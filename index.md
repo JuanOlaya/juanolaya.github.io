@@ -1,16 +1,3 @@
-// SECCIONES
-// 1. Teaching
-// 2. OpenProcessing
-// 3. Master thesis ??
-// 4. LiveCoding
-// 
-// CV -> mas adelante
-// Poner Twitter 
-
-//Ejemplos:
-// https://yecto.github.io/
-// http://ojack.github.io/
-// 
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/JuanOlaya/juanolaya.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
