@@ -2,7 +2,7 @@
 var pointList = [];
 
 function setup() {
-	createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight);
   background(50);
 
   for (var i=0; i<10; i++) {
