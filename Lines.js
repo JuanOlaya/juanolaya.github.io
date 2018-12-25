@@ -1,4 +1,4 @@
-// https://soundcloud.com/nasa/cassini-saturn-radio-emissions-1
+
 var pointList = [];
 var canvas;
 
