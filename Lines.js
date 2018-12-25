@@ -52,18 +52,18 @@ function texto(){
 	text("OpenProcessing", width/2, height - 3*(height/11) );
 	//noFill();
 	//stroke(254, 247, 229,190);
-	fill(255,170,0,80);
+	fill(255,170,0,50);
 	rect(width/2-200,height - 3*(height/11)-30,400,50);
 	fill(254, 247, 229,190);
 	
 	
 	text("Github Repository", width/2, height - 2*(height/11) );
-	fill(255,170,0,80);
+	fill(255,170,0,50);
 	rect(width/2-200,height - 2*(height/11)-30,400,50);
 	fill(254, 247, 229,190);
 	
 	text("Youtube Videos", width/2, height - (height/11));
-	fill(255,170,0,80);
+	fill(255,170,0,50);
 	rect(width/2-200,height - (height/11)-30,400,50);
 	fill(254, 247, 229,190);
 }
