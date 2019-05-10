@@ -40,11 +40,11 @@ function texto(){
 }
 
 		document.querySelector("#btn1").addEventListener('click',function(){
-			console.log('btn1');
-			location.href = 'https://www.openprocessing.org/user/65585/';
+			//location.href = 'https://www.openprocessing.org/user/65585/';
+			window.open( 'https://www.openprocessing.org/user/65585/');
 		})
 		document.querySelector("#btn2").addEventListener('click',function(){
-			console.log('btn2');
-			location.href = 'https://github.com/JuanOlaya/';
+			//location.href = 'https://github.com/JuanOlaya/';
+			window.open('https://github.com/JuanOlaya/');
 		})
 
