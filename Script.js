@@ -37,10 +37,3 @@ function texto(){
 	textSize(25);
 	text("JUAN OLAYA", width/2, height - 4*(height/11) );
 }
-
-		document.querySelector("#btn1").addEventListener('click',function(){
-			window.open( 'https://www.openprocessing.org/user/65585/');
-		})
-		document.querySelector("#btn2").addEventListener('click',function(){
-			window.open('https://github.com/JuanOlaya/');
-		})
