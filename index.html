@@ -28,6 +28,7 @@
   width: 300px;
   margin: 0 auto;
   margin-bottom: 15px;
+  outline:none
 }
 #btns {
  position: fixed;
@@ -45,5 +46,16 @@
 		<button id="btn2" class="btn">Github Repository</button>
 	    </div>
     </body>
+	<script>
+	
+		document.querySelector("#btn1").addEventListener('click',function(){
+			//location.href = 'https://www.openprocessing.org/user/65585/';
+			window.open( 'https://www.openprocessing.org/user/65585/');
+		})
+		document.querySelector("#btn2").addEventListener('click',function(){
+			//location.href = 'https://github.com/JuanOlaya/';
+			window.open('https://github.com/JuanOlaya/');
+		})
+	</script>
 </html>
 
