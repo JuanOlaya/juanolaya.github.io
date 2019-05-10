@@ -37,13 +37,4 @@ function texto(){
 	textStyle(BOLD);
 	textSize(25);
 	text("JUAN OLAYA", width/2, height - 4*(height/11) );
-	
-	
-	if(mouseIsPressed){
-		fill(255,170,0,170);
-	}
-	else{
-		//fill(245,245,220,170);
-		fill(254, 247, 229,190);
-	}	
 }
