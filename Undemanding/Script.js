@@ -25,8 +25,8 @@ var stairs=30;
 var flatPlat=30;
 
 function setup() {
-  //createCanvas(windowWidth, windowHeight);
-  createCanvas(1366, 768);
+  createCanvas(windowWidth, windowHeight);
+  //createCanvas(1366, 768);
   //createCanvas(1024, 768);
 	//createCanvas(1200, 550);
  
