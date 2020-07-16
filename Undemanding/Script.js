@@ -26,8 +26,8 @@ var flatPlat=30;
 
 function setup() {
   //createCanvas(windowWidth, windowHeight);
-  createCanvas(640,480);
-  //createCanvas(1366, 768);
+  //createCanvas(640,480);
+  createCanvas(1366, 768);
   //createCanvas(1024, 768);
 	//createCanvas(1200, 550);
  
