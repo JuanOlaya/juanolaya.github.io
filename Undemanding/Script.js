@@ -23,11 +23,10 @@ var startedTimeFlat = false;
 var platStatus=0;
 var stairs=30;
 var flatPlat=30;
-var caNu=0;
+var caseNumber=0;
 
 function preload() {
-   //caNu=document.getElementById('caseNum');
-   caNu=document.getElementById('numCase').value;
+   caseNumber=document.getElementById('caseNum').value;
 }
 
 function setup() {
@@ -57,7 +56,7 @@ function setup() {
 
   tiempoInicio = 0;
   tiempoEspera = 20000; //  segundos
-  console.log(  caNu);
+  console.log( caseNumber);
 }
 
 function draw() {
