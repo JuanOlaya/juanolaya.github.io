@@ -23,6 +23,11 @@ var startedTimeFlat = false;
 var platStatus=0;
 var stairs=30;
 var flatPlat=30;
+var caNu=0;
+
+function preload() {
+   caNu=document.getElementById('caseNum');
+}
 
 function setup() {
   //createCanvas(windowWidth, windowHeight);
@@ -56,7 +61,7 @@ function setup() {
 function draw() {
   background(0);
   translate(-player.location.x + translateDistance, 0);
-
+  console.log(  caNu);
   //console.log(  player.location.x );
   player.show();
 
