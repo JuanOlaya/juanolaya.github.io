@@ -26,7 +26,7 @@ var flatPlat=30;
 var caNu=0;
 
 function preload() {
-   caNu=document.getElementById('caseNum').value;
+   caNu=document.getElementById('caseNum');
 }
 
 function setup() {
