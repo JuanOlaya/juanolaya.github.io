@@ -27,7 +27,7 @@ var caNu=0;
 
 function preload() {
    //caNu=document.getElementById('caseNum');
-   caNu=document.getElementById('numCase');
+   caNu=document.getElementById('numCase').value;
 }
 
 function setup() {
