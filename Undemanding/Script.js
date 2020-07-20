@@ -56,12 +56,12 @@ function setup() {
 
   tiempoInicio = 0;
   tiempoEspera = 20000; //  segundos
+  console.log(  caNu);
 }
 
 function draw() {
   background(0);
   translate(-player.location.x + translateDistance, 0);
-  console.log(  caNu);
   //console.log(  player.location.x );
   player.show();
 
