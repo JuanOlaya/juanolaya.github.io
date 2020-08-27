@@ -2,7 +2,6 @@ class PowerUp{
 	constructor(posX,rw){
 		this.posY=0;
 		this.radius=60;
-		this.posX=posX+(rw/2);
 	}
 	show(y,w){
 		this.posY=y-40;
