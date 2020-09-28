@@ -13,7 +13,7 @@ var widthGame;
 
 function setup() {
   createCanvas(1366, 768);
-	
+  frameRate(30);	
 	player = new Player();
 	
 	let countDistanceX = 0;
