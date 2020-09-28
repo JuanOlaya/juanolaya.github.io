@@ -17,7 +17,7 @@ class Player {
 	constructor() {
 		this.location = createVector(width/2, 0);
 		this.velocity = createVector(0, 0);
-		this.acceleration  = createVector(0, 0.2);
+		this.acceleration  = createVector(0, 0.6);
 		this.colour = color('#198BC6');  //   #1B998B #6F8CFB
 		this.radius = 30;
 		this.side=0;		  // (ES) Atributo que almacena el lado de la colisión detectada
