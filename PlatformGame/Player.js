@@ -21,7 +21,7 @@ class Player {
 		this.colour = color('#198BC6');  //   #1B998B #6F8CFB
 		this.radius = 30;
 		this.side=0;		  // (ES) Atributo que almacena el lado de la colisión detectada
-		this.speedX=7;
+		this.speedX=12;
 		this.minSpeed=0;  // (ES) Atributo que almacena la mínima velocidad alcanzada por el player
 	}
 	
@@ -138,7 +138,7 @@ class Player {
 			if( this.side == 3){ 
 				this.minSpeed=0;
 				if(this.velocity.y>10){
-					this.velocity.y=10;
+					this.velocity.y=20;
 				}
 				this.velocity.y = this.velocity.y * (-1.05);
 				this.location.y = ry - this.radius;
@@ -197,7 +197,7 @@ class Player {
 		if(this.velocity.y<0){
 			this.velocity.y=this.velocity.y-0.6;
 			if(this.velocity.y<-9){
-				this.velocity.y=-9;
+				this.velocity.y=-16;
 			}
 		}
 	}
