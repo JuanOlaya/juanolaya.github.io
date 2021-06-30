@@ -1,0 +1,45 @@
+html,body {
+	margin: 0;
+	padding: 0;
+	overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+canvas { width: 100%; height: 100% }
+
+div {
+    display: block;
+    position: absolute;
+    /*width: 30%;*/
+	width: 400px;
+    height: auto;
+    left: 5%;
+    top: 10%;
+    text-align: left;
+    /*vertical-align: middle;*/
+    padding: 40px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+    background-color: #3B2640;
+	font-size: 20px;
+}
+
+
+a{
+	text-decoration: none;
+	color: rgb(255, 255, 255);
+}
+
+a:link {
+	color: white;
+  }
+  
+a:visited {
+	color: grey;
+}
+  
+/* mouse over link */
+a:hover {
+	color: rgb(165, 165, 165);
+}
