@@ -93,5 +93,3 @@ function mousePressed() {
 function doubleCick(){
 	console.log("doubleClick");
 }
-
-
