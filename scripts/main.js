@@ -19,9 +19,7 @@ let diameter=50;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   
-
-  //for (let i = 0; i < 100; i++) {
-	for (let i = 0; i < width/8; i++) {
+  for (let i = 0; i < width/8; i++) {
     carListVertical.push(new VerticalCar(i * 10 + 5 ,random(height),0,speed,color("#FE9601")));
   }
 
@@ -33,19 +31,12 @@ function setup() {
   tiempoEspera = 1500; // 3 segundos
 
   background("#301F33");
-	//background(0);
+  frameRate(50);
 }
 
 function draw() {
-  /*
-  if (mouseIsPressed) {
-    background("#503354"); // #F5EFFF BBC7CE
-  }
-  */
-	//console.log({speed});
   if(running==true){
 		if (millis() - tiempoInicio > tiempoEspera) {
-			//background(0);
 			background("#301F33");
 			tiempoInicio = millis();
 		}
@@ -76,19 +67,6 @@ function draw() {
 			}
   }
 
-  /*
-  	//fill("#B1DDF1");
-	fill("#472F4C");
-	//fill(0);
-  	rect(80, 80, 600, 350);
-	//fill();
-	textSize(30);
-	//fill("#FE9601");
-	fill(255);
-	textStyle(BOLD);
-	text("Juan Olaya", 120,140);
-	*/
-  //bordes();
   fill("#3B2640");
   circle(5*width/100+(diameter/2),height-(5*height/100),diameter);
   stroke("#F4F0F9");
@@ -105,29 +83,11 @@ function draw() {
 }
 
 function mousePressed() {
-  //running=!running;
 	if(dist(5*width/100+(diameter/2)+diameter*1.3,height-(5*height/100),mouseX,mouseY)<diameter/2){
 		speed++;
 	}else if(speed>0 && dist(5*width/100+(diameter/2),height-(5*height/100),mouseX,mouseY)<diameter/2){
 		speed--;
 	}
-	
-	
-	/*
-  if (mouseX > width / 2 ) {
-    if(running==true){
-    background("#503354");
-    if (status < 3) {
-      status++;
-    } else {
-      status = 1;
-    }
-  }
-  }
-  else{
-    running=!running;
-  }
-	*/
 }
 
 function doubleCick(){
