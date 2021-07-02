@@ -1,0 +1,83 @@
+/*Noto Sans KR*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap');
+
+html,body {
+	margin: 0;
+	padding: 0;
+	overflow-y: hidden; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+canvas { width: 100%; height: 100% }
+
+div {
+    display: block;
+    position: absolute;
+	/*width: 300px;*/
+    width: auto;
+    height: auto;
+    left: 5%;
+    top: 5%;
+    text-align: left;
+    /*vertical-align: middle;*/
+    padding: 30px;
+    color: #DFD2EE;
+    font-size: 16px;
+    line-height: 18px;
+    background-color: #3B2640;
+	font-size: px;
+    font-weight: 300;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+a{
+	text-decoration: underline;
+	color: #F4F0F9;
+    /*padding: 10px;*/
+}
+
+a:link {
+	color: #F4F0F9;
+}
+  
+a:visited {
+	color: #B597D8;
+}
+
+/* mouse over link */
+a:hover {
+	color: rgb(165, 165, 165);
+}
+
+/* selected link */
+a:active {
+    color: #fff;
+}
+
+.name{
+    color: #fff;
+    font-size: 25px;
+    font-weight: 500;
+    left: 30px;
+    top: 21px;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.findMeOn{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    left: 30px;
+    top: 28px;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.links{
+    left: 5%;
+    top: 20%;
+    font-size: 16px;
+    width: auto;
+    height: auto;
+}
