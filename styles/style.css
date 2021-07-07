@@ -22,8 +22,6 @@ canvas { width: 100%; height: 100% }
 .grid-container{
     display: grid;
     height:100vh;
-    /*position: middle;*/
-    /*grid-template-columns: repeat (4, 1fr);*/
     
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -31,24 +29,18 @@ canvas { width: 100%; height: 100% }
     grid-gap: 2rem;
     justify-items: center;
     align-items: center;
-    /*grid-auto-rows:50px;*/
-    /*align-content: start;*/
-    /*padding: 2%;*/
 }
 
-@media only screen and (max-width: 550px){
+@media /*only */ screen and (max-width: 550px){
     .grid-container{
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        /*grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;*/
     }
 
     html,body {
-        margin: 0;
-        padding: 0;
-        overflow-y: scroll; /* Hide vertical scrollbar */
+        overflow-y: scroll;  /* Show vertical scrollbar */
     }
 }
-
 
 
 .tile {
@@ -168,3 +160,5 @@ a:active {
     text-align: start;
     font-family: 'Noto Sans KR', sans-serif;
 }
+
+
