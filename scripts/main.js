@@ -108,6 +108,10 @@ var horizontalObjectCollisions=0;
 var otherObjectCollisions=0;
 
 
+function windowsResized(){
+	resizeCanvas(windowWidth,windowHeight);
+}
+
 function setup() {
 	canvas = createCanvas(windowWidth,windowHeight);
 	canvas.position(0,0);	  
