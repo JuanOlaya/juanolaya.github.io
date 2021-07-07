@@ -101,6 +101,7 @@ function doubleCick(){
 var balls = [];
 var colores = [];
 var oprimido=false;
+var oprimidoHorizontal=false;
 var backColor;
 var canvas;
 var horizontalObjectCollisions=0;
@@ -140,7 +141,7 @@ function draw() {
 			}
 
 			if(horizontalObjectCollisions==0){
-				balls[1].showHorizontal(oprimido);
+				balls[1].showHorizontal(oprimidoHorizontal);
 				balls[1].moveLeft();
 				balls[1].edgeCollisionHorizontal();
 			}
@@ -148,8 +149,11 @@ function draw() {
 	//}
 }
 
-setTimeout(function(){ oprimido=true; }, 1300);
-setTimeout(function(){ oprimido=false; }, 1800);
+setTimeout(function(){ oprimidoHorizontal=true; }, 4000);
+setTimeout(function(){ oprimidoHorizontal=false; }, 4250);
+
+setTimeout(function(){ oprimido=true; }, 6000);
+setTimeout(function(){ oprimido=false; }, 6500);
 
 /*
 function touchStarted() {
@@ -177,18 +181,14 @@ class Ball {
 	}
 	
 	//MÉTODO MOSTRAR    
-	showHorizontal(oprimido) {
-		/*
-		if(oprimido){
+	showHorizontal(oprimidoHorizontal) {
+		if(oprimidoHorizontal){
 			noStroke();
 			fill(this.c);
 		}else{
 			noFill();
 			stroke(this.c);
 		}
-		*/
-		noFill();
-		stroke(this.c);
 		ellipse(this.localizacion.x, this.localizacion.y, this.radius * 2, this.radius * 2);
 	}
 	showOther(oprimido) {
