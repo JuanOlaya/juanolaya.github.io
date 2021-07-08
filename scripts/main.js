@@ -143,6 +143,7 @@ function setup() {
 function draw() {
 	console.log("Width: "+width);
 	console.log("height: "+height);
+	if(width>height){
 	//for (let j = 0; j < balls.length; j++) {
 		//if(mouseX<6*width/7){
 			if(otherObjectCollisions<5){
@@ -158,6 +159,7 @@ function draw() {
 			}
 		//}
 	//}
+	}
 }
 
 setTimeout(function(){ oprimidoHorizontal=true; }, 4000);
