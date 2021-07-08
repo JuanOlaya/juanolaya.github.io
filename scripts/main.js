@@ -113,7 +113,12 @@ function windowsResized(){
 }
 
 function setup() {
-	canvas = createCanvas(windowWidth,windowHeight);
+	if(width<height){
+		canvas = createCanvas(400,windowHeight);
+	}else{
+		canvas = createCanvas(windowWidth,windowHeight);
+	}
+	
 	canvas.position(0,0);	  
 	canvas.style("z-index",-1);
 	                                                // Names of colors from coolors.co/app
@@ -136,6 +141,8 @@ function setup() {
 }
 
 function draw() {
+	console.log("Width: "+width);
+	console.log("height: "+height);
 	//for (let j = 0; j < balls.length; j++) {
 		//if(mouseX<6*width/7){
 			if(otherObjectCollisions<5){
