@@ -113,11 +113,21 @@ function windowsResized(){
 }
 
 function setup() {
-	if(width<height){
+	
+	console.log("windowWidth: "+windowWidth);
+	console.log("windowHeight: "+windowHeight);
+
+	console.log("Width: "+width);
+	console.log("height: "+height);
+
+	if(windowWidth<windowHeight){
 		canvas = createCanvas(400,windowHeight);
+		console.log("CreaCanvas: "+width);
 	}else{
 		canvas = createCanvas(windowWidth,windowHeight);
 	}
+	
+	//canvas = createCanvas(400,windowHeight);
 	
 	canvas.position(0,0);	  
 	canvas.style("z-index",-1);
@@ -141,8 +151,9 @@ function setup() {
 }
 
 function draw() {
-	console.log("Width: "+width);
-	console.log("height: "+height);
+	
+	
+	
 	//if(width>height){
 	//for (let j = 0; j < balls.length; j++) {
 		//if(mouseX<6*width/7){
