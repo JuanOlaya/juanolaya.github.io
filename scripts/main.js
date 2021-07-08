@@ -106,6 +106,7 @@ var backColor;
 var canvas;
 var horizontalObjectCollisions=0;
 var otherObjectCollisions=0;
+var mobile=false;
 
 
 function windowsResized(){
@@ -114,15 +115,9 @@ function windowsResized(){
 
 function setup() {
 	
-	console.log("windowWidth: "+windowWidth);
-	console.log("windowHeight: "+windowHeight);
-
-	console.log("Width: "+width);
-	console.log("height: "+height);
-
 	if(windowWidth<windowHeight){
-		canvas = createCanvas(400,windowHeight);
-		console.log("CreaCanvas: "+width);
+		canvas = createCanvas(400,850);
+		mobile=true;
 	}else{
 		canvas = createCanvas(windowWidth,windowHeight);
 	}
@@ -143,16 +138,23 @@ function setup() {
 		balls.push( new Ball(random(86, width / 2), random(86, height / 2), 2, 2, 0, 0.1, colores[i%4]));
 	}*/
 	balls.push( new Ball(random(100, width / 2), random(86, height / 2), 3, 3, 0, 0.1, colores[0]));
-	balls.push( new Ball(random( 2*width / 3, width-95), random(100, height - 100), 4, 4, 0, 0.1, colores[1]));
+	if(mobile==true){
+		balls.push( new Ball(width/2, 100, 4, 4, 0, 0.1, colores[1]));
+	}else{
+		balls.push( new Ball(random( 2*width / 3, width-95), random(100, height - 100), 4, 4, 0, 0.1, colores[1]));
+	}
 
 	//backColor=color(244,237,221);
 	backColor=40;
 	background(backColor);
+	console.log("windowWidth: "+windowWidth);
+	console.log("windowHeight: "+windowHeight);
+
+	console.log("Width: "+width);
+	console.log("height: "+height);
 }
 
 function draw() {
-	
-	
 	
 	//if(width>height){
 	//for (let j = 0; j < balls.length; j++) {
@@ -165,7 +167,11 @@ function draw() {
 
 			if(horizontalObjectCollisions==0){
 				balls[1].showHorizontal(oprimidoHorizontal);
-				balls[1].moveLeft();
+				if(mobile==true){
+					balls[1].moveDown();
+				}else{
+					balls[1].moveLeft();
+				}
 				balls[1].edgeCollisionHorizontal();
 			}
 		//}
@@ -234,6 +240,9 @@ class Ball {
 	moveLeft(){
 		this.localizacion.x = this.localizacion.x - this.velocity.x; 
 		//this.localizacion.sub(this.velocity);
+	}
+	moveDown(){
+		this.localizacion.y = this.localizacion.y + this.velocity.y; 
 	}
 	
 	edgeCollision() {
