@@ -147,15 +147,32 @@ function setup() {
 	//backColor=color(244,237,221);
 	backColor=40;
 	background(backColor);
+	/*
 	console.log("windowWidth: "+windowWidth);
 	console.log("windowHeight: "+windowHeight);
 
 	console.log("Width: "+width);
 	console.log("height: "+height);
+	*/
+}
+
+if(mobile){
+	console.log("MobileEntra");
+	setTimeout(function(){ oprimidoHorizontal=true; }, 400);
+	setTimeout(function(){ oprimidoHorizontal=false; }, 650);
+
+	setTimeout(function(){ oprimido=true; }, 500);
+	setTimeout(function(){ oprimido=false; }, 1000);
+}else{
+	setTimeout(function(){ oprimidoHorizontal=true; }, 4000);
+	setTimeout(function(){ oprimidoHorizontal=false; }, 4250);
+
+	setTimeout(function(){ oprimido=true; }, 6000);
+	setTimeout(function(){ oprimido=false; }, 6500);
 }
 
 function draw() {
-	
+	console.log("Mobile:"+mobile);
 	//if(width>height){
 	//for (let j = 0; j < balls.length; j++) {
 		//if(mouseX<6*width/7){
@@ -179,11 +196,8 @@ function draw() {
 	//}
 }
 
-setTimeout(function(){ oprimidoHorizontal=true; }, 4000);
-setTimeout(function(){ oprimidoHorizontal=false; }, 4250);
 
-setTimeout(function(){ oprimido=true; }, 6000);
-setTimeout(function(){ oprimido=false; }, 6500);
+
 
 /*
 function touchStarted() {
