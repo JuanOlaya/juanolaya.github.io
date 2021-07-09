@@ -108,10 +108,10 @@ var horizontalObjectCollisions=0;
 var diagonalObjectCollisions=0;
 var mobile=false;
 var startTime= 0;
-var pressTimeHorizontal = 400; 
-var releaseTimeHorizontal = 650;
-var pressTimeDiagonal = 500;
-var releaseTimeDiagonal = 1000;
+var pressTimeHorizontal; 
+var releaseTimeHorizontal;
+var pressTimeDiagonal;
+var releaseTimeDiagonal;
 
 
 function windowsResized(){
@@ -124,8 +124,8 @@ function setup() {
 		canvas = createCanvas(400,850);
 		mobile=true;
 
-		pressTimeHorizontal = 400; 
-		releaseTimeHorizontal = 650;
+		pressTimeHorizontal = 750; 
+		releaseTimeHorizontal = 1000;
 		pressTimeDiagonal = 500;  
 		releaseTimeDiagonal = 1000;
 	}else{
@@ -154,7 +154,7 @@ function setup() {
 	}*/
 	balls.push( new Ball(random(100, width / 2), random(86, height / 2), 3, 3, 0, 0.1, colores[0]));
 	if(mobile==true){
-		balls.push( new Ball(width/2, 100, 4, 4, 0, 0.1, colores[1]));
+		balls.push( new Ball(width-90, 100, 4, 4, 0, 0.1, colores[1]));
 	}else{
 		balls.push( new Ball(random( 2*width / 3, width-95), random(100, height - 100), 4, 4, 0, 0.1, colores[1]));
 	}
