@@ -112,6 +112,7 @@ var pressTimeHorizontal;
 var releaseTimeHorizontal;
 var pressTimeDiagonal;
 var releaseTimeDiagonal;
+var thresholdDiagonalCollisions=4;
 
 
 function windowsResized(){
@@ -128,6 +129,7 @@ function setup() {
 		releaseTimeHorizontal = 1000;
 		pressTimeDiagonal = 500;  
 		releaseTimeDiagonal = 1000;
+		thresholdDiagonalCollisions=4;
 	}else{
 		canvas = createCanvas(windowWidth,windowHeight);
 
@@ -135,6 +137,7 @@ function setup() {
 		releaseTimeHorizontal = 4250;
 		pressTimeDiagonal = 6000;  
 		releaseTimeDiagonal = 6500;
+		thresholdDiagonalCollisions=5;
 	}
 	
 	//canvas = createCanvas(400,windowHeight);
@@ -176,7 +179,7 @@ function draw() {
 	//if(width>height){
 	//for (let j = 0; j < balls.length; j++) {
 		//if(mouseX<6*width/7){
-			if(diagonalObjectCollisions<5){
+			if(diagonalObjectCollisions<thresholdDiagonalCollisions){
 				balls[0].showDiagonal(oprimido);
 				balls[0].applyGravity();
 				balls[0].edgeCollision();
