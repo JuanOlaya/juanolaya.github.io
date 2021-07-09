@@ -155,10 +155,14 @@ function setup() {
 	/*for (let i = 0; i < 2; i++) {
 		balls.push( new Ball(random(86, width / 2), random(86, height / 2), 2, 2, 0, 0.1, colores[i%4]));
 	}*/
-	balls.push( new Ball(random(100, width / 2), random(86, height / 2), 3, 3, 0, 0.1, colores[0]));
+	
+	
 	if(mobile==true){
+		balls.push( new Ball(random(100, width / 2), random(86, height / 2), 3, 3, 0, 0.1, colores[0]));
 		balls.push( new Ball(width-90, 100, 4, 4, 0, 0.1, colores[1]));
+		
 	}else{
+		balls.push( new Ball(random(100, width / 2), random(86, height / 3), 3, 3, 0, 0.1, colores[0]));
 		balls.push( new Ball(random( 2*width / 3, width-95), random(100, height - 100), 4, 4, 0, 0.1, colores[1]));
 	}
 
