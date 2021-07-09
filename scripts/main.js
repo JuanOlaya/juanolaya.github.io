@@ -105,8 +105,13 @@ var oprimidoHorizontal=false;
 var backColor;
 var canvas;
 var horizontalObjectCollisions=0;
-var otherObjectCollisions=0;
+var diagonalObjectCollisions=0;
 var mobile=false;
+var startTime= 0;
+var pressTimeHorizontal = 400; 
+var releaseTimeHorizontal = 650;
+var pressTimeDiagonal = 500;
+var releaseTimeDiagonal = 1000;
 
 
 function windowsResized(){
@@ -118,8 +123,18 @@ function setup() {
 	if(windowWidth<windowHeight){
 		canvas = createCanvas(400,850);
 		mobile=true;
+
+		pressTimeHorizontal = 400; 
+		releaseTimeHorizontal = 650;
+		pressTimeDiagonal = 500;  
+		releaseTimeDiagonal = 1000;
 	}else{
 		canvas = createCanvas(windowWidth,windowHeight);
+
+		pressTimeHorizontal = 4000; 
+		releaseTimeHorizontal = 4250;
+		pressTimeDiagonal = 6000;  
+		releaseTimeDiagonal = 6500;
 	}
 	
 	//canvas = createCanvas(400,windowHeight);
@@ -156,28 +171,13 @@ function setup() {
 	*/
 }
 
-if(mobile){
-	console.log("MobileEntra");
-	setTimeout(function(){ oprimidoHorizontal=true; }, 400);
-	setTimeout(function(){ oprimidoHorizontal=false; }, 650);
-
-	setTimeout(function(){ oprimido=true; }, 500);
-	setTimeout(function(){ oprimido=false; }, 1000);
-}else{
-	setTimeout(function(){ oprimidoHorizontal=true; }, 4000);
-	setTimeout(function(){ oprimidoHorizontal=false; }, 4250);
-
-	setTimeout(function(){ oprimido=true; }, 6000);
-	setTimeout(function(){ oprimido=false; }, 6500);
-}
-
 function draw() {
 	console.log("Mobile:"+mobile);
 	//if(width>height){
 	//for (let j = 0; j < balls.length; j++) {
 		//if(mouseX<6*width/7){
-			if(otherObjectCollisions<5){
-				balls[0].showOther(oprimido);
+			if(diagonalObjectCollisions<5){
+				balls[0].showDiagonal(oprimido);
 				balls[0].applyGravity();
 				balls[0].edgeCollision();
 			}
@@ -194,8 +194,39 @@ function draw() {
 		//}
 	//}
 	//}
+	
+	if (millis() - startTime > pressTimeHorizontal) {
+		oprimidoHorizontal=true;
+	}
+	if (millis() - startTime > releaseTimeHorizontal) {
+		oprimidoHorizontal=false;
+	}
+
+	if (millis() - startTime > pressTimeDiagonal) {
+		oprimido=true;
+	}
+	if (millis() - startTime > releaseTimeDiagonal) {
+		oprimido=false;
+	}
 }
 
+
+/*
+if(mobile){
+	console.log("MobileEntra");
+	setTimeout(function(){ oprimidoHorizontal=true; }, 400);
+	setTimeout(function(){ oprimidoHorizontal=false; }, 650);
+
+	setTimeout(function(){ oprimido=true; }, 500);
+	setTimeout(function(){ oprimido=false; }, 1000);
+}else{
+	setTimeout(function(){ oprimidoHorizontal=true; }, 4000);
+	setTimeout(function(){ oprimidoHorizontal=false; }, 4250);
+
+	setTimeout(function(){ oprimido=true; }, 6000);
+	setTimeout(function(){ oprimido=false; }, 6500);
+}
+*/
 
 
 
@@ -235,7 +266,7 @@ class Ball {
 		}
 		ellipse(this.localizacion.x, this.localizacion.y, this.radius * 2, this.radius * 2);
 	}
-	showOther(oprimido) {
+	showDiagonal(oprimido) {
 		if(oprimido){
 			noStroke();
 			fill(this.c);
@@ -262,28 +293,28 @@ class Ball {
 	edgeCollision() {
 		if (this.localizacion.x > width* 0.8 - this.radius) {
 			//horizontalObjectCollisions++;
-			otherObjectCollisions++;
+			diagonalObjectCollisions++;
 			this.velocity.x = this.velocity.x * (-1);
 			this.localizacion.x = width* 0.8 - this.radius-7;
 		}
 
 		if (this.localizacion.x < this.radius) {
 			horizontalObjectCollisions++;
-			otherObjectCollisions++;
+			diagonalObjectCollisions++;
 			this.velocity.x = this.velocity.x * (-1);
 			this.localizacion.x = this.radius+7;
 		}
 
 		if (this.localizacion.y > height - this.radius) {
 			//horizontalObjectCollisions++;
-			otherObjectCollisions++;
+			diagonalObjectCollisions++;
 			this.velocity.y = this.velocity.y * (-1);
 			this.localizacion.y = height - this.radius-7;
 		}
 
 		if (this.localizacion.y < this.radius) {
 			//horizontalObjectCollisions++;
-			otherObjectCollisions++;
+			diagonalObjectCollisions++;
 			this.velocity.y = this.velocity.y * (-1);
 			this.localizacion.y = this.radius+7;
 		}
@@ -292,28 +323,28 @@ class Ball {
 	edgeCollisionHorizontal() {
 		if (this.localizacion.x > width - this.radius) {
 			//horizontalObjectCollisions++;
-			otherObjectCollisions++;
+			diagonalObjectCollisions++;
 			this.velocity.x = this.velocity.x * (-1);
 			this.localizacion.x = width - this.radius-7;
 		}
 
 		if (this.localizacion.x < this.radius) {
 			horizontalObjectCollisions++;
-			otherObjectCollisions++;
+			diagonalObjectCollisions++;
 			this.velocity.x = this.velocity.x * (-1);
 			this.localizacion.x = this.radius+7;
 		}
 
 		if (this.localizacion.y > height - this.radius) {
 			//horizontalObjectCollisions++;
-			otherObjectCollisions++;
+			diagonalObjectCollisions++;
 			this.velocity.y = this.velocity.y * (-1);
 			this.localizacion.y = height - this.radius-7;
 		}
 
 		if (this.localizacion.y < this.radius) {
 			//horizontalObjectCollisions++;
-			otherObjectCollisions++;
+			diagonalObjectCollisions++;
 			this.velocity.y = this.velocity.y * (-1);
 			this.localizacion.y = this.radius+7;
 		}
