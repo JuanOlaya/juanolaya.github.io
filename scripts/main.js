@@ -93,7 +93,7 @@ function doubleCick(){
 
 
 /*
-	***** PHYSICAL CONTEMPLATION *****
+  ***** Generative Art *****
   by Juan Olaya
   https://juanolaya.github.io/
 */
