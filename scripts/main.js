@@ -129,7 +129,7 @@ function setup() {
 		releaseTimeHorizontal = 1000;
 		pressTimeDiagonal = 500;  
 		releaseTimeDiagonal = 1000;
-		thresholdDiagonalCollisions=4;
+		thresholdDiagonalCollisions=3;
 	}else{
 		canvas = createCanvas(windowWidth,windowHeight);
 
