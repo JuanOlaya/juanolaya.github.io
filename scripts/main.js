@@ -135,8 +135,8 @@ function setup() {
 
 		pressTimeHorizontal = 4000; 
 		releaseTimeHorizontal = 4250;
-		pressTimeDiagonal = 6000;  
-		releaseTimeDiagonal = 6500;
+		pressTimeDiagonal = 11000;  
+		releaseTimeDiagonal = 11500;
 		thresholdDiagonalCollisions=5;
 	}
 	
