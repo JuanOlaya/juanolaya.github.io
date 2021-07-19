@@ -5,9 +5,10 @@ let arregloCarros=[];
 function setup(){
     canvas = createCanvas(windowWidth,windowHeight);
     canvas.position(0,0);	  
-    canvas.style("z-index",0);
+    // canvas.style("z-index",0);
+    canvas.style("z-index",-2);
     brasovWebcam=document.getElementById("brasovCam");
-	brasovWebcam.style.display = "none";
+	  brasovWebcam.style.display = "none";
 
     for( let i=0; i<120; i++) {  
 		let tempCar = new Car(random(height),random(1,7), color(random(170,200),random(70,100),0,200)); 
