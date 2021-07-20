@@ -4,7 +4,7 @@ let infoRomania;
 let camBrazil;
 let titleBrazil;
 let infoBrazil;
-let numCity=1;
+let numCity=2;
 
 function setup(){
     camRomania=document.getElementById("brasovCam");
