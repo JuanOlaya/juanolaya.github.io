@@ -140,3 +140,10 @@ class Car {
     }
   }
 }
+
+
+//  <iframe class="window" id="brasovCam" src="https://www.youtube.com/embed/G05wmWFDtSo?autoplay=1&mute=1&vq=hd1080" width="1248" height="702"  allow='autoplay'></iframe>
+
+//  <iframe class="window" id="brasovCam" src="https://www.youtube.com/embed/JSEetXHijiE?autoplay=1&mute=1&vq=hd1080" width="1248" height="702"  allow='autoplay'></iframe>
+
+// https://www.youtube.com/embed/JSEetXHijiE
