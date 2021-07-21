@@ -4,6 +4,9 @@ let infoRomania;
 let camBrazil;
 let titleBrazil;
 let infoBrazil;
+let camChina;
+let titleChina;
+let infoChina;
 let numCity=1;
 
 function setup(){
@@ -20,6 +23,13 @@ function setup(){
     titleBrazil.style.display = "none";
     infoBrazil=document.getElementById("saoPauloInfo");
     infoBrazil.style.display = "none";
+
+    camChina=document.getElementById("hongKongCam");
+    camChina.style.display = "none";
+    titleChina=document.getElementById("hongKongTitle");
+    titleChina.style.display = "none";
+    infoChina=document.getElementById("hongKongInfo");
+    infoChina.style.display = "none";
 }
 
 function draw(){
@@ -32,6 +42,10 @@ function draw(){
         camBrazil.style.display = "none";
         titleBrazil.style.display = "none";
         infoBrazil.style.display = "none";
+
+        camChina.style.display = "none";
+        titleChina.style.display = "none";
+        infoChina.style.display = "none";
     }
     if(numCity==2){
         camRomania.style.display = "none";
@@ -41,11 +55,28 @@ function draw(){
         camBrazil.style.display = "block";
         titleBrazil.style.display = "block";
         infoBrazil.style.display = "block";
+
+        camChina.style.display = "none";
+        titleChina.style.display = "none";
+        infoChina.style.display = "none";
+    }
+    if(numCity==3){
+        camRomania.style.display = "none";
+        titleRomania.style.display = "none";
+        infoRomania.style.display = "none";
+
+        camBrazil.style.display = "none";
+        titleBrazil.style.display = "none";
+        infoBrazil.style.display = "none";
+
+        camChina.style.display = "block";
+        titleChina.style.display = "block";
+        infoChina.style.display = "block";
     }
 }
 
 function mousePressed(){
-    if(numCity<2){
+    if(numCity<3){
         numCity++;
     }else{
         numCity=1;
