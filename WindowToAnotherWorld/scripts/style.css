@@ -11,8 +11,8 @@ canvas {
   
 .window{
 
-  border: 40px solid #CFD6EA;   /* #4182ab  #E67A01*/ 
-  border-radius: 500px;
+  /*border: 20px solid #CFD6EA; */ /* #4182ab  #E67A01*/ 
+  border-radius: 50px;
   z-index: 0;
   margin: 0;
   position: absolute;
@@ -24,28 +24,75 @@ canvas {
 
 body{
   z-index: -1;
-  background-color: #10002b;
+  background-color: #F4A523;    /* #10002b */ 
 }
 
-.centerTop{
+
+.marginFrame{
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-530px,-355px);
+  transform: translate(-640px,-355px);
 }
 
-.trapeziumTop{
-  width: 860px; 
-  height: 0;
-  border-bottom: 110px solid #CFD6EA;
-  border-left: 100px solid transparent; 
-  border-right: 100px solid transparent;  
+.frame{
+  width: 1180px; 
+  height: 633px;
+  border: 43px solid #292A2B;
+  border-radius: 50px;
+  /*background: #F4A523;*/
+  /*box-shadow: 20px 20px;*/
+  box-shadow:  41px 41px 30px #cf8c1e,
+  -41px -41px 30px #ffbe28;
+  z-index: 1;
+  /*
+  border-bottom: 500px solid #CFD6EA;
+  border-left: 0px solid transparent; 
+  border-right: 0px solid transparent; 
+  */
+  /*opacity: 0.5; */
+}
+
+.marginBoxLocation{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(-300px,280px);
 }
 
 
+.boxLocation{
+  width: 600px; 
+  height: 80px;
+  border-radius: 30px;
+  background: #292A2B;
+}
+
+.marginBoxInfoLeft{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(-620px,-340px);
+}
+
+
+.boxInfoLeft{
+  width: 300px; 
+  height: 110px;
+  border-radius: 30px;
+  background: #292A2B;
+}
+
+/*
 .centerBottom{
   margin: 0;
   position: absolute;
@@ -63,6 +110,17 @@ body{
   height: 0;
   width: 860px;
 }
+*/
+
+/*
+.frame{
+  border-radius: 50px;
+  border: 40px solid #292A2B;
+  width: 860px; 
+  opacity: 0.5;
+  z-index: 1;
+}
+*/
 
 .saoPauloText{
   z-index: 0;
@@ -70,10 +128,10 @@ body{
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #34008F;
+  color: #ffffff;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-270px,-345px);
+  transform: translate(-220px,290px);
   font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -83,10 +141,10 @@ body{
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #34008F;
+  color: #ffffff;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-70px,275px);
+  transform: translate(-580px,-305px);
   font-family: 'Noto Sans KR', sans-serif;
 }
 
