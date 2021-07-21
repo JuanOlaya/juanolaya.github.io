@@ -37,6 +37,7 @@ canvas { width: 100%; height: 100% }
     height: 250px;   /* 250px*/
     padding: 18px;   /* 25px*/
     border-radius: 5px;
+    opacity: 0.95;
     /*width: auto;
     height: auto;*/
     /*left: 5%;
@@ -55,6 +56,7 @@ canvas { width: 100%; height: 100% }
     /*background-color: #74A4BC;*/
     font-weight: 300;
     font-family: 'Noto Sans KR', sans-serif;
+    border: 1px solid #41414E;
 }
 
 @media only screen and (max-width: 550px){
