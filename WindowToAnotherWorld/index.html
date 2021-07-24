@@ -6,12 +6,12 @@
         <meta name="description" content="Look out the window and get inspired">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
         <link rel="stylesheet" type="text/css" href="scripts/style.css">
-        <script src="scripts/script.js"></script>
+        
     </head>
     
     <body>
         <section >
-            <iframe class="window" id="saoPauloCam" src="https://www.youtube.com/embed/PePvk9dCLVU?autoplay=1&mute=1&vq=hd1080" width="1248" height="702"  allow='autoplay' frameBorder="0"></iframe>
+            <iframe class="window" id="saoPauloCam" src="https://www.youtube.com/embed/PePvk9dCLVU?autoplay=1&mute=1&vq=hd1080" width="1355" height="762"  allow='autoplay' frameBorder="0"></iframe>
         <section/>
         <section >
             <iframe class="window" id="brasovCam" src="https://www.youtube.com/embed/G05wmWFDtSo?autoplay=1&mute=1&vq=hd1080" width="1248" height="702"  allow='autoplay' frameBorder="0"></iframe>
@@ -36,28 +36,50 @@
             <div/>
         </section>
         <section class="cityText" id="saoPauloTitle">
-            <h1 >São Paulo, Brazil, Guarulhos International Airport</h1>
+            São Paulo,  Brazil,  Guarulhos International Airport
         </section>
-        <section class="cityInfo" id="saoPauloInfo">
-            <p>6:03 AM</p>
-            <p>Monday, 23 July</p>
-            <p>18° C </p>
+        <section >
+            <div class="cityInfo" id="saoPauloInfo">
+                <div class="timeSao" id="timeSao">
+                    6:03 AM <span id="am-pm">PM</span>
+                </div>
+                <div class="dateSao" id="dateSao">
+                    Monday, 23 July
+                </div>
+                <div class="weatherSao" id="weatherSao">
+                    18° C 
+                </div>
+                <div>
+                    <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" id="weatherIconSao">
+                </div>
+            </div>
         </section>
         <section class="cityText" id="brasovTitle">
-            <h1 >Brasov, Romania, Michael Weiss Street</h1>
+            Brasov,  Romania,  Michael Weiss Street
         </section>
-        <section class="cityInfo" id="brasovInfo">
-            <p>11:03 AM</p>
-            <p>Monday, 23 July</p>
-            <p>21° C </p>
+        <section>
+            <div class="cityInfo" id="brasovInfo">
+                11:03 AM
+                <br>
+                Monday, 23 July
+                <br>
+                21° C
+                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
+            </div>
         </section>
         <section class="cityText" id="hongKongTitle">
-            <h1 >Taoyuan, Taiwan, Daxi Old Street</h1>
+            Taoyuan,  Taiwan,  Daxi Old Street
         </section>
-        <section class="cityInfo" id="hongKongInfo">
-            <p>11:03 AM</p>
-            <p>Monday, 23 July</p>
-            <p>24° C </p>
+        <section>
+            <div class="cityInfo" id="hongKongInfo">
+                11:03 AM
+                <br>
+                Monday, 23 July
+                <br>
+                24° C
+                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
+            </div>
         </section>
+    <script src="scripts/script.js"></script>
     </body>
 </html>
