@@ -7,6 +7,11 @@ let infoBrazil;
 let camChina;
 let titleChina;
 let infoChina;
+
+let camAmsterdam;
+let titleAmsterdam;
+let infoAmsterdam;
+
 let numCity=1;
 var canvas;
 
@@ -39,6 +44,15 @@ function setup(){
     titleChina.style.display = "none";
     infoChina=document.getElementById("hongKongInfo");
     infoChina.style.display = "none";
+
+    camAmsterdam=document.getElementById("amsterdamCam");
+    camAmsterdam.style.display = "none";
+    /*
+    titleAmsterdam=document.getElementById("amsterdamTitle");
+    titleAmsterdam.style.display = "none";
+    infoAmsterdam=document.getElementById("amsterdamInfo");
+    infoAmsterdam.style.display = "none";
+    */
 }
 
 function draw(){
@@ -91,7 +105,7 @@ function mousePressed(){
         numCity=1;
     }
 
-    if(mouseX<width/2 && mouseY<height/2){
+    if(mouseX>80*width/100 && mouseY>80*height/100){
         let fs = fullscreen();
         fullscreen(!fs);
     }
