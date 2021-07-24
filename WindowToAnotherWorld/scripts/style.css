@@ -12,7 +12,8 @@ canvas {
 .window{
 
   /*border: 20px solid #CFD6EA; */ /* #4182ab  #E67A01*/ 
-  border-radius: 50px;
+  /*border-radius: 50px;*/
+  border-radius: 0px 130px 100px 100px;
   z-index: 0;
   margin: 0;
   position: absolute;
@@ -24,7 +25,7 @@ canvas {
 
 body{
   z-index: -1;
-  background-color: #F4A523;    /* #10002b */ 
+  background-color: #301F32;   /*F4A523*/  /* #10002b */   /*142C52*/
 }
 
 
@@ -35,43 +36,41 @@ body{
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-640px,-355px);
+  transform: translate(-662px,-355px);
 }
 
 .frame{
-  width: 1180px; 
+  width: 1199px; 
   height: 633px;
   border: 43px solid #292A2B;
-  border-radius: 50px;
-  /*background: #F4A523;*/
-  /*box-shadow: 20px 20px;*/
+  /*border-radius: 50px;*/
+  border-radius: 0px 100px 0px 100px;
+
+  /*
   box-shadow:  41px 41px 70px #cf8c1e,
   -41px -41px 70px #ffbe28;
-  z-index: 1;
-  /*
-  border-bottom: 500px solid #CFD6EA;
-  border-left: 0px solid transparent; 
-  border-right: 0px solid transparent; 
   */
-  /*opacity: 0.5; */
+  z-index: 1;
+  opacity: 1;
 }
 
-.marginBoxLocation{
+.marginBoxCity{
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-300px,280px);
+  transform: translate(-280px,290px);
 }
 
 
-.boxLocation{
-  width: 600px; 
-  height: 80px;
-  border-radius: 30px;
+.boxCity{
+  width: 480px; 
+  height: 74px;
+  border-radius: 30px 30px 0 0;
   background: #292A2B;
+  opacity: 1;
 }
 
 .marginBoxInfoLeft{
@@ -81,15 +80,19 @@ body{
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-620px,-340px);
+  transform: translate(-640px,-355px);
 }
 
 
 .boxInfoLeft{
-  width: 300px; 
-  height: 110px;
-  border-radius: 30px;
-  background: #292A2B;
+  width: 280px; 
+  height: 130px;
+  border-radius: 40px 0px 40px 0px; 
+  background: #292A2B;    /*5C8BD6*/ /*323334*/
+  /*border-top: 4px solid #292A2B;
+  border-left: 4px solid #292A2B;*/
+  /*border: 1px solid #3C3D3E;*/
+  opacity: 1;
 }
 
 /*
@@ -122,7 +125,7 @@ body{
 }
 */
 
-.saoPauloText{
+.cityText{
   z-index: 0;
   margin: 0;
   position: absolute;
@@ -135,7 +138,7 @@ body{
   font-family: 'Noto Sans KR', sans-serif;
 }
 
-.saoPauloDegrees{
+.cityInfo{
   z-index: 0;
   margin: 0;
   position: absolute;
@@ -144,7 +147,7 @@ body{
   color: #ffffff;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-580px,-305px);
+  transform: translate(-590px,-365px);
   font-family: 'Noto Sans KR', sans-serif;
 }
 
