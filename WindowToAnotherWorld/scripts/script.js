@@ -15,6 +15,56 @@ let infoAmsterdam;
 let numCity=1;
 var canvas;
 
+
+/////*************//////
+const timeSaoEl = document.getElementById("timeSao"); 
+const dateSaoEl = document.getElementById("dateSao");
+const weatherSaoEl = document.getElementById("weatherSao");
+const iconSaoEl = document.getElementById("weatherIconSao");
+
+const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+const API_KEY="1dd359b1b668b6011fdd5c163f521f6b";
+
+setInterval(() => {
+    const time = new Date();
+    const month = time.getMonth();
+    const date = time.getDate();
+    const day = time.getDay(); 
+    const hour = time.getHours();
+    const hoursIn12HrFormat = hour >= 13 ? hour %12: hour;
+    const minutes = time.getMinutes();
+    const ampm = hour >=12 ? 'PM' : 'AM';
+
+    timeSaoEl.innerHTML = hoursIn12HrFormat + ":" + minutes + " " + `<span id="am-pm">${ampm}</span>`;
+    dateSaoEl.innerHTML = days[day]+", "+date+" "+months[month];
+
+    
+},1000);
+
+getWeatherData(); 
+function getWeatherData(){
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=-23.42&lon=-46.48&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(data =>{
+        console.log(data);
+        showWeatherData(data);
+    });
+    
+    //-23.428108580847645, -46.482164617161985
+}
+
+function showWeatherData(data){
+    let {temp} = data.current;
+    let {icon} = data.current.weather[0];
+    console.log({icon});
+
+    weatherSaoEl.innerHTML = `<div class="weatherSao" id="weatherSao">${temp}° C</div>`;
+
+    console.log(`<img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="weather icon" id="weatherIcon"></img>`);
+    //iconSaoEl.innerHTML = `<div><img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="weather icon" id="weatherIcon"></img></div>`;
+    iconSaoEl.innerHTML = icon;
+}
+
 function preload(){
     /*background("#F4A523");*/
 }

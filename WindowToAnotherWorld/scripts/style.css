@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;700&display=swap');
 
 html, body {
   margin: 0;
@@ -26,6 +27,7 @@ canvas {
 body{
   z-index: -1;
   background-color: #F4A523;   /*F4A523*/  /* #10002b */   /*142C52*/
+  font-family: 'Poppins', sans-serif;
 }
 
 
@@ -45,11 +47,9 @@ body{
   border: 43px solid #292A2B;
   /*border-radius: 50px;*/
   border-radius: 0px 100px 0px 100px;
-
-  /*
   box-shadow:  41px 41px 70px #cf8c1e,
   -41px -41px 70px #ffbe28;
-  */
+  
   z-index: 1;
   opacity: 1;
 }
@@ -135,7 +135,7 @@ body{
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   transform: translate(-220px,290px);
-  font-family: 'Noto Sans KR', sans-serif;
+  /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
 .cityInfo{
@@ -148,6 +148,6 @@ body{
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   transform: translate(-590px,-365px);
-  font-family: 'Noto Sans KR', sans-serif;
+  /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
