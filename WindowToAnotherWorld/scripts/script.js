@@ -8,8 +8,17 @@ let camChina;
 let titleChina;
 let infoChina;
 let numCity=1;
+var canvas;
+
+function preload(){
+    /*background("#F4A523");*/
+}
 
 function setup(){
+    canvas = createCanvas(windowWidth,windowHeight);
+    canvas.position(0,0);	  
+	canvas.style("z-index",-1);
+
     camRomania=document.getElementById("brasovCam");
 	camRomania.style.display = "none";
     titleRomania=document.getElementById("brasovTitle");
@@ -80,5 +89,10 @@ function mousePressed(){
         numCity++;
     }else{
         numCity=1;
+    }
+
+    if(mouseX<width/2 && mouseY<height/2){
+        let fs = fullscreen();
+        fullscreen(!fs);
     }
 }
