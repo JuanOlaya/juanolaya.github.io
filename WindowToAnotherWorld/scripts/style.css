@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500;520;600;700&display=swap');
 
 html, body {
   margin: 0;
@@ -50,9 +50,34 @@ body{
   box-shadow:  41px 41px 70px #cf8c1e,
   -41px -41px 70px #ffbe28;
   
+  z-index: 2;
+  opacity: 1;
+}
+
+
+.marginFrameBackground{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(-705px,-398px);
+}
+
+
+
+.frameBackground{
+  width: 1243px; 
+  height: 680px;
+  border: 80px solid #F4A523;
+  /*border-radius: 50px;*/
+  border-radius: 0px 120px 0px 130px;
+  
   z-index: 1;
   opacity: 1;
 }
+
 
 .marginBoxCity{
   margin: 0;
@@ -61,13 +86,13 @@ body{
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-280px,290px);
+  transform: translate(-280px,310px);
 }
 
 
 .boxCity{
-  width: 480px; 
-  height: 74px;
+  width: 530px; 
+  height: 50px;
   border-radius: 30px 30px 0 0;
   background: #292A2B;
   opacity: 1;
@@ -80,13 +105,13 @@ body{
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-640px,-355px);
+  transform: translate(-650px,-355px);
 }
 
 
 .boxInfoLeft{
-  width: 280px; 
-  height: 130px;
+  width: 225px; 
+  height: 110px;
   border-radius: 40px 0px 40px 0px; 
   background: #292A2B;    /*5C8BD6*/ /*323334*/
   /*border-top: 4px solid #292A2B;
@@ -134,11 +159,12 @@ body{
   color: #ffffff;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-220px,290px);
+  transform: translate(-210px,323px);
+  font-weight: 500;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.cityInfo{
+.cityTime{
   z-index: 0;
   margin: 0;
   position: absolute;
@@ -147,7 +173,49 @@ body{
   color: #ffffff;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-590px,-365px);
+  transform: translate(-610px,-324px);
+  font-size: 35px;
+  /*font-family: 'Noto Sans KR', sans-serif;*/
+}
+
+.cityDate{
+  z-index: 0;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #ffffff;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(-610px,-275px);
+  font-size: 10px;
+  /*font-family: 'Noto Sans KR', sans-serif;*/
+}
+
+.cityIcon{
+  z-index: 0;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #ffffff;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(-510px,-334px);
+  /*font-family: 'Noto Sans KR', sans-serif;*/
+}
+
+.cityTemperature{
+  z-index: 0;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #ffffff;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(-486px,-274px);
+  font-size: 10px;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 

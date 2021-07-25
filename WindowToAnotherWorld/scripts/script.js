@@ -12,15 +12,16 @@ let camAmsterdam;
 let titleAmsterdam;
 let infoAmsterdam;
 
-let numCity=1;
+let numCity=2;
 var canvas;
 
 
 /////*************//////
+
 const timeSaoEl = document.getElementById("timeSao"); 
 const dateSaoEl = document.getElementById("dateSao");
 const weatherSaoEl = document.getElementById("weatherSao");
-const iconSaoEl = document.getElementById("weatherIconSao");
+
 
 const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -33,15 +34,15 @@ setInterval(() => {
     const date = time.getDate();
     const day = time.getDay(); 
     const hour = time.getHours();
-    const hoursIn12HrFormat = hour >= 13 ? hour %12: hour;
+    //const hoursIn12HrFormat = hour >= 13 ? hour %12: hour;
     const minutes = time.getMinutes();
     const ampm = hour >=12 ? 'PM' : 'AM';
 
-    timeSaoEl.innerHTML = hoursIn12HrFormat + ":" + minutes + " " + `<span id="am-pm">${ampm}</span>`;
+    timeSaoEl.innerHTML = hour + ":" + minutes;
     dateSaoEl.innerHTML = days[day]+", "+date+" "+months[month];
 
     
-},1000);
+},6000);
 
 getWeatherData(); 
 function getWeatherData(){
@@ -49,20 +50,30 @@ function getWeatherData(){
         console.log(data);
         showWeatherData(data);
     });
-    
-    //-23.428108580847645, -46.482164617161985
 }
 
 function showWeatherData(data){
     let {temp} = data.current;
+    temp=Math.round(temp);
     let {icon} = data.current.weather[0];
     console.log({icon});
+    
 
-    weatherSaoEl.innerHTML = `<div class="weatherSao" id="weatherSao">${temp}° C</div>`;
+    //weatherSaoEl.innerHTML = `<div class="cityWeather" id="weatherSao"><div>${temp}° C</div><img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="weather icon"></div></div>`;
+ 
+    
+    weatherSaoEl.innerHTML = `
+    <div class="cityIcon">
+        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+    </div>
+    <div class="cityTemperature">
+        ${temp}° C
+    </div>`;
 
-    console.log(`<img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="weather icon" id="weatherIcon"></img>`);
-    //iconSaoEl.innerHTML = `<div><img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="weather icon" id="weatherIcon"></img></div>`;
-    iconSaoEl.innerHTML = icon;
+    console.log(weatherSaoEl);
+    
+    //iconSaoEl.innerHTML = `<div id="weatherIconSao"><img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="weather icon"></div>`;
+
 }
 
 function preload(){
@@ -76,24 +87,30 @@ function setup(){
 
     camRomania=document.getElementById("brasovCam");
 	camRomania.style.display = "none";
+    
     titleRomania=document.getElementById("brasovTitle");
     titleRomania.style.display = "none";
     infoRomania=document.getElementById("brasovInfo");
     infoRomania.style.display = "none";
+    
 
     camBrazil=document.getElementById("saoPauloCam");
     camBrazil.style.display = "none";
+    
     titleBrazil=document.getElementById("saoPauloTitle");
     titleBrazil.style.display = "none";
     infoBrazil=document.getElementById("saoPauloInfo");
     infoBrazil.style.display = "none";
+    
 
     camChina=document.getElementById("hongKongCam");
     camChina.style.display = "none";
+    
     titleChina=document.getElementById("hongKongTitle");
     titleChina.style.display = "none";
     infoChina=document.getElementById("hongKongInfo");
     infoChina.style.display = "none";
+    
 
     camAmsterdam=document.getElementById("amsterdamCam");
     camAmsterdam.style.display = "none";
@@ -109,42 +126,60 @@ function draw(){
 
     if(numCity==1){
         camRomania.style.display = "block";
+        
         titleRomania.style.display = "block";
-        infoRomania.style.display = "block";
+        infoRomania.style.display = "block"
+        
 
         camBrazil.style.display = "none";
+        
         titleBrazil.style.display = "none";
         infoBrazil.style.display = "none";
+        
 
         camChina.style.display = "none";
+        
         titleChina.style.display = "none";
         infoChina.style.display = "none";
+        
     }
     if(numCity==2){
         camRomania.style.display = "none";
+        
         titleRomania.style.display = "none";
         infoRomania.style.display = "none";
+        
 
         camBrazil.style.display = "block";
+        
         titleBrazil.style.display = "block";
         infoBrazil.style.display = "block";
+        
 
         camChina.style.display = "none";
+        
         titleChina.style.display = "none";
-        infoChina.style.display = "none";
+        infoChina.style.display = "none"
+        
     }
     if(numCity==3){
         camRomania.style.display = "none";
+        
         titleRomania.style.display = "none";
         infoRomania.style.display = "none";
+        
 
         camBrazil.style.display = "none";
+        
         titleBrazil.style.display = "none";
         infoBrazil.style.display = "none";
+        
 
         camChina.style.display = "block";
+        
         titleChina.style.display = "block";
         infoChina.style.display = "block";
+        
     }
 }
 
