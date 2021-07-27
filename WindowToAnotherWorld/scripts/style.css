@@ -28,6 +28,8 @@ body{
   z-index: -1;
   background-color: #F4A523;   /*F4A523*/  /* #10002b */   /*142C52*/
   font-family: 'Poppins', sans-serif;
+  overflow-y: hidden; 
+  overflow-x: hidden; 
 }
 
 
@@ -150,13 +152,55 @@ body{
 }
 */
 
+.saoName{
+  z-index: 0;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #F3E4CE;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(-205px,323px);
+  font-weight: 500;
+  /*font-family: 'Noto Sans KR', sans-serif;*/
+}
+
+.brasovName{
+  z-index: 0;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #F3E4CE;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(-165px,323px);
+  font-weight: 500;
+  /*font-family: 'Noto Sans KR', sans-serif;*/
+}
+
+.taoyuanName{
+  z-index: 0;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #F3E4CE;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(-145px,323px);
+  font-weight: 500;
+  /*font-family: 'Noto Sans KR', sans-serif;*/
+}
+
 .cityText{
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #ffffff;
+  color: #F3E4CE;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   transform: translate(-210px,323px);
@@ -170,7 +214,7 @@ body{
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #ffffff;
+  color: #FBF6EF;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   transform: translate(-610px,-324px);
@@ -184,7 +228,7 @@ body{
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #ffffff;
+  color: #FBF6EF;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   transform: translate(-610px,-275px);
@@ -198,7 +242,7 @@ body{
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #ffffff;
+  /*color: #ffffff;*/
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   transform: translate(-510px,-334px);
@@ -211,7 +255,7 @@ body{
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #ffffff;
+  color: #FBF6EF;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   transform: translate(-486px,-274px);
@@ -219,3 +263,48 @@ body{
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
+#leftArrowIcon{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(-280px,300px);
+  font-size: 70px;
+  color: #F3E4CE;
+  cursor: pointer;
+}
+
+#rightArrowIcon{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(183px,300px);
+  font-size: 70px;
+  color: #F3E4CE;
+  cursor: pointer;
+}
+
+#fullscreenIcon{
+  margin: 0;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 40px;
+  color: rgba(243, 228, 206, 0.6)
+}
+
+#infoIcon{
+  margin: 0;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 40px;
+  color: rgba(243, 228, 206, 0.6)
+}
