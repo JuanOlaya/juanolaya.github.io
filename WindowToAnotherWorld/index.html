@@ -18,7 +18,7 @@
             <iframe class="window" id="brasovCam" src="https://www.youtube.com/embed/G05wmWFDtSo?autoplay=1&mute=1&vq=hd1080" width="1248" height="702"  allow='autoplay' frameBorder="0"></iframe>
         </section>
         <section >
-            <iframe class="window" id="hongKongCam" src="https://www.youtube.com/embed/z_mlibCfgFI?autoplay=1&mute=1&vq=hd1080" width="1248" height="702"  allow='autoplay' frameBorder="0"></iframe>
+            <iframe class="window" id="taoyuanCam" src="https://www.youtube.com/embed/z_mlibCfgFI?autoplay=1&mute=1&vq=hd1080" width="1248" height="702"  allow='autoplay' frameBorder="0"></iframe>
         </section>
         <section >
             <iframe class="window" id="amsterdamCam" src="https://www.youtube.com/embed/iB6Te_JP4Lk?autoplay=1&mute=1&vq=hd1080" width="1248" height="702"  allow='autoplay' frameBorder="0"></iframe>
@@ -66,32 +66,47 @@
                 Monday, 23 July
             </div>
         </div>
+
         <section class="brasovName" id="brasovTitle">
             Brasov,  Romania,  Michael Weiss Street
         </section>
-        <section>
-            <div class="cityTime" id="brasovInfo">
-                11:03
-                <br>
-                Monday, 23 July
-                <br>
-                21° C
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
+        <div id="brasovInfo">
+            <div id="weatherBrasov">
+                <div class="cityIcon">
+                    <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
+                </div>
+                <div class="cityTemperature">
+                    18° C
+                </div>
             </div>
-        </section>
-        <section class="taoyuanName" id="hongKongTitle">
+            <div class="cityTime" id="timeBrasov">
+                6:03
+            </div>
+            <div class="cityDate" id="dateBrasov">
+                Monday, 23 July
+            </div>
+        </div>
+
+        <section class="taoyuanName" id="taoyuanTitle">
             Taoyuan,  Taiwan,  Daxi Old Street
         </section>
-        <section>
-            <div class="cityTime" id="hongKongInfo">
-                11:03 
-                <br>
-                Monday, 23 July
-                <br>
-                24° C
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon">
+
+        <div id="taoyuanInfo">
+            <div id="weatherTaoyuan" ></div>
+                <div class="cityIcon">
+                    <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
+                </div>
+                <div class="cityTemperature">
+                    18° C
+                </div>
             </div>
-        </section>
+            <div class="cityTime" id="timeTaoyuan">
+                6:03
+            </div>
+            <div class="cityDate" id="dateTaoyuan">
+                Monday, 23 July
+            </div>
+        </div>
     <script src="scripts/script.js"></script>
     </body>
 </html>
