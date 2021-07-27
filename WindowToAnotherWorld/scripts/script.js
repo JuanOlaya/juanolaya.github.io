@@ -38,8 +38,8 @@ setInterval(() => {
     const minutes = time.getMinutes();
     const ampm = hour >=12 ? 'PM' : 'AM';
 
-    timeSaoEl.innerHTML = hour + ":" + minutes;
-    dateSaoEl.innerHTML = days[day]+", "+date+" "+months[month];
+    //timeSaoEl.innerHTML = hour + ":" + minutes;
+    //dateSaoEl.innerHTML = days[day]+", "+date+" "+months[month];
 
     
 },6000);
@@ -52,15 +52,58 @@ function getWeatherData(){
     });
 }
 
+
+
+setInterval(() => {
+    let options = {
+        timeZone: 'America/Sao_Paulo',
+        weekday: 'long',
+        day: 'numeric',
+        month: 'short',
+        hour: 'numeric',
+        minute: 'numeric', 
+    },
+    //saoHour = new Intl.DateTimeFormat([], options);
+    
+    saoHour = new Intl.DateTimeFormat([], options);
+
+    var pos=[];
+    pos=saoHour.formatToParts(new Date());
+    console.log(pos);
+
+    dateSaoEl.innerHTML = pos[0].value +", "+pos[2].value+" "+pos[4].value;
+    timeSaoEl.innerHTML = pos[6].value + ":" + pos[8].value;
+},100);
+
+
+
+
+/*
+let options = {
+    timeZone: 'America/Sao_Paulo',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+  },
+  //saoHour = new Intl.DateTimeFormat([], options);
+  
+  saoHour = new Intl.DateTimeFormat([], options);
+
+var pos=[];
+pos=saoHour.formatToParts(new Date());
+timeSaoEl.innerHTML = pos[6].value + ":" + pos[8].value;
+console.log(pos[6].value);
+*/
+
+
 function showWeatherData(data){
     let {temp} = data.current;
     temp=Math.round(temp);
     let {icon} = data.current.weather[0];
     console.log({icon});
-    
-
-    //weatherSaoEl.innerHTML = `<div class="cityWeather" id="weatherSao"><div>${temp}° C</div><img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="weather icon"></div></div>`;
- 
     
     weatherSaoEl.innerHTML = `
     <div class="cityIcon">
@@ -72,7 +115,7 @@ function showWeatherData(data){
 
     console.log(weatherSaoEl);
     
-    //iconSaoEl.innerHTML = `<div id="weatherIconSao"><img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="weather icon"></div>`;
+    
 
 }
 
@@ -184,14 +227,29 @@ function draw(){
 }
 
 function mousePressed(){
-    if(numCity<3){
-        numCity++;
+    
+    if(mouseX>width/2 && mouseX<95*width/100 && mouseY<95*height/100){
+        //if(mouseX<80*width/100 && mouseY<80*height/100){
+            if(numCity<3){
+                numCity++;
+            }else{
+                numCity=1;
+            }
+        //}
     }else{
-        numCity=1;
+        if(numCity>1){
+            numCity--;
+        }else{
+            numCity=3;
+        }
     }
 
-    if(mouseX>80*width/100 && mouseY>80*height/100){
+    if(mouseX>95*width/100 && mouseY>95*height/100){
         let fs = fullscreen();
         fullscreen(!fs);
     }
 }
+
+
+// France Côte d'Azur Nature Beach in 4k
+// https://www.youtube.com/watch?v=zr10KdpyWm0
