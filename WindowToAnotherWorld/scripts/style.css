@@ -299,12 +299,22 @@ body{
   color: rgba(243, 228, 206, 0.6)
 }
 
+#paletteIcon{
+  margin: 0;
+  position: absolute;
+  bottom: 20px;
+  right: 60px;
+  cursor: pointer;
+  font-size: 30px;
+  color: rgba(243, 228, 206, 0.6)
+}
+
 #infoIcon{
   margin: 0;
   position: absolute;
-  top: 15px;
-  right: 15px;
+  bottom: 20px;
+  right: 100px;
   cursor: pointer;
-  font-size: 40px;
+  font-size: 30px;
   color: rgba(243, 228, 206, 0.6)
 }

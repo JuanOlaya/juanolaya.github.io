@@ -12,7 +12,7 @@ let camAmsterdam;
 let titleAmsterdam;
 let infoAmsterdam;
 
-let numCity=2;
+let numCity=1;
 var canvas;
 
 
@@ -93,6 +93,7 @@ setInterval(() => {
 
     dateBrasovEl.innerHTML = brasov[0].value +", "+brasov[2].value+" "+brasov[4].value;
     timeBrasovEl.innerHTML = brasov[6].value + ":" + brasov[8].value;
+    
 
     // Taoyuan // 
     let optionsTaoyuan = {
@@ -248,24 +249,20 @@ function draw(){
         camBrazil.style.display = "none";
         titleBrazil.style.display = "none";
         infoBrazil.style.display = "none";
-        
 
         camTaiwan.style.display = "none";
         titleTaiwan.style.display = "none";
         infoTaiwan.style.display = "none";
     }
-    
+
     if(numCity==2){
         camRomania.style.display = "none";
         titleRomania.style.display = "none";
         infoRomania.style.display = "none";
-        
 
         camBrazil.style.display = "block";
-        
         titleBrazil.style.display = "block";
         infoBrazil.style.display = "block";
-        
 
         camTaiwan.style.display = "none";
         titleTaiwan.style.display = "none";
@@ -276,12 +273,10 @@ function draw(){
         camRomania.style.display = "none";
         titleRomania.style.display = "none";
         infoRomania.style.display = "none";
-        
 
         camBrazil.style.display = "none";
         titleBrazil.style.display = "none";
         infoBrazil.style.display = "none";
-        
 
         camTaiwan.style.display = "block";
         titleTaiwan.style.display = "block";
