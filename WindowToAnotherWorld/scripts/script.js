@@ -63,7 +63,9 @@ setInterval(() => {
         day: 'numeric',
         month: 'short',
         hour: 'numeric',
-        minute: 'numeric', 
+        minute: 'numeric',
+        /*hour12: false, */
+        hourCycle: 'h23',
     },
     
     saoDate = new Intl.DateTimeFormat([], optionsSao);
@@ -82,7 +84,9 @@ setInterval(() => {
         day: 'numeric',
         month: 'short',
         hour: 'numeric',
-        minute: 'numeric', 
+        minute: 'numeric',
+        /*hour12: false, */
+        hourCycle: 'h23',
     },
     
     brasovDate = new Intl.DateTimeFormat([], optionsBrasov);
@@ -94,7 +98,6 @@ setInterval(() => {
     dateBrasovEl.innerHTML = brasov[0].value +", "+brasov[2].value+" "+brasov[4].value;
     timeBrasovEl.innerHTML = brasov[6].value + ":" + brasov[8].value;
     
-
     // Taoyuan // 
     let optionsTaoyuan = {
         timeZone: 'Asia/Taipei',
@@ -103,13 +106,15 @@ setInterval(() => {
         month: 'short',
         hour: 'numeric',
         minute: 'numeric', 
+        hour12: false,
+        hourCycle: 'h23', 
     },
     
     taoyuanDate = new Intl.DateTimeFormat([], optionsTaoyuan);
 
     var taoyuan=[];
     taoyuan=taoyuanDate.formatToParts(new Date());
-    //console.log(taoyuan);
+    console.log(taoyuan);
 
     dateTaoyuanEl.innerHTML = taoyuan[0].value +", "+taoyuan[2].value+" "+taoyuan[4].value;
     timeTaoyuanEl.innerHTML = taoyuan[6].value + ":" + taoyuan[8].value;
@@ -152,9 +157,9 @@ function getWeatherDataTaoyuan(){
 function showWeatherDataSao(data){
     let {temp} = data.current;
     temp=Math.round(temp);
-    console.log("temp: "+temp);
+    //console.log("temp: "+temp);
     let {icon} = data.current.weather[0];
-    console.log({icon});
+    //console.log({icon});
     
     weatherSaoEl.innerHTML = `
     <div class="cityIcon">
@@ -169,12 +174,12 @@ function showWeatherDataSao(data){
 
 
 function showWeatherDataBrasov(dataBrasov){
-    console.log(dataBrasov);
+    //console.log(dataBrasov);
     let {temp} = dataBrasov.current;
     temp=Math.round(temp);
-    console.log(temp);
+    //console.log(temp);
     let {icon} = dataBrasov.current.weather[0];
-    console.log({icon});
+    //console.log({icon});
     
     //weatherBrasovEl.innerHTML = `<div class="cityIcon"><img src="http://openweathermap.org/img/wn/01n@2x.png" alt="Weather Icon" width=75 height=75></div><div class="cityTemperature">18° C</div>`;
 
