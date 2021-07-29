@@ -276,6 +276,7 @@ body{
   cursor: pointer;
 }
 
+
 #rightArrowIcon{
   margin: 0;
   position: absolute;
@@ -288,6 +289,7 @@ body{
   color: #F3E4CE;
   cursor: pointer;
 }
+
 
 #fullscreenIcon{
   margin: 0;
@@ -317,4 +319,13 @@ body{
   cursor: pointer;
   font-size: 30px;
   color: rgba(243, 228, 206, 0.6)
+}
+
+
+.span_no_selection {
+  user-select: none; /* standard syntax */
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */
 }
