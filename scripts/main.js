@@ -64,7 +64,7 @@ function setup() {
 		
 	}else{
 		balls.push( new Ball(random(100, width / 2), random(86, height / 3), 3, 3, 0, 0.1, colores[0]));
-		balls.push( new Ball(random( 2*width / 3, width-95), random(100, height - 100), 4, 4, 0, 0.1, colores[1]));
+		balls.push( new Ball(random( 2*width / 3, width-95), random(height/2+100, height - 100), 4, 4, 0, 0.1, colores[1]));
 	}
 
 	backColor=40;
