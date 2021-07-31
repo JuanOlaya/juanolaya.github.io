@@ -265,9 +265,10 @@ document.getElementById("leftArrowIcon").addEventListener("click", function() {
     updateDisplays();
 });
 
-var elem = elem = document.documentElement;
+var elem = document.documentElement;
 
 document.getElementById("fullscreenIcon").addEventListener("click", function() {
+    
     if (!document.fullscreenElement){
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
@@ -276,7 +277,8 @@ document.getElementById("fullscreenIcon").addEventListener("click", function() {
         } else if (elem.msRequestFullscreen) { /* IE11 */
             elem.msRequestFullscreen();
         }
-    }else{
+    } else{
+     if (document.fullscreenElement){
         if (document.exitFullscreen) {
             document.exitFullscreen();
           } else if (document.webkitExitFullscreen) { /* Safari */
@@ -284,6 +286,7 @@ document.getElementById("fullscreenIcon").addEventListener("click", function() {
           } else if (document.msExitFullscreen) { /* IE11 */
             document.msExitFullscreen();
           }
+        }
     }
 });
 
