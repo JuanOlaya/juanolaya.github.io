@@ -8,12 +8,74 @@ let camChina;
 let titleChina;
 let infoChina;
 
+
+
+let camTaipei;
+let camOdessa;
+let camTokyo;
+let camVerbier;
+let camVenice;
+
 let camAmsterdam;
 let titleAmsterdam;
 let infoAmsterdam;
 
+
 let numCity=1;
 var canvas;
+
+
+camRomania=document.getElementById("brasovCam");
+camRomania.style.display = "block";
+titleRomania=document.getElementById("brasovTitle");
+titleRomania.style.display = "block";
+infoRomania=document.getElementById("brasovInfo");
+infoRomania.style.display = "block";
+
+
+camBrazil=document.getElementById("saoPauloCam");
+camBrazil.style.display = "none";
+titleBrazil=document.getElementById("saoPauloTitle");
+titleBrazil.style.display = "none";
+infoBrazil=document.getElementById("saoPauloInfo");
+infoBrazil.style.display = "none";
+
+
+camTaiwan=document.getElementById("taoyuanCam");
+camTaiwan.style.display = "none";
+titleTaiwan=document.getElementById("taoyuanTitle");
+titleTaiwan.style.display = "none";
+infoTaiwan=document.getElementById("taoyuanInfo");
+infoTaiwan.style.display = "none";
+
+
+camTaipei=document.getElementById("taipeiCam");
+camTaipei.style.display = "none";
+
+
+camOdessa=document.getElementById("odessaCam");
+camOdessa.style.display = "none";
+
+
+camTokyo=document.getElementById("tokyoCam");
+camTokyo.style.display = "none";
+
+camVerbier=document.getElementById("verbierCam");
+camVerbier.style.display = "none";
+
+camVenice=document.getElementById("veniceCam");
+camVenice.style.display = "none";
+
+camAmsterdam=document.getElementById("amsterdamCam");
+camAmsterdam.style.display = "none";
+
+
+/*
+titleAmsterdam=document.getElementById("amsterdamTitle");
+titleAmsterdam.style.display = "none";
+infoAmsterdam=document.getElementById("amsterdamInfo");
+infoAmsterdam.style.display = "none";
+*/
 
 
 /////*************//////
@@ -31,28 +93,6 @@ const dateTaoyuanEl = document.getElementById("dateTaoyuan");
 const weatherTaoyuanEl = document.getElementById("weatherTaoyuan");
 
 const API_KEY="1dd359b1b668b6011fdd5c163f521f6b";
-
-/*
-const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-
-setInterval(() => {
-    const time = new Date();
-    const month = time.getMonth();
-    const date = time.getDate();
-    const day = time.getDay(); 
-    const hour = time.getHours();
-    //const hoursIn12HrFormat = hour >= 13 ? hour %12: hour;
-    const minutes = time.getMinutes();
-    const ampm = hour >=12 ? 'PM' : 'AM';
-
-    //timeSaoEl.innerHTML = hour + ":" + minutes;
-    //dateSaoEl.innerHTML = days[day]+", "+date+" "+months[month];
-
-    
-},6000);
-*/
-
 
 
 setInterval(() => {
@@ -114,7 +154,7 @@ setInterval(() => {
 
     var taoyuan=[];
     taoyuan=taoyuanDate.formatToParts(new Date());
-    console.log(taoyuan);
+    //console.log(taoyuan);
 
     dateTaoyuanEl.innerHTML = taoyuan[0].value +", "+taoyuan[2].value+" "+taoyuan[4].value;
     timeTaoyuanEl.innerHTML = taoyuan[6].value + ":" + taoyuan[8].value;
@@ -204,46 +244,32 @@ function showWeatherDataTaoyuan(dataTaoyuan){
     //console.log(weatherSaoEl);
 }
 
-function setup(){
-    canvas = createCanvas(windowWidth,windowHeight);
-    canvas.position(0,0);	  
-	canvas.style("z-index",-1);
 
-    camRomania=document.getElementById("brasovCam");
-	camRomania.style.display = "none";
-    titleRomania=document.getElementById("brasovTitle");
-    titleRomania.style.display = "none";
-    infoRomania=document.getElementById("brasovInfo");
-    infoRomania.style.display = "none";
+
+document.getElementById("rightArrowIcon").addEventListener("click", function() {
     
+    if(numCity<9){
+        numCity++;
+    }else{
+        numCity=1;
+    }
+    updateDisplays();
+});
 
-    camBrazil=document.getElementById("saoPauloCam");
-    camBrazil.style.display = "none";
-    titleBrazil=document.getElementById("saoPauloTitle");
-    titleBrazil.style.display = "none";
-    infoBrazil=document.getElementById("saoPauloInfo");
-    infoBrazil.style.display = "none";
-    
+document.getElementById("leftArrowIcon").addEventListener("click", function() {
+    if(numCity>1){
+        numCity--;
+    }else{
+        numCity=9;
+    }
+    updateDisplays();
+});
 
-    camTaiwan=document.getElementById("taoyuanCam");
-    camTaiwan.style.display = "none";
-    titleTaiwan=document.getElementById("taoyuanTitle");
-    titleTaiwan.style.display = "none";
-    infoTaiwan=document.getElementById("taoyuanInfo");
-    infoTaiwan.style.display = "none";
-    
+document.getElementById("fullscreenIcon").addEventListener("click", function() {
+    fullscreen(!fullscreen());
+});
 
-    camAmsterdam=document.getElementById("amsterdamCam");
-    camAmsterdam.style.display = "none";
-    /*
-    titleAmsterdam=document.getElementById("amsterdamTitle");
-    titleAmsterdam.style.display = "none";
-    infoAmsterdam=document.getElementById("amsterdamInfo");
-    infoAmsterdam.style.display = "none";
-    */
-}
-
-function draw(){
+function updateDisplays(){
 
     if(numCity==1){
         camRomania.style.display = "block";
@@ -258,6 +284,13 @@ function draw(){
         camTaiwan.style.display = "none";
         titleTaiwan.style.display = "none";
         infoTaiwan.style.display = "none";
+
+        camTaipei.style.display = "none";
+        camOdessa.style.display = "none";
+        camTokyo.style.display = "none";
+        camVerbier.style.display = "none";
+        camVenice.style.display = "none";
+        camAmsterdam.style.display = "none";
     }
 
     if(numCity==2){
@@ -271,7 +304,14 @@ function draw(){
 
         camTaiwan.style.display = "none";
         titleTaiwan.style.display = "none";
-        infoTaiwan.style.display = "none"
+        infoTaiwan.style.display = "none";
+
+        camTaipei.style.display = "none";
+        camOdessa.style.display = "none";
+        camTokyo.style.display = "none";
+        camVerbier.style.display = "none";
+        camVenice.style.display = "none";
+        camAmsterdam.style.display = "none";
     }
 
     if(numCity==3){
@@ -286,31 +326,151 @@ function draw(){
         camTaiwan.style.display = "block";
         titleTaiwan.style.display = "block";
         infoTaiwan.style.display = "block";
-    }
-}
 
-function mousePressed(){
+        camTaipei.style.display = "none";
+        camOdessa.style.display = "none";
+        camTokyo.style.display = "none";
+        camVerbier.style.display = "none";
+        camVenice.style.display = "none";
+        camAmsterdam.style.display = "none";
+    }
+
+    if(numCity==4){
+        camRomania.style.display = "none";
+        titleRomania.style.display = "none";
+        infoRomania.style.display = "none";
+
+        camBrazil.style.display = "none";
+        titleBrazil.style.display = "none";
+        infoBrazil.style.display = "none";
+
+        camTaiwan.style.display = "none";
+        titleTaiwan.style.display = "none";
+        infoTaiwan.style.display = "none";
+
+        camTaipei.style.display = "block";
+        camOdessa.style.display = "none";
+        camTokyo.style.display = "none";
+        camVerbier.style.display = "none";
+        camVenice.style.display = "none";
+        camAmsterdam.style.display = "none";
+    }
+
+    if(numCity==5){
+        camRomania.style.display = "none";
+        titleRomania.style.display = "none";
+        infoRomania.style.display = "none";
+
+        camBrazil.style.display = "none";
+        titleBrazil.style.display = "none";
+        infoBrazil.style.display = "none";
+
+        camTaiwan.style.display = "none";
+        titleTaiwan.style.display = "none";
+        infoTaiwan.style.display = "none";
+
+        camTaipei.style.display = "none";
+        camOdessa.style.display = "block";
+        camTokyo.style.display = "none";
+        camVerbier.style.display = "none";
+        camVenice.style.display = "none";
+        camAmsterdam.style.display = "none";
+    }
+
     
-    if(mouseX>width/2 && mouseX<95*width/100 && mouseY<95*height/100){
-        if(numCity<3){
-            numCity++;
-        }else{
-            numCity=1;
-        }
-    }else{
-        if(numCity>1){
-            numCity--;
-        }else{
-            numCity=3;
-        }
+    if(numCity==6){
+        camRomania.style.display = "none";
+        titleRomania.style.display = "none";
+        infoRomania.style.display = "none";
+
+        camBrazil.style.display = "none";
+        titleBrazil.style.display = "none";
+        infoBrazil.style.display = "none";
+
+        camTaiwan.style.display = "none";
+        titleTaiwan.style.display = "none";
+        infoTaiwan.style.display = "none";
+
+        camTaipei.style.display = "none";
+        camOdessa.style.display = "none";
+        camTokyo.style.display = "block";
+        camVerbier.style.display = "none";
+        camVenice.style.display = "none";
+        camAmsterdam.style.display = "none";
     }
 
-    if(mouseX>95*width/100 && mouseY>95*height/100){
-        let fs = fullscreen();
-        fullscreen(!fs);
+    if(numCity==7){
+        camRomania.style.display = "none";
+        titleRomania.style.display = "none";
+        infoRomania.style.display = "none";
+
+        camBrazil.style.display = "none";
+        titleBrazil.style.display = "none";
+        infoBrazil.style.display = "none";
+
+        camTaiwan.style.display = "none";
+        titleTaiwan.style.display = "none";
+        infoTaiwan.style.display = "none";
+
+        camTaipei.style.display = "none";
+        camOdessa.style.display = "none";
+        camTokyo.style.display = "none";
+        camVerbier.style.display = "block";
+        camVenice.style.display = "none";
+        camAmsterdam.style.display = "none";
+    }
+
+    if(numCity==8){
+        camRomania.style.display = "none";
+        titleRomania.style.display = "none";
+        infoRomania.style.display = "none";
+
+        camBrazil.style.display = "none";
+        titleBrazil.style.display = "none";
+        infoBrazil.style.display = "none";
+
+        camTaiwan.style.display = "none";
+        titleTaiwan.style.display = "none";
+        infoTaiwan.style.display = "none";
+
+        camTaipei.style.display = "none";
+        camOdessa.style.display = "none";
+        camTokyo.style.display = "none";
+        camVerbier.style.display = "none";
+        camVenice.style.display = "block";
+        camAmsterdam.style.display = "none";
+    }
+
+    if(numCity==9){
+        camRomania.style.display = "none";
+        titleRomania.style.display = "none";
+        infoRomania.style.display = "none";
+
+        camBrazil.style.display = "none";
+        titleBrazil.style.display = "none";
+        infoBrazil.style.display = "none";
+
+        camTaiwan.style.display = "none";
+        titleTaiwan.style.display = "none";
+        infoTaiwan.style.display = "none";
+
+        camTaipei.style.display = "none";
+        camOdessa.style.display = "none";
+        camTokyo.style.display = "none";
+        camVerbier.style.display = "none";
+        camVenice.style.display = "none";
+        camAmsterdam.style.display = "block";
     }
 }
+
+
+
+
 
 
 // France Côte d'Azur Nature Beach in 4k
 // https://www.youtube.com/watch?v=zr10KdpyWm0
+
+
+//Place Centrale Verbier
+//https://www.youtube.com/watch?v=yDKJMdZTEXQ
