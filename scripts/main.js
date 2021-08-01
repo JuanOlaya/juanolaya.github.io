@@ -18,9 +18,13 @@ let releaseTimeHorizontal;
 let pressTimeDiagonal;
 let releaseTimeDiagonal;
 let thresholdDiagonalCollisions=4;
+
+let fullscreen = document.getElementById("fullscreenIcon");
+fullscreen.style.display = "none";
+
 let gridStatus=true;
 let gridOff = document.getElementById("gridOffIcon");
-gridOff.style.display = "block";
+gridOff.style.display = "none";
 let gridOn = document.getElementById("gridOnIcon");
 gridOn.style.display = "none";
 
@@ -250,7 +254,7 @@ class Ball {
 	}
 }
 
-var elemBody = document.body; // Make the body go full screen.
+//var elemBody = document.body; // Make the body go full screen.
 document.getElementById("fullscreenIcon").addEventListener("click", function() {
 	let fs = fullscreen();
     fullscreen(!fs);
