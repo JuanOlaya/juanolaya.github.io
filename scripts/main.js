@@ -3,26 +3,53 @@
   https://juanolaya.github.io/
 */
 
-var balls = [];
-var colores = [];
-var oprimido=false;
-var oprimidoHorizontal=false;
-var backColor;
-var canvas;
-var horizontalObjectCollisions=0;
-var diagonalObjectCollisions=0;
-var mobile=false;
-var startTime= 0;
-var pressTimeHorizontal; 
-var releaseTimeHorizontal;
-var pressTimeDiagonal;
-var releaseTimeDiagonal;
-var thresholdDiagonalCollisions=4;
+let balls = [];
+let colores = [];
+let oprimido=false;
+let oprimidoHorizontal=false;
+let backColor;
+let canvas;
+let horizontalObjectCollisions=0;
+let diagonalObjectCollisions=0;
+let mobile=false;
+let startTime= 0;
+let pressTimeHorizontal; 
+let releaseTimeHorizontal;
+let pressTimeDiagonal;
+let releaseTimeDiagonal;
+let thresholdDiagonalCollisions=4;
+let gridStatus=true;
+let gridOff = document.getElementById("gridOffIcon");
+gridOff.style.display = "block";
+let gridOn = document.getElementById("gridOnIcon");
+gridOn.style.display = "none";
 
+let gridContainer = document.getElementById("cardGrid");
+let refreshIcon = document.getElementById("refreshIcon");
+refreshIcon.style.display = "none";
+
+let oneUnselected = document.getElementById("oneUnselected");
+oneUnselected.style.display = "none";
+let twoUnselected = document.getElementById("twoUnselected");
+twoUnselected.style.display = "none";
+let threeUnselected = document.getElementById("threeUnselected");
+threeUnselected.style.display = "none";
+
+/*
+var w = window.innerWidth
+|| document.documentElement.clientWidth
+|| document.body.clientWidth;
+
+var h = window.innerHeight
+|| document.documentElement.clientHeight
+|| document.body.clientHeight;
+*/
 
 function windowsResized(){
 	resizeCanvas(windowWidth,windowHeight);
 }
+
+
 
 function setup() {
 	
@@ -59,11 +86,11 @@ function setup() {
 	
 	
 	if(mobile==true){
-		balls.push( new Ball(random(100, width / 2), random(86, height / 2), 3, 3, 0, 0.1, colores[0]));
+		balls.push( new Ball(random(100, width / 2), random(86, height / 2), 3, 3, 0, 0.1, colores[0]));  //orange
 		balls.push( new Ball(width-90, 100, 4, 4, 0, 0.1, colores[1]));
 		
 	}else{
-		balls.push( new Ball(random(100, width / 2), random(86, height / 3), 3, 3, 0, 0.1, colores[0]));
+		balls.push( new Ball(random(100, width / 2), random(86, height / 3), 3, 3, 0, 0.1, colores[0]));     //orange
 		balls.push( new Ball(random( 2*width / 3, width-95), random(2*height/3, height - 100), 4, 4, 0, 0.1, colores[1]));
 	}
 
@@ -72,7 +99,22 @@ function setup() {
 }
 
 function draw() {
-	console.log("Mobile:"+mobile);
+	//console.log({windowWidth},{windowHeight},{w},{h});
+
+
+	//console.log("Mobile:"+mobile);
+	/*
+	if(gridStatus==true){
+		gridOff.style.display = "block";
+		gridOn.style.display = "none";
+		
+		
+	}else{
+		gridOff.style.display = "none";
+		gridOn.style.display = "block";
+		
+	}
+	*/
 
 	if(diagonalObjectCollisions<thresholdDiagonalCollisions){
 		balls[0].showDiagonal(oprimido);
@@ -182,7 +224,6 @@ class Ball {
 
 	edgeCollisionHorizontal() {
 		if (this.localizacion.x > width - this.radius) {
-			//horizontalObjectCollisions++;
 			diagonalObjectCollisions++;
 			this.velocity.x = this.velocity.x * (-1);
 			this.localizacion.x = width - this.radius-7;
@@ -196,17 +237,95 @@ class Ball {
 		}
 
 		if (this.localizacion.y > height - this.radius) {
-			//horizontalObjectCollisions++;
 			diagonalObjectCollisions++;
 			this.velocity.y = this.velocity.y * (-1);
 			this.localizacion.y = height - this.radius-7;
 		}
 
 		if (this.localizacion.y < this.radius) {
-			//horizontalObjectCollisions++;
 			diagonalObjectCollisions++;
 			this.velocity.y = this.velocity.y * (-1);
 			this.localizacion.y = this.radius+7;
 		}
 	}
 }
+
+var elemBody = document.body; // Make the body go full screen.
+document.getElementById("fullscreenIcon").addEventListener("click", function() {
+	let fs = fullscreen();
+    fullscreen(!fs);
+});
+
+
+document.getElementById("gridOffIcon").addEventListener("click", function() {
+
+	gridStatus=!gridStatus;
+	if(!gridStatus){
+		gridContainer.style.display = "none";
+		gridOff.style.display = "none";
+		gridOn.style.display = "block";
+		gridContainer.style.cursor = "pointer";
+		refreshIcon.style.display = "block";
+		/*
+		oneUnselected.style.display = "block";
+		twoUnselected.style.display = "block";
+		threeUnselected.style.display = "block";
+		*/
+	}
+});
+
+document.getElementById("gridOnIcon").addEventListener("click", function() {
+
+	gridStatus=!gridStatus;
+	if(gridStatus){
+		gridContainer.style.display = "block";
+		gridOff.style.display = "block";
+		gridOn.style.display = "none";
+		gridContainer.style.cursor = "default";
+		refreshIcon.style.display = "none";
+		oneUnselected.style.display = "none";
+		twoUnselected.style.display = "none";
+		threeUnselected.style.display = "none";
+	}
+});
+
+document.getElementById("refreshIcon").addEventListener("click", function() {
+	background(backColor);
+	diagonalObjectCollisions=0;
+	horizontalObjectCollisions=0;
+
+	if(mobile==true){
+		balls[0].localizacion.x=random(100, width / 2);  //orange
+		balls[0].localizacion.y=random(86, height / 2);
+		balls[1].localizacion.x=width-90;
+		balls[1].localizacion.y= 100;
+
+		pressTimeHorizontal = millis()+750; 
+		releaseTimeHorizontal = millis()+1000;
+		pressTimeDiagonal = millis()+500;  
+		releaseTimeDiagonal = millis()+1000;
+	}else{
+		balls[0].localizacion.x=random(100, width / 2);    //orange
+		balls[0].localizacion.y=random(86, height / 3);
+		balls[1].localizacion.x=random(2*width / 3, width-95);
+		balls[1].localizacion.y=random(100, height - 100);
+		balls[1].velocity.x=3;
+
+		pressTimeHorizontal = millis()+3000; 
+		releaseTimeHorizontal = millis()+3250;
+		pressTimeDiagonal = millis()+4500;  
+		releaseTimeDiagonal = millis()+5000;
+	}
+});
+
+
+/*
+if(mobile==true){
+	balls.push( new Ball(random(100, width / 2), random(86, height / 2), 3, 3, 0, 0.1, colores[0]));  //orange
+	balls.push( new Ball(width-90, 100, 4, 4, 0, 0.1, colores[1]));
+	
+}else{
+	balls.push( new Ball(random(100, width / 2), random(86, height / 3), 3, 3, 0, 0.1, colores[0]));     //orange
+	balls.push( new Ball(random( 2*width / 3, width-95), random(2*height/3, height - 100), 4, 4, 0, 0.1, colores[1]));
+}
+*/

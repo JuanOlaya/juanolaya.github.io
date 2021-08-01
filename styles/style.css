@@ -4,6 +4,7 @@
 html,body {
 	margin: 0;
 	padding: 0;
+    resize: both;
 	overflow-y: hidden; /* Hide vertical scrollbar */
     overflow-x: hidden; /* Hide horizontal scrollbar */
     /*background-color: #282828;*/
@@ -20,17 +21,7 @@ canvas { width: 100%; height: 100% }
 }
 */
 
-.grid-container{
-    display: grid;
-    height:100vh;
-    
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    
-    grid-gap: 2rem;
-    justify-items: center;
-    align-items: center;
-}
+
 
 .card {
 	width: 230px;
@@ -169,4 +160,94 @@ a:active {
     padding: 0;*/
     text-align: start;
     font-family: 'Noto Sans KR', sans-serif;
+}
+
+#fullscreenIcon{
+    margin: 0;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 55px;
+    color: rgba(243, 228, 206, 0.8);
+  }
+
+#gridOffIcon{
+    margin: 0;
+    position: absolute;
+    bottom: 23px;
+    right: 80px;
+    cursor: pointer;
+    font-size: 39px;
+    color: rgba(243, 228, 206, 0.8);
+}
+
+#gridOnIcon{
+    margin: 0;
+    position: absolute;
+    bottom: 23px;
+    right: 80px;
+    cursor: pointer;
+    font-size: 39px;
+    color: rgba(243, 228, 206, 0.8);
+}
+
+#refreshIcon{
+    margin: 0;
+    position: absolute;
+    bottom: 23px;
+    right: 140px;
+    cursor: pointer;
+    font-size: 42px;
+    color: rgba(243, 228, 206, 0.8);
+}
+
+#threeUnselected{
+    margin: 0;
+    position: absolute;
+    bottom: 23px;
+    right: 200px;
+    cursor: pointer;
+    font-size: 42px;
+    color: rgba(243, 228, 206, 0.8);
+}
+
+#twoUnselected{
+    margin: 0;
+    position: absolute;
+    bottom: 23px;
+    right: 260px;
+    cursor: pointer;
+    font-size: 42px;
+    color: rgba(243, 228, 206, 0.8);
+}
+
+#oneUnselected{
+    margin: 0;
+    position: absolute;
+    bottom: 23px;
+    right: 320px;
+    cursor: pointer;
+    font-size: 42px;
+    color: rgba(243, 228, 206, 0.8);
+}
+
+.span_no_selection {
+    user-select: none; /* standard syntax */
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+}
+  
+.grid-container{
+    display: grid;
+    height:100vh;
+    
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    
+    grid-gap: 2rem;
+    justify-items: center;
+    align-items: center;
 }

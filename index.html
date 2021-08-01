@@ -7,16 +7,27 @@
         <meta name="description" content="Interactive Designer">
         <link rel="stylesheet" type="text/css" href="styles/style.css">
         <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="scripts/main.js"></script>
-        <script src="scripts/car.js"></script>
-        <script src="scripts/verticalCar.js"></script>
-        <script src="scripts/horizontalCar.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"rel="stylesheet">
     </head>
 
     <body style="background-color:#282828;">
-        <div class="center">
-            <div class="grid-container">
+        <span id="fullscreenIcon" class="material-icons-round span_no_selection">fullscreen</span>
+        <span id="gridOffIcon" class="material-icons-round span_no_selection">grid_off</span>
+        <span id="gridOnIcon" class="material-icons-round span_no_selection">grid_on</span>
+        <span id="refreshIcon" class="material-icons-outlined span_no_selection">refresh</span>
+        <span id="oneUnselected" class="material-icons-outlined span_no_selection">looks_one</span>
+        <span id="twoUnselected" class="material-icons-outlined span_no_selection">looks_two</span>
+        <span id="threeUnselected" class="material-icons-outlined span_no_selection">looks_3</span>
+        <!--
+        <span id="oneSelected" class="material-icons-round span_no_selection">looks_one</span>
+        <span id="twoSelected" class="material-icons-round span_no_selection">looks_two</span>
+        <span id="threeSelected" class="material-icons-round span_no_selection">looks_3</span>
+        -->
+
+        <div id="cardGrid" class="center">
+            <div  class="grid-container">
                 <div class="card">
                     <div class="title">Juan Olaya</div>
                     <br>
@@ -50,7 +61,7 @@
                         Digital window to expand the mind and inspire new ideas of creative professionals in coworking spaces. 
                     </p>
                     <br>
-                    <a href="https://juanolaya.github.io/WindowToAnotherWorld/" target="_blank">Experience</a>
+                    <a href="https://juanolaya.github.io/WindowToAnotherWorld/" target="_blank">Online Experience</a>
                     <br>
                 </div>
 
@@ -132,6 +143,8 @@
                 </div>
             </div>
         </div>
+        <script src="scripts/main.js"></script>
+        <script src="scripts/car.js"></script>
     </body>
 
 </html>
