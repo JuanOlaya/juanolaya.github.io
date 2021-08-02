@@ -1,23 +1,37 @@
 let camRomania;
 let titleRomania;
 let infoRomania;
+
 let camBrazil;
 let titleBrazil;
 let infoBrazil;
-let camChina;
-let titleChina;
-let infoChina;
 
-
+let camTaiwan;
+let titleTaiwan;
+let infoTaiwan;
 
 let camTaipei;
+let titleTaiwan2;
+let infoTaipei;
+
 let camOdessa;
+let titleUkraine;
+let infoOdessa;
+
 let camTokyo;
+let titleJapan;
+let infoTokyo;
+
 let camVerbier;
+let titleSwitzerland;
+let infoVerbier;
+
 let camVenice;
+let titleItaly;
+let infoVenice;
 
 let camAmsterdam;
-let titleAmsterdam;
+let titleNetherlands;
 let infoAmsterdam;
 
 
@@ -51,24 +65,34 @@ infoTaiwan.style.display = "none";
 
 camTaipei=document.getElementById("taipeiCam");
 camTaipei.style.display = "none";
+titleTaiwan2=document.getElementById("taipeiTitle");
+titleTaiwan2.style.display = "none";
 
 
 camOdessa=document.getElementById("odessaCam");
 camOdessa.style.display = "none";
-
+titleUkraine=document.getElementById("odessaTitle");
+titleUkraine.style.display = "none";
 
 camTokyo=document.getElementById("tokyoCam");
 camTokyo.style.display = "none";
+titleJapan=document.getElementById("tokyoTitle");
+titleJapan.style.display = "none";
 
 camVerbier=document.getElementById("verbierCam");
 camVerbier.style.display = "none";
+titleSwitzerland=document.getElementById("verbierTitle");
+titleSwitzerland.style.display = "none";
 
 camVenice=document.getElementById("veniceCam");
 camVenice.style.display = "none";
+titleItaly=document.getElementById("veniceTitle");
+titleItaly.style.display = "none";
 
 camAmsterdam=document.getElementById("amsterdamCam");
 camAmsterdam.style.display = "none";
-
+titleNetherlands=document.getElementById("amsterdamTitle");
+titleNetherlands.style.display = "none";
 
 /*
 titleAmsterdam=document.getElementById("amsterdamTitle");
@@ -298,7 +322,6 @@ function updateDisplays(){
         titleRomania.style.display = "block";
         infoRomania.style.display = "block"
         
-
         camBrazil.style.display = "none";
         titleBrazil.style.display = "none";
         infoBrazil.style.display = "none";
@@ -308,11 +331,22 @@ function updateDisplays(){
         infoTaiwan.style.display = "none";
 
         camTaipei.style.display = "none";
+        titleTaiwan2.style.display = "none";
+
         camOdessa.style.display = "none";
+        titleUkraine.style.display = "none";
+
         camTokyo.style.display = "none";
+        titleJapan.style.display = "none";
+
         camVerbier.style.display = "none";
+        titleSwitzerland.style.display = "none";
+
         camVenice.style.display = "none";
+        titleItaly.style.display = "none";
+
         camAmsterdam.style.display = "none";
+        titleNetherlands.style.display = "none";
     }
 
     if(numCity==2){
@@ -329,11 +363,22 @@ function updateDisplays(){
         infoTaiwan.style.display = "none";
 
         camTaipei.style.display = "none";
+        titleTaiwan2.style.display = "none";
+
         camOdessa.style.display = "none";
+        titleUkraine.style.display = "none";
+
         camTokyo.style.display = "none";
+        titleJapan.style.display = "none";
+
         camVerbier.style.display = "none";
+        titleSwitzerland.style.display = "none";
+
         camVenice.style.display = "none";
+        titleItaly.style.display = "none";
+
         camAmsterdam.style.display = "none";
+        titleNetherlands.style.display = "none";
     }
 
     if(numCity==3){
@@ -350,11 +395,22 @@ function updateDisplays(){
         infoTaiwan.style.display = "block";
 
         camTaipei.style.display = "none";
+        titleTaiwan2.style.display = "none";
+
         camOdessa.style.display = "none";
+        titleUkraine.style.display = "none";
+
         camTokyo.style.display = "none";
+        titleJapan.style.display = "none";
+
         camVerbier.style.display = "none";
+        titleSwitzerland.style.display = "none";
+
         camVenice.style.display = "none";
+        titleItaly.style.display = "none";
+
         camAmsterdam.style.display = "none";
+        titleNetherlands.style.display = "none";
     }
 
     if(numCity==4){
@@ -371,11 +427,22 @@ function updateDisplays(){
         infoTaiwan.style.display = "none";
 
         camTaipei.style.display = "block";
+        titleTaiwan2.style.display = "block";
+
         camOdessa.style.display = "none";
+        titleUkraine.style.display = "none";
+
         camTokyo.style.display = "none";
+        titleJapan.style.display = "none";
+
         camVerbier.style.display = "none";
+        titleSwitzerland.style.display = "none";
+
         camVenice.style.display = "none";
+        titleItaly.style.display = "none";
+
         camAmsterdam.style.display = "none";
+        titleNetherlands.style.display = "none";
     }
 
     if(numCity==5){
@@ -392,11 +459,22 @@ function updateDisplays(){
         infoTaiwan.style.display = "none";
 
         camTaipei.style.display = "none";
+        titleTaiwan2.style.display = "none";
+
         camOdessa.style.display = "block";
+        titleUkraine.style.display = "block";
+
         camTokyo.style.display = "none";
+        titleJapan.style.display = "none";
+
         camVerbier.style.display = "none";
+        titleSwitzerland.style.display = "none";
+
         camVenice.style.display = "none";
+        titleItaly.style.display = "none";
+
         camAmsterdam.style.display = "none";
+        titleNetherlands.style.display = "none";
     }
 
     
@@ -414,11 +492,22 @@ function updateDisplays(){
         infoTaiwan.style.display = "none";
 
         camTaipei.style.display = "none";
+        titleTaiwan2.style.display = "none";
+
         camOdessa.style.display = "none";
+        titleUkraine.style.display = "none";
+
         camTokyo.style.display = "block";
+        titleJapan.style.display = "block";
+
         camVerbier.style.display = "none";
+        titleSwitzerland.style.display = "none";
+
         camVenice.style.display = "none";
+        titleItaly.style.display = "none";
+
         camAmsterdam.style.display = "none";
+        titleNetherlands.style.display = "none";
     }
 
     if(numCity==7){
@@ -435,11 +524,22 @@ function updateDisplays(){
         infoTaiwan.style.display = "none";
 
         camTaipei.style.display = "none";
+        titleTaiwan2.style.display = "none";
+
         camOdessa.style.display = "none";
+        titleUkraine.style.display = "none";
+
         camTokyo.style.display = "none";
+        titleJapan.style.display = "none";
+
         camVerbier.style.display = "block";
+        titleSwitzerland.style.display = "block";
+
         camVenice.style.display = "none";
+        titleItaly.style.display = "none";
+
         camAmsterdam.style.display = "none";
+        titleNetherlands.style.display = "none";
     }
 
     if(numCity==8){
@@ -456,11 +556,22 @@ function updateDisplays(){
         infoTaiwan.style.display = "none";
 
         camTaipei.style.display = "none";
+        titleTaiwan2.style.display = "none";
+
         camOdessa.style.display = "none";
+        titleUkraine.style.display = "none";
+
         camTokyo.style.display = "none";
+        titleJapan.style.display = "none";
+
         camVerbier.style.display = "none";
+        titleSwitzerland.style.display = "none";
+
         camVenice.style.display = "block";
+        titleItaly.style.display = "block";
+
         camAmsterdam.style.display = "none";
+        titleNetherlands.style.display = "none";
     }
 
     if(numCity==9){
@@ -477,11 +588,22 @@ function updateDisplays(){
         infoTaiwan.style.display = "none";
 
         camTaipei.style.display = "none";
+        titleTaiwan2.style.display = "none";
+
         camOdessa.style.display = "none";
+        titleUkraine.style.display = "none";
+
         camTokyo.style.display = "none";
+        titleJapan.style.display = "none";
+
         camVerbier.style.display = "none";
+        titleSwitzerland.style.display = "none";
+
         camVenice.style.display = "none";
+        titleItaly.style.display = "none";
+
         camAmsterdam.style.display = "block";
+        titleNetherlands.style.display = "block";
     }
 }
 
