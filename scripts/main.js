@@ -51,10 +51,11 @@ var h = window.innerHeight
 || document.body.clientHeight;
 */
 
+/*
 function windowsResized(){
 	resizeCanvas(windowWidth,windowHeight);
 }
-
+*/
 
 
 function setup() {
