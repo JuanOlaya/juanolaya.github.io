@@ -18,21 +18,24 @@ let releaseTimeHorizontal;
 let pressTimeDiagonal;
 let releaseTimeDiagonal;
 let thresholdDiagonalCollisions=4;
+let gridStatus=true;
+let gridContainer = document.getElementById("cardGrid");
 
-/*
+
 let fullscreen = document.getElementById("fullscreenIcon");
 fullscreen.style.display = "none";
 
-let gridStatus=true;
+/*
 let gridOff = document.getElementById("gridOffIcon");
 gridOff.style.display = "none";
+*/
 let gridOn = document.getElementById("gridOnIcon");
 gridOn.style.display = "none";
 
-let gridContainer = document.getElementById("cardGrid");
+
 let refreshIcon = document.getElementById("refreshIcon");
 refreshIcon.style.display = "none";
-
+/*
 let oneUnselected = document.getElementById("oneUnselected");
 oneUnselected.style.display = "none";
 let twoUnselected = document.getElementById("twoUnselected");
@@ -122,6 +125,21 @@ function draw() {
 		
 	}
 	*/
+
+	if(gridStatus){
+		gridContainer.style.display = "block";
+		fullscreen.style.display = "none";
+		/*gridOff.style.display = "none";*/
+		gridOn.style.display = "none";
+		refreshIcon.style.display = "none";
+
+	}else{
+		gridContainer.style.display = "none";
+		fullscreen.style.display = "block";
+		//gridOff.style.display = "block";
+		gridOn.style.display = "block";
+		refreshIcon.style.display = "block";
+	}
 
 	if(diagonalObjectCollisions<thresholdDiagonalCollisions){
 		balls[0].showDiagonal(oprimido);
@@ -257,14 +275,46 @@ class Ball {
 	}
 }
 
-//var elemBody = document.body; // Make the body go full screen.
-/*
-document.getElementById("fullscreenIcon").addEventListener("click", function() {
-	let fs = fullscreen();
-    fullscreen(!fs);
+document.addEventListener('keyup', event => {
+	if (event.code === 'Space') {
+		gridStatus=!gridStatus;
+		//console.log('Space pressed')
+	}
 });
 
+//var elemBody = document.body; // Make the body go full screen.
 
+var elem = document.documentElement;
+
+document.getElementById("fullscreenIcon").addEventListener("click", function() {
+	console.log("fuulllyy");
+	/*
+	let fs = fullscreen();
+    fullscreen(!fs);
+	*/
+
+	if (!document.fullscreenElement){
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { // Safari 
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { // IE11 
+            elem.msRequestFullscreen();
+        }
+    } else{
+     if (document.fullscreenElement){
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) { // Safari 
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) { // IE11 
+            document.msExitFullscreen();
+          }
+        }
+    }
+});
+
+/*
 document.getElementById("gridOffIcon").addEventListener("click", function() {
 
 	gridStatus=!gridStatus;
@@ -281,19 +331,22 @@ document.getElementById("gridOffIcon").addEventListener("click", function() {
 	
 	}
 });
+*/
 
 document.getElementById("gridOnIcon").addEventListener("click", function() {
 
 	gridStatus=!gridStatus;
 	if(gridStatus){
 		gridContainer.style.display = "block";
-		gridOff.style.display = "block";
+		/*gridOff.style.display = "block";*/
 		gridOn.style.display = "none";
 		gridContainer.style.cursor = "default";
 		refreshIcon.style.display = "none";
+		/*
 		oneUnselected.style.display = "none";
 		twoUnselected.style.display = "none";
 		threeUnselected.style.display = "none";
+		*/
 	}
 });
 
@@ -325,5 +378,3 @@ document.getElementById("refreshIcon").addEventListener("click", function() {
 		releaseTimeDiagonal = millis()+5000;
 	}
 });
-
-*/
