@@ -19,6 +19,7 @@ let pressTimeDiagonal;
 let releaseTimeDiagonal;
 let thresholdDiagonalCollisions=4;
 
+/*
 let fullscreen = document.getElementById("fullscreenIcon");
 fullscreen.style.display = "none";
 
@@ -38,6 +39,7 @@ let twoUnselected = document.getElementById("twoUnselected");
 twoUnselected.style.display = "none";
 let threeUnselected = document.getElementById("threeUnselected");
 threeUnselected.style.display = "none";
+*/
 
 /*
 var w = window.innerWidth
@@ -255,6 +257,7 @@ class Ball {
 }
 
 //var elemBody = document.body; // Make the body go full screen.
+/*
 document.getElementById("fullscreenIcon").addEventListener("click", function() {
 	let fs = fullscreen();
     fullscreen(!fs);
@@ -270,11 +273,11 @@ document.getElementById("gridOffIcon").addEventListener("click", function() {
 		gridOn.style.display = "block";
 		gridContainer.style.cursor = "pointer";
 		refreshIcon.style.display = "block";
-		/*
+	
 		oneUnselected.style.display = "block";
 		twoUnselected.style.display = "block";
 		threeUnselected.style.display = "block";
-		*/
+	
 	}
 });
 
@@ -322,14 +325,4 @@ document.getElementById("refreshIcon").addEventListener("click", function() {
 	}
 });
 
-
-/*
-if(mobile==true){
-	balls.push( new Ball(random(100, width / 2), random(86, height / 2), 3, 3, 0, 0.1, colores[0]));  //orange
-	balls.push( new Ball(width-90, 100, 4, 4, 0, 0.1, colores[1]));
-	
-}else{
-	balls.push( new Ball(random(100, width / 2), random(86, height / 3), 3, 3, 0, 0.1, colores[0]));     //orange
-	balls.push( new Ball(random( 2*width / 3, width-95), random(2*height/3, height - 100), 4, 4, 0, 0.1, colores[1]));
-}
 */
