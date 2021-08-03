@@ -106,6 +106,10 @@ titleNetherlands.style.display = "none";
 infoAmsterdam=document.getElementById("amsterdamInfo");
 infoAmsterdam.style.display = "none";
 
+let infoScreen=document.getElementById("infoScreen");
+infoScreen.style.display = "none";
+
+
 /*
 titleAmsterdam=document.getElementById("amsterdamTitle");
 titleAmsterdam.style.display = "none";
@@ -220,7 +224,133 @@ setInterval(() => {
     timeTaoyuanEl.innerHTML = taoyuan[6].value + ":" + taoyuan[8].value;
 
 
-    // Europe/Kiev    Ukraine
+    //  Taiwan  Asia/Taipei
+
+    let optionsTaipei = {
+        timeZone: 'Asia/Taipei',
+        weekday: 'long',
+        day: 'numeric',
+        month: 'short',
+        hour: 'numeric',
+        minute: 'numeric', 
+        hour12: false,
+        hourCycle: 'h23', 
+    },
+    
+    taipeiDate = new Intl.DateTimeFormat([], optionsTaipei);
+
+    var taipei=[];
+    taipei=taipeiDate.formatToParts(new Date());
+    //console.log(taiwan);
+
+    dateTaipeiEl.innerHTML = taipei[0].value +", "+taipei[2].value+" "+taipei[4].value;
+    timeTaipeiEl.innerHTML = taipei[6].value + ":" + taipei[8].value;
+
+    //  Ukraine    Europe/Kiev  
+    let optionsOdessa = {
+        timeZone: 'Europe/Kiev',
+        weekday: 'long',
+        day: 'numeric',
+        month: 'short',
+        hour: 'numeric',
+        minute: 'numeric', 
+        hour12: false,
+        hourCycle: 'h23', 
+    },
+    
+    odessaDate = new Intl.DateTimeFormat([], optionsOdessa);
+
+    var odessa=[];
+    odessa=odessaDate.formatToParts(new Date());
+    //console.log(odessa);
+
+    dateOdessaEl.innerHTML = odessa[0].value +", "+odessa[2].value+" "+odessa[4].value;
+    timeOdessaEl.innerHTML = odessa[6].value + ":" + odessa[8].value;
+
+
+    //  Asia/Tokyo
+    let optionsTokyo = {
+        timeZone: 'Asia/Tokyo',
+        weekday: 'long',
+        day: 'numeric',
+        month: 'short',
+        hour: 'numeric',
+        minute: 'numeric', 
+        hour12: false,
+        hourCycle: 'h23', 
+    },
+    
+    tokyoDate = new Intl.DateTimeFormat([], optionsTokyo);
+
+    var tokyo=[];
+    tokyo=tokyoDate.formatToParts(new Date());
+    //console.log(tokyo);
+
+    dateTokyoEl.innerHTML = tokyo[0].value +", "+tokyo[2].value+" "+tokyo[4].value;
+    timeTokyoEl.innerHTML = tokyo[6].value + ":" + tokyo[8].value;
+
+    // Verbier Europe/Zurich
+    let optionsVerbier = {
+        timeZone: 'Europe/Zurich',
+        weekday: 'long',
+        day: 'numeric',
+        month: 'short',
+        hour: 'numeric',
+        minute: 'numeric', 
+        hour12: false,
+        hourCycle: 'h23', 
+    },
+    
+    verbierDate = new Intl.DateTimeFormat([], optionsVerbier);
+
+    var verbier=[];
+    verbier=verbierDate.formatToParts(new Date());
+    //console.log(tokyo);
+
+    dateVerbierEl.innerHTML = verbier[0].value +", "+verbier[2].value+" "+verbier[4].value;
+    timeVerbierEl.innerHTML = verbier[6].value + ":" + verbier[8].value;
+
+    // Venice   Europe/Rome
+    let optionsVenice = {
+        timeZone: 'Europe/Rome',
+        weekday: 'long',
+        day: 'numeric',
+        month: 'short',
+        hour: 'numeric',
+        minute: 'numeric', 
+        hour12: false,
+        hourCycle: 'h23', 
+    },
+    
+    veniceDate = new Intl.DateTimeFormat([], optionsVenice);
+
+    var venice=[];
+    venice=veniceDate.formatToParts(new Date());
+    //console.log(tokyo);
+
+    dateVeniceEl.innerHTML = venice[0].value +", "+venice[2].value+" "+venice[4].value;
+    timeVeniceEl.innerHTML = venice[6].value + ":" + venice[8].value;
+
+    // Europe/Amsterdam
+    let optionsAmsterdam = {
+        timeZone: 'Europe/Amsterdam',
+        weekday: 'long',
+        day: 'numeric',
+        month: 'short',
+        hour: 'numeric',
+        minute: 'numeric', 
+        hour12: false,
+        hourCycle: 'h23', 
+    },
+    
+    amsterdamDate = new Intl.DateTimeFormat([], optionsAmsterdam);
+
+    var amsterdam=[];
+    amsterdam=amsterdamDate.formatToParts(new Date());
+    //console.log(tokyo);
+
+    dateAmsterdamEl.innerHTML = amsterdam[0].value +", "+amsterdam[2].value+" "+amsterdam[4].value;
+    timeAmsterdamEl.innerHTML = amsterdam[6].value + ":" + amsterdam[8].value;
 
 },1000);
 
@@ -268,7 +398,7 @@ getWeatherDataOdessa();
 function getWeatherDataOdessa(){
     // Odessa 46.49065067401354, 30.73857664724402
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=46.49&lon=30.73&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataOdessa =>{
-        console.log(dataOdessa);
+        //console.log(dataOdessa);
         showWeatherDataOdessa(dataOdessa);
     });
 }
@@ -305,7 +435,7 @@ getWeatherDataAmsterdam();
 function getWeatherDataAmsterdam(){
     // Amsterdam 52.3778937674073, 4.893438884975311
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=52.37&lon=4.89&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataAmsterdam =>{
-        //console.log(dataAmsterdam);
+        console.log(dataAmsterdam);
         showWeatherDataAmsterdam(dataAmsterdam);
     });
 }
@@ -507,6 +637,15 @@ document.getElementById("fullscreenIcon").addEventListener("click", function() {
         }
     }
     
+});
+
+document.getElementById("infoIcon").addEventListener("click", function() {
+    console.log(document.getElementById("infoScreen").style.display);
+    if(document.getElementById("infoScreen").style.display=="block"){
+        document.getElementById("infoScreen").style.display="none";
+    }else{
+        document.getElementById("infoScreen").style.display="block";
+    }
 });
 
 function updateDisplays(){

@@ -56,6 +56,21 @@ body{
   opacity: 1;
 }
 
+.screenInfo{
+  width: 1200px; 
+  height: 633px;
+  border: 43px solid #292A2B;
+  background: #292A2B;
+  /*border-radius: 50px;*/
+  border-radius: 0px 100px 0px 100px;
+  box-shadow:  41px 41px 70px #cf8c1e,
+  -41px -41px 70px #ffbe28;
+  
+  z-index: 2;
+  opacity: 1;
+}
+
+
 
 .marginFrameBackground{
   margin: 0;
@@ -383,7 +398,7 @@ body{
   bottom: 15px;
   right: 15px;
   cursor: pointer;
-  font-size: 55px;
+  font-size: 45px;
   color: rgba(243, 228, 206, 0.9)
 }
 
@@ -393,8 +408,8 @@ body{
   bottom: 20px;
   right: 60px;
   cursor: pointer;
-  font-size: 30px;
-  color: rgba(243, 228, 206, 0.7)
+  font-size: 35px;
+  color: rgba(243, 228, 206, 0.9)
 }
 
 #infoIcon{
@@ -403,8 +418,8 @@ body{
   bottom: 20px;
   right: 100px;
   cursor: pointer;
-  font-size: 30px;
-  color: rgba(243, 228, 206, 0.7)
+  font-size: 35px;
+  color: rgba(243, 228, 206, 0.9)
 }
 
 
