@@ -67,32 +67,44 @@ camTaipei=document.getElementById("taipeiCam");
 camTaipei.style.display = "none";
 titleTaiwan2=document.getElementById("taipeiTitle");
 titleTaiwan2.style.display = "none";
+infoTaipei=document.getElementById("taipeiInfo");
+infoTaipei.style.display = "none";
 
 
 camOdessa=document.getElementById("odessaCam");
 camOdessa.style.display = "none";
 titleUkraine=document.getElementById("odessaTitle");
 titleUkraine.style.display = "none";
+infoOdessa=document.getElementById("odessaInfo");
+infoOdessa.style.display = "none";
 
 camTokyo=document.getElementById("tokyoCam");
 camTokyo.style.display = "none";
 titleJapan=document.getElementById("tokyoTitle");
 titleJapan.style.display = "none";
+infoTokyo=document.getElementById("tokyoInfo");
+infoTokyo.style.display = "none";
 
 camVerbier=document.getElementById("verbierCam");
 camVerbier.style.display = "none";
 titleSwitzerland=document.getElementById("verbierTitle");
 titleSwitzerland.style.display = "none";
+infoVerbier=document.getElementById("verbierInfo");
+infoVerbier.style.display = "none";
 
 camVenice=document.getElementById("veniceCam");
 camVenice.style.display = "none";
 titleItaly=document.getElementById("veniceTitle");
 titleItaly.style.display = "none";
+infoVenice=document.getElementById("veniceInfo");
+infoVenice.style.display = "none";
 
 camAmsterdam=document.getElementById("amsterdamCam");
 camAmsterdam.style.display = "none";
 titleNetherlands=document.getElementById("amsterdamTitle");
 titleNetherlands.style.display = "none";
+infoAmsterdam=document.getElementById("amsterdamInfo");
+infoAmsterdam.style.display = "none";
 
 /*
 titleAmsterdam=document.getElementById("amsterdamTitle");
@@ -115,6 +127,30 @@ const weatherBrasovEl = document.getElementById("weatherBrasov");
 const timeTaoyuanEl = document.getElementById("timeTaoyuan"); 
 const dateTaoyuanEl = document.getElementById("dateTaoyuan");
 const weatherTaoyuanEl = document.getElementById("weatherTaoyuan");
+
+const timeTaipeiEl = document.getElementById("timeTaipei"); 
+const dateTaipeiEl = document.getElementById("dateTaipei");
+const weatherTaipeiEl = document.getElementById("weatherTaipei");
+
+const timeOdessaEl = document.getElementById("timeOdessa"); 
+const dateOdessaEl = document.getElementById("dateOdessa");
+const weatherOdessaEl = document.getElementById("weatherOdessa");
+
+const timeTokyoEl = document.getElementById("timeTokyo"); 
+const dateTokyoEl = document.getElementById("dateTokyo");
+const weatherTokyoEl = document.getElementById("weatherTokyo");
+
+const timeVerbierEl = document.getElementById("timeVerbier"); 
+const dateVerbierEl = document.getElementById("dateVerbier");
+const weatherVerbierEl = document.getElementById("weatherVerbier");
+
+const timeVeniceEl = document.getElementById("timeVenice"); 
+const dateVeniceEl = document.getElementById("dateVenice");
+const weatherVeniceEl = document.getElementById("weatherVenice");
+
+const timeAmsterdamEl = document.getElementById("timeAmsterdam"); 
+const dateAmsterdamEl = document.getElementById("dateAmsterdam");
+const weatherAmsterdamEl = document.getElementById("weatherAmsterdam");
 
 const API_KEY="1dd359b1b668b6011fdd5c163f521f6b";
 
@@ -183,6 +219,9 @@ setInterval(() => {
     dateTaoyuanEl.innerHTML = taoyuan[0].value +", "+taoyuan[2].value+" "+taoyuan[4].value;
     timeTaoyuanEl.innerHTML = taoyuan[6].value + ":" + taoyuan[8].value;
 
+
+    // Europe/Kiev    Ukraine
+
 },1000);
 
 
@@ -216,7 +255,60 @@ function getWeatherDataTaoyuan(){
     });
 }
 
+getWeatherDataTaipei();
+function getWeatherDataTaipei(){
+    // Taipei 25.03599478244717, 121.56444740481227
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=25.03&lon=121.56&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataTaipei =>{
+        //console.log(dataTaipei);
+        showWeatherDataTaipei(dataTaipei);
+    });
+}
 
+getWeatherDataOdessa();
+function getWeatherDataOdessa(){
+    // Odessa 46.49065067401354, 30.73857664724402
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=46.49&lon=30.73&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataOdessa =>{
+        console.log(dataOdessa);
+        showWeatherDataOdessa(dataOdessa);
+    });
+}
+
+getWeatherDataTokyo();
+function getWeatherDataTokyo(){
+    // Tokyo 35.65982030515791, 139.7010257463303
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=35.65&lon=139.70&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataTokyo =>{
+        //console.log(dataTokyo);
+        showWeatherDataTokyo(dataTokyo);
+    });
+}
+
+
+getWeatherDataVerbier();
+function getWeatherDataVerbier(){
+    // Verbier 46.09612803438759, 7.228889161183665
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=46.09&lon=7.22&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataVerbier =>{
+        //console.log(dataVerbier);
+        showWeatherDataVerbier(dataVerbier);
+    });
+}
+
+getWeatherDataVenice();
+function getWeatherDataVenice(){
+    // Venice 45.44387557496979, 12.325567185160779
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=45.44&lon=12.32&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataVenice =>{
+        //console.log(dataVenice);
+        showWeatherDataVenice(dataVenice);
+    });
+}
+
+getWeatherDataAmsterdam();
+function getWeatherDataAmsterdam(){
+    // Amsterdam 52.3778937674073, 4.893438884975311
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=52.37&lon=4.89&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataAmsterdam =>{
+        //console.log(dataAmsterdam);
+        showWeatherDataAmsterdam(dataAmsterdam);
+    });
+}
 
 function showWeatherDataSao(data){
     let {temp} = data.current;
@@ -258,6 +350,108 @@ function showWeatherDataTaoyuan(dataTaoyuan){
     //console.log({icon});
     
     weatherTaoyuanEl.innerHTML = `
+    <div class="cityIcon">
+        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+    </div>
+    <div class="cityTemperature">
+        ${temp}° C
+    </div>`;
+
+    //console.log(weatherSaoEl);
+}
+
+function showWeatherDataTaipei(data){
+    let {temp} = data.current;
+    temp=Math.round(temp);
+    let {icon} = data.current.weather[0];
+    console.log({temp});
+    
+    weatherTaipeiEl.innerHTML = `
+    <div class="cityIcon">
+        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+    </div>
+    <div class="cityTemperature">
+        ${temp}° C
+    </div>`;
+
+    //console.log(weatherSaoEl);
+}
+
+function showWeatherDataOdessa(data){
+    let {temp} = data.current;
+    temp=Math.round(temp);
+    let {icon} = data.current.weather[0];
+    //console.log({temp});
+    
+    weatherOdessaEl.innerHTML = `
+    <div class="cityIcon">
+        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+    </div>
+    <div class="cityTemperature">
+        ${temp}° C
+    </div>`;
+
+    //console.log(weatherSaoEl);
+}
+
+function showWeatherDataTokyo(data){
+    let {temp} = data.current;
+    temp=Math.round(temp);
+    let {icon} = data.current.weather[0];
+    //console.log({temp});
+    
+    weatherTokyoEl.innerHTML = `
+    <div class="cityIcon">
+        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+    </div>
+    <div class="cityTemperature">
+        ${temp}° C
+    </div>`;
+
+    //console.log(weatherSaoEl);
+}
+
+function showWeatherDataVerbier(data){
+    let {temp} = data.current;
+    temp=Math.round(temp);
+    let {icon} = data.current.weather[0];
+    //console.log({temp});
+    
+    weatherVerbierEl.innerHTML = `
+    <div class="cityIcon">
+        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+    </div>
+    <div class="cityTemperature">
+        ${temp}° C
+    </div>`;
+
+    //console.log(weatherSaoEl);
+}
+
+function showWeatherDataVenice(data){
+    let {temp} = data.current;
+    temp=Math.round(temp);
+    let {icon} = data.current.weather[0];
+    //console.log({temp});
+    
+    weatherVeniceEl.innerHTML = `
+    <div class="cityIcon">
+        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+    </div>
+    <div class="cityTemperature">
+        ${temp}° C
+    </div>`;
+
+    //console.log(weatherSaoEl);
+}
+
+function showWeatherDataAmsterdam(data){
+    let {temp} = data.current;
+    temp=Math.round(temp);
+    let {icon} = data.current.weather[0];
+    //console.log({temp});
+    
+    weatherAmsterdamEl.innerHTML = `
     <div class="cityIcon">
         <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
     </div>
@@ -332,21 +526,27 @@ function updateDisplays(){
 
         camTaipei.style.display = "none";
         titleTaiwan2.style.display = "none";
+        infoTaipei.style.display = "none";
 
         camOdessa.style.display = "none";
         titleUkraine.style.display = "none";
+        infoOdessa.style.display = "none";
 
         camTokyo.style.display = "none";
         titleJapan.style.display = "none";
+        infoTokyo.style.display = "none";
 
         camVerbier.style.display = "none";
         titleSwitzerland.style.display = "none";
+        infoVerbier.style.display = "none";
 
         camVenice.style.display = "none";
         titleItaly.style.display = "none";
+        infoVenice.style.display = "none";
 
         camAmsterdam.style.display = "none";
         titleNetherlands.style.display = "none";
+        infoAmsterdam.style.display = "none";
     }
 
     if(numCity==2){
@@ -364,21 +564,27 @@ function updateDisplays(){
 
         camTaipei.style.display = "none";
         titleTaiwan2.style.display = "none";
+        infoTaipei.style.display = "none";
 
         camOdessa.style.display = "none";
         titleUkraine.style.display = "none";
+        infoOdessa.style.display = "none";
 
         camTokyo.style.display = "none";
         titleJapan.style.display = "none";
+        infoTokyo.style.display = "none";
 
         camVerbier.style.display = "none";
         titleSwitzerland.style.display = "none";
+        infoVerbier.style.display = "none";
 
         camVenice.style.display = "none";
         titleItaly.style.display = "none";
+        infoVenice.style.display = "none";
 
         camAmsterdam.style.display = "none";
         titleNetherlands.style.display = "none";
+        infoAmsterdam.style.display = "none";
     }
 
     if(numCity==3){
@@ -396,21 +602,27 @@ function updateDisplays(){
 
         camTaipei.style.display = "none";
         titleTaiwan2.style.display = "none";
+        infoTaipei.style.display = "none";
 
         camOdessa.style.display = "none";
         titleUkraine.style.display = "none";
+        infoOdessa.style.display = "none";
 
         camTokyo.style.display = "none";
         titleJapan.style.display = "none";
+        infoTokyo.style.display = "none";
 
         camVerbier.style.display = "none";
         titleSwitzerland.style.display = "none";
+        infoVerbier.style.display = "none";
 
         camVenice.style.display = "none";
         titleItaly.style.display = "none";
+        infoVenice.style.display = "none";
 
         camAmsterdam.style.display = "none";
         titleNetherlands.style.display = "none";
+        infoAmsterdam.style.display = "none";
     }
 
     if(numCity==4){
@@ -428,21 +640,27 @@ function updateDisplays(){
 
         camTaipei.style.display = "block";
         titleTaiwan2.style.display = "block";
+        infoTaipei.style.display = "block";
 
         camOdessa.style.display = "none";
         titleUkraine.style.display = "none";
+        infoOdessa.style.display = "none";
 
         camTokyo.style.display = "none";
         titleJapan.style.display = "none";
+        infoTokyo.style.display = "none";
 
         camVerbier.style.display = "none";
         titleSwitzerland.style.display = "none";
+        infoVerbier.style.display = "none";
 
         camVenice.style.display = "none";
         titleItaly.style.display = "none";
+        infoVenice.style.display = "none";
 
         camAmsterdam.style.display = "none";
         titleNetherlands.style.display = "none";
+        infoAmsterdam.style.display = "none";
     }
 
     if(numCity==5){
@@ -460,21 +678,27 @@ function updateDisplays(){
 
         camTaipei.style.display = "none";
         titleTaiwan2.style.display = "none";
+        infoTaipei.style.display = "none";
 
         camOdessa.style.display = "block";
         titleUkraine.style.display = "block";
+        infoOdessa.style.display = "block";
 
         camTokyo.style.display = "none";
         titleJapan.style.display = "none";
+        infoTokyo.style.display = "none";
 
         camVerbier.style.display = "none";
         titleSwitzerland.style.display = "none";
+        infoVerbier.style.display = "none";
 
         camVenice.style.display = "none";
         titleItaly.style.display = "none";
+        infoVenice.style.display = "none";
 
         camAmsterdam.style.display = "none";
         titleNetherlands.style.display = "none";
+        infoAmsterdam.style.display = "none";
     }
 
     
@@ -493,21 +717,27 @@ function updateDisplays(){
 
         camTaipei.style.display = "none";
         titleTaiwan2.style.display = "none";
+        infoTaipei.style.display = "none";
 
         camOdessa.style.display = "none";
         titleUkraine.style.display = "none";
+        infoOdessa.style.display = "none";
 
         camTokyo.style.display = "block";
         titleJapan.style.display = "block";
+        infoTokyo.style.display = "block";
 
         camVerbier.style.display = "none";
         titleSwitzerland.style.display = "none";
+        infoVerbier.style.display = "none";
 
         camVenice.style.display = "none";
         titleItaly.style.display = "none";
+        infoVenice.style.display = "none";
 
         camAmsterdam.style.display = "none";
         titleNetherlands.style.display = "none";
+        infoAmsterdam.style.display = "none";
     }
 
     if(numCity==7){
@@ -525,21 +755,27 @@ function updateDisplays(){
 
         camTaipei.style.display = "none";
         titleTaiwan2.style.display = "none";
+        infoTaipei.style.display = "none";
 
         camOdessa.style.display = "none";
         titleUkraine.style.display = "none";
+        infoOdessa.style.display = "none";
 
         camTokyo.style.display = "none";
         titleJapan.style.display = "none";
+        infoTokyo.style.display = "none";
 
         camVerbier.style.display = "block";
         titleSwitzerland.style.display = "block";
+        infoVerbier.style.display = "block";
 
         camVenice.style.display = "none";
         titleItaly.style.display = "none";
+        infoVenice.style.display = "none";
 
         camAmsterdam.style.display = "none";
         titleNetherlands.style.display = "none";
+        infoAmsterdam.style.display = "none";
     }
 
     if(numCity==8){
@@ -557,21 +793,27 @@ function updateDisplays(){
 
         camTaipei.style.display = "none";
         titleTaiwan2.style.display = "none";
+        infoTaipei.style.display = "none";
 
         camOdessa.style.display = "none";
         titleUkraine.style.display = "none";
+        infoOdessa.style.display = "none";
 
         camTokyo.style.display = "none";
         titleJapan.style.display = "none";
+        infoTokyo.style.display = "none";
 
         camVerbier.style.display = "none";
         titleSwitzerland.style.display = "none";
+        infoVerbier.style.display = "none";
 
         camVenice.style.display = "block";
         titleItaly.style.display = "block";
+        infoVenice.style.display = "block";
 
         camAmsterdam.style.display = "none";
         titleNetherlands.style.display = "none";
+        infoAmsterdam.style.display = "none";
     }
 
     if(numCity==9){
@@ -589,21 +831,27 @@ function updateDisplays(){
 
         camTaipei.style.display = "none";
         titleTaiwan2.style.display = "none";
+        infoTaipei.style.display = "none";
 
         camOdessa.style.display = "none";
         titleUkraine.style.display = "none";
+        infoOdessa.style.display = "none";
 
         camTokyo.style.display = "none";
         titleJapan.style.display = "none";
+        infoTokyo.style.display = "none";
 
         camVerbier.style.display = "none";
         titleSwitzerland.style.display = "none";
+        infoVerbier.style.display = "none";
 
         camVenice.style.display = "none";
         titleItaly.style.display = "none";
+        infoVenice.style.display = "none";
 
         camAmsterdam.style.display = "block";
         titleNetherlands.style.display = "block";
+        infoAmsterdam.style.display = "block";
     }
 }
 
