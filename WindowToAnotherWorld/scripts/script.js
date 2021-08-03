@@ -107,7 +107,7 @@ infoAmsterdam=document.getElementById("amsterdamInfo");
 infoAmsterdam.style.display = "none";
 
 let infoScreen=document.getElementById("infoScreen");
-infoScreen.style.display = "none";
+infoScreen.style.display = "block";
 
 
 /*
@@ -646,6 +646,15 @@ document.getElementById("infoIcon").addEventListener("click", function() {
     }else{
         document.getElementById("infoScreen").style.display="block";
     }
+});
+
+document.getElementById("cancelInfoScreen").addEventListener("click", function() {
+    //console.log(document.getElementById("infoScreen").style.display);
+    //if(document.getElementById("infoScreen").style.display=="block"){
+        document.getElementById("infoScreen").style.display="none";
+    //}else{
+        //document.getElementById("infoScreen").style.display="block";
+    //}
 });
 
 function updateDisplays(){
