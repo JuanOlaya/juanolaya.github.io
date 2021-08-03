@@ -61,6 +61,9 @@ body{
   height: 633px;
   border: 43px solid #292A2B;
   background: #292A2B;
+  line-height: 120%;
+  color: #F1D8BC;
+  font-size: 35px;
   /*border-radius: 50px;*/
   border-radius: 0px 100px 0px 100px;
   box-shadow:  41px 41px 70px #cf8c1e,
@@ -399,7 +402,7 @@ body{
   right: 15px;
   cursor: pointer;
   font-size: 45px;
-  color: rgba(243, 228, 206, 0.9)
+  color: rgba(243, 228, 206, 0.9);
 }
 
 #paletteIcon{
@@ -409,7 +412,7 @@ body{
   right: 60px;
   cursor: pointer;
   font-size: 35px;
-  color: rgba(243, 228, 206, 0.9)
+  color: rgba(243, 228, 206, 0.9);
 }
 
 #infoIcon{
@@ -419,7 +422,24 @@ body{
   right: 100px;
   cursor: pointer;
   font-size: 35px;
-  color: rgba(243, 228, 206, 0.9)
+  color: rgba(243, 228, 206, 0.9);
+}
+
+#cancelInfoScreen{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(595px,315px);
+  font-size: 70px;
+  cursor: pointer;
+  font-size: 40px;
+  color: #F3E4CE;
+  border-radius: 50%;
+  background: #3C3D3E;
+  border: 10px solid #3C3D3E;
 }
 
 
