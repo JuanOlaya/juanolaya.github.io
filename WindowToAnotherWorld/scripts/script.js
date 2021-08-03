@@ -657,6 +657,23 @@ document.getElementById("cancelInfoScreen").addEventListener("click", function()
     //}
 });
 
+document.getElementById("cancelInfoScreen").addEventListener("click", function() {
+    //console.log(document.getElementById("infoScreen").style.display);
+    //if(document.getElementById("infoScreen").style.display=="block"){
+        document.getElementById("infoScreen").style.display="none";
+    //}else{
+        //document.getElementById("infoScreen").style.display="block";
+    //}
+});
+
+/*
+document.getElementById("paletteIcon").addEventListener("click", function() {
+    
+    document.body.style.backgroundColor= "#f4eddd";
+    document.getElementById("frameBehind").style.borderColor = "#f4eddd";
+});
+*/
+
 function updateDisplays(){
 
     if(numCity==1){
