@@ -649,22 +649,10 @@ document.getElementById("infoIcon").addEventListener("click", function() {
 });
 
 document.getElementById("cancelInfoScreen").addEventListener("click", function() {
-    //console.log(document.getElementById("infoScreen").style.display);
-    //if(document.getElementById("infoScreen").style.display=="block"){
-        document.getElementById("infoScreen").style.display="none";
-    //}else{
-        //document.getElementById("infoScreen").style.display="block";
-    //}
+    document.getElementById("infoScreen").style.display="none";
 });
 
-document.getElementById("cancelInfoScreen").addEventListener("click", function() {
-    //console.log(document.getElementById("infoScreen").style.display);
-    //if(document.getElementById("infoScreen").style.display=="block"){
-        document.getElementById("infoScreen").style.display="none";
-    //}else{
-        //document.getElementById("infoScreen").style.display="block";
-    //}
-});
+
 
 /*
 document.getElementById("paletteIcon").addEventListener("click", function() {
@@ -1031,3 +1019,11 @@ function updateDisplays(){
 
 //Place Centrale Verbier
 //https://www.youtube.com/watch?v=yDKJMdZTEXQ
+
+//https://www.youtube.com/watch?v=9-sfWSHtJdk
+
+/*
+<span class="material-icons-outlined">
+settings_brightness
+</span>
+*/
