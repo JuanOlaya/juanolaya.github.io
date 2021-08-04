@@ -85,7 +85,7 @@ function setup() {
 	
 	
 	canvas.position(0,0);	  
-	canvas.style("z-index",-1);
+	canvas.style("z-index",-2);
 	                                                // Names of colors from coolors.co/app
 	colores[0] = color('rgba(196,130,8, 0.25)');      //Orange
 	colores[1] = color('rgba(25,139,198, 0.25)');    // Cyan Cornflower Blue ->'#198BC6'
