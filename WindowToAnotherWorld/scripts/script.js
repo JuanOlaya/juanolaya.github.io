@@ -38,7 +38,7 @@ let infoAmsterdam;
 let numCity=1;
 var canvas;
 
-document.body.style.backgroundColor= "#F4A523";
+/*document.body.style.backgroundColor= "#F4A523";*/
 camRomania=document.getElementById("brasovCam");
 camRomania.style.display = "block";
 titleRomania=document.getElementById("brasovTitle");
