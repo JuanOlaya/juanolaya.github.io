@@ -7,7 +7,7 @@ let balls = [];
 let colores = [];
 let oprimido=false;
 let oprimidoHorizontal=false;
-let backColor;
+const backColor=40;
 let canvas;
 let horizontalObjectCollisions=0;
 let diagonalObjectCollisions=0;
@@ -20,7 +20,6 @@ let releaseTimeDiagonal;
 let thresholdDiagonalCollisions=4;
 let gridStatus=true;
 let gridContainer = document.getElementById("cardGrid");
-
 
 let fullscreen = document.getElementById("fullscreenIcon");
 fullscreen.style.display = "none";
@@ -85,7 +84,7 @@ function setup() {
 	
 	
 	canvas.position(0,0);	  
-	canvas.style("z-index",-2);
+	canvas.style("z-index",-1);
 	                                                // Names of colors from coolors.co/app
 	colores[0] = color('rgba(196,130,8, 0.25)');      //Orange
 	colores[1] = color('rgba(25,139,198, 0.25)');    // Cyan Cornflower Blue ->'#198BC6'
@@ -104,7 +103,6 @@ function setup() {
 		balls.push( new Ball(random( 2*width / 3, width-95), random(2*height/3, height - 100), 4, 4, 0, 0.1, colores[1]));
 	}
 
-	backColor=40;
 	background(backColor);
 }
 
@@ -172,108 +170,6 @@ function draw() {
 	}
 }
 
-
-
-class Ball {
-	
-	constructor(posX, posY, velX, velY, gravX, gravY, col) {
-		this.localizacion = createVector(posX, posY);
-		this.velocity = createVector(velX, velY);
-		this.gravity = createVector(gravX, gravY);
-		this.c = color(col);
-		this.radius = 86;
-	}
-	  
-	showHorizontal(oprimidoHorizontal) {
-		if(oprimidoHorizontal){
-			noStroke();
-			fill(this.c);
-		}else{
-			noFill();
-			stroke(this.c);
-		}
-		ellipse(this.localizacion.x, this.localizacion.y, this.radius * 2, this.radius * 2);
-	}
-	
-	showDiagonal(oprimido) {
-		if(oprimido){
-			noStroke();
-			fill(this.c);
-		}else{
-			noFill();
-			stroke(this.c);
-		}
-		ellipse(this.localizacion.x, this.localizacion.y, this.radius * 2, this.radius * 2);
-	}
-	
-	applyGravity(){
-		this.localizacion.add(this.velocity); 
-	}
-
-	moveLeft(){
-		this.localizacion.x = this.localizacion.x - this.velocity.x; 
-	}
-	moveDown(){
-		this.localizacion.y = this.localizacion.y + this.velocity.y; 
-	}
-	
-	edgeCollision() {
-		if (this.localizacion.x > width* 0.8 - this.radius) {
-			//horizontalObjectCollisions++;
-			diagonalObjectCollisions++;
-			this.velocity.x = this.velocity.x * (-1);
-			this.localizacion.x = width* 0.8 - this.radius-7;
-		}
-
-		if (this.localizacion.x < this.radius) {
-			horizontalObjectCollisions++;
-			diagonalObjectCollisions++;
-			this.velocity.x = this.velocity.x * (-1);
-			this.localizacion.x = this.radius+7;
-		}
-
-		if (this.localizacion.y > height - this.radius) {
-			//horizontalObjectCollisions++;
-			diagonalObjectCollisions++;
-			this.velocity.y = this.velocity.y * (-1);
-			this.localizacion.y = height - this.radius-7;
-		}
-
-		if (this.localizacion.y < this.radius) {
-			//horizontalObjectCollisions++;
-			diagonalObjectCollisions++;
-			this.velocity.y = this.velocity.y * (-1);
-			this.localizacion.y = this.radius+7;
-		}
-	}
-
-	edgeCollisionHorizontal() {
-		if (this.localizacion.x > width - this.radius) {
-			diagonalObjectCollisions++;
-			this.velocity.x = this.velocity.x * (-1);
-			this.localizacion.x = width - this.radius-7;
-		}
-
-		if (this.localizacion.x < this.radius) {
-			horizontalObjectCollisions++;
-			diagonalObjectCollisions++;
-			this.velocity.x = this.velocity.x * (-1);
-			this.localizacion.x = this.radius+7;
-		}
-
-		if (this.localizacion.y > height - this.radius) {
-			diagonalObjectCollisions++;
-			this.velocity.y = this.velocity.y * (-1);
-			this.localizacion.y = height - this.radius-7;
-		}
-
-		if (this.localizacion.y < this.radius) {
-			diagonalObjectCollisions++;
-			this.velocity.y = this.velocity.y * (-1);
-			this.localizacion.y = this.radius+7;
-		}
-	}
-}
 
 document.addEventListener('keyup', event => {
 	if (event.code === 'Space') {
