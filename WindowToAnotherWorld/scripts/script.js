@@ -109,6 +109,8 @@ infoAmsterdam.style.display = "none";
 let infoScreen=document.getElementById("infoScreen");
 infoScreen.style.display = "block";
 
+//let fullscreenIcon=document.getElementById("fullscreenIcon");
+
 
 /*
 titleAmsterdam=document.getElementById("amsterdamTitle");
@@ -625,6 +627,7 @@ document.getElementById("fullscreenIcon").addEventListener("click", function() {
         } else if (elem.msRequestFullscreen) { // IE11 
             elem.msRequestFullscreen();
         }
+        document.getElementById("fullscreenIcon").innerHTML = `fullscreen_exit`;
     } else{
      if (document.fullscreenElement){
         if (document.exitFullscreen) {
@@ -634,9 +637,9 @@ document.getElementById("fullscreenIcon").addEventListener("click", function() {
           } else if (document.msExitFullscreen) { // IE11 
             document.msExitFullscreen();
           }
+          document.getElementById("fullscreenIcon").innerHTML = `fullscreen`;
         }
     }
-    
 });
 
 document.getElementById("infoIcon").addEventListener("click", function() {
