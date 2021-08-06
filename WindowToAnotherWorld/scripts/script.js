@@ -1016,6 +1016,10 @@ function updateDisplays(){
 // France Côte d'Azur Nature Beach in 4k
 // https://www.youtube.com/watch?v=zr10KdpyWm0
 
+/*
+Rooftops of Vieux Vieux in Nice South of France Côte d'Azur in 4k
+https://www.youtube.com/watch?v=GtYmMkklK10
+*/
 
 //Place Centrale Verbier
 //https://www.youtube.com/watch?v=yDKJMdZTEXQ
