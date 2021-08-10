@@ -649,10 +649,14 @@ document.getElementById("infoIcon").addEventListener("click", function() {
     }else{
         document.getElementById("infoScreen").style.display="block";
     }
+    slideIndex=1;
+    showSlides(slideIndex);
 });
 
 document.getElementById("cancelInfoScreen").addEventListener("click", function() {
     document.getElementById("infoScreen").style.display="none";
+    slideIndex=1;
+    showSlides(slideIndex);
 });
 
 
