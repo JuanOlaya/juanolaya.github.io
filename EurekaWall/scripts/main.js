@@ -7,10 +7,12 @@ function setup() {
 }
 
 function draw() {
+    
     background(" #3A3A3A  ");
     fill("#D7B42A");
     noStroke();
-    rect(0,0,width*0.29,height);
+    rect(0,0,width*0.31,height);
+    
     /*ellipse(width,height,1.75*width);*/
     
   }
