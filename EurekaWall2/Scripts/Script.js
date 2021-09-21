@@ -310,7 +310,6 @@ function homeButton(){
 			ellipse(x,y,10,10);
 		}
 	}
-	
 }
 
 function home() {

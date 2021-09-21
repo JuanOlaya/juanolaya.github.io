@@ -357,9 +357,7 @@ function mousePressed(){
         
         if(dist(firstIconX,firstIconY,mouseX,mouseY)<=menuButtonsDiameter/2){  //buttonCompass
             //transitionTriggerPortal=true;
-            
             screen=10;
-            
         }
         if(dist(secondIconX,secondIconY,mouseX,mouseY)<=menuButtonsDiameter/2){  //buttonFortune
             screen=20;
@@ -367,8 +365,11 @@ function mousePressed(){
         }
         if(dist(thirdIconX,thirdIconY,mouseX,mouseY)<=menuButtonsDiameter/2){   //buttonArtwork
             screen=30;
+            console.log("index -1");
+            canvas.style("z-index",-3);
+            balconity.style.display = "block";
+            //background("#F4A523");
         }
-        
     }
     
     if(screen==10 && entered==0){
@@ -376,7 +377,7 @@ function mousePressed(){
         for(let i=0;i<pixelList.length;i++){
             pixelList[i].pixelIsPressed();    
         }
-
+        /*
         if(mouseX>width-height/6 && mouseX<width){
             if(mouseY>10*height/12 && mouseY<height){
                 screen=0;
@@ -384,17 +385,26 @@ function mousePressed(){
                 tiempoInicio2=millis(); 
             }
         }
+        */
+        if(mouseX<width/6 && mouseY<height/6){
+            screen=0;
+        }
     }
-    
 
-    if(screen==20 || screen==21 && entered==0){
+    if(screen==20 || screen==21 && entered==0){   // GENART
         entered=1;
         
+        /*
         if(mouseX>width-height/6 && mouseX<width){
             if(mouseY>10*height/12 && mouseY<height){
                 screen=0;
             }
         }
+        */
+        if(mouseX<width/6 && mouseY<height/6){
+            screen=0;
+        }
+
         if(dist(50,height-50,mouseX,mouseY)<29){
             backgroundStatus=!backgroundStatus;
         }
@@ -447,12 +457,20 @@ function mousePressed(){
         }
     }
 
-    if(screen==30 || screen==31 && entered===0){
+    if(screen==30 || screen==31 && entered===0){    // BRIDGE/BALCONITY
         entered=1;
+        /*
         if(mouseX>width-3*height/20 && mouseX<width){
             if(mouseY>69*height/80 && mouseY<height){
                 screen=0;
             }
+        }
+        */
+
+        if(mouseX<width/6 && mouseY<height/6){
+            screen=0;
+            //console.log("index -1");
+            canvas.style("z-index",0);
         }
 
         if(artistList.length>2){
