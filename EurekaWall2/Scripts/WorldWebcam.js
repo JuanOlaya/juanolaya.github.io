@@ -1,7 +1,7 @@
 var statusWebcam=0;
 
 function camaraEnVivo(){
-    console.log("statusWebcam: "+statusWebcam);
+    //console.log("statusWebcam: "+statusWebcam);
     //canvas.style("z-index",0);
     //brasovWebcam.style("z-index",-1);
     //background(255,255,255,0);
@@ -75,6 +75,4 @@ function camaraEnVivo(){
     rectMode(CENTER);
     rect(width/2,height/2,834+170,468+170,300);
     noStroke();
-
-    
 }

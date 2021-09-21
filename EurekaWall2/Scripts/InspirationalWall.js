@@ -85,9 +85,9 @@ function inspirationWall(){
 			//artwork();
 			//homeButton(); 
 			//background(backgroundColor);
-			console.log({screen});
-			background(backgroundColor);
-			camaraEnVivo();
+			//console.log({screen});
+			//background(backgroundColor);
+			//camaraEnVivo();
 		}
 
 		if(screen==31){ // PROFILE
