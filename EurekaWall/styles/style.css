@@ -21,6 +21,13 @@ canvas { width: 100%; height: 100% }
 }
 */
 
+.backgroundIcon{
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    background-color: #4B75A4;
+}
+
 .card {
 	width: 275px;
     height: 275px;   /* 250px*/
@@ -51,7 +58,7 @@ canvas { width: 100%; height: 100% }
 
     /*background-color: #D7B42A;*/
     
-    background-color: #29833B;
+    /*background-color: #29833B;*/
     
     font-weight: 300;
     font-family: 'Noto Sans KR', sans-serif;
@@ -99,7 +106,7 @@ canvas { width: 100%; height: 100% }
     */
 
 
-    width: 350px;
+    /*width: 350px;*/
     /*
     height: 700px;
     */
@@ -107,9 +114,11 @@ canvas { width: 100%; height: 100% }
 
     /*background-color: #D7B42A;*/
 
-    background-color: #272727;
+    /*background-color: #272727;*/
     
     /*grid-area:box0;*/
+    grid-column: 1;
+    grid-row: 1; 
 }
 
 

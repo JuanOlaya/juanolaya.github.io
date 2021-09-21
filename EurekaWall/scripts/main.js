@@ -8,16 +8,18 @@ function setup() {
 
 function draw() {
     
-    background(" #3A3A3A  ");
+    /*background(" #3A3A3A  ");*/
     /*fill("#D7B42A");*/
+    
+    /*
     fill("#272727");
     noStroke();
     rect(0,0,width*0.31,height);
+    */
     
     /*ellipse(width,height,1.75*width);*/
     
   }
-
 
 
 var elem = document.documentElement;
