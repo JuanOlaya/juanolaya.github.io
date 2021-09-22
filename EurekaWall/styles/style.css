@@ -24,14 +24,15 @@ canvas { width: 100%; height: 100% }
 .backgroundIcon{
     width: 200px;
     height: 200px;
-    border-radius: 100px;
-    background-color: #4B75A4;
+    border-radius: 200px;
+    /*background-color: #4B75A4;*/
+    border: 10px solid #F5F5F5;
 }
 
 .card {
-	width: 275px;
-    height: 275px;   /* 250px*/
-    padding: 18px;   /* 25px*/
+	/*width: 275px;*/
+    /*height: 275px;*/   /* 250px*/
+    /*padding: 18px; */  /* 25px*/
     /*border-radius: 500px;*/
     /*opacity: 0.94;*/
     /*width: auto;
@@ -71,18 +72,24 @@ canvas { width: 100%; height: 100% }
     /*gap: 20px;*/
     height:100vh;
     
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
     
-    /*grid-template-areas: 
-        "box0 box1 box2"
-        "box0 box3 box4";
-    */
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.4fr 1fr 1fr;
+    
+    
+    grid-template-areas:
+        "box0 box0 box0"
+        "box1 box2 emptyBox"
+        "box3 box4 box4";
+    
     /*grid-gap: 2rem;*/
     
     
+    
     justify-items: center;
+    /*
     align-items: center;
+    */
     
     /*padding-top: 20px;*/
     /*padding-left: 200px;*/
@@ -116,29 +123,35 @@ canvas { width: 100%; height: 100% }
 
     /*background-color: #272727;*/
     
-    /*grid-area:box0;*/
+    grid-area:box0;
+    
+    /*
     grid-column: 1;
     grid-row: 1; 
+    */
 }
 
 
 .box1{
     /*justify-self: start;*/
 
+    /*
     grid-column: 2;
     grid-row: 1;    
-    
+    */
 
-    /*grid-area:box1;*/
+    grid-area:box1;
 }
 
 .box2{
     /*justify-self: start;*/
 
+    /*
     grid-column: 3;
     grid-row: 1;
+    */
     
-    /*grid-area:box2;*/
+    grid-area:box2;
 }
 
 .box3{
@@ -146,10 +159,12 @@ canvas { width: 100%; height: 100% }
     /*justify-self: start;
     align-self: start;*/
     
+    /*
     grid-column: 2;
     grid-row: 2;
+    */
     
-    /*grid-area:box3;*/
+    grid-area:box3;
 }
 
 .box4{
@@ -157,10 +172,25 @@ canvas { width: 100%; height: 100% }
     /*justify-self: start;
     align-self: start;*/
     
+    /*
     grid-column: 3;
     grid-row: 2;
+    */
     
-    /*grid-area:box4;*/
+    grid-area:box4;
+}
+
+.emptyBox{
+    
+    /*justify-self: start;
+    align-self: start;*/
+    
+    /*
+    grid-column: 3;
+    grid-row: 2;
+    */
+    
+    grid-area:emptyBox;
 }
 
 @media only screen and (max-width: 550px){
@@ -254,8 +284,10 @@ a:active {
     /*color: #9178E3;*/
     /*color: #38363B;*/
 
-    color: #F5F5F5;
     /*color: #EBEBEB;*/
+    /*color: #F5F5F5;*/
+
+    color: #ECC452;
     font-size: 24px; /*25*/
     font-weight: 700;
     line-height: 100%;
