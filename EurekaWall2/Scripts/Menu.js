@@ -2,6 +2,12 @@
 	INSPIRATIONAL WALL
 */
 
+
+let homeEureka;
+homeEureka=document.getElementById("homeEureka");
+//homeIcons.style.display = "none";
+
+
 function menu(){
     noStroke();
     textAlign(CENTER,CENTER);
@@ -558,3 +564,26 @@ function printCanvas(){
     }, true);
 }
 
+
+document.getElementById("eurekaBalconity").addEventListener("click", function() {
+    //console.log();
+    balconitySection.style.display = "block";
+    homeEureka.style.display = "none";
+    screen=30;
+});
+
+document.getElementById("eurekaPixelGrid").addEventListener("click", function() {
+    /*console.log("Pixel");*/
+    /*balconitySection.style.display = "block";*/
+    defaultCanvas.style.display = "block";
+    homeEureka.style.display = "none";
+    screen=10;
+});
+
+document.getElementById("eurekaParticleCanvas").addEventListener("click", function() {
+    console.log("Pixel");
+    /*balconitySection.style.display = "block";*/
+    defaultCanvas.style.display = "block";
+    homeEureka.style.display = "none";
+    screen=20;
+});

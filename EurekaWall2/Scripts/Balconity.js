@@ -37,12 +37,12 @@ let infoAmsterdam;
 
 let numCity=1;
 var canvas;
-let balconity;
+let balconitySection;
 
 /*document.body.style.backgroundColor= "#F4A523";*/
 
-balconity=document.getElementById("balconity");
-balconity.style.display = "none";
+balconitySection=document.getElementById("balconity");
+balconitySection.style.display = "none";
 
 camRomania=document.getElementById("brasovCam");
 camRomania.style.display = "block";
@@ -663,6 +663,16 @@ document.getElementById("cancelInfoScreen").addEventListener("click", function()
     showSlides(slideIndex);
 });
 
+document.getElementById("goBack").addEventListener("click", function() {
+    balconitySection.style.display = "none";
+    homeEureka.style.display = "block";
+    screen=0;
+    /*
+    document.getElementById("infoScreen").style.display="none";
+    slideIndex=1;
+    showSlides(slideIndex);
+    */
+});
 
 
 /*

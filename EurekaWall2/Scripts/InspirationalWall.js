@@ -24,7 +24,9 @@ function inspirationWall(){
 		if(screen==0){  // MENU
 
 			background(backgroundColor);
-			defaultCanvas.style.display = "block";
+			defaultCanvas.style.display = "none";
+			balconitySection.style.display = "none";
+			homeEureka.style.display = "block";
 			//videoAustralia.style.display = "none";
 			//videoAguahoja.pause();
 
@@ -33,8 +35,7 @@ function inspirationWall(){
 			
 			//pixelWave();
 			fill(0);
-			
-			}
+		}
 		
 		/*
 		if(screen==10 || screen==11 || screen==12 ){ // COMPASS
