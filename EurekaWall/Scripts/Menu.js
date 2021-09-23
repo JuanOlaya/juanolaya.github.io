@@ -566,7 +566,7 @@ function printCanvas(){
 
 
 document.getElementById("eurekaBalconity").addEventListener("click", function() {
-    //console.log();
+    console.log("ASSaasdfdgfd");
     balconitySection.style.display = "block";
     homeEureka.style.display = "none";
     screen=30;
