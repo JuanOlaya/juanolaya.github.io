@@ -11,14 +11,85 @@
         <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="Scripts/style.css">
         <link rel="stylesheet" type="text/css" href="styles/balconityStyle.css">
+        <link rel="stylesheet" type="text/css" href="styles/homeStyle.css"> 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"rel="stylesheet">
     </head>
     
+    <!--
     <body style="background-color:#1E1E1E;">
-        <section id=balconity>
+    -->
+    <body>
+        <section id=homeEureka>
+            <section>
+                <div class="fullBackgroundHome"></div>
+            </section>
 
+            <!--
+            <section class="marginFrameBackground">
+                <div id="frameBehind"class="frameBackground"></div>
+            </section>
+            -->
+
+            <div id="cardGrid">
+                <div  class="grid-container">
+                    <div class="card box0">
+                        <div class="title">EurekaWall</div>
+                        <br>                       
+                    </div>
+                    <div id="eurekaMuseFlow" class="card box1" style="cursor: pointer;">
+                        <div class="backgroundIcon">
+                            <span id="infoIcon2" class="material-icons-round" alt="EurekaWall Demo">videogame_asset</span>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="nameApp">MuseFlow</div>  
+                    </div>
+                    <div id="eurekaParticleCanvas" class="card box2" style="cursor: pointer;">
+                        <div class="backgroundIcon">
+                            <img id="infoIcon2" src="assets/crossWhite.svg" alt="ParticleCanvas" width="130" height="130">
+                        </div>
+                        <br>
+                        <br>
+                        <div class="nameApp">ParticleCanvas</div>
+                    </div>
+                    <div id="eurekaBalconity" class="card box3" style="cursor: pointer;">
+                        <div class="backgroundIcon">
+                            <span id="infoIcon2" class="material-icons-round">landscape</span>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="nameApp">Balconity</div>
+                    </div>
+                    <div id="eurekaPixelGrid" class="card box4" style="cursor: pointer;">
+                        <div class="backgroundIcon">
+                            <span id="infoIcon2" class="material-icons-round">category</span>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="nameApp">PixelGrid</div>
+                    </div>
+                    <div id="eurekaDemo" class="card box5" style="cursor: pointer;">
+                        <div class="backgroundIcon">
+                            <span id="infoIcon2" class="material-icons-round" alt="EurekaWall Demo">play_arrow</span>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="nameApp">EurekaWall Demo</div>
+                    </div>
+                    <div class="card emptyBox">
+                    </div>
+                </div>
+            </div>
+            <!--
+            <footer> 
+                <span id="fullscreenIcon" class="material-icons-round span_no_selection">fullscreen</span>
+            </footer>
+            -->
+        </section>
+
+        <section id=balconity>
             <section >    
                 <iframe class="window" id="brasovCam" src="https://www.youtube.com/embed/G05wmWFDtSo?autoplay=1&mute=1&vq=hd1080" width="1254" height="705"  allow='autoplay' frameBorder="0"></iframe>
                 <iframe class="window" id="saoPauloCam" src="https://www.youtube.com/embed/2EwKLMpr_T4?autoplay=1&mute=1&vq=hd1080" width="1355" height="762"  allow='autoplay' frameBorder="0"></iframe>
@@ -29,30 +100,26 @@
                 <iframe class="window" id="verbierCam" src="https://www.youtube.com/embed/yDKJMdZTEXQ?autoplay=1&mute=1&vq=hd1080" width="1248" height="702"  allow='autoplay' frameBorder="0"></iframe>
                 <iframe class="window" id="veniceCam" src="https://www.youtube.com/embed/HpZAez2oYsA?autoplay=1&mute=1&vq=hd1080" width="1268" height="713"  allow='autoplay' frameBorder="0"></iframe>
                 <iframe class="window" id="amsterdamCam" src="https://www.youtube.com/embed/iB6Te_JP4Lk?autoplay=1&mute=1&vq=hd1080" width="1248" height="702"  allow='autoplay' frameBorder="0"></iframe>        
-            </section>
-
-            
+            </section>   
             <section class="marginFrameBackground">
                 <div id="frameBehind"class="frameBackground">
-                <div/>
-            </section>
-            
+                </div>
+            </section>           
             <section >
-                <div id="allBackground"class="completeBackground">
-                <div/>
+                <div id="allBackground"class="fullBackground">
+                </div>
             </section>
-
             <section class="marginFrame">
                 <div class="frame">
-                <div/>
+                </div>
             </section>
             <section class="marginBoxCity">
                 <div class="boxCity">
-                <div/>
+                </div>
             </section>
             <section class="marginBoxInfoLeft">
                 <div class="boxInfoLeft">
-                <div/>
+                </div>
             </section>
             <span id="leftArrowIcon" class="material-icons-round span_no_selection" >arrow_left</span>
             <span id="rightArrowIcon" class="material-icons-round span_no_selection">arrow_right</span>
@@ -60,9 +127,6 @@
             
             <span id="infoIcon" class="material-icons-outlined span_no_selection">help_outline</span>
             <span id="goBack" class="material-icons-outlined span_no_selection">arrow_back</span>
-            <!--
-            <span id="paletteIcon" class="material-icons-outlined span_no_selection">palette</span>
-            -->
 
             <section class="saoName" id="saoPauloTitle">
                 Brazil, São Paulo, Guarulhos International Airport
@@ -73,14 +137,11 @@
                         <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
                     </div>
                     <div class="cityTemperature">
-                    <!-- 18° C  -->
                     </div>
                 </div>
                 <div class="cityTime" id="timeSao">
-                    <!-- 6:03  -->
                 </div> 
                 <div class="cityDate" id="dateSao">
-                <!-- Monday, 23 July  -->
                 </div>
             </section>
 
@@ -93,14 +154,11 @@
                         <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
                     </div>
                     <div class="cityTemperature">
-                        <!-- 18° C -->
                     </div>
                 </div>
                 <div class="cityTime" id="timeBrasov">
-                    <!--  6:03 -->
                 </div>
                 <div class="cityDate" id="dateBrasov">
-                    <!-- Monday, 23 July  -->
                 </div>
             </section>
 
@@ -114,14 +172,11 @@
                         <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
                     </div>
                     <div class="cityTemperature">
-                    <!-- 18° C -->
                     </div>
                 </div>
                 <div class="cityTime" id="timeTaoyuan">
-                    <!-- 6:03 -->
                 </div>
                 <div class="cityDate" id="dateTaoyuan">
-                    <!-- Monday, 23 July -->
                 </div>
             </section>
                 
@@ -134,14 +189,11 @@
                         <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
                     </div>
                     <div class="cityTemperature">
-                    <!-- 18° C -->
                     </div>
                 </div>
                 <div class="cityTime" id="timeTaipei">
-                    <!-- 6:03 -->
                 </div>
                 <div class="cityDate" id="dateTaipei">
-                    <!-- Monday, 23 July -->
                 </div>
             </section>
 
@@ -154,14 +206,11 @@
                         <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
                     </div>
                     <div class="cityTemperature">
-                    <!-- 18° C -->
                     </div>
                 </div>
                 <div class="cityTime" id="timeOdessa">
-                    <!-- 6:03 -->
                 </div>
                 <div class="cityDate" id="dateOdessa">
-                    <!-- Monday, 23 July -->
                 </div>
             </section>
 
@@ -175,14 +224,11 @@
                         <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
                     </div>
                     <div class="cityTemperature">
-                    <!-- 18° C -->
                     </div>
                 </div>
                 <div class="cityTime" id="timeTokyo">
-                    <!-- 6:03 -->
                 </div>
                 <div class="cityDate" id="dateTokyo">
-                    <!-- Monday, 23 July -->
                 </div>
             </section>
 
@@ -196,14 +242,11 @@
                         <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
                     </div>
                     <div class="cityTemperature">
-                    <!-- 18° C -->
                     </div>
                 </div>
                 <div class="cityTime" id="timeVenice">
-                    <!-- 6:03 -->
                 </div>
                 <div class="cityDate" id="dateVenice">
-                    <!-- Monday, 23 July -->
                 </div>
             </section>
 
@@ -216,14 +259,11 @@
                         <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
                     </div>
                     <div class="cityTemperature">
-                    <!-- 18° C -->
                     </div>
                 </div>
                 <div class="cityTime" id="timeVerbier">
-                    <!-- 6:03 -->
                 </div>
                 <div class="cityDate" id="dateVerbier">
-                    <!-- Monday, 23 July -->
                 </div>
             </section>
 
@@ -236,14 +276,11 @@
                         <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
                     </div>
                     <div class="cityTemperature">
-                    <!-- 18° C -->
                     </div>
                 </div>
                 <div class="cityTime" id="timeAmsterdam">
-                    <!-- 6:03 -->
                 </div>
                 <div class="cityDate" id="dateAmsterdam">
-                    <!-- Monday, 23 July -->
                 </div>
             </section>
             <section id="infoScreen">
@@ -259,10 +296,6 @@
                         <div class="mySlides fade">
                             <div class="aboutIconMargin">
                             <span id="aboutIcon" class="material-icons span_no_selection ">wb_incandescent</span>
-                            <!--
-                            lightbulb
-                            batch_prediction
-                            -->
                             </div>
                             <br>
                             <br>
@@ -329,7 +362,7 @@
                         <span class="dot" onclick="currentSlide(3)"></span> 
                         </div>
                             
-                <div/>
+                    </div>
                 <span id="cancelInfoScreen" class="material-icons-round span_no_selection">highlight_off</span>
             </section>
         </section>
@@ -351,14 +384,6 @@
         <script src="Scripts/GenerativeArt.js" type="text/javascript"></script>
         <script src="Scripts/Balconity.js" type="text/javascript"></script>
         
-        <!--
-        <div>
-            <iframe class="window" id="brasovCam" src="https://www.youtube.com/embed/G05wmWFDtSo?autoplay=1&mute=1&vq=hd1080" width="800" height="450"  allow='autoplay'></iframe>
-            <iframe class="window" id="tokyoCam" src="https://www.youtube.com/embed/QOjmvL3e7Lc?autoplay=1&mute=1&vq=hd1080" width="1664" height="936" frameborder="0" allow='autoplay'></iframe>
-            <iframe class="window" id="hongKongCam" src="https://www.youtube.com/embed/rWYwEaOXK2M?vq=hd1080&autoplay=1&mute=1" width="1664" height="936" frameborder="0" allow='autoplay'></iframe>
-            <iframe id="worldCam" src="https://www.youtube.com/embed/Wt5M-1LAKDQ?autoplay=1&mute=1&vq=hd1080" width="1664" height="936" frameborder="0" allow='autoplay'></iframe>
-        <div/>
-        -->
     </body>
 
     <script>

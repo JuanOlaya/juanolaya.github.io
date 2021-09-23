@@ -11,7 +11,6 @@ canvas {
 }
   
 .window{
-
   /*border: 20px solid #CFD6EA; */ /* #4182ab  #E67A01*/ 
   /*border-radius: 50px;*/
   border-radius: 0px 130px 100px 100px;
@@ -31,7 +30,6 @@ body{
   overflow-y: hidden; 
   overflow-x: hidden; 
 }
-
 
 .marginFrame{
   margin: 0;
@@ -73,19 +71,16 @@ body{
   opacity: 1;
 }
 
-
-
 .marginFrameBackground{
   margin: 0;
   position: absolute;
+  /*position: relative;*/
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   transform: translate(-705px,-398px);
 }
-
-
 
 .frameBackground{
   width: 1243px; 
@@ -98,13 +93,10 @@ body{
   opacity: 1;
 }
 
-.completeBackground{
+.fullBackground{
   width: 2500px; 
   height: 1500px;
   background: #F4A523;
-  /*border: 80px solid #F4A523;*/
-  /*border-radius: 50px;*/
-  border-radius: 0px 120px 0px 130px;
   
   z-index: 0;
   opacity: 1;

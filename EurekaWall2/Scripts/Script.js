@@ -400,6 +400,7 @@ alert("did something");
 */
 
 
+/*
 // 1. Create the buttonTrace
 var buttonTrace = document.createElement("button");
 buttonTrace.innerHTML = "Trace";
@@ -425,3 +426,4 @@ body.appendChild(buttonPause);
 buttonPause.addEventListener ("click", function() {
 	pausa=!pausa;
 });
+*/
