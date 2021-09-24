@@ -8,6 +8,11 @@ var amountShapes=1;
 var speedMore=1;
 var mailWindow=false;
 
+let particleCanvasSec;
+
+particleCanvasSec=document.getElementById("particleCanvasSection");
+particleCanvasSec.style.display = "none";
+
 function generativeArt(){
 
     if(backgroundStatus){
@@ -583,3 +588,10 @@ function generativeArt(){
         }
       }
     }
+
+
+document.getElementById("goBack").addEventListener("click", function() {
+  defaultCanvas.style.display = "none";
+  homeEureka.style.display = "block";
+  screen=0;
+});
