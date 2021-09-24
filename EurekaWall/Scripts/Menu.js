@@ -566,7 +566,7 @@ function printCanvas(){
 
 
 document.getElementById("eurekaBalconity").addEventListener("click", function() {
-    console.log("ASSaasdfdgfd");
+    /*console.log("ASSaasdfdgfd");*/
     balconitySection.style.display = "block";
     homeEureka.style.display = "none";
     screen=30;
@@ -585,5 +585,6 @@ document.getElementById("eurekaParticleCanvas").addEventListener("click", functi
     /*balconitySection.style.display = "block";*/
     defaultCanvas.style.display = "block";
     homeEureka.style.display = "none";
+    particleCanvasSec.style.display = "block";
     screen=20;
 });

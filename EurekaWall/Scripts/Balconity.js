@@ -39,10 +39,10 @@ let numCity=1;
 var canvas;
 let balconitySection;
 
-/*document.body.style.backgroundColor= "#F4A523";*/
-
 balconitySection=document.getElementById("balconity");
 balconitySection.style.display = "none";
+
+/*document.body.style.backgroundColor= "#F4A523";*/
 
 camRomania=document.getElementById("brasovCam");
 camRomania.style.display = "block";
@@ -667,11 +667,6 @@ document.getElementById("goBack").addEventListener("click", function() {
     balconitySection.style.display = "none";
     homeEureka.style.display = "block";
     screen=0;
-    /*
-    document.getElementById("infoScreen").style.display="none";
-    slideIndex=1;
-    showSlides(slideIndex);
-    */
 });
 
 
