@@ -394,13 +394,24 @@ function menu2(){
     textStyle(BOLD);
     text("Eureka", width / 2 - 80, (85 * height) / 100 - 170);
     text("Wall", width / 2 - 40, (85 * height) / 100 - 110);
+
+    fill(0);
+
+    //ellipse(width/2-295,height/2-60,150,150);  // MuseFlow
+    //ellipse(width/2,height/2-158,150,150);  // ParticleCanvas
+    //ellipse(width/2+295,height/2-60,150,150); // Balconity
+ 
+    ellipse(width/2+473,height/2+190,150,150);  // ShapeGrid
+
   
     
     image(img1, width / 2 - 515, (85 * height) / 100 - 196, 80, 70);
+    /*
     image(img2, width / 2 - 333, (85 * height) / 100 - 451, 80, 70);
     image(img3, width / 2 - 34, (85 * height) / 100 - 541, 80, 70);
     image(img4, width / 2 + 263, (85 * height) / 100 - 440, 80, 70);
     image(img5, width / 2 + 440, (85 * height) / 100 - 182, 80, 70);
+    */
     
 }
 
@@ -702,20 +713,37 @@ function mousePressed(){
         
         entered=1;
         
-        if(dist(firstIconX,firstIconY,mouseX,mouseY)<=menuButtonsDiameter/2){  //buttonCompass
-            //transitionTriggerPortal=true;
-            screen=10;
-        }
-        if(dist(secondIconX,secondIconY,mouseX,mouseY)<=menuButtonsDiameter/2){  //buttonFortune
+       
+        if(dist(width/2,height/2-158,mouseX,mouseY)<=150/2){  // ParticleCanvas
+            
+            /*
             screen=20;
             background(backgroundColor);
+            */
+
+            particleCanvasSec.style.display = "block";
+            screen=20;
         }
-        if(dist(thirdIconX,thirdIconY,mouseX,mouseY)<=menuButtonsDiameter/2){   //buttonArtwork
+        if(dist(width/2+295,height/2-60,mouseX,mouseY)<=150/2){   //Balconity
+            
+            /*
             screen=30;
             console.log("index -1");
             canvas.style("z-index",-3);
             balconity.style.display = "block";
             //background("#F4A523");
+            */
+            
+            
+            balconitySection.style.display = "block";
+            defaultCanvas.style.display = "none";
+            screen=30;
+            
+        }
+
+        if(dist(width/2+473,height/2+190,mouseX,mouseY)<=150/2){  // PixelGrid
+            //transitionTriggerPortal=true;
+            screen=10;
         }
     }
     
@@ -922,10 +950,12 @@ document.getElementById("eurekaPixelGrid").addEventListener("click", function() 
 });
 
 document.getElementById("eurekaParticleCanvas").addEventListener("click", function() {
-    console.log("Pixel");
+    //console.log("Pixel");
     /*balconitySection.style.display = "block";*/
     defaultCanvas.style.display = "block";
     homeEureka.style.display = "none";
     particleCanvasSec.style.display = "block";
     screen=20;
 });
+
+
