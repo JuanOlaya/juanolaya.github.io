@@ -111,12 +111,13 @@ function windowResized(){
 
 function preload() {
 	
+	/*
 	img1 = loadImage("assets/Demo.jpg");
 	img2 = loadImage("assets/Gamepad.jpg");
 	img3 = loadImage("assets/ParticleCanvas2.jpg");
 	img4 = loadImage("assets/Balconity.jpg");
 	img5 = loadImage("assets/GridCanvas7.jpg");
-	
+	*/
 
 	//photo1 = loadImage('Assets/Images/woman1.png');
 	
