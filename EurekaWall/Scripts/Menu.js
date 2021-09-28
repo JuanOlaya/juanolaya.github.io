@@ -401,18 +401,13 @@ function menu2(){
     //ellipse(width/2,height/2-158,150,150);  // ParticleCanvas
     //ellipse(width/2+295,height/2-60,150,150); // Balconity
  
-    ellipse(width/2+473,height/2+190,150,150);  // ShapeGrid
+    //ellipse(width/2+473,height/2+190,150,150);  // ShapeGrid
 
-  
-    
     image(img1, width / 2 - 515, (85 * height) / 100 - 196, 80, 70);
-    /*
     image(img2, width / 2 - 333, (85 * height) / 100 - 451, 80, 70);
     image(img3, width / 2 - 34, (85 * height) / 100 - 541, 80, 70);
     image(img4, width / 2 + 263, (85 * height) / 100 - 440, 80, 70);
     image(img5, width / 2 + 440, (85 * height) / 100 - 182, 80, 70);
-    */
-    
 }
 
 function fortuneWheelShow() {
