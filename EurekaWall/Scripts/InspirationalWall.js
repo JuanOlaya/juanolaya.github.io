@@ -24,14 +24,15 @@ function inspirationWall(){
 		if(screen==0){  // MENU
 
 			background(backgroundColor);
-			defaultCanvas.style.display = "none";
+			defaultCanvas.style.display = "block";
 			balconitySection.style.display = "none";
-			homeEureka.style.display = "block";
+			//homeEureka.style.display = "block";
 			//videoAustralia.style.display = "none";
 			//videoAguahoja.pause();
 
 			//paintingPixels();
-			menu();
+			//menu();
+			menu2();
 			
 			//pixelWave();
 			fill(0);
@@ -105,3 +106,7 @@ function inspirationWall(){
 		fill(255);
 		//text("Touches Length: "+touches.length+"    Status: "+pixelList[0].hasChangedStatus,150,20);
 }
+
+
+
+

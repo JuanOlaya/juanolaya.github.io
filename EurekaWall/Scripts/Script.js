@@ -55,6 +55,7 @@ var menuButtonsDiameter=160;  // ORIGINAL 160
 var roundedTextRadius=menuButtonsDiameter/2;
 
 // 	WINDOW TO ANOTHER WORLD
+/*
 var rot;
 var speed;
 var colour;
@@ -67,7 +68,7 @@ var initialTimeTaken=false;
 var compassTextOpacity=54;
 var velCompassTextOpacity=3;
 var showTextCompass=true;
-
+*/
 // FORTUNE WHEEL
 var playAguahoja=true;
 var isTriviaSubjectCalculated=false;
@@ -109,6 +110,14 @@ function windowResized(){
 }
 
 function preload() {
+	
+	img1 = loadImage("assets/Demo.jpg");
+	img2 = loadImage("assets/Gamepad.jpg");
+	img3 = loadImage("assets/ParticleCanvas2.jpg");
+	img4 = loadImage("assets/Balconity.jpg");
+	img5 = loadImage("assets/GridCanvas7.jpg");
+	
+
 	//photo1 = loadImage('Assets/Images/woman1.png');
 	
 	//photo1 = loadImage("file:///C:/Users/juanf/OneDrive/Documentos/PhD/Interactive%20Wall/Assets/Images/woman1.png");
@@ -274,6 +283,26 @@ function setup() {
 	secondIconY=height/2;
 	thirdIconX=3*width/4;
 	thirdIconY=height/2;
+
+	accelRotFort = PI / 300;
+	pieColors[0] = color("#3C3C68");
+	pieColors[1] = color("#314991");
+
+	//photo1 = loadImage("/Assets/Images/woman1.png");
+
+	//photo1 = loadImage("Assets/Images/woman1.png");
+
+	for (let i = 0; i < amount; i++) {
+		piePieceList.push(
+		new PiePiece(
+			((2 * PI) / amount) * i,
+			((2 * PI) / amount) * (1 + i),
+			titles[i],
+			pieColors[i % 2],
+			i
+		)
+		);
+	}
 
 	
 }

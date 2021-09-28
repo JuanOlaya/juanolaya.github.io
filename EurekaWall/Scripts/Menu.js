@@ -2,6 +2,36 @@
 	INSPIRATIONAL WALL
 */
 
+// ******new home**********
+
+let piePieceList = [];
+let titles = [" ", " ", " ", " ", " ", " "];
+let amount = 10;
+let pieColors = [];
+let rotVel = 0;
+
+let velRotFort = 0;
+let accelRotFort;
+let stateFort = 0;
+
+let diameterButton = 10;
+let velDiameterButton = 0.07;
+
+let fortuneTextOpacity = 54;
+let velFortuneTextOpacity = 2;
+let showTextFortune = true;
+let initialTimeTaken = false;
+var numApp = 5;
+var tiempoInicioHome = 0;
+var tiempoEsperaHome = 2000; // 3 segundos
+var indice = 0;
+let img1;
+let img2;
+let img3;
+let img4;
+let img5;
+
+
 
 let homeEureka;
 homeEureka=document.getElementById("homeEureka");
@@ -342,6 +372,315 @@ function menu(){
         }	
     }
 }
+ 
+
+function menu2(){
+    background("#3D3D3D");
+  
+    fortuneWheelShow();
+    appDescription();
+  
+    if (millis() - tiempoInicioHome > tiempoEsperaHome) {
+      tiempoInicioHome = millis();
+      if (numApp < 9) {
+        numApp++;
+      } else {
+        numApp = 5;
+      }
+    }
+  
+    fill(255);
+    textSize(60);
+    textStyle(BOLD);
+    text("Eureka", width / 2 - 80, (85 * height) / 100 - 170);
+    text("Wall", width / 2 - 40, (85 * height) / 100 - 110);
+  
+    image(img1, width / 2 - 515, (85 * height) / 100 - 196, 80, 70);
+    image(img2, width / 2 - 333, (85 * height) / 100 - 451, 80, 70);
+    image(img3, width / 2 - 34, (85 * height) / 100 - 541, 80, 70);
+    image(img4, width / 2 + 263, (85 * height) / 100 - 440, 80, 70);
+    image(img5, width / 2 + 440, (85 * height) / 100 - 182, 80, 70);
+}
+
+function fortuneWheelShow() {
+    push();
+    translate(width / 2, (85 * height) / 100);
+  
+    noStroke();
+    /*
+    fill("#B30844");     // background   
+    ellipse(0,0,1300,1300);
+    fill("#A3083E");    //  background
+    ellipse(0,0,900,900);
+    */
+  
+    //fill("#3A549C");   // Yellow wheel
+    //ellipse(0,0,535,535);
+  
+    for (let i = 0; i < piePieceList.length; i++) {
+      if (i == numApp) {
+        piePieceList[i].show(velRotFort, true, i);
+        //console.log(i);
+      } else {
+        piePieceList[i].show(velRotFort, false);
+      }
+    }
+    /*
+    fill("#F4D00C"); // middle
+    ellipse(0,0,70,70);
+    fill("#A48C08");  // middle
+    ellipse(0,0,30,30);
+    */
+  
+    diameterButton = diameterButton + velDiameterButton;
+    fortuneTextOpacity = fortuneTextOpacity + velFortuneTextOpacity;
+    console.log(fortuneTextOpacity);
+  
+    if (diameterButton > 25) {
+      velDiameterButton = velDiameterButton * -1;
+      velFortuneTextOpacity = velFortuneTextOpacity * -1;
+    }
+    if (diameterButton < 9) {
+      velDiameterButton = velDiameterButton * -1;
+      velFortuneTextOpacity = velFortuneTextOpacity * -1;
+    }
+  
+    /*
+    fill(255);    // right-hand-side needle
+    ellipse(295 ,0,45,45);
+    quad(290,-15,290,15,240,8,240,-8);
+    ellipse(235,0,23,23);
+    fill(0);
+    ellipse(295,0,diameterButton,diameterButton);
+    */
+  
+    
+    if(showTextFortune){ 
+      let pushmeFort="Push one"; 
+      let gapLettersFort = 90;
+      let initialGapFort = PI+426*PI/1000; 
+      textSize(20);
+      textStyle(NORMAL);
+  
+      fill(color(150,150,150,fortuneTextOpacity));
+      //fill(255);
+      noStroke();
+  
+      for (let i = 0; i < pushmeFort.length; i+=1){  // ROUNDED TEXT
+          let x1,y1;
+          x1=y1=0;
+          x1 = 0+670*cos((i*2*PI/gapLettersFort)+initialGapFort);
+          y1 = 0+670*sin((i*2*PI/gapLettersFort)+initialGapFort);
+  
+          push();
+          translate(x1,y1);
+          rotate((i*2*PI/gapLettersFort)+initialGapFort+PI/2);
+          text(pushmeFort[i],0,0);
+          pop();
+      }
+    }
+    
+  
+    pop();
+    noStroke();
+    fill("#333333");
+    //fill("#296d55");
+    rect(0, (85 * height) / 100 - 4, width, height);
+  }
+  
+  
+  
+  class PiePiece {
+    constructor(startA, stopA, texto, colour, i) {
+      this.startAngle = startA;
+      this.stopAngle = stopA;
+      this.radius = 1000;
+      this.texto = texto;
+      this.pieceAmount = 5;
+      this.color = colour;
+      this.indice = i;
+      console.log("Indice: " + this.indice);
+    }
+  
+    show(rotF, border1, index) {
+      stroke(this.color);
+      strokeWeight(0.1);
+      fill(this.color);
+      //arc(0,0, this.radius, this.radius, this.startAngle+rotF, this.stopAngle+rotF,PIE);
+  
+      fill(0);
+      noStroke();
+  
+      push();
+      rotate(this.startAngle + rotF + PI / this.pieceAmount);
+      textAlign(CENTER, CENTER);
+      textSize(25);
+      textStyle(BOLD);
+      fill(255);
+      push();
+      
+      fill(255);
+      ellipse(480, -150, 130, 130);
+  
+      if (border1) {
+        indice = index;
+        //stroke("#F04749");   // #5ACAEC   #F04749
+        
+  
+        if (index == 5) {
+          stroke("#947BD3"); //3a9c79
+          strokeWeight(10);
+          fill(255);
+          ellipse(480, -150, 130, 130);
+          noStroke();
+          
+          noFill();
+          stroke("#947BD3"); // 3a9c79
+          strokeWeight(11);
+          arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
+          arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
+          
+        }
+        
+        if( index == 6){
+          stroke("#DBBD0F"); //3a9c79
+          strokeWeight(10);
+          fill(255);
+          ellipse(480, -150, 130, 130);
+          noStroke();
+          
+          noFill();
+          stroke("#DBBD0F"); // 
+          strokeWeight(11);
+          arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
+          arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
+           
+          }
+        
+        if( index == 7){
+          stroke("#7576BD"); //3a9c79
+          strokeWeight(10);
+          fill(255);
+          ellipse(480, -150, 130, 130);
+          noStroke();
+          
+          noFill();
+          stroke("#7576BD"); // 
+          strokeWeight(11);
+          arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
+          arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
+           
+          }
+        
+        if( index == 8){
+          stroke("#FEAD34"); //3a9c79
+          strokeWeight(10);
+          fill(255);
+          ellipse(480, -150, 130, 130);
+          noStroke();
+          
+          noFill();
+          stroke("#FEAD34"); // 
+          strokeWeight(11);
+          arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
+          arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
+           
+          }
+        if( index == 9){
+          stroke("#DC4141"); //3a9c79
+          strokeWeight(10);
+          fill(255);
+          ellipse(480, -150, 130, 130);
+          noStroke();
+          
+          noFill();
+          stroke("#DC4141"); // 
+          strokeWeight(11);
+          arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
+          arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
+           
+          }
+        
+      }
+      
+      text(this.texto, 150, 0);
+      pop();
+      pop();
+    }
+  }
+  
+  function appDescription(index) {
+    if (indice == 5) {
+      fill(255);
+      textSize(23);
+      text("Demo", width / 2 - 500, (85 * height) / 100 + 40);
+      textStyle(NORMAL);
+      textSize(23);
+      text(
+        "Watch the presentation of EurekaWall and know the 4 interactive experiences to use them while break",
+        width / 2 - 500,
+        (85 * height) / 100 + 80
+      );
+      noStroke();
+    }
+    if (indice == 6) {
+      fill(255);
+      textSize(23);
+      text("MuseFlow", width / 2 - 500, (85 * height) / 100 + 40);
+      textStyle(NORMAL);
+      textSize(23);
+      text(
+        "Play an undemanding video game and unlock your creativity by promoting mind-wandering episodes",
+        width / 2 - 500,
+        (85 * height) / 100 + 80
+      );
+      noStroke();
+    }
+    if (indice == 7) {
+      fill(255);
+      textSize(23);
+      text("ParticleCanvas", width / 2 - 500, (85 * height) / 100 + 40);
+      textStyle(NORMAL);
+      textSize(23);
+      text(
+        "Create an unique and abstract visual work by exploring different brushes ",
+        width / 2 - 500,
+        (85 * height) / 100 + 80
+      );
+      noStroke();
+    }
+    if (indice == 8) {
+      fill(255);
+      textSize(23);
+      text("Balconity", width / 2 - 500, (85 * height) / 100 + 40);
+      textStyle(NORMAL);
+      textSize(23);
+      text(
+        "Find serendipitous inspiration by exploring visual stimuli such as 9 live cameras from around the world",
+        width / 2 - 500,
+        (85 * height) / 100 + 80
+      );
+      noStroke();
+    }
+    if (indice == 9) {
+      fill(255);
+      textSize(23);
+      text("ShapeGrid", width / 2 - 500, (85 * height) / 100 + 40);
+      textStyle(NORMAL);
+      textSize(23);
+      text(
+        "Create a visual representation of your ideas by painting them with shapes on a grid",
+        width / 2 - 500,
+        (85 * height) / 100 + 80
+      );
+      //text("Create a meaninful visualization by painting with shapes on a grid",width/2-500,85*height/100+80);
+      // customization sketching
+      noStroke();
+    }
+  }
+
+
+
 
 function mousePressed(){
     var entered=0;

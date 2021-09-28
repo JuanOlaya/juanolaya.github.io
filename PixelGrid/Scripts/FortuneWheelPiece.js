@@ -2,6 +2,7 @@
 	INSPIRATIONAL WALL
 */
 
+
 class PiePiece {
   
 	constructor(startA, stopA,texto,colour){
