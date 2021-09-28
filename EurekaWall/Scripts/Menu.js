@@ -395,13 +395,13 @@ function menu2(){
     text("Eureka", width / 2 - 80, (85 * height) / 100 - 170);
     text("Wall", width / 2 - 40, (85 * height) / 100 - 110);
   
-    /*
+    
     image(img1, width / 2 - 515, (85 * height) / 100 - 196, 80, 70);
     image(img2, width / 2 - 333, (85 * height) / 100 - 451, 80, 70);
     image(img3, width / 2 - 34, (85 * height) / 100 - 541, 80, 70);
     image(img4, width / 2 + 263, (85 * height) / 100 - 440, 80, 70);
     image(img5, width / 2 + 440, (85 * height) / 100 - 182, 80, 70);
-    */
+    
 }
 
 function fortuneWheelShow() {
