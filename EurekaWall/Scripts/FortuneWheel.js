@@ -2,7 +2,7 @@
     INSPIRATIONAL WALL
 */
 
-
+/*
 var piePieceList = [];
 var titles = ["Science","Origami", "Ecology", "Installation Art","Material Ecology","Bionics"];
 var amount=6;
@@ -19,6 +19,7 @@ var velDiameterButton=0.2;
 var fortuneTextOpacity=54;
 var velFortuneTextOpacity=2;
 var showTextFortune=true;
+*/
 
 function fortuneWheelShow(){
 	push();

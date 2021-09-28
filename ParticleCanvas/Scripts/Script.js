@@ -107,6 +107,7 @@ function windowResized(){
 }
 
 function preload() {
+
 	//photo1 = loadImage('Assets/Images/woman1.png');
 	
 	//photo1 = loadImage("file:///C:/Users/juanf/OneDrive/Documentos/PhD/Interactive%20Wall/Assets/Images/woman1.png");
@@ -273,7 +274,7 @@ function setup() {
 	thirdIconX=3*width/4;
 	thirdIconY=height/2;
 
-	
+
 }
 
 function draw() {
