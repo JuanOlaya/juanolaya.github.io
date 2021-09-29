@@ -374,10 +374,12 @@ body{
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-280px,300px);
-  font-size: 70px;
-  color: #F3E4CE;
+  transform: translate(-750px,370px);
+  font-size: 200px;
+  /*color: #F3E4CE;*/
+  color: #fff;
   cursor: pointer;
+  z-index: 1;
 }
 
 #rightArrowIcon{
@@ -387,10 +389,12 @@ body{
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(183px,300px);
-  font-size: 70px;
-  color: #F3E4CE;
+  transform: translate(680px,370px);
+  font-size: 200px;
+  /*color: #F3E4CE;*/
+  color: #fff;
   cursor: pointer;
+  z-index: 1;
 }
 
 #leftArrowAboutIcon{
