@@ -23,7 +23,7 @@ let showTextFortune = true;
 let initialTimeTaken = false;
 var numApp = 5;
 var tiempoInicioHome = 0;
-var tiempoEsperaHome = 2000; // 3 segundos
+var tiempoEsperaHome = 6000; // 3 segundos
 var indice = 0;
 let img1;
 let img2;
@@ -33,10 +33,11 @@ let img5;
 
 
 
-let homeEureka;
-homeEureka=document.getElementById("homeEureka");
+//let homeEureka;
+//homeEureka=document.getElementById("homeEureka");
 //homeIcons.style.display = "none";
 
+homeEureka.style.display = "none";
 
 function menu(){
     noStroke();
@@ -375,7 +376,7 @@ function menu(){
  
 
 function menu2(){
-    background("#3D3D3D");
+    background("#333333");    //3D3D3D
   
     fortuneWheelShow();
     appDescription();
@@ -390,10 +391,10 @@ function menu2(){
     }
   
     fill(255);
-    textSize(60);
+    textSize(70);
     textStyle(BOLD);
     text("Eureka", width / 2 - 80, (85 * height) / 100 - 170);
-    text("Wall", width / 2 - 40, (85 * height) / 100 - 110);
+    text("Wall", width / 2 - 40, (85 * height) / 100 - 100);
 
     fill(0);
 
@@ -403,11 +404,13 @@ function menu2(){
  
     //ellipse(width/2+473,height/2+190,150,150);  // ShapeGrid
 
+    
     image(img1, width / 2 - 515, (85 * height) / 100 - 196, 80, 70);
     image(img2, width / 2 - 333, (85 * height) / 100 - 451, 80, 70);
     image(img3, width / 2 - 34, (85 * height) / 100 - 541, 80, 70);
     image(img4, width / 2 + 263, (85 * height) / 100 - 440, 80, 70);
     image(img5, width / 2 + 440, (85 * height) / 100 - 182, 80, 70);
+    
 }
 
 function fortuneWheelShow() {
@@ -442,7 +445,7 @@ function fortuneWheelShow() {
   
     diameterButton = diameterButton + velDiameterButton;
     fortuneTextOpacity = fortuneTextOpacity + velFortuneTextOpacity;
-    console.log(fortuneTextOpacity);
+    //console.log(fortuneTextOpacity);
   
     if (diameterButton > 25) {
       velDiameterButton = velDiameterButton * -1;
@@ -491,14 +494,14 @@ function fortuneWheelShow() {
   
     pop();
     noStroke();
-    fill("#333333");
+    fill("#292929");
     //fill("#296d55");
     rect(0, (85 * height) / 100 - 4, width, height);
   }
   
   
   
-  class PiePiece {
+class PiePiece {
     constructor(startA, stopA, texto, colour, i) {
       this.startAngle = startA;
       this.stopAngle = stopA;
@@ -528,16 +531,15 @@ function fortuneWheelShow() {
       push();
       
       fill(255);
-      ellipse(480, -150, 130, 130);
+      ellipse(480, -150, 120, 120);
   
       if (border1) {
         indice = index;
         //stroke("#F04749");   // #5ACAEC   #F04749
         
-  
         if (index == 5) {
           stroke("#947BD3"); //3a9c79
-          strokeWeight(10);
+          strokeWeight(11);
           fill(255);
           ellipse(480, -150, 130, 130);
           noStroke();
@@ -658,17 +660,33 @@ function fortuneWheelShow() {
       noStroke();
     }
     if (indice == 8) {
+        
+        /*
+        fill("#FEAD34");
+      rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,120,33);
+      */
+
+      
+      fill("#FEAD34");
+      rect(width / 2 - 500 -10, (85 * height) / 100 + 40 +1,120,8);
+        
+
+      fill("#FEAD34");
+      rect(width / 2 - 500 +110, (85 * height) / 100 + 40 -24,33,33,25);
+
       fill(255);
       textSize(23);
       text("Balconity", width / 2 - 500, (85 * height) / 100 + 40);
       textStyle(NORMAL);
       textSize(23);
+      fill(255);
       text(
         "Find serendipitous inspiration by exploring visual stimuli such as 9 live cameras from around the world",
         width / 2 - 500,
         (85 * height) / 100 + 80
       );
       noStroke();
+      
     }
     if (indice == 9) {
       fill(255);
@@ -716,6 +734,7 @@ function mousePressed(){
             background(backgroundColor);
             */
 
+            homeEureka.style.display = "none";
             particleCanvasSec.style.display = "block";
             screen=20;
         }
@@ -729,7 +748,7 @@ function mousePressed(){
             //background("#F4A523");
             */
             
-            
+            homeEureka.style.display = "none";
             balconitySection.style.display = "block";
             defaultCanvas.style.display = "none";
             screen=30;
@@ -738,6 +757,7 @@ function mousePressed(){
 
         if(dist(width/2+473,height/2+190,mouseX,mouseY)<=150/2){  // PixelGrid
             //transitionTriggerPortal=true;
+            homeEureka.style.display = "none";
             screen=10;
         }
     }
@@ -928,29 +948,45 @@ function printCanvas(){
     }, true);
 }
 
-
+/*
 document.getElementById("eurekaBalconity").addEventListener("click", function() {
-    /*console.log("ASSaasdfdgfd");*/
+    
     balconitySection.style.display = "block";
     homeEureka.style.display = "none";
     screen=30;
 });
 
 document.getElementById("eurekaPixelGrid").addEventListener("click", function() {
-    /*console.log("Pixel");*/
-    /*balconitySection.style.display = "block";*/
+    
     defaultCanvas.style.display = "block";
     homeEureka.style.display = "none";
     screen=10;
 });
 
 document.getElementById("eurekaParticleCanvas").addEventListener("click", function() {
-    //console.log("Pixel");
-    /*balconitySection.style.display = "block";*/
+    
     defaultCanvas.style.display = "block";
     homeEureka.style.display = "none";
     particleCanvasSec.style.display = "block";
     screen=20;
 });
+*/
 
+document.getElementById("rightArrowIcon").addEventListener("click", function() {
+    
+    tiempoInicioHome = millis();
+    if (numApp < 9) {
+        numApp++;
+    } else {
+        numApp = 5;
+    }
+});
 
+document.getElementById("leftArrowIcon").addEventListener("click", function() {
+    tiempoInicioHome = millis();
+    if (numApp > 5) {
+        numApp--;
+    } else {
+        numApp = 9;
+    }
+});
