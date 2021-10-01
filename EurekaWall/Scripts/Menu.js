@@ -581,8 +581,8 @@ class PiePiece {
         strokeWeight(4);
         noFill();
         */
-        fill("#292929");
-        ellipse(480, -150, 120, 120);
+        //fill("#292929");
+        //ellipse(480, -150, 120, 120);
         
         //console.log("EN IND1"+border1);
       if (index == 5) {
