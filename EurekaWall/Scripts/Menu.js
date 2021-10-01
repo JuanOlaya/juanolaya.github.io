@@ -30,6 +30,7 @@ let img2;
 let img3;
 let img4;
 let img5;
+let indexSelected=5;
 
 
 
@@ -377,6 +378,43 @@ function menu(){
 
 function menu2(){
     background("#333333");    //3D3D3D
+
+    if(indexSelected==5){
+        rectMode(CENTER);
+        fill("#947BD3");
+        rect(width/2,700*height/1000,150,60,10);
+        rectMode(CORNER);
+    }
+    if(indexSelected==6){
+        rectMode(CENTER);
+        fill("#DBBD0F");
+        rect(width/2,700*height/1000,150,60,10);
+        rectMode(CORNER);
+    }
+    if(indexSelected==7){
+        rectMode(CENTER);
+        fill("#7576BD");
+        rect(width/2,700*height/1000,150,60,10);
+        rectMode(CORNER);
+    }
+    if(indexSelected==8){
+        rectMode(CENTER);
+        fill("#FEAD34");
+        rect(width/2,700*height/1000,150,60,10);
+        rectMode(CORNER);
+    }
+    if(indexSelected==9){
+        rectMode(CENTER);
+        fill("#DC4141");
+        rect(width/2,700*height/1000,150,60,10);
+        rectMode(CORNER);
+    }
+    textAlign(CENTER,CENTER);
+    fill("#333333");
+    textSize(30);
+    textStyle(BOLD);
+    text("Start",width/2,700*height/1000);
+    textAlign(LEFT,BOTTOM);
   
     fortuneWheelShow();
     appDescription();
@@ -393,8 +431,11 @@ function menu2(){
     fill(255);
     textSize(70);
     textStyle(BOLD);
-    text("Eureka", width / 2 - 80, (85 * height) / 100 - 170);
-    text("Wall", width / 2 - 40, (85 * height) / 100 - 100);
+    //text("Eureka", width / 2 - 80, (85 * height) / 100 - 170);
+    //text("Wall", width / 2 - 40, (85 * height) / 100 - 100);
+    textSize(35);
+    text("Eureka", 15, 40);
+    text("Wall", 15, 75);
 
     fill(0);
 
@@ -430,10 +471,11 @@ function fortuneWheelShow() {
   
     for (let i = 0; i < piePieceList.length; i++) {
       if (i == numApp) {
+        indexSelected=i;
         piePieceList[i].show(velRotFort, true, i);
         //console.log(i);
       } else {
-        piePieceList[i].show(velRotFort, false);
+        piePieceList[i].show(velRotFort, false, i);
       }
     }
     /*
@@ -467,6 +509,7 @@ function fortuneWheelShow() {
   
     
     if(showTextFortune){ 
+        /*
       let pushmeFort="Push one"; 
       let gapLettersFort = 90;
       let initialGapFort = PI+426*PI/1000; 
@@ -489,6 +532,7 @@ function fortuneWheelShow() {
           text(pushmeFort[i],0,0);
           pop();
       }
+      */
     }
     
   
@@ -521,6 +565,8 @@ class PiePiece {
   
       fill(0);
       noStroke();
+
+        
   
       push();
       rotate(this.startAngle + rotF + PI / this.pieceAmount);
@@ -530,8 +576,48 @@ class PiePiece {
       fill(255);
       push();
       
-      fill(255);
-      ellipse(480, -150, 120, 120);
+      /*
+        stroke("#947BD3");
+        strokeWeight(4);
+        noFill();
+        //fill(255);
+        ellipse(480, -150, 120, 120);
+        */
+        //console.log("EN IND1"+border1);
+      if (index == 5) {
+          //console.log("EN IND1"+index);
+          stroke("#947BD3");
+          strokeWeight(2);
+          noFill();
+          ellipse(480, -150, 120, 120);
+
+          //fill(255);
+          //ellipse(480, -150, 120, 120);
+      }
+      if (index == 6) {
+        stroke("#DBBD0F");
+        strokeWeight(2);
+        noFill();
+        ellipse(480, -150, 120, 120);
+      }
+      if (index == 7) {
+        stroke("#7576BD");
+        strokeWeight(2);
+        noFill();
+        ellipse(480, -150, 120, 120);
+      }
+      if (index == 8) {
+        stroke("#FEAD34");
+        strokeWeight(2);
+        noFill();
+        ellipse(480, -150, 120, 120);
+      }
+      if (index == 9) {
+        stroke("#DC4141");
+        strokeWeight(2);
+        noFill();
+        ellipse(480, -150, 120, 120);
+      }
   
       if (border1) {
         indice = index;
@@ -540,7 +626,8 @@ class PiePiece {
         if (index == 5) {
           stroke("#947BD3"); //3a9c79
           strokeWeight(11);
-          fill(255);
+          //fill(255);
+          noFill();
           ellipse(480, -150, 130, 130);
           noStroke();
           
@@ -549,13 +636,16 @@ class PiePiece {
           strokeWeight(11);
           arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
           arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
+
+          
           
         }
         
         if( index == 6){
           stroke("#DBBD0F"); //3a9c79
           strokeWeight(10);
-          fill(255);
+          //fill(255);
+          noFill();
           ellipse(480, -150, 130, 130);
           noStroke();
           
@@ -570,7 +660,8 @@ class PiePiece {
         if( index == 7){
           stroke("#7576BD"); //3a9c79
           strokeWeight(10);
-          fill(255);
+          //fill(255);
+          noFill();
           ellipse(480, -150, 130, 130);
           noStroke();
           
@@ -585,7 +676,8 @@ class PiePiece {
         if( index == 8){
           stroke("#FEAD34"); //3a9c79
           strokeWeight(10);
-          fill(255);
+          //fill(255);
+          noFill();
           ellipse(480, -150, 130, 130);
           noStroke();
           
@@ -599,7 +691,8 @@ class PiePiece {
         if( index == 9){
           stroke("#DC4141"); //3a9c79
           strokeWeight(10);
-          fill(255);
+          //fill(255);
+          noFill();
           ellipse(480, -150, 130, 130);
           noStroke();
           
@@ -608,6 +701,8 @@ class PiePiece {
           strokeWeight(11);
           arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
           arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
+
+
            
           }
         
@@ -661,18 +756,26 @@ class PiePiece {
     }
     if (indice == 8) {
         
+        /*fill("#FEAD34");*/
+        stroke("#FEAD34");
+        strokeWeight(4);
+        //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -23,122,35,9);
+        noStroke();
+
         /*
         fill("#FEAD34");
-      rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,120,33);
+      rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,120,33); //background
       */
 
-      
+      /*
       fill("#FEAD34");
-      rect(width / 2 - 500 -10, (85 * height) / 100 + 40 +1,120,8);
+      rect(width / 2 - 500 -10, (85 * height) / 100 + 40 +1,120,8);  // highlighted
         
 
       fill("#FEAD34");
-      rect(width / 2 - 500 +110, (85 * height) / 100 + 40 -24,33,33,25);
+      rect(width / 2 - 500 +110, (85 * height) / 100 + 40 -24,33,33,25);  // circle
+      */
 
       fill(255);
       textSize(23);
