@@ -377,7 +377,7 @@ function menu(){
  
 
 function menu2(){
-    background("#333333");    //3D3D3D
+    background("#292929");    // 333333                   3D3D3D
 
     if(indexSelected==5){
         rectMode(CENTER);
@@ -387,7 +387,7 @@ function menu2(){
     }
     if(indexSelected==6){
         rectMode(CENTER);
-        fill("#DBBD0F");
+        fill("#F54E00");
         rect(width/2,700*height/1000,150,60,10);
         rectMode(CORNER);
     }
@@ -538,7 +538,7 @@ function fortuneWheelShow() {
   
     pop();
     noStroke();
-    fill("#292929");
+    fill("#333333");  // 333333  292929
     //fill("#296d55");
     rect(0, (85 * height) / 100 - 4, width, height);
   }
@@ -581,8 +581,8 @@ class PiePiece {
         strokeWeight(4);
         noFill();
         */
-        //fill("#292929");
-        //ellipse(480, -150, 120, 120);
+        fill("#333333");
+        ellipse(480, -150, 120, 120);
         
         //console.log("EN IND1"+border1);
       if (index == 5) {
@@ -596,7 +596,7 @@ class PiePiece {
           //ellipse(480, -150, 120, 120);
       }
       if (index == 6) {
-        stroke("#DBBD0F");
+        stroke("#CC4100");
         strokeWeight(2);
         noFill();
         ellipse(480, -150, 120, 120);
@@ -643,7 +643,7 @@ class PiePiece {
         }
         
         if( index == 6){
-          stroke("#DBBD0F"); //3a9c79
+          stroke("#F54E00"); //3a9c79
           strokeWeight(10);
           //fill(255);
           noFill();
@@ -651,7 +651,7 @@ class PiePiece {
           noStroke();
           
           noFill();
-          stroke("#DBBD0F"); // 
+          stroke("#F54E00"); // 
           strokeWeight(11);
           arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
           arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
@@ -715,8 +715,15 @@ class PiePiece {
     }
   }
   
-  function appDescription(index) {
+function appDescription(index) {
     if (indice == 5) {
+
+        stroke("#947BD3");
+    strokeWeight(4);
+    //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
+    rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,122,35,9);
+    noStroke();
+
       fill(255);
       textSize(23);
       text("Demo", width / 2 - 500, (85 * height) / 100 + 40);
@@ -730,6 +737,13 @@ class PiePiece {
       noStroke();
     }
     if (indice == 6) {
+
+    stroke("#F54E00");
+    strokeWeight(4);
+    //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
+    rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,122,35,9);
+    noStroke();
+
       fill(255);
       textSize(23);
       text("MuseFlow", width / 2 - 500, (85 * height) / 100 + 40);
@@ -743,6 +757,15 @@ class PiePiece {
       noStroke();
     }
     if (indice == 7) {
+
+        //7576BD
+
+        stroke("#7576BD");
+        strokeWeight(4);
+        //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,122,35,9);
+        noStroke();
+
       fill(255);
       textSize(23);
       text("ParticleCanvas", width / 2 - 500, (85 * height) / 100 + 40);
@@ -761,7 +784,7 @@ class PiePiece {
         stroke("#FEAD34");
         strokeWeight(4);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -23,122,35,9);
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,122,35,9);
         noStroke();
 
         /*
@@ -793,6 +816,13 @@ class PiePiece {
       
     }
     if (indice == 9) {
+
+        stroke("#DC4141");
+        strokeWeight(4);
+        //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,122,35,9);
+        noStroke();
+
       fill(255);
       textSize(23);
       text("ShapeGrid", width / 2 - 500, (85 * height) / 100 + 40);

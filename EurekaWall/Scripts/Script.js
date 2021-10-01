@@ -117,7 +117,7 @@ function preload() {
 	img3 = loadImage("assets/particleCanvas.svg");
 	img4 = loadImage("assets/balconity.svg");
 	img5 = loadImage("assets/grid.svg");
-
+	
 
 	//photo1 = loadImage('Assets/Images/woman1.png');
 	//photo1 = loadImage("file:///C:/Users/juanf/OneDrive/Documentos/PhD/Interactive%20Wall/Assets/Images/woman1.png");
