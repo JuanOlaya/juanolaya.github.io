@@ -399,7 +399,7 @@ function menu2(){
     }
     if(indexSelected==8){
         rectMode(CENTER);
-        fill("#FEAD34");
+        fill("#CC4100");
         rect(width/2,700*height/1000,150,60,10);
         rectMode(CORNER);
     }
@@ -608,7 +608,7 @@ class PiePiece {
         ellipse(480, -150, 120, 120);
       }
       if (index == 8) {
-        stroke("#FEAD34");
+        stroke("#CC4100");
         strokeWeight(3);
         noFill();
         ellipse(480, -150, 120, 120);
@@ -675,7 +675,7 @@ class PiePiece {
           }
         
         if( index == 8){
-          stroke("#FEAD34"); //3a9c79
+          stroke("#CC4100"); //3a9c79
           strokeWeight(10);
           //fill(255);
           noFill();
@@ -683,7 +683,7 @@ class PiePiece {
           noStroke();
           
           noFill();
-          stroke("#FEAD34"); // 
+          stroke("#CC4100"); // 
           strokeWeight(11);
           arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
           arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
