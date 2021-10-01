@@ -588,7 +588,7 @@ class PiePiece {
       if (index == 5) {
           //console.log("EN IND1"+index);
           stroke("#947BD3");
-          strokeWeight(2);
+          strokeWeight(3);
           noFill();
           ellipse(480, -150, 120, 120);
 
@@ -597,25 +597,25 @@ class PiePiece {
       }
       if (index == 6) {
         stroke("#CC4100");
-        strokeWeight(2);
+        strokeWeight(3);
         noFill();
         ellipse(480, -150, 120, 120);
       }
       if (index == 7) {
         stroke("#7576BD");
-        strokeWeight(2);
+        strokeWeight(3);
         noFill();
         ellipse(480, -150, 120, 120);
       }
       if (index == 8) {
         stroke("#FEAD34");
-        strokeWeight(2);
+        strokeWeight(3);
         noFill();
         ellipse(480, -150, 120, 120);
       }
       if (index == 9) {
         stroke("#DC4141");
-        strokeWeight(2);
+        strokeWeight(3);
         noFill();
         ellipse(480, -150, 120, 120);
       }
