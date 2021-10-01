@@ -446,11 +446,11 @@ function menu2(){
     //ellipse(width/2+473,height/2+190,150,150);  // ShapeGrid
 
     
-    image(img1, width / 2 - 515, (85 * height) / 100 - 196, 60, 50);
-    image(img2, width / 2 - 333, (85 * height) / 100 - 451, 60, 50);
-    image(img3, width / 2 - 34, (85 * height) / 100 - 541, 60, 50);
-    image(img4, width / 2 + 263, (85 * height) / 100 - 440, 60, 50);
-    image(img5, width / 2 + 440, (85 * height) / 100 - 182, 60, 50);
+    image(img1, width / 2 - 515+10, (85 * height) / 100 - 196+10, 60, 50);
+    image(img2, width / 2 - 333+10, (85 * height) / 100 - 451+10, 60, 50);
+    image(img3, width / 2 - 34+10, (85 * height) / 100 - 541+10, 60, 50);
+    image(img4, width / 2 + 263+10, (85 * height) / 100 - 440+10, 60, 50);
+    image(img5, width / 2 + 440+10, (85 * height) / 100 - 182+10, 60, 50);
     
 }
 
