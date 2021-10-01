@@ -704,11 +704,11 @@ class PiePiece {
 
 
            
-          }
+        }
         
       }
       
-      text(this.texto, 150, 0);
+      //text(this.texto, 150, 0);
       pop();
       pop();
     }
