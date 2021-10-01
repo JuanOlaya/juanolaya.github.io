@@ -113,7 +113,7 @@ function preload() {
 	
 	
 	img1 = loadImage("assets/demo.svg");
-	img2 = loadImage("assets/gamepad.svg");
+	img2 = loadImage("assets/museFlow.svg");
 	img3 = loadImage("assets/particleCanvas.svg");
 	img4 = loadImage("assets/balconity.svg");
 	img5 = loadImage("assets/grid.svg");
