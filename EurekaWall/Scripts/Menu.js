@@ -567,9 +567,7 @@ class PiePiece {
   
       fill(0);
       noStroke();
-
-        
-  
+      
       push();
       rotate(this.startAngle + rotF + PI / this.pieceAmount);
       textAlign(CENTER, CENTER);
