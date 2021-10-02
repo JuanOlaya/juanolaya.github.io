@@ -738,7 +738,7 @@ function appDescription(index) {
     stroke(color6);
     strokeWeight(4);
     //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-    rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,125,35,9);
+    rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,130,35,9);
     noStroke();
 
       fill(255);
