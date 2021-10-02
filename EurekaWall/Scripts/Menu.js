@@ -32,6 +32,7 @@ let img4;
 let img5;
 let indexSelected=5;
 let color6="#E0AC00";
+let color7="#17799C";
 
 
 
@@ -394,7 +395,7 @@ function menu2(){
     }
     if(indexSelected==7){
         rectMode(CENTER);
-        fill("#7576BD");
+        fill(color7);
         rect(width/2,700*height/1000,150,60,10);
         rectMode(CORNER);
     }
@@ -598,7 +599,7 @@ class PiePiece {
         ellipse(480, -150, 120, 120);
       }
       if (index == 7) {
-        stroke("#7576BD");
+        stroke(color7);
         strokeWeight(11);
         noFill();
         ellipse(480, -150, 120, 120);
@@ -652,7 +653,7 @@ class PiePiece {
           }
         
         if( index == 7){
-          stroke("#7576BD"); //3a9c79
+          stroke(color7); //3a9c79
           strokeWeight(10);
           //fill(255);
           noFill();
@@ -660,7 +661,7 @@ class PiePiece {
           noStroke();
           
           noFill();
-          stroke("#7576BD"); // 
+          stroke(color7); // 
           strokeWeight(11);
           arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
           arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
@@ -709,68 +710,70 @@ class PiePiece {
   }
   
 function appDescription(index) {
+
     if (indice == 5) {
 
         stroke("#947BD3");
-    strokeWeight(4);
-    //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-    rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,90,35,9);
-    noStroke();
-
-      fill(255);
-      textSize(23);
-      text("Demo", width / 2 - 500, (85 * height) / 100 + 40);
-      textStyle(NORMAL);
-      textSize(23);
-      text(
-        "Watch the presentation of EurekaWall and know the 4 interactive experiences to use them while break",
-        width / 2 - 500,
-        (85 * height) / 100 + 80
-      );
-      noStroke();
-    }
-    if (indice == 6) {
-
-    stroke(color6);
-    strokeWeight(4);
-    //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-    rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,115,35,9);
-    noStroke();
-
-      fill(255);
-      textSize(23);
-      text("MuseFlow", width / 2 - 500, (85 * height) / 100 + 40);
-      textStyle(NORMAL);
-      textSize(23);
-      text(
-        "Play an undemanding video game and unlock your creativity by promoting mind-wandering episodes",
-        width / 2 - 500,
-        (85 * height) / 100 + 80
-      );
-      noStroke();
-    }
-    if (indice == 7) {
-
-        //7576BD
-
-        stroke("#7576BD");
         strokeWeight(4);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,172,35,9);
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,86,35,9);
         noStroke();
 
-      fill(255);
-      textSize(23);
-      text("ParticleCanvas", width / 2 - 500, (85 * height) / 100 + 40);
-      textStyle(NORMAL);
-      textSize(23);
-      text(
-        "Create an unique and abstract visual work by exploring different brushes ",
-        width / 2 - 500,
-        (85 * height) / 100 + 80
-      );
-      noStroke();
+        fill(255);
+        textSize(23);
+        text("Demo", width / 2 - 500, (85 * height) / 100 + 40);
+        textStyle(NORMAL);
+        textSize(23);
+        text(
+            "Watch the presentation of EurekaWall and know the 4 interactive experiences to use them while break",
+            width / 2 - 500,
+            (85 * height) / 100 + 80
+        );
+        noStroke();
     }
+
+    if (indice == 6) {
+
+        stroke(color6);
+        strokeWeight(4);
+        //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,123,35,9);
+        noStroke();
+
+        fill(255);
+        textSize(23);
+        text("MuseFlow", width / 2 - 500, (85 * height) / 100 + 40);
+        textStyle(NORMAL);
+        textSize(23);
+        text(
+            "Play an undemanding video game and unlock your creativity by promoting mind-wandering episodes",
+            width / 2 - 500,
+            (85 * height) / 100 + 80
+        );
+        noStroke();
+    }
+    
+    if (indice == 7) {
+
+        stroke(color7);
+        strokeWeight(4);
+        //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,176,35,9);
+        noStroke();
+
+        fill(255);
+        textSize(23);
+        text("ParticleCanvas", width / 2 - 500, (85 * height) / 100 + 40);
+        textStyle(NORMAL);
+        textSize(23);
+        text(
+            "Create an unique and abstract visual work by exploring different brushes ",
+            width / 2 - 500,
+            (85 * height) / 100 + 80
+        );
+        noStroke();
+    }
+
     if (indice == 8) {
         
         /*fill("#FEAD34");*/
@@ -782,32 +785,32 @@ function appDescription(index) {
 
         /*
         fill("#FEAD34");
-      rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,120,33); //background
-      */
+        rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,120,33); //background
+        */
 
-      /*
-      fill("#FEAD34");
-      rect(width / 2 - 500 -10, (85 * height) / 100 + 40 +1,120,8);  // highlighted
-        
+        /*
+        fill("#FEAD34");
+        rect(width / 2 - 500 -10, (85 * height) / 100 + 40 +1,120,8);  // highlighted
+            
 
-      fill("#FEAD34");
-      rect(width / 2 - 500 +110, (85 * height) / 100 + 40 -24,33,33,25);  // circle
-      */
+        fill("#FEAD34");
+        rect(width / 2 - 500 +110, (85 * height) / 100 + 40 -24,33,33,25);  // circle
+        */
 
-      fill(255);
-      textSize(23);
-      text("Balconity", width / 2 - 500, (85 * height) / 100 + 40);
-      textStyle(NORMAL);
-      textSize(23);
-      fill(255);
-      text(
-        "Find serendipitous inspiration by exploring visual stimuli such as 9 live cameras from around the world",
-        width / 2 - 500,
-        (85 * height) / 100 + 80
-      );
-      noStroke();
-      
+        fill(255);
+        textSize(23);
+        text("Balconity", width / 2 - 500, (85 * height) / 100 + 40);
+        textStyle(NORMAL);
+        textSize(23);
+        fill(255);
+        text(
+            "Find serendipitous inspiration by exploring visual stimuli such as 9 live cameras from around the world",
+            width / 2 - 500,
+            (85 * height) / 100 + 80
+        );
+        noStroke();
     }
+
     if (indice == 9) {
 
         stroke("#DC4141");
@@ -816,21 +819,21 @@ function appDescription(index) {
         rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,133,35,9);
         noStroke();
 
-      fill(255);
-      textSize(23);
-      text("ShapeGrid", width / 2 - 500, (85 * height) / 100 + 40);
-      textStyle(NORMAL);
-      textSize(23);
-      text(
-        "Create a visual representation of your ideas by painting them with shapes on a grid",
-        width / 2 - 500,
-        (85 * height) / 100 + 80
-      );
-      //text("Create a meaninful visualization by painting with shapes on a grid",width/2-500,85*height/100+80);
-      // customization sketching
-      noStroke();
+        fill(255);
+        textSize(23);
+        text("ShapeGrid", width / 2 - 500, (85 * height) / 100 + 40);
+        textStyle(NORMAL);
+        textSize(23);
+        text(
+            "Create a visual representation of your ideas by painting them with shapes on a grid",
+            width / 2 - 500,
+            (85 * height) / 100 + 80
+        );
+        //text("Create a meaninful visualization by painting with shapes on a grid",width/2-500,85*height/100+80);
+        // customization sketching
+        noStroke();
     }
-  }
+}
 
 
 
