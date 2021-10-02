@@ -448,12 +448,10 @@ function menu2(){
 
     
     image(img1, width / 2 - 515+10, (85 * height) / 100 - 196+10, 60, 60);
-    image(img2, width / 2 - 333+10, (85 * height) / 100 - 451+10, 60, 60);
+    image(img2, width / 2 - 333+10, (85 * height) / 100 - 451+10, 70, 70);
     image(img3, width / 2 - 34+10, (85 * height) / 100 - 541+10, 60, 60);
     image(img4, width / 2 + 263+10, (85 * height) / 100 - 440+10, 60, 60);
     image(img5, width / 2 + 440+10, (85 * height) / 100 - 182+10, 60, 60);
-    
-    
 }
 
 function fortuneWheelShow() {
@@ -716,7 +714,7 @@ function appDescription(index) {
         stroke("#947BD3");
     strokeWeight(4);
     //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-    rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,122,35,9);
+    rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,90,35,9);
     noStroke();
 
       fill(255);
@@ -736,7 +734,7 @@ function appDescription(index) {
     stroke(color6);
     strokeWeight(4);
     //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-    rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,100,35,9);
+    rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,115,35,9);
     noStroke();
 
       fill(255);
@@ -758,7 +756,7 @@ function appDescription(index) {
         stroke("#7576BD");
         strokeWeight(4);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,162,35,9);
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,172,35,9);
         noStroke();
 
       fill(255);
@@ -815,7 +813,7 @@ function appDescription(index) {
         stroke("#DC4141");
         strokeWeight(4);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,132,35,9);
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,133,35,9);
         noStroke();
 
       fill(255);
