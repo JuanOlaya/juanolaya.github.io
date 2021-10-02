@@ -31,6 +31,7 @@ let img3;
 let img4;
 let img5;
 let indexSelected=5;
+let color6="#0C4EAD";
 
 
 
@@ -387,7 +388,7 @@ function menu2(){
     }
     if(indexSelected==6){
         rectMode(CENTER); 
-        fill("#0C4EAD");    // F54E00
+        fill(color6);    // F54E00
         rect(width/2,700*height/1000,150,60,10);
         rectMode(CORNER);
     }
@@ -595,7 +596,7 @@ class PiePiece {
           ellipse(480, -150, 120, 120);
       }
       if (index == 6) {
-        stroke("#0C4EAD");  //  #073E89  #CC4100
+        stroke(color6);  //  #073E89  #CC4100
         strokeWeight(11);
         noFill();
         ellipse(480, -150, 120, 120);
@@ -639,7 +640,7 @@ class PiePiece {
         }
         
         if( index == 6){
-          stroke("#0C4EAD"); //  #073E89 #F54E00 3a9c79
+          stroke(color6); //  #073E89 #F54E00 3a9c79
           strokeWeight(10);
           //fill(255);
           noFill();
@@ -647,7 +648,7 @@ class PiePiece {
           noStroke();
           
           noFill();
-          stroke("#0C4EAD"); // #073E89
+          stroke(color6); // #073E89
           strokeWeight(11);
           arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
           arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
@@ -734,10 +735,10 @@ function appDescription(index) {
     }
     if (indice == 6) {
 
-    stroke("#F54E00");
+    stroke(color6);
     strokeWeight(4);
     //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-    rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,122,35,9);
+    rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,125,35,9);
     noStroke();
 
       fill(255);
