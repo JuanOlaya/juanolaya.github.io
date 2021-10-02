@@ -386,8 +386,8 @@ function menu2(){
         rectMode(CORNER);
     }
     if(indexSelected==6){
-        rectMode(CENTER);
-        fill("#F54E00");
+        rectMode(CENTER); 
+        fill("#0C4EAD");    // F54E00
         rect(width/2,700*height/1000,150,60,10);
         rectMode(CORNER);
     }
@@ -433,16 +433,16 @@ function menu2(){
     textStyle(BOLD);
     //text("Eureka", width / 2 - 80, (85 * height) / 100 - 170);
     //text("Wall", width / 2 - 40, (85 * height) / 100 - 100);
-    textSize(35);
-    text("Eureka", 15, 40);
-    text("Wall", 15, 75);
+    textSize(45);
+    text("Eureka", 15, 55);
+    text("Wall", 15, 95);
 
     fill(0);
 
+    //ellipse(width/2-473,height/2+190,150,150); // Demo
     //ellipse(width/2-295,height/2-60,150,150);  // MuseFlow
     //ellipse(width/2,height/2-158,150,150);  // ParticleCanvas
     //ellipse(width/2+295,height/2-60,150,150); // Balconity
- 
     //ellipse(width/2+473,height/2+190,150,150);  // ShapeGrid
 
     
@@ -451,6 +451,7 @@ function menu2(){
     image(img3, width / 2 - 34+10, (85 * height) / 100 - 541+10, 60, 50);
     image(img4, width / 2 + 263+10, (85 * height) / 100 - 440+10, 60, 50);
     image(img5, width / 2 + 440+10, (85 * height) / 100 - 182+10, 60, 50);
+    
     
 }
 
@@ -581,41 +582,39 @@ class PiePiece {
         strokeWeight(4);
         noFill();
         */
-        fill("#333333");
+        //fill("#333333");
+        fill(240);
         ellipse(480, -150, 120, 120);
         
         //console.log("EN IND1"+border1);
+        
       if (index == 5) {
-          //console.log("EN IND1"+index);
           stroke("#947BD3");
-          strokeWeight(3);
+          strokeWeight(11);
           noFill();
           ellipse(480, -150, 120, 120);
-
-          //fill(255);
-          //ellipse(480, -150, 120, 120);
       }
       if (index == 6) {
-        stroke("#CC4100");
-        strokeWeight(3);
+        stroke("#0C4EAD");  //  #073E89  #CC4100
+        strokeWeight(11);
         noFill();
         ellipse(480, -150, 120, 120);
       }
       if (index == 7) {
         stroke("#7576BD");
-        strokeWeight(3);
+        strokeWeight(11);
         noFill();
         ellipse(480, -150, 120, 120);
       }
       if (index == 8) {
         stroke("#f48c06");
-        strokeWeight(3);
+        strokeWeight(11);
         noFill();
         ellipse(480, -150, 120, 120);
       }
       if (index == 9) {
         stroke("#DC4141");
-        strokeWeight(3);
+        strokeWeight(11);
         noFill();
         ellipse(480, -150, 120, 120);
       }
@@ -637,13 +636,10 @@ class PiePiece {
           strokeWeight(11);
           arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
           arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
-
-          
-          
         }
         
         if( index == 6){
-          stroke("#F54E00"); //3a9c79
+          stroke("#0C4EAD"); //  #073E89 #F54E00 3a9c79
           strokeWeight(10);
           //fill(255);
           noFill();
@@ -651,7 +647,7 @@ class PiePiece {
           noStroke();
           
           noFill();
-          stroke("#F54E00"); // 
+          stroke("#0C4EAD"); // #073E89
           strokeWeight(11);
           arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
           arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
@@ -859,40 +855,44 @@ function mousePressed(){
     if(screen==0 && entered==0){
         
         entered=1;
-        
+
+        if(dist(width/2-473,height/2+190,mouseX,mouseY)<=150/2){  // Demo
+            tiempoInicioHome = millis();
+            numApp=5;
+        }
+
+        if(dist(width/2-295,height/2-60,mouseX,mouseY)<=150/2){  //  MuseFlow
+            tiempoInicioHome = millis();
+            numApp=6;
+        }
        
         if(dist(width/2,height/2-158,mouseX,mouseY)<=150/2){  // ParticleCanvas
-            
+            tiempoInicioHome = millis();
+            numApp=7;
             /*
-            screen=20;
-            background(backgroundColor);
-            */
-
             homeEureka.style.display = "none";
             particleCanvasSec.style.display = "block";
             screen=20;
+            */
         }
         if(dist(width/2+295,height/2-60,mouseX,mouseY)<=150/2){   //Balconity
-            
+            tiempoInicioHome = millis();
+            numApp=8;
             /*
-            screen=30;
-            console.log("index -1");
-            canvas.style("z-index",-3);
-            balconity.style.display = "block";
-            //background("#F4A523");
-            */
-            
             homeEureka.style.display = "none";
             balconitySection.style.display = "block";
             defaultCanvas.style.display = "none";
             screen=30;
-            
+            */
         }
 
         if(dist(width/2+473,height/2+190,mouseX,mouseY)<=150/2){  // PixelGrid
-            //transitionTriggerPortal=true;
+            tiempoInicioHome = millis();
+            numApp=9;
+            /*
             homeEureka.style.display = "none";
             screen=10;
+            */
         }
     }
     
