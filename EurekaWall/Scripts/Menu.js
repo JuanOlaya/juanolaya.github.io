@@ -31,7 +31,7 @@ let img3;
 let img4;
 let img5;
 let indexSelected=5;
-let color6="#F5BC00";
+let color6="#E0AC00";
 
 
 
