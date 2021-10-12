@@ -670,6 +670,8 @@ document.getElementById("goBack").addEventListener("click", function() {
 });
 
 
+
+
 /*
 document.getElementById("paletteIcon").addEventListener("click", function() {
     
