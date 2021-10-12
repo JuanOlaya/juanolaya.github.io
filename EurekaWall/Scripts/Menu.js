@@ -31,10 +31,15 @@ let img3;
 let img4;
 let img5;
 let indexSelected=5;
+let color5="#947BD3";
 let color6="#E0AC00";
-let color7="#17799C";
+let color7="#1E9CC9";  // 29833B 2A878D 2F969D 1C90BA 1D96C2 1E9CC9 4FC3CB #00FFC7 #17799C 
+let color8="#f48c06";
+let color9="#DC4141";
+let demoSection;
 
-
+demoSection=document.getElementById("demoSec");
+demoSection.style.display = "none";
 
 //let homeEureka;
 //homeEureka=document.getElementById("homeEureka");
@@ -383,7 +388,7 @@ function menu2(){
 
     if(indexSelected==5){
         rectMode(CENTER);
-        fill("#947BD3");
+        fill(color5);
         rect(width/2,700*height/1000,150,60,10);
         rectMode(CORNER);
     }
@@ -401,13 +406,13 @@ function menu2(){
     }
     if(indexSelected==8){
         rectMode(CENTER);
-        fill("#f48c06");
+        fill(color8);
         rect(width/2,700*height/1000,150,60,10);
         rectMode(CORNER);
     }
     if(indexSelected==9){
         rectMode(CENTER);
-        fill("#DC4141");
+        fill(color9);
         rect(width/2,700*height/1000,150,60,10);
         rectMode(CORNER);
     }
@@ -430,14 +435,23 @@ function menu2(){
       }
     }
   
+    
+    //text("Eureka", width / 2 - 80, (85 * height) / 100 - 170);
+    //text("Wall", width / 2 - 40, (85 * height) / 100 - 100);
+    
+    stroke(255,230,0);
+    strokeWeight(7);
+    strokeCap(SQUARE);
+    line(15, 51,202,51);
+    line(15, 109,138,109);
+    noStroke();
+    
     fill(255);
     textSize(70);
     textStyle(BOLD);
-    //text("Eureka", width / 2 - 80, (85 * height) / 100 - 170);
-    //text("Wall", width / 2 - 40, (85 * height) / 100 - 100);
-    textSize(45);
+    textSize(55);
     text("Eureka", 15, 55);
-    text("Wall", 15, 95);
+    text("Wall", 15, 113);
 
     fill(0);
 
@@ -587,7 +601,7 @@ class PiePiece {
         //console.log("EN IND1"+border1);
         
       if (index == 5) {
-          stroke("#947BD3");
+          stroke(color5);
           strokeWeight(11);
           noFill();
           ellipse(480, -150, 120, 120);
@@ -605,13 +619,13 @@ class PiePiece {
         ellipse(480, -150, 120, 120);
       }
       if (index == 8) {
-        stroke("#f48c06");
+        stroke(color8);
         strokeWeight(11);
         noFill();
         ellipse(480, -150, 120, 120);
       }
       if (index == 9) {
-        stroke("#DC4141");
+        stroke(color9);
         strokeWeight(11);
         noFill();
         ellipse(480, -150, 120, 120);
@@ -622,7 +636,7 @@ class PiePiece {
         //stroke("#F04749");   // #5ACAEC   #F04749
         
         if (index == 5) {
-          stroke("#947BD3"); //3a9c79
+          stroke(color5); //3a9c79
           strokeWeight(11);
           //fill(255);
           noFill();
@@ -630,7 +644,7 @@ class PiePiece {
           noStroke();
           
           noFill();
-          stroke("#947BD3"); // 3a9c79
+          stroke(color5); // 3a9c79
           strokeWeight(11);
           arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
           arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
@@ -669,7 +683,7 @@ class PiePiece {
           }
         
         if( index == 8){
-          stroke("#f48c06"); //3a9c79
+          stroke(color8); //3a9c79
           strokeWeight(10);
           //fill(255);
           noFill();
@@ -677,14 +691,14 @@ class PiePiece {
           noStroke();
           
           noFill();
-          stroke("#f48c06"); // 
+          stroke(color8); // 
           strokeWeight(11);
           arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
           arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
            
           }
         if( index == 9){
-          stroke("#DC4141"); //3a9c79
+          stroke(color9); //3a9c79
           strokeWeight(10);
           //fill(255);
           noFill();
@@ -692,15 +706,11 @@ class PiePiece {
           noStroke();
           
           noFill();
-          stroke("#DC4141"); // 
+          stroke(color9); // 
           strokeWeight(11);
           arc(480, -150, 170, 170, (-25 * PI) / 100, (10 * PI) / 100, OPEN);
           arc(480, -150, 170, 170, (70 * PI) / 100, (105 * PI) / 100, OPEN);
-
-
-           
         }
-        
       }
       
       //text(this.texto, 150, 0);
@@ -713,10 +723,10 @@ function appDescription(index) {
 
     if (indice == 5) {
 
-        stroke("#947BD3");
+        stroke(color5);
         strokeWeight(4);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,86,35,9);
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,84,35,9);
         noStroke();
 
         fill(255);
@@ -735,7 +745,7 @@ function appDescription(index) {
     if (indice == 6) {
 
         stroke(color6);
-        strokeWeight(4);
+        strokeWeight(5);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
         rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,123,35,9);
         noStroke();
@@ -752,13 +762,13 @@ function appDescription(index) {
         );
         noStroke();
     }
-    
+
     if (indice == 7) {
 
         stroke(color7);
-        strokeWeight(4);
+        strokeWeight(5);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,176,35,9);
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,179,35,9);
         noStroke();
 
         fill(255);
@@ -777,8 +787,8 @@ function appDescription(index) {
     if (indice == 8) {
         
         /*fill("#FEAD34");*/
-        stroke("#FEAD34");
-        strokeWeight(4);
+        stroke(color8);
+        strokeWeight(5);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
         rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,122,35,9);
         noStroke();
@@ -813,8 +823,8 @@ function appDescription(index) {
 
     if (indice == 9) {
 
-        stroke("#DC4141");
-        strokeWeight(4);
+        stroke(color9);
+        strokeWeight(5);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
         rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,133,35,9);
         noStroke();
@@ -894,6 +904,32 @@ function mousePressed(){
             screen=10;
             */
         }
+
+        if(mouseX>width/2-150 && mouseX<width/2+150){
+            if(mouseY>700*height/1000-60 && mouseY<700*height/1000+60){
+                if(numApp==5){
+                    //console.log("entra boton");
+                    demoSection.style.display = "block";
+                    defaultCanvas.style.display = "none";
+                    screen=50;
+                }
+                if(numApp==7){
+                    homeEureka.style.display = "none";
+                    particleCanvasSec.style.display = "block";
+                    screen=20;
+                }
+                if(numApp==8){
+                    homeEureka.style.display = "none";
+                    balconitySection.style.display = "block";
+                    defaultCanvas.style.display = "none";
+                    screen=30;
+                }
+                if(numApp==9){
+                    homeEureka.style.display = "none";
+                    screen=10;
+                }
+            }
+        } 
     }
     
     if(screen==10 && entered==0){
@@ -1027,13 +1063,11 @@ function mouseDragged() {
     }
     if(screen==10){
         for(let i=0;i<pixelList.length;i++){
-            
             pixelList[i].resetPixel();
             pixelList[i].pixelPinched();
             pixelList[i].pixelIsPressed();
         }
     }
-    
   }
 
 function mouseReleased() {
@@ -1123,4 +1157,10 @@ document.getElementById("leftArrowIcon").addEventListener("click", function() {
     } else {
         numApp = 9;
     }
+});
+
+document.getElementById("goBackDemoSec").addEventListener("click", function() {
+    demoSection.style.display = "none";
+    defaultCanvas.style.display = "block";
+    screen=0;
 });
