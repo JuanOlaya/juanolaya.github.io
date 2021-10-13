@@ -440,7 +440,8 @@ function menu2(){
     //text("Wall", width / 2 - 40, (85 * height) / 100 - 100);
     
     stroke(255,230,0);
-    strokeWeight(7);
+    //stroke(255);
+    strokeWeight(3);
     strokeCap(SQUARE);
     line(15, 51,202,51);
     line(15, 109,138,109);
