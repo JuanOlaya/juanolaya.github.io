@@ -23,7 +23,7 @@ let showTextFortune = true;
 let initialTimeTaken = false;
 var numApp = 5;
 var tiempoInicioHome = 0;
-var tiempoEsperaHome = 6000; // 3 segundos
+var tiempoEsperaHome = 10000; // 10 seconds
 var indice = 0;
 let img1;
 let img2;
@@ -443,16 +443,16 @@ function menu2(){
     //stroke(255);
     strokeWeight(3);
     strokeCap(SQUARE);
-    line(15, 51,202,51);
-    line(15, 109,138,109);
+    line(15, 61,202,61);
+    line(15, 119,138,119);
     noStroke();
     
     fill(255);
     textSize(70);
     textStyle(BOLD);
     textSize(55);
-    text("Eureka", 15, 55);
-    text("Wall", 15, 113);
+    text("Eureka", 15, 65);
+    text("Wall", 15, 123);
 
     fill(0);
 
