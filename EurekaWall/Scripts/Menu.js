@@ -384,8 +384,8 @@ function menu(){
  
 
 function menu2(){
-    background(0);    // 515290 3B3C68 #314991   #39549B   #292929  333333                   3D3D3D
-    
+    background("#292929");    // 333333                   3D3D3D
+
     if(indexSelected==5){
         rectMode(CENTER);
         fill(color5);
@@ -439,14 +439,13 @@ function menu2(){
     //text("Eureka", width / 2 - 80, (85 * height) / 100 - 170);
     //text("Wall", width / 2 - 40, (85 * height) / 100 - 100);
     
-    /*
     stroke(255,230,0);
+    //stroke(255);
     strokeWeight(3);
     strokeCap(SQUARE);
     line(15, 61,202,61);
     line(15, 119,138,119);
     noStroke();
-    */
     
     fill(255);
     textSize(70);
@@ -555,15 +554,9 @@ function fortuneWheelShow() {
   
     pop();
     noStroke();
-    fill(0);  // 3B3C68 314991 #333333 333333  292929
+    fill("#333333");  // 333333  292929
     //fill("#296d55");
     rect(0, (85 * height) / 100 - 4, width, height);
-
-    strokeWeight(20);
-    stroke(200,0,0);
-    noFill();
-    rect(0,0,width,height);
-    noStroke();
   }
   
   
