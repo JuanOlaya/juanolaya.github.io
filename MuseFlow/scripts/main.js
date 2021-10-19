@@ -3304,7 +3304,7 @@ function keyPressed() {
     playerMovement=true;
     countLeftArrow++;
   }
-  /*
+  
   if( screen == "undemandingTraining" || screen == "demandingTraining" ){
     if(keyCode === 69){  // e
       //player.location.x=trainingPlatforms[amountTrainingPlatforms-2].rx;
@@ -3319,14 +3319,14 @@ function keyPressed() {
       player.location.y=height/8;
     }
   }
-  */
   
-  /*
+  
+  
   // [32,53,78,116,140];
   if(condition=="undemanding"){
     if(keyCode === 49 ){ // #1
-      if(platforms.length>31){
-        player.location.x=platforms[31].rx;
+      if(platforms.length>36){
+        player.location.x=platforms[36].rx;
         player.location.y=height/8;
       }
     }
@@ -3357,7 +3357,7 @@ function keyPressed() {
   }
   
   //[3,56,207,290,325]
-  
+  /*
   if(condition=="demanding"){
     if(keyCode === 49 ){   // 1
       if(platforms.length>42){

@@ -354,7 +354,8 @@ setInterval(() => {
     dateAmsterdamEl.innerHTML = amsterdam[0].value +", "+amsterdam[2].value+" "+amsterdam[4].value;
     timeAmsterdamEl.innerHTML = amsterdam[6].value + ":" + amsterdam[8].value;
 
-},1000);
+    console.log("Aqui es");
+},10000);
 
 
 getWeatherData(); 
