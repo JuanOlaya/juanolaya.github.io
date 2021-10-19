@@ -10,6 +10,7 @@ class GoalFlag{
         this.colH=120; //150
         //this.colour="#F15152";
         this.colour="#F04242";
+        console.log("Creada Flag"+this.posX);
     }
 
     show(y){

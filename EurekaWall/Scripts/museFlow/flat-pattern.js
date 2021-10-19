@@ -3,6 +3,7 @@ class FlatPattern{
         this.posX=posX+rw/2;
         this.posY=0;
 		this.radius=60;
+		
 	}
 	show(y){
        

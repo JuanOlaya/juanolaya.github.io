@@ -14,6 +14,7 @@ function museFlowMain() {
     
     //console.log("timeThoughtProbeSelected: "+timeThoughtProbeSelected1);
     //console.log("speedX: "+player.speedX);
+    console.log("playerPosX: "+player.location.x);
     //console.log(indexthoughtProbe);
     //console.log("thoughtProbeNumber: "+thoughtProbeNumber);
     //console.log("counter: "+countError);
