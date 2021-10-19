@@ -465,6 +465,203 @@ function mousePressed(){
             statusWebcam=1;
         }
     }
+
+    if(screen==40){
+        if(interruption){     
+            if (thoughtProbePage == 1) {
+              // Button 1
+              if(mouseX > width/2 -215 && mouseX < width/2 -165){
+                if(mouseY > height/2 -25 && mouseY < height/2 + 25){
+                  //thoughtProbes[indexthoughtProbe]=1;
+                  thoughtProbes[thoughtProbeNumber]=1;
+                  
+                  //indexthoughtProbe++;
+                  console.log("probe option: 1");
+                  
+                  // cambiado para stairs version
+                  //interruption=false;
+        
+        
+                  flagProbesIndex=false;
+        
+                  thoughtProbeSelected1=true;
+                  timeThoughtProbeSelected=millis();
+                }
+              }
+        
+              // Button 2
+              if(mouseX > width/2 -139 && mouseX < width/2 -89){
+                if(mouseY > height/2 -25 && mouseY < height/2 + 25){
+                  //thoughtProbes[indexthoughtProbe]=2;
+                  thoughtProbes[thoughtProbeNumber]=2;
+                  //indexthoughtProbe++;
+                  
+                  console.log("probe option: 2");
+                  //interruption=false;
+                  flagProbesIndex=false;
+        
+                  thoughtProbeSelected2=true;
+                  timeThoughtProbeSelected=millis();
+                }
+              }
+        
+              // Button 3
+              if(mouseX > width/2 -63 && mouseX < width/2 -13){
+                if(mouseY > height/2 -25 && mouseY < height/2 + 25){
+                  //thoughtProbes[indexthoughtProbe]=3;
+                  thoughtProbes[thoughtProbeNumber]=3;
+                  //indexthoughtProbe++;
+                  
+                  console.log("probe option: 3");
+                  //interruption=false;
+                  flagProbesIndex=false;
+        
+                  thoughtProbeSelected3=true;
+                  timeThoughtProbeSelected=millis();
+                }
+              }
+        
+              // Button 4
+              if(mouseX > width/2 +13 && mouseX < width/2 +63){
+                if(mouseY > height/2 -25 && mouseY < height/2 + 25){
+                  //thoughtProbes[indexthoughtProbe]=4;
+                  thoughtProbes[thoughtProbeNumber]=4;
+                  //indexthoughtProbe++;
+                  
+                  console.log("probe option: 4");
+                  //interruption=false;
+                  flagProbesIndex=false;
+                
+                  thoughtProbeSelected4=true;
+                  timeThoughtProbeSelected=millis();
+                }
+              }
+        
+              // Button 5
+              if(mouseX > width/2 +89 && mouseX < width/2 +139){
+                if(mouseY > height/2 -25 && mouseY < height/2 + 25){
+                  //thoughtProbes[indexthoughtProbe]=5;
+                  thoughtProbes[thoughtProbeNumber]=5;
+                  //indexthoughtProbe++;
+                  
+                  console.log("probe option: 5");
+                  //interruption=false;
+                  flagProbesIndex=false;
+        
+                  thoughtProbeSelected5=true;
+                  timeThoughtProbeSelected=millis();
+                }
+              }
+        
+              // Button 6
+              if(mouseX > width/2 +165 && mouseX < width/2 +215){
+                if(mouseY > height/2 -25 && mouseY < height/2 + 25){
+                  //thoughtProbes[indexthoughtProbe]=6;
+                  thoughtProbes[thoughtProbeNumber]=6;
+                  
+                  //indexthoughtProbe++;
+                  console.log("probe option: 6");
+                  //interruption=false;
+                  flagProbesIndex=false;
+        
+                  thoughtProbeSelected6=true;
+                  timeThoughtProbeSelected=millis();
+                }
+              }
+            }
+        
+            if (thoughtProbePage == 2) {
+            
+              if( mouseX>width / 2 - widthRect && mouseX < width / 2){
+                if(mouseY>height / 100 * 93.7 && mouseY< height / 100 * 93.7 +38 ){
+                   thoughtProbePage = 3;
+                }
+              }
+              
+              if (mouseY > height / 100 * 14 && mouseY < height / 100 * 25) {
+                if (mouseX > width / 2 - sizeLine && mouseX < width / 2 + sizeLine) {
+                  question1X = constrain(mouseX, width / 2 - sizeLine, width / 2 + sizeLine);
+                }
+              }
+              scoreQ1=map(question1X-width/2,-200,200,0,100);
+              console.log("scoreQ1: "+scoreQ1);
+              if (mouseY > height / 100 * 31 && mouseY < height / 100 * 42) {
+                if (mouseX >= width / 2 - sizeLine && mouseX <= width / 2 + sizeLine) {
+                  //question1X=mouseX;
+                  question2X = constrain(mouseX, width / 2 - sizeLine, width / 2 + sizeLine);
+                }
+              }
+              scoreQ2=map(question2X-width/2,-200,200,0,100);
+              console.log("scoreQ2: "+scoreQ2);
+              if (mouseY > height / 100 * 48 && mouseY < height / 100 * 59) {
+                if (mouseX >= width / 2 - sizeLine && mouseX <= width / 2 + sizeLine) {
+                  question3X = constrain(mouseX, width / 2 - sizeLine, width / 2 + sizeLine);
+                }
+              }
+              scoreQ3=map(question3X-width/2,-200,200,0,100);
+              console.log("scoreQ3: "+scoreQ3);
+              if (mouseY > height / 100 * 64 && mouseY < height / 100 * 75) {
+                if (mouseX >= width / 2 - sizeLine && mouseX <= width / 2 + sizeLine) {
+                  question4X = constrain(mouseX, width / 2 - sizeLine, width / 2 + sizeLine);
+                }
+              }
+              scoreQ4=map(question4X-width/2,-200,200,0,100);
+              console.log("scoreQ4: "+scoreQ4);
+              if (mouseY > height / 100 * 81 && mouseY < height / 100 * 90) {
+                if (mouseX >= width / 2 - sizeLine && mouseX <= width / 2 + sizeLine) {
+                  question5X = constrain(mouseX, width / 2 - sizeLine, width / 2 + sizeLine);
+                }
+              }
+              scoreQ5=map(question5X-width/2,-200,200,0,100);
+              console.log("scoreQ5: "+scoreQ5);
+            }
+            ///// thoughtProbePage == 3 /////////////
+            if (thoughtProbePage == 3) {
+              if( mouseX>width / 2 +2 && mouseX < width / 2  + widthRect){
+                if(mouseY>height / 100 * 93.7 && mouseY< height / 100 * 93.7 +38 ){
+                  interruption=false;
+                  timeThoughtProbeSelected=0;
+                }
+              }
+              if (mouseY > height / 100 * 14 && mouseY < height / 100 * 25) {
+                if (mouseX >= width / 2 - sizeLine && mouseX <= width / 2 + sizeLine) {
+                  question6X = constrain(mouseX, width / 2 - sizeLine, width / 2 + sizeLine);
+                }
+              }
+              scoreQ6=map(question6X-width/2,-200,200,0,100);
+              console.log("scoreQ6: "+scoreQ6);
+              if (mouseY > height / 100 * 31 && mouseY < height / 100 * 42) {
+                if (mouseX >= width / 2 - sizeLine && mouseX <= width / 2 + sizeLine) {
+                  //question1X=mouseX;
+                  question7X = constrain(mouseX, width / 2 - sizeLine, width / 2 + sizeLine);
+                }
+              }
+              scoreQ7=map(question7X-width/2,-200,200,0,100);
+              console.log("scoreQ7: "+scoreQ7);
+              if (mouseY > height / 100 * 48 && mouseY < height / 100 * 59) {
+                if (mouseX >= width / 2 - sizeLine && mouseX <= width / 2 + sizeLine) {
+                  question8X = constrain(mouseX, width / 2 - sizeLine, width / 2 + sizeLine);
+                }
+              }
+              scoreQ8=map(question8X-width/2,-200,200,0,100);
+              console.log("scoreQ8: "+scoreQ8);
+              if (mouseY > height / 100 * 64 && mouseY < height / 100 * 75) {
+                if (mouseX >= width / 2 - sizeLine && mouseX <= width / 2 + sizeLine) {
+                  question9X = constrain(mouseX, width / 2 - sizeLine, width / 2 + sizeLine);
+                }
+              }
+              scoreQ9=map(question9X-width/2,-200,200,0,100);
+              console.log("scoreQ9: "+scoreQ9);
+              if (mouseY > height / 100 * 81 && mouseY < height / 100 * 90) {
+                if (mouseX >= width / 2 - sizeLine && mouseX <= width / 2 + sizeLine) {
+                  question10X = constrain(mouseX, width / 2 - sizeLine, width / 2 + sizeLine);
+                }
+              }
+              scoreQ10=map(question10X-width/2,-200,200,0,100);
+              console.log("scoreQ10: "+scoreQ10);
+            }
+          }
+    }
 }
 
 function mouseDragged() {

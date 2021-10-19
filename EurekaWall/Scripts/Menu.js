@@ -914,6 +914,10 @@ function mousePressed(){
                     defaultCanvas.style.display = "none";
                     screen=50;
                 }
+                if(numApp==6){  // MuseFlow
+                    
+                    screen=40;
+                }
                 if(numApp==7){
                     homeEureka.style.display = "none";
                     particleCanvasSec.style.display = "block";

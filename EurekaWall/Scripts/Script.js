@@ -121,6 +121,7 @@ function preload() {
 	//photo1 = loadImage('Assets/Images/woman1.png');
 	//photo1 = loadImage("file:///C:/Users/juanf/OneDrive/Documentos/PhD/Interactive%20Wall/Assets/Images/woman1.png");
 	//photo1= createImg('file:///C:/Users/juanf/OneDrive/Documentos/PhD/Interactive%20Wall/Assets/Images/woman1.png' /*, undefined, 'anonymous'*/);
+	preloadMuseFlow();
 }
 
 function make2DArray(cols,rows){
@@ -129,6 +130,45 @@ function make2DArray(cols,rows){
 		arr[i]= new Array(rows);
 	}
 	return arr;
+}
+
+function preloadMuseFlow(){
+
+	undemandingInstructions= loadImage('https://juanolaya.github.io/assets/undemandingInstructions.png');
+	demandingInstructions= loadImage('https://juanolaya.github.io/assets/demandingInstructions.png');
+	
+	if(document.getElementById('caseNum').value!="%caseNumber%"){ 
+	  caseNumber=document.getElementById('caseNum').value;
+	  //SoSciTools.submitButtonsHide();
+	}else{
+	  caseNumber=0;  // %2!=0 -> undemanding   //   %2==0 -> demanding
+	}
+  
+	if(document.getElementById('urnRand').value!="%urn%"){ 
+	  urnRandom=document.getElementById('urnRand').value;
+	  console.log("Took urnRandom: "+urnRandom);
+	}else{
+	  urnRandom=0;  // %2!=0 -> undemanding   //   %2==0 -> demanding
+	}
+  
+	if(document.querySelector(".questionary")){
+	  document.querySelector(".questionary").style.display='none';
+	}
+  
+	let urlUndemanding = 'https://gist.githubusercontent.com/JuanOlaya/8a640395d09db4b2ef8220fd510c5c19/raw/19fe558aa2a4e8960832b0aadc581aeded2d539e/platforms-undemanding-gaming.json';
+	allPlatforms = loadJSON(urlUndemanding);
+	
+	let urlDemanding = 'https://gist.githubusercontent.com/JuanOlaya/34efce4dcf723ccb77d14f1f5c996a5c/raw/611d67750c9fd2e6b932886081e9692413c8ef89/DemandingPlatforms.json';
+	allPlatformsDemanding = loadJSON(urlDemanding);
+  
+	let urlUndemandingTraining = 'https://gist.githubusercontent.com/JuanOlaya/49fc53a64026d8c2af4ccccf3eb839ce/raw/0f80791e9f83bb13b32fac046f7eddd0b1146c60/platforms-undemanding-training.json';
+	undemandingTrainingJSON = loadJSON(urlUndemandingTraining);
+	
+	let urlDemandingTraining = 'https://gist.githubusercontent.com/JuanOlaya/93abe3a2db9969062467407499b1f1b9/raw/e2b32722048733d48a0f07aba9ebaf807ee1fba9/platforms-demanding-training.json';
+	demandingTrainingJSON = loadJSON(urlDemandingTraining);
+  
+	let urlBaseline = 'https://gist.githubusercontent.com/JuanOlaya/44dc3efb6a79032174cfb71ff75d30af/raw/cf6c40a857e12c3f336854d91b9b915ea187a963/baseline.json';
+	baselineJSON = loadJSON(urlBaseline);
 }
 
 function setup() {
@@ -302,8 +342,293 @@ function setup() {
 		)
 		);
 	}
+	setupMuseFlow();
+}
 
-	
+function setupMuseFlow(){
+
+//createCanvas(windowWidth, windowHeight);
+  //createCanvas(1024, 768);
+  //createCanvas(1200, 550);
+  console.log(" baseline length: "+baselineJSON.platforms.length  );
+  //createCanvas(windowWidth, 768);
+  //canvasMuseFlow = createCanvas(windowWidth, windowHeight);
+  //canvas.style();
+  //frameRate(30);
+
+
+  translateDistance = width / 4;
+  player = new Player();
+  highLightColor= color(200,0,0);
+  
+  /*
+  if(amountPlatforms>=allPlatforms.platforms.length){
+    amountPlatforms=allPlatforms.platforms.length;
+  }
+  */
+  if( /*caseNumber%2!=0*/ urnRandom==0 ){
+    condition="undemanding";
+    amountPlatforms=156;
+    amountTrainingPlatforms = 32;
+  }
+
+  if( /*caseNumber%2==0*/ urnRandom==1 ){
+    condition="demanding"
+    amountPlatforms=203;  //292   336
+    amountTrainingPlatforms = 42;
+  }
+  goalFlagNum=(amountPlatforms-1)-amountCutEndPlats;
+  goalFlagTraining=(amountTrainingPlatforms-1)-amountCutEndPlats;
+
+  //************************************************* */
+  //      0. BASELINE (setup)
+  //************************************************* */
+  let countDistanceX = 0;
+  for (let i = 0; i < baselineJSON.platforms.length; i++) {
+    gap=15;
+    let platformTemp = new Platform(countDistanceX, i,baselineJSON.platforms[i].speed, baselineJSON.platforms[i].width,"baseline");
+    baselinePlatforms.push(platformTemp);
+    countDistanceX = countDistanceX + platformTemp.rw + gap; // 130 = gap between platforms
+  }
+  //widthGame = countDistanceX - gap;
+
+
+  // ** UNDEMANDING CONDITION ** //
+  if( condition=="undemanding" ){
+    //condition="undemanding";
+    //amountPlatforms=156;
+
+    //************************************************* */
+    //      1. UNDEMANDING GAMING (setup)
+    //************************************************* */
+    speedMin=0.7; // 0.7
+    speedMax=1.1; // 1.1
+    
+    let countDistanceX = 0;
+    
+    for (let i = 0; i < amountPlatforms; i++) {
+      gap=15;
+      for(let j=0;j<horizontalPlatformsLocation.length;j++){
+        if(horizontalPlatformsLocation[j]==i){
+          gap=800;
+        }
+      }
+      let platformTemp = new Platform(countDistanceX, i,allPlatforms.platforms[i].speed, allPlatforms.platforms[i].width, "gaming");
+      platforms.push(platformTemp);
+      countDistanceX = countDistanceX + platformTemp.rw + gap; // 130 = gap between platforms
+    }
+    widthGame = countDistanceX - gap;
+    
+    for(let j=0;j<horizontalPlatformsLocation.length;j++){
+      if( horizontalPlatformsLocation[j] <amountPlatforms){  // horizontal platform
+        platforms[ horizontalPlatformsLocation[j] ].horizontalPlatform=true;
+      }
+    }
+
+    for(let i=0;i<flatPattern1.length; i++){
+      
+      if( flatPattern1[i] <amountPlatforms){
+        //if(i==81){
+          console.log("ENTRA "+flatPattern1[i]+" amountPlatforms "+amountPlatforms);
+        //}
+        platforms[flatPattern1[i]].rh=height/2;
+      }
+    }
+  
+    for(let i=0;i<stairsPattern1.length; i++){
+      if( stairsPattern1[i] <amountPlatforms){
+        platforms[stairsPattern1[i]].rh=-(13) + (60*height/100);
+      }
+    }
+    platforms[47].waitingHorizontalPlatform=true;
+
+    //************************************************* */
+    //     2. UNDEMANDING TRAINING (setup)
+    //************************************************* */
+
+    let countDistanceXTraining = 0;
+    
+    for (let i = 0; i < amountTrainingPlatforms; i++) {
+      gap=15;
+      /*
+      for(let j=0;j<horizontalPlatformsLocation.length;j++){
+        if(horizontalPlatformsLocation[j]==i){
+          gap=800;
+        }
+      }
+      */
+      let platformTemp = new Platform(countDistanceXTraining, i,undemandingTrainingJSON.platforms[i].speed, undemandingTrainingJSON.platforms[i].width,"training");
+      trainingPlatforms.push(platformTemp);
+      countDistanceXTraining = countDistanceXTraining + platformTemp.rw + gap; // 130 = gap between platforms
+    }
+    //widthGame = countDistanceXTraining - gap;
+    /*
+    for(let j=0;j<horizontalPlatformsLocation.length;j++){
+      if( horizontalPlatformsLocation[j] <amountTrainingPlatforms){  // horizontal platform
+        platforms[ horizontalPlatformsLocation[j] ].horizontalPlatform=true;
+      }
+    }
+    */
+    /*
+    for(let i=0;i<flatLocationDemanding.length; i++){
+      
+      if( flatLocationDemanding[i] <amountTrainingPlatforms){
+        //if(i==81){
+          console.log("ENTRA "+flatLocationUndemanding[i]+" amountTrainingPlatforms "+amountTrainingPlatforms);
+        //}
+        trainingPlatforms[flatLocationUndemanding[i]].rh=height/2;
+      }
+    }
+    */
+    //
+    //************************************************* */
+    /*
+    for(let i=0;i<stairsPattern1.length; i++){
+      if( stairsPattern1[i] <amountPlatforms){
+        platforms[stairsPattern1[i]].rh=-(13) + (60*height/100);
+      }
+    }
+    platforms[47].waitingHorizontalPlatform=true;
+    */
+  }
+
+   //** DEMANDING CONDITION ** //
+  if( condition == "demanding"){
+    //condition="demanding";
+    //amountPlatforms=336;
+
+    //************************************************* */
+    //      3. DEMANDING GAMING (setup)
+    //************************************************* */
+    
+    speedMin=7;
+    speedMax=9;
+
+    let countDistanceX = 0;
+    for (let i = 0; i < allPlatformsDemanding.platforms.length /*amountPlatforms*/; i++) {
+      gap=138;
+      for(let j=0;j<horizontalPlatformsLocationDemanding.length;j++){
+        if(horizontalPlatformsLocationDemanding[j]==i){
+          gap = 500;
+        }
+      }
+      let platformTemp = new Platform(countDistanceX, i,allPlatformsDemanding.platforms[i].speed, allPlatformsDemanding.platforms[i].width, "gaming");
+      platforms.push(platformTemp);
+      countDistanceX = countDistanceX + platformTemp.rw + gap; // 130 = gap between platforms
+    }
+    widthGame = countDistanceX - gap;
+
+    for(let i=0;i<flatPatternDemanding.length; i++){
+      if(flatPatternDemanding[i]<allPlatformsDemanding.platforms.length){
+        platforms[flatPatternDemanding[i]].rh=45*height/100;
+      }
+    }
+    
+    for(let i=0;i< stairsPatternDemanding.length; i++){
+      if(stairsPatternDemanding[i]<allPlatformsDemanding.platforms.length){
+        platforms[stairsPatternDemanding[i]].rh=15*height/100 + (25);
+      }
+    }
+
+    for(let j=0;j<horizontalPlatformsLocationDemanding.length;j++){
+      if( horizontalPlatformsLocationDemanding[j] <allPlatformsDemanding.platforms.length){  // horizontal platform
+          platforms[horizontalPlatformsLocationDemanding[j]].horizontalPlatform=true;
+      }
+    }
+
+    //************************************************* */
+    //     4. DEMANDING TRAINING (setup)
+    //************************************************* */
+
+    let countDistanceXTraining = 0;
+    
+    for (let i = 0; i < amountTrainingPlatforms; i++) {
+      gap=138;
+      /*
+      for(let j=0;j<horizontalPlatformsLocation.length;j++){
+        if(horizontalPlatformsLocation[j]==i){
+          gap=800;
+        }
+      }
+      */
+      let platformTemp = new Platform(countDistanceXTraining, i,demandingTrainingJSON.platforms[i].speed, demandingTrainingJSON.platforms[i].width, "training");
+      trainingPlatforms.push(platformTemp);
+      countDistanceXTraining = countDistanceXTraining + platformTemp.rw + gap; // 130 = gap between platforms
+    }
+    //widthGame = countDistanceXTraining - gap;
+    
+    /*
+    for(let j=0;j<horizontalPlatformsLocation.length;j++){
+      if( horizontalPlatformsLocation[j] <amountTrainingPlatforms){  // horizontal platform
+        platforms[ horizontalPlatformsLocation[j] ].horizontalPlatform=true;
+      }
+    }
+    */
+    /*
+    for(let i=0;i<flatLocationDemanding.length; i++){
+      
+      if( flatLocationDemanding[i] <amountTrainingPlatforms){
+        //if(i==81){
+          console.log("ENTRA "+flatLocationDemanding[i]+" amountTrainingPlatforms "+amountTrainingPlatforms);
+        //}
+        trainingPlatforms[flatLocationDemanding[i]].rh=height/2;
+      }
+    }
+    */
+    //
+    //************************************************* */
+  
+    /*
+    for(let i=0;i<stairsPattern1.length; i++){
+      if( stairsPattern1[i] <amountPlatforms){
+        platforms[stairsPattern1[i]].rh=-(13) + (60*height/100);
+      }
+    }
+    platforms[47].waitingHorizontalPlatform=true;
+    */
+
+  }
+
+  for(let i=0;i<platforms.length;i++){
+    if(i+1<platforms.length){  // Next platform
+      platforms[i].nextPlatform=platforms[i+1].rx;
+    }
+    if(i-1>=0){               // Previous platform
+      platforms[i].previousPlatform = platforms[i-1].rx+platforms[i-1].rw;
+    } 
+  }
+
+  tiempoInicio = 0;
+  tiempoEspera = 20000;         //  milliseconds
+  demandingWaitTime = 25000;   //  milliseconds
+
+  question1X = width / 2;
+  question2X = width / 2;
+  question3X = width / 2;
+  question4X = width / 2;
+  question5X = width / 2;
+  question6X = width / 2;
+  question7X = width / 2;
+  question8X = width / 2;
+  question9X = width / 2;
+  question10X = width / 2;
+
+
+
+  console.log("caseNumber:  "+ caseNumber);
+  console.log("Condition:  "+ condition);
+  console.log("amountPlatforms:  "+ platforms.length);
+  console.log("amount Platforms JSON (undemanding):  "+allPlatforms.platforms.length);
+  console.log("amount Platforms JSON (demanding):  "+allPlatformsDemanding.platforms.length);
+  console.log("goal flag location :  "+goalFlagNum);
+  //console.log("CaseNumber: "+ caseNumber);
+  //console.log("81 plat"+platforms[81].ry);
+  endDate = new Date().toISOString().slice(0, 10);
+  var date = new Date();
+  endHour = date.getHours()+":"+date.getMinutes();
+  //console.log(endDate);
+  //console.log(endHour);
+
 }
 
 function draw() {

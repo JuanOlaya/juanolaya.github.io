@@ -107,6 +107,11 @@ function inspirationWall(){
 		textSize(20);
 		fill(255);
 		//text("Touches Length: "+touches.length+"    Status: "+pixelList[0].hasChangedStatus,150,20);
+
+		if(screen==40){
+			//museFlowMain();
+			console.log("Entra museFlowMain");
+		}
 }
 
 

@@ -1,4 +1,4 @@
-
+let offsetX=107;
 function paintingPixels(){
     
     background(backgroundColor);
@@ -93,7 +93,7 @@ function paintingPixels(){
 
         
         fill(50);
-        rect(441*width/1000,bordeAbajo-35,750,100,10);
+        rect(-offsetX+441*width/1000,bordeAbajo-35,750,100,10);
 
         if( dist(mouseX,mouseY,width/25+(sizePixel*13+12*13),bordeAbajo)<sizePixel/2){
             shapeSelected=1;
@@ -150,6 +150,7 @@ function paintingPixels(){
         //stroke(222, 90, 4);
         noStroke();
         fill(colores[colorSelected]);
+        strokeCap(SQUARE);
         arc(width/25+(sizePixel*16+12*16)+(sizePixel/2),bordeAbajo-(sizePixel/2),sizePixel*2,sizePixel*2,PI/2,PI);
         //
         /*
@@ -173,6 +174,7 @@ function paintingPixels(){
         //stroke(222, 90, 4);
         fill(colores[colorSelected]);
         noStroke();
+        strokeCap(SQUARE);
         arc( width/25+(sizePixel*17+12*17)-(sizePixel/2),bordeAbajo+(sizePixel/2) ,sizePixel*2,sizePixel*2,3*PI/2,2*PI);
         
         if( dist(mouseX,mouseY,width/25+(sizePixel*17+12*17),bordeAbajo)<sizePixel/2){
@@ -218,6 +220,7 @@ function paintingPixels(){
         //stroke(222, 90, 4);
         fill(colores[colorSelected]);
         noStroke();
+        strokeCap(SQUARE);
         arc( width/25+(sizePixel*18+12*18)+(sizePixel/2),bordeAbajo+(sizePixel/2) ,sizePixel*2,sizePixel*2,PI,3*PI/2);
         
         if( dist(mouseX,mouseY,width/25+(sizePixel*18+12*18),bordeAbajo)<sizePixel/2){
