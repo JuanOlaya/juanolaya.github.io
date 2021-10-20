@@ -921,9 +921,11 @@ function mousePressed(){
                     screen=50;
                 }
                 if(numApp==6){  // MuseFlow
+                    /*
                     museFlowSec.style.display = "block";
                     defaultCanvas.style.zIndex = "-1";
                     screen=40;
+                    */
                 }
                 if(numApp==7){
                     homeEureka.style.display = "none";
