@@ -867,19 +867,19 @@ function mousePressed(){
         
         entered=1;
 
-        if(dist(width/2-473,height/2+190,mouseX,mouseY)<=150/2){  // Demo
+        if(dist(width/2-473,height/2+190,mouseX,mouseY)<=240/2){  // Demo
             tiempoInicioHome = millis();
             numApp=5;
             console.log(numApp);
         }
 
-        if(dist(width/2-295,height/2-60,mouseX,mouseY)<=150/2){  //  MuseFlow
+        if(dist(width/2-295,height/2-60,mouseX,mouseY)<=240/2){  //  MuseFlow
             tiempoInicioHome = millis();
             numApp=6;
             console.log(numApp);
         }
        
-        if(dist(width/2,height/2-158,mouseX,mouseY)<=150/2){  // ParticleCanvas
+        if(dist(width/2,height/2-158,mouseX,mouseY)<=240/2){  // ParticleCanvas
             tiempoInicioHome = millis();
             numApp=7;
             console.log(numApp);
@@ -889,7 +889,7 @@ function mousePressed(){
             screen=20;
             */
         }
-        if(dist(width/2+295,height/2-60,mouseX,mouseY)<=150/2){   //Balconity
+        if(dist(width/2+295,height/2-60,mouseX,mouseY)<=240/2){   //Balconity
             tiempoInicioHome = millis();
             numApp=8;
             console.log(numApp);
@@ -901,7 +901,7 @@ function mousePressed(){
             */
         }
 
-        if(dist(width/2+473,height/2+190,mouseX,mouseY)<=150/2){  // PixelGrid
+        if(dist(width/2+473,height/2+190,mouseX,mouseY)<=230/2){  // PixelGrid
             tiempoInicioHome = millis();
             numApp=9;
             console.log(numApp);

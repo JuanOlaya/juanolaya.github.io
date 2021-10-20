@@ -109,7 +109,7 @@ function inspirationWall(){
 		//text("Touches Length: "+touches.length+"    Status: "+pixelList[0].hasChangedStatus,150,20);
 
 		if(screen==40){
-			museFlowMain();
+			//museFlowMain();
 			console.log("Entra museFlowMain");
 		}
 }
