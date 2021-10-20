@@ -774,7 +774,7 @@ function appDescription(index) {
 
         fill(255);
         textSize(23);
-        text("ParticleCanvas", width / 2 - 500, (85 * height) / 100 + 40);
+        text("SwarmCanvas", width / 2 - 500, (85 * height) / 100 + 40);
         textStyle(NORMAL);
         textSize(23);
         text(
@@ -832,7 +832,7 @@ function appDescription(index) {
 
         fill(255);
         textSize(23);
-        text("ShapeGrid", width / 2 - 500, (85 * height) / 100 + 40);
+        text("ShapyGrid", width / 2 - 500, (85 * height) / 100 + 40);
         textStyle(NORMAL);
         textSize(23);
         text(
@@ -870,16 +870,19 @@ function mousePressed(){
         if(dist(width/2-473,height/2+190,mouseX,mouseY)<=150/2){  // Demo
             tiempoInicioHome = millis();
             numApp=5;
+            console.log(numApp);
         }
 
         if(dist(width/2-295,height/2-60,mouseX,mouseY)<=150/2){  //  MuseFlow
             tiempoInicioHome = millis();
             numApp=6;
+            console.log(numApp);
         }
        
         if(dist(width/2,height/2-158,mouseX,mouseY)<=150/2){  // ParticleCanvas
             tiempoInicioHome = millis();
             numApp=7;
+            console.log(numApp);
             /*
             homeEureka.style.display = "none";
             particleCanvasSec.style.display = "block";
@@ -889,6 +892,7 @@ function mousePressed(){
         if(dist(width/2+295,height/2-60,mouseX,mouseY)<=150/2){   //Balconity
             tiempoInicioHome = millis();
             numApp=8;
+            console.log(numApp);
             /*
             homeEureka.style.display = "none";
             balconitySection.style.display = "block";
@@ -900,6 +904,7 @@ function mousePressed(){
         if(dist(width/2+473,height/2+190,mouseX,mouseY)<=150/2){  // PixelGrid
             tiempoInicioHome = millis();
             numApp=9;
+            console.log(numApp);
             /*
             homeEureka.style.display = "none";
             screen=10;
@@ -912,15 +917,18 @@ function mousePressed(){
                     //console.log("entra boton");
                     demoSection.style.display = "block";
                     defaultCanvas.style.display = "none";
+                    defaultCanvas.style.zIndex = "-1";
                     screen=50;
                 }
                 if(numApp==6){  // MuseFlow
-                    
+                    museFlowSec.style.display = "block";
+                    defaultCanvas.style.zIndex = "-1";
                     screen=40;
                 }
                 if(numApp==7){
                     homeEureka.style.display = "none";
                     particleCanvasSec.style.display = "block";
+                    defaultCanvas.style.zIndex = "-1";
                     screen=20;
                 }
                 if(numApp==8){
@@ -931,6 +939,7 @@ function mousePressed(){
                 }
                 if(numApp==9){
                     homeEureka.style.display = "none";
+                    defaultCanvas.style.zIndex = "-1";
                     screen=10;
                 }
             }
@@ -1167,5 +1176,13 @@ document.getElementById("leftArrowIcon").addEventListener("click", function() {
 document.getElementById("goBackDemoSec").addEventListener("click", function() {
     demoSection.style.display = "none";
     defaultCanvas.style.display = "block";
+    defaultCanvas.style.zIndex = "0";
+    screen=0;
+});
+
+document.getElementById("goBackMuseFlowSec").addEventListener("click", function() {
+    //demoSection.style.display = "none";
+    //defaultCanvas.style.display = "block";
+    defaultCanvas.style.zIndex = "0";
     screen=0;
 });

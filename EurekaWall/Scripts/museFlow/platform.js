@@ -313,10 +313,12 @@ class Platform {
 
 		if(this.index==goalFlagNum && ( screen=="undemanding" || screen=="demanding") ){
 			this.goalFlag.show(this.ry);
+			
 		}
 
 		if( this.index==goalFlagTraining && (screen=="undemandingTraining" || screen=="demandingTraining") ){
 			this.goalFlag.show(this.ry);
+			console.log("entraaa flaggg");
 		}
 	}
 
