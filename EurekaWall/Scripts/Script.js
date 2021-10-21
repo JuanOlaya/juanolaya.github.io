@@ -111,7 +111,6 @@ function windowResized(){
 
 function preload() {
 	
-	
 	img1 = loadImage("assets/demo.svg");
 	img2 = loadImage("assets/museFlow4.svg");
 	img3 = loadImage("assets/particleCanvas.svg");
@@ -121,7 +120,46 @@ function preload() {
 	//photo1 = loadImage('Assets/Images/woman1.png');
 	//photo1 = loadImage("file:///C:/Users/juanf/OneDrive/Documentos/PhD/Interactive%20Wall/Assets/Images/woman1.png");
 	//photo1= createImg('file:///C:/Users/juanf/OneDrive/Documentos/PhD/Interactive%20Wall/Assets/Images/woman1.png' /*, undefined, 'anonymous'*/);
-	preloadMuseFlow();
+  preloadMuseFlow();
+}
+
+function preloadMuseFlow(){
+    //img = loadImage('https://juanolaya.github.io/assets/chair.png');
+    undemandingInstructions= loadImage('https://juanolaya.github.io/assets/undemandingInstructions.png');
+    demandingInstructions= loadImage('https://juanolaya.github.io/assets/demandingInstructions.png');
+    
+    if(document.getElementById('caseNum').value!="%caseNumber%"){ 
+      caseNumber=document.getElementById('caseNum').value;
+      //SoSciTools.submitButtonsHide();
+    }else{
+      caseNumber=0;  // %2!=0 -> undemanding   //   %2==0 -> demanding
+    }
+  
+    if(document.getElementById('urnRand').value!="%urn%"){ 
+      urnRandom=document.getElementById('urnRand').value;
+      console.log("Took urnRandom: "+urnRandom);
+    }else{
+      urnRandom=0;  // %2!=0 -> undemanding   //   %2==0 -> demanding
+    }
+  
+    if(document.querySelector(".questionary")){
+      document.querySelector(".questionary").style.display='none';
+    }
+  
+    let urlUndemanding = 'https://gist.githubusercontent.com/JuanOlaya/8a640395d09db4b2ef8220fd510c5c19/raw/19fe558aa2a4e8960832b0aadc581aeded2d539e/platforms-undemanding-gaming.json';
+    allPlatforms = loadJSON(urlUndemanding);
+    
+    let urlDemanding = 'https://gist.githubusercontent.com/JuanOlaya/34efce4dcf723ccb77d14f1f5c996a5c/raw/611d67750c9fd2e6b932886081e9692413c8ef89/DemandingPlatforms.json';
+    allPlatformsDemanding = loadJSON(urlDemanding);
+  
+    let urlUndemandingTraining = 'https://gist.githubusercontent.com/JuanOlaya/49fc53a64026d8c2af4ccccf3eb839ce/raw/0f80791e9f83bb13b32fac046f7eddd0b1146c60/platforms-undemanding-training.json';
+    undemandingTrainingJSON = loadJSON(urlUndemandingTraining);
+    
+    let urlDemandingTraining = 'https://gist.githubusercontent.com/JuanOlaya/93abe3a2db9969062467407499b1f1b9/raw/e2b32722048733d48a0f07aba9ebaf807ee1fba9/platforms-demanding-training.json';
+    demandingTrainingJSON = loadJSON(urlDemandingTraining);
+  
+    let urlBaseline = 'https://gist.githubusercontent.com/JuanOlaya/44dc3efb6a79032174cfb71ff75d30af/raw/cf6c40a857e12c3f336854d91b9b915ea187a963/baseline.json';
+    baselineJSON = loadJSON(urlBaseline);
 }
 
 function make2DArray(cols,rows){
@@ -132,44 +170,7 @@ function make2DArray(cols,rows){
 	return arr;
 }
 
-function preloadMuseFlow(){
 
-	undemandingInstructions= loadImage('https://juanolaya.github.io/assets/undemandingInstructions.png');
-	demandingInstructions= loadImage('https://juanolaya.github.io/assets/demandingInstructions.png');
-	
-	if(document.getElementById('caseNum').value!="%caseNumber%"){ 
-	  caseNumber=document.getElementById('caseNum').value;
-	  //SoSciTools.submitButtonsHide();
-	}else{
-	  caseNumber=0;  // %2!=0 -> undemanding   //   %2==0 -> demanding
-	}
-  
-	if(document.getElementById('urnRand').value!="%urn%"){ 
-	  urnRandom=document.getElementById('urnRand').value;
-	  console.log("Took urnRandom: "+urnRandom);
-	}else{
-	  urnRandom=0;  // %2!=0 -> undemanding   //   %2==0 -> demanding
-	}
-  
-	if(document.querySelector(".questionary")){
-	  document.querySelector(".questionary").style.display='none';
-	}
-  
-	let urlUndemanding = 'https://gist.githubusercontent.com/JuanOlaya/8a640395d09db4b2ef8220fd510c5c19/raw/19fe558aa2a4e8960832b0aadc581aeded2d539e/platforms-undemanding-gaming.json';
-	allPlatforms = loadJSON(urlUndemanding);
-	
-	let urlDemanding = 'https://gist.githubusercontent.com/JuanOlaya/34efce4dcf723ccb77d14f1f5c996a5c/raw/611d67750c9fd2e6b932886081e9692413c8ef89/DemandingPlatforms.json';
-	allPlatformsDemanding = loadJSON(urlDemanding);
-  
-	let urlUndemandingTraining = 'https://gist.githubusercontent.com/JuanOlaya/49fc53a64026d8c2af4ccccf3eb839ce/raw/0f80791e9f83bb13b32fac046f7eddd0b1146c60/platforms-undemanding-training.json';
-	undemandingTrainingJSON = loadJSON(urlUndemandingTraining);
-	
-	let urlDemandingTraining = 'https://gist.githubusercontent.com/JuanOlaya/93abe3a2db9969062467407499b1f1b9/raw/e2b32722048733d48a0f07aba9ebaf807ee1fba9/platforms-demanding-training.json';
-	demandingTrainingJSON = loadJSON(urlDemandingTraining);
-  
-	let urlBaseline = 'https://gist.githubusercontent.com/JuanOlaya/44dc3efb6a79032174cfb71ff75d30af/raw/cf6c40a857e12c3f336854d91b9b915ea187a963/baseline.json';
-	baselineJSON = loadJSON(urlBaseline);
-}
 
 function setup() {
 	canvas = createCanvas(windowWidth,windowHeight);
@@ -189,7 +190,9 @@ function setup() {
 
 	
 	defaultCanvas=document.getElementById("defaultCanvas0");
-	//defaultCanvas.style.zIndex = "0";
+	
+  
+  //defaultCanvas.style.zIndex = "0";
 	/*
 	videoAustralia=document.getElementById("videoAus");
 	videoAustralia.style.display = "none";  					// none-> element to not be displayed
@@ -342,19 +345,24 @@ function setup() {
 		)
 		);
 	}
-	//setupMuseFlow();
+
+  setupMuseFlow();
 }
 
 function setupMuseFlow(){
-
-//createCanvas(windowWidth, windowHeight);
+  //createCanvas(windowWidth, windowHeight);
   //createCanvas(1024, 768);
   //createCanvas(1200, 550);
   console.log(" baseline length: "+baselineJSON.platforms.length  );
   //createCanvas(windowWidth, 768);
-  //canvasMuseFlow = createCanvas(windowWidth, windowHeight);
+  
+    //museFlowCanvas = createCanvas(windowWidth, windowHeight);
+
+  //museFlowCanvas.style.display= "none";
+
   //canvas.style();
-  //frameRate(30);
+  
+    //frameRate(30);
 
 
   translateDistance = width / 4;
@@ -630,6 +638,8 @@ function setupMuseFlow(){
   //console.log(endHour);
 
 }
+
+
 
 function draw() {
 	//console.log("StatusWebcam: "+statusWebcam);

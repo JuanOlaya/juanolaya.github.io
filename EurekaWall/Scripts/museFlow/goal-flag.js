@@ -10,12 +10,10 @@ class GoalFlag{
         this.colH=120; //150
         //this.colour="#F15152";
         this.colour="#F04242";
-        console.log("Creada Flag posX: "+this.posX+"PosY: "+this.posY);
     }
 
     show(y){
         this.posY=y-100;
-        console.log("Mostrada flag PosY: "+this.posY);
          //fill(255);
         //fill(139,0,0);
         fill(this.colour);

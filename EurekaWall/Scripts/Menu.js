@@ -37,9 +37,25 @@ let color7="#1E9CC9";  // 29833B 2A878D 2F969D 1C90BA 1D96C2 1E9CC9 4FC3CB #00FF
 let color8="#f48c06";
 let color9="#DC4141";
 let demoSection;
+let museFlowSection;
+var defaultCanvas1;
+
 
 demoSection=document.getElementById("demoSec");
 demoSection.style.display = "none";
+
+museFlowSection=document.getElementById("museFlowSec");
+museFlowSection.style.display = "none";
+
+document.getElementsByTagName('canvas');
+
+//defaultCanvas=document.getElementById("defaultCanvas0");
+//defaultCanvas.style.display = "none";
+
+/*
+defaultCanvas1=document.getElementById("defaultCanvas1");
+defaultCanvas1.style.display = "none";
+*/
 
 //let homeEureka;
 //homeEureka=document.getElementById("homeEureka");
@@ -921,11 +937,12 @@ function mousePressed(){
                     screen=50;
                 }
                 if(numApp==6){  // MuseFlow
-                    /*
+                    
+                    
                     museFlowSec.style.display = "block";
                     defaultCanvas.style.zIndex = "-1";
                     screen=40;
-                    */
+                    
                 }
                 if(numApp==7){
                     homeEureka.style.display = "none";
@@ -1071,6 +1088,7 @@ function mousePressed(){
             statusWebcam=1;
         }
     }
+    mousePressedMuseFlow();
 }
 
 function mouseDragged() {
@@ -1185,6 +1203,7 @@ document.getElementById("goBackDemoSec").addEventListener("click", function() {
 document.getElementById("goBackMuseFlowSec").addEventListener("click", function() {
     //demoSection.style.display = "none";
     //defaultCanvas.style.display = "block";
+    demoSec.style.display = "none";
     defaultCanvas.style.zIndex = "0";
     screen=0;
 });
