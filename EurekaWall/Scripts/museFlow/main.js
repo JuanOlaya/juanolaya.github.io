@@ -302,7 +302,7 @@ function preload() {
 
 //function draw() {
 function museFlowMain(){
-
+  frameRate(30);
   if(width>height){
   posXpowerUps=player.location.x - translateDistance +width/2;
   console.log("Current platform:  "+numCurrentPlat);
