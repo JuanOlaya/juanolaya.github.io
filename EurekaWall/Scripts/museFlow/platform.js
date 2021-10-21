@@ -261,7 +261,7 @@ class Platform {
 			}
 		}
 		
-		if(screen=="undemandingTraining" || screen=="demandingTraining"){
+		if(screen=="undemandingTraining" || screenMuseFlow=="demandingTraining"){
 			if(this.index!=amountTrainingPlatforms-1){
 				fill(this.colour);
 				if(!this.horizontalPlatform){
@@ -283,7 +283,7 @@ class Platform {
 			}
 		}
 
-		if(condition=="undemanding" && screen!="baseline"){
+		if(condition=="undemanding" && screenMuseFlow!="baseline"){
 			for(let i=0;i<flatPattern1.length;i++){
 				if(this.index==flatPattern1[i]){
 					this.flatPattern.show(this.ry);
@@ -297,7 +297,7 @@ class Platform {
 			}
 		}
 		
-		if(condition=="demanding" && screen!="baseline"){
+		if(condition=="demanding" && screenMuseFlow!="baseline"){
 			for(let i=0;i<flatPatternDemanding.length;i++){
 				if(this.index==flatPatternDemanding [i]){
 					this.flatPattern.show(this.ry);
@@ -311,11 +311,11 @@ class Platform {
 			}
 		}
 
-		if(this.index==goalFlagNum && ( screen=="undemanding" || screen=="demanding") ){
+		if(this.index==goalFlagNum && ( screenMuseFlow=="undemanding" || screenMuseFlow=="demanding") ){
 			this.goalFlag.show(this.ry);
 		}
 
-		if( this.index==goalFlagTraining && (screen=="undemandingTraining" || screen=="demandingTraining") ){
+		if( this.index==goalFlagTraining && (screenMuseFlow=="undemandingTraining" || screenMuseFlow=="demandingTraining") ){
 			this.goalFlag.show(this.ry);
 		}
 	}
