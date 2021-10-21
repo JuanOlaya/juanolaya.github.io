@@ -5,6 +5,7 @@ class GoalFlag{
         this.h=50; //150
 
         this.posX=posX+rw/2-(this.w/4);
+        console.log("PosX: "+this.posX);
         this.posY=-120;
         this.colW=100; //100
         this.colH=120; //150
@@ -14,6 +15,7 @@ class GoalFlag{
 
     show(y){
         this.posY=y-100;
+        console.log("PosY: "+this.posY);
          //fill(255);
         //fill(139,0,0);
         fill(this.colour);
