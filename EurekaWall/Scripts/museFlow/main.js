@@ -324,6 +324,7 @@ function museFlowMain(){
   //console.log("missedOpor: "+missedOpportunities);
   //console.log("Fading process: "+fading);
   //console.log("MouseX: "+mouseX);
+  console.log("posXpowerUps: "+posXpowerUps);
   //console.log("Width: "+width);
   //console.log(fadingProbeResults);
   
@@ -2217,7 +2218,32 @@ function edgeLines() {
 
 //function mousePressed(){
 
+function mouseReleased(){
+
+  arrowRight=false;
+  arrowLeft=false;
+  playerMovement=true;
+  mouseReleasedSwarmCanvas();
+}
+
 function mousePressedMuseFlow(){
+
+  
+  if(mouseX>translateDistance){
+    arrowRight=true;
+    countRightArrow++;
+    if(!hasReactionTimeSinceUnobs){
+      reactionTimeSinceUnobs=Math.round(millis());
+    }
+  }
+
+  if(mouseX<translateDistance){
+    arrowLeft=true;
+    playerMovement=true;
+    countLeftArrow++;
+  }
+
+
   if(interruption){     
     if (thoughtProbePage == 1) {
       // Button 1
@@ -3126,6 +3152,7 @@ function keyPressed() {
     condition="undemanding";
   }
   */
+  keyPressedSwarmCanvas();
 }
 
 function keyReleased() {

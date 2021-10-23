@@ -1,0 +1,78 @@
+#goBackSwarmCanvas{
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 50px;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 35px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+}
+
+#goBackDemoSec{
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  font-size: 35px;
+  color: rgba(255, 255, 255);
+  /*background-color: rgba(255, 255, 255);*/
+  /*z-index: 0; */
+  /*color: rgba(243, 228, 206);*/
+}
+
+#goBackMuseFlowSec{
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  font-size: 35px;
+  color: rgba(255, 255, 255);
+  /*background-color: rgba(255, 255, 255);*/
+  /*z-index: 0; */
+  /*color: rgba(243, 228, 206);*/
+}
+
+#goBackShapyGrid{
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  font-size: 35px;
+  color: rgba(255, 255, 255);
+}
+
+#pencilMode{
+  margin: 0;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  border-radius: 50px;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 35px;
+  color: rgba(255, 255, 255);
+  background-color: #141414;
+  z-index: 1;
+  /*color: rgba(243, 228, 206);*/
+}
+
+#deleteCanvas{
+  margin: 0;
+  position: absolute;
+  right: 110px;
+  bottom: 30px;
+  border-radius: 50px;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 35px;
+  color: rgba(255, 255, 255);
+  background-color: #141414;
+  z-index: 1;
+}
+
