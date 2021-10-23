@@ -725,7 +725,8 @@ function pause(){
 	}	
 }
 
-function keyPressed() {
+//function keyPressed() {
+function keyPressedSwarmCanvas(){
 	if(keyCode === 49 ){
 		generalMode=1;		
 	}

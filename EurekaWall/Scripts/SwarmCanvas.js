@@ -7,11 +7,18 @@ var backgroundStatus=true;
 var amountShapes=1;
 var speedMore=1;
 var mailWindow=false;
+var swarmSize1=0.25;
+var swarmSize2=1;
+var swarmStroke=2;
 
 let particleCanvasSec;
 
+/*
 particleCanvasSec=document.getElementById("particleCanvasSection");
 particleCanvasSec.style.display = "none";
+*/
+swarmCanvasSection.style.display = "none";
+shapyGridSection.style.display = "none";
 
 function generativeArt(){
 
@@ -396,9 +403,9 @@ function generativeArt(){
             rectMode(CENTER);
             fill(agent.crossColor);
             stroke(0);
-            strokeWeight(2);
-            rect(0, 0, agent.ancho, agent.ancho/4,50);
-            rect(0, 0, agent.ancho/4, agent.ancho,50);
+            strokeWeight(swarmStroke);
+            rect(0, 0, agent.ancho*swarmSize2, agent.ancho*swarmSize1,50);
+            rect(0, 0, agent.ancho*swarmSize1, agent.ancho*swarmSize2,50);
             pop();
           }
           if(shapeGenArt==3){
@@ -415,7 +422,9 @@ function generativeArt(){
             stroke(0);
             strokeWeight(2);
             */
-            rect(0, 0, agent.ancho/2, agent.ancho/5);
+            stroke(0);
+            strokeWeight(swarmStroke);
+            rect(0, 0, agent.ancho*swarmSize2, agent.ancho*swarmSize1);
             //rect(0, 0, agent.ancho/4, agent.ancho,50);
             pop();
           }
@@ -447,9 +456,9 @@ function generativeArt(){
           rectMode(CENTER);
           fill(agent.crossColor);
           stroke(0);
-          strokeWeight(2);
-          rect(0, 0, agent.ancho, agent.ancho/4,50);
-          rect(0, 0, agent.ancho/4, agent.ancho,50);
+          strokeWeight(swarmStroke);
+          rect(0, 0, agent.ancho*swarmSize2, agent.ancho*swarmSize1,50);
+          rect(0, 0, agent.ancho*swarmSize1, agent.ancho*swarmSize2,50);
           pop();
         }
         if(shapeGenArt==3){
@@ -462,10 +471,10 @@ function generativeArt(){
           rotate(agent.vel.heading());
           rectMode(CENTER);
           fill(agent.rectColor);
-          /*stroke(0);
-          strokeWeight(2);
-          */
-          rect(0, 0, agent.ancho/2, agent.ancho/5);
+          stroke(0);
+          strokeWeight(swarmStroke);
+          
+          rect(0, 0, agent.ancho*swarmSize2, agent.ancho*swarmSize1);
           //rect(0, 0, agent.ancho/4, agent.ancho,50);
           pop();
         }

@@ -65,7 +65,11 @@ function inspirationWall(){
 			homeButton();
 			*/
 			//background(backgroundColor);
+			
 			generativeArt();
+			console.log("mode3: "+mode3);
+			
+			console.log("showShapes: "+showShapes);
 			//console.log("GENERATIVE ART");
 		}
 
@@ -109,8 +113,9 @@ function inspirationWall(){
 		//text("Touches Length: "+touches.length+"    Status: "+pixelList[0].hasChangedStatus,150,20);
 
 		if(screen==40){
+
 			museFlowMain();
-			console.log("Entra museFlowMain");
+			
 		}
 }
 

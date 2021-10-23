@@ -895,7 +895,7 @@ function mousePressed(){
             console.log(numApp);
         }
        
-        if(dist(width/2,height/2-158,mouseX,mouseY)<=240/2){  // ParticleCanvas
+        if(dist(width/2,height/2-158,mouseX,mouseY)<=240/2){  // SwarmCanvas
             tiempoInicioHome = millis();
             numApp=7;
             console.log(numApp);
@@ -917,7 +917,7 @@ function mousePressed(){
             */
         }
 
-        if(dist(width/2+473,height/2+190,mouseX,mouseY)<=230/2){  // PixelGrid
+        if(dist(width/2+473,height/2+190,mouseX,mouseY)<=230/2){  // ShapyGrid
             tiempoInicioHome = millis();
             numApp=9;
             console.log(numApp);
@@ -945,8 +945,9 @@ function mousePressed(){
                     
                 }
                 if(numApp==7){
+                    background(backgroundColor);
                     homeEureka.style.display = "none";
-                    particleCanvasSec.style.display = "block";
+                    swarmCanvasSection.style.display = "block";
                     defaultCanvas.style.zIndex = "-1";
                     screen=20;
                 }
@@ -957,6 +958,7 @@ function mousePressed(){
                     screen=30;
                 }
                 if(numApp==9){
+                    shapyGridSection.style.display = "block";
                     homeEureka.style.display = "none";
                     defaultCanvas.style.zIndex = "-1";
                     screen=10;
@@ -979,9 +981,11 @@ function mousePressed(){
             }
         }
         */
+       /*
         if(mouseX<width/6 && mouseY<height/6){
             screen=0;
         }
+        */
     }
 
     if(screen==20 || screen==21 && entered==0){   // GENART
@@ -994,9 +998,11 @@ function mousePressed(){
             }
         }
         */
+       /*
         if(mouseX<width/6 && mouseY<height/6){
             screen=0;
         }
+        */
 
         if(dist(50,height-50,mouseX,mouseY)<29){
             backgroundStatus=!backgroundStatus;
@@ -1060,11 +1066,13 @@ function mousePressed(){
         }
         */
 
+        /*
         if(mouseX<width/6 && mouseY<height/6){
             screen=0;
             //console.log("index -1");
             canvas.style("z-index",0);
         }
+        */
 
         if(artistList.length>2){
             if(dist(artistList[0].posX,artistList[0].posY, mouseX,mouseY)<artistList[0].diameter/2){
@@ -1104,7 +1112,8 @@ function mouseDragged() {
     }
   }
 
-function mouseReleased() {
+//  function mouseReleased(){
+function mouseReleasedSwarmCanvas() {
     if(mode3){
         showShapes=false;
     }
@@ -1203,7 +1212,38 @@ document.getElementById("goBackDemoSec").addEventListener("click", function() {
 document.getElementById("goBackMuseFlowSec").addEventListener("click", function() {
     //demoSection.style.display = "none";
     //defaultCanvas.style.display = "block";
-    demoSec.style.display = "none";
+    museFlowSec.style.display = "none";
     defaultCanvas.style.zIndex = "0";
     screen=0;
 });
+
+document.getElementById("goBackSwarmCanvas").addEventListener("click", function() {
+    //demoSection.style.display = "none";
+    //defaultCanvas.style.display = "block";
+    swarmCanvasSection.style.display = "none";
+    //defaultCanvas.style.zIndex = "0";
+    screen=0;
+});
+
+document.getElementById("goBackShapyGrid").addEventListener("click", function() {
+    shapyGridSection.style.display = "none";
+    screen=0;
+});
+
+document.getElementById("pencilMode").addEventListener("click", function() {
+    mode3=!mode3;	
+    background(backgroundColor);
+    backgroundStatus=false;
+    //swarmSize=8;
+
+    swarmSize1=0.06;
+    swarmSize2=0.25;
+    swarmStroke=0.6;
+});
+
+document.getElementById("deleteCanvas").addEventListener("click", function() {
+    background(backgroundColor);
+});
+
+
+
