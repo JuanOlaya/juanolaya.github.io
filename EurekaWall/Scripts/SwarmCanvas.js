@@ -17,8 +17,7 @@ let particleCanvasSec;
 particleCanvasSec=document.getElementById("particleCanvasSection");
 particleCanvasSec.style.display = "none";
 */
-swarmCanvasSection.style.display = "none";
-shapyGridSection.style.display = "none";
+
 
 function generativeArt(){
 
@@ -28,6 +27,21 @@ function generativeArt(){
     //console.log("SCREENNNN: "+screen);
     //fill(255);
     //rect(width/2,height/2,20,20);
+
+    /*
+    if(showShapes && mouseIsPressed){
+      
+      for(let agent of group){
+          agent.pos.x=mouseX;
+          agent.pos.y=mouseY;
+      }
+      for(let agent of group2){
+          agent.pos.x=mouseX;
+          agent.pos.y=mouseY;
+      }
+    }
+    */
+
     if(shapeGenArt==1){
       if(group.length<amountShapes){
         let agent=createAgent();
@@ -54,7 +68,7 @@ function generativeArt(){
       for(let agent of group){
         if(!pausa){
           if(mouseIsPressed /*&& mouseButton === LEFT*/){
-            seek(agent,mouse, 5);  // mouse
+            seek(agent,mouse, 12);  // mouse
           }
           separate(agent,group, 1);
           align(agent,group );
@@ -68,7 +82,7 @@ function generativeArt(){
       for(let agent of group2){
         if(!pausa){
           if(mouseIsPressed /*&& mouseButton === RIGHT*/){
-            seek(agent,mouse,5);  // mouse
+            seek(agent,mouse,12);  // mouse
           }
           separate(agent,group2,1);
           align(agent,group2);
@@ -377,56 +391,60 @@ function generativeArt(){
       
       if(mode3){
         if(showShapes){
-          if(shapeGenArt==1){
-            rectMode(CENTER);
-            //stroke(0);
-            strokeWeight(1);
-            stroke(agent.color);
-            //fill(agent.color);
-            //fill(agent.color);
-            
-            noFill();
-            push();
-            translate(agent.pos.x, agent.pos.y);
-            rotate(agent.vel.heading());
-            //rect(0,0,30,15);
-            line(-20,0,20,0);
-            pop();
-          }
-          if(shapeGenArt==2){
-            if(!pausa){
-              agent.rot=agent.rot+velRot;
+          if(millis()-startingTimePencilMode>50){
+
+          //if (millis() - tiempoInicio > tiempoEspera) {  
+            if(shapeGenArt==1){
+              rectMode(CENTER);
+              //stroke(0);
+              strokeWeight(1);
+              stroke(agent.color);
+              //fill(agent.color);
+              //fill(agent.color);
+              
+              noFill();
+              push();
+              translate(agent.pos.x, agent.pos.y);
+              rotate(agent.vel.heading());
+              //rect(0,0,30,15);
+              line(-20,0,20,0);
+              pop();
             }
-            push();
-            translate(agent.pos.x, agent.pos.y);
-            rotate(agent.rot);
-            rectMode(CENTER);
-            fill(agent.crossColor);
-            stroke(0);
-            strokeWeight(swarmStroke);
-            rect(0, 0, agent.ancho*swarmSize2, agent.ancho*swarmSize1,50);
-            rect(0, 0, agent.ancho*swarmSize1, agent.ancho*swarmSize2,50);
-            pop();
-          }
-          if(shapeGenArt==3){
-            if(!pausa){
-              agent.rot=agent.rot+velRot;
+            if(shapeGenArt==2){
+              if(!pausa){
+                agent.rot=agent.rot+velRot;
+              }
+              push();
+              translate(agent.pos.x, agent.pos.y);
+              rotate(agent.rot);
+              rectMode(CENTER);
+              fill(agent.crossColor);
+              stroke(0);
+              strokeWeight(swarmStroke);
+              rect(0, 0, agent.ancho*swarmSize2, agent.ancho*swarmSize1,50);
+              rect(0, 0, agent.ancho*swarmSize1, agent.ancho*swarmSize2,50);
+              pop();
             }
-            push();
-            translate(agent.pos.x, agent.pos.y);
-            //rotate(agent.rot);
-            rotate(agent.vel.heading());
-            rectMode(CENTER);
-            fill(agent.rectColor);
-            /*
-            stroke(0);
-            strokeWeight(2);
-            */
-            stroke(0);
-            strokeWeight(swarmStroke);
-            rect(0, 0, agent.ancho*swarmSize2, agent.ancho*swarmSize1);
-            //rect(0, 0, agent.ancho/4, agent.ancho,50);
-            pop();
+            if(shapeGenArt==3){
+              if(!pausa){
+                agent.rot=agent.rot+velRot;
+              }
+              push();
+              translate(agent.pos.x, agent.pos.y);
+              rotate(agent.rot);
+              //rotate(agent.vel.heading());
+              rectMode(CENTER);
+              fill(agent.rectColor);
+              /*
+              stroke(0);
+              strokeWeight(2);
+              */
+              stroke(0);
+              strokeWeight(swarmStroke);
+              rect(0, 0, agent.ancho*swarmSize2, agent.ancho*swarmSize1);
+              //rect(0, 0, agent.ancho/4, agent.ancho,50);
+              pop();
+            }
           }
         }
       }else{
@@ -467,8 +485,8 @@ function generativeArt(){
           }
           push();
           translate(agent.pos.x, agent.pos.y);
-          //rotate(agent.rot);
-          rotate(agent.vel.heading());
+          rotate(agent.rot);
+          //rotate(agent.vel.heading());
           rectMode(CENTER);
           fill(agent.rectColor);
           stroke(0);
@@ -502,13 +520,13 @@ function generativeArt(){
     
     
     //-------------------------------------------
-    function applyForce(agent, force, strength=3){
+    function applyForce(agent, force, strength=1){
       force.mult(strength);
       agent.acc.add(force);
     }
     
     //-------------------------------------------
-    function seek(agent,target , strength=1){
+    function seek(agent,target , strength=10){
       let targetDirection= p5.Vector.sub(target, agent.pos);
       //targetDirection = target - agent.pos
       targetDirection.normalize();
@@ -522,14 +540,14 @@ function generativeArt(){
       steer(agent,targetDirection, strength);
     }
     //-------------------------------------------
-    function steer(agent, targetDirection, strength=0.5){
+    function steer(agent, targetDirection, strength=2){
       let steer = p5.Vector.sub(targetDirection, agent.vel);
       steer.limit(agent.maxforce);
       applyForce(agent,steer,strength);
     }
     
     //-------------------------------------------
-    function separate(agent, group, strength=2){  //strength=1
+    function separate(agent, group, strength=0.1){  //strength=1
       let separation = 40;   // radius
       
       let sum= new p5.Vector();

@@ -645,7 +645,7 @@ function draw() {
 	//console.log("StatusWebcam: "+statusWebcam);
 	//console.log("showShapes: "+showShapes);
 
-	console.log("Screen: "+screen);
+	//console.log("Screen: "+screen);
 
 	if(generalMode==1){
 		inspirationWall();

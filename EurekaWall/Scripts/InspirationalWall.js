@@ -67,9 +67,9 @@ function inspirationWall(){
 			//background(backgroundColor);
 			
 			generativeArt();
-			console.log("mode3: "+mode3);
+			//console.log("mode3: "+mode3);
 			
-			console.log("showShapes: "+showShapes);
+			//console.log("showShapes: "+showShapes);
 			//console.log("GENERATIVE ART");
 		}
 
