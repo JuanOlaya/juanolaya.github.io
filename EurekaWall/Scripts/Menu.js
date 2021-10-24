@@ -39,6 +39,8 @@ let color9="#DC4141";
 let demoSection;
 let museFlowSection;
 var defaultCanvas1;
+var timerPencilMode=false;
+var startingTimePencilMode = 0;
 
 
 demoSection=document.getElementById("demoSec");
@@ -48,6 +50,9 @@ museFlowSection=document.getElementById("museFlowSec");
 museFlowSection.style.display = "none";
 
 document.getElementsByTagName('canvas');
+
+swarmCanvasSection.style.display = "none";
+shapyGridSection.style.display = "none";
 
 //defaultCanvas=document.getElementById("defaultCanvas0");
 //defaultCanvas.style.display = "none";
@@ -868,8 +873,20 @@ function appDescription(index) {
 function mousePressed(){
     var entered=0;
 
+    /*
     if(mode3){
         showShapes=true;
+        //timerPencilMode=true;
+        
+    }
+    */
+
+    
+    if(mode3){
+        console.log("entra mode3");
+        showShapes=true;
+        startingTimePencilMode = millis();
+        
         for(let agent of group){
             agent.pos.x=mouseX;
             agent.pos.y=mouseY;
@@ -878,7 +895,10 @@ function mousePressed(){
             agent.pos.x=mouseX;
             agent.pos.y=mouseY;
         }
+        
     }
+    
+    
     if(screen==0 && entered==0){
         
         entered=1;
@@ -1037,6 +1057,7 @@ function mousePressed(){
                 }
             }
         }
+
         if(dist(540,height-50,mouseX,mouseY)<29){
             if(amountShapes<150){
                 amountShapes=amountShapes+3;
@@ -1116,6 +1137,7 @@ function mouseDragged() {
 function mouseReleasedSwarmCanvas() {
     if(mode3){
         showShapes=false;
+        //timerPencilMode=false;
     }
     eraserDragging=false;
     if(screen==10){
@@ -1236,8 +1258,8 @@ document.getElementById("pencilMode").addEventListener("click", function() {
     backgroundStatus=false;
     //swarmSize=8;
 
-    swarmSize1=0.06;
-    swarmSize2=0.25;
+    swarmSize1=0.12;
+    swarmSize2=0.50;
     swarmStroke=0.6;
 });
 
