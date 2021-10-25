@@ -663,7 +663,7 @@ document.getElementById("cancelInfoScreen").addEventListener("click", function()
     showSlides(slideIndex);
 });
 
-document.getElementById("goBack").addEventListener("click", function() {
+document.getElementById("goBackBalconity").addEventListener("click", function() {
     balconitySection.style.display = "none";
     homeEureka.style.display = "block";
     screen=0;
