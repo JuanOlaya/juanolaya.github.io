@@ -410,6 +410,34 @@ body{
 }
 */
 
+#leftArrowIcon{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(-285px,292px);
+  font-size: 90px;
+  /*color: #F3E4CE;*/
+  color: #F1D8BC;
+  cursor: pointer;
+}
+
+#rightArrowIcon{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(170px,292px);
+  font-size: 90px;
+  /*color: #F3E4CE;*/
+  color: #F1D8BC;
+  cursor: pointer;
+}
+
 #leftArrowAboutIcon{
   margin: 0;
   position: absolute;
@@ -493,9 +521,10 @@ body{
   border-radius: 50%;
   background: #3C3D3E;
   border: 10px solid #3C3D3E;
+  z-index: 2;
 }
 
-#goBack{
+#goBackBalconity{
   margin: 0;
   position: absolute;
   top: 20px;
@@ -503,6 +532,7 @@ body{
   cursor: pointer;
   font-size: 35px;
   color: rgba(243, 228, 206, 1);
+ 
 }
 
 .span_no_selection {
