@@ -102,12 +102,13 @@ let rectPalette = ["#9b5de5","#f15bb5","#fee440","#00bbf9","#00f5d4"];
 var canvas;
 
 var showShapes=false;
-var mode3=false;
+var modePencil=false;
 
 
 function windowResized(){
 	resizeCanvas(windowWidth,windowHeight);
 }
+
 
 function preload() {
 	
@@ -733,9 +734,11 @@ function keyPressedSwarmCanvas(){
 	if(keyCode === 50 ){
 		generalMode=2;		
 	}
+  /*
 	if(keyCode === 51 ){
-		mode3=!mode3;		
+		modePencil=!modePencil;		
 	}
+  */
 }
 /*
 function mousePressed(){
