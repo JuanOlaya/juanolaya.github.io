@@ -12,6 +12,8 @@ var swarmSize2=1;
 var swarmStroke=2;
 
 let particleCanvasSec;
+let modeSwarmCanvas=1;   // 1=dancingMode  2=bigBangMode   3=pencilMode
+let seekSwarmCanvas=4;
 
 /*
 particleCanvasSec=document.getElementById("particleCanvasSection");
@@ -22,7 +24,11 @@ particleCanvasSec.style.display = "none";
 function generativeArt(){
 
     if(backgroundStatus){
-      background(backgroundColor);
+      if(darkModeSwarmCanvas){
+        background(backgroundColor);
+      }else{
+        background("#F4EDDD");
+      }
     }
     //console.log("SCREENNNN: "+screen);
     //fill(255);
@@ -68,7 +74,7 @@ function generativeArt(){
       for(let agent of group){
         if(!pausa){
           if(mouseIsPressed /*&& mouseButton === LEFT*/){
-            seek(agent,mouse, 12);  // mouse
+            seek(agent,mouse, seekSwarmCanvas);  // mouse
           }
           separate(agent,group, 1);
           align(agent,group );
@@ -82,7 +88,7 @@ function generativeArt(){
       for(let agent of group2){
         if(!pausa){
           if(mouseIsPressed /*&& mouseButton === RIGHT*/){
-            seek(agent,mouse,12);  // mouse
+            seek(agent,mouse, seekSwarmCanvas);  // mouse
           }
           separate(agent,group2,1);
           align(agent,group2);
@@ -163,6 +169,7 @@ function generativeArt(){
 
       //trail / trazo
       //console.log("TRAXZO BOTON");
+      /*
       fill(backgroundColor);
       noStroke();
       ellipse(50,height-50,57,57);
@@ -175,7 +182,7 @@ function generativeArt(){
       rect(50,height-50,16,16);
       fill(colorButtons);
       rect(55,height-50,16,16);
-
+*/
 
       //button restart
       /*
@@ -200,6 +207,7 @@ function generativeArt(){
       
 
       //button pause
+      /*
       if(!pausa){
         fill(backgroundColor);
         noStroke();
@@ -215,8 +223,9 @@ function generativeArt(){
         fill(colorButtons);
         triangle(111,height-63,111,height-37,134,height-50);
       }
-
+*/
       //button cross
+      /*
       fill(backgroundColor);
       noStroke();
       ellipse(190,height-50,57,57);
@@ -226,8 +235,9 @@ function generativeArt(){
       rectMode(CENTER);
       rect(190,height-50,8,25,50);
       rect(190,height-50,25,8,50);
-
+*/
       //button rect
+      /*
       fill(backgroundColor);
       noStroke();
       ellipse(260,height-50,57,57);
@@ -237,8 +247,9 @@ function generativeArt(){
       rectMode(CENTER);
       rect(260,height-50,8,25);
       //rect(190,height-50,25,8);
-
+*/
       //button line
+      /*
       fill(backgroundColor);
       noStroke();
       ellipse(330,height-50,57,57);
@@ -248,8 +259,9 @@ function generativeArt(){
       rectMode(CENTER);
       strokeWeight(2);
       line(320,height-45,340,height-55);
-
+*/
       //spped up
+      /*
       fill(backgroundColor);
       noStroke();
       ellipse(400,height-50,57,57);
@@ -257,31 +269,34 @@ function generativeArt(){
       fill(colorButtons);
       rect(400,height-50,5,20);
       rect(400,height-50,20,5);
-
+*/
       //spped down
+      /*
       fill(backgroundColor);
       noStroke();
       ellipse(470,height-50,57,57);
       rectMode(CENTER);
       fill(colorButtons);
       rect(470,height-50,20,5);
-
+*/
       //amount up
+      /*
       fill(backgroundColor);
       noStroke();
       ellipse(540,height-50,57,57);
       rectMode(CENTER);
       fill(colorButtons);
       triangle(540,height-60,530,height-40,550,height-40);
-
+*/
       //amount down
+      /*
       fill(backgroundColor);
       noStroke();
       ellipse(610,height-50,57,57);
       rectMode(CENTER);
       fill(colorButtons);
       triangle(610,height-40,600,height-60,620,height-60);
-
+*/
       
 
       //mail
@@ -325,6 +340,7 @@ function generativeArt(){
       }
       */
       // Printer
+      /*
       fill(backgroundColor);
       noStroke();
       ellipse(680,height-50,57,57);
@@ -349,6 +365,7 @@ function generativeArt(){
       stroke(backgroundColor);
       strokeWeight(3);
       point(692,height-53);
+      */
 
       /*
       fill(colorButtons);
@@ -389,7 +406,7 @@ function generativeArt(){
     //-------------------------------------------
     function render(agent){
       
-      if(mode3){
+      if(modeSwarmCanvas==3 /*|| modeSwarmCanvas==2*/){
         if(showShapes){
           if(millis()-startingTimePencilMode>50){
 
@@ -621,4 +638,107 @@ document.getElementById("goBackSwarmCanvas").addEventListener("click", function(
   defaultCanvas.style.display = "none";
   homeEureka.style.display = "block";
   screen=0;
+});
+
+
+//var elem = document.documentElement;
+
+var darkModeSwarmCanvas = true;
+
+document.getElementById("darkMode").addEventListener("click", function() {
+    
+    darkModeSwarmCanvas=!darkModeSwarmCanvas;
+    if (darkModeSwarmCanvas){
+      document.getElementById("darkMode").innerHTML = `nightlight`;
+      background(backgroundColor);
+    } else{
+      document.getElementById("darkMode").innerHTML = `light_mode`;
+      background("#F4EDDD");
+    }
+});
+
+
+
+document.getElementById("dancingMode").addEventListener("click", function() {
+  modeSwarmCanvas=1;
+  backgroundStatus=true;
+  seekSwarmCanvas=4;
+  if(darkModeSwarmCanvas){
+    background(backgroundColor);
+  }else{
+    background("#F4EDDD");
+  }
+
+  swarmSize1=0.25;
+  swarmSize2=1;
+  swarmStroke=2;
+
+});
+
+document.getElementById("bigBangMode").addEventListener("click", function() {
+  modeSwarmCanvas=2;
+  backgroundStatus=false;
+  seekSwarmCanvas=12;
+  if(darkModeSwarmCanvas){
+    background(backgroundColor);
+  }else{
+    background("#F4EDDD");
+  }
+
+  swarmSize1=0.25;
+  swarmSize2=1;
+  swarmStroke=2;
+
+});
+
+document.getElementById("pencilMode").addEventListener("click", function() {
+  //modePencil=!modePencil;	
+  modeSwarmCanvas=3;
+  backgroundStatus=false;
+  seekSwarmCanvas=12;
+  if(darkModeSwarmCanvas){
+    background(backgroundColor);
+  }else{
+    background("#F4EDDD");
+  }
+
+  swarmSize1=0.12;
+  swarmSize2=0.50;
+  swarmStroke=0.6;
+
+});
+
+
+document.getElementById("crossShape").addEventListener("click", function() {
+  shapeGenArt=2;
+}); 
+
+document.getElementById("rectangleShape").addEventListener("click", function() {
+  shapeGenArt=3;
+}); 
+
+document.getElementById("lineShape").addEventListener("click", function() {
+  shapeGenArt=1;
+}); 
+
+document.getElementById("amountMore").addEventListener("click", function() {
+  if(amountShapes<150){
+    amountShapes=amountShapes+3;
+  }
+});
+
+document.getElementById("amountLess").addEventListener("click", function() {
+  if(amountShapes>6){     
+    amountShapes=amountShapes-3;
+  }
+});
+
+document.getElementById("deleteCanvas").addEventListener("click", function() {
+  
+  if(darkModeSwarmCanvas){
+    background(backgroundColor);
+  }else{
+    background("#F4EDDD");
+  }
+
 });

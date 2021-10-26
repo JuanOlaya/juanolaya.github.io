@@ -873,17 +873,8 @@ function appDescription(index) {
 function mousePressed(){
     var entered=0;
 
-    /*
-    if(mode3){
-        showShapes=true;
-        //timerPencilMode=true;
-        
-    }
-    */
-
-    
-    if(mode3){
-        console.log("entra mode3");
+    if(modeSwarmCanvas==3){
+        //console.log("entra modePencil");
         showShapes=true;
         startingTimePencilMode = millis();
         
@@ -895,9 +886,7 @@ function mousePressed(){
             agent.pos.x=mouseX;
             agent.pos.y=mouseY;
         }
-        
     }
-    
     
     if(screen==0 && entered==0){
         
@@ -1025,19 +1014,19 @@ function mousePressed(){
         */
 
         if(dist(50,height-50,mouseX,mouseY)<29){
-            backgroundStatus=!backgroundStatus;
+            //backgroundStatus=!backgroundStatus;
         }
         if(dist(120,height-50,mouseX,mouseY)<29){
-            pausa=!pausa;
+            //pausa=!pausa;
         }
         if(dist(190,height-50,mouseX,mouseY)<29){
-            shapeGenArt=2;
+            //shapeGenArt=2;
         }
         if(dist(260,height-50,mouseX,mouseY)<29){
-            shapeGenArt=3;
+            //shapeGenArt=3;
         }
         if(dist(330,height-50,mouseX,mouseY)<29){
-            shapeGenArt=1;
+            //shapeGenArt=1;
         }
         if(dist(400,height-50,mouseX,mouseY)<29){
             if(speedMore<10){
@@ -1059,21 +1048,22 @@ function mousePressed(){
         }
 
         if(dist(540,height-50,mouseX,mouseY)<29){
+            /*
             if(amountShapes<150){
                 amountShapes=amountShapes+3;
-            }
+            }*/
         }
         if(dist(610,height-50,mouseX,mouseY)<29){
-            
+            /*
             if(amountShapes>6){
                 
                 amountShapes=amountShapes-3;
-            }
+            }*/
         }
         if(dist(680,height-50,mouseX,mouseY)<29){  // PRINT 
             console.log("ENTRA mail");
             //mailWindow=!mailWindow;
-            printCanvas();
+            //printCanvas();
         }
     }
 
@@ -1135,7 +1125,7 @@ function mouseDragged() {
 
 //  function mouseReleased(){
 function mouseReleasedSwarmCanvas() {
-    if(mode3){
+    if(modeSwarmCanvas==3){
         showShapes=false;
         //timerPencilMode=false;
     }
@@ -1252,20 +1242,7 @@ document.getElementById("goBackShapyGrid").addEventListener("click", function() 
     screen=0;
 });
 
-document.getElementById("pencilMode").addEventListener("click", function() {
-    mode3=!mode3;	
-    background(backgroundColor);
-    backgroundStatus=false;
-    //swarmSize=8;
 
-    swarmSize1=0.12;
-    swarmSize2=0.50;
-    swarmStroke=0.6;
-});
-
-document.getElementById("deleteCanvas").addEventListener("click", function() {
-    background(backgroundColor);
-});
 
 
 var elem = document.documentElement;
