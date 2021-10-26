@@ -23,7 +23,7 @@ let showTextFortune = true;
 let initialTimeTaken = false;
 var numApp = 5;
 var tiempoInicioHome = 0;
-var tiempoEsperaHome = 10000; // 10 seconds
+var tiempoEsperaHome = 12000; // 12 seconds
 var indice = 0;
 let img1;
 let img2;
@@ -406,7 +406,7 @@ function menu(){
 
 function menu2(){
     background("#292929");    // 333333                   3D3D3D
-
+    homeEureka.style.display = "block";
     if(indexSelected==5){
         rectMode(CENTER);
         fill(color5);
@@ -748,18 +748,18 @@ function appDescription(index) {
         stroke(color5);
         strokeWeight(4);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,84,35,9);
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -29,155,35,9);
         noStroke();
 
         fill(255);
         textSize(23);
-        text("Demo", width / 2 - 500, (85 * height) / 100 + 40);
+        text("Introduction", width / 2 - 500, (85 * height) / 100 + 40);
         textStyle(NORMAL);
         textSize(23);
         text(
-            "Watch the presentation of EurekaWall and know the 4 interactive experiences to use them while break",
+            "Watch a video to learn about the concepts behind EurekaWall.",
             width / 2 - 500,
-            (85 * height) / 100 + 80
+            (85 * height) / 100 + 82
         );
         noStroke();
     }
@@ -769,7 +769,7 @@ function appDescription(index) {
         stroke(color6);
         strokeWeight(5);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,123,35,9);
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -29,129,35,9);
         noStroke();
 
         fill(255);
@@ -778,9 +778,9 @@ function appDescription(index) {
         textStyle(NORMAL);
         textSize(23);
         text(
-            "Play an undemanding video game and unlock your creativity by promoting mind-wandering episodes",
+            "Play an undemanding video game to unlock your creativity",
             width / 2 - 500,
-            (85 * height) / 100 + 80
+            (85 * height) / 100 + 82
         );
         noStroke();
     }
@@ -790,7 +790,7 @@ function appDescription(index) {
         stroke(color7);
         strokeWeight(5);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,179,35,9);
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -29,175,35,9);
         noStroke();
 
         fill(255);
@@ -801,7 +801,7 @@ function appDescription(index) {
         text(
             "Create an unique and abstract visual work by exploring different brushes ",
             width / 2 - 500,
-            (85 * height) / 100 + 80
+            (85 * height) / 100 + 82
         );
         noStroke();
     }
@@ -812,7 +812,7 @@ function appDescription(index) {
         stroke(color8);
         strokeWeight(5);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,122,35,9);
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -29,122,36,9);
         noStroke();
 
         /*
@@ -838,7 +838,7 @@ function appDescription(index) {
         text(
             "Find serendipitous inspiration by exploring visual stimuli such as 9 live cameras from around the world",
             width / 2 - 500,
-            (85 * height) / 100 + 80
+            (85 * height) / 100 + 82
         );
         noStroke();
     }
@@ -848,7 +848,7 @@ function appDescription(index) {
         stroke(color9);
         strokeWeight(5);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -28,133,35,9);
+        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -29,133,36,9);
         noStroke();
 
         fill(255);
@@ -859,7 +859,7 @@ function appDescription(index) {
         text(
             "Create a visual representation of your ideas by painting them with shapes on a grid",
             width / 2 - 500,
-            (85 * height) / 100 + 80
+            (85 * height) / 100 + 82
         );
         //text("Create a meaninful visualization by painting with shapes on a grid",width/2-500,85*height/100+80);
         // customization sketching
@@ -1267,5 +1267,32 @@ document.getElementById("deleteCanvas").addEventListener("click", function() {
     background(backgroundColor);
 });
 
+
+var elem = document.documentElement;
+
+document.getElementById("fullscreenIcon").addEventListener("click", function() {
+    
+    if (!document.fullscreenElement){
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { // Safari 
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { // IE11 
+            elem.msRequestFullscreen();
+        }
+        document.getElementById("fullscreenIcon").innerHTML = `fullscreen_exit`;
+    } else{
+     if (document.fullscreenElement){
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) { // Safari 
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) { // IE11 
+            document.msExitFullscreen();
+          }
+          document.getElementById("fullscreenIcon").innerHTML = `fullscreen`;
+        }
+    }
+});
 
 

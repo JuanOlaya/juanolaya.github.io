@@ -3,11 +3,12 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  border-radius: 50px;
+  border-radius: 50%;
   padding: 15px;
   cursor: pointer;
   font-size: 35px;
   color: rgba(243, 228, 206);
+  padding: 10px;
   background-color: #141414;
 }
 
@@ -18,7 +19,10 @@
   left: 20px;
   cursor: pointer;
   font-size: 35px;
-  color: rgba(255, 255, 255);
+  color: rgba(243, 228, 206);
+  border-radius: 50%;
+  padding: 10px;
+  background-color: #141414;
   /*background-color: rgba(255, 255, 255);*/
   /*z-index: 0; */
   /*color: rgba(243, 228, 206);*/
@@ -31,7 +35,10 @@
   left: 20px;
   cursor: pointer;
   font-size: 35px;
-  color: rgba(255, 255, 255);
+  color: rgba(243, 228, 206);
+  border-radius: 50%;
+  padding: 10px;
+  background-color: #141414;
   /*background-color: rgba(255, 255, 255);*/
   /*z-index: 0; */
   /*color: rgba(243, 228, 206);*/
@@ -44,35 +51,196 @@
   left: 20px;
   cursor: pointer;
   font-size: 35px;
-  color: rgba(255, 255, 255);
+  color: rgba(243, 228, 206);
+  border-radius: 50%;
+  padding: 10px;
+  background-color: #141414;
 }
 
-#pencilMode{
+#dancingMode{
   margin: 0;
   position: absolute;
-  right: 30px;
+  left: 30px;
   bottom: 30px;
-  border-radius: 50px;
+  border-radius: 50%;
   padding: 15px;
   cursor: pointer;
-  font-size: 35px;
-  color: rgba(255, 255, 255);
+  font-size: 25px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+  z-index: 1;
+}
+
+#bigBangMode{
+  margin: 0;
+  position: absolute;
+  left: 105px;
+  bottom: 30px;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(243, 228, 206);
   background-color: #141414;
   z-index: 1;
   /*color: rgba(243, 228, 206);*/
 }
 
-#deleteCanvas{
+#pencilMode{
   margin: 0;
   position: absolute;
-  right: 110px;
+  left: 180px;
   bottom: 30px;
-  border-radius: 50px;
+  border-radius: 50%;
   padding: 15px;
   cursor: pointer;
-  font-size: 35px;
-  color: rgba(255, 255, 255);
+  font-size: 25px;
+  color: rgba(243, 228, 206);
   background-color: #141414;
   z-index: 1;
 }
+
+
+
+#crossShape{
+  margin: 0;
+  position: absolute;
+  left: 350px;
+  bottom: 30px;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+  z-index: 1;
+}
+
+#rectangleShape{
+  margin: 0;
+  position: absolute;
+  left: 425px;
+  bottom: 30px;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+  z-index: 1;
+}
+
+#lineShape{
+  margin: 0;
+  position: absolute;
+  left: 500px;
+  bottom: 30px;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+  z-index: 1;
+}
+
+#sizeMore{
+  margin: 0;
+  position: absolute;
+  left: 675px;
+  bottom: 30px;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+  z-index: 1;
+}
+
+#sizeLess{
+  margin: 0;
+  position: absolute;
+  left: 750px;
+  bottom: 30px;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+  z-index: 1;
+}
+
+#amountMore{
+  margin: 0;
+  position: absolute;
+  left: 875px;
+  bottom: 30px;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+  z-index: 1;
+}
+
+#amountLess{
+  margin: 0;
+  position: absolute;
+  left: 950px;
+  bottom: 30px;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+  z-index: 1;
+}
+
+#deleteCanvas{
+  margin: 0;
+  position: absolute;
+  left: 1150px;
+  bottom: 30px;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+  z-index: 1;
+}
+
+#darkMode{
+  margin: 0;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+  z-index: 1;
+}
+
+#lightMode{
+  margin: 0;
+  position: absolute;
+  left: 1075px;
+  bottom: 30px;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+  z-index: 1;
+}
+
+
 

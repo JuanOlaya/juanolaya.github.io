@@ -619,32 +619,7 @@ document.getElementById("leftArrowIcon").addEventListener("click", function() {
     updateDisplays();
 });
 
-var elem = document.documentElement;
 
-document.getElementById("fullscreenIcon").addEventListener("click", function() {
-    
-    if (!document.fullscreenElement){
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-        } else if (elem.webkitRequestFullscreen) { // Safari 
-            elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) { // IE11 
-            elem.msRequestFullscreen();
-        }
-        document.getElementById("fullscreenIcon").innerHTML = `fullscreen_exit`;
-    } else{
-     if (document.fullscreenElement){
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-          } else if (document.webkitExitFullscreen) { // Safari 
-            document.webkitExitFullscreen();
-          } else if (document.msExitFullscreen) { // IE11 
-            document.msExitFullscreen();
-          }
-          document.getElementById("fullscreenIcon").innerHTML = `fullscreen`;
-        }
-    }
-});
 
 document.getElementById("infoIcon").addEventListener("click", function() {
     console.log(document.getElementById("infoScreen").style.display);
