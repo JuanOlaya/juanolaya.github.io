@@ -176,7 +176,7 @@ function make2DArray(cols,rows){
 function setup() {
 	canvas = createCanvas(windowWidth,windowHeight);
 	canvas.position(0,0);	  
-	canvas.style("z-index",0);
+	canvas.style("z-index",-1);
 	// GENERAL
 	waitress = millis() + 1000; 
 	//ubuntuFont = loadFont("Assets/Fonts/Ubuntu-Medium.ttf");
