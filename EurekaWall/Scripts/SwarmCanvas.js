@@ -635,7 +635,7 @@ function generativeArt(){
 
 
 document.getElementById("goBackSwarmCanvas").addEventListener("click", function() {
-  defaultCanvas.style.display = "none";
+  //defaultCanvas.style.display = "none";
   homeEureka.style.display = "block";
   screen=0;
 });
