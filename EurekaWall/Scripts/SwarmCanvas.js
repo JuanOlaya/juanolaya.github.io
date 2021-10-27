@@ -649,10 +649,10 @@ document.getElementById("darkMode").addEventListener("click", function() {
     
     darkModeSwarmCanvas=!darkModeSwarmCanvas;
     if (darkModeSwarmCanvas){
-      document.getElementById("darkMode").innerHTML = `nightlight`;
+      document.getElementById("darkMode").innerHTML = `light_mode`;
       background(backgroundColor);
     } else{
-      document.getElementById("darkMode").innerHTML = `light_mode`;
+      document.getElementById("darkMode").innerHTML = `nightlight`;
       background("#F4EDDD");
     }
 });
