@@ -53,6 +53,7 @@ document.getElementsByTagName('canvas');
 
 swarmCanvasSection.style.display = "none";
 shapyGridSection.style.display = "none";
+homeEureka.style.display = "none";
 
 //defaultCanvas=document.getElementById("defaultCanvas0");
 //defaultCanvas.style.display = "none";
@@ -66,7 +67,7 @@ defaultCanvas1.style.display = "none";
 //homeEureka=document.getElementById("homeEureka");
 //homeIcons.style.display = "none";
 
-homeEureka.style.display = "none";
+
 
 function menu(){
     noStroke();
@@ -943,12 +944,14 @@ function mousePressed(){
                     demoSection.style.display = "block";
                     defaultCanvas.style.display = "none";
                     defaultCanvas.style.zIndex = "-1";
+                    homeEureka.style.display = "none";
                     screen=50;
                 }
                 if(numApp==6){  // MuseFlow
                     
                     
                     museFlowSec.style.display = "block";
+                    homeEureka.style.display = "none";
                     defaultCanvas.style.zIndex = "-1";
                     screen=40;
                     
@@ -1226,6 +1229,7 @@ document.getElementById("goBackMuseFlowSec").addEventListener("click", function(
     //defaultCanvas.style.display = "block";
     museFlowSec.style.display = "none";
     defaultCanvas.style.zIndex = "0";
+    homeEureka.style.display = "block";
     screen=0;
 });
 

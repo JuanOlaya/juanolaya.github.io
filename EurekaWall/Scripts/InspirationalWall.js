@@ -27,7 +27,7 @@ function inspirationWall(){
 			defaultCanvas.style.display = "block";
 			balconitySection.style.display = "none";
 			loading.style.display = "none";
-			homeEureka.style.display = "block";
+			
 			//homeEureka.style.display = "block";
 			//videoAustralia.style.display = "none";
 			//videoAguahoja.pause();

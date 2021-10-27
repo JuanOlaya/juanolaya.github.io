@@ -61,7 +61,7 @@
   margin: 0;
   position: absolute;
   left: 30px;
-  bottom: 30px;
+  bottom: 20px;
   border-radius: 50%;
   padding: 15px;
   cursor: pointer;
@@ -75,7 +75,7 @@
   margin: 0;
   position: absolute;
   left: 105px;
-  bottom: 30px;
+  bottom: 20px;
   border-radius: 50%;
   padding: 15px;
   cursor: pointer;
@@ -90,7 +90,7 @@
   margin: 0;
   position: absolute;
   left: 180px;
-  bottom: 30px;
+  bottom: 20px;
   border-radius: 50%;
   padding: 15px;
   cursor: pointer;
@@ -100,47 +100,65 @@
   z-index: 1;
 }
 
-
-
 #crossShape{
-  /*background: url("https://api.iconify.design/ic-baseline-face.svg?height=24") no-repeat top left;*/
-  background: url("assets/crossBeige.svg") no-repeat top left;
+  
+  /*background: url("https://juanolaya.github.io/EurekaWall/assets/crossBeige.svg") no-repeat top left;*/
   margin: 0;
   position: absolute;
   left: 350px;
-  bottom: 30px;
+  bottom: 20px;
   border-radius: 50%;
-  padding: 15px;
+  
+  width: 55px;
+  height: 55px;
+  
   cursor: pointer;
-  font-size: 25px;
+  /*font-size: 25px;*/
   color: rgba(243, 228, 206);
   background-color: #141414;
   z-index: 1;
 }
 
+.SVGlocation{
+  position: relative;
+  left: 12px;
+  top: 12px;
+}
+
+
+
 #rectangleShape{
+
+  /*background: url("https://juanolaya.github.io/EurekaWall/assets/rectangleBeige.svg") no-repeat top left;*/
   margin: 0;
   position: absolute;
   left: 425px;
-  bottom: 30px;
+  bottom: 20px;
   border-radius: 50%;
-  padding: 15px;
+  
+  width: 55px;
+  height: 55px;
+  
   cursor: pointer;
-  font-size: 25px;
+  /*font-size: 25px;*/
   color: rgba(243, 228, 206);
   background-color: #141414;
   z-index: 1;
 }
 
 #lineShape{
+  /*background: url("https://juanolaya.github.io/EurekaWall/assets/lineBeige.svg") no-repeat top left;*/
   margin: 0;
   position: absolute;
   left: 500px;
-  bottom: 30px;
+  bottom: 20px;
   border-radius: 50%;
-  padding: 15px;
+
+  width: 55px;
+  height: 55px;
+
   cursor: pointer;
-  font-size: 25px;
+  /*font-size: 25px;*/
   color: rgba(243, 228, 206);
   background-color: #141414;
   z-index: 1;
@@ -150,10 +168,11 @@
   margin: 0;
   position: absolute;
   left: 675px;
-  bottom: 30px;
+  bottom: 20px;
   border-radius: 50%;
   padding: 15px;
   cursor: pointer;
+  font-weight: bold;
   font-size: 25px;
   color: rgba(243, 228, 206);
   background-color: #141414;
@@ -164,10 +183,11 @@
   margin: 0;
   position: absolute;
   left: 750px;
-  bottom: 30px;
+  bottom: 20px;
   border-radius: 50%;
   padding: 15px;
   cursor: pointer;
+  font-weight: bold;
   font-size: 25px;
   color: rgba(243, 228, 206);
   background-color: #141414;
@@ -178,10 +198,11 @@
   margin: 0;
   position: absolute;
   left: 875px;
-  bottom: 30px;
+  bottom: 20px;
   border-radius: 50%;
   padding: 15px;
   cursor: pointer;
+  font-weight: bold;
   font-size: 25px;
   color: rgba(243, 228, 206);
   background-color: #141414;
@@ -192,10 +213,11 @@
   margin: 0;
   position: absolute;
   left: 950px;
-  bottom: 30px;
+  bottom: 20px;
   border-radius: 50%;
   padding: 15px;
   cursor: pointer;
+  font-weight: bold;
   font-size: 25px;
   color: rgba(243, 228, 206);
   background-color: #141414;
@@ -206,7 +228,7 @@
   margin: 0;
   position: absolute;
   left: 1150px;
-  bottom: 30px;
+  bottom: 20px;
   border-radius: 50%;
   padding: 15px;
   cursor: pointer;
@@ -236,7 +258,7 @@
   margin: 0;
   position: absolute;
   left: 1075px;
-  bottom: 30px;
+  bottom: 20px;
   border-radius: 50%;
   padding: 15px;
   cursor: pointer;
@@ -245,6 +267,3 @@
   background-color: #141414;
   z-index: 1;
 }
-
-
-
