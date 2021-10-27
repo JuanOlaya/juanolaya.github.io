@@ -53,7 +53,7 @@ document.getElementsByTagName('canvas');
 
 swarmCanvasSection.style.display = "none";
 shapyGridSection.style.display = "none";
-homeEureka.style.display = "none";
+//homeEureka.style.display = "none";
 
 //defaultCanvas=document.getElementById("defaultCanvas0");
 //defaultCanvas.style.display = "none";
@@ -1220,7 +1220,7 @@ document.getElementById("leftArrowIcon").addEventListener("click", function() {
 document.getElementById("goBackDemoSec").addEventListener("click", function() {
     demoSection.style.display = "none";
     defaultCanvas.style.display = "block";
-    defaultCanvas.style.zIndex = "0";
+    //defaultCanvas.style.zIndex = "0";
     screen=0;
 });
 
@@ -1228,7 +1228,7 @@ document.getElementById("goBackMuseFlowSec").addEventListener("click", function(
     //demoSection.style.display = "none";
     //defaultCanvas.style.display = "block";
     museFlowSec.style.display = "none";
-    defaultCanvas.style.zIndex = "0";
+    //defaultCanvas.style.zIndex = "0";
     homeEureka.style.display = "block";
     screen=0;
 });
@@ -1238,11 +1238,13 @@ document.getElementById("goBackSwarmCanvas").addEventListener("click", function(
     //defaultCanvas.style.display = "block";
     swarmCanvasSection.style.display = "none";
     //defaultCanvas.style.zIndex = "0";
+    homeEureka.style.display = "block";
     screen=0;
 });
 
 document.getElementById("goBackShapyGrid").addEventListener("click", function() {
     shapyGridSection.style.display = "none";
+    homeEureka.style.display = "block";
     screen=0;
 });
 
