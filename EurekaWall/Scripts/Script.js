@@ -112,7 +112,7 @@ function windowResized(){
 
 function preload() {
 	
-	img1 = loadImage("assets/demo.svg");
+	img1 = loadImage("assets/brainIntro.svg");
 	img2 = loadImage("assets/museFlow4.svg");
 	img3 = loadImage("assets/particleCanvas.svg");
 	img4 = loadImage("assets/balconity.svg");
