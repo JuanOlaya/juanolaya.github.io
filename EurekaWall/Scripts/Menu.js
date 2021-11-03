@@ -465,16 +465,16 @@ function menu2(){
     //stroke(255);
     strokeWeight(3);
     strokeCap(SQUARE);
-    line(15, 61,202,61);
-    line(15, 119,138,119);
+    //line(15, 61,202,61);
+    //line(15, 119,138,119);
     noStroke();
     
     fill(255);
     textSize(70);
     textStyle(BOLD);
     textSize(55);
-    text("Eureka", 15, 65);
-    text("Wall", 15, 123);
+    text("EurekaWall", 15, 65);
+    //text("Wall", 15, 123);
 
     fill(0);
 
@@ -485,7 +485,7 @@ function menu2(){
     //ellipse(width/2+473,height/2+190,150,150);  // ShapeGrid
 
     
-    image(img1, width / 2 - 515+10, (85 * height) / 100 - 196+10, 60, 60);
+    image(img1, width / 2 - 515+12, (85 * height) / 100 - 196+3, 53, 63);
     image(img2, width / 2 - 333+10, (85 * height) / 100 - 451+10, 70, 70);
     image(img3, width / 2 - 34+10, (85 * height) / 100 - 541+10, 60, 60);
     image(img4, width / 2 + 263+10, (85 * height) / 100 - 440+10, 60, 60);
@@ -749,17 +749,19 @@ function appDescription(index) {
         stroke(color5);
         strokeWeight(4);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -29,155,35,9);
+        rectMode(CENTER);
+        rect(width / 2 , (85 * height) / 100 + 40 ,155,35,9);
         noStroke();
 
         fill(255);
         textSize(23);
-        text("Introduction", width / 2 - 500, (85 * height) / 100 + 40);
+        textAlign(CENTER,CENTER);
+        text("Introduction", width / 2 , (85 * height) / 100 + 40);
         textStyle(NORMAL);
         textSize(23);
         text(
-            "Watch a video to learn about the concepts behind EurekaWall.",
-            width / 2 - 500,
+            "Watch a video to learn the concepts behind EurekaWall.",
+            width / 2 ,
             (85 * height) / 100 + 82
         );
         noStroke();
@@ -770,17 +772,19 @@ function appDescription(index) {
         stroke(color6);
         strokeWeight(5);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -29,129,35,9);
+        rectMode(CENTER);
+        rect(width / 2 , (85 * height) / 100 + 40 , 129 ,35,9);
         noStroke();
 
         fill(255);
         textSize(23);
-        text("MuseFlow", width / 2 - 500, (85 * height) / 100 + 40);
+        textAlign(CENTER,CENTER);
+        text("MuseFlow", width / 2, (85 * height) / 100 + 40);
         textStyle(NORMAL);
         textSize(23);
         text(
-            "Play an undemanding video game to unlock your creativity",
-            width / 2 - 500,
+            "Play an undemanding video game to unlock your creativity.",
+            width / 2,
             (85 * height) / 100 + 82
         );
         noStroke();
@@ -791,17 +795,19 @@ function appDescription(index) {
         stroke(color7);
         strokeWeight(5);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -29,175,35,9);
+        rectMode(CENTER);
+        rect(width / 2 , (85 * height) / 100 + 41,175,35,9);
         noStroke();
 
         fill(255);
         textSize(23);
-        text("SwarmCanvas", width / 2 - 500, (85 * height) / 100 + 40);
+        textAlign(CENTER,CENTER);
+        text("SwarmCanvas", width / 2 , (85 * height) / 100 + 42);
         textStyle(NORMAL);
         textSize(23);
         text(
-            "Create an unique and abstract visual work by exploring different brushes ",
-            width / 2 - 500,
+            "Create a visual work by exploring different brushes.",
+            width / 2 ,
             (85 * height) / 100 + 82
         );
         noStroke();
@@ -813,7 +819,8 @@ function appDescription(index) {
         stroke(color8);
         strokeWeight(5);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -29,122,36,9);
+        rectMode(CENTER);
+        rect(width / 2 , (85 * height) / 100 + 42,155,36,9);
         noStroke();
 
         /*
@@ -832,14 +839,15 @@ function appDescription(index) {
 
         fill(255);
         textSize(23);
-        text("Balconity", width / 2 - 500, (85 * height) / 100 + 40);
+        textAlign(CENTER,CENTER);
+        text("Balcondipity", width / 2, (85 * height) / 100 + 42);
         textStyle(NORMAL);
         textSize(23);
         fill(255);
         text(
-            "Find serendipitous inspiration by exploring visual stimuli such as 9 live cameras from around the world",
-            width / 2 - 500,
-            (85 * height) / 100 + 82
+            "Find serendipitous inspiration by looking through this observation point.",
+            width / 2 ,
+            (85 * height) / 100 + 89
         );
         noStroke();
     }
@@ -849,23 +857,31 @@ function appDescription(index) {
         stroke(color9);
         strokeWeight(5);
         //rect(width / 2 - 500 -10, (85 * height) / 100 + 40 -24,1190,75,5); // stroke
-        rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -29,133,36,9);
+        
+        
+        //rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -29,132,36,9);
+        rectMode(CENTER);
+        rect(width / 2, (85 * height) / 100 + 42 ,132,36,9);
         noStroke();
 
         fill(255);
         textSize(23);
-        text("ShapyGrid", width / 2 - 500, (85 * height) / 100 + 40);
+        //text("ShapyGrid", width / 2 - 500, (85 * height) / 100 + 40);
+        textAlign(CENTER,CENTER);
+        text("ShapyGrid", width / 2 , (85 * height) / 100 + 42);
         textStyle(NORMAL);
         textSize(23);
         text(
-            "Create a visual representation of your ideas by painting them with shapes on a grid",
-            width / 2 - 500,
-            (85 * height) / 100 + 82
+            "Sketch your ideas by painting them with shapes.",
+            width / 2,
+            (85 * height) / 100 + 89
         );
         //text("Create a meaninful visualization by painting with shapes on a grid",width/2-500,85*height/100+80);
         // customization sketching
         noStroke();
     }
+    rectMode(CORNER);
+    textAlign(LEFT,BOTTOM);
 }
 
 

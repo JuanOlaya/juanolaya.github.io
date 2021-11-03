@@ -445,7 +445,7 @@ body{
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-160px,238px);
+  transform: translate(-160px,275px);
   font-size: 90px;
   /*color: #F3E4CE;*/
   color: #F1D8BC;
@@ -459,7 +459,7 @@ body{
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(78px,238px);
+  transform: translate(78px,275px);
   font-size: 90px;
   /*color: #F3E4CE;*/
   color: #F1D8BC;
@@ -499,11 +499,16 @@ body{
 #infoIcon{
   margin: 0;
   position: absolute;
-  bottom: 20px;
-  right: 65px;
+  top: 20px;
+  right: 20px;
   cursor: pointer;
   font-size: 35px;
+  transform: rotate(180deg);
   color: rgba(243, 228, 206, 0.9);
+  border-radius: 50%;
+  padding: 10px;
+  /* background-color: #141414;*/
+  background-color: #292A2B;
 }
 
 #cancelInfoScreen{
@@ -534,7 +539,8 @@ body{
   color: rgba(243, 228, 206, 1);
   border-radius: 50%;
   padding: 10px;
-  background-color: #141414;
+  /*background-color: #141414;*/
+  background-color: #292A2B;
 }
 
 .span_no_selection {
@@ -555,6 +561,7 @@ body{
 
 #aboutIcon{
   font-size: 140px;
+  cursor: pointer;
 }
 
 .aboutIconMargin{
