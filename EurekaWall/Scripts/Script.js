@@ -171,7 +171,7 @@ function make2DArray(cols,rows){
 	return arr;
 }
 
-
+//defaultCanvas=document.getElementById("defaultCanvas0");
 
 function setup() {
 	canvas = createCanvas(windowWidth,windowHeight);
