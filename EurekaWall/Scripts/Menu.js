@@ -1145,6 +1145,7 @@ function mouseDragged() {
 //  function mouseReleased(){
 function mouseReleasedSwarmCanvas() {
     if(modeSwarmCanvas==3){
+    //modeSwarmCanvas
         showShapes=false;
         //timerPencilMode=false;
     }

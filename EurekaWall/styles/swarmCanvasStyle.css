@@ -224,10 +224,38 @@
   z-index: 1;
 }
 
+#darkMode{
+  margin: 0;
+  position: absolute;
+  left: 1075px;
+  bottom: 20px;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+  z-index: 1;
+}
+
 #deleteCanvas{
   margin: 0;
   position: absolute;
   left: 1150px;
+  bottom: 20px;
+  border-radius: 50%;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(243, 228, 206);
+  background-color: #141414;
+  z-index: 1;
+}
+
+#saveCanvas{
+  margin: 0;
+  position: absolute;
+  left: 1250px;
   bottom: 20px;
   border-radius: 50%;
   padding: 15px;
@@ -254,16 +282,5 @@
 }
 */
 
-#darkMode{
-  margin: 0;
-  position: absolute;
-  left: 1075px;
-  bottom: 20px;
-  border-radius: 50%;
-  padding: 15px;
-  cursor: pointer;
-  font-size: 25px;
-  color: rgba(243, 228, 206);
-  background-color: #141414;
-  z-index: 1;
-}
+
+

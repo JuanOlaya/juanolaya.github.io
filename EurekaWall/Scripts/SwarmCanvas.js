@@ -12,7 +12,7 @@ var swarmSize2=1;
 var swarmStroke=2;
 
 let particleCanvasSec;
-let modeSwarmCanvas=1;   // 1=dancingMode  2=bigBangMode   3=pencilMode
+var modeSwarmCanvas=1;   // 1=dancingMode  2=bigBangMode   3=pencilMode
 let seekSwarmCanvas=4;
 
 /*
@@ -742,3 +742,84 @@ document.getElementById("deleteCanvas").addEventListener("click", function() {
   }
 
 });
+
+
+  
+  
+
+///////////********** Selection Process ********/////////////
+
+/*
+document.getElementById("selectImage").onclick = function (e){
+  
+  console.log("Button select");
+  var input = document.createElement('input');
+  input.type= 'file';
+
+  input.onchange = e => {
+    files = e.target.files;
+    reader = new FileReader();
+    reader.onload = function (){
+      document.getElementById("myimg").src = reader.result;
+    }
+    reader.readAsDataURL(files[0]);
+  }
+  input.click();
+}
+*/
+
+///////////********** Upload Process ********/////////////
+
+
+//document.getElementById("saveSwarmCanvas").addEventListener("click", function() {
+
+/*
+document.getElementById("upload").onclick = function(){
+  var ImgName = document.getElementById("namebox").value;
+  var uploadTask = storage.storage().ref('Images'/+ImgName+".png").put(files[0]);
+
+  uploadTask.on('state_changed',function(snapshot){
+    var progress = (snapshot.bytesTransferred / snapshot.totalBytes)*100;
+    document.getElementById('UpProgress').innerHTML = 'Upload'+progress+'%';
+  },
+
+  function(error){
+    alert('error in saving the image');
+  },
+
+  function(){
+    uploadTask.snapshot.ref.getDownloadURL().then(function(url){
+      ImgUrl = url;
+
+      firebase.database().ref('Picture/'+ImgName).set({
+        Name: ImagName,
+        Link: ImagUrl
+      });
+      alert('image added successfully');
+      }
+    );
+  });
+}
+*/
+
+/*
+document.getElementById("saveSwarmCanvas").addEventListener("click", function() {
+  const ImgName = document.getElementById("namebox").value;
+  const archivoRef = ref(storage, 'Images/'+ImgName+".png" );
+  await uploadBytes(archivoRef,archivoLocal);
+});
+*/
+
+/*
+document.getElementById("saveSwarmCanvas").addEventListener("click", function() {
+  console.log("saveCanvas");
+  html2canvas(document.querySelector("#defaultCanvas0")).then(canvas => {
+    document.body.appendChild(canvas);
+    return Canvas2Image.saveAsPNG(canvas);
+    //Canvas2Image.saveAsPNG(canvas);
+  });
+});
+*/
+
+
+
