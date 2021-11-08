@@ -68,7 +68,10 @@
         </section>
 
         <section id=museFlowSec> 
+            
             <span id="goBackMuseFlowSec" class="material-icons-outlined span_no_selection">arrow_back</span>   
+            
+
             <!--            
             <div class="fullBackgroundHome"></div>
             -->
@@ -571,7 +574,7 @@
             //console.log(image.src);
 
             const storage = getStorage();
-            const storageRef = ref(storage, 'Images/some-child'+new Date());
+            const storageRef = ref(storage, 'Images/'+new Date());
             uploadString(storageRef, image.src, 'data_url').then((snapshot) => {
             console.log('Uploaded a data_url string!');
             });
