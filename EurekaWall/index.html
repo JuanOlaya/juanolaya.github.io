@@ -31,6 +31,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"rel="stylesheet">
 
+        <!--
         <style> 
             img{ 
                 height: 200px; 
@@ -38,6 +39,7 @@
                 border: 2px black solid; 
             }
         </style>
+        -->
     </head>
     
     <!--
@@ -113,16 +115,17 @@
             <span id="fullscreenIcon" class="material-icons-round span_no_selection">fullscreen</span>
             
             
-            
+            <!--
             <label>Image Name</label> <input type="text" id="nameBox"> <label id="extlab"></label> <br><br>
             <img id="myimg"> <label id="upprogress"></label> <br><br>
 
             <button id="selbtn">Select Imageee</button>
             <button id="upbtn">Upload Image</button>
-            <!--
+            
             <button id="downbtn">Retrieve Image</button> 
-            -->
+            
             <button id="snap">Capture</button>
+            -->
             
         </section>
 
@@ -457,6 +460,7 @@
             console.log(app);
 
 //-----------Variable & References ---------------------//
+            /*
             var files = [];
             var reader = new FileReader();
 
@@ -486,9 +490,9 @@
             reader.onload = function(){
                 myimg.src = reader.result;
             }
-
+            */
 //--------------Selection ---------------------//
-
+            /*
             SelBtn.onclick = function (){
                 console.log("select BTN");
                 input.click();
@@ -505,9 +509,10 @@
                 var fname = temp.slice(0,-1).join('.');
                 return fname;
             }
+            */
 
         //--------------Upload process ---------------------//
-
+            /*
         async function UploadProcess(){
             var ImgToUpload = files[0];
 
@@ -538,12 +543,11 @@
         }
 
         UpBtn.onclick = UploadProcess;
-
-
+        */
         //----------- Capture ---------//
 
         //var context = defaultCanvas.getContext('2d');
-
+        /*
         snap.addEventListener('click',function(){
             var image = new Image();
             image.id= 'pic';
@@ -556,21 +560,22 @@
                 uploadString(storageRef, image.src, 'data_url').then((snapshot) => {
                 console.log('Uploaded a data_url string!');
             });
-            
-            /*
-            var boton = document.createElement('button');
-            boton.textContent = 'Upload Image';
-            document.body.appendChild(boton);
-            boton.onclick= function(){
-                const storage = getStorage();
-                const storageRef = ref(storage, 'Images/some-child'+new Date());
-                uploadString(storageRef, image.src, 'data_url').then((snapshot) => {
-                console.log('Uploaded a data_url string!');
-                });
-            }
-            */
-            
         })
+        */
+
+
+        document.getElementById("saveSwarmCanvas").addEventListener("click", function() {
+            var image = new Image();
+            image.id= 'pic';
+            image.src = defaultCanvas0.toDataURL('image/png');
+            //console.log(image.src);
+
+            const storage = getStorage();
+            const storageRef = ref(storage, 'Images/some-child'+new Date());
+            uploadString(storageRef, image.src, 'data_url').then((snapshot) => {
+            console.log('Uploaded a data_url string!');
+            });
+        });
 
         </script>
 
