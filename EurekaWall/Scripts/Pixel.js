@@ -335,7 +335,7 @@ class Pixel{
     resetPixel(){
         if(eraserDragging==true && mouseX>this.posX){
             this.status=1;
-            this.indexColor=0;
+            this.indexColor=5;
             this.diameter=sizePixel;
         }
     }
