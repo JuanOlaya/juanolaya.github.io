@@ -3397,7 +3397,7 @@ function windowResized() {
   }
 }
 
-
+/*
 function mouseDragged() {
   if (thoughtProbePage == 2) {
     
@@ -3485,3 +3485,4 @@ function mouseDragged() {
     console.log("scoreQ10: "+scoreQ10);
   }
 }
+*/

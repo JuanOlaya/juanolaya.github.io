@@ -1157,6 +1157,7 @@ function mouseReleasedSwarmCanvas() {
         }
     }
 
+    /*
     if( dist(mouseX,mouseY,width/25+(sizePixel*10+12*10),bordeAbajo)<sizePixel){
 		if(onOffBar){
 			onOffBar=false;
@@ -1165,6 +1166,7 @@ function mouseReleasedSwarmCanvas() {
 			onOffBar=true;
 		}
 	}
+    */
 }
 
 function printCanvas(){
@@ -1259,11 +1261,7 @@ document.getElementById("goBackSwarmCanvas").addEventListener("click", function(
     screen=0;
 });
 
-document.getElementById("goBackShapyGrid").addEventListener("click", function() {
-    shapyGridSection.style.display = "none";
-    homeEureka.style.display = "block";
-    screen=0;
-});
+
 
 
 

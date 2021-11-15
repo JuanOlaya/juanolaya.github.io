@@ -76,17 +76,20 @@ function paintingPixels(){
     }
 
     // ON/OFF BAR BUTTON
+    /*
     fill("#EFD8B9");
     if(!onOffBar){
         ellipse(350*width/1000,bordeAbajo,sizePixel/2,sizePixel/2);
     }else{
         ellipse(365*width/1000,bordeAbajo,sizePixel/2,sizePixel/2);
     }
+    
     noFill();
     stroke("#EFD8B9");
     strokeWeight(2);
     rect(342*width/1000,bordeAbajo-sizePixel/4-2,60,sizePixel/2+4,20);
     noStroke();
+    */
     
     if(onOffBar){
         // Shape1: CONVENTIONAL PIXEL //
@@ -328,18 +331,18 @@ function paintingPixels(){
     if(eraserDragging){
         //stroke("#4A2A18");
         noStroke();
-        fill("#000000");  //060201
+        fill("#000");  //060201
         //rect(0,0,mouseX,width);
         strokeWeight(30);
         stroke("#de5a04");
         strokeCap(ROUND);
         line(mouseX,0 /*10*height/200*/,mouseX-10,height/*190*height/200*/);
         strokeWeight(8);
-        stroke("#000000");
+        stroke("#000");
         line(mouseX,0 /*12*height/200*/,mouseX-10,height/*188*height/200*/);
     }
     else{
-        fill("#000000");
+        fill("#000");
         rect(0,0,12,width);
         strokeWeight(3);
         stroke("#de5a04");
@@ -347,9 +350,102 @@ function paintingPixels(){
         line(5,height/4-30,5,height/4+30);
         line(5,3*height/4-30,5,3*height/4+30);
     }
-
-
 }
+
+document.getElementById("goBackShapyGrid").addEventListener("click", function() {
+    shapyGridSection.style.display = "none";
+    homeEureka.style.display = "block";
+    screen=0;
+});
+
+document.getElementById("purple").addEventListener("click", function() {
+    colorSelected=0;
+});
+
+document.getElementById("yellow").addEventListener("click", function() {
+    colorSelected=1;
+});
+
+document.getElementById("pink").addEventListener("click", function() {
+    colorSelected=2;
+});
+
+document.getElementById("green").addEventListener("click", function() {
+    colorSelected=3;
+});
+
+document.getElementById("orange").addEventListener("click", function() {
+    colorSelected=4;
+});
+
+document.getElementById("clean").addEventListener("click", function() {
+    colorSelected=5;
+});
+
+document.getElementById("circleShapy").addEventListener("click", function() {
+    shapeSelected=1;
+});
+
+document.getElementById("squareShapy").addEventListener("click", function() {
+    shapeSelected=2;
+});
+
+document.getElementById("pie1Shapy").addEventListener("click", function() {
+    shapeSelected=3;
+});
+
+document.getElementById("pie2Shapy").addEventListener("click", function() {
+    shapeSelected=4;
+});
+
+document.getElementById("pie3Shapy").addEventListener("click", function() {
+    shapeSelected=5;
+});
+
+document.getElementById("pie4Shapy").addEventListener("click", function() {
+    shapeSelected=6;
+});
+
+document.getElementById("triangle1Shapy").addEventListener("click", function() {
+    shapeSelected=7;
+});
+
+document.getElementById("triangle2Shapy").addEventListener("click", function() {
+    shapeSelected=8;
+});
+
+document.getElementById("triangle3Shapy").addEventListener("click", function() {
+    shapeSelected=9;
+});
+
+document.getElementById("triangle4Shapy").addEventListener("click", function() {
+    shapeSelected=10;
+});
+
+document.getElementById("leaf1Shapy").addEventListener("click", function() {
+    shapeSelected=11;
+});
+
+document.getElementById("leaf2Shapy").addEventListener("click", function() {
+    shapeSelected=12;
+});
+
+
+/*
+circleShapy
+squareShapy
+pie1Shapy
+pie2Shapy
+pie3Shapy
+pie4Shapy
+triangle1Shapy
+triangle2Shapy
+triangle3Shapy
+triangle4Shapy
+leaf1Shapy
+leaf2Shapy
+*/
+
 
 function pixelWave(){ 
     
