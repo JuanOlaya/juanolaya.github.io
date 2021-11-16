@@ -861,18 +861,18 @@ function appDescription(index) {
         
         //rect(width / 2 - 500 -9, (85 * height) / 100 + 40 -29,132,36,9);
         rectMode(CENTER);
-        rect(width / 2, (85 * height) / 100 + 42 ,132,36,9);
+        rect(width / 2, (85 * height) / 100 + 42 ,182,36,9);
         noStroke();
 
         fill(255);
         textSize(23);
         //text("ShapyGrid", width / 2 - 500, (85 * height) / 100 + 40);
         textAlign(CENTER,CENTER);
-        text("ShapyGrid", width / 2 , (85 * height) / 100 + 42);
+        text("ShapyPresence", width / 2 , (85 * height) / 100 + 42);
         textStyle(NORMAL);
         textSize(23);
         text(
-            "Sketch your ideas by painting them with shapes.",
+            "Remote social presence.",
             width / 2,
             (85 * height) / 100 + 89
         );

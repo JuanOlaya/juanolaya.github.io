@@ -22,7 +22,8 @@ class Pixel{
         this.upDown=floor(random(2));
         //this.colores=["#3A417E","#EAD367","#7F6A93","#EFD8B9"]; //  1. HANSA YELLOW     //000000  #381501
         //this.colores=["#3A417E","#A349A4","#E0AB62","#EFD8B9","#381501"]; //      E0CB62 1. Purpureus (Purple) 2.HANSA YELLOW (E8D366) // EAD367  EAD467
-        this.colores=["#484B78","#E4AA2D","#C62F40","#58875D","#D0692E","#1E1E1E"];
+        //this.colores=["#484B78","#E4AA2D","#C62F40","#58875D","#D0692E","#1E1E1E"];
+        this.colores=["#484B78","#E4AA2D","#C62F40","#58875D","#D0692E", backgroundColorShapy];
         this.hasChangedColor=false;
         this.hasChangedStatus=false;
         this.status=1;
