@@ -1,7 +1,27 @@
 
+let backgroundShapy = 1;
+let backgroundColorShapy=backgroundColor;
+
+
+
 function paintingPixels(){
     
-    background(backgroundColor);
+    /*
+    if(backgroundShapy == 1){
+        background(backgroundColor);
+    }
+
+    if(backgroundShapy == 2){
+        background(backgroundColorShapy2);
+    }
+
+    if(backgroundShapy == 3){
+        background(backgroundColorShapy3);
+    }
+    */
+
+    background(backgroundColorShapy);
+
     rectMode(CORNER);
     for(let i=0;i<pixelList.length;i++){
         pixelList[i].show();
@@ -430,6 +450,35 @@ document.getElementById("leaf2Shapy").addEventListener("click", function() {
     shapeSelected=12;
 });
 
+document.getElementById("backgroundShapy").addEventListener("click", function() {
+    
+    if(backgroundShapy<4){
+        backgroundShapy++;
+    }
+    else{
+        backgroundShapy=1;
+    }
+    
+    //console.log("backgroundShapy  "+backgroundShapy);
+
+    if (backgroundShapy == 1){
+        backgroundColorShapy = backgroundColor;
+    }
+    if (backgroundShapy == 2){
+        backgroundColorShapy = "#18111D";
+    }
+    if (backgroundShapy == 3){
+        backgroundColorShapy = "#FF6600";
+    }
+
+    if (backgroundShapy == 4){
+        backgroundColorShapy = "#E1CFA3";
+    }
+
+    for(let i=0;i<pixelList.length;i++){
+        pixelList[i].colores=["#484B78","#E4AA2D","#C62F40","#58875D","#D0692E", backgroundColorShapy];
+    }
+});
 
 /*
 circleShapy

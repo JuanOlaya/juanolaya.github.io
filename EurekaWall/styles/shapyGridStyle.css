@@ -72,10 +72,25 @@
     /*color: rgba(243, 228, 206);*/
 }
 
+#clean{
+    margin: 0;
+    position: absolute;
+    left: 375px;
+    bottom: 20px;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 25px;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+    /*color: rgba(243, 228, 206);*/
+}
+
 #circleShapy{
     margin: 0;
     position: absolute;
-    left: 415px;
+    left: 480px;
     bottom: 20px;
     border-radius: 50%;
     
@@ -92,7 +107,7 @@
 #squareShapy{
     margin: 0;
     position: absolute;
-    left: 475px;
+    left: 540px;
     bottom: 20px;
     border-radius: 50%;
     
@@ -109,7 +124,7 @@
   #pie1Shapy{
     margin: 0;
     position: absolute;
-    left: 535px;
+    left: 600px;
     bottom: 20px;
     border-radius: 50%;
     
@@ -126,7 +141,7 @@
   #pie2Shapy{
     margin: 0;
     position: absolute;
-    left: 595px;
+    left: 660px;
     bottom: 20px;
     border-radius: 50%;
     
@@ -143,7 +158,7 @@
 #pie3Shapy{
     margin: 0;
     position: absolute;
-    left: 655px;
+    left: 720px;
     bottom: 20px;
     border-radius: 50%;
     
@@ -160,7 +175,7 @@
   #pie4Shapy{
     margin: 0;
     position: absolute;
-    left: 715px;
+    left: 780px;
     bottom: 20px;
     border-radius: 50%;
     
@@ -177,7 +192,7 @@
   #triangle1Shapy{
     margin: 0;
     position: absolute;
-    left: 775px;
+    left: 840px;
     bottom: 20px;
     border-radius: 50%;
     
@@ -194,7 +209,7 @@
   #triangle2Shapy{
     margin: 0;
     position: absolute;
-    left: 835px;
+    left: 900px;
     bottom: 20px;
     border-radius: 50%;
     
@@ -211,7 +226,7 @@
 #triangle3Shapy{
     margin: 0;
     position: absolute;
-    left: 895px;
+    left: 960px;
     bottom: 20px;
     border-radius: 50%;
     
@@ -228,7 +243,7 @@
 #triangle4Shapy{
     margin: 0;
     position: absolute;
-    left: 955px;
+    left: 1020px;
     bottom: 20px;
     border-radius: 50%;
     
@@ -245,7 +260,7 @@
 #leaf1Shapy{
     margin: 0;
     position: absolute;
-    left: 1015px;
+    left: 1080px;
     bottom: 20px;
     border-radius: 50%;
     
@@ -262,7 +277,7 @@
 #leaf2Shapy{
     margin: 0;
     position: absolute;
-    left: 1075px;
+    left: 1140px;
     bottom: 20px;
     border-radius: 50%;
     
@@ -276,10 +291,12 @@
     z-index: 1;
 }
 
-#clean{
+
+
+#backgroundShapy{
     margin: 0;
     position: absolute;
-    left: 1175px;
+    left: 1275px;
     bottom: 20px;
     border-radius: 50%;
     padding: 15px;
