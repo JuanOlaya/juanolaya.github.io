@@ -743,6 +743,23 @@ document.getElementById("deleteCanvas").addEventListener("click", function() {
 
 });
 
+document.getElementById("cancelInfoScreenSwarmCanvas").addEventListener("click", function() {
+  document.getElementById("infoScreenSwarmCanvas").style.display="none";
+  
+  slideIndex=1;
+  showSlides(slideIndex);
+});
+
+document.getElementById("infoIconSwarmCanvas").addEventListener("click", function() {
+  //console.log(document.getElementById("infoScreen").style.display);
+  if(document.getElementById("infoScreenSwarmCanvas").style.display=="block"){
+      document.getElementById("infoScreenSwarmCanvas").style.display="none";
+  }else{
+      document.getElementById("infoScreenSwarmCanvas").style.display="block";
+  }
+  slideIndex=1;
+  showSlides(slideIndex);
+});
 
   
   

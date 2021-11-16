@@ -3486,3 +3486,22 @@ function mouseDragged() {
   }
 }
 */
+
+
+document.getElementById("cancelInfoScreenMuseFlow").addEventListener("click", function() {
+  document.getElementById("infoScreenMuseFlow").style.display="none";
+  
+  slideIndex=1;
+  showSlides(slideIndex);
+});
+
+document.getElementById("infoIconMuseFlow").addEventListener("click", function() {
+  //console.log(document.getElementById("infoScreen").style.display);
+  if(document.getElementById("infoScreenMuseFlow").style.display=="block"){
+      document.getElementById("infoScreenMuseFlow").style.display="none";
+  }else{
+      document.getElementById("infoScreenMuseFlow").style.display="block";
+  }
+  slideIndex=1;
+  showSlides(slideIndex);
+});
