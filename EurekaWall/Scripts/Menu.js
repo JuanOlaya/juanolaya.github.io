@@ -760,7 +760,7 @@ function appDescription(index) {
         textStyle(NORMAL);
         textSize(23);
         text(
-            "Watch a video to learn the concepts behind EurekaWall.",
+            "Watch this video to learn the concepts behind EurekaWall.",
             width / 2 ,
             (85 * height) / 100 + 82
         );
@@ -783,7 +783,7 @@ function appDescription(index) {
         textStyle(NORMAL);
         textSize(23);
         text(
-            "Play an undemanding video game to unlock your creativity.",
+            "Play this undemanding video game to unlock your creativity.",
             width / 2,
             (85 * height) / 100 + 82
         );
@@ -872,7 +872,8 @@ function appDescription(index) {
         textStyle(NORMAL);
         textSize(23);
         text(
-            "Remote social presence.",
+            //"Feel remote social presence through this shared board",
+            "Feel a remote social presence by creating and sharing visual messages",
             width / 2,
             (85 * height) / 100 + 89
         );
