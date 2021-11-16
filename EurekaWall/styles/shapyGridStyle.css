@@ -307,3 +307,55 @@
     z-index: 1;
     /*color: rgba(243, 228, 206);*/
 }
+
+
+.screenInfoShapy{
+  width: 1200px; 
+  height: 633px;
+  border: 43px solid #292A2B;
+  background: #292A2B;
+  line-height: 120%;
+  color: #F1D8BC;
+  font-size: 35px;
+  border-radius: 20px;
+  /*
+  border-radius: 0px 100px 0px 100px;
+  box-shadow:  41px 41px 70px #cf8c1e,
+  -41px -41px 70px #ffbe28;
+  */
+  z-index: 2;
+  opacity: 1;
+}
+
+#cancelInfoScreenShapy{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  transform: translate(595px,315px);
+  cursor: pointer;
+  font-size: 45px;
+  /*color: #F3E4CE;*/
+  color: #F1D8BC;
+  border-radius: 50%;
+  background: #3C3D3E;
+  border: 10px solid #3C3D3E;
+  z-index: 2;
+}
+
+#infoIconShapy{
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 35px;
+  transform: rotate(180deg);
+  color: rgba(243, 228, 206, 0.9);
+  border-radius: 50%;
+  padding: 10px;
+  /* background-color: #141414;*/
+  background-color: #292A2B;
+}

@@ -474,7 +474,10 @@ function menu2(){
     textStyle(BOLD);
     textSize(55);
     text("EurekaWall", 15, 65);
-    //text("Wall", 15, 123);
+    textSize(16.1);
+    textStyle(NORMAL);
+    textAlign(LEFT, BOTTOM);
+    text("The inspirational toolkit for creatives", 20, 81);
 
     fill(0);
 

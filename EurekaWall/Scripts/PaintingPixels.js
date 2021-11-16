@@ -480,6 +480,24 @@ document.getElementById("backgroundShapy").addEventListener("click", function() 
     }
 });
 
+document.getElementById("cancelInfoScreenShapy").addEventListener("click", function() {
+    document.getElementById("infoScreenShapy").style.display="none";
+    
+    slideIndex=1;
+    showSlides(slideIndex);
+});
+
+document.getElementById("infoIconShapy").addEventListener("click", function() {
+    //console.log(document.getElementById("infoScreen").style.display);
+    if(document.getElementById("infoScreenShapy").style.display=="block"){
+        document.getElementById("infoScreenShapy").style.display="none";
+    }else{
+        document.getElementById("infoScreenShapy").style.display="block";
+    }
+    slideIndex=1;
+    showSlides(slideIndex);
+});
+
 /*
 circleShapy
 squareShapy
