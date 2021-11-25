@@ -478,6 +478,9 @@ function menu2(){
     textStyle(NORMAL);
     textAlign(LEFT, BOTTOM);
     text("The inspirational toolkit for creatives", 20, 81);
+    textSize(14.1);
+    //textStyle(ITALIC);
+    //text("#BreakTimes #CoworkingSpaces", 20, 102);
 
     fill(0);
 
