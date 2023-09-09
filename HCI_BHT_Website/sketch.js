@@ -6,7 +6,7 @@ function setup() {
 }
 
 function draw() {
-  background("#D7D3D8");
+  background("#1C3147");
   
   fill("#E23C12");
   noStroke();
