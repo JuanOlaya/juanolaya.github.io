@@ -12,7 +12,7 @@ function draw() {
   noStroke();
   ellipse(15*width/100, 43*height/100,diameter,diameter);
   
-  fill("#BD320F");
+  fill("#D10B5B");  //#BD320F
   noStroke();
   ellipse(38*width/100, 43*height/100,diameter,diameter);
   
