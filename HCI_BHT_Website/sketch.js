@@ -15,7 +15,7 @@ function draw() {
   background("#1C3147");
   image(img, 0, 0, 234, 29);
 
-
+    console.log("MouseX: "+mouseX+" MouseY: "+mouseY);
   fill("#E23C12");
   noStroke();
   ellipse(15*width/100, 43*height/100,diameter,diameter);
