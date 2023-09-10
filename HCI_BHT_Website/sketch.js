@@ -16,7 +16,7 @@ function draw() {
 
     fill("#E23C12");
     noStroke();
-    ellipse(25*width/100, 43*height/100,diameter,diameter);
+    ellipse(20*width/100, 43*height/100,diameter,diameter);
 
     fill("#D10B5B");  //#BD320F
     noStroke();
@@ -24,7 +24,7 @@ function draw() {
 
     fill("#DE2697");  // #97280C
     noStroke();
-    ellipse(75*width/100, 43*height/100,diameter,diameter);
+    ellipse(80*width/100, 43*height/100,diameter,diameter);
 
     /*
     fill("#711E09");
@@ -36,7 +36,7 @@ function draw() {
     //fill("#E23C12");
     fill("#189CD8");      //#97280C
     noStroke();
-    ellipse(25*width/100, 76*height/100,diameter,diameter);
+    ellipse(20*width/100, 76*height/100,diameter,diameter);
 
     fill("#BD320F");
     noStroke();
@@ -51,7 +51,7 @@ function draw() {
 
     if(mouseIsPressed)
     {
-    if(50>dist(mouseX,mouseY,62*width/100, 43*height/100))  
+    if(50>dist(mouseX,mouseY,80*width/100, 43*height/100))  
     {
         console.log("Entra");
         statusMenu=-1;
