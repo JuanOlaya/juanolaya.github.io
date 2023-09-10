@@ -3,9 +3,6 @@ var statusMenu=0;
 var statusGeneral=1;
 let img;
 
-
-
-
 function setup() {
   createCanvas(windowWidth , windowHeight);
   img = loadImage('assets/HCI_logo.svg');
@@ -13,7 +10,7 @@ function setup() {
 
 function draw() {
   background("#1C3147");
-  image(img, 0, 0, 234, 29);
+  image(img, 178, 135, 234*1.6, 29*1.6);
 
     console.log("MouseX: "+mouseX+" MouseY: "+mouseY);
   fill("#E23C12");
