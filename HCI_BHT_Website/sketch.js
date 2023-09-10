@@ -10,7 +10,7 @@ function setup() {
 
 function draw() {
   background("#1C3147");
-  image(img, 178, 135, 234*1.6, 29*1.6);
+  image(img, 178, 45, 234*2, 29*2);
 
     console.log("MouseX: "+mouseX+" MouseY: "+mouseY);
   fill("#E23C12");
