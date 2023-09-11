@@ -7,7 +7,7 @@ function setup() {
     createCanvas(windowWidth , windowHeight);
     canvas.position(0,0);	  
 	canvas.style("z-index",-1);
-    defaultCanvas=document.getElementById("defaultCanvas0");
+    //defaultCanvas=document.getElementById("defaultCanvas0");
     //img = loadImage('assets/HCI_logo.svg');
 }
 
