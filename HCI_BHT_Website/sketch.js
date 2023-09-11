@@ -5,12 +5,12 @@ let img;
 
 function setup() {
     createCanvas(windowWidth , windowHeight);
-    img = loadImage('assets/HCI_logo.svg');
+    //img = loadImage('assets/HCI_logo.svg');
 }
 
 function draw() {
     background("#1C3147");
-    image(img, 178, 45, 234*2, 29*2);
+    //image(img, 178, 45, 234*2, 29*2);
 
     console.log("MouseX: "+mouseX+" MouseY: "+mouseY);
 
