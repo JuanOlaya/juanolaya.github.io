@@ -16,15 +16,11 @@ function draw() {
 
     fill("#E23C12");
     noStroke();
-    ellipse(20*width/100, 43*height/100,diameter,diameter);
+    ellipse(20*width/100, 30*height/100,diameter,diameter);
 
     fill("#D10B5B");  //#BD320F
     noStroke();
-    ellipse(50*width/100, 43*height/100,diameter,diameter);
-
-    fill("#DE2697");  // #97280C
-    noStroke();
-    ellipse(80*width/100, 43*height/100,diameter,diameter);
+    ellipse(50*width/100, 30*height/100,diameter,diameter);
 
     /*
     fill("#711E09");
@@ -36,17 +32,21 @@ function draw() {
     //fill("#E23C12");
     fill("#189CD8");      //#97280C
     noStroke();
-    ellipse(20*width/100, 76*height/100,diameter,diameter);
+    ellipse(20*width/100, 60*height/100,diameter,diameter);
 
     fill("#BD320F");
     noStroke();
-    ellipse(50*width/100, 76*height/100,diameter,diameter);
+    ellipse(50*width/100, 60*height/100,diameter,diameter);
 
     /*
     fill("#189CD8");      //#97280C
     noStroke();
     ellipse(62*width/100, 76*height/100,diameter,diameter);
     */
+
+    fill("#DE2697");  // #97280C
+    noStroke();
+    ellipse(20*width/100, 90*height/100,diameter,diameter);
 
 
     if(mouseIsPressed)
