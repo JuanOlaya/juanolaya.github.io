@@ -1,0 +1,2224 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutsche Sprachreferenz für A1</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    margin: 20px;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+  }
+  h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  /* Style for the collapsible sections */
+  details {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  summary {
+    display: block; /* Ensures the summary takes full width */
+    padding: 15px 20px;
+    background-color: #e9ecef;
+    color: #2c3e50;
+    font-weight: bold;
+    cursor: pointer;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 8px 8px 0 0;
+    outline: none; /* Remove default focus outline */
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+  }
+  summary::-webkit-details-marker {
+    display: none; /* Hide default arrow marker */
+  }
+  summary:before {
+    content: '▶️'; /* Custom arrow for closed state */
+    margin-right: 10px;
+    transition: transform 0.2s ease-in-out;
+  }
+  details[open] > summary:before {
+    content: '🔽'; /* Custom arrow for open state */
+    transform: rotate(90deg);
+  }
+  details[open] > summary {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .content-wrapper {
+    padding: 20px;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px; /* Reduced margin as tables are now inside collapsible sections */
+    box-shadow: none; /* Remove shadow from inner tables */
+    border-radius: 0; /* Remove border-radius from inner tables */
+    border: none; /* Remove border from inner tables */
+  }
+  th, td {
+    border: 1px solid #e0e0e0;
+    padding: 12px 15px;
+    text-align: left;
+  }
+  th {
+    background-color: #e9ecef;
+    color: #495057;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+  tr:hover {
+    background-color: #e2e6ea;
+  }
+  .red-ending {
+    color: red;
+  }
+  .blue-change {
+    color: blue;
+  }
+  .der-color {
+    color: red; /* Masculine */
+  }
+  .die-color {
+    color: blue; /* Feminine */
+  }
+  .das-color {
+    color: black; /* Neuter */
+  }
+  strong {
+    font-weight: bold;
+  }
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    thead, tbody, th, td, tr {
+      display: block;
+    }
+    tr {
+      margin-bottom: 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+    td {
+      border: none;
+      border-bottom: 1px solid #e0e0e0;
+      position: relative;
+      padding-left: 50%;
+      text-align: right;
+    }
+    td:before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 45%;
+      padding-left: 15px;
+      font-weight: bold;
+      text-align: left;
+    }
+    th {
+      display: none; /* Hide original headers */
+    }
+  }
+</style>
+</head>
+<body>
+
+  <h1>Deutsche Sprachreferenz für A1</h1>
+
+  <details id="verben-section">
+    <summary>Verben</summary>
+    <div class="content-wrapper">
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg shadow-inner">
+        <h3 class="text-lg font-semibold mb-3 text-gray-700">Satzgenerator für Verben ✨</h3>
+        <div class="flex flex-col sm:flex-row gap-4 mb-4">
+          <input type="text" id="verbInput" placeholder="Verb eingeben (z.B. spielen)" class="p-2 border border-gray-300 rounded-md flex-grow">
+          <select id="pronounSelect" class="p-2 border border-gray-300 rounded-md">
+            <option value="ich">ich</option>
+            <option value="du">du</option>
+            <option value="er/sie/es">er/sie/es</option>
+            <option value="wir">wir</option>
+            <option value="ihr">ihr</option>
+            <option value="sie/Sie">sie/Sie</option>
+          </select>
+          <button id="generateVerbSentenceBtn" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200 ease-in-out shadow-md">
+            Satz generieren ✨
+          </button>
+        </div>
+        <div id="verbSentenceOutput" class="p-3 bg-white border border-gray-200 rounded-md text-gray-800 min-h-[40px] flex items-center justify-center text-center mb-2">
+          </div>
+        <div id="verbSentenceEnglishOutput" class="p-3 bg-white border border-gray-200 rounded-md text-gray-800 min-h-[40px] flex items-center justify-center text-center mb-2">
+          </div>
+        <div id="verbSentenceSpanishOutput" class="p-3 bg-white border border-gray-200 rounded-md text-gray-800 min-h-[40px] flex items-center justify-center text-center">
+          </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>🇪🇸 (Spanish Translation)</th>
+            <th>👤 Personalpronomen (Pronoun)</th>
+            <th>✍️ Inflektionsendung (Inflectional Ending)</th>
+            <th>🧍 sein (to be)</th>
+            <th>Besitz haben (to have)</th>
+            <th>🚶 kommen (to come)</th>
+            <th>⚽ spielen (to play)</th>
+            <th>🗣️ heißen (to be called)</th>
+            <th>💬 sprechen (to speak)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">yo</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ich</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-e</td>
+            <td data-label="🧍 sein (to be)">bi<span class="red-ending">n</span></td>
+            <td data-label="Besitz haben (to have)">hab<span class="red-ending">e</span></td>
+            <td data-label="🚶 kommen (to come)">komm<span class="red-ending">e</span></td>
+            <td data-label="⚽ spielen (to play)">spiel<span class="red-ending">e</span></td>
+            <td data-label="🗣️ heißen (to be called)">heiß<span class="red-ending">e</span></td>
+            <td data-label="💬 sprechen (to speak)">sprech<span class="red-ending">e</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">tú</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">du</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-st</td>
+            <td data-label="🧍 sein (to be)">bis<span class="red-ending">t</span></td>
+            <td data-label="Besitz haben (to have)">has<span class="red-ending">t</span></td>
+            <td data-label="🚶 kommen (to come)">komms<span class="red-ending">t</span></td>
+            <td data-label="⚽ spielen (to play)">spiels<span class="red-ending">t</span></td>
+            <td data-label="🗣️ heißen (to be called)">heiß<span class="red-ending">t</span></td>
+            <td data-label="💬 sprechen (to speak)">sprich<span class="red-ending">st</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">él / ella / neutro</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">er/sie/es</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="🧍 sein (to be)">is<span class="red-ending">t</span></td>
+            <td data-label="Besitz haben (to have)">ha<span class="red-ending">t</span></td>
+            <td data-label="🚶 kommen (to come)">komm<span class="red-ending">t</span></td>
+            <td data-label="⚽ spielen (to play)">spiel<span class="red-ending">t</span></td>
+            <td data-label="🗣️ heißen (to be called)">heiß<span class="red-ending">t</span></td>
+            <td data-label="💬 sprechen (to speak)">sprich<span class="red-ending">t</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">nosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">wir</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="🧍 sein (to be)">sin<span class="red-ending">d</span></td>
+            <td data-label="Besitz haben (to have)">hab<span class="red-ending">en</span></td>
+            <td data-label="🚶 kommen (to come)">komm<span class="red-ending">en</span></td>
+            <td data-label="⚽ spielen (to play)">spiel<span class="red-ending">en</span></td>
+            <td data-label="🗣️ heißen (to be called)">heiß<span class="red-ending">en</span></td>
+            <td data-label="💬 sprechen (to speak)">sprech<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">vosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ihr</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="🧍 sein (to be)">sei<span class="red-ending">d</span></td>
+            <td data-label="Besitz haben (to have)">hab<span class="red-ending">t</span></td>
+            <td data-label="🚶 kommen (to come)">komm<span class="red-ending">t</span></td>
+            <td data-label="⚽ spielen (to play)">spiel<span class="red-ending">t</span></td>
+            <td data-label="🗣️ heißen (to be called)">heiß<span class="red-ending">t</span></td>
+            <td data-label="💬 sprechen (to speak)">sprech<span class="red-ending">t</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">ell@s / usted(es)</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">sie/Sie</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="🧍 sein (to be)">sin<span class="red-ending">d</span></td>
+            <td data-label="Besitz haben (to have)">hab<span class="red-ending">en</span></td>
+            <td data-label="🚶 kommen (to come)">komm<span class="red-ending">en</span></td>
+            <td data-label="⚽ spielen (to play)">spiel<span class="red-ending">en</span></td>
+            <td data-label="🗣️ heißen (to be called)">heiß<span class="red-ending">en</span></td>
+            <td data-label="💬 sprechen (to speak)">sprech<span style="color:red">en</span></td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Beispiel</strong></td>
+            <td data-label="🧍 sein (to be)">Ich bin Student.</td>
+            <td data-label="Besitz haben (to have)">Du hast ein Buch.</td>
+            <td data-label="🚶 kommen (to come)">Er kommt aus Deutschland.</td>
+            <td data-label="⚽ spielen (to play)">Wir spielen Fußball.</td>
+            <td data-label="🗣️ heißen (to be called)">Ich heiße Max.</td>
+            <td data-label="💬 sprechen (to speak)">Sie sprechen Deutsch.</td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Example</strong></td>
+            <td data-label="🧍 sein (to be)">I am a student.</td>
+            <td data-label="Besitz haben (to have)">You have a book.</td>
+            <td data-label="🚶 kommen (to come)">He comes from Germany.</td>
+            <td data-label="⚽ spielen (to play)">We play football.</td>
+            <td data-label="🗣️ heißen (to be called)">I am called Max.</td>
+            <td data-label="💬 sprechen (to speak)">They speak German.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+          <tr>
+            <th>🇪🇸 (Spanish Translation)</th>
+            <th>👤 Personalpronomen (Pronoun)</th>
+            <th>✍️ Inflektionsendung (Inflectional Ending)</th>
+            <th>🏡 leben (to live)</th>
+            <th>🏠 wohnen (to reside)</th>
+            <th>🛠️ machen (to make/do)</th>
+            <th>💬 sagen (to say)</th>
+            <th>❓ fragen (to ask)</th>
+            <th>✅ antworten (to answer)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">yo</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ich</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-e</td>
+            <td data-label="🏡 leben (to live)">leb<span class="red-ending">e</span></td>
+            <td data-label="🏠 wohnen (to reside)">wohn<span class="red-ending">e</span></td>
+            <td data-label="🛠️ machen (to make/do)">mach<span class="red-ending">e</span></td>
+            <td data-label="💬 sagen (to say)">sag<span class="red-ending">e</span></td>
+            <td data-label="❓ fragen (to ask)">frag<span class="red-ending">e</span></td>
+            <td data-label="✅ antworten (to answer)">antwort<span class="red-ending">e</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">tú</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">du</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-st</td>
+            <td data-label="🏡 leben (to live)">lebs<span class="red-ending">t</span></td>
+            <td data-label="🏠 wohnen (to reside)">wohns<span class="red-ending">t</span></td>
+            <td data-label="🛠️ machen (to make/do)">machs<span class="red-ending">t</span></td>
+            <td data-label="💬 sagen (to say)">sags<span class="red-ending">t</span></td>
+            <td data-label="❓ fragen (to ask)">frags<span class="red-ending">t</span></td>
+            <td data-label="✅ antworten (to answer)">antworte<span class="red-ending">st</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">él / ella / neutro</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">er/sie/es</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="🏡 leben (to live)">leb<span class="red-ending">t</span></td>
+            <td data-label="🏠 wohnen (to reside)">wohn<span class="red-ending">t</span></td>
+            <td data-label="🛠️ machen (to make/do)">mach<span class="red-ending">t</span></td>
+            <td data-label="💬 sagen (to say)">sag<span class="red-ending">t</span></td>
+            <td data-label="❓ fragen (to ask)">frag<span class="red-ending">t</span></td>
+            <td data-label="✅ antworten (to answer)">antwort<span class="red-ending">et</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">nosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">wir</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="🏡 leben (to live)">leb<span class="red-ending">en</span></td>
+            <td data-label="🏠 wohnen (to reside)">wohn<span class="red-ending">en</span></td>
+            <td data-label="🛠️ machen (to make/do)">mach<span class="red-ending">en</span></td>
+            <td data-label="💬 sagen (to say)">sag<span class="red-ending">en</span></td>
+            <td data-label="❓ fragen (to ask)">frag<span class="red-ending">en</span></td>
+            <td data-label="✅ antworten (to answer)">antwort<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">vosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ihr</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="🏡 leben (to live)">leb<span class="red-ending">t</span></td>
+            <td data-label="🏠 wohnen (to reside)">wohn<span class="red-ending">t</span></td>
+            <td data-label="🛠️ machen (to make/do)">mach<span class="red-ending">t</span></td>
+            <td data-label="💬 sagen (to say)">sag<span class="red-ending">t</span></td>
+            <td data-label="❓ fragen (to ask)">frag<span class="red-ending">t</span></td>
+            <td data-label="✅ antworten (to answer)">antwort<span class="red-ending">et</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">ell@s / usted(es)</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">sie/Sie</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="🏡 leben (to live)">leb<span class="red-ending">en</span></td>
+            <td data-label="🏠 wohnen (to reside)">wohn<span class="red-ending">en</span></td>
+            <td data-label="🛠️ machen (to make/do)">mach<span class="red-ending">en</span></td>
+            <td data-label="💬 sagen (to say)">sag<span class="red-ending">en</span></td>
+            <td data-label="❓ fragen (to ask)">frag<span class="red-ending">en</span></td>
+            <td data-label="✅ antworten (to answer)">antwort<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Beispiel</strong></td>
+            <td data-label="🏡 leben (to live)">Ich lebe in Berlin.</td>
+            <td data-label="🏠 wohnen (to reside)">Ich wohne in einem Haus.</td>
+            <td data-label="🛠️ machen (to make/do)">Er macht Sport.</td>
+            <td data-label="💬 sagen (to say)">Ich sage "Hallo".</td>
+            <td data-label="❓ fragen (to ask)">Ich frage den Lehrer.</td>
+            <td data-label="✅ antworten (to answer)">Sie antworten schnell.</td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Example</strong></td>
+            <td data-label="🏡 leben (to live)">I live in Berlin.</td>
+            <td data-label="🏠 wohnen (to reside)">I live in a house.</td>
+            <td data-label="🛠️ machen (to make/do)">He does sports.</td>
+            <td data-label="💬 sagen (to say)">I say "Hello".</td>
+            <td data-label="❓ fragen (to ask)">I ask the teacher.</td>
+            <td data-label="✅ antworten (to answer)">They answer quickly.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+          <tr>
+            <th>🇪🇸 (Spanish Translation)</th>
+            <th>👤 Personalpronomen (Pronoun)</th>
+            <th>✍️ Inflektionsendung (Inflectional Ending)</th>
+            <th>🚗 fahren (to drive/go)</th>
+            <th>👷 arbeiten (to work)</th>
+            <th>👂 hören (to hear/listen)</th>
+            <th>🔍 suchen (to search/look for)</th>
+            <th>🤔 verstehen (to understand)</th>
+            <th>📚 studieren (to study)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">yo</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ich</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-e</td>
+            <td data-label="🚗 fahren (to drive/go)">fahr<span class="red-ending">e</span></td>
+            <td data-label="👷 arbeiten (to work)">arbeit<span class="red-ending">e</span></td>
+            <td data-label="👂 hören (to hear/listen)">hör<span class="red-ending">e</span></td>
+            <td data-label="🔍 suchen (to search/look for)">such<span class="red-ending">e</span></td>
+            <td data-label="🤔 verstehen (to understand)">versteh<span class="red-ending">e</span></td>
+            <td data-label="📚 studieren (to study)">studier<span class="red-ending">e</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">tú</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">du</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-st</td>
+            <td data-label="🚗 fahren (to drive/go)">f<span class="blue-change">ä</span>hr<span class="red-ending">st</span></td>
+            <td data-label="👷 arbeiten (to work)">arbeite<span class="red-ending">st</span></td>
+            <td data-label="👂 hören (to hear/listen)">hörs<span class="red-ending">t</span></td>
+            <td data-label="🔍 suchen (to search/look for)">suchs<span class="red-ending">t</span></td>
+            <td data-label="🤔 verstehen (to understand)">verstehs<span class="red-ending">t</span></td>
+            <td data-label="📚 studieren (to study)">studier<span class="red-ending">st</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">él / ella / neutro</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">er/sie/es</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="🚗 fahren (to drive/go)">f<span class="blue-change">ä</span>hr<span class="red-ending">t</span></td>
+            <td data-label="👷 arbeiten (to work)">arbeit<span class="red-ending">et</span></td>
+            <td data-label="👂 hören (to hear/listen)">hör<span class="red-ending">t</span></td>
+            <td data-label="🔍 suchen (to search/look for)">such<span class="red-ending">t</span></td>
+            <td data-label="🤔 verstehen (to understand)">versteh<span class="red-ending">t</span></td>
+            <td data-label="📚 studieren (to study)">studier<span class="red-ending">t</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">nosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">wir</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="🚗 fahren (to drive/go)">fahr<span class="red-ending">en</span></td>
+            <td data-label="👷 arbeiten (to work)">arbeit<span class="red-ending">en</span></td>
+            <td data-label="👂 hören (to hear/listen)">hör<span class="red-ending">en</span></td>
+            <td data-label="🔍 suchen (to search/look for)">such<span class="red-ending">en</span></td>
+            <td data-label="🤔 verstehen (to understand)">versteh<span class="red-ending">en</span></td>
+            <td data-label="📚 studieren (to study)">studier<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">vosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ihr</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="🚗 fahren (to drive/go)">fahr<span class="red-ending">t</span></td>
+            <td data-label="👷 arbeiten (to work)">arbeit<span class="red-ending">et</span></td>
+            <td data-label="👂 hören (to hear/listen)">hör<span class="red-ending">t</span></td>
+            <td data-label="🔍 suchen (to search/look for)">such<span class="red-ending">t</span></td>
+            <td data-label="🤔 verstehen (to understand)">versteh<span class="red-ending">t</span></td>
+            <td data-label="📚 studieren (to study)">studier<span class="red-ending">t</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">ell@s / usted(es)</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">sie/Sie</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="🚗 fahren (to drive/go)">fahr<span class="red-ending">en</span></td>
+            <td data-label="👷 arbeiten (to work)">arbeit<span class="red-ending">en</span></td>
+            <td data-label="👂 hören (to hear/listen)">hör<span class="red-ending">en</span></td>
+            <td data-label="🔍 suchen (to search/look for)">such<span class="red-ending">en</span></td>
+            <td data-label="🤔 verstehen (to understand)">versteh<span class="red-ending">en</span></td>
+            <td data-label="📚 studieren (to study)">studier<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Beispiel</strong></td>
+            <td data-label="🚗 fahren (to drive/go)">Ich fahre Auto.</td>
+            <td data-label="👷 arbeiten (to work)">Du arbeitest hier.</td>
+            <td data-label="👂 hören (to hear/listen)">Er hört Musik.</td>
+            <td data-label="🔍 suchen (to search/look for)">Wir suchen das Buch.</td>
+            <td data-label="🤔 verstehen (to understand)">Ihr versteht Deutsch.</td>
+            <td data-label="📚 studieren (to study)">Sie studieren Medizin.</td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Example</strong></td>
+            <td data-label="🚗 fahren (to drive/go)">I drive a car.</td>
+            <td data-label="👷 arbeiten (to work)">You work here.</td>
+            <td data-label="👂 hören (to hear/listen)">He listens to music.</td>
+            <td data-label="🔍 suchen (to search/look for)">We are looking for the book.</td>
+            <td data-label="🤔 verstehen (to understand)">You (pl. informal) understand German.</td>
+            <td data-label="📚 studieren (to study)">They study medicine.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+          <tr>
+            <th>🇪🇸 (Spanish Translation)</th>
+            <th>👤 Personalpronomen (Pronoun)</th>
+            <th>✍️ Inflektionsendung (Inflectional Ending)</th>
+            <th>🔎 finden (to find)</th>
+            <th>👀 sehen (to see)</th>
+            <th>🧠 denken (to think)</th>
+            <th>✍️ schreiben (to write)</th>
+            <th>📖 lesen (to read)</th>
+            <th>👨‍🏫 lernen (to learn)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">yo</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ich</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-e</td>
+            <td data-label="🔎 finden (to find)">find<span class="red-ending">e</span></td>
+            <td data-label="👀 sehen (to see)">seh<span class="red-ending">e</span></td>
+            <td data-label="🧠 denken (to think)">denk<span class="red-ending">e</span></td>
+            <td data-label="✍️ schreiben (to write)">schreib<span class="red-ending">e</span></td>
+            <td data-label="📖 lesen (to read)">les<span class="red-ending">e</span></td>
+            <td data-label="👨‍🏫 lernen (to learn)">lern<span class="red-ending">e</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">tú</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">du</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-st</td>
+            <td data-label="🔎 finden (to find)">finde<span class="red-ending">st</span></td>
+            <td data-label="👀 sehen (to see)">s<span class="blue-change">ieh</span>st</td>
+            <td data-label="🧠 denken (to think)">denk<span class="red-ending">st</span></td>
+            <td data-label="✍️ schreiben (to write)">schreib<span class="red-ending">st</span></td>
+            <td data-label="📖 lesen (to read)">l<span class="blue-change">ies</span>t</td>
+            <td data-label="👨‍🏫 lernen (to learn)">lern<span class="red-ending">st</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">él / ella / neutro</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">er/sie/es</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="🔎 finden (to find)">finde<span class="red-ending">t</span></td>
+            <td data-label="👀 sehen (to see)">s<span class="blue-change">ieh</span>t</td>
+            <td data-label="🧠 denken (to think)">denk<span class="red-ending">t</span></td>
+            <td data-label="✍️ schreiben (to write)">schreib<span class="red-ending">t</span></td>
+            <td data-label="📖 lesen (to read)">l<span class="blue-change">ies</span>t</td>
+            <td data-label="👨‍🏫 lernen (to learn)">lern<span class="red-ending">t</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">nosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">wir</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="🔎 finden (to find)">find<span class="red-ending">en</span></td>
+            <td data-label="👀 sehen (to see)">seh<span class="red-ending">en</span></td>
+            <td data-label="🧠 denken (to think)">denk<span class="red-ending">en</span></td>
+            <td data-label="✍️ schreiben (to write)">schreib<span class="red-ending">en</span></td>
+            <td data-label="📖 lesen (to read)">les<span class="red-ending">en</span></td>
+            <td data-label="👨‍🏫 lernen (to learn)">lern<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">vosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ihr</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="🔎 finden (to find)">finde<span class="red-ending">t</span></td>
+            <td data-label="👀 sehen (to see)">seh<span class="red-ending">t</span></td>
+            <td data-label="🧠 denken (to think)">denk<span class="red-ending">t</span></td>
+            <td data-label="✍️ schreiben (to write)">schreib<span class="red-ending">t</span></td>
+            <td data-label="📖 lesen (to read)">les<span class="red-ending">t</span></td>
+            <td data-label="👨‍🏫 lernen (to learn)">lern<span class="red-ending">t</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">ell@s / usted(es)</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">sie/Sie</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="🔎 finden (to find)">find<span class="red-ending">en</span></td>
+            <td data-label="👀 sehen (to see)">seh<span class="red-ending">en</span></td>
+            <td data-label="🧠 denken (to think)">denk<span class="red-ending">en</span></td>
+            <td data-label="✍️ schreiben (to write)">schreib<span class="red-ending">en</span></td>
+            <td data-label="📖 lesen (to read)">les<span class="red-ending">en</span></td>
+            <td data-label="👨‍🏫 lernen (to learn)">lern<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Beispiel</strong></td>
+            <td data-label="🔎 finden (to find)">Ich finde das gut.</td>
+            <td data-label="👀 sehen (to see)">Du siehst den Baum.</td>
+            <td data-label="🧠 denken (to think)">Er denkt viel.</td>
+            <td data-label="✍️ schreiben (to write)">Wir schreiben einen Brief.</td>
+            <td data-label="📖 lesen (to read)">Ihr lest ein Buch.</td>
+            <td data-label="👨‍🏫 lernen (to learn)">Sie lernen Deutsch.</td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Example</strong></td>
+            <td data-label="🔎 finden (to find)">I find that good.</td>
+            <td data-label="👀 sehen (to see)">You see the tree.</td>
+            <td data-label="🧠 denken (to think)">He thinks a lot.</td>
+            <td data-label="✍️ schreiben (to write)">We write a letter.</td>
+            <td data-label="📖 lesen (to read)">You (pl. informal) read a book.</td>
+            <td data-label="👨‍🏫 lernen (to learn)">They learn German.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+          <tr>
+            <th>🇪🇸 (Spanish Translation)</th>
+            <th>👤 Personalpronomen (Pronoun)</th>
+            <th>✍️ Inflektionsendung (Inflectional Ending)</th>
+            <th>✈️ reisen (to travel)</th>
+            <th>🎤 singen (to sing)</th>
+            <th>🛒 kaufen (to buy)</th>
+            <th>🚶‍♀️ gehen (to go)</th>
+            <th>🏘️ mieten (to rent)</th>
+            <th>⏳ warten (to wait)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">yo</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ich</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-e</td>
+            <td data-label="✈️ reisen (to travel)">reis<span class="red-ending">e</span></td>
+            <td data-label="🎤 singen (to sing)">sing<span class="red-ending">e</span></td>
+            <td data-label="🛒 kaufen (to buy)">kauf<span class="red-ending">e</span></td>
+            <td data-label="🚶‍♀️ gehen (to go)">geh<span class="red-ending">e</span></td>
+            <td data-label="🏘️ mieten (to rent)">miet<span class="red-ending">e</span></td>
+            <td data-label="⏳ warten (to wait)">wart<span class="red-ending">e</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">tú</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">du</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-st</td>
+            <td data-label="✈️ reisen (to travel)">reis<span class="red-ending">t</span></td>
+            <td data-label="🎤 singen (to sing)">sing<span class="red-ending">st</span></td>
+            <td data-label="🛒 kaufen (to buy)">kauf<span class="red-ending">st</span></td>
+            <td data-label="🚶‍♀️ gehen (to go)">geh<span class="red-ending">st</span></td>
+            <td data-label="🏘️ mieten (to rent)">miet<span class="red-ending">est</span></td>
+            <td data-label="⏳ warten (to wait)">warte<span class="red-ending">st</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">él / ella / neutro</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">er/sie/es</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="✈️ reisen (to travel)">reis<span class="red-ending">t</span></td>
+            <td data-label="🎤 singen (to sing)">sing<span class="red-ending">t</span></td>
+            <td data-label="🛒 kaufen (to buy)">kauf<span class="red-ending">t</span></td>
+            <td data-label="🚶‍♀️ gehen (to go)">geh<span class="red-ending">t</span></td>
+            <td data-label="🏘️ mieten (to rent)">miet<span class="red-ending">et</span></td>
+            <td data-label="⏳ warten (to wait)">wart<span class="red-ending">t</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">nosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">wir</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="✈️ reisen (to travel)">reis<span class="red-ending">en</span></td>
+            <td data-label="🎤 singen (to sing)">sing<span class="red-ending">en</span></td>
+            <td data-label="🛒 kaufen (to buy)">kauf<span class="red-ending">en</span></td>
+            <td data-label="🚶‍♀️ gehen (to go)">geh<span class="red-ending">en</span></td>
+            <td data-label="🏘️ mieten (to rent)">miet<span class="red-ending">en</span></td>
+            <td data-label="⏳ warten (to wait)">wart<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">vosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ihr</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="✈️ reisen (to travel)">reis<span class="red-ending">t</span></td>
+            <td data-label="🎤 singen (to sing)">sing<span class="red-ending">t</span></td>
+            <td data-label="🛒 kaufen (to buy)">kauf<span class="red-ending">t</span></td>
+            <td data-label="🚶‍♀️ gehen (to go)">geh<span class="red-ending">t</span></td>
+            <td data-label="🏘️ mieten (to rent)">miet<span class="red-ending">et</span></td>
+            <td data-label="⏳ warten (to wait)">wart<span class="red-ending">et</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">ell@s / usted(es)</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">sie/Sie</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="✈️ reisen (to travel)">reis<span class="red-ending">en</span></td>
+            <td data-label="🎤 singen (to sing)">sing<span class="red-ending">en</span></td>
+            <td data-label="🛒 kaufen (to buy)">kauf<span class="red-ending">en</span></td>
+            <td data-label="🚶‍♀️ gehen (to go)">geh<span class="red-ending">en</span></td>
+            <td data-label="🏘️ mieten (to rent)">miet<span class="red-ending">en</span></td>
+            <td data-label="⏳ warten (to wait)">wart<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Beispiel</strong></td>
+            <td data-label="✈️ reisen (to travel)">Ich reise gern.</td>
+            <td data-label="🎤 singen (to sing)">Du singst schön.</td>
+            <td data-label="🛒 kaufen (to buy)">Er kauft ein Auto.</td>
+            <td data-label="🚶‍♀️ gehen (to go)">Wir gehen nach Hause.</td>
+            <td data-label="🏘️ mieten (to rent)">Ihr mietet eine Wohnung.</td>
+            <td data-label="⏳ warten (to wait)">Sie warten auf den Bus.</td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Example</strong></td>
+            <td data-label="✈️ reisen (to travel)">I like to travel.</td>
+            <td data-label="🎤 singen (to sing)">You sing beautifully.</td>
+            <td data-label="🛒 kaufen (to buy)">He buys a car.</td>
+            <td data-label="🚶‍♀️ gehen (to go)">We go home.</td>
+            <td data-label="🏘️ mieten (to rent)">You (pl. informal) rent an apartment.</td>
+            <td data-label="⏳ warten (to wait)">They wait for the bus.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+          <tr>
+            <th>🇪🇸 (Spanish Translation)</th>
+            <th>👤 Personalpronomen (Pronoun)</th>
+            <th>✍️ Inflektionsendung (Inflectional Ending)</th>
+            <th>🚗 fahren (to drive/go)</th>
+            <th>😴 schlafen (to sleep)</th>
+            <th>✋ lassen (to let/leave)</th>
+            <th>👕 tragen (to wear/carry)</th>
+            <th>🧼 waschen (to wash)</th>
+            <th>🏃 laufen (to run/walk)</th>
+            <th>📦 behalten (to keep)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">yo</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ich</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-e</td>
+            <td data-label="🚗 fahren (to drive/go)">fahr<span class="red-ending">e</span></td>
+            <td data-label="😴 schlafen (to sleep)">schlaf<span class="red-ending">e</span></td>
+            <td data-label="✋ lassen (to let/leave)">lass<span class="red-ending">e</span></td>
+            <td data-label="👕 tragen (to wear/carry)">trag<span class="red-ending">e</span></td>
+            <td data-label="🧼 waschen (to wash)">wasch<span class="red-ending">e</span></td>
+            <td data-label="🏃 laufen (to run/walk)">lauf<span class="red-ending">e</span></td>
+            <td data-label="📦 behalten (to keep)">behalt<span class="red-ending">e</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">tú</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">du</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-st</td>
+            <td data-label="🚗 fahren (to drive/go)">f<span class="blue-change">ä</span>hr<span class="red-ending">st</span></td>
+            <td data-label="😴 schlafen (to sleep)">schl<span class="blue-change">ä</span>fs<span class="red-ending">t</span></td>
+            <td data-label="✋ lassen (to let/leave)">l<span class="blue-change">ä</span>ss<span class="red-ending">t</span></td>
+            <td data-label="👕 tragen (to wear/carry)">tr<span class="blue-change">ä</span>gs<span class="red-ending">t</span></td>
+            <td data-label="🧼 waschen (to wash)">w<span class="blue-change">ä</span>schs<span class="red-ending">t</span></td>
+            <td data-label="🏃 laufen (to run/walk)">l<span class="blue-change">äu</span>fs<span class="red-ending">t</span></td>
+            <td data-label="📦 behalten (to keep)">beh<span class="blue-change">ä</span>lts<span class="red-ending">t</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">él / ella / neutro</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">er/sie/es</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="🚗 fahren (to drive/go)">f<span class="blue-change">ä</span>hr<span class="red-ending">t</span></td>
+            <td data-label="😴 schlafen (to sleep)">schl<span class="blue-change">ä</span>f<span class="red-ending">t</span></td>
+            <td data-label="✋ lassen (to let/leave)">l<span class="blue-change">ä</span>ss<span class="red-ending">t</span></td>
+            <td data-label="👕 tragen (to wear/carry)">tr<span class="blue-change">ä</span>g<span class="red-ending">t</span></td>
+            <td data-label="🧼 waschen (to wash)">w<span class="blue-change">ä</span>sch<span class="red-ending">t</span></td>
+            <td data-label="🏃 laufen (to run/walk)">l<span class="blue-change">äu</span>f<span class="red-ending">t</span></td>
+            <td data-label="📦 behalten (to keep)">beh<span class="blue-change">ä</span>lt<span class="red-ending">t</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">nosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">wir</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="🚗 fahren (to drive/go)">fahr<span class="red-ending">en</span></td>
+            <td data-label="😴 schlafen (to sleep)">schlaf<span class="red-ending">en</span></td>
+            <td data-label="✋ lassen (to let/leave)">lass<span class="red-ending">en</span></td>
+            <td data-label="👕 tragen (to wear/carry)">trag<span class="red-ending">en</span></td>
+            <td data-label="🧼 waschen (to wash)">wasch<span class="red-ending">en</span></td>
+            <td data-label="🏃 laufen (to run/walk)">lauf<span class="red-ending">en</span></td>
+            <td data-label="📦 behalten (to keep)">behalt<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">vosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ihr</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="🚗 fahren (to drive/go)">fahr<span class="red-ending">t</span></td>
+            <td data-label="😴 schlafen (to sleep)">schlaf<span class="red-ending">t</span></td>
+            <td data-label="✋ lassen (to let/leave)">lass<span class="red-ending">t</span></td>
+            <td data-label="👕 tragen (to wear/carry)">trag<span class="red-ending">t</span></td>
+            <td data-label="🧼 waschen (to wash)">wasch<span class="red-ending">t</span></td>
+            <td data-label="🏃 laufen (to run/walk)">lauf<span class="red-ending">t</span></td>
+            <td data-label="📦 behalten (to keep)">behalt<span class="red-ending">et</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">ell@s / usted(es)</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">sie/Sie</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="🚗 fahren (to drive/go)">fahr<span class="red-ending">en</span></td>
+            <td data-label="😴 schlafen (to sleep)">schlaf<span class="red-ending">en</span></td>
+            <td data-label="✋ lassen (to let/leave)">lass<span class="red-ending">en</span></td>
+            <td data-label="👕 tragen (to wear/carry)">trag<span class="red-ending">en</span></td>
+            <td data-label="🧼 waschen (to wash)">wasch<span class="red-ending">en</span></td>
+            <td data-label="🏃 laufen (to run/walk)">lauf<span class="red-ending">en</span></td>
+            <td data-label="📦 behalten (to keep)">behalt<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Beispiel</strong></td>
+            <td data-label="🚗 fahren (to drive/go)">Ich fahre Auto.</td>
+            <td data-label="😴 schlafen (to sleep)">Du schläfst lange.</td>
+            <td data-label="✋ lassen (to let/leave)">Er lässt das Buch.</td>
+            <td data-label="👕 tragen (to wear/carry)">Wir tragen Kleidung.</td>
+            <td data-label="🧼 waschen (to wash)">Ihr wascht die Hände.</td>
+            <td data-label="🏃 laufen (to run/walk)">Sie laufen schnell.</td>
+            <td data-label="📦 behalten (to keep)">Ich behalte das.</td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Example</strong></td>
+            <td data-label="🚗 fahren (to drive/go)">I drive a car.</td>
+            <td data-label="😴 schlafen (to sleep)">You sleep long.</td>
+            <td data-label="✋ lassen (to let/leave)">He leaves the book.</td>
+            <td data-label="👕 tragen (to wear/carry)">We wear clothes.</td>
+            <td data-label="🧼 waschen (to wash)">You (pl. informal) wash your hands.</td>
+            <td data-label="🏃 laufen (to run/walk)">They run fast.</td>
+            <td data-label="📦 behalten (to keep)">I keep that.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+          <tr>
+            <th>🇪🇸 (Spanish Translation)</th>
+            <th>👤 Personalpronomen (Pronoun)</th>
+            <th>✍️ Inflektionsendung (Inflectional Ending)</th>
+            <th>🤝 helfen (to help)</th>
+            <th>🎁 geben (to give)</th>
+            <th>🍽️ essen (to eat)</th>
+            <th>💬 sprechen (to speak)</th>
+            <th>👋 treffen (to meet)</th>
+            <th>✋ nehmen (to take)</th>
+            <th>🤔 vergessen (to forget)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">yo</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ich</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-e</td>
+            <td data-label="🤝 helfen (to help)">helf<span class="red-ending">e</span></td>
+            <td data-label="🎁 geben (to give)">geb<span class="red-ending">e</span></td>
+            <td data-label="🍽️ essen (to eat)">ess<span class="red-ending">e</span></td>
+            <td data-label="💬 sprechen (to speak)">sprech<span class="red-ending">e</span></td>
+            <td data-label="👋 treffen (to meet)">treff<span class="red-ending">e</span></td>
+            <td data-label="✋ nehmen (to take)">nehm<span class="red-ending">e</span></td>
+            <td data-label="🤔 vergessen (to forget)">vergess<span class="red-ending">e</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">tú</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">du</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-st</td>
+            <td data-label="🤝 helfen (to help)">h<span class="blue-change">i</span>lfs<span class="red-ending">t</span></td>
+            <td data-label="🎁 geben (to give)">g<span class="blue-change">i</span>bs<span class="red-ending">t</span></td>
+            <td data-label="🍽️ essen (to eat)"><span class="blue-change">i</span>ss<span class="red-ending">t</span></td>
+            <td data-label="💬 sprechen (to speak)">spr<span class="blue-change">i</span>chs<span class="red-ending">t</span></td>
+            <td data-label="👋 treffen (to meet)">tr<span class="blue-change">i</span>ffs<span class="red-ending">t</span></td>
+            <td data-label="✋ nehmen (to take)">n<span class="blue-change">i</span>mms<span class="red-ending">t</span></td>
+            <td data-label="🤔 vergessen (to forget)">verg<span class="blue-change">i</span>ss<span class="red-ending">t</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">él / ella / neutro</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">er/sie/es</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="🤝 helfen (to help)">h<span class="blue-change">i</span>lf<span class="red-ending">t</span></td>
+            <td data-label="🎁 geben (to give)">g<span class="blue-change">i</span>b<span class="red-ending">t</span></td>
+            <td data-label="🍽️ essen (to eat)"><span class="blue-change">i</span>ss<span class="red-ending">t</span></td>
+            <td data-label="💬 sprechen (to speak)">spr<span class="blue-change">i</span>ch<span class="red-ending">t</span></td>
+            <td data-label="👋 treffen (to meet)">tr<span class="blue-change">i</span>ff<span class="red-ending">t</span></td>
+            <td data-label="✋ nehmen (to take)">n<span class="blue-change">i</span>mm<span class="red-ending">t</span></td>
+            <td data-label="🤔 vergessen (to forget)">verg<span class="blue-change">i</span>ss<span class="red-ending">t</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">nosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">wir</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="🤝 helfen (to help)">helf<span class="red-ending">en</span></td>
+            <td data-label="🎁 geben (to give)">geb<span class="red-ending">en</span></td>
+            <td data-label="🍽️ essen (to eat)">ess<span class="red-ending">en</span></td>
+            <td data-label="💬 sprechen (to speak)">sprech<span class="red-ending">en</span></td>
+            <td data-label="👋 treffen (to meet)">treff<span class="red-ending">en</span></td>
+            <td data-label="✋ nehmen (to take)">nehm<span class="red-ending">en</span></td>
+            <td data-label="🤔 vergessen (to forget)">vergess<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">vosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ihr</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="🤝 helfen (to help)">helf<span class="red-ending">t</span></td>
+            <td data-label="🎁 geben (to give)">geb<span class="red-ending">t</span></td>
+            <td data-label="🍽️ essen (to eat)">ess<span class="red-ending">t</span></td>
+            <td data-label="💬 sprechen (to speak)">sprech<span class="red-ending">t</span></td>
+            <td data-label="👋 treffen (to meet)">treff<span class="red-ending">t</span></td>
+            <td data-label="✋ nehmen (to take)">nehm<span class="red-ending">t</span></td>
+            <td data-label="🤔 vergessen (to forget)">vergess<span class="red-ending">t</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">ell@s / usted(es)</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">sie/Sie</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="🤝 helfen (to help)">helf<span class="red-ending">en</span></td>
+            <td data-label="🎁 geben (to give)">geb<span class="red-ending">en</span></td>
+            <td data-label="🍽️ essen (to eat)">ess<span class="red-ending">en</span></td>
+            <td data-label="💬 sprechen (to speak)">sprech<span class="red-ending">en</span></td>
+            <td data-label="👋 treffen (to meet)">treff<span class="red-ending">en</span></td>
+            <td data-label="✋ nehmen (to take)">nehm<span class="red-ending">en</span></td>
+            <td data-label="🤔 vergessen (to forget)">vergess<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Beispiel</strong></td>
+            <td data-label="🤝 helfen (to help)">Ich helfe dir.</td>
+            <td data-label="🎁 geben (to give)">Du gibst mir das.</td>
+            <td data-label="🍽️ essen (to eat)">Er isst Pizza.</td>
+            <td data-label="💬 sprechen (to speak)">Wir sprechen Deutsch.</td>
+            <td data-label="👋 treffen (to meet)">Ihr trefft Freunde.</td>
+            <td data-label="✋ nehmen (to take)">Sie nehmen den Bus.</td>
+            <td data-label="🤔 vergessen (to forget)">Ich vergesse das nicht.</td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Example</strong></td>
+            <td data-label="🤝 helfen (to help)">I help you.</td>
+            <td data-label="🎁 geben (to give)">You give me that.</td>
+            <td data-label="🍽️ essen (to eat)">He eats pizza.</td>
+            <td data-label="💬 sprechen (to speak)">We speak German.</td>
+            <td data-label="👋 treffen (to meet)">You (pl. informal) meet friends.</td>
+            <td data-label="✋ nehmen (to take)">They take the bus.</td>
+            <td data-label="🤔 vergessen (to forget)">I don't forget that.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+          <tr>
+            <th>🇪🇸 (Spanish Translation)</th>
+            <th>👤 Personalpronomen (Pronoun)</th>
+            <th>✍️ Inflektionsendung (Inflectional Ending)</th>
+            <th>👀 sehen (to see)</th>
+            <th>📖 lesen (to read)</th>
+            <th>👑 befehlen (to command)</th>
+            <th>🔪 stehlen (to steal)</th>
+            <th>✨ geschehen (to happen)</th>
+            <th>👍 empfehlen (to recommend)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">yo</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ich</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-e</td>
+            <td data-label="👀 sehen (to see)">seh<span class="red-ending">e</span></td>
+            <td data-label="📖 lesen (to read)">les<span class="red-ending">e</span></td>
+            <td data-label="👑 befehlen (to command)">befehl<span class="red-ending">e</span></td>
+            <td data-label="🔪 stehlen (to steal)">stehl<span class="red-ending">e</span></td>
+            <td data-label="✨ geschehen (to happen)">gescheh<span class="red-ending">e</span></td>
+            <td data-label="👍 empfehlen (to recommend)">empfehl<span class="red-ending">e</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">tú</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">du</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-st</td>
+            <td data-label="👀 sehen (to see)">s<span class="blue-change">ieh</span>st</td>
+            <td data-label="📖 lesen (to read)">l<span class="blue-change">ies</span>t</td>
+            <td data-label="👑 befehlen (to command)">bef<span class="blue-change">iehl</span>st</td>
+            <td data-label="🔪 stehlen (to steal)">st<span class="blue-change">iehl</span>st</td>
+            <td data-label="✨ geschehen (to happen)">gesch<span class="blue-change">ieh</span>st</td>
+            <td data-label="👍 empfehlen (to recommend)">empf<span class="blue-change">iehl</span>st</td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">él / ella / neutro</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">er/sie/es</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="👀 sehen (to see)">s<span class="blue-change">ieh</span>t</td>
+            <td data-label="📖 lesen (to read)">l<span class="blue-change">ies</span>t</td>
+            <td data-label="👑 befehlen (to command)">bef<span class="blue-change">iehl</span>t</td>
+            <td data-label="🔪 stehlen (to steal)">st<span class="blue-change">iehl</span>t</td>
+            <td data-label="✨ geschehen (to happen)">gesch<span class="blue-change">ieh</span>t</td>
+            <td data-label="👍 empfehlen (to recommend)">empf<span class="blue-change">iehl</span>t</td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">nosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">wir</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="👀 sehen (to see)">seh<span class="red-ending">en</span></td>
+            <td data-label="📖 lesen (to read)">les<span class="red-ending">en</span></td>
+            <td data-label="👑 befehlen (to command)">befehl<span class="red-ending">en</span></td>
+            <td data-label="🔪 stehlen (to steal)">stehl<span class="red-ending">en</span></td>
+            <td data-label="✨ geschehen (to happen)">gescheh<span class="red-ending">en</span></td>
+            <td data-label="👍 empfehlen (to recommend)">empfehl<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">vosotr@s</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">ihr</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-t</td>
+            <td data-label="👀 sehen (to see)">seh<span class="red-ending">t</span></td>
+            <td data-label="📖 lesen (to read)">les<span class="red-ending">t</span></td>
+            <td data-label="👑 befehlen (to command)">befehl<span class="red-ending">t</span></td>
+            <td data-label="🔪 stehlen (to steal)">stehl<span class="red-ending">t</span></td>
+            <td data-label="✨ geschehen (to happen)">gescheh<span class="red-ending">t</span></td>
+            <td data-label="👍 empfehlen (to recommend)">empfehl<span class="red-ending">t</span></td>
+          </tr>
+          <tr>
+            <td data-label="🇪🇸 (Spanish Translation)">ell@s / usted(es)</td>
+            <td data-label="👤 Personalpronomen (Pronoun)">sie/Sie</td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)">-en</td>
+            <td data-label="👀 sehen (to see)">seh<span class="red-ending">en</span></td>
+            <td data-label="📖 lesen (to read)">les<span class="red-ending">en</span></td>
+            <td data-label="👑 befehlen (to command)">befehl<span class="red-ending">en</span></td>
+            <td data-label="🔪 stehlen (to steal)">stehl<span class="red-ending">en</span></td>
+            <td data-label="✨ geschehen (to happen)">gescheh<span class="red-ending">en</span></td>
+            <td data-label="👍 empfehlen (to recommend)">empfehl<span class="red-ending">en</span></td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Beispiel</strong></td>
+            <td data-label="👀 sehen (to see)">Ich sehe einen Film.</td>
+            <td data-label="📖 lesen (to read)">Du liest ein Buch.</td>
+            <td data-label="👑 befehlen (to command)">Er befiehlt dem Hund.</td>
+            <td data-label="🔪 stehlen (to steal)">Wir stehlen nichts.</td>
+            <td data-label="✨ geschehen (to happen)">Es geschieht jetzt.</td>
+            <td data-label="👍 empfehlen (to recommend)">Sie empfehlen das Restaurant.</td>
+          </tr>
+          <tr>
+            <td data-label=""></td>
+            <td data-label=""></td>
+            <td data-label="✍️ Inflektionsendung (Inflectional Ending)"><strong>Example</strong></td>
+            <td data-label="👀 sehen (to see)">I see a film.</td>
+            <td data-label="📖 lesen (to read)">You read a book.</td>
+            <td data-label="👑 befehlen (to command)">He commands the dog.</td>
+            <td data-label="🔪 stehlen (to steal)">We steal nothing.</td>
+            <td data-label="✨ geschehen (to happen)">It is happening now.</td>
+            <td data-label="👍 empfehlen (to recommend)">They recommend the restaurant.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details id="abstraktes-deutsches-substantiv-section">
+    <summary>Abstraktes deutsches Substantiv</summary>
+    <div class="content-wrapper">
+      <div class="mb-6 p-4 bg-gray-50 rounded-lg shadow-inner">
+        <h3 class="text-lg font-semibold mb-3 text-gray-700">Beispieltextgenerator für Substantive ✨</h3>
+        <div class="flex flex-col sm:flex-row gap-4 mb-4">
+          <input type="text" id="nounInput" placeholder="Substantiv eingeben (z.B. die Zeit)" class="p-2 border border-gray-300 rounded-md flex-grow">
+          <button id="generateNounTextBtn" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-200 ease-in-out shadow-md">
+            Beispieltext generieren ✨
+          </button>
+        </div>
+        <div id="nounTextOutput" class="p-3 bg-white border border-gray-200 rounded-md text-gray-800 min-h-[40px] flex items-center justify-center text-center mb-2">
+          </div>
+        <div id="nounTextEnglishOutput" class="p-3 bg-white border border-gray-200 rounded-md text-gray-800 min-h-[40px] flex items-center justify-center text-center mb-2">
+          </div>
+        <div id="nounTextSpanishOutput" class="p-3 bg-white border border-gray-200 rounded-md text-gray-800 min-h-[40px] flex items-center justify-center text-center">
+          </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Deutsches Substantiv (German Noun)</th>
+            <th>Aussprache (Pronunciation)</th>
+            <th>Englisch (English)</th>
+            <th>Emoji</th>
+            <th>Beispielsatz (A1) (Example Sentence - A1)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong><span class="die-color">die Zeit</span></strong></td>
+            <td>/tsait/</td>
+            <td>Time</td>
+            <td>⏰</td>
+            <td>Ich habe keine Zeit.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Geld</span></strong></td>
+            <td>/gelt/</td>
+            <td>Money</td>
+            <td>💰</td>
+            <td>Ich brauche Geld.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Leute</span> (Pl.)</strong></td>
+            <td>/lói-te/</td>
+            <td>People</td>
+            <td>🧑‍🤝‍🧑</td>
+            <td>Viele Leute sind hier.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Wasser</span></strong></td>
+            <td>/vas-ser/</td>
+            <td>Water</td>
+            <td>💧</td>
+            <td>Ich trinke Wasser.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Essen</span></strong></td>
+            <td>/es-sen/</td>
+            <td>Food</td>
+            <td>🍎</td>
+            <td>Das Essen ist lecker.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Tag</span></strong></td>
+            <td>/taak/</td>
+            <td>Day</td>
+            <td>☀️</td>
+            <td>Das ist ein schöner Tag.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Nacht</span></strong></td>
+            <td>/naht/</td>
+            <td>Night</td>
+            <td>🌙</td>
+            <td>Die Nacht ist dunkel.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Jahr</span></strong></td>
+            <td>/jaar/</td>
+            <td>Year</td>
+            <td>🗓️</td>
+            <td>Das ist ein neues Jahr.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Woche</span></strong></td>
+            <td>/vo-khe/</td>
+            <td>Week</td>
+            <td>📅</td>
+            <td>Das ist eine lange Woche.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Mensch</span></strong></td>
+            <td>/mensh/</td>
+            <td>The Human / Person</td>
+            <td>🧑‍🤝‍🧑</td>
+            <td>Der Mensch ist freundlich.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Frau</span></strong></td>
+            <td>/frau/</td>
+            <td>Woman / Wife</td>
+            <td>👩</td>
+            <td>Das ist eine nette Frau.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Mann</span></strong></td>
+            <td>/man/</td>
+            <td>Man / Husband</td>
+            <td>👨</td>
+            <td>Das ist ein netter Mann.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Kind</span></strong></td>
+            <td>/kint/</td>
+            <td>Child</td>
+            <td>👧👦</td>
+            <td>Das Kind spielt.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Arbeit</span></strong></td>
+            <td>/ár-bait/</td>
+            <td>Work / Job</td>
+            <td>💼</td>
+            <td>Ich habe Arbeit.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Haus</span></strong></td>
+            <td>/haus/</td>
+            <td>House</td>
+            <td>🏠</td>
+            <td>Das ist ein großes Haus.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Wohnung</span></strong></td>
+            <td>/vo-nung/</td>
+            <td>Apartment / Flat</td>
+            <td>🏢</td>
+            <td>Meine Wohnung ist klein.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Straße</span></strong></td>
+            <td>/shtraa-se/</td>
+            <td>Street</td>
+            <td>🛣️</td>
+            <td>Die Straße ist lang.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Stadt</span></strong></td>
+            <td>/shtat/</td>
+            <td>City / Town</td>
+            <td>🏙️</td>
+            <td>Ich wohne in der Stadt.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Auto</span></strong></td>
+            <td>/au-toh/</td>
+            <td>Car</td>
+            <td>🚗</td>
+            <td>Das Auto ist schnell.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Bus</span></strong></td>
+            <td>/bus/</td>
+            <td>Bus</td>
+            <td>🚌</td>
+            <td>Der Bus kommt bald.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Bahn</span></strong></td>
+            <td>/baan/</td>
+            <td>Train (often local)</td>
+            <td>🚈</td>
+            <td>Ich fahre mit der Bahn.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Geld</span></strong></td>
+            <td>/gelt/</td>
+            <td>Money</td>
+            <td>💰</td>
+            <td>Ich brauche Geld.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Sprache</span></strong></td>
+            <td>/shpraa-khe/</td>
+            <td>Language</td>
+            <td>🗣️</td>
+            <td>Deutsch ist eine Sprache.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Problem</span></strong></td>
+            <td>/pro-bléhm/</td>
+            <td>Problem</td>
+            <td>😥</td>
+            <td>Das ist ein Problem.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Hilfe</span></strong></td>
+            <td>/hil-fe/</td>
+            <td>Help</td>
+            <td>🤝</td>
+            <td>Ich brauche Hilfe.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Frage</span></strong></td>
+            <td>/fraa-ge/</td>
+            <td>Question</td>
+            <td>❓</td>
+            <td>Das ist eine Frage.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Antwort</span></strong></td>
+            <td>/ant-vort/</td>
+            <td>Answer</td>
+            <td>✅</td>
+            <td>Das ist die Antwort.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Freund</span></strong></td>
+            <td>/froint/</td>
+            <td>Friend (male)</td>
+            <td>🧑‍🤝‍🧑</td>
+            <td>Das ist mein Freund.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Freundin</span></strong></td>
+            <td>/frói-din/</td>
+            <td>Friend (female)</td>
+            <td>👩‍🤝‍👩</td>
+            <td>Das ist meine Freundin.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Schule</span></strong></td>
+            <td>/shuu-le/</td>
+            <td>School</td>
+            <td>🏫</td>
+            <td>Mein Kind geht zur Schule.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Buch</span></strong></td>
+            <td>/buuch/</td>
+            <td>Book</td>
+            <td>📖</td>
+            <td>Das Buch ist interessant.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Tisch</span></strong></td>
+            <td>/tish/</td>
+            <td>Table</td>
+            <td>🪑</td>
+            <td>Der Tisch ist groß.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Stuhl</span></strong></td>
+            <td>/shtool/</td>
+            <td>Chair</td>
+            <td>🪑</td>
+            <td>Der Stuhl ist bequem.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Zimmer</span></strong></td>
+            <td>/tsi-mer/</td>
+            <td>Room</td>
+            <td>🚪🛋️</td>
+            <td>Das Zimmer ist hell.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Tür</span></strong></td>
+            <td>/tüür/</td>
+            <td>Door</td>
+            <td>🚪</td>
+            <td>Die Tür ist offen.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Fenster</span></strong></td>
+            <td>/fen-ster/</td>
+            <td>Window</td>
+            <td>🪟</td>
+            <td>Das Fenster ist geschlossen.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Computer</span></strong></td>
+            <td>/kom-pyuu-ter/</td>
+            <td>Computer</td>
+            <td>💻</td>
+            <td>Ich brauche einen Computer.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Handy</span></strong></td>
+            <td>/hen-dee/</td>
+            <td>Cell phone</td>
+            <td>📱</td>
+            <td>Mein Handy ist neu.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Internet</span></strong></td>
+            <td>/in-ter-net/</td>
+            <td>The Internet</td>
+            <td>🌐</td>
+            <td>Das Internet ist nützlich.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Farbe</span></strong></td>
+            <td>/far-be/</td>
+            <td>Color</td>
+            <td>🎨🌈</td>
+            <td>Das ist meine Lieblingsfarbe.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Wetter</span></strong></td>
+            <td>/ve-ter/</td>
+            <td>Weather</td>
+            <td>☀️🌧️</td>
+            <td>Das Wetter ist gut.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Sonne</span></strong></td>
+            <td>/zon-ne/</td>
+            <td>Sun</td>
+            <td>☀️</td>
+            <td>Die Sonne scheint.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Regen</span></strong></td>
+            <td>/ré-gen/</td>
+            <td>Rain</td>
+            <td>🌧️</td>
+            <td>Es regnet. (Der Regen ist stark.)</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Wind</span></strong></td>
+            <td>/vint/</td>
+            <td>Wind</td>
+            <td>🌬️</td>
+            <td>Der Wind ist stark.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Licht</span></strong></td>
+            <td>/lijt/</td>
+            <td>Light</td>
+            <td>💡</td>
+            <td>Das ist helles Licht.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Nacht</span></strong></td>
+            <td>/naht/</td>
+            <td>Night</td>
+            <td>🌑</td>
+            <td>Die Nacht ist dunkel.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Himmel</span></strong></td>
+            <td>/him-mel/</td>
+            <td>Sky</td>
+            <td>☁️</td>
+            <td>Der Himmel ist blau.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Liebe</span></strong></td>
+            <td>/lee-be/</td>
+            <td>Love</td>
+            <td>❤️</td>
+            <td>Das ist Liebe.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Freude</span></strong></td>
+            <td>/frói-de/</td>
+            <td>Joy / Happiness</td>
+            <td>😊</td>
+            <td>Das ist eine große Freude.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Angst</span></strong></td>
+            <td>/angst/</td>
+            <td>Fear / Anxiety</td>
+            <td>😨</td>
+            <td>Ich habe Angst.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Hoffnung</span></strong></td>
+            <td>/hof-nung/</td>
+            <td>Hope</td>
+            <td>🙏</td>
+            <td>Ich habe Hoffnung.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Idee</span></strong></td>
+            <td>/i-dé-e/</td>
+            <td>Idea</td>
+            <td>💡</td>
+            <td>Ich habe eine Idee.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Möglichkeit</span></strong></td>
+            <td>/mög-lich-kait/</td>
+            <td>Possibility / Option</td>
+            <td>🤔</td>
+            <td>Das ist eine Möglichkeit.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Antwort</span></strong></td>
+            <td>/ant-vort/</td>
+            <td>Answer</td>
+            <td>✅</td>
+            <td>Das ist die Antwort.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Frage</span></strong></td>
+            <td>/fraa-ge/</td>
+            <td>Question</td>
+            <td>❓</td>
+            <td>Das ist eine Frage.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Anfang</span></strong></td>
+            <td>/AN-fang/</td>
+            <td>Beginning / Start</td>
+            <td>➡️</td>
+            <td>Das ist der Anfang.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Ende</span></strong></td>
+            <td>/EN-de/</td>
+            <td>End</td>
+            <td>🔚</td>
+            <td>Das ist das Ende.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Beispiel</span></strong></td>
+            <td>/bais-peel/</td>
+            <td>Example</td>
+            <td>👍</td>
+            <td>Hier ist ein Beispiel.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Wort</span></strong></td>
+            <td>/vort/</td>
+            <td>Word</td>
+            <td>💬</td>
+            <td>Das ist ein schweres Wort.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Zahl</span></strong></td>
+            <td>/tsaal/</td>
+            <td>Number</td>
+            <td>🔢</td>
+            <td>Das ist eine Zahl.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Satz</span></strong></td>
+            <td>/zats/</td>
+            <td>Sentence</td>
+            <td>📝</td>
+            <td>Das ist ein kurzer Satz.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Arbeit</span></strong></td>
+            <td>/ár-bait/</td>
+            <td>Work</td>
+            <td>💼</td>
+            <td>Ich suche Arbeit.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Freizeit</span></strong></td>
+            <td>/frái-tsait/</td>
+            <td>Free Time / Leisure</td>
+            <td>🏖️</td>
+            <td>Ich habe Freizeit.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Geld</span></strong></td>
+            <td>/gelt/</td>
+            <td>Money</td>
+            <td>💰</td>
+            <td>Ich habe Geld.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Problem</span></strong></td>
+            <td>/pro-bléhm/</td>
+            <td>Problem</td>
+            <td>😥</td>
+            <td>Ich habe ein Problem.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Lösung</span></strong></td>
+            <td>/lö-zung/</td>
+            <td>Solution</td>
+            <td>✨</td>
+            <td>Das ist die Lösung.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Hilfe</span></strong></td>
+            <td>/hil-fe/</td>
+            <td>Help</td>
+            <td>🤝</td>
+            <td>Danke für die Hilfe.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Frage</span></strong></td>
+            <td>/fraa-ge/</td>
+            <td>Question</td>
+            <td>❓</td>
+            <td>Ich habe eine wichtige Frage.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Antwort</span></strong></td>
+            <td>/ant-vort/</td>
+            <td>Answer</td>
+            <td>✅</td>
+            <td>Das ist die richtige Antwort.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Wetter</span></strong></td>
+            <td>/ve-ter/</td>
+            <td>Weather</td>
+            <td>☀️🌧️</td>
+            <td>Wie ist das Wetter?</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Liebe</span></strong></td>
+            <td>/lee-be/</td>
+            <td>Love</td>
+            <td>❤️</td>
+            <td>Liebe ist wichtig.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Freude</span></strong></td>
+            <td>/frói-de/</td>
+            <td>Joy</td>
+            <td>😄</td>
+            <td>Ich habe viel Freude.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Angst</span></strong></td>
+            <td>/angst/</td>
+            <td>Fear</td>
+            <td>😨</td>
+            <td>Ich habe Angst im Dunkeln.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Hoffnung</span></strong></td>
+            <td>/hof-nung/</td>
+            <td>Hope</td>
+            <td>🙏</td>
+            <td>Ich habe Hoffnung für die Zukunft.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Idee</span></strong></td>
+            <td>/i-dé-e/</td>
+            <td>Idea</td>
+            <td>💡</td>
+            <td>Das ist eine gute Idee.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Möglichkeit</span></strong></td>
+            <td>/mög-lich-kait/</td>
+            <td>Possibility</td>
+            <td>🤔</td>
+            <td>Das ist eine gute Möglichkeit.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Antwort</span></strong></td>
+            <td>/ant-vort/</td>
+            <td>Answer</td>
+            <td>✅</td>
+            <td>Das ist die richtige Antwort.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Frage</span></strong></td>
+            <td>/fraa-ge/</td>
+            <td>Question</td>
+            <td>❓</td>
+            <td>Ich habe eine wichtige Frage.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Anfang</span></strong></td>
+            <td>/AN-fang/</td>
+            <td>Beginning</td>
+            <td>➡️</td>
+            <td>Das ist der Anfang vom Buch.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Ende</span></strong></td>
+            <td>/EN-de/</td>
+            <td>End</td>
+            <td>🔚</td>
+            <td>Das ist das Ende vom Film.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Beispiel</span></strong></td>
+            <td>/bais-peel/</td>
+            <td>Example</td>
+            <td>👍</td>
+            <td>Kannst du ein Beispiel geben?</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Wort</span></strong></td>
+            <td>/vort/</td>
+            <td>Word</td>
+            <td>💬</td>
+            <td>Was bedeutet dieses Wort?</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Zahl</span></strong></td>
+            <td>/tsaal/</td>
+            <td>Number</td>
+            <td>🔢</td>
+            <td>Welche Zahl ist das?</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Satz</span></strong></td>
+            <td>/zats/</td>
+            <td>Sentence</td>
+            <td>📝</td>
+            <td>Kannst du den Satz wiederholen?</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Veränderung</span></strong></td>
+            <td>/fe-én-de-rung/</td>
+            <td>Change</td>
+            <td>✨</td>
+            <td>Das ist eine große Veränderung.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Wechsel</span></strong></td>
+            <td>/vek-sel/</td>
+            <td>Change (Switch)</td>
+            <td>↔️</td>
+            <td>Das ist ein schneller Wechsel.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Wahl</span></strong></td>
+            <td>/vaal/</td>
+            <td>Choice / Election</td>
+            <td>✅🗳️</td>
+            <td>Das ist deine Wahl.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Nachricht</span></strong></td>
+            <td>/náj-rijt/ (náh-rischt)</td>
+            <td>Message / News</td>
+            <td>📰💬</td>
+            <td>Ich habe eine wichtige Nachricht.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Gewicht</span></strong></td>
+            <td>/ge-víjcht/ (ge-wischt)</td>
+            <td>Weight</td>
+            <td>⚖️</td>
+            <td>Wie viel Gewicht hat das?</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Arbeitszeit</span></strong></td>
+            <td>/ár-baits-tsait/</td>
+            <td>Working Time</td>
+            <td>⏱️</td>
+            <td>Meine Arbeitszeit ist lang.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Freizeit</span></strong></td>
+            <td>/frái-tsait/</td>
+            <td>Free Time</td>
+            <td>🏖️</td>
+            <td>Ich mag meine Freizeit.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Wartezeit</span></strong></td>
+            <td>/vár-te-tsait/</td>
+            <td>Waiting Time</td>
+            <td>⏳</td>
+            <td>Die Wartezeit ist kurz.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Eile</span></strong></td>
+            <td>/ái-le/</td>
+            <td>Hurry</td>
+            <td>🏃‍♀️</td>
+            <td>Ich habe keine Eile.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Farbe</span></strong></td>
+            <td>/far-be/</td>
+            <td>Color</td>
+            <td>🎨🌈</td>
+            <td>Welche Farbe magst du?</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Wissenschaft</span></strong></td>
+            <td>/ví-sen-shaft/</td>
+            <td>Science</td>
+            <td>🔬</td>
+            <td>Wissenschaft ist wichtig für die Zukunft.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Intelligenz</span></strong></td>
+            <td>/in-te-li-gents/</td>
+            <td>Intelligence</td>
+            <td>🧠</td>
+            <td>Intelligenz ist eine gute Sache.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Ökonomie</span></strong></td>
+            <td>/ö-ko-no-mí-e/</td>
+            <td>Economics</td>
+            <td>📈</td>
+            <td>Die Ökonomie ist kompliziert.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Finanzen</span> (Pl.)</strong></td>
+            <td>/fi-nan-tsen/</td>
+            <td>Finances</td>
+            <td>💸</td>
+            <td>Meine Finanzen sind gut.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Budget</span></strong></td>
+            <td>/bü-dje/ or /bú-djet/</td>
+            <td>Budget</td>
+            <td>📊</td>
+            <td>Das Budget ist klein.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Bargeld</span></strong></td>
+            <td>/bar-gelt/</td>
+            <td>Cash</td>
+            <td>💵</td>
+            <td>Ich bezahle mit Bargeld.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Forschung</span></strong></td>
+            <td>/for-shung/</td>
+            <td>Research</td>
+            <td>🧪</td>
+            <td>Die Forschung ist interessant.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Gesellschaft</span></strong></td>
+            <td>/ge-zel-shaft/</td>
+            <td>Society</td>
+            <td>🤝</td>
+            <td>Die Gesellschaft ändert sich.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Kultur</span></strong></td>
+            <td>/kul-tuur/</td>
+            <td>Culture</td>
+            <td>🎭</td>
+            <td>Die deutsche Kultur ist vielfältig.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Geisteswissenschaften</span> (Pl.)</strong></td>
+            <td>/gáis-tes-ví-sen-shaf-ten/</td>
+            <td>Humanities</td>
+            <td>📚</td>
+            <td>Die Geisteswissenschaften sind interessant.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Kunst</span></strong></td>
+            <td>/kunst/</td>
+            <td>Art</td>
+            <td>🎨</td>
+            <td>Ich mag moderne Kunst.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Werk</span></strong></td>
+            <td>/verk/</td>
+            <td>Work (opus) / Plant / Factory</td>
+            <td>🏭🛠️</td>
+            <td>Das ist ein wichtiges Werk.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Welt</span></strong></td>
+            <td>/velt/</td>
+            <td>World</td>
+            <td>🌍</td>
+            <td>Die Welt ist groß.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Politik</span></strong></td>
+            <td>/po-li-tiik/</td>
+            <td>Politics</td>
+            <td>🏛️</td>
+            <td>Politik ist manchmal schwierig.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Krieg</span></strong></td>
+            <td>/kriik/</td>
+            <td>War</td>
+            <td>⚔️</td>
+            <td>Krieg ist schrecklich.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Armee</span></strong></td>
+            <td>/ar-mé-e/</td>
+            <td>Army</td>
+            <td>🛡️</td>
+            <td>Die Armee ist stark.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Bundeswehr</span></strong></td>
+            <td>/bún-des-veer/</td>
+            <td>German Armed Forces</td>
+            <td>🇩🇪🛡️</td>
+            <td>Das ist die <strong>Bundeswehr</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Bundesländer</span> (Pl.)</strong></td>
+            <td>/bún-des-len-der/</td>
+            <td>Federal States</td>
+            <td>🇩🇪</td>
+            <td>Deutschland hat viele Bundesländer.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Liebe</span></strong></td>
+            <td>/lee-be/</td>
+            <td>Love</td>
+            <td>❤️</td>
+            <td>Liebe ist wichtig.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Freude</span></strong></td>
+            <td>/frói-de/</td>
+            <td>Joy</td>
+            <td>😄</td>
+            <td>Ich habe viel Freude.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Spaß</span></strong></td>
+            <td>/shpaas/</td>
+            <td>Fun</td>
+            <td>😄</td>
+            <td>Das macht viel Spaß.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Glück</span></strong></td>
+            <td>/glük/</td>
+            <td>Luck / Happiness</td>
+            <td>🍀</td>
+            <td>Ich wünsche dir Glück.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Angst</span></strong></td>
+            <td>/angst/</td>
+            <td>Fear</td>
+            <td>😨</td>
+            <td>Ich habe Angst vor Hunden.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Hoffnung</span></strong></td>
+            <td>/hof-nung/</td>
+            <td>Hope</td>
+            <td>🙏</td>
+            <td>Ich habe Hoffnung für morgen.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Idee</span></strong></td>
+            <td>/i-dé-e/</td>
+            <td>Idea</td>
+            <td>💡</td>
+            <td>Das ist eine gute Idee.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Möglichkeit</span></strong></td>
+            <td>/mög-lich-kait/</td>
+            <td>Possibility</td>
+            <td>🤔</td>
+            <td>Das ist eine gute Möglichkeit.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Ruhe</span></strong></td>
+            <td>/roo-e/</td>
+            <td>Peace / Quiet</td>
+            <td>🧘‍♀️</td>
+            <td>Ich suche Ruhe.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Dunkelheit</span></strong></td>
+            <td>/dún-kel-heit/</td>
+            <td>Darkness</td>
+            <td>🌑</td>
+            <td>Hier ist Dunkelheit.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Schatten</span></strong></td>
+            <td>/sha-ten/</td>
+            <td>Shadow</td>
+            <td>👤</td>
+            <td>Der Schatten ist lang.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Zorn</span></strong></td>
+            <td>/tsorn/</td>
+            <td>Anger / Wrath</td>
+            <td>😡</td>
+            <td>Er hat viel Zorn.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Überraschung</span></strong></td>
+            <td>/üü-ber-ra-shung/</td>
+            <td>Surprise</td>
+            <td>😲</td>
+            <td>Das ist eine schöne Überraschung.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Enttäuschung</span></strong></td>
+            <td>/ent-tói-shung/</td>
+            <td>Disappointment</td>
+            <td>😞</td>
+            <td>Das ist eine große Enttäuschung.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Achtung</span></strong></td>
+            <td>/aj-tung/</td>
+            <td>Attention / Respect</td>
+            <td>⚠️</td>
+            <td><strong>Achtung</strong>, Stufe!</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Aufmerksamkeit</span></strong></td>
+            <td>/auf-merk-zaam-kait/</td>
+            <td>Attention / Attentiveness</td>
+            <td>🦉</td>
+            <td>Ich brauche deine <strong>Aufmerksamkeit</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Kleinanzeigen</span> (Pl.)</strong></td>
+            <td>/klain-an-tsai-gen/</td>
+            <td>Classifieds / Small Ads</td>
+            <td>📰</td>
+            <td>Ich lese <strong>die Kleinanzeigen</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="das-color">das Treffen</span></strong></td>
+            <td>/tref-fen/</td>
+            <td>Meeting (informal)</td>
+            <td>🤝</td>
+            <td>Wir haben ein <strong>Treffen</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Sitzung</span></strong></td>
+            <td>/zit-zung/</td>
+            <td>Meeting (formal, office)</td>
+            <td>💼</td>
+            <td><strong>Die Sitzung</strong> ist um 10 Uhr.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Termin</span></strong></td>
+            <td>/ter-miin/</td>
+            <td>Appointment / Scheduled time</td>
+            <td>🗓️</td>
+            <td>Ich habe einen <strong>Termin</strong>.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Toleranz</span></strong></td>
+            <td>/to-le-RANTS/</td>
+            <td>Tolerance</td>
+            <td>🤗</td>
+            <td>Toleranz ist wichtig in der Gesellschaft.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Duldung</span></strong></td>
+            <td>/DUL-dung/</td>
+            <td>Toleration / Acquiescence</td>
+            <td>😌</td>
+            <td>Manchmal ist Duldung notwendig.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Schutz</span></strong></td>
+            <td>/shuts/</td>
+            <td>Protection</td>
+            <td>🛡️</td>
+            <td>Wir brauchen Schutz vor dem Regen.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Freiheit</span></strong></td>
+            <td>/FRAI-heit/</td>
+            <td>Freedom / Liberty</td>
+            <td>🕊️</td>
+            <td>Freiheit ist ein Menschenrecht.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Kapitalismus</span></strong></td>
+            <td>/ka-pi-ta-LIS-mus/</td>
+            <td>Capitalism</td>
+            <td>📈</td>
+            <td>Der Kapitalismus hat Vorteile und Nachteile.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Sozialismus</span></strong></td>
+            <td>/zo-tsi-a-LIS-mus/</td>
+            <td>Socialism</td>
+            <td>🤝</td>
+            <td>Der Sozialismus ist ein politisches System.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Rassismus</span></strong></td>
+            <td>/ra-SIS-mus/</td>
+            <td>Racism</td>
+            <td>🚫</td>
+            <td>Rassismus ist ein großes Problem.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="der-color">der Tourismus</span></strong></td>
+            <td>/tu-RIS-mus/</td>
+            <td>Tourism</td>
+            <td>✈️🏞️</td>
+            <td>Der Tourismus ist wichtig für die Wirtschaft.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Literatur</span></strong></td>
+            <td>/li-te-ra-TUUR/</td>
+            <td>Literature</td>
+            <td>📚</td>
+            <td>Ich lese gerne deutsche Literatur.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Diktatur</span></strong></td>
+            <td>/dik-ta-TUUR/</td>
+            <td>Dictatorship</td>
+            <td>👑🚫</td>
+            <td>Eine Diktatur ist nicht demokratisch.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Struktur</span></strong></td>
+            <td>/shtruk-TUUR/</td>
+            <td>Structure</td>
+            <td>🏗️</td>
+            <td>Die Struktur des Hauses ist stark.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Soziologie</span></strong></td>
+            <td>/zo-tsi-o-lo-GIE/</td>
+            <td>Sociology</td>
+            <td>🧑‍🤝‍🧑🔬</td>
+            <td>Soziologie studiert die Gesellschaft.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Philosophie</span></strong></td>
+            <td>/fi-lo-so-FIE/</td>
+            <td>Philosophy</td>
+            <td>🤔📜</td>
+            <td>Philosophie ist ein interessantes Fach.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Biologie</span></strong></td>
+            <td>/bio-lo-GIE/</td>
+            <td>Biology</td>
+            <td>🧬🌿</td>
+            <td>Biologie ist die Lehre vom Leben.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Technologie</span></strong></td>
+            <td>/tesh-no-lo-GIE/</td>
+            <td>Technology</td>
+            <td>�💡</td>
+            <td>Die Technologie entwickelt sich schnell.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Nationalität</span></strong></td>
+            <td>/na-tsio-na-li-TÄT/</td>
+            <td>Nationality</td>
+            <td>🏳️</td>
+            <td>Was ist deine Nationalität?</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Kapazität</span></strong></td>
+            <td>/ka-pa-tsi-TÄT/</td>
+            <td>Capacity</td>
+            <td>🔋📦</td>
+            <td>Die Kapazität des Raumes ist begrenzt.</td>
+          </tr>
+          <tr>
+            <td><strong><span class="die-color">die Realität</span></strong></td>
+            <td>/re-a-li-TÄT/</td>
+            <td>Reality</td>
+            <td>👁️‍🗨️</td>
+            <td>Die Realität ist manchmal anders.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <script>
+    // Function to call the Gemini API
+    async function callGeminiAPI(prompt, outputElementId) {
+      const outputElement = document.getElementById(outputElementId);
+      outputElement.innerHTML = '<span class="animate-pulse">Generiere...</span>'; // Loading indicator
+
+      try {
+        let chatHistory = [];
+        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+        const payload = { contents: chatHistory };
+        const apiKey = ""; // Canvas will automatically provide the API key here.
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (result.candidates && result.candidates.length > 0 &&
+            result.candidates[0].content && result.candidates[0].content.parts &&
+            result.candidates[0].content.parts.length > 0) {
+          const text = result.candidates[0].content.parts[0].text;
+          outputElement.textContent = text;
+          return text; // Return the generated text for further use
+        } else {
+          outputElement.textContent = 'Fehler: Keine Antwort erhalten.';
+          console.error('Gemini API response structure unexpected:', result);
+          return '';
+        }
+      } catch (error) {
+        outputElement.textContent = 'Fehler beim Generieren des Textes.';
+        console.error('Error calling Gemini API:', error);
+        return '';
+      }
+    }
+
+    // Event Listener for Verb Sentence Generator
+    document.getElementById('generateVerbSentenceBtn').addEventListener('click', async () => {
+      const verb = document.getElementById('verbInput').value.trim();
+      const pronoun = document.getElementById('pronounSelect').value;
+
+      if (verb) {
+        const germanSentence = await callGeminiAPI(
+          `Generiere einen einfachen deutschen Satz (A1-Niveau) mit dem Verb "${verb}" konjugiert für das Personalpronomen "${pronoun}". Der Satz sollte kurz und klar sein.`,
+          'verbSentenceOutput'
+        );
+
+        if (germanSentence) {
+          // Translate to English
+          await callGeminiAPI(
+            `Übersetze den folgenden deutschen Satz ins Englische: "${germanSentence}"`,
+            'verbSentenceEnglishOutput'
+          );
+          // Translate to Spanish
+          await callGeminiAPI(
+            `Übersetze den folgenden deutschen Satz ins Spanische: "${germanSentence}"`,
+            'verbSentenceSpanishOutput'
+          );
+        }
+      } else {
+        document.getElementById('verbSentenceOutput').textContent = 'Bitte geben Sie ein Verb ein.';
+        document.getElementById('verbSentenceEnglishOutput').textContent = '';
+        document.getElementById('verbSentenceSpanishOutput').textContent = '';
+      }
+    });
+
+    // Event Listener for Noun Example Text Generator
+    document.getElementById('generateNounTextBtn').addEventListener('click', async () => {
+      const noun = document.getElementById('nounInput').value.trim();
+
+      if (noun) {
+        const germanText = await callGeminiAPI(
+          `Schreibe einen kurzen deutschen Satz oder einen sehr kurzen beschreibenden Text (A1-Niveau) mit dem Substantiv "${noun}". Der Text sollte die Bedeutung des Substantivs im Kontext zeigen.`,
+          'nounTextOutput'
+        );
+
+        if (germanText) {
+          // Translate to English
+          await callGeminiAPI(
+            `Übersetze den folgenden deutschen Text ins Englische: "${germanText}"`,
+            'nounTextEnglishOutput'
+          );
+          // Translate to Spanish
+          await callGeminiAPI(
+            `Übersetze den folgenden deutschen Text ins Spanische: "${germanText}"`,
+            'nounTextSpanishOutput'
+          );
+        }
+      } else {
+        document.getElementById('nounTextOutput').textContent = 'Bitte geben Sie ein Substantiv ein.';
+        document.getElementById('nounTextEnglishOutput').textContent = '';
+        document.getElementById('nounTextSpanishOutput').textContent = '';
+      }
+    });
+  </script>
+</body>
+</html>
+�
