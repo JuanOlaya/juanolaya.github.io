@@ -87,6 +87,36 @@ h1 {
   transform: translateY(-2px);
 }
 
+/* External Link Styles */
+.external-link {
+  color: #3182ce;
+  text-decoration: underline;
+  font-weight: 500;
+  display: inline-block;
+  margin: 10px 0;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.external-link:hover {
+  color: #2c5aa0;
+  background-color: #edf2f7;
+  text-decoration: underline;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.external-link:visited {
+  color: #553c9a;
+}
+
+.external-link:active {
+  transform: translateY(0);
+}
+
 /* Style for the collapsible sections */
 details {
   background-color: #ffffff;
