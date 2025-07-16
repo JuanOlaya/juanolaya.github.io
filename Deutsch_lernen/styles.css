@@ -316,7 +316,12 @@ td[data-label="kaufen"] span,
 td[data-label="hören"] span,
 td[data-label="trinken"] span,
 td[data-label="lieben"] span {
-  font-weight: 600 !important;
+  font-weight: 550 !important;
+}
+
+/* Make articles extra bold */
+strong {
+  font-weight: 750 !important;
 }
 
 /* Hide the br in einkaufsvokabular */
@@ -416,4 +421,78 @@ td[data-label="Emoji"] {
     font-weight: 600;
     color: #4a5568;
   }
+}
+
+/* Hover effect to expand cells and show complete sentences */
+table td:hover {
+  position: relative;
+  z-index: 10;
+  min-width: max-content;
+  white-space: nowrap;
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid #4299e1;
+  padding: 15px 18px;
+  border-radius: 6px;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+/* Mobile tap-to-expand functionality */
+table td.expanded {
+  position: relative;
+  z-index: 10;
+  min-width: max-content;
+  white-space: nowrap;
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid #4299e1;
+  padding: 15px 18px;
+  border-radius: 6px;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+/* Add touch indicator for mobile */
+@media (hover: none) and (pointer: coarse) {
+  table td:not([data-label="Emoji"]):not([data-label="Substantiv"]):after {
+    content: " 👆";
+    font-size: 0.8em;
+    opacity: 0.6;
+    margin-left: 4px;
+  }
+  
+  table td.expanded:after {
+    content: " ✕";
+    font-size: 0.8em;
+    opacity: 0.8;
+    margin-left: 4px;
+    color: #4299e1;
+  }
+}
+
+/* Prevent hover expansion for emoji and substantiv cells to avoid breaking layout */
+td[data-label="Emoji"]:hover,
+td[data-label="Substantiv"]:hover {
+  position: static;
+  z-index: auto;
+  min-width: auto;
+  white-space: normal;
+  transform: none;
+  border: none;
+  box-shadow: none;
+  padding: 12px 15px;
+}
+
+/* Prevent expansion class for emoji and substantiv cells */
+td[data-label="Emoji"].expanded,
+td[data-label="Substantiv"].expanded {
+  position: static;
+  z-index: auto;
+  min-width: auto;
+  white-space: normal;
+  transform: none;
+  border: none;
+  box-shadow: none;
+  padding: 12px 15px;
 }
