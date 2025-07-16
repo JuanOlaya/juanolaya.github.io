@@ -257,14 +257,26 @@ ul ul {
   border-collapse: collapse;
 }
 
+/* Make emojis in substantiv cells larger and centered */
+#abstraktes-deutsches-substantiv-section td[data-label="Substantiv"] {
+  font-size: 2.2em; /* Optimal size for readability */
+  text-align: center;
+}
+
+/* General substantiv cells for other tables */
+td[data-label="Substantiv"] {
+  font-size: 2.2em; /* Optimal size for readability */  
+  text-align: center;
+}
+
 /* Specific emoji size for "Abstraktes deutsches Substantiv" table */
 #abstraktes-deutsches-substantiv-subsection td[data-label="Emoji"] {
-  font-size: 2.5em; /* Increased to 2.5 times the base font size for better visibility */
+  font-size: 7.5em; /* Increased by 100% from 3.75em (3.75 * 2 = 7.5) */
 }
 
 /* Default emoji size for other tables */
 td[data-label="Emoji"] {
-  font-size: 1.50em; /* 50% larger than parent font size */
+  font-size: 4.5em; /* Increased by 100% from 2.25em (2.25 * 2 = 4.5) */
 }
 
 /* Responsive adjustments for tables */
