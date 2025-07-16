@@ -303,6 +303,22 @@ table td[data-label="Substantiv"] .das-color {
   padding: 8px !important;
 }
 
+/* Semibold styling for German examples in verb columns */
+td[data-label="haben"] span,
+td[data-label="sehen"] span,
+td[data-label="finden"] span,
+td[data-label="nehmen"] span,
+td[data-label="mögen"] span,
+td[data-label="kennen"] span,
+td[data-label="brauchen"] span,
+td[data-label="essen"] span,
+td[data-label="kaufen"] span,
+td[data-label="hören"] span,
+td[data-label="trinken"] span,
+td[data-label="lieben"] span {
+  font-weight: 600 !important;
+}
+
 /* Hide the br in einkaufsvokabular */
 #einkaufsvokabular-section td[data-label="Substantiv"] br {
   display: none !important;
