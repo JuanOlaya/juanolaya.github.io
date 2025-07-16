@@ -258,15 +258,19 @@ ul ul {
 }
 
 /* Make emojis in substantiv cells larger and centered */
-#abstraktes-deutsches-substantiv-section td[data-label="Substantiv"] {
-  font-size: 2.2em; /* Optimal size for readability */
-  text-align: center;
-}
+/* Removed specific rule for abstraktes-deutsches-substantiv - now uses general rule */
 
 /* General substantiv cells for other tables */
 td[data-label="Substantiv"] {
-  font-size: 2.2em; /* Optimal size for readability */  
   text-align: center;
+  line-height: 1.6;
+  font-size: 1rem; /* Normal text size */
+}
+
+/* Make emojis specifically larger while keeping text normal */
+td[data-label="Substantiv"] br + * {
+  font-size: 3em !important; /* Large emoji size only */
+  line-height: 1.2;
 }
 
 /* Specific emoji size for "Abstraktes deutsches Substantiv" table */
