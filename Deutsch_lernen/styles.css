@@ -260,23 +260,69 @@ ul ul {
 /* Make emojis in substantiv cells larger and centered */
 /* Removed specific rule for abstraktes-deutsches-substantiv - now uses general rule */
 
-/* General substantiv cells for other tables */
+/* General substantiv cells - BIG for emojis */
 td[data-label="Substantiv"] {
   text-align: center;
-  line-height: 1.6;
-  font-size: 1rem; /* Normal text size */
+  font-size: 7.02rem !important; /* Increased 20% more: 5.85rem * 1.2 = 7.02rem */
+  line-height: 1.3 !important; /* Normal line height for text */
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.1rem !important; /* Minimal gap */
+  padding: 8px !important;
 }
 
-/* Make emojis specifically larger while keeping text normal */
-td[data-label="Substantiv"] br + * {
-  font-size: 3em !important; /* Large emoji size only */
-  line-height: 1.2;
+/* Hide the br and use CSS to position emoji closer */
+td[data-label="Substantiv"] br {
+  display: none !important;
+}
+
+/* Force German text to be readable size - override everything */
+table td[data-label="Substantiv"] strong,
+table td[data-label="Substantiv"] span,
+table td[data-label="Substantiv"] .der-color,
+table td[data-label="Substantiv"] .die-color,
+table td[data-label="Substantiv"] .das-color {
+  font-size: 2.34rem !important; /* Increased 30%: 1.8rem * 1.3 = 2.34rem */
+  display: inline !important;
+}
+
+/* Specific styling for einkaufsvokabular table - AFTER general rule */
+#einkaufsvokabular-section td[data-label="Substantiv"] {
+  text-align: center;
+  font-size: 7.02rem !important; /* Same as abstraktes: 7.02rem */
+  line-height: 1.3 !important; /* Normal line height for text */
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.1rem !important; /* Minimal gap */
+  padding: 8px !important;
+}
+
+/* Hide the br in einkaufsvokabular */
+#einkaufsvokabular-section td[data-label="Substantiv"] br {
+  display: none !important;
+}
+
+/* Force German text to be readable size in einkaufsvokabular */
+#einkaufsvokabular-section table td[data-label="Substantiv"] strong,
+#einkaufsvokabular-section table td[data-label="Substantiv"] span,
+#einkaufsvokabular-section table td[data-label="Substantiv"] .der-color,
+#einkaufsvokabular-section table td[data-label="Substantiv"] .die-color,
+#einkaufsvokabular-section table td[data-label="Substantiv"] .das-color {
+  font-size: 2.34rem !important; /* Increased 30%: 1.8rem * 1.3 = 2.34rem */
+  display: inline !important;
 }
 
 /* Specific emoji size for "Abstraktes deutsches Substantiv" table */
 #abstraktes-deutsches-substantiv-subsection td[data-label="Emoji"] {
   font-size: 7.5em; /* Increased by 100% from 3.75em (3.75 * 2 = 7.5) */
 }
+
 
 /* Default emoji size for other tables */
 td[data-label="Emoji"] {
