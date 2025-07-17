@@ -496,3 +496,201 @@ td[data-label="Substantiv"].expanded {
   box-shadow: none;
   padding: 12px 15px;
 }
+
+/* Hide translations by default in Akkusativ tables */
+td[data-label="haben"] .translation,
+td[data-label="sehen"] .translation,
+td[data-label="finden"] .translation,
+td[data-label="nehmen"] .translation,
+td[data-label="mögen"] .translation,
+td[data-label="kennen"] .translation,
+td[data-label="brauchen"] .translation,
+td[data-label="essen"] .translation,
+td[data-label="kaufen"] .translation,
+td[data-label="hören"] .translation,
+td[data-label="trinken"] .translation,
+td[data-label="lieben"] .translation {
+  display: none;
+}
+
+/* Show translations on hover */
+td[data-label="haben"]:hover .translation,
+td[data-label="sehen"]:hover .translation,
+td[data-label="finden"]:hover .translation,
+td[data-label="nehmen"]:hover .translation,
+td[data-label="mögen"]:hover .translation,
+td[data-label="kennen"]:hover .translation,
+td[data-label="brauchen"]:hover .translation,
+td[data-label="essen"]:hover .translation,
+td[data-label="kaufen"]:hover .translation,
+td[data-label="hören"]:hover .translation,
+td[data-label="trinken"]:hover .translation,
+td[data-label="lieben"]:hover .translation {
+  display: block;
+}
+
+/* Show translations when expanded (mobile) */
+td[data-label="haben"].expanded .translation,
+td[data-label="sehen"].expanded .translation,
+td[data-label="finden"].expanded .translation,
+td[data-label="nehmen"].expanded .translation,
+td[data-label="mögen"].expanded .translation,
+td[data-label="kennen"].expanded .translation,
+td[data-label="brauchen"].expanded .translation,
+td[data-label="essen"].expanded .translation,
+td[data-label="kaufen"].expanded .translation,
+td[data-label="hören"].expanded .translation,
+td[data-label="trinken"].expanded .translation,
+td[data-label="lieben"].expanded .translation {
+  display: block;
+}
+
+/* Remove bold from translations */
+.translation {
+  font-weight: normal !important;
+}
+
+.translation i {
+  font-weight: normal !important;
+}
+
+/* Remove bold from German sentences by default in Akkusativ tables, but keep bold for articles and nouns */
+td[data-label="haben"] span:first-child,
+td[data-label="sehen"] span:first-child,
+td[data-label="finden"] span:first-child,
+td[data-label="nehmen"] span:first-child,
+td[data-label="mögen"] span:first-child,
+td[data-label="kennen"] span:first-child,
+td[data-label="brauchen"] span:first-child,
+td[data-label="essen"] span:first-child,
+td[data-label="kaufen"] span:first-child,
+td[data-label="hören"] span:first-child,
+td[data-label="trinken"] span:first-child,
+td[data-label="lieben"] span:first-child {
+  font-weight: normal !important;
+}
+
+/* Keep bold for articles and nouns within German sentences in Akkusativ tables */
+td[data-label="haben"] span:first-child strong,
+td[data-label="sehen"] span:first-child strong,
+td[data-label="finden"] span:first-child strong,
+td[data-label="nehmen"] span:first-child strong,
+td[data-label="mögen"] span:first-child strong,
+td[data-label="kennen"] span:first-child strong,
+td[data-label="brauchen"] span:first-child strong,
+td[data-label="essen"] span:first-child strong,
+td[data-label="kaufen"] span:first-child strong,
+td[data-label="hören"] span:first-child strong,
+td[data-label="trinken"] span:first-child strong,
+td[data-label="lieben"] span:first-child strong {
+  font-weight: 750 !important;
+}
+
+/* Apply bold to German sentences on hover */
+td[data-label="haben"]:hover span:first-child,
+td[data-label="sehen"]:hover span:first-child,
+td[data-label="finden"]:hover span:first-child,
+td[data-label="nehmen"]:hover span:first-child,
+td[data-label="mögen"]:hover span:first-child,
+td[data-label="kennen"]:hover span:first-child,
+td[data-label="brauchen"]:hover span:first-child,
+td[data-label="essen"]:hover span:first-child,
+td[data-label="kaufen"]:hover span:first-child,
+td[data-label="hören"]:hover span:first-child,
+td[data-label="trinken"]:hover span:first-child,
+td[data-label="lieben"]:hover span:first-child {
+  font-weight: 550 !important;
+}
+
+/* Apply bold to German sentences when expanded (mobile) */
+td[data-label="haben"].expanded span:first-child,
+td[data-label="sehen"].expanded span:first-child,
+td[data-label="finden"].expanded span:first-child,
+td[data-label="nehmen"].expanded span:first-child,
+td[data-label="mögen"].expanded span:first-child,
+td[data-label="kennen"].expanded span:first-child,
+td[data-label="brauchen"].expanded span:first-child,
+td[data-label="essen"].expanded span:first-child,
+td[data-label="kaufen"].expanded span:first-child,
+td[data-label="hören"].expanded span:first-child,
+td[data-label="trinken"].expanded span:first-child,
+td[data-label="lieben"].expanded span:first-child {
+  font-weight: 550 !important;
+}
+
+/* Hide translations by default in Abstraktes Substantiv tables */
+td[data-label="Beispielsatz"] .translation,
+td[data-label="Definiter Artikel (Nominativ)"] .translation,
+td[data-label="Definiter Artikel (Akkusativ)"] .translation,
+td[data-label="Indefiniter Artikel (Nominativ)"] .translation,
+td[data-label="Indefiniter Artikel (Akkusativ)"] .translation,
+td[data-label="Negation (Nominativ)"] .translation,
+td[data-label="Negation (Akkusativ)"] .translation {
+  display: none;
+}
+
+/* Show translations on hover */
+td[data-label="Beispielsatz"]:hover .translation,
+td[data-label="Definiter Artikel (Nominativ)"]:hover .translation,
+td[data-label="Definiter Artikel (Akkusativ)"]:hover .translation,
+td[data-label="Indefiniter Artikel (Nominativ)"]:hover .translation,
+td[data-label="Indefiniter Artikel (Akkusativ)"]:hover .translation,
+td[data-label="Negation (Nominativ)"]:hover .translation,
+td[data-label="Negation (Akkusativ)"]:hover .translation {
+  display: block;
+}
+
+/* Show translations when expanded (mobile) */
+td[data-label="Beispielsatz"].expanded .translation,
+td[data-label="Definiter Artikel (Nominativ)"].expanded .translation,
+td[data-label="Definiter Artikel (Akkusativ)"].expanded .translation,
+td[data-label="Indefiniter Artikel (Nominativ)"].expanded .translation,
+td[data-label="Indefiniter Artikel (Akkusativ)"].expanded .translation,
+td[data-label="Negation (Nominativ)"].expanded .translation,
+td[data-label="Negation (Akkusativ)"].expanded .translation {
+  display: block;
+}
+
+/* Remove bold from German sentences by default in Abstraktes Substantiv tables, but keep bold for articles and nouns */
+td[data-label="Beispielsatz"] span:first-child,
+td[data-label="Definiter Artikel (Nominativ)"] span:first-child,
+td[data-label="Definiter Artikel (Akkusativ)"] span:first-child,
+td[data-label="Indefiniter Artikel (Nominativ)"] span:first-child,
+td[data-label="Indefiniter Artikel (Akkusativ)"] span:first-child,
+td[data-label="Negation (Nominativ)"] span:first-child,
+td[data-label="Negation (Akkusativ)"] span:first-child {
+  font-weight: normal !important;
+}
+
+/* Keep bold for articles and nouns within German sentences */
+td[data-label="Beispielsatz"] span:first-child strong,
+td[data-label="Definiter Artikel (Nominativ)"] span:first-child strong,
+td[data-label="Definiter Artikel (Akkusativ)"] span:first-child strong,
+td[data-label="Indefiniter Artikel (Nominativ)"] span:first-child strong,
+td[data-label="Indefiniter Artikel (Akkusativ)"] span:first-child strong,
+td[data-label="Negation (Nominativ)"] span:first-child strong,
+td[data-label="Negation (Akkusativ)"] span:first-child strong {
+  font-weight: 750 !important;
+}
+
+/* Apply semibold to German sentences on hover */
+td[data-label="Beispielsatz"]:hover span:first-child,
+td[data-label="Definiter Artikel (Nominativ)"]:hover span:first-child,
+td[data-label="Definiter Artikel (Akkusativ)"]:hover span:first-child,
+td[data-label="Indefiniter Artikel (Nominativ)"]:hover span:first-child,
+td[data-label="Indefiniter Artikel (Akkusativ)"]:hover span:first-child,
+td[data-label="Negation (Nominativ)"]:hover span:first-child,
+td[data-label="Negation (Akkusativ)"]:hover span:first-child {
+  font-weight: 550 !important;
+}
+
+/* Apply semibold to German sentences when expanded (mobile) */
+td[data-label="Beispielsatz"].expanded span:first-child,
+td[data-label="Definiter Artikel (Nominativ)"].expanded span:first-child,
+td[data-label="Definiter Artikel (Akkusativ)"].expanded span:first-child,
+td[data-label="Indefiniter Artikel (Nominativ)"].expanded span:first-child,
+td[data-label="Indefiniter Artikel (Akkusativ)"].expanded span:first-child,
+td[data-label="Negation (Nominativ)"].expanded span:first-child,
+td[data-label="Negation (Akkusativ)"].expanded span:first-child {
+  font-weight: 550 !important;
+}
