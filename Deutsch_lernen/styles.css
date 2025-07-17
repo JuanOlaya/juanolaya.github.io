@@ -694,3 +694,17 @@ td[data-label="Negation (Nominativ)"].expanded span:first-child,
 td[data-label="Negation (Akkusativ)"].expanded span:first-child {
   font-weight: 550 !important;
 }
+
+/* Hide GB and Es lines in column 2 by default for abstraktes-deutsches-substantiv */
+td[data-label="Aussprache Englisch Spanisch"] .translation { display: none; }
+
+/* Show hidden lines on hover/tap - column 2 (no enlargement) */
+td[data-label="Aussprache Englisch Spanisch"]:hover .translation,
+td[data-label="Aussprache Englisch Spanisch"]:active .translation { 
+  display: block; 
+}
+
+/* Show hidden lines on hover/tap and enlarge cell - columns 3+ */
+td[data-label="Aussprache Englisch Spanisch"].expanded .translation { 
+  display: block; 
+}

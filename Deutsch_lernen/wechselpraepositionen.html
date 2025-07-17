@@ -5,7 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wechselpräpositionen (Two-Way Prepositions) - Deutsche Sprachreferenz für A1</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="styles.css">
+<style>
+  /* General Styles */
+  body { font-family: 'Inter', sans-serif; margin: 20px; background-color: #f0f4f8; color: #333; line-height: 1.6; padding: 20px; }
+  h1 { color: #2c3e50; font-size: 2.5rem; margin-bottom: 20px; text-align: center; }
+  .back-link { margin-bottom: 20px; }
+  .back-link a { color: #3182ce; text-decoration: none; font-weight: 500; }
+  .back-link a:hover { text-decoration: underline; }
+
+  /* Collapsible Section */
+  details { background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); margin-bottom: 20px; overflow: hidden; }
+  summary { background-color: #e2e8f0; color: #2c3e50; padding: 18px 25px; font-size: 1.3rem; font-weight: 600; cursor: pointer; outline: none; transition: background-color 0.3s ease; display: block; position: relative; user-select: none; border-bottom: 1px solid #cbd5e0; }
+  summary:hover { background-color: #d1d9e2; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: '▶'; position: absolute; right: 20px; font-size: 1rem; transition: transform 0.3s ease; }
+  details[open] > summary::before { transform: rotate(90deg); }
+  .content-wrapper { padding: 20px 25px; }
+
+  /* Table Styles */
+  table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 20px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
+  th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  th { background-color: #f8faff; font-weight: 600; color: #4a5568; text-transform: uppercase; font-size: 0.9rem; }
+  tr:nth-child(even) { background-color: #fbfdff; }
+  tr:hover { background-color: #f0f4f8; }
+  td .translation { display: block; font-size: 0.9em; color: #555; font-style: italic; margin-top: 4px; }
+  strong { font-weight: 700; }
+
+  /* Hide GB and Es lines in columns 2+ by default */
+  td:nth-child(n+2) .translation { display: none; }
+  
+  /* Show hidden lines on hover/tap and enlarge cell - columns 3+ */
+  td:nth-child(n+3):hover .translation,
+  td:nth-child(n+3):active .translation { 
+    display: block; 
+  }
+  
+  td:nth-child(n+3):hover,
+  td:nth-child(n+3):active { 
+    white-space: nowrap; 
+    min-width: 300px; 
+    z-index: 10; 
+    position: relative; 
+  }
+  
+  /* Show hidden lines on hover/tap - column 2 (no enlargement) */
+  td:nth-child(2):hover .translation,
+  td:nth-child(2):active .translation { 
+    display: block; 
+  }
+
+  /* Responsive Table */
+  @media (max-width: 900px) {
+      thead { display: none; }
+      tr { display: block; border: 1px solid #e2e8f0; margin-bottom: 15px; border-radius: 8px; overflow: hidden; }
+      td { display: block; text-align: right; padding-left: 50%; position: relative; border-bottom: 1px solid #eee; }
+      td:last-child { border-bottom: 0; }
+      td:before { content: attr(data-label); position: absolute; left: 15px; width: 45%; padding-right: 10px; white-space: nowrap; text-align: left; font-weight: 600; color: #4a5568; }
+      td .translation { text-align: right; }
+  }
+</style>
 </head>
 <body>
 
@@ -16,85 +74,98 @@
   </div>
 
   <details id="praepositionen-section" open>
-    <summary>Wechselpräpositionen (Two-Way Prepositions)</summary>
+    <summary>Wechselpräpositionen mit Beispielen</summary>
     <div class="content-wrapper">
-        <p class="mb-4">These prepositions can be followed by either the <strong>Dativ</strong> case (to indicate a static location, answering <strong>Wo?</strong> - Where?) or the <strong>Akkusativ</strong> case (to indicate movement or direction towards something, answering <strong>Wohin?</strong> - Where to?).</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Präposition</th>
-                    <th>English</th>
-                    <th>Emoji</th>
-                    <th>Beispiel mit Dativ (Wo?)</th>
-                    <th>Beispiel mit Akkusativ (Wohin?)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td data-label="Präposition">an</td>
-                    <td data-label="English">at, on (vertical surface)</td>
-                    <td data-label="Emoji">🖼️</td>
-                    <td data-label="Beispiel mit Dativ (Wo?)">Das Bild hängt <strong>an der</strong> Wand. (The picture is hanging on the wall.)</td>
-                    <td data-label="Beispiel mit Akkusativ (Wohin?)">Ich hänge das Bild <strong>an die</strong> Wand. (I hang the picture onto the wall.)</td>
-                </tr>
-                <tr>
-                    <td data-label="Präposition">auf</td>
-                    <td data-label="English">on (horizontal surface)</td>
-                    <td data-label="Emoji">📖</td>
-                    <td data-label="Beispiel mit Dativ (Wo?)">Das Buch liegt <strong>auf dem</strong> Tisch. (The book is lying on the table.)</td>
-                    <td data-label="Beispiel mit Akkusativ (Wohin?)">Ich lege das Buch <strong>auf den</strong> Tisch. (I lay the book onto the table.)</td>
-                </tr>
-                <tr>
-                    <td data-label="Präposition">hinter</td>
-                    <td data-label="English">behind</td>
-                    <td data-label="Emoji">🌳👤</td>
-                    <td data-label="Beispiel mit Dativ (Wo?)">Er steht <strong>hinter dem</strong> Baum. (He is standing behind the tree.)</td>
-                    <td data-label="Beispiel mit Akkusativ (Wohin?)">Er geht <strong>hinter den</strong> Baum. (He is going behind the tree.)</td>
-                </tr>
-                <tr>
-                    <td data-label="Präposition">in</td>
-                    <td data-label="English">in, into</td>
-                    <td data-label="Emoji">🏠</td>
-                    <td data-label="Beispiel mit Dativ (Wo?)">Ich bin <strong>in dem</strong> (im) Haus. (I am in the house.)</td>
-                    <td data-label="Beispiel mit Akkusativ (Wohin?)">Ich gehe <strong>in das</strong> (ins) Haus. (I am going into the house.)</td>
-                </tr>
-                <tr>
-                    <td data-label="Präposition">neben</td>
-                    <td data-label="English">next to, beside</td>
-                    <td data-label="Emoji">🚗🧍</td>
-                    <td data-label="Beispiel mit Dativ (Wo?)">Die Lampe steht <strong>neben dem</strong> Sofa. (The lamp is standing next to the sofa.)</td>
-                    <td data-label="Beispiel mit Akkusativ (Wohin?)">Ich stelle die Lampe <strong>neben das</strong> Sofa. (I am placing the lamp next to the sofa.)</td>
-                </tr>
-                <tr>
-                    <td data-label="Präposition">über</td>
-                    <td data-label="English">over, above</td>
-                    <td data-label="Emoji">✈️☁️</td>
-                    <td data-label="Beispiel mit Dativ (Wo?)">Das Flugzeug fliegt <strong>über der</strong> Stadt. (The plane is flying over the city.)</td>
-                    <td data-label="Beispiel mit Akkusativ (Wohin?)">Er springt <strong>über den</strong> Zaun. (He is jumping over the fence.)</td>
-                </tr>
-                <tr>
-                    <td data-label="Präposition">unter</td>
-                    <td data-label="English">under, below</td>
-                    <td data-label="Emoji">🐈‍⬛📦</td>
-                    <td data-label="Beispiel mit Dativ (Wo?)">Die Katze liegt <strong>unter dem</strong> Tisch. (The cat is lying under the table.)</td>
-                    <td data-label="Beispiel mit Akkusativ (Wohin?)">Die Katze kriecht <strong>unter den</strong> Tisch. (The cat is crawling under the table.)</td>
-                </tr>
-                <tr>
-                    <td data-label="Präposition">vor</td>
-                    <td data-label="English">in front of</td>
-                    <td data-label="Emoji">🧍🚪</td>
-                    <td data-label="Beispiel mit Dativ (Wo?)">Das Auto steht <strong>vor dem</strong> Haus. (The car is parked in front of the house.)</td>
-                    <td data-label="Beispiel mit Akkusativ (Wohin?)">Ich fahre das Auto <strong>vor das</strong> Haus. (I am driving the car in front of the house.)</td>
-                </tr>
-                <tr>
-                    <td data-label="Präposition">zwischen</td>
-                    <td data-label="English">between</td>
-                    <td data-label="Emoji">🅰️🧍🅱️</td>
-                    <td data-label="Beispiel mit Dativ (Wo?)">Der Stuhl steht <strong>zwischen dem</strong> Tisch und dem Fenster. (The chair is between the table and the window.)</td>
-                    <td data-label="Beispiel mit Akkusativ (Wohin?)">Ich stelle den Stuhl <strong>zwischen den</strong> Tisch und das Fenster. (I am putting the chair between the table and the window.)</td>
-                </tr>
-            </tbody>
-        </table>
+        <p class="mb-4">Cada preposición puede usar el caso <strong>Dativo</strong> (ubicación estática, ¿Dónde? - <strong>Wo?</strong>) o el caso <strong>Acusativo</strong> (movimiento hacia un lugar, ¿A dónde? - <strong>Wohin?</strong>).</p>
+        
+        <div class="overflow-x-auto rounded-lg mb-6">
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Präposition">🇩🇪 Präposition <br/>🇬🇧 Preposition <br/>🇪🇸 Preposición</th>
+                        <th data-label="Info">🇩🇪 Aussprache <br/>🇬🇧 English <br/>🇪🇸 Español</th>
+                        <th data-label="Dativ Beispiel 1">Dativ Beispiel 1 (Wo?)</th>
+                        <th data-label="Dativ Beispiel 2">Dativ Beispiel 2 (Wo?)</th>
+                        <th data-label="Akkusativ Beispiel 1">Akkusativ Beispiel 1 (Wohin?)</th>
+                        <th data-label="Akkusativ Beispiel 2">Akkusativ Beispiel 2 (Wohin?)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Präposition"><strong>an</strong><br>🖼️</td>
+                        <td data-label="Info">🇩🇪 /an/<span class="translation"><br>🇬🇧 <i>at, on (vertical)</i><br>🇪🇸 <i>en, junto a</i></span></td>
+                        <td data-label="Dativ Beispiel 1"><span>Das Poster hängt <strong>an der</strong> Wand.</span><span class="translation">🇬🇧 The poster is hanging on the wall.<br>🇪🇸 El póster está colgado en la pared.</span></td>
+                        <td data-label="Dativ Beispiel 2"><span>Wir warten <strong>am</strong> Bahnhof.</span><span class="translation">🇬🇧 We are waiting at the train station.<br>🇪🇸 Esperamos en la estación de tren.</span></td>
+                        <td data-label="Akkusativ Beispiel 1"><span>Ich hänge das Poster <strong>an die</strong> Wand.</span><span class="translation">🇬🇧 I hang the poster onto the wall.<br>🇪🇸 Cuelgo el póster en la pared.</span></td>
+                        <td data-label="Akkusativ Beispiel 2"><span>Stell dich bitte <strong>an die</strong> Tür.</span><span class="translation">🇬🇧 Please stand by the door.<br>🇪🇸 Por favor, ponte junto a la puerta.</span></td>
+                    </tr>
+                    <tr>
+                        <td data-label="Präposition"><strong>auf</strong><br>📖</td>
+                        <td data-label="Info">🇩🇪 /auf/<span class="translation"><br>🇬🇧 <i>on (horizontal)</i><br>🇪🇸 <i>sobre, en</i></span></td>
+                        <td data-label="Dativ Beispiel 1"><span>Das Buch liegt <strong>auf dem</strong> Tisch.</span><span class="translation">🇬🇧 The book is lying on the table.<br>🇪🇸 El libro está sobre la mesa.</span></td>
+                        <td data-label="Dativ Beispiel 2"><span>Die Katze schläft <strong>auf dem</strong> Sofa.</span><span class="translation">🇬🇧 The cat is sleeping on the sofa.<br>🇪🇸 El gato duerme en el sofá.</span></td>
+                        <td data-label="Akkusativ Beispiel 1"><span>Ich lege das Buch <strong>auf den</strong> Tisch.</span><span class="translation">🇬🇧 I lay the book onto the table.<br>🇪🇸 Pongo el libro sobre la mesa.</span></td>
+                        <td data-label="Akkusativ Beispiel 2"><span>Wir klettern <strong>auf das</strong> Dach.</span><span class="translation">🇬🇧 We are climbing onto the roof.<br>🇪🇸 Subimos (escalando) al tejado.</span></td>
+                    </tr>
+                    <tr>
+                        <td data-label="Präposition"><strong>hinter</strong><br>🌳👤</td>
+                        <td data-label="Info">🇩🇪 /hínter/<span class="translation"><br>🇬🇧 <i>behind</i><br>🇪🇸 <i>detrás de</i></span></td>
+                        <td data-label="Dativ Beispiel 1"><span>Er steht <strong>hinter dem</strong> Baum.</span><span class="translation">🇬🇧 He is standing behind the tree.<br>🇪🇸 Él está parado detrás del árbol.</span></td>
+                        <td data-label="Dativ Beispiel 2"><span>Das Auto parkt <strong>hinter dem</strong> Haus.</span><span class="translation">🇬🇧 The car is parked behind the house.<br>🇪🇸 El coche está aparcado detrás de la casa.</span></td>
+                        <td data-label="Akkusativ Beispiel 1"><span>Er geht <strong>hinter den</strong> Baum.</span><span class="translation">🇬🇧 He is going behind the tree.<br>🇪🇸 Él va detrás del árbol.</span></td>
+                        <td data-label="Akkusativ Beispiel 2"><span>Der Ball rollt <strong>hinter den</strong> Schrank.</span><span class="translation">🇬🇧 The ball rolls behind the wardrobe.<br>🇪🇸 La pelota rueda detrás del armario.</span></td>
+                    </tr>
+                    <tr>
+                        <td data-label="Präposition"><strong>in</strong><br>🏠</td>
+                        <td data-label="Info">🇩🇪 /in/<span class="translation"><br>🇬🇧 <i>in, into</i><br>🇪🇸 <i>en, dentro de</i></span></td>
+                        <td data-label="Dativ Beispiel 1"><span>Ich bin <strong>im</strong> Haus.</span><span class="translation">🇬🇧 I am in the house.<br>🇪🇸 Estoy en la casa.</span></td>
+                        <td data-label="Dativ Beispiel 2"><span>Die Fische schwimmen <strong>im</strong> See.</span><span class="translation">🇬🇧 The fish are swimming in the lake.<br>🇪🇸 Los peces nadan en el lago.</span></td>
+                        <td data-label="Akkusativ Beispiel 1"><span>Ich gehe <strong>ins</strong> Haus.</span><span class="translation">🇬🇧 I am going into the house.<br>🇪🇸 Voy a la casa.</span></td>
+                        <td data-label="Akkusativ Beispiel 2"><span>Er springt <strong>in den</strong> See.</span><span class="translation">🇬🇧 He jumps into the lake.<br>🇪🇸 Él salta al lago.</span></td>
+                    </tr>
+                    <tr>
+                        <td data-label="Präposition"><strong>neben</strong><br>🚗🧍</td>
+                        <td data-label="Info">🇩🇪 /nében/<span class="translation"><br>🇬🇧 <i>next to, beside</i><br>🇪🇸 <i>al lado de</i></span></td>
+                        <td data-label="Dativ Beispiel 1"><span>Die Lampe steht <strong>neben dem</strong> Sofa.</span><span class="translation">🇬🇧 The lamp is standing next to the sofa.<br>🇪🇸 La lámpara está al lado del sofá.</span></td>
+                        <td data-label="Dativ Beispiel 2"><span>Die Apotheke ist <strong>neben der</strong> Bank.</span><span class="translation">🇬🇧 The pharmacy is next to the bank.<br>🇪🇸 La farmacia está al lado del banco.</span></td>
+                        <td data-label="Akkusativ Beispiel 1"><span>Ich stelle die Lampe <strong>neben das</strong> Sofa.</span><span class="translation">🇬🇧 I am placing the lamp next to the sofa.<br>🇪🇸 Pongo la lámpara al lado del sofá.</span></td>
+                        <td data-label="Akkusativ Beispiel 2"><span>Setz dich <strong>neben</strong> mich!</span><span class="translation">🇬🇧 Sit down next to me!<br>🇪🇸 ¡Siéntate a mi lado!</span></td>
+                    </tr>
+                    <tr>
+                        <td data-label="Präposition"><strong>über</strong><br>✈️☁️</td>
+                        <td data-label="Info">🇩🇪 /über/<span class="translation"><br>🇬🇧 <i>over, above</i><br>🇪🇸 <i>sobre, por encima de</i></span></td>
+                        <td data-label="Dativ Beispiel 1"><span>Die Wolken sind <strong>über der</strong> Stadt.</span><span class="translation">🇬🇧 The clouds are over the city.<br>🇪🇸 Las nubes están sobre la ciudad.</span></td>
+                        <td data-label="Dativ Beispiel 2"><span>Die Lampe hängt <strong>über dem</strong> Tisch.</span><span class="translation">🇬🇧 The lamp is hanging over the table.<br>🇪🇸 La lámpara cuelga sobre la mesa.</span></td>
+                        <td data-label="Akkusativ Beispiel 1"><span>Das Flugzeug fliegt <strong>über die</strong> Stadt.</span><span class="translation">🇬🇧 The airplane flies over the city.<br>🇪🇸 El avión vuela sobre la ciudad.</span></td>
+                        <td data-label="Akkusativ Beispiel 2"><span>Der Hund springt <strong>über den</strong> Zaun.</span><span class="translation">🇬🇧 The dog jumps over the fence.<br>🇪🇸 El perro salta por encima de la valla.</span></td>
+                    </tr>
+                    <tr>
+                        <td data-label="Präposition"><strong>unter</strong><br>🐈‍⬛📦</td>
+                        <td data-label="Info">🇩🇪 /únter/<span class="translation"><br>🇬🇧 <i>under, below</i><br>🇪🇸 <i>debajo de</i></span></td>
+                        <td data-label="Dativ Beispiel 1"><span>Die Katze liegt <strong>unter dem</strong> Tisch.</span><span class="translation">🇬🇧 The cat is lying under the table.<br>🇪🇸 El gato está debajo de la mesa.</span></td>
+                        <td data-label="Dativ Beispiel 2"><span>Wir stehen <strong>unter der</strong> Brücke.</span><span class="translation">🇬🇧 We are standing under the bridge.<br>🇪🇸 Estamos parados debajo del puente.</span></td>
+                        <td data-label="Akkusativ Beispiel 1"><span>Die Katze kriecht <strong>unter den</strong> Tisch.</span><span class="translation">🇬🇧 The cat crawls under the table.<br>🇪🇸 El gato se arrastra debajo de la mesa.</span></td>
+                        <td data-label="Akkusativ Beispiel 2"><span>Der Ball rollt <strong>unter das</strong> Auto.</span><span class="translation">🇬🇧 The ball rolls under the car.<br>🇪🇸 La pelota rueda debajo del coche.</span></td>
+                    </tr>
+                    <tr>
+                        <td data-label="Präposition"><strong>vor</strong><br>🧍🚪</td>
+                        <td data-label="Info">🇩🇪 /fohr/<span class="translation"><br>🇬🇧 <i>in front of</i><br>🇪🇸 <i>delante de</i></span></td>
+                        <td data-label="Dativ Beispiel 1"><span>Das Auto steht <strong>vor dem</strong> Haus.</span><span class="translation">🇬🇧 The car is parked in front of the house.<br>🇪🇸 El coche está aparcado delante de la casa.</span></td>
+                        <td data-label="Dativ Beispiel 2"><span>Ich warte <strong>vor dem</strong> Kino.</span><span class="translation">🇬🇧 I am waiting in front of the cinema.<br>🇪🇸 Espero delante del cine.</span></td>
+                        <td data-label="Akkusativ Beispiel 1"><span>Ich fahre das Auto <strong>vor das</strong> Haus.</span><span class="translation">🇬🇧 I am driving the car in front of the house.<br>🇪🇸 Llevo el coche delante de la casa.</span></td>
+                        <td data-label="Akkusativ Beispiel 2"><span>Er stellt sich <strong>vor den</strong> Spiegel.</span><span class="translation">🇬🇧 He places himself in front of the mirror.<br>🇪🇸 Se pone delante del espejo.</span></td>
+                    </tr>
+                    <tr>
+                        <td data-label="Präposition"><strong>zwischen</strong><br>🅰️🧍🅱️</td>
+                        <td data-label="Info">🇩🇪 /tsvíshen/<span class="translation"><br>🇬🇧 <i>between</i><br>🇪🇸 <i>entre</i></span></td>
+                        <td data-label="Dativ Beispiel 1"><span>Der Stuhl steht <strong>zwischen dem</strong> Tisch und dem Bett.</span><span class="translation">🇬🇧 The chair is between the table and the bed.<br>🇪🇸 La silla está entre la mesa y la cama.</span></td>
+                        <td data-label="Dativ Beispiel 2"><span>Das Dorf liegt <strong>zwischen den</strong> Bergen.</span><span class="translation">🇬🇧 The village lies between the mountains.<br>🇪🇸 El pueblo se encuentra entre las montañas.</span></td>
+                        <td data-label="Akkusativ Beispiel 1"><span>Ich stelle den Stuhl <strong>zwischen den</strong> Tisch und das Bett.</span><span class="translation">🇬🇧 I am putting the chair between the table and the bed.<br>🇪🇸 Pongo la silla entre la mesa y la cama.</span></td>
+                        <td data-label="Akkusativ Beispiel 2"><span>Er setzt sich <strong>zwischen die</strong> beiden Kinder.</span><span class="translation">🇬🇧 He sits down between the two children.<br>🇪🇸 Él se sienta entre los dos niños.</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
   </details>
 
