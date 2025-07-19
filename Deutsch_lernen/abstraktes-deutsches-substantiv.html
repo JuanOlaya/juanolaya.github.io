@@ -11,6 +11,23 @@
 
   <a href="substantiv.html" class="back-home">🏠 Zurück zu Substantiv / Back to Substantiv</a>
 
+  <div class="toggle-container" style="margin: 1.5rem 0; text-align: center; display: flex; align-items: center; justify-content: center; gap: 1rem;">
+    <span style="font-weight: 500; color: #374151;">👁️ Artikel anzeigen / Show Articles</span>
+    <label class="toggle-switch" style="position: relative; display: inline-block; width: 60px; height: 34px;">
+      <input type="checkbox" id="articleToggle" style="opacity: 0; width: 0; height: 0;">
+      <span class="slider" style="
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: .4s;
+        border-radius: 34px;
+      "></span>
+    </label>
+  </div>
+
   <h1>🧠 Abstraktes deutsches Substantiv</h1>
 
   <details id="abstraktes-deutsches-substantiv-section" open>
@@ -21,26 +38,12 @@
           <tr>
             <th data-label="Substantiv">🇩🇪 Substantiv <br/> 🇬🇧 Noun</th>
             <th data-label="Aussprache Englisch Spanisch">🇩🇪 Aussprache <br/> 🇬🇧 Englisch <br/> 🇪🇸 Spanisch</th>
-            <th data-label="Beispielsatz">Beispielsatz</th>
-            <th data-label="Beispielsatz">Beispielsatz</th>
-            <th data-label="Definiter Artikel (Nominativ)">Definiter Artikel (Nominativ)</th>
-            <th data-label="Definiter Artikel (Akkusativ)">Definiter Artikel (Akkusativ)</th>
-            <th data-label="Indefiniter Artikel (Nominativ)">Indefiniter Artikel (Nominativ)</th>
-            <th data-label="Indefiniter Artikel (Akkusativ)">Indefiniter Artikel (Akkusativ)</th>
-            <th data-label="Negation (Nominativ)">Negation (Nominativ)</th>
-            <th data-label="Negation (Akkusativ)">Negation (Akkusativ)</th>
-          </tr>
-          <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th>🇪🇸 (Sujeto: ¿Quién o qué realiza la acción?)</th>
-            <th>🇪🇸 (Objeto Directo: ¿Quién o qué recibe directamente la acción?)</th>
-            <th>🇪🇸 (Sujeto: ¿Quién o qué realiza la acción?)</th>
-            <th>🇪🇸 (Objeto Directo: ¿Quién o qué recibe directamente la acción?)</th>
-            <th>🇪🇸 (Sujeto: ¿Quién o qué realiza la acción?)</th>
-            <th>🇪🇸 (Objeto Directo: ¿Quién o qué recibe directamente la acción?)</th>
+            <th data-label="Definiter Artikel (Nominativ)">Definiter Artikel (Nominativ) <br/> <a href="faelle.html#nominative" style="color: #3b82f6; text-decoration: underline; font-size: 0.9em;">Sujeto</a></th>
+            <th data-label="Definiter Artikel (Akkusativ)">Definiter Artikel (Akkusativ) <br/> <a href="faelle.html#accusative" style="color: #3b82f6; text-decoration: underline; font-size: 0.9em;">Objeto Directo</a></th>
+            <th data-label="Indefiniter Artikel (Nominativ)">Indefiniter Artikel (Nominativ) <br/> <a href="faelle.html#nominative" style="color: #3b82f6; text-decoration: underline; font-size: 0.9em;">Sujeto</a></th>
+            <th data-label="Indefiniter Artikel (Akkusativ)">Indefiniter Artikel (Akkusativ) <br/> <a href="faelle.html#accusative" style="color: #3b82f6; text-decoration: underline; font-size: 0.9em;">Objeto Directo</a></th>
+            <th data-label="Negation (Nominativ)">Negation (Nominativ) <br/> <a href="faelle.html#nominative" style="color: #3b82f6; text-decoration: underline; font-size: 0.9em;">Sujeto</a></th>
+            <th data-label="Negation (Akkusativ)">Negation (Akkusativ) <br/> <a href="faelle.html#accusative" style="color: #3b82f6; text-decoration: underline; font-size: 0.9em;">Objeto Directo</a></th>
           </tr>
         </thead>
         <tbody>
@@ -55,6 +58,7 @@
             <td data-label="Indefiniter Artikel (Akkusativ)"><span>Ich habe <strong><span class="die-color">eine</span></strong> gute <strong><span class="die-color">Zeit</span></strong>.</span><span class="translation"><br/>🇬🇧 <i>I have a good time.</i><br/>🇪🇸 <i>Tengo un buen momento.</i></span></td>
             <td data-label="Negation (Nominativ)"><span><strong><span class="die-color">Keine Zeit</span></strong> ist da.</span><span class="translation"><br/>🇬🇧 <i>No time is there.</i><br/>🇪🇸 <i>No hay tiempo.</i></span></td>
             <td data-label="Negation (Akkusativ)"><span>Ich habe <strong><span class="die-color">keine Zeit</span></strong>.</span><span class="translation"><br/>🇬🇧 <i>I have no time.</i><br/>🇪🇸 <i>No tengo tiempo.</i></span></td>
+            <td data-label="Expand"><button class="show-more-btn" onclick="toggleExamples(this)">▶️</button></td>
           </tr>
           <tr>
             <td data-label="Substantiv"><strong><span class="das-color">das Geld</span></strong> <br/> 💰</td>
@@ -67,6 +71,7 @@
             <td data-label="Indefiniter Artikel (Akkusativ)"><span>Ich habe <strong><span class="das-color">ein Geld</span></strong>.</span><span class="translation"><br/>🇬🇧 <i>I have some money.</i><br/>🇪🇸 <i>Tengo dinero.</i></span></td>
             <td data-label="Negation (Nominativ)"><span><strong><span class="das-color">Kein Geld</span></strong> ist da.</span><span class="translation"><br/>🇬🇧 <i>No money is there.</i><br/>🇪🇸 <i>No hay dinero.</i></span></td>
             <td data-label="Negation (Akkusativ)"><span>Ich habe <strong><span class="das-color">kein Geld</span></strong>.</span><span class="translation"><br/>🇬🇧 <i>I have no money.</i><br/>🇪🇸 <i>No tengo dinero.</i></span></td>
+            <td data-label="Expand"><button class="show-more-btn" onclick="toggleExamples(this)">▶️</button></td>
           </tr>
           <tr>
             <td data-label="Substantiv"><strong><span class="die-color">die Liebe</span></strong> <br/> ❤️</td>
@@ -79,6 +84,7 @@
             <td data-label="Indefiniter Artikel (Akkusativ)"><span>Ich finde <strong><span class="die-color">eine</span></strong> große <strong><span class="die-color">Liebe</span></strong>.</span><span class="translation"><br/>🇬🇧 <i>I find great love.</i><br/>🇪🇸 <i>Encuentro un gran amor.</i></span></td>
             <td data-label="Negation (Nominativ)"><span><strong><span class="die-color">Keine Liebe</span></strong> ist da.</span><span class="translation"><br/>🇬🇧 <i>No love is there.</i><br/>🇪🇸 <i>No hay amor.</i></span></td>
             <td data-label="Negation (Akkusativ)"><span>Ich fühle <strong><span class="die-color">keine Liebe</span></strong>.</span><span class="translation"><br/>🇬🇧 <i>I feel no love.</i><br/>🇪🇸 <i>No siento amor.</i></span></td>
+            <td data-label="Expand"><button class="show-more-btn" onclick="toggleExamples(this)">▶️</button></td>
           </tr>
           <tr>
             <td data-label="Substantiv"><strong><span class="das-color">das Leben</span></strong> <br/> 🌱</td>
@@ -91,6 +97,7 @@
             <td data-label="Indefiniter Artikel (Akkusativ)"><span>Ich beginne <strong><span class="das-color">ein</span></strong> neues <strong><span class="das-color">Leben</span></strong>.</span><span class="translation"><br/>🇬🇧 <i>I begin a new life.</i><br/>🇪🇸 <i>Comienzo una nueva vida.</i></span></td>
             <td data-label="Negation (Nominativ)"><span><strong><span class="das-color">Kein Leben</span></strong> ist da.</span><span class="translation"><br/>🇬🇧 <i>No life is there.</i><br/>🇪🇸 <i>No hay vida.</i></span></td>
             <td data-label="Negation (Akkusativ)"><span>Ich habe <strong><span class="das-color">kein Leben</span></strong>.</span><span class="translation"><br/>🇬🇧 <i>I have no life.</i><br/>🇪🇸 <i>No tengo vida.</i></span></td>
+            <td data-label="Expand"><button class="show-more-btn" onclick="toggleExamples(this)">▶️</button></td>
           </tr>
           <tr>
             <td data-label="Substantiv"><strong><span class="die-color">die Arbeit</span></strong> <br/> 💼</td>
@@ -103,6 +110,7 @@
             <td data-label="Indefiniter Artikel (Akkusativ)"><span>Ich finde <strong><span class="die-color">eine</span></strong> gute <strong><span class="die-color">Arbeit</span></strong>.</span><span class="translation"><br/>🇬🇧 <i>I find good work.</i><br/>🇪🇸 <i>Encuentro un buen trabajo.</i></span></td>
             <td data-label="Negation (Nominativ)"><span><strong><span class="die-color">Keine Arbeit</span></strong> ist da.</span><span class="translation"><br/>🇬🇧 <i>No work is there.</i><br/>🇪🇸 <i>No hay trabajo.</i></span></td>
             <td data-label="Negation (Akkusativ)"><span>Ich habe <strong><span class="die-color">keine Arbeit</span></strong>.</span><span class="translation"><br/>🇬🇧 <i>I have no work.</i><br/>🇪🇸 <i>No tengo trabajo.</i></span></td>
+            <td data-label="Expand"><button class="show-more-btn" onclick="toggleExamples(this)">▶️</button></td>
           </tr>
           <tr>
             <td data-label="Substantiv"><strong><span class="die-color">die Gesundheit</span></strong> <br/> 🏥</td>
@@ -115,6 +123,7 @@
             <td data-label="Indefiniter Artikel (Akkusativ)"><span>Ich wünsche <strong><span class="die-color">eine</span></strong> gute <strong><span class="die-color">Gesundheit</span></strong>.</span><span class="translation"><br/>🇬🇧 <i>I wish for good health.</i><br/>🇪🇸 <i>Deseo buena salud.</i></span></td>
             <td data-label="Negation (Nominativ)"><span><strong><span class="die-color">Keine Gesundheit</span></strong> ist da.</span><span class="translation"><br/>🇬🇧 <i>No health is there.</i><br/>🇪🇸 <i>No hay salud.</i></span></td>
             <td data-label="Negation (Akkusativ)"><span>Er hat <strong><span class="die-color">keine Gesundheit</span></strong>.</span><span class="translation"><br/>🇬🇧 <i>He has no health.</i><br/>🇪🇸 <i>Él no tiene salud.</i></span></td>
+            <td data-label="Expand"><button class="show-more-btn" onclick="toggleExamples(this)">▶️</button></td>
           </tr>
           <tr>
             <td data-label="Substantiv"><strong><span class="die-color">die Bildung</span></strong> <br/> 🎓</td>
@@ -370,19 +379,161 @@
           </tr>
         </tbody>
       </table>
+      
     </div>
   </details>
 
+<style>
+/* Article visibility toggle styles */
+.articles-hidden .article-only {
+    color: transparent !important;
+    background-color: inherit !important;
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+/* Underline for hidden articles */
+.articles-hidden .article-underline {
+    color: transparent !important;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+    transition: all 0.2s ease;
+    /* The text-decoration-color will be set dynamically via JavaScript */
+}
+
+/* Keep nouns visible */
+.articles-hidden .noun-only {
+    color: inherit !important;
+}
+
+/* Show articles on hover/tap when hidden */
+.articles-hidden td:hover .article-underline,
+.articles-hidden td.show-articles .article-underline {
+    color: inherit !important;
+    opacity: 0.7;
+}
+
+
+/* Toggle Switch Styles */
+.slider {
+    background-color: #dc2626;
+}
+
+.slider::before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#articleToggle:checked + .slider {
+    background-color: #4ade80;
+}
+
+#articleToggle:checked + .slider::before {
+    transform: translateX(26px);
+}
+
+.slider:hover {
+    background-color: #b91c1c;
+}
+
+#articleToggle:checked + .slider:hover {
+    background-color: #22c55e;
+}
+</style>
+
 <script>
+// Article visibility toggle functionality
+let show_article = false;
+
+
 // Mobile tap-to-expand functionality for table cells
 document.addEventListener('DOMContentLoaded', function() {
-    // Only add touch functionality for mobile devices
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-        const tableCells = document.querySelectorAll('table td:not([data-label="Emoji"]):not([data-label="Substantiv"]):not([data-label="Aussprache Englisch Spanisch"])');
+    // Article toggle functionality
+    const toggleCheckbox = document.getElementById('articleToggle');
+    const body = document.body;
+    
+    // Function to separate articles from nouns
+    function separateArticlesFromNouns() {
+        const coloredSpans = document.querySelectorAll('.die-color, .der-color, .das-color');
         
-        tableCells.forEach(cell => {
+        coloredSpans.forEach(span => {
+            const text = span.textContent.trim();
+            const words = text.split(' ');
+            const genderClass = span.className.match(/(die-color|der-color|das-color)/)[0];
+            
+            // Get the computed color of the original span
+            const originalColor = window.getComputedStyle(span).color;
+            
+            if (words.length > 1) {
+                const articles = ['der', 'die', 'das', 'ein', 'eine', 'einen', 'einem', 'einer', 'eines', 'kein', 'keine', 'keinen', 'keinem', 'keiner', 'keines', 'Der', 'Die', 'Das', 'Ein', 'Eine', 'Einen', 'Einem', 'Einer', 'Eines', 'Kein', 'Keine', 'Keinen', 'Keinem', 'Keiner', 'Keines'];
+                
+                let newHTML = '';
+                words.forEach((word, index) => {
+                    if (articles.includes(word)) {
+                        newHTML += `<span class="article-underline ${genderClass}" style="text-decoration-color: ${originalColor};">${word}</span>`;
+                    } else {
+                        newHTML += `<span class="noun-only">${word}</span>`;
+                    }
+                    if (index < words.length - 1) newHTML += ' ';
+                });
+                
+                span.innerHTML = newHTML;
+            }
+        });
+    }
+    
+    // Separate articles from nouns
+    separateArticlesFromNouns();
+    
+    // Initialize with articles hidden since show_article starts as false
+    body.classList.add('articles-hidden');
+    toggleCheckbox.checked = false; // Start unchecked (articles hidden)
+    
+    toggleCheckbox.addEventListener('change', function() {
+        show_article = this.checked;
+        
+        if (show_article) {
+            body.classList.remove('articles-hidden');
+        } else {
+            body.classList.add('articles-hidden');
+        }
+    });
+    // Article hover/tap functionality for showing articles temporarily
+    const tableCells = document.querySelectorAll('table td');
+    
+    tableCells.forEach(cell => {
+        // For mobile devices - tap to show articles
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
             cell.addEventListener('click', function(e) {
+                // Don't interfere with existing expanded functionality for certain cells
+                if (!this.hasAttribute('data-label') || 
+                    this.getAttribute('data-label') === 'Emoji' || 
+                    this.getAttribute('data-label') === 'Substantiv' || 
+                    this.getAttribute('data-label') === 'Aussprache Englisch Spanisch') {
+                    return;
+                }
+                
                 e.preventDefault();
+                
+                // Close any other show-articles cells first
+                const showArticleCells = document.querySelectorAll('table td.show-articles');
+                showArticleCells.forEach(showCell => {
+                    if (showCell !== this) {
+                        showCell.classList.remove('show-articles');
+                    }
+                });
+                
+                // Toggle current cell article visibility
+                this.classList.toggle('show-articles');
                 
                 // Close any other expanded cells first
                 const expandedCells = document.querySelectorAll('table td.expanded');
@@ -392,21 +543,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
                 
-                // Toggle current cell
+                // Toggle current cell expansion
                 this.classList.toggle('expanded');
             });
-        });
-        
-        // Close expanded cells when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('table td')) {
-                const expandedCells = document.querySelectorAll('table td.expanded');
-                expandedCells.forEach(cell => {
-                    cell.classList.remove('expanded');
-                });
-            }
-        });
-    }
+        }
+    });
+    
+    // Close expanded and show-articles cells when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('table td')) {
+            const expandedCells = document.querySelectorAll('table td.expanded');
+            const showArticleCells = document.querySelectorAll('table td.show-articles');
+            
+            expandedCells.forEach(cell => {
+                cell.classList.remove('expanded');
+            });
+            
+            showArticleCells.forEach(cell => {
+                cell.classList.remove('show-articles');
+            });
+        }
+    });
 });
 </script>
 
