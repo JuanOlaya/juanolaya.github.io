@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abstrakte deutsche Substantive - A1 Niveau</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* =================================== */
+        /* SIMPLIFIED ARTICLE VISIBILITY SYSTEM */
+        /* =================================== */
+        
+        /* General article classes for easier targeting */
+        .article {
+            transition: all 0.2s ease;
+        }
+        
+        /* When articles should be hidden */
+        .articles-hidden .article {
+            color: transparent !important;
+            background-color: inherit !important;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 2px;
+            /* Preserve original color in the underline */
+        }
+        
+        /* Specific color preservations for underlines */
+        .articles-hidden .article.der-color {
+            text-decoration-color: #3b82f6 !important; /* Blue for der */
+        }
+        
+        .articles-hidden .article.die-color {
+            text-decoration-color: #dc2626 !important; /* Red for die */
+        }
+        
+        .articles-hidden .article.das-color {
+            text-decoration-color: #059669 !important; /* Green for das */
+        }
+        
+        /* Keep nouns always visible */
+        .noun {
+            color: inherit !important;
+        }
+        
+        /* Article color definitions */
+        .der-color { color: #3b82f6; }
+        .die-color { color: #dc2626; }
+        .das-color { color: #059669; }
+        
+        /* =================================== */
+        /* TRANSLATION TOGGLE FUNCTIONALITY */
+        /* =================================== */
+        
+        .translation {
+            display: none;
+        }
+        
+        td[data-label="Substantiv"] {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-radius: 4px;
+        }
+        
+        td[data-label="Substantiv"]:hover {
+            background-color: rgba(59, 130, 246, 0.1) !important;
+        }
+        
+        tr.show-translations td[data-label="Substantiv"] {
+            background-color: rgba(59, 130, 246, 0.15) !important;
+            border-left: 3px solid #3b82f6;
+        }
+        
+        tr.show-translations .translation {
+            display: inline !important;
+        }
+        
+        /* =================================== */
+        /* TABLE STYLING */
+        /* =================================== */
+        
+        .responsive-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        
+        .responsive-table th,
+        .responsive-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: top;
+        }
+        
+        .responsive-table th {
+            background-color: #f3f4f6;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .responsive-table tbody tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        
+        .responsive-table tbody tr:hover {
+            background-color: #f3f4f6;
+        }
+        
+        /* Toggle switch styling */
+        .toggle-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-left: 10px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #3b82f6;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .responsive-table {
+                font-size: 14px;
+            }
+            
+            .responsive-table th,
+            .responsive-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Article visibility toggle -->
+    <div class="toggle-container">
+        <label for="articleToggle">
+            <strong>🔤 Artikel anzeigen (Show Articles):</strong>
+            <span class="toggle-switch">
+                <input type="checkbox" id="articleToggle">
+                <span class="slider"></span>
+            </span>
+        </label>
+        <p style="margin-top: 8px; font-size: 14px; color: #6b7280;">
+            📖 Klicken Sie auf ein Substantiv, um Übersetzungen zu sehen / Click on a noun to see translations
+        </p>
+    </div>
+
+    <!-- Table with simplified structure -->
+    <table class="responsive-table">
+        <thead>
+            <tr>
+                <th>Substantiv</th>
+                <th>Aussprache, Englisch, Spanisch</th>
+                <th>Definiter Artikel (Nominativ)</th>
+                <th>Definiter Artikel (Akkusativ)</th>
+                <th>Indefiniter Artikel (Nominativ)</th>
+                <th>Indefiniter Artikel (Akkusativ)</th>
+                <th>Negation (Nominativ)</th>
+                <th>Negation (Akkusativ)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Sample row to demonstrate the simplified approach -->
+            <tr>
+                <td data-label="Substantiv">
+                    <strong><span class="die-color">die Zeit</span></strong><br/>
+                    <span style="font-size: 0.8em;">⏰</span>
+                </td>
+                <td data-label="Aussprache Englisch Spanisch">
+                    🇩🇪 /tsait/
+                    <span class="translation"><br/>🇬🇧 <i>Time</i><br/>🇪🇸 <i>Tiempo</i></span>
+                </td>
+                <td data-label="Definiter Artikel (Nominativ)" class="example-cell">
+                    <span><strong><span class="article die-color">Die</span> <span class="noun die-color">Zeit</span></strong> vergeht schnell.</span>
+                    <span class="translation"><br/>🇬🇧 <i>Time passes quickly.</i><br/>🇪🇸 <i>El tiempo pasa rápido.</i></span>
+                </td>
+                <td data-label="Definiter Artikel (Akkusativ)" class="example-cell">
+                    <span>Ich brauche <strong><span class="article die-color">die</span> <span class="noun die-color">Zeit</span></strong>.</span>
+                    <span class="translation"><br/>🇬🇧 <i>I need time.</i><br/>🇪🇸 <i>Necesito tiempo.</i></span>
+                </td>
+                <td data-label="Indefiniter Artikel (Nominativ)" class="example-cell">
+                    <span>Das ist <strong><span class="article die-color">eine</span></strong> gute <strong><span class="noun die-color">Zeit</span></strong>.</span>
+                    <span class="translation"><br/>🇬🇧 <i>This is a good time.</i><br/>🇪🇸 <i>Este es un buen momento.</i></span>
+                </td>
+                <td data-label="Indefiniter Artikel (Akkusativ)" class="example-cell">
+                    <span>Ich habe <strong><span class="article die-color">eine</span></strong> gute <span class="noun die-color">Zeit</span></strong>.</span>
+                    <span class="translation"><br/>🇬🇧 <i>I have a good time.</i><br/>🇪🇸 <i>Tengo un buen momento.</i></span>
+                </td>
+                <td data-label="Negation (Nominativ)" class="example-cell">
+                    <span><strong><span class="article die-color">Keine</span> <span class="noun die-color">Zeit</span></strong> ist da.</span>
+                    <span class="translation"><br/>🇬🇧 <i>No time is there.</i><br/>🇪🇸 <i>No hay tiempo.</i></span>
+                </td>
+                <td data-label="Negation (Akkusativ)" class="example-cell">
+                    <span>Das ist <strong><span class="article die-color">keine</span> <span class="noun die-color">Zeit</span></strong>.</span>
+                    <span class="translation"><br/>🇬🇧 <i>That is no time.</i><br/>🇪🇸 <i>Eso no es momento.</i></span>
+                </td>
+            </tr>
+            
+            <!-- Example with der -->
+            <tr>
+                <td data-label="Substantiv">
+                    <strong><span class="der-color">der Traum</span></strong><br/>
+                    <span style="font-size: 0.8em;">💭</span>
+                </td>
+                <td data-label="Aussprache Englisch Spanisch">
+                    🇩🇪 /traum/
+                    <span class="translation"><br/>🇬🇧 <i>Dream</i><br/>🇪🇸 <i>Sueño</i></span>
+                </td>
+                <td data-label="Definiter Artikel (Nominativ)" class="example-cell">
+                    <span><strong><span class="article der-color">Der</span> <span class="noun der-color">Traum</span></strong> ist schön.</span>
+                    <span class="translation"><br/>🇬🇧 <i>The dream is beautiful.</i><br/>🇪🇸 <i>El sueño es hermoso.</i></span>
+                </td>
+                <td data-label="Definiter Artikel (Akkusativ)" class="example-cell">
+                    <span>Ich habe <strong><span class="article der-color">den</span> <span class="noun der-color">Traum</span></strong>.</span>
+                    <span class="translation"><br/>🇬🇧 <i>I have the dream.</i><br/>🇪🇸 <i>Tengo el sueño.</i></span>
+                </td>
+                <td data-label="Indefiniter Artikel (Nominativ)" class="example-cell">
+                    <span>Das ist <strong><span class="article der-color">ein</span></strong> guter <strong><span class="noun der-color">Traum</span></strong>.</span>
+                    <span class="translation"><br/>🇬🇧 <i>This is a good dream.</i><br/>🇪🇸 <i>Este es un buen sueño.</i></span>
+                </td>
+                <td data-label="Indefiniter Artikel (Akkusativ)" class="example-cell">
+                    <span>Ich träume <strong><span class="article der-color">einen</span></strong> guten <strong><span class="noun der-color">Traum</span></strong>.</span>
+                    <span class="translation"><br/>🇬🇧 <i>I dream a good dream.</i><br/>🇪🇸 <i>Sueño un buen sueño.</i></span>
+                </td>
+                <td data-label="Negation (Nominativ)" class="example-cell">
+                    <span><strong><span class="article der-color">Kein</span> <span class="noun der-color">Traum</span></strong> ist da.</span>
+                    <span class="translation"><br/>🇬🇧 <i>No dream is there.</i><br/>🇪🇸 <i>No hay sueño.</i></span>
+                </td>
+                <td data-label="Negation (Akkusativ)" class="example-cell">
+                    <span>Das ist <strong><span class="article der-color">kein</span> <span class="noun der-color">Traum</span></strong>.</span>
+                    <span class="translation"><br/>🇬🇧 <i>That is no dream.</i><br/>🇪🇸 <i>Eso no es sueño.</i></span>
+                </td>
+            </tr>
+            
+            <!-- Example with die and complex phrase -->
+            <tr>
+                <td data-label="Substantiv">
+                    <strong><span class="die-color">die Realität</span></strong><br/>
+                    <span style="font-size: 0.8em;">👁️‍🗨️</span>
+                </td>
+                <td data-label="Aussprache Englisch Spanisch">
+                    🇩🇪 /re-a-li-TÄT/
+                    <span class="translation"><br/>🇬🇧 <i>Reality</i><br/>🇪🇸 <i>Realidad</i></span>
+                </td>
+                <td data-label="Definiter Artikel (Nominativ)" class="example-cell">
+                    <span><strong><span class="article die-color">Die</span> <span class="noun die-color">Realität</span></strong> ist wichtig.</span>
+                    <span class="translation"><br/>🇬🇧 <i>Reality is important.</i><br/>🇪🇸 <i>La realidad es importante.</i></span>
+                </td>
+                <td data-label="Definiter Artikel (Akkusativ)" class="example-cell">
+                    <span>Ich sehe <strong><span class="article die-color">die</span> <span class="noun die-color">Realität</span></strong>.</span>
+                    <span class="translation"><br/>🇬🇧 <i>I see reality.</i><br/>🇪🇸 <i>Veo la realidad.</i></span>
+                </td>
+                <td data-label="Indefiniter Artikel (Nominativ)" class="example-cell">
+                    <span>Das ist <strong><span class="article die-color">eine</span></strong> harte <strong><span class="noun die-color">Realität</span></strong>.</span>
+                    <span class="translation"><br/>🇬🇧 <i>This is harsh reality.</i><br/>🇪🇸 <i>Esta es dura realidad.</i></span>
+                </td>
+                <td data-label="Indefiniter Artikel (Akkusativ)" class="example-cell">
+                    <span>Ich akzeptiere <strong><span class="article die-color">eine</span></strong> harte <strong><span class="noun die-color">Realität</span></strong>.</span>
+                    <span class="translation"><br/>🇬🇧 <i>I accept harsh reality.</i><br/>🇪🇸 <i>Acepto la dura realidad.</i></span>
+                </td>
+                <td data-label="Negation (Nominativ)" class="example-cell">
+                    <span><strong><span class="article die-color">Keine</span> <span class="noun die-color">Realität</span></strong> ist da.</span>
+                    <span class="translation"><br/>🇬🇧 <i>No reality is there.</i><br/>🇪🇸 <i>No hay realidad.</i></span>
+                </td>
+                <td data-label="Negation (Akkusativ)" class="example-cell">
+                    <span>Das ist <strong><span class="article die-color">keine</span> <span class="noun die-color">Realität</span></strong>.</span>
+                    <span class="translation"><br/>🇬🇧 <i>That is no reality.</i><br/>🇪🇸 <i>Eso no es realidad.</i></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        // =================================== 
+        // SIMPLIFIED ARTICLE VISIBILITY SYSTEM
+        // ===================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleCheckbox = document.getElementById('articleToggle');
+            const body = document.body;
+            
+            // Initialize with articles hidden
+            body.classList.add('articles-hidden');
+            toggleCheckbox.checked = false;
+            
+            // Handle article visibility toggle
+            toggleCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    body.classList.remove('articles-hidden');
+                } else {
+                    body.classList.add('articles-hidden');
+                }
+            });
+            
+            // Handle noun cell clicks for translation toggle
+            document.querySelectorAll('td[data-label="Substantiv"]').forEach(cell => {
+                cell.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    row.classList.toggle('show-translations');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
