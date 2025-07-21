@@ -31,6 +31,40 @@
             color: black; /* Neuter */
             font-weight: bold;
         }
+        
+        /* Button styles for Mehr column */
+        .arrow-btn {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            color: #374151;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+        
+        .arrow-btn:hover {
+            background: #e5e7eb;
+            border-color: #9ca3af;
+        }
+        
+        .arrow-btn:active {
+            background: #d1d5db;
+        }
+        
+        /* Alternative example styles */
+        .alternative-example {
+            display: none;
+        }
+        
+        .alternative-example.active {
+            display: block !important;
+        }
+        
+        .default-example.hidden {
+            display: none !important;
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800 p-4 sm:p-6 lg:p-8">
@@ -56,6 +90,7 @@
                         <th scope="col" class="px-6 py-3">Enunciado del Examen (Situación)</th>
                         <th scope="col" class="px-6 py-3">Musterantwort</th>
                         <th scope="col" class="px-6 py-3">Traducción al Español</th>
+                        <th scope="col" class="px-6 py-3">Mehr</th>
                     </tr>
                 </thead>
                 <!-- Cuerpo de la tabla -->
@@ -63,10 +98,23 @@
                     <!-- Muy Alta -->
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">Muy Alta</span></td>
-                        <td class="px-6 py-4 italic">*Schreiben Sie eine E-Mail an Ihren Freund Alex. Laden Sie ihn zu Ihrer Geburtstagsparty ein. Schreiben Sie: Wann? Wo?*</td>
-                        <td class="px-6 py-4 font-medium"><strong>Correo Informal:</strong> Invite a un amigo a su fiesta de cumpleaños, indicando cuándo y dónde.</td>
-                        <td class="px-6 py-4">Lieber Alex,<br><br>ich habe bald Geburtstag und mache <span class="die-color">eine</span> Party. <span class="die-color">Die</span> Party ist am Samstag um 20:00 Uhr bei mir zu Hause. Kommst du?<br><br>Liebe Grüße,<br>Sofia</td>
-                        <td class="px-6 py-4">Querido Alex, pronto es mi cumpleaños y hago una fiesta. La fiesta es el sábado a las 20:00 en mi casa. ¿Vienes? Cariños, Sofía.</td>
+                        <td class="px-6 py-4 italic">
+                            <div class="default-example">*Schreiben Sie eine E-Mail an Ihren Freund Alex. Laden Sie ihn zu Ihrer Geburtstagsparty ein. Schreiben Sie: Wann? Wo?*</div>
+                            <div class="alternative-example"><strong>Brief 1: Jemanden einladen</strong><br>Sie machen Ihre Geburtstagparty am Sonntag. Sie laden Ihren Freund Thomas zu der Party ein.<br><br>Warum machen Sie die Party?<br>Wann und wo?<br>Etwas zum Essen und Trinken mitbringen?</div>
+                        </td>
+                        <td class="px-6 py-4 font-medium">
+                            <div class="default-example"><strong>Invitar a alguien:</strong> Invite a un amigo a su fiesta de cumpleaños, indicando cuándo y dónde.</div>
+                            <div class="alternative-example"><strong>Carta 1: Invitar a alguien</strong><br>Celebrarás tu fiesta de cumpleaños el domingo. Invitas a tu amigo Thomas a la fiesta.<br><br>¿Por qué celebras la fiesta?<br>¿Cuándo y dónde?<br>¿Traer algo para comer y beber?</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="default-example">Lieber Alex,<br><br>ich habe bald Geburtstag und mache <span class="die-color">eine</span> Party. <span class="die-color">Die</span> Party ist am Samstag um 20:00 Uhr bei mir zu Hause. Kommst du?<br><br>Liebe Grüße,<br>Sofia</div>
+                            <div class="alternative-example">Lieber Thomas,<br><br>wie geht´s dir? Ich hoffe, gut. Ich mache eine Party am Sonntag denn es ist mein Geburtstag. Ich lade dich ein. Die Party ist am Sonntag um 18.00 Uhr im Hotel ,,Kaiser Wilhelm''. Bitte, bring Cola, Bier und Hänchen mit.<br><br>Bis bald!<br><br>Liebe Grüße<br>ABC</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="default-example">Querido Alex, pronto es mi cumpleaños y hago una fiesta. La fiesta es el sábado a las 20:00 en mi casa. ¿Vienes? Cariños, Sofía.</div>
+                            <div class="alternative-example">Querido Thomas:<br><br>¿Cómo estás? Espero que bien. El domingo voy a celebrar una fiesta porque es mi cumpleaños. Te invito. La fiesta será el domingo a las 18:00 en el hotel «Kaiser Wilhelm». Por favor, trae refrescos, cerveza y pollo.<br><br>¡Hasta pronto!<br><br>Un saludo cordial,<br>ABC</div>
+                        </td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">Muy Alta</span></td>
@@ -74,20 +122,47 @@
                         <td class="px-6 py-4 font-medium"><strong>Justificar una Ausencia:</strong> Escriba a su profesor para disculpar su ausencia en la próxima clase debido a una cita médica.</td>
                         <td class="px-6 py-4">Sehr geehrte/r Herr/Frau [Apellido],<br><br>ich kann am Montag nicht zum Deutschkurs kommen. Ich habe <span class="der-color">einen</span> Arzttermin.<br><br>Mit freundlichen Grüßen,<br>[Su Nombre]</td>
                         <td class="px-6 py-4">Estimado/a Sr./Sra. [Apellido], el lunes no puedo asistir a la clase de alemán. Tengo una cita médica. Atentamente, [Su Nombre].</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">Muy Alta</span></td>
-                        <td class="px-6 py-4 italic">*Ihre Freundin Sofia hat Sie zu ihrer Geburtstagsparty eingeladen. Sie können nicht kommen. Schreiben Sie eine E-Mail: Danken Sie, entschuldigen Sie sich und nennen Sie den Grund.*</td>
-                        <td class="px-6 py-4 font-medium"><strong>Rechazar una Invitación:</strong> Su amiga le ha invitado a su fiesta, pero no puede ir. Escríbale para disculparse y explicar el motivo.</td>
-                        <td class="px-6 py-4">Liebe Sofia,<br><br>danke für <span class="die-color">die</span> Einladung. Es tut mir sehr leid, aber ich kann nicht kommen. Ich muss am Wochenende meine Eltern besuchen.</td>
-                        <td class="px-6 py-4">Querida Sofía, gracias por la invitación. Lo siento mucho, pero no puedo ir. Tengo que visitar a mis padres el fin de semana.</td>
+                        <td class="px-6 py-4 italic">
+                            <div class="default-example">*Ihre Freundin Sofia hat Sie zu ihrer Geburtstagsparty eingeladen. Sie können nicht kommen. Schreiben Sie eine E-Mail: Danken Sie, entschuldigen Sie sich und nennen Sie den Grund.*</div>
+                            <div class="alternative-example"><strong>Brief: Einladung ablehnen</strong><br>Eine bekannte, Frau Meyer-Siebeck, hat Sie zu ihrer Geburtstagparty am Samstag eingeladen. Schreiben Sie an Ihre Nachbarin Frau Meyer-Siebeck.<br><br>Danken Sie für die Einladung<br>Entschuldigen Sie sich: Sie können nicht kommen<br>am Wochenende treffen</div>
+                        </td>
+                        <td class="px-6 py-4 font-medium">
+                            <div class="default-example"><strong>Rechazar una Invitación:</strong> Su amiga le ha invitado a su fiesta, pero no puede ir. Escríbale para disculparse y explicar el motivo.</div>
+                            <div class="alternative-example"><strong>Carta: Rechazar invitación</strong><br>Una conocida, la Sra. Meyer-Siebeck, le ha invitado a su fiesta de cumpleaños el sábado. Escriba a su vecina la Sra. Meyer-Siebeck.<br><br>Agradezca la invitación<br>Discúlpese: No puede ir<br>Verse el fin de semana</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="default-example">Liebe Sofia,<br><br>danke für <span class="die-color">die</span> Einladung. Es tut mir sehr leid, aber ich kann nicht kommen. Ich muss am Wochenende meine Eltern besuchen.</div>
+                            <div class="alternative-example">Sehr geehrte Frau Meyer-Siebeck,<br><br>wie geht´s Ihnen? Ich hoffe, gut. Vielen Dank für die Einladung zu der Party. Es tut mir sehr leid, ich kann nicht kommen denn am Samstag habe ich einen wichtigen Termin.<br>Können wir uns am nächsten Wochenende treffen?<br><br>Rufen Sie mich an! Bis bald!<br><br>Herzliche Grüße<br><br>ABC</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="default-example">Querida Sofía, gracias por la invitación. Lo siento mucho, pero no puedo ir. Tengo que visitar a mis padres el fin de semana.</div>
+                            <div class="alternative-example">Estimada Sra. Meyer-Siebeck,<br><br>¿cómo está usted? Espero que bien. Muchas gracias por la invitación a la fiesta. Lo siento mucho, no puedo ir porque el sábado tengo una cita importante.<br>¿Podemos vernos el próximo fin de semana?<br><br>¡Llámeme! ¡Hasta pronto!<br><br>Saludos cordiales<br><br>ABC</div>
+                        </td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">Muy Alta</span></td>
-                        <td class="px-6 py-4 italic">*Ihr Freund Paul hat Sie ins Kino eingeladen. Antworten Sie ihm. Schreiben Sie, dass Sie mitkommen und wann Sie Zeit haben.*</td>
-                        <td class="px-6 py-4 font-medium"><strong>Aceptar una Invitación:</strong> Su amigo le ha invitado al cine. Contéstele aceptando la invitación.</td>
-                        <td class="px-6 py-4">Lieber Paul,<br><br>vielen Dank für deine Einladung! Ja, ich komme sehr gern mit. Samstag um 19:00 Uhr passt super. Ich freue mich!</td>
-                        <td class="px-6 py-4">Querido Paul, ¡muchas gracias por tu invitación! Sí, me encantaría ir. El sábado a las 19:00 me viene genial. ¡Me alegro!</td>
+                        <td class="px-6 py-4 italic">
+                            <div class="default-example">*Ihr Freund Paul hat Sie ins Kino eingeladen. Antworten Sie ihm. Schreiben Sie, dass Sie mitkommen und wann Sie Zeit haben.*</div>
+                            <div class="alternative-example"><strong>Brief 2: Einladung akzeptieren</strong><br>Eine bekannte, Frau Meyer-Siebeck, hat Sie zu ihrer Geburtstagparty am Samstag eingeladen. Schreiben Sie an Ihre Nachbarin Frau Meyer-Siebeck.<br><br>Danken Sie für die Einladung<br>Etwas zum Essen oder Trinken<br>Jemanden mitbringen</div>
+                        </td>
+                        <td class="px-6 py-4 font-medium">
+                            <div class="default-example"><strong>Aceptar una Invitación:</strong> Su amigo le ha invitado al cine. Contéstele aceptando la invitación.</div>
+                            <div class="alternative-example"><strong>Carta 2: Aceptar invitación</strong><br>Una conocida, la Sra. Meyer-Siebeck, le ha invitado a su fiesta de cumpleaños el sábado. Escriba a su vecina la Sra. Meyer-Siebeck.<br><br>Agradezca la invitación<br>Algo para comer o beber<br>Traer a alguien</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="default-example">Lieber Paul,<br><br>vielen Dank für deine Einladung! Ja, ich komme sehr gern mit. Samstag um 19:00 Uhr passt super. Ich freue mich!</div>
+                            <div class="alternative-example">Sehr geehrte Frau Meyer-Siebeck,<br><br>wie geht´s Ihnen. Ich hoffe, gut. Vielen Dank für die Einladung zu der Geburtstagparty. Ich komme sicher. Ich bringe Cola, Bier und Hänchen mit. Ich bringe ein schönes Geschenk für Sie mit. Darf ich meinen Freund mitbringen?<br><br>Rufen Sie mich an! Bis bald!<br><br>Viele Grüße<br>ABC</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="default-example">Querido Paul, ¡muchas gracias por tu invitación! Sí, me encantaría ir. El sábado a las 19:00 me viene genial. ¡Me alegro!</div>
+                            <div class="alternative-example">Estimada Sra. Meyer-Siebeck,<br><br>¿cómo está usted? Espero que bien. Muchas gracias por la invitación a la fiesta de cumpleaños. Iré sin falta. Traeré refrescos, cerveza y pollo. Traeré un bonito regalo para usted. ¿Puedo traer a mi amigo?<br><br>¡Llámeme! ¡Hasta pronto!<br><br>Muchos saludos<br>ABC</div>
+                        </td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                      <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">Muy Alta</span></td>
@@ -95,6 +170,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Hacer una Cita:</strong> Pida una cita en la peluquería para el próximo martes por la tarde.</td>
                         <td class="px-6 py-4">Sehr geehrte Damen und Herren,<br><br>ich möchte bitte <span class="der-color">einen</span> Termin zum Haareschneiden. Haben Sie am nächsten Dienstag Nachmittag Zeit?<br><br>Mit freundlichen Grüßen,<br>[Su Nombre]</td>
                         <td class="px-6 py-4">Estimados señoras y señores, quisiera una cita para cortarme el pelo. ¿Tienen tiempo el próximo martes por la tarde? Atentamente, [Su Nombre].</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">Muy Alta</span></td>
@@ -102,6 +178,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Cancelar una Cita:</strong> Tiene una cita con el médico, pero no puede asistir. Escriba un correo a la consulta. Discúlpese y pida una nueva cita.</td>
                         <td class="px-6 py-4">Sehr geehrte Damen und Herren,<br><br>ich habe am Mittwoch um 10 Uhr <span class="der-color">einen</span> Termin bei Dr. Schmidt. Leider kann ich nicht kommen. Können wir bitte <span class="der-color">einen</span> neuen Termin machen?<br><br>Mit freundlichen Grüßen,<br>[Ihr Name]</td>
                         <td class="px-6 py-4">Estimados señoras y señores, tengo una cita el miércoles a las 10h con el Dr. Schmidt. Lamentablemente, no puedo ir. ¿Podríamos concertar una nueva cita, por favor?</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">Muy Alta</span></td>
@@ -109,6 +186,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Planes de Fin de Semana:</strong> Proponga a un amigo ir al cine el sábado.</td>
                         <td class="px-6 py-4">Liebe Julia,<br><br>hast du am Samstag Zeit? Wir können zusammen ins Kino gehen. Es gibt <span class="der-color">einen</span> neuen Film. Hast du Lust?</td>
                         <td class="px-6 py-4">Querida Julia, ¿tienes tiempo el sábado? Podemos ir juntos al cine. Hay una nueva película. ¿Te apetece?</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <!-- Alta -->
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
@@ -117,6 +195,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Informar Problema de Salud:</strong> Escriba a su trabajo para decir que no puede ir porque está enfermo.</td>
                         <td class="px-6 py-4">Sehr geehrte/r Herr/Frau [Jefe],<br><br>leider kann ich heute nicht zur Arbeit kommen. Ich habe Kopfschmerzen und Fieber. Ich gehe zum Arzt.<br><br>Mit freundlichen Grüßen,<br>[Ihr Name]</td>
                         <td class="px-6 py-4">Estimado/a Sr./Sra. [Jefe], hoy no puedo ir a trabajar. Tengo dolor de cabeza y fiebre. Voy al médico.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full">Alta</span></td>
@@ -124,6 +203,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Informar de un Problema en Casa:</strong> La calefacción no funciona. Escriba un correo a la administración de su edificio.</td>
                         <td class="px-6 py-4">Sehr geehrte Damen und Herren,<br><br>ich schreibe Ihnen, weil meine Heizung nicht funktioniert. Es ist sehr kalt. Können Sie bitte <span class="der-color">einen</span> Techniker schicken?<br><br>Mit freundlichen Grüßen,<br>[Ihr Name]</td>
                         <td class="px-6 py-4">Estimados señoras y señores, les escribo porque la calefacción de mi apartamento no funciona. Hace mucho frío. ¿Pueden enviar un técnico, por favor? Atentamente, [Su Nombre].</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full">Alta</span></td>
@@ -131,6 +211,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Presentación Personal:</strong> Preséntese con su nombre, origen, residencia e idiomas.</td>
                         <td class="px-6 py-4">Hallo, ich heiße María González. Ich komme aus Spanien und wohne jetzt in Berlin. Ich spreche Spanisch, ein bisschen Englisch und lerne Deutsch.</td>
                         <td class="px-6 py-4">Hola, me llamo María González. Vengo de España y ahora vivo en Berlín. Hablo español, un poco de inglés y estoy aprendiendo alemán.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full">Alta</span></td>
@@ -138,13 +219,47 @@
                         <td class="px-6 py-4 font-medium"><strong>Describir a la Familia:</strong> Describa a su familia, cuántas personas son y dónde viven.</td>
                         <td class="px-6 py-4">Meine Familie hat vier Personen: mein Vater, meine Mutter, mein Bruder und ich. Wir wohnen zusammen in <span class="das-color">einem</span> Haus in Valencia.</td>
                         <td class="px-6 py-4">Mi familia tiene cuatro personas: mi padre, mi madre, mi hermano y yo. Vivimos juntos en una casa en Valencia.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full">Alta</span></td>
-                        <td class="px-6 py-4 italic">*Sie sind in der Touristeninformation. Sie brauchen einen Stadtplan und Informationen über Museen (Öffnungszeiten).*</td>
-                        <td class="px-6 py-4 font-medium"><strong>Pedir Información Turística:</strong> Pida un mapa de la ciudad y horarios de museos.</td>
-                        <td class="px-6 py-4">Guten Tag, ich brauche bitte <span class="der-color">einen</span> Stadtplan und Informationen über <span class="die-color">die</span> Museen. Was sind <span class="die-color">die</span> Öffnungszeiten? Vielen Dank.</td>
-                        <td class="px-6 py-4">Buenos días, necesito por favor un mapa de la ciudad e información sobre los museos. ¿Cuál es el horario de apertura? Muchas gracias.</td>
+                        <td class="px-6 py-4 italic">
+                            <div class="default-example">*Sie sind in der Touristeninformation. Sie brauchen einen Stadtplan und Informationen über Museen (Öffnungszeiten).*</div>
+                            <div class="alternative-example"><strong>Brief: Stadt besichtigen</strong><br>Schreiben Sie an die Touristinformation in Stuttgart:<br><br>Sie wollen im Sommer nach Stuttgart fahren<br>Bitten Sie um Information über die Sehenswürdigkeiten und Kulturprogramme.<br>Sie möchten in der Jugendherberge übernachten.</div>
+                        </td>
+                        <td class="px-6 py-4 font-medium">
+                            <div class="default-example"><strong>Pedir Información Turística:</strong> Pida un mapa de la ciudad y horarios de museos.</div>
+                            <div class="alternative-example"><strong>Carta: Visitar la ciudad</strong><br>Escriba a la oficina de turismo de Stuttgart:<br><br>Quiere ir a Stuttgart en verano<br>Pida información sobre las atracciones turísticas y programas culturales.<br>Quiere alojarse en el albergue juvenil.</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="default-example">Guten Tag, ich brauche bitte <span class="der-color">einen</span> Stadtplan und Informationen über <span class="die-color">die</span> Museen. Was sind <span class="die-color">die</span> Öffnungszeiten? Vielen Dank.</div>
+                            <div class="alternative-example">Sehr geehrte Damen und Herren,<br><br>Begrüßung! Ich heiße ABC und wohne in Berlin. Ich will im Sommer nach Stuttgart fahren. Könnten Sie mir Information über die Sehenswürdigkeiten; z.B. Museen, Feste, Theater usw. geben. Ich möchte in der Jugendherberge übernachten.<br><br>Ich warte auf Ihre schnelle Rückmeldung.<br>Danke im Voraus!<br><br>Mit freundlichen Grüßen<br>ABC</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="default-example">Buenos días, necesito por favor un mapa de la ciudad e información sobre los museos. ¿Cuál es el horario de apertura? Muchas gracias.</div>
+                            <div class="alternative-example">Estimados señoras y señores,<br><br>¡Saludos! Me llamo ABC y vivo en Berlín. Quiero ir a Stuttgart en verano. ¿Podrían darme información sobre las atracciones turísticas; por ejemplo, museos, festivales, teatros, etc.? Me gustaría alojarme en el albergue juvenil.<br><br>Espero su pronta respuesta.<br>¡Gracias de antemano!<br><br>Atentamente<br>ABC</div>
+                        </td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
+                    </tr>
+                    <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
+                        <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full">Alta</span></td>
+                        <td class="px-6 py-4 italic">
+                            <div class="default-example">*Sie möchten ein Hotelzimmer buchen. Schreiben Sie eine E-Mail an das Hotel. Geben Sie alle wichtigen Informationen an.*</div>
+                            <div class="alternative-example"><strong>Brief 10: Hotel abholen</strong><br>Schreiben Sie an E-Mail an das Hotel ,,Ratswaage´´ in Magdeburg:<br><br>Sie brauchen ein Doppelzimmer mit Halbpension.<br>Sie bleiben vier Nächte, Ankunft: 05.06., 16.30 Flughafen.<br>Das Hotelauto soll Sie am Flughafen abholen.</div>
+                        </td>
+                        <td class="px-6 py-4 font-medium">
+                            <div class="default-example"><strong>Reservar Hotel:</strong> Escriba al hotel para reservar una habitación proporcionando toda la información necesaria.</div>
+                            <div class="alternative-example"><strong>Carta 10: Recogida en hotel</strong><br>Escriba un correo al hotel ,,Ratswaage´´ en Magdeburgo:<br><br>Necesita una habitación doble con media pensión.<br>Se quedará cuatro noches, llegada: 05.06., 16:30 aeropuerto.<br>El coche del hotel debe recogerle en el aeropuerto.</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="default-example">Sehr geehrte Damen und Herren,<br><br>ich möchte gern <span class="das-color">ein</span> Einzelzimmer für drei Nächte buchen. Vom 15. bis 18. Juli. Haben Sie noch Plätze frei?<br><br>Mit freundlichen Grüßen,<br>[Ihr Name]</div>
+                            <div class="alternative-example">Sehr geehrte Damen und Herren,<br><br>Begrüßung! Ich heiße ABC. Ich brauche ein Doppelzimmer mit Halbpension bei Ihnen. Ich bleibe vier Nächte im Hotel und komme am 5. Juni, um 16.30 Uhr am Flughafen an. Das Hotelauto soll mich am Flughafen abholen.<br><br>Ich warte auf Ihre schnelle Rückmeldung.<br>Danke im Voraus!<br><br>Mit freundlichen Grüßen<br>ABC</div>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="default-example">Estimados señoras y señores, me gustaría reservar una habitación individual para tres noches. Del 15 al 18 de julio. ¿Tienen plazas disponibles? Atentamente, [Su Nombre]</div>
+                            <div class="alternative-example">Estimados señoras y señores,<br><br>¡Saludos! Me llamo ABC. Necesito una habitación doble con media pensión en su hotel. Me quedaré cuatro noches en el hotel y llego el 5 de junio a las 16:30 al aeropuerto. El coche del hotel debe recogerme en el aeropuerto.<br><br>Espero su pronta respuesta.<br>¡Gracias de antemano!<br><br>Atentamente<br>ABC</div>
+                        </td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <!-- Media -->
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
@@ -153,6 +268,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Describir Habilidades:</strong> Escriba sobre sus habilidades. ¿Qué sabe hacer bien? ¿Qué no sabe hacer tan bien?</td>
                         <td class="px-6 py-4">Ich glaube, ich kann sehr gut kochen. Ich koche gern italienisches Essen für meine Freunde. Aber ich kann leider gar nicht singen. Ich singe nur in der Dusche!</td>
                         <td class="px-6 py-4">Creo que sé cocinar muy bien. Me gusta cocinar comida italiana para mis amigos. Pero, lamentablemente, no sé cantar nada. ¡Solo canto en la ducha!</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full">Media</span></td>
@@ -160,6 +276,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Rutina Diaria:</strong> Describa su rutina mencionando qué hace por la mañana y por la tarde.</td>
                         <td class="px-6 py-4">Ich stehe um sieben Uhr auf. Am Morgen frühstücke ich und gehe zum Deutschkurs. Am Nachmittag esse ich zu Hause und mache meine Hausaufgaben.</td>
                         <td class="px-6 py-4">Me levanto a las siete. Por la mañana desayuno y voy a la clase de alemán. Por la tarde como en casa y hago mis deberes.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full">Media</span></td>
@@ -167,6 +284,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Hobbies:</strong> Escriba sobre sus pasatiempos, qué le gusta hacer y con quién.</td>
                         <td class="px-6 py-4">In meiner Freizeit spiele ich gern Fußball mit meinen Freunden im Park. Ich höre auch gern Musik und lese Bücher.</td>
                         <td class="px-6 py-4">En mi tiempo libre me gusta jugar al fútbol con mis amigos en el parque. También me gusta escuchar música y leer libros.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full">Media</span></td>
@@ -174,6 +292,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Describir el Día de Ayer:</strong> Cuente qué hizo ayer usando el tiempo "Perfekt".</td>
                         <td class="px-6 py-4">Gestern habe ich im Supermarkt eingekauft. Danach habe ich mit <span class="die-color">meiner</span> Freundin Anna telefoniert. Am Abend haben wir <span class="der-color">einen</span> Film gesehen.</td>
                         <td class="px-6 py-4">Ayer hice la compra en el supermercado. Después hablé por teléfono con mi amiga Anna. Por la noche vimos una película.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full">Media</span></td>
@@ -181,6 +300,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Describir Apartamento:</strong> Describa su apartamento, cuántas habitaciones tiene y cuál es su favorita.</td>
                         <td class="px-6 py-4">Ich wohne in <span class="die-color">einer</span> Wohnung. Sie hat drei Zimmer: <span class="das-color">ein</span> Wohnzimmer, <span class="das-color">ein</span> Schlafzimmer und <span class="die-color">eine</span> Küche. Mein Lieblingszimmer ist <span class="das-color">das</span> Wohnzimmer.</td>
                         <td class="px-6 py-4">Vivo en un apartamento. Tiene tres habitaciones: una sala, un dormitorio y una cocina. Mi habitación favorita es la sala.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full">Media</span></td>
@@ -188,6 +308,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Escribir una Postal:</strong> Escriba una postal desde sus vacaciones describiendo el lugar y sus actividades.</td>
                         <td class="px-6 py-4">Liebe Familie,<br><br>viele Grüße aus München! Das Wetter hier ist super und die Stadt ist sehr schön. Ich besuche viele Museen.<br><br>Bis bald,<br>[Su Nombre]</td>
                         <td class="px-6 py-4">Querida familia, ¡muchos saludos desde Múnich! El tiempo aquí es genial y la ciudad es muy bonita. Visito muchos museos. Hasta pronto, [Su Nombre].</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full">Media</span></td>
@@ -195,6 +316,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Preferencias de Comida:</strong> Escriba sobre su comida y bebida favoritas y lo que no le gusta.</td>
                         <td class="px-6 py-4">Mein Lieblingsessen ist Pizza. Ich trinke gern Orangensaft. Zum Frühstück esse ich Müsli. Fisch mag ich gar nicht.</td>
                         <td class="px-6 py-4">Mi comida favorita es la pizza. Me gusta beber zumo de naranja. Para desayunar como muesli. No me gusta nada el pescado.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full">Media</span></td>
@@ -202,6 +324,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Medio de Transporte:</strong> Explique cómo viaja cada día y cuánto tarda.</td>
                         <td class="px-6 py-4">Jeden Tag fahre ich mit der U-Bahn zum Deutschkurs. Die Fahrt dauert ungefähr zwanzig Minuten. Die U-Bahn ist schnell, aber oft voll.</td>
                         <td class="px-6 py-4">Cada día voy en metro a la clase de alemán. El trayecto dura unos veinte minutos. El metro es rápido, pero a menudo está lleno.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full">Media</span></td>
@@ -209,6 +332,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Agradecer un Regalo:</strong> Agradezca a su abuela un libro que le regaló.</td>
                         <td class="px-6 py-4">Liebe Oma,<br><br>vielen Dank für das tolle Buch! Es gefällt mir sehr gut. Ich habe schon angefangen zu lesen.<br><br>Dein [Ihr Name]</td>
                         <td class="px-6 py-4">Querida abuela, ¡muchas gracias por el libro genial! Me gusta mucho. Ya he empezado a leer. Tu [Su Nombre].</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <!-- Baja -->
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
@@ -217,6 +341,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Hablar sobre Ropa:</strong> Pida opinión a un amigo sobre una chaqueta que quiere comprar.</td>
                         <td class="px-6 py-4">Hallo Alex,<br><br>ich bin im Geschäft und sehe <span class="die-color">eine</span> tolle Jacke. Sie ist blau und kostet nur 40 Euro. Soll ich sie kaufen?</td>
                         <td class="px-6 py-4">Hola Alex, estoy en la tienda y veo una chaqueta genial. Es azul y cuesta solo 40 euros. ¿Debería comprarla?</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">Baja</span></td>
@@ -224,6 +349,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Invitar a un Vecino:</strong> Invite a su nuevo vecino a una fiesta de inauguración.</td>
                         <td class="px-6 py-4">Liebe/r Herr/Frau [Nachname],<br><br>ich mache am Samstag <span class="die-color">eine</span> kleine Party. Sie sind herzlich eingeladen! <span class="die-color">Die</span> Party beginnt um 19 Uhr.</td>
                         <td class="px-6 py-4">Estimado/a Sr./Sra. [Apellido], el sábado haré una pequeña fiesta. ¡Está cordialmente invitado/a! La fiesta empieza a las 19h.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">Baja</span></td>
@@ -231,6 +357,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Reclamar por un Producto:</strong> Escriba a una tienda porque la cafetera que compró está rota.</td>
                         <td class="px-6 py-4">Sehr geehrte Damen und Herren,<br><br>ich habe <span class="die-color">eine</span> Kaffeemaschine bei Ihnen gekauft. Leider ist sie schon kaputt. Ich möchte sie bitte umtauschen.<br><br>Mit freundlichen Grüßen,<br>[Ihr Name]</td>
                         <td class="px-6 py-4">Estimados señoras y señores, he comprado una cafetera en su tienda. Lamentablemente, ya está rota. Quisiera cambiarla, por favor.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">Baja</span></td>
@@ -238,6 +365,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Describir Lugar de Estudio:</strong> Describa su escuela de idiomas y a sus compañeros.</td>
                         <td class="px-6 py-4">Ich lerne Deutsch in einer Sprachschule. Die Schule ist modern. Meine Mitschüler sind sehr nett und kommen aus vielen Ländern.</td>
                         <td class="px-6 py-4">Aprendo alemán en una escuela de idiomas. La escuela es moderna. Mis compañeros son muy amables y vienen de muchos países.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">Baja</span></td>
@@ -245,6 +373,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Pedir un Camino:</strong> Pida ayuda a un transeúnte para llegar a la estación de tren.</td>
                         <td class="px-6 py-4">Entschuldigung, können Sie mir bitte helfen? Ich suche den Hauptbahnhof. Ist er weit von hier? Vielen Dank für Ihre Hilfe.</td>
                         <td class="px-6 py-4">Disculpe, ¿puede ayudarme? Busco la estación principal. ¿Está lejos de aquí? Muchas gracias por su ayuda.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">Baja</span></td>
@@ -252,6 +381,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Estación Favorita:</strong> Describa su estación favorita y por qué le gusta.</td>
                         <td class="px-6 py-4">Meine Lieblingsjahreszeit ist der Sommer. Ich liebe den Sommer, weil es warm ist und die Sonne scheint. Ich gehe oft schwimmen.</td>
                         <td class="px-6 py-4">Mi estación favorita es el verano. Me encanta el verano porque hace calor y brilla el sol. Voy a nadar a menudo.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">Baja</span></td>
@@ -259,6 +389,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Describir una Mascota:</strong> Describa a su mascota, su nombre y qué le gusta hacer.</td>
                         <td class="px-6 py-4">Ich habe einen Hund. Er heißt Max und ist drei Jahre alt. Er ist sehr freundlich und spielt gern im Park.</td>
                         <td class="px-6 py-4">Tengo un perro. Se llama Max y tiene tres años. Es muy amigable y le gusta jugar en el parque.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">Baja</span></td>
@@ -266,6 +397,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Hablar del Tiempo:</strong> Describa el tiempo que hace hoy en su ciudad.</td>
                         <td class="px-6 py-4">Heute scheint in Berlin die Sonne, aber es ist ziemlich kalt, nur 15 Grad. Am Nachmittag regnet es vielleicht.</td>
                         <td class="px-6 py-4">Hoy en Berlín brilla el sol, pero hace bastante frío, solo 15 grados. Por la tarde quizás llueva.</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">Baja</span></td>
@@ -273,6 +405,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Lista de Compras:</strong> Escriba una nota a su compañero de piso con cuatro cosas que necesita comprar.</td>
                         <td class="px-6 py-4">Hallo Anna,<br><br>ich gehe einkaufen. Ich kaufe Milch, Brot und Käse. Brauchen wir auch Eier? Bitte antworte schnell.<br><br>Danke!</td>
                         <td class="px-6 py-4">Hola Anna, voy de compras. Compro leche, pan y queso. ¿Necesitamos también huevos? Por favor, responde rápido. ¡Gracias!</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                     <tr class="bg-white hover:bg-gray-50">
                         <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">Baja</span></td>
@@ -280,6 +413,7 @@
                         <td class="px-6 py-4 font-medium"><strong>Pedir en Cafetería:</strong> Escriba a un amigo qué va a pedir en una cafetería.</td>
                         <td class="px-6 py-4">Hallo Tim,<br><br>ich bin im Café. Ich bestelle einen Kaffee und ein Stück Apfelkuchen. Was möchtest du? Beeil dich!</td>
                         <td class="px-6 py-4">Hola Tim, estoy en la cafetería. Voy a pedir un café y un trozo de tarta de manzana. ¿Qué quieres tú? ¡Date prisa!</td>
+                        <td class="px-6 py-4"><button class="arrow-btn" onclick="toggleExamples(this)" title="Ver ejemplo alternativo">↻</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -298,6 +432,69 @@
         </div>
 
     </div>
+
+    <script>
+        function toggleExamples(button) {
+            const row = button.closest('tr');
+            const aufgabenstellungCell = row.cells[1]; // The "Aufgabenstellung" column (2nd column, index 1)
+            const enunciadoCell = row.cells[2]; // The "Enunciado del Examen" column (3rd column, index 2)
+            const musterantwortCell = row.cells[3]; // The "Musterantwort" column (4th column, index 3)
+            const traduccionCell = row.cells[4]; // The "Traducción" column (5th column, index 4)
+            
+            const aufgabenDefault = aufgabenstellungCell.querySelector('.default-example');
+            const aufgabenAlternative = aufgabenstellungCell.querySelector('.alternative-example');
+            const enunciadoDefault = enunciadoCell.querySelector('.default-example');
+            const enunciadoAlternative = enunciadoCell.querySelector('.alternative-example');
+            const germanDefault = musterantwortCell.querySelector('.default-example');
+            const germanAlternative = musterantwortCell.querySelector('.alternative-example');
+            const spanishDefault = traduccionCell.querySelector('.default-example');
+            const spanishAlternative = traduccionCell.querySelector('.alternative-example');
+            
+            // If no alternative structure exists, do nothing
+            if (!germanDefault || !germanAlternative) {
+                return;
+            }
+            
+            // Toggle visibility
+            if (germanDefault.classList.contains('hidden')) {
+                // Show default, hide alternative
+                if (aufgabenDefault && aufgabenAlternative) {
+                    aufgabenDefault.classList.remove('hidden');
+                    aufgabenAlternative.classList.remove('active');
+                }
+                if (enunciadoDefault && enunciadoAlternative) {
+                    enunciadoDefault.classList.remove('hidden');
+                    enunciadoAlternative.classList.remove('active');
+                }
+                germanDefault.classList.remove('hidden');
+                germanAlternative.classList.remove('active');
+                if (spanishDefault && spanishAlternative) {
+                    spanishDefault.classList.remove('hidden');
+                    spanishAlternative.classList.remove('active');
+                }
+                button.textContent = '↻';
+                button.title = 'Ver ejemplo alternativo';
+            } else {
+                // Show alternative, hide default
+                if (aufgabenDefault && aufgabenAlternative) {
+                    aufgabenDefault.classList.add('hidden');
+                    aufgabenAlternative.classList.add('active');
+                }
+                if (enunciadoDefault && enunciadoAlternative) {
+                    enunciadoDefault.classList.add('hidden');
+                    enunciadoAlternative.classList.add('active');
+                }
+                germanDefault.classList.add('hidden');
+                germanAlternative.classList.add('active');
+                if (spanishDefault && spanishAlternative) {
+                    spanishDefault.classList.add('hidden');
+                    spanishAlternative.classList.add('active');
+                }
+                button.textContent = '↺';
+                button.title = 'Ver ejemplo original';
+            }
+        }
+    </script>
 
 </body>
 </html>
