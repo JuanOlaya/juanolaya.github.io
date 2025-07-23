@@ -97,7 +97,7 @@
 
                 <h4 class="text-lg font-bold mt-6 mb-2">Akkusativ</h4>
                  <p class="mb-4 text-sm">(Direct Object: Who or what is directly receiving the action?)<br>🇪🇸 (Objeto Directo: ¿Quién o qué recibe directamente la acción?)</p>
-                <table>
+                <table id="definite-akkusativ-table">
                     <thead>
                         <tr>
                             <th>Case</th>
@@ -107,12 +107,13 @@
                             <th>nehmen<br/><span style="font-size: 225%; text-align: center; display: block;">✋</span></th>
                             <th>mögen<br/><span style="font-size: 225%; text-align: center; display: block;">😍</span></th>
                             <th>kennen<br/><span style="font-size: 225%; text-align: center; display: block;">🧠</span></th>
-                            <th>brauchen<br/><span style="font-size: 225%; text-align: center; display: block;">🆘</span></th>
-                            <th>essen<br/><span style="font-size: 225%; text-align: center; display: block;">🍽️</span></th>
-                            <th>kaufen<br/><span style="font-size: 225%; text-align: center; display: block;">💰</span></th>
-                            <th>hören<br/><span style="font-size: 225%; text-align: center; display: block;">👂</span></th>
-                            <th>trinken<br/><span style="font-size: 225%; text-align: center; display: block;">🥤</span></th>
-                            <th>lieben<br/><span style="font-size: 225%; text-align: center; display: block;">❤️</span></th>
+                            <th class="mehr-verbs" style="display: none;">brauchen<br/><span style="font-size: 225%; text-align: center; display: block;">🆘</span></th>
+                            <th class="mehr-verbs" style="display: none;">essen<br/><span style="font-size: 225%; text-align: center; display: block;">🍽️</span></th>
+                            <th class="mehr-verbs" style="display: none;">kaufen<br/><span style="font-size: 225%; text-align: center; display: block;">💰</span></th>
+                            <th class="mehr-verbs" style="display: none;">hören<br/><span style="font-size: 225%; text-align: center; display: block;">👂</span></th>
+                            <th class="mehr-verbs" style="display: none;">trinken<br/><span style="font-size: 225%; text-align: center; display: block;">🥤</span></th>
+                            <th class="mehr-verbs" style="display: none;">lieben<br/><span style="font-size: 225%; text-align: center; display: block;">❤️</span></th>
+                            <th>Mehr</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -124,12 +125,13 @@
                             <td data-label="nehmen"><span>Ich nehme <strong class="der-color">den</strong> Ball.</span><span class="translation"><br/>🇬🇧 <i>I take the ball.</i><br/>🇪🇸 <i>Tomo la pelota.</i></span></td>
                             <td data-label="mögen"><span>Ich mag <strong class="der-color">den</strong> Lehrer.</span><span class="translation"><br/>🇬🇧 <i>I like the teacher.</i><br/>🇪🇸 <i>Me gusta el profesor.</i></span></td>
                             <td data-label="kennen"><span>Ich kenne <strong class="der-color">den</strong> Arzt.</span><span class="translation"><br/>🇬🇧 <i>I know the doctor.</i><br/>🇪🇸 <i>Conozco al doctor.</i></span></td>
-                            <td data-label="brauchen"><span>Ich brauche <strong class="der-color">den</strong> Stift.</span><span class="translation"><br/>🇬🇧 <i>I need the pen.</i><br/>🇪🇸 <i>Necesito el bolígrafo.</i></span></td>
-                            <td data-label="essen"><span>Ich esse <strong class="der-color">den</strong> Apfel.</span><span class="translation"><br/>🇬🇧 <i>I eat the apple.</i><br/>🇪🇸 <i>Como la manzana.</i></span></td>
-                            <td data-label="kaufen"><span>Ich kaufe <strong class="der-color">den</strong> Wagen.</span><span class="translation"><br/>🇬🇧 <i>I buy the car.</i><br/>🇪🇸 <i>Compro el coche.</i></span></td>
-                            <td data-label="hören"><span>Ich höre <strong class="der-color">den</strong> Hund.</span><span class="translation"><br/>🇬🇧 <i>I hear the dog.</i><br/>🇪🇸 <i>Escucho al perro.</i></span></td>
-                            <td data-label="trinken"><span>Ich trinke <strong class="der-color">den</strong> Kaffee.</span><span class="translation"><br/>🇬🇧 <i>I drink the coffee.</i><br/>🇪🇸 <i>Bebo el café.</i></span></td>
-                            <td data-label="lieben"><span>Ich liebe <strong class="der-color">den</strong> Vater.</span><span class="translation"><br/>🇬🇧 <i>I love the father.</i><br/>🇪🇸 <i>Amo al padre.</i></span></td>
+                            <td data-label="brauchen" class="mehr-verbs" style="display: none;"><span>Ich brauche <strong class="der-color">den</strong> Stift.</span><span class="translation"><br/>🇬🇧 <i>I need the pen.</i><br/>🇪🇸 <i>Necesito el bolígrafo.</i></span></td>
+                            <td data-label="essen" class="mehr-verbs" style="display: none;"><span>Ich esse <strong class="der-color">den</strong> Apfel.</span><span class="translation"><br/>🇬🇧 <i>I eat the apple.</i><br/>🇪🇸 <i>Como la manzana.</i></span></td>
+                            <td data-label="kaufen" class="mehr-verbs" style="display: none;"><span>Ich kaufe <strong class="der-color">den</strong> Wagen.</span><span class="translation"><br/>🇬🇧 <i>I buy the car.</i><br/>🇪🇸 <i>Compro el coche.</i></span></td>
+                            <td data-label="hören" class="mehr-verbs" style="display: none;"><span>Ich höre <strong class="der-color">den</strong> Hund.</span><span class="translation"><br/>🇬🇧 <i>I hear the dog.</i><br/>🇪🇸 <i>Escucho al perro.</i></span></td>
+                            <td data-label="trinken" class="mehr-verbs" style="display: none;"><span>Ich trinke <strong class="der-color">den</strong> Kaffee.</span><span class="translation"><br/>🇬🇧 <i>I drink the coffee.</i><br/>🇪🇸 <i>Bebo el café.</i></span></td>
+                            <td data-label="lieben" class="mehr-verbs" style="display: none;"><span>Ich liebe <strong class="der-color">den</strong> Vater.</span><span class="translation"><br/>🇬🇧 <i>I love the father.</i><br/>🇪🇸 <i>Amo al padre.</i></span></td>
+                            <td data-label="Mehr"><button class="arrow-btn" onclick="toggleVerbs(this)" title="Mehr Verben anzeigen">↻</button></td>
                         </tr>
                         <tr>
                             <td data-label="Case"><strong class="die-color">Feminin (f)</strong><br/><strong class="die-color">die</strong></td>
@@ -139,12 +141,13 @@
                             <td data-label="nehmen"><span>Ich nehme <strong class="die-color">die</strong> Tasche.</span><span class="translation"><br/>🇬🇧 <i>I take the bag.</i><br/>🇪🇸 <i>Tomo la bolsa.</i></span></td>
                             <td data-label="mögen"><span>Ich mag <strong class="die-color">die</strong> Lehrerin.</span><span class="translation"><br/>🇬🇧 <i>I like the teacher.</i><br/>🇪🇸 <i>Me gusta la profesora.</i></span></td>
                             <td data-label="kennen"><span>Ich kenne <strong class="die-color">die</strong> Ärztin.</span><span class="translation"><br/>🇬🇧 <i>I know the doctor.</i><br/>🇪🇸 <i>Conozco a la doctora.</i></span></td>
-                            <td data-label="brauchen"><span>Ich brauche <strong class="die-color">die</strong> Lampe.</span><span class="translation"><br/>🇬🇧 <i>I need the lamp.</i><br/>🇪🇸 <i>Necesito la lámpara.</i></span></td>
-                            <td data-label="essen"><span>Ich esse <strong class="die-color">die</strong> Suppe.</span><span class="translation"><br/>🇬🇧 <i>I eat the soup.</i><br/>🇪🇸 <i>Como la sopa.</i></span></td>
-                            <td data-label="kaufen"><span>Ich kaufe <strong class="die-color">die</strong> Blume.</span><span class="translation"><br/>🇬🇧 <i>I buy the flower.</i><br/>🇪🇸 <i>Compro la flor.</i></span></td>
-                            <td data-label="hören"><span>Ich höre <strong class="die-color">die</strong> Musik.</span><span class="translation"><br/>🇬🇧 <i>I hear the music.</i><br/>🇪🇸 <i>Escucho la música.</i></span></td>
-                            <td data-label="trinken"><span>Ich trinke <strong class="die-color">die</strong> Milch.</span><span class="translation"><br/>🇬🇧 <i>I drink the milk.</i><br/>🇪🇸 <i>Bebo la leche.</i></span></td>
-                            <td data-label="lieben"><span>Ich liebe <strong class="die-color">die</strong> Mutter.</span><span class="translation"><br/>🇬🇧 <i>I love the mother.</i><br/>🇪🇸 <i>Amo a la madre.</i></span></td>
+                            <td data-label="brauchen" class="mehr-verbs" style="display: none;"><span>Ich brauche <strong class="die-color">die</strong> Lampe.</span><span class="translation"><br/>🇬🇧 <i>I need the lamp.</i><br/>🇪🇸 <i>Necesito la lámpara.</i></span></td>
+                            <td data-label="essen" class="mehr-verbs" style="display: none;"><span>Ich esse <strong class="die-color">die</strong> Suppe.</span><span class="translation"><br/>🇬🇧 <i>I eat the soup.</i><br/>🇪🇸 <i>Como la sopa.</i></span></td>
+                            <td data-label="kaufen" class="mehr-verbs" style="display: none;"><span>Ich kaufe <strong class="die-color">die</strong> Blume.</span><span class="translation"><br/>🇬🇧 <i>I buy the flower.</i><br/>🇪🇸 <i>Compro la flor.</i></span></td>
+                            <td data-label="hören" class="mehr-verbs" style="display: none;"><span>Ich höre <strong class="die-color">die</strong> Musik.</span><span class="translation"><br/>🇬🇧 <i>I hear the music.</i><br/>🇪🇸 <i>Escucho la música.</i></span></td>
+                            <td data-label="trinken" class="mehr-verbs" style="display: none;"><span>Ich trinke <strong class="die-color">die</strong> Milch.</span><span class="translation"><br/>🇬🇧 <i>I drink the milk.</i><br/>🇪🇸 <i>Bebo la leche.</i></span></td>
+                            <td data-label="lieben" class="mehr-verbs" style="display: none;"><span>Ich liebe <strong class="die-color">die</strong> Mutter.</span><span class="translation"><br/>🇬🇧 <i>I love the mother.</i><br/>🇪🇸 <i>Amo a la madre.</i></span></td>
+                            <td data-label="Mehr"><button class="arrow-btn" onclick="toggleVerbs(this)" title="Mehr Verben anzeigen">↻</button></td>
                         </tr>
                         <tr>
                             <td data-label="Case"><strong class="das-color">Neutrum (n)</strong><br/><strong class="das-color">das</strong></td>
@@ -154,12 +157,13 @@
                             <td data-label="nehmen"><span>Ich nehme <strong class="das-color">das</strong> Buch.</span><span class="translation"><br/>🇬🇧 <i>I take the book.</i><br/>🇪🇸 <i>Tomo el libro.</i></span></td>
                             <td data-label="mögen"><span>Ich mag <strong class="das-color">das</strong> Tier.</span><span class="translation"><br/>🇬🇧 <i>I like the animal.</i><br/>🇪🇸 <i>Me gusta el animal.</i></span></td>
                             <td data-label="kennen"><span>Ich kenne <strong class="das-color">das</strong> Mädchen.</span><span class="translation"><br/>🇬🇧 <i>I know the girl.</i><br/>🇪🇸 <i>Conozco a la niña.</i></span></td>
-                            <td data-label="brauchen"><span>Ich brauche <strong class="das-color">das</strong> Auto.</span><span class="translation"><br/>🇬🇧 <i>I need the car.</i><br/>🇪🇸 <i>Necesito el coche.</i></span></td>
-                            <td data-label="essen"><span>Ich esse <strong class="das-color">das</strong> Brot.</span><span class="translation"><br/>🇬🇧 <i>I eat the bread.</i><br/>🇪🇸 <i>Como el pan.</i></span></td>
-                            <td data-label="kaufen"><span>Ich kaufe <strong class="das-color">das</strong> Haus.</span><span class="translation"><br/>🇬🇧 <i>I buy the house.</i><br/>🇪🇸 <i>Compro la casa.</i></span></td>
-                            <td data-label="hören"><span>Ich höre <strong class="das-color">das</strong> Radio.</span><span class="translation"><br/>🇬🇧 <i>I hear the radio.</i><br/>🇪🇸 <i>Escucho la radio.</i></span></td>
-                            <td data-label="trinken"><span>Ich trinke <strong class="das-color">das</strong> Wasser.</span><span class="translation"><br/>🇬🇧 <i>I drink the water.</i><br/>🇪🇸 <i>Bebo el agua.</i></span></td>
-                            <td data-label="lieben"><span>Ich liebe <strong class="das-color">das</strong> Baby.</span><span class="translation"><br/>🇬🇧 <i>I love the baby.</i><br/>🇪🇸 <i>Amo al bebé.</i></span></td>
+                            <td data-label="brauchen" class="mehr-verbs" style="display: none;"><span>Ich brauche <strong class="das-color">das</strong> Auto.</span><span class="translation"><br/>🇬🇧 <i>I need the car.</i><br/>🇪🇸 <i>Necesito el coche.</i></span></td>
+                            <td data-label="essen" class="mehr-verbs" style="display: none;"><span>Ich esse <strong class="das-color">das</strong> Brot.</span><span class="translation"><br/>🇬🇧 <i>I eat the bread.</i><br/>🇪🇸 <i>Como el pan.</i></span></td>
+                            <td data-label="kaufen" class="mehr-verbs" style="display: none;"><span>Ich kaufe <strong class="das-color">das</strong> Haus.</span><span class="translation"><br/>🇬🇧 <i>I buy the house.</i><br/>🇪🇸 <i>Compro la casa.</i></span></td>
+                            <td data-label="hören" class="mehr-verbs" style="display: none;"><span>Ich höre <strong class="das-color">das</strong> Radio.</span><span class="translation"><br/>🇬🇧 <i>I hear the radio.</i><br/>🇪🇸 <i>Escucho la radio.</i></span></td>
+                            <td data-label="trinken" class="mehr-verbs" style="display: none;"><span>Ich trinke <strong class="das-color">das</strong> Wasser.</span><span class="translation"><br/>🇬🇧 <i>I drink the water.</i><br/>🇪🇸 <i>Bebo el agua.</i></span></td>
+                            <td data-label="lieben" class="mehr-verbs" style="display: none;"><span>Ich liebe <strong class="das-color">das</strong> Baby.</span><span class="translation"><br/>🇬🇧 <i>I love the baby.</i><br/>🇪🇸 <i>Amo al bebé.</i></span></td>
+                            <td data-label="Mehr"><button class="arrow-btn" onclick="toggleVerbs(this)" title="Mehr Verben anzeigen">↻</button></td>
                         </tr>
                         <tr>
                             <td data-label="Case"><strong class="plural-color">Plural</strong><br/><strong class="plural-color">die</strong></td>
@@ -169,12 +173,13 @@
                             <td data-label="nehmen"><span>Ich nehme <strong class="plural-color">die</strong> Bücher.</span><span class="translation"><br/>🇬🇧 <i>I take the books.</i><br/>🇪🇸 <i>Tomo los libros.</i></span></td>
                             <td data-label="mögen"><span>Ich mag <strong class="plural-color">die</strong> Tiere.</span><span class="translation"><br/>🇬🇧 <i>I like the animals.</i><br/>🇪🇸 <i>Me gustan los animales.</i></span></td>
                             <td data-label="kennen"><span>Ich kenne <strong class="plural-color">die</strong> Leute.</span><span class="translation"><br/>🇬🇧 <i>I know the people.</i><br/>🇪🇸 <i>Conozco a la gente.</i></span></td>
-                            <td data-label="brauchen"><span>Ich brauche <strong class="plural-color">die</strong> Stifte.</span><span class="translation"><br/>🇬🇧 <i>I need the pens.</i><br/>🇪🇸 <i>Necesito los bolígrafos.</i></span></td>
-                            <td data-label="essen"><span>Ich esse <strong class="plural-color">die</strong> Äpfel.</span><span class="translation"><br/>🇬🇧 <i>I eat the apples.</i><br/>🇪🇸 <i>Como las manzanas.</i></span></td>
-                            <td data-label="kaufen"><span>Ich kaufe <strong class="plural-color">die</strong> Blumen.</span><span class="translation"><br/>🇬🇧 <i>I buy the flowers.</i><br/>🇪🇸 <i>Compro las flores.</i></span></td>
-                            <td data-label="hören"><span>Ich höre <strong class="plural-color">die</strong> Vögel.</span><span class="translation"><br/>🇬🇧 <i>I hear the birds.</i><br/>🇪🇸 <i>Escucho a los pájaros.</i></span></td>
-                            <td data-label="trinken"><span>Ich trinke <strong class="plural-color">die</strong> Säfte.</span><span class="translation"><br/>🇬🇧 <i>I drink the juices.</i><br/>🇪🇸 <i>Bebo los jugos.</i></span></td>
-                            <td data-label="lieben"><span>Ich liebe <strong class="plural-color">die</strong> Eltern.</span><span class="translation"><br/>🇬🇧 <i>I love the parents.</i><br/>🇪🇸 <i>Amo a los padres.</i></span></td>
+                            <td data-label="brauchen" class="mehr-verbs" style="display: none;"><span>Ich brauche <strong class="plural-color">die</strong> Stifte.</span><span class="translation"><br/>🇬🇧 <i>I need the pens.</i><br/>🇪🇸 <i>Necesito los bolígrafos.</i></span></td>
+                            <td data-label="essen" class="mehr-verbs" style="display: none;"><span>Ich esse <strong class="plural-color">die</strong> Äpfel.</span><span class="translation"><br/>🇬🇧 <i>I eat the apples.</i><br/>🇪🇸 <i>Como las manzanas.</i></span></td>
+                            <td data-label="kaufen" class="mehr-verbs" style="display: none;"><span>Ich kaufe <strong class="plural-color">die</strong> Blumen.</span><span class="translation"><br/>🇬🇧 <i>I buy the flowers.</i><br/>🇪🇸 <i>Compro las flores.</i></span></td>
+                            <td data-label="hören" class="mehr-verbs" style="display: none;"><span>Ich höre <strong class="plural-color">die</strong> Vögel.</span><span class="translation"><br/>🇬🇧 <i>I hear the birds.</i><br/>🇪🇸 <i>Escucho a los pájaros.</i></span></td>
+                            <td data-label="trinken" class="mehr-verbs" style="display: none;"><span>Ich trinke <strong class="plural-color">die</strong> Säfte.</span><span class="translation"><br/>🇬🇧 <i>I drink the juices.</i><br/>🇪🇸 <i>Bebo los jugos.</i></span></td>
+                            <td data-label="lieben" class="mehr-verbs" style="display: none;"><span>Ich liebe <strong class="plural-color">die</strong> Eltern.</span><span class="translation"><br/>🇬🇧 <i>I love the parents.</i><br/>🇪🇸 <i>Amo a los padres.</i></span></td>
+                            <td data-label="Mehr"><button class="arrow-btn" onclick="toggleVerbs(this)" title="Mehr Verben anzeigen">↻</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -322,7 +327,7 @@
 
                 <h4 class="text-lg font-bold mt-6 mb-2">Akkusativ</h4>
                  <p class="mb-4 text-sm">(Direct Object: Who or what is directly receiving the action?)<br>🇪🇸 (Objeto Directo: ¿Quién o qué recibe directamente la acción?)</p>
-                <table>
+                <table id="indefinite-akkusativ-table">
                     <thead>
                         <tr>
                             <th>Case</th>
@@ -332,12 +337,13 @@
                             <th>nehmen<br/><span style="font-size: 225%; text-align: center; display: block;">✋</span></th>
                             <th>mögen<br/><span style="font-size: 225%; text-align: center; display: block;">😍</span></th>
                             <th>kennen<br/><span style="font-size: 225%; text-align: center; display: block;">🧠</span></th>
-                            <th>brauchen<br/><span style="font-size: 225%; text-align: center; display: block;">🆘</span></th>
-                            <th>essen<br/><span style="font-size: 225%; text-align: center; display: block;">🍽️</span></th>
-                            <th>kaufen<br/><span style="font-size: 225%; text-align: center; display: block;">💰</span></th>
-                            <th>hören<br/><span style="font-size: 225%; text-align: center; display: block;">👂</span></th>
-                            <th>trinken<br/><span style="font-size: 225%; text-align: center; display: block;">🥤</span></th>
-                            <th>lieben<br/><span style="font-size: 225%; text-align: center; display: block;">❤️</span></th>
+                            <th class="mehr-verbs" style="display: none;">brauchen<br/><span style="font-size: 225%; text-align: center; display: block;">🆘</span></th>
+                            <th class="mehr-verbs" style="display: none;">essen<br/><span style="font-size: 225%; text-align: center; display: block;">🍽️</span></th>
+                            <th class="mehr-verbs" style="display: none;">kaufen<br/><span style="font-size: 225%; text-align: center; display: block;">💰</span></th>
+                            <th class="mehr-verbs" style="display: none;">hören<br/><span style="font-size: 225%; text-align: center; display: block;">👂</span></th>
+                            <th class="mehr-verbs" style="display: none;">trinken<br/><span style="font-size: 225%; text-align: center; display: block;">🥤</span></th>
+                            <th class="mehr-verbs" style="display: none;">lieben<br/><span style="font-size: 225%; text-align: center; display: block;">❤️</span></th>
+                            <th>Mehr</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -349,12 +355,13 @@
                             <td data-label="nehmen"><span>Ich nehme <strong class="der-color">einen</strong> Ball.</span><span class="translation"><br/>🇬🇧 <i>I take a ball.</i><br/>🇪🇸 <i>Tomo una pelota.</i></span></td>
                             <td data-label="mögen"><span>Ich mag <strong class="der-color">einen</strong> Lehrer.</span><span class="translation"><br/>🇬🇧 <i>I like a teacher.</i><br/>🇪🇸 <i>Me gusta un profesor.</i></span></td>
                             <td data-label="kennen"><span>Ich kenne <strong class="der-color">einen</strong> Arzt.</span><span class="translation"><br/>🇬🇧 <i>I know a doctor.</i><br/>🇪🇸 <i>Conozco a un doctor.</i></span></td>
-                            <td data-label="brauchen"><span>Ich brauche <strong class="der-color">einen</strong> Stift.</span><span class="translation"><br/>🇬🇧 <i>I need a pen.</i><br/>🇪🇸 <i>Necesito un bolígrafo.</i></span></td>
-                            <td data-label="essen"><span>Ich esse <strong class="der-color">einen</strong> Apfel.</span><span class="translation"><br/>🇬🇧 <i>I eat an apple.</i><br/>🇪🇸 <i>Como una manzana.</i></span></td>
-                            <td data-label="kaufen"><span>Ich kaufe <strong class="der-color">einen</strong> Wagen.</span><span class="translation"><br/>🇬🇧 <i>I buy a car.</i><br/>🇪🇸 <i>Compro un coche.</i></span></td>
-                            <td data-label="hören"><span>Ich höre <strong class="der-color">einen</strong> Hund.</span><span class="translation"><br/>🇬🇧 <i>I hear a dog.</i><br/>🇪🇸 <i>Escucho a un perro.</i></span></td>
-                            <td data-label="trinken"><span>Ich trinke <strong class="der-color">einen</strong> Kaffee.</span><span class="translation"><br/>🇬🇧 <i>I drink a coffee.</i><br/>🇪🇸 <i>Bebo un café.</i></span></td>
-                            <td data-label="lieben"><span>Ich liebe <strong class="der-color">einen</strong> Vater.</span><span class="translation"><br/>🇬🇧 <i>I love a father.</i><br/>🇪🇸 <i>Amo a un padre.</i></span></td>
+                            <td data-label="brauchen" class="mehr-verbs" style="display: none;"><span>Ich brauche <strong class="der-color">einen</strong> Stift.</span><span class="translation"><br/>🇬🇧 <i>I need a pen.</i><br/>🇪🇸 <i>Necesito un bolígrafo.</i></span></td>
+                            <td data-label="essen" class="mehr-verbs" style="display: none;"><span>Ich esse <strong class="der-color">einen</strong> Apfel.</span><span class="translation"><br/>🇬🇧 <i>I eat an apple.</i><br/>🇪🇸 <i>Como una manzana.</i></span></td>
+                            <td data-label="kaufen" class="mehr-verbs" style="display: none;"><span>Ich kaufe <strong class="der-color">einen</strong> Wagen.</span><span class="translation"><br/>🇬🇧 <i>I buy a car.</i><br/>🇪🇸 <i>Compro un coche.</i></span></td>
+                            <td data-label="hören" class="mehr-verbs" style="display: none;"><span>Ich höre <strong class="der-color">einen</strong> Hund.</span><span class="translation"><br/>🇬🇧 <i>I hear a dog.</i><br/>🇪🇸 <i>Escucho a un perro.</i></span></td>
+                            <td data-label="trinken" class="mehr-verbs" style="display: none;"><span>Ich trinke <strong class="der-color">einen</strong> Kaffee.</span><span class="translation"><br/>🇬🇧 <i>I drink a coffee.</i><br/>🇪🇸 <i>Bebo un café.</i></span></td>
+                            <td data-label="lieben" class="mehr-verbs" style="display: none;"><span>Ich liebe <strong class="der-color">einen</strong> Vater.</span><span class="translation"><br/>🇬🇧 <i>I love a father.</i><br/>🇪🇸 <i>Amo a un padre.</i></span></td>
+                            <td data-label="Mehr"><button class="arrow-btn" onclick="toggleVerbs(this)" title="Mehr Verben anzeigen">↻</button></td>
                         </tr>
                         <tr>
                             <td data-label="Case"><strong class="die-color">Feminin (f)</strong><br/><strong class="die-color">eine</strong></td>
@@ -364,12 +371,13 @@
                             <td data-label="nehmen"><span>Ich nehme <strong class="die-color">eine</strong> Tasche.</span><span class="translation"><br/>🇬🇧 <i>I take a bag.</i><br/>🇪🇸 <i>Tomo una bolsa.</i></span></td>
                             <td data-label="mögen"><span>Ich mag <strong class="die-color">eine</strong> Lehrerin.</span><span class="translation"><br/>🇬🇧 <i>I like a teacher.</i><br/>🇪🇸 <i>Me gusta una profesora.</i></span></td>
                             <td data-label="kennen"><span>Ich kenne <strong class="die-color">eine</strong> Ärztin.</span><span class="translation"><br/>🇬🇧 <i>I know a doctor.</i><br/>🇪🇸 <i>Conozco a una doctora.</i></span></td>
-                            <td data-label="brauchen"><span>Ich brauche <strong class="die-color">eine</strong> Lampe.</span><span class="translation"><br/>🇬🇧 <i>I need a lamp.</i><br/>🇪🇸 <i>Necesito una lámpara.</i></span></td>
-                            <td data-label="essen"><span>Ich esse <strong class="die-color">eine</strong> Suppe.</span><span class="translation"><br/>🇬🇧 <i>I eat a soup.</i><br/>🇪🇸 <i>Como una sopa.</i></span></td>
-                            <td data-label="kaufen"><span>Ich kaufe <strong class="die-color">eine</strong> Blume.</span><span class="translation"><br/>🇬🇧 <i>I buy a flower.</i><br/>🇪🇸 <i>Compro una flor.</i></span></td>
-                            <td data-label="hören"><span>Ich höre <strong class="die-color">eine</strong> Musik.</span><span class="translation"><br/>🇬🇧 <i>I hear music.</i><br/>🇪🇸 <i>Escucho música.</i></span></td>
-                            <td data-label="trinken"><span>Ich trinke <strong class="die-color">eine</strong> Milch.</span><span class="translation"><br/>🇬🇧 <i>I drink milk.</i><br/>🇪🇸 <i>Bebo leche.</i></span></td>
-                            <td data-label="lieben"><span>Ich liebe <strong class="die-color">eine</strong> Mutter.</span><span class="translation"><br/>🇬🇧 <i>I love a mother.</i><br/>🇪🇸 <i>Amo a una madre.</i></span></td>
+                            <td data-label="brauchen" class="mehr-verbs" style="display: none;"><span>Ich brauche <strong class="die-color">eine</strong> Lampe.</span><span class="translation"><br/>🇬🇧 <i>I need a lamp.</i><br/>🇪🇸 <i>Necesito una lámpara.</i></span></td>
+                            <td data-label="essen" class="mehr-verbs" style="display: none;"><span>Ich esse <strong class="die-color">eine</strong> Suppe.</span><span class="translation"><br/>🇬🇧 <i>I eat a soup.</i><br/>🇪🇸 <i>Como una sopa.</i></span></td>
+                            <td data-label="kaufen" class="mehr-verbs" style="display: none;"><span>Ich kaufe <strong class="die-color">eine</strong> Blume.</span><span class="translation"><br/>🇬🇧 <i>I buy a flower.</i><br/>🇪🇸 <i>Compro una flor.</i></span></td>
+                            <td data-label="hören" class="mehr-verbs" style="display: none;"><span>Ich höre <strong class="die-color">eine</strong> Musik.</span><span class="translation"><br/>🇬🇧 <i>I hear music.</i><br/>🇪🇸 <i>Escucho música.</i></span></td>
+                            <td data-label="trinken" class="mehr-verbs" style="display: none;"><span>Ich trinke <strong class="die-color">eine</strong> Milch.</span><span class="translation"><br/>🇬🇧 <i>I drink milk.</i><br/>🇪🇸 <i>Bebo leche.</i></span></td>
+                            <td data-label="lieben" class="mehr-verbs" style="display: none;"><span>Ich liebe <strong class="die-color">eine</strong> Mutter.</span><span class="translation"><br/>🇬🇧 <i>I love a mother.</i><br/>🇪🇸 <i>Amo a una madre.</i></span></td>
+                            <td data-label="Mehr"><button class="arrow-btn" onclick="toggleVerbs(this)" title="Mehr Verben anzeigen">↻</button></td>
                         </tr>
                         <tr>
                             <td data-label="Case"><strong class="das-color">Neutrum (n)</strong><br/><strong class="das-color">ein</strong></td>
@@ -379,12 +387,13 @@
                             <td data-label="nehmen"><span>Ich nehme <strong class="das-color">ein</strong> Buch.</span><span class="translation"><br/>🇬🇧 <i>I take a book.</i><br/>🇪🇸 <i>Tomo un libro.</i></span></td>
                             <td data-label="mögen"><span>Ich mag <strong class="das-color">ein</strong> Tier.</span><span class="translation"><br/>🇬🇧 <i>I like an animal.</i><br/>🇪🇸 <i>Me gusta un animal.</i></span></td>
                             <td data-label="kennen"><span>Ich kenne <strong class="das-color">ein</strong> Mädchen.</span><span class="translation"><br/>🇬🇧 <i>I know a girl.</i><br/>🇪🇸 <i>Conozco a una niña.</i></span></td>
-                            <td data-label="brauchen"><span>Ich brauche <strong class="das-color">ein</strong> Auto.</span><span class="translation"><br/>🇬🇧 <i>I need a car.</i><br/>🇪🇸 <i>Necesito un coche.</i></span></td>
-                            <td data-label="essen"><span>Ich esse <strong class="das-color">ein</strong> Brot.</span><span class="translation"><br/>🇬🇧 <i>I eat bread.</i><br/>🇪🇸 <i>Como pan.</i></span></td>
-                            <td data-label="kaufen"><span>Ich kaufe <strong class="das-color">ein</strong> Haus.</span><span class="translation"><br/>🇬🇧 <i>I buy a house.</i><br/>🇪🇸 <i>Compro una casa.</i></span></td>
-                            <td data-label="hören"><span>Ich höre <strong class="das-color">ein</strong> Radio.</span><span class="translation"><br/>🇬🇧 <i>I hear a radio.</i><br/>🇪🇸 <i>Escucho una radio.</i></span></td>
-                            <td data-label="trinken"><span>Ich trinke <strong class="das-color">ein</strong> Wasser.</span><span class="translation"><br/>🇬🇧 <i>I drink water.</i><br/>🇪🇸 <i>Bebo agua.</i></span></td>
-                            <td data-label="lieben"><span>Ich liebe <strong class="das-color">ein</strong> Baby.</span><span class="translation"><br/>🇬🇧 <i>I love a baby.</i><br/>🇪🇸 <i>Amo a un bebé.</i></span></td>
+                            <td data-label="brauchen" class="mehr-verbs" style="display: none;"><span>Ich brauche <strong class="das-color">ein</strong> Auto.</span><span class="translation"><br/>🇬🇧 <i>I need a car.</i><br/>🇪🇸 <i>Necesito un coche.</i></span></td>
+                            <td data-label="essen" class="mehr-verbs" style="display: none;"><span>Ich esse <strong class="das-color">ein</strong> Brot.</span><span class="translation"><br/>🇬🇧 <i>I eat bread.</i><br/>🇪🇸 <i>Como pan.</i></span></td>
+                            <td data-label="kaufen" class="mehr-verbs" style="display: none;"><span>Ich kaufe <strong class="das-color">ein</strong> Haus.</span><span class="translation"><br/>🇬🇧 <i>I buy a house.</i><br/>🇪🇸 <i>Compro una casa.</i></span></td>
+                            <td data-label="hören" class="mehr-verbs" style="display: none;"><span>Ich höre <strong class="das-color">ein</strong> Radio.</span><span class="translation"><br/>🇬🇧 <i>I hear a radio.</i><br/>🇪🇸 <i>Escucho una radio.</i></span></td>
+                            <td data-label="trinken" class="mehr-verbs" style="display: none;"><span>Ich trinke <strong class="das-color">ein</strong> Wasser.</span><span class="translation"><br/>🇬🇧 <i>I drink water.</i><br/>🇪🇸 <i>Bebo agua.</i></span></td>
+                            <td data-label="lieben" class="mehr-verbs" style="display: none;"><span>Ich liebe <strong class="das-color">ein</strong> Baby.</span><span class="translation"><br/>🇬🇧 <i>I love a baby.</i><br/>🇪🇸 <i>Amo a un bebé.</i></span></td>
+                            <td data-label="Mehr"><button class="arrow-btn" onclick="toggleVerbs(this)" title="Mehr Verben anzeigen">↻</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -532,7 +541,7 @@
 
                 <h4 class="text-lg font-bold mt-6 mb-2">Akkusativ</h4>
                  <p class="mb-4 text-sm">(Direct Object: Who or what is directly receiving the action?)<br>🇪🇸 (Objeto Directo: ¿Quién o qué recibe directamente la acción?)</p>
-                <table>
+                <table id="negation-akkusativ-table">
                     <thead>
                         <tr>
                             <th>Case</th>
@@ -542,12 +551,13 @@
                             <th>nehmen<br/><span style="font-size: 225%; text-align: center; display: block;">✋</span></th>
                             <th>mögen<br/><span style="font-size: 225%; text-align: center; display: block;">😍</span></th>
                             <th>kennen<br/><span style="font-size: 225%; text-align: center; display: block;">🧠</span></th>
-                            <th>brauchen<br/><span style="font-size: 225%; text-align: center; display: block;">🆘</span></th>
-                            <th>essen<br/><span style="font-size: 225%; text-align: center; display: block;">🍽️</span></th>
-                            <th>kaufen<br/><span style="font-size: 225%; text-align: center; display: block;">💰</span></th>
-                            <th>hören<br/><span style="font-size: 225%; text-align: center; display: block;">👂</span></th>
-                            <th>trinken<br/><span style="font-size: 225%; text-align: center; display: block;">🥤</span></th>
-                            <th>lieben<br/><span style="font-size: 225%; text-align: center; display: block;">❤️</span></th>
+                            <th class="mehr-verbs" style="display: none;">brauchen<br/><span style="font-size: 225%; text-align: center; display: block;">🆘</span></th>
+                            <th class="mehr-verbs" style="display: none;">essen<br/><span style="font-size: 225%; text-align: center; display: block;">🍽️</span></th>
+                            <th class="mehr-verbs" style="display: none;">kaufen<br/><span style="font-size: 225%; text-align: center; display: block;">💰</span></th>
+                            <th class="mehr-verbs" style="display: none;">hören<br/><span style="font-size: 225%; text-align: center; display: block;">👂</span></th>
+                            <th class="mehr-verbs" style="display: none;">trinken<br/><span style="font-size: 225%; text-align: center; display: block;">🥤</span></th>
+                            <th class="mehr-verbs" style="display: none;">lieben<br/><span style="font-size: 225%; text-align: center; display: block;">❤️</span></th>
+                            <th>Mehr</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -559,12 +569,13 @@
                             <td data-label="nehmen"><span>Ich nehme <strong class="der-color">keinen</strong> Ball.</span><span class="translation"><br/>🇬🇧 <i>I take no ball.</i><br/>🇪🇸 <i>No tomo ninguna pelota.</i></span></td>
                             <td data-label="mögen"><span>Ich mag <strong class="der-color">keinen</strong> Lehrer.</span><span class="translation"><br/>🇬🇧 <i>I like no teacher.</i><br/>🇪🇸 <i>No me gusta ningún profesor.</i></span></td>
                             <td data-label="kennen"><span>Ich kenne <strong class="der-color">keinen</strong> Arzt.</span><span class="translation"><br/>🇬🇧 <i>I know no doctor.</i><br/>🇪🇸 <i>No conozco a ningún doctor.</i></span></td>
-                            <td data-label="brauchen"><span>Ich brauche <strong class="der-color">keinen</strong> Stift.</span><span class="translation"><br/>🇬🇧 <i>I need no pen.</i><br/>🇪🇸 <i>No necesito ningún bolígrafo.</i></span></td>
-                            <td data-label="essen"><span>Ich esse <strong class="der-color">keinen</strong> Apfel.</span><span class="translation"><br/>🇬🇧 <i>I eat no apple.</i><br/>🇪🇸 <i>No como ninguna manzana.</i></span></td>
-                            <td data-label="kaufen"><span>Ich kaufe <strong class="der-color">keinen</strong> Wagen.</span><span class="translation"><br/>🇬🇧 <i>I buy no car.</i><br/>🇪🇸 <i>No compro ningún coche.</i></span></td>
-                            <td data-label="hören"><span>Ich höre <strong class="der-color">keinen</strong> Hund.</span><span class="translation"><br/>🇬🇧 <i>I hear no dog.</i><br/>🇪🇸 <i>No escucho a ningún perro.</i></span></td>
-                            <td data-label="trinken"><span>Ich trinke <strong class="der-color">keinen</strong> Kaffee.</span><span class="translation"><br/>🇬🇧 <i>I drink no coffee.</i><br/>🇪🇸 <i>No bebo ningún café.</i></span></td>
-                            <td data-label="lieben"><span>Ich liebe <strong class="der-color">keinen</strong> Vater.</span><span class="translation"><br/>🇬🇧 <i>I love no father.</i><br/>🇪🇸 <i>No amo a ningún padre.</i></span></td>
+                            <td data-label="brauchen" class="mehr-verbs" style="display: none;"><span>Ich brauche <strong class="der-color">keinen</strong> Stift.</span><span class="translation"><br/>🇬🇧 <i>I need no pen.</i><br/>🇪🇸 <i>No necesito ningún bolígrafo.</i></span></td>
+                            <td data-label="essen" class="mehr-verbs" style="display: none;"><span>Ich esse <strong class="der-color">keinen</strong> Apfel.</span><span class="translation"><br/>🇬🇧 <i>I eat no apple.</i><br/>🇪🇸 <i>No como ninguna manzana.</i></span></td>
+                            <td data-label="kaufen" class="mehr-verbs" style="display: none;"><span>Ich kaufe <strong class="der-color">keinen</strong> Wagen.</span><span class="translation"><br/>🇬🇧 <i>I buy no car.</i><br/>🇪🇸 <i>No compro ningún coche.</i></span></td>
+                            <td data-label="hören" class="mehr-verbs" style="display: none;"><span>Ich höre <strong class="der-color">keinen</strong> Hund.</span><span class="translation"><br/>🇬🇧 <i>I hear no dog.</i><br/>🇪🇸 <i>No escucho a ningún perro.</i></span></td>
+                            <td data-label="trinken" class="mehr-verbs" style="display: none;"><span>Ich trinke <strong class="der-color">keinen</strong> Kaffee.</span><span class="translation"><br/>🇬🇧 <i>I drink no coffee.</i><br/>🇪🇸 <i>No bebo ningún café.</i></span></td>
+                            <td data-label="lieben" class="mehr-verbs" style="display: none;"><span>Ich liebe <strong class="der-color">keinen</strong> Vater.</span><span class="translation"><br/>🇬🇧 <i>I love no father.</i><br/>🇪🇸 <i>No amo a ningún padre.</i></span></td>
+                            <td data-label="Mehr"><button class="arrow-btn" onclick="toggleVerbs(this)" title="Mehr Verben anzeigen">↻</button></td>
                         </tr>
                         <tr>
                             <td data-label="Case"><strong class="die-color">Feminin (f)</strong><br/><strong class="die-color">keine</strong></td>
@@ -574,12 +585,13 @@
                             <td data-label="nehmen"><span>Ich nehme <strong class="die-color">keine</strong> Tasche.</span><span class="translation"><br/>🇬🇧 <i>I take no bag.</i><br/>🇪🇸 <i>No tomo ninguna bolsa.</i></span></td>
                             <td data-label="mögen"><span>Ich mag <strong class="die-color">keine</strong> Lehrerin.</span><span class="translation"><br/>🇬🇧 <i>I like no teacher.</i><br/>🇪🇸 <i>No me gusta ninguna profesora.</i></span></td>
                             <td data-label="kennen"><span>Ich kenne <strong class="die-color">keine</strong> Ärztin.</span><span class="translation"><br/>🇬🇧 <i>I know no doctor.</i><br/>🇪🇸 <i>No conozco a ninguna doctora.</i></span></td>
-                            <td data-label="brauchen"><span>Ich brauche <strong class="die-color">keine</strong> Lampe.</span><span class="translation"><br/>🇬🇧 <i>I need no lamp.</i><br/>🇪🇸 <i>No necesito ninguna lámpara.</i></span></td>
-                            <td data-label="essen"><span>Ich esse <strong class="die-color">keine</strong> Suppe.</span><span class="translation"><br/>🇬🇧 <i>I eat no soup.</i><br/>🇪🇸 <i>No como ninguna sopa.</i></span></td>
-                            <td data-label="kaufen"><span>Ich kaufe <strong class="die-color">keine</strong> Blume.</span><span class="translation"><br/>🇬🇧 <i>I buy no flower.</i><br/>🇪🇸 <i>No compro ninguna flor.</i></span></td>
-                            <td data-label="hören"><span>Ich höre <strong class="die-color">keine</strong> Musik.</span><span class="translation"><br/>🇬🇧 <i>I hear no music.</i><br/>🇪🇸 <i>No escucho música.</i></span></td>
-                            <td data-label="trinken"><span>Ich trinke <strong class="die-color">keine</strong> Milch.</span><span class="translation"><br/>🇬🇧 <i>I drink no milk.</i><br/>🇪🇸 <i>No bebo leche.</i></span></td>
-                            <td data-label="lieben"><span>Ich liebe <strong class="die-color">keine</strong> Mutter.</span><span class="translation"><br/>🇬🇧 <i>I love no mother.</i><br/>🇪🇸 <i>No amo a ninguna madre.</i></span></td>
+                            <td data-label="brauchen" class="mehr-verbs" style="display: none;"><span>Ich brauche <strong class="die-color">keine</strong> Lampe.</span><span class="translation"><br/>🇬🇧 <i>I need no lamp.</i><br/>🇪🇸 <i>No necesito ninguna lámpara.</i></span></td>
+                            <td data-label="essen" class="mehr-verbs" style="display: none;"><span>Ich esse <strong class="die-color">keine</strong> Suppe.</span><span class="translation"><br/>🇬🇧 <i>I eat no soup.</i><br/>🇪🇸 <i>No como ninguna sopa.</i></span></td>
+                            <td data-label="kaufen" class="mehr-verbs" style="display: none;"><span>Ich kaufe <strong class="die-color">keine</strong> Blume.</span><span class="translation"><br/>🇬🇧 <i>I buy no flower.</i><br/>🇪🇸 <i>No compro ninguna flor.</i></span></td>
+                            <td data-label="hören" class="mehr-verbs" style="display: none;"><span>Ich höre <strong class="die-color">keine</strong> Musik.</span><span class="translation"><br/>🇬🇧 <i>I hear no music.</i><br/>🇪🇸 <i>No escucho música.</i></span></td>
+                            <td data-label="trinken" class="mehr-verbs" style="display: none;"><span>Ich trinke <strong class="die-color">keine</strong> Milch.</span><span class="translation"><br/>🇬🇧 <i>I drink no milk.</i><br/>🇪🇸 <i>No bebo leche.</i></span></td>
+                            <td data-label="lieben" class="mehr-verbs" style="display: none;"><span>Ich liebe <strong class="die-color">keine</strong> Mutter.</span><span class="translation"><br/>🇬🇧 <i>I love no mother.</i><br/>🇪🇸 <i>No amo a ninguna madre.</i></span></td>
+                            <td data-label="Mehr"><button class="arrow-btn" onclick="toggleVerbs(this)" title="Mehr Verben anzeigen">↻</button></td>
                         </tr>
                         <tr>
                             <td data-label="Case"><strong class="das-color">Neutrum (n)</strong><br/><strong class="das-color">kein</strong></td>
@@ -589,12 +601,13 @@
                             <td data-label="nehmen"><span>Ich nehme <strong class="das-color">kein</strong> Buch.</span><span class="translation"><br/>🇬🇧 <i>I take no book.</i><br/>🇪🇸 <i>No tomo ningún libro.</i></span></td>
                             <td data-label="mögen"><span>Ich mag <strong class="das-color">kein</strong> Tier.</span><span class="translation"><br/>🇬🇧 <i>I like no animal.</i><br/>🇪🇸 <i>No me gusta ningún animal.</i></span></td>
                             <td data-label="kennen"><span>Ich kenne <strong class="das-color">kein</strong> Mädchen.</span><span class="translation"><br/>🇬🇧 <i>I know no girl.</i><br/>🇪🇸 <i>No conozco a ninguna niña.</i></span></td>
-                            <td data-label="brauchen"><span>Ich brauche <strong class="das-color">kein</strong> Auto.</span><span class="translation"><br/>🇬🇧 <i>I need no car.</i><br/>🇪🇸 <i>No necesito ningún coche.</i></span></td>
-                            <td data-label="essen"><span>Ich esse <strong class="das-color">kein</strong> Brot.</span><span class="translation"><br/>🇬🇧 <i>I eat no bread.</i><br/>🇪🇸 <i>No como pan.</i></span></td>
-                            <td data-label="kaufen"><span>Ich kaufe <strong class="das-color">kein</strong> Haus.</span><span class="translation"><br/>🇬🇧 <i>I buy no house.</i><br/>🇪🇸 <i>No compro ninguna casa.</i></span></td>
-                            <td data-label="hören"><span>Ich höre <strong class="das-color">kein</strong> Radio.</span><span class="translation"><br/>🇬🇧 <i>I hear no radio.</i><br/>🇪🇸 <i>No escucho ninguna radio.</i></span></td>
-                            <td data-label="trinken"><span>Ich trinke <strong class="das-color">kein</strong> Wasser.</span><span class="translation"><br/>🇬🇧 <i>I drink no water.</i><br/>🇪🇸 <i>No bebo agua.</i></span></td>
-                            <td data-label="lieben"><span>Ich liebe <strong class="das-color">kein</strong> Baby.</span><span class="translation"><br/>🇬🇧 <i>I love no baby.</i><br/>🇪🇸 <i>No amo a ningún bebé.</i></span></td>
+                            <td data-label="brauchen" class="mehr-verbs" style="display: none;"><span>Ich brauche <strong class="das-color">kein</strong> Auto.</span><span class="translation"><br/>🇬🇧 <i>I need no car.</i><br/>🇪🇸 <i>No necesito ningún coche.</i></span></td>
+                            <td data-label="essen" class="mehr-verbs" style="display: none;"><span>Ich esse <strong class="das-color">kein</strong> Brot.</span><span class="translation"><br/>🇬🇧 <i>I eat no bread.</i><br/>🇪🇸 <i>No como pan.</i></span></td>
+                            <td data-label="kaufen" class="mehr-verbs" style="display: none;"><span>Ich kaufe <strong class="das-color">kein</strong> Haus.</span><span class="translation"><br/>🇬🇧 <i>I buy no house.</i><br/>🇪🇸 <i>No compro ninguna casa.</i></span></td>
+                            <td data-label="hören" class="mehr-verbs" style="display: none;"><span>Ich höre <strong class="das-color">kein</strong> Radio.</span><span class="translation"><br/>🇬🇧 <i>I hear no radio.</i><br/>🇪🇸 <i>No escucho ninguna radio.</i></span></td>
+                            <td data-label="trinken" class="mehr-verbs" style="display: none;"><span>Ich trinke <strong class="das-color">kein</strong> Wasser.</span><span class="translation"><br/>🇬🇧 <i>I drink no water.</i><br/>🇪🇸 <i>No bebo agua.</i></span></td>
+                            <td data-label="lieben" class="mehr-verbs" style="display: none;"><span>Ich liebe <strong class="das-color">kein</strong> Baby.</span><span class="translation"><br/>🇬🇧 <i>I love no baby.</i><br/>🇪🇸 <i>No amo a ningún bebé.</i></span></td>
+                            <td data-label="Mehr"><button class="arrow-btn" onclick="toggleVerbs(this)" title="Mehr Verben anzeigen">↻</button></td>
                         </tr>
                         <tr>
                             <td data-label="Case"><strong class="plural-color">Plural</strong><br/><strong class="plural-color">keine</strong></td>
@@ -604,12 +617,13 @@
                             <td data-label="nehmen"><span>Ich nehme <strong class="plural-color">keine</strong> Bücher.</span><span class="translation"><br/>🇬🇧 <i>I take no books.</i><br/>🇪🇸 <i>No tomo libros.</i></span></td>
                             <td data-label="mögen"><span>Ich mag <strong class="plural-color">keine</strong> Tiere.</span><span class="translation"><br/>🇬🇧 <i>I like no animals.</i><br/>🇪🇸 <i>No me gustan los animales.</i></span></td>
                             <td data-label="kennen"><span>Ich kenne <strong class="plural-color">keine</strong> Leute.</span><span class="translation"><br/>🇬🇧 <i>I know no people.</i><br/>🇪🇸 <i>No conozco a nadie.</i></span></td>
-                            <td data-label="brauchen"><span>Ich brauche <strong class="plural-color">keine</strong> Stifte.</span><span class="translation"><br/>🇬🇧 <i>I need no pens.</i><br/>🇪🇸 <i>No necesito bolígrafos.</i></span></td>
-                            <td data-label="essen"><span>Ich esse <strong class="plural-color">keine</strong> Äpfel.</span><span class="translation"><br/>🇬🇧 <i>I eat no apples.</i><br/>🇪🇸 <i>No como manzanas.</i></span></td>
-                            <td data-label="kaufen"><span>Ich kaufe <strong class="plural-color">keine</strong> Blumen.</span><span class="translation"><br/>🇬🇧 <i>I buy no flowers.</i><br/>🇪🇸 <i>No compro flores.</i></span></td>
-                            <td data-label="hören"><span>Ich höre <strong class="plural-color">keine</strong> Vögel.</span><span class="translation"><br/>🇬🇧 <i>I hear no birds.</i><br/>🇪🇸 <i>No escucho pájaros.</i></span></td>
-                            <td data-label="trinken"><span>Ich trinke <strong class="plural-color">keine</strong> Säfte.</span><span class="translation"><br/>🇬🇧 <i>I drink no juices.</i><br/>🇪🇸 <i>No bebo jugos.</i></span></td>
-                            <td data-label="lieben"><span>Ich liebe <strong class="plural-color">keine</strong> Eltern.</span><span class="translation"><br/>🇬🇧 <i>I love no parents.</i><br/>🇪🇸 <i>No amo a ningún padre.</i></span></td>
+                            <td data-label="brauchen" class="mehr-verbs" style="display: none;"><span>Ich brauche <strong class="plural-color">keine</strong> Stifte.</span><span class="translation"><br/>🇬🇧 <i>I need no pens.</i><br/>🇪🇸 <i>No necesito bolígrafos.</i></span></td>
+                            <td data-label="essen" class="mehr-verbs" style="display: none;"><span>Ich esse <strong class="plural-color">keine</strong> Äpfel.</span><span class="translation"><br/>🇬🇧 <i>I eat no apples.</i><br/>🇪🇸 <i>No como manzanas.</i></span></td>
+                            <td data-label="kaufen" class="mehr-verbs" style="display: none;"><span>Ich kaufe <strong class="plural-color">keine</strong> Blumen.</span><span class="translation"><br/>🇬🇧 <i>I buy no flowers.</i><br/>🇪🇸 <i>No compro flores.</i></span></td>
+                            <td data-label="hören" class="mehr-verbs" style="display: none;"><span>Ich höre <strong class="plural-color">keine</strong> Vögel.</span><span class="translation"><br/>🇬🇧 <i>I hear no birds.</i><br/>🇪🇸 <i>No escucho pájaros.</i></span></td>
+                            <td data-label="trinken" class="mehr-verbs" style="display: none;"><span>Ich trinke <strong class="plural-color">keine</strong> Säfte.</span><span class="translation"><br/>🇬🇧 <i>I drink no juices.</i><br/>🇪🇸 <i>No bebo jugos.</i></span></td>
+                            <td data-label="lieben" class="mehr-verbs" style="display: none;"><span>Ich liebe <strong class="plural-color">keine</strong> Eltern.</span><span class="translation"><br/>🇬🇧 <i>I love no parents.</i><br/>🇪🇸 <i>No amo a ningún padre.</i></span></td>
+                            <td data-label="Mehr"><button class="arrow-btn" onclick="toggleVerbs(this)" title="Mehr Verben anzeigen">↻</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -772,6 +786,28 @@
     </div>
   </details>
 
+<style>
+.arrow-btn {
+    background: none;
+    border: none;
+    font-size: 1.2em !important;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    color: #3b82f6;
+}
+
+.arrow-btn:hover {
+    background-color: #f3f4f6;
+    transform: scale(1.1);
+}
+
+.arrow-btn:active {
+    transform: scale(0.95);
+}
+</style>
+
 <script>
 // Mobile tap-to-expand functionality for table cells
 document.addEventListener('DOMContentLoaded', function() {
@@ -807,6 +843,53 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Toggle verb visibility function
+function toggleVerbs(button) {
+    const table = button.closest('table');
+    const mehrHeaders = table.querySelectorAll('th.mehr-verbs');
+    const mehrCells = table.querySelectorAll('td.mehr-verbs');
+    
+    // Get the first 6 verb headers and cells (haben, sehen, finden, nehmen, mögen, kennen)
+    const firstHeaders = table.querySelectorAll('th:nth-child(2), th:nth-child(3), th:nth-child(4), th:nth-child(5), th:nth-child(6), th:nth-child(7)');
+    const firstCells = table.querySelectorAll('td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child(6), td:nth-child(7)');
+    
+    const isShowingMore = mehrHeaders.length > 0 && mehrHeaders[0].style.display !== 'none';
+    
+    if (isShowingMore) {
+        // Currently showing more verbs, switch back to first 6
+        mehrHeaders.forEach(header => {
+            header.style.display = 'none';
+        });
+        mehrCells.forEach(cell => {
+            cell.style.display = 'none';
+        });
+        firstHeaders.forEach(header => {
+            header.style.display = '';
+        });
+        firstCells.forEach(cell => {
+            cell.style.display = '';
+        });
+        button.textContent = '↻';
+        button.title = 'Mehr Verben anzeigen';
+    } else {
+        // Currently showing first 6, switch to last 6
+        firstHeaders.forEach(header => {
+            header.style.display = 'none';
+        });
+        firstCells.forEach(cell => {
+            cell.style.display = 'none';
+        });
+        mehrHeaders.forEach(header => {
+            header.style.display = '';
+        });
+        mehrCells.forEach(cell => {
+            cell.style.display = '';
+        });
+        button.textContent = '↶';
+        button.title = 'Weniger Verben anzeigen';
+    }
+}
 </script>
 
 </body>
