@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Einkaufsvokabular (Kapitel 1) - Deutsche Sprachreferenz für A1</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* Basic styles for readability - matching styles.css color system */
+  .der-color { color: red; font-weight: bold; } /* Red for 'der' (masculine) */
+  .die-color { color: blue; font-weight: bold; } /* Blue for 'die' (feminine) */
+  .das-color { color: black; font-weight: bold; } /* Black for 'das' (neuter) */
+  body { font-family: sans-serif; line-height: 1.6; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 12px; border: 1px solid #ddd; text-align: left; vertical-align: top; }
+  th { background-color: #f4f4f4; }
+  tbody tr:nth-child(odd) { background-color: #f9f9f9; }
+  h1 { font-size: 2.5em; text-align: center; margin-bottom: 20px; }
+  .back-home { display: block; text-align: center; margin: 20px; font-size: 1.2em; }
+  
+  /* Make first column text and emoji with increased sizing - matching other files */
+  td[data-label="Substantiv"] strong span {
+    font-size: 1.9008em !important;
+  }
+  td[data-label="Substantiv"] strong .der-color,
+  td[data-label="Substantiv"] strong .die-color,
+  td[data-label="Substantiv"] strong .das-color {
+    font-size: 1.9008em !important;
+  }
+  
+  /* Default: emoji inline to the right with larger size */
+  .emoji-small {
+    display: inline;
+    margin-left: 5px;
+    font-size: 2.2464em !important;
+  }
+  
+  /* When articles are hidden: emoji below with consistent size */
+  .emoji-below {
+    display: block !important;
+    margin-top: 5px !important;
+    margin-left: 0 !important;
+    font-size: 2.2464em !important;
+  }
+</style>
+</head>
+<body>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <a href="substantiv.html" class="back-home">🏠 Zurück zu Substantiv / Back to Substantiv</a>
+    
+    <div class="toggle-container" style="margin: 0;">
+      <label for="toggle-articles" class="toggle-label">
+        <input type="checkbox" id="toggle-articles">
+        <span class="toggle-slider"></span>
+        Artikel ausblenden / Hide Articles
+      </label>
+    </div>
+    
+    <div style="width: 200px;"></div> <!-- Spacer for balance -->
+  </div>
+
+  <h1>🛒 Einkaufsvokabular (Kapitel 1)</h1>
+
+  <details id="einkaufsvokabular-section" open>
+    <summary>Einkaufsvokabular</summary>
+    <div class="content-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th data-label="Substantiv">🇩🇪 Substantiv <br/> 🇬🇧 Noun</th>
+            <th data-label="Aussprache Englisch Spanisch">🇩🇪 Aussprache <br/> 🇬🇧 Englisch <br/> 🇪🇸 Spanisch</th>
+            <th data-label="Beispielsatz">Beispielsatz</th>
+            <th data-label="Beispielsatz">Beispielsatz</th>
+            <th data-label="Definiter Artikel (Nominativ)">Definiter Artikel (Nominativ)</th>
+            <th data-label="Definiter Artikel (Akkusativ)">Definiter Artikel (Akkusativ)</th>
+            <th data-label="Indefiniter Artikel (Nominativ)">Indefiniter Artikel (Nominativ)</th>
+            <th data-label="Indefiniter Artikel (Akkusativ)">Indefiniter Artikel (Akkusativ)</th>
+            <th data-label="Negation (Nominativ)">Negation (Nominativ)</th>
+            <th data-label="Negation (Akkusativ)">Negation (Akkusativ)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- DER Nouns -->
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Beleg</span> <span class="emoji-small">🧾</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ bəˈleːk/ <br/> 🇬🇧 <i>Receipt</i> <br/> 🇪🇸 <i>Recibo / Comprobante</i></td>
+            <td data-label="Beispielsatz">Haben Sie den <strong><span class="der-color">Beleg</span></strong>? <br/> 🇬🇧 <i>Do you have the receipt?</i> <br/> 🇪🇸 <i>¿Tiene el recibo?</i></td>
+            <td data-label="Beispielsatz">Ich brauche einen <strong><span class="der-color">Beleg</span></strong> für die Rückgabe. <br/> 🇬🇧 <i>I need a receipt for the return.</i> <br/> 🇪🇸 <i>Necesito un recibo para la devolución.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Beleg</span></strong> ist hier.<br/>🇬🇧 <i>The receipt is here.</i><br/>🇪🇸 <i>El recibo está aquí.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich nehme <strong><span class="der-color">den Beleg</span></strong>.<br/>🇬🇧 <i>I'll take the receipt.</i><br/>🇪🇸 <i>Tomo el recibo.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Beleg</span></strong>.<br/>🇬🇧 <i>This is a receipt.</i><br/>🇪🇸 <i>Este es un recibo.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Kann ich bitte <strong><span class="der-color">einen Beleg</span></strong> haben?<br/>🇬🇧 <i>Can I have a receipt, please?</i><br/>🇪🇸 <i>¿Me puede dar un recibo, por favor?</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="der-color">kein Beleg</span></strong>.<br/>🇬🇧 <i>That is not a receipt.</i><br/>🇪🇸 <i>Eso no es un recibo.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="der-color">keinen Beleg</span></strong>.<br/>🇬🇧 <i>I don't have a receipt.</i><br/>🇪🇸 <i>No tengo recibo.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Cent</span> <span class="emoji-small">🪙</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ sɛnt/ <br/> 🇬🇧 <i>Cent</i> <br/> 🇪🇸 <i>Céntimo</i></td>
+            <td data-label="Beispielsatz">Das kostet 50 <strong><span class="der-color">Cent</span></strong>. <br/> 🇬🇧 <i>That costs 50 cents.</i> <br/> 🇪🇸 <i>Eso cuesta 50 céntimos.</i></td>
+            <td data-label="Beispielsatz">Ich habe nur noch einen <strong><span class="der-color">Cent</span></strong>. <br/> 🇬🇧 <i>I only have one cent left.</i> <br/> 🇪🇸 <i>Solo me queda un céntimo.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Cent</span></strong> ist eine Münze.<br/>🇬🇧 <i>The cent is a coin.</i><br/>🇪🇸 <i>El céntimo es una moneda.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich brauche <strong><span class="der-color">den Cent</span></strong>.<br/>🇬🇧 <i>I need the cent.</i><br/>🇪🇸 <i>Necesito el céntimo.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Cent</span></strong>.<br/>🇬🇧 <i>This is one cent.</i><br/>🇪🇸 <i>Esto es un céntimo.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich finde <strong><span class="der-color">einen Cent</span></strong>.<br/>🇬🇧 <i>I find a cent.</i><br/>🇪🇸 <i>Encuentro un céntimo.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="der-color">kein Cent</span></strong>.<br/>🇬🇧 <i>That is not a cent.</i><br/>🇪🇸 <i>Eso no es un céntimo.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="der-color">keinen Cent</span></strong>.<br/>🇬🇧 <i>I don't have a cent.</i><br/>🇪🇸 <i>No tengo ni un céntimo.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Einkaufswagen</span> <span class="emoji-small">🛒</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ ˈaɪ̯nkaʊ̯fsˌvaːɡn̩/ <br/> 🇬🇧 <i>Shopping cart</i> <br/> 🇪🇸 <i>Carrito de compras</i></td>
+            <td data-label="Beispielsatz">Ich nehme <strong><span class="der-color">einen Einkaufswagen</span></strong>. <br/> 🇬🇧 <i>I'll take a shopping cart.</i> <br/> 🇪🇸 <i>Cojo un carrito de compras.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Der Einkaufswagen</span></strong> ist voll. <br/> 🇬🇧 <i>The shopping cart is full.</i> <br/> 🇪🇸 <i>El carrito de compras está lleno.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Einkaufswagen</span></strong> ist groß.<br/>🇬🇧 <i>The shopping cart is big.</i><br/>🇪🇸 <i>El carrito de compras es grande.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich schiebe <strong><span class="der-color">den Einkaufswagen</span></strong>.<br/>🇬🇧 <i>I'm pushing the shopping cart.</i><br/>🇪🇸 <i>Empujo el carrito.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Einkaufswagen</span></strong>.<br/>🇬🇧 <i>This is a shopping cart.</i><br/>🇪🇸 <i>Este es un carrito.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="der-color">einen Einkaufswagen</span></strong>.<br/>🇬🇧 <i>I need a shopping cart.</i><br/>🇪🇸 <i>Necesito un carrito.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Einkaufswagen</span></strong> ist frei.<br/>🇬🇧 <i>No shopping cart is free.</i><br/>🇪🇸 <i>No hay carritos libres.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen Einkaufswagen</span></strong>.<br/>🇬🇧 <i>I can't find a shopping cart.</i><br/>🇪🇸 <i>No encuentro un carrito.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Euro</span> <span class="emoji-small">💶</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ ˈɔʏʁo/ <br/> 🇬🇧 <i>Euro</i> <br/> 🇪🇸 <i>Euro</i></td>
+            <td data-label="Beispielsatz">Das kostet fünf <strong><span class="der-color">Euro</span></strong>. <br/> 🇬🇧 <i>That costs five euros.</i> <br/> 🇪🇸 <i>Eso cuesta cinco euros.</i></td>
+            <td data-label="Beispielsatz">Ich habe zehn <strong><span class="der-color">Euro</span></strong>. <br/> 🇬🇧 <i>I have ten euros.</i> <br/> 🇪🇸 <i>Tengo diez euros.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Euro</span></strong> ist die Währung.<br/>🇬🇧 <i>The Euro is the currency.</i><br/>🇪🇸 <i>El euro es la moneda.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich bezahle mit <strong><span class="der-color">dem Euro</span></strong>.<br/>🇬🇧 <i>I pay with the Euro.</i><br/>🇪🇸 <i>Pago con el euro.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Euro</span></strong>.<br/>🇬🇧 <i>This is one Euro.</i><br/>🇪🇸 <i>Esto es un euro.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="der-color">einen Euro</span></strong>.<br/>🇬🇧 <i>I need one Euro.</i><br/>🇪🇸 <i>Necesito un euro.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="der-color">kein Euro</span></strong>.<br/>🇬🇧 <i>That is not a Euro.</i><br/>🇪🇸 <i>Eso no es un euro.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="der-color">keinen Euro</span></strong>.<br/>🇬🇧 <i>I don't have a Euro.</i><br/>🇪🇸 <i>No tengo un euro.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Korb</span> <span class="emoji-small">🧺</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ kɔʁp/ <br/> 🇬🇧 <i>Basket</i> <br/> 🇪🇸 <i>Cesta</i></td>
+            <td data-label="Beispielsatz">Ich trage <strong><span class="der-color">einen Korb</span></strong>. <br/> 🇬🇧 <i>I'm carrying a basket.</i> <br/> 🇪🇸 <i>Llevo una cesta.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Der Korb</span></strong> ist leer. <br/> 🇬🇧 <i>The basket is empty.</i> <br/> 🇪🇸 <i>La cesta está vacía.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Korb</span></strong> ist klein.<br/>🇬🇧 <i>The basket is small.</i><br/>🇪🇸 <i>La cesta es pequeña.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich nehme <strong><span class="der-color">den Korb</span></strong>.<br/>🇬🇧 <i>I'll take the basket.</i><br/>🇪🇸 <i>Tomo la cesta.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Korb</span></strong>.<br/>🇬🇧 <i>This is a basket.</i><br/>🇪🇸 <i>Esta es una cesta.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="der-color">einen Korb</span></strong>.<br/>🇬🇧 <i>I need a basket.</i><br/>🇪🇸 <i>Necesito una cesta.</i></td>
+            <td data-label="Negation (Nominativ)">Hier ist <strong><span class="der-color">kein Korb</span></strong>.<br/>🇬🇧 <i>There is no basket here.</i><br/>🇪🇸 <i>Aquí no hay cesta.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen Korb</span></strong>.<br/>🇬🇧 <i>I can't find a basket.</i><br/>🇪🇸 <i>No encuentro una cesta.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Kunde</span> <span class="emoji-small">👨‍🦱</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ ˈkʊndə/ <br/> 🇬🇧 <i>Customer (male)</i> <br/> 🇪🇸 <i>Cliente</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Der Kunde</span></strong> ist zufrieden. <br/> 🇬🇧 <i>The customer is satisfied.</i> <br/> 🇪🇸 <i>El cliente está satisfecho.</i></td>
+            <td data-label="Beispielsatz">Ich bin <strong><span class="der-color">ein Kunde</span></strong>. <br/> 🇬🇧 <i>I am a customer.</i> <br/> 🇪🇸 <i>Soy un cliente.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Kunde</span></strong> fragt.<br/>🇬🇧 <i>The customer asks.</i><br/>🇪🇸 <i>El cliente pregunta.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich helfe <strong><span class="der-color">dem Kunden</span></strong>.<br/>🇬🇧 <i>I help the customer.</i><br/>🇪🇸 <i>Ayudo al cliente.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Hier ist <strong><span class="der-color">ein Kunde</span></strong>.<br/>🇬🇧 <i>Here is a customer.</i><br/>🇪🇸 <i>Aquí hay un cliente.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="der-color">einen Kunden</span></strong>.<br/>🇬🇧 <i>I see a customer.</i><br/>🇪🇸 <i>Veo a un cliente.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="der-color">kein Kunde</span></strong>.<br/>🇬🇧 <i>That is not a customer.</i><br/>🇪🇸 <i>Ese no es un cliente.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="der-color">keinen Kunden</span></strong>.<br/>🇬🇧 <i>I don't see a customer.</i><br/>🇪🇸 <i>No veo a ningún cliente.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Laden</span> <span class="emoji-small">🏪</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ ˈlaːdn̩/ <br/> 🇬🇧 <i>Store / Shop</i> <br/> 🇪🇸 <i>Tienda</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Der Laden</span></strong> ist geschlossen. <br/> 🇬🇧 <i>The store is closed.</i> <br/> 🇪🇸 <i>La tienda está cerrada.</i></td>
+            <td data-label="Beispielsatz">Ich gehe in <strong><span class="der-color">den Laden</span></strong>. <br/> 🇬🇧 <i>I'm going to the store.</i> <br/> 🇪🇸 <i>Voy a la tienda.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Laden</span></strong> ist klein.<br/>🇬🇧 <i>The shop is small.</i><br/>🇪🇸 <i>La tienda es pequeña.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="der-color">den Laden</span></strong>.<br/>🇬🇧 <i>I'm visiting the shop.</i><br/>🇪🇸 <i>Visito la tienda.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Laden</span></strong>.<br/>🇬🇧 <i>This is a shop.</i><br/>🇪🇸 <i>Esta es una tienda.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen Laden</span></strong>.<br/>🇬🇧 <i>I'm looking for a shop.</i><br/>🇪🇸 <i>Busco una tienda.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="der-color">kein Laden</span></strong>.<br/>🇬🇧 <i>That is not a shop.</i><br/>🇪🇸 <i>Eso no es una tienda.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen Laden</span></strong>.<br/>🇬🇧 <i>I can't find a shop.</i><br/>🇪🇸 <i>No encuentro una tienda.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Preis</span> <span class="emoji-small">🏷️</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ pʁaɪ̯s/ <br/> 🇬🇧 <i>Price</i> <br/> 🇪🇸 <i>Precio</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Der Preis</span></strong> ist zu hoch. <br/> 🇬🇧 <i>The price is too high.</i> <br/> 🇪🇸 <i>El precio es demasiado alto.</i></td>
+            <td data-label="Beispielsatz">Was ist <strong><span class="der-color">der Preis</span></strong>? <br/> 🇬🇧 <i>What is the price?</i> <br/> 🇪🇸 <i>¿Cuál es el precio?</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Preis</span></strong> ist gut.<br/>🇬🇧 <i>The price is good.</i><br/>🇪🇸 <i>El precio es bueno.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich kenne <strong><span class="der-color">den Preis</span></strong>.<br/>🇬🇧 <i>I know the price.</i><br/>🇪🇸 <i>Sé el precio.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein</span></strong> guter <strong><span class="der-color">Preis</span></strong>.<br/>🇬🇧 <i>That is a good price.</i><br/>🇪🇸 <i>Ese es un buen precio.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Das hat <strong><span class="der-color">einen</span></strong> hohen <strong><span class="der-color">Preis</span></strong>.<br/>🇬🇧 <i>That has a high price.</i><br/>🇪🇸 <i>Eso tiene un precio alto.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="der-color">kein</span></strong> guter <strong><span class="der-color">Preis</span></strong>.<br/>🇬🇧 <i>That is not a good price.</i><br/>🇪🇸 <i>Ese no es un buen precio.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich zahle <strong><span class="der-color">keinen Preis</span></strong>.<br/>🇬🇧 <i>I'm paying no price.</i><br/>🇪🇸 <i>No pago ningún precio.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Rabatt</span> <span class="emoji-small">💰</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ ʁaˈbat/ <br/> 🇬🇧 <i>Discount</i> <br/> 🇪🇸 <i>Descuento</i></td>
+            <td data-label="Beispielsatz">Gibt es <strong><span class="der-color">einen Rabatt</span></strong>? <br/> 🇬🇧 <i>Is there a discount?</i> <br/> 🇪🇸 <i>¿Hay un descuento?</i></td>
+            <td data-label="Beispielsatz">Ich bekomme <strong><span class="der-color">einen Rabatt</span></strong>. <br/> 🇬🇧 <i>I'm getting a discount.</i> <br/> 🇪🇸 <i>Recibo un descuento.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Rabatt</span></strong> ist 10 Prozent.<br/>🇬🇧 <i>The discount is 10 percent.</i><br/>🇪🇸 <i>El descuento es del 10 por ciento.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich möchte <strong><span class="der-color">den Rabatt</span></strong>.<br/>🇬🇧 <i>I want the discount.</i><br/>🇪🇸 <i>Quiero el descuento.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Rabatt</span></strong>.<br/>🇬🇧 <i>This is a discount.</i><br/>🇪🇸 <i>Esto es un descuento.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich bekomme <strong><span class="der-color">einen Rabatt</span></strong>.<br/>🇬🇧 <i>I get a discount.</i><br/>🇪🇸 <i>Obtengo un descuento.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="der-color">kein Rabatt</span></strong>.<br/>🇬🇧 <i>That is not a discount.</i><br/>🇪🇸 <i>Eso no es un descuento.</i></td>
+            <td data-label="Negation (Akkusativ)">Es gibt <strong><span class="der-color">keinen Rabatt</span></strong>.<br/>🇬🇧 <i>There is no discount.</i><br/>🇪🇸 <i>No hay descuento.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Supermarkt</span> <span class="emoji-small">🛒</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ ˈzuːpɐmarkt/ <br/> 🇬🇧 <i>Supermarket</i> <br/> 🇪🇸 <i>Supermercado</i></td>
+            <td data-label="Beispielsatz">Ich kaufe im <strong><span class="der-color">Supermarkt</span></strong> ein. <br/> 🇬🇧 <i>I shop at the supermarket.</i> <br/> 🇪🇸 <i>Compro en el supermercado.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Der Supermarkt</span></strong> ist groß. <br/> 🇬🇧 <i>The supermarket is big.</i> <br/> 🇪🇸 <i>El supermercado es grande.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Supermarkt</span></strong> ist geöffnet.<br/>🇬🇧 <i>The supermarket is open.</i><br/>🇪🇸 <i>El supermercado está abierto.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich gehe in <strong><span class="der-color">den Supermarkt</span></strong>.<br/>🇬🇧 <i>I'm going to the supermarket.</i><br/>🇪🇸 <i>Voy al supermercado.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Supermarkt</span></strong>.<br/>🇬🇧 <i>This is a supermarket.</i><br/>🇪🇸 <i>Este es un supermercado.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen Supermarkt</span></strong>.<br/>🇬🇧 <i>I'm looking for a supermarket.</i><br/>🇪🇸 <i>Busco un supermercado.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="der-color">kein Supermarkt</span></strong>.<br/>🇬🇧 <i>That is not a supermarket.</i><br/>🇪🇸 <i>Eso no es un supermercado.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen Supermarkt</span></strong>.<br/>🇬🇧 <i>I can't find a supermarket.</i><br/>🇪🇸 <i>No encuentro un supermercado.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Verkäufer</span> <span class="emoji-small">👨‍💼</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ fɛɐ̯ˈkɔʏ̯fɐ/ <br/> 🇬🇧 <i>Salesperson (male)</i> <br/> 🇪🇸 <i>Vendedor</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Der Verkäufer</span></strong> ist sehr freundlich. <br/> 🇬🇧 <i>The salesperson is very friendly.</i> <br/> 🇪🇸 <i>El vendedor es muy amable.</i></td>
+            <td data-label="Beispielsatz">Ich frage <strong><span class="der-color">den Verkäufer</span></strong>. <br/> 🇬🇧 <i>I'll ask the salesperson.</i> <br/> 🇪🇸 <i>Le pregunto al vendedor.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Verkäufer</span></strong> hilft.<br/>🇬🇧 <i>The salesperson is helping.</i><br/>🇪🇸 <i>El vendedor ayuda.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich rufe <strong><span class="der-color">den Verkäufer</span></strong>.<br/>🇬🇧 <i>I'm calling the salesperson.</i><br/>🇪🇸 <i>Llamo al vendedor.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Verkäufer</span></strong>.<br/>🇬🇧 <i>This is a salesperson.</i><br/>🇪🇸 <i>Este es un vendedor.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen Verkäufer</span></strong>.<br/>🇬🇧 <i>I'm looking for a salesperson.</i><br/>🇪🇸 <i>Busco un vendedor.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="der-color">kein Verkäufer</span></strong>.<br/>🇬🇧 <i>That is not a salesperson.</i><br/>🇪🇸 <i>Ese no es un vendedor.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="der-color">keinen Verkäufer</span></strong>.<br/>🇬🇧 <i>I see no salesperson.</i><br/>🇪🇸 <i>No veo a ningún vendedor.</i></td>
+          </tr>
+          <!-- DIE Nouns -->
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Apotheke</span> <span class="emoji-small">💊</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː apoˈteːkə/ <br/> 🇬🇧 <i>Pharmacy</i> <br/> 🇪🇸 <i>Farmacia</i></td>
+            <td data-label="Beispielsatz">Ich kaufe Medikamente in <strong><span class="die-color">der Apotheke</span></strong>. <br/> 🇬🇧 <i>I buy medicine at the pharmacy.</i> <br/> 🇪🇸 <i>Compro medicamentos en la farmacia.</i></td>
+            <td data-label="Beispielsatz">Wo ist die nächste <strong><span class="die-color">Apotheke</span></strong>? <br/> 🇬🇧 <i>Where is the nearest pharmacy?</i> <br/> 🇪🇸 <i>¿Dónde está la farmacia más cercana?</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Apotheke</span></strong> ist geöffnet.<br/>🇬🇧 <i>The pharmacy is open.</i><br/>🇪🇸 <i>La farmacia está abierta.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">die Apotheke</span></strong>.<br/>🇬🇧 <i>I'm looking for the pharmacy.</i><br/>🇪🇸 <i>Busco la farmacia.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Apotheke</span></strong>.<br/>🇬🇧 <i>This is a pharmacy.</i><br/>🇪🇸 <i>Esta es una farmacia.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine Apotheke</span></strong>.<br/>🇬🇧 <i>I'm looking for a pharmacy.</i><br/>🇪🇸 <i>Busco una farmacia.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Apotheke</span></strong>.<br/>🇬🇧 <i>That is not a pharmacy.</i><br/>🇪🇸 <i>Eso no es una farmacia.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Apotheke</span></strong>.<br/>🇬🇧 <i>I can't find a pharmacy.</i><br/>🇪🇸 <i>No encuentro una farmacia.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Bäckerei</span> <span class="emoji-small">🥖</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː bɛkəˈʁaɪ̯/ <br/> 🇬🇧 <i>Bakery</i> <br/> 🇪🇸 <i>Panadería</i></td>
+            <td data-label="Beispielsatz">Ich kaufe Brot in <strong><span class="die-color">der Bäckerei</span></strong>. <br/> 🇬🇧 <i>I buy bread at the bakery.</i> <br/> 🇪🇸 <i>Compro pan en la panadería.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Bäckerei</span></strong> ist neu. <br/> 🇬🇧 <i>The bakery is new.</i> <br/> 🇪🇸 <i>La panadería es nueva.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Bäckerei</span></strong> riecht gut.<br/>🇬🇧 <i>The bakery smells good.</i><br/>🇪🇸 <i>La panadería huele bien.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich gehe in <strong><span class="die-color">die Bäckerei</span></strong>.<br/>🇬🇧 <i>I'm going into the bakery.</i><br/>🇪🇸 <i>Entro en la panadería.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Bäckerei</span></strong>.<br/>🇬🇧 <i>This is a bakery.</i><br/>🇪🇸 <i>Esta es una panadería.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine Bäckerei</span></strong>.<br/>🇬🇧 <i>I'm looking for a bakery.</i><br/>🇪🇸 <i>Busco una panadería.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Bäckerei</span></strong>.<br/>🇬🇧 <i>That is not a bakery.</i><br/>🇪🇸 <i>Eso no es una panadería.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Bäckerei</span></strong>.<br/>🇬🇧 <i>I can't find a bakery.</i><br/>🇪🇸 <i>No encuentro una panadería.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Drogerie</span> <span class="emoji-small">🧴</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː dʁoɡəˈʁiː/ <br/> 🇬🇧 <i>Drugstore</i> <br/> 🇪🇸 <i>Droguería</i></td>
+            <td data-label="Beispielsatz">Ich kaufe Shampoo in der <strong><span class="die-color">Drogerie</span></strong>. <br/> 🇬🇧 <i>I buy shampoo at the drugstore.</i> <br/> 🇪🇸 <i>Compro champú en la droguería.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Drogerie</span></strong> ist neben dem Supermarkt. <br/> 🇬🇧 <i>The drugstore is next to the supermarket.</i> <br/> 🇪🇸 <i>La droguería está al lado del supermercado.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Drogerie</span></strong> hat alles.<br/>🇬🇧 <i>The drugstore has everything.</i><br/>🇪🇸 <i>La droguería tiene de todo.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich gehe in <strong><span class="die-color">die Drogerie</span></strong>.<br/>🇬🇧 <i>I'm going to the drugstore.</i><br/>🇪🇸 <i>Voy a la droguería.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Drogerie</span></strong>.<br/>🇬🇧 <i>This is a drugstore.</i><br/>🇪🇸 <i>Esta es una droguería.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine Drogerie</span></strong>.<br/>🇬🇧 <i>I'm looking for a drugstore.</i><br/>🇪🇸 <i>Busco una droguería.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Drogerie</span></strong>.<br/>🇬🇧 <i>That is not a drugstore.</i><br/>🇪🇸 <i>Eso no es una droguería.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Drogerie</span></strong>.<br/>🇬🇧 <i>I can't find a drugstore.</i><br/>🇪🇸 <i>No encuentro una droguería.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Einkaufsliste</span> <span class="emoji-small">📝</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈaɪ̯nkaʊ̯fsˌlɪstə/ <br/> 🇬🇧 <i>Shopping list</i> <br/> 🇪🇸 <i>Lista de compras</i></td>
+            <td data-label="Beispielsatz">Ich schreibe <strong><span class="die-color">eine Einkaufsliste</span></strong>. <br/> 🇬🇧 <i>I'm writing a shopping list.</i> <br/> 🇪🇸 <i>Escribo una lista de compras.</i></td>
+            <td data-label="Beispielsatz">Hast du <strong><span class="die-color">die Einkaufsliste</span></strong>? <br/> 🇬🇧 <i>Do you have the shopping list?</i> <br/> 🇪🇸 <i>¿Tienes la lista de compras?</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Einkaufsliste</span></strong> ist lang.<br/>🇬🇧 <i>The shopping list is long.</i><br/>🇪🇸 <i>La lista de compras es larga.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich brauche <strong><span class="die-color">die Einkaufsliste</span></strong>.<br/>🇬🇧 <i>I need the shopping list.</i><br/>🇪🇸 <i>Necesito la lista de compras.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Einkaufsliste</span></strong>.<br/>🇬🇧 <i>This is a shopping list.</i><br/>🇪🇸 <i>Esta es una lista de compras.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich mache <strong><span class="die-color">eine Einkaufsliste</span></strong>.<br/>🇬🇧 <i>I'm making a shopping list.</i><br/>🇪🇸 <i>Hago una lista de compras.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Einkaufsliste</span></strong>.<br/>🇬🇧 <i>That is not a shopping list.</i><br/>🇪🇸 <i>Eso no es una lista de compras.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="die-color">keine Einkaufsliste</span></strong>.<br/>🇬🇧 <i>I don't have a shopping list.</i><br/>🇪🇸 <i>No tengo lista de compras.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Farbe</span> <span class="emoji-small">🎨</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈfaʁbə/ <br/> 🇬🇧 <i>Color</i> <br/> 🇪🇸 <i>Color</i></td>
+            <td data-label="Beispielsatz">Diese <strong><span class="die-color">Farbe</span></strong> gefällt mir. <br/> 🇬🇧 <i>I like this color.</i> <br/> 🇪🇸 <i>Me gusta este color.</i></td>
+            <td data-label="Beispielsatz">Welche <strong><span class="die-color">Farbe</span></strong> hat das? <br/> 🇬🇧 <i>What color is that?</i> <br/> 🇪🇸 <i>¿De qué color es eso?</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Farbe</span></strong> ist schön.<br/>🇬🇧 <i>The color is beautiful.</i><br/>🇪🇸 <i>El color es bonito.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich mag <strong><span class="die-color">die Farbe</span></strong>.<br/>🇬🇧 <i>I like the color.</i><br/>🇪🇸 <i>Me gusta el color.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine</span></strong> schöne <strong><span class="die-color">Farbe</span></strong>.<br/>🇬🇧 <i>That is a beautiful color.</i><br/>🇪🇸 <i>Ese es un color bonito.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich wähle <strong><span class="die-color">eine Farbe</span></strong>.<br/>🇬🇧 <i>I'm choosing a color.</i><br/>🇪🇸 <i>Elijo un color.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Farbe</span></strong>.<br/>🇬🇧 <i>That is not a color.</i><br/>🇪🇸 <i>Eso no es un color.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich will <strong><span class="die-color">keine Farbe</span></strong>.<br/>🇬🇧 <i>I don't want any color.</i><br/>🇪🇸 <i>No quiero ningún color.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Größe</span> <span class="emoji-small">📏</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈɡʁøːsə/ <br/> 🇬🇧 <i>Size</i> <br/> 🇪🇸 <i>Talla / Tamaño</i></td>
+            <td data-label="Beispielsatz">Welche <strong><span class="die-color">Größe</span></strong> brauchen Sie? <br/> 🇬🇧 <i>What size do you need?</i> <br/> 🇪🇸 <i>¿Qué talla necesita?</i></td>
+            <td data-label="Beispielsatz">Das ist die richtige <strong><span class="die-color">Größe</span></strong>. <br/> 🇬🇧 <i>That is the right size.</i> <br/> 🇪🇸 <i>Esa es la talla correcta.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Größe</span></strong> passt.<br/>🇬🇧 <i>The size fits.</i><br/>🇪🇸 <i>La talla queda bien.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich brauche <strong><span class="die-color">die Größe</span></strong> M.<br/>🇬🇧 <i>I need size M.</i><br/>🇪🇸 <i>Necesito la talla M.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Größe</span></strong>.<br/>🇬🇧 <i>That is a size.</i><br/>🇪🇸 <i>Esa es una talla.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine</span></strong> andere <strong><span class="die-color">Größe</span></strong>.<br/>🇬🇧 <i>I'm looking for another size.</i><br/>🇪🇸 <i>Busco otra talla.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Größe</span></strong>.<br/>🇬🇧 <i>That is not a size.</i><br/>🇪🇸 <i>Esa no es una talla.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Größe</span></strong>.<br/>🇬🇧 <i>I can't find a size.</i><br/>🇪🇸 <i>No encuentro una talla.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Kasse</span> <span class="emoji-small">💳</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈkasə/ <br/> 🇬🇧 <i>Checkout / Cash register</i> <br/> 🇪🇸 <i>Caja</i></td>
+            <td data-label="Beispielsatz">Ich bezahle an <strong><span class="die-color">der Kasse</span></strong>. <br/> 🇬🇧 <i>I'm paying at the checkout.</i> <br/> 🇪🇸 <i>Pago en la caja.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Kasse</span></strong> ist besetzt. <br/> 🇬🇧 <i>The checkout is occupied.</i> <br/> 🇪🇸 <i>La caja está ocupada.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Kasse</span></strong> ist geöffnet.<br/>🇬🇧 <i>The checkout is open.</i><br/>🇪🇸 <i>La caja está abierta.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich gehe zur <strong><span class="die-color">Kasse</span></strong>.<br/>🇬🇧 <i>I'm going to the checkout.</i><br/>🇪🇸 <i>Voy a la caja.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Kasse</span></strong>.<br/>🇬🇧 <i>This is a checkout.</i><br/>🇪🇸 <i>Esta es una caja.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine Kasse</span></strong>.<br/>🇬🇧 <i>I'm looking for a checkout.</i><br/>🇪🇸 <i>Busco una caja.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Kasse</span></strong>.<br/>🇬🇧 <i>That is not a checkout.</i><br/>🇪🇸 <i>Eso no es una caja.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Kasse</span></strong>.<br/>🇬🇧 <i>I can't find a checkout.</i><br/>🇪🇸 <i>No encuentro una caja.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Kleidung</span> <span class="emoji-small">👕</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈklaɪ̯dʊŋ/ <br/> 🇬🇧 <i>Clothing</i> <br/> 🇪🇸 <i>Ropa</i></td>
+            <td data-label="Beispielsatz">Ich kaufe neue <strong><span class="die-color">Kleidung</span></strong>. <br/> 🇬🇧 <i>I'm buying new clothes.</i> <br/> 🇪🇸 <i>Compro ropa nueva.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Kleidung</span></strong> ist teuer. <br/> 🇬🇧 <i>The clothing is expensive.</i> <br/> 🇪🇸 <i>La ropa es cara.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Kleidung</span></strong> ist im Schrank.<br/>🇬🇧 <i>The clothing is in the closet.</i><br/>🇪🇸 <i>La ropa está en el armario.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich wasche <strong><span class="die-color">die Kleidung</span></strong>.<br/>🇬🇧 <i>I'm washing the clothes.</i><br/>🇪🇸 <i>Lavo la ropa.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">-</td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche neue <strong><span class="die-color">Kleidung</span></strong>.<br/>🇬🇧 <i>I need new clothes.</i><br/>🇪🇸 <i>Necesito ropa nueva.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Kleidung</span></strong>.<br/>🇬🇧 <i>That is not clothing.</i><br/>🇪🇸 <i>Eso no es ropa.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich trage <strong><span class="die-color">keine Kleidung</span></strong> von dieser Marke.<br/>🇬🇧 <i>I don't wear clothes from this brand.</i><br/>🇪🇸 <i>No llevo ropa de esta marca.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Kreditkarte</span> <span class="emoji-small">💳</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː kʁeˈdɪtˌkaʁtə/ <br/> 🇬🇧 <i>Credit card</i> <br/> 🇪🇸 <i>Tarjeta de crédito</i></td>
+            <td data-label="Beispielsatz">Kann ich mit <strong><span class="die-color">Kreditkarte</span></strong> bezahlen? <br/> 🇬🇧 <i>Can I pay with a credit card?</i> <br/> 🇪🇸 <i>¿Puedo pagar con tarjeta de crédito?</i></td>
+            <td data-label="Beispielsatz">Ich habe <strong><span class="die-color">keine Kreditkarte</span></strong>. <br/> 🇬🇧 <i>I don't have a credit card.</i> <br/> 🇪🇸 <i>No tengo tarjeta de crédito.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Kreditkarte</span></strong> ist neu.<br/>🇬🇧 <i>The credit card is new.</i><br/>🇪🇸 <i>La tarjeta de crédito es nueva.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich benutze <strong><span class="die-color">die Kreditkarte</span></strong>.<br/>🇬🇧 <i>I'm using the credit card.</i><br/>🇪🇸 <i>Uso la tarjeta de crédito.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Kreditkarte</span></strong>.<br/>🇬🇧 <i>This is a credit card.</i><br/>🇪🇸 <i>Esta es una tarjeta de crédito.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="die-color">eine Kreditkarte</span></strong>.<br/>🇬🇧 <i>I need a credit card.</i><br/>🇪🇸 <i>Necesito una tarjeta de crédito.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Kreditkarte</span></strong>.<br/>🇬🇧 <i>That is not a credit card.</i><br/>🇪🇸 <i>Eso no es una tarjeta de crédito.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="die-color">keine Kreditkarte</span></strong>.<br/>🇬🇧 <i>I have no credit card.</i><br/>🇪🇸 <i>No tengo tarjeta de crédito.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Kundin</span> <span class="emoji-small">👩</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈkʊndɪn/ <br/> 🇬🇧 <i>Customer (female)</i> <br/> 🇪🇸 <i>Clienta</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Kundin</span></strong> kauft ein Kleid. <br/> 🇬🇧 <i>The customer is buying a dress.</i> <br/> 🇪🇸 <i>La clienta compra un vestido.</i></td>
+            <td data-label="Beispielsatz">Sie ist eine neue <strong><span class="die-color">Kundin</span></strong>. <br/> 🇬🇧 <i>She is a new customer.</i> <br/> 🇪🇸 <i>Ella es una clienta nueva.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Kundin</span></strong> bezahlt.<br/>🇬🇧 <i>The customer pays.</i><br/>🇪🇸 <i>La clienta paga.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich berate <strong><span class="die-color">die Kundin</span></strong>.<br/>🇬🇧 <i>I advise the customer.</i><br/>🇪🇸 <i>Aconsejo a la clienta.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Kundin</span></strong>.<br/>🇬🇧 <i>This is a customer.</i><br/>🇪🇸 <i>Esta es una clienta.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="die-color">eine Kundin</span></strong>.<br/>🇬🇧 <i>I see a customer.</i><br/>🇪🇸 <i>Veo a una clienta.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Kundin</span></strong>.<br/>🇬🇧 <i>That is not a customer.</i><br/>🇪🇸 <i>Esa no es una clienta.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="die-color">keine Kundin</span></strong>.<br/>🇬🇧 <i>I don't see a customer.</i><br/>🇪🇸 <i>No veo a ninguna clienta.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Metzgerei</span> <span class="emoji-small">🥩</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː mɛtsɡəˈʁaɪ̯/ <br/> 🇬🇧 <i>Butcher shop</i> <br/> 🇪🇸 <i>Carnicería</i></td>
+            <td data-label="Beispielsatz">In <strong><span class="die-color">der Metzgerei</span></strong> gibt es Fleisch. <br/> 🇬🇧 <i>There is meat at the butcher shop.</i> <br/> 🇪🇸 <i>En la carnicería hay carne.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Metzgerei</span></strong> ist geschlossen. <br/> 🇬🇧 <i>The butcher shop is closed.</i> <br/> 🇪🇸 <i>La carnicería está cerrada.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Metzgerei</span></strong> ist sauber.<br/>🇬🇧 <i>The butcher shop is clean.</i><br/>🇪🇸 <i>La carnicería está limpia.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="die-color">die Metzgerei</span></strong>.<br/>🇬🇧 <i>I'm visiting the butcher shop.</i><br/>🇪🇸 <i>Visito la carnicería.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Metzgerei</span></strong>.<br/>🇬🇧 <i>This is a butcher shop.</i><br/>🇪🇸 <i>Esta es una carnicería.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine Metzgerei</span></strong>.<br/>🇬🇧 <i>I'm looking for a butcher shop.</i><br/>🇪🇸 <i>Busco una carnicería.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Metzgerei</span></strong>.<br/>🇬🇧 <i>That is not a butcher shop.</i><br/>🇪🇸 <i>Eso no es una carnicería.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Metzgerei</span></strong>.<br/>🇬🇧 <i>I can't find a butcher shop.</i><br/>🇪🇸 <i>No encuentro una carnicería.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Öffnungszeiten</span> <span class="emoji-small">🕐</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈœfnʊŋsˌtsaɪ̯tn̩/ <br/> 🇬🇧 <i>Opening hours</i> <br/> 🇪🇸 <i>Horario de apertura</i></td>
+            <td data-label="Beispielsatz">Wie sind die <strong><span class="die-color">Öffnungszeiten</span></strong>? <br/> 🇬🇧 <i>What are the opening hours?</i> <br/> 🇪🇸 <i>¿Cuál es el horario de apertura?</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Öffnungszeiten</span></strong> sind lang. <br/> 🇬🇧 <i>The opening hours are long.</i> <br/> 🇪🇸 <i>El horario es largo.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Öffnungszeiten</span></strong> sind gut.<br/>🇬🇧 <i>The opening hours are good.</i><br/>🇪🇸 <i>El horario es bueno.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich prüfe <strong><span class="die-color">die Öffnungszeiten</span></strong>.<br/>🇬🇧 <i>I check the opening hours.</i><br/>🇪🇸 <i>Verifico el horario.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">-</td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">-</td>
+            <td data-label="Negation (Nominativ)">-</td>
+            <td data-label="Negation (Akkusativ)">-</td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Rechnung</span> <span class="emoji-small">🧾</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈʁɛçnʊŋ/ <br/> 🇬🇧 <i>Bill / Receipt</i> <br/> 🇪🇸 <i>Factura / Cuenta</i></td>
+            <td data-label="Beispielsatz">Kann ich <strong><span class="die-color">die Rechnung</span></strong> haben? <br/> 🇬🇧 <i>Can I have the bill?</i> <br/> 🇪🇸 <i>¿Me trae la cuenta, por favor?</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Rechnung</span></strong> ist korrekt. <br/> 🇬🇧 <i>The bill is correct.</i> <br/> 🇪🇸 <i>La cuenta es correcta.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Rechnung</span></strong> ist hier.<br/>🇬🇧 <i>The bill is here.</i><br/>🇪🇸 <i>Aquí está la factura.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich bezahle <strong><span class="die-color">die Rechnung</span></strong>.<br/>🇬🇧 <i>I'm paying the bill.</i><br/>🇪🇸 <i>Pago la cuenta.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Rechnung</span></strong>.<br/>🇬🇧 <i>This is a bill.</i><br/>🇪🇸 <i>Esta es una factura.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich bekomme <strong><span class="die-color">eine Rechnung</span></strong>.<br/>🇬🇧 <i>I'm getting a bill.</i><br/>🇪🇸 <i>Recibo una factura.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Rechnung</span></strong>.<br/>🇬🇧 <i>That is not a bill.</i><br/>🇪🇸 <i>Eso no es una factura.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich brauche <strong><span class="die-color">keine Rechnung</span></strong>.<br/>🇬🇧 <i>I don't need a bill.</i><br/>🇪🇸 <i>No necesito una factura.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Tasche</span> <span class="emoji-small">🛍️</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈtaʃə/ <br/> 🇬🇧 <i>Bag</i> <br/> 🇪🇸 <i>Bolso / Bolsa</i></td>
+            <td data-label="Beispielsatz">Ich brauche <strong><span class="die-color">eine Tasche</span></strong>. <br/> 🇬🇧 <i>I need a bag.</i> <br/> 🇪🇸 <i>Necesito una bolsa.</i></td>
+            <td data-label="Beispielsatz">Meine <strong><span class="die-color">Tasche</span></strong> ist schwer. <br/> 🇬🇧 <i>My bag is heavy.</i> <br/> 🇪🇸 <i>Mi bolso está pesado.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Tasche</span></strong> ist schön.<br/>🇬🇧 <i>The bag is beautiful.</i><br/>🇪🇸 <i>El bolso es bonito.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich packe <strong><span class="die-color">die Tasche</span></strong>.<br/>🇬🇧 <i>I'm packing the bag.</i><br/>🇪🇸 <i>Hago la maleta.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Tasche</span></strong>.<br/>🇬🇧 <i>This is a bag.</i><br/>🇪🇸 <i>Este es un bolso.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich kaufe <strong><span class="die-color">eine Tasche</span></strong>.<br/>🇬🇧 <i>I'm buying a bag.</i><br/>🇪🇸 <i>Compro un bolso.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Tasche</span></strong>.<br/>🇬🇧 <i>That is not a bag.</i><br/>🇪🇸 <i>Eso no es un bolso.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="die-color">keine Tasche</span></strong>.<br/>🇬🇧 <i>I don't have a bag.</i><br/>🇪🇸 <i>No tengo bolso.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Tüte</span> <span class="emoji-small">🛍️</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈtyːtə/ <br/> 🇬🇧 <i>Bag (paper/plastic)</i> <br/> 🇪🇸 <i>Bolsa (de papel/plástico)</i></td>
+            <td data-label="Beispielsatz">Brauchen Sie <strong><span class="die-color">eine Tüte</span></strong>? <br/> 🇬🇧 <i>Do you need a bag?</i> <br/> 🇪🇸 <i>¿Necesita una bolsa?</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Tüte</span></strong> ist voll. <br/> 🇬🇧 <i>The bag is full.</i> <br/> 🇪🇸 <i>La bolsa está llena.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Tüte</span></strong> ist aus Papier.<br/>🇬🇧 <i>The bag is made of paper.</i><br/>🇪🇸 <i>La bolsa es de papel.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich nehme <strong><span class="die-color">die Tüte</span></strong>.<br/>🇬🇧 <i>I'll take the bag.</i><br/>🇪🇸 <i>Tomo la bolsa.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Tüte</span></strong>.<br/>🇬🇧 <i>This is a bag.</i><br/>🇪🇸 <i>Esta es una bolsa.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich möchte <strong><span class="die-color">eine Tüte</span></strong>.<br/>🇬🇧 <i>I would like a bag.</i><br/>🇪🇸 <i>Quisiera una bolsa.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Tüte</span></strong>.<br/>🇬🇧 <i>That is not a bag.</i><br/>🇪🇸 <i>Eso no es una bolsa.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich brauche <strong><span class="die-color">keine Tüte</span></strong>.<br/>🇬🇧 <i>I don't need a bag.</i><br/>🇪🇸 <i>No necesito bolsa.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Verkäuferin</span> <span class="emoji-small">👩‍💼</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː fɛɐ̯ˈkɔʏ̯fəʁɪn/ <br/> 🇬🇧 <i>Salesperson (female)</i> <br/> 🇪🇸 <i>Vendedora</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Verkäuferin</span></strong> hilft mir. <br/> 🇬🇧 <i>The salesperson helps me.</i> <br/> 🇪🇸 <i>La vendedora me ayuda.</i></td>
+            <td data-label="Beispielsatz">Sie ist eine gute <strong><span class="die-color">Verkäuferin</span></strong>. <br/> 🇬🇧 <i>She is a good salesperson.</i> <br/> 🇪🇸 <i>Es una buena vendedora.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Verkäuferin</span></strong> ist freundlich.<br/>🇬🇧 <i>The salesperson is friendly.</i><br/>🇪🇸 <i>La vendedora es amable.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich frage <strong><span class="die-color">die Verkäuferin</span></strong>.<br/>🇬🇧 <i>I'll ask the salesperson.</i><br/>🇪🇸 <i>Le pregunto a la vendedora.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Verkäuferin</span></strong>.<br/>🇬🇧 <i>This is a salesperson.</i><br/>🇪🇸 <i>Esta es una vendedora.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine Verkäuferin</span></strong>.<br/>🇬🇧 <i>I'm looking for a salesperson.</i><br/>🇪🇸 <i>Busco una vendedora.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Verkäuferin</span></strong>.<br/>🇬🇧 <i>That is not a salesperson.</i><br/>🇪🇸 <i>Esa no es una vendedora.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="die-color">keine Verkäuferin</span></strong>.<br/>🇬🇧 <i>I don't see a salesperson.</i><br/>🇪🇸 <i>No veo a ninguna vendedora.</i></td>
+          </tr>
+          <!-- DAS Nouns -->
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Angebot</span> <span class="emoji-small">🏷️</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ˈanɡəˌboːt/ <br/> 🇬🇧 <i>Offer / Special deal</i> <br/> 🇪🇸 <i>Oferta</i></td>
+            <td data-label="Beispielsatz">Das ist ein gutes <strong><span class="das-color">Angebot</span></strong>. <br/> 🇬🇧 <i>That is a good offer.</i> <br/> 🇪🇸 <i>Esa es una buena oferta.</i></td>
+            <td data-label="Beispielsatz">Ich nehme <strong><span class="das-color">das Angebot</span></strong> an. <br/> 🇬🇧 <i>I'll accept the offer.</i> <br/> 🇪🇸 <i>Acepto la oferta.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Angebot</span></strong> ist super.<br/>🇬🇧 <i>The offer is great.</i><br/>🇪🇸 <i>La oferta es genial.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich sehe <strong><span class="das-color">das Angebot</span></strong>.<br/>🇬🇧 <i>I see the offer.</i><br/>🇪🇸 <i>Veo la oferta.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Angebot</span></strong>.<br/>🇬🇧 <i>This is an offer.</i><br/>🇪🇸 <i>Esta es una oferta.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein Angebot</span></strong>.<br/>🇬🇧 <i>I'm looking for an offer.</i><br/>🇪🇸 <i>Busco una oferta.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Angebot</span></strong>.<br/>🇬🇧 <i>That is not an offer.</i><br/>🇪🇸 <i>Eso no es una oferta.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein Angebot</span></strong>.<br/>🇬🇧 <i>I can't find an offer.</i><br/>🇪🇸 <i>No encuentro una oferta.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Bargeld</span> <span class="emoji-small">💰</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ˈbaːɐ̯ˌɡɛlt/ <br/> 🇬🇧 <i>Cash</i> <br/> 🇪🇸 <i>Efectivo</i></td>
+            <td data-label="Beispielsatz">Ich bezahle mit <strong><span class="das-color">Bargeld</span></strong>. <br/> 🇬🇧 <i>I'm paying with cash.</i> <br/> 🇪🇸 <i>Pago en efectivo.</i></td>
+            <td data-label="Beispielsatz">Haben Sie <strong><span class="das-color">Bargeld</span></strong>? <br/> 🇬🇧 <i>Do you have cash?</i> <br/> 🇪🇸 <i>¿Tiene efectivo?</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Bargeld</span></strong> ist hier.<br/>🇬🇧 <i>The cash is here.</i><br/>🇪🇸 <i>El efectivo está aquí.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich nehme <strong><span class="das-color">das Bargeld</span></strong>.<br/>🇬🇧 <i>I'll take the cash.</i><br/>🇪🇸 <i>Tomo el efectivo.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">-</td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">-</td>
+            <td data-label="Negation (Nominativ)">-</td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="das-color">kein Bargeld</span></strong>.<br/>🇬🇧 <i>I don't have cash.</i><br/>🇪🇸 <i>No tengo efectivo.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Geld</span> <span class="emoji-small">💰</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ɡɛlt/ <br/> 🇬🇧 <i>Money</i> <br/> 🇪🇸 <i>Dinero</i></td>
+            <td data-label="Beispielsatz">Ich brauche <strong><span class="das-color">Geld</span></strong>. <br/> 🇬🇧 <i>I need money.</i> <br/> 🇪🇸 <i>Necesito dinero.</i></td>
+            <td data-label="Beispielsatz">Hast du genug <strong><span class="das-color">Geld</span></strong>? <br/> 🇬🇧 <i>Do you have enough money?</i> <br/> 🇪🇸 <i>¿Tienes suficiente dinero?</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Geld</span></strong> ist in der Tasche.<br/>🇬🇧 <i>The money is in the bag.</i><br/>🇪🇸 <i>El dinero está en el bolso.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich brauche <strong><span class="das-color">das Geld</span></strong>.<br/>🇬🇧 <i>I need the money.</i><br/>🇪🇸 <i>Necesito el dinero.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">-</td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">-</td>
+            <td data-label="Negation (Nominativ)">-</td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="das-color">kein Geld</span></strong>.<br/>🇬🇧 <i>I have no money.</i><br/>🇪🇸 <i>No tengo dinero.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Geschäft</span> <span class="emoji-small">🏪</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ɡəˈʃɛft/ <br/> 🇬🇧 <i>Store / Business</i> <br/> 🇪🇸 <i>Tienda / Negocio</i></td>
+            <td data-label="Beispielsatz"><strong><span class="das-color">Das Geschäft</span></strong> öffnet um 9 Uhr. <br/> 🇬🇧 <i>The store opens at 9 o'clock.</i> <br/> 🇪🇸 <i>La tienda abre a las 9.</i></td>
+            <td data-label="Beispielsatz">Ich gehe in <strong><span class="das-color">das Geschäft</span></strong>. <br/> 🇬🇧 <i>I'm going into the store.</i> <br/> 🇪🇸 <i>Entro a la tienda.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Geschäft</span></strong> ist neu.<br/>🇬🇧 <i>The store is new.</i><br/>🇪🇸 <i>La tienda es nueva.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">das Geschäft</span></strong>.<br/>🇬🇧 <i>I'm looking for the store.</i><br/>🇪🇸 <i>Busco la tienda.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Geschäft</span></strong>.<br/>🇬🇧 <i>This is a store.</i><br/>🇪🇸 <i>Esta es una tienda.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="das-color">ein Geschäft</span></strong>.<br/>🇬🇧 <i>I see a store.</i><br/>🇪🇸 <i>Veo una tienda.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Geschäft</span></strong>.<br/>🇬🇧 <i>That is not a store.</i><br/>🇪🇸 <i>Eso no es una tienda.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein Geschäft</span></strong>.<br/>🇬🇧 <i>I can't find a store.</i><br/>🇪🇸 <i>No encuentro una tienda.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Kaufhaus</span> <span class="emoji-small">🏬</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ˈkaʊ̯fˌhaʊ̯s/ <br/> 🇬🇧 <i>Department store</i> <br/> 🇪🇸 <i>Grandes almacenes</i></td>
+            <td data-label="Beispielsatz">Ich gehe ins <strong><span class="das-color">Kaufhaus</span></strong>. <br/> 🇬🇧 <i>I'm going to the department store.</i> <br/> 🇪🇸 <i>Voy a los grandes almacenes.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="das-color">Das Kaufhaus</span></strong> ist sehr groß. <br/> 🇬🇧 <i>The department store is very big.</i> <br/> 🇪🇸 <i>Los grandes almacenes son muy grandes.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Kaufhaus</span></strong> ist teuer.<br/>🇬🇧 <i>The department store is expensive.</i><br/>🇪🇸 <i>Los grandes almacenes son caros.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="das-color">das Kaufhaus</span></strong>.<br/>🇬🇧 <i>I visit the department store.</i><br/>🇪🇸 <i>Visito los grandes almacenes.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Kaufhaus</span></strong>.<br/>🇬🇧 <i>This is a department store.</i><br/>🇪🇸 <i>Estos son unos grandes almacenes.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein Kaufhaus</span></strong>.<br/>🇬🇧 <i>I'm looking for a department store.</i><br/>🇪🇸 <i>Busco unos grandes almacenes.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Kaufhaus</span></strong>.<br/>🇬🇧 <i>That is not a department store.</i><br/>🇪🇸 <i>Eso no son unos grandes almacenes.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein Kaufhaus</span></strong>.<br/>🇬🇧 <i>I can't find a department store.</i><br/>🇪🇸 <i>No encuentro grandes almacenes.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Produkt</span> <span class="emoji-small">📦</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das pʁoˈdʊkt/ <br/> 🇬🇧 <i>Product</i> <br/> 🇪🇸 <i>Producto</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Produkt</span></strong> ist neu. <br/> 🇬🇧 <i>The product is new.</i> <br/> 🇪🇸 <i>El producto es nuevo.</i></td>
+            <td data-label="Beispielsatz">Ich kaufe dieses <strong><span class="das-color">Produkt</span></strong>. <br/> 🇬🇧 <i>I'm buying this product.</i> <br/> 🇪🇸 <i>Compro este producto.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Produkt</span></strong> ist gut.<br/>🇬🇧 <i>The product is good.</i><br/>🇪🇸 <i>El producto es bueno.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich teste <strong><span class="das-color">das Produkt</span></strong>.<br/>🇬🇧 <i>I'm testing the product.</i><br/>🇪🇸 <i>Pruebo el producto.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Produkt</span></strong>.<br/>🇬🇧 <i>This is a product.</i><br/>🇪🇸 <i>Este es un producto.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein Produkt</span></strong>.<br/>🇬🇧 <i>I'm looking for a product.</i><br/>🇪🇸 <i>Busco un producto.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Produkt</span></strong> für mich.<br/>🇬🇧 <i>That is not a product for me.</i><br/>🇪🇸 <i>Ese no es un producto para mí.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich kaufe <strong><span class="das-color">kein Produkt</span></strong>.<br/>🇬🇧 <i>I'm not buying a product.</i><br/>🇪🇸 <i>No compro un producto.</i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <script>
+    function toggleArticles() {
+      const toggle = document.getElementById('toggle-articles');
+      const articleSpans = document.querySelectorAll('.die-color, .der-color, .das-color');
+      const emojiSpans = document.querySelectorAll('.emoji-small');
+      const isHidden = toggle.checked;
+      
+      articleSpans.forEach(span => {
+        if (isHidden) {
+          span.style.display = 'none';
+        } else {
+          span.style.display = '';
+        }
+      });
+
+      // Move emoji position based on toggle state
+      emojiSpans.forEach(span => {
+        if (isHidden) {
+          // When tick is chosen: move emoji below the noun
+          span.classList.add('emoji-below');
+        } else {
+          // When tick is not chosen: emoji inline to the right
+          span.classList.remove('emoji-below');
+        }
+      });
+    }
+
+    // Initialize the toggle state on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      toggleArticles(); // Call once to set initial state
+    });
+
+    document.getElementById('toggle-articles').addEventListener('change', toggleArticles);
+  </script>
+
+</body>
+</html>
