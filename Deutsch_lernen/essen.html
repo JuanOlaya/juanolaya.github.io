@@ -5,13 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Essen - Deutsche Sprachreferenz für A1</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="styles.css">
+<style>
+  /* Basic styles for readability - matching styles.css color system */
+  .der-color { color: red; font-weight: bold; } /* Red for 'der' (masculine) */
+  .die-color { color: blue; font-weight: bold; } /* Blue for 'die' (feminine) */
+  .das-color { color: black; font-weight: bold; } /* Black for 'das' (neuter) */
+  body { font-family: sans-serif; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+  th { background-color: #f4f4f4; }
+  tbody tr:nth-child(odd) { background-color: #f9f9f9; }
+  h1 { font-size: 2.5em; text-align: center; margin-bottom: 20px; }
+  .back-home { display: block; text-align: center; margin: 20px; font-size: 1.2em; }
+  
+  /* Make first column text and emoji consistent sizing - increased by 40% total */
+  td[data-label="Substantiv"] strong span {
+    font-size: 1.584em !important;
+  }
+  td[data-label="Substantiv"] strong .der-color,
+  td[data-label="Substantiv"] strong .die-color,
+  td[data-label="Substantiv"] strong .das-color {
+    font-size: 1.584em !important;
+  }
+  
+  /* Default: emoji inline to the right with larger size - increased by 40% total */
+  .emoji-small {
+    display: inline;
+    margin-left: 5px;
+    font-size: 1.872em !important;
+  }
+  
+  /* When articles are hidden: emoji below with consistent size - increased by 40% total */
+  .emoji-below {
+    display: block !important;
+    margin-top: 5px !important;
+    margin-left: 0 !important;
+    font-size: 1.872em !important;
+  }
+</style>
 </head>
 <body>
 
-  <a href="substantiv.html" class="back-home">🏠 Zurück zu Substantiv / Back to Substantiv</a>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <a href="substantiv.html" class="back-home">🏠 Zurück zu Substantiv / Back to Substantiv</a>
+    
+    <div class="toggle-container" style="margin: 0;">
+      <label for="toggle-articles" class="toggle-label">
+        <input type="checkbox" id="toggle-articles">
+        <span class="toggle-slider"></span>
+        Artikel ausblenden / Hide Articles
+      </label>
+    </div>
+    
+    <div style="width: 200px;"></div> <!-- Spacer for balance -->
+  </div>
 
-  <h1>🍽️ Essen</h1>
+  <h1>🍽️ Essen (Food & Drinks)</h1>
 
   <details id="essen-section" open>
     <summary>Essen</summary>
@@ -30,178 +79,11 @@
             <th data-label="Negation (Nominativ)">Negation (Nominativ)</th>
             <th data-label="Negation (Akkusativ)">Negation (Akkusativ)</th>
           </tr>
-          <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th>🇪🇸 (Sujeto: ¿Quién o qué realiza la acción?)</th>
-            <th>🇪🇸 (Objeto Directo: ¿Quién o qué recibe directamente la acción?)</th>
-            <th>🇪🇸 (Sujeto: ¿Quién o qué realiza la acción?)</th>
-            <th>🇪🇸 (Objeto Directo: ¿Quién o qué recibe directamente la acción?)</th>
-            <th>🇪🇸 (Sujeto: ¿Quién o qué realiza la acción?)</th>
-            <th>🇪🇸 (Objeto Directo: ¿Quién o qué recibe directamente la acción?)</th>
-          </tr>
         </thead>
         <tbody>
+          <!-- DER Nouns -->
           <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Frühstück</span></strong> <br/> 🥐</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das frúh-shtük/ <br/> 🇬🇧 <i>Breakfast</i> <br/> 🇪🇸 <i>Desayuno</i></td>
-            <td data-label="Beispielsatz">Das <strong><span class="das-color">Frühstück</span></strong> ist um 8 Uhr. <br/> 🇬🇧 <i>Breakfast is at 8 o'clock.</i> <br/> 🇪🇸 <i>El desayuno es a las 8.</i></td>
-            <td data-label="Beispielsatz">Ich esse <strong><span class="das-color">Frühstück</span></strong> zu Hause. <br/> 🇬🇧 <i>I eat breakfast at home.</i> <br/> 🇪🇸 <i>Desayuno en casa.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Frühstück</span></strong> ist fertig.<br/>🇬🇧 <i>Breakfast is ready.</i><br/>🇪🇸 <i>El desayuno está listo.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich esse <strong><span class="das-color">das Frühstück</span></strong>.<br/>🇬🇧 <i>I eat breakfast.</i><br/>🇪🇸 <i>Como el desayuno.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Frühstück</span></strong>.<br/>🇬🇧 <i>This is a breakfast.</i><br/>🇪🇸 <i>Este es un desayuno.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich mache <strong><span class="das-color">ein Frühstück</span></strong>.<br/>🇬🇧 <i>I make a breakfast.</i><br/>🇪🇸 <i>Hago un desayuno.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Frühstück</span></strong> ist da.<br/>🇬🇧 <i>No breakfast is there.</i><br/>🇪🇸 <i>No hay desayuno.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Frühstück</span></strong>.<br/>🇬🇧 <i>I eat no breakfast.</i><br/>🇪🇸 <i>No desayuno.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Mittagessen</span></strong> <br/> 🍛</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das mít-tag-és-sen/ <br/> 🇬🇧 <i>Lunch</i> <br/> 🇪🇸 <i>Almuerzo</i></td>
-            <td data-label="Beispielsatz">Wann gibt es <strong><span class="das-color">Mittagessen</span></strong>? <br/> 🇬🇧 <i>When is lunch?</i> <br/> 🇪🇸 <i>¿Cuándo es el almuerzo?</i></td>
-            <td data-label="Beispielsatz">Das <strong><span class="das-color">Mittagessen</span></strong> schmeckt gut. <br/> 🇬🇧 <i>Lunch tastes good.</i> <br/> 🇪🇸 <i>El almuerzo sabe bien.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Mittagessen</span></strong> ist warm.<br/>🇬🇧 <i>Lunch is warm.</i><br/>🇪🇸 <i>El almuerzo está caliente.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich koche <strong><span class="das-color">das Mittagessen</span></strong>.<br/>🇬🇧 <i>I cook lunch.</i><br/>🇪🇸 <i>Cocino el almuerzo.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Mittagessen</span></strong>.<br/>🇬🇧 <i>This is a lunch.</i><br/>🇪🇸 <i>Este es un almuerzo.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich bereite <strong><span class="das-color">ein Mittagessen</span></strong> vor.<br/>🇬🇧 <i>I prepare a lunch.</i><br/>🇪🇸 <i>Preparo un almuerzo.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Mittagessen</span></strong> ist fertig.<br/>🇬🇧 <i>No lunch is ready.</i><br/>🇪🇸 <i>No hay almuerzo listo.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Mittagessen</span></strong>.<br/>🇬🇧 <i>I eat no lunch.</i><br/>🇪🇸 <i>No almuerzo.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Abendessen</span></strong> <br/> 🍝</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das á-bent-és-sen/ <br/> 🇬🇧 <i>Dinner</i> <br/> 🇪🇸 <i>Cena</i></td>
-            <td data-label="Beispielsatz">Das <strong><span class="das-color">Abendessen</span></strong> ist fertig. <br/> 🇬🇧 <i>Dinner is ready.</i> <br/> 🇪🇸 <i>La cena está lista.</i></td>
-            <td data-label="Beispielsatz">Wir essen <strong><span class="das-color">Abendessen</span></strong> um 19 Uhr. <br/> 🇬🇧 <i>We eat dinner at 7 PM.</i> <br/> 🇪🇸 <i>Cenamos a las 7 PM.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Abendessen</span></strong> ist lecker.<br/>🇬🇧 <i>Dinner is delicious.</i><br/>🇪🇸 <i>La cena está deliciosa.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich genieße <strong><span class="das-color">das Abendessen</span></strong>.<br/>🇬🇧 <i>I enjoy dinner.</i><br/>🇪🇸 <i>Disfruto la cena.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Abendessen</span></strong>.<br/>🇬🇧 <i>This is a dinner.</i><br/>🇪🇸 <i>Esta es una cena.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich plane <strong><span class="das-color">ein Abendessen</span></strong>.<br/>🇬🇧 <i>I plan a dinner.</i><br/>🇪🇸 <i>Planifico una cena.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Abendessen</span></strong> ist da.<br/>🇬🇧 <i>No dinner is there.</i><br/>🇪🇸 <i>No hay cena.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Abendessen</span></strong>.<br/>🇬🇧 <i>I eat no dinner.</i><br/>🇪🇸 <i>No ceno.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Essen</span></strong> <br/> 🍽️</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das és-sen/ <br/> 🇬🇧 <i>Food</i> <br/> 🇪🇸 <i>Comida</i></td>
-            <td data-label="Beispielsatz">Ich koche <strong><span class="das-color">Essen</span></strong> für mein Baby. <br/> 🇬🇧 <i>I cook food for my baby.</i> <br/> 🇪🇸 <i>Cocino comida para mi bebé.</i></td>
-            <td data-label="Beispielsatz">Das <strong><span class="das-color">Essen</span></strong> ist gesund. <br/> 🇬🇧 <i>The food is healthy.</i> <br/> 🇪🇸 <i>La comida es saludable.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Essen</span></strong> ist warm.<br/>🇬🇧 <i>The food is warm.</i><br/>🇪🇸 <i>La comida está caliente.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich mag <strong><span class="das-color">das Essen</span></strong>.<br/>🇬🇧 <i>I like the food.</i><br/>🇪🇸 <i>Me gusta la comida.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Essen</span></strong>.<br/>🇬🇧 <i>This is a meal.</i><br/>🇪🇸 <i>Esta es una comida.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich bestelle <strong><span class="das-color">ein Essen</span></strong>.<br/>🇬🇧 <i>I order a meal.</i><br/>🇪🇸 <i>Pido una comida.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Essen</span></strong> ist da.<br/>🇬🇧 <i>No food is there.</i><br/>🇪🇸 <i>No hay comida.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich kaufe <strong><span class="das-color">kein Essen</span></strong>.<br/>🇬🇧 <i>I buy no food.</i><br/>🇪🇸 <i>No compro comida.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Speisen</span></strong> <br/> 🍽️</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di shpái-sen/ <br/> 🇬🇧 <i>Dishes</i> <br/> 🇪🇸 <i>Platos</i></td>
-            <td data-label="Beispielsatz">Die <strong><span class="die-color">Speisen</span></strong> sind lecker. <br/> 🇬🇧 <i>The dishes are delicious.</i> <br/> 🇪🇸 <i>Los platos están deliciosos.</i></td>
-            <td data-label="Beispielsatz">Wir probieren verschiedene <strong><span class="die-color">Speisen</span></strong>. <br/> 🇬🇧 <i>We try different dishes.</i> <br/> 🇪🇸 <i>Probamos diferentes platos.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Speisen</span></strong> sind frisch.<br/>🇬🇧 <i>The dishes are fresh.</i><br/>🇪🇸 <i>Los platos están frescos.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich bestelle <strong><span class="die-color">die Speisen</span></strong>.<br/>🇬🇧 <i>I order the dishes.</i><br/>🇪🇸 <i>Pido los platos.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das sind <strong><span class="die-color">Speisen</span></strong>.<br/>🇬🇧 <i>These are dishes.</i><br/>🇪🇸 <i>Estos son platos.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich koche <strong><span class="die-color">Speisen</span></strong>.<br/>🇬🇧 <i>I cook dishes.</i><br/>🇪🇸 <i>Cocino platos.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Speisen</span></strong> sind da.<br/>🇬🇧 <i>No dishes are there.</i><br/>🇪🇸 <i>No hay platos.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="die-color">keine Speisen</span></strong>.<br/>🇬🇧 <i>I eat no dishes.</i><br/>🇪🇸 <i>No como platos.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Lebensmittel</span></strong> <br/> 🛒</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di lé-bens-mit-tel/ <br/> 🇬🇧 <i>Groceries</i> <br/> 🇪🇸 <i>Alimentos</i></td>
-            <td data-label="Beispielsatz">Ich kaufe <strong><span class="die-color">Lebensmittel</span></strong> im Supermarkt. <br/> 🇬🇧 <i>I buy groceries at the supermarket.</i> <br/> 🇪🇸 <i>Compro alimentos en el supermercado.</i></td>
-            <td data-label="Beispielsatz">Die <strong><span class="die-color">Lebensmittel</span></strong> sind frisch. <br/> 🇬🇧 <i>The groceries are fresh.</i> <br/> 🇪🇸 <i>Los alimentos están frescos.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Lebensmittel</span></strong> sind teuer.<br/>🇬🇧 <i>The groceries are expensive.</i><br/>🇪🇸 <i>Los alimentos son caros.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich brauche <strong><span class="die-color">die Lebensmittel</span></strong>.<br/>🇬🇧 <i>I need the groceries.</i><br/>🇪🇸 <i>Necesito los alimentos.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das sind <strong><span class="die-color">Lebensmittel</span></strong>.<br/>🇬🇧 <i>These are groceries.</i><br/>🇪🇸 <i>Estos son alimentos.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich hole <strong><span class="die-color">Lebensmittel</span></strong>.<br/>🇬🇧 <i>I get groceries.</i><br/>🇪🇸 <i>Consigo alimentos.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Lebensmittel</span></strong> sind da.<br/>🇬🇧 <i>No groceries are there.</i><br/>🇪🇸 <i>No hay alimentos.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich kaufe <strong><span class="die-color">keine Lebensmittel</span></strong>.<br/>🇬🇧 <i>I buy no groceries.</i><br/>🇪🇸 <i>No compro alimentos.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Getränke</span></strong> <br/> 🥤</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di ge-trän-ke/ <br/> 🇬🇧 <i>Drinks</i> <br/> 🇪🇸 <i>Bebidas</i></td>
-            <td data-label="Beispielsatz">Ich trinke verschiedene <strong><span class="die-color">Getränke</span></strong>. <br/> 🇬🇧 <i>I drink different drinks.</i> <br/> 🇪🇸 <i>Bebo diferentes bebidas.</i></td>
-            <td data-label="Beispielsatz">Die <strong><span class="die-color">Getränke</span></strong> sind kalt. <br/> 🇬🇧 <i>The drinks are cold.</i> <br/> 🇪🇸 <i>Las bebidas están frías.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Getränke</span></strong> sind süß.<br/>🇬🇧 <i>The drinks are sweet.</i><br/>🇪🇸 <i>Las bebidas son dulces.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich bestelle <strong><span class="die-color">die Getränke</span></strong>.<br/>🇬🇧 <i>I order the drinks.</i><br/>🇪🇸 <i>Pido las bebidas.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das sind <strong><span class="die-color">Getränke</span></strong>.<br/>🇬🇧 <i>These are drinks.</i><br/>🇪🇸 <i>Estas son bebidas.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich hole <strong><span class="die-color">Getränke</span></strong>.<br/>🇬🇧 <i>I get drinks.</i><br/>🇪🇸 <i>Consigo bebidas.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Getränke</span></strong> sind da.<br/>🇬🇧 <i>No drinks are there.</i><br/>🇪🇸 <i>No hay bebidas.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich trinke <strong><span class="die-color">keine Getränke</span></strong>.<br/>🇬🇧 <i>I drink no drinks.</i><br/>🇪🇸 <i>No bebo bebidas.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Ei</span></strong> <br/> 🥚</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ái/ <br/> 🇬🇧 <i>Egg</i> <br/> 🇪🇸 <i>Huevo</i></td>
-            <td data-label="Beispielsatz">Ich esse <strong><span class="das-color">ein Ei</span></strong> zum Frühstück. <br/> 🇬🇧 <i>I eat an egg for breakfast.</i> <br/> 🇪🇸 <i>Como un huevo para el desayuno.</i></td>
-            <td data-label="Beispielsatz">Das <strong><span class="das-color">Ei</span></strong> ist gekocht. <br/> 🇬🇧 <i>The egg is cooked.</i> <br/> 🇪🇸 <i>El huevo está cocido.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Ei</span></strong> ist frisch.<br/>🇬🇧 <i>The egg is fresh.</i><br/>🇪🇸 <i>El huevo está fresco.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich koche <strong><span class="das-color">das Ei</span></strong>.<br/>🇬🇧 <i>I cook the egg.</i><br/>🇪🇸 <i>Cocino el huevo.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Ei</span></strong>.<br/>🇬🇧 <i>This is an egg.</i><br/>🇪🇸 <i>Este es un huevo.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich esse <strong><span class="das-color">ein Ei</span></strong>.<br/>🇬🇧 <i>I eat an egg.</i><br/>🇪🇸 <i>Como un huevo.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Ei</span></strong> ist da.<br/>🇬🇧 <i>No egg is there.</i><br/>🇪🇸 <i>No hay huevo.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Ei</span></strong>.<br/>🇬🇧 <i>I eat no egg.</i><br/>🇪🇸 <i>No como huevo.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Eis</span></strong> <br/> 🍦</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ís/ <br/> 🇬🇧 <i>Ice cream</i> <br/> 🇪🇸 <i>Helado</i></td>
-            <td data-label="Beispielsatz">Wir essen am Wochenende <strong><span class="das-color">Eis</span></strong>. <br/> 🇬🇧 <i>We eat ice cream on the weekend.</i> <br/> 🇪🇸 <i>Comemos helado el fin de semana.</i></td>
-            <td data-label="Beispielsatz">Das <strong><span class="das-color">Eis</span></strong> ist kalt. <br/> 🇬🇧 <i>The ice cream is cold.</i> <br/> 🇪🇸 <i>El helado está frío.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Eis</span></strong> schmeckt gut.<br/>🇬🇧 <i>The ice cream tastes good.</i><br/>🇪🇸 <i>El helado sabe bien.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">das Eis</span></strong>.<br/>🇬🇧 <i>I buy the ice cream.</i><br/>🇪🇸 <i>Compro el helado.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Eis</span></strong>.<br/>🇬🇧 <i>This is an ice cream.</i><br/>🇪🇸 <i>Este es un helado.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich esse <strong><span class="das-color">ein Eis</span></strong>.<br/>🇬🇧 <i>I eat an ice cream.</i><br/>🇪🇸 <i>Como un helado.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Eis</span></strong> ist da.<br/>🇬🇧 <i>No ice cream is there.</i><br/>🇪🇸 <i>No hay helado.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Eis</span></strong>.<br/>🇬🇧 <i>I eat no ice cream.</i><br/>🇪🇸 <i>No como helado.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Obst</span></strong> <br/> 🍎</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ópst/ <br/> 🇬🇧 <i>Fruit</i> <br/> 🇪🇸 <i>Fruta</i></td>
-            <td data-label="Beispielsatz"><strong><span class="das-color">Obst</span></strong> ist gesund. <br/> 🇬🇧 <i>Fruit is healthy.</i> <br/> 🇪🇸 <i>La fruta es saludable.</i></td>
-            <td data-label="Beispielsatz">Ich esse gern <strong><span class="das-color">Obst</span></strong>. <br/> 🇬🇧 <i>I like to eat fruit.</i> <br/> 🇪🇸 <i>Me gusta comer fruta.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Obst</span></strong> ist reif.<br/>🇬🇧 <i>The fruit is ripe.</i><br/>🇪🇸 <i>La fruta está madura.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">das Obst</span></strong>.<br/>🇬🇧 <i>I buy the fruit.</i><br/>🇪🇸 <i>Compro la fruta.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">Obst</span></strong>.<br/>🇬🇧 <i>This is fruit.</i><br/>🇪🇸 <i>Esta es fruta.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich esse <strong><span class="das-color">Obst</span></strong>.<br/>🇬🇧 <i>I eat fruit.</i><br/>🇪🇸 <i>Como fruta.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Obst</span></strong> ist da.<br/>🇬🇧 <i>No fruit is there.</i><br/>🇪🇸 <i>No hay fruta.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Obst</span></strong>.<br/>🇬🇧 <i>I eat no fruit.</i><br/>🇪🇸 <i>No como fruta.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Gemüse</span></strong> <br/> 🥦</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ge-mú-se/ <br/> 🇬🇧 <i>Vegetables</i> <br/> 🇪🇸 <i>Verduras</i></td>
-            <td data-label="Beispielsatz">Ich esse gern <strong><span class="das-color">Gemüse</span></strong>. <br/> 🇬🇧 <i>I like to eat vegetables.</i> <br/> 🇪🇸 <i>Me gusta comer verduras.</i></td>
-            <td data-label="Beispielsatz">Das <strong><span class="das-color">Gemüse</span></strong> ist frisch. <br/> 🇬🇧 <i>The vegetables are fresh.</i> <br/> 🇪🇸 <i>Las verduras están frescas.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Gemüse</span></strong> ist grün.<br/>🇬🇧 <i>The vegetables are green.</i><br/>🇪🇸 <i>Las verduras son verdes.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich koche <strong><span class="das-color">das Gemüse</span></strong>.<br/>🇬🇧 <i>I cook the vegetables.</i><br/>🇪🇸 <i>Cocino las verduras.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">Gemüse</span></strong>.<br/>🇬🇧 <i>This is vegetables.</i><br/>🇪🇸 <i>Estas son verduras.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">Gemüse</span></strong>.<br/>🇬🇧 <i>I buy vegetables.</i><br/>🇪🇸 <i>Compro verduras.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Gemüse</span></strong> ist da.<br/>🇬🇧 <i>No vegetables are there.</i><br/>🇪🇸 <i>No hay verduras.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Gemüse</span></strong>.<br/>🇬🇧 <i>I eat no vegetables.</i><br/>🇪🇸 <i>No como verduras.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Fleisch</span></strong> <br/> 🥩</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das flaish/ <br/> 🇬🇧 <i>Meat</i> <br/> 🇪🇸 <i>Carne</i></td>
-            <td data-label="Beispielsatz">Ich esse <strong><span class="das-color">Fleisch</span></strong> gern. <br/> 🇬🇧 <i>I like to eat meat.</i> <br/> 🇪🇸 <i>Me gusta comer carne.</i></td>
-            <td data-label="Beispielsatz">Das <strong><span class="das-color">Fleisch</span></strong> ist zart. <br/> 🇬🇧 <i>The meat is tender.</i> <br/> 🇪🇸 <i>La carne está tierna.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Fleisch</span></strong> ist frisch.<br/>🇬🇧 <i>The meat is fresh.</i><br/>🇪🇸 <i>La carne está fresca.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich brate <strong><span class="das-color">das Fleisch</span></strong>.<br/>🇬🇧 <i>I fry the meat.</i><br/>🇪🇸 <i>Frio la carne.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">Fleisch</span></strong>.<br/>🇬🇧 <i>This is meat.</i><br/>🇪🇸 <i>Esta es carne.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">Fleisch</span></strong>.<br/>🇬🇧 <i>I buy meat.</i><br/>🇪🇸 <i>Compro carne.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Fleisch</span></strong> ist da.<br/>🇬🇧 <i>No meat is there.</i><br/>🇪🇸 <i>No hay carne.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Fleisch</span></strong>.<br/>🇬🇧 <i>I eat no meat.</i><br/>🇪🇸 <i>No como carne.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Wasser</span></strong> <br/> 💧</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das vá-ser/ <br/> 🇬🇧 <i>Water</i> <br/> 🇪🇸 <i>Agua</i></td>
-            <td data-label="Beispielsatz">Mittags trinke ich <strong><span class="das-color">Wasser</span></strong>. <br/> 🇬🇧 <i>I drink water at noon.</i> <br/> 🇪🇸 <i>Bebo agua al mediodía.</i></td>
-            <td data-label="Beispielsatz">Das <strong><span class="das-color">Wasser</span></strong> ist kalt. <br/> 🇬🇧 <i>The water is cold.</i> <br/> 🇪🇸 <i>El agua está fría.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Wasser</span></strong> ist sauber.<br/>🇬🇧 <i>The water is clean.</i><br/>🇪🇸 <i>El agua está limpia.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich trinke <strong><span class="das-color">das Wasser</span></strong>.<br/>🇬🇧 <i>I drink the water.</i><br/>🇪🇸 <i>Bebo el agua.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">Wasser</span></strong>.<br/>🇬🇧 <i>This is water.</i><br/>🇪🇸 <i>Esta es agua.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="das-color">Wasser</span></strong>.<br/>🇬🇧 <i>I need water.</i><br/>🇪🇸 <i>Necesito agua.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Wasser</span></strong> ist da.<br/>🇬🇧 <i>No water is there.</i><br/>🇪🇸 <i>No hay agua.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich trinke <strong><span class="das-color">kein Wasser</span></strong>.<br/>🇬🇧 <i>I drink no water.</i><br/>🇪🇸 <i>No bebo agua.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Apfel</span></strong> <br/> 🍎</td>
+            <td data-label="Substantiv"><strong><span class="der-color">der Apfel</span> <span class="emoji-small">🍎</span></strong></td>
             <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der áp-fel/ <br/> 🇬🇧 <i>Apple</i> <br/> 🇪🇸 <i>Manzana</i></td>
             <td data-label="Beispielsatz">Ich esse <strong><span class="der-color">einen Apfel</span></strong>. <br/> 🇬🇧 <i>I eat an apple.</i> <br/> 🇪🇸 <i>Como una manzana.</i></td>
             <td data-label="Beispielsatz">Der <strong><span class="der-color">Apfel</span></strong> ist rot. <br/> 🇬🇧 <i>The apple is red.</i> <br/> 🇪🇸 <i>La manzana es roja.</i></td>
@@ -213,7 +95,79 @@
             <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="der-color">keinen Apfel</span></strong>.<br/>🇬🇧 <i>I eat no apple.</i><br/>🇪🇸 <i>No como manzana.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Salat</span></strong> <br/> 🥗</td>
+            <td data-label="Substantiv"><strong><span class="der-color">der Fisch</span> <span class="emoji-small">🐟</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der fɪʃ/ <br/> 🇬🇧 <i>Fish</i> <br/> 🇪🇸 <i>Pescado</i></td>
+            <td data-label="Beispielsatz">Ich esse gern <strong><span class="der-color">Fisch</span></strong>. <br/> 🇬🇧 <i>I like to eat fish.</i> <br/> 🇪🇸 <i>Me gusta comer pescado.</i></td>
+            <td data-label="Beispielsatz">Der <strong><span class="der-color">Fisch</span></strong> ist frisch. <br/> 🇬🇧 <i>The fish is fresh.</i> <br/> 🇪🇸 <i>El pescado está fresco.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Fisch</span></strong> schwimmt.<br/>🇬🇧 <i>The fish is swimming.</i><br/>🇪🇸 <i>El pez nada.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich kaufe <strong><span class="der-color">den Fisch</span></strong>.<br/>🇬🇧 <i>I buy the fish.</i><br/>🇪🇸 <i>Compro el pescado.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Fisch</span></strong>.<br/>🇬🇧 <i>This is a fish.</i><br/>🇪🇸 <i>Esto es un pez.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich möchte <strong><span class="der-color">einen Fisch</span></strong>.<br/>🇬🇧 <i>I would like a fish.</i><br/>🇪🇸 <i>Quisiera un pescado.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Fisch</span></strong> ist im Kühlschrank.<br/>🇬🇧 <i>No fish is in the fridge.</i><br/>🇪🇸 <i>No hay pescado en el refrigerador.</i></td>
+            <td data-label="Negation (Akkusativ)">Sie isst <strong><span class="der-color">keinen Fisch</span></strong>.<br/>🇬🇧 <i>She doesn't eat fish.</i><br/>🇪🇸 <i>Ella no come pescado.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Geschmack</span> <span class="emoji-small">😋</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der ge-shmak/ <br/> 🇬🇧 <i>Flavor / Taste</i> <br/> 🇪🇸 <i>Sabor / Gusto</i></td>
+            <td data-label="Beispielsatz">Der <strong><span class="der-color">Geschmack</span></strong> ist sehr gut. <br/> 🇬🇧 <i>The taste is very good.</i> <br/> 🇪🇸 <i>El sabor es muy bueno.</i></td>
+            <td data-label="Beispielsatz">Ich mag den <strong><span class="der-color">Geschmack</span></strong> von Schokolade. <br/> 🇬🇧 <i>I like the taste of chocolate.</i> <br/> 🇪🇸 <i>Me gusta el sabor del chocolate.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Geschmack</span></strong> ist süß.<br/>🇬🇧 <i>The taste is sweet.</i><br/>🇪🇸 <i>El sabor es dulce.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Er beschreibt <strong><span class="der-color">den Geschmack</span></strong>.<br/>🇬🇧 <i>He describes the taste.</i><br/>🇪🇸 <i>Él describe el sabor.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein</span></strong> neuer <strong><span class="der-color">Geschmack</span></strong>.<br/>🇬🇧 <i>This is a new taste.</i><br/>🇪🇸 <i>Este es un sabor nuevo.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Das Essen hat <strong><span class="der-color">einen guten Geschmack</span></strong>.<br/>🇬🇧 <i>The food has a good taste.</i><br/>🇪🇸 <i>La comida tiene un buen sabor.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein guter Geschmack</span></strong> ist das.<br/>🇬🇧 <i>That is not a good taste.</i><br/>🇪🇸 <i>Ese no es un buen sabor.</i></td>
+            <td data-label="Negation (Akkusativ)">Der Joghurt hat <strong><span class="der-color">keinen Geschmack</span></strong>.<br/>🇬🇧 <i>The yogurt has no taste.</i><br/>🇪🇸 <i>El yogur no tiene sabor.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Ingwer</span> <span class="emoji-small">🫚</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der íng-wer/ <br/> 🇬🇧 <i>Ginger</i> <br/> 🇪🇸 <i>Jengibre</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Ingwer</span></strong> ist sehr gesund. <br/> 🇬🇧 <i>Ginger is very healthy.</i> <br/> 🇪🇸 <i>El jengibre es muy saludable.</i></td>
+            <td data-label="Beispielsatz">Ich gebe <strong><span class="der-color">Ingwer</span></strong> in den Tee. <br/> 🇬🇧 <i>I put ginger in the tea.</i> <br/> 🇪🇸 <i>Pongo jengibre en el té.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Ingwer</span></strong> ist scharf.<br/>🇬🇧 <i>The ginger is spicy.</i><br/>🇪🇸 <i>El jengibre es picante.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich kaufe <strong><span class="der-color">den Ingwer</span></strong>.<br/>🇬🇧 <i>I buy the ginger.</i><br/>🇪🇸 <i>Compro el jengibre.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">Ingwer</span></strong>.<br/>🇬🇧 <i>This is ginger.</i><br/>🇪🇸 <i>Esto es jengibre.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="der-color">Ingwer</span></strong>.<br/>🇬🇧 <i>I need ginger.</i><br/>🇪🇸 <i>Necesito jengibre.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Ingwer</span></strong> ist da.<br/>🇬🇧 <i>No ginger is there.</i><br/>🇪🇸 <i>No hay jengibre.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich mag <strong><span class="der-color">keinen Ingwer</span></strong>.<br/>🇬🇧 <i>I don't like ginger.</i><br/>🇪🇸 <i>No me gusta el jengibre.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Kaffee</span> <span class="emoji-small">☕</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der ˈkafe/ <br/> 🇬🇧 <i>Coffee</i> <br/> 🇪🇸 <i>Café</i></td>
+            <td data-label="Beispielsatz">Ich trinke morgens <strong><span class="der-color">Kaffee</span></strong>. <br/> 🇬🇧 <i>I drink coffee in the morning.</i> <br/> 🇪🇸 <i>Bebo café por la mañana.</i></td>
+            <td data-label="Beispielsatz">Der <strong><span class="der-color">Kaffee</span></strong> ist heiß. <br/> 🇬🇧 <i>The coffee is hot.</i> <br/> 🇪🇸 <i>El café está caliente.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Kaffee</span></strong> ist schwarz.<br/>🇬🇧 <i>The coffee is black.</i><br/>🇪🇸 <i>El café es negro.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich mache <strong><span class="der-color">den Kaffee</span></strong>.<br/>🇬🇧 <i>I make the coffee.</i><br/>🇪🇸 <i>Hago el café.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Kaffee</span></strong>.<br/>🇬🇧 <i>This is a coffee.</i><br/>🇪🇸 <i>Este es un café.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich bestelle <strong><span class="der-color">einen Kaffee</span></strong>.<br/>🇬🇧 <i>I order a coffee.</i><br/>🇪🇸 <i>Pido un café.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Kaffee</span></strong> ist fertig.<br/>🇬🇧 <i>No coffee is ready.</i><br/>🇪🇸 <i>No hay café listo.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich trinke <strong><span class="der-color">keinen Kaffee</span></strong>.<br/>🇬🇧 <i>I don't drink coffee.</i><br/>🇪🇸 <i>No bebo café.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Käse</span> <span class="emoji-small">🧀</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der ˈkɛːzə/ <br/> 🇬🇧 <i>Cheese</i> <br/> 🇪🇸 <i>Queso</i></td>
+            <td data-label="Beispielsatz">Ich esse Brot mit <strong><span class="der-color">Käse</span></strong>. <br/> 🇬🇧 <i>I eat bread with cheese.</i> <br/> 🇪🇸 <i>Como pan con queso.</i></td>
+            <td data-label="Beispielsatz">Der <strong><span class="der-color">Käse</span></strong> kommt aus der Schweiz. <br/> 🇬🇧 <i>The cheese comes from Switzerland.</i> <br/> 🇪🇸 <i>El queso viene de Suiza.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Käse</span></strong> ist lecker.<br/>🇬🇧 <i>The cheese is delicious.</i><br/>🇪🇸 <i>El queso está delicioso.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich schneide <strong><span class="der-color">den Käse</span></strong>.<br/>🇬🇧 <i>I'm cutting the cheese.</i><br/>🇪🇸 <i>Corto el queso.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">Käse</span></strong>.<br/>🇬🇧 <i>This is cheese.</i><br/>🇪🇸 <i>Esto es queso.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich kaufe <strong><span class="der-color">Käse</span></strong>.<br/>🇬🇧 <i>I'm buying cheese.</i><br/>🇪🇸 <i>Compro queso.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Käse</span></strong> ist im Kühlschrank.<br/>🇬🇧 <i>No cheese is in the fridge.</i><br/>🇪🇸 <i>No hay queso en el refrigerador.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich mag <strong><span class="der-color">keinen Käse</span></strong>.<br/>🇬🇧 <i>I don't like cheese.</i><br/>🇪🇸 <i>No me gusta el queso.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Kuchen</span> <span class="emoji-small">🍰</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der ˈkuːxn̩/ <br/> 🇬🇧 <i>Cake</i> <br/> 🇪🇸 <i>Pastel / Tarta</i></td>
+            <td data-label="Beispielsatz">Wir essen am Sonntag <strong><span class="der-color">Kuchen</span></strong>. <br/> 🇬🇧 <i>We eat cake on Sunday.</i> <br/> 🇪🇸 <i>Comemos pastel el domingo.</i></td>
+            <td data-label="Beispielsatz">Der <strong><span class="der-color">Kuchen</span></strong> schmeckt gut. <br/> 🇬🇧 <i>The cake tastes good.</i> <br/> 🇪🇸 <i>El pastel sabe bien.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Kuchen</span></strong> ist süß.<br/>🇬🇧 <i>The cake is sweet.</i><br/>🇪🇸 <i>El pastel es dulce.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich backe <strong><span class="der-color">den Kuchen</span></strong>.<br/>🇬🇧 <i>I am baking the cake.</i><br/>🇪🇸 <i>Horneo el pastel.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Kuchen</span></strong>.<br/>🇬🇧 <i>This is a cake.</i><br/>🇪🇸 <i>Este es un pastel.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich möchte <strong><span class="der-color">einen Kuchen</span></strong>.<br/>🇬🇧 <i>I would like a cake.</i><br/>🇪🇸 <i>Quisiera un pastel.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Kuchen</span></strong> ist mehr da.<br/>🇬🇧 <i>No cake is left.</i><br/>🇪🇸 <i>No queda pastel.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="der-color">keinen Kuchen</span></strong>.<br/>🇬🇧 <i>I don't eat cake.</i><br/>🇪🇸 <i>No como pastel.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Salat</span> <span class="emoji-small">🥗</span></strong></td>
             <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der sa-lát/ <br/> 🇬🇧 <i>Salad</i> <br/> 🇪🇸 <i>Ensalada</i></td>
             <td data-label="Beispielsatz">Mittags kaufe ich <strong><span class="der-color">einen Salat</span></strong>. <br/> 🇬🇧 <i>I buy a salad at noon.</i> <br/> 🇪🇸 <i>Compro una ensalada al mediodía.</i></td>
             <td data-label="Beispielsatz">Der <strong><span class="der-color">Salat</span></strong> ist frisch. <br/> 🇬🇧 <i>The salad is fresh.</i> <br/> 🇪🇸 <i>La ensalada está fresca.</i></td>
@@ -224,10 +178,347 @@
             <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Salat</span></strong> ist da.<br/>🇬🇧 <i>No salad is there.</i><br/>🇪🇸 <i>No hay ensalada.</i></td>
             <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="der-color">keinen Salat</span></strong>.<br/>🇬🇧 <i>I eat no salad.</i><br/>🇪🇸 <i>No como ensalada.</i></td>
           </tr>
+          <!-- DIE Nouns -->
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Eier</span> <span class="emoji-small">🥚</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di ái-er/ <br/> 🇬🇧 <i>Eggs</i> <br/> 🇪🇸 <i>Huevos</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Eier</span></strong> sind frisch. <br/> 🇬🇧 <i>The eggs are fresh.</i> <br/> 🇪🇸 <i>Los huevos están frescos.</i></td>
+            <td data-label="Beispielsatz">Ich kaufe <strong><span class="die-color">Eier</span></strong> für den Kuchen. <br/> 🇬🇧 <i>I'm buying eggs for the cake.</i> <br/> 🇪🇸 <i>Compro huevos para el pastel.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Eier</span></strong> sind im Kühlschrank.<br/>🇬🇧 <i>The eggs are in the fridge.</i><br/>🇪🇸 <i>Los huevos están en el refrigerador.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich koche <strong><span class="die-color">die Eier</span></strong>.<br/>🇬🇧 <i>I cook the eggs.</i><br/>🇪🇸 <i>Cocino los huevos.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das sind <strong><span class="die-color">Eier</span></strong>.<br/>🇬🇧 <i>These are eggs.</i><br/>🇪🇸 <i>Estos son huevos.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="die-color">Eier</span></strong>.<br/>🇬🇧 <i>I need eggs.</i><br/>🇪🇸 <i>Necesito huevos.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Eier</span></strong> sind da.<br/>🇬🇧 <i>No eggs are there.</i><br/>🇪🇸 <i>No hay huevos.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="die-color">keine Eier</span></strong>.<br/>🇬🇧 <i>I eat no eggs.</i><br/>🇪🇸 <i>No como huevos.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Empfehlung</span> <span class="emoji-small">👍</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di emp-fé-lung/ <br/> 🇬🇧 <i>Recommendation</i> <br/> 🇪🇸 <i>Recomendación</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Empfehlung</span></strong> war gut. <br/> 🇬🇧 <i>The recommendation was good.</i> <br/> 🇪🇸 <i>La recomendación fue buena.</i></td>
+            <td data-label="Beispielsatz">Ich habe <strong><span class="die-color">eine Empfehlung</span></strong>. <br/> 🇬🇧 <i>I have a recommendation.</i> <br/> 🇪🇸 <i>Tengo una recomendación.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Empfehlung</span></strong> ist hilfreich.<br/>🇬🇧 <i>The recommendation is helpful.</i><br/>🇪🇸 <i>La recomendación es útil.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich gebe <strong><span class="die-color">die Empfehlung</span></strong>.<br/>🇬🇧 <i>I give the recommendation.</i><br/>🇪🇸 <i>Doy la recomendación.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Empfehlung</span></strong>.<br/>🇬🇧 <i>This is a recommendation.</i><br/>🇪🇸 <i>Esta es una recomendación.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="die-color">eine Empfehlung</span></strong>.<br/>🇬🇧 <i>I need a recommendation.</i><br/>🇪🇸 <i>Necesito una recomendación.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Empfehlung</span></strong> ist hier.<br/>🇬🇧 <i>No recommendation is here.</i><br/>🇪🇸 <i>No hay ninguna recomendación aquí.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich gebe <strong><span class="die-color">keine Empfehlung</span></strong>.<br/>🇬🇧 <i>I give no recommendation.</i><br/>🇪🇸 <i>No doy ninguna recomendación.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Erdbeere</span> <span class="emoji-small">🍓</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di ért-be-re/ <br/> 🇬🇧 <i>Strawberry</i> <br/> 🇪🇸 <i>Fresa</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Erdbeere</span></strong> ist süß. <br/> 🇬🇧 <i>The strawberry is sweet.</i> <br/> 🇪🇸 <i>La fresa es dulce.</i></td>
+            <td data-label="Beispielsatz">Ich esse gern <strong><span class="die-color">Erdbeeren</span></strong>. <br/> 🇬🇧 <i>I like to eat strawberries.</i> <br/> 🇪🇸 <i>Me gusta comer fresas.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Erdbeere</span></strong> ist rot.<br/>🇬🇧 <i>The strawberry is red.</i><br/>🇪🇸 <i>La fresa es roja.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich pflücke <strong><span class="die-color">die Erdbeere</span></strong>.<br/>🇬🇧 <i>I pick the strawberry.</i><br/>🇪🇸 <i>Cojo la fresa.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Erdbeere</span></strong>.<br/>🇬🇧 <i>This is a strawberry.</i><br/>🇪🇸 <i>Esta es una fresa.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich möchte <strong><span class="die-color">eine Erdbeere</span></strong>.<br/>🇬🇧 <i>I would like a strawberry.</i><br/>🇪🇸 <i>Quisiera una fresa.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Erdbeere</span></strong> ist mehr da.<br/>🇬🇧 <i>There is no strawberry left.</i><br/>🇪🇸 <i>No queda ninguna fresa.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="die-color">keine Erdbeere</span></strong>.<br/>🇬🇧 <i>I eat no strawberry.</i><br/>🇪🇸 <i>No como fresas.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Getränke</span> <span class="emoji-small">🥤</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di ge-trän-ke/ <br/> 🇬🇧 <i>Drinks</i> <br/> 🇪🇸 <i>Bebidas</i></td>
+            <td data-label="Beispielsatz">Ich trinke verschiedene <strong><span class="die-color">Getränke</span></strong>. <br/> 🇬🇧 <i>I drink different drinks.</i> <br/> 🇪🇸 <i>Bebo diferentes bebidas.</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Getränke</span></strong> sind kalt. <br/> 🇬🇧 <i>The drinks are cold.</i> <br/> 🇪🇸 <i>Las bebidas están frías.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Getränke</span></strong> sind süß.<br/>🇬🇧 <i>The drinks are sweet.</i><br/>🇪🇸 <i>Las bebidas son dulces.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich bestelle <strong><span class="die-color">die Getränke</span></strong>.<br/>🇬🇧 <i>I order the drinks.</i><br/>🇪🇸 <i>Pido las bebidas.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das sind <strong><span class="die-color">Getränke</span></strong>.<br/>🇬🇧 <i>These are drinks.</i><br/>🇪🇸 <i>Estas son bebidas.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich hole <strong><span class="die-color">Getränke</span></strong>.<br/>🇬🇧 <i>I get drinks.</i><br/>🇪🇸 <i>Consigo bebidas.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Getränke</span></strong> sind da.<br/>🇬🇧 <i>No drinks are there.</i><br/>🇪🇸 <i>No hay bebidas.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich trinke <strong><span class="die-color">keine Getränke</span></strong>.<br/>🇬🇧 <i>I drink no drinks.</i><br/>🇪🇸 <i>No bebo bebidas.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Kartoffel</span> <span class="emoji-small">🥔</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di karˈtɔfl/ <br/> 🇬🇧 <i>Potato</i> <br/> 🇪🇸 <i>Patata / Papa</i></td>
+            <td data-label="Beispielsatz">Ich koche heute <strong><span class="die-color">Kartoffeln</span></strong>. <br/> 🇬🇧 <i>I am cooking potatoes today.</i> <br/> 🇪🇸 <i>Hoy cocino patatas.</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Kartoffel</span></strong> ist ein Gemüse. <br/> 🇬🇧 <i>The potato is a vegetable.</i> <br/> 🇪🇸 <i>La patata es una verdura.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Kartoffel</span></strong> ist groß.<br/>🇬🇧 <i>The potato is big.</i><br/>🇪🇸 <i>La patata es grande.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich schäle <strong><span class="die-color">die Kartoffel</span></strong>.<br/>🇬🇧 <i>I'm peeling the potato.</i><br/>🇪🇸 <i>Pelo la patata.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Kartoffel</span></strong>.<br/>🇬🇧 <i>This is a potato.</i><br/>🇪🇸 <i>Esta es una patata.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich nehme <strong><span class="die-color">eine Kartoffel</span></strong>.<br/>🇬🇧 <i>I'll take a potato.</i><br/>🇪🇸 <i>Tomo una patata.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Kartoffel</span></strong> ist gekocht.<br/>🇬🇧 <i>No potato is cooked.</i><br/>🇪🇸 <i>Ninguna patata está cocida.</i></td>
+            <td data-label="Negation (Akkusativ)">Er isst <strong><span class="die-color">keine Kartoffeln</span></strong>.<br/>🇬🇧 <i>He doesn't eat potatoes.</i><br/>🇪🇸 <i>Él no come patatas.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Kichererbse</span> <span class="emoji-small">🧆</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di kí-cher-erb-se/ <br/> 🇬🇧 <i>Chickpea</i> <br/> 🇪🇸 <i>Garbanzo</i></td>
+            <td data-label="Beispielsatz">Ich koche heute <strong><span class="die-color">Kichererbsen</span></strong>. <br/> 🇬🇧 <i>I am cooking chickpeas today.</i> <br/> 🇪🇸 <i>Hoy cocino garbanzos.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Kichererbsen</span></strong> sind lecker. <br/> 🇬🇧 <i>Chickpeas are delicious.</i> <br/> 🇪🇸 <i>Los garbanzos son deliciosos.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Kichererbsen</span></strong> sind gesund.<br/>🇬🇧 <i>The chickpeas are healthy.</i><br/>🇪🇸 <i>Los garbanzos son saludables.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich esse <strong><span class="die-color">die Kichererbsen</span></strong>.<br/>🇬🇧 <i>I eat the chickpeas.</i><br/>🇪🇸 <i>Como los garbanzos.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das sind <strong><span class="die-color">Kichererbsen</span></strong>.<br/>🇬🇧 <i>These are chickpeas.</i><br/>🇪🇸 <i>Estos son garbanzos.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich kaufe <strong><span class="die-color">Kichererbsen</span></strong>.<br/>🇬🇧 <i>I buy chickpeas.</i><br/>🇪🇸 <i>Compro garbanzos.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Kichererbsen</span></strong> sind im Salat.<br/>🇬🇧 <i>No chickpeas are in the salad.</i><br/>🇪🇸 <i>No hay garbanzos en la ensalada.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich mag <strong><span class="die-color">keine Kichererbsen</span></strong>.<br/>🇬🇧 <i>I don't like chickpeas.</i><br/>🇪🇸 <i>No me gustan los garbanzos.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Kirsche</span> <span class="emoji-small">🍒</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di kír-sche/ <br/> 🇬🇧 <i>Cherry</i> <br/> 🇪🇸 <i>Cereza</i></td>
+            <td data-label="Beispielsatz">Im Sommer esse ich gerne <strong><span class="die-color">Kirschen</span></strong>. <br/> 🇬🇧 <i>I like to eat cherries in the summer.</i> <br/> 🇪🇸 <i>Me gusta comer cerezas en verano.</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Kirsche</span></strong> am Baum ist reif. <br/> 🇬🇧 <i>The cherry on the tree is ripe.</i> <br/> 🇪🇸 <i>La cereza en el árbol está madura.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Kirsche</span></strong> ist süß.<br/>🇬🇧 <i>The cherry is sweet.</i><br/>🇪🇸 <i>La cereza es dulce.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich nehme <strong><span class="die-color">die Kirsche</span></strong>.<br/>🇬🇧 <i>I take the cherry.</i><br/>🇪🇸 <i>Tomo la cereza.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Kirsche</span></strong>.<br/>🇬🇧 <i>This is a cherry.</i><br/>🇪🇸 <i>Esta es una cereza.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich esse <strong><span class="die-color">eine Kirsche</span></strong>.<br/>🇬🇧 <i>I eat a cherry.</i><br/>🇪🇸 <i>Como una cereza.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Kirsche</span></strong> ist auf dem Kuchen.<br/>🇬🇧 <i>No cherry is on the cake.</i><br/>🇪🇸 <i>No hay cereza en el pastel.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich möchte <strong><span class="die-color">keine Kirsche</span></strong>.<br/>🇬🇧 <i>I want no cherry.</i><br/>🇪🇸 <i>No quiero cerezas.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Lebensmittel</span> <span class="emoji-small">🛒</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di lé-bens-mit-tel/ <br/> 🇬🇧 <i>Groceries</i> <br/> 🇪🇸 <i>Alimentos</i></td>
+            <td data-label="Beispielsatz">Ich kaufe <strong><span class="die-color">Lebensmittel</span></strong> im Supermarkt. <br/> 🇬🇧 <i>I buy groceries at the supermarket.</i> <br/> 🇪🇸 <i>Compro alimentos en el supermercado.</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Lebensmittel</span></strong> sind frisch. <br/> 🇬🇧 <i>The groceries are fresh.</i> <br/> 🇪🇸 <i>Los alimentos están frescos.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Lebensmittel</span></strong> sind teuer.<br/>🇬🇧 <i>The groceries are expensive.</i><br/>🇪🇸 <i>Los alimentos son caros.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich brauche <strong><span class="die-color">die Lebensmittel</span></strong>.<br/>🇬🇧 <i>I need the groceries.</i><br/>🇪🇸 <i>Necesito los alimentos.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das sind <strong><span class="die-color">Lebensmittel</span></strong>.<br/>🇬🇧 <i>These are groceries.</i><br/>🇪🇸 <i>Estos son alimentos.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich hole <strong><span class="die-color">Lebensmittel</span></strong>.<br/>🇬🇧 <i>I get groceries.</i><br/>🇪🇸 <i>Consigo alimentos.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Lebensmittel</span></strong> sind da.<br/>🇬🇧 <i>No groceries are there.</i><br/>🇪🇸 <i>No hay alimentos.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich kaufe <strong><span class="die-color">keine Lebensmittel</span></strong>.<br/>🇬🇧 <i>I buy no groceries.</i><br/>🇪🇸 <i>No compro alimentos.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Mandel</span> <span class="emoji-small">🌰</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di mán-del/ <br/> 🇬🇧 <i>Almond</i> <br/> 🇪🇸 <i>Almendra</i></td>
+            <td data-label="Beispielsatz">Ich esse jeden Tag <strong><span class="die-color">Mandeln</span></strong>. <br/> 🇬🇧 <i>I eat almonds every day.</i> <br/> 🇪🇸 <i>Como almendras todos los días.</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Mandel</span></strong> ist ein gesunder Snack. <br/> 🇬🇧 <i>The almond is a healthy snack.</i> <br/> 🇪🇸 <i>La almendra es un snack saludable.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Mandeln</span></strong> sind geröstet.<br/>🇬🇧 <i>The almonds are roasted.</i><br/>🇪🇸 <i>Las almendras están tostadas.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich kaufe <strong><span class="die-color">die Mandeln</span></strong>.<br/>🇬🇧 <i>I buy the almonds.</i><br/>🇪🇸 <i>Compro las almendras.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Mandel</span></strong>.<br/>🇬🇧 <i>This is an almond.</i><br/>🇪🇸 <i>Esta es una almendra.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich esse <strong><span class="die-color">eine Mandel</span></strong>.<br/>🇬🇧 <i>I eat an almond.</i><br/>🇪🇸 <i>Como una almendra.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Mandeln</span></strong> sind mehr in der Tüte.<br/>🇬🇧 <i>No almonds are left in the bag.</i><br/>🇪🇸 <i>No quedan almendras en la bolsa.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="die-color">keine Mandeln</span></strong>.<br/>🇬🇧 <i>I eat no almonds.</i><br/>🇪🇸 <i>No como almendras.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Milch</span> <span class="emoji-small">🥛</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di mɪlç/ <br/> 🇬🇧 <i>Milk</i> <br/> 🇪🇸 <i>Leche</i></td>
+            <td data-label="Beispielsatz">Ich trinke Kaffee mit <strong><span class="die-color">Milch</span></strong>. <br/> 🇬🇧 <i>I drink coffee with milk.</i> <br/> 🇪🇸 <i>Bebo café con leche.</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Milch</span></strong> ist im Kühlschrank. <br/> 🇬🇧 <i>The milk is in the fridge.</i> <br/> 🇪🇸 <i>La leche está en el refrigerador.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Milch</span></strong> ist kalt.<br/>🇬🇧 <i>The milk is cold.</i><br/>🇪🇸 <i>La leche está fría.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich kaufe <strong><span class="die-color">die Milch</span></strong>.<br/>🇬🇧 <i>I buy the milk.</i><br/>🇪🇸 <i>Compro la leche.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">Milch</span></strong>.<br/>🇬🇧 <i>This is milk.</i><br/>🇪🇸 <i>Esto es leche.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="die-color">Milch</span></strong>.<br/>🇬🇧 <i>I need milk.</i><br/>🇪🇸 <i>Necesito leche.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Milch</span></strong> ist da.<br/>🇬🇧 <i>No milk is there.</i><br/>🇪🇸 <i>No hay leche.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich trinke <strong><span class="die-color">keine Milch</span></strong>.<br/>🇬🇧 <i>I don't drink milk.</i><br/>🇪🇸 <i>No bebo leche.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Speisen</span> <span class="emoji-small">🍽️</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di shpái-sen/ <br/> 🇬🇧 <i>Dishes</i> <br/> 🇪🇸 <i>Platos</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Speisen</span></strong> sind lecker. <br/> 🇬🇧 <i>The dishes are delicious.</i> <br/> 🇪🇸 <i>Los platos están deliciosos.</i></td>
+            <td data-label="Beispielsatz">Wir probieren verschiedene <strong><span class="die-color">Speisen</span></strong>. <br/> 🇬🇧 <i>We try different dishes.</i> <br/> 🇪🇸 <i>Probamos diferentes platos.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Speisen</span></strong> sind frisch.<br/>🇬🇧 <i>The dishes are fresh.</i><br/>🇪🇸 <i>Los platos están frescos.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich bestelle <strong><span class="die-color">die Speisen</span></strong>.<br/>🇬🇧 <i>I order the dishes.</i><br/>🇪🇸 <i>Pido los platos.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das sind <strong><span class="die-color">Speisen</span></strong>.<br/>🇬🇧 <i>These are dishes.</i><br/>🇪🇸 <i>Estos son platos.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich koche <strong><span class="die-color">Speisen</span></strong>.<br/>🇬🇧 <i>I cook dishes.</i><br/>🇪🇸 <i>Cocino platos.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Speisen</span></strong> sind da.<br/>🇬🇧 <i>No dishes are there.</i><br/>🇪🇸 <i>No hay platos.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="die-color">keine Speisen</span></strong>.<br/>🇬🇧 <i>I eat no dishes.</i><br/>🇪🇸 <i>No como platos.</i></td>
+          </tr>
+          <!-- DAS Nouns -->
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Abendessen</span> <span class="emoji-small">🍝</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das á-bent-és-sen/ <br/> 🇬🇧 <i>Dinner</i> <br/> 🇪🇸 <i>Cena</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Abendessen</span></strong> ist fertig. <br/> 🇬🇧 <i>Dinner is ready.</i> <br/> 🇪🇸 <i>La cena está lista.</i></td>
+            <td data-label="Beispielsatz">Wir essen <strong><span class="das-color">Abendessen</span></strong> um 19 Uhr. <br/> 🇬🇧 <i>We eat dinner at 7 PM.</i> <br/> 🇪🇸 <i>Cenamos a las 7 PM.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Abendessen</span></strong> ist lecker.<br/>🇬🇧 <i>Dinner is delicious.</i><br/>🇪🇸 <i>La cena está deliciosa.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich genieße <strong><span class="das-color">das Abendessen</span></strong>.<br/>🇬🇧 <i>I enjoy dinner.</i><br/>🇪🇸 <i>Disfruto la cena.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Abendessen</span></strong>.<br/>🇬🇧 <i>This is a dinner.</i><br/>🇪🇸 <i>Esta es una cena.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich plane <strong><span class="das-color">ein Abendessen</span></strong>.<br/>🇬🇧 <i>I plan a dinner.</i><br/>🇪🇸 <i>Planifico una cena.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Abendessen</span></strong> ist da.<br/>🇬🇧 <i>No dinner is there.</i><br/>🇪🇸 <i>No hay cena.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Abendessen</span></strong>.<br/>🇬🇧 <i>I eat no dinner.</i><br/>🇪🇸 <i>No ceno.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Brot</span> <span class="emoji-small">🍞</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das bʁoːt/ <br/> 🇬🇧 <i>Bread</i> <br/> 🇪🇸 <i>Pan</i></td>
+            <td data-label="Beispielsatz">Ich esse <strong><span class="das-color">Brot</span></strong> zum Frühstück. <br/> 🇬🇧 <i>I eat bread for breakfast.</i> <br/> 🇪🇸 <i>Como pan para el desayuno.</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Brot</span></strong> ist frisch. <br/> 🇬🇧 <i>The bread is fresh.</i> <br/> 🇪🇸 <i>El pan está fresco.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Brot</span></strong> ist lecker.<br/>🇬🇧 <i>The bread is delicious.</i><br/>🇪🇸 <i>El pan está delicioso.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">das Brot</span></strong>.<br/>🇬🇧 <i>I buy the bread.</i><br/>🇪🇸 <i>Compro el pan.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Brot</span></strong>.<br/>🇬🇧 <i>This is a loaf of bread.</i><br/>🇪🇸 <i>Este es un pan.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich schneide <strong><span class="das-color">ein Brot</span></strong>.<br/>🇬🇧 <i>I'm cutting a loaf of bread.</i><br/>🇪🇸 <i>Corto un pan.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Brot</span></strong> ist da.<br/>🇬🇧 <i>No bread is there.</i><br/>🇪🇸 <i>No hay pan.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Brot</span></strong>.<br/>🇬🇧 <i>I eat no bread.</i><br/>🇪🇸 <i>No como pan.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Ei</span> <span class="emoji-small">🥚</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ái/ <br/> 🇬🇧 <i>Egg</i> <br/> 🇪🇸 <i>Huevo</i></td>
+            <td data-label="Beispielsatz">Ich esse <strong><span class="das-color">ein Ei</span></strong> zum Frühstück. <br/> 🇬🇧 <i>I eat an egg for breakfast.</i> <br/> 🇪🇸 <i>Como un huevo para el desayuno.</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Ei</span></strong> ist gekocht. <br/> 🇬🇧 <i>The egg is cooked.</i> <br/> 🇪🇸 <i>El huevo está cocido.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Ei</span></strong> ist frisch.<br/>🇬🇧 <i>The egg is fresh.</i><br/>🇪🇸 <i>El huevo está fresco.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich koche <strong><span class="das-color">das Ei</span></strong>.<br/>🇬🇧 <i>I cook the egg.</i><br/>🇪🇸 <i>Cocino el huevo.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Ei</span></strong>.<br/>🇬🇧 <i>This is an egg.</i><br/>🇪🇸 <i>Este es un huevo.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich esse <strong><span class="das-color">ein Ei</span></strong>.<br/>🇬🇧 <i>I eat an egg.</i><br/>🇪🇸 <i>Como un huevo.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Ei</span></strong> ist da.<br/>🇬🇧 <i>No egg is there.</i><br/>🇪🇸 <i>No hay huevo.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Ei</span></strong>.<br/>🇬🇧 <i>I eat no egg.</i><br/>🇪🇸 <i>No como huevo.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Eis</span> <span class="emoji-small">🍦</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ís/ <br/> 🇬🇧 <i>Ice cream</i> <br/> 🇪🇸 <i>Helado</i></td>
+            <td data-label="Beispielsatz">Wir essen am Wochenende <strong><span class="das-color">Eis</span></strong>. <br/> 🇬🇧 <i>We eat ice cream on the weekend.</i> <br/> 🇪🇸 <i>Comemos helado el fin de semana.</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Eis</span></strong> ist kalt. <br/> 🇬🇧 <i>The ice cream is cold.</i> <br/> 🇪🇸 <i>El helado está frío.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Eis</span></strong> schmeckt gut.<br/>🇬🇧 <i>The ice cream tastes good.</i><br/>🇪🇸 <i>El helado sabe bien.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">das Eis</span></strong>.<br/>🇬🇧 <i>I buy the ice cream.</i><br/>🇪🇸 <i>Compro el helado.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Eis</span></strong>.<br/>🇬🇧 <i>This is an ice cream.</i><br/>🇪🇸 <i>Este es un helado.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich esse <strong><span class="das-color">ein Eis</span></strong>.<br/>🇬🇧 <i>I eat an ice cream.</i><br/>🇪🇸 <i>Como un helado.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Eis</span></strong> ist da.<br/>🇬🇧 <i>No ice cream is there.</i><br/>🇪🇸 <i>No hay helado.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Eis</span></strong>.<br/>🇬🇧 <i>I eat no ice cream.</i><br/>🇪🇸 <i>No como helado.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Essen</span> <span class="emoji-small">🍽️</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das és-sen/ <br/> 🇬🇧 <i>Food</i> <br/> 🇪🇸 <i>Comida</i></td>
+            <td data-label="Beispielsatz">Ich koche <strong><span class="das-color">Essen</span></strong> für mein Baby. <br/> 🇬🇧 <i>I cook food for my baby.</i> <br/> 🇪🇸 <i>Cocino comida para mi bebé.</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Essen</span></strong> ist gesund. <br/> 🇬🇧 <i>The food is healthy.</i> <br/> 🇪🇸 <i>La comida es saludable.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Essen</span></strong> ist warm.<br/>🇬🇧 <i>The food is warm.</i><br/>🇪🇸 <i>La comida está caliente.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich mag <strong><span class="das-color">das Essen</span></strong>.<br/>🇬🇧 <i>I like the food.</i><br/>🇪🇸 <i>Me gusta la comida.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Essen</span></strong>.<br/>🇬🇧 <i>This is a meal.</i><br/>🇪🇸 <i>Esta es una comida.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich bestelle <strong><span class="das-color">ein Essen</span></strong>.<br/>🇬🇧 <i>I order a meal.</i><br/>🇪🇸 <i>Pido una comida.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Essen</span></strong> ist da.<br/>🇬🇧 <i>No food is there.</i><br/>🇪🇸 <i>No hay comida.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich kaufe <strong><span class="das-color">kein Essen</span></strong>.<br/>🇬🇧 <i>I buy no food.</i><br/>🇪🇸 <i>No compro comida.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Fleisch</span> <span class="emoji-small">🥩</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das flaish/ <br/> 🇬🇧 <i>Meat</i> <br/> 🇪🇸 <i>Carne</i></td>
+            <td data-label="Beispielsatz">Ich esse <strong><span class="das-color">Fleisch</span></strong> gern. <br/> 🇬🇧 <i>I like to eat meat.</i> <br/> 🇪🇸 <i>Me gusta comer carne.</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Fleisch</span></strong> ist zart. <br/> 🇬🇧 <i>The meat is tender.</i> <br/> 🇪🇸 <i>La carne está tierna.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Fleisch</span></strong> ist frisch.<br/>🇬🇧 <i>The meat is fresh.</i><br/>🇪🇸 <i>La carne está fresca.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich brate <strong><span class="das-color">das Fleisch</span></strong>.<br/>🇬🇧 <i>I fry the meat.</i><br/>🇪🇸 <i>Frio la carne.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">Fleisch</span></strong>.<br/>🇬🇧 <i>This is meat.</i><br/>🇪🇸 <i>Esta es carne.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">Fleisch</span></strong>.<br/>🇬🇧 <i>I buy meat.</i><br/>🇪🇸 <i>Compro carne.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Fleisch</span></strong> ist da.<br/>🇬🇧 <i>No meat is there.</i><br/>🇪🇸 <i>No hay carne.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Fleisch</span></strong>.<br/>🇬🇧 <i>I eat no meat.</i><br/>🇪🇸 <i>No como carne.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Frühstück</span> <span class="emoji-small">🥐</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das frúh-shtük/ <br/> 🇬🇧 <i>Breakfast</i> <br/> 🇪🇸 <i>Desayuno</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Frühstück</span></strong> ist um 8 Uhr. <br/> 🇬🇧 <i>Breakfast is at 8 o'clock.</i> <br/> 🇪🇸 <i>El desayuno es a las 8.</i></td>
+            <td data-label="Beispielsatz">Ich esse <strong><span class="das-color">Frühstück</span></strong> zu Hause. <br/> 🇬🇧 <i>I eat breakfast at home.</i> <br/> 🇪🇸 <i>Desayuno en casa.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Frühstück</span></strong> ist fertig.<br/>🇬🇧 <i>Breakfast is ready.</i><br/>🇪🇸 <i>El desayuno está listo.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich esse <strong><span class="das-color">das Frühstück</span></strong>.<br/>🇬🇧 <i>I eat breakfast.</i><br/>🇪🇸 <i>Como el desayuno.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Frühstück</span></strong>.<br/>🇬🇧 <i>This is a breakfast.</i><br/>🇪🇸 <i>Este es un desayuno.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich mache <strong><span class="das-color">ein Frühstück</span></strong>.<br/>🇬🇧 <i>I make a breakfast.</i><br/>🇪🇸 <i>Hago un desayuno.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Frühstück</span></strong> ist da.<br/>🇬🇧 <i>No breakfast is there.</i><br/>🇪🇸 <i>No hay desayuno.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Frühstück</span></strong>.<br/>🇬🇧 <i>I eat no breakfast.</i><br/>🇪🇸 <i>No desayuno.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Gemüse</span> <span class="emoji-small">🥦</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ge-mú-se/ <br/> 🇬🇧 <i>Vegetables</i> <br/> 🇪🇸 <i>Verduras</i></td>
+            <td data-label="Beispielsatz">Ich esse gern <strong><span class="das-color">Gemüse</span></strong>. <br/> 🇬🇧 <i>I like to eat vegetables.</i> <br/> 🇪🇸 <i>Me gusta comer verduras.</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Gemüse</span></strong> ist frisch. <br/> 🇬🇧 <i>The vegetables are fresh.</i> <br/> 🇪🇸 <i>Las verduras están frescas.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Gemüse</span></strong> ist grün.<br/>🇬🇧 <i>The vegetables are green.</i><br/>🇪🇸 <i>Las verduras son verdes.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich koche <strong><span class="das-color">das Gemüse</span></strong>.<br/>🇬🇧 <i>I cook the vegetables.</i><br/>🇪🇸 <i>Cocino las verduras.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">Gemüse</span></strong>.<br/>🇬🇧 <i>This is vegetables.</i><br/>🇪🇸 <i>Estas son verduras.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">Gemüse</span></strong>.<br/>🇬🇧 <i>I buy vegetables.</i><br/>🇪🇸 <i>Compro verduras.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Gemüse</span></strong> ist da.<br/>🇬🇧 <i>No vegetables are there.</i><br/>🇪🇸 <i>No hay verduras.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Gemüse</span></strong>.<br/>🇬🇧 <i>I eat no vegetables.</i><br/>🇪🇸 <i>No como verduras.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Hackfleisch</span> <span class="emoji-small">🧆</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das hák-flaish/ <br/> 🇬🇧 <i>Minced meat</i> <br/> 🇪🇸 <i>Carne picada</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Hackfleisch</span></strong> ist für die Soße. <br/> 🇬🇧 <i>The minced meat is for the sauce.</i> <br/> 🇪🇸 <i>La carne picada es para la salsa.</i></td>
+            <td data-label="Beispielsatz">Ich brauche <strong><span class="das-color">Hackfleisch</span></strong>. <br/> 🇬🇧 <i>I need minced meat.</i> <br/> 🇪🇸 <i>Necesito carne picada.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Hackfleisch</span></strong> ist frisch.<br/>🇬🇧 <i>The minced meat is fresh.</i><br/>🇪🇸 <i>La carne picada está fresca.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich brate <strong><span class="das-color">das Hackfleisch</span></strong> an.<br/>🇬🇧 <i>I am frying the minced meat.</i><br/>🇪🇸 <i>Frío la carne picada.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">Hackfleisch</span></strong>.<br/>🇬🇧 <i>This is minced meat.</i><br/>🇪🇸 <i>Esto es carne picada.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">Hackfleisch</span></strong>.<br/>🇬🇧 <i>I buy minced meat.</i><br/>🇪🇸 <i>Compro carne picada.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Hackfleisch</span></strong> ist da.<br/>🇬🇧 <i>No minced meat is there.</i><br/>🇪🇸 <i>No hay carne picada.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Hackfleisch</span></strong>.<br/>🇬🇧 <i>I eat no minced meat.</i><br/>🇪🇸 <i>No como carne picada.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Hühnchen</span> <span class="emoji-small">🐔</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das hǘn-chen/ <br/> 🇬🇧 <i>Chicken</i> <br/> 🇪🇸 <i>Pollo</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Hühnchen</span></strong> ist fertig. <br/> 🇬🇧 <i>The chicken is ready.</i> <br/> 🇪🇸 <i>El pollo está listo.</i></td>
+            <td data-label="Beispielsatz">Wir essen heute <strong><span class="das-color">Hühnchen</span></strong>. <br/> 🇬🇧 <i>We are eating chicken today.</i> <br/> 🇪🇸 <i>Hoy comemos pollo.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Hühnchen</span></strong> ist lecker.<br/>🇬🇧 <i>The chicken is delicious.</i><br/>🇪🇸 <i>El pollo está delicioso.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich bestelle <strong><span class="das-color">das Hühnchen</span></strong>.<br/>🇬🇧 <i>I order the chicken.</i><br/>🇪🇸 <i>Pido el pollo.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Hühnchen</span></strong>.<br/>🇬🇧 <i>This is a chicken.</i><br/>🇪🇸 <i>Este es un pollo.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich esse <strong><span class="das-color">ein Hühnchen</span></strong>.<br/>🇬🇧 <i>I eat a chicken.</i><br/>🇪🇸 <i>Como un pollo.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Hühnchen</span></strong> ist im Ofen.<br/>🇬🇧 <i>No chicken is in the oven.</i><br/>🇪🇸 <i>No hay pollo en el horno.</i></td>
+            <td data-label="Negation (Akkusativ)">Sie isst <strong><span class="das-color">kein Hühnchen</span></strong>.<br/>🇬🇧 <i>She eats no chicken.</i><br/>🇪🇸 <i>Ella no come pollo.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Mittagessen</span> <span class="emoji-small">🍛</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das mít-tag-és-sen/ <br/> 🇬🇧 <i>Lunch</i> <br/> 🇪🇸 <i>Almuerzo</i></td>
+            <td data-label="Beispielsatz">Wann gibt es <strong><span class="das-color">Mittagessen</span></strong>? <br/> 🇬🇧 <i>When is lunch?</i> <br/> 🇪🇸 <i>¿Cuándo es el almuerzo?</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Mittagessen</span></strong> schmeckt gut. <br/> 🇬🇧 <i>Lunch tastes good.</i> <br/> 🇪🇸 <i>El almuerzo sabe bien.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Mittagessen</span></strong> ist warm.<br/>🇬🇧 <i>Lunch is warm.</i><br/>🇪🇸 <i>El almuerzo está caliente.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich koche <strong><span class="das-color">das Mittagessen</span></strong>.<br/>🇬🇧 <i>I cook lunch.</i><br/>🇪🇸 <i>Cocino el almuerzo.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Mittagessen</span></strong>.<br/>🇬🇧 <i>This is a lunch.</i><br/>🇪🇸 <i>Este es un almuerzo.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich bereite <strong><span class="das-color">ein Mittagessen</span></strong> vor.<br/>🇬🇧 <i>I prepare a lunch.</i><br/>🇪🇸 <i>Preparo un almuerzo.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Mittagessen</span></strong> ist fertig.<br/>🇬🇧 <i>No lunch is ready.</i><br/>🇪🇸 <i>No hay almuerzo listo.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Mittagessen</span></strong>.<br/>🇬🇧 <i>I eat no lunch.</i><br/>🇪🇸 <i>No almuerzo.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Obst</span> <span class="emoji-small">🍎</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ópst/ <br/> 🇬🇧 <i>Fruit</i> <br/> 🇪🇸 <i>Fruta</i></td>
+            <td data-label="Beispielsatz"><strong><span class="das-color">Obst</span></strong> ist gesund. <br/> 🇬🇧 <i>Fruit is healthy.</i> <br/> 🇪🇸 <i>La fruta es saludable.</i></td>
+            <td data-label="Beispielsatz">Ich esse gern <strong><span class="das-color">Obst</span></strong>. <br/> 🇬🇧 <i>I like to eat fruit.</i> <br/> 🇪🇸 <i>Me gusta comer fruta.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Obst</span></strong> ist reif.<br/>🇬🇧 <i>The fruit is ripe.</i><br/>🇪🇸 <i>La fruta está madura.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">das Obst</span></strong>.<br/>🇬🇧 <i>I buy the fruit.</i><br/>🇪🇸 <i>Compro la fruta.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">Obst</span></strong>.<br/>🇬🇧 <i>This is fruit.</i><br/>🇪🇸 <i>Esta es fruta.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich esse <strong><span class="das-color">Obst</span></strong>.<br/>🇬🇧 <i>I eat fruit.</i><br/>🇪🇸 <i>Como fruta.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Obst</span></strong> ist da.<br/>🇬🇧 <i>No fruit is there.</i><br/>🇪🇸 <i>No hay fruta.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich esse <strong><span class="das-color">kein Obst</span></strong>.<br/>🇬🇧 <i>I eat no fruit.</i><br/>🇪🇸 <i>No como fruta.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Rindfleisch</span> <span class="emoji-small">🐄</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das rínt-flaish/ <br/> 🇬🇧 <i>Beef</i> <br/> 🇪🇸 <i>Carne de res</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Rindfleisch</span></strong> ist teuer. <br/> 🇬🇧 <i>The beef is expensive.</i> <br/> 🇪🇸 <i>La carne de res es cara.</i></td>
+            <td data-label="Beispielsatz">Ich esse gern <strong><span class="das-color">Rindfleisch</span></strong>. <br/> 🇬🇧 <i>I like to eat beef.</i> <br/> 🇪🇸 <i>Me gusta comer carne de res.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Rindfleisch</span></strong> ist zart.<br/>🇬🇧 <i>The beef is tender.</i><br/>🇪🇸 <i>La carne de res está tierna.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich koche <strong><span class="das-color">das Rindfleisch</span></strong>.<br/>🇬🇧 <i>I cook the beef.</i><br/>🇪🇸 <i>Cocino la carne de res.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">Rindfleisch</span></strong>.<br/>🇬🇧 <i>This is beef.</i><br/>🇪🇸 <i>Esto es carne de res.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">Rindfleisch</span></strong>.<br/>🇬🇧 <i>I buy beef.</i><br/>🇪🇸 <i>Compro carne de res.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Rindfleisch</span></strong> ist mehr da.<br/>🇬🇧 <i>There is no beef left.</i><br/>🇪🇸 <i>No queda carne de res.</i></td>
+            <td data-label="Negation (Akkusativ)">Er isst <strong><span class="das-color">kein Rindfleisch</span></strong>.<br/>🇬🇧 <i>He eats no beef.</i><br/>🇪🇸 <i>Él no come carne de res.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Wasser</span> <span class="emoji-small">💧</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das vá-ser/ <br/> 🇬🇧 <i>Water</i> <br/> 🇪🇸 <i>Agua</i></td>
+            <td data-label="Beispielsatz">Mittags trinke ich <strong><span class="das-color">Wasser</span></strong>. <br/> 🇬🇧 <i>I drink water at noon.</i> <br/> 🇪🇸 <i>Bebo agua al mediodía.</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Wasser</span></strong> ist kalt. <br/> 🇬🇧 <i>The water is cold.</i> <br/> 🇪🇸 <i>El agua está fría.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Wasser</span></strong> ist sauber.<br/>🇬🇧 <i>The water is clean.</i><br/>🇪🇸 <i>El agua está limpia.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich trinke <strong><span class="das-color">das Wasser</span></strong>.<br/>🇬🇧 <i>I drink the water.</i><br/>🇪🇸 <i>Bebo el agua.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">Wasser</span></strong>.<br/>🇬🇧 <i>This is water.</i><br/>🇪🇸 <i>Esta es agua.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="das-color">Wasser</span></strong>.<br/>🇬🇧 <i>I need water.</i><br/>🇪🇸 <i>Necesito agua.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Wasser</span></strong> ist da.<br/>🇬🇧 <i>No water is there.</i><br/>🇪🇸 <i>No hay agua.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich trinke <strong><span class="das-color">kein Wasser</span></strong>.<br/>🇬🇧 <i>I drink no water.</i><br/>🇪🇸 <i>No bebo agua.</i></td>
+          </tr>
         </tbody>
       </table>
     </div>
   </details>
+
+  <script>
+    function toggleArticles() {
+      const toggle = document.getElementById('toggle-articles');
+      const articleSpans = document.querySelectorAll('.die-color, .der-color, .das-color');
+      const emojiSpans = document.querySelectorAll('.emoji-small');
+      const isHidden = toggle.checked;
+      
+      articleSpans.forEach(span => {
+        if (isHidden) {
+          span.style.display = 'none';
+        } else {
+          span.style.display = '';
+        }
+      });
+
+      // Move emoji position based on toggle state
+      emojiSpans.forEach(span => {
+        if (isHidden) {
+          // When tick is chosen: move emoji below the noun
+          span.classList.add('emoji-below');
+        } else {
+          // When tick is not chosen: emoji inline to the right - der Freund 🧑‍🤝‍🧑
+          span.classList.remove('emoji-below');
+        }
+      });
+    }
+
+    // Initialize the toggle state on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      toggleArticles(); // Call once to set initial state
+    });
+
+    document.getElementById('toggle-articles').addEventListener('change', toggleArticles);
+  </script>
 
 </body>
 </html>
