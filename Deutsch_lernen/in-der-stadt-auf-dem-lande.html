@@ -3,15 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>In der Stadt / Auf dem Lande - Deutsche Sprachreferenz für A1</title>
+<title>In der Stadt & Auf dem Lande (A1) - Deutsche Sprachreferenz</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="styles.css">
+<style>
+  /* Basic styles for readability - matching styles.css color system */
+  .der-color { color: red; font-weight: bold; } /* Red for 'der' (masculine) */
+  .die-color { color: blue; font-weight: bold; } /* Blue for 'die' (feminine) */
+  .das-color { color: black; font-weight: bold; } /* Black for 'das' (neuter) */
+  body { font-family: sans-serif; line-height: 1.6; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 12px; border: 1px solid #ddd; text-align: left; vertical-align: top; }
+  th { background-color: #f4f4f4; }
+  tbody tr:nth-child(odd) { background-color: #f9f9f9; }
+  h1 { font-size: 2.5em; text-align: center; margin-bottom: 20px; }
+  .back-home { display: block; text-align: center; margin: 20px; font-size: 1.2em; }
+  
+  /* Make first column text and emoji with increased sizing - increased by 20% more */
+  td[data-label="Substantiv"] strong span {
+    font-size: 1.9008em !important;
+  }
+  td[data-label="Substantiv"] strong .der-color,
+  td[data-label="Substantiv"] strong .die-color,
+  td[data-label="Substantiv"] strong .das-color {
+    font-size: 1.9008em !important;
+  }
+  
+  /* Default: emoji inline to the right with larger size - increased by 20% more */
+  .emoji-small {
+    display: inline;
+    margin-left: 5px;
+    font-size: 2.2464em !important;
+  }
+  
+  /* When articles are hidden: emoji below with consistent size - increased by 20% more */
+  .emoji-below {
+    display: block !important;
+    margin-top: 5px !important;
+    margin-left: 0 !important;
+    font-size: 2.2464em !important;
+  }
+</style>
 </head>
 <body>
 
-  <a href="substantiv.html" class="back-home">🏠 Zurück zu Substantiv / Back to Substantiv</a>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <a href="substantiv.html" class="back-home">🏠 Zurück zu Substantiv / Back to Substantiv</a>
+    
+    <div class="toggle-container" style="margin: 0;">
+      <label for="toggle-articles" class="toggle-label">
+        <input type="checkbox" id="toggle-articles">
+        <span class="toggle-slider"></span>
+        Artikel ausblenden / Hide Articles
+      </label>
+    </div>
+    
+    <div style="width: 200px;"></div> <!-- Spacer for balance -->
+  </div>
 
-  <h1>🏙️ In der Stadt / Auf dem Lande</h1>
+  <h1>🏙️ In der Stadt & Auf dem Lande (A1)</h1>
 
   <details id="in-der-stadt-auf-dem-lande-section" open>
     <summary>In der Stadt / Auf dem Lande</summary>
@@ -30,801 +79,446 @@
             <th data-label="Negation (Nominativ)">Negation (Nominativ)</th>
             <th data-label="Negation (Akkusativ)">Negation (Akkusativ)</th>
           </tr>
-          <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th>🇪🇸 (Sujeto: ¿Quién o qué realiza la acción?)</th>
-            <th>🇪🇸 (Objeto Directo: ¿Quién o qué recibe directamente la acción?)</th>
-            <th>🇪🇸 (Sujeto: ¿Quién o qué realiza la acción?)</th>
-            <th>🇪🇸 (Objeto Directo: ¿Quién o qué recibe directamente la acción?)</th>
-            <th>🇪🇸 (Sujeto: ¿Quién o qué realiza la acción?)</th>
-            <th>🇪🇸 (Objeto Directo: ¿Quién o qué recibe directamente la acción?)</th>
-          </tr>
         </thead>
         <tbody>
+          <!-- DER Nouns -->
           <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Stadt</span></strong> <br/> 🏙️</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di shtát/ <br/> 🇬🇧 <i>City / Town</i> <br/> 🇪🇸 <i>Ciudad / Pueblo</i></td>
-            <td data-label="Beispielsatz">Ich wohne in <strong><span class="die-color">der Stadt</span></strong>. <br/> 🇬🇧 <i>I live in the city.</i> <br/> 🇪🇸 <i>Vivo en la ciudad.</i></td>
-            <td data-label="Beispielsatz"><strong><span class="die-color">Die Stadt</span></strong> ist groß. <br/> 🇬🇧 <i>The city is big.</i> <br/> 🇪🇸 <i>La ciudad es grande.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Stadt</span></strong> ist schön.<br/>🇬🇧 <i>The city is beautiful.</i><br/>🇪🇸 <i>La ciudad es hermosa.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="die-color">die Stadt</span></strong>.<br/>🇬🇧 <i>I visit the city.</i><br/>🇪🇸 <i>Visito la ciudad.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine</span></strong> große <strong><span class="die-color">Stadt</span></strong>.<br/>🇬🇧 <i>This is a big city.</i><br/>🇪🇸 <i>Esta es una ciudad grande.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich finde <strong><span class="die-color">eine</span></strong> schöne <strong><span class="die-color">Stadt</span></strong>.<br/>🇬🇧 <i>I find a beautiful city.</i><br/>🇪🇸 <i>Encuentro una ciudad hermosa.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Stadt</span></strong> ist perfekt.<br/>🇬🇧 <i>No city is perfect.</i><br/>🇪🇸 <i>Ninguna ciudad es perfecta.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine</span></strong> kleine <strong><span class="die-color">Stadt</span></strong>.<br/>🇬🇧 <i>I find no small city.</i><br/>🇪🇸 <i>No encuentro ninguna ciudad pequeña.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Dorf</span></strong> <br/> 🏘️</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das dorf/ <br/> 🇬🇧 <i>Village</i> <br/> 🇪🇸 <i>Pueblo</i></td>
-            <td data-label="Beispielsatz"><strong><span class="das-color">Das Dorf</span></strong> ist sehr klein. <br/> 🇬🇧 <i>The village is very small.</i> <br/> 🇪🇸 <i>El pueblo es muy pequeño.</i></td>
-            <td data-label="Beispielsatz">Ich besuche <strong><span class="das-color">das Dorf</span></strong>. <br/> 🇬🇧 <i>I visit the village.</i> <br/> 🇪🇸 <i>Visito el pueblo.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Dorf</span></strong> ist klein.<br/>🇬🇧 <i>The village is small.</i><br/>🇪🇸 <i>El pueblo es pequeño.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="das-color">das Dorf</span></strong>.<br/>🇬🇧 <i>I visit the village.</i><br/>🇪🇸 <i>Visito el pueblo.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein</span></strong> schönes <strong><span class="das-color">Dorf</span></strong>.<br/>🇬🇧 <i>This is a beautiful village.</i><br/>🇪🇸 <i>Este es un pueblo hermoso.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich finde <strong><span class="das-color">ein</span></strong> ruhiges <strong><span class="das-color">Dorf</span></strong>.<br/>🇬🇧 <i>I find a quiet village.</i><br/>🇪🇸 <i>Encuentro un pueblo tranquilo.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Dorf</span></strong> ist perfekt.<br/>🇬🇧 <i>No village is perfect.</i><br/>🇪🇸 <i>Ningún pueblo es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein</span></strong> großes <strong><span class="das-color">Dorf</span></strong>.<br/>🇬🇧 <i>I find no big village.</i><br/>🇪🇸 <i>No encuentro ningún pueblo grande.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Land</span></strong> <br/> 🌾</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das lant/ <br/> 🇬🇧 <i>Country / Countryside</i> <br/> 🇪🇸 <i>País / Campo</i></td>
-            <td data-label="Beispielsatz">Das Leben auf <strong><span class="das-color">dem Land</span></strong> ist ruhig. <br/> 🇬🇧 <i>Life in the countryside is quiet.</i> <br/> 🇪🇸 <i>La vida en el campo es tranquila.</i></td>
-            <td data-label="Beispielsatz">Ich fahre aufs <strong><span class="das-color">Land</span></strong>. <br/> 🇬🇧 <i>I go to the countryside.</i> <br/> 🇪🇸 <i>Voy al campo.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Land</span></strong> ist schön.<br/>🇬🇧 <i>The countryside is beautiful.</i><br/>🇪🇸 <i>El campo es hermoso.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich liebe <strong><span class="das-color">das Land</span></strong>.<br/>🇬🇧 <i>I love the countryside.</i><br/>🇪🇸 <i>Amo el campo.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein</span></strong> ruhiges <strong><span class="das-color">Land</span></strong>.<br/>🇬🇧 <i>This is a quiet country.</i><br/>🇪🇸 <i>Este es un país tranquilo.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich besuche <strong><span class="das-color">ein</span></strong> fremdes <strong><span class="das-color">Land</span></strong>.<br/>🇬🇧 <i>I visit a foreign country.</i><br/>🇪🇸 <i>Visito un país extranjero.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Land</span></strong> ist perfekt.<br/>🇬🇧 <i>No country is perfect.</i><br/>🇪🇸 <i>Ningún país es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein</span></strong> besseres <strong><span class="das-color">Land</span></strong>.<br/>🇬🇧 <i>I find no better country.</i><br/>🇪🇸 <i>No encuentro ningún país mejor.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Straße</span></strong> <br/> 🛣️</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di SHTRA-ße/ <br/> 🇬🇧 <i>Street</i> <br/> 🇪🇸 <i>Calle</i></td>
-            <td data-label="Beispielsatz"><strong><span class="die-color">Die Straße</span></strong> ist sehr lang. <br/> 🇬🇧 <i>The street is very long.</i> <br/> 🇪🇸 <i>La calle es muy larga.</i></td>
-            <td data-label="Beispielsatz">Ich wohne in dieser <strong><span class="die-color">Straße</span></strong>. <br/> 🇬🇧 <i>I live on this street.</i> <br/> 🇪🇸 <i>Vivo en esta calle.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Straße</span></strong> ist breit.<br/>🇬🇧 <i>The street is wide.</i><br/>🇪🇸 <i>La calle es ancha.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich überquere <strong><span class="die-color">die Straße</span></strong>.<br/>🇬🇧 <i>I cross the street.</i><br/>🇪🇸 <i>Cruzo la calle.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine</span></strong> ruhige <strong><span class="die-color">Straße</span></strong>.<br/>🇬🇧 <i>This is a quiet street.</i><br/>🇪🇸 <i>Esta es una calle tranquila.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine</span></strong> neue <strong><span class="die-color">Straße</span></strong>.<br/>🇬🇧 <i>I look for a new street.</i><br/>🇪🇸 <i>Busco una calle nueva.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Straße</span></strong> ist perfekt.<br/>🇬🇧 <i>No street is perfect.</i><br/>🇪🇸 <i>Ninguna calle es perfecta.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine</span></strong> gefährliche <strong><span class="die-color">Straße</span></strong>.<br/>🇬🇧 <i>I find no dangerous street.</i><br/>🇪🇸 <i>No encuentro ninguna calle peligrosa.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Platz</span></strong> <br/> 🏛️</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der plats/ <br/> 🇬🇧 <i>Square / Place</i> <br/> 🇪🇸 <i>Plaza / Lugar</i></td>
-            <td data-label="Beispielsatz"><strong><span class="der-color">Der Platz</span></strong> ist sehr schön. <br/> 🇬🇧 <i>The square is very beautiful.</i> <br/> 🇪🇸 <i>La plaza es muy bonita.</i></td>
-            <td data-label="Beispielsatz">Wir treffen uns auf <strong><span class="der-color">dem Platz</span></strong>. <br/> 🇬🇧 <i>We meet in the square.</i> <br/> 🇪🇸 <i>Nos encontramos en la plaza.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Platz</span></strong> ist groß.<br/>🇬🇧 <i>The square is big.</i><br/>🇪🇸 <i>La plaza es grande.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="der-color">den Platz</span></strong>.<br/>🇬🇧 <i>I visit the square.</i><br/>🇪🇸 <i>Visito la plaza.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein</span></strong> schöner <strong><span class="der-color">Platz</span></strong>.<br/>🇬🇧 <i>This is a beautiful square.</i><br/>🇪🇸 <i>Esta es una plaza hermosa.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen</span></strong> ruhigen <strong><span class="der-color">Platz</span></strong>.<br/>🇬🇧 <i>I look for a quiet square.</i><br/>🇪🇸 <i>Busco una plaza tranquila.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Platz</span></strong> ist perfekt.<br/>🇬🇧 <i>No square is perfect.</i><br/>🇪🇸 <i>Ninguna plaza es perfecta.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen</span></strong> freien <strong><span class="der-color">Platz</span></strong>.<br/>🇬🇧 <i>I find no free space.</i><br/>🇪🇸 <i>No encuentro ningún lugar libre.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Park</span></strong> <br/> 🌳</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der park/ <br/> 🇬🇧 <i>Park</i> <br/> 🇪🇸 <i>Parque</i></td>
-            <td data-label="Beispielsatz">Ich gehe in <strong><span class="der-color">den Park</span></strong>. <br/> 🇬🇧 <i>I go to the park.</i> <br/> 🇪🇸 <i>Voy al parque.</i></td>
-            <td data-label="Beispielsatz"><strong><span class="der-color">Der Park</span></strong> ist grün. <br/> 🇬🇧 <i>The park is green.</i> <br/> 🇪🇸 <i>El parque es verde.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Park</span></strong> ist schön.<br/>🇬🇧 <i>The park is beautiful.</i><br/>🇪🇸 <i>El parque es hermoso.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="der-color">den Park</span></strong>.<br/>🇬🇧 <i>I visit the park.</i><br/>🇪🇸 <i>Visito el parque.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein</span></strong> großer <strong><span class="der-color">Park</span></strong>.<br/>🇬🇧 <i>This is a big park.</i><br/>🇪🇸 <i>Este es un parque grande.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich finde <strong><span class="der-color">einen</span></strong> ruhigen <strong><span class="der-color">Park</span></strong>.<br/>🇬🇧 <i>I find a quiet park.</i><br/>🇪🇸 <i>Encuentro un parque tranquilo.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Park</span></strong> ist perfekt.<br/>🇬🇧 <i>No park is perfect.</i><br/>🇪🇸 <i>Ningún parque es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen</span></strong> schöneren <strong><span class="der-color">Park</span></strong>.<br/>🇬🇧 <i>I find no more beautiful park.</i><br/>🇪🇸 <i>No encuentro ningún parque más hermoso.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Garten</span></strong> <br/> 🌺</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der GAR-ten/ <br/> 🇬🇧 <i>Garden</i> <br/> 🇪🇸 <i>Jardín</i></td>
-            <td data-label="Beispielsatz">Mein <strong><span class="der-color">Garten</span></strong> ist groß. <br/> 🇬🇧 <i>My garden is big.</i> <br/> 🇪🇸 <i>Mi jardín es grande.</i></td>
-            <td data-label="Beispielsatz">Ich arbeite im <strong><span class="der-color">Garten</span></strong>. <br/> 🇬🇧 <i>I work in the garden.</i> <br/> 🇪🇸 <i>Trabajo en el jardín.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Garten</span></strong> ist schön.<br/>🇬🇧 <i>The garden is beautiful.</i><br/>🇪🇸 <i>El jardín es hermoso.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="der-color">den Garten</span></strong>.<br/>🇬🇧 <i>I visit the garden.</i><br/>🇪🇸 <i>Visito el jardín.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein</span></strong> kleiner <strong><span class="der-color">Garten</span></strong>.<br/>🇬🇧 <i>This is a small garden.</i><br/>🇪🇸 <i>Este es un jardín pequeño.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich pflege <strong><span class="der-color">einen</span></strong> schönen <strong><span class="der-color">Garten</span></strong>.<br/>🇬🇧 <i>I tend a beautiful garden.</i><br/>🇪🇸 <i>Cuido un jardín hermoso.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Garten</span></strong> ist perfekt.<br/>🇬🇧 <i>No garden is perfect.</i><br/>🇪🇸 <i>Ningún jardín es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="der-color">keinen</span></strong> eigenen <strong><span class="der-color">Garten</span></strong>.<br/>🇬🇧 <i>I have no own garden.</i><br/>🇪🇸 <i>No tengo jardín propio.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Haus</span></strong> <br/> 🏠</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das haus/ <br/> 🇬🇧 <i>House</i> <br/> 🇪🇸 <i>Casa</i></td>
-            <td data-label="Beispielsatz"><strong><span class="das-color">Das Haus</span></strong> ist neu. <br/> 🇬🇧 <i>The house is new.</i> <br/> 🇪🇸 <i>La casa es nueva.</i></td>
-            <td data-label="Beispielsatz">Ich wohne in <strong><span class="das-color">einem Haus</span></strong>. <br/> 🇬🇧 <i>I live in a house.</i> <br/> 🇪🇸 <i>Vivo en una casa.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Haus</span></strong> ist groß.<br/>🇬🇧 <i>The house is big.</i><br/>🇪🇸 <i>La casa es grande.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">das Haus</span></strong>.<br/>🇬🇧 <i>I buy the house.</i><br/>🇪🇸 <i>Compro la casa.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein</span></strong> schönes <strong><span class="das-color">Haus</span></strong>.<br/>🇬🇧 <i>This is a beautiful house.</i><br/>🇪🇸 <i>Esta es una casa hermosa.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein</span></strong> neues <strong><span class="das-color">Haus</span></strong>.<br/>🇬🇧 <i>I look for a new house.</i><br/>🇪🇸 <i>Busco una casa nueva.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Haus</span></strong> ist perfekt.<br/>🇬🇧 <i>No house is perfect.</i><br/>🇪🇸 <i>Ninguna casa es perfecta.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein</span></strong> günstiges <strong><span class="das-color">Haus</span></strong>.<br/>🇬🇧 <i>I find no affordable house.</i><br/>🇪🇸 <i>No encuentro ninguna casa asequible.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Gebäude</span></strong> <br/> 🏢</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ge-BOI-de/ <br/> 🇬🇧 <i>Building</i> <br/> 🇪🇸 <i>Edificio</i></td>
-            <td data-label="Beispielsatz"><strong><span class="das-color">Das Gebäude</span></strong> ist sehr hoch. <br/> 🇬🇧 <i>The building is very tall.</i> <br/> 🇪🇸 <i>El edificio es muy alto.</i></td>
-            <td data-label="Beispielsatz">Das ist <strong><span class="das-color">ein</span></strong> altes <strong><span class="das-color">Gebäude</span></strong>. <br/> 🇬🇧 <i>That is an old building.</i> <br/> 🇪🇸 <i>Ese es un edificio antiguo.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Gebäude</span></strong> ist modern.<br/>🇬🇧 <i>The building is modern.</i><br/>🇪🇸 <i>El edificio es moderno.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich betrete <strong><span class="das-color">das Gebäude</span></strong>.<br/>🇬🇧 <i>I enter the building.</i><br/>🇪🇸 <i>Entro al edificio.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein</span></strong> hohes <strong><span class="das-color">Gebäude</span></strong>.<br/>🇬🇧 <i>This is a tall building.</i><br/>🇪🇸 <i>Este es un edificio alto.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="das-color">ein</span></strong> modernes <strong><span class="das-color">Gebäude</span></strong>.<br/>🇬🇧 <i>I see a modern building.</i><br/>🇪🇸 <i>Veo un edificio moderno.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Gebäude</span></strong> ist perfekt.<br/>🇬🇧 <i>No building is perfect.</i><br/>🇪🇸 <i>Ningún edificio es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein</span></strong> schöneres <strong><span class="das-color">Gebäude</span></strong>.<br/>🇬🇧 <i>I find no more beautiful building.</i><br/>🇪🇸 <i>No encuentro ningún edificio más hermoso.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Wohnung</span></strong> <br/> 🏠</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di VO-nung/ <br/> 🇬🇧 <i>Apartment</i> <br/> 🇪🇸 <i>Apartamento</i></td>
-            <td data-label="Beispielsatz">Meine <strong><span class="die-color">Wohnung</span></strong> ist klein. <br/> 🇬🇧 <i>My apartment is small.</i> <br/> 🇪🇸 <i>Mi apartamento es pequeño.</i></td>
-            <td data-label="Beispielsatz">Ich suche <strong><span class="die-color">eine</span></strong> neue <strong><span class="die-color">Wohnung</span></strong>. <br/> 🇬🇧 <i>I am looking for a new apartment.</i> <br/> 🇪🇸 <i>Busco un apartamento nuevo.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Wohnung</span></strong> ist gemütlich.<br/>🇬🇧 <i>The apartment is cozy.</i><br/>🇪🇸 <i>El apartamento es acogedor.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich miete <strong><span class="die-color">die Wohnung</span></strong>.<br/>🇬🇧 <i>I rent the apartment.</i><br/>🇪🇸 <i>Alquilo el apartamento.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine</span></strong> große <strong><span class="die-color">Wohnung</span></strong>.<br/>🇬🇧 <i>This is a big apartment.</i><br/>🇪🇸 <i>Este es un apartamento grande.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="die-color">eine</span></strong> neue <strong><span class="die-color">Wohnung</span></strong>.<br/>🇬🇧 <i>I need a new apartment.</i><br/>🇪🇸 <i>Necesito un apartamento nuevo.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Wohnung</span></strong> ist perfekt.<br/>🇬🇧 <i>No apartment is perfect.</i><br/>🇪🇸 <i>Ningún apartamento es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine</span></strong> günstige <strong><span class="die-color">Wohnung</span></strong>.<br/>🇬🇧 <i>I find no affordable apartment.</i><br/>🇪🇸 <i>No encuentro ningún apartamento asequible.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Bahnhof</span></strong> <br/> 🚂</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der BAN-hof/ <br/> 🇬🇧 <i>Train Station</i> <br/> 🇪🇸 <i>Estación de tren</i></td>
-            <td data-label="Beispielsatz">Ich fahre <strong><span class="der-color">zum Bahnhof</span></strong>. <br/> 🇬🇧 <i>I go to the train station.</i> <br/> 🇪🇸 <i>Voy a la estación de tren.</i></td>
+            <td data-label="Substantiv"><strong><span class="der-color">der Bahnhof</span> <span class="emoji-small">🚂</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ ˈbaːnhoːf/ <br/> 🇬🇧 <i>Train Station</i> <br/> 🇪🇸 <i>Estación de tren</i></td>
+            <td data-label="Beispielsatz">Ich fahre <strong><span class="der-color">zum Bahnhof</span></strong>. <br/> 🇬🇧 <i>I'm going to the train station.</i> <br/> 🇪🇸 <i>Voy a la estación de tren.</i></td>
             <td data-label="Beispielsatz"><strong><span class="der-color">Der Bahnhof</span></strong> ist weit weg. <br/> 🇬🇧 <i>The train station is far away.</i> <br/> 🇪🇸 <i>La estación de tren está lejos.</i></td>
             <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Bahnhof</span></strong> ist groß.<br/>🇬🇧 <i>The train station is big.</i><br/>🇪🇸 <i>La estación de tren es grande.</i></td>
             <td data-label="Definiter Artikel (Akkusativ)">Ich erreiche <strong><span class="der-color">den Bahnhof</span></strong>.<br/>🇬🇧 <i>I reach the train station.</i><br/>🇪🇸 <i>Llego a la estación de tren.</i></td>
             <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein</span></strong> alter <strong><span class="der-color">Bahnhof</span></strong>.<br/>🇬🇧 <i>This is an old train station.</i><br/>🇪🇸 <i>Esta es una estación de tren antigua.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen</span></strong> näheren <strong><span class="der-color">Bahnhof</span></strong>.<br/>🇬🇧 <i>I look for a closer train station.</i><br/>🇪🇸 <i>Busco una estación de tren más cercana.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Bahnhof</span></strong> ist perfekt.<br/>🇬🇧 <i>No train station is perfect.</i><br/>🇪🇸 <i>Ninguna estación de tren es perfecta.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen</span></strong> offenen <strong><span class="der-color">Bahnhof</span></strong>.<br/>🇬🇧 <i>I find no open train station.</i><br/>🇪🇸 <i>No encuentro ninguna estación de tren abierta.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen Bahnhof</span></strong>.<br/>🇬🇧 <i>I'm looking for a train station.</i><br/>🇪🇸 <i>Busco una estación de tren.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Bahnhof</span></strong> ist hier.<br/>🇬🇧 <i>No train station is here.</i><br/>🇪🇸 <i>No hay ninguna estación de tren aquí.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen Bahnhof</span></strong>.<br/>🇬🇧 <i>I don't find a train station.</i><br/>🇪🇸 <i>No encuentro ninguna estación de tren.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Flughafen</span></strong> <br/> ✈️</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der FLUK-ha-fen/ <br/> 🇬🇧 <i>Airport</i> <br/> 🇪🇸 <i>Aeropuerto</i></td>
-            <td data-label="Beispielsatz"><strong><span class="der-color">Der Flughafen</span></strong> ist groß. <br/> 🇬🇧 <i>The airport is big.</i> <br/> 🇪🇸 <i>El aeropuerto es grande.</i></td>
-            <td data-label="Beispielsatz">Ich fliege vom <strong><span class="der-color">Flughafen</span></strong>. <br/> 🇬🇧 <i>I fly from the airport.</i> <br/> 🇪🇸 <i>Vuelo desde el aeropuerto.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Flughafen</span></strong> ist international.<br/>🇬🇧 <i>The airport is international.</i><br/>🇪🇸 <i>El aeropuerto es internacional.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich erreiche <strong><span class="der-color">den Flughafen</span></strong>.<br/>🇬🇧 <i>I reach the airport.</i><br/>🇪🇸 <i>Llego al aeropuerto.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein</span></strong> moderner <strong><span class="der-color">Flughafen</span></strong>.<br/>🇬🇧 <i>This is a modern airport.</i><br/>🇪🇸 <i>Este es un aeropuerto moderno.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen</span></strong> internationalen <strong><span class="der-color">Flughafen</span></strong>.<br/>🇬🇧 <i>I look for an international airport.</i><br/>🇪🇸 <i>Busco un aeropuerto internacional.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Flughafen</span></strong> ist perfekt.<br/>🇬🇧 <i>No airport is perfect.</i><br/>🇪🇸 <i>Ningún aeropuerto es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen</span></strong> offenen <strong><span class="der-color">Flughafen</span></strong>.<br/>🇬🇧 <i>I find no open airport.</i><br/>🇪🇸 <i>No encuentro ningún aeropuerto abierto.</i></td>
+            <td data-label="Substantiv"><strong><span class="der-color">der Baum</span> <span class="emoji-small">🌳</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ baʊ̯m/ <br/> 🇬🇧 <i>Tree</i> <br/> 🇪🇸 <i>Árbol</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Der Baum</span></strong> ist groß. <br/> 🇬🇧 <i>The tree is big.</i> <br/> 🇪🇸 <i>El árbol es grande.</i></td>
+            <td data-label="Beispielsatz">Im Garten steht <strong><span class="der-color">ein Baum</span></strong>. <br/> 🇬🇧 <i>There is a tree in the garden.</i> <br/> 🇪🇸 <i>Hay un árbol en el jardín.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Baum</span></strong> ist alt.<br/>🇬🇧 <i>The tree is old.</i><br/>🇪🇸 <i>El árbol es viejo.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich sehe <strong><span class="der-color">den Baum</span></strong>.<br/>🇬🇧 <i>I see the tree.</i><br/>🇪🇸 <i>Veo el árbol.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Baum</span></strong>.<br/>🇬🇧 <i>This is a tree.</i><br/>🇪🇸 <i>Este es un árbol.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich pflanze <strong><span class="der-color">einen Baum</span></strong>.<br/>🇬🇧 <i>I plant a tree.</i><br/>🇪🇸 <i>Planto un árbol.</i></td>
+            <td data-label="Negation (Nominativ)">Hier ist <strong><span class="der-color">kein Baum</span></strong>.<br/>🇬🇧 <i>There is no tree here.</i><br/>🇪🇸 <i>Aquí no hay ningún árbol.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="der-color">keinen Baum</span></strong>.<br/>🇬🇧 <i>I see no tree.</i><br/>🇪🇸 <i>No veo ningún árbol.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Krankenhaus</span></strong> <br/> 🏥</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das KRAN-ken-haus/ <br/> 🇬🇧 <i>Hospital</i> <br/> 🇪🇸 <i>Hospital</i></td>
-            <td data-label="Beispielsatz"><strong><span class="das-color">Das Krankenhaus</span></strong> ist neu. <br/> 🇬🇧 <i>The hospital is new.</i> <br/> 🇪🇸 <i>El hospital es nuevo.</i></td>
-            <td data-label="Beispielsatz">Ich besuche <strong><span class="das-color">das Krankenhaus</span></strong>. <br/> 🇬🇧 <i>I visit the hospital.</i> <br/> 🇪🇸 <i>Visito el hospital.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Krankenhaus</span></strong> ist groß.<br/>🇬🇧 <i>The hospital is big.</i><br/>🇪🇸 <i>El hospital es grande.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich brauche <strong><span class="das-color">das Krankenhaus</span></strong>.<br/>🇬🇧 <i>I need the hospital.</i><br/>🇪🇸 <i>Necesito el hospital.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein</span></strong> gutes <strong><span class="das-color">Krankenhaus</span></strong>.<br/>🇬🇧 <i>This is a good hospital.</i><br/>🇪🇸 <i>Este es un hospital bueno.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein</span></strong> modernes <strong><span class="das-color">Krankenhaus</span></strong>.<br/>🇬🇧 <i>I look for a modern hospital.</i><br/>🇪🇸 <i>Busco un hospital moderno.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Krankenhaus</span></strong> ist perfekt.<br/>🇬🇧 <i>No hospital is perfect.</i><br/>🇪🇸 <i>Ningún hospital es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein</span></strong> privates <strong><span class="das-color">Krankenhaus</span></strong>.<br/>🇬🇧 <i>I find no private hospital.</i><br/>🇪🇸 <i>No encuentro ningún hospital privado.</i></td>
+            <td data-label="Substantiv"><strong><span class="der-color">der Bus</span> <span class="emoji-small">🚌</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ bʊs/ <br/> 🇬🇧 <i>Bus</i> <br/> 🇪🇸 <i>Autobús</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Der Bus</span></strong> kommt gleich. <br/> 🇬🇧 <i>The bus is coming soon.</i> <br/> 🇪🇸 <i>El autobús llega pronto.</i></td>
+            <td data-label="Beispielsatz">Ich fahre mit <strong><span class="der-color">dem Bus</span></strong>. <br/> 🇬🇧 <i>I'm going by bus.</i> <br/> 🇪🇸 <i>Voy en autobús.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Bus</span></strong> ist voll.<br/>🇬🇧 <i>The bus is full.</i><br/>🇪🇸 <i>El autobús está lleno.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich nehme <strong><span class="der-color">den Bus</span></strong>.<br/>🇬🇧 <i>I'll take the bus.</i><br/>🇪🇸 <i>Tomo el autobús.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Bus</span></strong>.<br/>🇬🇧 <i>This is a bus.</i><br/>🇪🇸 <i>Este es un autobús.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="der-color">einen Bus</span></strong>.<br/>🇬🇧 <i>I see a bus.</i><br/>🇪🇸 <i>Veo un autobús.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Bus</span></strong> kommt heute.<br/>🇬🇧 <i>No bus is coming today.</i><br/>🇪🇸 <i>Hoy no viene ningún autobús.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="der-color">keinen Bus</span></strong>.<br/>🇬🇧 <i>I don't see a bus.</i><br/>🇪🇸 <i>No veo ningún autobús.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Schule</span></strong> <br/> 🏫</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di SHU-le/ <br/> 🇬🇧 <i>School</i> <br/> 🇪🇸 <i>Escuela</i></td>
-            <td data-label="Beispielsatz"><strong><span class="die-color">Die Schule</span></strong> beginnt um 8 Uhr. <br/> 🇬🇧 <i>School starts at 8 AM.</i> <br/> 🇪🇸 <i>La escuela empieza a las 8 AM.</i></td>
-            <td data-label="Beispielsatz">Ich gehe <strong><span class="die-color">zur Schule</span></strong>. <br/> 🇬🇧 <i>I go to school.</i> <br/> 🇪🇸 <i>Voy a la escuela.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Schule</span></strong> ist näh.<br/>🇬🇧 <i>The school is near.</i><br/>🇪🇸 <i>La escuela está cerca.</i></td>
+            <td data-label="Substantiv"><strong><span class="der-color">der Garten</span> <span class="emoji-small">🌺</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ ˈɡaʁtn̩/ <br/> 🇬🇧 <i>Garden</i> <br/> 🇪🇸 <i>Jardín</i></td>
+            <td data-label="Beispielsatz">Mein <strong><span class="der-color">Garten</span></strong> ist groß. <br/> 🇬🇧 <i>My garden is big.</i> <br/> 🇪🇸 <i>Mi jardín es grande.</i></td>
+            <td data-label="Beispielsatz">Ich arbeite im <strong><span class="der-color">Garten</span></strong>. <br/> 🇬🇧 <i>I'm working in the garden.</i> <br/> 🇪🇸 <i>Trabajo en el jardín.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Garten</span></strong> ist schön.<br/>🇬🇧 <i>The garden is beautiful.</i><br/>🇪🇸 <i>El jardín es bonito.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich mag <strong><span class="der-color">den Garten</span></strong>.<br/>🇬🇧 <i>I like the garden.</i><br/>🇪🇸 <i>Me gusta el jardín.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Garten</span></strong>.<br/>🇬🇧 <i>This is a garden.</i><br/>🇪🇸 <i>Este es un jardín.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich habe <strong><span class="der-color">einen Garten</span></strong>.<br/>🇬🇧 <i>I have a garden.</i><br/>🇪🇸 <i>Tengo un jardín.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Garten</span></strong> ist hier.<br/>🇬🇧 <i>No garden is here.</i><br/>🇪🇸 <i>Aquí no hay ningún jardín.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="der-color">keinen Garten</span></strong>.<br/>🇬🇧 <i>I don't have a garden.</i><br/>🇪🇸 <i>No tengo jardín.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Hund</span> <span class="emoji-small">🐕</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ hʊnt/ <br/> 🇬🇧 <i>Dog</i> <br/> 🇪🇸 <i>Perro</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Der Hund</span></strong> bellt. <br/> 🇬🇧 <i>The dog is barking.</i> <br/> 🇪🇸 <i>El perro ladra.</i></td>
+            <td data-label="Beispielsatz">Ich spiele mit <strong><span class="der-color">dem Hund</span></strong>. <br/> 🇬🇧 <i>I'm playing with the dog.</i> <br/> 🇪🇸 <i>Juego con el perro.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Hund</span></strong> ist süß.<br/>🇬🇧 <i>The dog is cute.</i><br/>🇪🇸 <i>El perro es mono.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich sehe <strong><span class="der-color">den Hund</span></strong>.<br/>🇬🇧 <i>I see the dog.</i><br/>🇪🇸 <i>Veo al perro.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Hund</span></strong>.<br/>🇬🇧 <i>This is a dog.</i><br/>🇪🇸 <i>Este es un perro.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich habe <strong><span class="der-color">einen Hund</span></strong>.<br/>🇬🇧 <i>I have a dog.</i><br/>🇪🇸 <i>Tengo un perro.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="der-color">kein Hund</span></strong>.<br/>🇬🇧 <i>That is not a dog.</i><br/>🇪🇸 <i>Eso no es un perro.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="der-color">keinen Hund</span></strong>.<br/>🇬🇧 <i>I don't have a dog.</i><br/>🇪🇸 <i>No tengo perro.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Markt</span> <span class="emoji-small">🥕</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ maʁkt/ <br/> 🇬🇧 <i>Market</i> <br/> 🇪🇸 <i>Mercado</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Der Markt</span></strong> ist am Samstag. <br/> 🇬🇧 <i>The market is on Saturday.</i> <br/> 🇪🇸 <i>El mercado es el sábado.</i></td>
+            <td data-label="Beispielsatz">Ich gehe zum <strong><span class="der-color">Markt</span></strong>. <br/> 🇬🇧 <i>I'm going to the market.</i> <br/> 🇪🇸 <i>Voy al mercado.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Markt</span></strong> ist bunt.<br/>🇬🇧 <i>The market is colorful.</i><br/>🇪🇸 <i>El mercado es colorido.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="der-color">den Markt</span></strong>.<br/>🇬🇧 <i>I visit the market.</i><br/>🇪🇸 <i>Visito el mercado.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Markt</span></strong>.<br/>🇬🇧 <i>This is a market.</i><br/>🇪🇸 <i>Este es un mercado.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen Markt</span></strong>.<br/>🇬🇧 <i>I'm looking for a market.</i><br/>🇪🇸 <i>Busco un mercado.</i></td>
+            <td data-label="Negation (Nominativ)">Hier ist <strong><span class="der-color">kein Markt</span></strong>.<br/>🇬🇧 <i>No market is here.</i><br/>🇪🇸 <i>Aquí no hay mercado.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen Markt</span></strong>.<br/>🇬🇧 <i>I can't find a market.</i><br/>🇪🇸 <i>No encuentro un mercado.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Park</span> <span class="emoji-small">🌳</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ paʁk/ <br/> 🇬🇧 <i>Park</i> <br/> 🇪🇸 <i>Parque</i></td>
+            <td data-label="Beispielsatz">Ich gehe in <strong><span class="der-color">den Park</span></strong>. <br/> 🇬🇧 <i>I'm going to the park.</i> <br/> 🇪🇸 <i>Voy al parque.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Der Park</span></strong> ist grün. <br/> 🇬🇧 <i>The park is green.</i> <br/> 🇪🇸 <i>El parque es verde.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Park</span></strong> ist schön.<br/>🇬🇧 <i>The park is beautiful.</i><br/>🇪🇸 <i>El parque es bonito.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="der-color">den Park</span></strong>.<br/>🇬🇧 <i>I visit the park.</i><br/>🇪🇸 <i>Visito el parque.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Park</span></strong>.<br/>🇬🇧 <i>This is a park.</i><br/>🇪🇸 <i>Esto es un parque.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen Park</span></strong>.<br/>🇬🇧 <i>I'm looking for a park.</i><br/>🇪🇸 <i>Busco un parque.</i></td>
+            <td data-label="Negation (Nominativ)">Hier ist <strong><span class="der-color">kein Park</span></strong>.<br/>🇬🇧 <i>No park is here.</i><br/>🇪🇸 <i>Aquí no hay ningún parque.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen Park</span></strong>.<br/>🇬🇧 <i>I can't find a park.</i><br/>🇪🇸 <i>No encuentro ningún parque.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Platz</span> <span class="emoji-small">🏛️</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ plats/ <br/> 🇬🇧 <i>Square / Place</i> <br/> 🇪🇸 <i>Plaza / Lugar</i></td>
+            <td data-label="Beispielsatz"><strong><span class="der-color">Der Platz</span></strong> ist sehr schön. <br/> 🇬🇧 <i>The square is very beautiful.</i> <br/> 🇪🇸 <i>La plaza es muy bonita.</i></td>
+            <td data-label="Beispielsatz">Wir treffen uns auf <strong><span class="der-color">dem Platz</span></strong>. <br/> 🇬🇧 <i>We'll meet at the square.</i> <br/> 🇪🇸 <i>Nos encontramos en la plaza.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Platz</span></strong> ist groß.<br/>🇬🇧 <i>The square is big.</i><br/>🇪🇸 <i>La plaza es grande.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="der-color">den Platz</span></strong>.<br/>🇬🇧 <i>I visit the square.</i><br/>🇪🇸 <i>Visito la plaza.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Platz</span></strong>.<br/>🇬🇧 <i>This is a square.</i><br/>🇪🇸 <i>Esta es una plaza.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen Platz</span></strong>.<br/>🇬🇧 <i>I'm looking for a place.</i><br/>🇪🇸 <i>Busco un lugar.</i></td>
+            <td data-label="Negation (Nominativ)">Hier ist <strong><span class="der-color">kein Platz</span></strong>.<br/>🇬🇧 <i>There is no space here.</i><br/>🇪🇸 <i>Aquí no hay espacio.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen Platz</span></strong>.<br/>🇬🇧 <i>I can't find a space.</i><br/>🇪🇸 <i>No encuentro un lugar.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Supermarkt</span> <span class="emoji-small">🛒</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ ˈzuːpɐmaʁkt/ <br/> 🇬🇧 <i>Supermarket</i> <br/> 🇪🇸 <i>Supermercado</i></td>
+            <td data-label="Beispielsatz">Ich kaufe im <strong><span class="der-color">Supermarkt</span></strong> ein. <br/> 🇬🇧 <i>I'm shopping at the supermarket.</i> <br/> 🇪🇸 <i>Compro en el supermercado.</i></td>
+            <td data-label="Beispielsatz">Der <strong><span class="der-color">Supermarkt</span></strong> ist groß. <br/> 🇬🇧 <i>The supermarket is big.</i> <br/> 🇪🇸 <i>El supermercado es grande.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Supermarkt</span></strong> hat geöffnet.<br/>🇬🇧 <i>The supermarket is open.</i><br/>🇪🇸 <i>El supermercado está abierto.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich gehe in <strong><span class="der-color">den Supermarkt</span></strong>.<br/>🇬🇧 <i>I'm going to the supermarket.</i><br/>🇪🇸 <i>Voy al supermercado.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Supermarkt</span></strong>.<br/>🇬🇧 <i>This is a supermarket.</i><br/>🇪🇸 <i>Este es un supermercado.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen Supermarkt</span></strong>.<br/>🇬🇧 <i>I'm looking for a supermarket.</i><br/>🇪🇸 <i>Busco un supermercado.</i></td>
+            <td data-label="Negation (Nominativ)">Hier ist <strong><span class="der-color">kein Supermarkt</span></strong>.<br/>🇬🇧 <i>There is no supermarket here.</i><br/>🇪🇸 <i>Aquí no hay supermercado.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen Supermarkt</span></strong>.<br/>🇬🇧 <i>I can't find a supermarket.</i><br/>🇪🇸 <i>No encuentro un supermercado.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="der-color">der Zug</span> <span class="emoji-small">🚆</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /deːɐ̯ tsuːk/ <br/> 🇬🇧 <i>Train</i> <br/> 🇪🇸 <i>Tren</i></td>
+            <td data-label="Beispielsatz">Der <strong><span class="der-color">Zug</span></strong> ist schnell. <br/> 🇬🇧 <i>The train is fast.</i> <br/> 🇪🇸 <i>El tren es rápido.</i></td>
+            <td data-label="Beispielsatz">Ich nehme den <strong><span class="der-color">Zug</span></strong>. <br/> 🇬🇧 <i>I'm taking the train.</i> <br/> 🇪🇸 <i>Tomo el tren.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Zug</span></strong> hat Verspätung.<br/>🇬🇧 <i>The train is delayed.</i><br/>🇪🇸 <i>El tren tiene retraso.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich nehme <strong><span class="der-color">den Zug</span></strong>.<br/>🇬🇧 <i>I take the train.</i><br/>🇪🇸 <i>Tomo el tren.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Zug</span></strong>.<br/>🇬🇧 <i>This is a train.</i><br/>🇪🇸 <i>Este es un tren.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="der-color">einen Zug</span></strong>.<br/>🇬🇧 <i>I see a train.</i><br/>🇪🇸 <i>Veo un tren.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Zug</span></strong> fährt heute.<br/>🇬🇧 <i>No train is running today.</i><br/>🇪🇸 <i>Hoy no circula ningún tren.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="der-color">keinen Zug</span></strong>.<br/>🇬🇧 <i>I don't see a train.</i><br/>🇪🇸 <i>No veo ningún tren.</i></td>
+          </tr>
+          <!-- DIE Nouns -->
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Bank</span> <span class="emoji-small">🏦</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː baŋk/ <br/> 🇬🇧 <i>Bank</i> <br/> 🇪🇸 <i>Banco</i></td>
+            <td data-label="Beispielsatz">Ich gehe zur <strong><span class="die-color">Bank</span></strong>. <br/> 🇬🇧 <i>I'm going to the bank.</i> <br/> 🇪🇸 <i>Voy al banco.</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Bank</span></strong> ist offen. <br/> 🇬🇧 <i>The bank is open.</i> <br/> 🇪🇸 <i>El banco está abierto.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Bank</span></strong> ist geschlossen.<br/>🇬🇧 <i>The bank is closed.</i><br/>🇪🇸 <i>El banco está cerrado.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">die Bank</span></strong>.<br/>🇬🇧 <i>I'm looking for the bank.</i><br/>🇪🇸 <i>Busco el banco.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Bank</span></strong>.<br/>🇬🇧 <i>This is a bank.</i><br/>🇪🇸 <i>Este es un banco.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine Bank</span></strong>.<br/>🇬🇧 <i>I'm looking for a bank.</i><br/>🇪🇸 <i>Busco un banco.</i></td>
+            <td data-label="Negation (Nominativ)">Hier ist <strong><span class="die-color">keine Bank</span></strong>.<br/>🇬🇧 <i>There is no bank here.</i><br/>🇪🇸 <i>Aquí no hay ningún banco.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Bank</span></strong>.<br/>🇬🇧 <i>I can't find a bank.</i><br/>🇪🇸 <i>No encuentro ningún banco.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Blume</span> <span class="emoji-small">🌸</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈbluːmə/ <br/> 🇬🇧 <i>Flower</i> <br/> 🇪🇸 <i>Flor</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Blume</span></strong> ist schön. <br/> 🇬🇧 <i>The flower is beautiful.</i> <br/> 🇪🇸 <i>La flor es bonita.</i></td>
+            <td data-label="Beispielsatz">Ich kaufe <strong><span class="die-color">Blumen</span></strong>. <br/> 🇬🇧 <i>I'm buying flowers.</i> <br/> 🇪🇸 <i>Compro flores.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Blume</span></strong> ist rot.<br/>🇬🇧 <i>The flower is red.</i><br/>🇪🇸 <i>La flor es roja.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich sehe <strong><span class="die-color">die Blume</span></strong>.<br/>🇬🇧 <i>I see the flower.</i><br/>🇪🇸 <i>Veo la flor.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Blume</span></strong>.<br/>🇬🇧 <i>This is a flower.</i><br/>🇪🇸 <i>Esta es una flor.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich pflücke <strong><span class="die-color">eine Blume</span></strong>.<br/>🇬🇧 <i>I pick a flower.</i><br/>🇪🇸 <i>Cojo una flor.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Blume</span></strong>.<br/>🇬🇧 <i>That is not a flower.</i><br/>🇪🇸 <i>Eso no es una flor.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="die-color">keine Blume</span></strong>.<br/>🇬🇧 <i>I see no flower.</i><br/>🇪🇸 <i>No veo ninguna flor.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Bushaltestelle</span> <span class="emoji-small">🚏</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈbʊshaltəˌʃtɛlə/ <br/> 🇬🇧 <i>Bus Stop</i> <br/> 🇪🇸 <i>Parada de autobús</i></td>
+            <td data-label="Beispielsatz">Ich warte an der <strong><span class="die-color">Bushaltestelle</span></strong>. <br/> 🇬🇧 <i>I'm waiting at the bus stop.</i> <br/> 🇪🇸 <i>Espero en la parada de autobús.</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Bushaltestelle</span></strong> ist da vorne. <br/> 🇬🇧 <i>The bus stop is up there.</i> <br/> 🇪🇸 <i>La parada de autobús está allí delante.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Bushaltestelle</span></strong> ist nah.<br/>🇬🇧 <i>The bus stop is near.</i><br/>🇪🇸 <i>La parada de autobús está cerca.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">die Bushaltestelle</span></strong>.<br/>🇬🇧 <i>I'm looking for the bus stop.</i><br/>🇪🇸 <i>Busco la parada de autobús.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Bushaltestelle</span></strong>.<br/>🇬🇧 <i>This is a bus stop.</i><br/>🇪🇸 <i>Esta es una parada de autobús.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="die-color">eine Bushaltestelle</span></strong>.<br/>🇬🇧 <i>I see a bus stop.</i><br/>🇪🇸 <i>Veo una parada de autobús.</i></td>
+            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Bushaltestelle</span></strong> ist hier.<br/>🇬🇧 <i>No bus stop is here.</i><br/>🇪🇸 <i>Aquí no hay parada de autobús.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Bushaltestelle</span></strong>.<br/>🇬🇧 <i>I don't find a bus stop.</i><br/>🇪🇸 <i>No encuentro ninguna parada de autobús.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Katze</span> <span class="emoji-small">🐱</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈkatsə/ <br/> 🇬🇧 <i>Cat</i> <br/> 🇪🇸 <i>Gato</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Katze</span></strong> schläft. <br/> 🇬🇧 <i>The cat is sleeping.</i> <br/> 🇪🇸 <i>El gato duerme.</i></td>
+            <td data-label="Beispielsatz">Ich mag <strong><span class="die-color">Katzen</span></strong>. <br/> 🇬🇧 <i>I like cats.</i> <br/> 🇪🇸 <i>Me gustan los gatos.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Katze</span></strong> ist schwarz.<br/>🇬🇧 <i>The cat is black.</i><br/>🇪🇸 <i>El gato es negro.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich sehe <strong><span class="die-color">die Katze</span></strong>.<br/>🇬🇧 <i>I see the cat.</i><br/>🇪🇸 <i>Veo al gato.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Katze</span></strong>.<br/>🇬🇧 <i>This is a cat.</i><br/>🇪🇸 <i>Este es un gato.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich habe <strong><span class="die-color">eine Katze</span></strong>.<br/>🇬🇧 <i>I have a cat.</i><br/>🇪🇸 <i>Tengo un gato.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Katze</span></strong>.<br/>🇬🇧 <i>That is not a cat.</i><br/>🇪🇸 <i>Eso no es un gato.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="die-color">keine Katze</span></strong>.<br/>🇬🇧 <i>I don't have a cat.</i><br/>🇪🇸 <i>No tengo gato.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Polizei</span> <span class="emoji-small">👮</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː poliˈtsaɪ/ <br/> 🇬🇧 <i>Police</i> <br/> 🇪🇸 <i>Policía</i></td>
+            <td data-label="Beispielsatz">Ich rufe die <strong><span class="die-color">Polizei</span></strong>. <br/> 🇬🇧 <i>I'm calling the police.</i> <br/> 🇪🇸 <i>Llamo a la policía.</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Polizei</span></strong> ist hier. <br/> 🇬🇧 <i>The police are here.</i> <br/> 🇪🇸 <i>La policía está aquí.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Polizei</span></strong> hilft.<br/>🇬🇧 <i>The police helps.</i><br/>🇪🇸 <i>La policía ayuda.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich rufe <strong><span class="die-color">die Polizei</span></strong>.<br/>🇬🇧 <i>I call the police.</i><br/>🇪🇸 <i>Llamo a la policía.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">-</td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">-</td>
+            <td data-label="Negation (Nominativ)">-</td>
+            <td data-label="Negation (Akkusativ)">-</td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Post</span> <span class="emoji-small">📮</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː pɔst/ <br/> 🇬🇧 <i>Post Office</i> <br/> 🇪🇸 <i>Oficina de correos</i></td>
+            <td data-label="Beispielsatz">Ich gehe zur <strong><span class="die-color">Post</span></strong>. <br/> 🇬🇧 <i>I'm going to the post office.</i> <br/> 🇪🇸 <i>Voy a correos.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Post</span></strong> ist geschlossen. <br/> 🇬🇧 <i>The post office is closed.</i> <br/> 🇪🇸 <i>La oficina de correos está cerrada.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Post</span></strong> ist um die Ecke.<br/>🇬🇧 <i>The post office is around the corner.</i><br/>🇪🇸 <i>Correos está a la vuelta de la esquina.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">die Post</span></strong>.<br/>🇬🇧 <i>I'm looking for the post office.</i><br/>🇪🇸 <i>Busco la oficina de correos.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Post</span></strong>.<br/>🇬🇧 <i>This is a post office.</i><br/>🇪🇸 <i>Esta es una oficina de correos.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine Post</span></strong>.<br/>🇬🇧 <i>I'm looking for a post office.</i><br/>🇪🇸 <i>Busco una oficina de correos.</i></td>
+            <td data-label="Negation (Nominativ)">Hier ist <strong><span class="die-color">keine Post</span></strong>.<br/>🇬🇧 <i>There is no post office here.</i><br/>🇪🇸 <i>Aquí no hay oficina de correos.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Post</span></strong>.<br/>🇬🇧 <i>I can't find a post office.</i><br/>🇪🇸 <i>No encuentro una oficina de correos.</i></td>
+          </tr>
+          <tr>
+            <td data-label="Substantiv"><strong><span class="die-color">die Schule</span> <span class="emoji-small">🏫</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈʃuːlə/ <br/> 🇬🇧 <i>School</i> <br/> 🇪🇸 <i>Escuela</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Schule</span></strong> beginnt um 8 Uhr. <br/> 🇬🇧 <i>School starts at 8 AM.</i> <br/> 🇪🇸 <i>La escuela empieza a las 8.</i></td>
+            <td data-label="Beispielsatz">Ich gehe <strong><span class="die-color">zur Schule</span></strong>. <br/> 🇬🇧 <i>I'm going to school.</i> <br/> 🇪🇸 <i>Voy a la escuela.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Schule</span></strong> ist neu.<br/>🇬🇧 <i>The school is new.</i><br/>🇪🇸 <i>La escuela es nueva.</i></td>
             <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="die-color">die Schule</span></strong>.<br/>🇬🇧 <i>I visit the school.</i><br/>🇪🇸 <i>Visito la escuela.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine</span></strong> gute <strong><span class="die-color">Schule</span></strong>.<br/>🇬🇧 <i>This is a good school.</i><br/>🇪🇸 <i>Esta es una escuela buena.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine</span></strong> neue <strong><span class="die-color">Schule</span></strong>.<br/>🇬🇧 <i>I look for a new school.</i><br/>🇪🇸 <i>Busco una escuela nueva.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Schule</span></strong> ist perfekt.<br/>🇬🇧 <i>No school is perfect.</i><br/>🇪🇸 <i>Ninguna escuela es perfecta.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine</span></strong> private <strong><span class="die-color">Schule</span></strong>.<br/>🇬🇧 <i>I find no private school.</i><br/>🇪🇸 <i>No encuentro ninguna escuela privada.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Schule</span></strong>.<br/>🇬🇧 <i>This is a school.</i><br/>🇪🇸 <i>Esta es una escuela.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine Schule</span></strong>.<br/>🇬🇧 <i>I'm looking for a school.</i><br/>🇪🇸 <i>Busco una escuela.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Schule</span></strong>.<br/>🇬🇧 <i>That is not a school.</i><br/>🇪🇸 <i>Eso no es una escuela.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Schule</span></strong>.<br/>🇬🇧 <i>I can't find a school.</i><br/>🇪🇸 <i>No encuentro una escuela.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Universität</span></strong> <br/> 🎓</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di u-ni-ver-zi-TÄT/ <br/> 🇬🇧 <i>University</i> <br/> 🇪🇸 <i>Universidad</i></td>
-            <td data-label="Beispielsatz">Ich studiere an <strong><span class="die-color">der Universität</span></strong>. <br/> 🇬🇧 <i>I study at the university.</i> <br/> 🇪🇸 <i>Estudio en la universidad.</i></td>
-            <td data-label="Beispielsatz"><strong><span class="die-color">Die Universität</span></strong> ist alt. <br/> 🇬🇧 <i>The university is old.</i> <br/> 🇪🇸 <i>La universidad es antigua.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Universität</span></strong> ist bekannt.<br/>🇬🇧 <i>The university is well-known.</i><br/>🇪🇸 <i>La universidad es conocida.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="die-color">die Universität</span></strong>.<br/>🇬🇧 <i>I visit the university.</i><br/>🇪🇸 <i>Visito la universidad.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine</span></strong> gute <strong><span class="die-color">Universität</span></strong>.<br/>🇬🇧 <i>This is a good university.</i><br/>🇪🇸 <i>Esta es una universidad buena.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich wähle <strong><span class="die-color">eine</span></strong> bekannte <strong><span class="die-color">Universität</span></strong>.<br/>🇬🇧 <i>I choose a famous university.</i><br/>🇪🇸 <i>Elijo una universidad famosa.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Universität</span></strong> ist perfekt.<br/>🇬🇧 <i>No university is perfect.</i><br/>🇪🇸 <i>Ninguna universidad es perfecta.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine</span></strong> private <strong><span class="die-color">Universität</span></strong>.<br/>🇬🇧 <i>I find no private university.</i><br/>🇪🇸 <i>No encuentro ninguna universidad privada.</i></td>
+            <td data-label="Substantiv"><strong><span class="die-color">die Sonne</span> <span class="emoji-small">☀️</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈzɔnə/ <br/> 🇬🇧 <i>Sun</i> <br/> 🇪🇸 <i>Sol</i></td>
+            <td data-label="Beispielsatz">Die <strong><span class="die-color">Sonne</span></strong> scheint. <br/> 🇬🇧 <i>The sun is shining.</i> <br/> 🇪🇸 <i>El sol brilla.</i></td>
+            <td data-label="Beispielsatz">Ich mag die <strong><span class="die-color">Sonne</span></strong>. <br/> 🇬🇧 <i>I like the sun.</i> <br/> 🇪🇸 <i>Me gusta el sol.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Sonne</span></strong> ist warm.<br/>🇬🇧 <i>The sun is warm.</i><br/>🇪🇸 <i>El sol es cálido.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich sehe <strong><span class="die-color">die Sonne</span></strong>.<br/>🇬🇧 <i>I see the sun.</i><br/>🇪🇸 <i>Veo el sol.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">-</td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">-</td>
+            <td data-label="Negation (Nominativ)">Heute ist <strong><span class="die-color">keine Sonne</span></strong> da.<br/>🇬🇧 <i>There is no sun today.</i><br/>🇪🇸 <i>Hoy no hace sol.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="die-color">keine Sonne</span></strong>.<br/>🇬🇧 <i>I see no sun.</i><br/>🇪🇸 <i>No veo el sol.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Bibliothek</span></strong> <br/> 📚</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di bib-li-o-TEK/ <br/> 🇬🇧 <i>Library</i> <br/> 🇪🇸 <i>Biblioteca</i></td>
-            <td data-label="Beispielsatz">Ich lese in <strong><span class="die-color">der Bibliothek</span></strong>. <br/> 🇬🇧 <i>I read in the library.</i> <br/> 🇪🇸 <i>Leo en la biblioteca.</i></td>
-            <td data-label="Beispielsatz"><strong><span class="die-color">Die Bibliothek</span></strong> ist groß. <br/> 🇬🇧 <i>The library is big.</i> <br/> 🇪🇸 <i>La biblioteca es grande.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Bibliothek</span></strong> ist ruhig.<br/>🇬🇧 <i>The library is quiet.</i><br/>🇪🇸 <i>La biblioteca está tranquila.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="die-color">die Bibliothek</span></strong>.<br/>🇬🇧 <i>I visit the library.</i><br/>🇪🇸 <i>Visito la biblioteca.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine</span></strong> moderne <strong><span class="die-color">Bibliothek</span></strong>.<br/>🇬🇧 <i>This is a modern library.</i><br/>🇪🇸 <i>Esta es una biblioteca moderna.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine</span></strong> ruhige <strong><span class="die-color">Bibliothek</span></strong>.<br/>🇬🇧 <i>I look for a quiet library.</i><br/>🇪🇸 <i>Busco una biblioteca tranquila.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Bibliothek</span></strong> ist perfekt.<br/>🇬🇧 <i>No library is perfect.</i><br/>🇪🇸 <i>Ninguna biblioteca es perfecta.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine</span></strong> offene <strong><span class="die-color">Bibliothek</span></strong>.<br/>🇬🇧 <i>I find no open library.</i><br/>🇪🇸 <i>No encuentro ninguna biblioteca abierta.</i></td>
+            <td data-label="Substantiv"><strong><span class="die-color">die Stadt</span> <span class="emoji-small">🏙️</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ʃtat/ <br/> 🇬🇧 <i>City / Town</i> <br/> 🇪🇸 <i>Ciudad</i></td>
+            <td data-label="Beispielsatz">Ich wohne in <strong><span class="die-color">der Stadt</span></strong>. <br/> 🇬🇧 <i>I live in the city.</i> <br/> 🇪🇸 <i>Vivo en la ciudad.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Stadt</span></strong> ist groß. <br/> 🇬🇧 <i>The city is big.</i> <br/> 🇪🇸 <i>La ciudad es grande.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Stadt</span></strong> ist schön.<br/>🇬🇧 <i>The city is beautiful.</i><br/>🇪🇸 <i>La ciudad es bonita.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="die-color">die Stadt</span></strong>.<br/>🇬🇧 <i>I'm visiting the city.</i><br/>🇪🇸 <i>Visito la ciudad.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Stadt</span></strong>.<br/>🇬🇧 <i>This is a city.</i><br/>🇪🇸 <i>Esta es una ciudad.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine Stadt</span></strong>.<br/>🇬🇧 <i>I'm looking for a city.</i><br/>🇪🇸 <i>Busco una ciudad.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Stadt</span></strong>.<br/>🇬🇧 <i>That is not a city.</i><br/>🇪🇸 <i>Eso no es una ciudad.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Stadt</span></strong>.<br/>🇬🇧 <i>I can't find a city.</i><br/>🇪🇸 <i>No encuentro una ciudad.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Museum</span></strong> <br/> 🏛️</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das mu-ZE-um/ <br/> 🇬🇧 <i>Museum</i> <br/> 🇪🇸 <i>Museo</i></td>
-            <td data-label="Beispielsatz"><strong><span class="das-color">Das Museum</span></strong> ist interessant. <br/> 🇬🇧 <i>The museum is interesting.</i> <br/> 🇪🇸 <i>El museo es interesante.</i></td>
-            <td data-label="Beispielsatz">Ich besuche <strong><span class="das-color">das Museum</span></strong>. <br/> 🇬🇧 <i>I visit the museum.</i> <br/> 🇪🇸 <i>Visito el museo.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Museum</span></strong> ist alt.<br/>🇬🇧 <i>The museum is old.</i><br/>🇪🇸 <i>El museo es antiguo.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="das-color">das Museum</span></strong>.<br/>🇬🇧 <i>I visit the museum.</i><br/>🇪🇸 <i>Visito el museo.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein</span></strong> großes <strong><span class="das-color">Museum</span></strong>.<br/>🇬🇧 <i>This is a big museum.</i><br/>🇪🇸 <i>Este es un museo grande.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="das-color">ein</span></strong> altes <strong><span class="das-color">Museum</span></strong>.<br/>🇬🇧 <i>I see an old museum.</i><br/>🇪🇸 <i>Veo un museo antiguo.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Museum</span></strong> ist perfekt.<br/>🇬🇧 <i>No museum is perfect.</i><br/>🇪🇸 <i>Ningún museo es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein</span></strong> offenes <strong><span class="das-color">Museum</span></strong>.<br/>🇬🇧 <i>I find no open museum.</i><br/>🇪🇸 <i>No encuentro ningún museo abierto.</i></td>
+            <td data-label="Substantiv"><strong><span class="die-color">die Straße</span> <span class="emoji-small">🛣️</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈʃtraːsə/ <br/> 🇬🇧 <i>Street</i> <br/> 🇪🇸 <i>Calle</i></td>
+            <td data-label="Beispielsatz"><strong><span class="die-color">Die Straße</span></strong> ist lang. <br/> 🇬🇧 <i>The street is long.</i> <br/> 🇪🇸 <i>La calle es larga.</i></td>
+            <td data-label="Beispielsatz">Ich wohne in dieser <strong><span class="die-color">Straße</span></strong>. <br/> 🇬🇧 <i>I live on this street.</i> <br/> 🇪🇸 <i>Vivo en esta calle.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Straße</span></strong> ist breit.<br/>🇬🇧 <i>The street is wide.</i><br/>🇪🇸 <i>La calle es ancha.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich überquere <strong><span class="die-color">die Straße</span></strong>.<br/>🇬🇧 <i>I'm crossing the street.</i><br/>🇪🇸 <i>Cruzo la calle.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Straße</span></strong>.<br/>🇬🇧 <i>This is a street.</i><br/>🇪🇸 <i>Esta es una calle.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine Straße</span></strong>.<br/>🇬🇧 <i>I'm looking for a street.</i><br/>🇪🇸 <i>Busco una calle.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Straße</span></strong>.<br/>🇬🇧 <i>That is not a street.</i><br/>🇪🇸 <i>Eso no es una calle.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Straße</span></strong>.<br/>🇬🇧 <i>I can't find a street.</i><br/>🇪🇸 <i>No encuentro una calle.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Theater</span></strong> <br/> 🎭</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das te-A-ter/ <br/> 🇬🇧 <i>Theater</i> <br/> 🇪🇸 <i>Teatro</i></td>
-            <td data-label="Beispielsatz">Wir gehen ins <strong><span class="das-color">Theater</span></strong>. <br/> 🇬🇧 <i>We go to the theater.</i> <br/> 🇪🇸 <i>Vamos al teatro.</i></td>
-            <td data-label="Beispielsatz"><strong><span class="das-color">Das Theater</span></strong> ist alt. <br/> 🇬🇧 <i>The theater is old.</i> <br/> 🇪🇸 <i>El teatro es antiguo.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Theater</span></strong> ist elegant.<br/>🇬🇧 <i>The theater is elegant.</i><br/>🇪🇸 <i>El teatro es elegante.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="das-color">das Theater</span></strong>.<br/>🇬🇧 <i>I visit the theater.</i><br/>🇪🇸 <i>Visito el teatro.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein</span></strong> bekanntes <strong><span class="das-color">Theater</span></strong>.<br/>🇬🇧 <i>This is a well-known theater.</i><br/>🇪🇸 <i>Este es un teatro conocido.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein</span></strong> gutes <strong><span class="das-color">Theater</span></strong>.<br/>🇬🇧 <i>I look for a good theater.</i><br/>🇪🇸 <i>Busco un teatro bueno.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Theater</span></strong> ist perfekt.<br/>🇬🇧 <i>No theater is perfect.</i><br/>🇪🇸 <i>Ningún teatro es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein</span></strong> modernes <strong><span class="das-color">Theater</span></strong>.<br/>🇬🇧 <i>I find no modern theater.</i><br/>🇪🇸 <i>No encuentro ningún teatro moderno.</i></td>
+            <td data-label="Substantiv"><strong><span class="die-color">die Wohnung</span> <span class="emoji-small">🏠</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /diː ˈvoːnʊŋ/ <br/> 🇬🇧 <i>Apartment</i> <br/> 🇪🇸 <i>Apartamento / Piso</i></td>
+            <td data-label="Beispielsatz">Meine <strong><span class="die-color">Wohnung</span></strong> ist klein. <br/> 🇬🇧 <i>My apartment is small.</i> <br/> 🇪🇸 <i>Mi apartamento es pequeño.</i></td>
+            <td data-label="Beispielsatz">Ich suche <strong><span class="die-color">eine Wohnung</span></strong>. <br/> 🇬🇧 <i>I'm looking for an apartment.</i> <br/> 🇪🇸 <i>Busco un apartamento.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Wohnung</span></strong> ist gemütlich.<br/>🇬🇧 <i>The apartment is cozy.</i><br/>🇪🇸 <i>El apartamento es acogedor.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich miete <strong><span class="die-color">die Wohnung</span></strong>.<br/>🇬🇧 <i>I'm renting the apartment.</i><br/>🇪🇸 <i>Alquilo el apartamento.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Wohnung</span></strong>.<br/>🇬🇧 <i>This is an apartment.</i><br/>🇪🇸 <i>Este es un apartamento.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="die-color">eine Wohnung</span></strong>.<br/>🇬🇧 <i>I need an apartment.</i><br/>🇪🇸 <i>Necesito un apartamento.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Wohnung</span></strong>.<br/>🇬🇧 <i>That is not an apartment.</i><br/>🇪🇸 <i>Eso no es un apartamento.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Wohnung</span></strong>.<br/>🇬🇧 <i>I can't find an apartment.</i><br/>🇪🇸 <i>No encuentro un apartamento.</i></td>
+          </tr>
+          <!-- DAS Nouns -->
+          <tr>
+            <td data-label="Substantiv"><strong><span class="das-color">das Auto</span> <span class="emoji-small">🚗</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ˈaʊ̯to/ <br/> 🇬🇧 <i>Car</i> <br/> 🇪🇸 <i>Coche / Auto</i></td>
+            <td data-label="Beispielsatz">Mein <strong><span class="das-color">Auto</span></strong> ist blau. <br/> 🇬🇧 <i>My car is blue.</i> <br/> 🇪🇸 <i>Mi coche es azul.</i></td>
+            <td data-label="Beispielsatz">Ich fahre mit <strong><span class="das-color">dem Auto</span></strong>. <br/> 🇬🇧 <i>I'm going by car.</i> <br/> 🇪🇸 <i>Voy en coche.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Auto</span></strong> ist neu.<br/>🇬🇧 <i>The car is new.</i><br/>🇪🇸 <i>El coche es nuevo.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich fahre <strong><span class="das-color">das Auto</span></strong>.<br/>🇬🇧 <i>I'm driving the car.</i><br/>🇪🇸 <i>Conduzco el coche.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Auto</span></strong>.<br/>🇬🇧 <i>This is a car.</i><br/>🇪🇸 <i>Este es un coche.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">ein Auto</span></strong>.<br/>🇬🇧 <i>I'm buying a car.</i><br/>🇪🇸 <i>Compro un coche.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Auto</span></strong>.<br/>🇬🇧 <i>That is not a car.</i><br/>🇪🇸 <i>Eso no es un coche.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="das-color">kein Auto</span></strong>.<br/>🇬🇧 <i>I don't have a car.</i><br/>🇪🇸 <i>No tengo coche.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Kino</span></strong> <br/> 🎬</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das KI-no/ <br/> 🇬🇧 <i>Cinema</i> <br/> 🇪🇸 <i>Cine</i></td>
-            <td data-label="Beispielsatz">Ich gehe ins <strong><span class="das-color">Kino</span></strong>. <br/> 🇬🇧 <i>I go to the cinema.</i> <br/> 🇪🇸 <i>Voy al cine.</i></td>
-            <td data-label="Beispielsatz"><strong><span class="das-color">Das Kino</span></strong> ist geschlossen. <br/> 🇬🇧 <i>The cinema is closed.</i> <br/> 🇪🇸 <i>El cine está cerrado.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Kino</span></strong> ist näh.<br/>🇬🇧 <i>The cinema is near.</i><br/>🇪🇸 <i>El cine está cerca.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="das-color">das Kino</span></strong>.<br/>🇬🇧 <i>I visit the cinema.</i><br/>🇪🇸 <i>Visito el cine.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein</span></strong> neues <strong><span class="das-color">Kino</span></strong>.<br/>🇬🇧 <i>This is a new cinema.</i><br/>🇪🇸 <i>Este es un cine nuevo.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein</span></strong> gutes <strong><span class="das-color">Kino</span></strong>.<br/>🇬🇧 <i>I look for a good cinema.</i><br/>🇪🇸 <i>Busco un cine bueno.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Kino</span></strong> ist perfekt.<br/>🇬🇧 <i>No cinema is perfect.</i><br/>🇪🇸 <i>Ningún cine es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein</span></strong> teures <strong><span class="das-color">Kino</span></strong>.<br/>🇬🇧 <i>I find no expensive cinema.</i><br/>🇪🇸 <i>No encuentro ningún cine caro.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Restaurant</span></strong> <br/> 🍽️</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das res-tau-RANT/ <br/> 🇬🇧 <i>Restaurant</i> <br/> 🇪🇸 <i>Restaurante</i></td>
-            <td data-label="Beispielsatz"><strong><span class="das-color">Das Restaurant</span></strong> ist teuer. <br/> 🇬🇧 <i>The restaurant is expensive.</i> <br/> 🇪🇸 <i>El restaurante es caro.</i></td>
-            <td data-label="Beispielsatz">Wir essen im <strong><span class="das-color">Restaurant</span></strong>. <br/> 🇬🇧 <i>We eat at the restaurant.</i> <br/> 🇪🇸 <i>Comemos en el restaurante.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Restaurant</span></strong> ist gut.<br/>🇬🇧 <i>The restaurant is good.</i><br/>🇪🇸 <i>El restaurante es bueno.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="das-color">das Restaurant</span></strong>.<br/>🇬🇧 <i>I visit the restaurant.</i><br/>🇪🇸 <i>Visito el restaurante.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein</span></strong> italienisches <strong><span class="das-color">Restaurant</span></strong>.<br/>🇬🇧 <i>This is an Italian restaurant.</i><br/>🇪🇸 <i>Este es un restaurante italiano.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein</span></strong> gutes <strong><span class="das-color">Restaurant</span></strong>.<br/>🇬🇧 <i>I look for a good restaurant.</i><br/>🇪🇸 <i>Busco un restaurante bueno.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Restaurant</span></strong> ist perfekt.<br/>🇬🇧 <i>No restaurant is perfect.</i><br/>🇪🇸 <i>Ningún restaurante es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein</span></strong> billiges <strong><span class="das-color">Restaurant</span></strong>.<br/>🇬🇧 <i>I find no cheap restaurant.</i><br/>🇪🇸 <i>No encuentro ningún restaurante barato.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Café</span></strong> <br/> ☕</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ka-FE/ <br/> 🇬🇧 <i>Café</i> <br/> 🇪🇸 <i>Cafetería</i></td>
+            <td data-label="Substantiv"><strong><span class="das-color">das Café</span> <span class="emoji-small">☕</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das kaˈfeː/ <br/> 🇬🇧 <i>Café</i> <br/> 🇪🇸 <i>Cafetería</i></td>
             <td data-label="Beispielsatz">Ich trinke Kaffee im <strong><span class="das-color">Café</span></strong>. <br/> 🇬🇧 <i>I drink coffee at the cafe.</i> <br/> 🇪🇸 <i>Bebo café en la cafetería.</i></td>
             <td data-label="Beispielsatz">Das <strong><span class="das-color">Café</span></strong> ist gemütlich. <br/> 🇬🇧 <i>The cafe is cozy.</i> <br/> 🇪🇸 <i>La cafetería es acogedora.</i></td>
             <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Café</span></strong> ist klein.<br/>🇬🇧 <i>The cafe is small.</i><br/>🇪🇸 <i>La cafetería es pequeña.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="das-color">das Café</span></strong>.<br/>🇬🇧 <i>I visit the cafe.</i><br/>🇪🇸 <i>Visito la cafetería.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein</span></strong> schönes <strong><span class="das-color">Café</span></strong>.<br/>🇬🇧 <i>This is a nice cafe.</i><br/>🇪🇸 <i>Esta es una cafetería bonita.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein</span></strong> ruhiges <strong><span class="das-color">Café</span></strong>.<br/>🇬🇧 <i>I look for a quiet cafe.</i><br/>🇪🇸 <i>Busco una cafetería tranquila.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Café</span></strong> ist perfekt.<br/>🇬🇧 <i>No cafe is perfect.</i><br/>🇪🇸 <i>Ninguna cafetería es perfecta.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein</span></strong> teures <strong><span class="das-color">Café</span></strong>.<br/>🇬🇧 <i>I find no expensive cafe.</i><br/>🇪🇸 <i>No encuentro ninguna cafetería cara.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="das-color">das Café</span></strong>.<br/>🇬🇧 <i>I'm visiting the cafe.</i><br/>🇪🇸 <i>Visito la cafetería.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Café</span></strong>.<br/>🇬🇧 <i>This is a cafe.</i><br/>🇪🇸 <i>Esta es una cafetería.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein Café</span></strong>.<br/>🇬🇧 <i>I'm looking for a cafe.</i><br/>🇪🇸 <i>Busco una cafetería.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Café</span></strong>.<br/>🇬🇧 <i>That is not a cafe.</i><br/>🇪🇸 <i>Eso no es una cafetería.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein Café</span></strong>.<br/>🇬🇧 <i>I can't find a cafe.</i><br/>🇪🇸 <i>No encuentro una cafetería.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Hotel</span></strong> <br/> 🏨</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ho-TEL/ <br/> 🇬🇧 <i>Hotel</i> <br/> 🇪🇸 <i>Hotel</i></td>
-            <td data-label="Beispielsatz">Das <strong><span class="das-color">Hotel</span></strong> ist komfortabel. <br/> 🇬🇧 <i>The hotel is comfortable.</i> <br/> 🇪🇸 <i>El hotel es cómodo.</i></td>
-            <td data-label="Beispielsatz">Ich schlafe im <strong><span class="das-color">Hotel</span></strong>. <br/> 🇬🇧 <i>I sleep in the hotel.</i> <br/> 🇪🇸 <i>Duermo en el hotel.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Hotel</span></strong> ist luxuriös.<br/>🇬🇧 <i>The hotel is luxurious.</i><br/>🇪🇸 <i>El hotel es lujoso.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="das-color">das Hotel</span></strong>.<br/>🇬🇧 <i>I visit the hotel.</i><br/>🇪🇸 <i>Visito el hotel.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein</span></strong> gutes <strong><span class="das-color">Hotel</span></strong>.<br/>🇬🇧 <i>This is a good hotel.</i><br/>🇪🇸 <i>Este es un hotel bueno.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein</span></strong> günstiges <strong><span class="das-color">Hotel</span></strong>.<br/>🇬🇧 <i>I look for a cheap hotel.</i><br/>🇪🇸 <i>Busco un hotel barato.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Hotel</span></strong> ist perfekt.<br/>🇬🇧 <i>No hotel is perfect.</i><br/>🇪🇸 <i>Ningún hotel es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein</span></strong> billiges <strong><span class="das-color">Hotel</span></strong>.<br/>🇬🇧 <i>I find no cheap hotel.</i><br/>🇪🇸 <i>No encuentro ningún hotel barato.</i></td>
+            <td data-label="Substantiv"><strong><span class="das-color">das Dorf</span> <span class="emoji-small">🏘️</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das dɔʁf/ <br/> 🇬🇧 <i>Village</i> <br/> 🇪🇸 <i>Pueblo</i></td>
+            <td data-label="Beispielsatz"><strong><span class="das-color">Das Dorf</span></strong> ist sehr klein. <br/> 🇬🇧 <i>The village is very small.</i> <br/> 🇪🇸 <i>El pueblo es muy pequeño.</i></td>
+            <td data-label="Beispielsatz">Ich besuche <strong><span class="das-color">das Dorf</span></strong>. <br/> 🇬🇧 <i>I'm visiting the village.</i> <br/> 🇪🇸 <i>Visito el pueblo.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Dorf</span></strong> ist ruhig.<br/>🇬🇧 <i>The village is quiet.</i><br/>🇪🇸 <i>El pueblo es tranquilo.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich mag <strong><span class="das-color">das Dorf</span></strong>.<br/>🇬🇧 <i>I like the village.</i><br/>🇪🇸 <i>Me gusta el pueblo.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Dorf</span></strong>.<br/>🇬🇧 <i>This is a village.</i><br/>🇪🇸 <i>Este es un pueblo.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein Dorf</span></strong>.<br/>🇬🇧 <i>I'm looking for a village.</i><br/>🇪🇸 <i>Busco un pueblo.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Dorf</span></strong>, das ist eine Stadt.<br/>🇬🇧 <i>That is not a village, that's a city.</i><br/>🇪🇸 <i>Eso no es un pueblo, es una ciudad.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein Dorf</span></strong>.<br/>🇬🇧 <i>I can't find a village.</i><br/>🇪🇸 <i>No encuentro un pueblo.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Bank</span></strong> <br/> 🏦</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di bank/ <br/> 🇬🇧 <i>Bank</i> <br/> 🇪🇸 <i>Banco</i></td>
-            <td data-label="Beispielsatz">Ich gehe zur <strong><span class="die-color">Bank</span></strong>. <br/> 🇬🇧 <i>I go to the bank.</i> <br/> 🇪🇸 <i>Voy al banco.</i></td>
-            <td data-label="Beispielsatz">Die <strong><span class="die-color">Bank</span></strong> ist offen. <br/> 🇬🇧 <i>The bank is open.</i> <br/> 🇪🇸 <i>El banco está abierto.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Bank</span></strong> ist näh.<br/>🇬🇧 <i>The bank is near.</i><br/>🇪🇸 <i>El banco está cerca.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="die-color">die Bank</span></strong>.<br/>🇬🇧 <i>I visit the bank.</i><br/>🇪🇸 <i>Visito el banco.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine</span></strong> große <strong><span class="die-color">Bank</span></strong>.<br/>🇬🇧 <i>This is a big bank.</i><br/>🇪🇸 <i>Este es un banco grande.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine</span></strong> neue <strong><span class="die-color">Bank</span></strong>.<br/>🇬🇧 <i>I look for a new bank.</i><br/>🇪🇸 <i>Busco un banco nuevo.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Bank</span></strong> ist perfekt.<br/>🇬🇧 <i>No bank is perfect.</i><br/>🇪🇸 <i>Ningún banco es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine</span></strong> kleine <strong><span class="die-color">Bank</span></strong>.<br/>🇬🇧 <i>I find no small bank.</i><br/>🇪🇸 <i>No encuentro ningún banco pequeño.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Post</span></strong> <br/> 📮</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di post/ <br/> 🇬🇧 <i>Post Office</i> <br/> 🇪🇸 <i>Oficina de correos</i></td>
-            <td data-label="Beispielsatz">Ich schicke einen Brief zur <strong><span class="die-color">Post</span></strong>. <br/> 🇬🇧 <i>I send a letter to the post office.</i> <br/> 🇪🇸 <i>Envío una carta a la oficina de correos.</i></td>
-            <td data-label="Beispielsatz"><strong><span class="die-color">Die Post</span></strong> ist geschlossen. <br/> 🇬🇧 <i>The post office is closed.</i> <br/> 🇪🇸 <i>La oficina de correos está cerrada.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Post</span></strong> ist öffentlich.<br/>🇬🇧 <i>The post office is public.</i><br/>🇪🇸 <i>La oficina de correos es pública.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="die-color">die Post</span></strong>.<br/>🇬🇧 <i>I visit the post office.</i><br/>🇪🇸 <i>Visito la oficina de correos.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine</span></strong> moderne <strong><span class="die-color">Post</span></strong>.<br/>🇬🇧 <i>This is a modern post office.</i><br/>🇪🇸 <i>Esta es una oficina de correos moderna.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine</span></strong> nahe <strong><span class="die-color">Post</span></strong>.<br/>🇬🇧 <i>I look for a nearby post office.</i><br/>🇪🇸 <i>Busco una oficina de correos cercana.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Post</span></strong> ist perfekt.<br/>🇬🇧 <i>No post office is perfect.</i><br/>🇪🇸 <i>Ninguna oficina de correos es perfecta.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine</span></strong> private <strong><span class="die-color">Post</span></strong>.<br/>🇬🇧 <i>I find no private post office.</i><br/>🇪🇸 <i>No encuentro ninguna oficina de correos privada.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Polizei</span></strong> <br/> 👮</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di po-li-TSAI/ <br/> 🇬🇧 <i>Police</i> <br/> 🇪🇸 <i>Policía</i></td>
-            <td data-label="Beispielsatz">Ich rufe die <strong><span class="die-color">Polizei</span></strong>. <br/> 🇬🇧 <i>I call the police.</i> <br/> 🇪🇸 <i>Llamo a la policía.</i></td>
-            <td data-label="Beispielsatz">Die <strong><span class="die-color">Polizei</span></strong> ist hier. <br/> 🇬🇧 <i>The police are here.</i> <br/> 🇪🇸 <i>La policía está aquí.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Polizei</span></strong> hilft.<br/>🇬🇧 <i>The police help.</i><br/>🇪🇸 <i>La policía ayuda.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich rufe <strong><span class="die-color">die Polizei</span></strong>.<br/>🇬🇧 <i>I call the police.</i><br/>🇪🇸 <i>Llamo a la policía.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine</span></strong> gute <strong><span class="die-color">Polizei</span></strong>.<br/>🇬🇧 <i>This is a good police force.</i><br/>🇪🇸 <i>Esta es una policía buena.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="die-color">eine</span></strong> lokale <strong><span class="die-color">Polizei</span></strong>.<br/>🇬🇧 <i>I see a local police force.</i><br/>🇪🇸 <i>Veo una policía local.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Polizei</span></strong> ist perfekt.<br/>🇬🇧 <i>No police force is perfect.</i><br/>🇪🇸 <i>Ninguna policía es perfecta.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine</span></strong> private <strong><span class="die-color">Polizei</span></strong>.<br/>🇬🇧 <i>I find no private police.</i><br/>🇪🇸 <i>No encuentro ninguna policía privada.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Feuerwehr</span></strong> <br/> 🚒</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di FOI-er-ver/ <br/> 🇬🇧 <i>Fire Department</i> <br/> 🇪🇸 <i>Departamento de bomberos</i></td>
-            <td data-label="Beispielsatz">Die <strong><span class="die-color">Feuerwehr</span></strong> kommt schnell. <br/> 🇬🇧 <i>The fire department comes quickly.</i> <br/> 🇪🇸 <i>El departamento de bomberos llega rápido.</i></td>
-            <td data-label="Beispielsatz">Ich rufe die <strong><span class="die-color">Feuerwehr</span></strong>. <br/> 🇬🇧 <i>I call the fire department.</i> <br/> 🇪🇸 <i>Llamo al departamento de bomberos.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Feuerwehr</span></strong> ist bereit.<br/>🇬🇧 <i>The fire department is ready.</i><br/>🇪🇸 <i>El departamento de bomberos está listo.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich rufe <strong><span class="die-color">die Feuerwehr</span></strong>.<br/>🇬🇧 <i>I call the fire department.</i><br/>🇪🇸 <i>Llamo al departamento de bomberos.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine</span></strong> lokale <strong><span class="die-color">Feuerwehr</span></strong>.<br/>🇬🇧 <i>This is a local fire department.</i><br/>🇪🇸 <i>Este es un departamento de bomberos local.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="die-color">eine</span></strong> neue <strong><span class="die-color">Feuerwehr</span></strong>.<br/>🇬🇧 <i>I see a new fire department.</i><br/>🇪🇸 <i>Veo un departamento de bomberos nuevo.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Feuerwehr</span></strong> ist perfekt.<br/>🇬🇧 <i>No fire department is perfect.</i><br/>🇪🇸 <i>Ningún departamento de bomberos es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine</span></strong> private <strong><span class="die-color">Feuerwehr</span></strong>.<br/>🇬🇧 <i>I find no private fire department.</i><br/>🇪🇸 <i>No encuentro ningún departamento de bomberos privado.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Supermarkt</span></strong> <br/> 🛒</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der ZU-per-markt/ <br/> 🇬🇧 <i>Supermarket</i> <br/> 🇪🇸 <i>Supermercado</i></td>
-            <td data-label="Beispielsatz">Ich kaufe im <strong><span class="der-color">Supermarkt</span></strong> ein. <br/> 🇬🇧 <i>I shop at the supermarket.</i> <br/> 🇪🇸 <i>Compro en el supermercado.</i></td>
-            <td data-label="Beispielsatz">Der <strong><span class="der-color">Supermarkt</span></strong> ist groß. <br/> 🇬🇧 <i>The supermarket is big.</i> <br/> 🇪🇸 <i>El supermercado es grande.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Supermarkt</span></strong> ist modern.<br/>🇬🇧 <i>The supermarket is modern.</i><br/>🇪🇸 <i>El supermercado es moderno.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="der-color">den Supermarkt</span></strong>.<br/>🇬🇧 <i>I visit the supermarket.</i><br/>🇪🇸 <i>Visito el supermercado.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein</span></strong> großer <strong><span class="der-color">Supermarkt</span></strong>.<br/>🇬🇧 <i>This is a big supermarket.</i><br/>🇪🇸 <i>Este es un supermercado grande.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen</span></strong> neuen <strong><span class="der-color">Supermarkt</span></strong>.<br/>🇬🇧 <i>I look for a new supermarket.</i><br/>🇪🇸 <i>Busco un supermercado nuevo.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Supermarkt</span></strong> ist perfekt.<br/>🇬🇧 <i>No supermarket is perfect.</i><br/>🇪🇸 <i>Ningún supermercado es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen</span></strong> teuren <strong><span class="der-color">Supermarkt</span></strong>.<br/>🇬🇧 <i>I find no expensive supermarket.</i><br/>🇪🇸 <i>No encuentro ningún supermercado caro.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Markt</span></strong> <br/> 🥕</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der markt/ <br/> 🇬🇧 <i>Market</i> <br/> 🇪🇸 <i>Mercado</i></td>
-            <td data-label="Beispielsatz"><strong><span class="der-color">Der Markt</span></strong> ist jeden Samstag. <br/> 🇬🇧 <i>The market is every Saturday.</i> <br/> 🇪🇸 <i>El mercado es cada sábado.</i></td>
-            <td data-label="Beispielsatz">Ich gehe zum <strong><span class="der-color">Markt</span></strong>. <br/> 🇬🇧 <i>I go to the market.</i> <br/> 🇪🇸 <i>Voy al mercado.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Markt</span></strong> ist bunt.<br/>🇬🇧 <i>The market is colorful.</i><br/>🇪🇸 <i>El mercado es colorido.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="der-color">den Markt</span></strong>.<br/>🇬🇧 <i>I visit the market.</i><br/>🇪🇸 <i>Visito el mercado.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein</span></strong> lokaler <strong><span class="der-color">Markt</span></strong>.<br/>🇬🇧 <i>This is a local market.</i><br/>🇪🇸 <i>Este es un mercado local.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen</span></strong> nahen <strong><span class="der-color">Markt</span></strong>.<br/>🇬🇧 <i>I look for a nearby market.</i><br/>🇪🇸 <i>Busco un mercado cercano.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Markt</span></strong> ist perfekt.<br/>🇬🇧 <i>No market is perfect.</i><br/>🇪🇸 <i>Ningún mercado es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen</span></strong> täglichen <strong><span class="der-color">Markt</span></strong>.<br/>🇬🇧 <i>I find no daily market.</i><br/>🇪🇸 <i>No encuentro ningún mercado diario.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Tankstelle</span></strong> <br/> ⛽</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di TANK-shtel-le/ <br/> 🇬🇧 <i>Gas Station</i> <br/> 🇪🇸 <i>Gasolinera</i></td>
-            <td data-label="Beispielsatz">Ich fahre zur <strong><span class="die-color">Tankstelle</span></strong>. <br/> 🇬🇧 <i>I drive to the gas station.</i> <br/> 🇪🇸 <i>Voy a la gasolinera.</i></td>
-            <td data-label="Beispielsatz">Die <strong><span class="die-color">Tankstelle</span></strong> ist offen. <br/> 🇬🇧 <i>The gas station is open.</i> <br/> 🇪🇸 <i>La gasolinera está abierta.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Tankstelle</span></strong> ist 24 Stunden geöffnet.<br/>🇬🇧 <i>The gas station is open 24 hours.</i><br/>🇪🇸 <i>La gasolinera está abierta 24 horas.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich sehe <strong><span class="die-color">die Tankstelle</span></strong>.<br/>🇬🇧 <i>I see the gas station.</i><br/>🇪🇸 <i>Veo la gasolinera.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Tankstelle</span></strong>.<br/>🇬🇧 <i>This is a gas station.</i><br/>🇪🇸 <i>Esta es una gasolinera.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine Tankstelle</span></strong>.<br/>🇬🇧 <i>I'm looking for a gas station.</i><br/>🇪🇸 <i>Busco una gasolinera.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Tankstelle</span></strong> ist hier.<br/>🇬🇧 <i>No gas station is here.</i><br/>🇪🇸 <i>No hay gasolinera aquí.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Tankstelle</span></strong>.<br/>🇬🇧 <i>I find no gas station.</i><br/>🇪🇸 <i>No encuentro ninguna gasolinera.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Parkplatz</span></strong> <br/> 🅿️</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der PARK-plats/ <br/> 🇬🇧 <i>Parking Lot</i> <br/> 🇪🇸 <i>Estacionamiento</i></td>
-            <td data-label="Beispielsatz">Der <strong><span class="der-color">Parkplatz</span></strong> ist voll. <br/> 🇬🇧 <i>The parking lot is full.</i> <br/> 🇪🇸 <i>El estacionamiento está lleno.</i></td>
-            <td data-label="Beispielsatz">Ich suche einen <strong><span class="der-color">Parkplatz</span></strong>. <br/> 🇬🇧 <i>I am looking for a parking space.</i> <br/> 🇪🇸 <i>Busco un estacionamiento.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Parkplatz</span></strong> ist kostenlos.<br/>🇬🇧 <i>The parking lot is free.</i><br/>🇪🇸 <i>El estacionamiento es gratis.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich finde <strong><span class="der-color">den Parkplatz</span></strong>.<br/>🇬🇧 <i>I find the parking lot.</i><br/>🇪🇸 <i>Encuentro el estacionamiento.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Parkplatz</span></strong>.<br/>🇬🇧 <i>This is a parking lot.</i><br/>🇪🇸 <i>Este es un estacionamiento.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="der-color">einen Parkplatz</span></strong>.<br/>🇬🇧 <i>I need a parking space.</i><br/>🇪🇸 <i>Necesito un estacionamiento.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Parkplatz</span></strong> ist frei.<br/>🇬🇧 <i>No parking space is free.</i><br/>🇪🇸 <i>Ningún estacionamiento está libre.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen Parkplatz</span></strong>.<br/>🇬🇧 <i>I find no parking space.</i><br/>🇪🇸 <i>No encuentro ningún estacionamiento.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Bushaltestelle</span></strong> <br/> 🚏</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di BUS-hal-te-shtel-le/ <br/> 🇬🇧 <i>Bus Stop</i> <br/> 🇪🇸 <i>Parada de autobús</i></td>
-            <td data-label="Beispielsatz">Ich warte an der <strong><span class="die-color">Bushaltestelle</span></strong>. <br/> 🇬🇧 <i>I wait at the bus stop.</i> <br/> 🇪🇸 <i>Espero en la parada de autobús.</i></td>
-            <td data-label="Beispielsatz">Die <strong><span class="die-color">Bushaltestelle</span></strong> ist nah. <br/> 🇬🇧 <i>The bus stop is near.</i> <br/> 🇪🇸 <i>La parada de autobús está cerca.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Bushaltestelle</span></strong> ist nah.<br/>🇬🇧 <i>The bus stop is near.</i><br/>🇪🇸 <i>La parada de autobús está cerca.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich sehe <strong><span class="die-color">die Bushaltestelle</span></strong>.<br/>🇬🇧 <i>I see the bus stop.</i><br/>🇪🇸 <i>Veo la parada de autobús.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Bushaltestelle</span></strong>.<br/>🇬🇧 <i>This is a bus stop.</i><br/>🇪🇸 <i>Esta es una parada de autobús.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="die-color">eine Bushaltestelle</span></strong>.<br/>🇬🇧 <i>I'm looking for a bus stop.</i><br/>🇪🇸 <i>Busco una parada de autobús.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Bushaltestelle</span></strong> ist hier.<br/>🇬🇧 <i>No bus stop is here.</i><br/>🇪🇸 <i>No hay parada de autobús aquí.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine Bushaltestelle</span></strong>.<br/>🇬🇧 <i>I find no bus stop.</i><br/>🇪🇸 <i>No encuentro ninguna parada de autobús.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die U-Bahn</span></strong> <br/> 🚇</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di U-ban/ <br/> 🇬🇧 <i>Subway</i> <br/> 🇪🇸 <i>Metro / Subterráneo</i></td>
-            <td data-label="Beispielsatz">Ich fahre mit <strong><span class="die-color">der U-Bahn</span></strong>. <br/> 🇬🇧 <i>I travel by subway.</i> <br/> 🇪🇸 <i>Viajo en metro.</i></td>
-            <td data-label="Beispielsatz"><strong><span class="die-color">Die U-Bahn</span></strong> ist schnell. <br/> 🇬🇧 <i>The subway is fast.</i> <br/> 🇪🇸 <i>El metro es rápido.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die U-Bahn</span></strong> ist schnell.<br/>🇬🇧 <i>The subway is fast.</i><br/>🇪🇸 <i>El metro es rápido.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich nehme <strong><span class="die-color">die U-Bahn</span></strong>.<br/>🇬🇧 <i>I take the subway.</i><br/>🇪🇸 <i>Tomo el metro.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine U-Bahn</span></strong>.<br/>🇬🇧 <i>This is a subway.</i><br/>🇪🇸 <i>Este es un metro.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="die-color">eine U-Bahn</span></strong>.<br/>🇬🇧 <i>I need a subway.</i><br/>🇪🇸 <i>Necesito un metro.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine U-Bahn</span></strong> fährt nachts.<br/>🇬🇧 <i>No subway runs at night.</i><br/>🇪🇸 <i>Ningún metro funciona de noche.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="die-color">keine U-Bahn</span></strong>.<br/>🇬🇧 <i>I find no subway.</i><br/>🇪🇸 <i>No encuentro ningún metro.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Straßenbahn</span></strong> <br/> 🚋</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di SHTRA-ßen-ban/ <br/> 🇬🇧 <i>Tram</i> <br/> 🇪🇸 <i>Tranvía</i></td>
-            <td data-label="Beispielsatz">Die <strong><span class="die-color">Straßenbahn</span></strong> ist pünktlich. <br/> 🇬🇧 <i>The tram is on time.</i> <br/> 🇪🇸 <i>El tranvía es puntual.</i></td>
-            <td data-label="Beispielsatz">Ich nehme die <strong><span class="die-color">Straßenbahn</span></strong>. <br/> 🇬🇧 <i>I take the tram.</i> <br/> 🇪🇸 <i>Cojo el tranvía.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Straßenbahn</span></strong> ist pünktlich.<br/>🇬🇧 <i>The tram is on time.</i><br/>🇪🇸 <i>El tranvía es puntual.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich nehme <strong><span class="die-color">die Straßenbahn</span></strong>.<br/>🇬🇧 <i>I take the tram.</i><br/>🇪🇸 <i>Tomo el tranvía.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Straßenbahn</span></strong>.<br/>🇬🇧 <i>This is a tram.</i><br/>🇪🇸 <i>Este es un tranvía.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich warte auf <strong><span class="die-color">eine Straßenbahn</span></strong>.<br/>🇬🇧 <i>I wait for a tram.</i><br/>🇪🇸 <i>Espero un tranvía.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Straßenbahn</span></strong> fährt nachts.<br/>🇬🇧 <i>No tram runs at night.</i><br/>🇪🇸 <i>Ningún tranvía funciona de noche.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="die-color">keine Straßenbahn</span></strong>.<br/>🇬🇧 <i>I see no tram.</i><br/>🇪🇸 <i>No veo ningún tranvía.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Bus</span></strong> <br/> 🚌</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der bus/ <br/> 🇬🇧 <i>Bus</i> <br/> 🇪🇸 <i>Autobús</i></td>
-            <td data-label="Beispielsatz"><strong><span class="der-color">Der Bus</span></strong> kommt in 5 Minuten. <br/> 🇬🇧 <i>The bus comes in 5 minutes.</i> <br/> 🇪🇸 <i>El autobús llega en 5 minutos.</i></td>
-            <td data-label="Beispielsatz">Ich fahre mit <strong><span class="der-color">dem Bus</span></strong>. <br/> 🇬🇧 <i>I travel by bus.</i> <br/> 🇪🇸 <i>Viajo en autobús.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Bus</span></strong> kommt.<br/>🇬🇧 <i>The bus is coming.</i><br/>🇪🇸 <i>El autobús viene.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich nehme <strong><span class="der-color">den Bus</span></strong>.<br/>🇬🇧 <i>I take the bus.</i><br/>🇪🇸 <i>Tomo el autobús.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Bus</span></strong>.<br/>🇬🇧 <i>This is a bus.</i><br/>🇪🇸 <i>Este es un autobús.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich warte auf <strong><span class="der-color">einen Bus</span></strong>.<br/>🇬🇧 <i>I wait for a bus.</i><br/>🇪🇸 <i>Espero un autobús.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Bus</span></strong> fährt heute.<br/>🇬🇧 <i>No bus runs today.</i><br/>🇪🇸 <i>Ningún autobús funciona hoy.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="der-color">keinen Bus</span></strong>.<br/>🇬🇧 <i>I see no bus.</i><br/>🇪🇸 <i>No veo ningún autobús.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Zug</span></strong> <br/> 🚆</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der tsuk/ <br/> 🇬🇧 <i>Train</i> <br/> 🇪🇸 <i>Tren</i></td>
-            <td data-label="Beispielsatz">Der <strong><span class="der-color">Zug</span></strong> ist schnell. <br/> 🇬🇧 <i>The train is fast.</i> <br/> 🇪🇸 <i>El tren es rápido.</i></td>
-            <td data-label="Beispielsatz">Ich nehme den <strong><span class="der-color">Zug</span></strong>. <br/> 🇬🇧 <i>I take the train.</i> <br/> 🇪🇸 <i>Cojo el tren.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Zug</span></strong> ist schnell.<br/>🇬🇧 <i>The train is fast.</i><br/>🇪🇸 <i>El tren es rápido.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich nehme <strong><span class="der-color">den Zug</span></strong>.<br/>🇬🇧 <i>I take the train.</i><br/>🇪🇸 <i>Tomo el tren.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Zug</span></strong>.<br/>🇬🇧 <i>This is a train.</i><br/>🇪🇸 <i>Este es un tren.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="der-color">einen Zug</span></strong>.<br/>🇬🇧 <i>I need a train.</i><br/>🇪🇸 <i>Necesito un tren.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Zug</span></strong> fährt heute.<br/>🇬🇧 <i>No train runs today.</i><br/>🇪🇸 <i>Ningún tren funciona hoy.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="der-color">keinen Zug</span></strong>.<br/>🇬🇧 <i>I see no train.</i><br/>🇪🇸 <i>No veo ningún tren.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Taxi</span></strong> <br/> 🚕</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das TAK-si/ <br/> 🇬🇧 <i>Taxi</i> <br/> 🇪🇸 <i>Taxi</i></td>
-            <td data-label="Beispielsatz">Ich nehme ein <strong><span class="das-color">Taxi</span></strong>. <br/> 🇬🇧 <i>I take a taxi.</i> <br/> 🇪🇸 <i>Cojo un taxi.</i></td>
-            <td data-label="Beispielsatz">Das <strong><span class="das-color">Taxi</span></strong> ist teuer. <br/> 🇬🇧 <i>The taxi is expensive.</i> <br/> 🇪🇸 <i>El taxi es caro.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Taxi</span></strong> ist teuer.<br/>🇬🇧 <i>The taxi is expensive.</i><br/>🇪🇸 <i>El taxi es caro.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich nehme <strong><span class="das-color">das Taxi</span></strong>.<br/>🇬🇧 <i>I take the taxi.</i><br/>🇪🇸 <i>Tomo el taxi.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Taxi</span></strong>.<br/>🇬🇧 <i>This is a taxi.</i><br/>🇪🇸 <i>Este es un taxi.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="das-color">ein Taxi</span></strong>.<br/>🇬🇧 <i>I need a taxi.</i><br/>🇪🇸 <i>Necesito un taxi.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Taxi</span></strong> ist verfügbar.<br/>🇬🇧 <i>No taxi is available.</i><br/>🇪🇸 <i>Ningún taxi está disponible.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein Taxi</span></strong>.<br/>🇬🇧 <i>I find no taxi.</i><br/>🇪🇸 <i>No encuentro ningún taxi.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Auto</span></strong> <br/> 🚗</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das AU-to/ <br/> 🇬🇧 <i>Car</i> <br/> 🇪🇸 <i>Coche / Auto</i></td>
-            <td data-label="Beispielsatz">Mein <strong><span class="das-color">Auto</span></strong> ist blau. <br/> 🇬🇧 <i>My car is blue.</i> <br/> 🇪🇸 <i>Mi coche es azul.</i></td>
-            <td data-label="Beispielsatz">Ich fahre <strong><span class="das-color">Auto</span></strong>. <br/> 🇬🇧 <i>I drive a car.</i> <br/> 🇪🇸 <i>Conduzco un coche.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Auto</span></strong> ist blau.<br/>🇬🇧 <i>The car is blue.</i><br/>🇪🇸 <i>El coche es azul.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich fahre <strong><span class="das-color">das Auto</span></strong>.<br/>🇬🇧 <i>I drive the car.</i><br/>🇪🇸 <i>Conduzco el coche.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Auto</span></strong>.<br/>🇬🇧 <i>This is a car.</i><br/>🇪🇸 <i>Este es un coche.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">ein Auto</span></strong>.<br/>🇬🇧 <i>I buy a car.</i><br/>🇪🇸 <i>Compro un coche.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Auto</span></strong> ist perfekt.<br/>🇬🇧 <i>No car is perfect.</i><br/>🇪🇸 <i>Ningún coche es perfecto.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="das-color">kein Auto</span></strong>.<br/>🇬🇧 <i>I have no car.</i><br/>🇪🇸 <i>No tengo coche.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Fahrrad</span></strong> <br/> 🚲</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das FAR-rat/ <br/> 🇬🇧 <i>Bicycle</i> <br/> 🇪🇸 <i>Bicicleta</i></td>
-            <td data-label="Beispielsatz">Ich fahre <strong><span class="das-color">Fahrrad</span></strong>. <br/> 🇬🇧 <i>I ride a bicycle.</i> <br/> 🇪🇸 <i>Monto en bicicleta.</i></td>
+            <td data-label="Substantiv"><strong><span class="das-color">das Fahrrad</span> <span class="emoji-small">🚲</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ˈfaːɐ̯ˌʁaːt/ <br/> 🇬🇧 <i>Bicycle</i> <br/> 🇪🇸 <i>Bicicleta</i></td>
+            <td data-label="Beispielsatz">Ich fahre <strong><span class="das-color">Fahrrad</span></strong>. <br/> 🇬🇧 <i>I'm riding a bicycle.</i> <br/> 🇪🇸 <i>Monto en bicicleta.</i></td>
             <td data-label="Beispielsatz">Das <strong><span class="das-color">Fahrrad</span></strong> ist neu. <br/> 🇬🇧 <i>The bicycle is new.</i> <br/> 🇪🇸 <i>La bicicleta es nueva.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Fahrrad</span></strong> ist neu.<br/>🇬🇧 <i>The bicycle is new.</i><br/>🇪🇸 <i>La bicicleta es nueva.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich fahre <strong><span class="das-color">das Fahrrad</span></strong>.<br/>🇬🇧 <i>I ride the bicycle.</i><br/>🇪🇸 <i>Monto la bicicleta.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Fahrrad</span></strong> ist schnell.<br/>🇬🇧 <i>The bicycle is fast.</i><br/>🇪🇸 <i>La bicicleta es rápida.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich repariere <strong><span class="das-color">das Fahrrad</span></strong>.<br/>🇬🇧 <i>I'm repairing the bicycle.</i><br/>🇪🇸 <i>Reparo la bicicleta.</i></td>
             <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Fahrrad</span></strong>.<br/>🇬🇧 <i>This is a bicycle.</i><br/>🇪🇸 <i>Esta es una bicicleta.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">ein Fahrrad</span></strong>.<br/>🇬🇧 <i>I buy a bicycle.</i><br/>🇪🇸 <i>Compro una bicicleta.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="das-color">Kein Fahrrad</span></strong> ist da.<br/>🇬🇧 <i>No bicycle is there.</i><br/>🇪🇸 <i>No hay bicicleta.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="das-color">kein Fahrrad</span></strong>.<br/>🇬🇧 <i>I have no bicycle.</i><br/>🇪🇸 <i>No tengo bicicleta.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">ein Fahrrad</span></strong>.<br/>🇬🇧 <i>I'm buying a bicycle.</i><br/>🇪🇸 <i>Compro una bicicleta.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Fahrrad</span></strong>.<br/>🇬🇧 <i>That is not a bicycle.</i><br/>🇪🇸 <i>Eso no es una bicicleta.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="das-color">kein Fahrrad</span></strong>.<br/>🇬🇧 <i>I don't have a bicycle.</i><br/>🇪🇸 <i>No tengo bicicleta.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Ampel</span></strong> <br/> 🚦</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di AM-pel/ <br/> 🇬🇧 <i>Traffic Light</i> <br/> 🇪🇸 <i>Semáforo</i></td>
-            <td data-label="Beispielsatz">Die <strong><span class="die-color">Ampel</span></strong> ist rot. <br/> 🇬🇧 <i>The traffic light is red.</i> <br/> 🇪🇸 <i>El semáforo está en rojo.</i></td>
-            <td data-label="Beispielsatz">Wir warten an der <strong><span class="die-color">Ampel</span></strong>. <br/> 🇬🇧 <i>We wait at the traffic light.</i> <br/> 🇪🇸 <i>Esperamos en el semáforo.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Ampel</span></strong> ist rot.<br/>🇬🇧 <i>The traffic light is red.</i><br/>🇪🇸 <i>El semáforo está en rojo.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich sehe <strong><span class="die-color">die Ampel</span></strong>.<br/>🇬🇧 <i>I see the traffic light.</i><br/>🇪🇸 <i>Veo el semáforo.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Ampel</span></strong>.<br/>🇬🇧 <i>This is a traffic light.</i><br/>🇪🇸 <i>Este es un semáforo.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich erkenne <strong><span class="die-color">eine Ampel</span></strong>.<br/>🇬🇧 <i>I recognize a traffic light.</i><br/>🇪🇸 <i>Reconozco un semáforo.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="die-color">Keine Ampel</span></strong> ist da.<br/>🇬🇧 <i>No traffic light is there.</i><br/>🇪🇸 <i>No hay semáforo.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="die-color">keine Ampel</span></strong>.<br/>🇬🇧 <i>I see no traffic light.</i><br/>🇪🇸 <i>No veo ningún semáforo.</i></td>
+            <td data-label="Substantiv"><strong><span class="das-color">das Haus</span> <span class="emoji-small">🏠</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das haʊ̯s/ <br/> 🇬🇧 <i>House</i> <br/> 🇪🇸 <i>Casa</i></td>
+            <td data-label="Beispielsatz"><strong><span class="das-color">Das Haus</span></strong> ist neu. <br/> 🇬🇧 <i>The house is new.</i> <br/> 🇪🇸 <i>La casa es nueva.</i></td>
+            <td data-label="Beispielsatz">Ich wohne in <strong><span class="das-color">einem Haus</span></strong>. <br/> 🇬🇧 <i>I live in a house.</i> <br/> 🇪🇸 <i>Vivo en una casa.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Haus</span></strong> ist groß.<br/>🇬🇧 <i>The house is big.</i><br/>🇪🇸 <i>La casa es grande.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich kaufe <strong><span class="das-color">das Haus</span></strong>.<br/>🇬🇧 <i>I'm buying the house.</i><br/>🇪🇸 <i>Compro la casa.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Haus</span></strong>.<br/>🇬🇧 <i>This is a house.</i><br/>🇪🇸 <i>Esta es una casa.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein Haus</span></strong>.<br/>🇬🇧 <i>I'm looking for a house.</i><br/>🇪🇸 <i>Busco una casa.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Haus</span></strong>.<br/>🇬🇧 <i>That is not a house.</i><br/>🇪🇸 <i>Eso no es una casa.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich habe <strong><span class="das-color">kein Haus</span></strong>.<br/>🇬🇧 <i>I don't have a house.</i><br/>🇪🇸 <i>No tengo casa.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Zebrastreifen</span></strong> <br/> 🦓</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der ZE-bra-shtrai-fen/ <br/> 🇬🇧 <i>Crosswalk</i> <br/> 🇪🇸 <i>Paso de cebra</i></td>
-            <td data-label="Beispielsatz">Ich gehe über den <strong><span class="der-color">Zebrastreifen</span></strong>. <br/> 🇬🇧 <i>I cross the crosswalk.</i> <br/> 🇪🇸 <i>Cruzo el paso de cebra.</i></td>
-            <td data-label="Beispielsatz">Der <strong><span class="der-color">Zebrastreifen</span></strong> ist sicher. <br/> 🇬🇧 <i>The crosswalk is safe.</i> <br/> 🇪🇸 <i>El paso de cebra es seguro.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Zebrastreifen</span></strong> ist sicher.<br/>🇬🇧 <i>The crosswalk is safe.</i><br/>🇪🇸 <i>El paso de cebra es seguro.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich benutze <strong><span class="der-color">den Zebrastreifen</span></strong>.<br/>🇬🇧 <i>I use the crosswalk.</i><br/>🇪🇸 <i>Uso el paso de cebra.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Zebrastreifen</span></strong>.<br/>🇬🇧 <i>This is a crosswalk.</i><br/>🇪🇸 <i>Este es un paso de cebra.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen Zebrastreifen</span></strong>.<br/>🇬🇧 <i>I look for a crosswalk.</i><br/>🇪🇸 <i>Busco un paso de cebra.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein Zebrastreifen</span></strong> ist hier.<br/>🇬🇧 <i>No crosswalk is here.</i><br/>🇪🇸 <i>No hay paso de cebra aquí.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="der-color">keinen Zebrastreifen</span></strong>.<br/>🇬🇧 <i>I find no crosswalk.</i><br/>🇪🇸 <i>No encuentro ningún paso de cebra.</i></td>
+            <td data-label="Substantiv"><strong><span class="das-color">das Hotel</span> <span class="emoji-small">🏨</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das hoˈtɛl/ <br/> 🇬🇧 <i>Hotel</i> <br/> 🇪🇸 <i>Hotel</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Hotel</span></strong> ist komfortabel. <br/> 🇬🇧 <i>The hotel is comfortable.</i> <br/> 🇪🇸 <i>El hotel es cómodo.</i></td>
+            <td data-label="Beispielsatz">Ich schlafe im <strong><span class="das-color">Hotel</span></strong>. <br/> 🇬🇧 <i>I'm sleeping in the hotel.</i> <br/> 🇪🇸 <i>Duermo en el hotel.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Hotel</span></strong> ist teuer.<br/>🇬🇧 <i>The hotel is expensive.</i><br/>🇪🇸 <i>El hotel es caro.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich buche <strong><span class="das-color">das Hotel</span></strong>.<br/>🇬🇧 <i>I'm booking the hotel.</i><br/>🇪🇸 <i>Reservo el hotel.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Hotel</span></strong>.<br/>🇬🇧 <i>This is a hotel.</i><br/>🇪🇸 <i>Este es un hotel.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein Hotel</span></strong>.<br/>🇬🇧 <i>I'm looking for a hotel.</i><br/>🇪🇸 <i>Busco un hotel.</i></td>
+            <td data-label="Negation (Nominativ)">Hier ist <strong><span class="das-color">kein Hotel</span></strong>.<br/>🇬🇧 <i>There is no hotel here.</i><br/>🇪🇸 <i>Aquí no hay hotel.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein Hotel</span></strong>.<br/>🇬🇧 <i>I can't find a hotel.</i><br/>🇪🇸 <i>No encuentro un hotel.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="die-color">die Brücke</span></strong> <br/> 🌉</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /di BRÜ-ke/ <br/> 🇬🇧 <i>Bridge</i> <br/> 🇪🇸 <i>Puente</i></td>
-            <td data-label="Beispielsatz">Die <strong><span class="die-color">Brücke</span></strong> ist alt. <br/> 🇬🇧 <i>The bridge is old.</i> <br/> 🇪🇸 <i>El puente es viejo.</i></td>
-            <td data-label="Beispielsatz">Wir gehen über die <strong><span class="die-color">Brücke</span></strong>. <br/> 🇬🇧 <i>We go over the bridge.</i> <br/> 🇪🇸 <i>Cruzamos el puente.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="die-color">Die Brücke</span></strong> ist alt.<br/>🇬🇧 <i>The bridge is old.</i><br/>🇪🇸 <i>El puente es viejo.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Wir gehen über <strong><span class="die-color">die Brücke</span></strong>.<br/>🇬🇧 <i>We go over the bridge.</i><br/>🇪🇸 <i>Cruzamos el puente.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="die-color">eine Brücke</span></strong>.<br/>🇬🇧 <i>This is a bridge.</i><br/>🇪🇸 <i>Este es un puente.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="die-color">eine Brücke</span></strong>.<br/>🇬🇧 <i>I see a bridge.</i><br/>🇪🇸 <i>Veo un puente.</i></td>
-            <td data-label="Negation (Nominativ)">Das ist <strong><span class="die-color">keine Brücke</span></strong>.<br/>🇬🇧 <i>This is not a bridge.</i><br/>🇪🇸 <i>Este no es un puente.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="die-color">keine Brücke</span></strong>.<br/>🇬🇧 <i>I see no bridge.</i><br/>🇪🇸 <i>No veo ningún puente.</i></td>
+            <td data-label="Substantiv"><strong><span class="das-color">das Kino</span> <span class="emoji-small">🎬</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ˈkiːno/ <br/> 🇬🇧 <i>Cinema</i> <br/> 🇪🇸 <i>Cine</i></td>
+            <td data-label="Beispielsatz">Ich gehe ins <strong><span class="das-color">Kino</span></strong>. <br/> 🇬🇧 <i>I'm going to the cinema.</i> <br/> 🇪🇸 <i>Voy al cine.</i></td>
+            <td data-label="Beispielsatz"><strong><span class="das-color">Das Kino</span></strong> ist geschlossen. <br/> 🇬🇧 <i>The cinema is closed.</i> <br/> 🇪🇸 <i>El cine está cerrado.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Kino</span></strong> ist modern.<br/>🇬🇧 <i>The cinema is modern.</i><br/>🇪🇸 <i>El cine es moderno.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="das-color">das Kino</span></strong>.<br/>🇬🇧 <i>I visit the cinema.</i><br/>🇪🇸 <i>Visito el cine.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Kino</span></strong>.<br/>🇬🇧 <i>This is a cinema.</i><br/>🇪🇸 <i>Este es un cine.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein Kino</span></strong>.<br/>🇬🇧 <i>I'm looking for a cinema.</i><br/>🇪🇸 <i>Busco un cine.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Kino</span></strong>.<br/>🇬🇧 <i>That is not a cinema.</i><br/>🇪🇸 <i>Eso no es un cine.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein Kino</span></strong>.<br/>🇬🇧 <i>I can't find a cinema.</i><br/>🇪🇸 <i>No encuentro un cine.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Tunnel</span></strong> <br/> 🚇</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der TU-nel/ <br/> 🇬🇧 <i>Tunnel</i> <br/> 🇪🇸 <i>Túnel</i></td>
-            <td data-label="Beispielsatz">Der <strong><span class="der-color">Tunnel</span></strong> ist dunkel. <br/> 🇬🇧 <i>The tunnel is dark.</i> <br/> 🇪🇸 <i>El túnel es oscuro.</i></td>
-            <td data-label="Beispielsatz">Wir fahren durch den <strong><span class="der-color">Tunnel</span></strong>. <br/> 🇬🇧 <i>We drive through the tunnel.</i> <br/> 🇪🇸 <i>Conducimos por el túnel.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Tunnel</span></strong> ist dunkel.<br/>🇬🇧 <i>The tunnel is dark.</i><br/>🇪🇸 <i>El túnel es oscuro.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Wir fahren durch <strong><span class="der-color">den Tunnel</span></strong>.<br/>🇬🇧 <i>We drive through the tunnel.</i><br/>🇪🇸 <i>Conducimos por el túnel.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Tunnel</span></strong>.<br/>🇬🇧 <i>This is a tunnel.</i><br/>🇪🇸 <i>Este es un túnel.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="der-color">einen Tunnel</span></strong>.<br/>🇬🇧 <i>I see a tunnel.</i><br/>🇪🇸 <i>Veo un túnel.</i></td>
-            <td data-label="Negation (Nominativ)">Das ist <strong><span class="der-color">kein Tunnel</span></strong>.<br/>🇬🇧 <i>This is not a tunnel.</i><br/>🇪🇸 <i>Este no es un túnel.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="der-color">keinen Tunnel</span></strong>.<br/>🇬🇧 <i>I see no tunnel.</i><br/>🇪🇸 <i>No veo ningún túnel.</i></td>
+            <td data-label="Substantiv"><strong><span class="das-color">das Krankenhaus</span> <span class="emoji-small">🏥</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ˈkʁaŋkənˌhaʊ̯s/ <br/> 🇬🇧 <i>Hospital</i> <br/> 🇪🇸 <i>Hospital</i></td>
+            <td data-label="Beispielsatz"><strong><span class="das-color">Das Krankenhaus</span></strong> ist neu. <br/> 🇬🇧 <i>The hospital is new.</i> <br/> 🇪🇸 <i>El hospital es nuevo.</i></td>
+            <td data-label="Beispielsatz">Ich fahre zum <strong><span class="das-color">Krankenhaus</span></strong>. <br/> 🇬🇧 <i>I'm driving to the hospital.</i> <br/> 🇪🇸 <i>Voy al hospital.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Krankenhaus</span></strong> ist groß.<br/>🇬🇧 <i>The hospital is big.</i><br/>🇪🇸 <i>El hospital es grande.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">das Krankenhaus</span></strong>.<br/>🇬🇧 <i>I'm looking for the hospital.</i><br/>🇪🇸 <i>Busco el hospital.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Krankenhaus</span></strong>.<br/>🇬🇧 <i>This is a hospital.</i><br/>🇪🇸 <i>Este es un hospital.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich brauche <strong><span class="das-color">ein Krankenhaus</span></strong>.<br/>🇬🇧 <i>I need a hospital.</i><br/>🇪🇸 <i>Necesito un hospital.</i></td>
+            <td data-label="Negation (Nominativ)">Hier ist <strong><span class="das-color">kein Krankenhaus</span></strong>.<br/>🇬🇧 <i>There is no hospital here.</i><br/>🇪🇸 <i>Aquí no hay hospital.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein Krankenhaus</span></strong>.<br/>🇬🇧 <i>I can't find a hospital.</i><br/>🇪🇸 <i>No encuentro un hospital.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Wald</span></strong> <br/> 🌲</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der valt/ <br/> 🇬🇧 <i>Forest</i> <br/> 🇪🇸 <i>Bosque</i></td>
-            <td data-label="Beispielsatz">Der <strong><span class="der-color">Wald</span></strong> ist grün. <br/> 🇬🇧 <i>The forest is green.</i> <br/> 🇪🇸 <i>El bosque es verde.</i></td>
-            <td data-label="Beispielsatz">Ich gehe in den <strong><span class="der-color">Wald</span></strong>. <br/> 🇬🇧 <i>I go into the forest.</i> <br/> 🇪🇸 <i>Voy al bosque.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Wald</span></strong> ist grün.<br/>🇬🇧 <i>The forest is green.</i><br/>🇪🇸 <i>El bosque es verde.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich gehe in <strong><span class="der-color">den Wald</span></strong>.<br/>🇬🇧 <i>I go into the forest.</i><br/>🇪🇸 <i>Voy al bosque.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Wald</span></strong>.<br/>🇬🇧 <i>This is a forest.</i><br/>🇪🇸 <i>Este es un bosque.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="der-color">einen Wald</span></strong>.<br/>🇬🇧 <i>I see a forest.</i><br/>🇪🇸 <i>Veo un bosque.</i></td>
-            <td data-label="Negation (Nominativ)">Das ist <strong><span class="der-color">kein Wald</span></strong>.<br/>🇬🇧 <i>This is not a forest.</i><br/>🇪🇸 <i>Este no es un bosque.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="der-color">keinen Wald</span></strong>.<br/>🇬🇧 <i>I see no forest.</i><br/>🇪🇸 <i>No veo ningún bosque.</i></td>
+            <td data-label="Substantiv"><strong><span class="das-color">das Land</span> <span class="emoji-small">🌾</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das lant/ <br/> 🇬🇧 <i>Country / Countryside</i> <br/> 🇪🇸 <i>País / Campo</i></td>
+            <td data-label="Beispielsatz">Ich wohne auf <strong><span class="das-color">dem Land</span></strong>. <br/> 🇬🇧 <i>I live in the countryside.</i> <br/> 🇪🇸 <i>Vivo en el campo.</i></td>
+            <td data-label="Beispielsatz">Deutschland ist <strong><span class="das-color">ein Land</span></strong>. <br/> 🇬🇧 <i>Germany is a country.</i> <br/> 🇪🇸 <i>Alemania es un país.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Land</span></strong> ist schön.<br/>🇬🇧 <i>The country is beautiful.</i><br/>🇪🇸 <i>El país es bonito.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich liebe <strong><span class="das-color">das Land</span></strong>.<br/>🇬🇧 <i>I love the countryside.</i><br/>🇪🇸 <i>Amo el campo.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Land</span></strong>.<br/>🇬🇧 <i>This is a country.</i><br/>🇪🇸 <i>Este es un país.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich besuche <strong><span class="das-color">ein Land</span></strong>.<br/>🇬🇧 <i>I'm visiting a country.</i><br/>🇪🇸 <i>Visito un país.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Land</span></strong>.<br/>🇬🇧 <i>That is not a country.</i><br/>🇪🇸 <i>Eso no es un país.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich kenne <strong><span class="das-color">kein Land</span></strong>.<br/>🇬🇧 <i>I know no country.</i><br/>🇪🇸 <i>No conozco ningún país.</i></td>
           </tr>
           <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der Berg</span></strong> <br/> ⛰️</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der berk/ <br/> 🇬🇧 <i>Mountain</i> <br/> 🇪🇸 <i>Montaña</i></td>
-            <td data-label="Beispielsatz">Der <strong><span class="der-color">Berg</span></strong> ist hoch. <br/> 🇬🇧 <i>The mountain is high.</i> <br/> 🇪🇸 <i>La montaña es alta.</i></td>
-            <td data-label="Beispielsatz">Wir steigen auf den <strong><span class="der-color">Berg</span></strong>. <br/> 🇬🇧 <i>We climb the mountain.</i> <br/> 🇪🇸 <i>Subimos la montaña.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der Berg</span></strong> ist hoch.<br/>🇬🇧 <i>The mountain is high.</i><br/>🇪🇸 <i>La montaña es alta.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Wir steigen auf <strong><span class="der-color">den Berg</span></strong>.<br/>🇬🇧 <i>We climb the mountain.</i><br/>🇪🇸 <i>Subimos la montaña.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein Berg</span></strong>.<br/>🇬🇧 <i>This is a mountain.</i><br/>🇪🇸 <i>Esta es una montaña.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="der-color">einen Berg</span></strong>.<br/>🇬🇧 <i>I see a mountain.</i><br/>🇪🇸 <i>Veo una montaña.</i></td>
-            <td data-label="Negation (Nominativ)">Das ist <strong><span class="der-color">kein Berg</span></strong>.<br/>🇬🇧 <i>This is not a mountain.</i><br/>🇪🇸 <i>Esta no es una montaña.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="der-color">keinen Berg</span></strong>.<br/>🇬🇧 <i>I see no mountain.</i><br/>🇪🇸 <i>No veo ninguna montaña.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="der-color">der See</span></strong> <br/> 🏞️</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /der ze/ <br/> 🇬🇧 <i>Lake</i> <br/> 🇪🇸 <i>Lago</i></td>
-            <td data-label="Beispielsatz">Der <strong><span class="der-color">See</span></strong> ist kalt. <br/> 🇬🇧 <i>The lake is cold.</i> <br/> 🇪🇸 <i>El lago es frío.</i></td>
-            <td data-label="Beispielsatz">Ich schwimme im <strong><span class="der-color">See</span></strong>. <br/> 🇬🇧 <i>I swim in the lake.</i> <br/> 🇪🇸 <i>Nado en el lago.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="der-color">Der See</span></strong> ist schön.<br/>🇬🇧 <i>The lake is beautiful.</i><br/>🇪🇸 <i>El lago es hermoso.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich sehe <strong><span class="der-color">den See</span></strong>.<br/>🇬🇧 <i>I see the lake.</i><br/>🇪🇸 <i>Veo el lago.</i></td>
-            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="der-color">ein See</span></strong>.<br/>🇬🇧 <i>That is a lake.</i><br/>🇪🇸 <i>Ese es un lago.</i></td>
-            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="der-color">einen See</span></strong>.<br/>🇬🇧 <i>I'm looking for a lake.</i><br/>🇪🇸 <i>Busco un lago.</i></td>
-            <td data-label="Negation (Nominativ)"><strong><span class="der-color">Kein See</span></strong> ist hier.<br/>🇬🇧 <i>No lake is here.</i><br/>🇪🇸 <i>No hay lago aquí.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="der-color">keinen See</span></strong>.<br/>🇬🇧 <i>I see no lake.</i><br/>🇪🇸 <i>No veo ningún lago.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="der-color">der Fluss</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/der flus/</td>
-            <td data-label="Englisch (English)">River</td>
-            <td data-label="Spanisch (Spanish)">Río</td>
-            <td data-label="Emoji">🏞️</td>
-            <td data-label="Beispielsatz 1 (German)">Der <strong><span class="der-color">Fluss</span></strong> fließt schnell. <br/> <i>The river flows fast.</i> <br/> <i>El río fluye rápido.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Wir fahren auf dem <strong><span class="der-color">Fluss</span></strong>. <br/> <i>We travel on the river.</i> <br/> <i>Viajamos por el río.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Substantiv"><strong><span class="das-color">das Meer</span></strong> <br/> 🌊</td>
-            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das mer/ <br/> 🇬🇧 <i>Sea</i> <br/> 🇪🇸 <i>Mar</i></td>
+            <td data-label="Substantiv"><strong><span class="das-color">das Meer</span> <span class="emoji-small">🌊</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das meːɐ̯/ <br/> 🇬🇧 <i>Sea</i> <br/> 🇪🇸 <i>Mar</i></td>
             <td data-label="Beispielsatz">Das <strong><span class="das-color">Meer</span></strong> ist blau. <br/> 🇬🇧 <i>The sea is blue.</i> <br/> 🇪🇸 <i>El mar es azul.</i></td>
-            <td data-label="Beispielsatz">Ich liebe das <strong><span class="das-color">Meer</span></strong>. <br/> 🇬🇧 <i>I love the sea.</i> <br/> 🇪🇸 <i>Amo el mar.</i></td>
-            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Meer</span></strong> ist blau.<br/>🇬🇧 <i>The sea is blue.</i><br/>🇪🇸 <i>El mar es azul.</i></td>
-            <td data-label="Definiter Artikel (Akkusativ)">Ich liebe <strong><span class="das-color">das Meer</span></strong>.<br/>🇬🇧 <i>I love the sea.</i><br/>🇪🇸 <i>Amo el mar.</i></td>
+            <td data-label="Beispielsatz">Ich schwimme im <strong><span class="das-color">Meer</span></strong>. <br/> 🇬🇧 <i>I'm swimming in the sea.</i> <br/> 🇪🇸 <i>Nado en el mar.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Meer</span></strong> ist weit.<br/>🇬🇧 <i>The sea is vast.</i><br/>🇪🇸 <i>El mar es inmenso.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich sehe <strong><span class="das-color">das Meer</span></strong>.<br/>🇬🇧 <i>I see the sea.</i><br/>🇪🇸 <i>Veo el mar.</i></td>
             <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Meer</span></strong>.<br/>🇬🇧 <i>This is a sea.</i><br/>🇪🇸 <i>Este es un mar.</i></td>
             <td data-label="Indefiniter Artikel (Akkusativ)">Ich sehe <strong><span class="das-color">ein Meer</span></strong>.<br/>🇬🇧 <i>I see a sea.</i><br/>🇪🇸 <i>Veo un mar.</i></td>
-            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Meer</span></strong>.<br/>🇬🇧 <i>This is not a sea.</i><br/>🇪🇸 <i>Este no es un mar.</i></td>
-            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="das-color">kein Meer</span></strong>.<br/>🇬🇧 <i>I see no sea.</i><br/>🇪🇸 <i>No veo ningún mar.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Meer</span></strong>, das ist ein See.<br/>🇬🇧 <i>That's not a sea, it's a lake.</i><br/>🇪🇸 <i>Eso no es un mar, es un lago.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="das-color">kein Meer</span></strong>.<br/>🇬🇧 <i>I see no sea.</i><br/>🇪🇸 <i>No veo el mar.</i></td>
           </tr>
           <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="der-color">der Strand</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/der shtrant/</td>
-            <td data-label="Englisch (English)">Beach</td>
-            <td data-label="Spanisch (Spanish)">Playa</td>
-            <td data-label="Emoji">🏖️</td>
-            <td data-label="Beispielsatz 1 (German)"><strong><span class="der-color">Der</span></strong> <strong><span class="der-color">Strand</span></strong> ist schön. <br/> <i>The beach is beautiful.</i> <br/> <i>La playa es hermosa.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Wir gehen <strong><span class="der-color">zum</span></strong> <strong><span class="der-color">Strand</span></strong>. <br/> <i>We go to the beach.</i> <br/> <i>Vamos a la playa.</i></td>
+            <td data-label="Substantiv"><strong><span class="das-color">das Restaurant</span> <span class="emoji-small">🍽️</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das ʁɛstoˈʁɑ̃ː/ <br/> 🇬🇧 <i>Restaurant</i> <br/> 🇪🇸 <i>Restaurante</i></td>
+            <td data-label="Beispielsatz"><strong><span class="das-color">Das Restaurant</span></strong> ist teuer. <br/> 🇬🇧 <i>The restaurant is expensive.</i> <br/> 🇪🇸 <i>El restaurante es caro.</i></td>
+            <td data-label="Beispielsatz">Wir essen im <strong><span class="das-color">Restaurant</span></strong>. <br/> 🇬🇧 <i>We're eating at the restaurant.</i> <br/> 🇪🇸 <i>Comemos en el restaurante.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Restaurant</span></strong> ist gut.<br/>🇬🇧 <i>The restaurant is good.</i><br/>🇪🇸 <i>El restaurante es bueno.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich besuche <strong><span class="das-color">das Restaurant</span></strong>.<br/>🇬🇧 <i>I'm visiting the restaurant.</i><br/>🇪🇸 <i>Visito el restaurante.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Restaurant</span></strong>.<br/>🇬🇧 <i>This is a restaurant.</i><br/>🇪🇸 <i>Este es un restaurante.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich suche <strong><span class="das-color">ein Restaurant</span></strong>.<br/>🇬🇧 <i>I'm looking for a restaurant.</i><br/>🇪🇸 <i>Busco un restaurante.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Restaurant</span></strong>.<br/>🇬🇧 <i>That is not a restaurant.</i><br/>🇪🇸 <i>Eso no es un restaurante.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich finde <strong><span class="das-color">kein Restaurant</span></strong>.<br/>🇬🇧 <i>I can't find a restaurant.</i><br/>🇪🇸 <i>No encuentro un restaurante.</i></td>
           </tr>
           <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="das-color">das Feld</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/das felt/</td>
-            <td data-label="Englisch (English)">Field</td>
-            <td data-label="Spanisch (Spanish)">Campo</td>
-            <td data-label="Emoji">🌾</td>
-            <td data-label="Beispielsatz 1 (German)">Das <strong><span class="das-color">Feld</span></strong> ist groß. <br/> <i>The field is big.</i> <br/> <i>El campo es grande.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Wir arbeiten auf dem <strong><span class="das-color">Feld</span></strong>. <br/> <i>We work in the field.</i> <br/> <i>Trabajamos en el campo.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="die-color">die Wiese</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/di VI-ze/</td>
-            <td data-label="Englisch (English)">Meadow</td>
-            <td data-label="Spanisch (Spanish)">Prado / Pradera</td>
-            <td data-label="Emoji">🌾</td>
-            <td data-label="Beispielsatz 1 (German)">Die <strong><span class="die-color">Wiese</span></strong> ist grün. <br/> <i>The meadow is green.</i> <br/> <i>El prado es verde.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich liege auf der <strong><span class="die-color">Wiese</span></strong>. <br/> <i>I lie on the meadow.</i> <br/> <i>Me acuesto en la pradera.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="der-color">der Bauernhof</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/der BAU-ern-hof/</td>
-            <td data-label="Englisch (English)">Farm</td>
-            <td data-label="Spanisch (Spanish)">Granja</td>
-            <td data-label="Emoji">🚜</td>
-            <td data-label="Beispielsatz 1 (German)">Der <strong><span class="der-color">Bauernhof</span></strong> ist groß. <br/> <i>The farm is big.</i> <br/> <i>La granja es grande.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich besuche den <strong><span class="der-color">Bauernhof</span></strong>. <br/> <i>I visit the farm.</i> <br/> <i>Visito la granja.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="das-color">das Tier</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/das tir/</td>
-            <td data-label="Englisch (English)">Animal</td>
-            <td data-label="Spanisch (Spanish)">Animal</td>
-            <td data-label="Emoji">🐾</td>
-            <td data-label="Beispielsatz 1 (German)">Das <strong><span class="das-color">Tier</span></strong> ist süß. <br/> <i>The animal is cute.</i> <br/> <i>El animal es lindo.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich mag <strong><span class="das-color">Tiere</span></strong>. <br/> <i>I like animals.</i> <br/> <i>Me gustan los animales.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="die-color">die Kuh</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/di ku/</td>
-            <td data-label="Englisch (English)">Cow</td>
-            <td data-label="Spanisch (Spanish)">Vaca</td>
-            <td data-label="Emoji">🐄</td>
-            <td data-label="Beispielsatz 1 (German)">Die <strong><span class="die-color">Kuh</span></strong> gibt Milch. <br/> <i>The cow gives milk.</i> <br/> <i>La vaca da leche.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich sehe eine <strong><span class="die-color">Kuh</span></strong>. <br/> <i>I see a cow.</i> <br/> <i>Veo una vaca.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="das-color">das Pferd</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/das pfert/</td>
-            <td data-label="Englisch (English)">Horse</td>
-            <td data-label="Spanisch (Spanish)">Caballo</td>
-            <td data-label="Emoji">🐴</td>
-            <td data-label="Beispielsatz 1 (German)">Das <strong><span class="das-color">Pferd</span></strong> ist stark. <br/> <i>The horse is strong.</i> <br/> <i>El caballo es fuerte.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich reite ein <strong><span class="das-color">Pferd</span></strong>. <br/> <i>I ride a horse.</i> <br/> <i>Monto a caballo.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="das-color">das Schwein</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/das shvain/</td>
-            <td data-label="Englisch (English)">Pig</td>
-            <td data-label="Spanisch (Spanish)">Cerdo</td>
-            <td data-label="Emoji">🐷</td>
-            <td data-label="Beispielsatz 1 (German)">Das <strong><span class="das-color">Schwein</span></strong> ist rosa. <br/> <i>The pig is pink.</i> <br/> <i>El cerdo es rosa.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich sehe ein <strong><span class="das-color">Schwein</span></strong>. <br/> <i>I see a pig.</i> <br/> <i>Veo un cerdo.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="das-color">das Huhn</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/das hun/</td>
-            <td data-label="Englisch (English)">Chicken</td>
-            <td data-label="Spanisch (Spanish)">Gallina / Pollo</td>
-            <td data-label="Emoji">🐔</td>
-            <td data-label="Beispielsatz 1 (German)">Das <strong><span class="das-color">Huhn</span></strong> legt Eier. <br/> <i>The chicken lays eggs.</i> <br/> <i>La gallina pone huevos.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich esse <strong><span class="das-color">Huhn</span></strong>. <br/> <i>I eat chicken.</i> <br/> <i>Como pollo.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="der-color">der Hund</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/der hunt/</td>
-            <td data-label="Englisch (English)">Dog</td>
-            <td data-label="Spanisch (Spanish)">Perro</td>
-            <td data-label="Emoji">🐕</td>
-            <td data-label="Beispielsatz 1 (German)">Der <strong><span class="der-color">Hund</span></strong> bellt. <br/> <i>The dog barks.</i> <br/> <i>El perro ladra.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich habe einen <strong><span class="der-color">Hund</span></strong>. <br/> <i>I have a dog.</i> <br/> <i>Tengo un perro.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="die-color">die Katze</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/di KAT-se/</td>
-            <td data-label="Englisch (English)">Cat</td>
-            <td data-label="Spanisch (Spanish)">Gato / Gata</td>
-            <td data-label="Emoji">🐱</td>
-            <td data-label="Beispielsatz 1 (German)">Die <strong><span class="die-color">Katze</span></strong> miaut. <br/> <i>The cat meows.</i> <br/> <i>El gato maúlla.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich mag <strong><span class="die-color">Katzen</span></strong>. <br/> <i>I like cats.</i> <br/> <i>Me gustan los gatos.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="der-color">der Vogel</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/der FO-gel/</td>
-            <td data-label="Englisch (English)">Bird</td>
-            <td data-label="Spanisch (Spanish)">Pájaro</td>
-            <td data-label="Emoji">🐦</td>
-            <td data-label="Beispielsatz 1 (German)">Der <strong><span class="der-color">Vogel</span></strong> singt. <br/> <i>The bird sings.</i> <br/> <i>El pájaro canta.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich sehe einen <strong><span class="der-color">Vogel</span></strong>. <br/> <i>I see a bird.</i> <br/> <i>Veo un pájaro.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="der-color">der Fisch</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/der fish/</td>
-            <td data-label="Englisch (English)">Fish</td>
-            <td data-label="Spanisch (Spanish)">Pez / Pescado</td>
-            <td data-label="Emoji">🐟</td>
-            <td data-label="Beispielsatz 1 (German)">Der <strong><span class="der-color">Fisch</span></strong> schwimmt. <br/> <i>The fish swims.</i> <br/> <i>El pez nada.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich esse gerne <strong><span class="der-color">Fisch</span></strong>. <br/> <i>I like to eat fish.</i> <br/> <i>Me gusta comer pescado.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="die-color">die Blume</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/di BLU-me/</td>
-            <td data-label="Englisch (English)">Flower</td>
-            <td data-label="Spanisch (Spanish)">Flor</td>
-            <td data-label="Emoji">🌸</td>
-            <td data-label="Beispielsatz 1 (German)">Die <strong><span class="die-color">Blume</span></strong> ist schön. <br/> <i>The flower is beautiful.</i> <br/> <i>La flor es hermosa.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich kaufe <strong><span class="die-color">Blumen</span></strong>. <br/> <i>I buy flowers.</i> <br/> <i>Compro flores.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="der-color">der Baum</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/der baum/</td>
-            <td data-label="Englisch (English)">Tree</td>
-            <td data-label="Spanisch (Spanish)">Árbol</td>
-            <td data-label="Emoji">🌳</td>
-            <td data-label="Beispielsatz 1 (German)">Der <strong><span class="der-color">Baum</span></strong> ist groß. <br/> <i>The tree is big.</i> <br/> <i>El árbol es grande.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich pflanze einen <strong><span class="der-color">Baum</span></strong>. <br/> <i>I plant a tree.</i> <br/> <i>Planto un árbol.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="das-color">das Gras</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/das gras/</td>
-            <td data-label="Englisch (English)">Grass</td>
-            <td data-label="Spanisch (Spanish)">Hierba / Césped</td>
-            <td data-label="Emoji">🌱</td>
-            <td data-label="Beispielsatz 1 (German)">Das <strong><span class="das-color">Gras</span></strong> ist grün. <br/> <i>The grass is green.</i> <br/> <i>La hierba es verde.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich mähe das <strong><span class="das-color">Gras</span></strong>. <br/> <i>I mow the grass.</i> <br/> <i>Corto el césped.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="die-color">die Sonne</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/di ZO-ne/</td>
-            <td data-label="Englisch (English)">Sun</td>
-            <td data-label="Spanisch (Spanish)">Sol</td>
-            <td data-label="Emoji">☀️</td>
-            <td data-label="Beispielsatz 1 (German)">Die <strong><span class="die-color">Sonne</span></strong> scheint. <br/> <i>The sun is shining.</i> <br/> <i>El sol brilla.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich liebe die <strong><span class="die-color">Sonne</span></strong>. <br/> <i>I love the sun.</i> <br/> <i>Me encanta el sol.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="der-color">der Mond</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/der mont/</td>
-            <td data-label="Englisch (English)">Moon</td>
-            <td data-label="Spanisch (Spanish)">Luna</td>
-            <td data-label="Emoji">🌙</td>
-            <td data-label="Beispielsatz 1 (German)">Der <strong><span class="der-color">Mond</span></strong> ist hell. <br/> <i>The moon is bright.</i> <br/> <i>La luna es brillante.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich sehe den <strong><span class="der-color">Mond</span></strong>. <br/> <i>I see the moon.</i> <br/> <i>Veo la luna.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="der-color">der Himmel</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/der HI-mel/</td>
-            <td data-label="Englisch (English)">Sky</td>
-            <td data-label="Spanisch (Spanish)">Cielo</td>
-            <td data-label="Emoji">🌌</td>
-            <td data-label="Beispielsatz 1 (German)">Der <strong><span class="der-color">Himmel</span></strong> ist blau. <br/> <i>The sky is blue.</i> <br/> <i>El cielo es azul.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich schaue in den <strong><span class="der-color">Himmel</span></strong>. <br/> <i>I look at the sky.</i> <br/> <i>Miro al cielo.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="die-color">die Wolke</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/di VOL-ke/</td>
-            <td data-label="Englisch (English)">Cloud</td>
-            <td data-label="Spanisch (Spanish)">Nube</td>
-            <td data-label="Emoji">☁️</td>
-            <td data-label="Beispielsatz 1 (German)">Die <strong><span class="die-color">Wolke</span></strong> ist weiß. <br/> <i>The cloud is white.</i> <br/> <i>La nube es blanca.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich sehe viele <strong><span class="die-color">Wolken</span></strong>. <br/> <i>I see many clouds.</i> <br/> <i>Veo muchas nubes.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="der-color">der Regen</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/der RE-gen/</td>
-            <td data-label="Englisch (English)">Rain</td>
-            <td data-label="Spanisch (Spanish)">Lluvia</td>
-            <td data-label="Emoji">🌧️</td>
-            <td data-label="Beispielsatz 1 (German)">Der <strong><span class="der-color">Regen</span></strong> ist kalt. <br/> <i>The rain is cold.</i> <br/> <i>La lluvia es fría.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Es regnet, der <strong><span class="der-color">Regen</span></strong> ist stark. <br/> <i>It's raining, the rain is heavy.</i> <br/> <i>Está lloviendo, la lluvia es fuerte.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="der-color">der Schnee</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/der shne/</td>
-            <td data-label="Englisch (English)">Snow</td>
-            <td data-label="Spanisch (Spanish)">Nieve</td>
-            <td data-label="Emoji">❄️</td>
-            <td data-label="Beispielsatz 1 (German)">Der <strong><span class="der-color">Schnee</span></strong> ist weiß. <br/> <i>The snow is white.</i> <br/> <i>La nieve es blanca.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich mag den <strong><span class="der-color">Schnee</span></strong>. <br/> <i>I like the snow.</i> <br/> <i>Me gusta la nieve.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="der-color">der Wind</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/der vint/</td>
-            <td data-label="Englisch (English)">Wind</td>
-            <td data-label="Spanisch (Spanish)">Viento</td>
-            <td data-label="Emoji">🌬️</td>
-            <td data-label="Beispielsatz 1 (German)">Der <strong><span class="der-color">Wind</span></strong> ist stark. <br/> <i>The wind is strong.</i> <br/> <i>El viento es fuerte.</i></td>
-            <td data-label="Beispielsatz 2 (German)">Es ist viel <strong><span class="der-color">Wind</span></strong>. <br/> <i>There is a lot of wind.</i> <br/> <i>Hay mucho viento.</i></td>
-          </tr>
-          <tr>
-            <td data-label="Deutsches Substantiv (German)"><strong><span class="die-color">die Barzahlung</span></strong></td>
-            <td data-label="Aussprache (Pronunciation)">/di BA:R-tsa:-lung/</td>
-            <td data-label="Englisch (English)">Cash payment</td>
-            <td data-label="Spanisch (Spanish)">Pago en efectivo</td>
-            <td data-label="Emoji">💵</td>
-            <td data-label="Beispielsatz 1 (German)">Ist <strong><span class="die-color">Barzahlung</span></strong> möglich? <br/> <i>Is cash payment possible?</i> <br/> <i>¿Es posible el pago en efectivo?</i></td>
-            <td data-label="Beispielsatz 2 (German)">Ich bevorzuge <strong><span class="die-color">Barzahlung</span></strong>. <br/> <i>I prefer cash payment.</i> <br/> <i>Prefiero el pago en efectivo.</i></td>
+            <td data-label="Substantiv"><strong><span class="das-color">das Tier</span> <span class="emoji-small">🐾</span></strong></td>
+            <td data-label="Aussprache Englisch Spanisch">🇩🇪 /das tiːɐ̯/ <br/> 🇬🇧 <i>Animal</i> <br/> 🇪🇸 <i>Animal</i></td>
+            <td data-label="Beispielsatz">Das <strong><span class="das-color">Tier</span></strong> ist süß. <br/> 🇬🇧 <i>The animal is cute.</i> <br/> 🇪🇸 <i>El animal es lindo.</i></td>
+            <td data-label="Beispielsatz">Ich mag <strong><span class="das-color">Tiere</span></strong>. <br/> 🇬🇧 <i>I like animals.</i> <br/> 🇪🇸 <i>Me gustan los animales.</i></td>
+            <td data-label="Definiter Artikel (Nominativ)"><strong><span class="das-color">Das Tier</span></strong> ist klein.<br/>🇬🇧 <i>The animal is small.</i><br/>🇪🇸 <i>El animal es pequeño.</i></td>
+            <td data-label="Definiter Artikel (Akkusativ)">Ich sehe <strong><span class="das-color">das Tier</span></strong>.<br/>🇬🇧 <i>I see the animal.</i><br/>🇪🇸 <i>Veo el animal.</i></td>
+            <td data-label="Indefiniter Artikel (Nominativ)">Das ist <strong><span class="das-color">ein Tier</span></strong>.<br/>🇬🇧 <i>This is an animal.</i><br/>🇪🇸 <i>Este es un animal.</i></td>
+            <td data-label="Indefiniter Artikel (Akkusativ)">Ich habe <strong><span class="das-color">ein Tier</span></strong>.<br/>🇬🇧 <i>I have an animal.</i><br/>🇪🇸 <i>Tengo un animal.</i></td>
+            <td data-label="Negation (Nominativ)">Das ist <strong><span class="das-color">kein Tier</span></strong>.<br/>🇬🇧 <i>That is not an animal.</i><br/>🇪🇸 <i>Eso no es un animal.</i></td>
+            <td data-label="Negation (Akkusativ)">Ich sehe <strong><span class="das-color">kein Tier</span></strong>.<br/>🇬🇧 <i>I see no animal.</i><br/>🇪🇸 <i>No veo ningún animal.</i></td>
           </tr>
         </tbody>
       </table>
     </div>
   </details>
+
+  <script>
+    function toggleArticles() {
+      const toggle = document.getElementById('toggle-articles');
+      const articleSpans = document.querySelectorAll('.die-color, .der-color, .das-color');
+      const emojiSpans = document.querySelectorAll('.emoji-small');
+      const isHidden = toggle.checked;
+      
+      articleSpans.forEach(span => {
+        if (isHidden) {
+          span.style.display = 'none';
+        } else {
+          span.style.display = '';
+        }
+      });
+
+      // Move emoji position based on toggle state
+      emojiSpans.forEach(span => {
+        if (isHidden) {
+          // When tick is chosen: move emoji below the noun
+          span.classList.add('emoji-below');
+        } else {
+          // When tick is not chosen: emoji inline to the right
+          span.classList.remove('emoji-below');
+        }
+      });
+    }
+
+    // Initialize the toggle state on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      toggleArticles(); // Call once to set initial state
+    });
+
+    document.getElementById('toggle-articles').addEventListener('change', toggleArticles);
+  </script>
 
 </body>
 </html>
