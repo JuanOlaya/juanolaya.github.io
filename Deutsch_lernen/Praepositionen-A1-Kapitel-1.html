@@ -31,27 +31,25 @@
   td .translation { display: block; font-size: 0.9em; color: #555; font-style: italic; margin-top: 4px; }
   strong { font-weight: 700; }
 
-  /* Hide GB and Es lines in columns 2+ by default */
-  td:nth-child(n+2) .translation { display: none; }
+  /* Show translations by default */
+  .translation { display: block; }
   
-  /* Show hidden lines on hover/tap and enlarge cell - columns 3+ */
-  td:nth-child(n+3):hover .translation,
-  td:nth-child(n+3):active .translation { 
-    display: block; 
+  /* Hide translations when toggle is checked */
+  .hide-translations .translation { display: none !important; }
+  
+  /* Show translations on hover when they are hidden */
+  .hide-translations td:nth-child(n+2):hover .translation,
+  .hide-translations td:nth-child(n+2):active .translation { 
+    display: block !important; 
   }
   
-  td:nth-child(n+3):hover,
-  td:nth-child(n+3):active { 
+  /* Hover effect for columns 3+ when translations are hidden */
+  .hide-translations td:nth-child(n+3):hover,
+  .hide-translations td:nth-child(n+3):active { 
     white-space: nowrap; 
     min-width: 300px; 
     z-index: 10; 
     position: relative; 
-  }
-  
-  /* Show hidden lines on hover/tap - column 2 (no enlargement) */
-  td:nth-child(2):hover .translation,
-  td:nth-child(2):active .translation { 
-    display: block; 
   }
 
   /* Responsive Table */
@@ -80,8 +78,17 @@
     <p style="margin-top: 5px; font-size: 0.8em; color: #888;">Source: <a href="https://emmalovesgerman.com/german-prepositions/" target="_blank" style="color: #3182ce;">EmmaLovesGerman.com</a></p>
   </div>
 
+  <div style="display: flex; justify-content: center; margin: 20px 0; padding: 15px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+    <div class="toggle-container" style="margin: 0;">
+      <label for="toggle-translations" style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 500; color: #2c3e50;">
+        <input type="checkbox" id="toggle-translations" style="transform: scale(1.2);">
+        <span>🌐 Übersetzungen ausblenden / Hide Translations</span>
+      </label>
+    </div>
+  </div>
+
   <details id="praepositionen-section" open>
-    <summary>Wechselpräpositionen mit Beispielen</summary>
+    <summary>Wechselpräpositionen mit Beispielen 🇬🇧 Two-Way Prepositions with Examples 🇪🇸 Preposiciones de Doble Caso con Ejemplos</summary>
     <div class="content-wrapper">
         <p class="mb-4">Cada preposición puede usar el caso <strong>Dativo</strong> (ubicación estática, ¿Dónde? - <strong>Wo?</strong>) o el caso <strong>Acusativo</strong> (movimiento hacia un lugar, ¿A dónde? - <strong>Wohin?</strong>).</p>
         
@@ -90,7 +97,7 @@
                 <thead>
                     <tr>
                         <th data-label="Präposition">🇩🇪 Präposition <br/>🇬🇧 Preposition <br/>🇪🇸 Preposición</th>
-                        <th data-label="Info">🇩🇪 Aussprache <br/>🇬🇧 English <br/>🇪🇸 Español</th>
+                        <th data-label="Info">🇩🇪 Aussprache<br/>🇬🇧 English<br/>🇪🇸 Español</th>
                         <th data-label="Dativ Beispiel 1">Dativ Beispiel 1 (Wo?)</th>
                         <th data-label="Dativ Beispiel 2">Dativ Beispiel 2 (Wo?)</th>
                         <th data-label="Akkusativ Beispiel 1">Akkusativ Beispiel 1 (Wohin?)</th>
@@ -100,7 +107,7 @@
                 <tbody>
                     <tr>
                         <td data-label="Präposition"><strong>an</strong><br>🖼️</td>
-                        <td data-label="Info">🇩🇪 /an/<span class="translation"><br>🇬🇧 <i>at, on (vertical)</i><br>🇪🇸 <i>en, junto a</i></span></td>
+                        <td data-label="Info">🇩🇪 /an/<span class="translation"> 🇬🇧 <i>at, on (vertical)</i><br>🇪🇸 <i>en, junto a</i></span></td>
                         <td data-label="Dativ Beispiel 1"><span>Das Poster hängt <strong>an der</strong> Wand.</span><span class="translation">🇬🇧 The poster is hanging on the wall.<br>🇪🇸 El póster está colgado en la pared.</span></td>
                         <td data-label="Dativ Beispiel 2"><span>Wir warten <strong>am</strong> Bahnhof.</span><span class="translation">🇬🇧 We are waiting at the train station.<br>🇪🇸 Esperamos en la estación de tren.</span></td>
                         <td data-label="Akkusativ Beispiel 1"><span>Ich hänge das Poster <strong>an die</strong> Wand.</span><span class="translation">🇬🇧 I hang the poster onto the wall.<br>🇪🇸 Cuelgo el póster en la pared.</span></td>
@@ -108,7 +115,7 @@
                     </tr>
                     <tr>
                         <td data-label="Präposition"><strong>auf</strong><br>📖</td>
-                        <td data-label="Info">🇩🇪 /auf/<span class="translation"><br>🇬🇧 <i>on (horizontal)</i><br>🇪🇸 <i>sobre, en</i></span></td>
+                        <td data-label="Info">🇩🇪 /auf/<span class="translation"> 🇬🇧 <i>on (horizontal)</i><br>🇪🇸 <i>sobre, en</i></span></td>
                         <td data-label="Dativ Beispiel 1"><span>Das Buch liegt <strong>auf dem</strong> Tisch.</span><span class="translation">🇬🇧 The book is lying on the table.<br>🇪🇸 El libro está sobre la mesa.</span></td>
                         <td data-label="Dativ Beispiel 2"><span>Die Katze schläft <strong>auf dem</strong> Sofa.</span><span class="translation">🇬🇧 The cat is sleeping on the sofa.<br>🇪🇸 El gato duerme en el sofá.</span></td>
                         <td data-label="Akkusativ Beispiel 1"><span>Ich lege das Buch <strong>auf den</strong> Tisch.</span><span class="translation">🇬🇧 I lay the book onto the table.<br>🇪🇸 Pongo el libro sobre la mesa.</span></td>
@@ -116,7 +123,7 @@
                     </tr>
                     <tr>
                         <td data-label="Präposition"><strong>hinter</strong><br>🌳👤</td>
-                        <td data-label="Info">🇩🇪 /hínter/<span class="translation"><br>🇬🇧 <i>behind</i><br>🇪🇸 <i>detrás de</i></span></td>
+                        <td data-label="Info">🇩🇪 /hínter/<span class="translation"> 🇬🇧 <i>behind</i><br>🇪🇸 <i>detrás de</i></span></td>
                         <td data-label="Dativ Beispiel 1"><span>Er steht <strong>hinter dem</strong> Baum.</span><span class="translation">🇬🇧 He is standing behind the tree.<br>🇪🇸 Él está parado detrás del árbol.</span></td>
                         <td data-label="Dativ Beispiel 2"><span>Das Auto parkt <strong>hinter dem</strong> Haus.</span><span class="translation">🇬🇧 The car is parked behind the house.<br>🇪🇸 El coche está aparcado detrás de la casa.</span></td>
                         <td data-label="Akkusativ Beispiel 1"><span>Er geht <strong>hinter den</strong> Baum.</span><span class="translation">🇬🇧 He is going behind the tree.<br>🇪🇸 Él va detrás del árbol.</span></td>
@@ -124,7 +131,7 @@
                     </tr>
                     <tr>
                         <td data-label="Präposition"><strong>in</strong><br>🏠</td>
-                        <td data-label="Info">🇩🇪 /in/<span class="translation"><br>🇬🇧 <i>in, into</i><br>🇪🇸 <i>en, dentro de</i></span></td>
+                        <td data-label="Info">🇩🇪 /in/<span class="translation"> 🇬🇧 <i>in, into</i><br>🇪🇸 <i>en, dentro de</i></span></td>
                         <td data-label="Dativ Beispiel 1"><span>Ich bin <strong>im</strong> Haus.</span><span class="translation">🇬🇧 I am in the house.<br>🇪🇸 Estoy en la casa.</span></td>
                         <td data-label="Dativ Beispiel 2"><span>Die Fische schwimmen <strong>im</strong> See.</span><span class="translation">🇬🇧 The fish are swimming in the lake.<br>🇪🇸 Los peces nadan en el lago.</span></td>
                         <td data-label="Akkusativ Beispiel 1"><span>Ich gehe <strong>ins</strong> Haus.</span><span class="translation">🇬🇧 I am going into the house.<br>🇪🇸 Voy a la casa.</span></td>
@@ -132,7 +139,7 @@
                     </tr>
                     <tr>
                         <td data-label="Präposition"><strong>neben</strong><br>🚗🧍</td>
-                        <td data-label="Info">🇩🇪 /nében/<span class="translation"><br>🇬🇧 <i>next to, beside</i><br>🇪🇸 <i>al lado de</i></span></td>
+                        <td data-label="Info">🇩🇪 /nében/<span class="translation"> 🇬🇧 <i>next to, beside</i><br>🇪🇸 <i>al lado de</i></span></td>
                         <td data-label="Dativ Beispiel 1"><span>Die Lampe steht <strong>neben dem</strong> Sofa.</span><span class="translation">🇬🇧 The lamp is standing next to the sofa.<br>🇪🇸 La lámpara está al lado del sofá.</span></td>
                         <td data-label="Dativ Beispiel 2"><span>Die Apotheke ist <strong>neben der</strong> Bank.</span><span class="translation">🇬🇧 The pharmacy is next to the bank.<br>🇪🇸 La farmacia está al lado del banco.</span></td>
                         <td data-label="Akkusativ Beispiel 1"><span>Ich stelle die Lampe <strong>neben das</strong> Sofa.</span><span class="translation">🇬🇧 I am placing the lamp next to the sofa.<br>🇪🇸 Pongo la lámpara al lado del sofá.</span></td>
@@ -140,7 +147,7 @@
                     </tr>
                     <tr>
                         <td data-label="Präposition"><strong>über</strong><br>✈️☁️</td>
-                        <td data-label="Info">🇩🇪 /über/<span class="translation"><br>🇬🇧 <i>over, above</i><br>🇪🇸 <i>sobre, por encima de</i></span></td>
+                        <td data-label="Info">🇩🇪 /über/<span class="translation"> 🇬🇧 <i>over, above</i><br>🇪🇸 <i>sobre, por encima de</i></span></td>
                         <td data-label="Dativ Beispiel 1"><span>Die Wolken sind <strong>über der</strong> Stadt.</span><span class="translation">🇬🇧 The clouds are over the city.<br>🇪🇸 Las nubes están sobre la ciudad.</span></td>
                         <td data-label="Dativ Beispiel 2"><span>Die Lampe hängt <strong>über dem</strong> Tisch.</span><span class="translation">🇬🇧 The lamp is hanging over the table.<br>🇪🇸 La lámpara cuelga sobre la mesa.</span></td>
                         <td data-label="Akkusativ Beispiel 1"><span>Das Flugzeug fliegt <strong>über die</strong> Stadt.</span><span class="translation">🇬🇧 The airplane flies over the city.<br>🇪🇸 El avión vuela sobre la ciudad.</span></td>
@@ -148,7 +155,7 @@
                     </tr>
                     <tr>
                         <td data-label="Präposition"><strong>unter</strong><br>🐈‍⬛📦</td>
-                        <td data-label="Info">🇩🇪 /únter/<span class="translation"><br>🇬🇧 <i>under, below</i><br>🇪🇸 <i>debajo de</i></span></td>
+                        <td data-label="Info">🇩🇪 /únter/<span class="translation"> 🇬🇧 <i>under, below</i><br>🇪🇸 <i>debajo de</i></span></td>
                         <td data-label="Dativ Beispiel 1"><span>Die Katze liegt <strong>unter dem</strong> Tisch.</span><span class="translation">🇬🇧 The cat is lying under the table.<br>🇪🇸 El gato está debajo de la mesa.</span></td>
                         <td data-label="Dativ Beispiel 2"><span>Wir stehen <strong>unter der</strong> Brücke.</span><span class="translation">🇬🇧 We are standing under the bridge.<br>🇪🇸 Estamos parados debajo del puente.</span></td>
                         <td data-label="Akkusativ Beispiel 1"><span>Die Katze kriecht <strong>unter den</strong> Tisch.</span><span class="translation">🇬🇧 The cat crawls under the table.<br>🇪🇸 El gato se arrastra debajo de la mesa.</span></td>
@@ -156,7 +163,7 @@
                     </tr>
                     <tr>
                         <td data-label="Präposition"><strong>vor</strong><br>🧍🚪</td>
-                        <td data-label="Info">🇩🇪 /fohr/<span class="translation"><br>🇬🇧 <i>in front of</i><br>🇪🇸 <i>delante de</i></span></td>
+                        <td data-label="Info">🇩🇪 /fohr/<span class="translation"> 🇬🇧 <i>in front of</i><br>🇪🇸 <i>delante de</i></span></td>
                         <td data-label="Dativ Beispiel 1"><span>Das Auto steht <strong>vor dem</strong> Haus.</span><span class="translation">🇬🇧 The car is parked in front of the house.<br>🇪🇸 El coche está aparcado delante de la casa.</span></td>
                         <td data-label="Dativ Beispiel 2"><span>Ich warte <strong>vor dem</strong> Kino.</span><span class="translation">🇬🇧 I am waiting in front of the cinema.<br>🇪🇸 Espero delante del cine.</span></td>
                         <td data-label="Akkusativ Beispiel 1"><span>Ich fahre das Auto <strong>vor das</strong> Haus.</span><span class="translation">🇬🇧 I am driving the car in front of the house.<br>🇪🇸 Llevo el coche delante de la casa.</span></td>
@@ -164,7 +171,7 @@
                     </tr>
                     <tr>
                         <td data-label="Präposition"><strong>zwischen</strong><br>🅰️🧍🅱️</td>
-                        <td data-label="Info">🇩🇪 /tsvíshen/<span class="translation"><br>🇬🇧 <i>between</i><br>🇪🇸 <i>entre</i></span></td>
+                        <td data-label="Info">🇩🇪 /tsvíshen/<span class="translation"> 🇬🇧 <i>between</i><br>🇪🇸 <i>entre</i></span></td>
                         <td data-label="Dativ Beispiel 1"><span>Der Stuhl steht <strong>zwischen dem</strong> Tisch und dem Bett.</span><span class="translation">🇬🇧 The chair is between the table and the bed.<br>🇪🇸 La silla está entre la mesa y la cama.</span></td>
                         <td data-label="Dativ Beispiel 2"><span>Das Dorf liegt <strong>zwischen den</strong> Bergen.</span><span class="translation">🇬🇧 The village lies between the mountains.<br>🇪🇸 El pueblo se encuentra entre las montañas.</span></td>
                         <td data-label="Akkusativ Beispiel 1"><span>Ich stelle den Stuhl <strong>zwischen den</strong> Tisch und das Bett.</span><span class="translation">🇬🇧 I am putting the chair between the table and the bed.<br>🇪🇸 Pongo la silla entre la mesa y la cama.</span></td>
@@ -175,6 +182,31 @@
         </div>
     </div>
   </details>
+
+  <script>
+    function toggleTranslations() {
+      const toggle = document.getElementById('toggle-translations');
+      const body = document.body;
+      
+      if (toggle.checked) {
+        // Hide translations
+        body.classList.add('hide-translations');
+      } else {
+        // Show translations
+        body.classList.remove('hide-translations');
+      }
+    }
+
+    // Initialize the toggle state on page load (default: show translations)
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggle = document.getElementById('toggle-translations');
+      toggle.checked = false; // Default: show translations
+      toggleTranslations(); // Call once to set initial state
+    });
+
+    // Add event listener for toggle changes
+    document.getElementById('toggle-translations').addEventListener('change', toggleTranslations);
+  </script>
 
 </body>
 </html>
