@@ -1,5 +1,13 @@
 /* Shared CSS for German Learning Site */
 
+/* Gender and Plural Color System */
+:root {
+  --maskulin-color: #0066cc;     /* Blue for masculine */
+  --feminin-color: #cc0000;      /* Red for feminine */
+  --neutrum-color: #404040;      /* Dark gray for neuter */
+  --plural-color: #B800B8;       /* Purple/magenta for plural */
+}
+
 body {
   font-family: 'Inter', sans-serif;
   margin: 20px;
@@ -205,23 +213,25 @@ tr:hover {
   color: blue;
 }
 
-.der-color {
-  color: red; /* Masculine */
+/* Updated Gender and Plural Classes */
+.der-color, .maskulin {
+  color: var(--maskulin-color) !important;
   font-weight: bold;
 }
 
-.die-color {
-  color: blue; /* Feminine */
+.die-color, .feminin {
+  color: var(--feminin-color) !important;
   font-weight: bold;
 }
 
-.das-color {
-  color: black; /* Neuter */
+.das-color, .neutrum {
+  color: var(--neutrum-color) !important;
   font-weight: bold;
 }
 
-.plural-color {
-  color: purple; /* Plural */
+.plural-color, .plural {
+  color: var(--plural-color) !important;
+  font-weight: bold;
 }
 
 strong {
