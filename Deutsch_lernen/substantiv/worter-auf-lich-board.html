@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palabras en Alemán con -lich</title>
+    <!-- Carga de la fuente para el estilo de tiza -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #FA8072; /* Color de fondo salmón */
+            padding: 20px;
+        }
+        .chalkboard {
+            position: relative; /* Añadido para posicionar el círculo */
+            background-color: #FFE4E1; /* Color de fondo cambiado a salmón claro (Misty Rose) */
+            border: 10px solid #E9967A; /* Dark Salmon para el marco */
+            border-radius: 12px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 950px; /* Ancho para las columnas */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            font-family: 'Patrick Hand', cursive; /* Fuente estilo tiza */
+            color: black; /* Texto principal cambiado a negro */
+        }
+        .level-indicator {
+            position: absolute;
+            top: 1rem;
+            left: 1rem; /* Cambiado de 'right' a 'left' */
+            width: 60px;
+            height: 60px;
+            background-color: #D9534F;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .title {
+            font-family: 'Kalam', cursive;
+            font-size: 2.5rem;
+            text-align: center;
+            color: black; /* Título cambiado a negro */
+            border-bottom: 2px dashed rgba(0, 0, 0, 0.5); /* Borde oscuro */
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            text-shadow: none;
+        }
+        .columns-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem; /* Espacio entre columnas */
+        }
+        .column {
+            width: 32%; /* Ancho de cada columna */
+        }
+        .word-item {
+            position: relative; /* Contenedor para el tooltip */
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem; /* Tamaño ajustado para más palabras */
+            margin-bottom: 1.25rem;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .word-item:hover {
+            transform: scale(1.05);
+        }
+        .emoji {
+            font-size: 2.2rem;
+            margin-right: 1rem;
+            width: 40px; /* Ancho fijo para alinear */
+            text-align: center;
+            text-shadow: none; 
+        }
+        .text-container {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Nunito', sans-serif; /* Fuente Nunito aplicada aquí */
+        }
+        .german-word {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .spanish-translation {
+            font-size: 1rem;
+            color: #333; /* Gris muy oscuro para la traducción */
+            margin-top: -5px;
+        }
+        
+        /* Estilos para el Tooltip */
+        .tooltip {
+            visibility: hidden;
+            width: 240px; /* Ancho aumentado para más contenido */
+            background-color: #ffeb3b; /* Fondo amarillo */
+            color: #333; /* Texto oscuro */
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Posición encima del elemento */
+            left: 50%;
+            margin-left: -120px; /* Centrar el tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-family: Arial, sans-serif; /* Fuente estándar para legibilidad */
+            font-size: 0.9rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            pointer-events: none; /* Para que no interfiera con el hover */
+        }
+        .tooltip::after { /* Flecha del tooltip */
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #ffeb3b transparent transparent transparent;
+        }
+        .word-item:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        .tooltip-example {
+            color: #555;
+        }
+
+        /* Media query para pantallas más pequeñas */
+        @media (max-width: 768px) {
+            .columns-container {
+                flex-direction: column;
+                gap: 0;
+            }
+            .column {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chalkboard">
+        <div class="level-indicator">A1</div>
+        <h1 class="title">A1 Wörter auf -lich</h1>
+        <div class="columns-container">
+            <!-- Columna 1 -->
+            <div class="column">
+                <div class="word-item">
+                    <span class="emoji">😊</span>
+                    <div class="text-container">
+                        <span class="german-word">freundlich</span>
+                        <span class="spanish-translation">(amigable, amable)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Er ist sehr freundlich.</span><br>/ea ist sea froind-lish/<br>�🇧 friendly, kind<br>Tipo: Adjektiv/Adverb</span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">📅</span>
+                    <div class="text-container">
+                        <span class="german-word">täglich</span>
+                        <span class="spanish-translation">(diario, cada día)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Ich lerne täglich Deutsch.</span><br>/ij lerne teg-lish doitsh/<br>🇬🇧 daily<br>Tipo: Adjektiv/Adverb</span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">⏰</span>
+                    <div class="text-container">
+                        <span class="german-word">pünktlich</span>
+                        <span class="spanish-translation">(puntual)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Der Bus ist pünktlich.</span><br>/dea bus ist punkt-lish/<br>🇬🇧 punctual, on time<br>Tipo: Adjektiv/Adverb</span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">😄</span>
+                    <div class="text-container">
+                        <span class="german-word">glücklich</span>
+                        <span class="spanish-translation">(feliz, afortunado)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Ich bin sehr glücklich.</span><br>/ij bin sea gliuk-lish/<br>🇬🇧 happy, lucky<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <!-- Columna 2 -->
+            <div class="column">
+                <div class="word-item">
+                    <span class="emoji">🌱</span>
+                    <div class="text-container">
+                        <span class="german-word">natürlich</span>
+                        <span class="spanish-translation">(por supuesto, natural)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Kommst du mit? Natürlich!</span><br>/kommst du mit? na-tiur-lish!/<br>🇬🇧 of course, natural<br>Tipo: Adverb/Adjektiv</span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">✅</span>
+                    <div class="text-container">
+                        <span class="german-word">möglich</span>
+                        <span class="spanish-translation">(posible)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Ist das möglich?</span><br>/ist das miog-lish/<br>🇬🇧 possible<br>Tipo: Adjektiv</span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">👤</span>
+                    <div class="text-container">
+                        <span class="german-word">persönlich</span>
+                        <span class="spanish-translation">(personal)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Das ist meine persönliche Meinung.</span><br>/das ist maine per-son-lishe mainung/<br>🇬🇧 personal, personally<br>Tipo: Adjektiv/Adverb</span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">🛋️</span>
+                    <div class="text-container">
+                        <span class="german-word">gemütlich</span>
+                        <span class="spanish-translation">(acogedor, cómodo)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Die Wohnung ist gemütlich.</span><br>/di vonung ist gue-miut-lish/<br>🇬🇧 cozy, comfortable<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <!-- Columna 3 -->
+            <div class="column">
+                <div class="word-item">
+                    <span class="emoji">🤢</span>
+                    <div class="text-container">
+                        <span class="german-word">hässlich</span>
+                        <span class="spanish-translation">(feo)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Das Wetter ist hässlich.</span><br>/das veta ist jes-lish/<br>🇬🇧 ugly<br>Tipo: Adjektiv</span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">⚽️</span>
+                    <div class="text-container">
+                        <span class="german-word">sportlich</span>
+                        <span class="spanish-translation">(deportivo)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Mein Bruder ist sehr sportlich.</span><br>/main bruda ist sea shport-lish/<br>🇬🇧 sporty, athletic<br>Tipo: Adjektiv</span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">🚺</span>
+                    <div class="text-container">
+                        <span class="german-word">weiblich</span>
+                        <span class="spanish-translation">(femenino)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Bitte ankreuzen: weiblich.</span><br>/bite an-kroitzen: vaib-lish/<br>🇬🇧 female<br>Tipo: Adjektiv</span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">🚹</span>
+                    <div class="text-container">
+                        <span class="german-word">männlich</span>
+                        <span class="spanish-translation">(masculino)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Bitte ankreuzen: männlich.</span><br>/bite an-kroitzen: men-lish/<br>🇬🇧 male<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verbos Modales en Alemán (A1)</title>
+    <!-- Carga de fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #FA8072; /* Color de fondo: Salmón */
+            padding: 20px;
+            font-family: 'Patrick Hand', cursive;
+        }
+        .chalkboard {
+            position: relative; /* Necesario para posicionar el círculo A1 */
+            background-color: #FFE4E1; /* Color de fondo: Misty Rose (Salmón claro) */
+            border: 12px solid #E9967A; /* Borde: Dark Salmon */
+            border-radius: 12px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 950px; /* Ancho ajustado para tres columnas */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            color: #2c3e50; /* Texto oscuro para contraste */
+            text-shadow: none;
+        }
+        .level-circle {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 60px;
+            height: 60px;
+            background-color: #D9534F; /* Rojo salmón oscuro */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Nunito', sans-serif; /* Misma fuente que los verbos */
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .title {
+            font-family: 'Kalam', cursive;
+            font-size: 2.8rem;
+            text-align: center;
+            color: #000000; /* Título en negro */
+            border-bottom: 2px dashed rgba(44, 62, 80, 0.5);
+            padding-bottom: 1rem;
+            margin-top: 1rem; /* Espacio para que no choque con el círculo */
+            margin-bottom: 2rem;
+        }
+        .columns-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem; /* Espacio entre columnas */
+        }
+        .column {
+            width: 31%; /* Ancho para tres columnas */
+        }
+        .word-item {
+            position: relative; /* Contenedor para el tooltip */
+            display: flex;
+            align-items: center;
+            font-size: 1.6rem; 
+            margin-bottom: 3rem;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .word-item:hover {
+            transform: scale(1.05);
+        }
+        .emoji {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+            width: 45px; /* Ancho fijo para alinear */
+            text-align: center;
+            text-shadow: none; /* Sin sombra para los emojis */
+        }
+        .text-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .german-word {
+            font-family: 'Nunito', sans-serif; /* Fuente más legible */
+            font-weight: 700;
+            color: #000000; /* Verbo en negro */
+            font-size: 1.7rem; /* Ligeramente más grande */
+        }
+        .spanish-translation {
+            font-family: 'Nunito', sans-serif; /* Fuente más legible */
+            font-size: 1.1rem;
+            color: #4a5568; /* Gris oscuro para la traducción */
+            margin-top: 0;
+        }
+        
+        /* Estilos para el Tooltip */
+        .tooltip {
+            visibility: hidden;
+            width: 280px;
+            background-color: #ffeb3b; /* Fondo amarillo tipo post-it */
+            color: #000000; /* Texto en negro */
+            text-align: left;
+            border-radius: 6px;
+            padding: 12px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Posición encima del elemento */
+            left: 50%;
+            margin-left: -140px; /* Centrar el tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-family: 'Nunito', sans-serif; /* Fuente más legible para el tooltip */
+            font-size: 1.1rem;
+            line-height: 1.2; /* Espacio entre líneas reducido */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            pointer-events: none; /* Para que no interfiera con el hover */
+            text-shadow: none;
+        }
+        .tooltip .german-example {
+            color: #000000; /* Texto en negro */
+        }
+
+        .tooltip::after { /* Flecha del tooltip */
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -8px;
+            border-width: 8px;
+            border-style: solid;
+            border-color: #ffeb3b transparent transparent transparent;
+        }
+        .word-item:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Media query para pantallas más pequeñas */
+        @media (max-width: 768px) {
+            .columns-container {
+                flex-direction: column;
+                gap: 0;
+            }
+            .column {
+                width: 100%;
+            }
+            .title {
+                font-size: 2rem;
+            }
+            .word-item {
+                font-size: 1.4rem;
+                margin-bottom: 2rem;
+            }
+            .level-circle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chalkboard">
+        <div class="level-circle">A1</div>
+        <h1 class="title">A1 Modalverben</h1>
+        <div class="columns-container">
+            <!-- Columna 1 -->
+            <div class="column">
+                <div class="word-item">
+                    <span class="emoji">💪</span>
+                    <div class="text-container">
+                        <span class="german-word">können</span>
+                        <span class="spanish-translation">(poder, saber hacer)</span>
+                    </div>
+                    <span class="tooltip">
+                        <span class="german-example">🇩🇪 Ich kann Deutsch sprechen.</span><br>
+                        /ish kan doitch shprejen/<br>
+                        🇬🇧 to be able to, can
+                    </span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">❗</span>
+                    <div class="text-container">
+                        <span class="german-word">müssen</span>
+                        <span class="spanish-translation">(tener que, deber)</span>
+                    </div>
+                     <span class="tooltip">
+                        <span class="german-example">🇩🇪 Du musst die Hausaufgaben machen.</span><br>
+                        /du must di haus-auf-gaben majen/<br>
+                        🇬🇧 to have to, must
+                    </span>
+                </div>
+            </div>
+            <!-- Columna 2 -->
+            <div class="column">
+                <div class="word-item">
+                    <span class="emoji">😍</span>
+                    <div class="text-container">
+                        <span class="german-word">wollen</span>
+                        <span class="spanish-translation">(querer)</span>
+                    </div>
+                    <span class="tooltip">
+                        <span class="german-example">🇩🇪 Wir wollen Pizza essen.</span><br>
+                        /via volen pitsa esen/<br>
+                        🇬🇧 to want
+                    </span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">☕</span>
+                    <div class="text-container">
+                        <span class="german-word">möchten</span>
+                        <span class="spanish-translation">(querer, me gustaría)</span>
+                    </div>
+                     <span class="tooltip">
+                        <span class="german-example">🇩🇪 Ich möchte einen Kaffee, bitte.</span><br>
+                        /ish mioshte ainen kafe, bite/<br>
+                        🇬🇧 would like
+                    </span>
+                </div>
+            </div>
+            <!-- Columna 3 -->
+            <div class="column">
+                <div class="word-item">
+                    <span class="emoji">✅</span>
+                    <div class="text-container">
+                        <span class="german-word">dürfen</span>
+                        <span class="spanish-translation">(poder, tener permiso)</span>
+                    </div>
+                     <span class="tooltip">
+                        <span class="german-example">🇩🇪 Sie dürfen hier nicht rauchen.</span><br>
+                        /si diurfen hia nisht raujen/<br>
+                        🇬🇧 to be allowed to, may
+                    </span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">🧑‍⚕️</span>
+                    <div class="text-container">
+                        <span class="german-word">sollen</span>
+                        <span class="spanish-translation">(deber - recomendación)</span>
+                    </div>
+                    <span class="tooltip">
+                        <span class="german-example">🇩🇪 Du sollst mehr schlafen.</span><br>
+                        /du solst mea shlafen/<br>
+                        🇬🇧 should, ought to
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
