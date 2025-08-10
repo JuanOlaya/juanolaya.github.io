@@ -65,7 +65,7 @@
             gap: 2rem; /* Espacio entre columnas */
         }
         .column {
-            width: calc(33.333% - 1.5rem); /* CORRECCIÓN: Cálculo de ancho robusto */
+            width: calc(33.333% - 1.5rem); /* Cálculo de ancho robusto */
             display: flex;
             flex-direction: column;
             gap: 3rem;
@@ -172,6 +172,14 @@
             margin-top: 1rem;
             font-weight: bold;
         }
+        .error-message {
+            color: red; 
+            text-align: center; 
+            width: 100%;
+            font-family: 'Nunito', sans-serif;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
 
         /* Media query para pantallas más pequeñas */
         @media (max-width: 768px) {
@@ -249,7 +257,7 @@
                     <span class="tooltip">
                         🇩🇪 Er kommt nächste Woche nach Berlin.<br>
                         /ea komt nexte voje naj berlín/<br>
-                        �🇧 He's coming to Berlin next week.
+                        🇬🇧 He's coming to Berlin next week.
                     </span>
                 </div>
                 <div class="word-item">
@@ -312,11 +320,11 @@
             </div>
         </div>
         <!-- Gemini Feature Section -->
-        <div style="text-align: center; margin-top: 2rem; border-top: 2px dashed rgba(44, 62, 80, 0.5); padding-top: 2rem;">
+        <div id="gemini-section" style="text-align: center; margin-top: 2rem; border-top: 2px dashed rgba(44, 62, 80, 0.5); padding-top: 2rem;">
             <button id="generate-examples-btn" class="gemini-button">
                 ✨ Mehr Beispiele
             </button>
-            <div id="loading-indicator" class="loading-indicator" style="display: none;">Cargando...</div>
+            <div id="loading-indicator" class="loading-indicator" style="display: none;">Wird geladen...</div>
         </div>
     </div>
 
@@ -325,10 +333,17 @@
         const generateBtn = document.getElementById('generate-examples-btn');
         const loadingIndicator = document.getElementById('loading-indicator');
         const examplesContainer = document.getElementById('main-examples-container'); 
+        const geminiSection = document.getElementById('gemini-section');
+
+        // --- INSTRUCCIONES IMPORTANTES ---
+        // Para que esta función se ejecute en tu computadora o en GitHub Pages,
+        // necesitas una API Key de Google AI Studio.
+        // 1. Ve a https://aistudio.google.com/ y obtén tu clave.
+        // 2. Pega tu clave en la siguiente línea, reemplazando el texto entre comillas.
+        const apiKey = "AIzaSyBOhLCcvyYqv0kxdt0sNd6ahfS2MCGUVhQ";
 
         // --- Función para llamar a la API de Gemini con reintentos (exponential backoff) ---
         async function callGeminiWithBackoff(payload, retries = 3, delay = 1000) {
-            const apiKey = "AIzaSyBOhLCcvyYqv0kxdt0sNd6ahfS2MCGUVhQ"; // La clave de API se inyectará en tiempo de ejecución
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
             for (let i = 0; i < retries; i++) {
@@ -353,6 +368,19 @@
 
         // --- Event Listener para el botón de generar ---
         generateBtn.addEventListener('click', async () => {
+            // Limpiar mensajes de error anteriores
+            const existingError = geminiSection.querySelector('.error-message');
+            if (existingError) existingError.remove();
+
+            // Verificar si la API key ha sido añadida
+            if (apiKey === "Pega tu API Key de Google AI Studio aquí" || apiKey === "") {
+                const errorMsg = document.createElement('p');
+                errorMsg.className = 'error-message';
+                errorMsg.textContent = "Por favor, añade tu API Key en el código para usar esta función.";
+                geminiSection.appendChild(errorMsg);
+                return;
+            }
+
             loadingIndicator.style.display = 'block';
             generateBtn.disabled = true;
             
@@ -427,15 +455,18 @@
                         // Añade las columnas pobladas al contenedor principal
                         columns.forEach(col => examplesContainer.appendChild(col));
                     } else {
-                         throw new Error("API did not return 9 examples as requested.");
+                         throw new Error("La API no devolvió 9 ejemplos como se solicitó.");
                     }
                 } else {
-                    throw new Error("No valid candidates found in API response.");
+                    throw new Error("No se encontraron candidatos válidos en la respuesta de la API.");
                 }
 
             } catch (error) {
                 console.error("Error calling Gemini API:", error);
-                alert('Error al generar ejemplos. Por favor, inténtalo de nuevo.');
+                const errorMsg = document.createElement('p');
+                errorMsg.className = 'error-message';
+                errorMsg.textContent = "Error al generar ejemplos. Revisa tu API Key o la consola.";
+                geminiSection.appendChild(errorMsg);
             } finally {
                 loadingIndicator.style.display = 'none';
                 generateBtn.disabled = false;
