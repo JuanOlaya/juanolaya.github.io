@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuro en Alemán (A1)</title>
+    <!-- Carga de fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #FA8072; /* Color de fondo: Salmón */
+            padding: 20px;
+            font-family: 'Patrick Hand', cursive;
+        }
+        .chalkboard {
+            position: relative; /* Necesario para posicionar el círculo A1 */
+            background-color: #FFE4E1; /* Color de fondo: Misty Rose (Salmón claro) */
+            border: 12px solid #E9967A; /* Borde: Dark Salmon */
+            border-radius: 12px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 950px; /* Ancho ajustado para tres columnas */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            color: #2c3e50; /* Texto oscuro para contraste */
+            text-shadow: none;
+        }
+        .level-circle {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 60px;
+            height: 60px;
+            background-color: #D9534F; /* Rojo salmón oscuro */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Nunito', sans-serif; /* Misma fuente que los verbos */
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        .title {
+            font-family: 'Kalam', cursive;
+            font-size: 2.8rem;
+            text-align: center;
+            color: #000000; /* Título en negro */
+            border-bottom: 2px dashed rgba(44, 62, 80, 0.5);
+            padding-bottom: 1rem;
+            margin-top: 1rem; /* Espacio para que no choque con el círculo */
+            margin-bottom: 2rem;
+        }
+        .columns-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem; /* Espacio entre columnas */
+        }
+        .column {
+            width: calc(33.333% - 1.5rem); /* CORRECCIÓN: Cálculo de ancho robusto */
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        .word-item {
+            position: relative; /* Contenedor para el tooltip */
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem; /* Tamaño ajustado para frases más largas */
+            transition: transform 0.2s;
+            cursor: pointer;
+            min-height: 50px; /* Altura mínima para alinear */
+        }
+        .word-item:hover {
+            transform: scale(1.05);
+        }
+        .emoji {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+            width: 45px; /* Ancho fijo para alinear */
+            text-align: center;
+            text-shadow: none; /* Sin sombra para los emojis */
+        }
+        .text-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .german-sentence {
+            font-family: 'Nunito', sans-serif; /* Fuente más legible */
+            font-weight: 700;
+            color: #000000; /* Verbo en negro */
+            font-size: 1.3rem; /* Ligeramente más grande */
+        }
+        .time-adverb {
+            font-family: 'Nunito', sans-serif; /* Fuente más legible */
+            font-size: 1rem;
+            color: #c0392b; /* Rojo oscuro para el adverbio */
+            font-style: italic;
+            margin-top: 0;
+        }
+        
+        /* Estilos para el Tooltip */
+        .tooltip {
+            visibility: hidden;
+            width: 300px;
+            background-color: #ffeb3b; /* Fondo amarillo tipo post-it */
+            color: #000000; /* Texto en negro */
+            text-align: left;
+            border-radius: 6px;
+            padding: 12px;
+            position: absolute;
+            z-index: 100; /* Asegura que esté por encima de otros elementos */
+            bottom: 125%; /* Posición encima del elemento */
+            left: 50%;
+            margin-left: -150px; /* Centrar el tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-family: 'Nunito', sans-serif; /* Fuente más legible para el tooltip */
+            font-size: 1.1rem;
+            line-height: 1.3; /* Espacio entre líneas reducido */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            pointer-events: none; /* Para que no interfiera con el hover */
+            text-shadow: none;
+        }
+        
+        .tooltip::after { /* Flecha del tooltip */
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -8px;
+            border-width: 8px;
+            border-style: solid;
+            border-color: #ffeb3b transparent transparent transparent;
+        }
+        .word-item:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .gemini-button {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background-color: #D9534F;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .gemini-button:hover {
+            background-color: #B22222;
+            transform: translateY(-2px);
+        }
+        .gemini-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .loading-indicator {
+            font-family: 'Nunito', sans-serif;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        /* Media query para pantallas más pequeñas */
+        @media (max-width: 768px) {
+            .columns-container {
+                flex-direction: column;
+                gap: 0;
+            }
+            .column {
+                width: 100%;
+                gap: 2rem;
+            }
+            .title {
+                font-size: 2rem;
+            }
+            .word-item {
+                font-size: 1.1rem;
+                margin-bottom: 0;
+            }
+            .level-circle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chalkboard">
+        <div class="level-circle">A1</div>
+        <h1 class="title">Futur mit Präsens</h1>
+        <div id="main-examples-container" class="columns-container">
+            <!-- Contenido inicial que será reemplazado -->
+            <div class="column">
+                <div class="word-item">
+                    <span class="emoji">🎬</span>
+                    <div class="text-container">
+                        <span class="german-sentence">Ich gehe <span class="time-adverb">morgen</span> ins Kino.</span>
+                    </div>
+                    <span class="tooltip">
+                        🇩🇪 Ich gehe morgen ins Kino.<br>
+                        /ish guee morguen ins kino/<br>
+                        🇬🇧 I'm going to the cinema tomorrow.
+                    </span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">👵</span>
+                    <div class="text-container">
+                        <span class="german-sentence">Wir besuchen <span class="time-adverb">am Wochenende</span> unsere Oma.</span>
+                    </div>
+                    <span class="tooltip">
+                        🇩🇪 Wir besuchen am Wochenende unsere Oma.<br>
+                        /via besujen am vojen-ende únsere oma/<br>
+                        🇬🇧 We're visiting our grandma on the weekend.
+                    </span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">😔</span>
+                    <div class="text-container">
+                        <span class="german-sentence">Ich habe <span class="time-adverb">am Samstag</span> leider keine Zeit.</span>
+                    </div>
+                    <span class="tooltip">
+                        🇩🇪 Ich habe am Samstag leider keine Zeit.<br>
+                        /ish habe am samstag laida kaine tsait/<br>
+                        🇬🇧 Unfortunately, I don't have time on Saturday.
+                    </span>
+                </div>
+            </div>
+            <div class="column">
+                <div class="word-item">
+                    <span class="emoji">✈️</span>
+                    <div class="text-container">
+                        <span class="german-sentence">Er kommt <span class="time-adverb">nächste Woche</span> nach Berlin.</span>
+                    </div>
+                    <span class="tooltip">
+                        🇩🇪 Er kommt nächste Woche nach Berlin.<br>
+                        /ea komt nexte voje naj berlín/<br>
+                        �🇧 He's coming to Berlin next week.
+                    </span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">☀️</span>
+                    <div class="text-container">
+                        <span class="german-sentence">Sie fliegt <span class="time-adverb">im Sommer</span> nach Spanien.</span>
+                    </div>
+                    <span class="tooltip">
+                        🇩🇪 Sie fliegt im Sommer nach Spanien.<br>
+                        /si fligt im som-ma naj shpanien/<br>
+                        🇬🇧 She's flying to Spain in the summer.
+                    </span>
+                </div>
+                 <div class="word-item">
+                    <span class="emoji">🤒</span>
+                    <div class="text-container">
+                        <span class="german-sentence">Ich bin <span class="time-adverb">morgen</span> leider krank.</span>
+                    </div>
+                    <span class="tooltip">
+                        🇩🇪 Ich bin morgen leider krank.<br>
+                        /ish bin morguen laida krank/<br>
+                        🇬🇧 Unfortunately, I will be sick tomorrow.
+                    </span>
+                </div>
+            </div>
+            <div class="column">
+                <div class="word-item">
+                    <span class="emoji">🎉</span>
+                    <div class="text-container">
+                        <span class="german-sentence">Ihr habt <span class="time-adverb">heute Abend</span> eine Party.</span>
+                    </div>
+                    <span class="tooltip">
+                        🇩🇪 Ihr habt heute Abend eine Party.<br>
+                        /ía habt hoite abent aine parti/<br>
+                        🇬🇧 You (all) are having a party tonight.
+                    </span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">🚆</span>
+                    <div class="text-container">
+                        <span class="german-sentence">Der Zug fährt <span class="time-adverb">in fünf Minuten</span> ab.</span>
+                    </div>
+                    <span class="tooltip">
+                        🇩🇪 Der Zug fährt in fünf Minuten ab.<br>
+                        /dea tsug fert in fiunf minúten ap/<br>
+                        🇬🇧 The train is leaving in five minutes.
+                    </span>
+                </div>
+                <div class="word-item">
+                    <span class="emoji">🗓️</span>
+                    <div class="text-container">
+                        <span class="german-sentence">Ich sage den Termin <span class="time-adverb">für Montag</span> ab.</span>
+                    </div>
+                    <span class="tooltip">
+                        🇩🇪 Ich sage den Termin für Montag ab.<br>
+                        /ish sague den termín fiua montag ap/<br>
+                        🇬🇧 I am canceling the appointment for Monday.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- Gemini Feature Section -->
+        <div style="text-align: center; margin-top: 2rem; border-top: 2px dashed rgba(44, 62, 80, 0.5); padding-top: 2rem;">
+            <button id="generate-examples-btn" class="gemini-button">
+                ✨ Mehr Beispiele
+            </button>
+            <div id="loading-indicator" class="loading-indicator" style="display: none;">Cargando...</div>
+        </div>
+    </div>
+
+    <script>
+        // --- Referencias a los elementos del DOM ---
+        const generateBtn = document.getElementById('generate-examples-btn');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const examplesContainer = document.getElementById('main-examples-container'); 
+
+        // --- Función para llamar a la API de Gemini con reintentos (exponential backoff) ---
+        async function callGeminiWithBackoff(payload, retries = 3, delay = 1000) {
+            const apiKey = ""; // La clave de API se inyectará en tiempo de ejecución
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.warn(`Attempt ${i + 1} failed. Retrying in ${delay}ms...`);
+                    if (i === retries - 1) throw error;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        // --- Event Listener para el botón de generar ---
+        generateBtn.addEventListener('click', async () => {
+            loadingIndicator.style.display = 'block';
+            generateBtn.disabled = true;
+            
+            const prompt = `Generate 9 new, unique, simple German A1 level sentences that use the present tense to express a future action. The sentences should be different from these examples: "Ich gehe morgen ins Kino.", "Wir besuchen am Wochenende unsere Oma.", "Ich habe am Samstag leider keine Zeit.", "Er kommt nächste Woche nach Berlin.", "Sie fliegt im Sommer nach Spanien.", "Ich bin morgen leider krank.", "Ihr habt heute Abend eine Party.", "Der Zug fährt in fünf Minuten ab.", "Ich sage den Termin für Montag ab.". Provide the response as a JSON object with a single key "examples" which is an array of objects. Each object should have the following properties: "emoji" (a single relevant emoji), "sentence" (the full German sentence), "timeAdverb" (the specific time adverb from the sentence), "pronunciation" (a simple phonetic guide for a Spanish speaker), and "translationEN" (the English translation).`;
+
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: prompt }] }],
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            "examples": {
+                                type: "ARRAY",
+                                items: {
+                                    type: "OBJECT",
+                                    properties: {
+                                        "emoji": { "type": "STRING" },
+                                        "sentence": { "type": "STRING" },
+                                        "timeAdverb": { "type": "STRING" },
+                                        "pronunciation": { "type": "STRING" },
+                                        "translationEN": { "type": "STRING" }
+                                    },
+                                    required: ["emoji", "sentence", "timeAdverb", "pronunciation", "translationEN"]
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            try {
+                const result = await callGeminiWithBackoff(payload);
+                
+                if (result.candidates && result.candidates.length > 0) {
+                    const generatedData = JSON.parse(result.candidates[0].content.parts[0].text);
+
+                    if (generatedData && generatedData.examples && generatedData.examples.length === 9) {
+                        examplesContainer.innerHTML = ''; // Limpia los ejemplos originales
+                        
+                        // Crea tres columnas
+                        const columns = [document.createElement('div'), document.createElement('div'), document.createElement('div')];
+                        columns.forEach(col => col.className = 'column');
+
+                        // Distribuye los 9 ejemplos en las 3 columnas
+                        generatedData.examples.forEach((example, index) => {
+                            const wordItem = document.createElement('div');
+                            wordItem.className = 'word-item';
+                            
+                            const highlightedSentence = example.sentence.replace(
+                                example.timeAdverb,
+                                `<span class="time-adverb">${example.timeAdverb}</span>`
+                            );
+
+                            wordItem.innerHTML = `
+                                <span class="emoji">${example.emoji}</span>
+                                <div class="text-container">
+                                    <span class="german-sentence">${highlightedSentence}</span>
+                                </div>
+                                <span class="tooltip">
+                                    🇩🇪 ${example.sentence}<br>
+                                    /${example.pronunciation}/<br>
+                                    🇬🇧 ${example.translationEN}
+                                </span>
+                            `;
+                            
+                            // Lógica corregida para distribuir 3 items por columna
+                            const columnIndex = index % 3;
+                            columns[columnIndex].appendChild(wordItem);
+                        });
+
+                        // Añade las columnas pobladas al contenedor principal
+                        columns.forEach(col => examplesContainer.appendChild(col));
+                    } else {
+                         throw new Error("API did not return 9 examples as requested.");
+                    }
+                } else {
+                    throw new Error("No valid candidates found in API response.");
+                }
+
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                alert('Error al generar ejemplos. Por favor, inténtalo de nuevo.');
+            } finally {
+                loadingIndicator.style.display = 'none';
+                generateBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
