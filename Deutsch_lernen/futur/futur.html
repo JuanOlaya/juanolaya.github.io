@@ -20,7 +20,7 @@
             font-family: 'Patrick Hand', cursive;
         }
         .chalkboard {
-            position: relative; /* Necesario para posicionar el círculo A1 */
+            position: relative; /* Necesario para posicionar los círculos */
             background-color: #FFE4E1; /* Color de fondo: Misty Rose (Salmón claro) */
             border: 12px solid #E9967A; /* Borde: Dark Salmon */
             border-radius: 12px;
@@ -31,10 +31,9 @@
             color: #2c3e50; /* Texto oscuro para contraste */
             text-shadow: none;
         }
-        .level-circle {
+        .level-circle, .info-button {
             position: absolute;
             top: 1rem;
-            left: 1rem;
             width: 60px;
             height: 60px;
             background-color: #D9534F; /* Rojo salmón oscuro */
@@ -44,10 +43,18 @@
             justify-content: center;
             align-items: center;
             font-family: 'Nunito', sans-serif; /* Misma fuente que los verbos */
-            font-size: 1.5rem;
             font-weight: 700;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             z-index: 10;
+        }
+        .level-circle {
+            left: 1rem;
+            font-size: 1.5rem;
+        }
+        .info-button {
+            right: 1rem;
+            cursor: pointer;
+            font-size: 1.3rem; /* Ajustado para que quepa "info" */
         }
         .title {
             font-family: 'Kalam', cursive;
@@ -57,7 +64,46 @@
             border-bottom: 2px dashed rgba(44, 62, 80, 0.5);
             padding-bottom: 1rem;
             margin-top: 1rem; /* Espacio para que no choque con el círculo */
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .explanation-box {
+            display: none; /* Oculto por defecto */
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2.5rem;
+            font-family: 'Nunito', sans-serif;
+            border: 1px dashed #D9534F;
+        }
+        .explanation-box h3 {
+            font-family: 'Kalam', cursive;
+            margin-top: 0;
+            text-align: center;
+            color: #c0392b;
+            font-size: 1.5rem;
+        }
+        .explanation-box p {
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+        .explanation-box code {
+            background-color: rgba(0,0,0,0.07);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .explanation-box ul {
+            padding-left: 20px; /* Espacio para los bullet points */
+        }
+        .explanation-box li {
+            margin-bottom: 0.75rem;
+        }
+        .explanation-box li em {
+            display: block;
+            margin-left: 1rem;
+            color: #4a5568;
+            font-style: normal;
         }
         .columns-container {
             display: flex;
@@ -198,7 +244,7 @@
                 font-size: 1.1rem;
                 margin-bottom: 0;
             }
-            .level-circle {
+            .level-circle, .info-button {
                 width: 50px;
                 height: 50px;
                 font-size: 1.2rem;
@@ -210,7 +256,23 @@
 
     <div class="chalkboard">
         <div class="level-circle">A1</div>
+        <div id="info-button" class="info-button">info</div>
         <h1 class="title">Futur mit Präsens</h1>
+        
+        <div id="explanation-box" class="explanation-box">
+            <h3>¿Cómo hablamos del futuro en alemán?</h3>
+            <p>En el nivel A1, la forma más común de hablar sobre el futuro es usando el <strong>tiempo presente</strong> (<em>Präsens</em>) con una <strong>expresión de tiempo</strong> (como <code>morgen</code>, <code>nächste Woche</code>, etc.).</p>
+            <p>La regla de oro es: ¡el <strong>verbo conjugado</strong> siempre va en la <strong>segunda posición</strong>!</p>
+            <p>Lo que cambia es lo que pones en la primera posición para dar énfasis:</p>
+            <ul>
+                <li><strong>Estructura estándar:</strong> <code>Sujeto + Verbo + ...</code><br>
+                    <em>Ich <strong>gehe</strong> morgen ins Kino.</em></li>
+                <li><strong>Énfasis en el tiempo:</strong> <code>Tiempo + Verbo + Sujeto ...</code><br>
+                    <em>Morgen <strong>gehe</strong> ich ins Kino.</em></li>
+            </ul>
+            <p><strong>Importante:</strong> La "segunda posición" se refiere al segundo "bloque de información", no necesariamente a la segunda palabra. Por ejemplo, en <em><code>Am Wochenende</code> <strong>macht</strong> er Sport</em>, "Am Wochenende" es el primer bloque y el verbo "macht" está correctamente en la segunda posición.</p>
+        </div>
+
         <div id="main-examples-container" class="columns-container">
             <!-- Contenido inicial que será reemplazado -->
             <div class="column">
@@ -334,6 +396,8 @@
         const loadingIndicator = document.getElementById('loading-indicator');
         const examplesContainer = document.getElementById('main-examples-container'); 
         const geminiSection = document.getElementById('gemini-section');
+        const infoButton = document.getElementById('info-button');
+        const explanationBox = document.getElementById('explanation-box');
 
         // --- INSTRUCCIONES IMPORTANTES ---
         // Para que esta función se ejecute en tu computadora o en GitHub Pages,
@@ -341,6 +405,15 @@
         // 1. Ve a https://aistudio.google.com/ y obtén tu clave.
         // 2. Pega tu clave en la siguiente línea, reemplazando el texto entre comillas.
         const apiKey = "AIzaSyBOhLCcvyYqv0kxdt0sNd6ahfS2MCGUVhQ";
+
+        // --- Event Listener para el botón de información ---
+        infoButton.addEventListener('click', () => {
+            if (explanationBox.style.display === 'none' || explanationBox.style.display === '') {
+                explanationBox.style.display = 'block';
+            } else {
+                explanationBox.style.display = 'none';
+            }
+        });
 
         // --- Función para llamar a la API de Gemini con reintentos (exponential backoff) ---
         async function callGeminiWithBackoff(payload, retries = 3, delay = 1000) {
