@@ -328,7 +328,7 @@
 
         // --- Función para llamar a la API de Gemini con reintentos (exponential backoff) ---
         async function callGeminiWithBackoff(payload, retries = 3, delay = 1000) {
-            const apiKey = ""; // La clave de API se inyectará en tiempo de ejecución
+            const apiKey = "AIzaSyBOhLCcvyYqv0kxdt0sNd6ahfS2MCGUVhQ"; // La clave de API se inyectará en tiempo de ejecución
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
             for (let i = 0; i < retries; i++) {
