@@ -139,11 +139,36 @@
             display: flex;
             flex-direction: column;
         }
+        .german-sentence-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
         .german-sentence {
             font-family: 'Nunito', sans-serif; /* Fuente más legible */
             font-weight: 700;
             color: #000000; /* Verbo en negro */
             font-size: 1.3rem; /* Ligeramente más grande */
+        }
+        .audio-icon {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            opacity: 0.6;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .audio-icon:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        .audio-icon.playing {
+            opacity: 1;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
         .time-adverb {
             font-family: 'Nunito', sans-serif; /* Fuente más legible */
@@ -279,7 +304,10 @@
                 <div class="word-item">
                     <span class="emoji">🎬</span>
                     <div class="text-container">
-                        <span class="german-sentence">Ich gehe <span class="time-adverb">morgen</span> ins Kino.</span>
+                        <div class="german-sentence-container">
+                            <span class="german-sentence">Ich gehe <span class="time-adverb">morgen</span> ins Kino.</span>
+                            <img src="https://www.gstatic.com/images/icons/material/system/2x/volume_up_black_24dp.png" class="audio-icon" alt="Play audio">
+                        </div>
                     </div>
                     <span class="tooltip">
                         🇩🇪 Ich gehe morgen ins Kino.<br>
@@ -290,7 +318,10 @@
                 <div class="word-item">
                     <span class="emoji">👵</span>
                     <div class="text-container">
-                        <span class="german-sentence">Wir besuchen <span class="time-adverb">am Wochenende</span> unsere Oma.</span>
+                        <div class="german-sentence-container">
+                            <span class="german-sentence">Wir besuchen <span class="time-adverb">am Wochenende</span> unsere Oma.</span>
+                            <img src="https://www.gstatic.com/images/icons/material/system/2x/volume_up_black_24dp.png" class="audio-icon" alt="Play audio">
+                        </div>
                     </div>
                     <span class="tooltip">
                         🇩🇪 Wir besuchen am Wochenende unsere Oma.<br>
@@ -301,7 +332,10 @@
                 <div class="word-item">
                     <span class="emoji">😔</span>
                     <div class="text-container">
-                        <span class="german-sentence">Ich habe <span class="time-adverb">am Samstag</span> leider keine Zeit.</span>
+                        <div class="german-sentence-container">
+                            <span class="german-sentence">Ich habe <span class="time-adverb">am Samstag</span> leider keine Zeit.</span>
+                            <img src="https://www.gstatic.com/images/icons/material/system/2x/volume_up_black_24dp.png" class="audio-icon" alt="Play audio">
+                        </div>
                     </div>
                     <span class="tooltip">
                         🇩🇪 Ich habe am Samstag leider keine Zeit.<br>
@@ -314,7 +348,10 @@
                 <div class="word-item">
                     <span class="emoji">✈️</span>
                     <div class="text-container">
-                        <span class="german-sentence">Er kommt <span class="time-adverb">nächste Woche</span> nach Berlin.</span>
+                        <div class="german-sentence-container">
+                            <span class="german-sentence">Er kommt <span class="time-adverb">nächste Woche</span> nach Berlin.</span>
+                            <img src="https://www.gstatic.com/images/icons/material/system/2x/volume_up_black_24dp.png" class="audio-icon" alt="Play audio">
+                        </div>
                     </div>
                     <span class="tooltip">
                         🇩🇪 Er kommt nächste Woche nach Berlin.<br>
@@ -325,7 +362,10 @@
                 <div class="word-item">
                     <span class="emoji">☀️</span>
                     <div class="text-container">
-                        <span class="german-sentence">Sie fliegt <span class="time-adverb">im Sommer</span> nach Spanien.</span>
+                         <div class="german-sentence-container">
+                            <span class="german-sentence">Sie fliegt <span class="time-adverb">im Sommer</span> nach Spanien.</span>
+                            <img src="https://www.gstatic.com/images/icons/material/system/2x/volume_up_black_24dp.png" class="audio-icon" alt="Play audio">
+                        </div>
                     </div>
                     <span class="tooltip">
                         🇩🇪 Sie fliegt im Sommer nach Spanien.<br>
@@ -336,7 +376,10 @@
                  <div class="word-item">
                     <span class="emoji">🤒</span>
                     <div class="text-container">
-                        <span class="german-sentence">Ich bin <span class="time-adverb">morgen</span> leider krank.</span>
+                        <div class="german-sentence-container">
+                            <span class="german-sentence">Ich bin <span class="time-adverb">morgen</span> leider krank.</span>
+                            <img src="https://www.gstatic.com/images/icons/material/system/2x/volume_up_black_24dp.png" class="audio-icon" alt="Play audio">
+                        </div>
                     </div>
                     <span class="tooltip">
                         🇩🇪 Ich bin morgen leider krank.<br>
@@ -349,7 +392,10 @@
                 <div class="word-item">
                     <span class="emoji">🎉</span>
                     <div class="text-container">
-                        <span class="german-sentence">Ihr habt <span class="time-adverb">heute Abend</span> eine Party.</span>
+                        <div class="german-sentence-container">
+                            <span class="german-sentence">Ihr habt <span class="time-adverb">heute Abend</span> eine Party.</span>
+                            <img src="https://www.gstatic.com/images/icons/material/system/2x/volume_up_black_24dp.png" class="audio-icon" alt="Play audio">
+                        </div>
                     </div>
                     <span class="tooltip">
                         🇩🇪 Ihr habt heute Abend eine Party.<br>
@@ -360,7 +406,10 @@
                 <div class="word-item">
                     <span class="emoji">🚆</span>
                     <div class="text-container">
-                        <span class="german-sentence">Der Zug fährt <span class="time-adverb">in fünf Minuten</span> ab.</span>
+                        <div class="german-sentence-container">
+                            <span class="german-sentence">Der Zug fährt <span class="time-adverb">in fünf Minuten</span> ab.</span>
+                            <img src="https://www.gstatic.com/images/icons/material/system/2x/volume_up_black_24dp.png" class="audio-icon" alt="Play audio">
+                        </div>
                     </div>
                     <span class="tooltip">
                         🇩🇪 Der Zug fährt in fünf Minuten ab.<br>
@@ -371,7 +420,10 @@
                 <div class="word-item">
                     <span class="emoji">🗓️</span>
                     <div class="text-container">
-                        <span class="german-sentence">Ich sage den Termin <span class="time-adverb">für Montag</span> ab.</span>
+                        <div class="german-sentence-container">
+                            <span class="german-sentence">Ich sage den Termin <span class="time-adverb">für Montag</span> ab.</span>
+                            <img src="https://www.gstatic.com/images/icons/material/system/2x/volume_up_black_24dp.png" class="audio-icon" alt="Play audio">
+                        </div>
                     </div>
                     <span class="tooltip">
                         🇩🇪 Ich sage den Termin für Montag ab.<br>
@@ -415,13 +467,137 @@
             }
         });
 
+        // --- Funciones de Audio ---
+        function base64ToArrayBuffer(base64) {
+            const binaryString = window.atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        function pcmToWav(pcmData, sampleRate) {
+            const numChannels = 1;
+            const bytesPerSample = 2;
+            const blockAlign = numChannels * bytesPerSample;
+            const byteRate = sampleRate * blockAlign;
+            const dataSize = pcmData.length * bytesPerSample;
+            const buffer = new ArrayBuffer(44 + dataSize);
+            const view = new DataView(buffer);
+
+            function writeString(view, offset, string) {
+                for (let i = 0; i < string.length; i++) {
+                    view.setUint8(offset + i, string.charCodeAt(i));
+                }
+            }
+
+            writeString(view, 0, 'RIFF');
+            view.setUint32(4, 36 + dataSize, true);
+            writeString(view, 8, 'WAVE');
+            writeString(view, 12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true);
+            view.setUint16(22, numChannels, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, byteRate, true);
+            view.setUint16(32, blockAlign, true);
+            view.setUint16(34, 16, true);
+            writeString(view, 36, 'data');
+            view.setUint32(40, dataSize, true);
+
+            for (let i = 0; i < pcmData.length; i++) {
+                view.setInt16(44 + i * 2, pcmData[i], true);
+            }
+
+            return new Blob([view], { type: 'audio/wav' });
+        }
+
+        async function playAudio(text, iconElement) {
+            if (apiKey === "Pega tu API Key de Google AI Studio aquí" || apiKey === "") {
+                const existingError = geminiSection.querySelector('.error-message');
+                if (!existingError) {
+                    const errorMsg = document.createElement('p');
+                    errorMsg.className = 'error-message';
+                    errorMsg.textContent = "Por favor, añade tu API Key para usar el audio.";
+                    geminiSection.appendChild(errorMsg);
+                }
+                return;
+            }
+            
+            iconElement.classList.add('playing');
+
+            try {
+                // CORRECCIÓN: El payload para TTS es más simple.
+                const payload = {
+                    contents: [{ parts: [{ text: text }] }], // Solo el texto a sintetizar
+                    generationConfig: {
+                        responseModalities: ["AUDIO"],
+                        speechConfig: {
+                            voiceConfig: { 
+                                prebuiltVoiceConfig: { voiceName: "Kore" } // Voz válida
+                            }
+                        }
+                    },
+                    model: "gemini-2.5-flash-preview-tts"
+                };
+
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                
+                const result = await response.json();
+                const part = result?.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+
+                if (audioData && mimeType && mimeType.startsWith("audio/")) {
+                    const sampleRate = parseInt(mimeType.match(/rate=(\d+)/)[1], 10);
+                    const pcmData = base64ToArrayBuffer(audioData);
+                    const pcm16 = new Int16Array(pcmData);
+                    const wavBlob = pcmToWav(pcm16, sampleRate);
+                    const audioUrl = URL.createObjectURL(wavBlob);
+                    const audio = new Audio(audioUrl);
+                    audio.play();
+                    audio.onended = () => iconElement.classList.remove('playing');
+                } else {
+                    throw new Error("Respuesta de audio inválida.");
+                }
+            } catch (error) {
+                console.error("Error al generar audio:", error);
+                iconElement.classList.remove('playing');
+            }
+        }
+        
+        function addAudioListeners() {
+            document.querySelectorAll('.audio-icon').forEach(icon => {
+                // Evita añadir múltiples listeners al mismo icono
+                if (icon.dataset.listenerAttached) return;
+                
+                icon.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const sentence = e.target.closest('.german-sentence-container').querySelector('.german-sentence').innerText;
+                    playAudio(sentence, e.target);
+                });
+                icon.dataset.listenerAttached = 'true';
+            });
+        }
+        
+        addAudioListeners();
+
         // --- Función para llamar a la API de Gemini con reintentos (exponential backoff) ---
         async function callGeminiWithBackoff(payload, retries = 3, delay = 1000) {
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            const apiUrlText = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
             for (let i = 0; i < retries; i++) {
                 try {
-                    const response = await fetch(apiUrl, {
+                    const response = await fetch(apiUrlText, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
@@ -511,7 +687,10 @@
                             wordItem.innerHTML = `
                                 <span class="emoji">${example.emoji}</span>
                                 <div class="text-container">
-                                    <span class="german-sentence">${highlightedSentence}</span>
+                                     <div class="german-sentence-container">
+                                        <span class="german-sentence">${highlightedSentence}</span>
+                                        <img src="https://www.gstatic.com/images/icons/material/system/2x/volume_up_black_24dp.png" class="audio-icon" alt="Play audio">
+                                    </div>
                                 </div>
                                 <span class="tooltip">
                                     🇩🇪 ${example.sentence}<br>
@@ -527,6 +706,7 @@
 
                         // Añade las columnas pobladas al contenedor principal
                         columns.forEach(col => examplesContainer.appendChild(col));
+                        addAudioListeners(); // Vuelve a añadir los listeners a los nuevos elementos
                     } else {
                          throw new Error("La API no devolvió 9 ejemplos como se solicitó.");
                     }
