@@ -1,61 +1,567 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="de">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Professionen A1</title>
-  <style>
-    table { border-collapse: collapse; width: 100%; }
-    th, td { border: 1px solid #333; padding: 4px 8px; text-align: left; vertical-align: top; }
-    th { background-color: #f0f0f0; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palabras en Alemán con -lich</title>
+    <!-- Carga de la fuente para el estilo de tiza -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Alineado al inicio */
+            min-height: 100%;
+            margin: 0;
+            background-color: #FFA985; /* Color de fondo */
+            padding: 20px;
+            font-family: 'Nunito', sans-serif;
+        }
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+            background-color: #FFF5EE; /* Seashell (Salmón muy claro) */
+            border: 10px solid #D9534F; /* Nuevo color de marco, igual al botón */
+            border-radius: 20px; /* Rounded corners for the inner container */
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .header {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .level-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 60px;
+            background-color: #D9534F; /* Rojo oscuro */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .title {
+            font-family: 'Kalam', cursive;
+            font-size: 3rem;
+            color: #333;
+            padding-top: 1rem;
+            border-bottom: 3px dashed #CD5C5C; /* Indian Red, darker salmon */
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem; /* Espacio entre tarjetas */
+        }
+        .word-item {
+            position: relative; /* Contenedor para el tooltip */
+            background-color: #FFE4E1; /* Misty Rose (Salmón claro) */
+            border-radius: 8px;
+            padding: 1.5rem;
+            width: 280px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .word-item:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .word-item:nth-child(even):hover {
+            transform: scale(1.05) rotate(-1deg);
+        }
+        .word-item-content {
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+        .emoji {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+            text-shadow: none; 
+        }
+        .text-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .german-word {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: black;
+        }
+        .spanish-translation {
+            font-size: 1rem;
+            color: #555;
+            margin-top: -5px;
+        }
+        
+        /* Estilos para el Tooltip */
+        .tooltip {
+            visibility: hidden;
+            width: 240px;
+            background-color: #333;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 115%;
+            left: 50%;
+            margin-left: -120px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+        .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+        .word-item:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        .tooltip-example {
+            color: #ccc;
+        }
+
+        /* Gemini API Features */
+        .story-container {
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 8px;
+            color: black;
+            display: none;
+            max-width: 800px;
+            text-align: left;
+        }
+        .story-container h3 {
+            font-family: 'Kalam', cursive;
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #story-button {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 12px 24px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            background-color: #D9534F; /* Rojo oscuro */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #story-button:hover {
+            background-color: #c9302c; /* Tono más oscuro para el hover */
+        }
+        .button-translation {
+            display: block;
+            font-size: 0.8rem;
+            font-style: italic;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+        .loader {
+            text-align: center;
+        }
+        .highlighted-word {
+            color: #D32F2F;
+            font-weight: 700;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            font-size: 1.2rem;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        #close-modal {
+            margin-top: 1.5rem;
+            padding: 8px 16px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <h1>Professionen – A1 Übungen mit Artikeln</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>German Noun</th><th>English</th><th>Español</th>
-        <th>Def. Nom.</th><th>Def. Akk.</th>
-        <th>Indef. Nom.</th><th>Indef. Akk.</th>
-        <th>Neg. Nom.</th><th>Neg. Akk.</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>der Arzt</td><td>doctor</td><td>médico</td><td>Der Arzt arbeitet im Krankenhaus.</td><td>Gestern habe ich den Arzt besucht.</td><td>Ein Arzt hilft den Patienten.</td><td>Ich treffe einen Arzt um 9 Uhr.</td><td>Kein Arzt ist heute da.</td><td>Ich kenne keinen Arzt.</td></tr>
-      <tr><td>der Bauer</td><td>farmer</td><td>agricultor</td><td>Der Bauer füttert die Tiere.</td><td>Wir besuchen den Bauer morgen.</td><td>Ein Bauer verkauft frisches Gemüse.</td><td>Ich sehe einen Bauer auf dem Feld.</td><td>Kein Bauer erntet heute.</td><td>Ich kenne keinen Bauer.</td></tr>
-      <tr><td>der Bäcker</td><td>baker</td><td>panadero</td><td>Der Bäcker backt Brot.</td><td>Ich kaufe den Bäcker immer frisches Brot.</td><td>Ein Bäcker arbeitet bereits um 5 Uhr.</td><td>Ich besuche einen Bäcker in der Stadt.</td><td>Kein Bäcker macht heute Kuchen.</td><td>Ich kenne keinen Bäcker.</td></tr>
-      <tr><td>der Elektriker</td><td>electrician</td><td>electricista</td><td>Der Elektriker repariert die Lampe.</td><td>Letzte Woche habe ich den Elektriker gerufen.</td><td>Ein Elektriker kommt heute.</td><td>Ich brauche einen Elektriker für das Haus.</td><td>Kein Elektriker ist im Büro.</td><td>Ich kenne keinen Elektriker.</td></tr>
-      <tr><td>der Fahrer</td><td>driver</td><td>conductor</td><td>Der Fahrer fährt den Bus.</td><td>Ich sehe den Fahrer an der Haltestelle.</td><td>Ein Fahrer wartet vor dem Haus.</td><td>Ich treffe einen Fahrer morgen früh.</td><td>Kein Fahrer ist krank.</td><td>Ich kenne keinen Fahrer.</td></tr>
-      <tr><td>der Feuerwehrmann</td><td>firefighter</td><td>bombero</td><td>Der Feuerwehrmann löscht das Feuer.</td><td>Heute habe ich den Feuerwehrmann im Einsatz gesehen.</td><td>Ein Feuerwehrmann hilft den Menschen.</td><td>Ich rufe einen Feuerwehrmann im Notfall.</td><td>Kein Feuerwehrmann ist draußen.</td><td>Ich kenne keinen Feuerwehrmann.</td></tr>
-      <tr><td>der Friseur</td><td>hairdresser</td><td>peluquero</td><td>Der Friseur schneidet Haare.</td><td>Ich sehe den Friseur morgen.</td><td>Ein Friseur öffnet den Salon um 9 Uhr.</td><td>Ich brauche einen Friseur für Samstag.</td><td>Kein Friseur ist gerade da.</td><td>Ich kenne keinen Friseur.</td></tr>
-      <tr><td>der Informatiker</td><td>IT specialist</td><td>informático</td><td>Der Informatiker programmiert den Computer.</td><td>Ich treffe den Informatiker heute.</td><td>Ein Informatiker installiert die Software.</td><td>Ich suche einen Informatiker online.</td><td>Kein Informatiker ist im Büro.</td><td>Ich kenne keinen Informatiker.</td></tr>
-      <tr><td>der Kellner</td><td>waiter</td><td>camarero</td><td>Der Kellner bringt das Essen.</td><td>Ich habe den Kellner gerufen.</td><td>Ein Kellner serviert Kaffee.</td><td>Ich sehe einen Kellner im Café.</td><td>Kein Kellner ist im Raum.</td><td>Ich kenne keinen Kellner.</td></tr>
-      <tr><td>der Koch</td><td>cook</td><td>cocinero</td><td>Der Koch kocht Suppe.</td><td>Heute habe ich den Koch gefragt.</td><td>Ein Koch bereitet das Frühstück.</td><td>Ich treffe einen Koch um 8 Uhr.</td><td>Kein Koch ist im Restaurant.</td><td>Ich kenne keinen Koch.</td></tr>
-      <tr><td>der Krankenpfleger</td><td>nurse</td><td>enfermero</td><td>Der Krankenpfleger hilft dem Patienten.</td><td>Ich sehe den Krankenpfleger im Krankenhaus.</td><td>Ein Krankenpfleger kommt heute.</td><td>Ich brauche einen Krankenpfleger morgen.</td><td>Kein Krankenpfleger ist frei.</td><td>Ich kenne keinen Krankenpfleger.</td></tr>
-      <tr><td>der Lehrer</td><td>teacher</td><td>profesor</td><td>Der Lehrer erklärt die Aufgabe.</td><td>Ich habe den Lehrer gefragt.</td><td>Ein Lehrer unterrichtet die Klasse.</td><td>Ich treffe einen Lehrer im Unterricht.</td><td>Kein Lehrer ist heute da.</td><td>Ich kenne keinen Lehrer.</td></tr>
-      <tr><td>der Mechaniker</td><td>mechanic</td><td>mecánico</td><td>Der Mechaniker repariert das Auto.</td><td>Ich sehe den Mechaniker in der Werkstatt.</td><td>Ein Mechaniker prüft den Motor.</td><td>Ich brauche einen Mechaniker heute.</td><td>Kein Mechaniker ist beschäftigt.</td><td>Ich kenne keinen Mechaniker.</td></tr>
-      <tr><td>der Polizist</td><td>policeman</td><td>policía</td><td>Der Polizist hilft den Leuten.</td><td>Ich kenne den Polizist gut.</td><td>Ein Polizist kontrolliert den Verkehr.</td><td>Ich sehe einen Polizist auf der Straße.</td><td>Kein Polizist ist hier.</td><td>Ich kenne keinen Polizist.</td></tr>
-      <tr><td>der Sekretär</td><td>secretary</td><td>secretario</td><td>Der Sekretär organisiert Termine.</td><td>Ich rufe den Sekretär an.</td><td>Ein Sekretär schreibt Briefe.</td><td>Ich treffe einen Sekretär heute.</td><td>Kein Sekretär arbeitet morgen.</td><td>Ich kenne keinen Sekretär.</td></tr>
-      <tr><td>der Verkäufer</td><td>salesperson</td><td>vendedor</td><td>Der Verkäufer verkauft Kleidung.</td><td>Ich sehe den Verkäufer im Laden.</td><td>Ein Verkäufer berät die Kunden.</td><td>Ich suche einen Verkäufer hier.</td><td>Kein Verkäufer ist heute da.</td><td>Ich kenne keinen Verkäufer.</td></tr>
-      <tr><td>die Ärztin</td><td>doctor (female)</td><td>médica</td><td>Die Ärztin untersucht den Patienten.</td><td>Ich besuche die Ärztin morgen.</td><td>Eine Ärztin kommt gleich.</td><td>Ich treffe eine Ärztin um 10 Uhr.</td><td>Keine Ärztin ist verfügbar.</td><td>Ich kenne keine Ärztin.</td></tr>
-      <tr><td>die Bäckerin</td><td>baker (female)</td><td>panadera</td><td>Die Bäckerin backt Brot.</td><td>Ich sehe die Bäckerin im Laden.</td><td>Eine Bäckerin verkauft Kuchen.</td><td>Ich suche eine Bäckerin hier.</td><td>Keine Bäckerin arbeitet heute.</td><td>Ich kenne keine Bäckerin.</td></tr>
-      <tr><td>die Elektrikerin</td><td>electrician (female)</td><td>electricista</td><td>Die Elektrikerin repariert den Schalter.</td><td>Ich rufe die Elektrikerin an.</td><td>Eine Elektrikerin kommt heute.</td><td>Ich brauche eine Elektrikerin morgen.</td><td>Keine Elektrikerin ist frei.</td><td>Ich kenne keine Elektrikerin.</td></tr>
-      <tr><td>die Fahrerin</td><td>driver (female)</td><td>conductora</td><td>Die Fahrerin fährt den Bus.</td><td>Ich sehe die Fahrerin am Bahnhof.</td><td>Eine Fahrerin fährt heute.</td><td>Ich treffe eine Fahrerin morgen.</td><td>Keine Fahrerin ist da.</td><td>Ich kenne keine Fahrerin.</td></tr>
-      <tr><td>die Feuerwehrfrau</td><td>firefighter (female)</td><td>bombera</td><td>Die Feuerwehrfrau löscht das Feuer.</td><td>Ich sehe die Feuerwehrfrau im Einsatz.</td><td>Eine Feuerwehrfrau hilft sofort.</td><td>Ich rufe eine Feuerwehrfrau an.</td><td>Keine Feuerwehrfrau ist frei.</td><td>Ich kenne keine Feuerwehrfrau.</td></tr>
-      <tr><td>die Friseurin</td><td>hairdresser (female)</td><td>peluquera</td><td>Die Friseurin kämmt die Haare.</td><td>Ich besuche die Friseurin nächste Woche.</td><td>Eine Friseurin wäscht Haare.</td><td>Ich suche eine Friseurin hier.</td><td>Keine Friseurin ist beschäftigt.</td><td>Ich kenne keine Friseurin.</td></tr>
-      <tr><td>die Informatikerin</td><td>IT specialist (female)</td><td>informática</td><td>Die Informatikerin programmiert Software.</td><td>Ich treffe die Informatikerin heute.</td><td>Eine Informatikerin arbeitet im Büro.</td><td>Ich brauche eine Informatikerin jetzt.</td><td>Keine Informatikerin ist verfügbar.</td><td>Ich kenne keine Informatikerin.</td></tr>
-      <tr><td>die Kellnerin</td><td>waitress</td><td>camarera</td><td>Die Kellnerin serviert Kaffee.</td><td>Ich sehe die Kellnerin im Café.</td><td>Eine Kellnerin räumt den Tisch ab.</td><td>Ich rufe eine Kellnerin her.</td><td>Keine Kellnerin ist da.</td><td>Ich conozco ninguna Kellnerin.</td></tr>
-      <tr><td>die Köchin</td><td>cook (female)</td><td>cocinera</td><td>Die Köchin kocht Suppe.</td><td>Ich besuche die Köchin im Restaurant.</td><td>Eine Köchin bereitet das Mittagessen.</td><td>Ich treffe eine Köchin heute.</td><td>Keine Köchin ist am Herd.</td><td>Ich conozco ninguna Köchin.</td></tr>
-      <tr><td>die Krankenschwester</td><td>nurse (female)</td><td>enfermera</td><td>Die Krankenschwester pflegt den Patienten.</td><td>Ich sehe die Krankenschwester im Krankenhaus.</td><td>Eine Krankenschwester hilft jetzt.</td><td>Ich necesito una Krankenschwester mañana.</td><td>Keine Krankenschwester ist frei.</td><td>Ich conozco ninguna Krankenschwester.</td></tr>
-      <tr><td>die Lehrerin</td><td>teacher (female)</td><td>profesora</td><td>Die Lehrerin schreibt an die Tafel.</td><td>Ich habe die Lehrerin getroffen.</td><td>Eine Lehrerin erklärt den Text.</td><td>Ich treffe eine Lehrerin am Montag.</td><td>Keine Lehrerin ist da.</td><td>Ich conozco ninguna Lehrerin.</td></tr>
-      <tr><td>die Malerin</td><td>painter (female)</td><td>pintora</td><td>Die Malerin malt ein Bild.</td><td>Ich besuche die Malerin morgen.</td><td>Eine Malerin arbeitet im Atelier.</td><td>Ich treffe eine Malerin bald.</td><td>Keine Malerin ist hier.</td><td>Ich conozco ninguna Malerin.</td></tr>
-      <tr><td>die Mechanikerin</td><td>mechanic (female)</td><td>mecánica</td><td>Die Mechanikerin repariert das Fahrrad.</td><td>Ich sehe die Mechanikerin in der Werkstatt.</td><td>Eine Mechanikerin testet den Motor.</td><td>Ich necesito una Mechanikerin heute.</td><td>Keine Mechanikerin ist beschäftigt.</td><td>Ich conozco ninguna Mechanikerin.</td></tr>
-      <tr><td>die Polizistin</td><td>policewoman</td><td>mujer policía</td><td>Die Polizistin hilft der Familie.</td><td>Ich treffe die Polizistin am Wochenende.</td><td>Eine Polizistin kontrolliert den Verkehr.</td><td>Ich rufe eine Polizistin im Notfall.</td><td>Keine Polizistin ist in der Nähe.</td><td>Ich conozco ninguna Polizistin.</td></tr>
-      <tr><td>die Sekretärin</td><td>secretary (female)</td><td>secretaria</td><td>Die Sekretärin beantwortet Anrufe.</td><td>Ich sehe die Sekretärin im Büro.</td><td>Eine Sekretärin schreibt einen Brief.</td><td>Ich necesito una Sekretärin ahora.</td><td>Keine Sekretärin ist anwesend.</td><td>Ich conozco ninguna Sekretärin.</td></tr>
-      <tr><td>die Verkäuferin</td><td>salesperson (female)</td><td>vendedora</td><td>Die Verkäuferin zeigt das Produkt.</td><td>Ich sehe die Verkäuferin im Geschäft.</td><td>Eine Verkäuferin berät mich heute.</td><td>Ich brauche eine Verkäuferin im Laden.</td><td>Keine Verkäuferin ist da.</td><td>Ich conozco ninguna Verkäuferin.</td></tr>
-    </tbody>
-  </table>
+
+    <div class="main-container">
+        <div class="header">
+            <div class="level-indicator">A1</div>
+            <h1 class="title">A1 Wörter auf -lich</h1>
+        </div>
+        
+        <div class="cards-container">
+            <div class="word-item" onclick="generateExample('freundlich')">
+                <div class="word-item-content">
+                    <span class="emoji">😊</span>
+                    <div class="text-container">
+                        <span class="german-word">freundlich</span>
+                        <span class="spanish-translation">(amigable, amable)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Er ist sehr freundlich.</span><br>/ea ist sea froind-lish/<br>🇬🇧 friendly, kind<br>Tipo: Adjektiv/Adverb</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('täglich')">
+                <div class="word-item-content">
+                    <span class="emoji">📅</span>
+                    <div class="text-container">
+                        <span class="german-word">täglich</span>
+                        <span class="spanish-translation">(diario, cada día)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Ich lerne täglich Deutsch.</span><br>/ij lerne teg-lish doitsh/<br>🇬🇧 daily<br>Tipo: Adjektiv/Adverb</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('pünktlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">⏰</span>
+                    <div class="text-container">
+                        <span class="german-word">pünktlich</span>
+                        <span class="spanish-translation">(puntual)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Der Bus ist pünktlich.</span><br>/dea bus ist punkt-lish/<br>🇬🇧 punctual, on time<br>Tipo: Adjektiv/Adverb</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('glücklich')">
+                 <div class="word-item-content">
+                    <span class="emoji">😄</span>
+                    <div class="text-container">
+                        <span class="german-word">glücklich</span>
+                        <span class="spanish-translation">(feliz, afortunado)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Ich bin sehr glücklich.</span><br>/ij bin sea gliuk-lish/<br>🇬🇧 happy, lucky<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('natürlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">🌱</span>
+                    <div class="text-container">
+                        <span class="german-word">natürlich</span>
+                        <span class="spanish-translation">(por supuesto, natural)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Kommst du mit? Natürlich!</span><br>/kommst du mit? na-tiur-lish!/<br>🇬🇧 of course, natural<br>Tipo: Adverb/Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('möglich')">
+                 <div class="word-item-content">
+                    <span class="emoji">✅</span>
+                    <div class="text-container">
+                        <span class="german-word">möglich</span>
+                        <span class="spanish-translation">(posible)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Ist das möglich?</span><br>/ist das miog-lish/<br>🇬🇧 possible<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('persönlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">👤</span>
+                    <div class="text-container">
+                        <span class="german-word">persönlich</span>
+                        <span class="spanish-translation">(personal)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Das ist meine persönliche Meinung.</span><br>/das ist maine per-son-lishe mainung/<br>🇬🇧 personal, personally<br>Tipo: Adjektiv/Adverb</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('gemütlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">🛋️</span>
+                    <div class="text-container">
+                        <span class="german-word">gemütlich</span>
+                        <span class="spanish-translation">(acogedor, cómodo)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Die Wohnung ist gemütlich.</span><br>/di vonung ist gue-miut-lish/<br>🇬🇧 cozy, comfortable<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('hässlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">🤢</span>
+                    <div class="text-container">
+                        <span class="german-word">hässlich</span>
+                        <span class="spanish-translation">(feo)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Das Wetter ist hässlich.</span><br>/das veta ist jes-lish/<br>🇬🇧 ugly<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('sportlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">⚽️</span>
+                    <div class="text-container">
+                        <span class="german-word">sportlich</span>
+                        <span class="spanish-translation">(deportivo)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Mein Bruder ist sehr sportlich.</span><br>/main bruda ist sea shport-lish/<br>🇬🇧 sporty, athletic<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('weiblich')">
+                 <div class="word-item-content">
+                    <span class="emoji">🚺</span>
+                    <div class="text-container">
+                        <span class="german-word">weiblich</span>
+                        <span class="spanish-translation">(femenino)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Bitte ankreuzen: weiblich.</span><br>/bite an-kroitzen: vaib-lish/<br>🇬🇧 female<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('männlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">🚹</span>
+                    <div class="text-container">
+                        <span class="german-word">männlich</span>
+                        <span class="spanish-translation">(masculino)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Bitte ankreuzen: männlich.</span><br>/bite an-kroitzen: men-lish/<br>🇬🇧 male<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+        </div>
+
+        <button id="story-button" onclick="generateStory()">
+            Mit einer Geschichte üben
+            <span class="button-translation">(Practicar con una Historia)</span>
+        </button>
+        <div id="story-container" class="story-container">
+            <h3>Eine kleine Geschichte...</h3>
+            <div id="story-content"></div>
+        </div>
+    </div>
+
+    <!-- Modal para mostrar el ejemplo generado -->
+    <div id="example-modal" class="modal-overlay">
+        <div class="modal-content">
+            <p id="modal-text"></p>
+            <button id="close-modal">
+                <strong>Schließen</strong>
+                <span class="button-translation">(Cerrar)</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- Base de datos de ejemplos guardados ---
+        const savedExamples = {
+            'freundlich': ['Die Lehrerin ist sehr freundlich.', 'Ihr Lächeln ist freundlich.', 'Danke, das ist sehr freundlich von Ihnen.'],
+            'täglich': ['Ich trinke täglich zwei Liter Wasser.', 'Die Zeitung kommt täglich.', 'Fast alle Geschäfte sind täglich geöffnet.'],
+            'pünktlich': ['Der Zug nach Berlin ist pünktlich.', 'Bitte seien Sie morgen pünktlich.', 'Er kommt nie pünktlich zur Arbeit.'],
+            'glücklich': ['Wir sind zusammen sehr glücklich.', 'Ein glückliches neues Jahr!', 'Sie hat ein glückliches Lächeln.'],
+            'natürlich': ['Natürlich helfe ich dir gerne.', 'Das ist ein natürlicher Saft ohne Zucker.', 'Er spricht sehr natürlich.'],
+            'möglich': ['Eine Reservierung ist leider nicht mehr möglich.', 'Kannst du bitte so schnell wie möglich kommen?', 'Gibt es eine andere mögliche Lösung?'],
+            'persönlich': ['Ich habe eine persönliche Frage.', 'Sie müssen den Brief persönlich abgeben.', 'Das ist nichts Persönliches.'],
+            'gemütlich': ['Mein Zimmer ist klein, aber sehr gemütlich.', 'Am Sonntag machen wir einen gemütlichen Abend.', 'Setz dich, mach es dir gemütlich.'],
+            'hässlich': ['Ich finde diese Farbe hässlich.', 'Das ist ein sehr hässlicher Hund.', 'Warum bist du so hässlich zu mir?'],
+            'sportlich': ['Meine Schwester ist sehr sportlich.', 'Er trägt immer sportliche Kleidung.', 'Ich bin nicht sehr sportlich.'],
+            'weiblich': ['Unser Hund ist weiblich.', 'In meinem Kurs sind mehr weibliche Teilnehmer.', 'Die weibliche Form von "Arzt" ist "Ärztin".'],
+            'männlich': ['Der Chef ist männlich.', 'Suchen Sie einen männlichen oder weiblichen Arzt?', 'Das ist ein typisch männlicher Name.']
+        };
+        
+        // --- Base de datos de historias guardadas ---
+        const savedStories = [
+            `Mein neuer Kollege heißt Marco. Er ist ein sehr <span class="highlighted-word">freundlicher</span> und <span class="highlighted-word">männlicher</span> Lehrer aus Italien. Marco ist auch sehr <span class="highlighted-word">sportlich</span>; er spielt am Wochenende Fußball. Er kommt <span class="highlighted-word">täglich</span> mit dem Fahrrad zur Arbeit, auch wenn das Wetter schlecht ist. Das ist super, denn er ist immer <span class="highlighted-word">pünktlich</span> und nie zu spät.`,
+            `Ich bin sehr <span class="highlighted-word">glücklich</span>, denn ich habe eine neue Wohnung! Sie ist klein, aber sehr <span class="highlighted-word">gemütlich</span>, mit einem Sofa und vielen Kissen. Für mich <span class="highlighted-word">persönlich</span> ist das perfekt. Ich habe viele Pflanzen, das sieht sehr <span class="highlighted-word">natürlich</span> und schön aus. Ist es <span class="highlighted-word">möglich</span>, dass du mich am Samstag besuchst? Wir können zusammen Kaffee trinken.`,
+            `Ich brauche Hilfe mit einem Formular. Hier steht: <span class="highlighted-word">männlich</span> oder <span class="highlighted-word">weiblich</span>? Ich kreuze <span class="highlighted-word">weiblich</span> an. Aber mein Passfoto ist wirklich <span class="highlighted-word">hässlich</span>! Meine Haare sehen komisch aus. <span class="highlighted-word">Natürlich</span> kann ich das nicht benutzen. Ist es <span class="highlighted-word">möglich</span>, heute ein neues Foto zu machen? Ich hoffe es.`
+        ];
+        let storyClickCounter = 0;
+
+        // --- Contador para los ejemplos guardados ---
+        const exampleCounters = {};
+        Object.keys(savedExamples).forEach(word => {
+            exampleCounters[word] = 0;
+        });
+
+        // --- Gemini API Call Logic ---
+        const API_KEY = ""; // No es necesaria una clave para el modelo flash
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${API_KEY}`;
+        
+        // --- Funciones del Modal ---
+        const modal = document.getElementById('example-modal');
+        const modalText = document.getElementById('modal-text');
+        const closeModalButton = document.getElementById('close-modal');
+
+        function showModal(text) {
+            modalText.textContent = text;
+            modal.classList.add('visible');
+        }
+
+        function hideModal() {
+            modal.classList.remove('visible');
+        }
+
+        closeModalButton.addEventListener('click', hideModal);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                hideModal();
+            }
+        });
+
+        // --- Lógica para reintentos de API (Exponential Backoff) ---
+        async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.ok) return response;
+                } catch (error) {
+                    // Ignorar errores de red para reintentar
+                }
+                await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
+            }
+            throw new Error("API request failed after multiple retries.");
+        }
+
+        // --- Función para generar un ejemplo de una sola palabra ---
+        async function generateExample(word) {
+            const counter = exampleCounters[word];
+            
+            if (counter < 3) {
+                const example = savedExamples[word][counter];
+                showModal(example);
+                exampleCounters[word]++;
+                return;
+            }
+
+            showModal("Generando un nuevo ejemplo con IA...");
+
+            const prompt = `Crea una oración simple en alemán de nivel A1 usando la palabra '${word}'. La oración debe ser fácil de entender para un principiante. No incluyas la traducción.`;
+            
+            const payload = {
+                contents: [{
+                    parts: [{ text: prompt }]
+                }]
+            };
+
+            try {
+                const response = await fetchWithRetry(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                const generatedText = result.candidates[0].content.parts[0].text;
+                showModal(generatedText.trim());
+            } catch (error) {
+                showModal("Lo siento, no se pudo generar un ejemplo en este momento. Por favor, inténtalo de nuevo.");
+                console.error("Error fetching Gemini API:", error);
+            }
+        }
+
+        // --- Función para generar una historia ---
+        async function generateStory() {
+            const storyContainer = document.getElementById('story-container');
+            const storyContent = document.getElementById('story-content');
+            const storyButton = document.getElementById('story-button');
+            
+            storyContainer.style.display = 'block';
+            storyButton.disabled = true;
+
+            if (storyClickCounter < 3) {
+                storyContent.innerHTML = `<p>${savedStories[storyClickCounter]}</p>`;
+                storyClickCounter++;
+                storyButton.disabled = false;
+                return;
+            }
+
+            storyContent.innerHTML = '<div class="loader">✨ Creando una nueva historia con IA...</div>';
+
+            const words = Array.from(document.querySelectorAll('.german-word')).map(el => el.textContent);
+            const wordList = words.join(', ');
+
+            const prompt = `Escribe una historia muy corta y simple en alemán de nivel A1. Usa tantas de las siguientes palabras como sea posible: ${wordList}. La historia debe ser fácil de entender para un principiante. No incluyas la traducción. No uses asteriscos u otro formato de markdown para resaltar las palabras.`;
+
+            const payload = {
+                contents: [{
+                    parts: [{ text: prompt }]
+                }]
+            };
+
+            try {
+                const response = await fetchWithRetry(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                let generatedText = result.candidates[0].content.parts[0].text;
+                
+                // Limpiar asteriscos por si acaso
+                generatedText = generatedText.replace(/\*/g, '');
+
+                // Resaltar las palabras de la lista en la historia
+                words.forEach(word => {
+                    const regex = new RegExp(`\\b(${word})\\b`, 'gi');
+                    generatedText = generatedText.replace(regex, '<span class="highlighted-word">$1</span>');
+                });
+
+                storyContent.innerHTML = `<p>${generatedText.replace(/\n/g, '<br>')}</p>`;
+            } catch (error) {
+                storyContent.textContent = "Lo siento, no se pudo generar una historia. Por favor, inténtalo de nuevo.";
+                console.error("Error fetching Gemini API:", error);
+            } finally {
+                storyButton.disabled = false;
+            }
+        }
+    </script>
 </body>
 </html>
