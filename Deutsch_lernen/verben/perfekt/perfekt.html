@@ -326,7 +326,7 @@
 
     <div class="main-container">
         <div class="header">
-            <div class="level-indicator">A1</div>
+            <div class="level-indicator" id="level-indicator">A1</div>
             <div class="info-button" id="info-button">info</div>
             <h1 class="title">Verben im Perfekt</h1>
         </div>
@@ -523,6 +523,7 @@
         // --- Elementos del DOM ---
         const verbModal = document.getElementById('verb-modal');
         const infoModal = document.getElementById('info-modal');
+        const levelIndicator = document.getElementById('level-indicator');
         const modalVerbInfinitive = document.getElementById('modal-verb-infinitive');
         const modalVerbPerfekt = document.getElementById('modal-verb-perfekt');
         const modalVerbEnglish = document.getElementById('modal-verb-english');
@@ -571,6 +572,13 @@
             groupIndicator.textContent = `Gruppe ${index + 1} von ${verbGroups.length}`;
             prevGroupBtn.disabled = index === 0;
             nextGroupBtn.disabled = index === verbGroups.length - 1;
+
+            // Actualizar el indicador de nivel
+            if (index < 4) { // Grupos 1-4 son A1
+                levelIndicator.textContent = 'A1';
+            } else { // Grupos 5-6 son A2
+                levelIndicator.textContent = 'A2';
+            }
         }
 
         // --- Funciones de Pronunciación (TTS) ---
