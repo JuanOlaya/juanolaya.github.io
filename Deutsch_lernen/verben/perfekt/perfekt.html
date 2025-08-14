@@ -24,6 +24,7 @@
             background-color: #85D4FF; /* Color de fondo azul cielo */
             padding: 20px;
             font-family: 'Nunito', sans-serif;
+            transition: background-color 0.5s;
         }
         .main-container {
             width: 100%;
@@ -34,6 +35,7 @@
             border-radius: 20px;
             padding: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: background-color 0.5s, border-color 0.5s;
         }
         .header {
             position: relative;
@@ -54,6 +56,7 @@
             font-weight: 700;
             color: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background-color 0.5s;
         }
         .level-indicator {
             left: 0;
@@ -62,7 +65,7 @@
         .info-button {
             right: 0;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.2s, background-color 0.5s;
         }
         .info-button:hover {
             transform: scale(1.1);
@@ -75,37 +78,69 @@
             border-bottom: 3px dashed #5F9EA0; /* CadetBlue */
             display: inline-block;
             margin-bottom: 1rem;
+            transition: border-bottom-color 0.5s, color 0.5s;
         }
         .navigation-controls {
+            display: flex;
+            flex-direction: column; /* Para apilar los elementos */
+            justify-content: center;
+            align-items: center;
+            gap: 15px; /* Espacio entre elementos */
+            margin-top: 1.5rem;
+        }
+        .nav-buttons-container {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 20px;
-            margin-top: 1.5rem;
         }
         .nav-button {
             padding: 8px 16px;
             font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            border: 2px solid #4682B4;
-            background-color: white;
-            color: #4682B4;
+            border: none; /* Borde eliminado */
+            background-color: #e9ecef; /* Color de fondo sutil */
+            color: #495057; /* Color de texto oscuro */
             border-radius: 8px;
             transition: background-color 0.2s, color 0.2s;
+            text-align: center;
         }
         .nav-button:hover:not(:disabled) {
-            background-color: #4682B4;
-            color: white;
+            background-color: #dee2e6; /* Color de fondo más oscuro al pasar el ratón */
         }
         .nav-button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
+        .button-translation {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            font-style: italic;
+        }
         #group-indicator {
             font-size: 1.2rem;
             font-weight: normal;
             color: #333;
+            transition: color 0.5s;
+            margin-bottom: 10px; /* Espacio antes del progress bar */
+        }
+        .progress-bar-container {
+            width: 150px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .progress-step {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ced4da; /* Color inactivo */
+            transition: background-color 0.5s;
+        }
+        .progress-step.active {
+            background-color: #4682B4; /* Color activo */
         }
         .cards-container {
             display: flex;
@@ -123,7 +158,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.5s;
             cursor: pointer;
         }
         .word-item:hover {
@@ -144,16 +179,22 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: black;
+            transition: color 0.5s;
         }
         .german-past {
             font-size: 1.2rem;
             font-weight: 700;
             color: #4682B4;
+            transition: color 0.5s;
         }
-        .spanish-translation {
+        .spanish-translation, .spanish-perfekt {
             font-size: 1rem;
             color: #555;
             margin-top: 4px;
+            transition: color 0.5s;
+        }
+        .spanish-perfekt {
+            font-size: 0.9rem;
         }
         #story-button {
             margin: 1.5rem 0 0 0;
@@ -289,7 +330,13 @@
             justify-content: space-between;
             align-items: center;
             margin-top: 1.5rem;
-            padding: 0 20px;
+            padding: 0 10px;
+        }
+        .example-progress-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
         }
         .close-modal-btn {
             margin-top: 1.5rem;
@@ -299,6 +346,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            line-height: 1.2;
         }
         /* Info Modal Specifics */
         #info-modal .modal-content {
@@ -315,16 +363,67 @@
             color: #4682B4;
             border-bottom: 2px solid #4682B4;
             padding-bottom: 5px;
+            transition: color 0.5s, border-bottom-color 0.5s;
         }
         #info-modal ul {
             padding-left: 20px;
             list-style-type: '✓ ';
         }
+        #modal-progress-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        /* --- A2 Darker Blue Theme --- */
+        .theme-a2 {
+            background-color: #7bbfd1; /* Lighter blue background */
+        }
+        .theme-a2 .main-container {
+            background-color: #dbe7f0; /* Lighter board */
+            border-color: #3a7ca5;
+        }
+        .theme-a2 .title {
+            color: #1A2530;
+            border-bottom-color: #4a6e8a;
+        }
+        .theme-a2 .level-indicator, .theme-a2 .info-button {
+            background-color: #3a7ca5;
+        }
+        .theme-a2 .word-item {
+            background-color: #bde0f0; /* Lighter cards */
+        }
+        .theme-a2 .german-word {
+            color: #1A2530;
+        }
+        .theme-a2 .spanish-translation, .theme-a2 #group-indicator, .theme-a2 .spanish-perfekt {
+            color: #2c3e50;
+        }
+        .theme-a2 .german-past {
+            color: #1d4e89;
+        }
+        .theme-a2 .nav-button {
+            background-color: #d1e0e8;
+            color: #3a7ca5;
+        }
+        .theme-a2 .nav-button:hover:not(:disabled) {
+            background-color: #c1d3de;
+        }
+        .theme-a2 #info-modal h3 {
+            color: #3a7ca5;
+            border-bottom-color: #3a7ca5;
+        }
+        .theme-a2 .progress-step.active {
+            background-color: #3a7ca5;
+        }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
+    <div class="main-container" id="main-container">
         <div class="header">
             <div class="level-indicator" id="level-indicator">A1</div>
             <div class="info-button" id="info-button">info</div>
@@ -336,9 +435,20 @@
         </div>
 
         <div class="navigation-controls">
-            <button id="prev-group-btn" class="nav-button">&lt; Zurück</button>
-            <span id="group-indicator"></span>
-            <button id="next-group-btn" class="nav-button">Weiter &gt;</button>
+            <div id="group-indicator"></div>
+            <div class="progress-bar-container" id="progress-bar">
+                <!-- Los puntos de progreso se generarán aquí -->
+            </div>
+            <div class="nav-buttons-container">
+                <button id="prev-group-btn" class="nav-button">
+                    <strong>&lt; Zurück</strong>
+                    <span class="button-translation">(Anterior)</span>
+                </button>
+                <button id="next-group-btn" class="nav-button">
+                    <strong>Weiter &gt;</strong>
+                    <span class="button-translation">(Siguiente)</span>
+                </button>
+            </div>
         </div>
         
         <button id="story-button">✨ Practicar con una Historia</button>
@@ -369,12 +479,24 @@
             <div id="modal-translations"></div>
             
             <div class="modal-nav">
-                <button id="prev-example" class="nav-button">&lt; Zurück</button>
-                <span id="example-counter"></span>
-                <button id="next-example" class="nav-button">Weiter &gt;</button>
+                <button id="prev-example" class="nav-button">
+                    <strong>&lt; Zurück</strong>
+                    <span class="button-translation">(Anterior)</span>
+                </button>
+                <div class="example-progress-container">
+                    <span id="example-counter"></span>
+                    <div class="progress-bar-container" id="example-progress-bar"></div>
+                </div>
+                <button id="next-example" class="nav-button">
+                    <strong>Weiter &gt;</strong>
+                    <span class="button-translation">(Siguiente)</span>
+                </button>
             </div>
-
-            <button id="close-verb-modal" class="close-modal-btn">Schließen (Cerrar)</button>
+            
+            <button id="close-verb-modal" class="close-modal-btn">
+                <strong>Schließen</strong>
+                <span class="button-translation">(Cerrar)</span>
+            </button>
         </div>
     </div>
 
@@ -432,75 +554,75 @@
         const verbGroups = [
             // Grupo 1
             {
-                'sein': { perfekt: 'ist gewesen', emoji: '🌟', es: '(ser/estar)', en_verb: '(to be)', examples: [{ de: 'Ich bin im Kino gewesen.', es: 'He estado en el cine.', phonetics: '/ij bin im kino guevesen/' }, { de: 'Wo bist du gewesen?', es: '¿Dónde has estado?', phonetics: '/vo bist du guevesen/' }, { de: 'Das ist eine gute Idee gewesen.', es: 'Esa ha sido una buena idea.', phonetics: '/das ist aine gute idee guevesen/' }, { de: 'Wir sind müde gewesen.', es: 'Hemos estado cansados.', phonetics: '/via sind miude guevesen/' }, { de: 'Seid ihr im Park gewesen?', es: '¿Habéis estado en el parque?', phonetics: '/said ia im park guevesen/' }] },
-                'haben': { perfekt: 'hat gehabt', emoji: '🤝', es: '(tener)', en_verb: '(to have)', examples: [{ de: 'Ich habe Glück gehabt.', es: 'He tenido suerte.', phonetics: '/ij jabe gliuk guejapt/' }, { de: 'Wir haben keine Zeit gehabt.', es: 'No hemos tenido tiempo.', phonetics: '/via jaben kaine tsait guejapt/' }, { de: 'Er hat Hunger gehabt.', es: 'Él ha tenido hambre.', phonetics: '/ea jat junga guejapt/' }, { de: 'Hast du einen Hund gehabt?', es: '¿Has tenido un perro?', phonetics: '/jast du ainen junt guejapt/' }, { de: 'Sie haben Spaß gehabt.', es: 'Ellos se han divertido (han tenido diversión).', phonetics: '/si jaben shpas guejapt/' }] },
-                'machen': { perfekt: 'hat gemacht', emoji: '🛠️', es: '(hacer)', en_verb: '(to do/make)', examples: [{ de: 'Ich habe die Hausaufgaben gemacht.', es: 'He hecho los deberes.', phonetics: '/ij jabe di jaus-auf-gaben guemajt/' }, { de: 'Was hast du gestern gemacht?', es: '¿Qué hiciste ayer?', phonetics: '/vas jast du guestern guemajt/' }, { de: 'Sie hat einen Fehler gemacht.', es: 'Ella ha cometido un error.', phonetics: '/si jat ainen fela guemajt/' }, { de: 'Wir haben eine Pause gemacht.', es: 'Hemos hecho una pausa.', phonetics: '/via jaben aine pause guemajt/' }, { de: 'Habt ihr das Fenster zugemacht?', es: '¿Habéis cerrado la ventana?', phonetics: '/japt ia das fensta tsuguemajt/' }] },
-                'gehen': { perfekt: 'ist gegangen', emoji: '🚶‍♂️', es: '(ir/caminar)', en_verb: '(to go)', examples: [{ de: 'Sie ist nach Hause gegangen.', es: 'Ella se ha ido a casa.', phonetics: '/si ist naj jause guegangen/' }, { de: 'Wir sind spazieren gegangen.', es: 'Hemos ido a pasear.', phonetics: '/via sind shpatsiren guegangen/' }, { de: 'Ich bin ins Bett gegangen.', es: 'Me he ido a la cama.', phonetics: '/ij bin ins bet guegangen/' }, { de: 'Bist du zur Arbeit gegangen?', es: '¿Has ido al trabajo?', phonetics: '/bist du tsua abait guegangen/' }, { de: 'Die Kinder sind in die Schule gegangen.', es: 'Los niños han ido al colegio.', phonetics: '/di kinda sind in di shule guegangen/' }] },
-                'kommen': { perfekt: 'ist gekommen', emoji: '📨', es: '(venir)', en_verb: '(to come)', examples: [{ de: 'Meine Freundin ist gestern gekommen.', es: 'Mi amiga vino ayer.', phonetics: '/maine froindin ist guestern guekomen/' }, { de: 'Der Bus ist pünktlich gekommen.', es: 'El autobús ha llegado puntual.', phonetics: '/dea bus ist piunktlij guekomen/' }, { de: 'Er ist aus Deutschland gekommen.', es: 'Él ha venido de Alemania.', phonetics: '/ea ist aus doitshlant guekomen/' }, { de: 'Wann seid ihr gekommen?', es: '¿Cuándo habéis venido?', phonetics: '/van said ia guekomen/' }, { de: 'Ich bin zu spät gekommen.', es: 'He llegado tarde.', phonetics: '/ij bin tsu shpet guekomen/' }] },
-                'sehen': { perfekt: 'hat gesehen', emoji: '👀', es: '(ver)', en_verb: '(to see)', examples: [{ de: 'Ich habe einen Film gesehen.', es: 'He visto una película.', phonetics: '/ij jabe ainen film gueséen/' }, { de: 'Hast du meine Schlüssel gesehen?', es: '¿Has visto mis llaves?', phonetics: '/jast du maine shliusel gueséen/' }, { de: 'Wir haben uns lange nicht gesehen.', es: 'No nos hemos visto en mucho tiempo.', phonetics: '/via jaben uns langue nijt gueséen/' }, { de: 'Er hat das Schild nicht gesehen.', es: 'Él no ha visto la señal.', phonetics: '/ea jat das shilt nijt gueséen/' }, { de: 'Habt ihr die Show gesehen?', es: '¿Habéis visto el espectáculo?', phonetics: '/japt ia di sho gueséen/' }] },
-                'sprechen': { perfekt: 'hat gesprochen', emoji: '💬', es: '(hablar)', en_verb: '(to speak)', examples: [{ de: 'Er hat mit mir gesprochen.', es: 'Él ha hablado conmigo.', phonetics: '/ea jat mit mía gueshprojen/' }, { de: 'Wir haben über das Wetter gesprochen.', es: 'Hemos hablado sobre el tiempo.', phonetics: '/vía jaben iuba das veta gueshprojen/'}, { de: 'Ich habe mit dem Chef gesprochen.', es: 'He hablado con el jefe.', phonetics: '/ij jabe mit dem shef gueshprojen/' }, { de: 'Hast du mit ihr gesprochen?', es: '¿Has hablado con ella?', phonetics: '/jast du mit ia gueshprojen/' }, { de: 'Sie haben am Telefon gesprochen.', es: 'Ellos han hablado por teléfono.', phonetics: '/si jaben am telefon gueshprojen/' }] },
-                'essen': { perfekt: 'hat gegessen', emoji: '🍕', es: '(comer)', en_verb: '(to eat)', examples: [{ de: 'Er hat eine Pizza gegessen.', es: 'Él ha comido una pizza.', phonetics: '/ea jat aine pitsa gueguesen/' }, { de: 'Ich habe schon gegessen.', es: 'Ya he comido.', phonetics: '/ij jabe shon gueguesen/' }, { de: 'Was hast du zum Frühstück gegessen?', es: '¿Qué has desayunado?', phonetics: '/vas jast du tsum friushtiuk gueguesen/' }, { de: 'Wir haben im Restaurant gegessen.', es: 'Hemos comido en el restaurante.', phonetics: '/via jaben im restorant gueguesen/' }, { de: 'Habt ihr alles gegessen?', es: '¿Lo habéis comido todo?', phonetics: '/japt ia ales gueguesen/' }] },
-                'trinken': { perfekt: 'hat getrunken', emoji: '🥤', es: '(beber)', en_verb: '(to drink)', examples: [{ de: 'Sie hat Wasser getrunken.', es: 'Ella ha bebido agua.', phonetics: '/si jat vasa guetrunken/' }, { de: 'Wir haben Kaffee getrunken.', es: 'Hemos bebido café.', phonetics: '/via jaben kafe guetrunken/' }, { de: 'Ich habe zu viel Cola getrunken.', es: 'He bebido demasiada cola.', phonetics: '/ij jabe tsu fil kola guetrunken/' }, { de: 'Was hast du getrunken?', es: '¿Qué has bebido?', phonetics: '/vas jast du guetrunken/' }, { de: 'Sie haben Wein getrunken.', es: 'Ellos han bebido vino.', phonetics: '/si jaben vain guetrunken/' }] }
+                'sein': { perfekt: 'ist gewesen', emoji: '🌟', es: '(ser/estar)', es_perfekt: '(he sido/estado)', en_verb: '(to be)', examples: [{ de: 'Ich bin im Kino gewesen.', es: 'He estado en el cine.', phonetics: '/ij bin im kino guevesen/' }, { de: 'Wo bist du gewesen?', es: '¿Dónde has estado?', phonetics: '/vo bist du guevesen/' }, { de: 'Das ist eine gute Idee gewesen.', es: 'Esa ha sido una buena idea.', phonetics: '/das ist aine gute idee guevesen/' }, { de: 'Wir sind müde gewesen.', es: 'Hemos estado cansados.', phonetics: '/via sind miude guevesen/' }, { de: 'Seid ihr im Park gewesen?', es: '¿Habéis estado en el parque?', phonetics: '/said ia im park guevesen/' }] },
+                'haben': { perfekt: 'hat gehabt', emoji: '🤝', es: '(tener)', es_perfekt: '(he tenido)', en_verb: '(to have)', examples: [{ de: 'Ich habe Glück gehabt.', es: 'He tenido suerte.', phonetics: '/ij jabe gliuk guejapt/' }, { de: 'Wir haben keine Zeit gehabt.', es: 'No hemos tenido tiempo.', phonetics: '/via jaben kaine tsait guejapt/' }, { de: 'Er hat Hunger gehabt.', es: 'Él ha tenido hambre.', phonetics: '/ea jat junga guejapt/' }, { de: 'Hast du einen Hund gehabt?', es: '¿Has tenido un perro?', phonetics: '/jast du ainen junt guejapt/' }, { de: 'Sie haben Spaß gehabt.', es: 'Ellos se han divertido (han tenido diversión).', phonetics: '/si jaben shpas guejapt/' }] },
+                'machen': { perfekt: 'hat gemacht', emoji: '🛠️', es: '(hacer)', es_perfekt: '(he hecho)', en_verb: '(to do/make)', examples: [{ de: 'Ich habe die Hausaufgaben gemacht.', es: 'He hecho los deberes.', phonetics: '/ij jabe di jaus-auf-gaben guemajt/' }, { de: 'Was hast du gestern gemacht?', es: '¿Qué hiciste ayer?', phonetics: '/vas jast du guestern guemajt/' }, { de: 'Sie hat einen Fehler gemacht.', es: 'Ella ha cometido un error.', phonetics: '/si jat ainen fela guemajt/' }, { de: 'Wir haben eine Pause gemacht.', es: 'Hemos hecho una pausa.', phonetics: '/via jaben aine pause guemajt/' }, { de: 'Habt ihr das Fenster zugemacht?', es: '¿Habéis cerrado la ventana?', phonetics: '/japt ia das fensta tsuguemajt/' }] },
+                'gehen': { perfekt: 'ist gegangen', emoji: '🚶‍♂️', es: '(ir/caminar)', es_perfekt: '(he ido)', en_verb: '(to go)', examples: [{ de: 'Sie ist nach Hause gegangen.', es: 'Ella se ha ido a casa.', phonetics: '/si ist naj jause guegangen/' }, { de: 'Wir sind spazieren gegangen.', es: 'Hemos ido a pasear.', phonetics: '/via sind shpatsiren guegangen/' }, { de: 'Ich bin ins Bett gegangen.', es: 'Me he ido a la cama.', phonetics: '/ij bin ins bet guegangen/' }, { de: 'Bist du zur Arbeit gegangen?', es: '¿Has ido al trabajo?', phonetics: '/bist du tsua abait guegangen/' }, { de: 'Die Kinder sind in die Schule gegangen.', es: 'Los niños han ido al colegio.', phonetics: '/di kinda sind in di shule guegangen/' }] },
+                'kommen': { perfekt: 'ist gekommen', emoji: '📨', es: '(venir)', es_perfekt: '(he venido)', en_verb: '(to come)', examples: [{ de: 'Meine Freundin ist gestern gekommen.', es: 'Mi amiga vino ayer.', phonetics: '/maine froindin ist guestern guekomen/' }, { de: 'Der Bus ist pünktlich gekommen.', es: 'El autobús ha llegado puntual.', phonetics: '/dea bus ist piunktlij guekomen/' }, { de: 'Er ist aus Deutschland gekommen.', es: 'Él ha venido de Alemania.', phonetics: '/ea ist aus doitshlant guekomen/' }, { de: 'Wann seid ihr gekommen?', es: '¿Cuándo habéis venido?', phonetics: '/van said ia guekomen/' }, { de: 'Ich bin zu spät gekommen.', es: 'He llegado tarde.', phonetics: '/ij bin tsu shpet guekomen/' }] },
+                'sehen': { perfekt: 'hat gesehen', emoji: '👀', es: '(ver)', es_perfekt: '(he visto)', en_verb: '(to see)', examples: [{ de: 'Ich habe einen Film gesehen.', es: 'He visto una película.', phonetics: '/ij jabe ainen film gueséen/' }, { de: 'Hast du meine Schlüssel gesehen?', es: '¿Has visto mis llaves?', phonetics: '/jast du maine shliusel gueséen/' }, { de: 'Wir haben uns lange nicht gesehen.', es: 'No nos hemos visto en mucho tiempo.', phonetics: '/via jaben uns langue nijt gueséen/' }, { de: 'Er hat das Schild nicht gesehen.', es: 'Él no ha visto la señal.', phonetics: '/ea jat das shilt nijt gueséen/' }, { de: 'Habt ihr die Show gesehen?', es: '¿Habéis visto el espectáculo?', phonetics: '/japt ia di sho gueséen/' }] },
+                'sprechen': { perfekt: 'hat gesprochen', emoji: '💬', es: '(hablar)', es_perfekt: '(he hablado)', en_verb: '(to speak)', examples: [{ de: 'Er hat mit mir gesprochen.', es: 'Él ha hablado conmigo.', phonetics: '/ea jat mit mía gueshprojen/' }, { de: 'Wir haben über das Wetter gesprochen.', es: 'Hemos hablado sobre el tiempo.', phonetics: '/vía jaben iuba das veta gueshprojen/'}, { de: 'Ich habe mit dem Chef gesprochen.', es: 'He hablado con el jefe.', phonetics: '/ij jabe mit dem shef gueshprojen/' }, { de: 'Hast du mit ihr gesprochen?', es: '¿Has hablado con ella?', phonetics: '/jast du mit ia gueshprojen/' }, { de: 'Sie haben am Telefon gesprochen.', es: 'Ellos han hablado por teléfono.', phonetics: '/si jaben am telefon gueshprojen/' }] },
+                'essen': { perfekt: 'hat gegessen', emoji: '🍕', es: '(comer)', es_perfekt: '(he comido)', en_verb: '(to eat)', examples: [{ de: 'Er hat eine Pizza gegessen.', es: 'Él ha comido una pizza.', phonetics: '/ea jat aine pitsa gueguesen/' }, { de: 'Ich habe schon gegessen.', es: 'Ya he comido.', phonetics: '/ij jabe shon gueguesen/' }, { de: 'Was hast du zum Frühstück gegessen?', es: '¿Qué has desayunado?', phonetics: '/vas jast du tsum friushtiuk gueguesen/' }, { de: 'Wir haben im Restaurant gegessen.', es: 'Hemos comido en el restaurante.', phonetics: '/via jaben im restorant gueguesen/' }, { de: 'Habt ihr alles gegessen?', es: '¿Lo habéis comido todo?', phonetics: '/japt ia ales gueguesen/' }] },
+                'trinken': { perfekt: 'hat getrunken', emoji: '🥤', es: '(beber)', es_perfekt: '(he bebido)', en_verb: '(to drink)', examples: [{ de: 'Sie hat Wasser getrunken.', es: 'Ella ha bebido agua.', phonetics: '/si jat vasa guetrunken/' }, { de: 'Wir haben Kaffee getrunken.', es: 'Hemos bebido café.', phonetics: '/via jaben kafe guetrunken/' }, { de: 'Ich habe zu viel Cola getrunken.', es: 'He bebido demasiada cola.', phonetics: '/ij jabe tsu fil kola guetrunken/' }, { de: 'Was hast du getrunken?', es: '¿Qué has bebido?', phonetics: '/vas jast du guetrunken/' }, { de: 'Sie haben Wein getrunken.', es: 'Ellos han bebido vino.', phonetics: '/si jaben vain guetrunken/' }] }
             },
             // Grupo 2
             {
-                'kaufen': { perfekt: 'hat gekauft', emoji: '🛒', es: '(comprar)', en_verb: '(to buy)', examples: [{ de: 'Er hat ein neues Auto gekauft.', es: 'Él ha comprado un coche nuevo.', phonetics: '/ea jat ain noies auto guekauft/' }, { de: 'Ich habe Brot gekauft.', es: 'He comprado pan.', phonetics: '/ij jabe brot guekauft/' }, { de: 'Sie hat ein Ticket gekauft.', es: 'Ella ha comprado un billete.', phonetics: '/si jat ain tiket guekauft/' }, { de: 'Was habt ihr gekauft?', es: '¿Qué habéis comprado?', phonetics: '/vas japt ia guekauft/' }, { de: 'Wir haben Geschenke gekauft.', es: 'Hemos comprado regalos.', phonetics: '/via jaben gueshenke guekauft/' }] },
-                'lernen': { perfekt: 'hat gelernt', emoji: '📚', es: '(aprender)', en_verb: '(to learn)', examples: [{ de: 'Wir haben Deutsch gelernt.', es: 'Hemos aprendido alemán.', phonetics: '/via jaben doitsh guelernt/' }, { de: 'Ich habe viel gelernt.', es: 'He aprendido mucho.', phonetics: '/ij jabe fil guelernt/' }, { de: 'Er hat das Gedicht gelernt.', es: 'Él ha aprendido el poema.', phonetics: '/ea jat das guedijt guelernt/' }, { de: 'Hast du für die Prüfung gelernt?', es: '¿Has estudiado para el examen?', phonetics: '/jast du fiua di prufung guelernt/' }, { de: 'Sie hat schwimmen gelernt.', es: 'Ella ha aprendido a nadar.', phonetics: '/si jat shvimen guelernt/' }] },
-                'lesen': { perfekt: 'hat gelesen', emoji: '📖', es: '(leer)', en_verb: '(to read)', examples: [{ de: 'Ich habe ein Buch gelesen.', es: 'He leído un libro.', phonetics: '/ij jabe ain buj guelesen/' }, { de: 'Er hat die Zeitung gelesen.', es: 'Él ha leído el periódico.', phonetics: '/ea jat di tsaitung guelesen/' }, { de: 'Hast du die E-Mail gelesen?', es: '¿Has leído el correo electrónico?', phonetics: '/jast du di imeil guelesen/' }, { de: 'Wir haben die Speisekarte gelesen.', es: 'Hemos leído el menú.', phonetics: '/via jaben di shpaisekarte guelesen/' }, { de: 'Sie hat mir eine Geschichte vorgelesen.', es: 'Ella me ha leído una historia.', phonetics: '/si jat mía aine gueshijte foaguelesen/' }] },
-                'fahren': { perfekt: 'ist gefahren', emoji: '🚗', es: '(ir/conducir)', en_verb: '(to drive/go)', examples: [{ de: 'Wir sind nach Berlin gefahren.', es: 'Hemos ido a Berlín.', phonetics: '/via sind naj berlin guefaren/' }, { de: 'Bist du mit dem Auto gefahren?', es: '¿Has ido en coche?', phonetics: '/bist du mit dem auto guefaren/' }, { de: 'Ich bin mit dem Zug gefahren.', es: 'He ido en tren.', phonetics: '/ij bin mit dem tsug guefaren/' }, { de: 'Sie ist nach Hamburg gefahren.', es: 'Ella ha ido a Hamburgo.', phonetics: '/si ist naj jamburg guefaren/' }, { de: 'Seid ihr in den Urlaub gefahren?', es: '¿Os habéis ido de vacaciones?', phonetics: '/said ia in den ualaup guefaren/' }] },
-                'schlafen': { perfekt: 'hat geschlafen', emoji: '😴', es: '(dormir)', en_verb: '(to sleep)', examples: [{ de: 'Das Baby hat gut geschlafen.', es: 'El bebé ha dormido bien.', phonetics: '/das beibi jat gut gueshlafen/' }, { de: 'Hast du gut geschlafen?', es: '¿Has dormido bien?', phonetics: '/jast du gut gueshlafen/' }, { de: 'Ich habe nur fünf Stunden geschlafen.', es: 'Solo he dormido cinco horas.', phonetics: '/ij jabe nua fiunf shtunden gueshlafen/' }, { de: 'Er hat auf dem Sofa geschlafen.', es: 'Él ha dormido en el sofá.', phonetics: '/ea jat auf dem sofa gueshlafen/' }, { de: 'Wir haben lange geschlafen.', es: 'Hemos dormido mucho (tiempo).', phonetics: '/via jaben langue gueshlafen/' }] },
-                'arbeiten': { perfekt: 'hat gearbeitet', emoji: '💼', es: '(trabajar)', en_verb: '(to work)', examples: [{ de: 'Ich habe gestern viel gearbeitet.', es: 'Ayer trabajé mucho.', phonetics: '/ij jabe guestern fil guearbaitet/' }, { de: 'Sie hat im Büro gearbeitet.', es: 'Ella ha trabajado en la oficina.', phonetics: '/si jat im biuro guearbaitet/'}, { de: 'Mein Vater hat als Arzt gearbeitet.', es: 'Mi padre ha trabajado como médico.', phonetics: '/main fata jat als atst guearbaitet/' }, { de: 'Wo hast du gearbeitet?', es: '¿Dónde has trabajado?', phonetics: '/vo jast du guearbaitet/' }, { de: 'Wir haben am Projekt gearbeitet.', es: 'Hemos trabajado en el proyecto.', phonetics: '/via jaben am proiekt guearbaitet/' }] },
-                'fragen': { perfekt: 'hat gefragt', emoji: '❓', es: '(preguntar)', en_verb: '(to ask)', examples: [{ de: 'Ich habe den Lehrer gefragt.', es: 'Le he preguntado al profesor.', phonetics: '/ij jabe den lera guefragt/'}, { de: 'Er hat nach dem Weg gefragt.', es: 'Él ha preguntado por el camino.', phonetics: '/ea jat naj dem vek guefragt/'}, { de: 'Hast du sie gefragt?', es: '¿Le has preguntado a ella?', phonetics: '/jast du si guefragt/' }, { de: 'Wir haben um Hilfe gefragt.', es: 'Hemos pedido ayuda.', phonetics: '/via jaben um jilfe guefragt/' }, { de: 'Warum hast du nicht gefragt?', es: '¿Por qué no has preguntado?', phonetics: '/varum jast du nijt guefragt/' }] },
-                'hören': { perfekt: 'hat gehört', emoji: '🎧', es: '(oír/escuchar)', en_verb: '(to hear/listen)', examples: [{ de: 'Ich habe Musik gehört.', es: 'He escuchado música.', phonetics: '/ij jabe musik guehoert/'}, { de: 'Hast du das Geräusch gehört?', es: '¿Has oído ese ruido?', phonetics: '/jast du das gueroish guehoert/'}, { de: 'Wir haben die Nachrichten gehört.', es: 'Hemos escuchado las noticias.', phonetics: '/via jaben di najrijten guehoert/' }, { de: 'Er hat ein Lied im Radio gehört.', es: 'Él ha escuchado una canción en la radio.', phonetics: '/ea jat ain lit im radio guehoert/' }, { de: 'Habt ihr etwas gehört?', es: '¿Habéis oído algo?', phonetics: '/japt ia etvas guehoert/' }] },
-                'kochen': { perfekt: 'hat gekocht', emoji: '🍳', es: '(cocinar)', en_verb: '(to cook)', examples: [{ de: 'Meine Mutter hat Suppe gekocht.', es: 'Mi madre ha cocinado sopa.', phonetics: '/maine muta jat supe guekojt/' }, { de: 'Wer hat das Essen gekocht?', es: '¿Quién ha cocinado la comida?', phonetics: '/vea jat das esen guekojt/' }, { de: 'Ich habe Reis gekocht.', es: 'He cocinado arroz.', phonetics: '/ij jabe rais guekojt/' }, { de: 'Hast du schon gekocht?', es: '¿Ya has cocinado?', phonetics: '/jast du shon guekojt/' }, { de: 'Wir haben zusammen gekocht.', es: 'Hemos cocinado juntos.', phonetics: '/via jaben tsusamen guekojt/' }] }
+                'kaufen': { perfekt: 'hat gekauft', emoji: '🛒', es: '(comprar)', es_perfekt: '(he comprado)', en_verb: '(to buy)', examples: [{ de: 'Er hat ein neues Auto gekauft.', es: 'Él ha comprado un coche nuevo.', phonetics: '/ea jat ain noies auto guekauft/' }, { de: 'Ich habe Brot gekauft.', es: 'He comprado pan.', phonetics: '/ij jabe brot guekauft/' }, { de: 'Sie hat ein Ticket gekauft.', es: 'Ella ha comprado un billete.', phonetics: '/si jat ain tiket guekauft/' }, { de: 'Was habt ihr gekauft?', es: '¿Qué habéis comprado?', phonetics: '/vas japt ia guekauft/' }, { de: 'Wir haben Geschenke gekauft.', es: 'Hemos comprado regalos.', phonetics: '/via jaben gueshenke guekauft/' }] },
+                'lernen': { perfekt: 'hat gelernt', emoji: '📚', es: '(aprender)', es_perfekt: '(he aprendido)', en_verb: '(to learn)', examples: [{ de: 'Wir haben Deutsch gelernt.', es: 'Hemos aprendido alemán.', phonetics: '/via jaben doitsh guelernt/' }, { de: 'Ich habe viel gelernt.', es: 'He aprendido mucho.', phonetics: '/ij jabe fil guelernt/' }, { de: 'Er hat das Gedicht gelernt.', es: 'Él ha aprendido el poema.', phonetics: '/ea jat das guedijt guelernt/' }, { de: 'Hast du für die Prüfung gelernt?', es: '¿Has estudiado para el examen?', phonetics: '/jast du fiua di prufung guelernt/' }, { de: 'Sie hat schwimmen gelernt.', es: 'Ella ha aprendido a nadar.', phonetics: '/si jat shvimen guelernt/' }] },
+                'lesen': { perfekt: 'hat gelesen', emoji: '📖', es: '(leer)', es_perfekt: '(he leído)', en_verb: '(to read)', examples: [{ de: 'Ich habe ein Buch gelesen.', es: 'He leído un libro.', phonetics: '/ij jabe ain buj guelesen/' }, { de: 'Er hat die Zeitung gelesen.', es: 'Él ha leído el periódico.', phonetics: '/ea jat di tsaitung guelesen/' }, { de: 'Hast du die E-Mail gelesen?', es: '¿Has leído el correo electrónico?', phonetics: '/jast du di imeil guelesen/' }, { de: 'Wir haben die Speisekarte gelesen.', es: 'Hemos leído el menú.', phonetics: '/via jaben di shpaisekarte guelesen/' }, { de: 'Sie hat mir eine Geschichte vorgelesen.', es: 'Ella me ha leído una historia.', phonetics: '/si jat mía aine gueshijte foaguelesen/' }] },
+                'fahren': { perfekt: 'ist gefahren', emoji: '🚗', es: '(ir/conducir)', es_perfekt: '(he ido/conducido)', en_verb: '(to drive/go)', examples: [{ de: 'Wir sind nach Berlin gefahren.', es: 'Hemos ido a Berlín.', phonetics: '/via sind naj berlin guefaren/' }, { de: 'Bist du mit dem Auto gefahren?', es: '¿Has ido en coche?', phonetics: '/bist du mit dem auto guefaren/' }, { de: 'Ich bin mit dem Zug gefahren.', es: 'He ido en tren.', phonetics: '/ij bin mit dem tsug guefaren/' }, { de: 'Sie ist nach Hamburg gefahren.', es: 'Ella ha ido a Hamburgo.', phonetics: '/si ist naj jamburg guefaren/' }, { de: 'Seid ihr in den Urlaub gefahren?', es: '¿Os habéis ido de vacaciones?', phonetics: '/said ia in den ualaup guefaren/' }] },
+                'schlafen': { perfekt: 'hat geschlafen', emoji: '😴', es: '(dormir)', es_perfekt: '(he dormido)', en_verb: '(to sleep)', examples: [{ de: 'Das Baby hat gut geschlafen.', es: 'El bebé ha dormido bien.', phonetics: '/das beibi jat gut gueshlafen/' }, { de: 'Hast du gut geschlafen?', es: '¿Has dormido bien?', phonetics: '/jast du gut gueshlafen/' }, { de: 'Ich habe nur fünf Stunden geschlafen.', es: 'Solo he dormido cinco horas.', phonetics: '/ij jabe nua fiunf shtunden gueshlafen/' }, { de: 'Er hat auf dem Sofa geschlafen.', es: 'Él ha dormido en el sofá.', phonetics: '/ea jat auf dem sofa gueshlafen/' }, { de: 'Wir haben lange geschlafen.', es: 'Hemos dormido mucho (tiempo).', phonetics: '/via jaben langue gueshlafen/' }] },
+                'arbeiten': { perfekt: 'hat gearbeitet', emoji: '💼', es: '(trabajar)', es_perfekt: '(he trabajado)', en_verb: '(to work)', examples: [{ de: 'Ich habe gestern viel gearbeitet.', es: 'Ayer trabajé mucho.', phonetics: '/ij jabe guestern fil guearbaitet/' }, { de: 'Sie hat im Büro gearbeitet.', es: 'Ella ha trabajado en la oficina.', phonetics: '/si jat im biuro guearbaitet/'}, { de: 'Mein Vater hat als Arzt gearbeitet.', es: 'Mi padre ha trabajado como médico.', phonetics: '/main fata jat als atst guearbaitet/' }, { de: 'Wo hast du gearbeitet?', es: '¿Dónde has trabajado?', phonetics: '/vo jast du guearbaitet/' }, { de: 'Wir haben am Projekt gearbeitet.', es: 'Hemos trabajado en el proyecto.', phonetics: '/via jaben am proiekt guearbaitet/' }] },
+                'fragen': { perfekt: 'hat gefragt', emoji: '❓', es: '(preguntar)', es_perfekt: '(he preguntado)', en_verb: '(to ask)', examples: [{ de: 'Ich habe den Lehrer gefragt.', es: 'Le he preguntado al profesor.', phonetics: '/ij jabe den lera guefragt/'}, { de: 'Er hat nach dem Weg gefragt.', es: 'Él ha preguntado por el camino.', phonetics: '/ea jat naj dem vek guefragt/'}, { de: 'Hast du sie gefragt?', es: '¿Le has preguntado a ella?', phonetics: '/jast du si guefragt/' }, { de: 'Wir haben um Hilfe gefragt.', es: 'Hemos pedido ayuda.', phonetics: '/via jaben um jilfe guefragt/' }, { de: 'Warum hast du nicht gefragt?', es: '¿Por qué no has preguntado?', phonetics: '/varum jast du nijt guefragt/' }] },
+                'hören': { perfekt: 'hat gehört', emoji: '🎧', es: '(oír/escuchar)', es_perfekt: '(he oído/escuchado)', en_verb: '(to hear/listen)', examples: [{ de: 'Ich habe Musik gehört.', es: 'He escuchado música.', phonetics: '/ij jabe musik guehoert/'}, { de: 'Hast du das Geräusch gehört?', es: '¿Has oído ese ruido?', phonetics: '/jast du das gueroish guehoert/'}, { de: 'Wir haben die Nachrichten gehört.', es: 'Hemos escuchado las noticias.', phonetics: '/via jaben di najrijten guehoert/' }, { de: 'Er hat ein Lied im Radio gehört.', es: 'Él ha escuchado una canción en la radio.', phonetics: '/ea jat ain lit im radio guehoert/' }, { de: 'Habt ihr etwas gehört?', es: '¿Habéis oído algo?', phonetics: '/japt ia etvas guehoert/' }] },
+                'kochen': { perfekt: 'hat gekocht', emoji: '🍳', es: '(cocinar)', es_perfekt: '(he cocinado)', en_verb: '(to cook)', examples: [{ de: 'Meine Mutter hat Suppe gekocht.', es: 'Mi madre ha cocinado sopa.', phonetics: '/maine muta jat supe guekojt/' }, { de: 'Wer hat das Essen gekocht?', es: '¿Quién ha cocinado la comida?', phonetics: '/vea jat das esen guekojt/' }, { de: 'Ich habe Reis gekocht.', es: 'He cocinado arroz.', phonetics: '/ij jabe rais guekojt/' }, { de: 'Hast du schon gekocht?', es: '¿Ya has cocinado?', phonetics: '/jast du shon guekojt/' }, { de: 'Wir haben zusammen gekocht.', es: 'Hemos cocinado juntos.', phonetics: '/via jaben tsusamen guekojt/' }] }
             },
             // Grupo 3
             {
-                'wohnen': { perfekt: 'hat gewohnt', emoji: '🏠', es: '(vivir/residir)', en_verb: '(to live/reside)', examples: [{ de: 'Ich habe in Berlin gewohnt.', es: 'He vivido en Berlín.', phonetics: '/ij jabe in berlin guevont/' }, { de: 'Wo hast du gewohnt?', es: '¿Dónde has vivido?', phonetics: '/vo jast du guevont/' }, { de: 'Sie hat bei ihren Eltern gewohnt.', es: 'Ella ha vivido con sus padres.', phonetics: '/si jat bai iren eltan guevont/' }, { de: 'Wir haben in einer Wohnung gewohnt.', es: 'Hemos vivido en un apartamento.', phonetics: '/via jaben in aina vonung guevont/' }, { de: 'Habt ihr lange hier gewohnt?', es: '¿Habéis vivido aquí mucho tiempo?', phonetics: '/japt ia langue hía guevont/' }] },
-                'sagen': { perfekt: 'hat gesagt', emoji: '🗣️', es: '(decir)', en_verb: '(to say)', examples: [{ de: 'Er hat nichts gesagt.', es: 'Él no ha dicho nada.', phonetics: '/ea jat nijts guesakt/' }, { de: 'Was hast du gesagt?', es: '¿Qué has dicho?', phonetics: '/vas jast du guesakt/' }, { de: 'Sie hat mir die Wahrheit gesagt.', es: 'Ella me ha dicho la verdad.', phonetics: '/si jat mía di varjait guesakt/' }, { de: 'Ich habe es dir doch gesagt!', es: '¡Pero si te lo he dicho!', phonetics: '/ij jabe es día doj guesakt/' }, { de: 'Wir haben "Hallo" gesagt.', es: 'Hemos dicho "hola".', phonetics: '/via jaben jalo guesakt/' }] },
-                'geben': { perfekt: 'hat gegeben', emoji: '🎁', es: '(dar)', en_verb: '(to give)', examples: [{ de: 'Ich habe ihm ein Buch gegeben.', es: 'Le he dado un libro a él.', phonetics: '/ij jabe im ain buj guegueben/' }, { de: 'Sie hat mir ihre Nummer gegeben.', es: 'Ella me ha dado su número.', phonetics: '/si jat mía ire numa guegueben/' }, { de: 'Hast du der Katze Futter gegeben?', es: '¿Le has dado comida al gato?', phonetics: '/jast du dea katse futa guegueben/' }, { de: 'Wir haben eine Party gegeben.', es: 'Hemos dado una fiesta.', phonetics: '/via jaben aine parti guegueben/' }, { de: 'Der Lehrer hat uns Hausaufgaben gegeben.', es: 'El profesor nos ha dado deberes.', phonetics: '/dea lera jat uns jaus-auf-gaben guegueben/' }] },
-                'schreiben': { perfekt: 'hat geschrieben', emoji: '✍️', es: '(escribir)', en_verb: '(to write)', examples: [{ de: 'Ich habe einen Brief geschrieben.', es: 'He escrito una carta.', phonetics: '/ij jabe ainen brif gueshriben/' }, { de: 'Hast du eine E-Mail geschrieben?', es: '¿Has escrito un correo electrónico?', phonetics: '/jast du aine imeil gueshriben/' }, { de: 'Sie hat ein Buch geschrieben.', es: 'Ella ha escrito un libro.', phonetics: '/si jat ain buj gueshriben/' }, { de: 'Wir haben eine Liste geschrieben.', es: 'Hemos escrito una lista.', phonetics: '/via jaben aine liste gueshriben/' }, { de: 'Wer hat das geschrieben?', es: '¿Quién ha escrito esto?', phonetics: '/vea jat das gueshriben/' }] },
-                'helfen': { perfekt: 'hat geholfen', emoji: '🆘', es: '(ayudar)', en_verb: '(to help)', examples: [{ de: 'Er hat mir geholfen.', es: 'Él me ha ayudado.', phonetics: '/ea jat mía guejolfen/' }, { de: 'Hast du deiner Mutter geholfen?', es: '¿Has ayudado a tu madre?', phonetics: '/jast du daina muta guejolfen/' }, { de: 'Wir haben im Garten geholfen.', es: 'Hemos ayudado en el jardín.', phonetics: '/via jaben im garten guejolfen/' }, { de: 'Das hat mir sehr geholfen.', es: 'Eso me ha ayudado mucho.', phonetics: '/das jat mía sea guejolfen/' }, { de: 'Können Sie mir helfen?', es: '¿Puede usted ayudarme?', phonetics: '/koenen si mía jelfen/' }] },
-                'nehmen': { perfekt: 'hat genommen', emoji: '✋', es: '(tomar/coger)', en_verb: '(to take)', examples: [{ de: 'Ich habe den Bus genommen.', es: 'He tomado el autobús.', phonetics: '/ij jabe den bus guenomen/' }, { de: 'Hast du ein Taxi genommen?', es: '¿Has tomado un taxi?', phonetics: '/jast du ain taxi guenomen/' }, { de: 'Er hat meinen Stift genommen.', es: 'Él ha cogido mi bolígrafo.', phonetics: '/ea jat mainen shtift guenomen/' }, { de: 'Wir haben den letzten Zug genommen.', es: 'Hemos tomado el último tren.', phonetics: '/via jaben den letsten tsug guenomen/' }, { de: 'Sie hat ein Foto von uns genommen.', es: 'Ella nos ha hecho una foto.', phonetics: '/si jat ain foto fon uns guenomen/' }] },
-                'treffen': { perfekt: 'hat getroffen', emoji: '🧑‍🤝‍🧑', es: '(encontrarse/reunirse)', en_verb: '(to meet)', examples: [{ de: 'Ich habe meine Freunde getroffen.', es: 'Me he encontrado con mis amigos.', phonetics: '/ij jabe maine froinde guetrofen/' }, { de: 'Wo habt ihr euch getroffen?', es: '¿Dónde os habéis encontrado?', phonetics: '/vo japt ia oish guetrofen/' }, { de: 'Sie hat eine Entscheidung getroffen.', es: 'Ella ha tomado una decisión.', phonetics: '/si jat aine entshaidung guetrofen/' }, { de: 'Wir haben uns um 18 Uhr getroffen.', es: 'Nos hemos encontrado a las 18h.', phonetics: '/via jaben uns um ajtsen ua guetrofen/' }, { de: 'Hast du ihn zufällig getroffen?', es: '¿Te lo has encontrado por casualidad?', phonetics: '/jast du in tsufelij guetrofen/' }] },
-                'bleiben': { perfekt: 'ist geblieben', emoji: '🧍', es: '(quedarse/permanecer)', en_verb: '(to stay)', examples: [{ de: 'Ich bin zu Hause geblieben.', es: 'Me he quedado en casa.', phonetics: '/ij bin tsu jause guebliben/' }, { de: 'Wie lange seid ihr geblieben?', es: '¿Cuánto tiempo os habéis quedado?', phonetics: '/vi langue said ia guebliben/' }, { de: 'Er ist im Bett geblieben.', es: 'Él se ha quedado en la cama.', phonetics: '/ea ist im bet guebliben/' }, { de: 'Wir sind Freunde geblieben.', es: 'Hemos seguido siendo amigos.', phonetics: '/via sind froinde guebliben/' }, { de: 'Warum bist du nicht geblieben?', es: '¿Por qué no te has quedado?', phonetics: '/varum bist du nijt guebliben/' }] },
-                'fliegen': { perfekt: 'ist geflogen', emoji: '✈️', es: '(volar)', en_verb: '(to fly)', examples: [{ de: 'Wir sind nach Spanien geflogen.', es: 'Hemos volado a España.', phonetics: '/via sind naj shpanien guefloguen/' }, { de: 'Bist du schon einmal geflogen?', es: '¿Has volado alguna vez?', phonetics: '/bist du shon ainmal guefloguen/' }, { de: 'Das Flugzeug ist pünktlich geflogen.', es: 'El avión ha volado puntual.', phonetics: '/das flugtsoik ist piunktlij guefloguen/' }, { de: 'Ich bin von Berlin nach München geflogen.', es: 'He volado de Berlín a Múnich.', phonetics: '/ij bin fon berlin naj miunjen guefloguen/' }, { de: 'Sie sind in den Urlaub geflogen.', es: 'Ellos han volado de vacaciones.', phonetics: '/si sind in den ualaup guefloguen/' }] }
+                'wohnen': { perfekt: 'hat gewohnt', emoji: '🏠', es: '(vivir/residir)', es_perfekt: '(he vivido/residido)', en_verb: '(to live/reside)', examples: [{ de: 'Ich habe in Berlin gewohnt.', es: 'He vivido en Berlín.', phonetics: '/ij jabe in berlin guevont/' }, { de: 'Wo hast du gewohnt?', es: '¿Dónde has vivido?', phonetics: '/vo jast du guevont/' }, { de: 'Sie hat bei ihren Eltern gewohnt.', es: 'Ella ha vivido con sus padres.', phonetics: '/si jat bai iren eltan guevont/' }, { de: 'Wir haben in einer Wohnung gewohnt.', es: 'Hemos vivido en un apartamento.', phonetics: '/via jaben in aina vonung guevont/' }, { de: 'Habt ihr lange hier gewohnt?', es: '¿Habéis vivido aquí mucho tiempo?', phonetics: '/japt ia langue hía guevont/' }] },
+                'sagen': { perfekt: 'hat gesagt', emoji: '🗣️', es: '(decir)', es_perfekt: '(he dicho)', en_verb: '(to say)', examples: [{ de: 'Er hat nichts gesagt.', es: 'Él no ha dicho nada.', phonetics: '/ea jat nijts guesakt/' }, { de: 'Was hast du gesagt?', es: '¿Qué has dicho?', phonetics: '/vas jast du guesakt/' }, { de: 'Sie hat mir die Wahrheit gesagt.', es: 'Ella me ha dicho la verdad.', phonetics: '/si jat mía di varjait guesakt/' }, { de: 'Ich habe es dir doch gesagt!', es: '¡Pero si te lo he dicho!', phonetics: '/ij jabe es día doj guesakt/' }, { de: 'Wir haben "Hallo" gesagt.', es: 'Hemos dicho "hola".', phonetics: '/via jaben jalo guesakt/' }] },
+                'geben': { perfekt: 'hat gegeben', emoji: '🎁', es: '(dar)', es_perfekt: '(he dado)', en_verb: '(to give)', examples: [{ de: 'Ich habe ihm ein Buch gegeben.', es: 'Le he dado un libro a él.', phonetics: '/ij jabe im ain buj guegueben/' }, { de: 'Sie hat mir ihre Nummer gegeben.', es: 'Ella me ha dado su número.', phonetics: '/si jat mía ire numa guegueben/' }, { de: 'Hast du der Katze Futter gegeben?', es: '¿Le has dado comida al gato?', phonetics: '/jast du dea katse futa guegueben/' }, { de: 'Wir haben eine Party gegeben.', es: 'Hemos dado una fiesta.', phonetics: '/via jaben aine parti guegueben/' }, { de: 'Der Lehrer hat uns Hausaufgaben gegeben.', es: 'El profesor nos ha dado deberes.', phonetics: '/dea lera jat uns jaus-auf-gaben guegueben/' }] },
+                'schreiben': { perfekt: 'hat geschrieben', emoji: '✍️', es: '(escribir)', es_perfekt: '(he escrito)', en_verb: '(to write)', examples: [{ de: 'Ich habe einen Brief geschrieben.', es: 'He escrito una carta.', phonetics: '/ij jabe ainen brif gueshriben/' }, { de: 'Hast du eine E-Mail geschrieben?', es: '¿Has escrito un correo electrónico?', phonetics: '/jast du aine imeil gueshriben/' }, { de: 'Sie hat ein Buch geschrieben.', es: 'Ella ha escrito un libro.', phonetics: '/si jat ain buj gueshriben/' }, { de: 'Wir haben eine Liste geschrieben.', es: 'Hemos escrito una lista.', phonetics: '/via jaben aine liste gueshriben/' }, { de: 'Wer hat das geschrieben?', es: '¿Quién ha escrito esto?', phonetics: '/vea jat das gueshriben/' }] },
+                'helfen': { perfekt: 'hat geholfen', emoji: '🆘', es: '(ayudar)', es_perfekt: '(he ayudado)', en_verb: '(to help)', examples: [{ de: 'Er hat mir geholfen.', es: 'Él me ha ayudado.', phonetics: '/ea jat mía guejolfen/' }, { de: 'Hast du deiner Mutter geholfen?', es: '¿Has ayudado a tu madre?', phonetics: '/jast du daina muta guejolfen/' }, { de: 'Wir haben im Garten geholfen.', es: 'Hemos ayudado en el jardín.', phonetics: '/via jaben im garten guejolfen/' }, { de: 'Das hat mir sehr geholfen.', es: 'Eso me ha ayudado mucho.', phonetics: '/das jat mía sea guejolfen/' }, { de: 'Können Sie mir helfen?', es: '¿Puede usted ayudarme?', phonetics: '/koenen si mía jelfen/' }] },
+                'nehmen': { perfekt: 'hat genommen', emoji: '✋', es: '(tomar/coger)', es_perfekt: '(he tomado/cogido)', en_verb: '(to take)', examples: [{ de: 'Ich habe den Bus genommen.', es: 'He tomado el autobús.', phonetics: '/ij jabe den bus guenomen/' }, { de: 'Hast du ein Taxi genommen?', es: '¿Has tomado un taxi?', phonetics: '/jast du ain taxi guenomen/' }, { de: 'Er hat meinen Stift genommen.', es: 'Él ha cogido mi bolígrafo.', phonetics: '/ea jat mainen shtift guenomen/' }, { de: 'Wir haben den letzten Zug genommen.', es: 'Hemos tomado el último tren.', phonetics: '/via jaben den letsten tsug guenomen/' }, { de: 'Sie hat ein Foto von uns genommen.', es: 'Ella nos ha hecho una foto.', phonetics: '/si jat ain foto fon uns guenomen/' }] },
+                'treffen': { perfekt: 'hat getroffen', emoji: '🧑‍🤝‍🧑', es: '(encontrarse/reunirse)', es_perfekt: '(me he encontrado)', en_verb: '(to meet)', examples: [{ de: 'Ich habe meine Freunde getroffen.', es: 'Me he encontrado con mis amigos.', phonetics: '/ij jabe maine froinde guetrofen/' }, { de: 'Wo habt ihr euch getroffen?', es: '¿Dónde os habéis encontrado?', phonetics: '/vo japt ia oish guetrofen/' }, { de: 'Sie hat eine Entscheidung getroffen.', es: 'Ella ha tomado una decisión.', phonetics: '/si jat aine entshaidung guetrofen/' }, { de: 'Wir haben uns um 18 Uhr getroffen.', es: 'Nos hemos encontrado a las 18h.', phonetics: '/via jaben uns um ajtsen ua guetrofen/' }, { de: 'Hast du ihn zufällig getroffen?', es: '¿Te lo has encontrado por casualidad?', phonetics: '/jast du in tsufelij guetrofen/' }] },
+                'bleiben': { perfekt: 'ist geblieben', emoji: '🧍', es: '(quedarse/permanecer)', es_perfekt: '(me he quedado)', en_verb: '(to stay)', examples: [{ de: 'Ich bin zu Hause geblieben.', es: 'Me he quedado en casa.', phonetics: '/ij bin tsu jause guebliben/' }, { de: 'Wie lange seid ihr geblieben?', es: '¿Cuánto tiempo os habéis quedado?', phonetics: '/vi langue said ia guebliben/' }, { de: 'Er ist im Bett geblieben.', es: 'Él se ha quedado en la cama.', phonetics: '/ea ist im bet guebliben/' }, { de: 'Wir sind Freunde geblieben.', es: 'Hemos seguido siendo amigos.', phonetics: '/via sind froinde guebliben/' }, { de: 'Warum bist du nicht geblieben?', es: '¿Por qué no te has quedado?', phonetics: '/varum bist du nijt guebliben/' }] },
+                'fliegen': { perfekt: 'ist geflogen', emoji: '✈️', es: '(volar)', es_perfekt: '(he volado)', en_verb: '(to fly)', examples: [{ de: 'Wir sind nach Spanien geflogen.', es: 'Hemos volado a España.', phonetics: '/via sind naj shpanien guefloguen/' }, { de: 'Bist du schon einmal geflogen?', es: '¿Has volado alguna vez?', phonetics: '/bist du shon ainmal guefloguen/' }, { de: 'Das Flugzeug ist pünktlich geflogen.', es: 'El avión ha volado puntual.', phonetics: '/das flugtsoik ist piunktlij guefloguen/' }, { de: 'Ich bin von Berlin nach München geflogen.', es: 'He volado de Berlín a Múnich.', phonetics: '/ij bin fon berlin naj miunjen guefloguen/' }, { de: 'Sie sind in den Urlaub geflogen.', es: 'Ellos han volado de vacaciones.', phonetics: '/si sind in den ualaup guefloguen/' }] }
             },
             // Grupo 4
             {
-                'suchen': { perfekt: 'hat gesucht', emoji: '🔍', es: '(buscar)', en_verb: '(to search/look for)', examples: [{ de: 'Ich habe meine Schlüssel gesucht.', es: 'He buscado mis llaves.', phonetics: '/ij jabe maine shliusel guesujt/' }, { de: 'Was hast du gesucht?', es: '¿Qué has buscado?', phonetics: '/vas jast du guesujt/' }, { de: 'Wir haben eine Wohnung gesucht.', es: 'Hemos buscado un apartamento.', phonetics: '/via jaben aine vonung guesujt/' }, { de: 'Er hat lange nach einer Lösung gesucht.', es: 'Él ha buscado una solución durante mucho tiempo.', phonetics: '/ea jat langue naj aina losung guesujt/' }, { de: 'Habt ihr im Internet gesucht?', es: '¿Habéis buscado en internet?', phonetics: '/japt ia im internet guesujt/' }] },
-                'finden': { perfekt: 'hat gefunden', emoji: '💡', es: '(encontrar)', en_verb: '(to find)', examples: [{ de: 'Ich habe meine Schlüssel gefunden!', es: '¡He encontrado mis llaves!', phonetics: '/ij jabe maine shliusel guefunden/' }, { de: 'Hast du eine Lösung gefunden?', es: '¿Has encontrado una solución?', phonetics: '/jast du aine losung guefunden/' }, { de: 'Wir haben einen Parkplatz gefunden.', es: 'Hemos encontrado un aparcamiento.', phonetics: '/via jaben ainen parkplats guefunden/' }, { de: 'Sie hat einen neuen Job gefunden.', es: 'Ella ha encontrado un nuevo trabajo.', phonetics: '/si jat ainen noien yob guefunden/' }, { de: 'Ich habe das Buch nicht gefunden.', es: 'No he encontrado el libro.', phonetics: '/ij jabe das buj nijt guefunden/' }] },
-                'bringen': { perfekt: 'hat gebracht', emoji: '🚚', es: '(traer/llevar)', en_verb: '(to bring)', examples: [{ de: 'Der Postbote hat ein Paket gebracht.', es: 'El cartero ha traído un paquete.', phonetics: '/dea postbote jat ain paket guebrajt/' }, { de: 'Hast du die Bücher mitgebracht?', es: '¿Has traído los libros?', phonetics: '/jast du di biuja mitguebrajt/' }, { de: 'Ich habe dir einen Kaffee gebracht.', es: 'Te he traído un café.', phonetics: '/ij jabe día ainen kafe guebrajt/' }, { de: 'Sie hat uns zum Bahnhof gebracht.', es: 'Ella nos ha llevado a la estación.', phonetics: '/si jat uns tsum banjof guebrajt/' }, { de: 'Was hat er zur Party gebracht?', es: '¿Qué ha traído él a la fiesta?', phonetics: '/vas jat ea tsua parti guebrajt/' }] },
-                'denken': { perfekt: 'hat gedacht', emoji: '🤔', es: '(pensar)', en_verb: '(to think)', examples: [{ de: 'Ich habe an dich gedacht.', es: 'He pensado en ti.', phonetics: '/ij jabe an dij guedajt/' }, { de: 'Was hast du gedacht?', es: '¿Qué has pensado?', phonetics: '/vas jast du guedajt/' }, { de: 'Wir haben das Gleiche gedacht.', es: 'Hemos pensado lo mismo.', phonetics: '/via jaben das glaishe guedajt/' }, { de: 'Ich habe gedacht, du kommst nicht.', es: 'Pensé que no venías.', phonetics: '/ij jabe guedajt, du komst nijt/' }, { de: 'Er hat lange nachgedacht.', es: 'Él ha reflexionado mucho tiempo.', phonetics: '/ea jat langue najguedajt/' }] },
-                'wissen': { perfekt: 'hat gewusst', emoji: '🧠', es: '(saber)', en_verb: '(to know)', examples: [{ de: 'Ich habe das nicht gewusst.', es: 'No lo sabía.', phonetics: '/ij jabe das nijt guevust/' }, { de: 'Hast du das schon gewusst?', es: '¿Ya lo sabías?', phonetics: '/jast du das shon guevust/' }, { de: 'Er hat die Antwort gewusst.', es: 'Él sabía la respuesta.', phonetics: '/ea jat di antvort guevust/' }, { de: 'Wir haben nichts davon gewusst.', es: 'No sabíamos nada de eso.', phonetics: '/via jaben nijts dafon guevust/' }, { de: 'Woher hast du das gewusst?', es: '¿De dónde lo sabías?', phonetics: '/voja jast du das guevust/' }] },
-                'tanzen': { perfekt: 'hat getanzt', emoji: '💃', es: '(bailar)', en_verb: '(to dance)', examples: [{ de: 'Wir haben die ganze Nacht getanzt.', es: 'Hemos bailado toda la noche.', phonetics: '/via jaben di gantse najt guetantst/' }, { de: 'Hast du auf der Party getanzt?', es: '¿Has bailado en la fiesta?', phonetics: '/jast du auf dea parti guetantst/' }, { de: 'Sie hat sehr gut getanzt.', es: 'Ella ha bailado muy bien.', phonetics: '/si jat sea gut guetantst/' }, { de: 'Ich habe mit ihm getanzt.', es: 'He bailado con él.', phonetics: '/ij jabe mit im guetantst/' }, { de: 'Habt ihr Walzer getanzt?', es: '¿Habéis bailado el vals?', phonetics: '/japt ia valtsa guetantst/' }] },
-                'spielen': { perfekt: 'hat gespielt', emoji: '⚽', es: '(jugar/tocar instr.)', en_verb: '(to play)', examples: [{ de: 'Die Kinder haben im Garten gespielt.', es: 'Los niños han jugado en el jardín.', phonetics: '/di kinda jaben im garten gueshpilt/' }, { de: 'Hast du Fußball gespielt?', es: '¿Has jugado al fútbol?', phonetics: '/jast du fusbal gueshpilt/' }, { de: 'Er hat Klavier gespielt.', es: 'Él ha tocado el piano.', phonetics: '/ea jat klavía gueshpilt/' }, { de: 'Wir haben Karten gespielt.', es: 'Hemos jugado a las cartas.', phonetics: '/via jaben karten gueshpilt/' }, { de: 'Sie hat eine Rolle im Theater gespielt.', es: 'Ella ha interpretado un papel en el teatro.', phonetics: '/si jat aine role im teata gueshpilt/' }] },
-                'bezahlen': { perfekt: 'hat bezahlt', emoji: '💳', es: '(pagar)', en_verb: '(to pay)', examples: [{ de: 'Ich habe die Rechnung bezahlt.', es: 'He pagado la cuenta.', phonetics: '/ij jabe di rejnunk betsalt/' }, { de: 'Hast du schon bezahlt?', es: '¿Ya has pagado?', phonetics: '/jast du shon betsalt/' }, { de: 'Wir haben mit Karte bezahlt.', es: 'Hemos pagado con tarjeta.', phonetics: '/via jaben mit karte betsalt/' }, { de: 'Er hat das Ticket bezahlt.', es: 'Él ha pagado el billete.', phonetics: '/ea jat das tiket betsalt/' }, { de: 'Wer hat die Getränke bezahlt?', es: '¿Quién ha pagado las bebidas?', phonetics: '/vea jat di guetrenke betsalt/' }] },
-                'verstehen': { perfekt: 'hat verstanden', emoji: '💡', es: '(entender/comprender)', en_verb: '(to understand)', examples: [{ de: 'Ich habe alles verstanden.', es: 'Lo he entendido todo.', phonetics: '/ij jabe ales feashtanden/' }, { de: 'Hast du die Frage verstanden?', es: '¿Has entendido la pregunta?', phonetics: '/jast du di frague feashtanden/' }, { de: 'Er hat mich nicht verstanden.', es: 'Él no me ha entendido.', phonetics: '/ea jat mish nijt feashtanden/' }, { de: 'Wir haben den Film nicht verstanden.', es: 'No hemos entendido la película.', phonetics: '/via jaben den film nijt feashtanden/' }, { de: 'Ich habe nur Bahnhof verstanden.', es: 'No he entendido nada (dicho popular).', phonetics: '/ij jabe nua banjof feashtanden/' }] }
+                'suchen': { perfekt: 'hat gesucht', emoji: '🔍', es: '(buscar)', es_perfekt: '(he buscado)', en_verb: '(to search/look for)', examples: [{ de: 'Ich habe meine Schlüssel gesucht.', es: 'He buscado mis llaves.', phonetics: '/ij jabe maine shliusel guesujt/' }, { de: 'Was hast du gesucht?', es: '¿Qué has buscado?', phonetics: '/vas jast du guesujt/' }, { de: 'Wir haben eine Wohnung gesucht.', es: 'Hemos buscado un apartamento.', phonetics: '/via jaben aine vonung guesujt/' }, { de: 'Er hat lange nach einer Lösung gesucht.', es: 'Él ha buscado una solución durante mucho tiempo.', phonetics: '/ea jat langue naj aina losung guesujt/' }, { de: 'Habt ihr im Internet gesucht?', es: '¿Habéis buscado en internet?', phonetics: '/japt ia im internet guesujt/' }] },
+                'finden': { perfekt: 'hat gefunden', emoji: '💡', es: '(encontrar)', es_perfekt: '(he encontrado)', en_verb: '(to find)', examples: [{ de: 'Ich habe meine Schlüssel gefunden!', es: '¡He encontrado mis llaves!', phonetics: '/ij jabe maine shliusel guefunden/' }, { de: 'Hast du eine Lösung gefunden?', es: '¿Has encontrado una solución?', phonetics: '/jast du aine losung guefunden/' }, { de: 'Wir haben einen Parkplatz gefunden.', es: 'Hemos encontrado un aparcamiento.', phonetics: '/via jaben ainen parkplats guefunden/' }, { de: 'Sie hat einen neuen Job gefunden.', es: 'Ella ha encontrado un nuevo trabajo.', phonetics: '/si jat ainen noien yob guefunden/' }, { de: 'Ich habe das Buch nicht gefunden.', es: 'No he encontrado el libro.', phonetics: '/ij jabe das buj nijt guefunden/' }] },
+                'bringen': { perfekt: 'hat gebracht', emoji: '🚚', es: '(traer/llevar)', es_perfekt: '(he traído/llevado)', en_verb: '(to bring)', examples: [{ de: 'Der Postbote hat ein Paket gebracht.', es: 'El cartero ha traído un paquete.', phonetics: '/dea postbote jat ain paket guebrajt/' }, { de: 'Hast du die Bücher mitgebracht?', es: '¿Has traído los libros?', phonetics: '/jast du di biuja mitguebrajt/' }, { de: 'Ich habe dir einen Kaffee gebracht.', es: 'Te he traído un café.', phonetics: '/ij jabe día ainen kafe guebrajt/' }, { de: 'Sie hat uns zum Bahnhof gebracht.', es: 'Ella nos ha llevado a la estación.', phonetics: '/si jat uns tsum banjof guebrajt/' }, { de: 'Was hat er zur Party gebracht?', es: '¿Qué ha traído él a la fiesta?', phonetics: '/vas jat ea tsua parti guebrajt/' }] },
+                'denken': { perfekt: 'hat gedacht', emoji: '🤔', es: '(pensar)', es_perfekt: '(he pensado)', en_verb: '(to think)', examples: [{ de: 'Ich habe an dich gedacht.', es: 'He pensado en ti.', phonetics: '/ij jabe an dij guedajt/' }, { de: 'Was hast du gedacht?', es: '¿Qué has pensado?', phonetics: '/vas jast du guedajt/' }, { de: 'Wir haben das Gleiche gedacht.', es: 'Hemos pensado lo mismo.', phonetics: '/via jaben das glaishe guedajt/' }, { de: 'Ich habe gedacht, du kommst nicht.', es: 'Pensé que no venías.', phonetics: '/ij jabe guedajt, du komst nijt/' }, { de: 'Er hat lange nachgedacht.', es: 'Él ha reflexionado mucho tiempo.', phonetics: '/ea jat langue najguedajt/' }] },
+                'wissen': { perfekt: 'hat gewusst', emoji: '🧠', es: '(saber)', es_perfekt: '(he sabido)', en_verb: '(to know)', examples: [{ de: 'Ich habe das nicht gewusst.', es: 'No lo sabía.', phonetics: '/ij jabe das nijt guevust/' }, { de: 'Hast du das schon gewusst?', es: '¿Ya lo sabías?', phonetics: '/jast du das shon guevust/' }, { de: 'Er hat die Antwort gewusst.', es: 'Él sabía la respuesta.', phonetics: '/ea jat di antvort guevust/' }, { de: 'Wir haben nichts davon gewusst.', es: 'No sabíamos nada de eso.', phonetics: '/via jaben nijts dafon guevust/' }, { de: 'Woher hast du das gewusst?', es: '¿De dónde lo sabías?', phonetics: '/voja jast du das guevust/' }] },
+                'tanzen': { perfekt: 'hat getanzt', emoji: '💃', es: '(bailar)', es_perfekt: '(he bailado)', en_verb: '(to dance)', examples: [{ de: 'Wir haben die ganze Nacht getanzt.', es: 'Hemos bailado toda la noche.', phonetics: '/via jaben di gantse najt guetantst/' }, { de: 'Hast du auf der Party getanzt?', es: '¿Has bailado en la fiesta?', phonetics: '/jast du auf dea parti guetantst/' }, { de: 'Sie hat sehr gut getanzt.', es: 'Ella ha bailado muy bien.', phonetics: '/si jat sea gut guetantst/' }, { de: 'Ich habe mit ihm getanzt.', es: 'He bailado con él.', phonetics: '/ij jabe mit im guetantst/' }, { de: 'Habt ihr Walzer getanzt?', es: '¿Habéis bailado el vals?', phonetics: '/japt ia valtsa guetantst/' }] },
+                'spielen': { perfekt: 'hat gespielt', emoji: '⚽', es: '(jugar/tocar instr.)', es_perfekt: '(he jugado/tocado)', en_verb: '(to play)', examples: [{ de: 'Die Kinder haben im Garten gespielt.', es: 'Los niños han jugado en el jardín.', phonetics: '/di kinda jaben im garten gueshpilt/' }, { de: 'Hast du Fußball gespielt?', es: '¿Has jugado al fútbol?', phonetics: '/jast du fusbal gueshpilt/' }, { de: 'Er hat Klavier gespielt.', es: 'Él ha tocado el piano.', phonetics: '/ea jat klavía gueshpilt/' }, { de: 'Wir haben Karten gespielt.', es: 'Hemos jugado a las cartas.', phonetics: '/via jaben karten gueshpilt/' }, { de: 'Sie hat eine Rolle im Theater gespielt.', es: 'Ella ha interpretado un papel en el teatro.', phonetics: '/si jat aine role im teata gueshpilt/' }] },
+                'bezahlen': { perfekt: 'hat bezahlt', emoji: '💳', es: '(pagar)', es_perfekt: '(he pagado)', en_verb: '(to pay)', examples: [{ de: 'Ich habe die Rechnung bezahlt.', es: 'He pagado la cuenta.', phonetics: '/ij jabe di rejnunk betsalt/' }, { de: 'Hast du schon bezahlt?', es: '¿Ya has pagado?', phonetics: '/jast du shon betsalt/' }, { de: 'Wir haben mit Karte bezahlt.', es: 'Hemos pagado con tarjeta.', phonetics: '/via jaben mit karte betsalt/' }, { de: 'Er hat das Ticket bezahlt.', es: 'Él ha pagado el billete.', phonetics: '/ea jat das tiket betsalt/' }, { de: 'Wer hat die Getränke bezahlt?', es: '¿Quién ha pagado las bebidas?', phonetics: '/vea jat di guetrenke betsalt/' }] },
+                'verstehen': { perfekt: 'hat verstanden', emoji: '💡', es: '(entender/comprender)', es_perfekt: '(he entendido)', en_verb: '(to understand)', examples: [{ de: 'Ich habe alles verstanden.', es: 'Lo he entendido todo.', phonetics: '/ij jabe ales feashtanden/' }, { de: 'Hast du die Frage verstanden?', es: '¿Has entendido la pregunta?', phonetics: '/jast du di frague feashtanden/' }, { de: 'Er hat mich nicht verstanden.', es: 'Él no me ha entendido.', phonetics: '/ea jat mish nijt feashtanden/' }, { de: 'Wir haben den Film nicht verstanden.', es: 'No hemos entendido la película.', phonetics: '/via jaben den film nijt feashtanden/' }, { de: 'Ich habe nur Bahnhof verstanden.', es: 'No he entendido nada (dicho popular).', phonetics: '/ij jabe nua banjof feashtanden/' }] }
             },
             // Grupo 5
             {
-                'anrufen': { perfekt: 'hat angerufen', emoji: '📞', es: '(llamar por teléfono)', en_verb: '(to call)', examples: [{ de: 'Ich habe dich gestern angerufen.', es: 'Te he llamado ayer.', phonetics: '/ij jabe dij guestern anguerufen/' }, { de: 'Wer hat angerufen?', es: '¿Quién ha llamado?', phonetics: '/vea jat anguerufen/' }, { de: 'Sie hat ihre Mutter angerufen.', es: 'Ella ha llamado a su madre.', phonetics: '/si jat ire muta anguerufen/' }, { de: 'Hast du den Arzt angerufen?', es: '¿Has llamado al médico?', phonetics: '/jast du den atst anguerufen/' }, { de: 'Wir haben ein Taxi angerufen.', es: 'Hemos llamado a un taxi.', phonetics: '/via jaben ain taxi anguerufen/' }] },
-                'beginnen': { perfekt: 'hat begonnen', emoji: '🏁', es: '(empezar)', en_verb: '(to begin)', examples: [{ de: 'Der Film hat schon begonnen.', es: 'La película ya ha empezado.', phonetics: '/dea film jat shon begonen/' }, { de: 'Wann hat das Konzert begonnen?', es: '¿Cuándo ha empezado el concierto?', phonetics: '/van jat das kontsert begonen/' }, { de: 'Ich habe mit der Arbeit begonnen.', es: 'He empezado con el trabajo.', phonetics: '/ij jabe mit dea abait begonen/' }, { de: 'Die Schule hat im September begonnen.', es: 'El colegio ha empezado en septiembre.', phonetics: '/di shule jat im septemba begonen/' }, { de: 'Wir haben zu früh begonnen.', es: 'Hemos empezado demasiado pronto.', phonetics: '/via jaben tsu friu begonen/' }] },
-                'erzählen': { perfekt: 'hat erzählt', emoji: '📖', es: '(contar/narrar)', en_verb: '(to tell/narrate)', examples: [{ de: 'Er hat mir eine Geschichte erzählt.', es: 'Él me ha contado una historia.', phonetics: '/ea jat mía aine gueshijte etselt/' }, { de: 'Was hast du ihr erzählt?', es: '¿Qué le has contado a ella?', phonetics: '/vas jast du ia etselt/' }, { de: 'Sie hat von ihrem Urlaub erzählt.', es: 'Ella ha contado sobre sus vacaciones.', phonetics: '/si jat fon irem ualaup etselt/' }, { de: 'Ich habe ihm alles erzählt.', es: 'Le he contado todo a él.', phonetics: '/ij jabe im ales etselt/' }, { de: 'Wir haben Witze erzählt.', es: 'Hemos contado chistes.', phonetics: '/via jaben vitse etselt/' }] },
-                'glauben': { perfekt: 'hat geglaubt', emoji: '🙏', es: '(creer)', en_verb: '(to believe)', examples: [{ de: 'Ich habe dir geglaubt.', es: 'Te he creído.', phonetics: '/ij jabe día gueglaupt/' }, { de: 'Er hat die Geschichte nicht geglaubt.', es: 'Él no se ha creído la historia.', phonetics: '/ea jat di gueshijte nijt gueglaupt/' }, { de: 'Hast du das wirklich geglaubt?', es: '¿De verdad te has creído eso?', phonetics: '/jast du das virklij gueglaupt/' }, { de: 'Wir haben an dich geglaubt.', es: 'Hemos creído en ti.', phonetics: '/via jaben an dij gueglaupt/' }, { de: 'Niemand hat es geglaubt.', es: 'Nadie se lo ha creído.', phonetics: '/nimant jat es gueglaupt/' }] },
-                'hoffen': { perfekt: 'hat gehofft', emoji: '🤞', es: '(esperar/tener esperanza)', en_verb: '(to hope)', examples: [{ de: 'Ich habe auf gutes Wetter gehofft.', es: 'He esperado que hiciera buen tiempo.', phonetics: '/ij jabe auf gutes veta guejoft/' }, { de: 'Wir haben das Beste gehofft.', es: 'Hemos esperado lo mejor.', phonetics: '/via jaben das beste guejoft/' }, { de: 'Er hat gehofft, dich zu sehen.', es: 'Él esperaba verte.', phonetics: '/ea jat guejoft, dij tsu seen/' }, { de: 'Sie hat auf eine Antwort gehofft.', es: 'Ella esperaba una respuesta.', phonetics: '/si jat auf aine antvort guejoft/' }, { de: 'Ich habe gehofft, du rufst an.', es: 'Esperaba que llamaras.', phonetics: '/ij jabe guejoft, du rufst an/' }] },
-                'lachen': { perfekt: 'hat gelacht', emoji: '😂', es: '(reír)', en_verb: '(to laugh)', examples: [{ de: 'Wir haben viel gelacht.', es: 'Nos hemos reído mucho.', phonetics: '/via jaben fil guelajt/' }, { de: 'Warum hast du gelacht?', es: '¿Por qué te has reído?', phonetics: '/varum jast du guelajt/' }, { de: 'Sie hat über den Witz gelacht.', es: 'Ella se ha reído del chiste.', phonetics: '/si jat iuba den vits guelajt/' }, { de: 'Ich habe so sehr gelacht.', es: 'Me he reído muchísimo.', phonetics: '/ij jabe so sea guelajt/' }, { de: 'Die Kinder haben laut gelacht.', es: 'Los niños se han reído a carcajadas.', phonetics: '/di kinda jaben laut guelajt/' }] },
-                'regnen': { perfekt: 'hat geregnet', emoji: '🌧️', es: '(llover)', en_verb: '(to rain)', examples: [{ de: 'Gestern hat es geregnet.', es: 'Ayer ha llovido.', phonetics: '/guestern jat es gueregnet/' }, { de: 'Es hat den ganzen Tag geregnet.', es: 'Ha llovido todo el día.', phonetics: '/es jat den gantsen tak gueregnet/' }, { de: 'Hat es bei euch auch geregnet?', es: '¿Ha llovido donde vosotros también?', phonetics: '/jat es bai oish auj gueregnet/' }, { de: 'Es hat nur ein bisschen geregnet.', es: 'Solo ha llovido un poquito.', phonetics: '/es jat nua ain bisjen gueregnet/' }, { de: 'Zum Glück hat es nicht geregnet.', es: 'Por suerte no ha llovido.', phonetics: '/tsum gliuk jat es nijt gueregnet/' }] },
-                'reisen': { perfekt: 'ist gereist', emoji: '✈️', es: '(viajar)', en_verb: '(to travel)', examples: [{ de: 'Ich bin durch Europa gereist.', es: 'He viajado por Europa.', phonetics: '/ij bin durj oiropa gueraist/' }, { de: 'Wohin seid ihr gereist?', es: '¿A dónde habéis viajado?', phonetics: '/vojin said ia gueraist/' }, { de: 'Er ist allein gereist.', es: 'Él ha viajado solo.', phonetics: '/ea ist alain gueraist/' }, { de: 'Wir sind mit dem Zug gereist.', es: 'Hemos viajado en tren.', phonetics: '/via sind mit dem tsug gueraist/' }, { de: 'Sie ist viel gereist.', es: 'Ella ha viajado mucho.', phonetics: '/si ist fil gueraist/' }] },
-                'verlieren': { perfekt: 'hat verloren', emoji: '💔', es: '(perder)', en_verb: '(to lose)', examples: [{ de: 'Ich habe meinen Schlüssel verloren.', es: 'He perdido mi llave.', phonetics: '/ij jabe mainen shliusel fealoaren/' }, { de: 'Er hat das Spiel verloren.', es: 'Él ha perdido el partido.', phonetics: '/ea jat das shpil fealoaren/' }, { de: 'Hast du etwas verloren?', es: '¿Has perdido algo?', phonetics: '/jast du etvas fealoaren/' }, { de: 'Wir haben die Hoffnung nicht verloren.', es: 'No hemos perdido la esperanza.', phonetics: '/via jaben di jofnunk nijt fealoaren/' }, { de: 'Sie hat ihre Brille verloren.', es: 'Ella ha perdido sus gafas.', phonetics: '/si jat ire brile fealoaren/' }] }
+                'anrufen': { perfekt: 'hat angerufen', emoji: '📞', es: '(llamar por teléfono)', es_perfekt: '(he llamado)', en_verb: '(to call)', examples: [{ de: 'Ich habe dich gestern angerufen.', es: 'Te he llamado ayer.', phonetics: '/ij jabe dij guestern anguerufen/' }, { de: 'Wer hat angerufen?', es: '¿Quién ha llamado?', phonetics: '/vea jat anguerufen/' }, { de: 'Sie hat ihre Mutter angerufen.', es: 'Ella ha llamado a su madre.', phonetics: '/si jat ire muta anguerufen/' }, { de: 'Hast du den Arzt angerufen?', es: '¿Has llamado al médico?', phonetics: '/jast du den atst anguerufen/' }, { de: 'Wir haben ein Taxi angerufen.', es: 'Hemos llamado a un taxi.', phonetics: '/via jaben ain taxi anguerufen/' }] },
+                'beginnen': { perfekt: 'hat begonnen', emoji: '🏁', es: '(empezar)', es_perfekt: '(he empezado)', en_verb: '(to begin)', examples: [{ de: 'Der Film hat schon begonnen.', es: 'La película ya ha empezado.', phonetics: '/dea film jat shon begonen/' }, { de: 'Wann hat das Konzert begonnen?', es: '¿Cuándo ha empezado el concierto?', phonetics: '/van jat das kontsert begonen/' }, { de: 'Ich habe mit der Arbeit begonnen.', es: 'He empezado con el trabajo.', phonetics: '/ij jabe mit dea abait begonen/' }, { de: 'Die Schule hat im September begonnen.', es: 'El colegio ha empezado en septiembre.', phonetics: '/di shule jat im septemba begonen/' }, { de: 'Wir haben zu früh begonnen.', es: 'Hemos empezado demasiado pronto.', phonetics: '/via jaben tsu friu begonen/' }] },
+                'erzählen': { perfekt: 'hat erzählt', emoji: '📖', es: '(contar/narrar)', es_perfekt: '(he contado/narrado)', en_verb: '(to tell/narrate)', examples: [{ de: 'Er hat mir eine Geschichte erzählt.', es: 'Él me ha contado una historia.', phonetics: '/ea jat mía aine gueshijte etselt/' }, { de: 'Was hast du ihr erzählt?', es: '¿Qué le has contado a ella?', phonetics: '/vas jast du ia etselt/' }, { de: 'Sie hat von ihrem Urlaub erzählt.', es: 'Ella ha contado sobre sus vacaciones.', phonetics: '/si jat fon irem ualaup etselt/' }, { de: 'Ich habe ihm alles erzählt.', es: 'Le he contado todo a él.', phonetics: '/ij jabe im ales etselt/' }, { de: 'Wir haben Witze erzählt.', es: 'Hemos contado chistes.', phonetics: '/via jaben vitse etselt/' }] },
+                'glauben': { perfekt: 'hat geglaubt', emoji: '🙏', es: '(creer)', es_perfekt: '(he creído)', en_verb: '(to believe)', examples: [{ de: 'Ich habe dir geglaubt.', es: 'Te he creído.', phonetics: '/ij jabe día gueglaupt/' }, { de: 'Er hat die Geschichte nicht geglaubt.', es: 'Él no se ha creído la historia.', phonetics: '/ea jat di gueshijte nijt gueglaupt/' }, { de: 'Hast du das wirklich geglaubt?', es: '¿De verdad te has creído eso?', phonetics: '/jast du das virklij gueglaupt/' }, { de: 'Wir haben an dich geglaubt.', es: 'Hemos creído en ti.', phonetics: '/via jaben an dij gueglaupt/' }, { de: 'Niemand hat es geglaubt.', es: 'Nadie se lo ha creído.', phonetics: '/nimant jat es gueglaupt/' }] },
+                'hoffen': { perfekt: 'hat gehofft', emoji: '🤞', es: '(esperar/tener esperanza)', es_perfekt: '(he esperado)', en_verb: '(to hope)', examples: [{ de: 'Ich habe auf gutes Wetter gehofft.', es: 'He esperado que hiciera buen tiempo.', phonetics: '/ij jabe auf gutes veta guejoft/' }, { de: 'Wir haben das Beste gehofft.', es: 'Hemos esperado lo mejor.', phonetics: '/via jaben das beste guejoft/' }, { de: 'Er hat gehofft, dich zu sehen.', es: 'Él esperaba verte.', phonetics: '/ea jat guejoft, dij tsu seen/' }, { de: 'Sie hat auf eine Antwort gehofft.', es: 'Ella esperaba una respuesta.', phonetics: '/si jat auf aine antvort guejoft/' }, { de: 'Ich habe gehofft, du rufst an.', es: 'Esperaba que llamaras.', phonetics: '/ij jabe guejoft, du rufst an/' }] },
+                'lachen': { perfekt: 'hat gelacht', emoji: '😂', es: '(reír)', es_perfekt: '(he reído)', en_verb: '(to laugh)', examples: [{ de: 'Wir haben viel gelacht.', es: 'Nos hemos reído mucho.', phonetics: '/via jaben fil guelajt/' }, { de: 'Warum hast du gelacht?', es: '¿Por qué te has reído?', phonetics: '/varum jast du guelajt/' }, { de: 'Sie hat über den Witz gelacht.', es: 'Ella se ha reído del chiste.', phonetics: '/si jat iuba den vits guelajt/' }, { de: 'Ich habe so sehr gelacht.', es: 'Me he reído muchísimo.', phonetics: '/ij jabe so sea guelajt/' }, { de: 'Die Kinder haben laut gelacht.', es: 'Los niños se han reído a carcajadas.', phonetics: '/di kinda jaben laut guelajt/' }] },
+                'regnen': { perfekt: 'hat geregnet', emoji: '🌧️', es: '(llover)', es_perfekt: '(ha llovido)', en_verb: '(to rain)', examples: [{ de: 'Gestern hat es geregnet.', es: 'Ayer ha llovido.', phonetics: '/guestern jat es gueregnet/' }, { de: 'Es hat den ganzen Tag geregnet.', es: 'Ha llovido todo el día.', phonetics: '/es jat den gantsen tak gueregnet/' }, { de: 'Hat es bei euch auch geregnet?', es: '¿Ha llovido donde vosotros también?', phonetics: '/jat es bai oish auj gueregnet/' }, { de: 'Es hat nur ein bisschen geregnet.', es: 'Solo ha llovido un poquito.', phonetics: '/es jat nua ain bisjen gueregnet/' }, { de: 'Zum Glück hat es nicht geregnet.', es: 'Por suerte no ha llovido.', phonetics: '/tsum gliuk jat es nijt gueregnet/' }] },
+                'reisen': { perfekt: 'ist gereist', emoji: '✈️', es: '(viajar)', es_perfekt: '(he viajado)', en_verb: '(to travel)', examples: [{ de: 'Ich bin durch Europa gereist.', es: 'He viajado por Europa.', phonetics: '/ij bin durj oiropa gueraist/' }, { de: 'Wohin seid ihr gereist?', es: '¿A dónde habéis viajado?', phonetics: '/vojin said ia gueraist/' }, { de: 'Er ist allein gereist.', es: 'Él ha viajado solo.', phonetics: '/ea ist alain gueraist/' }, { de: 'Wir sind mit dem Zug gereist.', es: 'Hemos viajado en tren.', phonetics: '/via sind mit dem tsug gueraist/' }, { de: 'Sie ist viel gereist.', es: 'Ella ha viajado mucho.', phonetics: '/si ist fil gueraist/' }] },
+                'verlieren': { perfekt: 'hat verloren', emoji: '💔', es: '(perder)', es_perfekt: '(he perdido)', en_verb: '(to lose)', examples: [{ de: 'Ich habe meinen Schlüssel verloren.', es: 'He perdido mi llave.', phonetics: '/ij jabe mainen shliusel fealoaren/' }, { de: 'Er hat das Spiel verloren.', es: 'Él ha perdido el partido.', phonetics: '/ea jat das shpil fealoaren/' }, { de: 'Hast du etwas verloren?', es: '¿Has perdido algo?', phonetics: '/jast du etvas fealoaren/' }, { de: 'Wir haben die Hoffnung nicht verloren.', es: 'No hemos perdido la esperanza.', phonetics: '/via jaben di jofnunk nijt fealoaren/' }, { de: 'Sie hat ihre Brille verloren.', es: 'Ella ha perdido sus gafas.', phonetics: '/si jat ire brile fealoaren/' }] }
             },
             // Grupo 6
             {
-                'aufstehen': { perfekt: 'ist aufgestanden', emoji: '🧍‍♀️', es: '(levantarse)', en_verb: '(to get up)', examples: [{ de: 'Ich bin um 7 Uhr aufgestanden.', es: 'Me he levantado a las 7.', phonetics: '/ij bin um siben ua aufgueshtanden/' }, { de: 'Wann bist du heute aufgestanden?', es: '¿Cuándo te has levantado hoy?', phonetics: '/van bist du joite aufgueshtanden/' }, { de: 'Er ist sehr früh aufgestanden.', es: 'Él se ha levantado muy temprano.', phonetics: '/ea ist sea friu aufgueshtanden/' }, { de: 'Wir sind alle gleichzeitig aufgestanden.', es: 'Nos hemos levantado todos a la vez.', phonetics: '/via sind ale glaijtsaitij aufgueshtanden/' }, { de: 'Sie ist vom Sofa aufgestanden.', es: 'Ella se ha levantado del sofá.', phonetics: '/si ist fom sofa aufgueshtanden/' }] },
-                'einkaufen': { perfekt: 'hat eingekauft', emoji: '🛍️', es: '(hacer la compra)', en_verb: '(to go shopping)', examples: [{ de: 'Ich habe im Supermarkt eingekauft.', es: 'He comprado en el supermercado.', phonetics: '/ij jabe im supamarkt ainguekauft/' }, { de: 'Hast du alles eingekauft?', es: '¿Has comprado todo?', phonetics: '/jast du ales ainguekauft/' }, { de: 'Wir haben für die Party eingekauft.', es: 'Hemos hecho la compra para la fiesta.', phonetics: '/via jaben fiua di parti ainguekauft/' }, { de: 'Sie hat am Samstag eingekauft.', es: 'Ella ha hecho la compra el sábado.', phonetics: '/si jat am samstak ainguekauft/' }, { de: 'Meine Mutter hat Obst eingekauft.', es: 'Mi madre ha comprado fruta.', phonetics: '/maine muta jat opst ainguekauft/' }] },
-                'fernsehen': { perfekt: 'hat ferngesehen', emoji: '📺', es: '(ver la televisión)', en_verb: '(to watch TV)', examples: [{ de: 'Wir haben gestern Abend ferngesehen.', es: 'Vimos la televisión ayer por la noche.', phonetics: '/via jaben guestern abent feangueséen/' }, { de: 'Er hat zu lange ferngesehen.', es: 'Él ha visto la tele demasiado tiempo.', phonetics: '/ea jat tsu langue feangueséen/' }, { de: 'Was hast du ferngesehen?', es: '¿Qué has visto en la tele?', phonetics: '/vas jast du feangueséen/' }, { de: 'Ich habe einen Krimi ferngesehen.', es: 'He visto una película de suspense.', phonetics: '/ij jabe ainen krimi feangueséen/' }, { de: 'Habt ihr die Nachrichten ferngesehen?', es: '¿Habéis visto las noticias?', phonetics: '/japt ia di najrijten feangueséen/' }] },
-                'mitbringen': { perfekt: 'hat mitgebracht', emoji: '🎁', es: '(traer consigo)', en_verb: '(to bring along)', examples: [{ de: 'Hast du den Kuchen mitgebracht?', es: '¿Has traído el pastel?', phonetics: '/jast du den kujen mitguebrajt/' }, { de: 'Ich habe meinen Freund mitgebracht.', es: 'He traído a mi amigo.', phonetics: '/ij jabe mainen froint mitguebrajt/' }, { de: 'Sie hat Wein mitgebracht.', es: 'Ella ha traído vino.', phonetics: '/si jat vain mitguebrajt/' }, { de: 'Was sollen wir mitbringen?', es: '¿Qué deberíamos traer?', phonetics: '/vas solen via mitbringuen/' }, { de: 'Er hat nichts mitgebracht.', es: 'Él no ha traído nada.', phonetics: '/ea jat nijts mitguebrajt/' }] },
-                'anfangen': { perfekt: 'hat angefangen', emoji: '🎬', es: '(empezar)', en_verb: '(to start/begin)', examples: [{ de: 'Der Kurs hat um 9 Uhr angefangen.', es: 'El curso ha empezado a las 9.', phonetics: '/dea kuas jat um noin ua anguefanguen/' }, { de: 'Wann hat der Film angefangen?', es: '¿Cuándo ha empezado la película?', phonetics: '/van jat dea film anguefanguen/' }, { de: 'Ich habe mit einem neuen Buch angefangen.', es: 'He empezado un nuevo libro.', phonetics: '/ij jabe mit ainem noien buj anguefanguen/' }, { de: 'Es hat angefangen zu regnen.', es: 'Ha empezado a llover.', phonetics: '/es jat anguefanguen tsu regnen/' }, { de: 'Wir haben pünktlich angefangen.', es: 'Hemos empezado puntuales.', phonetics: '/via jaben piunktlij anguefanguen/' }] },
-                'einladen': { perfekt: 'hat eingeladen', emoji: '💌', es: '(invitar)', en_verb: '(to invite)', examples: [{ de: 'Ich habe meine Freunde eingeladen.', es: 'He invitado a mis amigos.', phonetics: '/ij jabe maine froinde aingueladen/' }, { de: 'Er hat mich zum Essen eingeladen.', es: 'Él me ha invitado a comer.', phonetics: '/ea jat mish tsum esen aingueladen/' }, { de: 'Wen hast du eingeladen?', es: '¿A quién has invitado?', phonetics: '/ven jast du aingueladen/' }, { de: 'Sie hat uns zur Party eingeladen.', es: 'Ella nos ha invitado a la fiesta.', phonetics: '/si jat uns tsua parti aingueladen/' }, { de: 'Wir haben viele Leute eingeladen.', es: 'Hemos invitado a mucha gente.', phonetics: '/via jaben file loite aingueladen/' }] },
-                'gefallen': { perfekt: 'hat gefallen', emoji: '👍', es: '(gustar)', en_verb: '(to like/be pleasing)', examples: [{ de: 'Das Geschenk hat mir gefallen.', es: 'Me ha gustado el regalo.', phonetics: '/das gueshenk jat mía guefalen/' }, { de: 'Wie hat dir der Film gefallen?', es: '¿Qué te ha parecido la película?', phonetics: '/vi jat día dea film guefalen/' }, { de: 'Die Stadt hat uns sehr gut gefallen.', es: 'La ciudad nos ha gustado mucho.', phonetics: '/di shtat jat uns sea gut guefalen/' }, { de: 'Dein neues Auto hat mir gefallen.', es: 'Me ha gustado tu coche nuevo.', phonetics: '/dain noies auto jat mía guefalen/' }, { de: 'Es hat ihm nicht gefallen.', es: 'No le ha gustado a él.', phonetics: '/es jat im nijt guefalen/' }] },
-                'warten': { perfekt: 'hat gewartet', emoji: '⏳', es: '(esperar)', en_verb: '(to wait)', examples: [{ de: 'Ich habe auf den Bus gewartet.', es: 'He esperado el autobús.', phonetics: '/ij jabe auf den bus guevartet/' }, { de: 'Wie lange hast du gewartet?', es: '¿Cuánto tiempo has esperado?', phonetics: '/vi langue jast du guevartet/' }, { de: 'Wir haben eine Stunde gewartet.', es: 'Hemos esperado una hora.', phonetics: '/via jaben aine shtunde guevartet/' }, { de: 'Er hat auf dich gewartet.', es: 'Él te ha esperado.', phonetics: '/ea jat auf dij guevartet/' }, { de: 'Sie haben geduldig gewartet.', es: 'Ellos han esperado pacientemente.', phonetics: '/si jaben gueduldij guevartet/' }] },
-                'tragen': { perfekt: 'hat getragen', emoji: '👕', es: '(llevar puesto/cargar)', en_verb: '(to wear/carry)', examples: [{ de: 'Sie hat ein rotes Kleid getragen.', es: 'Ella ha llevado un vestido rojo.', phonetics: '/si jat ain rotes klaid guetraguen/' }, { de: 'Ich habe die schwere Tasche getragen.', es: 'He cargado la bolsa pesada.', phonetics: '/ij jabe di shvere tashe guetraguen/' }, { de: 'Was hast du gestern getragen?', es: '¿Qué llevabas puesto ayer?', phonetics: '/vas jast du guestern guetraguen/' }, { de: 'Er hat einen Anzug getragen.', es: 'Él ha llevado un traje.', phonetics: '/ea jat ainen antsug guetraguen/' }, { de: 'Wir haben die Kisten nach oben getragen.', es: 'Hemos subido las cajas.', phonetics: '/via jaben di kisten naj oben guetraguen/' }] }
+                'aufstehen': { perfekt: 'ist aufgestanden', emoji: '🧍‍♀️', es: '(levantarse)', es_perfekt: '(me he levantado)', en_verb: '(to get up)', examples: [{ de: 'Ich bin um 7 Uhr aufgestanden.', es: 'Me he levantado a las 7.', phonetics: '/ij bin um siben ua aufgueshtanden/' }, { de: 'Wann bist du heute aufgestanden?', es: '¿Cuándo te has levantado hoy?', phonetics: '/van bist du joite aufgueshtanden/' }, { de: 'Er ist sehr früh aufgestanden.', es: 'Él se ha levantado muy temprano.', phonetics: '/ea ist sea friu aufgueshtanden/' }, { de: 'Wir sind alle gleichzeitig aufgestanden.', es: 'Nos hemos levantado todos a la vez.', phonetics: '/via sind ale glaijtsaitij aufgueshtanden/' }, { de: 'Sie ist vom Sofa aufgestanden.', es: 'Ella se ha levantado del sofá.', phonetics: '/si ist fom sofa aufgueshtanden/' }] },
+                'einkaufen': { perfekt: 'hat eingekauft', emoji: '🛍️', es: '(hacer la compra)', es_perfekt: '(he comprado)', en_verb: '(to go shopping)', examples: [{ de: 'Ich habe im Supermarkt eingekauft.', es: 'He comprado en el supermercado.', phonetics: '/ij jabe im supamarkt ainguekauft/' }, { de: 'Hast du alles eingekauft?', es: '¿Has comprado todo?', phonetics: '/jast du ales ainguekauft/' }, { de: 'Wir haben für die Party eingekauft.', es: 'Hemos hecho la compra para la fiesta.', phonetics: '/via jaben fiua di parti ainguekauft/' }, { de: 'Sie hat am Samstag eingekauft.', es: 'Ella ha hecho la compra el sábado.', phonetics: '/si jat am samstak ainguekauft/' }, { de: 'Meine Mutter hat Obst eingekauft.', es: 'Mi madre ha comprado fruta.', phonetics: '/maine muta jat opst ainguekauft/' }] },
+                'fernsehen': { perfekt: 'hat ferngesehen', emoji: '📺', es: '(ver la televisión)', es_perfekt: '(he visto la tele)', en_verb: '(to watch TV)', examples: [{ de: 'Wir haben gestern Abend ferngesehen.', es: 'Vimos la televisión ayer por la noche.', phonetics: '/via jaben guestern abent feangueséen/' }, { de: 'Er hat zu lange ferngesehen.', es: 'Él ha visto la tele demasiado tiempo.', phonetics: '/ea jat tsu langue feangueséen/' }, { de: 'Was hast du ferngesehen?', es: '¿Qué has visto en la tele?', phonetics: '/vas jast du feangueséen/' }, { de: 'Ich habe einen Krimi ferngesehen.', es: 'He visto una película de suspense.', phonetics: '/ij jabe ainen krimi feangueséen/' }, { de: 'Habt ihr die Nachrichten ferngesehen?', es: '¿Habéis visto las noticias?', phonetics: '/japt ia di najrijten feangueséen/' }] },
+                'mitbringen': { perfekt: 'hat mitgebracht', emoji: '🎁', es: '(traer consigo)', es_perfekt: '(he traído)', en_verb: '(to bring along)', examples: [{ de: 'Hast du den Kuchen mitgebracht?', es: '¿Has traído el pastel?', phonetics: '/jast du den kujen mitguebrajt/' }, { de: 'Ich habe meinen Freund mitgebracht.', es: 'He traído a mi amigo.', phonetics: '/ij jabe mainen froint mitguebrajt/' }, { de: 'Sie hat Wein mitgebracht.', es: 'Ella ha traído vino.', phonetics: '/si jat vain mitguebrajt/' }, { de: 'Was sollen wir mitbringen?', es: '¿Qué deberíamos traer?', phonetics: '/vas solen via mitbringuen/' }, { de: 'Er hat nichts mitgebracht.', es: 'Él no ha traído nada.', phonetics: '/ea jat nijts mitguebrajt/' }] },
+                'anfangen': { perfekt: 'hat angefangen', emoji: '🎬', es: '(empezar)', es_perfekt: '(he empezado)', en_verb: '(to start/begin)', examples: [{ de: 'Der Kurs hat um 9 Uhr angefangen.', es: 'El curso ha empezado a las 9.', phonetics: '/dea kuas jat um noin ua anguefanguen/' }, { de: 'Wann hat der Film angefangen?', es: '¿Cuándo ha empezado la película?', phonetics: '/van jat dea film anguefanguen/' }, { de: 'Ich habe mit einem neuen Buch angefangen.', es: 'He empezado un nuevo libro.', phonetics: '/ij jabe mit ainem noien buj anguefanguen/' }, { de: 'Es hat angefangen zu regnen.', es: 'Ha empezado a llover.', phonetics: '/es jat anguefanguen tsu regnen/' }, { de: 'Wir haben pünktlich angefangen.', es: 'Hemos empezado puntuales.', phonetics: '/via jaben piunktlij anguefanguen/' }] },
+                'einladen': { perfekt: 'hat eingeladen', emoji: '💌', es: '(invitar)', es_perfekt: '(he invitado)', en_verb: '(to invite)', examples: [{ de: 'Ich habe meine Freunde eingeladen.', es: 'He invitado a mis amigos.', phonetics: '/ij jabe maine froinde aingueladen/' }, { de: 'Er hat mich zum Essen eingeladen.', es: 'Él me ha invitado a comer.', phonetics: '/ea jat mish tsum esen aingueladen/' }, { de: 'Wen hast du eingeladen?', es: '¿A quién has invitado?', phonetics: '/ven jast du aingueladen/' }, { de: 'Sie hat uns zur Party eingeladen.', es: 'Ella nos ha invitado a la fiesta.', phonetics: '/si jat uns tsua parti aingueladen/' }, { de: 'Wir haben viele Leute eingeladen.', es: 'Hemos invitado a mucha gente.', phonetics: '/via jaben file loite aingueladen/' }] },
+                'gefallen': { perfekt: 'hat gefallen', emoji: '👍', es: '(gustar)', es_perfekt: '(me ha gustado)', en_verb: '(to like/be pleasing)', examples: [{ de: 'Das Geschenk hat mir gefallen.', es: 'Me ha gustado el regalo.', phonetics: '/das gueshenk jat mía guefalen/' }, { de: 'Wie hat dir der Film gefallen?', es: '¿Qué te ha parecido la película?', phonetics: '/vi jat día dea film guefalen/' }, { de: 'Die Stadt hat uns sehr gut gefallen.', es: 'La ciudad nos ha gustado mucho.', phonetics: '/di shtat jat uns sea gut guefalen/' }, { de: 'Dein neues Auto hat mir gefallen.', es: 'Me ha gustado tu coche nuevo.', phonetics: '/dain noies auto jat mía guefalen/' }, { de: 'Es hat ihm nicht gefallen.', es: 'No le ha gustado a él.', phonetics: '/es jat im nijt guefalen/' }] },
+                'warten': { perfekt: 'hat gewartet', emoji: '⏳', es: '(esperar)', es_perfekt: '(he esperado)', en_verb: '(to wait)', examples: [{ de: 'Ich habe auf den Bus gewartet.', es: 'He esperado el autobús.', phonetics: '/ij jabe auf den bus guevartet/' }, { de: 'Wie lange hast du gewartet?', es: '¿Cuánto tiempo has esperado?', phonetics: '/vi langue jast du guevartet/' }, { de: 'Wir haben eine Stunde gewartet.', es: 'Hemos esperado una hora.', phonetics: '/via jaben aine shtunde guevartet/' }, { de: 'Er hat auf dich gewartet.', es: 'Él te ha esperado.', phonetics: '/ea jat auf dij guevartet/' }, { de: 'Sie haben geduldig gewartet.', es: 'Ellos han esperado pacientemente.', phonetics: '/si jaben gueduldij guevartet/' }] },
+                'tragen': { perfekt: 'hat getragen', emoji: '👕', es: '(llevar puesto/cargar)', es_perfekt: '(he llevado/cargado)', en_verb: '(to wear/carry)', examples: [{ de: 'Sie hat ein rotes Kleid getragen.', es: 'Ella ha llevado un vestido rojo.', phonetics: '/si jat ain rotes klaid guetraguen/' }, { de: 'Ich habe die schwere Tasche getragen.', es: 'He cargado la bolsa pesada.', phonetics: '/ij jabe di shvere tashe guetraguen/' }, { de: 'Was hast du gestern getragen?', es: '¿Qué llevabas puesto ayer?', phonetics: '/vas jast du guestern guetraguen/' }, { de: 'Er hat einen Anzug getragen.', es: 'Él ha llevado un traje.', phonetics: '/ea jat ainen antsug guetraguen/' }, { de: 'Wir haben die Kisten nach oben getragen.', es: 'Hemos subido las cajas.', phonetics: '/via jaben di kisten naj oben guetraguen/' }] }
             }
         ];
         
@@ -521,6 +643,7 @@
         ];
 
         // --- Elementos del DOM ---
+        const mainContainer = document.getElementById('main-container');
         const verbModal = document.getElementById('verb-modal');
         const infoModal = document.getElementById('info-modal');
         const levelIndicator = document.getElementById('level-indicator');
@@ -543,6 +666,7 @@
         const prevGroupBtn = document.getElementById('prev-group-btn');
         const nextGroupBtn = document.getElementById('next-group-btn');
         const groupIndicator = document.getElementById('group-indicator');
+        const progressBar = document.getElementById('progress-bar');
         const storyButton = document.getElementById('story-button');
         const storyContainer = document.getElementById('story-container');
         const storyContent = document.getElementById('story-content');
@@ -562,6 +686,7 @@
                                 <span class="german-word">${verb}</span>
                                 <span class="german-past">${data.perfekt}</span>
                                 <span class="spanish-translation">${data.es}</span>
+                                <span class="spanish-perfekt">${data.es_perfekt}</span>
                             </div>
                         </div>
                     </div>
@@ -573,16 +698,41 @@
             prevGroupBtn.disabled = index === 0;
             nextGroupBtn.disabled = index === verbGroups.length - 1;
 
-            // Actualizar el indicador de nivel
+            // Actualizar el indicador de nivel y el tema de color
             if (index < 4) { // Grupos 1-4 son A1
                 levelIndicator.textContent = 'A1';
+                document.body.classList.remove('theme-a2');
+                mainContainer.classList.remove('theme-a2');
             } else { // Grupos 5-6 son A2
                 levelIndicator.textContent = 'A2';
+                document.body.classList.add('theme-a2');
+                mainContainer.classList.add('theme-a2');
+            }
+            updateProgressBar(index);
+        }
+        
+        function setupProgressBar(container) {
+            container.innerHTML = ''; // Limpiar antes de añadir
+            for (let i = 0; i < verbGroups.length; i++) {
+                const step = document.createElement('div');
+                step.classList.add('progress-step');
+                container.appendChild(step);
             }
         }
 
+        function updateProgressBar(currentIndex) {
+            const steps = document.querySelectorAll('#progress-bar .progress-step');
+            steps.forEach((step, index) => {
+                if (index <= currentIndex) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+        }
+        
         // --- Funciones de Pronunciación (TTS) ---
-        function speak(text, lang = 'de-DE', rate = 0.5) { // Velocidad cambiada a 0.5
+        function speak(text, lang = 'de-DE', rate = 0.6) { // Velocidad cambiada a 0.6
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
@@ -617,8 +767,22 @@
             speakSentenceIcon.onclick = () => speak(sentence.de);
 
             exampleCounterSpan.textContent = `Beispiel ${index + 1} von ${maxExamples}`;
+            updateExampleProgressBar(index, maxExamples);
             prevExampleButton.disabled = index === 0;
             nextExampleButton.disabled = index === maxExamples - 1;
+        }
+
+        function updateExampleProgressBar(currentIndex, total) {
+            const container = document.getElementById('example-progress-bar');
+            container.innerHTML = '';
+            for (let i = 0; i < total; i++) {
+                const step = document.createElement('div');
+                step.classList.add('progress-step');
+                if (i <= currentIndex) {
+                    step.classList.add('active');
+                }
+                container.appendChild(step);
+            }
         }
 
         function openModalForVerb(verb) {
@@ -689,6 +853,7 @@
 
         // --- Inicialización ---
         document.addEventListener('DOMContentLoaded', () => {
+            setupProgressBar(progressBar);
             renderVerbGroup(currentGroupIndex);
         });
 
