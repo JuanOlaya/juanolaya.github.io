@@ -69,62 +69,13 @@
 </head>
 <body class="p-4 md:p-8">
 
-<div class="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6">
 
-  <!-- LEFT COLUMN: VISUALIZATIONS -->
-  <div class="flex flex-col gap-6">
-    <!-- SECTION 1: MAIN VISUALIZATION -->
+  <!-- NEW LEFT COLUMN: CONTROLS -->
+  <div class="lg:col-span-1 flex flex-col gap-6">
     <div class="panel">
-      <h2 class="text-xl font-bold text-slate-800 mb-4">Main Visualization</h2>
-      <canvas id="viz" width="800" height="360" aria-label="Scene: handle, lever, mass"></canvas>
-    </div>
-
-    <!-- SECTION 3: ANALYSIS -->
-    <div class="panel flex flex-col gap-6">
-      <h2 class="text-xl font-bold text-slate-800">Analysis</h2>
-      <hr/>
-      <div>
-        <h3 id="jointPlotTitle" class="font-semibold mb-2">Forces at the Joint</h3>
-        <div class="flex flex-col gap-4">
-          <canvas id="jointPlot" width="800" height="500" aria-label="Forces at the joint (global or handle frame)"></canvas>
-          <div id="forceFormulaBreakdownContainer" class="formula-breakdown grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div id="forceFormulaBreakdownFx"></div>
-            <div id="forceFormulaBreakdownFy"></div>
-          </div>
-        </div>
-      </div>
-      <hr/>
-      <div>
-        <h3 class="font-semibold mb-2">Torque vs. Lever Angle (ψ)</h3>
-        <div class="flex flex-col gap-4">
-          <canvas id="torquePlot" width="800" height="450" aria-label="Torque curve vs psi"></canvas>
-          <div id="torqueFormulaBreakdown" class="formula-breakdown"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- RIGHT COLUMN: PANEL -->
-  <div class="flex flex-col gap-6">
-    <div class="panel">
-      <h2 class="text-xl font-bold text-slate-800 mb-4">Panel</h2>
+      <h2 class="text-xl font-bold text-slate-800 mb-4">Controls</h2>
       <div class="flex flex-col gap-6">
-        <!-- Angle Readouts -->
-        <fieldset class="border border-slate-200 rounded-lg p-4 h-full">
-          <legend class="px-2 font-semibold">Angle Readouts</legend>
-          <div class="angle-breakdown flex flex-col justify-center h-full gap-2">
-              <div>
-                  <div class="text-slate-500 text-xs">Constants</div>
-                  <code>m=0.242, g=9.81, L=0.20</code>
-              </div>
-              <hr class="border-slate-200"/>
-              <div id="thetaHBreakdown"></div>
-              <div id="thetaSBreakdown"></div>
-              <div id="psiBreakdown"></div>
-              <div id="phiBreakdown"></div>
-          </div>
-        </fieldset>
-        <!-- Controls -->
         <fieldset class="border border-slate-200 rounded-lg p-4">
             <legend class="px-2 font-semibold">Simulation</legend>
             <div class="flex items-center justify-between mb-2">
@@ -139,7 +90,7 @@
         </fieldset>
         <fieldset class="border border-slate-200 rounded-lg p-4">
             <legend class="px-2 font-semibold">Force Visualization</legend>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="flex flex-col gap-4">
                 <div>
                     <label class="font-medium text-sm">Force Type</label>
                     <div class="flex flex-col gap-1 mt-1">
@@ -161,6 +112,82 @@
                         <label class="flex items-center gap-2" title="The Handle's Perspective (X_h and Y_h rotating)"><input type="radio" name="forceFrame" value="handle" checked> Handle Frame</label>
                     </div>
                 </div>
+            </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+
+  <!-- MIDDLE COLUMN: VISUALIZATIONS -->
+  <div class="lg:col-span-2 flex flex-col gap-6">
+    <!-- SECTION 1: MAIN VISUALIZATION -->
+    <div class="panel">
+      <h2 class="text-xl font-bold text-slate-800 mb-4">Main Visualization</h2>
+      <canvas id="viz" width="800" height="360" aria-label="Scene: handle, lever, mass"></canvas>
+    </div>
+
+    <!-- SECTION 3: ANALYSIS -->
+    <div class="panel flex flex-col gap-6">
+      <h2 class="text-xl font-bold text-slate-800">Analysis</h2>
+      <hr/>
+      <div>
+        <h3 id="jointPlotTitle" class="font-semibold mb-2">Forces at the Joint</h3>
+        <div class="flex flex-col gap-4">
+          <canvas id="jointPlot" width="800" height="500" aria-label="Forces at the joint (global or handle frame)"></canvas>
+        </div>
+      </div>
+      <hr/>
+      <div>
+        <h3 class="font-semibold mb-2" title="A torque is a twisting or turning force that makes something rotate around a pivot point.">Torque vs. Lever Angle (ψ)</h3>
+        <div class="flex flex-col gap-4">
+          <canvas id="torquePlot" width="800" height="450" aria-label="Torque curve vs psi"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN: READOUTS -->
+  <div class="lg:col-span-1 flex flex-col gap-6">
+    <div class="panel">
+      <h2 class="text-xl font-bold text-slate-800 mb-4">Readouts</h2>
+      <div class="flex flex-col gap-6">
+        <!-- Angle Readouts -->
+        <fieldset class="border border-slate-200 rounded-lg p-4 h-full">
+          <legend class="px-2 font-semibold">Angle Readouts</legend>
+          <div class="angle-breakdown flex flex-col justify-center h-full gap-2">
+              <div>
+                  <div class="text-slate-500 text-xs">Constants</div>
+                  <code>m=0.242, g=9.81, L=0.20</code>
+              </div>
+              <hr class="border-slate-200"/>
+              <div>
+                <div class="text-slate-500 text-xs">Definitions</div>
+                <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+                    <span><b style="color: #f59e0b;">θh</b> (theta):</span> <span>handle</span>
+                    <span><b style="color: #1e293b;">βs</b> (beta):</span> <span>servo</span>
+                    <span><b style="color: #3b82f6;">ψ</b> (psi):</span> <span>lever-mass</span>
+                    <span><b style="color: #ec4899;">α</b> (alpha):</span> <span>relative angle</span>
+                </div>
+              </div>
+              <hr class="border-slate-200"/>
+              <div id="thetaHBreakdown"></div>
+              <div id="betaSBreakdown"></div>
+              <div id="psiBreakdown"></div>
+              <div id="alphaBreakdown"></div>
+          </div>
+        </fieldset>
+        <!-- Force & Torque Calculations -->
+        <fieldset class="border border-slate-200 rounded-lg p-4 h-full">
+            <legend class="px-2 font-semibold">Calculations</legend>
+            <div class="angle-breakdown flex flex-col gap-2">
+                <div id="forceReadoutTitle" class="font-semibold text-sm" title="A force is a push or a pull that makes something move in a straight line."></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div id="forceReadoutBreakdownFx"></div>
+                    <div id="forceReadoutBreakdownFy"></div>
+                </div>
+                <hr class="border-slate-200"/>
+                <div class="font-semibold text-sm mt-2">Torque</div>
+                <div id="torqueReadoutBreakdown"></div>
             </div>
         </fieldset>
       </div>
@@ -189,24 +216,24 @@ class HapticLeverSystem {
   update(dtheta_hDeg, servoMode) {
     const theta_h = this.theta_h0 + dtheta_hDeg;
     
-    let thetaS;
+    let betaS;
     if (servoMode === 'shifting') {
-        thetaS = this._clamp(this.ratio * dtheta_hDeg, -this.servoLimit, this.servoLimit);
+        betaS = this._clamp(this.ratio * dtheta_hDeg, -this.servoLimit, this.servoLimit);
     } else { // fixed
-        thetaS = 0;
+        betaS = 0;
     }
     
-    const psi = this._normalizeAngle(theta_h + 180 + thetaS);
-    let phi = psi - theta_h;
-    phi = this._normalizeAngle(phi + 180) - 180;
+    const psi = this._normalizeAngle(theta_h + 180 + betaS);
+    let alpha = psi - theta_h;
+    alpha = this._normalizeAngle(alpha + 180) - 180;
 
     const psiRad = this._deg2rad(psi);
-    const phiRad = this._deg2rad(phi);
+    const alphaRad = this._deg2rad(alpha);
 
     const force_global_x = this.mg * Math.cos(psiRad);
     const force_global_y = this.mg * Math.sin(psiRad);
-    const force_handle_x = this.mg * Math.sin(phiRad);
-    const force_handle_y = this.mg * Math.cos(phiRad);
+    const force_handle_x = this.mg * Math.sin(alphaRad);
+    const force_handle_y = this.mg * Math.cos(alphaRad);
 
     const torque = this.mg * this.L * Math.sin(psiRad);
 
@@ -215,7 +242,7 @@ class HapticLeverSystem {
         dtheta_hDeg: dtheta_hDeg,
         servoMode: servoMode
       },
-      angles: { theta_h: theta_h, thetaS: thetaS, psi: psi, phi: phi },
+      angles: { theta_h: theta_h, betaS: betaS, psi: psi, alpha: alpha },
       forces: {
         mass_global: { x: force_global_x, y: force_global_y },
         mass_handle: { x: force_handle_x, y: force_handle_y },
@@ -246,19 +273,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const jointPlotCtx = jointPlotCanvas.getContext('2d');
   const torquePlotCtx = torquePlotCanvas.getContext('2d');
   
-  const forceFormulaBreakdownFx = document.getElementById('forceFormulaBreakdownFx');
-  const forceFormulaBreakdownFy = document.getElementById('forceFormulaBreakdownFy');
-  const torqueFormulaBreakdown = document.getElementById('torqueFormulaBreakdown');
+  const forceReadoutBreakdownFx = document.getElementById('forceReadoutBreakdownFx');
+  const forceReadoutBreakdownFy = document.getElementById('forceReadoutBreakdownFy');
+  const torqueReadoutBreakdown = document.getElementById('torqueReadoutBreakdown');
 
   const thetaHBreakdown = document.getElementById('thetaHBreakdown');
-  const thetaSBreakdown = document.getElementById('thetaSBreakdown');
+  const betaSBreakdown = document.getElementById('betaSBreakdown');
   const psiBreakdown = document.getElementById('psiBreakdown');
-  const phiBreakdown = document.getElementById('phiBreakdown');
+  const alphaBreakdown = document.getElementById('alphaBreakdown');
   
   const forceTypeRadios = document.querySelectorAll('input[name="forceType"]');
   const forceFrameRadios = document.querySelectorAll('input[name="forceFrame"]');
   const servoModeRadios = document.querySelectorAll('input[name="servoMode"]');
   const jointPlotTitle = document.getElementById('jointPlotTitle');
+  const forceReadoutTitle = document.getElementById('forceReadoutTitle');
 
   let isPlaying = false, rafId = null, lastT = null, phase = 0;
   const animAmp = 74, animOmega = 0.6;
@@ -266,8 +294,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Drawing Functions ---
 
   function drawArrow(ctx, x1, y1, x2, y2, color, lineWidth = 2) {
-    const head = 10; // Made arrowhead larger
-    const angle = Math.atan2(y2 - y1, x2 - x1); // Corrected angle calculation
+    const head = 10;
+    const angle = Math.atan2(y2 - y1, x2 - x1);
     ctx.save();
     ctx.strokeStyle = color;
     ctx.fillStyle = color;
@@ -285,9 +313,11 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.restore();
   }
   
-  function drawOrientationDial(ctx, centerX, centerY, theta_hRad, psiRad) {
+  function drawOrientationDial(ctx, centerX, centerY, theta_hRad, psiRad, alphaRad, betaSRad) {
     const dialRadius = 110;
-    const arcRadiusTheta = 70;
+    const arcRadiusBetaS = 40;
+    const arcRadiusAlpha = 55;
+    const arcRadiusThetaH = 70;
     const arcRadiusPsi = 85;
 
     ctx.save();
@@ -310,37 +340,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     ctx.fillStyle = '#475569';
-    ctx.font = '12px system-ui';
+    ctx.font = '14px system-ui';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     [0, 90, 180, 270].forEach(d => {
         const angleRad = hapticSystem._deg2rad(d);
-        const labelRadius = dialRadius + 15;
+        const labelRadius = dialRadius + 18;
         ctx.fillText(`${d}°`, centerX + labelRadius * Math.cos(angleRad), centerY - labelRadius * Math.sin(angleRad));
     });
 
     // Draw arc for theta_h (orange)
     ctx.strokeStyle = '#f59e0b';
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 4;
     ctx.beginPath();
-    ctx.arc(centerX, centerY, arcRadiusTheta, 0, -theta_hRad, true);
+    ctx.arc(centerX, centerY, arcRadiusThetaH, 0, -theta_hRad, true);
     ctx.stroke();
     const midThetaH = -theta_hRad / 2;
     ctx.fillStyle = '#f59e0b';
-    ctx.font = 'bold 12px system-ui';
-    ctx.fillText('θh', centerX + (arcRadiusTheta + 12) * Math.cos(midThetaH), centerY + (arcRadiusTheta + 12) * Math.sin(midThetaH));
+    ctx.font = 'bold 14px system-ui';
+    ctx.fillText('θh', centerX + (arcRadiusThetaH + 15) * Math.cos(midThetaH), centerY + (arcRadiusThetaH + 15) * Math.sin(midThetaH));
 
     // Draw arc for psi (blue)
     ctx.strokeStyle = '#3b82f6';
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 4;
     ctx.beginPath();
     ctx.arc(centerX, centerY, arcRadiusPsi, 0, -psiRad, true);
     ctx.stroke();
     const midPsi = -psiRad / 2;
     ctx.fillStyle = '#3b82f6';
-    ctx.font = 'bold 12px system-ui';
-    ctx.fillText('ψ', centerX + (arcRadiusPsi + 12) * Math.cos(midPsi), centerY + (arcRadiusPsi + 12) * Math.sin(midPsi));
+    ctx.font = 'bold 14px system-ui';
+    ctx.fillText('ψ', centerX + (arcRadiusPsi + 15) * Math.cos(midPsi), centerY + (arcRadiusPsi + 15) * Math.sin(midPsi));
     
+    // Draw arc for alpha (pink)
+    ctx.strokeStyle = '#ec4899'; // Pink color
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, arcRadiusAlpha, -theta_hRad, -psiRad, alphaRad > 0);
+    ctx.stroke();
+    const midAlpha = (-theta_hRad - psiRad) / 2;
+    ctx.fillStyle = '#ec4899';
+    ctx.font = 'bold 14px system-ui';
+    ctx.fillText('α', centerX + (arcRadiusAlpha - 15) * Math.cos(midAlpha), centerY + (arcRadiusAlpha - 15) * Math.sin(midAlpha));
+
+    // Draw arc for beta_s (black)
+    const antiHandleRad = theta_hRad + Math.PI;
+    ctx.strokeStyle = '#1e293b';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, arcRadiusBetaS, -antiHandleRad, -psiRad, betaSRad > 0);
+    ctx.stroke();
+    const midBetaS = (-antiHandleRad - psiRad) / 2;
+    ctx.fillStyle = '#1e293b';
+    ctx.font = 'bold 14px system-ui';
+    ctx.fillText('βs', centerX + (arcRadiusBetaS + 15) * Math.cos(midBetaS), centerY + (arcRadiusBetaS + 15) * Math.sin(midBetaS));
+
+
     ctx.restore();
   }
 
@@ -350,41 +404,43 @@ document.addEventListener('DOMContentLoaded', () => {
     vizCtx.clearRect(0, 0, w, h);
 
     const joint = { x: w / 2, y: h / 2 };
-    const LpxLever = 120;
-    const LpxHandle = 50;
+    const LpxLever = 140; // Increased size
+    const LpxHandle = 60; // Increased size
 
-    const { theta_h, psi } = state.angles;
+    const { theta_h, psi, alpha, betaS } = state.angles;
     const theta_hRad = hapticSystem._deg2rad(theta_h);
     const psiRad = hapticSystem._deg2rad(psi);
+    const alphaRad = hapticSystem._deg2rad(alpha);
+    const betaSRad = hapticSystem._deg2rad(betaS);
 
-    drawOrientationDial(vizCtx, joint.x, joint.y, theta_hRad, psiRad);
+    drawOrientationDial(vizCtx, joint.x, joint.y, theta_hRad, psiRad, alphaRad, betaSRad);
 
     const uLever = { x: Math.cos(psiRad), y: -Math.sin(psiRad) };
     const uHandleY = { x: Math.cos(theta_hRad), y: -Math.sin(theta_hRad) };
     const uHandleX = { x: Math.cos(theta_hRad - Math.PI/2), y: -Math.sin(theta_hRad - Math.PI/2) };
 
     vizCtx.save();
-    const axisLen = 80; // Longer
-    drawArrow(vizCtx, joint.x, joint.y, joint.x + axisLen * uHandleX.x, joint.y + axisLen * uHandleX.y, '#16a34a', 2); // Thicker
-    drawArrow(vizCtx, joint.x, joint.y, joint.x + axisLen * uHandleY.x, joint.y + axisLen * uHandleY.y, '#16a34a', 2); // Thicker
+    const axisLen = 90; // Longer
+    drawArrow(vizCtx, joint.x, joint.y, joint.x + axisLen * uHandleX.x, joint.y + axisLen * uHandleX.y, '#16a34a', 2.5); // Thicker
+    drawArrow(vizCtx, joint.x, joint.y, joint.x + axisLen * uHandleY.x, joint.y + axisLen * uHandleY.y, '#16a34a', 2.5); // Thicker
     vizCtx.fillStyle = '#10b981';
-    vizCtx.font = 'bold 14px system-ui'; // Bigger and bold
-    vizCtx.fillText('X_h', joint.x + (axisLen + 10) * uHandleX.x, joint.y + (axisLen + 10) * uHandleX.y);
-    vizCtx.fillText('Y_h', joint.x + (axisLen + 10) * uHandleY.x, joint.y + (axisLen + 10) * uHandleY.y);
+    vizCtx.font = 'bold 16px system-ui'; // Bigger and bold
+    vizCtx.fillText('X_h', joint.x + (axisLen + 12) * uHandleX.x, joint.y + (axisLen + 12) * uHandleX.y);
+    vizCtx.fillText('Y_h', joint.x + (axisLen + 12) * uHandleY.x, joint.y + (axisLen + 12) * uHandleY.y);
     vizCtx.restore();
 
     const leverEnd = { x: joint.x + LpxLever * uLever.x, y: joint.y + LpxLever * uLever.y };
-    drawArrow(vizCtx, joint.x, joint.y, leverEnd.x, leverEnd.y, '#3b82f6', 6);
+    drawArrow(vizCtx, joint.x, joint.y, leverEnd.x, leverEnd.y, '#3b82f6', 8);
     vizCtx.beginPath();
-    vizCtx.arc(leverEnd.x, leverEnd.y, 12, 0, 2 * Math.PI);
+    vizCtx.arc(leverEnd.x, leverEnd.y, 14, 0, 2 * Math.PI);
     vizCtx.fillStyle = '#64748b';
     vizCtx.fill();
     
     const handleEnd = { x: joint.x + LpxHandle * uHandleY.x, y: joint.y + LpxHandle * uHandleY.y };
-    drawArrow(vizCtx, joint.x, joint.y, handleEnd.x, handleEnd.y, '#f59e0b', 6);
+    drawArrow(vizCtx, joint.x, joint.y, handleEnd.x, handleEnd.y, '#f59e0b', 8);
 
     vizCtx.beginPath();
-    vizCtx.arc(joint.x, joint.y, 8, 0, 2 * Math.PI);
+    vizCtx.arc(joint.x, joint.y, 10, 0, 2 * Math.PI);
     vizCtx.fillStyle = '#1e293b';
     vizCtx.fill();
   }
@@ -451,12 +507,12 @@ document.addEventListener('DOMContentLoaded', () => {
     jointPlotCtx.font = '14px ui-monospace';
     jointPlotCtx.textAlign = 'center';
     jointPlotCtx.textBaseline = 'top';
-    jointPlotCtx.fillText(`${force.x.toFixed(2)} N`, origin.x + Fx / 2, origin.y + 8);
+    jointPlotCtx.fillText(`${force.x.toFixed(1)} N`, origin.x + Fx / 2, origin.y + 8);
 
     jointPlotCtx.fillStyle = '#f59e0b';
     jointPlotCtx.textAlign = 'left';
     jointPlotCtx.textBaseline = 'middle';
-    jointPlotCtx.fillText(`${force.y.toFixed(2)} N`, origin.x + 8, origin.y + Fy / 2);
+    jointPlotCtx.fillText(`${force.y.toFixed(1)} N`, origin.x + 8, origin.y + Fy / 2);
 
   }
 
@@ -536,34 +592,40 @@ document.addEventListener('DOMContentLoaded', () => {
     updateFormulas(state);
     updateAngleFormulas(state);
     
+    const plotTitle = document.getElementById('jointPlotTitle');
+    const readoutTitle = document.getElementById('forceReadoutTitle');
+    let titleText = '';
+
     if (forceFrame === 'global') {
-        jointPlotTitle.textContent = 'Forces at the Joint';
+        titleText = 'Forces at the Joint';
     } else {
         if (forceType === 'mass') {
-            jointPlotTitle.textContent = 'Mass Force at Handle Frame';
+            titleText = 'Mass Force at Handle Frame';
         } else {
-            jointPlotTitle.textContent = 'Reaction Force at Handle Frame';
+            titleText = 'Reaction Force at Handle Frame';
         }
     }
+    plotTitle.textContent = titleText;
+    readoutTitle.textContent = titleText;
   }
   
   function updateAngleFormulas(state) {
     const { dtheta_hDeg, servoMode } = state.inputs;
-    const { theta_h, thetaS, psi, phi } = state.angles;
+    const { theta_h, betaS, psi, alpha } = state.angles;
 
-    thetaHBreakdown.innerHTML = `<div class="text-slate-500 text-xs">θh = 90° + Δθh</div>
-                              <div>90° + ${dtheta_hDeg.toFixed(1)}° = <b>${theta_h.toFixed(2)}°</b></div>`;
+    thetaHBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #f59e0b; font-weight: 600;">θh</b> = 90° + <b style="color: #f59e0b; font-weight: 600;">Δθh</b></div>
+                              <div>90° + ${dtheta_hDeg.toFixed(1)}° = <b>${theta_h.toFixed(1)}°</b></div>`;
     
-    const unclampedThetaS = hapticSystem.ratio * dtheta_hDeg;
-    const thetaSFormula = (servoMode === 'shifting') ? '0.73·Δθh' : '0';
-    thetaSBreakdown.innerHTML = `<div class="text-slate-500 text-xs">θs = ${servoMode === 'shifting' ? 'clamp(0.73·Δθh, ±54°)' : '0'}</div>
-                                 <div>${servoMode === 'shifting' ? `clamp(${(hapticSystem.ratio * dtheta_hDeg).toFixed(1)}°)` : ''} = <b>${thetaS.toFixed(2)}°</b></div>`;
+    const unclampedBetaS = hapticSystem.ratio * dtheta_hDeg;
+    const betaSFormula = (servoMode === 'shifting') ? '0.73·Δθh' : '0';
+    betaSBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #1e293b; font-weight: 600;">βs</b> = ${servoMode === 'shifting' ? `clamp(0.73·<b style="color: #f59e0b; font-weight: 600;">Δθh</b>, ±54°)` : '0'}</div>
+                                 <div>${servoMode === 'shifting' ? `clamp(${(hapticSystem.ratio * dtheta_hDeg).toFixed(1)}°)` : ''} = <b>${betaS.toFixed(1)}°</b></div>`;
 
-    psiBreakdown.innerHTML = `<div class="text-slate-500 text-xs">ψ = θh + 180° + θs</div>
-                              <div>${theta_h.toFixed(1)}°+180°+${thetaS.toFixed(1)}° = <b>${psi.toFixed(2)}°</b></div>`;
+    psiBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #3b82f6; font-weight: 600;">ψ</b> = <b style="color: #f59e0b; font-weight: 600;">θh</b> + 180° + <b style="color: #1e293b; font-weight: 600;">βs</b></div>
+                              <div>${theta_h.toFixed(1)}°+180°+${betaS.toFixed(1)}° = <b>${psi.toFixed(1)}°</b></div>`;
 
-    phiBreakdown.innerHTML = `<div class="text-slate-500 text-xs">φ = ψ − θh</div>
-                                <div>${psi.toFixed(1)}° - ${theta_h.toFixed(1)}° = <b>${phi.toFixed(2)}°</b></div>`;
+    alphaBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #ec4899; font-weight: 600;">α</b> = <b style="color: #3b82f6; font-weight: 600;">ψ</b> − <b style="color: #f59e0b; font-weight: 600;">θh</b></div>
+                                <div>${psi.toFixed(1)}° - ${theta_h.toFixed(1)}° = <b>${alpha.toFixed(1)}°</b></div>`;
   }
 
   function updateFormulas(state) {
@@ -579,28 +641,28 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (forceFrame === 'global') {
         const force = state.forces[`${forceType}_global`];
-        fxHTML = `Fx = ${sign}(m·g·cos(ψ))<br>
-                  = ${sign}(${mg.toFixed(3)})·cos(${angles.psi.toFixed(1)}°)<br>
-                  = <b>${force.x.toFixed(3)} N</b>`;
-        fyHTML = `Fy = ${sign}(m·g·sin(ψ))<br>
-                  = ${sign}(${mg.toFixed(3)})·sin(${angles.psi.toFixed(1)}°)<br>
-                  = <b>${force.y.toFixed(3)} N</b>`;
+        fxHTML = `Fx = ${sign}(m·g·cos(<b style="color: #3b82f6; font-weight: 600;">ψ</b>))<br>
+                  = ${sign}(${mg.toFixed(1)})·cos(${angles.psi.toFixed(1)}°)<br>
+                  = <b>${force.x.toFixed(1)} N</b>`;
+        fyHTML = `Fy = ${sign}(m·g·sin(<b style="color: #3b82f6; font-weight: 600;">ψ</b>))<br>
+                  = ${sign}(${mg.toFixed(1)})·sin(${angles.psi.toFixed(1)}°)<br>
+                  = <b>${force.y.toFixed(1)} N</b>`;
     } else { // handle frame
         const force = state.forces[`${forceType}_handle`];
-        fxHTML = `Fx = ${sign}(m·g·sin(φ))<br>
-                  = ${sign}(${mg.toFixed(3)})·sin(${angles.phi.toFixed(1)}°)<br>
-                  = <b>${force.x.toFixed(3)} N</b>`;
-        fyHTML = `Fy = ${sign}(m·g·cos(φ))<br>
-                  = ${sign}(${mg.toFixed(3)})·cos(${angles.phi.toFixed(1)}°)<br>
-                  = <b>${force.y.toFixed(3)} N</b>`;
+        fxHTML = `Fx = ${sign}(m·g·sin(<b style="color: #ec4899; font-weight: 600;">α</b>))<br>
+                  = ${sign}(${mg.toFixed(1)})·sin(${angles.alpha.toFixed(1)}°)<br>
+                  = <b>${force.x.toFixed(1)} N</b>`;
+        fyHTML = `Fy = ${sign}(m·g·cos(<b style="color: #ec4899; font-weight: 600;">α</b>))<br>
+                  = ${sign}(${mg.toFixed(1)})·cos(${angles.alpha.toFixed(1)}°)<br>
+                  = <b>${force.y.toFixed(1)} N</b>`;
     }
     
-    forceFormulaBreakdownFx.innerHTML = fxHTML;
-    forceFormulaBreakdownFy.innerHTML = fyHTML;
+    forceReadoutBreakdownFx.innerHTML = fxHTML;
+    forceReadoutBreakdownFy.innerHTML = fyHTML;
     
-    torqueFormulaBreakdown.innerHTML = `τ = m·g·L·sin(ψ)<br>
-                                        = (${mg.toFixed(3)})·(${L.toFixed(2)})·sin(${angles.psi.toFixed(1)}°)<br>
-                                        = <b>${torque.toFixed(3)} N·m</b>`;
+    torqueReadoutBreakdown.innerHTML = `<div class="formula-breakdown">τ = m·g·L·sin(<b style="color: #3b82f6; font-weight: 600;">ψ</b>)<br>
+                                        = (${mg.toFixed(1)})·(${L.toFixed(1)})·sin(${angles.psi.toFixed(1)}°)<br>
+                                        = <b>${torque.toFixed(1)} N·m</b></div>`;
   }
 
   // --- Animation Logic ---
