@@ -1,29 +1,44 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8" />
-<title>Haptic Lever — Joint & Handle Forces (4 columns, 15% smaller)</title>
+<title>Haptic Lever — Joint & Handle Forces (4 columnas + separador)</title>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <style>
-  :root { --panel:#f8fafc; --fg:#111827; --axis:#9ca3af; }
+  :root { --panel:#f8fafc; --fg:#111827; --axis:#9ca3af; --divider:#d1d5db; }
   body { margin:24px; font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; color:var(--fg); }
 
-  /* Four columns:
-     1) Left plots
-     2) Panel for left plots
-     3) Fixed-phi plots
-     4) Panel for fixed-phi plots */
+  /* 5 columnas:
+     1) Plots izq   2) Panel izq   3) Separador   4) Plots der   5) Panel der  */
   .layout {
     display: grid;
-    grid-template-columns: minmax(520px, 833px) 420px minmax(520px, 833px) 420px;
+    grid-template-columns: minmax(520px, 833px) 420px 1px minmax(520px, 833px) 420px;
     gap: 16px;
     align-items: start;
+  }
+
+  /* Títulos de grupo que abarcan 2 columnas */
+  .groupTitle {
+    font-weight: 700; font-size: 18px; color: #111827;
+    margin: 0 0 4px 2px;
+  }
+  .groupTitle.left { grid-column: 1 / span 2; }
+  .groupTitle.right { grid-column: 4 / span 2; }
+
+  /* Separador vertical */
+  .v-sep {
+    grid-column: 3 / span 1;
+    background: var(--divider);
+    align-self: stretch;
+    min-height: 100%;
+    width: 1px;
+    border-radius: 1px;
   }
 
   .panel { background:var(--panel); border:1px solid #e5e7eb; border-radius:10px; padding:14px; }
   .plots { display:grid; grid-auto-rows:min-content; gap:90px; }
 
-  /* All canvases are now 833px wide (15% smaller than 980) */
+  /* Canvases 15% más angostos (833px) */
   canvas { display:block; background:#fff; border-radius:8px; width:833px; }
   #viz, #vizFixed { height:420px; }
   #globalPlot, #globalPlotFixed { height:240px; }
@@ -44,55 +59,69 @@
   legend{ padding:0 6px; font-weight:600; }
   label.radio{ display:inline-flex; align-items:center; gap:6px; margin-right:12px; }
 
-  /* 2 line-heights above & below each separator */
+  /* 2 líneas arriba y abajo de cada separador horizontal */
   hr.divider { border:0; border-top:1px solid #d1d5db; margin: 2.8em 10px; }
 
   #err { position:fixed; left:12px; bottom:12px; background:#fee2e2; color:#991b1b;
          border:1px solid #fecaca; padding:8px 10px; border-radius:8px; font-size:12px;
          display:none; max-width:90vw; z-index:9999; }
+
+  /* Responsive */
+  @media (max-width: 1400px){
+    .layout{ grid-template-columns: 1fr; }
+    .groupTitle.left, .groupTitle.right { grid-column: 1 / span 1; }
+    .v-sep { display:none; }
+    canvas { width:100%; }
+  }
 </style>
 </head>
 <body>
+
 <div class="layout">
 
-  <!-- COLUMN 1: PLOTS (tracker rotates φ) -->
-  <div class="panel plots">
-    <canvas id="viz" width="833" height="420" aria-label="Scene: handle, lever, mass"></canvas>
-    <canvas id="globalPlot" width="833" height="240" aria-label="Forces in lever arm at joint (Cartesian)"></canvas>
-    <canvas id="handlePlot" width="833" height="240" aria-label="Perceived forces at the handle"></canvas>
-    <canvas id="torque" width="833" height="220" aria-label="Torque curve vs psi (0–360 deg)"></canvas>
+  <!-- Título grupo IZQUIERDA (Columnas 1 y 2) -->
+  <h2 class="groupTitle left">Sistema con tracker activo (phi rota)</h2>
+  <!-- Título grupo DERECHA (Columnas 4 y 5) -->
+  <h2 class="groupTitle right">Sistema con phi fijo (solo servo thetas)</h2>
+
+  <!-- COLUMNA 1: PLOTS (tracker rota phi) -->
+  <div class="panel plots" style="grid-column:1;">
+    <canvas id="viz" width="833" height="420" aria-label="Escena: handle, lever, masa"></canvas>
+    <canvas id="globalPlot" width="833" height="240" aria-label="Fuerzas en el joint (Cartesianas)"></canvas>
+    <canvas id="handlePlot" width="833" height="240" aria-label="Fuerzas percibidas en el handle"></canvas>
+    <canvas id="torque" width="833" height="220" aria-label="Torque vs psi (0–360°)"></canvas>
   </div>
 
-  <!-- COLUMN 2: PANEL (for Column 1) -->
-  <div class="panel">
+  <!-- COLUMNA 2: PANEL (para Columna 1) -->
+  <div class="panel" style="grid-column:2;">
     <div class="inputs">
 
       <fieldset>
-        <legend>Plot shows (joint)</legend>
+        <legend>Plot del joint</legend>
         <label class="radio"><input type="radio" name="globalMode" value="mass" checked> Forces in lever arm at joint — Mass force (panel)</label>
         <label class="radio"><input type="radio" name="globalMode" value="reaction"> Forces in lever arm at joint — Joint reaction (−panel)</label>
         <div class="small">
-          Math axes: 0° at +X, CCW • φ₀=90° • Δφ=slider • φ=φ₀+Δφ • θs=clamp(0.73·Δφ, ±54°) • ψ=φ+180°+θs
+          Ejes matematicos: 0° en +X, CCW • phi0=90° • dphi=slider • phi=phi0+dphi • thetas=clamp(0.73*dphi, ±54°) • psi=phi+180°+thetas
         </div>
       </fieldset>
 
       <fieldset>
-        <legend>Handle forces view</legend>
+        <legend>Vista fuerzas en handle</legend>
         <label class="radio"><input type="radio" name="handleView" value="global" checked> Global axes</label>
         <label class="radio"><input type="radio" name="handleView" value="handle"> Handle frame</label>
-        <div class="small">Δ = ψ − φ is shown; formulas & steps switch with the view.</div>
+        <div class="small">Delta = psi − phi; formulas cambian con la vista.</div>
       </fieldset>
 
       <fieldset>
-        <legend>Force shown</legend>
+        <legend>Fuerza mostrada</legend>
         <label class="radio"><input type="radio" name="handleForceType" value="mass" checked> Mass force</label>
-        <label class="radio"><input type="radio" name="handleForceType" value="reaction"> Reaction force (what user feels)</label>
-        <div class="small">Reaction = −Mass (same magnitude, opposite direction).</div>
+        <label class="radio"><input type="radio" name="handleForceType" value="reaction"> Reaction force (lo que siente el usuario)</label>
+        <div class="small">Reaction = −Mass (misma magnitud, direccion opuesta).</div>
       </fieldset>
 
       <div class="row">
-        <label for="slider"><strong>Tracker slider Δφ (deg)</strong></label>
-        <span class="small">Range Δφ ∈ [−74°, +74°] → φ ∈ [16°, 164°]</span>
+        <label for="slider"><strong>Tracker slider dphi (deg)</strong></label>
+        <span class="small">dphi en [−74°, +74°] → phi en [16°, 164°]</span>
       </div>
       <input id="slider" type="range" min="-74" max="74" step="0.1" value="0" />
 
@@ -100,7 +129,7 @@
         <div>
           <label for="len">Lever length L (m):</label><br/>
           <input id="len" type="number" step="0.01" min="0.01" value="0.20" />
-          <div class="small">τ = m·g·L·sin(ψ)</div>
+          <div class="small">tau = m*g*L*sin(psi)</div>
         </div>
         <div class="buttons" style="margin-left:auto;">
           <button id="playPauseBtn" aria-pressed="false"><span aria-hidden="true">▶</span> Play</button>
@@ -110,18 +139,18 @@
 
       <div class="readout" style="margin-top:8px;">
         <div><strong>Angles</strong></div>
-        <div>Δφ (slider): <code id="dphiOut">0.00°</code> <span class="small">(range [−74°, +74°])</span></div>
-        <div>φ (tracker): <code id="phiOut">90.00°</code> <span class="small">(range [16°, 164°])</span></div>
-        <div>θs (servo): <code id="thetasOut">0.00°</code> <span class="small">(clamped [−54°, +54°])</span></div>
-        <div>ψ = φ + 180° + θs: <code id="psiOut">270.00°</code></div>
-        <div>Δ = ψ − φ: <code id="deltaOut">180.00°</code></div>
+        <div>dphi (slider): <code id="dphiOut">0.00°</code> <span class="small">(range [−74°, +74°])</span></div>
+        <div>phi (tracker): <code id="phiOut">90.00°</code> <span class="small">(range [16°, 164°])</span></div>
+        <div>thetas (servo): <code id="thetasOut">0.00°</code> <span class="small">(clamped [−54°, +54°])</span></div>
+        <div>psi = phi + 180° + thetas: <code id="psiOut">270.00°</code></div>
+        <div>Delta = psi − phi: <code id="deltaOut">180.00°</code></div>
 
         <hr class="divider">
 
-        <div><strong>Forces in lever arm at joint (rotates with ψ)</strong></div>
+        <div><strong>Forces in lever arm at joint (rotates with psi)</strong></div>
         <div>Fx,L: <code id="fxgOut">0.00 N</code></div>
         <div>Fy,L: <code id="fygOut">0.00 N</code></div>
-        <div class="small">Fx,L = m·g·cos(ψ), Fy,L = m·g·sin(ψ)</div>
+        <div class="small">Fx,L = m*g*cos(psi), Fy,L = m*g*sin(psi)</div>
         <div id="fxgStep" class="small" style="margin-top:6px;"></div>
         <div id="fygStep" class="small" style="margin-top:4px;"></div>
 
@@ -137,8 +166,8 @@
         <hr class="divider">
 
         <div><strong>Torque at the joint</strong></div>
-        <div>τ: <code id="tauOut">0.000 N·m</code></div>
-        <div class="small">τ = m·g·L·sin(ψ)</div>
+        <div>tau: <code id="tauOut">0.000 N·m</code></div>
+        <div class="small">tau = m*g*L*sin(psi)</div>
         <div id="tauStep1" class="small" style="margin-top:6px;"></div>
         <div id="tauStep2" class="small" style="margin-top:4px;"></div>
         <div id="tauStep3" class="small" style="margin-top:4px;"></div>
@@ -146,57 +175,60 @@
     </div>
   </div>
 
-  <!-- COLUMN 3: FIXED-φ PLOTS (φ fixed at 90°, θs rotates) -->
-  <div class="panel plots">
-    <canvas id="vizFixed" width="833" height="420" aria-label="Scene (phi fixed, servo rotates)"></canvas>
-    <canvas id="globalPlotFixed" width="833" height="240" aria-label="Joint forces (fixed phi)"></canvas>
-    <canvas id="handlePlotFixed" width="833" height="240" aria-label="Handle forces (fixed phi)"></canvas>
+  <!-- COLUMNA 3: SEPARADOR -->
+  <div class="v-sep"></div>
+
+  <!-- COLUMNA 4: PLOTS phi fijo (phi=90°, solo rota thetas) -->
+  <div class="panel plots" style="grid-column:4;">
+    <canvas id="vizFixed" width="833" height="420" aria-label="Escena (phi fijo, rota servo)"></canvas>
+    <canvas id="globalPlotFixed" width="833" height="240" aria-label="Fuerzas en el joint (phi fijo)"></canvas>
+    <canvas id="handlePlotFixed" width="833" height="240" aria-label="Fuerzas en el handle (phi fijo)"></canvas>
   </div>
 
-  <!-- COLUMN 4: PANEL (for Column 3) -->
-  <div class="panel">
+  <!-- COLUMNA 5: PANEL para Columna 4 -->
+  <div class="panel" style="grid-column:5;">
     <div class="inputs">
 
       <fieldset>
-        <legend>Fixed-φ: Plot shows (joint)</legend>
+        <legend>phi fijo: plot del joint</legend>
         <label class="radio"><input type="radio" name="globalModeFixed" value="mass" checked> Joint — Mass force (panel)</label>
         <label class="radio"><input type="radio" name="globalModeFixed" value="reaction"> Joint — Reaction (−panel)</label>
-        <div class="small">Here φ is fixed at 90°. θs = clamp(0.73·Δφ, ±54°). ψ_fixed = φ_fixed + 180° + θs.</div>
+        <div class="small">Aqui phi_fixed = 90°. thetas = clamp(0.73*dphi, ±54°). psi_fixed = phi_fixed + 180° + thetas.</div>
       </fieldset>
 
       <fieldset>
-        <legend>Fixed-φ: Handle forces view</legend>
+        <legend>phi fijo: vista fuerzas en handle</legend>
         <label class="radio"><input type="radio" name="handleViewFixed" value="global" checked> Global axes</label>
         <label class="radio"><input type="radio" name="handleViewFixed" value="handle"> Handle frame</label>
-        <div class="small">Δ_fixed = ψ_fixed − φ_fixed (with φ_fixed = 90°).</div>
+        <div class="small">Delta_fixed = psi_fixed − phi_fixed (con phi_fixed = 90°).</div>
       </fieldset>
 
       <fieldset>
-        <legend>Fixed-φ: Force shown</legend>
+        <legend>phi fijo: fuerza mostrada</legend>
         <label class="radio"><input type="radio" name="handleForceTypeFixed" value="mass" checked> Mass force</label>
         <label class="radio"><input type="radio" name="handleForceTypeFixed" value="reaction"> Reaction force</label>
         <div class="small">Reaction = −Mass.</div>
       </fieldset>
 
       <div class="readout" style="margin-top:8px;">
-        <div><strong>Angles (fixed-φ column)</strong></div>
-        <div>φ_fixed: <code id="phiOutF">90.00°</code></div>
-        <div>θs (servo): <code id="thetasOutF">0.00°</code> <span class="small">(clamped [−54°, +54°])</span></div>
-        <div>ψ_fixed = φ_fixed + 180° + θs: <code id="psiOutF">270.00°</code></div>
-        <div>Δ_fixed = ψ_fixed − φ_fixed: <code id="deltaOutF">180.00°</code></div>
+        <div><strong>Angles (phi fijo)</strong></div>
+        <div>phi_fixed: <code id="phiOutF">90.00°</code></div>
+        <div>thetas (servo): <code id="thetasOutF">0.00°</code> <span class="small">(clamped [−54°, +54°])</span></div>
+        <div>psi_fixed = phi_fixed + 180° + thetas: <code id="psiOutF">270.00°</code></div>
+        <div>Delta_fixed = psi_fixed − phi_fixed: <code id="deltaOutF">180.00°</code></div>
 
         <hr class="divider">
 
-        <div><strong>Joint forces (fixed-φ, rotates with ψ_fixed)</strong></div>
+        <div><strong>Joint forces (phi fijo, rota con psi_fixed)</strong></div>
         <div>Fx,L_fixed: <code id="fxgOutF">0.00 N</code></div>
         <div>Fy,L_fixed: <code id="fygOutF">0.00 N</code></div>
-        <div class="small">Fx,L_fixed = m·g·cos(ψ_fixed), Fy,L_fixed = m·g·sin(ψ_fixed)</div>
+        <div class="small">Fx,L_fixed = m*g*cos(psi_fixed), Fy,L_fixed = m*g*sin(psi_fixed)</div>
         <div id="fxgStepF" class="small" style="margin-top:6px;"></div>
         <div id="fygStepF" class="small" style="margin-top:4px;"></div>
 
         <hr class="divider">
 
-        <div><strong id="handleTitleF">Handle forces (fixed-φ) — Global axes</strong></div>
+        <div><strong id="handleTitleF">Handle forces (phi fijo) — Global axes</strong></div>
         <div>Fx,h_fixed: <code id="fxhOutF">0.00 N</code></div>
         <div>Fy,h_fixed: <code id="fyhOutF">0.00 N</code></div>
         <div id="handleFormulaHintF" class="small" style="margin-top:6px;"></div>
@@ -215,13 +247,13 @@
 (function(){
   "use strict";
 
-  /*================= Constants =================*/
+  // ===== Constantes =====
   var m = 0.242, g = 9.81, mg = m*g;
-  var phi0 = 90;                      // handle up at neutral
-  var ratio = 0.73, servoLimit = 54;  // θs = clamp(0.73·Δφ, ±54°)
-  var kF = 35;                        // px per Newton (scene arrows)
+  var phi0 = 90;                      // handle arriba en neutro
+  var ratio = 0.73, servoLimit = 54;  // thetas = clamp(0.73*dphi, ±54°)
+  var kF = 35;                        // px por Newton (flechas escena)
 
-  /*================= Error banner =================*/
+  // ===== Banner de errores =====
   var errBox = document.getElementById('err');
   window.addEventListener('error', function(e){
     errBox.textContent = 'Error: ' + (e.message || e);
@@ -229,18 +261,18 @@
     try { console.error(e.error || e.message || e); } catch(_) {}
   });
 
-  /*================= DOM refs — Column 1 canvases =================*/
+  // ===== DOM refs — Columna 1 =====
   var viz = document.getElementById('viz');
   var gplot = document.getElementById('globalPlot');
   var hplot = document.getElementById('handlePlot');
   var tq = document.getElementById('torque');
 
-  /*================= DOM refs — Column 3 canvases =================*/
+  // ===== DOM refs — Columna 4 =====
   var vizFixed = document.getElementById('vizFixed');
   var gplotF = document.getElementById('globalPlotFixed');
   var hplotF = document.getElementById('handlePlotFixed');
 
-  /*================= Controls (Column 2) =================*/
+  // ===== Controles (Columna 2) =====
   var slider = document.getElementById('slider');
   var lenInput = document.getElementById('len');
   var playPauseBtn = document.getElementById('playPauseBtn');
@@ -273,7 +305,7 @@
   var handleRadios = document.querySelectorAll('input[name="handleView"]');
   var handleForceRadios = document.querySelectorAll('input[name="handleForceType"]');
 
-  /*================= Controls (Column 4) =================*/
+  // ===== Controles (Columna 5) =====
   var phiOutF = document.getElementById('phiOutF');
   var thetasOutF = document.getElementById('thetasOutF');
   var psiOutF = document.getElementById('psiOutF');
@@ -295,12 +327,12 @@
   var handleRadiosF = document.querySelectorAll('input[name="handleViewFixed"]');
   var handleForceRadiosF = document.querySelectorAll('input[name="handleForceTypeFixed"]');
 
-  /*================= State =================*/
+  // ===== Estado =====
   var dphiDeg = parseFloat(slider.value);
   var isPlaying = false, rafId = null, lastT = null, phase = 0;
   var amp = 74, omega = 0.6;
 
-  /*================= Helpers =================*/
+  // ===== Helpers =====
   function deg2rad(d){ return d*Math.PI/180; }
   function normDeg360(d){ return ((d%360)+360)%360; }
 
@@ -309,7 +341,7 @@
     var h = (c.getAttribute('height')|0);
     c.width  = w; c.height = h;
     var ctx = c.getContext('2d');
-    ctx.setTransform(1,0,0,1,0,0); // identity
+    ctx.setTransform(1,0,0,1,0,0);
     return ctx;
   }
   function clearCanvas(ctx, el){
@@ -317,7 +349,6 @@
     var h = (el.getAttribute('height')|0);
     ctx.clearRect(0,0,w,h);
   }
-
   function arrow(ctx,x1,y1,x2,y2,color){
     var head=7, a=Math.atan2(y2-y1,x2-x1);
     ctx.save();
@@ -329,20 +360,18 @@
     ctx.closePath(); ctx.fill();
     ctx.restore();
   }
-
   function withCenteredMathAxes(ctx, el, drawFn){
     var w = (el.getAttribute('width')|0);
     var h = (el.getAttribute('height')|0);
     ctx.save(); ctx.translate(w/2, h/2); ctx.scale(1,-1); drawFn(ctx, w, h); ctx.restore();
   }
-
   function getRadioValue(name){
     var list = document.querySelectorAll('input[name="'+name+'"]');
     for (var i=0; i<list.length; i++) if (list[i].checked) return list[i].value;
     return null;
   }
 
-  /*================= Scene (Column 1) =================*/
+  // ===== Escena (Columna 1) =====
   var jointLeft = {x:(833/2), y:160};
   var LpxLever=180, LpxHandle=LpxLever/3;
 
@@ -371,7 +400,7 @@
     ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+(R-16)*ux2, cy+(R-16)*uy2); ctx.stroke();
     ctx.fillStyle='#111827'; ctx.beginPath(); ctx.arc(cx,cy,3,0,Math.PI*2); ctx.fill();
     ctx.fillStyle='#DC2626'; ctx.font='12px system-ui,sans-serif';
-    ctx.fillText(label||'ψ', cx+(R-24)*ux2+10, cy+(R-24)*uy2+4);
+    ctx.fillText(label||'psi', cx+(R-24)*ux2+10, cy+(R-24)*uy2+4);
     ctx.restore();
   }
 
@@ -382,11 +411,11 @@
     ctx.beginPath(); ctx.arc(cx,cy,R,start,end,true); ctx.stroke();
     var mid=(start+end)/2;
     ctx.fillStyle='#16A34A'; ctx.font='12px system-ui,sans-serif';
-    ctx.fillText(label||'φ', cx+(R+12)*Math.cos(mid), cy+(R+12)*Math.sin(mid)+4);
+    ctx.fillText(label||'phi', cx+(R+12)*Math.cos(mid), cy+(R+12)*Math.sin(mid)+4);
     ctx.restore();
   }
 
-  function drawViz(phiDeg, thetaSDeg, psiDeg){
+  function drawViz(phiDeg, thetasDeg, psiDeg){
     var ctx=setupCanvas(viz);
     clearCanvas(ctx, viz);
 
@@ -394,7 +423,7 @@
     ctx.save(); ctx.fillStyle='#111827'; ctx.font='bold 14px system-ui,sans-serif';
     ctx.fillText('Scene — Handle & Lever', 12, 20); ctx.restore();
 
-    var phi=deg2rad(phiDeg), theta_s=deg2rad(thetaSDeg), psi=deg2rad(psiDeg);
+    var phi=deg2rad(phiDeg), theta_s=deg2rad(thetasDeg), psi=deg2rad(psiDeg);
 
     var uYh = { x: Math.cos(phi), y: -Math.sin(phi) };
     var uXh = { x: Math.sin(phi), y:  Math.cos(phi) };
@@ -405,14 +434,14 @@
     var handleEndX = jointLeft.x + LpxHandle * uYh.x;
     var handleEndY = jointLeft.y + LpxHandle * uYh.y;
 
-    // y=0 guide
+    // y=0 guia
     ctx.save(); ctx.strokeStyle='#9CA3AF'; ctx.lineWidth=2;
     ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(w,0); ctx.stroke(); ctx.restore();
 
-    drawPsiDial(ctx, jointLeft.x, jointLeft.y, psi, 'ψ');
-    drawPhiArc(ctx, jointLeft.x, jointLeft.y, phi, 'φ');
+    drawPsiDial(ctx, jointLeft.x, jointLeft.y, psi, 'psi');
+    drawPhiArc(ctx, jointLeft.x, jointLeft.y, phi, 'phi');
 
-    // Hub + horns
+    // Hub + brazos
     ctx.save(); ctx.strokeStyle='#A3A3A3'; ctx.lineWidth=3;
     var horn=28;
     ctx.beginPath(); ctx.arc(jointLeft.x,jointLeft.y,22,0,Math.PI*2); ctx.stroke();
@@ -421,7 +450,7 @@
     ctx.beginPath(); ctx.moveTo(jointLeft.x,jointLeft.y); ctx.lineTo(jointLeft.x+horn*uYh.x, jointLeft.y+horn*uYh.y); ctx.stroke();
     ctx.restore();
 
-    // Handle axes
+    // Ejes del handle
     ctx.save(); ctx.strokeStyle='#16A34A'; ctx.lineWidth=2;
     var ax=42;
     ctx.beginPath();
@@ -435,10 +464,10 @@
     ctx.fillText('Y_h', jointLeft.x+ax*uYh.x+4, jointLeft.y+ax*uYh.y+4);
     ctx.restore();
 
-    // Joint dot
+    // Joint
     ctx.save(); ctx.fillStyle='#111827'; ctx.beginPath(); ctx.arc(jointLeft.x,jointLeft.y,4,0,Math.PI*2); ctx.fill(); ctx.restore();
 
-    // Handle bar + grip
+    // Handle + grip
     ctx.save(); ctx.strokeStyle='#F59E0B'; ctx.lineWidth=6; ctx.lineCap='round';
     ctx.beginPath(); ctx.moveTo(jointLeft.x,jointLeft.y); ctx.lineTo(handleEndX,handleEndY); ctx.stroke();
     var gripW=36, gripH=12, angleHandle=Math.atan2(uYh.y, uYh.x);
@@ -447,38 +476,38 @@
     ctx.beginPath(); ctx.rect(-gripW/2,-gripH/2,gripW,gripH); ctx.fill(); ctx.stroke();
     ctx.restore();
 
-    // Lever + mass
+    // Lever + masa
     ctx.save(); ctx.strokeStyle='#2563EB'; ctx.lineWidth=6; ctx.lineCap='round';
     ctx.beginPath(); ctx.moveTo(jointLeft.x,jointLeft.y); ctx.lineTo(leverEndX,leverEndY); ctx.stroke(); ctx.restore();
     ctx.save(); ctx.fillStyle='#6B7280'; ctx.beginPath(); ctx.arc(leverEndX,leverEndY,12,0,Math.PI*2); ctx.fill(); ctx.restore();
 
-    // Weight (visual down)
+    // Peso (visual hacia abajo)
     arrow(ctx, leverEndX,leverEndY, leverEndX, leverEndY+Math.max(25, mg*35*0.25), '#0F766E');
 
-    // Red arrows (from θs in handle frame)
+    // Flechas rojas (componentes en ejes del handle por thetas)
     var Fx_handle_h = - mg * Math.sin(theta_s);
     var Fy_handle_h = - mg * Math.cos(theta_s);
     arrow(ctx, jointLeft.x,jointLeft.y, jointLeft.x+Fx_handle_h*kF*uXh.x, jointLeft.y+Fx_handle_h*kF*uXh.y, '#B91C1C');
     arrow(ctx, jointLeft.x,jointLeft.y, jointLeft.x+Fy_handle_h*kF*uYh.x, jointLeft.y+Fy_handle_h*kF*uYh.y, '#B91C1C');
   }
 
-  /*================= Scene (Column 3: φ fixed) =================*/
+  // ===== Escena phi fija (Columna 4) =====
   var jointRight = {x:(833/2), y:160};
-  function drawVizFixed(thetaSDeg){
+  function drawVizFixed(thetasDeg){
     var ctx = setupCanvas(vizFixed);
     clearCanvas(ctx, vizFixed);
 
     var w = (vizFixed.getAttribute('width')|0);
     ctx.save(); ctx.fillStyle='#111827'; ctx.font='bold 14px system-ui,sans-serif';
-    ctx.fillText('Scene — Servo-only (φ fixed at 90°)', 12, 20); ctx.restore();
+    ctx.fillText('Scene — Servo-only (phi fixed at 90°)', 12, 20); ctx.restore();
 
-    var phiFixedDeg = phi0;                                 // φ stays fixed
-    var psiFixedDeg = normDeg360(phiFixedDeg + 180 + thetaSDeg);
+    var phiFixedDeg = phi0;
+    var psiFixedDeg = normDeg360(phiFixedDeg + 180 + thetasDeg);
     var phiF = deg2rad(phiFixedDeg);
-    var theta_s = deg2rad(thetaSDeg);
+    var theta_s = deg2rad(thetasDeg);
     var psiF = deg2rad(psiFixedDeg);
 
-    var uYh = { x: Math.cos(phiF), y: -Math.sin(phiF) }; // fixed handle axes
+    var uYh = { x: Math.cos(phiF), y: -Math.sin(phiF) };
     var uXh = { x: Math.sin(phiF), y:  Math.cos(phiF) };
     var uBar= { x: Math.cos(psiF), y: -Math.sin(psiF) };
 
@@ -490,10 +519,10 @@
     ctx.save(); ctx.strokeStyle='#9CA3AF'; ctx.lineWidth=2;
     ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(w,0); ctx.stroke(); ctx.restore();
 
-    drawPsiDial(ctx, jointRight.x, jointRight.y, psiF, 'ψ');
-    drawPhiArc(ctx, jointRight.x, jointRight.y, phiF, 'φ (fixed)');
+    drawPsiDial(ctx, jointRight.x, jointRight.y, psiF, 'psi');
+    drawPhiArc(ctx, jointRight.x, jointRight.y, phiF, 'phi (fixed)');
 
-    // Hub + horns
+    // Hub + brazos
     ctx.save(); ctx.strokeStyle='#A3A3A3'; ctx.lineWidth=3;
     var horn=28;
     ctx.beginPath(); ctx.arc(jointRight.x,jointRight.y,22,0,Math.PI*2); ctx.stroke();
@@ -502,7 +531,7 @@
     ctx.beginPath(); ctx.moveTo(jointRight.x,jointRight.y); ctx.lineTo(jointRight.x+horn*uYh.x, jointRight.y+horn*uYh.y); ctx.stroke();
     ctx.restore();
 
-    // Fixed handle axes
+    // Ejes del handle fijos
     ctx.save(); ctx.strokeStyle='#16A34A'; ctx.lineWidth=2;
     var ax=42;
     ctx.beginPath();
@@ -516,10 +545,10 @@
     ctx.fillText('Y_h', jointRight.x+ax*uYh.x+4, jointRight.y+ax*uYh.y+4);
     ctx.restore();
 
-    // Joint dot
+    // Joint
     ctx.save(); ctx.fillStyle='#111827'; ctx.beginPath(); ctx.arc(jointRight.x,jointRight.y,4,0,Math.PI*2); ctx.fill(); ctx.restore();
 
-    // Handle bar + grip (fixed)
+    // Handle + grip (fijo)
     ctx.save(); ctx.strokeStyle='#F59E0B'; ctx.lineWidth=6; ctx.lineCap='round';
     ctx.beginPath(); ctx.moveTo(jointRight.x,jointRight.y); ctx.lineTo(handleEndX,handleEndY); ctx.stroke();
     var gripW=36, gripH=12, angleHandle=Math.atan2(uYh.y, uYh.x);
@@ -528,32 +557,31 @@
     ctx.beginPath(); ctx.rect(-gripW/2,-gripH/2,gripW,gripH); ctx.fill(); ctx.stroke();
     ctx.restore();
 
-    // Lever + mass (rotates with θs only)
+    // Lever + masa (rota con thetas)
     ctx.save(); ctx.strokeStyle='#2563EB'; ctx.lineWidth=6; ctx.lineCap='round';
     ctx.beginPath(); ctx.moveTo(jointRight.x,jointRight.y); ctx.lineTo(leverEndX,leverEndY); ctx.stroke(); ctx.restore();
     ctx.save(); ctx.fillStyle='#6B7280'; ctx.beginPath(); ctx.arc(leverEndX,leverEndY,12,0,Math.PI*2); ctx.fill(); ctx.restore();
 
-    // Weight (visual down)
+    // Peso (visual)
     arrow(ctx, leverEndX,leverEndY, leverEndX, leverEndY+Math.max(25, mg*35*0.25), '#0F766E');
 
-    // Red arrows (θs in fixed handle frame)
+    // Flechas rojas (componentes por thetas)
     var Fx_handle_h = - mg * Math.sin(theta_s);
     var Fy_handle_h = - mg * Math.cos(theta_s);
     arrow(ctx, jointRight.x,jointRight.y, jointRight.x+Fx_handle_h*kF*uXh.x, jointRight.y+Fx_handle_h*kF*uXh.y, '#B91C1C');
     arrow(ctx, jointRight.x,jointRight.y, jointRight.x+Fy_handle_h*kF*uYh.x, jointRight.y+Fy_handle_h*kF*uYh.y, '#B91C1C');
   }
 
-  /*================= Joint plot (Column 1) =================*/
+  // ===== Plot del joint (Columna 1) =====
   function drawGlobalPlot(Fx_panel, Fy_panel, mode){
     var ctx=setupCanvas(gplot);
     clearCanvas(ctx, gplot);
 
-    var Fx = Fx_panel, Fy = Fy_panel;
-    if (mode === 'reaction'){ Fx = -Fx_panel; Fy = -Fy_panel; }
+    var Fx = (mode === 'reaction') ? -Fx_panel : Fx_panel;
+    var Fy = (mode === 'reaction') ? -Fy_panel : Fy_panel;
 
     var plotW=(gplot.getAttribute('width')|0)-46-16;
     var plotH=(gplot.getAttribute('height')|0)-16-32;
-
     var maxN = Math.max(2.5, Math.ceil((Math.max(Math.abs(Fx_panel),Math.abs(Fy_panel), mg)*1.1)*10)/10);
 
     withCenteredMathAxes(ctx, gplot, function(c){
@@ -586,24 +614,23 @@
       c.save(); c.scale(1,-1);
       c.fillStyle='#111827'; c.font='bold 13px system-ui,sans-serif';
       var title = (mode==='mass')
-        ? 'Forces in lever arm at joint (rotates with ψ) — Mass force (panel)'
-        : 'Forces in lever arm at joint (rotates with ψ) — Joint reaction (−panel)';
+        ? 'Forces in lever arm at joint (rotates with psi) — Mass force (panel)'
+        : 'Forces in lever arm at joint (rotates with psi) — Joint reaction (−panel)';
       c.fillText(title, -halfW+8, -halfH-8);
       c.restore();
     });
   }
 
-  /*================= Joint plot (Column 3: φ fixed) =================*/
+  // ===== Plot del joint (Columna 4, phi fijo) =====
   function drawGlobalPlotFixed(Fx_panel, Fy_panel, mode){
     var ctx=setupCanvas(gplotF);
     clearCanvas(ctx, gplotF);
 
-    var Fx = Fx_panel, Fy = Fy_panel;
-    if (mode === 'reaction'){ Fx = -Fx_panel; Fy = -Fy_panel; }
+    var Fx = (mode === 'reaction') ? -Fx_panel : Fx_panel;
+    var Fy = (mode === 'reaction') ? -Fy_panel : Fy_panel;
 
     var plotW=(gplotF.getAttribute('width')|0)-46-16;
     var plotH=(gplotF.getAttribute('height')|0)-16-32;
-
     var maxN = Math.max(2.5, Math.ceil((Math.max(Math.abs(Fx_panel),Math.abs(Fy_panel), mg)*1.1)*10)/10);
 
     withCenteredMathAxes(ctx, gplotF, function(c){
@@ -636,14 +663,14 @@
       c.save(); c.scale(1,-1);
       c.fillStyle='#111827'; c.font='bold 13px system-ui,sans-serif';
       var title = (mode==='mass')
-        ? 'Joint forces (fixed φ) — Mass force (panel)'
-        : 'Joint forces (fixed φ) — Reaction (−panel)';
+        ? 'Joint forces (fixed phi) — Mass force (panel)'
+        : 'Joint forces (fixed phi) — Reaction (−panel)';
       c.fillText(title, -halfW+8, -halfH-8);
       c.restore();
     });
   }
 
-  /*================= Handle plots =================*/
+  // ===== Plots del handle =====
   function drawHandlePlotGlobal(Fx_g, Fy_g){
     var ctx=setupCanvas(hplot);
     clearCanvas(ctx, hplot);
@@ -747,7 +774,7 @@
 
       c.save(); c.scale(1,-1);
       c.fillStyle='#111827'; c.font='bold 13px system-ui,sans-serif';
-      c.fillText('Handle forces (fixed φ) — Global axes', -halfW+8, -halfH-8);
+      c.fillText('Handle forces (fixed phi) — Global axes', -halfW+8, -halfH-8);
       c.restore();
     });
   }
@@ -783,12 +810,12 @@
 
       c.save(); c.scale(1,-1);
       c.fillStyle='#111827'; c.font='bold 13px system-ui,sans-serif';
-      c.fillText('Handle forces (fixed φ) — Handle frame', -halfW+8, -halfH-8);
+      c.fillText('Handle forces (fixed phi) — Handle frame', -halfW+8, -halfH-8);
       c.restore();
     });
   }
 
-  /*================= Torque plot (Column 1) =================*/
+  // ===== Torque (Columna 1) =====
   function drawTorque(psiRad, Lm){
     var ctx=setupCanvas(tq);
     clearCanvas(ctx, tq);
@@ -837,14 +864,14 @@
     ctx.restore();
 
     ctx.save(); ctx.fillStyle='#111827'; ctx.font='bold 13px system-ui,sans-serif';
-    ctx.fillText('Torque vs ψ', padL+8, padB+h+18);
+    ctx.fillText('Torque vs psi', padL+8, padB+h+18);
     ctx.fillStyle='#374151'; ctx.font='12px system-ui,sans-serif';
-    ctx.fillText('ψ (degrees)', padL+w-98, padB+h+16);
-    ctx.fillText('τ (N·m)', 8, Y(tauMax)-6);
+    ctx.fillText('psi (degrees)', padL+w-98, padB+h+16);
+    ctx.fillText('tau (N·m)', 8, Y(tauMax)-6);
     ctx.restore();
   }
 
-  /*================= Play / Pause / Stop =================*/
+  // ===== Play / Pause / Stop =====
   function setPlayUI(p){
     isPlaying=p;
     playPauseBtn.setAttribute('aria-pressed', p?'true':'false');
@@ -871,32 +898,27 @@
     dphiDeg=0; slider.value='0'; phase=0; lastT=null; drawAll();
   });
 
-  /*================= Main draw =================*/
+  // ===== Dibujo principal =====
   function drawAll(){
-    // Angles (Column 1)
-    var phiDeg = phi0 + dphiDeg;                           // φ = 90° + Δφ
-    var thetaSDeg = Math.max(-servoLimit, Math.min(servoLimit, ratio * dphiDeg)); // θs clamp
-    var psiDeg = normDeg360(phiDeg + 180 + thetaSDeg);     // ψ = φ + 180 + θs
+    // Columna 1
+    var phiDeg = phi0 + dphiDeg;
+    var thetasDeg = Math.max(-servoLimit, Math.min(servoLimit, ratio * dphiDeg));
+    var psiDeg = normDeg360(phiDeg + 180 + thetasDeg);
     var psi = deg2rad(psiDeg);
     var phi = deg2rad(phiDeg);
 
-    // Δ = ψ − φ (signed for display)
     var deltaDeg = ((psiDeg - phiDeg + 540) % 360) - 180;
 
-    // Joint force (global) — mass
     var FxL = mg * Math.cos(psi);
     var FyL = mg * Math.sin(psi);
 
-    // Handle-frame projection (same vector)
-    var Fx_h_proj = FxL * (-Math.sin(phi)) + FyL * ( Math.cos(phi)); // = mg·sin(Δ)
-    var Fy_h_proj = FxL * ( Math.cos(phi)) + FyL * ( Math.sin(phi)); // = mg·cos(Δ)
+    var Fx_h_proj = FxL * (-Math.sin(phi)) + FyL * ( Math.cos(phi));
+    var Fy_h_proj = FxL * ( Math.cos(phi)) + FyL * ( Math.sin(phi));
 
-    // Torque
     var Lm = Math.max(0.01, parseFloat((lenInput.value||'').replace(',', '.')) || 0.20);
     var tauVal = mg * Lm * Math.sin(psi);
 
-    // ===== Column 1 drawings =====
-    drawViz(phiDeg, thetaSDeg, psiDeg);
+    drawViz(phiDeg, thetasDeg, psiDeg);
 
     var modeJoint = getRadioValue('globalMode') || 'mass';
     drawGlobalPlot(FxL, FyL, modeJoint);
@@ -914,9 +936,9 @@
       if(handleForceType==='mass'){
         drawHandlePlotGlobal(FxL, FyL);
         handleTitle.textContent='Perceived forces at the handle (global axes)';
-        handleFormulaHint.innerHTML = 'In global: Fx,h ≡ Fx,L and Fy,h ≡ Fy,L.<br>Fx,L = m·g·cos(ψ), Fy,L = m·g·sin(ψ).';
-        fxhStep.innerHTML = 'Fx,h = Fx,L = ('+mgStr+')·cos('+psiDeg.toFixed(2)+'°) = '+(FxL.toFixed(3))+' N';
-        fyhStep.innerHTML = 'Fy,h = Fy,L = ('+mgStr+')·sin('+psiDeg.toFixed(2)+'°) = '+(FyL.toFixed(3))+' N';
+        handleFormulaHint.innerHTML = 'In global: Fx,h = Fx,L y Fy,h = Fy,L. Fx,L = m*g*cos(psi), Fy,L = m*g*sin(psi).';
+        fxhStep.innerHTML = 'Fx,h = mg*cos(psi) = ('+mgStr+')*cos('+psiDeg.toFixed(2)+'°) = '+(FxL.toFixed(3))+' N';
+        fyhStep.innerHTML = 'Fy,h = mg*sin(psi) = ('+mgStr+')*sin('+psiDeg.toFixed(2)+'°) = '+(FyL.toFixed(3))+' N';
         fxhOut.textContent = FxL.toFixed(2)+' N';
         fyhOut.textContent = FyL.toFixed(2)+' N';
       } else {
@@ -924,8 +946,8 @@
         drawHandlePlotGlobal(FxR, FyR);
         handleTitle.textContent='Perceived forces at the handle (global axes) — Reaction';
         handleFormulaHint.innerHTML = 'Fx,h = −Fx,L,  Fy,h = −Fy,L.';
-        fxhStep.innerHTML = 'Fx,h = −('+mgStr+')·cos('+psiDeg.toFixed(2)+'°) = '+(FxR.toFixed(3))+' N';
-        fyhStep.innerHTML = 'Fy,h = −('+mgStr+')·sin('+psiDeg.toFixed(2)+'°) = '+(FyR.toFixed(3))+' N';
+        fxhStep.innerHTML = 'Fx,h = −mg*cos(psi) = −('+mgStr+')*cos('+psiDeg.toFixed(2)+'°) = '+(FxR.toFixed(3))+' N';
+        fyhStep.innerHTML = 'Fy,h = −mg*sin(psi) = −('+mgStr+')*sin('+psiDeg.toFixed(2)+'°) = '+(FyR.toFixed(3))+' N';
         fxhOut.textContent = FxR.toFixed(2)+' N';
         fyhOut.textContent = FyR.toFixed(2)+' N';
       }
@@ -933,62 +955,58 @@
       if(handleForceType==='mass'){
         drawHandlePlotHandleFrame(Fx_h_proj, Fy_h_proj);
         handleTitle.textContent='Perceived forces at the handle (handle frame)';
-        handleFormulaHint.innerHTML = 'Δ = ψ − φ;<br>Fx,h = m·g·sin(Δ),  Fy,h = m·g·cos(Δ).';
-        fxhStep.innerHTML = 'Fx,h = ('+mgStr+')·sin(Δ) = ('+mgStr+')·('+sinDelta+')';
-        fyhStep.innerHTML = 'Fy,h = ('+mgStr+')·cos(Δ) = ('+mgStr+')·('+cosDelta+')';
+        handleFormulaHint.innerHTML = 'Delta = psi − phi; Fx,h = mg*sin(Delta),  Fy,h = mg*cos(Delta).';
+        fxhStep.innerHTML = 'Fx,h = ('+mgStr+')*sin(Delta) = '+(mg*Math.sin(deg2rad(deltaDeg))).toFixed(3)+' N';
+        fyhStep.innerHTML = 'Fy,h = ('+mgStr+')*cos(Delta) = '+(mg*Math.cos(deg2rad(deltaDeg))).toFixed(3)+' N';
         fxhOut.textContent = Fx_h_proj.toFixed(2)+' N';
         fyhOut.textContent = Fy_h_proj.toFixed(2)+' N';
       } else {
         var Fx_h_react = -Fx_h_proj, Fy_h_react = -Fy_h_proj;
         drawHandlePlotHandleFrame(Fx_h_react, Fy_h_react);
         handleTitle.textContent='Perceived forces at the handle (handle frame) — Reaction';
-        handleFormulaHint.innerHTML = 'Reaction = −Mass in any frame.<br>Fx,h = −m·g·sin(Δ),  Fy,h = −m·g·cos(Δ).';
-        fxhStep.innerHTML = 'Fx,h = −('+mgStr+')·sin(Δ) = −('+mgStr+')·('+sinDelta+')';
-        fyhStep.innerHTML = 'Fy,h = −('+mgStr+')·cos(Δ) = −('+mgStr+')·('+cosDelta+')';
+        handleFormulaHint.innerHTML = 'Reaction = −Mass: Fx,h = −mg*sin(Delta),  Fy,h = −mg*cos(Delta).';
+        fxhStep.innerHTML = 'Fx,h = −('+mgStr+')*sin(Delta) = '+(-mg*Math.sin(deg2rad(deltaDeg))).toFixed(3)+' N';
+        fyhStep.innerHTML = 'Fy,h = −('+mgStr+')*cos(Delta) = '+(-mg*Math.cos(deg2rad(deltaDeg))).toFixed(3)+' N';
         fxhOut.textContent = Fx_h_react.toFixed(2)+' N';
         fyhOut.textContent = Fy_h_react.toFixed(2)+' N';
       }
     }
 
-    // Joint readouts
+    // Readouts joint
     fxgOut.textContent = FxL.toFixed(2)+' N';
     fygOut.textContent = FyL.toFixed(2)+' N';
-    fxgStep.innerHTML = 'Fx,L = m·g·cos(ψ) = ('+m.toFixed(3)+'·'+g.toFixed(2)+')·cos('+psiDeg.toFixed(2)+'°) = ('+mg.toFixed(3)+')·('+cosPsi+') = '+FxL.toFixed(3)+' N';
-    fygStep.innerHTML = 'Fy,L = m·g·sin(ψ) = ('+m.toFixed(3)+'·'+g.toFixed(2)+')·sin('+psiDeg.toFixed(2)+'°) = ('+mg.toFixed(3)+')·('+sinPsi+') = '+FyL.toFixed(3)+' N';
+    fxgStep.innerHTML = 'Fx,L = m*g*cos(psi) = ('+m.toFixed(3)+'*'+g.toFixed(2)+')*cos('+psiDeg.toFixed(2)+'°) = ('+mg.toFixed(3)+')*('+cosPsi+') = '+FxL.toFixed(3)+' N';
+    fygStep.innerHTML = 'Fy,L = m*g*sin(psi) = ('+m.toFixed(3)+'*'+g.toFixed(2)+')*sin('+psiDeg.toFixed(2)+'°) = ('+mg.toFixed(3)+')*('+sinPsi+') = '+FyL.toFixed(3)+' N';
 
     // Torque (panel)
-    var sinPsiStr = Math.sin(psi).toFixed(4);
     tauOutEl.textContent = tauVal.toFixed(3) + ' N·m';
-    tauStep1.textContent = 'τ = m·g·L·sin(ψ)';
-    tauStep2.textContent = ' = ('+m.toFixed(3)+'·'+g.toFixed(2)+')·('+Lm.toFixed(2)+')·sin('+psiDeg.toFixed(2)+'°)';
-    tauStep3.textContent = ' = ('+mg.toFixed(3)+')·('+Lm.toFixed(2)+')·('+sinPsiStr+') = '+tauVal.toFixed(3)+' N·m';
+    tauStep1.textContent = 'tau = m*g*L*sin(psi)';
+    tauStep2.textContent = ' = ('+m.toFixed(3)+'*'+g.toFixed(2)+')*('+Lm.toFixed(2)+')*sin('+psiDeg.toFixed(2)+'°)';
+    tauStep3.textContent = ' = ('+mg.toFixed(3)+')*('+Lm.toFixed(2)+')*('+Math.sin(psi).toFixed(4)+') = '+tauVal.toFixed(3)+' N·m';
 
-    // Angles readout
+    // Angles
     dphiOut.textContent = dphiDeg.toFixed(2)+'°';
-    phiOut.textContent   = phiDeg.toFixed(2)+'°';
-    thetasOut.textContent= thetaSDeg.toFixed(2)+'°';
+    phiOut.textContent   = (phi0 + dphiDeg).toFixed(2)+'°';
+    thetasOut.textContent= thetasDeg.toFixed(2)+'°';
     psiOut.textContent   = psiDeg.toFixed(2)+'°';
     deltaOut.textContent = deltaDeg.toFixed(2)+'°';
 
     // Torque plot
     drawTorque(psi, Lm);
 
-    // ===== Column 3 (φ fixed) =====
+    // ===== Columna 4 (phi fijo) =====
     var phiFixedDeg = phi0;
-    var psiFixedDeg = normDeg360(phiFixedDeg + 180 + thetaSDeg);
+    var psiFixedDeg = normDeg360(phiFixedDeg + 180 + thetasDeg);
     var psiF = deg2rad(psiFixedDeg);
     var phiF = deg2rad(phiFixedDeg);
 
-    // Forces for fixed-φ
     var FxL_fixed = mg * Math.cos(psiF);
     var FyL_fixed = mg * Math.sin(psiF);
 
-    // Projection into fixed handle frame (φ_fixed)
-    var Fx_h_proj_F = FxL_fixed * (-Math.sin(phiF)) + FyL_fixed * ( Math.cos(phiF)); // = mg·sin(Δ_fixed)
-    var Fy_h_proj_F = FxL_fixed * ( Math.cos(phiF)) + FyL_fixed * ( Math.sin(phiF)); // = mg·cos(Δ_fixed)
+    var Fx_h_proj_F = FxL_fixed * (-Math.sin(phiF)) + FyL_fixed * ( Math.cos(phiF));
+    var Fy_h_proj_F = FxL_fixed * ( Math.cos(phiF)) + FyL_fixed * ( Math.sin(phiF));
 
-    // Draw fixed scenes/plots
-    drawVizFixed(thetaSDeg);
+    drawVizFixed(thetasDeg);
 
     var modeJointF = getRadioValue('globalModeFixed') || 'mass';
     drawGlobalPlotFixed(FxL_fixed, FyL_fixed, modeJointF);
@@ -999,46 +1017,36 @@
     var mgStrF = mg.toFixed(3),
         cosPsiF = Math.cos(psiF).toFixed(4),
         sinPsiF = Math.sin(psiF).toFixed(4),
-        deltaFixedDeg = ((psiFixedDeg - phiFixedDeg + 540) % 360) - 180,
-        sinDeltaF = Math.sin(deg2rad(deltaFixedDeg)).toFixed(4),
-        cosDeltaF = Math.cos(deg2rad(deltaFixedDeg)).toFixed(4);
+        deltaFixedDeg = ((psiFixedDeg - phiFixedDeg + 540) % 360) - 180;
 
-    // Update fixed-φ readouts
     phiOutF.textContent   = phiFixedDeg.toFixed(2)+'°';
-    thetasOutF.textContent= thetaSDeg.toFixed(2)+'°';
+    thetasOutF.textContent= thetasDeg.toFixed(2)+'°';
     psiOutF.textContent   = psiFixedDeg.toFixed(2)+'°';
     deltaOutF.textContent = deltaFixedDeg.toFixed(2)+'°';
 
-    // Joint readouts (fixed)
     fxgOutF.textContent = FxL_fixed.toFixed(2)+' N';
     fygOutF.textContent = FyL_fixed.toFixed(2)+' N';
-    fxgStepF.innerHTML  = 'Fx,L_fixed = m·g·cos(ψ_fixed) = ('+m.toFixed(3)+'·'+g.toFixed(2)+')·cos('+psiFixedDeg.toFixed(2)+'°) = ('+mgStrF+')·('+cosPsiF+') = '+FxL_fixed.toFixed(3)+' N';
-    fygStepF.innerHTML  = 'Fy,L_fixed = m·g·sin(ψ_fixed) = ('+m.toFixed(3)+'·'+g.toFixed(2)+')·sin('+psiFixedDeg.toFixed(2)+'°) = ('+mgStrF+')·('+sinPsiF+') = '+FyL_fixed.toFixed(3)+' N';
+    fxgStepF.innerHTML  = 'Fx,L_fixed = m*g*cos(psi_fixed) = ('+m.toFixed(3)+'*'+g.toFixed(2)+')*cos('+psiFixedDeg.toFixed(2)+'°) = ('+mgStrF+')*('+cosPsiF+') = '+FxL_fixed.toFixed(3)+' N';
+    fygStepF.innerHTML  = 'Fy,L_fixed = m*g*sin(psi_fixed) = ('+m.toFixed(3)+'*'+g.toFixed(2)+')*sin('+psiFixedDeg.toFixed(2)+'°) = ('+mgStrF+')*('+sinPsiF+') = '+FyL_fixed.toFixed(3)+' N';
 
-    // Handle plot (fixed)
     if(handleModeF==='global'){
       var Fx_show = (handleForceTypeF==='mass')? FxL_fixed : -FxL_fixed;
       var Fy_show = (handleForceTypeF==='mass')? FyL_fixed : -FyL_fixed;
       drawHandlePlotGlobalFixed(Fx_show, Fy_show);
 
       handleTitleF.textContent = (handleForceTypeF==='mass')
-        ? 'Handle forces (fixed φ) — Global axes'
-        : 'Handle forces (fixed φ) — Global axes — Reaction';
+        ? 'Handle forces (fixed phi) — Global axes'
+        : 'Handle forces (fixed phi) — Global axes — Reaction';
 
       handleFormulaHintF.innerHTML = (handleForceTypeF==='mass')
-        ? 'In global: Fx,h_fixed ≡ Fx,L_fixed,  Fy,h_fixed ≡ Fy,L_fixed.'
-        : 'Reaction: Fx,h_fixed = −Fx,L_fixed,  Fy,h_fixed = −Fy,L_fixed.';
-
-      fxhStepF.innerHTML = (handleForceTypeF==='mass')
-        ? 'Fx,h_fixed = Fx,L_fixed = ('+mgStrF+')·cos('+psiFixedDeg.toFixed(2)+'°) = '+FxL_fixed.toFixed(3)+' N'
-        : 'Fx,h_fixed = −Fx,L_fixed = −[('+mgStrF+')·cos('+psiFixedDeg.toFixed(2)+'°)] = '+(-FxL_fixed).toFixed(3)+' N';
-
-      fyhStepF.innerHTML = (handleForceTypeF==='mass')
-        ? 'Fy,h_fixed = Fy,L_fixed = ('+mgStrF+')·sin('+psiFixedDeg.toFixed(2)+'°) = '+FyL_fixed.toFixed(3)+' N'
-        : 'Fy,h_fixed = −Fy,L_fixed = −[('+mgStrF+')·sin('+psiFixedDeg.toFixed(2)+'°)] = '+(-FyL_fixed).toFixed(3)+' N';
+        ? 'En global: Fx,h_fixed = Fx,L_fixed,  Fy,h_fixed = Fy,L_fixed.'
+        : 'Reaccion: Fx,h_fixed = -Fx,L_fixed,  Fy,h_fixed = -Fy,L_fixed.';
 
       fxhOutF.textContent = Fx_show.toFixed(2)+' N';
       fyhOutF.textContent = Fy_show.toFixed(2)+' N';
+
+      fxhStepF.textContent = 'Fx,h_fixed = ' + Fx_show.toFixed(3) + ' N';
+      fyhStepF.textContent = 'Fy,h_fixed = ' + Fy_show.toFixed(3) + ' N';
 
     } else {
       var Fx_show_h = (handleForceTypeF==='mass')? Fx_h_proj_F : -Fx_h_proj_F;
@@ -1046,27 +1054,22 @@
       drawHandlePlotHandleFrameFixed(Fx_show_h, Fy_show_h);
 
       handleTitleF.textContent = (handleForceTypeF==='mass')
-        ? 'Handle forces (fixed φ) — Handle frame'
-        : 'Handle forces (fixed φ) — Handle frame — Reaction';
+        ? 'Handle forces (fixed phi) — Handle frame'
+        : 'Handle forces (fixed phi) — Handle frame — Reaction';
 
       handleFormulaHintF.innerHTML = (handleForceTypeF==='mass')
-        ? 'Δ_fixed = ψ_fixed − φ_fixed; Fx,h_fixed = m·g·sin(Δ_fixed), Fy,h_fixed = m·g·cos(Δ_fixed).'
-        : 'Reaction: Fx,h_fixed = −m·g·sin(Δ_fixed), Fy,h_fixed = −m·g·cos(Δ_fixed).';
-
-      fxhStepF.innerHTML = (handleForceTypeF==='mass')
-        ? 'Fx,h_fixed = ('+mgStrF+')·sin(Δ_fixed) = ('+mgStrF+')·('+sinDeltaF+') = '+(mg*Math.sin(deg2rad(deltaFixedDeg))).toFixed(3)+' N'
-        : 'Fx,h_fixed = −('+mgStrF+')·sin(Δ_fixed) = −('+mgStrF+')·('+sinDeltaF+') = '+(-mg*Math.sin(deg2rad(deltaFixedDeg))).toFixed(3)+' N';
-
-      fyhStepF.innerHTML = (handleForceTypeF==='mass')
-        ? 'Fy,h_fixed = ('+mgStrF+')·cos(Δ_fixed) = ('+mgStrF+')·('+cosDeltaF+') = '+(mg*Math.cos(deg2rad(deltaFixedDeg))).toFixed(3)+' N'
-        : 'Fy,h_fixed = −('+mgStrF+')·cos(Δ_fixed) = −('+mgStrF+')·('+cosDeltaF+') = '+(-mg*Math.cos(deg2rad(deltaFixedDeg))).toFixed(3)+' N';
+        ? 'Delta_fixed = psi_fixed − phi_fixed; Fx,h_fixed = m*g*sin(Delta_fixed), Fy,h_fixed = m*g*cos(Delta_fixed).'
+        : 'Reaccion: Fx,h_fixed = -m*g*sin(Delta_fixed), Fy,h_fixed = -m*g*cos(Delta_fixed).';
 
       fxhOutF.textContent = Fx_show_h.toFixed(2)+' N';
       fyhOutF.textContent = Fy_show_h.toFixed(2)+' N';
+
+      fxhStepF.textContent = 'Fx,h_fixed = ' + Fx_show_h.toFixed(3) + ' N';
+      fyhStepF.textContent = 'Fy,h_fixed = ' + Fy_show_h.toFixed(3) + ' N';
     }
   }
 
-  /*================= Listeners & Init =================*/
+  // ===== Listeners & Init =====
   function bindRadioGroup(name){
     var nodes = document.querySelectorAll('input[name="'+name+'"]');
     for (var i=0;i<nodes.length;i++) nodes[i].addEventListener('change', drawAll);
@@ -1085,11 +1088,7 @@
   });
   lenInput.addEventListener('input', drawAll);
 
-  function setPlayUI(p){
-    isPlaying=p;
-    playPauseBtn.setAttribute('aria-pressed', p?'true':'false');
-    playPauseBtn.innerHTML=p?'<span aria-hidden="true">❚❚</span> Pause':'<span aria-hidden="true">▶</span> Play';
-  }
+  // Play controls
   function animate(){
     function loop(t){
       if(!isPlaying) return;
@@ -1099,6 +1098,11 @@
       drawAll(); rafId=requestAnimationFrame(loop);
     }
     rafId=requestAnimationFrame(loop);
+  }
+  function setPlayUI(p){
+    isPlaying=p;
+    playPauseBtn.setAttribute('aria-pressed', p?'true':'false');
+    playPauseBtn.innerHTML=p?'<span aria-hidden="true">❚❚</span> Pause':'<span aria-hidden="true">▶</span> Play';
   }
   playPauseBtn.addEventListener('click', function(){
     if(!isPlaying){
@@ -1111,6 +1115,7 @@
     dphiDeg=0; slider.value='0'; phase=0; lastT=null; drawAll();
   });
 
+  // Init
   setupCanvas(viz); setupCanvas(gplot); setupCanvas(hplot); setupCanvas(tq);
   setupCanvas(vizFixed); setupCanvas(gplotF); setupCanvas(hplotF);
   drawAll();
