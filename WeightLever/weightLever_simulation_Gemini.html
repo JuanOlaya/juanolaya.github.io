@@ -79,9 +79,9 @@
       <canvas id="viz" width="800" height="360" aria-label="Scene: handle, lever, mass"></canvas>
     </div>
 
-    <!-- SECTION 3: DETAILED ANALYSIS -->
+    <!-- SECTION 3: ANALYSIS -->
     <div class="panel flex flex-col gap-6">
-      <h2 class="text-xl font-bold text-slate-800">Detailed Analysis</h2>
+      <h2 class="text-xl font-bold text-slate-800">Analysis</h2>
       <hr/>
       <div>
         <h3 id="jointPlotTitle" class="font-semibold mb-2">Forces at the Joint</h3>
@@ -148,17 +148,17 @@
                     </div>
                 </div>
                 <div>
-                    <label class="font-medium text-sm">System</label>
+                    <label class="font-medium text-sm">Servo</label>
                     <div class="flex flex-col gap-1 mt-1">
-                        <label class="flex items-center gap-2"><input type="radio" name="systemMode" value="fixed"> fixed</label>
-                        <label class="flex items-center gap-2"><input type="radio" name="systemMode" value="rotating" checked> rotating</label>
+                        <label class="flex items-center gap-2"><input type="radio" name="servoMode" value="fixed"> fixed</label>
+                        <label class="flex items-center gap-2"><input type="radio" name="servoMode" value="shifting" checked> shifting</label>
                     </div>
                 </div>
                 <div>
                     <label class="font-medium text-sm">Coordinate System</label>
                     <div class="flex flex-col gap-1 mt-1">
-                        <label class="flex items-center gap-2"><input type="radio" name="forceFrame" value="global" checked> World Frame</label>
-                        <label class="flex items-center gap-2"><input type="radio" name="forceFrame" value="handle"> Handle Frame</label>
+                        <label class="flex items-center gap-2"><input type="radio" name="forceFrame" value="global"> World Frame</label>
+                        <label class="flex items-center gap-2" title="The Handle's Perspective (X_h and Y_h rotating)"><input type="radio" name="forceFrame" value="handle" checked> Handle Frame</label>
                     </div>
                 </div>
             </div>
@@ -179,19 +179,23 @@ class HapticLeverSystem {
     this.ratio = options.servoRatio || 0.73;
     this.servoLimit = options.servoLimit || 54;
     this.mg = this.m * this.g;
-    this.state = this.update(0, 'rotating');
+    this.state = this.update(0, 'shifting');
   }
 
   _deg2rad(d) { return d * Math.PI / 180; }
   _clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
   _normalizeAngle(deg) { return ((deg % 360) + 360) % 360; }
 
-  update(sliderInputDeg, systemMode) {
-    const dtheta_hDeg = (systemMode === 'rotating') ? sliderInputDeg : 0;
+  update(dtheta_hDeg, servoMode) {
     const theta_h = this.theta_h0 + dtheta_hDeg;
-    const thetaS_input = (systemMode === 'rotating') ? dtheta_hDeg : sliderInputDeg;
     
-    const thetaS = this._clamp(this.ratio * thetaS_input, -this.servoLimit, this.servoLimit);
+    let thetaS;
+    if (servoMode === 'shifting') {
+        thetaS = this._clamp(this.ratio * dtheta_hDeg, -this.servoLimit, this.servoLimit);
+    } else { // fixed
+        thetaS = 0;
+    }
+    
     const psi = this._normalizeAngle(theta_h + 180 + thetaS);
     let phi = psi - theta_h;
     phi = this._normalizeAngle(phi + 180) - 180;
@@ -208,10 +212,8 @@ class HapticLeverSystem {
 
     this.state = {
       inputs: { 
-        sliderInputDeg: sliderInputDeg, 
-        systemMode: systemMode,
         dtheta_hDeg: dtheta_hDeg,
-        thetaS_input: thetaS_input
+        servoMode: servoMode
       },
       angles: { theta_h: theta_h, thetaS: thetaS, psi: psi, phi: phi },
       forces: {
@@ -255,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const forceTypeRadios = document.querySelectorAll('input[name="forceType"]');
   const forceFrameRadios = document.querySelectorAll('input[name="forceFrame"]');
-  const systemModeRadios = document.querySelectorAll('input[name="systemMode"]');
+  const servoModeRadios = document.querySelectorAll('input[name="servoMode"]');
   const jointPlotTitle = document.getElementById('jointPlotTitle');
 
   let isPlaying = false, rafId = null, lastT = null, phase = 0;
@@ -264,8 +266,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Drawing Functions ---
 
   function drawArrow(ctx, x1, y1, x2, y2, color, lineWidth = 2) {
-    const head = 7;
-    const angle = Math.atan2(y2 - y1, x2 - x1);
+    const head = 10; // Made arrowhead larger
+    const angle = Math.atan2(y2 - y1, x2 - x1); // Corrected angle calculation
     ctx.save();
     ctx.strokeStyle = color;
     ctx.fillStyle = color;
@@ -317,25 +319,25 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillText(`${d}°`, centerX + labelRadius * Math.cos(angleRad), centerY - labelRadius * Math.sin(angleRad));
     });
 
-    // Draw arc for theta_h (green)
-    ctx.strokeStyle = '#16a34a';
+    // Draw arc for theta_h (orange)
+    ctx.strokeStyle = '#f59e0b';
     ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.arc(centerX, centerY, arcRadiusTheta, 0, -theta_hRad, true);
     ctx.stroke();
     const midThetaH = -theta_hRad / 2;
-    ctx.fillStyle = '#16a34a';
+    ctx.fillStyle = '#f59e0b';
     ctx.font = 'bold 12px system-ui';
     ctx.fillText('θh', centerX + (arcRadiusTheta + 12) * Math.cos(midThetaH), centerY + (arcRadiusTheta + 12) * Math.sin(midThetaH));
 
-    // Draw arc for psi (red)
-    ctx.strokeStyle = '#ef4444';
+    // Draw arc for psi (blue)
+    ctx.strokeStyle = '#3b82f6';
     ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.arc(centerX, centerY, arcRadiusPsi, 0, -psiRad, true);
     ctx.stroke();
     const midPsi = -psiRad / 2;
-    ctx.fillStyle = '#ef4444';
+    ctx.fillStyle = '#3b82f6';
     ctx.font = 'bold 12px system-ui';
     ctx.fillText('ψ', centerX + (arcRadiusPsi + 12) * Math.cos(midPsi), centerY + (arcRadiusPsi + 12) * Math.sin(midPsi));
     
@@ -362,13 +364,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const uHandleX = { x: Math.cos(theta_hRad - Math.PI/2), y: -Math.sin(theta_hRad - Math.PI/2) };
 
     vizCtx.save();
-    const axisLen = 65;
-    drawArrow(vizCtx, joint.x, joint.y, joint.x + axisLen * uHandleX.x, joint.y + axisLen * uHandleX.y, '#16a34a', 1.5);
-    drawArrow(vizCtx, joint.x, joint.y, joint.x + axisLen * uHandleY.x, joint.y + axisLen * uHandleY.y, '#16a34a', 1.5);
+    const axisLen = 80; // Longer
+    drawArrow(vizCtx, joint.x, joint.y, joint.x + axisLen * uHandleX.x, joint.y + axisLen * uHandleX.y, '#16a34a', 2); // Thicker
+    drawArrow(vizCtx, joint.x, joint.y, joint.x + axisLen * uHandleY.x, joint.y + axisLen * uHandleY.y, '#16a34a', 2); // Thicker
     vizCtx.fillStyle = '#10b981';
-    vizCtx.font = '12px system-ui';
-    vizCtx.fillText('X_h', joint.x + (axisLen + 8) * uHandleX.x, joint.y + (axisLen + 8) * uHandleX.y);
-    vizCtx.fillText('Y_h', joint.x + (axisLen + 8) * uHandleY.x, joint.y + (axisLen + 8) * uHandleY.y);
+    vizCtx.font = 'bold 14px system-ui'; // Bigger and bold
+    vizCtx.fillText('X_h', joint.x + (axisLen + 10) * uHandleX.x, joint.y + (axisLen + 10) * uHandleX.y);
+    vizCtx.fillText('Y_h', joint.x + (axisLen + 10) * uHandleY.x, joint.y + (axisLen + 10) * uHandleY.y);
     vizCtx.restore();
 
     const leverEnd = { x: joint.x + LpxLever * uLever.x, y: joint.y + LpxLever * uLever.y };
@@ -424,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Axis labels
     jointPlotCtx.fillStyle = '#475569';
-    jointPlotCtx.font = '16px system-ui'; // Increased font size
+    jointPlotCtx.font = '18px system-ui'; // Increased font size
     jointPlotCtx.textAlign = 'center';
     jointPlotCtx.textBaseline = 'middle';
     const xLabel = forceFrame === 'global' ? 'X_g (N)' : 'X_h (N)';
@@ -440,9 +442,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const Fx = force.x * scale;
     const Fy = -force.y * scale;
     
-    drawArrow(jointPlotCtx, origin.x, origin.y, origin.x + Fx, origin.y + Fy, '#3b82f6', 3);
-    drawArrow(jointPlotCtx, origin.x, origin.y, origin.x + Fx, origin.y, '#16a34a');
-    drawArrow(jointPlotCtx, origin.x, origin.y, origin.x, origin.y + Fy, '#f59e0b');
+    drawArrow(jointPlotCtx, origin.x, origin.y, origin.x + Fx, origin.y + Fy, '#3b82f6', 5); // Thicker
+    drawArrow(jointPlotCtx, origin.x, origin.y, origin.x + Fx, origin.y, '#16a34a', 4); // Thicker
+    drawArrow(jointPlotCtx, origin.x, origin.y, origin.x, origin.y + Fy, '#f59e0b', 4); // Thicker
+
+    // Force value labels
+    jointPlotCtx.fillStyle = '#16a34a';
+    jointPlotCtx.font = '14px ui-monospace';
+    jointPlotCtx.textAlign = 'center';
+    jointPlotCtx.textBaseline = 'top';
+    jointPlotCtx.fillText(`${force.x.toFixed(2)} N`, origin.x + Fx / 2, origin.y + 8);
+
+    jointPlotCtx.fillStyle = '#f59e0b';
+    jointPlotCtx.textAlign = 'left';
+    jointPlotCtx.textBaseline = 'middle';
+    jointPlotCtx.fillText(`${force.y.toFixed(2)} N`, origin.x + 8, origin.y + Fy / 2);
+
   }
 
   function drawTorquePlot(state) {
@@ -505,11 +520,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Main Update Function ---
   function drawAll() {
     const sliderInputDeg = parseFloat(slider.value);
-    const systemMode = document.querySelector('input[name="systemMode"]:checked').value;
+    const servoMode = document.querySelector('input[name="servoMode"]:checked').value;
     
-    const state = hapticSystem.update(sliderInputDeg, systemMode);
+    const state = hapticSystem.update(sliderInputDeg, servoMode);
     
     const forceFrame = document.querySelector('input[name="forceFrame"]:checked').value;
+    const forceType = document.querySelector('input[name="forceType"]:checked').value;
     
     // Update visualizations
     drawViz(state);
@@ -523,21 +539,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (forceFrame === 'global') {
         jointPlotTitle.textContent = 'Forces at the Joint';
     } else {
-        jointPlotTitle.textContent = 'Perceived Forces at the Handle';
+        if (forceType === 'mass') {
+            jointPlotTitle.textContent = 'Mass Force at Handle Frame';
+        } else {
+            jointPlotTitle.textContent = 'Reaction Force at Handle Frame';
+        }
     }
   }
   
   function updateAngleFormulas(state) {
-    const { dtheta_hDeg, thetaS_input, systemMode } = state.inputs;
+    const { dtheta_hDeg, servoMode } = state.inputs;
     const { theta_h, thetaS, psi, phi } = state.angles;
 
     thetaHBreakdown.innerHTML = `<div class="text-slate-500 text-xs">θh = 90° + Δθh</div>
                               <div>90° + ${dtheta_hDeg.toFixed(1)}° = <b>${theta_h.toFixed(2)}°</b></div>`;
     
-    const unclampedThetaS = hapticSystem.ratio * thetaS_input;
-    const thetaSFormula = (systemMode === 'rotating') ? '0.73·Δθh' : '0.73·slider';
-    thetaSBreakdown.innerHTML = `<div class="text-slate-500 text-xs">θs = clamp(${thetaSFormula}, ±54°)</div>
-                                 <div>clamp(${unclampedThetaS.toFixed(1)}°) = <b>${thetaS.toFixed(2)}°</b></div>`;
+    const unclampedThetaS = hapticSystem.ratio * dtheta_hDeg;
+    const thetaSFormula = (servoMode === 'shifting') ? '0.73·Δθh' : '0';
+    thetaSBreakdown.innerHTML = `<div class="text-slate-500 text-xs">θs = ${servoMode === 'shifting' ? 'clamp(0.73·Δθh, ±54°)' : '0'}</div>
+                                 <div>${servoMode === 'shifting' ? `clamp(${(hapticSystem.ratio * dtheta_hDeg).toFixed(1)}°)` : ''} = <b>${thetaS.toFixed(2)}°</b></div>`;
 
     psiBreakdown.innerHTML = `<div class="text-slate-500 text-xs">ψ = θh + 180° + θs</div>
                               <div>${theta_h.toFixed(1)}°+180°+${thetaS.toFixed(1)}° = <b>${psi.toFixed(2)}°</b></div>`;
@@ -634,7 +654,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   forceTypeRadios.forEach(radio => radio.addEventListener('change', drawAll));
   forceFrameRadios.forEach(radio => radio.addEventListener('change', drawAll));
-  systemModeRadios.forEach(radio => radio.addEventListener('change', drawAll));
+  servoModeRadios.forEach(radio => radio.addEventListener('change', drawAll));
   window.addEventListener('resize', drawAll);
 
   // --- Initialization ---
