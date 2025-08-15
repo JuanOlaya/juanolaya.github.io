@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Haptic Lever Simulator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background-color: #f1f5f9;
+      color: #1e293b;
+    }
+    .panel {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    }
+    canvas {
+      display: block;
+      background-color: #f8fafc;
+      border-radius: 0.5rem;
+      width: 100%;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #4f46e5;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: #4f46e5;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+    button {
+      transition: all 0.2s;
+    }
+    button[aria-pressed="true"] {
+      background-color: #4338ca;
+      color: #ffffff;
+    }
+    .formula-breakdown {
+        font-family: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+        font-size: 1rem; /* Increased font size */
+        line-height: 1.6;
+        background-color: #f8fafc;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid #e2e8f0;
+        height: 100%;
+    }
+    .formula-breakdown b, .angle-breakdown b {
+        color: #4f46e5;
+    }
+    .angle-breakdown {
+        font-family: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+  </style>
+</head>
+<body class="p-4 md:p-8">
+
+<div class="max-w-7xl mx-auto flex flex-col gap-6">
+
+  <!-- SECTION 1: MAIN VISUALIZATION -->
+  <div class="panel">
+    <h2 class="text-xl font-bold text-slate-800 mb-4">Main Visualization</h2>
+    <canvas id="viz" width="800" height="500" aria-label="Scene: handle, lever, mass"></canvas>
+  </div>
+
+  <!-- SECTION 2: CONTROL PANEL -->
+  <div class="panel">
+    <h2 class="text-xl font-bold text-slate-800 mb-4">Panel</h2>
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <!-- Left Column (40%): Angle Readouts -->
+      <fieldset class="border border-slate-200 rounded-lg p-4 h-full lg:col-span-2">
+        <legend class="px-2 font-semibold">Angle Readouts</legend>
+        <div class="angle-breakdown flex flex-col justify-center h-full gap-2">
+            <div>
+                <div class="text-slate-500 text-xs">Constants</div>
+                <code>m=0.242, g=9.81, L=0.20</code>
+            </div>
+            <hr class="border-slate-200"/>
+            <div id="thetaHBreakdown"></div>
+            <div id="thetaSBreakdown"></div>
+            <div id="psiBreakdown"></div>
+            <div id="phiBreakdown"></div>
+        </div>
+      </fieldset>
+      <!-- Right Column (60%): Controls -->
+      <div class="flex flex-col gap-6 lg:col-span-3">
+          <fieldset class="border border-slate-200 rounded-lg p-4">
+              <legend class="px-2 font-semibold">Simulation</legend>
+              <div class="flex items-center justify-between mb-2">
+                <label for="slider" class="font-medium">Handle Displacement (Δθh)</label>
+                <span class="text-sm text-slate-500">Range: [−74°, +74°]</span>
+              </div>
+              <!-- FIX: Added relative and z-10 to ensure the slider is interactive -->
+              <input id="slider" type="range" min="-74" max="74" step="0.1" value="0" class="relative z-10 w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" />
+              <div class="flex items-center gap-2 mt-4">
+                   <button id="playPauseBtn" aria-pressed="false" class="px-4 py-2 bg-indigo-100 text-indigo-700 font-semibold rounded-md hover:bg-indigo-200">▶ Play</button>
+                   <button id="stopBtn" class="px-4 py-2 bg-slate-100 text-slate-700 font-semibold rounded-md hover:bg-slate-200">⏹ Stop</button>
+              </div>
+          </fieldset>
+
+          <fieldset class="border border-slate-200 rounded-lg p-4">
+              <legend class="px-2 font-semibold">Force Visualization</legend>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                      <label class="font-medium text-sm">Force Type</label>
+                      <div class="flex flex-col gap-1 mt-1">
+                          <label class="flex items-center gap-2"><input type="radio" name="forceType" value="mass" checked> Mass Force</label>
+                          <label class="flex items-center gap-2"><input type="radio" name="forceType" value="reaction"> Reaction Force</label>
+                      </div>
+                  </div>
+                  <div>
+                      <label class="font-medium text-sm">System</label>
+                      <div class="flex flex-col gap-1 mt-1">
+                          <label class="flex items-center gap-2"><input type="radio" name="systemMode" value="fixed"> fixed</label>
+                          <label class="flex items-center gap-2"><input type="radio" name="systemMode" value="rotating" checked> rotating</label>
+                      </div>
+                  </div>
+                  <div>
+                      <label class="font-medium text-sm">Coordinate System</label>
+                      <div class="flex flex-col gap-1 mt-1">
+                          <label class="flex items-center gap-2"><input type="radio" name="forceFrame" value="global" checked> World Frame</label>
+                          <label class="flex items-center gap-2"><input type="radio" name="forceFrame" value="handle"> Handle Frame</label>
+                      </div>
+                  </div>
+              </div>
+          </fieldset>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: DETAILED ANALYSIS -->
+  <div class="panel flex flex-col gap-6">
+    <h2 class="text-xl font-bold text-slate-800">Detailed Analysis</h2>
+    <hr/>
+    <div>
+      <h3 id="jointPlotTitle" class="font-semibold mb-2">Forces at the Joint</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+        <canvas id="jointPlot" width="800" height="400" aria-label="Forces at the joint (global or handle frame)"></canvas>
+        <div id="forceFormulaBreakdown" class="formula-breakdown"></div>
+      </div>
+    </div>
+    <hr/>
+    <div>
+      <h3 class="font-semibold mb-2">Torque vs. Lever Angle (ψ)</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+        <canvas id="torquePlot" width="800" height="350" aria-label="Torque curve vs psi"></canvas>
+        <div id="torqueFormulaBreakdown" class="formula-breakdown"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// --- HAPTIC LEVER SYSTEM CLASS ---
+class HapticLeverSystem {
+  constructor(options = {}) {
+    this.m = options.mass || 0.242;
+    this.g = options.gravity || 9.81;
+    this.L = options.leverLength || 0.20; // Constant length
+    this.theta_h0 = options.initialThetaH || 90;
+    this.ratio = options.servoRatio || 0.73;
+    this.servoLimit = options.servoLimit || 54;
+    this.mg = this.m * this.g;
+    this.state = this.update(0, 'rotating');
+  }
+
+  _deg2rad(d) { return d * Math.PI / 180; }
+  _clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
+  _normalizeAngle(deg) { return ((deg % 360) + 360) % 360; }
+
+  update(sliderInputDeg, systemMode) {
+    const dtheta_hDeg = (systemMode === 'rotating') ? sliderInputDeg : 0;
+    const theta_h = this.theta_h0 + dtheta_hDeg;
+    const thetaS_input = (systemMode === 'rotating') ? dtheta_hDeg : sliderInputDeg;
+    
+    const thetaS = this._clamp(this.ratio * thetaS_input, -this.servoLimit, this.servoLimit);
+    const psi = this._normalizeAngle(theta_h + 180 + thetaS);
+    let phi = psi - theta_h;
+    phi = this._normalizeAngle(phi + 180) - 180;
+
+    const psiRad = this._deg2rad(psi);
+    const phiRad = this._deg2rad(phi);
+
+    const force_global_x = this.mg * Math.cos(psiRad);
+    const force_global_y = this.mg * Math.sin(psiRad);
+    const force_handle_x = this.mg * Math.sin(phiRad);
+    const force_handle_y = this.mg * Math.cos(phiRad);
+
+    const torque = this.mg * this.L * Math.sin(psiRad);
+
+    this.state = {
+      inputs: { 
+        sliderInputDeg: sliderInputDeg, 
+        systemMode: systemMode,
+        dtheta_hDeg: dtheta_hDeg,
+        thetaS_input: thetaS_input
+      },
+      angles: { theta_h: theta_h, thetaS: thetaS, psi: psi, phi: phi },
+      forces: {
+        mass_global: { x: force_global_x, y: force_global_y },
+        mass_handle: { x: force_handle_x, y: force_handle_y },
+        reaction_global: { x: -force_global_x, y: -force_global_y },
+        reaction_handle: { x: -force_handle_x, y: -force_handle_y },
+      },
+      torque: torque,
+    };
+    return this.state;
+  }
+  getState() { return this.state; }
+}
+
+// --- APPLICATION LOGIC (VIEW & CONTROLLER) ---
+document.addEventListener('DOMContentLoaded', () => {
+  const hapticSystem = new HapticLeverSystem();
+
+  // DOM Element References
+  const slider = document.getElementById('slider');
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const stopBtn = document.getElementById('stopBtn');
+
+  const vizCanvas = document.getElementById('viz');
+  const jointPlotCanvas = document.getElementById('jointPlot');
+  const torquePlotCanvas = document.getElementById('torquePlot');
+  
+  const vizCtx = vizCanvas.getContext('2d');
+  const jointPlotCtx = jointPlotCanvas.getContext('2d');
+  const torquePlotCtx = torquePlotCanvas.getContext('2d');
+  
+  const forceFormulaBreakdown = document.getElementById('forceFormulaBreakdown');
+  const torqueFormulaBreakdown = document.getElementById('torqueFormulaBreakdown');
+
+  const thetaHBreakdown = document.getElementById('thetaHBreakdown');
+  const thetaSBreakdown = document.getElementById('thetaSBreakdown');
+  const psiBreakdown = document.getElementById('psiBreakdown');
+  const phiBreakdown = document.getElementById('phiBreakdown');
+  
+  const forceTypeRadios = document.querySelectorAll('input[name="forceType"]');
+  const forceFrameRadios = document.querySelectorAll('input[name="forceFrame"]');
+  const systemModeRadios = document.querySelectorAll('input[name="systemMode"]');
+  const jointPlotTitle = document.getElementById('jointPlotTitle');
+
+  let isPlaying = false, rafId = null, lastT = null, phase = 0;
+  const animAmp = 74, animOmega = 0.6;
+
+  // --- Drawing Functions ---
+
+  function drawArrow(ctx, x1, y1, x2, y2, color, lineWidth = 2) {
+    const head = 7;
+    const angle = Math.atan2(y2 - y1, x2 - x1);
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
+    ctx.lineWidth = lineWidth;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x2, y2);
+    ctx.lineTo(x2 - head * Math.cos(angle - Math.PI / 6), y2 - head * Math.sin(angle - Math.PI / 6));
+    ctx.lineTo(x2 - head * Math.cos(angle + Math.PI / 6), y2 - head * Math.sin(angle + Math.PI / 6));
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+  
+  function drawOrientationDial(ctx, centerX, centerY, theta_hRad, psiRad) {
+    const dialRadius = 110;
+    const arcRadiusTheta = 70;
+    const arcRadiusPsi = 85;
+
+    ctx.save();
+    ctx.strokeStyle = '#9ca3af';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, dialRadius, 0, 2 * Math.PI);
+    ctx.stroke();
+
+    for (let d = 0; d < 360; d += 30) {
+        const angleRad = hapticSystem._deg2rad(d);
+        const isMajorTick = d % 90 === 0;
+        const tickLength = isMajorTick ? 10 : 5;
+        const cosA = Math.cos(angleRad);
+        const sinA = -Math.sin(angleRad);
+        ctx.beginPath();
+        ctx.moveTo(centerX + (dialRadius - tickLength) * cosA, centerY + (dialRadius - tickLength) * sinA);
+        ctx.lineTo(centerX + dialRadius * cosA, centerY + dialRadius * sinA);
+        ctx.stroke();
+    }
+
+    ctx.fillStyle = '#475569';
+    ctx.font = '12px system-ui';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    [0, 90, 180, 270].forEach(d => {
+        const angleRad = hapticSystem._deg2rad(d);
+        const labelRadius = dialRadius + 15;
+        ctx.fillText(`${d}°`, centerX + labelRadius * Math.cos(angleRad), centerY - labelRadius * Math.sin(angleRad));
+    });
+
+    // Draw arc for theta_h (green)
+    ctx.strokeStyle = '#16a34a';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, arcRadiusTheta, 0, -theta_hRad, true);
+    ctx.stroke();
+    const midThetaH = -theta_hRad / 2;
+    ctx.fillStyle = '#16a34a';
+    ctx.font = 'bold 12px system-ui';
+    ctx.fillText('θh', centerX + (arcRadiusTheta + 12) * Math.cos(midThetaH), centerY + (arcRadiusTheta + 12) * Math.sin(midThetaH));
+
+    // Draw arc for psi (red)
+    ctx.strokeStyle = '#ef4444';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, arcRadiusPsi, 0, -psiRad, true);
+    ctx.stroke();
+    const midPsi = -psiRad / 2;
+    ctx.fillStyle = '#ef4444';
+    ctx.font = 'bold 12px system-ui';
+    ctx.fillText('ψ', centerX + (arcRadiusPsi + 12) * Math.cos(midPsi), centerY + (arcRadiusPsi + 12) * Math.sin(midPsi));
+    
+    ctx.restore();
+  }
+
+  function drawViz(state) {
+    const w = vizCanvas.width;
+    const h = vizCanvas.height;
+    vizCtx.clearRect(0, 0, w, h);
+
+    const joint = { x: w / 2, y: h / 2 };
+    const LpxLever = 120;
+    const LpxHandle = 50;
+
+    const { theta_h, psi } = state.angles;
+    const theta_hRad = hapticSystem._deg2rad(theta_h);
+    const psiRad = hapticSystem._deg2rad(psi);
+
+    drawOrientationDial(vizCtx, joint.x, joint.y, theta_hRad, psiRad);
+
+    const uLever = { x: Math.cos(psiRad), y: -Math.sin(psiRad) };
+    const uHandleY = { x: Math.cos(theta_hRad), y: -Math.sin(theta_hRad) };
+    const uHandleX = { x: Math.cos(theta_hRad - Math.PI/2), y: -Math.sin(theta_hRad - Math.PI/2) };
+
+    vizCtx.save();
+    const axisLen = 65;
+    drawArrow(vizCtx, joint.x, joint.y, joint.x + axisLen * uHandleX.x, joint.y + axisLen * uHandleX.y, '#16a34a', 1.5);
+    drawArrow(vizCtx, joint.x, joint.y, joint.x + axisLen * uHandleY.x, joint.y + axisLen * uHandleY.y, '#16a34a', 1.5);
+    vizCtx.fillStyle = '#10b981';
+    vizCtx.font = '12px system-ui';
+    vizCtx.fillText('X_h', joint.x + (axisLen + 8) * uHandleX.x, joint.y + (axisLen + 8) * uHandleX.y);
+    vizCtx.fillText('Y_h', joint.x + (axisLen + 8) * uHandleY.x, joint.y + (axisLen + 8) * uHandleY.y);
+    vizCtx.restore();
+
+    const leverEnd = { x: joint.x + LpxLever * uLever.x, y: joint.y + LpxLever * uLever.y };
+    drawArrow(vizCtx, joint.x, joint.y, leverEnd.x, leverEnd.y, '#3b82f6', 6);
+    vizCtx.beginPath();
+    vizCtx.arc(leverEnd.x, leverEnd.y, 12, 0, 2 * Math.PI);
+    vizCtx.fillStyle = '#64748b';
+    vizCtx.fill();
+    
+    const handleEnd = { x: joint.x + LpxHandle * uHandleY.x, y: joint.y + LpxHandle * uHandleY.y };
+    drawArrow(vizCtx, joint.x, joint.y, handleEnd.x, handleEnd.y, '#f59e0b', 6);
+
+    vizCtx.beginPath();
+    vizCtx.arc(joint.x, joint.y, 8, 0, 2 * Math.PI);
+    vizCtx.fillStyle = '#1e293b';
+    vizCtx.fill();
+  }
+  
+  function drawForcePlot(state, forceFrame) {
+    const w = jointPlotCanvas.width;
+    const h = jointPlotCanvas.height;
+    jointPlotCtx.clearRect(0, 0, w, h);
+    
+    const forceType = document.querySelector('input[name="forceType"]:checked').value;
+    const forceKey = `${forceType}_${forceFrame}`;
+    const force = state.forces[forceKey];
+    
+    const maxN = Math.max(2.5, Math.ceil(hapticSystem.mg * 1.1));
+    const origin = { x: w / 2, y: h / 2 };
+    const scale = (h * 0.8) / (2 * maxN);
+    const pad = 40;
+
+    // Grid and axes
+    jointPlotCtx.save();
+    jointPlotCtx.strokeStyle = '#e2e8f0';
+    jointPlotCtx.lineWidth = 1;
+    jointPlotCtx.setLineDash([2, 4]);
+    for (let i = -2; i <= 2; i++) {
+        if (i === 0) continue;
+        const yGrid = origin.y + i * (maxN / 2) * scale;
+        const xGrid = origin.x + i * (maxN / 2) * scale;
+        jointPlotCtx.beginPath(); jointPlotCtx.moveTo(pad, yGrid); jointPlotCtx.lineTo(w - pad, yGrid); jointPlotCtx.stroke();
+        jointPlotCtx.beginPath(); jointPlotCtx.moveTo(xGrid, pad); jointPlotCtx.lineTo(xGrid, h - pad); jointPlotCtx.stroke();
+    }
+    jointPlotCtx.restore();
+    
+    jointPlotCtx.save();
+    jointPlotCtx.strokeStyle = '#94a3b8';
+    jointPlotCtx.lineWidth = 1.5;
+    jointPlotCtx.beginPath(); jointPlotCtx.moveTo(pad, origin.y); jointPlotCtx.lineTo(w - pad, origin.y); jointPlotCtx.stroke();
+    jointPlotCtx.beginPath(); jointPlotCtx.moveTo(origin.x, pad); jointPlotCtx.lineTo(origin.x, h - pad); jointPlotCtx.stroke();
+    jointPlotCtx.restore();
+    
+    // Axis labels
+    jointPlotCtx.fillStyle = '#475569';
+    jointPlotCtx.font = '16px system-ui'; // Increased font size
+    jointPlotCtx.textAlign = 'center';
+    jointPlotCtx.textBaseline = 'middle';
+    const xLabel = forceFrame === 'global' ? 'X_g (N)' : 'X_h (N)';
+    const yLabel = forceFrame === 'global' ? 'Y_g (N)' : 'Y_h (N)';
+    jointPlotCtx.fillText(xLabel, w / 2, h - pad / 2);
+    jointPlotCtx.save();
+    jointPlotCtx.translate(pad / 2, h / 2);
+    jointPlotCtx.rotate(-Math.PI / 2);
+    jointPlotCtx.fillText(yLabel, 0, 0);
+    jointPlotCtx.restore();
+
+    // Force vectors
+    const Fx = force.x * scale;
+    const Fy = -force.y * scale;
+    
+    drawArrow(jointPlotCtx, origin.x, origin.y, origin.x + Fx, origin.y + Fy, '#3b82f6', 3);
+    drawArrow(jointPlotCtx, origin.x, origin.y, origin.x + Fx, origin.y, '#16a34a');
+    drawArrow(jointPlotCtx, origin.x, origin.y, origin.x, origin.y + Fy, '#f59e0b');
+  }
+
+  function drawTorquePlot(state) {
+    const w = torquePlotCanvas.width;
+    const h = torquePlotCanvas.height;
+    torquePlotCtx.clearRect(0, 0, w, h);
+    
+    const pad = { x: 50, y: 30 };
+    const plotW = w - pad.x * 1.5;
+    const plotH = h - pad.y * 2;
+    
+    const tauMax = hapticSystem.mg * hapticSystem.L;
+    
+    const toX = (deg) => pad.x + (deg / 360) * plotW;
+    const toY = (tau) => (h / 2) - (tau / tauMax) * (plotH / 2);
+    
+    // Axes
+    torquePlotCtx.strokeStyle = '#94a3b8';
+    torquePlotCtx.lineWidth = 1.5;
+    torquePlotCtx.beginPath(); torquePlotCtx.moveTo(pad.x, toY(0)); torquePlotCtx.lineTo(w - pad.x/2, toY(0)); torquePlotCtx.stroke();
+    
+    // Axis labels
+    torquePlotCtx.fillStyle = '#475569';
+    torquePlotCtx.font = '16px system-ui'; // Increased font size
+    torquePlotCtx.textAlign = 'center';
+    torquePlotCtx.textBaseline = 'middle';
+    torquePlotCtx.fillText('ψ (degrees)', w / 2, h - pad.y / 2);
+    torquePlotCtx.save();
+    torquePlotCtx.translate(pad.x / 2, h / 2);
+    torquePlotCtx.rotate(-Math.PI / 2);
+    torquePlotCtx.fillText('τ (N·m)', 0, 0);
+    torquePlotCtx.restore();
+
+    // Torque curve
+    torquePlotCtx.strokeStyle = '#3b82f6';
+    torquePlotCtx.lineWidth = 2;
+    torquePlotCtx.beginPath();
+    for (let deg = 0; deg <= 360; deg++) {
+        const rad = hapticSystem._deg2rad(deg);
+        const currentTau = hapticSystem.mg * hapticSystem.L * Math.sin(rad);
+        const px = toX(deg);
+        const py = toY(currentTau);
+        if (deg === 0) torquePlotCtx.moveTo(px, py);
+        else torquePlotCtx.lineTo(px, py);
+    }
+    torquePlotCtx.stroke();
+    
+    // Current point
+    const { psi } = state.angles;
+    const { torque } = state;
+    const currentX = toX(psi);
+    const currentY = toY(torque);
+    
+    torquePlotCtx.beginPath();
+    torquePlotCtx.arc(currentX, currentY, 5, 0, 2 * Math.PI);
+    torquePlotCtx.fillStyle = '#ef4444';
+    torquePlotCtx.fill();
+  }
+
+  // --- Main Update Function ---
+  function drawAll() {
+    const sliderInputDeg = parseFloat(slider.value);
+    const systemMode = document.querySelector('input[name="systemMode"]:checked').value;
+    
+    const state = hapticSystem.update(sliderInputDeg, systemMode);
+    
+    const forceFrame = document.querySelector('input[name="forceFrame"]:checked').value;
+    
+    // Update visualizations
+    drawViz(state);
+    drawForcePlot(state, forceFrame);
+    drawTorquePlot(state);
+    
+    // Update formula breakdowns and titles
+    updateFormulas(state);
+    updateAngleFormulas(state);
+    
+    if (forceFrame === 'global') {
+        jointPlotTitle.textContent = 'Forces at the Joint';
+    } else {
+        jointPlotTitle.textContent = 'Perceived Forces at the Handle';
+    }
+  }
+  
+  function updateAngleFormulas(state) {
+    const { dtheta_hDeg, thetaS_input, systemMode } = state.inputs;
+    const { theta_h, thetaS, psi, phi } = state.angles;
+
+    thetaHBreakdown.innerHTML = `<div class="text-slate-500 text-xs">θh = 90° + Δθh</div>
+                              <div>90° + ${dtheta_hDeg.toFixed(1)}° = <b>${theta_h.toFixed(2)}°</b></div>`;
+    
+    const unclampedThetaS = hapticSystem.ratio * thetaS_input;
+    const thetaSFormula = (systemMode === 'rotating') ? '0.73·Δθh' : '0.73·slider';
+    thetaSBreakdown.innerHTML = `<div class="text-slate-500 text-xs">θs = clamp(${thetaSFormula}, ±54°)</div>
+                                 <div>clamp(${unclampedThetaS.toFixed(1)}°) = <b>${thetaS.toFixed(2)}°</b></div>`;
+
+    psiBreakdown.innerHTML = `<div class="text-slate-500 text-xs">ψ = θh + 180° + θs</div>
+                              <div>${theta_h.toFixed(1)}°+180°+${thetaS.toFixed(1)}° = <b>${psi.toFixed(2)}°</b></div>`;
+
+    phiBreakdown.innerHTML = `<div class="text-slate-500 text-xs">φ = ψ − θh</div>
+                                <div>${psi.toFixed(1)}° - ${theta_h.toFixed(1)}° = <b>${phi.toFixed(2)}°</b></div>`;
+  }
+
+  function updateFormulas(state) {
+    const { angles, torque } = state;
+    const L = hapticSystem.L;
+    const mg = hapticSystem.mg;
+    
+    const forceType = document.querySelector('input[name="forceType"]:checked').value;
+    const forceFrame = document.querySelector('input[name="forceFrame"]:checked').value;
+    const sign = forceType === 'mass' ? '' : '-';
+    
+    let fxHTML, fyHTML;
+    
+    if (forceFrame === 'global') {
+        const force = state.forces[`${forceType}_global`];
+        fxHTML = `Fx = ${sign}(m·g·cos(ψ))<br>
+                  = ${sign}(${mg.toFixed(3)})·cos(${angles.psi.toFixed(1)}°)<br>
+                  = <b>${force.x.toFixed(3)} N</b>`;
+        fyHTML = `Fy = ${sign}(m·g·sin(ψ))<br>
+                  = ${sign}(${mg.toFixed(3)})·sin(${angles.psi.toFixed(1)}°)<br>
+                  = <b>${force.y.toFixed(3)} N</b>`;
+    } else { // handle frame
+        const force = state.forces[`${forceType}_handle`];
+        fxHTML = `Fx = ${sign}(m·g·sin(φ))<br>
+                  = ${sign}(${mg.toFixed(3)})·sin(${angles.phi.toFixed(1)}°)<br>
+                  = <b>${force.x.toFixed(3)} N</b>`;
+        fyHTML = `Fy = ${sign}(m·g·cos(φ))<br>
+                  = ${sign}(${mg.toFixed(3)})·cos(${angles.phi.toFixed(1)}°)<br>
+                  = <b>${force.y.toFixed(3)} N</b>`;
+    }
+    
+    forceFormulaBreakdown.innerHTML = `${fxHTML}<hr class="my-2 border-slate-300">${fyHTML}`;
+    
+    torqueFormulaBreakdown.innerHTML = `τ = m·g·L·sin(ψ)<br>
+                                        = (${mg.toFixed(3)})·(${L.toFixed(2)})·sin(${angles.psi.toFixed(1)}°)<br>
+                                        = <b>${torque.toFixed(3)} N·m</b>`;
+  }
+
+  // --- Animation Logic ---
+  function setPlayUI(playing) {
+    isPlaying = playing;
+    playPauseBtn.setAttribute('aria-pressed', playing);
+    playPauseBtn.innerHTML = playing ? '❚❚ Pause' : '▶ Play';
+  }
+
+  function animate(t) {
+    if (!isPlaying) return;
+    if (lastT == null) lastT = t;
+    const dt = (t - lastT) / 1000;
+    lastT = t;
+    phase += animOmega * dt;
+    slider.value = animAmp * Math.sin(phase);
+    drawAll();
+    rafId = requestAnimationFrame(animate);
+  }
+
+  playPauseBtn.addEventListener('click', () => {
+    if (!isPlaying) {
+      const s = hapticSystem._clamp(parseFloat(slider.value) / animAmp, -1, 1);
+      phase = Math.asin(s);
+      lastT = null;
+      setPlayUI(true);
+      animate(performance.now());
+    } else {
+      setPlayUI(false);
+      cancelAnimationFrame(rafId);
+    }
+  });
+
+  stopBtn.addEventListener('click', () => {
+    cancelAnimationFrame(rafId);
+    setPlayUI(false);
+    slider.value = '0';
+    phase = 0;
+    lastT = null;
+    drawAll();
+  });
+
+  // --- Event Listeners ---
+  slider.addEventListener('input', () => {
+    if (isPlaying) {
+      setPlayUI(false);
+      cancelAnimationFrame(rafId);
+    }
+    drawAll();
+  });
+  
+  forceTypeRadios.forEach(radio => radio.addEventListener('change', drawAll));
+  forceFrameRadios.forEach(radio => radio.addEventListener('change', drawAll));
+  systemModeRadios.forEach(radio => radio.addEventListener('change', drawAll));
+  window.addEventListener('resize', drawAll);
+
+  // --- Initialization ---
+  drawAll();
+});
+</script>
+
+</body>
+</html>
