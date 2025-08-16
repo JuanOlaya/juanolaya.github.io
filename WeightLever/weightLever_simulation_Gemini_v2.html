@@ -80,10 +80,17 @@
       <h2 class="text-xl font-bold text-slate-800 mb-4">Controls</h2>
       <div class="flex flex-col gap-6">
         <fieldset class="border border-slate-200 rounded-lg p-4">
+            <legend class="px-2 font-semibold">Task</legend>
+             <div class="flex flex-col gap-1 mt-1">
+                <label class="flex items-center gap-2"><input type="radio" name="task" value="resistance" checked> Resistance</label>
+                <label class="flex items-center gap-2"><input type="radio" name="task" value="motion"> Motion</label>
+            </div>
+        </fieldset>
+        <fieldset class="border border-slate-200 rounded-lg p-4">
             <legend class="px-2 font-semibold">Simulation</legend>
             <div class="flex items-center justify-between mb-2">
-              <label for="slider" class="font-medium">Handle Displacement (Δθh)</label>
-              <span class="text-sm text-slate-500 whitespace-nowrap">Range: [−74°, +74°]</span>
+              <label id="sliderLabel" for="slider" class="font-medium">Handle Displacement (Δθh)</label>
+              <span id="sliderRange" class="text-sm text-slate-500 whitespace-nowrap">Range: [−74°, +74°]</span>
             </div>
             <input id="slider" type="range" min="-74" max="74" step="0.1" value="0" class="relative z-10 w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" />
             <div class="flex items-center gap-2 mt-4">
@@ -209,23 +216,14 @@ class HapticLeverSystem {
     this.ratio = options.servoRatio || 0.73;
     this.servoLimit = options.servoLimit || 54;
     this.mg = this.m * this.g;
-    this.state = this.update(0, 'shifting');
+    this.state = this.updateResistance(0, 'shifting');
   }
 
   _deg2rad(d) { return d * Math.PI / 180; }
   _clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
   _normalizeAngle(deg) { return ((deg % 360) + 360) % 360; }
 
-  update(dtheta_hDeg, servoMode) {
-    const theta_h = this.theta_h0 + dtheta_hDeg;
-    
-    let betaS;
-    if (servoMode === 'shifting') {
-        betaS = this._clamp(this.ratio * dtheta_hDeg, -this.servoLimit, this.servoLimit);
-    } else { // fixed
-        betaS = 0;
-    }
-    
+  _calculateState(theta_h, betaS, dtheta_hDeg, servoMode) {
     const psi = this._normalizeAngle(theta_h + 180 + betaS);
     let alpha = psi - theta_h;
     alpha = this._normalizeAngle(alpha + 180) - 180;
@@ -243,6 +241,7 @@ class HapticLeverSystem {
     this.state = {
       inputs: { 
         dtheta_hDeg: dtheta_hDeg,
+        betaSDeg: betaS,
         servoMode: servoMode
       },
       angles: { theta_h: theta_h, betaS: betaS, psi: psi, alpha: alpha },
@@ -256,6 +255,24 @@ class HapticLeverSystem {
     };
     return this.state;
   }
+
+  updateResistance(dtheta_hDeg, servoMode) {
+    const theta_h = this.theta_h0 + dtheta_hDeg;
+    let betaS;
+    if (servoMode === 'shifting') {
+        betaS = this._clamp(this.ratio * dtheta_hDeg, -this.servoLimit, this.servoLimit);
+    } else { // fixed
+        betaS = 0;
+    }
+    return this._calculateState(theta_h, betaS, dtheta_hDeg, servoMode);
+  }
+
+  updateMotion(betaSDeg) {
+      const dtheta_hDeg = 0;
+      const theta_h = this.theta_h0 + dtheta_hDeg;
+      return this._calculateState(theta_h, betaSDeg, dtheta_hDeg, 'shifting');
+  }
+
   getState() { return this.state; }
 }
 
@@ -265,8 +282,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // DOM Element References
   const slider = document.getElementById('slider');
+  const sliderLabel = document.getElementById('sliderLabel');
+  const sliderRange = document.getElementById('sliderRange');
   const playPauseBtn = document.getElementById('playPauseBtn');
   const stopBtn = document.getElementById('stopBtn');
+  const taskRadios = document.querySelectorAll('input[name="task"]');
 
   const vizCanvas = document.getElementById('viz');
   const jointPlotCanvas = document.getElementById('jointPlot');
@@ -292,7 +312,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const forceReadoutTitle = document.getElementById('forceReadoutTitle');
 
   let isPlaying = false, rafId = null, lastT = null, phase = 0;
-  const animAmp = 74, animOmega = 0.6;
+  let animAmp = 74;
+  const animOmega = 0.6;
 
   // --- Drawing Functions ---
 
@@ -349,9 +370,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.beginPath();
     
     const endAngleRad = startAngleRad + alphaRad;
-    // Because the coordinate system is flipped vertically (scale(1, -1)),
-    // the definition of counter-clockwise is also flipped.
-    // A positive alpha (CCW in math) requires a clockwise arc draw.
     const counterclockwise = alphaDeg < 0; 
 
     ctx.arc(0, 0, radius, startAngleRad, endAngleRad, counterclockwise);
@@ -623,9 +641,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Main Update Function ---
   function drawAll() {
     const sliderInputDeg = parseFloat(slider.value);
-    const servoMode = document.querySelector('input[name="servoMode"]:checked').value;
+    const task = document.querySelector('input[name="task"]:checked').value;
     
-    const state = hapticSystem.update(sliderInputDeg, servoMode);
+    let state;
+    if (task === 'resistance') {
+      const servoMode = document.querySelector('input[name="servoMode"]:checked').value;
+      state = hapticSystem.updateResistance(sliderInputDeg, servoMode);
+    } else { // motion
+      state = hapticSystem.updateMotion(sliderInputDeg);
+    }
     
     const forceFrame = document.querySelector('input[name="forceFrame"]:checked').value;
     const forceType = document.querySelector('input[name="forceType"]:checked').value;
@@ -657,16 +681,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   function updateAngleFormulas(state) {
-    const { dtheta_hDeg, servoMode } = state.inputs;
+    const { dtheta_hDeg, betaSDeg } = state.inputs;
     const { theta_h, betaS, psi, alpha } = state.angles;
 
     thetaHBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #f59e0b; font-weight: 600;">θh</b> = 90° + <b style="color: #f59e0b; font-weight: 600;">Δθh</b></div>
                                  <div>90° + ${dtheta_hDeg.toFixed(1)}° = <b>${theta_h.toFixed(1)}°</b></div>`;
     
     const unclampedBetaS = hapticSystem.ratio * dtheta_hDeg;
-    const betaSFormula = (servoMode === 'shifting') ? '0.73·Δθh' : '0';
-    betaSBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #1e293b; font-weight: 600;">βs</b> = ${servoMode === 'shifting' ? `clamp(0.73·<b style="color: #f59e0b; font-weight: 600;">Δθh</b>, ±54°)` : '0'}</div>
-                                      <div>${servoMode === 'shifting' ? `clamp(${(hapticSystem.ratio * dtheta_hDeg).toFixed(1)}°)` : ''} = <b>${betaS.toFixed(1)}°</b></div>`;
+    const betaSFormula = (state.inputs.servoMode === 'shifting') ? '0.73·Δθh' : '0';
+    betaSBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #1e293b; font-weight: 600;">βs</b> = ${state.inputs.servoMode === 'shifting' ? `clamp(0.73·<b style="color: #f59e0b; font-weight: 600;">Δθh</b>, ±54°)` : '0'}</div>
+                                      <div>${state.inputs.servoMode === 'shifting' ? `clamp(${(hapticSystem.ratio * dtheta_hDeg).toFixed(1)}°)` : ''} = <b>${betaS.toFixed(1)}°</b></div>`;
 
     psiBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #3b82f6; font-weight: 600;">ψ</b> = <b style="color: #f59e0b; font-weight: 600;">θh</b> + 180° + <b style="color: #1e293b; font-weight: 600;">βs</b></div>
                                   <div>${theta_h.toFixed(1)}°+180°+${betaS.toFixed(1)}° = <b>${psi.toFixed(1)}°</b></div>`;
@@ -760,6 +784,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     drawAll();
   });
+
+  taskRadios.forEach(radio => radio.addEventListener('change', (e) => {
+    const task = e.target.value;
+    if (task === 'resistance') {
+        sliderLabel.textContent = 'Handle Displacement (Δθh)';
+        sliderRange.textContent = 'Range: [−74°, +74°]';
+        slider.min = -74;
+        slider.max = 74;
+        animAmp = 74;
+    } else { // motion
+        sliderLabel.textContent = 'Servo Angle (βs)';
+        sliderRange.textContent = 'Range: [−54°, +54°]';
+        slider.min = -54;
+        slider.max = 54;
+        animAmp = 54;
+    }
+    slider.value = 0;
+    drawAll();
+  }));
   
   forceTypeRadios.forEach(radio => radio.addEventListener('change', drawAll));
   forceFrameRadios.forEach(radio => radio.addEventListener('change', drawAll));
