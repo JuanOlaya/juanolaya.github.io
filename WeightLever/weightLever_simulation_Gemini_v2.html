@@ -70,7 +70,7 @@
 </head>
 <body class="p-4 md:p-8">
 
-<h1 class="text-3xl font-bold text-slate-800 text-center mb-8">Resistance Force Simulation</h1>
+<h1 id="mainTitle" class="text-3xl font-bold text-slate-800 text-center mb-8">Resistance Force Simulation</h1>
 
 <div class="max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-7 gap-6">
 
@@ -287,6 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const playPauseBtn = document.getElementById('playPauseBtn');
   const stopBtn = document.getElementById('stopBtn');
   const taskRadios = document.querySelectorAll('input[name="task"]');
+  const mainTitle = document.getElementById('mainTitle');
 
   const vizCanvas = document.getElementById('viz');
   const jointPlotCanvas = document.getElementById('jointPlot');
@@ -376,6 +377,17 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.stroke();
     ctx.restore();
   }
+  
+  function drawPsiArc(ctx, radius, psiRad) {
+    ctx.save();
+    ctx.strokeStyle = '#3b82f6'; // Color for psi
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.arc(0, 0, radius, 0, psiRad, false); // Always draw counter-clockwise from 0
+    ctx.stroke();
+    ctx.restore();
+  }
+
 
   function drawOrientationDial(ctx) {
     const dialRadius = 120; // Bigger
@@ -415,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.restore();
   }
 
-  function drawViz(state) {
+  function drawViz(state, task, forceFrame) {
     const w = vizCanvas.width;
     const h = vizCanvas.height;
     vizCtx.clearRect(0, 0, w, h);
@@ -433,13 +445,29 @@ document.addEventListener('DOMContentLoaded', () => {
     vizCtx.translate(w / 2, h / 2);
     vizCtx.scale(1, -1); // Flip Y axis to use standard math coordinates
     
-    drawLeverRangeArc(vizCtx, LpxLever);
-    drawHandleRangeArc(vizCtx, LpxHandle, true); // White mask
-    drawHandleRangeArc(vizCtx, LpxHandle, false); // Orange overlay
+    if (task === 'resistance') {
+        drawLeverRangeArc(vizCtx, LpxLever);
+        drawHandleRangeArc(vizCtx, LpxHandle, true); // White mask
+        drawHandleRangeArc(vizCtx, LpxHandle, false); // Orange overlay
+    } else { // motion
+        vizCtx.save();
+        vizCtx.fillStyle = 'rgba(59, 130, 246, 0.15)';
+        vizCtx.beginPath();
+        vizCtx.moveTo(0, 0);
+        const startAngle = hapticSystem._deg2rad(216);
+        const endAngle = hapticSystem._deg2rad(324);
+        vizCtx.arc(0, 0, LpxLever, startAngle, endAngle, false);
+        vizCtx.closePath();
+        vizCtx.fill();
+        vizCtx.restore();
+    }
     drawOrientationDial(vizCtx);
 
-    // Draw the new alpha arc
-    drawAlphaArc(vizCtx, 45, theta_hRad, alphaRad, alpha);
+    if (forceFrame === 'handle') {
+      drawAlphaArc(vizCtx, 45, theta_hRad, alphaRad, alpha);
+    } else {
+      drawPsiArc(vizCtx, 45, psiRad);
+    }
 
     const uLever = { x: Math.cos(psiRad), y: Math.sin(psiRad) };
     const uHandleY = { x: Math.cos(theta_hRad), y: Math.sin(theta_hRad) };
@@ -472,16 +500,28 @@ document.addEventListener('DOMContentLoaded', () => {
     vizCtx.fillText('X_h', (axisLen + 12) * uHandleX.x, -(axisLen + 12) * uHandleX.y);
     vizCtx.fillText('Y_h', (axisLen + 12) * uHandleY.x, -(axisLen + 12) * uHandleY.y);
     
-    // Add alpha label
-    vizCtx.fillStyle = '#ec4899';
-    vizCtx.font = 'bold 20px system-ui';
-    const midAlphaAngle = theta_hRad + (alphaRad / 2);
-    const alphaLabelRadius = 65;
-    const labelX = alphaLabelRadius * Math.cos(midAlphaAngle);
-    const labelY = -alphaLabelRadius * Math.sin(midAlphaAngle); // Y is flipped back
-    vizCtx.textAlign = 'center';
-    vizCtx.textBaseline = 'middle';
-    vizCtx.fillText('α', labelX, labelY);
+    if (forceFrame === 'handle') {
+      vizCtx.fillStyle = '#ec4899';
+      vizCtx.font = 'bold 20px system-ui';
+      const midAlphaAngle = theta_hRad + (alphaRad / 2);
+      const alphaLabelRadius = 65;
+      const labelX = alphaLabelRadius * Math.cos(midAlphaAngle);
+      const labelY = -alphaLabelRadius * Math.sin(midAlphaAngle); // Y is flipped back
+      vizCtx.textAlign = 'center';
+      vizCtx.textBaseline = 'middle';
+      vizCtx.fillText('α', labelX, labelY);
+    } else {
+      vizCtx.fillStyle = '#3b82f6';
+      vizCtx.font = 'bold 20px system-ui';
+      const midPsiAngle = psiRad / 2;
+      const psiLabelRadius = 65;
+      const labelX = psiLabelRadius * Math.cos(midPsiAngle);
+      const labelY = -psiLabelRadius * Math.sin(midPsiAngle); // Y is flipped back
+      vizCtx.textAlign = 'center';
+      vizCtx.textBaseline = 'middle';
+      vizCtx.fillText('ψ', labelX, labelY);
+    }
+
 
     vizCtx.restore();
 
@@ -655,7 +695,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const forceType = document.querySelector('input[name="forceType"]:checked').value;
     
     // Update visualizations
-    drawViz(state);
+    drawViz(state, task, forceFrame);
     drawForcePlot(state, forceFrame);
     drawTorquePlot(state);
     
@@ -788,12 +828,14 @@ document.addEventListener('DOMContentLoaded', () => {
   taskRadios.forEach(radio => radio.addEventListener('change', (e) => {
     const task = e.target.value;
     if (task === 'resistance') {
+        mainTitle.textContent = 'Resistance Force Simulation';
         sliderLabel.textContent = 'Handle Displacement (Δθh)';
         sliderRange.textContent = 'Range: [−74°, +74°]';
         slider.min = -74;
         slider.max = 74;
         animAmp = 74;
     } else { // motion
+        mainTitle.textContent = 'Motion Force Simulation';
         sliderLabel.textContent = 'Servo Angle (βs)';
         sliderRange.textContent = 'Range: [−54°, +54°]';
         slider.min = -54;
