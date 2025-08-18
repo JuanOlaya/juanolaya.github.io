@@ -376,7 +376,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const startAngle = hapticSystem._deg2rad(psi_negative);
     const endAngle = hapticSystem._deg2rad(psi_positive);
     
-    // Because the canvas is flipped, `false` draws visually counter-clockwise.
     ctx.arc(0, 0, radius, startAngle, endAngle, false);
 
     ctx.closePath();
@@ -406,6 +405,34 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.arc(0, 0, radius, 0, psiRad, false); // Always draw counter-clockwise from 0
     ctx.stroke();
     ctx.restore();
+  }
+
+  function drawWorldAxes(ctx) {
+      const axisLength = 160; // Make it longer than the dial
+      ctx.save();
+      ctx.strokeStyle = '#d4d4d8'; // A lighter grey color
+      ctx.lineWidth = 1.5;
+      // X-axis
+      ctx.beginPath();
+      ctx.moveTo(-axisLength, 0);
+      ctx.lineTo(axisLength, 0);
+      ctx.stroke();
+      // Y-axis
+      ctx.beginPath();
+      ctx.moveTo(0, -axisLength);
+      ctx.lineTo(0, axisLength);
+      ctx.stroke();
+
+      // Add labels
+      ctx.save();
+      ctx.scale(1, -1); // Flip text to be upright
+      ctx.fillStyle = '#d4d4d8';
+      ctx.font = 'bold 16px system-ui';
+      ctx.fillText('Xg', axisLength + 10, 10);
+      ctx.fillText('Yg', -20, -(axisLength + 5));
+      ctx.restore();
+
+      ctx.restore();
   }
 
 
@@ -481,13 +508,18 @@ document.addEventListener('DOMContentLoaded', () => {
         vizCtx.closePath();
         vizCtx.fill();
         vizCtx.restore();
+        
+        // Also draw the handle range arc in motion mode
+        drawHandleRangeArc(vizCtx, LpxHandle, 74, true);
+        drawHandleRangeArc(vizCtx, LpxHandle, 74, false);
     }
     drawOrientationDial(vizCtx);
 
-    if (forceFrame === 'handle') {
-      drawAlphaArc(vizCtx, 45, theta_hRad, alphaRad, alpha);
+    if (forceFrame === 'global') {
+        drawWorldAxes(vizCtx);
+        drawPsiArc(vizCtx, 45, psiRad);
     } else {
-      drawPsiArc(vizCtx, 45, psiRad);
+      drawAlphaArc(vizCtx, 45, theta_hRad, alphaRad, alpha);
     }
 
     const uLever = { x: Math.cos(psiRad), y: Math.sin(psiRad) };
@@ -495,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const uHandleX = { x: Math.cos(theta_hRad - Math.PI/2), y: Math.sin(theta_hRad - Math.PI/2) };
 
     if (forceFrame === 'handle') {
-        const axisLen = 90; // Longer
+        const axisLen = 160; // Longer
         drawArrow(vizCtx, 0, 0, axisLen * uHandleX.x, axisLen * uHandleX.y, '#16a34a', 2.5); // Thicker
         drawArrow(vizCtx, 0, 0, axisLen * uHandleY.x, axisLen * uHandleY.y, '#16a34a', 2.5); // Thicker
     }
@@ -522,7 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (forceFrame === 'handle') {
       vizCtx.fillStyle = '#10b981';
       vizCtx.font = 'bold 16px system-ui';
-      const axisLen = 90;
+      const axisLen = 160;
       vizCtx.fillText('X_h', (axisLen + 12) * uHandleX.x, -(axisLen + 12) * uHandleX.y);
       vizCtx.fillText('Y_h', (axisLen + 12) * uHandleY.x, -(axisLen + 12) * uHandleY.y);
       
