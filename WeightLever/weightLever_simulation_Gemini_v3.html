@@ -93,16 +93,16 @@
               <span id="sliderRange" class="text-sm text-slate-500 whitespace-nowrap">Range: [−45°, +45°]</span>
             </div>
             <input id="slider" type="range" min="-45" max="45" step="0.1" value="0" class="relative z-10 w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" />
-            <div id="rangeControlContainer" class="mt-4">
+            <div class="flex items-center gap-2 mt-4">
+                <button id="playPauseBtn" aria-pressed="false" class="px-4 py-2 bg-indigo-100 text-indigo-700 font-semibold rounded-md hover:bg-indigo-200">▶ Play</button>
+                <button id="stopBtn" class="px-4 py-2 bg-slate-100 text-slate-700 font-semibold rounded-md hover:bg-slate-200">⏹ Stop</button>
+            </div>
+             <div id="rangeControlContainer" class="mt-4">
                  <div class="flex items-center justify-between mb-2">
                     <label for="rangeSlider" class="font-medium text-sm">Set Max Range (Δθh)</label>
                     <span id="rangeSliderValue" class="text-sm text-slate-500">45°</span>
                 </div>
                 <input id="rangeSlider" type="range" min="45" max="74" step="1" value="45" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
-            </div>
-            <div class="flex items-center gap-2 mt-4">
-                <button id="playPauseBtn" aria-pressed="false" class="px-4 py-2 bg-indigo-100 text-indigo-700 font-semibold rounded-md hover:bg-indigo-200">▶ Play</button>
-                <button id="stopBtn" class="px-4 py-2 bg-slate-100 text-slate-700 font-semibold rounded-md hover:bg-slate-200">⏹ Stop</button>
             </div>
         </fieldset>
         <fieldset class="border border-slate-200 rounded-lg p-4">
@@ -376,6 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const startAngle = hapticSystem._deg2rad(psi_negative);
     const endAngle = hapticSystem._deg2rad(psi_positive);
     
+    // Because the canvas is flipped, `false` draws visually counter-clockwise.
     ctx.arc(0, 0, radius, startAngle, endAngle, false);
 
     ctx.closePath();
@@ -493,9 +494,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const uHandleY = { x: Math.cos(theta_hRad), y: Math.sin(theta_hRad) };
     const uHandleX = { x: Math.cos(theta_hRad - Math.PI/2), y: Math.sin(theta_hRad - Math.PI/2) };
 
-    const axisLen = 90; // Longer
-    drawArrow(vizCtx, 0, 0, axisLen * uHandleX.x, axisLen * uHandleX.y, '#16a34a', 2.5); // Thicker
-    drawArrow(vizCtx, 0, 0, axisLen * uHandleY.x, axisLen * uHandleY.y, '#16a34a', 2.5); // Thicker
+    if (forceFrame === 'handle') {
+        const axisLen = 90; // Longer
+        drawArrow(vizCtx, 0, 0, axisLen * uHandleX.x, axisLen * uHandleX.y, '#16a34a', 2.5); // Thicker
+        drawArrow(vizCtx, 0, 0, axisLen * uHandleY.x, axisLen * uHandleY.y, '#16a34a', 2.5); // Thicker
+    }
     
     const leverEnd = { x: LpxLever * uLever.x, y: LpxLever * uLever.y };
     drawArrow(vizCtx, 0, 0, leverEnd.x, leverEnd.y, '#3b82f6', 8);
@@ -515,12 +518,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Draw labels last, after flipping text back
     vizCtx.save();
     vizCtx.scale(1, -1);
-    vizCtx.fillStyle = '#10b981';
-    vizCtx.font = 'bold 16px system-ui';
-    vizCtx.fillText('X_h', (axisLen + 12) * uHandleX.x, -(axisLen + 12) * uHandleX.y);
-    vizCtx.fillText('Y_h', (axisLen + 12) * uHandleY.x, -(axisLen + 12) * uHandleY.y);
     
     if (forceFrame === 'handle') {
+      vizCtx.fillStyle = '#10b981';
+      vizCtx.font = 'bold 16px system-ui';
+      const axisLen = 90;
+      vizCtx.fillText('X_h', (axisLen + 12) * uHandleX.x, -(axisLen + 12) * uHandleX.y);
+      vizCtx.fillText('Y_h', (axisLen + 12) * uHandleY.x, -(axisLen + 12) * uHandleY.y);
+      
       vizCtx.fillStyle = '#ec4899';
       vizCtx.font = 'bold 20px system-ui';
       const midAlphaAngle = theta_hRad + (alphaRad / 2);
