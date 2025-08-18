@@ -82,8 +82,8 @@
         <fieldset class="border border-slate-200 rounded-lg p-4">
             <legend class="px-2 font-semibold">Task</legend>
              <div class="flex flex-col gap-1 mt-1">
-                <label class="flex items-center gap-2"><input type="radio" name="task" value="resistance" checked> Resistance</label>
-                <label class="flex items-center gap-2"><input type="radio" name="task" value="motion"> Motion</label>
+                <label class="flex items-center gap-2"><input type="radio" name="task" value="resistance" checked> Resistance (steering wheel)</label>
+                <label class="flex items-center gap-2"><input type="radio" name="task" value="motion"> Motion (helicopter)</label>
             </div>
         </fieldset>
         <fieldset class="border border-slate-200 rounded-lg p-4">
@@ -118,8 +118,8 @@
                 <div>
                     <label class="font-medium text-sm">Coordinate System</label>
                     <div class="flex flex-col gap-1 mt-1">
-                        <label class="flex items-center gap-2"><input type="radio" name="forceFrame" value="global"> World Frame</label>
-                        <label class="flex items-center gap-2" title="The Handle's Perspective (X_h and Y_h rotating)"><input type="radio" name="forceFrame" value="handle" checked> Handle Frame</label>
+                        <label class="flex items-center gap-2"><input type="radio" name="forceFrame" value="global" checked> World Frame</label>
+                        <label class="flex items-center gap-2" title="The Handle's Perspective (X_h and Y_h rotating)"><input type="radio" name="forceFrame" value="handle"> Handle Frame</label>
                     </div>
                 </div>
             </div>
@@ -191,7 +191,7 @@
             <legend class="px-2 font-semibold">Calculations</legend>
             <div class="angle-breakdown flex flex-col gap-2">
                 <div id="forceReadoutTitle" class="font-semibold text-sm" title="A force is a push or a pull that makes something move in a straight line."></div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 gap-4">
                     <div id="forceReadoutBreakdownFx"></div>
                     <div id="forceReadoutBreakdownFy"></div>
                 </div>
@@ -214,7 +214,7 @@ class HapticLeverSystem {
     this.L = options.leverLength || 0.20; // Constant length
     this.theta_h0 = options.initialThetaH || 90;
     this.ratio = options.servoRatio || 0.73;
-    this.servoLimit = options.servoLimit || 54;
+    this.servoLimit = options.servoLimit || 81; // Updated servo limit
     this.mg = this.m * this.g;
     this.state = this.updateResistance(0, 'shifting');
   }
@@ -454,8 +454,8 @@ document.addEventListener('DOMContentLoaded', () => {
         vizCtx.fillStyle = 'rgba(59, 130, 246, 0.15)';
         vizCtx.beginPath();
         vizCtx.moveTo(0, 0);
-        const startAngle = hapticSystem._deg2rad(216);
-        const endAngle = hapticSystem._deg2rad(324);
+        const startAngle = hapticSystem._deg2rad(189);
+        const endAngle = hapticSystem._deg2rad(351);
         vizCtx.arc(0, 0, LpxLever, startAngle, endAngle, false);
         vizCtx.closePath();
         vizCtx.fill();
@@ -837,10 +837,10 @@ document.addEventListener('DOMContentLoaded', () => {
     } else { // motion
         mainTitle.textContent = 'Motion Force Simulation';
         sliderLabel.textContent = 'Servo Angle (βs)';
-        sliderRange.textContent = 'Range: [−54°, +54°]';
-        slider.min = -54;
-        slider.max = 54;
-        animAmp = 54;
+        sliderRange.textContent = 'Range: [−81°, +81°]';
+        slider.min = -81;
+        slider.max = 81;
+        animAmp = 81;
     }
     slider.value = 0;
     drawAll();
