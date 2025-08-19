@@ -82,8 +82,9 @@
         <fieldset class="border border-slate-200 rounded-lg p-4">
             <legend class="px-2 font-semibold">Task</legend>
              <div class="flex flex-col gap-1 mt-1">
-                <label class="flex items-center gap-2"><input type="radio" name="task" value="resistance" checked> Resistance (steering wheel)</label>
-                <label class="flex items-center gap-2"><input type="radio" name="task" value="motion"> Motion (helicopter)</label>
+                <label class="flex items-center gap-2"><input type="radio" name="task" value="motion" checked> 5 Motion (helicopter)</label>
+                <label class="flex items-center gap-2"><input type="radio" name="task" value="resistance"> 6.1 Resistance (current)</label>
+                <label class="flex items-center gap-2"><input type="radio" name="task" value="resistance_torque"> 6.2 Resistance (max. torque)</label>
             </div>
         </fieldset>
         <fieldset id="simulationFieldset" class="border border-slate-200 rounded-lg p-4">
@@ -111,7 +112,7 @@
                 <div>
                     <label class="font-medium text-sm">Force Type</label>
                     <div class="flex flex-col gap-1 mt-1">
-                        <label class="flex items-center gap-2"><input type="radio" name="forceType" value="mass" checked> Mass Force</label>
+                        <label class="flex items-center gap-2"><input type="radio" name="forceType" value="mass" checked> Action (mass force)</label>
                         <label class="flex items-center gap-2"><input type="radio" name="forceType" value="reaction"> Reaction Force</label>
                     </div>
                 </div>
@@ -193,17 +194,21 @@
               <div id="alphaBreakdown"></div>
           </div>
         </fieldset>
-        <!-- Force & Torque Calculations -->
+        <!-- Force Calculations -->
         <fieldset class="border border-slate-200 rounded-lg p-4 h-full">
-            <legend class="px-2 font-semibold">Calculations</legend>
+            <legend class="px-2 font-semibold" title="A force is a push or a pull that makes something move in a straight line.">Force</legend>
             <div class="angle-breakdown flex flex-col gap-2">
-                <div id="forceReadoutTitle" class="font-semibold text-sm" title="A force is a push or a pull that makes something move in a straight line."></div>
+                <div id="forceReadoutTitle" class="font-semibold text-sm"></div>
                 <div class="grid grid-cols-1 gap-4">
                     <div id="forceReadoutBreakdownFx"></div>
                     <div id="forceReadoutBreakdownFy"></div>
                 </div>
-                <hr class="border-slate-200"/>
-                <div class="font-semibold text-sm mt-2">Torque</div>
+            </div>
+        </fieldset>
+         <!-- Torque Calculations -->
+        <fieldset class="border border-slate-200 rounded-lg p-4 h-full">
+            <legend class="px-2 font-semibold" title="A torque is a twisting or turning force that makes something rotate around a pivot point.">Torque</legend>
+            <div class="angle-breakdown flex flex-col gap-2">
                 <div id="torqueReadoutBreakdown"></div>
             </div>
         </fieldset>
@@ -272,6 +277,12 @@ class HapticLeverSystem {
         betaS = 0;
     }
     return this._calculateState(theta_h, betaS, dtheta_hDeg, servoMode);
+  }
+  
+  updateResistanceTorque(dtheta_hDeg) {
+    const theta_h = this.theta_h0 + dtheta_hDeg;
+    const betaS = this._clamp(-this.ratio * dtheta_hDeg, -this.servoLimit, this.servoLimit);
+    return this._calculateState(theta_h, betaS, dtheta_hDeg, 'shifting');
   }
 
   updateMotion(betaSDeg) {
@@ -492,7 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
     vizCtx.translate(w / 2, h / 2);
     vizCtx.scale(1, -1); // Flip Y axis to use standard math coordinates
     
-    if (task === 'resistance') {
+    if (task === 'resistance' || task === 'resistance_torque') {
         const currentRange = parseFloat(rangeSlider.value);
         drawLeverRangeArc(vizCtx, LpxLever, currentRange);
         drawHandleRangeArc(vizCtx, LpxHandle, currentRange, true); // White mask
@@ -508,10 +519,6 @@ document.addEventListener('DOMContentLoaded', () => {
         vizCtx.closePath();
         vizCtx.fill();
         vizCtx.restore();
-        
-        // Also draw the handle range arc in motion mode
-        drawHandleRangeArc(vizCtx, LpxHandle, 74, true);
-        drawHandleRangeArc(vizCtx, LpxHandle, 74, false);
     }
     drawOrientationDial(vizCtx);
 
@@ -744,6 +751,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (task === 'resistance') {
       const servoMode = document.querySelector('input[name="servoMode"]:checked').value;
       state = hapticSystem.updateResistance(sliderInputDeg, servoMode);
+    } else if (task === 'resistance_torque') {
+      state = hapticSystem.updateResistanceTorque(sliderInputDeg);
     } else { // motion
       state = hapticSystem.updateMotion(sliderInputDeg);
     }
@@ -780,14 +789,22 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateAngleFormulas(state) {
     const { dtheta_hDeg, betaSDeg } = state.inputs;
     const { theta_h, betaS, psi, alpha } = state.angles;
+    const task = document.querySelector('input[name="task"]:checked').value;
 
     thetaHBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #f59e0b; font-weight: 600;">θh</b> = 90° + <b style="color: #f59e0b; font-weight: 600;">Δθh</b></div>
                                  <div>90° + ${dtheta_hDeg.toFixed(1)}° = <b>${theta_h.toFixed(1)}°</b></div>`;
     
-    const unclampedBetaS = hapticSystem.ratio * dtheta_hDeg;
-    const betaSFormula = (state.inputs.servoMode === 'shifting') ? '0.73·Δθh' : '0';
-    betaSBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #1e293b; font-weight: 600;">βs</b> = ${state.inputs.servoMode === 'shifting' ? `clamp(0.73·<b style="color: #f59e0b; font-weight: 600;">Δθh</b>, ±54°)` : '0'}</div>
-                                      <div>${state.inputs.servoMode === 'shifting' ? `clamp(${(hapticSystem.ratio * dtheta_hDeg).toFixed(1)}°)` : ''} = <b>${betaS.toFixed(1)}°</b></div>`;
+    let betaSFormula = '';
+    if (task === 'resistance_torque') {
+        betaSFormula = `clamp(-0.73·<b style="color: #f59e0b; font-weight: 600;">Δθh</b>, ±81°)`;
+    } else if (state.inputs.servoMode === 'shifting') {
+        betaSFormula = `clamp(0.73·<b style="color: #f59e0b; font-weight: 600;">Δθh</b>, ±54°)`;
+    } else {
+        betaSFormula = '0';
+    }
+
+    betaSBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #1e293b; font-weight: 600;">βs</b> = ${betaSFormula}</div>
+                                      <div><b>${betaS.toFixed(1)}°</b></div>`;
 
     psiBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #3b82f6; font-weight: 600;">ψ</b> = <b style="color: #f59e0b; font-weight: 600;">θh</b> + 180° + <b style="color: #1e293b; font-weight: 600;">βs</b></div>
                                   <div>${theta_h.toFixed(1)}°+180°+${betaS.toFixed(1)}° = <b>${psi.toFixed(1)}°</b></div>`;
@@ -897,7 +914,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   taskRadios.forEach(radio => radio.addEventListener('change', (e) => {
     const task = e.target.value;
-    if (task === 'resistance') {
+    if (task === 'resistance' || task === 'resistance_torque') {
         mainTitle.textContent = 'Resistance Force Simulation';
         sliderLabel.textContent = 'Handle Displacement (Δθh)';
         const currentRange = parseFloat(rangeSlider.value);
