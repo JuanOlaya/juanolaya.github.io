@@ -83,7 +83,7 @@
             <legend class="px-2 font-semibold">Task</legend>
              <div class="flex flex-col gap-1 mt-1">
                 <label class="flex items-center gap-2"><input type="radio" name="task" value="motion" checked> 5 Motion (helicopter)</label>
-                <label class="flex items-center gap-2"><input type="radio" name="task" value="resistance"> 6.1 Resistance (current)</label>
+                <label class="flex items-center gap-2"><input type="radio" name="task" value="resistance"> 6.1 Resistance (car-current)</label>
                 <label class="flex items-center gap-2"><input type="radio" name="task" value="resistance_torque"> 6.2 Resistance (max. torque)</label>
             </div>
         </fieldset>
@@ -161,6 +161,15 @@
           <canvas id="torquePlot" width="800" height="450" aria-label="Torque curve vs psi"></canvas>
         </div>
       </div>
+       <div id="angularMomentumPlotContainer" class="hidden">
+        <hr/>
+        <div>
+            <h3 class="font-semibold mb-2">Torque vs. Handle Angle (Δθh)</h3>
+            <div class="flex flex-col gap-4">
+                <canvas id="angularMomentumPlot" width="800" height="450" aria-label="Torque vs Handle Angle"></canvas>
+            </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -212,6 +221,14 @@
                 <div id="torqueReadoutBreakdown"></div>
             </div>
         </fieldset>
+        <!-- Angular Momentum Calculations -->
+        <fieldset id="angularMomentumFieldset" class="border border-slate-200 rounded-lg p-4 h-full hidden">
+            <legend class="px-2 font-semibold flex justify-between items-center w-full cursor-pointer" id="toggleAngularMomentum">
+                <span>Angular Momentum</span>
+                <span id="angularMomentumToggleIcon">►</span>
+            </legend>
+            <div id="angularMomentumBreakdown" class="angle-breakdown flex-col gap-2 hidden"></div>
+        </fieldset>
       </div>
     </div>
   </div>
@@ -228,6 +245,7 @@ class HapticLeverSystem {
     this.ratio = options.servoRatio || 0.73;
     this.servoLimit = options.servoLimit || 81; // Updated servo limit
     this.mg = this.m * this.g;
+    this.I = this.m * this.L * this.L; // Moment of Inertia
     this.state = this.updateResistance(0, 'shifting');
   }
 
@@ -313,10 +331,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const vizCanvas = document.getElementById('viz');
   const jointPlotCanvas = document.getElementById('jointPlot');
   const torquePlotCanvas = document.getElementById('torquePlot');
+  const angularMomentumPlotCanvas = document.getElementById('angularMomentumPlot');
+  const angularMomentumPlotContainer = document.getElementById('angularMomentumPlotContainer');
+  const angularMomentumFieldset = document.getElementById('angularMomentumFieldset');
+  const angularMomentumBreakdown = document.getElementById('angularMomentumBreakdown');
+  const toggleAngularMomentum = document.getElementById('toggleAngularMomentum');
+  const angularMomentumToggleIcon = document.getElementById('angularMomentumToggleIcon');
   
   const vizCtx = vizCanvas.getContext('2d');
   const jointPlotCtx = jointPlotCanvas.getContext('2d');
   const torquePlotCtx = torquePlotCanvas.getContext('2d');
+  const angularMomentumPlotCtx = angularMomentumPlotCanvas.getContext('2d');
   
   const forceReadoutBreakdownFx = document.getElementById('forceReadoutBreakdownFx');
   const forceReadoutBreakdownFy = document.getElementById('forceReadoutBreakdownFy');
@@ -741,6 +766,60 @@ document.addEventListener('DOMContentLoaded', () => {
     torquePlotCtx.restore();
     // --- End of transformed drawing ---
   }
+  
+  function drawAngularMomentumPlot(state) {
+    const w = angularMomentumPlotCanvas.width;
+    const h = angularMomentumPlotCanvas.height;
+    angularMomentumPlotCtx.clearRect(0, 0, w, h);
+    
+    const pad = { x: 50, y: 30 };
+    const plotW = w - pad.x * 1.5;
+    const plotH = h - pad.y * 2;
+    
+    const tauMax = hapticSystem.mg * hapticSystem.L;
+    const dthetaMax = parseFloat(rangeSlider.value);
+    
+    // --- Start of transformed drawing ---
+    angularMomentumPlotCtx.save();
+    angularMomentumPlotCtx.translate(pad.x, h / 2);
+    angularMomentumPlotCtx.scale(1, -1);
+
+    const toX = (dtheta) => ((dtheta + dthetaMax) / (dthetaMax * 2)) * plotW;
+    const toY = (tau) => (tau / tauMax) * (plotH / 2);
+    
+    // Axes
+    angularMomentumPlotCtx.strokeStyle = '#94a3b8';
+    angularMomentumPlotCtx.lineWidth = 1.5;
+    angularMomentumPlotCtx.beginPath(); angularMomentumPlotCtx.moveTo(0, 0); angularMomentumPlotCtx.lineTo(plotW, 0); angularMomentumPlotCtx.stroke();
+    
+    // Torque curve
+    angularMomentumPlotCtx.strokeStyle = '#3b82f6';
+    angularMomentumPlotCtx.lineWidth = 2;
+    angularMomentumPlotCtx.beginPath();
+    for (let dtheta = -dthetaMax; dtheta <= dthetaMax; dtheta += 0.5) {
+        const tempState = hapticSystem.updateResistanceTorque(dtheta);
+        const px = toX(dtheta);
+        const py = toY(tempState.torque);
+        if (dtheta === -dthetaMax) angularMomentumPlotCtx.moveTo(px, py);
+        else angularMomentumPlotCtx.lineTo(px, py);
+    }
+    angularMomentumPlotCtx.stroke();
+    
+    // Current point
+    const { dtheta_hDeg } = state.inputs;
+    const { torque } = state;
+    const currentX = toX(dtheta_hDeg);
+    const currentY = toY(torque);
+    
+    angularMomentumPlotCtx.beginPath();
+    angularMomentumPlotCtx.arc(currentX, currentY, 5, 0, 2 * Math.PI);
+    angularMomentumPlotCtx.fillStyle = '#ef4444';
+    torquePlotCtx.restore();
+    angularMomentumPlotCtx.restore();
+
+    angularMomentumPlotCtx.restore();
+    // --- End of transformed drawing ---
+  }
 
   // --- Main Update Function ---
   function drawAll() {
@@ -751,10 +830,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (task === 'resistance') {
       const servoMode = document.querySelector('input[name="servoMode"]:checked').value;
       state = hapticSystem.updateResistance(sliderInputDeg, servoMode);
+      angularMomentumFieldset.classList.remove('hidden');
     } else if (task === 'resistance_torque') {
       state = hapticSystem.updateResistanceTorque(sliderInputDeg);
+      angularMomentumFieldset.classList.remove('hidden');
     } else { // motion
       state = hapticSystem.updateMotion(sliderInputDeg);
+      angularMomentumFieldset.classList.add('hidden');
     }
     
     const forceFrame = document.querySelector('input[name="forceFrame"]:checked').value;
@@ -764,10 +846,14 @@ document.addEventListener('DOMContentLoaded', () => {
     drawViz(state, task, forceFrame);
     drawForcePlot(state, forceFrame);
     drawTorquePlot(state);
+    if (task === 'resistance' || task === 'resistance_torque') {
+        drawAngularMomentumPlot(state);
+    }
     
     // Update formula breakdowns and titles
     updateFormulas(state);
     updateAngleFormulas(state);
+    updateAngularMomentumFormulas(state);
     
     const plotTitle = document.getElementById('jointPlotTitle');
     const readoutTitle = document.getElementById('forceReadoutTitle');
@@ -849,6 +935,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                         = (${mg.toFixed(1)})·(${L.toFixed(1)})·sin(${angles.psi.toFixed(1)}°)<br>
                                         = <b>${torque.toFixed(1)} N·m</b>`;
   }
+  
+  function updateAngularMomentumFormulas(state) {
+      angularMomentumBreakdown.innerHTML = `L = I · ω<br>
+        I = m · L² = <b>${hapticSystem.I.toFixed(3)} kg·m²</b><br>
+        <span class="text-xs text-slate-500">ω is the angular velocity (not calculated in this static simulation)</span>`;
+  }
 
   // --- Animation Logic ---
   function setPlayUI(playing) {
@@ -923,6 +1015,7 @@ document.addEventListener('DOMContentLoaded', () => {
         slider.max = currentRange;
         animAmp = currentRange;
         rangeControlContainer.style.display = 'block';
+        angularMomentumFieldset.classList.remove('hidden');
     } else { // motion
         mainTitle.textContent = 'Motion Force Simulation';
         sliderLabel.textContent = 'Servo Angle (βs)';
@@ -931,6 +1024,7 @@ document.addEventListener('DOMContentLoaded', () => {
         slider.max = 81;
         animAmp = 81;
         rangeControlContainer.style.display = 'none';
+        angularMomentumFieldset.classList.add('hidden');
     }
     slider.value = 0;
     drawAll();
@@ -941,13 +1035,37 @@ document.addEventListener('DOMContentLoaded', () => {
   servoModeRadios.forEach(radio => radio.addEventListener('change', drawAll));
   window.addEventListener('resize', drawAll);
 
+  toggleAngularMomentum.addEventListener('click', () => {
+      angularMomentumBreakdown.classList.toggle('hidden');
+      angularMomentumPlotContainer.classList.toggle('hidden');
+      if (angularMomentumBreakdown.classList.contains('hidden')) {
+          angularMomentumToggleIcon.textContent = '►';
+      } else {
+          angularMomentumToggleIcon.textContent = '▼';
+      }
+  });
+
   // --- Initialization ---
-  const initialRange = parseFloat(rangeSlider.value);
-  slider.min = -initialRange;
-  slider.max = initialRange;
-  sliderRange.textContent = `Range: [−${initialRange}°, +${initialRange}°]`;
-  rangeSliderValue.textContent = `${initialRange}°`;
-  animAmp = initialRange;
+  const initialTask = document.querySelector('input[name="task"]:checked').value;
+  if (initialTask === 'resistance' || initialTask === 'resistance_torque') {
+      mainTitle.textContent = 'Resistance Force Simulation';
+      sliderLabel.textContent = 'Handle Displacement (Δθh)';
+      const currentRange = parseFloat(rangeSlider.value);
+      sliderRange.textContent = `Range: [−${currentRange}°, +${currentRange}°]`;
+      slider.min = -currentRange;
+      slider.max = currentRange;
+      animAmp = currentRange;
+      rangeControlContainer.style.display = 'block';
+  } else { // motion
+      mainTitle.textContent = 'Motion Force Simulation';
+      sliderLabel.textContent = 'Servo Angle (βs)';
+      sliderRange.textContent = 'Range: [−81°, +81°]';
+      slider.min = -81;
+      slider.max = 81;
+      animAmp = 81;
+      rangeControlContainer.style.display = 'none';
+  }
+  slider.value = 0;
   drawAll();
 });
 </script>
