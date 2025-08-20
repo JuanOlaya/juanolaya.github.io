@@ -137,6 +137,13 @@
                         <label class="flex items-center gap-2"><input type="radio" name="axisVisibility" value="off"> Off</label>
                     </div>
                 </div>
+                 <div>
+                    <label class="font-medium text-sm">Indexes</label>
+                    <div class="flex flex-col gap-1 mt-1">
+                        <label class="flex items-center gap-2"><input type="radio" name="axisIndex" value="on" checked> On</label>
+                        <label class="flex items-center gap-2"><input type="radio" name="axisIndex" value="off"> Off</label>
+                    </div>
+                </div>
             </div>
         </fieldset>
       </div>
@@ -335,6 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const taskRadios = document.querySelectorAll('input[name="task"]');
   const mainTitle = document.getElementById('mainTitle');
   const axisVisibilityRadios = document.querySelectorAll('input[name="axisVisibility"]');
+  const axisIndexRadios = document.querySelectorAll('input[name="axisIndex"]');
 
   const vizCanvas = document.getElementById('viz');
   const jointPlotCanvas = document.getElementById('jointPlot');
@@ -472,8 +480,11 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.scale(1, -1); // Flip text to be upright
       ctx.fillStyle = '#d4d4d8';
       ctx.font = 'bold 16px system-ui';
-      ctx.fillText('Xg', axisLength + 10, 10);
-      ctx.fillText('Yg', -20, -(axisLength + 5));
+      const showIndexes = document.querySelector('input[name="axisIndex"]:checked').value === 'on';
+      const xLabel = showIndexes ? 'Xg' : 'X';
+      const yLabel = showIndexes ? 'Yg' : 'Y';
+      ctx.fillText(xLabel, axisLength + 10, 10);
+      ctx.fillText(yLabel, -20, -(axisLength + 5));
       ctx.restore();
 
       ctx.restore();
@@ -594,12 +605,16 @@ document.addEventListener('DOMContentLoaded', () => {
     vizCtx.save();
     vizCtx.scale(1, -1);
     
+    const showIndexes = document.querySelector('input[name="axisIndex"]:checked').value === 'on';
+
     if (forceFrame === 'handle') {
       vizCtx.fillStyle = '#10b981';
       vizCtx.font = 'bold 16px system-ui';
       const axisLen = 160;
-      vizCtx.fillText('X_h', (axisLen + 12) * uHandleX.x, -(axisLen + 12) * uHandleX.y);
-      vizCtx.fillText('Y_h', (axisLen + 12) * uHandleY.x, -(axisLen + 12) * uHandleY.y);
+      const xLabel = showIndexes ? 'X_h' : 'X';
+      const yLabel = showIndexes ? 'Y_h' : 'Y';
+      vizCtx.fillText(xLabel, (axisLen + 12) * uHandleX.x, -(axisLen + 12) * uHandleX.y);
+      vizCtx.fillText(yLabel, (axisLen + 12) * uHandleY.x, -(axisLen + 12) * uHandleY.y);
       
       vizCtx.fillStyle = '#ec4899';
       vizCtx.font = 'bold 20px system-ui';
@@ -685,8 +700,9 @@ document.addEventListener('DOMContentLoaded', () => {
     jointPlotCtx.font = '18px system-ui'; // Increased font size
     jointPlotCtx.textAlign = 'center';
     jointPlotCtx.textBaseline = 'middle';
-    const xLabel = forceFrame === 'global' ? 'X_g (N)' : 'X_h (N)';
-    const yLabel = forceFrame === 'global' ? 'Y_g (N)' : 'Y_h (N)';
+    const showIndexes = document.querySelector('input[name="axisIndex"]:checked').value === 'on';
+    const xLabel = forceFrame === 'global' ? (showIndexes ? 'X_g (N)' : 'X (N)') : (showIndexes ? 'X_h (N)' : 'X (N)');
+    const yLabel = forceFrame === 'global' ? (showIndexes ? 'Y_g (N)' : 'Y (N)') : (showIndexes ? 'Y_h (N)' : 'Y (N)');
     jointPlotCtx.fillText(xLabel, 0, (h / 2) - (pad / 2));
     jointPlotCtx.save();
     jointPlotCtx.rotate(Math.PI / 2);
