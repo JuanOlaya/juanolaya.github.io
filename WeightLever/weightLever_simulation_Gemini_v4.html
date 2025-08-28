@@ -85,6 +85,7 @@
                 <label class="flex items-center gap-2"><input type="radio" name="task" value="motion" checked> 5 Motion (helicopter)</label>
                 <label class="flex items-center gap-2"><input type="radio" name="task" value="resistance"> 6.1 Resistance (car-current)</label>
                 <label class="flex items-center gap-2"><input type="radio" name="task" value="resistance_torque"> 6.2 Resistance (max. torque)</label>
+                <label class="flex items-center gap-2"><input type="radio" name="task" value="impact"> Impact</label>
             </div>
         </fieldset>
         <fieldset id="simulationFieldset" class="border border-slate-200 rounded-lg p-4">
@@ -208,6 +209,7 @@
                     <span><b style="color: #1e293b;">βs</b> (beta):</span> <span>servo</span>
                     <span><b style="color: #3b82f6;">ψ</b> (psi):</span> <span>lever-mass</span>
                     <span><b style="color: #ec4899;">α</b> (alpha):</span> <span>relative angle</span>
+                    <span id="gammaDef" class="hidden"><b style="color: #14b8a6;">γ</b> (gamma):</span> <span class="hidden">impact angle</span>
                 </div>
               </div>
               <hr class="border-slate-200"/>
@@ -215,6 +217,7 @@
               <div id="betaSBreakdown"></div>
               <div id="psiBreakdown"></div>
               <div id="alphaBreakdown"></div>
+              <div id="gammaBreakdown" class="hidden"></div>
           </div>
         </fieldset>
         <!-- Force Calculations -->
@@ -267,8 +270,8 @@ class HapticLeverSystem {
   _clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
   _normalizeAngle(deg) { return ((deg % 360) + 360) % 360; }
 
-  _calculateState(theta_h, betaS, dtheta_hDeg, servoMode) {
-    const psi = this._normalizeAngle(theta_h + 180 + betaS);
+  _calculateState(theta_h, betaS, dtheta_hDeg, servoMode, gammaDeg = null) {
+    const psi = this._normalizeAngle(gammaDeg !== null ? gammaDeg : theta_h + 180 + betaS);
     let alpha = psi - theta_h;
     alpha = this._normalizeAngle(alpha + 180) - 180;
 
@@ -288,7 +291,7 @@ class HapticLeverSystem {
         betaSDeg: betaS,
         servoMode: servoMode
       },
-      angles: { theta_h: theta_h, betaS: betaS, psi: psi, alpha: alpha },
+      angles: { theta_h: theta_h, betaS: betaS, psi: psi, alpha: alpha, gamma: gammaDeg },
       forces: {
         mass_global: { x: force_global_x, y: force_global_y },
         mass_handle: { x: force_handle_x, y: force_handle_y },
@@ -321,6 +324,13 @@ class HapticLeverSystem {
       const dtheta_hDeg = 0;
       const theta_h = this.theta_h0 + dtheta_hDeg;
       return this._calculateState(theta_h, betaSDeg, dtheta_hDeg, 'shifting');
+  }
+  
+  updateImpact(gammaDeg) {
+      const dtheta_hDeg = 0;
+      const theta_h = this.theta_h0;
+      const betaS = 0; // Not directly used, but can be derived
+      return this._calculateState(theta_h, betaS, dtheta_hDeg, 'shifting', gammaDeg);
   }
 
   getState() { return this.state; }
@@ -367,6 +377,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const betaSBreakdown = document.getElementById('betaSBreakdown');
   const psiBreakdown = document.getElementById('psiBreakdown');
   const alphaBreakdown = document.getElementById('alphaBreakdown');
+  const gammaBreakdown = document.getElementById('gammaBreakdown');
+  const gammaDef = document.getElementById('gammaDef');
   
   const forceTypeRadios = document.querySelectorAll('input[name="forceType"]');
   const forceFrameRadios = document.querySelectorAll('input[name="forceFrame"]');
@@ -474,19 +486,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.moveTo(0, -axisLength);
       ctx.lineTo(0, axisLength);
       ctx.stroke();
-
-      // Add labels
-      ctx.save();
-      ctx.scale(1, -1); // Flip text to be upright
-      ctx.fillStyle = '#d4d4d8';
-      ctx.font = 'bold 16px system-ui';
-      const showIndexes = document.querySelector('input[name="axisIndex"]:checked').value === 'on';
-      const xLabel = showIndexes ? 'Xg' : 'X';
-      const yLabel = showIndexes ? 'Yg' : 'Y';
-      ctx.fillText(xLabel, axisLength + 10, 10);
-      ctx.fillText(yLabel, -20, -(axisLength + 5));
-      ctx.restore();
-
       ctx.restore();
   }
 
@@ -556,7 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
         drawLeverRangeArc(vizCtx, LpxLever, currentRange);
         drawHandleRangeArc(vizCtx, LpxHandle, currentRange, true); // White mask
         drawHandleRangeArc(vizCtx, LpxHandle, currentRange, false); // Orange overlay
-    } else { // motion
+    } else if (task === 'motion') {
         vizCtx.save();
         vizCtx.fillStyle = 'rgba(59, 130, 246, 0.15)';
         vizCtx.beginPath();
@@ -567,7 +566,19 @@ document.addEventListener('DOMContentLoaded', () => {
         vizCtx.closePath();
         vizCtx.fill();
         vizCtx.restore();
+    } else if (task === 'impact') {
+        vizCtx.save();
+        vizCtx.fillStyle = 'rgba(59, 130, 246, 0.15)'; // Teal color
+        vizCtx.beginPath();
+        vizCtx.moveTo(0, 0);
+        const startAngle = hapticSystem._deg2rad(270);
+        const endAngle = hapticSystem._deg2rad(360);
+        vizCtx.arc(0, 0, LpxLever, startAngle, endAngle, false); 
+        vizCtx.closePath();
+        vizCtx.fill();
+        vizCtx.restore();
     }
+    
     drawOrientationDial(vizCtx);
 
     if (forceFrame === 'handle') {
@@ -626,15 +637,27 @@ document.addEventListener('DOMContentLoaded', () => {
       vizCtx.textBaseline = 'middle';
       vizCtx.fillText('α', labelX, labelY);
     } else {
-      vizCtx.fillStyle = '#3b82f6';
+      let symbol, color, angleRad, radius;
+      if (task === 'impact') {
+          symbol = 'γ';
+          color = '#14b8a6';
+          angleRad = hapticSystem._deg2rad(state.angles.gamma);
+          radius = 85;
+      } else {
+          symbol = 'ψ';
+          color = '#3b82f6';
+          angleRad = psiRad;
+          radius = 65;
+      }
+
+      vizCtx.fillStyle = color;
       vizCtx.font = 'bold 20px system-ui';
-      const psiLabelRadius = 85; // Increased radius
-      const labelAngle = psiRad - hapticSystem._deg2rad(10); // Offset to the left
-      const labelX = psiLabelRadius * Math.cos(labelAngle);
-      const labelY = -psiLabelRadius * Math.sin(labelAngle); // Y is flipped back
+      const labelAngle = angleRad - hapticSystem._deg2rad(10); // Offset to the left
+      const labelX = radius * Math.cos(labelAngle);
+      const labelY = -radius * Math.sin(labelAngle); // Y is flipped back
       vizCtx.textAlign = 'center';
       vizCtx.textBaseline = 'middle';
-      vizCtx.fillText('ψ', labelX, labelY);
+      vizCtx.fillText(symbol, labelX, labelY);
     }
 
 
@@ -701,8 +724,8 @@ document.addEventListener('DOMContentLoaded', () => {
     jointPlotCtx.textAlign = 'center';
     jointPlotCtx.textBaseline = 'middle';
     const showIndexes = document.querySelector('input[name="axisIndex"]:checked').value === 'on';
-    const xLabel = forceFrame === 'global' ? (showIndexes ? 'X_g (N)' : 'X (N)') : (showIndexes ? 'X_h (N)' : 'X (N)');
-    const yLabel = forceFrame === 'global' ? (showIndexes ? 'Y_g (N)' : 'Y (N)') : (showIndexes ? 'Y_h (N)' : 'Y (N)');
+    const xLabel = forceFrame === 'global' ? (showIndexes ? 'Zg (N)' : 'Z (N)') : (showIndexes ? 'X_h (N)' : 'X (N)');
+    const yLabel = forceFrame === 'global' ? (showIndexes ? 'Yg (N)' : 'Y (N)') : (showIndexes ? 'Y_h (N)' : 'Y (N)');
     jointPlotCtx.fillText(xLabel, 0, (h / 2) - (pad / 2));
     jointPlotCtx.save();
     jointPlotCtx.rotate(Math.PI / 2);
@@ -861,6 +884,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (task === 'resistance_torque') {
       state = hapticSystem.updateResistanceTorque(sliderInputDeg);
       angularMomentumFieldset.classList.remove('hidden');
+    } else if (task === 'impact') {
+        state = hapticSystem.updateImpact(sliderInputDeg);
+        angularMomentumFieldset.classList.add('hidden');
     } else { // motion
       state = hapticSystem.updateMotion(sliderInputDeg);
       angularMomentumFieldset.classList.add('hidden');
@@ -901,8 +927,27 @@ document.addEventListener('DOMContentLoaded', () => {
   
   function updateAngleFormulas(state) {
     const { dtheta_hDeg, betaSDeg } = state.inputs;
-    const { theta_h, betaS, psi, alpha } = state.angles;
+    const { theta_h, betaS, psi, alpha, gamma } = state.angles;
     const task = document.querySelector('input[name="task"]:checked').value;
+    
+    const angleElements = [thetaHBreakdown, betaSBreakdown, psiBreakdown, alphaBreakdown, gammaBreakdown];
+    angleElements.forEach(el => el.classList.add('hidden'));
+    gammaDef.classList.add('hidden');
+    gammaDef.nextElementSibling.classList.add('hidden');
+
+
+    if (task === 'impact') {
+        gammaBreakdown.classList.remove('hidden');
+        gammaDef.classList.remove('hidden');
+        gammaDef.nextElementSibling.classList.remove('hidden');
+        gammaBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #14b8a6; font-weight: 600;">γ</b> = slider value</div>
+                                  <div><b>${gamma.toFixed(1)}°</b></div>`;
+    } else {
+        thetaHBreakdown.classList.remove('hidden');
+        betaSBreakdown.classList.remove('hidden');
+        psiBreakdown.classList.remove('hidden');
+        alphaBreakdown.classList.remove('hidden');
+    }
 
     thetaHBreakdown.innerHTML = `<div class="text-slate-500 text-xs"><b style="color: #f59e0b; font-weight: 600;">θh</b> = 90° + <b style="color: #f59e0b; font-weight: 600;">Δθh</b></div>
                                  <div>90° + ${dtheta_hDeg.toFixed(1)}° = <b>${theta_h.toFixed(1)}°</b></div>`;
@@ -910,7 +955,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let betaSFormula = '';
     if (task === 'resistance_torque') {
         betaSFormula = `clamp(-0.73·<b style="color: #f59e0b; font-weight: 600;">Δθh</b>, ±81°)`;
-    } else if (state.inputs.servoMode === 'shifting') {
+    } else if (state.inputs.servoMode === 'shifting' && (task === 'resistance' || task === 'motion')) {
         betaSFormula = `clamp(0.73·<b style="color: #f59e0b; font-weight: 600;">Δθh</b>, ±54°)`;
     } else {
         betaSFormula = '0';
@@ -1043,7 +1088,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animAmp = currentRange;
         rangeControlContainer.style.display = 'block';
         angularMomentumFieldset.classList.remove('hidden');
-    } else { // motion
+    } else if (task === 'motion') {
         mainTitle.textContent = 'Motion Force Simulation';
         sliderLabel.textContent = 'Servo Angle (βs)';
         sliderRange.textContent = 'Range: [−81°, +81°]';
@@ -1052,8 +1097,17 @@ document.addEventListener('DOMContentLoaded', () => {
         animAmp = 81;
         rangeControlContainer.style.display = 'none';
         angularMomentumFieldset.classList.add('hidden');
+    } else { // impact
+        mainTitle.textContent = 'Impact Simulation';
+        sliderLabel.textContent = 'Impact Angle (γ)';
+        sliderRange.textContent = 'Range: [270°, 360°]';
+        slider.min = 270;
+        slider.max = 360;
+        animAmp = 90;
+        rangeControlContainer.style.display = 'none';
+        angularMomentumFieldset.classList.add('hidden');
     }
-    slider.value = 0;
+    slider.value = (task === 'impact') ? 270 : 0;
     drawAll();
   }));
   
