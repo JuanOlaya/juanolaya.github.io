@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palabras en Alemán con -lich</title>
+    <!-- Carga de la fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Kalam:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100%;
+            margin: 0;
+            background-color: #FFA985; /* Fondo Salmón */
+            padding: 20px;
+            font-family: 'Nunito', sans-serif;
+            color: #414A5C; /* Azul oscuro para texto */
+        }
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+            padding: 10px 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem; /* Reduced margin */
+            flex-wrap: wrap; 
+        }
+        .level-indicator {
+            width: 60px;
+            height: 60px;
+            background-color: #414A5C; /* Azul Oscuro */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #F0F1E8; /* Texto claro */
+            flex-shrink: 0;
+        }
+        .title {
+            font-family: 'Kalam', cursive;
+            font-size: 3rem;
+            color: #414A5C;
+            border-bottom: 3px dashed #E57373; /* Borde añadido */
+            padding-bottom: 0.5rem;
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        .word-item {
+            background-color: #FFE4E1;
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .word-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .word-item-content {
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+        .emoji {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+            text-shadow: none; 
+        }
+        .text-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .german-word {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #414A5C;
+        }
+        .spanish-translation {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-top: -5px;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        /* Estilos para el Active Recall Toggle */
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .active-recall-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .switch-label {
+            color: #414A5C;
+            cursor: pointer;
+            font-weight: 700; /* Bold */
+            text-align: right;
+            line-height: 1.2;
+        }
+        .label-translation {
+            display: block;
+            font-size: 0.8em;
+            font-style: italic;
+            font-weight: 400; /* Regular weight */
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #414A5C; /* Default ON */
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+            transform: translateX(26px); /* Default ON */
+        }
+        input:not(:checked) + .slider {
+            background-color: #ccc;
+        }
+        input:not(:checked) + .slider:before {
+            transform: translateX(0px);
+        }
+
+        /* Gemini API Features */
+        .story-container {
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #F0F1E8;
+            border-radius: 12px;
+            color: #414A5C;
+            display: none;
+            max-width: 800px;
+            text-align: left;
+        }
+        .story-container h3 {
+            font-family: 'Kalam', cursive;
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #87405E;
+        }
+        #story-button {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: white;
+            background-color: #414A5C;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        #story-button:hover {
+            background-color: #313846;
+            transform: translateY(-2px);
+        }
+        .button-translation {
+            display: block;
+            font-size: 0.8rem;
+            font-style: italic;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+        .loader {
+            text-align: center;
+            color: #414A5C;
+        }
+        .highlighted-word {
+            color: #8B456A;
+            font-weight: 700;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            font-size: 1.2rem;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        #modal-word-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        #modal-emoji {
+            font-size: 2rem;
+        }
+        #modal-word {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #414A5C;
+        }
+        #modal-full-spanish {
+            font-size: 1.1rem;
+            color: black;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .modal-type-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+            display: block;
+            margin-top: 0.5rem; /* Espacio añadido */
+        }
+        #modal-example-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        #modal-text {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .audio-button {
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+        .audio-button svg {
+            width: 32px;
+            height: 32px;
+            fill: #E57373; /* Tono salmón oscuro */
+        }
+        #modal-pronunciation {
+            font-style: italic;
+            color: black;
+            margin-bottom: 0.5rem;
+        }
+        #modal-spanish-translation {
+            color: #444;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        #modal-info {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        .modal-separator {
+            border: none;
+            border-top: 2px solid #E57373; /* Cambiado a línea continua */
+            margin: 1.5rem 0;
+        }
+        #example-navigation {
+            display: flex;
+            flex-direction: column; /* Stack vertically */
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem; /* Space between counter and buttons */
+        }
+        .nav-buttons-container {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav-button {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        #example-counter {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+        #close-modal {
+            margin-top: 1.5rem;
+            padding: 8px 16px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="header">
+            <div class="level-indicator">A1</div>
+            <h1 class="title">Wörter auf -lich</h1>
+        </div>
+
+        <div class="toggle-container">
+            <div class="active-recall-toggle">
+                <label class="switch-label" for="recall-switch">Übersetzung<span class="label-translation">(traducción)</span></label>
+                <label class="switch">
+                    <input type="checkbox" id="recall-switch" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <div class="cards-container">
+             <div class="word-item" onclick="openExampleModal('freundlich', '😊')">
+                <div class="word-item-content">
+                    <span class="emoji">😊</span>
+                    <div class="text-container">
+                        <span class="german-word">freundlich</span>
+                        <span class="spanish-translation">(amigable)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('täglich', '📅')">
+                <div class="word-item-content">
+                    <span class="emoji">📅</span>
+                    <div class="text-container">
+                        <span class="german-word">täglich</span>
+                        <span class="spanish-translation">(diario)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('pünktlich', '⏰')">
+                 <div class="word-item-content">
+                    <span class="emoji">⏰</span>
+                    <div class="text-container">
+                        <span class="german-word">pünktlich</span>
+                        <span class="spanish-translation">(puntual)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('glücklich', '😄')">
+                 <div class="word-item-content">
+                    <span class="emoji">😄</span>
+                    <div class="text-container">
+                        <span class="german-word">glücklich</span>
+                        <span class="spanish-translation">(feliz)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('natürlich', '🌱')">
+                 <div class="word-item-content">
+                    <span class="emoji">🌱</span>
+                    <div class="text-container">
+                        <span class="german-word">natürlich</span>
+                        <span class="spanish-translation">(por supuesto)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('möglich', '✅')">
+                 <div class="word-item-content">
+                    <span class="emoji">✅</span>
+                    <div class="text-container">
+                        <span class="german-word">möglich</span>
+                        <span class="spanish-translation">(posible)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('persönlich', '👤')">
+                 <div class="word-item-content">
+                    <span class="emoji">👤</span>
+                    <div class="text-container">
+                        <span class="german-word">persönlich</span>
+                        <span class="spanish-translation">(personal)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('gemütlich', '🛋️')">
+                 <div class="word-item-content">
+                    <span class="emoji">🛋️</span>
+                    <div class="text-container">
+                        <span class="german-word">gemütlich</span>
+                        <span class="spanish-translation">(acogedor)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('hässlich', '🤢')">
+                 <div class="word-item-content">
+                    <span class="emoji">🤢</span>
+                    <div class="text-container">
+                        <span class="german-word">hässlich</span>
+                        <span class="spanish-translation">(feo)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('sportlich', '⚽️')">
+                 <div class="word-item-content">
+                    <span class="emoji">⚽️</span>
+                    <div class="text-container">
+                        <span class="german-word">sportlich</span>
+                        <span class="spanish-translation">(deportivo)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('weiblich', '🚺')">
+                 <div class="word-item-content">
+                    <span class="emoji">🚺</span>
+                    <div class="text-container">
+                        <span class="german-word">weiblich</span>
+                        <span class="spanish-translation">(femenino)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('männlich', '🚹')">
+                 <div class="word-item-content">
+                    <span class="emoji">🚹</span>
+                    <div class="text-container">
+                        <span class="german-word">männlich</span>
+                        <span class="spanish-translation">(masculino)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('eigentlich', '🤔')">
+                <div class="word-item-content">
+                   <span class="emoji">🤔</span>
+                   <div class="text-container">
+                       <span class="german-word">eigentlich</span>
+                       <span class="spanish-translation">(en realidad)</span>
+                   </div>
+               </div>
+           </div>
+        </div>
+
+        <button id="story-button" onclick="generateStory()">
+            Mit einer Geschichte üben
+            <span class="button-translation">(Practicar con una Historia)</span>
+        </button>
+        <div id="story-container" class="story-container">
+            <h3>Eine kleine Geschichte...</h3>
+            <div id="story-content"></div>
+        </div>
+    </div>
+
+    <!-- Modal para mostrar el ejemplo generado -->
+    <div id="example-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div id="modal-word-header">
+                <span id="modal-emoji"></span>
+                <h2 id="modal-word"></h2>
+                <button id="play-word-audio-button" class="audio-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
+                </button>
+            </div>
+            <p id="modal-full-spanish"></p>
+            <div class="modal-separator"></div>
+            <div id="modal-example-container">
+                <p id="modal-text"></p>
+                <button id="play-sentence-audio-button" class="audio-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
+                </button>
+            </div>
+            <p id="modal-pronunciation"></p>
+            <p id="modal-spanish-translation"></p>
+            <div id="modal-info"></div>
+            
+            <div class="modal-separator"></div>
+            
+            <div id="example-navigation">
+                <span id="example-counter"></span>
+                <div class="nav-buttons-container">
+                    <button class="nav-button" id="prev-example-button">&lt;</button>
+                    <button class="nav-button" id="next-example-button">&gt;</button>
+                </div>
+            </div>
+            <button id="close-modal">
+                <strong>Schließen</strong>
+                <span class="button-translation">(Cerrar)</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- Base de datos de ejemplos guardados ---
+        const savedExamples = {
+            'freundlich': [
+                { sentence: 'Die Lehrerin ist sehr freundlich.', pronunciation: '/di lererin ist sea froind-lish/', type: 'Adjektiv', english: 'The teacher is very friendly.', spanish: 'La profesora es muy amable.', fullSpanish: '(amigable, amable)', fullEnglish: '(friendly, kind)' },
+                { sentence: 'Ihr Lächeln ist freundlich.', pronunciation: '/ia legeln ist froind-lish/', type: 'Adjektiv', english: 'Her smile is friendly.', spanish: 'Su sonrisa es amigable.', fullSpanish: '(amigable, amable)', fullEnglish: '(friendly, kind)' },
+                { sentence: 'Danke, das ist sehr freundlich von Ihnen.', pronunciation: '/danke, das ist sea froind-lish fon inen/', type: 'Adjektiv', english: 'Thanks, that is very kind of you.', spanish: 'Gracias, es muy amable de su parte.', fullSpanish: '(amigable, amable)', fullEnglish: '(friendly, kind)' },
+                { sentence: 'Er hat eine freundliche Stimme.', pronunciation: '/ea jat aine froind-lishe shtime/', type: 'Adjektiv', english: 'He has a friendly voice.', spanish: 'Él tiene una voz amigable.', fullSpanish: '(amigable, amable)', fullEnglish: '(friendly, kind)' },
+                { sentence: 'Bitte seien Sie freundlich zu den Gästen.', pronunciation: '/bite saien si froind-lish tsu den guesten/', type: 'Adjektiv', english: 'Please be friendly to the guests.', spanish: 'Por favor, sea amable con los invitados.', fullSpanish: '(amigable, amable)', fullEnglish: '(friendly, kind)' }
+            ],
+            'täglich': [
+                { sentence: 'Ich trinke täglich zwei Liter Wasser.', pronunciation: '/ij trinke teg-lish tsvai lita vasa/', type: 'Adverb', english: 'I drink two liters of water daily.', spanish: 'Bebo dos litros de agua a diario.', fullSpanish: '(diario, cada día)', fullEnglish: '(daily, every day)' },
+                { sentence: 'Die Zeitung kommt täglich.', pronunciation: '/di tsaitung komt teg-lish/', type: 'Adverb', english: 'The newspaper comes daily.', spanish: 'El periódico llega a diario.', fullSpanish: '(diario, cada día)', fullEnglish: '(daily, every day)' },
+                { sentence: 'Meine tägliche Routine ist einfach.', pronunciation: '/maine teg-lishe rutine ist ainfaj/', type: 'Adjektiv', english: 'My daily routine is simple.', spanish: 'Mi rutina diaria es simple.', fullSpanish: '(diario, cada día)', fullEnglish: '(daily, every day)' },
+                { sentence: 'Er macht täglich Sport.', pronunciation: '/ea majt teg-lish shport/', type: 'Adverb', english: 'He does sports daily.', spanish: 'Él hace deporte a diario.', fullSpanish: '(diario, cada día)', fullEnglish: '(daily, every day)' },
+                { sentence: 'Der tägliche Spaziergang ist gesund.', pronunciation: '/dea teg-lishe shpatsigang ist guesúnt/', type: 'Adjektiv', english: 'The daily walk is healthy.', spanish: 'El paseo diario es saludable.', fullSpanish: '(diario, cada día)', fullEnglish: '(daily, every day)' }
+            ],
+            'pünktlich': [
+                { sentence: 'Der Zug nach Berlin ist pünktlich.', pronunciation: '/dea tsug naj berlin ist punkt-lish/', type: 'Adjektiv', english: 'The train to Berlin is on time.', spanish: 'El tren a Berlín es puntual.', fullSpanish: '(puntual)', fullEnglish: '(punctual, on time)' },
+                { sentence: 'Bitte seien Sie morgen pünktlich.', pronunciation: '/bite saien si morguen punkt-lish/', type: 'Adverb', english: 'Please be on time tomorrow.', spanish: 'Por favor, sea puntual mañana.', fullSpanish: '(puntual)', fullEnglish: '(punctual, on time)' },
+                { sentence: 'Er kommt nie pünktlich zur Arbeit.', pronunciation: '/ea komt ni punkt-lish tsua abait/', type: 'Adverb', english: 'He never comes to work on time.', spanish: 'Él nunca llega puntual al trabajo.', fullSpanish: '(puntual)', fullEnglish: '(punctual, on time)' },
+                { sentence: 'Die Besprechung beginnt pünktlich um 10 Uhr.', pronunciation: '/di beshprejung beguint punkt-lish um tsen ua/', type: 'Adverb', english: 'The meeting starts punctually at 10 o\'clock.', spanish: 'La reunión empieza puntualmente a las 10.', fullSpanish: '(puntual)', fullEnglish: '(punctual, on time)' },
+                { sentence: 'Eine pünktliche Ankunft ist wichtig.', pronunciation: '/aine punkt-lishe ankunft ist vijtish/', type: 'Adjektiv', english: 'A punctual arrival is important.', spanish: 'Una llegada puntual es importante.', fullSpanish: '(puntual)', fullEnglish: '(punctual, on time)' }
+            ],
+            'glücklich': [
+                { sentence: 'Wir sind zusammen sehr glücklich.', pronunciation: '/via sint tsusamen sea gliuk-lish/', type: 'Adjektiv', english: 'We are very happy together.', spanish: 'Estamos muy felices juntos.', fullSpanish: '(feliz, afortunado)', fullEnglish: '(happy, lucky)' },
+                { sentence: 'Ein glückliches neues Jahr!', pronunciation: '/ain gliuk-lishes noies yaa/', type: 'Adjektiv', english: 'A happy new year!', spanish: '¡Un feliz año nuevo!', fullSpanish: '(feliz, afortunado)', fullEnglish: '(happy, lucky)' },
+                { sentence: 'Sie hat ein glückliches Lächeln.', pronunciation: '/si jat ain gliuk-lishes legeln/', type: 'Adjektiv', english: 'She has a happy smile.', spanish: 'Ella tiene una sonrisa feliz.', fullSpanish: '(feliz, afortunado)', fullEnglish: '(happy, lucky)' },
+                { sentence: 'Das Kind spielt glücklich im Garten.', pronunciation: '/das kint shpilt gliuk-lish im garten/', type: 'Adverb', english: 'The child plays happily in the garden.', spanish: 'El niño juega feliz en el jardín.', fullSpanish: '(feliz, afortunado)', fullEnglish: '(happy, lucky)' },
+                { sentence: 'Ich bin glücklich über das Geschenk.', pronunciation: '/ij bin gliuk-lish iuba das gueshenk/', type: 'Adjektiv', english: 'I am happy about the gift.', spanish: 'Estoy feliz por el regalo.', fullSpanish: '(feliz, afortunado)', fullEnglish: '(happy, lucky)' }
+            ],
+            'natürlich': [
+                { sentence: 'Natürlich helfe ich dir gerne.', pronunciation: '/na-tiur-lish jelfe ij dia guerne/', type: 'Adverb', english: 'Of course I\'ll help you.', spanish: 'Por supuesto que te ayudo.', fullSpanish: '(por supuesto, natural)', fullEnglish: '(of course, natural)' },
+                { sentence: 'Das ist ein natürlicher Saft ohne Zucker.', pronunciation: '/das ist ain na-tiur-lisher saft one tsuka/', type: 'Adjektiv', english: 'That is a natural juice without sugar.', spanish: 'Ese es un zumo natural sin azúcar.', fullSpanish: '(por supuesto, natural)', fullEnglish: '(of course, natural)' },
+                { sentence: 'Er spricht sehr natürlich.', pronunciation: '/ea shprijt sea na-tiur-lish/', type: 'Adverb', english: 'He speaks very naturally.', spanish: 'Él habla de forma muy natural.', fullSpanish: '(por supuesto, natural)', fullEnglish: '(of course, natural)' },
+                { sentence: 'Die Blumen sind natürlich schön.', pronunciation: '/di blumen sint na-tiur-lish shon/', type: 'Adjektiv', english: 'The flowers are naturally beautiful.', spanish: 'Las flores son naturalmente bonitas.', fullSpanish: '(por supuesto, natural)', fullEnglish: '(of course, natural)' },
+                { sentence: 'Kommst du mit? Natürlich!', pronunciation: '/komst du mit? na-tiur-lish!/', type: 'Adverb', english: 'Are you coming along? Of course!', spanish: '¿Vienes? ¡Por supuesto!', fullSpanish: '(por supuesto, natural)', fullEnglish: '(of course, natural)' }
+            ],
+             'möglich': [
+                { sentence: 'Eine Reservierung ist leider nicht mehr möglich.', pronunciation: '/aine reservirung ist laida nijt mea miog-lish/', type: 'Adjektiv', english: 'A reservation is unfortunately no longer possible.', spanish: 'Lamentablemente ya no es posible reservar.', fullSpanish: '(posible)', fullEnglish: '(possible)' },
+                { sentence: 'Kannst du bitte so schnell wie möglich kommen?', pronunciation: '/kanst du bite so shnel vi miog-lish komen/', type: 'Adjektiv', english: 'Can you please come as soon as possible?', spanish: '¿Puedes venir lo antes posible, por favor?', fullSpanish: '(posible)', fullEnglish: '(possible)' },
+                { sentence: 'Gibt es eine andere mögliche Lösung?', pronunciation: '/guipt es aine andere miog-lishe losung/', type: 'Adjektiv', english: 'Is there another possible solution?', spanish: '¿Hay otra posible solución?', fullSpanish: '(posible)', fullEnglish: '(possible)' },
+                { sentence: 'Ist es möglich, hier zu parken?', pronunciation: '/ist es miog-lish jia tsu parken/', type: 'Adjektiv', english: 'Is it possible to park here?', spanish: '¿Es posible aparcar aquí?', fullSpanish: '(posible)', fullEnglish: '(possible)' },
+                { sentence: 'Wir machen alles, was möglich ist.', pronunciation: '/via majen ales, vas miog-lish ist/', type: 'Adjektiv', english: 'We are doing everything that is possible.', spanish: 'Hacemos todo lo que es posible.', fullSpanish: '(posible)', fullEnglish: '(possible)' }
+            ],
+            'persönlich': [
+                { sentence: 'Ich habe eine persönliche Frage.', pronunciation: '/ij jabe aine per-son-lishe frague/', type: 'Adjektiv', english: 'I have a personal question.', spanish: 'Tengo una pregunta personal.', fullSpanish: '(personal)', fullEnglish: '(personal)' },
+                { sentence: 'Sie müssen den Brief persönlich abgeben.', pronunciation: '/si miusen den brif per-son-lish apgueben/', type: 'Adverb', english: 'You have to deliver the letter personally.', spanish: 'Tiene que entregar la carta personalmente.', fullSpanish: '(personal)', fullEnglish: '(personal)' },
+                { sentence: 'Das ist nichts Persönliches.', pronunciation: '/das ist nijts per-son-lishes/', type: 'Adjektiv', english: 'That is nothing personal.', spanish: 'No es nada personal.', fullSpanish: '(personal)', fullEnglish: '(personal)' },
+                { sentence: 'Ich kenne ihn persönlich nicht.', pronunciation: '/ij kene in per-son-lish nijt/', type: 'Adverb', english: 'I don\'t know him personally.', spanish: 'No lo conozco personalmente.', fullSpanish: '(personal)', fullEnglish: '(personal)' },
+                { sentence: 'Das ist meine persönliche Meinung.', pronunciation: '/das ist maine per-son-lishe mainung/', type: 'Adjektiv', english: 'That is my personal opinion.', spanish: 'Esa es mi opinión personal.', fullSpanish: '(personal)', fullEnglish: '(personal)' }
+            ],
+            'gemütlich': [
+                { sentence: 'Mein Zimmer ist klein, aber sehr gemütlich.', pronunciation: '/main tsima ist klain, aba sea gue-miut-lish/', type: 'Adjektiv', english: 'My room is small, but very cozy.', spanish: 'Mi habitación es pequeña, pero muy acogedora.', fullSpanish: '(acogedor, cómodo)', fullEnglish: '(cozy, comfortable)' },
+                { sentence: 'Am Sonntag machen wir einen gemütlichen Abend.', pronunciation: '/am sontag majen via ainen gue-miut-lishen abent/', type: 'Adjektiv', english: 'On Sunday we are having a cozy evening.', spanish: 'El domingo tendremos una tarde acogedora.', fullSpanish: '(acogedor, cómodo)', fullEnglish: '(cozy, comfortable)' },
+                { sentence: 'Setz dich, mach es dir gemütlich.', pronunciation: '/sets dij, maj es dia gue-miut-lish/', type: 'Adjektiv', english: 'Sit down, make yourself comfortable.', spanish: 'Siéntate, ponte cómodo.', fullSpanish: '(acogedor, cómodo)', fullEnglish: '(cozy, comfortable)' },
+                { sentence: 'Wir sitzen gemütlich im Café.', pronunciation: '/via sitsen gue-miut-lish im café/', type: 'Adverb', english: 'We are sitting comfortably in the café.', spanish: 'Estamos sentados cómodamente en la cafetería.', fullSpanish: '(acogedor, cómodo)', fullEnglish: '(cozy, comfortable)' },
+                { sentence: 'Das Sofa ist sehr gemütlich.', pronunciation: '/das sofa ist sea gue-miut-lish/', type: 'Adjektiv', english: 'The sofa is very comfortable.', spanish: 'El sofá es muy cómodo.', fullSpanish: '(acogedor, cómodo)', fullEnglish: '(cozy, comfortable)' }
+            ],
+            'hässlich': [
+                { sentence: 'Ich finde diese Farbe hässlich.', pronunciation: '/ij finde dise farbe jes-lish/', type: 'Adjektiv', english: 'I find this color ugly.', spanish: 'Encuentro este color feo.', fullSpanish: '(feo)', fullEnglish: '(ugly)' },
+                { sentence: 'Das ist ein sehr hässlicher Hund.', pronunciation: '/das ist ain sea jes-lisher junt/', type: 'Adjektiv', english: 'That is a very ugly dog.', spanish: 'Ese es un perro muy feo.', fullSpanish: '(feo)', fullEnglish: '(ugly)' },
+                { sentence: 'Warum bist du so hässlich zu mir?', pronunciation: '/varum bist du so jes-lish tsu mia/', type: 'Adjektiv', english: 'Why are you so nasty to me?', spanish: '¿Por qué eres tan desagradable conmigo?', fullSpanish: '(feo)', fullEnglish: '(ugly, nasty)' },
+                { sentence: 'Das Wetter ist heute wirklich hässlich.', pronunciation: '/das veta ist joite virk-lish jes-lish/', type: 'Adjektiv', english: 'The weather is really ugly today.', spanish: 'El tiempo hoy es realmente feo.', fullSpanish: '(feo)', fullEnglish: '(ugly)' },
+                { sentence: 'Er trägt ein hässliches Hemd.', pronunciation: '/ea tregt ain jes-lishes jemt/', type: 'Adjektiv', english: 'He is wearing an ugly shirt.', spanish: 'Él lleva una camisa fea.', fullSpanish: '(feo)', fullEnglish: '(ugly)' }
+            ],
+            'sportlich': [
+                { sentence: 'Meine Schwester ist sehr sportlich.', pronunciation: '/maine shvesta ist sea shport-lish/', type: 'Adjektiv', english: 'My sister is very athletic.', spanish: 'Mi hermana es muy deportista.', fullSpanish: '(deportivo)', fullEnglish: '(sporty, athletic)' },
+                { sentence: 'Er trägt immer sportliche Kleidung.', pronunciation: '/ea tregt ima shport-lishe klaidung/', type: 'Adjektiv', english: 'He always wears sporty clothes.', spanish: 'Él siempre lleva ropa deportiva.', fullSpanish: '(deportivo)', fullEnglish: '(sporty, athletic)' },
+                { sentence: 'Ich bin nicht sehr sportlich.', pronunciation: '/ij bin nijt sea shport-lish/', type: 'Adjektiv', english: 'I am not very athletic.', spanish: 'No soy muy deportista.', fullSpanish: '(deportivo)', fullEnglish: '(sporty, athletic)' },
+                { sentence: 'Sie hat ein sportliches Auto.', pronunciation: '/si jat ain shport-lishes auto/', type: 'Adjektiv', english: 'She has a sporty car.', spanish: 'Ella tiene un coche deportivo.', fullSpanish: '(deportivo)', fullEnglish: '(sporty, athletic)' },
+                { sentence: 'Er ist ein sportlicher Typ.', pronunciation: '/ea ist ain shport-lisher tiup/', type: 'Adjektiv', english: 'He is a sporty guy.', spanish: 'Él es un tipo deportista.', fullSpanish: '(deportivo)', fullEnglish: '(sporty, athletic)' }
+            ],
+            'weiblich': [
+                { sentence: 'Bitte kreuzen Sie "weiblich" an.', pronunciation: '/bite kroytsen si "vaib-lish" an/', type: 'Adjektiv', english: 'Please check "female".', spanish: 'Por favor, marque "femenino".', fullSpanish: '(femenino)', fullEnglish: '(female)' },
+                { sentence: 'In meinem Kurs sind mehr weibliche Teilnehmer.', pronunciation: '/in mainem kurs sint mea vaib-lishe tailnema/', type: 'Adjektiv', english: 'There are more female participants in my course.', spanish: 'En mi curso hay más participantes femeninas.', fullSpanish: '(femenino)', fullEnglish: '(female)' },
+                { sentence: 'Die weibliche Form von "Arzt" ist "Ärztin".', pronunciation: '/di vaib-lishe form fon "arzt" ist "erstin"/', type: 'Adjektiv', english: 'The female form of "Arzt" is "Ärztin".', spanish: 'La forma femenina de "Arzt" es "Ärztin".', fullSpanish: '(femenino)', fullEnglish: '(female)' },
+                { sentence: 'Wir haben zwei Katzen, eine ist männlich und eine ist weiblich.', pronunciation: '/via jaben tsvai katsen, aine ist men-lish unt aine ist vaib-lish/', type: 'Adjektiv', english: 'We have two cats, one is male and one is female.', spanish: 'Tenemos dos gatos, uno es macho y otra es hembra.', fullSpanish: '(femenino)', fullEnglish: '(female)' },
+                { sentence: 'Unsere Katze ist weiblich.', pronunciation: '/unsere katse ist vaib-lish/', type: 'Adjektiv', english: 'Our cat is female.', spanish: 'Nuestra gata es hembra.', fullSpanish: '(femenino)', fullEnglish: '(female)' }
+            ],
+            'männlich': [
+                { sentence: 'Unser Hund ist männlich.', pronunciation: '/unza junt ist men-lish/', type: 'Adjektiv', english: 'Our dog is male.', spanish: 'Nuestro perro es macho.', fullSpanish: '(masculino)', fullEnglish: '(male)' },
+                { sentence: 'Suchen Sie einen männlichen oder weiblichen Arzt?', pronunciation: '/sujen si ainen men-lishen oda vaib-lishen artst/', type: 'Adjektiv', english: 'Are you looking for a male or female doctor?', spanish: '¿Busca un médico hombre o mujer?', fullSpanish: '(masculino)', fullEnglish: '(male)' },
+                { sentence: '"Paul" ist ein männlicher Vorname.', pronunciation: '/"paul" ist ain men-lisher foa-name/', type: 'Adjektiv', english: '"Paul" is a male first name.', spanish: '"Paul" es un nombre de pila masculino.', fullSpanish: '(masculino)', fullEnglish: '(male)' },
+                { sentence: 'Der Löwe ist ein männliches Tier.', pronunciation: '/dea love ist ain men-lishes tia/', type: 'Adjektiv', english: 'The lion is a male animal.', spanish: 'El león es un animal macho.', fullSpanish: '(masculino)', fullEnglish: '(male)' },
+                { sentence: 'Bitte kreuzen Sie "männlich" an.', pronunciation: '/bite kroytsen si "men-lish" an/', type: 'Adjektiv', english: 'Please check "male".', spanish: 'Por favor, marque "masculino".', fullSpanish: '(masculino)', fullEnglish: '(male)' }
+            ],
+            'eigentlich': [
+                { sentence: 'Was willst du eigentlich machen?', pronunciation: '/vas vilst du ai-guent-lish majen/', type: 'Adverb', english: 'What do you actually want to do?', spanish: '¿Qué quieres hacer en realidad?', fullSpanish: '(en realidad, de hecho)', fullEnglish: '(actually, by the way)' },
+                { sentence: 'Eigentlich wollte ich ins Kino gehen.', pronunciation: '/ai-guent-lish volte ij ins kino gueen/', type: 'Adverb', english: 'Actually, I wanted to go to the cinema.', spanish: 'En realidad, quería ir al cine.', fullSpanish: '(en realidad, de hecho)', fullEnglish: '(actually, by the way)' },
+                { sentence: 'Das ist eigentlich eine gute Idee.', pronunciation: '/das ist ai-guent-lish aine gute idee/', type: 'Adverb', english: 'That is actually a good idea.', spanish: 'Esa es, de hecho, una buena idea.', fullSpanish: '(en realidad, de hecho)', fullEnglish: '(actually, by the way)' },
+                { sentence: 'Ich habe eigentlich keinen Hunger.', pronunciation: '/ij jabe ai-guent-lish kainen junga/', type: 'Adverb', english: 'I\'m not actually hungry.', spanish: 'En realidad no tengo hambre.', fullSpanish: '(en realidad, de hecho)', fullEnglish: '(actually, by the way)' },
+                { sentence: 'Wo ist eigentlich Paul?', pronunciation: '/vo ist ai-guent-lish paul/', type: 'Adverb', english: 'Where is Paul, by the way?', spanish: 'Por cierto, ¿dónde está Paul?', fullSpanish: '(en realidad, de hecho)', fullEnglish: '(actually, by the way)' }
+            ]
+        };
+        
+        // --- Base de datos de historias guardadas ---
+        const savedStories = [
+            `Mein neuer Kollege heißt Marco. Er ist ein sehr <span class="highlighted-word">freundlicher</span> und <span class="highlighted-word">männlicher</span> Lehrer aus Italien. Marco ist auch sehr <span class="highlighted-word">sportlich</span>; er spielt am Wochenende Fußball. Er kommt <span class="highlighted-word">täglich</span> mit dem Fahrrad zur Arbeit, auch wenn das Wetter schlecht ist. Das ist super, denn er ist immer <span class="highlighted-word">pünktlich</span> und nie zu spät.`,
+            `Ich bin sehr <span class="highlighted-word">glücklich</span>, denn ich habe eine neue Wohnung! Sie ist klein, aber sehr <span class="highlighted-word">gemütlich</span>, mit einem Sofa und vielen Kissen. Für mich <span class="highlighted-word">persönlich</span> ist das perfekt. Ich habe viele Pflanzen, das sieht sehr <span class="highlighted-word">natürlich</span> und schön aus. Ist es <span class="highlighted-word">möglich</span>, dass du mich am Samstag besuchst? Wir können zusammen Kaffee trinken.`,
+            `Ich brauche Hilfe mit einem Formular. Hier steht: <span class="highlighted-word">männlich</span> oder <span class="highlighted-word">weiblich</span>? Ich kreuze <span class="highlighted-word">weiblich</span> an. Aber mein Passfoto ist wirklich <span class="highlighted-word">hässlich</span>! Meine Haare sehen komisch aus. <span class="highlighted-word">Natürlich</span> kann ich das nicht benutzen. Ist es <span class="highlighted-word">möglich</span>, heute ein neues Foto zu machen? Ich hoffe es.`
+        ];
+        let storyClickCounter = 0;
+
+        // --- Variables globales para el modal ---
+        let currentWord = '';
+        let currentExampleIndex = 0;
+        let currentEmoji = '';
+        const germanOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes"];
+
+
+        // --- Gemini API Call Logic ---
+        const API_KEY = ""; // No es necesaria una clave para el modelo flash
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${API_KEY}`;
+        
+        // --- Funciones del Modal ---
+        const modal = document.getElementById('example-modal');
+        const modalWord = document.getElementById('modal-word');
+        const modalEmoji = document.getElementById('modal-emoji');
+        const modalFullSpanish = document.getElementById('modal-full-spanish');
+        const modalText = document.getElementById('modal-text');
+        const modalPronunciation = document.getElementById('modal-pronunciation');
+        const modalSpanishTranslation = document.getElementById('modal-spanish-translation');
+        const modalInfo = document.getElementById('modal-info');
+        const exampleCounter = document.getElementById('example-counter');
+        const closeModalButton = document.getElementById('close-modal');
+        const prevButton = document.getElementById('prev-example-button');
+        const nextButton = document.getElementById('next-example-button');
+        const playWordAudioButton = document.getElementById('play-word-audio-button');
+        const playSentenceAudioButton = document.getElementById('play-sentence-audio-button');
+
+        function openExampleModal(word, emoji) {
+            currentWord = word;
+            currentEmoji = emoji;
+            currentExampleIndex = 0;
+            updateModalContent();
+            modal.classList.add('visible');
+        }
+
+        function updateModalContent() {
+            const exampleData = savedExamples[currentWord][currentExampleIndex];
+            modalWord.textContent = currentWord;
+            modalEmoji.textContent = currentEmoji;
+            modalFullSpanish.innerHTML = `🇪🇸 ${exampleData.fullSpanish}<br>🇬🇧 ${exampleData.fullEnglish}<br><span class="modal-type-info">Tipo: ${exampleData.type}</span>`;
+            modalText.textContent = exampleData.sentence;
+            modalPronunciation.textContent = exampleData.pronunciation;
+            modalSpanishTranslation.innerHTML = `🇪🇸 ${exampleData.spanish}`;
+            modalInfo.innerHTML = `🇬🇧 ${exampleData.english}`;
+            exampleCounter.textContent = `${germanOrdinals[currentExampleIndex]} Beispiel von 5`;
+        }
+
+        function nextExample() {
+            currentExampleIndex = (currentExampleIndex + 1) % 5;
+            updateModalContent();
+        }
+
+        function prevExample() {
+            currentExampleIndex = (currentExampleIndex - 1 + 5) % 5;
+            updateModalContent();
+        }
+        
+        function playAudio(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'de-DE';
+                utterance.rate = 0.6; // 40% más lento que la velocidad normal (1.0)
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('Lo siento, tu navegador no soporta la síntesis de voz.');
+            }
+        }
+
+        prevButton.addEventListener('click', prevExample);
+        nextButton.addEventListener('click', nextExample);
+        playWordAudioButton.addEventListener('click', () => playAudio(currentWord));
+        playSentenceAudioButton.addEventListener('click', () => playAudio(modalText.textContent));
+
+        function hideModal() {
+            modal.classList.remove('visible');
+        }
+
+        closeModalButton.addEventListener('click', hideModal);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                hideModal();
+            }
+        });
+
+        // --- Active Recall Feature ---
+        const recallSwitch = document.getElementById('recall-switch');
+        const translations = document.querySelectorAll('.spanish-translation');
+
+        recallSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                // Ocultar traducciones
+                translations.forEach(span => {
+                    span.style.opacity = '1';
+                });
+            } else {
+                // Mostrar traducciones
+                translations.forEach(span => {
+                    span.style.opacity = '0';
+                });
+            }
+        });
+
+        // Initialize switch state
+        if (recallSwitch.checked) {
+             translations.forEach(span => {
+                span.style.visibility = 'visible';
+            });
+        } else {
+             translations.forEach(span => {
+                span.style.visibility = 'hidden';
+            });
+        }
+
+
+        // --- Lógica para reintentos de API (Exponential Backoff) ---
+        async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.ok) return response;
+                } catch (error) {
+                    // Ignorar errores de red para reintentar
+                }
+                await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
+            }
+            throw new Error("API request failed after multiple retries.");
+        }
+        
+        // --- Función para generar una historia ---
+        async function generateStory() {
+            const storyContainer = document.getElementById('story-container');
+            const storyContent = document.getElementById('story-content');
+            const storyButton = document.getElementById('story-button');
+            
+            storyContainer.style.display = 'block';
+            storyButton.disabled = true;
+
+            if (storyClickCounter < 3) {
+                storyContent.innerHTML = `<p>${savedStories[storyClickCounter]}</p>`;
+                storyClickCounter++;
+                storyButton.disabled = false;
+                return;
+            }
+
+            storyContent.innerHTML = '<div class="loader">✨ Creando una nueva historia con IA...</div>';
+
+            const words = Array.from(document.querySelectorAll('.german-word')).map(el => el.textContent);
+            const wordList = words.join(', ');
+
+            const prompt = `Escribe una historia muy corta y simple en alemán de nivel A1. Usa tantas de las siguientes palabras como sea posible: ${wordList}. La historia debe ser fácil de entender para un principiante. No incluyas la traducción. No uses asteriscos u otro formato de markdown para resaltar las palabras.`;
+
+            const payload = {
+                contents: [{
+                    parts: [{ text: prompt }]
+                }]
+            };
+
+            try {
+                const response = await fetchWithRetry(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                let generatedText = result.candidates[0].content.parts[0].text;
+                
+                generatedText = generatedText.replace(/\*/g, '');
+
+                words.forEach(word => {
+                    const regex = new RegExp(`\\b(${word})\\b`, 'gi');
+                    generatedText = generated-text.replace(regex, '<span class="highlighted-word">$1</span>');
+                });
+
+                storyContent.innerHTML = `<p>${generatedText.replace(/\n/g, '<br>')}</p>`;
+            } catch (error) {
+                storyContent.textContent = "Lo siento, no se pudo generar una historia. Por favor, inténtalo de nuevo.";
+                console.error("Error fetching Gemini API:", error);
+            } finally {
+                storyButton.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
