@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verbos en Perfekt (A1.1) - Alemán</title>
+    <!-- Carga de la fuente para el estilo de tiza -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100%;
+            margin: 0;
+            background-color: #85D4FF; /* Color de fondo azul cielo */
+            padding: 20px;
+            font-family: 'Nunito', sans-serif;
+            transition: background-color 0.5s;
+        }
+        .main-container {
+            width: 100%;
+            text-align: center;
+            border-radius: 20px;
+            padding: 20px;
+            transition: background-color 0.5s, border-color 0.5s;
+        }
+        .content-block {
+            max-width: 888px; /* 3 cards * 280px + 2 gaps * 24px */
+            margin: 0 auto;
+            width: 100%;
+            text-align: center;
+        }
+        .header {
+            position: relative;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .level-indicator, .info-button {
+            position: relative; 
+            overflow: hidden; 
+            width: 60px;
+            height: 60px;
+            background-color: #4682B4; /* SteelBlue */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background-color 0.5s;
+            flex-shrink: 0; /* Evita que los botones se encojan */
+        }
+        .level-indicator {
+            font-size: 1.5rem;
+        }
+        .info-button {
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.5s;
+            animation: pulse 2s infinite;
+        }
+        .info-button:hover {
+            transform: scale(1.1);
+        }
+        .title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .title {
+            font-family: 'Kalam', cursive;
+            font-size: 3rem;
+            color: #333;
+            padding-top: 1rem;
+            border-bottom: 3px dashed #4682B4;
+            display: inline-block;
+            margin-bottom: 1rem;
+            transition: border-bottom-color 0.5s, color 0.5s;
+        }
+        .navigation-wrapper {
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+        .navigation-controls {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding-top: 2.5rem;
+            border-top: 3px dashed #4682B4;
+        }
+        .nav-buttons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .nav-button {
+            padding: 8px 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            background-color: #e9ecef;
+            color: #495057;
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-button div {
+            text-align: center;
+        }
+        .nav-button svg {
+            stroke: #4682B4;
+            transition: stroke 0.2s;
+        }
+        .nav-button:hover:not(:disabled) {
+            background-color: #dee2e6;
+        }
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .button-translation {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            font-style: italic;
+        }
+        #group-indicator {
+            font-size: 1.2rem;
+            font-weight: normal;
+            color: #333;
+            transition: color 0.5s;
+            margin-bottom: 0;
+        }
+        .progress-bar-container {
+            width: 150px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .progress-step {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ced4da;
+            transition: background-color 0.5s;
+        }
+        .progress-step.active {
+            background-color: #4682B4;
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem; 
+            min-height: 550px;
+        }
+        .word-item {
+            background-color: #E0FFFF;
+            border-radius: 8px;
+            padding: 1.5rem;
+            width: 280px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.5s;
+            cursor: pointer;
+            text-align: left;
+        }
+        .word-item:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .emoji {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+        }
+        .text-container {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            width: 100%;
+        }
+        .german-word {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: black;
+            transition: color 0.5s;
+        }
+        .german-past {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4682B4;
+            transition: color 0.5s;
+            margin-top: 0.5rem;
+        }
+        .spanish-translation, .spanish-perfekt {
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 2px;
+            transition: color 0.5s, opacity 0.3s, height 0.3s;
+        }
+        #story-button {
+            margin: 2.5rem 0 0 0;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            background-color: #3CB371;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        #story-button:hover {
+            background-color: #2E8B57;
+            transform: translateY(-2px);
+        }
+        .story-container {
+            margin: 1rem auto 0 auto;
+            padding: 1.5rem;
+            background-color: #FFFFE0;
+            border: 2px dashed #FFD700;
+            border-radius: 8px;
+            color: black;
+            display: none;
+            max-width: 800px;
+            text-align: left;
+            line-height: 1.6;
+        }
+        .story-container h3 {
+            font-family: 'Kalam', cursive;
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        .highlighted-word {
+            background-color: #FFD700;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal-overlay.visible {
+            display: flex;
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        .modal-verb-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0.3rem 0;
+        }
+        #modal-verb-infinitive, #modal-verb-perfekt {
+             font-size: 1.8rem;
+             font-weight: bold;
+             margin: 0;
+        }
+        #modal-verb-perfekt {
+             color: #333;
+        }
+        .modal-translation {
+            font-size: 1.1rem;
+            color: #333;
+            margin: 0.2rem 0;
+        }
+        .modal-verb-block {
+            border-bottom: 2px solid #A9CCE3;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        .speak-icon {
+            cursor: pointer;
+            transition: transform 0.2s, color 0.2s;
+            color: #6899C9;
+            display: inline-flex;
+            align-items: center;
+        }
+        .speak-icon:hover {
+            transform: scale(1.2);
+            color: #4682B4;
+        }
+        .speak-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: currentColor;
+        }
+        #sentence-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 30px;
+            margin-bottom: 0.5rem;
+        }
+        #modal-text {
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin: 0;
+        }
+        .modal-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1.5rem;
+            padding: 0 10px;
+        }
+        .modal-nav-buttons {
+            display: flex;
+            gap: 20px;
+        }
+        .example-progress-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .close-modal-btn {
+            margin-top: 1.5rem;
+            padding: 8px 16px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            line-height: 1.2;
+        }
+        /* Info Modal Specifics */
+        #info-modal .modal-content {
+            text-align: left;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        #info-modal h2 {
+            font-family: 'Kalam', cursive;
+            text-align: center;
+            margin-top: 0;
+        }
+        #info-modal h3 {
+            color: #4682B4;
+            border-bottom: 2px solid #4682B4;
+            padding-bottom: 5px;
+            transition: color 0.5s, border-bottom-color 0.5s;
+        }
+        #info-modal ul {
+            padding-left: 20px;
+            list-style-type: '✓ ';
+        }
+        
+        /* Active Recall Toggle Switch */
+        .active-recall-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .toggle-label {
+            display: flex;
+            flex-direction: column;
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.2;
+            text-align: right;
+            cursor: pointer;
+        }
+        .toggle-sublabel {
+            font-size: 0.8em;
+            font-weight: 400;
+            font-style: italic;
+            color: #555;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .hide-translation .spanish-translation,
+        .hide-translation .spanish-perfekt {
+            display: none;
+        }
+
+        /* Ripple Effect */
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(70, 130, 180, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(70, 130, 180, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(70, 130, 180, 0);
+            }
+        }
+        .modal-note {
+            font-style: italic;
+            color: #666;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background-color: #f8f9fa;
+            border-left: 4px solid #4682B4;
+            text-align: left;
+        }
+        .modal-separator {
+            width: 100%;
+            margin: 1rem 0;
+            border: 0;
+            border-top: 2px solid #A9CCE3;
+        }
+
+        /* Dropdown Styles */
+        #details-container {
+            margin-top: 0.5rem;
+        }
+        #details-summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #4682B4;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+            display: inline-flex; /* Changed to inline-flex */
+            align-items: center; /* Center items vertically */
+            gap: 8px; /* Space between text and arrow */
+            list-style: none; /* Remove default marker */
+        }
+        #details-summary::-webkit-details-marker {
+            display: none; /* Hide for Chrome/Safari */
+        }
+        #details-summary::after {
+            content: '▶';
+            font-size: 0.8em;
+            transition: transform 0.2s;
+        }
+        details[open] > #details-summary::after {
+            transform: rotate(90deg);
+        }
+        #details-summary:hover {
+            background-color: #f0f0f0;
+        }
+        .details-content {
+            text-align: left;
+            padding: 10px;
+            margin-top: 5px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #4682B4;
+            border-radius: 0 5px 5px 0;
+        }
+        .details-content ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+        #modal-phonetics, #modal-translations {
+             font-size: 0.95rem;
+             color: #333;
+             margin: 0 0 10px 0;
+             line-height: 1.5;
+        }
+        #modal-grammar-explanation {
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.5;
+        }
+        #modal-grammar-explanation b {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="main-container" id="main-container">
+        <div class="content-block">
+            <div class="header">
+                <div class="level-indicator" id="level-indicator">A1.1</div>
+                <div class="title-container">
+                    <h1 class="title">Verben im Perfekt</h1>
+                    <div class="active-recall-toggle">
+                        <label for="recall-switch" class="toggle-label">
+                            Übersetzung
+                            <span class="toggle-sublabel">(traducción)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="recall-switch" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="info-button" id="info-button">info</div>
+            </div>
+            
+            <div class="cards-container" id="cards-container">
+                <!-- Las tarjetas de verbos se generarán aquí con JavaScript -->
+            </div>
+    
+            <div class="navigation-wrapper">
+                <div class="navigation-controls">
+                    <div id="group-indicator"></div>
+                    <div class="progress-bar-container" id="progress-bar">
+                        <!-- Los puntos de progreso se generarán aquí -->
+                    </div>
+                    <div class="nav-buttons-container">
+                        <button id="prev-group-btn" class="nav-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                            <div>
+                                Zurück
+                                <span class="button-translation">(Anterior)</span>
+                            </div>
+                        </button>
+                        <button id="next-group-btn" class="nav-button">
+                            <div>
+                                Weiter
+                                <span class="button-translation">(Siguiente)</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="story-button">✨ Practicar con una Historia</button>
+            <div id="story-container" class="story-container">
+                <h3>Eine kleine Geschichte...</h3>
+                <div id="story-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para los Verbos -->
+    <div id="verb-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-verb-block">
+                <div class="modal-verb-line">
+                    <span id="modal-emoji" class="emoji" style="font-size: 2.2rem; margin-right: 0.5rem;"></span>
+                    <h3 id="modal-verb-infinitive"></h3>
+                    <span id="speak-infinitive-icon" class="speak-icon" title="Infinitiv aussprechen"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></span>
+                </div>
+                <p id="modal-verb-infinitive-es" class="modal-translation"></p>
+                <p id="modal-verb-english-infinitive" class="modal-translation"></p>
+            </div>
+            <div class="modal-verb-block">
+                <div class="modal-verb-line">
+                    <h4 id="modal-verb-perfekt"></h4>
+                    <span id="speak-perfekt-icon" class="speak-icon" title="Perfekt aussprechen"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></span>
+                </div>
+                <p id="modal-verb-perfekt-es" class="modal-translation"></p>
+                <p id="modal-verb-english-perfekt" class="modal-translation"></p>
+            </div>
+            
+            <p id="modal-verb-note" class="modal-note" style="display: none;"></p>
+
+             <div id="sentence-container">
+                 <p id="modal-text"></p>
+                 <span id="speak-sentence-icon" class="speak-icon" title="Satz aussprechen"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></span>
+             </div>
+             
+             <details id="details-container">
+                 <summary id="details-summary">Más información</summary>
+                 <div class="details-content">
+                     <div id="modal-phonetics"></div>
+                     <div id="modal-translations"></div>
+                     <div id="modal-grammar-explanation"></div>
+                 </div>
+             </details>
+            
+             <hr class="modal-separator">
+
+             <div class="modal-nav">
+                 <div class="example-progress-container">
+                     <span id="example-counter"></span>
+                     <div class="progress-bar-container" id="example-progress-bar"></div>
+                 </div>
+                 <div class="modal-nav-buttons">
+                     <button id="prev-example" class="nav-button">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                         <div>
+                             Zurück
+                             <span class="button-translation">(Anterior)</span>
+                         </div>
+                     </button>
+                     <button id="next-example" class="nav-button">
+                         <div>
+                             Weiter
+                             <span class="button-translation">(Siguiente)</span>
+                         </div>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                     </button>
+                 </div>
+             </div>
+            
+            <button id="close-verb-modal" class="close-modal-btn">
+                <strong>Schließen</strong>
+                <span class="button-translation">(Cerrar)</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal para la Información -->
+    <div id="info-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>El Pasado "Perfekt"</h2>
+            <h3>Uso Principal</h3>
+            <p>El "Perfekt" es el tiempo pasado más importante en alemán. Se usa principalmente en <b>conversaciones habladas</b> para describir acciones que ya han terminado.</p>
+            
+            <h3>Estructura de la Frase</h3>
+            <p>La estructura es simple:<br><b>Sujeto + Verbo Auxiliar (conjugado) + ... + Participio II (al final).</b></p>
+            <p>Ej: <i>Ich <b>habe</b> einen Apfel <b>gegessen</b>.</i></p>
+            
+            <h3>Verbos Auxiliares: ¿Haben o Sein?</h3>
+            <p>Se usa <b>sein</b> con verbos que indican un movimiento (de A a B) o un cambio de estado. Por ejemplo:</p>
+            <ul>
+                <li><b>gehen</b>: Ich bin ins Kino gegangen. (<b>He ido</b> al cine)</li>
+                <li><b>fahren</b>: Er ist nach Berlin gefahren. (Él <b>ha ido/conducido</b> a Berlín)</li>
+                <li><b>fliegen</b>: Wir sind geflogen. (<b>Hemos volado</b>)</li>
+                <li><b>aufstehen</b>: Du bist aufgestanden. (<b>Te has levantado</b>)</li>
+            </ul>
+            
+            <p>Se usa <b>haben</b> con la gran mayoría de los otros verbos, especialmente aquellos que tienen un objeto directo. Por ejemplo:</p>
+            <ul>
+                <li><b>kaufen</b>: Ich habe ein Buch gekauft. (<b>He comprado</b> un libro)</li>
+                <li><b>essen</b>: Sie hat eine Pizza gegessen. (Ella <b>ha comido</b> una pizza)</li>
+                <li><b>lesen</b>: Wir haben die Zeitung gelesen. (<b>Hemos leído</b> el periódico)</li>
+            </ul>
+
+            <h3>El Participio II (Partizip II)</h3>
+            <p>Es la forma pasada del verbo. Para verbos regulares, a menudo se forma con:<br><b>ge-</b> + raíz del verbo + <b>-t</b>. Por ejemplo:</p>
+            <ul>
+                <li>machen -> <b>ge</b>mach<b>t</b> (hecho)</li>
+                <li>lernen -> <b>ge</b>lern<b>t</b> (aprendido)</li>
+                <li>kaufen -> <b>ge</b>kauf<b>t</b> (comprado)</li>
+            </ul>
+            
+            <p>Los verbos irregulares tienen formas propias que debes memorizar. Por ejemplo:</p>
+            <ul>
+                <li>gehen -> <b>ge</b>gang<b>en</b> (ido)</li>
+                <li>sehen -> <b>ge</b>seh<b>en</b> (visto)</li>
+                <li>sprechen -> <b>ge</b>sproch<b>en</b> (hablado)</li>
+                <li>trinken -> <b>ge</b>trunk<b>en</b> (bebido)</li>
+                <li>schreiben -> <b>ge</b>schrieb<b>en</b> (escrito)</li>
+            </ul>
+            
+            <br>
+            <button id="close-info-modal" class="close-modal-btn">Verstanden (Entendido)</button>
+        </div>
+    </div>
+
+    <script>
+        const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte"];
+        const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes", "Sechstes", "Siebtes", "Achtes"];
+
+        // --- Base de datos de verbos, dividida en seis grupos ---
+        const verbGroups = [
+            // Grupo 1
+            {
+                'sein': { perfekt: 'ist gewesen', emoji: '🌟', es: 'ser/estar', es_perfekt: 'he sido/estado', en_verb: 'to be', en_perfekt: 'has been', examples: [
+                    { de: 'Ich bin im Kino gewesen.', es: 'He estado en el cine.', phonetics: '/ij bin im kino guevesen/', explanation: '<li><b>Preposición:</b> "im" es la contracción de "in dem". Se usa "in" con Dativ para indicar una ubicación (dónde estabas).</li>' }, 
+                    { de: 'Wo bist du gewesen?', es: '¿Dónde has estado?', phonetics: '/vo bist du guevesen/', explanation: '<li><b>W-Frage:</b> "Wo?" significa "¿Dónde?" y se usa para preguntar por una ubicación.</li>' }, 
+                    { de: 'Das ist eine gute Idee gewesen.', es: 'Esa ha sido una buena idea.', phonetics: '/das ist aine gute idee guevesen/', explanation: '<li><b>Akkusativ:</b> "eine gute Idee" está en acusativo. El artículo indefinido para un sustantivo femenino (Idee) en acusativo es "eine".</li>' }, 
+                    { de: 'Wir sind müde gewesen.', es: 'Hemos estado cansados.', phonetics: '/via sind miude guevesen/', explanation: '<li>El adjetivo "müde" (cansado) describe el estado del sujeto "Wir" (nosotros).</li>' }, 
+                    { de: 'Seid ihr im Park gewesen?', es: '¿Habéis estado en el parque?', phonetics: '/said ia im park guevesen/', explanation: '<li><b>Pregunta Ja/Nein:</b> La pregunta empieza con el verbo conjugado ("Seid") para esperar una respuesta de sí o no.</li>' },
+                    { de: 'Wer ist im Kino gewesen?', es: '¿Quién ha estado en el cine?', phonetics: '/vea ist im kino guevesen/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" significa "¿Quién?" y pregunta por el sujeto de la oración.</li>' },
+                    { de: 'Wann bist du müde gewesen?', es: '¿Cuándo has estado cansado?', phonetics: '/van bist du miude guevesen/', explanation: '<li><b>W-Frage:</b> "Wann?" significa "¿Cuándo?" y pregunta por el momento en el tiempo.</li>' },
+                    { de: 'Warum ist er traurig gewesen?', es: '¿Por qué ha estado él triste?', phonetics: '/varum ist ea traurig guevesen/', explanation: '<li><b>W-Frage:</b> "Warum?" significa "¿Por qué?" y pregunta por la razón o el motivo.</li>' }
+                ]},
+                'haben': { perfekt: 'hat gehabt', emoji: '🤝', es: 'tener', es_perfekt: 'he tenido', en_verb: 'to have', en_perfekt: 'has had', examples: [
+                    { de: 'Ich habe Glück gehabt.', es: 'He tenido suerte.', phonetics: '/ij jabe gliuk guejapt/', explanation: '<li>"Glück" es un sustantivo neutro que aquí funciona como objeto directo, pero no lleva artículo.</li>' }, 
+                    { de: 'Wir haben keine Zeit gehabt.', es: 'No hemos tenido tiempo.', phonetics: '/via jaben kaine tsait guejapt/', explanation: '<li><b>Negación (Akkusativ):</b> Usamos "keine" para negar un sustantivo con artículo indefinido o sin artículo. "Zeit" es femenino, por eso se usa "keine".</li>' }, 
+                    { de: 'Er hat Hunger gehabt.', es: 'Él ha tenido hambre.', phonetics: '/ea jat junga guejapt/', explanation: '<li>La expresión "Hunger haben" (tener hambre) es fija. "Hunger" es el objeto directo.</li>' }, 
+                    { de: 'Hast du einen Hund gehabt?', es: '¿Has tenido un perro?', phonetics: '/jast du ainen junt guejapt/', explanation: '<li><b>Akkusativ:</b> "einen Hund" está en acusativo porque es el objeto directo del verbo "haben". "Hund" es masculino.</li>' }, 
+                    { de: 'Sie haben Spaß gehabt.', es: 'Ellos se han divertido.', phonetics: '/si jaben shpas guejapt/', explanation: '<li>La expresión "Spaß haben" (divertirse) es muy común. "Spaß" es el objeto directo.</li>' },
+                    { de: 'Was hast du gehabt?', es: '¿Qué has tenido?', phonetics: '/vas jast du guejapt/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" significa "¿Qué?" y pregunta por el objeto directo de la oración.</li>' },
+                    { de: 'Wer hat eine Frage gehabt?', es: '¿Quién ha tenido una pregunta?', phonetics: '/vea jat aine frague guejapt/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por el sujeto que realiza la acción de tener.</li>' },
+                    { de: 'Wie viel Geld hast du gehabt?', es: '¿Cuánto dinero has tenido?', phonetics: '/vi fil guelt jast du guejapt/', explanation: '<li><b>W-Frage:</b> "Wie viel?" significa "¿Cuánto?" y se usa para sustantivos incontables como "Geld" (dinero).</li>' }
+                ]},
+                'werden': { perfekt: 'ist geworden', emoji: '🦋', es: 'llegar a ser', es_perfekt: 'he llegado a ser', en_verb: 'to become', en_perfekt: 'has become', examples: [
+                    { de: 'Er ist Arzt geworden.', es: 'Él se ha convertido en médico.', phonetics: '/ea ist atst guevorden/', explanation: '<li>Cuando "werden" significa "convertirse en", el complemento (Arzt) está en nominativo.</li>' },
+                    { de: 'Sie ist schnell müde geworden.', es: 'Ella se ha cansado rápidamente.', phonetics: '/si ist shnel miude guevorden/', explanation: '<li>Aquí "werden" indica un cambio de estado, por eso se usa "sein" como auxiliar.</li>' },
+                    { de: 'Das Wasser ist kalt geworden.', es: 'El agua se ha enfriado.', phonetics: '/das vasa ist kalt guevorden/', explanation: '<li>Indica un cambio de estado de la temperatura del agua.</li>' },
+                    { de: 'Wir sind Freunde geworden.', es: 'Nos hemos hecho amigos.', phonetics: '/via sind froinde guevorden/', explanation: '<li>"Freunde" está en nominativo plural.</li>' },
+                    { de: 'Bist du nervös geworden?', es: '¿Te has puesto nervioso?', phonetics: '/bist du nervos guevorden/', explanation: '<li>Pregunta por un cambio en el estado de ánimo.</li>' },
+                    { de: 'Was ist aus ihm geworden?', es: '¿Qué ha sido de él?', phonetics: '/vas ist aus im guevorden/', explanation: '<li><b>W-Frage y Dativ:</b> "Was?" pregunta por el resultado. La preposición "aus" siempre rige dativo ("ihm").</li>' },
+                    { de: 'Wer ist krank geworden?', es: '¿Quién se ha puesto enfermo?', phonetics: '/vea ist krank guevorden/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por el sujeto que experimentó el cambio de estado.</li>' },
+                    { de: 'Warum ist es so spät geworden?', es: '¿Por qué se ha hecho tan tarde?', phonetics: '/varum ist es so shpet guevorden/', explanation: '<li><b>W-Frage:</b> "Warum?" pregunta la razón.</li>' }
+                ]},
+                'machen': { perfekt: 'hat gemacht', emoji: '🛠️', es: 'hacer', es_perfekt: 'he hecho', en_verb: 'to do/make', en_perfekt: 'has done/made', examples: [
+                    { de: 'Ich habe die Hausaufgaben gemacht.', es: 'He hecho los deberes.', phonetics: '/ij jabe di jaus-auf-gaben guemajt/', explanation: '<li><b>Akkusativ:</b> "die Hausaufgaben" (plural) es el objeto directo. El artículo definido plural en acusativo es "die".</li>' }, 
+                    { de: 'Was hast du gestern gemacht?', es: '¿Qué hiciste ayer?', phonetics: '/vas jast du guestern guemajt/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el objeto directo de la acción de "hacer".</li>' }, 
+                    { de: 'Sie hat einen Fehler gemacht.', es: 'Ella ha cometido un error.', phonetics: '/si jat ainen fela guemajt/', explanation: '<li><b>Akkusativ:</b> "einen Fehler" es el objeto directo. "Fehler" es masculino, por lo que su artículo indefinido en acusativo es "einen".</li>' }, 
+                    { de: 'Wir haben eine Pause gemacht.', es: 'Hemos hecho una pausa.', phonetics: '/via jaben aine pause guemajt/', explanation: '<li><b>Akkusativ:</b> "eine Pause" es el objeto directo. "Pause" es femenino, por lo que su artículo indefinido en acusativo es "eine".</li>' }, 
+                    { de: 'Habt ihr das Fenster zugemacht?', es: '¿Habéis cerrado la ventana?', phonetics: '/japt ia das fensta tsuguemajt/', explanation: '<li><b>Verbo Separable:</b> El verbo es "zumachen" (cerrar). En Perfekt, "ge" se intercala entre el prefijo y la raíz: "zu-ge-macht".</li>' },
+                    { de: 'Wer hat das gemacht?', es: '¿Quién ha hecho eso?', phonetics: '/vea jat das guemajt/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por la persona (el sujeto) que realizó la acción.</li>' },
+                    { de: 'Wie hast du den Kuchen gemacht?', es: '¿Cómo has hecho el pastel?', phonetics: '/vi jast du den kujen guemajt/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Wie?" pregunta "¿Cómo?". "den Kuchen" está en acusativo porque es el objeto directo.</li>' },
+                    { de: 'Warum hast du das gemacht?', es: '¿Por qué has hecho eso?', phonetics: '/varum jast du das guemajt/', explanation: '<li><b>W-Frage:</b> "Warum?" pregunta por el motivo o la razón de una acción.</li>' }
+                ]},
+                'geben': { perfekt: 'hat gegeben', emoji: '🎁', es: 'dar', es_perfekt: 'he dado', en_verb: 'to give', en_perfekt: 'has given', examples: [
+                    { de: 'Ich habe ihm ein Buch gegeben.', es: 'Le he dado un libro a él.', phonetics: '/ij jabe im ain buj guegueben/', explanation: '<li><b>Dativ y Akkusativ:</b> "ihm" (a él) es el objeto indirecto en dativo. "ein Buch" es el objeto directo en acusativo.</li>' }, 
+                    { de: 'Sie hat mir ihre Nummer gegeben.', es: 'Ella me ha dado su número.', phonetics: '/si jat mía ire numa guegueben/', explanation: '<li><b>Dativ y Akkusativ:</b> "mir" (a mí) es el objeto indirecto (dativo). "ihre Nummer" es el objeto directo (acusativo).</li>' }, 
+                    { de: 'Hast du der Katze Futter gegeben?', es: '¿Le has dado comida al gato?', phonetics: '/jast du dea katse futa guegueben/', explanation: '<li><b>Dativ:</b> El verbo "geben" rige dativo para el receptor. "die Katze" (femenino) cambia a "der Katze".</li>' }, 
+                    { de: 'Wir haben eine Party gegeben.', es: 'Hemos dado una fiesta.', phonetics: '/via jaben aine parti guegueben/', explanation: '<li>La expresión "eine Party geben" es fija y significa "dar una fiesta".</li>' }, 
+                    { de: 'Der Lehrer hat uns Hausaufgaben gegeben.', es: 'El profesor nos ha dado deberes.', phonetics: '/dea lera jat uns jaus-auf-gaben guegueben/', explanation: '<li><b>Dativ y Akkusativ:</b> "uns" (a nosotros) es dativo. "Hausaufgaben" (plural) es acusativo.</li>' },
+                    { de: 'Was hat er dir gegeben?', es: '¿Qué te ha dado él?', phonetics: '/vas jat ea día guegueben/', explanation: '<li><b>W-Frage, Akkusativ y Dativ:</b> "Was?" pregunta por el objeto directo (acusativo). "dir" (a ti) es el objeto indirecto (dativo).</li>' },
+                    { de: 'Wer hat dir das Geschenk gegeben?', es: '¿Quién te ha dado el regalo?', phonetics: '/vea jat día das gueshenk guegueben/', explanation: '<li><b>W-Frage, Dativ y Akkusativ:</b> "Wer?" (sujeto), "dir" (objeto indirecto), "das Geschenk" (objeto directo).</li>' },
+                    { de: 'Warum hast du ihm kein Geld gegeben?', es: '¿Por qué no le has dado dinero a él?', phonetics: '/varum jast du im kain guelt guegueben/', explanation: '<li><b>Negación y Casos:</b> "kein Geld" niega el objeto directo. "ihm" (a él) es el objeto indirecto en dativo.</li>' }
+                ]},
+                'sagen': { perfekt: 'hat gesagt', emoji: '🗣️', es: 'decir', es_perfekt: 'he dicho', en_verb: 'to say', en_perfekt: '(has said)', examples: [
+                    { de: 'Er hat nichts gesagt.', es: 'Él no ha dicho nada.', phonetics: '/ea jat nijts guesakt/', explanation: '<li>"nichts" significa "nada" y funciona como objeto directo.</li>' }, 
+                    { de: 'Was hast du gesagt?', es: '¿Qué has dicho?', phonetics: '/vas jast du guesakt/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por lo que se dijo.</li>' }, 
+                    { de: 'Sie hat mir die Wahrheit gesagt.', es: 'Ella me ha dicho la verdad.', phonetics: '/si jat mía di varjait guesakt/', explanation: '<li><b>Dativ y Akkusativ:</b> "mir" (a mí) es el objeto indirecto en dativo. "die Wahrheit" es el objeto directo en acusativo.</li>' }, 
+                    { de: 'Ich habe es dir doch gesagt!', es: '¡Pero si te lo he dicho!', phonetics: '/ij jabe es día doj guesakt/', explanation: '<li><b>Pronombres:</b> "es" (lo) es acusativo, "dir" (a ti) es dativo. "doch" es una partícula que añade énfasis.</li>' }, 
+                    { de: 'Wir haben "Hallo" gesagt.', es: 'Hemos dicho "hola".', phonetics: '/via jaben jalo guesakt/', explanation: '<li>Una cita directa como "Hallo" funciona como el objeto directo.</li>' },
+                    { de: 'Wer hat das gesagt?', es: '¿Quién ha dicho eso?', phonetics: '/vea jat das guesakt/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por el sujeto que habló.</li>' },
+                    { de: 'Wann hat er das gesagt?', es: '¿Cuándo ha dicho él eso?', phonetics: '/van jat ea das guesakt/', explanation: '<li><b>W-Frage:</b> "Wann?" pregunta por el momento en que se dijo.</li>' },
+                    { de: 'Warum hast du das gesagt?', es: '¿Por qué has dicho eso?', phonetics: '/varum jast du das guesakt/', explanation: '<li><b>W-Frage:</b> "Warum?" pregunta por el motivo.</li>' }
+                ]},
+                'gehen': { perfekt: 'ist gegangen', emoji: '🚶‍♂️', es: 'ir/caminar', es_perfekt: 'he ido', en_verb: 'to go', en_perfekt: 'has gone', examples: [
+                    { de: 'Sie ist nach Hause gegangen.', es: 'Ella se ha ido a casa.', phonetics: '/si ist naj jause guegangen/', explanation: '<li><b>Preposición:</b> La expresión "nach Hause" significa "a casa" y se usa con verbos de movimiento.</li>' }, 
+                    { de: 'Wir sind spazieren gegangen.', es: 'Hemos ido a pasear.', phonetics: '/via sind shpatsiren guegangen/', explanation: '<li>La expresión fija "spazieren gehen" significa "ir a pasear". En Perfekt, se conjuga "gehen" (sind gegangen) y "spazieren" queda al final.</li>' }, 
+                    { de: 'Ich bin ins Bett gegangen.', es: 'Me he ido a la cama.', phonetics: '/ij bin ins bet guegangen/', explanation: '<li><b>Preposición (Akkusativ):</b> "ins" es la contracción de "in das". Se usa "in" con acusativo para indicar dirección (a dónde vas).</li>' }, 
+                    { de: 'Bist du zur Arbeit gegangen?', es: '¿Has ido al trabajo?', phonetics: '/bist du tsua abait guegangen/', explanation: '<li><b>Preposición (Dativ):</b> "zur" es la contracción de "zu der". La preposición "zu" siempre rige dativo.</li>' }, 
+                    { de: 'Die Kinder sind in die Schule gegangen.', es: 'Los niños han ido al colegio.', phonetics: '/di kinda sind in di shule guegangen/', explanation: '<li><b>Preposición (Akkusativ):</b> Se usa "in die Schule" para indicar movimiento hacia la escuela. "Schule" es femenino.</li>' },
+                    { de: 'Wohin bist du gegangen?', es: '¿A dónde has ido?', phonetics: '/vojin bist du guegangen/', explanation: '<li><b>W-Frage:</b> "Wohin?" significa "¿A dónde?" y se usa para preguntar por el destino de un movimiento.</li>' },
+                    { de: 'Wann ist sie gegangen?', es: '¿Cuándo se ha ido ella?', phonetics: '/van ist si guegangen/', explanation: '<li><b>W-Frage:</b> "Wann?" pregunta por el momento en que ocurrió la acción.</li>' },
+                    { de: 'Wer ist mit dir gegangen?', es: '¿Quién ha ido contigo?', phonetics: '/vea ist mit día guegangen/', explanation: '<li><b>W-Frage y Dativ:</b> "Wer?" pregunta por el sujeto. "mit dir" usa la preposición "mit", que siempre rige dativo.</li>' }
+                ]},
+                'kommen': { perfekt: 'ist gekommen', emoji: '📨', es: 'venir', es_perfekt: 'he venido', en_verb: 'to come', en_perfekt: 'has come', examples: [
+                    { de: 'Meine Freundin ist gestern gekommen.', es: 'Mi amiga vino ayer.', phonetics: '/maine froindin ist guestern guekomen/', explanation: '<li><b>Posesivo (Nominativ):</b> "Meine Freundin" es el sujeto de la oración, por lo tanto está en nominativo.</li>' }, 
+                    { de: 'Der Bus ist pünktlich gekommen.', es: 'El autobús ha llegado puntual.', phonetics: '/dea bus ist piunktlij guekomen/', explanation: '<li>"Der Bus" es el sujeto (masculino, nominativo). "pünktlich" es un adverbio que describe cómo llegó.</li>' }, 
+                    { de: 'Er ist aus Deutschland gekommen.', es: 'Él ha venido de Alemania.', phonetics: '/ea ist aus doitshlant guekomen/', explanation: '<li><b>Preposición (Dativ):</b> La preposición "aus" (de, desde) siempre rige el caso dativo.</li>' }, 
+                    { de: 'Wann seid ihr gekommen?', es: '¿Cuándo habéis venido?', phonetics: '/van said ia guekomen/', explanation: '<li><b>W-Frage:</b> "Wann?" pregunta por el momento de la llegada.</li>' }, 
+                    { de: 'Ich bin zu spät gekommen.', es: 'He llegado tarde.', phonetics: '/ij bin tsu shpet guekomen/', explanation: '<li>La expresión "zu spät" significa "demasiado tarde" o simplemente "tarde".</li>' },
+                    { de: 'Woher ist er gekommen?', es: '¿De dónde ha venido él?', phonetics: '/vojea ist ea guekomen/', explanation: '<li><b>W-Frage:</b> "Woher?" significa "¿De dónde?" y se usa para preguntar por el origen.</li>' },
+                    { de: 'Wer ist zur Party gekommen?', es: '¿Quién ha venido a la fiesta?', phonetics: '/vea ist tsua parti guekomen/', explanation: '<li><b>W-Frage y Dativ:</b> "Wer?" pregunta por el sujeto. "zur Party" (zu der Party) usa la preposición "zu" que rige dativo.</li>' },
+                    { de: 'Warum bist du nicht gekommen?', es: '¿Por qué no has venido?', phonetics: '/varum bist du nijt guekomen/', explanation: '<li><b>Negación:</b> "nicht" se usa para negar el verbo o toda la oración. Generalmente va al final, antes del participio.</li>' }
+                ]},
+                'sehen': { perfekt: 'hat gesehen', emoji: '👀', es: 'ver', es_perfekt: 'he visto', en_verb: 'to see', en_perfekt: 'has seen', examples: [
+                    { de: 'Ich habe einen Film gesehen.', es: 'He visto una película.', phonetics: '/ij jabe ainen film gueséen/', explanation: '<li><b>Akkusativ:</b> "einen Film" es el objeto directo de "sehen". Como "Film" es masculino, usamos "einen".</li>' }, 
+                    { de: 'Hast du meine Schlüssel gesehen?', es: '¿Has visto mis llaves?', phonetics: '/jast du maine shliusel gueséen/', explanation: '<li><b>Posesivo (Akkusativ):</b> "meine Schlüssel" (mis llaves, plural) es el objeto directo. El posesivo plural en acusativo es "meine".</li>' }, 
+                    { de: 'Wir haben uns lange nicht gesehen.', es: 'No nos hemos visto en mucho tiempo.', phonetics: '/via jaben uns langue nijt gueséen/', explanation: '<li><b>Reflexivo:</b> "uns" actúa como pronombre reflexivo (nos hemos visto a nosotros).</li>' }, 
+                    { de: 'Er hat das Schild nicht gesehen.', es: 'Él no ha visto la señal.', phonetics: '/ea jat das shilt nijt gueséen/', explanation: '<li><b>Akkusativ:</b> "das Schild" (neutro) es el objeto directo. El artículo definido neutro en acusativo es "das".</li>' }, 
+                    { de: 'Habt ihr die Show gesehen?', es: '¿Habéis visto el espectáculo?', phonetics: '/japt ia di sho gueséen/', explanation: '<li><b>Akkusativ:</b> "die Show" (femenino) es el objeto directo. El artículo definido femenino en acusativo es "die".</li>' },
+                    { de: 'Was hast du im Fernsehen gesehen?', es: '¿Qué has visto en la televisión?', phonetics: '/vas jast du im fern-séen gueséen/', explanation: '<li><b>W-Frage y Dativ:</b> "Was?" pregunta por el objeto. "im Fernsehen" (in dem Fernsehen) indica la ubicación (dónde) y usa dativo.</li>' },
+                    { de: 'Wer hat den Unfall gesehen?', es: '¿Quién ha visto el accidente?', phonetics: '/vea jat den un-fal gueséen/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Wer?" pregunta por el sujeto. "den Unfall" es el objeto directo en acusativo.</li>' },
+                    { de: 'Wo hast du ihn gesehen?', es: '¿Dónde lo has visto a él?', phonetics: '/vo jast du in gueséen/', explanation: '<li><b>Pronombre (Akkusativ):</b> "ihn" es el pronombre personal para "él" en acusativo (lo viste a él).</li>' }
+                ]}
+            },
+            // Grupo 2
+            {
+                'sprechen': { perfekt: 'hat gesprochen', emoji: '💬', es: 'hablar', es_perfekt: 'he hablado', en_verb: 'to speak', en_perfekt: 'has spoken', examples: [
+                    { de: 'Er hat mit mir gesprochen.', es: 'Él ha hablado conmigo.', phonetics: '/ea jat mit mía gueshprojen/', explanation: '<li><b>Preposición (Dativ):</b> La preposición "mit" (con) siempre rige el caso dativo. Por eso se usa "mir" (a mí).</li>' }, 
+                    { de: 'Wir haben über das Wetter gesprochen.', es: 'Hemos hablado sobre el tiempo.', phonetics: '/vía jaben iuba das veta gueshprojen/', explanation: '<li><b>Preposición (Akkusativ):</b> La preposición "über" (sobre) rige el caso acusativo cuando no indica una posición fija.</li>'}, 
+                    { de: 'Ich habe mit dem Chef gesprochen.', es: 'He hablado con el jefe.', phonetics: '/ij jabe mit dem shef gueshprojen/', explanation: '<li><b>Preposición (Dativ):</b> "mit" siempre va seguido de dativo. Por eso, "der Chef" (masculino) cambia a "dem Chef".</li>' }, 
+                    { de: 'Hast du mit ihr gesprochen?', es: '¿Has hablado con ella?', phonetics: '/jast du mit ia gueshprojen/', explanation: '<li><b>Preposición (Dativ):</b> De nuevo, "mit" rige dativo. El pronombre para "sie" (ella) en dativo es "ihr".</li>' }, 
+                    { de: 'Sie haben am Telefon gesprochen.', es: 'Ellos han hablado por teléfono.', phonetics: '/si jaben am telefon gueshprojen/', explanation: '<li><b>Preposición (Dativ):</b> "am" es la contracción de "an dem". Aquí indica el medio y usa dativo.</li>' },
+                    { de: 'Wer hat mit dir gesprochen?', es: '¿Quién ha hablado contigo?', phonetics: '/vea jat mit día gueshprojen/', explanation: '<li><b>W-Frage y Dativ:</b> "Wer?" pregunta por el sujeto. "mit dir" usa la preposición "mit" que rige dativo.</li>' },
+                    { de: 'Wie lange habt ihr gesprochen?', es: '¿Cuánto tiempo habéis hablado?', phonetics: '/vi langue japt ia gueshprojen/', explanation: '<li><b>W-Frage:</b> "Wie lange?" pregunta por la duración de una acción.</li>' },
+                    { de: 'Worüber habt ihr gesprochen?', es: '¿Sobre qué habéis hablado?', phonetics: '/vorüba japt ia gueshprojen/', explanation: '<li><b>W-Frage (pronominal):</b> "Worüber" es una forma de preguntar "¿Sobre qué?" (wo + über).</li>' }
+                ]},
+                'essen': { perfekt: 'hat gegessen', emoji: '🍕', es: 'comer', es_perfekt: 'he comido', en_verb: 'to eat', en_perfekt: 'has eaten', examples: [
+                    { de: 'Er hat eine Pizza gegessen.', es: 'Él ha comido una pizza.', phonetics: '/ea jat aine pitsa gueguesen/', explanation: '<li><b>Akkusativ:</b> "eine Pizza" (femenino) es el objeto directo de "essen" y por eso va en acusativo.</li>' }, 
+                    { de: 'Ich habe schon gegessen.', es: 'Ya he comido.', phonetics: '/ij jabe shon gueguesen/', explanation: '<li>El adverbio "schon" significa "ya" y se coloca antes del participio.</li>' }, 
+                    { de: 'Was hast du zum Frühstück gegessen?', es: '¿Qué has desayunado?', phonetics: '/vas jast du tsum friushtiuk gueguesen/', explanation: '<li><b>Preposición (Dativ):</b> "zum" es la contracción de "zu dem". La expresión "zum Frühstück" (para desayunar) es fija.</li>' }, 
+                    { de: 'Wir haben im Restaurant gegessen.', es: 'Hemos comido en el restaurante.', phonetics: '/via jaben im restorant gueguesen/', explanation: '<li><b>Preposición (Dativ):</b> "im" (in dem) se usa para indicar una ubicación (dónde comisteis).</li>' }, 
+                    { de: 'Habt ihr alles gegessen?', es: '¿Lo habéis comido todo?', phonetics: '/japt ia ales gueguesen/', explanation: '<li>"alles" (todo) funciona aquí como el objeto directo de la oración.</li>' },
+                    { de: 'Wo hast du gegessen?', es: '¿Dónde has comido?', phonetics: '/vo jast du gueguesen/', explanation: '<li><b>W-Frage:</b> "Wo?" pregunta por el lugar donde se realizó la acción.</li>' },
+                    { de: 'Wann habt ihr zu Mittag gegessen?', es: '¿Cuándo habéis almorzado?', phonetics: '/van jast du tsu mit-tag gueguesen/', explanation: '<li><b>W-Frage:</b> "zu Mittag essen" es una expresión fija para "almorzar". "Wann" pregunta por el momento.</li>' },
+                    { de: 'Wer hat meinen Apfel gegessen?', es: '¿Quién se ha comido mi manzana?', phonetics: '/vea jat mainen apfel gueguesen/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Wer?" pregunta por el sujeto. "meinen Apfel" es el objeto directo en acusativo (masculino).</li>' }
+                ]},
+                'trinken': { perfekt: 'hat getrunken', emoji: '🥤', es: 'beber', es_perfekt: 'he bebido', en_verb: 'to drink', en_perfekt: 'has drunk', examples: [
+                    { de: 'Sie hat Wasser getrunken.', es: 'Ella ha bebido agua.', phonetics: '/si jat vasa guetrunken/', explanation: '<li>"Wasser" (neutro) es el objeto directo. A menudo, las bebidas no llevan artículo si se habla de forma general.</li>' }, 
+                    { de: 'Wir haben Kaffee getrunken.', es: 'Hemos bebido café.', phonetics: '/via jaben kafe guetrunken/', explanation: '<li>"Kaffee" (masculino) es el objeto directo, pero no lleva artículo en este contexto general.</li>' }, 
+                    { de: 'Ich habe zu viel Cola getrunken.', es: 'He bebido demasiada cola.', phonetics: '/ij jabe tsu fil kola guetrunken/', explanation: '<li>"zu viel" significa "demasiado/a" y se usa con sustantivos incontables.</li>' }, 
+                    { de: 'Was hast du getrunken?', es: '¿Qué has bebido?', phonetics: '/vas jast du guetrunken/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el objeto directo (la bebida).</li>' }, 
+                    { de: 'Sie haben Wein getrunken.', es: 'Ellos han bebido vino.', phonetics: '/si jaben vain guetrunken/', explanation: '<li>"Wein" (masculino) es el objeto directo.</li>' },
+                    { de: 'Wie viel Wasser hast du getrunken?', es: '¿Cuánta agua has bebido?', phonetics: '/vi fil vasa jast du guetrunken/', explanation: '<li><b>W-Frage:</b> "Wie viel?" se usa para preguntar por cantidades de sustantivos incontables como "Wasser".</li>' },
+                    { de: 'Wer hat meinen Saft getrunken?', es: '¿Quién se ha bebido mi zumo?', phonetics: '/vea jat mainen saft guetrunken/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Wer?" pregunta por el sujeto. "meinen Saft" es el objeto directo en acusativo (masculino).</li>' },
+                    { de: 'Warum hast du so viel Kaffee getrunken?', es: '¿Por qué has bebido tanto café?', phonetics: '/varum jast du so fil kafe guetrunken/', explanation: '<li><b>W-Frage:</b> "so viel" significa "tanto/a". "Warum" pregunta por la razón.</li>' }
+                ]},
+                'lesen': { perfekt: 'hat gelesen', emoji: '📖', es: 'leer', es_perfekt: 'he leído', en_verb: 'to read', en_perfekt: 'has read', examples: [
+                    { de: 'Ich habe ein Buch gelesen.', es: 'He leído un libro.', phonetics: '/ij jabe ain buj guelesen/', explanation: '<li><b>Akkusativ:</b> "ein Buch" (neutro) es el objeto directo que fue leído.</li>' }, 
+                    { de: 'Er hat die Zeitung gelesen.', es: 'Él ha leído el periódico.', phonetics: '/ea jat di tsaitung guelesen/', explanation: '<li><b>Akkusativ:</b> "die Zeitung" (femenino) es el objeto directo.</li>' }, 
+                    { de: 'Hast du die E-Mail gelesen?', es: '¿Has leído el correo electrónico?', phonetics: '/jast du di imeil guelesen/', explanation: '<li><b>Akkusativ:</b> "die E-Mail" (femenino) es el objeto directo.</li>' }, 
+                    { de: 'Wir haben die Speisekarte gelesen.', es: 'Hemos leído el menú.', phonetics: '/via jaben di shpaisekarte guelesen/', explanation: '<li><b>Akkusativ:</b> "die Speisekarte" (femenino) es el objeto directo.</li>' }, 
+                    { de: 'Sie hat mir eine Geschichte vorgelesen.', es: 'Ella me ha leído una historia.', phonetics: '/si jat mía aine gueshijte foaguelesen/', explanation: '<li><b>Verbo Separable y Dativ:</b> El verbo es "vorlesen" (leer en voz alta). "mir" (a mí) es el objeto indirecto en dativo.</li>' },
+                    { de: 'Was hast du gelesen?', es: '¿Qué has leído?', phonetics: '/vas jast du guelesen/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el objeto directo (lo que se leyó).</li>' },
+                    { de: 'Wer hat dieses Buch gelesen?', es: '¿Quién ha leído este libro?', phonetics: '/vea jat díses buj guelesen/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Wer?" pregunta por el sujeto. "dieses Buch" (este libro) está en acusativo.</li>' },
+                    { de: 'Wie viele Bücher hast du gelesen?', es: '¿Cuántos libros has leído?', phonetics: '/vi file biuja jast du guelesen/', explanation: '<li><b>W-Frage:</b> "Wie viele?" significa "¿Cuántos/as?" y se usa con sustantivos contables en plural como "Bücher".</li>' }
+                ]},
+                'schreiben': { perfekt: 'hat geschrieben', emoji: '✍️', es: 'escribir', es_perfekt: 'he escrito', en_verb: 'to write', en_perfekt: 'has written', examples: [
+                    { de: 'Ich habe einen Brief geschrieben.', es: 'He escrito una carta.', phonetics: '/ij jabe ainen brif gueshriben/', explanation: '<li><b>Akkusativ:</b> "einen Brief" (masculino) es el objeto directo.</li>' }, 
+                    { de: 'Hast du eine E-Mail geschrieben?', es: '¿Has escrito un correo electrónico?', phonetics: '/jast du aine imeil guelesen/', explanation: '<li><b>Akkusativ:</b> "eine E-Mail" (femenino) es el objeto directo.</li>' }, 
+                    { de: 'Sie hat ein Buch geschrieben.', es: 'Ella ha escrito un libro.', phonetics: '/si jat ain buj gueshriben/', explanation: '<li><b>Akkusativ:</b> "ein Buch" (neutro) es el objeto directo.</li>' }, 
+                    { de: 'Wir haben eine Liste geschrieben.', es: 'Hemos escrito una lista.', phonetics: '/via jaben aine liste gueshriben/', explanation: '<li><b>Akkusativ:</b> "eine Liste" (femenino) es el objeto directo.</li>' }, 
+                    { de: 'Wer hat das geschrieben?', es: '¿Quién ha escrito esto?', phonetics: '/vea jat das gueshriben/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por el autor.</li>' },
+                    { de: 'Was hast du geschrieben?', es: '¿Qué has escrito?', phonetics: '/vas jast du gueshriben/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el contenido escrito.</li>' },
+                    { de: 'Wann hast du den Brief geschrieben?', es: '¿Cuándo has escrito la carta?', phonetics: '/van jast du den brif gueshriben/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Wann?" pregunta por el tiempo. "den Brief" es el objeto directo.</li>' },
+                    { de: 'Warum hast du ihm geschrieben?', es: '¿Por qué le has escrito a él?', phonetics: '/varum jast du im gueshriben/', explanation: '<li><b>W-Frage y Dativ:</b> "Warum?" pregunta la razón. "ihm" (a él) es el objeto indirecto en dativo.</li>' }
+                ]},
+                'hören': { perfekt: 'hat gehört', emoji: '🎧', es: 'oír/escuchar', es_perfekt: 'he oído/escuchado', en_verb: 'to hear/listen', en_perfekt: 'has heard/listened', examples: [
+                    { de: 'Ich habe Musik gehört.', es: 'He escuchado música.', phonetics: '/ij jabe musik guehoert/', explanation: '<li><b>Akkusativ:</b> "Musik" (femenino) es el objeto directo de la acción de escuchar.</li>' }, 
+                    { de: 'Hast du das Geräusch gehört?', es: '¿Has oído ese ruido?', phonetics: '/jast du das gueroish guehoert/', explanation: '<li><b>Akkusativ:</b> "das Geräusch" (neutro) es el objeto directo.</li>' }, 
+                    { de: 'Wir haben die Nachrichten gehört.', es: 'Hemos escuchado las noticias.', phonetics: '/via jaben di najrijten guehoert/', explanation: '<li><b>Akkusativ:</b> "die Nachrichten" (plural) es el objeto directo.</li>' }, 
+                    { de: 'Er hat ein Lied im Radio gehört.', es: 'Él ha escuchado una canción en la radio.', phonetics: '/ea jat ain lit im radio guehoert/', explanation: '<li><b>Akkusativ y Dativ:</b> "ein Lied" es el objeto directo (acusativo). "im Radio" indica el lugar (dativo).</li>' }, 
+                    { de: 'Habt ihr etwas gehört?', es: '¿Habéis oído algo?', phonetics: '/japt ia etvas guehoert/', explanation: '<li>"etwas" (algo) funciona como el objeto directo.</li>' },
+                    { de: 'Was hast du gehört?', es: '¿Qué has oído?', phonetics: '/vas jast du guehoert/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el sonido o la cosa que se oyó.</li>' },
+                    { de: 'Wer hat das Geräusch gehört?', es: '¿Quién ha oído el ruido?', phonetics: '/vea jat das gueroish guehoert/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por la persona que oyó.</li>' },
+                    { de: 'Wann hast du das Lied gehört?', es: '¿Cuándo has oído la canción?', phonetics: '/van jast du das lit guehoert/', explanation: '<li><b>W-Frage:</b> "Wann?" pregunta por el momento en que se escuchó la canción.</li>' }
+                ]},
+                'fragen': { perfekt: 'hat gefragt', emoji: '❓', es: 'preguntar', es_perfekt: 'he preguntado', en_verb: 'to ask', en_perfekt: 'has asked', examples: [
+                    { de: 'Ich habe den Lehrer gefragt.', es: 'Le he preguntado al profesor.', phonetics: '/ij jabe den lera guefragt/', explanation: '<li><b>Akkusativ:</b> Usamos "den Lehrer" (acusativo) porque el verbo "fragen" rige un objeto directo en acusativo.</li>' }, 
+                    { de: 'Sie hat nach ihrem Papa gefragt.', es: 'Ella ha preguntado por su papá.', phonetics: '/si jat naj irem papa guefragt/', explanation: '<li><b>Preposición (Dativ):</b> La preposición "nach" siempre rige el caso dativo. Por eso, el posesivo "ihr Papa" (masculino) se convierte en "ihrem Papa".</li>' }, 
+                    { de: 'Hast du sie gefragt?', es: '¿Le has preguntado a ella?', phonetics: '/jast du si guefragt/', explanation: '<li><b>Pronombre (Akkusativ):</b> "sie" es aquí el pronombre para "ella" en acusativo, funcionando como objeto directo.</li>' }, 
+                    { de: 'Er hat um einen Stift gefragt.', es: 'Él ha pedido un bolígrafo.', phonetics: '/ea jat um ainen shtift guefragt/', explanation: '<li><b>Expresión:</b> "um etwas fragen" significa "pedir algo". "einen Stift" está en acusativo, regido por la preposición "um".</li>' }, 
+                    { de: 'Warum hast du nicht gefragt?', es: '¿Por qué no has preguntado?', phonetics: '/varum jast du nijt guefragt/', explanation: '<li><b>W-Frage y Negación:</b> "Warum?" pregunta la razón. "nicht" niega la acción del verbo.</li>' },
+                    { de: 'Was hat sie gefragt?', es: '¿Qué ha preguntado ella?', phonetics: '/vas jat si guefragt/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el objeto directo de la pregunta.</li>' },
+                    { de: 'Wer hat dich gefragt?', es: '¿Quién te ha preguntado?', phonetics: '/vea jat dij guefragt/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Wer?" pregunta por el sujeto. "dich" (a ti) es el objeto directo en acusativo.</li>' },
+                    { de: 'Wo hast du ihn gefragt?', es: '¿Dónde le has preguntado a él?', phonetics: '/vo jast du in guefragt/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Wo?" pregunta por el lugar. "ihn" (a él) es el objeto directo en acusativo.</li>' }
+                ]},
+                'kaufen': { perfekt: 'hat gekauft', emoji: '🛒', es: 'comprar', es_perfekt: 'he comprado', en_verb: 'to buy', en_perfekt: 'has bought', examples: [
+                    { de: 'Er hat ein neues Auto gekauft.', es: 'Él ha comprado un coche nuevo.', phonetics: '/ea jat ain noies auto guekauft/', explanation: '<li><b>Akkusativ:</b> "ein neues Auto" (neutro) es el objeto directo. El adjetivo "neu" se declina a "neues".</li>' }, 
+                    { de: 'Ich habe Brot gekauft.', es: 'He comprado pan.', phonetics: '/ij jabe brot guekauft/', explanation: '<li>"Brot" (neutro) es el objeto directo. A menudo no se usa artículo.</li>' }, 
+                    { de: 'Sie hat ein Ticket gekauft.', es: 'Ella ha comprado un billete.', phonetics: '/si jat ain tiket guekauft/', explanation: '<li><b>Akkusativ:</b> "ein Ticket" (neutro) es el objeto directo.</li>' }, 
+                    { de: 'Was habt ihr gekauft?', es: '¿Qué habéis comprado?', phonetics: '/vas japt ia guekauft/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el objeto que fue comprado.</li>' }, 
+                    { de: 'Wir haben Geschenke gekauft.', es: 'Hemos comprado regalos.', phonetics: '/via jaben gueshenke guekauft/', explanation: '<li>"Geschenke" (plural) es el objeto directo. No lleva artículo porque se habla de regalos en general.</li>' },
+                    { de: 'Wo hast du das T-Shirt gekauft?', es: '¿Dónde has comprado la camiseta?', phonetics: '/vo jast du das ti-shirt guekauft/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Wo?" pregunta por el lugar. "das T-Shirt" es el objeto directo en acusativo (neutro).</li>' },
+                    { de: 'Wer hat das Brot gekauft?', es: '¿Quién ha comprado el pan?', phonetics: '/vea jat das brot guekauft/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por el sujeto que compró.</li>' },
+                    { de: 'Wann hast du die Tickets gekauft?', es: '¿Cuándo has comprado los billetes?', phonetics: '/van jast du di tikets guekauft/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Wann?" pregunta por el tiempo. "die Tickets" (plural) es el objeto directo.</li>' }
+                ]},
+                'zahlen / bezahlen': { perfekt: 'hat gezahlt / hat bezahlt', emoji: '💳', es: 'pagar', es_perfekt: 'he pagado', en_verb: 'to pay', en_perfekt: 'has paid', note_es: '<b>Nota:</b> "bezahlen" se usa a menudo para un objeto específico (la cuenta, un café). "zahlen" puede ser más general (pagar con tarjeta) o usarse sin objeto.', examples: [
+                    { de: 'Ich habe die Rechnung bezahlt.', es: 'He pagado la cuenta.', phonetics: '/ij jabe di rejnunk betsalt/', explanation: '<li><b>Akkusativ:</b> "die Rechnung" (femenino) es el objeto directo.</li>' }, 
+                    { de: 'Hast du den Kaffee gezahlt?', es: '¿Has pagado el café?', phonetics: '/jast du den kafe guetsalt/', explanation: '<li><b>Akkusativ:</b> "den Kaffee" (masculino) es el objeto directo.</li>' }, 
+                    { de: 'Wir haben mit Karte gezahlt.', es: 'Hemos pagado con tarjeta.', phonetics: '/via jaben mit karte guetsalt/', explanation: '<li><b>Preposición (Dativ):</b> "mit" rige dativo. Aunque "Karte" no lleva artículo, se entiende que el caso es dativo.</li>' }, 
+                    { de: 'Wer hat die Getränke bezahlt?', es: '¿Quién ha pagado las bebidas?', phonetics: '/vea jat di guetrenke betsalt/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por la persona que pagó.</li>' },
+                    { de: 'Wir haben bar gezahlt.', es: 'Hemos pagado en efectivo.', phonetics: '/via jaben bar guetsalt/', explanation: '<li>"bar" es un adverbio que significa "en efectivo".</li>' },
+                    { de: 'Was hast du bezahlt?', es: '¿Qué has pagado?', phonetics: '/vas jast du betsalt/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el objeto pagado.</li>' },
+                    { de: 'Wie hast du gezahlt?', es: '¿Cómo has pagado?', phonetics: '/vi jast du guetsalt/', explanation: '<li><b>W-Frage:</b> "Wie?" pregunta por el método de pago.</li>' },
+                    { de: 'Warum hast du nicht bezahlt?', es: '¿Por qué no has pagado?', phonetics: '/varum jast du nijt betsalt/', explanation: '<li><b>W-Frage y Negación:</b> "Warum?" pregunta la razón.</li>' }
+                ]}
+            },
+            // Grupo 3
+            {
+                'arbeiten': { perfekt: 'hat gearbeitet', emoji: '💼', es: 'trabajar', es_perfekt: 'he trabajado', en_verb: 'to work', en_perfekt: 'has worked', examples: [
+                    { de: 'Ich habe gestern viel gearbeitet.', es: 'Ayer trabajé mucho.', phonetics: '/ij jabe guestern fil guearbaitet/', explanation: '<li>Los adverbios de tiempo como "gestern" (ayer) suelen ir después del verbo conjugado.</li>' }, 
+                    { de: 'Sie hat im Büro gearbeitet.', es: 'Ella ha trabajado en la oficina.', phonetics: '/si jat im biuro guearbaitet/', explanation: '<li><b>Preposición (Dativ):</b> "im" (in dem) indica la ubicación (dónde trabajó).</li>' }, 
+                    { de: 'Mein Vater hat als Arzt gearbeitet.', es: 'Mi padre ha trabajado como médico.', phonetics: '/main fata jat als atst guearbaitet/', explanation: '<li><b>Preposición:</b> "als" se usa para indicar una profesión o función.</li>' }, 
+                    { de: 'Wo hast du gearbeitet?', es: '¿Dónde has trabajado?', phonetics: '/vo jast du guearbaitet/', explanation: '<li><b>W-Frage:</b> "Wo?" pregunta por el lugar de trabajo.</li>' }, 
+                    { de: 'Wir haben am Projekt gearbeitet.', es: 'Hemos trabajado en el proyecto.', phonetics: '/via jaben am proiekt guearbaitet/', explanation: '<li><b>Preposición (Dativ):</b> "am" (an dem) se usa a menudo con "arbeiten" para indicar en qué se trabaja.</li>' },
+                    { de: 'Wann hast du gearbeitet?', es: '¿Cuándo has trabajado?', phonetics: '/van jast du guearbaitet/', explanation: '<li><b>W-Frage:</b> "Wann?" pregunta por el momento del trabajo.</li>' },
+                    { de: 'Wie lange hat er gearbeitet?', es: '¿Cuánto tiempo ha trabajado él?', phonetics: '/vi langue jat ea guearbaitet/', explanation: '<li><b>W-Frage:</b> "Wie lange?" pregunta por la duración del trabajo.</li>' },
+                    { de: 'Wer hat am Wochenende gearbeitet?', es: '¿Quién ha trabajado el fin de semana?', phonetics: '/vea jat am vojen-ende guearbaitet/', explanation: '<li><b>W-Frage y Dativ:</b> "Wer?" pregunta por el sujeto. "am Wochenende" indica el tiempo (cuándo) y usa dativo.</li>' }
+                ]},
+                'lernen': { perfekt: 'hat gelernt', emoji: '📚', es: 'aprender', es_perfekt: 'he aprendido', en_verb: 'to learn', en_perfekt: 'has learned', note_es: '<b>Nota:</b> "lernen" se usa para aprender habilidades (nadar, un idioma) o para estudiar en la escuela/colegio. Para estudios universitarios se usa "studieren".', examples: [
+                    { de: 'Wir haben Deutsch gelernt.', es: 'Hemos aprendido alemán.', phonetics: '/via jaben doitsh guelernt/', explanation: '<li>"Deutsch" (alemán) es el objeto directo de "lernen".</li>' }, 
+                    { de: 'Ich habe viel gelernt.', es: 'He aprendido mucho.', phonetics: '/ij jabe fil guelernt/', explanation: '<li>"viel" (mucho) es un adverbio que modifica al verbo.</li>' }, 
+                    { de: 'Er hat das Gedicht gelernt.', es: 'Él ha aprendido el poema.', phonetics: '/ea jat das guedijt guelernt/', explanation: '<li><b>Akkusativ:</b> "das Gedicht" (neutro) es el objeto directo que ha sido aprendido.</li>' }, 
+                    { de: 'Hast du für die Prüfung gelernt?', es: '¿Has estudiado para el examen?', phonetics: '/jast du fiua di prufung guelernt/', explanation: '<li><b>Preposición (Akkusativ):</b> La preposición "für" (para) siempre rige el caso acusativo.</li>' }, 
+                    { de: 'Sie hat schwimmen gelernt.', es: 'Ella ha aprendido a nadar.', phonetics: '/si jat shvimen guelernt/', explanation: '<li>Cuando "lernen" va seguido de otro verbo en infinitivo (como "schwimmen"), este va al final de la oración, justo antes del participio.</li>' },
+                    { de: 'Was hast du in der Schule gelernt?', es: '¿Qué has aprendido en la escuela?', phonetics: '/vas jast du in dea shule guelernt/', explanation: '<li><b>W-Frage y Dativ:</b> "Was?" pregunta por el objeto. "in der Schule" indica ubicación (dónde) y usa dativo.</li>' },
+                    { de: 'Wie lange hast du Deutsch gelernt?', es: '¿Cuánto tiempo has aprendido alemán?', phonetics: '/vi langue jast du doitsh guelernt/', explanation: '<li><b>W-Frage:</b> "Wie lange?" pregunta por la duración del aprendizaje.</li>' },
+                    { de: 'Wo hat er Gitarre spielen gelernt?', es: '¿Dónde ha aprendido él a tocar la guitarra?', phonetics: '/vo jat ea gitarre shpilen guelernt/', explanation: '<li><b>Estructura:</b> El infinitivo "spielen" va justo antes del participio "gelernt" al final de la oración.</li>' }
+                ]},
+                'wohnen': { perfekt: 'hat gewohnt', emoji: '🏠', es: 'vivir/residir', es_perfekt: 'he vivido/residido', en_verb: 'to live/reside', examples: [
+                    { de: 'Ich habe in Berlin gewohnt.', es: 'He vivido en Berlín.', phonetics: '/ij jabe in berlin guevont/', explanation: '<li><b>Preposición (Dativ):</b> "in" se usa con dativo para indicar una ubicación fija (dónde vives).</li>' }, 
+                    { de: 'Wo hast du gewohnt?', es: '¿Dónde has vivido?', phonetics: '/vo jast du guevont/', explanation: '<li><b>W-Frage:</b> "Wo?" pregunta por la ubicación.</li>' }, 
+                    { de: 'Sie hat bei ihren Eltern gewohnt.', es: 'Ella ha vivido con sus padres.', phonetics: '/si jat bai iren eltan guevont/', explanation: '<li><b>Preposición (Dativ):</b> "bei" (en casa de) siempre rige dativo. Por eso, "ihre Eltern" (plural) se convierte en "ihren Eltern".</li>' }, 
+                    { de: 'Wir haben in einer Wohnung gewohnt.', es: 'Hemos vivido en un apartamento.', phonetics: '/via jaben in aina vonung guevont/', explanation: '<li><b>Preposición (Dativ):</b> "in" con dativo indica ubicación. "eine Wohnung" (femenino) se convierte en "einer Wohnung".</li>' }, 
+                    { de: 'Habt ihr lange hier gewohnt?', es: '¿Habéis vivido aquí mucho tiempo?', phonetics: '/japt ia langue hía guevont/', explanation: '<li>La combinación "lange hier" significa "mucho tiempo aquí".</li>' },
+                    { de: 'Wie lange hast du dort gewohnt?', es: '¿Cuánto tiempo has vivido allí?', phonetics: '/vi langue jast du dort guevont/', explanation: '<li><b>W-Frage:</b> "Wie lange?" pregunta por la duración. "dort" significa "allí".</li>' },
+                    { de: 'Wer hat in diesem Haus gewohnt?', es: '¿Quién ha vivido en esta casa?', phonetics: '/vea jat in dísem jaus guevont/', explanation: '<li><b>W-Frage y Dativ:</b> "Wer?" pregunta por el sujeto. "in diesem Haus" indica ubicación en dativo.</li>' },
+                    { de: 'Warum hat er allein gewohnt?', es: '¿Por qué ha vivido él solo?', phonetics: '/varum jat ea alain guevont/', explanation: '<li><b>W-Frage:</b> "Warum?" pregunta la razón. "allein" significa "solo".</li>' }
+                ]},
+                 'leben': { perfekt: 'hat gelebt', emoji: '❤️', es: 'vivir', es_perfekt: 'he vivido', en_verb: 'to live', en_perfekt: 'has lived', examples: [
+                    { de: 'Meine Oma hat lange gelebt.', es: 'Mi abuela ha vivido mucho tiempo.', phonetics: '/maine oma jat langue guelept/', explanation: '<li>"lange" es un adverbio que significa "mucho tiempo".</li>' },
+                    { de: 'Er hat in Frankreich gelebt.', es: 'Él ha vivido en Francia.', phonetics: '/ea jat in frankraij guelept/', explanation: '<li><b>Preposición (Dativ):</b> "in" se usa con dativo para indicar la ubicación donde vivió.</li>' },
+                    { de: 'Wir haben glücklich gelebt.', es: 'Hemos vivido felices.', phonetics: '/via jaben gluklij guelept/', explanation: '<li>"glücklich" (felizmente) es un adverbio que describe cómo vivieron.</li>' },
+                    { de: 'Sie hat für ihre Träume gelebt.', es: 'Ella ha vivido para sus sueños.', phonetics: '/si jat fiua ire troime guelept/', explanation: '<li><b>Preposición (Akkusativ):</b> "für" siempre rige acusativo. "ihre Träume" es el objeto.</li>' },
+                    { de: 'Ich habe ein einfaches Leben gelebt.', es: 'He vivido una vida sencilla.', phonetics: '/ij jabe ain ainfajes leben guelept/', explanation: '<li><b>Akkusativ:</b> "ein einfaches Leben" es el objeto directo de "leben".</li>' },
+                    { de: 'Wo hast du gelebt?', es: '¿Dónde has vivido?', phonetics: '/vo jast du guelept/', explanation: '<li><b>W-Frage:</b> "Wo?" pregunta por el lugar donde se ha vivido.</li>' },
+                    { de: 'Wie lange hat er in Spanien gelebt?', es: '¿Cuánto tiempo ha vivido él en España?', phonetics: '/vi langue jat ea in shpanien guelept/', explanation: '<li><b>W-Frage:</b> "Wie lange?" pregunta por la duración de tiempo.</li>' },
+                    { de: 'Wer hat hier früher gelebt?', es: '¿Quién ha vivido aquí antes?', phonetics: '/vea jat hía früa guelept/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por la persona (sujeto). "früher" significa "antes".</li>' }
+                ]},
+                'schlafen': { perfekt: 'hat geschlafen', emoji: '😴', es: 'dormir', es_perfekt: 'he dormido', en_verb: 'to sleep', en_perfekt: 'has slept', examples: [
+                    { de: 'Das Baby hat gut geschlafen.', es: 'El bebé ha dormido bien.', phonetics: '/das beibi jat gut gueshlafen/', explanation: '<li>"gut" (bien) es un adverbio que describe cómo durmió el bebé.</li>' }, 
+                    { de: 'Hast du gut geschlafen?', es: '¿Has dormido bien?', phonetics: '/jast du gut gueshlafen/', explanation: '<li>Una pregunta común para la que se espera una respuesta de sí o no (Ja/Nein-Frage).</li>' }, 
+                    { de: 'Ich habe nur fünf Stunden geschlafen.', es: 'Solo he dormido cinco horas.', phonetics: '/ij jabe nua fiunf shtunden gueshlafen/', explanation: '<li>"nur" significa "solo". "fünf Stunden" indica la duración.</li>' }, 
+                    { de: 'Er hat auf dem Sofa geschlafen.', es: 'Él ha dormido en el sofá.', phonetics: '/ea jat auf dem sofa gueshlafen/', explanation: '<li><b>Preposición (Dativ):</b> "auf" se usa con dativo ("dem Sofa") para indicar una ubicación (dónde durmió).</li>' }, 
+                    { de: 'Wir haben lange geschlafen.', es: 'Hemos dormido mucho (tiempo).', phonetics: '/via jaben langue gueshlafen/', explanation: '<li>"lange" es un adverbio que significa "mucho tiempo".</li>' },
+                    { de: 'Wo hat die Katze geschlafen?', es: '¿Dónde ha dormido el gato?', phonetics: '/vo jat di katse gueshlafen/', explanation: '<li><b>W-Frage:</b> "Wo?" pregunta por el lugar donde durmió el sujeto ("die Katze").</li>' },
+                    { de: 'Wie lange hast du geschlafen?', es: '¿Cuánto tiempo has dormido?', phonetics: '/vi langue jast du gueshlafen/', explanation: '<li><b>W-Frage:</b> "Wie lange?" pregunta por la duración de la acción de dormir.</li>' },
+                    { de: 'Warum hast du so wenig geschlafen?', es: '¿Por qué has dormido tan poco?', phonetics: '/varum jast du so venij gueshlafen/', explanation: '<li><b>W-Frage:</b> "Warum?" pregunta la razón. "so wenig" significa "tan poco".</li>' }
+                ]},
+                'fahren': { perfekt: 'ist gefahren', emoji: '🚗', es: 'conducir, ir en bici/coche/tren', es_perfekt: 'he conducido, ido en vehículo', en_verb: 'to drive/go', en_perfekt: 'has driven/gone', note_es: '<b>Nota:</b> Para el modal, la traducción es: <b>conducir, ir en vehículo (bici/coche/tren)</b>', examples: [
+                    { de: 'Wir sind nach Berlin gefahren.', es: 'Hemos ido a Berlín.', phonetics: '/via sind naj berlin guefaren/', explanation: '<li><b>Preposición:</b> "nach" se usa para indicar dirección hacia ciudades o países sin artículo.</li>' }, 
+                    { de: 'Bist du mit dem Auto gefahren?', es: '¿Has ido en coche?', phonetics: '/bist du mit dem auto guefaren/', explanation: '<li><b>Preposición (Dativ):</b> "mit" siempre rige el caso dativo. "das Auto" (neutro) cambia a "dem Auto".</li>' }, 
+                    { de: 'Ich bin mit dem Zug gefahren.', es: 'He ido en tren.', phonetics: '/ij bin mit dem tsug guefaren/', explanation: '<li><b>Preposición (Dativ):</b> "mit" rige dativo. "der Zug" (masculino) cambia a "dem Zug".</li>' }, 
+                    { de: 'Sie ist nach Hamburg gefahren.', es: 'Ella ha ido a Hamburgo.', phonetics: '/si ist naj jamburg guefaren/', explanation: '<li><b>Preposición:</b> "nach" se usa para ciudades.</li>' }, 
+                    { de: 'Seid ihr in den Urlaub gefahren?', es: '¿Os habéis ido de vacaciones?', phonetics: '/said ia in den ualaup guefaren/', explanation: '<li><b>Preposición (Akkusativ):</b> "in den Urlaub" indica dirección (hacia las vacaciones). "Urlaub" es masculino, por eso "in den".</li>' },
+                    { de: 'Wohin seid ihr gefahren?', es: '¿A dónde habéis ido (en vehículo)?', phonetics: '/vojin said ia guefaren/', explanation: '<li><b>W-Frage:</b> "Wohin?" pregunta por el destino de un movimiento.</li>' },
+                    { de: 'Wann bist du nach Hause gefahren?', es: '¿Cuándo te has ido a casa (en vehículo)?', phonetics: '/van bist du naj jause guefaren/', explanation: '<li><b>W-Frage y Preposición:</b> "Wann?" pregunta por el tiempo. "nach Hause" es una expresión fija para "a casa".</li>' },
+                    { de: 'Wer ist mit dem Fahrrad gefahren?', es: '¿Quién ha ido en bicicleta?', phonetics: '/vea ist mit dem farrat guefaren/', explanation: '<li><b>W-Frage y Dativ:</b> "Wer?" pregunta por el sujeto. "mit dem Fahrrad" usa "mit" que rige dativo.</li>' }
+                ]},
+                'fliegen': { perfekt: 'ist geflogen', emoji: '✈️', es: 'volar', es_perfekt: 'he volado', en_verb: 'to fly', en_perfekt: 'has flown', examples: [
+                    { de: 'Wir sind nach Spanien geflogen.', es: 'Hemos volado a España.', phonetics: '/via sind naj shpanien guefloguen/', explanation: '<li><b>Preposición:</b> "nach" se usa para direcciones (países, ciudades).</li>' }, 
+                    { de: 'Bist du schon einmal geflogen?', es: '¿Has volado alguna vez?', phonetics: '/bist du shon ainmal guefloguen/', explanation: '<li>"schon einmal" es una expresión que significa "alguna vez".</li>' }, 
+                    { de: 'Das Flugzeug ist pünktlich geflogen.', es: 'El avión ha volado puntual.', phonetics: '/das flugtsoik ist piunktlij guefloguen/', explanation: '<li>"pünktlich" (puntual) es un adverbio.</li>' }, 
+                    { de: 'Ich bin von Berlin nach München geflogen.', es: 'He volado de Berlín a Múnich.', phonetics: '/ij bin fon berlin naj miunjen guefloguen/', explanation: '<li><b>Preposiciones:</b> "von" (desde) indica el origen y "nach" (hacia) el destino.</li>' }, 
+                    { de: 'Sie sind in den Urlaub geflogen.', es: 'Ellos han volado de vacaciones.', phonetics: '/si sind in den ualaup guefloguen/', explanation: '<li><b>Preposición (Akkusativ):</b> "in den Urlaub" indica dirección (hacia dónde).</li>' },
+                    { de: 'Wohin bist du geflogen?', es: '¿A dónde has volado?', phonetics: '/vojin bist du guefloguen/', explanation: '<li><b>W-Frage:</b> "Wohin?" pregunta por el destino.</li>' },
+                    { de: 'Wann seid ihr geflogen?', es: '¿Cuándo habéis volado?', phonetics: '/van said ia guefloguen/', explanation: '<li><b>W-Frage:</b> "Wann?" pregunta por el tiempo.</li>' },
+                    { de: 'Wer ist nach Italien geflogen?', es: '¿Quién ha volado a Italia?', phonetics: '/vea ist naj italien guefloguen/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por la persona que voló.</li>' }
+                ]},
+                 'heißen': { perfekt: 'hat geheißen', emoji: '📛', es: 'llamarse', es_perfekt: 'me he llamado', en_verb: 'to be called', en_perfekt: 'has been called', examples: [
+                    { de: 'Wie hat der Film geheißen?', es: '¿Cómo se ha llamado la película?', phonetics: '/vi jat dea film guejaisen/', explanation: '<li>El Perfekt de "heißen" es poco común en conversaciones; se prefiere el Präteritum ("hieß"). Pero es gramaticalmente correcto.</li>' },
+                    { de: 'Der Mann hat Klaus geheißen.', es: 'El hombre se ha llamado Klaus.', phonetics: '/dea man jat klaus guejaisen/', explanation: '<li>El nombre propio "Klaus" funciona como complemento nominativo.</li>' },
+                    { de: 'Das hat nichts Gutes geheißen.', es: 'Eso no ha significado nada bueno.', phonetics: '/das jat nijts gutes guejaisen/', explanation: '<li>Aquí "heißen" tiene el significado de "significar" o "augurar".</li>' },
+                    { de: 'Er hat "Hans" mit Nachnamen geheißen.', es: 'Él se ha apellidado "Hans".', phonetics: '/ea jat jans mit najnamen guejaisen/', explanation: '<li>"mit Nachnamen" es una expresión fija que significa "de apellido".</li>' },
+                    { de: 'Ich habe früher anders geheißen.', es: 'Antes me he llamado de otra forma.', phonetics: '/ij jabe früa anders guejaisen/', explanation: '<li>"früher" (antes) y "anders" (diferente) son adverbios.</li>' },
+                    { de: 'Wie hat die Straße geheißen?', es: '¿Cómo se ha llamado la calle?', phonetics: '/vi jat di shtrase guejaisen/', explanation: '<li><b>W-Frage:</b> "Wie?" es la W-Frage que se usa con "heißen" para preguntar por un nombre.</li>' },
+                    { de: 'Wer hat so geheißen?', es: '¿Quién se ha llamado así?', phonetics: '/vea jat so guejaisen/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por la persona con ese nombre.</li>' },
+                    { de: 'Warum hat er seinen Namen geändert?', es: '¿Por qué ha cambiado su nombre?', phonetics: '/varum jat ea sainen namen gue-endert/', explanation: '<li>Una pregunta relacionada, ya que el Perfekt de heißen es raro. Aquí se usa "ändern" (cambiar).</li>' }
+                ]},
+                 'rauchen': { perfekt: 'hat geraucht', emoji: '🚬', es: 'fumar', es_perfekt: 'he fumado', en_verb: 'to smoke', en_perfekt: 'has smoked', examples: [
+                    { de: 'Er hat eine Zigarette geraucht.', es: 'Él ha fumado un cigarrillo.', phonetics: '/ea jat aine tsigarete gueraujt/', explanation: '<li><b>Akkusativ:</b> "eine Zigarette" (femenino) es el objeto directo.</li>' },
+                    { de: 'Hast du hier geraucht?', es: '¿Has fumado aquí?', phonetics: '/jast du hía gueraujt/', explanation: '<li>"hier" (aquí) es un adverbio de lugar.</li>' },
+                    { de: 'Mein Opa hat früher viel geraucht.', es: 'Mi abuelo fumaba mucho antes.', phonetics: '/main opa jat früa fil gueraujt/', explanation: '<li>"früher" (antes) y "viel" (mucho) son adverbios.</li>' },
+                    { de: 'Wir haben auf dem Balkon geraucht.', es: 'Hemos fumado en el balcón.', phonetics: '/via jaben auf dem balkon gueraujt/', explanation: '<li><b>Preposición (Dativ):</b> "auf" con dativo ("dem Balkon") indica la ubicación.</li>' },
+                    { de: 'Es ist verboten, hier zu rauchen.', es: 'Está prohibido fumar aquí.', phonetics: '/es ist ferboten, hía tsu raujen/', explanation: '<li>Una frase útil en presente que usa el infinitivo con "zu".</li>' },
+                    { de: 'Was hast du geraucht?', es: '¿Qué has fumado?', phonetics: '/vas jast du gueraujt/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el objeto que se ha fumado.</li>' },
+                    { de: 'Wer hat hier geraucht?', es: '¿Quién ha fumado aquí?', phonetics: '/vea jat hía gueraujt/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por la persona que fumó.</li>' },
+                    { de: 'Warum hast du im Haus geraucht?', es: '¿Por qué has fumado en la casa?', phonetics: '/varum jast du im jaus gueraujt/', explanation: '<li><b>W-Frage y Dativ:</b> "Warum?" pregunta la razón. "im Haus" (dativo) indica la ubicación.</li>' }
+                ]}
+            },
+            // Grupo 4
+            {
+                'wissen': { perfekt: 'hat gewusst', emoji: '🧠', es: 'saber', es_perfekt: 'he sabido', en_verb: 'to know', en_perfekt: 'has known', examples: [
+                    { de: 'Ich habe das nicht gewusst.', es: 'No lo sabía.', phonetics: '/ij jabe das nijt guevust/', explanation: '<li><b>Negación:</b> "nicht" niega el verbo "gewusst".</li>' }, 
+                    { de: 'Hast du das schon gewusst?', es: '¿Ya lo sabías?', phonetics: '/jast du das shon guevust/', explanation: '<li>"schon" es el adverbio "ya".</li>' }, 
+                    { de: 'Er hat die Antwort gewusst.', es: 'Él sabía la respuesta.', phonetics: '/ea jat di antvort guevust/', explanation: '<li><b>Akkusativ:</b> "die Antwort" (femenino) es el objeto directo.</li>' }, 
+                    { de: 'Wir haben nichts davon gewusst.', es: 'No sabíamos nada de eso.', phonetics: '/via jaben nijts dafon guevust/', explanation: '<li>"nichts" (nada) y "davon" (de eso) forman la negación.</li>' }, 
+                    { de: 'Woher hast du das gewusst?', es: '¿De dónde lo sabías?', phonetics: '/voja jast du das guevust/', explanation: '<li><b>W-Frage:</b> "Woher?" pregunta por el origen de la información.</li>' },
+                    { de: 'Wer hat das gewusst?', es: '¿Quién sabía eso?', phonetics: '/vea jat das guevust/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por la persona que sabía.</li>' },
+                    { de: 'Was hast du gewusst?', es: '¿Qué sabías?', phonetics: '/vas jast du guevust/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por la información sabida.</li>' },
+                    { de: 'Warum hast du das nicht gewusst?', es: '¿Por qué no sabías eso?', phonetics: '/varum jast du das nijt guevust/', explanation: '<li><b>W-Frage y Negación:</b> Una pregunta común para pedir una justificación.</li>' }
+                ]},
+                'kennen': { perfekt: 'hat gekannt', emoji: '🤝', es: 'conocer', es_perfekt: 'he conocido', en_verb: 'to know person/place', en_perfekt: 'has known', examples: [
+                    { de: 'Ich habe ihn nicht gekannt.', es: 'No lo he conocido.', phonetics: '/ij jabe in nijt guekant/', explanation: '<li><b>Pronombre (Akkusativ):</b> "kennen" rige acusativo. "ihn" (a él) es el objeto directo.</li>' },
+                    { de: 'Hast du diese Stadt gekannt?', es: '¿Conocías esta ciudad?', phonetics: '/jast du díse shtat guekant/', explanation: '<li><b>Akkusativ:</b> "diese Stadt" (femenino) es el objeto directo.</li>' },
+                    { de: 'Wir haben uns schon gekannt.', es: 'Ya nos conocíamos.', phonetics: '/via jaben uns shon guekant/', explanation: '<li><b>Reflexivo:</b> "uns" actúa como pronombre reflexivo ("el uno al otro").</li>' },
+                    { de: 'Sie hat den Weg gekannt.', es: 'Ella conocía el camino.', phonetics: '/si jat den vek guekant/', explanation: '<li><b>Akkusativ:</b> "den Weg" (masculino) es el objeto directo.</li>' },
+                    { de: 'Ich habe seinen Namen nicht gekannt.', es: 'No sabía su nombre.', phonetics: '/ij jabe sainen namen nijt guekant/', explanation: '<li><b>Posesivo (Akkusativ):</b> "seinen Namen" es el objeto directo.</li>' },
+                    { de: 'Wen hast du dort gekannt?', es: '¿A quién has conocido allí?', phonetics: '/ven jast du dort guekant/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Wen?" se usa para preguntar por la persona que es objeto directo.</li>' },
+                    { de: 'Woher hast du sie gekannt?', es: '¿De dónde la conocías?', phonetics: '/voja jast du si guekant/', explanation: '<li><b>W-Frage y Pronombre (Akkusativ):</b> "Woher?" pregunta por el origen. "sie" (a ella) es el objeto directo.</li>' },
+                    { de: 'Wer hat dich nicht gekannt?', es: '¿Quién no te ha conocido?', phonetics: '/vea jat dij nijt guekant/', explanation: '<li><b>W-Frage y Pronombre (Akkusativ):</b> "Wer?" (sujeto), "dich" (objeto directo).</li>' }
+                ]},
+                'denken': { perfekt: 'hat gedacht', emoji: '🤔', es: 'pensar', es_perfekt: 'he pensado', en_verb: 'to think', en_perfekt: 'has thought', examples: [
+                    { de: 'Ich habe an dich gedacht.', es: 'He pensado en ti.', phonetics: '/ij jabe an dij guedajt/', explanation: '<li><b>Preposición (Akkusativ):</b> La expresión "an jemanden denken" (pensar en alguien) rige acusativo. Por eso se usa "dich" (a ti).</li>' }, 
+                    { de: 'Was hast du gedacht?', es: '¿Qué has pensado?', phonetics: '/vas jast du guedajt/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el pensamiento.</li>' }, 
+                    { de: 'Wir haben das Gleiche gedacht.', es: 'Hemos pensado lo mismo.', phonetics: '/via jaben das glaishe guedajt/', explanation: '<li>"das Gleiche" significa "lo mismo" y funciona como objeto directo.</li>' }, 
+                    { de: 'Ich habe gedacht, du kommst nicht.', es: 'Pensé que no venías.', phonetics: '/ij jabe guedajt, du komst nijt/', explanation: '<li>Aquí, el verbo "denken" introduce una oración subordinada ("dass" está omitido).</li>' }, 
+                    { de: 'Er hat lange nachgedacht.', es: 'Él ha reflexionado mucho tiempo.', phonetics: '/ea jat langue najguedajt/', explanation: '<li><b>Verbo Separable:</b> El verbo es "nachdenken" (reflexionar, pensar sobre algo). El participio es "nachgedacht".</li>' },
+                    { de: 'Wer hat das gedacht?', es: '¿Quién ha pensado eso?', phonetics: '/vea jat das guedajt/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por la persona que pensó.</li>' },
+                    { de: 'Warum hast du das gedacht?', es: '¿Por qué has pensado eso?', phonetics: '/varum jast du das guedajt/', explanation: '<li><b>W-Frage:</b> "Warum?" pregunta por la razón.</li>' },
+                    { de: 'Woran hast du gedacht?', es: '¿En qué has pensado?', phonetics: '/voran jast du guedajt/', explanation: '<li><b>W-Frage (pronominal):</b> "Woran" es la forma de preguntar "¿En qué?" (wo + an).</li>' }
+                ]},
+                'finden': { perfekt: 'hat gefunden', emoji: '💡', es: 'encontrar', es_perfekt: 'he encontrado', en_verb: 'to find', en_perfekt: 'has found', examples: [
+                    { de: 'Ich habe meine Schlüssel gefunden!', es: '¡He encontrado mis llaves!', phonetics: '/ij jabe maine shliusel guefunden/', explanation: '<li><b>Posesivo (Akkusativ):</b> "meine Schlüssel" (plural) es el objeto directo.</li>' }, 
+                    { de: 'Hast du eine Lösung gefunden?', es: '¿Has encontrado una solución?', phonetics: '/jast du aine losung guefunden/', explanation: '<li><b>Akkusativ:</b> "eine Lösung" (femenino) es el objeto directo.</li>' }, 
+                    { de: 'Wir haben einen Parkplatz gefunden.', es: 'Hemos encontrado un aparcamiento.', phonetics: '/via jaben ainen parkplats guefunden/', explanation: '<li><b>Akkusativ:</b> "einen Parkplatz" (masculino) es el objeto directo.</li>' }, 
+                    { de: 'Sie hat einen neuen Job gefunden.', es: 'Ella ha encontrado un nuevo trabajo.', phonetics: '/si jat ainen noien yob guefunden/', explanation: '<li><b>Akkusativ:</b> "einen neuen Job" (masculino) es el objeto directo.</li>' }, 
+                    { de: 'Ich habe das Buch nicht gefunden.', es: 'No he encontrado el libro.', phonetics: '/ij jabe das buj nijt guefunden/', explanation: '<li><b>Negación:</b> "nicht" niega la acción del verbo y se coloca antes del participio.</li>' },
+                    { de: 'Was hast du gefunden?', es: '¿Qué has encontrado?', phonetics: '/vas jast du guefunden/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el objeto encontrado.</li>' },
+                    { de: 'Wo hast du das Geld gefunden?', es: '¿Dónde has encontrado el dinero?', phonetics: '/vo jast du das guelt guefunden/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Wo?" pregunta el lugar. "das Geld" es el objeto directo.</li>' },
+                    { de: 'Wer hat die Lösung gefunden?', es: '¿Quién ha encontrado la solución?', phonetics: '/vea jat di losung guefunden/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por el sujeto que encontró la solución.</li>' }
+                ]},
+                'suchen': { perfekt: 'hat gesucht', emoji: '🔍', es: 'buscar', es_perfekt: 'he buscado', en_verb: 'to search/look for', en_perfekt: 'has searched', examples: [
+                    { de: 'Ich habe meine Schlüssel gesucht.', es: 'He buscado mis llaves.', phonetics: '/ij jabe maine shliusel guesujt/', explanation: '<li><b>Posesivo (Akkusativ):</b> "meine Schlüssel" (plural) es el objeto directo.</li>' }, 
+                    { de: 'Was hast du gesucht?', es: '¿Qué has buscado?', phonetics: '/vas jast du guesujt/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el objeto buscado.</li>' }, 
+                    { de: 'Wir haben eine Wohnung gesucht.', es: 'Hemos buscado un apartamento.', phonetics: '/via jaben aine vonung guesujt/', explanation: '<li><b>Akkusativ:</b> "eine Wohnung" (femenino) es el objeto directo.</li>' }, 
+                    { de: 'Er hat lange nach einer Lösung gesucht.', es: 'Él ha buscado una solución durante mucho tiempo.', phonetics: '/ea jat langue naj aina losung guesujt/', explanation: '<li><b>Preposición (Dativ):</b> "nach" rige dativo. "eine Lösung" (femenino) se convierte en "einer Lösung".</li>' }, 
+                    { de: 'Habt ihr im Internet gesucht?', es: '¿Habéis buscado en internet?', phonetics: '/japt ia im internet guesujt/', explanation: '<li><b>Preposición (Dativ):</b> "im" (in dem) indica el lugar de la búsqueda.</li>' },
+                    { de: 'Wer hat die Schlüssel gesucht?', es: '¿Quién ha buscado las llaves?', phonetics: '/vea jat di shliusel guesujt/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por el sujeto.</li>' },
+                    { de: 'Wo hast du deine Brille gesucht?', es: '¿Dónde has buscado tus gafas?', phonetics: '/vo jast du daine brile guesujt/', explanation: '<li><b>W-Frage y Posesivo (Akkusativ):</b> "Wo?" pregunta por el lugar. "deine Brille" es el objeto directo.</li>' },
+                    { de: 'Wie lange hast du gesucht?', es: '¿Cuánto tiempo has buscado?', phonetics: '/vi langue jast du guesujt/', explanation: '<li><b>W-Frage:</b> "Wie lange?" pregunta por la duración de la búsqueda.</li>' }
+                ]},
+                'bringen': { perfekt: 'hat gebracht', emoji: '🚚', es: 'traer/llevar', es_perfekt: 'he traído/llevado', en_verb: 'to bring', en_perfekt: 'has brought', examples: [
+                    { de: 'Der Postbote hat ein Paket gebracht.', es: 'El cartero ha traído un paquete.', phonetics: '/dea postbote jat ain paket guebrajt/', explanation: '<li><b>Nominativ y Akkusativ:</b> "Der Postbote" es el sujeto. "ein Paket" es el objeto directo.</li>' }, 
+                    { de: 'Hast du die Bücher mitgebracht?', es: '¿Has traído los libros?', phonetics: '/jast du di biuja mitguebrajt/', explanation: '<li><b>Verbo Separable:</b> El verbo es "mitbringen". El prefijo "mit-" se une al participio: "mitgebracht".</li>' }, 
+                    { de: 'Ich habe dir einen Kaffee gebracht.', es: 'Te he traído un café.', phonetics: '/ij jabe día ainen kafe guebrajt/', explanation: '<li><b>Dativ y Akkusativ:</b> "dir" (a ti) es el objeto indirecto (dativo). "einen Kaffee" es el directo (acusativo).</li>' }, 
+                    { de: 'Sie hat uns zum Bahnhof gebracht.', es: 'Ella nos ha llevado a la estación.', phonetics: '/si jat uns tsum banjof guebrajt/', explanation: '<li><b>Akkusativ y Dativ:</b> "uns" (a nosotros) es acusativo. "zum Bahnhof" (zu dem) indica el destino y usa dativo.</li>' }, 
+                    { de: 'Was hat er zur Party gebracht?', es: '¿Qué ha traído él a la fiesta?', phonetics: '/vas jat ea tsua parti guebrajt/', explanation: '<li><b>W-Frage y Dativ:</b> "Was?" pregunta por el objeto. "zur Party" (zu der) indica el destino y usa dativo.</li>' },
+                    { de: 'Wer hat den Kuchen gebracht?', es: '¿Quién ha traído el pastel?', phonetics: '/vea jat den kujen guebrajt/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Wer?" pregunta por el sujeto. "den Kuchen" es el objeto directo.</li>' },
+                    { de: 'Was hast du mir gebracht?', es: '¿Qué me has traído?', phonetics: '/vas jast du mía guebrajt/', explanation: '<li><b>W-Frage, Akkusativ y Dativ:</b> "Was?" (objeto directo), "mir" (objeto indirecto).</li>' },
+                    { de: 'Wohin hat er dich gebracht?', es: '¿A dónde te ha llevado él?', phonetics: '/vojin jat ea dij guebrajt/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Wohin?" pregunta por el destino. "dich" (a ti) es el objeto directo.</li>' }
+                ]},
+                'kosten': { perfekt: 'hat gekostet', emoji: '💶', es: 'costar', es_perfekt: 'ha costado', en_verb: 'to cost', en_perfekt: 'has cost', examples: [
+                    { de: 'Das Ticket hat 10 Euro gekostet.', es: 'El billete ha costado 10 euros.', phonetics: '/das tiket jat tsen oiro guekostet/', explanation: '<li>"10 Euro" es un complemento de precio, que en alemán se considera acusativo.</li>' },
+                    { de: 'Wie viel hat das gekostet?', es: '¿Cuánto ha costado eso?', phonetics: '/vi fil jat das guekostet/', explanation: '<li><b>W-Frage:</b> "Wie viel?" es la forma estándar de preguntar el precio.</li>' },
+                    { de: 'Der Kaffee hat nichts gekostet.', es: 'El café no ha costado nada.', phonetics: '/dea kafe jat nijts guekostet/', explanation: '<li>"nichts" (nada) funciona como el complemento de precio.</li>' },
+                    { de: 'Das hat mich viel Zeit gekostet.', es: 'Eso me ha costado mucho tiempo.', phonetics: '/das jat mish fil tsait guekostet/', explanation: '<li><b>Doble Akkusativ:</b> "kosten" puede llevar dos objetos en acusativo: la persona a la que le cuesta algo ("mich") y lo que cuesta ("viel Zeit").</li>' },
+                    { de: 'Die Reparatur hat viel Geld gekostet.', es: 'La reparación ha costado mucho dinero.', phonetics: '/di reparatur jat fil guelt guekostet/', explanation: '<li><b>Akkusativ:</b> "viel Geld" es el complemento de precio.</li>' },
+                    { de: 'Was hat der Apfel gekostet?', es: '¿Qué ha costado la manzana?', phonetics: '/vas jat dea apfel guekostet/', explanation: '<li>Aunque se puede usar "Was", es más natural preguntar el precio con "Wie viel".</li>' },
+                    { de: 'Wer hat das bezahlt?', es: '¿Quién ha pagado eso?', phonetics: '/vea jat das betsalt/', explanation: '<li>Una pregunta relacionada. "bezahlen" (pagar) se usa más frecuentemente en Perfekt que "kosten".</li>' },
+                    { de: 'Warum hat es so viel gekostet?', es: '¿Por qué ha costado tanto?', phonetics: '/varum jat es so fil guekostet/', explanation: '<li><b>W-Frage:</b> "Warum?" pregunta por la razón del alto precio. "so viel" significa "tanto".</li>' }
+                ]},
+                'brauchen': { perfekt: 'hat gebraucht', emoji: '🙏', es: 'necesitar', es_perfekt: 'he necesitado', en_verb: 'to need', en_perfekt: 'has needed', examples: [
+                    { de: 'Ich habe deine Hilfe gebraucht.', es: 'He necesitado tu ayuda.', phonetics: '/ij jabe daine jilfe guebraujt/', explanation: '<li><b>Akkusativ:</b> El verbo "brauchen" rige el caso acusativo. "deine Hilfe" es el objeto directo.</li>' },
+                    { de: 'Hast du einen Stift gebraucht?', es: '¿Has necesitado un bolígrafo?', phonetics: '/jast du ainen shtift guebraujt/', explanation: '<li><b>Akkusativ:</b> "einen Stift" (masculino) es el objeto directo en acusativo.</li>' },
+                    { de: 'Wir haben mehr Zeit gebraucht.', es: 'Hemos necesitado más tiempo.', phonetics: '/via jaben mea tsait guebraujt/', explanation: '<li>"mehr Zeit" (más tiempo) es el objeto directo en acusativo.</li>' },
+                    { de: 'Sie hat das Geld nicht gebraucht.', es: 'Ella no ha necesitado el dinero.', phonetics: '/si jat das guelt nijt guebraujt/', explanation: '<li><b>Akkusativ y Negación:</b> "das Geld" es el objeto directo. "nicht" niega la acción.</li>' },
+                    { de: 'Ihr habt eine Pause gebraucht.', es: 'Vosotros habéis necesitado una pausa.', phonetics: '/ia japt aine pause guebraujt/', explanation: '<li><b>Akkusativ:</b> "eine Pause" (femenino) es el objeto directo.</li>' },
+                    { de: 'Was hast du gebraucht?', es: '¿Qué has necesitado?', phonetics: '/vas jast du guebraujt/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el objeto que se necesitaba.</li>' },
+                    { de: 'Wer hat Hilfe gebraucht?', es: '¿Quién ha necesitado ayuda?', phonetics: '/vea jat jilfe guebraujt/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por la persona (sujeto) que necesitaba ayuda.</li>' },
+                    { de: 'Warum hast du ein neues Handy gebraucht?', es: '¿Por qué has necesitado un móvil nuevo?', phonetics: '/varum jast du ain noies jendi guebraujt/', explanation: '<li><b>W-Frage y Akkusativ:</b> "Warum?" pregunta por la razón. "ein neues Handy" es el objeto directo.</li>' }
+                ]},
+                 'rauchen': { perfekt: 'hat geraucht', emoji: '🚬', es: 'fumar', es_perfekt: 'he fumado', en_verb: 'to smoke', en_perfekt: 'has smoked', examples: [
+                    { de: 'Er hat eine Zigarette geraucht.', es: 'Él ha fumado un cigarrillo.', phonetics: '/ea jat aine tsigarete gueraujt/', explanation: '<li><b>Akkusativ:</b> "eine Zigarette" (femenino) es el objeto directo.</li>' },
+                    { de: 'Hast du hier geraucht?', es: '¿Has fumado aquí?', phonetics: '/jast du hía gueraujt/', explanation: '<li>"hier" (aquí) es un adverbio de lugar.</li>' },
+                    { de: 'Mein Opa hat früher viel geraucht.', es: 'Mi abuelo fumaba mucho antes.', phonetics: '/main opa jat früa fil gueraujt/', explanation: '<li>"früher" (antes) y "viel" (mucho) son adverbios.</li>' },
+                    { de: 'Wir haben auf dem Balkon geraucht.', es: 'Hemos fumado en el balcón.', phonetics: '/via jaben auf dem balkon gueraujt/', explanation: '<li><b>Preposición (Dativ):</b> "auf" con dativo ("dem Balkon") indica la ubicación.</li>' },
+                    { de: 'Es ist verboten, hier zu rauchen.', es: 'Está prohibido fumar aquí.', phonetics: '/es ist ferboten, hía tsu raujen/', explanation: '<li>Una frase útil en presente que usa el infinitivo con "zu".</li>' },
+                    { de: 'Was hast du geraucht?', es: '¿Qué has fumado?', phonetics: '/vas jast du gueraujt/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el objeto que se ha fumado.</li>' },
+                    { de: 'Wer hat hier geraucht?', es: '¿Quién ha fumado aquí?', phonetics: '/vea jat hía gueraujt/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por la persona que fumó.</li>' },
+                    { de: 'Warum hast du im Haus geraucht?', es: '¿Por qué has fumado en la casa?', phonetics: '/varum jast du im jaus gueraujt/', explanation: '<li><b>W-Frage y Dativ:</b> "Warum?" pregunta la razón. "im Haus" (dativo) indica la ubicación.</li>' }
+                ]}
+            },
+            // Grupo 5
+            {
+                'dürfen': { perfekt: 'hat gedurft', emoji: '✅', es: 'poder, tener permiso', es_perfekt: 'he podido', en_verb: 'to be allowed to', en_perfekt: 'has been allowed to', examples: [
+                    { de: 'Ich habe das nicht gedurft.', es: 'No he tenido permiso para eso.', phonetics: '/ij jabe das nijt guedurft/', explanation: '<li>El Perfekt de los verbos modales se forma con "haben" + participio. Es menos común que el Präteritum (durfte).</li>' },
+                    { de: 'Er hat hier nicht parken gedurft.', es: 'Él no ha tenido permiso para aparcar aquí.', phonetics: '/ea jat hía nijt parken guedurft/', explanation: '<li><b>Doble Infinitivo:</b> Cuando un verbo modal en Perfekt acompaña a otro verbo, se usa una estructura especial (Ersatzinfinitiv): "hat ... parken dürfen". Sin embargo, la forma con participio "gedurft" se usa a veces en lenguaje hablado, aunque no es estándar. Este ejemplo simplifica para A1.</li>' },
+                    { de: 'Wir haben früher alles gedurft.', es: 'Antes hemos podido (hacer) todo.', phonetics: '/via jaben früa ales guedurft/', explanation: '<li>"früher" (antes) y "alles" (todo) son adverbios.</li>' },
+                    { de: 'Hast du das machen gedurft?', es: '¿Has tenido permiso para hacer eso?', phonetics: '/jast du das majen guedurft/', explanation: '<li>Simplificación para A1. La forma estándar sería "Hast du das machen dürfen?".</li>' },
+                    { de: 'Die Kinder haben lange aufbleiben gedurft.', es: 'Los niños han podido quedarse despiertos hasta tarde.', phonetics: '/di kinda jaben langue aufblaiben guedurft/', explanation: '<li>Verbo separable "aufbleiben". La forma estándar sería "haben ... aufbleiben dürfen".</li>' },
+                    { de: 'Was hast du nicht gedurft?', es: '¿Qué no tenías permitido (hacer)?', phonetics: '/vas jast du nijt guedurft/', explanation: '<li><b>W-Frage:</b> "Was?" pregunta por la acción no permitida.</li>' },
+                    { de: 'Wer hat das gedurft?', es: '¿Quién ha tenido permiso para eso?', phonetics: '/vea jat das guedurft/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por el sujeto.</li>' },
+                    { de: 'Warum hast du das nicht gedurft?', es: '¿Por qué no tenías permiso para eso?', phonetics: '/varum jast du das nijt guedurft/', explanation: '<li><b>W-Frage:</b> "Warum?" pregunta por la razón.</li>' }
+                ]},
+                'müssen': { perfekt: 'hat gemusst', emoji: '❗', es: 'tener que', es_perfekt: 'he tenido que', en_verb: 'to have to', en_perfekt: 'has had to', examples: [
+                    { de: 'Ich habe das machen gemusst.', es: 'He tenido que hacer eso.', phonetics: '/ij jabe das majen guemust/', explanation: '<li>Al igual que con "dürfen", el Perfekt de "müssen" con otro verbo es complejo. Esta es una simplificación para A1. La forma estándar es "hat ... machen müssen".</li>' },
+                    { de: 'Wir haben früh aufstehen gemusst.', es: 'Hemos tenido que levantarnos temprano.', phonetics: '/via jaben frü auf-shteyen guemust/', explanation: '<li>Verbo separable "aufstehen". Forma estándar: "haben ... aufstehen müssen".</li>' },
+                    { de: 'Er hat zur Arbeit gehen gemusst.', es: 'Él ha tenido que ir al trabajo.', phonetics: '/ea jat tsua abait gue-en guemust/', explanation: '<li>Forma estándar: "hat ... gehen müssen".</li>' },
+                    { de: 'Hast du wirklich gehen gemusst?', es: '¿De verdad has tenido que irte?', phonetics: '/jast du virklij gue-en guemust/', explanation: '<li>"wirklich" (de verdad) es un adverbio.</li>' },
+                    { de: 'Sie hat das nicht gemusst.', es: 'Ella no ha tenido que (hacer) eso.', phonetics: '/si jat das nijt guemust/', explanation: '<li>Aquí "müssen" se usa sin otro verbo explícito.</li>' },
+                    { de: 'Was hast du machen gemusst?', es: '¿Qué has tenido que hacer?', phonetics: '/vas jast du majen guemust/', explanation: '<li><b>W-Frage:</b> "Was?" pregunta por la obligación.</li>' },
+                    { de: 'Wer hat das aufräumen gemusst?', es: '¿Quién ha tenido que ordenar?', phonetics: '/vea jat das aufroimen guemust/', explanation: '<li><b>W-Frage:</b> "Wer?" pregunta por la persona.</li>' },
+                    { de: 'Warum hast du das gemusst?', es: '¿Por qué has tenido que (hacer) eso?', phonetics: '/varum jast du das guemust/', explanation: '<li><b>W-Frage:</b> "Warum?" pregunta por la razón.</li>' }
+                ]},
+                'wollen': { perfekt: 'hat gewollt', emoji: '🙋', es: 'querer', es_perfekt: 'he querido', en_verb: 'to want', en_perfekt: 'has wanted', examples: [
+                    { de: 'Ich habe das nicht gewollt.', es: 'No he querido eso.', phonetics: '/ij jabe das nijt guevolt/', explanation: '<li>El verbo modal "wollen" en Perfekt sin otro verbo.</li>' },
+                    { de: 'Er hat einen Kaffee trinken gewollt.', es: 'Él ha querido beber un café.', phonetics: '/ea jat ainen kafe trinken guevolt/', explanation: '<li>Simplificación para A1. La forma estándar es "hat ... trinken wollen".</li>' },
+                    { de: 'Wir haben ins Kino gehen gewollt.', es: 'Hemos querido ir al cine.', phonetics: '/via jaben ins kino gue-en guevolt/', explanation: '<li>Forma estándar: "haben ... gehen wollen".</li>' },
+                    { de: 'Hast du das wirklich gewollt?', es: '¿De verdad has querido eso?', phonetics: '/jast du das virklij guevolt/', explanation: '<li>"wirklich" (de verdad) es un adverbio.</li>' },
+                    { de: 'Sie hat immer eine Katze gewollt.', es: 'Ella siempre ha querido un gato.', phonetics: '/si jat ima aine katse guevolt/', explanation: '<li><b>Akkusativ:</b> "eine Katze" es el objeto directo de "wollen".</li>' },
+                    { de: 'Was hast du gewollt?', es: '¿Qué has querido?', phonetics: '/vas jast du guevolt/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Was?" pregunta por el objeto del deseo.</li>' },
+                    { de: 'Wer hat das gewollt?', es: '¿Quién ha querido eso?', phonetics: '/vea jat das guevolt/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por el sujeto.</li>' },
+                    { de: 'Warum hast du das nicht gewollt?', es: '¿Por qué no has querido eso?', phonetics: '/varum jast du das nijt guevolt/', explanation: '<li><b>W-Frage y Negación:</b> Pregunta por la razón.</li>' }
+                ]},
+                'sollen': { perfekt: 'hat gesollt', emoji: '🧑‍⚖️', es: 'deber', es_perfekt: 'he debido', en_verb: 'should have', en_perfekt: 'should have', examples: [
+                    { de: 'Ich habe meine Hausaufgaben machen gesollt.', es: 'He debido hacer mis deberes.', phonetics: '/ij jabe maine jaus-auf-gaben majen guesolt/', explanation: '<li>El Perfekt de "sollen" es muy raro. Se prefiere el Präteritum (sollte) o el Konjunktiv II (hätte ... machen sollen). Esta forma es una simplificación extrema.</li>' },
+                    { de: 'Du hast das nicht sagen gesollt.', es: 'No deberías haber dicho eso.', phonetics: '/du jast das nijt saguen guesolt/', explanation: '<li>Forma estándar y más común: "Du hättest das nicht sagen sollen".</li>' },
+                    { de: 'Er hat früher aufstehen gesollt.', es: 'Él debería haberse levantado más temprano.', phonetics: '/ea jat früa auf-shteyen guesolt/', explanation: '<li>Forma estándar: "Er hätte früher aufstehen sollen".</li>' },
+                    { de: 'Wir haben mehr lernen gesollt.', es: 'Deberíamos haber estudiado más.', phonetics: '/via jaben mea lernen guesolt/', explanation: '<li>Forma estándar: "Wir hätten mehr lernen sollen".</li>' },
+                    { de: 'Was habe ich machen gesollt?', es: '¿Qué he debido hacer?', phonetics: '/vas jabe ij majen guesolt/', explanation: '<li><b>W-Frage:</b> Pregunta por la tarea u obligación.</li>' },
+                    { de: 'Wer hat das machen gesollt?', es: '¿Quién debía hacer eso?', phonetics: '/vea jat das majen guesolt/', explanation: '<li><b>W-Frage (Nominativ):</b> Pregunta por la persona responsable.</li>' },
+                    { de: 'Wann hätte ich das machen sollen?', es: '¿Cuándo debería haber hecho eso?', phonetics: '/van jete ij das majen solen/', explanation: '<li>Ejemplo en Konjunktiv II (la forma más natural de expresar esto en el pasado).</li>' },
+                    { de: 'Warum hast du das getan?', es: '¿Por qué has hecho eso?', phonetics: '/varum jast du das guetan/', explanation: '<li>Una pregunta más simple y común en lugar de usar el Perfekt de "sollen".</li>' }
+                ]},
+                 'mögen': { perfekt: 'hat gemocht', emoji: '👍', es: 'gustar', es_perfekt: 'me ha gustado', en_verb: 'to like', en_perfekt: 'has liked', note_es: '<b>Nota:</b> A diferencia de otros verbos en este grupo, "mögen" no es un verbo modal. Se usa como un verbo principal que significa "gustar".', examples: [
+                    { de: 'Ich habe den Film gemocht.', es: 'Me ha gustado la película.', phonetics: '/ij jabe den film guemojt/', explanation: '<li><b>Akkusativ:</b> El verbo "mögen" rige el caso acusativo. "den Film" es el objeto que gusta.</li>' },
+                    { de: 'Sie hat ihn sehr gemocht.', es: 'A ella le ha gustado mucho él.', phonetics: '/si jat in sea guemojt/', explanation: '<li><b>Pronombre (Akkusativ):</b> "ihn" (a él) es el objeto directo.</li>' },
+                    { de: 'Wir haben das Essen nicht gemocht.', es: 'No nos ha gustado la comida.', phonetics: '/via jaben das esen nijt guemojt/', explanation: '<li><b>Akkusativ:</b> "das Essen" (neutro) es el objeto directo.</li>' },
+                    { de: 'Hast du die Musik gemocht?', es: '¿Te ha gustado la música?', phonetics: '/jast du di musik guemojt/', explanation: '<li><b>Akkusativ:</b> "die Musik" (femenino) es el objeto directo.</li>' },
+                    { de: 'Er hat seinen Job nie gemocht.', es: 'A él nunca le ha gustado su trabajo.', phonetics: '/ea jat sainen yob ni guemojt/', explanation: '<li><b>Posesivo (Akkusativ):</b> "seinen Job" (masculino) es el objeto directo.</li>' },
+                    { de: 'Was hast du am liebsten gemocht?', es: '¿Qué es lo que más te ha gustado?', phonetics: '/vas jast du am lipsten guemojt/', explanation: '<li><b>W-Frage:</b> "am liebsten" es el superlativo de "gern/lieb" y significa "lo que más".</li>' },
+                    { de: 'Wen hast du nicht gemocht?', es: '¿Quién no te ha gustado?', phonetics: '/ven jast du nijt guemojt/', explanation: '<li><b>W-Frage (Akkusativ):</b> "Wen?" pregunta por la persona que no te gustó.</li>' },
+                    { de: 'Warum hast du es nicht gemocht?', es: '¿Por qué no te ha gustado?', phonetics: '/varum jast du es nijt guemojt/', explanation: '<li><b>W-Frage:</b> "Warum?" pregunta por la razón.</li>' }
+                ]},
+                'können': { perfekt: 'hat gekonnt', emoji: '💪', es: 'poder, saber hacer', es_perfekt: 'he podido', en_verb: 'to be able to, can', en_perfekt: 'has been able to', note_es: '<b>Nota:</b> El Perfekt de "können" con otro verbo es complejo. Normalmente se usa el "Ersatzinfinitiv" (doble infinitivo): "Ich habe schwimmen können". Las formas aquí son una simplificación para A1.', examples: [
+                    { de: 'Ich habe das nicht gekonnt.', es: 'No he podido (hacer) eso.', phonetics: '/ij jabe das nijt guekont/', explanation: '<li>Uso de "können" en Perfekt sin otro verbo explícito.</li>' },
+                    { de: 'Er hat sehr gut Deutsch gekonnt.', es: 'Él ha sabido hablar muy bien alemán.', phonetics: '/ea jat sea gut doitsh guekont/', explanation: '<li>Aquí "gekonnt" se usa para expresar una habilidad dominada en el pasado.</li>' },
+                    { de: 'Wir haben nicht helfen gekonnt.', es: 'No hemos podido ayudar.', phonetics: '/via jaben nijt jelfen guekont/', explanation: '<li>Esta es la forma simplificada del Perfekt con un segundo verbo.</li>' },
+                    { de: 'Hast du die Tür aufmachen gekonnt?', es: '¿Has podido abrir la puerta?', phonetics: '/jast du di tiua aufmajen guekont/', explanation: '<li>Verbo separable "aufmachen". Simplificación del Perfekt modal.</li>' },
+                    { de: 'Sie hat die Antwort nicht gekonnt.', es: 'Ella no se ha sabido la respuesta.', phonetics: '/si jat di antwort nijt guekont/', explanation: '<li>Similar a "wissen", "können" puede significar "saberse" algo de memoria.</li>' },
+                    { de: 'Was hast du nicht gekonnt?', es: '¿Qué no has podido (hacer)?', phonetics: '/vas jast du nijt guekont/', explanation: '<li><b>W-Frage:</b> Pregunta por la habilidad o acción que no se pudo realizar.</li>' },
+                    { de: 'Wer hat das gekonnt?', es: '¿Quién ha podido (hacer) eso?', phonetics: '/vea jat das guekont/', explanation: '<li><b>W-Frage (Nominativ):</b> Pregunta por el sujeto con la habilidad.</li>' },
+                    { de: 'Warum hast du das nicht gekonnt?', es: '¿Por qué no has podido (hacer) eso?', phonetics: '/varum jast du das nijt guekont/', explanation: '<li><b>W-Frage:</b> Pregunta por la razón de la incapacidad.</li>' }
+                ]},
+                'möchten': { perfekt: '---', emoji: '☕', es: 'quisiera', es_perfekt: '---', en_verb: 'would like', en_perfekt: '---', note_es: '<b>Nota:</b> "möchten" es una forma del presente (Konjunktiv II de mögen) y no tiene un participio II propio. Para expresar un deseo en el pasado, se usa el Präteritum de "wollen": <b>Ich wollte...</b> (Yo quería...). Por eso, los ejemplos están en presente.', examples: [
+                    { de: 'Ich möchte einen Kaffee.', es: 'Quisiera un café.', phonetics: '/ij moeshte ainen kafe/', explanation: '<li>"möchten" se usa para expresar un deseo de forma educada. Rige Akkusativ ("einen Kaffee").</li>' },
+                    { de: 'Was möchtest du essen?', es: '¿Qué te gustaría comer?', phonetics: '/vas moeshtest du esen/', explanation: '<li><b>W-Frage:</b> "Was?" pregunta por el objeto del deseo. El segundo verbo ("essen") va al final en infinitivo.</li>' },
+                    { de: 'Wir möchten nach Hause gehen.', es: 'Nos gustaría ir a casa.', phonetics: '/via moeshten naj jause gue-en/', explanation: '<li>El segundo verbo ("gehen") va al final en infinitivo.</li>' },
+                    { de: 'Möchtest du mitkommen?', es: '¿Te gustaría venir (con nosotros)?', phonetics: '/moeshtest du mit-komen/', explanation: '<li>Pregunta Ja/Nein con verbo separable ("mitkommen").</li>' },
+                    { de: 'Er möchte das nicht.', es: 'Él no quiere eso.', phonetics: '/ea moeshte das nijt/', explanation: '<li>Negación simple con "nicht".</li>' },
+                    { de: 'Was möchtet ihr trinken?', es: '¿Qué os gustaría beber?', phonetics: '/vas moeshtet ia trinken/', explanation: '<li><b>W-Frage:</b> Pregunta por la bebida deseada.</li>' },
+                    { de: 'Wer möchte ein Eis?', es: '¿Quién quiere un helado?', phonetics: '/vea moeshte ain ais/', explanation: '<li><b>W-Frage (Nominativ):</b> "Wer?" pregunta por la persona que desea algo.</li>' },
+                    { de: 'Warum möchtest du das nicht?', es: '¿Por qué no quieres eso?', phonetics: '/varum moeshtest du das nijt/', explanation: '<li><b>W-Frage:</b> Pregunta por la razón de no querer algo.</li>' }
+                ]}
+            }
+        ];
+        
+        const allVerbs = {};
+        verbGroups.forEach(group => {
+            Object.assign(allVerbs, group);
+        });
+        
+        let currentGroupIndex = 0;
+        let currentVerbInModal = '';
+        let currentIndexInModal = 0;
+        let storyClickCounter = 0;
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainContainer = document.getElementById('main-container');
+            const verbModal = document.getElementById('verb-modal');
+            const infoModal = document.getElementById('info-modal');
+            const recallSwitch = document.getElementById('recall-switch');
+            const closeVerbModalButton = document.getElementById('close-verb-modal');
+            const infoButton = document.getElementById('info-button');
+            const closeInfoModalButton = document.getElementById('close-info-modal');
+            const prevExampleButton = document.getElementById('prev-example');
+            const nextExampleButton = document.getElementById('next-example');
+            const prevGroupBtn = document.getElementById('prev-group-btn');
+            const nextGroupBtn = document.getElementById('next-group-btn');
+            const storyButton = document.getElementById('story-button');
+            
+            setupProgressBar(document.getElementById('progress-bar'));
+            renderVerbGroup(currentGroupIndex);
+            mainContainer.classList.remove('hide-translation');
+
+            recallSwitch.addEventListener('change', (event) => {
+                if (event.currentTarget.checked) {
+                    mainContainer.classList.remove('hide-translation');
+                } else {
+                    mainContainer.classList.add('hide-translation');
+                }
+            });
+
+            closeVerbModalButton.addEventListener('click', hideVerbModal);
+            verbModal.addEventListener('click', (event) => {
+                if (event.target === verbModal) hideVerbModal();
+            });
+            
+            infoButton.addEventListener('click', showInfoModal);
+            closeInfoModalButton.addEventListener('click', hideInfoModal);
+            infoModal.addEventListener('click', (event) => {
+                if (event.target === infoModal) hideInfoModal();
+            });
+            
+            prevExampleButton.addEventListener('click', () => {
+                if (currentIndexInModal > 0) {
+                    displayExampleInModal(currentVerbInModal, currentIndexInModal - 1);
+                }
+            });
+
+            nextExampleButton.addEventListener('click', () => {
+                const maxIndex = allVerbs[currentVerbInModal].examples.length - 1;
+                if (currentIndexInModal < maxIndex) {
+                     displayExampleInModal(currentVerbInModal, currentIndexInModal + 1);
+                }
+            });
+
+            prevGroupBtn.addEventListener('click', () => {
+                if (currentGroupIndex > 0) {
+                    currentGroupIndex--;
+                    renderVerbGroup(currentGroupIndex);
+                }
+            });
+
+            nextGroupBtn.addEventListener('click', () => {
+                if (currentGroupIndex < verbGroups.length - 1) {
+                    currentGroupIndex++;
+                    renderVerbGroup(currentGroupIndex);
+                }
+            });
+            
+            storyButton.addEventListener('click', showStory);
+        });
+        
+        function speak(text, lang = 'de-DE', rate = 0.6) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = rate;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                console.error("Speech synthesis not supported in this browser.");
+            }
+        }
+
+        function displayExampleInModal(verb, index) {
+            currentVerbInModal = verb;
+            currentIndexInModal = index;
+            
+            const data = allVerbs[verb];
+            const maxExamples = data.examples.length;
+            const sentence = data.examples[index];
+            const modalText = document.getElementById('modal-text');
+            const modalPhonetics = document.getElementById('modal-phonetics');
+            const modalTranslations = document.getElementById('modal-translations');
+            const modalGrammarExplanation = document.getElementById('modal-grammar-explanation');
+            const detailsContainer = document.getElementById('details-container');
+            const exampleCounterSpan = document.getElementById('example-counter');
+            const modalVerbNote = document.getElementById('modal-verb-note');
+
+            document.getElementById('modal-emoji').textContent = data.emoji;
+            document.getElementById('modal-verb-infinitive').textContent = verb;
+            document.getElementById('modal-verb-perfekt').textContent = data.perfekt;
+            document.getElementById('modal-verb-infinitive-es').textContent = `🇪🇸 ${data.es}`;
+            document.getElementById('modal-verb-perfekt-es').textContent = `🇪🇸 ${data.es_perfekt}`;
+            document.getElementById('modal-verb-english-infinitive').textContent = `🇬🇧 ${data.en_verb}`;
+            document.getElementById('modal-verb-english-perfekt').textContent = `🇬🇧 ${data.en_perfekt}`;
+            
+            if (data.note_es) {
+                 modalVerbNote.innerHTML = data.note_es;
+                 modalVerbNote.style.display = 'block';
+             } else {
+                 modalVerbNote.style.display = 'none';
+             }
+
+            modalText.textContent = sentence.de;
+            
+            modalPhonetics.innerHTML = `<b>Pronunciación:</b> ${sentence.phonetics}`;
+            modalTranslations.innerHTML = `🇪🇸 ${sentence.es}`;
+            modalGrammarExplanation.innerHTML = `<b>Gramática</b><ul>${sentence.explanation}</ul>`;
+
+
+            detailsContainer.open = false;
+
+            exampleCounterSpan.textContent = `${germanExampleOrdinals[index]} Beispiel von ${maxExamples}`;
+            updateExampleProgressBar(index, maxExamples);
+            document.getElementById('prev-example').disabled = index === 0;
+            document.getElementById('next-example').disabled = index === maxExamples - 1;
+
+            document.getElementById('speak-infinitive-icon').onclick = () => speak(verb);
+            document.getElementById('speak-perfekt-icon').onclick = () => speak(data.perfekt);
+            document.getElementById('speak-sentence-icon').onclick = () => speak(sentence.de);
+        }
+        
+        function renderVerbGroup(index) {
+            const cardsContainer = document.getElementById('cards-container');
+            cardsContainer.innerHTML = ''; // Limpiar contenedor
+            const groupData = verbGroups[index];
+            
+            for (const verb in groupData) {
+                const data = groupData[verb];
+                const cardHTML = `
+                    <div class="word-item" onclick="openModalForVerb('${verb}')">
+                        <div class="word-item-content">
+                            <span class="emoji">${data.emoji}</span>
+                            <div class="text-container">
+                                <span class="german-word">${verb}</span>
+                                <span class="spanish-translation">${data.es}</span>
+                                <span class="german-past">${data.perfekt}</span>
+                                <span class="spanish-perfekt">${data.es_perfekt}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                cardsContainer.innerHTML += cardHTML;
+            }
+            const groupIndicator = document.getElementById('group-indicator');
+            const prevGroupBtn = document.getElementById('prev-group-btn');
+            const nextGroupBtn = document.getElementById('next-group-btn');
+
+            groupIndicator.textContent = `${germanOrdinals[index]} Gruppe von ${verbGroups.length}`;
+            prevGroupBtn.disabled = index === 0;
+            nextGroupBtn.disabled = index === verbGroups.length - 1;
+
+            updateProgressBar(index);
+        }
+        
+        function setupProgressBar(container) {
+            container.innerHTML = ''; // Limpiar antes de añadir
+            for (let i = 0; i < verbGroups.length; i++) {
+                const step = document.createElement('div');
+                step.classList.add('progress-step');
+                container.appendChild(step);
+            }
+        }
+
+        function updateProgressBar(currentIndex) {
+            const steps = document.querySelectorAll('#progress-bar .progress-step');
+            steps.forEach((step, index) => {
+                if (index <= currentIndex) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+        }
+        function openModalForVerb(verb) {
+            displayExampleInModal(verb, 0);
+            document.getElementById('verb-modal').classList.add('visible');
+        }
+
+        function hideVerbModal() {
+            window.speechSynthesis.cancel();
+            document.getElementById('verb-modal').classList.remove('visible');
+        }
+        
+        function showInfoModal() {
+            document.getElementById('info-modal').classList.add('visible');
+        }
+        
+        function hideInfoModal() {
+            document.getElementById('info-modal').classList.remove('visible');
+        }
+        
+        function showStory() {
+            const storyContainer = document.getElementById('story-container');
+            const storyContent = document.getElementById('story-content');
+            storyContainer.style.display = 'block';
+            storyContent.innerHTML = savedStories[storyClickCounter];
+            storyClickCounter = (storyClickCounter + 1) % savedStories.length; // Cicla las historias
+        }
+        
+        function updateExampleProgressBar(currentIndex, total) {
+            const container = document.getElementById('example-progress-bar');
+            container.innerHTML = '';
+            for (let i = 0; i < total; i++) {
+                const step = document.createElement('div');
+                step.classList.add('progress-step');
+                if (i <= currentIndex) {
+                    step.classList.add('active');
+                }
+                container.appendChild(step);
+            }
+        }
+
+    </script>
+</body>
+</html>
