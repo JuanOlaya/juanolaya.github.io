@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palabras en Alemán con -lich</title>
-    <!-- Carga de la fuente para el estilo de tiza -->
+    <title>Adjetivos y adverbios con -lich (A1-A2)</title>
+    <!-- Carga de la fuente -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Kalam:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -18,78 +18,65 @@
         body {
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Alineado al inicio */
+            align-items: flex-start;
             min-height: 100%;
             margin: 0;
-            background-color: #FFA985; /* Color de fondo */
+            background-color: #FFA985; /* Fondo Salmón */
             padding: 20px;
             font-family: 'Nunito', sans-serif;
+            color: #414A5C; /* Azul oscuro para texto */
         }
         .main-container {
             width: 100%;
             max-width: 1200px;
             text-align: center;
-            background-color: #FFF5EE; /* Seashell (Salmón muy claro) */
-            border: 10px solid #D9534F; /* Nuevo color de marco, igual al botón */
-            border-radius: 20px; /* Rounded corners for the inner container */
-            padding: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            padding: 10px 20px;
         }
         .header {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-        .level-indicator {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 60px;
-            height: 60px;
-            background-color: #D9534F; /* Rojo oscuro */
-            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Nunito', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            gap: 1.5rem;
+            margin-bottom: 1rem; /* Reduced margin */
+            flex-wrap: wrap; 
         }
         .title {
             font-family: 'Kalam', cursive;
             font-size: 3rem;
-            color: #333;
-            padding-top: 1rem;
-            border-bottom: 3px dashed #CD5C5C; /* Indian Red, darker salmon */
-            display: inline-block;
-            margin-bottom: 2rem;
+            color: #414A5C;
+            border-bottom: 3px dashed #E57373; /* Borde añadido */
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        .section-title {
+            font-family: 'Kalam', cursive;
+            font-size: 2.5rem;
+            color: #414A5C;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
         }
         .cards-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1.5rem; /* Espacio entre tarjetas */
+            gap: 1.5rem;
         }
         .word-item {
-            position: relative; /* Contenedor para el tooltip */
-            background-color: #FFE4E1; /* Misty Rose (Salmón claro) */
-            border-radius: 8px;
+            background-color: #FFE4E1;
+            border-radius: 12px;
             padding: 1.5rem;
             width: 280px;
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
             justify-content: space-between;
             transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         .word-item:hover {
-            transform: scale(1.05) rotate(1deg);
-            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        .word-item:nth-child(even):hover {
-            transform: scale(1.05) rotate(-1deg);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
         .word-item-content {
             display: flex;
@@ -108,60 +95,87 @@
         .german-word {
             font-size: 1.5rem;
             font-weight: 700;
-            color: black;
+            color: #414A5C;
         }
         .spanish-translation {
             font-size: 1rem;
-            color: #555;
+            color: #6c757d;
             margin-top: -5px;
+            transition: opacity 0.3s, visibility 0.3s;
         }
         
-        /* Estilos para el Tooltip */
-        .tooltip {
-            visibility: hidden;
-            width: 240px;
-            background-color: #333;
-            color: #fff;
-            text-align: left;
-            border-radius: 6px;
-            padding: 10px;
-            position: absolute;
-            z-index: 1;
-            bottom: 115%;
-            left: 50%;
-            margin-left: -120px;
+        /* Estilos para el Active Recall Toggle */
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        .active-recall-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .switch-label {
+            color: #414A5C;
+            cursor: pointer;
+            font-weight: 700; /* Bold */
+            text-align: right;
+            line-height: 1.2;
+        }
+        .label-translation {
+            display: block;
+            font-size: 0.8em;
+            font-style: italic;
+            font-weight: 400; /* Regular weight */
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .switch input {
             opacity: 0;
-            transition: opacity 0.3s;
-            font-family: Arial, sans-serif;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            pointer-events: none;
+            width: 0;
+            height: 0;
         }
-        .tooltip::after {
-            content: "";
+        .slider {
             position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #333 transparent transparent transparent;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #414A5C; /* Default ON */
+            transition: .4s;
+            border-radius: 34px;
         }
-        .word-item:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+            transform: translateX(26px); /* Default ON */
         }
-        .tooltip-example {
-            color: #ccc;
+        input:not(:checked) + .slider {
+            background-color: #ccc;
+        }
+        input:not(:checked) + .slider:before {
+            transform: translateX(0px);
         }
 
         /* Gemini API Features */
         .story-container {
             margin: 2rem auto;
             padding: 1.5rem;
-            background-color: white;
-            border-radius: 8px;
-            color: black;
+            background-color: #F0F1E8;
+            border-radius: 12px;
+            color: #414A5C;
             display: none;
             max-width: 800px;
             text-align: left;
@@ -171,23 +185,24 @@
             font-size: 1.5rem;
             margin-top: 0;
             margin-bottom: 1rem;
+            color: #87405E;
         }
         #story-button {
             display: inline-block;
             margin: 2rem 0;
             padding: 12px 24px;
-            font-family: 'Nunito', sans-serif;
             font-size: 1.1rem;
-            font-weight: 700;
+            font-weight: 500;
             color: white;
-            background-color: #D9534F; /* Rojo oscuro */
+            background-color: #414A5C;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
         #story-button:hover {
-            background-color: #c9302c; /* Tono más oscuro para el hover */
+            background-color: #313846;
+            transform: translateY(-2px);
         }
         .button-translation {
             display: block;
@@ -198,9 +213,10 @@
         }
         .loader {
             text-align: center;
+            color: #414A5C;
         }
         .highlighted-word {
-            color: #D32F2F;
+            color: #8B456A;
             font-weight: 700;
         }
 
@@ -238,6 +254,101 @@
         .modal-overlay.visible .modal-content {
             transform: scale(1);
         }
+        #modal-word-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        #modal-emoji {
+            font-size: 2rem;
+        }
+        #modal-word {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #414A5C;
+        }
+        #modal-full-spanish {
+            font-size: 1.1rem;
+            color: black;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .modal-type-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+            display: block;
+            margin-top: 0.5rem; /* Espacio añadido */
+        }
+        #modal-example-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        #modal-text {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .audio-button {
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+        .audio-button svg {
+            width: 32px;
+            height: 32px;
+            fill: #E57373; /* Tono salmón oscuro */
+        }
+        #modal-pronunciation {
+            font-style: italic;
+            color: black;
+            margin-bottom: 0.5rem;
+        }
+        #modal-spanish-translation {
+            color: #444;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        #modal-info {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        .modal-separator {
+            border: none;
+            border-top: 2px solid #E57373; /* Cambiado a línea continua */
+            margin: 1.5rem 0;
+        }
+        #example-navigation {
+            display: flex;
+            flex-direction: column; /* Stack vertically */
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem; /* Space between counter and buttons */
+        }
+        .nav-buttons-container {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav-button {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        #example-counter {
+            font-size: 1rem;
+            color: #6c757d;
+        }
         #close-modal {
             margin-top: 1.5rem;
             padding: 8px 16px;
@@ -253,132 +364,306 @@
 
     <div class="main-container">
         <div class="header">
-            <div class="level-indicator">A1</div>
-            <h1 class="title">A1 Wörter auf -lich</h1>
+            <h1 class="title">Adjetivos y adverbios con -lich (A1-A2)</h1>
+        </div>
+
+        <div class="toggle-container">
+            <div class="active-recall-toggle">
+                <label class="switch-label" for="recall-switch">Übersetzung<span class="label-translation">(traducción)</span></label>
+                <label class="switch">
+                    <input type="checkbox" id="recall-switch" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
         </div>
         
+        <h2 class="section-title">Nivel A1: Vocabulario Esencial</h2>
         <div class="cards-container">
-            <div class="word-item" onclick="generateExample('freundlich')">
+             <div class="word-item" onclick="openExampleModal('freundlich', '😊')">
                 <div class="word-item-content">
                     <span class="emoji">😊</span>
                     <div class="text-container">
                         <span class="german-word">freundlich</span>
-                        <span class="spanish-translation">(amigable, amable)</span>
+                        <span class="spanish-translation">(amigable)</span>
                     </div>
-                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Er ist sehr freundlich.</span><br>/ea ist sea froind-lish/<br>🇬🇧 friendly, kind<br>Tipo: Adjektiv/Adverb</span>
                 </div>
             </div>
-            <div class="word-item" onclick="generateExample('täglich')">
+            <div class="word-item" onclick="openExampleModal('täglich', '📅')">
                 <div class="word-item-content">
                     <span class="emoji">📅</span>
                     <div class="text-container">
                         <span class="german-word">täglich</span>
-                        <span class="spanish-translation">(diario, cada día)</span>
+                        <span class="spanish-translation">(diario)</span>
                     </div>
-                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Ich lerne täglich Deutsch.</span><br>/ij lerne teg-lish doitsh/<br>🇬🇧 daily<br>Tipo: Adjektiv/Adverb</span>
                 </div>
             </div>
-            <div class="word-item" onclick="generateExample('pünktlich')">
+            <div class="word-item" onclick="openExampleModal('pünktlich', '⏰')">
                  <div class="word-item-content">
                     <span class="emoji">⏰</span>
                     <div class="text-container">
                         <span class="german-word">pünktlich</span>
                         <span class="spanish-translation">(puntual)</span>
                     </div>
-                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Der Bus ist pünktlich.</span><br>/dea bus ist punkt-lish/<br>🇬🇧 punctual, on time<br>Tipo: Adjektiv/Adverb</span>
                 </div>
             </div>
-            <div class="word-item" onclick="generateExample('glücklich')">
+            <div class="word-item" onclick="openExampleModal('glücklich', '😄')">
                  <div class="word-item-content">
                     <span class="emoji">😄</span>
                     <div class="text-container">
                         <span class="german-word">glücklich</span>
-                        <span class="spanish-translation">(feliz, afortunado)</span>
+                        <span class="spanish-translation">(feliz / afortunado)</span>
                     </div>
-                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Ich bin sehr glücklich.</span><br>/ij bin sea gliuk-lish/<br>🇬🇧 happy, lucky<br>Tipo: Adjektiv</span>
                 </div>
             </div>
-            <div class="word-item" onclick="generateExample('natürlich')">
+            <div class="word-item" onclick="openExampleModal('natürlich', '🌱')">
                  <div class="word-item-content">
                     <span class="emoji">🌱</span>
                     <div class="text-container">
                         <span class="german-word">natürlich</span>
-                        <span class="spanish-translation">(por supuesto, natural)</span>
+                        <span class="spanish-translation">(por supuesto)</span>
                     </div>
-                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Kommst du mit? Natürlich!</span><br>/kommst du mit? na-tiur-lish!/<br>🇬🇧 of course, natural<br>Tipo: Adverb/Adjektiv</span>
                 </div>
             </div>
-            <div class="word-item" onclick="generateExample('möglich')">
+            <div class="word-item" onclick="openExampleModal('möglich', '✅')">
                  <div class="word-item-content">
                     <span class="emoji">✅</span>
                     <div class="text-container">
                         <span class="german-word">möglich</span>
                         <span class="spanish-translation">(posible)</span>
                     </div>
-                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Ist das möglich?</span><br>/ist das miog-lish/<br>🇬🇧 possible<br>Tipo: Adjektiv</span>
                 </div>
             </div>
-            <div class="word-item" onclick="generateExample('persönlich')">
+            <div class="word-item" onclick="openExampleModal('persönlich', '👤')">
                  <div class="word-item-content">
                     <span class="emoji">👤</span>
                     <div class="text-container">
                         <span class="german-word">persönlich</span>
                         <span class="spanish-translation">(personal)</span>
                     </div>
-                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Das ist meine persönliche Meinung.</span><br>/das ist maine per-son-lishe mainung/<br>🇬🇧 personal, personally<br>Tipo: Adjektiv/Adverb</span>
                 </div>
             </div>
-            <div class="word-item" onclick="generateExample('gemütlich')">
+            <div class="word-item" onclick="openExampleModal('gemütlich', '🛋️')">
                  <div class="word-item-content">
                     <span class="emoji">🛋️</span>
                     <div class="text-container">
                         <span class="german-word">gemütlich</span>
-                        <span class="spanish-translation">(acogedor, cómodo)</span>
+                        <span class="spanish-translation">(acogedor)</span>
                     </div>
-                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Die Wohnung ist gemütlich.</span><br>/di vonung ist gue-miut-lish/<br>🇬🇧 cozy, comfortable<br>Tipo: Adjektiv</span>
                 </div>
             </div>
-            <div class="word-item" onclick="generateExample('hässlich')">
+            <div class="word-item" onclick="openExampleModal('hässlich', '🤢')">
                  <div class="word-item-content">
                     <span class="emoji">🤢</span>
                     <div class="text-container">
                         <span class="german-word">hässlich</span>
                         <span class="spanish-translation">(feo)</span>
                     </div>
-                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Das Wetter ist hässlich.</span><br>/das veta ist jes-lish/<br>🇬🇧 ugly<br>Tipo: Adjektiv</span>
                 </div>
             </div>
-            <div class="word-item" onclick="generateExample('sportlich')">
+            <div class="word-item" onclick="openExampleModal('sportlich', '⚽️')">
                  <div class="word-item-content">
                     <span class="emoji">⚽️</span>
                     <div class="text-container">
                         <span class="german-word">sportlich</span>
                         <span class="spanish-translation">(deportivo)</span>
                     </div>
-                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Mein Bruder ist sehr sportlich.</span><br>/main bruda ist sea shport-lish/<br>🇬🇧 sporty, athletic<br>Tipo: Adjektiv</span>
                 </div>
             </div>
-            <div class="word-item" onclick="generateExample('weiblich')">
+            <div class="word-item" onclick="openExampleModal('weiblich', '🚺')">
                  <div class="word-item-content">
                     <span class="emoji">🚺</span>
                     <div class="text-container">
                         <span class="german-word">weiblich</span>
                         <span class="spanish-translation">(femenino)</span>
                     </div>
-                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Bitte ankreuzen: weiblich.</span><br>/bite an-kroitzen: vaib-lish/<br>🇬🇧 female<br>Tipo: Adjektiv</span>
                 </div>
             </div>
-            <div class="word-item" onclick="generateExample('männlich')">
+            <div class="word-item" onclick="openExampleModal('männlich', '🚹')">
                  <div class="word-item-content">
                     <span class="emoji">🚹</span>
                     <div class="text-container">
                         <span class="german-word">männlich</span>
                         <span class="spanish-translation">(masculino)</span>
                     </div>
-                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Bitte ankreuzen: männlich.</span><br>/bite an-kroitzen: men-lish/<br>🇬🇧 male<br>Tipo: Adjektiv</span>
                 </div>
             </div>
+            <div class="word-item" onclick="openExampleModal('endlich', '🏁')">
+                <div class="word-item-content">
+                   <span class="emoji">🏁</span>
+                   <div class="text-container">
+                       <span class="german-word">endlich</span>
+                       <span class="spanish-translation">(finalmente)</span>
+                   </div>
+               </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('nützlich', '🔧')">
+                <div class="word-item-content">
+                   <span class="emoji">🔧</span>
+                   <div class="text-container">
+                       <span class="german-word">nützlich</span>
+                       <span class="spanish-translation">(útil)</span>
+                   </div>
+               </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('gefährlich', '⚠️')">
+                <div class="word-item-content">
+                   <span class="emoji">⚠️</span>
+                   <div class="text-container">
+                       <span class="german-word">gefährlich</span>
+                       <span class="spanish-translation">(peligroso)</span>
+                   </div>
+               </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('herzlich', '❤️')">
+                <div class="word-item-content">
+                   <span class="emoji">❤️</span>
+                   <div class="text-container">
+                       <span class="german-word">herzlich</span>
+                       <span class="spanish-translation">(cordial)</span>
+                   </div>
+               </div>
+            </div>
+             <div class="word-item" onclick="openExampleModal('fröhlich', '🥳')">
+                <div class="word-item-content">
+                   <span class="emoji">🥳</span>
+                   <div class="text-container">
+                       <span class="german-word">fröhlich</span>
+                       <span class="spanish-translation">(alegre)</span>
+                   </div>
+               </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('wirklich', '😲')">
+                <div class="word-item-content">
+                   <span class="emoji">😲</span>
+                   <div class="text-container">
+                       <span class="german-word">wirklich</span>
+                       <span class="spanish-translation">(de verdad)</span>
+                   </div>
+               </div>
+           </div>
         </div>
+
+        <h2 class="section-title">Nivel A2: Vocabulario Ampliado</h2>
+        <div class="cards-container">
+            <div class="word-item" onclick="openExampleModal('in Wirklichkeit', '🎭')">
+                <div class="word-item-content">
+                   <span class="emoji">🎭</span>
+                   <div class="text-container">
+                       <span class="german-word">in Wirklichkeit</span>
+                       <span class="spanish-translation">(en realidad)</span>
+                   </div>
+               </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('eigentlich', '🤔')">
+                <div class="word-item-content">
+                   <span class="emoji">🤔</span>
+                   <div class="text-container">
+                       <span class="german-word">eigentlich</span>
+                       <span class="spanish-translation">(en realidad)</span>
+                   </div>
+               </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('tatsächlich', '🤯')">
+                <div class="word-item-content">
+                   <span class="emoji">🤯</span>
+                   <div class="text-container">
+                       <span class="german-word">tatsächlich</span>
+                       <span class="spanish-translation">(de hecho)</span>
+                   </div>
+               </div>
+            </div>
+             <div class="word-item" onclick="openExampleModal('ehrlich', '✋')">
+                <div class="word-item-content">
+                   <span class="emoji">✋</span>
+                   <div class="text-container">
+                       <span class="german-word">ehrlich</span>
+                       <span class="spanish-translation">(honesto)</span>
+                   </div>
+               </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('wahrscheinlich', '🤷')">
+                <div class="word-item-content">
+                   <span class="emoji">🤷</span>
+                   <div class="text-container">
+                       <span class="german-word">wahrscheinlich</span>
+                       <span class="spanish-translation">(probable)</span>
+                   </div>
+               </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('deutlich', '🔊')">
+                <div class="word-item-content">
+                   <span class="emoji">🔊</span>
+                   <div class="text-container">
+                       <span class="german-word">deutlich</span>
+                       <span class="spanish-translation">(claramente)</span>
+                   </div>
+               </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('plötzlich', '⚡')">
+                <div class="word-item-content">
+                   <span class="emoji">⚡</span>
+                   <div class="text-container">
+                       <span class="german-word">plötzlich</span>
+                       <span class="spanish-translation">(de repente)</span>
+                   </div>
+               </div>
+            </div>
+             <div class="word-item" onclick="openExampleModal('öffentlich', '🏛️')">
+                <div class="word-item-content">
+                   <span class="emoji">🏛️</span>
+                   <div class="text-container">
+                       <span class="german-word">öffentlich</span>
+                       <span class="spanish-translation">(público)</span>
+                   </div>
+               </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('schrecklich', '😱')">
+                <div class="word-item-content">
+                   <span class="emoji">😱</span>
+                   <div class="text-container">
+                       <span class="german-word">schrecklich</span>
+                       <span class="spanish-translation">(terrible)</span>
+                   </div>
+               </div>
+            </div>
+             <div class="word-item" onclick="openExampleModal('unglaublich', '✨')">
+                <div class="word-item-content">
+                   <span class="emoji">✨</span>
+                   <div class="text-container">
+                       <span class="german-word">unglaublich</span>
+                       <span class="spanish-translation">(increíble)</span>
+                   </div>
+               </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('monatlich', '🗓️')">
+                <div class="word-item-content">
+                   <span class="emoji">🗓️</span>
+                   <div class="text-container">
+                       <span class="german-word">monatlich</span>
+                       <span class="spanish-translation">(mensual)</span>
+                   </div>
+               </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('jährlich', '🎇')">
+                <div class="word-item-content">
+                   <span class="emoji">🎇</span>
+                   <div class="text-container">
+                       <span class="german-word">jährlich</span>
+                       <span class="spanish-translation">(anual)</span>
+                   </div>
+               </div>
+            </div>
+             <div class="word-item" onclick="openExampleModal('gewöhnlich', '🔄')">
+                <div class="word-item-content">
+                   <span class="emoji">🔄</span>
+                   <div class="text-container">
+                       <span class="german-word">gewöhnlich</span>
+                       <span class="spanish-translation">(habitual)</span>
+                   </div>
+               </div>
+            </div>
+        </div>
+
 
         <button id="story-button" onclick="generateStory()">
             Mit einer Geschichte üben
@@ -393,7 +678,34 @@
     <!-- Modal para mostrar el ejemplo generado -->
     <div id="example-modal" class="modal-overlay">
         <div class="modal-content">
-            <p id="modal-text"></p>
+            <div id="modal-word-header">
+                <span id="modal-emoji"></span>
+                <h2 id="modal-word"></h2>
+                <button id="play-word-audio-button" class="audio-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
+                </button>
+            </div>
+            <p id="modal-full-spanish"></p>
+            <div class="modal-separator"></div>
+            <div id="modal-example-container">
+                <p id="modal-text"></p>
+                <button id="play-sentence-audio-button" class="audio-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
+                </button>
+            </div>
+            <p id="modal-pronunciation"></p>
+            <p id="modal-spanish-translation"></p>
+            <div id="modal-info"></div>
+            
+            <div class="modal-separator"></div>
+            
+            <div id="example-navigation">
+                <span id="example-counter"></span>
+                <div class="nav-buttons-container">
+                    <button class="nav-button" id="prev-example-button">&lt;</button>
+                    <button class="nav-button" id="next-example-button">&gt;</button>
+                </div>
+            </div>
             <button id="close-modal">
                 <strong>Schließen</strong>
                 <span class="button-translation">(Cerrar)</span>
@@ -404,18 +716,223 @@
     <script>
         // --- Base de datos de ejemplos guardados ---
         const savedExamples = {
-            'freundlich': ['Die Lehrerin ist sehr freundlich.', 'Ihr Lächeln ist freundlich.', 'Danke, das ist sehr freundlich von Ihnen.'],
-            'täglich': ['Ich trinke täglich zwei Liter Wasser.', 'Die Zeitung kommt täglich.', 'Fast alle Geschäfte sind täglich geöffnet.'],
-            'pünktlich': ['Der Zug nach Berlin ist pünktlich.', 'Bitte seien Sie morgen pünktlich.', 'Er kommt nie pünktlich zur Arbeit.'],
-            'glücklich': ['Wir sind zusammen sehr glücklich.', 'Ein glückliches neues Jahr!', 'Sie hat ein glückliches Lächeln.'],
-            'natürlich': ['Natürlich helfe ich dir gerne.', 'Das ist ein natürlicher Saft ohne Zucker.', 'Er spricht sehr natürlich.'],
-            'möglich': ['Eine Reservierung ist leider nicht mehr möglich.', 'Kannst du bitte so schnell wie möglich kommen?', 'Gibt es eine andere mögliche Lösung?'],
-            'persönlich': ['Ich habe eine persönliche Frage.', 'Sie müssen den Brief persönlich abgeben.', 'Das ist nichts Persönliches.'],
-            'gemütlich': ['Mein Zimmer ist klein, aber sehr gemütlich.', 'Am Sonntag machen wir einen gemütlichen Abend.', 'Setz dich, mach es dir gemütlich.'],
-            'hässlich': ['Ich finde diese Farbe hässlich.', 'Das ist ein sehr hässlicher Hund.', 'Warum bist du so hässlich zu mir?'],
-            'sportlich': ['Meine Schwester ist sehr sportlich.', 'Er trägt immer sportliche Kleidung.', 'Ich bin nicht sehr sportlich.'],
-            'weiblich': ['Unser Hund ist weiblich.', 'In meinem Kurs sind mehr weibliche Teilnehmer.', 'Die weibliche Form von "Arzt" ist "Ärztin".'],
-            'männlich': ['Der Chef ist männlich.', 'Suchen Sie einen männlichen oder weiblichen Arzt?', 'Das ist ein typisch männlicher Name.']
+            'freundlich': [
+                { sentence: 'Die Lehrerin ist sehr freundlich.', pronunciation: '/di lererin ist sea froind-lish/', type: 'Adjektiv', english: 'The teacher is very friendly.', spanish: 'La profesora es muy amable.', fullSpanish: '(amigable, amable)', fullEnglish: '(friendly, kind)' },
+                { sentence: 'Ihr Lächeln ist freundlich.', pronunciation: '/ia legeln ist froind-lish/', type: 'Adjektiv', english: 'Her smile is friendly.', spanish: 'Su sonrisa es amigable.', fullSpanish: '(amigable, amable)', fullEnglish: '(friendly, kind)' },
+                { sentence: 'Danke, das ist sehr freundlich von Ihnen.', pronunciation: '/danke, das ist sea froind-lish fon inen/', type: 'Adjektiv', english: 'Thanks, that is very kind of you.', spanish: 'Gracias, es muy amable de su parte.', fullSpanish: '(amigable, amable)', fullEnglish: '(friendly, kind)' },
+                { sentence: 'Er hat eine freundliche Stimme.', pronunciation: '/ea jat aine froind-lishe shtime/', type: 'Adjektiv', english: 'He has a friendly voice.', spanish: 'Él tiene una voz amigable.', fullSpanish: '(amigable, amable)', fullEnglish: '(friendly, kind)' },
+                { sentence: 'Bitte seien Sie freundlich zu den Gästen.', pronunciation: '/bite saien si froind-lish tsu den guesten/', type: 'Adjektiv', english: 'Please be friendly to the guests.', spanish: 'Por favor, sea amable con los invitados.', fullSpanish: '(amigable, amable)', fullEnglish: '(friendly, kind)' }
+            ],
+            'täglich': [
+                { sentence: 'Ich trinke täglich zwei Liter Wasser.', pronunciation: '/ij trinke teg-lish tsvai lita vasa/', type: 'Adverb', english: 'I drink two liters of water daily.', spanish: 'Bebo dos litros de agua a diario.', fullSpanish: '(diario, cada día)', fullEnglish: '(daily, every day)' },
+                { sentence: 'Die Zeitung kommt täglich.', pronunciation: '/di tsaitung komt teg-lish/', type: 'Adverb', english: 'The newspaper comes daily.', spanish: 'El periódico llega a diario.', fullSpanish: '(diario, cada día)', fullEnglish: '(daily, every day)' },
+                { sentence: 'Meine tägliche Routine ist einfach.', pronunciation: '/maine teg-lishe rutine ist ainfaj/', type: 'Adjektiv', english: 'My daily routine is simple.', spanish: 'Mi rutina diaria es simple.', fullSpanish: '(diario, cada día)', fullEnglish: '(daily, every day)' },
+                { sentence: 'Er macht täglich Sport.', pronunciation: '/ea majt teg-lish shport/', type: 'Adverb', english: 'He does sports daily.', spanish: 'Él hace deporte a diario.', fullSpanish: '(diario, cada día)', fullEnglish: '(daily, every day)' },
+                { sentence: 'Der tägliche Spaziergang ist gesund.', pronunciation: '/dea teg-lishe shpatsigang ist guesúnt/', type: 'Adjektiv', english: 'The daily walk is healthy.', spanish: 'El paseo diario es saludable.', fullSpanish: '(diario, cada día)', fullEnglish: '(daily, every day)' }
+            ],
+            'pünktlich': [
+                { sentence: 'Der Zug nach Berlin ist pünktlich.', pronunciation: '/dea tsug naj berlin ist punkt-lish/', type: 'Adjektiv', english: 'The train to Berlin is on time.', spanish: 'El tren a Berlín es puntual.', fullSpanish: '(puntual)', fullEnglish: '(punctual, on time)' },
+                { sentence: 'Bitte seien Sie morgen pünktlich.', pronunciation: '/bite saien si morguen punkt-lish/', type: 'Adverb', english: 'Please be on time tomorrow.', spanish: 'Por favor, sea puntual mañana.', fullSpanish: '(puntual)', fullEnglish: '(punctual, on time)' },
+                { sentence: 'Er kommt nie pünktlich zur Arbeit.', pronunciation: '/ea komt ni punkt-lish tsua abait/', type: 'Adverb', english: 'He never comes to work on time.', spanish: 'Él nunca llega puntual al trabajo.', fullSpanish: '(puntual)', fullEnglish: '(punctual, on time)' },
+                { sentence: 'Die Besprechung beginnt pünktlich um 10 Uhr.', pronunciation: '/di beshprejung beguint punkt-lish um tsen ua/', type: 'Adverb', english: 'The meeting starts punctually at 10 o\'clock.', spanish: 'La reunión empieza puntualmente a las 10.', fullSpanish: '(puntual)', fullEnglish: '(punctual, on time)' },
+                { sentence: 'Eine pünktliche Ankunft ist wichtig.', pronunciation: '/aine punkt-lishe ankunft ist vijtish/', type: 'Adjektiv', english: 'A punctual arrival is important.', spanish: 'Una llegada puntual es importante.', fullSpanish: '(puntual)', fullEnglish: '(punctual, on time)' }
+            ],
+            'glücklich': [
+                { sentence: 'Wir sind zusammen sehr glücklich.', pronunciation: '/via sint tsusamen sea gliuk-lish/', type: 'Adjektiv', english: 'We are very happy together.', spanish: 'Estamos muy felices juntos.', fullSpanish: '(feliz, afortunado)', fullEnglish: '(happy, lucky)' },
+                { sentence: 'Ein glückliches neues Jahr!', pronunciation: '/ain gliuk-lishes noies yaa/', type: 'Adjektiv', english: 'A happy new year!', spanish: '¡Un feliz año nuevo!', fullSpanish: '(feliz, afortunado)', fullEnglish: '(happy, lucky)' },
+                { sentence: 'Sie hat ein glückliches Lächeln.', pronunciation: '/si jat ain gliuk-lishes legeln/', type: 'Adjektiv', english: 'She has a happy smile.', spanish: 'Ella tiene una sonrisa feliz.', fullSpanish: '(feliz, afortunado)', fullEnglish: '(happy, lucky)' },
+                { sentence: 'Das Kind spielt glücklich im Garten.', pronunciation: '/das kint shpilt gliuk-lish im garten/', type: 'Adverb', english: 'The child plays happily in the garden.', spanish: 'El niño juega feliz en el jardín.', fullSpanish: '(feliz, afortunado)', fullEnglish: '(happy, lucky)' },
+                { sentence: 'Ich bin glücklich über das Geschenk.', pronunciation: '/ij bin gliuk-lish iuba das gueshenk/', type: 'Adjektiv', english: 'I am happy about the gift.', spanish: 'Estoy feliz por el regalo.', fullSpanish: '(feliz, afortunado)', fullEnglish: '(happy, lucky)' }
+            ],
+            'natürlich': [
+                { sentence: 'Natürlich helfe ich dir gerne.', pronunciation: '/na-tiur-lish jelfe ij dia guerne/', type: 'Adverb', english: 'Of course I\'ll help you.', spanish: 'Por supuesto que te ayudo.', fullSpanish: '(por supuesto, natural)', fullEnglish: '(of course, natural)' },
+                { sentence: 'Das ist ein natürlicher Saft ohne Zucker.', pronunciation: '/das ist ain na-tiur-lisher saft one tsuka/', type: 'Adjektiv', english: 'That is a natural juice without sugar.', spanish: 'Ese es un zumo natural sin azúcar.', fullSpanish: '(por supuesto, natural)', fullEnglish: '(of course, natural)' },
+                { sentence: 'Er spricht sehr natürlich.', pronunciation: '/ea shprijt sea na-tiur-lish/', type: 'Adverb', english: 'He speaks very naturally.', spanish: 'Él habla de forma muy natural.', fullSpanish: '(por supuesto, natural)', fullEnglish: '(of course, natural)' },
+                { sentence: 'Die Blumen sind natürlich schön.', pronunciation: '/di blumen sint na-tiur-lish shon/', type: 'Adjektiv', english: 'The flowers are naturally beautiful.', spanish: 'Las flores son naturalmente bonitas.', fullSpanish: '(por supuesto, natural)', fullEnglish: '(of course, natural)' },
+                { sentence: 'Kommst du mit? Natürlich!', pronunciation: '/komst du mit? na-tiur-lish!/', type: 'Adverb', english: 'Are you coming along? Of course!', spanish: '¿Vienes? ¡Por supuesto!', fullSpanish: '(por supuesto, natural)', fullEnglish: '(of course, natural)' }
+            ],
+             'möglich': [
+                { sentence: 'Eine Reservierung ist leider nicht mehr möglich.', pronunciation: '/aine reservirung ist laida nijt mea miog-lish/', type: 'Adjektiv', english: 'A reservation is unfortunately no longer possible.', spanish: 'Lamentablemente ya no es posible reservar.', fullSpanish: '(posible)', fullEnglish: '(possible)' },
+                { sentence: 'Kannst du bitte so schnell wie möglich kommen?', pronunciation: '/kanst du bite so shnel vi miog-lish komen/', type: 'Adjektiv', english: 'Can you please come as soon as possible?', spanish: '¿Puedes venir lo antes posible, por favor?', fullSpanish: '(posible)', fullEnglish: '(possible)' },
+                { sentence: 'Gibt es eine andere mögliche Lösung?', pronunciation: '/guipt es aine andere miog-lishe losung/', type: 'Adjektiv', english: 'Is there another possible solution?', spanish: '¿Hay otra posible solución?', fullSpanish: '(posible)', fullEnglish: '(possible)' },
+                { sentence: 'Ist es möglich, hier zu parken?', pronunciation: '/ist es miog-lish jia tsu parken/', type: 'Adjektiv', english: 'Is it possible to park here?', spanish: '¿Es posible aparcar aquí?', fullSpanish: '(posible)', fullEnglish: '(possible)' },
+                { sentence: 'Wir machen alles, was möglich ist.', pronunciation: '/via majen ales, vas miog-lish ist/', type: 'Adjektiv', english: 'We are doing everything that is possible.', spanish: 'Hacemos todo lo que es posible.', fullSpanish: '(posible)', fullEnglish: '(possible)' }
+            ],
+            'persönlich': [
+                { sentence: 'Ich habe eine persönliche Frage.', pronunciation: '/ij jabe aine per-son-lishe frague/', type: 'Adjektiv', english: 'I have a personal question.', spanish: 'Tengo una pregunta personal.', fullSpanish: '(personal)', fullEnglish: '(personal)' },
+                { sentence: 'Sie müssen den Brief persönlich abgeben.', pronunciation: '/si miusen den brif per-son-lish apgueben/', type: 'Adverb', english: 'You have to deliver the letter personally.', spanish: 'Tiene que entregar la carta personalmente.', fullSpanish: '(personal)', fullEnglish: '(personal)' },
+                { sentence: 'Das ist nichts Persönliches.', pronunciation: '/das ist nijts per-son-lishes/', type: 'Adjektiv', english: 'That is nothing personal.', spanish: 'No es nada personal.', fullSpanish: '(personal)', fullEnglish: '(personal)' },
+                { sentence: 'Ich kenne ihn persönlich nicht.', pronunciation: '/ij kene in per-son-lish nijt/', type: 'Adverb', english: 'I don\'t know him personally.', spanish: 'No lo conozco personalmente.', fullSpanish: '(personal)', fullEnglish: '(personal)' },
+                { sentence: 'Das ist meine persönliche Meinung.', pronunciation: '/das ist maine per-son-lishe mainung/', type: 'Adjektiv', english: 'That is my personal opinion.', spanish: 'Esa es mi opinión personal.', fullSpanish: '(personal)', fullEnglish: '(personal)' }
+            ],
+            'gemütlich': [
+                { sentence: 'Mein Zimmer ist klein, aber sehr gemütlich.', pronunciation: '/main tsima ist klain, aba sea gue-miut-lish/', type: 'Adjektiv', english: 'My room is small, but very cozy.', spanish: 'Mi habitación es pequeña, pero muy acogedora.', fullSpanish: '(acogedor, cómodo)', fullEnglish: '(cozy, comfortable)' },
+                { sentence: 'Am Sonntag machen wir einen gemütlichen Abend.', pronunciation: '/am sontag majen via ainen gue-miut-lishen abent/', type: 'Adjektiv', english: 'On Sunday we are having a cozy evening.', spanish: 'El domingo tendremos una tarde acogedora.', fullSpanish: '(acogedor, cómodo)', fullEnglish: '(cozy, comfortable)' },
+                { sentence: 'Setz dich, mach es dir gemütlich.', pronunciation: '/sets dij, maj es dia gue-miut-lish/', type: 'Adjektiv', english: 'Sit down, make yourself comfortable.', spanish: 'Siéntate, ponte cómodo.', fullSpanish: '(acogedor, cómodo)', fullEnglish: '(cozy, comfortable)' },
+                { sentence: 'Wir sitzen gemütlich im Café.', pronunciation: '/via sitsen gue-miut-lish im café/', type: 'Adverb', english: 'We are sitting comfortably in the café.', spanish: 'Estamos sentados cómodamente en la cafetería.', fullSpanish: '(acogedor, cómodo)', fullEnglish: '(cozy, comfortable)' },
+                { sentence: 'Das Sofa ist sehr gemütlich.', pronunciation: '/das sofa ist sea gue-miut-lish/', type: 'Adjektiv', english: 'The sofa is very comfortable.', spanish: 'El sofá es muy cómodo.', fullSpanish: '(acogedor, cómodo)', fullEnglish: '(cozy, comfortable)' }
+            ],
+            'hässlich': [
+                { sentence: 'Ich finde diese Farbe hässlich.', pronunciation: '/ij finde dise farbe jes-lish/', type: 'Adjektiv', english: 'I find this color ugly.', spanish: 'Encuentro este color feo.', fullSpanish: '(feo)', fullEnglish: '(ugly)' },
+                { sentence: 'Das ist ein sehr hässlicher Hund.', pronunciation: '/das ist ain sea jes-lisher junt/', type: 'Adjektiv', english: 'That is a very ugly dog.', spanish: 'Ese es un perro muy feo.', fullSpanish: '(feo)', fullEnglish: '(ugly)' },
+                { sentence: 'Warum bist du so hässlich zu mir?', pronunciation: '/varum bist du so jes-lish tsu mia/', type: 'Adjektiv', english: 'Why are you so nasty to me?', spanish: '¿Por qué eres tan desagradable conmigo?', fullSpanish: '(feo)', fullEnglish: '(ugly, nasty)' },
+                { sentence: 'Das Wetter ist heute wirklich hässlich.', pronunciation: '/das veta ist joite virk-lish jes-lish/', type: 'Adjektiv', english: 'The weather is really ugly today.', spanish: 'El tiempo hoy es realmente feo.', fullSpanish: '(feo)', fullEnglish: '(ugly)' },
+                { sentence: 'Er trägt ein hässliches Hemd.', pronunciation: '/ea tregt ain jes-lishes jemt/', type: 'Adjektiv', english: 'He is wearing an ugly shirt.', spanish: 'Él lleva una camisa fea.', fullSpanish: '(feo)', fullEnglish: '(ugly)' }
+            ],
+            'sportlich': [
+                { sentence: 'Meine Schwester ist sehr sportlich.', pronunciation: '/maine shvesta ist sea shport-lish/', type: 'Adjektiv', english: 'My sister is very athletic.', spanish: 'Mi hermana es muy deportista.', fullSpanish: '(deportivo)', fullEnglish: '(sporty, athletic)' },
+                { sentence: 'Er trägt immer sportliche Kleidung.', pronunciation: '/ea tregt ima shport-lishe klaidung/', type: 'Adjektiv', english: 'He always wears sporty clothes.', spanish: 'Él siempre lleva ropa deportiva.', fullSpanish: '(deportivo)', fullEnglish: '(sporty, athletic)' },
+                { sentence: 'Ich bin nicht sehr sportlich.', pronunciation: '/ij bin nijt sea shport-lish/', type: 'Adjektiv', english: 'I am not very athletic.', spanish: 'No soy muy deportista.', fullSpanish: '(deportivo)', fullEnglish: '(sporty, athletic)' },
+                { sentence: 'Sie hat ein sportliches Auto.', pronunciation: '/si jat ain shport-lishes auto/', type: 'Adjektiv', english: 'She has a sporty car.', spanish: 'Ella tiene un coche deportivo.', fullSpanish: '(deportivo)', fullEnglish: '(sporty, athletic)' },
+                { sentence: 'Er ist ein sportlicher Typ.', pronunciation: '/ea ist ain shport-lisher tiup/', type: 'Adjektiv', english: 'He is a sporty guy.', spanish: 'Él es un tipo deportista.', fullSpanish: '(deportivo)', fullEnglish: '(sporty, athletic)' }
+            ],
+            'weiblich': [
+                { sentence: 'Bitte kreuzen Sie "weiblich" an.', pronunciation: '/bite kroytsen si "vaib-lish" an/', type: 'Adjektiv', english: 'Please check "female".', spanish: 'Por favor, marque "femenino".', fullSpanish: '(femenino)', fullEnglish: '(female)' },
+                { sentence: 'In meinem Kurs sind mehr weibliche Teilnehmer.', pronunciation: '/in mainem kurs sint mea vaib-lishe tailnema/', type: 'Adjektiv', english: 'There are more female participants in my course.', spanish: 'En mi curso hay más participantes femeninas.', fullSpanish: '(femenino)', fullEnglish: '(female)' },
+                { sentence: 'Die weibliche Form von "Arzt" ist "Ärztin".', pronunciation: '/di vaib-lishe form fon "arzt" ist "erstin"/', type: 'Adjektiv', english: 'The female form of "Arzt" is "Ärztin".', spanish: 'La forma femenina de "Arzt" es "Ärztin".', fullSpanish: '(femenino)', fullEnglish: '(female)' },
+                { sentence: 'Wir haben zwei Katzen, eine ist männlich und eine ist weiblich.', pronunciation: '/via jaben tsvai katsen, aine ist men-lish unt aine ist vaib-lish/', type: 'Adjektiv', english: 'We have two cats, one is male and one is female.', spanish: 'Tenemos dos gatos, uno es macho y otra es hembra.', fullSpanish: '(femenino)', fullEnglish: '(female)' },
+                { sentence: 'Unsere Katze ist weiblich.', pronunciation: '/unsere katse ist vaib-lish/', type: 'Adjektiv', english: 'Our cat is female.', spanish: 'Nuestra gata es hembra.', fullSpanish: '(femenino)', fullEnglish: '(female)' }
+            ],
+            'männlich': [
+                { sentence: 'Unser Hund ist männlich.', pronunciation: '/unza junt ist men-lish/', type: 'Adjektiv', english: 'Our dog is male.', spanish: 'Nuestro perro es macho.', fullSpanish: '(masculino)', fullEnglish: '(male)' },
+                { sentence: 'Suchen Sie einen männlichen oder weiblichen Arzt?', pronunciation: '/sujen si ainen men-lishen oda vaib-lishen artst/', type: 'Adjektiv', english: 'Are you looking for a male or female doctor?', spanish: '¿Busca un médico hombre o mujer?', fullSpanish: '(masculino)', fullEnglish: '(male)' },
+                { sentence: '"Paul" ist ein männlicher Vorname.', pronunciation: '/"paul" ist ain men-lisher foa-name/', type: 'Adjektiv', english: '"Paul" is a male first name.', spanish: '"Paul" es un nombre de pila masculino.', fullSpanish: '(masculino)', fullEnglish: '(male)' },
+                { sentence: 'Der Löwe ist ein männliches Tier.', pronunciation: '/dea love ist ain men-lishes tia/', type: 'Adjektiv', english: 'The lion is a male animal.', spanish: 'El león es un animal macho.', fullSpanish: '(masculino)', fullEnglish: '(male)' },
+                { sentence: 'Bitte kreuzen Sie "männlich" an.', pronunciation: '/bite kroytsen si "men-lish" an/', type: 'Adjektiv', english: 'Please check "male".', spanish: 'Por favor, marque "masculino".', fullSpanish: '(masculino)', fullEnglish: '(male)' }
+            ],
+            'endlich': [
+                { sentence: 'Endlich ist Wochenende!', pronunciation: '/endlich ist vojen-ende/', type: 'Adverb', english: 'Finally, it\'s the weekend!', spanish: '¡Finalmente es fin de semana!', fullSpanish: '(finalmente, por fin)', fullEnglish: '(finally, at last)' },
+                { sentence: 'Wir sind endlich da.', pronunciation: '/via sind endlich da/', type: 'Adverb', english: 'We are finally here.', spanish: 'Finalmente estamos aquí.', fullSpanish: '(finalmente, por fin)', fullEnglish: '(finally, at last)' },
+                { sentence: 'Der Sommer kommt endlich.', pronunciation: '/dea soma komt endlich/', type: 'Adverb', english: 'Summer is finally coming.', spanish: 'El verano finalmente llega.', fullSpanish: '(finalmente, por fin)', fullEnglish: '(finally, at last)' },
+                { sentence: 'Ich habe es endlich geschafft.', pronunciation: '/ij jabe es endlich gueshaft/', type: 'Adverb', english: 'I finally did it.', spanish: 'Finalmente lo logré.', fullSpanish: '(finalmente, por fin)', fullEnglish: '(finally, at last)' },
+                { sentence: 'Endlich habe ich dich gefunden.', pronunciation: '/endlich jabe ij dij guefunden/', type: 'Adverb', english: 'I finally found you.', spanish: 'Finalmente te encontré.', fullSpanish: '(finalmente, por fin)', fullEnglish: '(finally, at last)' }
+            ],
+            'nützlich': [
+                { sentence: 'Ein Wörterbuch ist sehr nützlich.', pronunciation: '/ain vorterbuj ist sea niuts-lish/', type: 'Adjektiv', english: 'A dictionary is very useful.', spanish: 'Un diccionario es muy útil.', fullSpanish: '(útil)', fullEnglish: '(useful)' },
+                { sentence: 'Das ist eine nützliche Information.', pronunciation: '/das ist aine niuts-lishe informatsion/', type: 'Adjektiv', english: 'That is useful information.', spanish: 'Esa es una información útil.', fullSpanish: '(útil)', fullEnglish: '(useful)' },
+                { sentence: 'Dieser Tipp war sehr nützlich.', pronunciation: '/disa tip vaa sea niuts-lish/', type: 'Adjektiv', english: 'This tip was very useful.', spanish: 'Este consejo fue muy útil.', fullSpanish: '(útil)', fullEnglish: '(useful)' },
+                { sentence: 'Er hat mir nützliche Ratschläge gegeben.', pronunciation: '/ea jat mia niuts-lishe ratshlegue guegueben/', type: 'Adjektiv', english: 'He gave me useful advice.', spanish: 'Él me dio consejos útiles.', fullSpanish: '(útil)', fullEnglish: '(useful)' },
+                { sentence: 'Es ist nützlich, Deutsch zu lernen.', pronunciation: '/es ist niuts-lish, doytsh tsu lernen/', type: 'Adjektiv', english: 'It is useful to learn German.', spanish: 'Es útil aprender alemán.', fullSpanish: '(útil)', fullEnglish: '(useful)' }
+            ],
+            'gefährlich': [
+                { sentence: 'Achtung, das ist gefährlich!', pronunciation: '/ajtung, das ist gue-fea-lish/', type: 'Adjektiv', english: 'Be careful, that is dangerous!', spanish: '¡Cuidado, eso es peligroso!', fullSpanish: '(peligroso)', fullEnglish: '(dangerous)' },
+                { sentence: 'Schwimmen im Meer kann gefährlich sein.', pronunciation: '/shvimen im mea kan gue-fea-lish sain/', type: 'Adjektiv', english: 'Swimming in the sea can be dangerous.', spanish: 'Nadar en el mar puede ser peligroso.', fullSpanish: '(peligroso)', fullEnglish: '(dangerous)' },
+                { sentence: 'Das ist ein gefährliches Tier.', pronunciation: '/das ist ain gue-fea-lishes tia/', type: 'Adjektiv', english: 'That is a dangerous animal.', spanish: 'Ese es un animal peligroso.', fullSpanish: '(peligroso)', fullEnglish: '(dangerous)' },
+                { sentence: 'Fahr nicht so schnell, das ist gefährlich.', pronunciation: '/faa nijt so shnel, das ist gue-fea-lish/', type: 'Adjektiv', english: 'Don\'t drive so fast, that is dangerous.', spanish: 'No conduzcas tan rápido, es peligroso.', fullSpanish: '(peligroso)', fullEnglish: '(dangerous)' },
+                { sentence: 'Die Situation wird gefährlich.', pronunciation: '/di situatsion virt gue-fea-lish/', type: 'Adjektiv', english: 'The situation is becoming dangerous.', spanish: 'La situación se está volviendo peligrosa.', fullSpanish: '(peligroso)', fullEnglish: '(dangerous)' }
+            ],
+            'herzlich': [
+                { sentence: 'Herzlich willkommen!', pronunciation: '/jerts-lish vilkomen/', type: 'Adverb', english: 'Welcome!', spanish: '¡Bienvenido/a cordialmente!', fullSpanish: '(cordial, afectuoso)', fullEnglish: '(cordial, heartfelt)' },
+                { sentence: 'Ich gratuliere Ihnen herzlich.', pronunciation: '/ij gratulire inen jerts-lish/', type: 'Adverb', english: 'I congratulate you cordially.', spanish: 'Le felicito cordialmente.', fullSpanish: '(cordial, afectuoso)', fullEnglish: '(cordial, heartfelt)' },
+                { sentence: 'Vielen herzlichen Dank!', pronunciation: '/filen jerts-lishen dank/', type: 'Adjektiv', english: 'Many heartfelt thanks!', spanish: '¡Muchas gracias de corazón!', fullSpanish: '(cordial, afectuoso)', fullEnglish: '(cordial, heartfelt)' },
+                { sentence: 'Sie wurden herzlich empfangen.', pronunciation: '/si vurden jerts-lish empfangen/', type: 'Adverb', english: 'They were received cordially.', spanish: 'Fueron recibidos cordialmente.', fullSpanish: '(cordial, afectuoso)', fullEnglish: '(cordial, heartfelt)' },
+                { sentence: 'Meine herzlichen Grüße.', pronunciation: '/maine jerts-lishen gruse/', type: 'Adjektiv', english: 'My cordial greetings.', spanish: 'Mis saludos cordiales.', fullSpanish: '(cordial, afectuoso)', fullEnglish: '(cordial, heartfelt)' }
+            ],
+            'fröhlich': [
+                { sentence: 'Sie ist ein fröhliches Kind.', pronunciation: '/si ist ain fro-lishes kint/', type: 'Adjektiv', english: 'She is a cheerful child.', spanish: 'Es una niña alegre.', fullSpanish: '(alegre, feliz)', fullEnglish: '(cheerful, happy)' },
+                { sentence: 'Wir singen ein fröhliches Lied.', pronunciation: '/via singuen ain fro-lishes lid/', type: 'Adjektiv', english: 'We are singing a cheerful song.', spanish: 'Cantamos una canción alegre.', fullSpanish: '(alegre, feliz)', fullEnglish: '(cheerful, happy)' },
+                { sentence: 'Frohe Weihnachten!', pronunciation: '/froe vainajten/', type: 'Adjektiv', english: 'Merry Christmas!', spanish: '¡Feliz Navidad!', fullSpanish: '(alegre, feliz)', fullEnglish: '(cheerful, happy)' },
+                { sentence: 'Er lacht immer so fröhlich.', pronunciation: '/ea lajt ima so fro-lish/', type: 'Adverb', english: 'He always laughs so cheerfully.', spanish: 'Él siempre ríe tan alegremente.', fullSpanish: '(alegre, feliz)', fullEnglish: '(cheerful, happy)' },
+                { sentence: 'Das Fest war sehr fröhlich.', pronunciation: '/das fest vaa sea fro-lish/', type: 'Adjektiv', english: 'The party was very cheerful.', spanish: 'La fiesta fue muy alegre.', fullSpanish: '(alegre, feliz)', fullEnglish: '(cheerful, happy)' }
+            ],
+            'wirklich': [
+                { sentence: 'Das ist wirklich schön.', pronunciation: '/das ist virk-lish shon/', type: 'Adverb', english: 'That is really beautiful.', spanish: 'Eso es de verdad bonito.', fullSpanish: '(de verdad, realmente)', fullEnglish: '(really, truly)' },
+                { sentence: 'Bist du wirklich müde?', pronunciation: '/bist du virk-lish miude/', type: 'Adverb', english: 'Are you really tired?', spanish: '¿Estás realmente cansado?', fullSpanish: '(de verdad, realmente)', fullEnglish: '(really, truly)' },
+                { sentence: 'Ich mag das wirklich.', pronunciation: '/ij mag das virk-lish/', type: 'Adverb', english: 'I really like that.', spanish: 'Me gusta de verdad.', fullSpanish: '(de verdad, realmente)', fullEnglish: '(really, truly)' },
+                { sentence: 'Er ist wirklich nett.', pronunciation: '/ea ist virk-lish net/', type: 'Adverb', english: 'He is really nice.', spanish: 'Él es realmente simpático.', fullSpanish: '(de verdad, realmente)', fullEnglish: '(really, truly)' },
+                { sentence: 'Das Essen schmeckt wirklich gut.', pronunciation: '/das esen shmekt virk-lish gut/', type: 'Adverb', english: 'The food tastes really good.', spanish: 'La comida sabe de verdad bien.', fullSpanish: '(de verdad, realmente)', fullEnglish: '(really, truly)' }
+            ],
+            'in Wirklichkeit': [
+                { sentence: 'Er wirkt ruhig; in Wirklichkeit ist er nervös.', pronunciation: '/in virk-lish-kait ist ea ner-vos/', type: 'Adverb', english: 'He seems calm; in reality he is nervous.', spanish: 'Parece tranquilo; en realidad está nervioso.', fullSpanish: '(en realidad)', fullEnglish: '(in reality, actually)' },
+                { sentence: 'Sie sagt, sie hat keine Zeit, aber in Wirklichkeit will sie nicht.', pronunciation: '/si sagt, si jat kaine tsait, aba in virk-lish-kait vil si nijt/', type: 'Adverb', english: 'She says she has no time, but in reality she doesn\'t want to.', spanish: 'Dice que no tiene tiempo, pero en realidad no quiere.', fullSpanish: '(en realidad)', fullEnglish: '(in reality, actually)' },
+                { sentence: 'Das Foto sieht gut aus, aber in Wirklichkeit ist es alt.', pronunciation: '/das foto sit gut aus, aba in virk-lish-kait ist es alt/', type: 'Adverb', english: 'The photo looks good, but in reality it is old.', spanish: 'La foto se ve bien, pero en realidad es antigua.', fullSpanish: '(en realidad)', fullEnglish: '(in reality, actually)' },
+                { sentence: 'In Wirklichkeit ist die Aufgabe schwieriger.', pronunciation: '/in virk-lish-kait ist di auf-gabe shvi-riga/', type: 'Adverb', english: 'In reality, the task is more difficult.', spanish: 'En realidad, la tarea es más difícil.', fullSpanish: '(en realidad)', fullEnglish: '(in reality, actually)' },
+                { sentence: 'Er tut so, als ob er schläft, aber in Wirklichkeit ist er wach.', pronunciation: '/ea tut so, als op ea shleft, aba in virk-lish-kait ist ea vaj/', type: 'Adverb', english: 'He pretends to be asleep, but in reality he is awake.', spanish: 'Finge que duerme, pero en realidad está despierto.', fullSpanish: '(en realidad)', fullEnglish: '(in reality, actually)' }
+            ],
+            'eigentlich': [
+                { sentence: 'Was willst du eigentlich machen?', pronunciation: '/vas vilst du ai-guent-lish majen/', type: 'Adverb', english: 'What do you actually want to do?', spanish: '¿Qué quieres hacer en realidad?', fullSpanish: '(en realidad, de hecho)', fullEnglish: '(actually, by the way)' },
+                { sentence: 'Eigentlich wollte ich ins Kino gehen.', pronunciation: '/ai-guent-lish volte ij ins kino gueen/', type: 'Adverb', english: 'Actually, I wanted to go to the cinema.', spanish: 'En realidad, quería ir al cine.', fullSpanish: '(en realidad, de hecho)', fullEnglish: '(actually, by the way)' },
+                { sentence: 'Das ist eigentlich eine gute Idee.', pronunciation: '/das ist ai-guent-lish aine gute idee/', type: 'Adverb', english: 'That is actually a good idea.', spanish: 'Esa es, de hecho, una buena idea.', fullSpanish: '(en realidad, de hecho)', fullEnglish: '(actually, by the way)' },
+                { sentence: 'Ich habe eigentlich keinen Hunger.', pronunciation: '/ij jabe ai-guent-lish kainen junga/', type: 'Adverb', english: 'I\'m not actually hungry.', spanish: 'En realidad no tengo hambre.', fullSpanish: '(en realidad, de hecho)', fullEnglish: '(actually, by the way)' },
+                { sentence: 'Wo ist eigentlich Paul?', pronunciation: '/vo ist ai-guent-lish paul/', type: 'Adverb', english: 'Where is Paul, by the way?', spanish: 'Por cierto, ¿dónde está Paul?', fullSpanish: '(en realidad, de hecho)', fullEnglish: '(actually, by the way)' }
+            ],
+            'tatsächlich': [
+                { sentence: 'Er hat tatsächlich gewonnen.', pronunciation: '/er jat tat-sej-lish gue-vonen/', type: 'Adverb', english: 'He did in fact win.', spanish: 'Él de hecho ganó.', fullSpanish: '(de hecho, efectivamente)', fullEnglish: '(in fact, indeed, actually)'},
+                { sentence: 'Das ist tatsächlich ein Problem.', pronunciation: '/das ist tat-sej-lish ain problem/', type: 'Adverb', english: 'That is indeed a problem.', spanish: 'Eso es de hecho un problema.', fullSpanish: '(de hecho, efectivamente)', fullEnglish: '(in fact, indeed, actually)'},
+                { sentence: 'Glaubst du das tatsächlich?', pronunciation: '/glaubst du das tat-sej-lish/', type: 'Adverb', english: 'Do you actually believe that?', spanish: '¿De verdad crees eso?', fullSpanish: '(de hecho, efectivamente)', fullEnglish: '(in fact, indeed, actually)'},
+                { sentence: 'Sie hat es tatsächlich geschafft.', pronunciation: '/si jat es tat-sej-lish gue-shaft/', type: 'Adverb', english: 'She actually managed it.', spanish: 'Ella realmente lo logró.', fullSpanish: '(de hecho, efectivamente)', fullEnglish: '(in fact, indeed, actually)'},
+                { sentence: 'Es ist tatsächlich schon Mitternacht.', pronunciation: '/es ist tat-sej-lish shon mita-najt/', type: 'Adverb', english: 'It is in fact already midnight.', spanish: 'De hecho ya es medianoche.', fullSpanish: '(de hecho, efectivamente)', fullEnglish: '(in fact, indeed, actually)'}
+            ],
+            'ehrlich': [
+                { sentence: 'Sei ehrlich, gefällt es dir?', pronunciation: '/sai er-lish, gue-felt es dia/', type: 'Adverb', english: 'Be honest, do you like it?', spanish: 'Sé honesto, ¿te gusta?', fullSpanish: '(honesto, sinceramente)', fullEnglish: '(honest, honestly)' },
+                { sentence: 'Ehrlich gesagt, weiß ich es nicht.', pronunciation: '/er-lish gue-sagt, vais ij es nijt/', type: 'Adverb', english: 'Honestly, I don\'t know.', spanish: 'Sinceramente, no lo sé.', fullSpanish: '(honesto, sinceramente)', fullEnglish: '(honest, honestly)' },
+                { sentence: 'Er ist ein ehrlicher Mensch.', pronunciation: '/ea ist ain er-lisher mensh/', type: 'Adjektiv', english: 'He is an honest person.', spanish: 'Es una persona honesta.', fullSpanish: '(honesto, sinceramente)', fullEnglish: '(honest, honestly)' },
+                { sentence: 'Ich schätze deine ehrliche Meinung.', pronunciation: '/ij shetse daine er-lishe mainung/', type: 'Adjektiv', english: 'I appreciate your honest opinion.', spanish: 'Aprecio tu opinión honesta.', fullSpanish: '(honesto, sinceramente)', fullEnglish: '(honest, honestly)' },
+                { sentence: 'Das ist eine ehrliche Antwort.', pronunciation: '/das ist aine er-lishe antwort/', type: 'Adjektiv', english: 'That is an honest answer.', spanish: 'Esa es una respuesta honesta.', fullSpanish: '(honesto, sinceramente)', fullEnglish: '(honest, honestly)' }
+            ],
+            'wahrscheinlich': [
+                { sentence: 'Er kommt wahrscheinlich später.', pronunciation: '/ea komt va-shain-lish shpeta/', type: 'Adverb', english: 'He will probably come later.', spanish: 'Él probablemente venga más tarde.', fullSpanish: '(probable, probablemente)', fullEnglish: '(probable, probably)' },
+                { sentence: 'Das ist die wahrscheinlichste Lösung.', pronunciation: '/das ist di va-shain-lishe losung/', type: 'Adjektiv', english: 'That is the most probable solution.', spanish: 'Esa es la solución más probable.', fullSpanish: '(probable, probablemente)', fullEnglish: '(probable, probably)' },
+                { sentence: 'Wahrscheinlich regnet es morgen.', pronunciation: '/va-shain-lish regnet es morguen/', type: 'Adverb', english: 'It will probably rain tomorrow.', spanish: 'Probablemente llueva mañana.', fullSpanish: '(probable, probablemente)', fullEnglish: '(probable, probably)' },
+                { sentence: 'Sie hat wahrscheinlich den Zug verpasst.', pronunciation: '/si jat va-shain-lish den tsug ferpast/', type: 'Adverb', english: 'She probably missed the train.', spanish: 'Ella probablemente perdió el tren.', fullSpanish: '(probable, probablemente)', fullEnglish: '(probable, probably)' },
+                { sentence: 'Es ist nicht wahrscheinlich, dass er anruft.', pronunciation: '/es ist nijt va-shain-lish, das ea anruft/', type: 'Adjektiv', english: 'It is not probable that he will call.', spanish: 'No es probable que llame.', fullSpanish: '(probable, probablemente)', fullEnglish: '(probable, probably)' }
+            ],
+            'deutlich': [
+                { sentence: 'Bitte sprechen Sie langsam und deutlich.', pronunciation: '/bite shprejen si langsam unt doyt-lish/', type: 'Adverb', english: 'Please speak slowly and clearly.', spanish: 'Por favor, hable despacio y claramente.', fullSpanish: '(claro, claramente)', fullEnglish: '(clear, clearly)' },
+                { sentence: 'Das ist ein deutliches Zeichen.', pronunciation: '/das ist ain doyt-lishes tsaishen/', type: 'Adjektiv', english: 'That is a clear sign.', spanish: 'Esa es una señal clara.', fullSpanish: '(claro, claramente)', fullEnglish: '(clear, clearly)' },
+                { sentence: 'Er hat deutlich "Nein" gesagt.', pronunciation: '/ea jat doyt-lish "nain" guesagt/', type: 'Adverb', english: 'He clearly said "no".', spanish: 'Él dijo "no" claramente.', fullSpanish: '(claro, claramente)', fullEnglish: '(clear, clearly)' },
+                { sentence: 'Die Schrift ist nicht sehr deutlich.', pronunciation: '/di shrift ist nijt sea doyt-lish/', type: 'Adjektiv', english: 'The writing is not very clear.', spanish: 'La escritura no es muy clara.', fullSpanish: '(claro, claramente)', fullEnglish: '(clear, clearly)' },
+                { sentence: 'Es gibt einen deutlichen Unterschied.', pronunciation: '/es guipt ainen doyt-lishen untashid/', type: 'Adjektiv', english: 'There is a clear difference.', spanish: 'Hay una clara diferencia.', fullSpanish: '(claro, claramente)', fullEnglish: '(clear, clearly)' }
+            ],
+            'plötzlich': [
+                { sentence: 'Plötzlich hat es angefangen zu regnen.', pronunciation: '/plots-lish jat es an-gue-fangen tsu regnen/', type: 'Adverb', english: 'Suddenly it started to rain.', spanish: 'De repente empezó a llover.', fullSpanish: '(de repente, súbito)', fullEnglish: '(suddenly)' },
+                { sentence: 'Er ist plötzlich krank geworden.', pronunciation: '/ea ist plots-lish krank gue-vorden/', type: 'Adverb', english: 'He suddenly became ill.', spanish: 'De repente se puso enfermo.', fullSpanish: '(de repente, súbito)', fullEnglish: '(suddenly)' },
+                { sentence: 'Die Tür ging plötzlich auf.', pronunciation: '/di tiua guing plots-lish auf/', type: 'Adverb', english: 'The door suddenly opened.', spanish: 'La puerta se abrió de repente.', fullSpanish: '(de repente, súbito)', fullEnglish: '(suddenly)' },
+                { sentence: 'Ein plötzlicher Schmerz im Bein.', pronunciation: '/ain plots-lisher shmerts im bain/', type: 'Adjektiv', english: 'A sudden pain in the leg.', spanish: 'Un dolor repentino en la pierna.', fullSpanish: '(de repente, súbito)', fullEnglish: '(suddenly)' },
+                { sentence: 'Sie hat plötzlich angehalten.', pronunciation: '/si jat plots-lish an-gue-jalten/', type: 'Adverb', english: 'She suddenly stopped.', spanish: 'Ella se detuvo de repente.', fullSpanish: '(de repente, súbito)', fullEnglish: '(suddenly)' }
+            ],
+            'öffentlich': [
+                { sentence: 'Die Bibliothek ist ein öffentliches Gebäude.', pronunciation: '/di bibliotek ist ain ofent-lishes gue-boide/', type: 'Adjektiv', english: 'The library is a public building.', spanish: 'La biblioteca es un edificio público.', fullSpanish: '(público)', fullEnglish: '(public)' },
+                { sentence: 'Das ist eine öffentliche Veranstaltung.', pronunciation: '/das ist aine ofent-lishe fer-an-shtaltung/', type: 'Adjektiv', english: 'That is a public event.', spanish: 'Ese es un evento público.', fullSpanish: '(público)', fullEnglish: '(public)' },
+                { sentence: 'Rauchen ist hier nicht öffentlich erlaubt.', pronunciation: '/raujen ist jia nijt ofent-lish erlaubt/', type: 'Adverb', english: 'Smoking is not publicly allowed here.', spanish: 'No está permitido fumar en público aquí.', fullSpanish: '(público)', fullEnglish: '(public)' },
+                { sentence: 'Öffentliche Verkehrsmittel sind praktisch.', pronunciation: '/ofent-lishe fer-kers-mitel sint praktish/', type: 'Adjektiv', english: 'Public transport is practical.', spanish: 'El transporte público es práctico.', fullSpanish: '(público)', fullEnglish: '(public)' },
+                { sentence: 'Die Information ist öffentlich zugänglich.', pronunciation: '/di informatsion ist ofent-lish tsu-gueng-lish/', type: 'Adjektiv', english: 'The information is publicly accessible.', spanish: 'La información es de acceso público.', fullSpanish: '(público)', fullEnglish: '(public)' }
+            ],
+            'schrecklich': [
+                { sentence: 'Das Wetter ist heute schrecklich.', pronunciation: '/das veta ist joite shrek-lish/', type: 'Adjektiv', english: 'The weather is awful today.', spanish: 'El tiempo hoy es terrible.', fullSpanish: '(terrible, horrible)', fullEnglish: '(terrible, awful)' },
+                { sentence: 'Der Film war schrecklich langweilig.', pronunciation: '/dea film vaa shrek-lish lang-vai-lig/', type: 'Adverb', english: 'The movie was terribly boring.', spanish: 'La película fue terriblemente aburrida.', fullSpanish: '(terrible, horrible)', fullEnglish: '(terrible, awful)' },
+                { sentence: 'Ich habe schreckliche Kopfschmerzen.', pronunciation: '/ij jabe shrek-lishe kopf-shmertsen/', type: 'Adjektiv', english: 'I have a terrible headache.', spanish: 'Tengo un dolor de cabeza terrible.', fullSpanish: '(terrible, horrible)', fullEnglish: '(terrible, awful)' },
+                { sentence: 'Das war ein schrecklicher Unfall.', pronunciation: '/das vaa ain shrek-lisher un-fal/', type: 'Adjektiv', english: 'That was a terrible accident.', spanish: 'Ese fue un accidente terrible.', fullSpanish: '(terrible, horrible)', fullEnglish: '(terrible, awful)' },
+                { sentence: 'Er singt schrecklich.', pronunciation: '/ea singt shrek-lish/', type: 'Adverb', english: 'He sings terribly.', spanish: 'Él canta terriblemente.', fullSpanish: '(terrible, horrible)', fullEnglish: '(terrible, awful)' }
+            ],
+            'unglaublich': [
+                { sentence: 'Die Aussicht ist unglaublich schön.', pronunciation: '/di aus-sijt ist un-glaub-lish shon/', type: 'Adverb', english: 'The view is unbelievably beautiful.', spanish: 'La vista es increíblemente bonita.', fullSpanish: '(increíble)', fullEnglish: '(unbelievable, incredible)' },
+                { sentence: 'Das ist eine unglaubliche Geschichte.', pronunciation: '/das ist aine un-glaub-lishe gue-shijte/', type: 'Adjektiv', english: 'That is an unbelievable story.', spanish: 'Esa es una historia increíble.', fullSpanish: '(increíble)', fullEnglish: '(unbelievable, incredible)' },
+                { sentence: 'Er hat unglaublich viel Geld.', pronunciation: '/ea jat un-glaub-lish fil guelt/', type: 'Adverb', english: 'He has an incredible amount of money.', spanish: 'Él tiene una cantidad increíble de dinero.', fullSpanish: '(increíble)', fullEnglish: '(unbelievable, incredible)' },
+                { sentence: 'Es ist unglaublich, aber wahr.', pronunciation: '/es ist un-glaub-lish, aba vaa/', type: 'Adjektiv', english: 'It\'s unbelievable, but true.', spanish: 'Es increíble, pero cierto.', fullSpanish: '(increíble)', fullEnglish: '(unbelievable, incredible)' },
+                { sentence: 'Sie hat eine unglaubliche Energie.', pronunciation: '/si jat aine un-glaub-lishe ener-gui/', type: 'Adjektiv', english: 'She has incredible energy.', spanish: 'Ella tiene una energía increíble.', fullSpanish: '(increíble)', fullEnglish: '(unbelievable, incredible)' }
+            ],
+            'monatlich': [
+                { sentence: 'Die Miete bezahle ich monatlich.', pronunciation: '/di mite be-tsale ij monat-lish/', type: 'Adverb', english: 'I pay the rent monthly.', spanish: 'Pago el alquiler mensualmente.', fullSpanish: '(mensual, mensualmente)', fullEnglish: '(monthly)' },
+                { sentence: 'Das Magazin erscheint monatlich.', pronunciation: '/das magatsin er-shaint monat-lish/', type: 'Adverb', english: 'The magazine is published monthly.', spanish: 'La revista se publica mensualmente.', fullSpanish: '(mensual, mensualmente)', fullEnglish: '(monthly)' },
+                { sentence: 'Wir haben eine monatliche Besprechung.', pronunciation: '/via jaben aine monat-lishe be-shprejung/', type: 'Adjektiv', english: 'We have a monthly meeting.', spanish: 'Tenemos una reunión mensual.', fullSpanish: '(mensual, mensualmente)', fullEnglish: '(monthly)' },
+                { sentence: 'Mein monatliches Gehalt ist gut.', pronunciation: '/main monat-lishes gue-jalt ist gut/', type: 'Adjektiv', english: 'My monthly salary is good.', spanish: 'Mi salario mensual es bueno.', fullSpanish: '(mensual, mensualmente)', fullEnglish: '(monthly)' },
+                { sentence: 'Die Raten sind monatlich zu zahlen.', pronunciation: '/di raten sint monat-lish tsu tsalen/', type: 'Adverb', english: 'The installments are to be paid monthly.', spanish: 'Las cuotas se deben pagar mensualmente.', fullSpanish: '(mensual, mensualmente)', fullEnglish: '(monthly)' }
+            ],
+            'jährlich': [
+                { sentence: 'Das Festival findet jährlich statt.', pronunciation: '/das festival findet yer-lish shtat/', type: 'Adverb', english: 'The festival takes place annually.', spanish: 'El festival tiene lugar anualmente.', fullSpanish: '(anual, anualmente)', fullEnglish: '(yearly, annually)' },
+                { sentence: 'Wir machen eine jährliche Reise.', pronunciation: '/via majen aine yer-lishe raise/', type: 'Adjektiv', english: 'We take a yearly trip.', spanish: 'Hacemos un viaje anual.', fullSpanish: '(anual, anualmente)', fullEnglish: '(yearly, annually)' },
+                { sentence: 'Der Bericht wird jährlich veröffentlicht.', pronunciation: '/dea berijt virt yer-lish fer-ofent-lisht/', type: 'Adverb', english: 'The report is published annually.', spanish: 'El informe se publica anualmente.', fullSpanish: '(anual, anualmente)', fullEnglish: '(yearly, annually)' },
+                { sentence: 'Die jährliche Gebühr ist 50 Euro.', pronunciation: '/di yer-lishe gue-biua ist fiunftsig oyro/', type: 'Adjektiv', english: 'The annual fee is 50 euros.', spanish: 'La cuota anual es de 50 euros.', fullSpanish: '(anual, anualmente)', fullEnglish: '(yearly, annually)' },
+                { sentence: 'Er bekommt jährlich einen Bonus.', pronunciation: '/ea bekomt yer-lish ainen bonus/', type: 'Adverb', english: 'He gets a bonus annually.', spanish: 'Él recibe un bono anualmente.', fullSpanish: '(anual, anualmente)', fullEnglish: '(yearly, annually)' }
+            ],
+            'gewöhnlich': [
+                { sentence: 'Er steht gewöhnlich um 7 Uhr auf.', pronunciation: '/ea shtet gue-von-lish um siben ua auf/', type: 'Adverb', english: 'He usually gets up at 7 o\'clock.', spanish: 'Él se levanta habitualmente a las 7.', fullSpanish: '(usual, habitualmente)', fullEnglish: '(usual, usually)' },
+                { sentence: 'Das ist ein ganz gewöhnlicher Tag.', pronunciation: '/das ist ain gants gue-von-lisher tag/', type: 'Adjektiv', english: 'That is a very usual day.', spanish: 'Ese es un día muy normal.', fullSpanish: '(usual, habitualmente)', fullEnglish: '(usual, usually)' },
+                { sentence: 'Gewöhnlich esse ich mittags nur einen Salat.', pronunciation: '/gue-von-lish ese ij mitags nua ainen salat/', type: 'Adverb', english: 'Usually, I only eat a salad for lunch.', spanish: 'Habitualmente solo como una ensalada para almorzar.', fullSpanish: '(usual, habitualmente)', fullEnglish: '(usual, usually)' },
+                { sentence: 'Es ist gewöhnlich, dass es im Winter schneit.', pronunciation: '/es ist gue-von-lish, das es im vinta shnait/', type: 'Adjektiv', english: 'It is usual for it to snow in winter.', spanish: 'Es habitual que nieve en invierno.', fullSpanish: '(usual, habitualmente)', fullEnglish: '(usual, usually)' },
+                { sentence: 'Das ist nicht der gewöhnliche Weg.', pronunciation: '/das ist nijt dea gue-von-lishe veg/', type: 'Adjektiv', english: 'That is not the usual way.', spanish: 'Ese no es el camino habitual.', fullSpanish: '(usual, habitualmente)', fullEnglish: '(usual, usually)' }
+            ]
         };
         
         // --- Base de datos de historias guardadas ---
@@ -426,11 +943,12 @@
         ];
         let storyClickCounter = 0;
 
-        // --- Contador para los ejemplos guardados ---
-        const exampleCounters = {};
-        Object.keys(savedExamples).forEach(word => {
-            exampleCounters[word] = 0;
-        });
+        // --- Variables globales para el modal ---
+        let currentWord = '';
+        let currentExampleIndex = 0;
+        let currentEmoji = '';
+        const germanOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes"];
+
 
         // --- Gemini API Call Logic ---
         const API_KEY = ""; // No es necesaria una clave para el modelo flash
@@ -438,13 +956,65 @@
         
         // --- Funciones del Modal ---
         const modal = document.getElementById('example-modal');
+        const modalWord = document.getElementById('modal-word');
+        const modalEmoji = document.getElementById('modal-emoji');
+        const modalFullSpanish = document.getElementById('modal-full-spanish');
         const modalText = document.getElementById('modal-text');
+        const modalPronunciation = document.getElementById('modal-pronunciation');
+        const modalSpanishTranslation = document.getElementById('modal-spanish-translation');
+        const modalInfo = document.getElementById('modal-info');
+        const exampleCounter = document.getElementById('example-counter');
         const closeModalButton = document.getElementById('close-modal');
+        const prevButton = document.getElementById('prev-example-button');
+        const nextButton = document.getElementById('next-example-button');
+        const playWordAudioButton = document.getElementById('play-word-audio-button');
+        const playSentenceAudioButton = document.getElementById('play-sentence-audio-button');
 
-        function showModal(text) {
-            modalText.textContent = text;
+        function openExampleModal(word, emoji) {
+            currentWord = word;
+            currentEmoji = emoji;
+            currentExampleIndex = 0;
+            updateModalContent();
             modal.classList.add('visible');
         }
+
+        function updateModalContent() {
+            const exampleData = savedExamples[currentWord][currentExampleIndex];
+            modalWord.textContent = currentWord;
+            modalEmoji.textContent = currentEmoji;
+            modalFullSpanish.innerHTML = `🇪🇸 ${exampleData.fullSpanish}<br>🇬🇧 ${exampleData.fullEnglish}<br><span class="modal-type-info">Tipo: ${exampleData.type}</span>`;
+            modalText.textContent = exampleData.sentence;
+            modalPronunciation.textContent = exampleData.pronunciation;
+            modalSpanishTranslation.innerHTML = `🇪🇸 ${exampleData.spanish}`;
+            modalInfo.innerHTML = `🇬🇧 ${exampleData.english}`;
+            exampleCounter.textContent = `${germanOrdinals[currentExampleIndex]} Beispiel von 5`;
+        }
+
+        function nextExample() {
+            currentExampleIndex = (currentExampleIndex + 1) % 5;
+            updateModalContent();
+        }
+
+        function prevExample() {
+            currentExampleIndex = (currentExampleIndex - 1 + 5) % 5;
+            updateModalContent();
+        }
+        
+        function playAudio(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'de-DE';
+                utterance.rate = 0.6; // 40% más lento que la velocidad normal (1.0)
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('Lo siento, tu navegador no soporta la síntesis de voz.');
+            }
+        }
+
+        prevButton.addEventListener('click', prevExample);
+        nextButton.addEventListener('click', nextExample);
+        playWordAudioButton.addEventListener('click', () => playAudio(currentWord));
+        playSentenceAudioButton.addEventListener('click', () => playAudio(modalText.textContent));
 
         function hideModal() {
             modal.classList.remove('visible');
@@ -456,6 +1026,41 @@
                 hideModal();
             }
         });
+
+        // --- Active Recall Feature ---
+        const recallSwitch = document.getElementById('recall-switch');
+        const translations = document.querySelectorAll('.spanish-translation');
+
+        recallSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                translations.forEach(span => {
+                    span.style.opacity = '1';
+                    span.style.visibility = 'visible';
+                });
+            } else {
+                translations.forEach(span => {
+                    span.style.opacity = '0';
+                    setTimeout(() => { span.style.visibility = 'hidden'; }, 300);
+                });
+            }
+        });
+
+        // Initialize switch state
+        function setInitialTranslationState() {
+            if (recallSwitch.checked) {
+                translations.forEach(span => {
+                    span.style.visibility = 'visible';
+                    span.style.opacity = '1';
+                });
+            } else {
+                translations.forEach(span => {
+                    span.style.visibility = 'hidden';
+                    span.style.opacity = '0';
+                });
+            }
+        }
+        setInitialTranslationState();
+
 
         // --- Lógica para reintentos de API (Exponential Backoff) ---
         async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
@@ -470,43 +1075,7 @@
             }
             throw new Error("API request failed after multiple retries.");
         }
-
-        // --- Función para generar un ejemplo de una sola palabra ---
-        async function generateExample(word) {
-            const counter = exampleCounters[word];
-            
-            if (counter < 3) {
-                const example = savedExamples[word][counter];
-                showModal(example);
-                exampleCounters[word]++;
-                return;
-            }
-
-            showModal("Generando un nuevo ejemplo con IA...");
-
-            const prompt = `Crea una oración simple en alemán de nivel A1 usando la palabra '${word}'. La oración debe ser fácil de entender para un principiante. No incluyas la traducción.`;
-            
-            const payload = {
-                contents: [{
-                    parts: [{ text: prompt }]
-                }]
-            };
-
-            try {
-                const response = await fetchWithRetry(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                const result = await response.json();
-                const generatedText = result.candidates[0].content.parts[0].text;
-                showModal(generatedText.trim());
-            } catch (error) {
-                showModal("Lo siento, no se pudo generar un ejemplo en este momento. Por favor, inténtalo de nuevo.");
-                console.error("Error fetching Gemini API:", error);
-            }
-        }
-
+        
         // --- Función para generar una historia ---
         async function generateStory() {
             const storyContainer = document.getElementById('story-container');
@@ -545,10 +1114,8 @@
                 const result = await response.json();
                 let generatedText = result.candidates[0].content.parts[0].text;
                 
-                // Limpiar asteriscos por si acaso
                 generatedText = generatedText.replace(/\*/g, '');
 
-                // Resaltar las palabras de la lista en la historia
                 words.forEach(word => {
                     const regex = new RegExp(`\\b(${word})\\b`, 'gi');
                     generatedText = generatedText.replace(regex, '<span class="highlighted-word">$1</span>');

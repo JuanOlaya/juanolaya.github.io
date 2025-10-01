@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palabras en Alemán con -lich</title>
+    <!-- Carga de la fuente para el estilo de tiza -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Alineado al inicio */
+            min-height: 100%;
+            margin: 0;
+            background-color: #FFA985; /* Color de fondo */
+            padding: 20px;
+            font-family: 'Nunito', sans-serif;
+        }
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+            background-color: #FFF5EE; /* Seashell (Salmón muy claro) */
+            border: 10px solid #D9534F; /* Nuevo color de marco, igual al botón */
+            border-radius: 20px; /* Rounded corners for the inner container */
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .header {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .level-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 60px;
+            background-color: #D9534F; /* Rojo oscuro */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .title {
+            font-family: 'Kalam', cursive;
+            font-size: 3rem;
+            color: #333;
+            padding-top: 1rem;
+            border-bottom: 3px dashed #CD5C5C; /* Indian Red, darker salmon */
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem; /* Espacio entre tarjetas */
+        }
+        .word-item {
+            position: relative; /* Contenedor para el tooltip */
+            background-color: #FFE4E1; /* Misty Rose (Salmón claro) */
+            border-radius: 8px;
+            padding: 1.5rem;
+            width: 280px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        .word-item:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .word-item:nth-child(even):hover {
+            transform: scale(1.05) rotate(-1deg);
+        }
+        .word-item-content {
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+        .emoji {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+            text-shadow: none; 
+        }
+        .text-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .german-word {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: black;
+        }
+        .spanish-translation {
+            font-size: 1rem;
+            color: #555;
+            margin-top: -5px;
+        }
+        
+        /* Estilos para el Tooltip */
+        .tooltip {
+            visibility: hidden;
+            width: 240px;
+            background-color: #333;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 115%;
+            left: 50%;
+            margin-left: -120px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+        .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+        .word-item:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        .tooltip-example {
+            color: #ccc;
+        }
+
+        /* Gemini API Features */
+        .story-container {
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 8px;
+            color: black;
+            display: none;
+            max-width: 800px;
+            text-align: left;
+        }
+        .story-container h3 {
+            font-family: 'Kalam', cursive;
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        #story-button {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 12px 24px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            background-color: #D9534F; /* Rojo oscuro */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #story-button:hover {
+            background-color: #c9302c; /* Tono más oscuro para el hover */
+        }
+        .button-translation {
+            display: block;
+            font-size: 0.8rem;
+            font-style: italic;
+            font-weight: 400;
+            margin-top: 2px;
+        }
+        .loader {
+            text-align: center;
+        }
+        .highlighted-word {
+            color: #D32F2F;
+            font-weight: 700;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            font-size: 1.2rem;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        #close-modal {
+            margin-top: 1.5rem;
+            padding: 8px 16px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="header">
+            <div class="level-indicator">A1</div>
+            <h1 class="title">A1 Wörter auf -lich</h1>
+        </div>
+        
+        <div class="cards-container">
+            <div class="word-item" onclick="generateExample('freundlich')">
+                <div class="word-item-content">
+                    <span class="emoji">😊</span>
+                    <div class="text-container">
+                        <span class="german-word">freundlich</span>
+                        <span class="spanish-translation">(amigable, amable)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Er ist sehr freundlich.</span><br>/ea ist sea froind-lish/<br>🇬🇧 friendly, kind<br>Tipo: Adjektiv/Adverb</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('täglich')">
+                <div class="word-item-content">
+                    <span class="emoji">📅</span>
+                    <div class="text-container">
+                        <span class="german-word">täglich</span>
+                        <span class="spanish-translation">(diario, cada día)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Ich lerne täglich Deutsch.</span><br>/ij lerne teg-lish doitsh/<br>🇬🇧 daily<br>Tipo: Adjektiv/Adverb</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('pünktlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">⏰</span>
+                    <div class="text-container">
+                        <span class="german-word">pünktlich</span>
+                        <span class="spanish-translation">(puntual)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Der Bus ist pünktlich.</span><br>/dea bus ist punkt-lish/<br>🇬🇧 punctual, on time<br>Tipo: Adjektiv/Adverb</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('glücklich')">
+                 <div class="word-item-content">
+                    <span class="emoji">😄</span>
+                    <div class="text-container">
+                        <span class="german-word">glücklich</span>
+                        <span class="spanish-translation">(feliz, afortunado)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Ich bin sehr glücklich.</span><br>/ij bin sea gliuk-lish/<br>🇬🇧 happy, lucky<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('natürlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">🌱</span>
+                    <div class="text-container">
+                        <span class="german-word">natürlich</span>
+                        <span class="spanish-translation">(por supuesto, natural)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Kommst du mit? Natürlich!</span><br>/kommst du mit? na-tiur-lish!/<br>🇬🇧 of course, natural<br>Tipo: Adverb/Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('möglich')">
+                 <div class="word-item-content">
+                    <span class="emoji">✅</span>
+                    <div class="text-container">
+                        <span class="german-word">möglich</span>
+                        <span class="spanish-translation">(posible)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Ist das möglich?</span><br>/ist das miog-lish/<br>🇬🇧 possible<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('persönlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">👤</span>
+                    <div class="text-container">
+                        <span class="german-word">persönlich</span>
+                        <span class="spanish-translation">(personal)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Das ist meine persönliche Meinung.</span><br>/das ist maine per-son-lishe mainung/<br>🇬🇧 personal, personally<br>Tipo: Adjektiv/Adverb</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('gemütlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">🛋️</span>
+                    <div class="text-container">
+                        <span class="german-word">gemütlich</span>
+                        <span class="spanish-translation">(acogedor, cómodo)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Die Wohnung ist gemütlich.</span><br>/di vonung ist gue-miut-lish/<br>🇬🇧 cozy, comfortable<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('hässlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">🤢</span>
+                    <div class="text-container">
+                        <span class="german-word">hässlich</span>
+                        <span class="spanish-translation">(feo)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Das Wetter ist hässlich.</span><br>/das veta ist jes-lish/<br>🇬🇧 ugly<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('sportlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">⚽️</span>
+                    <div class="text-container">
+                        <span class="german-word">sportlich</span>
+                        <span class="spanish-translation">(deportivo)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Mein Bruder ist sehr sportlich.</span><br>/main bruda ist sea shport-lish/<br>🇬🇧 sporty, athletic<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('weiblich')">
+                 <div class="word-item-content">
+                    <span class="emoji">🚺</span>
+                    <div class="text-container">
+                        <span class="german-word">weiblich</span>
+                        <span class="spanish-translation">(femenino)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Bitte ankreuzen: weiblich.</span><br>/bite an-kroitzen: vaib-lish/<br>🇬🇧 female<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+            <div class="word-item" onclick="generateExample('männlich')">
+                 <div class="word-item-content">
+                    <span class="emoji">🚹</span>
+                    <div class="text-container">
+                        <span class="german-word">männlich</span>
+                        <span class="spanish-translation">(masculino)</span>
+                    </div>
+                    <span class="tooltip"><span class="tooltip-example">🇩🇪 Bitte ankreuzen: männlich.</span><br>/bite an-kroitzen: men-lish/<br>🇬🇧 male<br>Tipo: Adjektiv</span>
+                </div>
+            </div>
+        </div>
+
+        <button id="story-button" onclick="generateStory()">
+            Mit einer Geschichte üben
+            <span class="button-translation">(Practicar con una Historia)</span>
+        </button>
+        <div id="story-container" class="story-container">
+            <h3>Eine kleine Geschichte...</h3>
+            <div id="story-content"></div>
+        </div>
+    </div>
+
+    <!-- Modal para mostrar el ejemplo generado -->
+    <div id="example-modal" class="modal-overlay">
+        <div class="modal-content">
+            <p id="modal-text"></p>
+            <button id="close-modal">
+                <strong>Schließen</strong>
+                <span class="button-translation">(Cerrar)</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- Base de datos de ejemplos guardados ---
+        const savedExamples = {
+            'freundlich': ['Die Lehrerin ist sehr freundlich.', 'Ihr Lächeln ist freundlich.', 'Danke, das ist sehr freundlich von Ihnen.'],
+            'täglich': ['Ich trinke täglich zwei Liter Wasser.', 'Die Zeitung kommt täglich.', 'Fast alle Geschäfte sind täglich geöffnet.'],
+            'pünktlich': ['Der Zug nach Berlin ist pünktlich.', 'Bitte seien Sie morgen pünktlich.', 'Er kommt nie pünktlich zur Arbeit.'],
+            'glücklich': ['Wir sind zusammen sehr glücklich.', 'Ein glückliches neues Jahr!', 'Sie hat ein glückliches Lächeln.'],
+            'natürlich': ['Natürlich helfe ich dir gerne.', 'Das ist ein natürlicher Saft ohne Zucker.', 'Er spricht sehr natürlich.'],
+            'möglich': ['Eine Reservierung ist leider nicht mehr möglich.', 'Kannst du bitte so schnell wie möglich kommen?', 'Gibt es eine andere mögliche Lösung?'],
+            'persönlich': ['Ich habe eine persönliche Frage.', 'Sie müssen den Brief persönlich abgeben.', 'Das ist nichts Persönliches.'],
+            'gemütlich': ['Mein Zimmer ist klein, aber sehr gemütlich.', 'Am Sonntag machen wir einen gemütlichen Abend.', 'Setz dich, mach es dir gemütlich.'],
+            'hässlich': ['Ich finde diese Farbe hässlich.', 'Das ist ein sehr hässlicher Hund.', 'Warum bist du so hässlich zu mir?'],
+            'sportlich': ['Meine Schwester ist sehr sportlich.', 'Er trägt immer sportliche Kleidung.', 'Ich bin nicht sehr sportlich.'],
+            'weiblich': ['Unser Hund ist weiblich.', 'In meinem Kurs sind mehr weibliche Teilnehmer.', 'Die weibliche Form von "Arzt" ist "Ärztin".'],
+            'männlich': ['Der Chef ist männlich.', 'Suchen Sie einen männlichen oder weiblichen Arzt?', 'Das ist ein typisch männlicher Name.']
+        };
+        
+        // --- Base de datos de historias guardadas ---
+        const savedStories = [
+            `Mein neuer Kollege heißt Marco. Er ist ein sehr <span class="highlighted-word">freundlicher</span> und <span class="highlighted-word">männlicher</span> Lehrer aus Italien. Marco ist auch sehr <span class="highlighted-word">sportlich</span>; er spielt am Wochenende Fußball. Er kommt <span class="highlighted-word">täglich</span> mit dem Fahrrad zur Arbeit, auch wenn das Wetter schlecht ist. Das ist super, denn er ist immer <span class="highlighted-word">pünktlich</span> und nie zu spät.`,
+            `Ich bin sehr <span class="highlighted-word">glücklich</span>, denn ich habe eine neue Wohnung! Sie ist klein, aber sehr <span class="highlighted-word">gemütlich</span>, mit einem Sofa und vielen Kissen. Für mich <span class="highlighted-word">persönlich</span> ist das perfekt. Ich habe viele Pflanzen, das sieht sehr <span class="highlighted-word">natürlich</span> und schön aus. Ist es <span class="highlighted-word">möglich</span>, dass du mich am Samstag besuchst? Wir können zusammen Kaffee trinken.`,
+            `Ich brauche Hilfe mit einem Formular. Hier steht: <span class="highlighted-word">männlich</span> oder <span class="highlighted-word">weiblich</span>? Ich kreuze <span class="highlighted-word">weiblich</span> an. Aber mein Passfoto ist wirklich <span class="highlighted-word">hässlich</span>! Meine Haare sehen komisch aus. <span class="highlighted-word">Natürlich</span> kann ich das nicht benutzen. Ist es <span class="highlighted-word">möglich</span>, heute ein neues Foto zu machen? Ich hoffe es.`
+        ];
+        let storyClickCounter = 0;
+
+        // --- Contador para los ejemplos guardados ---
+        const exampleCounters = {};
+        Object.keys(savedExamples).forEach(word => {
+            exampleCounters[word] = 0;
+        });
+
+        // --- Gemini API Call Logic ---
+        const API_KEY = ""; // No es necesaria una clave para el modelo flash
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${API_KEY}`;
+        
+        // --- Funciones del Modal ---
+        const modal = document.getElementById('example-modal');
+        const modalText = document.getElementById('modal-text');
+        const closeModalButton = document.getElementById('close-modal');
+
+        function showModal(text) {
+            modalText.textContent = text;
+            modal.classList.add('visible');
+        }
+
+        function hideModal() {
+            modal.classList.remove('visible');
+        }
+
+        closeModalButton.addEventListener('click', hideModal);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                hideModal();
+            }
+        });
+
+        // --- Lógica para reintentos de API (Exponential Backoff) ---
+        async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.ok) return response;
+                } catch (error) {
+                    // Ignorar errores de red para reintentar
+                }
+                await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
+            }
+            throw new Error("API request failed after multiple retries.");
+        }
+
+        // --- Función para generar un ejemplo de una sola palabra ---
+        async function generateExample(word) {
+            const counter = exampleCounters[word];
+            
+            if (counter < 3) {
+                const example = savedExamples[word][counter];
+                showModal(example);
+                exampleCounters[word]++;
+                return;
+            }
+
+            showModal("Generando un nuevo ejemplo con IA...");
+
+            const prompt = `Crea una oración simple en alemán de nivel A1 usando la palabra '${word}'. La oración debe ser fácil de entender para un principiante. No incluyas la traducción.`;
+            
+            const payload = {
+                contents: [{
+                    parts: [{ text: prompt }]
+                }]
+            };
+
+            try {
+                const response = await fetchWithRetry(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                const generatedText = result.candidates[0].content.parts[0].text;
+                showModal(generatedText.trim());
+            } catch (error) {
+                showModal("Lo siento, no se pudo generar un ejemplo en este momento. Por favor, inténtalo de nuevo.");
+                console.error("Error fetching Gemini API:", error);
+            }
+        }
+
+        // --- Función para generar una historia ---
+        async function generateStory() {
+            const storyContainer = document.getElementById('story-container');
+            const storyContent = document.getElementById('story-content');
+            const storyButton = document.getElementById('story-button');
+            
+            storyContainer.style.display = 'block';
+            storyButton.disabled = true;
+
+            if (storyClickCounter < 3) {
+                storyContent.innerHTML = `<p>${savedStories[storyClickCounter]}</p>`;
+                storyClickCounter++;
+                storyButton.disabled = false;
+                return;
+            }
+
+            storyContent.innerHTML = '<div class="loader">✨ Creando una nueva historia con IA...</div>';
+
+            const words = Array.from(document.querySelectorAll('.german-word')).map(el => el.textContent);
+            const wordList = words.join(', ');
+
+            const prompt = `Escribe una historia muy corta y simple en alemán de nivel A1. Usa tantas de las siguientes palabras como sea posible: ${wordList}. La historia debe ser fácil de entender para un principiante. No incluyas la traducción. No uses asteriscos u otro formato de markdown para resaltar las palabras.`;
+
+            const payload = {
+                contents: [{
+                    parts: [{ text: prompt }]
+                }]
+            };
+
+            try {
+                const response = await fetchWithRetry(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                let generatedText = result.candidates[0].content.parts[0].text;
+                
+                // Limpiar asteriscos por si acaso
+                generatedText = generatedText.replace(/\*/g, '');
+
+                // Resaltar las palabras de la lista en la historia
+                words.forEach(word => {
+                    const regex = new RegExp(`\\b(${word})\\b`, 'gi');
+                    generatedText = generatedText.replace(regex, '<span class="highlighted-word">$1</span>');
+                });
+
+                storyContent.innerHTML = `<p>${generatedText.replace(/\n/g, '<br>')}</p>`;
+            } catch (error) {
+                storyContent.textContent = "Lo siento, no se pudo generar una historia. Por favor, inténtalo de nuevo.";
+                console.error("Error fetching Gemini API:", error);
+            } finally {
+                storyButton.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
