@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainstorming Haptic Cards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* A simple, clean font for better readability */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for modality tags if needed */
+        .cutaneous {
+            background-color: #28a745; /* Green */
+        }
+        .kinesthetic {
+            background-color: #dc3545; /* Red */
+        }
+        .gemini-ideas ul {
+            list-style-position: inside;
+            padding-left: 0.5rem;
+        }
+         .gemini-ideas li {
+            margin-bottom: 0.5rem;
+        }
+        .loader {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#85D4FF] text-gray-800 p-4 sm:p-6 md:p-8">
+
+    <header class="text-center mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">Brainstorming Haptic Cards</h1>
+        <p class="text-md text-gray-600 mt-2">An interactive collection of handheld VR controllers for ideation.</p>
+    </header>
+    
+    <main id="card-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Cards will be dynamically inserted here by JavaScript -->
+    </main>
+
+    <footer class="mt-12 pt-8 border-t border-gray-300">
+        <!-- Toggle for Gemini Feature -->
+        <div class="flex justify-center items-center">
+            <label for="toggle-ideas" class="flex items-center cursor-pointer">
+                <span class="mr-3 text-gray-700 font-medium">Show "Generate Ideas" Feature</span>
+                <div class="relative">
+                    <input type="checkbox" id="toggle-ideas" class="sr-only peer">
+                    <div class="block w-14 h-8 bg-gray-300 rounded-full"></div>
+                    <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-300 ease-in-out peer-checked:translate-x-full peer-checked:bg-blue-600"></div>
+                </div>
+            </label>
+        </div>
+    </footer>
+    
+    <!-- Modal for Concept Explainer -->
+    <div id="explainer-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl max-w-lg w-full p-6 relative">
+            <button id="modal-close-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h2 id="modal-title" class="text-2xl font-bold text-gray-900 mb-4">Concept Name</h2>
+            <div id="modal-content" class="text-gray-700">
+                <!-- Gemini explanation will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Data derived from the provided table, now with image and DOI URLs
+        const devices = [
+            // Air-propulsion
+            { name: "Aero-plane", mechanism: "Propellers render forces for weight shifting.", useCase: "Simulating flight dynamics, wind forces, and wielding large, heavy objects.", submodalities: ["Impact", "Motion", "Resistance", "Weight distribution", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Aero-plane", doi: "10.1145/3332165.3347926" },
+            { name: "AirCharge", mechanism: "Compressed air jets create sharp impacts.", useCase: "Feeling the impact of virtual projectiles or sharp haptic alerts.", submodalities: ["Impact"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=AirCharge", doi: "10.1145/3586183.3606768" },
+            { name: "AirRacket", mechanism: "Compressed air jets generate racket impact.", useCase: "Simulating ball impacts in racket sports like tennis or badminton.", submodalities: ["Impact"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=AirRacket", doi: "10.1145/3491102.3502034" },
+            { name: "JetController", mechanism: "Compressed air jets generate 3D forces.", useCase: "Providing continuous force feedback for flight simulation or virtual object manipulation.", submodalities: ["Impact"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=JetController", doi: "10.1145/3411764.3445549" },
+            { name: "LevioPole", mechanism: "Propellers create vertical force and torque.", useCase: "Interacting with pole-shaped objects like fishing rods, magic wands, or levers.", submodalities: ["Resistance", "Weight distribution", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=LevioPole", doi: "10.1145/3214907.3214913" },
+            { name: "Thor's Hammer", mechanism: "Propellers generate linear force and torque.", useCase: "Simulating the momentum and impact of wielding heavy virtual tools like a hammer.", submodalities: ["Motion", "Resistance", "Weight distribution", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Thor's+Hammer", doi: "10.1145/3173574.3174099" },
+            // Fingertip
+            { name: "HairTouch", mechanism: "Hair array with servo control.", useCase: "Rendering fine textures and soft surfaces by stroking a bed of fine hairs.", submodalities: ["Stiffness", "Fine vibration", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=HairTouch", doi: "10.1145/3411764.3445285" },
+            { name: "Haptic Handshank", mechanism: "Peltier and vibros for thermal & tactile cues.", useCase: "Simulating tool interactions, like the heat and vibration of a virtual drill.", submodalities: ["Thermal", "Stiffness", "Fine vibration", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Haptic+Handshank", doi: "10.1109/ISMAR50242.2020.00047" },
+            { name: "Haptic Palette", mechanism: "Rotating disc presents physical textures.", useCase: "Providing a variety of distinct, high-fidelity textures for exploration on a single surface.", submodalities: ["Friction", "Fine vibration"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Haptic+Palette", doi: "10.1145/3393914.3395870" },
+            { name: "Haptic Revolver", mechanism: "Motorized wheel renders textures on fingertip.", useCase: "Simulating interactions with virtual objects having dynamic states, like a clickable button or a knob.", submodalities: ["Friction", "Fine vibration", "Resistance", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Haptic+Revolver", doi: "10.1145/3173574.3173660" },
+            { name: "Kurita et al.", mechanism: "Motor controls slip for weight & friction.", useCase: "Displaying the perception of weight and friction by inducing skin slip on the fingertip.", submodalities: ["Friction", "Weight amount", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Kurita+et+al.", doi: "10.1109/IROS.2011.6094613" },
+            { name: "Mouillé", mechanism: "Peltier element cools fingers for wetness feel.", useCase: "Simulating the sensation of touching wet or cold surfaces, like a window with condensation.", submodalities: ["Thermal", "Friction"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Mouillé", doi: "10.1145/3313831.3376138" },
+            { name: "NormalTouch", mechanism: "Tilting platform renders surface geometry.", useCase: "Rendering the 3D shape and orientation of a small virtual surface under the fingertip.", submodalities: ["Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=NormalTouch", doi: "10.1145/2984511.2984526" },
+            { name: "TapeTouch", mechanism: "Motor controls fabric tape for softness cues.", useCase: "Rendering different levels of softness by controlling the tension of a fabric tape.", submodalities: ["Stiffness", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=TapeTouch", doi: "10.1109/TVCG.2022.3203087" },
+            { name: "Guinan et al.", mechanism: "Thumb module uses rollers to stretch skin.", useCase: "Providing directional force cues to the thumb for navigation or object manipulation.", submodalities: ["Resistance"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Guinan+et+al.", doi: "10.1109/HAVE.2012.6374430" },
+            { name: "TORC", mechanism: "Voice coils vibrate for texture from a held object.", useCase: "Simulating the feeling of texture being transmitted through a held tool, like a pen on paper.", submodalities: ["Stiffness", "Fine vibration", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=TORC", doi: "10.1145/3290605.3300301" },
+            // Grip-form
+            { name: "GamesBond", mechanism: "Passive add-ons alter controller ergonomics.", useCase: "Quickly changing the physical shape of a controller to match different virtual tools (e.g., gun, stick).", submodalities: ["Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=GamesBond", doi: "10.1145/3411764.3445727" },
+            { name: "MimicTile", mechanism: "Reconfigurable magnetic blocks create shape.", useCase: "Creating tangible, reconfigurable interfaces and props for VR/AR environments.", submodalities: ["Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=MimicTile", doi: "10.1145/2207676.2207782" },
+            { name: "PaCaPa", mechanism: "Motorized panels apply pressure to the palm.", useCase: "Simulating the feeling of grasping or holding objects of varying shapes by applying pressure patterns.", submodalities: ["Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=PaCaPa", doi: "10.1145/3290605.3300682" },
+            { name: "PoCoPo", mechanism: "Motorized pin array displays shape in palm.", useCase: "Rendering the 3D shape of a virtual object directly into the user's palm.", submodalities: ["Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=PoCoPo", doi: "10.1145/3313831.3376358" },
+            { name: "PuPoP", mechanism: "Pneumatic airbags pop up to form shapes.", useCase: "Changing the controller's shape to represent different grip types or object states.", submodalities: ["Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=PuPoP", doi: "10.1145/3242587.3242628" },
+            { name: "Reactive Grip", mechanism: "Sliding plates create lateral shear forces.", useCase: "Simulating the forces of holding an object, such as the recoil of a gun or the tug of a fish on a line.", submodalities: ["Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Reactive+Grip", doi: "10.1007/978-3-319-42321-0_17" },
+            { name: "SqueezeBlock", mechanism: "Inflatable bladder simulates compliance.", useCase: "Rendering the sensation of squeezing soft or compliant objects, like a stress ball or fruit.", submodalities: ["Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=SqueezeBlock", doi: "10.1109/ICFPT59805.2023.00032" },
+            { name: "Schorr et al.", mechanism: "Squeezable prop with jamming stiffness.", useCase: "Creating a prop with controllable stiffness for interacting with deformable virtual objects.", submodalities: ["Stiffness", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Schorr+et+al.", doi: "10.1109/ROBOSOFT.2018.8404930" },
+            { name: "X-Rings", mechanism: "Concentric rings rise to form grip shapes.", useCase: "Dynamically forming different grip affordances, such as a handle, knob, or sphere.", submodalities: ["Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=X-Rings", doi: "10.1145/3472749.3474782" },
+            // Mass-shifting
+            { name: "Mizuno et al.", mechanism: "Slider-crank creates asymmetric vibration.", useCase: "Creating a sensation of constant force in one direction using vibrotactile stimuli.", submodalities: ["Fine vibration", "Weight amount", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Mizuno+et+al.", doi: "10.1109/ECTICon.2013.6559590" },
+            { name: "Dominjon et al.", mechanism: "Cube-shaped gyro for heaviness perception.", useCase: "Simulating the inertial properties (heaviness, sloshing) of virtual objects.", submodalities: ["Weight amount", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Dominjon+et+al.", doi: "10.1109/TOH.2008.5" },
+            { name: "ElastOscillation", mechanism: "Motorized elastic bands create oscillations.", useCase: "Simulating the feeling of impacts or continuous oscillations through a handheld device.", submodalities: ["Resistance"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=ElastOscillation", doi: "10.1145/3313831.3376408" },
+            { name: "ElaStick", mechanism: "Motorized tendons render variable stiffness.", useCase: "Creating a stick-like controller that can simulate varying levels of flexibility or resistance.", submodalities: ["Stiffness", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=ElaStick", doi: "10.1145/3379337.3415862" },
+            { name: "Rekimoto et al.", mechanism: "Phone-form device shifts center of mass.", useCase: "Enhancing graphical user interfaces on mobile devices with weight-shifting feedback.", submodalities: ["Weight distribution", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Rekimoto+et+al.", doi: "10.1145/1753846.1753922" },
+            { name: "Shifty", mechanism: "Motor moves a mass to shift center of gravity.", useCase: "Simulating the weight and balance of virtual objects like containers with moving contents.", submodalities: ["Resistance", "Weight amount", "Weight distribution", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Shifty", doi: "10.1109/TVCG.2017.2656978" },
+            { name: "SWISH", mechanism: "Motors move a mass to shift center of gravity", useCase: "Rendering the sensation of fluids sloshing inside a held virtual container.", submodalities: ["Resistance", "Weight distribution", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=SWISH", doi: "10.1145/3332165.3347870" },
+            { name: "TorqueBAR", mechanism: "Moving weights generate rotational torque.", useCase: "Simulating the rotational forces (torque) of wielding objects like a baseball bat or steering wheel.", submodalities: ["Weight distribution", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=TorqueBAR", doi: "10.1145/958432.958445" },
+            { name: "Transcalibur", mechanism: "Reconfigures shape and center of mass.", useCase: "Interacting with virtual tools and sports equipment (sword, bat, gun) by matching their form factor.", submodalities: ["Weight distribution", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Transcalibur", doi: "10.1145/3290605.3300241" },
+            // Air-d
+            { name: "Drag:on", mechanism: "Actuated wings alter aerodynamic drag.", useCase: "Simulating large-scale shape changes or the feel of moving through a fluid (air/water).", submodalities: ["Resistance", "Weight amount", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Drag:on", doi: "10.1145/3290605.3300441" },
+            { name: "ShapeSense", mechanism: "Motorized flaps alter inertia and air drag.", useCase: "Simulating the feeling of wielding different tools by dynamically changing the controller's inertia.", submodalities: ["Resistance", "Weight amount", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=ShapeSense", doi: "10.1145/3305367.3327991" },
+             // Grip-force
+            { name: "Arezoo et al.", mechanism: "Linear actuators create force and rotation.", useCase: "Bimanual interaction for simulating the resistance of stretching or compressing a virtual object.", submodalities: ["Motion", "Resistance"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Arezoo+et+al.", doi: "10.1109/TOH.2024.3493377" },
+            { name: "CapstanCrunch", mechanism: "Thumb-index brake system for grasp force.", useCase: "Rendering the compliance and stiffness of grasped objects between the thumb and index finger.", submodalities: ["Stiffness", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=CapstanCrunch", doi: "10.1145/3332165.3347891" },
+            { name: "CLAW", mechanism: "Servo yields pinch force, coil adds texture.", useCase: "Simulating grasping a virtual object, feeling its surface texture, and triggering an action.", submodalities: ["Stiffness", "Fine vibration", "Macro vibration", "Impact", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=CLAW", doi: "10.1145/3173574.3174228" },
+            { name: "ElastiLinks", mechanism: "Bimanual resistance via braked elastic links.", useCase: "Rendering resistive forces for two-handed interactions, such as drawing a virtual bowstring.", submodalities: ["Motion", "Resistance"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=ElastiLinks", doi: "10.1145/3379337.3415836" },
+            { name: "HapLinkage", mechanism: "Motorized linkage renders shape & resistance.", useCase: "Simulating the shape and resistance of complex objects like pliers or scissors.", submodalities: ["Resistance", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=HapLinkage", doi: "10.1145/3379337.3415812" },
+            { name: "Haptic Links", mechanism: "Brakes on linkages for bimanual resistance.", useCase: "Creating two-handed props that can lock, resist movement, or create impact sensations.", submodalities: ["Impact", "Motion", "Resistance", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Haptic+Links", doi: "10.1145/3173574.3174218" },
+            { name: "MacLean et al.", mechanism: "Fingertip tactor creates skin shear force.", useCase: "Providing directional cues and force information through skin stretch at the fingertip.", submodalities: ["Friction"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=MacLean+et+al.", doi: "10.1109/HAPTIC.2002.998974" },
+            { name: "Triggermuscle", mechanism: "Servo and spring system alters trigger pull.", useCase: "Simulating realistic trigger pulls for firearms or other tools with complex trigger mechanisms.", submodalities: ["Resistance", "Weight amount", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Triggermuscle", doi: "10.3389/frvir.2021.754511" },
+            // Gyro
+            { name: "HapticWhirl", mechanism: "Tilted flywheel creates gyroscopic torque.", useCase: "Simulating impacts, collisions, and continuous rotational forces for tools and weapons.", submodalities: ["Impact", "Motion", "Resistance"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=HapticWhirl", doi: "10.3390/s24030935" },
+            { name: "iTorqU 2.1", mechanism: "Gimbaled flywheel generates sustained torque.", useCase: "Providing continuous, directional torque for applications like virtual steering or drilling.", submodalities: ["Motion", "Resistance"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=iTorqU+2.1", doi: "10.1109/ROBOT.2010.5509485" },
+            { name: "MetamorphX", mechanism: "Counter-rotating gyros create 3-DOF torque.", useCase: "Rendering multi-axis rotational forces for complex interactions like piloting a drone or spaceship.", submodalities: ["Motion", "Resistance"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=MetamorphX", doi: "10.1145/3526113.3545650" },
+            { name: "TorqueCapsules", mechanism: "Modular flywheels for customizable haptics.", useCase: "Creating customizable tool haptics by arranging modular units to produce tailored force feedback.", submodalities: ["Impact", "Motion", "Resistance"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=TorqueCapsules", doi: "10.1145/3654777.3676364" },
+            // Inertial Impact
+            { name: "Berna-Moya et al.", mechanism: "Gun-shaped handheld with impact recoil.", useCase: "Simulating single-shot recoil for virtual firearms and shooting training scenarios.", submodalities: ["Impact"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Berna-Moya+et+al.", doi: "10.1007/978-3-030-29384-0_46" },
+            { name: "Fong et al.", mechanism: "Racket with solenoids for force and torque.", useCase: "Recreating the complex impact sensations of hitting a ball with a tennis racket.", submodalities: ["Impact"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Fong+et+al.", doi: "10.1145/2425296.2425321" },
+            { name: "White et al.", mechanism: "Passive bat with adjustable inertia.", useCase: "Physically reconfiguring a bat to match the inertial properties of different virtual bats.", submodalities: ["Impact"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=White+et+al.", doi: "10.1145/3359566.3360058" },
+            { name: "HapticCollider", mechanism: "Kinetic energy transfer for sharp impacts.", useCase: "Delivering sharp, compelling impact sensations for virtual collisions or weapon hits.", submodalities: ["Impact"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=HapticCollider", doi: "10.1145/3603555.3603568" },
+            { name: "HaptiVec", mechanism: "Actuated pin array for directional forces.", useCase: "Providing directional impact forces to the hand for visceral feedback in games and simulations.", submodalities: ["Impact"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=HaptiVec", doi: "10.1145/3290605.3300401" },
+            { name: "SpinShot", mechanism: "Fired flywheel creates impact and gyro-force.", useCase: "Simulating the dual sensations of a firearm's initial recoil and subsequent gyroscopic barrel rise.", submodalities: ["Impact"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=SpinShot", doi: "10.1145/3654777.3676433" },
+            { name: "Su et al.", mechanism: "Gun controller for linear recoil.", useCase: "Simulating realistic, high-force linear recoil for virtual firearms.", submodalities: ["Impact"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Su+et+al.", doi: "10.1109/WHC49131.2021.9517202" },
+            { name: "Unident", mechanism: "Belt-driven mass creates directional forces.", useCase: "Simulating the directional forces and torques of wielding virtual melee weapons like swords.", submodalities: ["Impact", "Resistance", "Weight distribution", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Unident", doi: "10.1109/VR50410.2021.00021" },
+            // Liquid-pump
+            { name: "FluidWeight", mechanism: "Liquid metal pump alters center of mass.", useCase: "Simulating dynamic weight shifts in virtual objects, such as a cup being filled with liquid.", submodalities: ["Weight amount", "Weight distribution", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=FluidWeight", doi: "10.1145/3462244.3479907" },
+            { name: "GravityCup", mechanism: "Passive shifting mass simulates liquid.", useCase: "Mimicking the feel of liquid sloshing inside a virtual cup through a simple passive mechanism.", submodalities: ["Weight amount", "Weight distribution", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=GravityCup", doi: "10.1145/3281505.3281569" },
+            { name: "MobileGravity", mechanism: "Pumped liquid changes the absolute mass.", useCase: "Simulating large changes in the weight of a held object, like picking up or dropping heavy items.", submodalities: ["Weight amount", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=MobileGravity", doi: "10.1145/3613904.3642658" },
+            { name: "PumpVR", mechanism: "Liquid transfer for large weight changes.", useCase: "Rendering significant weight changes by pumping liquid between a controller and a wearable reservoir.", submodalities: ["Weight amount", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=PumpVR", doi: "10.1145/3544548.3581172" },
+            { name: "VibroWeight", mechanism: "Liquid and vibration create weight illusion.", useCase: "Enhancing the perceived weight change of a liquid-pumping device using psycho-physical illusions.", submodalities: ["Weight amount", "Weight distribution", "Shape"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=VibroWeight", doi: "10.1109/HAPTICS52432.2022.9765609" },
+             // Vibro
+            { name: "Bstick", mechanism: "Linear actuators provide finger-based cues.", useCase: "Providing subtle tactile cues to different fingers for enhanced manipulation and button feedback.", submodalities: ["Fine vibration"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=Bstick", doi: "10.3390/systems10030054" },
+            { name: "DualVib", mechanism: "Dual voice coils for complex vibrations.", useCase: "Rendering more expressive and detailed tactile effects than standard single-motor vibrations.", submodalities: ["Fine vibration"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=DualVib", doi: "10.1145/3385956.3418964" },
+            { name: "MultiVibes", mechanism: "Vibromotor array creates spat-temp patterns.", useCase: "Creating rich, directional tactile feedback across the hand, such as feeling an object slide through your palm.", submodalities: ["Fine vibration"], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=MultiVibes", doi: "10.1109/ISMAR59233.2023.00085" },
+            { name: "BrushStroke", mechanism: "Belt and motor mechanism stroking the back of the hand and fingers", useCase: "", submodalities: [], imageUrl: "https://placehold.co/400x250/E2E8F0/4A5568?text=BrushStroke", doi: "" }
+        ];
+
+        // Define which submodalities belong to which primary modality
+        const cutaneousSubmodalities = new Set(["Thermal", "Stiffness", "Friction", "Fine vibration"]);
+        const kinestheticSubmodalities = new Set(["Macro vibration", "Impact", "Motion", "Resistance", "Weight amount", "Weight distribution", "Shape"]);
+
+        const cardContainer = document.getElementById('card-container');
+
+        // --- Gemini API Call Function ---
+        async function getGeminiIdeas(device, buttonElement) {
+            const ideasContainer = document.getElementById(`gemini-ideas-${device.name.replace(/\s+/g, '-')}`);
+            ideasContainer.innerHTML = '<div class="loader"></div>';
+            buttonElement.disabled = true;
+
+            const systemPrompt = `You are an expert HCI researcher and creative technologist specializing in haptics. Your goal is to brainstorm novel, concrete, and imaginative use cases for haptic devices.
+            - Provide exactly three distinct ideas.
+            - Format the output as a simple HTML unordered list (<ul><li>Idea 1</li>...</ul>).
+            - Do not include any other text, titles, or explanations.`;
+            const userQuery = `Brainstorm three new, creative use cases for the following haptic device:
+            - Name: ${device.name}
+            - Mechanism: ${device.mechanism}
+            - Known Modalities: ${device.submodalities.join(', ')}
+            - Existing Use Case (for context, do not repeat): ${device.useCase}`;
+            
+            const apiKey = ""; // Leave as-is
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: userQuery }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] },
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                
+                if (text) {
+                    ideasContainer.innerHTML = text;
+                } else {
+                    ideasContainer.innerHTML = '<p class="text-red-500 text-sm">Could not generate ideas. Please try again.</p>';
+                }
+
+            } catch (error) {
+                console.error('Gemini API call failed:', error);
+                ideasContainer.innerHTML = `<p class="text-red-500 text-sm">Error: ${error.message}</p>`;
+            } finally {
+                 buttonElement.style.display = 'none'; // Hide button after use
+            }
+        }
+        
+        // --- Gemini API Call for Concept Explainer ---
+        async function getGeminiExplanation(modalityName) {
+            const modal = document.getElementById('explainer-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+
+            modalTitle.textContent = modalityName;
+            modalContent.innerHTML = '<div class="loader"></div>';
+            modal.classList.remove('hidden');
+
+            const systemPrompt = `You are an expert HCI professor. Explain haptic concepts clearly and concisely for a student.
+            - Provide the explanation in a single, simple paragraph.
+            - Do not include any other text, titles, or formatting.`;
+            const userQuery = `Explain the haptic concept of "${modalityName}".`;
+            
+            const apiKey = ""; // Leave as-is
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: userQuery }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] },
+                    })
+                });
+                if (!response.ok) throw new Error(`API Error: ${response.status}`);
+                
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                
+                if (text) {
+                    modalContent.innerHTML = `<p>${text}</p>`;
+                } else {
+                    modalContent.innerHTML = '<p class="text-red-500">Could not get explanation.</p>';
+                }
+            } catch (error) {
+                console.error("Gemini explanation call failed:", error);
+                modalContent.innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
+            }
+        }
+
+
+        // Function to generate and append cards
+        function createCards() {
+            devices.forEach((device) => {
+                const deviceId = device.name.replace(/\s+/g, '-');
+                const deviceCutaneous = device.submodalities.filter(sm => cutaneousSubmodalities.has(sm));
+                const deviceKinesthetic = device.submodalities.filter(sm => kinestheticSubmodalities.has(sm));
+
+                // Card Template
+                const cardHTML = `
+                <div class="bg-[#E0FFFF] rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out p-6 flex flex-col">
+                    <h2 class="text-xl font-bold text-blue-700 mb-2 pb-2 border-b border-gray-200">${device.name}</h2>
+                    
+                    <img src="${device.imageUrl}" alt="Image of ${device.name}" class="mb-4 rounded-lg object-cover h-48 w-full bg-gray-200" onerror="this.onerror=null;this.src='https://placehold.co/400x250/CBD5E0/4A5568?text=Image+Not+Available';">
+
+                    <div class="mb-4">
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Primary Mechanism</h3>
+                        <p class="text-gray-700 mt-1">${device.mechanism}</p>
+                    </div>
+
+                    <div class="mb-4 flex-grow">
+                        <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Example Use Case</h3>
+                        <p class="text-gray-700 mt-1">${device.useCase}</p>
+                    </div>
+
+                    <div class="mt-auto pt-4 border-t border-gray-200">
+                        <div class="mb-2">
+                            <h4 class="text-xs font-bold text-gray-600 mb-1">Cutaneous Perception</h4>
+                            <div class="flex flex-wrap gap-2 min-h-[24px]">
+                                ${deviceCutaneous.map(sm => `<button data-modality="${sm}" class="modality-tag cutaneous text-white text-xs font-medium px-2.5 py-0.5 rounded-full hover:opacity-80 transition-opacity">${sm}</button>`).join('')}
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xs font-bold text-gray-600 mb-1">Kinesthetic Perception</h4>
+                            <div class="flex flex-wrap gap-2 min-h-[24px]">
+                                ${deviceKinesthetic.map(sm => `<button data-modality="${sm}" class="modality-tag kinesthetic text-white text-xs font-medium px-2.5 py-0.5 rounded-full hover:opacity-80 transition-opacity">${sm}</button>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DOI Link Section -->
+                    ${device.doi ? `
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <a href="https://doi.org/${device.doi}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors inline-flex items-center">
+                            Paper
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                        </a>
+                    </div>
+                    ` : ''}
+
+                     <!-- Gemini Section -->
+                    <div class="gemini-section mt-4 pt-4 border-t border-dashed border-gray-300 hidden">
+                         <button id="gemini-btn-${deviceId}" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300">
+                            Generate Ideas ✨
+                        </button>
+                        <div id="gemini-ideas-${deviceId}" class="gemini-ideas text-gray-700 mt-4 text-sm"></div>
+                    </div>
+                </div>
+                `;
+                
+                cardContainer.innerHTML += cardHTML;
+            });
+            
+             // Add event listeners after all cards are created
+            devices.forEach(device => {
+                 const deviceId = device.name.replace(/\s+/g, '-');
+                 const button = document.getElementById(`gemini-btn-${deviceId}`);
+                 if (button) { // Check if the button exists
+                    button.addEventListener('click', () => getGeminiIdeas(device, button));
+                 }
+            });
+
+            // Add event listeners for modality tags
+            document.querySelectorAll('.modality-tag').forEach(tag => {
+                tag.addEventListener('click', () => {
+                    const modalityName = tag.dataset.modality;
+                    getGeminiExplanation(modalityName);
+                });
+            });
+        }
+
+        // Run the function on page load
+        window.onload = function() {
+            createCards();
+
+            // Setup toggle functionality
+            const ideaToggle = document.getElementById('toggle-ideas');
+            ideaToggle.addEventListener('change', () => {
+                const geminiSections = document.querySelectorAll('.gemini-section');
+                geminiSections.forEach(section => {
+                    if (ideaToggle.checked) {
+                        section.classList.remove('hidden');
+                    } else {
+                        section.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Setup modal close functionality
+            const modal = document.getElementById('explainer-modal');
+            const closeBtn = document.getElementById('modal-close-btn');
+            closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        };
+    </script>
+
+</body>
+</html>
