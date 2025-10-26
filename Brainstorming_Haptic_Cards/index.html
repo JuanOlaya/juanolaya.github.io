@@ -340,7 +340,7 @@
             - Known Modalities: ${device.submodalities.join(', ')}
             - Existing Use Cases (for context, do not repeat): ${device.useCaseTags.join(', ')}`; // Pass use case tags as context
             
-            const apiKey = ""; // Leave as-is
+            const apiKey = "AIzaSyC7K2EsV9umWuSlhSLtyKe2lVCNUQnWvI4"; // TODO: Replace with your actual Google AI Studio API key
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
             try {
@@ -417,9 +417,9 @@
             const systemPrompt = `You are an expert HCI professor. Explain haptic concepts clearly and concisely for a student.
             - Provide the explanation in a single, simple paragraph.
             - Do not include any other text, titles, or formatting.`;
-            const userQuery = `Explain the haptic concept of "${modalityName}".`;
+            const userQuery = `Explain the haptic concept of \"${modalityName}\".`;
             
-            const apiKey = ""; // Leave as-is
+            const apiKey = "YOUR_API_KEY"; // TODO: Replace with your actual Google AI Studio API key
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
              try {
