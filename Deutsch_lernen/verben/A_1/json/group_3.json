@@ -1,0 +1,619 @@
+{
+    "level": "A1.1",
+    "verbs": 
+    {
+        "arbeiten": {
+            "perfekt": "hat gearbeitet",
+            "emoji": "💼",
+            "es": "trabajar",
+            "es_perfekt": "he trabajado",
+            "en_verb": "to work",
+            "en_perfekt": "has worked",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "arbeite",
+                "du": "arbeitest",
+                "erSieEs": "arbeitet",
+                "wir": "arbeiten",
+                "ihr": "arbeitet",
+                "sieSie": "arbeiten"
+            },
+            "examples": [
+                {
+                    "de": "Ich habe gestern viel gearbeitet.",
+                    "es": "Ayer trabajé mucho.",
+                    "phonetics": "/ɪç ˈhaːbə ˈɡɛstɐn fiːl ɡəˈʔaʁbaɪ̯tət/",
+                    "explanation": "<li><b>Adverbien:</b> \"gestern\", \"viel\"."
+                },
+                {
+                    "de": "Sie hat im Büro gearbeitet.",
+                    "es": "Ella ha trabajado en la oficina.",
+                    "phonetics": "/ziː hat ɪm byˈʁoː ɡəˈʔaʁbaɪ̯tət/",
+                    "explanation": "<li><b>Präposition + Dativ (Ort):</b> \"im Büro\"."
+                },
+                {
+                    "de": "Mein Vater hat als Arzt gearbeitet.",
+                    "es": "Mi padre ha trabajado como médico.",
+                    "phonetics": "/maɪ̯n ˈfaːtɐ hat als aːɐ̯tst ɡəˈʔaʁbaɪ̯tət/",
+                    "explanation": "<li><b>Präposition:</b> \"als\" (Beruf)."
+                },
+                {
+                    "de": "Wo hast du gearbeitet?",
+                    "es": "¿Dónde has trabajado?",
+                    "phonetics": "/voː hast duː ɡəˈʔaʁbaɪ̯tət/",
+                    "explanation": "<li><b>W-Frage (Ort).</b>"
+                },
+                {
+                    "de": "Wir haben am Projekt gearbeitet.",
+                    "es": "Hemos trabajado en el proyecto.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ am pʁoˈjɛkt ɡəˈʔaʁbaɪ̯tət/",
+                    "explanation": "<li><b>Präposition + Dativ:</b> \"am Projekt\"."
+                },
+                {
+                    "de": "Wann hast du gearbeitet?",
+                    "es": "¿Cuándo has trabajado?",
+                    "phonetics": "/van hast duː ɡəˈʔaʁbaɪ̯tət/",
+                    "explanation": "<li><b>W-Frage (Zeit).</b>"
+                },
+                {
+                    "de": "Wie lange hat er gearbeitet?",
+                    "es": "¿Cuánto tiempo ha trabajado él?",
+                    "phonetics": "/viː ˈlaŋə hat eːɐ̯ ɡəˈʔaʁbaɪ̯tət/",
+                    "explanation": "<li><b>W-Frage (Dauer).</b>"
+                },
+                {
+                    "de": "Wer hat am Wochenende gearbeitet?",
+                    "es": "¿Quién ha trabajado el fin de semana?",
+                    "phonetics": "/veːɐ̯ hat am ˈvɔxn̩ˌʔɛndə ɡəˈʔaʁbaɪ̯tət/",
+                    "explanation": "<li><b>W-Frage (Subjekt) + Präposition + Dativ (am Wochenende).</b>"
+                }
+            ]
+        },
+        "lernen": {
+            "perfekt": "hat gelernt",
+            "emoji": "📚",
+            "es": "aprender",
+            "es_perfekt": "he aprendido",
+            "en_verb": "to learn",
+            "en_perfekt": "has learned",
+            "note_es": "<b>Nota:</b> \"lernen\" se usa para aprender habilidades (nadar, un idioma) o para estudiar en la escuela/colegio. Para estudios universitarios se usa \"studieren\".",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "lerne",
+                "du": "lernst",
+                "erSieEs": "lernt",
+                "wir": "lernen",
+                "ihr": "lernt",
+                "sieSie": "lernen"
+            },
+            "examples": [
+                {
+                    "de": "Wir haben Deutsch gelernt.",
+                    "es": "Hemos aprendido alemán.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ dɔʏ̯tʃ ɡəˈlɛʁnt/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Ich habe viel gelernt.",
+                    "es": "He aprendido mucho.",
+                    "phonetics": "/ɪç ˈhaːbə fiːl ɡəˈlɛʁnt/",
+                    "explanation": "<li><b>Adverb:</b> \"viel\"."
+                },
+                {
+                    "de": "Er hat das Gedicht gelernt.",
+                    "es": "Él ha aprendido el poema.",
+                    "phonetics": "/eːɐ̯ hat das ɡəˈdɪçt ɡəˈlɛʁnt/",
+                    "explanation": "<li><b>Akkusativ (neutral):</b> \"das Gedicht\"."
+                },
+                {
+                    "de": "Hast du für die Prüfung gelernt?",
+                    "es": "¿Has estudiado para el examen?",
+                    "phonetics": "/hast duː fyːɐ̯ diː ˈpʁyːfʊŋ ɡəˈlɛʁnt/",
+                    "explanation": "<li><b>Präposition + Akkusativ:</b> \"für die Prüfung\"."
+                },
+                {
+                    "de": "Sie hat schwimmen gelernt.",
+                    "es": "Ella ha aprendido a nadar.",
+                    "phonetics": "/ziː hat ˈʃvɪmən ɡəˈlɛʁnt/",
+                    "explanation": "<li><b>Infinitiv als Ergänzung.</b>"
+                },
+                {
+                    "de": "Was hast du in der Schule gelernt?",
+                    "es": "¿Qué has aprendido en la escuela?",
+                    "phonetics": "/vas hast duː ɪn deːɐ̯ ˈʃuːlə ɡəˈlɛʁnt/",
+                    "explanation": "<li><b>W-Frage (Objekt) + Präposition + Dativ (in der Schule).</b>"
+                },
+                {
+                    "de": "Wie lange hast du Deutsch gelernt?",
+                    "es": "¿Cuánto tiempo has aprendido alemán?",
+                    "phonetics": "/viː ˈlaŋə hast duː dɔʏ̯tʃ ɡəˈlɛʁnt/",
+                    "explanation": "<li><b>W-Frage (Dauer).</b>"
+                },
+                {
+                    "de": "Wo hat er Gitarre spielen gelernt?",
+                    "es": "¿Dónde ha aprendido él a tocar la guitarra?",
+                    "phonetics": "/voː hat eːɐ̯ ɡiˈtaʁə ˈʃpiːlən ɡəˈlɛʁnt/",
+                    "explanation": "<li><b>W-Frage (Ort) + Infinitivkonstruktion.</b>"
+                }
+            ]
+        },
+        "wohnen": {
+            "perfekt": "hat gewohnt",
+            "emoji": "🏠",
+            "es": "vivir/residir",
+            "es_perfekt": "he vivido/residido",
+            "en_verb": "to live/reside",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "wohne",
+                "du": "wohnst",
+                "erSieEs": "wohnt",
+                "wir": "wohnen",
+                "ihr": "wohnt",
+                "sieSie": "wohnen"
+            },
+            "examples": [
+                {
+                    "de": "Ich habe in Berlin gewohnt.",
+                    "es": "He vivido en Berlín.",
+                    "phonetics": "/ɪç ˈhaːbə ɪn bɛʁˈliːn ɡəˈvoːnt/",
+                    "explanation": "<li><b>Präposition + Dativ (Ort).</b>"
+                },
+                {
+                    "de": "Wo hast du gewohnt?",
+                    "es": "¿Dónde has vivido?",
+                    "phonetics": "/voː hast duː ɡəˈvoːnt/",
+                    "explanation": "<li><b>W-Frage (Ort).</b>"
+                },
+                {
+                    "de": "Sie hat bei ihren Eltern gewohnt.",
+                    "es": "Ella ha vivido con sus padres.",
+                    "phonetics": "/ziː hat baɪ̯ ˈiːʁən ˈɛltɐn ɡəˈvoːnt/",
+                    "explanation": "<li><b>Präposition + Dativ (bei ihren Eltern).</b>"
+                },
+                {
+                    "de": "Wir haben in einer Wohnung gewohnt.",
+                    "es": "Hemos vivido en un apartamento.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ ɪn ˈaɪ̯nɐ ˈvoːnʊŋ ɡəˈvoːnt/",
+                    "explanation": "<li><b>Präposition + Dativ (in einer Wohnung).</b>"
+                },
+                {
+                    "de": "Habt ihr lange hier gewohnt?",
+                    "es": "¿Habéis vivido aquí mucho tiempo?",
+                    "phonetics": "/hapt iːɐ̯ ˈlaŋə hiːɐ̯ ɡəˈvoːnt/",
+                    "explanation": "<li><b>Adverbien:</b> \"lange\", \"hier\"."
+                },
+                {
+                    "de": "Wie lange hast du dort gewohnt?",
+                    "es": "¿Cuánto tiempo has vivido allí?",
+                    "phonetics": "/viː ˈlaŋə hast duː dɔʁt ɡəˈvoːnt/",
+                    "explanation": "<li><b>W-Frage (Dauer) + Adverb (dort).</b>"
+                },
+                {
+                    "de": "Wer hat in diesem Haus gewohnt?",
+                    "es": "¿Quién ha vivido en esta casa?",
+                    "phonetics": "/veːɐ̯ hat ɪn ˈdiːzəm haʊ̯s ɡəˈvoːnt/",
+                    "explanation": "<li><b>W-Frage (Subjekt) + Präposition + Dativ (in diesem Haus).</b>"
+                },
+                {
+                    "de": "Warum hat er allein gewohnt?",
+                    "es": "¿Por qué ha vivido él solo?",
+                    "phonetics": "/vaˈʁʊm hat eːɐ̯ aˈlaɪ̯n ɡəˈvoːnt/",
+                    "explanation": "<li><b>W-Frage (Grund) + Adverb (allein).</b>"
+                }
+            ]
+        },
+        "leben": {
+            "perfekt": "hat gelebt",
+            "emoji": "❤️",
+            "es": "vivir",
+            "es_perfekt": "he vivido",
+            "en_verb": "to live",
+            "en_perfekt": "has lived",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "lebe",
+                "du": "lebst",
+                "erSieEs": "lebt",
+                "wir": "leben",
+                "ihr": "lebt",
+                "sieSie": "leben"
+            },
+            "examples": [
+                {
+                    "de": "Meine Oma hat lange gelebt.",
+                    "es": "Mi abuela ha vivido mucho tiempo.",
+                    "phonetics": "/ˈmaɪ̯nə ˈoːma hat ˈlaŋə ɡəˈleːpt/",
+                    "explanation": "<li><b>Adverb:</b> \"lange\"."
+                },
+                {
+                    "de": "Er hat in Frankreich gelebt.",
+                    "es": "Él ha vivido en Francia.",
+                    "phonetics": "/eːɐ̯ hat ɪn ˈfʁaŋkʁaɪ̯ç ɡəˈleːpt/",
+                    "explanation": "<li><b>Präposition + Dativ (Ort).</b>"
+                },
+                {
+                    "de": "Wir haben glücklich gelebt.",
+                    "es": "Hemos vivido felices.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ ˈɡlʏklɪç ɡəˈleːpt/",
+                    "explanation": "<li><b>Adverb:</b> \"glücklich\"."
+                },
+                {
+                    "de": "Sie hat für ihre Träume gelebt.",
+                    "es": "Ella ha vivido para sus sueños.",
+                    "phonetics": "/ziː hat fyːɐ̯ ˈiːʁə ˈtʁɔʏ̯mə ɡəˈleːpt/",
+                    "explanation": "<li><b>Präposition + Akkusativ:</b> \"für ihre Träume\"."
+                },
+                {
+                    "de": "Ich habe ein einfaches Leben gelebt.",
+                    "es": "He vivido una vida sencilla.",
+                    "phonetics": "/ɪç ˈhaːbə aɪ̯n ˈaɪ̯nfaxəs ˈleːbn̩ ɡəˈleːpt/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Wo hast du gelebt?",
+                    "es": "¿Dónde has vivido?",
+                    "phonetics": "/voː hast duː ɡəˈleːpt/",
+                    "explanation": "<li><b>W-Frage (Ort).</b>"
+                },
+                {
+                    "de": "Wie lange hat er in Spanien gelebt?",
+                    "es": "¿Cuánto tiempo ha vivido él en España?",
+                    "phonetics": "/viː ˈlaŋə hat eːɐ̯ ɪn ˈʃpaːni̯ən ɡəˈleːpt/",
+                    "explanation": "<li><b>W-Frage (Dauer).</b>"
+                },
+                {
+                    "de": "Wer hat hier früher gelebt?",
+                    "es": "¿Quién ha vivido aquí antes?",
+                    "phonetics": "/veːɐ̯ hat hiːɐ̯ ˈfʁyːɐ ɡəˈleːpt/",
+                    "explanation": "<li><b>W-Frage (Subjekt) + Adverbien.</b>"
+                }
+            ]
+        },
+        "schlafen": {
+            "perfekt": "hat geschlafen",
+            "emoji": "😴",
+            "es": "dormir",
+            "es_perfekt": "he dormido",
+            "en_verb": "to sleep",
+            "en_perfekt": "has slept",
+            "irregularPraesens": true,
+            "vokalwechsel": "a > ä (du schläfst, er/sie/es schläft)",
+            "praesens": {
+                "ich": "schlafe",
+                "du": "schläfst",
+                "erSieEs": "schläft",
+                "wir": "schlafen",
+                "ihr": "schlaft",
+                "sieSie": "schlafen"
+            },
+            "examples": [
+                {
+                    "de": "Das Baby hat gut geschlafen.",
+                    "es": "El bebé ha dormido bien.",
+                    "phonetics": "/das ˈbeːbi hat ɡuːt ɡəˈʃlaːfn̩/",
+                    "explanation": "<li><b>Adverb:</b> \"gut\"."
+                },
+                {
+                    "de": "Hast du gut geschlafen?",
+                    "es": "¿Has dormido bien?",
+                    "phonetics": "/hast duː ɡuːt ɡəˈʃlaːfn̩/",
+                    "explanation": "<li><b>Ja/Nein-Frage.</b>"
+                },
+                {
+                    "de": "Ich habe nur fünf Stunden geschlafen.",
+                    "es": "Solo he dormido cinco horas.",
+                    "phonetics": "/ɪç ˈhaːbə nuːɐ̯ fʏnf ˈʃtʊndn̩ ɡəˈʃlaːfn̩/",
+                    "explanation": "<li><b>Adverb (nur) + Zeitangabe.</b>"
+                },
+                {
+                    "de": "Er hat auf dem Sofa geschlafen.",
+                    "es": "Él ha dormido en el sofá.",
+                    "phonetics": "/eːɐ̯ hat aʊ̯f deːm ˈzoːfa ɡəˈʃlaːfn̩/",
+                    "explanation": "<li><b>Präposition + Dativ (Ort).</b>"
+                },
+                {
+                    "de": "Wir haben lange geschlafen.",
+                    "es": "Hemos dormido mucho (tiempo).",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ ˈlaŋə ɡəˈʃlaːfn̩/",
+                    "explanation": "<li><b>Adverb:</b> \"lange\"."
+                },
+                {
+                    "de": "Wo hat die Katze geschlafen?",
+                    "es": "¿Dónde ha dormido el gato?",
+                    "phonetics": "/voː hat diː ˈkatsə ɡəˈʃlaːfn̩/",
+                    "explanation": "<li><b>W-Frage (Ort).</b>"
+                },
+                {
+                    "de": "Wie lange hast du geschlafen?",
+                    "es": "¿Cuánto tiempo has dormido?",
+                    "phonetics": "/viː ˈlaŋə hast duː ɡəˈʃlaːfn̩/",
+                    "explanation": "<li><b>W-Frage (Dauer).</b>"
+                },
+                {
+                    "de": "Warum hast du so wenig geschlafen?",
+                    "es": "¿Por qué has dormido tan poco?",
+                    "phonetics": "/vaˈʁʊm hast duː zoː ˈveːnɪç ɡəˈʃlaːfn̩/",
+                    "explanation": "<li><b>W-Frage (Grund) + Adverbial (so wenig).</b>"
+                }
+            ]
+        },
+        "fahren": {
+            "perfekt": "ist gefahren",
+            "emoji": "🚗",
+            "es": "conducir, ir en bici/coche/tren",
+            "es_perfekt": "he conducido, ido en vehículo",
+            "en_verb": "to drive/go",
+            "en_perfekt": "has driven/gone",
+            "note_es": "<b>Nota:</b> Usa \"sein\" en Perfekt. El presente es irregular (a > ä).",
+            "irregularPraesens": true,
+            "vokalwechsel": "a > ä (du fährst, er/sie/es fährt)",
+            "praesens": {
+                "ich": "fahre",
+                "du": "fährst",
+                "erSieEs": "fährt",
+                "wir": "fahren",
+                "ihr": "fahrt",
+                "sieSie": "fahren"
+            },
+            "examples": [
+                {
+                    "de": "Wir sind nach Berlin gefahren.",
+                    "es": "Hemos ido a Berlín.",
+                    "phonetics": "/viːɐ̯ zɪnt nax bɛʁˈliːn ɡəˈfaːʁən/",
+                    "explanation": "<li><b>Präposition (Richtung, Stadt).</b>"
+                },
+                {
+                    "de": "Bist du mit dem Auto gefahren?",
+                    "es": "¿Has ido en coche?",
+                    "phonetics": "/bɪst duː mɪt deːm ˈaʊ̯toː ɡəˈfaːʁən/",
+                    "explanation": "<li><b>Präposition + Dativ (Mittel).</b>"
+                },
+                {
+                    "de": "Ich bin mit dem Zug gefahren.",
+                    "es": "He ido en tren.",
+                    "phonetics": "/ɪç bɪn mɪt deːm tsuːk ɡəˈfaːʁən/",
+                    "explanation": "<li><b>Präposition + Dativ (Mittel).</b>"
+                },
+                {
+                    "de": "Sie ist nach Hamburg gefahren.",
+                    "es": "Ella ha ido a Hamburgo.",
+                    "phonetics": "/ziː ɪst nax ˈhambʊʁk ɡəˈfaːʁən/",
+                    "explanation": "<li><b>Präposition (Richtung, Stadt).</b>"
+                },
+                {
+                    "de": "Seid ihr in den Urlaub gefahren?",
+                    "es": "¿Os habéis ido de vacaciones?",
+                    "phonetics": "/zaɪ̯t iːɐ̯ ɪn deːn ˈuːɐ̯laʊ̯p ɡəˈfaːʁən/",
+                    "explanation": "<li><b>Präposition + Akkusativ (Richtung).</b>"
+                },
+                {
+                    "de": "Wohin seid ihr gefahren?",
+                    "es": "¿A dónde habéis ido (en vehículo)?",
+                    "phonetics": "/voːˈhɪn zaɪ̯t iːɐ̯ ɡəˈfaːʁən/",
+                    "explanation": "<li><b>W-Frage (Richtung).</b>"
+                },
+                {
+                    "de": "Wann bist du nach Hause gefahren?",
+                    "es": "¿Cuándo te has ido a casa (en vehículo)?",
+                    "phonetics": "/van bɪst duː nax ˈhaʊ̯zə ɡəˈfaːʁən/",
+                    "explanation": "<li><b>W-Frage (Zeit) + Feste Wendung.</b>"
+                },
+                {
+                    "de": "Wer ist mit dem Fahrrad gefahren?",
+                    "es": "¿Quién ha ido en bicicleta?",
+                    "phonetics": "/veːɐ̯ ɪst mɪt deːm ˈfaːɐ̯ʁaːt ɡəˈfaːʁən/",
+                    "explanation": "<li><b>W-Frage (Subjekt) + Präposition + Dativ (Mittel).</b>"
+                }
+            ]
+        },
+        "fliegen": {
+            "perfekt": "ist geflogen",
+            "emoji": "✈️",
+            "es": "volar",
+            "es_perfekt": "he volado",
+            "en_verb": "to fly",
+            "en_perfekt": "has flown",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "fliege",
+                "du": "fliegst",
+                "erSieEs": "fliegt",
+                "wir": "fliegen",
+                "ihr": "fliegt",
+                "sieSie": "fliegen"
+            },
+            "examples": [
+                {
+                    "de": "Wir sind nach Spanien geflogen.",
+                    "es": "Hemos volado a España.",
+                    "phonetics": "/viːɐ̯ zɪnt nax ˈʃpaːni̯ən ɡəˈfloːɡən/",
+                    "explanation": "<li><b>Präposition (Richtung, Land).</b>"
+                },
+                {
+                    "de": "Bist du schon einmal geflogen?",
+                    "es": "¿Has volado alguna vez?",
+                    "phonetics": "/bɪst duː ʃoːn ˈaɪ̯nmaːl ɡəˈfloːɡən/",
+                    "explanation": "<li><b>Adverbien:</b> \"schon einmal\"."
+                },
+                {
+                    "de": "Das Flugzeug ist pünktlich geflogen.",
+                    "es": "El avión ha volado puntual.",
+                    "phonetics": "/das ˈfluːkˌtsɔʏ̯k ɪst ˈpʏŋktlɪç ɡəˈfloːɡən/",
+                    "explanation": "<li><b>Adverb:</b> \"pünktlich\"."
+                },
+                {
+                    "de": "Ich bin von Berlin nach München geflogen.",
+                    "es": "He volado de Berlín a Múnich.",
+                    "phonetics": "/ɪç bɪn fɔn bɛʁˈliːn nax ˈmʏnçən ɡəˈfloːɡən/",
+                    "explanation": "<li><b>Präpositionen (von...nach...).</b>"
+                },
+                {
+                    "de": "Sie sind in den Urlaub geflogen.",
+                    "es": "Ellos han volado de vacaciones.",
+                    "phonetics": "/ziː zɪnt ɪn deːn ˈuːɐ̯laʊ̯p ɡəˈfloːɡən/",
+                    "explanation": "<li><b>Präposition + Akkusativ (Richtung).</b>"
+                },
+                {
+                    "de": "Wohin bist du geflogen?",
+                    "es": "¿A dónde has volado?",
+                    "phonetics": "/voːˈhɪn bɪst duː ɡəˈfloːɡən/",
+                    "explanation": "<li><b>W-Frage (Richtung).</b>"
+                },
+                {
+                    "de": "Wann seid ihr geflogen?",
+                    "es": "¿Cuándo habéis volado?",
+                    "phonetics": "/van zaɪ̯t iːɐ̯ ɡəˈfloːɡən/",
+                    "explanation": "<li><b>W-Frage (Zeit).</b>"
+                },
+                {
+                    "de": "Wer ist nach Italien geflogen?",
+                    "es": "¿Quién ha volado a Italia?",
+                    "phonetics": "/veːɐ̯ ɪst nax iˈtaːli̯ən ɡəˈfloːɡən/",
+                    "explanation": "<li><b>W-Frage (Subjekt).</b>"
+                }
+            ]
+        },
+        "heißen": {
+            "perfekt": "hat geheißen",
+            "emoji": "📛",
+            "es": "llamarse",
+            "es_perfekt": "me he llamado",
+            "en_verb": "to be called",
+            "en_perfekt": "has been called",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "heiße",
+                "du": "heißt",
+                "erSieEs": "heißt",
+                "wir": "heißen",
+                "ihr": "heißt",
+                "sieSie": "heißen"
+            },
+            "examples": [
+                {
+                    "de": "Wie hat der Film geheißen?",
+                    "es": "¿Cómo se ha llamado la película?",
+                    "phonetics": "/viː hat deːɐ̯ fɪlm ɡəˈhaɪ̯sn̩/",
+                    "explanation": "<li><b>Perfekt selten benutzt, Präteritum (hieß) häufiger.</b>"
+                },
+                {
+                    "de": "Der Mann hat Klaus geheißen.",
+                    "es": "El hombre se ha llamado Klaus.",
+                    "phonetics": "/deːɐ̯ man hat klaʊ̯s ɡəˈhaɪ̯sn̩/",
+                    "explanation": "<li><b>Nominativ (Name).</b>"
+                },
+                {
+                    "de": "Das hat nichts Gutes geheißen.",
+                    "es": "Eso no ha significado nada bueno.",
+                    "phonetics": "/das hat nɪçts ˈɡuːtəs ɡəˈhaɪ̯sn̩/",
+                    "explanation": "<li><b>Bedeutung:</b> bedeuten."
+                },
+                {
+                    "de": "Er hat \"Hans\" mit Nachnamen geheißen.",
+                    "es": "Él se ha apellidado \"Hans\".",
+                    "phonetics": "/eːɐ̯ hat hans mɪt ˈnaːxˌnaːmən ɡəˈhaɪ̯sn̩/",
+                    "explanation": "<li><b>Feste Wendung.</b>"
+                },
+                {
+                    "de": "Ich habe früher anders geheißen.",
+                    "es": "Antes me he llamado de otra forma.",
+                    "phonetics": "/ɪç ˈhaːbə ˈfʁyːɐ ˈandɐs ɡəˈhaɪ̯sn̩/",
+                    "explanation": "<li><b>Adverbien.</b>"
+                },
+                {
+                    "de": "Wie hat die Straße geheißen?",
+                    "es": "¿Cómo se ha llamado la calle?",
+                    "phonetics": "/viː hat diː ˈʃtʁaːsə ɡəˈhaɪ̯sn̩/",
+                    "explanation": "<li><b>W-Frage (Name).</b>"
+                },
+                {
+                    "de": "Wer hat so geheißen?",
+                    "es": "¿Quién se ha llamado así?",
+                    "phonetics": "/veːɐ̯ hat zoː ɡəˈhaɪ̯sn̩/",
+                    "explanation": "<li><b>W-Frage (Subjekt).</b>"
+                },
+                {
+                    "de": "Warum hat er seinen Namen geändert?",
+                    "es": "¿Por qué ha cambiado su nombre?",
+                    "phonetics": "/vaˈʁʊm hat eːɐ̯ ˈzaɪ̯nən ˈnaːmən ɡəˈʔɛndɐt/",
+                    "explanation": "<li><b>Alternative Frage (ändern statt heißen im Perfekt).</b>"
+                }
+            ]
+        },
+        "rauchen": {
+            "perfekt": "hat geraucht",
+            "emoji": "🚬",
+            "es": "fumar",
+            "es_perfekt": "he fumado",
+            "en_verb": "to smoke",
+            "en_perfekt": "has smoked",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "rauche",
+                "du": "rauchst",
+                "erSieEs": "raucht",
+                "wir": "rauchen",
+                "ihr": "raucht",
+                "sieSie": "rauchen"
+            },
+            "examples": [
+                {
+                    "de": "Er hat eine Zigarette geraucht.",
+                    "es": "Él ha fumado un cigarrillo.",
+                    "phonetics": "/eːɐ̯ hat ˈaɪ̯nə tsiɡaˈʁɛtə ɡəˈʁaʊ̯xt/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Hast du hier geraucht?",
+                    "es": "¿Has fumado aquí?",
+                    "phonetics": "/hast duː hiːɐ̯ ɡəˈʁaʊ̯xt/",
+                    "explanation": "<li><b>Adverb (Ort).</b>"
+                },
+                {
+                    "de": "Mein Opa hat früher viel geraucht.",
+                    "es": "Mi abuelo fumaba mucho antes.",
+                    "phonetics": "/maɪ̯n ˈoːpa hat ˈfʁyːɐ fiːl ɡəˈʁaʊ̯xt/",
+                    "explanation": "<li><b>Adverbien.</b>"
+                },
+                {
+                    "de": "Wir haben auf dem Balkon geraucht.",
+                    "es": "Hemos fumado en el balcón.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ aʊ̯f deːm balˈkoːn ɡəˈʁaʊ̯xt/",
+                    "explanation": "<li><b>Präposition + Dativ (Ort).</b>"
+                },
+                {
+                    "de": "Es ist verboten, hier zu rauchen.",
+                    "es": "Está prohibido fumar aquí.",
+                    "phonetics": "/ɛs ɪst fɛɐ̯ˈboːtn̩ hiːɐ̯ tsuː ˈʁaʊ̯xn̩/",
+                    "explanation": "<li><b>Infinitiv mit zu (im Präsens).</b>"
+                },
+                {
+                    "de": "Was hast du geraucht?",
+                    "es": "¿Qué has fumado?",
+                    "phonetics": "/vas hast duː ɡəˈʁaʊ̯xt/",
+                    "explanation": "<li><b>W-Frage (Objekt).</b>"
+                },
+                {
+                    "de": "Wer hat hier geraucht?",
+                    "es": "¿Quién ha fumado aquí?",
+                    "phonetics": "/veːɐ̯ hat hiːɐ̯ ɡəˈʁaʊ̯xt/",
+                    "explanation": "<li><b>W-Frage (Subjekt).</b>"
+                },
+                {
+                    "de": "Warum hast du im Haus geraucht?",
+                    "es": "¿Por qué has fumado en la casa?",
+                    "phonetics": "/vaˈʁʊm hast duː ɪm haʊ̯s ɡəˈʁaʊ̯xt/",
+                    "explanation": "<li><b>W-Frage (Grund) + Präposition + Dativ (Ort).</b>"
+                }
+            ]
+        }
+    }
+}

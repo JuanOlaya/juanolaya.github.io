@@ -1,0 +1,760 @@
+
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100%;
+            margin: 0;
+            background-color: #85D4FF; /* Color de fondo azul cielo */
+            padding: 20px;
+            font-family: 'Nunito', sans-serif;
+            transition: background-color 0.5s;
+        }
+        .main-container {
+            width: 100%;
+            text-align: center;
+            border-radius: 20px;
+            padding: 20px;
+            transition: background-color 0.5s, border-color 0.5s;
+        }
+        .content-block {
+            max-width: 888px; /* 3 cards * 280px + 2 gaps * 24px */
+            margin: 0 auto;
+            width: 100%;
+            text-align: center;
+        }
+        .header {
+            position: relative;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .level-indicator, .info-button {
+            position: relative;
+            overflow: hidden;
+            width: 60px;
+            height: 60px;
+            background-color: #4682B4; /* SteelBlue */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background-color 0.5s;
+            flex-shrink: 0; /* Evita que los botones se encojan */
+        }
+        .level-indicator {
+            font-size: 1.5rem;
+        }
+
+        .level-a1-1 {
+            background-color: #4682B4; /* SteelBlue */
+        }
+
+        .level-a1-2 {
+            background-color: #3CB371; /* MediumSeaGreen */
+        }
+        .info-button {
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.5s;
+            animation: pulse 2s infinite;
+        }
+        .info-button:hover {
+            transform: scale(1.1);
+        }
+        .title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .title {
+            font-family: 'Kalam', cursive;
+            font-size: 3rem;
+            color: #333;
+            padding-top: 1rem;
+            border-bottom: 3px dashed #4682B4;
+            display: inline-block;
+            margin-bottom: 1rem;
+            transition: border-bottom-color 0.5s, color 0.5s;
+        }
+        .navigation-wrapper {
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+        .navigation-controls {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding-top: 2.5rem;
+            border-top: 3px dashed #4682B4;
+        }
+        .nav-buttons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .nav-button {
+            padding: 8px 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            background-color: #e9ecef;
+            color: #495057;
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-button div {
+            text-align: center;
+        }
+        .nav-button svg {
+            stroke: #4682B4;
+            transition: stroke 0.2s;
+            width: 22px; /* Ensure consistent SVG size */
+            height: 22px;
+        }
+        .nav-button:hover:not(:disabled) {
+            background-color: #dee2e6;
+        }
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .button-translation {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            font-style: italic;
+        }
+        #group-indicator {
+            font-size: 1.2rem;
+            font-weight: normal;
+            color: #333;
+            transition: color 0.5s;
+            margin-bottom: 0;
+        }
+        .progress-bar-container {
+            width: 150px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .progress-step {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ced4da;
+            transition: background-color 0.5s;
+        }
+        .progress-step.active {
+            background-color: #4682B4;
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            min-height: 550px; /* Adjust as needed */
+            align-content: flex-start; /* Aligns items to the start vertically */
+        }
+        .word-item {
+            background-color: #E0FFFF; /* Light Cyan */
+            border-radius: 12px; /* Slightly more rounded */
+            padding: 1.5rem;
+            width: 280px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            display: flex;
+            align-items: center; /* Vertically center emoji and text */
+            justify-content: flex-start;
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; /* Smoother transitions */
+            cursor: pointer;
+            text-align: left;
+            border: 1px solid #B0E0E6; /* Powder blue border */
+        }
+        .word-item:hover {
+            transform: translateY(-5px) scale(1.03); /* Lift effect */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        .emoji {
+            font-size: 2.8rem; /* Slightly larger emoji */
+            margin-right: 1.2rem;
+            flex-shrink: 0; /* Prevent emoji from shrinking */
+        }
+        .text-container {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            width: 100%;
+            overflow: hidden; /* Prevent text overflow issues */
+        }
+        .german-word {
+            font-size: 1.6rem; /* Slightly larger */
+            font-weight: 700;
+            color: #2F4F4F; /* Dark Slate Gray */
+            margin-bottom: 0; /* Space below infinitive */
+             white-space: nowrap; /* Prevent wrapping */
+             text-overflow: ellipsis; /* Add ellipsis if too long */
+             overflow: hidden;
+             display: inline; /* Keep asterisk on same line */
+        }
+        .german-past {
+            font-size: 1.3rem; /* Slightly larger */
+            font-weight: 700;
+            color: #4682B4; /* Steel Blue */
+            margin-top: 0;
+            margin-bottom: 0; /* More space below perfekt */
+             white-space: nowrap;
+             text-overflow: ellipsis;
+             overflow: hidden;
+        }
+        .spanish-translation, .spanish-perfekt {
+            font-size: 0.95rem; /* Slightly larger */
+            color: #555;
+            margin-top: 0; /* Consistent small spacing */
+            transition: color 0.5s, opacity 0.3s, max-height 0.4s ease-in-out; /* Transition max-height */
+            opacity: 1;
+            max-height: 20px; /* Adjust based on expected line height */
+            overflow: hidden;
+        }
+        .hide-translation [data-form~='translation'],
+        .hide-perfekt [data-form~='perfekt'],
+        #verb-modal .modal-content.hide-perfekt [data-form~='perfekt'],
+        #verb-modal .modal-content.hide-translation [data-form~='translation'] {
+            display: none;
+        }
+        /* Style for the irregular verb indicator */
+        .irregular-indicator {
+            color: #dc3545; /* Red color */
+            font-size: 0.9em;
+            vertical-align: super; /* Superscript position */
+            margin-left: 2px;
+            font-weight: bold;
+        }
+
+        #story-button {
+            margin: 2.5rem 0 1rem 0; /* Added bottom margin */
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            background-color: #3CB371; /* Medium Sea Green */
+            border: none;
+            border-radius: 25px; /* Pill shape */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #story-button:hover {
+            background-color: #2E8B57; /* Sea Green */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .story-container {
+            margin: 1.5rem auto 0 auto; /* Consistent margin */
+            padding: 1.5rem 2rem; /* More padding */
+            background-color: #FFFACD; /* Lemon Chiffon */
+            border: 2px dashed #FFD700; /* Gold */
+            border-radius: 12px; /* Match cards */
+            color: #333; /* Darker text for better contrast */
+            display: none;
+            max-width: 800px;
+            text-align: left;
+            line-height: 1.7; /* Increased line height */
+            box-shadow: 0 3px 5px rgba(0,0,0,0.05); /* Subtle shadow */
+        }
+        .story-container h3 {
+            font-family: 'Kalam', cursive;
+            font-size: 1.6rem; /* Slightly larger */
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #556B2F; /* Dark Olive Green */
+            text-align: center; /* Center story title */
+        }
+        .highlighted-word {
+            background-color: #FFEC8B; /* Lighter yellow */
+            padding: 2px 5px;
+            border-radius: 5px;
+            font-weight: 700;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Subtle shadow on highlight */
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-out, visibility 0.3s;
+            padding: 15px; /* Padding for smaller screens */
+        }
+        .modal-overlay.visible {
+            display: flex;
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem 2.5rem; /* More padding */
+            border-radius: 12px; /* Match cards */
+            max-width: 550px; /* Slightly wider */
+            width: 100%; /* Responsive width */
+            max-height: 90vh; /* Limit height and allow scrolling */
+            overflow-y: auto; /* Enable vertical scroll if needed */
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: scale(0.95);
+            transition: transform 0.3s ease-out;
+        }
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        .modal-verb-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px; /* More gap */
+            margin: 0.3rem 0;
+            flex-wrap: wrap; /* Allow wrapping */
+        }
+        #modal-verb-infinitive, #modal-verb-perfekt {
+             font-size: 1.9rem; /* Slightly larger */
+             font-weight: bold;
+             margin: 0;
+             color: #2F4F4F; /* Dark Slate Gray */
+        }
+        #modal-verb-perfekt {
+             color: #4682B4; /* Steel Blue */
+        }
+        .modal-translation {
+            font-size: 1rem; /* Slightly smaller for balance */
+            color: #444; /* Darker gray */
+            margin: 3px 0; /* Consistent small margin */
+        }
+        .modal-verb-block {
+            border-bottom: 2px solid #A9CCE3; /* Light Blue */
+            padding-bottom: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+         /* Remove border between infinitive and praesens details */
+         .modal-verb-block:first-of-type {
+             border-bottom: none;
+             padding-bottom: 0.5rem; /* Less space if no border */
+             margin-bottom: 0.5rem;
+         }
+         /* Add border between praesens details and perfekt block */
+         #praesens-details-container {
+             border-bottom: 2px solid #A9CCE3;
+             margin-bottom: 1.2rem;
+             border-radius: 0; /* Remove double radius */
+             border-left: none;
+             border-right: none;
+             border-top: none;
+             margin-top: 0.8rem; /* Space above Praesens details */
+         }
+         #praesens-details-container summary {
+             background-color: transparent; /* Make summary background transparent */
+             padding: 8px 0; /* Adjust padding */
+             justify-content: flex-start; /* Align left */
+         }
+         #praesens-details-container .details-content {
+             padding: 10px 0 15px 0; /* Adjust padding */
+             border-top: 1px solid #eee; /* Light line separator */
+         }
+
+
+        .speak-icon {
+            cursor: pointer;
+            transition: transform 0.2s, color 0.2s;
+            color: #6899C9; /* Lighter Blue */
+            display: inline-flex;
+            align-items: center;
+            padding: 5px; /* Add padding for easier clicking */
+            border-radius: 50%;
+        }
+        .speak-icon:hover {
+            transform: scale(1.2);
+            color: #4682B4; /* Steel Blue */
+            background-color: #f0f8ff; /* Alice blue hover */
+        }
+        .speak-icon svg {
+            width: 28px; /* Slightly larger */
+            height: 28px;
+            fill: currentColor;
+        }
+        #sentence-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 40px; /* Ensure space */
+            margin: 1rem 0 0.8rem 0; /* Adjusted margin */
+            padding: 10px;
+            background-color: #f9f9f9; /* Light background for sentence */
+            border-radius: 8px;
+        }
+        #modal-text {
+            font-weight: bold;
+            font-size: 1.35rem; /* Slightly larger */
+            margin: 0;
+            color: #333;
+            flex-grow: 1; /* Allow text to take space */
+            text-align: center; /* Center text within container */
+        }
+        .modal-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px; /* More gap */
+            margin-top: 1.5rem;
+            padding: 0 10px;
+        }
+        .modal-nav-buttons {
+            display: flex;
+            gap: 25px; /* More gap between buttons */
+        }
+        .example-progress-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px; /* Increased gap */
+             margin-bottom: 10px; /* Space above buttons */
+        }
+         #example-counter {
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .close-modal-btn {
+            margin-top: 2rem; /* More space above close button */
+            padding: 10px 20px; /* Bigger button */
+            background-color: #6c757d; /* Gray */
+            color: white;
+            border: none;
+            border-radius: 20px; /* Pill shape */
+            cursor: pointer;
+            line-height: 1.2;
+            transition: background-color 0.2s, transform 0.1s;
+             font-weight: 600;
+        }
+         .close-modal-btn:hover {
+             background-color: #5a6268;
+             transform: scale(1.05);
+         }
+
+        /* Info Modal Specifics */
+        #info-modal .modal-content {
+            text-align: left;
+            max-height: 85vh; /* Allow a bit more height */
+        }
+        #info-modal h2 {
+            font-family: 'Kalam', cursive;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 1.5rem; /* More space below h2 */
+             color: #4682B4; /* Steel Blue */
+        }
+        #info-modal h3 {
+            color: #556B2F; /* Dark Olive Green */
+            border-bottom: 2px solid #A9CCE3; /* Light Blue */
+            padding-bottom: 6px;
+             margin-top: 1.8rem; /* More space above h3 */
+             margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+        #info-modal p, #info-modal li {
+             line-height: 1.6;
+             color: #333;
+        }
+        #info-modal ul {
+            padding-left: 25px;
+            list-style-type: '✓ '; /* Check mark */
+             margin-bottom: 1rem;
+        }
+         #info-modal b {
+             color: #4682B4; /* Highlight key terms */
+         }
+         #info-modal i { /* Style example sentence */
+             background-color: #f0f8ff;
+             padding: 2px 5px;
+             border-radius: 4px;
+             font-family: monospace;
+         }
+
+        /* Active Recall Toggle Switch */
+        .active-recall-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center toggle below title */
+            gap: 10px;
+            margin: 5px 0 10px 0; /* Adjust margin */
+        }
+        .toggle-label {
+            display: flex;
+            flex-direction: column;
+            font-weight: 600; /* Slightly less bold */
+            font-size: 1rem; /* Adjust size */
+            line-height: 1.2;
+            text-align: right;
+            cursor: pointer;
+            color: #333;
+        }
+        .toggle-sublabel {
+            font-size: 0.75em; /* Smaller sublabel */
+            font-weight: 400;
+            font-style: italic;
+            color: #555;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px; /* Slightly smaller switch */
+            height: 22px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 22px; /* Match height */
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px; /* Smaller circle */
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        input:checked + .slider {
+            background-color: #4682B4; /* Match theme color */
+        }
+        input:focus + .slider {
+             box-shadow: 0 0 1px #4682B4;
+        }
+        input:checked + .slider:before {
+            transform: translateX(22px); /* Adjust translation distance */
+        }
+
+        /* Pulse Animation */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(70, 130, 180, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(70, 130, 180, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(70, 130, 180, 0); }
+        }
+
+        /* Modal Note Style */
+        .modal-note {
+            font-style: italic;
+            font-size: 0.9rem; /* Adjust size */
+            color: #555; /* Slightly darker */
+            margin-top: 0.8rem;
+            margin-bottom: 0.8rem; /* Space around note */
+            padding: 0.6rem 0.8rem; /* Adjust padding */
+            background-color: #f0f8ff; /* Alice Blue */
+            border-left: 5px solid #6899C9; /* Lighter blue border */
+            border-radius: 0 5px 5px 0; /* Rounded right corners */
+            text-align: left;
+        }
+        .modal-separator {
+            width: 100%;
+            margin: 1.5rem 0; /* More space around separator */
+            border: 0;
+            border-top: 1px solid #ddd; /* Lighter separator */
+        }
+
+        /* Dropdown Styles (General & Specific) */
+        details { /* Apply base style to all details */
+            margin-top: 1rem;
+            background-color: transparent; /* Make details background transparent by default */
+            border: none; /* Remove default border */
+            border-radius: 0; /* Remove default radius */
+            overflow: visible; /* Allow content to flow */
+        }
+        summary { /* Base style for all summaries */
+            cursor: pointer;
+            font-weight: bold;
+            color: #4682B4;
+            padding: 10px 0; /* Adjust padding, remove side padding */
+            display: flex; /* Use flex for alignment */
+            align-items: center;
+            justify-content: flex-start; /* Align left */
+            list-style: none; /* Remove default marker */
+            background-color: transparent; /* Transparent background */
+            transition: background-color 0.2s;
+            position: relative; /* Needed for marker positioning if needed */
+        }
+        summary::-webkit-details-marker { display: none; } /* Hide marker Chrome/Safari */
+        summary::marker { display: none; content: ''; } /* Hide marker Firefox */
+        summary:hover { background-color: #f0f8ff; } /* Light hover for summary only */
+
+        /* Arrow Styling */
+         summary .details-arrow {
+             display: inline-block;
+             transition: transform 0.2s;
+             margin-left: 8px; /* Space before arrow */
+             font-size: 0.8em; /* Smaller arrow */
+             color: #4682B4; /* Match text color */
+             order: 1; /* Place arrow after text */
+         }
+          details[open] > summary .details-arrow {
+             transform: rotate(90deg);
+         }
+         /* Move arrow to the end for specific summaries */
+         #details-summary, #praesens-details-summary {
+             justify-content: space-between; /* Push arrow to the right */
+         }
+         #praesens-details-summary {
+              padding: 8px 0; /* Less padding for Praesens summary */
+         }
+
+
+        .details-content {
+            text-align: left;
+            padding: 15px 0; /* Adjust padding, remove side padding */
+            margin-top: 5px; /* Space below summary */
+            background-color: #fff; /* White background for content */
+            border-top: 1px solid #e9ecef; /* Separator line */
+            border-left: none; /* Remove previous left border */
+            border-radius: 0; /* Remove previous radius */
+             /* Add styles for content within specific details */
+             background-color: #f8f9fa; /* Light background for content */
+             border: 1px solid #e9ecef;
+             border-top: none; /* Remove top border as summary acts as header */
+             border-radius: 0 0 8px 8px; /* Round bottom corners */
+             padding: 15px; /* Restore padding */
+             margin-top: 0; /* Remove space */
+        }
+         /* Specific styling for content within #praesens-details-container */
+         #praesens-details-container .details-content {
+             background-color: transparent; /* No background for table container */
+             border: none;
+             padding: 10px 0 0 0; /* Adjust padding */
+             border-radius: 0;
+         }
+
+        .details-content ul {
+            padding-left: 20px;
+            margin: 0;
+            list-style-position: outside; /* Ensure bullets align nicely */
+        }
+        #modal-phonetics, #modal-translations {
+             font-size: 0.95rem;
+             color: #333;
+             margin: 0 0 10px 0;
+             line-height: 1.5;
+        }
+        #modal-grammar-explanation {
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.5;
+        }
+        #modal-grammar-explanation b {
+            display: block;
+            margin-bottom: 5px;
+             color: #556B2F; /* Dark Olive Green for emphasis */
+             font-weight: 600;
+        }
+         #modal-grammar-explanation li {
+             margin-bottom: 8px; /* Space between grammar points */
+         }
+
+        /* Präsens Table Styles */
+         #modal-praesens-table table {
+             border: 1px solid #ccc;
+             margin-top: 0; /* Remove top margin */
+             width: 100%;
+             border-collapse: collapse;
+         }
+         #modal-praesens-table th, #modal-praesens-table td {
+             border: 1px solid #ccc;
+             padding: 6px 8px;
+             vertical-align: middle;
+             text-align: left;
+         }
+         #modal-praesens-table th {
+             background-color: #e9ecef;
+             font-weight: 600; /* Bold headers */
+         }
+         #modal-praesens-table td:nth-child(4) { /* Center alignment for Endung */
+             text-align: center;
+         }
+         #modal-praesens-table h4 { /* Style for table title */
+             margin-top: 0;
+             margin-bottom: 10px;
+             text-align: center;
+             font-size: 1.1rem;
+             color: #333;
+         }
+         /* Note below Präsens table */
+         #modal-praesens-table .praesens-note {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: #555;
+            margin-top: 10px;
+            text-align: left;
+            padding: 5px;
+            background-color: #f0f8ff;
+            border-left: 3px solid #6899C9;
+         }
+
+         /* Media Query for smaller screens */
+         @media (max-width: 600px) {
+            body { padding: 10px; }
+            .title { font-size: 2rem; }
+            .level-indicator, .info-button { width: 50px; height: 50px; font-size: 1rem; }
+            .cards-container { gap: 1rem; }
+            .word-item { width: calc(50% - 0.5rem); padding: 1rem; } /* Two cards per row */
+            .emoji { font-size: 2rem; margin-right: 0.8rem; }
+            .german-word { font-size: 1.3rem; }
+            .german-past { font-size: 1.1rem; }
+            .spanish-translation, .spanish-perfekt { font-size: 0.85rem; }
+            .modal-content { padding: 1.5rem; max-width: 95%; }
+            #modal-verb-infinitive, #modal-verb-perfekt { font-size: 1.5rem; }
+            #modal-text { font-size: 1.1rem; }
+            .nav-button { padding: 6px 10px; font-size: 0.9rem; gap: 5px; }
+            .nav-button svg { width: 18px; height: 18px; }
+            .button-translation { font-size: 0.65rem; }
+            #modal-praesens-table table, #modal-praesens-table th, #modal-praesens-table td { font-size: 0.8rem; padding: 4px 5px;} /* Smaller table text */
+         }
+         @media (max-width: 400px) {
+              .word-item { width: 100%; } /* One card per row */
+              .header { flex-direction: column; gap: 10px; } /* Stack header items */
+              .title-container { order: -1; } /* Move title to top on mobile */
+         }
