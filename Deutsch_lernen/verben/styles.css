@@ -1,0 +1,720 @@
+/* Shared CSS for German Learning Site */
+
+/* Gender and Plural Color System */
+:root {
+  --maskulin-color: #360FE6;     /* Blue for masculine */
+  --feminin-color: #FF0A0A;      /* Red for feminine */
+  --neutrum-color: #007A00;      /* Green for neuter */
+  --plural-color: #FF8C00;       /* Dark orange for plural */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 20px;
+  background-color: #f0f4f8;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Navigation Menu Styles */
+.nav-menu {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.nav-menu h2 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.nav-item {
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 15px;
+  text-decoration: none;
+  color: #2c3e50;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.nav-item h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.nav-item p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Back to Home Link */
+.back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #4299e1;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 25px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-home:hover {
+  background-color: #3182ce;
+  transform: translateY(-2px);
+}
+
+/* External Link Styles */
+.external-link {
+  color: #3182ce;
+  text-decoration: underline;
+  font-weight: 500;
+  display: inline-block;
+  margin: 10px 0;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.external-link:hover {
+  color: #2c5aa0;
+  background-color: #edf2f7;
+  text-decoration: underline;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.external-link:visited {
+  color: #553c9a;
+}
+
+.external-link:active {
+  transform: translateY(0);
+}
+
+/* Style for the collapsible sections */
+details {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+summary {
+  background-color: #e2e8f0;
+  color: #2c3e50;
+  padding: 18px 25px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+  display: block; /* Ensures full clickable area */
+  position: relative;
+  user-select: none;
+  border-bottom: 1px solid #cbd5e0;
+}
+
+summary:hover {
+  background-color: #d1d9e2;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::before {
+  content: '▶';
+  position: absolute;
+  right: 20px;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.content-wrapper {
+  padding: 20px 25px;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  background-color: #f8faff;
+  font-weight: 600;
+  color: #4a5568;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+tr:nth-child(even) {
+  background-color: #fbfdff;
+}
+
+tr:hover {
+  background-color: #f0f4f8;
+}
+
+.red-ending {
+  color: red;
+}
+
+.blue-change {
+  color: blue;
+}
+
+/* Updated Gender and Plural Classes */
+.der-color, .maskulin {
+  color: var(--maskulin-color) !important;
+  font-weight: bold;
+}
+
+.die-color, .feminin {
+  color: var(--feminin-color) !important;
+  font-weight: bold;
+}
+
+.das-color, .neutrum {
+  color: var(--neutrum-color) !important;
+  font-weight: bold;
+}
+
+.plural-color, .plural {
+  color: var(--plural-color) !important;
+  font-weight: bold;
+}
+
+strong {
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  border-bottom: 1px dashed #cbd5e0;
+  padding-bottom: 5px;
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+ul ul {
+  list-style-type: circle;
+  margin-left: 20px;
+}
+
+.inner-details {
+  margin-bottom: 15px;
+}
+
+.responsive-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Make emojis in substantiv cells larger and centered */
+/* Removed specific rule for abstraktes-deutsches-substantiv - now uses general rule */
+
+/* General substantiv cells - BIG for emojis */
+td[data-label="Substantiv"] {
+  text-align: center;
+  font-size: 7.02rem !important; /* Increased 20% more: 5.85rem * 1.2 = 7.02rem */
+  line-height: 1.3 !important; /* Normal line height for text */
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.1rem !important; /* Minimal gap */
+  padding: 8px !important;
+}
+
+/* Hide the br and use CSS to position emoji closer */
+td[data-label="Substantiv"] br {
+  display: none !important;
+}
+
+/* Force German text to be readable size - override everything */
+table td[data-label="Substantiv"] strong,
+table td[data-label="Substantiv"] span,
+table td[data-label="Substantiv"] .der-color,
+table td[data-label="Substantiv"] .die-color,
+table td[data-label="Substantiv"] .das-color {
+  font-size: 2.34rem !important; /* Increased 30%: 1.8rem * 1.3 = 2.34rem */
+  display: inline !important;
+}
+
+/* Specific styling for einkaufsvokabular table - AFTER general rule */
+#einkaufsvokabular-section td[data-label="Substantiv"] {
+  text-align: center;
+  font-size: 7.02rem !important; /* Same as abstraktes: 7.02rem */
+  line-height: 1.3 !important; /* Normal line height for text */
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.1rem !important; /* Minimal gap */
+  padding: 8px !important;
+}
+
+/* Semibold styling for German examples in verb columns */
+td[data-label="haben"] span,
+td[data-label="sehen"] span,
+td[data-label="finden"] span,
+td[data-label="nehmen"] span,
+td[data-label="mögen"] span,
+td[data-label="kennen"] span,
+td[data-label="brauchen"] span,
+td[data-label="essen"] span,
+td[data-label="kaufen"] span,
+td[data-label="hören"] span,
+td[data-label="trinken"] span,
+td[data-label="lieben"] span {
+  font-weight: 550 !important;
+}
+
+/* Make articles extra bold */
+strong {
+  font-weight: 750 !important;
+}
+
+/* Hide the br in einkaufsvokabular */
+#einkaufsvokabular-section td[data-label="Substantiv"] br {
+  display: none !important;
+}
+
+/* Force German text to be readable size in einkaufsvokabular */
+#einkaufsvokabular-section table td[data-label="Substantiv"] strong,
+#einkaufsvokabular-section table td[data-label="Substantiv"] span,
+#einkaufsvokabular-section table td[data-label="Substantiv"] .der-color,
+#einkaufsvokabular-section table td[data-label="Substantiv"] .die-color,
+#einkaufsvokabular-section table td[data-label="Substantiv"] .das-color {
+  font-size: 2.34rem !important; /* Increased 30%: 1.8rem * 1.3 = 2.34rem */
+  display: inline !important;
+}
+
+/* Specific emoji size for "Abstraktes deutsches Substantiv" table */
+#abstraktes-deutsches-substantiv-subsection td[data-label="Emoji"] {
+  font-size: 7.5em; /* Increased by 100% from 3.75em (3.75 * 2 = 7.5) */
+}
+
+
+/* Default emoji size for other tables */
+td[data-label="Emoji"] {
+  font-size: 4.5em; /* Increased by 100% from 2.25em (2.25 * 2 = 4.5) */
+}
+
+/* Responsive adjustments for tables */
+@media (max-width: 768px) {
+  .nav-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  body {
+    padding: 15px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  summary {
+    font-size: 1.1rem;
+    padding: 15px 20px;
+  }
+  
+  th, td {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .back-home {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  tr {
+    border: 1px solid #e2e8f0;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  td {
+    border: none;
+    border-bottom: 1px solid #e2e8f0;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+  }
+  
+  td:last-child {
+    border-bottom: none;
+  }
+  
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: 600;
+    color: #4a5568;
+  }
+}
+
+/* Hover effect to expand cells and show complete sentences */
+table td:hover {
+  position: relative;
+  z-index: 10;
+  min-width: max-content;
+  white-space: nowrap;
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid #4299e1;
+  padding: 15px 18px;
+  border-radius: 6px;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+/* Mobile tap-to-expand functionality */
+table td.expanded {
+  position: relative;
+  z-index: 10;
+  min-width: max-content;
+  white-space: nowrap;
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid #4299e1;
+  padding: 15px 18px;
+  border-radius: 6px;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+/* Add touch indicator for mobile */
+@media (hover: none) and (pointer: coarse) {
+  table td:not([data-label="Emoji"]):not([data-label="Substantiv"]):after {
+    content: " 👆";
+    font-size: 0.8em;
+    opacity: 0.6;
+    margin-left: 4px;
+  }
+  
+  table td.expanded:after {
+    content: " ✕";
+    font-size: 0.8em;
+    opacity: 0.8;
+    margin-left: 4px;
+    color: #4299e1;
+  }
+}
+
+/* Prevent hover expansion for emoji and substantiv cells to avoid breaking layout */
+td[data-label="Emoji"]:hover,
+td[data-label="Substantiv"]:hover {
+  position: static;
+  z-index: auto;
+  min-width: auto;
+  white-space: normal;
+  transform: none;
+  border: none;
+  box-shadow: none;
+  padding: 12px 15px;
+}
+
+/* Prevent expansion class for emoji and substantiv cells */
+td[data-label="Emoji"].expanded,
+td[data-label="Substantiv"].expanded {
+  position: static;
+  z-index: auto;
+  min-width: auto;
+  white-space: normal;
+  transform: none;
+  border: none;
+  box-shadow: none;
+  padding: 12px 15px;
+}
+
+/* Hide translations by default in Akkusativ tables */
+td[data-label="haben"] .translation,
+td[data-label="sehen"] .translation,
+td[data-label="finden"] .translation,
+td[data-label="nehmen"] .translation,
+td[data-label="mögen"] .translation,
+td[data-label="kennen"] .translation,
+td[data-label="brauchen"] .translation,
+td[data-label="essen"] .translation,
+td[data-label="kaufen"] .translation,
+td[data-label="hören"] .translation,
+td[data-label="trinken"] .translation,
+td[data-label="lieben"] .translation {
+  display: none;
+}
+
+/* Show translations on hover */
+td[data-label="haben"]:hover .translation,
+td[data-label="sehen"]:hover .translation,
+td[data-label="finden"]:hover .translation,
+td[data-label="nehmen"]:hover .translation,
+td[data-label="mögen"]:hover .translation,
+td[data-label="kennen"]:hover .translation,
+td[data-label="brauchen"]:hover .translation,
+td[data-label="essen"]:hover .translation,
+td[data-label="kaufen"]:hover .translation,
+td[data-label="hören"]:hover .translation,
+td[data-label="trinken"]:hover .translation,
+td[data-label="lieben"]:hover .translation {
+  display: block;
+}
+
+/* Show translations when expanded (mobile) */
+td[data-label="haben"].expanded .translation,
+td[data-label="sehen"].expanded .translation,
+td[data-label="finden"].expanded .translation,
+td[data-label="nehmen"].expanded .translation,
+td[data-label="mögen"].expanded .translation,
+td[data-label="kennen"].expanded .translation,
+td[data-label="brauchen"].expanded .translation,
+td[data-label="essen"].expanded .translation,
+td[data-label="kaufen"].expanded .translation,
+td[data-label="hören"].expanded .translation,
+td[data-label="trinken"].expanded .translation,
+td[data-label="lieben"].expanded .translation {
+  display: block;
+}
+
+/* Remove bold from translations */
+.translation {
+  font-weight: normal !important;
+}
+
+.translation i {
+  font-weight: normal !important;
+}
+
+/* Remove bold from German sentences by default in Akkusativ tables, but keep bold for articles and nouns */
+td[data-label="haben"] span:first-child,
+td[data-label="sehen"] span:first-child,
+td[data-label="finden"] span:first-child,
+td[data-label="nehmen"] span:first-child,
+td[data-label="mögen"] span:first-child,
+td[data-label="kennen"] span:first-child,
+td[data-label="brauchen"] span:first-child,
+td[data-label="essen"] span:first-child,
+td[data-label="kaufen"] span:first-child,
+td[data-label="hören"] span:first-child,
+td[data-label="trinken"] span:first-child,
+td[data-label="lieben"] span:first-child {
+  font-weight: normal !important;
+}
+
+/* Keep bold for articles and nouns within German sentences in Akkusativ tables */
+td[data-label="haben"] span:first-child strong,
+td[data-label="sehen"] span:first-child strong,
+td[data-label="finden"] span:first-child strong,
+td[data-label="nehmen"] span:first-child strong,
+td[data-label="mögen"] span:first-child strong,
+td[data-label="kennen"] span:first-child strong,
+td[data-label="brauchen"] span:first-child strong,
+td[data-label="essen"] span:first-child strong,
+td[data-label="kaufen"] span:first-child strong,
+td[data-label="hören"] span:first-child strong,
+td[data-label="trinken"] span:first-child strong,
+td[data-label="lieben"] span:first-child strong {
+  font-weight: 750 !important;
+}
+
+/* Apply bold to German sentences on hover */
+td[data-label="haben"]:hover span:first-child,
+td[data-label="sehen"]:hover span:first-child,
+td[data-label="finden"]:hover span:first-child,
+td[data-label="nehmen"]:hover span:first-child,
+td[data-label="mögen"]:hover span:first-child,
+td[data-label="kennen"]:hover span:first-child,
+td[data-label="brauchen"]:hover span:first-child,
+td[data-label="essen"]:hover span:first-child,
+td[data-label="kaufen"]:hover span:first-child,
+td[data-label="hören"]:hover span:first-child,
+td[data-label="trinken"]:hover span:first-child,
+td[data-label="lieben"]:hover span:first-child {
+  font-weight: 550 !important;
+}
+
+/* Apply bold to German sentences when expanded (mobile) */
+td[data-label="haben"].expanded span:first-child,
+td[data-label="sehen"].expanded span:first-child,
+td[data-label="finden"].expanded span:first-child,
+td[data-label="nehmen"].expanded span:first-child,
+td[data-label="mögen"].expanded span:first-child,
+td[data-label="kennen"].expanded span:first-child,
+td[data-label="brauchen"].expanded span:first-child,
+td[data-label="essen"].expanded span:first-child,
+td[data-label="kaufen"].expanded span:first-child,
+td[data-label="hören"].expanded span:first-child,
+td[data-label="trinken"].expanded span:first-child,
+td[data-label="lieben"].expanded span:first-child {
+  font-weight: 550 !important;
+}
+
+/* Hide translations by default in Abstraktes Substantiv tables */
+td[data-label="Beispielsatz"] .translation,
+td[data-label="Definiter Artikel (Nominativ)"] .translation,
+td[data-label="Definiter Artikel (Akkusativ)"] .translation,
+td[data-label="Indefiniter Artikel (Nominativ)"] .translation,
+td[data-label="Indefiniter Artikel (Akkusativ)"] .translation,
+td[data-label="Negation (Nominativ)"] .translation,
+td[data-label="Negation (Akkusativ)"] .translation {
+  display: none;
+}
+
+/* Show translations on hover */
+td[data-label="Beispielsatz"]:hover .translation,
+td[data-label="Definiter Artikel (Nominativ)"]:hover .translation,
+td[data-label="Definiter Artikel (Akkusativ)"]:hover .translation,
+td[data-label="Indefiniter Artikel (Nominativ)"]:hover .translation,
+td[data-label="Indefiniter Artikel (Akkusativ)"]:hover .translation,
+td[data-label="Negation (Nominativ)"]:hover .translation,
+td[data-label="Negation (Akkusativ)"]:hover .translation {
+  display: block;
+}
+
+/* Show translations when expanded (mobile) */
+td[data-label="Beispielsatz"].expanded .translation,
+td[data-label="Definiter Artikel (Nominativ)"].expanded .translation,
+td[data-label="Definiter Artikel (Akkusativ)"].expanded .translation,
+td[data-label="Indefiniter Artikel (Nominativ)"].expanded .translation,
+td[data-label="Indefiniter Artikel (Akkusativ)"].expanded .translation,
+td[data-label="Negation (Nominativ)"].expanded .translation,
+td[data-label="Negation (Akkusativ)"].expanded .translation {
+  display: block;
+}
+
+/* Remove bold from German sentences by default in Abstraktes Substantiv tables, but keep bold for articles and nouns */
+td[data-label="Beispielsatz"] span:first-child,
+td[data-label="Definiter Artikel (Nominativ)"] span:first-child,
+td[data-label="Definiter Artikel (Akkusativ)"] span:first-child,
+td[data-label="Indefiniter Artikel (Nominativ)"] span:first-child,
+td[data-label="Indefiniter Artikel (Akkusativ)"] span:first-child,
+td[data-label="Negation (Nominativ)"] span:first-child,
+td[data-label="Negation (Akkusativ)"] span:first-child {
+  font-weight: normal !important;
+}
+
+/* Keep bold for articles and nouns within German sentences */
+td[data-label="Beispielsatz"] span:first-child strong,
+td[data-label="Definiter Artikel (Nominativ)"] span:first-child strong,
+td[data-label="Definiter Artikel (Akkusativ)"] span:first-child strong,
+td[data-label="Indefiniter Artikel (Nominativ)"] span:first-child strong,
+td[data-label="Indefiniter Artikel (Akkusativ)"] span:first-child strong,
+td[data-label="Negation (Nominativ)"] span:first-child strong,
+td[data-label="Negation (Akkusativ)"] span:first-child strong {
+  font-weight: 750 !important;
+}
+
+/* Apply semibold to German sentences on hover */
+td[data-label="Beispielsatz"]:hover span:first-child,
+td[data-label="Definiter Artikel (Nominativ)"]:hover span:first-child,
+td[data-label="Definiter Artikel (Akkusativ)"]:hover span:first-child,
+td[data-label="Indefiniter Artikel (Nominativ)"]:hover span:first-child,
+td[data-label="Indefiniter Artikel (Akkusativ)"]:hover span:first-child,
+td[data-label="Negation (Nominativ)"]:hover span:first-child,
+td[data-label="Negation (Akkusativ)"]:hover span:first-child {
+  font-weight: 550 !important;
+}
+
+/* Apply semibold to German sentences when expanded (mobile) */
+td[data-label="Beispielsatz"].expanded span:first-child,
+td[data-label="Definiter Artikel (Nominativ)"].expanded span:first-child,
+td[data-label="Definiter Artikel (Akkusativ)"].expanded span:first-child,
+td[data-label="Indefiniter Artikel (Nominativ)"].expanded span:first-child,
+td[data-label="Indefiniter Artikel (Akkusativ)"].expanded span:first-child,
+td[data-label="Negation (Nominativ)"].expanded span:first-child,
+td[data-label="Negation (Akkusativ)"].expanded span:first-child {
+  font-weight: 550 !important;
+}
+
+/* Hide GB and Es lines in column 2 by default for abstraktes-deutsches-substantiv */
+td[data-label="Aussprache Englisch Spanisch"] .translation { display: none; }
+
+/* Show hidden lines on hover/tap - column 2 (no enlargement) */
+td[data-label="Aussprache Englisch Spanisch"]:hover .translation,
+td[data-label="Aussprache Englisch Spanisch"]:active .translation { 
+  display: block; 
+}
+
+/* Show hidden lines on hover/tap and enlarge cell - columns 3+ */
+td[data-label="Aussprache Englisch Spanisch"].expanded .translation { 
+  display: block; 
+}

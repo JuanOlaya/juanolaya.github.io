@@ -1,0 +1,550 @@
+{
+    "level": "A1.1",
+    "verbs": 
+    {
+        "wissen": {
+            "perfekt": "hat gewusst",
+            "emoji": "🧠",
+            "es": "saber (info)",
+            "es_perfekt": "he sabido",
+            "en_verb": "to know (fact)",
+            "en_perfekt": "has known",
+            "irregularPraesens": true,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "weiß",
+                "du": "weißt",
+                "erSieEs": "weiß",
+                "wir": "wissen",
+                "ihr": "wisst",
+                "sieSie": "wissen"
+            },
+            "examples": [
+                {
+                    "de": "Ich habe das nicht gewusst.",
+                    "es": "No lo sabía.",
+                    "phonetics": "/ɪç ˈhaːbə das nɪçt ɡəˈvʊst/",
+                    "explanation": "<li><b>Negation.</b>"
+                },
+                {
+                    "de": "Hast du das schon gewusst?",
+                    "es": "¿Ya lo sabías?",
+                    "phonetics": "/hast duː das ʃoːn ɡəˈvʊst/",
+                    "explanation": "<li><b>Adverb:</b> \"schon\"."
+                },
+                {
+                    "de": "Er hat die Antwort gewusst.",
+                    "es": "Él sabía la respuesta.",
+                    "phonetics": "/eːɐ̯ hat diː ˈantvɔʁt ɡəˈvʊst/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Wir haben nichts davon gewusst.",
+                    "es": "No sabíamos nada de eso.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ nɪçts daˈfɔn ɡəˈvʊst/",
+                    "explanation": "<li><b>Negation + Pronominaladverb.</b>"
+                },
+                {
+                    "de": "Woher hast du das gewusst?",
+                    "es": "¿De dónde lo sabías?",
+                    "phonetics": "/voːˈheːɐ̯ hast duː das ɡəˈvʊst/",
+                    "explanation": "<li><b>W-Frage (Herkunft der Info).</b>"
+                },
+                {
+                    "de": "Wer hat das gewusst?",
+                    "es": "¿Quién sabía eso?",
+                    "phonetics": "/veːɐ̯ hat das ɡəˈvʊst/",
+                    "explanation": "<li><b>W-Frage (Subjekt).</b>"
+                },
+                {
+                    "de": "Was hast du gewusst?",
+                    "es": "¿Qué sabías?",
+                    "phonetics": "/vas hast duː ɡəˈvʊst/",
+                    "explanation": "<li><b>W-Frage (Objekt).</b>"
+                },
+                {
+                    "de": "Warum hast du das nicht gewusst?",
+                    "es": "¿Por qué no sabías eso?",
+                    "phonetics": "/vaˈʁʊm hast duː das nɪçt ɡəˈvʊst/",
+                    "explanation": "<li><b>W-Frage (Grund) + Negation.</b>"
+                }
+            ]
+        },
+        "kennen": {
+            "perfekt": "hat gekannt",
+            "emoji": "🤝",
+            "es": "conocer (pers./lugar)",
+            "es_perfekt": "he conocido",
+            "en_verb": "to know (person/place)",
+            "en_perfekt": "has known",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "kenne",
+                "du": "kennst",
+                "erSieEs": "kennt",
+                "wir": "kennen",
+                "ihr": "kennt",
+                "sieSie": "kennen"
+            },
+            "examples": [
+                {
+                    "de": "Ich habe ihn nicht gekannt.",
+                    "es": "No lo he conocido (a él).",
+                    "phonetics": "/ɪç ˈhaːbə iːn nɪçt ɡəˈkant/",
+                    "explanation": "<li><b>Akkusativpronomen (ihn).</b>"
+                },
+                {
+                    "de": "Hast du diese Stadt gekannt?",
+                    "es": "¿Conocías esta ciudad?",
+                    "phonetics": "/hast duː ˈdiːzə ʃtat ɡəˈkant/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Wir haben uns schon gekannt.",
+                    "es": "Ya nos conocíamos.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ ʊns ʃoːn ɡəˈkant/",
+                    "explanation": "<li><b>Reflexivpronomen (uns).</b>"
+                },
+                {
+                    "de": "Sie hat den Weg gekannt.",
+                    "es": "Ella conocía el camino.",
+                    "phonetics": "/ziː hat deːn veːk ɡəˈkant/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Ich habe seinen Namen nicht gekannt.",
+                    "es": "No sabía su nombre (de él).",
+                    "phonetics": "/ɪç ˈhaːbə ˈzaɪ̯nən ˈnaːmən nɪçt ɡəˈkant/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Wen hast du dort gekannt?",
+                    "es": "¿A quién has conocido allí?",
+                    "phonetics": "/veːn hast duː dɔʁt ɡəˈkant/",
+                    "explanation": "<li><b>W-Frage (Akkusativ-Person).</b>"
+                },
+                {
+                    "de": "Woher hast du sie gekannt?",
+                    "es": "¿De dónde la conocías (a ella)?",
+                    "phonetics": "/voːˈheːɐ̯ hast duː ziː ɡəˈkant/",
+                    "explanation": "<li><b>W-Frage (Herkunft) + Akkusativpronomen (sie).</b>"
+                },
+                {
+                    "de": "Wer hat dich nicht gekannt?",
+                    "es": "¿Quién no te ha conocido?",
+                    "phonetics": "/veːɐ̯ hat dɪç nɪçt ɡəˈkant/",
+                    "explanation": "<li><b>W-Frage (Subjekt) + Akkusativpronomen (dich).</b>"
+                }
+            ]
+        },
+        "denken": {
+            "perfekt": "hat gedacht",
+            "emoji": "🤔",
+            "es": "pensar",
+            "es_perfekt": "he pensado",
+            "en_verb": "to think",
+            "en_perfekt": "has thought",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "denke",
+                "du": "denkst",
+                "erSieEs": "denkt",
+                "wir": "denken",
+                "ihr": "denkt",
+                "sieSie": "denken"
+            },
+            "examples": [
+                {
+                    "de": "Ich habe an dich gedacht.",
+                    "es": "He pensado en ti.",
+                    "phonetics": "/ɪç ˈhaːbə an dɪç ɡəˈdaxt/",
+                    "explanation": "<li><b>Präposition + Akkusativ:</b> \"an dich denken\"."
+                },
+                {
+                    "de": "Was hast du gedacht?",
+                    "es": "¿Qué has pensado?",
+                    "phonetics": "/vas hast duː ɡəˈdaxt/",
+                    "explanation": "<li><b>W-Frage (Objekt).</b>"
+                },
+                {
+                    "de": "Wir haben das Gleiche gedacht.",
+                    "es": "Hemos pensado lo mismo.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ das ˈɡlaɪ̯çə ɡəˈdaxt/",
+                    "explanation": "<li><b>Objekt:</b> \"das Gleiche\"."
+                },
+                {
+                    "de": "Ich habe gedacht, du kommst nicht.",
+                    "es": "Pensé que no venías.",
+                    "phonetics": "/ɪç ˈhaːbə ɡəˈdaxt duː kɔmst nɪçt/",
+                    "explanation": "<li><b>Nebensatz (ohne \"dass\").</b>"
+                },
+                {
+                    "de": "Er hat lange nachgedacht.",
+                    "es": "Él ha reflexionado mucho tiempo.",
+                    "phonetics": "/eːɐ̯ hat ˈlaŋə ˈnaːxɡədaxt/",
+                    "explanation": "<li><b>Trennbares Verb:</b> nachdenken -> nachgedacht."
+                },
+                {
+                    "de": "Wer hat das gedacht?",
+                    "es": "¿Quién ha pensado eso?",
+                    "phonetics": "/veːɐ̯ hat das ɡəˈdaxt/",
+                    "explanation": "<li><b>W-Frage (Subjekt).</b>"
+                },
+                {
+                    "de": "Warum hast du das gedacht?",
+                    "es": "¿Por qué has pensado eso?",
+                    "phonetics": "/vaˈʁʊm hast duː das ɡəˈdaxt/",
+                    "explanation": "<li><b>W-Frage (Grund).</b>"
+                },
+                {
+                    "de": "Woran hast du gedacht?",
+                    "es": "¿En qué has pensado?",
+                    "phonetics": "/voːˈʁan hast duː ɡəˈdaxt/",
+                    "explanation": "<li><b>Pronominaladverb (woran = wo + an).</b>"
+                }
+            ]
+        },
+        "finden": {
+            "perfekt": "hat gefunden",
+            "emoji": "💡",
+            "es": "encontrar",
+            "es_perfekt": "he encontrado",
+            "en_verb": "to find",
+            "en_perfekt": "has found",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "finde",
+                "du": "findest",
+                "erSieEs": "findet",
+                "wir": "finden",
+                "ihr": "findet",
+                "sieSie": "finden"
+            },
+            "examples": [
+                {
+                    "de": "Ich habe meine Schlüssel gefunden!",
+                    "es": "¡He encontrado mis llaves!",
+                    "phonetics": "/ɪç ˈhaːbə ˈmaɪ̯nə ˈʃlʏsl̩ ɡəˈfʊndn̩/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Hast du eine Lösung gefunden?",
+                    "es": "¿Has encontrado una solución?",
+                    "phonetics": "/hast duː ˈaɪ̯nə ˈløːzʊŋ ɡəˈfʊndn̩/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Wir haben einen Parkplatz gefunden.",
+                    "es": "Hemos encontrado un aparcamiento.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ ˈaɪ̯nən ˈpaʁkˌplats ɡəˈfʊndn̩/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Sie hat einen neuen Job gefunden.",
+                    "es": "Ella ha encontrado un nuevo trabajo.",
+                    "phonetics": "/ziː hat ˈaɪ̯nən ˈnɔʏ̯ən dʒɔp ɡəˈfʊndn̩/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Ich habe das Buch nicht gefunden.",
+                    "es": "No he encontrado el libro.",
+                    "phonetics": "/ɪç ˈhaːbə das buːx nɪçt ɡəˈfʊndn̩/",
+                    "explanation": "<li><b>Negation.</b>"
+                },
+                {
+                    "de": "Was hast du gefunden?",
+                    "es": "¿Qué has encontrado?",
+                    "phonetics": "/vas hast duː ɡəˈfʊndn̩/",
+                    "explanation": "<li><b>W-Frage (Objekt).</b>"
+                },
+                {
+                    "de": "Wo hast du das Geld gefunden?",
+                    "es": "¿Dónde has encontrado el dinero?",
+                    "phonetics": "/voː hast duː das ɡɛlt ɡəˈfʊndn̩/",
+                    "explanation": "<li><b>W-Frage (Ort).</b>"
+                },
+                {
+                    "de": "Wer hat die Lösung gefunden?",
+                    "es": "¿Quién ha encontrado la solución?",
+                    "phonetics": "/veːɐ̯ hat diː ˈløːzʊŋ ɡəˈfʊndn̩/",
+                    "explanation": "<li><b>W-Frage (Subjekt).</b>"
+                }
+            ]
+        },
+        "suchen": {
+            "perfekt": "hat gesucht",
+            "emoji": "🔍",
+            "es": "buscar",
+            "es_perfekt": "he buscado",
+            "en_verb": "to search/look for",
+            "en_perfekt": "has searched",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "suche",
+                "du": "suchst",
+                "erSieEs": "sucht",
+                "wir": "suchen",
+                "ihr": "sucht",
+                "sieSie": "suchen"
+            },
+            "examples": [
+                {
+                    "de": "Ich habe meine Schlüssel gesucht.",
+                    "es": "He buscado mis llaves.",
+                    "phonetics": "/ɪç ˈhaːbə ˈmaɪ̯nə ˈʃlʏsl̩ ɡəˈzuːxt/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Was hast du gesucht?",
+                    "es": "¿Qué has buscado?",
+                    "phonetics": "/vas hast duː ɡəˈzuːxt/",
+                    "explanation": "<li><b>W-Frage (Objekt).</b>"
+                },
+                {
+                    "de": "Wir haben eine Wohnung gesucht.",
+                    "es": "Hemos buscado un apartamento.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ ˈaɪ̯nə ˈvoːnʊŋ ɡəˈzuːxt/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Er hat lange nach einer Lösung gesucht.",
+                    "es": "Él ha buscado una solución durante mucho tiempo.",
+                    "phonetics": "/eːɐ̯ hat ˈlaŋə nax ˈaɪ̯nɐ ˈløːzʊŋ ɡəˈzuːxt/",
+                    "explanation": "<li><b>Präposition + Dativ:</b> \"nach einer Lösung\"."
+                },
+                {
+                    "de": "Habt ihr im Internet gesucht?",
+                    "es": "¿Habéis buscado en internet?",
+                    "phonetics": "/hapt iːɐ̯ ɪm ˈɪntɐnɛt ɡəˈzuːxt/",
+                    "explanation": "<li><b>Präposition + Dativ (Ort).</b>"
+                },
+                {
+                    "de": "Wer hat die Schlüssel gesucht?",
+                    "es": "¿Quién ha buscado las llaves?",
+                    "phonetics": "/veːɐ̯ hat diː ˈʃlʏsl̩ ɡəˈzuːxt/",
+                    "explanation": "<li><b>W-Frage (Subjekt).</b>"
+                },
+                {
+                    "de": "Wo hast du deine Brille gesucht?",
+                    "es": "¿Dónde has buscado tus gafas?",
+                    "phonetics": "/voː hast duː ˈdaɪ̯nə ˈbʁɪlə ɡəˈzuːxt/",
+                    "explanation": "<li><b>W-Frage (Ort) + Akkusativ (deine Brille).</b>"
+                },
+                {
+                    "de": "Wie lange hast du gesucht?",
+                    "es": "¿Cuánto tiempo has buscado?",
+                    "phonetics": "/viː ˈlaŋə hast duː ɡəˈzuːxt/",
+                    "explanation": "<li><b>W-Frage (Dauer).</b>"
+                }
+            ]
+        },
+        "bringen": {
+            "perfekt": "hat gebracht",
+            "emoji": "🚚",
+            "es": "traer/llevar",
+            "es_perfekt": "he traído/llevado",
+            "en_verb": "to bring",
+            "en_perfekt": "has brought",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "bringe",
+                "du": "bringst",
+                "erSieEs": "bringt",
+                "wir": "bringen",
+                "ihr": "bringt",
+                "sieSie": "bringen"
+            },
+            "examples": [
+                {
+                    "de": "Der Postbote hat ein Paket gebracht.",
+                    "es": "El cartero ha traído un paquete.",
+                    "phonetics": "/deːɐ̯ ˈpɔstˌboːtə hat aɪ̯n paˈkeːt ɡəˈbʁaxt/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Hast du die Bücher mitgebracht?",
+                    "es": "¿Has traído los libros?",
+                    "phonetics": "/hast duː diː ˈbyːçɐ ˈmɪtɡəbʁaxt/",
+                    "explanation": "<li><b>Trennbares Verb:</b> mitbringen -> mitgebracht."
+                },
+                {
+                    "de": "Ich habe dir einen Kaffee gebracht.",
+                    "es": "Te he traído un café.",
+                    "phonetics": "/ɪç ˈhaːbə diːɐ̯ ˈaɪ̯nən ˈkafeː ɡəˈbʁaxt/",
+                    "explanation": "<li><b>Dativ (Person) + Akkusativ (Sache).</b>"
+                },
+                {
+                    "de": "Sie hat uns zum Bahnhof gebracht.",
+                    "es": "Ella nos ha llevado a la estación.",
+                    "phonetics": "/ziː hat ʊns tsʊm ˈbaːnhoːf ɡəˈbʁaxt/",
+                    "explanation": "<li><b>Akkusativ (Person) + Präposition + Dativ (Ort).</b>"
+                },
+                {
+                    "de": "Was hat er zur Party gebracht?",
+                    "es": "¿Qué ha traído él a la fiesta?",
+                    "phonetics": "/vas hat eːɐ̯ tsuːɐ̯ ˈpaːɐ̯ti ɡəˈbʁaxt/",
+                    "explanation": "<li><b>W-Frage (Objekt) + Präposition + Dativ.</b>"
+                },
+                {
+                    "de": "Wer hat den Kuchen gebracht?",
+                    "es": "¿Quién ha traído el pastel?",
+                    "phonetics": "/veːɐ̯ hat deːn ˈkuːxn̩ ɡəˈbʁaxt/",
+                    "explanation": "<li><b>W-Frage (Subjekt) + Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Was hast du mir gebracht?",
+                    "es": "¿Qué me has traído?",
+                    "phonetics": "/vas hast duː miːɐ̯ ɡəˈbʁaxt/",
+                    "explanation": "<li><b>W-Frage (Objekt) + Dativ (Person).</b>"
+                },
+                {
+                    "de": "Wohin hat er dich gebracht?",
+                    "es": "¿A dónde te ha llevado él?",
+                    "phonetics": "/voːˈhɪn hat eːɐ̯ dɪç ɡəˈbʁaxt/",
+                    "explanation": "<li><b>W-Frage (Richtung) + Akkusativ (Person).</b>"
+                }
+            ]
+        },
+        "kosten": {
+            "perfekt": "hat gekostet",
+            "emoji": "💶",
+            "es": "costar",
+            "es_perfekt": "ha costado",
+            "en_verb": "to cost",
+            "en_perfekt": "has cost",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "koste",
+                "du": "kostest",
+                "erSieEs": "kostet",
+                "wir": "kosten",
+                "ihr": "kostet",
+                "sieSie": "kosten"
+            },
+            "examples": [
+                {
+                    "de": "Das Ticket hat 10 Euro gekostet.",
+                    "es": "El billete ha costado 10 euros.",
+                    "phonetics": "/das ˈtɪkət hat tseːn ˈɔʏ̯ʁoː ɡəˈkɔstət/",
+                    "explanation": "<li><b>Akkusativ (Preis).</b>"
+                },
+                {
+                    "de": "Wie viel hat das gekostet?",
+                    "es": "¿Cuánto ha costado eso?",
+                    "phonetics": "/viː fiːl hat das ɡəˈkɔstət/",
+                    "explanation": "<li><b>W-Frage (Preis).</b>"
+                },
+                {
+                    "de": "Der Kaffee hat nichts gekostet.",
+                    "es": "El café no ha costado nada.",
+                    "phonetics": "/deːɐ̯ ˈkafeː hat nɪçts ɡəˈkɔstət/",
+                    "explanation": "<li><b>Objekt:</b> \"nichts\"."
+                },
+                {
+                    "de": "Das hat mich viel Zeit gekostet.",
+                    "es": "Eso me ha costado mucho tiempo.",
+                    "phonetics": "/das hat mɪç fiːl tsaɪ̯t ɡəˈkɔstət/",
+                    "explanation": "<li><b>Doppelter Akkusativ:</b> \"mich\" (Person), \"viel Zeit\" (Sache)."
+                },
+                {
+                    "de": "Die Reparatur hat viel Geld gekostet.",
+                    "es": "La reparación ha costado mucho dinero.",
+                    "phonetics": "/diː ʁepaʁaˈtuːɐ̯ hat fiːl ɡɛlt ɡəˈkɔstət/",
+                    "explanation": "<li><b>Akkusativ (Preis).</b>"
+                },
+                {
+                    "de": "Was hat der Apfel gekostet?",
+                    "es": "¿Qué ha costado la manzana?",
+                    "phonetics": "/vas hat deːɐ̯ ˈapfl̩ ɡəˈkɔstət/",
+                    "explanation": "<li><b>W-Frage (Preis) - \"Wie viel\" ist üblicher.</b>"
+                },
+                {
+                    "de": "Wer hat das bezahlt?",
+                    "es": "¿Quién ha pagado eso?",
+                    "phonetics": "/veːɐ̯ hat das bəˈtsaːlt/",
+                    "explanation": "<li><b>Alternative Frage (bezahlen statt kosten).</b>"
+                },
+                {
+                    "de": "Warum hat es so viel gekostet?",
+                    "es": "¿Por qué ha costado tanto?",
+                    "phonetics": "/vaˈʁʊm hat ɛs zoː fiːl ɡəˈkɔstət/",
+                    "explanation": "<li><b>W-Frage (Grund).</b>"
+                }
+            ]
+        },
+        "brauchen": {
+            "perfekt": "hat gebraucht",
+            "emoji": "🙏",
+            "es": "necesitar",
+            "es_perfekt": "he necesitado",
+            "en_verb": "to need",
+            "en_perfekt": "has needed",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "brauche",
+                "du": "brauchst",
+                "erSieEs": "braucht",
+                "wir": "brauchen",
+                "ihr": "braucht",
+                "sieSie": "brauchen"
+            },
+            "examples": [
+                {
+                    "de": "Ich habe deine Hilfe gebraucht.",
+                    "es": "He necesitado tu ayuda.",
+                    "phonetics": "/ɪç ˈhaːbə ˈdaɪ̯nə ˈhɪlfə ɡəˈbʁaʊ̯xt/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Hast du einen Stift gebraucht?",
+                    "es": "¿Has necesitado un bolígrafo?",
+                    "phonetics": "/hast duː ˈaɪ̯nən ʃtɪft ɡəˈbʁaʊ̯xt/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Wir haben mehr Zeit gebraucht.",
+                    "es": "Hemos necesitado más tiempo.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ meːɐ̯ tsaɪ̯t ɡəˈbʁaʊ̯xt/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Sie hat das Geld nicht gebraucht.",
+                    "es": "Ella no ha necesitado el dinero.",
+                    "phonetics": "/ziː hat das ɡɛlt nɪçt ɡəˈbʁaʊ̯xt/",
+                    "explanation": "<li><b>Negation.</b>"
+                },
+                {
+                    "de": "Ihr habt eine Pause gebraucht.",
+                    "es": "Vosotros habéis necesitado una pausa.",
+                    "phonetics": "/iːɐ̯ hapt ˈaɪ̯nə ˈpaʊ̯zə ɡəˈbʁaʊ̯xt/",
+                    "explanation": "<li><b>Akkusativ (Objekt).</b>"
+                },
+                {
+                    "de": "Was hast du gebraucht?",
+                    "es": "¿Qué has necesitado?",
+                    "phonetics": "/vas hast duː ɡəˈbʁaʊ̯xt/",
+                    "explanation": "<li><b>W-Frage (Objekt).</b>"
+                },
+                {
+                    "de": "Wer hat Hilfe gebraucht?",
+                    "es": "¿Quién ha necesitado ayuda?",
+                    "phonetics": "/veːɐ̯ hat ˈhɪlfə ɡəˈbʁaʊ̯xt/",
+                    "explanation": "<li><b>W-Frage (Subjekt).</b>"
+                },
+                {
+                    "de": "Warum hast du ein neues Handy gebraucht?",
+                    "es": "¿Por qué has necesitado un móvil nuevo?",
+                    "phonetics": "/vaˈʁʊm hast duː aɪ̯n ˈnɔʏ̯əs ˈhɛndi ɡəˈbʁaʊ̯xt/",
+                    "explanation": "<li><b>W-Frage (Grund).</b>"
+                }
+            ]
+        }
+    }
+}

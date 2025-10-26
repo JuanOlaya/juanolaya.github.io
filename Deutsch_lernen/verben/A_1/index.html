@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verben: Infinitiv & Perfekt - Alemán A1.1</title>
+    <!-- Carga de la fuente para el estilo de tiza -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/styles.css">
+</head>
+<body>
+
+    <div class="main-container" id="main-container">
+        <div class="content-block">
+            <div class="header">
+                <div class="level-indicator" id="level-indicator">A1.1</div>
+                <div class="title-container">
+                    <h1 class="title">Verben: Infinitiv & Perfekt</h1>
+
+                    <div class="active-recall-toggle">
+                        <label for="perfekt-switch" class="toggle-label">
+                            Perfekt
+                            <span class="toggle-sublabel">(verbo)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="perfekt-switch" class="visibility-toggle" data-toggle-class="hide-perfekt" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="info-button" id="info-button">info</div>
+            </div>
+
+            <div class="cards-container" id="cards-container">
+                <!-- Verb cards will be generated here by JavaScript -->
+            </div>
+
+            <div class="navigation-wrapper">
+                <div class="navigation-controls">
+                    <div id="group-indicator"></div>
+                    <div class="progress-bar-container" id="progress-bar">
+                        <!-- Progress dots will be generated here -->
+                    </div>
+                    <div class="nav-buttons-container">
+                        <button id="prev-group-btn" class="nav-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                            <div>
+                                Zurück
+                                <span class="button-translation">(Anterior)</span>
+                            </div>
+                        </button>
+                        <button id="next-group-btn" class="nav-button">
+                            <div>
+                                Weiter
+                                <span class="button-translation">(Siguiente)</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <button id="story-button">✨ Practicar con una Historia</button>
+            <div class="active-recall-toggle">
+                <label for="recall-switch" class="toggle-label">
+                    Übersetzung
+                    <span class="toggle-sublabel">(traducción)</span>
+                </label>
+                <label class="switch">
+                    <input type="checkbox" id="recall-switch" class="visibility-toggle" data-toggle-class="hide-translation" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div id="story-container" class="story-container">
+                <h3>Eine kleine Geschichte...</h3>
+                <div id="story-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Verb Modal -->
+    <div id="verb-modal" class="modal-overlay">
+        <div class="modal-content">
+            <!-- Infinitive Block -->
+            <div class="modal-verb-block">
+                <div class="modal-verb-line">
+                    <span id="modal-emoji" class="emoji"></span>
+                    <h3 id="modal-verb-infinitive"></h3>
+                    <span id="speak-infinitive-icon" class="speak-icon" title="Infinitiv aussprechen"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></span>
+                </div>
+                <p id="modal-verb-infinitive-es" class="modal-translation" data-form="translation"></p>
+                <p id="modal-verb-english-infinitive" class="modal-translation" data-form="translation"></p>
+            </div>
+
+             <!-- Präsens Details Section -->
+             <details id="praesens-details-container">
+                 <summary id="praesens-details-summary">
+                     Präsens Konjugation
+                     <span class="details-arrow">▶</span>
+                 </summary>
+                 <div id="modal-praesens-table" class="details-content">
+                     <!-- Conjugation table inserted here -->
+                 </div>
+             </details>
+
+            <div data-form="perfekt">
+                <!-- Perfekt Block -->
+                <div class="modal-verb-block">
+                    <div class="modal-verb-line">
+                        <h4 id="modal-verb-perfekt"></h4>
+                        <span id="speak-perfekt-icon" class="speak-icon" title="Perfekt aussprechen"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></span>
+                    </div>
+                    <p id="modal-verb-perfekt-es" class="modal-translation" data-form="translation"></p>
+                    <p id="modal-verb-english-perfekt" class="modal-translation" data-form="translation"></p>
+                </div>
+
+                <!-- Verb Note -->
+                <p id="modal-verb-note" class="modal-note" style="display: none;"></p>
+
+                <!-- Example Sentence Container -->
+                <div id="sentence-container">
+                    <p id="modal-text"></p>
+                    <span id="speak-sentence-icon" class="speak-icon" title="Satz aussprechen"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></span>
+                </div>
+
+                <!-- More Info Details Section -->
+                <details id="details-container">
+                    <summary id="details-summary">
+                        Más información
+                        <span class="details-arrow">▶</span>
+                    </summary>
+                    <div class="details-content">
+                        <div id="modal-phonetics"></div>
+                        <div id="modal-translations"></div>
+                        <div id="modal-grammar-explanation"></div>
+                    </div>
+                </details>
+            </div>
+
+            <hr class="modal-separator">
+
+            <!-- Example Navigation -->
+            <div class="modal-nav">
+                <div class="example-progress-container">
+                    <span id="example-counter"></span>
+                    <div class="progress-bar-container" id="example-progress-bar"></div>
+                </div>
+                <div class="modal-nav-buttons">
+                    <button id="prev-example" class="nav-button">
+                        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        <div>
+                            Zurück
+                            <span class="button-translation">(Anterior)</span>
+                        </div>
+                    </button>
+                    <button id="next-example" class="nav-button">
+                        <div>
+                            Weiter
+                            <span class="button-translation">(Siguiente)</span>
+                        </div>
+                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+            </div>
+
+            <button id="close-verb-modal" class="close-modal-btn">
+                <strong>Schließen</strong>
+                <span class="button-translation">(Cerrar)</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- General Info Modal -->
+    <div id="info-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>El Pasado "Perfekt"</h2>
+            <h3>Uso Principal</h3>
+            <p>El "Perfekt" es el tiempo pasado más importante en alemán. Se usa principalmente en <b>conversaciones habladas</b> para describir acciones que ya han terminado.</p>
+
+            <h3>Estructura de la Frase</h3>
+            <p>La estructura es simple:<br><b>Sujeto + Verbo Auxiliar (conjugado) + ... + Participio II (al final).</b></p>
+            <p>Ej: <i>Ich <b>habe</b> einen Apfel <b>gegessen</b>.</i></p>
+
+            <h3>Verbos Auxiliares: ¿Haben o Sein?</h3>
+            <p>Se usa <b>sein</b> con verbos que indican un movimiento (de A a B) o un cambio de estado. Por ejemplo:</p>
+            <ul>
+                <li><b>gehen</b>: Ich bin ins Kino gegangen. (<b>He ido</b> al cine)</li>
+                <li><b>fahren</b>: Er ist nach Berlin gefahren. (Él <b>ha ido/conducido</b> a Berlín)</li>
+                <li><b>fliegen</b>: Wir sind geflogen. (<b>Hemos volado</b>)</li>
+                <li><b>aufstehen</b> (levantarse): Du bist aufgestanden. (<b>Te has levantado</b>)</li>
+            </ul>
+
+            <p>Se usa <b>haben</b> con la gran mayoría de los otros verbos, especialmente aquellos que tienen un objeto directo. Por ejemplo:</p>
+            <ul>
+                <li><b>kaufen</b>: Ich habe ein Buch gekauft. (<b>He comprado</b> un libro)</li>
+                <li><b>essen</b>: Sie hat eine Pizza gegessen. (Ella <b>ha comido</b> una pizza)</li>
+                <li><b>lesen</b>: Wir haben die Zeitung gelesen. (<b>Hemos leído</b> el periódico)</li>
+            </ul>
+
+            <h3>El Participio II (Partizip II)</h3>
+            <p>Es la forma pasada del verbo. Para verbos regulares, a menudo se forma con:<br><b>ge-</b> + raíz del verbo + <b>-t</b>. Por ejemplo:</p>
+            <ul>
+                <li>machen -> <b>ge</b>mach<b>t</b> (hecho)</li>
+                <li>lernen -> <b>ge</b>lern<b>t</b> (aprendido)</li>
+                <li>kaufen -> <b>ge</b>kauf<b>t</b> (comprado)</li>
+            </ul>
+
+            <p>Los verbos irregulares tienen formas propias que debes memorizar (a menudo terminan en <b>-en</b>). Por ejemplo:</p>
+            <ul>
+                <li>gehen -> gegang<b>en</b> (ido)</li>
+                <li>sehen -> geseh<b>en</b> (visto)</li>
+                <li>sprechen -> gesproch<b>en</b> (hablado)</li>
+                <li>trinken -> getrunk<b>en</b> (bebido)</li>
+                <li>schreiben -> geschrieb<b>en</b> (escrito)</li>
+            </ul>
+
+            <br>
+            <button id="close-info-modal" class="close-modal-btn">Verstanden (Entendido)</button>
+        </div>
+    </div>
+
+    <script src="script/script.js"></script>
+</body>
+</html>
