@@ -155,7 +155,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 2.5rem; /* 40px, 100% bigger */
+            font-size: 3.75rem; /* 60px, 150% bigger */
             pointer-events: none; /* Don't intercept clicks */
             filter: grayscale(100%) opacity(0.8); /* Darker opacity */
             z-index: 20; /* Ensure it's on top of the image */
@@ -513,7 +513,8 @@
                 let imageUrl = currentMedia.src;
                 // Remove text from placeholder URL for the first slide
                 if (imageUrl.includes('placehold.co')) {
-                    imageUrl = imageUrl.split('?')[0];
+                    // Change to a solid color placeholder without text
+                    imageUrl = "https://placehold.co/400x250/E2E8F0/E2E8F0"; // Background color same as text color
                 }
                 mediaHTML = `
                     <div style="position: relative;">
