@@ -241,6 +241,42 @@ const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechs
                 praesensDetailsContainer.style.display = 'none';
             }
 
+            // --- Generate Präsens Examples Table ---
+            const praesensExamplesContainer = document.getElementById('praesens-examples-container');
+            const praesensExamplesTableDiv = document.getElementById('modal-praesens-examples-table');
+            if (data.praesens_examples) {
+                let praesensExamplesTableHTML = `<h4 style="margin-top: 0; margin-bottom: 10px; text-align: center;">Präsens Beispiele (${verb})</h4>`;
+                praesensExamplesTableHTML += `
+                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+                        <thead>
+                            <tr style="background-color: #f0f0f0;">
+                                <th style="padding: 5px; border: 1px solid #ccc;">🇩🇪 Pronomen</th>
+                                <th style="padding: 5px; border: 1px solid #ccc;">Satz</th>
+                                <th style="padding: 5px; border: 1px solid #ccc;">🇬🇧 Translation</th>
+                                <th style="padding: 5px; border: 1px solid #ccc;">🇪🇸 Traducción</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+                for (const pronoun in data.praesens_examples) {
+                    const example = data.praesens_examples[pronoun];
+                    praesensExamplesTableHTML += `
+                            <tr>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${pronoun}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${example.de}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${example.en}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${example.es}</td>
+                            </tr>`;
+                }
+                praesensExamplesTableHTML += `
+                        </tbody>
+                    </table>`;
+                praesensExamplesTableDiv.innerHTML = praesensExamplesTableHTML;
+                praesensExamplesContainer.style.display = 'block';
+            } else {
+                praesensExamplesTableDiv.innerHTML = '';
+                praesensExamplesContainer.style.display = 'none';
+            }
+
             // --- Fill Example Info & More Info ---
              detailsContainer.open = false; // Close "Más Info" by default
              const moreInfoArrow = detailsContainer.querySelector('summary .details-arrow');
