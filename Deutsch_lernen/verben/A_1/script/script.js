@@ -169,6 +169,8 @@ const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechs
             const praesensDetailsContainer = document.getElementById('praesens-details-container'); // "Präsens"
             const praesensTableDiv = document.getElementById('modal-praesens-table');
             const praesensSummary = document.getElementById('praesens-details-summary');
+            const praesensExamplesContainer = document.getElementById('praesens-examples-container'); // Get the new container
+            const praesensExamplesSummary = document.getElementById('praesens-examples-summary'); // Get the new summary
             const exampleNavButtons = document.querySelector('.modal-nav-buttons');
             const exampleProgress = document.querySelector('.example-progress-container');
             const speakInfinitiveIcon = document.getElementById('speak-infinitive-icon');
@@ -242,9 +244,11 @@ const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechs
             }
 
             // --- Generate Präsens Examples Table ---
-            const praesensExamplesContainer = document.getElementById('praesens-examples-container');
-            const praesensExamplesTableDiv = document.getElementById('modal-praesens-examples-table');
             if (data.praesens_examples) {
+                praesensExamplesContainer.open = false; // Close by default
+                const praesensExamplesArrow = praesensExamplesSummary?.querySelector('.details-arrow');
+                if (praesensExamplesArrow) praesensExamplesArrow.style.transform = 'rotate(0deg)'; // Reset arrow
+
                 let praesensExamplesTableHTML = `<h4 style="margin-top: 0; margin-bottom: 10px; text-align: center;">Präsens Beispiele (${verb})</h4>`;
                 praesensExamplesTableHTML += `
                     <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
