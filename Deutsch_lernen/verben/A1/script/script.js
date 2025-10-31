@@ -87,17 +87,13 @@
             });
 
             prevGroupBtn.addEventListener('click', () => {
-                if (currentGroupIndex > 0) {
-                    currentGroupIndex--;
-                    renderVerbGroup(currentGroupIndex);
-                }
+                currentGroupIndex--;
+                renderVerbGroup(currentGroupIndex);
             });
 
             nextGroupBtn.addEventListener('click', () => {
-                if (currentGroupIndex < totalGroups - 1) {
-                    currentGroupIndex++;
-                    renderVerbGroup(currentGroupIndex);
-                }
+                currentGroupIndex++;
+                renderVerbGroup(currentGroupIndex);
             });
 
             storyButton.addEventListener('click', showStory);
