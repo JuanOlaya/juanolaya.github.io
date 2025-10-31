@@ -1,5 +1,4 @@
-const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte"];
-        const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes", "Sechstes", "Siebtes", "Achtes"];
+        const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "Zwölfte", "Dreizehnte", "Vierzehnte", "Fünfzehnte", "Sechzehnte"];        const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes", "Sechstes", "Siebtes", "Achtes"];
 
         // Stories
         const savedStories = [
@@ -9,7 +8,7 @@ const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechs
         ];
 
         const allVerbs = {};
-        const totalGroups = 9; // Updated from 5 to 9
+        const totalGroups = 16;
 
         let currentGroupIndex = 0;
         let currentVerbInModal = '';
@@ -386,11 +385,13 @@ const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechs
                     }
 
                     levelIndicator.textContent = data.level; // Update the level indicator
-                    levelIndicator.classList.remove('level-a1-1', 'level-a1-2');
+                    levelIndicator.classList.remove('level-a1-1', 'level-a1-2', 'level-a2-1');
                     if (data.level === 'A1.1') {
                         levelIndicator.classList.add('level-a1-1');
                     } else if (data.level === 'A1.2') {
                         levelIndicator.classList.add('level-a1-2');
+                    } else if (data.level === 'A2.1') {
+                        levelIndicator.classList.add('level-a2-1');
                     }
 
                     const groupIndicator = document.getElementById('group-indicator');
