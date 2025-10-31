@@ -140,10 +140,12 @@ const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechs
         }
 
         function displayExampleInModal(verb, index) {
+            console.log('displayExampleInModal called with verb:', verb, 'and index:', index);
             currentVerbInModal = verb;
             currentIndexInModal = index;
 
             const data = allVerbs[verb];
+            console.log('data:', data);
             if (!data) { console.error(`Verb data not found for: ${verb}`); hideVerbModal(); return; }
 
              const examples = data.examples || [];
@@ -171,6 +173,9 @@ const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechs
             const praesensSummary = document.getElementById('praesens-details-summary');
             const praesensExamplesContainer = document.getElementById('praesens-examples-container'); // Get the new container
             const praesensExamplesSummary = document.getElementById('praesens-examples-summary'); // Get the new summary
+            const praesensExamplesTableDiv = document.getElementById('modal-praesens-examples-table'); // Get the new table div
+            console.log('praesensExamplesContainer:', praesensExamplesContainer);
+            console.log('praesensExamplesTableDiv:', praesensExamplesTableDiv);
             const exampleNavButtons = document.querySelector('.modal-nav-buttons');
             const exampleProgress = document.querySelector('.example-progress-container');
             const speakInfinitiveIcon = document.getElementById('speak-infinitive-icon');
@@ -417,6 +422,7 @@ const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechs
         }
 
         function openModalForVerb(verb) {
+            console.log('openModalForVerb called with verb:', verb);
             displayExampleInModal(verb, 0);
             document.getElementById('verb-modal').classList.add('visible');
         }

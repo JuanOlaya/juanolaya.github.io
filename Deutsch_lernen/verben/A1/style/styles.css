@@ -303,7 +303,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0,0,0,0.6);
-            display: none;
+            display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
@@ -313,7 +313,6 @@
             padding: 15px; /* Padding for smaller screens */
         }
         .modal-overlay.visible {
-            display: flex;
             opacity: 1;
             visibility: visible;
         }
