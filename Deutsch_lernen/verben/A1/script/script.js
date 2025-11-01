@@ -218,6 +218,7 @@
                                 <th style="padding: 5px; border: 1px solid #ccc; text-align: center;">🇩🇪<br>Pronomen</th>
                                 <th style="padding: 5px; border: 1px solid #ccc; text-align: center;">✍️<br>Endung</th>
                                 <th style="padding: 5px; border: 1px solid #ccc; text-align: center;">${verb}</th>
+                                <th style="padding: 5px; border: 1px solid #ccc; text-align: center;">Beispiel</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -227,6 +228,7 @@
                                 <td style="padding: 5px; border: 1px solid #ccc;">ich</td>
                                 <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-e</td>
                                 <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.ich || '?'}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${(data.praesens_examples && data.praesens_examples.ich) ? data.praesens_examples.ich.de : ''}</td>
                             </tr>
                             <tr>
                                 <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">you</td>
@@ -234,6 +236,7 @@
                                 <td style="padding: 5px; border: 1px solid #ccc;">du</td>
                                 <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-st</td>
                                 <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.du || '?'}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${(data.praesens_examples && data.praesens_examples.du) ? data.praesens_examples.du.de : ''}</td>
                             </tr>
                             <tr>
                                 <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">he/she/it</td>
@@ -241,6 +244,7 @@
                                 <td style="padding: 5px; border: 1px solid #ccc;">er/sie/es</td>
                                 <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-t</td>
                                 <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.erSieEs || '?'}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${(data.praesens_examples && data.praesens_examples.erSieEs) ? data.praesens_examples.erSieEs.de : ''}</td>
                             </tr>
                             <tr>
                                 <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">we</td>
@@ -248,6 +252,7 @@
                                 <td style="padding: 5px; border: 1px solid #ccc;">wir</td>
                                 <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-en</td>
                                 <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.wir || '?'}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${(data.praesens_examples && data.praesens_examples.wir) ? data.praesens_examples.wir.de : ''}</td>
                             </tr>
                             <tr>
                                 <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">you (pl.)</td>
@@ -255,6 +260,7 @@
                                 <td style="padding: 5px; border: 1px solid #ccc;">ihr</td>
                                 <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-t</td>
                                 <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.ihr || '?'}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${(data.praesens_examples && data.praesens_examples.ihr) ? data.praesens_examples.ihr.de : ''}</td>
                             </tr>
                             <tr>
                                 <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">they/You</td>
@@ -262,6 +268,7 @@
                                 <td style="padding: 5px; border: 1px solid #ccc;">sie/Sie</td>
                                 <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-en</td>
                                 <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.sieSie || '?'}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${(data.praesens_examples && data.praesens_examples.sieSie) ? data.praesens_examples.sieSie.de : ''}</td>
                             </tr>
                         </tbody>
                     </table>`;
