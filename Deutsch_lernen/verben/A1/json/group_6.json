@@ -5,370 +5,204 @@
             "perfekt": "hat abgegeben",
             "es": "entregar",
             "es_perfekt": "he entregado",
+            "en_verb": "to hand in / submit",
             "emoji": "📦",
+            "irregularPraesens": true,
+            "vokalwechsel": "e > i",
+            "praesens": {
+                "ich": "gebe ab",
+                "du": "gibst ab",
+                "erSieEs": "gibt ab",
+                "wir": "geben ab",
+                "ihr": "gebt ab",
+                "sieSie": "geben ab"
+            },
+            "praesens_examples": {
+                "ich": {"de": "Ich gebe meine Hausaufgaben ab.", "en": "I hand in my homework.", "es": "Entrego mis deberes."},                "du": {"de": "Gibst du den Schlüssel ab?", "en": "Are you handing in the key?", "es": "¿Entregas la llave?"},                "erSieEs": {"de": "Sie gibt den Bericht morgen ab.", "en": "She is submitting the report tomorrow.", "es": "Ella entrega el informe mañana."},                "wir": {"de": "Wir geben unsere Anträge heute ab.", "en": "We are submitting our applications today.", "es": "Entregamos nuestras solicitudes hoy."},                "ihr": {"de": "Wann gebt ihr die Bücher ab?", "en": "When are you (pl.) returning the books?", "es": "¿Cuándo devolvéis los libros?"},                "sieSie": {"de": "Die Studenten geben ihre Arbeiten ab.", "en": "The students are handing in their papers.", "es": "Los estudiantes entregan sus trabajos."}            },
             "examples": [
-                {
-                    "de": "Ich habe meine Hausaufgaben abgegeben.",
-                    "es": "He entregado mis deberes.",
-                    "phonetics": "/ij jabe maine jaus-auf-gaben ap-guegueben/",
-                    "explanation": "<li><b>Verbo Separable:</b> El verbo es \"abgeben\". En Perfekt, \"ge\" se intercala entre el prefijo \"ab\" y la raíz: \"ab-ge-geben\".</li><li><b>Akkusativ:</b> \"meine Hausaufgaben\" es el objeto directo.</li>"
-                },
-                {
-                    "de": "Er hat seinen Schlüssel an der Rezeption abgegeben.",
-                    "es": "Él ha entregado su llave en la recepción."
-                },
-                {
-                    "de": "Wir müssen die Bücher in der Bibliothek abgeben.",
-                    "es": "Tenemos que entregar los libros en la biblioteca."
-                },
-                {
-                    "de": "Hast du das Formular schon abgegeben?",
-                    "es": "¿Ya has entregado el formulario?"
-                },
-                {
-                    "de": "Sie hat ihre Stimme bei der Wahl abgegeben.",
-                    "es": "Ella ha emitido su voto en las elecciones."
-                },
-                {
-                    "de": "Wann müssen wir die Projektarbeit abgeben?",
-                    "es": "¿Cuándo tenemos que entregar el trabajo del proyecto?"
-                },
-                {
-                    "de": "Wer hat die Pakete abgegeben?",
-                    "es": "¿Quién ha entregado los paquetes?"
-                },
-                {
-                    "de": "Warum hast du es nicht abgegeben?",
-                    "es": "¿Por qué no lo has entregado?"
-                }
+                {"de": "Ich habe meine Hausaufgaben abgegeben.", "es": "He entregado mis deberes.", "phonetics": "/ɪç ˈhaːbə ˈmaɪnə ˈhaʊsʔaʊfˌɡaːbn̩ ˈapɡəˌɡeːbn̩/", "explanation": "<li><b>Verbo Separable:</b> El verbo es \"abgeben\". En Perfekt, \"ge\" se intercala entre el prefijo \"ab\" y la raíz: \"ab-ge-geben\".</li><li><b>Akkusativ:</b> \"meine Hausaufgaben\" es el objeto directo.</li>"},
+                {"de": "Er hat seinen Schlüssel an der Rezeption abgegeben.", "es": "Él ha entregado su llave en la recepción."},                {"de": "Wir müssen die Bücher in der Bibliothek abgeben.", "es": "Tenemos que entregar los libros en la biblioteca."},                {"de": "Hast du das Formular schon abgegeben?", "es": "¿Ya has entregado el formulario?"}
             ]
         },
         "mitmachen": {
             "perfekt": "hat mitgemacht",
             "es": "participar",
             "es_perfekt": "he participado",
+            "en_verb": "to participate / join in",
             "emoji": "🙋‍♀️",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "mache mit",
+                "du": "machst mit",
+                "erSieEs": "macht mit",
+                "wir": "machen mit",
+                "ihr": "macht mit",
+                "sieSie": "machen mit"
+            },
+            "praesens_examples": {
+                "ich": {"de": "Ich mache bei dem Spiel mit.", "en": "I'm joining the game.", "es": "Participo en el juego."},                "du": {"de": "Machst du auch mit?", "en": "Are you participating too?", "es": "¿Tú también participas?"},                "erSieEs": {"de": "Er macht bei der Aktion nicht mit.", "en": "He is not participating in the event.", "es": "Él no participa en el evento."},                "wir": {"de": "Wir machen alle zusammen mit.", "en": "We are all participating together.", "es": "Participamos todos juntos."},                "ihr": {"de": "Macht ihr beim Marathon mit?", "en": "Are you (pl.) participating in the marathon?", "es": "¿Participáis en el maratón?"},                "sieSie": {"de": "Sie machen bei dem Projekt mit.", "en": "They are participating in the project.", "es": "Ellos participan en el proyecto."}            },
             "examples": [
-                {
-                    "de": "Alle haben bei dem Projekt mitgemacht.",
-                    "es": "Todos han participado en el proyecto.",
-                    "phonetics": "/ale jaben bai dem projekt mit-gue-macht/",
-                    "explanation": "<li><b>Verbo Separable:</b> El verbo es \"mitmachen\". En Perfekt, \"ge\" se intercala entre el prefijo \"mit\" y la raíz: \"mit-ge-macht\".</li><li><b>Präposition + Dativ:</b> \"bei dem Projekt\".</li>"
-                },
-                {
-                    "de": "Willst du bei unserem Spiel mitmachen?",
-                    "es": "¿Quieres participar en nuestro juego?"
-                },
-                {
-                    "de": "Sie hat bei der Diskussion nicht mitgemacht.",
-                    "es": "Ella no ha participado in la discusión."
-                },
-                {
-                    "de": "Wer hat bei der Organisation mitgemacht?",
-                    "es": "¿Quién ha participado en la organización?"
-                },
-                {
-                    "de": "Ich habe bei dem Wettbewerb mitgemacht.",
-                    "es": "He participado en el concurso."
-                },
-                {
-                    "de": "Warum hast du nicht mitgemacht?",
-                    "es": "¿Por qué no has participado?"
-                },
-                {
-                    "de": "Wir haben alle zusammen mitgemacht.",
-                    "es": "Hemos participado todos juntos."
-                },
-                {
-                    "de": "Er hat bei der Demonstration mitgemacht.",
-                    "es": "Él ha participado en la manifestación."
-                }
-            ]
+                {"de": "Alle haben bei dem Projekt mitgemacht.", "es": "Todos han participado en el proyecto.", "phonetics": "/ˈalə ˈhaːbn̩ baɪ deːm pʁoˈjɛkt ˈmɪtɡəˌmaxt/", "explanation": "<li><b>Verbo Separable:</b> El verbo es \"mitmachen\". En Perfekt, \"ge\" se intercala entre el prefijo \"mit\" y la raíz: \"mit-ge-macht\".</li><li><b>Präposition + Dativ:</b> \"bei dem Projekt\".</li>"},
+                {"de": "Willst du bei unserem Spiel mitmachen?", "es": "¿Quieres participar en nuestro juego?"},
+                {"de": "Sie hat bei der Diskussion nicht mitgemacht.", "es": "Ella no ha participado en la discusión."}            ]
         },
         "vorstellen": {
             "perfekt": "hat vorgestellt",
-            "es": "presentar",
-            "es_perfekt": "he presentado",
+            "es": "presentar / imaginar",
+            "es_perfekt": "he presentado / imaginado",
+            "en_verb": "to introduce / imagine",
             "emoji": "👋",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "stelle vor",
+                "du": "stellst vor",
+                "erSieEs": "stellt vor",
+                "wir": "stellen vor",
+                "ihr": "stellt vor",
+                "sieSie": "stellen vor"
+            },
+            "praesens_examples": {
+                "ich": {"de": "Ich stelle dir meinen Freund vor.", "en": "I introduce my friend to you.", "es": "Te presento a mi amigo."},                "du": {"de": "Stellst du dich bitte vor?", "en": "Will you please introduce yourself?", "es": "¿Te presentas, por favor?"},                "erSieEs": {"de": "Sie stellt das neue Konzept vor.", "en": "She presents the new concept.", "es": "Ella presenta el nuevo concepto."},                "wir": {"de": "Wir stellen Ihnen unser Team vor.", "en": "We introduce our team to you (formal).", "es": "Le presentamos a nuestro equipo."},                "ihr": {"de": "Stellt ihr heute eure Ergebnisse vor?", "en": "Are you (pl.) presenting your results today?", "es": "¿Presentáis hoy vuestros resultados?"},                "sieSie": {"de": "Ich stelle mir vor, wie es sein wird.", "en": "I imagine how it will be.", "es": "Me imagino cómo será."}            },
             "examples": [
-                {
-                    "de": "Ich habe ihm meinen neuen Freund vorgestellt.",
-                    "es": "Le he presentado a mi nuevo amigo.",
-                    "phonetics": "/ij jabe im mainen noien froind for-gue-shtelt/",
-                    "explanation": "<li><b>Verbo Separable:</b> El verbo es \"vorstellen\". En Perfekt, \"ge\" se intercala entre el prefijo \"vor\" y la raíz: \"vor-ge-stellt\".</li><li><b>Dativ (Person) + Akkusativ (Sache):</b> \"ihm\" (Dativ), \"meinen neuen Freund\" (Akkusativ).</li>"
-                },
-                {
-                    "de": "Kannst du dich bitte vorstellen?",
-                    "es": "¿Puedes presentarte, por favor?"
-                },
-                {
-                    "de": "Sie hat uns ihre Familie vorgestellt.",
-                    "es": "Ella nos ha presentado a su familia."
-                },
-                {
-                    "de": "Wir haben dem Kunden das Projekt vorgestellt.",
-                    "es": "Hemos presentado el proyecto al cliente."
-                },
-                {
-                    "de": "Wer hat dich ihm vorgestellt?",
-                    "es": "¿Quién te ha presentado a él?"
-                },
-                {
-                    "de": "Ich stelle mir vor, wie es sein wird.",
-                    "es": "Me imagino cómo será."
-                },
-                {
-                    "de": "Was hast du dir vorgestellt?",
-                    "es": "¿Qué te has imaginado?"
-                },
-                {
-                    "de": "Warum hast du ihn nicht vorgestellt?",
-                    "es": "¿Por qué no lo has presentado?"
-                }
+                {"de": "Ich habe ihm meinen neuen Freund vorgestellt.", "es": "Le he presentado a mi nuevo amigo.", "phonetics": "/ɪç ˈhaːbə iːm ˈmaɪnən ˈnɔʏən ˈfʁɔʏnt ˈfoːɐɡəˌʃtɛlt/", "explanation": "<li><b>Verbo Separable:</b> El verbo es \"vorstellen\". En Perfekt, \"ge\" se intercala entre el prefijo \"vor\" y la raíz: \"vor-ge-stellt\".</li><li><b>Dativ (Person) + Akkusativ (Sache):</b> \"ihm\" (Dativ), \"meinen neuen Freund\" (Akkusativ).</li>"},
+                {"de": "Kannst du dich bitte vorstellen?", "es": "¿Puedes presentarte, por favor?"},
+                {"de": "Sie hat uns ihre Familie vorgestellt.", "es": "Ella nos ha presentado a su familia."}
             ]
         },
         "helfen": {
             "perfekt": "hat geholfen",
             "es": "ayudar",
             "es_perfekt": "he ayudado",
+            "en_verb": "to help",
             "emoji": "🤝",
+            "irregularPraesens": true,
+            "vokalwechsel": "e > i",
+            "praesens": {
+                "ich": "helfe",
+                "du": "hilfst",
+                "erSieEs": "hilft",
+                "wir": "helfen",
+                "ihr": "helft",
+                "sieSie": "helfen"
+            },
+            "praesens_examples": {
+                "ich": {"de": "Ich helfe dir gerne.", "en": "I'm happy to help you.", "es": "Te ayudo con gusto."},                "du": {"de": "Hilfst du mir bitte?", "en": "Can you please help me?", "es": "¿Me ayudas, por favor?"},                "erSieEs": {"de": "Er hilft seiner Oma.", "en": "He helps his grandma.", "es": "Él ayuda a su abuela."},                "wir": {"de": "Wir helfen bei der Organisation.", "en": "We are helping with the organization.", "es": "Ayudamos con la organización."},                "ihr": {"de": "Helft ihr uns beim Umzug?", "en": "Are you (pl.) helping us move?", "es": "¿Nos ayudáis con la mudanza?"},                "sieSie": {"de": "Sie helfen den Tieren im Tierheim.", "en": "They help the animals in the animal shelter.", "es": "Ellos ayudan a los animales en el refugio."}            },
             "examples": [
-                {
-                    "de": "Ich habe meiner Mutter im Garten geholfen.",
-                    "es": "He ayudado a mi madre en el jardín.",
-                    "phonetics": "/ij jabe mainer muter im garten gue-jolfen/",
-                    "explanation": "<li><b>Dativ:</b> El verbo \"helfen\" siempre rige dativo. Por eso se dice \"meiner Mutter\" (a mi madre).</li>"
-                },
-                {
-                    "de": "Kannst du mir bitte helfen?",
-                    "es": "¿Puedes ayudarme por favor?"
-                },
-                {
-                    "de": "Er hat mir bei den Hausaufgaben geholfen.",
-                    "es": "Él me ha ayudado con los deberes."
-                },
-                {
-                    "de": "Wir haben den alten Leuten geholfen.",
-                    "es": "Hemos ayudado a la gente mayor."
-                },
-                {
-                    "de": "Sie hat ihm geholfen, die Koffer zu tragen.",
-                    "es": "Ella le ha ayudado a llevar las maletas."
-                },
-                {
-                    "de": "Wer hat dir geholfen?",
-                    "es": "¿Quién te ha ayudado?"
-                },
-                {
-                    "de": "Wobei kann ich Ihnen helfen?",
-                    "es": "¿En qué puedo ayudarle?"
-                },
-                {
-                    "de": "Warum hast du ihm nicht geholfen?",
-                    "es": "¿Por qué no le has ayudado?"
-                }
-            ]
+                {"de": "Ich habe meiner Mutter im Garten geholfen.", "es": "He ayudado a mi madre en el jardín.", "phonetics": "/ɪç ˈhaːbə ˈmaɪnɐ ˈmʊtɐ ɪm ˈɡaʁtn̩ ɡəˈhɔlfn̩/", "explanation": "<li><b>Dativ:</b> El verbo \"helfen\" siempre rige dativo. Por eso se dice \"meiner Mutter\" (a mi madre).</li>"},
+                {"de": "Kannst du mir bitte helfen?", "es": "¿Puedes ayudarme por favor?"},
+                {"de": "Er hat mir bei den Hausaufgaben geholfen.", "es": "Él me ha ayudado con los deberes."}            ]
         },
         "danken": {
             "perfekt": "hat gedankt",
             "es": "agradecer",
             "es_perfekt": "he agradecido",
+            "en_verb": "to thank",
             "emoji": "🙏",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "danke",
+                "du": "dankst",
+                "erSieEs": "dankt",
+                "wir": "danken",
+                "ihr": "dankt",
+                "sieSie": "danken"
+            },
+            "praesens_examples": {
+                "ich": {"de": "Ich danke Ihnen für die Einladung.", "en": "I thank you (formal) for the invitation.", "es": "Le agradezco la invitación."},                "du": {"de": "Ich weiß nicht, wie ich dir danke.", "en": "I don't know how to thank you.", "es": "No sé cómo agradecerte."},                "erSieEs": {"de": "Er dankt seinem Freund für die Hilfe.", "en": "He thanks his friend for the help.", "es": "Él agradece a su amigo por la ayuda."},                "wir": {"de": "Wir danken für Ihr Verständnis.", "en": "We thank you for your understanding.", "es": "Agradecemos su comprensión."},                "ihr": {"de": "Dankt ihr ihm auch?", "en": "Do you (pl.) thank him too?", "es": "¿Le dais las gracias también?"},                "sieSie": {"de": "Sie danken dem Arzt.", "en": "They thank the doctor.", "es": "Ellos agradecen al médico."}            },
             "examples": [
-                {
-                    "de": "Ich danke dir für deine Hilfe.",
-                    "es": "Te agradezco tu ayuda.",
-                    "phonetics": "/ij danke dia fur daine jilfe/",
-                    "explanation": "<li><b>Dativ:</b> El verbo \"danken\" rige dativo. Por eso se dice \"dir\" (a ti).</li><li><b>Präposition + Akkusativ:</b> \"für deine Hilfe\".</li>"
-                },
-                {
-                    "de": "Er hat sich bei mir bedankt.",
-                    "es": "Él me ha dado las gracias."
-                },
-                {
-                    "de": "Wir danken Ihnen für Ihr Verständnis.",
-                    "es": "Le agradecemos su comprensión."
-                },
-                {
-                    "de": "Hast du ihm schon gedankt?",
-                    "es": "¿Ya le has dado las gracias?"
-                },
-                {
-                    "de": "Sie hat mir für das Geschenk gedankt.",
-                    "es": "Ella me ha dado las gracias por el regalo."
-                },
-                {
-                    "de": "Wofür hast du ihm gedankt?",
-                    "es": "¿Por qué le has dado las gracias?"
-                },
-                {
-                    "de": "Wer hat dir gedankt?",
-                    "es": "¿Quién te ha dado las gracias?"
-                },
-                {
-                    "de": "Warum hast du dich nicht bedankt?",
-                    "es": "¿Por qué no has dado las gracias?"
-                }
-            ]
+                {"de": "Ich danke dir für deine Hilfe.", "es": "Te agradezco tu ayuda.", "phonetics": "/ɪç ˈdaŋkə diːɐ̯ fyːɐ̯ ˈdaɪnə ˈhɪlfə/", "explanation": "<li><b>Dativ:</b> El verbo \"danken\" rige dativo. Por eso se dice \"dir\" (a ti).</li><li><b>Präposition + Akkusativ:</b> \"für deine Hilfe\".</li>"},
+                {"de": "Er hat sich bei mir bedankt.", "es": "Él me ha dado las gracias."},                {"de": "Wir danken Ihnen für Ihr Verständnis.", "es": "Le agradecemos su comprensión."}            ]
         },
         "gehören": {
             "perfekt": "hat gehört",
             "es": "pertenecer",
             "es_perfekt": "he pertenecido",
+            "en_verb": "to belong to",
             "emoji": "🔑",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "gehöre",
+                "du": "gehörst",
+                "erSieEs": "gehört",
+                "wir": "gehören",
+                "ihr": "gehört",
+                "sieSie": "gehören"
+            },
+            "praesens_examples": {
+                "ich": {"de": "Ich gehöre zu dieser Gruppe.", "en": "I belong to this group.", "es": "Pertenezco a este grupo."},                "du": {"de": "Gehörst du auch dazu?", "en": "Do you belong to it too?", "es": "¿Tú también perteneces?"},                "erSieEs": {"de": "Das Auto gehört meinem Vater.", "en": "The car belongs to my father.", "es": "El coche pertenece a mi padre."},                "wir": {"de": "Wir gehören zusammen.", "en": "We belong together.", "es": "Pertenecemos juntos."},                "ihr": {"de": "Gehört ihr zur Familie?", "en": "Do you (pl.) belong to the family?", "es": "¿Pertenecéis a la familia?"},                "sieSie": {"de": "Die Schlüssel gehören an das Brett.", "en": "The keys belong on the board.", "es": "Las llaves pertenecen al tablero."}            },
             "examples": [
-                {
-                    "de": "Das Buch gehört mir.",
-                    "es": "El libro me pertenece."
-                },
-                {
-                    "de": "Wem gehört dieses Auto?",
-                    "es": "¿A quién pertenece este coche?"
-                },
-                {
-                    "de": "Sie gehört zu unserer Gruppe.",
-                    "es": "Ella pertenece a nuestro grupo."
-                },
-                {
-                    "de": "Das gehört nicht hierher.",
-                    "es": "Eso no pertenece aquí."
-                },
-                {
-                    "de": "Diese Aufgabe gehört zu meinen Pflichten.",
-                    "es": "Esta tarea pertenece a mis obligaciones."
-                },
-                {
-                    "de": "Gehört das dir?",
-                    "es": "¿Eso te pertenece?"
-                },
-                {
-                    "de": "Wer gehört dazu?",
-                    "es": "¿Quién pertenece a eso?"
-                },
-                {
-                    "de": "Warum gehört das nicht dazu?",
-                    "es": "¿Por qué eso no pertenece a eso?"
-                }
-            ]
+                {"de": "Das Buch gehört mir.", "es": "El libro me pertenece."},                {"de": "Wem gehört dieses Auto?", "es": "¿A quién pertenece este coche?"},
+                {"de": "Sie gehört zu unserer Gruppe.", "es": "Ella pertenece a nuestro grupo."}            ]
         },
         "passen": {
             "perfekt": "hat gepasst",
-            "es": "quedar bien",
-            "es_perfekt": "ha quedado bien",
+            "es": "quedar bien / encajar",
+            "es_perfekt": "ha quedado bien / encajado",
+            "en_verb": "to fit / to suit",
             "emoji": "👕",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "passe",
+                "du": "passt",
+                "erSieEs": "passt",
+                "wir": "passen",
+                "ihr": "passt",
+                "sieSie": "passen"
+            },
+            "praesens_examples": {
+                "ich": {"de": "Ich glaube, ich passe nicht in die Gruppe.", "en": "I think I don't fit in the group.", "es": "Creo que no encajo en el grupo."},                "du": {"de": "Passt dir der Termin?", "en": "Does the appointment suit you?", "es": "¿Te viene bien la cita?"},                "erSieEs": {"de": "Die Hose passt perfekt.", "en": "The pants fit perfectly.", "es": "Los pantalones me quedan perfectos."},                "wir": {"de": "Wir passen gut zusammen.", "en": "We are a good match.", "es": "Encajamos bien juntos."},                "ihr": {"de": "Passt euch die Farbe?", "en": "Does the color suit you (pl.)?", "es": "¿Os va bien el color?"},                "sieSie": {"de": "Die Schuhe passen ihr nicht.", "en": "The shoes don't fit her.", "es": "Los zapatos no le quedan bien."}            },
             "examples": [
-                {
-                    "de": "Die Hose passt mir gut.",
-                    "es": "El pantalón me queda bien."
-                },
-                {
-                    "de": "Die Schuhe passen nicht zu meinem Kleid.",
-                    "es": "Los zapatos no combinan con mi vestido."
-                },
-                {
-                    "de": "Passt dir der Termin am Dienstag?",
-                    "es": "¿Te viene bien la cita el martes?"
-                },
-                {
-                    "de": "Das Wetter hat gut gepasst.",
-                    "es": "El tiempo ha sido bueno."
-                },
-                {
-                    "de": "Diese Farbe passt gut zu dir.",
-                    "es": "Este color te sienta bien."
-                },
-                {
-                    "de": "Passt das zusammen?",
-                    "es": "¿Esto combina?"
-                },
-                {
-                    "de": "Wer passt auf die Kinder auf?",
-                    "es": "¿Quién cuida a los niños?"
-                },
-                {
-                    "de": "Warum passt das nicht?",
-                    "es": "¿Por qué no encaja?"
-                }
+                {"de": "Die Hose passt mir gut.", "es": "El pantalón me queda bien."},                {"de": "Die Schuhe passen nicht zu meinem Kleid.", "es": "Los zapatos no combinan con mi vestido."},                {"de": "Passt dir der Termin am Dienstag?", "es": "¿Te viene bien la cita el martes?"}
             ]
         },
         "schmecken": {
             "perfekt": "hat geschmeckt",
             "es": "saber (de sabor)",
             "es_perfekt": "ha sabido",
+            "en_verb": "to taste (good)",
             "emoji": "😋",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "schmecke",
+                "du": "schmeckst",
+                "erSieEs": "schmeckt",
+                "wir": "schmecken",
+                "ihr": "schmeckt",
+                "sieSie": "schmecken"
+            },
+            "praesens_examples": {
+                "ich": {"de": "Ich schmecke das Salz nicht.", "en": "I don't taste the salt.", "es": "No noto la sal."},                "du": {"de": "Schmeckst du den Unterschied?", "en": "Do you taste the difference?", "es": "¿Notas la diferencia de sabor?"},                "erSieEs": {"de": "Der Kuchen schmeckt gut.", "en": "The cake tastes good.", "es": "El pastel sabe bien."},                "wir": {"de": "Wir schmecken, dass es frisch ist.", "en": "We taste that it's fresh.", "es": "Notamos que está fresco."},                "ihr": {"de": "Schmeckt euch die Suppe?", "en": "Do you (pl.) like the soup?", "es": "¿Os gusta la sopa?"},                "sieSie": {"de": "Das Essen schmeckt ihnen immer.", "en": "The food always tastes good to them.", "es": "La comida siempre les sabe bien."}            },
             "examples": [
-                {
-                    "de": "Das Essen schmeckt sehr gut.",
-                    "es": "La comida sabe muy bien."
-                },
-                {
-                    "de": "Schmeckt dir der Wein?",
-                    "es": "¿Te gusta el vino?"
-                },
-                {
-                    "de": "Mir schmeckt es nicht.",
-                    "es": "No me gusta."
-                },
-                {
-                    "de": "Das schmeckt nach Schokolade.",
-                    "es": "Sabe a chocolate."
-                },
-                {
-                    "de": "Hat es dir geschmeckt?",
-                    "es": "¿Te ha gustado?"
-                },
-                {
-                    "de": "Was schmeckt dir am besten?",
-                    "es": "¿Qué es lo que más te gusta?"
-                },
-                {
-                    "de": "Wer hat das geschmeckt?",
-                    "es": "¿Quién ha probado esto?"
-                },
-                {
-                    "de": "Warum schmeckt das so komisch?",
-                    "es": "¿Por qué sabe tan raro?"
-                }
+                {"de": "Das Essen schmeckt sehr gut.", "es": "La comida sabe muy bien."},                {"de": "Schmeckt dir der Wein?", "es": "¿Te gusta el vino?"},
+                {"de": "Mir schmeckt es nicht.", "es": "No me gusta (el sabor)."}
             ]
         },
         "gratulieren": {
             "perfekt": "hat gratuliert",
             "es": "felicitar",
             "es_perfekt": "he felicitado",
+            "en_verb": "to congratulate",
             "emoji": "🎉",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "gratuliere",
+                "du": "gratulierst",
+                "erSieEs": "gratuliert",
+                "wir": "gratulieren",
+                "ihr": "gratuliert",
+                "sieSie": "gratulieren"
+            },
+            "praesens_examples": {
+                "ich": {"de": "Ich gratuliere dir zum Geburtstag.", "en": "I congratulate you on your birthday.", "es": "Te felicito por tu cumpleaños."},                "du": {"de": "Du gratulierst ihm zur Hochzeit.", "en": "You congratulate him on his wedding.", "es": "Tú le felicitas por su boda."},                "erSieEs": {"de": "Sie gratuliert ihrer Schwester.", "en": "She congratulates her sister.", "es": "Ella felicita a su hermana."},                "wir": {"de": "Wir gratulieren zum neuen Job.", "en": "We congratulate on the new job.", "es": "Felicitamos por el nuevo trabajo."},                "ihr": {"de": "Wann gratuliert ihr dem Gewinner?", "en": "When do you (pl.) congratulate the winner?", "es": "¿Cuándo felicitáis al ganador?"},                "sieSie": {"de": "Sie gratulieren dem Team zum Sieg.", "en": "They congratulate the team on the victory.", "es": "Ellos felicitan al equipo por la victoria."}            },
             "examples": [
-                {
-                    "de": "Ich gratuliere dir zum Geburtstag.",
-                    "es": "Te felicito por tu cumpleaños."
-                },
-                {
-                    "de": "Wir gratulieren Ihnen herzlich zur Hochzeit.",
-                    "es": "Le felicitamos sinceramente por la boda."
-                },
-                {
-                    "de": "Hast du ihm schon gratuliert?",
-                    "es": "¿Ya le has felicitado?"
-                },
-                {
-                    "de": "Sie hat mir zur bestandenen Prüfung gratuliert.",
-                    "es": "Ella me ha felicitado por el examen aprobado."
-                },
-                {
-                    "de": "Wozu hast du ihm gratuliert?",
-                    "es": "¿Por qué le has felicitado?"
-                },
-                {
-                    "de": "Wer hat dir gratuliert?",
-                    "es": "¿Quién te ha felicitado?"
-                },
-                {
-                    "de": "Warum hast du ihr nicht gratuliert?",
-                    "es": "¿Por qué no la has felicitado?"
-                },
-                {
-                    "de": "Ich gratuliere dir zu deinem Erfolg.",
-                    "es": "Te felicito por tu éxito."
-                }
+                {"de": "Ich gratuliere dir zum Geburtstag.", "es": "Te felicito por tu cumpleaños."},                {"de": "Wir gratulieren Ihnen herzlich zur Hochzeit.", "es": "Le felicitamos sinceramente por la boda."},                {"de": "Hast du ihm schon gratuliert?", "es": "¿Ya le has felicitado?"}
             ]
         }
     }
