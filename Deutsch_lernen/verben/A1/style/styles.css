@@ -1,5 +1,4 @@
-
-        * {
+* {
             box-sizing: border-box;
         }
         html {
@@ -494,7 +493,7 @@
         }
         #info-modal ul {
             padding-left: 25px;
-            list-style-type: '✓ '; /* Check mark */
+            list-style-type: '✓ ';
              margin-bottom: 1rem;
         }
          #info-modal b {
@@ -761,3 +760,16 @@
               .header { flex-direction: column; gap: 10px; } /* Stack header items */
               .title-container { order: -1; } /* Move title to top on mobile */
          }
+/* Styles for collapsible columns in Praesens table */
+#praesens-conjugation-table.hide-translations .collapsible-col {
+    display: none;
+}
+
+.translation-toggle-details summary {
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #007bff;
+    cursor: pointer;
+    padding: 5px;
+    text-align: right;
+}

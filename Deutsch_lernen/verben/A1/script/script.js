@@ -202,24 +202,67 @@
                     if (data.vokalwechsel) { praesensTableHTML += ` (${data.vokalwechsel})`; }
                 }
                 praesensTableHTML += `</h4>`;
+                
+                // Add the details/summary for toggling columns
                 praesensTableHTML += `
-                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+                    <details class="translation-toggle-details">
+                        <summary>Show Pronoun Translations</summary>
+                    </details>`;
+
+                praesensTableHTML += `
+                    <table id="praesens-conjugation-table" class="hide-translations" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
                         <thead>
                             <tr style="background-color: #f0f0f0;">
+                                <th class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">🇬🇧 Pronoun</th>
+                                <th class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">🇪🇸 Pronombre</th>
                                 <th style="padding: 5px; border: 1px solid #ccc;">🇩🇪 Pronomen</th>
-                                <th style="padding: 5px; border: 1px solid #ccc;">🇬🇧 Pronoun</th>
-                                <th style="padding: 5px; border: 1px solid #ccc;">🇪🇸 Pronombre</th>
                                 <th style="padding: 5px; border: 1px solid #ccc; text-align: center;">✍️ Endung</th>
                                 <th style="padding: 5px; border: 1px solid #ccc;">${verb}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td style="padding: 5px; border: 1px solid #ccc;">ich</td><td style="padding: 5px; border: 1px solid #ccc;">I</td><td style="padding: 5px; border: 1px solid #ccc;">yo</td><td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-e</td><td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.ich || '?'}</td></tr>
-                            <tr><td style="padding: 5px; border: 1px solid #ccc;">du</td><td style="padding: 5px; border: 1px solid #ccc;">you</td><td style="padding: 5px; border: 1px solid #ccc;">tú</td><td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-st</td><td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.du || '?'}</td></tr>
-                            <tr><td style="padding: 5px; border: 1px solid #ccc;">er/sie/es</td><td style="padding: 5px; border: 1px solid #ccc;">he/she/it</td><td style="padding: 5px; border: 1px solid #ccc;">él/ella/neutro</td><td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-t</td><td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.erSieEs || '?'}</td></tr>
-                            <tr><td style="padding: 5px; border: 1px solid #ccc;">wir</td><td style="padding: 5px; border: 1px solid #ccc;">we</td><td style="padding: 5px; border: 1px solid #ccc;">nosotros/as</td><td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-en</td><td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.wir || '?'}</td></tr>
-                            <tr><td style="padding: 5px; border: 1px solid #ccc;">ihr</td><td style="padding: 5px; border: 1px solid #ccc;">you (pl.)</td><td style="padding: 5px; border: 1px solid #ccc;">vosotros/as</td><td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-t</td><td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.ihr || '?'}</td></tr>
-                            <tr><td style="padding: 5px; border: 1px solid #ccc;">sie/Sie</td><td style="padding: 5px; border: 1px solid #ccc;">they/You</td><td style="padding: 5px; border: 1px solid #ccc;">ellos/as / Usted(es)</td><td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-en</td><td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.sieSie || '?'}</td></tr>
+                            <tr>
+                                <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">I</td>
+                                <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">yo</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">ich</td>
+                                <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-e</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.ich || '?'}</td>
+                            </tr>
+                            <tr>
+                                <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">you</td>
+                                <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">tú</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">du</td>
+                                <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-st</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.du || '?'}</td>
+                            </tr>
+                            <tr>
+                                <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">he/she/it</td>
+                                <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">él/ella/neutro</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">er/sie/es</td>
+                                <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-t</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.erSieEs || '?'}</td>
+                            </tr>
+                            <tr>
+                                <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">we</td>
+                                <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">nosotros/as</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">wir</td>
+                                <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-en</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.wir || '?'}</td>
+                            </tr>
+                            <tr>
+                                <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">you (pl.)</td>
+                                <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">vosotros/as</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">ihr</td>
+                                <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-t</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.ihr || '?'}</td>
+                            </tr>
+                            <tr>
+                                <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">they/You</td>
+                                <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">ellos/as / Usted(es)</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">sie/Sie</td>
+                                <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-en</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.sieSie || '?'}</td>
+                            </tr>
                         </tbody>
                     </table>`;
 
@@ -237,6 +280,15 @@
                  } // Add more specific notes for modals if needed
 
                 praesensTableDiv.innerHTML = praesensTableHTML;
+                
+                // Add event listener for the new details/summary
+                const translationToggle = praesensTableDiv.querySelector('.translation-toggle-details');
+                const table = praesensTableDiv.querySelector('#praesens-conjugation-table');
+                if (translationToggle && table) {
+                    translationToggle.addEventListener('toggle', () => {
+                        table.classList.toggle('hide-translations');
+                    });
+                }
                 praesensDetailsContainer.style.display = 'block';
             } else {
                 praesensTableDiv.innerHTML = '';
