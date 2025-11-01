@@ -774,43 +774,6 @@
     text-align: right;
 }
 
-/* Language toggle switch in modal */
-.lang-toggle-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-bottom: 10px;
-    gap: 8px;
-}
-
-.lang-toggle-label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #555;
-}
-
-/* Simple toggle with labels */
-.lang-toggle {
-    display: flex;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.lang-toggle-option {
-    padding: 4px 10px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    background-color: #f0f0f0;
-    color: #333;
-    transition: background-color 0.2s;
-}
-
-.lang-toggle-option.active {
-    background-color: #4682B4;
-    color: white;
-}
-
 /* Example translation styling */
 .beispiel-translation {
     display: block; /* Puts it on a new line */
@@ -818,13 +781,23 @@
     font-size: 0.85em; /* Smaller than the main example */
     color: #555;
     margin-top: 4px;
+    
+    /* --- NEW --- */
+    opacity: 0; /* Hide by default */
+    max-height: 0; /* Collapse the element */
+    overflow: hidden;
+    transition: opacity 0.3s ease-out, max-height 0.3s ease-out;
 }
 
-/* Hide/show logic for translations */
-#praesens-conjugation-table.show-es .lang-en {
-    display: none;
+/* Show on hover of the parent cell */
+#praesens-conjugation-table td:hover .beispiel-translation {
+    opacity: 1;
+    max-height: 5em; /* Allow space for translations to appear */
 }
 
-#praesens-conjugation-table.show-en .lang-es {
-    display: none;
+/* Make both translations visible, stacked */
+.beispiel-translation .lang-en,
+.beispiel-translation .lang-es {
+    display: block; /* Stack them vertically */
+    margin-top: 2px;
 }
