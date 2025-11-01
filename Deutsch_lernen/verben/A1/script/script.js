@@ -213,11 +213,11 @@
                     <table id="praesens-conjugation-table" class="hide-translations" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
                         <thead>
                             <tr style="background-color: #f0f0f0;">
-                                <th class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">🇬🇧 Pronoun</th>
-                                <th class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">🇪🇸 Pronombre</th>
-                                <th style="padding: 5px; border: 1px solid #ccc;">🇩🇪 Pronomen</th>
-                                <th style="padding: 5px; border: 1px solid #ccc; text-align: center;">✍️ Endung</th>
-                                <th style="padding: 5px; border: 1px solid #ccc;">${verb}</th>
+                                <th class="collapsible-col" style="padding: 5px; border: 1px solid #ccc; text-align: center;">🇬🇧<br>Pronoun</th>
+                                <th class="collapsible-col" style="padding: 5px; border: 1px solid #ccc; text-align: center;">🇪🇸<br>Pronombre</th>
+                                <th style="padding: 5px; border: 1px solid #ccc; text-align: center;">🇩🇪<br>Pronomen</th>
+                                <th style="padding: 5px; border: 1px solid #ccc; text-align: center;">✍️<br>Endung</th>
+                                <th style="padding: 5px; border: 1px solid #ccc; text-align: center;">${verb}</th>
                             </tr>
                         </thead>
                         <tbody>
