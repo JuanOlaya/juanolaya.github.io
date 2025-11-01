@@ -209,6 +209,16 @@
                         <summary>Show Pronoun Translations</summary>
                     </details>`;
 
+                // Add the language toggle for examples
+                praesensTableHTML += `
+                    <div class="lang-toggle-container">
+                        <span class="lang-toggle-label">Translation:</span>
+                        <div class="lang-toggle" id="beispiel-lang-toggle">
+                            <div class="lang-toggle-option active" data-lang="en">🇬🇧 EN</div>
+                            <div class="lang-toggle-option" data-lang="es">🇪🇸 ES</div>
+                        </div>
+                    </div>`;
+
                 praesensTableHTML += `
                     <table id="praesens-conjugation-table" class="hide-translations" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
                         <thead>
@@ -228,7 +238,13 @@
                                 <td style="padding: 5px; border: 1px solid #ccc;">ich</td>
                                 <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-e</td>
                                 <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.ich || '?'}</td>
-                                <td style="padding: 5px; border: 1px solid #ccc;">${(data.praesens_examples && data.praesens_examples.ich) ? data.praesens_examples.ich.de : ''}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">
+                                    ${(data.praesens_examples && data.praesens_examples.ich) ? data.praesens_examples.ich.de : ''}
+                                    <span class="beispiel-translation">
+                                        <span class="lang-en">${(data.praesens_examples && data.praesens_examples.ich) ? data.praesens_examples.ich.en : ''}</span>
+                                        <span class="lang-es">${(data.praesens_examples && data.praesens_examples.ich) ? data.praesens_examples.ich.es : ''}</span>
+                                    </span>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">you</td>
@@ -236,7 +252,13 @@
                                 <td style="padding: 5px; border: 1px solid #ccc;">du</td>
                                 <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-st</td>
                                 <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.du || '?'}</td>
-                                <td style="padding: 5px; border: 1px solid #ccc;">${(data.praesens_examples && data.praesens_examples.du) ? data.praesens_examples.du.de : ''}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">
+                                    ${(data.praesens_examples && data.praesens_examples.du) ? data.praesens_examples.du.de : ''}
+                                    <span class="beispiel-translation">
+                                        <span class="lang-en">${(data.praesens_examples && data.praesens_examples.du) ? data.praesens_examples.du.en : ''}</span>
+                                        <span class="lang-es">${(data.praesens_examples && data.praesens_examples.du) ? data.praesens_examples.du.es : ''}</span>
+                                    </span>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">he/she/it</td>
@@ -244,7 +266,13 @@
                                 <td style="padding: 5px; border: 1px solid #ccc;">er/sie/es</td>
                                 <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-t</td>
                                 <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.erSieEs || '?'}</td>
-                                <td style="padding: 5px; border: 1px solid #ccc;">${(data.praesens_examples && data.praesens_examples.erSieEs) ? data.praesens_examples.erSieEs.de : ''}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">
+                                    ${(data.praesens_examples && data.praesens_examples.erSieEs) ? data.praesens_examples.erSieEs.de : ''}
+                                    <span class="beispiel-translation">
+                                        <span class="lang-en">${(data.praesens_examples && data.praesens_examples.erSieEs) ? data.praesens_examples.erSieEs.en : ''}</span>
+                                        <span class="lang-es">${(data.praesens_examples && data.praesens_examples.erSieEs) ? data.praesens_examples.erSieEs.es : ''}</span>
+                                    </span>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">we</td>
@@ -252,7 +280,13 @@
                                 <td style="padding: 5px; border: 1px solid #ccc;">wir</td>
                                 <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-en</td>
                                 <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.wir || '?'}</td>
-                                <td style="padding: 5px; border: 1px solid #ccc;">${(data.praesens_examples && data.praesens_examples.wir) ? data.praesens_examples.wir.de : ''}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">
+                                    ${(data.praesens_examples && data.praesens_examples.wir) ? data.praesens_examples.wir.de : ''}
+                                    <span class="beispiel-translation">
+                                        <span class="lang-en">${(data.praesens_examples && data.praesens_examples.wir) ? data.praesens_examples.wir.en : ''}</span>
+                                        <span class="lang-es">${(data.praesens_examples && data.praesens_examples.wir) ? data.praesens_examples.wir.es : ''}</span>
+                                    </span>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">you (pl.)</td>
@@ -260,7 +294,13 @@
                                 <td style="padding: 5px; border: 1px solid #ccc;">ihr</td>
                                 <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-t</td>
                                 <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.ihr || '?'}</td>
-                                <td style="padding: 5px; border: 1px solid #ccc;">${(data.praesens_examples && data.praesens_examples.ihr) ? data.praesens_examples.ihr.de : ''}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">
+                                    ${(data.praesens_examples && data.praesens_examples.ihr) ? data.praesens_examples.ihr.de : ''}
+                                    <span class="beispiel-translation">
+                                        <span class="lang-en">${(data.praesens_examples && data.praesens_examples.ihr) ? data.praesens_examples.ihr.en : ''}</span>
+                                        <span class="lang-es">${(data.praesens_examples && data.praesens_examples.ihr) ? data.praesens_examples.ihr.es : ''}</span>
+                                    </span>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="collapsible-col" style="padding: 5px; border: 1px solid #ccc;">they/You</td>
@@ -268,7 +308,13 @@
                                 <td style="padding: 5px; border: 1px solid #ccc;">sie/Sie</td>
                                 <td style="padding: 5px; border: 1px solid #ccc; text-align: center;">-en</td>
                                 <td style="padding: 5px; border: 1px solid #ccc;">${data.praesens.sieSie || '?'}</td>
-                                <td style="padding: 5px; border: 1px solid #ccc;">${(data.praesens_examples && data.praesens_examples.sieSie) ? data.praesens_examples.sieSie.de : ''}</td>
+                                <td style="padding: 5px; border: 1px solid #ccc;">
+                                    ${(data.praesens_examples && data.praesens_examples.sieSie) ? data.praesens_examples.sieSie.de : ''}
+                                    <span class="beispiel-translation">
+                                        <span class="lang-en">${(data.praesens_examples && data.praesens_examples.sieSie) ? data.praesens_examples.sieSie.en : ''}</span>
+                                        <span class="lang-es">${(data.praesens_examples && data.praesens_examples.sieSie) ? data.praesens_examples.sieSie.es : ''}</span>
+                                    </span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>`;
@@ -288,14 +334,45 @@
 
                 praesensTableDiv.innerHTML = praesensTableHTML;
                 
-                // Add event listener for the new details/summary
-                const translationToggle = praesensTableDiv.querySelector('.translation-toggle-details');
                 const table = praesensTableDiv.querySelector('#praesens-conjugation-table');
+
+                // Add event listener for the pronoun translation toggle
+                const translationToggle = praesensTableDiv.querySelector('.translation-toggle-details');
                 if (translationToggle && table) {
                     translationToggle.addEventListener('toggle', () => {
                         table.classList.toggle('hide-translations');
                     });
                 }
+
+                // Add event listener for the new language toggle
+                const beispielLangToggle = praesensTableDiv.querySelector('#beispiel-lang-toggle');
+                if (beispielLangToggle && table) {
+                    // Set initial state
+                    table.classList.add('show-en');
+
+                    beispielLangToggle.addEventListener('click', (event) => {
+                        const target = event.target.closest('.lang-toggle-option');
+                        if (!target) return;
+
+                        const lang = target.dataset.lang;
+                        
+                        // Update button active state
+                        beispielLangToggle.querySelectorAll('.lang-toggle-option').forEach(opt => {
+                            opt.classList.remove('active');
+                        });
+                        target.classList.add('active');
+
+                        // Update table class
+                        if (lang === 'es') {
+                            table.classList.remove('show-en');
+                            table.classList.add('show-es');
+                        } else {
+                            table.classList.remove('show-es');
+                            table.classList.add('show-en');
+                        }
+                    });
+                }
+
                 praesensDetailsContainer.style.display = 'block';
             } else {
                 praesensTableDiv.innerHTML = '';
