@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>German Nominativ Case Table</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+        }
+        .table-cell {
+            padding: 0.4rem 0.6rem;
+            white-space: nowrap; 
+            vertical-align: top;
+        }
+        .wrap-cell {
+            white-space: normal;
+        }
+
+        /* --- BASE STYLES FOR INTERACTIVE CELLS --- */
+        .interactive-cell-wrapper {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0.4rem 0.6rem;
+            transition: background-color 0.15s ease-in-out;
+            min-height: 5.5rem; /* Ensure consistent height for all main interactive cells */
+            justify-content: center;
+        }
+        .interactive-cell-wrapper:hover,
+        .interactive-cell-wrapper.active {
+            background-color: #e5e5e5; /* Light grey hover background */
+        }
+
+        /* --- HIDDEN TRANSLATION MECHANISM (UNIFIED) --- */
+        .hidden-translation-part {
+            color: #4b5563; 
+            font-style: italic; /* Always italic for Spanish translations */
+            font-size: 0.8rem;
+            line-height: 1.2;
+            white-space: normal;
+            
+            /* Hiding styles */
+            max-height: 0; 
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        
+        /* RULE 1: Reveal on Hover/Active or Global Toggle */
+        .interactive-cell-wrapper:hover .hidden-translation-part,
+        .interactive-cell-wrapper.active .hidden-translation-part,
+        .force-open .hidden-translation-part {
+            max-height: 10rem !important; /* Force open to accommodate text */
+            opacity: 1 !important;
+            margin-top: 0.1rem !important;
+        }
+        
+
+        /* --- SPECIFIC STYLE ELEMENTS --- */
+        
+        .merged-gender-cell, .merged-base-cell { 
+            min-height: 5.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 0; /* Let inner wrapper control padding */
+        }
+        .german-phrase {
+            color: #1f2937; 
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+        .base-article-german {
+            background-color: #ecfdf5; 
+            display: inline-block;
+            padding: 0.05rem 0.2rem;
+            border-radius: 0.25rem;
+            font-weight: 700; 
+            color: #065f46;
+        }
+        .nominativ-pronoun-visible {
+            font-weight: 700;
+            color: #0f766e;
+            background-color: #f0fdfa;
+            display: inline-block;
+            padding: 0.1rem 0.2rem;
+            border-radius: 0.25rem;
+            margin-right: 0.5rem;
+        }
+        .pronunciation-hint {
+            font-size: 0.8rem;
+            color: #4b5563;
+            font-weight: 500;
+            margin-top: 0;
+        }
+
+        /* Row colors */
+        .article-row, .possessive-row {
+            background-color: #f0fdfa;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">German Nominativ Case: Articles, Pronouns, and Possessives</h1>
+        <p class="text-gray-600 mb-6">A comprehensive table of the Nominativ case, including personal pronouns, articles, and possessive determiners, with Spanish translations. (Click/tap any cell to reveal its translation.)</p>
+
+        <div id="table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200">
+            <!-- Table will be rendered here by JavaScript -->
+        </div>
+
+        <!-- Global Toggle Button -->
+        <div class="mt-6 flex justify-end">
+            <button id="toggle-all-button" onclick="toggleAllTranslations()" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-4 5a1 1 0 100 2h2a1 1 0 100-2h-2z" clip-rule="evenodd" />
+                </svg>
+                Mostrar todas las traducciones
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const tableData = [
+            {
+                "Sujeto (Nominativo)": "Art. Def.",
+                "Base": "der / die / das",
+                "Trad. Base": "el / la / el",
+                "den männlich (akkusativ)": "der",
+                "Männlich (M) - Ejemplos con Verbos": "Der Mann ist freundlich.",
+                "Trad. (M)": "El hombre es amigable.",
+                "die weiblich (akkusativ)": "die",
+                "Weiblich (F) - Ejemplos con Verbos": "Die Frau ist Ärztin.",
+                "Trad. (F)": "La mujer es doctora.",
+                "das neutral (akkusativ)": "das",
+                "Neutral (N) - Ejemplos con Verbos": "Das Kind schläft.",
+                "Trad. (N)": "El niño duerme.",
+                "die plural (akkusativ)": "die",
+                "Plural (P) - Ejemplos con Verbos": "Die Hunde bellen.",
+                "Trad. (P)": "Los perros ladran.",
+            },
+            {
+                "Sujeto (Nominativo)": "Art. Indef.",
+                "Base": "ein / eine / ein",
+                "Trad. Base": "un / una / un",
+                "den männlich (akkusativ)": "ein",
+                "Männlich (M) - Ejemplos con Verbos": "Ein Vogel singt laut.",
+                "Trad. (M)": "Un pájaro canta fuerte.",
+                "die weiblich (akkusativ)": "eine",
+                "Weiblich (F) - Ejemplos con Verbos": "Eine Blume blüht.",
+                "Trad. (F)": "Una flor florece.",
+                "das neutral (akkusativ)": "ein",
+                "Neutral (N) - Ejemplos con Verbos": "Ein Buch liegt da.",
+                "Trad. (N)": "Un libro yace allí.",
+                "die plural (akkusativ)": "-", // No indefinite article in plural
+                "Plural (P) - Ejemplos con Verbos": "-",
+                "Trad. (P)": "(No existe art. indefinido)",
+            },
+            {
+                "Sujeto (Nominativo)": "Art. Neg.",
+                "Base": "kein / keine / kein",
+                "Trad. Base": "ningún / ninguna / ningún",
+                "den männlich (akkusativ)": "kein",
+                "Männlich (M) - Ejemplos con Verbos": "Kein Wein ist auf dem Tisch.",
+                "Trad. (M)": "No hay vino en la mesa.",
+                "die weiblich (akkusativ)": "keine",
+                "Weiblich (F) - Ejemplos con Verbos": "Keine Milch ist im Kühlschrank.",
+                "Trad. (F)": "No hay leche en la nevera.",
+                "das neutral (akkusativ)": "kein",
+                "Neutral (N) - Ejemplos con Verbos": "Kein Auto steht draußen.",
+                "Trad. (N)": "No hay ningún coche fuera.",
+                "die plural (akkusativ)": "keine",
+                "Plural (P) - Ejemplos con Verbos": "Keine Kinder spielen hier.",
+                "Trad. (P)": "Ningún niño juega aquí.",
+            },
+            {
+                "Sujeto (Nominativo)": "ich",
+                "Base": "mein-",
+                "Trad. Base": "mi-",
+                "den männlich (akkusativ)": "mein",
+                "Männlich (M) - Ejemplos con Verbos": "Mein Hund ist süß.",
+                "Trad. (M)": "Mi perro es lindo.",
+                "die weiblich (akkusativ)": "meine",
+                "Weiblich (F) - Ejemplos con Verbos": "Meine Lampe brennt.",
+                "Trad. (F)": "Mi lámpara está encendida.",
+                "das neutral (akkusativ)": "mein",
+                "Neutral (N) - Ejemplos con Verbos": "Mein Haus ist groß.",
+                "Trad. (N)": "Mi casa es grande.",
+                "die plural (akkusativ)": "meine",
+                "Plural (P) - Ejemplos con Verbos": "Meine Katzen schlafen.",
+                "Trad. (P)": "Mis gatos duermen.",
+            },
+            {
+                "Sujeto (Nominativo)": "du",
+                "Base": "dein-",
+                "Trad. Base": "tu-",
+                "den männlich (akkusativ)": "dein",
+                "Männlich (M) - Ejemplos con Verbos": "Dein Tisch ist leer.",
+                "Trad. (M)": "Tu mesa está vacía.",
+                "die weiblich (akkusativ)": "deine",
+                "Weiblich (F) - Ejemplos con Verbos": "Deine Uhr ist kaputt.",
+                "Trad. (F)": "Tu reloj está roto.",
+                "das neutral (akkusativ)": "dein",
+                "Neutral (N) - Ejemplos con Verbos": "Dein Glas ist voll.",
+                "Trad. (N)": "Tu vaso está lleno.",
+                "die plural (akkusativ)": "deine",
+                "Plural (P) - Ejemplos con Verbos": "Deine Bücher sind neu.",
+                "Trad. (P)": "Tus libros son nuevos.",
+            },
+            {
+                "Sujeto (Nominativo)": "er",
+                "Base": "sein-",
+                "Trad. Base": "su (de él)-",
+                "den männlich (akkusativ)": "sein",
+                "Männlich (M) - Ejemplos con Verbos": "Sein Name ist Tom.",
+                "Trad. (M)": "Su nombre es Tom.",
+                "die weiblich (akkusativ)": "seine",
+                "Weiblich (F) - Ejemplos con Verbos": "Seine Frau arbeitet hier.",
+                "Trad. (F)": "Su esposa trabaja aquí.",
+                "das neutral (akkusativ)": "sein",
+                "Neutral (N) - Ejemplos con Verbos": "Sein Buch ist interessant.",
+                "Trad. (N)": "Su libro es interesante.",
+                "die plural (akkusativ)": "seine",
+                "Plural (P) - Ejemplos con Verbos": "Seine Eltern sind nett.",
+                "Trad. (P)": "Sus padres son amables.",
+            },
+            {
+                "Sujeto (Nominativo)": "sie (ella)",
+                "Base": "ihr-",
+                "Trad. Base": "su (de ella)-",
+                "den männlich (akkusativ)": "ihr",
+                "Männlich (M) - Ejemplos con Verbos": "Ihr Mann ist Ingenieur.",
+                "Trad. (M)": "Su marido es ingeniero.",
+                "die weiblich (akkusativ)": "ihre",
+                "Weiblich (F) - Ejemplos con Verbos": "Ihre Katze ist schwarz.",
+                "Trad. (F)": "Su gata es negra.",
+                "das neutral (akkusativ)": "ihr",
+                "Neutral (N) - Ejemplos con Verbos": "Ihr Kind spielt draußen.",
+                "Trad. (N)": "Su hijo juega fuera.",
+                "die plural (akkusativ)": "ihre",
+                "Plural (P) - Ejemplos con Verbos": "Ihre Taschen sind schwer.",
+                "Trad. (P)": "Sus bolsos son pesados.",
+            },
+            {
+                "Sujeto (Nominativo)": "es",
+                "Base": "sein-",
+                "Trad. Base": "su (de ello)-",
+                "den männlich (akkusativ)": "sein",
+                "Männlich (M) - Ejemplos con Verbos": "Sein Auto fährt schnell.",
+                "Trad. (M)": "Su coche corre rápido.",
+                "die weiblich (akkusativ)": "seine",
+                "Weiblich (F) - Ejemplos con Verbos": "Seine Farbe ist schön.",
+                "Trad. (F)": "Su color es bonito.",
+                "das neutral (akkusativ)": "sein",
+                "Neutral (N) - Ejemplos con Verbos": "Sein Buch ist dick.",
+                "Trad. (N)": "Su libro es gordo.",
+                "die plural (akkusativ)": "seine",
+                "Plural (P) - Ejemplos con Verbos": "Seine Blätter fallen.",
+                "Trad. (P)": "Sus hojas caen.",
+            },
+            {
+                "Sujeto (Nominativo)": "wir",
+                "Base": "unser-",
+                "Trad. Base": "nuestro/a-",
+                "den männlich (akkusativ)": "unser",
+                "Männlich (M) - Ejemplos con Verbos": "Unser Lehrer ist streng.",
+                "Trad. (M)": "Nuestro profesor es estricto.",
+                "die weiblich (akkusativ)": "unsere",
+                "Weiblich (F) - Ejemplos con Verbos": "Unsere Ciudad ist schön.",
+                "Trad. (F)": "Nuestra ciudad es hermosa.",
+                "das neutral (akkusativ)": "unser",
+                "Neutral (N) - Ejemplos con Verbos": "Unser Haus ist alt.",
+                "Trad. (N)": "Nuestra casa es vieja.",
+                "die plural (akkusativ)": "unsere",
+                "Plural (P) - Ejemplos con Verbos": "Unsere Kinder sind laut.",
+                "Trad. (P)": "Nuestros hijos son ruidosos.",
+            },
+            {
+                "Sujeto (Nominativo)": "ihr (vosotros)",
+                "Base": "euer- / eur-",
+                "Trad. Base": "vuestro/a-",
+                "den männlich (akkusativ)": "euer",
+                "Männlich (M) - Ejemplos con Verbos": "Euer Garten ist grün.",
+                "Trad. (M)": "Vuestro jardín es verde.",
+                "die weiblich (akkusativ)": "eure",
+                "Weiblich (F) - Ejemplos con Verbos": "Eure Wohnung ist klein.",
+                "Trad. (F)": "Vuestro apartamento es pequeño.",
+                "das neutral (akkusativ)": "euer",
+                "Neutral (N) - Ejemplos con Verbos": "Euer Auto ist rot.",
+                "Trad. (N)": "Vuestro coche es rojo.",
+                "die plural (akkusativ)": "eure",
+                "Plural (P) - Ejemplos con Verbos": "Eure Kleider sind schön.",
+                "Trad. (P)": "Vuestra ropa es bonita.",
+            },
+            {
+                "Sujeto (Nominativo)": "sie (ellos)",
+                "Base": "ihr-",
+                "Trad. Base": "su (de ellos)-",
+                "den männlich (akkusativ)": "ihr",
+                "Männlich (M) - Ejemplos con Verbos": "Ihr Baum ist hoch.",
+                "Trad. (M)": "Su árbol es alto.",
+                "die weiblich (akkusativ)": "ihre",
+                "Weiblich (F) - Ejemplos con Verbos": "Ihre Idee ist gut.",
+                "Trad. (F)": "Su idea es buena.",
+                "das neutral (akkusativ)": "ihr",
+                "Neutral (N) - Ejemplos con Verbos": "Ihr Geld ist weg.",
+                "Trad. (N)": "Su dinero se ha ido.",
+                "die plural (akkusativ)": "ihre",
+                "Plural (P) - Ejemplos con Verbos": "Ihre Kinder spielen.",
+                "Trad. (P)": "Sus hijos juegan.",
+            },
+            {
+                "Sujeto (Nominativo)": "Sie (formal)",
+                "Base": "Ihr-",
+                "Trad. Base": "su (formal)-",
+                "den männlich (akkusativ)": "Ihr",
+                "Männlich (M) - Ejemplos con Verbos": "Ihr Kaffee ist fertig.",
+                "Trad. (M)": "Su café está listo.",
+                "die weiblich (akkusativ)": "Ihre",
+                "Weiblich (F) - Ejemplos con Verbos": "Ihre Rechnung ist korrekt.",
+                "Trad. (F)": "Su factura es correcta.",
+                "das neutral (akkusativ)": "Ihr",
+                "Neutral (N) - Ejemplos con Verbos": "Ihr Gepäck ist angekommen.",
+                "Trad. (N)": "Su equipaje ha llegado.",
+                "die plural (akkusativ)": "Ihre",
+                "Plural (P) - Ejemplos con Verbos": "Ihre Kollegen sind hier.",
+                "Trad. (P)": "Sus colegas están aquí.",
+            }
+        ];
+
+        // Pronunciation map and Spanish translation map remain unchanged
+        const pronunciationMap = {
+            "ich": "/ij/", "du": "/du/", "er": "/ea/", "sie (ella)": "/si/",
+            "es (neutro)": "/es/", "wir": "/via/", "ihr (vosotros)": "/ia/",
+            "sie (ellos)": "/si/", "Sie (formal)": "/si/"
+        };
+        const spanishTranslationMap = {
+            "ich": "yo", "du": "tú", "er": "él", "wir": "nosotros/as"
+        };
+
+        const mergedDeterminerKeys = [
+            { key: "den männlich (akkusativ)", example: "Männlich (M) - Ejemplos con Verbos", translation: "Trad. (M)", color: '#34d399', title: 'Männlich (M)' },
+            { key: "die weiblich (akkusativ)", example: "Weiblich (F) - Ejemplos con Verbos", translation: "Trad. (F)", color: '#10b981', title: 'Weiblich (F)' },
+            { key: "das neutral (akkusativ)", example: "Neutral (N) - Ejemplos con Verbos", translation: "Trad. (N)", color: '#059669', title: 'Neutral (N)' },
+            { key: "die plural (akkusativ)", example: "Plural (P) - Ejemplos con Verbos", translation: "Trad. (P)", color: '#047857', title: 'Plural (P)' }
+        ];
+
+        const determinerKeys = [
+            "den männlich (akkusativ)", "die weiblich (akkusativ)", 
+            "das neutral (akkusativ)", "die plural (akkusativ)"
+        ];
+
+        
+        // --- HELPER FUNCTIONS ---
+
+        function formatMultiLine(text, isTranslationBase) {
+            if (typeof text !== 'string') return text;
+            let newText = text.replace(/ \/ /g, '<br>');
+            if (isTranslationBase) {
+                newText = newText.replace(/-\s*$/, '');
+            }
+            return newText;
+        }
+
+        function formatSubjectColumn(text) {
+            if (typeof text !== 'string') return text;
+            
+            // Handle Article rows (Art. Def., Art. Indef., Art. Neg.)
+            if (text.startsWith('Art.')) {
+                // Articles don't have separate translations/pronunciation hints in this column
+                return `<div class="interactive-cell-wrapper" onclick="this.classList.toggle('active')">
+                    <span class="nominativ-pronoun-visible">${text}</span>
+                </div>`;
+            }
+            
+            // Handle Pronoun rows (ich, du, er, sie, es, wir, ihr, Sie)
+            const parenthesisMatch = text.match(/ \((ella|vosotros|ellos|formal|neutro)\)/);
+            const baseText = text.replace(parenthesisMatch ? parenthesisMatch[0] : '', '').trim();
+            const pronunciation = pronunciationMap[text] || '';
+            const simpleSpanishTranslation = spanishTranslationMap[baseText] || '';
+            
+            let parenthesisContent = '';
+            if (parenthesisMatch) {
+                parenthesisContent = parenthesisMatch[1];
+                if (parenthesisContent === 'formal') {
+                    parenthesisContent = 'Usted / Ustedes';
+                }
+            }
+
+            return `
+                <div class="interactive-cell-wrapper" onclick="this.classList.toggle('active')">
+                    <span class="nominativ-pronoun-visible">${baseText}</span>
+                    ${pronunciation ? `<span class="pronunciation-hint">${pronunciation}</span>` : ''}
+                    ${simpleSpanishTranslation ? `<span class="hidden-translation-part">${simpleSpanishTranslation}</span>` : ''}
+                    ${parenthesisContent ? `<span class="hidden-translation-part">${parenthesisContent}</span>` : ''}
+                </div>
+            `;
+        }
+
+        // Global Toggle Function
+        let translationsVisible = false;
+
+        function toggleAllTranslations() {
+            const button = document.getElementById('toggle-all-button');
+            const table = document.getElementById('table-container');
+
+            translationsVisible = !translationsVisible;
+            
+            if (translationsVisible) {
+                table.classList.add('force-open');
+                button.textContent = 'Ocultar todas las traducciones';
+            } else {
+                table.classList.remove('force-open');
+                button.textContent = 'Mostrar todas las traducciones';
+                document.querySelectorAll('.interactive-cell-wrapper').forEach(wrapper => {
+                    wrapper.classList.remove('active');
+                });
+            }
+        }
+
+
+        // --- MAIN RENDER FUNCTION ---
+        function renderTable() {
+            const container = document.getElementById('table-container');
+
+            let html = '<div class="overflow-x-auto"><table class="min-w-full divide-y divide-gray-300">';
+
+            const bodyKeysToRender = [
+                "Sujeto (Nominativo)", "Base", "den männlich (akkusativ)", 
+                "die weiblich (akkusativ)", "das neutral (akkusativ)", "die plural (akkusativ)"
+            ];
+            
+            // --- HEADER ROW 1: Grouping ---
+            html += '<thead class="bg-gray-100">';
+            html += '<tr>';
+            html += `<th colspan="2" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #e0f2fe;">Pronombres Personales y Base</th>`;
+            html += `<th colspan="4" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700" style="background-color: #ccfbf1;">Nominativ Case Determiners (Artículos y Posesivos por Género)</th>`;
+            html += '</tr>';
+
+            // --- HEADER ROW 2: Sub-Grouping / Gender Labels ---
+            html += '<tr>';
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #a7f3d0;">Sujeto (Nom.)</th>`;
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #6ee7b7;">Base / Trad.</th>`;
+
+            const genders = [
+                { title: 'Männlich (M)', color: '#34d399' }, 
+                { title: 'Weiblich (F)', color: '#10b981' }, 
+                { title: 'Neutral (N)', color: '#059669' }, 
+                { title: 'Plural (P)', color: '#047857' }
+            ];
+            genders.forEach(gender => {
+                html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-900" style="background-color: ${gender.color}; color: white;">${gender.title}</th>`;
+            });
+            html += '</tr>';
+            html += '</thead>';
+
+            // --- BODY ---
+            html += '<tbody class="divide-y divide-gray-200">';
+            tableData.forEach((row, rowIndex) => {
+                if (row["Sujeto (Nominativo)"] === "es") {
+                    row["Sujeto (Nominativo)"] = "es (neutro)";
+                }
+                const isArticleRow = row["Sujeto (Nominativo)"].startsWith('Art.');
+                const rowClass = isArticleRow ? 'article-row' : 'possessive-row';
+                html += `<tr class="${rowClass} hover:bg-opacity-75">`;
+                
+                bodyKeysToRender.forEach((key) => {
+                    const value = row[key];
+                    let cellClass = 'table-cell text-sm text-gray-800 text-left';
+                    let contentHtml = value;
+                    let styleAttr = '';
+
+
+                    // --- GENDERED COLUMNS (Determiner + Example) ---
+                    if (determinerKeys.includes(key)) {
+                        const mergedData = mergedDeterminerKeys.find(data => data.key === key);
+                        const determiner = row[mergedData.key];
+                        const exampleValue = row[mergedData.example];
+                        const tradExampleValue = row[mergedData.translation];
+                        
+                        let styledExampleValue = exampleValue;
+                        // Only bold the determiner if it's not a placeholder '-'
+                        if(determiner && determiner !== '-') {
+                            styledExampleValue = exampleValue.replace(new RegExp(`\\b(${determiner})\\b`), (match) => {
+                                return `<b class="text-green-800">${match}</b>`;
+                            });
+                        }
+                        
+                        cellClass = `merged-gender-cell wrap-cell align-top`;
+                        styleAttr = ` style="background-color: ${mergedData.color};"`;
+
+                        if (exampleValue && exampleValue !== '-') {
+                            contentHtml = `
+                                <div class="interactive-cell-wrapper p-0 pt-1" onclick="this.classList.toggle('active')">
+                                    <span class="nominativ-determiner">${determiner}</span>
+                                    <span class="german-phrase whitespace-normal">${styledExampleValue}</span>
+                                    <span class="hidden-translation-part">${tradExampleValue}</span>
+                                </div>
+                            `;
+                        } else {
+                            // Case for no indefinite plural article/example
+                            contentHtml = `<div class="interactive-cell-wrapper" onclick="this.classList.toggle('active')">
+                                <span class="nominativ-determiner">${determiner}</span>
+                                ${tradExampleValue ? `<span class="hidden-translation-part">${tradExampleValue}</span>` : ''}
+                            </div>`;
+                        }
+                    } 
+                    // --- BASE / TRANSLATION COLUMN ---
+                    else if (key === "Base") {
+                        const baseValue = formatMultiLine(row["Base"], false); 
+                        const germanLines = baseValue.split('<br>');
+                        
+                        const tradBaseValue = formatMultiLine(row["Trad. Base"], true); 
+                        const spanishLines = tradBaseValue.split('<br>');
+
+                        cellClass = 'merged-base-cell wrap-cell align-top';
+                        styleAttr = ' style="background-color: #99f6e4;"';
+
+                        let germanDisplay = '';
+
+                        for (let i = 0; i < germanLines.length; i++) {
+                            const germanText = germanLines[i].trim();
+                            const spanishText = (spanishLines[i] || '').trim();
+
+                            if (germanText) {
+                                const germanSpan = `<span class="base-article-german">${germanText}</span>`;
+                                
+                                const hiddenPart = spanishText 
+                                    ? `<span class="hidden-translation-part">→ ${spanishText}</span>` 
+                                    : '';
+                                    
+                                germanDisplay += `<div class="stacked-content-line">${germanSpan}${hiddenPart}</div>`;
+                            }
+                        }
+                        
+                        contentHtml = `<div class="interactive-cell-wrapper" onclick="this.classList.toggle('active')">${germanDisplay}</div>`;
+                    }
+                    // --- SUBJECT (PRONOUN) COLUMN ---
+                    else if (key === "Sujeto (Nominativo)") {
+                        contentHtml = formatSubjectColumn(value);
+                        cellClass = 'wrap-cell align-top p-0';
+                        styleAttr = ' style="background-color: #d1fae5;"'; 
+                    } else {
+                        return;
+                    }
+                    
+                    html += `<td class="${cellClass}"${styleAttr}>${contentHtml}</td>`;
+                });
+                html += '</tr>';
+            });
+            html += '</tbody>';
+            html += '</table></div>';
+
+            container.innerHTML = html;
+        }
+
+        window.onload = renderTable;
+    </script>
+</body>
+</html>
