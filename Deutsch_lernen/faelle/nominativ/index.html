@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>German Nominativ Case Table</title>
+    <title>German Nominativ Case Table (Static)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -11,68 +11,31 @@
             font-family: 'Inter', sans-serif;
             background-color: #f7f7f7;
         }
-        .table-cell {
-            padding: 0.4rem 0.6rem;
-            white-space: nowrap; 
-            vertical-align: top;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        .wrap-cell {
-            white-space: normal;
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid #e2e8f0; /* Tailwind's gray-300 */
         }
-
-        /* --- BASE STYLES FOR INTERACTIVE CELLS --- */
-        .interactive-cell-wrapper {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 0.4rem 0.6rem;
-            transition: background-color 0.15s ease-in-out;
-            min-height: 5.5rem; /* Ensure consistent height for all main interactive cells */
-            justify-content: center;
+        th {
+            background-color: #f8fafc; /* Tailwind's gray-50 */
+            font-weight: 600;
+            color: #4a5568; /* Tailwind's gray-700 */
+            text-transform: uppercase;
+            font-size: 0.75rem;
         }
-        .interactive-cell-wrapper:hover,
-        .interactive-cell-wrapper.active {
-            background-color: #e5e5e5; /* Light grey hover background */
+        tr:nth-child(even) {
+            background-color: #f7f7f7; /* Very light gray for even rows */
         }
-
-        /* --- HIDDEN TRANSLATION MECHANISM (UNIFIED) --- */
-        .hidden-translation-part {
-            color: #4b5563; 
-            font-style: italic; /* Always italic for Spanish translations */
-            font-size: 0.8rem;
-            line-height: 1.2;
-            white-space: normal;
-            display: none;
-        }
-        
-        /* RULE 1: Reveal on Hover/Active or Global Toggle */
-        .interactive-cell-wrapper:hover .hidden-translation-part,
-        .interactive-cell-wrapper.active .hidden-translation-part,
-        .force-open .hidden-translation-part {
-            display: block;
-            margin-top: 0.1rem;
-        }
-        
-
-        /* --- SPECIFIC STYLE ELEMENTS --- */
-        
-        /* Removed .merged-gender-cell, .merged-base-cell as they are no longer relevant */
-
         .german-phrase {
-            color: #1f2937; 
+            color: #1f2937;
             font-size: 0.9rem;
             line-height: 1.2;
         }
-        .base-article-german {
-            background-color: #ecfdf5; 
-            display: inline-block;
-            padding: 0.05rem 0.2rem;
-            border-radius: 0.25rem;
-            font-weight: 700; 
-            color: #065f46;
-        }
-        .nominativ-pronoun-visible {
+        .nominativ-determiner {
             font-weight: 700;
             color: #0f766e;
             background-color: #f0fdfa;
@@ -81,364 +44,178 @@
             border-radius: 0.25rem;
             margin-right: 0.5rem;
         }
-        .pronunciation-hint {
-            font-size: 0.8rem;
-            color: #4b5563;
-            font-weight: 500;
-            margin-top: 0;
-        }
-
-        /* Row colors */
-        .article-row, .possessive-row {
-            background-color: #f0fdfa;
-        }
     </style>
 </head>
 <body class="p-4 sm:p-8">
 
     <div class="max-w-7xl mx-auto">
-        <h1 class="text-3xl font-bold text-gray-800 mb-2">German Nominativ Case: Articles, Pronouns, and Possessives</h1>
-        <p class="text-gray-600 mb-6">A comprehensive table of the Nominativ case, including personal pronouns, articles, and possessive determiners, with Spanish translations. (Click/tap any cell to reveal its translation.)</p>
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">German Nominativ Case: Articles, Pronouns, and Possessives (Static)</h1>
+        <p class="text-gray-600 mb-6">A basic table of the Nominativ case with German content only. Translations are hidden by omission.</p>
 
         <div id="table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200">
-            <!-- Table will be rendered here by JavaScript -->
-        </div>
-
-        <!-- Global Toggle Button -->
-        <div class="mt-6 flex justify-end">
-            <button id="toggle-all-button" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-4 5a1 1 0 100 2h2a1 1 0 100-2h-2z" clip-rule="evenodd" />
-                </svg>
-                Mostrar todas las traducciones
-            </button>
+            <table class="min-w-full divide-y divide-gray-300">
+                <thead>
+                    <tr>
+                        <th>Sujeto (Nominativo)</th>
+                        <th>Base</th>
+                        <th>Männlich (M) - Determiner</th>
+                        <th>Männlich (M) - Ejemplos con Verbos</th>
+                        <th>Weiblich (F) - Determiner</th>
+                        <th>Weiblich (F) - Ejemplos con Verbos</th>
+                        <th>Neutral (N) - Determiner</th>
+                        <th>Neutral (N) - Ejemplos con Verbos</th>
+                        <th>Plural (P) - Determiner</th>
+                        <th>Plural (P) - Ejemplos con Verbos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Art. Def.</td>
+                        <td>der / die / das</td>
+                        <td>der</td>
+                        <td>Der Mann ist freundlich.</td>
+                        <td>die</td>
+                        <td>Die Frau ist Ärztin.</td>
+                        <td>das</td>
+                        <td>Das Kind schläft.</td>
+                        <td>die</td>
+                        <td>Die Hunde bellen.</td>
+                    </tr>
+                    <tr>
+                        <td>Art. Indef.</td>
+                        <td>ein / eine / ein</td>
+                        <td>ein</td>
+                        <td>Ein Vogel singt laut.</td>
+                        <td>eine</td>
+                        <td>Eine Blume blüht.</td>
+                        <td>ein</td>
+                        <td>Ein Buch liegt da.</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Art. Neg.</td>
+                        <td>kein / keine / kein</td>
+                        <td>kein</td>
+                        <td>Es ist kein Wein auf dem Tisch.</td>
+                        <td>keine</td>
+                        <td>Es ist keine Milch im Kühlschrank.</td>
+                        <td>kein</td>
+                        <td>Kein Auto steht draußen.</td>
+                        <td>keine</td>
+                        <td>Keine Kinder spielen hier.</td>
+                    </tr>
+                    <tr>
+                        <td>ich</td>
+                        <td>mein-</td>
+                        <td>mein</td>
+                        <td>Mein Hund ist süß.</td>
+                        <td>meine</td>
+                        <td>Meine Lampe brennt.</td>
+                        <td>mein</td>
+                        <td>Mein Haus ist groß.</td>
+                        <td>meine</td>
+                        <td>Meine Katzen schlafen.</td>
+                    </tr>
+                    <tr>
+                        <td>du</td>
+                        <td>dein-</td>
+                        <td>dein</td>
+                        <td>Dein Tisch ist leer.</td>
+                        <td>deine</td>
+                        <td>Deine Uhr ist kaputt.</td>
+                        <td>dein</td>
+                        <td>Dein Glas ist voll.</td>
+                        <td>deine</td>
+                        <td>Deine Bücher sind neu.</td>
+                    </tr>
+                    <tr>
+                        <td>er</td>
+                        <td>sein-</td>
+                        <td>sein</td>
+                        <td>Sein Name ist Tom.</td>
+                        <td>seine</td>
+                        <td>Seine Frau arbeitet hier.</td>
+                        <td>sein</td>
+                        <td>Sein Buch ist interessant.</td>
+                        <td>seine</td>
+                        <td>Seine Eltern sind nett.</td>
+                    </tr>
+                    <tr>
+                        <td>sie (ella)</td>
+                        <td>ihr-</td>
+                        <td>ihr</td>
+                        <td>Ihr Mann ist Ingenieur.</td>
+                        <td>ihre</td>
+                        <td>Ihre Katze ist schwarz.</td>
+                        <td>ihr</td>
+                        <td>Ihr Kind spielt draußen.</td>
+                        <td>ihre</td>
+                        <td>Ihre Taschen sind schwer.</td>
+                    </tr>
+                    <tr>
+                        <td>es (neutro)</td>
+                        <td>sein-</td>
+                        <td>sein</td>
+                        <td>Sein Auto fährt schnell.</td>
+                        <td>seine</td>
+                        <td>Seine Farbe ist schön.</td>
+                        <td>sein</td>
+                        <td>Sein Buch ist dick.</td>
+                        <td>seine</td>
+                        <td>Seine Blätter fallen.</td>
+                    </tr>
+                    <tr>
+                        <td>wir</td>
+                        <td>unser-</td>
+                        <td>unser</td>
+                        <td>Unser Lehrer ist streng.</td>
+                        <td>unsere</td>
+                        <td>Unsere Stadt ist schön.</td>
+                        <td>unser</td>
+                        <td>Unser Haus ist alt.</td>
+                        <td>unsere</td>
+                        <td>Unsere Kinder sind laut.</td>
+                    </tr>
+                    <tr>
+                        <td>ihr (vosotros)</td>
+                        <td>euer- / eur-</td>
+                        <td>euer</td>
+                        <td>Euer Garten ist grün.</td>
+                        <td>eure</td>
+                        <td>Eure Wohnung ist klein.</td>
+                        <td>euer</td>
+                        <td>Euer Auto ist rot.</td>
+                        <td>eure</td>
+                        <td>Eure Kleider sind schön.</td>
+                    </tr>
+                    <tr>
+                        <td>sie (ellos)</td>
+                        <td>ihr-</td>
+                        <td>ihr</td>
+                        <td>Ihr Baum ist hoch.</td>
+                        <td>ihre</td>
+                        <td>Ihre Idee ist gut.</td>
+                        <td>ihr</td>
+                        <td>Ihr Geld ist weg.</td>
+                        <td>ihre</td>
+                        <td>Ihre Kinder spielen.</td>
+                    </tr>
+                    <tr>
+                        <td>Sie (formal)</td>
+                        <td>Ihr-</td>
+                        <td>Ihr</td>
+                        <td>Ihr Kaffee ist fertig.</td>
+                        <td>Ihre</td>
+                        <td>Ihre Rechnung ist korrekt.</td>
+                        <td>Ihr</td>
+                        <td>Ihr Gepäck ist angekommen.</td>
+                        <td>Ihre</td>
+                        <td>Ihre Kollegen sind hier.</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-
-    <script>
-        const tableData = [
-            {
-                "Sujeto (Nominativo)": "Art. Def.",
-                "Base": "der / die / das",
-                "Trad. Base": "el / la / el",
-                "Männlich (M) - Determiner": "der",
-                "Männlich (M) - Ejemplos con Verbos": "Der Mann ist freundlich.",
-                "Trad. (M)": "El hombre es amigable.",
-                "Weiblich (F) - Determiner": "die",
-                "Weiblich (F) - Ejemplos con Verbos": "Die Frau ist Ärztin.",
-                "Trad. (F)": "La mujer es doctora.",
-                "Neutral (N) - Determiner": "das",
-                "Neutral (N) - Ejemplos con Verbos": "Das Kind schläft.",
-                "Trad. (N)": "El niño duerme.",
-                "Plural (P) - Determiner": "die",
-                "Plural (P) - Ejemplos con Verbos": "Die Hunde bellen.",
-                "Trad. (P)": "Los perros ladran."
-            },
-            {
-                "Sujeto (Nominativo)": "Art. Indef.",
-                "Base": "ein / eine / ein",
-                "Trad. Base": "un / una / un",
-                "Männlich (M) - Determiner": "ein",
-                "Männlich (M) - Ejemplos con Verbos": "Ein Vogel singt laut.",
-                "Trad. (M)": "Un pájaro canta fuerte.",
-                "Weiblich (F) - Determiner": "eine",
-                "Weiblich (F) - Ejemplos con Verbos": "Eine Blume blüht.",
-                "Trad. (F)": "Una flor florece.",
-                "Neutral (N) - Determiner": "ein",
-                "Neutral (N) - Ejemplos con Verbos": "Ein Buch liegt da.",
-                "Trad. (N)": "Un libro yace allí.",
-                "Plural (P) - Determiner": "-",
-                "Plural (P) - Ejemplos con Verbos": "-",
-                "Trad. (P)": "(No existe art. indefinido)"
-            },
-            {
-                "Sujeto (Nominativo)": "Art. Neg.",
-                "Base": "kein / keine / kein",
-                "Trad. Base": "ningún / ninguna / ningún",
-                "Männlich (M) - Determiner": "kein",
-                "Männlich (M) - Ejemplos con Verbos": "Es ist kein Wein auf dem Tisch.",
-                "Trad. (M)": "No hay vino en la mesa.",
-                "Weiblich (F) - Determiner": "keine",
-                "Weiblich (F) - Ejemplos con Verbos": "Es ist keine Milch im Kühlschrank.",
-                "Trad. (F)": "No hay leche en la nevera.",
-                "Neutral (N) - Determiner": "kein",
-                "Neutral (N) - Ejemplos con Verbos": "Kein Auto steht draußen.",
-                "Trad. (N)": "No hay ningún coche fuera.",
-                "Plural (P) - Determiner": "keine",
-                "Plural (P) - Ejemplos con Verbos": "Keine Kinder spielen hier.",
-                "Trad. (P)": "Ningún niño juega aquí."
-            },
-            {
-                "Sujeto (Nominativo)": "ich",
-                "Base": "mein-",
-                "Trad. Base": "mi-",
-                "Männlich (M) - Determiner": "mein",
-                "Männlich (M) - Ejemplos con Verbos": "Mein Hund ist süß.",
-                "Trad. (M)": "Mi perro es lindo.",
-                "Weiblich (F) - Determiner": "meine",
-                "Weiblich (F) - Ejemplos con Verbos": "Meine Lampe brennt.",
-                "Trad. (F)": "Mi lámpara está encendida.",
-                "Neutral (N) - Determiner": "mein",
-                "Neutral (N) - Ejemplos con Verbos": "Mein Haus ist groß.",
-                "Trad. (N)": "Mi casa es grande.",
-                "Plural (P) - Determiner": "meine",
-                "Plural (P) - Ejemplos con Verbos": "Meine Katzen schlafen.",
-                "Trad. (P)": "Mis gatos duermen."
-            },
-            {
-                "Sujeto (Nominativo)": "du",
-                "Base": "dein-",
-                "Trad. Base": "tu-",
-                "Männlich (M) - Determiner": "dein",
-                "Männlich (M) - Ejemplos con Verbos": "Dein Tisch ist leer.",
-                "Trad. (M)": "Tu mesa está vacía.",
-                "Weiblich (F) - Determiner": "deine",
-                "Weiblich (F) - Ejemplos con Verbos": "Deine Uhr ist kaputt.",
-                "Trad. (F)": "Tu reloj está roto.",
-                "Neutral (N) - Determiner": "dein",
-                "Neutral (N) - Ejemplos con Verbos": "Dein Glas ist voll.",
-                "Trad. (N)": "Tu vaso está lleno.",
-                "Plural (P) - Determiner": "deine",
-                "Plural (P) - Ejemplos con Verbos": "Deine Bücher sind neu.",
-                "Trad. (P)": "Tus libros son nuevos."
-            },
-            {
-                "Sujeto (Nominativo)": "er",
-                "Base": "sein-",
-                "Trad. Base": "su (de él)-",
-                "Männlich (M) - Determiner": "sein",
-                "Männlich (M) - Ejemplos con Verbos": "Sein Name ist Tom.",
-                "Trad. (M)": "Su nombre es Tom.",
-                "Weiblich (F) - Determiner": "seine",
-                "Weiblich (F) - Ejemplos con Verbos": "Seine Frau arbeitet hier.",
-                "Trad. (F)": "Su esposa trabaja aquí.",
-                "Neutral (N) - Determiner": "sein",
-                "Neutral (N) - Ejemplos con Verbos": "Sein Buch ist interessant.",
-                "Trad. (N)": "Su libro es interesante.",
-                "Plural (P) - Determiner": "seine",
-                "Plural (P) - Ejemplos con Verbos": "Seine Eltern sind nett.",
-                "Trad. (P)": "Sus padres son amables."
-            },
-            {
-                "Sujeto (Nominativo)": "sie (ella)",
-                "Base": "ihr-",
-                "Trad. Base": "su (de ella)-",
-                "Männlich (M) - Determiner": "ihr",
-                "Männlich (M) - Ejemplos con Verbos": "Ihr Mann ist Ingenieur.",
-                "Trad. (M)": "Su marido es ingeniero.",
-                "Weiblich (F) - Determiner": "ihre",
-                "Weiblich (F) - Ejemplos con Verbos": "Ihre Katze ist schwarz.",
-                "Trad. (F)": "Su gata es negra.",
-                "Neutral (N) - Determiner": "ihr",
-                "Neutral (N) - Ejemplos con Verbos": "Ihr Kind spielt draußen.",
-                "Trad. (N)": "Su hijo juega fuera.",
-                "Plural (P) - Determiner": "ihre",
-                "Plural (P) - Ejemplos con Verbos": "Ihre Taschen sind schwer.",
-                "Trad. (P)": "Sus bolsos son pesados."
-            },
-            {
-                "Sujeto (Nominativo)": "es (neutro)",
-                "Base": "sein-",
-                "Trad. Base": "su (de ello)-",
-                "Männlich (M) - Determiner": "sein",
-                "Männlich (M) - Ejemplos con Verbos": "Sein Auto fährt schnell.",
-                "Trad. (M)": "Su coche corre rápido.",
-                "Weiblich (F) - Determiner": "seine",
-                "Weiblich (F) - Ejemplos con Verbos": "Seine Farbe ist schön.",
-                "Trad. (F)": "Su color es bonito.",
-                "Neutral (N) - Determiner": "sein",
-                "Neutral (N) - Ejemplos con Verbos": "Sein Buch ist dick.",
-                "Trad. (N)": "Su libro es gordo.",
-                "Plural (P) - Determiner": "seine",
-                "Plural (P) - Ejemplos con Verbos": "Seine Blätter fallen.",
-                "Trad. (P)": "Sus hojas caen."
-            },
-            {
-                "Sujeto (Nominativo)": "wir",
-                "Base": "unser-",
-                "Trad. Base": "nuestro/a-",
-                "Männlich (M) - Determiner": "unser",
-                "Männlich (M) - Ejemplos con Verbos": "Unser Lehrer ist streng.",
-                "Trad. (M)": "Nuestro profesor es estricto.",
-                "Weiblich (F) - Determiner": "unsere",
-                "Weiblich (F) - Ejemplos con Verbos": "Unsere Stadt ist schön.",
-                "Trad. (F)": "Nuestra ciudad es hermosa.",
-                "Neutral (N) - Determiner": "unser",
-                "Neutral (N) - Ejemplos con Verbos": "Unser Haus ist alt.",
-                "Trad. (N)": "Nuestra casa es vieja.",
-                "Plural (P) - Determiner": "unsere",
-                "Plural (P) - Ejemplos con Verbos": "Unsere Kinder sind laut.",
-                "Trad. (P)": "Nuestros hijos son ruidosos."
-            },
-            {
-                "Sujeto (Nominativo)": "ihr (vosotros)",
-                "Base": "euer- / eur-",
-                "Trad. Base": "vuestro/a-",
-                "Männlich (M) - Determiner": "euer",
-                "Männlich (M) - Ejemplos con Verbos": "Euer Garten ist grün.",
-                "Trad. (M)": "Vuestro jardín es verde.",
-                "Weiblich (F) - Determiner": "eure",
-                "Weiblich (F) - Ejemplos con Verbos": "Eure Wohnung ist klein.",
-                "Trad. (F)": "Vuestro apartamento es pequeño.",
-                "Neutral (N) - Determiner": "euer",
-                "Neutral (N) - Ejemplos con Verbos": "Euer Auto ist rot.",
-                "Trad. (N)": "Vuestro coche es rojo.",
-                "Plural (P) - Determiner": "eure",
-                "Plural (P) - Ejemplos con Verbos": "Eure Kleider sind schön.",
-                "Trad. (P)": "Vuestra ropa es bonita."
-            },
-            {
-                "Sujeto (Nominativo)": "sie (ellos)",
-                "Base": "ihr-",
-                "Trad. Base": "su (de ellos)-",
-                "Männlich (M) - Determiner": "ihr",
-                "Männlich (M) - Ejemplos con Verbos": "Ihr Baum ist hoch.",
-                "Trad. (M)": "Su árbol es alto.",
-                "Weiblich (F) - Determiner": "ihre",
-                "Weiblich (F) - Ejemplos con Verbos": "Ihre Idee ist gut.",
-                "Trad. (F)": "Su idea es buena.",
-                "Neutral (N) - Determiner": "ihr",
-                "Neutral (N) - Ejemplos con Verbos": "Ihr Geld ist weg.",
-                "Trad. (N)": "Su dinero se ha ido.",
-                "Plural (P) - Determiner": "ihre",
-                "Plural (P) - Ejemplos con Verbos": "Ihre Kinder spielen.",
-                "Trad. (P)": "Sus hijos juegan."
-            },
-            {
-                "Sujeto (Nominativo)": "Sie (formal)",
-                "Base": "Ihr-",
-                "Trad. Base": "su (formal)-",
-                "Männlich (M) - Determiner": "Ihr",
-                "Männlich (M) - Ejemplos con Verbos": "Ihr Kaffee ist fertig.",
-                "Trad. (M)": "Su café está listo.",
-                "Weiblich (F) - Determiner": "Ihre",
-                "Weiblich (F) - Ejemplos con Verbos": "Ihre Rechnung ist korrekt.",
-                "Trad. (F)": "Su factura es correcta.",
-                "Neutral (N) - Determiner": "Ihr",
-                "Neutral (N) - Ejemplos con Verbos": "Ihr Gepäck ist angekommen.",
-                "Trad. (N)": "Su equipaje ha llegado.",
-                "Plural (P) - Determiner": "Ihre",
-                "Plural (P) - Ejemplos con Verbos": "Ihre Kollegen sind hier.",
-                "Trad. (P)": "Sus colegas están aquí."
-            }
-        ];
-
-        const pronunciationMap = {
-            "ich": "/ij/", "du": "/du/", "er": "/ea/", "sie (ella)": "/si/",
-            "es (neutro)": "/es/", "wir": "/via/", "ihr (vosotros)": "/ia/",
-            "sie (ellos)": "/si/", "Sie (formal)": "/si/"
-        };
-        const spanishTranslationMap = {
-            "ich": "yo", "du": "tú", "er": "él", "wir": "nosotros/as"
-        };
-
-        function toggleAllTranslations() {
-            const button = document.getElementById('toggle-all-button');
-            const table = document.getElementById('table-container');
-
-            let translationsVisible = table.classList.contains('force-open');
-            translationsVisible = !translationsVisible;
-            
-            if (translationsVisible) {
-                table.classList.add('force-open');
-                button.textContent = 'Ocultar todas las traducciones';
-            } else {
-                table.classList.remove('force-open');
-                button.textContent = 'Mostrar todas las traducciones';
-                document.querySelectorAll('.interactive-cell-wrapper').forEach(wrapper => {
-                    wrapper.classList.remove('active');
-                });
-            }
-        }
-
-        function renderTable() {
-            const container = document.getElementById('table-container');
-            const headers = Object.keys(tableData[0]); // Get headers from the first data row
-
-            let html = '<div class="overflow-x-auto"><table class="min-w-full divide-y divide-gray-300">';
-
-            // Table Headers
-            html += '<thead class="bg-gray-100"><tr>';
-            headers.forEach(header => {
-                html += `<th class="px-3 py-2 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">${header}</th>`;
-            });
-            html += '</tr></thead>';
-
-            // Table Body
-            html += '<tbody class="divide-y divide-gray-200">';
-            tableData.forEach(row => {
-                html += '<tr class="hover:bg-opacity-75">';
-                headers.forEach(header => {
-                    let cellContent = row[header];
-                    let translationContent = '';
-                    let cellClass = 'table-cell text-sm text-gray-800 text-left px-3 py-2';
-
-                    // Determine if there's a corresponding translation column
-                    if (header === "Sujeto (Nominativo)") {
-                        const baseText = cellContent.replace(/ \((ella|vosotros|ellos|formal|neutro)\)/, '').trim();
-                        const pronunciation = pronunciationMap[cellContent] || '';
-                        const simpleSpanishTranslation = spanishTranslationMap[baseText] || '';
-
-                        contentWrapper = `<span class="nominativ-pronoun-visible">${baseText}</span>`;
-                        if (pronunciation) contentWrapper += `<span class="pronunciation-hint">${pronunciation}</span>`;
-                        if (simpleSpanishTranslation) translationContent = simpleSpanishTranslation;
-                        if (cellContent.includes('(')) translationContent = `${translationContent} ${cellContent.match(/ \((.+)\)/)[1]}`; // Append parenthesis content
-
-                    } else if (header.endsWith(" - Determiner") || header.endsWith(" - Ejemplos con Verbos") || header === "Base") {
-                         // Check for corresponding translation. Example: "Männlich (M) - Determiner" -> "Trad. (M)"
-                        let baseHeader = '';
-                        if(header.includes("Determiner")) {
-                            baseHeader = header.replace(" - Determiner", "");
-                        } else if (header.includes("Ejemplos con Verbos")) {
-                            baseHeader = header.replace(" - Ejemplos con Verbos", "");
-                        } else if (header === "Base") {
-                            baseHeader = ""; // Special case for base
-                        }
-
-                        if (row[`Trad. ${baseHeader ? baseHeader + ' - ' : ''} ` + (baseHeader ? '' : 'Base')] !== undefined) {
-                            translationContent = row[`Trad. ${baseHeader ? baseHeader + ' - ' : ''} `+ (baseHeader ? '' : 'Base')];
-                        }
-
-                        if (header.includes(" - Ejemplos con Verbos") && row[header.replace("Ejemplos con Verbos", "Determiner")] && row[header.replace("Ejemplos con Verbos", "Determiner")] !== '-') {
-                            const currentDeterminer = row[header.replace("Ejemplos con Verbos", "Determiner")];
-                            cellContent = cellContent.replace(currentDeterminer, `<b class="text-green-800">${currentDeterminer}</b>`);
-                        }
-
-                    }
-                    
-                    if (translationContent && translationContent !== '-') {
-                        html += `<td class="${cellClass}"><div class="interactive-cell-wrapper">
-                            ${cellContent}
-                            <span class="hidden-translation-part">${translationContent}</span>
-                        </div></td>`;
-                    } else {
-                        html += `<td class="${cellClass}">${cellContent}</td>`;
-                    }
-                });
-                html += '</tr>';
-            });
-            html += '</tbody>';
-            html += '</table></div>';
-
-            container.innerHTML = html;
-        }
-
-        function setupEventListeners() {
-            const tableContainer = document.getElementById('table-container');
-            if (tableContainer) {
-                tableContainer.addEventListener('click', function(event) {
-                    const wrapper = event.target.closest('.interactive-cell-wrapper');
-                    if (wrapper) {
-                        wrapper.classList.toggle('active');
-                    }
-                });
-            }
-        }
-
-        window.onload = function() {
-            renderTable();
-            setupEventListeners();
-        };
-    </script>
 </body>
 </html>
