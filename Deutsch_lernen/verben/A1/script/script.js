@@ -8,6 +8,7 @@
         ];
 
         const allVerbs = {};
+        const verbGroupsData = [];
         const totalGroups = 24;
 
         let currentGroupIndex = 0;
@@ -507,7 +508,8 @@
                 promises.push(fetch(`json/group_${i}.json`).then(response => response.json()));
             }
             return Promise.all(promises).then(groups => {
-                groups.forEach(group => {
+                groups.forEach((group, index) => {
+                    verbGroupsData[index] = group;
                     Object.assign(allVerbs, group.verbs);
                 });
             });
@@ -520,54 +522,47 @@
             const prevGroupBtn = document.getElementById('prev-group-btn');
             const nextGroupBtn = document.getElementById('next-group-btn');
 
-            const groupData = {};
-            const groupFileName = `json/group_${index + 1}.json`;
+            const data = verbGroupsData[index];
+            const groupData = data.verbs;
+            cardsContainer.innerHTML = ''; // Clear existing cards
 
-            // We need to get the keys for the current group from the file
-            fetch(groupFileName)
-                .then(response => response.json())
-                .then(data => {
-                    const groupVerbs = data.verbs;
-                    cardsContainer.innerHTML = ''; // Clear existing cards
+            for (const verb in groupData) {
+                const verbData = allVerbs[verb];
+                if (!verbData) continue;
 
-                    for (const verb in groupVerbs) {
-                        const verbData = allVerbs[verb];
-                        if (!verbData) continue;
+                const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
 
-                        const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
-
-                        const cardHTML = `
-                            <div class="word-item" onclick="openModalForVerb('${verb}')">
-                                <div class="word-item-content">
-                                    <span class="emoji">${verbData.emoji || '❓'}</span>
-                                    <div class="text-container">
-                                        <span class="german-word">${verb}${irregularMark}</span>
-                                        <span class="spanish-translation" data-form="translation">${verbData.es || ''}</span>
-                                        <span class="german-past" data-form="perfekt">${verbData.perfekt || '---'}</span>
-                                        <span class="spanish-perfekt" data-form="translation perfekt">${verbData.es_perfekt || ''}</span>
-                                    </div>
-                                </div>
+                const cardHTML = `
+                    <div class="word-item" onclick="openModalForVerb('${verb}')">
+                        <div class="word-item-content">
+                            <span class="emoji">${verbData.emoji || '❓'}</span>
+                            <div class="text-container">
+                                <span class="german-word">${verb}${irregularMark}</span>
+                                <span class="spanish-translation" data-form="translation">${verbData.es || ''}</span>
+                                <span class="german-past" data-form="perfekt">${verbData.perfekt || '---'}</span>
+                                <span class="spanish-perfekt" data-form="translation perfekt">${verbData.es_perfekt || ''}</span>
                             </div>
-                        `;
-                        cardsContainer.innerHTML += cardHTML;
-                    }
+                        </div>
+                    </div>
+                `;
+                cardsContainer.innerHTML += cardHTML;
+            }
 
-                    levelIndicator.textContent = data.level; // Update the level indicator
-                    levelIndicator.classList.remove('level-a1-1', 'level-a1-2', 'level-a2-1');
-                    if (data.level === 'A1.1') {
-                        levelIndicator.classList.add('level-a1-1');
-                    } else if (data.level === 'A1.2') {
-                        levelIndicator.classList.add('level-a1-2');
-                    } else if (data.level === 'A2.1') {
-                        levelIndicator.classList.add('level-a2-1');
-                    }
+            levelIndicator.textContent = data.level; // Update the level indicator
+            levelIndicator.classList.remove('level-a1-1', 'level-a1-2', 'level-a2-1');
+            if (data.level === 'A1.1') {
+                levelIndicator.classList.add('level-a1-1');
+            } else if (data.level === 'A1.2') {
+                levelIndicator.classList.add('level-a1-2');
+            } else if (data.level === 'A2.1') {
+                levelIndicator.classList.add('level-a2-1');
+            }
 
-                    groupIndicator.textContent = `${germanOrdinals[index]} Gruppe von ${totalGroups}`;
-                    prevGroupBtn.disabled = index === 0;
-                    nextGroupBtn.disabled = index === totalGroups - 1;
+            groupIndicator.textContent = `${germanOrdinals[index]} Gruppe von ${totalGroups}`;
+            prevGroupBtn.disabled = index === 0;
+            nextGroupBtn.disabled = index === totalGroups - 1;
 
-                    updateProgressBar(index);
-                });
+            updateProgressBar(index);
         }
 
         function setupProgressBar(container) {
