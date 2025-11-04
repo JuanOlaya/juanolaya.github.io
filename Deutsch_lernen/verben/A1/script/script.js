@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressBar = document.getElementById('progress-bar');
     const prevGroupBtn = document.getElementById('prev-group-btn');
     const nextGroupBtn = document.getElementById('next-group-btn');
-    const searchInput = document.getElementById('search-input');
     const navigationWrapper = document.querySelector('.navigation-wrapper');
     const storyButton = document.getElementById('story-button');
     const storyContainer = document.getElementById('story-container');
@@ -99,32 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateProgressBar(index);
     }
 
-    function renderSearchResults(verbs) {
-        cardsContainer.innerHTML = '';
-        if (verbs.length === 0) {
-            cardsContainer.innerHTML = '<p>Keine Verben gefunden.</p>';
-            return;
-        }
-        verbs.forEach(verb => {
-            const verbData = allVerbs[verb];
-            if (!verbData) return;
-            const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
-            const cardHTML = `
-                <div class="word-item" onclick="openModalForVerb('${verb}')">
-                    <div class="word-item-content">
-                        <span class="emoji">${verbData.emoji || '❓'}</span>
-                        <div class="text-container">
-                            <span class="german-word">${verb}${irregularMark}</span>
-                            <span class="spanish-translation" data-form="translation">${verbData.es || ''}</span>
-                            <span class="german-past" data-form="perfekt">${verbData.perfekt || '---'}</span>
-                            <span class="spanish-perfekt" data-form="translation perfekt">${verbData.es_perfekt || ''}</span>
-                        </div>
-                    </div>
-                </div>`;
-            cardsContainer.innerHTML += cardHTML;
-        });
-    }
-
     function setupProgressBar() {
         progressBar.innerHTML = '';
         for (let i = 0; i < totalGroups; i++) {
@@ -139,22 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
         steps.forEach((step, i) => {
             step.classList.toggle('active', i <= index);
         });
-    }
-
-    function handleSearch() {
-        const searchTerm = searchInput.value.toLowerCase().trim();
-        if (searchTerm.length > 0) {
-            navigationWrapper.classList.add('hidden');
-            const searchResults = Object.keys(allVerbs).filter(verb => {
-                const verbData = allVerbs[verb];
-                return verb.toLowerCase().includes(searchTerm) ||
-                       (verbData.perfekt && verbData.perfekt.toLowerCase().includes(searchTerm));
-            });
-            renderSearchResults(searchResults);
-        } else {
-            navigationWrapper.classList.remove('hidden');
-            renderVerbGroup(currentGroupIndex);
-        }
     }
     
     function initializeApp() {
@@ -172,15 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderVerbGroup(currentGroupIndex);
                 
                 // --- SETUP EVENT LISTENERS AFTER DATA IS LOADED ---
-                const debounce = (func, delay) => {
-                    let timeout;
-                    return function(...args) {
-                        clearTimeout(timeout);
-                        timeout = setTimeout(() => func.apply(this, args), delay);
-                    };
-                };
-                searchInput.addEventListener('input', debounce(handleSearch, 300));
-
                 prevGroupBtn.addEventListener('click', () => {
                     if (currentGroupIndex > 0) {
                         currentGroupIndex--;
