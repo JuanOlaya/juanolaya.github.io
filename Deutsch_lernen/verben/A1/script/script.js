@@ -39,9 +39,40 @@
             const nextGroupBtn = document.getElementById('next-group-btn');
             const storyButton = document.getElementById('story-button');
             const levelIndicator = document.getElementById('level-indicator');
+            const searchInput = document.getElementById('search-input');
+            const navigationWrapper = document.querySelector('.navigation-wrapper');
 
             setupProgressBar(document.getElementById('progress-bar'));
-            renderVerbGroup(currentGroupIndex);
+            loadAllVerbs().then(() => {
+                renderVerbGroup(currentGroupIndex);
+            });
+
+            const debounce = (func, delay) => {
+                let timeout;
+                return function(...args) {
+                    const context = this;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(context, args), delay);
+                };
+            };
+
+            const handleSearch = () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                if (searchTerm.length > 0) {
+                    navigationWrapper.classList.add('hidden');
+                    const searchResults = Object.keys(allVerbs).filter(verb => {
+                        const verbData = allVerbs[verb];
+                        return verb.toLowerCase().includes(searchTerm) || 
+                               (verbData.perfekt && verbData.perfekt.toLowerCase().includes(searchTerm));
+                    });
+                    renderSearchResults(searchResults);
+                } else {
+                    navigationWrapper.classList.remove('hidden');
+                    renderVerbGroup(currentGroupIndex);
+                }
+            };
+
+            searchInput.addEventListener('input', debounce(handleSearch, 300));
 
             const toggles = document.querySelectorAll('.visibility-toggle');
             const verbModalContent = document.querySelector('#verb-modal .modal-content');
@@ -438,25 +469,70 @@
         }
 
 
+        function renderSearchResults(verbs) {
+            const cardsContainer = document.getElementById('cards-container');
+            cardsContainer.innerHTML = ''; // Clear existing cards
+
+            if (verbs.length === 0) {
+                cardsContainer.innerHTML = '<p>Keine Verben gefunden.</p>';
+                return;
+            }
+
+            for (const verb of verbs) {
+                const verbData = allVerbs[verb];
+                if (!verbData) continue;
+
+                const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
+
+                const cardHTML = `
+                    <div class="word-item" onclick="openModalForVerb('${verb}')">
+                        <div class="word-item-content">
+                            <span class="emoji">${verbData.emoji || '❓'}</span>
+                            <div class="text-container">
+                                <span class="german-word">${verb}${irregularMark}</span>
+                                <span class="spanish-translation" data-form="translation">${verbData.es || ''}</span>
+                                <span class="german-past" data-form="perfekt">${verbData.perfekt || '---'}</span>
+                                <span class="spanish-perfekt" data-form="translation perfekt">${verbData.es_perfekt || ''}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                cardsContainer.innerHTML += cardHTML;
+            }
+        }
+
+        function loadAllVerbs() {
+            const promises = [];
+            for (let i = 1; i <= totalGroups; i++) {
+                promises.push(fetch(`json/group_${i}.json`).then(response => response.json()));
+            }
+            return Promise.all(promises).then(groups => {
+                groups.forEach(group => {
+                    Object.assign(allVerbs, group.verbs);
+                });
+            });
+        }
+
         function renderVerbGroup(index) {
             const cardsContainer = document.getElementById('cards-container');
-            const groupFile = `json/group_${index + 1}.json`;
+            const levelIndicator = document.getElementById('level-indicator');
+            const groupIndicator = document.getElementById('group-indicator');
+            const prevGroupBtn = document.getElementById('prev-group-btn');
+            const nextGroupBtn = document.getElementById('next-group-btn');
 
+            // Get the verbs for the current group
+            const groupVerbs = {};
+            const groupFile = `json/group_${index + 1}.json`;
             fetch(groupFile)
                 .then(response => response.json())
                 .then(data => {
-                    const levelIndicator = document.getElementById('level-indicator');
-
                     const groupData = data.verbs;
-                    Object.assign(allVerbs, groupData);
-
                     cardsContainer.innerHTML = ''; // Clear existing cards
 
                     for (const verb in groupData) {
                         const verbData = groupData[verb];
                         if (!verbData) continue;
 
-                        // Add asterisk if irregularPraesens is true
                         const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
 
                         const cardHTML = `
@@ -484,10 +560,6 @@
                     } else if (data.level === 'A2.1') {
                         levelIndicator.classList.add('level-a2-1');
                     }
-
-                    const groupIndicator = document.getElementById('group-indicator');
-                    const prevGroupBtn = document.getElementById('prev-group-btn');
-                    const nextGroupBtn = document.getElementById('next-group-btn');
 
                     groupIndicator.textContent = `${germanOrdinals[index]} Gruppe von ${totalGroups}`;
                     prevGroupBtn.disabled = index === 0;
