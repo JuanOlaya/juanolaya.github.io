@@ -520,17 +520,18 @@
             const prevGroupBtn = document.getElementById('prev-group-btn');
             const nextGroupBtn = document.getElementById('next-group-btn');
 
-            // Get the verbs for the current group
-            const groupVerbs = {};
-            const groupFile = `json/group_${index + 1}.json`;
-            fetch(groupFile)
+            const groupData = {};
+            const groupFileName = `json/group_${index + 1}.json`;
+
+            // We need to get the keys for the current group from the file
+            fetch(groupFileName)
                 .then(response => response.json())
                 .then(data => {
-                    const groupData = data.verbs;
+                    const groupVerbs = data.verbs;
                     cardsContainer.innerHTML = ''; // Clear existing cards
 
-                    for (const verb in groupData) {
-                        const verbData = groupData[verb];
+                    for (const verb in groupVerbs) {
+                        const verbData = allVerbs[verb];
                         if (!verbData) continue;
 
                         const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
