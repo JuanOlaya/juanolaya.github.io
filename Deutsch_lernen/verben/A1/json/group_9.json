@@ -99,30 +99,69 @@
                 {"de": "Sie scheint glücklich zu sein.", "es": "Ella parece estar feliz.", "phonetics": "/ziː ʃaɪ̯nt ˈɡlʏklɪç tsuː zaɪ̯n/", "explanation": "<li><b>Infinitiv mit zu:</b> \"glücklich zu sein\"."}
             ]
         },
-        "verdienen": {
-            "perfekt": "hat verdient",
-            "es": "ganar dinero, merecer",
-            "es_perfekt": "he ganado",
-            "en_verb": "to earn, to deserve",
-            "en_perfekt": "has earned, has deserved",
-            "emoji": "💰",
-            "irregularPraesens": false,
-            "vokalwechsel": null,
-            "praesens": {
-                "ich": "verdiene",
-                "du": "verdienst",
-                "erSieEs": "verdient",
-                "wir": "verdienen",
-                "ihr": "verdient",
-                "sieSie": "verdienen"
-            },
-            "praesens_examples": {
-                "ich": {"de": "Ich verdiene mein Geld ehrlich.", "en": "I earn my money honestly.", "es": "Gano mi dinero honestamente."},                "du": {"de": "Du verdienst eine Pause.", "en": "You deserve a break.", "es": "Te mereces un descanso."},                "erSieEs": {"de": "Er verdient viel Geld.", "en": "He earns a lot of money.", "es": "Él gana mucho dinero."},                "wir": {"de": "Wir verdienen Respekt.", "en": "We deserve respect.", "es": "Nos merecemos respeto."},                "ihr": {"de": "Verdient ihr genug?", "en": "Do you (pl.) earn enough?", "es": "¿Ganáis suficiente?"},                "sieSie": {"de": "Sie verdienen eine zweite Chance.", "en": "They deserve a second chance.", "es": "Ellos merecen una segunda oportunidad."}            },
-            "examples": [
-                {"de": "Er hat viel Geld verdient.", "es": "Él ha ganado mucho dinero.", "phonetics": "/eːɐ̯ hat fiːl ɡɛlt fɛɐ̯ˈdiːnt/", "explanation": "<li><b>Akkusativ (Objekt):</b> \"viel Geld\"."},
-                {"de": "Du hast eine Pause verdient.", "es": "Te has ganado un descanso.", "phonetics": "/duː hast ˈaɪ̯nə ˈpaʊ̯zə fɛɐ̯ˈdiːnt/", "explanation": "<li><b>Akkusativ (Objekt).</b>"},
-                {"de": "Sie hat sich das verdient.", "es": "Ella se lo ha ganado.", "phonetics": "/ziː hat zɪç das fɛɐ̯ˈdiːnt/", "explanation": "<li><b>Reflexivpronomen (sich).</b>"}
-            ]
+                "verdienen": {
+                    "perfekt": "hat verdient",
+                    "es": "ganar dinero, merecer",
+                    "es_perfekt": "he ganado",
+                    "en_verb": "to earn, to deserve",
+                    "en_perfekt": "has earned, has deserved",
+                    "emoji": "💰",
+                    "irregularPraesens": false,
+                    "vokalwechsel": null,
+                    "praesens": {
+                        "ich": "verdiene",
+                        "du": "verdienst",
+                        "erSieEs": "verdient",
+                        "wir": "verdienen",
+                        "ihr": "verdient",
+                        "sieSie": "verdienen"
+                    },
+                    "praesens_examples": {
+                        "ich": {"de": "Ich verdiene mein Geld ehrlich.", "en": "I earn my money honestly.", "es": "Gano mi dinero honestamente."},
+                        "du": {"de": "Du verdienst eine Pause.", "en": "You deserve a break.", "es": "Te mereces un descanso."},
+                        "erSieEs": {"de": "Er verdient viel Geld.", "en": "He earns a lot of money.", "es": "Él gana mucho dinero."},
+                        "wir": {"de": "Wir verdienen Respekt.", "en": "We deserve respect.", "es": "Nos merecemos respeto."},
+                        "ihr": {"de": "Verdient ihr genug?", "en": "Do you (pl.) earn enough?", "es": "¿Ganáis suficiente?"},
+                        "sieSie": {"de": "Sie verdienen eine zweite Chance.", "en": "They deserve a second chance.", "es": "Ellos merecen una segunda oportunidad."}
+                    },
+                    "examples": [
+                        {"de": "Er hat viel Geld verdient.", "es": "Él ha ganado mucho dinero.", "phonetics": "/eːɐ̯ hat fiːl ɡɛlt fɛɐ̯ˈdiːnt/", "explanation": "<li><b>Akkusativ (Objekt):</b> \"viel Geld\".</li>"},
+                        {"de": "Du hast eine Pause verdient.", "es": "Te has ganado un descanso.", "phonetics": "/duː hast ˈaɪ̯nə ˈpaʊ̯zə fɛɐ̯ˈdiːnt/", "explanation": "<li><b>Akkusativ (Objekt).</b>"},
+                        {"de": "Sie hat sich das verdient.", "es": "Ella se lo ha ganado.", "phonetics": "/ziː hat zɪç das fɛɐ̯ˈdiːnt/", "explanation": "<li><b>Reflexivpronomen (sich).</b>"}
+                    ]
+                },
+                "tragen": {
+                    "perfekt": "hat getragen",
+                    "emoji": "👕",
+                    "es": "llevar puesto/cargar",
+                    "es_perfekt": "he llevado/cargado",
+                    "en_verb": "to wear/carry",
+                    "en_perfekt": "has worn/carried",
+                    "irregularPraesens": true,
+                    "vokalwechsel": "a > ä (du trägst, er/sie/es trägt)",
+                    "praesens": {
+                        "ich": "trage",
+                        "du": "trägst",
+                        "erSieEs": "trägt",
+                        "wir": "tragen",
+                        "ihr": "tragt",
+                        "sieSie": "tragen"
+                    },
+                    "praesens_examples": {
+                        "ich": {"de": "Ich trage eine Brille.", "en": "I wear glasses.", "es": "Llevo gafas."},
+                        "du": {"de": "Was trägst du heute?", "en": "What are you wearing today?", "es": "¿Qué llevas puesto hoy?"},
+                        "erSieEs": {"de": "Er trägt einen Rucksack.", "en": "He carries a backpack.", "es": "Él lleva una mochila."},
+                        "wir": {"de": "Wir tragen die Verantwortung.", "en": "We bear the responsibility.", "es": "Nosotros tenemos la responsabilidad."},
+                        "ihr": {"de": "Tragt ihr die Kisten?", "en": "Are you carrying the boxes?", "es": "¿Lleváis las cajas?"},
+                        "sieSie": {"de": "Sie tragen oft Hüte.", "en": "They often wear hats.", "es": "Ellos llevan sombreros a menudo."}
+                    },
+                    "examples": [
+                        {"de": "Sie hat ein rotes Kleid getragen.", "es": "Ella ha llevado un vestido rojo.", "phonetics": "/si jat ain rotes klaid guetraguen/" },
+                        {"de": "Ich habe die schwere Tasche getragen.", "es": "He cargado la bolsa pesada.", "phonetics": "/ij jabe di shvere tashe guetraguen/" },
+                        {"de": "Was hast du gestern getragen?", "es": "¿Qué llevabas puesto ayer?", "phonetics": "/vas jast du guestern guetraguen/" },
+                        {"de": "Er hat einen Anzug getragen.", "es": "Él ha llevado un traje.", "phonetics": "/ea jat ainen antsug guetraguen/" },
+                        {"de": "Wir haben die Kisten nach oben getragen.", "es": "Hemos subido las cajas.", "phonetics": "/via jaben di kisten naj oben guetraguen/" }
+                    ]
+                }
+            }
         }
-    }
-}
