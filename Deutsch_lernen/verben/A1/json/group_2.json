@@ -1,7 +1,6 @@
 {
     "level": "A1.1",
-    "verbs": 
-    {
+    "verbs": {
         "sprechen": {
             "perfekt": "hat gesprochen",
             "emoji": "💬",
@@ -32,4 +31,77 @@
                     "de": "Er hat mit mir gesprochen.",
                     "es": "Él ha hablado conmigo.",
                     "phonetics": "/eːɐ̯ hat mɪt miːɐ̯ ɡəˈʃpʁɔxn̩/",
-                    "explanation": "<li><b>Präposition + Dativ:</b> \"mit mir\".
+                    "explanation": "<li><b>Präposition + Dativ:</b> \"mit mir".</li>"
+                }
+            ]
+        },
+        "kaufen": {
+            "perfekt": "hat gekauft",
+            "emoji": "🛒",
+            "es": "comprar",
+            "es_perfekt": "he comprado",
+            "en_verb": "to buy",
+            "en_perfekt": "has bought",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "kaufe",
+                "du": "kaufst",
+                "erSieEs": "kauft",
+                "wir": "kaufen",
+                "ihr": "kauft",
+                "sieSie": "kaufen"
+            },
+            "praesens_examples": {
+                "ich": { "de": "Ich kaufe ein.", "en": "I am shopping.", "es": "Estoy de compras." },
+                "du": { "de": "Was kaufst du?", "en": "What are you buying?", "es": "¿Qué compras?" },
+                "erSieEs": { "de": "Sie kauft ein Kleid.", "en": "She buys a dress.", "es": "Ella compra un vestido." },
+                "wir": { "de": "Wir kaufen Lebensmittel.", "en": "We are buying groceries.", "es": "Compramos comestibles." },
+                "ihr": { "de": "Ihr kauft Geschenke.", "en": "You are buying gifts.", "es": "Compráis regalos." },
+                "sieSie": { "de": "Sie kaufen ein Haus.", "en": "They are buying a house.", "es": "Compran una casa." }
+            },
+            "examples": [
+                {
+                    "de": "Ich habe ein Buch gekauft.",
+                    "es": "He comprado un libro.",
+                    "phonetics": "/ɪç ˈhaːbə aɪ̯n buːx ɡəˈkaʊ̯ft/",
+                    "explanation": "<li><b>Akkusativ (neutral):</b> \"ein Buch".</li>"
+                }
+            ]
+        },
+        "bezahlen": {
+            "perfekt": "hat bezahlt",
+            "emoji": "💳",
+            "es": "pagar",
+            "es_perfekt": "he pagado",
+            "en_verb": "to pay",
+            "en_perfekt": "has paid",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "bezahle",
+                "du": "bezahlst",
+                "erSieEs": "bezahlt",
+                "wir": "bezahlen",
+                "ihr": "bezahlt",
+                "sieSie": "bezahlen"
+            },
+            "praesens_examples": {
+                "ich": { "de": "Ich bezahle die Rechnung.", "en": "I pay the bill.", "es": "Pago la cuenta." },
+                "du": { "de": "Bezahlst du bar?", "en": "Are you paying in cash?", "es": "¿Pagas en efectivo?" },
+                "erSieEs": { "de": "Er bezahlt mit Karte.", "en": "He pays by card.", "es": "Él paga con tarjeta." },
+                "wir": { "de": "Wir bezahlen getrennt.", "en": "We pay separately.", "es": "Pagamos por separado." },
+                "ihr": { "de": "Ihr bezahlt zusammen.", "en": "You pay together.", "es": "Pagáis juntos." },
+                "sieSie": { "de": "Sie bezahlen den Kaffee.", "en": "They pay for the coffee.", "es": "Pagan el café." }
+            },
+            "examples": [
+                {
+                    "de": "Er hat die Rechnung bezahlt.",
+                    "es": "Él ha pagado la cuenta.",
+                    "phonetics": "/eːɐ̯ hat diː ˈʁɛçnʊŋ bəˈtsaːlt/",
+                    "explanation": "<li><b>Akkusativ (feminin):</b> \"die Rechnung".</li>"
+                }
+            ]
+        }
+    }
+}
