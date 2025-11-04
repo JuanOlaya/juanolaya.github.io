@@ -10,6 +10,7 @@
         const allVerbs = {};
         const verbGroupsData = [];
         const totalGroups = 24;
+        let allVerbsLoaded = false;
 
         let currentGroupIndex = 0;
         let currentVerbInModal = '';
@@ -44,9 +45,7 @@
             const navigationWrapper = document.querySelector('.navigation-wrapper');
 
             setupProgressBar(document.getElementById('progress-bar'));
-            loadAllVerbs().then(() => {
-                renderVerbGroup(currentGroupIndex);
-            });
+            renderVerbGroup(currentGroupIndex);
 
             const debounce = (func, delay) => {
                 let timeout;
@@ -61,12 +60,19 @@
                 const searchTerm = searchInput.value.toLowerCase();
                 if (searchTerm.length > 0) {
                     navigationWrapper.classList.add('hidden');
-                    const searchResults = Object.keys(allVerbs).filter(verb => {
-                        const verbData = allVerbs[verb];
-                        return verb.toLowerCase().includes(searchTerm) || 
-                               (verbData.perfekt && verbData.perfekt.toLowerCase().includes(searchTerm));
-                    });
-                    renderSearchResults(searchResults);
+                    if (allVerbsLoaded) {
+                        const searchResults = Object.keys(allVerbs).filter(verb => {
+                            const verbData = allVerbs[verb];
+                            return verb.toLowerCase().includes(searchTerm) || 
+                                   (verbData.perfekt && verbData.perfekt.toLowerCase().includes(searchTerm));
+                        });
+                        renderSearchResults(searchResults);
+                    } else {
+                        loadAllVerbs().then(() => {
+                            allVerbsLoaded = true;
+                            handleSearch(); // Retry search after loading
+                        });
+                    }
                 } else {
                     navigationWrapper.classList.remove('hidden');
                     renderVerbGroup(currentGroupIndex);
