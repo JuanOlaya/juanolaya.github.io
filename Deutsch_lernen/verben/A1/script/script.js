@@ -208,6 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
             praesensTableContainer.innerHTML = '';
         }
 
+        const verbModalContent = document.querySelector('#verb-modal .modal-content');
+        verbModalContent.classList.remove('hide-perfekt', 'hide-translation');
         document.getElementById('praesens-details-container').open = true;
 
         verbModal.classList.add('visible');
