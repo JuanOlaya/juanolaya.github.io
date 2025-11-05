@@ -208,6 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
             praesensTableContainer.innerHTML = '';
         }
 
+        document.getElementById('praesens-details-container').open = true;
+
         verbModal.classList.add('visible');
     }
 
