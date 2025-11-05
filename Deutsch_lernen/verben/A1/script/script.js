@@ -39,12 +39,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadAllVerbs() {
         const promises = [];
         for (let i = 1; i <= totalGroups; i++) {
-            promises.push(fetch(`json/group_${i}.json`).then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status} for group_${i}.json`);
-                }
-                return response.json();
-            }));
+            const promise = fetch(`json/group_${i}.json`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status} for group_${i}.json`);
+                    }
+                    return response.json();
+                })
+                .catch(error => {
+                    console.error(`Error loading group_${i}.json:`, error);
+                    throw error; // re-throw the error to be caught by the final catch
+                });
+            promises.push(promise);
         }
         return Promise.all(promises).then(groups => {
             groups.forEach((group, index) => {
