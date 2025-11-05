@@ -195,9 +195,19 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modal-verb-english-infinitive').textContent = data.en_verb ? `🇬🇧 ${data.en_verb}` : '';
         document.getElementById('modal-verb-english-perfekt').textContent = data.en_perfekt ? `🇬🇧 ${data.en_perfekt}` : '';
         
-        // You would continue to fill the rest of the modal here...
-        // For brevity, I'm omitting the full detail of the modal population
-        
+        const praesensTableContainer = document.getElementById('modal-praesens-table');
+        if (data.praesens) {
+            let tableHTML = '<table>';
+            tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th></tr>';
+            for (const [pronoun, conjugation] of Object.entries(data.praesens)) {
+                tableHTML += `<tr><td>${pronoun}</td><td>${conjugation}</td></tr>`;
+            }
+            tableHTML += '</table>';
+            praesensTableContainer.innerHTML = tableHTML;
+        } else {
+            praesensTableContainer.innerHTML = '';
+        }
+
         verbModal.classList.add('visible');
     }
 
