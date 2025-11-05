@@ -19,19 +19,43 @@
                 "sieSie": "sprechen"
             },
             "praesens_examples": {
-                "ich": { "de": "Ich spreche Deutsch.", "en": "I speak German.", "es": "Hablo alemán." },
-                "du": { "de": "Sprichst du Englisch?", "en": "Do you speak English?", "es": "¿Hablas inglés?" },
-                "erSieEs": { "de": "Er spricht schnell.", "en": "He speaks fast.", "es": "Él habla rápido." },
-                "wir": { "de": "Wir sprechen über das Wetter.", "en": "We talk about the weather.", "es": "Hablamos sobre el tiempo." },
-                "ihr": { "de": "Sprecht ihr Spanisch?", "en": "Do you speak Spanish?", "es": "¿Habláis español?" },
-                "sieSie": { "de": "Sie sprechen leise.", "en": "They speak quietly.", "es": "Ellos hablan bajo." }
+                "ich": {
+                    "de": "Ich spreche Deutsch.",
+                    "en": "I speak German.",
+                    "es": "Hablo alemán."
+                },
+                "du": {
+                    "de": "Sprichst du Englisch?",
+                    "en": "Do you speak English?",
+                    "es": "¿Hablas inglés?"
+                },
+                "erSieEs": {
+                    "de": "Er spricht schnell.",
+                    "en": "He speaks fast.",
+                    "es": "Él habla rápido."
+                },
+                "wir": {
+                    "de": "Wir sprechen über das Wetter.",
+                    "en": "We talk about the weather.",
+                    "es": "Hablamos sobre el tiempo."
+                },
+                "ihr": {
+                    "de": "Sprecht ihr Spanisch?",
+                    "en": "Do you speak Spanish?",
+                    "es": "¿Habláis español?"
+                },
+                "sieSie": {
+                    "de": "Sie sprechen leise.",
+                    "en": "They speak quietly.",
+                    "es": "Ellos hablan bajo."
+                }
             },
             "examples": [
                 {
                     "de": "Er hat mit mir gesprochen.",
                     "es": "Él ha hablado conmigo.",
                     "phonetics": "/eːɐ̯ hat mɪt miːɐ̯ ɡəˈʃpʁɔxn̩/",
-                    "explanation": "<li><b>Präposition + Dativ:</b> \"mit mir\".</li>"
+                    "explanation": "<li><b>Präposition + Dativ:</b> \"mit mir".</li>"
                 }
             ]
         },
@@ -53,19 +77,451 @@
                 "sieSie": "kaufen"
             },
             "praesens_examples": {
-                "ich": { "de": "Ich kaufe ein.", "en": "I am shopping.", "es": "Estoy de compras." },
-                "du": { "de": "Was kaufst du?", "en": "What are you buying?", "es": "¿Qué compras?" },
-                "erSieEs": { "de": "Sie kauft ein Kleid.", "en": "She buys a dress.", "es": "Ella compra un vestido." },
-                "wir": { "de": "Wir kaufen Lebensmittel.", "en": "We are buying groceries.", "es": "Compramos comestibles." },
-                "ihr": { "de": "Ihr kauft Geschenke.", "en": "You are buying gifts.", "es": "Compráis regalos." },
-                "sieSie": { "de": "Sie kaufen ein Haus.", "en": "They are buying a house.", "es": "Compran una casa." }
+                "ich": {
+                    "de": "Ich kaufe ein.",
+                    "en": "I am shopping.",
+                    "es": "Estoy de compras."
+                },
+                "du": {
+                    "de": "Was kaufst du?",
+                    "en": "What are you buying?",
+                    "es": "¿Qué compras?"
+                },
+                "erSieEs": {
+                    "de": "Sie kauft ein Kleid.",
+                    "en": "She buys a dress.",
+                    "es": "Ella compra un vestido."
+                },
+                "wir": {
+                    "de": "Wir kaufen Lebensmittel.",
+                    "en": "We are buying groceries.",
+                    "es": "Compramos comestibles."
+                },
+                "ihr": {
+                    "de": "Ihr kauft Geschenke.",
+                    "en": "You are buying gifts.",
+                    "es": "Compráis regalos."
+                },
+                "sieSie": {
+                    "de": "Sie kaufen ein Haus.",
+                    "en": "They are buying a house.",
+                    "es": "Compran una casa."
+                }
             },
             "examples": [
                 {
                     "de": "Ich habe ein Buch gekauft.",
                     "es": "He comprado un libro.",
                     "phonetics": "/ɪç ˈhaːbə aɪ̯n buːx ɡəˈkaʊ̯ft/",
-                    "explanation": "<li><b>Akkusativ (neutral):</b> \"ein Buch\".</li>"
+                    "explanation": "<li><b>Akkusativ (neutral):</b> \"ein Buch".</li>"
+                }
+            ]
+        },
+        "essen": {
+            "perfekt": "hat gegessen",
+            "emoji": "🍕",
+            "es": "comer",
+            "es_perfekt": "he comido",
+            "en_verb": "to eat",
+            "en_perfekt": "has eaten",
+            "irregularPraesens": true,
+            "vokalwechsel": "e > i (du isst, er/sie/es isst)",
+            "praesens": {
+                "ich": "esse",
+                "du": "isst",
+                "erSieEs": "isst",
+                "wir": "essen",
+                "ihr": "esst",
+                "sieSie": "essen"
+            },
+            "examples": [
+                {
+                    "de": "Er hat eine Pizza gegessen.",
+                    "es": "Él ha comido una pizza.",
+                    "phonetics": "/eːɐ̯ hat ˈaɪ̯nə ˈpɪtsa ɡəˈɡɛsn̩/",
+                    "explanation": "<li><b>Akkusativ (feminin):</b> \"eine Pizza".</li>"
+                },
+                {
+                    "de": "Ich habe schon gegessen.",
+                    "es": "Ya he comido.",
+                    "phonetics": "/ɪç ˈhaːbə ʃoːn ɡəˈɡɛsn̩/",
+                    "explanation": "<li><b>Adverb:</b> \"schon".</li>"
+                },
+                {
+                    "de": "Was hast du zum Frühstück gegessen?",
+                    "es": "¿Qué has desayunado?",
+                    "phonetics": "/vas hast duː tsʊm ˈfʁyːʃtʏk ɡəˈɡɛsn̩/",
+                    "explanation": "<li><b>W-Frage (Objekt) + Präposition + Dativ (zum Frühstück).</b></li>"
+                },
+                {
+                    "de": "Wir haben im Restaurant gegessen.",
+                    "es": "Hemos comido en el restaurante.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ ɪm ʁɛstoˈʁɑ̃ː ɡəˈɡɛsn̩/",
+                    "explanation": "<li><b>Präposition + Dativ (Ort):</b> \"im Restaurant".</li>"
+                },
+                {
+                    "de": "Habt ihr alles gegessen?",
+                    "es": "¿Lo habéis comido todo?",
+                    "phonetics": "/hapt iːɐ̯ ˈaləs ɡəˈɡɛsn̩/",
+                    "explanation": "<li><b>Pronomen als Objekt:</b> \"alles".</li>"
+                },
+                {
+                    "de": "Wo hast du gegessen?",
+                    "es": "¿Dónde has comido?",
+                    "phonetics": "/voː hast duː ɡəˈɡɛsn̩/",
+                    "explanation": "<li><b>W-Frage (Ort).</b></li>"
+                },
+                {
+                    "de": "Wann habt ihr zu Mittag gegessen?",
+                    "es": "¿Cuándo habéis almorzado?",
+                    "phonetics": "/van hapt iːɐ̯ tsuː ˈmɪtaːk ɡəˈɡɛsn̩/",
+                    "explanation": "<li><b>W-Frage (Zeit) + Feste Wendung.</b></li>"
+                },
+                {
+                    "de": "Wer hat meinen Apfel gegessen?",
+                    "es": "¿Quién se ha comido mi manzana?",
+                    "phonetics": "/veːɐ̯ hat ˈmaɪ̯nən ˈapfl̩ ɡəˈɡɛsn̩/",
+                    "explanation": "<li><b>W-Frage (Subjekt) + Akkusativ (meinen Apfel).</b></li>"
+                }
+            ]
+        },
+        "trinken": {
+            "perfekt": "hat getrunken",
+            "emoji": "🥤",
+            "es": "beber",
+            "es_perfekt": "he bebido",
+            "en_verb": "to drink",
+            "en_perfekt": "has drunk",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "trinke",
+                "du": "trinkst",
+                "erSieEs": "trinkt",
+                "wir": "trinken",
+                "ihr": "trinkt",
+                "sieSie": "trinken"
+            },
+            "examples": [
+                {
+                    "de": "Sie hat Wasser getrunken.",
+                    "es": "Ella ha bebido agua.",
+                    "phonetics": "/ziː hat ˈvasɐ ɡəˈtʁʊŋkn̩/",
+                    "explanation": "<li><b>Akkusativ (ohne Artikel).</b></li>"
+                },
+                {
+                    "de": "Wir haben Kaffee getrunken.",
+                    "es": "Hemos bebido café.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ ˈkafe ɡəˈtʁʊŋkn̩/",
+                    "explanation": "<li><b>Akkusativ (ohne Artikel).</b></li>"
+                },
+                {
+                    "de": "Ich habe zu viel Cola getrunken.",
+                    "es": "He bebido demasiada cola.",
+                    "phonetics": "/ɪç ˈhaːbə tsuː fiːl ˈkoːla ɡəˈtʁʊŋkn̩/",
+                    "explanation": "<li><b>Adverbial:</b> \"zu viel".</li>"
+                },
+                {
+                    "de": "Was hast du getrunken?",
+                    "es": "¿Qué has bebido?",
+                    "phonetics": "/vas hast duː ɡəˈtʁʊŋkn̩/",
+                    "explanation": "<li><b>W-Frage (Objekt).</b></li>"
+                },
+                {
+                    "de": "Sie haben Wein getrunken.",
+                    "es": "Ellos han bebido vino.",
+                    "phonetics": "/ziː ˈhaːbn̩ vaɪ̯n ɡəˈtʁʊŋkn̩/",
+                    "explanation": "<li><b>Akkusativ (ohne Artikel).</b></li>"
+                },
+                {
+                    "de": "Wie viel Wasser hast du getrunken?",
+                    "es": "¿Cuánta agua has bebido?",
+                    "phonetics": "/viː fiːl ˈvasɐ hast duː ɡəˈtʁʊŋkn̩/",
+                    "explanation": "<li><b>W-Frage (Menge).</b></li>"
+                },
+                {
+                    "de": "Wer hat meinen Saft getrunken?",
+                    "es": "¿Quién se ha bebido mi zumo?",
+                    "phonetics": "/veːɐ̯ hat ˈmaɪ̯nən zaft ɡəˈtʁʊŋkn̩/",
+                    "explanation": "<li><b>W-Frage (Subjekt) + Akkusativ (meinen Saft).</b></li>"
+                },
+                {
+                    "de": "Warum hast du so viel Kaffee getrunken?",
+                    "es": "¿Por qué has bebido tanto café?",
+                    "phonetics": "/vaˈʁʊm hast duː zoː fiːl ˈkafe ɡəˈtʁʊŋkn̩/",
+                    "explanation": "<li><b>W-Frage (Grund) + Adverbial (so viel).</b></li>"
+                }
+            ]
+        },
+        "lesen": {
+            "perfekt": "hat gelesen",
+            "emoji": "📖",
+            "es": "leer",
+            "es_perfekt": "he leído",
+            "en_verb": "to read",
+            "en_perfekt": "has read",
+            "irregularPraesens": true,
+            "vokalwechsel": "e > ie (du liest, er/sie/es liest)",
+            "praesens": {
+                "ich": "lese",
+                "du": "liest",
+                "erSieEs": "liest",
+                "wir": "lesen",
+                "ihr": "lest",
+                "sieSie": "lesen"
+            },
+            "examples": [
+                {
+                    "de": "Ich habe ein Buch gelesen.",
+                    "es": "He leído un libro.",
+                    "phonetics": "/ɪç ˈhaːbə aɪ̯n buːx ɡəˈleːzn̩/",
+                    "explanation": "<li><b>Akkusativ (neutral):</b> \"ein Buch".</li>"
+                },
+                {
+                    "de": "Er hat die Zeitung gelesen.",
+                    "es": "Él ha leído el periódico.",
+                    "phonetics": "/eːɐ̯ hat diː ˈtsaɪ̯tʊŋ ɡəˈleːzn̩/",
+                    "explanation": "<li><b>Akkusativ (feminin):</b> \"die Zeitung".</li>"
+                },
+                {
+                    "de": "Hast du die E-Mail gelesen?",
+                    "es": "¿Has leído el correo electrónico?",
+                    "phonetics": "/hast duː diː ˈiːmeːl ɡəˈleːzn̩/",
+                    "explanation": "<li><b>Akkusativ (feminin):</b> \"die E-Mail".</li>"
+                },
+                {
+                    "de": "Wir haben die Speisekarte gelesen.",
+                    "es": "Hemos leído el menú.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ diː ˈʃpaɪ̯zəˌkaʁtə ɡəˈleːzn̩/",
+                    "explanation": "<li><b>Akkusativ (feminin):</b> \"die Speisekarte".</li>"
+                },
+                {
+                    "de": "Sie hat mir eine Geschichte vorgelesen.",
+                    "es": "Ella me ha leído una historia.",
+                    "phonetics": "/ziː hat miːɐ̯ ˈaɪ̯nə ɡəˈʃɪçtə ˈfoːɐ̯ɡəleːzn̩/",
+                    "explanation": "<li><b>Trennbares Verb + Dativ (mir).</b></li>"
+                },
+                {
+                    "de": "Was hast du gelesen?",
+                    "es": "¿Qué has leído?",
+                    "phonetics": "/vas hast duː ɡəˈleːzn̩/",
+                    "explanation": "<li><b>W-Frage (Objekt).</b></li>"
+                },
+                {
+                    "de": "Wer hat dieses Buch gelesen?",
+                    "es": "¿Quién ha leído este libro?",
+                    "phonetics": "/veːɐ̯ hat ˈdiːzəs buːx ɡəˈleːzn̩/",
+                    "explanation": "<li><b>W-Frage (Subjekt) + Akkusativ (dieses Buch).</b></li>"
+                },
+                {
+                    "de": "Wie viele Bücher hast du gelesen?",
+                    "es": "¿Cuántos libros has leído?",
+                    "phonetics": "/viː ˈfiːlə ˈbyːçɐ hast duː ɡəˈleːzn̩/",
+                    "explanation": "<li><b>W-Frage (Anzahl).</b></li>"
+                }
+            ]
+        },
+        "schreiben": {
+            "perfekt": "hat geschrieben",
+            "emoji": "✍️",
+            "es": "escribir",
+            "es_perfekt": "he escrito",
+            "en_verb": "to write",
+            "en_perfekt": "has written",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "schreibe",
+                "du": "schreibst",
+                "erSieEs": "schreibt",
+                "wir": "schreiben",
+                "ihr": "schreibt",
+                "sieSie": "schreiben"
+            },
+            "examples": [
+                {
+                    "de": "Ich habe einen Brief geschrieben.",
+                    "es": "He escrito una carta.",
+                    "phonetics": "/ɪç ˈhaːbə ˈaɪ̯nən bʁiːf ɡəˈʃʁiːbn̩/",
+                    "explanation": "<li><b>Akkusativ (maskulin):</b> \"einen Brief".</li>"
+                },
+                {
+                    "de": "Hast du eine E-Mail geschrieben?",
+                    "es": "¿Has escrito un correo electrónico?",
+                    "phonetics": "/hast duː ˈaɪ̯nə ˈiːmeːl ɡəˈʃʁiːbn̩/",
+                    "explanation": "<li><b>Akkusativ (feminin):</b> \"eine E-Mail".</li>"
+                },
+                {
+                    "de": "Sie hat ein Buch geschrieben.",
+                    "es": "Ella ha escrito un libro.",
+                    "phonetics": "/ziː hat aɪ̯n buːx ɡəˈʃʁiːbn̩/",
+                    "explanation": "<li><b>Akkusativ (neutral):</b> \"ein Buch".</li>"
+                },
+                {
+                    "de": "Wir haben eine Liste geschrieben.",
+                    "es": "Hemos escrito una lista.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ ˈaɪ̯nə ˈlɪstə ɡəˈʃʁiːbn̩/",
+                    "explanation": "<li><b>Akkusativ (feminin):</b> \"eine Liste".</li>"
+                },
+                {
+                    "de": "Wer hat das geschrieben?",
+                    "es": "¿Quién ha escrito esto?",
+                    "phonetics": "/veːɐ̯ hat das ɡəˈʃʁiːbn̩/",
+                    "explanation": "<li><b>W-Frage (Subjekt).</b></li>"
+                },
+                {
+                    "de": "Was hast du geschrieben?",
+                    "es": "¿Qué has escrito?",
+                    "phonetics": "/vas hast duː ɡəˈʃʁiːbn̩/",
+                    "explanation": "<li><b>W-Frage (Objekt).</b></li>"
+                },
+                {
+                    "de": "Wann hast du den Brief geschrieben?",
+                    "es": "¿Cuándo has escrito la carta?",
+                    "phonetics": "/van hast duː deːn bʁiːf ɡəˈʃʁiːbn̩/",
+                    "explanation": "<li><b>W-Frage (Zeit) + Akkusativ (den Brief).</b></li>"
+                },
+                {
+                    "de": "Warum hast du ihm geschrieben?",
+                    "es": "¿Por qué le has escrito a él?",
+                    "phonetics": "/vaˈʁʊm hast duː iːm ɡəˈʃʁiːbn̩/",
+                    "explanation": "<li><b>W-Frage (Grund) + Dativ (ihm).</b></li>"
+                }
+            ]
+        },
+        "hören": {
+            "perfekt": "hat gehört",
+            "emoji": "🎧",
+            "es": "oír/escuchar",
+            "es_perfekt": "he oído/escuchado",
+            "en_verb": "to hear/listen",
+            "en_perfekt": "has heard/listened",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "höre",
+                "du": "hörst",
+                "erSieEs": "hört",
+                "wir": "hören",
+                "ihr": "hört",
+                "sieSie": "hören"
+            },
+            "examples": [
+                {
+                    "de": "Ich habe Musik gehört.",
+                    "es": "He escuchado música.",
+                    "phonetics": "/ɪç ˈhaːbə muˈziːk ɡəˈhøːɐ̯t/",
+                    "explanation": "<li><b>Akkusativ (ohne Artikel).</b></li>"
+                },
+                {
+                    "de": "Hast du das Geräusch gehört?",
+                    "es": "¿Has oído ese ruido?",
+                    "phonetics": "/hast duː das ɡəˈʁɔʏ̯ʃ ɡəˈhøːɐ̯t/",
+                    "explanation": "<li><b>Akkusativ (neutral):</b> \"das Geräusch".</li>"
+                },
+                {
+                    "de": "Wir haben die Nachrichten gehört.",
+                    "es": "Hemos escuchado las noticias.",
+                    "phonetics": "/viːɐ̯ ˈhaːbn̩ diː ˈnaːxˌʁɪçtn̩ ɡəˈhøːɐ̯t/",
+                    "explanation": "<li><b>Akkusativ (Plural):</b> \"die Nachrichten".</li>"
+                },
+                {
+                    "de": "Er hat ein Lied im Radio gehört.",
+                    "es": "Él ha escuchado una canción en la radio.",
+                    "phonetics": "/eːɐ̯ hat aɪ̯n liːt ɪm ˈʁaːdioː ɡəˈhøːɐ̯t/",
+                    "explanation": "<li><b>Akkusativ (ein Lied) + Präposition + Dativ (im Radio).</b></li>"
+                },
+                {
+                    "de": "Habt ihr etwas gehört?",
+                    "es": "¿Habéis oído algo?",
+                    "phonetics": "/hapt iːɐ̯ ˈɛtvas ɡəˈhøːɐ̯t/",
+                    "explanation": "<li><b>Pronomen als Objekt:</b> \"etwas".</li>"
+                },
+                {
+                    "de": "Was hast du gehört?",
+                    "es": "¿Qué has oído?",
+                    "phonetics": "/vas hast duː ɡəˈhøːɐ̯t/",
+                    "explanation": "<li><b>W-Frage (Objekt).</b></li>"
+                },
+                {
+                    "de": "Wer hat das Geräusch gehört?",
+                    "es": "¿Quién ha oído el ruido?",
+                    "phonetics": "/veːɐ̯ hat das ɡəˈʁɔʏ̯ʃ ɡəˈhøːɐ̯t/",
+                    "explanation": "<li><b>W-Frage (Subjekt).</b></li>"
+                },
+                {
+                    "de": "Wann hast du das Lied gehört?",
+                    "es": "¿Cuándo has oído la canción?",
+                    "phonetics": "/van hast duː das liːt ɡəˈhøːɐ̯t/",
+                    "explanation": "<li><b>W-Frage (Zeit).</b></li>"
+                }
+            ]
+        },
+        "fragen": {
+            "perfekt": "hat gefragt",
+            "emoji": "❓",
+            "es": "preguntar",
+            "es_perfekt": "he preguntado",
+            "en_verb": "to ask",
+            "en_perfekt": "has asked",
+            "irregularPraesens": false,
+            "vokalwechsel": null,
+            "praesens": {
+                "ich": "frage",
+                "du": "fragst",
+                "erSieEs": "fragt",
+                "wir": "fragen",
+                "ihr": "fragt",
+                "sieSie": "fragen"
+            },
+            "examples": [
+                {
+                    "de": "Ich habe den Lehrer gefragt.",
+                    "es": "Le he preguntado al profesor.",
+                    "phonetics": "/ɪç ˈhaːbə deːn ˈleːʁɐ ɡəˈfʁaːkt/",
+                    "explanation": "<li><b>Akkusativ (Person):</b> \"fragen\" + Akkusativ (\"den Lehrer\").</li>"
+                },
+                {
+                    "de": "Sie hat nach ihrem Papa gefragt.",
+                    "es": "Ella ha preguntado por su papá.",
+                    "phonetics": "/ziː hat nax ˈiːʁəm ˈpapa ɡəˈfʁaːkt/",
+                    "explanation": "<li><b>Präposition + Dativ:</b> \"nach ihrem Papa".</li>"
+                },
+                {
+                    "de": "Hast du sie gefragt?",
+                    "es": "¿Le has preguntado a ella?",
+                    "phonetics": "/hast duː ziː ɡəˈfʁaːkt/",
+                    "explanation": "<li><b>Akkusativpronomen (sie).</b></li>"
+                },
+                {
+                    "de": "Er hat um einen Stift gefragt.",
+                    "es": "Él ha pedido un bolígrafo.",
+                    "phonetics": "/eːɐ̯ hat ʊm ˈaɪ̯nən ʃtɪft ɡəˈfʁaːkt/",
+                    "explanation": "<li><b>Feste Wendung:</b> \"um etwas fragen\". Präposition + Akkusativ.</li>"
+                },
+                {
+                    "de": "Warum hast du nicht gefragt?",
+                    "es": "¿Por qué no has preguntado?",
+                    "phonetics": "/vaˈʁʊm hast duː nɪçt ɡəˈfʁaːkt/",
+                    "explanation": "<li><b>W-Frage (Grund) + Negation.</b></li>"
+                },
+                {
+                    "de": "Was hat sie gefragt?",
+                    "es": "¿Qué ha preguntado ella?",
+                    "phonetics": "/vas hat ziː ɡəˈfʁaːkt/",
+                    "explanation": "<li><b>W-Frage (Objekt).</b></li>"
+                },
+                {
+                    "de": "Wer hat dich gefragt?",
+                    "es": "¿Quién te ha preguntado?",
+                    "phonetics": "/veːɐ̯ hat dɪç ɡəˈfʁaːkt/",
+                    "explanation": "<li><b>W-Frage (Subjekt) + Akkusativpronomen (dich).</b></li>"
+                },
+                {
+                    "de": "Wo hast du ihn gefragt?",
+                    "es": "¿Dónde le has preguntado a él?",
+                    "phonetics": "/voː hast duː iːn ɡəˈfʁaːkt/",
+                    "explanation": "<li><b>W-Frage (Ort) + Akkusativpronomen (ihn).</b></li>"
                 }
             ]
         },
@@ -87,19 +543,43 @@
                 "sieSie": "bezahlen"
             },
             "praesens_examples": {
-                "ich": { "de": "Ich bezahle die Rechnung.", "en": "I pay the bill.", "es": "Pago la cuenta." },
-                "du": { "de": "Bezahlst du bar?", "en": "Are you paying in cash?", "es": "¿Pagas en efectivo?" },
-                "erSieEs": { "de": "Er bezahlt mit Karte.", "en": "He pays by card.", "es": "Él paga con tarjeta." },
-                "wir": { "de": "Wir bezahlen getrennt.", "en": "We pay separately.", "es": "Pagamos por separado." },
-                "ihr": { "de": "Ihr bezahlt zusammen.", "en": "You pay together.", "es": "Pagáis juntos." },
-                "sieSie": { "de": "Sie bezahlen den Kaffee.", "en": "They pay for the coffee.", "es": "Pagan el café." }
+                "ich": {
+                    "de": "Ich bezahle die Rechnung.",
+                    "en": "I pay the bill.",
+                    "es": "Pago la cuenta."
+                },
+                "du": {
+                    "de": "Bezahlst du bar?",
+                    "en": "Are you paying in cash?",
+                    "es": "¿Pagas en efectivo?"
+                },
+                "erSieEs": {
+                    "de": "Er bezahlt mit Karte.",
+                    "en": "He pays by card.",
+                    "es": "Él paga con tarjeta."
+                },
+                "wir": {
+                    "de": "Wir bezahlen getrennt.",
+                    "en": "We pay separately.",
+                    "es": "Pagamos por separado."
+                },
+                "ihr": {
+                    "de": "Ihr bezahlt zusammen.",
+                    "en": "You pay together.",
+                    "es": "Pagáis juntos."
+                },
+                "sieSie": {
+                    "de": "Sie bezahlen den Kaffee.",
+                    "en": "They pay for the coffee.",
+                    "es": "Pagan el café."
+                }
             },
             "examples": [
                 {
                     "de": "Er hat die Rechnung bezahlt.",
                     "es": "Él ha pagado la cuenta.",
                     "phonetics": "/eːɐ̯ hat diː ˈʁɛçnʊŋ bəˈtsaːlt/",
-                    "explanation": "<li><b>Akkusativ (feminin):</b> \"die Rechnung\".</li>"
+                    "explanation": "<li><b>Akkusativ (feminin):</b> \"die Rechnung".</li>"
                 }
             ]
         }
