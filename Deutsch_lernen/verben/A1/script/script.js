@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- GLOBAL STATE ---
-    const allVerbs = {};
-    const verbGroupsData = [];
+    const allVerbsData = {};
+    let verbGroupsData = [];
     const totalGroups = 24;
     const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "Zwölfte", "Dreizehnte", "Vierzehnte", "Fünfzehnte", "Sechzehnte", "Siebzehnte", "Achtzehnte", "Neunzehnte", "Zwanzigste", "Einundzwanzigste", "Zweiundzwanzigste", "Dreiundzwanzigste", "Vierundzwanzigste"];
     const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes", "Sechstes", "Siebtes", "Achtes"];
@@ -34,53 +34,62 @@ document.addEventListener('DOMContentLoaded', () => {
     const infoButton = document.getElementById('info-button');
     const closeInfoModalButton = document.getElementById('close-info-modal');
 
-    // --- FUNCTIONS ---
-
-    function loadAllVerbs() {
-        const promises = [];
+    // --- NEW LOADING FUNCTION ---
+    function loadAppData() {
+        const groupPromises = [];
         for (let i = 1; i <= totalGroups; i++) {
-            const promise = fetch(`json/group_${i}.json`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status} for group_${i}.json`);
-                    }
-                    return response.json();
-                })
-                .catch(error => {
-                    console.error(`Error loading group_${i}.json:`, error);
-                    throw error; // re-throw the error to be caught by the final catch
-                });
-            promises.push(promise);
+            groupPromises.push(fetch(`json/groups/group_${i}.json`).then(res => res.json()));
         }
-        return Promise.all(promises).then(groups => {
-            groups.forEach((group, index) => {
-                verbGroupsData[index] = group;
-                Object.assign(allVerbs, group.verbs);
+
+        return Promise.all(groupPromises).then(groups => {
+            verbGroupsData = groups;
+
+            const allVerbNames = new Set();
+            groups.forEach(group => {
+                if (group.verbs) {
+                    group.verbs.forEach(verbName => allVerbNames.add(verbName));
+                }
             });
+
+            const verbDataPromises = Array.from(allVerbNames).map(verbName => {
+                const cardPromise = fetch(`json/cards/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
+                const praesensPromise = fetch(`json/praesens/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
+                const perfektPromise = fetch(`json/perfekt/${verbName}.json`).then(res => res.ok ? res.json() : []).catch(() => []);
+
+                return Promise.all([cardPromise, praesensPromise, perfektPromise])
+                    .then(([cardData, praesensData, perfektData]) => {
+                        allVerbsData[verbName] = {
+                            ...cardData,
+                            ...praesensData,
+                            examples: perfektData
+                        };
+                    });
+            });
+
+            return Promise.all(verbDataPromises);
         });
     }
 
+    // --- UPDATED RENDER FUNCTION ---
     function renderVerbGroup(index) {
-        const data = verbGroupsData[index];
-        if (!data) {
-            console.error(`Group data for index ${index} is not loaded.`);
+        const group = verbGroupsData[index];
+        if (!group || !group.verbs) {
+            console.error(`Group data for index ${index} is not loaded or invalid.`);
             cardsContainer.innerHTML = '<p>Fehler beim Laden der Verben.</p>';
             return;
         }
 
-        const groupData = data.verbs;
         cardsContainer.innerHTML = '';
-
-        for (const verb in groupData) {
-            const verbData = groupData[verb];
-            if (!verbData) continue;
+        group.verbs.forEach(verbName => {
+            const verbData = allVerbsData[verbName];
+            if (!verbData) return;
             const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
             const cardHTML = `
-                <div class="word-item" onclick="openModalForVerb('${verb}')">
+                <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="word-item-content">
                         <span class="emoji">${verbData.emoji || '❓'}</span>
                         <div class="text-container">
-                            <span class="german-word">${verb}${irregularMark}</span>
+                            <span class="german-word">${verbName}${irregularMark}</span>
                             <span class="spanish-translation" data-form="translation">${verbData.es || ''}</span>
                             <span class="german-past" data-form="perfekt">${verbData.perfekt || '---'}</span>
                             <span class="spanish-perfekt" data-form="translation perfekt">${verbData.es_perfekt || ''}</span>
@@ -88,15 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>`;
             cardsContainer.innerHTML += cardHTML;
-        }
+        });
 
-        levelIndicator.textContent = data.level;
+        levelIndicator.textContent = group.level;
         levelIndicator.className = 'level-indicator'; // Reset classes
-        if (data.level === 'A1.1') levelIndicator.classList.add('level-a1-1');
-        else if (data.level === 'A1.2') levelIndicator.classList.add('level-a1-2');
-        else if (data.level === 'A2.1') levelIndicator.classList.add('level-a2-1');
-        else if (data.level === 'A2.2') levelIndicator.classList.add('level-a2-2');
-
+        if (group.level === 'A1.1') levelIndicator.classList.add('level-a1-1');
+        else if (group.level === 'A1.2') levelIndicator.classList.add('level-a1-2');
+        else if (group.level === 'A2.1') levelIndicator.classList.add('level-a2-1');
+        else if (group.level === 'A2.2') levelIndicator.classList.add('level-a2-2');
 
         groupIndicator.textContent = `${germanOrdinals[index]} Gruppe von ${totalGroups}`;
         prevGroupBtn.disabled = index === 0;
@@ -121,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function initializeApp() {
-        // Determine starting group from URL
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('level') === 'A1.2') {
             currentGroupIndex = 5;
@@ -129,12 +136,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setupProgressBar();
         
-        // Load all data, then render the initial view
-        loadAllVerbs()
+        loadAppData()
             .then(() => {
                 renderVerbGroup(currentGroupIndex);
                 
-                // --- SETUP EVENT LISTENERS AFTER DATA IS LOADED ---
                 prevGroupBtn.addEventListener('click', () => {
                     if (currentGroupIndex > 0) {
                         currentGroupIndex--;
@@ -154,7 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 cardsContainer.innerHTML = '<p>Ein Fehler ist beim Laden der Verben aufgetreten. Bitte versuchen Sie es später erneut.</p>';
             });
 
-        // --- General Event Listeners (can be set up immediately) ---
         const toggles = document.querySelectorAll('.visibility-toggle');
         const verbModalContent = document.querySelector('#verb-modal .modal-content');
         toggles.forEach(toggle => {
@@ -181,12 +185,11 @@ document.addEventListener('DOMContentLoaded', () => {
         verbModal.addEventListener('click', (e) => { if (e.target === verbModal) verbModal.classList.remove('visible'); });
     }
     
-    // --- MODAL FUNCTIONS (Can be defined globally as they depend on allVerbs) ---
+    // --- UPDATED MODAL FUNCTION ---
     window.openModalForVerb = function(verb) {
-        const data = allVerbs[verb];
+        const data = allVerbsData[verb];
         if (!data) return;
         
-        // For simplicity, this is a condensed version of your modal logic
         document.getElementById('modal-verb-infinitive').textContent = verb;
         document.getElementById('modal-verb-perfekt').textContent = data.perfekt || '---';
         document.getElementById('modal-emoji').textContent = data.emoji || '❓';
@@ -198,26 +201,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const praesensTableContainer = document.getElementById('modal-praesens-table');
         if (data.praesens) {
             let tableHTML = '<table>';
-            tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel</th></tr>';
+            tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th></tr>';
             for (const [pronoun, conjugation] of Object.entries(data.praesens)) {
-                let exampleHTML = '';
-                if (pronoun === 'erSieEs' && data.praesens_examples.er && data.praesens_examples.sie_singular && data.praesens_examples.es) {
-                    exampleHTML += `<b>er:</b> ${data.praesens_examples.er.de}<br>`;
-                    exampleHTML += `<b>sie:</b> ${data.praesens_examples.sie_singular.de}<br>`;
-                    exampleHTML += `<b>es:</b> ${data.praesens_examples.es.de}`;
-                } else if (pronoun === 'sieSie' && data.praesens_examples.sie_plural && data.praesens_examples.Sie_formal) {
-                    exampleHTML += `<b>sie:</b> ${data.praesens_examples.sie_plural.de}<br>`;
-                    exampleHTML += `<b>Sie:</b> ${data.praesens_examples.Sie_formal.de}`;
-                } else {
-                    exampleHTML = data.praesens_examples[pronoun] ? data.praesens_examples[pronoun].de : '';
-                }
-                tableHTML += `<tr><td>${pronoun}</td><td>${conjugation}</td><td>${exampleHTML}</td></tr>`;
+                tableHTML += `<tr><td>${pronoun}</td><td>${conjugation}</td></tr>`;
             }
             tableHTML += '</table>';
             praesensTableContainer.innerHTML = tableHTML;
         } else {
             praesensTableContainer.innerHTML = '';
         }
+
+        const praesensExamplesContainer = document.getElementById('praesens-examples-container');
+        if(praesensExamplesContainer) praesensExamplesContainer.style.display = 'none';
 
         const verbModalContent = document.querySelector('#verb-modal .modal-content');
         verbModalContent.classList.remove('hide-perfekt', 'hide-translation');
