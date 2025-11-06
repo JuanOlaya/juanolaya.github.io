@@ -200,8 +200,18 @@ document.addEventListener('DOMContentLoaded', () => {
             let tableHTML = '<table>';
             tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel</th></tr>';
             for (const [pronoun, conjugation] of Object.entries(data.praesens)) {
-                const example = data.praesens_examples[pronoun] ? data.praesens_examples[pronoun].de : '';
-                tableHTML += `<tr><td>${pronoun}</td><td>${conjugation}</td><td>${example}</td></tr>`;
+                let exampleHTML = '';
+                if (pronoun === 'erSieEs' && data.praesens_examples.er && data.praesens_examples.sie_singular && data.praesens_examples.es) {
+                    exampleHTML += `<b>er:</b> ${data.praesens_examples.er.de}<br>`;
+                    exampleHTML += `<b>sie:</b> ${data.praesens_examples.sie_singular.de}<br>`;
+                    exampleHTML += `<b>es:</b> ${data.praesens_examples.es.de}`;
+                } else if (pronoun === 'sieSie' && data.praesens_examples.sie_plural && data.praesens_examples.Sie_formal) {
+                    exampleHTML += `<b>sie:</b> ${data.praesens_examples.sie_plural.de}<br>`;
+                    exampleHTML += `<b>Sie:</b> ${data.praesens_examples.Sie_formal.de}`;
+                } else {
+                    exampleHTML = data.praesens_examples[pronoun] ? data.praesens_examples[pronoun].de : '';
+                }
+                tableHTML += `<tr><td>${pronoun}</td><td>${conjugation}</td><td>${exampleHTML}</td></tr>`;
             }
             tableHTML += '</table>';
             praesensTableContainer.innerHTML = tableHTML;
