@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadAppData() {
         const groupPromises = [];
         for (let i = 1; i <= totalGroups; i++) {
-            groupPromises.push(fetch(`json/groups/group_${i}.json`).then(res => res.json()));
+            groupPromises.push(fetch(`../json/groups/group_${i}.json`).then(res => res.json()));
         }
 
         return Promise.all(groupPromises).then(groups => {
@@ -52,9 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             const verbDataPromises = Array.from(allVerbNames).map(verbName => {
-                const cardPromise = fetch(`json/cards/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-                const praesensPromise = fetch(`json/praesens/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-                const perfektPromise = fetch(`json/perfekt/${verbName}.json`).then(res => res.ok ? res.json() : []).catch(() => []);
+                const cardPromise = fetch(`../json/cards/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
+                const praesensPromise = fetch(`../json/praesens/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
+                const perfektPromise = fetch(`../json/perfekt/${verbName}.json`).then(res => res.ok ? res.json() : []).catch(() => []);
 
                 return Promise.all([cardPromise, praesensPromise, perfektPromise])
                     .then(([cardData, praesensData, perfektData]) => {
