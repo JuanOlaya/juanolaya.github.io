@@ -198,9 +198,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const praesensTableContainer = document.getElementById('modal-praesens-table');
         if (data.praesens) {
             let tableHTML = '<table>';
-            tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th></tr>';
+            tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel</th></tr>';
             for (const [pronoun, conjugation] of Object.entries(data.praesens)) {
-                tableHTML += `<tr><td>${pronoun}</td><td>${conjugation}</td></tr>`;
+                const example = data.praesens_examples[pronoun] ? data.praesens_examples[pronoun].de : '';
+                tableHTML += `<tr><td>${pronoun}</td><td>${conjugation}</td><td>${example}</td></tr>`;
             }
             tableHTML += '</table>';
             praesensTableContainer.innerHTML = tableHTML;
