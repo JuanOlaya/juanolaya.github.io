@@ -7,7 +7,9 @@
       "Bash(do grep '\"\"\"\"' \"json/groups/group_$i.json\")",
       "Bash(done)",
       "Bash(cat:*)",
-      "Bash(node update_sie_formal.js:*)"
+      "Bash(node update_sie_formal.js:*)",
+      "Bash(del update_sie_formal.js)",
+      "Bash(node update_complete_examples.js:*)"
     ],
     "deny": [],
     "ask": []
