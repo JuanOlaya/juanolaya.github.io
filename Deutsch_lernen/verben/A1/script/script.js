@@ -61,17 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const verbDataPromises = Array.from(allVerbNames).map(verbName => {
                 const cardPromise = fetch(`json/cards/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-                const praesensPromise = fetch(`json/praesens/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-                const perfektPromise = fetch(`json/perfekt/${verbName}.json`).then(res => res.ok ? res.json() : []).catch(() => []);
 
-                return Promise.all([cardPromise, praesensPromise, perfektPromise])
-                    .then(([cardData, praesensData, perfektData]) => {
-                        allVerbsData[verbName] = {
-                            ...cardData,
-                            ...praesensData,
-                            examples: perfektData
-                        };
-                    });
+                return cardPromise.then(cardData => {
+                    allVerbsData[verbName] = cardData;
+                });
             });
 
             return Promise.all(verbDataPromises);
@@ -193,21 +186,43 @@ document.addEventListener('DOMContentLoaded', () => {
         verbModal.addEventListener('click', (e) => { if (e.target === verbModal) verbModal.classList.remove('visible'); });
     }
     
-    // --- UPDATED MODAL FUNCTION ---
-    window.openModalForVerb = function(verb) {
+    // --- UPDATED MODAL FUNCTION WITH LAZY LOADING ---
+    window.openModalForVerb = async function(verb) {
         const data = allVerbsData[verb];
         if (!data) return;
-        
+
+        // Lazy load praesens and perfekt data if not already loaded
+        if (!data.praesens || !data.examples) {
+            try {
+                const praesensPromise = fetch(`json/praesens/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
+                const perfektPromise = fetch(`json/perfekt/${verb}.json`).then(res => res.ok ? res.json() : []).catch(() => []);
+
+                const [praesensData, perfektData] = await Promise.all([praesensPromise, perfektPromise]);
+
+                // Merge the loaded data into allVerbsData
+                allVerbsData[verb] = {
+                    ...data,
+                    ...praesensData,
+                    examples: perfektData
+                };
+            } catch (error) {
+                console.error(`Failed to load modal data for ${verb}:`, error);
+            }
+        }
+
+        // Get the updated data reference
+        const updatedData = allVerbsData[verb];
+
         document.getElementById('modal-verb-infinitive').textContent = verb;
-        document.getElementById('modal-verb-perfekt').textContent = data.perfekt || '---';
-        document.getElementById('modal-emoji').textContent = data.emoji || '❓';
-        document.getElementById('modal-verb-infinitive-es').textContent = data.es ? `🇪🇸 ${data.es}` : '';
-        document.getElementById('modal-verb-perfekt-es').textContent = data.es_perfekt ? `🇪🇸 ${data.es_perfekt}` : '';
-        document.getElementById('modal-verb-english-infinitive').textContent = data.en_verb ? `🇬🇧 ${data.en_verb}` : '';
-        document.getElementById('modal-verb-english-perfekt').textContent = data.en_perfekt ? `🇬🇧 ${data.en_perfekt}` : '';
+        document.getElementById('modal-verb-perfekt').textContent = updatedData.perfekt || '---';
+        document.getElementById('modal-emoji').textContent = updatedData.emoji || '❓';
+        document.getElementById('modal-verb-infinitive-es').textContent = updatedData.es ? `🇪🇸 ${updatedData.es}` : '';
+        document.getElementById('modal-verb-perfekt-es').textContent = updatedData.es_perfekt ? `🇪🇸 ${updatedData.es_perfekt}` : '';
+        document.getElementById('modal-verb-english-infinitive').textContent = updatedData.en_verb ? `🇬🇧 ${updatedData.en_verb}` : '';
+        document.getElementById('modal-verb-english-perfekt').textContent = updatedData.en_perfekt ? `🇬🇧 ${updatedData.en_perfekt}` : '';
         
         const praesensTableContainer = document.getElementById('modal-praesens-table');
-        if (data.praesens) {
+        if (updatedData.praesens) {
             // Define the desired pronoun order
             const pronounOrder = [
                 { key: 'ich', display: 'ich' },
@@ -225,9 +240,9 @@ document.addEventListener('DOMContentLoaded', () => {
             tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel</th></tr>';
 
             for (const { key, display } of pronounOrder) {
-                const conjugation = data.praesens[key];
+                const conjugation = updatedData.praesens[key];
                 if (conjugation) {
-                    const example = data.praesens_examples && data.praesens_examples[key];
+                    const example = updatedData.praesens_examples && updatedData.praesens_examples[key];
                     let exampleCell = '';
 
                     if (example) {
