@@ -831,12 +831,21 @@
     max-height: 10em; /* Allow space for both translations */
 }
 
+/* Make perfekt containers relative for absolute positioning of auxiliary */
+.german-past,
+.spanish-perfekt {
+    position: relative;
+    display: inline-block;
+}
+
 /* Hide auxiliary verbs (ist/hat, he/ha) by default in Perfekt forms */
 .auxiliary-verb {
-    display: inline-block;
-    width: 2em; /* Fixed width to maintain alignment */
+    position: absolute;
+    right: 100%; /* Position to the left of the participle */
+    margin-right: 0.3em; /* Small space between auxiliary and participle */
     opacity: 0;
     transition: opacity 0.3s ease-out;
+    white-space: nowrap;
 }
 
 /* Show all auxiliary verbs when hovering over either German or Spanish perfekt */
