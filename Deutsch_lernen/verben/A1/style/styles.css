@@ -836,13 +836,13 @@
 .spanish-perfekt {
     position: relative;
     display: inline-block;
+    padding-left: 2.5em; /* Make room for auxiliary verb */
 }
 
 /* Hide auxiliary verbs (ist/hat, he/ha) by default in Perfekt forms */
 .auxiliary-verb {
     position: absolute;
-    right: 100%; /* Position to the left of the participle */
-    margin-right: 0.3em; /* Small space between auxiliary and participle */
+    left: 0; /* Position at the left edge of the container */
     opacity: 0;
     transition: opacity 0.3s ease-out;
     white-space: nowrap;
