@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node analyze_praesens.js:*)",
+      "Bash(del analyze_praesens.js)",
+      "Bash(for i in {1..5})",
+      "Bash(do grep '\"\"\"\"' \"json/groups/group_$i.json\")",
+      "Bash(done)",
+      "Bash(cat:*)",
+      "Bash(node update_sie_formal.js:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
