@@ -208,11 +208,40 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const praesensTableContainer = document.getElementById('modal-praesens-table');
         if (data.praesens) {
+            // Define the desired pronoun order
+            const pronounOrder = [
+                { key: 'ich', display: 'ich' },
+                { key: 'du', display: 'du' },
+                { key: 'er', display: 'er' },
+                { key: 'sie', display: 'sie' },
+                { key: 'es', display: 'es' },
+                { key: 'wir', display: 'wir' },
+                { key: 'ihr', display: 'ihr' },
+                { key: 'sie (plural)', display: 'sie' },
+                { key: 'Sie (formal)', display: 'Sie' }
+            ];
+
             let tableHTML = '<table>';
-            tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th></tr>';
-            for (const [pronoun, conjugation] of Object.entries(data.praesens)) {
-                tableHTML += `<tr><td>${pronoun}</td><td>${conjugation}</td></tr>`;
+            tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel</th></tr>';
+
+            for (const { key, display } of pronounOrder) {
+                const conjugation = data.praesens[key];
+                if (conjugation) {
+                    const example = data.praesens_examples && data.praesens_examples[key];
+                    let exampleCell = '';
+
+                    if (example) {
+                        exampleCell = `<div class="example-cell">`;
+                        if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
+                        if (example.en) exampleCell += `<div class="example-en">${example.en}</div>`;
+                        if (example.es) exampleCell += `<div class="example-es">${example.es}</div>`;
+                        exampleCell += `</div>`;
+                    }
+
+                    tableHTML += `<tr><td>${display}</td><td>${conjugation}</td><td>${exampleCell}</td></tr>`;
+                }
             }
+
             tableHTML += '</table>';
             praesensTableContainer.innerHTML = tableHTML;
         } else {
