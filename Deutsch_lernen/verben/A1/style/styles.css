@@ -830,3 +830,15 @@
     opacity: 1;
     max-height: 10em; /* Allow space for both translations */
 }
+
+/* Hide auxiliary verbs (ist/hat, he/ha) by default in Perfekt forms */
+.auxiliary-verb {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+/* Show auxiliary verbs on hover of the parent span (german-past or spanish-perfekt) */
+.german-past:hover .auxiliary-verb,
+.spanish-perfekt:hover .auxiliary-verb {
+    opacity: 1;
+}

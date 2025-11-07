@@ -25,7 +25,20 @@ This document tracks all major changes made to the A1 German verbs learning appl
 - Präsens and Perfekt data loaded on-demand when user clicks a verb card
 - Reduced initial load from 300 to ~100 JSON files for better performance
 
-### 5. Fixed A1.1 Verb Examples (43 verbs)
+### 5. Hide Auxiliary Verbs in Perfekt Forms (script.js:89-109, styles.css:834-844)
+**Date**: 2025-11-07
+
+- Auxiliary verbs (ist/hat) in German Perfekt are now hidden by default
+- Auxiliary verbs (he/ha) in Spanish Perfekt are now hidden by default
+- Both appear on hover with smooth opacity transition (0.3s)
+- Example: "ist gegangen" displays as "gegangen" → hover shows "ist gegangen"
+- Example: "he ido" displays as "ido" → hover shows "he ido"
+
+**Implementation**:
+- JavaScript splits the Perfekt string and wraps auxiliary in `<span class="auxiliary-verb">`
+- CSS sets `opacity: 0` by default, `opacity: 1` on hover of parent element
+
+### 6. Fixed A1.1 Verb Examples (43 verbs)
 **Date**: 2025-11-07
 
 Updated all A1.1 verbs with properly differentiated examples:
