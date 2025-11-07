@@ -833,12 +833,14 @@
 
 /* Hide auxiliary verbs (ist/hat, he/ha) by default in Perfekt forms */
 .auxiliary-verb {
+    display: inline-block;
+    width: 2em; /* Fixed width to maintain alignment */
     opacity: 0;
     transition: opacity 0.3s ease-out;
 }
 
-/* Show auxiliary verbs on hover of the parent span (german-past or spanish-perfekt) */
-.german-past:hover .auxiliary-verb,
-.spanish-perfekt:hover .auxiliary-verb {
+/* Show all auxiliary verbs when hovering over either German or Spanish perfekt */
+.text-container:has(.german-past:hover) .auxiliary-verb,
+.text-container:has(.spanish-perfekt:hover) .auxiliary-verb {
     opacity: 1;
 }
