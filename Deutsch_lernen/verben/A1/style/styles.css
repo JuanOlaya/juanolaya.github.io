@@ -853,3 +853,17 @@
 .text-container:has(.spanish-perfekt:hover) .auxiliary-verb {
     opacity: 1;
 }
+
+/* Remove borders between er/sie/es rows in the Konjugation column */
+tr.pronoun-er td:nth-child(2) {
+    border-bottom: none;
+}
+
+tr.pronoun-sie td:nth-child(2) {
+    border-top: none;
+    border-bottom: none;
+}
+
+tr.pronoun-es td:nth-child(2) {
+    border-top: none;
+}

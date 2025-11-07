@@ -276,7 +276,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         exampleCell += `</div>`;
                     }
 
-                    tableHTML += `<tr><td>${display}</td><td>${conjugation}</td><td>${exampleCell}</td></tr>`;
+                    // Add special classes for er/sie/es rows and hide conjugation for er and es
+                    let rowClass = '';
+                    let conjugationCell = conjugation;
+
+                    if (key === 'er') {
+                        rowClass = ' class="pronoun-er"';
+                        conjugationCell = ''; // Hide conjugation for er
+                    } else if (key === 'sie') {
+                        rowClass = ' class="pronoun-sie"';
+                    } else if (key === 'es') {
+                        rowClass = ' class="pronoun-es"';
+                        conjugationCell = ''; // Hide conjugation for es
+                    }
+
+                    tableHTML += `<tr${rowClass}><td>${display}</td><td>${conjugationCell}</td><td>${exampleCell}</td></tr>`;
                 }
             }
 
