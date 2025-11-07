@@ -86,25 +86,25 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!verbData) return;
             const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
 
-            // Split German perfekt into auxiliary and participle
-            let germanPerfektHTML = verbData.perfekt || '---';
+            // Prepare German perfekt with short (participle only) and full versions
+            let germanPerfektShort = verbData.perfekt || '---';
+            let germanPerfektFull = verbData.perfekt || '---';
             if (verbData.perfekt && verbData.perfekt !== '---') {
                 const germanParts = verbData.perfekt.split(' ');
                 if (germanParts.length >= 2) {
-                    const auxiliary = germanParts[0]; // ist or hat
-                    const participle = germanParts.slice(1).join(' ');
-                    germanPerfektHTML = `<span class="auxiliary-verb">${auxiliary}</span> ${participle}`;
+                    germanPerfektShort = germanParts.slice(1).join(' '); // participle only
+                    germanPerfektFull = verbData.perfekt; // full: ist gegangen
                 }
             }
 
-            // Split Spanish perfekt into auxiliary and participle
-            let spanishPerfektHTML = verbData.es_perfekt || '';
+            // Prepare Spanish perfekt with short (participle only) and full versions
+            let spanishPerfektShort = verbData.es_perfekt || '';
+            let spanishPerfektFull = verbData.es_perfekt || '';
             if (verbData.es_perfekt) {
                 const spanishParts = verbData.es_perfekt.split(' ');
                 if (spanishParts.length >= 2) {
-                    const auxiliary = spanishParts[0]; // he or ha
-                    const participle = spanishParts.slice(1).join(' ');
-                    spanishPerfektHTML = `<span class="auxiliary-verb">${auxiliary}</span> ${participle}`;
+                    spanishPerfektShort = spanishParts.slice(1).join(' '); // participle only
+                    spanishPerfektFull = verbData.es_perfekt; // full: he ido
                 }
             }
 
@@ -112,11 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="word-item-content">
                         <span class="emoji">${verbData.emoji || '❓'}</span>
-                        <div class="text-container">
+                        <div class="text-container perfekt-hover-container">
                             <span class="german-word">${verbName}${irregularMark}</span>
                             <span class="spanish-translation" data-form="translation">${verbData.es || ''}</span>
-                            <span class="german-past" data-form="perfekt">${germanPerfektHTML}</span>
-                            <span class="spanish-perfekt" data-form="translation perfekt">${spanishPerfektHTML}</span>
+                            <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
+                            <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
                         </div>
                     </div>
                 </div>`;
@@ -134,6 +134,34 @@ document.addEventListener('DOMContentLoaded', () => {
         prevGroupBtn.disabled = index === 0;
         nextGroupBtn.disabled = index === totalGroups - 1;
         updateProgressBar(index);
+
+        // Setup hover listeners for perfekt forms
+        setupPerfektHoverListeners();
+    }
+
+    function setupPerfektHoverListeners() {
+        const containers = document.querySelectorAll('.perfekt-hover-container');
+
+        containers.forEach(container => {
+            const perfektTexts = container.querySelectorAll('.perfekt-text');
+
+            // Add hover listeners to each perfekt text element
+            perfektTexts.forEach(perfektText => {
+                perfektText.addEventListener('mouseenter', () => {
+                    // Show full version for all perfekt texts in this container
+                    container.querySelectorAll('.perfekt-text').forEach(text => {
+                        text.textContent = text.getAttribute('data-full');
+                    });
+                });
+
+                perfektText.addEventListener('mouseleave', () => {
+                    // Show short version for all perfekt texts in this container
+                    container.querySelectorAll('.perfekt-text').forEach(text => {
+                        text.textContent = text.getAttribute('data-short');
+                    });
+                });
+            });
+        });
     }
 
     function setupProgressBar() {
