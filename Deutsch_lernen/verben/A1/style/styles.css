@@ -801,3 +801,32 @@
     display: block; /* Stack them vertically */
     margin-top: 2px;
 }
+
+/* Präsens Konjugation Example Cell Styles */
+.example-cell {
+    line-height: 1.6;
+}
+
+.example-de {
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* Hide translations by default */
+.example-translation {
+    display: block;
+    font-style: italic;
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 4px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease-out, max-height 0.3s ease-out;
+}
+
+/* Show translations on hover of the example cell */
+.example-cell:hover .example-translation {
+    opacity: 1;
+    max-height: 10em; /* Allow space for both translations */
+}

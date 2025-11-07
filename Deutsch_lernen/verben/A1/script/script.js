@@ -248,8 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (example) {
                         exampleCell = `<div class="example-cell">`;
                         if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
-                        if (example.en) exampleCell += `<div class="example-en">${example.en}</div>`;
-                        if (example.es) exampleCell += `<div class="example-es">${example.es}</div>`;
+                        if (example.en) exampleCell += `<div class="example-translation example-en">🇬🇧 ${example.en}</div>`;
+                        if (example.es) exampleCell += `<div class="example-translation example-es">🇪🇸 ${example.es}</div>`;
                         exampleCell += `</div>`;
                     }
 
