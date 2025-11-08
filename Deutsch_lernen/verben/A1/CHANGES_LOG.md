@@ -101,7 +101,21 @@ Sie            | arbeiten    | Sie arbeiten sehr professionell.
 - Counter displayed above cards container
 - Smooth transitions and focus states
 
-### 9. Fixed A1.1 Verb Examples (43 verbs)
+### 9. Updated A2.1 Verb Levels (63 verbs in groups 10-16)
+**Date**: 2025-11-08
+
+- Corrected level classification for all verbs in groups 10-16 (Zehnte to Sechzehnte Gruppe)
+- Updated 17 verbs that had incorrect levels (A1.1, A1.2, or A2.2) to A2.1
+- Groups 10-16 now consistently show A2.1 level
+
+**Updated verbs**:
+- Group 10: anrufen, beginnen, erzählen, glauben, reisen
+- Group 11: aufstehen, einkaufen, mitbringen, anfangen
+- Group 12: abholen, mitkommen, erklären, bekommen, besuchen
+- Group 14: halten, scheinen
+- Group 15: raten
+
+### 10. Fixed A1.1 Verb Examples (43 verbs)
 **Date**: 2025-11-07
 
 Updated all A1.1 verbs with properly differentiated examples:
