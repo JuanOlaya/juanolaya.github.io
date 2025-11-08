@@ -15,7 +15,9 @@
       "Bash(node update_final_batches.js:*)",
       "Bash(node fix_a1_1_examples.js:*)",
       "Bash(del fix_a1_1_examples.js)",
-      "Bash(node update_a2_1_levels.js:*)"
+      "Bash(node update_a2_1_levels.js:*)",
+      "Bash(node check_missing_praesens.js:*)",
+      "Bash(node add_missing_praesens.js:*)"
     ],
     "deny": [],
     "ask": []
