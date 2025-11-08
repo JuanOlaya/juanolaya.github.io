@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Only search if 2+ characters
         if (searchTerm.length < 2) {
-            // Show all cards
+            // Show all cards in current group
             const allCards = cardsContainer.querySelectorAll('.word-item');
             allCards.forEach(card => {
                 card.style.display = '';
@@ -396,45 +396,87 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Get current group data
-        const currentGroup = verbGroupsData[currentGroupIndex];
-        if (!currentGroup) return;
+        // Search across ALL groups
+        const matchingVerbs = [];
 
-        let visibleCount = 0;
-        const maxVisible = 9;
+        verbGroupsData.forEach((group, groupIndex) => {
+            group.verbs.forEach(verbName => {
+                const verbData = allVerbsData[verbName];
+                if (verbData) {
+                    // Search in German infinitive and Spanish translation
+                    const germanMatch = verbName.toLowerCase().includes(searchTerm);
+                    const spanishMatch = verbData.es && verbData.es.toLowerCase().includes(searchTerm);
 
-        // Search through verbs in current group
-        const allCards = cardsContainer.querySelectorAll('.word-item');
-
-        allCards.forEach((card, index) => {
-            const verbName = currentGroup.verbs[index];
-            const verbData = allVerbsData[verbName];
-
-            if (!verbData) {
-                card.style.display = 'none';
-                return;
-            }
-
-            // Search in German infinitive and Spanish translation
-            const germanMatch = verbName.toLowerCase().includes(searchTerm);
-            const spanishMatch = verbData.es && verbData.es.toLowerCase().includes(searchTerm);
-
-            const isMatch = germanMatch || spanishMatch;
-
-            if (isMatch && visibleCount < maxVisible) {
-                card.style.display = '';
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
-            }
+                    if (germanMatch || spanishMatch) {
+                        matchingVerbs.push({
+                            verb: verbName,
+                            data: verbData,
+                            groupIndex: groupIndex
+                        });
+                    }
+                }
+            });
         });
+
+        // Clear current cards and display matching verbs (max 9)
+        cardsContainer.innerHTML = '';
+        const maxVisible = 9;
+        const verbsToShow = matchingVerbs.slice(0, maxVisible);
+
+        verbsToShow.forEach(match => {
+            const verbName = match.verb;
+            const verbData = match.data;
+            const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
+
+            // Prepare German perfekt with short and full versions
+            let germanPerfektShort = verbData.perfekt || '---';
+            let germanPerfektFull = verbData.perfekt || '---';
+            if (verbData.perfekt && verbData.perfekt !== '---') {
+                const germanParts = verbData.perfekt.split(' ');
+                if (germanParts.length >= 2) {
+                    germanPerfektShort = germanParts.slice(1).join(' ');
+                    germanPerfektFull = verbData.perfekt;
+                }
+            }
+
+            // Prepare Spanish perfekt with short and full versions
+            let spanishPerfektShort = verbData.es_perfekt || '';
+            let spanishPerfektFull = verbData.es_perfekt || '';
+            if (verbData.es_perfekt) {
+                const spanishParts = verbData.es_perfekt.split(' ');
+                if (spanishParts.length >= 2) {
+                    spanishPerfektShort = spanishParts.slice(1).join(' ');
+                    spanishPerfektFull = verbData.es_perfekt;
+                }
+            }
+
+            const cardHTML = `
+                <div class="word-item" onclick="openModalForVerb('${verbName}')">
+                    <div class="word-item-content">
+                        <span class="emoji">${verbData.emoji || '❓'}</span>
+                        <div class="text-container perfekt-hover-container">
+                            <span class="german-word">${verbName}${irregularMark}</span>
+                            <span class="spanish-translation" data-form="translation">${verbData.es || ''}</span>
+                            <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
+                            <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
+                        </div>
+                    </div>
+                </div>`;
+            cardsContainer.innerHTML += cardHTML;
+        });
+
+        // Re-setup hover listeners for new cards
+        setupPerfektHoverListeners();
 
         // Update counter
         if (searchCounter) {
-            if (visibleCount === 0) {
+            const totalMatches = matchingVerbs.length;
+            if (totalMatches === 0) {
                 searchCounter.textContent = 'Keine Verben gefunden (no se encontraron verbos)';
+            } else if (totalMatches <= maxVisible) {
+                searchCounter.textContent = `${totalMatches} ${totalMatches === 1 ? 'Verb' : 'Verben'} gefunden`;
             } else {
-                searchCounter.textContent = `${visibleCount} ${visibleCount === 1 ? 'Verb' : 'Verben'} gefunden`;
+                searchCounter.textContent = `${verbsToShow.length} von ${totalMatches} Verben angezeigt`;
             }
         }
     }
@@ -443,7 +485,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!searchInput) return;
         searchInput.value = '';
         if (clearSearchBtn) clearSearchBtn.classList.remove('visible');
-        performSearch(); // This will show all cards again
+        if (searchCounter) searchCounter.textContent = '';
+        // Restore the current group
+        renderVerbGroup(currentGroupIndex);
     }
 
     // Event listeners
