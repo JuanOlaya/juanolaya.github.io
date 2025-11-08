@@ -81,7 +81,27 @@ Sie            | arbeiten    | Sie arbeiten sehr professionell.
 🇪🇸 usted(es)  |             |
 ```
 
-### 8. Fixed A1.1 Verb Examples (43 verbs)
+### 8. Added Search Feature for Verb Cards (index.html:25-28,44, script.js:353-435, styles.css:577-646)
+**Date**: 2025-11-08
+
+- Added search input box next to Perfekt toggle in header
+- Live filtering as you type (minimum 2 characters required)
+- Searches in both German verb infinitive and Spanish translation
+- Partial match anywhere in the text
+- Maximum 9 matching verbs displayed at once
+- Clear button (×) appears when typing
+- Match counter shows number of results (e.g., "5 Verben gefunden")
+- "Keine Verben gefunden" message when no matches
+- Search automatically clears when switching groups
+- Cards filter in the same container (no layout changes)
+
+**UI Features**:
+- Search box with blue border matching theme
+- Clear button positioned inside input (right side)
+- Counter displayed above cards container
+- Smooth transitions and focus states
+
+### 9. Fixed A1.1 Verb Examples (43 verbs)
 **Date**: 2025-11-07
 
 Updated all A1.1 verbs with properly differentiated examples:

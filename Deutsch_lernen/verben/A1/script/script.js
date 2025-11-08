@@ -350,6 +350,90 @@ document.addEventListener('DOMContentLoaded', () => {
         verbModal.classList.add('visible');
     }
 
+    // --- SEARCH FUNCTIONALITY ---
+    const searchInput = document.getElementById('verb-search');
+    const clearSearchBtn = document.getElementById('clear-search');
+    const searchCounter = document.getElementById('search-counter');
+
+    function performSearch() {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+
+        // Show/hide clear button
+        if (searchTerm.length > 0) {
+            clearSearchBtn.classList.add('visible');
+        } else {
+            clearSearchBtn.classList.remove('visible');
+        }
+
+        // Only search if 2+ characters
+        if (searchTerm.length < 2) {
+            // Show all cards
+            const allCards = cardsContainer.querySelectorAll('.word-item');
+            allCards.forEach(card => {
+                card.style.display = '';
+            });
+            searchCounter.textContent = '';
+            return;
+        }
+
+        // Get current group data
+        const currentGroup = verbGroupsData[currentGroupIndex];
+        if (!currentGroup) return;
+
+        let visibleCount = 0;
+        const maxVisible = 9;
+
+        // Search through verbs in current group
+        const allCards = cardsContainer.querySelectorAll('.word-item');
+
+        allCards.forEach((card, index) => {
+            const verbName = currentGroup.verbs[index];
+            const verbData = allVerbsData[verbName];
+
+            if (!verbData) {
+                card.style.display = 'none';
+                return;
+            }
+
+            // Search in German infinitive and Spanish translation
+            const germanMatch = verbName.toLowerCase().includes(searchTerm);
+            const spanishMatch = verbData.es && verbData.es.toLowerCase().includes(searchTerm);
+
+            const isMatch = germanMatch || spanishMatch;
+
+            if (isMatch && visibleCount < maxVisible) {
+                card.style.display = '';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Update counter
+        if (visibleCount === 0) {
+            searchCounter.textContent = 'Keine Verben gefunden (no se encontraron verbos)';
+        } else {
+            searchCounter.textContent = `${visibleCount} ${visibleCount === 1 ? 'Verb' : 'Verben'} gefunden`;
+        }
+    }
+
+    function clearSearch() {
+        searchInput.value = '';
+        clearSearchBtn.classList.remove('visible');
+        performSearch(); // This will show all cards again
+    }
+
+    // Event listeners
+    searchInput.addEventListener('input', performSearch);
+    clearSearchBtn.addEventListener('click', clearSearch);
+
+    // Clear search when changing groups
+    const originalDisplayGroup = displayGroup;
+    window.displayGroup = function(index) {
+        clearSearch();
+        originalDisplayGroup.call(this, index);
+    };
+
     // --- START THE APP ---
     initializeApp();
 });

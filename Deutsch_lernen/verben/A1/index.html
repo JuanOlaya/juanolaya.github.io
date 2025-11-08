@@ -22,6 +22,10 @@
                     <h1 class="title">Verben: Präsens & Perfekt</h1>
 
                     <div class="controls-container">
+                        <div class="search-container">
+                            <input type="text" id="verb-search" class="search-input" placeholder="Suchen... (buscar)">
+                            <button id="clear-search" class="clear-search-btn" title="Clear search">×</button>
+                        </div>
                         <div class="active-recall-toggle">
                             <label for="perfekt-switch" class="toggle-label">
                                 Perfekt
@@ -37,6 +41,7 @@
                 <div class="info-button" id="info-button">info</div>
             </div>
 
+            <div id="search-counter" class="search-counter"></div>
             <div class="cards-container" id="cards-container">
                 <!-- Verb cards will be generated here by JavaScript -->
             </div>
