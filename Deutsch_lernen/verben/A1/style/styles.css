@@ -851,24 +851,24 @@
 }
 
 /* Remove borders between er/sie/es rows in the Konjugation column */
-tr.pronoun-er td:nth-child(2) {
+tr.pronoun-row-er td:nth-child(2) {
     border-bottom: none;
 }
 
-tr.pronoun-sie td:nth-child(2) {
+tr.pronoun-row-sie td:nth-child(2) {
     border-top: none;
     border-bottom: none;
 }
 
-tr.pronoun-es td:nth-child(2) {
+tr.pronoun-row-es td:nth-child(2) {
     border-top: none;
 }
 
 /* Remove borders between sie (plural) and Sie (formal) rows in the Konjugation column */
-tr.pronoun-sie-plural td:nth-child(2) {
+tr.pronoun-row-sie-plural td:nth-child(2) {
     border-bottom: none;
 }
 
-tr.pronoun-Sie-formal td:nth-child(2) {
+tr.pronoun-row-Sie-formal td:nth-child(2) {
     border-top: none;
 }

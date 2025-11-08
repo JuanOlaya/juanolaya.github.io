@@ -316,18 +316,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     let conjugationCell = conjugation;
 
                     if (key === 'er') {
-                        rowClass = ' class="pronoun-er"';
+                        rowClass = ' class="pronoun-row-er"';
                         conjugationCell = ''; // Hide conjugation for er
                     } else if (key === 'sie') {
-                        rowClass = ' class="pronoun-sie"';
+                        rowClass = ' class="pronoun-row-sie"';
                     } else if (key === 'es') {
-                        rowClass = ' class="pronoun-es"';
+                        rowClass = ' class="pronoun-row-es"';
                         conjugationCell = ''; // Hide conjugation for es
                     } else if (key === 'sie (plural)') {
-                        rowClass = ' class="pronoun-sie-plural"';
+                        rowClass = ' class="pronoun-row-sie-plural"';
                         conjugationCell = ''; // Hide conjugation for sie (plural)
                     } else if (key === 'Sie (formal)') {
-                        rowClass = ' class="pronoun-Sie-formal"';
+                        rowClass = ' class="pronoun-row-Sie-formal"';
                     }
 
                     tableHTML += `<tr${rowClass}><td>${pronounCell}</td><td>${conjugationCell}</td><td>${exampleCell}</td></tr>`;
