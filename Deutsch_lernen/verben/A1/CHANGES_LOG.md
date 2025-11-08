@@ -41,13 +41,15 @@ This document tracks all major changes made to the A1 German verbs learning appl
 - Event listeners swap text content on mouseenter/mouseleave
 - Hovering over either German or Spanish perfekt shows BOTH auxiliaries simultaneously
 
-### 6. Added Spanish Pronoun Translations in Modal (script.js:277-333, styles.css:839-851)
+### 6. Added Spanish Pronoun Translations in Modal (script.js:277-333, styles.css:839-861)
 **Date**: 2025-11-07
 
 - Added Spanish translations for pronouns in the Präsens Konjugation table
 - Each pronoun shows its Spanish equivalent below with 🇪🇸 flag
 - Translations: ich→yo, du→tú, er→él, sie→ella, es→neutro, wir→nosotr@s, ihr→vosotr@s, sie→ell@s, Sie→usted(es)
 - Spanish text is smaller, italic, and gray for visual hierarchy
+- Spanish translations are hidden by default and appear on hover of the Pronomen cell
+- Smooth opacity and max-height transition (0.3s)
 
 ### 7. Merged Conjugation Display in Modal (script.js:313-333, styles.css:853-874)
 **Date**: 2025-11-07

@@ -848,6 +848,16 @@
     color: #666;
     font-style: italic;
     margin-top: 2px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease-out, max-height 0.3s ease-out;
+}
+
+/* Show Spanish pronoun translation on hover of the table cell */
+td:hover .pronoun-es {
+    opacity: 1;
+    max-height: 2em;
 }
 
 /* Remove borders between er/sie/es rows in the Konjugation column */
