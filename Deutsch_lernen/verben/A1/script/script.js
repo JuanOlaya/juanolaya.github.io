@@ -274,23 +274,23 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const praesensTableContainer = document.getElementById('modal-praesens-table');
         if (updatedData.praesens) {
-            // Define the desired pronoun order
+            // Define the desired pronoun order with Spanish translations
             const pronounOrder = [
-                { key: 'ich', display: 'ich' },
-                { key: 'du', display: 'du' },
-                { key: 'er', display: 'er' },
-                { key: 'sie', display: 'sie' },
-                { key: 'es', display: 'es' },
-                { key: 'wir', display: 'wir' },
-                { key: 'ihr', display: 'ihr' },
-                { key: 'sie (plural)', display: 'sie' },
-                { key: 'Sie (formal)', display: 'Sie' }
+                { key: 'ich', display: 'ich', es: 'yo' },
+                { key: 'du', display: 'du', es: 'tú' },
+                { key: 'er', display: 'er', es: 'él' },
+                { key: 'sie', display: 'sie', es: 'ella' },
+                { key: 'es', display: 'es', es: 'neutro' },
+                { key: 'wir', display: 'wir', es: 'nosotr@s' },
+                { key: 'ihr', display: 'ihr', es: 'vosotr@s' },
+                { key: 'sie (plural)', display: 'sie', es: 'ell@s' },
+                { key: 'Sie (formal)', display: 'Sie', es: 'usted(es)' }
             ];
 
             let tableHTML = '<table>';
             tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel</th></tr>';
 
-            for (const { key, display } of pronounOrder) {
+            for (const { key, display, es } of pronounOrder) {
                 const conjugation = updatedData.praesens[key];
                 if (conjugation) {
                     const example = updatedData.praesens_examples && updatedData.praesens_examples[key];
@@ -304,7 +304,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         exampleCell += `</div>`;
                     }
 
+                    // Create pronoun cell with German pronoun and Spanish translation
+                    let pronounCell = `<div class="pronoun-de">${display}</div>`;
+                    if (es) {
+                        pronounCell += `<div class="pronoun-es">🇪🇸 ${es}</div>`;
+                    }
+
                     // Add special classes for er/sie/es rows and hide conjugation for er and es
+                    // Also hide conjugation for sie (plural) since it's same as Sie (formal)
                     let rowClass = '';
                     let conjugationCell = conjugation;
 
@@ -316,9 +323,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else if (key === 'es') {
                         rowClass = ' class="pronoun-es"';
                         conjugationCell = ''; // Hide conjugation for es
+                    } else if (key === 'sie (plural)') {
+                        rowClass = ' class="pronoun-sie-plural"';
+                        conjugationCell = ''; // Hide conjugation for sie (plural)
+                    } else if (key === 'Sie (formal)') {
+                        rowClass = ' class="pronoun-Sie-formal"';
                     }
 
-                    tableHTML += `<tr${rowClass}><td>${display}</td><td>${conjugationCell}</td><td>${exampleCell}</td></tr>`;
+                    tableHTML += `<tr${rowClass}><td>${pronounCell}</td><td>${conjugationCell}</td><td>${exampleCell}</td></tr>`;
                 }
             }
 

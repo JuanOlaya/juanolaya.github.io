@@ -836,6 +836,20 @@
     transition: all 0.2s ease-out;
 }
 
+/* Pronoun cell styling with Spanish translation */
+.pronoun-de {
+    display: block;
+    font-weight: 500;
+}
+
+.pronoun-es {
+    display: block;
+    font-size: 0.85em;
+    color: #666;
+    font-style: italic;
+    margin-top: 2px;
+}
+
 /* Remove borders between er/sie/es rows in the Konjugation column */
 tr.pronoun-er td:nth-child(2) {
     border-bottom: none;
@@ -847,5 +861,14 @@ tr.pronoun-sie td:nth-child(2) {
 }
 
 tr.pronoun-es td:nth-child(2) {
+    border-top: none;
+}
+
+/* Remove borders between sie (plural) and Sie (formal) rows in the Konjugation column */
+tr.pronoun-sie-plural td:nth-child(2) {
+    border-bottom: none;
+}
+
+tr.pronoun-Sie-formal td:nth-child(2) {
     border-top: none;
 }

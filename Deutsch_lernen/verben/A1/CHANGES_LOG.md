@@ -41,24 +41,45 @@ This document tracks all major changes made to the A1 German verbs learning appl
 - Event listeners swap text content on mouseenter/mouseleave
 - Hovering over either German or Spanish perfekt shows BOTH auxiliaries simultaneously
 
-### 6. Merged er/sie/es Conjugation Display in Modal (script.js:279-293, styles.css:839-851)
+### 6. Added Spanish Pronoun Translations in Modal (script.js:277-333, styles.css:839-851)
 **Date**: 2025-11-07
 
-- In Präsens Konjugation table, er/sie/es rows now appear as one merged cell in the Konjugation column
+- Added Spanish translations for pronouns in the Präsens Konjugation table
+- Each pronoun shows its Spanish equivalent below with 🇪🇸 flag
+- Translations: ich→yo, du→tú, er→él, sie→ella, es→neutro, wir→nosotr@s, ihr→vosotr@s, sie→ell@s, Sie→usted(es)
+- Spanish text is smaller, italic, and gray for visual hierarchy
+
+### 7. Merged Conjugation Display in Modal (script.js:313-333, styles.css:853-874)
+**Date**: 2025-11-07
+
+- In Präsens Konjugation table, er/sie/es rows appear as one merged cell in the Konjugation column
 - Conjugation text shown only in the middle (sie) row
-- Borders removed between these three rows in the Konjugation column
-- All three rows still display their individual examples
+- Similarly, sie (plural) and Sie (formal) rows appear merged in the Konjugation column
+- Conjugation text shown only in the Sie (formal) row
+- Borders removed between merged rows in the Konjugation column
+- All rows still display their individual examples
 
 **Visual result**:
 ```
-Pronomen | Konjugation | Beispiel
----------|-------------|----------
-er       |             | Er arbeitet als Arzt.
-sie      | arbeitet    | Sie arbeitet in einer Bank.
-es       |             | Das Kind arbeitet an einem Projekt.
+Pronomen       | Konjugation | Beispiel
+---------------|-------------|----------
+er             |             | Er arbeitet als Arzt.
+🇪🇸 él         |             |
+sie            | arbeitet    | Sie arbeitet in einer Bank.
+🇪🇸 ella       |             |
+es             |             | Das Kind arbeitet an einem Projekt.
+🇪🇸 neutro     |             |
+wir            | arbeiten    | Wir arbeiten zusammen.
+🇪🇸 nosotr@s   |             |
+ihr            | arbeitet    | Ihr arbeitet am Wochenende.
+🇪🇸 vosotr@s   |             |
+sie            |             | Sie arbeiten in verschiedenen Firmen.
+🇪🇸 ell@s      |             |
+Sie            | arbeiten    | Sie arbeiten sehr professionell.
+🇪🇸 usted(es)  |             |
 ```
 
-### 7. Fixed A1.1 Verb Examples (43 verbs)
+### 8. Fixed A1.1 Verb Examples (43 verbs)
 **Date**: 2025-11-07
 
 Updated all A1.1 verbs with properly differentiated examples:
