@@ -276,21 +276,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (updatedData.praesens) {
             // Define the desired pronoun order with Spanish translations
             const pronounOrder = [
-                { key: 'ich', display: 'ich', es: 'yo' },
-                { key: 'du', display: 'du', es: 'tú' },
-                { key: 'er', display: 'er', es: 'él' },
-                { key: 'sie', display: 'sie', es: 'ella' },
-                { key: 'es', display: 'es', es: 'neutro' },
-                { key: 'wir', display: 'wir', es: 'nosotr@s' },
-                { key: 'ihr', display: 'ihr', es: 'vosotr@s' },
-                { key: 'sie (plural)', display: 'sie', es: 'ell@s' },
-                { key: 'Sie (formal)', display: 'Sie', es: 'usted(es)' }
+                { key: 'ich', display: 'ich', spanish: 'yo' },
+                { key: 'du', display: 'du', spanish: 'tú' },
+                { key: 'er', display: 'er', spanish: 'él' },
+                { key: 'sie', display: 'sie', spanish: 'ella' },
+                { key: 'es', display: 'es', spanish: 'neutro' },
+                { key: 'wir', display: 'wir', spanish: 'nosotr@s' },
+                { key: 'ihr', display: 'ihr', spanish: 'vosotr@s' },
+                { key: 'sie (plural)', display: 'sie', spanish: 'ell@s' },
+                { key: 'Sie (formal)', display: 'Sie', spanish: 'usted(es)' }
             ];
 
             let tableHTML = '<table>';
             tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel</th></tr>';
 
-            for (const { key, display, es } of pronounOrder) {
+            for (const { key, display, spanish } of pronounOrder) {
                 const conjugation = updatedData.praesens[key];
                 if (conjugation) {
                     const example = updatedData.praesens_examples && updatedData.praesens_examples[key];
@@ -306,8 +306,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Create pronoun cell with German pronoun and Spanish translation
                     let pronounCell = `<div class="pronoun-de">${display}</div>`;
-                    if (es) {
-                        pronounCell += `<div class="pronoun-es">🇪🇸 ${es}</div>`;
+                    if (spanish) {
+                        pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
                     }
 
                     // Add special classes for er/sie/es rows and hide conjugation for er and es
