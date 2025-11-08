@@ -115,6 +115,17 @@ Sie            | arbeiten    | Sie arbeiten sehr professionell.
 - Group 14: halten, scheinen
 - Group 15: raten
 
+### 9b. Added Missing Präsens Conjugation Tables for A2.1 Verbs
+**Date**: 2025-11-08
+
+- Added missing `praesens` conjugation tables for 9 A2.1 verbs
+- These verbs had examples but were missing the conjugation table, preventing the Präsens Konjugation modal from displaying
+- All A2.1 verbs now show properly in the modal
+
+**Fixed verbs**:
+- Group 15: unterhalten
+- Group 16: putzen, singen, weinen, schenken, träumen, üben, zeichnen, schneien
+
 ### 10. Fixed A1.1 Verb Examples (43 verbs)
 **Date**: 2025-11-07
 
