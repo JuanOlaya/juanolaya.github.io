@@ -195,6 +195,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 prevGroupBtn.addEventListener('click', () => {
                     if (currentGroupIndex > 0) {
                         currentGroupIndex--;
+                        // Clear search when changing groups
+                        const searchInput = document.getElementById('verb-search');
+                        const clearSearchBtn = document.getElementById('clear-search');
+                        if (searchInput) {
+                            searchInput.value = '';
+                            clearSearchBtn.classList.remove('visible');
+                            document.getElementById('search-counter').textContent = '';
+                        }
                         renderVerbGroup(currentGroupIndex);
                     }
                 });
@@ -202,6 +210,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 nextGroupBtn.addEventListener('click', () => {
                     if (currentGroupIndex < totalGroups - 1) {
                         currentGroupIndex++;
+                        // Clear search when changing groups
+                        const searchInput = document.getElementById('verb-search');
+                        const clearSearchBtn = document.getElementById('clear-search');
+                        if (searchInput) {
+                            searchInput.value = '';
+                            clearSearchBtn.classList.remove('visible');
+                            document.getElementById('search-counter').textContent = '';
+                        }
                         renderVerbGroup(currentGroupIndex);
                     }
                 });
@@ -356,13 +372,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchCounter = document.getElementById('search-counter');
 
     function performSearch() {
+        if (!searchInput) return;
+
         const searchTerm = searchInput.value.trim().toLowerCase();
 
         // Show/hide clear button
-        if (searchTerm.length > 0) {
-            clearSearchBtn.classList.add('visible');
-        } else {
-            clearSearchBtn.classList.remove('visible');
+        if (clearSearchBtn) {
+            if (searchTerm.length > 0) {
+                clearSearchBtn.classList.add('visible');
+            } else {
+                clearSearchBtn.classList.remove('visible');
+            }
         }
 
         // Only search if 2+ characters
@@ -372,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
             allCards.forEach(card => {
                 card.style.display = '';
             });
-            searchCounter.textContent = '';
+            if (searchCounter) searchCounter.textContent = '';
             return;
         }
 
@@ -410,29 +430,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Update counter
-        if (visibleCount === 0) {
-            searchCounter.textContent = 'Keine Verben gefunden (no se encontraron verbos)';
-        } else {
-            searchCounter.textContent = `${visibleCount} ${visibleCount === 1 ? 'Verb' : 'Verben'} gefunden`;
+        if (searchCounter) {
+            if (visibleCount === 0) {
+                searchCounter.textContent = 'Keine Verben gefunden (no se encontraron verbos)';
+            } else {
+                searchCounter.textContent = `${visibleCount} ${visibleCount === 1 ? 'Verb' : 'Verben'} gefunden`;
+            }
         }
     }
 
     function clearSearch() {
+        if (!searchInput) return;
         searchInput.value = '';
-        clearSearchBtn.classList.remove('visible');
+        if (clearSearchBtn) clearSearchBtn.classList.remove('visible');
         performSearch(); // This will show all cards again
     }
 
     // Event listeners
-    searchInput.addEventListener('input', performSearch);
-    clearSearchBtn.addEventListener('click', clearSearch);
-
-    // Clear search when changing groups
-    const originalDisplayGroup = displayGroup;
-    window.displayGroup = function(index) {
-        clearSearch();
-        originalDisplayGroup.call(this, index);
-    };
+    if (searchInput) {
+        searchInput.addEventListener('input', performSearch);
+    }
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', clearSearch);
+    }
 
     // --- START THE APP ---
     initializeApp();
