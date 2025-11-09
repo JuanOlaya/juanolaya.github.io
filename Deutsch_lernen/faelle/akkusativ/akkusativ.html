@@ -11,11 +11,28 @@
             font-family: 'Inter', sans-serif;
             background-color: #f7f7f7;
         }
+
+        /* Remove horizontal scroll by making table fit viewport */
+        #table-container {
+            max-width: calc(100vw - 4rem); /* Account for body padding */
+            overflow-x: hidden;
+        }
+
+        table {
+            width: 100%;
+            table-layout: auto;
+        }
+
+        /* Ensure all columns are visible */
+        td, th {
+            overflow: visible;
+        }
         /* Reducir el padding de las celdas generales */
         .table-cell {
-            padding: 0.4rem 0.6rem; /* Reducido de 0.5rem 0.75rem */
-            white-space: nowrap; 
+            padding: 0.25rem 0.3rem; /* Even more compact */
+            white-space: nowrap;
             vertical-align: top; /* Ensure content aligns to the top */
+            font-size: 0.8rem; /* Smaller font for better fit */
         }
         /* New style for cells that must wrap content (like the Base column) */
         .wrap-cell {
@@ -35,9 +52,9 @@
         }
         
         /* Specific style for the merged cell content (Gendered Akkusativ) */
-        .merged-gender-cell { 
-            padding: 0.3rem 0.6rem; /* Reduced */
-            min-height: 5.5rem; /* Reduced */
+        .merged-gender-cell {
+            padding: 0.25rem 0.3rem; /* Further reduced for compact fit */
+            min-height: 5rem; /* Reduced */
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -62,11 +79,12 @@
         
         /* NEW: Styles for the merged Pronoun Column (4-in-1 cell) */
         .merged-pronoun-cell {
-            padding: 0.4rem 0.6rem; /* Reduced */
-            min-height: 5.5rem; /* Reduced */
+            padding: 0.3rem 0.4rem; /* Further reduced */
+            min-height: 5rem; /* Further reduced */
             display: flex;
             flex-direction: column;
             justify-content: center;
+            white-space: normal; /* Allow wrapping to fit in viewport */
             /* Base color set in JS for consistency */
         }
 
@@ -78,8 +96,8 @@
 
         /* Base German/Spanish phrase styling */
         .german-phrase, .article-german-lines {
-            color: #1f2937; 
-            font-size: 0.9rem;
+            color: #1f2937;
+            font-size: 0.8rem; /* Smaller for better fit */
             line-height: 1.2;
         }
         
@@ -202,7 +220,15 @@
             font-size: 0.8rem;
             color: #4b5563;
             font-weight: 500;
-            margin-top: 0; /* Reduced margin */
+            margin-top: 0.1rem;
+        }
+
+        /* Hide pronunciation hint by default when combined with subject-translation-hidden */
+        .pronunciation-hint.subject-translation-hidden {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
         }
         
         /* NEW: Style for simple Spanish translations in Subject column */
@@ -419,9 +445,9 @@
                 "die weiblich (akkusativ)": "deine",
                 "Weiblich (F) - Ejemplos con Verbos": "Du schreibst deine E-Mail.",
                 "Trad. (F)": "Escribes tu correo.",
-                "das neutral (akkusativ)": "ein",
-                "Neutral (N) - Ejemplos con Verbos": "Du kaufst ein Auto.",
-                "Trad. (N)": "Compras un coche.",
+                "das neutral (akkusativ)": "dein",
+                "Neutral (N) - Ejemplos con Verbos": "Du liest dein Buch gern.",
+                "Trad. (N)": "Lees tu libro con gusto.",
                 "die plural (akkusativ)": "deine",
                 "Plural (P) - Ejemplos con Verbos": "Du suchst deine Schlüssel.",
                 "Trad. (P)": "Buscas tus llaves.",
@@ -645,32 +671,35 @@
             // --- Format the base pronoun (ich, du, er, wir) ---
             if (spanishTranslationMap[baseText]) {
                 formattedText += `<span class="akkusativ-pronoun-visible">${baseText}</span>`;
-                if (pronunciation) {
-                    formattedText += `<br><span class="pronunciation-hint">${pronunciation}</span>`;
-                }
-                // HIDE: Simple Spanish translation is now hidden
+                // SHOW: Simple Spanish translation is always visible
                 if (simpleSpanishTranslation) {
-                    formattedText += `<br><span class="subject-spanish-translation subject-translation-hidden">${simpleSpanishTranslation}</span>`;
+                    formattedText += `<br><span class="text-xs italic text-gray-500" style="margin-top: 0.2rem;">${simpleSpanishTranslation}</span>`;
                 }
-            } 
+                // HIDE: Pronunciation is now hidden until hover
+                if (pronunciation) {
+                    formattedText += `<br><span class="pronunciation-hint subject-translation-hidden">${pronunciation}</span>`;
+                }
+            }
             // --- Format the complex pronouns (sie, es, ihr, Sie) ---
             else {
                  // Text is the German pronoun (sie, es, ihr, Sie)
                 formattedText += `<span class="akkusativ-pronoun-visible">${baseText}</span>`;
+
+                // SHOW: Parenthesis content (translation) is now always visible
+                if (parenthesisMatch) {
+                    let parenthesisContent = parenthesisMatch[1]; // e.g., 'ella'
+
+                    if (parenthesisContent === 'formal') {
+                        parenthesisContent = 'Usted / Ustedes';
+                    }
+
+                    formattedText += `<br><span class="text-xs italic text-gray-500" style="margin-top: 0.2rem;">${parenthesisContent}</span>`;
+                }
+
+                // HIDE: Pronunciation is now hidden until hover
                 if (pronunciation) {
-                    formattedText += `<br><span class="pronunciation-hint">${pronunciation}</span>`;
+                    formattedText += `<br><span class="pronunciation-hint subject-translation-hidden">${pronunciation}</span>`;
                 }
-            }
-            
-            // HIDE: Parenthesis content is now hidden and shown without parentheses
-            if (parenthesisMatch) {
-                let parenthesisContent = parenthesisMatch[1]; // e.g., 'ella'
-                
-                if (parenthesisContent === 'formal') {
-                    parenthesisContent = 'Usted / Ustedes';
-                }
-                
-                formattedText += `<br><span class="subject-parenthesis-italic subject-translation-hidden">${parenthesisContent}</span>`;
             }
             
             return formattedText;
@@ -738,8 +767,8 @@
         function renderTable() {
             const container = document.getElementById('table-container');
 
-            // Start of table structure, applying horizontal scrolling on smaller screens
-            let html = '<div class="overflow-x-auto"><table class="min-w-full divide-y divide-gray-300">';
+            // Start of table structure, no horizontal scrolling
+            let html = '<table class="divide-y divide-gray-300">';
 
             // --- HEADER ROW 1: Grouping ---
             html += '<thead class="bg-gray-100">';
@@ -748,7 +777,7 @@
             html += `<th colspan="2" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300">Pronombres Personales</th>`;
             
             // Column 2: Base/Nominative Section (Span 1 column)
-            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300 bg-red-100">Posesivo/Base</th>`;
+            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300 bg-red-100">Base/Posesivo</th>`;
             
             // Column 3: Akkusativ Case by Gender Section (Span 12 columns)
             html += `<th colspan="12" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-red-100">Akkusativ Case Determiners (Artículos y Posesivos por Género)</th>`;
@@ -769,7 +798,7 @@
                     </th>`;
 
             // Sub-grouping for Base Form (1 column)
-            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200">Base / Trad.</th>`;
+            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200">Base/Posesivo</th>`;
 
             // Sub-grouping for Gendered Akkusativ (4 groups)
             const genders = [
@@ -794,9 +823,9 @@
             ];
             
             const visibleHeaders = [
-                "Pron. (Nom.)", 
+                "Pron. (Nom.)",
                 "Pron. (Akk.)", // Updated header title
-                "Base / Trad.", 
+                "Base/Posesivo",
                 "den", // Simplified header
                 "die", // Simplified header
                 "das", // Simplified header
@@ -923,17 +952,18 @@
 
                             contentHtml = `
                                 <div class="w-full" onclick="this.classList.toggle('active')">
-                                    <!-- Visible Part: German Pronoun & Translation -->
-                                    <div class="stacked-content-line mb-1">
+                                    <!-- Visible Part: German Pronoun -->
+                                    <div class="stacked-content-line">
                                         <span class="akkusativ-pronoun-visible">${pronoun}</span>
-                                        <!-- TRADUCCIÓN AHORA ES EN CURSIVA -->
-                                        <span class="trad-pronoun-visible">${tradPronoun}</span>
                                     </div>
-                                    
+                                    <div class="stacked-content-line text-xs italic text-gray-500" style="margin-top: 0.2rem;">
+                                        ${tradPronoun}
+                                    </div>
+
                                     <!-- Hidden Part: Example Phrase and Translation -->
                                     <div class="pronoun-hidden-part">
-                                        <div class="text-gray-700">${styledExample}</div> 
-                                        <div class="text-gray-500">${tradExample}</div> 
+                                        <div class="text-gray-700" style="white-space: nowrap;">${styledExample}</div>
+                                        <div class="text-gray-500 italic">${tradExample}</div>
                                     </div>
                                 </div>
                             `;
@@ -1020,40 +1050,21 @@
                             contentHtml = `<div class="w-full" onclick="this.classList.toggle('active')">${germanDisplay}</div>`;
                             
                         } else {
-                            // POSSESSIVES: INTERACTIVE (NOM. EXAMPLE)
+                            // POSSESSIVES: SIMPLE DISPLAY (BASE + TRANSLATION)
                             const possessiveRoot = germanLines[0]; // e.g., mein-
-                            const nomExample = row["Nom. Example"];
-                            const tradNomExample = row["Trad. Nom. Example"];
-                            
-                            // IDENTIFY THE NOMINATIVE POSSESSIVE TO BOLD
-                            const subjectPronoun = row["Sujeto (Nominativo)"].replace(/\s*\(.*\)/, '').trim();
-                            let nomDeterminer = '';
-                            if (nomExample) {
-                                // Extract the first word (the possessive) from the example sentence
-                                nomDeterminer = nomExample.split(' ')[0];
-                            }
+                            const tradBaseValue = formatMultiLine(row["Trad. Base"], true);
+                            const spanishTranslation = tradBaseValue.split('<br>')[0].trim();
 
-                            // Bold the possessive in the Nominative example phrase
-                            let styledNomExample = nomExample.replace(new RegExp(`\\b(${nomDeterminer})\\b`), (match) => {
-                                return `<b>${match}</b>`;
-                            });
-
-                            // Interactive content structure
+                            // Simple content structure: German base + Spanish translation
                             alignedHtml = `
                                 <div class="stacked-content-line">
                                     <span class="base-article-german">${possessiveRoot}</span>
                                 </div>
-                                
-                                <div class="possessive-study-wrapper cursor-pointer" onclick="this.classList.toggle('active')">
-                                    <div class="stacked-content-line text-sm text-gray-700 font-medium">
-                                        ${styledNomExample}
-                                    </div>
-                                    <div class="stacked-content-line text-xs italic text-gray-500 nominativ-translation-hidden">
-                                        ${tradNomExample}
-                                    </div>
+                                <div class="stacked-content-line text-xs italic text-gray-500" style="margin-top: 0.2rem;">
+                                    ${spanishTranslation}
                                 </div>
                             `;
-                            
+
                             contentHtml = alignedHtml;
                         }
                         
@@ -1075,7 +1086,7 @@
                 html += '</tr>';
             });
             html += '</tbody>';
-            html += '</table></div>';
+            html += '</table>';
 
             container.innerHTML = html;
         }
