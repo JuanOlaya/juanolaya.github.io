@@ -977,3 +977,26 @@ tr.pronoun-row-sie-plural td:nth-child(2) {
 tr.pronoun-row-Sie-formal td:nth-child(2) {
     border-top: none;
 }
+
+/* Additional grammar note below Präsens table */
+.additional-note {
+    margin-top: 1.5rem;
+    padding: 1rem 1.2rem;
+    background-color: #f8f9fa;
+    border-left: 4px solid #4682B4;
+    border-radius: 6px;
+    text-align: left;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #333;
+    white-space: pre-line;
+}
+
+.additional-note::before {
+    content: "📚 Nota gramatical";
+    display: block;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #4682B4;
+}

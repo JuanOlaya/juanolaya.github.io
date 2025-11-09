@@ -184,19 +184,27 @@ Updated all A1.1 verbs with properly differentiated examples:
 - Works alongside the existing bottom "Schließen" button
 - Clean, minimal design with smooth transitions
 
-### 14. Added Grammar Notes for Position Verbs (6 verbs)
+### 14. Added Grammar Notes for Position Verbs (6 verbs) - script.js:357-360, styles.css:981-1002
 **Date**: 2025-11-08
 
 - Added `additionalNote` attribute to position-related verbs explaining Dativ/Akkusativ case usage
 - **Dativ verbs** (static position - "Wo?"): liegen, stehen, sitzen
 - **Akkusativ verbs** (movement to position - "Wohin?"): legen, stellen
 - **Special case**: hängen (can use both Dativ and Akkusativ)
+- **Notes displayed in modal** below the Präsens Konjugation table
+- Fixed missing `praesens` conjugations for stehen and sitzen
 
 **Notes include:**
 - Explanation of when to use the verb (position vs. movement)
 - Which question it answers ("Wo?" or "Wohin?")
 - Which case to use (Dativ or Akkusativ)
 - Examples in German with Spanish translations
+
+**UI Implementation:**
+- Displayed below the conjugation table with "📚 Nota gramatical" header
+- Light gray background with blue left border
+- Preserves line breaks for readability
+- Only shows when `additionalNote` exists in the verb data
 
 **Example note structure:**
 ```
@@ -209,8 +217,6 @@ Ejemplos:
 • Die Flasche steht neben dem Stuhl.
 • Das Kind sitzt auf dem Boden.
 ```
-
-**Note**: The notes are stored in JSON but not yet displayed in the UI. Future implementation will show them in the modal.
 
 ## Known Issues
 
