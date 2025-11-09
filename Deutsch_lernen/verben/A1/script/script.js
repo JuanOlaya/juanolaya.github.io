@@ -353,6 +353,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             tableHTML += '</table>';
+
+            // Add additional grammar note if it exists
+            if (updatedData.additionalNote) {
+                tableHTML += `<div class="additional-note">${updatedData.additionalNote}</div>`;
+            }
+
             praesensTableContainer.innerHTML = tableHTML;
         } else {
             praesensTableContainer.innerHTML = '';
