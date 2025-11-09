@@ -87,6 +87,9 @@ Sie            | arbeiten    | Sie arbeiten sehr professionell.
 - Updated browser tab title from "Verben: Präsens & Perfekt" to "Verben A1 & A2: Präsens & Perfekt"
 - Updated page heading (h1) to match
 - Clarifies that the app covers both A1 and A2 level verbs
+- Changed title typography from Kalam (handwriting) to **Poppins** (modern sans-serif)
+- Added font-weight: 700 (bold) and letter-spacing for better readability
+- More professional and contemporary look
 
 ### 9. Added Search Feature for Verb Cards (index.html:25-28,44, script.js:353-502, styles.css:577-646)
 **Date**: 2025-11-08
@@ -100,7 +103,8 @@ Sie            | arbeiten    | Sie arbeiten sehr professionell.
   - **Perfekt forms** (e.g., "ist gegangen", "hat gemacht")
   - **All Präsens conjugations** (e.g., "gehe", "machst", "arbeitet")
 - Lazy-loads Präsens data during search if needed
-- Partial match anywhere in the text
+- **"Starts with" matching** - only shows results that START with your search term
+  - Example: "lie" finds "liegen" but NOT "verlieren" or "fliegen"
 - Maximum 9 matching verbs displayed at once
 - Clear button (×) appears when typing
 - Match counter shows number of results (e.g., "5 Verben gefunden" or "9 von 15 Verben angezeigt")

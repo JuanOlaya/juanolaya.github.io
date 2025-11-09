@@ -406,12 +406,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (verbData) {
                     // Create a promise for each verb to search (including lazy-loaded praesens)
                     const searchPromise = (async () => {
-                        // Search in German infinitive and Spanish translation
-                        const germanMatch = verbName.toLowerCase().includes(searchTerm);
-                        const spanishMatch = verbData.es && verbData.es.toLowerCase().includes(searchTerm);
+                        // Search in German infinitive and Spanish translation (starts with)
+                        const germanMatch = verbName.toLowerCase().startsWith(searchTerm);
+                        const spanishMatch = verbData.es && verbData.es.toLowerCase().startsWith(searchTerm);
 
-                        // Search in Perfekt
-                        const perfektMatch = verbData.perfekt && verbData.perfekt.toLowerCase().includes(searchTerm);
+                        // Search in Perfekt (check if any word starts with search term)
+                        let perfektMatch = false;
+                        if (verbData.perfekt) {
+                            const perfektWords = verbData.perfekt.toLowerCase().split(' ');
+                            perfektMatch = perfektWords.some(word => word.startsWith(searchTerm));
+                        }
 
                         // Search in Präsens conjugations (load if needed)
                         let praesensMatch = false;
@@ -428,10 +432,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         }
 
-                        // Check all praesens conjugations
+                        // Check all praesens conjugations (starts with)
                         if (allVerbsData[verbName].praesens) {
                             const conjugations = Object.values(allVerbsData[verbName].praesens);
-                            praesensMatch = conjugations.some(conj => conj.toLowerCase().includes(searchTerm));
+                            praesensMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
                         }
 
                         if (germanMatch || spanishMatch || perfektMatch || praesensMatch) {
