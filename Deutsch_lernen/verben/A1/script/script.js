@@ -371,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearSearchBtn = document.getElementById('clear-search');
     const searchCounter = document.getElementById('search-counter');
 
-    function performSearch() {
+    async function performSearch() {
         if (!searchInput) return;
 
         const searchTerm = searchInput.value.trim().toLowerCase();
@@ -398,25 +398,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Search across ALL groups
         const matchingVerbs = [];
+        const searchPromises = [];
 
         verbGroupsData.forEach((group, groupIndex) => {
             group.verbs.forEach(verbName => {
                 const verbData = allVerbsData[verbName];
                 if (verbData) {
-                    // Search in German infinitive and Spanish translation
-                    const germanMatch = verbName.toLowerCase().includes(searchTerm);
-                    const spanishMatch = verbData.es && verbData.es.toLowerCase().includes(searchTerm);
+                    // Create a promise for each verb to search (including lazy-loaded praesens)
+                    const searchPromise = (async () => {
+                        // Search in German infinitive and Spanish translation
+                        const germanMatch = verbName.toLowerCase().includes(searchTerm);
+                        const spanishMatch = verbData.es && verbData.es.toLowerCase().includes(searchTerm);
 
-                    if (germanMatch || spanishMatch) {
-                        matchingVerbs.push({
-                            verb: verbName,
-                            data: verbData,
-                            groupIndex: groupIndex
-                        });
-                    }
+                        // Search in Perfekt
+                        const perfektMatch = verbData.perfekt && verbData.perfekt.toLowerCase().includes(searchTerm);
+
+                        // Search in Präsens conjugations (load if needed)
+                        let praesensMatch = false;
+                        if (!allVerbsData[verbName].praesens) {
+                            // Lazy load praesens data
+                            try {
+                                const praesensData = await fetch(`json/praesens/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
+                                if (praesensData.praesens) {
+                                    allVerbsData[verbName].praesens = praesensData.praesens;
+                                    allVerbsData[verbName].praesens_examples = praesensData.praesens_examples;
+                                }
+                            } catch (e) {
+                                // Ignore loading errors
+                            }
+                        }
+
+                        // Check all praesens conjugations
+                        if (allVerbsData[verbName].praesens) {
+                            const conjugations = Object.values(allVerbsData[verbName].praesens);
+                            praesensMatch = conjugations.some(conj => conj.toLowerCase().includes(searchTerm));
+                        }
+
+                        if (germanMatch || spanishMatch || perfektMatch || praesensMatch) {
+                            return {
+                                verb: verbName,
+                                data: verbData,
+                                groupIndex: groupIndex
+                            };
+                        }
+                        return null;
+                    })();
+
+                    searchPromises.push(searchPromise);
                 }
             });
         });
+
+        // Wait for all search promises to resolve
+        const searchResults = await Promise.all(searchPromises);
+        const filteredResults = searchResults.filter(result => result !== null);
+        matchingVerbs.push(...filteredResults);
 
         // Clear current cards and display matching verbs (max 9)
         cardsContainer.innerHTML = '';

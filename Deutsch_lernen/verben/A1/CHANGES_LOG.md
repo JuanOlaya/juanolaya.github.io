@@ -94,7 +94,12 @@ Sie            | arbeiten    | Sie arbeiten sehr professionell.
 - Added search input box next to Perfekt toggle in header
 - Live filtering as you type (minimum 2 characters required)
 - **Searches across ALL groups** (not just current group)
-- Searches in both German verb infinitive and Spanish translation
+- **Comprehensive search** in:
+  - German verb infinitive
+  - Spanish translation
+  - **Perfekt forms** (e.g., "ist gegangen", "hat gemacht")
+  - **All Präsens conjugations** (e.g., "gehe", "machst", "arbeitet")
+- Lazy-loads Präsens data during search if needed
 - Partial match anywhere in the text
 - Maximum 9 matching verbs displayed at once
 - Clear button (×) appears when typing
@@ -110,7 +115,12 @@ Sie            | arbeiten    | Sie arbeiten sehr professionell.
 - Smooth transitions and focus states
 - Perfekt hover functionality works on search results
 
-### 9. Updated A2.1 Verb Levels (63 verbs in groups 10-16)
+**Search Examples**:
+- Search "gegangen" → finds "gehen" (Perfekt: ist gegangen)
+- Search "machst" → finds "machen" (du machst)
+- Search "arbeitet" → finds "arbeiten" (er/sie/es arbeitet, ihr arbeitet)
+
+### 10. Updated A2.1 Verb Levels (63 verbs in groups 10-16)
 **Date**: 2025-11-08
 
 - Corrected level classification for all verbs in groups 10-16 (Zehnte to Sechzehnte Gruppe)
@@ -124,7 +134,7 @@ Sie            | arbeiten    | Sie arbeiten sehr professionell.
 - Group 14: halten, scheinen
 - Group 15: raten
 
-### 9b. Added Missing Präsens Conjugation Tables for A2.1 Verbs
+### 11. Added Missing Präsens Conjugation Tables for A2.1 Verbs
 **Date**: 2025-11-08
 
 - Added missing `praesens` conjugation tables for 9 A2.1 verbs
@@ -135,7 +145,7 @@ Sie            | arbeiten    | Sie arbeiten sehr professionell.
 - Group 15: unterhalten
 - Group 16: putzen, singen, weinen, schenken, träumen, üben, zeichnen, schneien
 
-### 10. Fixed A1.1 Verb Examples (43 verbs)
+### 12. Fixed A1.1 Verb Examples (43 verbs)
 **Date**: 2025-11-07
 
 Updated all A1.1 verbs with properly differentiated examples:
