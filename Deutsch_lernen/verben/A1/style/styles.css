@@ -82,11 +82,13 @@
             align-items: center;
         }
         .title {
-            font-family: 'Kalam', cursive;
+            font-family: 'Poppins', sans-serif;
             font-size: 3rem;
+            font-weight: 700;
             color: #333;
             padding-top: 1rem;
             border-bottom: 3px dashed #4682B4;
+            letter-spacing: -0.5px;
             display: inline-block;
             margin-bottom: 1rem;
             transition: border-bottom-color 0.5s, color 0.5s;
