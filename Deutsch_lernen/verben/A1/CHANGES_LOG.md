@@ -81,7 +81,14 @@ Sie            | arbeiten    | Sie arbeiten sehr professionell.
 🇪🇸 usted(es)  |             |
 ```
 
-### 8. Added Search Feature for Verb Cards (index.html:25-28,44, script.js:353-502, styles.css:577-646)
+### 8. Updated Page Title to Include A1 & A2 Levels (index.html:7,22)
+**Date**: 2025-11-08
+
+- Updated browser tab title from "Verben: Präsens & Perfekt" to "Verben A1 & A2: Präsens & Perfekt"
+- Updated page heading (h1) to match
+- Clarifies that the app covers both A1 and A2 level verbs
+
+### 9. Added Search Feature for Verb Cards (index.html:25-28,44, script.js:353-502, styles.css:577-646)
 **Date**: 2025-11-08
 
 - Added search input box next to Perfekt toggle in header
