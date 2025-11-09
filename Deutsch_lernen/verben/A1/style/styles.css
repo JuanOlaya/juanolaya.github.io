@@ -50,7 +50,7 @@
             font-weight: 700;
             color: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: background-color 0.5s;
+            transition: background-color 0.5s, opacity 0.3s ease;
             flex-shrink: 0; /* Evita que los botones se encojan */
         }
         .level-indicator {
@@ -356,6 +356,22 @@
             color: #333;
             transform: scale(1.1);
         }
+
+        /* Top-left level badge in modal */
+        .modal-level-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: linear-gradient(135deg, #4682B4 0%, #5a9bd4 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+
         .modal-overlay.visible .modal-content {
             transform: scale(1);
         }

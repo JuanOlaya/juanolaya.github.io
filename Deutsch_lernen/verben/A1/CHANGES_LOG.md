@@ -218,6 +218,32 @@ Ejemplos:
 • Das Kind sitzt auf dem Boden.
 ```
 
+### 15. Level Indicator Improvements (index.html:105, script.js:292,406-417,550-553, styles.css:53,361-373)
+**Date**: 2025-11-09
+
+**Level Badge in Modal:**
+- Added level badge in top-left corner of verb modal
+- Displays the German level (A1.1, A1.2, A2.1, etc.) for each verb
+- Blue gradient background matching theme colors
+- Automatically populated from verb's `level` attribute
+
+**Disabled Level Indicator During Search:**
+- Level indicator button (top-left of page) is visually disabled during active search
+- Reduced opacity (0.3) and disabled pointer events when searching
+- Automatically re-enabled when search is cleared or becomes empty
+- Smooth opacity transition (0.3s) for better UX
+
+**Fixed Verb Examples:**
+- Updated **liegen.json**: Differentiated examples for er/sie/es and sie/Sie pronouns
+- Updated **lieben.json**: Differentiated examples for all pronouns, removed questions
+
+**Added Missing Präsens Tables:**
+- **verpassen** (A2.1): Added conjugation table
+- **unternehmen** (A2.1): Added conjugation table with stem change (unternimm-)
+- **wecken** (A2.1): Added conjugation table
+- **stehen**: Added missing conjugation table
+- **sitzen**: Added missing conjugation table
+
 ## Known Issues
 
 ### Verbs Missing Präsens Conjugation Tables

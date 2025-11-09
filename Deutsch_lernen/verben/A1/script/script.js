@@ -289,6 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modal-verb-perfekt-es').textContent = updatedData.es_perfekt ? `🇪🇸 ${updatedData.es_perfekt}` : '';
         document.getElementById('modal-verb-english-infinitive').textContent = updatedData.en_verb ? `🇬🇧 ${updatedData.en_verb}` : '';
         document.getElementById('modal-verb-english-perfekt').textContent = updatedData.en_perfekt ? `🇬🇧 ${updatedData.en_perfekt}` : '';
+        document.getElementById('modal-level-badge').textContent = updatedData.level || 'A1';
         
         const praesensTableContainer = document.getElementById('modal-praesens-table');
         if (updatedData.praesens) {
@@ -401,7 +402,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.style.display = '';
             });
             if (searchCounter) searchCounter.textContent = '';
+            // Re-enable level indicator
+            if (levelIndicator) {
+                levelIndicator.style.opacity = '1';
+                levelIndicator.style.pointerEvents = 'auto';
+            }
             return;
+        }
+
+        // Disable level indicator during search
+        if (levelIndicator) {
+            levelIndicator.style.opacity = '0.3';
+            levelIndicator.style.pointerEvents = 'none';
         }
 
         // Search across ALL groups
@@ -534,6 +546,11 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.value = '';
         if (clearSearchBtn) clearSearchBtn.classList.remove('visible');
         if (searchCounter) searchCounter.textContent = '';
+        // Re-enable level indicator
+        if (levelIndicator) {
+            levelIndicator.style.opacity = '1';
+            levelIndicator.style.pointerEvents = 'auto';
+        }
         // Restore the current group
         renderVerbGroup(currentGroupIndex);
     }
