@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const verbModal = document.getElementById('verb-modal');
     const infoModal = document.getElementById('info-modal');
     const closeVerbModalButton = document.getElementById('close-verb-modal');
+    const closeVerbModalXButton = document.getElementById('close-verb-modal-x');
     const infoButton = document.getElementById('info-button');
     const closeInfoModalButton = document.getElementById('close-info-modal');
 
@@ -250,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
         infoModal.addEventListener('click', (e) => { if (e.target === infoModal) infoModal.classList.remove('visible'); });
         
         closeVerbModalButton.addEventListener('click', () => verbModal.classList.remove('visible'));
+        closeVerbModalXButton.addEventListener('click', () => verbModal.classList.remove('visible'));
         verbModal.addEventListener('click', (e) => { if (e.target === verbModal) verbModal.classList.remove('visible'); });
     }
     

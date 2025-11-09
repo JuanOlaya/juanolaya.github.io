@@ -174,6 +174,16 @@ Updated all A1.1 verbs with properly differentiated examples:
 - sie (plural): "Sie arbeiten in verschiedenen Firmen." (They work in different companies)
 - Sie (formal): "Sie arbeiten sehr professionell." (You work very professionally)
 
+### 13. Added Top-Right Close Button to Modal (index.html:104, styles.css:339-358, script.js:34,254)
+**Date**: 2025-11-08
+
+- Added "×" close button in the top right corner of the verb modal
+- Positioned absolutely in top-right (10px from top and right)
+- Gray color (#999) that darkens to #333 on hover
+- Enlarges slightly on hover (scale 1.1)
+- Works alongside the existing bottom "Schließen" button
+- Clean, minimal design with smooth transitions
+
 ## Known Issues
 
 ### Verbs Missing Präsens Conjugation Tables
