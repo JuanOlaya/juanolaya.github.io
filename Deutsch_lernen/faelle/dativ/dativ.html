@@ -57,6 +57,7 @@
         .modal-label { font-size: 0.875rem; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
         .modal-text { font-size: 1rem; color: #1f2937; line-height: 1.5; }
         .category-tag { display: inline-block; padding: 0.25rem 0.5rem; background-color: #dbeafe; color: #1e40af; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 500; margin-top: 0.25rem; }
+        .separator-row { border-top: 3px solid #16a34a !important; }
     </style>
 </head>
 <body class="p-4 sm:p-8">
@@ -149,7 +150,8 @@
     <script>
         const tableData = [
             {
-                "Sujeto (Nominativo)": "Articulo / Definido",
+                "Sujeto (Nominativo)": "Art. Def.",
+                "Sujeto Display": "Artículo<br>Definido",
                 "Pronombre (Dativ)": "-",
                 "Trad. Pronombre": "-",
                 "Ejemplo Pronombre (Dativ)": "-",
@@ -173,6 +175,7 @@
             },
             {
                 "Sujeto (Nominativo)": "Art. Indef.",
+                "Sujeto Display": "Artículo<br>Indefinido",
                 "Pronombre (Dativ)": "-",
                 "Trad. Pronombre": "-",
                 "Ejemplo Pronombre (Dativ)": "-",
@@ -196,6 +199,7 @@
             },
             {
                 "Sujeto (Nominativo)": "Art. Neg.",
+                "Sujeto Display": "Artículo<br>Negativo",
                 "Pronombre (Dativ)": "-",
                 "Trad. Pronombre": "-",
                 "Ejemplo Pronombre (Dativ)": "-",
@@ -573,7 +577,7 @@
             html += '</tr>';
             html += '</thead>';
 
-            const keysToSkip = ["Trad. Pronombre", "Ejemplo Pronombre (Dativ)", "Trad. Ejemplo", "Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M) - Ejemplos con Verbos", "Weiblich (F) - Ejemplos con Verbos", "Neutral (N) - Ejemplos con Verbos", "Plural (P) - Ejemplos con Verbos", "Trad. Base", "Category (M)", "Category (F)", "Category (N)", "Category (P)", "Explanation (M)", "Explanation (F)", "Explanation (N)", "Explanation (P)"];
+            const keysToSkip = ["Trad. Pronombre", "Ejemplo Pronombre (Dativ)", "Trad. Ejemplo", "Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M) - Ejemplos con Verbos", "Weiblich (F) - Ejemplos con Verbos", "Neutral (N) - Ejemplos con Verbos", "Plural (P) - Ejemplos con Verbos", "Trad. Base", "Category (M)", "Category (F)", "Category (N)", "Category (P)", "Explanation (M)", "Explanation (F)", "Explanation (N)", "Explanation (P)", "Sujeto Display"];
 
             html += '<tbody class="divide-y divide-gray-200">';
             tableData.forEach((row) => {
@@ -582,7 +586,9 @@
                                      row["Sujeto (Nominativo)"].startsWith('Articulo') ||
                                      row["Sujeto (Nominativo)"] === "Nullartikel";
                 const rowClass = isArticleRow ? 'article-row' : 'possessive-row';
-                html += `<tr class="${rowClass} hover:bg-opacity-75">`;
+                const isSeparatorRow = row["Sujeto (Nominativo)"] === "ich";
+                const separatorClass = isSeparatorRow ? ' separator-row' : '';
+                html += `<tr class="${rowClass}${separatorClass} hover:bg-opacity-75">`;
                 const headers = [
                     "Sujeto (Nominativo)", "Pronombre (Dativ)", "Trad. Pronombre", "Ejemplo Pronombre (Dativ)", "Trad. Ejemplo", "Base", "Trad. Base", "dem männlich (dativ)", "Männlich (M) - Ejemplos con Verbos", "Trad. (M)", "der weiblich (dativ)", "Weiblich (F) - Ejemplos con Verbos", "Trad. (F)", "dem neutral (dativ)", "Neutral (N) - Ejemplos con Verbos", "Trad. (N)", "den plural (dativ)", "Plural (P) - Ejemplos con Verbos", "Trad. (P)"
                 ];
@@ -694,15 +700,13 @@
                     }
                     else {
                         if (key === "Sujeto (Nominativo)") {
-                            let formattedValue = value;
-                            // Format article rows with line breaks
-                            if (value.includes(' / ') && (value.startsWith('Articulo') || value.startsWith('Art.'))) {
-                                formattedValue = value.replace(' / ', '<br>');
-                            }
-                            if (value.startsWith('Articulo') || value.startsWith('Art.') || value === 'Nullartikel') {
-                                contentHtml = `<div class="w-full subject-study-cell">${formattedValue}</div>`;
+                            const displayValue = row["Sujeto Display"] || value;
+                            let formattedValue = displayValue;
+
+                            if (value.startsWith('Art.') || value === 'Nullartikel') {
+                                contentHtml = `<div class="w-full subject-study-cell" style="text-align: center;">${formattedValue}</div>`;
                             } else {
-                                contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(formattedValue)}</div>`;
+                                contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(value)}</div>`;
                             }
                             cellClass += ' wrap-cell align-top p-0';
                             styleAttr = ' style="background-color: #E0F2FE;"';
