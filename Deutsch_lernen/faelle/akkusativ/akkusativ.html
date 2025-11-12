@@ -133,7 +133,7 @@
             },
             {
                 "Sujeto (Nominativo)": "Nullartikel",
-                "Pronombre (Akkusativ)": "Note: Use no article with uncountable nouns, mass nouns, and plural nouns without determiners.",
+                "Pronombre (Akkusativ)": "Nota: Se deja sin artículo para sustantivos incontables, sustantivos masivos y sustantivos plurales sin determinantes.",
                 "Trad. Pronombre": "-",
                 "Ejemplo Pronombre (Akkusativ)": "-",
                 "Trad. Ejemplo": "-",
@@ -507,7 +507,7 @@
                         tradPronoun = tradPronoun.replace(' (formal)', '').replace(' (neutro)', '');
                         cellClass += ' merged-pronoun-cell wrap-cell align-top cursor-pointer';
                         if (pronoun === '-') { contentHtml = '-'; cellClass = 'table-cell text-sm text-gray-800 text-left bg-gray-200'; }
-                        else if (pronoun.startsWith('Note:')) {
+                        else if (pronoun.startsWith('Nota:')) {
                             contentHtml = `<div class="text-xs italic text-gray-600 p-2" style="white-space: normal; line-height: 1.4;">${pronoun}</div>`;
                             cellClass = 'table-cell text-sm text-gray-800 text-left bg-yellow-50';
                         }
