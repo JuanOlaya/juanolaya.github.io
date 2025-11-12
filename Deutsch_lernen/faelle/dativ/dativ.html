@@ -62,7 +62,7 @@
 <body class="p-4 sm:p-8">
     <div class="max-w-7xl mx-auto">
         <h1 class="text-3xl font-bold text-gray-800 mb-2">German Dativ Case: Articles, Pronouns, and Possessives (A1–A2)</h1>
-        <p class="text-gray-600 mb-6">Ejemplos simplificados y naturales para A1–A2. El Dativ responde a "¿A quién?" o "¿Con quién?". Se usa para el objeto indirecto y después de ciertas preposiciones (mit, nach, aus, zu, von, bei, seit).</p>
+        <p class="text-gray-600 mb-6">El Dativ responde a "¿A quién?" o "¿Con quién?". Se usa para el <strong>objeto indirecto</strong> - la persona que recibe indirectamente la acción. También se usa después de ciertas preposiciones (<a href="#" onclick="openPrepositionsModal(event)" class="text-green-700 underline hover:text-green-900">mit, nach, aus, zu, von, bei, seit, ab, gegenüber</a>).</p>
         <div id="table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200"></div>
         <div class="mt-6 flex justify-end">
             <button id="toggle-all-button" onclick="toggleAllTranslations()" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 flex items-center">
@@ -77,6 +77,72 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="modal-close" onclick="closeModal()">&times;</span>
             <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Modal for Prepositions -->
+    <div id="prepositions-modal" class="modal-overlay" onclick="closePrepositionsModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closePrepositionsModal()">&times;</span>
+            <div id="prepositions-modal-body">
+                <h2 class="modal-title" style="color: #166534;">Preposiciones de Dativ</h2>
+
+                <div class="modal-section">
+                    <div class="modal-label">mit (con)</div>
+                    <div class="modal-text"><strong>Ich fahre mit dem Bus.</strong></div>
+                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Viajo con el bus.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">nach (después de / hacia)</div>
+                    <div class="modal-text"><strong>Nach dem Essen.</strong></div>
+                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Después de la comida.</div>
+                    <div class="modal-text" style="margin-top: 0.5rem;"><strong>Ich fahre nach Berlin.</strong></div>
+                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Voy hacia Berlín.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">aus (de / desde)</div>
+                    <div class="modal-text"><strong>Ich komme aus der Schule.</strong></div>
+                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Vengo de la escuela.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">zu (a / hacia)</div>
+                    <div class="modal-text"><strong>Ich gehe zu meinem Freund.</strong></div>
+                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Voy a mi amigo.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">von (de / desde)</div>
+                    <div class="modal-text"><strong>Das Buch ist von meinem Lehrer.</strong></div>
+                    <div class="modal-text" style="font-style: italic; color: #6b7280;">El libro es de mi profesor.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">bei (en casa de / cerca de)</div>
+                    <div class="modal-text"><strong>Ich bin bei meiner Oma.</strong></div>
+                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Estoy en casa de mi abuela.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">seit (desde hace)</div>
+                    <div class="modal-text"><strong>Seit einem Jahr.</strong></div>
+                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Desde hace un año.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">ab (desde / a partir de)</div>
+                    <div class="modal-text"><strong>Ab morgen.</strong></div>
+                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Desde mañana.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">gegenüber (frente a)</div>
+                    <div class="modal-text"><strong>Gegenüber dem Park.</strong></div>
+                    <div class="modal-text" style="font-style: italic; color: #6b7280;">Frente al parque.</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -682,10 +748,22 @@
             }
         }
 
+        function openPrepositionsModal(event) {
+            event.preventDefault();
+            document.getElementById('prepositions-modal').classList.add('active');
+        }
+
+        function closePrepositionsModal(event) {
+            if (!event || event.target.classList.contains('modal-overlay') || event.target.classList.contains('modal-close')) {
+                document.getElementById('prepositions-modal').classList.remove('active');
+            }
+        }
+
         // Close modal with Escape key
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeModal();
+                closePrepositionsModal();
             }
         });
 
