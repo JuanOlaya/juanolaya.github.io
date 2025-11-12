@@ -63,7 +63,7 @@
     <script>
         const tableData = [
             {
-                "Sujeto (Nominativo)": "Art. Def.",
+                "Sujeto (Nominativo)": "Articulo / Definido",
                 "Pronombre (Akkusativ)": "-",
                 "Trad. Pronombre": "-",
                 "Ejemplo Pronombre (Akkusativ)": "-",
@@ -133,7 +133,7 @@
             },
             {
                 "Sujeto (Nominativo)": "Nullartikel",
-                "Pronombre (Akkusativ)": "-",
+                "Pronombre (Akkusativ)": "Note: Use no article with uncountable nouns, mass nouns, and plural nouns without determiners.",
                 "Trad. Pronombre": "-",
                 "Ejemplo Pronombre (Akkusativ)": "-",
                 "Trad. Ejemplo": "-",
@@ -484,7 +484,9 @@
             html += '<tbody class="divide-y divide-gray-200">';
             tableData.forEach((row) => {
                 if (row["Sujeto (Nominativo)"] === "es") { row["Sujeto (Nominativo)"] = "es (neutro)"; }
-                const isArticleRow = row["Sujeto (Nominativo)"].startsWith('Art.');
+                const isArticleRow = row["Sujeto (Nominativo)"].startsWith('Art.') ||
+                                     row["Sujeto (Nominativo)"].startsWith('Articulo') ||
+                                     row["Sujeto (Nominativo)"] === "Nullartikel";
                 const rowClass = isArticleRow ? 'article-row' : 'possessive-row';
                 html += `<tr class="${rowClass} hover:bg-opacity-75">`;
                 const headers = [
@@ -505,6 +507,10 @@
                         tradPronoun = tradPronoun.replace(' (formal)', '').replace(' (neutro)', '');
                         cellClass += ' merged-pronoun-cell wrap-cell align-top cursor-pointer';
                         if (pronoun === '-') { contentHtml = '-'; cellClass = 'table-cell text-sm text-gray-800 text-left bg-gray-200'; }
+                        else if (pronoun.startsWith('Note:')) {
+                            contentHtml = `<div class="text-xs italic text-gray-600 p-2" style="white-space: normal; line-height: 1.4;">${pronoun}</div>`;
+                            cellClass = 'table-cell text-sm text-gray-800 text-left bg-yellow-50';
+                        }
                         else {
                             const exampleTextToBold = pronoun;
                             let styledExample = example.replace(new RegExp(`\\b(${exampleTextToBold})\\b`), (m) => `<b>${m}</b>`);
@@ -573,7 +579,16 @@
                     }
                     else {
                         if (key === "Sujeto (Nominativo)") {
-                            contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(value)}</div>`;
+                            let formattedValue = value;
+                            // Format article rows with line breaks
+                            if (value.includes(' / ') && (value.startsWith('Articulo') || value.startsWith('Art.'))) {
+                                formattedValue = value.replace(' / ', '<br>');
+                            }
+                            if (value.startsWith('Articulo') || value.startsWith('Art.') || value === 'Nullartikel') {
+                                contentHtml = `<div class="w-full subject-study-cell">${formattedValue}</div>`;
+                            } else {
+                                contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(formattedValue)}</div>`;
+                            }
                             cellClass += ' wrap-cell align-top p-0';
                             styleAttr = ' style="background-color: #E0F2FE;"';
                         }
