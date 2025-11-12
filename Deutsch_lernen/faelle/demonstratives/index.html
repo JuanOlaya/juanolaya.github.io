@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>German Demonstratives - All Cases (A1–A2)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f7f7; }
+        #table-container { max-width: calc(100vw - 4rem); overflow-x: hidden; }
+        table { width: 100%; table-layout: auto; }
+        td, th { overflow: visible; }
+        .table-cell { padding: 0.25rem 0.3rem; white-space: nowrap; vertical-align: top; font-size: 0.8rem; }
+        .wrap-cell { white-space: normal; }
+        .study-cell { position: relative; display: flex; flex-direction: column; align-items: flex-start; cursor: pointer; padding: 0.3rem 0.3rem; min-height: 3.5rem; justify-content: center; }
+        .merged-gender-cell { padding: 0.25rem 0.3rem; min-height: 5rem; display: flex; flex-direction: column; justify-content: flex-start; }
+        .merged-gender-cell .study-cell { min-height: auto; padding: 0; margin-top: 0.3rem; }
+        .merged-possessive-cell { padding: 0.4rem 0.6rem; white-space: normal; vertical-align: top; font-size: 0.9rem; line-height: 1.2; min-height: 5.5rem; }
+        .german-phrase { color: #1f2937; font-size: 0.8rem; line-height: 1.2; }
+        .spanish-translation { color: #4b5563; font-style: italic; font-size: 0.8rem; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; margin-top: 0.1rem; }
+        .study-cell:hover .spanish-translation, .study-cell.active .spanish-translation { max-height: 10rem; opacity: 1; }
+        .force-open .spanish-translation { max-height: 10rem !important; opacity: 1 !important; margin-top: 0.1rem !important; }
+        .stacked-content-line { margin-bottom: 2px; line-height: 1.2; }
+
+        /* Nominativ styles */
+        .base-article-german-nominativ { background-color: #dbeafe; display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: #1e40af; }
+        .nominativ-determiner { font-weight: 700; color: #1e40af; background-color: #dbeafe; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; }
+
+        /* Akkusativ styles */
+        .base-article-german-akkusativ { background-color: #fef2f2; display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: #991b1b; }
+        .akkusativ-determiner { font-weight: 700; color: #991b1b; background-color: #fef2f2; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; }
+
+        /* Dativ styles */
+        .base-article-german-dativ { background-color: #f0fdf4; display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: #15803d; }
+        .dativ-determiner { font-weight: 700; color: #15803d; background-color: #f0fdf4; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; }
+
+        .section-divider { height: 2px; background: linear-gradient(to right, transparent, #9ca3af, transparent); margin: 4rem 0; }
+        .case-title { font-size: 2rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem; text-align: center; }
+        .case-description { color: #4b5563; margin-bottom: 2rem; text-align: center; font-size: 1rem; }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-4xl font-bold text-gray-800 mb-3 text-center">German Demonstratives - All Cases (A1–A2)</h1>
+        <p class="text-gray-600 mb-8 text-center text-lg">Demostrativos en alemán: <strong>dieser</strong> (este/esta), <strong>jener</strong> (aquel/aquella), <strong>jeder</strong> (cada), <strong>welcher</strong> (cuál) - Todos los casos</p>
+
+        <!-- Nominativ Section -->
+        <div id="nominativ-section">
+            <h2 class="case-title" style="color: #1e40af;">Nominativ Case</h2>
+            <p class="case-description">El Nominativ identifica el <strong>sujeto</strong> de la oración - quién o qué realiza la acción.</p>
+            <div id="nominativ-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200"></div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Akkusativ Section -->
+        <div id="akkusativ-section">
+            <h2 class="case-title" style="color: #991b1b;">Akkusativ Case</h2>
+            <p class="case-description">El Akkusativ identifica el <strong>objeto directo</strong> - qué o a quién recibe directamente la acción del verbo.</p>
+            <div id="akkusativ-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200"></div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Dativ Section -->
+        <div id="dativ-section">
+            <h2 class="case-title" style="color: #15803d;">Dativ Case</h2>
+            <p class="case-description">El Dativ identifica el <strong>objeto indirecto</strong> - a quién o para quién se realiza la acción indirectamente.</p>
+            <div id="dativ-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200"></div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+            <button id="toggle-all-button" onclick="toggleAllTranslations()" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-4 5a1 1 0 100 2h2a1 1 0 100-2h-2z" clip-rule="evenodd"/></svg>
+                Mostrar todas las traducciones
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Nominativ Data
+        const nominativData = [
+            {
+                "Tipo": "dieser (este/esta)",
+                "Trad. Tipo": "este / esta / estos / estas",
+                "der männlich": "dieser",
+                "Männlich (M)": "Dieser Mann ist nett.",
+                "Trad. (M)": "Este hombre es amable.",
+                "die weiblich": "diese",
+                "Weiblich (F)": "Diese Frau ist freundlich.",
+                "Trad. (F)": "Esta mujer es amigable.",
+                "das neutral": "dieses",
+                "Neutral (N)": "Dieses Kind ist klein.",
+                "Trad. (N)": "Este niño es pequeño.",
+                "die plural": "diese",
+                "Plural (P)": "Diese Leute sind glücklich.",
+                "Trad. (P)": "Estas personas son felices."
+            },
+            {
+                "Tipo": "jener (aquel/aquella)",
+                "Trad. Tipo": "aquel / aquella / aquellos / aquellas",
+                "der männlich": "jener",
+                "Männlich (M)": "Jener Mann ist groß.",
+                "Trad. (M)": "Aquel hombre es grande.",
+                "die weiblich": "jene",
+                "Weiblich (F)": "Jene Frau arbeitet hier.",
+                "Trad. (F)": "Aquella mujer trabaja aquí.",
+                "das neutral": "jenes",
+                "Neutral (N)": "Jenes Auto ist rot.",
+                "Trad. (N)": "Aquel carro es rojo.",
+                "die plural": "jene",
+                "Plural (P)": "Jene Häuser sind alt.",
+                "Trad. (P)": "Aquellas casas son viejas."
+            },
+            {
+                "Tipo": "jeder (cada)",
+                "Trad. Tipo": "cada (singular)",
+                "der männlich": "jeder",
+                "Männlich (M)": "Jeder Schüler lernt.",
+                "Trad. (M)": "Cada alumno aprende.",
+                "die weiblich": "jede",
+                "Weiblich (F)": "Jede Frage ist wichtig.",
+                "Trad. (F)": "Cada pregunta es importante.",
+                "das neutral": "jedes",
+                "Neutral (N)": "Jedes Wort zählt.",
+                "Trad. (N)": "Cada palabra cuenta.",
+                "die plural": "-",
+                "Plural (P)": "-",
+                "Trad. (P)": "(No se usa en plural)"
+            },
+            {
+                "Tipo": "welcher (cuál)",
+                "Trad. Tipo": "cuál / cuáles (interrogativo)",
+                "der männlich": "welcher",
+                "Männlich (M)": "Welcher Mann ist dein Vater?",
+                "Trad. (M)": "¿Cuál hombre es tu padre?",
+                "die weiblich": "welche",
+                "Weiblich (F)": "Welche Frau ist deine Mutter?",
+                "Trad. (F)": "¿Cuál mujer es tu madre?",
+                "das neutral": "welches",
+                "Neutral (N)": "Welches Buch liest du?",
+                "Trad. (N)": "¿Cuál libro lees?",
+                "die plural": "welche",
+                "Plural (P)": "Welche Kinder spielen draußen?",
+                "Trad. (P)": "¿Cuáles niños juegan afuera?"
+            }
+        ];
+
+        // Akkusativ Data
+        const akkusativData = [
+            {
+                "Tipo": "dieser (este/esta)",
+                "Trad. Tipo": "este / esta / estos / estas",
+                "den männlich": "diesen",
+                "Männlich (M)": "Ich sehe diesen Mann.",
+                "Trad. (M)": "Veo a este hombre.",
+                "die weiblich": "diese",
+                "Weiblich (F)": "Ich kenne diese Frau.",
+                "Trad. (F)": "Conozco a esta mujer.",
+                "das neutral": "dieses",
+                "Neutral (N)": "Ich mag dieses Buch.",
+                "Trad. (N)": "Me gusta este libro.",
+                "die plural": "diese",
+                "Plural (P)": "Ich kaufe diese Schuhe.",
+                "Trad. (P)": "Compro estos zapatos."
+            },
+            {
+                "Tipo": "jener (aquel/aquella)",
+                "Trad. Tipo": "aquel / aquella / aquellos / aquellas",
+                "den männlich": "jenen",
+                "Männlich (M)": "Er nimmt jenen Stuhl.",
+                "Trad. (M)": "Él toma aquella silla.",
+                "die weiblich": "jene",
+                "Weiblich (F)": "Sie braucht jene Lampe.",
+                "Trad. (F)": "Ella necesita aquella lámpara.",
+                "das neutral": "jenes",
+                "Neutral (N)": "Wir kaufen jenes Auto.",
+                "Trad. (N)": "Compramos aquel carro.",
+                "die plural": "jene",
+                "Plural (P)": "Sie sehen jene Gebäude.",
+                "Trad. (P)": "Ellos ven aquellos edificios."
+            },
+            {
+                "Tipo": "jeder (cada)",
+                "Trad. Tipo": "cada (singular)",
+                "den männlich": "jeden",
+                "Männlich (M)": "Ich frage jeden Lehrer.",
+                "Trad. (M)": "Pregunto a cada profesor.",
+                "die weiblich": "jede",
+                "Weiblich (F)": "Er liest jede Zeitung.",
+                "Trad. (F)": "Él lee cada periódico.",
+                "das neutral": "jedes",
+                "Neutral (N)": "Sie kennt jedes Wort.",
+                "Trad. (N)": "Ella conoce cada palabra.",
+                "die plural": "-",
+                "Plural (P)": "-",
+                "Trad. (P)": "(No se usa en plural)"
+            },
+            {
+                "Tipo": "welcher (cuál)",
+                "Trad. Tipo": "cuál / cuáles (interrogativo)",
+                "den männlich": "welchen",
+                "Männlich (M)": "Welchen Film siehst du?",
+                "Trad. (M)": "¿Cuál película ves?",
+                "die weiblich": "welche",
+                "Weiblich (F)": "Welche Sprache lernst du?",
+                "Trad. (F)": "¿Cuál idioma aprendes?",
+                "das neutral": "welches",
+                "Neutral (N)": "Welches Auto kaufst du?",
+                "Trad. (N)": "¿Cuál carro compras?",
+                "die plural": "welche",
+                "Plural (P)": "Welche Bücher liest du?",
+                "Trad. (P)": "¿Cuáles libros lees?"
+            }
+        ];
+
+        // Dativ Data
+        const dativData = [
+            {
+                "Tipo": "dieser (a este/esta)",
+                "Trad. Tipo": "a este / a esta / a estos / a estas",
+                "dem männlich": "diesem",
+                "Männlich (M)": "Ich helfe diesem Mann.",
+                "Trad. (M)": "Ayudo a este hombre.",
+                "der weiblich": "dieser",
+                "Weiblich (F)": "Er gibt dieser Frau Geld.",
+                "Trad. (F)": "Él le da dinero a esta mujer.",
+                "dem neutral": "diesem",
+                "Neutral (N)": "Sie dankt diesem Kind.",
+                "Trad. (N)": "Ella le agradece a este niño.",
+                "den plural": "diesen",
+                "Plural (P)": "Wir folgen diesen Leuten.",
+                "Trad. (P)": "Seguimos a estas personas."
+            },
+            {
+                "Tipo": "jener (a aquel/aquella)",
+                "Trad. Tipo": "a aquel / a aquella / a aquellos / a aquellas",
+                "dem männlich": "jenem",
+                "Männlich (M)": "Er antwortet jenem Lehrer.",
+                "Trad. (M)": "Él le responde a aquel profesor.",
+                "der weiblich": "jener",
+                "Weiblich (F)": "Sie schreibt jener Person.",
+                "Trad. (F)": "Ella le escribe a aquella persona.",
+                "dem neutral": "jenem",
+                "Neutral (N)": "Wir geben jenem Tier Futter.",
+                "Trad. (N)": "Le damos comida a aquel animal.",
+                "den plural": "jenen",
+                "Plural (P)": "Ich helfe jenen Studenten.",
+                "Trad. (P)": "Ayudo a aquellos estudiantes."
+            },
+            {
+                "Tipo": "jeder (a cada)",
+                "Trad. Tipo": "a cada (singular)",
+                "dem männlich": "jedem",
+                "Männlich (M)": "Er gibt jedem Schüler ein Buch.",
+                "Trad. (M)": "Él le da un libro a cada alumno.",
+                "der weiblich": "jeder",
+                "Weiblich (F)": "Sie hilft jeder Person.",
+                "Trad. (F)": "Ella ayuda a cada persona.",
+                "dem neutral": "jedem",
+                "Neutral (N)": "Wir danken jedem Kind.",
+                "Trad. (N)": "Le agradecemos a cada niño.",
+                "den plural": "-",
+                "Plural (P)": "-",
+                "Trad. (P)": "(No se usa en plural)"
+            },
+            {
+                "Tipo": "welcher (a cuál)",
+                "Trad. Tipo": "a cuál / a cuáles (interrogativo)",
+                "dem männlich": "welchem",
+                "Männlich (M)": "Mit welchem Lehrer sprichst du?",
+                "Trad. (M)": "¿Con cuál profesor hablas?",
+                "der weiblich": "welcher",
+                "Weiblich (F)": "Von welcher Person redest du?",
+                "Trad. (F)": "¿De cuál persona hablas?",
+                "dem neutral": "welchem",
+                "Neutral (N)": "Aus welchem Land kommst du?",
+                "Trad. (N)": "¿De cuál país vienes?",
+                "den plural": "welchen",
+                "Plural (P)": "Mit welchen Freunden gehst du?",
+                "Trad. (P)": "¿Con cuáles amigos vas?"
+            }
+        ];
+
+        const nominativKeys = [
+            { key: "der männlich", example: "Männlich (M)", translation: "Trad. (M)", color: 'bg-blue-200' },
+            { key: "die weiblich", example: "Weiblich (F)", translation: "Trad. (F)", color: 'bg-blue-300' },
+            { key: "das neutral", example: "Neutral (N)", translation: "Trad. (N)", color: 'bg-blue-400' },
+            { key: "die plural", example: "Plural (P)", translation: "Trad. (P)", color: 'bg-blue-500' }
+        ];
+
+        const akkusativKeys = [
+            { key: "den männlich", example: "Männlich (M)", translation: "Trad. (M)", color: 'bg-red-200' },
+            { key: "die weiblich", example: "Weiblich (F)", translation: "Trad. (F)", color: 'bg-red-300' },
+            { key: "das neutral", example: "Neutral (N)", translation: "Trad. (N)", color: 'bg-red-400' },
+            { key: "die plural", example: "Plural (P)", translation: "Trad. (P)", color: 'bg-red-500' }
+        ];
+
+        const dativKeys = [
+            { key: "dem männlich", example: "Männlich (M)", translation: "Trad. (M)", color: 'bg-green-200' },
+            { key: "der weiblich", example: "Weiblich (F)", translation: "Trad. (F)", color: 'bg-green-300' },
+            { key: "dem neutral", example: "Neutral (N)", translation: "Trad. (N)", color: 'bg-green-400' },
+            { key: "den plural", example: "Plural (P)", translation: "Trad. (P)", color: 'bg-green-500' }
+        ];
+
+        let translationsVisible = false;
+        function toggleAllTranslations() {
+            const studyWrappers = document.querySelectorAll('.study-cell');
+            const button = document.getElementById('toggle-all-button');
+            const containers = document.querySelectorAll('#nominativ-container, #akkusativ-container, #dativ-container');
+            translationsVisible = !translationsVisible;
+            if (translationsVisible) {
+                containers.forEach(c => c.classList.add('force-open'));
+                button.textContent = 'Ocultar todas las traducciones';
+            } else {
+                containers.forEach(c => c.classList.remove('force-open'));
+                button.textContent = 'Mostrar todas las traducciones';
+                studyWrappers.forEach(w => w.classList.remove('active'));
+            }
+        }
+
+        function renderTable(containerId, data, mergedKeys, determinerKeys, caseType, headerBgColor, caseLabel) {
+            const container = document.getElementById(containerId);
+            let html = '<table class="divide-y divide-gray-300">';
+            html += '<thead class="bg-gray-100">';
+            html += '<tr>';
+            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300 ${headerBgColor}">Demostrativo</th>`;
+            html += `<th colspan="4" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 ${headerBgColor}">${caseLabel} Case (por Género)</th>`;
+            html += '</tr>';
+            html += '<tr>';
+            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 ${mergedKeys[0].color}">Tipo</th>`;
+            const genders = [
+                { title: 'Männlich (M)', color: mergedKeys[0].color, colspan: 1 },
+                { title: 'Weiblich (F)', color: mergedKeys[1].color, colspan: 1 },
+                { title: 'Neutral (N)', color: mergedKeys[2].color, colspan: 1 },
+                { title: 'Plural (P)', color: mergedKeys[3].color, colspan: 1 }
+            ];
+            genders.forEach(g => {
+                html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}">${g.title}</th>`;
+            });
+            html += '</tr>';
+            html += '</thead>';
+
+            const keysToSkip = ["Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M)", "Weiblich (F)", "Neutral (N)", "Plural (P)", "Trad. Tipo"];
+
+            html += '<tbody class="divide-y divide-gray-200">';
+            data.forEach((row) => {
+                html += `<tr class="hover:bg-opacity-75">`;
+
+                const headers = [
+                    "Tipo", "Trad. Tipo",
+                    mergedKeys[0].key, "Männlich (M)", "Trad. (M)",
+                    mergedKeys[1].key, "Weiblich (F)", "Trad. (F)",
+                    mergedKeys[2].key, "Neutral (N)", "Trad. (N)",
+                    mergedKeys[3].key, "Plural (P)", "Trad. (P)"
+                ];
+
+                headers.forEach((key) => {
+                    const value = row[key];
+                    if (keysToSkip.includes(key)) return;
+                    let cellClass = 'table-cell text-sm text-gray-800 text-left';
+                    let contentHtml = value;
+
+                    if (determinerKeys.includes(key)) {
+                        const mergedData = mergedKeys.find(d => d.key === key);
+                        const determiner = row[mergedData.key];
+                        const exampleValue = row[mergedData.example];
+                        const tradExampleValue = row[mergedData.translation];
+
+                        const exampleTextToBold = determiner;
+                        let styledExampleValue = exampleValue && exampleValue !== '-' ?
+                            exampleValue.replace(new RegExp(`\\b(${exampleTextToBold})\\b`, 'i'), (m) => `<b>${m}</b>`) :
+                            exampleValue;
+                        cellClass += ` merged-gender-cell wrap-cell align-top ${mergedData.color}`;
+
+                        if (exampleValue && exampleValue !== '-' && tradExampleValue && tradExampleValue !== '-') {
+                            contentHtml = `
+                                <span class="${caseType}-determiner">${determiner}</span>
+                                <div class="study-cell cursor-pointer p-0 pt-1" onclick="this.classList.toggle('active')">
+                                    <span class="german-phrase whitespace-nowrap">${styledExampleValue}</span>
+                                    <span class="spanish-translation">${tradExampleValue}</span>
+                                </div>`;
+                        } else {
+                            contentHtml = `<span class="${caseType}-determiner">${determiner}</span>`;
+                        }
+                    }
+                    else if (key === "Tipo") {
+                        const tipoValue = row["Tipo"];
+                        const tradTipoValue = row["Trad. Tipo"];
+                        contentHtml = `
+                            <div class="stacked-content-line"><span class="base-article-german-${caseType}">${tipoValue}</span></div>
+                            <div class="stacked-content-line text-xs italic text-gray-500" style="margin-top: 0.2rem;">${tradTipoValue}</div>`;
+                        cellClass += ` merged-possessive-cell ${headerBgColor}`;
+                    }
+
+                    html += `<td class="${cellClass}">${contentHtml}</td>`;
+                });
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        window.onload = function() {
+            renderTable('nominativ-container', nominativData, nominativKeys, ["der männlich", "die weiblich", "das neutral", "die plural"], 'nominativ', 'bg-blue-100', 'Nominativ');
+            renderTable('akkusativ-container', akkusativData, akkusativKeys, ["den männlich", "die weiblich", "das neutral", "die plural"], 'akkusativ', 'bg-red-100', 'Akkusativ');
+            renderTable('dativ-container', dativData, dativKeys, ["dem männlich", "der weiblich", "dem neutral", "den plural"], 'dativ', 'bg-green-100', 'Dativ');
+        };
+    </script>
+</body>
+</html>
