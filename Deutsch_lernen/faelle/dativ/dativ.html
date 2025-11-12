@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>German Akkusativ Case Table — A1–A2 Improved</title>
+    <title>German Dativ Case Table — A1–A2 Improved</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
@@ -20,7 +20,7 @@
         .merged-pronoun-cell { padding: 0.3rem 0.4rem; min-height: 5rem; display: flex; flex-direction: column; justify-content: center; white-space: normal; }
         .stacked-content-line { margin-bottom: 2px; line-height: 1.2; }
         .german-phrase, .article-german-lines { color: #1f2937; font-size: 0.8rem; line-height: 1.2; }
-        .base-article-german { background-color: #fef2f2; display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: #991b1b; }
+        .base-article-german { background-color: #f0fdf4; display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: #166534; }
         .akkusativ-pronoun-visible { font-weight: 700; color: #1D4ED8; background-color: #f0fdfa; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; margin-right: 0.5rem; }
         .trad-pronoun-visible { font-weight: 400; color: #4b5563; font-style: italic; font-size: 0.9rem; }
         .pronoun-hidden-part { color: #4b5563; font-size: 0.8rem; opacity: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; }
@@ -39,7 +39,7 @@
         .subject-parenthesis-italic { font-size: 0.8rem; color: #4b5563; font-style: italic; margin-top: 0.1rem; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
         .nominativ-translation-hidden { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
         .possessive-study-wrapper:hover .nominativ-translation-hidden, .possessive-study-wrapper.active .nominativ-translation-hidden { max-height: 5rem; opacity: 1; }
-        .akkusativ-determiner { font-weight: 700; color: #991b1b; background-color: #fef2f2; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; }
+        .akkusativ-determiner { font-weight: 700; color: #166534; background-color: #f0fdf4; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; }
         .article-row { background-color: #f7f7f7; }
         .possessive-row { background-color: #e0f2fe; }
         .subject-study-cell { min-height: 5.5rem; padding: 0.4rem 0.6rem; cursor: pointer; transition: background-color 0.15s ease-in-out; }
@@ -61,8 +61,8 @@
 </head>
 <body class="p-4 sm:p-8">
     <div class="max-w-7xl mx-auto">
-        <h1 class="text-3xl font-bold text-gray-800 mb-2">German Akkusativ Case: Articles, Pronouns, and Possessives (A1–A2)</h1>
-        <p class="text-gray-600 mb-6">Ejemplos simplificados y naturales para A1–A2. Vocabulario frecuente, verbos básicos, y traducciones más precisas.</p>
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">German Dativ Case: Articles, Pronouns, and Possessives (A1–A2)</h1>
+        <p class="text-gray-600 mb-6">Ejemplos simplificados y naturales para A1–A2. El Dativ responde a "¿A quién?" o "¿Con quién?". Se usa para el objeto indirecto y después de ciertas preposiciones (mit, nach, aus, zu, von, bei, seit).</p>
         <div id="table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200"></div>
         <div class="mt-6 flex justify-end">
             <button id="toggle-all-button" onclick="toggleAllTranslations()" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 flex items-center">
@@ -84,45 +84,45 @@
         const tableData = [
             {
                 "Sujeto (Nominativo)": "Articulo / Definido",
-                "Pronombre (Akkusativ)": "-",
+                "Pronombre (Dativ)": "-",
                 "Trad. Pronombre": "-",
-                "Ejemplo Pronombre (Akkusativ)": "-",
+                "Ejemplo Pronombre (Dativ)": "-",
                 "Trad. Ejemplo": "-",
                 "Base": "der / die / das (Nominativ)",
                 "Trad. Base": "el / la / el (Nominativ)",
-                "den männlich (akkusativ)": "den",
-                "Männlich (M) - Ejemplos con Verbos": "Ich sehe den Hund.",
-                "Trad. (M)": "Veo el perro.",
-                "die weiblich (akkusativ)": "die",
-                "Weiblich (F) - Ejemplos con Verbos": "Ich brauche die Lampe.",
-                "Trad. (F)": "Necesito la lámpara.",
-                "das neutral (akkusativ)": "das",
-                "Neutral (N) - Ejemplos con Verbos": "Ich trinke das Wasser.",
-                "Trad. (N)": "Bebo el agua.",
-                "die plural (akkusativ)": "die",
-                "Plural (P) - Ejemplos con Verbos": "Ich nehme die Äpfel.",
-                "Trad. (P)": "Tomo las manzanas.",
+                "dem männlich (dativ)": "dem",
+                "Männlich (M) - Ejemplos con Verbos": "Ich helfe dem Mann.",
+                "Trad. (M)": "Ayudo al hombre.",
+                "der weiblich (dativ)": "der",
+                "Weiblich (F) - Ejemplos con Verbos": "Er dankt der Frau.",
+                "Trad. (F)": "Él agradece a la mujer.",
+                "dem neutral (dativ)": "dem",
+                "Neutral (N) - Ejemplos con Verbos": "Sie gibt dem Kind ein Buch.",
+                "Trad. (N)": "Ella le da un libro al niño.",
+                "den plural (dativ)": "den",
+                "Plural (P) - Ejemplos con Verbos": "Wir helfen den Kindern.",
+                "Trad. (P)": "Ayudamos a los niños.",
                 "Nom. Example": "-",
                 "Trad. Nom. Example": "-"
             },
             {
                 "Sujeto (Nominativo)": "Art. Indef.",
-                "Pronombre (Akkusativ)": "-",
+                "Pronombre (Dativ)": "-",
                 "Trad. Pronombre": "-",
-                "Ejemplo Pronombre (Akkusativ)": "-",
+                "Ejemplo Pronombre (Dativ)": "-",
                 "Trad. Ejemplo": "-",
                 "Base": "ein / eine / ein (Nominativ)",
                 "Trad. Base": "un / una / un (Nominativ)",
-                "den männlich (akkusativ)": "einen",
-                "Männlich (M) - Ejemplos con Verbos": "Du kaufst einen Apfel.",
-                "Trad. (M)": "Compras una manzana.",
-                "die weiblich (akkusativ)": "eine",
-                "Weiblich (F) - Ejemplos con Verbos": "Du isst eine Suppe.",
-                "Trad. (F)": "Comes una sopa.",
-                "das neutral (akkusativ)": "ein",
-                "Neutral (N) - Ejemplos con Verbos": "Du kaufst ein Brot.",
-                "Trad. (N)": "Compras un pan.",
-                "die plural (akkusativ)": "-",
+                "dem männlich (dativ)": "einem",
+                "Männlich (M) - Ejemplos con Verbos": "Du gibst einem Freund das Buch.",
+                "Trad. (M)": "Le das el libro a un amigo.",
+                "der weiblich (dativ)": "einer",
+                "Weiblich (F) - Ejemplos con Verbos": "Ich schicke einer Kollegin eine Mail.",
+                "Trad. (F)": "Envío un correo a una colega.",
+                "dem neutral (dativ)": "einem",
+                "Neutral (N) - Ejemplos con Verbos": "Er zeigt einem Kind den Weg.",
+                "Trad. (N)": "Él le muestra el camino a un niño.",
+                "den plural (dativ)": "-",
                 "Plural (P) - Ejemplos con Verbos": "-",
                 "Trad. (P)": "(No existe art. indefinido)",
                 "Nom. Example": "-",
@@ -130,262 +130,262 @@
             },
             {
                 "Sujeto (Nominativo)": "Art. Neg.",
-                "Pronombre (Akkusativ)": "-",
+                "Pronombre (Dativ)": "-",
                 "Trad. Pronombre": "-",
-                "Ejemplo Pronombre (Akkusativ)": "-",
+                "Ejemplo Pronombre (Dativ)": "-",
                 "Trad. Ejemplo": "-",
                 "Base": "kein / keine / kein (Nominativ)",
                 "Trad. Base": "ningún / ninguna / ningún (Nominativ)",
-                "den männlich (akkusativ)": "keinen",
-                "Männlich (M) - Ejemplos con Verbos": "Er nimmt keinen Stuhl.",
-                "Trad. (M)": "Él no toma ninguna silla.",
-                "die weiblich (akkusativ)": "keine",
-                "Weiblich (F) - Ejemplos con Verbos": "Sie kauft keine Banane.",
-                "Trad. (F)": "Ella no compra ninguna banana.",
-                "das neutral (akkusativ)": "kein",
-                "Neutral (N) - Ejemplos con Verbos": "Wir kaufen kein Auto.",
-                "Trad. (N)": "No compramos ningun carro.",
-                "die plural (akkusativ)": "keine",
-                "Plural (P) - Ejemplos con Verbos": "Ich habe keine Brüder.",
-                "Trad. (P)": "No tengo hermanos.",
+                "dem männlich (dativ)": "keinem",
+                "Männlich (M) - Ejemplos con Verbos": "Ich helfe keinem Mann.",
+                "Trad. (M)": "No ayudo a ningún hombre.",
+                "der weiblich (dativ)": "keiner",
+                "Weiblich (F) - Ejemplos con Verbos": "Er dankt keiner Frau.",
+                "Trad. (F)": "Él no agradece a ninguna mujer.",
+                "dem neutral (dativ)": "keinem",
+                "Neutral (N) - Ejemplos con Verbos": "Sie gibt keinem Kind Geld.",
+                "Trad. (N)": "Ella no le da dinero a ningún niño.",
+                "den plural (dativ)": "keinen",
+                "Plural (P) - Ejemplos con Verbos": "Wir helfen keinen Leuten.",
+                "Trad. (P)": "No ayudamos a ninguna gente.",
                 "Nom. Example": "-",
                 "Trad. Nom. Example": "-"
             },
             {
                 "Sujeto (Nominativo)": "Nullartikel",
-                "Pronombre (Akkusativ)": "Nota: Se deja sin artículo para sustantivos incontables, sustantivos masivos y sustantivos plurales sin determinantes.",
+                "Pronombre (Dativ)": "Nota: Se deja sin artículo para sustantivos incontables, sustantivos masivos y sustantivos plurales sin determinantes.",
                 "Trad. Pronombre": "-",
-                "Ejemplo Pronombre (Akkusativ)": "-",
+                "Ejemplo Pronombre (Dativ)": "-",
                 "Trad. Ejemplo": "-",
                 "Base": "∅ (Nominativ)",
                 "Trad. Base": "sin artículo (Nominativ)",
-                "den männlich (akkusativ)": "∅",
-                "Männlich (M) - Ejemplos con Verbos": "Wir trinken Kaffee.",
-                "Trad. (M)": "Bebemos café.",
+                "dem männlich (dativ)": "∅",
+                "Männlich (M) - Ejemplos con Verbos": "Ich trinke Kaffee mit Zucker.",
+                "Trad. (M)": "Bebo café con azúcar.",
                 "Category (M)": "Sustantivo Masivo (Materia)",
-                "Explanation (M)": "Se refiere a la bebida/sustancia Kaffee en general, no a una taza específica.",
-                "die weiblich (akkusativ)": "∅",
-                "Weiblich (F) - Ejemplos con Verbos": "Ich brauche Hilfe.",
-                "Trad. (F)": "Necesito ayuda.",
+                "Explanation (M)": "Zucker (azúcar) es una sustancia incontable que no requiere artículo después de la preposición 'mit'.",
+                "der weiblich (dativ)": "∅",
+                "Weiblich (F) - Ejemplos con Verbos": "Er arbeitet mit Geduld.",
+                "Trad. (F)": "Él trabaja con paciencia.",
                 "Category (F)": "Sustantivo Incontable (Abstracto)",
-                "Explanation (F)": "Hilfe (ayuda) es un concepto inmaterial y no se puede contar.",
-                "das neutral (akkusativ)": "∅",
-                "Neutral (N) - Ejemplos con Verbos": "Er hat Geld.",
-                "Trad. (N)": "Él tiene dinero.",
-                "Category (N)": "Sustantivo Masivo (Materia)",
-                "Explanation (N)": "Geld funciona gramaticalmente como una masa incontable, refiriéndose a la riqueza en general.",
-                "die plural (akkusativ)": "∅",
-                "Plural (P) - Ejemplos con Verbos": "Sie kaufen Äpfel.",
-                "Trad. (P)": "Compran manzanas.",
+                "Explanation (F)": "Geduld (paciencia) es un concepto abstracto e incontable en Dativ después de 'mit'.",
+                "dem neutral (dativ)": "∅",
+                "Neutral (N) - Ejemplos con Verbos": "Sie kommt aus Berlin.",
+                "Trad. (N)": "Ella viene de Berlín.",
+                "Category (N)": "Nombre Propio (Ciudad)",
+                "Explanation (N)": "Los nombres de ciudades no llevan artículo en alemán, incluso después de preposiciones de Dativ como 'aus'.",
+                "den plural (dativ)": "∅",
+                "Plural (P) - Ejemplos con Verbos": "Wir sprechen mit Freunden.",
+                "Trad. (P)": "Hablamos con amigos.",
                 "Category (P)": "Sustantivo Plural Indefinido",
-                "Explanation (P)": "Se refiere a manzanas de forma no específica o a la clase de fruta. El plural no lleva artículo indefinido.",
+                "Explanation (P)": "Se refiere a amigos de forma no específica. El plural sin determinante no lleva artículo en Dativ.",
                 "Nom. Example": "-",
                 "Trad. Nom. Example": "-"
             },
             {
                 "Sujeto (Nominativo)": "ich",
-                "Pronombre (Akkusativ)": "mich",
-                "Trad. Pronombre": "me",
-                "Ejemplo Pronombre (Akkusativ)": "Du liebst mich.",
-                "Trad. Ejemplo": "Tú me quieres.",
+                "Pronombre (Dativ)": "mir",
+                "Trad. Pronombre": "a mí",
+                "Ejemplo Pronombre (Dativ)": "Er gibt mir das Buch.",
+                "Trad. Ejemplo": "Él me da el libro.",
                 "Base": "mein-",
                 "Trad. Base": "mi-",
-                "den männlich (akkusativ)": "meinen",
-                "Männlich (M) - Ejemplos con Verbos": "Ich sehe meinen Bruder.",
-                "Trad. (M)": "Veo a mi hermano.",
-                "die weiblich (akkusativ)": "meine",
-                "Weiblich (F) - Ejemplos con Verbos": "Ich besuche meine Oma heute.",
-                "Trad. (F)": "Visito a mi abuela hoy.",
-                "das neutral (akkusativ)": "mein",
-                "Neutral (N) - Ejemplos con Verbos": "Ich putze mein Zimmer.",
-                "Trad. (N)": "Limpio mi cuarto.",
-                "die plural (akkusativ)": "meine",
-                "Plural (P) - Ejemplos con Verbos": "Ich mag meine Blumen.",
-                "Trad. (P)": "Me gustan mis flores.",
+                "dem männlich (dativ)": "meinem",
+                "Männlich (M) - Ejemplos con Verbos": "Ich helfe meinem Bruder.",
+                "Trad. (M)": "Ayudo a mi hermano.",
+                "der weiblich (dativ)": "meiner",
+                "Weiblich (F) - Ejemplos con Verbos": "Ich danke meiner Oma.",
+                "Trad. (F)": "Agradezco a mi abuela.",
+                "dem neutral (dativ)": "meinem",
+                "Neutral (N) - Ejemplos con Verbos": "Ich gebe meinem Kind Wasser.",
+                "Trad. (N)": "Le doy agua a mi niño.",
+                "den plural (dativ)": "meinen",
+                "Plural (P) - Ejemplos con Verbos": "Ich helfe meinen Eltern.",
+                "Trad. (P)": "Ayudo a mis padres.",
                 "Nom. Example": "Mein Hund",
                 "Trad. Nom. Example": "Mi perro"
             },
             {
                 "Sujeto (Nominativo)": "du",
-                "Pronombre (Akkusativ)": "dich",
-                "Trad. Pronombre": "te",
-                "Ejemplo Pronombre (Akkusativ)": "Ich brauche dich.",
-                "Trad. Ejemplo": "Yo te necesito.",
+                "Pronombre (Dativ)": "dir",
+                "Trad. Pronombre": "a ti",
+                "Ejemplo Pronombre (Dativ)": "Ich helfe dir.",
+                "Trad. Ejemplo": "Te ayudo.",
                 "Base": "dein-",
                 "Trad. Base": "tu-",
-                "den männlich (akkusativ)": "deinen",
-                "Männlich (M) - Ejemplos con Verbos": "Du hast deinen Hund.",
-                "Trad. (M)": "Tienes tu perro.",
-                "die weiblich (akkusativ)": "deine",
-                "Weiblich (F) - Ejemplos con Verbos": "Du schreibst deine Nachricht.",
-                "Trad. (F)": "Escribes tu mensaje.",
-                "das neutral (akkusativ)": "dein",
-                "Neutral (N) - Ejemplos con Verbos": "Du liest dein Buch gern.",
-                "Trad. (N)": "Lees tu libro con gusto.",
-                "die plural (akkusativ)": "deine",
-                "Plural (P) - Ejemplos con Verbos": "Du suchst deine Schlüssel.",
-                "Trad. (P)": "Buscas tus llaves.",
+                "dem männlich (dativ)": "deinem",
+                "Männlich (M) - Ejemplos con Verbos": "Du hilfst deinem Vater.",
+                "Trad. (M)": "Ayudas a tu padre.",
+                "der weiblich (dativ)": "deiner",
+                "Weiblich (F) - Ejemplos con Verbos": "Du dankst deiner Lehrerin.",
+                "Trad. (F)": "Agradeces a tu profesora.",
+                "dem neutral (dativ)": "deinem",
+                "Neutral (N) - Ejemplos con Verbos": "Du gibst deinem Kind Milch.",
+                "Trad. (N)": "Le das leche a tu niño.",
+                "den plural (dativ)": "deinen",
+                "Plural (P) - Ejemplos con Verbos": "Du hilfst deinen Freunden.",
+                "Trad. (P)": "Ayudas a tus amigos.",
                 "Nom. Example": "Dein Hund",
                 "Trad. Nom. Example": "Tu perro"
             },
             {
                 "Sujeto (Nominativo)": "er",
-                "Pronombre (Akkusativ)": "ihn",
-                "Trad. Pronombre": "lo",
-                "Ejemplo Pronombre (Akkusativ)": "Wir kennen ihn.",
-                "Trad. Ejemplo": "Nosotros lo conocemos.",
+                "Pronombre (Dativ)": "ihm",
+                "Trad. Pronombre": "a él",
+                "Ejemplo Pronombre (Dativ)": "Ich gebe ihm das Buch.",
+                "Trad. Ejemplo": "Le doy el libro a él.",
                 "Base": "sein-",
                 "Trad. Base": "su (de él)-",
-                "den männlich (akkusativ)": "seinen",
-                "Männlich (M) - Ejemplos con Verbos": "Er kauft seinen Ball.",
-                "Trad. (M)": "Él compra su pelota.",
-                "die weiblich (akkusativ)": "seine",
-                "Weiblich (F) - Ejemplos con Verbos": "Er sucht seine Mutter.",
-                "Trad. (F)": "Él busca a su madre.",
-                "das neutral (akkusativ)": "sein",
-                "Neutral (N) - Ejemplos con Verbos": "Er hat sein Handy.",
-                "Trad. (N)": "Él tiene su móvil.",
-                "die plural (akkusativ)": "seine",
-                "Plural (P) - Ejemplos con Verbos": "Er sieht seine Freunde.",
-                "Trad. (P)": "Él ve a sus amigos.",
+                "dem männlich (dativ)": "seinem",
+                "Männlich (M) - Ejemplos con Verbos": "Er hilft seinem Freund.",
+                "Trad. (M)": "Él ayuda a su amigo.",
+                "der weiblich (dativ)": "seiner",
+                "Weiblich (F) - Ejemplos con Verbos": "Er dankt seiner Mutter.",
+                "Trad. (F)": "Él agradece a su madre.",
+                "dem neutral (dativ)": "seinem",
+                "Neutral (N) - Ejemplos con Verbos": "Er gibt seinem Hund Futter.",
+                "Trad. (N)": "Él le da comida a su perro.",
+                "den plural (dativ)": "seinen",
+                "Plural (P) - Ejemplos con Verbos": "Er hilft seinen Eltern.",
+                "Trad. (P)": "Él ayuda a sus padres.",
                 "Nom. Example": "Sein Ball",
                 "Trad. Nom. Example": "Su pelota"
             },
             {
                 "Sujeto (Nominativo)": "sie (ella)",
-                "Pronombre (Akkusativ)": "sie",
-                "Trad. Pronombre": "la",
-                "Ejemplo Pronombre (Akkusativ)": "Er fragt sie.",
-                "Trad. Ejemplo": "Él le pregunta a ella.",
+                "Pronombre (Dativ)": "ihr",
+                "Trad. Pronombre": "a ella",
+                "Ejemplo Pronombre (Dativ)": "Ich gebe ihr Blumen.",
+                "Trad. Ejemplo": "Le doy flores a ella.",
                 "Base": "ihr-",
                 "Trad. Base": "su (de ella)-",
-                "den männlich (akkusativ)": "ihren",
-                "Männlich (M) - Ejemplos con Verbos": "Sie liest ihren Roman.",
-                "Trad. (M)": "Ella lee su novela.",
-                "die weiblich (akkusativ)": "ihre",
-                "Weiblich (F) - Ejemplos con Verbos": "Sie kauft ihre Schuhe heute.",
-                "Trad. (F)": "Ella compra sus zapatos hoy.",
-                "das neutral (akkusativ)": "ihr",
-                "Neutral (N) - Ejemplos con Verbos": "Sie putzt ihr Auto.",
-                "Trad. (N)": "Ella limpia su coche.",
-                "die plural (akkusativ)": "ihre",
-                "Plural (P) - Ejemplos con Verbos": "Sie fragt ihre Eltern.",
-                "Trad. (P)": "Ella pregunta a sus padres.",
+                "dem männlich (dativ)": "ihrem",
+                "Männlich (M) - Ejemplos con Verbos": "Sie hilft ihrem Mann.",
+                "Trad. (M)": "Ella ayuda a su marido.",
+                "der weiblich (dativ)": "ihrer",
+                "Weiblich (F) - Ejemplos con Verbos": "Sie dankt ihrer Schwester.",
+                "Trad. (F)": "Ella agradece a su hermana.",
+                "dem neutral (dativ)": "ihrem",
+                "Neutral (N) - Ejemplos con Verbos": "Sie gibt ihrem Baby Milch.",
+                "Trad. (N)": "Ella le da leche a su bebé.",
+                "den plural (dativ)": "ihren",
+                "Plural (P) - Ejemplos con Verbos": "Sie hilft ihren Freunden.",
+                "Trad. (P)": "Ella ayuda a sus amigos.",
                 "Nom. Example": "Ihr Roman",
                 "Trad. Nom. Example": "Su novela"
             },
             {
                 "Sujeto (Nominativo)": "es",
-                "Pronombre (Akkusativ)": "es",
-                "Trad. Pronombre": "lo/la",
-                "Ejemplo Pronombre (Akkusativ)": "Wir haben es.",
-                "Trad. Ejemplo": "Nosotros lo tenemos.",
+                "Pronombre (Dativ)": "ihm",
+                "Trad. Pronombre": "a ello",
+                "Ejemplo Pronombre (Dativ)": "Ich gebe ihm Wasser.",
+                "Trad. Ejemplo": "Le doy agua (al bebé).",
                 "Base": "sein-",
                 "Trad. Base": "su (de ello)-",
-                "den männlich (akkusativ)": "seinen",
-                "Männlich (M) - Ejemplos con Verbos": "Das Baby findet seinen Ball.",
-                "Trad. (M)": "El bebé encuentra su pelota.",
-                "die weiblich (akkusativ)": "seine",
-                "Weiblich (F) - Ejemplos con Verbos": "Das Baby sucht seine Mutter.",
-                "Trad. (F)": "El bebé busca a su madre.",
-                "das neutral (akkusativ)": "sein",
-                "Neutral (N) - Ejemplos con Verbos": "Das Baby findet sein Buch.",
-                "Trad. (N)": "El bebé encuentra su libro.",
-                "die plural (akkusativ)": "seine",
-                "Plural (P) - Ejemplos con Verbos": "Das Baby fragt seine Eltern.",
-                "Trad. (P)": "El bebé pregunta a sus padres.",
+                "dem männlich (dativ)": "seinem",
+                "Männlich (M) - Ejemplos con Verbos": "Das Kind hilft seinem Vater.",
+                "Trad. (M)": "El niño ayuda a su padre.",
+                "der weiblich (dativ)": "seiner",
+                "Weiblich (F) - Ejemplos con Verbos": "Das Baby dankt seiner Mutter.",
+                "Trad. (F)": "El bebé agradece a su madre.",
+                "dem neutral (dativ)": "seinem",
+                "Neutral (N) - Ejemplos con Verbos": "Das Kind gibt seinem Haustier Wasser.",
+                "Trad. (N)": "El niño le da agua a su mascota.",
+                "den plural (dativ)": "seinen",
+                "Plural (P) - Ejemplos con Verbos": "Das Kind hilft seinen Eltern.",
+                "Trad. (P)": "El niño ayuda a sus padres.",
                 "Nom. Example": "Sein Buch",
                 "Trad. Nom. Example": "Su libro"
             },
             {
                 "Sujeto (Nominativo)": "wir",
-                "Pronombre (Akkusativ)": "uns",
-                "Trad. Pronombre": "nos",
-                "Ejemplo Pronombre (Akkusativ)": "Er kennt uns.",
-                "Trad. Ejemplo": "Él nos conoce.",
+                "Pronombre (Dativ)": "uns",
+                "Trad. Pronombre": "a nosotros",
+                "Ejemplo Pronombre (Dativ)": "Er hilft uns.",
+                "Trad. Ejemplo": "Él nos ayuda.",
                 "Base": "unser-",
                 "Trad. Base": "nuestro/a-",
-                "den männlich (akkusativ)": "unseren",
-                "Männlich (M) - Ejemplos con Verbos": "Wir brauchen unseren Schlüssel jetzt.",
-                "Trad. (M)": "Necesitamos nuestra llave ahora.",
-                "die weiblich (akkusativ)": "unsere",
-                "Weiblich (F) - Ejemplos con Verbos": "Wir besuchen unsere Tante morgen.",
-                "Trad. (F)": "Visitamos a nuestra tía mañana.",
-                "das neutral (akkusativ)": "unser",
-                "Neutral (N) - Ejemplos con Verbos": "Wir kaufen unser Haus bald.",
-                "Trad. (N)": "Compramos nuestra casa pronto.",
-                "die plural (akkusativ)": "unsere",
-                "Plural (P) - Ejemplos con Verbos": "Wir hören unsere Lieder.",
-                "Trad. (P)": "Escuchamos nuestras canciones.",
+                "dem männlich (dativ)": "unserem",
+                "Männlich (M) - Ejemplos con Verbos": "Wir helfen unserem Lehrer.",
+                "Trad. (M)": "Ayudamos a nuestro profesor.",
+                "der weiblich (dativ)": "unserer",
+                "Weiblich (F) - Ejemplos con Verbos": "Wir danken unserer Tante.",
+                "Trad. (F)": "Agradecemos a nuestra tía.",
+                "dem neutral (dativ)": "unserem",
+                "Neutral (N) - Ejemplos con Verbos": "Wir geben unserem Kind ein Buch.",
+                "Trad. (N)": "Le damos un libro a nuestro niño.",
+                "den plural (dativ)": "unseren",
+                "Plural (P) - Ejemplos con Verbos": "Wir helfen unseren Nachbarn.",
+                "Trad. (P)": "Ayudamos a nuestros vecinos.",
                 "Nom. Example": "Unser Schlüssel",
                 "Trad. Nom. Example": "Nuestra llave"
             },
             {
                 "Sujeto (Nominativo)": "ihr (vosotros)",
-                "Pronombre (Akkusativ)": "euch",
-                "Trad. Pronombre": "os",
-                "Ejemplo Pronombre (Akkusativ)": "Ich suche euch.",
-                "Trad. Ejemplo": "Yo os busco.",
+                "Pronombre (Dativ)": "euch",
+                "Trad. Pronombre": "a vosotros",
+                "Ejemplo Pronombre (Dativ)": "Ich helfe euch.",
+                "Trad. Ejemplo": "Os ayudo.",
                 "Base": "euer- / eur-",
                 "Trad. Base": "vuestro/a-",
-                "den männlich (akkusativ)": "euren",
-                "Männlich (M) - Ejemplos con Verbos": "Ihr esst euren Käse.",
-                "Trad. (M)": "Coméis vuestro queso.",
-                "die weiblich (akkusativ)": "eure",
-                "Weiblich (F) - Ejemplos con Verbos": "Ihr sucht eure Tasche.",
-                "Trad. (F)": "Buscáis vuestra bolsa.",
-                "das neutral (akkusativ)": "euer",
-                "Neutral (N) - Ejemplos con Verbos": "Ihr esst euer Brot.",
-                "Trad. (N)": "Coméis vuestro pan.",
-                "die plural (akkusativ)": "eure",
-                "Plural (P) - Ejemplos con Verbos": "Ihr liebt eure Kinder.",
-                "Trad. (P)": "Amáis a vuestros hijos.",
+                "dem männlich (dativ)": "eurem",
+                "Männlich (M) - Ejemplos con Verbos": "Ihr helft eurem Vater.",
+                "Trad. (M)": "Ayudáis a vuestro padre.",
+                "der weiblich (dativ)": "eurer",
+                "Weiblich (F) - Ejemplos con Verbos": "Ihr dankt eurer Mutter.",
+                "Trad. (F)": "Agradecéis a vuestra madre.",
+                "dem neutral (dativ)": "eurem",
+                "Neutral (N) - Ejemplos con Verbos": "Ihr gebt eurem Kind Essen.",
+                "Trad. (N)": "Le dais comida a vuestro niño.",
+                "den plural (dativ)": "euren",
+                "Plural (P) - Ejemplos con Verbos": "Ihr helft euren Freunden.",
+                "Trad. (P)": "Ayudáis a vuestros amigos.",
                 "Nom. Example": "Euer Käse",
                 "Trad. Nom. Example": "Vuestro queso"
             },
             {
                 "Sujeto (Nominativo)": "sie (ellos)",
-                "Pronombre (Akkusativ)": "sie",
-                "Trad. Pronombre": "los/las",
-                "Ejemplo Pronombre (Akkusativ)": "Ich sehe sie.",
-                "Trad. Ejemplo": "Yo los/las veo.",
+                "Pronombre (Dativ)": "ihnen",
+                "Trad. Pronombre": "a ellos/ellas",
+                "Ejemplo Pronombre (Dativ)": "Ich gebe ihnen Geld.",
+                "Trad. Ejemplo": "Les doy dinero.",
                 "Base": "ihr-",
                 "Trad. Base": "su (de ellos)-",
-                "den männlich (akkusativ)": "ihren",
-                "Männlich (M) - Ejemplos con Verbos": "Sie trinken ihren Tee.",
-                "Trad. (M)": "Ellos beben su té.",
-                "die weiblich (akkusativ)": "ihre",
-                "Weiblich (F) - Ejemplos con Verbos": "Sie machen ihre Arbeit gut.",
-                "Trad. (F)": "Ellos hacen su trabajo bien.",
-                "das neutral (akkusativ)": "ihr",
-                "Neutral (N) - Ejemplos con Verbos": "Sie brauchen ihr Auto.",
-                "Trad. (N)": "Ellos necesitan su coche.",
-                "die plural (akkusativ)": "ihre",
-                "Plural (P) - Ejemplos con Verbos": "Sie besuchen ihre Freunde.",
-                "Trad. (P)": "Ellos visitan a sus amigos.",
+                "dem männlich (dativ)": "ihrem",
+                "Männlich (M) - Ejemplos con Verbos": "Sie helfen ihrem Lehrer.",
+                "Trad. (M)": "Ellos ayudan a su profesor.",
+                "der weiblich (dativ)": "ihrer",
+                "Weiblich (F) - Ejemplos con Verbos": "Sie danken ihrer Lehrerin.",
+                "Trad. (F)": "Ellos agradecen a su profesora.",
+                "dem neutral (dativ)": "ihrem",
+                "Neutral (N) - Ejemplos con Verbos": "Sie geben ihrem Kind Milch.",
+                "Trad. (N)": "Ellos le dan leche a su niño.",
+                "den plural (dativ)": "ihren",
+                "Plural (P) - Ejemplos con Verbos": "Sie helfen ihren Eltern.",
+                "Trad. (P)": "Ellos ayudan a sus padres.",
                 "Nom. Example": "Ihr Tee",
                 "Trad. Nom. Example": "Su té"
             },
             {
                 "Sujeto (Nominativo)": "Sie (formal)",
-                "Pronombre (Akkusativ)": "Sie",
-                "Trad. Pronombre": "lo/la/le",
-                "Ejemplo Pronombre (Akkusativ)": "Ich frage Sie.",
-                "Trad. Ejemplo": "Yo le pregunto.",
+                "Pronombre (Dativ)": "Ihnen",
+                "Trad. Pronombre": "a usted/es",
+                "Ejemplo Pronombre (Dativ)": "Ich helfe Ihnen.",
+                "Trad. Ejemplo": "Le ayudo a usted.",
                 "Base": "Ihr-",
                 "Trad. Base": "su (formal)-",
-                "den männlich (akkusativ)": "Ihren",
-                "Männlich (M) - Ejemplos con Verbos": "Sie tragen Ihren Anzug heute.",
-                "Trad. (M)": "Usted lleva su traje hoy.",
-                "die weiblich (akkusativ)": "Ihre",
-                "Weiblich (F) - Ejemplos con Verbos": "Sie besuchen Ihre Frau morgen.",
-                "Trad. (F)": "Usted visita a su esposa mañana.",
-                "das neutral (akkusativ)": "Ihr",
-                "Neutral (N) - Ejemplos con Verbos": "Sie verkaufen Ihr Haus bald.",
-                "Trad. (N)": "Usted vende su casa pronto.",
-                "die plural (akkusativ)": "Ihre",
-                "Plural (P) - Ejemplos con Verbos": "Sie treffen Ihre Freunde heute.",
-                "Trad. (P)": "Usted se reúne con sus amigos hoy.",
+                "dem männlich (dativ)": "Ihrem",
+                "Männlich (M) - Ejemplos con Verbos": "Sie danken Ihrem Chef.",
+                "Trad. (M)": "Usted agradece a su jefe.",
+                "der weiblich (dativ)": "Ihrer",
+                "Weiblich (F) - Ejemplos con Verbos": "Sie helfen Ihrer Kollegin.",
+                "Trad. (F)": "Usted ayuda a su colega.",
+                "dem neutral (dativ)": "Ihrem",
+                "Neutral (N) - Ejemplos con Verbos": "Sie geben Ihrem Kind Geld.",
+                "Trad. (N)": "Usted le da dinero a su niño.",
+                "den plural (dativ)": "Ihren",
+                "Plural (P) - Ejemplos con Verbos": "Sie helfen Ihren Mitarbeitern.",
+                "Trad. (P)": "Usted ayuda a sus empleados.",
                 "Nom. Example": "Ihr Anzug",
                 "Trad. Nom. Example": "Su traje"
             }
@@ -443,18 +443,18 @@
         }
 
         const translationToMergeKeys = [
-            "Trad. Pronombre", "Ejemplo Pronombre (Akkusativ)", "Trad. Ejemplo", "Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)",
+            "Trad. Pronombre", "Ejemplo Pronombre (Dativ)", "Trad. Ejemplo", "Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)",
             "Männlich (M) - Ejemplos con Verbos", "Weiblich (F) - Ejemplos con Verbos", "Neutral (N) - Ejemplos con Verbos", "Plural (P) - Ejemplos con Verbos", "Trad. Base"
         ];
 
         const mergedDeterminerKeys = [
-            { key: "den männlich (akkusativ)", example: "Männlich (M) - Ejemplos con Verbos", translation: "Trad. (M)", color: 'bg-red-200' },
-            { key: "die weiblich (akkusativ)", example: "Weiblich (F) - Ejemplos con Verbos", translation: "Trad. (F)", color: 'bg-red-300' },
-            { key: "das neutral (akkusativ)", example: "Neutral (N) - Ejemplos con Verbos", translation: "Trad. (N)", color: 'bg-red-400' },
-            { key: "die plural (akkusativ)", example: "Plural (P) - Ejemplos con Verbos", translation: "Trad. (P)", color: 'bg-red-500' }
+            { key: "dem männlich (dativ)", example: "Männlich (M) - Ejemplos con Verbos", translation: "Trad. (M)", color: 'bg-green-200' },
+            { key: "der weiblich (dativ)", example: "Weiblich (F) - Ejemplos con Verbos", translation: "Trad. (F)", color: 'bg-green-300' },
+            { key: "dem neutral (dativ)", example: "Neutral (N) - Ejemplos con Verbos", translation: "Trad. (N)", color: 'bg-green-400' },
+            { key: "den plural (dativ)", example: "Plural (P) - Ejemplos con Verbos", translation: "Trad. (P)", color: 'bg-green-500' }
         ];
 
-        const determinerKeys = ["den männlich (akkusativ)", "die weiblich (akkusativ)", "das neutral (akkusativ)", "die plural (akkusativ)"];
+        const determinerKeys = ["dem männlich (dativ)", "der weiblich (dativ)", "dem neutral (dativ)", "den plural (dativ)"];
 
         let translationsVisible = false;
         function toggleAllTranslations() {
@@ -472,42 +472,42 @@
             html += '<thead class="bg-gray-100">';
             html += '<tr>';
             html += `<th colspan="2" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300">Pronombres Personales</th>`;
-            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300 bg-red-100">Base/Posesivo</th>`;
-            html += `<th colspan="12" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-red-100">Akkusativ Case Determiners (Artículos y Posesivos por Género)</th>`;
+            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300 bg-green-100">Base/Posesivo</th>`;
+            html += `<th colspan="12" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-green-100">Dativ Case Determiners (Artículos y Posesivos por Género)</th>`;
             html += '</tr>';
             html += '<tr>';
             html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE;"><span class="small-pronoun-header">PRON (NOM)</span></th>`;
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE;"><span class="small-pronoun-header">PRON (AKK)</span></th>`;
-            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200">Base/Posesivo</th>`;
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE;"><span class="small-pronoun-header">PRON (DAT)</span></th>`;
+            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-green-200">Base/Posesivo</th>`;
             const genders = [
-                { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1 },
-                { title: 'Weiblich (F)', color: 'bg-red-300', colspan: 1 },
-                { title: 'Neutral (N)', color: 'bg-red-400', colspan: 1 },
-                { title: 'Plural (P)', color: 'bg-red-500', colspan: 1 }
+                { title: 'Männlich (M)', color: 'bg-green-200', colspan: 1 },
+                { title: 'Weiblich (F)', color: 'bg-green-300', colspan: 1 },
+                { title: 'Neutral (N)', color: 'bg-green-400', colspan: 1 },
+                { title: 'Plural (P)', color: 'bg-green-500', colspan: 1 }
             ];
             genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}">${g.title}</th>`; });
             html += '</tr>';
-            const fullHeadersForRender = ["Sujeto (Nominativo)", "Pronombre (Akkusativ)", "Base", "den männlich (akkusativ)", "die weiblich (akkusativ)", "das neutral (akkusativ)", "die plural (akkusativ)"];
-            const visibleHeaders = ["Pron. (Nom.)","Pron. (Akk.)","Base/Posesivo","den","die","das","die"];
+            const fullHeadersForRender = ["Sujeto (Nominativo)", "Pronombre (Dativ)", "Base", "dem männlich (dativ)", "der weiblich (dativ)", "dem neutral (dativ)", "den plural (dativ)"];
+            const visibleHeaders = ["Pron. (Nom.)","Pron. (Dat.)","Base/Posesivo","dem","der","dem","den"];
             html += '<tr>';
             fullHeadersForRender.forEach((header, index) => {
                 let cellClass = 'bg-gray-50 text-gray-700 font-medium text-xs border-b-2 border-gray-200';
                 if (header === "Sujeto (Nominativo)") cellClass = 'text-gray-700 font-bold text-sm';
-                if (header === "Pronombre (Akkusativ)") cellClass = 'text-gray-700 font-bold text-sm';
+                if (header === "Pronombre (Dativ)") cellClass = 'text-gray-700 font-bold text-sm';
                 if (header === "Sujeto (Nominativo)") cellClass += ' style="background-color: #E0F2FE;"';
-                if (header === "Pronombre (Akkusativ)") cellClass += ' style="background-color: #CCE5FE;"';
-                if (header === "Base") cellClass = 'bg-red-200 text-gray-700 font-bold text-sm';
-                if (header === "den männlich (akkusativ)") cellClass = 'bg-red-200 text-gray-900 font-bold text-sm wrap-cell';
-                if (header === "die weiblich (akkusativ)") cellClass = 'bg-red-300 text-gray-900 font-bold text-sm wrap-cell';
-                if (header === "das neutral (akkusativ)") cellClass = 'bg-red-400 text-gray-900 font-bold text-sm wrap-cell';
-                if (header === "die plural (akkusativ)") cellClass = 'bg-red-500 text-gray-900 font-bold text-sm wrap-cell';
+                if (header === "Pronombre (Dativ)") cellClass += ' style="background-color: #CCE5FE;"';
+                if (header === "Base") cellClass = 'bg-green-200 text-gray-700 font-bold text-sm';
+                if (header === "dem männlich (dativ)") cellClass = 'bg-green-200 text-gray-900 font-bold text-sm wrap-cell';
+                if (header === "der weiblich (dativ)") cellClass = 'bg-green-300 text-gray-900 font-bold text-sm wrap-cell';
+                if (header === "dem neutral (dativ)") cellClass = 'bg-green-400 text-gray-900 font-bold text-sm wrap-cell';
+                if (header === "den plural (dativ)") cellClass = 'bg-green-500 text-gray-900 font-bold text-sm wrap-cell';
                 const finalTitle = visibleHeaders[index];
                 html += `<th class="table-cell ${cellClass} text-left uppercase">${finalTitle}</th>`;
             });
             html += '</tr>';
             html += '</thead>';
 
-            const keysToSkip = ["Trad. Pronombre", "Ejemplo Pronombre (Akkusativ)", "Trad. Ejemplo", "Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M) - Ejemplos con Verbos", "Weiblich (F) - Ejemplos con Verbos", "Neutral (N) - Ejemplos con Verbos", "Plural (P) - Ejemplos con Verbos", "Trad. Base", "Category (M)", "Category (F)", "Category (N)", "Category (P)", "Explanation (M)", "Explanation (F)", "Explanation (N)", "Explanation (P)"];
+            const keysToSkip = ["Trad. Pronombre", "Ejemplo Pronombre (Dativ)", "Trad. Ejemplo", "Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M) - Ejemplos con Verbos", "Weiblich (F) - Ejemplos con Verbos", "Neutral (N) - Ejemplos con Verbos", "Plural (P) - Ejemplos con Verbos", "Trad. Base", "Category (M)", "Category (F)", "Category (N)", "Category (P)", "Explanation (M)", "Explanation (F)", "Explanation (N)", "Explanation (P)"];
 
             html += '<tbody class="divide-y divide-gray-200">';
             tableData.forEach((row) => {
@@ -518,7 +518,7 @@
                 const rowClass = isArticleRow ? 'article-row' : 'possessive-row';
                 html += `<tr class="${rowClass} hover:bg-opacity-75">`;
                 const headers = [
-                    "Sujeto (Nominativo)", "Pronombre (Akkusativ)", "Trad. Pronombre", "Ejemplo Pronombre (Akkusativ)", "Trad. Ejemplo", "Base", "Trad. Base", "den männlich (akkusativ)", "Männlich (M) - Ejemplos con Verbos", "Trad. (M)", "die weiblich (akkusativ)", "Weiblich (F) - Ejemplos con Verbos", "Trad. (F)", "das neutral (akkusativ)", "Neutral (N) - Ejemplos con Verbos", "Trad. (N)", "die plural (akkusativ)", "Plural (P) - Ejemplos con Verbos", "Trad. (P)"
+                    "Sujeto (Nominativo)", "Pronombre (Dativ)", "Trad. Pronombre", "Ejemplo Pronombre (Dativ)", "Trad. Ejemplo", "Base", "Trad. Base", "dem männlich (dativ)", "Männlich (M) - Ejemplos con Verbos", "Trad. (M)", "der weiblich (dativ)", "Weiblich (F) - Ejemplos con Verbos", "Trad. (F)", "dem neutral (dativ)", "Neutral (N) - Ejemplos con Verbos", "Trad. (N)", "den plural (dativ)", "Plural (P) - Ejemplos con Verbos", "Trad. (P)"
                 ];
                 headers.forEach((key) => {
                     const value = row[key];
@@ -527,10 +527,10 @@
                     let contentHtml = value;
                     let styleAttr = '';
 
-                    if (key === "Pronombre (Akkusativ)") {
-                        const pronoun = row["Pronombre (Akkusativ)"];
+                    if (key === "Pronombre (Dativ)") {
+                        const pronoun = row["Pronombre (Dativ)"];
                         let tradPronoun = row["Trad. Pronombre"];
-                        const example = row["Ejemplo Pronombre (Akkusativ)"];
+                        const example = row["Ejemplo Pronombre (Dativ)"];
                         const tradExample = row["Trad. Ejemplo"];
                         tradPronoun = tradPronoun.replace(' (formal)', '').replace(' (neutro)', '');
                         cellClass += ' merged-pronoun-cell wrap-cell align-top cursor-pointer';
@@ -618,7 +618,7 @@
                                 <div class="stacked-content-line text-xs italic text-gray-500" style="margin-top: 0.2rem;">${spanishTranslation}</div>`;
                             contentHtml = alignedHtml;
                         }
-                        cellClass += ' merged-possessive-cell bg-red-100';
+                        cellClass += ' merged-possessive-cell bg-green-100';
                     }
                     else {
                         if (key === "Sujeto (Nominativo)") {
