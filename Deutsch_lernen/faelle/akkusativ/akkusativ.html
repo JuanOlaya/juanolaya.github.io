@@ -45,6 +45,18 @@
         .subject-study-cell { min-height: 5.5rem; padding: 0.4rem 0.6rem; cursor: pointer; transition: background-color 0.15s ease-in-out; }
         .force-open .subject-translation-hidden, .force-open .article-hidden-part, .force-open .pronoun-hidden-part, .force-open .spanish-translation, .force-open .nominativ-translation-hidden { max-height: 10rem !important; opacity: 1 !important; margin-top: 0.1rem !important; }
         .small-pronoun-header { font-size: 0.7rem; line-height: 1; }
+
+        /* Modal styles */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background-color: white; border-radius: 1rem; padding: 2rem; max-width: 600px; width: 90%; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); position: relative; max-height: 80vh; overflow-y: auto; }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem; cursor: pointer; color: #6b7280; transition: color 0.15s ease-in-out; }
+        .modal-close:hover { color: #1f2937; }
+        .modal-title { font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem; }
+        .modal-section { margin-bottom: 1.5rem; }
+        .modal-label { font-size: 0.875rem; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .modal-text { font-size: 1rem; color: #1f2937; line-height: 1.5; }
+        .category-tag { display: inline-block; padding: 0.25rem 0.5rem; background-color: #dbeafe; color: #1e40af; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 500; margin-top: 0.25rem; }
     </style>
 </head>
 <body class="p-4 sm:p-8">
@@ -57,6 +69,14 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-4 5a1 1 0 100 2h2a1 1 0 100-2h-2z" clip-rule="evenodd"/></svg>
                 Mostrar todas las traducciones
             </button>
+        </div>
+    </div>
+
+    <!-- Modal for Nullartikel examples -->
+    <div id="nullartikel-modal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
         </div>
     </div>
 
@@ -142,15 +162,23 @@
                 "den männlich (akkusativ)": "∅",
                 "Männlich (M) - Ejemplos con Verbos": "Wir trinken Kaffee.",
                 "Trad. (M)": "Bebemos café.",
+                "Category (M)": "Sustantivo Masivo (Materia)",
+                "Explanation (M)": "Se refiere a la bebida/sustancia Kaffee en general, no a una taza específica.",
                 "die weiblich (akkusativ)": "∅",
                 "Weiblich (F) - Ejemplos con Verbos": "Ich brauche Hilfe.",
                 "Trad. (F)": "Necesito ayuda.",
+                "Category (F)": "Sustantivo Incontable (Abstracto)",
+                "Explanation (F)": "Hilfe (ayuda) es un concepto inmaterial y no se puede contar.",
                 "das neutral (akkusativ)": "∅",
                 "Neutral (N) - Ejemplos con Verbos": "Er hat Geld.",
                 "Trad. (N)": "Él tiene dinero.",
+                "Category (N)": "Sustantivo Masivo (Materia)",
+                "Explanation (N)": "Geld funciona gramaticalmente como una masa incontable, refiriéndose a la riqueza en general.",
                 "die plural (akkusativ)": "∅",
                 "Plural (P) - Ejemplos con Verbos": "Sie kaufen Äpfel.",
-                "Trad. (P)": "Ellos compran manzanas.",
+                "Trad. (P)": "Compran manzanas.",
+                "Category (P)": "Sustantivo Plural Indefinido",
+                "Explanation (P)": "Se refiere a manzanas de forma no específica o a la clase de fruta. El plural no lleva artículo indefinido.",
                 "Nom. Example": "-",
                 "Trad. Nom. Example": "-"
             },
@@ -479,7 +507,7 @@
             html += '</tr>';
             html += '</thead>';
 
-            const keysToSkip = ["Trad. Pronombre", "Ejemplo Pronombre (Akkusativ)", "Trad. Ejemplo", "Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M) - Ejemplos con Verbos", "Weiblich (F) - Ejemplos con Verbos", "Neutral (N) - Ejemplos con Verbos", "Plural (P) - Ejemplos con Verbos", "Trad. Base"];
+            const keysToSkip = ["Trad. Pronombre", "Ejemplo Pronombre (Akkusativ)", "Trad. Ejemplo", "Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M) - Ejemplos con Verbos", "Weiblich (F) - Ejemplos con Verbos", "Neutral (N) - Ejemplos con Verbos", "Plural (P) - Ejemplos con Verbos", "Trad. Base", "Category (M)", "Category (F)", "Category (N)", "Category (P)", "Explanation (M)", "Explanation (F)", "Explanation (N)", "Explanation (P)"];
 
             html += '<tbody class="divide-y divide-gray-200">';
             tableData.forEach((row) => {
@@ -531,16 +559,31 @@
                         const determiner = row[mergedData.key];
                         const exampleValue = row[mergedData.example];
                         const tradExampleValue = row[mergedData.translation];
+                        const genderSuffix = key.includes('männlich') ? '(M)' : key.includes('weiblich') ? '(F)' : key.includes('neutral') ? '(N)' : '(P)';
+                        const categoryValue = row[`Category ${genderSuffix}`] || '';
+                        const explanationValue = row[`Explanation ${genderSuffix}`] || '';
                         const exampleTextToBold = determiner;
                         let styledExampleValue = exampleValue.replace(new RegExp(`\\b(${exampleTextToBold})\\b`), (m) => `<b>${m}</b>`);
                         cellClass += ` merged-gender-cell wrap-cell align-top ${mergedData.color}`;
+
+                        const isNullartikel = row["Sujeto (Nominativo)"] === "Nullartikel";
+
                         if (exampleValue && exampleValue !== '-' && tradExampleValue && tradExampleValue !== '-') {
-                            contentHtml = `
-                                <span class="akkusativ-determiner">${determiner}</span>
-                                <div class="study-cell cursor-pointer p-0 pt-1" onclick="this.classList.toggle('active')">
-                                    <span class="german-phrase whitespace-nowrap">${styledExampleValue}</span>
-                                    <span class="spanish-translation">${tradExampleValue}</span>
-                                </div>`;
+                            if (isNullartikel && categoryValue) {
+                                contentHtml = `
+                                    <span class="akkusativ-determiner">${determiner}</span>
+                                    <div class="study-cell cursor-pointer p-0 pt-1" onclick="openModal('${exampleValue.replace(/'/g, "\\'")}', '${tradExampleValue.replace(/'/g, "\\'")}', '${categoryValue.replace(/'/g, "\\'")}', '${explanationValue.replace(/'/g, "\\'")}')" style="cursor: pointer;">
+                                        <span class="german-phrase whitespace-nowrap">${styledExampleValue}</span>
+                                        <span class="spanish-translation">${tradExampleValue}<br><span class="category-tag">${categoryValue}</span></span>
+                                    </div>`;
+                            } else {
+                                contentHtml = `
+                                    <span class="akkusativ-determiner">${determiner}</span>
+                                    <div class="study-cell cursor-pointer p-0 pt-1" onclick="this.classList.toggle('active')">
+                                        <span class="german-phrase whitespace-nowrap">${styledExampleValue}</span>
+                                        <span class="spanish-translation">${tradExampleValue}</span>
+                                    </div>`;
+                            }
                         } else {
                             contentHtml = `<span class="akkusativ-determiner">${determiner}</span>${exampleValue ? '<br>' + exampleValue : ''}`;
                         }
@@ -600,6 +643,50 @@
             html += '</tbody></table>';
             container.innerHTML = html;
         }
+
+        function openModal(german, spanish, category, explanation) {
+            const modal = document.getElementById('nullartikel-modal');
+            const modalBody = document.getElementById('modal-body');
+
+            modalBody.innerHTML = `
+                <h2 class="modal-title">Nullartikel - Ejemplo Detallado</h2>
+
+                <div class="modal-section">
+                    <div class="modal-label">Alemán (Sin Artículo)</div>
+                    <div class="modal-text" style="font-weight: 600; color: #1e40af;">${german}</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">Español (Traducción Directa)</div>
+                    <div class="modal-text">${spanish}</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">Categoría</div>
+                    <div class="modal-text"><span class="category-tag" style="font-size: 0.875rem; padding: 0.375rem 0.75rem;">${category}</span></div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">Explicación</div>
+                    <div class="modal-text">${explanation}</div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        function closeModal(event) {
+            if (!event || event.target.classList.contains('modal-overlay') || event.target.classList.contains('modal-close')) {
+                document.getElementById('nullartikel-modal').classList.remove('active');
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
 
         window.onload = renderTable;
     </script>
