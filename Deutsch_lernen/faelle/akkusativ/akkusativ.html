@@ -592,7 +592,7 @@
                         const baseValue = formatMultiLine(row["Base"], false);
                         const germanLines = baseValue.split('<br>');
                         let alignedHtml = '';
-                        const isArticleRow = row["Sujeto (Nominativo)"].startsWith('Art.') || row["Sujeto (Nominativo)"].startsWith('Articulo');
+                        const isArticleRow = row["Sujeto (Nominativo)"].startsWith('Art.') || row["Sujeto (Nominativo)"].startsWith('Articulo') || row["Sujeto (Nominativo)"] === 'Nullartikel';
                         if (isArticleRow) {
                             const tradBaseValue = formatMultiLine(row["Trad. Base"], true);
                             const spanishLines = tradBaseValue.split('<br>');
@@ -609,6 +609,7 @@
                                 }
                             }
                             contentHtml = `<div class="w-full" onclick=\"this.classList.toggle('active')\">${germanDisplay}</div>`;
+                            cellClass += ' merged-possessive-cell bg-red-50';
                         } else {
                             const possessiveRoot = germanLines[0];
                             const tradBaseValue = formatMultiLine(row["Trad. Base"], true);
@@ -617,8 +618,8 @@
                                 <div class="stacked-content-line"><span class="base-article-german">${possessiveRoot}</span></div>
                                 <div class="stacked-content-line text-xs italic text-gray-500" style="margin-top: 0.2rem;">${spanishTranslation}</div>`;
                             contentHtml = alignedHtml;
+                            cellClass += ' merged-possessive-cell bg-red-100';
                         }
-                        cellClass += ' merged-possessive-cell bg-red-100';
                     }
                     else {
                         if (key === "Sujeto (Nominativo)") {
