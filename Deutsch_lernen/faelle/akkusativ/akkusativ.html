@@ -620,6 +620,11 @@
                         let styledExampleValue = exampleValue.replace(new RegExp(`\\b(${exampleTextToBold})\\b`), (m) => `<b>${m}</b>`);
                         cellClass += ` merged-gender-cell wrap-cell align-top ${mergedData.color}`;
 
+                        // Add white/light text for dark red backgrounds (Neutral and Plural columns) - only for examples
+                        const isDarkRed = mergedData.color === 'bg-red-400' || mergedData.color === 'bg-red-500';
+                        const textColorClass = isDarkRed ? 'text-white' : '';
+                        const translationColorClass = isDarkRed ? 'text-gray-100' : '';
+
                         const isNullartikel = row["Sujeto (Nominativo)"] === "Nullartikel";
 
                         if (exampleValue && exampleValue !== '-' && tradExampleValue && tradExampleValue !== '-') {
@@ -627,15 +632,15 @@
                                 contentHtml = `
                                     <span class="akkusativ-determiner">${determiner}</span>
                                     <div class="study-cell cursor-pointer p-0 pt-1" onclick="openModal('${exampleValue.replace(/'/g, "\\'")}', '${tradExampleValue.replace(/'/g, "\\'")}', '${categoryValue.replace(/'/g, "\\'")}', '${explanationValue.replace(/'/g, "\\'")}')" style="cursor: pointer;">
-                                        <span class="german-phrase whitespace-nowrap">${styledExampleValue}</span>
-                                        <span class="spanish-translation">${tradExampleValue}<br><span class="category-tag">${categoryValue}</span></span>
+                                        <span class="german-phrase whitespace-nowrap ${textColorClass}">${styledExampleValue}</span>
+                                        <span class="spanish-translation ${translationColorClass}">${tradExampleValue}<br><span class="category-tag">${categoryValue}</span></span>
                                     </div>`;
                             } else {
                                 contentHtml = `
                                     <span class="akkusativ-determiner">${determiner}</span>
                                     <div class="study-cell cursor-pointer p-0 pt-1" onclick="this.classList.toggle('active')">
-                                        <span class="german-phrase whitespace-nowrap">${styledExampleValue}</span>
-                                        <span class="spanish-translation">${tradExampleValue}</span>
+                                        <span class="german-phrase whitespace-nowrap ${textColorClass}">${styledExampleValue}</span>
+                                        <span class="spanish-translation ${translationColorClass}">${tradExampleValue}</span>
                                     </div>`;
                             }
                         } else {
