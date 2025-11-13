@@ -380,14 +380,17 @@
         function toggleAllTranslations() {
             const studyWrappers = document.querySelectorAll('.subject-study-cell, .article-study-cell-wrapper, .study-cell');
             const button = document.getElementById('toggle-all-button');
-            const table = document.getElementById('table-container');
+            const articlesTable = document.getElementById('articles-table-container');
+            const pronounsTable = document.getElementById('pronouns-table-container');
             translationsVisible = !translationsVisible;
             if (translationsVisible) {
-                table.classList.add('force-open');
+                articlesTable.classList.add('force-open');
+                pronounsTable.classList.add('force-open');
                 button.textContent = 'Ocultar todas las traducciones';
             }
             else {
-                table.classList.remove('force-open');
+                articlesTable.classList.remove('force-open');
+                pronounsTable.classList.remove('force-open');
                 button.textContent = 'Mostrar todas las traducciones';
                 studyWrappers.forEach(w => w.classList.remove('active'));
             }
@@ -546,6 +549,110 @@
             container.innerHTML = html;
         }
 
+        function renderPronounsTable() {
+            const container = document.getElementById('pronouns-table-container');
+            let html = '<table class="divide-y divide-gray-300">';
+            html += '<thead class="bg-gray-100">';
+            html += '<tr>';
+            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300">Sujeto</th>`;
+            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300 bg-blue-100">Base/Posesivo</th>`;
+            html += `<th colspan="4" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-blue-100">Nominativ Case (Artículos y Posesivos por Género)</th>`;
+            html += '</tr>';
+            html += '<tr>';
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-gray-50">Sujeto (Nom.)</th>`;
+            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-blue-200">Base/Posesivo</th>`;
+            const genders = [
+                { title: 'Männlich (M)', color: 'bg-blue-200', colspan: 1 },
+                { title: 'Weiblich (F)', color: 'bg-blue-300', colspan: 1 },
+                { title: 'Neutral (N)', color: 'bg-blue-400', colspan: 1 },
+                { title: 'Plural (P)', color: 'bg-blue-500', colspan: 1 }
+            ];
+            genders.forEach(g => {
+                html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}">${g.title}</th>`;
+            });
+            html += '</tr>';
+            html += '</thead>';
+
+            const keysToSkip = ["Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M)", "Weiblich (F)", "Neutral (N)", "Plural (P)", "Trad. Base", "Category (M)", "Category (F)", "Category (N)", "Category (P)", "Explanation (M)", "Explanation (F)", "Explanation (N)", "Explanation (P)", "Sujeto Display"];
+
+            html += '<tbody class="divide-y divide-gray-200">';
+            // Filter only pronoun rows
+            const pronounsData = tableData.filter(row =>
+                !row["Sujeto (Nominativo)"].startsWith('Art.') &&
+                !row["Sujeto (Nominativo)"].startsWith('Articulo') &&
+                row["Sujeto (Nominativo)"] !== "Nullartikel"
+            );
+            pronounsData.forEach((row) => {
+                const rowClass = 'possessive-row';
+                html += `<tr class="${rowClass} hover:bg-opacity-75">`;
+
+                const headers = [
+                    "Sujeto (Nominativo)", "Base", "Trad. Base",
+                    "der männlich (nominativ)", "Männlich (M)", "Trad. (M)",
+                    "die weiblich (nominativ)", "Weiblich (F)", "Trad. (F)",
+                    "das neutral (nominativ)", "Neutral (N)", "Trad. (N)",
+                    "die plural (nominativ)", "Plural (P)", "Trad. (P)"
+                ];
+
+                headers.forEach((key) => {
+                    const value = row[key];
+                    if (keysToSkip.includes(key)) return;
+                    let cellClass = 'table-cell text-sm text-gray-800 text-left';
+                    let contentHtml = value;
+
+                    if (determinerKeys.includes(key)) {
+                        const mergedData = mergedDeterminerKeys.find(d => d.key === key);
+                        const determiner = row[mergedData.key];
+                        const exampleValue = row[mergedData.example];
+                        const tradExampleValue = row[mergedData.translation];
+
+                        const exampleTextToBold = determiner;
+                        let styledExampleValue = exampleValue.replace(new RegExp(`\\b(${exampleTextToBold})\\b`), (m) => `<b>${m}</b>`);
+                        cellClass += ` merged-gender-cell wrap-cell align-top ${mergedData.color}`;
+
+                        const isDarkBlue = mergedData.color === 'bg-blue-300' || mergedData.color === 'bg-blue-400' || mergedData.color === 'bg-blue-500';
+                        const textColorClass = isDarkBlue ? 'text-white' : '';
+                        const translationColorClass = isDarkBlue ? 'text-white' : '';
+
+                        if (exampleValue && exampleValue !== '-' && tradExampleValue && tradExampleValue !== '-') {
+                            contentHtml = `
+                                <span class="nominativ-determiner">${determiner}</span>
+                                <div class="study-cell cursor-pointer p-0 pt-1" onclick="this.classList.toggle('active')">
+                                    <span class="german-phrase whitespace-nowrap ${textColorClass}">${styledExampleValue}</span>
+                                    <span class="spanish-translation ${translationColorClass}">${tradExampleValue}</span>
+                                </div>`;
+                        } else {
+                            contentHtml = `<span class="nominativ-determiner">${determiner}</span>${exampleValue ? '<br>' + exampleValue : ''}`;
+                        }
+                    }
+                    else if (key === "Base") {
+                        const baseValue = formatMultiLine(row["Base"], false);
+                        const germanLines = baseValue.split('<br>');
+                        const possessiveRoot = germanLines[0];
+                        const tradBaseValue = formatMultiLine(row["Trad. Base"], true);
+                        const spanishTranslation = tradBaseValue.split('<br>')[0].trim();
+                        let alignedHtml = `
+                            <div class="stacked-content-line"><span class="base-article-german">${possessiveRoot}</span></div>
+                            <div class="stacked-content-line text-xs italic text-black" style="margin-top: 0.2rem;">${spanishTranslation}</div>`;
+                        contentHtml = alignedHtml;
+                        cellClass += ' merged-possessive-cell bg-blue-100';
+                    }
+                    else {
+                        if (key === "Sujeto (Nominativo)") {
+                            const displayValue = row["Sujeto Display"] || value;
+                            contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(value)}</div>`;
+                            cellClass += ' wrap-cell align-top p-0';
+                            cellClass += ' bg-blue-25';
+                        }
+                    }
+                    html += `<td class="${cellClass}">${contentHtml}</td>`;
+                });
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
         function openModal(german, spanish, category, explanation) {
             const modal = document.getElementById('nullartikel-modal');
             const modalBody = document.getElementById('modal-body');
@@ -590,7 +697,7 @@
             }
         });
 
-        window.onload = renderTable;
+        window.onload = renderTables;
     </script>
 </body>
 </html>

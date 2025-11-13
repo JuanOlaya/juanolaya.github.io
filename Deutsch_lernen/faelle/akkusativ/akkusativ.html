@@ -64,7 +64,15 @@
     <div class="max-w-7xl mx-auto">
         <h1 class="text-3xl font-bold text-gray-800 mb-2">German Akkusativ Case: Articles, Pronouns, and Possessives</h1>
         <p class="text-gray-600 mb-6">El Akkusativ responde a "¿Qué?" o "¿A quién?". Se usa para el <strong>objeto directo</strong> de la oración - la persona o cosa que recibe directamente la acción del verbo. También se usa después de ciertas preposiciones (<a href="#" onclick="openPrepositionsModal(event)" class="text-red-600 underline hover:text-red-800">durch, für, gegen, ohne, um, bis, entlang</a>).</p>
-        <div id="table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200"></div>
+
+        <!-- Articles Table -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-3 mt-8">Artículos (Articles)</h2>
+        <div id="articles-table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200 mb-8"></div>
+
+        <!-- Pronouns Table -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-3 mt-8">Pronombres Posesivos (Possessive Pronouns)</h2>
+        <div id="pronouns-table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200"></div>
+
         <div class="mt-6 flex justify-end">
             <button id="toggle-all-button" onclick="toggleAllTranslations()" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-4 5a1 1 0 100 2h2a1 1 0 100-2h-2z" clip-rule="evenodd"/></svg>
@@ -78,6 +86,52 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="modal-close" onclick="closeModal()">&times;</span>
             <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Modal for Nullartikel Info -->
+    <div id="nullartikel-info-modal" class="modal-overlay" onclick="closeNullartikelInfoModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeNullartikelInfoModal()">&times;</span>
+            <div id="nullartikel-info-body">
+                <h2 class="modal-title" style="color: #991b1b;">Nullartikel (Sin Artículo)</h2>
+
+                <div class="modal-section">
+                    <div class="modal-label">¿Qué es el Nullartikel?</div>
+                    <div class="modal-text">El Nullartikel (artículo cero) se usa cuando NO se coloca ningún artículo antes del sustantivo. Es común en alemán en ciertos contextos específicos.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">1. Sustantivos Incontables</div>
+                    <div class="modal-text">Sustantivos que no se pueden contar (abstractos, materias, líquidos):</div>
+                    <div class="modal-text"><strong>Ich trinke Kaffee.</strong> - Bebo café.</div>
+                    <div class="modal-text"><strong>Er braucht Hilfe.</strong> - Él necesita ayuda.</div>
+                    <div class="modal-text"><strong>Sie hat Geld.</strong> - Ella tiene dinero.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">2. Sustantivos Masivos</div>
+                    <div class="modal-text">Materias o sustancias sin forma definida:</div>
+                    <div class="modal-text"><strong>Ich kaufe Brot.</strong> - Compro pan.</div>
+                    <div class="modal-text"><strong>Wir essen Reis.</strong> - Comemos arroz.</div>
+                    <div class="modal-text"><strong>Er trinkt Wasser.</strong> - Él bebe agua.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">3. Sustantivos Plurales (sin especificar)</div>
+                    <div class="modal-text">Cuando hablamos de cosas en general, no específicas:</div>
+                    <div class="modal-text"><strong>Kinder spielen gern.</strong> - A los niños les gusta jugar.</div>
+                    <div class="modal-text"><strong>Ich habe Freunde.</strong> - Tengo amigos.</div>
+                    <div class="modal-text"><strong>Sie kauft Äpfel.</strong> - Ella compra manzanas.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">Otros usos del Nullartikel:</div>
+                    <div class="modal-text">• Profesiones: <strong>Er ist Lehrer.</strong> (Él es profesor)</div>
+                    <div class="modal-text">• Nacionalidades: <strong>Sie ist Deutsche.</strong> (Ella es alemana)</div>
+                    <div class="modal-text">• Idiomas: <strong>Ich lerne Deutsch.</strong> (Aprendo alemán)</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -211,7 +265,7 @@
             },
             {
                 "Sujeto (Nominativo)": "Nullartikel",
-                "Pronombre (Akkusativ)": "Nota: Se deja sin artículo para sustantivos incontables, sustantivos masivos y sustantivos plurales sin determinantes.",
+                "Pronombre (Akkusativ)": "Sustantivos:<br>• incontables<br>• masivos<br>• plurales",
                 "Trad. Pronombre": "-",
                 "Ejemplo Pronombre (Akkusativ)": "-",
                 "Trad. Ejemplo": "-",
@@ -518,25 +572,39 @@
         function toggleAllTranslations() {
             const studyWrappers = document.querySelectorAll('.subject-study-cell, .article-study-cell-wrapper, .merged-pronoun-cell > .w-full, .study-cell');
             const button = document.getElementById('toggle-all-button');
-            const table = document.getElementById('table-container');
+            const articlesTable = document.getElementById('articles-table-container');
+            const pronounsTable = document.getElementById('pronouns-table-container');
             translationsVisible = !translationsVisible;
-            if (translationsVisible) { table.classList.add('force-open'); button.textContent = 'Ocultar todas las traducciones'; }
-            else { table.classList.remove('force-open'); button.textContent = 'Mostrar todas las traducciones'; studyWrappers.forEach(w => w.classList.remove('active')); }
+            if (translationsVisible) {
+                articlesTable.classList.add('force-open');
+                pronounsTable.classList.add('force-open');
+                button.textContent = 'Ocultar todas las traducciones';
+            }
+            else {
+                articlesTable.classList.remove('force-open');
+                pronounsTable.classList.remove('force-open');
+                button.textContent = 'Mostrar todas las traducciones';
+                studyWrappers.forEach(w => w.classList.remove('active'));
+            }
         }
 
-        function renderTable() {
-            const container = document.getElementById('table-container');
+        function renderTables() {
+            renderArticlesTable();
+            renderPronounsTable();
+        }
+
+        function renderArticlesTable() {
+            const container = document.getElementById('articles-table-container');
             let html = '<table class="divide-y divide-gray-300">';
             html += '<thead class="bg-gray-100">';
             html += '<tr>';
-            html += `<th colspan="2" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300">Pronombres Personales</th>`;
-            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300 bg-red-100">Base/Posesivo</th>`;
-            html += `<th colspan="12" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-red-100">Akkusativ Case Determiners (Artículos y Posesivos por Género)</th>`;
+            html += `<th colspan="2" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300">Artículos</th>`;
+            html += `<th colspan="10" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-red-100">Akkusativ Case Determiners</th>`;
             html += '</tr>';
             html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE;"><span class="small-pronoun-header">PRON (NOM)</span></th>`;
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE;"><span class="small-pronoun-header">PRON (AKK)</span></th>`;
-            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200">Base/Posesivo</th>`;
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE;"><span class="small-pronoun-header">Sujeto</span></th>`;
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE;"><span class="small-pronoun-header">-</span></th>`;
+            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200">Base</th>`;
             const genders = [
                 { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1 },
                 { title: 'Weiblich (F)', color: 'bg-red-300', colspan: 1 },
@@ -544,39 +612,25 @@
                 { title: 'Plural (P)', color: 'bg-red-500', colspan: 1 }
             ];
             genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}">${g.title}</th>`; });
-            html += '</tr>';
-            const fullHeadersForRender = ["Sujeto (Nominativo)", "Pronombre (Akkusativ)", "Base", "den männlich (akkusativ)", "die weiblich (akkusativ)", "das neutral (akkusativ)", "die plural (akkusativ)"];
-            const visibleHeaders = ["Pron. (Nom.)","Pron. (Akk.)","Base/Posesivo","den","die","das","die"];
-            html += '<tr>';
-            fullHeadersForRender.forEach((header, index) => {
-                let cellClass = 'bg-gray-50 text-gray-700 font-medium text-xs border-b-2 border-gray-200';
-                if (header === "Sujeto (Nominativo)") cellClass = 'text-gray-700 font-bold text-sm';
-                if (header === "Pronombre (Akkusativ)") cellClass = 'text-gray-700 font-bold text-sm';
-                if (header === "Sujeto (Nominativo)") cellClass += ' style="background-color: #E0F2FE;"';
-                if (header === "Pronombre (Akkusativ)") cellClass += ' style="background-color: #CCE5FE;"';
-                if (header === "Base") cellClass = 'bg-red-200 text-gray-700 font-bold text-sm';
-                if (header === "den männlich (akkusativ)") cellClass = 'bg-red-200 text-gray-900 font-bold text-sm wrap-cell';
-                if (header === "die weiblich (akkusativ)") cellClass = 'bg-red-300 text-gray-900 font-bold text-sm wrap-cell';
-                if (header === "das neutral (akkusativ)") cellClass = 'bg-red-400 text-gray-900 font-bold text-sm wrap-cell';
-                if (header === "die plural (akkusativ)") cellClass = 'bg-red-500 text-gray-900 font-bold text-sm wrap-cell';
-                const finalTitle = visibleHeaders[index];
-                html += `<th class="table-cell ${cellClass} text-left uppercase">${finalTitle}</th>`;
-            });
+            // Add 5 empty headers to match pronoun table column count (Base + 4 genders for Nominativ section)
+            for (let i = 0; i < 5; i++) {
+                html += `<th class="table-cell" style="border: none; background: transparent;"></th>`;
+            }
             html += '</tr>';
             html += '</thead>';
 
             const keysToSkip = ["Trad. Pronombre", "Ejemplo Pronombre (Akkusativ)", "Trad. Ejemplo", "Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M) - Ejemplos con Verbos", "Weiblich (F) - Ejemplos con Verbos", "Neutral (N) - Ejemplos con Verbos", "Plural (P) - Ejemplos con Verbos", "Trad. Base", "Category (M)", "Category (F)", "Category (N)", "Category (P)", "Explanation (M)", "Explanation (F)", "Explanation (N)", "Explanation (P)", "Sujeto Display"];
 
             html += '<tbody class="divide-y divide-gray-200">';
-            tableData.forEach((row) => {
-                if (row["Sujeto (Nominativo)"] === "es") { row["Sujeto (Nominativo)"] = "es (neutro)"; }
-                const isArticleRow = row["Sujeto (Nominativo)"].startsWith('Art.') ||
-                                     row["Sujeto (Nominativo)"].startsWith('Articulo') ||
-                                     row["Sujeto (Nominativo)"] === "Nullartikel";
-                const rowClass = isArticleRow ? 'article-row' : 'possessive-row';
-                const isSeparatorRow = row["Sujeto (Nominativo)"] === "ich";
-                const separatorClass = isSeparatorRow ? ' separator-row' : '';
-                html += `<tr class="${rowClass}${separatorClass} hover:bg-opacity-75">`;
+            // Filter only article rows
+            const articlesData = tableData.filter(row =>
+                row["Sujeto (Nominativo)"].startsWith('Art.') ||
+                row["Sujeto (Nominativo)"].startsWith('Articulo') ||
+                row["Sujeto (Nominativo)"] === "Nullartikel"
+            );
+            articlesData.forEach((row) => {
+                const rowClass = 'article-row';
+                html += `<tr class="${rowClass} hover:bg-opacity-75">`;
                 const headers = [
                     "Sujeto (Nominativo)", "Pronombre (Akkusativ)", "Trad. Pronombre", "Ejemplo Pronombre (Akkusativ)", "Trad. Ejemplo", "Base", "Trad. Base", "den männlich (akkusativ)", "Männlich (M) - Ejemplos con Verbos", "Trad. (M)", "die weiblich (akkusativ)", "Weiblich (F) - Ejemplos con Verbos", "Trad. (F)", "das neutral (akkusativ)", "Neutral (N) - Ejemplos con Verbos", "Trad. (N)", "die plural (akkusativ)", "Plural (P) - Ejemplos con Verbos", "Trad. (P)"
                 ];
@@ -595,8 +649,8 @@
                         tradPronoun = tradPronoun.replace(' (formal)', '').replace(' (neutro)', '');
                         cellClass += ' merged-pronoun-cell wrap-cell align-top cursor-pointer';
                         if (pronoun === '-') { contentHtml = '-'; cellClass = 'table-cell text-sm text-gray-800 text-left bg-gray-200'; }
-                        else if (pronoun.startsWith('Nota:')) {
-                            contentHtml = `<div class="text-xs italic text-gray-600 p-2" style="white-space: normal; line-height: 1.4;">${pronoun}</div>`;
+                        else if (pronoun.includes('Sustantivos')) {
+                            contentHtml = `<div class="text-xs text-gray-800 p-2" style="white-space: normal; line-height: 1.6;">${pronoun}<br><a href="#" onclick="openNullartikelInfoModal(event); return false;" class="text-blue-600 underline hover:text-blue-800 mt-1 inline-block">Ver más información</a></div>`;
                             cellClass = 'table-cell text-sm text-gray-800 text-left bg-yellow-50';
                         }
                         else {
@@ -702,6 +756,128 @@
                     }
                     html += `<td class="${cellClass}"${styleAttr}>${contentHtml}</td>`;
                 });
+                // Add 5 empty cells to match pronoun table column count
+                for (let i = 0; i < 5; i++) {
+                    html += `<td style="border: none; background: transparent;"></td>`;
+                }
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        function renderPronounsTable() {
+            const container = document.getElementById('pronouns-table-container');
+            let html = '<table class="divide-y divide-gray-300">';
+            html += '<thead class="bg-gray-100">';
+            html += '<tr>';
+            html += `<th colspan="2" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300">Pronombres Personales</th>`;
+            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300 bg-red-100">Base/Posesivo</th>`;
+            html += `<th colspan="12" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-red-100">Akkusativ Case Determiners (Artículos y Posesivos por Género)</th>`;
+            html += '</tr>';
+            html += '<tr>';
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE;"><span class="small-pronoun-header">PRON (NOM)</span></th>`;
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE;"><span class="small-pronoun-header">PRON (AKK)</span></th>`;
+            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200">Base/Posesivo</th>`;
+            const genders = [
+                { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1 },
+                { title: 'Weiblich (F)', color: 'bg-red-300', colspan: 1 },
+                { title: 'Neutral (N)', color: 'bg-red-400', colspan: 1 },
+                { title: 'Plural (P)', color: 'bg-red-500', colspan: 1 }
+            ];
+            genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}">${g.title}</th>`; });
+            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200">Base/Posesivo</th>`;
+            genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}">${g.title}</th>`; });
+            html += '</tr>';
+            html += '</thead>';
+
+            const keysToSkip = ["Trad. Pronombre", "Ejemplo Pronombre (Akkusativ)", "Trad. Ejemplo", "Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M) - Ejemplos con Verbos", "Weiblich (F) - Ejemplos con Verbos", "Neutral (N) - Ejemplos con Verbos", "Plural (P) - Ejemplos con Verbos", "Trad. Base", "Category (M)", "Category (F)", "Category (N)", "Category (P)", "Explanation (M)", "Explanation (F)", "Explanation (N)", "Explanation (P)", "Sujeto Display"];
+
+            html += '<tbody class="divide-y divide-gray-200">';
+            // Filter only pronoun rows
+            const pronounsData = tableData.filter(row =>
+                !row["Sujeto (Nominativo)"].startsWith('Art.') &&
+                !row["Sujeto (Nominativo)"].startsWith('Articulo') &&
+                row["Sujeto (Nominativo)"] !== "Nullartikel"
+            );
+            pronounsData.forEach((row) => {
+                if (row["Sujeto (Nominativo)"] === "es") { row["Sujeto (Nominativo)"] = "es (neutro)"; }
+                const rowClass = 'possessive-row';
+                html += `<tr class="${rowClass} hover:bg-opacity-75">`;
+                const headers = [
+                    "Sujeto (Nominativo)", "Pronombre (Akkusativ)", "Trad. Pronombre", "Ejemplo Pronombre (Akkusativ)", "Trad. Ejemplo", "Base", "Trad. Base", "den männlich (akkusativ)", "Männlich (M) - Ejemplos con Verbos", "Trad. (M)", "die weiblich (akkusativ)", "Weiblich (F) - Ejemplos con Verbos", "Trad. (F)", "das neutral (akkusativ)", "Neutral (N) - Ejemplos con Verbos", "Trad. (N)", "die plural (akkusativ)", "Plural (P) - Ejemplos con Verbos", "Trad. (P)"
+                ];
+                headers.forEach((key) => {
+                    const value = row[key];
+                    if (keysToSkip.includes(key)) return;
+                    let cellClass = 'table-cell text-sm text-gray-800 text-left';
+                    let contentHtml = value;
+                    let styleAttr = '';
+
+                    if (key === "Pronombre (Akkusativ)") {
+                        const pronoun = row["Pronombre (Akkusativ)"];
+                        let tradPronoun = row["Trad. Pronombre"];
+                        const example = row["Ejemplo Pronombre (Akkusativ)"];
+                        const tradExample = row["Trad. Ejemplo"];
+                        tradPronoun = tradPronoun.replace(' (formal)', '').replace(' (neutro)', '');
+                        cellClass += ' merged-pronoun-cell wrap-cell align-top cursor-pointer';
+                        const exampleTextToBold = pronoun;
+                        let styledExample = example.replace(new RegExp(`\\b(${exampleTextToBold})\\b`), (m) => `<b>${m}</b>`);
+                        contentHtml = `
+                            <div class="w-full" onclick="this.classList.toggle('active')">
+                                <div class="stacked-content-line"><span class="akkusativ-pronoun-visible">${pronoun}</span></div>
+                                <div class="stacked-content-line text-xs italic text-black" style="margin-top: 0.2rem;">${tradPronoun}</div>
+                                <div class="pronoun-hidden-part">
+                                    <div class="text-black" style="white-space: nowrap;">${styledExample}</div>
+                                    <div class="text-black italic">${tradExample}</div>
+                                </div>
+                            </div>`;
+                        styleAttr = ' style="background-color: #CCE5FE;"';
+                    }
+                    else if (determinerKeys.includes(key)) {
+                        const mergedData = mergedDeterminerKeys.find(d => d.key === key);
+                        const determiner = row[mergedData.key];
+                        const exampleValue = row[mergedData.example];
+                        const tradExampleValue = row[mergedData.translation];
+                        const exampleTextToBold = determiner;
+                        let styledExampleValue = exampleValue.replace(new RegExp(`\\b(${exampleTextToBold})\\b`), (m) => `<b>${m}</b>`);
+                        cellClass += ` merged-gender-cell wrap-cell align-top ${mergedData.color}`;
+                        const isDarkRed = mergedData.color === 'bg-red-300' || mergedData.color === 'bg-red-400' || mergedData.color === 'bg-red-500';
+                        const textColorClass = isDarkRed ? 'text-white' : '';
+                        const translationColorClass = isDarkRed ? 'text-white' : '';
+                        if (exampleValue && exampleValue !== '-' && tradExampleValue && tradExampleValue !== '-') {
+                            contentHtml = `
+                                <span class="akkusativ-determiner">${determiner}</span>
+                                <div class="study-cell cursor-pointer p-0 pt-1" onclick="this.classList.toggle('active')">
+                                    <span class="german-phrase whitespace-nowrap ${textColorClass}">${styledExampleValue}</span>
+                                    <span class="spanish-translation ${translationColorClass}">${tradExampleValue}</span>
+                                </div>`;
+                        } else {
+                            contentHtml = `<span class="akkusativ-determiner">${determiner}</span>${exampleValue ? '<br>' + exampleValue : ''}`;
+                        }
+                    }
+                    else if (key === "Base") {
+                        const baseValue = formatMultiLine(row["Base"], false);
+                        const germanLines = baseValue.split('<br>');
+                        const possessiveRoot = germanLines[0];
+                        const tradBaseValue = formatMultiLine(row["Trad. Base"], true);
+                        const spanishTranslation = tradBaseValue.split('<br>')[0].trim();
+                        let alignedHtml = `
+                            <div class="stacked-content-line"><span class="base-article-german">${possessiveRoot}</span></div>
+                            <div class="stacked-content-line text-xs italic text-black" style="margin-top: 0.2rem;">${spanishTranslation}</div>`;
+                        contentHtml = alignedHtml;
+                        cellClass += ' merged-possessive-cell bg-red-100';
+                    }
+                    else {
+                        if (key === "Sujeto (Nominativo)") {
+                            const displayValue = row["Sujeto Display"] || value;
+                            contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(value)}</div>`;
+                            cellClass += ' wrap-cell align-top p-0';
+                            styleAttr = ' style="background-color: #E0F2FE;"';
+                        }
+                    }
+                    html += `<td class="${cellClass}"${styleAttr}>${contentHtml}</td>`;
+                });
                 html += '</tr>';
             });
             html += '</tbody></table>';
@@ -745,6 +921,17 @@
             }
         }
 
+        function openNullartikelInfoModal(event) {
+            event.preventDefault();
+            document.getElementById('nullartikel-info-modal').classList.add('active');
+        }
+
+        function closeNullartikelInfoModal(event) {
+            if (!event || event.target.classList.contains('modal-overlay') || event.target.classList.contains('modal-close')) {
+                document.getElementById('nullartikel-info-modal').classList.remove('active');
+            }
+        }
+
         function openPrepositionsModal(event) {
             event.preventDefault();
             document.getElementById('prepositions-modal').classList.add('active');
@@ -760,11 +947,12 @@
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeModal();
+                closeNullartikelInfoModal();
                 closePrepositionsModal();
             }
         });
 
-        window.onload = renderTable;
+        window.onload = renderTables;
     </script>
 </body>
 </html>
