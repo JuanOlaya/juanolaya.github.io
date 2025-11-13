@@ -8,8 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f7f7f7; }
-        #table-container { max-width: calc(100vw - 4rem); overflow-x: hidden; }
-        table { width: 100%; table-layout: auto; }
+        #table-container { width: fit-content; min-width: 100%; overflow-x: visible; }
+        table { width: auto; table-layout: auto; }
         td, th { overflow: visible; }
         .table-cell { padding: 0.25rem 0.3rem; white-space: nowrap; vertical-align: top; font-size: 0.8rem; }
         .wrap-cell { white-space: normal; }
@@ -19,27 +19,27 @@
         .merged-possessive-cell { padding: 0.4rem 0.6rem; white-space: normal; vertical-align: top; font-size: 0.9rem; line-height: 1.2; min-height: 5.5rem; }
         .merged-pronoun-cell { padding: 0.3rem 0.4rem; min-height: 5rem; display: flex; flex-direction: column; justify-content: center; white-space: normal; }
         .stacked-content-line { margin-bottom: 2px; line-height: 1.2; }
-        .german-phrase, .article-german-lines { color: #1f2937; font-size: 0.8rem; line-height: 1.2; }
-        .base-article-german { background-color: #f0fdf4; display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: #166534; }
-        .akkusativ-pronoun-visible { font-weight: 700; color: #1D4ED8; background-color: #f0fdfa; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; margin-right: 0.5rem; }
-        .trad-pronoun-visible { font-weight: 400; color: #4b5563; font-style: italic; font-size: 0.9rem; }
-        .pronoun-hidden-part { color: #4b5563; font-size: 0.8rem; opacity: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; }
+        .german-phrase, .article-german-lines { color: #1f2937; font-size: 1.0rem; line-height: 1.2; }
+        .base-article-german { background-color: #f0fdf4; display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: #166534; font-size: 1.0rem; }
+        .akkusativ-pronoun-visible { font-weight: 700; color: #1D4ED8; background-color: #f0fdfa; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
+        .trad-pronoun-visible { font-weight: 400; color: #000000; font-style: italic; font-size: 0.9rem; }
+        .pronoun-hidden-part { color: #000000; font-size: 0.8rem; opacity: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; }
         .merged-pronoun-cell:hover .pronoun-hidden-part, .merged-pronoun-cell.active .pronoun-hidden-part { max-height: 8rem; opacity: 1; margin-top: 0.2rem; }
-        .article-hidden-part { color: #4b5563; font-style: italic; font-size: 0.8rem; opacity: 0; transition: opacity 0.3s ease-out; line-height: 1.2; white-space: normal; margin-left: 0.25rem; }
-        .spanish-translation { color: #4b5563; font-style: italic; font-size: 0.8rem; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; margin-top: 0.1rem; }
+        .article-hidden-part { color: #000000; font-style: italic; font-size: 0.8rem; opacity: 0; transition: opacity 0.3s ease-out; line-height: 1.2; white-space: normal; margin-left: 0.25rem; }
+        .spanish-translation { color: #000000; font-style: italic; font-size: 0.8rem; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; margin-top: 0.1rem; }
         .study-cell:hover .spanish-translation, .study-cell.active .spanish-translation { max-height: 10rem; opacity: 1; }
         .article-study-cell-wrapper:hover .article-hidden-part, .article-study-cell-wrapper.active .article-hidden-part { opacity: 1; }
         .subject-study-cell:hover .subject-translation-hidden, .subject-study-cell.active .subject-translation-hidden { max-height: 5rem; opacity: 1; }
         .article-study-cell-wrapper { cursor: pointer; padding: 0.4rem 0.6rem; transition: background-color 0.15s ease-in-out; min-height: 5.5rem; display: flex; flex-direction: column; justify-content: center; }
         .article-study-cell-wrapper:hover, .article-study-cell-wrapper.active { background-color: #e5e5e5; }
         .article-study-cell-wrapper .stacked-translation-line { display: block; text-align: left; }
-        .pronunciation-hint { font-size: 0.8rem; color: #4b5563; font-weight: 500; margin-top: 0.1rem; }
-        .pronunciation-hint.subject-translation-hidden { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
-        .subject-spanish-translation { font-size: 0.8rem; color: #4b5563; font-style: italic; margin-top: 0.1rem; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
-        .subject-parenthesis-italic { font-size: 0.8rem; color: #4b5563; font-style: italic; margin-top: 0.1rem; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
+        .pronunciation-hint { font-size: 0.8rem; color: #000000; font-weight: 500; display: inline; }
+        .pronunciation-hint.subject-translation-hidden { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; display: inline; }
+        .subject-spanish-translation { font-size: 0.8rem; color: #000000; font-style: italic; margin-top: 0.1rem; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
+        .subject-parenthesis-italic { font-size: 0.8rem; color: #000000; font-style: italic; margin-top: 0.1rem; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
         .nominativ-translation-hidden { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
         .possessive-study-wrapper:hover .nominativ-translation-hidden, .possessive-study-wrapper.active .nominativ-translation-hidden { max-height: 5rem; opacity: 1; }
-        .akkusativ-determiner { font-weight: 700; color: #166534; background-color: #f0fdf4; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; }
+        .akkusativ-determiner { font-weight: 700; color: #166534; background-color: #f0fdf4; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
         .article-row { background-color: #f7f7f7; }
         .possessive-row { background-color: #e0f2fe; }
         .subject-study-cell { min-height: 5.5rem; padding: 0.4rem 0.6rem; cursor: pointer; transition: background-color 0.15s ease-in-out; }
@@ -62,7 +62,7 @@
 </head>
 <body class="p-4 sm:p-8">
     <div class="max-w-7xl mx-auto">
-        <h1 class="text-3xl font-bold text-gray-800 mb-2">German Dativ Case: Articles, Pronouns, and Possessives (A1–A2)</h1>
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">German Dativ Case: Articles, Pronouns, and Possessives</h1>
         <p class="text-gray-600 mb-6">El Dativ responde a "¿A quién?" o "¿Con quién?". Se usa para el <strong>objeto indirecto</strong> - la persona que recibe indirectamente la acción. También se usa después de ciertas preposiciones (<a href="#" onclick="openPrepositionsModal(event)" class="text-green-700 underline hover:text-green-900">mit, nach, aus, zu, von, bei, seit, ab, gegenüber</a>).</p>
         <div id="table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200"></div>
         <div class="mt-6 flex justify-end">
@@ -492,21 +492,21 @@
             let formattedText = '';
             if (spanishTranslationMap[baseText]) {
                 formattedText += `<span class="akkusativ-pronoun-visible">${baseText}</span>`;
-                if (simpleSpanishTranslation) {
-                    formattedText += `<br><span class="text-xs italic text-gray-500" style="margin-top: 0.2rem;">${simpleSpanishTranslation}</span>`;
-                }
                 if (pronunciation) {
-                    formattedText += `<br><span class="pronunciation-hint subject-translation-hidden">${pronunciation}</span>`;
+                    formattedText += `<span class="pronunciation-hint subject-translation-hidden">→${pronunciation}</span>`;
+                }
+                if (simpleSpanishTranslation) {
+                    formattedText += `<br><span class="text-xs italic text-black" style="margin-top: 0.2rem;">${simpleSpanishTranslation}</span>`;
                 }
             } else {
                 formattedText += `<span class="akkusativ-pronoun-visible">${baseText}</span>`;
+                if (pronunciation) {
+                    formattedText += `<span class="pronunciation-hint subject-translation-hidden">→${pronunciation}</span>`;
+                }
                 if (parenthesisMatch) {
                     let parenthesisContent = parenthesisMatch[1];
                     if (parenthesisContent === 'formal') { parenthesisContent = 'Usted / Ustedes'; }
-                    formattedText += `<br><span class="text-xs italic text-gray-500" style="margin-top: 0.2rem;">${parenthesisContent}</span>`;
-                }
-                if (pronunciation) {
-                    formattedText += `<br><span class="pronunciation-hint subject-translation-hidden">${pronunciation}</span>`;
+                    formattedText += `<br><span class="text-xs italic text-black" style="margin-top: 0.2rem;">${parenthesisContent}</span>`;
                 }
             }
             return formattedText;
@@ -617,10 +617,10 @@
                             contentHtml = `
                                 <div class="w-full" onclick="this.classList.toggle('active')">
                                     <div class="stacked-content-line"><span class="akkusativ-pronoun-visible">${pronoun}</span></div>
-                                    <div class="stacked-content-line text-xs italic text-gray-500" style="margin-top: 0.2rem;">${tradPronoun}</div>
+                                    <div class="stacked-content-line text-xs italic text-black" style="margin-top: 0.2rem;">${tradPronoun}</div>
                                     <div class="pronoun-hidden-part">
-                                        <div class="text-gray-700" style="white-space: nowrap;">${styledExample}</div>
-                                        <div class="text-gray-500 italic">${tradExample}</div>
+                                        <div class="text-black" style="white-space: nowrap;">${styledExample}</div>
+                                        <div class="text-black italic">${tradExample}</div>
                                     </div>
                                 </div>`;
                         }
@@ -638,10 +638,10 @@
                         let styledExampleValue = exampleValue.replace(new RegExp(`\\b(${exampleTextToBold})\\b`), (m) => `<b>${m}</b>`);
                         cellClass += ` merged-gender-cell wrap-cell align-top ${mergedData.color}`;
 
-                        // Add white/light text for dark green background (only Plural column) - only for examples
-                        const isDarkGreen = mergedData.color === 'bg-green-500';
+                        // Add white/light text for dark green backgrounds (Weiblich, Neutral and Plural columns) - for examples and translations
+                        const isDarkGreen = mergedData.color === 'bg-green-300' || mergedData.color === 'bg-green-400' || mergedData.color === 'bg-green-500';
                         const textColorClass = isDarkGreen ? 'text-white' : '';
-                        const translationColorClass = isDarkGreen ? 'text-gray-100' : '';
+                        const translationColorClass = isDarkGreen ? 'text-white' : '';
 
                         const isNullartikel = row["Sujeto (Nominativo)"] === "Nullartikel";
 
@@ -693,7 +693,7 @@
                             const spanishTranslation = tradBaseValue.split('<br>')[0].trim();
                             alignedHtml = `
                                 <div class="stacked-content-line"><span class="base-article-german">${possessiveRoot}</span></div>
-                                <div class="stacked-content-line text-xs italic text-gray-500" style="margin-top: 0.2rem;">${spanishTranslation}</div>`;
+                                <div class="stacked-content-line text-xs italic text-black" style="margin-top: 0.2rem;">${spanishTranslation}</div>`;
                             contentHtml = alignedHtml;
                             cellClass += ' merged-possessive-cell bg-green-100';
                         }
