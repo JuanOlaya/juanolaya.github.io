@@ -9,9 +9,10 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f7f7f7; }
         #table-container { width: fit-content; min-width: 100%; overflow-x: visible; }
-        table { width: auto; table-layout: auto; }
+        table { width: 100%; table-layout: fixed; }
         td, th { overflow: visible; }
         .table-cell { padding: 0.25rem 0.3rem; white-space: nowrap; vertical-align: top; font-size: 0.8rem; }
+        .german-phrase { white-space: normal !important; }
         .wrap-cell { white-space: normal; }
         .study-cell { position: relative; display: flex; flex-direction: column; align-items: flex-start; cursor: pointer; padding: 0.3rem 0.3rem; min-height: 3.5rem; justify-content: center; }
         .merged-gender-cell { padding: 0.25rem 0.3rem; min-height: 5rem; display: flex; flex-direction: column; justify-content: flex-start; }
@@ -45,6 +46,7 @@
         .subject-study-cell { min-height: 5.5rem; padding: 0.4rem 0.6rem; cursor: pointer; transition: background-color 0.15s ease-in-out; }
         .force-open .subject-translation-hidden, .force-open .article-hidden-part, .force-open .pronoun-hidden-part, .force-open .spanish-translation, .force-open .nominativ-translation-hidden { max-height: 10rem !important; opacity: 1 !important; margin-top: 0.1rem !important; }
         .small-pronoun-header { font-size: 0.7rem; line-height: 1; }
+        .verb-example:hover .spanish-translation, .verb-example.active .spanish-translation { max-height: 10rem; opacity: 1; }
 
         /* Modal styles */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
@@ -64,12 +66,295 @@
     <div class="max-w-7xl mx-auto">
         <h1 class="text-3xl font-bold text-gray-800 mb-2">German Dativ Case: Articles, Pronouns, and Possessives</h1>
         <p class="text-gray-600 mb-6">El Dativ responde a "¿A quién?" o "¿Con quién?". Se usa para el <strong>objeto indirecto</strong> - la persona que recibe indirectamente la acción. También se usa después de ciertas preposiciones (<a href="#" onclick="openPrepositionsModal(event)" class="text-green-700 underline hover:text-green-900">mit, nach, aus, zu, von, bei, seit, ab, gegenüber</a>).</p>
-        <div id="table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200"></div>
+
+        <!-- Articles Table -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-3 mt-8">Artículos (Articles)</h2>
+        <div id="articles-table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200 mb-8"></div>
+
+        <!-- Pronouns Table -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-3 mt-8">Pronombres Posesivos (Possessive Pronouns)</h2>
+        <div id="pronouns-table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200"></div>
+
         <div class="mt-6 flex justify-end">
             <button id="toggle-all-button" onclick="toggleAllTranslations()" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-4 5a1 1 0 100 2h2a1 1 0 100-2h-2z" clip-rule="evenodd"/></svg>
                 Mostrar todas las traducciones
             </button>
+        </div>
+
+        <!-- Dativ Detailed Explanation -->
+        <div class="mt-12 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl shadow-lg p-8 border-2 border-green-200">
+            <h2 class="text-3xl font-bold text-green-700 mb-6 flex items-center">
+                <span class="bg-green-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3 text-xl">📝</span>
+                Dativ - Explicación Detallada
+            </h2>
+
+            <div class="bg-white rounded-xl p-6 mb-6 shadow-md border-l-4 border-green-500">
+                <p class="text-lg text-gray-700 mb-2">
+                    El Dativ responde a <span class="font-bold text-green-600">"¿A quién?"</span> o <span class="font-bold text-green-600">"¿Con quién?"</span>.
+                    Se usa para el <span class="bg-yellow-200 font-bold px-2 py-1 rounded">objeto indirecto</span> de la oración -
+                    la persona o cosa que <span class="underline decoration-green-500 decoration-2">recibe indirectamente la acción del verbo</span>.
+                    También se usa después de ciertas preposiciones (<a href="#" onclick="openPrepositionsModal(event)" class="text-green-600 font-semibold underline hover:text-green-800">mit, nach, aus, zu, von, bei, seit, ab, gegenüber</a>).
+                </p>
+            </div>
+
+            <!-- W-Fragen Section -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
+                    <span class="mr-2">❓</span> W-Fragen (Preguntas en Alemán)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-green-100 rounded-lg p-4 border-2 border-green-300">
+                        <div class="text-3xl font-bold text-green-700 mb-2">Wem?</div>
+                        <div class="text-lg text-gray-700">¿A quién? <span class="text-sm italic">(objeto indirecto)</span></div>
+                    </div>
+                    <div class="bg-green-100 rounded-lg p-4 border-2 border-green-300">
+                        <div class="text-3xl font-bold text-green-700 mb-2">Mit wem?</div>
+                        <div class="text-lg text-gray-700">¿Con quién? <span class="text-sm italic">(con preposiciones)</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Objeto Indirecto Section -->
+            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
+                <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
+                    <span class="mr-2">🎯</span> ¿Qué es el Objeto Indirecto?
+                </h3>
+                <p class="text-lg text-gray-700 mb-4">
+                    El objeto indirecto (<span class="font-semibold text-green-600">Dativobjekt</span>) es la persona o cosa que
+                    <span class="bg-green-100 font-bold px-2 py-1 rounded border border-green-300">recibe indirectamente</span> la acción del verbo.
+                    Es lo que responde a la pregunta <span class="font-bold">"¿A quién?"</span>.
+                </p>
+
+                <div class="space-y-3">
+                    <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
+                        <div class="font-bold text-lg mb-2">Ich gebe <span class="text-green-600 bg-green-100 px-2 py-1 rounded">dem Mann</span> das Buch.</div>
+                        <div class="text-gray-600">
+                            → <span class="font-semibold">¿A quién doy el libro?</span> → <span class="text-green-600 font-bold">al hombre</span>
+                            <span class="bg-yellow-200 px-2 py-1 rounded text-sm ml-2">objeto indirecto</span>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                        <div class="font-bold text-lg mb-2">Sie hilft <span class="text-green-600 bg-green-100 px-2 py-1 rounded">ihrer Mutter</span>.</div>
+                        <div class="text-gray-600">
+                            → <span class="font-semibold">¿A quién ayuda?</span> → <span class="text-green-600 font-bold">a su madre</span>
+                            <span class="bg-yellow-200 px-2 py-1 rounded text-sm ml-2">objeto indirecto</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diferenciación Section -->
+            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
+                <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
+                    <span class="mr-2">🔍</span> ¿Cómo Diferenciar el Objeto Indirecto?
+                </h3>
+
+                <div class="space-y-4">
+                    <!-- Técnica 1 -->
+                    <div class="bg-gradient-to-r from-teal-50 to-teal-100 p-5 rounded-lg border-2 border-teal-400">
+                        <h4 class="font-bold text-xl text-teal-700 mb-3">📌 Técnica 1: Usa la W-Frage "Wem?"</h4>
+                        <p class="text-gray-700 mb-3">Haz la pregunta con <span class="bg-teal-200 font-bold px-2 py-1 rounded">wem?</span> (¿a quién?) después del verbo:</p>
+                        <div class="bg-white p-3 rounded border-l-4 border-teal-500">
+                            <div class="mb-2">Ich helfe <span class="text-green-600 font-bold">dem Kind</span>.</div>
+                            <div class="text-gray-600">→ <span class="italic">Wem helfe ich?</span> → <span class="text-green-600 font-bold">dem Kind</span> <span class="text-teal-600 font-bold text-xl">✓</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Técnica 2 -->
+                    <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-5 rounded-lg border-2 border-blue-400">
+                        <h4 class="font-bold text-xl text-blue-700 mb-3">📌 Técnica 2: Identifica si hay dos objetos</h4>
+                        <div class="space-y-2 text-gray-700">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-2">➤</span>
+                                <span>El <span class="bg-green-200 font-bold px-2 py-1 rounded">objeto indirecto</span> (Dativ) <span class="font-bold">recibe</span> el objeto directo</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-2">➤</span>
+                                <span>El <span class="bg-red-200 font-bold px-2 py-1 rounded">objeto directo</span> (Akkusativ) es <span class="font-bold">lo que se da/transfiere</span></span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3 rounded border-l-4 border-blue-500 mt-3">
+                            <div>Ich gebe <span class="bg-green-200 font-bold px-2 py-1 rounded">dem Mann</span> <span class="text-gray-500 text-sm">(a quién/DAT)</span> <span class="bg-red-200 font-bold px-2 py-1 rounded">das Buch</span> <span class="text-gray-500 text-sm">(qué/AKK)</span>.</div>
+                        </div>
+                    </div>
+
+                    <!-- Técnica 3 -->
+                    <div class="bg-gradient-to-r from-emerald-50 to-emerald-100 p-5 rounded-lg border-2 border-emerald-400">
+                        <h4 class="font-bold text-xl text-emerald-700 mb-3">📌 Técnica 3: Cambios en todos los géneros</h4>
+                        <p class="text-gray-700 mb-3">En Dativ, <span class="underline decoration-2 decoration-emerald-500 font-bold">TODOS los artículos cambian</span>:</p>
+                        <div class="space-y-2">
+                            <div class="bg-white p-3 rounded flex items-center justify-between">
+                                <span class="font-bold">der/ein → dem/einem</span>
+                                <span class="text-sm">(masculino)</span>
+                                <span class="bg-green-500 text-white font-bold px-3 py-1 rounded text-lg">✓ CAMBIA</span>
+                            </div>
+                            <div class="bg-white p-3 rounded flex items-center justify-between">
+                                <span class="font-bold">die/eine → der/einer</span>
+                                <span class="text-sm">(femenino)</span>
+                                <span class="bg-green-500 text-white font-bold px-3 py-1 rounded text-lg">✓ CAMBIA</span>
+                            </div>
+                            <div class="bg-white p-3 rounded flex items-center justify-between">
+                                <span class="font-bold">das/ein → dem/einem</span>
+                                <span class="text-sm">(neutro)</span>
+                                <span class="bg-green-500 text-white font-bold px-3 py-1 rounded text-lg">✓ CAMBIA</span>
+                            </div>
+                            <div class="bg-white p-3 rounded flex items-center justify-between">
+                                <span class="font-bold">die → den</span>
+                                <span class="text-sm">(plural)</span>
+                                <span class="bg-green-500 text-white font-bold px-3 py-1 rounded text-lg">✓ CAMBIA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verbos Comunes Section -->
+            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
+                <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
+                    <span class="mr-2">💬</span> Verbos Comunes que Requieren Dativ
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="bg-green-50 p-3 rounded border-l-4 border-green-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">🤝</span><span class="font-bold text-green-700">helfen</span> <span class="text-gray-600">(ayudar)</span>
+                        <div class="text-sm mt-1">Ich helfe <span class="font-semibold">meinem Vater</span>.</div>
+                        <div class="spanish-translation">Ayudo a mi padre.</div>
+                    </div>
+                    <div class="bg-green-50 p-3 rounded border-l-4 border-green-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">🙏</span><span class="font-bold text-green-700">danken</span> <span class="text-gray-600">(agradecer)</span>
+                        <div class="text-sm mt-1">Du dankst <span class="font-semibold">deiner Lehrerin</span>.</div>
+                        <div class="spanish-translation">Agradeces a tu profesora.</div>
+                    </div>
+                    <div class="bg-green-50 p-3 rounded border-l-4 border-green-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">🎁</span><span class="font-bold text-green-700">geben</span> <span class="text-gray-600">(dar)</span>
+                        <div class="text-sm mt-1">Er gibt <span class="font-semibold">dem Kind</span> ein Geschenk.</div>
+                        <div class="spanish-translation">Él le da un regalo al niño.</div>
+                    </div>
+                    <div class="bg-green-50 p-3 rounded border-l-4 border-green-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">👁️</span><span class="font-bold text-green-700">zeigen</span> <span class="text-gray-600">(mostrar)</span>
+                        <div class="text-sm mt-1">Sie zeigt <span class="font-semibold">ihrem Freund</span> das Foto.</div>
+                        <div class="spanish-translation">Ella le muestra la foto a su amigo.</div>
+                    </div>
+                    <div class="bg-green-50 p-3 rounded border-l-4 border-green-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">✉️</span><span class="font-bold text-green-700">schreiben</span> <span class="text-gray-600">(escribir)</span>
+                        <div class="text-sm mt-1">Wir schreiben <span class="font-semibold">unserer Oma</span> einen Brief.</div>
+                        <div class="spanish-translation">Le escribimos una carta a nuestra abuela.</div>
+                    </div>
+                    <div class="bg-green-50 p-3 rounded border-l-4 border-green-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">📞</span><span class="font-bold text-green-700">antworten</span> <span class="text-gray-600">(responder)</span>
+                        <div class="text-sm mt-1">Ihr antwortet <span class="font-semibold">dem Lehrer</span>.</div>
+                        <div class="spanish-translation">Respondéis al profesor.</div>
+                    </div>
+                    <div class="bg-green-50 p-3 rounded border-l-4 border-green-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">👂</span><span class="font-bold text-green-700">zuhören</span> <span class="text-gray-600">(escuchar)</span>
+                        <div class="text-sm mt-1">Sie hören <span class="font-semibold">der Musik</span> zu.</div>
+                        <div class="spanish-translation">Escuchan la música.</div>
+                    </div>
+                    <div class="bg-green-50 p-3 rounded border-l-4 border-green-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">🎉</span><span class="font-bold text-green-700">gratulieren</span> <span class="text-gray-600">(felicitar)</span>
+                        <div class="text-sm mt-1">Ich gratuliere <span class="font-semibold">meiner Schwester</span>.</div>
+                        <div class="spanish-translation">Felicito a mi hermana.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preposiciones Section -->
+            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
+                <h3 class="text-2xl font-bold text-green-700 mb-4 flex items-center">
+                    <span class="mr-2">🔗</span> Preposiciones que Siempre Usan Dativ
+                </h3>
+                <p class="text-gray-700 mb-3">Estas preposiciones SIEMPRE requieren Dativ:</p>
+                <div class="bg-green-50 p-4 rounded-lg border-2 border-green-300">
+                    <a href="#" onclick="openPrepositionsModal(event)" class="text-green-600 font-bold text-lg underline hover:text-green-800">
+                        mit, nach, aus, zu, von, bei, seit, ab, gegenüber
+                    </a>
+                    <div class="text-sm text-gray-600 mt-2 italic">Haz clic para ver ejemplos detallados</div>
+                </div>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="bg-gradient-to-r from-yellow-100 to-yellow-200 rounded-xl p-6 shadow-md border-2 border-yellow-400">
+                <h3 class="text-2xl font-bold text-yellow-800 mb-4 flex items-center">
+                    <span class="mr-2">💡</span> Tips para No Olvidar
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-3">1️⃣</span>
+                        <div>
+                            <span class="font-bold text-yellow-900">Memoriza "dem" y "der":</span>
+                            <span class="text-gray-700"> Son los cambios más comunes (masculino/neutro: dem, femenino: der)</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-3">2️⃣</span>
+                        <div>
+                            <span class="font-bold text-yellow-900">Pregunta siempre:</span>
+                            <span class="text-gray-700"> <span class="italic">"¿A quién?"</span> o <span class="italic">"¿Con quién?"</span> después del verbo</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-3">3️⃣</span>
+                        <div>
+                            <span class="font-bold text-yellow-900">Dativ = recibir indirectamente:</span>
+                            <span class="text-gray-700"> Es <span class="underline decoration-2">a quién beneficia</span> la acción</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-3">4️⃣</span>
+                        <div>
+                            <span class="font-bold text-yellow-900">Practica con verbos de Dativ:</span>
+                            <span class="text-gray-700"> Verbos que necesitan un destinatario (helfen, danken, geben, zeigen, schreiben, antworten, zuhören, gratulieren, folgen, gehören, passen, schmecken, etc.)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disclaimer Section -->
+            <div class="mt-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 shadow-md border-2 border-blue-300">
+                <h3 class="text-xl font-bold text-blue-800 mb-3 flex items-center">
+                    <span class="mr-2">📌</span> Nota Importante
+                </h3>
+                <p class="text-gray-700 mb-4">
+                    La regla <span class="font-semibold">"es a quién beneficia la acción"</span> funciona muy bien para <span class="bg-green-100 px-2 py-1 rounded font-semibold">nivel A1</span> y los verbos más comunes (helfen, geben, danken, zeigen). Sin embargo, en <span class="bg-orange-100 px-2 py-1 rounded font-semibold">A2</span> y niveles superiores encontrarás verbos que simplemente <span class="font-bold text-blue-700">requieren Dativ por tradición gramatical</span>:
+                </p>
+
+                <div class="bg-white rounded-lg p-4 mb-4 border-l-4 border-blue-400">
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-start">
+                            <span class="mr-2">•</span>
+                            <div>
+                                <span class="font-semibold text-gray-800">Sie hören <span class="text-green-600">der Musik</span> zu.</span>
+                                <span class="text-gray-600 italic ml-2">(escuchan la música)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="mr-2">•</span>
+                            <div>
+                                <span class="font-semibold text-gray-800">Das gefällt <span class="text-green-600">mir</span>.</span>
+                                <span class="text-gray-600 italic ml-2">(eso me gusta)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="mr-2">•</span>
+                            <div>
+                                <span class="font-semibold text-gray-800">Das Buch gehört <span class="text-green-600">meinem Bruder</span>.</span>
+                                <span class="text-gray-600 italic ml-2">(el libro pertenece a mi hermano)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="bg-green-100 p-3 rounded-lg border border-green-300">
+                        <div class="font-bold text-green-800 mb-1">✅ Para A1:</div>
+                        <div class="text-sm text-gray-700">La regla del "beneficiario" es suficiente</div>
+                    </div>
+                    <div class="bg-orange-100 p-3 rounded-lg border border-orange-300">
+                        <div class="font-bold text-orange-800 mb-1">📝 Para A2:</div>
+                        <div class="text-sm text-gray-700">Empieza a memorizar verbos especiales que rigen dativo</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -78,6 +363,52 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="modal-close" onclick="closeModal()">&times;</span>
             <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Modal for Nullartikel Info -->
+    <div id="nullartikel-info-modal" class="modal-overlay" onclick="closeNullartikelInfoModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeNullartikelInfoModal()">&times;</span>
+            <div id="nullartikel-info-body">
+                <h2 class="modal-title" style="color: #166534;">Nullartikel (Sin Artículo)</h2>
+
+                <div class="modal-section">
+                    <div class="modal-label">¿Qué es el Nullartikel?</div>
+                    <div class="modal-text">El Nullartikel (artículo cero) se usa cuando NO se coloca ningún artículo antes del sustantivo. Es común en alemán en ciertos contextos específicos.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">1. Sustantivos Incontables</div>
+                    <div class="modal-text">Sustantivos que no se pueden contar (abstractos, materias, líquidos):</div>
+                    <div class="modal-text"><strong>Ich trinke Kaffee.</strong> - Bebo café.</div>
+                    <div class="modal-text"><strong>Er braucht Hilfe.</strong> - Él necesita ayuda.</div>
+                    <div class="modal-text"><strong>Sie hat Geld.</strong> - Ella tiene dinero.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">2. Sustantivos Masivos</div>
+                    <div class="modal-text">Materias o sustancias sin forma definida:</div>
+                    <div class="modal-text"><strong>Ich kaufe Brot.</strong> - Compro pan.</div>
+                    <div class="modal-text"><strong>Wir essen Reis.</strong> - Comemos arroz.</div>
+                    <div class="modal-text"><strong>Er trinkt Wasser.</strong> - Él bebe agua.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">3. Sustantivos Plurales (sin especificar)</div>
+                    <div class="modal-text">Cuando hablamos de cosas en general, no específicas:</div>
+                    <div class="modal-text"><strong>Kinder spielen gern.</strong> - A los niños les gusta jugar.</div>
+                    <div class="modal-text"><strong>Ich habe Freunde.</strong> - Tengo amigos.</div>
+                    <div class="modal-text"><strong>Sie kauft Äpfel.</strong> - Ella compra manzanas.</div>
+                </div>
+
+                <div class="modal-section">
+                    <div class="modal-label">Otros usos del Nullartikel:</div>
+                    <div class="modal-text">• Profesiones: <strong>Er ist Lehrer.</strong> (Él es profesor)</div>
+                    <div class="modal-text">• Nacionalidades: <strong>Sie ist Deutsche.</strong> (Ella es alemana)</div>
+                    <div class="modal-text">• Idiomas: <strong>Ich lerne Deutsch.</strong> (Aprendo alemán)</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -223,7 +554,7 @@
             },
             {
                 "Sujeto (Nominativo)": "Nullartikel",
-                "Pronombre (Dativ)": "Nota: Se deja sin artículo para sustantivos incontables, sustantivos masivos y sustantivos plurales sin determinantes.",
+                "Pronombre (Dativ)": "Sustantivos:<br>• incontables<br>• masivos<br>• plurales",
                 "Trad. Pronombre": "-",
                 "Ejemplo Pronombre (Dativ)": "-",
                 "Trad. Ejemplo": "-",
@@ -528,69 +859,75 @@
 
         let translationsVisible = false;
         function toggleAllTranslations() {
-            const studyWrappers = document.querySelectorAll('.subject-study-cell, .article-study-cell-wrapper, .merged-pronoun-cell > .w-full, .study-cell');
+            const studyWrappers = document.querySelectorAll('.subject-study-cell, .article-study-cell-wrapper, .merged-pronoun-cell > .w-full, .study-cell, .verb-example');
             const button = document.getElementById('toggle-all-button');
-            const table = document.getElementById('table-container');
+            const articlesTable = document.getElementById('articles-table-container');
+            const pronounsTable = document.getElementById('pronouns-table-container');
             translationsVisible = !translationsVisible;
-            if (translationsVisible) { table.classList.add('force-open'); button.textContent = 'Ocultar todas las traducciones'; }
-            else { table.classList.remove('force-open'); button.textContent = 'Mostrar todas las traducciones'; studyWrappers.forEach(w => w.classList.remove('active')); }
+            if (translationsVisible) {
+                articlesTable.classList.add('force-open');
+                pronounsTable.classList.add('force-open');
+                studyWrappers.forEach(w => w.classList.add('active'));
+                button.textContent = 'Ocultar todas las traducciones';
+            }
+            else {
+                articlesTable.classList.remove('force-open');
+                pronounsTable.classList.remove('force-open');
+                button.textContent = 'Mostrar todas las traducciones';
+                studyWrappers.forEach(w => w.classList.remove('active'));
+            }
         }
 
-        function renderTable() {
-            const container = document.getElementById('table-container');
+        function renderTables() {
+            renderArticlesTable();
+            renderPronounsTable();
+        }
+
+        function renderArticlesTable() {
+            const container = document.getElementById('articles-table-container');
             let html = '<table class="divide-y divide-gray-300">';
+            html += '<colgroup>';
+            html += '<col style="width: 7%;">';
+            html += '<col style="width: 10%;">';
+            html += '<col style="width: 9%;">';
+            html += '<col style="width: 18%;">';
+            html += '<col style="width: 18%;">';
+            html += '<col style="width: 19%;">';
+            html += '<col style="width: 19%;">';
+            html += '</colgroup>';
             html += '<thead class="bg-gray-100">';
             html += '<tr>';
-            html += `<th colspan="2" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300">Pronombres Personales</th>`;
-            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300 bg-green-100">Base/Posesivo</th>`;
-            html += `<th colspan="12" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-green-100">Dativ Case Determiners (Artículos y Posesivos por Género)</th>`;
+            html += `<th colspan="3" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300">Artículos</th>`;
+            html += `<th colspan="4" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-green-100">Dativ</th>`;
             html += '</tr>';
             html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE;"><span class="small-pronoun-header">PRON (NOM)</span></th>`;
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE;"><span class="small-pronoun-header">PRON (DAT)</span></th>`;
-            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-green-200">Base/Posesivo</th>`;
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE; width: 7%;"><span class="small-pronoun-header">Sujeto</span></th>`;
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE; width: 10%;"><span class="small-pronoun-header">-</span></th>`;
+            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-green-200" style="width: 9%;">Base</th>`;
             const genders = [
-                { title: 'Männlich (M)', color: 'bg-green-200', colspan: 1 },
-                { title: 'Weiblich (F)', color: 'bg-green-300', colspan: 1 },
-                { title: 'Neutral (N)', color: 'bg-green-400', colspan: 1 },
-                { title: 'Plural (P)', color: 'bg-green-500', colspan: 1 }
+                { title: 'Männlich (M)', color: 'bg-green-200', colspan: 1, width: '18%' },
+                { title: 'Weiblich (F)', color: 'bg-green-300', colspan: 1, width: '18%' },
+                { title: 'Neutral (N)', color: 'bg-green-400', colspan: 1, width: '19%' },
+                { title: 'Plural (P)', color: 'bg-green-500', colspan: 1, width: '19%' }
             ];
-            genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}">${g.title}</th>`; });
-            html += '</tr>';
-            const fullHeadersForRender = ["Sujeto (Nominativo)", "Pronombre (Dativ)", "Base", "dem männlich (dativ)", "der weiblich (dativ)", "dem neutral (dativ)", "den plural (dativ)"];
-            const visibleHeaders = ["Pron. (Nom.)","Pron. (Dat.)","Base/Posesivo","dem","der","dem","den"];
-            html += '<tr>';
-            fullHeadersForRender.forEach((header, index) => {
-                let cellClass = 'bg-gray-50 text-gray-700 font-medium text-xs border-b-2 border-gray-200';
-                if (header === "Sujeto (Nominativo)") cellClass = 'text-gray-700 font-bold text-sm';
-                if (header === "Pronombre (Dativ)") cellClass = 'text-gray-700 font-bold text-sm';
-                if (header === "Sujeto (Nominativo)") cellClass += ' style="background-color: #E0F2FE;"';
-                if (header === "Pronombre (Dativ)") cellClass += ' style="background-color: #CCE5FE;"';
-                if (header === "Base") cellClass = 'bg-green-200 text-gray-700 font-bold text-sm';
-                if (header === "dem männlich (dativ)") cellClass = 'bg-green-200 text-gray-900 font-bold text-sm wrap-cell';
-                if (header === "der weiblich (dativ)") cellClass = 'bg-green-300 text-gray-900 font-bold text-sm wrap-cell';
-                if (header === "dem neutral (dativ)") cellClass = 'bg-green-400 text-gray-900 font-bold text-sm wrap-cell';
-                if (header === "den plural (dativ)") cellClass = 'bg-green-500 text-gray-900 font-bold text-sm wrap-cell';
-                const finalTitle = visibleHeaders[index];
-                html += `<th class="table-cell ${cellClass} text-left uppercase">${finalTitle}</th>`;
-            });
+            genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}" style="width: ${g.width};">${g.title}</th>`; });
             html += '</tr>';
             html += '</thead>';
 
             const keysToSkip = ["Trad. Pronombre", "Ejemplo Pronombre (Dativ)", "Trad. Ejemplo", "Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M) - Ejemplos con Verbos", "Weiblich (F) - Ejemplos con Verbos", "Neutral (N) - Ejemplos con Verbos", "Plural (P) - Ejemplos con Verbos", "Trad. Base", "Category (M)", "Category (F)", "Category (N)", "Category (P)", "Explanation (M)", "Explanation (F)", "Explanation (N)", "Explanation (P)", "Sujeto Display"];
 
             html += '<tbody class="divide-y divide-gray-200">';
-            tableData.forEach((row) => {
-                if (row["Sujeto (Nominativo)"] === "es") { row["Sujeto (Nominativo)"] = "es (neutro)"; }
-                const isArticleRow = row["Sujeto (Nominativo)"].startsWith('Art.') ||
-                                     row["Sujeto (Nominativo)"].startsWith('Articulo') ||
-                                     row["Sujeto (Nominativo)"] === "Nullartikel";
-                const rowClass = isArticleRow ? 'article-row' : 'possessive-row';
-                const isSeparatorRow = row["Sujeto (Nominativo)"] === "ich";
-                const separatorClass = isSeparatorRow ? ' separator-row' : '';
-                html += `<tr class="${rowClass}${separatorClass} hover:bg-opacity-75">`;
+            // Filter only article rows
+            const articlesData = tableData.filter(row =>
+                row["Sujeto (Nominativo)"].startsWith('Art.') ||
+                row["Sujeto (Nominativo)"].startsWith('Articulo') ||
+                row["Sujeto (Nominativo)"] === "Nullartikel"
+            );
+            articlesData.forEach((row) => {
+                const rowClass = 'article-row';
+                html += `<tr class="${rowClass} hover:bg-opacity-75">`;
                 const headers = [
-                    "Sujeto (Nominativo)", "Pronombre (Dativ)", "Trad. Pronombre", "Ejemplo Pronombre (Dativ)", "Trad. Ejemplo", "Base", "Trad. Base", "dem männlich (dativ)", "Männlich (M) - Ejemplos con Verbos", "Trad. (M)", "der weiblich (dativ)", "Weiblich (F) - Ejemplos con Verbos", "Trad. (F)", "dem neutral (dativ)", "Neutral (N) - Ejemplos con Verbos", "Trad. (N)", "den plural (dativ)", "Plural (P) - Ejemplos con Verbos", "Trad. (P)"
+                    "Sujeto (Nominativo)", "Pronombre (Dativ)", "Base", "dem männlich (dativ)", "der weiblich (dativ)", "dem neutral (dativ)", "den plural (dativ)"
                 ];
                 headers.forEach((key) => {
                     const value = row[key];
@@ -607,8 +944,8 @@
                         tradPronoun = tradPronoun.replace(' (formal)', '').replace(' (neutro)', '');
                         cellClass += ' merged-pronoun-cell wrap-cell align-top cursor-pointer';
                         if (pronoun === '-') { contentHtml = '-'; cellClass = 'table-cell text-sm text-gray-800 text-left bg-gray-200'; }
-                        else if (pronoun.startsWith('Nota:')) {
-                            contentHtml = `<div class="text-xs italic text-gray-600 p-2" style="white-space: normal; line-height: 1.4;">${pronoun}</div>`;
+                        else if (pronoun.includes('Sustantivos')) {
+                            contentHtml = `<div class="text-xs text-gray-800 p-2" style="white-space: normal; line-height: 1.6;">${pronoun}<br><a href="#" onclick="openNullartikelInfoModal(event); return false;" class="text-blue-600 underline hover:text-blue-800 mt-1 inline-block">más info</a></div>`;
                             cellClass = 'table-cell text-sm text-gray-800 text-left bg-yellow-50';
                         }
                         else {
@@ -720,6 +1057,130 @@
             container.innerHTML = html;
         }
 
+        function renderPronounsTable() {
+            const container = document.getElementById('pronouns-table-container');
+            let html = '<table class="divide-y divide-gray-300">';
+            html += '<colgroup>';
+            html += '<col style="width: 7%;">';
+            html += '<col style="width: 10%;">';
+            html += '<col style="width: 9%;">';
+            html += '<col style="width: 18%;">';
+            html += '<col style="width: 18%;">';
+            html += '<col style="width: 19%;">';
+            html += '<col style="width: 19%;">';
+            html += '</colgroup>';
+            html += '<thead class="bg-gray-100">';
+            html += '<tr>';
+            html += `<th colspan="3" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300">Pronombres Personales</th>`;
+            html += `<th colspan="4" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-green-100">Dativ</th>`;
+            html += '</tr>';
+            html += '<tr>';
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE; width: 7%;"><span class="small-pronoun-header">PRON (NOM)</span></th>`;
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE; width: 8%;"><span class="small-pronoun-header">PRON (DAT)</span></th>`;
+            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-green-200" style="width: 9%;">Base/Posesivo</th>`;
+            const genders = [
+                { title: 'Männlich (M)', color: 'bg-green-200', colspan: 1, width: '19%' },
+                { title: 'Weiblich (F)', color: 'bg-green-300', colspan: 1, width: '19%' },
+                { title: 'Neutral (N)', color: 'bg-green-400', colspan: 1, width: '19%' },
+                { title: 'Plural (P)', color: 'bg-green-500', colspan: 1, width: '19%' }
+            ];
+            genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}" style="width: ${g.width};">${g.title}</th>`; });
+            html += '</tr>';
+            html += '</thead>';
+
+            const keysToSkip = ["Trad. Pronombre", "Ejemplo Pronombre (Dativ)", "Trad. Ejemplo", "Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M) - Ejemplos con Verbos", "Weiblich (F) - Ejemplos con Verbos", "Neutral (N) - Ejemplos con Verbos", "Plural (P) - Ejemplos con Verbos", "Trad. Base", "Category (M)", "Category (F)", "Category (N)", "Category (P)", "Explanation (M)", "Explanation (F)", "Explanation (N)", "Explanation (P)", "Sujeto Display"];
+
+            html += '<tbody class="divide-y divide-gray-200">';
+            // Filter only pronoun rows
+            const pronounsData = tableData.filter(row =>
+                !row["Sujeto (Nominativo)"].startsWith('Art.') &&
+                !row["Sujeto (Nominativo)"].startsWith('Articulo') &&
+                row["Sujeto (Nominativo)"] !== "Nullartikel"
+            );
+            pronounsData.forEach((row) => {
+                if (row["Sujeto (Nominativo)"] === "es") { row["Sujeto (Nominativo)"] = "es (neutro)"; }
+                const rowClass = 'possessive-row';
+                html += `<tr class="${rowClass} hover:bg-opacity-75">`;
+                const headers = [
+                    "Sujeto (Nominativo)", "Pronombre (Dativ)", "Base", "dem männlich (dativ)", "der weiblich (dativ)", "dem neutral (dativ)", "den plural (dativ)"
+                ];
+                headers.forEach((key) => {
+                    const value = row[key];
+                    if (keysToSkip.includes(key)) return;
+                    let cellClass = 'table-cell text-sm text-gray-800 text-left';
+                    let contentHtml = value;
+                    let styleAttr = '';
+
+                    if (key === "Pronombre (Dativ)") {
+                        const pronoun = row["Pronombre (Dativ)"];
+                        let tradPronoun = row["Trad. Pronombre"];
+                        const example = row["Ejemplo Pronombre (Dativ)"];
+                        const tradExample = row["Trad. Ejemplo"];
+                        tradPronoun = tradPronoun.replace(' (formal)', '').replace(' (neutro)', '');
+                        cellClass += ' merged-pronoun-cell wrap-cell align-top cursor-pointer';
+                        const exampleTextToBold = pronoun;
+                        let styledExample = example.replace(new RegExp(`\\b(${exampleTextToBold})\\b`), (m) => `<b>${m}</b>`);
+                        contentHtml = `
+                            <div class="w-full" onclick="this.classList.toggle('active')">
+                                <div class="stacked-content-line"><span class="akkusativ-pronoun-visible">${pronoun}</span></div>
+                                <div class="stacked-content-line text-xs italic text-black" style="margin-top: 0.2rem;">${tradPronoun}</div>
+                                <div class="pronoun-hidden-part">
+                                    <div class="text-black" style="white-space: nowrap;">${styledExample}</div>
+                                    <div class="text-black italic">${tradExample}</div>
+                                </div>
+                            </div>`;
+                        styleAttr = ' style="background-color: #CCE5FE;"';
+                    }
+                    else if (determinerKeys.includes(key)) {
+                        const mergedData = mergedDeterminerKeys.find(d => d.key === key);
+                        const determiner = row[mergedData.key];
+                        const exampleValue = row[mergedData.example];
+                        const tradExampleValue = row[mergedData.translation];
+                        const exampleTextToBold = determiner;
+                        let styledExampleValue = exampleValue.replace(new RegExp(`\\b(${exampleTextToBold})\\b`), (m) => `<b>${m}</b>`);
+                        cellClass += ` merged-gender-cell wrap-cell align-top ${mergedData.color}`;
+                        const isDarkGreen = mergedData.color === 'bg-green-300' || mergedData.color === 'bg-green-400' || mergedData.color === 'bg-green-500';
+                        const textColorClass = isDarkGreen ? 'text-white' : '';
+                        const translationColorClass = isDarkGreen ? 'text-white' : '';
+                        if (exampleValue && exampleValue !== '-' && tradExampleValue && tradExampleValue !== '-') {
+                            contentHtml = `
+                                <span class="akkusativ-determiner">${determiner}</span>
+                                <div class="study-cell cursor-pointer p-0 pt-1" onclick="this.classList.toggle('active')">
+                                    <span class="german-phrase whitespace-nowrap ${textColorClass}">${styledExampleValue}</span>
+                                    <span class="spanish-translation ${translationColorClass}">${tradExampleValue}</span>
+                                </div>`;
+                        } else {
+                            contentHtml = `<span class="akkusativ-determiner">${determiner}</span>${exampleValue ? '<br>' + exampleValue : ''}`;
+                        }
+                    }
+                    else if (key === "Base") {
+                        const baseValue = formatMultiLine(row["Base"], false);
+                        const germanLines = baseValue.split('<br>');
+                        const possessiveRoot = germanLines[0];
+                        const tradBaseValue = formatMultiLine(row["Trad. Base"], true);
+                        const spanishTranslation = tradBaseValue.split('<br>')[0].trim();
+                        let alignedHtml = `
+                            <div class="stacked-content-line"><span class="base-article-german">${possessiveRoot}</span></div>
+                            <div class="stacked-content-line text-xs italic text-black" style="margin-top: 0.2rem;">${spanishTranslation}</div>`;
+                        contentHtml = alignedHtml;
+                        cellClass += ' merged-possessive-cell bg-green-100';
+                    }
+                    else {
+                        if (key === "Sujeto (Nominativo)") {
+                            const displayValue = row["Sujeto Display"] || value;
+                            contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(value)}</div>`;
+                            cellClass += ' wrap-cell align-top p-0';
+                            styleAttr = ' style="background-color: #E0F2FE;"';
+                        }
+                    }
+                    html += `<td class="${cellClass}"${styleAttr}>${contentHtml}</td>`;
+                });
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
         function openModal(german, spanish, category, explanation) {
             const modal = document.getElementById('nullartikel-modal');
             const modalBody = document.getElementById('modal-body');
@@ -757,6 +1218,17 @@
             }
         }
 
+        function openNullartikelInfoModal(event) {
+            event.preventDefault();
+            document.getElementById('nullartikel-info-modal').classList.add('active');
+        }
+
+        function closeNullartikelInfoModal(event) {
+            if (!event || event.target.classList.contains('modal-overlay') || event.target.classList.contains('modal-close')) {
+                document.getElementById('nullartikel-info-modal').classList.remove('active');
+            }
+        }
+
         function openPrepositionsModal(event) {
             event.preventDefault();
             document.getElementById('prepositions-modal').classList.add('active');
@@ -772,11 +1244,12 @@
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeModal();
+                closeNullartikelInfoModal();
                 closePrepositionsModal();
             }
         });
 
-        window.onload = renderTable;
+        window.onload = renderTables;
     </script>
 </body>
 </html>

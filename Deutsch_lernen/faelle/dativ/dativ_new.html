@@ -46,7 +46,6 @@
         .subject-study-cell { min-height: 5.5rem; padding: 0.4rem 0.6rem; cursor: pointer; transition: background-color 0.15s ease-in-out; }
         .force-open .subject-translation-hidden, .force-open .article-hidden-part, .force-open .pronoun-hidden-part, .force-open .spanish-translation, .force-open .nominativ-translation-hidden { max-height: 10rem !important; opacity: 1 !important; margin-top: 0.1rem !important; }
         .small-pronoun-header { font-size: 0.7rem; line-height: 1; }
-        .verb-example:hover .spanish-translation, .verb-example.active .spanish-translation { max-height: 10rem; opacity: 1; }
 
         /* Modal styles */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
@@ -65,6 +64,7 @@
 <body class="p-4 sm:p-8">
     <div class="max-w-7xl mx-auto">
         <h1 class="text-3xl font-bold text-gray-800 mb-2">German Akkusativ Case: Articles, Pronouns, and Possessives</h1>
+        <p class="text-gray-600 mb-6">El Akkusativ responde a "¿Qué?" o "¿A quién?". Se usa para el <strong>objeto directo</strong> de la oración - la persona o cosa que recibe directamente la acción del verbo. También se usa después de ciertas preposiciones (<a href="#" onclick="openPrepositionsModal(event)" class="text-red-600 underline hover:text-red-800">durch, für, gegen, ohne, um, bis, entlang</a>).</p>
 
         <!-- Articles Table -->
         <h2 class="text-2xl font-bold text-gray-800 mb-3 mt-8">Artículos (Articles)</h2>
@@ -79,234 +79,6 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-4 5a1 1 0 100 2h2a1 1 0 100-2h-2z" clip-rule="evenodd"/></svg>
                 Mostrar todas las traducciones
             </button>
-        </div>
-
-        <!-- Akkusativ Detailed Explanation -->
-        <div class="mt-12 bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl shadow-lg p-8 border-2 border-red-200">
-            <h2 class="text-3xl font-bold text-red-700 mb-6 flex items-center">
-                <span class="bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3 text-xl">📝</span>
-                Akkusativ - Explicación Detallada
-            </h2>
-
-            <div class="bg-white rounded-xl p-6 mb-6 shadow-md border-l-4 border-red-500">
-                <p class="text-lg text-gray-700 mb-2">
-                    El Akkusativ responde a <span class="font-bold text-red-600">"¿Qué?"</span> o <span class="font-bold text-red-600">"¿A quién?"</span>.
-                    Se usa para el <span class="bg-yellow-200 font-bold px-2 py-1 rounded">objeto directo</span> de la oración -
-                    la persona o cosa que <span class="underline decoration-red-500 decoration-2">recibe directamente la acción del verbo</span>.
-                    También se usa después de ciertas preposiciones (<a href="#" onclick="openPrepositionsModal(event)" class="text-red-600 font-semibold underline hover:text-red-800">durch, für, gegen, ohne, um, bis, entlang</a>).
-                </p>
-            </div>
-
-            <!-- W-Fragen Section -->
-            <div class="mb-8">
-                <h3 class="text-2xl font-bold text-red-700 mb-4 flex items-center">
-                    <span class="mr-2">❓</span> W-Fragen (Preguntas en Alemán)
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-red-100 rounded-lg p-4 border-2 border-red-300">
-                        <div class="text-3xl font-bold text-red-700 mb-2">Wen?</div>
-                        <div class="text-lg text-gray-700">¿A quién? <span class="text-sm italic">(para personas)</span></div>
-                    </div>
-                    <div class="bg-red-100 rounded-lg p-4 border-2 border-red-300">
-                        <div class="text-3xl font-bold text-red-700 mb-2">Was?</div>
-                        <div class="text-lg text-gray-700">¿Qué? <span class="text-sm italic">(para cosas)</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Objeto Directo Section -->
-            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
-                <h3 class="text-2xl font-bold text-red-700 mb-4 flex items-center">
-                    <span class="mr-2">🎯</span> ¿Qué es el Objeto Directo?
-                </h3>
-                <p class="text-lg text-gray-700 mb-4">
-                    El objeto directo (<span class="font-semibold text-red-600">Akkusativobjekt</span>) es la persona o cosa que
-                    <span class="bg-red-100 font-bold px-2 py-1 rounded border border-red-300">recibe directamente</span> la acción del verbo.
-                    Es lo que responde a las preguntas <span class="font-bold">"¿Qué?"</span> o <span class="font-bold">"¿A quién?"</span>.
-                </p>
-
-                <div class="space-y-3">
-                    <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg border-l-4 border-blue-500">
-                        <div class="font-bold text-lg mb-2">Ich sehe <span class="text-red-600 bg-red-100 px-2 py-1 rounded">den Hund</span>.</div>
-                        <div class="text-gray-600">
-                            → <span class="font-semibold">¿Qué veo?</span> → <span class="text-red-600 font-bold">el perro</span>
-                            <span class="bg-yellow-200 px-2 py-1 rounded text-sm ml-2">objeto directo</span>
-                        </div>
-                    </div>
-                    <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
-                        <div class="font-bold text-lg mb-2">Sie liebt <span class="text-red-600 bg-red-100 px-2 py-1 rounded">ihren Bruder</span>.</div>
-                        <div class="text-gray-600">
-                            → <span class="font-semibold">¿A quién ama?</span> → <span class="text-red-600 font-bold">a su hermano</span>
-                            <span class="bg-yellow-200 px-2 py-1 rounded text-sm ml-2">objeto directo</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Diferenciación Section -->
-            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
-                <h3 class="text-2xl font-bold text-red-700 mb-4 flex items-center">
-                    <span class="mr-2">🔍</span> ¿Cómo Diferenciar el Objeto Directo?
-                </h3>
-
-                <div class="space-y-4">
-                    <!-- Técnica 1 -->
-                    <div class="bg-gradient-to-r from-green-50 to-green-100 p-5 rounded-lg border-2 border-green-400">
-                        <h4 class="font-bold text-xl text-green-700 mb-3">📌 Técnica 1: Usa las W-Fragen</h4>
-                        <p class="text-gray-700 mb-3">Haz la pregunta con <span class="bg-green-200 font-bold px-2 py-1 rounded">wen?</span> (¿a quién?) o <span class="bg-green-200 font-bold px-2 py-1 rounded">was?</span> (¿qué?) después del verbo:</p>
-                        <div class="bg-white p-3 rounded border-l-4 border-green-500">
-                            <div class="mb-2">Ich kaufe <span class="text-red-600 font-bold">einen Apfel</span>.</div>
-                            <div class="text-gray-600">→ <span class="italic">Was kaufe ich?</span> → <span class="text-red-600 font-bold">einen Apfel</span> <span class="text-green-600 font-bold text-xl">✓</span></div>
-                        </div>
-                    </div>
-
-                    <!-- Técnica 2 -->
-                    <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-5 rounded-lg border-2 border-blue-400">
-                        <h4 class="font-bold text-xl text-blue-700 mb-3">📌 Técnica 2: Identifica el sujeto primero</h4>
-                        <div class="space-y-2 text-gray-700">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-2">➤</span>
-                                <span>El <span class="bg-blue-200 font-bold px-2 py-1 rounded">sujeto</span> (Nominativ) <span class="font-bold">hace</span> la acción</span>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-2">➤</span>
-                                <span>El <span class="bg-red-200 font-bold px-2 py-1 rounded">objeto directo</span> (Akkusativ) <span class="font-bold">recibe</span> la acción</span>
-                            </div>
-                        </div>
-                        <div class="bg-white p-3 rounded border-l-4 border-blue-500 mt-3">
-                            <div><span class="bg-blue-200 font-bold px-2 py-1 rounded">Der Mann</span> <span class="text-gray-500 text-sm">(sujeto/NOM)</span> kauft <span class="bg-red-200 font-bold px-2 py-1 rounded">das Auto</span> <span class="text-gray-500 text-sm">(objeto directo/AKK)</span>.</div>
-                        </div>
-                    </div>
-
-                    <!-- Técnica 3 -->
-                    <div class="bg-gradient-to-r from-orange-50 to-orange-100 p-5 rounded-lg border-2 border-orange-400">
-                        <h4 class="font-bold text-xl text-orange-700 mb-3">📌 Técnica 3: Solo el masculino cambia</h4>
-                        <p class="text-gray-700 mb-3">En Akkusativ, <span class="underline decoration-2 decoration-orange-500 font-bold">solo el artículo masculino cambia</span>:</p>
-                        <div class="space-y-2">
-                            <div class="bg-white p-3 rounded flex items-center justify-between">
-                                <span class="font-bold">der/ein → den/einen</span>
-                                <span class="text-sm">(masculino)</span>
-                                <span class="bg-red-500 text-white font-bold px-3 py-1 rounded text-lg">✓ CAMBIA</span>
-                            </div>
-                            <div class="bg-gray-100 p-3 rounded flex items-center justify-between opacity-75">
-                                <span>die/eine → die/eine</span>
-                                <span class="text-sm">(femenino)</span>
-                                <span class="text-gray-500 font-bold">NO cambia</span>
-                            </div>
-                            <div class="bg-gray-100 p-3 rounded flex items-center justify-between opacity-75">
-                                <span>das/ein → das/ein</span>
-                                <span class="text-sm">(neutro)</span>
-                                <span class="text-gray-500 font-bold">NO cambia</span>
-                            </div>
-                            <div class="bg-gray-100 p-3 rounded flex items-center justify-between opacity-75">
-                                <span>die → die</span>
-                                <span class="text-sm">(plural)</span>
-                                <span class="text-gray-500 font-bold">NO cambia</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Verbos Comunes Section -->
-            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
-                <h3 class="text-2xl font-bold text-red-700 mb-4 flex items-center">
-                    <span class="mr-2">💬</span> Verbos Comunes que Requieren Akkusativ
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div class="bg-red-50 p-3 rounded border-l-4 border-red-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">✋</span><span class="font-bold text-red-700">haben</span> <span class="text-gray-600">(tener)</span>
-                        <div class="text-sm mt-1">Ich habe <span class="font-semibold">einen Hund</span>.</div>
-                        <div class="spanish-translation">Tengo un perro.</div>
-                    </div>
-                    <div class="bg-red-50 p-3 rounded border-l-4 border-red-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">👁️</span><span class="font-bold text-red-700">sehen</span> <span class="text-gray-600">(ver)</span>
-                        <div class="text-sm mt-1">Du siehst <span class="font-semibold">den Film</span>.</div>
-                        <div class="spanish-translation">Ves la película.</div>
-                    </div>
-                    <div class="bg-red-50 p-3 rounded border-l-4 border-red-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">🛒</span><span class="font-bold text-red-700">kaufen</span> <span class="text-gray-600">(comprar)</span>
-                        <div class="text-sm mt-1">Er kauft <span class="font-semibold">ein Auto</span>.</div>
-                        <div class="spanish-translation">Él compra un coche.</div>
-                    </div>
-                    <div class="bg-red-50 p-3 rounded border-l-4 border-red-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">❤️</span><span class="font-bold text-red-700">lieben</span> <span class="text-gray-600">(amar)</span>
-                        <div class="text-sm mt-1">Sie liebt <span class="font-semibold">ihren Mann</span>.</div>
-                        <div class="spanish-translation">Ella ama a su marido.</div>
-                    </div>
-                    <div class="bg-red-50 p-3 rounded border-l-4 border-red-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">🍽️</span><span class="font-bold text-red-700">essen</span> <span class="text-gray-600">(comer)</span>
-                        <div class="text-sm mt-1">Wir essen <span class="font-semibold">den Kuchen</span>.</div>
-                        <div class="spanish-translation">Comemos el pastel.</div>
-                    </div>
-                    <div class="bg-red-50 p-3 rounded border-l-4 border-red-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">🥤</span><span class="font-bold text-red-700">trinken</span> <span class="text-gray-600">(beber)</span>
-                        <div class="text-sm mt-1">Ihr trinkt <span class="font-semibold">das Wasser</span>.</div>
-                        <div class="spanish-translation">Bebéis el agua.</div>
-                    </div>
-                    <div class="bg-red-50 p-3 rounded border-l-4 border-red-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">🔧</span><span class="font-bold text-red-700">brauchen</span> <span class="text-gray-600">(necesitar)</span>
-                        <div class="text-sm mt-1">Sie brauchen <span class="font-semibold">eine Pause</span>.</div>
-                        <div class="spanish-translation">Necesitan una pausa.</div>
-                    </div>
-                    <div class="bg-red-50 p-3 rounded border-l-4 border-red-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">🤲</span><span class="font-bold text-red-700">nehmen</span> <span class="text-gray-600">(tomar)</span>
-                        <div class="text-sm mt-1">Ich nehme <span class="font-semibold">die Äpfel</span>.</div>
-                        <div class="spanish-translation">Tomo las manzanas.</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Preposiciones Section -->
-            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
-                <h3 class="text-2xl font-bold text-red-700 mb-4 flex items-center">
-                    <span class="mr-2">🔗</span> Preposiciones que Siempre Usan Akkusativ
-                </h3>
-                <p class="text-gray-700 mb-3">Estas preposiciones SIEMPRE requieren Akkusativ:</p>
-                <div class="bg-red-50 p-4 rounded-lg border-2 border-red-300">
-                    <a href="#" onclick="openPrepositionsModal(event)" class="text-red-600 font-bold text-lg underline hover:text-red-800">
-                        durch, für, gegen, ohne, um, bis, entlang
-                    </a>
-                    <div class="text-sm text-gray-600 mt-2 italic">Haz clic para ver ejemplos detallados</div>
-                </div>
-            </div>
-
-            <!-- Tips Section -->
-            <div class="bg-gradient-to-r from-yellow-100 to-yellow-200 rounded-xl p-6 shadow-md border-2 border-yellow-400">
-                <h3 class="text-2xl font-bold text-yellow-800 mb-4 flex items-center">
-                    <span class="mr-2">💡</span> Tips para No Olvidar
-                </h3>
-                <div class="space-y-3">
-                    <div class="flex items-start">
-                        <span class="text-2xl mr-3">1️⃣</span>
-                        <div>
-                            <span class="font-bold text-yellow-900">Memoriza "der → den":</span>
-                            <span class="text-gray-700"> Este es el <span class="bg-yellow-300 px-2 py-1 rounded font-bold">único cambio importante</span></span>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <span class="text-2xl mr-3">2️⃣</span>
-                        <div>
-                            <span class="font-bold text-yellow-900">Pregunta siempre:</span>
-                            <span class="text-gray-700"> <span class="italic">"¿Qué?"</span> o <span class="italic">"¿A quién?"</span> después del verbo</span>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <span class="text-2xl mr-3">3️⃣</span>
-                        <div>
-                            <span class="font-bold text-yellow-900">El sujeto hace, el objeto recibe:</span>
-                            <span class="text-gray-700"> Esta regla <span class="underline decoration-2">nunca falla</span></span>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <span class="text-2xl mr-3">4️⃣</span>
-                        <div>
-                            <span class="font-bold text-yellow-900">Practica con verbos transitivos:</span>
-                            <span class="text-gray-700"> Verbos que necesitan un objeto (haben, sehen, kaufen, lieben, essen, trinken, brauchen, nehmen, machen, finden, suchen, lesen, schreiben, hören, kennen, besuchen, verstehen, etc.)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -799,7 +571,7 @@
 
         let translationsVisible = false;
         function toggleAllTranslations() {
-            const studyWrappers = document.querySelectorAll('.subject-study-cell, .article-study-cell-wrapper, .merged-pronoun-cell > .w-full, .study-cell, .verb-example');
+            const studyWrappers = document.querySelectorAll('.subject-study-cell, .article-study-cell-wrapper, .merged-pronoun-cell > .w-full, .study-cell');
             const button = document.getElementById('toggle-all-button');
             const articlesTable = document.getElementById('articles-table-container');
             const pronounsTable = document.getElementById('pronouns-table-container');
@@ -807,7 +579,6 @@
             if (translationsVisible) {
                 articlesTable.classList.add('force-open');
                 pronounsTable.classList.add('force-open');
-                studyWrappers.forEach(w => w.classList.add('active'));
                 button.textContent = 'Ocultar todas las traducciones';
             }
             else {
@@ -828,10 +599,10 @@
             let html = '<table class="divide-y divide-gray-300">';
             html += '<colgroup>';
             html += '<col style="width: 7%;">';
-            html += '<col style="width: 10%;">';
+            html += '<col style="width: 8%;">';
             html += '<col style="width: 9%;">';
-            html += '<col style="width: 18%;">';
-            html += '<col style="width: 18%;">';
+            html += '<col style="width: 19%;">';
+            html += '<col style="width: 19%;">';
             html += '<col style="width: 19%;">';
             html += '<col style="width: 19%;">';
             html += '</colgroup>';
@@ -842,11 +613,11 @@
             html += '</tr>';
             html += '<tr>';
             html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE; width: 7%;"><span class="small-pronoun-header">Sujeto</span></th>`;
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE; width: 10%;"><span class="small-pronoun-header">-</span></th>`;
+            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE; width: 8%;"><span class="small-pronoun-header">-</span></th>`;
             html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200" style="width: 9%;">Base</th>`;
             const genders = [
-                { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1, width: '18%' },
-                { title: 'Weiblich (F)', color: 'bg-red-300', colspan: 1, width: '18%' },
+                { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1, width: '19%' },
+                { title: 'Weiblich (F)', color: 'bg-red-300', colspan: 1, width: '19%' },
                 { title: 'Neutral (N)', color: 'bg-red-400', colspan: 1, width: '19%' },
                 { title: 'Plural (P)', color: 'bg-red-500', colspan: 1, width: '19%' }
             ];
@@ -1002,10 +773,10 @@
             let html = '<table class="divide-y divide-gray-300">';
             html += '<colgroup>';
             html += '<col style="width: 7%;">';
-            html += '<col style="width: 10%;">';
+            html += '<col style="width: 8%;">';
             html += '<col style="width: 9%;">';
-            html += '<col style="width: 18%;">';
-            html += '<col style="width: 18%;">';
+            html += '<col style="width: 19%;">';
+            html += '<col style="width: 19%;">';
             html += '<col style="width: 19%;">';
             html += '<col style="width: 19%;">';
             html += '</colgroup>';
