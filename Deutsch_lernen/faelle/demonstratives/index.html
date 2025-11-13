@@ -374,12 +374,19 @@
                             exampleValue;
                         cellClass += ` merged-gender-cell wrap-cell align-top ${mergedData.color}`;
 
+                        // Add white/light text for dark backgrounds (Neutral and Plural columns) - only for examples
+                        const isDarkBackground = mergedData.color === 'bg-blue-400' || mergedData.color === 'bg-blue-500' ||
+                                                 mergedData.color === 'bg-red-400' || mergedData.color === 'bg-red-500' ||
+                                                 mergedData.color === 'bg-green-400' || mergedData.color === 'bg-green-500';
+                        const textColorClass = isDarkBackground ? 'text-white' : '';
+                        const translationColorClass = isDarkBackground ? 'text-gray-100' : '';
+
                         if (exampleValue && exampleValue !== '-' && tradExampleValue && tradExampleValue !== '-') {
                             contentHtml = `
                                 <span class="${caseType}-determiner">${determiner}</span>
                                 <div class="study-cell cursor-pointer p-0 pt-1" onclick="this.classList.toggle('active')">
-                                    <span class="german-phrase whitespace-nowrap">${styledExampleValue}</span>
-                                    <span class="spanish-translation">${tradExampleValue}</span>
+                                    <span class="german-phrase whitespace-nowrap ${textColorClass}">${styledExampleValue}</span>
+                                    <span class="spanish-translation ${translationColorClass}">${tradExampleValue}</span>
                                 </div>`;
                         } else {
                             contentHtml = `<span class="${caseType}-determiner">${determiner}</span>`;
