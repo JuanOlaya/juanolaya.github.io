@@ -1016,3 +1016,33 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
     margin-bottom: 0.5rem;
     color: #4682B4;
 }
+/* Toggle button for Beispiel (Aussage/Frage) */
+.toggle-beispiel-btn {
+    background: linear-gradient(135deg, #4682B4 0%, #5a9fd4 100%);
+    border: none;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-left: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.toggle-beispiel-btn:hover {
+    background: linear-gradient(135deg, #5a9fd4 0%, #4682B4 100%);
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.toggle-beispiel-btn:active {
+    transform: scale(0.98);
+}
+
+/* Example containers for Aussage and Frage */
+.example-aussage,
+.example-frage {
+    transition: opacity 0.3s ease-in-out;
+}
