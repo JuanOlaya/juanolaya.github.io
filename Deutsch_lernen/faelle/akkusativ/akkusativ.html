@@ -90,7 +90,7 @@
 
             <div class="bg-white rounded-xl p-6 mb-6 shadow-md border-l-4 border-red-500">
                 <p class="text-lg text-gray-700 mb-2">
-                    El Akkusativ responde a <span class="font-bold text-red-600">"¿Qué?"</span> o <span class="font-bold text-red-600">"¿A quién?"</span>.
+                    El Akkusativ responde a <span class="bg-red-200 px-2 py-1 rounded font-semibold">Was?</span> <span class="font-bold text-red-600">¿Qué?</span> o <span class="bg-red-200 px-2 py-1 rounded font-semibold">Wen?</span> <span class="font-bold text-red-600">¿A quién?</span>.
                     Se usa para el <span class="bg-yellow-200 font-bold px-2 py-1 rounded">objeto directo</span> de la oración -
                     la persona o cosa que <span class="underline decoration-red-500 decoration-2">recibe directamente la acción del verbo</span>.
                     También se usa después de ciertas preposiciones (<a href="#" onclick="openPrepositionsModal(event)" class="text-red-600 font-semibold underline hover:text-red-800">durch, für, gegen, ohne, um, bis, entlang</a>).
@@ -288,7 +288,7 @@
                         <span class="text-2xl mr-3">2️⃣</span>
                         <div>
                             <span class="font-bold text-yellow-900">Pregunta siempre:</span>
-                            <span class="text-gray-700"> <span class="italic">"¿Qué?"</span> o <span class="italic">"¿A quién?"</span> después del verbo</span>
+                            <span class="text-gray-700"> <span class="bg-red-200 px-2 py-1 rounded font-semibold">Was?</span> <span class="italic">"¿Qué?"</span> o <span class="bg-red-200 px-2 py-1 rounded font-semibold">Wen?</span> <span class="italic">"¿A quién?"</span> después del verbo</span>
                         </div>
                     </div>
                     <div class="flex items-start">
@@ -837,20 +837,16 @@
             html += '</colgroup>';
             html += '<thead class="bg-gray-100">';
             html += '<tr>';
-            html += `<th colspan="3" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300">Artículos</th>`;
-            html += `<th colspan="4" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-red-100">Akkusativ</th>`;
-            html += '</tr>';
-            html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE; width: 7%;"><span class="small-pronoun-header">Sujeto</span></th>`;
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE; width: 10%;"><span class="small-pronoun-header">-</span></th>`;
-            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200" style="width: 9%;">Base</th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE; width: 7%; font-size: 0.95rem;"><span class="small-pronoun-header">Subjekt</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE; width: 10%; font-size: 0.95rem;"><span class="small-pronoun-header">-</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200" style="width: 9%; font-size: 0.95rem;">Artikel</th>`;
             const genders = [
                 { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1, width: '18%' },
                 { title: 'Weiblich (F)', color: 'bg-red-300', colspan: 1, width: '18%' },
                 { title: 'Neutral (N)', color: 'bg-red-400', colspan: 1, width: '19%' },
                 { title: 'Plural (P)', color: 'bg-red-500', colspan: 1, width: '19%' }
             ];
-            genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}" style="width: ${g.width};">${g.title}</th>`; });
+            genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell font-bold tracking-wider text-gray-900 ${g.color}" style="width: ${g.width}; font-size: 0.95rem;">${g.title}</th>`; });
             html += '</tr>';
             html += '</thead>';
 
@@ -1011,20 +1007,16 @@
             html += '</colgroup>';
             html += '<thead class="bg-gray-100">';
             html += '<tr>';
-            html += `<th colspan="3" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300">Pronombres Personales</th>`;
-            html += `<th colspan="4" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-red-100">Akkusativ</th>`;
-            html += '</tr>';
-            html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE; width: 2.4%;"><span class="small-pronoun-header">PRON (NOM)</span></th>`;
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE; width: 5%;"><span class="small-pronoun-header">PRON (AKK)</span></th>`;
-            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200" style="width: 6%;">Base/Posesivo</th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE; width: 2.4%; font-size: 0.95rem;"><span class="small-pronoun-header">Pronomen (NOM)</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE; width: 5%; font-size: 0.95rem;"><span class="small-pronoun-header">Pronomen (AKK)</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200" style="width: 6%; font-size: 0.95rem;">Possessiv</th>`;
             const genders = [
                 { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1, width: '21.4%' },
                 { title: 'Weiblich (F)', color: 'bg-red-300', colspan: 1, width: '21.4%' },
                 { title: 'Neutral (N)', color: 'bg-red-400', colspan: 1, width: '21.4%' },
                 { title: 'Plural (P)', color: 'bg-red-500', colspan: 1, width: '22.4%' }
             ];
-            genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}" style="width: ${g.width};">${g.title}</th>`; });
+            genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell font-bold tracking-wider text-gray-900 ${g.color}" style="width: ${g.width}; font-size: 0.95rem;">${g.title}</th>`; });
             html += '</tr>';
             html += '</thead>';
 

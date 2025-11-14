@@ -35,6 +35,7 @@
         .pronunciation-hint.subject-translation-hidden { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; display: inline; }
         .subject-study-cell:hover .subject-translation-hidden, .subject-study-cell.active .subject-translation-hidden { max-height: 5rem; opacity: 1; }
         .force-open .article-hidden-part, .force-open .spanish-translation, .force-open .subject-translation-hidden { max-height: 10rem !important; opacity: 1 !important; margin-top: 0.1rem !important; }
+        .verb-example:hover .spanish-translation, .verb-example.active .spanish-translation { max-height: 10rem; opacity: 1; }
 
         /* Modal styles */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
@@ -69,6 +70,217 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-4 5a1 1 0 100 2h2a1 1 0 100-2h-2z" clip-rule="evenodd"/></svg>
                 Mostrar todas las traducciones
             </button>
+        </div>
+
+        <!-- Nominativ Detailed Explanation -->
+        <div class="mt-12 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-8 border-2 border-blue-200">
+            <h2 class="text-3xl font-bold text-blue-700 mb-6 flex items-center">
+                <span class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3 text-xl">📝</span>
+                Nominativ - Explicación Detallada
+            </h2>
+
+            <div class="bg-white rounded-xl p-6 mb-6 shadow-md border-l-4 border-blue-500">
+                <p class="text-lg text-gray-700 mb-2">
+                    El Nominativ responde a <span class="bg-blue-200 px-2 py-1 rounded font-semibold">Wer?</span> <span class="font-bold text-blue-600">¿Quién?</span> o <span class="bg-blue-200 px-2 py-1 rounded font-semibold">Was?</span> <span class="font-bold text-blue-600">¿Qué?</span>.
+                    Se usa para el <span class="bg-yellow-200 font-bold px-2 py-1 rounded">sujeto</span> de la oración -
+                    la persona o cosa que <span class="underline decoration-blue-500 decoration-2">hace o realiza la acción del verbo</span>.
+                    Es el caso <span class="font-bold text-blue-600">básico o de diccionario</span>.
+                </p>
+            </div>
+
+            <!-- W-Fragen Section -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
+                    <span class="mr-2">❓</span> W-Fragen (Preguntas en Alemán)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-blue-100 rounded-lg p-4 border-2 border-blue-300">
+                        <div class="text-3xl font-bold text-blue-700 mb-2">Wer?</div>
+                        <div class="text-lg text-gray-700">¿Quién? <span class="text-sm italic">(para personas)</span></div>
+                    </div>
+                    <div class="bg-blue-100 rounded-lg p-4 border-2 border-blue-300">
+                        <div class="text-3xl font-bold text-blue-700 mb-2">Was?</div>
+                        <div class="text-lg text-gray-700">¿Qué? <span class="text-sm italic">(para cosas)</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sujeto Section -->
+            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
+                <h3 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
+                    <span class="mr-2">🎯</span> ¿Qué es el Sujeto?
+                </h3>
+                <p class="text-lg text-gray-700 mb-4">
+                    El sujeto (<span class="font-semibold text-blue-600">Nominativ</span>) es la persona o cosa que
+                    <span class="bg-blue-100 font-bold px-2 py-1 rounded border border-blue-300">hace o realiza</span> la acción del verbo.
+                    Es lo que responde a las preguntas <span class="font-bold">"¿Quién?"</span> o <span class="font-bold">"¿Qué?"</span>.
+                </p>
+
+                <div class="space-y-3">
+                    <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
+                        <div class="font-bold text-lg mb-2"><span class="text-blue-600 bg-blue-100 px-2 py-1 rounded">Der Mann</span> läuft schnell.</div>
+                        <div class="text-gray-600">
+                            → <span class="font-semibold">¿Quién corre?</span> → <span class="text-blue-600 font-bold">el hombre</span>
+                            <span class="bg-yellow-200 px-2 py-1 rounded text-sm ml-2">sujeto</span>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
+                        <div class="font-bold text-lg mb-2"><span class="text-blue-600 bg-blue-100 px-2 py-1 rounded">Das Buch</span> ist interessant.</div>
+                        <div class="text-gray-600">
+                            → <span class="font-semibold">¿Qué es interesante?</span> → <span class="text-blue-600 font-bold">el libro</span>
+                            <span class="bg-yellow-200 px-2 py-1 rounded text-sm ml-2">sujeto</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Identificación Section -->
+            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
+                <h3 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
+                    <span class="mr-2">🔍</span> ¿Cómo Identificar el Sujeto?
+                </h3>
+
+                <div class="space-y-4">
+                    <!-- Técnica 1 -->
+                    <div class="bg-gradient-to-r from-cyan-50 to-cyan-100 p-5 rounded-lg border-2 border-cyan-400">
+                        <h4 class="font-bold text-xl text-cyan-700 mb-3">📌 Técnica 1: Usa las W-Fragen</h4>
+                        <p class="text-gray-700 mb-3">Haz la pregunta con <span class="bg-cyan-200 font-bold px-2 py-1 rounded">wer?</span> (¿quién?) o <span class="bg-cyan-200 font-bold px-2 py-1 rounded">was?</span> (¿qué?) antes del verbo:</p>
+                        <div class="bg-white p-3 rounded border-l-4 border-cyan-500">
+                            <div class="mb-2"><span class="text-blue-600 font-bold">Die Katze</span> schläft.</div>
+                            <div class="text-gray-600">→ <span class="italic">Wer schläft?</span> → <span class="text-blue-600 font-bold">Die Katze</span> <span class="text-cyan-600 font-bold text-xl">✓</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Técnica 2 -->
+                    <div class="bg-gradient-to-r from-indigo-50 to-indigo-100 p-5 rounded-lg border-2 border-indigo-400">
+                        <h4 class="font-bold text-xl text-indigo-700 mb-3">📌 Técnica 2: El que hace la acción</h4>
+                        <div class="space-y-2 text-gray-700">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-2">➤</span>
+                                <span>El sujeto es <span class="font-bold">quien o qué ejecuta</span> el verbo</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-2">➤</span>
+                                <span>Siempre está en <span class="bg-blue-200 font-bold px-2 py-1 rounded">Nominativ</span></span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3 rounded border-l-4 border-indigo-500 mt-3">
+                            <div><span class="bg-blue-200 font-bold px-2 py-1 rounded">Der Lehrer</span> <span class="text-gray-500 text-sm">(sujeto/NOM)</span> erklärt die Grammatik.</div>
+                            <div class="text-sm text-gray-600 mt-1 italic">El profesor explica la gramática.</div>
+                        </div>
+                    </div>
+
+                    <!-- Técnica 3 -->
+                    <div class="bg-gradient-to-r from-sky-50 to-sky-100 p-5 rounded-lg border-2 border-sky-400">
+                        <h4 class="font-bold text-xl text-sky-700 mb-3">📌 Técnica 3: La forma base del diccionario</h4>
+                        <p class="text-gray-700 mb-3">El Nominativ es <span class="underline decoration-2 decoration-sky-500 font-bold">siempre la forma que aparece en el diccionario</span>:</p>
+                        <div class="space-y-2">
+                            <div class="bg-white p-3 rounded flex items-center justify-between">
+                                <span class="font-bold">der Mann / ein Mann</span>
+                                <span class="text-sm">(masculino)</span>
+                                <span class="bg-blue-500 text-white font-bold px-3 py-1 rounded text-lg">✓ BASE</span>
+                            </div>
+                            <div class="bg-white p-3 rounded flex items-center justify-between">
+                                <span class="font-bold">die Frau / eine Frau</span>
+                                <span class="text-sm">(femenino)</span>
+                                <span class="bg-blue-500 text-white font-bold px-3 py-1 rounded text-lg">✓ BASE</span>
+                            </div>
+                            <div class="bg-white p-3 rounded flex items-center justify-between">
+                                <span class="font-bold">das Kind / ein Kind</span>
+                                <span class="text-sm">(neutro)</span>
+                                <span class="bg-blue-500 text-white font-bold px-3 py-1 rounded text-lg">✓ BASE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verbos Comunes Section -->
+            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
+                <h3 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
+                    <span class="mr-2">💬</span> Verbos Comunes con Sujeto en Nominativ
+                </h3>
+                <p class="text-gray-700 mb-3"><span class="font-bold">Todos los verbos</span> requieren un sujeto en Nominativ. Aquí algunos ejemplos básicos:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">🏃</span><span class="font-bold text-blue-700">sein</span> <span class="text-gray-600">(ser/estar)</span>
+                        <div class="text-sm mt-1"><span class="font-semibold">Der Hund</span> ist groß.</div>
+                        <div class="spanish-translation">El perro es grande.</div>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">🚶</span><span class="font-bold text-blue-700">gehen</span> <span class="text-gray-600">(ir)</span>
+                        <div class="text-sm mt-1"><span class="font-semibold">Die Frau</span> geht nach Hause.</div>
+                        <div class="spanish-translation">La mujer va a casa.</div>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">🛌</span><span class="font-bold text-blue-700">schlafen</span> <span class="text-gray-600">(dormir)</span>
+                        <div class="text-sm mt-1"><span class="font-semibold">Das Kind</span> schläft.</div>
+                        <div class="spanish-translation">El niño duerme.</div>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">💼</span><span class="font-bold text-blue-700">arbeiten</span> <span class="text-gray-600">(trabajar)</span>
+                        <div class="text-sm mt-1"><span class="font-semibold">Mein Vater</span> arbeitet hier.</div>
+                        <div class="spanish-translation">Mi padre trabaja aquí.</div>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">🗣️</span><span class="font-bold text-blue-700">sprechen</span> <span class="text-gray-600">(hablar)</span>
+                        <div class="text-sm mt-1"><span class="font-semibold">Wir</span> sprechen Deutsch.</div>
+                        <div class="spanish-translation">Hablamos alemán.</div>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">🏠</span><span class="font-bold text-blue-700">wohnen</span> <span class="text-gray-600">(vivir)</span>
+                        <div class="text-sm mt-1"><span class="font-semibold">Sie</span> wohnt in Berlin.</div>
+                        <div class="spanish-translation">Ella vive en Berlín.</div>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">📖</span><span class="font-bold text-blue-700">lesen</span> <span class="text-gray-600">(leer)</span>
+                        <div class="text-sm mt-1"><span class="font-semibold">Ich</span> lese ein Buch.</div>
+                        <div class="spanish-translation">Leo un libro.</div>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
+                        <span class="text-xl mr-1">🎮</span><span class="font-bold text-blue-700">spielen</span> <span class="text-gray-600">(jugar)</span>
+                        <div class="text-sm mt-1"><span class="font-semibold">Die Kinder</span> spielen draußen.</div>
+                        <div class="spanish-translation">Los niños juegan afuera.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="bg-gradient-to-r from-yellow-100 to-yellow-200 rounded-xl p-6 shadow-md border-2 border-yellow-400">
+                <h3 class="text-2xl font-bold text-yellow-800 mb-4 flex items-center">
+                    <span class="mr-2">💡</span> Tips para No Olvidar
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-3">1️⃣</span>
+                        <div>
+                            <span class="font-bold text-yellow-900">El Nominativ es el caso más simple:</span>
+                            <span class="text-gray-700"> Es la <span class="bg-yellow-300 px-2 py-1 rounded font-bold">forma base</span> que aparece en el diccionario</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-3">2️⃣</span>
+                        <div>
+                            <span class="font-bold text-yellow-900">Pregunta siempre:</span>
+                            <span class="text-gray-700"> <span class="bg-blue-200 px-2 py-1 rounded font-semibold">Wer?</span> <span class="italic">"¿Quién?"</span> o <span class="bg-blue-200 px-2 py-1 rounded font-semibold">Was?</span> <span class="italic">"¿Qué?"</span> + verbo</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-3">3️⃣</span>
+                        <div>
+                            <span class="font-bold text-yellow-900">El sujeto siempre hace la acción:</span>
+                            <span class="text-gray-700"> Busca <span class="underline decoration-2">quién realiza el verbo</span></span>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-3">4️⃣</span>
+                        <div>
+                            <span class="font-bold text-yellow-900">Toda oración tiene un sujeto:</span>
+                            <span class="text-gray-700"> Y ese sujeto siempre está en Nominativ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -378,7 +590,7 @@
 
         let translationsVisible = false;
         function toggleAllTranslations() {
-            const studyWrappers = document.querySelectorAll('.subject-study-cell, .article-study-cell-wrapper, .study-cell');
+            const studyWrappers = document.querySelectorAll('.subject-study-cell, .article-study-cell-wrapper, .study-cell, .verb-example');
             const button = document.getElementById('toggle-all-button');
             const articlesTable = document.getElementById('articles-table-container');
             const pronounsTable = document.getElementById('pronouns-table-container');
@@ -386,6 +598,7 @@
             if (translationsVisible) {
                 articlesTable.classList.add('force-open');
                 pronounsTable.classList.add('force-open');
+                studyWrappers.forEach(w => w.classList.add('active'));
                 button.textContent = 'Ocultar todas las traducciones';
             }
             else {
@@ -406,13 +619,8 @@
             let html = '<table class="divide-y divide-gray-300">';
             html += '<thead class="bg-gray-100">';
             html += '<tr>';
-            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300">Sujeto</th>`;
-            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300 bg-blue-100">Base/Posesivo</th>`;
-            html += `<th colspan="4" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-blue-100">Nominativ Case (Artículos y Posesivos por Género)</th>`;
-            html += '</tr>';
-            html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-gray-50">Sujeto (Nom.)</th>`;
-            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-blue-200">Base/Posesivo</th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-gray-50" style="font-size: 0.95rem;">Subjekt (Nom.)</th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-blue-200" style="font-size: 0.95rem;">Artikel</th>`;
             const genders = [
                 { title: 'Männlich (M)', color: 'bg-blue-200', colspan: 1 },
                 { title: 'Weiblich (F)', color: 'bg-blue-300', colspan: 1 },
@@ -420,7 +628,7 @@
                 { title: 'Plural (P)', color: 'bg-blue-500', colspan: 1 }
             ];
             genders.forEach(g => {
-                html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}">${g.title}</th>`;
+                html += `<th colspan="${g.colspan}" class="table-cell font-bold tracking-wider text-gray-900 ${g.color}" style="font-size: 0.95rem;">${g.title}</th>`;
             });
             html += '</tr>';
             html += '</thead>';
@@ -554,13 +762,8 @@
             let html = '<table class="divide-y divide-gray-300">';
             html += '<thead class="bg-gray-100">';
             html += '<tr>';
-            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300">Sujeto</th>`;
-            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300 bg-blue-100">Base/Posesivo</th>`;
-            html += `<th colspan="4" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-blue-100">Nominativ Case (Artículos y Posesivos por Género)</th>`;
-            html += '</tr>';
-            html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-gray-50">Sujeto (Nom.)</th>`;
-            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-blue-200">Base/Posesivo</th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-gray-50" style="font-size: 0.95rem;">Subjekt (Nom.)</th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-blue-200" style="font-size: 0.95rem;">Possessiv</th>`;
             const genders = [
                 { title: 'Männlich (M)', color: 'bg-blue-200', colspan: 1 },
                 { title: 'Weiblich (F)', color: 'bg-blue-300', colspan: 1 },
@@ -568,7 +771,7 @@
                 { title: 'Plural (P)', color: 'bg-blue-500', colspan: 1 }
             ];
             genders.forEach(g => {
-                html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}">${g.title}</th>`;
+                html += `<th colspan="${g.colspan}" class="table-cell font-bold tracking-wider text-gray-900 ${g.color}" style="font-size: 0.95rem;">${g.title}</th>`;
             });
             html += '</tr>';
             html += '</thead>';
