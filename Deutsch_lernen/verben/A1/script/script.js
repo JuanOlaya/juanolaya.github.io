@@ -260,18 +260,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = allVerbsData[verb];
         if (!data) return;
 
-        // Lazy load praesens and perfekt data if not already loaded
-        if (!data.praesens || !data.examples) {
+        // Lazy load praesens, perfekt, and fragen data if not already loaded
+        if (!data.praesens || !data.examples || !data.praesens_fragen) {
             try {
                 const praesensPromise = fetch(`json/praesens/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
                 const perfektPromise = fetch(`json/perfekt/${verb}.json`).then(res => res.ok ? res.json() : []).catch(() => []);
+                const fragenPromise = fetch(`json/praesens_fragen/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
 
-                const [praesensData, perfektData] = await Promise.all([praesensPromise, perfektPromise]);
+                const [praesensData, perfektData, fragenData] = await Promise.all([praesensPromise, perfektPromise, fragenPromise]);
 
                 // Merge the loaded data into allVerbsData
                 allVerbsData[verb] = {
                     ...data,
                     ...praesensData,
+                    ...fragenData,
                     examples: perfektData
                 };
             } catch (error) {
@@ -307,19 +309,36 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
 
             let tableHTML = '<table>';
-            tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel</th></tr>';
+            tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel <button id="toggle-beispiel-type" class="toggle-beispiel-btn" title="Zwischen Aussagen und Fragen wechseln">⇄</button></th></tr>';
 
             for (const { key, display, spanish } of pronounOrder) {
                 const conjugation = updatedData.praesens[key];
                 if (conjugation) {
                     const example = updatedData.praesens_examples && updatedData.praesens_examples[key];
+                    const frage = updatedData.praesens_fragen && updatedData.praesens_fragen[key];
                     let exampleCell = '';
 
-                    if (example) {
+                    if (example || frage) {
                         exampleCell = `<div class="example-cell">`;
-                        if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
-                        if (example.en) exampleCell += `<div class="example-translation example-en">🇬🇧 ${example.en}</div>`;
-                        if (example.es) exampleCell += `<div class="example-translation example-es">🇪🇸 ${example.es}</div>`;
+
+                        // Aussage (statement) examples
+                        if (example) {
+                            exampleCell += `<div class="example-aussage" style="display: block;">`;
+                            if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
+                            if (example.en) exampleCell += `<div class="example-translation example-en">🇬🇧 ${example.en}</div>`;
+                            if (example.es) exampleCell += `<div class="example-translation example-es">🇪🇸 ${example.es}</div>`;
+                            exampleCell += `</div>`;
+                        }
+
+                        // Frage (question) examples
+                        if (frage) {
+                            exampleCell += `<div class="example-frage" style="display: none;">`;
+                            if (frage.de) exampleCell += `<div class="example-de">${frage.de}</div>`;
+                            if (frage.en) exampleCell += `<div class="example-translation example-en">🇬🇧 ${frage.en}</div>`;
+                            if (frage.es) exampleCell += `<div class="example-translation example-es">🇪🇸 ${frage.es}</div>`;
+                            exampleCell += `</div>`;
+                        }
+
                         exampleCell += `</div>`;
                     }
 
@@ -361,6 +380,31 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             praesensTableContainer.innerHTML = tableHTML;
+
+            // Add event listener for toggle button
+            const toggleBtn = document.getElementById('toggle-beispiel-type');
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', () => {
+                    const aussageExamples = document.querySelectorAll('.example-aussage');
+                    const frageExamples = document.querySelectorAll('.example-frage');
+
+                    aussageExamples.forEach(el => {
+                        if (el.style.display === 'none') {
+                            el.style.display = 'block';
+                        } else {
+                            el.style.display = 'none';
+                        }
+                    });
+
+                    frageExamples.forEach(el => {
+                        if (el.style.display === 'none') {
+                            el.style.display = 'block';
+                        } else {
+                            el.style.display = 'none';
+                        }
+                    });
+                });
+            }
         } else {
             praesensTableContainer.innerHTML = '';
         }
