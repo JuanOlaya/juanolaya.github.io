@@ -1046,3 +1046,32 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 .example-frage {
     transition: opacity 0.3s ease-in-out;
 }
+
+/* Präteritum styling */
+.german-praeteritum,
+.spanish-praeteritum {
+    display: none;
+}
+
+/* Show Präteritum when toggle is active */
+.main-container:not(.hide-praeteritum) .german-praeteritum,
+.main-container:not(.hide-praeteritum) .spanish-praeteritum {
+    display: block;
+}
+
+/* Modal Präteritum visibility */
+#verb-modal .modal-content.hide-praeteritum [data-form="praeteritum"] {
+    display: none;
+}
+
+/* Spanish praeteritum italic styling */
+.spanish-praeteritum {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.german-praeteritum {
+    color: #333;
+    margin-top: 4px;
+}
