@@ -666,13 +666,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     const searchPromise = (async () => {
                         // Search in German infinitive and Spanish translation (starts with)
                         const germanMatch = verbName.toLowerCase().startsWith(searchTerm);
-                        const spanishMatch = verbData.es && verbData.es.toLowerCase().startsWith(searchTerm);
+                        let spanishMatch = verbData.es && verbData.es.toLowerCase().startsWith(searchTerm);
+
+                        // Also search in searchable Spanish variants
+                        if (!spanishMatch && verbData.es_searchable) {
+                            spanishMatch = verbData.es_searchable.some(variant =>
+                                variant.toLowerCase().startsWith(searchTerm)
+                            );
+                        }
 
                         // Search in Perfekt (check if any word starts with search term)
                         let perfektMatch = false;
                         if (verbData.perfekt) {
                             const perfektWords = verbData.perfekt.toLowerCase().split(' ');
                             perfektMatch = perfektWords.some(word => word.startsWith(searchTerm));
+                        }
+
+                        // Also search in searchable Perfekt variants
+                        if (!perfektMatch && verbData.es_perfekt_searchable) {
+                            perfektMatch = verbData.es_perfekt_searchable.some(variant =>
+                                variant.toLowerCase().startsWith(searchTerm)
+                            );
                         }
 
                         // Search in Präsens conjugations (load if needed)
@@ -715,6 +729,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (allVerbsData[verbName].praeteritum_conjugations) {
                             const conjugations = Object.values(allVerbsData[verbName].praeteritum_conjugations);
                             praeteritumMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
+                        }
+
+                        // Also search in searchable Präteritum variants
+                        if (!praeteritumMatch && verbData.es_praeteritum_searchable) {
+                            praeteritumMatch = verbData.es_praeteritum_searchable.some(variant =>
+                                variant.toLowerCase().startsWith(searchTerm)
+                            );
                         }
 
                         if (germanMatch || spanishMatch || perfektMatch || praesensMatch || praeteritumMatch) {
