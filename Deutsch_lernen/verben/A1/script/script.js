@@ -109,6 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Prepare Präteritum
+            const germanPraeteritum = verbData.praeteritum || '---';
+            const spanishPraeteritum = verbData.es_praeteritum || '';
+
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="word-item-content">
@@ -118,6 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="spanish-translation" data-form="translation">${verbData.es || ''}</span>
                             <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
                             <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
+                            <span class="german-praeteritum" data-form="praeteritum">${germanPraeteritum}</span>
+                            <span class="spanish-praeteritum" data-form="translation praeteritum">${spanishPraeteritum}</span>
                         </div>
                     </div>
                 </div>`;
@@ -286,11 +292,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('modal-verb-infinitive').textContent = verb;
         document.getElementById('modal-verb-perfekt').textContent = updatedData.perfekt || '---';
+        document.getElementById('modal-verb-praeteritum').textContent = updatedData.praeteritum || '---';
         document.getElementById('modal-emoji').textContent = updatedData.emoji || '❓';
         document.getElementById('modal-verb-infinitive-es').textContent = updatedData.es ? `🇪🇸 ${updatedData.es}` : '';
         document.getElementById('modal-verb-perfekt-es').textContent = updatedData.es_perfekt ? `🇪🇸 ${updatedData.es_perfekt}` : '';
+        document.getElementById('modal-verb-praeteritum-es').textContent = updatedData.es_praeteritum ? `🇪🇸 ${updatedData.es_praeteritum}` : '';
         document.getElementById('modal-verb-english-infinitive').textContent = updatedData.en_verb ? `🇬🇧 ${updatedData.en_verb}` : '';
         document.getElementById('modal-verb-english-perfekt').textContent = updatedData.en_perfekt ? `🇬🇧 ${updatedData.en_perfekt}` : '';
+        document.getElementById('modal-verb-english-praeteritum').textContent = updatedData.en_praeteritum ? `🇬🇧 ${updatedData.en_praeteritum}` : '';
         document.getElementById('modal-level-badge').textContent = updatedData.level || 'A1';
         
         const praesensTableContainer = document.getElementById('modal-praesens-table');
@@ -413,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(praesensExamplesContainer) praesensExamplesContainer.style.display = 'none';
 
         const verbModalContent = document.querySelector('#verb-modal .modal-content');
-        verbModalContent.classList.remove('hide-perfekt', 'hide-translation');
+        verbModalContent.classList.remove('hide-perfekt', 'hide-praeteritum', 'hide-translation');
         document.getElementById('praesens-details-container').open = true;
 
         verbModal.classList.add('visible');
@@ -554,6 +563,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Prepare Präteritum
+            const germanPraeteritum = verbData.praeteritum || '---';
+            const spanishPraeteritum = verbData.es_praeteritum || '';
+
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="word-item-content">
@@ -563,6 +576,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="spanish-translation" data-form="translation">${verbData.es || ''}</span>
                             <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
                             <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
+                            <span class="german-praeteritum" data-form="praeteritum">${germanPraeteritum}</span>
+                            <span class="spanish-praeteritum" data-form="translation praeteritum">${spanishPraeteritum}</span>
                         </div>
                     </div>
                 </div>`;
