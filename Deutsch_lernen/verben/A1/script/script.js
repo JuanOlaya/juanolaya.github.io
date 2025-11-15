@@ -313,20 +313,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = allVerbsData[verb];
         if (!data) return;
 
-        // Lazy load praesens, perfekt, and fragen data if not already loaded
-        if (!data.praesens || !data.examples || !data.praesens_fragen) {
+        // Lazy load praesens, perfekt, perfekt_konjugation, and fragen data if not already loaded
+        if (!data.praesens || !data.examples || !data.praesens_fragen || !data.perfekt_examples) {
             try {
                 const praesensPromise = fetch(`json/praesens/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
                 const perfektPromise = fetch(`json/perfekt/${verb}.json`).then(res => res.ok ? res.json() : []).catch(() => []);
                 const fragenPromise = fetch(`json/praesens_fragen/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
+                const perfektKonjugationPromise = fetch(`json/perfekt_konjugation/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
 
-                const [praesensData, perfektData, fragenData] = await Promise.all([praesensPromise, perfektPromise, fragenPromise]);
+                const [praesensData, perfektData, fragenData, perfektKonjugationData] = await Promise.all([praesensPromise, perfektPromise, fragenPromise, perfektKonjugationPromise]);
 
                 // Merge the loaded data into allVerbsData
                 allVerbsData[verb] = {
                     ...data,
                     ...praesensData,
                     ...fragenData,
+                    ...perfektKonjugationData,
                     examples: perfektData
                 };
             } catch (error) {
@@ -467,6 +469,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const praesensExamplesContainer = document.getElementById('praesens-examples-container');
         if(praesensExamplesContainer) praesensExamplesContainer.style.display = 'none';
+
+        // Generate Perfekt examples table
+        const perfektExamplesTableContainer = document.getElementById('modal-perfekt-examples-table');
+        if (updatedData.perfekt_examples) {
+            const pronounOrder = [
+                { key: 'ich', display: 'ich', spanish: 'yo' },
+                { key: 'du', display: 'du', spanish: 'tú' },
+                { key: 'er', display: 'er', spanish: 'él' },
+                { key: 'sie', display: 'sie', spanish: 'ella' },
+                { key: 'es', display: 'es', spanish: 'neutro' },
+                { key: 'wir', display: 'wir', spanish: 'nosotr@s' },
+                { key: 'ihr', display: 'ihr', spanish: 'vosotr@s' },
+                { key: 'sie (plural)', display: 'sie', spanish: 'ell@s' },
+                { key: 'Sie (formal)', display: 'Sie', spanish: 'usted(es)' }
+            ];
+
+            let perfektTableHTML = '<table>';
+            perfektTableHTML += '<tr><th>Pronomen</th><th>Beispiel</th></tr>';
+
+            for (const { key, display, spanish } of pronounOrder) {
+                const example = updatedData.perfekt_examples[key];
+                if (example) {
+                    let exampleCell = '';
+
+                    if (example) {
+                        exampleCell = `<div class="example-cell">`;
+                        if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
+                        if (example.en) exampleCell += `<div class="example-translation example-en">🇬🇧 ${example.en}</div>`;
+                        if (example.es) exampleCell += `<div class="example-translation example-es">🇪🇸 ${example.es}</div>`;
+                        exampleCell += `</div>`;
+                    }
+
+                    // Create pronoun cell with German pronoun and Spanish translation
+                    let pronounCell = `<div class="pronoun-de">${display}</div>`;
+                    if (spanish) {
+                        pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
+                    }
+
+                    // Add special classes for er/sie/es rows
+                    let rowClass = '';
+                    if (key === 'er') {
+                        rowClass = ' class="pronoun-row-er"';
+                    } else if (key === 'sie') {
+                        rowClass = ' class="pronoun-row-sie"';
+                    } else if (key === 'es') {
+                        rowClass = ' class="pronoun-row-es"';
+                    } else if (key === 'sie (plural)') {
+                        rowClass = ' class="pronoun-row-sie-plural"';
+                    } else if (key === 'Sie (formal)') {
+                        rowClass = ' class="pronoun-row-Sie-formal"';
+                    }
+
+                    perfektTableHTML += `<tr${rowClass}><td>${pronounCell}</td><td>${exampleCell}</td></tr>`;
+                }
+            }
+
+            perfektTableHTML += '</table>';
+            perfektExamplesTableContainer.innerHTML = perfektTableHTML;
+        } else {
+            perfektExamplesTableContainer.innerHTML = '';
+        }
 
         const verbModalContent = document.querySelector('#verb-modal .modal-content');
         verbModalContent.classList.remove('hide-perfekt', 'hide-praeteritum', 'hide-translation');
