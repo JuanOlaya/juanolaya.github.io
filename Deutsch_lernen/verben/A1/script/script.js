@@ -664,28 +664,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (verbData) {
                     // Create a promise for each verb to search (including lazy-loaded praesens)
                     const searchPromise = (async () => {
-                        // Search in German infinitive and Spanish translation (starts with)
+                        // Helper function to check if search term is contained as a word in text
+                        const containsWord = (text, term) => {
+                            if (!text) return false;
+                            const normalized = text.toLowerCase().replace(/[()]/g, '');
+                            const words = normalized.split(/[\s,/]+/);
+                            return words.some(word => word.startsWith(term));
+                        };
+
+                        // Search in German infinitive and Spanish translation
                         const germanMatch = verbName.toLowerCase().startsWith(searchTerm);
-                        let spanishMatch = verbData.es && verbData.es.toLowerCase().startsWith(searchTerm);
+                        let spanishMatch = containsWord(verbData.es, searchTerm);
 
                         // Also search in searchable Spanish variants
                         if (!spanishMatch && verbData.es_searchable) {
                             spanishMatch = verbData.es_searchable.some(variant =>
-                                variant.toLowerCase().startsWith(searchTerm)
+                                containsWord(variant, searchTerm)
                             );
                         }
 
-                        // Search in Perfekt (check if any word starts with search term)
+                        // Search in Perfekt (German and Spanish)
                         let perfektMatch = false;
                         if (verbData.perfekt) {
                             const perfektWords = verbData.perfekt.toLowerCase().split(' ');
                             perfektMatch = perfektWords.some(word => word.startsWith(searchTerm));
                         }
 
+                        // Search in Spanish Perfekt forms (he dado, ha dado, etc.)
+                        if (!perfektMatch && verbData.es_perfekt) {
+                            perfektMatch = containsWord(verbData.es_perfekt, searchTerm);
+                        }
+
                         // Also search in searchable Perfekt variants
                         if (!perfektMatch && verbData.es_perfekt_searchable) {
                             perfektMatch = verbData.es_perfekt_searchable.some(variant =>
-                                variant.toLowerCase().startsWith(searchTerm)
+                                containsWord(variant, searchTerm)
                             );
                         }
 
@@ -704,10 +717,18 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         }
 
-                        // Check all praesens conjugations (starts with)
+                        // Check all praesens conjugations (German - starts with)
                         if (allVerbsData[verbName].praesens) {
                             const conjugations = Object.values(allVerbsData[verbName].praesens);
                             praesensMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
+                        }
+
+                        // Check praesens Spanish examples (doy, das, da, etc.)
+                        if (!praesensMatch && allVerbsData[verbName].praesens_examples) {
+                            const examples = Object.values(allVerbsData[verbName].praesens_examples);
+                            praesensMatch = examples.some(example =>
+                                example.es && containsWord(example.es, searchTerm)
+                            );
                         }
 
                         // Search in Präteritum conjugations (load if needed)
@@ -725,16 +746,29 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         }
 
-                        // Check all präteritum conjugations (starts with)
+                        // Check all präteritum conjugations (German - starts with)
                         if (allVerbsData[verbName].praeteritum_conjugations) {
                             const conjugations = Object.values(allVerbsData[verbName].praeteritum_conjugations);
                             praeteritumMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
                         }
 
+                        // Check präteritum Spanish examples (dio, diste, etc.)
+                        if (!praeteritumMatch && allVerbsData[verbName].praeteritum_examples) {
+                            const examples = Object.values(allVerbsData[verbName].praeteritum_examples);
+                            praeteritumMatch = examples.some(example =>
+                                example.es && containsWord(example.es, searchTerm)
+                            );
+                        }
+
+                        // Search in Spanish Präteritum forms (él/ella dio, etc.)
+                        if (!praeteritumMatch && verbData.es_praeteritum) {
+                            praeteritumMatch = containsWord(verbData.es_praeteritum, searchTerm);
+                        }
+
                         // Also search in searchable Präteritum variants
                         if (!praeteritumMatch && verbData.es_praeteritum_searchable) {
                             praeteritumMatch = verbData.es_praeteritum_searchable.some(variant =>
-                                variant.toLowerCase().startsWith(searchTerm)
+                                containsWord(variant, searchTerm)
                             );
                         }
 
