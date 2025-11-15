@@ -723,14 +723,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             praesensMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
                         }
 
-                        // Check praesens Spanish examples (doy, das, da, etc.)
-                        if (!praesensMatch && allVerbsData[verbName].praesens_examples) {
-                            const examples = Object.values(allVerbsData[verbName].praesens_examples);
-                            praesensMatch = examples.some(example =>
-                                example.es && containsWord(example.es, searchTerm)
-                            );
-                        }
-
                         // Search in Präteritum conjugations (load if needed)
                         let praeteritumMatch = false;
                         if (!allVerbsData[verbName].praeteritum_conjugations) {
@@ -750,14 +742,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (allVerbsData[verbName].praeteritum_conjugations) {
                             const conjugations = Object.values(allVerbsData[verbName].praeteritum_conjugations);
                             praeteritumMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
-                        }
-
-                        // Check präteritum Spanish examples (dio, diste, etc.)
-                        if (!praeteritumMatch && allVerbsData[verbName].praeteritum_examples) {
-                            const examples = Object.values(allVerbsData[verbName].praeteritum_examples);
-                            praeteritumMatch = examples.some(example =>
-                                example.es && containsWord(example.es, searchTerm)
-                            );
                         }
 
                         // Search in Spanish Präteritum forms (él/ella dio, etc.)
