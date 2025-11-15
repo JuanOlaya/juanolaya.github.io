@@ -481,22 +481,30 @@ document.addEventListener('DOMContentLoaded', () => {
         // Generate Perfekt examples table
         const perfektExamplesTableContainer = document.getElementById('modal-perfekt-examples-table');
         if (updatedData.perfekt_examples) {
+            // Determine if verb uses haben or sein
+            const usesHaben = updatedData.perfekt && updatedData.perfekt.startsWith('hat');
+            const usesSein = updatedData.perfekt && updatedData.perfekt.startsWith('ist');
+
+            // Auxiliary verb conjugations
+            const auxHaben = ['habe', 'hast', 'hat', 'haben', 'habt', 'haben', 'haben'];
+            const auxSein = ['bin', 'bist', 'ist', 'sind', 'seid', 'sind', 'sind'];
+
             const pronounOrder = [
-                { key: 'ich', display: 'ich', spanish: 'yo' },
-                { key: 'du', display: 'du', spanish: 'tú' },
-                { key: 'er', display: 'er', spanish: 'él' },
-                { key: 'sie', display: 'sie', spanish: 'ella' },
-                { key: 'es', display: 'es', spanish: 'neutro' },
-                { key: 'wir', display: 'wir', spanish: 'nosotr@s' },
-                { key: 'ihr', display: 'ihr', spanish: 'vosotr@s' },
-                { key: 'sie (plural)', display: 'sie', spanish: 'ell@s' },
-                { key: 'Sie (formal)', display: 'Sie', spanish: 'usted(es)' }
+                { key: 'ich', display: 'ich', spanish: 'yo', auxIndex: 0 },
+                { key: 'du', display: 'du', spanish: 'tú', auxIndex: 1 },
+                { key: 'er', display: 'er', spanish: 'él', auxIndex: 2 },
+                { key: 'sie', display: 'sie', spanish: 'ella', auxIndex: 2 },
+                { key: 'es', display: 'es', spanish: 'neutro', auxIndex: 2 },
+                { key: 'wir', display: 'wir', spanish: 'nosotr@s', auxIndex: 3 },
+                { key: 'ihr', display: 'ihr', spanish: 'vosotr@s', auxIndex: 4 },
+                { key: 'sie (plural)', display: 'sie', spanish: 'ell@s', auxIndex: 5 },
+                { key: 'Sie (formal)', display: 'Sie', spanish: 'usted(es)', auxIndex: 6 }
             ];
 
             let perfektTableHTML = '<table>';
-            perfektTableHTML += '<tr><th>Pronomen</th><th>Beispiel</th></tr>';
+            perfektTableHTML += '<tr><th>Pronomen</th><th>Aux. Konjug.</th><th>Beispiel</th></tr>';
 
-            for (const { key, display, spanish } of pronounOrder) {
+            for (const { key, display, spanish, auxIndex } of pronounOrder) {
                 const example = updatedData.perfekt_examples[key];
                 if (example) {
                     let exampleCell = '';
@@ -515,6 +523,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
                     }
 
+                    // Get auxiliary verb conjugation
+                    let auxVerb = '';
+                    if (usesSein) {
+                        auxVerb = auxSein[auxIndex];
+                    } else {
+                        auxVerb = auxHaben[auxIndex];
+                    }
+
                     // Add special classes for er/sie/es rows
                     let rowClass = '';
                     if (key === 'er') {
@@ -529,7 +545,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         rowClass = ' class="pronoun-row-Sie-formal"';
                     }
 
-                    perfektTableHTML += `<tr${rowClass}><td>${pronounCell}</td><td>${exampleCell}</td></tr>`;
+                    perfektTableHTML += `<tr${rowClass}><td>${pronounCell}</td><td class="aux-verb">${auxVerb}</td><td>${exampleCell}</td></tr>`;
                 }
             }
 
