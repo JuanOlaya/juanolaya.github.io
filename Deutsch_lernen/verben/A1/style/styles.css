@@ -237,6 +237,7 @@
             opacity: 1;
             max-height: 20px; /* Adjust based on expected line height */
             overflow: hidden;
+            font-style: italic; /* Italic for translations */
         }
         .hide-translation [data-form~='translation'],
         .hide-perfekt [data-form~='perfekt'],

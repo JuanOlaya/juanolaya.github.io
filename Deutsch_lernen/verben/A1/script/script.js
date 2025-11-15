@@ -72,6 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Helper function to remove parentheses from translations
+    function removeParentheses(text) {
+        if (!text) return text;
+        return text.replace(/^\(|\)$/g, '');
+    }
+
     // --- UPDATED RENDER FUNCTION ---
     function renderVerbGroup(index) {
         const group = verbGroupsData[index];
@@ -87,6 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!verbData) return;
             const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
 
+            // Remove parentheses from translations
+            const esTranslation = removeParentheses(verbData.es || '');
+            const esPerfektTranslation = removeParentheses(verbData.es_perfekt || '');
+            const esPraeteritumTranslation = removeParentheses(verbData.es_praeteritum || '');
+
             // Prepare German perfekt with short (participle only) and full versions
             let germanPerfektShort = verbData.perfekt || '---';
             let germanPerfektFull = verbData.perfekt || '---';
@@ -99,13 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Prepare Spanish perfekt with short (participle only) and full versions
-            let spanishPerfektShort = verbData.es_perfekt || '';
-            let spanishPerfektFull = verbData.es_perfekt || '';
-            if (verbData.es_perfekt) {
-                const spanishParts = verbData.es_perfekt.split(' ');
+            let spanishPerfektShort = esPerfektTranslation;
+            let spanishPerfektFull = esPerfektTranslation;
+            if (esPerfektTranslation) {
+                const spanishParts = esPerfektTranslation.split(' ');
                 if (spanishParts.length >= 2) {
                     spanishPerfektShort = spanishParts.slice(1).join(' '); // participle only
-                    spanishPerfektFull = verbData.es_perfekt; // full: he ido
+                    spanishPerfektFull = esPerfektTranslation; // full: he ido
                 }
             }
 
@@ -121,13 +132,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Prepare Spanish präteritum with short (verb only) and full versions
-            let spanishPraeteritumShort = verbData.es_praeteritum || '';
-            let spanishPraeteritumFull = verbData.es_praeteritum || '';
-            if (verbData.es_praeteritum) {
-                const spanishPraeteritumParts = verbData.es_praeteritum.split(' ');
+            let spanishPraeteritumShort = esPraeteritumTranslation;
+            let spanishPraeteritumFull = esPraeteritumTranslation;
+            if (esPraeteritumTranslation) {
+                const spanishPraeteritumParts = esPraeteritumTranslation.split(' ');
                 if (spanishPraeteritumParts.length >= 2) {
                     spanishPraeteritumShort = spanishPraeteritumParts.slice(1).join(' '); // verb only
-                    spanishPraeteritumFull = verbData.es_praeteritum; // full: él/ella hizo
+                    spanishPraeteritumFull = esPraeteritumTranslation; // full: él/ella hizo
                 }
             }
 
@@ -137,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="emoji">${verbData.emoji || '❓'}</span>
                         <div class="text-container perfekt-hover-container">
                             <span class="german-word">${verbName}${irregularMark}</span>
-                            <span class="spanish-translation" data-form="translation">${verbData.es || ''}</span>
+                            <span class="spanish-translation" data-form="translation">${esTranslation}</span>
                             <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
                             <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
                             <span class="german-praeteritum praeteritum-text" data-form="praeteritum" data-short="${germanPraeteritumShort}" data-full="${germanPraeteritumFull}">${germanPraeteritumShort}</span>
@@ -577,6 +588,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const verbData = match.data;
             const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
 
+            // Remove parentheses from translations
+            const esTranslation = removeParentheses(verbData.es || '');
+            const esPerfektTranslation = removeParentheses(verbData.es_perfekt || '');
+            const esPraeteritumTranslation = removeParentheses(verbData.es_praeteritum || '');
+
             // Prepare German perfekt with short and full versions
             let germanPerfektShort = verbData.perfekt || '---';
             let germanPerfektFull = verbData.perfekt || '---';
@@ -589,13 +605,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Prepare Spanish perfekt with short and full versions
-            let spanishPerfektShort = verbData.es_perfekt || '';
-            let spanishPerfektFull = verbData.es_perfekt || '';
-            if (verbData.es_perfekt) {
-                const spanishParts = verbData.es_perfekt.split(' ');
+            let spanishPerfektShort = esPerfektTranslation;
+            let spanishPerfektFull = esPerfektTranslation;
+            if (esPerfektTranslation) {
+                const spanishParts = esPerfektTranslation.split(' ');
                 if (spanishParts.length >= 2) {
                     spanishPerfektShort = spanishParts.slice(1).join(' ');
-                    spanishPerfektFull = verbData.es_perfekt;
+                    spanishPerfektFull = esPerfektTranslation;
                 }
             }
 
@@ -611,13 +627,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Prepare Spanish präteritum with short (verb only) and full versions
-            let spanishPraeteritumShort = verbData.es_praeteritum || '';
-            let spanishPraeteritumFull = verbData.es_praeteritum || '';
-            if (verbData.es_praeteritum) {
-                const spanishPraeteritumParts = verbData.es_praeteritum.split(' ');
+            let spanishPraeteritumShort = esPraeteritumTranslation;
+            let spanishPraeteritumFull = esPraeteritumTranslation;
+            if (esPraeteritumTranslation) {
+                const spanishPraeteritumParts = esPraeteritumTranslation.split(' ');
                 if (spanishPraeteritumParts.length >= 2) {
                     spanishPraeteritumShort = spanishPraeteritumParts.slice(1).join(' '); // verb only
-                    spanishPraeteritumFull = verbData.es_praeteritum; // full: él/ella hizo
+                    spanishPraeteritumFull = esPraeteritumTranslation; // full: él/ella hizo
                 }
             }
 
@@ -627,7 +643,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="emoji">${verbData.emoji || '❓'}</span>
                         <div class="text-container perfekt-hover-container">
                             <span class="german-word">${verbName}${irregularMark}</span>
-                            <span class="spanish-translation" data-form="translation">${verbData.es || ''}</span>
+                            <span class="spanish-translation" data-form="translation">${esTranslation}</span>
                             <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
                             <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
                             <span class="german-praeteritum praeteritum-text" data-form="praeteritum" data-short="${germanPraeteritumShort}" data-full="${germanPraeteritumFull}">${germanPraeteritumShort}</span>
