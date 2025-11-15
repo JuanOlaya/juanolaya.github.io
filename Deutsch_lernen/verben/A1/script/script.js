@@ -313,15 +313,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = allVerbsData[verb];
         if (!data) return;
 
-        // Lazy load praesens, perfekt, perfekt_konjugation, and fragen data if not already loaded
-        if (!data.praesens || !data.examples || !data.praesens_fragen || !data.perfekt_examples) {
+        // Lazy load praesens, perfekt, perfekt_konjugation, praeteritum_konjugation, and fragen data if not already loaded
+        if (!data.praesens || !data.examples || !data.praesens_fragen || !data.perfekt_examples || !data.praeteritum_examples) {
             try {
                 const praesensPromise = fetch(`json/praesens/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
                 const perfektPromise = fetch(`json/perfekt/${verb}.json`).then(res => res.ok ? res.json() : []).catch(() => []);
                 const fragenPromise = fetch(`json/praesens_fragen/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
                 const perfektKonjugationPromise = fetch(`json/perfekt_konjugation/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
+                const praeteritumKonjugationPromise = fetch(`json/praeteritum_konjugation/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
 
-                const [praesensData, perfektData, fragenData, perfektKonjugationData] = await Promise.all([praesensPromise, perfektPromise, fragenPromise, perfektKonjugationPromise]);
+                const [praesensData, perfektData, fragenData, perfektKonjugationData, praeteritumKonjugationData] = await Promise.all([praesensPromise, perfektPromise, fragenPromise, perfektKonjugationPromise, praeteritumKonjugationPromise]);
 
                 // Merge the loaded data into allVerbsData
                 allVerbsData[verb] = {
@@ -329,6 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ...praesensData,
                     ...fragenData,
                     ...perfektKonjugationData,
+                    ...praeteritumKonjugationData,
                     examples: perfektData
                 };
             } catch (error) {
@@ -529,6 +531,73 @@ document.addEventListener('DOMContentLoaded', () => {
             perfektExamplesTableContainer.innerHTML = perfektTableHTML;
         } else {
             perfektExamplesTableContainer.innerHTML = '';
+        }
+
+        // Generate Präteritum conjugation and examples table
+        const praeteritumKonjugationTableContainer = document.getElementById('modal-praeteritum-konjugation-table');
+        if (updatedData.praeteritum && updatedData.praeteritum_examples) {
+            const pronounOrder = [
+                { key: 'ich', display: 'ich', spanish: 'yo' },
+                { key: 'du', display: 'du', spanish: 'tú' },
+                { key: 'er', display: 'er', spanish: 'él' },
+                { key: 'sie', display: 'sie', spanish: 'ella' },
+                { key: 'es', display: 'es', spanish: 'neutro' },
+                { key: 'wir', display: 'wir', spanish: 'nosotr@s' },
+                { key: 'ihr', display: 'ihr', spanish: 'vosotr@s' },
+                { key: 'sie (plural)', display: 'sie', spanish: 'ell@s' },
+                { key: 'Sie (formal)', display: 'Sie', spanish: 'usted(es)' }
+            ];
+
+            let praeteritumTableHTML = '<table>';
+            praeteritumTableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel</th></tr>';
+
+            for (const { key, display, spanish } of pronounOrder) {
+                const conjugation = updatedData.praeteritum[key];
+                const example = updatedData.praeteritum_examples[key];
+
+                if (conjugation || example) {
+                    let exampleCell = '';
+
+                    if (example) {
+                        exampleCell = `<div class="example-cell">`;
+                        if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
+                        if (example.en) exampleCell += `<div class="example-translation example-en">🇬🇧 ${example.en}</div>`;
+                        if (example.es) exampleCell += `<div class="example-translation example-es">🇪🇸 ${example.es}</div>`;
+                        exampleCell += `</div>`;
+                    }
+
+                    // Create pronoun cell with German pronoun and Spanish translation
+                    let pronounCell = `<div class="pronoun-de">${display}</div>`;
+                    if (spanish) {
+                        pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
+                    }
+
+                    // Add special classes for er/sie/es rows and hide conjugation for duplicates
+                    let rowClass = '';
+                    let conjugationCell = conjugation || '';
+
+                    if (key === 'er') {
+                        rowClass = ' class="pronoun-row-er"';
+                    } else if (key === 'sie') {
+                        rowClass = ' class="pronoun-row-sie"';
+                    } else if (key === 'es') {
+                        rowClass = ' class="pronoun-row-es"';
+                        conjugationCell = ''; // Hide if same as er/sie
+                    } else if (key === 'sie (plural)') {
+                        rowClass = ' class="pronoun-row-sie-plural"';
+                        conjugationCell = ''; // Hide if same as Sie (formal)
+                    } else if (key === 'Sie (formal)') {
+                        rowClass = ' class="pronoun-row-Sie-formal"';
+                    }
+
+                    praeteritumTableHTML += `<tr${rowClass}><td>${pronounCell}</td><td>${conjugationCell}</td><td>${exampleCell}</td></tr>`;
+                }
+            }
+
+            praeteritumTableHTML += '</table>';
+            praeteritumKonjugationTableContainer.innerHTML = praeteritumTableHTML;
+        } else {
+            praeteritumKonjugationTableContainer.innerHTML = '';
         }
 
         const verbModalContent = document.querySelector('#verb-modal .modal-content');
