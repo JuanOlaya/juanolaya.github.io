@@ -690,7 +690,28 @@ document.addEventListener('DOMContentLoaded', () => {
                             praesensMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
                         }
 
-                        if (germanMatch || spanishMatch || perfektMatch || praesensMatch) {
+                        // Search in Präteritum conjugations (load if needed)
+                        let praeteritumMatch = false;
+                        if (!allVerbsData[verbName].praeteritum) {
+                            // Lazy load praeteritum data
+                            try {
+                                const praeteritumData = await fetch(`json/praeteritum_konjugation/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
+                                if (praeteritumData.praeteritum) {
+                                    allVerbsData[verbName].praeteritum = praeteritumData.praeteritum;
+                                    allVerbsData[verbName].praeteritum_examples = praeteritumData.praeteritum_examples;
+                                }
+                            } catch (e) {
+                                // Ignore loading errors
+                            }
+                        }
+
+                        // Check all präteritum conjugations (starts with)
+                        if (allVerbsData[verbName].praeteritum) {
+                            const conjugations = Object.values(allVerbsData[verbName].praeteritum);
+                            praeteritumMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
+                        }
+
+                        if (germanMatch || spanishMatch || perfektMatch || praesensMatch || praeteritumMatch) {
                             return {
                                 verb: verbName,
                                 data: verbData,
