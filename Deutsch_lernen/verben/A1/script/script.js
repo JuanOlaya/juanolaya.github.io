@@ -72,10 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Helper function to remove parentheses from translations
+    // Helper function to remove all parentheses from translations
     function removeParentheses(text) {
         if (!text) return text;
-        return text.replace(/^\(|\)$/g, '');
+        return text.replace(/[()]/g, '');
     }
 
     // --- UPDATED RENDER FUNCTION ---
