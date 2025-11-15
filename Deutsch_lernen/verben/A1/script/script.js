@@ -324,6 +324,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const [praesensData, perfektData, fragenData, perfektKonjugationData, praeteritumKonjugationData] = await Promise.all([praesensPromise, perfektPromise, fragenPromise, perfektKonjugationPromise, praeteritumKonjugationPromise]);
 
+                // Rename praeteritum from konjugation data to avoid conflict with card praeteritum string
+                if (praeteritumKonjugationData.praeteritum) {
+                    praeteritumKonjugationData.praeteritum_conjugations = praeteritumKonjugationData.praeteritum;
+                    delete praeteritumKonjugationData.praeteritum;
+                }
+
                 // Merge the loaded data into allVerbsData
                 allVerbsData[verb] = {
                     ...data,
@@ -535,7 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Generate Präteritum conjugation and examples table
         const praeteritumKonjugationTableContainer = document.getElementById('modal-praeteritum-konjugation-table');
-        if (updatedData.praeteritum && updatedData.praeteritum_examples) {
+        if (updatedData.praeteritum_conjugations && updatedData.praeteritum_examples) {
             const pronounOrder = [
                 { key: 'ich', display: 'ich', spanish: 'yo' },
                 { key: 'du', display: 'du', spanish: 'tú' },
@@ -552,7 +558,7 @@ document.addEventListener('DOMContentLoaded', () => {
             praeteritumTableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel</th></tr>';
 
             for (const { key, display, spanish } of pronounOrder) {
-                const conjugation = updatedData.praeteritum[key];
+                const conjugation = updatedData.praeteritum_conjugations[key];
                 const example = updatedData.praeteritum_examples[key];
 
                 if (conjugation || example) {
@@ -692,12 +698,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         // Search in Präteritum conjugations (load if needed)
                         let praeteritumMatch = false;
-                        if (!allVerbsData[verbName].praeteritum) {
+                        if (!allVerbsData[verbName].praeteritum_conjugations) {
                             // Lazy load praeteritum data
                             try {
                                 const praeteritumData = await fetch(`json/praeteritum_konjugation/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
                                 if (praeteritumData.praeteritum) {
-                                    allVerbsData[verbName].praeteritum = praeteritumData.praeteritum;
+                                    allVerbsData[verbName].praeteritum_conjugations = praeteritumData.praeteritum;
                                     allVerbsData[verbName].praeteritum_examples = praeteritumData.praeteritum_examples;
                                 }
                             } catch (e) {
@@ -706,8 +712,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
 
                         // Check all präteritum conjugations (starts with)
-                        if (allVerbsData[verbName].praeteritum) {
-                            const conjugations = Object.values(allVerbsData[verbName].praeteritum);
+                        if (allVerbsData[verbName].praeteritum_conjugations) {
+                            const conjugations = Object.values(allVerbsData[verbName].praeteritum_conjugations);
                             praeteritumMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
                         }
 
