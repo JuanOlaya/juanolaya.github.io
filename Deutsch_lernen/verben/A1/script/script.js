@@ -109,9 +109,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Prepare Präteritum
-            const germanPraeteritum = verbData.praeteritum || '---';
-            const spanishPraeteritum = verbData.es_praeteritum || '';
+            // Prepare Präteritum with short (verb only) and full versions
+            let germanPraeteritumShort = verbData.praeteritum || '---';
+            let germanPraeteritumFull = verbData.praeteritum || '---';
+            if (verbData.praeteritum && verbData.praeteritum !== '---') {
+                const germanPraeteritumParts = verbData.praeteritum.split(' ');
+                if (germanPraeteritumParts.length >= 2) {
+                    germanPraeteritumShort = germanPraeteritumParts.slice(1).join(' '); // verb only
+                    germanPraeteritumFull = verbData.praeteritum; // full: er/sie/es machte
+                }
+            }
+
+            // Prepare Spanish präteritum with short (verb only) and full versions
+            let spanishPraeteritumShort = verbData.es_praeteritum || '';
+            let spanishPraeteritumFull = verbData.es_praeteritum || '';
+            if (verbData.es_praeteritum) {
+                const spanishPraeteritumParts = verbData.es_praeteritum.split(' ');
+                if (spanishPraeteritumParts.length >= 2) {
+                    spanishPraeteritumShort = spanishPraeteritumParts.slice(1).join(' '); // verb only
+                    spanishPraeteritumFull = verbData.es_praeteritum; // full: él/ella hizo
+                }
+            }
 
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
@@ -122,8 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="spanish-translation" data-form="translation">${verbData.es || ''}</span>
                             <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
                             <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
-                            <span class="german-praeteritum" data-form="praeteritum">${germanPraeteritum}</span>
-                            <span class="spanish-praeteritum" data-form="translation praeteritum">${spanishPraeteritum}</span>
+                            <span class="german-praeteritum praeteritum-text" data-form="praeteritum" data-short="${germanPraeteritumShort}" data-full="${germanPraeteritumFull}">${germanPraeteritumShort}</span>
+                            <span class="spanish-praeteritum praeteritum-text" data-form="translation praeteritum" data-short="${spanishPraeteritumShort}" data-full="${spanishPraeteritumFull}">${spanishPraeteritumShort}</span>
                         </div>
                     </div>
                 </div>`;
@@ -142,15 +160,16 @@ document.addEventListener('DOMContentLoaded', () => {
         nextGroupBtn.disabled = index === totalGroups - 1;
         updateProgressBar(index);
 
-        // Setup hover listeners for perfekt forms
-        setupPerfektHoverListeners();
+        // Setup hover listeners for perfekt and präteritum forms
+        setupHoverListeners();
     }
 
-    function setupPerfektHoverListeners() {
+    function setupHoverListeners() {
         const containers = document.querySelectorAll('.perfekt-hover-container');
 
         containers.forEach(container => {
             const perfektTexts = container.querySelectorAll('.perfekt-text');
+            const praeteritumTexts = container.querySelectorAll('.praeteritum-text');
 
             // Add hover listeners to each perfekt text element
             perfektTexts.forEach(perfektText => {
@@ -164,6 +183,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 perfektText.addEventListener('mouseleave', () => {
                     // Show short version for all perfekt texts in this container
                     container.querySelectorAll('.perfekt-text').forEach(text => {
+                        text.textContent = text.getAttribute('data-short');
+                    });
+                });
+            });
+
+            // Add hover listeners to each präteritum text element
+            praeteritumTexts.forEach(praeteritumText => {
+                praeteritumText.addEventListener('mouseenter', () => {
+                    // Show full version for all präteritum texts in this container
+                    container.querySelectorAll('.praeteritum-text').forEach(text => {
+                        text.textContent = text.getAttribute('data-full');
+                    });
+                });
+
+                praeteritumText.addEventListener('mouseleave', () => {
+                    // Show short version for all präteritum texts in this container
+                    container.querySelectorAll('.praeteritum-text').forEach(text => {
                         text.textContent = text.getAttribute('data-short');
                     });
                 });
@@ -563,9 +599,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Prepare Präteritum
-            const germanPraeteritum = verbData.praeteritum || '---';
-            const spanishPraeteritum = verbData.es_praeteritum || '';
+            // Prepare Präteritum with short (verb only) and full versions
+            let germanPraeteritumShort = verbData.praeteritum || '---';
+            let germanPraeteritumFull = verbData.praeteritum || '---';
+            if (verbData.praeteritum && verbData.praeteritum !== '---') {
+                const germanPraeteritumParts = verbData.praeteritum.split(' ');
+                if (germanPraeteritumParts.length >= 2) {
+                    germanPraeteritumShort = germanPraeteritumParts.slice(1).join(' '); // verb only
+                    germanPraeteritumFull = verbData.praeteritum; // full: er/sie/es machte
+                }
+            }
+
+            // Prepare Spanish präteritum with short (verb only) and full versions
+            let spanishPraeteritumShort = verbData.es_praeteritum || '';
+            let spanishPraeteritumFull = verbData.es_praeteritum || '';
+            if (verbData.es_praeteritum) {
+                const spanishPraeteritumParts = verbData.es_praeteritum.split(' ');
+                if (spanishPraeteritumParts.length >= 2) {
+                    spanishPraeteritumShort = spanishPraeteritumParts.slice(1).join(' '); // verb only
+                    spanishPraeteritumFull = verbData.es_praeteritum; // full: él/ella hizo
+                }
+            }
 
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
@@ -576,8 +630,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="spanish-translation" data-form="translation">${verbData.es || ''}</span>
                             <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
                             <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
-                            <span class="german-praeteritum" data-form="praeteritum">${germanPraeteritum}</span>
-                            <span class="spanish-praeteritum" data-form="translation praeteritum">${spanishPraeteritum}</span>
+                            <span class="german-praeteritum praeteritum-text" data-form="praeteritum" data-short="${germanPraeteritumShort}" data-full="${germanPraeteritumFull}">${germanPraeteritumShort}</span>
+                            <span class="spanish-praeteritum praeteritum-text" data-form="translation praeteritum" data-short="${spanishPraeteritumShort}" data-full="${spanishPraeteritumFull}">${spanishPraeteritumShort}</span>
                         </div>
                     </div>
                 </div>`;
@@ -585,7 +639,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Re-setup hover listeners for new cards
-        setupPerfektHoverListeners();
+        setupHoverListeners();
 
         // Update counter
         if (searchCounter) {

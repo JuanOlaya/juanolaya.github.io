@@ -942,8 +942,9 @@
     max-height: 10em; /* Allow space for both translations */
 }
 
-/* Perfekt text styling - JavaScript handles the text swapping on hover */
-.perfekt-text {
+/* Perfekt and Präteritum text styling - JavaScript handles the text swapping on hover */
+.perfekt-text,
+.praeteritum-text {
     transition: all 0.2s ease-out;
 }
 
@@ -1072,6 +1073,12 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 }
 
 .german-praeteritum {
-    color: #333;
-    margin-top: 4px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #8B4513; /* SaddleBrown - different from Perfekt's SteelBlue */
+    margin-top: 0;
+    margin-bottom: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
