@@ -165,11 +165,13 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (group.level === 'A1.2') levelIndicator.classList.add('level-a1-2');
         else if (group.level === 'A2.1') levelIndicator.classList.add('level-a2-1');
         else if (group.level === 'A2.2') levelIndicator.classList.add('level-a2-2');
+        else if (group.level === 'B1.1') levelIndicator.classList.add('level-b1-1');
 
         groupIndicator.textContent = `${germanOrdinals[index]} Gruppe von ${totalGroups}`;
         prevGroupBtn.disabled = index === 0;
         nextGroupBtn.disabled = index === totalGroups - 1;
         updateProgressBar(index);
+        updateLevelIcons(group.level);
 
         // Setup hover listeners for perfekt and präteritum forms
         setupHoverListeners();
@@ -233,6 +235,29 @@ document.addEventListener('DOMContentLoaded', () => {
             step.classList.toggle('active', i <= index);
         });
     }
+
+    function updateLevelIcons(currentLevel) {
+        const levelIcons = document.querySelectorAll('.level-icon');
+        levelIcons.forEach(icon => {
+            if (icon.dataset.level === currentLevel) {
+                icon.classList.add('active');
+            } else {
+                icon.classList.remove('active');
+            }
+        });
+    }
+
+    function getFirstGroupIndexForLevel(level) {
+        // Map levels to their first group index (0-based)
+        const levelMapping = {
+            'A1.1': 0,  // Group 1
+            'A1.2': 5,  // Group 6
+            'A2.1': 10, // Group 11
+            'A2.2': 17, // Group 18
+            'B1.1': 25  // Group 26
+        };
+        return levelMapping[level] || 0;
+    }
     
     function initializeApp() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -274,6 +299,27 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                         renderVerbGroup(currentGroupIndex);
                     }
+                });
+
+                // Level icon click handlers
+                const levelIcons = document.querySelectorAll('.level-icon');
+                levelIcons.forEach(icon => {
+                    icon.addEventListener('click', () => {
+                        const level = icon.dataset.level;
+                        const targetGroupIndex = getFirstGroupIndexForLevel(level);
+                        currentGroupIndex = targetGroupIndex;
+
+                        // Clear search when changing levels
+                        const searchInput = document.getElementById('verb-search');
+                        const clearSearchBtn = document.getElementById('clear-search');
+                        if (searchInput) {
+                            searchInput.value = '';
+                            clearSearchBtn.classList.remove('visible');
+                            document.getElementById('search-counter').textContent = '';
+                        }
+
+                        renderVerbGroup(currentGroupIndex);
+                    });
                 });
             })
             .catch(error => {

@@ -57,6 +57,65 @@
             font-size: 1.5rem;
         }
 
+        .level-navigation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .level-icons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 80px;
+        }
+
+        .level-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: none;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background-color: #4682B4;
+        }
+
+        .level-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .level-icon[data-level="A1.1"] {
+            background-color: #4682B4; /* SteelBlue */
+        }
+
+        .level-icon[data-level="A1.2"] {
+            background-color: #3CB371; /* MediumSeaGreen */
+        }
+
+        .level-icon[data-level="A2.1"] {
+            background-color: #3a7ca5; /* A2.1 Blue */
+        }
+
+        .level-icon[data-level="A2.2"] {
+            background-color: #FF8C42; /* Orange */
+        }
+
+        .level-icon[data-level="B1.1"] {
+            background-color: #9B59B6; /* Purple */
+        }
+
+        .level-icon.active {
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.2);
+        }
+
         .level-a1-1 {
             background-color: #4682B4; /* SteelBlue */
         }
@@ -67,6 +126,14 @@
 
         .level-a2-1 {
             background-color: #3a7ca5; /* A2.1 Blue */
+        }
+
+        .level-a2-2 {
+            background-color: #FF8C42; /* Orange */
+        }
+
+        .level-b1-1 {
+            background-color: #9B59B6; /* Purple */
         }
         .info-button {
             cursor: pointer;
@@ -165,7 +232,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background-color: #ced4da;
+            background-color: rgba(206, 212, 218, 0.3); /* Lighter inactive dots */
             transition: background-color 0.5s;
         }
         .progress-step.active {
