@@ -26,14 +26,22 @@
         <div class="content-block">
             <div class="header">
                 <div class="level-navigation">
-                    <div class="level-indicator" id="level-indicator">A1.1</div>
-                    <div class="level-icons" id="level-icons">
-                        <button class="level-icon" data-level="A1.1" title="A1.1">A1.1</button>
-                        <button class="level-icon" data-level="A1.2" title="A1.2">A1.2</button>
-                        <button class="level-icon" data-level="A2.1" title="A2.1">A2.1</button>
-                        <button class="level-icon" data-level="A2.2" title="A2.2">A2.2</button>
-                        <button class="level-icon" data-level="B1.1" title="B1.1">B1.1</button>
+                    <button id="prev-level-btn" class="level-nav-arrow" title="Vorheriges Niveau">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <div class="level-indicator-container">
+                        <div class="level-indicator" id="level-indicator">A1.1</div>
+                        <div class="level-progress-dots" id="level-progress-dots">
+                            <span class="level-dot"></span>
+                            <span class="level-dot"></span>
+                            <span class="level-dot"></span>
+                            <span class="level-dot"></span>
+                            <span class="level-dot"></span>
+                        </div>
                     </div>
+                    <button id="next-level-btn" class="level-nav-arrow" title="Nächstes Niveau">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
                 </div>
                 <div class="title-container">
                     <h1 class="title">Deutsch Verben</h1>

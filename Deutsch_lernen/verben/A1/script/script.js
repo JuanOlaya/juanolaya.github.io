@@ -171,7 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
         prevGroupBtn.disabled = index === 0;
         nextGroupBtn.disabled = index === totalGroups - 1;
         updateProgressBar(index);
-        updateLevelIcons(group.level);
+        updateLevelProgressDots(group.level);
+        updateLevelNavigationButtons(group.level);
 
         // Setup hover listeners for perfekt and präteritum forms
         setupHoverListeners();
@@ -236,13 +237,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function updateLevelIcons(currentLevel) {
-        const levelIcons = document.querySelectorAll('.level-icon');
-        levelIcons.forEach(icon => {
-            if (icon.dataset.level === currentLevel) {
-                icon.classList.add('active');
+    const levelOrder = ['A1.1', 'A1.2', 'A2.1', 'A2.2', 'B1.1'];
+
+    function updateLevelProgressDots(currentLevel) {
+        const dots = document.querySelectorAll('.level-dot');
+        const currentLevelIndex = levelOrder.indexOf(currentLevel);
+
+        dots.forEach((dot, index) => {
+            if (index === currentLevelIndex) {
+                dot.classList.add('active');
             } else {
-                icon.classList.remove('active');
+                dot.classList.remove('active');
             }
         });
     }
@@ -257,6 +262,24 @@ document.addEventListener('DOMContentLoaded', () => {
             'B1.1': 25  // Group 26
         };
         return levelMapping[level] || 0;
+    }
+
+    function getLevelFromGroupIndex(groupIndex) {
+        // Determine which level a group belongs to
+        if (groupIndex < 5) return 'A1.1';
+        if (groupIndex < 10) return 'A1.2';
+        if (groupIndex < 17) return 'A2.1';
+        if (groupIndex < 25) return 'A2.2';
+        return 'B1.1';
+    }
+
+    function updateLevelNavigationButtons(currentLevel) {
+        const prevLevelBtn = document.getElementById('prev-level-btn');
+        const nextLevelBtn = document.getElementById('next-level-btn');
+        const currentLevelIndex = levelOrder.indexOf(currentLevel);
+
+        prevLevelBtn.disabled = currentLevelIndex === 0;
+        nextLevelBtn.disabled = currentLevelIndex === levelOrder.length - 1;
     }
     
     function initializeApp() {
@@ -301,13 +324,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                // Level icon click handlers
-                const levelIcons = document.querySelectorAll('.level-icon');
-                levelIcons.forEach(icon => {
-                    icon.addEventListener('click', () => {
-                        const level = icon.dataset.level;
-                        const targetGroupIndex = getFirstGroupIndexForLevel(level);
-                        currentGroupIndex = targetGroupIndex;
+                // Level navigation arrow handlers
+                const prevLevelBtn = document.getElementById('prev-level-btn');
+                const nextLevelBtn = document.getElementById('next-level-btn');
+
+                prevLevelBtn.addEventListener('click', () => {
+                    const currentLevel = getLevelFromGroupIndex(currentGroupIndex);
+                    const currentLevelIndex = levelOrder.indexOf(currentLevel);
+
+                    if (currentLevelIndex > 0) {
+                        const prevLevel = levelOrder[currentLevelIndex - 1];
+                        currentGroupIndex = getFirstGroupIndexForLevel(prevLevel);
 
                         // Clear search when changing levels
                         const searchInput = document.getElementById('verb-search');
@@ -319,7 +346,28 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
 
                         renderVerbGroup(currentGroupIndex);
-                    });
+                    }
+                });
+
+                nextLevelBtn.addEventListener('click', () => {
+                    const currentLevel = getLevelFromGroupIndex(currentGroupIndex);
+                    const currentLevelIndex = levelOrder.indexOf(currentLevel);
+
+                    if (currentLevelIndex < levelOrder.length - 1) {
+                        const nextLevel = levelOrder[currentLevelIndex + 1];
+                        currentGroupIndex = getFirstGroupIndexForLevel(nextLevel);
+
+                        // Clear search when changing levels
+                        const searchInput = document.getElementById('verb-search');
+                        const clearSearchBtn = document.getElementById('clear-search');
+                        if (searchInput) {
+                            searchInput.value = '';
+                            clearSearchBtn.classList.remove('visible');
+                            document.getElementById('search-counter').textContent = '';
+                        }
+
+                        renderVerbGroup(currentGroupIndex);
+                    }
                 });
             })
             .catch(error => {
