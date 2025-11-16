@@ -18,7 +18,9 @@
       "Bash(for file in abstraktes-deutsches-substantiv-kapitel-1.html abstraktes-deutsches-substantiv-kapitel-2.html abstraktes-deutsches-substantiv-kapitel-4.html abstraktes-deutsches-substantiv-kapitel-5.html einkaufsvokabular.html)",
       "Bash(do echo \"Updating $file\")",
       "Bash(done)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(node analyze_verbs.js:*)",
+      "Bash(node add_searchable_fields.js:*)"
     ],
     "deny": []
   }

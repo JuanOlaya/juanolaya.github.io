@@ -1,0 +1,1053 @@
+================================================================================
+COMPREHENSIVE REPORT: Spanish Searchable Fields Analysis
+================================================================================
+Analysis Date: 2025-11-16
+Directory: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards
+Total Files Analyzed: 211
+
+================================================================================
+EXECUTIVE SUMMARY
+================================================================================
+Total verbs needing es_searchable: 5
+Total verbs needing es_perfekt_searchable: 80
+Total verbs needing es_praeteritum_searchable: 84
+Total verbs needing updates: 169
+
+================================================================================
+1. VERBS NEEDING "es_searchable" (Infinitive/Präsens)
+================================================================================
+Total: 5 verbs
+
+These verbs have multi-word Spanish translations in the "es" field but are
+missing the "es_searchable" field for improved search functionality.
+
+---
+Verb: müssen
+  Current translation: "tener que"
+  Searchable words should be: ["tener","que"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\müssen.json
+
+---
+Verb: stellen
+  Current translation: "colocar verticalmente"
+  Searchable words should be: ["colocar","verticalmente"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\stellen.json
+
+---
+Verb: treffen
+  Current translation: "encontrarse con"
+  Searchable words should be: ["encontrarse","con"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\treffen.json
+
+---
+Verb: wandern
+  Current translation: "hacer senderismo"
+  Searchable words should be: ["hacer","senderismo"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\wandern.json
+
+---
+Verb: werden
+  Current translation: "llegar a ser"
+  Searchable words should be: ["llegar","a","ser"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\werden.json
+
+================================================================================
+2. VERBS NEEDING "es_perfekt_searchable" (Perfekt)
+================================================================================
+Total: 80 verbs
+
+These verbs have multi-word Spanish translations in the "es_perfekt" field but
+are missing the "es_perfekt_searchable" field for improved search functionality.
+
+---
+Verb: abfahren
+  Current translation: "ha partido"
+  Searchable words should be: ["ha","partido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\abfahren.json
+
+---
+Verb: abgeben
+  Current translation: "he entregado"
+  Searchable words should be: ["he","entregado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\abgeben.json
+
+---
+Verb: ankommen
+  Current translation: "he llegado"
+  Searchable words should be: ["he","llegado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\ankommen.json
+
+---
+Verb: antworten
+  Current translation: "ha respondido"
+  Searchable words should be: ["ha","respondido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\antworten.json
+
+---
+Verb: arbeiten
+  Current translation: "he trabajado"
+  Searchable words should be: ["he","trabajado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\arbeiten.json
+
+---
+Verb: aussteigen
+  Current translation: "he bajado"
+  Searchable words should be: ["he","bajado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\aussteigen.json
+
+---
+Verb: ausziehen
+  Current translation: "me he quitado"
+  Searchable words should be: ["me","he","quitado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\ausziehen.json
+
+---
+Verb: baden
+  Current translation: "me he bañado"
+  Searchable words should be: ["me","he","bañado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\baden.json
+
+---
+Verb: bedeuten
+  Current translation: "ha significado"
+  Searchable words should be: ["ha","significado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\bedeuten.json
+
+---
+Verb: bezahlen
+  Current translation: "he pagado"
+  Searchable words should be: ["he","pagado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\bezahlen.json
+
+---
+Verb: bleiben
+  Current translation: "me he quedado"
+  Searchable words should be: ["me","he","quedado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\bleiben.json
+
+---
+Verb: brauchen
+  Current translation: "he necesitado"
+  Searchable words should be: ["he","necesitado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\brauchen.json
+
+---
+Verb: danken
+  Current translation: "he agradecido"
+  Searchable words should be: ["he","agradecido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\danken.json
+
+---
+Verb: dauern
+  Current translation: "ha durado"
+  Searchable words should be: ["ha","durado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\dauern.json
+
+---
+Verb: denken
+  Current translation: "he pensado"
+  Searchable words should be: ["he","pensado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\denken.json
+
+---
+Verb: duschen
+  Current translation: "me he duchado"
+  Searchable words should be: ["me","he","duchado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\duschen.json
+
+---
+Verb: dürfen
+  Current translation: "he podido (permiso)"
+  Searchable words should be: ["he","podido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\dürfen.json
+
+---
+Verb: einsteigen
+  Current translation: "he subido"
+  Searchable words should be: ["he","subido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\einsteigen.json
+
+---
+Verb: erlauben
+  Current translation: "he permitido"
+  Searchable words should be: ["he","permitido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\erlauben.json
+
+---
+Verb: erreichen
+  Current translation: "he alcanzado"
+  Searchable words should be: ["he","alcanzado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\erreichen.json
+
+---
+Verb: essen
+  Current translation: "he comido"
+  Searchable words should be: ["he","comido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\essen.json
+
+---
+Verb: fehlen
+  Current translation: "ha faltado"
+  Searchable words should be: ["ha","faltado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\fehlen.json
+
+---
+Verb: feiern
+  Current translation: "he celebrado"
+  Searchable words should be: ["he","celebrado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\feiern.json
+
+---
+Verb: finden
+  Current translation: "he encontrado"
+  Searchable words should be: ["he","encontrado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\finden.json
+
+---
+Verb: fliegen
+  Current translation: "he volado"
+  Searchable words should be: ["he","volado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\fliegen.json
+
+---
+Verb: folgen
+  Current translation: "he seguido"
+  Searchable words should be: ["he","seguido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\folgen.json
+
+---
+Verb: fragen
+  Current translation: "he preguntado"
+  Searchable words should be: ["he","preguntado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\fragen.json
+
+---
+Verb: geben
+  Current translation: "he dado"
+  Searchable words should be: ["he","dado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\geben.json
+
+---
+Verb: gehen
+  Current translation: "he ido"
+  Searchable words should be: ["he","ido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\gehen.json
+
+---
+Verb: gehören
+  Current translation: "he pertenecido"
+  Searchable words should be: ["he","pertenecido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\gehören.json
+
+---
+Verb: glauben
+  Current translation: "he creído"
+  Searchable words should be: ["he","creído"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\glauben.json
+
+---
+Verb: gratulieren
+  Current translation: "he felicitado"
+  Searchable words should be: ["he","felicitado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\gratulieren.json
+
+---
+Verb: haben
+  Current translation: "he tenido"
+  Searchable words should be: ["he","tenido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\haben.json
+
+---
+Verb: halten
+  Current translation: "he sostenido"
+  Searchable words should be: ["he","sostenido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\halten.json
+
+---
+Verb: heißen
+  Current translation: "me he llamado"
+  Searchable words should be: ["me","he","llamado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\heißen.json
+
+---
+Verb: helfen
+  Current translation: "he ayudado"
+  Searchable words should be: ["he","ayudado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\helfen.json
+
+---
+Verb: kaufen
+  Current translation: "he comprado"
+  Searchable words should be: ["he","comprado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\kaufen.json
+
+---
+Verb: kennen
+  Current translation: "he conocido"
+  Searchable words should be: ["he","conocido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\kennen.json
+
+---
+Verb: kommen
+  Current translation: "he venido"
+  Searchable words should be: ["he","venido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\kommen.json
+
+---
+Verb: kosten
+  Current translation: "he costado"
+  Searchable words should be: ["he","costado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\kosten.json
+
+---
+Verb: können
+  Current translation: "he podido (sabido)"
+  Searchable words should be: ["he","podido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\können.json
+
+---
+Verb: laufen
+  Current translation: "he corrido"
+  Searchable words should be: ["he","corrido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\laufen.json
+
+---
+Verb: leben
+  Current translation: "he vivido"
+  Searchable words should be: ["he","vivido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\leben.json
+
+---
+Verb: legen
+  Current translation: "he colocado"
+  Searchable words should be: ["he","colocado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\legen.json
+
+---
+Verb: lernen
+  Current translation: "he aprendido"
+  Searchable words should be: ["he","aprendido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\lernen.json
+
+---
+Verb: lesen
+  Current translation: "he leído"
+  Searchable words should be: ["he","leído"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\lesen.json
+
+---
+Verb: lieben
+  Current translation: "he amado"
+  Searchable words should be: ["he","amado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\lieben.json
+
+---
+Verb: liegen
+  Current translation: "he estado acostado"
+  Searchable words should be: ["he","estado","acostado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\liegen.json
+
+---
+Verb: machen
+  Current translation: "he hecho"
+  Searchable words should be: ["he","hecho"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\machen.json
+
+---
+Verb: meinen
+  Current translation: "he opinado"
+  Searchable words should be: ["he","opinado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\meinen.json
+
+---
+Verb: mitmachen
+  Current translation: "he participado"
+  Searchable words should be: ["he","participado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\mitmachen.json
+
+---
+Verb: mögen
+  Current translation: "me ha gustado"
+  Searchable words should be: ["me","ha","gustado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\mögen.json
+
+---
+Verb: müssen
+  Current translation: "he tenido que"
+  Searchable words should be: ["he","tenido","que"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\müssen.json
+
+---
+Verb: nehmen
+  Current translation: "he tomado"
+  Searchable words should be: ["he","tomado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\nehmen.json
+
+---
+Verb: packen
+  Current translation: "he empacado"
+  Searchable words should be: ["he","empacado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\packen.json
+
+---
+Verb: rauchen
+  Current translation: "he fumado"
+  Searchable words should be: ["he","fumado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\rauchen.json
+
+---
+Verb: riechen
+  Current translation: "he olido"
+  Searchable words should be: ["he","olido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\riechen.json
+
+---
+Verb: sagen
+  Current translation: "he dicho"
+  Searchable words should be: ["he","dicho"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\sagen.json
+
+---
+Verb: scheinen
+  Current translation: "ha brillado"
+  Searchable words should be: ["ha","brillado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\scheinen.json
+
+---
+Verb: schicken
+  Current translation: "he enviado"
+  Searchable words should be: ["he","enviado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\schicken.json
+
+---
+Verb: schlafen
+  Current translation: "he dormido"
+  Searchable words should be: ["he","dormido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\schlafen.json
+
+---
+Verb: schmecken
+  Current translation: "ha sabido"
+  Searchable words should be: ["ha","sabido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\schmecken.json
+
+---
+Verb: schmerzen
+  Current translation: "ha dolido"
+  Searchable words should be: ["ha","dolido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\schmerzen.json
+
+---
+Verb: schreiben
+  Current translation: "he escrito"
+  Searchable words should be: ["he","escrito"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\schreiben.json
+
+---
+Verb: sehen
+  Current translation: "he visto"
+  Searchable words should be: ["he","visto"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\sehen.json
+
+---
+Verb: sollen
+  Current translation: "he debido"
+  Searchable words should be: ["he","debido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\sollen.json
+
+---
+Verb: sprechen
+  Current translation: "he hablado"
+  Searchable words should be: ["he","hablado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\sprechen.json
+
+---
+Verb: stellen
+  Current translation: "he colocado"
+  Searchable words should be: ["he","colocado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\stellen.json
+
+---
+Verb: suchen
+  Current translation: "he buscado"
+  Searchable words should be: ["he","buscado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\suchen.json
+
+---
+Verb: tanzen
+  Current translation: "he bailado"
+  Searchable words should be: ["he","bailado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\tanzen.json
+
+---
+Verb: treffen
+  Current translation: "me he encontrado con"
+  Searchable words should be: ["me","he","encontrado","con"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\treffen.json
+
+---
+Verb: trinken
+  Current translation: "he bebido"
+  Searchable words should be: ["he","bebido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\trinken.json
+
+---
+Verb: umsteigen
+  Current translation: "he cambiado"
+  Searchable words should be: ["he","cambiado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\umsteigen.json
+
+---
+Verb: verdienen
+  Current translation: "he ganado"
+  Searchable words should be: ["he","ganado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\verdienen.json
+
+---
+Verb: verstehen
+  Current translation: "he entendido"
+  Searchable words should be: ["he","entendido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\verstehen.json
+
+---
+Verb: wandern
+  Current translation: "he hecho senderismo"
+  Searchable words should be: ["he","hecho","senderismo"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\wandern.json
+
+---
+Verb: werden
+  Current translation: "he llegado a ser"
+  Searchable words should be: ["he","llegado","a","ser"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\werden.json
+
+---
+Verb: wissen
+  Current translation: "he sabido"
+  Searchable words should be: ["he","sabido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\wissen.json
+
+---
+Verb: wollen
+  Current translation: "he querido"
+  Searchable words should be: ["he","querido"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\wollen.json
+
+---
+Verb: zeigen
+  Current translation: "he mostrado"
+  Searchable words should be: ["he","mostrado"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\zeigen.json
+
+================================================================================
+3. VERBS NEEDING "es_praeteritum_searchable" (Präteritum)
+================================================================================
+Total: 84 verbs
+
+These verbs have multi-word Spanish translations in the "es_praeteritum" field
+but are missing the "es_praeteritum_searchable" field for improved search
+functionality.
+
+---
+Verb: abgeben
+  Current translation: "él/ella entregaba"
+  Searchable words should be: ["él/ella","entregaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\abgeben.json
+
+---
+Verb: ankommen
+  Current translation: "él/ella llegó"
+  Searchable words should be: ["él/ella","llegó"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\ankommen.json
+
+---
+Verb: antworten
+  Current translation: "él/ella respondió"
+  Searchable words should be: ["él/ella","respondió"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\antworten.json
+
+---
+Verb: anziehen
+  Current translation: "él/ella se puso"
+  Searchable words should be: ["él/ella","se","puso"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\anziehen.json
+
+---
+Verb: arbeiten
+  Current translation: "él/ella trabajaba"
+  Searchable words should be: ["él/ella","trabajaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\arbeiten.json
+
+---
+Verb: baden
+  Current translation: "él/ella bañarse"
+  Searchable words should be: ["él/ella","bañarse"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\baden.json
+
+---
+Verb: bedeuten
+  Current translation: "él/ella significaba"
+  Searchable words should be: ["él/ella","significaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\bedeuten.json
+
+---
+Verb: beginnen
+  Current translation: "él/ella comenzaba"
+  Searchable words should be: ["él/ella","comenzaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\beginnen.json
+
+---
+Verb: bekommen
+  Current translation: "él/ella recibía"
+  Searchable words should be: ["él/ella","recibía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\bekommen.json
+
+---
+Verb: bezahlen
+  Current translation: "él/ella pagaba"
+  Searchable words should be: ["él/ella","pagaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\bezahlen.json
+
+---
+Verb: bleiben
+  Current translation: "él/ella quedaba"
+  Searchable words should be: ["él/ella","quedaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\bleiben.json
+
+---
+Verb: brauchen
+  Current translation: "él/ella necesitaba"
+  Searchable words should be: ["él/ella","necesitaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\brauchen.json
+
+---
+Verb: danken
+  Current translation: "él/ella agradecía"
+  Searchable words should be: ["él/ella","agradecía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\danken.json
+
+---
+Verb: dauern
+  Current translation: "él/ella duraba"
+  Searchable words should be: ["él/ella","duraba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\dauern.json
+
+---
+Verb: denken
+  Current translation: "él/ella pensaba"
+  Searchable words should be: ["él/ella","pensaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\denken.json
+
+---
+Verb: duschen
+  Current translation: "él/ella ducharse"
+  Searchable words should be: ["él/ella","ducharse"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\duschen.json
+
+---
+Verb: dürfen
+  Current translation: "él/ella podía"
+  Searchable words should be: ["él/ella","podía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\dürfen.json
+
+---
+Verb: erlauben
+  Current translation: "él/ella permitía"
+  Searchable words should be: ["él/ella","permitía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\erlauben.json
+
+---
+Verb: essen
+  Current translation: "él/ella comía"
+  Searchable words should be: ["él/ella","comía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\essen.json
+
+---
+Verb: fehlen
+  Current translation: "él/ella faltaba"
+  Searchable words should be: ["él/ella","faltaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\fehlen.json
+
+---
+Verb: feiern
+  Current translation: "él/ella celebraba"
+  Searchable words should be: ["él/ella","celebraba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\feiern.json
+
+---
+Verb: finden
+  Current translation: "él/ella encontraba"
+  Searchable words should be: ["él/ella","encontraba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\finden.json
+
+---
+Verb: fliegen
+  Current translation: "él/ella volaba"
+  Searchable words should be: ["él/ella","volaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\fliegen.json
+
+---
+Verb: folgen
+  Current translation: "él/ella siguió"
+  Searchable words should be: ["él/ella","siguió"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\folgen.json
+
+---
+Verb: fragen
+  Current translation: "él/ella preguntaba"
+  Searchable words should be: ["él/ella","preguntaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\fragen.json
+
+---
+Verb: funktionieren
+  Current translation: "él/ella funcionó"
+  Searchable words should be: ["él/ella","funcionó"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\funktionieren.json
+
+---
+Verb: geben
+  Current translation: "él/ella dio/daba"
+  Searchable words should be: ["él/ella","dio/daba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\geben.json
+
+---
+Verb: gehören
+  Current translation: "él/ella pertenecía"
+  Searchable words should be: ["él/ella","pertenecía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\gehören.json
+
+---
+Verb: gewinnen
+  Current translation: "él/ella ganaba"
+  Searchable words should be: ["él/ella","ganaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\gewinnen.json
+
+---
+Verb: glauben
+  Current translation: "él/ella creía"
+  Searchable words should be: ["él/ella","creía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\glauben.json
+
+---
+Verb: gratulieren
+  Current translation: "él/ella felicitaba"
+  Searchable words should be: ["él/ella","felicitaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\gratulieren.json
+
+---
+Verb: haben
+  Current translation: "él/ella tenía"
+  Searchable words should be: ["él/ella","tenía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\haben.json
+
+---
+Verb: heißen
+  Current translation: "él/ella se llamaba"
+  Searchable words should be: ["él/ella","se","llamaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\heißen.json
+
+---
+Verb: helfen
+  Current translation: "él/ella ayudaba"
+  Searchable words should be: ["él/ella","ayudaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\helfen.json
+
+---
+Verb: husten
+  Current translation: "él/ella tosió"
+  Searchable words should be: ["él/ella","tosió"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\husten.json
+
+---
+Verb: hängen
+  Current translation: "él/ella colgó"
+  Searchable words should be: ["él/ella","colgó"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\hängen.json
+
+---
+Verb: kaufen
+  Current translation: "él/ella compraba"
+  Searchable words should be: ["él/ella","compraba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\kaufen.json
+
+---
+Verb: kommen
+  Current translation: "él/ella vino/venía"
+  Searchable words should be: ["él/ella","vino/venía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\kommen.json
+
+---
+Verb: kosten
+  Current translation: "él/ella costaba"
+  Searchable words should be: ["él/ella","costaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\kosten.json
+
+---
+Verb: können
+  Current translation: "él/ella podía"
+  Searchable words should be: ["él/ella","podía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\können.json
+
+---
+Verb: laufen
+  Current translation: "él/ella corrió"
+  Searchable words should be: ["él/ella","corrió"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\laufen.json
+
+---
+Verb: leben
+  Current translation: "él/ella vivía"
+  Searchable words should be: ["él/ella","vivía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\leben.json
+
+---
+Verb: legen
+  Current translation: "él/ella colocar (horizontal)"
+  Searchable words should be: ["él/ella","colocar"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\legen.json
+
+---
+Verb: lernen
+  Current translation: "él/ella aprendía"
+  Searchable words should be: ["él/ella","aprendía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\lernen.json
+
+---
+Verb: lesen
+  Current translation: "él/ella leía"
+  Searchable words should be: ["él/ella","leía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\lesen.json
+
+---
+Verb: lieben
+  Current translation: "él/ella amaba"
+  Searchable words should be: ["él/ella","amaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\lieben.json
+
+---
+Verb: machen
+  Current translation: "él/ella hacía"
+  Searchable words should be: ["él/ella","hacía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\machen.json
+
+---
+Verb: meinen
+  Current translation: "él/ella opinaba"
+  Searchable words should be: ["él/ella","opinaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\meinen.json
+
+---
+Verb: mitmachen
+  Current translation: "él/ella participaba"
+  Searchable words should be: ["él/ella","participaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\mitmachen.json
+
+---
+Verb: möchten
+  Current translation: "él/ella quisiera"
+  Searchable words should be: ["él/ella","quisiera"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\möchten.json
+
+---
+Verb: mögen
+  Current translation: "él/ella le gustaba"
+  Searchable words should be: ["él/ella","le","gustaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\mögen.json
+
+---
+Verb: müssen
+  Current translation: "él/ella debía"
+  Searchable words should be: ["él/ella","debía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\müssen.json
+
+---
+Verb: packen
+  Current translation: "él/ella empacaba"
+  Searchable words should be: ["él/ella","empacaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\packen.json
+
+---
+Verb: rauchen
+  Current translation: "él/ella fumaba"
+  Searchable words should be: ["él/ella","fumaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\rauchen.json
+
+---
+Verb: riechen
+  Current translation: "él/ella olía"
+  Searchable words should be: ["él/ella","olía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\riechen.json
+
+---
+Verb: sagen
+  Current translation: "él/ella decía"
+  Searchable words should be: ["él/ella","decía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\sagen.json
+
+---
+Verb: scheinen
+  Current translation: "él/ella brillaba"
+  Searchable words should be: ["él/ella","brillaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\scheinen.json
+
+---
+Verb: schicken
+  Current translation: "él/ella envió"
+  Searchable words should be: ["él/ella","envió"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\schicken.json
+
+---
+Verb: schlafen
+  Current translation: "él/ella dormía"
+  Searchable words should be: ["él/ella","dormía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\schlafen.json
+
+---
+Verb: schmecken
+  Current translation: "él/ella sabía"
+  Searchable words should be: ["él/ella","sabía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\schmecken.json
+
+---
+Verb: schreiben
+  Current translation: "él/ella escribió"
+  Searchable words should be: ["él/ella","escribió"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\schreiben.json
+
+---
+Verb: sehen
+  Current translation: "él/ella veía"
+  Searchable words should be: ["él/ella","veía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\sehen.json
+
+---
+Verb: sollen
+  Current translation: "él/ella debía"
+  Searchable words should be: ["él/ella","debía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\sollen.json
+
+---
+Verb: sprechen
+  Current translation: "él/ella hablaba"
+  Searchable words should be: ["él/ella","hablaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\sprechen.json
+
+---
+Verb: stellen
+  Current translation: "él/ella colocó (vertical)"
+  Searchable words should be: ["él/ella","colocó"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\stellen.json
+
+---
+Verb: studieren
+  Current translation: "él/ella estudiaba"
+  Searchable words should be: ["él/ella","estudiaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\studieren.json
+
+---
+Verb: suchen
+  Current translation: "él/ella buscó"
+  Searchable words should be: ["él/ella","buscó"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\suchen.json
+
+---
+Verb: tanzen
+  Current translation: "él/ella bailó"
+  Searchable words should be: ["él/ella","bailó"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\tanzen.json
+
+---
+Verb: treffen
+  Current translation: "él/ella se encontró con"
+  Searchable words should be: ["él/ella","se","encontró","con"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\treffen.json
+
+---
+Verb: trinken
+  Current translation: "él/ella bebía"
+  Searchable words should be: ["él/ella","bebía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\trinken.json
+
+---
+Verb: umsteigen
+  Current translation: "él/ella cambió"
+  Searchable words should be: ["él/ella","cambió"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\umsteigen.json
+
+---
+Verb: verdienen
+  Current translation: "él/ella ganó"
+  Searchable words should be: ["él/ella","ganó"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\verdienen.json
+
+---
+Verb: vergessen
+  Current translation: "él/ella olvidaba"
+  Searchable words should be: ["él/ella","olvidaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\vergessen.json
+
+---
+Verb: verstehen
+  Current translation: "él/ella entendía"
+  Searchable words should be: ["él/ella","entendía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\verstehen.json
+
+---
+Verb: wandern
+  Current translation: "él/ella hacía senderismo"
+  Searchable words should be: ["él/ella","hacía","senderismo"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\wandern.json
+
+---
+Verb: werden
+  Current translation: "él/ella llegó a ser"
+  Searchable words should be: ["él/ella","llegó","a","ser"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\werden.json
+
+---
+Verb: wiederholen
+  Current translation: "él/ella repetía"
+  Searchable words should be: ["él/ella","repetía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\wiederholen.json
+
+---
+Verb: wissen
+  Current translation: "él/ella sabía"
+  Searchable words should be: ["él/ella","sabía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\wissen.json
+
+---
+Verb: wohnen
+  Current translation: "él/ella vivía"
+  Searchable words should be: ["él/ella","vivía"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\wohnen.json
+
+---
+Verb: wollen
+  Current translation: "él/ella quería"
+  Searchable words should be: ["él/ella","quería"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\wollen.json
+
+---
+Verb: wünschen
+  Current translation: "él/ella deseaba"
+  Searchable words should be: ["él/ella","deseaba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\wünschen.json
+
+---
+Verb: zeigen
+  Current translation: "él/ella mostraba"
+  Searchable words should be: ["él/ella","mostraba"]
+  File: C:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\verben\A1\json\cards\zeigen.json
+
+================================================================================
+FINAL SUMMARY
+================================================================================
+Total verbs needing es_searchable: 5
+Total verbs needing es_perfekt_searchable: 80
+Total verbs needing es_praeteritum_searchable: 84
+Total unique verbs requiring updates: 169
+
+================================================================================
+END OF REPORT
+================================================================================
