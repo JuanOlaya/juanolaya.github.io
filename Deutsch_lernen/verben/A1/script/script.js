@@ -241,13 +241,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateLevelProgressDots(currentLevel) {
         const dots = document.querySelectorAll('.level-dot');
+        const lines = document.querySelectorAll('.level-line');
         const currentLevelIndex = levelOrder.indexOf(currentLevel);
 
         dots.forEach((dot, index) => {
+            // Remove all classes first
+            dot.classList.remove('active', 'completed');
+
             if (index === currentLevelIndex) {
+                // Current level - highlighted with glow
                 dot.classList.add('active');
-            } else {
-                dot.classList.remove('active');
+            } else if (index < currentLevelIndex) {
+                // Completed levels - filled but no glow
+                dot.classList.add('completed');
+            }
+        });
+
+        lines.forEach((line, index) => {
+            // Lines are between dots, so line[0] connects dot[0] to dot[1]
+            line.classList.remove('completed');
+
+            if (index < currentLevelIndex) {
+                // Line is completed if we've passed beyond it
+                line.classList.add('completed');
             }
         });
     }

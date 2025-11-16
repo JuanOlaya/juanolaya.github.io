@@ -103,19 +103,41 @@
 
         .level-progress-dots {
             display: flex;
-            gap: 6px;
-            margin-top: 2px;
+            align-items: center;
+            gap: 0;
+            margin-top: 4px;
         }
 
         .level-dot {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background-color: rgba(206, 212, 218, 0.4);
-            transition: background-color 0.3s ease;
+            background-color: rgba(206, 212, 218, 0.3);
+            border: 2px solid rgba(206, 212, 218, 0.5);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
         }
 
         .level-dot.active {
+            background-color: #4682B4;
+            border-color: #4682B4;
+            box-shadow: 0 0 0 2px rgba(70, 130, 180, 0.2);
+        }
+
+        .level-dot.completed {
+            background-color: #4682B4;
+            border-color: #4682B4;
+        }
+
+        .level-line {
+            height: 2px;
+            width: 12px;
+            background-color: rgba(206, 212, 218, 0.3);
+            transition: background-color 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .level-line.completed {
             background-color: #4682B4;
         }
 
