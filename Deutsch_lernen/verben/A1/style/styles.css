@@ -270,6 +270,9 @@
             gap: 1.5rem;
             min-height: 550px; /* Adjust as needed */
             align-content: flex-start; /* Aligns items to the start vertically */
+            cursor: grab;
+            user-select: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
         .word-item {
             background-color: #E0FFFF; /* Light Cyan */
