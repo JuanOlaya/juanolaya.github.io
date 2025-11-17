@@ -349,6 +349,79 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
+                // Swipe/Drag navigation for groups
+                let touchStartX = 0;
+                let touchEndX = 0;
+                let isDragging = false;
+                const swipeThreshold = 50; // minimum distance for swipe
+
+                // Touch events (mobile)
+                cardsContainer.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    isDragging = true;
+                }, { passive: true });
+
+                cardsContainer.addEventListener('touchend', (e) => {
+                    if (!isDragging) return;
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                    isDragging = false;
+                }, { passive: true });
+
+                // Mouse events (desktop)
+                let mouseStartX = 0;
+                let isMouseDragging = false;
+
+                cardsContainer.addEventListener('mousedown', (e) => {
+                    mouseStartX = e.screenX;
+                    isMouseDragging = true;
+                    cardsContainer.style.cursor = 'grabbing';
+                });
+
+                cardsContainer.addEventListener('mouseup', (e) => {
+                    if (!isMouseDragging) return;
+                    touchStartX = mouseStartX;
+                    touchEndX = e.screenX;
+                    handleSwipe();
+                    isMouseDragging = false;
+                    cardsContainer.style.cursor = 'grab';
+                });
+
+                cardsContainer.addEventListener('mouseleave', () => {
+                    if (isMouseDragging) {
+                        isMouseDragging = false;
+                        cardsContainer.style.cursor = 'grab';
+                    }
+                });
+
+                // Handle swipe/drag logic
+                function handleSwipe() {
+                    const swipeDistance = touchEndX - touchStartX;
+
+                    // Swipe left (next group)
+                    if (swipeDistance < -swipeThreshold && currentGroupIndex < totalGroups - 1) {
+                        currentGroupIndex++;
+                        clearSearchAndRender();
+                    }
+                    // Swipe right (previous group)
+                    else if (swipeDistance > swipeThreshold && currentGroupIndex > 0) {
+                        currentGroupIndex--;
+                        clearSearchAndRender();
+                    }
+                }
+
+                // Helper function to clear search and render
+                function clearSearchAndRender() {
+                    const searchInput = document.getElementById('verb-search');
+                    const clearSearchBtn = document.getElementById('clear-search');
+                    if (searchInput) {
+                        searchInput.value = '';
+                        clearSearchBtn.classList.remove('visible');
+                        document.getElementById('search-counter').textContent = '';
+                    }
+                    renderVerbGroup(currentGroupIndex);
+                }
+
                 // Level navigation arrow handlers
                 const prevLevelBtn = document.getElementById('prev-level-btn');
                 const nextLevelBtn = document.getElementById('next-level-btn');
