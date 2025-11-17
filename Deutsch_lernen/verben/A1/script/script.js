@@ -142,12 +142,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Generate tags HTML
+            let tagsHTML = '';
+            if (verbData.tags && verbData.tags.length > 0) {
+                tagsHTML = verbData.tags.map(tag => `<span class="verb-tag">${tag}</span>`).join('');
+            }
+
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="word-item-content">
                         <span class="emoji">${verbData.emoji || '❓'}</span>
                         <div class="text-container perfekt-hover-container">
-                            <span class="german-word">${verbName}${irregularMark}</span>
+                            <div class="german-word-container">
+                                <span class="german-word">${verbName}${irregularMark}</span>
+                                ${tagsHTML}
+                            </div>
                             <span class="spanish-translation" data-form="translation">${esTranslation}</span>
                             <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
                             <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
@@ -961,12 +970,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Generate tags HTML
+            let tagsHTML = '';
+            if (verbData.tags && verbData.tags.length > 0) {
+                tagsHTML = verbData.tags.map(tag => `<span class="verb-tag">${tag}</span>`).join('');
+            }
+
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="word-item-content">
                         <span class="emoji">${verbData.emoji || '❓'}</span>
                         <div class="text-container perfekt-hover-container">
-                            <span class="german-word">${verbName}${irregularMark}</span>
+                            <div class="german-word-container">
+                                <span class="german-word">${verbName}${irregularMark}</span>
+                                ${tagsHTML}
+                            </div>
                             <span class="spanish-translation" data-form="translation">${esTranslation}</span>
                             <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
                             <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>

@@ -301,15 +301,39 @@
             width: 100%;
             overflow: hidden; /* Prevent text overflow issues */
         }
+        .german-word-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
         .german-word {
             font-size: 1.6rem; /* Slightly larger */
             font-weight: 700;
             color: #2F4F4F; /* Dark Slate Gray */
             margin-bottom: 0; /* Space below infinitive */
-             white-space: nowrap; /* Prevent wrapping */
-             text-overflow: ellipsis; /* Add ellipsis if too long */
-             overflow: hidden;
-             display: inline; /* Keep asterisk on same line */
+            white-space: nowrap; /* Prevent wrapping */
+            text-overflow: ellipsis; /* Add ellipsis if too long */
+            overflow: hidden;
+            display: inline; /* Keep asterisk on same line */
+        }
+
+        .verb-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: white;
+            background-color: #FF8C42;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .verb-tag:not(:last-child) {
+            margin-right: 4px;
         }
         .german-past {
             font-size: 1.3rem; /* Slightly larger */
