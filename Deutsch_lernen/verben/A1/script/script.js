@@ -1,9 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- GLOBAL STATE ---
     const allVerbsData = {};
-    let verbGroupsData = [];
-    const totalGroups = 26;
-    const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "Zwölfte", "Dreizehnte", "Vierzehnte", "Fünfzehnte", "Sechzehnte", "Siebzehnte", "Achtzehnte", "Neunzehnte", "Zwanzigste", "Einundzwanzigste", "Zweiundzwanzigste", "Dreiundzwanzigste", "Vierundzwanzigste", "Fünfundzwanzigste", "Sechsundzwanzigste"];
+    let verbGroupsByLevel = {}; // Groups organized by level
+    const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte"];
     const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes", "Sechstes", "Siebtes", "Achtes"];
     const savedStories = [
         `<p>Gestern <span class="highlighted-word">bin ich</span> in Berlin <span class="highlighted-word">gewesen</span>. Ich <span class="highlighted-word">bin</span> mit dem Zug <span class="highlighted-word">gefahren</span>. In der Stadt <span class="highlighted-word">habe ich</span> eine Freundin <span class="highlighted-word">gesehen</span>. Wir <span class="highlighted-word">haben</span> in einem Café <span class="highlighted-word">gesprochen</span> und einen Kaffee <span class="highlighted-word">getrunken</span>. Danach <span class="highlighted-word">habe ich</span> ein Buch <span class="highlighted-word">gekauft</span> und mit Karte <span class="highlighted-word">bezahlt</span>. Es <span class="highlighted-word">hat</span> viel Spaß <span class="highlighted-word">gemacht</span>!</p>`,
@@ -11,7 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
         `<p>Am Wochenende <span class="highlighted-word">habe ich</span> zu Hause <span class="highlighted-word">gearbeitet</span>. Ich <span class="highlighted-word">habe</span> für eine Prüfung <span class="highlighted-word">gelernt</span>. Ich <span class="highlighted-word">habe</span> eine Frage nicht <span class="highlighted-word">gewusst</span>, also <span class="highlighted-word">habe ich</span> meinen Lehrer <span class="highlighted-word">gefragt</span>. Er <span class="highlighted-word">hat</span> mir alles gut erklärt. Ich <span class="highlighted-word">habe</span> die Antwort schnell <span class="highlighted-word">gefunden</span>.</p>`
     ];
 
-    let currentGroupIndex = 0;
+    // Level configuration
+    const levelConfig = {
+        'A1_1': { groupCount: 5, displayName: 'A1.1' },
+        'A1_2': { groupCount: 5, displayName: 'A1.2' },
+        'A2_1': { groupCount: 7, displayName: 'A2.1' },
+        'A2_2': { groupCount: 8, displayName: 'A2.2' },
+        'B1_1': { groupCount: 1, displayName: 'B1.1' }
+    };
+    const levelOrder = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1'];
+
+    let currentLevel = 'A1_1';
+    let currentGroupInLevel = 0; // 0-indexed position within current level
     let currentVerbInModal = '';
     let currentIndexInModal = 0;
     let storyClickCounter = 0;
@@ -38,26 +48,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- NEW LOADING FUNCTION ---
     function loadAppData() {
         const groupPromises = [];
-        for (let i = 1; i <= totalGroups; i++) {
-            groupPromises.push(
-                fetch(`json/groups/group_${i}.json`)
+
+        // Load groups from each level folder
+        levelOrder.forEach(levelKey => {
+            const config = levelConfig[levelKey];
+            const groups = [];
+
+            for (let i = 1; i <= config.groupCount; i++) {
+                const promise = fetch(`json/groups/${levelKey}/${levelKey}_group_${i}.json`)
                     .then(res => {
                         if (!res.ok) {
-                            throw new Error(`HTTP error! status: ${res.status} for group_${i}.json`);
+                            throw new Error(`HTTP error! status: ${res.status} for ${levelKey}_group_${i}.json`);
                         }
                         return res.json();
                     })
-            );
-        }
+                    .then(groupData => ({ levelKey, groupIndex: i - 1, data: groupData }));
 
-        return Promise.all(groupPromises).then(groups => {
-            verbGroupsData = groups;
+                groupPromises.push(promise);
+            }
+        });
 
-            const allVerbNames = new Set();
-            groups.forEach(group => {
-                if (group.verbs) {
-                    group.verbs.forEach(verbName => allVerbNames.add(verbName));
+        return Promise.all(groupPromises).then(groupResults => {
+            // Organize groups by level
+            groupResults.forEach(result => {
+                if (!verbGroupsByLevel[result.levelKey]) {
+                    verbGroupsByLevel[result.levelKey] = [];
                 }
+                verbGroupsByLevel[result.levelKey][result.groupIndex] = result.data;
+            });
+
+            // Collect all unique verb names
+            const allVerbNames = new Set();
+            Object.values(verbGroupsByLevel).forEach(levelGroups => {
+                levelGroups.forEach(group => {
+                    if (group && group.verbs) {
+                        group.verbs.forEach(verbName => allVerbNames.add(verbName));
+                    }
+                });
             });
 
             const verbDataPromises = Array.from(allVerbNames).map(verbName => {
@@ -79,10 +106,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- UPDATED RENDER FUNCTION ---
-    function renderVerbGroup(index) {
-        const group = verbGroupsData[index];
-        if (!group || !group.verbs) {
-            console.error(`Group data for index ${index} is not loaded or invalid.`);
+    function renderVerbGroup() {
+        const levelGroups = verbGroupsByLevel[currentLevel];
+        if (!levelGroups || !levelGroups[currentGroupInLevel]) {
+            console.error(`Group data for level ${currentLevel}, group ${currentGroupInLevel} is not loaded or invalid.`);
+            cardsContainer.innerHTML = '<p>Fehler beim Laden der Verben.</p>';
+            return;
+        }
+
+        const group = levelGroups[currentGroupInLevel];
+        if (!group.verbs) {
+            console.error(`No verbs found in group`);
             cardsContainer.innerHTML = '<p>Fehler beim Laden der Verben.</p>';
             return;
         }
@@ -168,20 +202,23 @@ document.addEventListener('DOMContentLoaded', () => {
             cardsContainer.innerHTML += cardHTML;
         });
 
-        levelIndicator.textContent = group.level;
+        const displayLevel = levelConfig[currentLevel].displayName;
+        levelIndicator.textContent = displayLevel;
         levelIndicator.className = 'level-indicator'; // Reset classes
-        if (group.level === 'A1.1') levelIndicator.classList.add('level-a1-1');
-        else if (group.level === 'A1.2') levelIndicator.classList.add('level-a1-2');
-        else if (group.level === 'A2.1') levelIndicator.classList.add('level-a2-1');
-        else if (group.level === 'A2.2') levelIndicator.classList.add('level-a2-2');
-        else if (group.level === 'B1.1') levelIndicator.classList.add('level-b1-1');
+        if (displayLevel === 'A1.1') levelIndicator.classList.add('level-a1-1');
+        else if (displayLevel === 'A1.2') levelIndicator.classList.add('level-a1-2');
+        else if (displayLevel === 'A2.1') levelIndicator.classList.add('level-a2-1');
+        else if (displayLevel === 'A2.2') levelIndicator.classList.add('level-a2-2');
+        else if (displayLevel === 'B1.1') levelIndicator.classList.add('level-b1-1');
 
-        groupIndicator.textContent = `${germanOrdinals[index]} Gruppe von ${totalGroups}`;
-        prevGroupBtn.disabled = index === 0;
-        nextGroupBtn.disabled = index === totalGroups - 1;
-        updateProgressBar(index);
-        updateLevelProgressDots(group.level);
-        updateLevelNavigationButtons(group.level);
+        const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
+        groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}`;
+        prevGroupBtn.disabled = currentGroupInLevel === 0 && currentLevel === levelOrder[0];
+        nextGroupBtn.disabled = currentGroupInLevel === totalGroupsInLevel - 1 && currentLevel === levelOrder[levelOrder.length - 1];
+        updateProgressBar();
+        updateLevelProgressDots();
+        updateLevelNavigationButtons();
+        saveProgress();
 
         // Setup hover listeners for perfekt and präteritum forms
         setupHoverListeners();
@@ -232,26 +269,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function setupProgressBar() {
         progressBar.innerHTML = '';
-        for (let i = 0; i < totalGroups; i++) {
+        const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
+        for (let i = 0; i < totalGroupsInLevel; i++) {
             const step = document.createElement('div');
             step.classList.add('progress-step');
             progressBar.appendChild(step);
         }
     }
 
-    function updateProgressBar(index) {
+    function updateProgressBar() {
+        setupProgressBar(); // Rebuild for current level
         const steps = progressBar.querySelectorAll('.progress-step');
         steps.forEach((step, i) => {
-            step.classList.toggle('active', i <= index);
+            step.classList.toggle('active', i <= currentGroupInLevel);
         });
     }
 
-    const levelOrder = ['A1.1', 'A1.2', 'A2.1', 'A2.2', 'B1.1'];
-
-    function updateLevelProgressDots(currentLevel) {
+    function updateLevelProgressDots() {
         const dots = document.querySelectorAll('.level-dot');
         const lines = document.querySelectorAll('.level-line');
-        const currentLevelIndex = levelOrder.indexOf(currentLevel);
+
+        // Convert currentLevel from 'A1_1' format to 'A1.1' for comparison
+        const displayLevel = levelConfig[currentLevel].displayName;
+        const displayLevelOrder = levelOrder.map(l => levelConfig[l].displayName);
+        const currentLevelIndex = displayLevelOrder.indexOf(displayLevel);
 
         dots.forEach((dot, index) => {
             // Remove all classes first
@@ -277,28 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function getFirstGroupIndexForLevel(level) {
-        // Map levels to their first group index (0-based)
-        const levelMapping = {
-            'A1.1': 0,  // Group 1
-            'A1.2': 5,  // Group 6
-            'A2.1': 10, // Group 11
-            'A2.2': 17, // Group 18
-            'B1.1': 25  // Group 26
-        };
-        return levelMapping[level] || 0;
-    }
-
-    function getLevelFromGroupIndex(groupIndex) {
-        // Determine which level a group belongs to
-        if (groupIndex < 5) return 'A1.1';
-        if (groupIndex < 10) return 'A1.2';
-        if (groupIndex < 17) return 'A2.1';
-        if (groupIndex < 25) return 'A2.2';
-        return 'B1.1';
-    }
-
-    function updateLevelNavigationButtons(currentLevel) {
+    function updateLevelNavigationButtons() {
         const prevLevelBtn = document.getElementById('prev-level-btn');
         const nextLevelBtn = document.getElementById('next-level-btn');
         const currentLevelIndex = levelOrder.indexOf(currentLevel);
@@ -306,47 +326,75 @@ document.addEventListener('DOMContentLoaded', () => {
         prevLevelBtn.disabled = currentLevelIndex === 0;
         nextLevelBtn.disabled = currentLevelIndex === levelOrder.length - 1;
     }
+
+    // Helper functions for progress tracking
+    function saveProgress() {
+        localStorage.setItem(`progress_${currentLevel}`, currentGroupInLevel);
+        localStorage.setItem('currentLevel', currentLevel);
+    }
+
+    function loadProgress() {
+        const savedLevel = localStorage.getItem('currentLevel');
+        if (savedLevel && levelConfig[savedLevel]) {
+            currentLevel = savedLevel;
+            const savedGroup = parseInt(localStorage.getItem(`progress_${currentLevel}`));
+            if (!isNaN(savedGroup)) {
+                currentGroupInLevel = savedGroup;
+            }
+        }
+    }
     
     function initializeApp() {
+        // Load saved progress from localStorage
+        loadProgress();
+
+        // Handle URL parameters (override saved progress)
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('level') === 'A1.2') {
-            currentGroupIndex = 5;
+        const urlLevel = urlParams.get('level');
+        if (urlLevel) {
+            // Convert 'A1.2' format to 'A1_2'
+            const levelKey = urlLevel.replace('.', '_');
+            if (levelConfig[levelKey]) {
+                currentLevel = levelKey;
+                currentGroupInLevel = 0;
+            }
         }
 
         setupProgressBar();
-        
+
         loadAppData()
             .then(() => {
-                renderVerbGroup(currentGroupIndex);
+                renderVerbGroup();
                 
                 prevGroupBtn.addEventListener('click', () => {
-                    if (currentGroupIndex > 0) {
-                        currentGroupIndex--;
-                        // Clear search when changing groups
-                        const searchInput = document.getElementById('verb-search');
-                        const clearSearchBtn = document.getElementById('clear-search');
-                        if (searchInput) {
-                            searchInput.value = '';
-                            clearSearchBtn.classList.remove('visible');
-                            document.getElementById('search-counter').textContent = '';
+                    if (currentGroupInLevel > 0) {
+                        // Previous group in current level
+                        currentGroupInLevel--;
+                    } else {
+                        // Go to previous level's last group (auto-advance)
+                        const currentLevelIndex = levelOrder.indexOf(currentLevel);
+                        if (currentLevelIndex > 0) {
+                            currentLevel = levelOrder[currentLevelIndex - 1];
+                            currentGroupInLevel = levelConfig[currentLevel].groupCount - 1;
                         }
-                        renderVerbGroup(currentGroupIndex);
                     }
+                    clearSearchAndRender();
                 });
 
                 nextGroupBtn.addEventListener('click', () => {
-                    if (currentGroupIndex < totalGroups - 1) {
-                        currentGroupIndex++;
-                        // Clear search when changing groups
-                        const searchInput = document.getElementById('verb-search');
-                        const clearSearchBtn = document.getElementById('clear-search');
-                        if (searchInput) {
-                            searchInput.value = '';
-                            clearSearchBtn.classList.remove('visible');
-                            document.getElementById('search-counter').textContent = '';
+                    const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
+                    if (currentGroupInLevel < totalGroupsInLevel - 1) {
+                        // Next group in current level
+                        currentGroupInLevel++;
+                    } else {
+                        // Go to next level's first group (auto-advance)
+                        const currentLevelIndex = levelOrder.indexOf(currentLevel);
+                        if (currentLevelIndex < levelOrder.length - 1) {
+                            currentLevel = levelOrder[currentLevelIndex + 1];
+                            currentGroupInLevel = 0;
                         }
-                        renderVerbGroup(currentGroupIndex);
                     }
+                    clearSearchAndRender();
                 });
 
                 // Swipe/Drag navigation for groups with resistance effect
@@ -477,12 +525,41 @@ document.addEventListener('DOMContentLoaded', () => {
                     cardsContainer.style.transform = `translateX(${translateX}px) scale(${scale})`;
 
                     // Show peek effect
-                    if (deltaX < -20 && currentGroupIndex < totalGroups - 1) {
+                    const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
+                    const currentLevelIndex = levelOrder.indexOf(currentLevel);
+
+                    if (deltaX < -20) {
                         // Dragging left, show next group
-                        showPeek(currentGroupIndex + 1, 'right', Math.abs(deltaX));
-                    } else if (deltaX > 20 && currentGroupIndex > 0) {
+                        let nextLevel = currentLevel;
+                        let nextGroup = currentGroupInLevel + 1;
+
+                        if (nextGroup >= totalGroupsInLevel) {
+                            // Next level's first group
+                            if (currentLevelIndex < levelOrder.length - 1) {
+                                nextLevel = levelOrder[currentLevelIndex + 1];
+                                nextGroup = 0;
+                            } else {
+                                return; // No next group
+                            }
+                        }
+
+                        showPeek(nextLevel, nextGroup, 'right', Math.abs(deltaX));
+                    } else if (deltaX > 20) {
                         // Dragging right, show previous group
-                        showPeek(currentGroupIndex - 1, 'left', Math.abs(deltaX));
+                        let prevLevel = currentLevel;
+                        let prevGroup = currentGroupInLevel - 1;
+
+                        if (prevGroup < 0) {
+                            // Previous level's last group
+                            if (currentLevelIndex > 0) {
+                                prevLevel = levelOrder[currentLevelIndex - 1];
+                                prevGroup = levelConfig[prevLevel].groupCount - 1;
+                            } else {
+                                return; // No previous group
+                            }
+                        }
+
+                        showPeek(prevLevel, prevGroup, 'left', Math.abs(deltaX));
                     } else {
                         // Hide peek if drag is too small
                         hidePeek();
@@ -490,8 +567,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Show peek preview of adjacent group
-                function showPeek(groupIndex, side, dragDistance) {
-                    const group = verbGroupsData[groupIndex];
+                function showPeek(levelKey, groupIndexInLevel, side, dragDistance) {
+                    const levelGroups = verbGroupsByLevel[levelKey];
+                    if (!levelGroups || !levelGroups[groupIndexInLevel]) return;
+                    const group = levelGroups[groupIndexInLevel];
                     if (!group || !group.verbs) return;
 
                     peekContainer.innerHTML = '';
@@ -546,16 +625,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 function handleSwipe(deltaX) {
                     hidePeek(); // Hide peek when swipe ends
                     cardsContainer.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-                    cardsContainer.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+
+                    const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
+                    const currentLevelIndex = levelOrder.indexOf(currentLevel);
 
                     // Swipe left (next group)
-                    if (deltaX < -swipeThreshold && currentGroupIndex < totalGroups - 1) {
-                        currentGroupIndex++;
+                    if (deltaX < -swipeThreshold) {
+                        if (currentGroupInLevel < totalGroupsInLevel - 1) {
+                            currentGroupInLevel++;
+                        } else if (currentLevelIndex < levelOrder.length - 1) {
+                            // Auto-advance to next level
+                            currentLevel = levelOrder[currentLevelIndex + 1];
+                            currentGroupInLevel = 0;
+                        }
                         clearSearchAndRender();
                     }
                     // Swipe right (previous group)
-                    else if (deltaX > swipeThreshold && currentGroupIndex > 0) {
-                        currentGroupIndex--;
+                    else if (deltaX > swipeThreshold) {
+                        if (currentGroupInLevel > 0) {
+                            currentGroupInLevel--;
+                        } else if (currentLevelIndex > 0) {
+                            // Auto-advance to previous level
+                            currentLevel = levelOrder[currentLevelIndex - 1];
+                            currentGroupInLevel = levelConfig[currentLevel].groupCount - 1;
+                        }
                         clearSearchAndRender();
                     }
                     // Not enough distance, spring back
@@ -583,7 +676,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Reset transform before rendering new group
                     cardsContainer.style.transform = 'translateX(0) scale(1)';
-                    renderVerbGroup(currentGroupIndex);
+                    renderVerbGroup();
                 }
 
                 // Level navigation arrow handlers
@@ -591,44 +684,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 const nextLevelBtn = document.getElementById('next-level-btn');
 
                 prevLevelBtn.addEventListener('click', () => {
-                    const currentLevel = getLevelFromGroupIndex(currentGroupIndex);
                     const currentLevelIndex = levelOrder.indexOf(currentLevel);
 
                     if (currentLevelIndex > 0) {
-                        const prevLevel = levelOrder[currentLevelIndex - 1];
-                        currentGroupIndex = getFirstGroupIndexForLevel(prevLevel);
-
-                        // Clear search when changing levels
-                        const searchInput = document.getElementById('verb-search');
-                        const clearSearchBtn = document.getElementById('clear-search');
-                        if (searchInput) {
-                            searchInput.value = '';
-                            clearSearchBtn.classList.remove('visible');
-                            document.getElementById('search-counter').textContent = '';
-                        }
-
-                        renderVerbGroup(currentGroupIndex);
+                        currentLevel = levelOrder[currentLevelIndex - 1];
+                        currentGroupInLevel = 0;
+                        clearSearchAndRender();
                     }
                 });
 
                 nextLevelBtn.addEventListener('click', () => {
-                    const currentLevel = getLevelFromGroupIndex(currentGroupIndex);
                     const currentLevelIndex = levelOrder.indexOf(currentLevel);
 
                     if (currentLevelIndex < levelOrder.length - 1) {
-                        const nextLevel = levelOrder[currentLevelIndex + 1];
-                        currentGroupIndex = getFirstGroupIndexForLevel(nextLevel);
+                        currentLevel = levelOrder[currentLevelIndex + 1];
+                        currentGroupInLevel = 0;
+                        clearSearchAndRender();
+                    }
+                });
 
-                        // Clear search when changing levels
-                        const searchInput = document.getElementById('verb-search');
-                        const clearSearchBtn = document.getElementById('clear-search');
-                        if (searchInput) {
-                            searchInput.value = '';
-                            clearSearchBtn.classList.remove('visible');
-                            document.getElementById('search-counter').textContent = '';
+                // Keyboard navigation for levels (Up/Down arrows)
+                document.addEventListener('keydown', (e) => {
+                    // Only handle if not typing in search input
+                    if (document.activeElement.tagName === 'INPUT') return;
+
+                    const currentLevelIndex = levelOrder.indexOf(currentLevel);
+
+                    if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        if (currentLevelIndex > 0) {
+                            currentLevel = levelOrder[currentLevelIndex - 1];
+                            currentGroupInLevel = 0;
+                            clearSearchAndRender();
                         }
-
-                        renderVerbGroup(currentGroupIndex);
+                    } else if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        if (currentLevelIndex < levelOrder.length - 1) {
+                            currentLevel = levelOrder[currentLevelIndex + 1];
+                            currentGroupInLevel = 0;
+                            clearSearchAndRender();
+                        }
                     }
                 });
             })
@@ -1026,16 +1121,19 @@ document.addEventListener('DOMContentLoaded', () => {
             levelIndicator.style.pointerEvents = 'none';
         }
 
-        // Search across ALL groups
+        // Search across ALL groups in all levels
         const matchingVerbs = [];
         const searchPromises = [];
 
-        verbGroupsData.forEach((group, groupIndex) => {
-            group.verbs.forEach(verbName => {
-                const verbData = allVerbsData[verbName];
-                if (verbData) {
-                    // Create a promise for each verb to search (including lazy-loaded praesens)
-                    const searchPromise = (async () => {
+        Object.keys(verbGroupsByLevel).forEach(levelKey => {
+            const levelGroups = verbGroupsByLevel[levelKey];
+            levelGroups.forEach((group, groupIndexInLevel) => {
+                if (!group || !group.verbs) return;
+                group.verbs.forEach(verbName => {
+                    const verbData = allVerbsData[verbName];
+                    if (verbData) {
+                        // Create a promise for each verb to search (including lazy-loaded praesens)
+                        const searchPromise = (async () => {
                         // Helper function to check if search term is contained as a word in text
                         const containsWord = (text, term) => {
                             if (!text) return false;
@@ -1128,18 +1226,20 @@ document.addEventListener('DOMContentLoaded', () => {
                             );
                         }
 
-                        if (germanMatch || spanishMatch || perfektMatch || praesensMatch || praeteritumMatch) {
-                            return {
-                                verb: verbName,
-                                data: verbData,
-                                groupIndex: groupIndex
-                            };
-                        }
-                        return null;
-                    })();
+                            if (germanMatch || spanishMatch || perfektMatch || praesensMatch || praeteritumMatch) {
+                                return {
+                                    verb: verbName,
+                                    data: verbData,
+                                    levelKey: levelKey,
+                                    groupIndexInLevel: groupIndexInLevel
+                                };
+                            }
+                            return null;
+                        })();
 
-                    searchPromises.push(searchPromise);
-                }
+                        searchPromises.push(searchPromise);
+                    }
+                });
             });
         });
 
@@ -1260,7 +1360,7 @@ document.addEventListener('DOMContentLoaded', () => {
             levelIndicator.style.pointerEvents = 'auto';
         }
         // Restore the current group
-        renderVerbGroup(currentGroupIndex);
+        renderVerbGroup();
     }
 
     // Event listeners

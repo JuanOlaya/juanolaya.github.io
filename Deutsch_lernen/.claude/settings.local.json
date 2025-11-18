@@ -1,29 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(powershell:*)",
-      "Bash(python:*)",
-      "Bash(wc:*)",
-      "Bash(tail:*)",
-      "Bash(grep:*)",
-      "Bash(cp:*)",
-      "Bash(rm:*)",
-      "Bash(sed:*)",
-      "Bash(start abstraktes-deutsches-substantiv.html)",
-      "Bash(rg:*)",
-      "Bash(mkdir:*)",
-      "Bash(move:*)",
-      "Bash(mv:*)",
-      "Bash(find:*)",
-      "Bash(for file in abstraktes-deutsches-substantiv-kapitel-1.html abstraktes-deutsches-substantiv-kapitel-2.html abstraktes-deutsches-substantiv-kapitel-4.html abstraktes-deutsches-substantiv-kapitel-5.html einkaufsvokabular.html)",
-      "Bash(do echo \"Updating $file\")",
+      "Bash(dir:*)",
       "Bash(done)",
-      "Bash(cat:*)",
-      "Bash(node analyze_verbs.js:*)",
-      "Bash(node add_searchable_fields.js:*)",
-      "Bash(node update_index.js:*)",
-      "Bash(for file in group_*.json)"
+      "Bash(mkdir:*)",
+      "Bash(for i in {1..5})",
+      "Bash(do cp \"group_$i.json\" \"A1_1/A1_1_group_$i.json\")"
     ],
-    "deny": []
+    "deny": [],
+    "ask": []
   }
 }
