@@ -95,7 +95,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
-            return Promise.all(verbDataPromises);
+            return Promise.all(verbDataPromises).then(() => {
+                // Pre-load all conjugation data for fast search
+                console.log('Pre-loading conjugation data for fast search...');
+                const conjugationPromises = Array.from(allVerbNames).map(async verbName => {
+                    try {
+                        const [praesensData, praeteritumData] = await Promise.all([
+                            fetch(`json/praesens/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
+                            fetch(`json/praeteritum_konjugation/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+                        ]);
+
+                        // Rename praeteritum from konjugation data to avoid conflict
+                        if (praeteritumData.praeteritum) {
+                            praeteritumData.praeteritum_conjugations = praeteritumData.praeteritum;
+                            delete praeteritumData.praeteritum;
+                        }
+
+                        // Merge conjugation data into allVerbsData
+                        allVerbsData[verbName] = {
+                            ...allVerbsData[verbName],
+                            ...praesensData,
+                            ...praeteritumData
+                        };
+                    } catch (error) {
+                        console.warn(`Failed to pre-load conjugations for ${verbName}:`, error);
+                    }
+                });
+
+                return Promise.all(conjugationPromises).then(() => {
+                    console.log('Conjugation data pre-loaded! Search will be fast.');
+                });
+            });
         });
     }
 
@@ -1172,43 +1202,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             );
                         }
 
-                        // Search in Präsens conjugations (load if needed)
+                        // Search in Präsens conjugations (pre-loaded!)
                         let praesensMatch = false;
-                        if (!allVerbsData[verbName].praesens) {
-                            // Lazy load praesens data
-                            try {
-                                const praesensData = await fetch(`json/praesens/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-                                if (praesensData.praesens) {
-                                    allVerbsData[verbName].praesens = praesensData.praesens;
-                                    allVerbsData[verbName].praesens_examples = praesensData.praesens_examples;
-                                }
-                            } catch (e) {
-                                // Ignore loading errors
-                            }
-                        }
-
-                        // Check all praesens conjugations (German - starts with)
                         if (allVerbsData[verbName].praesens) {
                             const conjugations = Object.values(allVerbsData[verbName].praesens);
                             praesensMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
                         }
 
-                        // Search in Präteritum conjugations (load if needed)
+                        // Search in Präteritum conjugations (pre-loaded!)
                         let praeteritumMatch = false;
-                        if (!allVerbsData[verbName].praeteritum_conjugations) {
-                            // Lazy load praeteritum data
-                            try {
-                                const praeteritumData = await fetch(`json/praeteritum_konjugation/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-                                if (praeteritumData.praeteritum) {
-                                    allVerbsData[verbName].praeteritum_conjugations = praeteritumData.praeteritum;
-                                    allVerbsData[verbName].praeteritum_examples = praeteritumData.praeteritum_examples;
-                                }
-                            } catch (e) {
-                                // Ignore loading errors
-                            }
-                        }
-
-                        // Check all präteritum conjugations (German - starts with)
                         if (allVerbsData[verbName].praeteritum_conjugations) {
                             const conjugations = Object.values(allVerbsData[verbName].praeteritum_conjugations);
                             praeteritumMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
@@ -1363,9 +1365,13 @@ document.addEventListener('DOMContentLoaded', () => {
         renderVerbGroup();
     }
 
-    // Event listeners
+    // Event listeners with debouncing for search
+    let searchTimeout;
     if (searchInput) {
-        searchInput.addEventListener('input', performSearch);
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => performSearch(), 300); // 300ms debounce
+        });
     }
     if (clearSearchBtn) {
         clearSearchBtn.addEventListener('click', clearSearch);
