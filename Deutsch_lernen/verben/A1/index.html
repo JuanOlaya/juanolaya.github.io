@@ -25,32 +25,11 @@
     <div class="main-container" id="main-container">
         <div class="content-block">
             <div class="header">
-                <div class="level-navigation">
-                    <button id="prev-level-btn" class="level-nav-arrow" title="Vorheriges Niveau">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                    </button>
-                    <div class="level-indicator-container">
-                        <div class="level-indicator" id="level-indicator">A1.1</div>
-                        <div class="level-progress-dots" id="level-progress-dots">
-                            <span class="level-dot"></span>
-                            <span class="level-line"></span>
-                            <span class="level-dot"></span>
-                            <span class="level-line"></span>
-                            <span class="level-dot"></span>
-                            <span class="level-line"></span>
-                            <span class="level-dot"></span>
-                            <span class="level-line"></span>
-                            <span class="level-dot"></span>
-                        </div>
-                    </div>
-                    <button id="next-level-btn" class="level-nav-arrow" title="Nächstes Niveau">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </button>
-                </div>
                 <div class="title-container">
                     <h1 class="title">Deutsch Verben</h1>
 
                     <div class="controls-container">
+                        <div class="info-button" id="info-button">info</div>
                         <div class="search-container">
                             <input type="text" id="verb-search" class="search-input" placeholder="Suchen... (buscar)">
                             <button id="clear-search" class="clear-search-btn" title="Clear search">×</button>
@@ -77,37 +56,52 @@
                         </div>
                     </div>
                 </div>
-                <div class="info-button" id="info-button">info</div>
             </div>
 
             <div id="search-counter" class="search-counter"></div>
-            <div class="cards-container" id="cards-container">
-                <!-- Verb cards will be generated here by JavaScript -->
-            </div>
 
+            <!-- New unified navigation above cards -->
             <div class="navigation-wrapper">
-                <div class="navigation-controls">
-                    <div id="group-indicator"></div>
+                <button id="prev-group-btn" class="nav-arrow-btn nav-arrow-left" title="Vorherige Gruppe">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+
+                <div class="navigation-center">
+                    <div class="level-navigation">
+                        <button id="prev-level-btn" class="level-nav-arrow" title="Vorheriges Niveau">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                        </button>
+                        <div class="level-indicator-container">
+                            <div class="level-indicator" id="level-indicator">A1.1</div>
+                            <div class="level-progress-dots" id="level-progress-dots">
+                                <span class="level-dot"></span>
+                                <span class="level-line"></span>
+                                <span class="level-dot"></span>
+                                <span class="level-line"></span>
+                                <span class="level-dot"></span>
+                                <span class="level-line"></span>
+                                <span class="level-dot"></span>
+                                <span class="level-line"></span>
+                                <span class="level-dot"></span>
+                            </div>
+                        </div>
+                        <button id="next-level-btn" class="level-nav-arrow" title="Nächstes Niveau">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                    </div>
+                    <div id="group-indicator" class="group-indicator"></div>
                     <div class="progress-bar-container" id="progress-bar">
                         <!-- Progress dots will be generated here -->
                     </div>
-                    <div class="nav-buttons-container">
-                        <button id="prev-group-btn" class="nav-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                            <div>
-                                Zurück
-                                <span class="button-translation">(Anterior)</span>
-                            </div>
-                        </button>
-                        <button id="next-group-btn" class="nav-button">
-                            <div>
-                                Weiter
-                                <span class="button-translation">(Siguiente)</span>
-                            </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                        </button>
-                    </div>
                 </div>
+
+                <button id="next-group-btn" class="nav-arrow-btn nav-arrow-right" title="Nächste Gruppe">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+
+            <div class="cards-container" id="cards-container">
+                <!-- Verb cards will be generated here by JavaScript -->
             </div>
 
 
