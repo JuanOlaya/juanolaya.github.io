@@ -29,30 +29,9 @@
                     <h1 class="title">Deutsch Verben</h1>
 
                     <div class="controls-container">
-                        <div class="info-button" id="info-button">info</div>
                         <div class="search-container">
                             <input type="text" id="verb-search" class="search-input" placeholder="Suchen... (buscar)">
                             <button id="clear-search" class="clear-search-btn" title="Clear search">×</button>
-                        </div>
-                        <div class="active-recall-toggle">
-                            <label for="perfekt-switch" class="toggle-label">
-                                Perfekt
-                                <span class="toggle-sublabel">(verbo)</span>
-                            </label>
-                            <label class="switch">
-                                <input type="checkbox" id="perfekt-switch" class="visibility-toggle" data-toggle-class="hide-perfekt" checked>
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        <div class="active-recall-toggle">
-                            <label for="praeteritum-switch" class="toggle-label">
-                                Präteritum
-                                <span class="toggle-sublabel">(verbo)</span>
-                            </label>
-                            <label class="switch">
-                                <input type="checkbox" id="praeteritum-switch" class="visibility-toggle" data-toggle-class="hide-praeteritum">
-                                <span class="slider"></span>
-                            </label>
                         </div>
                     </div>
                 </div>
@@ -67,24 +46,22 @@
                 </button>
 
                 <div class="navigation-center">
+                    <div class="level-progress-dots" id="level-progress-dots">
+                        <span class="level-dot"></span>
+                        <span class="level-line"></span>
+                        <span class="level-dot"></span>
+                        <span class="level-line"></span>
+                        <span class="level-dot"></span>
+                        <span class="level-line"></span>
+                        <span class="level-dot"></span>
+                        <span class="level-line"></span>
+                        <span class="level-dot"></span>
+                    </div>
                     <div class="level-navigation">
                         <button id="prev-level-btn" class="level-nav-arrow" title="Vorheriges Niveau">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
                         </button>
-                        <div class="level-indicator-container">
-                            <div class="level-indicator" id="level-indicator">A1.1</div>
-                            <div class="level-progress-dots" id="level-progress-dots">
-                                <span class="level-dot"></span>
-                                <span class="level-line"></span>
-                                <span class="level-dot"></span>
-                                <span class="level-line"></span>
-                                <span class="level-dot"></span>
-                                <span class="level-line"></span>
-                                <span class="level-dot"></span>
-                                <span class="level-line"></span>
-                                <span class="level-dot"></span>
-                            </div>
-                        </div>
+                        <div class="level-indicator" id="level-indicator">A1.1</div>
                         <button id="next-level-btn" class="level-nav-arrow" title="Nächstes Niveau">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </button>
@@ -106,15 +83,39 @@
 
 
             <button id="story-button">✨ Practicar con una Historia</button>
-            <div class="active-recall-toggle">
-                <label for="recall-switch" class="toggle-label">
-                    Übersetzung
-                    <span class="toggle-sublabel">(traducción)</span>
-                </label>
-                <label class="switch">
-                    <input type="checkbox" id="recall-switch" class="visibility-toggle" data-toggle-class="hide-translation" checked>
-                    <span class="slider"></span>
-                </label>
+
+            <div class="toggles-row">
+                <div class="info-button" id="info-button">info</div>
+                <div class="active-recall-toggle">
+                    <label for="recall-switch" class="toggle-label">
+                        Übersetzung
+                        <span class="toggle-sublabel">(traducción)</span>
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="recall-switch" class="visibility-toggle" data-toggle-class="hide-translation" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="active-recall-toggle">
+                    <label for="perfekt-switch" class="toggle-label">
+                        Perfekt
+                        <span class="toggle-sublabel">(verbo)</span>
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="perfekt-switch" class="visibility-toggle" data-toggle-class="hide-perfekt" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="active-recall-toggle">
+                    <label for="praeteritum-switch" class="toggle-label">
+                        Präteritum
+                        <span class="toggle-sublabel">(verbo)</span>
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="praeteritum-switch" class="visibility-toggle" data-toggle-class="hide-praeteritum">
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </div>
             <div id="story-container" class="story-container">
                 <h3>Eine kleine Geschichte...</h3>
