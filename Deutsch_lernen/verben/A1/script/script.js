@@ -349,65 +349,139 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                // Swipe/Drag navigation for groups
+                // Swipe/Drag navigation for groups with resistance effect
                 let touchStartX = 0;
+                let touchStartY = 0;
                 let touchEndX = 0;
+                let touchEndY = 0;
+                let currentX = 0;
                 let isDragging = false;
-                const swipeThreshold = 50; // minimum distance for swipe
+                const swipeThreshold = 80; // minimum distance for swipe
+                const resistance = 0.4; // 40% resistance for visual feedback
 
                 // Touch events (mobile)
                 cardsContainer.addEventListener('touchstart', (e) => {
                     touchStartX = e.changedTouches[0].screenX;
+                    touchStartY = e.changedTouches[0].screenY;
                     isDragging = true;
+                    cardsContainer.style.transition = 'none'; // Disable transition during drag
                 }, { passive: true });
+
+                cardsContainer.addEventListener('touchmove', (e) => {
+                    if (!isDragging) return;
+
+                    currentX = e.changedTouches[0].screenX;
+                    const currentY = e.changedTouches[0].screenY;
+                    const deltaX = currentX - touchStartX;
+                    const deltaY = currentY - touchStartY;
+
+                    // Only apply horizontal drag if movement is more horizontal than vertical
+                    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                        e.preventDefault(); // Prevent scrolling when dragging horizontally
+                        const translateX = deltaX * resistance; // Apply resistance
+                        cardsContainer.style.transform = `translateX(${translateX}px)`;
+                    }
+                }, { passive: false });
 
                 cardsContainer.addEventListener('touchend', (e) => {
                     if (!isDragging) return;
+
                     touchEndX = e.changedTouches[0].screenX;
-                    handleSwipe();
+                    touchEndY = e.changedTouches[0].screenY;
+
+                    const deltaX = touchEndX - touchStartX;
+                    const deltaY = touchEndY - touchStartY;
+
+                    // Only trigger swipe if movement is primarily horizontal
+                    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                        handleSwipe(deltaX);
+                    } else {
+                        // Reset position if it was vertical scroll
+                        resetPosition();
+                    }
+
                     isDragging = false;
                 }, { passive: true });
 
                 // Mouse events (desktop)
                 let mouseStartX = 0;
+                let mouseStartY = 0;
                 let isMouseDragging = false;
 
                 cardsContainer.addEventListener('mousedown', (e) => {
                     mouseStartX = e.screenX;
+                    mouseStartY = e.screenY;
                     isMouseDragging = true;
                     cardsContainer.style.cursor = 'grabbing';
+                    cardsContainer.style.transition = 'none';
+                });
+
+                cardsContainer.addEventListener('mousemove', (e) => {
+                    if (!isMouseDragging) return;
+
+                    const currentMouseX = e.screenX;
+                    const currentMouseY = e.screenY;
+                    const deltaX = currentMouseX - mouseStartX;
+                    const deltaY = currentMouseY - mouseStartY;
+
+                    // Only apply horizontal drag if movement is more horizontal than vertical
+                    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                        const translateX = deltaX * resistance; // Apply resistance
+                        cardsContainer.style.transform = `translateX(${translateX}px)`;
+                    }
                 });
 
                 cardsContainer.addEventListener('mouseup', (e) => {
                     if (!isMouseDragging) return;
-                    touchStartX = mouseStartX;
-                    touchEndX = e.screenX;
-                    handleSwipe();
+
+                    const mouseEndX = e.screenX;
+                    const mouseEndY = e.screenY;
+                    const deltaX = mouseEndX - mouseStartX;
+                    const deltaY = mouseEndY - mouseStartY;
+
+                    // Only trigger swipe if movement is primarily horizontal
+                    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                        handleSwipe(deltaX);
+                    } else {
+                        resetPosition();
+                    }
+
                     isMouseDragging = false;
                     cardsContainer.style.cursor = 'grab';
                 });
 
                 cardsContainer.addEventListener('mouseleave', () => {
                     if (isMouseDragging) {
+                        resetPosition();
                         isMouseDragging = false;
                         cardsContainer.style.cursor = 'grab';
                     }
                 });
 
                 // Handle swipe/drag logic
-                function handleSwipe() {
-                    const swipeDistance = touchEndX - touchStartX;
+                function handleSwipe(deltaX) {
+                    cardsContainer.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
 
                     // Swipe left (next group)
-                    if (swipeDistance < -swipeThreshold && currentGroupIndex < totalGroups - 1) {
+                    if (deltaX < -swipeThreshold && currentGroupIndex < totalGroups - 1) {
                         currentGroupIndex++;
                         clearSearchAndRender();
                     }
                     // Swipe right (previous group)
-                    else if (swipeDistance > swipeThreshold && currentGroupIndex > 0) {
+                    else if (deltaX > swipeThreshold && currentGroupIndex > 0) {
                         currentGroupIndex--;
                         clearSearchAndRender();
                     }
+                    // Not enough distance, spring back
+                    else {
+                        resetPosition();
+                    }
+                }
+
+                // Reset position with animation
+                function resetPosition() {
+                    cardsContainer.style.transition = 'transform 0.3s ease';
+                    cardsContainer.style.transform = 'translateX(0)';
                 }
 
                 // Helper function to clear search and render
@@ -419,6 +493,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         clearSearchBtn.classList.remove('visible');
                         document.getElementById('search-counter').textContent = '';
                     }
+
+                    // Reset transform before rendering new group
+                    cardsContainer.style.transform = 'translateX(0)';
                     renderVerbGroup(currentGroupIndex);
                 }
 
