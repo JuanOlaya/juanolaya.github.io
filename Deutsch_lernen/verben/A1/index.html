@@ -115,6 +115,16 @@
                         <span class="slider"></span>
                     </label>
                 </div>
+                <div class="active-recall-toggle">
+                    <label for="konjunktiv-switch" class="toggle-label">
+                        Konjunktiv II
+                        <span class="toggle-sublabel">(condicional)</span>
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="konjunktiv-switch" class="visibility-toggle" data-toggle-class="hide-konjunktiv">
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </div>
 
             <button id="story-button">✨ Practicar con una Historia</button>
@@ -205,6 +215,27 @@
                     </summary>
                     <div id="modal-praeteritum-konjugation-table" class="details-content">
                         <!-- Präteritum conjugation table inserted here -->
+                    </div>
+                </details>
+            </div>
+
+            <div data-form="konjunktiv">
+                <!-- Konjunktiv II Block -->
+                <div class="modal-verb-block">
+                    <div class="modal-verb-line">
+                        <h4 id="modal-verb-konjunktiv">Konjunktiv II</h4>
+                    </div>
+                    <p class="modal-translation" data-form="translation">Modo condicional (expresa deseos, situaciones hipotéticas)</p>
+                </div>
+
+                <!-- Konjunktiv II Konjugation Section -->
+                <details id="konjunktiv-konjugation-container">
+                    <summary id="konjunktiv-konjugation-summary">
+                        Konjunktiv II Konjugation
+                        <span class="details-arrow">▶</span>
+                    </summary>
+                    <div id="modal-konjunktiv-konjugation-table" class="details-content">
+                        <!-- Konjunktiv II conjugation table inserted here -->
                     </div>
                 </details>
             </div>
