@@ -378,8 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Only apply horizontal drag if movement is more horizontal than vertical
                     if (Math.abs(deltaX) > Math.abs(deltaY)) {
                         e.preventDefault(); // Prevent scrolling when dragging horizontally
-                        const translateX = deltaX * resistance; // Apply resistance
-                        cardsContainer.style.transform = `translateX(${translateX}px)`;
+                        applyDragEffects(deltaX);
                     }
                 }, { passive: false });
 
@@ -426,8 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Only apply horizontal drag if movement is more horizontal than vertical
                     if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                        const translateX = deltaX * resistance; // Apply resistance
-                        cardsContainer.style.transform = `translateX(${translateX}px)`;
+                        applyDragEffects(deltaX);
                     }
                 });
 
@@ -458,8 +456,96 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
+                // Create peek container for preview cards
+                let peekContainer = document.getElementById('peek-container');
+                if (!peekContainer) {
+                    peekContainer = document.createElement('div');
+                    peekContainer.id = 'peek-container';
+                    peekContainer.className = 'peek-container';
+                    mainContainer.appendChild(peekContainer);
+                }
+
+                // Apply drag visual effects (scale + peek)
+                function applyDragEffects(deltaX) {
+                    const translateX = deltaX * resistance; // Apply resistance
+
+                    // Calculate scale (0.9 to 1.0 based on drag distance)
+                    const dragProgress = Math.min(Math.abs(deltaX) / swipeThreshold, 1);
+                    const scale = 1 - (dragProgress * 0.1); // Scale down to 0.9
+
+                    // Apply transform with both translate and scale
+                    cardsContainer.style.transform = `translateX(${translateX}px) scale(${scale})`;
+
+                    // Show peek effect
+                    if (deltaX < -20 && currentGroupIndex < totalGroups - 1) {
+                        // Dragging left, show next group
+                        showPeek(currentGroupIndex + 1, 'right', Math.abs(deltaX));
+                    } else if (deltaX > 20 && currentGroupIndex > 0) {
+                        // Dragging right, show previous group
+                        showPeek(currentGroupIndex - 1, 'left', Math.abs(deltaX));
+                    } else {
+                        // Hide peek if drag is too small
+                        hidePeek();
+                    }
+                }
+
+                // Show peek preview of adjacent group
+                function showPeek(groupIndex, side, dragDistance) {
+                    const group = verbGroupsData[groupIndex];
+                    if (!group || !group.verbs) return;
+
+                    peekContainer.innerHTML = '';
+                    peekContainer.className = `peek-container peek-${side}`;
+
+                    // Render up to 4 cards as preview
+                    const previewCount = Math.min(4, group.verbs.length);
+                    for (let i = 0; i < previewCount; i++) {
+                        const verbName = group.verbs[i];
+                        const verbData = allVerbsData[verbName];
+                        if (!verbData) continue;
+
+                        const esTranslation = removeParentheses(verbData.es || '');
+                        const cardHTML = `
+                            <div class="word-item peek-card">
+                                <span class="emoji">${verbData.emoji || '❓'}</span>
+                                <div class="text-container">
+                                    <span class="german-word">${verbName}</span>
+                                    <span class="spanish-translation">${esTranslation}</span>
+                                </div>
+                            </div>
+                        `;
+                        peekContainer.innerHTML += cardHTML;
+                    }
+
+                    // Calculate peek visibility based on drag distance
+                    const peekProgress = Math.min(dragDistance / 100, 1);
+                    peekContainer.style.opacity = peekProgress * 0.7;
+                    peekContainer.style.display = 'flex';
+
+                    // Position peek container
+                    if (side === 'right') {
+                        peekContainer.style.right = '0';
+                        peekContainer.style.left = 'auto';
+                        peekContainer.style.transform = `translateX(${100 - (peekProgress * 100)}%)`;
+                    } else {
+                        peekContainer.style.left = '0';
+                        peekContainer.style.right = 'auto';
+                        peekContainer.style.transform = `translateX(-${100 - (peekProgress * 100)}%)`;
+                    }
+                }
+
+                // Hide peek container
+                function hidePeek() {
+                    if (peekContainer) {
+                        peekContainer.style.display = 'none';
+                        peekContainer.innerHTML = '';
+                    }
+                }
+
                 // Handle swipe/drag logic
                 function handleSwipe(deltaX) {
+                    hidePeek(); // Hide peek when swipe ends
+                    cardsContainer.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
                     cardsContainer.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
 
                     // Swipe left (next group)
@@ -480,8 +566,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Reset position with animation
                 function resetPosition() {
+                    hidePeek(); // Hide peek container
                     cardsContainer.style.transition = 'transform 0.3s ease';
-                    cardsContainer.style.transform = 'translateX(0)';
+                    cardsContainer.style.transform = 'translateX(0) scale(1)'; // Reset both position and scale
                 }
 
                 // Helper function to clear search and render
@@ -495,7 +582,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     // Reset transform before rendering new group
-                    cardsContainer.style.transform = 'translateX(0)';
+                    cardsContainer.style.transform = 'translateX(0) scale(1)';
                     renderVerbGroup(currentGroupIndex);
                 }
 
