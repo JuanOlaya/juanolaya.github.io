@@ -1260,6 +1260,37 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
     display: none;
 }
 
+/* Konjunktiv II styles - hidden by default */
+.german-konjunktiv,
+.spanish-konjunktiv {
+    display: none;
+}
+
+/* Show Konjunktiv II when toggle is active */
+.main-container:not(.hide-konjunktiv) .german-konjunktiv,
+.main-container:not(.hide-konjunktiv) .spanish-konjunktiv {
+    display: block;
+}
+
+/* Modal Konjunktiv II visibility */
+#verb-modal .modal-content.hide-konjunktiv [data-form="konjunktiv"] {
+    display: none;
+}
+
+/* Spanish konjunktiv italic styling */
+.spanish-konjunktiv {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.german-konjunktiv {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #9370DB; /* MediumPurple - different from Perfekt's SteelBlue and Präteritum's SaddleBrown */
+    margin-top: 0;
+}
+
 /* Spanish praeteritum italic styling */
 .spanish-praeteritum {
     font-style: italic;
