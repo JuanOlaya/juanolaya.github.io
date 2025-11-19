@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const levelOrder = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1'];
 
+    // Verbs that support Konjunktiv II
+    const konjunktivVerbs = ['sein', 'haben', 'werden', 'dürfen', 'müssen', 'wollen', 'sollen', 'mögen', 'können'];
+
     let currentLevel = 'A1_1';
     let currentGroupInLevel = 0; // 0-indexed position within current level
     let currentVerbInModal = '';
@@ -100,10 +103,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log('Pre-loading conjugation data for fast search...');
                 const conjugationPromises = Array.from(allVerbNames).map(async verbName => {
                     try {
-                        const [praesensData, praeteritumData] = await Promise.all([
+                        const fetchPromises = [
                             fetch(`json/praesens/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
                             fetch(`json/praeteritum_konjugation/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
-                        ]);
+                        ];
+
+                        // Add Konjunktiv II data for specific verbs
+                        if (konjunktivVerbs.includes(verbName)) {
+                            fetchPromises.push(
+                                fetch(`json/konjunktiv_ii/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+                            );
+                        }
+
+                        const [praesensData, praeteritumData, konjunktivData] = await Promise.all(fetchPromises);
 
                         // Rename praeteritum from konjugation data to avoid conflict
                         if (praeteritumData.praeteritum) {
@@ -115,7 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         allVerbsData[verbName] = {
                             ...allVerbsData[verbName],
                             ...praesensData,
-                            ...praeteritumData
+                            ...praeteritumData,
+                            ...(konjunktivData || {})
                         };
                     } catch (error) {
                         console.warn(`Failed to pre-load conjugations for ${verbName}:`, error);
@@ -206,6 +219,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Prepare Konjunktiv II (only for specific verbs)
+            let germanKonjunktivShort = '';
+            let germanKonjunktivFull = '';
+            let spanishKonjunktivShort = '';
+            let spanishKonjunktivFull = '';
+            let konjunktivHTML = '';
+
+            if (konjunktivVerbs.includes(verbName) && verbData.konjunktiv_ii) {
+                // Use the "er_sie_es" form for display
+                germanKonjunktivShort = verbData.konjunktiv_ii.er_sie_es || '---';
+                germanKonjunktivFull = `er/sie/es ${germanKonjunktivShort}`;
+
+                // Spanish translation for Konjunktiv II
+                const konjunktivTranslations = {
+                    'sein': 'él/ella sería',
+                    'haben': 'él/ella tendría',
+                    'werden': 'él/ella se convertiría',
+                    'dürfen': 'él/ella podría (permiso)',
+                    'müssen': 'él/ella debería',
+                    'wollen': 'él/ella querría',
+                    'sollen': 'él/ella debería',
+                    'mögen': 'él/ella gustaría',
+                    'können': 'él/ella podría'
+                };
+                spanishKonjunktivFull = konjunktivTranslations[verbName] || '---';
+                spanishKonjunktivShort = spanishKonjunktivFull.split(' ').slice(1).join(' ');
+
+                konjunktivHTML = `
+                    <span class="german-konjunktiv konjunktiv-text" data-form="konjunktiv" data-short="${germanKonjunktivShort}" data-full="${germanKonjunktivFull}">${germanKonjunktivShort}</span>
+                    <span class="spanish-konjunktiv konjunktiv-text" data-form="translation konjunktiv" data-short="${spanishKonjunktivShort}" data-full="${spanishKonjunktivFull}">${spanishKonjunktivShort}</span>
+                `;
+            }
+
             // Generate tags HTML
             let tagsHTML = '';
             if (verbData.tags && verbData.tags.length > 0) {
@@ -226,6 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
                             <span class="german-praeteritum praeteritum-text" data-form="praeteritum" data-short="${germanPraeteritumShort}" data-full="${germanPraeteritumFull}">${germanPraeteritumShort}</span>
                             <span class="spanish-praeteritum praeteritum-text" data-form="translation praeteritum" data-short="${spanishPraeteritumShort}" data-full="${spanishPraeteritumFull}">${spanishPraeteritumShort}</span>
+                            ${konjunktivHTML}
                         </div>
                     </div>
                 </div>`;
@@ -260,6 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
         containers.forEach(container => {
             const perfektTexts = container.querySelectorAll('.perfekt-text');
             const praeteritumTexts = container.querySelectorAll('.praeteritum-text');
+            const konjunktivTexts = container.querySelectorAll('.konjunktiv-text');
 
             // Add hover listeners to each perfekt text element
             perfektTexts.forEach(perfektText => {
@@ -290,6 +338,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 praeteritumText.addEventListener('mouseleave', () => {
                     // Show short version for all präteritum texts in this container
                     container.querySelectorAll('.praeteritum-text').forEach(text => {
+                        text.textContent = text.getAttribute('data-short');
+                    });
+                });
+            });
+
+            // Add hover listeners to each konjunktiv text element
+            konjunktivTexts.forEach(konjunktivText => {
+                konjunktivText.addEventListener('mouseenter', () => {
+                    // Show full version for all konjunktiv texts in this container
+                    container.querySelectorAll('.konjunktiv-text').forEach(text => {
+                        text.textContent = text.getAttribute('data-full');
+                    });
+                });
+
+                konjunktivText.addEventListener('mouseleave', () => {
+                    // Show short version for all konjunktiv texts in this container
+                    container.querySelectorAll('.konjunktiv-text').forEach(text => {
                         text.textContent = text.getAttribute('data-short');
                     });
                 });
@@ -1103,8 +1168,50 @@ document.addEventListener('DOMContentLoaded', () => {
             praeteritumKonjugationTableContainer.innerHTML = '';
         }
 
+        // Generate Konjunktiv II conjugation table (only for specific verbs)
+        const konjunktivKonjugationTableContainer = document.getElementById('modal-konjunktiv-konjugation-table');
+        const konjunktivKonjugationContainer = document.getElementById('konjunktiv-konjugation-container');
+
+        if (konjunktivVerbs.includes(updatedData.infinitive) && updatedData.konjunktiv_ii) {
+            // Show the Konjunktiv II container for these verbs
+            konjunktivKonjugationContainer.style.display = 'block';
+
+            const pronounOrder = [
+                { key: 'ich', display: 'ich', spanish: 'yo' },
+                { key: 'du', display: 'du', spanish: 'tú' },
+                { key: 'er_sie_es', display: 'er/sie/es', spanish: 'él/ella' },
+                { key: 'wir', display: 'wir', spanish: 'nosotr@s' },
+                { key: 'ihr', display: 'ihr', spanish: 'vosotr@s' },
+                { key: 'sie_Sie', display: 'sie/Sie', spanish: 'ell@s/usted(es)' }
+            ];
+
+            let konjunktivTableHTML = '<table>';
+            konjunktivTableHTML += '<tr><th>Pronomen</th><th>Konjugation</th></tr>';
+
+            for (const { key, display, spanish } of pronounOrder) {
+                const conjugation = updatedData.konjunktiv_ii[key];
+
+                if (conjugation) {
+                    // Create pronoun cell with German pronoun and Spanish translation
+                    let pronounCell = `<div class="pronoun-de">${display}</div>`;
+                    if (spanish) {
+                        pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
+                    }
+
+                    konjunktivTableHTML += `<tr><td>${pronounCell}</td><td>${conjugation}</td></tr>`;
+                }
+            }
+
+            konjunktivTableHTML += '</table>';
+            konjunktivKonjugationTableContainer.innerHTML = konjunktivTableHTML;
+        } else {
+            // Hide the Konjunktiv II container for verbs that don't support it
+            konjunktivKonjugationContainer.style.display = 'none';
+            konjunktivKonjugationTableContainer.innerHTML = '';
+        }
+
         const verbModalContent = document.querySelector('#verb-modal .modal-content');
-        verbModalContent.classList.remove('hide-perfekt', 'hide-praeteritum', 'hide-translation');
+        verbModalContent.classList.remove('hide-perfekt', 'hide-praeteritum', 'hide-konjunktiv', 'hide-translation');
         document.getElementById('praesens-details-container').open = true;
 
         verbModal.classList.add('visible');
@@ -1309,6 +1416,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Prepare Konjunktiv II (only for specific verbs)
+            let germanKonjunktivShort = '';
+            let germanKonjunktivFull = '';
+            let spanishKonjunktivShort = '';
+            let spanishKonjunktivFull = '';
+            let konjunktivHTML = '';
+
+            if (konjunktivVerbs.includes(verbName) && verbData.konjunktiv_ii) {
+                // Use the "er_sie_es" form for display
+                germanKonjunktivShort = verbData.konjunktiv_ii.er_sie_es || '---';
+                germanKonjunktivFull = `er/sie/es ${germanKonjunktivShort}`;
+
+                // Spanish translation for Konjunktiv II
+                const konjunktivTranslations = {
+                    'sein': 'él/ella sería',
+                    'haben': 'él/ella tendría',
+                    'werden': 'él/ella se convertiría',
+                    'dürfen': 'él/ella podría (permiso)',
+                    'müssen': 'él/ella debería',
+                    'wollen': 'él/ella querría',
+                    'sollen': 'él/ella debería',
+                    'mögen': 'él/ella gustaría',
+                    'können': 'él/ella podría'
+                };
+                spanishKonjunktivFull = konjunktivTranslations[verbName] || '---';
+                spanishKonjunktivShort = spanishKonjunktivFull.split(' ').slice(1).join(' ');
+
+                konjunktivHTML = `
+                    <span class="german-konjunktiv konjunktiv-text" data-form="konjunktiv" data-short="${germanKonjunktivShort}" data-full="${germanKonjunktivFull}">${germanKonjunktivShort}</span>
+                    <span class="spanish-konjunktiv konjunktiv-text" data-form="translation konjunktiv" data-short="${spanishKonjunktivShort}" data-full="${spanishKonjunktivFull}">${spanishKonjunktivShort}</span>
+                `;
+            }
+
             // Generate tags HTML
             let tagsHTML = '';
             if (verbData.tags && verbData.tags.length > 0) {
@@ -1329,6 +1469,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
                             <span class="german-praeteritum praeteritum-text" data-form="praeteritum" data-short="${germanPraeteritumShort}" data-full="${germanPraeteritumFull}">${germanPraeteritumShort}</span>
                             <span class="spanish-praeteritum praeteritum-text" data-form="translation praeteritum" data-short="${spanishPraeteritumShort}" data-full="${spanishPraeteritumFull}">${spanishPraeteritumShort}</span>
+                            ${konjunktivHTML}
                         </div>
                     </div>
                 </div>`;
