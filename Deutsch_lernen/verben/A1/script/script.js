@@ -1172,7 +1172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const konjunktivKonjugationTableContainer = document.getElementById('modal-konjunktiv-konjugation-table');
         const konjunktivKonjugationContainer = document.getElementById('konjunktiv-konjugation-container');
 
-        if (konjunktivVerbs.includes(updatedData.infinitive) && updatedData.konjunktiv_ii) {
+        if (konjunktivVerbs.includes(updatedData.infinitive) && updatedData.konjunktiv_ii && updatedData.konjunktiv_ii_examples) {
             // Show the Konjunktiv II container for these verbs
             konjunktivKonjugationContainer.style.display = 'block';
 
@@ -1186,19 +1186,30 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
 
             let konjunktivTableHTML = '<table>';
-            konjunktivTableHTML += '<tr><th>Pronomen</th><th>Konjugation</th></tr>';
+            konjunktivTableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel</th></tr>';
 
             for (const { key, display, spanish } of pronounOrder) {
                 const conjugation = updatedData.konjunktiv_ii[key];
+                const example = updatedData.konjunktiv_ii_examples[key];
 
-                if (conjugation) {
+                if (conjugation || example) {
                     // Create pronoun cell with German pronoun and Spanish translation
                     let pronounCell = `<div class="pronoun-de">${display}</div>`;
                     if (spanish) {
                         pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
                     }
 
-                    konjunktivTableHTML += `<tr><td>${pronounCell}</td><td>${conjugation}</td></tr>`;
+                    // Create example cell with German, English, and Spanish
+                    let exampleCell = '';
+                    if (example) {
+                        exampleCell = `<div class="example-cell">`;
+                        if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
+                        if (example.en) exampleCell += `<div class="example-translation example-en">🇬🇧 ${example.en}</div>`;
+                        if (example.es) exampleCell += `<div class="example-translation example-es">🇪🇸 ${example.es}</div>`;
+                        exampleCell += `</div>`;
+                    }
+
+                    konjunktivTableHTML += `<tr><td>${pronounCell}</td><td>${conjugation || ''}</td><td>${exampleCell}</td></tr>`;
                 }
             }
 
