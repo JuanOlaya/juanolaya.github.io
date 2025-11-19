@@ -22,7 +22,7 @@
         .stacked-content-line { margin-bottom: 2px; line-height: 1.2; }
         .german-phrase, .article-german-lines { color: #1f2937; font-size: 1.0rem; line-height: 1.2; }
         .base-article-german { background-color: #fef2f2; display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: #991b1b; font-size: 1.0rem; }
-        .akkusativ-pronoun-visible { font-weight: 700; color: #1D4ED8; background-color: #f0fdfa; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
+        .akkusativ-pronoun-visible { font-weight: 700; color: #be123c; background-color: #fce7f3; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
         .trad-pronoun-visible { font-weight: 400; color: #000000; font-style: italic; font-size: 0.9rem; }
         .pronoun-hidden-part { color: #000000; font-size: 0.8rem; opacity: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; }
         .merged-pronoun-cell:hover .pronoun-hidden-part, .merged-pronoun-cell.active .pronoun-hidden-part { max-height: 8rem; opacity: 1; margin-top: 0.2rem; }
@@ -42,7 +42,7 @@
         .possessive-study-wrapper:hover .nominativ-translation-hidden, .possessive-study-wrapper.active .nominativ-translation-hidden { max-height: 5rem; opacity: 1; }
         .akkusativ-determiner { font-weight: 700; color: #991b1b; background-color: #fef2f2; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
         .article-row { background-color: #f7f7f7; }
-        .possessive-row { background-color: #e0f2fe; }
+        .possessive-row { background-color: #fce7f3; }
         .subject-study-cell { min-height: 5.5rem; padding: 0.4rem 0.6rem; cursor: pointer; transition: background-color 0.15s ease-in-out; }
         .force-open .subject-translation-hidden, .force-open .article-hidden-part, .force-open .pronoun-hidden-part, .force-open .spanish-translation, .force-open .nominativ-translation-hidden { max-height: 10rem !important; opacity: 1 !important; margin-top: 0.1rem !important; }
         .small-pronoun-header { font-size: 0.7rem; line-height: 1; }
@@ -162,11 +162,11 @@
 
                     <!-- Técnica 2 -->
                     <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-5 rounded-lg border-2 border-blue-400">
-                        <h4 class="font-bold text-xl text-blue-700 mb-3">📌 Técnica 2: Identifica el sujeto primero</h4>
+                        <h4 class="font-bold text-xl text-rose-700 mb-3">📌 Técnica 2: Identifica el sujeto primero</h4>
                         <div class="space-y-2 text-gray-700">
                             <div class="flex items-center">
                                 <span class="text-2xl mr-2">➤</span>
-                                <span>El <span class="bg-blue-200 font-bold px-2 py-1 rounded">sujeto</span> (Nominativ) <span class="font-bold">hace</span> la acción</span>
+                                <span>El <span class="bg-pink-200 font-bold px-2 py-1 rounded">sujeto</span> (Nominativ) <span class="font-bold">hace</span> la acción</span>
                             </div>
                             <div class="flex items-center">
                                 <span class="text-2xl mr-2">➤</span>
@@ -174,7 +174,7 @@
                             </div>
                         </div>
                         <div class="bg-white p-3 rounded border-l-4 border-blue-500 mt-3">
-                            <div><span class="bg-blue-200 font-bold px-2 py-1 rounded">Der Mann</span> <span class="text-gray-500 text-sm">(sujeto/NOM)</span> kauft <span class="bg-red-200 font-bold px-2 py-1 rounded">das Auto</span> <span class="text-gray-500 text-sm">(objeto directo/AKK)</span>.</div>
+                            <div><span class="bg-pink-200 font-bold px-2 py-1 rounded">Der Mann</span> <span class="text-gray-500 text-sm">(sujeto/NOM)</span> kauft <span class="bg-red-200 font-bold px-2 py-1 rounded">das Auto</span> <span class="text-gray-500 text-sm">(objeto directo/AKK)</span>.</div>
                         </div>
                     </div>
 
@@ -837,8 +837,8 @@
             html += '</colgroup>';
             html += '<thead class="bg-gray-100">';
             html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE; width: 7%; font-size: 0.95rem;"><span class="small-pronoun-header">Subjekt</span></th>`;
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE; width: 10%; font-size: 0.95rem;"><span class="small-pronoun-header">-</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #fce7f3; width: 7%; font-size: 0.95rem;"><span class="small-pronoun-header">Subjekt</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #fbcfe8; width: 10%; font-size: 0.95rem;"><span class="small-pronoun-header">-</span></th>`;
             html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200" style="width: 9%; font-size: 0.95rem;">Artikel</th>`;
             const genders = [
                 { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1, width: '18%' },
@@ -881,7 +881,7 @@
                         cellClass += ' merged-pronoun-cell wrap-cell align-top cursor-pointer';
                         if (pronoun === '-') { contentHtml = '-'; cellClass = 'table-cell text-sm text-gray-800 text-left bg-gray-200'; }
                         else if (pronoun.includes('Sustantivos')) {
-                            contentHtml = `<div class="text-xs text-gray-800 p-2" style="white-space: normal; line-height: 1.6;">${pronoun}<br><a href="#" onclick="openNullartikelInfoModal(event); return false;" class="text-blue-600 underline hover:text-blue-800 mt-1 inline-block">más info</a></div>`;
+                            contentHtml = `<div class="text-xs text-gray-800 p-2" style="white-space: normal; line-height: 1.6;">${pronoun}<br><a href="#" onclick="openNullartikelInfoModal(event); return false;" class="text-rose-600 underline hover:text-rose-800 mt-1 inline-block">más info</a></div>`;
                             cellClass = 'table-cell text-sm text-gray-800 text-left bg-yellow-50';
                         }
                         else {
@@ -897,7 +897,7 @@
                                     </div>
                                 </div>`;
                         }
-                        styleAttr = ' style="background-color: #CCE5FE;"';
+                        styleAttr = ' style="background-color: #fbcfe8;"';
                     }
                     else if (determinerKeys.includes(key)) {
                         const mergedData = mergedDeterminerKeys.find(d => d.key === key);
@@ -982,7 +982,7 @@
                                 contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(value)}</div>`;
                             }
                             cellClass += ' wrap-cell align-top p-0';
-                            styleAttr = ' style="background-color: #E0F2FE;"';
+                            styleAttr = ' style="background-color: #fce7f3;"';
                         }
                     }
                     html += `<td class="${cellClass}"${styleAttr}>${contentHtml}</td>`;
@@ -1007,8 +1007,8 @@
             html += '</colgroup>';
             html += '<thead class="bg-gray-100">';
             html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #E0F2FE; width: 2.4%; font-size: 0.95rem;"><span class="small-pronoun-header">Pronomen (NOM)</span></th>`;
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #CCE5FE; width: 5%; font-size: 0.95rem;"><span class="small-pronoun-header">Pronomen (AKK)</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #fce7f3; width: 2.4%; font-size: 0.95rem;"><span class="small-pronoun-header">Pronomen (NOM)</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #fbcfe8; width: 5%; font-size: 0.95rem;"><span class="small-pronoun-header">Pronomen (AKK)</span></th>`;
             html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200" style="width: 6%; font-size: 0.95rem;">Possessiv</th>`;
             const genders = [
                 { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1, width: '21.4%' },
@@ -1061,7 +1061,7 @@
                                     <div class="text-black italic">${tradExample}</div>
                                 </div>
                             </div>`;
-                        styleAttr = ' style="background-color: #CCE5FE;"';
+                        styleAttr = ' style="background-color: #fbcfe8;"';
                     }
                     else if (determinerKeys.includes(key)) {
                         const mergedData = mergedDeterminerKeys.find(d => d.key === key);
@@ -1102,7 +1102,7 @@
                             const displayValue = row["Sujeto Display"] || value;
                             contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(value)}</div>`;
                             cellClass += ' wrap-cell align-top p-0';
-                            styleAttr = ' style="background-color: #E0F2FE;"';
+                            styleAttr = ' style="background-color: #fce7f3;"';
                         }
                     }
                     html += `<td class="${cellClass}"${styleAttr}>${contentHtml}</td>`;
