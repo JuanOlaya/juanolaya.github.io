@@ -97,11 +97,14 @@
             font-weight: 700;
             color: #414A5C;
         }
-        .spanish-translation {
+        .english-translation, .spanish-translation {
             font-size: 1rem;
+            font-style: italic;
             color: #6c757d;
-            margin-top: -5px;
             transition: opacity 0.3s, visibility 0.3s;
+        }
+        .english-translation {
+            margin-top: 4px;
         }
         
         /* Estilos para el Active Recall Toggle */
@@ -364,12 +367,13 @@
             background-color: #414A5C;
             color: white;
             border: none;
-            border-radius: 50%;
-            width: 40px;
+            border-radius: 8px;
+            width: 50px;
             height: 40px;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
             margin-left: 1rem;
+            padding: 5px 10px;
         }
         .info-modal-overlay {
             position: fixed;
@@ -417,7 +421,7 @@
     <div class="main-container">
         <div class="header">
             <h1 class="title">Adverbien (A1-B1)</h1>
-            <button id="info-button">ℹ️</button>
+            <button id="info-button">info</button>
         </div>
 
         <div class="toggle-container">
@@ -432,68 +436,53 @@
         
         <h2 class="section-title">Nivel A1: Vocabulario Esencial</h2>
         <div class="cards-container">
-             <div class="word-item" onclick="openExampleModal('täglich', '📅')">
-                <div class="word-item-content">
-                    <span class="emoji">📅</span>
-                    <div class="text-container">
-                        <span class="german-word">täglich</span>
-                        <span class="spanish-translation">(diario)</span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('glücklich', '😄')">
-                 <div class="word-item-content">
-                    <span class="emoji">😄</span>
-                    <div class="text-container">
-                        <span class="german-word">glücklich</span>
-                        <span class="spanish-translation">(feliz / afortunado)</span>
-                    </div>
-                </div>
-            </div>
             <div class="word-item" onclick="openExampleModal('natürlich', '🌱')">
-                 <div class="word-item-content">
+                <div class="word-item-content">
                     <span class="emoji">🌱</span>
                     <div class="text-container">
                         <span class="german-word">natürlich</span>
-                        <span class="spanish-translation">(por supuesto)</span>
+                        <span class="english-translation"><em>of course</em></span>
+                        <span class="spanish-translation"><em>por supuesto</em></span>
                     </div>
                 </div>
             </div>
             <div class="word-item" onclick="openExampleModal('endlich', '🏁')">
                 <div class="word-item-content">
-                   <span class="emoji">🏁</span>
-                   <div class="text-container">
-                       <span class="german-word">endlich</span>
-                       <span class="spanish-translation">(finalmente)</span>
-                   </div>
-               </div>
+                    <span class="emoji">🏁</span>
+                    <div class="text-container">
+                        <span class="german-word">endlich</span>
+                        <span class="english-translation"><em>finally</em></span>
+                        <span class="spanish-translation"><em>finalmente</em></span>
+                    </div>
+                </div>
             </div>
-
-
             <div class="word-item" onclick="openExampleModal('herzlich', '❤️')">
                 <div class="word-item-content">
-                   <span class="emoji">❤️</span>
-                   <div class="text-container">
-                       <span class="german-word">herzlich</span>
-                       <span class="spanish-translation">(cordial)</span>
-                   </div>
-               </div>
+                    <span class="emoji">❤️</span>
+                    <div class="text-container">
+                        <span class="german-word">herzlich</span>
+                        <span class="english-translation"><em>cordial</em></span>
+                        <span class="spanish-translation"><em>cordial</em></span>
+                    </div>
+                </div>
             </div>
             <div class="word-item" onclick="openExampleModal('wirklich', '😲')">
                 <div class="word-item-content">
-                   <span class="emoji">😲</span>
-                   <div class="text-container">
-                       <span class="german-word">wirklich</span>
-                       <span class="spanish-translation">(de verdad / realmente)</span>
-                   </div>
-               </div>
-           </div>
+                    <span class="emoji">😲</span>
+                    <div class="text-container">
+                        <span class="german-word">wirklich</span>
+                        <span class="english-translation"><em>really</em></span>
+                        <span class="spanish-translation"><em>de verdad / realmente</em></span>
+                    </div>
+                </div>
+            </div>
             <div class="word-item" onclick="openExampleModal('hier', '📍')">
                 <div class="word-item-content">
                     <span class="emoji">📍</span>
                     <div class="text-container">
                         <span class="german-word">hier</span>
-                        <span class="spanish-translation">(aquí)</span>
+                        <span class="english-translation"><em>here</em></span>
+                        <span class="spanish-translation"><em>aquí</em></span>
                     </div>
                 </div>
             </div>
@@ -502,7 +491,8 @@
                     <span class="emoji">🗺️</span>
                     <div class="text-container">
                         <span class="german-word">dort</span>
-                        <span class="spanish-translation">(allí)</span>
+                        <span class="english-translation"><em>there</em></span>
+                        <span class="spanish-translation"><em>allí</em></span>
                     </div>
                 </div>
             </div>
@@ -511,7 +501,8 @@
                     <span class="emoji"> এখনই</span>
                     <div class="text-container">
                         <span class="german-word">jetzt</span>
-                        <span class="spanish-translation">(ahora)</span>
+                        <span class="english-translation"><em>now</em></span>
+                        <span class="spanish-translation"><em>ahora</em></span>
                     </div>
                 </div>
             </div>
@@ -520,7 +511,8 @@
                     <span class="emoji">📆</span>
                     <div class="text-container">
                         <span class="german-word">heute</span>
-                        <span class="spanish-translation">(hoy)</span>
+                        <span class="english-translation"><em>today</em></span>
+                        <span class="spanish-translation"><em>hoy</em></span>
                     </div>
                 </div>
             </div>
@@ -529,7 +521,8 @@
                     <span class="emoji">🌅</span>
                     <div class="text-container">
                         <span class="german-word">morgen</span>
-                        <span class="spanish-translation">(mañana)</span>
+                        <span class="english-translation"><em>tomorrow</em></span>
+                        <span class="spanish-translation"><em>mañana</em></span>
                     </div>
                 </div>
             </div>
@@ -538,7 +531,8 @@
                     <span class="emoji">⏪</span>
                     <div class="text-container">
                         <span class="german-word">gestern</span>
-                        <span class="spanish-translation">(ayer)</span>
+                        <span class="english-translation"><em>yesterday</em></span>
+                        <span class="spanish-translation"><em>ayer</em></span>
                     </div>
                 </div>
             </div>
@@ -547,7 +541,8 @@
                     <span class="emoji">🔁</span>
                     <div class="text-container">
                         <span class="german-word">oft</span>
-                        <span class="spanish-translation">(a menudo)</span>
+                        <span class="english-translation"><em>often</em></span>
+                        <span class="spanish-translation"><em>a menudo</em></span>
                     </div>
                 </div>
             </div>
@@ -556,7 +551,8 @@
                     <span class="emoji">♾️</span>
                     <div class="text-container">
                         <span class="german-word">immer</span>
-                        <span class="spanish-translation">(siempre)</span>
+                        <span class="english-translation"><em>always</em></span>
+                        <span class="spanish-translation"><em>siempre</em></span>
                     </div>
                 </div>
             </div>
@@ -565,7 +561,8 @@
                     <span class="emoji">🚫</span>
                     <div class="text-container">
                         <span class="german-word">nie</span>
-                        <span class="spanish-translation">(nunca)</span>
+                        <span class="english-translation"><em>never</em></span>
+                        <span class="spanish-translation"><em>nunca</em></span>
                     </div>
                 </div>
             </div>
@@ -574,7 +571,8 @@
                     <span class="emoji">🔥</span>
                     <div class="text-container">
                         <span class="german-word">sehr</span>
-                        <span class="spanish-translation">(muy)</span>
+                        <span class="english-translation"><em>very</em></span>
+                        <span class="spanish-translation"><em>muy</em></span>
                     </div>
                 </div>
             </div>
@@ -583,7 +581,8 @@
                     <span class="emoji">👍</span>
                     <div class="text-container">
                         <span class="german-word">gut</span>
-                        <span class="spanish-translation">(bien)</span>
+                        <span class="english-translation"><em>well</em></span>
+                        <span class="spanish-translation"><em>bien</em></span>
                     </div>
                 </div>
             </div>
@@ -592,7 +591,8 @@
                     <span class="emoji">🧑‍🤝‍🧑</span>
                     <div class="text-container">
                         <span class="german-word">zusammen</span>
-                        <span class="spanish-translation">(juntos)</span>
+                        <span class="english-translation"><em>together</em></span>
+                        <span class="spanish-translation"><em>juntos</em></span>
                     </div>
                 </div>
             </div>
@@ -601,7 +601,8 @@
                     <span class="emoji">⏳</span>
                     <div class="text-container">
                         <span class="german-word">bald</span>
-                        <span class="spanish-translation">(pronto)</span>
+                        <span class="english-translation"><em>soon</em></span>
+                        <span class="spanish-translation"><em>pronto</em></span>
                     </div>
                 </div>
             </div>
@@ -610,7 +611,8 @@
                     <span class="emoji">✅</span>
                     <div class="text-container">
                         <span class="german-word">schon</span>
-                        <span class="spanish-translation">(ya)</span>
+                        <span class="english-translation"><em>already</em></span>
+                        <span class="spanish-translation"><em>ya</em></span>
                     </div>
                 </div>
             </div>
@@ -619,7 +621,8 @@
                     <span class="emoji">⏳</span>
                     <div class="text-container">
                         <span class="german-word">noch</span>
-                        <span class="spanish-translation">(aún / todavía)</span>
+                        <span class="english-translation"><em>still / yet</em></span>
+                        <span class="spanish-translation"><em>aún / todavía</em></span>
                     </div>
                 </div>
             </div>
@@ -628,7 +631,8 @@
                     <span class="emoji">➡️</span>
                     <div class="text-container">
                         <span class="german-word">dann</span>
-                        <span class="spanish-translation">(entonces)</span>
+                        <span class="english-translation"><em>then</em></span>
+                        <span class="spanish-translation"><em>entonces</em></span>
                     </div>
                 </div>
             </div>
@@ -637,7 +641,8 @@
                     <span class="emoji">⚡</span>
                     <div class="text-container">
                         <span class="german-word">sofort</span>
-                        <span class="spanish-translation">(inmediatamente)</span>
+                        <span class="english-translation"><em>immediately</em></span>
+                        <span class="spanish-translation"><em>inmediatamente</em></span>
                     </div>
                 </div>
             </div>
@@ -646,7 +651,8 @@
                     <span class="emoji">⬅️</span>
                     <div class="text-container">
                         <span class="german-word">links</span>
-                        <span class="spanish-translation">(izquierda)</span>
+                        <span class="english-translation"><em>left</em></span>
+                        <span class="spanish-translation"><em>izquierda</em></span>
                     </div>
                 </div>
             </div>
@@ -655,7 +661,8 @@
                     <span class="emoji">➡️</span>
                     <div class="text-container">
                         <span class="german-word">rechts</span>
-                        <span class="spanish-translation">(derecha)</span>
+                        <span class="english-translation"><em>right</em></span>
+                        <span class="spanish-translation"><em>derecha</em></span>
                     </div>
                 </div>
             </div>
@@ -664,7 +671,8 @@
                     <span class="emoji">🏃</span>
                     <div class="text-container">
                         <span class="german-word">schnell</span>
-                        <span class="spanish-translation">(rápido)</span>
+                        <span class="english-translation"><em>fast</em></span>
+                        <span class="spanish-translation"><em>rápido</em></span>
                     </div>
                 </div>
             </div>
@@ -673,7 +681,118 @@
                     <span class="emoji">🐢</span>
                     <div class="text-container">
                         <span class="german-word">langsam</span>
-                        <span class="spanish-translation">(lento)</span>
+                        <span class="english-translation"><em>slow</em></span>
+                        <span class="spanish-translation"><em>lento</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('nur', '☝️')">
+                <div class="word-item-content">
+                    <span class="emoji">☝️</span>
+                    <div class="text-container">
+                        <span class="german-word">nur</span>
+                        <span class="english-translation"><em>only</em></span>
+                        <span class="spanish-translation"><em>solo</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('gerade', '🏃')">
+                <div class="word-item-content">
+                    <span class="emoji">🏃</span>
+                    <div class="text-container">
+                        <span class="german-word">gerade</span>
+                        <span class="english-translation"><em>just</em></span>
+                        <span class="spanish-translation"><em>justo ahora</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('ganz', '💯')">
+                <div class="word-item-content">
+                    <span class="emoji">💯</span>
+                    <div class="text-container">
+                        <span class="german-word">ganz</span>
+                        <span class="english-translation"><em>quite</em></span>
+                        <span class="spanish-translation"><em>bastante / completamente</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('genau', '🎯')">
+                <div class="word-item-content">
+                    <span class="emoji">🎯</span>
+                    <div class="text-container">
+                        <span class="german-word">genau</span>
+                        <span class="english-translation"><em>exactly</em></span>
+                        <span class="spanish-translation"><em>exacto</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('auch', '➕')">
+                <div class="word-item-content">
+                    <span class="emoji">➕</span>
+                    <div class="text-container">
+                        <span class="german-word">auch</span>
+                        <span class="english-translation"><em>also</em></span>
+                        <span class="spanish-translation"><em>también</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('jemals', '❓')">
+                <div class="word-item-content">
+                    <span class="emoji">❓</span>
+                    <div class="text-container">
+                        <span class="german-word">jemals</span>
+                        <span class="english-translation"><em>ever</em></span>
+                        <span class="spanish-translation"><em>alguna vez</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('darum', '🧐')">
+                <div class="word-item-content">
+                    <span class="emoji">🧐</span>
+                    <div class="text-container">
+                        <span class="german-word">darum</span>
+                        <span class="english-translation"><em>therefore</em></span>
+                        <span class="spanish-translation"><em>por eso</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('täglich', '📅')">
+                <div class="word-item-content">
+                    <span class="emoji">📅</span>
+                    <div class="text-container">
+                        <span class="german-word">täglich</span>
+                        <span class="english-translation"><em>daily</em></span>
+                        <span class="spanish-translation"><em>diario</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('wöchentlich', '📅')">
+                <div class="word-item-content">
+                    <span class="emoji">📅</span>
+                    <div class="text-container">
+                        <span class="german-word">wöchentlich</span>
+                        <span class="english-translation"><em>weekly</em></span>
+                        <span class="spanish-translation"><em>semanal</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('monatlich', '🗓️')">
+                <div class="word-item-content">
+                    <span class="emoji">🗓️</span>
+                    <div class="text-container">
+                        <span class="german-word">monatlich</span>
+                        <span class="english-translation"><em>monthly</em></span>
+                        <span class="spanish-translation"><em>mensual</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('jährlich', '🎇')">
+                <div class="word-item-content">
+                    <span class="emoji">🎇</span>
+                    <div class="text-container">
+                        <span class="german-word">jährlich</span>
+                        <span class="english-translation"><em>yearly</em></span>
+                        <span class="spanish-translation"><em>anual</em></span>
                     </div>
                 </div>
             </div>
@@ -681,157 +800,143 @@
 
         <h2 class="section-title">Nivel A2: Vocabulario Ampliado</h2>
         <div class="cards-container">
-            <div class="word-item" onclick="openExampleModal('willkürlich', '🎲')">
-                <div class="word-item-content">
-                   <span class="emoji">🎲</span>
-                   <div class="text-container">
-                       <span class="german-word">willkürlich</span>
-                       <span class="spanish-translation">(arbitrario)</span>
-                   </div>
-               </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('besonders', '⭐')">
-                <div class="word-item-content">
-                   <span class="emoji">⭐</span>
-                   <div class="text-container">
-                       <span class="german-word">besonders</span>
-                       <span class="spanish-translation">(especialmente)</span>
-                   </div>
-               </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('gerne', '😊')">
-                <div class="word-item-content">
-                   <span class="emoji">😊</span>
-                   <div class="text-container">
-                       <span class="german-word">gerne</span>
-                       <span class="spanish-translation">(con gusto)</span>
-                   </div>
-               </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('einfach', '👍')">
-                <div class="word-item-content">
-                   <span class="emoji">👍</span>
-                   <div class="text-container">
-                       <span class="german-word">einfach</span>
-                       <span class="spanish-translation">(simplemente)</span>
-                   </div>
-               </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('in Wirklichkeit', '🎭')">
-                <div class="word-item-content">
-                   <span class="emoji">🎭</span>
-                   <div class="text-container">
-                       <span class="german-word">in Wirklichkeit</span>
-                       <span class="spanish-translation">(en realidad)</span>
-                   </div>
-               </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('eigentlich', '🤔')">
-                <div class="word-item-content">
-                   <span class="emoji">🤔</span>
-                   <div class="text-container">
-                       <span class="german-word">eigentlich</span>
-                       <span class="spanish-translation">(en realidad)</span>
-                   </div>
-               </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('tatsächlich', '🤯')">
-                <div class="word-item-content">
-                   <span class="emoji">🤯</span>
-                   <div class="text-container">
-                       <span class="german-word">tatsächlich</span>
-                       <span class="spanish-translation">(de hecho)</span>
-                   </div>
-               </div>
-            </div>
-             <div class="word-item" onclick="openExampleModal('ehrlich', '✋')">
-                <div class="word-item-content">
-                   <span class="emoji">✋</span>
-                   <div class="text-container">
-                       <span class="german-word">ehrlich</span>
-                       <span class="spanish-translation">(honesto / honestamente)</span>
-                   </div>
-               </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('wahrscheinlich', '🤷')">
-                <div class="word-item-content">
-                   <span class="emoji">🤷</span>
-                   <div class="text-container">
-                       <span class="german-word">wahrscheinlich</span>
-                       <span class="spanish-translation">(probable)</span>
-                   </div>
-               </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('deutlich', '🔊')">
-                <div class="word-item-content">
-                   <span class="emoji">🔊</span>
-                   <div class="text-container">
-                       <span class="german-word">deutlich</span>
-                       <span class="spanish-translation">(claramente)</span>
-                   </div>
-               </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('plötzlich', '⚡')">
-                <div class="word-item-content">
-                   <span class="emoji">⚡</span>
-                   <div class="text-container">
-                       <span class="german-word">plötzlich</span>
-                       <span class="spanish-translation">(de repente)</span>
-                   </div>
-               </div>
-            </div>
-
-            <div class="word-item" onclick="openExampleModal('schrecklich', '😱')">
-                <div class="word-item-content">
-                   <span class="emoji">😱</span>
-                   <div class="text-container">
-                       <span class="german-word">schrecklich</span>
-                       <span class="spanish-translation">(terrible)</span>
-                   </div>
-               </div>
-            </div>
-             <div class="word-item" onclick="openExampleModal('unglaublich', '✨')">
-                <div class="word-item-content">
-                   <span class="emoji">✨</span>
-                   <div class="text-container">
-                       <span class="german-word">unglaublich</span>
-                       <span class="spanish-translation">(increíble)</span>
-                   </div>
-               </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('monatlich', '🗓️')">
-                <div class="word-item-content">
-                   <span class="emoji">🗓️</span>
-                   <div class="text-container">
-                       <span class="german-word">monatlich</span>
-                       <span class="spanish-translation">(mensual)</span>
-                   </div>
-               </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('jährlich', '🎇')">
-                <div class="word-item-content">
-                   <span class="emoji">🎇</span>
-                   <div class="text-container">
-                       <span class="german-word">jährlich</span>
-                       <span class="spanish-translation">(anual)</span>
-                   </div>
-               </div>
-            </div>
-             <div class="word-item" onclick="openExampleModal('gewöhnlich', '🔄')">
-                <div class="word-item-content">
-                   <span class="emoji">🔄</span>
-                   <div class="text-container">
-                       <span class="german-word">gewöhnlich</span>
-                       <span class="spanish-translation">(habitual)</span>
-                   </div>
-               </div>
-            </div>
             <div class="word-item" onclick="openExampleModal('manchmal', '🌗')">
                 <div class="word-item-content">
                     <span class="emoji">🌗</span>
                     <div class="text-container">
                         <span class="german-word">manchmal</span>
-                        <span class="spanish-translation">(a veces)</span>
+                        <span class="english-translation"><em>sometimes</em></span>
+                        <span class="spanish-translation"><em>a veces</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('gewöhnlich', '🔄')">
+                <div class="word-item-content">
+                    <span class="emoji">🔄</span>
+                    <div class="text-container">
+                        <span class="german-word">gewöhnlich</span>
+                        <span class="english-translation"><em>usually</em></span>
+                        <span class="spanish-translation"><em>habitual</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('besonders', '⭐')">
+                <div class="word-item-content">
+                    <span class="emoji">⭐</span>
+                    <div class="text-container">
+                        <span class="german-word">besonders</span>
+                        <span class="english-translation"><em>especially</em></span>
+                        <span class="spanish-translation"><em>especialmente</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('gerne', '😊')">
+                <div class="word-item-content">
+                    <span class="emoji">😊</span>
+                    <div class="text-container">
+                        <span class="german-word">gerne</span>
+                        <span class="english-translation"><em>gladly</em></span>
+                        <span class="spanish-translation"><em>con gusto</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('einfach', '👍')">
+                <div class="word-item-content">
+                    <span class="emoji">👍</span>
+                    <div class="text-container">
+                        <span class="german-word">einfach</span>
+                        <span class="english-translation"><em>simply</em></span>
+                        <span class="spanish-translation"><em>simplemente</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('in Wirklichkeit', '🎭')">
+                <div class="word-item-content">
+                    <span class="emoji">🎭</span>
+                    <div class="text-container">
+                        <span class="german-word">in Wirklichkeit</span>
+                        <span class="english-translation"><em>in reality</em></span>
+                        <span class="spanish-translation"><em>en realidad</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('eigentlich', '🤔')">
+                <div class="word-item-content">
+                    <span class="emoji">🤔</span>
+                    <div class="text-container">
+                        <span class="german-word">eigentlich</span>
+                        <span class="english-translation"><em>actually</em></span>
+                        <span class="spanish-translation"><em>en realidad</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('tatsächlich', '🤯')">
+                <div class="word-item-content">
+                    <span class="emoji">🤯</span>
+                    <div class="text-container">
+                        <span class="german-word">tatsächlich</span>
+                        <span class="english-translation"><em>in fact</em></span>
+                        <span class="spanish-translation"><em>de hecho</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('ehrlich', '✋')">
+                <div class="word-item-content">
+                    <span class="emoji">✋</span>
+                    <div class="text-container">
+                        <span class="german-word">ehrlich</span>
+                        <span class="english-translation"><em>honest / honestly</em></span>
+                        <span class="spanish-translation"><em>honesto / honestamente</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('wahrscheinlich', '🤷')">
+                <div class="word-item-content">
+                    <span class="emoji">🤷</span>
+                    <div class="text-container">
+                        <span class="german-word">wahrscheinlich</span>
+                        <span class="english-translation"><em>probably</em></span>
+                        <span class="spanish-translation"><em>probable</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('deutlich', '🔊')">
+                <div class="word-item-content">
+                    <span class="emoji">🔊</span>
+                    <div class="text-container">
+                        <span class="german-word">deutlich</span>
+                        <span class="english-translation"><em>clearly</em></span>
+                        <span class="spanish-translation"><em>claramente</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('plötzlich', '⚡')">
+                <div class="word-item-content">
+                    <span class="emoji">⚡</span>
+                    <div class="text-container">
+                        <span class="german-word">plötzlich</span>
+                        <span class="english-translation"><em>suddenly</em></span>
+                        <span class="spanish-translation"><em>de repente</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('schrecklich', '😱')">
+                <div class="word-item-content">
+                    <span class="emoji">😱</span>
+                    <div class="text-container">
+                        <span class="german-word">schrecklich</span>
+                        <span class="english-translation"><em>terrible</em></span>
+                        <span class="spanish-translation"><em>terrible</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('unglaublich', '✨')">
+                <div class="word-item-content">
+                    <span class="emoji">✨</span>
+                    <div class="text-container">
+                        <span class="german-word">unglaublich</span>
+                        <span class="english-translation"><em>incredible</em></span>
+                        <span class="spanish-translation"><em>increíble</em></span>
                     </div>
                 </div>
             </div>
@@ -840,7 +945,8 @@
                     <span class="emoji">🤔</span>
                     <div class="text-container">
                         <span class="german-word">vielleicht</span>
-                        <span class="spanish-translation">(quizás)</span>
+                        <span class="english-translation"><em>perhaps</em></span>
+                        <span class="spanish-translation"><em>quizás</em></span>
                     </div>
                 </div>
             </div>
@@ -849,7 +955,8 @@
                     <span class="emoji">➡️</span>
                     <div class="text-container">
                         <span class="german-word">deshalb</span>
-                        <span class="spanish-translation">(por eso)</span>
+                        <span class="english-translation"><em>therefore</em></span>
+                        <span class="spanish-translation"><em>por eso</em></span>
                     </div>
                 </div>
             </div>
@@ -858,7 +965,8 @@
                     <span class="emoji">🤷‍♀️</span>
                     <div class="text-container">
                         <span class="german-word">trotzdem</span>
-                        <span class="spanish-translation">(sin embargo)</span>
+                        <span class="english-translation"><em>nevertheless</em></span>
+                        <span class="spanish-translation"><em>sin embargo</em></span>
                     </div>
                 </div>
             </div>
@@ -867,7 +975,8 @@
                     <span class="emoji">😥</span>
                     <div class="text-container">
                         <span class="german-word">leider</span>
-                        <span class="spanish-translation">(lamentablemente)</span>
+                        <span class="english-translation"><em>unfortunately</em></span>
+                        <span class="spanish-translation"><em>lamentablemente</em></span>
                     </div>
                 </div>
             </div>
@@ -876,7 +985,8 @@
                     <span class="emoji">🌍</span>
                     <div class="text-container">
                         <span class="german-word">überall</span>
-                        <span class="spanish-translation">(en todas partes)</span>
+                        <span class="english-translation"><em>everywhere</em></span>
+                        <span class="spanish-translation"><em>en todas partes</em></span>
                     </div>
                 </div>
             </div>
@@ -885,7 +995,8 @@
                     <span class="emoji">📍</span>
                     <div class="text-container">
                         <span class="german-word">nirgends</span>
-                        <span class="spanish-translation">(en ninguna parte)</span>
+                        <span class="english-translation"><em>nowhere</em></span>
+                        <span class="spanish-translation"><em>en ninguna parte</em></span>
                     </div>
                 </div>
             </div>
@@ -894,7 +1005,8 @@
                     <span class="emoji">✨</span>
                     <div class="text-container">
                         <span class="german-word">außerdem</span>
-                        <span class="spanish-translation">(además)</span>
+                        <span class="english-translation"><em>besides</em></span>
+                        <span class="spanish-translation"><em>además</em></span>
                     </div>
                 </div>
             </div>
@@ -903,7 +1015,8 @@
                     <span class="emoji">🧐</span>
                     <div class="text-container">
                         <span class="german-word">deswegen</span>
-                        <span class="spanish-translation">(por eso)</span>
+                        <span class="english-translation"><em>that's why</em></span>
+                        <span class="spanish-translation"><em>por eso</em></span>
                     </div>
                 </div>
             </div>
@@ -912,7 +1025,8 @@
                     <span class="emoji">❓</span>
                     <div class="text-container">
                         <span class="german-word">etwa</span>
-                        <span class="spanish-translation">(aproximadamente / quizás)</span>
+                        <span class="english-translation"><em>about / perhaps</em></span>
+                        <span class="spanish-translation"><em>aproximadamente / quizás</em></span>
                     </div>
                 </div>
             </div>
@@ -921,7 +1035,8 @@
                     <span class="emoji">👍</span>
                     <div class="text-container">
                         <span class="german-word">meistens</span>
-                        <span class="spanish-translation">(la mayoría de las veces)</span>
+                        <span class="english-translation"><em>mostly</em></span>
+                        <span class="spanish-translation"><em>la mayoría de las veces</em></span>
                     </div>
                 </div>
             </div>
@@ -930,7 +1045,8 @@
                     <span class="emoji">📉</span>
                     <div class="text-container">
                         <span class="german-word">selten</span>
-                        <span class="spanish-translation">(raramente)</span>
+                        <span class="english-translation"><em>rarely</em></span>
+                        <span class="spanish-translation"><em>raramente</em></span>
                     </div>
                 </div>
             </div>
@@ -939,7 +1055,8 @@
                     <span class="emoji">🔄</span>
                     <div class="text-container">
                         <span class="german-word">regelmäßig</span>
-                        <span class="spanish-translation">(regularmente)</span>
+                        <span class="english-translation"><em>regularly</em></span>
+                        <span class="spanish-translation"><em>regularmente</em></span>
                     </div>
                 </div>
             </div>
@@ -948,7 +1065,8 @@
                     <span class="emoji">⏪</span>
                     <div class="text-container">
                         <span class="german-word">früher</span>
-                        <span class="spanish-translation">(antes / antiguamente)</span>
+                        <span class="english-translation"><em>earlier / formerly</em></span>
+                        <span class="spanish-translation"><em>antes / antiguamente</em></span>
                     </div>
                 </div>
             </div>
@@ -957,7 +1075,8 @@
                     <span class="emoji">⏩</span>
                     <div class="text-container">
                         <span class="german-word">später</span>
-                        <span class="spanish-translation">(más tarde)</span>
+                        <span class="english-translation"><em>later</em></span>
+                        <span class="spanish-translation"><em>más tarde</em></span>
                     </div>
                 </div>
             </div>
@@ -966,7 +1085,8 @@
                     <span class="emoji">🤏</span>
                     <div class="text-container">
                         <span class="german-word">fast</span>
-                        <span class="spanish-translation">(casi)</span>
+                        <span class="english-translation"><em>almost</em></span>
+                        <span class="spanish-translation"><em>casi</em></span>
                     </div>
                 </div>
             </div>
@@ -975,7 +1095,8 @@
                     <span class="emoji">👌</span>
                     <div class="text-container">
                         <span class="german-word">ziemlich</span>
-                        <span class="spanish-translation">(bastante)</span>
+                        <span class="english-translation"><em>quite</em></span>
+                        <span class="spanish-translation"><em>bastante</em></span>
                     </div>
                 </div>
             </div>
@@ -984,7 +1105,18 @@
                     <span class="emoji">📉</span>
                     <div class="text-container">
                         <span class="german-word">kaum</span>
-                        <span class="spanish-translation">(apenas)</span>
+                        <span class="english-translation"><em>hardly</em></span>
+                        <span class="spanish-translation"><em>apenas</em></span>
+                    </div>
+                </div>
+            </div>
+            <div class="word-item" onclick="openExampleModal('willkürlich', '🎲')">
+                <div class="word-item-content">
+                    <span class="emoji">🎲</span>
+                    <div class="text-container">
+                        <span class="german-word">willkürlich</span>
+                        <span class="english-translation"><em>arbitrary</em></span>
+                        <span class="spanish-translation"><em>arbitrario</em></span>
                     </div>
                 </div>
             </div>
@@ -998,7 +1130,8 @@
                     <span class="emoji">🧐</span>
                     <div class="text-container">
                         <span class="german-word">allerdings</span>
-                        <span class="spanish-translation">(sin embargo)</span>
+                        <span class="english-translation"><em>however</em></span>
+                        <span class="spanish-translation"><em>sin embargo</em></span>
                     </div>
                 </div>
             </div>
@@ -1007,7 +1140,8 @@
                     <span class="emoji">👍</span>
                     <div class="text-container">
                         <span class="german-word">jedenfalls</span>
-                        <span class="spanish-translation">(en cualquier caso)</span>
+                        <span class="english-translation"><em>in any case</em></span>
+                        <span class="spanish-translation"><em>en cualquier caso</em></span>
                     </div>
                 </div>
             </div>
@@ -1016,7 +1150,8 @@
                     <span class="emoji">⏳</span>
                     <div class="text-container">
                         <span class="german-word">inzwischen</span>
-                        <span class="spanish-translation">(mientras tanto)</span>
+                        <span class="english-translation"><em>meanwhile</em></span>
+                        <span class="spanish-translation"><em>mientras tanto</em></span>
                     </div>
                 </div>
             </div>
@@ -1025,7 +1160,8 @@
                     <span class="emoji">❓</span>
                     <div class="text-container">
                         <span class="german-word">überhaupt</span>
-                        <span class="spanish-translation">(en absoluto)</span>
+                        <span class="english-translation"><em>at all</em></span>
+                        <span class="spanish-translation"><em>en absoluto</em></span>
                     </div>
                 </div>
             </div>
@@ -1034,7 +1170,8 @@
                     <span class="emoji">☝️</span>
                     <div class="text-container">
                         <span class="german-word">jeweils</span>
-                        <span class="spanish-translation">(respectivamente)</span>
+                        <span class="english-translation"><em>respectively</em></span>
+                        <span class="spanish-translation"><em>respectivamente</em></span>
                     </div>
                 </div>
             </div>
@@ -1043,7 +1180,8 @@
                     <span class="emoji">👉</span>
                     <div class="text-container">
                         <span class="german-word">beziehungsweise</span>
-                        <span class="spanish-translation">(o sea)</span>
+                        <span class="english-translation"><em>or rather</em></span>
+                        <span class="spanish-translation"><em>o sea</em></span>
                     </div>
                 </div>
             </div>
@@ -1052,7 +1190,8 @@
                     <span class="emoji"> иначе</span>
                     <div class="text-container">
                         <span class="german-word">ansonsten</span>
-                        <span class="spanish-translation">(por lo demás)</span>
+                        <span class="english-translation"><em>otherwise</em></span>
+                        <span class="spanish-translation"><em>por lo demás</em></span>
                     </div>
                 </div>
             </div>
@@ -1061,7 +1200,8 @@
                     <span class="emoji">⚖️</span>
                     <div class="text-container">
                         <span class="german-word">einerseits... andererseits</span>
-                        <span class="spanish-translation">(por un lado... por otro lado)</span>
+                        <span class="english-translation"><em>on the one hand... on the other hand</em></span>
+                        <span class="spanish-translation"><em>por un lado... por otro lado</em></span>
                     </div>
                 </div>
             </div>
@@ -1070,7 +1210,8 @@
                     <span class="emoji">↔️</span>
                     <div class="text-container">
                         <span class="german-word">entweder... oder</span>
-                        <span class="spanish-translation">(o... o)</span>
+                        <span class="english-translation"><em>either... or</em></span>
+                        <span class="spanish-translation"><em>o... o</em></span>
                     </div>
                 </div>
             </div>
@@ -1079,7 +1220,8 @@
                     <span class="emoji">🚫...🚫</span>
                     <div class="text-container">
                         <span class="german-word">weder... noch</span>
-                        <span class="spanish-translation">(ni... ni)</span>
+                        <span class="english-translation"><em>neither... nor</em></span>
+                        <span class="spanish-translation"><em>ni... ni</em></span>
                     </div>
                 </div>
             </div>
@@ -1088,7 +1230,8 @@
                     <span class="emoji">👍...👎</span>
                     <div class="text-container">
                         <span class="german-word">zwar... aber</span>
-                        <span class="spanish-translation">(es cierto que... pero)</span>
+                        <span class="english-translation"><em>admittedly... but</em></span>
+                        <span class="spanish-translation"><em>es cierto que... pero</em></span>
                     </div>
                 </div>
             </div>
@@ -1097,7 +1240,8 @@
                     <span class="emoji">🕰️</span>
                     <div class="text-container">
                         <span class="german-word">damals</span>
-                        <span class="spanish-translation">(en aquel entonces)</span>
+                        <span class="english-translation"><em>back then</em></span>
+                        <span class="spanish-translation"><em>en aquel entonces</em></span>
                     </div>
                 </div>
             </div>
@@ -1106,7 +1250,8 @@
                     <span class="emoji">📱</span>
                     <div class="text-container">
                         <span class="german-word">heutzutage</span>
-                        <span class="spanish-translation">(hoy en día)</span>
+                        <span class="english-translation"><em>nowadays</em></span>
+                        <span class="spanish-translation"><em>hoy en día</em></span>
                     </div>
                 </div>
             </div>
@@ -1115,7 +1260,8 @@
                     <span class="emoji">🧐</span>
                     <div class="text-container">
                         <span class="german-word">jedoch</span>
-                        <span class="spanish-translation">(sin embargo)</span>
+                        <span class="english-translation"><em>however</em></span>
+                        <span class="spanish-translation"><em>sin embargo</em></span>
                     </div>
                 </div>
             </div>
@@ -1124,7 +1270,8 @@
                     <span class="emoji">👍</span>
                     <div class="text-container">
                         <span class="german-word">zumindest</span>
-                        <span class="spanish-translation">(por lo menos)</span>
+                        <span class="english-translation"><em>at least</em></span>
+                        <span class="spanish-translation"><em>por lo menos</em></span>
                     </div>
                 </div>
             </div>
@@ -1133,7 +1280,8 @@
                     <span class="emoji">🙏</span>
                     <div class="text-container">
                         <span class="german-word">hoffentlich</span>
-                        <span class="spanish-translation">(ojalá)</span>
+                        <span class="english-translation"><em>hopefully</em></span>
+                        <span class="spanish-translation"><em>ojalá</em></span>
                     </div>
                 </div>
             </div>
@@ -1142,7 +1290,8 @@
                     <span class="emoji">😄</span>
                     <div class="text-container">
                         <span class="german-word">glücklicherweise</span>
-                        <span class="spanish-translation">(afortunadamente)</span>
+                        <span class="english-translation"><em>fortunately</em></span>
+                        <span class="spanish-translation"><em>afortunadamente</em></span>
                     </div>
                 </div>
             </div>
@@ -1165,17 +1314,14 @@
             <button id="close-info-modal">&times;</button>
             <h2>Was sind Adverbien? (¿Qué son los adverbios?)</h2>
             <p>
-                Adverbien sind Wörter, die beschreiben, <strong>wie</strong>, <strong>wo</strong>, <strong>wann</strong> oder <strong>warum</strong> etwas passiert. Sie verändern sich nicht (sie werden nicht dekliniert) und können sich auf Verben, Adjektive oder andere Adverbien beziehen.
-            </p>
-            <p>
-                <em>(Los adverbios son palabras que describen <strong>cómo</strong>, <strong>dónde</strong>, <strong>cuándo</strong> o <strong>por qué</strong> sucede algo. No cambian (no se declinan) y pueden modificar a verbos, adjetivos u otros adverbios.)</em>
+                Los adverbios son palabras que describen <strong>cómo</strong>, <strong>dónde</strong>, <strong>cuándo</strong> o <strong>por qué</strong> sucede algo. No cambian (no se declinan) y pueden modificar a verbos, adjetivos u otros adverbios.
             </p>
             <h3>Typen von Adverbien (Tipos de adverbios):</h3>
             <ul>
-                <li><strong>Temporaladverbien (de tiempo):</strong> wann? (¿cuándo?) - <em>gestern, heute, morgen, immer, nie</em></li>
-                <li><strong>Lokaladverbien (de lugar):</strong> wo? / wohin? / woher? (¿dónde? / ¿a dónde? / ¿de dónde?) - <em>hier, dort, überall</em></li>
-                <li><strong>Modaladverbien (de modo):</strong> wie? (¿cómo?) - <em>gut, schnell, langsam, gerne</em></li>
-                <li><strong>Kausaladverbien (de causa):</strong> warum? (¿por qué?) - <em>deshalb, darum, trotzdem</em></li>
+                <li><strong>Temporaladverbien (de tiempo):</strong> wann? (¿cuándo?) - <em>gestern, heute, morgen, immer, nie, schon, bald</em></li>
+                <li><strong>Lokaladverbien (de lugar):</strong> wo? / wohin? / woher? (¿dónde? / ¿a dónde? / ¿de dónde?) - <em>hier, dort, überall, nirgends</em></li>
+                <li><strong>Modaladverbien (de modo):</strong> wie? (¿cómo?) - <em>gut, schnell, langsam, gerne, sehr, einfach</em></li>
+                <li><strong>Kausaladverbien (de causa):</strong> warum? (¿por qué?) - <em>deshalb, darum, trotzdem, deswegen</em></li>
             </ul>
         </div>
     </div>
@@ -1705,7 +1851,7 @@
 
         // --- Active Recall Feature ---
         const recallSwitch = document.getElementById('recall-switch');
-        const translations = document.querySelectorAll('.spanish-translation');
+        const translations = document.querySelectorAll('.english-translation, .spanish-translation');
 
         recallSwitch.addEventListener('change', function() {
             if (this.checked) {
@@ -1793,7 +1939,7 @@
                 generatedText = generatedText.replace(/\*/g, '');
 
                 words.forEach(word => {
-                    const regex = new RegExp(`\\b(${word})\\b`, 'gi');
+                    const regex = new RegExp(`\b(${word})\b`, 'gi');
                     generatedText = generatedText.replace(regex, '<span class="highlighted-word">$1</span>');
                 });
 
