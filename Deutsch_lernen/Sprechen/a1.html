@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprechen A1 - Themen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Kalam:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100%;
+            margin: 0;
+            background-color: #85D2FF; /* Light Blue Background */
+            padding: 20px;
+            font-family: 'Nunito', sans-serif;
+            color: #414A5C;
+        }
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+            padding: 10px 20px;
+        }
+        .title {
+            font-family: 'Kalam', cursive;
+            font-size: 3rem;
+            color: #414A5C;
+            border-bottom: 3px dashed #E57373;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        .topic-card {
+            background-color: #f0f8ff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 280px;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .topic-emoji {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .topic-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #414A5C;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            padding: 1rem;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: left;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        #modal-topic-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #E57373;
+            padding-bottom: 1rem;
+        }
+        #modal-emoji {
+            font-size: 2.5rem;
+        }
+        #modal-topic-title {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Kalam', cursive;
+            color: #414A5C;
+        }
+        #qa-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .qa-pair {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 5px solid #85D2FF;
+        }
+        .qa-question {
+            font-weight: bold;
+            color: #414A5C;
+            margin-bottom: 0.5rem;
+        }
+        .qa-answer {
+            color: #555;
+        }
+        .translation {
+            font-style: italic;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        #close-modal {
+            margin-top: 1.5rem;
+            padding: 10px 20px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <h1 class="title">Sprechen A1 - Themen</h1>
+        <div class="cards-container">
+            <!-- Cards will be injected here by JS -->
+        </div>
+    </div>
+
+    <!-- Modal for Q&A -->
+    <div id="topic-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div id="modal-topic-header">
+                <span id="modal-emoji"></span>
+                <h2 id="modal-topic-title"></h2>
+            </div>
+            <div id="qa-container">
+                <!-- Q&A pairs will be injected here -->
+            </div>
+            <button id="close-modal">Schließen</button>
+        </div>
+    </div>
+
+    <script>
+        const topics = [
+            { id: 'personalInfo', title: 'Personal Information', emoji: '👤' },
+            { id: 'familie', title: 'Familie', emoji: '👨‍👩‍👧‍👦' },
+            { id: 'wohnen', title: 'Wohnen', emoji: '🏠' },
+            { id: 'essenTrinken', title: 'Essen & Trinken', emoji: '🍕' },
+            { id: 'freizeit', title: 'Freizeit', emoji: '🎨' },
+            { id: 'tagesablauf', title: 'Tagesablauf', emoji: '⏰' },
+            { id: 'einkaufen', title: 'Einkaufen', emoji: '🛒' },
+            { id: 'wetter', title: 'Wetter', emoji: '☀️' },
+            { id: 'reisenVerkehr', title: 'Reisen & Verkehr', emoji: '✈️' },
+            { id: 'termineZeit', title: 'Termine & Zeit', emoji: '🗓️' },
+            { id: 'gesundheit', title: 'Gesundheit', emoji: '🧑‍⚕️' },
+            { id: 'hobbys', title: 'Hobbys', emoji: '🎲' },
+        ];
+
+        const topicData = {
+            personalInfo: [
+                { q: 'Wie heißen Sie? / Wie heißt du?', a: 'Ich heiße [Name]. / Mein Name ist [Name].', q_en: "What's your name?", a_en: "My name is [Name]." },
+                { q: 'Woher kommen Sie? / Woher kommst du?', a: 'Ich komme aus [Land/Stadt].', q_en: "Where are you from?", a_en: "I come from [Country/City]." },
+                { q: 'Wo wohnen Sie? / Wo wohnst du?', a: 'Ich wohne in [Stadt].', q_en: "Where do you live?", a_en: "I live in [City]." },
+                { q: 'Was sind Sie von Beruf? / Was bist du von Beruf?', a: 'Ich bin [Beruf]. / Ich arbeite als [Beruf].', q_en: "What is your profession?", a_en: "I am a [Profession]. / I work as a [Profession]." },
+                { q: 'Welche Sprachen sprechen Sie? / Welche Sprachen sprichst du?', a: 'Ich spreche [Sprache 1] und [Sprache 2].', q_en: "Which languages do you speak?", a_en: "I speak [Language 1] and [Language 2]." }
+            ],
+            familie: [
+                { q: 'Haben Sie Geschwister? / Hast du Geschwister?', a: 'Ja, ich habe einen Bruder und eine Schwester. / Nein, ich bin Einzelkind.', q_en: "Do you have siblings?", a_en: "Yes, I have a brother and a sister. / No, I am an only child." },
+                { q: 'Sind Sie verheiratet? / Bist du verheiratet?', a: 'Ja, ich bin verheiratet. / Nein, ich bin ledig.', q_en: "Are you married?", a_en: "Yes, I am married. / No, I am single." },
+                { q: 'Haben Sie Kinder? / Hast du Kinder?', a: 'Ja, ich habe zwei Kinder. / Nein, ich habe keine Kinder.', q_en: "Do you have children?", a_en: "Yes, I have two children. / No, I don't have children." }
+            ],
+            wohnen: [
+                { q: 'Wo wohnen Sie?', a: 'Ich wohne in einer Wohnung im Stadtzentrum.', q_en: "Where do you live?", a_en: "I live in an apartment in the city center." },
+                { q: 'Wie groß ist Ihre Wohnung?', a: 'Meine Wohnung hat drei Zimmer. Sie ist 70 Quadratmeter groß.', q_en: "How big is your apartment?", a_en: "My apartment has three rooms. It is 70 square meters." },
+                { q: 'Was ist Ihr Lieblingszimmer?', a: 'Mein Lieblingszimmer ist das Wohnzimmer. Es ist sehr gemütlich.', q_en: "What is your favorite room?", a_en: "My favorite room is the living room. It is very cozy." }
+            ],
+            essenTrinken: [
+                { q: 'Was ist Ihr Lieblingsessen?', a: 'Mein Lieblingsessen ist Pizza.', q_en: "What is your favorite food?", a_en: "My favorite food is pizza." },
+                { q: 'Was trinken Sie gerne?', a: 'Ich trinke gerne Kaffee und Wasser.', q_en: "What do you like to drink?", a_en: "I like to drink coffee and water." },
+                { q: 'Was frühstücken Sie normalerweise?', a: 'Normalerweise esse ich Brot mit Käse zum Frühstück.', q_en: "What do you normally have for breakfast?", a_en: "I normally eat bread with cheese for breakfast." }
+            ],
+            freizeit: [
+                { q: 'Was machen Sie in Ihrer Freizeit?', a: 'In meiner Freizeit lese ich gerne Bücher oder treffe Freunde.', q_en: "What do you do in your free time?", a_en: "In my free time, I like to read books or meet friends." },
+                { q: 'Machen Sie Sport?', a: 'Ja, ich spiele Fußball. / Nein, ich mache keinen Sport.', q_en: "Do you do sports?", a_en: "Yes, I play soccer. / No, I don't do sports." }
+            ],
+            tagesablauf: [
+                { q: 'Wann stehen Sie auf?', a: 'Ich stehe um 7 Uhr auf.', q_en: "When do you get up?", a_en: "I get up at 7 o'clock." },
+                { q: 'Was machen Sie am Abend?', a: 'Am Abend sehe ich fern oder lese ein Buch.', q_en: "What do you do in the evening?", a_en: "In the evening, I watch TV or read a book." },
+                { q: 'Wann gehen Sie schlafen?', a: 'Ich gehe um 23 Uhr schlafen.', q_en: "When do you go to sleep?", a_en: "I go to sleep at 11 p.m." }
+            ],
+            einkaufen: [
+                { q: 'Wo kaufen Sie gerne ein?', a: 'Ich kaufe gerne auf dem Markt ein.', q_en: "Where do you like to shop?", a_en: "I like to shop at the market." },
+                { q: 'Was möchten Sie kaufen?', a: 'Ich möchte Obst und Gemüse kaufen.', q_en: "What would you like to buy?", a_en: "I would like to buy fruit and vegetables." },
+                { q: 'Wie viel kostet das?', a: 'Das kostet 5 Euro.', q_en: "How much does that cost?", a_en: "That costs 5 euros." }
+            ],
+            wetter: [
+                { q: 'Wie ist das Wetter heute?', a: 'Heute ist es sonnig und warm. / Heute regnet es.', q_en: "How is the weather today?", a_en: "Today it is sunny and warm. / Today it is raining." },
+                { q: 'Was ist Ihre Lieblingsjahreszeit?', a: 'Meine Lieblingsjahreszeit ist der Sommer.', q_en: "What is your favorite season?", a_en: "My favorite season is summer." }
+            ],
+            reisenVerkehr: [
+                { q: 'Womit fahren Sie zur Arbeit?', a: 'Ich fahre mit dem Bus zur Arbeit.', q_en: "How do you get to work?", a_en: "I take the bus to work." },
+                { q: 'Reisen Sie gerne?', a: 'Ja, ich reise sehr gerne. Mein letzter Urlaub war in Italien.', q_en: "Do you like to travel?", a_en: "Yes, I like to travel very much. My last vacation was in Italy." }
+            ],
+            termineZeit: [
+                { q: 'Wie spät ist es?', a: 'Es ist halb drei.', q_en: "What time is it?", a_en: "It is half past two." },
+                { q: 'Wann haben Sie Zeit?', a: 'Ich habe am Montag um 10 Uhr Zeit.', q_en: "When are you free?", a_en: "I am free on Monday at 10 a.m." }
+            ],
+            gesundheit: [
+                { q: 'Was tun Sie für Ihre Gesundheit?', a: 'Ich esse viel Obst und mache Sport.', q_en: "What do you do for your health?", a_en: "I eat a lot of fruit and do sports." },
+                { q: 'Wie fühlen Sie sich?', a: 'Ich fühle mich gut, danke. / Ich bin ein bisschen müde.', q_en: "How do you feel?", a_en: "I feel good, thank you. / I am a bit tired." }
+            ],
+            hobbys: [
+                { q: 'Was sind Ihre Hobbys?', a: 'Meine Hobbys sind Lesen, Kochen und Wandern.', q_en: "What are your hobbies?", a_en: "My hobbies are reading, cooking, and hiking." },
+                { q: 'Spielen Sie ein Instrument?', a: 'Ja, ich spiele Gitarre. / Nein, ich spiele kein Instrument.', q_en: "Do you play an instrument?", a_en: "Yes, I play the guitar. / No, I don't play an instrument." }
+            ]
+        };
+
+        const cardsContainer = document.querySelector('.cards-container');
+        const modal = document.getElementById('topic-modal');
+        const modalEmoji = document.getElementById('modal-emoji');
+        const modalTopicTitle = document.getElementById('modal-topic-title');
+        const qaContainer = document.getElementById('qa-container');
+        const closeModalButton = document.getElementById('close-modal');
+
+        function createTopicCards() {
+            topics.forEach(topic => {
+                const card = document.createElement('div');
+                card.className = 'topic-card';
+                card.onclick = () => openTopicModal(topic.id, topic.title, topic.emoji);
+                card.innerHTML = `
+                    <span class="topic-emoji">${topic.emoji}</span>
+                    <div class="topic-title">${topic.title}</div>
+                `;
+                cardsContainer.appendChild(card);
+            });
+        }
+
+        function openTopicModal(topicId, title, emoji) {
+            modalTopicTitle.textContent = title;
+            modalEmoji.textContent = emoji;
+            qaContainer.innerHTML = '';
+
+            const data = topicData[topicId];
+            if (data) {
+                data.forEach(item => {
+                    const qaPair = document.createElement('div');
+                    qaPair.className = 'qa-pair';
+                    qaPair.innerHTML = `
+                        <div class="qa-question">
+                            ${item.q}
+                            <div class="translation">${item.q_en}</div>
+                        </div>
+                        <div class="qa-answer">
+                            ${item.a}
+                            <div class="translation">${item.a_en}</div>
+                        </div>
+                    `;
+                    qaContainer.appendChild(qaPair);
+                });
+            }
+
+            modal.classList.add('visible');
+        }
+
+        function hideModal() {
+            modal.classList.remove('visible');
+        }
+
+        closeModalButton.addEventListener('click', hideModal);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                hideModal();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', createTopicCards);
+    </script>
+</body>
+</html>
