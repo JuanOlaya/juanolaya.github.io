@@ -21,8 +21,8 @@
         .merged-pronoun-cell { padding: 0.3rem 0.4rem; min-height: 5rem; display: flex; flex-direction: column; justify-content: center; white-space: normal; }
         .stacked-content-line { margin-bottom: 2px; line-height: 1.2; }
         .german-phrase, .article-german-lines { color: #1f2937; font-size: 1.0rem; line-height: 1.2; }
-        .base-article-german { background-color: #fef2f2; display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: #991b1b; font-size: 1.0rem; }
-        .akkusativ-pronoun-visible { font-weight: 700; color: #be123c; background-color: #fce7f3; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
+        .base-article-german { background-color: #FEF2F2; display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: #991b1b; font-size: 1.0rem; }
+        .akkusativ-pronoun-visible { font-weight: 700; color: #be123c; background-color: #FCE7F3; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
         .trad-pronoun-visible { font-weight: 400; color: #000000; font-style: italic; font-size: 0.9rem; }
         .pronoun-hidden-part { color: #000000; font-size: 0.8rem; opacity: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; }
         .merged-pronoun-cell:hover .pronoun-hidden-part, .merged-pronoun-cell.active .pronoun-hidden-part { max-height: 8rem; opacity: 1; margin-top: 0.2rem; }
@@ -40,7 +40,7 @@
         .subject-parenthesis-italic { font-size: 0.8rem; color: #000000; font-style: italic; margin-top: 0.1rem; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
         .nominativ-translation-hidden { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; }
         .possessive-study-wrapper:hover .nominativ-translation-hidden, .possessive-study-wrapper.active .nominativ-translation-hidden { max-height: 5rem; opacity: 1; }
-        .akkusativ-determiner { font-weight: 700; color: #991b1b; background-color: #fef2f2; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
+        .akkusativ-determiner { font-weight: 700; color: #991b1b; background-color: #FEF2F2; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
         .article-row { background-color: #f7f7f7; }
         .possessive-row { background-color: #fce7f3; }
         .subject-study-cell { min-height: 5.5rem; padding: 0.4rem 0.6rem; cursor: pointer; transition: background-color 0.15s ease-in-out; }
@@ -824,10 +824,10 @@
         ];
 
         const mergedDeterminerKeys = [
-            { key: "den männlich (akkusativ)", example: "Männlich (M) - Ejemplos con Verbos", translation: "Trad. (M)", color: 'bg-red-200' },
-            { key: "die weiblich (akkusativ)", example: "Weiblich (F) - Ejemplos con Verbos", translation: "Trad. (F)", color: 'bg-red-300' },
-            { key: "das neutral (akkusativ)", example: "Neutral (N) - Ejemplos con Verbos", translation: "Trad. (N)", color: 'bg-red-400' },
-            { key: "die plural (akkusativ)", example: "Plural (P) - Ejemplos con Verbos", translation: "Trad. (P)", color: 'bg-red-500' }
+            { key: "den männlich (akkusativ)", example: "Männlich (M) - Ejemplos con Verbos", translation: "Trad. (M)", color: '#FEF2F2' }, // bg-red-200 -> #FEF2F2
+            { key: "die weiblich (akkusativ)", example: "Weiblich (F) - Ejemplos con Verbos", translation: "Trad. (F)", color: '#FEE2E2' }, // bg-red-300 -> #FEE2E2
+            { key: "das neutral (akkusativ)", example: "Neutral (N) - Ejemplos con Verbos", translation: "Trad. (N)", color: '#FECACA' }, // bg-red-400 -> #FECACA
+            { key: "die plural (akkusativ)", example: "Plural (P) - Ejemplos con Verbos", translation: "Trad. (P)", color: '#FEE2E2' }  // bg-red-500 -> #FEE2E2
         ];
 
         const determinerKeys = ["den männlich (akkusativ)", "die weiblich (akkusativ)", "das neutral (akkusativ)", "die plural (akkusativ)"];
@@ -872,16 +872,16 @@
             html += '</colgroup>';
             html += '<thead class="bg-gray-100">';
             html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #fce7f3; width: 7%; font-size: 0.95rem;"><span class="small-pronoun-header">Subjekt</span></th>`;
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #fbcfe8; width: 10%; font-size: 0.95rem;"><span class="small-pronoun-header">-</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #FCE7F3; width: 7%; font-size: 0.95rem;"><span class="small-pronoun-header">Subjekt</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #FBCFE8; width: 10%; font-size: 0.95rem;"><span class="small-pronoun-header">-</span></th>`;
             html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200" style="width: 9%; font-size: 0.95rem;">Artikel</th>`;
             const genders = [
-                { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1, width: '18%' },
-                { title: 'Weiblich (F)', color: 'bg-red-300', colspan: 1, width: '18%' },
-                { title: 'Neutral (N)', color: 'bg-red-400', colspan: 1, width: '19%' },
-                { title: 'Plural (P)', color: 'bg-red-500', colspan: 1, width: '19%' }
+                { title: 'Männlich (M)', color: '#FEF2F2', colspan: 1, width: '18%' },
+                { title: 'Weiblich (F)', color: '#FEE2E2', colspan: 1, width: '18%' },
+                { title: 'Neutral (N)', color: '#FECACA', colspan: 1, width: '19%' },
+                { title: 'Plural (P)', color: '#FEE2E2', colspan: 1, width: '19%' }
             ];
-            genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell font-bold tracking-wider text-gray-900 ${g.color}" style="width: ${g.width}; font-size: 0.95rem;">${g.title}</th>`; });
+            genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell font-bold tracking-wider text-gray-900" style="background-color: ${g.color}; width: ${g.width}; font-size: 0.95rem;">${g.title}</th>`; });
             html += '</tr>';
             html += '</thead>';
 
@@ -932,7 +932,7 @@
                                     </div>
                                 </div>`;
                         }
-                        styleAttr = ' style="background-color: #fbcfe8;"';
+                        styleAttr = ' style="background-color: #FBCFE8;"';
                     }
                     else if (determinerKeys.includes(key)) {
                         const mergedData = mergedDeterminerKeys.find(d => d.key === key);
@@ -944,34 +944,29 @@
                         const explanationValue = row[`Explanation ${genderSuffix}`] || '';
                         const exampleTextToBold = determiner;
                         let styledExampleValue = exampleValue.replace(new RegExp(`\\b(${exampleTextToBold})\\b`), (m) => `<b>${m}</b>`);
-                        cellClass += ` merged-gender-cell wrap-cell align-top ${mergedData.color}`;
-
-                        // Add white/light text for dark red backgrounds (Weiblich, Neutral and Plural columns) - for examples and translations
-                        const isDarkRed = mergedData.color === 'bg-red-300' || mergedData.color === 'bg-red-400' || mergedData.color === 'bg-red-500';
-                        const textColorClass = isDarkRed ? 'text-white' : '';
-                        const translationColorClass = isDarkRed ? 'text-white' : '';
-
+                        cellClass += ` merged-gender-cell wrap-cell align-top`;
                         const isNullartikel = row["Sujeto (Nominativo)"] === "Nullartikel";
 
                         if (exampleValue && exampleValue !== '-' && tradExampleValue && tradExampleValue !== '-') {
                             if (isNullartikel && categoryValue) {
                                 contentHtml = `
-                                    <span class="akkusativ-determiner">${determiner}</span>
+                                    <span class="akkusativ-determiner" style="background-color: ${mergedData.color};">${determiner}</span>
                                     <div class="study-cell cursor-pointer p-0 pt-1" onclick="openModal('${exampleValue.replace(/'/g, "\\'")}', '${tradExampleValue.replace(/'/g, "\\'")}', '${categoryValue.replace(/'/g, "\\'")}', '${explanationValue.replace(/'/g, "\\'")}')" style="cursor: pointer;">
-                                        <span class="german-phrase whitespace-nowrap ${textColorClass}">${styledExampleValue}</span>
-                                        <span class="spanish-translation ${translationColorClass}">${tradExampleValue}<br><span class="category-tag">${categoryValue}</span></span>
+                                        <span class="german-phrase whitespace-nowrap">${styledExampleValue}</span>
+                                        <span class="spanish-translation">${tradExampleValue}<br><span class="category-tag">${categoryValue}</span></span>
                                     </div>`;
                             } else {
                                 contentHtml = `
-                                    <span class="akkusativ-determiner">${determiner}</span>
+                                    <span class="akkusativ-determiner" style="background-color: ${mergedData.color};">${determiner}</span>
                                     <div class="study-cell cursor-pointer p-0 pt-1" onclick="this.classList.toggle('active')">
-                                        <span class="german-phrase whitespace-nowrap ${textColorClass}">${styledExampleValue}</span>
-                                        <span class="spanish-translation ${translationColorClass}">${tradExampleValue}</span>
+                                        <span class="german-phrase whitespace-nowrap">${styledExampleValue}</span>
+                                        <span class="spanish-translation">${tradExampleValue}</span>
                                     </div>`;
                             }
                         } else {
-                            contentHtml = `<span class="akkusativ-determiner">${determiner}</span>${exampleValue ? '<br>' + exampleValue : ''}`;
+                            contentHtml = `<span class="akkusativ-determiner" style="background-color: ${mergedData.color};">${determiner}</span>${exampleValue ? '<br>' + exampleValue : ''}`;
                         }
+                        styleAttr = ` style="background-color: ${mergedData.color};"`;
                     }
                     else if (key === "Base") {
                         const baseValue = formatMultiLine(row["Base"], false);
@@ -1017,7 +1012,7 @@
                                 contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(value)}</div>`;
                             }
                             cellClass += ' wrap-cell align-top p-0';
-                            styleAttr = ' style="background-color: #fce7f3;"';
+                            styleAttr = ' style="background-color: #FCE7F3;"';
                         }
                     }
                     html += `<td class="${cellClass}"${styleAttr}>${contentHtml}</td>`;
@@ -1042,16 +1037,16 @@
             html += '</colgroup>';
             html += '<thead class="bg-gray-100">';
             html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #fce7f3; width: 2.4%; font-size: 0.95rem;"><span class="small-pronoun-header">Pron. (NOM)</span></th>`;
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #fbcfe8; width: 5%; font-size: 0.95rem;"><span class="small-pronoun-header">Pron. (AKK)</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #FCE7F3; width: 2.4%; font-size: 0.95rem;"><span class="small-pronoun-header">Pron. (NOM)</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #FBCFE8; width: 5%; font-size: 0.95rem;"><span class="small-pronoun-header">Pron. (AKK)</span></th>`;
             html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200" style="width: 6%; font-size: 0.95rem;">Possessiv</th>`;
             const genders = [
-                { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1, width: '21.4%' },
-                { title: 'Weiblich (F)', color: 'bg-red-300', colspan: 1, width: '21.4%' },
-                { title: 'Neutral (N)', color: 'bg-red-400', colspan: 1, width: '21.4%' },
-                { title: 'Plural (P)', color: 'bg-red-500', colspan: 1, width: '22.4%' }
+                { title: 'Männlich (M)', color: '#FEF2F2', colspan: 1, width: '19%' },
+                { title: 'Weiblich (F)', color: '#FEE2E2', colspan: 1, width: '19%' },
+                { title: 'Neutral (N)', color: '#FECACA', colspan: 1, width: '19%' },
+                { title: 'Plural (P)', color: '#FEE2E2', colspan: 1, width: '19%' }
             ];
-            genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell font-bold tracking-wider text-gray-900 ${g.color}" style="width: ${g.width}; font-size: 0.95rem;">${g.title}</th>`; });
+            genders.forEach(g => { html += `<th colspan="${g.colspan}" class="table-cell font-bold tracking-wider text-gray-900" style="background-color: ${g.color}; width: ${g.width}; font-size: 0.95rem;">${g.title}</th>`; });
             html += '</tr>';
             html += '</thead>';
 
@@ -1096,7 +1091,7 @@
                                     <div class="text-black italic">${tradExample}</div>
                                 </div>
                             </div>`;
-                        styleAttr = ' style="background-color: #fbcfe8;"';
+                        styleAttr = ' style="background-color: #FBCFE8;"';
                     }
                     else if (determinerKeys.includes(key)) {
                         const mergedData = mergedDeterminerKeys.find(d => d.key === key);
@@ -1105,20 +1100,19 @@
                         const tradExampleValue = row[mergedData.translation];
                         const exampleTextToBold = determiner;
                         let styledExampleValue = exampleValue.replace(new RegExp(`\\b(${exampleTextToBold})\\b`), (m) => `<b>${m}</b>`);
-                        cellClass += ` merged-gender-cell wrap-cell align-top ${mergedData.color}`;
-                        const isDarkRed = mergedData.color === 'bg-red-300' || mergedData.color === 'bg-red-400' || mergedData.color === 'bg-red-500';
-                        const textColorClass = isDarkRed ? 'text-white' : '';
-                        const translationColorClass = isDarkRed ? 'text-white' : '';
+                        cellClass += ` merged-gender-cell wrap-cell align-top`;
+                        
                         if (exampleValue && exampleValue !== '-' && tradExampleValue && tradExampleValue !== '-') {
                             contentHtml = `
-                                <span class="akkusativ-determiner">${determiner}</span>
+                                <span class="akkusativ-determiner" style="background-color: ${mergedData.color};">${determiner}</span>
                                 <div class="study-cell cursor-pointer p-0 pt-1" onclick="this.classList.toggle('active')">
-                                    <span class="german-phrase whitespace-nowrap ${textColorClass}">${styledExampleValue}</span>
-                                    <span class="spanish-translation ${translationColorClass}">${tradExampleValue}</span>
+                                    <span class="german-phrase whitespace-nowrap">${styledExampleValue}</span>
+                                    <span class="spanish-translation">${tradExampleValue}</span>
                                 </div>`;
                         } else {
-                            contentHtml = `<span class="akkusativ-determiner">${determiner}</span>${exampleValue ? '<br>' + exampleValue : ''}`;
+                            contentHtml = `<span class="akkusativ-determiner" style="background-color: ${mergedData.color};">${determiner}</span>${exampleValue ? '<br>' + exampleValue : ''}`;
                         }
+                        styleAttr = ` style="background-color: ${mergedData.color};"`;
                     }
                     else if (key === "Base") {
                         const baseValue = formatMultiLine(row["Base"], false);
