@@ -358,6 +358,58 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        /* Info Modal Styles */
+        #info-button {
+            background-color: #414A5C;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        .info-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 1001; /* Higher than the other modal */
+        }
+        .info-modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            text-align: left;
+            line-height: 1.6;
+        }
+        .info-modal-content h2 {
+            font-family: 'Kalam', cursive;
+            color: #414A5C;
+            margin-top: 0;
+        }
+        .info-modal-content ul {
+            padding-left: 20px;
+        }
+        .info-modal-content li {
+            margin-bottom: 0.5rem;
+        }
+        #close-info-modal {
+            float: right;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -365,6 +417,7 @@
     <div class="main-container">
         <div class="header">
             <h1 class="title">Adverbien (A1-B1)</h1>
+            <button id="info-button">ℹ️</button>
         </div>
 
         <div class="toggle-container">
@@ -1106,6 +1159,27 @@
         </div>
     </div>
 
+    <!-- Modal para información de adverbios -->
+    <div id="info-modal" class="info-modal-overlay">
+        <div class="info-modal-content">
+            <button id="close-info-modal">&times;</button>
+            <h2>Was sind Adverbien? (¿Qué son los adverbios?)</h2>
+            <p>
+                Adverbien sind Wörter, die beschreiben, <strong>wie</strong>, <strong>wo</strong>, <strong>wann</strong> oder <strong>warum</strong> etwas passiert. Sie verändern sich nicht (sie werden nicht dekliniert) und können sich auf Verben, Adjektive oder andere Adverbien beziehen.
+            </p>
+            <p>
+                <em>(Los adverbios son palabras que describen <strong>cómo</strong>, <strong>dónde</strong>, <strong>cuándo</strong> o <strong>por qué</strong> sucede algo. No cambian (no se declinan) y pueden modificar a verbos, adjetivos u otros adverbios.)</em>
+            </p>
+            <h3>Typen von Adverbien (Tipos de adverbios):</h3>
+            <ul>
+                <li><strong>Temporaladverbien (de tiempo):</strong> wann? (¿cuándo?) - <em>gestern, heute, morgen, immer, nie</em></li>
+                <li><strong>Lokaladverbien (de lugar):</strong> wo? / wohin? / woher? (¿dónde? / ¿a dónde? / ¿de dónde?) - <em>hier, dort, überall</em></li>
+                <li><strong>Modaladverbien (de modo):</strong> wie? (¿cómo?) - <em>gut, schnell, langsam, gerne</em></li>
+                <li><strong>Kausaladverbien (de causa):</strong> warum? (¿por qué?) - <em>deshalb, darum, trotzdem</em></li>
+            </ul>
+        </div>
+    </div>
+
     <!-- Modal para mostrar el ejemplo generado -->
     <div id="example-modal" class="modal-overlay">
         <div class="modal-content">
@@ -1731,6 +1805,25 @@
                 storyButton.disabled = false;
             }
         }
+
+        // --- Info Modal Logic ---
+        const infoButton = document.getElementById('info-button');
+        const infoModal = document.getElementById('info-modal');
+        const closeInfoModalButton = document.getElementById('close-info-modal');
+
+        infoButton.addEventListener('click', () => {
+            infoModal.style.display = 'flex';
+        });
+
+        closeInfoModalButton.addEventListener('click', () => {
+            infoModal.style.display = 'none';
+        });
+
+        infoModal.addEventListener('click', (event) => {
+            if (event.target === infoModal) {
+                infoModal.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
