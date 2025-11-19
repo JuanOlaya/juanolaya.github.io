@@ -72,6 +72,41 @@
 
         <!-- Pronouns Table -->
         <h2 class="text-2xl font-bold text-gray-800 mb-3 mt-8">Pronombres Posesivos (Possessive Pronouns)</h2>
+        <div class="mt-12 bg-gradient-to-r from-yellow-100 to-yellow-200 rounded-xl p-6 shadow-md border-2 border-yellow-400">
+            <h3 class="text-2xl font-bold text-yellow-800 mb-4 flex items-center">
+                <span class="mr-2">💡</span> Tips para No Olvidar
+            </h3>
+            <div class="space-y-3">
+                <div class="flex items-start">
+                    <span class="text-2xl mr-3">1️⃣</span>
+                    <div>
+                        <span class="font-bold text-yellow-900">Memoriza "der → den":</span>
+                        <span class="text-gray-700"> Este es el <span class="bg-yellow-300 px-2 py-1 rounded font-bold">único cambio importante</span></span>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-2xl mr-3">2️⃣</span>
+                    <div>
+                        <span class="font-bold text-yellow-900">Pregunta siempre:</span>
+                        <span class="text-gray-700"> <span class="bg-red-200 px-2 py-1 rounded font-semibold">Was?</span> <span class="italic">"¿Qué?"</span> o <span class="bg-red-200 px-2 py-1 rounded font-semibold">Wen?</span> <span class="italic">"¿A quién?"</span> después del verbo</span>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-2xl mr-3">3️⃣</span>
+                    <div>
+                        <span class="font-bold text-yellow-900">El sujeto hace, el objeto recibe:</span>
+                        <span class="text-gray-700"> Esta regla <span class="underline decoration-2">nunca falla</span></span>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <span class="text-2xl mr-3">4️⃣</span>
+                    <div>
+                        <span class="font-bold text-yellow-900">Practica con verbos transitivos:</span>
+                        <span class="text-gray-700"> Verbos que necesitan un objeto (haben, sehen, kaufen, lieben, essen, trinken, brauchen, nehmen, machen, finden, suchen, lesen, schreiben, hören, kennen, besuchen, verstehen, etc.)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="pronouns-table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200"></div>
 
         <div class="mt-6 flex justify-end">
@@ -1007,8 +1042,8 @@
             html += '</colgroup>';
             html += '<thead class="bg-gray-100">';
             html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #fce7f3; width: 2.4%; font-size: 0.95rem;"><span class="small-pronoun-header">Pronomen (NOM)</span></th>`;
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #fbcfe8; width: 5%; font-size: 0.95rem;"><span class="small-pronoun-header">Pronomen (AKK)</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #fce7f3; width: 2.4%; font-size: 0.95rem;"><span class="small-pronoun-header">Pron. (NOM)</span></th>`;
+            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300" style="background-color: #fbcfe8; width: 5%; font-size: 0.95rem;"><span class="small-pronoun-header">Pron. (AKK)</span></th>`;
             html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-red-200" style="width: 6%; font-size: 0.95rem;">Possessiv</th>`;
             const genders = [
                 { title: 'Männlich (M)', color: 'bg-red-200', colspan: 1, width: '21.4%' },
