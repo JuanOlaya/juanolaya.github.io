@@ -207,7 +207,6 @@
             background-color: rgba(70, 130, 180, 0.05);
             border-radius: 12px;
             border: 2px solid rgba(70, 130, 180, 0.2);
-            position: relative;
         }
 
         .navigation-center {
@@ -218,7 +217,7 @@
             gap: 12px;
         }
 
-        /* Group navigation arrows (left/right on sides) */
+        /* Group navigation arrows (left/right on sides of cards container) */
         .nav-arrow-btn {
             padding: 12px;
             background-color: white;
@@ -233,8 +232,7 @@
             height: 52px;
             flex-shrink: 0;
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 275px; /* Half of min-height 550px */
             z-index: 10;
         }
 
@@ -254,7 +252,7 @@
 
         .nav-arrow-btn:hover:not(:disabled) {
             background-color: #4682B4;
-            transform: translateY(-50%) scale(1.1);
+            transform: scale(1.1);
         }
 
         .nav-arrow-btn:hover:not(:disabled) svg {
@@ -299,6 +297,7 @@
             cursor: grab;
             user-select: none;
             transition: opacity 0.3s ease, transform 0.3s ease;
+            position: relative;
         }
 
         /* Peek container for preview cards */
@@ -1095,7 +1094,7 @@
             .level-indicator { width: 50px; height: 50px; font-size: 1.2rem; }
             .info-button { width: 40px; height: 40px; font-size: 0.85rem; }
             .navigation-wrapper { padding: 1rem 0.5rem; gap: 10px; }
-            .nav-arrow-btn { width: 42px; height: 42px; }
+            .nav-arrow-btn { width: 42px; height: 42px; top: 240px; }
             .nav-arrow-btn svg { width: 20px; height: 20px; }
             .nav-arrow-left { left: -55px; }
             .nav-arrow-right { right: -55px; }
@@ -1118,6 +1117,7 @@
               .word-item { width: 100%; } /* One card per row */
               .header { flex-direction: column; gap: 10px; } /* Stack header items */
               .title-container { order: -1; } /* Move title to top on mobile */
+              .nav-arrow-btn { top: 200px; }
               .nav-arrow-left { left: -50px; }
               .nav-arrow-right { right: -50px; }
          }
