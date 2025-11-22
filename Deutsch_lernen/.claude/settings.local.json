@@ -1,12 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dir:*)",
-      "Bash(done)",
-      "Bash(mkdir:*)",
-      "Bash(for i in {1..5})",
-      "Bash(do cp \"group_$i.json\" \"A1_1/A1_1_group_$i.json\")",
-      "Bash(cat:*)"
+      "Bash(while read f)",
+      "Bash(do grep -q 'case_tags' \"$f\")",
+      "Bash(echo:*)",
+      "Bash(do grep -q \"case_tags\" \"$file\")"
     ],
     "deny": [],
     "ask": []
