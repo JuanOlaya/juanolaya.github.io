@@ -200,13 +200,14 @@
         .navigation-wrapper {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             gap: 20px;
             margin: 0.5rem 0 1.5rem 0;
             padding: 1.5rem 1rem;
             background-color: rgba(70, 130, 180, 0.05);
             border-radius: 12px;
             border: 2px solid rgba(70, 130, 180, 0.2);
+            position: relative;
         }
 
         .navigation-center {
@@ -231,6 +232,18 @@
             width: 52px;
             height: 52px;
             flex-shrink: 0;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .nav-arrow-left {
+            left: -70px;
+        }
+
+        .nav-arrow-right {
+            right: -70px;
         }
 
         .nav-arrow-btn svg {
@@ -241,7 +254,7 @@
 
         .nav-arrow-btn:hover:not(:disabled) {
             background-color: #4682B4;
-            transform: scale(1.1);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .nav-arrow-btn:hover:not(:disabled) svg {
@@ -1084,6 +1097,8 @@
             .navigation-wrapper { padding: 1rem 0.5rem; gap: 10px; }
             .nav-arrow-btn { width: 42px; height: 42px; }
             .nav-arrow-btn svg { width: 20px; height: 20px; }
+            .nav-arrow-left { left: -55px; }
+            .nav-arrow-right { right: -55px; }
             .group-indicator { font-size: 0.85rem; }
             .level-nav-arrow { width: 28px; height: 28px; }
             .level-nav-arrow svg { width: 14px; height: 14px; }
@@ -1103,6 +1118,8 @@
               .word-item { width: 100%; } /* One card per row */
               .header { flex-direction: column; gap: 10px; } /* Stack header items */
               .title-container { order: -1; } /* Move title to top on mobile */
+              .nav-arrow-left { left: -50px; }
+              .nav-arrow-right { right: -50px; }
          }
 /* Styles for collapsible columns in Praesens table */
 #praesens-conjugation-table.hide-translations .collapsible-col {
