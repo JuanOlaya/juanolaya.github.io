@@ -859,8 +859,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = allVerbsData[verb];
         if (!data) return;
 
-        // Lazy load praesens, perfekt, perfekt_konjugation, praeteritum_konjugation, and fragen data if not already loaded
-        if (!data.praesens || !data.examples || !data.praesens_fragen || !data.perfekt_examples || !data.praeteritum_examples) {
+        // Lazy load praesens, perfekt, perfekt_konjugation, praeteritum_konjugation, fragen, and konjunktiv_ii data if not already loaded
+        if (!data.praesens || !data.examples || !data.praesens_fragen || !data.perfekt_examples || !data.praeteritum_examples || (konjunktivVerbs.includes(verb) && !data.konjunktiv_ii)) {
             try {
                 const praesensPromise = fetch(`json/praesens/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
                 const perfektPromise = fetch(`json/perfekt/${verb}.json`).then(res => res.ok ? res.json() : []).catch(() => []);
@@ -868,7 +868,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const perfektKonjugationPromise = fetch(`json/perfekt_konjugation/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
                 const praeteritumKonjugationPromise = fetch(`json/praeteritum_konjugation/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
 
-                const [praesensData, perfektData, fragenData, perfektKonjugationData, praeteritumKonjugationData] = await Promise.all([praesensPromise, perfektPromise, fragenPromise, perfektKonjugationPromise, praeteritumKonjugationPromise]);
+                // Add Konjunktiv II data fetch for specific verbs
+                const konjunktivPromise = konjunktivVerbs.includes(verb)
+                    ? fetch(`json/konjunktiv_ii/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+                    : Promise.resolve({});
+
+                const [praesensData, perfektData, fragenData, perfektKonjugationData, praeteritumKonjugationData, konjunktivData] = await Promise.all([praesensPromise, perfektPromise, fragenPromise, perfektKonjugationPromise, praeteritumKonjugationPromise, konjunktivPromise]);
 
                 // Rename praeteritum from konjugation data to avoid conflict with card praeteritum string
                 if (praeteritumKonjugationData.praeteritum) {
@@ -883,6 +888,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ...fragenData,
                     ...perfektKonjugationData,
                     ...praeteritumKonjugationData,
+                    ...konjunktivData,
                     examples: perfektData
                 };
             } catch (error) {
