@@ -1178,7 +1178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const konjunktivKonjugationTableContainer = document.getElementById('modal-konjunktiv-konjugation-table');
         const konjunktivKonjugationContainer = document.getElementById('konjunktiv-konjugation-container');
 
-        if (konjunktivVerbs.includes(updatedData.infinitive) && updatedData.konjunktiv_ii && updatedData.konjunktiv_ii_examples) {
+        if (konjunktivVerbs.includes(verb) && updatedData.konjunktiv_ii && updatedData.konjunktiv_ii_examples) {
             // Show the Konjunktiv II container for these verbs
             konjunktivKonjugationContainer.style.display = 'block';
 
@@ -1231,7 +1231,7 @@ document.addEventListener('DOMContentLoaded', () => {
         verbModalContent.classList.remove('hide-perfekt', 'hide-praeteritum', 'hide-konjunktiv', 'hide-translation');
 
         // Add hide-konjunktiv class if verb doesn't support Konjunktiv II
-        if (!konjunktivVerbs.includes(updatedData.infinitive)) {
+        if (!konjunktivVerbs.includes(verb)) {
             verbModalContent.classList.add('hide-konjunktiv');
         }
         document.getElementById('praesens-details-container').open = true;
