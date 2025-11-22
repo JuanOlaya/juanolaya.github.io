@@ -1223,6 +1223,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const verbModalContent = document.querySelector('#verb-modal .modal-content');
         verbModalContent.classList.remove('hide-perfekt', 'hide-praeteritum', 'hide-konjunktiv', 'hide-translation');
+
+        // Add hide-konjunktiv class if verb doesn't support Konjunktiv II
+        if (!konjunktivVerbs.includes(updatedData.infinitive)) {
+            verbModalContent.classList.add('hide-konjunktiv');
+        }
         document.getElementById('praesens-details-container').open = true;
 
         verbModal.classList.add('visible');
