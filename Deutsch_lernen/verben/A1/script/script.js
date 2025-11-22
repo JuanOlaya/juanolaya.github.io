@@ -258,6 +258,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 tagsHTML = verbData.tags.map(tag => `<span class="verb-tag">${tag}</span>`).join('');
             }
 
+            // Generate case tags HTML
+            let caseTagsHTML = '';
+            if (verbData.case_tags && verbData.case_tags.length > 0) {
+                caseTagsHTML = '<div class="case-tags">' + verbData.case_tags.map(tag => {
+                    const tagDisplay = {
+                        'dat': '🔴 [+Dat]',
+                        'dat_akk': '🔵 [+Dat + Akk]',
+                        'akk': '🟢 [+Akk]',
+                        'refl': '🟣 [Refl]',
+                        'nom': '🟡 [+Nom]',
+                        'intrans': '⚪ [Intrans]'
+                    };
+
+                    // Handle prep tags with specific prepositions
+                    if (tag.startsWith('prep:')) {
+                        const prep = tag.substring(5);
+                        return `<span class="case-tag case-tag-prep">⚪ [+Prep: ${prep}]</span>`;
+                    }
+
+                    const display = tagDisplay[tag] || tag;
+                    const className = `case-tag case-tag-${tag.replace('_', '-')}`;
+                    return `<span class="${className}">${display}</span>`;
+                }).join(' ') + '</div>';
+            }
+
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="word-item-content">
@@ -266,6 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="german-word-container">
                                 <span class="german-word">${verbName}${irregularMark}</span>
                                 ${tagsHTML}
+                                ${caseTagsHTML}
                             </div>
                             <span class="spanish-translation" data-form="translation">${esTranslation}</span>
                             <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
@@ -899,7 +925,37 @@ document.addEventListener('DOMContentLoaded', () => {
         // Get the updated data reference
         const updatedData = allVerbsData[verb];
 
-        document.getElementById('modal-verb-infinitive').textContent = verb;
+        // Set infinitive with case tags
+        const infinitiveElement = document.getElementById('modal-verb-infinitive');
+        infinitiveElement.textContent = verb;
+
+        // Add case tags to modal infinitive
+        if (updatedData.case_tags && updatedData.case_tags.length > 0) {
+            const tagDisplay = {
+                'dat': '🔴 [+Dat]',
+                'dat_akk': '🔵 [+Dat + Akk]',
+                'akk': '🟢 [+Akk]',
+                'refl': '🟣 [Refl]',
+                'nom': '🟡 [+Nom]',
+                'intrans': '⚪ [Intrans]'
+            };
+
+            updatedData.case_tags.forEach(tag => {
+                const tagSpan = document.createElement('span');
+                tagSpan.className = `case-tag case-tag-${tag.replace('_', '-')}`;
+
+                if (tag.startsWith('prep:')) {
+                    const prep = tag.substring(5);
+                    tagSpan.textContent = ` ⚪ [+Prep: ${prep}]`;
+                    tagSpan.className = 'case-tag case-tag-prep';
+                } else {
+                    tagSpan.textContent = ` ${tagDisplay[tag] || tag}`;
+                }
+
+                infinitiveElement.appendChild(tagSpan);
+            });
+        }
+
         document.getElementById('modal-verb-perfekt').textContent = updatedData.perfekt || '---';
         document.getElementById('modal-verb-praeteritum').textContent = updatedData.praeteritum || '---';
         document.getElementById('modal-emoji').textContent = updatedData.emoji || '❓';
@@ -1477,6 +1533,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 tagsHTML = verbData.tags.map(tag => `<span class="verb-tag">${tag}</span>`).join('');
             }
 
+            // Generate case tags HTML
+            let caseTagsHTML = '';
+            if (verbData.case_tags && verbData.case_tags.length > 0) {
+                caseTagsHTML = '<div class="case-tags">' + verbData.case_tags.map(tag => {
+                    const tagDisplay = {
+                        'dat': '🔴 [+Dat]',
+                        'dat_akk': '🔵 [+Dat + Akk]',
+                        'akk': '🟢 [+Akk]',
+                        'refl': '🟣 [Refl]',
+                        'nom': '🟡 [+Nom]',
+                        'intrans': '⚪ [Intrans]'
+                    };
+
+                    // Handle prep tags with specific prepositions
+                    if (tag.startsWith('prep:')) {
+                        const prep = tag.substring(5);
+                        return `<span class="case-tag case-tag-prep">⚪ [+Prep: ${prep}]</span>`;
+                    }
+
+                    const display = tagDisplay[tag] || tag;
+                    const className = `case-tag case-tag-${tag.replace('_', '-')}`;
+                    return `<span class="${className}">${display}</span>`;
+                }).join(' ') + '</div>';
+            }
+
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="word-item-content">
@@ -1485,6 +1566,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="german-word-container">
                                 <span class="german-word">${verbName}${irregularMark}</span>
                                 ${tagsHTML}
+                                ${caseTagsHTML}
                             </div>
                             <span class="spanish-translation" data-form="translation">${esTranslation}</span>
                             <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>

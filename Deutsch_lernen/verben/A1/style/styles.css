@@ -385,6 +385,35 @@
         .verb-tag:not(:last-child) {
             margin-right: 4px;
         }
+
+        /* Case Tags Styling */
+        .case-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 4px;
+            font-size: 0.75rem;
+        }
+
+        .case-tag {
+            display: inline-block;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border-radius: 4px;
+            white-space: nowrap;
+            background-color: #f3f4f6;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Modal case tags - slightly larger */
+        #modal-verb-infinitive .case-tag {
+            font-size: 0.85rem;
+            padding: 3px 8px;
+            margin-left: 6px;
+        }
+
         .german-past {
             font-size: 1.3rem; /* Slightly larger */
             font-weight: 700;
