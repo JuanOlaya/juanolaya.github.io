@@ -1166,9 +1166,11 @@
 
 /* Gustar Button Styles */
 .gustar-button-wrapper {
-    position: absolute;
-    bottom: -80px; /* Below the cards container bottom */
-    right: -70px;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -60px; /* Move up to overlap with bottom of cards */
+    margin-right: -70px;
     z-index: 10;
 }
 
