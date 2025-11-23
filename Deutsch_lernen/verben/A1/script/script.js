@@ -47,6 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeVerbModalXButton = document.getElementById('close-verb-modal-x');
     const infoButton = document.getElementById('info-button');
     const closeInfoModalButton = document.getElementById('close-info-modal');
+    const gustarButtonContainer = document.getElementById('gustar-button-container');
+    const gustarButton = document.getElementById('gustar-button');
+    const gustarModal = document.getElementById('gustar-modal');
+    const gustarCloseBtn = document.getElementById('gustar-close-btn');
+    const gustarCloseFooterBtn = document.getElementById('gustar-close-footer-btn');
 
     // --- NEW LOADING FUNCTION ---
     function loadAppData() {
@@ -386,6 +391,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
         });
+
+        // Update gustar button visibility
+        updateGustarButtonVisibility();
+    }
+
+    function updateGustarButtonVisibility() {
+        // Show gustar button only for A1.1 Group 6 (Sechste Gruppe)
+        if (currentLevel === 'A1_1' && currentGroupInLevel === 5) { // 5 is index for 6th group (0-indexed)
+            gustarButtonContainer.style.display = 'block';
+        } else {
+            gustarButtonContainer.style.display = 'none';
+        }
     }
 
     function setupProgressBar() {
@@ -874,10 +891,16 @@ document.addEventListener('DOMContentLoaded', () => {
         infoButton.addEventListener('click', () => infoModal.classList.add('visible'));
         closeInfoModalButton.addEventListener('click', () => infoModal.classList.remove('visible'));
         infoModal.addEventListener('click', (e) => { if (e.target === infoModal) infoModal.classList.remove('visible'); });
-        
+
         closeVerbModalButton.addEventListener('click', () => verbModal.classList.remove('visible'));
         closeVerbModalXButton.addEventListener('click', () => verbModal.classList.remove('visible'));
         verbModal.addEventListener('click', (e) => { if (e.target === verbModal) verbModal.classList.remove('visible'); });
+
+        // Gustar modal event listeners
+        gustarButton.addEventListener('click', () => gustarModal.classList.add('visible'));
+        gustarCloseBtn.addEventListener('click', () => gustarModal.classList.remove('visible'));
+        gustarCloseFooterBtn.addEventListener('click', () => gustarModal.classList.remove('visible'));
+        gustarModal.addEventListener('click', (e) => { if (e.target === gustarModal) gustarModal.classList.remove('visible'); });
     }
     
     // --- UPDATED MODAL FUNCTION WITH LAZY LOADING ---

@@ -77,6 +77,14 @@
                 </button>
             </div>
 
+            <!-- Gustar button for Sechste Gruppe -->
+            <div id="gustar-button-container" class="gustar-button-wrapper" style="display: none;">
+                <button id="gustar-button" class="gustar-btn" title="Mögen, Gern & Gefallen Info">
+                    <span class="gustar-emoji">❤️</span>
+                    <span class="gustar-text">gustar</span>
+                </button>
+            </div>
+
             <div class="cards-container" id="cards-container">
                 <!-- Verb cards will be generated here by JavaScript -->
             </div>
@@ -354,6 +362,218 @@
 
             <br>
             <button id="close-info-modal" class="close-modal-btn">Verstanden (Entendido)</button>
+        </div>
+    </div>
+
+    <!-- Gustar Modal -->
+    <div id="gustar-modal" class="modal-overlay gustar-modal-overlay">
+        <div class="modal-content gustar-modal-content">
+            <div class="gustar-modal-header">
+                <h2>Mögen, Gern & Gefallen: Eine Übersicht</h2>
+                <button id="gustar-close-btn" class="gustar-close-btn" title="Schließen (Cerrar)">×</button>
+            </div>
+
+            <div class="gustar-modal-body">
+                <!-- Section 1: Mögen -->
+                <details open class="gustar-section">
+                    <summary>1. Para Cosas (Sustantivos): "Mögen"</summary>
+                    <div class="gustar-section-content">
+                        <div class="highlight-box">
+                            <p>Se usa el verbo <strong>"mögen"</strong> cuando te gusta un objeto, una comida, una persona o un lugar.</p>
+                            <p class="mt-2"><strong>Estructura:</strong> Sujeto + mögen (conjugado) + Objeto.</p>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alemán</th>
+                                    <th>Español</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ich <strong>mag</strong> Kaffee.</td>
+                                    <td>Me gusta el café.</td>
+                                </tr>
+                                <tr>
+                                    <td>Du <strong>magst</strong> Berlin.</td>
+                                    <td>Te gusta Berlín.</td>
+                                </tr>
+                                <tr>
+                                    <td>Er <strong>mag</strong> Fußball.</td>
+                                    <td>A él le gusta el fútbol.</td>
+                                </tr>
+                                <tr class="negative-row font-semibold">
+                                    <td>Ich <strong>mag keinen</strong> Fisch.</td>
+                                    <td>No me gusta el pescado. (Negación)</td>
+                                </tr>
+                                <tr class="negative-row font-semibold">
+                                    <td>Wir <strong>mögen keine</strong> Spinnen.</td>
+                                    <td>No nos gustan las arañas. (Negación)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-sm text-gray-600 mt-2"><em>Nota: Para negar sustantivos se suele usar "kein/keine".</em></p>
+                    </div>
+                </details>
+
+                <!-- Section 2: Gern -->
+                <details open class="gustar-section">
+                    <summary>2. Para Acciones (Verbos): "Gern"</summary>
+                    <div class="gustar-section-content">
+                        <div class="highlight-box">
+                            <p>En alemán <strong>NO</strong> se usa "mögen" para acciones. Se usa el verbo de la acción + el adverbio <strong>"gern"</strong>.</p>
+                            <p class="mt-2"><strong>Estructura:</strong> Sujeto + Verbo conjugado + <strong>gern</strong>.</p>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alemán</th>
+                                    <th>Español</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ich spiele <strong>gern</strong> Fußball.</td>
+                                    <td>Me gusta jugar fútbol.</td>
+                                </tr>
+                                <tr>
+                                    <td>Ich tanze <strong>gern</strong> Salsa.</td>
+                                    <td>Me gusta bailar salsa.</td>
+                                </tr>
+                                <tr>
+                                    <td>Wir lernen <strong>gern</strong> Deutsch.</td>
+                                    <td>Nos gusta aprender alemán.</td>
+                                </tr>
+                                <tr class="negative-row font-semibold">
+                                    <td>Ich koche <strong>nicht gern</strong>.</td>
+                                    <td>No me gusta cocinar. (Negación)</td>
+                                </tr>
+                                <tr class="negative-row font-semibold">
+                                    <td>Sie warten <strong>nicht gern</strong>.</td>
+                                    <td>A ellos no les gusta esperar. (Negación)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-sm text-gray-600 mt-2"><em>Nota: Para negar acciones se usa "nicht" antes de "gern".</em></p>
+                    </div>
+                </details>
+
+                <!-- Section 3: Gefallen -->
+                <details class="gustar-section">
+                    <summary>3. Para impresiones/estética: "Gefallen"</summary>
+                    <div class="gustar-section-content">
+                        <div class="highlight-box">
+                            <p>Funciona igual que "Gustar" en español. El sujeto es la cosa que gusta, y la persona va en <strong>Dativo</strong>.</p>
+                            <p class="mt-2"><strong>Estructura:</strong> Objeto (Sujeto) + gefällt/gefallen + Persona (Dativo).</p>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alemán</th>
+                                    <th>Español</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Das Auto <strong>gefällt mir</strong>.</td>
+                                    <td>El auto me gusta (a mí).</td>
+                                </tr>
+                                <tr>
+                                    <td>Die Schuhe <strong>gefallen mir</strong>.</td>
+                                    <td>Los zapatos me gustan.</td>
+                                </tr>
+                                <tr>
+                                    <td>Berlin <strong>gefällt dir</strong>.</td>
+                                    <td>Berlín te gusta (a ti).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+
+                <!-- Section 4: Lieben & Hassen -->
+                <details class="gustar-section">
+                    <summary>4. Los Extremos: "Lieben" y "Hassen"</summary>
+                    <div class="gustar-section-content">
+
+                        <h3 class="text-xl font-bold text-red-600 mb-2">❤️ Lieben (Amar / Encantar)</h3>
+                        <p class="mb-4">Se usa para personas, lugares o cosas que te gustan muchísimo.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alemán</th>
+                                    <th>Español</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ich <strong>liebe</strong> meine Familie.</td>
+                                    <td>Amo a mi familia.</td>
+                                </tr>
+                                <tr>
+                                    <td>Er <strong>liebt</strong> Schokolade.</td>
+                                    <td>A él le encanta el chocolate.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 class="text-xl font-bold text-red-800 mt-6 mb-2">😡 Hassen (Odiar)</h3>
+                        <p class="mb-4">Se usa para expresar un desagrado intenso y profundo.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alemán</th>
+                                    <th>Español</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ich <strong>hasse</strong> den Regen.</td>
+                                    <td>Odio la lluvia.</td>
+                                </tr>
+                                <tr>
+                                    <td>Du <strong>hasst</strong> Hausaufgaben.</td>
+                                    <td>Tú odias la tarea.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+
+                <!-- Resumen Rápido -->
+                <div class="gustar-summary">
+                    <h3 class="text-xl font-bold mb-4">📝 Resumen Rápido</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            ¿Te <strong>encanta</strong> algo? → Usa <strong>Lieben</strong> (❤️). <br>
+                            <span class="example-box">Ej: <em>Ich liebe Musik.</em> (Amo la música).</span>
+                        </li>
+                        <li>
+                            ¿<strong>Odias</strong> algo? → Usa <strong>Hassen</strong> (😡). <br>
+                            <span class="example-box">Ej: <em>Ich hasse Lärm.</em> (Odio el ruido).</span>
+                        </li>
+                        <li>
+                            ¿Te gusta una <strong>cosa</strong>? → Usa <strong>Mögen</strong>. <br>
+                            <span class="example-box">Ej: <em>Ich mag Pizza.</em></span> <br>
+                            <span class="negative-example">Negativo: <em>Ich mag <strong>keine</strong> Spinnen.</em> (No me gustan las arañas).</span>
+                        </li>
+                        <li>
+                            ¿Te gusta hacer una <strong>acción</strong>? → Usa <strong>Gern</strong>. <br>
+                            <span class="example-box">Ej: <em>Ich esse gern.</em> (Me gusta comer).</span> <br>
+                            <span class="negative-example">Negativo: <em>Ich warte <strong>nicht gern</strong>.</em> (No me gusta esperar).</span>
+                        </li>
+                        <li>
+                            ¿Te gusta la <strong>apariencia</strong> de algo? → Usa <strong>Gefallen</strong>. <br>
+                            <span class="example-box">Ej: <em>Das Auto gefällt mir.</em></span> <br>
+                            <span class="negative-example">Negativo: <em>Das Bild gefällt mir <strong>nicht</strong>.</em> (El cuadro no me gusta).</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="gustar-modal-footer">
+                <button id="gustar-close-footer-btn">Verstanden (Entendido)</button>
+            </div>
         </div>
     </div>
 
