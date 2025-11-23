@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scalable Deutsch - Menú Principal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #fce4ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: #880e4f;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(136, 14, 79, 0.2);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #ad1457;
+            font-weight: 500;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 8px 24px rgba(136, 14, 79, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #e91e63, #f06292);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(136, 14, 79, 0.25);
+        }
+
+        .card-icon {
+            font-size: 4rem;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #880e4f;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            color: #6a1b3d;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .card-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .sub-link {
+            background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
+            color: #880e4f;
+            padding: 10px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .sub-link:hover {
+            background: linear-gradient(135deg, #f48fb1 0%, #f06292 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .old-version {
+            background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
+            border: 2px solid #9c27b0;
+        }
+
+        .old-version .card-title {
+            color: #6a1b9a;
+        }
+
+        .old-version .card-description {
+            color: #7b1fa2;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #ad1457;
+            font-size: 0.9rem;
+            animation: fadeIn 1s ease 0.8s backwards;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .card {
+                padding: 24px;
+            }
+
+            .card-icon {
+                font-size: 3rem;
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🇩🇪 Scalable Deutsch</h1>
+        <p>Dein interaktiver Deutschkurs</p>
+    </div>
+
+    <div class="cards-container">
+        <!-- Fälle Card -->
+        <div class="card">
+            <div class="card-icon">📋</div>
+            <h2 class="card-title">Fälle</h2>
+            <p class="card-description">Lerne die deutschen Fälle: Nominativ, Akkusativ und Dativ</p>
+            <div class="card-links">
+                <a href="faelle/nominativ/nominativ.html" class="sub-link">📘 Nominativ</a>
+                <a href="faelle/akkusativ/akkusativ.html" class="sub-link">📗 Akkusativ</a>
+                <a href="faelle/dativ/dativ.html" class="sub-link">📙 Dativ</a>
+            </div>
+        </div>
+
+        <!-- Verben Card -->
+        <a href="verben/A1/index.html" class="card">
+            <div class="card-icon">🔤</div>
+            <h2 class="card-title">Verben</h2>
+            <p class="card-description">Konjugation und Übung deutscher Verben mit interaktiven Karten</p>
+        </a>
+
+        <!-- Adverbien Card -->
+        <a href="adverbs/adverbien.html" class="card">
+            <div class="card-icon">⚡</div>
+            <h2 class="card-title">Adverbien</h2>
+            <p class="card-description">Verstehe und übe deutsche Adverbien</p>
+        </a>
+
+        <!-- A1 Sprechen Card -->
+        <a href="Sprechen/a1.html" class="card">
+            <div class="card-icon">💬</div>
+            <h2 class="card-title">A1 Sprechen</h2>
+            <p class="card-description">Sprachübungen und Konversation auf A1 Niveau</p>
+        </a>
+
+        <!-- Old Version Card -->
+        <a href="index.html" class="card old-version">
+            <div class="card-icon">🕰️</div>
+            <h2 class="card-title">Alte Version</h2>
+            <p class="card-description">Zurück zur klassischen Version der Anwendung</p>
+        </a>
+    </div>
+
+    <div class="footer">
+        <p>✨ Viel Erfolg beim Deutschlernen! ✨</p>
+        <p style="margin-top: 8px; font-size: 0.85rem; opacity: 0.8;">© 2024 Scalable Deutsch</p>
+    </div>
+</body>
+</html>
