@@ -1167,7 +1167,7 @@
 /* Gustar Button Styles */
 .gustar-button-wrapper {
     position: absolute;
-    top: calc(275px + 60px); /* Below the right arrow (middle + offset) */
+    top: calc(100% + 80px); /* Below the navigation wrapper */
     right: -70px;
     z-index: 10;
 }
