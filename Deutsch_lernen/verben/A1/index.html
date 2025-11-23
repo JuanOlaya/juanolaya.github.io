@@ -66,10 +66,6 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
                         </button>
                     </div>
-                    <div id="group-indicator" class="group-indicator"></div>
-                    <div class="progress-bar-container" id="progress-bar">
-                        <!-- Progress dots will be generated here -->
-                    </div>
                 </div>
 
                 <button id="next-group-btn" class="nav-arrow-btn nav-arrow-right" title="Nächste Gruppe">
@@ -79,6 +75,14 @@
 
             <div class="cards-container" id="cards-container">
                 <!-- Verb cards will be generated here by JavaScript -->
+            </div>
+
+            <!-- Group indicator and progress bar moved below cards -->
+            <div class="group-progress-section">
+                <div id="group-indicator" class="group-indicator"></div>
+                <div class="progress-bar-container" id="progress-bar">
+                    <!-- Progress dots will be generated here -->
+                </div>
             </div>
 
             <!-- Gustar button for Sechste Gruppe -->
@@ -547,27 +551,32 @@
                         <div class="summary-item">
                             <span class="summary-emoji">❤️</span>
                             <strong>Lieben</strong> → Encantar
-                            <em>Ich liebe Musik.</em>
+                            <em class="summary-positive">Ich liebe Musik.</em>
+                            <em class="summary-negative">Ich liebe keine Spinnen.</em>
                         </div>
                         <div class="summary-item">
                             <span class="summary-emoji">😡</span>
                             <strong>Hassen</strong> → Odiar
-                            <em>Ich hasse Lärm.</em>
+                            <em class="summary-positive">Ich hasse Lärm.</em>
+                            <em class="summary-negative">Ich hasse keinen Regen.</em>
                         </div>
                         <div class="summary-item">
                             <span class="summary-emoji">👍</span>
                             <strong>Mögen</strong> → Gustar (cosas)
-                            <em>Ich mag Pizza.</em>
+                            <em class="summary-positive">Ich mag Pizza.</em>
+                            <em class="summary-negative">Ich mag keine Spinnen.</em>
                         </div>
                         <div class="summary-item">
                             <span class="summary-emoji">⚡</span>
                             <strong>Gern</strong> → Gustar (acciones)
-                            <em>Ich esse gern.</em>
+                            <em class="summary-positive">Ich esse gern.</em>
+                            <em class="summary-negative">Ich warte nicht gern.</em>
                         </div>
                         <div class="summary-item">
                             <span class="summary-emoji">✨</span>
                             <strong>Gefallen</strong> → Gustar (apariencia)
-                            <em>Das Auto gefällt mir.</em>
+                            <em class="summary-positive">Das Auto gefällt mir.</em>
+                            <em class="summary-negative">Das Bild gefällt mir nicht.</em>
                         </div>
                     </div>
                 </div>
