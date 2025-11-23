@@ -202,11 +202,12 @@
             align-items: center;
             justify-content: center;
             gap: 20px;
-            margin: 0.5rem 0 1.5rem 0;
+            margin: 0.5rem 0 0 0;
             padding: 1.5rem 1rem;
             background-color: rgba(70, 130, 180, 0.05);
             border-radius: 12px;
             border: 2px solid rgba(70, 130, 180, 0.2);
+            position: relative;
         }
 
         .navigation-center {
@@ -232,7 +233,7 @@
             height: 52px;
             flex-shrink: 0;
             position: absolute;
-            top: 275px; /* Half of min-height 550px */
+            top: calc(100% + 1.5rem + 275px); /* navigation height + margin + half of cards min-height */
             z-index: 10;
         }
 
@@ -298,6 +299,7 @@
             user-select: none;
             transition: opacity 0.3s ease, transform 0.3s ease;
             position: relative;
+            margin: 1.5rem 0;
         }
 
         /* Peek container for preview cards */
@@ -1094,7 +1096,7 @@
             .level-indicator { width: 50px; height: 50px; font-size: 1.2rem; }
             .info-button { width: 40px; height: 40px; font-size: 0.85rem; }
             .navigation-wrapper { padding: 1rem 0.5rem; gap: 10px; }
-            .nav-arrow-btn { width: 42px; height: 42px; top: 240px; }
+            .nav-arrow-btn { width: 42px; height: 42px; }
             .nav-arrow-btn svg { width: 20px; height: 20px; }
             .nav-arrow-left { left: -55px; }
             .nav-arrow-right { right: -55px; }
@@ -1117,7 +1119,6 @@
               .word-item { width: 100%; } /* One card per row */
               .header { flex-direction: column; gap: 10px; } /* Stack header items */
               .title-container { order: -1; } /* Move title to top on mobile */
-              .nav-arrow-btn { top: 200px; }
               .nav-arrow-left { left: -50px; }
               .nav-arrow-right { right: -50px; }
          }
