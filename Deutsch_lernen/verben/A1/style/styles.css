@@ -1164,6 +1164,265 @@
     margin-top: 2px;
 }
 
+/* Gustar Button Styles */
+.gustar-button-wrapper {
+    position: absolute;
+    top: calc(275px + 60px); /* Below the right arrow (middle + offset) */
+    right: -70px;
+    z-index: 10;
+}
+
+.gustar-btn {
+    background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(192, 108, 132, 0.3);
+    transition: all 0.3s ease;
+}
+
+.gustar-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(192, 108, 132, 0.4);
+}
+
+.gustar-emoji {
+    font-size: 1.3rem;
+}
+
+.gustar-text {
+    font-style: italic;
+}
+
+/* Gustar Modal Styles */
+.gustar-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.gustar-modal-content {
+    background: white;
+    border-radius: 16px;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    padding: 0;
+}
+
+.gustar-modal-header {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+    color: white;
+    padding: 24px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+
+.gustar-modal-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.gustar-close-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    font-size: 1.5rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.gustar-close-btn:hover {
+    background: white;
+    color: #c06c84;
+    transform: rotate(90deg);
+}
+
+.gustar-modal-body {
+    padding: 24px;
+}
+
+.gustar-section {
+    margin-bottom: 24px;
+    border: 2px solid #f0f0f0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.gustar-section summary {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 16px 20px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #495057;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.gustar-section summary:hover {
+    background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+}
+
+.gustar-section[open] summary {
+    background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+    color: white;
+}
+
+.gustar-section-content {
+    padding: 20px;
+}
+
+.highlight-box {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 6px;
+}
+
+.negative-row {
+    background: #f8d7da;
+    border-left: 4px solid #dc3545;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 6px;
+}
+
+.negative-row strong {
+    color: #721c24;
+}
+
+.gustar-summary {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border: 2px solid #28a745;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.gustar-summary h3 {
+    color: #155724;
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+}
+
+.gustar-summary ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.gustar-summary li {
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+}
+
+.gustar-summary li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #28a745;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.example-box {
+    background: #e7f3ff;
+    border-left: 4px solid #007bff;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 6px;
+}
+
+.negative-example {
+    background: #f8d7da;
+    border-left: 4px solid #dc3545;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 6px;
+}
+
+.gustar-modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: center;
+}
+
+.gustar-modal-footer button {
+    background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gustar-modal-footer button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(192, 108, 132, 0.3);
+}
+
+/* Responsive adjustments for gustar button */
+@media (max-width: 600px) {
+    .gustar-button-wrapper {
+        right: -55px;
+    }
+    .gustar-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .gustar-button-wrapper {
+        right: -50px;
+    }
+    .gustar-btn {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+    .gustar-emoji {
+        font-size: 1.1rem;
+    }
+}
+
 /* Präsens Konjugation Example Cell Styles */
 .example-cell {
     line-height: 1.6;
