@@ -1167,7 +1167,7 @@
 /* Gustar Button Styles */
 .gustar-button-wrapper {
     position: absolute;
-    top: calc(100% + 80px); /* Below the navigation wrapper */
+    bottom: -80px; /* Below the cards container bottom */
     right: -70px;
     z-index: 10;
 }
@@ -1348,6 +1348,11 @@
     padding: 8px 0;
     padding-left: 24px;
     position: relative;
+    margin-bottom: 12px;
+}
+
+.gustar-summary li p {
+    margin: 0 0 8px 0;
 }
 
 .gustar-summary li:before {
