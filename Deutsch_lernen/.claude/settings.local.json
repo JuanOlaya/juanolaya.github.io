@@ -5,7 +5,11 @@
       "Bash(do grep -q 'case_tags' \"$f\")",
       "Bash(echo:*)",
       "Bash(do grep -q \"case_tags\" \"$file\")",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(do grep -h level $file)",
+      "Bash(python -m json.tool:*)",
+      "Bash(nul)",
+      "Bash(python -c:*)"
     ],
     "deny": [],
     "ask": []
