@@ -1476,6 +1476,9 @@
 /* Wortfamilie Styles */
 #wortfamilie-container {
     margin: 16px 0;
+    display: block;
+    border: 2px solid red; /* TEMPORARY - for debugging */
+    padding: 8px;
 }
 
 #wortfamilie-summary {
