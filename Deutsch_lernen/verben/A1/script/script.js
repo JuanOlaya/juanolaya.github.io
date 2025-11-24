@@ -1706,10 +1706,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listeners with debouncing for search
     let searchTimeout;
     if (searchInput) {
+        console.log('Search input found, attaching event listener');
         searchInput.addEventListener('input', () => {
+            console.log('Search input changed:', searchInput.value);
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(() => performSearch(), 300); // 300ms debounce
         });
+    } else {
+        console.error('Search input element not found!');
     }
     if (clearSearchBtn) {
         clearSearchBtn.addEventListener('click', clearSearch);
