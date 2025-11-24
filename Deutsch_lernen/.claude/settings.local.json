@@ -9,7 +9,10 @@
       "Bash(do grep -h level $file)",
       "Bash(python -m json.tool:*)",
       "Bash(nul)",
-      "Bash(python -c:*)"
+      "Bash(python -c:*)",
+      "Bash(if [ -f nul ])",
+      "Bash(then rm nul)",
+      "Bash(else echo \"nul file not found\")"
     ],
     "deny": [],
     "ask": []
