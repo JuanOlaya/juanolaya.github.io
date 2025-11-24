@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- GLOBAL STATE ---
     const allVerbsData = {};
     let verbGroupsByLevel = {}; // Groups organized by level
+    let wortfamilieData = {}; // Word family data
     const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte"];
     const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes", "Sechstes", "Siebtes", "Achtes"];
     const savedStories = [
@@ -142,6 +143,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 return Promise.all(conjugationPromises).then(() => {
                     console.log('Conjugation data pre-loaded! Search will be fast.');
+
+                    // Load Wortfamilie data
+                    return fetch('wortfamilie_kompakt.json')
+                        .then(res => res.ok ? res.json() : {})
+                        .then(data => {
+                            wortfamilieData = data.verbs || {};
+                            console.log('Wortfamilie data loaded!');
+                        })
+                        .catch(error => {
+                            console.warn('Failed to load Wortfamilie data:', error);
+                            wortfamilieData = {};
+                        });
                 });
             });
         });
@@ -989,7 +1002,63 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modal-verb-english-perfekt').textContent = updatedData.en_perfekt ? `🇬🇧 ${updatedData.en_perfekt}` : '';
         document.getElementById('modal-verb-english-praeteritum').textContent = updatedData.en_praeteritum ? `🇬🇧 ${updatedData.en_praeteritum}` : '';
         document.getElementById('modal-level-badge').textContent = updatedData.level || 'A1';
-        
+
+        // Populate Wortfamilie section
+        const wortfamilieContainer = document.getElementById('wortfamilie-container');
+        const wortfamilieContent = document.getElementById('wortfamilie-content');
+
+        if (wortfamilieData[verb] && wortfamilieData[verb].length > 0) {
+            wortfamilieContainer.style.display = 'block';
+
+            // Group words by level
+            const wordsByLevel = {
+                'A1': [],
+                'A2': [],
+                'B1': []
+            };
+
+            wortfamilieData[verb].forEach(wordData => {
+                if (wordsByLevel[wordData.level]) {
+                    wordsByLevel[wordData.level].push(wordData);
+                }
+            });
+
+            // Type abbreviation mapping
+            const typeAbbrev = {
+                'noun': 'n',
+                'adjective': 'a',
+                'adverb': 'adv',
+                'verb': 'v'
+            };
+
+            let contentHTML = '';
+
+            // Iterate through levels in order (A1, A2, B1)
+            ['A1', 'A2', 'B1'].forEach(level => {
+                if (wordsByLevel[level].length > 0) {
+                    contentHTML += `<div class="wf-level-section">`;
+                    contentHTML += `<div class="wf-level-header">${level} Level:</div>`;
+
+                    wordsByLevel[level].forEach(wordData => {
+                        const abbrev = typeAbbrev[wordData.type] || wordData.type;
+                        contentHTML += `<div class="wf-word-item">`;
+                        contentHTML += `<div class="wf-word-line">`;
+                        contentHTML += `• <span class="wf-word-german">${wordData.word}</span>`;
+                        contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
+                        contentHTML += `</div>`;
+                        contentHTML += `<div class="wf-word-translation">${wordData.es}</div>`;
+                        contentHTML += `</div>`;
+                    });
+
+                    contentHTML += `</div>`;
+                }
+            });
+
+            wortfamilieContent.innerHTML = contentHTML;
+        } else {
+            wortfamilieContainer.style.display = 'none';
+        }
+
         const praesensTableContainer = document.getElementById('modal-praesens-table');
         if (updatedData.praesens) {
             // Define the desired pronoun order with Spanish translations
@@ -1395,7 +1464,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         let perfektMatch = false;
                         if (verbData.perfekt) {
                             const perfektWords = verbData.perfekt.toLowerCase().split(' ');
-                            perfektMatch = perfektWords.some(word => word.startsWith(searchTerm));
+                            // Exclude auxiliary verbs "hat" and "ist" from search
+                            const filteredPerfektWords = perfektWords.filter(word => word !== 'hat' && word !== 'ist');
+                            perfektMatch = filteredPerfektWords.some(word => word.startsWith(searchTerm));
                         }
 
                         // Search in Spanish Perfekt forms (he dado, ha dado, etc.)
