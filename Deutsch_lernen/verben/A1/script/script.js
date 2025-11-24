@@ -1514,7 +1514,19 @@ document.addEventListener('DOMContentLoaded', () => {
                             );
                         }
 
-                            if (germanMatch || spanishMatch || perfektMatch || praesensMatch || praeteritumMatch) {
+                        // Search in Konjunktiv II conjugations (pre-loaded!)
+                        let konjunktivMatch = false;
+                        if (allVerbsData[verbName].konjunktiv_ii) {
+                            const conjugations = Object.values(allVerbsData[verbName].konjunktiv_ii);
+                            konjunktivMatch = conjugations.some(conj => {
+                                if (typeof conj === 'string') {
+                                    return conj.toLowerCase().startsWith(searchTerm);
+                                }
+                                return false;
+                            });
+                        }
+
+                            if (germanMatch || spanishMatch || perfektMatch || praesensMatch || praeteritumMatch || konjunktivMatch) {
                                 return {
                                     verb: verbName,
                                     data: verbData,
