@@ -146,17 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Load Wortfamilie data
                     return fetch('wortfamilie_kompakt.json')
-                        .then(res => {
-                            console.log('Wortfamilie fetch response:', res.ok, res.status);
-                            return res.ok ? res.json() : {};
-                        })
+                        .then(res => res.ok ? res.json() : {})
                         .then(data => {
                             wortfamilieData = data.verbs || {};
-                            console.log('Wortfamilie data loaded! Total verbs:', Object.keys(wortfamilieData).length);
-                            console.log('Sample verbs:', Object.keys(wortfamilieData).slice(0, 5));
                         })
                         .catch(error => {
-                            console.error('Failed to load Wortfamilie data:', error);
+                            console.warn('Failed to load Wortfamilie data:', error);
                             wortfamilieData = {};
                         });
                 });
@@ -1011,12 +1006,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const wortfamilieContainer = document.getElementById('wortfamilie-container');
         const wortfamilieContent = document.getElementById('wortfamilie-content');
 
-        console.log('Checking Wortfamilie for verb:', verb);
-        console.log('Wortfamilie data exists:', !!wortfamilieData[verb]);
-        console.log('Wortfamilie data:', wortfamilieData[verb]);
-
         if (wortfamilieData[verb] && wortfamilieData[verb].length > 0) {
-            console.log('Displaying Wortfamilie with', wortfamilieData[verb].length, 'words');
             wortfamilieContainer.style.display = 'block';
 
             // Group words by level
@@ -1065,7 +1055,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             wortfamilieContent.innerHTML = contentHTML;
         } else {
-            console.log('No Wortfamilie data found for', verb, '- hiding container');
             wortfamilieContainer.style.display = 'none';
         }
 
