@@ -1491,7 +1491,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         let praeteritumMatch = false;
                         if (allVerbsData[verbName].praeteritum_conjugations) {
                             const conjugations = Object.values(allVerbsData[verbName].praeteritum_conjugations);
-                            praeteritumMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
+                            praeteritumMatch = conjugations.some(conj => {
+                                // Präteritum conjugations are objects with de, en, es properties
+                                if (typeof conj === 'string') {
+                                    return conj.toLowerCase().startsWith(searchTerm);
+                                } else if (conj.de) {
+                                    return conj.de.toLowerCase().startsWith(searchTerm);
+                                }
+                                return false;
+                            });
                         }
 
                         // Search in Spanish Präteritum forms (él/ella dio, etc.)
@@ -1706,14 +1714,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listeners with debouncing for search
     let searchTimeout;
     if (searchInput) {
-        console.log('Search input found, attaching event listener');
         searchInput.addEventListener('input', () => {
-            console.log('Search input changed:', searchInput.value);
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(() => performSearch(), 300); // 300ms debounce
         });
-    } else {
-        console.error('Search input element not found!');
     }
     if (clearSearchBtn) {
         clearSearchBtn.addEventListener('click', clearSearch);
