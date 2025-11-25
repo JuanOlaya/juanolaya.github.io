@@ -336,7 +336,6 @@ document.addEventListener('DOMContentLoaded', () => {
         prevGroupBtn.disabled = currentGroupInLevel === 0 && currentLevel === levelOrder[0];
         nextGroupBtn.disabled = currentGroupInLevel === totalGroupsInLevel - 1 && currentLevel === levelOrder[levelOrder.length - 1];
         updateProgressBar();
-        updateLevelProgressDots();
         updateLevelNavigationButtons();
         saveProgress();
 
@@ -432,39 +431,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const steps = progressBar.querySelectorAll('.progress-step');
         steps.forEach((step, i) => {
             step.classList.toggle('active', i <= currentGroupInLevel);
-        });
-    }
-
-    function updateLevelProgressDots() {
-        const dots = document.querySelectorAll('.level-dot');
-        const lines = document.querySelectorAll('.level-line');
-
-        // Convert currentLevel from 'A1_1' format to 'A1.1' for comparison
-        const displayLevel = levelConfig[currentLevel].displayName;
-        const displayLevelOrder = levelOrder.map(l => levelConfig[l].displayName);
-        const currentLevelIndex = displayLevelOrder.indexOf(displayLevel);
-
-        dots.forEach((dot, index) => {
-            // Remove all classes first
-            dot.classList.remove('active', 'completed');
-
-            if (index === currentLevelIndex) {
-                // Current level - highlighted with glow
-                dot.classList.add('active');
-            } else if (index < currentLevelIndex) {
-                // Completed levels - filled but no glow
-                dot.classList.add('completed');
-            }
-        });
-
-        lines.forEach((line, index) => {
-            // Lines are between dots, so line[0] connects dot[0] to dot[1]
-            line.classList.remove('completed');
-
-            if (index < currentLevelIndex) {
-                // Line is completed if we've passed beyond it
-                line.classList.add('completed');
-            }
         });
     }
 
