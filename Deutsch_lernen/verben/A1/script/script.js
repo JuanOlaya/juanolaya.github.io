@@ -1008,6 +1008,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (wortfamilieData[verb] && wortfamilieData[verb].length > 0) {
             wortfamilieContainer.style.display = 'block';
+            wortfamilieContainer.open = true; // Open by default when data exists
 
             // Group words by level
             const wordsByLevel = {
