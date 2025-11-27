@@ -285,6 +285,26 @@
             display: block;
             margin-top: 0.5rem; /* Espacio añadido */
         }
+        /* Tag Badge Styles */
+        .adverb-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0.5rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .tag-temporal { background-color: #2196F3; color: white; } /* Azul */
+        .tag-frequenz { background-color: #4CAF50; color: white; } /* Verde */
+        .tag-lokal { background-color: #FFC107; color: #333; } /* Amarillo */
+        .tag-modal { background-color: #FF9800; color: white; } /* Naranja */
+        .tag-grad { background-color: #9C27B0; color: white; } /* Morado */
+        .tag-modal-afirmativo { background-color: #F44336; color: white; } /* Rojo */
+        .tag-wahrscheinlichkeit { background-color: #795548; color: white; } /* Café */
+        .tag-konjunktional { background-color: #9E9E9E; color: white; } /* Gris */
         #modal-example-container {
             display: flex;
             align-items: center;
@@ -1377,6 +1397,9 @@
                 </button>
             </div>
             <p id="modal-full-spanish"></p>
+            <div id="modal-adverb-tag-container" style="text-align: center;">
+                <!-- Tag will be inserted here by JavaScript -->
+            </div>
             <div class="modal-separator"></div>
             <div id="modal-example-container">
                 <p id="modal-text"></p>
@@ -1405,6 +1428,111 @@
     </div>
 
     <script>
+        // Adverb Tag Mapping
+        const adverbTags = {
+            // ⏰ TEMPORAL
+            'jetzt': { category: 'temporal', label: '⏰ Temporal' },
+            'heute': { category: 'temporal', label: '⏰ Temporal' },
+            'morgen': { category: 'temporal', label: '⏰ Temporal' },
+            'gestern': { category: 'temporal', label: '⏰ Temporal' },
+            'damals': { category: 'temporal', label: '⏰ Temporal' },
+            'früher': { category: 'temporal', label: '⏰ Temporal' },
+            'bald': { category: 'temporal', label: '⏰ Temporal' },
+            'sofort': { category: 'temporal', label: '⏰ Temporal' },
+            'später': { category: 'temporal', label: '⏰ Temporal' },
+            'plötzlich': { category: 'temporal', label: '⏰ Temporal' },
+            'gerade': { category: 'temporal', label: '⏰ Temporal' },
+            'inzwischen': { category: 'temporal', label: '⏰ Temporal' },
+            'heutzutage': { category: 'temporal', label: '⏰ Temporal' },
+            'dann': { category: 'temporal', label: '⏰ Temporal' },
+            'jeweils': { category: 'temporal', label: '⏰ Temporal' },
+
+            // 🔄 FREQUENZ
+            'immer': { category: 'frequenz', label: '🔄 Frequenz' },
+            'nie': { category: 'frequenz', label: '🔄 Frequenz' },
+            'oft': { category: 'frequenz', label: '🔄 Frequenz' },
+            'manchmal': { category: 'frequenz', label: '🔄 Frequenz' },
+            'selten': { category: 'frequenz', label: '🔄 Frequenz' },
+            'meistens': { category: 'frequenz', label: '🔄 Frequenz' },
+            'gewöhnlich': { category: 'frequenz', label: '🔄 Frequenz' },
+            'täglich': { category: 'frequenz', label: '🔄 Frequenz' },
+            'wöchentlich': { category: 'frequenz', label: '🔄 Frequenz' },
+            'monatlich': { category: 'frequenz', label: '🔄 Frequenz' },
+            'jährlich': { category: 'frequenz', label: '🔄 Frequenz' },
+            'jemals': { category: 'frequenz', label: '🔄 Frequenz' },
+
+            // 📍 LOKAL
+            'hier': { category: 'lokal', label: '📍 Lokal' },
+            'dort': { category: 'lokal', label: '📍 Lokal' },
+            'links': { category: 'lokal', label: '📍 Lokal' },
+            'rechts': { category: 'lokal', label: '📍 Lokal' },
+            'überall': { category: 'lokal', label: '📍 Lokal' },
+            'nirgends': { category: 'lokal', label: '📍 Lokal' },
+
+            // 🎯 MODAL
+            'gut': { category: 'modal', label: '🎯 Modal' },
+            'schnell': { category: 'modal', label: '🎯 Modal' },
+            'langsam': { category: 'modal', label: '🎯 Modal' },
+            'gerne': { category: 'modal', label: '🎯 Modal' },
+            'einfach': { category: 'modal', label: '🎯 Modal' },
+            'genau': { category: 'modal', label: '🎯 Modal' },
+            'deutlich': { category: 'modal', label: '🎯 Modal' },
+            'regelmäßig': { category: 'modal', label: '🎯 Modal' },
+            'zusammen': { category: 'modal', label: '🎯 Modal' },
+
+            // 📊 GRAD
+            'sehr': { category: 'grad', label: '📊 Grad' },
+            'ganz': { category: 'grad', label: '📊 Grad' },
+            'ziemlich': { category: 'grad', label: '📊 Grad' },
+            'fast': { category: 'grad', label: '📊 Grad' },
+            'kaum': { category: 'grad', label: '📊 Grad' },
+            'etwa': { category: 'grad', label: '📊 Grad' },
+            'besonders': { category: 'grad', label: '📊 Grad' },
+            'überhaupt': { category: 'grad', label: '📊 Grad' },
+            'unglaublich': { category: 'grad', label: '📊 Grad' },
+            'schrecklich': { category: 'grad', label: '📊 Grad' },
+
+            // 🤔 MODAL-AFIRMATIVO
+            'natürlich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
+            'wirklich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
+            'tatsächlich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
+            'ehrlich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
+            'eigentlich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
+            'jedenfalls': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
+            'zumindest': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
+            'endlich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
+            'herzlich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
+
+            // 🎲 WAHRSCHEINLICHKEIT
+            'vielleicht': { category: 'wahrscheinlichkeit', label: '🎲 Wahrscheinlichkeit' },
+            'wahrscheinlich': { category: 'wahrscheinlichkeit', label: '🎲 Wahrscheinlichkeit' },
+            'hoffentlich': { category: 'wahrscheinlichkeit', label: '🎲 Wahrscheinlichkeit' },
+            'glücklicherweise': { category: 'wahrscheinlichkeit', label: '🎲 Wahrscheinlichkeit' },
+            'leider': { category: 'wahrscheinlichkeit', label: '🎲 Wahrscheinlichkeit' },
+            'willkürlich': { category: 'wahrscheinlichkeit', label: '🎲 Wahrscheinlichkeit' },
+
+            // 🔗 KONJUNKTIONAL
+            'aber': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'auch': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'oder': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'deshalb': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'deswegen': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'darum': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'trotzdem': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'jedoch': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'allerdings': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'außerdem': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'andererseits': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'einerseits': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'ansonsten': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'beziehungsweise': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'entweder': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'weder': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'zwar': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'nur': { category: 'konjunktional', label: '🔗 Konjunktional' },
+            'in Wirklichkeit': { category: 'konjunktional', label: '🔗 Konjunktional' }
+        };
+
         const savedExamples = {
 
             'täglich': [
@@ -1649,6 +1777,16 @@
             modalWord.textContent = currentWord;
             modalEmoji.textContent = currentEmoji;
             modalFullSpanish.innerHTML = `🇪🇸 ${exampleData.fullSpanish}<br>🇬🇧 ${exampleData.fullEnglish}<br><span class="modal-type-info">Tipo: ${exampleData.type}</span>`;
+
+            // Display adverb tag
+            const tagContainer = document.getElementById('modal-adverb-tag-container');
+            const tagInfo = adverbTags[currentWord];
+            if (tagInfo) {
+                tagContainer.innerHTML = `<span class="adverb-tag tag-${tagInfo.category}">${tagInfo.label}</span>`;
+            } else {
+                tagContainer.innerHTML = '';
+            }
+
             modalText.textContent = exampleData.sentence;
             modalPronunciation.textContent = exampleData.pronunciation;
             modalSpanishTranslation.innerHTML = `🇪🇸 ${exampleData.spanish}`;
