@@ -12,7 +12,8 @@
       "Bash(python -c:*)",
       "Bash(if [ -f nul ])",
       "Bash(then rm nul)",
-      "Bash(else echo \"nul file not found\")"
+      "Bash(else echo \"nul file not found\")",
+      "Bash(python -m http.server:*)"
     ],
     "deny": [],
     "ask": []
