@@ -302,15 +302,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
-                    <div class="word-item-content">
-                        <span class="emoji">${verbData.emoji || '❓'}</span>
+                    <div class="card-header">
+                        <span class="german-word">${verbName}${irregularMark}</span>
+                        <span class="spanish-translation" data-form="translation">${esTranslation}</span>
+                        <div class="icon-floating">${verbData.emoji || '❓'}</div>
+                    </div>
+                    <div class="card-body">
                         <div class="text-container perfekt-hover-container">
                             <div class="german-word-container">
-                                <span class="german-word">${verbName}${irregularMark}</span>
                                 ${tagsHTML}
                                 ${caseTagsHTML}
                             </div>
-                            <span class="spanish-translation" data-form="translation">${esTranslation}</span>
                             <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
                             <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
                             <span class="german-praeteritum praeteritum-text" data-form="praeteritum" data-short="${germanPraeteritumShort}" data-full="${germanPraeteritumFull}">${germanPraeteritumShort}</span>
@@ -1640,15 +1642,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
-                    <div class="word-item-content">
-                        <span class="emoji">${verbData.emoji || '❓'}</span>
+                    <div class="card-header">
+                        <span class="german-word">${verbName}${irregularMark}</span>
+                        <span class="spanish-translation" data-form="translation">${esTranslation}</span>
+                        <div class="icon-floating">${verbData.emoji || '❓'}</div>
+                    </div>
+                    <div class="card-body">
                         <div class="text-container perfekt-hover-container">
                             <div class="german-word-container">
-                                <span class="german-word">${verbName}${irregularMark}</span>
                                 ${tagsHTML}
                                 ${caseTagsHTML}
                             </div>
-                            <span class="spanish-translation" data-form="translation">${esTranslation}</span>
                             <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
                             <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
                             <span class="german-praeteritum praeteritum-text" data-form="praeteritum" data-short="${germanPraeteritumShort}" data-full="${germanPraeteritumFull}">${germanPraeteritumShort}</span>
