@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f3f4f6;
+            --bg-color: #f3f4f6; /* Fondo gris claro neutro original */
             --text-color: #1f2937;
             --card-bg: #ffffff;
         }
@@ -560,7 +560,7 @@
         };
 
         const wFragenData = [
-            // FILA 1: Was?, Warum?, [ESPACIO VACÍO], Wer?
+            // FILA 1: Was?, Warum?, Was für?, Wer?
             { 
                 word: "Was?", translation: "¿Qué?", icon: "🎁", category: "thing",
                 examExample: "Was ist das?", 
@@ -573,7 +573,7 @@
                 ] 
             },
             { 
-                word: "Warum?", translation: "¿Por qué?", icon: "💡", category: "reason",
+                word: "Warum?", translation: "¿Por qué?", icon: "🤔", category: "reason",
                 examExample: "Warum lernen Sie Deutsch?", 
                 examTranslation: "¿Por qué aprende alemán?",
                 grammar: "Pregunta por la <strong>causa o razón</strong>. La respuesta típica comienza con <em>'Weil...'</em> (porque) y envía el verbo al final de la oración (oración subordinada).",
@@ -582,7 +582,18 @@
                     { de: "Warum kommst du nicht?", es: "¿Por qué no vienes?" }
                 ] 
             },
-            { empty: true }, // Espacio vacío
+            { 
+                word: "Was für ein...?", 
+                cardTitle: "Was für?", 
+                translation: "¿Qué tipo?", icon: "🏷️", category: "choice",
+                examExample: "Was für Musik hören Sie?", 
+                examTranslation: "¿Qué tipo de música escucha?",
+                grammar: "Pregunta por la <strong>clase, tipo o cualidad</strong> de algo (literalmente: '¿Qué para un...?'). El artículo 'ein' se declina según el caso de la oración.",
+                examples: [
+                    { de: "Was für Musik hören Sie?", es: "¿Qué tipo de música escucha?" },
+                    { de: "Was für einen Film schauen wir?", es: "¿Qué tipo de película vemos?" }
+                ] 
+            },
             { 
                 word: "Wer?", translation: "¿Quién?", icon: "👤", category: "person",
                 examExample: "Wer ist das?", 
@@ -626,7 +637,7 @@
                 ] 
             },
             { 
-                word: "Wen?", translation: "¿A quién?", icon: "🤝", category: "person",
+                word: "Wen?", translation: "¿A quién?", icon: "🕵️", category: "person",
                 examExample: "Wen rufen Sie an?",
                 examTranslation: "¿A quién llama usted?",
                 note: "⚠️ <strong>¡Ojo!</strong> No confundir con <em>Wenn</em> (que significa 'si' condicional o 'cuando' en el pasado).", 
@@ -650,7 +661,7 @@
                 ] 
             },
             { 
-                word: "Wie viel?", translation: "¿Cuánto?", icon: "💧", category: "thing",
+                word: "Wie viel?", translation: "¿Cuánto?", icon: "💰", category: "thing",
                 examExample: "Wie viel kostet das?", 
                 examTranslation: "¿Cuánto cuesta esto?",
                 grammar: "Se usa para sustantivos <strong>incontables</strong> (singular). Ejemplo: dinero (Geld), tiempo (Zeit), agua (Wasser).",
@@ -681,7 +692,7 @@
                 ] 
             },
 
-            // FILA 4: Welcher? + Was für? (Movido)
+            // FILA 4: Welcher?
             { 
                 word: "Welcher?", translation: "¿Cuál?", icon: "👆", category: "choice",
                 examExample: "Welche Sprachen sprechen Sie?", 
@@ -690,18 +701,6 @@
                 examples: [
                     { de: "Welche Sprachen sprechen Sie?", es: "¿Qué idiomas habla usted?" },
                     { de: "Welcher Tag ist heute?", es: "¿Qué día es hoy?" }
-                ] 
-            },
-            { 
-                word: "Was für ein...?", 
-                cardTitle: "Was für?", 
-                translation: "¿Qué tipo?", icon: "🏷️", category: "choice",
-                examExample: "Was für Musik hören Sie?", 
-                examTranslation: "¿Qué tipo de música escucha?",
-                grammar: "Pregunta por la <strong>clase, tipo o cualidad</strong> de algo (literalmente: '¿Qué para un...?'). El artículo 'ein' se declina según el caso de la oración.",
-                examples: [
-                    { de: "Was für Musik hören Sie?", es: "¿Qué tipo de música escucha?" },
-                    { de: "Was für einen Film schauen wir?", es: "¿Qué tipo de película vemos?" }
                 ] 
             }
         ];
@@ -735,7 +734,7 @@
                 
                 card.onclick = () => openModal(index);
                 
-                // Nueva estructura HTML de la tarjeta
+                // Nueva estructura HTML de la tarjeta (Header Color Sólido, Icono Flotante)
                 card.innerHTML = `
                     <div class="card-header">
                         <span class="german-word">${item.cardTitle || item.word}</span>
