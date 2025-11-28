@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="card-header">
-                        <span class="german-word">${verbName}${irregularMark}</span>
+                        <span class="german-word">${verbName}</span>
                         <span class="spanish-translation" data-form="translation">${esTranslation}</span>
                         <div class="icon-floating">${verbData.emoji || '❓'}</div>
                     </div>
@@ -930,7 +930,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Set infinitive with case tags
         const infinitiveElement = document.getElementById('modal-verb-infinitive');
-        infinitiveElement.textContent = verb;
+        const irregularMark = updatedData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
+        infinitiveElement.innerHTML = verb + irregularMark;
 
         // Add case tags to modal infinitive
         if (updatedData.case_tags && updatedData.case_tags.length > 0) {
@@ -1643,7 +1644,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="card-header">
-                        <span class="german-word">${verbName}${irregularMark}</span>
+                        <span class="german-word">${verbName}</span>
                         <span class="spanish-translation" data-form="translation">${esTranslation}</span>
                         <div class="icon-floating">${verbData.emoji || '❓'}</div>
                     </div>
