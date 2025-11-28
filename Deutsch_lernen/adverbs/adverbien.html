@@ -52,7 +52,10 @@
         .toggle-container {
             display: flex;
             justify-content: center;
+            align-items: center;
+            gap: 3rem;
             margin: 1.5rem 0;
+            flex-wrap: wrap;
         }
         .active-recall-toggle {
             display: flex;
@@ -356,6 +359,27 @@
             margin: 1rem 0;
             font-size: 0.95rem;
         }
+
+        /* Light Version Styles */
+        body.light-version .icon-floating {
+            display: none;
+        }
+        body.light-version .card-exam-example {
+            display: none;
+        }
+        body.light-version .card-category-badge {
+            display: none;
+        }
+        body.light-version .card-body {
+            padding: 20px;
+            min-height: auto;
+        }
+        body.light-version .card {
+            min-height: auto;
+        }
+        body.light-version .card-header {
+            padding: 30px 15px;
+        }
     </style>
 </head>
 <body>
@@ -388,6 +412,13 @@
     </div>
 
     <div class="toggle-container">
+        <div class="active-recall-toggle">
+            <label class="switch-label" for="light-version-switch">Versión ligera<span class="label-translation">(versión simple)</span></label>
+            <label class="switch">
+                <input type="checkbox" id="light-version-switch">
+                <span class="slider"></span>
+            </label>
+        </div>
         <div class="active-recall-toggle">
             <label class="switch-label" for="recall-switch">Übersetzung<span class="label-translation">(traducción)</span></label>
             <label class="switch">
@@ -579,6 +610,7 @@
         const prevGroupBtn = document.getElementById('prev-group-btn');
         const nextGroupBtn = document.getElementById('next-group-btn');
         const recallSwitch = document.getElementById('recall-switch');
+        const lightVersionSwitch = document.getElementById('light-version-switch');
         const searchInput = document.getElementById('search-input');
         const clearSearchBtn = document.getElementById('clear-search');
         const searchResultsInfo = document.getElementById('search-results-info');
@@ -640,6 +672,15 @@
                 currentGroupIndex++;
                 renderGroup();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        // Light Version Toggle
+        lightVersionSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('light-version');
+            } else {
+                document.body.classList.remove('light-version');
             }
         });
 
