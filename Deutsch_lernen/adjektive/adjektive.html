@@ -296,6 +296,66 @@
             font-weight: 500;
             transition: opacity 0.3s, visibility 0.3s;
         }
+
+        /* Search Bar */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+        #search-input {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            border: 2px solid #d1d5db;
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s;
+            background-color: white;
+        }
+        #search-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        #search-input::placeholder {
+            color: #9ca3af;
+        }
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            pointer-events: none;
+        }
+        .clear-search {
+            position: absolute;
+            right: 45px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            display: none;
+        }
+        .clear-search.visible {
+            display: block;
+        }
+        .search-results-info {
+            text-align: center;
+            color: #6b7280;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 <body>
@@ -314,6 +374,16 @@
             </label>
         </div>
     </div>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <div class="search-wrapper">
+            <input type="text" id="search-input" placeholder="Suchen... (z.B. groß, grande, big)">
+            <button class="clear-search" id="clear-search">✕</button>
+            <span class="search-icon">🔍</span>
+        </div>
+    </div>
+    <div id="search-results-info" class="search-results-info"></div>
 
     <!-- Navigation -->
     <div class="navigation-wrapper">
@@ -521,6 +591,8 @@
 
         // State
         let currentGroupIndex = 0;
+        let isSearchMode = false;
+        let searchResults = [];
 
         // DOM elements
         const cardsContainer = document.getElementById('cards-container');
@@ -528,6 +600,9 @@
         const prevGroupBtn = document.getElementById('prev-group-btn');
         const nextGroupBtn = document.getElementById('next-group-btn');
         const recallSwitch = document.getElementById('recall-switch');
+        const searchInput = document.getElementById('search-input');
+        const clearSearchBtn = document.getElementById('clear-search');
+        const searchResultsInfo = document.getElementById('search-results-info');
 
         // Render current group
         function renderGroup() {
@@ -619,6 +694,123 @@
                 });
             }
         }
+
+        // Search functionality
+        function performSearch(query) {
+            if (!query || query.trim() === '') {
+                exitSearchMode();
+                return;
+            }
+
+            isSearchMode = true;
+            const searchTerm = query.toLowerCase().trim();
+            searchResults = [];
+
+            // Search across all groups
+            adjectiveGroups.forEach(group => {
+                group.adjectives.forEach(adj => {
+                    // Search in German word, Spanish translation, English translation, and examples
+                    const searchableText = [
+                        adj.word,
+                        adj.spanish,
+                        adj.example_de,
+                        adj.example_es
+                    ].join(' ').toLowerCase();
+
+                    if (searchableText.includes(searchTerm)) {
+                        searchResults.push({
+                            ...adj,
+                            groupTitle: group.title,
+                            groupColorMain: group.colorMain,
+                            groupColorPastel: group.colorPastel,
+                            groupBadge: group.badge
+                        });
+                    }
+                });
+            });
+
+            renderSearchResults();
+        }
+
+        function renderSearchResults() {
+            // Update UI
+            groupIndicator.textContent = 'Suchergebnisse';
+            prevGroupBtn.style.display = 'none';
+            nextGroupBtn.style.display = 'none';
+
+            // Clear container
+            cardsContainer.innerHTML = '';
+
+            if (searchResults.length === 0) {
+                searchResultsInfo.textContent = 'Keine Ergebnisse gefunden.';
+                return;
+            }
+
+            searchResultsInfo.textContent = `${searchResults.length} Ergebnis${searchResults.length > 1 ? 'se' : ''} gefunden`;
+
+            // Render search results
+            searchResults.forEach(adj => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.setProperty('--card-main', adj.groupColorMain);
+                card.style.setProperty('--card-pastel', adj.groupColorPastel);
+
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="german-word">${adj.word}</span>
+                        <span class="spanish-meaning">${adj.spanish}</span>
+                        <div class="icon-floating">${adj.emoji}</div>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-category-badge">${adj.groupBadge}</span>
+                        <div class="card-exam-example">
+                            <span class="example-text de">${adj.example_de}</span>
+                            <span class="example-text es">${adj.example_es}</span>
+                        </div>
+                    </div>
+                `;
+
+                cardsContainer.appendChild(card);
+            });
+
+            // Apply active recall state
+            setInitialTranslationState();
+        }
+
+        function exitSearchMode() {
+            isSearchMode = false;
+            searchResults = [];
+            searchInput.value = '';
+            searchResultsInfo.textContent = '';
+            clearSearchBtn.classList.remove('visible');
+            prevGroupBtn.style.display = '';
+            nextGroupBtn.style.display = '';
+            renderGroup();
+        }
+
+        // Search input event listeners
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value;
+
+            if (query.trim() !== '') {
+                clearSearchBtn.classList.add('visible');
+            } else {
+                clearSearchBtn.classList.remove('visible');
+            }
+
+            performSearch(query);
+        });
+
+        clearSearchBtn.addEventListener('click', () => {
+            exitSearchMode();
+        });
+
+        // Allow Enter key to search
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                exitSearchMode();
+            }
+        });
 
         // Initialize
         renderGroup();
