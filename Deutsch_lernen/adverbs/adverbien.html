@@ -3,111 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adverbien (A1-B1)</title>
-    <!-- Carga de la fuente -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Kalam:wght@700&display=swap" rel="stylesheet">
+    <title>Deutsche Adverbien (A1-B1)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
+        :root {
+            --bg-color: #f3f4f6;
+            --text-color: #1f2937;
+            --card-bg: #ffffff;
         }
-        html {
-            height: 100%;
-        }
+
         body {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100%;
-            margin: 0;
-            background-color: #FFA985; /* Fondo Salmón */
-            padding: 20px;
-            font-family: 'Nunito', sans-serif;
-            color: #414A5C; /* Azul oscuro para texto */
-        }
-        .main-container {
-            width: 100%;
-            max-width: 1200px;
-            text-align: center;
-            padding: 10px 20px;
-        }
-        .header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem; /* Reduced margin */
-            flex-wrap: wrap; 
-        }
-        .title {
-            font-family: 'Kalam', cursive;
-            font-size: 3rem;
-            color: #414A5C;
-            border-bottom: 3px dashed #E57373; /* Borde añadido */
-            padding-bottom: 0.5rem;
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-        .section-title {
-            font-family: 'Kalam', cursive;
-            font-size: 2.5rem;
-            color: #414A5C;
-            margin-top: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        .cards-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-        .word-item {
-            background-color: #FFE4E1;
-            border-radius: 12px;
-            padding: 1.5rem;
-            width: 280px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        .word-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        .word-item-content {
-            display: flex;
-            align-items: center;
-            text-align: left;
-        }
-        .emoji {
-            font-size: 2.5rem;
-            margin-right: 1rem;
-            text-shadow: none; 
-        }
-        .text-container {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
             display: flex;
             flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+            color: var(--text-color);
+            line-height: 1.5;
         }
-        .german-word {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #414A5C;
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 800px;
         }
-        .english-translation, .spanish-translation {
-            font-size: 1rem;
-            font-style: italic;
-            color: #6c757d;
-            transition: opacity 0.3s, visibility 0.3s;
+
+        h1 {
+            color: #111827;
+            margin-bottom: 15px;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.05rem;
         }
-        .english-translation {
-            margin-top: 0px;
+
+        h1 span {
+            color: #d97706;
+            border-bottom: 4px solid #d97706;
         }
-        
-        /* Estilos para el Active Recall Toggle */
+
+        p.instruction {
+            color: #6b7280;
+            font-size: 1.25rem;
+        }
+
+        /* Active Recall Toggle */
         .toggle-container {
             display: flex;
             justify-content: center;
@@ -121,7 +62,7 @@
         .switch-label {
             color: #414A5C;
             cursor: pointer;
-            font-weight: 700; /* Bold */
+            font-weight: 700;
             text-align: right;
             line-height: 1.2;
         }
@@ -129,7 +70,7 @@
             display: block;
             font-size: 0.8em;
             font-style: italic;
-            font-weight: 400; /* Regular weight */
+            font-weight: 400;
         }
         .switch {
             position: relative;
@@ -149,7 +90,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #414A5C; /* Default ON */
+            background-color: #414A5C;
             transition: .4s;
             border-radius: 34px;
         }
@@ -163,7 +104,7 @@
             background-color: white;
             transition: .4s;
             border-radius: 50%;
-            transform: translateX(26px); /* Default ON */
+            transform: translateX(26px);
         }
         input:not(:checked) + .slider {
             background-color: #ccc;
@@ -172,1670 +113,539 @@
             transform: translateX(0px);
         }
 
-        /* Gemini API Features */
-        .story-container {
-            margin: 2rem auto;
-            padding: 1.5rem;
-            background-color: #F0F1E8;
-            border-radius: 12px;
-            color: #414A5C;
-            display: none;
-            max-width: 800px;
-            text-align: left;
-        }
-        .story-container h3 {
-            font-family: 'Kalam', cursive;
-            font-size: 1.5rem;
-            margin-top: 0;
-            margin-bottom: 1rem;
-            color: #87405E;
-        }
-        #story-button {
-            display: inline-block;
+        /* Navigation */
+        .navigation-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
             margin: 2rem 0;
-            padding: 12px 24px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: white;
-            background-color: #414A5C;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-        #story-button:hover {
-            background-color: #313846;
-            transform: translateY(-2px);
-        }
-        .button-translation {
-            display: block;
-            font-size: 0.8rem;
-            font-style: italic;
-            font-weight: 400;
-            margin-top: 2px;
-        }
-        .loader {
-            text-align: center;
-            color: #414A5C;
-        }
-        .highlighted-word {
-            color: #8B456A;
-            font-weight: 700;
-        }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-        .modal-content {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            font-size: 1.2rem;
-            transform: scale(0.9);
-            transition: transform 0.3s;
-        }
-        .modal-overlay.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-overlay.visible .modal-content {
-            transform: scale(1);
-        }
-        #modal-word-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 0.5rem;
-        }
-        #modal-emoji {
-            font-size: 2rem;
-        }
-        #modal-word {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #414A5C;
-        }
-        #modal-full-spanish {
-            font-size: 1.1rem;
-            color: black;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            line-height: 1.5;
-        }
-        .modal-type-info {
-            font-size: 0.9rem;
-            color: #6c757d;
-            display: block;
-            margin-top: 0.5rem; /* Espacio añadido */
-        }
-        /* Tag Badge Styles */
-        .adverb-tag {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin: 0.5rem 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .tag-temporal { background-color: #2196F3; color: white; } /* Azul */
-        .tag-frequenz { background-color: #4CAF50; color: white; } /* Verde */
-        .tag-lokal { background-color: #FFC107; color: #333; } /* Amarillo */
-        .tag-modal { background-color: #FF9800; color: white; } /* Naranja */
-        .tag-grad { background-color: #9C27B0; color: white; } /* Morado */
-        .tag-modal-afirmativo { background-color: #F44336; color: white; } /* Rojo */
-        .tag-wahrscheinlichkeit { background-color: #795548; color: white; } /* Café */
-        .tag-konjunktional { background-color: #9E9E9E; color: white; } /* Gris */
-        #modal-example-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        #modal-text {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: #333;
-        }
-        .audio-button {
-            background: transparent;
-            border: none;
-            padding: 0;
-            cursor: pointer;
-        }
-        .audio-button svg {
-            width: 32px;
-            height: 32px;
-            fill: #E57373; /* Tono salmón oscuro */
-        }
-        #modal-pronunciation {
-            font-style: italic;
-            color: black;
-            margin-bottom: 0.5rem;
-        }
-        #modal-spanish-translation {
-            color: #444;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-        #modal-info {
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 1.5rem;
-        }
-        .modal-separator {
-            border: none;
-            border-top: 2px solid #E57373; /* Cambiado a línea continua */
-            margin: 1.5rem 0;
-        }
-        #example-navigation {
-            display: flex;
-            flex-direction: column; /* Stack vertically */
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem; /* Space between counter and buttons */
-        }
-        .nav-buttons-container {
-            display: flex;
-            gap: 1rem;
         }
         .nav-button {
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        #example-counter {
-            font-size: 1rem;
-            color: #6c757d;
-        }
-        #close-modal {
-            margin-top: 1.5rem;
-            padding: 8px 16px;
-            background-color: #6c757d;
+            background-color: #111827;
             color: white;
             border: none;
-            border-radius: 5px;
+            padding: 12px 24px;
+            border-radius: 12px;
             cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .nav-button:hover {
+            background-color: #1f2937;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .nav-button:disabled {
+            background-color: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .group-indicator {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #111827;
+            text-align: center;
+            min-width: 300px;
         }
 
-        /* Info Modal Styles */
-        #info-button {
-            background-color: #414A5C;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            width: 50px;
-            height: 40px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-left: 1rem;
-            padding: 5px 10px;
-        }
-        .info-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* Grid Layout */
+        .infographic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
             width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.6);
-            display: none; /* Hidden by default */
-            justify-content: center;
-            align-items: center;
-            z-index: 1001; /* Higher than the other modal */
+            padding-bottom: 60px;
         }
-        .info-modal-content {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            max-width: 600px;
-            width: 90%;
-            text-align: left;
-            line-height: 1.6;
-        }
-        .info-modal-content h2 {
-            font-family: 'Kalam', cursive;
-            color: #414A5C;
-            margin-top: 0;
-        }
-        .info-modal-content ul {
-            padding-left: 20px;
-        }
-        .info-modal-content li {
-            margin-bottom: 0.5rem;
-        }
-        #close-info-modal {
-            float: right;
-            background: transparent;
-            border: none;
-            font-size: 1.5rem;
+
+        /* Card Styles */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: visible;
+            display: flex;
+            flex-direction: column;
+            min-height: 280px;
+            border: none;
+            margin-top: 10px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Header with Color */
+        .card-header {
+            background-color: var(--card-main);
+            color: white;
+            padding: 40px 15px 45px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-grow: 0;
+            height: auto;
+            border-radius: 20px 20px 0 0;
+        }
+
+        /* Floating Icon */
+        .icon-floating {
+            width: 60px;
+            height: 60px;
+            background-color: var(--card-pastel);
+            color: var(--card-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        /* White Body */
+        .card-body {
+            background-color: white;
+            padding: 45px 20px 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            border-radius: 0 0 20px 20px;
+        }
+
+        /* German Word */
+        .german-word {
+            display: block;
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0;
+            line-height: 1.1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Spanish Translation */
+        .spanish-meaning {
+            display: block;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+            margin-bottom: 0;
+            margin-top: 5px;
+        }
+
+        /* Badge */
+        .card-category-badge {
+            background-color: #f3f4f6;
+            color: #6b7280;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 15px;
+            display: inline-block;
+            box-shadow: none;
+        }
+
+        /* Example */
+        .card-exam-example {
+            width: 90%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            position: relative;
+            padding: 5px 0;
+            background-color: transparent;
+            border: none;
+            margin-top: auto;
+        }
+
+        .example-text {
+            display: block;
+            line-height: 1.4;
+        }
+
+        .example-text.de {
+            font-size: 1.1rem;
+            color: #1f2937;
+            font-weight: 700;
+        }
+
+        .example-text.es {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-weight: 500;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        /* Search Bar */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+        #search-input {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            border: 2px solid #d1d5db;
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s;
+            background-color: white;
+        }
+        #search-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        #search-input::placeholder {
+            color: #9ca3af;
+        }
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            pointer-events: none;
+        }
+        .clear-search {
+            position: absolute;
+            right: 45px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            display: none;
+        }
+        .clear-search.visible {
+            display: block;
+        }
+        .search-results-info {
+            text-align: center;
+            color: #6b7280;
+            margin: 1rem 0;
+            font-size: 0.95rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
-        <div class="header">
-            <h1 class="title">Adverbien (A1-B1)</h1>
-            <button id="info-button">info</button>
-        </div>
+    <header>
+        <h1>Deutsche <span>Adverbien</span></h1>
+        <p class="instruction">A1-B1 • Grammatische Kategorien</p>
+    </header>
 
-        <div class="toggle-container">
-            <div class="active-recall-toggle">
-                <label class="switch-label" for="recall-switch">Übersetzung<span class="label-translation">(traducción)</span></label>
-                <label class="switch">
-                    <input type="checkbox" id="recall-switch" checked>
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
-        
-        <h2 class="section-title">Nivel A1: Vocabulario Esencial</h2>
-        <div class="cards-container">
-            <div class="word-item" onclick="openExampleModal('natürlich', '🌱')">
-                <div class="word-item-content">
-                    <span class="emoji">🌱</span>
-                    <div class="text-container">
-                        <span class="german-word">natürlich</span>
-                        <span class="english-translation"><em>of course</em></span>
-                        <span class="spanish-translation"><em>por supuesto</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('endlich', '🏁')">
-                <div class="word-item-content">
-                    <span class="emoji">🏁</span>
-                    <div class="text-container">
-                        <span class="german-word">endlich</span>
-                        <span class="english-translation"><em>finally</em></span>
-                        <span class="spanish-translation"><em>finalmente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('herzlich', '❤️')">
-                <div class="word-item-content">
-                    <span class="emoji">❤️</span>
-                    <div class="text-container">
-                        <span class="german-word">herzlich</span>
-                        <span class="english-translation"><em>cordial</em></span>
-                        <span class="spanish-translation"><em>cordial</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('hier', '📍')">
-                <div class="word-item-content">
-                    <span class="emoji">📍</span>
-                    <div class="text-container">
-                        <span class="german-word">hier</span>
-                        <span class="english-translation"><em>here</em></span>
-                        <span class="spanish-translation"><em>aquí</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('dort', '🗺️')">
-                <div class="word-item-content">
-                    <span class="emoji">🗺️</span>
-                    <div class="text-container">
-                        <span class="german-word">dort</span>
-                        <span class="english-translation"><em>there</em></span>
-                        <span class="spanish-translation"><em>allí</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('jetzt', '⏰')">
-                <div class="word-item-content">
-                    <span class="emoji">⏰</span>
-                    <div class="text-container">
-                        <span class="german-word">jetzt</span>
-                        <span class="english-translation"><em>now</em></span>
-                        <span class="spanish-translation"><em>ahora</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('heute', '📆')">
-                <div class="word-item-content">
-                    <span class="emoji">📆</span>
-                    <div class="text-container">
-                        <span class="german-word">heute</span>
-                        <span class="english-translation"><em>today</em></span>
-                        <span class="spanish-translation"><em>hoy</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('morgen', '🌅')">
-                <div class="word-item-content">
-                    <span class="emoji">🌅</span>
-                    <div class="text-container">
-                        <span class="german-word">morgen</span>
-                        <span class="english-translation"><em>tomorrow</em></span>
-                        <span class="spanish-translation"><em>mañana</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('gestern', '⏪')">
-                <div class="word-item-content">
-                    <span class="emoji">⏪</span>
-                    <div class="text-container">
-                        <span class="german-word">gestern</span>
-                        <span class="english-translation"><em>yesterday</em></span>
-                        <span class="spanish-translation"><em>ayer</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('oft', '🔁')">
-                <div class="word-item-content">
-                    <span class="emoji">🔁</span>
-                    <div class="text-container">
-                        <span class="german-word">oft</span>
-                        <span class="english-translation"><em>often</em></span>
-                        <span class="spanish-translation"><em>a menudo</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('immer', '♾️')">
-                <div class="word-item-content">
-                    <span class="emoji">♾️</span>
-                    <div class="text-container">
-                        <span class="german-word">immer</span>
-                        <span class="english-translation"><em>always</em></span>
-                        <span class="spanish-translation"><em>siempre</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('nie', '🚫')">
-                <div class="word-item-content">
-                    <span class="emoji">🚫</span>
-                    <div class="text-container">
-                        <span class="german-word">nie</span>
-                        <span class="english-translation"><em>never</em></span>
-                        <span class="spanish-translation"><em>nunca</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('sehr', '🔥')">
-                <div class="word-item-content">
-                    <span class="emoji">🔥</span>
-                    <div class="text-container">
-                        <span class="german-word">sehr</span>
-                        <span class="english-translation"><em>very</em></span>
-                        <span class="spanish-translation"><em>muy</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('gut', '👍')">
-                <div class="word-item-content">
-                    <span class="emoji">👍</span>
-                    <div class="text-container">
-                        <span class="german-word">gut</span>
-                        <span class="english-translation"><em>well</em></span>
-                        <span class="spanish-translation"><em>bien</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('zusammen', '🧑‍🤝‍🧑')">
-                <div class="word-item-content">
-                    <span class="emoji">🧑‍🤝‍🧑</span>
-                    <div class="text-container">
-                        <span class="german-word">zusammen</span>
-                        <span class="english-translation"><em>together</em></span>
-                        <span class="spanish-translation"><em>juntos</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('bald', '⏳')">
-                <div class="word-item-content">
-                    <span class="emoji">⏳</span>
-                    <div class="text-container">
-                        <span class="german-word">bald</span>
-                        <span class="english-translation"><em>soon</em></span>
-                        <span class="spanish-translation"><em>pronto</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('schon', '✅')">
-                <div class="word-item-content">
-                    <span class="emoji">✅</span>
-                    <div class="text-container">
-                        <span class="german-word">schon</span>
-                        <span class="english-translation"><em>already</em></span>
-                        <span class="spanish-translation"><em>ya</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('noch', '⏳')">
-                <div class="word-item-content">
-                    <span class="emoji">⏳</span>
-                    <div class="text-container">
-                        <span class="german-word">noch</span>
-                        <span class="english-translation"><em>still / yet</em></span>
-                        <span class="spanish-translation"><em>aún / todavía</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('dann', '➡️')">
-                <div class="word-item-content">
-                    <span class="emoji">➡️</span>
-                    <div class="text-container">
-                        <span class="german-word">dann</span>
-                        <span class="english-translation"><em>then</em></span>
-                        <span class="spanish-translation"><em>entonces</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('sofort', '⚡')">
-                <div class="word-item-content">
-                    <span class="emoji">⚡</span>
-                    <div class="text-container">
-                        <span class="german-word">sofort</span>
-                        <span class="english-translation"><em>immediately</em></span>
-                        <span class="spanish-translation"><em>inmediatamente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('links', '⬅️')">
-                <div class="word-item-content">
-                    <span class="emoji">⬅️</span>
-                    <div class="text-container">
-                        <span class="german-word">links</span>
-                        <span class="english-translation"><em>left</em></span>
-                        <span class="spanish-translation"><em>izquierda</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('rechts', '➡️')">
-                <div class="word-item-content">
-                    <span class="emoji">➡️</span>
-                    <div class="text-container">
-                        <span class="german-word">rechts</span>
-                        <span class="english-translation"><em>right</em></span>
-                        <span class="spanish-translation"><em>derecha</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('schnell', '🏃')">
-                <div class="word-item-content">
-                    <span class="emoji">🏃</span>
-                    <div class="text-container">
-                        <span class="german-word">schnell</span>
-                        <span class="english-translation"><em>fast</em></span>
-                        <span class="spanish-translation"><em>rápido</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('langsam', '🐢')">
-                <div class="word-item-content">
-                    <span class="emoji">🐢</span>
-                    <div class="text-container">
-                        <span class="german-word">langsam</span>
-                        <span class="english-translation"><em>slow</em></span>
-                        <span class="spanish-translation"><em>lento</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('nur', '☝️')">
-                <div class="word-item-content">
-                    <span class="emoji">☝️</span>
-                    <div class="text-container">
-                        <span class="german-word">nur</span>
-                        <span class="english-translation"><em>only</em></span>
-                        <span class="spanish-translation"><em>solo</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('aber', '👎')">
-                <div class="word-item-content">
-                    <span class="emoji">👎</span>
-                    <div class="text-container">
-                        <span class="german-word">aber</span>
-                        <span class="english-translation"><em>but</em></span>
-                        <span class="spanish-translation"><em>pero</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('oder', '↔️')">
-                <div class="word-item-content">
-                    <span class="emoji">↔️</span>
-                    <div class="text-container">
-                        <span class="german-word">oder</span>
-                        <span class="english-translation"><em>or</em></span>
-                        <span class="spanish-translation"><em>o</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('gerade', '🏃')">
-                <div class="word-item-content">
-                    <span class="emoji">🏃</span>
-                    <div class="text-container">
-                        <span class="german-word">gerade</span>
-                        <span class="english-translation"><em>just</em></span>
-                        <span class="spanish-translation"><em>justo ahora</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('ganz', '💯')">
-                <div class="word-item-content">
-                    <span class="emoji">💯</span>
-                    <div class="text-container">
-                        <span class="german-word">ganz</span>
-                        <span class="english-translation"><em>quite</em></span>
-                        <span class="spanish-translation"><em>bastante / completamente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('genau', '🎯')">
-                <div class="word-item-content">
-                    <span class="emoji">🎯</span>
-                    <div class="text-container">
-                        <span class="german-word">genau</span>
-                        <span class="english-translation"><em>exactly</em></span>
-                        <span class="spanish-translation"><em>exacto</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('auch', '➕')">
-                <div class="word-item-content">
-                    <span class="emoji">➕</span>
-                    <div class="text-container">
-                        <span class="german-word">auch</span>
-                        <span class="english-translation"><em>also</em></span>
-                        <span class="spanish-translation"><em>también</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('jemals', '❓')">
-                <div class="word-item-content">
-                    <span class="emoji">❓</span>
-                    <div class="text-container">
-                        <span class="german-word">jemals</span>
-                        <span class="english-translation"><em>ever</em></span>
-                        <span class="spanish-translation"><em>alguna vez</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('darum', '🧐')">
-                <div class="word-item-content">
-                    <span class="emoji">🧐</span>
-                    <div class="text-container">
-                        <span class="german-word">darum</span>
-                        <span class="english-translation"><em>therefore</em></span>
-                        <span class="spanish-translation"><em>por eso</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('täglich', '📅')">
-                <div class="word-item-content">
-                    <span class="emoji">📅</span>
-                    <div class="text-container">
-                        <span class="german-word">täglich</span>
-                        <span class="english-translation"><em>daily</em></span>
-                        <span class="spanish-translation"><em>diario</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('wöchentlich', '📅')">
-                <div class="word-item-content">
-                    <span class="emoji">📅</span>
-                    <div class="text-container">
-                        <span class="german-word">wöchentlich</span>
-                        <span class="english-translation"><em>weekly</em></span>
-                        <span class="spanish-translation"><em>semanal</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('monatlich', '🗓️')">
-                <div class="word-item-content">
-                    <span class="emoji">🗓️</span>
-                    <div class="text-container">
-                        <span class="german-word">monatlich</span>
-                        <span class="english-translation"><em>monthly</em></span>
-                        <span class="spanish-translation"><em>mensual</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('jährlich', '🎇')">
-                <div class="word-item-content">
-                    <span class="emoji">🎇</span>
-                    <div class="text-container">
-                        <span class="german-word">jährlich</span>
-                        <span class="english-translation"><em>yearly</em></span>
-                        <span class="spanish-translation"><em>anual</em></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <h2 class="section-title">Nivel A2: Vocabulario Ampliado</h2>
-        <div class="cards-container">
-            <div class="word-item" onclick="openExampleModal('manchmal', '🌗')">
-                <div class="word-item-content">
-                    <span class="emoji">🌗</span>
-                    <div class="text-container">
-                        <span class="german-word">manchmal</span>
-                        <span class="english-translation"><em>sometimes</em></span>
-                        <span class="spanish-translation"><em>a veces</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('gewöhnlich', '🔄')">
-                <div class="word-item-content">
-                    <span class="emoji">🔄</span>
-                    <div class="text-container">
-                        <span class="german-word">gewöhnlich</span>
-                        <span class="english-translation"><em>usually</em></span>
-                        <span class="spanish-translation"><em>habitual</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('besonders', '⭐')">
-                <div class="word-item-content">
-                    <span class="emoji">⭐</span>
-                    <div class="text-container">
-                        <span class="german-word">besonders</span>
-                        <span class="english-translation"><em>especially</em></span>
-                        <span class="spanish-translation"><em>especialmente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('gerne', '😊')">
-                <div class="word-item-content">
-                    <span class="emoji">😊</span>
-                    <div class="text-container">
-                        <span class="german-word">gerne</span>
-                        <span class="english-translation"><em>gladly</em></span>
-                        <span class="spanish-translation"><em>con gusto</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('einfach', '👍')">
-                <div class="word-item-content">
-                    <span class="emoji">👍</span>
-                    <div class="text-container">
-                        <span class="german-word">einfach</span>
-                        <span class="english-translation"><em>simply</em></span>
-                        <span class="spanish-translation"><em>simplemente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('wirklich', '😲')">
-                 <div class="word-item-content">
-                    <span class="emoji">😲</span>
-                    <div class="text-container">
-                        <span class="german-word">wirklich</span>
-                        <span class="english-translation"><em>really</em></span>
-                        <span class="spanish-translation"><em>de verdad / realmente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('in Wirklichkeit', '🎭')">
-                <div class="word-item-content">
-                    <span class="emoji">🎭</span>
-                    <div class="text-container">
-                        <span class="german-word">in Wirklichkeit</span>
-                        <span class="english-translation"><em>in reality</em></span>
-                        <span class="spanish-translation"><em>en realidad</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('eigentlich', '🤔')">
-                <div class="word-item-content">
-                    <span class="emoji">🤔</span>
-                    <div class="text-container">
-                        <span class="german-word">eigentlich</span>
-                        <span class="english-translation"><em>actually</em></span>
-                        <span class="spanish-translation"><em>en realidad</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('tatsächlich', '🤯')">
-                <div class="word-item-content">
-                    <span class="emoji">🤯</span>
-                    <div class="text-container">
-                        <span class="german-word">tatsächlich</span>
-                        <span class="english-translation"><em>in fact</em></span>
-                        <span class="spanish-translation"><em>de hecho</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('ehrlich', '✋')">
-                <div class="word-item-content">
-                    <span class="emoji">✋</span>
-                    <div class="text-container">
-                        <span class="german-word">ehrlich</span>
-                        <span class="english-translation"><em>honest / honestly</em></span>
-                        <span class="spanish-translation"><em>honesto / honestamente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('wahrscheinlich', '🤷')">
-                <div class="word-item-content">
-                    <span class="emoji">🤷</span>
-                    <div class="text-container">
-                        <span class="german-word">wahrscheinlich</span>
-                        <span class="english-translation"><em>probably</em></span>
-                        <span class="spanish-translation"><em>probable</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('deutlich', '🔊')">
-                <div class="word-item-content">
-                    <span class="emoji">🔊</span>
-                    <div class="text-container">
-                        <span class="german-word">deutlich</span>
-                        <span class="english-translation"><em>clearly</em></span>
-                        <span class="spanish-translation"><em>claramente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('plötzlich', '⚡')">
-                <div class="word-item-content">
-                    <span class="emoji">⚡</span>
-                    <div class="text-container">
-                        <span class="german-word">plötzlich</span>
-                        <span class="english-translation"><em>suddenly</em></span>
-                        <span class="spanish-translation"><em>de repente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('schrecklich', '😱')">
-                <div class="word-item-content">
-                    <span class="emoji">😱</span>
-                    <div class="text-container">
-                        <span class="german-word">schrecklich</span>
-                        <span class="english-translation"><em>terrible</em></span>
-                        <span class="spanish-translation"><em>terrible</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('unglaublich', '✨')">
-                <div class="word-item-content">
-                    <span class="emoji">✨</span>
-                    <div class="text-container">
-                        <span class="german-word">unglaublich</span>
-                        <span class="english-translation"><em>incredible</em></span>
-                        <span class="spanish-translation"><em>increíble</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('vielleicht', '🤔')">
-                <div class="word-item-content">
-                    <span class="emoji">🤔</span>
-                    <div class="text-container">
-                        <span class="german-word">vielleicht</span>
-                        <span class="english-translation"><em>perhaps</em></span>
-                        <span class="spanish-translation"><em>quizás</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('deshalb', '➡️')">
-                <div class="word-item-content">
-                    <span class="emoji">➡️</span>
-                    <div class="text-container">
-                        <span class="german-word">deshalb</span>
-                        <span class="english-translation"><em>therefore</em></span>
-                        <span class="spanish-translation"><em>por eso</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('trotzdem', '🤷‍♀️')">
-                <div class="word-item-content">
-                    <span class="emoji">🤷‍♀️</span>
-                    <div class="text-container">
-                        <span class="german-word">trotzdem</span>
-                        <span class="english-translation"><em>nevertheless</em></span>
-                        <span class="spanish-translation"><em>sin embargo</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('leider', '😥')">
-                <div class="word-item-content">
-                    <span class="emoji">😥</span>
-                    <div class="text-container">
-                        <span class="german-word">leider</span>
-                        <span class="english-translation"><em>unfortunately</em></span>
-                        <span class="spanish-translation"><em>lamentablemente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('überall', '🌍')">
-                <div class="word-item-content">
-                    <span class="emoji">🌍</span>
-                    <div class="text-container">
-                        <span class="german-word">überall</span>
-                        <span class="english-translation"><em>everywhere</em></span>
-                        <span class="spanish-translation"><em>en todas partes</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('nirgends', '📍')">
-                <div class="word-item-content">
-                    <span class="emoji">📍</span>
-                    <div class="text-container">
-                        <span class="german-word">nirgends</span>
-                        <span class="english-translation"><em>nowhere</em></span>
-                        <span class="spanish-translation"><em>en ninguna parte</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('außerdem', '✨')">
-                <div class="word-item-content">
-                    <span class="emoji">✨</span>
-                    <div class="text-container">
-                        <span class="german-word">außerdem</span>
-                        <span class="english-translation"><em>besides</em></span>
-                        <span class="spanish-translation"><em>además</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('deswegen', '🧐')">
-                <div class="word-item-content">
-                    <span class="emoji">🧐</span>
-                    <div class="text-container">
-                        <span class="german-word">deswegen</span>
-                        <span class="english-translation"><em>that's why</em></span>
-                        <span class="spanish-translation"><em>por eso</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('etwa', '❓')">
-                <div class="word-item-content">
-                    <span class="emoji">❓</span>
-                    <div class="text-container">
-                        <span class="german-word">etwa</span>
-                        <span class="english-translation"><em>about / perhaps</em></span>
-                        <span class="spanish-translation"><em>aproximadamente / quizás</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('meistens', '👍')">
-                <div class="word-item-content">
-                    <span class="emoji">👍</span>
-                    <div class="text-container">
-                        <span class="german-word">meistens</span>
-                        <span class="english-translation"><em>mostly</em></span>
-                        <span class="spanish-translation"><em>la mayoría de las veces</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('selten', '📉')">
-                <div class="word-item-content">
-                    <span class="emoji">📉</span>
-                    <div class="text-container">
-                        <span class="german-word">selten</span>
-                        <span class="english-translation"><em>rarely</em></span>
-                        <span class="spanish-translation"><em>raramente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('regelmäßig', '🔄')">
-                <div class="word-item-content">
-                    <span class="emoji">🔄</span>
-                    <div class="text-container">
-                        <span class="german-word">regelmäßig</span>
-                        <span class="english-translation"><em>regularly</em></span>
-                        <span class="spanish-translation"><em>regularmente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('früher', '⏪')">
-                <div class="word-item-content">
-                    <span class="emoji">⏪</span>
-                    <div class="text-container">
-                        <span class="german-word">früher</span>
-                        <span class="english-translation"><em>earlier / formerly</em></span>
-                        <span class="spanish-translation"><em>antes / antiguamente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('später', '⏩')">
-                <div class="word-item-content">
-                    <span class="emoji">⏩</span>
-                    <div class="text-container">
-                        <span class="german-word">später</span>
-                        <span class="english-translation"><em>later</em></span>
-                        <span class="spanish-translation"><em>más tarde</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('fast', '🤏')">
-                <div class="word-item-content">
-                    <span class="emoji">🤏</span>
-                    <div class="text-container">
-                        <span class="german-word">fast</span>
-                        <span class="english-translation"><em>almost</em></span>
-                        <span class="spanish-translation"><em>casi</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('ziemlich', '👌')">
-                <div class="word-item-content">
-                    <span class="emoji">👌</span>
-                    <div class="text-container">
-                        <span class="german-word">ziemlich</span>
-                        <span class="english-translation"><em>quite</em></span>
-                        <span class="spanish-translation"><em>bastante</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('kaum', '📉')">
-                <div class="word-item-content">
-                    <span class="emoji">📉</span>
-                    <div class="text-container">
-                        <span class="german-word">kaum</span>
-                        <span class="english-translation"><em>hardly</em></span>
-                        <span class="spanish-translation"><em>apenas</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('willkürlich', '🎲')">
-                <div class="word-item-content">
-                    <span class="emoji">🎲</span>
-                    <div class="text-container">
-                        <span class="german-word">willkürlich</span>
-                        <span class="english-translation"><em>arbitrary</em></span>
-                        <span class="spanish-translation"><em>arbitrario</em></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <h2 class="section-title">Nivel B1: Vocabulario Avanzado</h2>
-        <div class="cards-container">
-            <div class="word-item" onclick="openExampleModal('hoffentlich', '🙏')">
-                <div class="word-item-content">
-                    <span class="emoji">🙏</span>
-                    <div class="text-container">
-                        <span class="german-word">hoffentlich</span>
-                        <span class="english-translation"><em>hopefully</em></span>
-                        <span class="spanish-translation"><em>ojalá</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('jedoch', '🧐')">
-                <div class="word-item-content">
-                    <span class="emoji">🧐</span>
-                    <div class="text-container">
-                        <span class="german-word">jedoch</span>
-                        <span class="english-translation"><em>however</em></span>
-                        <span class="spanish-translation"><em>sin embargo</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('allerdings', '🧐')">
-                <div class="word-item-content">
-                    <span class="emoji">🧐</span>
-                    <div class="text-container">
-                        <span class="german-word">allerdings</span>
-                        <span class="english-translation"><em>however</em></span>
-                        <span class="spanish-translation"><em>sin embargo</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('jedenfalls', '👍')">
-                <div class="word-item-content">
-                    <span class="emoji">👍</span>
-                    <div class="text-container">
-                        <span class="german-word">jedenfalls</span>
-                        <span class="english-translation"><em>in any case</em></span>
-                        <span class="spanish-translation"><em>en cualquier caso</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('inzwischen', '⏳')">
-                <div class="word-item-content">
-                    <span class="emoji">⏳</span>
-                    <div class="text-container">
-                        <span class="german-word">inzwischen</span>
-                        <span class="english-translation"><em>meanwhile</em></span>
-                        <span class="spanish-translation"><em>mientras tanto</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('überhaupt', '❓')">
-                <div class="word-item-content">
-                    <span class="emoji">❓</span>
-                    <div class="text-container">
-                        <span class="german-word">überhaupt</span>
-                        <span class="english-translation"><em>at all</em></span>
-                        <span class="spanish-translation"><em>en absoluto</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('jeweils', '☝️')">
-                <div class="word-item-content">
-                    <span class="emoji">☝️</span>
-                    <div class="text-container">
-                        <span class="german-word">jeweils</span>
-                        <span class="english-translation"><em>respectively</em></span>
-                        <span class="spanish-translation"><em>respectivamente</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('beziehungsweise', '👉')">
-                <div class="word-item-content">
-                    <span class="emoji">👉</span>
-                    <div class="text-container">
-                        <span class="german-word">beziehungsweise</span>
-                        <span class="english-translation"><em>or rather</em></span>
-                        <span class="spanish-translation"><em>o sea</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('ansonsten', '⚠️')">
-                <div class="word-item-content">
-                    <span class="emoji">⚠️</span>
-                    <div class="text-container">
-                        <span class="german-word">ansonsten</span>
-                        <span class="english-translation"><em>otherwise</em></span>
-                        <span class="spanish-translation"><em>por lo demás</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('einerseits', '⚖️')">
-                <div class="word-item-content">
-                    <span class="emoji">⚖️</span>
-                    <div class="text-container">
-                        <span class="german-word">einerseits</span>
-                        <span class="english-translation"><em>on the one hand</em></span>
-                        <span class="spanish-translation"><em>por un lado</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('andererseits', '⚖️')">
-                <div class="word-item-content">
-                    <span class="emoji">⚖️</span>
-                    <div class="text-container">
-                        <span class="german-word">andererseits</span>
-                        <span class="english-translation"><em>on the other hand</em></span>
-                        <span class="spanish-translation"><em>por otro lado</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('entweder', '↔️')">
-                <div class="word-item-content">
-                    <span class="emoji">↔️</span>
-                    <div class="text-container">
-                        <span class="german-word">entweder</span>
-                        <span class="english-translation"><em>either</em></span>
-                        <span class="spanish-translation"><em>o</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('weder', '🚫')">
-                <div class="word-item-content">
-                    <span class="emoji">🚫</span>
-                    <div class="text-container">
-                        <span class="german-word">weder</span>
-                        <span class="english-translation"><em>neither</em></span>
-                        <span class="spanish-translation"><em>ni</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('noch', '🚫')">
-                <div class="word-item-content">
-                    <span class="emoji">🚫</span>
-                    <div class="text-container">
-                        <span class="german-word">noch</span>
-                        <span class="english-translation"><em>nor</em></span>
-                        <span class="spanish-translation"><em>ni</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('zwar', '👍')">
-                <div class="word-item-content">
-                    <span class="emoji">👍</span>
-                    <div class="text-container">
-                        <span class="german-word">zwar</span>
-                        <span class="english-translation"><em>admittedly</em></span>
-                        <span class="spanish-translation"><em>es cierto que</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('damals', '🕰️')">
-                <div class="word-item-content">
-                    <span class="emoji">🕰️</span>
-                    <div class="text-container">
-                        <span class="german-word">damals</span>
-                        <span class="english-translation"><em>back then</em></span>
-                        <span class="spanish-translation"><em>en aquel entonces</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('heutzutage', '📱')">
-                <div class="word-item-content">
-                    <span class="emoji">📱</span>
-                    <div class="text-container">
-                        <span class="german-word">heutzutage</span>
-                        <span class="english-translation"><em>nowadays</em></span>
-                        <span class="spanish-translation"><em>hoy en día</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('zumindest', '👍')">
-                <div class="word-item-content">
-                    <span class="emoji">👍</span>
-                    <div class="text-container">
-                        <span class="german-word">zumindest</span>
-                        <span class="english-translation"><em>at least</em></span>
-                        <span class="spanish-translation"><em>por lo menos</em></span>
-                    </div>
-                </div>
-            </div>
-            <div class="word-item" onclick="openExampleModal('glücklicherweise', '😄')">
-                <div class="word-item-content">
-                    <span class="emoji">😄</span>
-                    <div class="text-container">
-                        <span class="german-word">glücklicherweise</span>
-                        <span class="english-translation"><em>fortunately</em></span>
-                        <span class="spanish-translation"><em>afortunadamente</em></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <button id="story-button" onclick="generateStory()">
-            Mit einer Geschichte üben
-            <span class="button-translation">(Practicar con una Historia)</span>
-        </button>
-        <div id="story-container" class="story-container">
-            <h3>Eine kleine Geschichte...</h3>
-            <div id="story-content"></div>
+    <!-- Search Bar -->
+    <div class="search-container">
+        <div class="search-wrapper">
+            <input type="text" id="search-input" placeholder="Suchen... (z.B. jetzt, ahora, now)">
+            <button class="clear-search" id="clear-search">✕</button>
+            <span class="search-icon">🔍</span>
         </div>
     </div>
+    <div id="search-results-info" class="search-results-info"></div>
 
-    <!-- Modal para información de adverbios -->
-    <div id="info-modal" class="info-modal-overlay">
-        <div class="info-modal-content">
-            <button id="close-info-modal">&times;</button>
-            <h2>Was sind Adverbien? (¿Qué son los adverbios?)</h2>
-            <p>
-                Los adverbios son palabras que describen <strong>cómo</strong>, <strong>dónde</strong>, <strong>cuándo</strong> o <strong>por qué</strong> sucede algo. No cambian (no se declinan) y pueden modificar a verbos, adjetivos u otros adverbios.
-            </p>
-            <h3>Typen von Adverbien (Tipos de adverbios):</h3>
-            <ul>
-                <li><strong>Temporaladverbien (de tiempo):</strong> wann? (¿cuándo?) - <em>gestern, heute, morgen, immer, nie, schon, bald</em></li>
-                <li><strong>Lokaladverbien (de lugar):</strong> wo? / wohin? / woher? (¿dónde? / ¿a dónde? / ¿de dónde?) - <em>hier, dort, überall, nirgends</em></li>
-                <li><strong>Modaladverbien (de modo):</strong> wie? (¿cómo?) - <em>gut, schnell, langsam, gerne, sehr, einfach</em></li>
-                <li><strong>Kausaladverbien (de causa):</strong> warum? (¿por qué?) - <em>deshalb, darum, trotzdem, deswegen</em></li>
-            </ul>
-        </div>
+    <!-- Navigation -->
+    <div class="navigation-wrapper">
+        <button class="nav-button" id="prev-group-btn">← Vorherige</button>
+        <span class="group-indicator" id="group-indicator">Gruppe wird geladen...</span>
+        <button class="nav-button" id="next-group-btn">Nächste →</button>
     </div>
 
-    <!-- Modal para mostrar el ejemplo generado -->
-    <div id="example-modal" class="modal-overlay">
-        <div class="modal-content">
-            <div id="modal-word-header">
-                <span id="modal-emoji"></span>
-                <h2 id="modal-word"></h2>
-                <button id="play-word-audio-button" class="audio-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
-                </button>
-            </div>
-            <p id="modal-full-spanish"></p>
-            <div id="modal-adverb-tag-container" style="text-align: center;">
-                <!-- Tag will be inserted here by JavaScript -->
-            </div>
-            <div class="modal-separator"></div>
-            <div id="modal-example-container">
-                <p id="modal-text"></p>
-                <button id="play-sentence-audio-button" class="audio-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg>
-                </button>
-            </div>
-            <p id="modal-pronunciation"></p>
-            <p id="modal-spanish-translation"></p>
-            <div id="modal-info"></div>
-            
-            <div class="modal-separator"></div>
-            
-            <div id="example-navigation">
-                <span id="example-counter"></span>
-                <div class="nav-buttons-container">
-                    <button class="nav-button" id="prev-example-button">&lt;</button>
-                    <button class="nav-button" id="next-example-button">&gt;</button>
-                </div>
-            </div>
-            <button id="close-modal">
-                <strong>Schließen</strong>
-                <span class="button-translation">(Cerrar)</span>
-            </button>
+    <!-- Cards Container -->
+    <div id="cards-container" class="infographic-grid">
+        <!-- Cards will be dynamically loaded here -->
+    </div>
+
+    <div class="toggle-container">
+        <div class="active-recall-toggle">
+            <label class="switch-label" for="recall-switch">Übersetzung<span class="label-translation">(traducción)</span></label>
+            <label class="switch">
+                <input type="checkbox" id="recall-switch" checked>
+                <span class="slider"></span>
+            </label>
         </div>
     </div>
 
     <script>
-        // Adverb Tag Mapping
-        const adverbTags = {
-            // ⏰ TEMPORAL
-            'jetzt': { category: 'temporal', label: '⏰ Temporal' },
-            'heute': { category: 'temporal', label: '⏰ Temporal' },
-            'morgen': { category: 'temporal', label: '⏰ Temporal' },
-            'gestern': { category: 'temporal', label: '⏰ Temporal' },
-            'damals': { category: 'temporal', label: '⏰ Temporal' },
-            'früher': { category: 'temporal', label: '⏰ Temporal' },
-            'bald': { category: 'temporal', label: '⏰ Temporal' },
-            'sofort': { category: 'temporal', label: '⏰ Temporal' },
-            'später': { category: 'temporal', label: '⏰ Temporal' },
-            'plötzlich': { category: 'temporal', label: '⏰ Temporal' },
-            'gerade': { category: 'temporal', label: '⏰ Temporal' },
-            'inzwischen': { category: 'temporal', label: '⏰ Temporal' },
-            'heutzutage': { category: 'temporal', label: '⏰ Temporal' },
-            'dann': { category: 'temporal', label: '⏰ Temporal' },
-            'jeweils': { category: 'temporal', label: '⏰ Temporal' },
-
-            // 🔄 FREQUENZ
-            'immer': { category: 'frequenz', label: '🔄 Frequenz' },
-            'nie': { category: 'frequenz', label: '🔄 Frequenz' },
-            'oft': { category: 'frequenz', label: '🔄 Frequenz' },
-            'manchmal': { category: 'frequenz', label: '🔄 Frequenz' },
-            'selten': { category: 'frequenz', label: '🔄 Frequenz' },
-            'meistens': { category: 'frequenz', label: '🔄 Frequenz' },
-            'gewöhnlich': { category: 'frequenz', label: '🔄 Frequenz' },
-            'täglich': { category: 'frequenz', label: '🔄 Frequenz' },
-            'wöchentlich': { category: 'frequenz', label: '🔄 Frequenz' },
-            'monatlich': { category: 'frequenz', label: '🔄 Frequenz' },
-            'jährlich': { category: 'frequenz', label: '🔄 Frequenz' },
-            'jemals': { category: 'frequenz', label: '🔄 Frequenz' },
-
-            // 📍 LOKAL
-            'hier': { category: 'lokal', label: '📍 Lokal' },
-            'dort': { category: 'lokal', label: '📍 Lokal' },
-            'links': { category: 'lokal', label: '📍 Lokal' },
-            'rechts': { category: 'lokal', label: '📍 Lokal' },
-            'überall': { category: 'lokal', label: '📍 Lokal' },
-            'nirgends': { category: 'lokal', label: '📍 Lokal' },
-
-            // 🎯 MODAL
-            'gut': { category: 'modal', label: '🎯 Modal' },
-            'schnell': { category: 'modal', label: '🎯 Modal' },
-            'langsam': { category: 'modal', label: '🎯 Modal' },
-            'gerne': { category: 'modal', label: '🎯 Modal' },
-            'einfach': { category: 'modal', label: '🎯 Modal' },
-            'genau': { category: 'modal', label: '🎯 Modal' },
-            'deutlich': { category: 'modal', label: '🎯 Modal' },
-            'regelmäßig': { category: 'modal', label: '🎯 Modal' },
-            'zusammen': { category: 'modal', label: '🎯 Modal' },
-
-            // 📊 GRAD
-            'sehr': { category: 'grad', label: '📊 Grad' },
-            'ganz': { category: 'grad', label: '📊 Grad' },
-            'ziemlich': { category: 'grad', label: '📊 Grad' },
-            'fast': { category: 'grad', label: '📊 Grad' },
-            'kaum': { category: 'grad', label: '📊 Grad' },
-            'etwa': { category: 'grad', label: '📊 Grad' },
-            'besonders': { category: 'grad', label: '📊 Grad' },
-            'überhaupt': { category: 'grad', label: '📊 Grad' },
-            'unglaublich': { category: 'grad', label: '📊 Grad' },
-            'schrecklich': { category: 'grad', label: '📊 Grad' },
-
-            // 🤔 MODAL-AFIRMATIVO
-            'natürlich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
-            'wirklich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
-            'tatsächlich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
-            'ehrlich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
-            'eigentlich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
-            'jedenfalls': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
-            'zumindest': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
-            'endlich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
-            'herzlich': { category: 'modal-afirmativo', label: '🤔 Modal-Afirmativo' },
-
-            // 🎲 WAHRSCHEINLICHKEIT
-            'vielleicht': { category: 'wahrscheinlichkeit', label: '🎲 Wahrscheinlichkeit' },
-            'wahrscheinlich': { category: 'wahrscheinlichkeit', label: '🎲 Wahrscheinlichkeit' },
-            'hoffentlich': { category: 'wahrscheinlichkeit', label: '🎲 Wahrscheinlichkeit' },
-            'glücklicherweise': { category: 'wahrscheinlichkeit', label: '🎲 Wahrscheinlichkeit' },
-            'leider': { category: 'wahrscheinlichkeit', label: '🎲 Wahrscheinlichkeit' },
-            'willkürlich': { category: 'wahrscheinlichkeit', label: '🎲 Wahrscheinlichkeit' },
-
-            // 🔗 KONJUNKTIONAL
-            'aber': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'auch': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'oder': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'deshalb': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'deswegen': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'darum': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'trotzdem': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'jedoch': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'allerdings': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'außerdem': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'andererseits': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'einerseits': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'ansonsten': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'beziehungsweise': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'entweder': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'weder': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'zwar': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'nur': { category: 'konjunktional', label: '🔗 Konjunktional' },
-            'in Wirklichkeit': { category: 'konjunktional', label: '🔗 Konjunktional' }
-        };
-
-        const savedExamples = {
-
-            'täglich': [
-                { sentence: 'Ich trinke täglich zwei Liter Wasser.', pronunciation: '/ij trinke teg-lish tsvai lita vasa/', type: 'Adverb', english: 'I drink two liters of water daily.', spanish: 'Bebo dos litros de agua a diario.', fullSpanish: 'diario, cada día', fullEnglish: 'daily, every day' },
-                { sentence: 'Die Zeitung kommt täglich.', pronunciation: '/di tsaitung komt teg-lish/', type: 'Adverb', english: 'The newspaper comes daily.', spanish: 'El periódico llega a diario.', fullSpanish: 'diario, cada día', fullEnglish: 'daily, every day' },
-                { sentence: 'Meine tägliche Routine ist einfach.', pronunciation: '/maine teg-lishe rutine ist ainfaj/', type: 'Adjektiv', english: 'My daily routine is simple.', spanish: 'Mi rutina diaria es simple.', fullSpanish: 'diario, cada día', fullEnglish: 'daily, every day' },
-                { sentence: 'Er macht täglich Sport.', pronunciation: '/ea majt teg-lish shport/', type: 'Adverb', english: 'He does sports daily.', spanish: 'Él hace deporte a diario.', fullSpanish: 'diario, cada día', fullEnglish: 'daily, every day' },
-                { sentence: 'Der tägliche Spaziergang ist gesund.', pronunciation: '/dea teg-lishe shpatsigang ist guesúnt/', type: 'Adjektiv', english: 'The daily walk is healthy.', spanish: 'El paseo diario es saludable.', fullSpanish: 'diario, cada día', fullEnglish: 'daily, every day' }
-            ],
-
-
-            'natürlich': [
-                { sentence: 'Natürlich helfe ich dir gerne.', pronunciation: '/na-tiur-lish jelfe ij dia guerne/', type: 'Adverb', english: 'Of course I\'ll help you.', spanish: 'Por supuesto que te ayudo.', fullSpanish: 'por supuesto, natural', fullEnglish: 'of course, natural' },
-                { sentence: 'Das ist ein natürlicher Saft ohne Zucker.', pronunciation: '/das ist ain na-tiur-lisher saft one tsuka/', type: 'Adjektiv', english: 'That is a natural juice without sugar.', spanish: 'Ese es un zumo natural sin azúcar.', fullSpanish: 'por supuesto, natural', fullEnglish: 'of course, natural' },
-                { sentence: 'Er spricht sehr natürlich.', pronunciation: '/ea shprijt sea na-tiur-lish/', type: 'Adverb', english: 'He speaks very naturally.', spanish: 'Él habla de forma muy natural.', fullSpanish: 'por supuesto, natural', fullEnglish: 'of course, natural' },
-                { sentence: 'Die Blumen sind natürlich schön.', pronunciation: '/di blumen sint na-tiur-lish shon/', type: 'Adjektiv', english: 'The flowers are naturally beautiful.', spanish: 'Las flores son naturalmente bonitas.', fullSpanish: 'por supuesto, natural', fullEnglish: 'of course, natural' },
-                { sentence: 'Kommst du mit? Natürlich!', pronunciation: '/komst du mit? na-tiur-lish!/', type: 'Adverb', english: 'Are you coming along? Of course!', spanish: '¿Vienes? ¡Por supuesto!', fullSpanish: 'por supuesto, natural', fullEnglish: 'of course, natural' }
-            ],
-
-
-            'endlich': [
-                { sentence: 'Endlich ist Wochenende!', pronunciation: '/endlich ist vojen-ende/', type: 'Adverb', english: 'Finally, it\'s the weekend!', spanish: '¡Finalmente es fin de semana!', fullSpanish: 'finalmente, por fin', fullEnglish: 'finally, at last' },
-                { sentence: 'Wir sind endlich da.', pronunciation: '/via sind endlich da/', type: 'Adverb', english: 'We are finally here.', spanish: 'Finalmente estamos aquí.', fullSpanish: 'finalmente, por fin', fullEnglish: 'finally, at last' },
-                { sentence: 'Der Sommer kommt endlich.', pronunciation: '/dea soma komt endlich/', type: 'Adverb', english: 'Summer is finally coming.', spanish: 'El verano finalmente llega.', fullSpanish: 'finalmente, por fin', fullEnglish: 'finally, at last' },
-                { sentence: 'Ich habe es endlich geschafft.', pronunciation: '/ij jabe es endlich gueshaft/', type: 'Adverb', english: 'I finally did it.', spanish: 'Finalmente lo logré.', fullSpanish: 'finalmente, por fin', fullEnglish: 'finally, at last' },
-                { sentence: 'Endlich habe ich dich gefunden.', pronunciation: '/endlich jabe ij dij guefunden/', type: 'Adverb', english: 'I finally found you.', spanish: 'Finalmente te encontré.', fullSpanish: 'finalmente, por fin', fullEnglish: 'finally, at last' }
-            ],
-            'herzlich': [
-                { sentence: 'Herzlich willkommen!', pronunciation: '/jerts-lish vilkomen/', type: 'Adverb', english: 'Welcome!', spanish: '¡Bienvenido/a cordialmente!', fullSpanish: 'cordial, afectuoso', fullEnglish: 'cordial, heartfelt' },
-                { sentence: 'Ich gratuliere Ihnen herzlich.', pronunciation: '/ij gratulire inen jerts-lish/', type: 'Adverb', english: 'I congratulate you cordially.', spanish: 'Le felicito cordialmente.', fullSpanish: 'cordial, afectuoso', fullEnglish: 'cordial, heartfelt' },
-                { sentence: 'Vielen herzlichen Dank!', pronunciation: '/filen jerts-lishen dank/', type: 'Adjektiv', english: 'Many heartfelt thanks!', spanish: '¡Muchas gracias de corazón!', fullSpanish: 'cordial, afectuoso', fullEnglish: 'cordial, heartfelt' },
-                { sentence: 'Sie wurden herzlich empfangen.', pronunciation: '/si vurden jerts-lish empfangen/', type: 'Adverb', english: 'They were received cordially.', spanish: 'Fueron recibidos cordialmente.', fullSpanish: 'cordial, afectuoso', fullEnglish: 'cordial, heartfelt' },
-                { sentence: 'Meine herzlichen Grüße.', pronunciation: '/maine jerts-lishen gruse/', type: 'Adjektiv', english: 'My cordial greetings.', spanish: 'Mis saludos cordiales.', fullSpanish: 'cordial, afectuoso', fullEnglish: 'cordial, heartfelt' }
-            ],
-
-            'wirklich': [
-                { sentence: 'Das ist wirklich schön.', pronunciation: '/das ist virk-lish shon/', type: 'Adverb', english: 'That is really beautiful.', spanish: 'Eso es realmente bonito.', fullSpanish: 'de verdad, realmente', fullEnglish: 'really, truly' },
-                { sentence: 'Bist du wirklich müde?', pronunciation: '/bist du virk-lish miude/', type: 'Adverb', english: 'Are you really tired?', spanish: '¿Estás realmente cansado?', fullSpanish: 'de verdad, realmente', fullEnglish: 'really, truly' },
-                { sentence: 'Ich mag das wirklich.', pronunciation: '/ij mag das virk-lish/', type: 'Adverb', english: 'I really like that.', spanish: 'Me gusta de verdad.', fullSpanish: 'de verdad, realmente', fullEnglish: 'really, truly' },
-                { sentence: 'Er ist wirklich nett.', pronunciation: '/ea ist virk-lish net/', type: 'Adverb', english: 'He is really nice.', spanish: 'Él es realmente simpático.', fullSpanish: 'de verdad, realmente', fullEnglish: 'really, truly' },
-                { sentence: 'Das Essen schmeckt wirklich gut.', pronunciation: '/das esen shmekt virk-lish gut/', type: 'Adverb', english: 'The food tastes really good.', spanish: 'La comida sabe realmente bien.', fullSpanish: 'de verdad, realmente', fullEnglish: 'really, truly' }
-            ],
-            'hier': [
-                { sentence: 'Ich bin hier.', pronunciation: '/ij bin hia/', type: 'Adverb', english: 'I am here.', spanish: 'Estoy aquí.', fullSpanish: 'aquí', fullEnglish: 'here' }
-            ],
-            'dort': [
-                { sentence: 'Das Auto ist dort.', pronunciation: '/das auto ist dort/', type: 'Adverb', english: 'The car is there.', spanish: 'El coche está allí.', fullSpanish: 'allí', fullEnglish: 'there' }
-            ],
-            'jetzt': [
-                { sentence: 'Wir essen jetzt.', pronunciation: '/via esen yetst/', type: 'Adverb', english: 'We are eating now.', spanish: 'Comemos ahora.', fullSpanish: 'ahora', fullEnglish: 'now' }
-            ],
-            'heute': [
-                { sentence: 'Heute lerne ich Deutsch.', pronunciation: '/joite lerne ij doytsh/', type: 'Adverb', english: 'Today I am learning German.', spanish: 'Hoy aprendo alemán.', fullSpanish: 'hoy', fullEnglish: 'today' }
-            ],
-            'morgen': [
-                { sentence: 'Morgen gehe ich ins Kino.', pronunciation: '/morguen gue-e ij ins kino/', type: 'Adverb', english: 'Tomorrow I am going to the cinema.', spanish: 'Mañana voy al cine.', fullSpanish: 'mañana', fullEnglish: 'tomorrow' }
-            ],
-            'gestern': [
-                { sentence: 'Gestern habe ich gearbeitet.', pronunciation: '/guestern jabe ij gue-arbaitet/', type: 'Adverb', english: 'Yesterday I worked.', spanish: 'Ayer trabajé.', fullSpanish: 'ayer', fullEnglish: 'yesterday' }
-            ],
-            'oft': [
-                { sentence: 'Er kommt oft zu spät.', pronunciation: '/ea komt oft tsu shpet/', type: 'Adverb', english: 'He often comes too late.', spanish: 'Él llega a menudo demasiado tarde.', fullSpanish: 'a menudo', fullEnglish: 'often' }
-            ],
-            'immer': [
-                { sentence: 'Sie ist immer pünktlich.', pronunciation: '/si ist ima punkt-lish/', type: 'Adverb', english: 'She is always on time.', spanish: 'Ella siempre es puntual.', fullSpanish: 'siempre', fullEnglish: 'always' }
-            ],
-            'nie': [
-                { sentence: 'Ich trinke nie Kaffee.', pronunciation: '/ij trinke ni kafe/', type: 'Adverb', english: 'I never drink coffee.', spanish: 'Nunca bebo café.', fullSpanish: 'nunca', fullEnglish: 'never' }
-            ],
-            'sehr': [
-                { sentence: 'Das ist sehr gut.', pronunciation: '/das ist sea gut/', type: 'Adverb', english: 'That is very good.', spanish: 'Eso está muy bien.', fullSpanish: 'muy', fullEnglish: 'very' }
-            ],
-            'gut': [
-                { sentence: 'Er singt gut.', pronunciation: '/ea singt gut/', type: 'Adverb', english: 'He sings well.', spanish: 'Él canta bien.', fullSpanish: 'bien', fullEnglish: 'well' }
-            ],
-            'zusammen': [
-                { sentence: 'Wir gehen zusammen ins Kino.', pronunciation: '/via gue-en tsusamen ins kino/', type: 'Adverb', english: 'We are going to the cinema together.', spanish: 'Vamos juntos al cine.', fullSpanish: 'juntos', fullEnglish: 'together' }
-            ],
-            'bald': [
-                { sentence: 'Ich komme bald.', pronunciation: '/ij kome balt/', type: 'Adverb', english: 'I am coming soon.', spanish: 'Vengo pronto.', fullSpanish: 'pronto', fullEnglish: 'soon' },
-                { sentence: 'Bis bald!', pronunciation: '/bis balt/', type: 'Adverb', english: 'See you soon!', spanish: '¡Hasta pronto!', fullSpanish: 'pronto', fullEnglish: 'soon' },
-                { sentence: 'Er wird bald 30.', pronunciation: '/ea virt balt draisish/', type: 'Adverb', english: 'He will be 30 soon.', spanish: 'Pronto cumplirá 30 años.', fullSpanish: 'pronto', fullEnglish: 'soon' },
-                { sentence: 'Der Frühling kommt bald.', pronunciation: '/dea fruling komt balt/', type: 'Adverb', english: 'Spring is coming soon.', spanish: 'La primavera llegará pronto.', fullSpanish: 'pronto', fullEnglish: 'soon' },
-                { sentence: 'Wir sehen uns bald wieder.', pronunciation: '/via seen uns balt vida/', type: 'Adverb', english: 'We will see each other again soon.', spanish: 'Nos veremos de nuevo pronto.', fullSpanish: 'pronto', fullEnglish: 'soon' }
-            ],
-            'schon': [
-                { sentence: 'Ich habe schon gegessen.', pronunciation: '/ij jabe shon gueguesen/', type: 'Adverb', english: 'I have already eaten.', spanish: 'Ya he comido.', fullSpanish: 'ya', fullEnglish: 'already' },
-                { sentence: 'Bist du schon fertig?', pronunciation: '/bist du shon fertig/', type: 'Adverb', english: 'Are you already finished?', spanish: '¿Ya has terminado?', fullSpanish: 'ya', fullEnglish: 'already' },
-                { sentence: 'Es ist schon spät.', pronunciation: '/es ist shon shpet/', type: 'Adverb', english: 'It is already late.', spanish: 'Ya es tarde.', fullSpanish: 'ya', fullEnglish: 'already' },
-                { sentence: 'Das habe ich schon gewusst.', pronunciation: '/das jabe ij shon guevust/', type: 'Adverb', english: 'I already knew that.', spanish: 'Eso ya lo sabía.', fullSpanish: 'ya', fullEnglish: 'already' },
-                { sentence: 'Sie ist schon da.', pronunciation: '/si ist shon da/', type: 'Adverb', english: 'She is already there.', spanish: 'Ella ya está allí.', fullSpanish: 'ya', fullEnglish: 'already' }
-            ],
-            'noch': [
-                { sentence: 'Ich bin noch nicht fertig.', pronunciation: '/ij bin noj nijt fertig/', type: 'Adverb', english: 'I am not finished yet.', spanish: 'Todavía no he terminado.', fullSpanish: 'aún / todavía', fullEnglish: 'still / yet' },
-                { sentence: 'Möchtest du noch etwas?', pronunciation: '/miojtest du noj etvas/', type: 'Adverb', english: 'Do you want anything else?', spanish: '¿Quieres algo más?', fullSpanish: 'aún / todavía', fullEnglish: 'still / yet' },
-                { sentence: 'Er ist noch im Büro.', pronunciation: '/ea ist noj im biuro/', type: 'Adverb', english: 'He is still at the office.', spanish: 'Él todavía está en la oficina.', fullSpanish: 'aún / todavía', fullEnglish: 'still / yet' },
-                { sentence: 'Wir haben noch Zeit.', pronunciation: '/via jaben noj tsait/', type: 'Adverb', english: 'We still have time.', spanish: 'Todavía tenemos tiempo.', fullSpanish: 'aún / todavía', fullEnglish: 'still / yet' },
-                { sentence: 'Einmal noch, bitte.', pronunciation: '/ainmal noj, bite/', type: 'Adverb', english: 'One more time, please.', spanish: 'Una vez más, por favor.', fullSpanish: 'aún / todavía', fullEnglish: 'still / yet' }
-            ],
-            'dann': [
-                { sentence: 'Erst die Arbeit, dann das Vergnügen.', pronunciation: '/erst di arbait, dan das fergnuguen/', type: 'Adverb', english: 'First work, then pleasure.', spanish: 'Primero el trabajo, luego el placer.', fullSpanish: 'entonces', fullEnglish: 'then' },
-                { sentence: 'Wenn du fertig bist, dann können wir gehen.', pronunciation: '/ven du fertig bist, dan konen via gueen/', type: 'Adverb', english: 'When you are finished, then we can go.', spanish: 'Cuando termines, entonces podemos irnos.', fullSpanish: 'entonces', fullEnglish: 'then' },
-                { sentence: 'Was hast du dann gemacht?', pronunciation: '/vas jast du dan guemajt/', type: 'Adverb', english: 'What did you do then?', spanish: '¿Qué hiciste entonces?', fullSpanish: 'entonces', fullEnglish: 'then' },
-                { sentence: 'Dann bis morgen!', pronunciation: '/dan bis morguen/', type: 'Adverb', english: 'See you tomorrow then!', spanish: '¡Entonces hasta mañana!', fullSpanish: 'entonces', fullEnglish: 'then' },
-                { sentence: 'Er überlegte kurz und sagte dann "Ja".', pronunciation: '/ea iuberlegte kurts und sagte dan "ya"/', type: 'Adverb', english: 'He thought for a moment and then said "Yes".', spanish: 'Él lo pensó un momento y luego dijo "Sí".', fullSpanish: 'entonces', fullEnglish: 'then' }
-            ],
-            'sofort': [
-                { sentence: 'Komm bitte sofort hierher!', pronunciation: '/kom bite sofort hiajea/', type: 'Adverb', english: 'Please come here immediately!', spanish: '¡Ven aquí inmediatamente, por favor!', fullSpanish: 'inmediatamente', fullEnglish: 'immediately' },
-                { sentence: 'Ich werde das sofort erledigen.', pronunciation: '/ij verde das sofort erlegiduen/', type: 'Adverb', english: 'I will take care of that immediately.', spanish: 'Me encargaré de eso inmediatamente.', fullSpanish: 'inmediatamente', fullEnglish: 'immediately' },
-                { sentence: 'Das Medikament wirkt sofort.', pronunciation: '/das medikament virkt sofort/', type: 'Adverb', english: 'The medicine works immediately.', spanish: 'El medicamento hace efecto inmediatamente.', fullSpanish: 'inmediatamente', fullEnglish: 'immediately' },
-                { sentence: 'Rufen Sie sofort einen Arzt!', pronunciation: '/rufen si sofort ainen artst/', type: 'Adverb', english: 'Call a doctor immediately!', spanish: '¡Llame a un médico inmediatamente!', fullSpanish: 'inmediatamente', fullEnglish: 'immediately' },
-                { sentence: 'Er hat sofort geantwortet.', pronunciation: '/ea jat sofort gueantwortet/', type: 'Adverb', english: 'He answered immediately.', spanish: 'Él respondió inmediatamente.', fullSpanish: 'inmediatamente', fullEnglish: 'immediately' }
-            ],
-            'links': [
-                { sentence: 'Gehen Sie hier nach links.', pronunciation: '/gueen si hia naj links/', type: 'Adverb', english: 'Turn left here.', spanish: 'Gire a la izquierda aquí.', fullSpanish: 'izquierda', fullEnglish: 'left' },
-                { sentence: 'Das Haus ist auf der linken Seite.', pronunciation: '/das jaus ist auf dea linken saite/', type: 'Adjektiv', english: 'The house is on the left side.', spanish: 'La casa está en el lado izquierdo.', fullSpanish: 'izquierda', fullEnglish: 'left' },
-                { sentence: 'Links neben mir sitzt mein Freund.', pronunciation: '/links neben mia sitst main froint/', type: 'Adverb', english: 'My friend is sitting to my left.', spanish: 'A mi izquierda se sienta mi amigo.', fullSpanish: 'izquierda', fullEnglish: 'left' },
-                { sentence: 'Schau nach links und rechts.', pronunciation: '/shau naj links und rejts/', type: 'Adverb', english: 'Look left and right.', spanish: 'Mira a la izquierda y a la derecha.', fullSpanish: 'izquierda', fullEnglish: 'left' },
-                { sentence: 'Die Tür ist links.', pronunciation: '/di tiua ist links/', type: 'Adverb', english: 'The door is on the left.', spanish: 'La puerta está a la izquierda.', fullSpanish: 'izquierda', fullEnglish: 'left' }
-            ],
-            'rechts': [
-                { sentence: 'Die Apotheke ist hier rechts.', pronunciation: '/di apoteke ist hia rejts/', type: 'Adverb', english: 'The pharmacy is here on the right.', spanish: 'La farmacia está aquí a la derecha.', fullSpanish: 'derecha', fullEnglish: 'right' },
-                { sentence: 'Nehmen Sie die nächste Straße rechts.', pronunciation: '/nemen si di nejste shtrase rejts/', type: 'Adverb', english: 'Take the next street on the right.', spanish: 'Tome la siguiente calle a la derecha.', fullSpanish: 'derecha', fullEnglish: 'right' },
-                { sentence: 'Er schreibt mit der rechten Hand.', pronunciation: '/ea shraibt mit dea rejten jant/', type: 'Adjektiv', english: 'He writes with his right hand.', spanish: 'Él escribe con la mano derecha.', fullSpanish: 'derecha', fullEnglish: 'right' },
-                { sentence: 'Rechts von mir ist ein Fenster.', pronunciation: '/rejts fon mia ist ain fensta/', type: 'Adverb', english: 'To my right is a window.', spanish: 'A mi derecha hay una ventana.', fullSpanish: 'derecha', fullEnglish: 'right' },
-                { sentence: 'Bitte bleiben Sie auf der rechten Seite.', pronunciation: '/bite blaiben si auf dea rejten saite/', type: 'Adjektiv', english: 'Please stay on the right side.', spanish: 'Por favor, manténgase en el lado derecho.', fullSpanish: 'derecha', fullEnglish: 'right' }
-            ],
-            'schnell': [
-                { sentence: 'Er läuft sehr schnell.', pronunciation: '/ea loift sea shnel/', type: 'Adverb', english: 'He runs very fast.', spanish: 'Él corre muy rápido.', fullSpanish: 'rápido', fullEnglish: 'fast' },
-                { sentence: 'Das ist ein schnelles Auto.', pronunciation: '/das ist ain shneles auto/', type: 'Adjektiv', english: 'That is a fast car.', spanish: 'Ese es un coche rápido.', fullSpanish: 'rápido', fullEnglish: 'fast' },
-                { sentence: 'Komm schnell!', pronunciation: '/kom shnel/', type: 'Adverb', english: 'Come quickly!', spanish: '¡Ven rápido!', fullSpanish: 'rápido', fullEnglish: 'fast' },
-                { sentence: 'Ich muss schnell nach Hause.', pronunciation: '/ij mus shnel naj jause/', type: 'Adverb', english: 'I have to go home quickly.', spanish: 'Tengo que ir a casa rápido.', fullSpanish: 'rápido', fullEnglish: 'fast' },
-                { sentence: 'Sie lernt schnell.', pronunciation: '/si lernt shnel/', type: 'Adverb', english: 'She learns quickly.', spanish: 'Ella aprende rápido.', fullSpanish: 'rápido', fullEnglish: 'fast' }
-            ],
-            'langsam': [
-                { sentence: 'Bitte sprechen Sie langsam.', pronunciation: '/bite shprejen si langsam/', type: 'Adverb', english: 'Please speak slowly.', spanish: 'Por favor, hable despacio.', fullSpanish: 'lento', fullEnglish: 'slow' },
-                { sentence: 'Die Schnecke ist sehr langsam.', pronunciation: '/di shneke ist sea langsam/', type: 'Adjektiv', english: 'The snail is very slow.', spanish: 'El caracol es muy lento.', fullSpanish: 'lento', fullEnglish: 'slow' },
-                { sentence: 'Er isst sehr langsam.', pronunciation: '/ea ist sea langsam/', type: 'Adverb', english: 'He eats very slowly.', spanish: 'Él come muy despacio.', fullSpanish: 'lento', fullEnglish: 'slow' },
-                { sentence: 'Der Verkehr bewegt sich langsam.', pronunciation: '/dea ferkea bevegt sij langsam/', type: 'Adverb', english: 'The traffic is moving slowly.', spanish: 'El tráfico se mueve lentamente.', fullSpanish: 'lento', fullEnglish: 'slow' },
-                { sentence: 'Ein langsamer Spaziergang ist entspannend.', pronunciation: '/ain langsama shpatsigang ist entshpanent/', type: 'Adjektiv', english: 'A slow walk is relaxing.', spanish: 'Un paseo lento es relajante.', fullSpanish: 'lento', fullEnglish: 'slow' }
-            ],
-            'nur': [
-                { sentence: 'Ich habe nur einen Euro.', pronunciation: '/ij jabe nua ainen oyro/', type: 'Adverb', english: 'I only have one euro.', spanish: 'Solo tengo un euro.', fullSpanish: 'solo', fullEnglish: 'only' },
-                { sentence: 'Sie ist nur müde, nicht krank.', pronunciation: '/si ist nua miude, nijt krank/', type: 'Adverb', english: 'She is only tired, not sick.', spanish: 'Ella solo está cansada, no enferma.', fullSpanish: 'solo', fullEnglish: 'only' },
-                { sentence: 'Nur du kannst mir helfen.', pronunciation: '/nua du kanst mia helfen/', type: 'Adverb', english: 'Only you can help me.', spanish: 'Solo tú puedes ayudarme.', fullSpanish: 'solo', fullEnglish: 'only' }
-            ],
-            'gerade': [
-                { sentence: 'Ich komme gerade von der Arbeit.', pronunciation: '/ij kome gerade fon dea arbait/', type: 'Adverb', english: 'I just came from work.', spanish: 'Acabo de llegar del trabajo.', fullSpanish: 'justo ahora', fullEnglish: 'just now' },
-                { sentence: 'Was machst du gerade?', pronunciation: '/vas majst du gerade/', type: 'Adverb', english: 'What are you doing right now?', spanish: '¿Qué estás haciendo justo ahora?', fullSpanish: 'justo ahora', fullEnglish: 'right now' }
-            ],
-            'ganz': [
-                { sentence: 'Das ist ganz einfach.', pronunciation: '/das ist gants ainfaj/', type: 'Adverb', english: 'That is quite simple.', spanish: 'Eso es bastante simple.', fullSpanish: 'bastante / completamente', fullEnglish: 'quite / completely' },
-                { sentence: 'Ich bin ganz deiner Meinung.', pronunciation: '/ij bin gants daina mainung/', type: 'Adverb', english: 'I completely agree with you.', spanish: 'Estoy completamente de acuerdo contigo.', fullSpanish: 'bastante / completamente', fullEnglish: 'quite / completely' }
-            ],
-            'genau': [
-                { sentence: 'Das ist genau das, was ich brauche.', pronunciation: '/das ist genau das, vas ij brauje/', type: 'Adverb', english: 'That is exactly what I need.', spanish: 'Eso es exactamente lo que necesito.', fullSpanish: 'exacto', fullEnglish: 'exactly' },
-                { sentence: 'Genau!', pronunciation: '/genau/', type: 'Adverb', english: 'Exactly!', spanish: '¡Exacto!', fullSpanish: 'exacto', fullEnglish: 'exactly' }
-            ],
-            'auch': [
-                { sentence: 'Ich komme auch.', pronunciation: '/ij kome auj/', type: 'Adverb', english: 'I am coming too.', spanish: 'Yo también vengo.', fullSpanish: 'también', fullEnglish: 'also' },
-                { sentence: 'Er mag auch Pizza.', pronunciation: '/ea mag auj pitsa/', type: 'Adverb', english: 'He also likes pizza.', spanish: 'A él también le gusta la pizza.', fullSpanish: 'también', fullEnglish: 'also' }
-            ],
-            'jemals': [
-                { sentence: 'Hast du jemals einen Elefanten gesehen?', pronunciation: '/jast du yemals ainen elefanten gueseen/', type: 'Adverb', english: 'Have you ever seen an elephant?', spanish: '¿Alguna vez has visto un elefante?', fullSpanish: 'alguna vez', fullEnglish: 'ever' },
-                { sentence: 'Ich war noch niemals in New York.', pronunciation: '/ij vaa noj nimals in niu york/', type: 'Adverb', english: 'I have never been to New York.', spanish: 'Nunca he estado en Nueva York.', fullSpanish: 'alguna vez', fullEnglish: 'ever' }
-            ],
-            'darum': [
-                { sentence: 'Er war müde, darum ist er gegangen.', pronunciation: '/ea vaa miude, darum ist ea guegangen/', type: 'Adverb', english: 'He was tired, therefore he left.', spanish: 'Estaba cansado, por eso se fue.', fullSpanish: 'por eso', fullEnglish: 'therefore' },
-                { sentence: 'Darum geht es doch!', pronunciation: '/darum guet es doj/', type: 'Adverb', english: 'That\'s what it\'s about!', spanish: '¡De eso se trata!', fullSpanish: 'por eso', fullEnglish: 'therefore' }
-            ],
-            'täglich': [
-                { sentence: 'Ich trinke täglich zwei Liter Wasser.', pronunciation: '/ij trinke teg-lish tsvai lita vasa/', type: 'Adverb', english: 'I drink two liters of water daily.', spanish: 'Bebo dos litros de agua a diario.', fullSpanish: 'diario, cada día', fullEnglish: 'daily, every day' },
-                { sentence: 'Die Zeitung kommt täglich.', pronunciation: '/di tsaitung komt teg-lish/', type: 'Adverb', english: 'The newspaper comes daily.', spanish: 'El periódico llega a diario.', fullSpanish: 'diario, cada día', fullEnglish: 'daily, every day' },
-                { sentence: 'Meine tägliche Routine ist einfach.', pronunciation: '/maine teg-lishe rutine ist ainfaj/', type: 'Adjektiv', english: 'My daily routine is simple.', spanish: 'Mi rutina diaria es simple.', fullSpanish: 'diario, cada día', fullEnglish: 'daily, every day' },
-                { sentence: 'Er macht täglich Sport.', pronunciation: '/ea majt teg-lish shport/', type: 'Adverb', english: 'He does sports daily.', spanish: 'Él hace deporte a diario.', fullSpanish: 'diario, cada día', fullEnglish: 'daily, every day' },
-                { sentence: 'Der tägliche Spaziergang ist gesund.', pronunciation: '/dea teg-lishe shpatsigang ist guesúnt/', type: 'Adjektiv', english: 'The daily walk is healthy.', spanish: 'El paseo diario es saludable.', fullSpanish: 'diario, cada día', fullEnglish: 'daily, every day' }
-            ],
-            'wöchentlich': [
-                { sentence: 'Ich gehe wöchentlich schwimmen.', pronunciation: '/ij guee voejent-lish shvimen/', type: 'Adverb', english: 'I go swimming weekly.', spanish: 'Voy a nadar semanalmente.', fullSpanish: 'semanal, semanalmente', fullEnglish: 'weekly' }
-            ],
-            'monatlich': [
-                { sentence: 'Die Miete bezahle ich monatlich.', pronunciation: '/di mite be-tsale ij monat-lish/', type: 'Adverb', english: 'I pay the rent monthly.', spanish: 'Pago el alquiler mensualmente.', fullSpanish: 'mensual, mensualmente', fullEnglish: 'monthly' },
-                { sentence: 'Das Magazin erscheint monatlich.', pronunciation: '/das magatsin er-shaint monat-lish/', type: 'Adverb', english: 'The magazine is published monthly.', spanish: 'La revista se publica mensualmente.', fullSpanish: 'mensual, mensualmente', fullEnglish: 'monthly' },
-                { sentence: 'Wir haben eine monatliche Besprechung.', pronunciation: '/via jaben aine monat-lishe be-shprejung/', type: 'Adjektiv', english: 'We have a monthly meeting.', spanish: 'Tenemos una reunión mensual.', fullSpanish: 'mensual, mensualmente', fullEnglish: 'monthly' },
-                { sentence: 'Mein monatliches Gehalt ist gut.', pronunciation: '/main monat-lishes gue-jalt ist gut/', type: 'Adjektiv', english: 'My monthly salary is good.', spanish: 'Mi salario mensual es bueno.', fullSpanish: 'mensual, mensualmente', fullEnglish: 'monthly' },
-                { sentence: 'Die Raten sind monatlich zu zahlen.', pronunciation: '/di raten sint monat-lish tsu tsalen/', type: 'Adverb', english: 'The installments are to be paid monthly.', spanish: 'Las cuotas se deben pagar mensualmente.', fullSpanish: 'mensual, mensualmente', fullEnglish: 'monthly' }
-            ],
-            'jährlich': [
-                { sentence: 'Das Festival findet jährlich statt.', pronunciation: '/das festival findet yer-lish shtat/', type: 'Adverb', english: 'The festival takes place annually.', spanish: 'El festival tiene lugar anualmente.', fullSpanish: 'anual, anualmente', fullEnglish: 'yearly, annually' },
-                { sentence: 'Wir machen eine jährliche Reise.', pronunciation: '/via majen aine yer-lishe raise/', type: 'Adjektiv', english: 'We take a yearly trip.', spanish: 'Hacemos un viaje anual.', fullSpanish: 'anual, anualmente', fullEnglish: 'yearly, annually' },
-                { sentence: 'Der Bericht wird jährlich veröffentlicht.', pronunciation: '/dea berijt virt yer-lish fer-ofent-lisht/', type: 'Adverb', english: 'The report is published annually.', spanish: 'El informe se publica anualmente.', fullSpanish: 'anual, anualmente', fullEnglish: 'yearly, annually' },
-                { sentence: 'Die jährliche Gebühr ist 50 Euro.', pronunciation: '/di yer-lishe gue-biua ist fiunftsig oyro/', type: 'Adjektiv', english: 'The annual fee is 50 euros.', spanish: 'La cuota anual es de 50 euros.', fullSpanish: 'anual, anualmente', fullEnglish: 'yearly, annually' },
-                { sentence: 'Er bekommt jährlich einen Bonus.', pronunciation: '/ea bekomt yer-lish ainen bonus/', type: 'Adverb', english: 'He gets a bonus annually.', spanish: 'Él recibe un bono anualmente.', fullSpanish: 'anual, anualmente', fullEnglish: 'yearly, annually' }
-            ]
-        };
-        
-        // --- Base de datos de historias guardadas ---
-        const savedStories = [
-            `Mein neuer Kollege heißt Marco. Er ist ein sehr <span class="highlighted-word">freundlicher</span> und <span class="highlighted-word">männlicher</span> Lehrer aus Italien. Marco ist auch sehr <span class="highlighted-word">sportlich</span>; er spielt am Wochenende Fußball. Er kommt <span class="highlighted-word">täglich</span> mit dem Fahrrad zur Arbeit, auch wenn das Wetter schlecht ist. Das ist super, denn er ist immer <span class="highlighted-word">pünktlich</span> und nie zu spät.`,
-            `Ich bin sehr <span class="highlighted-word">glücklich</span>, denn ich habe eine neue Wohnung! Sie ist klein, aber sehr <span class="highlighted-word">gemütlich</span>, mit einem Sofa und vielen Kissen. Für mich <span class="highlighted-word">persönlich</span> ist das perfekt. Ich habe viele Pflanzen, das sieht sehr <span class="highlighted-word">natürlich</span> und schön aus. Ist es <span class="highlighted-word">möglich</span>, dass du mich am Samstag besuchst? Wir können zusammen Kaffee trinken.`,
-            `Ich brauche Hilfe mit einem Formular. Hier steht: <span class="highlighted-word">männlich</span> oder <span class="highlighted-word">weiblich</span>? Ich kreuze <span class="highlighted-word">weiblich</span> an. Aber mein Passfoto ist wirklich <span class="highlighted-word">hässlich</span>! Meine Haare sehen komisch aus. <span class="highlighted-word">Natürlich</span> kann ich das nicht benutzen. Ist es <span class="highlighted-word">möglich</span>, heute ein neues Foto zu machen? Ich hoffe es.`
+        // Group definitions with examples
+        const adverbGroups = [
+            {
+                title: '⏰ Temporal (A1 - A2)',
+                description: 'Adverbios de tiempo',
+                level: 'A1-A2',
+                colorMain: '#3b82f6',
+                colorPastel: '#dbeafe',
+                badge: 'TEMPORAL',
+                adverbs: [
+                    { word: 'jetzt', emoji: '🕐', spanish: '(ahora)', example_de: 'Ich gehe jetzt nach Hause.', example_es: 'Ahora voy a casa.' },
+                    { word: 'heute', emoji: '📅', spanish: '(hoy)', example_de: 'Heute ist ein schöner Tag.', example_es: 'Hoy es un día bonito.' },
+                    { word: 'morgen', emoji: '🌅', spanish: '(mañana)', example_de: 'Morgen habe ich frei.', example_es: 'Mañana tengo libre.' },
+                    { word: 'gestern', emoji: '🔙', spanish: '(ayer)', example_de: 'Gestern war ich krank.', example_es: 'Ayer estuve enfermo.' },
+                    { word: 'sofort', emoji: '⚡', spanish: '(inmediatamente)', example_de: 'Komm bitte sofort her!', example_es: '¡Ven aquí inmediatamente, por favor!' },
+                    { word: 'später', emoji: '🔜', spanish: '(más tarde)', example_de: 'Wir sehen uns später.', example_es: 'Nos vemos más tarde.' },
+                    { word: 'bald', emoji: '⏳', spanish: '(pronto)', example_de: 'Bis bald!', example_es: '¡Hasta pronto!' },
+                    { word: 'gerade', emoji: '⏱️', spanish: '(justo ahora)', example_de: 'Er ruft gerade an.', example_es: 'Él está llamando justo ahora.' },
+                    { word: 'plötzlich', emoji: '💥', spanish: '(de repente)', example_de: 'Plötzlich fing es an zu regnen.', example_es: 'De repente empezó a llover.' },
+                    { word: 'früher', emoji: '🕰️', spanish: '(antes)', example_de: 'Früher war alles billiger.', example_es: 'Antes todo era más barato.' },
+                    { word: 'damals', emoji: '📜', spanish: '(en aquel entonces)', example_de: 'Damals wohnte ich noch in Berlin.', example_es: 'En aquel entonces vivía todavía en Berlín.' },
+                    { word: 'dann', emoji: '👉', spanish: '(luego/entonces)', example_de: 'Erst essen wir, dann gehen wir.', example_es: 'Primero comemos, luego nos vamos.' },
+                    { word: 'inzwischen', emoji: '⏳', spanish: '(mientras tanto)', example_de: 'Ich koche, inzwischen kannst du den Tisch decken.', example_es: 'Yo cocino, mientras tanto tú puedes poner la mesa.' },
+                    { word: 'heutzutage', emoji: '📱', spanish: '(hoy en día)', example_de: 'Heutzutage hat jeder ein Handy.', example_es: 'Hoy en día todo el mundo tiene un móvil.' },
+                    { word: 'jeweils', emoji: '🔢', spanish: '(respectivamente / cada uno)', example_de: 'Die Kurse kosten jeweils 50 Euro.', example_es: 'Los cursos cuestan 50 euros cada uno.' }
+                ]
+            },
+            {
+                title: '🔄 Frequenz (A1 - A2)',
+                description: 'Adverbios de frecuencia',
+                level: 'A1-A2',
+                colorMain: '#8b5cf6',
+                colorPastel: '#ede9fe',
+                badge: 'FREQUENZ',
+                adverbs: [
+                    { word: 'immer', emoji: '♾️', spanish: '(siempre)', example_de: 'Ich trinke immer Kaffee zum Frühstück.', example_es: 'Siempre bebo café para el desayuno.' },
+                    { word: 'nie', emoji: '🚫', spanish: '(nunca)', example_de: 'Er kommt nie pünktlich.', example_es: 'Él nunca llega puntual.' },
+                    { word: 'oft', emoji: '🔁', spanish: '(a menudo)', example_de: 'Ich besuche oft meine Eltern.', example_es: 'Visito a menudo a mis padres.' },
+                    { word: 'manchmal', emoji: '🎲', spanish: '(a veces)', example_de: 'Manchmal gehe ich ins Kino.', example_es: 'A veces voy al cine.' },
+                    { word: 'selten', emoji: '🌘', spanish: '(rara vez)', example_de: 'Wir essen selten Fleisch.', example_es: 'Rara vez comemos carne.' },
+                    { word: 'meistens', emoji: '📊', spanish: '(la mayoría de las veces)', example_de: 'Meistens stehe ich um 7 Uhr auf.', example_es: 'La mayoría de las veces me levanto a las 7.' },
+                    { word: 'täglich', emoji: '📆', spanish: '(a diario)', example_de: 'Ich fahre täglich mit dem Bus.', example_es: 'Viajo a diario en autobús.' },
+                    { word: 'wöchentlich', emoji: '🗓️', spanish: '(semanalmente)', example_de: 'Das Team trifft sich wöchentlich.', example_es: 'El equipo se reúne semanalmente.' },
+                    { word: 'monatlich', emoji: '🌒', spanish: '(mensualmente)', example_de: 'Ich bezahle die Miete monatlich.', example_es: 'Pago el alquiler mensualmente.' },
+                    { word: 'jährlich', emoji: '🎂', spanish: '(anualmente)', example_de: 'Das Festival findet jährlich statt.', example_es: 'El festival tiene lugar anualmente.' },
+                    { word: 'gewöhnlich', emoji: '☕', spanish: '(habitualmente)', example_de: 'Gewöhnlich trinke ich Tee.', example_es: 'Habitualmente bebo té.' },
+                    { word: 'jemals', emoji: '❓', spanish: '(alguna vez)', example_de: 'Warst du jemals in Paris?', example_es: '¿Has estado alguna vez en París?' }
+                ]
+            },
+            {
+                title: '📍 Lokal (A1)',
+                description: 'Adverbios de lugar',
+                level: 'A1',
+                colorMain: '#ec4899',
+                colorPastel: '#fce7f3',
+                badge: 'LOKAL',
+                adverbs: [
+                    { word: 'hier', emoji: '👇', spanish: '(aquí)', example_de: 'Ich bin hier.', example_es: 'Estoy aquí.' },
+                    { word: 'dort', emoji: '👉', spanish: '(allí)', example_de: 'Das Auto steht dort.', example_es: 'El coche está allí.' },
+                    { word: 'links', emoji: '⬅️', spanish: '(a la izquierda)', example_de: 'Biegen Sie bitte links ab.', example_es: 'Gire a la izquierda, por favor.' },
+                    { word: 'rechts', emoji: '➡️', spanish: '(a la derecha)', example_de: 'Die Post ist rechts.', example_es: 'El correo está a la derecha.' },
+                    { word: 'überall', emoji: '🌎', spanish: '(en todas partes)', example_de: 'Ich habe überall gesucht.', example_es: 'He buscado en todas partes.' },
+                    { word: 'nirgends', emoji: '❌', spanish: '(en ninguna parte)', example_de: 'Ich finde meinen Schlüssel nirgends.', example_es: 'No encuentro mi llave en ninguna parte.' }
+                ]
+            },
+            {
+                title: '🎯 Modal (A1 - A2)',
+                description: 'Adverbios de modo',
+                level: 'A1-A2',
+                colorMain: '#14b8a6',
+                colorPastel: '#ccfbf1',
+                badge: 'MODAL',
+                adverbs: [
+                    { word: 'gut', emoji: '👍', spanish: '(bien)', example_de: 'Das hast du gut gemacht.', example_es: 'Eso lo has hecho bien.' },
+                    { word: 'schnell', emoji: '🏃', spanish: '(rápido)', example_de: 'Bitte fahr nicht so schnell.', example_es: 'Por favor, no conduzcas tan rápido.' },
+                    { word: 'langsam', emoji: '🐢', spanish: '(despacio)', example_de: 'Können Sie bitte langsamer sprechen?', example_es: '¿Puede hablar más despacio, por favor?' },
+                    { word: 'gerne', emoji: '😊', spanish: '(con gusto)', example_de: 'Ich helfe dir gerne.', example_es: 'Te ayudo con gusto.' },
+                    { word: 'einfach', emoji: '👌', spanish: '(simplemente/fácil)', example_de: 'Das ist ganz einfach.', example_es: 'Eso es muy fácil/simple.' },
+                    { word: 'genau', emoji: '🎯', spanish: '(exactamente)', example_de: 'Das ist genau das Problem.', example_es: 'Ese es exactamente el problema.' },
+                    { word: 'deutlich', emoji: '🗣️', spanish: '(claramente)', example_de: 'Man kann es deutlich sehen.', example_es: 'Se puede ver claramente.' },
+                    { word: 'regelmäßig', emoji: '🔄', spanish: '(regularmente)', example_de: 'Du musst regelmäßig üben.', example_es: 'Tienes que practicar regularmente.' },
+                    { word: 'zusammen', emoji: '🤝', spanish: '(juntos)', example_de: 'Wir kochen oft zusammen.', example_es: 'A menudo cocinamos juntos.' }
+                ]
+            },
+            {
+                title: '📊 Grad (A1 - A2)',
+                description: 'Adverbios de grado',
+                level: 'A1-A2',
+                colorMain: '#f59e0b',
+                colorPastel: '#fef3c7',
+                badge: 'GRAD',
+                adverbs: [
+                    { word: 'sehr', emoji: '❗', spanish: '(muy)', example_de: 'Das ist sehr interessant.', example_es: 'Eso es muy interesante.' },
+                    { word: 'ganz', emoji: '💯', spanish: '(bastante/completamente)', example_de: 'Ich bin ganz sicher.', example_es: 'Estoy completamente seguro.' },
+                    { word: 'ziemlich', emoji: '⚖️', spanish: '(bastante)', example_de: 'Es ist heute ziemlich kalt.', example_es: 'Hoy hace bastante frío.' },
+                    { word: 'fast', emoji: '🤏', spanish: '(casi)', example_de: 'Wir sind fast da.', example_es: 'Casi estamos ahí (llegando).' },
+                    { word: 'kaum', emoji: '🌑', spanish: '(apenas)', example_de: 'Ich habe kaum geschlafen.', example_es: 'Apenas he dormido.' },
+                    { word: 'etwa', emoji: '📉', spanish: '(aproximadamente)', example_de: 'Das kostet etwa 10 Euro.', example_es: 'Eso cuesta aproximadamente 10 euros.' },
+                    { word: 'besonders', emoji: '🌟', spanish: '(especialmente)', example_de: 'Dieser Kuchen schmeckt besonders gut.', example_es: 'Este pastel sabe especialmente bien.' },
+                    { word: 'überhaupt', emoji: '🚫', spanish: '(en absoluto)', example_de: 'Das schmeckt mir überhaupt nicht.', example_es: 'Eso no me gusta en absoluto.' },
+                    { word: 'unglaublich', emoji: '😲', spanish: '(increíblemente)', example_de: 'Der Film war unglaublich spannend.', example_es: 'La película fue increíblemente emocionante.' },
+                    { word: 'schrecklich', emoji: '😱', spanish: '(terriblemente)', example_de: 'Ich vermisse dich schrecklich.', example_es: 'Te extraño terriblemente.' }
+                ]
+            },
+            {
+                title: '🤔 Modal-Affirmativ (A2)',
+                description: 'Adverbios de afirmación y opinión',
+                level: 'A2',
+                colorMain: '#10b981',
+                colorPastel: '#d1fae5',
+                badge: 'AFFIRMATIV',
+                adverbs: [
+                    { word: 'natürlich', emoji: '🌿', spanish: '(por supuesto)', example_de: 'Natürlich komme ich mit.', example_es: 'Por supuesto que voy contigo.' },
+                    { word: 'wirklich', emoji: '🤔', spanish: '(realmente)', example_de: 'Bist du wirklich sicher?', example_es: '¿Estás realmente seguro?' },
+                    { word: 'tatsächlich', emoji: '🗞️', spanish: '(de hecho)', example_de: 'Er hat tatsächlich gewonnen.', example_es: 'De hecho, él ha ganado.' },
+                    { word: 'ehrlich', emoji: '🤞', spanish: '(honestamente)', example_de: 'Ehrlich gesagt, ich weiß es nicht.', example_es: 'Honestamente, no lo sé.' },
+                    { word: 'eigentlich', emoji: '🤷', spanish: '(en realidad)', example_de: 'Eigentlich habe ich keine Zeit.', example_es: 'En realidad no tengo tiempo.' },
+                    { word: 'jedenfalls', emoji: '🛑', spanish: '(en cualquier caso)', example_de: 'Ich rufe dich jedenfalls an.', example_es: 'Te llamo en cualquier caso.' },
+                    { word: 'zumindest', emoji: '📉', spanish: '(al menos)', example_de: 'Du solltest zumindest fragen.', example_es: 'Deberías al menos preguntar.' },
+                    { word: 'endlich', emoji: '🏁', spanish: '(por fin)', example_de: 'Endlich ist Wochenende!', example_es: '¡Por fin es fin de semana!' },
+                    { word: 'herzlich', emoji: '❤️', spanish: '(cordialmente)', example_de: 'Herzlich willkommen!', example_es: '¡Cordialmente bienvenido! (¡Bienvenido!)' }
+                ]
+            },
+            {
+                title: '🎲 Wahrscheinlichkeit (A2 - B1)',
+                description: 'Adverbios de probabilidad',
+                level: 'A2-B1',
+                colorMain: '#ef4444',
+                colorPastel: '#fee2e2',
+                badge: 'WAHRSCHEIN.',
+                adverbs: [
+                    { word: 'vielleicht', emoji: '🤷‍♂️', spanish: '(tal vez)', example_de: 'Vielleicht regnet es später.', example_es: 'Tal vez llueva más tarde.' },
+                    { word: 'wahrscheinlich', emoji: '🌦️', spanish: '(probablemente)', example_de: 'Wahrscheinlich kommt er nicht.', example_es: 'Probablemente él no venga.' },
+                    { word: 'hoffentlich', emoji: '🙏', spanish: '(ojalá)', example_de: 'Hoffentlich geht es dir gut.', example_es: 'Ojalá estés bien.' },
+                    { word: 'leider', emoji: '😞', spanish: '(desgraciadamente)', example_de: 'Leider kann ich nicht kommen.', example_es: 'Desgraciadamente no puedo ir.' },
+                    { word: 'glücklicherweise', emoji: '🍀', spanish: '(afortunadamente)', example_de: 'Glücklicherweise ist nichts passiert.', example_es: 'Afortunadamente no ha pasado nada.' },
+                    { word: 'willkürlich', emoji: '🎲', spanish: '(arbitrariamente)', example_de: 'Die Auswahl war völlig willkürlich.', example_es: 'La selección fue totalmente arbitraria.' }
+                ]
+            },
+            {
+                title: '🔗 Konjunktional (A1 - B1)',
+                description: 'Conectores y adverbios conjuntivos',
+                level: 'A1-B1',
+                colorMain: '#6366f1',
+                colorPastel: '#e0e7ff',
+                badge: 'KONJUNKT.',
+                adverbs: [
+                    { word: 'aber', emoji: '⚖️', spanish: '(pero)', example_de: 'Ich bin müde, aber glücklich.', example_es: 'Estoy cansado, pero feliz.' },
+                    { word: 'auch', emoji: '➕', spanish: '(también)', example_de: 'Ich möchte auch ein Eis.', example_es: 'Yo también quiero un helado.' },
+                    { word: 'oder', emoji: '🤷', spanish: '(o)', example_de: 'Kaffee oder Tee?', example_es: '¿Café o té?' },
+                    { word: 'nur', emoji: '☝️', spanish: '(solo)', example_de: 'Ich habe nur 5 Euro.', example_es: 'Solo tengo 5 euros.' },
+                    { word: 'deshalb', emoji: '👉', spanish: '(por eso)', example_de: 'Ich war krank, deshalb war ich zu Hause.', example_es: 'Estaba enfermo, por eso estaba en casa.' },
+                    { word: 'deswegen', emoji: '👉', spanish: '(por ese motivo)', example_de: 'Es regnet, deswegen bleiben wir hier.', example_es: 'Llueve, por ese motivo nos quedamos aquí.' },
+                    { word: 'darum', emoji: '👉', spanish: '(por eso - razón)', example_de: 'Ich liebe dich, darum heirate ich dich.', example_es: 'Te amo, por eso me caso contigo.' },
+                    { word: 'trotzdem', emoji: '☔', spanish: '(a pesar de ello)', example_de: 'Es ist kalt, trotzdem gehe ich raus.', example_es: 'Hace frío, a pesar de ello salgo.' },
+                    { word: 'jedoch', emoji: '✋', spanish: '(sin embargo)', example_de: 'Er wollte kommen, jedoch hatte er keine Zeit.', example_es: 'Él quería venir, sin embargo no tenía tiempo.' },
+                    { word: 'allerdings', emoji: '🧐', spanish: '(sin embargo/ciertamente)', example_de: 'Das ist allerdings wahr.', example_es: 'Eso es ciertamente verdad.' },
+                    { word: 'außerdem', emoji: '➕', spanish: '(además)', example_de: 'Das Hemd ist zu klein und außerdem zu teuer.', example_es: 'La camisa es demasiado pequeña y además demasiado cara.' },
+                    { word: 'andererseits', emoji: '✋', spanish: '(por otro lado)', example_de: 'Er ist streng, aber andererseits sehr fair.', example_es: 'Es estricto, pero por otro lado muy justo.' },
+                    { word: 'einerseits', emoji: '✋', spanish: '(por un lado)', example_de: 'Einerseits ja, andererseits nein.', example_es: 'Por un lado sí, por otro lado no.' },
+                    { word: 'ansonsten', emoji: '⚠️', spanish: '(de lo contrario)', example_de: 'Beeil dich, ansonsten verpassen wir den Zug.', example_es: 'Date prisa, de lo contrario perderemos el tren.' },
+                    { word: 'beziehungsweise', emoji: '↔️', spanish: '(o sea / mejor dicho)', example_de: 'Ich nehme den Bus bzw. die Bahn.', example_es: 'Tomaré el autobús o mejor dicho el tren.' },
+                    { word: 'entweder', emoji: '⚖️', spanish: '(o ... o)', example_de: 'Entweder wir gehen ins Kino oder ins Theater.', example_es: 'O vamos al cine o al teatro.' },
+                    { word: 'weder', emoji: '🚫', spanish: '(ni ... ni)', example_de: 'Ich mag weder Fisch noch Fleisch.', example_es: 'No me gusta ni el pescado ni la carne.' },
+                    { word: 'zwar', emoji: '⚖️', spanish: '(es verdad que ... pero)', example_de: 'Das ist zwar teuer, aber gut.', example_es: 'Es verdad que es caro, pero es bueno.' },
+                    { word: 'in Wirklichkeit', emoji: '🕶️', spanish: '(en realidad)', example_de: 'Er wirkt böse, aber in Wirklichkeit ist er nett.', example_es: 'Parece malo, pero en realidad es amable.' }
+                ]
+            }
         ];
-        let storyClickCounter = 0;
 
-        // --- Variables globales para el modal ---
-        let currentWord = '';
-        let currentExampleIndex = 0;
-        let currentEmoji = '';
-        const germanOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes"];
+        // State
+        let currentGroupIndex = 0;
+        let isSearchMode = false;
+        let searchResults = [];
 
+        // DOM elements
+        const cardsContainer = document.getElementById('cards-container');
+        const groupIndicator = document.getElementById('group-indicator');
+        const prevGroupBtn = document.getElementById('prev-group-btn');
+        const nextGroupBtn = document.getElementById('next-group-btn');
+        const recallSwitch = document.getElementById('recall-switch');
+        const searchInput = document.getElementById('search-input');
+        const clearSearchBtn = document.getElementById('clear-search');
+        const searchResultsInfo = document.getElementById('search-results-info');
 
-        // --- Gemini API Call Logic ---
-        const API_KEY = ""; // No es necesaria una clave para el modelo flash
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${API_KEY}`;
-        
-        // --- Funciones del Modal ---
-        const modal = document.getElementById('example-modal');
-        const modalWord = document.getElementById('modal-word');
-        const modalEmoji = document.getElementById('modal-emoji');
-        const modalFullSpanish = document.getElementById('modal-full-spanish');
-        const modalText = document.getElementById('modal-text');
-        const modalPronunciation = document.getElementById('modal-pronunciation');
-        const modalSpanishTranslation = document.getElementById('modal-spanish-translation');
-        const modalInfo = document.getElementById('modal-info');
-        const exampleCounter = document.getElementById('example-counter');
-        const closeModalButton = document.getElementById('close-modal');
-        const prevButton = document.getElementById('prev-example-button');
-        const nextButton = document.getElementById('next-example-button');
-        const playWordAudioButton = document.getElementById('play-word-audio-button');
-        const playSentenceAudioButton = document.getElementById('play-sentence-audio-button');
+        // Render current group
+        function renderGroup() {
+            const group = adverbGroups[currentGroupIndex];
 
-        function openExampleModal(word, emoji) {
-            currentWord = word;
-            currentEmoji = emoji;
-            currentExampleIndex = 0;
-            updateModalContent();
-            modal.classList.add('visible');
+            // Update group indicator
+            groupIndicator.textContent = group.title;
+
+            // Clear container
+            cardsContainer.innerHTML = '';
+
+            // Add cards
+            group.adverbs.forEach(adv => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.setProperty('--card-main', group.colorMain);
+                card.style.setProperty('--card-pastel', group.colorPastel);
+
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="german-word">${adv.word}</span>
+                        <span class="spanish-meaning">${adv.spanish}</span>
+                        <div class="icon-floating">${adv.emoji}</div>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-category-badge">${group.badge}</span>
+                        <div class="card-exam-example">
+                            <span class="example-text de">${adv.example_de}</span>
+                            <span class="example-text es">${adv.example_es}</span>
+                        </div>
+                    </div>
+                `;
+
+                cardsContainer.appendChild(card);
+            });
+
+            // Update navigation buttons
+            prevGroupBtn.disabled = currentGroupIndex === 0;
+            nextGroupBtn.disabled = currentGroupIndex === adverbGroups.length - 1;
+
+            // Apply active recall state
+            setInitialTranslationState();
         }
 
-        function updateModalContent() {
-            const exampleData = savedExamples[currentWord][currentExampleIndex];
-            modalWord.textContent = currentWord;
-            modalEmoji.textContent = currentEmoji;
-            modalFullSpanish.innerHTML = `🇪🇸 ${exampleData.fullSpanish}<br>🇬🇧 ${exampleData.fullEnglish}<br><span class="modal-type-info">Tipo: ${exampleData.type}</span>`;
-
-            // Display adverb tag
-            const tagContainer = document.getElementById('modal-adverb-tag-container');
-            const tagInfo = adverbTags[currentWord];
-            if (tagInfo) {
-                tagContainer.innerHTML = `<span class="adverb-tag tag-${tagInfo.category}">${tagInfo.label}</span>`;
-            } else {
-                tagContainer.innerHTML = '';
-            }
-
-            modalText.textContent = exampleData.sentence;
-            modalPronunciation.textContent = exampleData.pronunciation;
-            modalSpanishTranslation.innerHTML = `🇪🇸 ${exampleData.spanish}`;
-            modalInfo.innerHTML = `🇬🇧 ${exampleData.english}`;
-            exampleCounter.textContent = `${germanOrdinals[currentExampleIndex]} Beispiel von ${savedExamples[currentWord].length}`;
-        }
-
-        function nextExample() {
-            currentExampleIndex = (currentExampleIndex + 1) % savedExamples[currentWord].length;
-            updateModalContent();
-        }
-
-        function prevExample() {
-            currentExampleIndex = (currentExampleIndex - 1 + savedExamples[currentWord].length) % savedExamples[currentWord].length;
-            updateModalContent();
-        }
-        
-        function playAudio(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'de-DE';
-                utterance.rate = 0.6; // 40% más lento que la velocidad normal (1.0)
-                window.speechSynthesis.speak(utterance);
-            } else {
-                alert('Lo siento, tu navegador no soporta la síntesis de voz.');
-            }
-        }
-
-        prevButton.addEventListener('click', prevExample);
-        nextButton.addEventListener('click', nextExample);
-        playWordAudioButton.addEventListener('click', () => playAudio(currentWord));
-        playSentenceAudioButton.addEventListener('click', () => playAudio(modalText.textContent));
-
-        function hideModal() {
-            modal.classList.remove('visible');
-        }
-
-        closeModalButton.addEventListener('click', hideModal);
-        modal.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                hideModal();
+        // Navigation
+        prevGroupBtn.addEventListener('click', () => {
+            if (currentGroupIndex > 0) {
+                currentGroupIndex--;
+                renderGroup();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
 
-        // --- Active Recall Feature ---
-        const recallSwitch = document.getElementById('recall-switch');
-        const translations = document.querySelectorAll('.english-translation, .spanish-translation');
+        nextGroupBtn.addEventListener('click', () => {
+            if (currentGroupIndex < adverbGroups.length - 1) {
+                currentGroupIndex++;
+                renderGroup();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
 
+        // Active Recall Toggle
         recallSwitch.addEventListener('change', function() {
+            const translations = document.querySelectorAll('.spanish-meaning, .example-text.es');
             if (this.checked) {
                 translations.forEach(span => {
                     span.style.opacity = '1';
@@ -1849,8 +659,8 @@
             }
         });
 
-        // Initialize switch state
         function setInitialTranslationState() {
+            const translations = document.querySelectorAll('.spanish-meaning, .example-text.es');
             if (recallSwitch.checked) {
                 translations.forEach(span => {
                     span.style.visibility = 'visible';
@@ -1863,95 +673,126 @@
                 });
             }
         }
-        setInitialTranslationState();
 
-
-        // --- Lógica para reintentos de API (Exponential Backoff) ---
-        async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
-            for (let i = 0; i < retries; i++) {
-                try {
-                    const response = await fetch(url, options);
-                    if (response.ok) return response;
-                } catch (error) {
-                    // Ignorar errores de red para reintentar
-                }
-                await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
-            }
-            throw new Error("API request failed after multiple retries.");
-        }
-        
-        // --- Función para generar una historia ---
-        async function generateStory() {
-            const storyContainer = document.getElementById('story-container');
-            const storyContent = document.getElementById('story-content');
-            const storyButton = document.getElementById('story-button');
-            
-            storyContainer.style.display = 'block';
-            storyButton.disabled = true;
-
-            if (storyClickCounter < 3) {
-                storyContent.innerHTML = `<p>${savedStories[storyClickCounter]}</p>`;
-                storyClickCounter++;
-                storyButton.disabled = false;
+        // Search functionality
+        function performSearch(query) {
+            if (!query || query.trim() === '') {
+                exitSearchMode();
                 return;
             }
 
-            storyContent.innerHTML = '<div class="loader">✨ Creando una nueva historia con IA...</div>';
+            isSearchMode = true;
+            const searchTerm = query.toLowerCase().trim();
+            searchResults = [];
 
-            const words = Array.from(document.querySelectorAll('.german-word')).map(el => el.textContent);
-            const wordList = words.join(', ');
+            // Search across all groups
+            adverbGroups.forEach(group => {
+                group.adverbs.forEach(adv => {
+                    // Search in German word, Spanish translation, and examples
+                    const searchableText = [
+                        adv.word,
+                        adv.spanish,
+                        adv.example_de,
+                        adv.example_es
+                    ].join(' ').toLowerCase();
 
-            const prompt = `Escribe una historia muy corta y simple en alemán de nivel A1. Usa tantas de las siguientes palabras como sea posible: ${wordList}. La historia debe ser fácil de entender para un principiante. No incluyas la traducción. No uses asteriscos u otro formato de markdown para resaltar las palabras.`;
-
-            const payload = {
-                contents: [{
-                    parts: [{ text: prompt }]
-                }]
-            };
-
-            try {
-                const response = await fetchWithRetry(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    if (searchableText.includes(searchTerm)) {
+                        searchResults.push({
+                            ...adv,
+                            groupTitle: group.title,
+                            groupColorMain: group.colorMain,
+                            groupColorPastel: group.colorPastel,
+                            groupBadge: group.badge
+                        });
+                    }
                 });
-                const result = await response.json();
-                let generatedText = result.candidates[0].content.parts[0].text;
-                
-                generatedText = generatedText.replace(/\*/g, '');
+            });
 
-                words.forEach(word => {
-                    const regex = new RegExp(`\b(${word})\\b`, 'gi');
-                    generatedText = generatedText.replace(regex, '<span class="highlighted-word">$1</span>');
-                });
-
-                storyContent.innerHTML = `<p>${generatedText.replace(/\n/g, '<br>')}</p>`;
-            } catch (error) {
-                storyContent.textContent = "Lo siento, no se pudo generar una historia. Por favor, inténtalo de nuevo.";
-                console.error("Error fetching Gemini API:", error);
-            } finally {
-                storyButton.disabled = false;
-            }
+            renderSearchResults();
         }
 
-        // --- Info Modal Logic ---
-        const infoButton = document.getElementById('info-button');
-        const infoModal = document.getElementById('info-modal');
-        const closeInfoModalButton = document.getElementById('close-info-modal');
+        function renderSearchResults() {
+            // Update UI
+            groupIndicator.textContent = 'Suchergebnisse';
+            prevGroupBtn.style.display = 'none';
+            nextGroupBtn.style.display = 'none';
 
-        infoButton.addEventListener('click', () => {
-            infoModal.style.display = 'flex';
+            // Clear container
+            cardsContainer.innerHTML = '';
+
+            if (searchResults.length === 0) {
+                searchResultsInfo.textContent = 'Keine Ergebnisse gefunden.';
+                return;
+            }
+
+            searchResultsInfo.textContent = `${searchResults.length} Ergebnis${searchResults.length > 1 ? 'se' : ''} gefunden`;
+
+            // Render search results
+            searchResults.forEach(adv => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.style.setProperty('--card-main', adv.groupColorMain);
+                card.style.setProperty('--card-pastel', adv.groupColorPastel);
+
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="german-word">${adv.word}</span>
+                        <span class="spanish-meaning">${adv.spanish}</span>
+                        <div class="icon-floating">${adv.emoji}</div>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-category-badge">${adv.groupBadge}</span>
+                        <div class="card-exam-example">
+                            <span class="example-text de">${adv.example_de}</span>
+                            <span class="example-text es">${adv.example_es}</span>
+                        </div>
+                    </div>
+                `;
+
+                cardsContainer.appendChild(card);
+            });
+
+            // Apply active recall state
+            setInitialTranslationState();
+        }
+
+        function exitSearchMode() {
+            isSearchMode = false;
+            searchResults = [];
+            searchInput.value = '';
+            searchResultsInfo.textContent = '';
+            clearSearchBtn.classList.remove('visible');
+            prevGroupBtn.style.display = '';
+            nextGroupBtn.style.display = '';
+            renderGroup();
+        }
+
+        // Search input event listeners
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value;
+
+            if (query.trim() !== '') {
+                clearSearchBtn.classList.add('visible');
+            } else {
+                clearSearchBtn.classList.remove('visible');
+            }
+
+            performSearch(query);
         });
 
-        closeInfoModalButton.addEventListener('click', () => {
-            infoModal.style.display = 'none';
+        clearSearchBtn.addEventListener('click', () => {
+            exitSearchMode();
         });
 
-        infoModal.addEventListener('click', (event) => {
-            if (event.target === infoModal) {
-                infoModal.style.display = 'none';
+        // Allow ESC key to exit search
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                exitSearchMode();
             }
         });
+
+        // Initialize
+        renderGroup();
     </script>
 </body>
 </html>
