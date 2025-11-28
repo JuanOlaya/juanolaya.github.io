@@ -365,16 +365,6 @@
         <p class="instruction">A1-B1 • Grammatische Kategorien</p>
     </header>
 
-    <div class="toggle-container">
-        <div class="active-recall-toggle">
-            <label class="switch-label" for="recall-switch">Übersetzung<span class="label-translation">(traducción)</span></label>
-            <label class="switch">
-                <input type="checkbox" id="recall-switch" checked>
-                <span class="slider"></span>
-            </label>
-        </div>
-    </div>
-
     <!-- Search Bar -->
     <div class="search-container">
         <div class="search-wrapper">
@@ -397,194 +387,204 @@
         <!-- Cards will be dynamically loaded here -->
     </div>
 
+    <div class="toggle-container">
+        <div class="active-recall-toggle">
+            <label class="switch-label" for="recall-switch">Übersetzung<span class="label-translation">(traducción)</span></label>
+            <label class="switch">
+                <input type="checkbox" id="recall-switch" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
     <script>
         // Group definitions with examples
         const adjectiveGroups = [
             {
-                title: '1. Deskriptive Adjektive (A1)',
-                description: 'Descriptive adjectives - basic qualities and characteristics',
+                title: '🌟 Gruppe 1: Allgemeine Grundlagen (A1)',
+                description: 'Fundamentos generales',
                 level: 'A1',
                 colorMain: '#3b82f6',
                 colorPastel: '#dbeafe',
-                badge: 'ADJEKTIV',
+                badge: 'GRUNDLAGEN',
                 adjectives: [
-                    { word: 'möglich', emoji: '✅', spanish: '(posible)', example_de: 'Das ist heute nicht möglich.', example_es: 'Hoy no es posible.' },
-                    { word: 'hässlich', emoji: '🤢', spanish: '(feo)', example_de: 'Ich finde diesen Pullover hässlich.', example_es: 'Encuentro feo este suéter.' },
-                    { word: 'sportlich', emoji: '⚽️', spanish: '(deportivo)', example_de: 'Mein Bruder ist sehr sportlich.', example_es: 'Mi hermano es muy deportista.' },
-                    { word: 'weiblich', emoji: '🚺', spanish: '(femenino)', example_de: 'Sie hat eine sehr weibliche Stimme.', example_es: 'Ella tiene una voz muy femenina.' },
-                    { word: 'männlich', emoji: '🚹', spanish: '(masculino)', example_de: 'Er hat ein sehr männliches Gesicht.', example_es: 'Él tiene una cara muy masculina.' },
-                    { word: 'nützlich', emoji: '🔧', spanish: '(útil)', example_de: 'Dein Rat war sehr nützlich.', example_es: 'Tu consejo fue muy útil.' },
-                    { word: 'gefährlich', emoji: '⚠️', spanish: '(peligroso)', example_de: 'Diese Kreuzung ist gefährlich.', example_es: 'Este cruce es peligroso.' },
-                    { word: 'freundlich', emoji: '😊', spanish: '(amigable)', example_de: 'Die Nachbarn sind sehr freundlich.', example_es: 'Los vecinos son muy amables.' },
-                    { word: 'pünktlich', emoji: '⏰', spanish: '(puntual)', example_de: 'Der Zug ist fast immer pünktlich.', example_es: 'El tren es casi siempre puntual.' },
-                    { word: 'gemütlich', emoji: '🛋️', spanish: '(acogedor)', example_de: 'Wir machen uns einen gemütlichen Abend.', example_es: 'Nos preparamos una noche acogedora.' },
-                    { word: 'fröhlich', emoji: '🥳', spanish: '(alegre)', example_de: 'Die Musik klingt sehr fröhlich.', example_es: 'La música suena muy alegre.' },
-                    { word: 'persönlich', emoji: '👤', spanish: '(personal)', example_de: 'Das ist meine persönliche Meinung.', example_es: 'Esa es mi opinión personal.' },
-                    { word: 'glücklich', emoji: '😄', spanish: '(feliz)', example_de: 'Sie sind ein glückliches Paar.', example_es: 'Son una pareja feliz.' },
-                    { word: 'hilfreich', emoji: '🆘', spanish: '(útil)', example_de: 'Das Wörterbuch ist sehr hilfreich.', example_es: 'El diccionario es de gran ayuda.' },
-                    { word: 'toll', emoji: '🎉', spanish: '(genial)', example_de: 'Das war eine tolle Idee.', example_es: 'Esa fue una idea genial.' },
-                    { word: 'aufrichtig', emoji: '🙏', spanish: '(sincero)', example_de: 'Das ist mein aufrichtiger Wunsch.', example_es: 'Ese es mi deseo sincero.' },
-                    { word: 'egal', emoji: '🤷', spanish: '(da igual)', example_de: 'Das Ergebnis ist mir egal.', example_es: 'El resultado me da igual.' },
-                    { word: 'ähnlich', emoji: '👯', spanish: '(similar)', example_de: 'Deine Jacke sieht meiner ähnlich.', example_es: 'Tu chaqueta se parece a la mía.' }
-                ]
-            },
-            {
-                title: '2. Deskriptive Adjektive (A2)',
-                description: 'Extended descriptive adjectives',
-                level: 'A2',
-                colorMain: '#8b5cf6',
-                colorPastel: '#ede9fe',
-                badge: 'ADJEKTIV',
-                adjectives: [
-                    { word: 'öffentlich', emoji: '🏛️', spanish: '(público)', example_de: 'Rauchen ist an öffentlichen Orten verboten.', example_es: 'Fumar está prohibido en lugares públicos.' },
+                    { word: 'gut', emoji: '👍', spanish: '(bueno)', example_de: 'Das Essen schmeckt sehr gut.', example_es: 'La comida sabe muy bien.' },
+                    { word: 'wichtig', emoji: '❗', spanish: '(importante)', example_de: 'Das ist ein wichtiger Termin.', example_es: 'Esa es una cita importante.' },
                     { word: 'groß', emoji: '🐘', spanish: '(grande)', example_de: 'Berlin ist eine große Stadt.', example_es: 'Berlín es una ciudad grande.' },
                     { word: 'klein', emoji: '🐭', spanish: '(pequeño)', example_de: 'Die Wohnung ist zu klein für uns.', example_es: 'El apartamento es demasiado pequeño para nosotros.' },
-                    { word: 'alt', emoji: '👵👴', spanish: '(viejo)', example_de: 'Mein Fahrrad ist schon sehr alt.', example_es: 'Mi bicicleta ya es muy vieja.' },
-                    { word: 'neu', emoji: '👶✨', spanish: '(nuevo)', example_de: 'Ich brauche eine neue Brille.', example_es: 'Necesito gafas nuevas.' },
+                    { word: 'neu', emoji: '👶', spanish: '(nuevo)', example_de: 'Ich brauche eine neue Brille.', example_es: 'Necesito gafas nuevas.' },
+                    { word: 'alt', emoji: '👵', spanish: '(viejo)', example_de: 'Mein Fahrrad ist schon sehr alt.', example_es: 'Mi bicicleta ya es muy vieja.' },
                     { word: 'schön', emoji: '🥰', spanish: '(bonito)', example_de: 'Der Ausblick ist wunderschön.', example_es: 'La vista es preciosa.' },
-                    { word: 'gut', emoji: '👍', spanish: '(bueno)', example_de: 'Das Essen schmeckt sehr gut.', example_es: 'La comida sabe muy bien.' },
-                    { word: 'schlecht', emoji: '👎', spanish: '(malo)', example_de: 'Das Wetter ist heute schlecht.', example_es: 'El tiempo hoy es malo.' },
-                    { word: 'kalt', emoji: '🥶', spanish: '(frío)', example_de: 'Mir ist an den Händen kalt.', example_es: 'Tengo frío en las manos.' },
-                    { word: 'warm', emoji: '☀️', spanish: '(caliente)', example_de: 'Es ist heute angenehm warm.', example_es: 'Hoy hace un calor agradable.' },
-                    { word: 'teuer', emoji: '💸', spanish: '(caro)', example_de: 'Die Mieten hier sind sehr teuer.', example_es: 'Los alquileres aquí son muy caros.' },
-                    { word: 'billig', emoji: '💰', spanish: '(barato)', example_de: 'Diese Schuhe waren sehr billig.', example_es: 'Estos zapatos fueron muy baratos.' },
-                    { word: 'schnell', emoji: '💨', spanish: '(rápido)', example_de: 'Du fährst zu schnell.', example_es: 'Conduces demasiado rápido.' },
-                    { word: 'langsam', emoji: '🐌', spanish: '(lento)', example_de: 'Bitte sprich etwas langsamer.', example_es: 'Por favor, habla un poco más despacio.' },
-                    { word: 'müde', emoji: '😴', spanish: '(cansado)', example_de: 'Ich bin müde von der Arbeit.', example_es: 'Estoy cansado del trabajo.' },
-                    { word: 'traurig', emoji: '😥', spanish: '(triste)', example_de: 'Warum bist du so traurig?', example_es: '¿Por qué estás tan triste?' },
                     { word: 'einfach', emoji: '👌', spanish: '(fácil)', example_de: 'Die Prüfung war sehr einfach.', example_es: 'El examen fue muy fácil.' },
                     { word: 'schwer', emoji: '🏋️', spanish: '(difícil)', example_de: 'Dieser Koffer ist extrem schwer.', example_es: 'Esta maleta es extremadamente pesada.' },
-                    { word: 'sauber', emoji: '✨', spanish: '(limpio)', example_de: 'Das Badezimmer muss sauber sein.', example_es: 'El baño tiene que estar limpio.' },
-                    { word: 'schmutzig', emoji: '💩', spanish: '(sucio)', example_de: 'Deine Hände sind schmutzig.', example_es: 'Tus manos están sucias.' }
+                    { word: 'möglich', emoji: '✅', spanish: '(posible)', example_de: 'Das ist heute nicht möglich.', example_es: 'Hoy no es posible.' },
+                    { word: 'schnell', emoji: '💨', spanish: '(rápido)', example_de: 'Du fährst zu schnell.', example_es: 'Conduces demasiado rápido.' },
+                    { word: 'langsam', emoji: '🐌', spanish: '(lento)', example_de: 'Bitte sprich etwas langsamer.', example_es: 'Por favor, habla un poco más despacio.' },
+                    { word: 'kalt', emoji: '🥶', spanish: '(frío)', example_de: 'Mir ist an den Händen kalt.', example_es: 'Tengo frío en las manos.' },
+                    { word: 'warm', emoji: '☀️', spanish: '(cálido)', example_de: 'Es ist heute angenehm warm.', example_es: 'Hoy hace un calor agradable.' },
+                    { word: 'teuer', emoji: '💸', spanish: '(caro)', example_de: 'Die Mieten hier sind sehr teuer.', example_es: 'Los alquileres aquí son muy caros.' },
+                    { word: 'billig', emoji: '💰', spanish: '(barato)', example_de: 'Diese Schuhe waren sehr billig.', example_es: 'Estos zapatos fueron muy baratos.' },
+                    { word: 'schlecht', emoji: '👎', spanish: '(malo)', example_de: 'Das Wetter ist heute schlecht.', example_es: 'El tiempo hoy es malo.' },
+                    { word: 'stark', emoji: '💪', spanish: '(fuerte)', example_de: 'Ich trinke meinen Kaffee gern stark.', example_es: 'Me gusta tomar mi café fuerte.' },
+                    { word: 'schwach', emoji: '🤕', spanish: '(débil)', example_de: 'Das Signal ist hier sehr schwach.', example_es: 'La señal aquí es muy débil.' }
                 ]
             },
             {
-                title: '3. Deskriptive Adjektive (A2) - Fortsetzung',
-                description: 'Personality, states, and characteristics',
-                level: 'A2',
-                colorMain: '#ec4899',
-                colorPastel: '#fce7f3',
-                badge: 'ADJEKTIV',
+                title: '🏠 Gruppe 2: Physische Zustände & Umgebung',
+                description: 'Estados físicos y entorno (Nivel A1 - A2)',
+                level: 'A1-A2',
+                colorMain: '#8b5cf6',
+                colorPastel: '#ede9fe',
+                badge: 'ZUSTÄNDE',
                 adjectives: [
+                    { word: 'sicher', emoji: '🔒', spanish: '(seguro)', example_de: 'Ist diese Gegend sicher?', example_es: '¿Es segura esta zona?' },
+                    { word: 'geöffnet', emoji: '🏪', spanish: '(abierto)', example_de: 'Das Museum ist täglich geöffnet.', example_es: 'El museo está abierto a diario.' },
+                    { word: 'geschlossen', emoji: '🔒', spanish: '(cerrado)', example_de: 'Wegen Krankheit geschlossen.', example_es: 'Cerrado por enfermedad.' },
                     { word: 'ruhig', emoji: '🤫', spanish: '(tranquilo)', example_de: 'Am Sonntag ist es hier ruhig.', example_es: 'El domingo aquí está tranquilo.' },
                     { word: 'laut', emoji: '📢', spanish: '(ruidoso)', example_de: 'Die Musik ist viel zu laut.', example_es: 'La música está demasiado alta.' },
-                    { word: 'nett', emoji: '😊', spanish: '(amable)', example_de: 'Das war sehr nett von dir.', example_es: 'Eso fue muy amable de tu parte.' },
-                    { word: 'stark', emoji: '💪', spanish: '(fuerte)', example_de: 'Ich trinke meinen Kaffee gern stark.', example_es: 'Me gusta tomar mi café fuerte.' },
-                    { word: 'schwach', emoji: '🤕', spanish: '(débil)', example_de: 'Das Signal ist hier sehr schwach.', example_es: 'La señal aquí es muy débil.' },
-                    { word: 'arm', emoji: '🥺', spanish: '(pobre)', example_de: 'Er kommt aus einer armen Familie.', example_es: 'Él viene de una familia pobre.' },
-                    { word: 'reich', emoji: '🤑', spanish: '(rico)', example_de: 'Sie möchte einen reichen Mann heiraten.', example_es: 'Ella quiere casarse con un hombre rico.' },
-                    { word: 'interessant', emoji: '🤔', spanish: '(interesante)', example_de: 'Die Dokumentation war sehr interessant.', example_es: 'El documental fue muy interesante.' },
-                    { word: 'langweilig', emoji: '😴', spanish: '(aburrido)', example_de: 'Mir ist langweilig.', example_es: 'Estoy aburrido.' },
-                    { word: 'lecker', emoji: '😋', spanish: '(delicioso)', example_de: 'Das Eis ist sehr lecker.', example_es: 'El helado está delicioso.' },
-                    { word: 'hungrig', emoji: '🤤', spanish: '(hambriento)', example_de: 'Die Kinder sind hungrig.', example_es: 'Los niños tienen hambre.' },
-                    { word: 'durstig', emoji: '🥤', spanish: '(sediento)', example_de: 'Nach dem Sport bin ich durstig.', example_es: 'Después del deporte tengo sed.' },
-                    { word: 'gesund', emoji: '🥗', spanish: '(sano)', example_de: 'Gemüse ist sehr gesund.', example_es: 'La verdura es muy saludable.' },
-                    { word: 'krank', emoji: '🤒', spanish: '(enfermo)', example_de: 'Ich kann nicht kommen, ich bin krank.', example_es: 'No puedo ir, estoy enfermo.' },
+                    { word: 'kaputt', emoji: '💔', spanish: '(roto)', example_de: 'Die Waschmaschine ist kaputt.', example_es: 'La lavadora está rota.' },
+                    { word: 'sauber', emoji: '✨', spanish: '(limpio)', example_de: 'Das Badezimmer muss sauber sein.', example_es: 'El baño tiene que estar limpio.' },
+                    { word: 'schmutzig', emoji: '💩', spanish: '(sucio)', example_de: 'Deine Hände sind schmutzig.', example_es: 'Tus manos están sucias.' },
+                    { word: 'besetzt', emoji: '🚫', spanish: '(ocupado)', example_de: 'Die Toilette ist besetzt.', example_es: 'El baño está ocupado.' },
+                    { word: 'hell', emoji: '💡', spanish: '(claro)', example_de: 'Im Sommer ist es lange hell.', example_es: 'En verano hay luz hasta tarde.' },
+                    { word: 'dunkel', emoji: '🌑', spanish: '(oscuro)', example_de: 'Im Winter wird es früh dunkel.', example_es: 'En invierno oscurece temprano.' },
+                    { word: 'hoch', emoji: '⛰️', spanish: '(alto)', example_de: 'Die Preise sind sehr hoch.', example_es: 'Los precios son muy altos.' },
+                    { word: 'niedrig', emoji: '⬇️', spanish: '(bajo)', example_de: 'Die Decke in diesem Raum ist niedrig.', example_es: 'El techo en esta habitación es bajo.' },
+                    { word: 'modern', emoji: '📱', spanish: '(moderno)', example_de: 'Das Hotel ist sehr modern.', example_es: 'El hotel es muy moderno.' },
                     { word: 'bequem', emoji: '🛋️', spanish: '(cómodo)', example_de: 'Diese Schuhe sind sehr bequem.', example_es: 'Estos zapatos son muy cómodos.' },
                     { word: 'unbequem', emoji: '😫', spanish: '(incómodo)', example_de: 'Der Stuhl ist hart und unbequem.', example_es: 'La silla es dura e incómoda.' },
-                    { word: 'altmodisch', emoji: '🕰️', spanish: '(anticuado)', example_de: 'Dieser Stil ist etwas altmodisch.', example_es: 'Este estilo es un poco anticuado.' },
-                    { word: 'modern', emoji: '📱', spanish: '(moderno)', example_de: 'Das Hotel ist sehr modern.', example_es: 'El hotel es muy moderno.' },
-                    { word: 'wichtig', emoji: '❗', spanish: '(importante)', example_de: 'Das ist ein wichtiger Termin.', example_es: 'Esa es una cita importante.' },
+                    { word: 'gefährlich', emoji: '⚠️', spanish: '(peligroso)', example_de: 'Diese Kreuzung ist gefährlich.', example_es: 'Este cruce es peligroso.' }
+                ]
+            },
+            {
+                title: '🧍 Gruppe 3: Körper, Gefühle & Menschen',
+                description: 'Cuerpo, sentimientos y personas (Nivel A1 - A2)',
+                level: 'A1-A2',
+                colorMain: '#ec4899',
+                colorPastel: '#fce7f3',
+                badge: 'GEFÜHLE',
+                adjectives: [
+                    { word: 'müde', emoji: '😴', spanish: '(cansado)', example_de: 'Ich bin müde von der Arbeit.', example_es: 'Estoy cansado del trabajo.' },
+                    { word: 'krank', emoji: '🤒', spanish: '(enfermo)', example_de: 'Ich kann nicht kommen, ich bin krank.', example_es: 'No puedo ir, estoy enfermo.' },
+                    { word: 'gesund', emoji: '🥗', spanish: '(sano)', example_de: 'Gemüse ist sehr gesund.', example_es: 'La verdura es muy saludable.' },
+                    { word: 'glücklich', emoji: '😄', spanish: '(feliz)', example_de: 'Sie sind ein glückliches Paar.', example_es: 'Son una pareja feliz.' },
+                    { word: 'nett', emoji: '😊', spanish: '(amable)', example_de: 'Das war sehr nett von dir.', example_es: 'Eso fue muy amable de tu parte.' },
+                    { word: 'freundlich', emoji: '😊', spanish: '(amigable)', example_de: 'Die Nachbarn sind sehr freundlich.', example_es: 'Los vecinos son muy amables.' },
+                    { word: 'zufrieden', emoji: '😊', spanish: '(satisfecho)', example_de: 'Ich bin mit meinem Leben zufrieden.', example_es: 'Estoy satisfecho con mi vida.' },
+                    { word: 'verheiratet', emoji: '💍', spanish: '(casado)', example_de: 'Sind Sie verheiratet oder ledig?', example_es: '¿Está usted casado o soltero?' },
+                    { word: 'hungrig', emoji: '🤤', spanish: '(hambriento)', example_de: 'Die Kinder sind hungrig.', example_es: 'Los niños tienen hambre.' },
+                    { word: 'durstig', emoji: '🥤', spanish: '(sediento)', example_de: 'Nach dem Sport bin ich durstig.', example_es: 'Después del deporte tengo sed.' },
+                    { word: 'traurig', emoji: '😥', spanish: '(triste)', example_de: 'Warum bist du so traurig?', example_es: '¿Por qué estás tan triste?' },
+                    { word: 'wach', emoji: '👀', spanish: '(despierto)', example_de: 'Ich bin schon seit sechs Uhr wach.', example_es: 'Estoy despierto desde las seis.' },
+                    { word: 'verliebt', emoji: '💕', spanish: '(enamorado)', example_de: 'Sie sind total verliebt.', example_es: 'Ellos están totalmente enamorados.' },
+                    { word: 'unfreundlich', emoji: '😠', spanish: '(antipático)', example_de: 'Der Service war leider unfreundlich.', example_es: 'El servicio fue, lamentablemente, antipático.' }
+                ]
+            },
+            {
+                title: '🗣️ Gruppe 4: Meinungen & Eigenschaften',
+                description: 'Opiniones y cualidades (Nivel A2)',
+                level: 'A2',
+                colorMain: '#14b8a6',
+                colorPastel: '#ccfbf1',
+                badge: 'MEINUNGEN',
+                adjectives: [
+                    { word: 'toll', emoji: '🎉', spanish: '(genial)', example_de: 'Das war eine tolle Idee.', example_es: 'Esa fue una idea genial.' },
+                    { word: 'egal', emoji: '🤷', spanish: '(da igual)', example_de: 'Das Ergebnis ist mir egal.', example_es: 'El resultado me da igual.' },
+                    { word: 'lecker', emoji: '😋', spanish: '(delicioso)', example_de: 'Das Eis ist sehr lecker.', example_es: 'El helado está delicioso.' },
+                    { word: 'interessant', emoji: '🤔', spanish: '(interesante)', example_de: 'Die Dokumentation war sehr interessant.', example_es: 'El documental fue muy interesante.' },
+                    { word: 'bekannt', emoji: '⭐', spanish: '(conocido)', example_de: 'Dieses Lied ist sehr bekannt.', example_es: 'Esta canción es muy conocida.' },
+                    { word: 'langweilig', emoji: '😴', spanish: '(aburrido)', example_de: 'Mir ist langweilig.', example_es: 'Estoy aburrido.' },
+                    { word: 'gemütlich', emoji: '🛋️', spanish: '(acogedor)', example_de: 'Wir machen uns einen gemütlichen Abend.', example_es: 'Nos preparamos una noche acogedora.' },
+                    { word: 'persönlich', emoji: '👤', spanish: '(personal)', example_de: 'Das ist meine persönliche Meinung.', example_es: 'Esa es mi opinión personal.' },
+                    { word: 'hilfreich', emoji: '🆘', spanish: '(útil)', example_de: 'Das Wörterbuch ist sehr hilfreich.', example_es: 'El diccionario es de gran ayuda.' },
+                    { word: 'nützlich', emoji: '🔧', spanish: '(útil)', example_de: 'Dein Rat war sehr nützlich.', example_es: 'Tu consejo fue muy útil.' },
+                    { word: 'öffentlich', emoji: '🏛️', spanish: '(público)', example_de: 'Rauchen ist an öffentlichen Orten verboten.', example_es: 'Fumar está prohibido en lugares públicos.' },
+                    { word: 'ähnlich', emoji: '👯', spanish: '(similar)', example_de: 'Deine Jacke sieht meiner ähnlich.', example_es: 'Tu chaqueta se parece a la mía.' },
+                    { word: 'hässlich', emoji: '🤢', spanish: '(feo)', example_de: 'Ich finde diesen Pullover hässlich.', example_es: 'Encuentro feo este suéter.' },
                     { word: 'unwichtig', emoji: '🤷‍♀️', spanish: '(sin importancia)', example_de: 'Die Details sind unwichtig.', example_es: 'Los detalles no son importantes.' }
                 ]
             },
             {
-                title: '4. Deskriptive Adjektive (A2) - Letzte',
-                description: 'Final set of descriptive adjectives',
-                level: 'A2',
-                colorMain: '#14b8a6',
-                colorPastel: '#ccfbf1',
-                badge: 'ADJEKTIV',
-                adjectives: [
-                    { word: 'zufrieden', emoji: '😊', spanish: '(satisfecho)', example_de: 'Ich bin mit meinem Leben zufrieden.', example_es: 'Estoy satisfecho con mi vida.' },
-                    { word: 'sicher', emoji: '🔒', spanish: '(seguro)', example_de: 'Ist diese Gegend sicher?', example_es: '¿Es segura esta zona?' },
-                    { word: 'bekannt', emoji: '⭐', spanish: '(conocido)', example_de: 'Dieses Lied ist sehr bekannt.', example_es: 'Esta canción es muy conocida.' },
-                    { word: 'hoch', emoji: '⛰️', spanish: '(alto)', example_de: 'Die Preise sind sehr hoch.', example_es: 'Los precios son muy altos.' },
-                    { word: 'niedrig', emoji: '⬇️', spanish: '(bajo)', example_de: 'Die Decke in diesem Raum ist niedrig.', example_es: 'El techo en esta habitación es bajo.' },
-                    { word: 'hell', emoji: '💡', spanish: '(claro)', example_de: 'Im Sommer ist es lange hell.', example_es: 'En verano hay luz hasta tarde.' },
-                    { word: 'dunkel', emoji: '🌑', spanish: '(oscuro)', example_de: 'Im Winter wird es früh dunkel.', example_es: 'En invierno oscurece temprano.' },
-                    { word: 'unfreundlich', emoji: '😠', spanish: '(antipático)', example_de: 'Der Service war leider unfreundlich.', example_es: 'El servicio fue, lamentablemente, antipático.' },
-                    { word: 'wach', emoji: '👀', spanish: '(despierto)', example_de: 'Ich bin schon seit sechs Uhr wach.', example_es: 'Estoy despierto desde las seis.' }
-                ]
-            },
-            {
-                title: '5. Indefinitbegleiter (A2)',
-                description: 'Indefinite adjectives - quantities and selections',
+                title: '🧠 Gruppe 5: Spezifische Beschreibungen',
+                description: 'Descripciones específicas (Nivel A2)',
                 level: 'A2',
                 colorMain: '#f59e0b',
                 colorPastel: '#fef3c7',
+                badge: 'SPEZIFISCH',
+                adjectives: [
+                    { word: 'pünktlich', emoji: '⏰', spanish: '(puntual)', example_de: 'Der Zug ist fast immer pünktlich.', example_es: 'El tren es casi siempre puntual.' },
+                    { word: 'reich', emoji: '🤑', spanish: '(rico)', example_de: 'Sie möchte einen reichen Mann heiraten.', example_es: 'Ella quiere casarse con un hombre rico.' },
+                    { word: 'arm', emoji: '🥺', spanish: '(pobre)', example_de: 'Er kommt aus einer armen Familie.', example_es: 'Él viene de una familia pobre.' },
+                    { word: 'sportlich', emoji: '⚽️', spanish: '(deportista)', example_de: 'Mein Bruder ist sehr sportlich.', example_es: 'Mi hermano es muy deportista.' },
+                    { word: 'fröhlich', emoji: '🥳', spanish: '(alegre)', example_de: 'Die Musik klingt sehr fröhlich.', example_es: 'La música suena muy alegre.' },
+                    { word: 'weiblich', emoji: '🚺', spanish: '(femenino)', example_de: 'Sie hat eine sehr weibliche Stimme.', example_es: 'Ella tiene una voz muy femenina.' },
+                    { word: 'männlich', emoji: '🚹', spanish: '(masculino)', example_de: 'Er hat ein sehr männliches Gesicht.', example_es: 'Él tiene una cara muy masculina.' },
+                    { word: 'altmodisch', emoji: '🕰️', spanish: '(anticuado)', example_de: 'Dieser Stil ist etwas altmodisch.', example_es: 'Este estilo es un poco anticuado.' },
+                    { word: 'aufrichtig', emoji: '🙏', spanish: '(sincero)', example_de: 'Das ist mein aufrichtiger Wunsch.', example_es: 'Ese es mi deseo sincero.' }
+                ]
+            },
+            {
+                title: '🔢 Gruppe 6: Indefinitbegleiter & Mengenadjektive',
+                description: 'Artículos indefinidos y adjetivos de cantidad (Nivel A1-A2)',
+                level: 'A1-A2',
+                colorMain: '#10b981',
+                colorPastel: '#d1fae5',
                 badge: 'INDEFINIT',
                 adjectives: [
-                    { word: 'viele', emoji: '🔢', spanish: '(muchos)', example_de: 'Es gibt viele Probleme zu lösen.', example_es: 'Hay muchos problemas por resolver.' },
-                    { word: 'wenige', emoji: '🔹', spanish: '(pocos)', example_de: 'Nur wenige Leute kamen zur Party.', example_es: 'Solo poca gente vino a la fiesta.' },
-                    { word: 'einige', emoji: '📊', spanish: '(algunos)', example_de: 'Ich habe einige Fragen dazu.', example_es: 'Tengo algunas preguntas al respecto.' },
-                    { word: 'manche', emoji: '🎲', spanish: '(algunos)', example_de: 'Manche Menschen mögen keinen Kaffee.', example_es: 'A algunas personas no les gusta el café.' },
-                    { word: 'mehrere', emoji: '📈', spanish: '(varios)', example_de: 'Er hat mehrere Autos.', example_es: 'Él tiene varios coches.' },
+                    { word: 'viel', emoji: '📦', spanish: '(mucho)', example_de: 'Ich habe heute viel Arbeit.', example_es: 'Hoy tengo mucho trabajo.' },
                     { word: 'alle', emoji: '💯', spanish: '(todos)', example_de: 'Alle Türen sind offen.', example_es: 'Todas las puertas están abiertas.' },
                     { word: 'jeder', emoji: '1️⃣', spanish: '(cada)', example_de: 'Jeder Tag ist ein neuer Anfang.', example_es: 'Cada día es un nuevo comienzo.' },
                     { word: 'andere', emoji: '🔄', spanish: '(otros)', example_de: 'Ich möchte das andere Kleid anprobieren.', example_es: 'Quiero probarme el otro vestido.' },
-                    { word: 'beide', emoji: '2️⃣', spanish: '(ambos)', example_de: 'Beide Eltern arbeiten.', example_es: 'Ambos padres trabajan.' }
-                ]
-            },
-            {
-                title: '6. Mengenadjektive (A2)',
-                description: 'Adjectives of quantity - amounts and degrees',
-                level: 'A2',
-                colorMain: '#10b981',
-                colorPastel: '#d1fae5',
-                badge: 'MENGE',
-                adjectives: [
-                    { word: 'viel', emoji: '📦', spanish: '(mucho)', example_de: 'Ich habe heute viel Arbeit.', example_es: 'Hoy tengo mucho trabajo.' },
-                    { word: 'wenig', emoji: '🔸', spanish: '(poco)', example_de: 'Wir haben nur wenig Zeit.', example_es: 'Tenemos solo poco tiempo.' },
-                    { word: 'zu viele', emoji: '🤯', spanish: '(demasiados)', example_de: 'Du isst zu viele Süßigkeiten.', example_es: 'Comes demasiados dulces.' },
                     { word: 'genug', emoji: '✔️', spanish: '(suficiente)', example_de: 'Haben wir genug Geld dabei?', example_es: '¿Llevamos suficiente dinero?' },
+                    { word: 'ganz', emoji: '⭕', spanish: '(entero)', example_de: 'Ich habe den ganzen Apfel gegessen.', example_es: 'Me he comido toda la manzana.' },
+                    { word: 'beide', emoji: '2️⃣', spanish: '(ambos)', example_de: 'Beide Eltern arbeiten.', example_es: 'Ambos padres trabajan.' },
+                    { word: 'viele', emoji: '🔢', spanish: '(muchos)', example_de: 'Es gibt viele Probleme zu lösen.', example_es: 'Hay muchos problemas por resolver.' },
+                    { word: 'wenig', emoji: '🔸', spanish: '(poco)', example_de: 'Wir haben nur wenig Zeit.', example_es: 'Tenemos solo poco tiempo.' },
+                    { word: 'wenige', emoji: '🔹', spanish: '(pocos)', example_de: 'Nur wenige Leute kamen zur Party.', example_es: 'Solo poca gente vino a la fiesta.' },
+                    { word: 'mehrere', emoji: '📈', spanish: '(varios)', example_de: 'Er hat mehrere Autos.', example_es: 'Él tiene varios coches.' },
+                    { word: 'einige', emoji: '📊', spanish: '(algunos)', example_de: 'Ich habe einige Fragen dazu.', example_es: 'Tengo algunas preguntas al respecto.' },
+                    { word: 'manche', emoji: '🎲', spanish: '(algunos)', example_de: 'Manche Menschen mögen keinen Kaffee.', example_es: 'A algunas personas no les gusta el café.' },
+                    { word: 'zu viele', emoji: '🤯', spanish: '(demasiados)', example_de: 'Du isst zu viele Süßigkeiten.', example_es: 'Comes demasiados dulces.' },
                     { word: 'mehr', emoji: '➕', spanish: '(más)', example_de: 'Ich brauche mehr Informationen.', example_es: 'Necesito más información.' },
-                    { word: 'weniger', emoji: '📉', spanish: '(menos)', example_de: 'Wir sollten weniger Fleisch essen.', example_es: 'Deberíamos comer menos carne.' },
-                    { word: 'ganz', emoji: '⭕', spanish: '(entero)', example_de: 'Ich habe den ganzen Apfel gegessen.', example_es: 'Me he comido toda la manzana.' }
+                    { word: 'weniger', emoji: '📉', spanish: '(menos)', example_de: 'Wir sollten weniger Fleisch essen.', example_es: 'Deberíamos comer menos carne.' }
                 ]
             },
             {
-                title: '7. Steigerungsformen (A2-B1)',
-                description: 'Comparative and Superlative forms',
+                title: '📈 Gruppe 7: Komparativ & Superlativ',
+                description: 'Comparativos y Superlativos (Nivel A2-B1)',
                 level: 'A2-B1',
                 colorMain: '#ef4444',
                 colorPastel: '#fee2e2',
                 badge: 'KOMPARATIV',
                 adjectives: [
-                    { word: 'größer', emoji: '🐘➡️', spanish: '(más grande)', example_de: 'Er ist größer als sein Vater.', example_es: 'Él es más alto que su padre.' },
-                    { word: 'kleiner', emoji: '🐭➡️', spanish: '(más pequeño)', example_de: 'Mein Zimmer ist kleiner als deins.', example_es: 'Mi habitación es más pequeña que la tuya.' },
-                    { word: 'besser', emoji: '👍➕', spanish: '(mejor)', example_de: 'Heute geht es mir schon besser.', example_es: 'Hoy ya me siento mejor.' },
-                    { word: 'schlechter', emoji: '👎➖', spanish: '(peor)', example_de: 'Die Qualität ist schlechter geworden.', example_es: 'La calidad ha empeorado.' },
-                    { word: 'älter', emoji: '👴➡️', spanish: '(más viejo)', example_de: 'Mein Auto ist älter als ich dachte.', example_es: 'Mi coche es más viejo de lo que pensaba.' },
-                    { word: 'jünger', emoji: '👶➡️', spanish: '(más joven)', example_de: 'Sie sieht jünger aus.', example_es: 'Ella parece más joven.' },
-                    { word: 'teurer', emoji: '💸➕', spanish: '(más caro)', example_de: 'Das Flugticket war teurer als erwartet.', example_es: 'El billete de avión fue más caro de lo esperado.' },
-                    { word: 'billiger', emoji: '💰➖', spanish: '(más barato)', example_de: 'Im Internet ist es oft billiger.', example_es: 'En internet a menudo es más barato.' },
-                    { word: 'am größten', emoji: '🏔️', spanish: '(el más grande)', example_de: 'Dieser Baum ist am größten.', example_es: 'Este árbol es el más grande.' },
-                    { word: 'am kleinsten', emoji: '🦠', spanish: '(el más pequeño)', example_de: 'Welches Stück ist am kleinsten?', example_es: '¿Qué trozo es el más pequeño?' },
+                    { word: 'besser', emoji: '👍', spanish: '(mejor)', example_de: 'Heute geht es mir schon besser.', example_es: 'Hoy ya me siento mejor.' },
+                    { word: 'schlechter', emoji: '👎', spanish: '(peor)', example_de: 'Die Qualität ist schlechter geworden.', example_es: 'La calidad ha empeorado.' },
+                    { word: 'größer', emoji: '🐘', spanish: '(más grande)', example_de: 'Er ist größer als sein Vater.', example_es: 'Él es más alto que su padre.' },
+                    { word: 'kleiner', emoji: '🐭', spanish: '(más pequeño)', example_de: 'Mein Zimmer ist kleiner als deins.', example_es: 'Mi habitación es más pequeña que la tuya.' },
+                    { word: 'älter', emoji: '👴', spanish: '(más viejo)', example_de: 'Mein Auto ist älter als ich dachte.', example_es: 'Mi coche es más viejo de lo que pensaba.' },
+                    { word: 'jünger', emoji: '👶', spanish: '(más joven)', example_de: 'Sie sieht jünger aus.', example_es: 'Ella parece más joven.' },
+                    { word: 'teurer', emoji: '💸', spanish: '(más caro)', example_de: 'Das Flugticket war teurer als erwartet.', example_es: 'El billete de avión fue más caro de lo esperado.' },
+                    { word: 'billiger', emoji: '💰', spanish: '(más barato)', example_de: 'Im Internet ist es oft billiger.', example_es: 'En internet a menudo es más barato.' },
                     { word: 'am besten', emoji: '🥇', spanish: '(el mejor)', example_de: 'Pizza schmeckt mir am besten.', example_es: 'La pizza es lo que más me gusta.' },
-                    { word: 'am schlechtesten', emoji: '💔', spanish: '(el peor)', example_de: 'Dieser Film war am schlechtesten.', example_es: 'Esta película fue la peor.' }
+                    { word: 'am schlechtesten', emoji: '💔', spanish: '(el peor)', example_de: 'Dieser Film war am schlechtesten.', example_es: 'Esta película fue la peor.' },
+                    { word: 'am größten', emoji: '🏔️', spanish: '(el más grande)', example_de: 'Dieser Baum ist am größten.', example_es: 'Este árbol es el más grande.' },
+                    { word: 'am kleinsten', emoji: '🦠', spanish: '(el más pequeño)', example_de: 'Welches Stück ist am kleinsten?', example_es: '¿Qué trozo es el más pequeño?' }
                 ]
             },
             {
-                title: '8. Partizipien als Adjektive (A2-B1)',
-                description: 'Participles used as adjectives',
+                title: '🧩 Gruppe 8: Partizipien',
+                description: 'Participios utilizados como adjetivos (Nivel A2-B1)',
                 level: 'A2-B1',
                 colorMain: '#6366f1',
                 colorPastel: '#e0e7ff',
                 badge: 'PARTIZIP',
                 adjectives: [
                     { word: 'spannend', emoji: '😮', spanish: '(emocionante)', example_de: 'Das Finale war sehr spannend.', example_es: 'La final fue muy emocionante.' },
-                    { word: 'laufend', emoji: '🏃', spanish: '(corriente)', example_de: 'Wir haben hohe laufende Kosten.', example_es: 'Tenemos altos gastos corrientes.' },
-                    { word: 'folgend', emoji: '⏭️', spanish: '(siguiente)', example_de: 'Bitte beachten Sie folgende Hinweise.', example_es: 'Por favor, tenga en cuenta las siguientes indicaciones.' },
+                    { word: 'gebraucht', emoji: '🔄', spanish: '(usado)', example_de: 'Ich kaufe nur gebrauchte Bücher.', example_es: 'Solo compro libros usados.' },
                     { word: 'passend', emoji: '✅', spanish: '(apropiado)', example_de: 'Ich habe keine passende Antwort.', example_es: 'No tengo una respuesta adecuada.' },
                     { word: 'fehlend', emoji: '❌', spanish: '(faltante)', example_de: 'Wir suchen das fehlende Teil.', example_es: 'Buscamos la pieza que falta.' },
-                    { word: 'geöffnet', emoji: '🚪', spanish: '(abierto)', example_de: 'Das Museum ist täglich geöffnet.', example_es: 'El museo está abierto a diario.' },
-                    { word: 'geschlossen', emoji: '🔒', spanish: '(cerrado)', example_de: 'Wegen Krankheit geschlossen.', example_es: 'Cerrado por enfermedad.' },
-                    { word: 'kaputt', emoji: '💔', spanish: '(roto)', example_de: 'Die Waschmaschine ist kaputt.', example_es: 'La lavadora está rota.' },
-                    { word: 'besetzt', emoji: '🚫', spanish: '(ocupado)', example_de: 'Die Toilette ist besetzt.', example_es: 'El baño está ocupado.' },
-                    { word: 'verliebt', emoji: '💕', spanish: '(enamorado)', example_de: 'Sie sind total verliebt.', example_es: 'Ellos están totalmente enamorados.' },
-                    { word: 'verheiratet', emoji: '💍', spanish: '(casado)', example_de: 'Sind Sie verheiratet oder ledig?', example_es: '¿Está usted casado o soltero?' },
-                    { word: 'gebraucht', emoji: '🔄', spanish: '(usado)', example_de: 'Ich kaufe nur gebrauchte Bücher.', example_es: 'Solo compro libros usados.' }
+                    { word: 'laufend', emoji: '🏃', spanish: '(corriente)', example_de: 'Wir haben hohe laufende Kosten.', example_es: 'Tenemos altos gastos corrientes.' },
+                    { word: 'folgend', emoji: '⏭️', spanish: '(siguiente)', example_de: 'Bitte beachten Sie folgende Hinweise.', example_es: 'Por favor, tenga en cuenta las siguientes indicaciones.' }
                 ]
             }
         ];
