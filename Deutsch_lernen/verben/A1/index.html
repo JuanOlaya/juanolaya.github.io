@@ -41,25 +41,27 @@
 
             <!-- New unified navigation above cards -->
             <div class="navigation-wrapper">
-                <button id="prev-group-btn" class="nav-arrow-btn nav-arrow-left" title="Vorherige Gruppe">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                </button>
-
-                <div class="navigation-center">
-                    <div class="level-navigation">
-                        <button id="prev-level-btn" class="level-nav-arrow" title="Vorheriges Niveau (Previous Level)">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </button>
-                        <div class="level-indicator" id="level-indicator">A1.1</div>
-                        <button id="next-level-btn" class="level-nav-arrow" title="Nächstes Niveau (Next Level)">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                        </button>
-                    </div>
+                <!-- Level Navigation Section -->
+                <div class="level-navigation">
+                    <button id="prev-level-btn" class="level-nav-arrow" title="Vorheriges Niveau (Previous Level)">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="level-indicator" id="level-indicator">A1.1</div>
+                    <button id="next-level-btn" class="level-nav-arrow" title="Nächstes Niveau (Next Level)">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                    </button>
                 </div>
 
-                <button id="next-group-btn" class="nav-arrow-btn nav-arrow-right" title="Nächste Gruppe">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </button>
+                <!-- Group Navigation Section -->
+                <div class="group-navigation">
+                    <button id="prev-group-btn" class="group-nav-arrow" title="Vorherige Gruppe">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <div class="group-theme-indicator" id="group-theme-indicator">Being & Existence</div>
+                    <button id="next-group-btn" class="group-nav-arrow" title="Nächste Gruppe">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
             </div>
 
             <div class="cards-container" id="cards-container">
