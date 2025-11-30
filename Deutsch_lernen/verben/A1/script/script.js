@@ -951,12 +951,26 @@ document.addEventListener('DOMContentLoaded', () => {
         // Light version toggle
         const lightVersionSwitch = document.getElementById('light-version-switch');
         if (lightVersionSwitch) {
+            // Load saved state from localStorage
+            const savedLightVersion = localStorage.getItem('verben-light-version');
+            if (savedLightVersion === 'true') {
+                lightVersionSwitch.checked = true;
+                mainContainer.classList.add('light-version');
+            }
+
+            // Event listener for toggle changes
             lightVersionSwitch.addEventListener('change', (event) => {
-                if (event.currentTarget.checked) {
+                const isChecked = event.currentTarget.checked;
+
+                if (isChecked) {
                     mainContainer.classList.add('light-version');
                 } else {
                     mainContainer.classList.remove('light-version');
                 }
+
+                // Save to localStorage
+                localStorage.setItem('verben-light-version', isChecked);
+
                 renderVerbGroup();
             });
         }
