@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContainer = document.getElementById('main-container');
     const cardsContainer = document.getElementById('cards-container');
     const levelIndicator = document.getElementById('level-indicator');
+    const groupThemeIndicator = document.getElementById('group-theme-indicator');
     const groupIndicator = document.getElementById('group-indicator');
     const progressBar = document.getElementById('progress-bar');
     const prevGroupBtn = document.getElementById('prev-group-btn');
@@ -225,8 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update level and group indicators
         const displayLevel = levelConfig[currentLevel].displayName;
-        const themeNameForLevel = group.theme ? ` - Gruppe: ${group.theme}` : '';
-        levelIndicator.textContent = `${displayLevel}${themeNameForLevel}`;
+        levelIndicator.textContent = displayLevel;
         levelIndicator.className = 'level-indicator';
         if (displayLevel === 'A1.1') levelIndicator.classList.add('level-a1-1');
         else if (displayLevel === 'A1.2') levelIndicator.classList.add('level-a1-2');
@@ -234,9 +234,13 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (displayLevel === 'A2.2') levelIndicator.classList.add('level-a2-2');
         else if (displayLevel === 'B1.1') levelIndicator.classList.add('level-b1-1');
 
+        // Update group theme indicator
+        const themeName = group.theme || 'Gruppe';
+        groupThemeIndicator.textContent = themeName;
+
         const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
-        const themeName = group.theme ? ` - ${group.theme}` : '';
-        groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}${themeName}`;
+        const themeNameForGroupIndicator = group.theme ? ` - ${group.theme}` : '';
+        groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}${themeNameForGroupIndicator}`;
         prevGroupBtn.disabled = currentGroupInLevel === 0 && currentLevel === levelOrder[0];
         nextGroupBtn.disabled = currentGroupInLevel === totalGroupsInLevel - 1 && currentLevel === levelOrder[levelOrder.length - 1];
     }
@@ -413,8 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const displayLevel = levelConfig[currentLevel].displayName;
-        const themeNameForLevel = group.theme ? ` - Gruppe: ${group.theme}` : '';
-        levelIndicator.textContent = `${displayLevel}${themeNameForLevel}`;
+        levelIndicator.textContent = displayLevel;
         levelIndicator.className = 'level-indicator'; // Reset classes
         if (displayLevel === 'A1.1') levelIndicator.classList.add('level-a1-1');
         else if (displayLevel === 'A1.2') levelIndicator.classList.add('level-a1-2');
@@ -422,9 +425,13 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (displayLevel === 'A2.2') levelIndicator.classList.add('level-a2-2');
         else if (displayLevel === 'B1.1') levelIndicator.classList.add('level-b1-1');
 
+        // Update group theme indicator
+        const themeName = group.theme || 'Gruppe';
+        groupThemeIndicator.textContent = themeName;
+
         const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
-        const themeName = group.theme ? ` - ${group.theme}` : '';
-        groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}${themeName}`;
+        const themeNameForGroupIndicator = group.theme ? ` - ${group.theme}` : '';
+        groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}${themeNameForGroupIndicator}`;
         prevGroupBtn.disabled = currentGroupInLevel === 0 && currentLevel === levelOrder[0];
         nextGroupBtn.disabled = currentGroupInLevel === totalGroupsInLevel - 1 && currentLevel === levelOrder[levelOrder.length - 1];
         updateProgressBar();

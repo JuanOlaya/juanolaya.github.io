@@ -64,8 +64,7 @@
             position: relative;
             overflow: visible;
             width: auto;
-            min-width: 300px;
-            max-width: 500px;
+            min-width: 70px;
             height: 40px;
             padding: 0 15px;
             background-color: #4682B4; /* SteelBlue */
@@ -74,7 +73,7 @@
             justify-content: center;
             align-items: center;
             font-family: 'Nunito', sans-serif;
-            font-size: 1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: white;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -88,6 +87,68 @@
             flex-direction: row;
             align-items: center;
             gap: 12px;
+        }
+
+        /* Group navigation section */
+        .group-navigation {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .group-theme-indicator {
+            position: relative;
+            overflow: visible;
+            width: auto;
+            min-width: 200px;
+            max-width: 400px;
+            height: 40px;
+            padding: 0 20px;
+            background-color: #3CB371; /* MediumSeaGreen */
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .group-nav-arrow {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: #3CB371; /* MediumSeaGreen */
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s, transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .group-nav-arrow svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+        }
+
+        .group-nav-arrow:hover {
+            background-color: #2E8B57; /* SeaGreen - darker on hover */
+            transform: scale(1.1);
+        }
+
+        .group-nav-arrow:disabled {
+            background-color: #90EE90; /* LightGreen */
+            cursor: not-allowed;
+            opacity: 0.5;
         }
 
         .level-nav-arrow {
@@ -205,68 +266,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
             margin: 0.5rem 0 0.5rem 0;
             padding: 0.75rem 1rem;
             background-color: rgba(70, 130, 180, 0.05);
             border-radius: 12px;
             border: 2px solid rgba(70, 130, 180, 0.2);
             position: relative;
-        }
-
-        .navigation-center {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Group navigation arrows (left/right on sides of cards container) */
-        .nav-arrow-btn {
-            padding: 12px;
-            background-color: white;
-            border: 2px solid #4682B4;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 52px;
-            height: 52px;
-            flex-shrink: 0;
-            position: absolute;
-            top: calc(100% + 1.5rem + 275px); /* navigation height + margin + half of cards min-height */
-            z-index: 10;
-        }
-
-        .nav-arrow-left {
-            left: -70px;
-        }
-
-        .nav-arrow-right {
-            right: -70px;
-        }
-
-        .nav-arrow-btn svg {
-            stroke: #4682B4;
-            width: 26px;
-            height: 26px;
-        }
-
-        .nav-arrow-btn:hover:not(:disabled) {
-            background-color: #4682B4;
-            transform: scale(1.1);
-        }
-
-        .nav-arrow-btn:hover:not(:disabled) svg {
-            stroke: white;
-        }
-
-        .nav-arrow-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
         }
 
         /* Group progress section - moved below cards */
@@ -1169,16 +1175,17 @@
          @media (max-width: 600px) {
             body { padding: 10px; }
             .title { font-size: 2rem; }
-            .level-indicator { min-width: 200px; max-width: 100%; height: auto; padding: 8px 12px; font-size: 0.85rem; white-space: normal; text-align: center; }
+            .level-indicator { min-width: 60px; height: auto; padding: 8px 12px; font-size: 0.9rem; }
+            .group-theme-indicator { min-width: 150px; max-width: 250px; height: auto; padding: 8px 12px; font-size: 0.85rem; }
             .info-button { width: 40px; height: 40px; font-size: 0.85rem; }
-            .navigation-wrapper { padding: 1rem 0.5rem; gap: 10px; }
-            .nav-arrow-btn { width: 42px; height: 42px; }
-            .nav-arrow-btn svg { width: 20px; height: 20px; }
-            .nav-arrow-left { left: -55px; }
-            .nav-arrow-right { right: -55px; }
+            .navigation-wrapper { padding: 1rem 0.5rem; gap: 15px; flex-wrap: wrap; }
+            .level-navigation { gap: 8px; }
+            .group-navigation { gap: 8px; }
             .group-indicator { font-size: 0.85rem; }
-            .level-nav-arrow { width: 28px; height: 28px; }
+            .level-nav-arrow { width: 32px; height: 32px; }
             .level-nav-arrow svg { width: 14px; height: 14px; }
+            .group-nav-arrow { width: 32px; height: 32px; }
+            .group-nav-arrow svg { width: 14px; height: 14px; }
             .toggles-row { gap: 12px; }
             .cards-container { gap: 1rem; }
             .word-item { width: calc(50% - 0.5rem); padding: 1rem; } /* Two cards per row */
@@ -1195,8 +1202,6 @@
               .word-item { width: 100%; } /* One card per row */
               .header { flex-direction: column; gap: 10px; } /* Stack header items */
               .title-container { order: -1; } /* Move title to top on mobile */
-              .nav-arrow-left { left: -50px; }
-              .nav-arrow-right { right: -50px; }
          }
 /* Styles for collapsible columns in Praesens table */
 #praesens-conjugation-table.hide-translations .collapsible-col {
