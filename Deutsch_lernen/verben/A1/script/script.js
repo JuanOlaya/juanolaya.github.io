@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Level configuration
     const levelConfig = {
-        'A1_1': { groupCount: 6, displayName: 'A1.1' },
+        'A1_1': { groupCount: 7, displayName: 'A1.1' },
         'A1_2': { groupCount: 7, displayName: 'A1.2' },
         'A2_1': { groupCount: 8, displayName: 'A2.1' },
         'A2_2': { groupCount: 9, displayName: 'A2.2' },
