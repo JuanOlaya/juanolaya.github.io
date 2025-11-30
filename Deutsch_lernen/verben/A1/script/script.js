@@ -234,7 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (displayLevel === 'B1.1') levelIndicator.classList.add('level-b1-1');
 
         const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
-        groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}`;
+        const themeName = group.theme ? ` - ${group.theme}` : '';
+        groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}${themeName}`;
         prevGroupBtn.disabled = currentGroupInLevel === 0 && currentLevel === levelOrder[0];
         nextGroupBtn.disabled = currentGroupInLevel === totalGroupsInLevel - 1 && currentLevel === levelOrder[levelOrder.length - 1];
     }
@@ -420,7 +421,8 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (displayLevel === 'B1.1') levelIndicator.classList.add('level-b1-1');
 
         const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
-        groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}`;
+        const themeName = group.theme ? ` - ${group.theme}` : '';
+        groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}${themeName}`;
         prevGroupBtn.disabled = currentGroupInLevel === 0 && currentLevel === levelOrder[0];
         nextGroupBtn.disabled = currentGroupInLevel === totalGroupsInLevel - 1 && currentLevel === levelOrder[levelOrder.length - 1];
         updateProgressBar();
