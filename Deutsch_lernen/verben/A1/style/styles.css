@@ -1777,6 +1777,11 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
     display: block;
 }
 
+/* Hide Spanish Präteritum when translation toggle is OFF */
+.main-container.hide-translation .spanish-praeteritum {
+    display: none !important;
+}
+
 /* Modal Präteritum visibility */
 #verb-modal .modal-content.hide-praeteritum [data-form="praeteritum"] {
     display: none;
@@ -1792,6 +1797,11 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 .main-container:not(.hide-konjunktiv) .german-konjunktiv,
 .main-container:not(.hide-konjunktiv) .spanish-konjunktiv {
     display: block;
+}
+
+/* Hide Spanish Konjunktiv II when translation toggle is OFF */
+.main-container.hide-translation .spanish-konjunktiv {
+    display: none !important;
 }
 
 /* Modal Konjunktiv II visibility */
@@ -1829,4 +1839,95 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+/* ============================================
+   LEICHTE VERSION (Light Version) STYLES
+   ============================================ */
+
+/* Hide normal cards when light version is active */
+.main-container.light-version .word-item:not(.light-version-row) {
+    display: none;
+}
+
+/* Light version container */
+.light-version-container {
+    display: none;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.main-container.light-version .light-version-container {
+    display: block;
+}
+
+/* Light version header row */
+.light-version-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background-color: #FF8C00; /* Dark orange */
+    padding: 15px 20px;
+    border-radius: 8px 8px 0 0;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.light-version-header-cell {
+    padding: 5px;
+}
+
+/* Light version data rows */
+.light-version-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    padding: 12px 20px;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+/* Zebra striping */
+.light-version-row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.light-version-row:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.light-version-row:hover {
+    background-color: #e8f4f8;
+}
+
+.light-version-row:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+/* Light version cells */
+.light-version-cell {
+    padding: 5px 10px;
+    text-align: center;
+}
+
+.light-version-cell.infinitiv {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.light-version-cell.perfekt {
+    color: #4682B4; /* SteelBlue */
+    font-weight: 500;
+}
+
+.light-version-cell.praeteritum {
+    color: #8B4513; /* SaddleBrown */
+    font-weight: 500;
 }

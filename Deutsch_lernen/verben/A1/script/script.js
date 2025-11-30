@@ -165,6 +165,80 @@ document.addEventListener('DOMContentLoaded', () => {
         return text.replace(/[()]/g, '');
     }
 
+    // Helper function to extract clean Perfekt (remove auxiliary verb)
+    function getCleanPerfekt(perfekt) {
+        if (!perfekt || perfekt === '---') return '---';
+        // Remove "hat " or "ist " from the beginning
+        const cleaned = perfekt.replace(/^(hat|ist)\s+/, '');
+        return cleaned;
+    }
+
+    // Helper function to extract clean Präteritum (remove pronouns)
+    function getCleanPraeteritum(praeteritum) {
+        if (!praeteritum || praeteritum === '---') return '---';
+        // Remove "er/sie/es " from the beginning
+        const cleaned = praeteritum.replace(/^(er\/sie\/es)\s+/, '');
+        return cleaned;
+    }
+
+    // --- LIGHT VERSION RENDER FUNCTION ---
+    function renderLightVersion(group) {
+        cardsContainer.innerHTML = '';
+
+        // Create light version container
+        const lightContainer = document.createElement('div');
+        lightContainer.className = 'light-version-container';
+
+        // Create header row
+        const headerRow = document.createElement('div');
+        headerRow.className = 'light-version-header';
+        headerRow.innerHTML = `
+            <div class="light-version-header-cell">Infinitiv</div>
+            <div class="light-version-header-cell">Perfekt</div>
+            <div class="light-version-header-cell">Präteritum</div>
+        `;
+        lightContainer.appendChild(headerRow);
+
+        // Create data rows
+        group.verbs.forEach(verbName => {
+            const verbData = allVerbsData[verbName];
+            if (!verbData) return;
+
+            // Get clean forms
+            const infinitiv = verbName;
+            const perfekt = getCleanPerfekt(verbData.perfekt);
+            const praeteritum = getCleanPraeteritum(verbData.praeteritum);
+
+            // Create row
+            const row = document.createElement('div');
+            row.className = 'light-version-row';
+            row.onclick = () => openModalForVerb(verbName);
+            row.innerHTML = `
+                <div class="light-version-cell infinitiv">${infinitiv}</div>
+                <div class="light-version-cell perfekt">${perfekt}</div>
+                <div class="light-version-cell praeteritum">${praeteritum}</div>
+            `;
+            lightContainer.appendChild(row);
+        });
+
+        cardsContainer.appendChild(lightContainer);
+
+        // Update level and group indicators
+        const displayLevel = levelConfig[currentLevel].displayName;
+        levelIndicator.textContent = displayLevel;
+        levelIndicator.className = 'level-indicator';
+        if (displayLevel === 'A1.1') levelIndicator.classList.add('level-a1-1');
+        else if (displayLevel === 'A1.2') levelIndicator.classList.add('level-a1-2');
+        else if (displayLevel === 'A2.1') levelIndicator.classList.add('level-a2-1');
+        else if (displayLevel === 'A2.2') levelIndicator.classList.add('level-a2-2');
+        else if (displayLevel === 'B1.1') levelIndicator.classList.add('level-b1-1');
+
+        const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
+        groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}`;
+        prevGroupBtn.disabled = currentGroupInLevel === 0 && currentLevel === levelOrder[0];
+        nextGroupBtn.disabled = currentGroupInLevel === totalGroupsInLevel - 1 && currentLevel === levelOrder[levelOrder.length - 1];
+    }
+
     // --- UPDATED RENDER FUNCTION ---
     function renderVerbGroup() {
         const levelGroups = verbGroupsByLevel[currentLevel];
@@ -178,6 +252,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!group.verbs) {
             console.error(`No verbs found in group`);
             cardsContainer.innerHTML = '<p>Fehler beim Laden der Verben.</p>';
+            return;
+        }
+
+        // Check if light version is active
+        const lightVersionSwitch = document.getElementById('light-version-switch');
+        const isLightVersion = lightVersionSwitch && lightVersionSwitch.checked;
+
+        if (isLightVersion) {
+            renderLightVersion(group);
+            updateProgressBar();
+            updateLevelNavigationButtons();
+            saveProgress();
             return;
         }
 
@@ -861,6 +947,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 verbModalContent.classList.toggle(toggleClass, !event.currentTarget.checked);
             });
         });
+
+        // Light version toggle
+        const lightVersionSwitch = document.getElementById('light-version-switch');
+        if (lightVersionSwitch) {
+            lightVersionSwitch.addEventListener('change', (event) => {
+                if (event.currentTarget.checked) {
+                    mainContainer.classList.add('light-version');
+                } else {
+                    mainContainer.classList.remove('light-version');
+                }
+                renderVerbGroup();
+            });
+        }
 
         storyButton.addEventListener('click', () => {
             storyContainer.style.display = 'block';
