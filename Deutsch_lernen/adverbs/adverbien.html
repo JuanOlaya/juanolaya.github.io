@@ -242,6 +242,9 @@
             line-height: 1.1;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        .german-word.long-word {
+            font-size: 1.8rem;
+        }
 
         /* Spanish Translation */
         .spanish-meaning {
@@ -375,10 +378,23 @@
         }
         body.light-version .card {
             min-height: auto;
+            background-color: #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         body.light-version .card-header {
             padding: 25px 15px;
             border-radius: 20px;
+            background-color: #e5e7eb;
+        }
+        body.light-version .german-word {
+            color: #1e3a8a;
+            text-shadow: none;
+        }
+        body.light-version .german-word.long-word {
+            color: #1e3a8a;
+        }
+        body.light-version .spanish-meaning {
+            color: #3b82f6;
         }
 
         /* Modal Styles */
@@ -727,6 +743,19 @@
         let isSearchMode = false;
         let searchResults = [];
 
+        // Helper function to get first definition for card display
+        function getFirstDefinition(translation) {
+            // Remove parentheses and split by /
+            const cleaned = translation.replace(/[()]/g, '');
+            const parts = cleaned.split('/');
+            return `(${parts[0].trim()})`;
+        }
+
+        // Helper function to check if word needs smaller font
+        function isLongWord(word) {
+            return word.length > 13;
+        }
+
         // DOM elements
         const cardsContainer = document.getElementById('cards-container');
         const groupIndicator = document.getElementById('group-indicator');
@@ -763,10 +792,14 @@
                 card.style.setProperty('--card-main', group.colorMain);
                 card.style.setProperty('--card-pastel', group.colorPastel);
 
+                // Show only first definition in card
+                const cardTranslation = getFirstDefinition(adv.spanish);
+                const longWordClass = isLongWord(adv.word) ? 'long-word' : '';
+
                 card.innerHTML = `
                     <div class="card-header">
-                        <span class="german-word">${adv.word}</span>
-                        <span class="spanish-meaning">${adv.spanish}</span>
+                        <span class="german-word ${longWordClass}">${adv.word}</span>
+                        <span class="spanish-meaning">${cardTranslation}</span>
                         <div class="icon-floating">${adv.emoji}</div>
                     </div>
                     <div class="card-body">
@@ -818,6 +851,8 @@
             } else {
                 document.body.classList.remove('light-version');
             }
+            // Save to localStorage
+            localStorage.setItem('adverbien-light-version', this.checked);
         });
 
         // Active Recall Toggle
@@ -834,6 +869,8 @@
                     setTimeout(() => { span.style.visibility = 'hidden'; }, 300);
                 });
             }
+            // Save to localStorage
+            localStorage.setItem('adverbien-translation', this.checked);
         });
 
         function setInitialTranslationState() {
@@ -911,10 +948,14 @@
                 card.style.setProperty('--card-main', adv.groupColorMain);
                 card.style.setProperty('--card-pastel', adv.groupColorPastel);
 
+                // Show only first definition in card
+                const cardTranslation = getFirstDefinition(adv.spanish);
+                const longWordClass = isLongWord(adv.word) ? 'long-word' : '';
+
                 card.innerHTML = `
                     <div class="card-header">
-                        <span class="german-word">${adv.word}</span>
-                        <span class="spanish-meaning">${adv.spanish}</span>
+                        <span class="german-word ${longWordClass}">${adv.word}</span>
+                        <span class="spanish-meaning">${cardTranslation}</span>
                         <div class="icon-floating">${adv.emoji}</div>
                     </div>
                     <div class="card-body">
@@ -925,6 +966,16 @@
                         </div>
                     </div>
                 `;
+
+                // Add click event to open modal
+                const groupData = {
+                    badge: adv.groupBadge,
+                    colorMain: adv.groupColorMain,
+                    colorPastel: adv.groupColorPastel
+                };
+                card.addEventListener('click', () => {
+                    openModal(adv, groupData);
+                });
 
                 cardsContainer.appendChild(card);
             });
@@ -968,7 +1019,62 @@
             }
         });
 
+        // Modal functions
+        function openModal(adverb, group) {
+            // Set modal content
+            modalEmoji.textContent = adverb.emoji;
+            modalWord.textContent = adverb.word;
+            modalTranslation.textContent = adverb.spanish;
+            modalBadge.textContent = group.badge;
+            modalBadge.style.setProperty('--modal-color', group.colorMain);
+            modalExampleDe.textContent = adverb.example_de;
+            modalExampleEs.textContent = adverb.example_es;
+
+            // Show modal
+            adverbModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            adverbModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Modal event listeners
+        modalClose.addEventListener('click', closeModal);
+
+        adverbModal.addEventListener('click', (e) => {
+            if (e.target === adverbModal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && adverbModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Load saved preferences from localStorage
+        function loadSavedPreferences() {
+            // Load light version preference
+            const savedLightVersion = localStorage.getItem('adverbien-light-version');
+            if (savedLightVersion !== null) {
+                lightVersionSwitch.checked = savedLightVersion === 'true';
+                if (lightVersionSwitch.checked) {
+                    document.body.classList.add('light-version');
+                }
+            }
+
+            // Load translation preference
+            const savedTranslation = localStorage.getItem('adverbien-translation');
+            if (savedTranslation !== null) {
+                recallSwitch.checked = savedTranslation === 'true';
+            }
+        }
+
         // Initialize
+        loadSavedPreferences();
         renderGroup();
     </script>
 </body>

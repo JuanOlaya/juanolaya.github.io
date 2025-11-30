@@ -52,7 +52,10 @@
         .toggle-container {
             display: flex;
             justify-content: center;
+            align-items: center;
+            gap: 3rem;
             margin: 1.5rem 0;
+            flex-wrap: wrap;
         }
         .active-recall-toggle {
             display: flex;
@@ -356,6 +359,37 @@
             margin: 1rem 0;
             font-size: 0.95rem;
         }
+
+        /* Light Version Styles */
+        body.light-version .icon-floating {
+            display: none;
+        }
+        body.light-version .card-exam-example {
+            display: none;
+        }
+        body.light-version .card-category-badge {
+            display: none;
+        }
+        body.light-version .card-body {
+            display: none;
+        }
+        body.light-version .card {
+            min-height: auto;
+            background-color: #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        body.light-version .card-header {
+            padding: 25px 15px;
+            border-radius: 20px;
+            background-color: #e5e7eb;
+        }
+        body.light-version .german-word {
+            color: #1e3a8a;
+            text-shadow: none;
+        }
+        body.light-version .spanish-meaning {
+            color: #3b82f6;
+        }
     </style>
 </head>
 <body>
@@ -388,6 +422,13 @@
     </div>
 
     <div class="toggle-container">
+        <div class="active-recall-toggle">
+            <label class="switch-label" for="light-version-switch">Versión ligera<span class="label-translation">(versión simple)</span></label>
+            <label class="switch">
+                <input type="checkbox" id="light-version-switch">
+                <span class="slider"></span>
+            </label>
+        </div>
         <div class="active-recall-toggle">
             <label class="switch-label" for="recall-switch">Übersetzung<span class="label-translation">(traducción)</span></label>
             <label class="switch">
@@ -600,6 +641,7 @@
         const prevGroupBtn = document.getElementById('prev-group-btn');
         const nextGroupBtn = document.getElementById('next-group-btn');
         const recallSwitch = document.getElementById('recall-switch');
+        const lightVersionSwitch = document.getElementById('light-version-switch');
         const searchInput = document.getElementById('search-input');
         const clearSearchBtn = document.getElementById('clear-search');
         const searchResultsInfo = document.getElementById('search-results-info');
@@ -664,6 +706,17 @@
             }
         });
 
+        // Light Version Toggle
+        lightVersionSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('light-version');
+            } else {
+                document.body.classList.remove('light-version');
+            }
+            // Save to localStorage
+            localStorage.setItem('adjektive-light-version', this.checked);
+        });
+
         // Active Recall Toggle
         recallSwitch.addEventListener('change', function() {
             const translations = document.querySelectorAll('.spanish-meaning, .example-text.es');
@@ -678,6 +731,8 @@
                     setTimeout(() => { span.style.visibility = 'hidden'; }, 300);
                 });
             }
+            // Save to localStorage
+            localStorage.setItem('adjektive-translation', this.checked);
         });
 
         function setInitialTranslationState() {
@@ -812,7 +867,26 @@
             }
         });
 
+        // Load saved preferences from localStorage
+        function loadSavedPreferences() {
+            // Load light version preference
+            const savedLightVersion = localStorage.getItem('adjektive-light-version');
+            if (savedLightVersion !== null) {
+                lightVersionSwitch.checked = savedLightVersion === 'true';
+                if (lightVersionSwitch.checked) {
+                    document.body.classList.add('light-version');
+                }
+            }
+
+            // Load translation preference
+            const savedTranslation = localStorage.getItem('adjektive-translation');
+            if (savedTranslation !== null) {
+                recallSwitch.checked = savedTranslation === 'true';
+            }
+        }
+
         // Initialize
+        loadSavedPreferences();
         renderGroup();
     </script>
 </body>
