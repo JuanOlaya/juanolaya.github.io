@@ -1915,19 +1915,18 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 .light-version-cell {
     padding: 5px 10px;
     text-align: center;
+    font-size: 1.3rem;
+    font-weight: 700;
 }
 
 .light-version-cell.infinitiv {
-    font-weight: 600;
     color: #2c3e50;
 }
 
 .light-version-cell.perfekt {
     color: #4682B4; /* SteelBlue */
-    font-weight: 500;
 }
 
 .light-version-cell.praeteritum {
     color: #8B4513; /* SaddleBrown */
-    font-weight: 500;
 }
