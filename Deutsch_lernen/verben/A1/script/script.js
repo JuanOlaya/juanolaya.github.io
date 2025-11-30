@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Level configuration
     const levelConfig = {
         'A1_1': { groupCount: 6, displayName: 'A1.1' },
-        'A1_2': { groupCount: 6, displayName: 'A1.2' },
-        'A2_1': { groupCount: 7, displayName: 'A2.1' },
-        'A2_2': { groupCount: 8, displayName: 'A2.2' },
+        'A1_2': { groupCount: 7, displayName: 'A1.2' },
+        'A2_1': { groupCount: 8, displayName: 'A2.1' },
+        'A2_2': { groupCount: 9, displayName: 'A2.2' },
         'B1_1': { groupCount: 2, displayName: 'B1.1' }
     };
     const levelOrder = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1'];
@@ -225,7 +225,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update level and group indicators
         const displayLevel = levelConfig[currentLevel].displayName;
-        levelIndicator.textContent = displayLevel;
+        const themeNameForLevel = group.theme ? ` - Gruppe: ${group.theme}` : '';
+        levelIndicator.textContent = `${displayLevel}${themeNameForLevel}`;
         levelIndicator.className = 'level-indicator';
         if (displayLevel === 'A1.1') levelIndicator.classList.add('level-a1-1');
         else if (displayLevel === 'A1.2') levelIndicator.classList.add('level-a1-2');
@@ -412,7 +413,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const displayLevel = levelConfig[currentLevel].displayName;
-        levelIndicator.textContent = displayLevel;
+        const themeNameForLevel = group.theme ? ` - Gruppe: ${group.theme}` : '';
+        levelIndicator.textContent = `${displayLevel}${themeNameForLevel}`;
         levelIndicator.className = 'level-indicator'; // Reset classes
         if (displayLevel === 'A1.1') levelIndicator.classList.add('level-a1-1');
         else if (displayLevel === 'A1.2') levelIndicator.classList.add('level-a1-2');
