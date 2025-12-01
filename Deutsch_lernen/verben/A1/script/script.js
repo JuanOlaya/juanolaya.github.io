@@ -1110,6 +1110,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modal-verb-english-praeteritum').textContent = updatedData.en_praeteritum ? `🇬🇧 ${updatedData.en_praeteritum}` : '';
         document.getElementById('modal-level-badge').textContent = updatedData.level || 'A1';
 
+        // Display note_es if it exists
+        const noteElement = document.getElementById('modal-verb-note');
+        if (updatedData.note_es) {
+            noteElement.innerHTML = updatedData.note_es;
+            noteElement.style.display = 'block';
+        } else {
+            noteElement.style.display = 'none';
+        }
+
         // Populate Wortfamilie section
         const wortfamilieContainer = document.getElementById('wortfamilie-container');
         const wortfamilieContent = document.getElementById('wortfamilie-content');
