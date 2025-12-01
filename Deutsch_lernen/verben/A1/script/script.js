@@ -951,11 +951,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const verbModalContent = document.querySelector('#verb-modal .modal-content');
         toggles.forEach(toggle => {
             const toggleClass = toggle.dataset.toggleClass;
+            const toggleId = toggle.id;
+
+            // Load saved state from localStorage
+            const savedState = localStorage.getItem(`toggle-${toggleId}`);
+            if (savedState !== null) {
+                toggle.checked = savedState === 'true';
+            }
+
+            // Apply initial state
             mainContainer.classList.toggle(toggleClass, !toggle.checked);
             verbModalContent.classList.toggle(toggleClass, !toggle.checked);
+
+            // Add change event listener
             toggle.addEventListener('change', (event) => {
-                mainContainer.classList.toggle(toggleClass, !event.currentTarget.checked);
-                verbModalContent.classList.toggle(toggleClass, !event.currentTarget.checked);
+                const isChecked = event.currentTarget.checked;
+                mainContainer.classList.toggle(toggleClass, !isChecked);
+                verbModalContent.classList.toggle(toggleClass, !isChecked);
+
+                // Save to localStorage
+                localStorage.setItem(`toggle-${toggleId}`, isChecked);
             });
         });
 
