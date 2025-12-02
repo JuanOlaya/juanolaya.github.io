@@ -13,7 +13,11 @@
       "Bash(if [ -f nul ])",
       "Bash(then rm nul)",
       "Bash(else echo \"nul file not found\")",
-      "Bash(python -m http.server:*)"
+      "Bash(python -m http.server:*)",
+      "Bash(if [ -d \"C:\\Users\\juan\\Documents\\GitHub\\juanolaya.github.io\\Deutsch_lernen\\verben\\A2\" ])",
+      "Bash(then echo \"A2 exists\")",
+      "Bash(else echo \"No A2 folder\")",
+      "Bash(fi)"
     ],
     "deny": [],
     "ask": []
