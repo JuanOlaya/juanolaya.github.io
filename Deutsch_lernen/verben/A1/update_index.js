@@ -6,7 +6,7 @@ const path = require('path');
  */
 function updateVerbsIndex() {
     const groupsDir = path.join(__dirname, 'json', 'groups');
-    const totalGroups = 26;
+    const totalGroups = 29;
     const allGroups = [];
 
     console.log('Updating verbs index...');
@@ -17,7 +17,6 @@ function updateVerbsIndex() {
         try {
             const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
             allGroups.push({
-                groupNumber: i,
                 level: data.level,
                 verbCount: data.verbs ? data.verbs.length : 0,
                 verbs: data.verbs || []
@@ -26,6 +25,16 @@ function updateVerbsIndex() {
             console.error(`⚠ Error reading group_${i}.json:`, error.message);
         }
     }
+
+    // Calculate groupNumberPerLevel for each group
+    const levelCounts = {};
+    allGroups.forEach(group => {
+        if (!levelCounts[group.level]) {
+            levelCounts[group.level] = 0;
+        }
+        levelCounts[group.level]++;
+        group.groupNumberPerLevel = levelCounts[group.level];
+    });
 
     // Create index data
     const indexData = {
