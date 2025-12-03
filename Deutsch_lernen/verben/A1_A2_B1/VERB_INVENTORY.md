@@ -1,8 +1,8 @@
 # Complete Verb Inventory by Level and Group
 
 **Generated:** 2025-12-03
-**Total Groups:** 38
-**Total Verbs:** 246
+**Total Groups:** 41
+**Total Verbs:** 273
 
 ---
 
@@ -127,16 +127,25 @@ zumachen, zurückkommen, behalten, versuchen, verschenken
 
 ---
 
-## B1.1 - 3 Groups, 14 Verbs
+## B1.1 - 6 Groups, 41 Verbs
 
-### Group 1: Ethics & Consequences (6 verbs)
-spenden, aufsuchen, stehlen, bewerten, betrinken, verlassen
+### Group 1: Ethics & Consequences (8 verbs)
+spenden, aufsuchen, stehlen, zurückbringen, laden, bewerten, betrinken, verlassen
 
-### Group 2: Presentation (4 verbs)
-schmücken, verzieren, vorstellen, wünschen
+### Group 2: Presentation (5 verbs)
+schmücken, beraten, erstellen, vorstellen, wünschen
 
 ### Group 3: Research & Analysis (4 verbs)
 forschen, erforschen, analysieren, dokumentieren
+
+### Group 4: Umwelt (9 verbs)
+schützen, verschmutzen, verbrauchen, wegwerfen, trennen, recyceln, zerstören, verzichten, sparen
+
+### Group 5: Digitale Welt (9 verbs)
+herunterladen, hochladen, löschen, einschalten, ausschalten, klicken, teilen, posten, nutzen
+
+### Group 6: Gesellschaft (9 verbs)
+wählen, diskutieren, sich engagieren, fordern, unterstützen, akzeptieren, überzeugen, respektieren, regieren
 
 ---
 
@@ -148,8 +157,8 @@ forschen, erforschen, analysieren, dokumentieren
 | A1.2  | 9      | 61    | 6.8             |
 | A2.1  | 9      | 66    | 7.3             |
 | A2.2  | 9      | 48    | 5.3             |
-| B1.1  | 3      | 14    | 4.7             |
-| **Total** | **38** | **246** | **6.5** |
+| B1.1  | 6      | 41    | 6.8             |
+| **Total** | **41** | **273** | **6.7** |
 
 ---
 
