@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'A1_2': { groupCount: 9, displayName: 'A1.2' },
         'A2_1': { groupCount: 9, displayName: 'A2.1' },
         'A2_2': { groupCount: 8, displayName: 'A2.2' },
-        'B1_1': { groupCount: 1, displayName: 'B1.1' }
+        'B1_1': { groupCount: 6, displayName: 'B1.1' }
     };
     const levelOrder = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1'];
 
@@ -261,11 +261,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Check if light version is active
-        const lightVersionSwitch = document.getElementById('light-version-switch');
-        const isLightVersion = lightVersionSwitch && lightVersionSwitch.checked;
+        // Check which version is active
+        const selectedVersionRadio = document.querySelector('input[name="card-version"]:checked');
+        const activeVersion = selectedVersionRadio ? selectedVersionRadio.value : 'normal';
 
-        if (isLightVersion) {
+        if (activeVersion === 'light') {
             renderLightVersion(group);
             updateProgressBar();
             updateLevelNavigationButtons();
@@ -410,6 +410,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="german-praeteritum praeteritum-text" data-form="praeteritum" data-short="${germanPraeteritumShort}" data-full="${germanPraeteritumFull}">${germanPraeteritumShort}</span>
                             <span class="spanish-praeteritum praeteritum-text" data-form="translation praeteritum" data-short="${spanishPraeteritumShort}" data-full="${spanishPraeteritumFull}">${spanishPraeteritumShort}</span>
                             ${konjunktivHTML}
+                        </div>
+                        <div class="cute-translations">
+                            <div class="cute-translation-es">${esTranslation}</div>
+                            <div class="cute-translation-en">${(verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim()}</div>
                         </div>
                     </div>
                 </div>`;
@@ -974,32 +978,43 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Light version toggle
-        const lightVersionSwitch = document.getElementById('light-version-switch');
-        if (lightVersionSwitch) {
-            // Load saved state from localStorage
-            const savedLightVersion = localStorage.getItem('verben-light-version');
-            if (savedLightVersion === 'true') {
-                lightVersionSwitch.checked = true;
+        // Version selector (Normal, Leichte, Niedliche)
+        const versionRadios = document.querySelectorAll('input[name="card-version"]');
+
+        // Load saved state from localStorage
+        const savedVersion = localStorage.getItem('verben-card-version') || 'normal';
+        const savedRadio = document.querySelector(`input[name="card-version"][value="${savedVersion}"]`);
+        if (savedRadio) {
+            savedRadio.checked = true;
+            mainContainer.classList.remove('light-version', 'cute-version');
+            if (savedVersion === 'light') {
                 mainContainer.classList.add('light-version');
+            } else if (savedVersion === 'cute') {
+                mainContainer.classList.add('cute-version');
             }
+        }
 
-            // Event listener for toggle changes
-            lightVersionSwitch.addEventListener('change', (event) => {
-                const isChecked = event.currentTarget.checked;
+        // Event listeners for version changes
+        versionRadios.forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                const selectedVersion = event.target.value;
 
-                if (isChecked) {
+                // Remove all version classes
+                mainContainer.classList.remove('light-version', 'cute-version');
+
+                // Add appropriate class
+                if (selectedVersion === 'light') {
                     mainContainer.classList.add('light-version');
-                } else {
-                    mainContainer.classList.remove('light-version');
+                } else if (selectedVersion === 'cute') {
+                    mainContainer.classList.add('cute-version');
                 }
 
                 // Save to localStorage
-                localStorage.setItem('verben-light-version', isChecked);
+                localStorage.setItem('verben-card-version', selectedVersion);
 
                 renderVerbGroup();
             });
-        }
+        });
 
         storyButton.addEventListener('click', () => {
             storyContainer.style.display = 'block';
@@ -1807,6 +1822,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="german-praeteritum praeteritum-text" data-form="praeteritum" data-short="${germanPraeteritumShort}" data-full="${germanPraeteritumFull}">${germanPraeteritumShort}</span>
                             <span class="spanish-praeteritum praeteritum-text" data-form="translation praeteritum" data-short="${spanishPraeteritumShort}" data-full="${spanishPraeteritumFull}">${spanishPraeteritumShort}</span>
                             ${konjunktivHTML}
+                        </div>
+                        <div class="cute-translations">
+                            <div class="cute-translation-es">${esTranslation}</div>
+                            <div class="cute-translation-en">${(verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim()}</div>
                         </div>
                     </div>
                 </div>`;

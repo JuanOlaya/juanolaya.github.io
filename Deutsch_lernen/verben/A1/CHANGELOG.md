@@ -1,6 +1,24 @@
 # Changelog - German Verbs Group Structure
 
-## 2025-12-03
+## 2025-12-03 (Latest Update)
+
+### A1.1 Changes
+- **Modified Group 1**: "Being & Existence"
+  - Removed verbs: `leben`, `liegen`, `stehen`, `bleiben` (moved to A1.2 Placement) - 8 verbs → 4 verbs
+
+### A1.2 Changes
+- **Modified Group 9**: "Placement"
+  - Added verbs: `liegen`, `stehen`, `bleiben` (moved from A1.1 Being & Existence) - 1 verb → 4 verbs
+  - Note: `leben` was already in this group
+
+### Summary
+- A1.1 total verbs: 61 → 57 (-4 verbs)
+- A1.2 total verbs: 58 → 61 (+3 verbs, net change because leben was in both groups)
+- Overall total verbs: 247 → 246 (-1 verb, removed duplicate)
+
+---
+
+## 2025-12-03 (Previous Update)
 
 ### A1.1 Changes
 - **Added Group 7**: "Logistics" (between Commerce and Modals & Feelings)
