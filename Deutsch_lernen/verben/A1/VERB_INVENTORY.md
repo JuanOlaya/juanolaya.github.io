@@ -2,14 +2,14 @@
 
 **Generated:** 2025-12-03
 **Total Groups:** 38
-**Total Verbs:** 247
+**Total Verbs:** 246
 
 ---
 
-## A1.1 - 8 Groups, 61 Verbs
+## A1.1 - 8 Groups, 57 Verbs
 
-### Group 1: Being & Existence (8 verbs)
-sein, haben, werden, wohnen, leben, liegen, stehen, bleiben
+### Group 1: Being & Existence (4 verbs)
+sein, haben, werden, wohnen
 
 ### Group 2: Daily Actions (7 verbs)
 essen, trinken, rauchen, geben, sehen, bringen, brauchen
@@ -34,7 +34,7 @@ dürfen, können, müssen, sollen, wollen, mögen, gefallen, lieben, hassen
 
 ---
 
-## A1.2 - 9 Groups, 58 Verbs
+## A1.2 - 9 Groups, 61 Verbs
 
 ### Group 1: Social Connection (9 verbs)
 helfen, danken, treffen, anrufen, einladen, lachen, gratulieren, abgeben, schenken
@@ -60,8 +60,8 @@ buchstabieren, wählen, sortieren, sagen, fragen, bitten, antworten, beantworten
 ### Group 8: Position & Placement (6 verbs)
 legen, stellen, setzen, sitzen, hängen, übernachten
 
-### Group 9: Placement (1 verb)
-leben
+### Group 9: Placement (4 verbs)
+leben, liegen, stehen, bleiben
 
 ---
 
@@ -144,12 +144,12 @@ forschen, erforschen, analysieren, dokumentieren
 
 | Level | Groups | Verbs | Avg Verbs/Group |
 |-------|--------|-------|-----------------|
-| A1.1  | 8      | 61    | 7.6             |
-| A1.2  | 9      | 58    | 6.4             |
+| A1.1  | 8      | 57    | 7.1             |
+| A1.2  | 9      | 61    | 6.8             |
 | A2.1  | 9      | 66    | 7.3             |
 | A2.2  | 9      | 48    | 5.3             |
 | B1.1  | 3      | 14    | 4.7             |
-| **Total** | **38** | **247** | **6.5** |
+| **Total** | **38** | **246** | **6.5** |
 
 ---
 
