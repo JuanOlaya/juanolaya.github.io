@@ -4,6 +4,8 @@
 **Total Groups:** 38
 **Total Verbs:** 244
 
+**Note:** Net change is 0 verbs - only reorganization of existing verbs between groups
+
 ---
 
 ## A1.1 - 8 Groups, 58 Verbs
@@ -34,7 +36,7 @@ dürfen, können, müssen, sollen, wollen, mögen, gefallen, lieben, hassen
 
 ---
 
-## A1.2 - 9 Groups, 61 Verbs
+## A1.2 - 9 Groups, 59 Verbs
 
 ### Group 1: Social Connection (9 verbs)
 helfen, danken, treffen, anrufen, einladen, lachen, gratulieren, abgeben, schenken
@@ -45,8 +47,8 @@ baden, duschen, waschen, putzen, aufräumen
 ### Group 3: Appearance & Response (9 verbs)
 aussehen, scheinen, tragen, anziehen, ausziehen, zeigen, folgen, passen, probieren
 
-### Group 4: Transit (9 verbs)
-fahren, halten, einsteigen, aussteigen, umsteigen, abfahren, ankommen, nehmen, warten
+### Group 4: Transit (8 verbs)
+fahren, halten, einsteigen, aussteigen, umsteigen, abfahren, ankommen, nehmen
 
 ### Group 5: Travel (7 verbs)
 fliegen, reisen, buchen, reservieren, auspacken, bestätigen, verpassen
@@ -57,27 +59,27 @@ mieten, umziehen, parken, besuchen, suchen, finden
 ### Group 7: Speech Mechanics (8 verbs)
 buchstabieren, wählen, sortieren, sagen, fragen, bitten, antworten, beantworten
 
-### Group 8: Position & Placement (7 verbs)
-legen, stellen, dauern, setzen, sitzen, hängen, übernachten
+### Group 8: Position & Placement (6 verbs)
+legen, stellen, setzen, sitzen, hängen, übernachten
 
 ### Group 9: Placement (1 verb)
 leben
 
 ---
 
-## A2.1 - 9 Groups, 59 Verbs
+## A2.1 - 9 Groups, 63 Verbs
 
 ### Group 1: Social Dynamics (9 verbs)
 unterhalten, erzählen, versprechen, mitmachen, gehören, streiten, stören, küssen, bedanken
 
-### Group 2: Leisure & Relaxation (6 verbs)
-aufstehen, fernsehen, mitbringen, anfangen, beginnen, feiern
+### Group 2: Leisure & Relaxation (5 verbs)
+aufstehen, fernsehen, mitbringen, beginnen, feiern
 
 ### Group 3: Organization & Errands (6 verbs)
 abholen, mitkommen, zurückgeben, bekommen, vergessen, ordnen
 
-### Group 4: Termin (1 verb)
-verschieben
+### Group 4: Termin (6 verbs)
+verschieben, vereinbaren, dauern, warten, anfangen, aufhören
 
 ### Group 5: Logic & Results (9 verbs)
 studieren, vergleichen, vorschlagen, öffnen, schließen, entscheiden, erreichen, gewinnen, raten
@@ -96,7 +98,7 @@ heißen, bedeuten, meinen, verstehen, erklären, nennen, beschreiben, übersetze
 
 ---
 
-## A2.2 - 9 Groups, 50 Verbs
+## A2.2 - 9 Groups, 48 Verbs
 
 ### Group 1: Transformation (4 verbs)
 anbieten, erinnern, mitnehmen, teilnehmen
@@ -119,8 +121,8 @@ braten, schneiden, mischen, vermischen, wegwerfen, schmecken, schmerzen, riechen
 ### Group 7: Resource Management (7 verbs)
 herstellen, lügen, schaffen, schimpfen, sammeln, sparen, speichern
 
-### Group 8: Admin & Appointments (6 verbs)
-überweisen, unternehmen, untersuchen, vereinbaren, weiterhelfen, aufhören
+### Group 8: Admin & Appointments (4 verbs)
+überweisen, unternehmen, untersuchen, weiterhelfen
 
 ### Group 9: Abstract Outcomes (5 verbs)
 zumachen, zurückkommen, behalten, versuchen, verschenken
@@ -145,9 +147,9 @@ forschen, erforschen, analysieren, dokumentieren
 | Level | Groups | Verbs | Avg Verbs/Group |
 |-------|--------|-------|-----------------|
 | A1.1  | 8      | 58    | 7.3             |
-| A1.2  | 9      | 61    | 6.8             |
-| A2.1  | 9      | 59    | 6.6             |
-| A2.2  | 9      | 50    | 5.6             |
+| A1.2  | 9      | 59    | 6.6             |
+| A2.1  | 9      | 63    | 7.0             |
+| A2.2  | 9      | 48    | 5.3             |
 | B1.1  | 3      | 16    | 5.3             |
 | **Total** | **38** | **244** | **6.4** |
 

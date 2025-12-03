@@ -4,13 +4,22 @@
 
 ### A1.1 Changes
 - **Added Group 7**: "Logistics" (between Commerce and Modals & Feelings)
-  - Moved verb: `packen` (from A1.2 Travel group)
+  - Initially created with: `packen` (from A1.2 Travel group)
+  - **Populated with 6 additional verbs**:
+    - `auspacken` (moved from A1.2 Travel)
+    - `schicken` (moved from A1.1 Daily Routine)
+    - `versenden` (moved from A1.1 Commerce)
+    - `liefern` (moved from A1.1 Commerce)
+    - `laden` (moved from B1.1 Ethics & Consequences)
+    - `zurückbringen` (moved from B1.1 Ethics & Consequences)
   - Total groups: 7 → 8
   - Group 7 (Modals & Feelings) renamed to Group 8
+  - Group 7 total: 1 verb → 7 verbs
 
 - **Modified existing groups**:
   - Group 2 "Daily Actions": Removed `suchen` and `finden` (moved to A1.2 City and living) - 9 verbs → 7 verbs
-  - Group 6 "Commerce": Removed `mieten` (moved to A1.2 City and living) - 9 verbs → 8 verbs
+  - Group 3 "Daily Routine": Removed `schicken` (moved to Logistics) - 9 verbs → 8 verbs
+  - Group 6 "Commerce": Removed `mieten`, `versenden`, `liefern` (moved to A1.2 City and living and Logistics) - 8 verbs → 6 verbs
 
 ### A1.2 Changes
 - **Added Group 6**: "City and living" (between Travel and Speech Mechanics)
@@ -33,31 +42,46 @@
   - Groups 4-7 renumbered accordingly
 
 - **Modified existing groups**:
-  - Group 5 "Travel": Removed `besuchen` (moved to City and living)
-  - Group 8 "Position & Placement": Removed `parken` (moved to City and living)
+  - Group 4 "Transit": Removed `warten` (moved to A2.1 Termin) - 9 verbs → 8 verbs
+  - Group 5 "Travel": Removed `besuchen` and `auspacken` (moved to City and living and A1.1 Logistics) - 7 verbs → 6 verbs
+  - Group 8 "Position & Placement": Removed `parken` and `dauern` (moved to City and living and A2.1 Termin) - 7 verbs → 6 verbs
 
 - **Final A1.2 structure** (9 groups):
   1. Social Connection
   2. Hygiene & Home
   3. Appearance & Response
-  4. Transit
+  4. Transit (8 verbs, was 9)
   5. Travel (7 verbs, was 8)
   6. City and living (NEW - 6 verbs)
   7. Speech Mechanics
-  8. Position & Placement (7 verbs, was 8)
+  8. Position & Placement (6 verbs, was 8)
   9. Placement (NEW)
 
 ### A2.1 Changes
 - **Added Group 4**: "Termin" (between Organization & Errands and Logic & Results)
-  - Moved verb: `verschieben` (from A2.2 Admin & Appointments)
+  - Initially created with: `verschieben` (from A2.2 Admin & Appointments)
+  - **Populated with 5 additional verbs** (moved from other groups):
+    - `vereinbaren` (moved from A2.2 Admin & Appointments)
+    - `dauern` (moved from A1.2 Position & Placement)
+    - `warten` (moved from A1.2 Transit)
+    - `anfangen` (moved from A2.1 Leisure & Relaxation)
+    - `aufhören` (moved from A2.2 Admin & Appointments)
+  - **Added 3 new verbs** (not previously in system):
+    - `absagen` (to cancel)
+    - `planen` (to plan)
+    - `vorhaben` (to intend / have plans)
   - Total groups: 7 → 9
   - Groups 4-8 shifted to 5-9
+  - Group 4 total: 6 verbs → 9 verbs
+
+- **Modified existing groups**:
+  - Group 2 "Leisure & Relaxation": Removed `anfangen` (moved to Termin) - 6 verbs → 5 verbs
 
 - **Final A2.1 structure** (9 groups):
   1. Social Dynamics
-  2. Leisure & Relaxation
+  2. Leisure & Relaxation (5 verbs, was 6)
   3. Organization & Errands
-  4. Termin (NEW)
+  4. Termin (NEW - 9 verbs, 3 newly created)
   5. Logic & Results
   6. Change & Impact
   7. Fate, Nature & Events
@@ -66,10 +90,14 @@
 
 ### A2.2 Changes
 - **Modified Group 8**: "Admin & Appointments"
-  - Removed verb: `verschieben` (moved to A2.1 Termin)
+  - Removed verbs: `verschieben`, `vereinbaren`, `aufhören` (moved to A2.1 Termin) - 6 verbs → 4 verbs
 
 - **Modified Group 1**: "Transformation"
   - Removed verb: `umziehen` (moved to A1.2 City and living) - 5 verbs → 4 verbs
+
+### B1.1 Changes
+- **Modified Group 1**: "Ethics & Consequences"
+  - Removed verbs: `laden`, `zurückbringen` (moved to A1.1 Logistics) - 8 verbs → 6 verbs
 
 ### verbs_index.json Changes
 - Introduced `groupNumberPerLevel` field (replaces global `groupNumber`)
