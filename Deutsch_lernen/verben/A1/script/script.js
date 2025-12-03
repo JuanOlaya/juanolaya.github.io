@@ -1087,7 +1087,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const irregularMark = updatedData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
         infinitiveElement.innerHTML = verb + irregularMark;
 
-        // Add case tags to modal infinitive
+        // Add case tags below translations
+        const caseTagsContainer = document.getElementById('modal-case-tags-container');
+        caseTagsContainer.innerHTML = ''; // Clear previous tags
+
         if (updatedData.case_tags && updatedData.case_tags.length > 0) {
             const tagDisplay = {
                 'dat': '🔴 [+Dat]',
@@ -1104,25 +1107,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (tag.startsWith('prep:')) {
                     const prep = tag.substring(5);
-                    tagSpan.textContent = ` ⚪ [+Prep: ${prep}]`;
+                    tagSpan.textContent = `⚪ [+Prep: ${prep}]`;
                     tagSpan.className = 'case-tag case-tag-prep';
                 } else {
-                    tagSpan.textContent = ` ${tagDisplay[tag] || tag}`;
+                    tagSpan.textContent = tagDisplay[tag] || tag;
                 }
 
-                infinitiveElement.appendChild(tagSpan);
+                caseTagsContainer.appendChild(tagSpan);
             });
         }
 
         document.getElementById('modal-verb-perfekt').textContent = updatedData.perfekt || '---';
         document.getElementById('modal-verb-praeteritum').textContent = updatedData.praeteritum || '---';
         document.getElementById('modal-emoji').textContent = updatedData.emoji || '❓';
-        document.getElementById('modal-verb-infinitive-es').textContent = updatedData.es ? `🇪🇸 ${updatedData.es}` : '';
-        document.getElementById('modal-verb-perfekt-es').textContent = updatedData.es_perfekt ? `🇪🇸 ${updatedData.es_perfekt}` : '';
-        document.getElementById('modal-verb-praeteritum-es').textContent = updatedData.es_praeteritum ? `🇪🇸 ${updatedData.es_praeteritum}` : '';
-        document.getElementById('modal-verb-english-infinitive').textContent = updatedData.en_verb ? `🇬🇧 ${updatedData.en_verb}` : '';
-        document.getElementById('modal-verb-english-perfekt').textContent = updatedData.en_perfekt ? `🇬🇧 ${updatedData.en_perfekt}` : '';
-        document.getElementById('modal-verb-english-praeteritum').textContent = updatedData.en_praeteritum ? `🇬🇧 ${updatedData.en_praeteritum}` : '';
+        document.getElementById('modal-verb-infinitive-es').textContent = updatedData.es || '';
+        document.getElementById('modal-verb-perfekt-es').textContent = updatedData.es_perfekt || '';
+        document.getElementById('modal-verb-praeteritum-es').textContent = updatedData.es_praeteritum || '';
+        document.getElementById('modal-verb-english-infinitive').textContent = updatedData.en_verb || '';
+        document.getElementById('modal-verb-english-perfekt').textContent = updatedData.en_perfekt || '';
+        document.getElementById('modal-verb-english-praeteritum').textContent = updatedData.en_praeteritum || '';
         document.getElementById('modal-level-badge').textContent = updatedData.level || 'A1';
 
         // Display note_es if it exists
