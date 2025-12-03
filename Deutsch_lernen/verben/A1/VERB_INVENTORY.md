@@ -2,13 +2,11 @@
 
 **Generated:** 2025-12-03
 **Total Groups:** 38
-**Total Verbs:** 244
-
-**Note:** Net change is 0 verbs - only reorganization of existing verbs between groups
+**Total Verbs:** 247
 
 ---
 
-## A1.1 - 8 Groups, 58 Verbs
+## A1.1 - 8 Groups, 61 Verbs
 
 ### Group 1: Being & Existence (8 verbs)
 sein, haben, werden, wohnen, leben, liegen, stehen, bleiben
@@ -16,8 +14,8 @@ sein, haben, werden, wohnen, leben, liegen, stehen, bleiben
 ### Group 2: Daily Actions (7 verbs)
 essen, trinken, rauchen, geben, sehen, bringen, brauchen
 
-### Group 3: Daily Routine (9 verbs)
-lesen, hören, schreiben, sprechen, schlafen, arbeiten, lernen, wecken, schicken
+### Group 3: Daily Routine (8 verbs)
+lesen, hören, schreiben, sprechen, schlafen, arbeiten, lernen, wecken
 
 ### Group 4: Activity & Sport (8 verbs)
 kommen, gehen, treiben, laufen, tanzen, machen, wandern, spazieren
@@ -25,18 +23,18 @@ kommen, gehen, treiben, laufen, tanzen, machen, wandern, spazieren
 ### Group 5: The Mind (8 verbs)
 wissen, kennen, denken, glauben, weinen, träumen, fühlen, kennenlernen
 
-### Group 6: Commerce (8 verbs)
-kaufen, einkaufen, bezahlen, versenden, liefern, verkaufen, kosten, bestellen
+### Group 6: Commerce (6 verbs)
+kaufen, einkaufen, bezahlen, verkaufen, kosten, bestellen
 
-### Group 7: Logistics (1 verb)
-packen
+### Group 7: Logistics (7 verbs)
+packen, auspacken, schicken, versenden, liefern, laden, zurückbringen
 
 ### Group 8: Modals & Feelings (9 verbs)
 dürfen, können, müssen, sollen, wollen, mögen, gefallen, lieben, hassen
 
 ---
 
-## A1.2 - 9 Groups, 59 Verbs
+## A1.2 - 9 Groups, 58 Verbs
 
 ### Group 1: Social Connection (9 verbs)
 helfen, danken, treffen, anrufen, einladen, lachen, gratulieren, abgeben, schenken
@@ -50,8 +48,8 @@ aussehen, scheinen, tragen, anziehen, ausziehen, zeigen, folgen, passen, probier
 ### Group 4: Transit (8 verbs)
 fahren, halten, einsteigen, aussteigen, umsteigen, abfahren, ankommen, nehmen
 
-### Group 5: Travel (7 verbs)
-fliegen, reisen, buchen, reservieren, auspacken, bestätigen, verpassen
+### Group 5: Travel (6 verbs)
+fliegen, reisen, buchen, reservieren, bestätigen, verpassen
 
 ### Group 6: City and living (6 verbs)
 mieten, umziehen, parken, besuchen, suchen, finden
@@ -67,7 +65,7 @@ leben
 
 ---
 
-## A2.1 - 9 Groups, 63 Verbs
+## A2.1 - 9 Groups, 66 Verbs
 
 ### Group 1: Social Dynamics (9 verbs)
 unterhalten, erzählen, versprechen, mitmachen, gehören, streiten, stören, küssen, bedanken
@@ -78,8 +76,8 @@ aufstehen, fernsehen, mitbringen, beginnen, feiern
 ### Group 3: Organization & Errands (6 verbs)
 abholen, mitkommen, zurückgeben, bekommen, vergessen, ordnen
 
-### Group 4: Termin (6 verbs)
-verschieben, vereinbaren, dauern, warten, anfangen, aufhören
+### Group 4: Termin (9 verbs)
+verschieben, vereinbaren, dauern, warten, anfangen, aufhören, absagen, planen, vorhaben
 
 ### Group 5: Logic & Results (9 verbs)
 studieren, vergleichen, vorschlagen, öffnen, schließen, entscheiden, erreichen, gewinnen, raten
@@ -129,10 +127,10 @@ zumachen, zurückkommen, behalten, versuchen, verschenken
 
 ---
 
-## B1.1 - 3 Groups, 16 Verbs
+## B1.1 - 3 Groups, 14 Verbs
 
-### Group 1: Ethics & Consequences (8 verbs)
-spenden, aufsuchen, stehlen, zurückbringen, laden, bewerten, betrinken, verlassen
+### Group 1: Ethics & Consequences (6 verbs)
+spenden, aufsuchen, stehlen, bewerten, betrinken, verlassen
 
 ### Group 2: Presentation (4 verbs)
 schmücken, verzieren, vorstellen, wünschen
@@ -146,12 +144,12 @@ forschen, erforschen, analysieren, dokumentieren
 
 | Level | Groups | Verbs | Avg Verbs/Group |
 |-------|--------|-------|-----------------|
-| A1.1  | 8      | 58    | 7.3             |
-| A1.2  | 9      | 59    | 6.6             |
-| A2.1  | 9      | 63    | 7.0             |
+| A1.1  | 8      | 61    | 7.6             |
+| A1.2  | 9      | 58    | 6.4             |
+| A2.1  | 9      | 66    | 7.3             |
 | A2.2  | 9      | 48    | 5.3             |
-| B1.1  | 3      | 16    | 5.3             |
-| **Total** | **38** | **244** | **6.4** |
+| B1.1  | 3      | 14    | 4.7             |
+| **Total** | **38** | **247** | **6.5** |
 
 ---
 
