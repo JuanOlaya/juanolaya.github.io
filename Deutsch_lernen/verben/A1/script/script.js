@@ -961,6 +961,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const savedState = localStorage.getItem(`toggle-${toggleId}`);
             if (savedState !== null) {
                 toggle.checked = savedState === 'true';
+            } else {
+                // Set default state: Übersetzung off by default
+                if (toggleId === 'recall-switch') {
+                    toggle.checked = false;
+                }
             }
 
             // Apply initial state
@@ -981,8 +986,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Version selector (Normal, Leichte, Niedliche)
         const versionRadios = document.querySelectorAll('input[name="card-version"]');
 
-        // Load saved state from localStorage
-        const savedVersion = localStorage.getItem('verben-card-version') || 'normal';
+        // Load saved state from localStorage (default to 'cute')
+        const savedVersion = localStorage.getItem('verben-card-version') || 'cute';
         const savedRadio = document.querySelector(`input[name="card-version"][value="${savedVersion}"]`);
         if (savedRadio) {
             savedRadio.checked = true;

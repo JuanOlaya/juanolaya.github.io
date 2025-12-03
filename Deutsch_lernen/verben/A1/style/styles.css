@@ -1999,13 +1999,32 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
     display: none;
 }
 
+/* Reduce card height in niedliche version */
+.main-container.cute-version .word-item {
+    min-height: 180px;
+}
+
+.main-container.cute-version .card-header {
+    padding: 20px 15px 30px 15px;
+}
+
 .main-container.cute-version .card-header .german-word {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
 }
 
 .main-container.cute-version .card-header .spanish-translation {
     display: none;
+}
+
+.main-container.cute-version .card-body {
+    padding: 35px 15px 15px 15px;
+}
+
+.main-container.cute-version .icon-floating {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
 }
 
 .main-container.cute-version .card-body .text-container {
@@ -2021,7 +2040,7 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 }
 
 .main-container.cute-version .cute-translation-es {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;
     font-style: italic;
     text-align: center;
@@ -2029,7 +2048,7 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 }
 
 .main-container.cute-version .cute-translation-en {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     font-style: italic;
     text-align: center;
