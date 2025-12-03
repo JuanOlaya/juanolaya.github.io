@@ -6,7 +6,7 @@ const path = require('path');
  */
 function updateVerbsIndex() {
     const groupsDir = path.join(__dirname, 'json', 'groups');
-    const totalGroups = 29;
+    const totalGroups = 30;
     const allGroups = [];
 
     console.log('Updating verbs index...');
@@ -45,7 +45,7 @@ function updateVerbsIndex() {
     };
 
     // Write index file
-    const indexPath = path.join(__dirname, 'verbs_index.json');
+    const indexPath = path.join(__dirname, 'json', 'verbs_index.json');
     fs.writeFileSync(indexPath, JSON.stringify(indexData, null, 4) + '\n', 'utf8');
 
     console.log(`✓ Index updated: ${indexData.totalVerbs} verbs across ${totalGroups} groups`);
