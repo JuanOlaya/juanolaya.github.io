@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Level configuration
     const levelConfig = {
-        'A1_1': { groupCount: 8, displayName: 'A1.1' },
+        'A1_1': { groupCount: 9, displayName: 'A1.1' },
         'A1_2': { groupCount: 9, displayName: 'A1.2' },
         'A2_1': { groupCount: 9, displayName: 'A2.1' },
-        'A2_2': { groupCount: 8, displayName: 'A2.2' },
+        'A2_2': { groupCount: 9, displayName: 'A2.2' },
         'B1_1': { groupCount: 6, displayName: 'B1.1' }
     };
     const levelOrder = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1'];
@@ -54,6 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const gustarModal = document.getElementById('gustar-modal');
     const gustarCloseBtn = document.getElementById('gustar-close-btn');
     const gustarCloseFooterBtn = document.getElementById('gustar-close-footer-btn');
+
+    // Theme modal elements
+    const themeModal = document.getElementById('theme-modal');
+    const closeThemeModalX = document.getElementById('close-theme-modal-x');
+    const closeThemeModalBtn = document.getElementById('close-theme-modal-btn');
+
+    // Theme data storage
+    let currentThemeData = null;
 
     // --- NEW LOADING FUNCTION ---
     function loadAppData() {
@@ -511,8 +519,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateGustarButtonVisibility() {
-        // Show gustar button only for A1.1 Group 6 (Sechste Gruppe)
-        if (currentLevel === 'A1_1' && currentGroupInLevel === 5) { // 5 is index for 6th group (0-indexed)
+        // Show gustar button only for A1.1 Group 8 (Modalverben - mögen, gefallen, lieben)
+        if (currentLevel === 'A1_1' && currentGroupInLevel === 7) { // 7 is index for 8th group (0-indexed)
             gustarButtonContainer.style.display = 'block';
         } else {
             gustarButtonContainer.style.display = 'none';
@@ -1040,8 +1048,67 @@ document.addEventListener('DOMContentLoaded', () => {
         gustarCloseBtn.addEventListener('click', () => gustarModal.classList.remove('visible'));
         gustarCloseFooterBtn.addEventListener('click', () => gustarModal.classList.remove('visible'));
         gustarModal.addEventListener('click', (e) => { if (e.target === gustarModal) gustarModal.classList.remove('visible'); });
+
+        // Theme modal event listeners
+        groupThemeIndicator.addEventListener('click', openThemeModal);
+        closeThemeModalX.addEventListener('click', () => themeModal.classList.remove('visible'));
+        closeThemeModalBtn.addEventListener('click', () => themeModal.classList.remove('visible'));
+        themeModal.addEventListener('click', (e) => { if (e.target === themeModal) themeModal.classList.remove('visible'); });
     }
-    
+
+    // --- THEME MODAL FUNCTION ---
+    async function openThemeModal() {
+        const levelKey = currentLevel; // e.g., 'A1_1'
+        const groupNum = currentGroupInLevel + 1; // 1-indexed
+
+        // Fetch theme data from JSON file
+        try {
+            const themeFilename = `${levelKey}_${groupNum}_theme.json`;
+            const response = await fetch(`json/themes/${themeFilename}`);
+
+            if (!response.ok) {
+                console.error(`Failed to load theme data: ${themeFilename}`);
+                return;
+            }
+
+            const themeData = await response.json();
+            currentThemeData = themeData;
+
+            // Populate modal with theme data
+            document.getElementById('theme-modal-german-name').textContent = themeData.germanName;
+            document.getElementById('theme-modal-spanish-name').textContent = themeData.spanishName;
+            document.getElementById('theme-modal-level').textContent = themeData.level;
+            document.getElementById('theme-modal-group').textContent = themeData.group;
+            document.getElementById('theme-modal-short-name').textContent = themeData.shortName;
+            document.getElementById('theme-modal-german-desc').textContent = themeData.germanDescription;
+            document.getElementById('theme-modal-spanish-desc').textContent = themeData.spanishDescription;
+
+            // Populate B1 rating and exam context
+            const ratingBadge = document.getElementById('theme-modal-rating');
+            ratingBadge.textContent = themeData.b1Rating || 'N/A';
+
+            // Add appropriate class based on rating type
+            ratingBadge.className = 'theme-rating-badge';
+            if (themeData.b1Rating) {
+                if (themeData.b1Rating.includes('Critical')) {
+                    ratingBadge.classList.add('critical');
+                } else if (themeData.b1Rating.includes('High')) {
+                    ratingBadge.classList.add('high');
+                } else if (themeData.b1Rating.includes('Medium')) {
+                    ratingBadge.classList.add('medium');
+                }
+            }
+
+            document.getElementById('theme-modal-exam-context').textContent = themeData.examContext || 'No exam context available.';
+            document.getElementById('theme-modal-exam-context-es').textContent = themeData.examContextEs || '';
+
+            // Show the modal
+            themeModal.classList.add('visible');
+        } catch (error) {
+            console.error('Error loading theme data:', error);
+        }
+    }
+
     // --- UPDATED MODAL FUNCTION WITH LAZY LOADING ---
     window.openModalForVerb = async function(verb) {
         const data = allVerbsData[verb];

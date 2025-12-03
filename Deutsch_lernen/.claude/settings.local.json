@@ -24,7 +24,12 @@
       "Bash(cat:*)",
       "Bash(node update_index.js:*)",
       "Bash(rm:*)",
-      "Bash(python extract_gemini_verbs.py:*)"
+      "Bash(python extract_gemini_verbs.py:*)",
+      "Bash(python create_theme_files.py:*)",
+      "Bash(python update_group_themes.py:*)",
+      "Bash(python update_themes_with_ratings.py:*)",
+      "Bash(python add_spanish_exam_context.py:*)",
+      "Bash(for i in {9..1})"
     ],
     "deny": [],
     "ask": []

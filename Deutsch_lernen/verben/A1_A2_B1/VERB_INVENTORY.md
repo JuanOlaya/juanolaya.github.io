@@ -1,12 +1,12 @@
 # Complete Verb Inventory by Level and Group
 
 **Generated:** 2025-12-03
-**Total Groups:** 41
+**Total Groups:** 42
 **Total Verbs:** 273
 
 ---
 
-## A1.1 - 8 Groups, 57 Verbs
+## A1.1 - 9 Groups, 57 Verbs
 
 ### Group 1: Being & Existence (4 verbs)
 sein, haben, werden, wohnen
@@ -20,8 +20,8 @@ lesen, hören, schreiben, sprechen, schlafen, arbeiten, lernen, wecken
 ### Group 4: Activity & Sport (8 verbs)
 kommen, gehen, treiben, laufen, tanzen, machen, wandern, spazieren
 
-### Group 5: The Mind (8 verbs)
-wissen, kennen, denken, glauben, weinen, träumen, fühlen, kennenlernen
+### Group 5: The Mind (6 verbs)
+wissen, kennen, denken, glauben, träumen, kennenlernen
 
 ### Group 6: Commerce (6 verbs)
 kaufen, einkaufen, bezahlen, verkaufen, kosten, bestellen
@@ -29,8 +29,11 @@ kaufen, einkaufen, bezahlen, verkaufen, kosten, bestellen
 ### Group 7: Logistics (7 verbs)
 packen, auspacken, schicken, versenden, liefern, laden, zurückbringen
 
-### Group 8: Modals & Feelings (9 verbs)
-dürfen, können, müssen, sollen, wollen, mögen, gefallen, lieben, hassen
+### Group 8: Modals (6 verbs)
+dürfen, können, müssen, sollen, wollen, mögen
+
+### Group 9: Gefühle (5 verbs)
+gefallen, lieben, hassen, weinen, fühlen
 
 ---
 
@@ -153,12 +156,12 @@ wählen, diskutieren, sich engagieren, fordern, unterstützen, akzeptieren, übe
 
 | Level | Groups | Verbs | Avg Verbs/Group |
 |-------|--------|-------|-----------------|
-| A1.1  | 8      | 57    | 7.1             |
+| A1.1  | 9      | 57    | 6.3             |
 | A1.2  | 9      | 61    | 6.8             |
 | A2.1  | 9      | 66    | 7.3             |
 | A2.2  | 9      | 48    | 5.3             |
 | B1.1  | 6      | 41    | 6.8             |
-| **Total** | **41** | **273** | **6.7** |
+| **Total** | **42** | **273** | **6.5** |
 
 ---
 

@@ -2059,3 +2059,223 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 .main-container.cute-version.hide-translation .cute-translation-en {
     display: none;
 }
+
+/* ==============================
+   THEME MODAL STYLES
+   ============================== */
+
+.theme-modal-content {
+    max-width: 600px;
+    padding: 2rem;
+}
+
+.theme-modal-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #e91e63;
+    padding-bottom: 1rem;
+}
+
+.theme-german-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #880e4f;
+    margin: 0 0 0.5rem 0;
+}
+
+.theme-spanish-name {
+    font-size: 1.5rem;
+    color: #ad1457;
+    margin: 0;
+    font-style: italic;
+}
+
+.theme-modal-body {
+    margin-bottom: 2rem;
+}
+
+.theme-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.theme-info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+    border-radius: 10px;
+}
+
+.theme-info-label {
+    font-size: 0.85rem;
+    color: #6a1b3d;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.theme-info-value {
+    font-size: 1.2rem;
+    color: #880e4f;
+    font-weight: 700;
+}
+
+.theme-descriptions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.theme-description-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+    border-left: 4px solid #e91e63;
+}
+
+.theme-desc-emoji {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.theme-description {
+    font-size: 1rem;
+    color: #4a5568;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.theme-modal-footer {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #f8bbd0;
+}
+
+.theme-close-btn {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-close-btn:hover {
+    background: linear-gradient(135deg, #c2185b 0%, #e91e63 100%);
+    transform: scale(1.05);
+}
+
+/* Make theme indicator clickable */
+.group-theme-indicator {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.group-theme-indicator:hover {
+    background: linear-gradient(135deg, #f48fb1 0%, #f06292 100%);
+    transform: scale(1.05);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .theme-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .theme-german-name {
+        font-size: 2rem;
+    }
+
+    .theme-spanish-name {
+        font-size: 1.2rem;
+    }
+}
+
+/* Theme Rating Section */
+.theme-rating-section {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+    border-radius: 12px;
+    border-left: 5px solid #ffc107;
+}
+
+.theme-rating-badge {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    border-radius: 25px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Rating badge colors */
+.theme-rating-badge.critical {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(238, 90, 111, 0.3);
+}
+
+.theme-rating-badge.high {
+    background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(55, 178, 77, 0.3);
+}
+
+.theme-rating-badge.medium {
+    background: linear-gradient(135deg, #ffd93d 0%, #ffbe0b 100%);
+    color: #5f3e00;
+    box-shadow: 0 4px 12px rgba(255, 190, 11, 0.3);
+}
+
+.theme-exam-context {
+    margin-top: 1rem;
+}
+
+.theme-exam-context strong {
+    display: block;
+    font-size: 1.1rem;
+    color: #6a1b3d;
+    margin-bottom: 0.5rem;
+}
+
+.theme-exam-context p {
+    font-size: 1rem;
+    color: #4a5568;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive adjustments for rating section */
+@media (max-width: 768px) {
+    .theme-rating-badge {
+        font-size: 1.1rem;
+        padding: 0.6rem 1.2rem;
+    }
+
+    .theme-exam-context strong {
+        font-size: 1rem;
+    }
+
+    .theme-exam-context p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Spanish Exam Context (italic) */
+.theme-exam-context-spanish {
+    font-style: italic;
+    color: #6a6a6a;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+}
