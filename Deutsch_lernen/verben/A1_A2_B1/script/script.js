@@ -1043,6 +1043,38 @@ document.addEventListener('DOMContentLoaded', () => {
         closeVerbModalXButton.addEventListener('click', () => verbModal.classList.remove('visible'));
         verbModal.addEventListener('click', (e) => { if (e.target === verbModal) verbModal.classList.remove('visible'); });
 
+        // Theme badge click handler - navigate to verb's theme group
+        const modalThemeBadge = document.getElementById('modal-theme-badge');
+        modalThemeBadge.addEventListener('click', () => {
+            const targetLevel = modalThemeBadge.dataset.level;
+            const targetGroup = parseInt(modalThemeBadge.dataset.group);
+
+            if (targetLevel && targetGroup) {
+                // Convert display level (e.g., "B1.1") to internal key (e.g., "B1_1")
+                const levelKey = targetLevel.replace('.', '_');
+
+                // Close the verb modal
+                verbModal.classList.remove('visible');
+
+                // Clear search input and reset UI
+                const searchInput = document.getElementById('verb-search');
+                const clearSearchBtn = document.getElementById('clear-search');
+                const searchCounter = document.getElementById('search-counter');
+                if (searchInput) {
+                    searchInput.value = '';
+                    if (clearSearchBtn) clearSearchBtn.classList.remove('visible');
+                    if (searchCounter) searchCounter.textContent = '';
+                }
+
+                // Navigate to the target level and group
+                currentLevel = levelKey;
+                currentGroupInLevel = targetGroup - 1; // Convert to 0-indexed
+
+                // Update UI
+                renderCurrentGroup();
+            }
+        });
+
         // Gustar modal event listeners
         gustarButton.addEventListener('click', () => gustarModal.classList.add('visible'));
         gustarCloseBtn.addEventListener('click', () => gustarModal.classList.remove('visible'));
@@ -1199,6 +1231,19 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modal-verb-english-perfekt').textContent = updatedData.en_perfekt || '';
         document.getElementById('modal-verb-english-praeteritum').textContent = updatedData.en_praeteritum || '';
         document.getElementById('modal-level-badge').textContent = updatedData.level || 'A1';
+
+        // Populate and setup theme badge
+        const themeBadge = document.getElementById('modal-theme-badge');
+        if (updatedData.theme && updatedData.group) {
+            themeBadge.textContent = updatedData.theme;
+            themeBadge.style.display = 'block';
+
+            // Store theme navigation data
+            themeBadge.dataset.level = updatedData.level;
+            themeBadge.dataset.group = updatedData.group;
+        } else {
+            themeBadge.style.display = 'none';
+        }
 
         // Display note_es if it exists
         const noteElement = document.getElementById('modal-verb-note');
