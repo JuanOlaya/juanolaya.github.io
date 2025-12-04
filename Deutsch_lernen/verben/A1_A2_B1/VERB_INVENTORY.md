@@ -1,153 +1,153 @@
 # Complete Verb Inventory by Level and Group
 
-**Generated:** 2025-12-03
+**Generated:** 2025-12-04
 **Total Groups:** 42
-**Total Verbs:** 273
+**Total Verbs:** 269
 
 ---
 
 ## A1.1 - 9 Groups, 57 Verbs
 
-### Group 1: Being & Existence (4 verbs)
-sein, haben, werden, wohnen
+### Group 1: Existenz / Existence (8 verbs)
+sein, haben, werden, wohnen, geben, machen, kommen, gehen
 
-### Group 2: Daily Actions (7 verbs)
-essen, trinken, rauchen, geben, sehen, bringen, brauchen
+### Group 2: Grundbedürfnisse / Basic Needs (7 verbs)
+essen, trinken, rauchen, sehen, bringen, brauchen, schlafen
 
-### Group 3: Daily Routine (8 verbs)
-lesen, hören, schreiben, sprechen, schlafen, arbeiten, lernen, wecken
+### Group 3: Routine / Routine (9 verbs)
+lesen, hören, schreiben, sprechen, arbeiten, lernen, wecken, öffnen, schließen
 
-### Group 4: Activity & Sport (8 verbs)
-kommen, gehen, treiben, laufen, tanzen, machen, wandern, spazieren
+### Group 4: Bewegung / Movement (5 verbs)
+treiben, laufen, tanzen, wandern, spazieren
 
-### Group 5: The Mind (6 verbs)
+### Group 5: Gedanken / Thoughts (6 verbs)
 wissen, kennen, denken, glauben, träumen, kennenlernen
 
-### Group 6: Commerce (6 verbs)
+### Group 6: Einkauf / Shopping (6 verbs)
 kaufen, einkaufen, bezahlen, verkaufen, kosten, bestellen
 
-### Group 7: Logistics (7 verbs)
-packen, auspacken, schicken, versenden, liefern, laden, zurückbringen
+### Group 7: Logistik / Logistics (6 verbs)
+packen, auspacken, schicken, versenden, liefern, zurückbringen
 
-### Group 8: Modals (6 verbs)
+### Group 8: Modalverben / Modal Verbs (6 verbs)
 dürfen, können, müssen, sollen, wollen, mögen
 
-### Group 9: Gefühle (5 verbs)
-gefallen, lieben, hassen, weinen, fühlen
+### Group 9: Gefühle / Feelings (6 verbs)
+gefallen, lieben, hassen, weinen, fühlen, lachen
 
 ---
 
-## A1.2 - 9 Groups, 61 Verbs
+## A1.2 - 9 Groups, 56 Verbs
 
-### Group 1: Social Connection (9 verbs)
-helfen, danken, treffen, anrufen, einladen, lachen, gratulieren, abgeben, schenken
+### Group 1: Soziales / Social (8 verbs)
+helfen, danken, treffen, anrufen, einladen, gratulieren, abgeben, schenken
 
-### Group 2: Hygiene & Home (5 verbs)
+### Group 2: Körperpflege / Personal Care (5 verbs)
 baden, duschen, waschen, putzen, aufräumen
 
-### Group 3: Appearance & Response (9 verbs)
-aussehen, scheinen, tragen, anziehen, ausziehen, zeigen, folgen, passen, probieren
+### Group 3: Kleidung / Clothing (8 verbs)
+aussehen, scheinen, tragen, anziehen, ausziehen, zeigen, folgen, passen
 
-### Group 4: Transit (8 verbs)
+### Group 4: Pendeln / Commuting (8 verbs)
 fahren, halten, einsteigen, aussteigen, umsteigen, abfahren, ankommen, nehmen
 
-### Group 5: Travel (6 verbs)
+### Group 5: Reisen / Travel (6 verbs)
 fliegen, reisen, buchen, reservieren, bestätigen, verpassen
 
-### Group 6: City and living (6 verbs)
+### Group 6: Stadtleben / City Life (6 verbs)
 mieten, umziehen, parken, besuchen, suchen, finden
 
-### Group 7: Speech Mechanics (8 verbs)
-buchstabieren, wählen, sortieren, sagen, fragen, bitten, antworten, beantworten
+### Group 7: Sprechen / Speaking (8 verbs)
+buchstabieren, sortieren, sagen, fragen, bitten, antworten, beantworten
 
-### Group 8: Position & Placement (6 verbs)
+### Group 8: Positionieren / Positioning (6 verbs)
 legen, stellen, setzen, sitzen, hängen, übernachten
-
-### Group 9: Placement (4 verbs)
-leben, liegen, stehen, bleiben
 
 ---
 
 ## A2.1 - 9 Groups, 66 Verbs
 
-### Group 1: Social Dynamics (9 verbs)
+### Group 1: Beziehungen / Relationships (9 verbs)
 unterhalten, erzählen, versprechen, mitmachen, gehören, streiten, stören, küssen, bedanken
 
-### Group 2: Leisure & Relaxation (5 verbs)
+### Group 2: Freizeit / Leisure (5 verbs)
 aufstehen, fernsehen, mitbringen, beginnen, feiern
 
-### Group 3: Organization & Errands (6 verbs)
+### Group 3: Erledigungen / Errands (6 verbs)
 abholen, mitkommen, zurückgeben, bekommen, vergessen, ordnen
 
-### Group 4: Termin (9 verbs)
+### Group 4: Termine / Appointments (9 verbs)
 verschieben, vereinbaren, dauern, warten, anfangen, aufhören, absagen, planen, vorhaben
 
-### Group 5: Logic & Results (9 verbs)
-studieren, vergleichen, vorschlagen, öffnen, schließen, entscheiden, erreichen, gewinnen, raten
+### Group 5: Entscheidungen / Decisions (7 verbs)
+studieren, vergleichen, vorschlagen, entscheiden, erreichen, gewinnen, raten
 
-### Group 6: Change & Impact (8 verbs)
+### Group 6: Veränderung / Change (8 verbs)
 lassen, tun, wehtun, wechseln, enden, ändern, fallen, brechen
 
-### Group 7: Fate, Nature & Events (6 verbs)
+### Group 7: Ereignisse / Events (6 verbs)
 regnen, schneien, passieren, geschehen, verlieren, hoffen
 
-### Group 8: Creativity & Emotion (5 verbs)
-singen, üben, zeichnen, malen, erstellen
+### Group 8: Kreativität / Creativity (4 verbs)
+singen, üben, zeichnen, malen
 
-### Group 9: Identity & Meaning (9 verbs)
+### Group 9: Bedeutung / Meaning (9 verbs)
 heißen, bedeuten, meinen, verstehen, erklären, nennen, beschreiben, übersetzen, lösen
 
 ---
 
 ## A2.2 - 9 Groups, 48 Verbs
 
-### Group 1: Transformation (4 verbs)
+### Group 1: Übergang / Transition (4 verbs)
 anbieten, erinnern, mitnehmen, teilnehmen
 
-### Group 2: Setup & Environment (3 verbs)
+### Group 2: Vorbereitung / Preparation (3 verbs)
 vorbereiten, zuhören, leihen
 
-### Group 3: Milestones (5 verbs)
+### Group 3: Lebensereignisse / Life Events (5 verbs)
 drucken, heiraten, sterben, abschließen, bestehen
 
-### Group 4: Professional Discourse (8 verbs)
-begründen, beraten, berichten, beschweren, bewerben, erlauben, fehlen, verdienen
+### Group 4: Geschäftliches / Business (8 verbs)
+begründen, berichten, beschweren, bewerben, erlauben, fehlen, verdienen
 
-### Group 5: Body & Function (4 verbs)
-funktionieren, husten, wachsen, klappen
+### Group 5: Funktion / Function (4 verbs)
+husten, wachsen, klappen
 
-### Group 6: Kitchen & Sensation (8 verbs)
-braten, schneiden, mischen, vermischen, wegwerfen, schmecken, schmerzen, riechen
+### Group 6: Kochen / Cooking (8 verbs)
+braten, schneiden, mischen, vermischen, schmecken, schmerzen, riechen
 
-### Group 7: Resource Management (7 verbs)
-herstellen, lügen, schaffen, schimpfen, sammeln, sparen, speichern
+### Group 7: Ressourcen / Resources (7 verbs)
+herstellen, lügen, schaffen, schimpfen, sammeln, speichern
 
-### Group 8: Admin & Appointments (4 verbs)
+### Group 8: Verwaltung / Administration (4 verbs)
 überweisen, unternehmen, untersuchen, weiterhelfen
 
-### Group 9: Abstract Outcomes (5 verbs)
+### Group 9: Resultate / Results (5 verbs)
 zumachen, zurückkommen, behalten, versuchen, verschenken
 
 ---
 
-## B1.1 - 6 Groups, 41 Verbs
+## B1.1 - 7 Groups, 42 Verbs
 
-### Group 1: Ethics & Consequences (8 verbs)
+### Group 1: Ethik / Ethics (8 verbs)
 spenden, aufsuchen, stehlen, zurückbringen, laden, bewerten, betrinken, verlassen
 
-### Group 2: Presentation (5 verbs)
+### Group 2: Präsentation / Presentation (6 verbs)
 schmücken, beraten, erstellen, vorstellen, wünschen
 
-### Group 3: Research & Analysis (4 verbs)
+### Group 3: Forschung / Research (4 verbs)
 forschen, erforschen, analysieren, dokumentieren
 
-### Group 4: Umwelt (9 verbs)
+### Group 4: Umwelt / Environment (9 verbs)
 schützen, verschmutzen, verbrauchen, wegwerfen, trennen, recyceln, zerstören, verzichten, sparen
 
-### Group 5: Digitale Welt (9 verbs)
+### Group 5: Digitale Welt / Digital World (9 verbs)
 herunterladen, hochladen, löschen, einschalten, ausschalten, klicken, teilen, posten, nutzen
 
-### Group 6: Gesellschaft (9 verbs)
+### Group 6: Technologie / Technology (6 verbs)
+funktionieren, probieren, reparieren, installieren, drücken, einstellen
+
+### Group 7: Gesellschaft / Society (9 verbs)
 wählen, diskutieren, sich engagieren, fordern, unterstützen, akzeptieren, überzeugen, respektieren, regieren
 
 ---
@@ -157,12 +157,12 @@ wählen, diskutieren, sich engagieren, fordern, unterstützen, akzeptieren, übe
 | Level | Groups | Verbs | Avg Verbs/Group |
 |-------|--------|-------|-----------------|
 | A1.1  | 9      | 57    | 6.3             |
-| A1.2  | 9      | 61    | 6.8             |
+| A1.2  | 9      | 56    | 6.2             |
 | A2.1  | 9      | 66    | 7.3             |
 | A2.2  | 9      | 48    | 5.3             |
-| B1.1  | 6      | 41    | 6.8             |
-| **Total** | **42** | **273** | **6.5** |
+| B1.1  | 7      | 42    | 6.0             |
+| **Total** | **43** | **269** | **6.3** |
 
 ---
 
-*This inventory reflects the current state of verb groups as of 2025-12-03*
+*This inventory reflects the current state of verb groups as of 2025-12-04*
