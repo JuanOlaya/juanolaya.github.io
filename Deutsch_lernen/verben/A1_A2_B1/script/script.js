@@ -1043,35 +1043,47 @@ document.addEventListener('DOMContentLoaded', () => {
         closeVerbModalXButton.addEventListener('click', () => verbModal.classList.remove('visible'));
         verbModal.addEventListener('click', (e) => { if (e.target === verbModal) verbModal.classList.remove('visible'); });
 
-        // Theme badge click handler - navigate to verb's theme group
-        const modalThemeBadge = document.getElementById('modal-theme-badge');
-        modalThemeBadge.addEventListener('click', () => {
-            const targetLevel = modalThemeBadge.dataset.level;
-            const targetGroup = parseInt(modalThemeBadge.dataset.group);
+        // Theme badge click handler - using event delegation since badge is created dynamically
+        const caseTagsContainer = document.getElementById('modal-case-tags-container');
+        caseTagsContainer.addEventListener('click', (e) => {
+            // Check if clicked element is the theme badge
+            if (e.target && e.target.id === 'modal-theme-badge') {
+                const targetLevel = e.target.dataset.level;
+                const targetGroup = parseInt(e.target.dataset.group);
 
-            if (targetLevel && targetGroup) {
-                // Convert display level (e.g., "B1.1") to internal key (e.g., "B1_1")
-                const levelKey = targetLevel.replace('.', '_');
+                if (targetLevel && targetGroup) {
+                    // Convert display level (e.g., "B1.1") to internal key (e.g., "B1_1")
+                    const levelKey = targetLevel.replace('.', '_');
 
-                // Close the verb modal
-                verbModal.classList.remove('visible');
+                    // Close the verb modal
+                    verbModal.classList.remove('visible');
 
-                // Clear search input and reset UI
-                const searchInput = document.getElementById('verb-search');
-                const clearSearchBtn = document.getElementById('clear-search');
-                const searchCounter = document.getElementById('search-counter');
-                if (searchInput) {
-                    searchInput.value = '';
-                    if (clearSearchBtn) clearSearchBtn.classList.remove('visible');
-                    if (searchCounter) searchCounter.textContent = '';
+                    // Clear search input and reset UI
+                    const searchInput = document.getElementById('verb-search');
+                    const clearSearchBtn = document.getElementById('clear-search');
+                    const searchCounter = document.getElementById('search-counter');
+                    if (searchInput) {
+                        searchInput.value = '';
+                        if (clearSearchBtn) clearSearchBtn.classList.remove('visible');
+                        if (searchCounter) searchCounter.textContent = '';
+                    }
+
+                    // Re-enable level indicator
+                    if (levelIndicator) {
+                        levelIndicator.style.opacity = '1';
+                        levelIndicator.style.pointerEvents = 'auto';
+                    }
+
+                    // Navigate to the target level and group
+                    currentLevel = levelKey;
+                    currentGroupInLevel = targetGroup - 1; // Convert to 0-indexed
+
+                    // Reset transform before rendering new group
+                    cardsContainer.style.transform = 'translateX(0) scale(1)';
+
+                    // Update UI - render the verb group
+                    renderVerbGroup();
                 }
-
-                // Navigate to the target level and group
-                currentLevel = levelKey;
-                currentGroupInLevel = targetGroup - 1; // Convert to 0-indexed
-
-                // Update UI
-                renderCurrentGroup();
             }
         });
 
@@ -1195,6 +1207,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const caseTagsContainer = document.getElementById('modal-case-tags-container');
         caseTagsContainer.innerHTML = ''; // Clear previous tags
 
+        // Add theme badge as the first element
+        const themeBadge = document.createElement('span');
+        themeBadge.id = 'modal-theme-badge';
+        themeBadge.className = 'modal-theme-badge case-tag';
+        themeBadge.title = 'Zum Thema navigieren (Navigate to theme)';
+
+        if (updatedData.theme && updatedData.group) {
+            themeBadge.textContent = updatedData.theme;
+            themeBadge.style.display = 'inline-block';
+            themeBadge.dataset.level = updatedData.level;
+            themeBadge.dataset.group = updatedData.group;
+        } else {
+            themeBadge.style.display = 'none';
+        }
+
+        caseTagsContainer.appendChild(themeBadge);
+
+        // Add case tags after theme badge
         if (updatedData.case_tags && updatedData.case_tags.length > 0) {
             const tagDisplay = {
                 'dat': '🔴 [+Dat]',
@@ -1231,19 +1261,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modal-verb-english-perfekt').textContent = updatedData.en_perfekt || '';
         document.getElementById('modal-verb-english-praeteritum').textContent = updatedData.en_praeteritum || '';
         document.getElementById('modal-level-badge').textContent = updatedData.level || 'A1';
-
-        // Populate and setup theme badge
-        const themeBadge = document.getElementById('modal-theme-badge');
-        if (updatedData.theme && updatedData.group) {
-            themeBadge.textContent = updatedData.theme;
-            themeBadge.style.display = 'block';
-
-            // Store theme navigation data
-            themeBadge.dataset.level = updatedData.level;
-            themeBadge.dataset.group = updatedData.group;
-        } else {
-            themeBadge.style.display = 'none';
-        }
 
         // Display note_es if it exists
         const noteElement = document.getElementById('modal-verb-note');

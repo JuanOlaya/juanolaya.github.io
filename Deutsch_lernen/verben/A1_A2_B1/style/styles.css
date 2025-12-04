@@ -665,19 +665,11 @@
             transform: scale(1.1);
         }
 
-        /* Top-left badges container in modal */
-        .modal-badges-container {
+        /* Level badge in modal - top left */
+        .modal-level-badge {
             position: absolute;
             top: 15px;
             left: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            z-index: 10;
-        }
-
-        /* Level badge in modal */
-        .modal-level-badge {
             background: linear-gradient(135deg, #4682B4 0%, #5a9bd4 100%);
             color: white;
             padding: 6px 14px;
@@ -685,21 +677,21 @@
             font-size: 0.9rem;
             font-weight: 600;
             box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-            width: fit-content;
+            z-index: 10;
         }
 
-        /* Theme badge in modal */
+        /* Theme badge in modal - in case tags row */
         .modal-theme-badge {
-            background: linear-gradient(135deg, #FF6B9D 0%, #FFA07A 100%);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, #FF6B9D 0%, #FFA07A 100%) !important;
+            color: white !important;
+            border: none !important;
+            padding: 4px 12px !important;
+            border-radius: 12px;
             font-size: 0.85rem;
             font-weight: 600;
             box-shadow: 0 2px 4px rgba(0,0,0,0.15);
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
-            width: fit-content;
             user-select: none;
         }
 
