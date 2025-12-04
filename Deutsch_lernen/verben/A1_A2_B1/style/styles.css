@@ -665,18 +665,51 @@
             transform: scale(1.1);
         }
 
-        /* Top-left level badge in modal */
-        .modal-level-badge {
+        /* Top-left badges container in modal */
+        .modal-badges-container {
             position: absolute;
             top: 15px;
             left: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        /* Level badge in modal */
+        .modal-level-badge {
             background: linear-gradient(135deg, #4682B4 0%, #5a9bd4 100%);
             color: white;
             padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 600;
-            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            width: fit-content;
+        }
+
+        /* Theme badge in modal */
+        .modal-theme-badge {
+            background: linear-gradient(135deg, #FF6B9D 0%, #FFA07A 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: fit-content;
+            user-select: none;
+        }
+
+        .modal-theme-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .modal-theme-badge:active {
+            transform: translateY(0);
             box-shadow: 0 2px 4px rgba(0,0,0,0.15);
         }
 
