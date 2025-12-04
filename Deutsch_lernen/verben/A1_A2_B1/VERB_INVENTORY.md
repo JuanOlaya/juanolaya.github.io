@@ -1,8 +1,8 @@
 # Complete Verb Inventory by Level and Group
 
 **Generated:** 2025-12-04
-**Total Groups:** 42
-**Total Verbs:** 269
+**Total Groups:** 43
+**Total Verbs:** 273
 
 ---
 
@@ -37,7 +37,7 @@ gefallen, lieben, hassen, weinen, fühlen, lachen
 
 ---
 
-## A1.2 - 9 Groups, 56 Verbs
+## A1.2 - 9 Groups, 60 Verbs
 
 ### Group 1: Soziales / Social (8 verbs)
 helfen, danken, treffen, anrufen, einladen, gratulieren, abgeben, schenken
@@ -51,17 +51,17 @@ aussehen, scheinen, tragen, anziehen, ausziehen, zeigen, folgen, passen
 ### Group 4: Pendeln / Commuting (8 verbs)
 fahren, halten, einsteigen, aussteigen, umsteigen, abfahren, ankommen, nehmen
 
-### Group 5: Reisen / Travel (6 verbs)
-fliegen, reisen, buchen, reservieren, bestätigen, verpassen
+### Group 5: Reisen / Travel (7 verbs)
+fliegen, reisen, buchen, reservieren, bestätigen, verpassen, übernachten
 
 ### Group 6: Stadtleben / City Life (6 verbs)
-mieten, umziehen, parken, besuchen, suchen, finden
+suchen, besuchen, finden, mieten, umziehen, parken
 
-### Group 7: Sprechen / Speaking (8 verbs)
+### Group 7: Sprechen / Speaking (7 verbs)
 buchstabieren, sortieren, sagen, fragen, bitten, antworten, beantworten
 
-### Group 8: Positionieren / Positioning (6 verbs)
-legen, stellen, setzen, sitzen, hängen, übernachten
+### Group 8: Positionieren / Positioning (9 verbs)
+legen, stellen, setzen, sitzen, hängen, liegen, leben, stehen, bleiben
 
 ---
 
@@ -157,11 +157,11 @@ wählen, diskutieren, sich engagieren, fordern, unterstützen, akzeptieren, übe
 | Level | Groups | Verbs | Avg Verbs/Group |
 |-------|--------|-------|-----------------|
 | A1.1  | 9      | 57    | 6.3             |
-| A1.2  | 9      | 56    | 6.2             |
+| A1.2  | 9      | 60    | 6.7             |
 | A2.1  | 9      | 66    | 7.3             |
 | A2.2  | 9      | 48    | 5.3             |
 | B1.1  | 7      | 42    | 6.0             |
-| **Total** | **43** | **269** | **6.3** |
+| **Total** | **43** | **273** | **6.3** |
 
 ---
 
