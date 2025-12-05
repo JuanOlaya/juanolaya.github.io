@@ -3,7 +3,7 @@ const path = require('path');
 
 // Level configuration
 const levelConfig = {
-    'A1_1': { groupCount: 9, displayName: 'A1.1' },
+    'A1_1': { groupCount: 10, displayName: 'A1.1' },
     'A1_2': { groupCount: 9, displayName: 'A1.2' },
     'A2_1': { groupCount: 9, displayName: 'A2.1' },
     'A2_2': { groupCount: 12, displayName: 'A2.2' },
