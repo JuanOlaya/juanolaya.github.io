@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const allVerbsData = {};
     let verbGroupsByLevel = {}; // Groups organized by level
     let wortfamilieData = {}; // Word family data
+    let verbTypesData = {}; // Verb types and notes data
     const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "Zwölfte"];
     const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes", "Sechstes", "Siebtes", "Achtes"];
     const savedStories = [
@@ -153,8 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return Promise.all(conjugationPromises).then(() => {
                     console.log('Conjugation data pre-loaded! Search will be fast.');
 
-                    // Load Wortfamilie data
-                    return fetch('json/wortfamilie_kompakt.json')
+                    // Load Wortfamilie data and Verb types data
+                    const wortfamiliePromise = fetch('json/wortfamilie_kompakt.json')
                         .then(res => res.ok ? res.json() : {})
                         .then(data => {
                             wortfamilieData = data.verbs || {};
@@ -163,6 +164,18 @@ document.addEventListener('DOMContentLoaded', () => {
                             console.warn('Failed to load Wortfamilie data:', error);
                             wortfamilieData = {};
                         });
+
+                    const verbTypesPromise = fetch('json/verb_types.json')
+                        .then(res => res.ok ? res.json() : {})
+                        .then(data => {
+                            verbTypesData = data || {};
+                        })
+                        .catch(error => {
+                            console.warn('Failed to load Verb types data:', error);
+                            verbTypesData = {};
+                        });
+
+                    return Promise.all([wortfamiliePromise, verbTypesPromise]);
                 });
             });
         });
@@ -1207,7 +1220,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const caseTagsContainer = document.getElementById('modal-case-tags-container');
         caseTagsContainer.innerHTML = ''; // Clear previous tags
 
-        // Add theme badge as the first element
+        // ROW 1: Theme badge only
+        const themeRow = document.createElement('div');
+        themeRow.className = 'tags-row theme-row';
+
         const themeBadge = document.createElement('span');
         themeBadge.id = 'modal-theme-badge';
         themeBadge.className = 'modal-theme-badge case-tag';
@@ -1218,14 +1234,15 @@ document.addEventListener('DOMContentLoaded', () => {
             themeBadge.style.display = 'inline-block';
             themeBadge.dataset.level = updatedData.level;
             themeBadge.dataset.group = updatedData.group;
-        } else {
-            themeBadge.style.display = 'none';
+            themeRow.appendChild(themeBadge);
+            caseTagsContainer.appendChild(themeRow);
         }
 
-        caseTagsContainer.appendChild(themeBadge);
-
-        // Add case tags after theme badge
+        // ROW 2: Case tags (Dativ, Akkusativ, Intrans, Prep, etc.)
         if (updatedData.case_tags && updatedData.case_tags.length > 0) {
+            const caseRow = document.createElement('div');
+            caseRow.className = 'tags-row case-tags-row';
+
             const tagDisplay = {
                 'dat': '🔴 [+Dat]',
                 'dat_akk': '🔵 [+Dat + Akk]',
@@ -1247,8 +1264,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     tagSpan.textContent = tagDisplay[tag] || tag;
                 }
 
-                caseTagsContainer.appendChild(tagSpan);
+                caseRow.appendChild(tagSpan);
             });
+
+            caseTagsContainer.appendChild(caseRow);
+        }
+
+        // ROW 3: Verb type and notes (Separable/Non-Separable + Notes)
+        if (verbTypesData[verb]) {
+            const typeInfo = verbTypesData[verb];
+            const typeRow = document.createElement('div');
+            typeRow.className = 'tags-row type-tags-row';
+
+            // Add type tag (Separable/Non-Separable)
+            if (typeInfo.type) {
+                const typeTag = document.createElement('span');
+                typeTag.className = 'verb-type-tag';
+
+                if (typeInfo.type === 'Separable') {
+                    typeTag.classList.add('type-separable');
+                    typeTag.textContent = '🔹 Separable';
+                } else if (typeInfo.type === 'Non-Separable') {
+                    typeTag.classList.add('type-non-separable');
+                    typeTag.textContent = '🔸 Non-Separable';
+                }
+
+                typeRow.appendChild(typeTag);
+            }
+
+            // Add notes tag if notes exist
+            if (typeInfo.notes && typeInfo.notes.trim() !== '') {
+                const notesTag = document.createElement('span');
+                notesTag.className = 'verb-notes-tag';
+                notesTag.textContent = `💡 ${typeInfo.notes}`;
+                typeRow.appendChild(notesTag);
+            }
+
+            // Only append the row if it has content
+            if (typeRow.children.length > 0) {
+                caseTagsContainer.appendChild(typeRow);
+            }
         }
 
         document.getElementById('modal-verb-perfekt').textContent = updatedData.perfekt || '---';

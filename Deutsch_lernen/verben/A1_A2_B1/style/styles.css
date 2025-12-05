@@ -498,8 +498,8 @@
         /* Modal case tags container */
         .modal-case-tags {
             display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
+            flex-direction: column;
+            gap: 8px;
             margin-top: 12px;
             justify-content: center;
         }
@@ -509,6 +509,27 @@
             padding: 4px 10px;
         }
 
+        /* Tags row structure - each row is a separate line */
+        .tags-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tags-row.theme-row {
+            margin-bottom: 4px;
+        }
+
+        .tags-row.case-tags-row {
+            margin-bottom: 4px;
+        }
+
+        .tags-row.type-tags-row {
+            margin-bottom: 0;
+        }
+
         /* Hide case tags when toggle is off */
         .main-container.hide-case-tags .case-tags {
             display: none;
@@ -516,6 +537,43 @@
 
         #verb-modal .modal-content.hide-case-tags .case-tag {
             display: none;
+        }
+
+        /* Verb type tags styling */
+        .verb-type-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 5px;
+            white-space: nowrap;
+            border: none;
+        }
+
+        .verb-type-tag.type-separable {
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            color: white;
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+        }
+
+        .verb-type-tag.type-non-separable {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            color: white;
+            box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Verb notes tag styling */
+        .verb-notes-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 5px;
+            white-space: nowrap;
+            background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);
         }
 
         .german-past {
