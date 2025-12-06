@@ -1708,6 +1708,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         document.getElementById('praesens-details-container').open = true;
 
+        document.getElementById('speak-infinitive-icon').addEventListener('click', (e) => {
+            e.stopPropagation();
+            speak(verb);
+        });
+        document.getElementById('speak-perfekt-icon').addEventListener('click', (e) => {
+            e.stopPropagation();
+            speak(updatedData.perfekt);
+        });
+        document.getElementById('speak-praeteritum-icon').addEventListener('click', (e) => {
+            e.stopPropagation();
+            speak(updatedData.praeteritum);
+        });
+        document.getElementById('speak-sentence-icon').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const sentence = document.getElementById('modal-text').textContent;
+            speak(sentence);
+        });
+
         verbModal.classList.add('visible');
     }
 
@@ -2064,6 +2082,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (clearSearchBtn) {
         clearSearchBtn.addEventListener('click', clearSearch);
+    }
+
+    // --- TTS Function ---
+    function speak(text, lang = 'de-DE', rate = 0.9) {
+        if ('speechSynthesis' in window) {
+            // Cancel any previous speech
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = rate;
+            
+            // Optional: Find a specific German voice
+            const voices = window.speechSynthesis.getVoices();
+            const germanVoice = voices.find(voice => voice.lang === 'de-DE');
+            if (germanVoice) {
+                utterance.voice = germanVoice;
+            }
+
+            window.speechSynthesis.speak(utterance);
+        } else {
+            console.error("Speech synthesis not supported in this browser.");
+        }
     }
 
     // --- START THE APP ---
