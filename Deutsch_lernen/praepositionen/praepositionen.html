@@ -1,49 +1,925 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Präpositionen - Deutsche Sprachreferenz für A1</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="../styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Preposiciones en Alemán</title>
+    <style>
+        :root {
+            --accusative: #3498db; /* Azul */
+            --dative: #e74c3c;     /* Rojo */
+            --two-way: #e91e63;    /* Rosado */
+            --genitive: #f39c12;   /* Naranja */
+            --bg-color: #f4f7f6;
+            --text-color: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .infographic-container {
+            background: white;
+            width: 100%;
+            max-width: 1200px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr auto;
+        }
+
+        /* HEADER */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 { margin: 0; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; }
+        p.subtitle { margin-top: 10px; opacity: 0.8; font-size: 1.1rem; }
+
+        /* MAIN GRID */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr 1fr;
+            gap: 2px;
+            background-color: #ecf0f1;
+        }
+
+        .column {
+            background-color: white;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        h2 {
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ddd;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .prep-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .prep-item {
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            transition: all 0.2s;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            /* Touch improvement */
+            min-height: 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .prep-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #eef2f7;
+        }
+
+        .example {
+            font-size: 0.9rem;
+            font-weight: normal;
+            color: #666;
+            display: block;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* FUDOG Styling */
+        .acc-word {
+            color: var(--accusative); /* Todo el texto en azul */
+        }
+        .fudog-letter {
+            text-decoration: underline;
+            text-decoration-color: var(--accusative);
+            text-decoration-thickness: 3px;
+        }
+
+        /* ESTILOS ESPECÍFICOS POR CASO */
+        .col-acc h2 { color: var(--accusative); border-color: var(--accusative); }
+        .col-dat h2 { color: var(--dative); border-color: var(--dative); }
+        .col-wechsel { background-color: #fff0f5; }
+        .col-wechsel h2 { color: var(--two-way); border-color: var(--two-way); }
+        
+        /* WECHSEL GRID */
+        .wechsel-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .wechsel-item {
+            background: white;
+            border: 2px solid var(--two-way);
+            color: var(--two-way);
+            padding: 12px 5px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Touch improvement */
+            min-height: 60px;
+        }
+        .wechsel-item:hover { transform: scale(1.05); background: var(--two-way); color: white; }
+        .wechsel-item:hover .translation { color: white; }
+
+        .translation {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: normal;
+            margin-top: 4px;
+            color: #666;
+        }
+
+        /* LOGIC BOX */
+        .logic-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-top: auto;
+        }
+
+        .comparison {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .comp-side {
+            flex: 1;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+        }
+
+        .comp-acc { border: 2px dashed var(--accusative); background-color: #ebf5fb; }
+        .comp-dat { border: 2px solid var(--dative); background-color: #fdedec; }
+
+        .action-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+        .rule-title { font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 5px; font-size: 1.1rem; }
+        .case-tag { 
+            display: inline-block; 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            color: white; 
+            font-size: 0.8rem; 
+            font-weight: bold; 
+            margin-bottom: 8px;
+        }
+
+        /* GENITIVO FOOTER */
+        .footer-genitive {
+            background-color: var(--genitive);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .gen-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .gen-item { 
+            background: rgba(255,255,255,0.2); 
+            padding: 12px 10px;
+            border-radius: 6px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            min-height: 44px; /* Touch target size */
+            justify-content: center;
+        }
+        .gen-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255,255,255,0.35);
+        }
+        .gen-de { font-weight: bold; font-size: 1rem; margin-bottom: 2px; }
+        .gen-es { font-size: 0.85rem; opacity: 0.9; font-style: italic; }
+
+        /* MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(3px);
+            padding: 20px; /* Prevent touching edges on mobile */
+            box-sizing: border-box;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 550px;
+            max-height: 85vh; /* Keep some space */
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 15px;
+            font-size: 2rem; /* Larger for touch */
+            padding: 5px;
+            cursor: pointer;
+            color: #999;
+            line-height: 0.8;
+            z-index: 10;
+        }
+        .close-btn:hover { color: #333; }
+
+        /* New Close Button at bottom */
+        .close-btn-bottom {
+            display: none;
+            margin-top: 20px;
+            padding: 12px;
+            background: #eee;
+            border: none;
+            border-radius: 8px;
+            color: #333;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+        }
+
+        .modal-title { font-size: 1.8rem; margin: 0 0 10px 0; color: #2c3e50; padding-right: 30px;}
+        .modal-type { font-weight: bold; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 20px; display: inline-block; padding: 4px 8px; border-radius: 4px; color: white;}
+        
+        .example-container {
+            margin-bottom: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            border-left: 5px solid #ccc;
+        }
+        
+        .example-row {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .example-row:last-child { border-bottom: none; }
+        
+        .modal-german { font-size: 1.1rem; margin-bottom: 3px; font-weight: 600; color: #34495e; }
+        .modal-spanish { color: #7f8c8d; font-style: italic; font-size: 0.95rem; }
+        
+        .modal-explanation { font-size: 1rem; line-height: 1.6; color: #444; margin-top: auto; padding-top: 15px; border-top: 1px solid #eee; }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            body { padding: 0; background-color: #fff; }
+            
+            .infographic-container { 
+                border-radius: 0; 
+                box-shadow: none;
+                display: flex; /* Stack fully */
+                flex-direction: column;
+            }
+
+            .main-content { 
+                display: flex;
+                flex-direction: column;
+            }
+            
+            /* Order: Wechsel first (1), Accusative (2), Dative (3) */
+            .col-wechsel { order: 1; border-bottom: 8px solid #f4f7f6; padding: 20px 15px;}
+            .col-acc { order: 2; border-bottom: 8px solid #f4f7f6; padding: 20px 15px;}
+            .col-dat { order: 3; padding: 20px 15px;}
+            
+            header { padding: 20px 10px; }
+            h1 { font-size: 1.8rem; }
+            
+            .wechsel-grid { 
+                grid-template-columns: repeat(2, 1fr); /* 2 cols on mobile for readablity */
+            }
+
+            .comparison { flex-direction: column; }
+            .gen-grid { grid-template-columns: repeat(2, 1fr); }
+            
+            /* Make modal easier to close on mobile */
+            .close-btn-bottom { display: block; }
+        }
+    </style>
 </head>
 <body>
 
-  <a href="../index.html" class="back-home">🏠 Zurück zur Hauptseite / Back to Home</a>
+<div class="infographic-container">
+    <header>
+        <h1>Deutsche Präpositionen</h1>
+        <p class="subtitle">Toca las tarjetas para ver ejemplos</p>
+    </header>
 
-  <h1>📍 Präpositionen</h1>
-
-  <details id="praepositionen-section" open>
-    <summary>Präpositionen</summary>
-    <div class="content-wrapper">
-      
-      <div class="nav-menu">
-        <h2>📍 Präpositionen Kapitel / Prepositions Chapters</h2>
-        <div class="nav-grid">
-          
-          <a href="Praepositionen-A1-Kapitel-1.html" class="nav-item" style="background-color: #374151; color: #f9fafb;">
-            <h3 style="color: #f9fafb;">📍 Präpositionen A1 - Kapitel 1</h3>
-            <p style="color: #d1d5db;">Wechselpräpositionen (Two-way prepositions): Dativ vs. Akkusativ usage with detailed examples</p>
-          </a>
-
-          <a href="Praepositionen-A1-Kapitel-2.html" class="nav-item">
-            <h3>📍 Präpositionen A1 - Kapitel 2</h3>
-            <p>Fixed prepositions: Akkusativ-only, Dativ-only, and Wechselpräpositionen overview</p>
-          </a>
-
+    <div class="main-content">
+        
+        <!-- COLUMNA ACUSATIVO -->
+        <div class="column col-acc">
+            <h2>AKKUSATIV</h2>
+            <ul class="prep-list">
+                <!-- FUDOG ORDER - Toda la palabra coloreada -->
+                <li class="prep-item" onclick="openModal('für')">
+                    <span class="acc-word"><span class="fudog-letter">F</span>ÜR</span>
+                    <span class="example">Para / Por</span>
+                </li>
+                <li class="prep-item" onclick="openModal('um')">
+                    <span class="acc-word"><span class="fudog-letter">U</span>M</span>
+                    <span class="example">Alrededor / A las</span>
+                </li>
+                <li class="prep-item" onclick="openModal('durch')">
+                    <span class="acc-word"><span class="fudog-letter">D</span>URCH</span>
+                    <span class="example">A través de</span>
+                </li>
+                <li class="prep-item" onclick="openModal('ohne')">
+                    <span class="acc-word"><span class="fudog-letter">O</span>HNE</span>
+                    <span class="example">Sin</span>
+                </li>
+                <li class="prep-item" onclick="openModal('gegen')">
+                    <span class="acc-word"><span class="fudog-letter">G</span>EGEN</span>
+                    <span class="example">Contra / Hacia</span>
+                </li>
+            </ul>
+            <div style="background:#eafaf1; padding:10px; border-radius:5px; font-size:0.9rem; text-align:center; margin-top:auto;">
+                <strong>Tip:</strong> Usa el acrónimo "FUDOG" para recordarlas.
+            </div>
         </div>
-      </div>
 
-      <div class="nav-menu">
-        <h2>ℹ️ Über diese Sektion / About This Section</h2>
-        <p>Diese Sektion enthält deutsche Präpositionen organisiert nach Schwierigkeitsgrad. Jedes Kapitel erklärt verschiedene Präpositionstypen mit Beispielen und Übersetzungen.</p>
-        <p><em>This section contains German prepositions organized by difficulty level. Each chapter explains different types of prepositions with examples and translations.</em></p>
-        <p><strong>Hinweis:</strong> Alle konjugierten Artikel (der, die, das, den, dem, etc.) sind farblich markiert und fett formatiert.</p>
-        <p><em><strong>Note:</strong> All conjugated articles (der, die, das, den, dem, etc.) are color-coded and bold formatted.</em></p>
-      </div>
+        <!-- COLUMNA CENTRAL (WECHSEL - ROSADO) -->
+        <div class="column col-wechsel">
+            <h2>WECHSEL</h2>
+            <p style="text-align:center; color:var(--two-way); margin-top: 0; margin-bottom: 20px; font-weight:500;">
+                Se usan con <strong>Acusativo</strong> (movimiento) O <strong>Dativo</strong> (posición)
+            </p>
+            
+            <div class="wechsel-grid">
+                <div class="wechsel-item" onclick="openModal('an')">AN<span class="translation">en (vertical)/junto a</span></div>
+                <div class="wechsel-item" onclick="openModal('auf')">AUF<span class="translation">sobre (encima)</span></div>
+                <div class="wechsel-item" onclick="openModal('hinter')">HINTER<span class="translation">detrás de</span></div>
+                <div class="wechsel-item" onclick="openModal('in')">IN<span class="translation">en (dentro)</span></div>
+                <div class="wechsel-item" onclick="openModal('neben')">NEBEN<span class="translation">al lado de</span></div>
+                <div class="wechsel-item" onclick="openModal('über')">ÜBER<span class="translation">sobre/encima de</span></div>
+                <div class="wechsel-item" onclick="openModal('unter')">UNTER<span class="translation">debajo de</span></div>
+                <div class="wechsel-item" onclick="openModal('vor')">VOR<span class="translation">delante de</span></div>
+                <div class="wechsel-item" onclick="openModal('zwischen')">ZWISCHEN<span class="translation">entre</span></div>
+            </div>
 
+            <div class="logic-box">
+                <h3 style="text-align:center; margin-top:0; color:#555;">¿Cuándo usar cuál?</h3>
+                <div class="comparison">
+                    <!-- Lado Acusativo -->
+                    <div class="comp-side comp-acc">
+                        <span class="case-tag" style="background:var(--accusative)">AKKUSATIV</span>
+                        <span class="action-icon">🏃‍♂️ ➡ 📦</span>
+                        <span class="rule-title" style="color:var(--accusative)">WOHIN?</span>
+                        <small>(¿A dónde?)</small>
+                        <hr style="border:0; border-top:1px dashed #ccc; margin: 10px 0;">
+                        <strong>Movimiento</strong>
+                        <div style="font-size: 0.85rem; margin-top:5px;">La acción implica cruzar una frontera o llegar a un destino.</div>
+                    </div>
+
+                    <!-- Lado Dativo -->
+                    <div class="comp-side comp-dat">
+                        <span class="case-tag" style="background:var(--dative)">DATIV</span>
+                        <span class="action-icon">📍🧍‍♂️</span>
+                        <span class="rule-title" style="color:var(--dative)">WO?</span>
+                        <small>(¿Dónde?)</small>
+                        <hr style="border:0; border-top:1px solid #ccc; margin: 10px 0;">
+                        <strong>Posición</strong>
+                        <div style="font-size: 0.85rem; margin-top:5px;">No hay cambio de lugar. Es estático.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUMNA DATIVO -->
+        <div class="column col-dat">
+            <h2>DATIV</h2>
+            <ul class="prep-list">
+                <li class="prep-item" onclick="openModal('aus')">AUS<span class="example">De (salir) / Hecho de</span></li>
+                <li class="prep-item" onclick="openModal('bei')">BEI<span class="example">En casa de / Junto a</span></li>
+                <li class="prep-item" onclick="openModal('mit')">MIT<span class="example">Con</span></li>
+                <li class="prep-item" onclick="openModal('nach')">NACH<span class="example">Hacia / Después</span></li>
+                <li class="prep-item" onclick="openModal('seit')">SEIT<span class="example">Desde (tiempo)</span></li>
+                <li class="prep-item" onclick="openModal('von')">VON<span class="example">De (origen/propiedad)</span></li>
+                <li class="prep-item" onclick="openModal('zu')">ZU<span class="example">Hacia (lugares/personas)</span></li>
+            </ul>
+            <div style="background:#fdedec; padding:10px; border-radius:5px; font-size:0.9rem; text-align:center; margin-top:auto;">
+                <strong>Ojo:</strong> "Seit" siempre se usa para algo que empezó en el pasado y sigue hoy.
+            </div>
+        </div>
     </div>
-  </details>
+
+    <div class="footer-genitive">
+        <div style="margin-bottom:15px; text-transform:uppercase; letter-spacing:1px; font-size:0.9rem;">Genitiv (Toca para ver ejemplos)</div>
+        <div class="gen-grid">
+            <div class="gen-item" onclick="openModal('während')"><span class="gen-de">WÄHREND</span><span class="gen-es">durante</span></div>
+            <div class="gen-item" onclick="openModal('wegen')"><span class="gen-de">WEGEN</span><span class="gen-es">por causa de</span></div>
+            <div class="gen-item" onclick="openModal('trotz')"><span class="gen-de">TROTZ</span><span class="gen-es">a pesar de</span></div>
+            <div class="gen-item" onclick="openModal('anstatt')"><span class="gen-de">ANSTATT</span><span class="gen-es">en vez de</span></div>
+            <div class="gen-item" onclick="openModal('außerhalb')"><span class="gen-de">AUßERHALB</span><span class="gen-es">fuera de</span></div>
+            <div class="gen-item" onclick="openModal('innerhalb')"><span class="gen-de">INNERHALB</span><span class="gen-es">dentro de</span></div>
+            <div class="gen-item" onclick="openModal('jenseits')"><span class="gen-de">JENSEITS</span><span class="gen-es">al otro lado de</span></div>
+            <div class="gen-item" onclick="openModal('aufgrund')"><span class="gen-de">AUFGRUND</span><span class="gen-es">debido a</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL WINDOW -->
+<div id="modal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModalBtn()">&times;</span>
+        <h2 id="m-title" class="modal-title">TITLE</h2>
+        <span id="m-type" class="modal-type">TYPE</span>
+        
+        <div id="m-examples" class="example-container">
+            <!-- Examples injected by JS -->
+        </div>
+        
+        <p id="m-desc" class="modal-explanation">Explanation here.</p>
+
+        <!-- New Mobile Friendly Close Button -->
+        <button class="close-btn-bottom" onclick="closeModalBtn()">CERRAR</button>
+    </div>
+</div>
+
+<script>
+    const prepData = {
+        // ACCUSATIVE
+        'für': { 
+            title: 'FÜR', 
+            type: 'acc', 
+            examples: [
+                { de: 'Das Geschenk ist für dich.', es: 'El regalo es para ti.' },
+                { de: 'Ich lerne für die Prüfung.', es: 'Estudio para el examen.' },
+                { de: 'Wir bleiben für drei Tage.', es: 'Nos quedamos por tres días.' },
+                { de: 'Ist dieser Platz für mich?', es: '¿Es este asiento para mí?' },
+                { de: 'Er arbeitet für eine große Firma.', es: 'Él trabaja para una gran empresa.' }
+            ], 
+            desc: 'Indica el destinatario o propósito. También se usa para periodos de tiempo futuros o duración. Siempre exige acusativo.' 
+        },
+        'um': { 
+            title: 'UM', 
+            type: 'acc', 
+            examples: [
+                { de: 'Wir gehen um das Haus.', es: 'Vamos alrededor de la casa.' },
+                { de: 'Der Film beginnt um 8 Uhr.', es: 'La película empieza a las 8.' },
+                { de: 'Er bittet um Hilfe.', es: 'Él pide ayuda.' },
+                { de: 'Die Erde dreht sich um die Sonne.', es: 'La Tierra gira alrededor del Sol.' },
+                { de: 'Um die Ecke ist eine Bäckerei.', es: 'A la vuelta de la esquina hay una panadería.' }
+            ], 
+            desc: 'Significa "alrededor de" (físico). También es la preposición estándar para decir la hora exacta.' 
+        },
+        'durch': { 
+            title: 'DURCH', 
+            type: 'acc', 
+            examples: [
+                { de: 'Wir fahren durch den Tunnel.', es: 'Vamos a través del túnel.' },
+                { de: 'Wir spazieren durch den Park.', es: 'Paseamos por el parque.' },
+                { de: 'Der Dieb kam durch das Fenster.', es: 'El ladrón entró por la ventana.' },
+                { de: 'Ich atme durch die Nase.', es: 'Respiro por la nariz.' },
+                { de: 'Wir teilen den Apfel durch zwei.', es: 'Dividimos la manzana por dos.' }
+            ], 
+            desc: 'Movimiento que atraviesa algo (un bosque, un túnel, una ciudad).' 
+        },
+        'ohne': { 
+            title: 'OHNE', 
+            type: 'acc', 
+            examples: [
+                { de: 'Ich trinke Kaffee ohne Zucker.', es: 'Bebo café sin azúcar.' },
+                { de: 'Ohne dich gehe ich nicht.', es: 'Sin ti no voy.' },
+                { de: 'Er kommt ohne seine Frau.', es: 'Él viene sin su mujer.' },
+                { de: 'Wir können nicht ohne Wasser leben.', es: 'No podemos vivir sin agua.' },
+                { de: 'Ohne Brille sehe ich nichts.', es: 'Sin gafas no veo nada.' }
+            ], 
+            desc: 'Indica carencia. Lo contrario de "mit". Si le sigue un sustantivo sin artículo, no se declina visiblemente.' 
+        },
+        'gegen': { 
+            title: 'GEGEN', 
+            type: 'acc', 
+            examples: [
+                { de: 'Das Auto fährt gegen den Baum.', es: 'El coche choca contra el árbol.' },
+                { de: 'Ich bin gegen den Krieg.', es: 'Estoy en contra de la guerra.' },
+                { de: 'Wir kommen gegen 10 Uhr.', es: 'Venimos hacia (aprox.) las 10.' },
+                { de: 'Haben Sie etwas gegen Kopfschmerzen?', es: '¿Tiene algo para el dolor de cabeza?' },
+                { de: 'Er lehnt sich gegen die Wand.', es: 'Él se apoya contra la pared.' }
+            ], 
+            desc: 'Significa "contra" (impacto físico o oposición) o "hacia/alrededor de" (tiempo aproximado).' 
+        },
+        
+        // DATIVE
+        'aus': { 
+            title: 'AUS', 
+            type: 'dat', 
+            examples: [
+                { de: 'Ich komme aus Spanien.', es: 'Vengo de España.' },
+                { de: 'Er geht aus dem Haus.', es: 'Él sale de la casa.' },
+                { de: 'Der Tisch ist aus Holz.', es: 'La mesa es de madera.' },
+                { de: 'Sie trinkt aus dem Glas.', es: 'Ella bebe del vaso.' },
+                { de: 'Das weiß ich aus Erfahrung.', es: 'Lo sé por experiencia.' }
+            ], 
+            desc: 'Indica procedencia (salir de un lugar cerrado o país) o material del que está hecho algo.' 
+        },
+        'bei': { 
+            title: 'BEI', 
+            type: 'dat', 
+            examples: [
+                { de: 'Ich wohne noch bei meinen Eltern.', es: 'Todavía vivo en casa de mis padres.' },
+                { de: 'Er arbeitet bei Siemens.', es: 'Él trabaja en Siemens.' },
+                { de: 'Bei Regen bleiben wir zu Hause.', es: 'Con (en caso de) lluvia nos quedamos en casa.' },
+                { de: 'Die Bäckerei ist bei der Post.', es: 'La panadería está junto a correos.' },
+                { de: 'Ich habe kein Geld bei mir.', es: 'No llevo dinero encima.' }
+            ], 
+            desc: 'Indica ubicación "en casa de", lugar de trabajo o condición simultánea.' 
+        },
+        'mit': { 
+            title: 'MIT', 
+            type: 'dat', 
+            examples: [
+                { de: 'Ich fahre mit dem Bus.', es: 'Voy con el autobús (en autobús).' },
+                { de: 'Ich gehe mit meiner Freundin ins Kino.', es: 'Voy con mi amiga al cine.' },
+                { de: 'Trinken Sie den Kaffee mit Milch?', es: '¿Bebe el café con leche?' },
+                { de: 'Er schreibt mit einem Kuli.', es: 'Él escribe con un boli.' },
+                { de: 'Kommst du mit uns?', es: '¿Vienes con nosotros?' }
+            ], 
+            desc: 'Indica instrumento (transporte) o compañía (con alguien).' 
+        },
+        'nach': { 
+            title: 'NACH', 
+            type: 'dat', 
+            examples: [
+                { de: 'Wir fliegen nach Berlin.', es: 'Volamos a Berlín.' },
+                { de: 'Nach dem Essen trinke ich Kaffee.', es: 'Después de comer bebo café.' },
+                { de: 'Es ist zehn nach fünf.', es: 'Son las cinco y diez.' },
+                { de: 'Wir fahren nach Hause.', es: 'Vamos a casa.' },
+                { de: 'Nach meiner Meinung ist das falsch.', es: 'En mi opinión eso está mal.' }
+            ], 
+            desc: 'Hacia ciudades o países (sin artículo). También significa "después de" (tiempo).' 
+        },
+        'seit': { 
+            title: 'SEIT', 
+            type: 'dat', 
+            examples: [
+                { de: 'Ich lerne seit einem Jahr Deutsch.', es: 'Estudio alemán desde hace un año.' },
+                { de: 'Seit gestern bin ich krank.', es: 'Desde ayer estoy enfermo.' },
+                { de: 'Wir wohnen seit 2010 hier.', es: 'Vivimos aquí desde 2010.' },
+                { de: 'Seit wann bist du hier?', es: '¿Desde cuándo estás aquí?' },
+                { de: 'Er wartet seit einer Stunde.', es: 'Él espera desde hace una hora.' }
+            ], 
+            desc: 'Acción que empezó en el pasado y continúa en el presente. En español solemos usar "desde hace" o presente.' 
+        },
+        'von': { 
+            title: 'VON', 
+            type: 'dat', 
+            examples: [
+                { de: 'Das ist das Auto von meinem Bruder.', es: 'Ese es el coche de mi hermano.' },
+                { de: 'Ich komme gerade vom Arzt.', es: 'Vengo ahora mismo del médico.' },
+                { de: 'Der Zug fährt von Gleis 3.', es: 'El tren sale de la vía 3.' },
+                { de: 'Ein Freund von mir.', es: 'Un amigo mío.' },
+                { de: 'Wir sprechen von dem Urlaub.', es: 'Hablamos de las vacaciones.' }
+            ], 
+            desc: 'Indica posesión (sustituye al genitivo en el habla cotidiana) u origen desde un punto/persona.' 
+        },
+        'zu': { 
+            title: 'ZU', 
+            type: 'dat', 
+            examples: [
+                { de: 'Ich gehe zu der (zur) Schule.', es: 'Voy a la escuela.' },
+                { de: 'Ich gehe zu Thomas.', es: 'Voy a casa de Thomas.' },
+                { de: 'Zum Geburtstag viel Glück!', es: '¡Felicidades por el cumpleaños!' },
+                { de: 'Wir fahren zum Bahnhof.', es: 'Vamos a la estación.' },
+                { de: 'Er ist zu Hause.', es: 'Él está en casa.' }
+            ], 
+            desc: 'Movimiento hacia una persona, edificio o lugar específico. También para celebraciones.' 
+        },
+
+        // WECHSEL
+        'an': { 
+            title: 'AN', 
+            type: 'wechsel', 
+            examples: [
+                { de: 'Ich hänge das Bild an die Wand. (Akk)', es: 'Cuelgo el cuadro en la pared.' },
+                { de: 'Das Bild hängt an der Wand. (Dat)', es: 'El cuadro cuelga en la pared.' },
+                { de: 'Wir warten an der Bushaltestelle. (Dat)', es: 'Esperamos en la parada.' },
+                { de: 'Ich gehe an den Strand. (Akk)', es: 'Voy a la playa.' },
+                { de: 'Er schreibt an die Tafel. (Akk)', es: 'Él escribe en la pizarra.' }
+            ], 
+            desc: 'Contacto vertical (paredes) o límite lateral (agua, fronteras, paradas).' 
+        },
+        'auf': { 
+            title: 'AUF', 
+            type: 'wechsel', 
+            examples: [
+                { de: 'Ich lege das Buch auf den Tisch. (Akk)', es: 'Pongo el libro sobre la mesa.' },
+                { de: 'Das Buch liegt auf dem Tisch. (Dat)', es: 'El libro está sobre la mesa.' },
+                { de: 'Wir sind auf der Party. (Dat)', es: 'Estamos en la fiesta.' },
+                { de: 'Die Katze springt auf das Sofa. (Akk)', es: 'El gato salta al sofá.' },
+                { de: 'Das Kind spielt auf der Straße. (Dat)', es: 'El niño juega en la calle.' }
+            ], 
+            desc: 'Contacto horizontal (superficies, mesas, suelo) o eventos públicos/fiestas.' 
+        },
+        'hinter': { 
+            title: 'HINTER', 
+            type: 'wechsel', 
+            examples: [
+                { de: 'Geh bitte hinter das Haus! (Akk)', es: '¡Ve detrás de la casa, por favor!' },
+                { de: 'Der Hund steht hinter dem Auto. (Dat)', es: 'El perro está detrás del coche.' },
+                { de: 'Ich stelle die Besen hinter die Tür. (Akk)', es: 'Pongo la escoba detrás de la puerta.' },
+                { de: 'Die Sonne scheint hinter den Wolken. (Dat)', es: 'El sol brilla detrás de las nubes.' },
+                { de: 'Er läuft hinter den Baum. (Akk)', es: 'Él corre detrás del árbol.' }
+            ], 
+            desc: 'Posición posterior. Ojo: si no hay movimiento hacia allí, es Dativo.' 
+        },
+        'in': { 
+            title: 'IN', 
+            type: 'wechsel', 
+            examples: [
+                { de: 'Ich gehe in den Park. (Akk)', es: 'Voy al parque.' },
+                { de: 'Ich bin im Park. (Dat)', es: 'Estoy en el parque.' },
+                { de: 'In einem Monat habe ich Urlaub. (Dat)', es: 'En un mes tengo vacaciones.' },
+                { de: 'Sie geht ins Kino. (Akk)', es: 'Ella va al cine.' },
+                { de: 'Wir wohnen in Berlin. (Dat)', es: 'Vivimos en Berlín.' }
+            ], 
+            desc: 'Dentro de un espacio cerrado o área definida (parques, calles, edificios). También para tiempo futuro.' 
+        },
+        'neben': { 
+            title: 'NEBEN', 
+            type: 'wechsel', 
+            examples: [
+                { de: 'Ich setze mich neben dich. (Akk)', es: 'Me siento a tu lado.' },
+                { de: 'Die Apotheke ist neben der Bank. (Dat)', es: 'La farmacia está al lado del banco.' },
+                { de: 'Stell die Lampe neben das Bett. (Akk)', es: 'Pon la lámpara al lado de la cama.' },
+                { de: 'Er steht neben mir. (Dat)', es: 'Él está de pie junto a mí.' },
+                { de: 'Das Hotel liegt neben dem Bahnhof. (Dat)', es: 'El hotel está al lado de la estación.' }
+            ], 
+            desc: 'Cercanía lateral. Estar al lado de algo/alguien sin necesidad de contacto físico.' 
+        },
+        'über': { 
+            title: 'ÜBER', 
+            type: 'wechsel', 
+            examples: [
+                { de: 'Wir gehen über die Straße. (Akk)', es: 'Cruzamos la calle (por encima).' },
+                { de: 'Die Lampe hängt über dem Tisch. (Dat)', es: 'La lámpara cuelga sobre la mesa.' },
+                { de: 'Wir sprechen über den Film. (Akk)', es: 'Hablamos sobre la película.' },
+                { de: 'Das Flugzeug fliegt über die Alpen. (Akk)', es: 'El avión vuela sobre los Alpes.' },
+                { de: 'Er wohnt über mir. (Dat)', es: 'Él vive encima de mí.' }
+            ], 
+            desc: 'Encima de (sin tocar) o cruzar de un lado a otro. También significa "acerca de" (temas de conversación, siempre Akkusativ).' 
+        },
+        'unter': { 
+            title: 'UNTER', 
+            type: 'wechsel', 
+            examples: [
+                { de: 'Der Hund kriecht unter das Sofa. (Akk)', es: 'El perro se arrastra debajo del sofá.' },
+                { de: 'Die Katze schläft unter dem Stuhl. (Dat)', es: 'El gato duerme debajo de la silla.' },
+                { de: 'Wir stehen unter dem Dach. (Dat)', es: 'Estamos bajo el techo.' },
+                { de: 'Das Buch fiel unter den Tisch. (Akk)', es: 'El libro cayó bajo la mesa.' },
+                { de: 'Er taucht unter das Wasser. (Akk)', es: 'Él se sumerge bajo el agua.' }
+            ], 
+            desc: 'Posición inferior (debajo de).' 
+        },
+        'vor': { 
+            title: 'VOR', 
+            type: 'wechsel', 
+            examples: [
+                { de: 'Stell das Auto vor die Garage. (Akk)', es: 'Pon el coche delante del garaje.' },
+                { de: 'Wir warten vor dem Kino. (Dat)', es: 'Esperamos delante del cine.' },
+                { de: 'Vor drei Jahren war ich hier. (Dat)', es: 'Hace tres años estuve aquí.' },
+                { de: 'Er spricht vor vielen Leuten. (Dat)', es: 'Él habla ante mucha gente.' },
+                { de: 'Sie tritt vor den Spiegel. (Akk)', es: 'Ella se pone ante el espejo.' }
+            ], 
+            desc: 'Posición anterior (delante de). En contextos temporales significa "hace" (vor 3 Tagen = hace 3 días).' 
+        },
+        'zwischen': { 
+            title: 'ZWISCHEN', 
+            type: 'wechsel', 
+            examples: [
+                { de: 'Setz dich zwischen mich und ihn. (Akk)', es: 'Siéntate entre yo y él.' },
+                { de: 'Das Bad ist zwischen den Zimmern. (Dat)', es: 'El baño está entre las habitaciones.' },
+                { de: 'Der Ball rollt zwischen die Stühle. (Akk)', es: 'La pelota rueda entre las sillas.' },
+                { de: 'Es gibt keinen Streit zwischen uns. (Dat)', es: 'No hay pelea entre nosotros.' },
+                { de: 'Stell die Vase zwischen die Kerzen. (Akk)', es: 'Pon el jarrón entre las velas.' }
+            ], 
+            desc: 'Ubicación entre dos o más objetos/personas.' 
+        },
+
+        // GENITIVE
+        'während': { 
+            title: 'WÄHREND', 
+            type: 'gen', 
+            examples: [
+                { de: 'Während des Films schlafe ich.', es: 'Durante la película duermo.' },
+                { de: 'Wir essen nicht während der Arbeit.', es: 'No comemos durante el trabajo.' },
+                { de: 'Während der Pause trinken wir Kaffee.', es: 'Durante la pausa bebemos café.' },
+                { de: 'Er telefoniert während der Fahrt.', es: 'Él habla por teléfono durante el viaje.' },
+                { de: 'Während des Sommers ist es heiß.', es: 'Durante el verano hace calor.' }
+            ], 
+            desc: 'Indica simultaneidad temporal (durante). Siempre va con genitivo (o dativo en lenguaje coloquial, pero aquí estudiamos la norma culta).' 
+        },
+        'wegen': { 
+            title: 'WEGEN', 
+            type: 'gen', 
+            examples: [
+                { de: 'Wegen des Regens bleiben wir hier.', es: 'Por culpa de la lluvia nos quedamos aquí.' },
+                { de: 'Wegen der Hitze trinke ich viel.', es: 'Por el calor bebo mucho.' },
+                { de: 'Wegen des Verkehrs komme ich spät.', es: 'Por el tráfico llego tarde.' },
+                { de: 'Der Laden ist wegen Krankheit geschlossen.', es: 'La tienda está cerrada por enfermedad.' },
+                { de: 'Wir streiten wegen des Geldes.', es: 'Discutimos por el dinero.' }
+            ], 
+            desc: 'Indica causa o motivo (por / a causa de).' 
+        },
+        'trotz': { 
+            title: 'TROTZ', 
+            type: 'gen', 
+            examples: [
+                { de: 'Trotz des Regens gehen wir spazieren.', es: 'A pesar de la lluvia vamos a pasear.' },
+                { de: 'Er trägt nur ein T-Shirt trotz der Kälte.', es: 'Lleva solo camiseta a pesar del frío.' },
+                { de: 'Sie lacht trotz der Schmerzen.', es: 'Ella ríe a pesar del dolor.' },
+                { de: 'Trotz des Verbots raucht er hier.', es: 'A pesar de la prohibición él fuma aquí.' },
+                { de: 'Wir kommen trotz des Sturms.', es: 'Venimos a pesar de la tormenta.' }
+            ], 
+            desc: 'Indica concesión (a pesar de).' 
+        },
+        'anstatt': { 
+            title: 'ANSTATT', 
+            type: 'gen', 
+            examples: [
+                { de: 'Ich trinke Tee statt Kaffee.', es: 'Bebo té en vez de café.' },
+                { de: 'Statt eines Autos kauft er ein Fahrrad.', es: 'En vez de un coche compra una bici.' },
+                { de: 'Er schickt einen Brief statt einer E-Mail.', es: 'Envía una carta en vez de un email.' },
+                { de: 'Ich nehme den Bus statt des Zuges.', es: 'Tomo el autobús en vez del tren.' },
+                { de: 'Statt der Suppe esse ich Salat.', es: 'En vez de la sopa como ensalada.' }
+            ], 
+            desc: 'Indica alternativa o sustitución. "Statt" es la forma corta y más común de "Anstatt".' 
+        },
+        'außerhalb': { 
+            title: 'AUßERHALB', 
+            type: 'gen', 
+            examples: [
+                { de: 'Er wohnt außerhalb der Stadt.', es: 'Vive fuera de la ciudad.' },
+                { de: 'Wir rufen außerhalb der Öffnungszeiten an.', es: 'Llamamos fuera del horario de apertura.' },
+                { de: 'Bitte nicht außerhalb des Hauses rauchen.', es: 'Por favor no fumar fuera de la casa.' },
+                { de: 'Der Bahnhof liegt außerhalb des Zentrums.', es: 'La estación está fuera del centro.' },
+                { de: 'Außerhalb der Saison ist es billiger.', es: 'Fuera de temporada es más barato.' }
+            ], 
+            desc: 'Indica ubicación exterior (espacial o temporal).' 
+        },
+        'innerhalb': { 
+            title: 'INNERHALB', 
+            type: 'gen', 
+            examples: [
+                { de: 'Bitte zahlen Sie innerhalb einer Woche.', es: 'Pague dentro de una semana.' },
+                { de: 'Innerhalb des Hauses ist es warm.', es: 'Dentro de la casa hace calor.' },
+                { de: 'Er kam innerhalb einer Stunde.', es: 'Llegó en el plazo de una hora.' },
+                { de: 'Innerhalb der Familie gibt es Streit.', es: 'Dentro de la familia hay pelea.' },
+                { de: 'Wir liefern innerhalb Deutschlands.', es: 'Entregamos dentro de Alemania.' }
+            ], 
+            desc: 'Indica ubicación interior o plazo de tiempo.' 
+        },
+        'jenseits': { 
+            title: 'JENSEITS', 
+            type: 'gen', 
+            examples: [
+                { de: 'Das Dorf liegt jenseits des Berges.', es: 'El pueblo está al otro lado de la montaña.' },
+                { de: 'Jenseits des Flusses ist ein Wald.', es: 'Al otro lado del río hay un bosque.' },
+                { de: 'Es gibt Leben jenseits der Arbeit.', es: 'Hay vida más allá del trabajo.' },
+                { de: 'Jenseits der Grenze sprechen sie Französisch.', es: 'Al otro lado de la frontera hablan francés.' },
+                { de: 'Das liegt jenseits meiner Vorstellungskraft.', es: 'Eso está más allá de mi imaginación.' }
+            ], 
+            desc: 'Indica "más allá de" o "al otro lado de".' 
+        },
+        'aufgrund': { 
+            title: 'AUFGRUND', 
+            type: 'gen', 
+            examples: [
+                { de: 'Aufgrund des Wetters fällt das Fest aus.', es: 'Debido al tiempo se cancela la fiesta.' },
+                { de: 'Er fehlt aufgrund einer Grippe.', es: 'Falta debido a una gripe.' },
+                { de: 'Aufgrund des Unfalls gibt es Stau.', es: 'Debido al accidente hay atasco.' },
+                { de: 'Wir schließen aufgrund von Renovierungsarbeiten.', es: 'Cerramos por reformas.' },
+                { de: 'Aufgrund der Verspätung verpasste ich den Zug.', es: 'Debido al retraso perdí el tren.' }
+            ], 
+            desc: 'Indica causa formal (debido a).' 
+        }
+    };
+
+    function openModal(key) {
+        const data = prepData[key];
+        if(!data) return;
+
+        document.getElementById('m-title').textContent = data.title;
+        document.getElementById('m-desc').textContent = data.desc;
+
+        // Set Header Color & Text
+        const typeElem = document.getElementById('m-type');
+        const exampleContainer = document.getElementById('m-examples');
+        
+        // Clear previous examples
+        exampleContainer.innerHTML = '';
+
+        // Inject new examples
+        data.examples.forEach(ex => {
+            const row = document.createElement('div');
+            row.className = 'example-row';
+            
+            const de = document.createElement('div');
+            de.className = 'modal-german';
+            de.textContent = ex.de;
+            
+            const es = document.createElement('div');
+            es.className = 'modal-spanish';
+            es.textContent = ex.es;
+            
+            row.appendChild(de);
+            row.appendChild(es);
+            exampleContainer.appendChild(row);
+        });
+
+        if(data.type === 'acc') {
+            typeElem.textContent = "SOLO ACUSATIVO";
+            typeElem.style.backgroundColor = "var(--accusative)";
+            exampleContainer.style.borderLeftColor = "var(--accusative)";
+        } else if (data.type === 'dat') {
+            typeElem.textContent = "SOLO DATIVO";
+            typeElem.style.backgroundColor = "var(--dative)";
+            exampleContainer.style.borderLeftColor = "var(--dative)";
+        } else if (data.type === 'gen') {
+            typeElem.textContent = "GENITIVO";
+            typeElem.style.backgroundColor = "var(--genitive)";
+            exampleContainer.style.borderLeftColor = "var(--genitive)";
+        } else {
+            typeElem.textContent = "WECHSEL (ACUSATIVO O DATIVO)";
+            typeElem.style.backgroundColor = "var(--two-way)";
+            exampleContainer.style.borderLeftColor = "var(--two-way)";
+        }
+
+        document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeModal(e) {
+        if (e.target.id === 'modal') {
+            document.getElementById('modal').style.display = 'none';
+        }
+    }
+
+    function closeModalBtn() {
+        document.getElementById('modal').style.display = 'none';
+    }
+</script>
 
 </body>
 </html>
