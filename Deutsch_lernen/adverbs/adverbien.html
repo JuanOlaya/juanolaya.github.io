@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deutsche Adverbien (A1-B1)</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="../images/german_flag.png" type="image/png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --bg-color: #f3f4f6;
@@ -14,15 +21,15 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Nunito', sans-serif;
+            background-color: #d1d5db;
+            /* Darker gray */
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 20px;
-            margin: 0;
-            color: var(--text-color);
-            line-height: 1.5;
         }
 
         header {
@@ -178,7 +185,7 @@
             padding-bottom: 60px;
         }
 
-        /* Card Styles */
+        /* Card Styles - Updated to match Adjektive */
         .card {
             background-color: var(--card-bg);
             border-radius: 20px;
@@ -190,7 +197,6 @@
             overflow: visible;
             display: flex;
             flex-direction: column;
-            min-height: 280px;
             border: none;
             margin-top: 10px;
         }
@@ -204,45 +210,51 @@
         .card-header {
             background-color: var(--card-main);
             color: white;
-            padding: 40px 15px 45px 15px;
+            padding: 20px 10px 35px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            flex-grow: 0;
+            flex-grow: 1;
             height: auto;
             border-radius: 20px 20px 0 0;
         }
 
         /* Floating Icon */
         .icon-floating {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background-color: var(--card-pastel);
             color: var(--card-main);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translate(-50%, 50%);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             z-index: 10;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .icon-floating:hover {
+            transform: translate(-50%, 50%) scale(1.1);
         }
 
         /* White Body */
         .card-body {
             background-color: white;
-            padding: 45px 20px 30px 20px;
+            padding: 30px 10px 20px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            flex-grow: 1;
+            flex-grow: 0;
             border-radius: 0 0 20px 20px;
         }
 
@@ -265,10 +277,11 @@
         .spanish-meaning {
             display: block;
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.95);
+            color: #6b7280;
             font-weight: 600;
             margin-bottom: 0;
-            margin-top: 5px;
+            margin-top: 2px;
+            font-style: italic;
         }
 
         /* Badge */
@@ -335,7 +348,7 @@
             width: 100%;
             padding: 12px 45px 12px 20px;
             font-size: 1rem;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Nunito', sans-serif;
             border: 2px solid #d1d5db;
             border-radius: 12px;
             outline: none;
@@ -441,67 +454,101 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-out, visibility 0.3s;
         }
 
-        .modal-overlay.active {
+        .modal-overlay.visible {
             display: flex;
+            opacity: 1;
+            visibility: visible;
         }
 
         .modal-content {
             background-color: white;
+            padding: 0;
             border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: scale(0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
             position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
         }
 
         .modal-close {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: none;
+            background: rgba(255, 255, 255, 0.2);
             border: none;
+            color: white;
             font-size: 2rem;
             cursor: pointer;
-            color: #6b7280;
-            transition: color 0.3s;
-            padding: 5px 10px;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            line-height: 1;
         }
 
         .modal-close:hover {
-            color: #1f2937;
+            background: rgba(255, 255, 255, 0.4);
+            color: white;
         }
 
         .modal-header {
+            padding: 40px 30px;
             text-align: center;
-            margin-bottom: 30px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0;
+            border-radius: 0;
         }
 
         .modal-emoji {
             font-size: 4rem;
             margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .modal-emoji:hover {
+            transform: scale(1.1);
         }
 
         .modal-word {
             font-size: 2.5rem;
             font-weight: 800;
-            color: #1f2937;
             margin-bottom: 10px;
+            cursor: pointer;
         }
 
         .modal-translation {
             font-size: 1.3rem;
-            color: #6b7280;
             font-weight: 600;
+            font-style: italic;
+            color: white;
+            /* Matches header text now */
         }
 
         .modal-badge {
             display: inline-block;
-            background-color: var(--modal-color);
+            background-color: rgba(255, 255, 255, 0.2);
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
@@ -513,9 +560,9 @@
         }
 
         .modal-section {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px solid #f3f4f6;
+            padding: 30px;
+            margin-top: 0;
+            border-top: none;
         }
 
         .modal-section-title {
@@ -537,6 +584,7 @@
             font-weight: 700;
             color: #1f2937;
             margin-bottom: 8px;
+            cursor: pointer;
         }
 
         .modal-example-es {
@@ -603,7 +651,7 @@
                 <div class="modal-emoji" id="modal-emoji"></div>
                 <div class="modal-word" id="modal-word"></div>
                 <div class="modal-translation" id="modal-translation"></div>
-                <span class="modal-badge" id="modal-badge"></span>
+                <div class="modal-badge" id="modal-badge"></div>
             </div>
             <div class="modal-section">
                 <div class="modal-section-title">Beispiel / Ejemplo</div>
@@ -846,22 +894,18 @@
                 card.style.setProperty('--card-main', group.colorMain);
                 card.style.setProperty('--card-pastel', group.colorPastel);
 
-                // Show only first definition in card
-                const cardTranslation = getFirstDefinition(adv.spanish);
+                // No longer restricting to long words class only
                 const longWordClass = isLongWord(adv.word) ? 'long-word' : '';
 
                 card.innerHTML = `
                     <div class="card-header">
-                        <span class="german-word ${longWordClass}" onclick="event.stopPropagation(); speak('${adv.word}')" title="Aussprache hören" style="cursor: pointer;">${adv.word}</span>
-                        <span class="spanish-meaning">${cardTranslation}</span>
-                        <div class="icon-floating">${adv.emoji}</div>
+                        <span class="german-word ${longWordClass}" lang="de" onclick="event.stopPropagation(); speak('${adv.word}')" title="Aussprache hören" style="cursor: pointer;">${adv.word}</span>
+                        <div class="icon-floating" onclick="event.stopPropagation(); speak('${adv.word}')" title="Aussprache hören">${adv.emoji}</div>
                     </div>
                     <div class="card-body">
-                        <span class="card-category-badge">${group.badge}</span>
-                        <div class="card-exam-example">
-                            <span class="example-text de">${adv.example_de}</span>
-                            <span class="example-text es">${adv.example_es}</span>
-                        </div>
+                         <span class="spanish-meaning" lang="es">${adv.spanish.replace(/[()]/g, '')}</span>
+                         <!-- English meaning placeholder -->
+                         <span class="english-meaning" lang="en"></span>
                     </div>
                 `;
 
@@ -1002,31 +1046,27 @@
                 card.style.setProperty('--card-main', adv.groupColorMain);
                 card.style.setProperty('--card-pastel', adv.groupColorPastel);
 
-                // Show only first definition in card
-                const cardTranslation = getFirstDefinition(adv.spanish);
                 const longWordClass = isLongWord(adv.word) ? 'long-word' : '';
 
                 card.innerHTML = `
                     <div class="card-header">
-                        <span class="german-word ${longWordClass}" onclick="event.stopPropagation(); speak('${adv.word}')" title="Aussprache hören" style="cursor: pointer;">${adv.word}</span>
-                        <span class="spanish-meaning">${cardTranslation}</span>
-                        <div class="icon-floating">${adv.emoji}</div>
+                        <span class="german-word ${longWordClass}" lang="de" onclick="event.stopPropagation(); speak('${adv.word}')" title="Aussprache hören" style="cursor: pointer;">${adv.word}</span>
+                        <div class="icon-floating" onclick="event.stopPropagation(); speak('${adv.word}')" title="Aussprache hören">${adv.emoji}</div>
                     </div>
                     <div class="card-body">
-                        <span class="card-category-badge">${adv.groupBadge}</span>
-                        <div class="card-exam-example">
-                            <span class="example-text de">${adv.example_de}</span>
-                            <span class="example-text es">${adv.example_es}</span>
-                        </div>
+                        <span class="spanish-meaning" lang="es">${adv.spanish.replace(/[()]/g, '')}</span>
+                        <span class="english-meaning" lang="en"></span>
                     </div>
                 `;
 
                 // Add click event to open modal
+                // Create a compatibility object for openModal
                 const groupData = {
                     badge: adv.groupBadge,
                     colorMain: adv.groupColorMain,
                     colorPastel: adv.groupColorPastel
                 };
+
                 card.addEventListener('click', () => {
                     openModal(adv, groupData);
                 });
@@ -1079,8 +1119,20 @@
             modalEmoji.textContent = adverb.emoji;
             modalWord.textContent = adverb.word;
             modalTranslation.textContent = adverb.spanish;
-            modalBadge.textContent = group.badge;
-            modalBadge.style.setProperty('--modal-color', group.colorMain);
+
+            // Check if group has badge property directly or if we need to access it differently
+            // Handling both group object and search result object structures
+            // Check if group has badge property directly or if we need to access it differently
+            // Handling both group object and search result object structures
+            modalBadge.textContent = group.badge || group.groupBadge;
+            // The background color is now set on the header in new, but we need to ensure the badge 
+            // has the translucent background defined in CSS, so we don't need to specificy it here unless
+            // the colorMain variable is needed for something else.
+            // In adjektive.html, modalHeader.style.backgroundColor = groupData.colorMain;
+
+            // We need to set the header background color
+            document.querySelector('.modal-header').style.backgroundColor = group.colorMain || group.groupColorMain;
+
             modalExampleDe.textContent = adverb.example_de;
             modalExampleEs.textContent = adverb.example_es;
 
@@ -1092,18 +1144,29 @@
             modalWord.style.cursor = 'pointer';
             modalWord.title = 'Aussprache hören';
 
-            // Reset emoji cursor and click
-            modalEmoji.style.cursor = 'default';
-            modalEmoji.title = '';
-            modalEmoji.onclick = null;
+            // Set TTS on emoji click
+            modalEmoji.style.cursor = 'pointer';
+            modalEmoji.title = 'Aussprache hören';
+            modalEmoji.onclick = (e) => {
+                e.stopPropagation();
+                speak(adverb.word);
+            };
+
+            // Set TTS on example
+            modalExampleDe.onclick = (e) => {
+                e.stopPropagation();
+                speak(adverb.example_de);
+            };
+            modalExampleDe.style.cursor = 'pointer';
+            modalExampleDe.title = 'Satz aussprechen';
 
             // Show modal
-            adverbModal.classList.add('active');
+            adverbModal.classList.add('visible'); // Use visible class instead of active
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
-            adverbModal.classList.remove('active');
+            adverbModal.classList.remove('visible');
             document.body.style.overflow = '';
         }
 
