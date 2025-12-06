@@ -418,7 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="card-header">
                         <span class="german-word">${verbName}</span>
                         <span class="spanish-translation" data-form="translation">${esTranslation}</span>
-                        <div class="icon-floating">${verbData.emoji || '❓'}</div>
+                        <div class="icon-floating" onclick="event.stopPropagation(); speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${verbData.emoji || '❓'}</div>
                     </div>
                     <div class="card-body">
                         <div class="text-container perfekt-hover-container">
@@ -583,7 +583,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-    
+
     function initializeApp() {
         // Load saved progress from localStorage
         loadProgress();
@@ -605,7 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadAppData()
             .then(() => {
                 renderVerbGroup();
-                
+
                 prevGroupBtn.addEventListener('click', () => {
                     if (currentGroupInLevel > 0) {
                         // Previous group in current level
@@ -1047,7 +1047,7 @@ document.addEventListener('DOMContentLoaded', () => {
             storyContent.innerHTML = savedStories[storyClickCounter];
             storyClickCounter = (storyClickCounter + 1) % savedStories.length;
         });
-        
+
         infoButton.addEventListener('click', () => infoModal.classList.add('visible'));
         closeInfoModalButton.addEventListener('click', () => infoModal.classList.remove('visible'));
         infoModal.addEventListener('click', (e) => { if (e.target === infoModal) infoModal.classList.remove('visible'); });
@@ -1167,7 +1167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- UPDATED MODAL FUNCTION WITH LAZY LOADING ---
-    window.openModalForVerb = async function(verb) {
+    window.openModalForVerb = async function (verb) {
         const data = allVerbsData[verb];
         if (!data) return;
 
@@ -1500,7 +1500,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const praesensExamplesContainer = document.getElementById('praesens-examples-container');
-        if(praesensExamplesContainer) praesensExamplesContainer.style.display = 'none';
+        if (praesensExamplesContainer) praesensExamplesContainer.style.display = 'none';
 
         // Generate Perfekt examples table
         const perfektExamplesTableContainer = document.getElementById('modal-perfekt-examples-table');
@@ -1783,91 +1783,91 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (verbData) {
                         // Create a promise for each verb to search (including lazy-loaded praesens)
                         const searchPromise = (async () => {
-                        // Helper function to check if search term is contained as a word in text
-                        const containsWord = (text, term) => {
-                            if (!text) return false;
-                            const normalized = text.toLowerCase().replace(/[()]/g, '');
-                            const words = normalized.split(/[\s,/]+/);
-                            return words.some(word => word.startsWith(term));
-                        };
+                            // Helper function to check if search term is contained as a word in text
+                            const containsWord = (text, term) => {
+                                if (!text) return false;
+                                const normalized = text.toLowerCase().replace(/[()]/g, '');
+                                const words = normalized.split(/[\s,/]+/);
+                                return words.some(word => word.startsWith(term));
+                            };
 
-                        // Search in German infinitive and Spanish translation
-                        const germanMatch = verbName.toLowerCase().startsWith(searchTerm);
-                        let spanishMatch = containsWord(verbData.es, searchTerm);
+                            // Search in German infinitive and Spanish translation
+                            const germanMatch = verbName.toLowerCase().startsWith(searchTerm);
+                            let spanishMatch = containsWord(verbData.es, searchTerm);
 
-                        // Also search in searchable Spanish variants
-                        if (!spanishMatch && verbData.es_searchable) {
-                            spanishMatch = verbData.es_searchable.some(variant =>
-                                containsWord(variant, searchTerm)
-                            );
-                        }
+                            // Also search in searchable Spanish variants
+                            if (!spanishMatch && verbData.es_searchable) {
+                                spanishMatch = verbData.es_searchable.some(variant =>
+                                    containsWord(variant, searchTerm)
+                                );
+                            }
 
-                        // Search in Perfekt (German and Spanish)
-                        let perfektMatch = false;
-                        if (verbData.perfekt) {
-                            const perfektWords = verbData.perfekt.toLowerCase().split(' ');
-                            // Exclude auxiliary verbs "hat" and "ist" from search
-                            const filteredPerfektWords = perfektWords.filter(word => word !== 'hat' && word !== 'ist');
-                            perfektMatch = filteredPerfektWords.some(word => word.startsWith(searchTerm));
-                        }
+                            // Search in Perfekt (German and Spanish)
+                            let perfektMatch = false;
+                            if (verbData.perfekt) {
+                                const perfektWords = verbData.perfekt.toLowerCase().split(' ');
+                                // Exclude auxiliary verbs "hat" and "ist" from search
+                                const filteredPerfektWords = perfektWords.filter(word => word !== 'hat' && word !== 'ist');
+                                perfektMatch = filteredPerfektWords.some(word => word.startsWith(searchTerm));
+                            }
 
-                        // Search in Spanish Perfekt forms (he dado, ha dado, etc.)
-                        if (!perfektMatch && verbData.es_perfekt) {
-                            perfektMatch = containsWord(verbData.es_perfekt, searchTerm);
-                        }
+                            // Search in Spanish Perfekt forms (he dado, ha dado, etc.)
+                            if (!perfektMatch && verbData.es_perfekt) {
+                                perfektMatch = containsWord(verbData.es_perfekt, searchTerm);
+                            }
 
-                        // Also search in searchable Perfekt variants
-                        if (!perfektMatch && verbData.es_perfekt_searchable) {
-                            perfektMatch = verbData.es_perfekt_searchable.some(variant =>
-                                containsWord(variant, searchTerm)
-                            );
-                        }
+                            // Also search in searchable Perfekt variants
+                            if (!perfektMatch && verbData.es_perfekt_searchable) {
+                                perfektMatch = verbData.es_perfekt_searchable.some(variant =>
+                                    containsWord(variant, searchTerm)
+                                );
+                            }
 
-                        // Search in Präsens conjugations (pre-loaded!)
-                        let praesensMatch = false;
-                        if (allVerbsData[verbName].praesens) {
-                            const conjugations = Object.values(allVerbsData[verbName].praesens);
-                            praesensMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
-                        }
+                            // Search in Präsens conjugations (pre-loaded!)
+                            let praesensMatch = false;
+                            if (allVerbsData[verbName].praesens) {
+                                const conjugations = Object.values(allVerbsData[verbName].praesens);
+                                praesensMatch = conjugations.some(conj => conj.toLowerCase().startsWith(searchTerm));
+                            }
 
-                        // Search in Präteritum conjugations (pre-loaded!)
-                        let praeteritumMatch = false;
-                        if (allVerbsData[verbName].praeteritum_conjugations) {
-                            const conjugations = Object.values(allVerbsData[verbName].praeteritum_conjugations);
-                            praeteritumMatch = conjugations.some(conj => {
-                                // Präteritum conjugations are objects with de, en, es properties
-                                if (typeof conj === 'string') {
-                                    return conj.toLowerCase().startsWith(searchTerm);
-                                } else if (conj.de) {
-                                    return conj.de.toLowerCase().startsWith(searchTerm);
-                                }
-                                return false;
-                            });
-                        }
+                            // Search in Präteritum conjugations (pre-loaded!)
+                            let praeteritumMatch = false;
+                            if (allVerbsData[verbName].praeteritum_conjugations) {
+                                const conjugations = Object.values(allVerbsData[verbName].praeteritum_conjugations);
+                                praeteritumMatch = conjugations.some(conj => {
+                                    // Präteritum conjugations are objects with de, en, es properties
+                                    if (typeof conj === 'string') {
+                                        return conj.toLowerCase().startsWith(searchTerm);
+                                    } else if (conj.de) {
+                                        return conj.de.toLowerCase().startsWith(searchTerm);
+                                    }
+                                    return false;
+                                });
+                            }
 
-                        // Search in Spanish Präteritum forms (él/ella dio, etc.)
-                        if (!praeteritumMatch && verbData.es_praeteritum) {
-                            praeteritumMatch = containsWord(verbData.es_praeteritum, searchTerm);
-                        }
+                            // Search in Spanish Präteritum forms (él/ella dio, etc.)
+                            if (!praeteritumMatch && verbData.es_praeteritum) {
+                                praeteritumMatch = containsWord(verbData.es_praeteritum, searchTerm);
+                            }
 
-                        // Also search in searchable Präteritum variants
-                        if (!praeteritumMatch && verbData.es_praeteritum_searchable) {
-                            praeteritumMatch = verbData.es_praeteritum_searchable.some(variant =>
-                                containsWord(variant, searchTerm)
-                            );
-                        }
+                            // Also search in searchable Präteritum variants
+                            if (!praeteritumMatch && verbData.es_praeteritum_searchable) {
+                                praeteritumMatch = verbData.es_praeteritum_searchable.some(variant =>
+                                    containsWord(variant, searchTerm)
+                                );
+                            }
 
-                        // Search in Konjunktiv II conjugations (pre-loaded!)
-                        let konjunktivMatch = false;
-                        if (allVerbsData[verbName].konjunktiv_ii) {
-                            const conjugations = Object.values(allVerbsData[verbName].konjunktiv_ii);
-                            konjunktivMatch = conjugations.some(conj => {
-                                if (typeof conj === 'string') {
-                                    return conj.toLowerCase().startsWith(searchTerm);
-                                }
-                                return false;
-                            });
-                        }
+                            // Search in Konjunktiv II conjugations (pre-loaded!)
+                            let konjunktivMatch = false;
+                            if (allVerbsData[verbName].konjunktiv_ii) {
+                                const conjugations = Object.values(allVerbsData[verbName].konjunktiv_ii);
+                                konjunktivMatch = conjugations.some(conj => {
+                                    if (typeof conj === 'string') {
+                                        return conj.toLowerCase().startsWith(searchTerm);
+                                    }
+                                    return false;
+                                });
+                            }
 
                             if (germanMatch || spanishMatch || perfektMatch || praesensMatch || praeteritumMatch || konjunktivMatch) {
                                 return {
@@ -2093,7 +2093,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
             utterance.rate = rate;
-            
+
             // Optional: Find a specific German voice
             const voices = window.speechSynthesis.getVoices();
             const germanVoice = voices.find(voice => voice.lang === 'de-DE');
