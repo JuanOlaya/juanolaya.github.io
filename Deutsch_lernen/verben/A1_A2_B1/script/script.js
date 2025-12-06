@@ -416,9 +416,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="card-header">
-                        <span class="german-word" onclick="event.stopPropagation(); speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${verbName}</span>
+                        <span class="german-word" onclick="speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${verbName}</span>
                         <span class="spanish-translation" data-form="translation">${esTranslation}</span>
-                        <div class="icon-floating">${verbData.emoji || '❓'}</div>
+                        <div class="icon-floating" onclick="speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${verbData.emoji || '❓'}</div>
                     </div>
                     <div class="card-body">
                         <div class="text-container perfekt-hover-container">
@@ -1057,8 +1057,9 @@ document.addEventListener('DOMContentLoaded', () => {
         verbModal.addEventListener('click', (e) => { if (e.target === verbModal) verbModal.classList.remove('visible'); });
 
         // Theme badge click handler - using event delegation since badge is created dynamically
-        const caseTagsContainer = document.getElementById('modal-case-tags-container');
-        caseTagsContainer.addEventListener('click', (e) => {
+        // Note: We attach to header tags container now
+        const headerTagsContainer = document.getElementById('modal-header-tags');
+        headerTagsContainer.addEventListener('click', (e) => {
             // Check if clicked element is the theme badge
             if (e.target && e.target.id === 'modal-theme-badge') {
                 const targetLevel = e.target.dataset.level;
@@ -1166,6 +1167,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- TTS FUNCTION ---
+    window.speak = function (text, lang = 'de-DE', rate = 0.9) {
+        if ('speechSynthesis' in window) {
+            // Cancel any previous speech
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = rate;
+
+            // Optional: Find a specific German voice
+            const voices = window.speechSynthesis.getVoices();
+            const germanVoice = voices.find(voice => voice.lang === 'de-DE');
+            if (germanVoice) {
+                utterance.voice = germanVoice;
+            }
+
+            window.speechSynthesis.speak(utterance);
+        } else {
+            console.error("Speech synthesis not supported in this browser.");
+        }
+    };
+
     // --- UPDATED MODAL FUNCTION WITH LAZY LOADING ---
     window.openModalForVerb = async function (verb) {
         const data = allVerbsData[verb];
@@ -1220,22 +1244,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const caseTagsContainer = document.getElementById('modal-case-tags-container');
         caseTagsContainer.innerHTML = ''; // Clear previous tags
 
-        // ROW 1: Theme badge only
-        const themeRow = document.createElement('div');
-        themeRow.className = 'tags-row theme-row';
+        // ROW 1: Theme badge - MOVED TO HEADER
+        const headerTagsContainer = document.getElementById('modal-header-tags');
+        headerTagsContainer.innerHTML = ''; // Clear previous header tags
 
-        const themeBadge = document.createElement('span');
-        themeBadge.id = 'modal-theme-badge';
-        themeBadge.className = 'modal-theme-badge case-tag';
-        themeBadge.title = 'Zum Thema navigieren (Navigate to theme)';
+        // Attributes (Separable/Notes) - MOVED OUTSIDE HEADER
+        const extraTagsContainer = document.getElementById('modal-extra-tags');
+        if (extraTagsContainer) extraTagsContainer.innerHTML = '';
 
         if (updatedData.theme && updatedData.group) {
+            const themeBadge = document.createElement('span');
+            themeBadge.id = 'modal-theme-badge';
+            themeBadge.className = 'modal-theme-badge case-tag';
+            themeBadge.title = 'Zum Thema navigieren (Navigate to theme)';
             themeBadge.textContent = updatedData.theme;
             themeBadge.style.display = 'inline-block';
             themeBadge.dataset.level = updatedData.level;
             themeBadge.dataset.group = updatedData.group;
-            themeRow.appendChild(themeBadge);
-            caseTagsContainer.appendChild(themeRow);
+
+            // Add refined styles for header context
+            themeBadge.style.backgroundColor = 'rgba(255, 255, 255, 0.25)';
+            themeBadge.style.border = '1px solid rgba(255, 255, 255, 0.4)';
+            themeBadge.style.color = 'white';
+            themeBadge.style.backdropFilter = 'blur(4px)';
+
+            headerTagsContainer.appendChild(themeBadge);
         }
 
         // ROW 2: Case tags (Dativ, Akkusativ, Intrans, Prep, etc.)
@@ -1302,13 +1335,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Only append the row if it has content
             if (typeRow.children.length > 0) {
-                caseTagsContainer.appendChild(typeRow);
+                // Determine which container to use.
+                // User wants Separable/Notes tags OUTSIDE the header.
+                // We reference extraTagsContainer defined in upper scope.
+                if (extraTagsContainer) {
+                    extraTagsContainer.appendChild(typeRow);
+                }
             }
         }
 
         document.getElementById('modal-verb-perfekt').textContent = updatedData.perfekt || '---';
         document.getElementById('modal-verb-praeteritum').textContent = updatedData.praeteritum || '---';
-        document.getElementById('modal-emoji').textContent = updatedData.emoji || '❓';
+
+        // Emoji with TTS
+        const modalEmojiEl = document.getElementById('modal-emoji');
+        modalEmojiEl.textContent = updatedData.emoji || '❓';
+        modalEmojiEl.onclick = (e) => {
+            e.stopPropagation();
+            speak(verb);
+        };
+        modalEmojiEl.title = "Aussprache hören";
+
         document.getElementById('modal-verb-infinitive-es').textContent = updatedData.es || '';
         document.getElementById('modal-verb-perfekt-es').textContent = updatedData.es_perfekt || '';
         document.getElementById('modal-verb-praeteritum-es').textContent = updatedData.es_praeteritum || '';

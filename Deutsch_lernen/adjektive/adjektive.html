@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="de">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deutsche Adjektive (A1-B1)</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="../images/german_flag.png" type="image/png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --bg-color: #f3f4f6;
@@ -14,15 +21,15 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Nunito', sans-serif;
+            background-color: #d1d5db;
+            /* Darker gray */
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 20px;
-            margin: 0;
-            color: var(--text-color);
-            line-height: 1.5;
         }
 
         header {
@@ -190,7 +197,6 @@
             overflow: visible;
             display: flex;
             flex-direction: column;
-            min-height: 280px;
             border: none;
             margin-top: 10px;
         }
@@ -204,45 +210,51 @@
         .card-header {
             background-color: var(--card-main);
             color: white;
-            padding: 40px 15px 45px 15px;
+            padding: 20px 10px 35px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
-            flex-grow: 0;
+            flex-grow: 1;
             height: auto;
             border-radius: 20px 20px 0 0;
         }
 
         /* Floating Icon */
         .icon-floating {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background-color: var(--card-pastel);
             color: var(--card-main);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translate(-50%, 50%);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             z-index: 10;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .icon-floating:hover {
+            transform: translate(-50%, 50%) scale(1.1);
         }
 
         /* White Body */
         .card-body {
             background-color: white;
-            padding: 45px 20px 30px 20px;
+            padding: 30px 10px 20px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            flex-grow: 1;
+            flex-grow: 0;
             border-radius: 0 0 20px 20px;
         }
 
@@ -261,10 +273,33 @@
         .spanish-meaning {
             display: block;
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.95);
+            color: #6b7280;
             font-weight: 600;
             margin-bottom: 0;
-            margin-top: 5px;
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        .english-meaning {
+            display: block;
+            font-size: 1.0rem;
+            color: #9ca3af;
+            font-weight: 500;
+            margin-top: 0;
+            font-style: italic;
+
+            /* Collapsing animation */
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+        }
+
+        .english-meaning.visible {
+            max-height: 50px;
+            /* Enough for 1-2 lines */
+            opacity: 1;
+            margin-top: 2px;
         }
 
         /* Badge */
@@ -382,6 +417,155 @@
             font-size: 0.95rem;
         }
 
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: scale(0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .modal-header {
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-emoji {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        .modal-word {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .modal-word:hover {
+            transform: scale(1.05);
+        }
+
+        .modal-word:active {
+            transform: scale(0.95);
+        }
+
+        .modal-translation {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .modal-badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 10px;
+        }
+
+        .modal-section {
+            padding: 30px;
+        }
+
+        .modal-section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .modal-example {
+            background-color: #f3f4f6;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .modal-example-de {
+            font-size: 1.2rem;
+            color: #1f2937;
+            font-weight: 600;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .modal-example-es {
+            font-size: 1rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
         /* Light Version Styles */
         body.light-version .icon-floating {
             display: none;
@@ -414,10 +598,8 @@
         body.light-version .german-word {
             color: #1e3a8a;
             text-shadow: none;
-        }
-
-        body.light-version .spanish-meaning {
-            color: #3b82f6;
+            color: #6b7280;
+            font-style: italic;
         }
     </style>
 </head>
@@ -439,6 +621,26 @@
     </div>
     <div id="search-results-info" class="search-results-info"></div>
 
+    <!-- Modal -->
+    <div class="modal-overlay" id="adjective-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">×</button>
+            <div class="modal-header">
+                <div class="modal-emoji" id="modal-emoji"></div>
+                <div class="modal-word" id="modal-word"></div>
+                <div class="modal-translation" id="modal-translation"></div>
+                <span class="modal-badge" id="modal-badge"></span>
+            </div>
+            <div class="modal-section">
+                <div class="modal-section-title">Beispiel / Ejemplo</div>
+                <div class="modal-example">
+                    <div class="modal-example-de" id="modal-example-de"></div>
+                    <div class="modal-example-es" id="modal-example-es"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <div class="navigation-wrapper">
         <button class="nav-button" id="prev-group-btn">← Vorherige</button>
@@ -457,6 +659,14 @@
                     class="label-translation">(versión simple)</span></label>
             <label class="switch">
                 <input type="checkbox" id="light-version-switch">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="active-recall-toggle">
+            <label class="switch-label" for="english-switch">Englisch<span
+                    class="label-translation">(English)</span></label>
+            <label class="switch">
+                <input type="checkbox" id="english-switch">
                 <span class="slider"></span>
             </label>
         </div>
@@ -481,27 +691,28 @@
                 colorPastel: '#dbeafe',
                 badge: 'GRUNDLAGEN',
                 adjectives: [
-                    { word: 'gut', emoji: '👍', spanish: '(bueno)', example_de: 'Das Essen schmeckt sehr gut.', example_es: 'La comida sabe muy bien.' },
-                    { word: 'wichtig', emoji: '❗', spanish: '(importante)', example_de: 'Das ist ein wichtiger Termin.', example_es: 'Esa es una cita importante.' },
-                    { word: 'groß', emoji: '🐘', spanish: '(grande)', example_de: 'Berlin ist eine große Stadt.', example_es: 'Berlín es una ciudad grande.' },
-                    { word: 'klein', emoji: '🐭', spanish: '(pequeño)', example_de: 'Die Wohnung ist zu klein für uns.', example_es: 'El apartamento es demasiado pequeño para nosotros.' },
-                    { word: 'neu', emoji: '👶', spanish: '(nuevo)', example_de: 'Ich brauche eine neue Brille.', example_es: 'Necesito gafas nuevas.' },
-                    { word: 'alt', emoji: '👵', spanish: '(viejo)', example_de: 'Mein Fahrrad ist schon sehr alt.', example_es: 'Mi bicicleta ya es muy vieja.' },
-                    { word: 'schön', emoji: '🥰', spanish: '(bonito)', example_de: 'Der Ausblick ist wunderschön.', example_es: 'La vista es preciosa.' },
-                    { word: 'einfach', emoji: '👌', spanish: '(fácil)', example_de: 'Die Prüfung war sehr einfach.', example_es: 'El examen fue muy fácil.' },
-                    { word: 'schwer', emoji: '🏋️', spanish: '(difícil)', example_de: 'Dieser Koffer ist extrem schwer.', example_es: 'Esta maleta es extremadamente pesada.' },
-                    { word: 'möglich', emoji: '✅', spanish: '(posible)', example_de: 'Das ist heute nicht möglich.', example_es: 'Hoy no es posible.' },
-                    { word: 'schnell', emoji: '💨', spanish: '(rápido)', example_de: 'Du fährst zu schnell.', example_es: 'Conduces demasiado rápido.' },
-                    { word: 'langsam', emoji: '🐌', spanish: '(lento)', example_de: 'Bitte sprich etwas langsamer.', example_es: 'Por favor, habla un poco más despacio.' },
-                    { word: 'kalt', emoji: '🥶', spanish: '(frío)', example_de: 'Mir ist an den Händen kalt.', example_es: 'Tengo frío en las manos.' },
-                    { word: 'warm', emoji: '☀️', spanish: '(cálido)', example_de: 'Es ist heute angenehm warm.', example_es: 'Hoy hace un calor agradable.' },
-                    { word: 'teuer', emoji: '💸', spanish: '(caro)', example_de: 'Die Mieten hier sind sehr teuer.', example_es: 'Los alquileres aquí son muy caros.' },
-                    { word: 'billig', emoji: '💰', spanish: '(barato)', example_de: 'Diese Schuhe waren sehr billig.', example_es: 'Estos zapatos fueron muy baratos.' },
-                    { word: 'schlecht', emoji: '👎', spanish: '(malo)', example_de: 'Das Wetter ist heute schlecht.', example_es: 'El tiempo hoy es malo.' },
-                    { word: 'stark', emoji: '💪', spanish: '(fuerte)', example_de: 'Ich trinke meinen Kaffee gern stark.', example_es: 'Me gusta tomar mi café fuerte.' },
-                    { word: 'schwach', emoji: '🤕', spanish: '(débil)', example_de: 'Das Signal ist hier sehr schwach.', example_es: 'La señal aquí es muy débil.' },
-                    { word: 'leicht', emoji: '🪶', spanish: '(fácil/ligero)', example_de: 'Die Übung ist sehr leicht.', example_es: 'El ejercicio es muy fácil.' },
-                    { word: 'dringend', emoji: '🚨', spanish: '(urgente)', example_de: 'Ich muss dringend mit dir sprechen.', example_es: 'Tengo que hablar contigo urgentemente.' }
+                    { word: 'gut', emoji: '👍', spanish: '(bueno)', english: 'good', example_de: 'Das Essen schmeckt sehr gut.', example_es: 'La comida sabe muy bien.' },
+                    { word: 'wichtig', emoji: '❗', spanish: '(importante)', english: 'important', example_de: 'Das ist ein wichtiger Termin.', example_es: 'Esa es una cita importante.' },
+                    { word: 'groß', emoji: '🐘', spanish: '(grande)', english: 'big', example_de: 'Berlin ist eine große Stadt.', example_es: 'Berlín es una ciudad grande.' },
+                    { word: 'klein', emoji: '🐭', spanish: '(pequeño)', english: 'small', example_de: 'Die Wohnung ist zu klein für uns.', example_es: 'El apartamento es demasiado pequeño para nosotros.' },
+                    { word: 'neu', emoji: '👶', spanish: '(nuevo)', english: 'new', example_de: 'Ich brauche eine neue Brille.', example_es: 'Necesito gafas nuevas.' },
+                    { word: 'alt', emoji: '👵', spanish: '(viejo)', english: 'old', example_de: 'Mein Fahrrad ist schon sehr alt.', example_es: 'Mi bicicleta ya es muy vieja.' },
+                    { word: 'lang', emoji: '📏', spanish: '(largo)', english: 'long', example_de: 'Der Weg ist sehr lang.', example_es: 'El camino es muy largo.' },
+                    { word: 'schön', emoji: '🥰', spanish: '(bonito)', english: 'beautiful', example_de: 'Der Ausblick ist wunderschön.', example_es: 'La vista es preciosa.' },
+                    { word: 'einfach', emoji: '👌', spanish: '(fácil)', english: 'simple/easy', example_de: 'Die Prüfung war sehr einfach.', example_es: 'El examen fue muy fácil.' },
+                    { word: 'schwer', emoji: '🏋️', spanish: '(difícil)', english: 'hard/heavy', example_de: 'Dieser Koffer ist extrem schwer.', example_es: 'Esta maleta es extremadamente pesada.' },
+                    { word: 'möglich', emoji: '✅', spanish: '(posible)', english: 'possible', example_de: 'Das ist heute nicht möglich.', example_es: 'Hoy no es posible.' },
+                    { word: 'schnell', emoji: '💨', spanish: '(rápido)', english: 'fast', example_de: 'Du fährst zu schnell.', example_es: 'Conduces demasiado rápido.' },
+                    { word: 'langsam', emoji: '🐌', spanish: '(lento)', english: 'slow', example_de: 'Bitte sprich etwas langsamer.', example_es: 'Por favor, habla un poco más despacio.' },
+                    { word: 'kalt', emoji: '🥶', spanish: '(frío)', english: 'cold', example_de: 'Mir ist an den Händen kalt.', example_es: 'Tengo frío en las manos.' },
+                    { word: 'warm', emoji: '☀️', spanish: '(cálido)', english: 'warm', example_de: 'Es ist heute angenehm warm.', example_es: 'Hoy hace un calor agradable.' },
+                    { word: 'teuer', emoji: '💸', spanish: '(caro)', english: 'expensive', example_de: 'Die Mieten hier sind sehr teuer.', example_es: 'Los alquileres aquí son muy caros.' },
+                    { word: 'billig', emoji: '💰', spanish: '(barato)', english: 'cheap', example_de: 'Diese Schuhe waren sehr billig.', example_es: 'Estos zapatos fueron muy baratos.' },
+                    { word: 'schlecht', emoji: '👎', spanish: '(malo)', english: 'bad', example_de: 'Das Wetter ist heute schlecht.', example_es: 'El tiempo hoy es malo.' },
+                    { word: 'stark', emoji: '💪', spanish: '(fuerte)', english: 'strong', example_de: 'Ich trinke meinen Kaffee gern stark.', example_es: 'Me gusta tomar mi café fuerte.' },
+                    { word: 'schwach', emoji: '🤕', spanish: '(débil)', english: 'weak', example_de: 'Das Signal ist hier sehr schwach.', example_es: 'La señal aquí es muy débil.' },
+                    { word: 'leicht', emoji: '🪶', spanish: '(fácil/ligero)', english: 'light/easy', example_de: 'Die Übung ist sehr leicht.', example_es: 'El ejercicio es muy fácil.' },
+                    { word: 'dringend', emoji: '🚨', spanish: '(urgente)', english: 'urgent', example_de: 'Ich muss dringend mit dir sprechen.', example_es: 'Tengo que hablar contigo urgentemente.' }
                 ]
             },
             {
@@ -512,24 +723,24 @@
                 colorPastel: '#ede9fe',
                 badge: 'ZUSTÄNDE',
                 adjectives: [
-                    { word: 'sicher', emoji: '🔒', spanish: '(seguro)', example_de: 'Ist diese Gegend sicher?', example_es: '¿Es segura esta zona?' },
-                    { word: 'geöffnet', emoji: '🏪', spanish: '(abierto)', example_de: 'Das Museum ist täglich geöffnet.', example_es: 'El museo está abierto a diario.' },
-                    { word: 'geschlossen', emoji: '🔒', spanish: '(cerrado)', example_de: 'Wegen Krankheit geschlossen.', example_es: 'Cerrado por enfermedad.' },
-                    { word: 'ruhig', emoji: '🤫', spanish: '(tranquilo)', example_de: 'Am Sonntag ist es hier ruhig.', example_es: 'El domingo aquí está tranquilo.' },
-                    { word: 'laut', emoji: '📢', spanish: '(ruidoso)', example_de: 'Die Musik ist viel zu laut.', example_es: 'La música está demasiado alta.' },
-                    { word: 'kaputt', emoji: '💔', spanish: '(roto)', example_de: 'Die Waschmaschine ist kaputt.', example_es: 'La lavadora está rota.' },
-                    { word: 'sauber', emoji: '✨', spanish: '(limpio)', example_de: 'Das Badezimmer muss sauber sein.', example_es: 'El baño tiene que estar limpio.' },
-                    { word: 'schmutzig', emoji: '💩', spanish: '(sucio)', example_de: 'Deine Hände sind schmutzig.', example_es: 'Tus manos están sucias.' },
-                    { word: 'besetzt', emoji: '🚫', spanish: '(ocupado)', example_de: 'Die Toilette ist besetzt.', example_es: 'El baño está ocupado.' },
-                    { word: 'hell', emoji: '💡', spanish: '(claro)', example_de: 'Im Sommer ist es lange hell.', example_es: 'En verano hay luz hasta tarde.' },
-                    { word: 'dunkel', emoji: '🌑', spanish: '(oscuro)', example_de: 'Im Winter wird es früh dunkel.', example_es: 'En invierno oscurece temprano.' },
-                    { word: 'hoch', emoji: '⛰️', spanish: '(alto)', example_de: 'Die Preise sind sehr hoch.', example_es: 'Los precios son muy altos.' },
-                    { word: 'niedrig', emoji: '⬇️', spanish: '(bajo)', example_de: 'Die Decke in diesem Raum ist niedrig.', example_es: 'El techo en esta habitación es bajo.' },
-                    { word: 'modern', emoji: '📱', spanish: '(moderno)', example_de: 'Das Hotel ist sehr modern.', example_es: 'El hotel es muy moderno.' },
-                    { word: 'bequem', emoji: '🛋️', spanish: '(cómodo)', example_de: 'Diese Schuhe sind sehr bequem.', example_es: 'Estos zapatos son muy cómodos.' },
-                    { word: 'unbequem', emoji: '😫', spanish: '(incómodo)', example_de: 'Der Stuhl ist hart und unbequem.', example_es: 'La silla es dura e incómoda.' },
-                    { word: 'gefährlich', emoji: '⚠️', spanish: '(peligroso)', example_de: 'Diese Kreuzung ist gefährlich.', example_es: 'Este cruce es peligroso.' },
-                    { word: 'fertig', emoji: '🏁', spanish: '(listo/terminado)', example_de: 'Das Essen ist fertig.', example_es: 'La comida está lista.' }
+                    { word: 'sicher', emoji: '🔒', spanish: '(seguro)', english: 'safe/secure', example_de: 'Ist diese Gegend sicher?', example_es: '¿Es segura esta zona?' },
+                    { word: 'geöffnet', emoji: '🏪', spanish: '(abierto)', english: 'open', example_de: 'Das Museum ist täglich geöffnet.', example_es: 'El museo está abierto a diario.' },
+                    { word: 'geschlossen', emoji: '🔒', spanish: '(cerrado)', english: 'closed', example_de: 'Wegen Krankheit geschlossen.', example_es: 'Cerrado por enfermedad.' },
+                    { word: 'ruhig', emoji: '🤫', spanish: '(tranquilo)', english: 'quiet', example_de: 'Am Sonntag ist es hier ruhig.', example_es: 'El domingo aquí está tranquilo.' },
+                    { word: 'laut', emoji: '📢', spanish: '(ruidoso)', english: 'loud', example_de: 'Die Musik ist viel zu laut.', example_es: 'La música está demasiado alta.' },
+                    { word: 'kaputt', emoji: '💔', spanish: '(roto)', english: 'broken', example_de: 'Die Waschmaschine ist kaputt.', example_es: 'La lavadora está rota.' },
+                    { word: 'sauber', emoji: '✨', spanish: '(limpio)', english: 'clean', example_de: 'Das Badezimmer muss sauber sein.', example_es: 'El baño tiene que estar limpio.' },
+                    { word: 'schmutzig', emoji: '💩', spanish: '(sucio)', english: 'dirty', example_de: 'Deine Hände sind schmutzig.', example_es: 'Tus manos están sucias.' },
+                    { word: 'besetzt', emoji: '🚫', spanish: '(ocupado)', english: 'occupied', example_de: 'Die Toilette ist besetzt.', example_es: 'El baño está ocupado.' },
+                    { word: 'hell', emoji: '💡', spanish: '(claro)', english: 'bright', example_de: 'Im Sommer ist es lange hell.', example_es: 'En verano hay luz hasta tarde.' },
+                    { word: 'dunkel', emoji: '🌑', spanish: '(oscuro)', english: 'dark', example_de: 'Im Winter wird es früh dunkel.', example_es: 'En invierno oscurece temprano.' },
+                    { word: 'hoch', emoji: '⛰️', spanish: '(alto)', english: 'high', example_de: 'Die Preise sind sehr hoch.', example_es: 'Los precios son muy altos.' },
+                    { word: 'niedrig', emoji: '⬇️', spanish: '(bajo)', english: 'low', example_de: 'Die Decke in diesem Raum ist niedrig.', example_es: 'El techo en esta habitación es bajo.' },
+                    { word: 'modern', emoji: '📱', spanish: '(moderno)', english: 'modern', example_de: 'Das Hotel ist sehr modern.', example_es: 'El hotel es muy moderno.' },
+                    { word: 'bequem', emoji: '🛋️', spanish: '(cómodo)', english: 'comfortable', example_de: 'Diese Schuhe sind sehr bequem.', example_es: 'Estos zapatos son muy cómodos.' },
+                    { word: 'unbequem', emoji: '😫', spanish: '(incómodo)', english: 'uncomfortable', example_de: 'Der Stuhl ist hart und unbequem.', example_es: 'La silla es dura e incómoda.' },
+                    { word: 'gefährlich', emoji: '⚠️', spanish: '(peligroso)', english: 'dangerous', example_de: 'Diese Kreuzung ist gefährlich.', example_es: 'Este cruce es peligroso.' },
+                    { word: 'fertig', emoji: '🏁', spanish: '(listo/terminado)', english: 'ready/finished', example_de: 'Das Essen ist fertig.', example_es: 'La comida está lista.' }
                 ]
             },
             {
@@ -540,21 +751,21 @@
                 colorPastel: '#fce7f3',
                 badge: 'GEFÜHLE',
                 adjectives: [
-                    { word: 'müde', emoji: '😴', spanish: '(cansado)', example_de: 'Ich bin müde von der Arbeit.', example_es: 'Estoy cansado del trabajo.' },
-                    { word: 'krank', emoji: '🤒', spanish: '(enfermo)', example_de: 'Ich kann nicht kommen, ich bin krank.', example_es: 'No puedo ir, estoy enfermo.' },
-                    { word: 'gesund', emoji: '🥗', spanish: '(sano)', example_de: 'Gemüse ist sehr gesund.', example_es: 'La verdura es muy saludable.' },
-                    { word: 'glücklich', emoji: '😄', spanish: '(feliz)', example_de: 'Sie sind ein glückliches Paar.', example_es: 'Son una pareja feliz.' },
-                    { word: 'nett', emoji: '😊', spanish: '(amable)', example_de: 'Das war sehr nett von dir.', example_es: 'Eso fue muy amable de tu parte.' },
-                    { word: 'freundlich', emoji: '😊', spanish: '(amigable)', example_de: 'Die Nachbarn sind sehr freundlich.', example_es: 'Los vecinos son muy amables.' },
-                    { word: 'zufrieden', emoji: '😊', spanish: '(satisfecho)', example_de: 'Ich bin mit meinem Leben zufrieden.', example_es: 'Estoy satisfecho con mi vida.' },
-                    { word: 'verheiratet', emoji: '💍', spanish: '(casado)', example_de: 'Sind Sie verheiratet oder ledig?', example_es: '¿Está usted casado o soltero?' },
-                    { word: 'hungrig', emoji: '🤤', spanish: '(hambriento)', example_de: 'Die Kinder sind hungrig.', example_es: 'Los niños tienen hambre.' },
-                    { word: 'durstig', emoji: '🥤', spanish: '(sediento)', example_de: 'Nach dem Sport bin ich durstig.', example_es: 'Después del deporte tengo sed.' },
-                    { word: 'traurig', emoji: '😥', spanish: '(triste)', example_de: 'Warum bist du so traurig?', example_es: '¿Por qué estás tan triste?' },
-                    { word: 'wach', emoji: '👀', spanish: '(despierto)', example_de: 'Ich bin schon seit sechs Uhr wach.', example_es: 'Estoy despierto desde las seis.' },
-                    { word: 'verliebt', emoji: '💕', spanish: '(enamorado)', example_de: 'Sie sind total verliebt.', example_es: 'Ellos están totalmente enamorados.' },
-                    { word: 'unfreundlich', emoji: '😠', spanish: '(antipático)', example_de: 'Der Service war leider unfreundlich.', example_es: 'El servicio fue, lamentablemente, antipático.' },
-                    { word: 'vorsichtig', emoji: '👀', spanish: '(cuidadoso)', example_de: 'Sei bitte vorsichtig!', example_es: '¡Por favor, ten cuidado!' }
+                    { word: 'müde', emoji: '😴', spanish: '(cansado)', english: 'tired', example_de: 'Ich bin müde von der Arbeit.', example_es: 'Estoy cansado del trabajo.' },
+                    { word: 'krank', emoji: '🤒', spanish: '(enfermo)', english: 'sick', example_de: 'Ich kann nicht kommen, ich bin krank.', example_es: 'No puedo ir, estoy enfermo.' },
+                    { word: 'gesund', emoji: '🥗', spanish: '(sano)', english: 'healthy', example_de: 'Gemüse ist sehr gesund.', example_es: 'La verdura es muy saludable.' },
+                    { word: 'glücklich', emoji: '😄', spanish: '(feliz)', english: 'happy', example_de: 'Sie sind ein glückliches Paar.', example_es: 'Son una pareja feliz.' },
+                    { word: 'nett', emoji: '😊', spanish: '(amable)', english: 'nice', example_de: 'Das war sehr nett von dir.', example_es: 'Eso fue muy amable de tu parte.' },
+                    { word: 'freundlich', emoji: '😊', spanish: '(amigable)', english: 'friendly', example_de: 'Die Nachbarn sind sehr freundlich.', example_es: 'Los vecinos son muy amables.' },
+                    { word: 'zufrieden', emoji: '😊', spanish: '(satisfecho)', english: 'satisfied', example_de: 'Ich bin mit meinem Leben zufrieden.', example_es: 'Estoy satisfecho con mi vida.' },
+                    { word: 'verheiratet', emoji: '💍', spanish: '(casado)', english: 'married', example_de: 'Sind Sie verheiratet oder ledig?', example_es: '¿Está usted casado o soltero?' },
+                    { word: 'hungrig', emoji: '🤤', spanish: '(hambriento)', english: 'hungry', example_de: 'Die Kinder sind hungrig.', example_es: 'Los niños tienen hambre.' },
+                    { word: 'durstig', emoji: '🥤', spanish: '(sediento)', english: 'thirsty', example_de: 'Nach dem Sport bin ich durstig.', example_es: 'Después del deporte tengo sed.' },
+                    { word: 'traurig', emoji: '😥', spanish: '(triste)', english: 'sad', example_de: 'Warum bist du so traurig?', example_es: '¿Por qué estás tan triste?' },
+                    { word: 'wach', emoji: '👀', spanish: '(despierto)', english: 'awake', example_de: 'Ich bin schon seit sechs Uhr wach.', example_es: 'Estoy despierto desde las seis.' },
+                    { word: 'verliebt', emoji: '💕', spanish: '(enamorado)', english: 'in love', example_de: 'Sie sind total verliebt.', example_es: 'Ellos están totalmente enamorados.' },
+                    { word: 'unfreundlich', emoji: '😠', spanish: '(antipático)', english: 'unfriendly', example_de: 'Der Service war leider unfreundlich.', example_es: 'El servicio fue, lamentablemente, antipático.' },
+                    { word: 'vorsichtig', emoji: '👀', spanish: '(cuidadoso)', english: 'careful', example_de: 'Sei bitte vorsichtig!', example_es: '¡Por favor, ten cuidado!' }
                 ]
             },
             {
@@ -565,20 +776,20 @@
                 colorPastel: '#ccfbf1',
                 badge: 'MEINUNGEN',
                 adjectives: [
-                    { word: 'toll', emoji: '🎉', spanish: '(genial)', example_de: 'Das war eine tolle Idee.', example_es: 'Esa fue una idea genial.' },
-                    { word: 'egal', emoji: '🤷', spanish: '(da igual)', example_de: 'Das Ergebnis ist mir egal.', example_es: 'El resultado me da igual.' },
-                    { word: 'lecker', emoji: '😋', spanish: '(delicioso)', example_de: 'Das Eis ist sehr lecker.', example_es: 'El helado está delicioso.' },
-                    { word: 'interessant', emoji: '🤔', spanish: '(interesante)', example_de: 'Die Dokumentation war sehr interessant.', example_es: 'El documental fue muy interesante.' },
-                    { word: 'bekannt', emoji: '⭐', spanish: '(conocido)', example_de: 'Dieses Lied ist sehr bekannt.', example_es: 'Esta canción es muy conocida.' },
-                    { word: 'langweilig', emoji: '😴', spanish: '(aburrido)', example_de: 'Mir ist langweilig.', example_es: 'Estoy aburrido.' },
-                    { word: 'gemütlich', emoji: '🛋️', spanish: '(acogedor)', example_de: 'Wir machen uns einen gemütlichen Abend.', example_es: 'Nos preparamos una noche acogedora.' },
-                    { word: 'persönlich', emoji: '👤', spanish: '(personal)', example_de: 'Das ist meine persönliche Meinung.', example_es: 'Esa es mi opinión personal.' },
-                    { word: 'hilfreich', emoji: '🆘', spanish: '(útil)', example_de: 'Das Wörterbuch ist sehr hilfreich.', example_es: 'El diccionario es de gran ayuda.' },
-                    { word: 'nützlich', emoji: '🔧', spanish: '(útil)', example_de: 'Dein Rat war sehr nützlich.', example_es: 'Tu consejo fue muy útil.' },
-                    { word: 'öffentlich', emoji: '🏛️', spanish: '(público)', example_de: 'Rauchen ist an öffentlichen Orten verboten.', example_es: 'Fumar está prohibido en lugares públicos.' },
-                    { word: 'ähnlich', emoji: '👯', spanish: '(similar)', example_de: 'Deine Jacke sieht meiner ähnlich.', example_es: 'Tu chaqueta se parece a la mía.' },
-                    { word: 'hässlich', emoji: '🤢', spanish: '(feo)', example_de: 'Ich finde diesen Pullover hässlich.', example_es: 'Encuentro feo este suéter.' },
-                    { word: 'unwichtig', emoji: '🤷‍♀️', spanish: '(sin importancia)', example_de: 'Die Details sind unwichtig.', example_es: 'Los detalles no son importantes.' }
+                    { word: 'toll', emoji: '🎉', spanish: '(genial)', english: 'great', example_de: 'Das war eine tolle Idee.', example_es: 'Esa fue una idea genial.' },
+                    { word: 'egal', emoji: '🤷', spanish: '(da igual)', english: 'it doesn\'t matter', example_de: 'Das Ergebnis ist mir egal.', example_es: 'El resultado me da igual.' },
+                    { word: 'lecker', emoji: '😋', spanish: '(delicioso)', english: 'delicious', example_de: 'Das Eis ist sehr lecker.', example_es: 'El helado está delicioso.' },
+                    { word: 'interessant', emoji: '🤔', spanish: '(interesante)', english: 'interesting', example_de: 'Die Dokumentation war sehr interessant.', example_es: 'El documental fue muy interesante.' },
+                    { word: 'bekannt', emoji: '⭐', spanish: '(conocido)', english: 'known/famous', example_de: 'Dieses Lied ist sehr bekannt.', example_es: 'Esta canción es muy conocida.' },
+                    { word: 'langweilig', emoji: '😴', spanish: '(aburrido)', english: 'boring', example_de: 'Mir ist langweilig.', example_es: 'Estoy aburrido.' },
+                    { word: 'gemütlich', emoji: '🛋️', spanish: '(acogedor)', english: 'cozy', example_de: 'Wir machen uns einen gemütlichen Abend.', example_es: 'Nos preparamos una noche acogedora.' },
+                    { word: 'persönlich', emoji: '👤', spanish: '(personal)', english: 'personal', example_de: 'Das ist meine persönliche Meinung.', example_es: 'Esa es mi opinión personal.' },
+                    { word: 'hilfreich', emoji: '🆘', spanish: '(útil)', english: 'helpful', example_de: 'Das Wörterbuch ist sehr hilfreich.', example_es: 'El diccionario es de gran ayuda.' },
+                    { word: 'nützlich', emoji: '🔧', spanish: '(útil)', english: 'useful', example_de: 'Dein Rat war sehr nützlich.', example_es: 'Tu consejo fue muy útil.' },
+                    { word: 'öffentlich', emoji: '🏛️', spanish: '(público)', english: 'public', example_de: 'Rauchen ist an öffentlichen Orten verboten.', example_es: 'Fumar está prohibido en lugares públicos.' },
+                    { word: 'ähnlich', emoji: '👯', spanish: '(similar)', english: 'similar', example_de: 'Deine Jacke sieht meiner ähnlich.', example_es: 'Tu chaqueta se parece a la mía.' },
+                    { word: 'hässlich', emoji: '🤢', spanish: '(feo)', english: 'ugly', example_de: 'Ich finde diesen Pullover hässlich.', example_es: 'Encuentro feo este suéter.' },
+                    { word: 'unwichtig', emoji: '🤷‍♀️', spanish: '(sin importancia)', english: 'unimportant', example_de: 'Die Details sind unwichtig.', example_es: 'Los detalles no son importantes.' }
                 ]
             },
             {
@@ -589,15 +800,15 @@
                 colorPastel: '#fef3c7',
                 badge: 'SPEZIFISCH',
                 adjectives: [
-                    { word: 'pünktlich', emoji: '⏰', spanish: '(puntual)', example_de: 'Der Zug ist fast immer pünktlich.', example_es: 'El tren es casi siempre puntual.' },
-                    { word: 'reich', emoji: '🤑', spanish: '(rico)', example_de: 'Sie möchte einen reichen Mann heiraten.', example_es: 'Ella quiere casarse con un hombre rico.' },
-                    { word: 'arm', emoji: '🥺', spanish: '(pobre)', example_de: 'Er kommt aus einer armen Familie.', example_es: 'Él viene de una familia pobre.' },
-                    { word: 'sportlich', emoji: '⚽️', spanish: '(deportista)', example_de: 'Mein Bruder ist sehr sportlich.', example_es: 'Mi hermano es muy deportista.' },
-                    { word: 'fröhlich', emoji: '🥳', spanish: '(alegre)', example_de: 'Die Musik klingt sehr fröhlich.', example_es: 'La música suena muy alegre.' },
-                    { word: 'weiblich', emoji: '🚺', spanish: '(femenino)', example_de: 'Sie hat eine sehr weibliche Stimme.', example_es: 'Ella tiene una voz muy femenina.' },
-                    { word: 'männlich', emoji: '🚹', spanish: '(masculino)', example_de: 'Er hat ein sehr männliches Gesicht.', example_es: 'Él tiene una cara muy masculina.' },
-                    { word: 'altmodisch', emoji: '🕰️', spanish: '(anticuado)', example_de: 'Dieser Stil ist etwas altmodisch.', example_es: 'Este estilo es un poco anticuado.' },
-                    { word: 'aufrichtig', emoji: '🙏', spanish: '(sincero)', example_de: 'Das ist mein aufrichtiger Wunsch.', example_es: 'Ese es mi deseo sincero.' }
+                    { word: 'pünktlich', emoji: '⏰', spanish: '(puntual)', english: 'punctual', example_de: 'Der Zug ist fast immer pünktlich.', example_es: 'El tren es casi siempre puntual.' },
+                    { word: 'reich', emoji: '🤑', spanish: '(rico)', english: 'rich', example_de: 'Sie möchte einen reichen Mann heiraten.', example_es: 'Ella quiere casarse con un hombre rico.' },
+                    { word: 'arm', emoji: '🥺', spanish: '(pobre)', english: 'poor', example_de: 'Er kommt aus einer armen Familie.', example_es: 'Él viene de una familia pobre.' },
+                    { word: 'sportlich', emoji: '⚽️', spanish: '(deportista)', english: 'athletic', example_de: 'Mein Bruder ist sehr sportlich.', example_es: 'Mi hermano es muy deportista.' },
+                    { word: 'fröhlich', emoji: '🥳', spanish: '(alegre)', english: 'cheerful', example_de: 'Die Musik klingt sehr fröhlich.', example_es: 'La música suena muy alegre.' },
+                    { word: 'weiblich', emoji: '🚺', spanish: '(femenino)', english: 'female', example_de: 'Sie hat eine sehr weibliche Stimme.', example_es: 'Ella tiene una voz muy femenina.' },
+                    { word: 'männlich', emoji: '🚹', spanish: '(masculino)', english: 'male', example_de: 'Er hat ein sehr männliches Gesicht.', example_es: 'Él tiene una cara muy masculina.' },
+                    { word: 'altmodisch', emoji: '🕰️', spanish: '(anticuado)', english: 'old-fashioned', example_de: 'Dieser Stil ist etwas altmodisch.', example_es: 'Este estilo es un poco anticuado.' },
+                    { word: 'aufrichtig', emoji: '🙏', spanish: '(sincero)', english: 'sincere', example_de: 'Das ist mein aufrichtiger Wunsch.', example_es: 'Ese es mi deseo sincero.' }
                 ]
             },
             {
@@ -608,22 +819,22 @@
                 colorPastel: '#d1fae5',
                 badge: 'INDEFINIT',
                 adjectives: [
-                    { word: 'viel', emoji: '📦', spanish: '(mucho)', example_de: 'Ich habe heute viel Arbeit.', example_es: 'Hoy tengo mucho trabajo.' },
-                    { word: 'alle', emoji: '💯', spanish: '(todos)', example_de: 'Alle Türen sind offen.', example_es: 'Todas las puertas están abiertas.' },
-                    { word: 'jeder', emoji: '1️⃣', spanish: '(cada)', example_de: 'Jeder Tag ist ein neuer Anfang.', example_es: 'Cada día es un nuevo comienzo.' },
-                    { word: 'andere', emoji: '🔄', spanish: '(otros)', example_de: 'Ich möchte das andere Kleid anprobieren.', example_es: 'Quiero probarme el otro vestido.' },
-                    { word: 'genug', emoji: '✔️', spanish: '(suficiente)', example_de: 'Haben wir genug Geld dabei?', example_es: '¿Llevamos suficiente dinero?' },
-                    { word: 'ganz', emoji: '⭕', spanish: '(entero)', example_de: 'Ich habe den ganzen Apfel gegessen.', example_es: 'Me he comido toda la manzana.' },
-                    { word: 'beide', emoji: '2️⃣', spanish: '(ambos)', example_de: 'Beide Eltern arbeiten.', example_es: 'Ambos padres trabajan.' },
-                    { word: 'viele', emoji: '🔢', spanish: '(muchos)', example_de: 'Es gibt viele Probleme zu lösen.', example_es: 'Hay muchos problemas por resolver.' },
-                    { word: 'wenig', emoji: '🔸', spanish: '(poco)', example_de: 'Wir haben nur wenig Zeit.', example_es: 'Tenemos solo poco tiempo.' },
-                    { word: 'wenige', emoji: '🔹', spanish: '(pocos)', example_de: 'Nur wenige Leute kamen zur Party.', example_es: 'Solo poca gente vino a la fiesta.' },
-                    { word: 'mehrere', emoji: '📈', spanish: '(varios)', example_de: 'Er hat mehrere Autos.', example_es: 'Él tiene varios coches.' },
-                    { word: 'einige', emoji: '📊', spanish: '(algunos)', example_de: 'Ich habe einige Fragen dazu.', example_es: 'Tengo algunas preguntas al respecto.' },
-                    { word: 'manche', emoji: '🎲', spanish: '(algunos)', example_de: 'Manche Menschen mögen keinen Kaffee.', example_es: 'A algunas personas no les gusta el café.' },
-                    { word: 'zu viele', emoji: '🤯', spanish: '(demasiados)', example_de: 'Du isst zu viele Süßigkeiten.', example_es: 'Comes demasiados dulces.' },
-                    { word: 'mehr', emoji: '➕', spanish: '(más)', example_de: 'Ich brauche mehr Informationen.', example_es: 'Necesito más información.' },
-                    { word: 'weniger', emoji: '📉', spanish: '(menos)', example_de: 'Wir sollten weniger Fleisch essen.', example_es: 'Deberíamos comer menos carne.' }
+                    { word: 'viel', emoji: '📦', spanish: '(mucho)', english: 'much', example_de: 'Ich habe heute viel Arbeit.', example_es: 'Hoy tengo mucho trabajo.' },
+                    { word: 'alle', emoji: '💯', spanish: '(todos)', english: 'all', example_de: 'Alle Türen sind offen.', example_es: 'Todas las puertas están abiertas.' },
+                    { word: 'jeder', emoji: '1️⃣', spanish: '(cada)', english: 'each/every', example_de: 'Jeder Tag ist ein neuer Anfang.', example_es: 'Cada día es un nuevo comienzo.' },
+                    { word: 'andere', emoji: '🔄', spanish: '(otros)', english: 'other', example_de: 'Ich möchte das andere Kleid anprobieren.', example_es: 'Quiero probarme el otro vestido.' },
+                    { word: 'genug', emoji: '✔️', spanish: '(suficiente)', english: 'enough', example_de: 'Haben wir genug Geld dabei?', example_es: '¿Llevamos suficiente dinero?' },
+                    { word: 'ganz', emoji: '⭕', spanish: '(entero)', english: 'whole', example_de: 'Ich habe den ganzen Apfel gegessen.', example_es: 'Me he comido toda la manzana.' },
+                    { word: 'beide', emoji: '2️⃣', spanish: '(ambos)', english: 'both', example_de: 'Beide Eltern arbeiten.', example_es: 'Ambos padres trabajan.' },
+                    { word: 'viele', emoji: '🔢', spanish: '(muchos)', english: 'many', example_de: 'Es gibt viele Probleme zu lösen.', example_es: 'Hay muchos problemas por resolver.' },
+                    { word: 'wenig', emoji: '🔸', spanish: '(poco)', english: 'little', example_de: 'Wir haben nur wenig Zeit.', example_es: 'Tenemos solo poco tiempo.' },
+                    { word: 'wenige', emoji: '🔹', spanish: '(pocos)', english: 'few', example_de: 'Nur wenige Leute kamen zur Party.', example_es: 'Solo poca gente vino a la fiesta.' },
+                    { word: 'mehrere', emoji: '📈', spanish: '(varios)', english: 'several', example_de: 'Er hat mehrere Autos.', example_es: 'Él tiene varios coches.' },
+                    { word: 'einige', emoji: '📊', spanish: '(algunos)', english: 'some', example_de: 'Ich habe einige Fragen dazu.', example_es: 'Tengo algunas preguntas al respecto.' },
+                    { word: 'manche', emoji: '🎲', spanish: '(algunos)', english: 'some', example_de: 'Manche Menschen mögen keinen Kaffee.', example_es: 'A algunas personas no les gusta el café.' },
+                    { word: 'zu viele', emoji: '🤯', spanish: '(demasiados)', english: 'too many', example_de: 'Du isst zu viele Süßigkeiten.', example_es: 'Comes demasiados dulces.' },
+                    { word: 'mehr', emoji: '➕', spanish: '(más)', english: 'more', example_de: 'Ich brauche mehr Informationen.', example_es: 'Necesito más información.' },
+                    { word: 'weniger', emoji: '📉', spanish: '(menos)', english: 'less', example_de: 'Wir sollten weniger Fleisch essen.', example_es: 'Deberíamos comer menos carne.' }
                 ]
             },
             {
@@ -634,18 +845,18 @@
                 colorPastel: '#fee2e2',
                 badge: 'KOMPARATIV',
                 adjectives: [
-                    { word: 'besser', emoji: '👍', spanish: '(mejor)', example_de: 'Heute geht es mir schon besser.', example_es: 'Hoy ya me siento mejor.' },
-                    { word: 'schlechter', emoji: '👎', spanish: '(peor)', example_de: 'Die Qualität ist schlechter geworden.', example_es: 'La calidad ha empeorado.' },
-                    { word: 'größer', emoji: '🐘', spanish: '(más grande)', example_de: 'Er ist größer als sein Vater.', example_es: 'Él es más alto que su padre.' },
-                    { word: 'kleiner', emoji: '🐭', spanish: '(más pequeño)', example_de: 'Mein Zimmer ist kleiner als deins.', example_es: 'Mi habitación es más pequeña que la tuya.' },
-                    { word: 'älter', emoji: '👴', spanish: '(más viejo)', example_de: 'Mein Auto ist älter als ich dachte.', example_es: 'Mi coche es más viejo de lo que pensaba.' },
-                    { word: 'jünger', emoji: '👶', spanish: '(más joven)', example_de: 'Sie sieht jünger aus.', example_es: 'Ella parece más joven.' },
-                    { word: 'teurer', emoji: '💸', spanish: '(más caro)', example_de: 'Das Flugticket war teurer als erwartet.', example_es: 'El billete de avión fue más caro de lo esperado.' },
-                    { word: 'billiger', emoji: '💰', spanish: '(más barato)', example_de: 'Im Internet ist es oft billiger.', example_es: 'En internet a menudo es más barato.' },
-                    { word: 'am besten', emoji: '🥇', spanish: '(el mejor)', example_de: 'Pizza schmeckt mir am besten.', example_es: 'La pizza es lo que más me gusta.' },
-                    { word: 'am schlechtesten', emoji: '💔', spanish: '(el peor)', example_de: 'Dieser Film war am schlechtesten.', example_es: 'Esta película fue la peor.' },
-                    { word: 'am größten', emoji: '🏔️', spanish: '(el más grande)', example_de: 'Dieser Baum ist am größten.', example_es: 'Este árbol es el más grande.' },
-                    { word: 'am kleinsten', emoji: '🦠', spanish: '(el más pequeño)', example_de: 'Welches Stück ist am kleinsten?', example_es: '¿Qué trozo es el más pequeño?' }
+                    { word: 'besser', emoji: '👍', spanish: '(mejor)', english: 'better', example_de: 'Heute geht es mir schon besser.', example_es: 'Hoy ya me siento mejor.' },
+                    { word: 'schlechter', emoji: '👎', spanish: '(peor)', english: 'worse', example_de: 'Die Qualität ist schlechter geworden.', example_es: 'La calidad ha empeorado.' },
+                    { word: 'größer', emoji: '🐘', spanish: '(más grande)', english: 'bigger', example_de: 'Er ist größer als sein Vater.', example_es: 'Él es más alto que su padre.' },
+                    { word: 'kleiner', emoji: '🐭', spanish: '(más pequeño)', english: 'smaller', example_de: 'Mein Zimmer ist kleiner als deins.', example_es: 'Mi habitación es más pequeña que la tuya.' },
+                    { word: 'älter', emoji: '👴', spanish: '(más viejo)', english: 'older', example_de: 'Mein Auto ist älter als ich dachte.', example_es: 'Mi coche es más viejo de lo que pensaba.' },
+                    { word: 'jünger', emoji: '👶', spanish: '(más joven)', english: 'younger', example_de: 'Sie sieht jünger aus.', example_es: 'Ella parece más joven.' },
+                    { word: 'teurer', emoji: '💸', spanish: '(más caro)', english: 'more expensive', example_de: 'Das Flugticket war teurer als erwartet.', example_es: 'El billete de avión fue más caro de lo esperado.' },
+                    { word: 'billiger', emoji: '💰', spanish: '(más barato)', english: 'cheaper', example_de: 'Im Internet ist es oft billiger.', example_es: 'En internet a menudo es más barato.' },
+                    { word: 'am besten', emoji: '🥇', spanish: '(el mejor)', english: 'the best', example_de: 'Pizza schmeckt mir am besten.', example_es: 'La pizza es lo que más me gusta.' },
+                    { word: 'am schlechtesten', emoji: '💔', spanish: '(el peor)', english: 'the worst', example_de: 'Dieser Film war am schlechtesten.', example_es: 'Esta película fue la peor.' },
+                    { word: 'am größten', emoji: '🏔️', spanish: '(el más grande)', english: 'the biggest', example_de: 'Dieser Baum ist am größten.', example_es: 'Este árbol es el más grande.' },
+                    { word: 'am kleinsten', emoji: '🦠', spanish: '(el más pequeño)', english: 'the smallest', example_de: 'Welches Stück ist am kleinsten?', example_es: '¿Qué trozo es el más pequeño?' }
                 ]
             },
             {
@@ -656,12 +867,12 @@
                 colorPastel: '#e0e7ff',
                 badge: 'PARTIZIP',
                 adjectives: [
-                    { word: 'spannend', emoji: '😮', spanish: '(emocionante)', example_de: 'Das Finale war sehr spannend.', example_es: 'La final fue muy emocionante.' },
-                    { word: 'gebraucht', emoji: '🔄', spanish: '(usado)', example_de: 'Ich kaufe nur gebrauchte Bücher.', example_es: 'Solo compro libros usados.' },
-                    { word: 'passend', emoji: '✅', spanish: '(apropiado)', example_de: 'Ich habe keine passende Antwort.', example_es: 'No tengo una respuesta adecuada.' },
-                    { word: 'fehlend', emoji: '❌', spanish: '(faltante)', example_de: 'Wir suchen das fehlende Teil.', example_es: 'Buscamos la pieza que falta.' },
-                    { word: 'laufend', emoji: '🏃', spanish: '(corriente)', example_de: 'Wir haben hohe laufende Kosten.', example_es: 'Tenemos altos gastos corrientes.' },
-                    { word: 'folgend', emoji: '⏭️', spanish: '(siguiente)', example_de: 'Bitte beachten Sie folgende Hinweise.', example_es: 'Por favor, tenga en cuenta las siguientes indicaciones.' }
+                    { word: 'spannend', emoji: '😮', spanish: '(emocionante)', english: 'exciting', example_de: 'Das Finale war sehr spannend.', example_es: 'La final fue muy emocionante.' },
+                    { word: 'gebraucht', emoji: '🔄', spanish: '(usado)', english: 'used', example_de: 'Ich kaufe nur gebrauchte Bücher.', example_es: 'Solo compro libros usados.' },
+                    { word: 'passend', emoji: '✅', spanish: '(apropiado)', english: 'fitting/appropriate', example_de: 'Ich habe keine passende Antwort.', example_es: 'No tengo una respuesta adecuada.' },
+                    { word: 'fehlend', emoji: '❌', spanish: '(faltante)', english: 'missing', example_de: 'Wir suchen das fehlende Teil.', example_es: 'Buscamos la pieza que falta.' },
+                    { word: 'laufend', emoji: '🏃', spanish: '(corriente)', english: 'ongoing/running', example_de: 'Wir haben hohe laufende Kosten.', example_es: 'Tenemos altos gastos corrientes.' },
+                    { word: 'folgend', emoji: '⏭️', spanish: '(siguiente)', english: 'following', example_de: 'Bitte beachten Sie folgende Hinweise.', example_es: 'Por favor, tenga en cuenta las siguientes indicaciones.' }
                 ]
             }
         ];
@@ -678,6 +889,7 @@
         const nextGroupBtn = document.getElementById('next-group-btn');
         const recallSwitch = document.getElementById('recall-switch');
         const lightVersionSwitch = document.getElementById('light-version-switch');
+        const englishSwitch = document.getElementById('english-switch');
         const searchInput = document.getElementById('search-input');
         const clearSearchBtn = document.getElementById('clear-search');
         const searchResultsInfo = document.getElementById('search-results-info');
@@ -701,18 +913,24 @@
 
                 card.innerHTML = `
                     <div class="card-header">
-                        <span class="german-word" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören" style="cursor: pointer;">${adj.word}</span>
-                        <span class="spanish-meaning">${adj.spanish}</span>
-                        <div class="icon-floating">${adj.emoji}</div>
+                        <span class="german-word" lang="de" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören" style="cursor: pointer;">${adj.word}</span>
+                        <div class="icon-floating" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören">${adj.emoji}</div>
                     </div>
                     <div class="card-body">
-                        <span class="card-category-badge">${group.badge}</span>
-                        <div class="card-exam-example">
-                            <span class="example-text de">${adj.example_de}</span>
-                            <span class="example-text es">${adj.example_es}</span>
-                        </div>
+                         <span class="spanish-meaning" lang="es">${adj.spanish.replace(/[()]/g, '')}</span>
+                         <span class="english-meaning" lang="en">${adj.english || ''}</span>
                     </div>
                 `;
+
+                // Add click event to open modal
+                const groupData = {
+                    badge: group.badge,
+                    colorMain: group.colorMain,
+                    colorPastel: group.colorPastel
+                };
+                card.addEventListener('click', () => {
+                    openModal(adj, groupData);
+                });
 
                 cardsContainer.appendChild(card);
             });
@@ -753,6 +971,18 @@
             localStorage.setItem('adjektive-light-version', this.checked);
         });
 
+        // English Toggle
+        englishSwitch.addEventListener('change', function () {
+            const englishMeanings = document.querySelectorAll('.english-meaning');
+            if (this.checked) {
+                englishMeanings.forEach(span => span.classList.add('visible'));
+            } else {
+                englishMeanings.forEach(span => span.classList.remove('visible'));
+            }
+            // Save to localStorage
+            localStorage.setItem('adjektive-english', this.checked);
+        });
+
         // Active Recall Toggle
         recallSwitch.addEventListener('change', function () {
             const translations = document.querySelectorAll('.spanish-meaning, .example-text.es');
@@ -773,6 +1003,8 @@
 
         function setInitialTranslationState() {
             const translations = document.querySelectorAll('.spanish-meaning, .example-text.es');
+            const englishMeanings = document.querySelectorAll('.english-meaning');
+
             if (recallSwitch.checked) {
                 translations.forEach(span => {
                     span.style.visibility = 'visible';
@@ -783,6 +1015,12 @@
                     span.style.visibility = 'hidden';
                     span.style.opacity = '0';
                 });
+            }
+
+            if (englishSwitch.checked) {
+                englishMeanings.forEach(span => span.classList.add('visible'));
+            } else {
+                englishMeanings.forEach(span => span.classList.remove('visible'));
             }
         }
 
@@ -848,18 +1086,24 @@
 
                 card.innerHTML = `
                     <div class="card-header">
-                        <span class="german-word" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören" style="cursor: pointer;">${adj.word}</span>
-                        <span class="spanish-meaning">${adj.spanish}</span>
-                        <div class="icon-floating">${adj.emoji}</div>
+                         <span class="german-word" lang="de" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören" style="cursor: pointer;">${adj.word}</span>
+                        <div class="icon-floating" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören">${adj.emoji}</div>
                     </div>
                     <div class="card-body">
-                        <span class="card-category-badge">${adj.groupBadge}</span>
-                        <div class="card-exam-example">
-                            <span class="example-text de">${adj.example_de}</span>
-                            <span class="example-text es">${adj.example_es}</span>
-                        </div>
+                        <span class="spanish-meaning" lang="es">${adj.spanish.replace(/[()]/g, '')}</span>
+                        <span class="english-meaning" lang="en">${adj.english || ''}</span>
                     </div>
                 `;
+
+                // Add click event to open modal
+                const groupData = {
+                    badge: adj.groupBadge,
+                    colorMain: adj.groupColorMain,
+                    colorPastel: adj.groupColorPastel
+                };
+                card.addEventListener('click', () => {
+                    openModal(adj, groupData);
+                });
 
                 cardsContainer.appendChild(card);
             });
@@ -919,7 +1163,83 @@
             if (savedTranslation !== null) {
                 recallSwitch.checked = savedTranslation === 'true';
             }
+
+            // Load english preference
+            const savedEnglish = localStorage.getItem('adjektive-english');
+            if (savedEnglish !== null) {
+                englishSwitch.checked = savedEnglish === 'true';
+            }
         }
+
+        // --- Modal Logic ---
+        const modal = document.getElementById('adjective-modal');
+        const modalCloseBtn = document.getElementById('modal-close');
+        const modalEmoji = document.getElementById('modal-emoji');
+        const modalWord = document.getElementById('modal-word');
+        const modalTranslation = document.getElementById('modal-translation');
+        const modalBadge = document.getElementById('modal-badge');
+        const modalExampleDe = document.getElementById('modal-example-de');
+        const modalExampleEs = document.getElementById('modal-example-es');
+        const modalHeader = document.querySelector('.modal-header');
+
+        function openModal(adj, groupData) {
+            // Populate content
+            modalEmoji.textContent = adj.emoji;
+            modalWord.textContent = adj.word;
+            modalTranslation.textContent = adj.spanish;
+            modalBadge.textContent = groupData.badge;
+            modalExampleDe.textContent = adj.example_de;
+            modalExampleEs.textContent = adj.example_es;
+
+            // Set colors
+            modalHeader.style.backgroundColor = groupData.colorMain;
+
+            // TTS Triggers
+            modalWord.onclick = (e) => {
+                e.stopPropagation();
+                speak(adj.word);
+            };
+            modalWord.title = "Aussprache hören";
+
+            modalEmoji.onclick = (e) => {
+                e.stopPropagation();
+                speak(adj.word);
+            };
+            modalEmoji.title = "Aussprache hören";
+            modalEmoji.style.cursor = "pointer";
+
+            modalExampleDe.onclick = (e) => {
+                e.stopPropagation();
+                speak(adj.example_de);
+            };
+            modalExampleDe.title = "Satz aussprechen";
+
+
+            // Show modal
+            modal.classList.add('visible');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            modal.classList.remove('visible');
+            document.body.style.overflow = '';
+        }
+
+        // Close events
+        modalCloseBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Key press events
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('visible')) {
+                closeModal();
+            }
+        });
 
         // --- TTS Function ---
         function speak(text, lang = 'de-DE', rate = 0.9) {
