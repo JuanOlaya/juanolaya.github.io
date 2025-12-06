@@ -416,9 +416,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="card-header">
-                        <span class="german-word">${verbName}</span>
+                        <span class="german-word" onclick="event.stopPropagation(); speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${verbName}</span>
                         <span class="spanish-translation" data-form="translation">${esTranslation}</span>
-                        <div class="icon-floating" onclick="event.stopPropagation(); speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${verbData.emoji || '❓'}</div>
+                        <div class="icon-floating">${verbData.emoji || '❓'}</div>
                     </div>
                     <div class="card-body">
                         <div class="text-container perfekt-hover-container">
@@ -1708,23 +1708,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         document.getElementById('praesens-details-container').open = true;
 
-        document.getElementById('speak-infinitive-icon').addEventListener('click', (e) => {
+        document.getElementById('modal-verb-infinitive').onclick = (e) => {
             e.stopPropagation();
             speak(verb);
-        });
-        document.getElementById('speak-perfekt-icon').addEventListener('click', (e) => {
+        };
+        document.getElementById('modal-verb-infinitive').style.cursor = 'pointer';
+        document.getElementById('modal-verb-infinitive').title = 'Aussprache hören';
+
+        document.getElementById('modal-verb-perfekt').onclick = (e) => {
             e.stopPropagation();
             speak(updatedData.perfekt);
-        });
-        document.getElementById('speak-praeteritum-icon').addEventListener('click', (e) => {
+        };
+        document.getElementById('modal-verb-perfekt').style.cursor = 'pointer';
+        document.getElementById('modal-verb-perfekt').title = 'Aussprache hören';
+
+        document.getElementById('modal-verb-praeteritum').onclick = (e) => {
             e.stopPropagation();
             speak(updatedData.praeteritum);
-        });
-        document.getElementById('speak-sentence-icon').addEventListener('click', (e) => {
+        };
+        document.getElementById('modal-verb-praeteritum').style.cursor = 'pointer';
+        document.getElementById('modal-verb-praeteritum').title = 'Aussprache hören';
+
+        document.getElementById('modal-text').onclick = (e) => {
             e.stopPropagation();
             const sentence = document.getElementById('modal-text').textContent;
             speak(sentence);
-        });
+        };
+        document.getElementById('modal-text').style.cursor = 'pointer';
+        document.getElementById('modal-text').title = 'Satz aussprechen';
 
         verbModal.classList.add('visible');
     }
@@ -2106,6 +2117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Speech synthesis not supported in this browser.");
         }
     }
+    window.speak = speak;
 
     // --- START THE APP ---
     initializeApp();

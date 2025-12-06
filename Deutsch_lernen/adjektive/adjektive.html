@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,11 +58,13 @@
             margin: 1.5rem 0;
             flex-wrap: wrap;
         }
+
         .active-recall-toggle {
             display: flex;
             align-items: center;
             gap: 10px;
         }
+
         .switch-label {
             color: #414A5C;
             cursor: pointer;
@@ -69,23 +72,27 @@
             text-align: right;
             line-height: 1.2;
         }
+
         .label-translation {
             display: block;
             font-size: 0.8em;
             font-style: italic;
             font-weight: 400;
         }
+
         .switch {
             position: relative;
             display: inline-block;
             width: 50px;
             height: 24px;
         }
+
         .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
+
         .slider {
             position: absolute;
             cursor: pointer;
@@ -97,6 +104,7 @@
             transition: .4s;
             border-radius: 34px;
         }
+
         .slider:before {
             position: absolute;
             content: "";
@@ -109,10 +117,12 @@
             border-radius: 50%;
             transform: translateX(26px);
         }
-        input:not(:checked) + .slider {
+
+        input:not(:checked)+.slider {
             background-color: #ccc;
         }
-        input:not(:checked) + .slider:before {
+
+        input:not(:checked)+.slider:before {
             transform: translateX(0px);
         }
 
@@ -124,6 +134,7 @@
             gap: 2rem;
             margin: 2rem 0;
         }
+
         .nav-button {
             background-color: #111827;
             color: white;
@@ -134,18 +145,21 @@
             font-size: 1.1rem;
             font-weight: 600;
             transition: all 0.3s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .nav-button:hover {
             background-color: #1f2937;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
+
         .nav-button:disabled {
             background-color: #d1d5db;
             cursor: not-allowed;
             transform: none;
         }
+
         .group-indicator {
             font-size: 1.3rem;
             font-weight: 700;
@@ -216,7 +230,7 @@
             bottom: 0;
             left: 50%;
             transform: translate(-50%, 50%);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             z-index: 10;
         }
 
@@ -240,7 +254,7 @@
             color: white;
             margin-bottom: 0;
             line-height: 1.1;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         /* Spanish Translation */
@@ -306,11 +320,13 @@
             justify-content: center;
             margin: 1.5rem 0;
         }
+
         .search-wrapper {
             position: relative;
             width: 100%;
             max-width: 500px;
         }
+
         #search-input {
             width: 100%;
             padding: 12px 45px 12px 20px;
@@ -322,13 +338,16 @@
             transition: all 0.3s;
             background-color: white;
         }
+
         #search-input:focus {
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
+
         #search-input::placeholder {
             color: #9ca3af;
         }
+
         .search-icon {
             position: absolute;
             right: 15px;
@@ -337,6 +356,7 @@
             color: #6b7280;
             pointer-events: none;
         }
+
         .clear-search {
             position: absolute;
             right: 45px;
@@ -350,9 +370,11 @@
             padding: 5px;
             display: none;
         }
+
         .clear-search.visible {
             display: block;
         }
+
         .search-results-info {
             text-align: center;
             color: #6b7280;
@@ -364,34 +386,42 @@
         body.light-version .icon-floating {
             display: none;
         }
+
         body.light-version .card-exam-example {
             display: none;
         }
+
         body.light-version .card-category-badge {
             display: none;
         }
+
         body.light-version .card-body {
             display: none;
         }
+
         body.light-version .card {
             min-height: auto;
             background-color: #e5e7eb;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
+
         body.light-version .card-header {
             padding: 25px 15px;
             border-radius: 20px;
             background-color: #e5e7eb;
         }
+
         body.light-version .german-word {
             color: #1e3a8a;
             text-shadow: none;
         }
+
         body.light-version .spanish-meaning {
             color: #3b82f6;
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -423,14 +453,16 @@
 
     <div class="toggle-container">
         <div class="active-recall-toggle">
-            <label class="switch-label" for="light-version-switch">Versión ligera<span class="label-translation">(versión simple)</span></label>
+            <label class="switch-label" for="light-version-switch">Versión ligera<span
+                    class="label-translation">(versión simple)</span></label>
             <label class="switch">
                 <input type="checkbox" id="light-version-switch">
                 <span class="slider"></span>
             </label>
         </div>
         <div class="active-recall-toggle">
-            <label class="switch-label" for="recall-switch">Übersetzung<span class="label-translation">(traducción)</span></label>
+            <label class="switch-label" for="recall-switch">Übersetzung<span
+                    class="label-translation">(traducción)</span></label>
             <label class="switch">
                 <input type="checkbox" id="recall-switch" checked>
                 <span class="slider"></span>
@@ -467,7 +499,9 @@
                     { word: 'billig', emoji: '💰', spanish: '(barato)', example_de: 'Diese Schuhe waren sehr billig.', example_es: 'Estos zapatos fueron muy baratos.' },
                     { word: 'schlecht', emoji: '👎', spanish: '(malo)', example_de: 'Das Wetter ist heute schlecht.', example_es: 'El tiempo hoy es malo.' },
                     { word: 'stark', emoji: '💪', spanish: '(fuerte)', example_de: 'Ich trinke meinen Kaffee gern stark.', example_es: 'Me gusta tomar mi café fuerte.' },
-                    { word: 'schwach', emoji: '🤕', spanish: '(débil)', example_de: 'Das Signal ist hier sehr schwach.', example_es: 'La señal aquí es muy débil.' }
+                    { word: 'schwach', emoji: '🤕', spanish: '(débil)', example_de: 'Das Signal ist hier sehr schwach.', example_es: 'La señal aquí es muy débil.' },
+                    { word: 'leicht', emoji: '🪶', spanish: '(fácil/ligero)', example_de: 'Die Übung ist sehr leicht.', example_es: 'El ejercicio es muy fácil.' },
+                    { word: 'dringend', emoji: '🚨', spanish: '(urgente)', example_de: 'Ich muss dringend mit dir sprechen.', example_es: 'Tengo que hablar contigo urgentemente.' }
                 ]
             },
             {
@@ -494,7 +528,8 @@
                     { word: 'modern', emoji: '📱', spanish: '(moderno)', example_de: 'Das Hotel ist sehr modern.', example_es: 'El hotel es muy moderno.' },
                     { word: 'bequem', emoji: '🛋️', spanish: '(cómodo)', example_de: 'Diese Schuhe sind sehr bequem.', example_es: 'Estos zapatos son muy cómodos.' },
                     { word: 'unbequem', emoji: '😫', spanish: '(incómodo)', example_de: 'Der Stuhl ist hart und unbequem.', example_es: 'La silla es dura e incómoda.' },
-                    { word: 'gefährlich', emoji: '⚠️', spanish: '(peligroso)', example_de: 'Diese Kreuzung ist gefährlich.', example_es: 'Este cruce es peligroso.' }
+                    { word: 'gefährlich', emoji: '⚠️', spanish: '(peligroso)', example_de: 'Diese Kreuzung ist gefährlich.', example_es: 'Este cruce es peligroso.' },
+                    { word: 'fertig', emoji: '🏁', spanish: '(listo/terminado)', example_de: 'Das Essen ist fertig.', example_es: 'La comida está lista.' }
                 ]
             },
             {
@@ -518,7 +553,8 @@
                     { word: 'traurig', emoji: '😥', spanish: '(triste)', example_de: 'Warum bist du so traurig?', example_es: '¿Por qué estás tan triste?' },
                     { word: 'wach', emoji: '👀', spanish: '(despierto)', example_de: 'Ich bin schon seit sechs Uhr wach.', example_es: 'Estoy despierto desde las seis.' },
                     { word: 'verliebt', emoji: '💕', spanish: '(enamorado)', example_de: 'Sie sind total verliebt.', example_es: 'Ellos están totalmente enamorados.' },
-                    { word: 'unfreundlich', emoji: '😠', spanish: '(antipático)', example_de: 'Der Service war leider unfreundlich.', example_es: 'El servicio fue, lamentablemente, antipático.' }
+                    { word: 'unfreundlich', emoji: '😠', spanish: '(antipático)', example_de: 'Der Service war leider unfreundlich.', example_es: 'El servicio fue, lamentablemente, antipático.' },
+                    { word: 'vorsichtig', emoji: '👀', spanish: '(cuidadoso)', example_de: 'Sei bitte vorsichtig!', example_es: '¡Por favor, ten cuidado!' }
                 ]
             },
             {
@@ -665,7 +701,7 @@
 
                 card.innerHTML = `
                     <div class="card-header">
-                        <span class="german-word">${adj.word}</span>
+                        <span class="german-word" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören" style="cursor: pointer;">${adj.word}</span>
                         <span class="spanish-meaning">${adj.spanish}</span>
                         <div class="icon-floating">${adj.emoji}</div>
                     </div>
@@ -707,7 +743,7 @@
         });
 
         // Light Version Toggle
-        lightVersionSwitch.addEventListener('change', function() {
+        lightVersionSwitch.addEventListener('change', function () {
             if (this.checked) {
                 document.body.classList.add('light-version');
             } else {
@@ -718,7 +754,7 @@
         });
 
         // Active Recall Toggle
-        recallSwitch.addEventListener('change', function() {
+        recallSwitch.addEventListener('change', function () {
             const translations = document.querySelectorAll('.spanish-meaning, .example-text.es');
             if (this.checked) {
                 translations.forEach(span => {
@@ -812,7 +848,7 @@
 
                 card.innerHTML = `
                     <div class="card-header">
-                        <span class="german-word">${adj.word}</span>
+                        <span class="german-word" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören" style="cursor: pointer;">${adj.word}</span>
                         <span class="spanish-meaning">${adj.spanish}</span>
                         <div class="icon-floating">${adj.emoji}</div>
                     </div>
@@ -885,9 +921,33 @@
             }
         }
 
+        // --- TTS Function ---
+        function speak(text, lang = 'de-DE', rate = 0.9) {
+            if ('speechSynthesis' in window) {
+                // Cancel any previous speech
+                window.speechSynthesis.cancel();
+
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = rate;
+
+                // Optional: Find a specific German voice
+                const voices = window.speechSynthesis.getVoices();
+                const germanVoice = voices.find(voice => voice.lang === 'de-DE');
+                if (germanVoice) {
+                    utterance.voice = germanVoice;
+                }
+
+                window.speechSynthesis.speak(utterance);
+            } else {
+                console.error("Speech synthesis not supported in this browser.");
+            }
+        }
+
         // Initialize
         loadSavedPreferences();
         renderGroup();
     </script>
 </body>
+
 </html>
