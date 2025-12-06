@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,11 +58,13 @@
             margin: 1.5rem 0;
             flex-wrap: wrap;
         }
+
         .active-recall-toggle {
             display: flex;
             align-items: center;
             gap: 10px;
         }
+
         .switch-label {
             color: #414A5C;
             cursor: pointer;
@@ -69,23 +72,27 @@
             text-align: right;
             line-height: 1.2;
         }
+
         .label-translation {
             display: block;
             font-size: 0.8em;
             font-style: italic;
             font-weight: 400;
         }
+
         .switch {
             position: relative;
             display: inline-block;
             width: 50px;
             height: 24px;
         }
+
         .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
+
         .slider {
             position: absolute;
             cursor: pointer;
@@ -97,6 +104,7 @@
             transition: .4s;
             border-radius: 34px;
         }
+
         .slider:before {
             position: absolute;
             content: "";
@@ -109,10 +117,12 @@
             border-radius: 50%;
             transform: translateX(26px);
         }
-        input:not(:checked) + .slider {
+
+        input:not(:checked)+.slider {
             background-color: #ccc;
         }
-        input:not(:checked) + .slider:before {
+
+        input:not(:checked)+.slider:before {
             transform: translateX(0px);
         }
 
@@ -124,6 +134,7 @@
             gap: 2rem;
             margin: 2rem 0;
         }
+
         .nav-button {
             background-color: #111827;
             color: white;
@@ -134,18 +145,21 @@
             font-size: 1.1rem;
             font-weight: 600;
             transition: all 0.3s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .nav-button:hover {
             background-color: #1f2937;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
+
         .nav-button:disabled {
             background-color: #d1d5db;
             cursor: not-allowed;
             transform: none;
         }
+
         .group-indicator {
             font-size: 1.3rem;
             font-weight: 700;
@@ -216,7 +230,7 @@
             bottom: 0;
             left: 50%;
             transform: translate(-50%, 50%);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             z-index: 10;
         }
 
@@ -240,8 +254,9 @@
             color: white;
             margin-bottom: 0;
             line-height: 1.1;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .german-word.long-word {
             font-size: 1.8rem;
         }
@@ -309,11 +324,13 @@
             justify-content: center;
             margin: 1.5rem 0;
         }
+
         .search-wrapper {
             position: relative;
             width: 100%;
             max-width: 500px;
         }
+
         #search-input {
             width: 100%;
             padding: 12px 45px 12px 20px;
@@ -325,13 +342,16 @@
             transition: all 0.3s;
             background-color: white;
         }
+
         #search-input:focus {
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
+
         #search-input::placeholder {
             color: #9ca3af;
         }
+
         .search-icon {
             position: absolute;
             right: 15px;
@@ -340,6 +360,7 @@
             color: #6b7280;
             pointer-events: none;
         }
+
         .clear-search {
             position: absolute;
             right: 45px;
@@ -353,9 +374,11 @@
             padding: 5px;
             display: none;
         }
+
         .clear-search.visible {
             display: block;
         }
+
         .search-results-info {
             text-align: center;
             color: #6b7280;
@@ -367,32 +390,40 @@
         body.light-version .icon-floating {
             display: none;
         }
+
         body.light-version .card-exam-example {
             display: none;
         }
+
         body.light-version .card-category-badge {
             display: none;
         }
+
         body.light-version .card-body {
             display: none;
         }
+
         body.light-version .card {
             min-height: auto;
             background-color: #e5e7eb;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
+
         body.light-version .card-header {
             padding: 25px 15px;
             border-radius: 20px;
             background-color: #e5e7eb;
         }
+
         body.light-version .german-word {
             color: #1e3a8a;
             text-shadow: none;
         }
+
         body.light-version .german-word.long-word {
             color: #1e3a8a;
         }
+
         body.light-version .spanish-meaning {
             color: #3b82f6;
         }
@@ -411,9 +442,11 @@
             align-items: center;
             padding: 20px;
         }
+
         .modal-overlay.active {
             display: flex;
         }
+
         .modal-content {
             background-color: white;
             border-radius: 20px;
@@ -425,6 +458,7 @@
             position: relative;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
+
         .modal-close {
             position: absolute;
             top: 15px;
@@ -437,28 +471,34 @@
             transition: color 0.3s;
             padding: 5px 10px;
         }
+
         .modal-close:hover {
             color: #1f2937;
         }
+
         .modal-header {
             text-align: center;
             margin-bottom: 30px;
         }
+
         .modal-emoji {
             font-size: 4rem;
             margin-bottom: 15px;
         }
+
         .modal-word {
             font-size: 2.5rem;
             font-weight: 800;
             color: #1f2937;
             margin-bottom: 10px;
         }
+
         .modal-translation {
             font-size: 1.3rem;
             color: #6b7280;
             font-weight: 600;
         }
+
         .modal-badge {
             display: inline-block;
             background-color: var(--modal-color);
@@ -471,29 +511,34 @@
             letter-spacing: 0.05em;
             margin-top: 15px;
         }
+
         .modal-section {
             margin-top: 30px;
             padding-top: 20px;
             border-top: 2px solid #f3f4f6;
         }
+
         .modal-section-title {
             font-size: 1.2rem;
             font-weight: 700;
             color: #1f2937;
             margin-bottom: 15px;
         }
+
         .modal-example {
             background-color: #f9fafb;
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 10px;
         }
+
         .modal-example-de {
             font-size: 1.2rem;
             font-weight: 700;
             color: #1f2937;
             margin-bottom: 8px;
         }
+
         .modal-example-es {
             font-size: 1rem;
             color: #6b7280;
@@ -501,6 +546,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -532,14 +578,16 @@
 
     <div class="toggle-container">
         <div class="active-recall-toggle">
-            <label class="switch-label" for="light-version-switch">Versión ligera<span class="label-translation">(versión simple)</span></label>
+            <label class="switch-label" for="light-version-switch">Versión ligera<span
+                    class="label-translation">(versión simple)</span></label>
             <label class="switch">
                 <input type="checkbox" id="light-version-switch">
                 <span class="slider"></span>
             </label>
         </div>
         <div class="active-recall-toggle">
-            <label class="switch-label" for="recall-switch">Übersetzung<span class="label-translation">(traducción)</span></label>
+            <label class="switch-label" for="recall-switch">Übersetzung<span
+                    class="label-translation">(traducción)</span></label>
             <label class="switch">
                 <input type="checkbox" id="recall-switch" checked>
                 <span class="slider"></span>
@@ -592,7 +640,10 @@
                     { word: 'dann', emoji: '👉', spanish: '(luego/entonces)', example_de: 'Erst essen wir, dann gehen wir.', example_es: 'Primero comemos, luego nos vamos.' },
                     { word: 'inzwischen', emoji: '⏳', spanish: '(mientras tanto)', example_de: 'Ich koche, inzwischen kannst du den Tisch decken.', example_es: 'Yo cocino, mientras tanto tú puedes poner la mesa.' },
                     { word: 'heutzutage', emoji: '📱', spanish: '(hoy en día)', example_de: 'Heutzutage hat jeder ein Handy.', example_es: 'Hoy en día todo el mundo tiene un móvil.' },
-                    { word: 'jeweils', emoji: '🔢', spanish: '(respectivamente / cada uno)', example_de: 'Die Kurse kosten jeweils 50 Euro.', example_es: 'Los cursos cuestan 50 euros cada uno.' }
+                    { word: 'jeweils', emoji: '🔢', spanish: '(respectivamente / cada uno)', example_de: 'Die Kurse kosten jeweils 50 Euro.', example_es: 'Los cursos cuestan 50 euros cada uno.' },
+                    { word: 'noch', emoji: '⏳', spanish: '(todavía/aún)', example_de: 'Ich bin noch hier.', example_es: 'Todavía estoy aquí.' },
+                    { word: 'danach', emoji: '⏩', spanish: '(después)', example_de: 'Erst essen wir, danach gehen wir.', example_es: 'Primero comemos, después nos vamos.' },
+                    { word: 'wieder', emoji: '🔄', spanish: '(de nuevo/otra vez)', example_de: 'Er kommt wieder.', example_es: 'Él viene de nuevo.' }
                 ]
             },
             {
@@ -669,7 +720,8 @@
                     { word: 'besonders', emoji: '🌟', spanish: '(especialmente)', example_de: 'Dieser Kuchen schmeckt besonders gut.', example_es: 'Este pastel sabe especialmente bien.' },
                     { word: 'überhaupt', emoji: '🚫', spanish: '(en absoluto)', example_de: 'Das schmeckt mir überhaupt nicht.', example_es: 'Eso no me gusta en absoluto.' },
                     { word: 'unglaublich', emoji: '😲', spanish: '(increíblemente)', example_de: 'Der Film war unglaublich spannend.', example_es: 'La película fue increíblemente emocionante.' },
-                    { word: 'schrecklich', emoji: '😱', spanish: '(terriblemente)', example_de: 'Ich vermisse dich schrecklich.', example_es: 'Te extraño terriblemente.' }
+                    { word: 'schrecklich', emoji: '😱', spanish: '(terriblemente)', example_de: 'Ich vermisse dich schrecklich.', example_es: 'Te extraño terriblemente.' },
+                    { word: 'völlig', emoji: '💯', spanish: '(completamente)', example_de: 'Das ist völlig falsch.', example_es: 'Eso es completamente incorrecto.' }
                 ]
             },
             {
@@ -688,7 +740,9 @@
                     { word: 'jedenfalls', emoji: '🛑', spanish: '(en cualquier caso)', example_de: 'Ich rufe dich jedenfalls an.', example_es: 'Te llamo en cualquier caso.' },
                     { word: 'zumindest', emoji: '📉', spanish: '(al menos)', example_de: 'Du solltest zumindest fragen.', example_es: 'Deberías al menos preguntar.' },
                     { word: 'endlich', emoji: '🏁', spanish: '(por fin)', example_de: 'Endlich ist Wochenende!', example_es: '¡Por fin es fin de semana!' },
-                    { word: 'herzlich', emoji: '❤️', spanish: '(cordialmente)', example_de: 'Herzlich willkommen!', example_es: '¡Cordialmente bienvenido! (¡Bienvenido!)' }
+                    { word: 'herzlich', emoji: '❤️', spanish: '(cordialmente)', example_de: 'Herzlich willkommen!', example_es: '¡Cordialmente bienvenido! (¡Bienvenido!)' },
+                    { word: 'halt', emoji: '🤷', spanish: '(simplemente/pues)', example_de: 'Das ist halt so.', example_es: 'Es que es así (simplemente es así).' },
+                    { word: 'doch', emoji: '☝️', spanish: '(sí/pues/pero)', example_de: 'Das war doch klar!', example_es: '¡Pero si estaba claro!' }
                 ]
             },
             {
@@ -798,7 +852,7 @@
 
                 card.innerHTML = `
                     <div class="card-header">
-                        <span class="german-word ${longWordClass}">${adv.word}</span>
+                        <span class="german-word ${longWordClass}" onclick="event.stopPropagation(); speak('${adv.word}')" title="Aussprache hören" style="cursor: pointer;">${adv.word}</span>
                         <span class="spanish-meaning">${cardTranslation}</span>
                         <div class="icon-floating">${adv.emoji}</div>
                     </div>
@@ -845,7 +899,7 @@
         });
 
         // Light Version Toggle
-        lightVersionSwitch.addEventListener('change', function() {
+        lightVersionSwitch.addEventListener('change', function () {
             if (this.checked) {
                 document.body.classList.add('light-version');
             } else {
@@ -856,7 +910,7 @@
         });
 
         // Active Recall Toggle
-        recallSwitch.addEventListener('change', function() {
+        recallSwitch.addEventListener('change', function () {
             const translations = document.querySelectorAll('.spanish-meaning, .example-text.es');
             if (this.checked) {
                 translations.forEach(span => {
@@ -954,7 +1008,7 @@
 
                 card.innerHTML = `
                     <div class="card-header">
-                        <span class="german-word ${longWordClass}">${adv.word}</span>
+                        <span class="german-word ${longWordClass}" onclick="event.stopPropagation(); speak('${adv.word}')" title="Aussprache hören" style="cursor: pointer;">${adv.word}</span>
                         <span class="spanish-meaning">${cardTranslation}</span>
                         <div class="icon-floating">${adv.emoji}</div>
                     </div>
@@ -1030,6 +1084,19 @@
             modalExampleDe.textContent = adverb.example_de;
             modalExampleEs.textContent = adverb.example_es;
 
+            // Set TTS on word text click
+            modalWord.onclick = (e) => {
+                e.stopPropagation();
+                speak(adverb.word);
+            };
+            modalWord.style.cursor = 'pointer';
+            modalWord.title = 'Aussprache hören';
+
+            // Reset emoji cursor and click
+            modalEmoji.style.cursor = 'default';
+            modalEmoji.title = '';
+            modalEmoji.onclick = null;
+
             // Show modal
             adverbModal.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1073,9 +1140,33 @@
             }
         }
 
+        // --- TTS Function ---
+        function speak(text, lang = 'de-DE', rate = 0.9) {
+            if ('speechSynthesis' in window) {
+                // Cancel any previous speech
+                window.speechSynthesis.cancel();
+
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = rate;
+
+                // Optional: Find a specific German voice
+                const voices = window.speechSynthesis.getVoices();
+                const germanVoice = voices.find(voice => voice.lang === 'de-DE');
+                if (germanVoice) {
+                    utterance.voice = germanVoice;
+                }
+
+                window.speechSynthesis.speak(utterance);
+            } else {
+                console.error("Speech synthesis not supported in this browser.");
+            }
+        }
+
         // Initialize
         loadSavedPreferences();
         renderGroup();
     </script>
 </body>
+
 </html>
