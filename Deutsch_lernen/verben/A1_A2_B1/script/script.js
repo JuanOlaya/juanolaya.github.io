@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'A1_1': { groupCount: 10, displayName: 'A1.1' },
         'A1_2': { groupCount: 9, displayName: 'A1.2' },
         'A2_1': { groupCount: 9, displayName: 'A2.1' },
-        'A2_2': { groupCount: 12, displayName: 'A2.2' },
+        'A2_2': { groupCount: 13, displayName: 'A2.2' },
         'B1_1': { groupCount: 7, displayName: 'B1.1' }
     };
     const levelOrder = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1'];
@@ -416,9 +416,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="card-header">
-                        <span class="german-word" onclick="speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${verbName}</span>
+                        <span class="german-word" onclick="event.stopPropagation(); speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${verbName}</span>
                         <span class="spanish-translation" data-form="translation">${esTranslation}</span>
-                        <div class="icon-floating" onclick="speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${verbData.emoji || '❓'}</div>
+                        <div class="icon-floating" onclick="event.stopPropagation(); speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${verbData.emoji || '❓'}</div>
                     </div>
                     <div class="card-body">
                         <div class="text-container perfekt-hover-container">
