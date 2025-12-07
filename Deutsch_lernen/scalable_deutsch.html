@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -66,14 +67,37 @@
             animation: fadeInUp 0.6s ease backwards;
         }
 
-        .card:nth-child(1) { animation-delay: 0.1s; }
-        .card:nth-child(2) { animation-delay: 0.2s; }
-        .card:nth-child(3) { animation-delay: 0.3s; }
-        .card:nth-child(4) { animation-delay: 0.4s; }
-        .card:nth-child(5) { animation-delay: 0.5s; }
-        .card:nth-child(6) { animation-delay: 0.6s; }
-        .card:nth-child(7) { animation-delay: 0.7s; }
-        .card:nth-child(8) { animation-delay: 0.8s; }
+        .card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .card:nth-child(7) {
+            animation-delay: 0.7s;
+        }
+
+        .card:nth-child(8) {
+            animation-delay: 0.8s;
+        }
 
         .card::before {
             content: '';
@@ -170,6 +194,7 @@
                 opacity: 0;
                 transform: translateY(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -181,6 +206,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -191,6 +217,7 @@
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
@@ -224,6 +251,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <h1>🇩🇪 Scalable Deutsch</h1>
@@ -244,10 +272,17 @@
         </div>
 
         <!-- Verben Card -->
-        <a href="verben/A1_A2_B1/index.html" class="card">
+        <a href="verben/A1_A2_B1/verben.html" class="card">
             <div class="card-icon">🔤</div>
             <h2 class="card-title">Verben</h2>
             <p class="card-description">Konjugation und Übung deutscher Verben mit interaktiven Karten</p>
+        </a>
+
+        <!-- Präpositionen Card -->
+        <a href="praepositionen/praepositionen.html" class="card">
+            <div class="card-icon">🧭</div>
+            <h2 class="card-title">Präpositionen</h2>
+            <p class="card-description">Beherrsche Akkusativ-, Dativ- und Wechselpräpositionen</p>
         </a>
 
         <!-- Adverbien Card -->
@@ -291,4 +326,5 @@
         <p style="margin-top: 8px; font-size: 0.85rem; opacity: 0.8;">© 2024 Scalable Deutsch</p>
     </div>
 </body>
+
 </html>
