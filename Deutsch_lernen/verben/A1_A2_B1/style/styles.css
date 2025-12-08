@@ -2880,3 +2880,15 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
     margin-top: 0.5rem;
     font-size: 0.95rem;
 }
+
+/* Hide German Content */
+.hide-de .german-word,
+.hide-de .german-past,
+.hide-de .german-praeteritum,
+.hide-de .german-konjunktiv,
+.hide-de .german-word-container .verb-tag,
+.hide-de .german-word-container .case-tags,
+.hide-de #modal-verb-infinitive,
+.hide-de .german-example {
+    display: none !important;
+}

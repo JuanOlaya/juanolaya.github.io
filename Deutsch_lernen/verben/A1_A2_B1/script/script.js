@@ -986,7 +986,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Set default state: Toggles off by default (Active Recall), except Spanish
                 if (toggleId === 'en-switch' || toggleId === 'recall-switch') {
                     toggle.checked = false;
-                } else if (toggleId === 'es-switch') {
+                } else if (toggleId === 'es-switch' || toggleId === 'de-switch') {
                     toggle.checked = true;
                 }
             }
