@@ -300,8 +300,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!verbData) return;
             const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
 
-            // Remove parentheses from translations
-            const esTranslation = removeParentheses(verbData.es || '');
+            // Remove parentheses from translations (except main translation)
+            const esTranslation = verbData.es || '';
             const esPerfektTranslation = removeParentheses(verbData.es_perfekt || '');
             const esPraeteritumTranslation = removeParentheses(verbData.es_praeteritum || '');
 
@@ -983,9 +983,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (savedState !== null) {
                 toggle.checked = savedState === 'true';
             } else {
-                // Set default state: Übersetzung off by default
-                if (toggleId === 'recall-switch') {
+                // Set default state: Toggles off by default (Active Recall), except Spanish
+                if (toggleId === 'en-switch' || toggleId === 'recall-switch') {
                     toggle.checked = false;
+                } else if (toggleId === 'es-switch') {
+                    toggle.checked = true;
                 }
             }
 
@@ -1174,14 +1176,24 @@ document.addEventListener('DOMContentLoaded', () => {
             window.speechSynthesis.cancel();
 
             const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
             utterance.rate = rate;
 
-            // Optional: Find a specific German voice
+            // Robust Voice Selection
             const voices = window.speechSynthesis.getVoices();
-            const germanVoice = voices.find(voice => voice.lang === 'de-DE');
-            if (germanVoice) {
-                utterance.voice = germanVoice;
+
+            // 1. Try exact match (e.g., 'de-DE')
+            // 2. Try alternate format (e.g., 'de_DE')
+            // 3. Try any voice starting with the language code (e.g., 'de')
+            let targetVoice = voices.find(voice => voice.lang === lang) ||
+                voices.find(voice => voice.lang === lang.replace('-', '_')) ||
+                voices.find(voice => voice.lang.startsWith(lang.substring(0, 2)));
+
+            if (targetVoice) {
+                utterance.voice = targetVoice;
+                utterance.lang = targetVoice.lang; // Ensure utterance lang matches voice lang
+            } else {
+                // Fallback: trust the browser to handle the requested lang
+                utterance.lang = lang;
             }
 
             window.speechSynthesis.speak(utterance);
