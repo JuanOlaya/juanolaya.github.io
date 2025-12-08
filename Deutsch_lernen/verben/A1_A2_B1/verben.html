@@ -104,13 +104,22 @@
             <div class="toggles-row">
                 <div class="info-button" id="info-button">info</div>
                 <div class="active-recall-toggle">
-                    <label for="recall-switch" class="toggle-label">
-                        Übersetzung
-                        <span class="toggle-sublabel">(traducción)</span>
+                    <label for="es-switch" class="toggle-label">
+                        Spanisch
+                        <span class="toggle-sublabel">(Übersetzung)</span>
                     </label>
                     <label class="switch">
-                        <input type="checkbox" id="recall-switch" class="visibility-toggle"
-                            data-toggle-class="hide-translation">
+                        <input type="checkbox" id="es-switch" class="visibility-toggle" data-toggle-class="hide-es">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="active-recall-toggle">
+                    <label for="en-switch" class="toggle-label">
+                        Englisch
+                        <span class="toggle-sublabel">(Übersetzung)</span>
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="en-switch" class="visibility-toggle" data-toggle-class="hide-en">
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -216,6 +225,9 @@
                     </div>
                 </details>
 
+                <!-- Verb Note -->
+                <p id="modal-verb-note" class="modal-note" style="display: none;"></p>
+
                 <!-- Präsens Details Section -->
                 <details id="praesens-details-container">
                     <summary id="praesens-details-summary">
@@ -310,8 +322,7 @@
 
                 <div data-form="perfekt">
 
-                    <!-- Verb Note -->
-                    <p id="modal-verb-note" class="modal-note" style="display: none;"></p>
+
 
                     <!-- Example Sentence Container -->
                     <div id="sentence-container">

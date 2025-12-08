@@ -648,10 +648,34 @@ body {
     font-style: italic;
 }
 
-.hide-translation [data-form~='translation'],
+/* Hide Spanish when toggle is off */
+.hide-es .spanish-translation,
+.hide-es .spanish-perfekt,
+.hide-es .spanish-praeteritum,
+.hide-es .spanish-konjunktiv,
+.hide-es .cute-translation-es,
+.hide-es .example-es,
+.hide-es .pronoun-es,
+.hide-es #modal-verb-infinitive-es,
+.hide-es #modal-verb-perfekt-es,
+.hide-es #modal-verb-praeteritum-es,
+.hide-es #modal-verb-note,
+.hide-es [data-form~='translation'] {
+    display: none !important;
+}
+
+/* Hide English when toggle is off */
+.hide-en .cute-translation-en,
+.hide-en .example-en,
+.hide-en #modal-verb-english-infinitive,
+.hide-en #modal-verb-english-perfekt,
+.hide-en #modal-verb-english-praeteritum,
+.hide-en .english {
+    display: none !important;
+}
+
 .hide-perfekt [data-form~='perfekt'],
-#verb-modal .modal-content.hide-perfekt [data-form~='perfekt'],
-#verb-modal .modal-content.hide-translation [data-form~='translation'] {
+#verb-modal .modal-content.hide-perfekt [data-form~='perfekt'] {
     display: none;
 }
 
