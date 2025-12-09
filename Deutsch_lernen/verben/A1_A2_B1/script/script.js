@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Level configuration
     const levelConfig = {
         'A1_1': { groupCount: 10, displayName: 'A1.1' },
-        'A1_2': { groupCount: 9, displayName: 'A1.2' },
+        'A1_2': { groupCount: 8, displayName: 'A1.2' },
         'A2_1': { groupCount: 9, displayName: 'A2.1' },
         'A2_2': { groupCount: 13, displayName: 'A2.2' },
         'B1_1': { groupCount: 7, displayName: 'B1.1' }
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const groups = [];
 
             for (let i = 1; i <= config.groupCount; i++) {
-                const promise = fetch(`json/groups/${levelKey}/${levelKey}_group_${i}.json`)
+                const promise = fetch(`json/groups/${levelKey}/${levelKey}_group_${i}.json?t=${new Date().getTime()}`)
                     .then(res => {
                         if (!res.ok) {
                             throw new Error(`HTTP error! status: ${res.status} for ${levelKey}_group_${i}.json`);
@@ -1111,13 +1111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gustarCloseFooterBtn.addEventListener('click', () => gustarModal.classList.remove('visible'));
         gustarModal.addEventListener('click', (e) => { if (e.target === gustarModal) gustarModal.classList.remove('visible'); });
 
-        // Modal event listeners
-        closeModalX.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
+        // Modal event listeners (Removed invalid generic listeners)
 
         // TTS on Modal Header
         const modalHeader = document.querySelector('.modal-header');
@@ -1146,52 +1140,51 @@ document.addEventListener('DOMContentLoaded', () => {
         const levelKey = currentLevel; // e.g., 'A1_1'
         const groupNum = currentGroupInLevel + 1; // 1-indexed
 
-        // Fetch theme data from JSON file
-        try {
-            const themeFilename = `${levelKey}_${groupNum}_theme.json`;
-            const response = await fetch(`json/themes/${themeFilename}`);
+        console.log(`[DEBUG] Opening Theme Modal for Level: ${levelKey}, Group: ${groupNum}`);
+        console.log(`[DEBUG] Opening Theme Modal for Level: ${levelKey}, Group: ${groupNum}`);
 
-            if (!response.ok) {
-                console.error(`Failed to load theme data: ${themeFilename}`);
-                return;
-            }
+        // Use pre-loaded group data from memory
+        const groupData = verbGroupsByLevel[levelKey][currentGroupInLevel];
 
-            const themeData = await response.json();
-            currentThemeData = themeData;
-
-            // Populate modal with theme data
-            document.getElementById('theme-modal-german-name').textContent = themeData.germanName;
-            document.getElementById('theme-modal-spanish-name').textContent = themeData.spanishName;
-            document.getElementById('theme-modal-level').textContent = themeData.level;
-            document.getElementById('theme-modal-group').textContent = themeData.group;
-            document.getElementById('theme-modal-short-name').textContent = themeData.shortName;
-            document.getElementById('theme-modal-german-desc').textContent = themeData.germanDescription;
-            document.getElementById('theme-modal-spanish-desc').textContent = themeData.spanishDescription;
-
-            // Populate B1 rating and exam context
-            const ratingBadge = document.getElementById('theme-modal-rating');
-            ratingBadge.textContent = themeData.b1Rating || 'N/A';
-
-            // Add appropriate class based on rating type
-            ratingBadge.className = 'theme-rating-badge';
-            if (themeData.b1Rating) {
-                if (themeData.b1Rating.includes('Critical')) {
-                    ratingBadge.classList.add('critical');
-                } else if (themeData.b1Rating.includes('High')) {
-                    ratingBadge.classList.add('high');
-                } else if (themeData.b1Rating.includes('Medium')) {
-                    ratingBadge.classList.add('medium');
-                }
-            }
-
-            document.getElementById('theme-modal-exam-context').textContent = themeData.examContext || 'No exam context available.';
-            document.getElementById('theme-modal-exam-context-es').textContent = themeData.examContextEs || '';
-
-            // Show the modal
-            themeModal.classList.add('visible');
-        } catch (error) {
-            console.error('Error loading theme data:', error);
+        if (!groupData) {
+            console.error(`Group data not found for ${levelKey} group index ${currentGroupInLevel}`);
+            return;
         }
+
+        currentThemeData = groupData;
+        const themeData = groupData;
+
+        // Populate modal with theme data
+        document.getElementById('theme-modal-german-name').textContent = themeData.germanName;
+        document.getElementById('theme-modal-spanish-name').textContent = themeData.spanishName;
+        document.getElementById('theme-modal-level').textContent = themeData.level;
+        document.getElementById('theme-modal-group').textContent = themeData.group;
+        document.getElementById('theme-modal-short-name').textContent = themeData.shortName;
+        document.getElementById('theme-modal-german-desc').textContent = themeData.germanDescription;
+        document.getElementById('theme-modal-spanish-desc').textContent = themeData.spanishDescription;
+
+        // Populate B1 rating and exam context
+        const ratingBadge = document.getElementById('theme-modal-rating');
+        ratingBadge.textContent = themeData.b1Rating || 'N/A';
+
+        // Add appropriate class based on rating type
+        ratingBadge.className = 'theme-rating-badge';
+        if (themeData.b1Rating) {
+            if (themeData.b1Rating.includes('Critical')) {
+                ratingBadge.classList.add('critical');
+            } else if (themeData.b1Rating.includes('High')) {
+                ratingBadge.classList.add('high');
+            } else if (themeData.b1Rating.includes('Medium')) {
+                ratingBadge.classList.add('medium');
+            }
+        }
+
+        document.getElementById('theme-modal-exam-context').textContent = themeData.examContext || 'No exam context available.';
+        document.getElementById('theme-modal-exam-context-es').textContent = themeData.examContextEs || '';
+
+        // Show the modal
+        themeModal.classList.add('visible');
+
     }
 
     // --- TTS FUNCTION ---
@@ -1873,11 +1866,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const levelGroups = verbGroupsByLevel[levelKey];
             levelGroups.forEach((group, groupIndexInLevel) => {
                 if (!group || !group.verbs) return;
+
+                // Check if group name matches search term (German or Spanish)
+                const groupNameMatch = (group.theme && group.theme.toLowerCase().includes(searchTerm)) ||
+                    (group.germanName && group.germanName.toLowerCase().includes(searchTerm)) ||
+                    (group.spanishName && group.spanishName.toLowerCase().includes(searchTerm));
+
+                if (groupNameMatch) {
+                    console.log(`MATCH FOUND! Group: ${group.theme} matches term: "${searchTerm}"`);
+                }
+
                 group.verbs.forEach(verbName => {
                     const verbData = allVerbsData[verbName];
                     if (verbData) {
                         // Create a promise for each verb to search (including lazy-loaded praesens)
                         const searchPromise = (async () => {
+                            // If the group matches, return this verb immediately as a match
+                            if (groupNameMatch) {
+                                return {
+                                    verb: verbName,
+                                    data: verbData,
+                                    levelKey: levelKey,
+                                    groupIndexInLevel: groupIndexInLevel
+                                };
+                            }
+
+                            // Helper function to check if search term is contained as a word in text
                             // Helper function to check if search term is contained as a word in text
                             const containsWord = (text, term) => {
                                 if (!text) return false;
