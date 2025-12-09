@@ -1056,7 +1056,9 @@ document.addEventListener('DOMContentLoaded', () => {
         closeInfoModalButton.addEventListener('click', () => infoModal.classList.remove('visible'));
         infoModal.addEventListener('click', (e) => { if (e.target === infoModal) infoModal.classList.remove('visible'); });
 
-        closeVerbModalButton.addEventListener('click', () => verbModal.classList.remove('visible'));
+        if (closeVerbModalButton) {
+            closeVerbModalButton.addEventListener('click', () => verbModal.classList.remove('visible'));
+        }
         closeVerbModalXButton.addEventListener('click', () => verbModal.classList.remove('visible'));
         verbModal.addEventListener('click', (e) => { if (e.target === verbModal) verbModal.classList.remove('visible'); });
 
@@ -1447,6 +1449,21 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('praeteritum-tab-content').classList.remove('active');
         document.getElementById('praeteritum-tab-content').style.display = 'none';
 
+        document.getElementById('konjunktiv-tab-content').classList.remove('active');
+        document.getElementById('konjunktiv-tab-content').style.display = 'none';
+
+        // Show/Hide Konjunktiv Tab Button and Set Label
+        const tabBtnKonjunktiv = document.getElementById('tab-btn-konjunktiv');
+        if (tabBtnKonjunktiv) {
+            if (konjunktivVerbs.includes(verb) && updatedData.konjunktiv_ii && updatedData.konjunktiv_ii.ich) {
+                tabBtnKonjunktiv.style.display = 'inline-block';
+                tabBtnKonjunktiv.textContent = updatedData.konjunktiv_ii.ich;
+                tabBtnKonjunktiv.classList.remove('active');
+            } else {
+                tabBtnKonjunktiv.style.display = 'none';
+            }
+        }
+
         // Emoji with TTS
         const modalEmojiEl = document.getElementById('modal-emoji');
         modalEmojiEl.textContent = updatedData.emoji || '❓';
@@ -1794,8 +1811,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Generate Konjunktiv II conjugation table (only for specific verbs)
-        const konjunktivKonjugationTableContainer = document.getElementById('modal-konjunktiv-konjugation-table');
-        const konjunktivKonjugationContainer = document.getElementById('konjunktiv-konjugation-container');
+        const konjunktivKonjugationTableContainer = document.getElementById('modal-konjunktiv-konjugation-table-tab');
+        const konjunktivKonjugationContainer = document.getElementById('konjunktiv-konjugation-container-tab');
 
         if (konjunktivVerbs.includes(verb) && updatedData.konjunktiv_ii && updatedData.konjunktiv_ii_examples) {
             // Show the Konjunktiv II container for these verbs
@@ -1876,13 +1893,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modal-verb-praeteritum').style.cursor = 'pointer';
         document.getElementById('modal-verb-praeteritum').title = 'Aussprache hören';
 
-        document.getElementById('modal-text').onclick = (e) => {
-            e.stopPropagation();
-            const sentence = document.getElementById('modal-text').textContent;
-            speak(sentence);
-        };
-        document.getElementById('modal-text').style.cursor = 'pointer';
-        document.getElementById('modal-text').title = 'Satz aussprechen';
+        // modal-text removed as per user request
+        // document.getElementById('modal-text').onclick = ...
 
         verbModal.classList.add('visible');
     }
