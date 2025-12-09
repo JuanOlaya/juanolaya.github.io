@@ -3037,3 +3037,54 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
         padding: 15px 5px;
     }
 }
+
+/* --- NEW MODAL TAB STYLES --- */
+.modal-tabs-nav {
+    display: flex;
+    gap: 0;
+    /* No separators */
+    margin-bottom: 20px;
+    border-bottom: 4px solid #89B3F7;
+    /* Match active tab color */
+    width: 100%;
+    justify-content: start;
+}
+
+.modal-tab-btn {
+    background-color: #174EA6;
+    /* Inactive Tabs: Dark Blue */
+    color: #FFFFFF;
+    /* White text for contrast */
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px 8px 0 0;
+    text-transform: capitalize;
+    margin-right: 2px;
+    /* Tiny separator just in case, but user said 'no separator', so 0 margin? User said 'looks like only one tab'. Distinct colors fix this. */
+    margin-right: 0;
+    opacity: 0.9;
+}
+
+.modal-tab-btn:hover {
+    background-color: #1a5bb8;
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+.modal-tab-btn.active {
+    background-color: #89B3F7;
+    /* Active Tab: Light Blue */
+    color: #0d3473;
+    /* Dark Blue text for contrast on light background */
+    box-shadow: none;
+    opacity: 1;
+}
+
+.modal-tab-btn.active:hover {
+    background-color: #89B3F7;
+    /* Maintain active color */
+}
