@@ -1676,38 +1676,25 @@ details[open]>summary .details-arrow {
 .details-content {
     text-align: left;
     padding: 15px 0;
-    /* Adjust padding, remove side padding */
     margin-top: 5px;
-    /* Space below summary */
-    background-color: #fff;
-    /* White background for content */
-    border-top: 1px solid #e9ecef;
-    /* Separator line */
+    background-color: #C6DAFB;
+    /* Requested table background */
+    border-top: 1px solid #a0c4ff;
     border-left: none;
-    /* Remove previous left border */
     border-radius: 0;
-    /* Remove previous radius */
-    /* Add styles for content within specific details */
-    background-color: #f8f9fa;
-    /* Light background for content */
-    border: 1px solid #e9ecef;
+    border: 1px solid #a0c4ff;
     border-top: none;
-    /* Remove top border as summary acts as header */
     border-radius: 0 0 8px 8px;
-    /* Round bottom corners */
     padding: 15px;
-    /* Restore padding */
     margin-top: 0;
-    /* Remove space */
 }
 
 /* Specific styling for content within #praesens-details-container */
 #praesens-details-container .details-content {
-    background-color: transparent;
-    /* No background for table container */
+    background-color: #C6DAFB;
+    /* Requested table background */
     border: none;
     padding: 10px 0 0 0;
-    /* Adjust padding */
     border-radius: 0;
 }
 
@@ -1715,7 +1702,6 @@ details[open]>summary .details-arrow {
     padding-left: 20px;
     margin: 0;
     list-style-position: outside;
-    /* Ensure bullets align nicely */
 }
 
 #modal-phonetics,
@@ -1736,45 +1722,41 @@ details[open]>summary .details-arrow {
     display: block;
     margin-bottom: 5px;
     color: #556B2F;
-    /* Dark Olive Green for emphasis */
     font-weight: 600;
 }
 
 #modal-grammar-explanation li {
     margin-bottom: 8px;
-    /* Space between grammar points */
 }
 
 /* Präsens Table Styles */
 #modal-praesens-table table {
-    border: 1px solid #ccc;
+    border: 1px solid #a0c4ff;
     margin-top: 0;
-    /* Remove top margin */
     width: 100%;
     border-collapse: collapse;
+    background-color: #C6DAFB;
 }
 
 #modal-praesens-table th,
 #modal-praesens-table td {
-    border: 1px solid #ccc;
+    border: 1px solid #a0c4ff;
     padding: 6px 8px;
     vertical-align: middle;
     text-align: left;
 }
 
 #modal-praesens-table th {
-    background-color: #e9ecef;
+    background-color: #a6c8ff;
+    /* Slightly darker header */
     font-weight: 600;
-    /* Bold headers */
 }
 
 #modal-praesens-table td:nth-child(4) {
-    /* Center alignment for Endung */
     text-align: center;
 }
 
 #modal-praesens-table h4 {
-    /* Style for table title */
     margin-top: 0;
     margin-bottom: 10px;
     text-align: center;
@@ -1790,7 +1772,8 @@ details[open]>summary .details-arrow {
     margin-top: 10px;
     text-align: left;
     padding: 5px;
-    background-color: #f0f8ff;
+    background-color: #C6DAFB;
+    /* Match background */
     border-left: 3px solid #6899C9;
 }
 
@@ -3043,7 +3026,8 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
     display: flex;
     gap: 0;
     /* No separators */
-    margin-bottom: 20px;
+    margin-bottom: 0;
+    /* Remove margin to connect with content */
     border-bottom: 4px solid #89B3F7;
     /* Match active tab color */
     width: 100%;
@@ -3056,15 +3040,17 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
     color: #FFFFFF;
     /* White text for contrast */
     border: none;
-    padding: 12px 24px;
-    font-size: 1.1rem;
-    font-weight: bold;
+    padding: 14px 28px;
+    /* Further increased padding */
+    font-size: 1.25rem;
+    /* Larger font (approx 20px) */
+    font-weight: 800;
+    /* Extra Bold */
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 8px 8px 0 0;
+    border-radius: 12px 12px 0 0;
+    /* Larger rounded corners */
     text-transform: capitalize;
-    margin-right: 2px;
-    /* Tiny separator just in case, but user said 'no separator', so 0 margin? User said 'looks like only one tab'. Distinct colors fix this. */
     margin-right: 0;
     opacity: 0.9;
 }
@@ -3087,4 +3073,19 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 .modal-tab-btn.active:hover {
     background-color: #89B3F7;
     /* Maintain active color */
+}
+
+/* Style for the content area to match active tab */
+.tab-content {
+    background-color: #89B3F7;
+    padding: 20px;
+    border-radius: 0 0 15px 15px;
+    /* Rounded bottom */
+    color: #0d3473;
+    /* Dark text for readability */
+}
+
+/* Ensure headings inside are readable */
+.tab-content h4 {
+    color: #0d3473;
 }

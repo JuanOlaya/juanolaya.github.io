@@ -1068,6 +1068,7 @@ document.addEventListener('DOMContentLoaded', () => {
         headerTagsContainer.addEventListener('click', (e) => {
             // Check if clicked element is the theme badge
             if (e.target && e.target.id === 'modal-theme-badge') {
+                e.stopPropagation(); // Prevent modal header click (TTS)
                 const targetLevel = e.target.dataset.level;
                 const targetGroup = parseInt(e.target.dataset.group);
 
