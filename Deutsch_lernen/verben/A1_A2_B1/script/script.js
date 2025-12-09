@@ -295,9 +295,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         cardsContainer.innerHTML = '';
-        group.verbs.forEach(verbName => {
+        const cardsHTML = group.verbs.map(verbName => {
             const verbData = allVerbsData[verbName];
-            if (!verbData) return;
+            if (!verbData) return '';
             const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
 
             // Remove parentheses from translations (except main translation)
@@ -415,10 +415,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
-                    <div class="card-header">
-                        <span class="german-word" onclick="event.stopPropagation(); speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${verbName}</span>
+                    <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">
+                        <span class="german-word">${verbName}</span>
                         <span class="spanish-translation" data-form="translation">${esTranslation}</span>
-                        <div class="icon-floating" onclick="event.stopPropagation(); speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${verbData.emoji || '❓'}</div>
+                        <div class="icon-floating">${verbData.emoji || '❓'}</div>
                     </div>
                     <div class="card-body">
                         <div class="text-container perfekt-hover-container">
@@ -438,8 +438,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 </div>`;
-            cardsContainer.innerHTML += cardHTML;
-        });
+            return cardHTML;
+        }).join('');
+
+        cardsContainer.innerHTML = cardsHTML;
 
         const displayLevel = levelConfig[currentLevel].displayName;
         levelIndicator.textContent = displayLevel;
@@ -1108,6 +1110,29 @@ document.addEventListener('DOMContentLoaded', () => {
         gustarCloseBtn.addEventListener('click', () => gustarModal.classList.remove('visible'));
         gustarCloseFooterBtn.addEventListener('click', () => gustarModal.classList.remove('visible'));
         gustarModal.addEventListener('click', (e) => { if (e.target === gustarModal) gustarModal.classList.remove('visible'); });
+
+        // Modal event listeners
+        closeModalX.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // TTS on Modal Header
+        const modalHeader = document.querySelector('.modal-header');
+        if (modalHeader) {
+            modalHeader.style.cursor = 'pointer';
+            modalHeader.title = 'Aussprache hören';
+            modalHeader.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const verbText = document.getElementById('modal-verb-infinitive').textContent;
+                if (verbText) {
+                    speak(verbText);
+                }
+            });
+        }
 
         // Theme modal event listeners
         groupThemeIndicator.addEventListener('click', openThemeModal);
