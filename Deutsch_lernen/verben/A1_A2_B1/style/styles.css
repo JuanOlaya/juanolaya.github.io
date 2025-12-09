@@ -35,6 +35,96 @@ body {
     text-align: center;
 }
 
+/* Modal Tabs Styling - Browser Style */
+.modal-tabs-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+    /* Small gap between tabs */
+    margin-bottom: 0;
+    /* Connect to content */
+    margin-top: 15px;
+    padding: 8px 8px 0 8px;
+    /* Padding for the "bar" look */
+    background-color: #e5e7eb;
+    /* Light gray bar background */
+    border-radius: 8px 8px 0 0;
+    width: 100%;
+    align-items: flex-end;
+    /* Align tabs to bottom */
+}
+
+.modal-tab-btn {
+    flex: 1;
+    background-color: #d1d5db;
+    /* Darker gray for inactive */
+    border: none;
+    border-radius: 8px 8px 0 0;
+    /* Top rounded only */
+    padding: 12px 5px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #4b5563;
+    /* Dark gray text */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    top: 0;
+}
+
+.modal-tab-btn:hover {
+    background-color: #e5e7eb;
+    /* Lighter on hover */
+    color: #1f2937;
+}
+
+.modal-tab-btn.active {
+    background-color: white;
+    /* White for active (matches content) */
+    color: #4682B4;
+    /* Steel blue text for nice contrast */
+    z-index: 2;
+    /* Sit on top */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+    /* Subtle lift */
+    padding-top: 14px;
+    /* Slightly taller to pop up */
+    border-top: 3px solid #4682B4;
+    /* Blue top indicator */
+}
+
+/* Tab Content Container Styling to match */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-out;
+    background-color: white;
+    /* Ensure consistency */
+    padding: 20px 10px;
+    /* Padding inside the "folder" */
+    border-radius: 0 0 8px 8px;
+    /* Bottom rounded */
+    /* If the modal content has padding, we might need to adjust partialy. 
+       The modal-content has padding: 0 usually and internal elements have padding. */
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.section-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    color: #4682B4;
+    margin: 0 0 15px 0;
+    /* Reduced top margin since tab connects */
+    font-weight: 700;
+    text-align: center;
+}
+
 .header {
     position: relative;
     margin-bottom: 0.75rem;
@@ -2891,11 +2981,24 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 .hide-de #modal-verb-infinitive,
 .hide-de .german-example {
     display: none !important;
+}
 
-    /* Adjust styles for moved elements */
-    #praesens-details-container,
-    #perfekt-examples-container,
-    #praeteritum-konjugation-container,
-    #konjunktiv-konjugation-container {
-        margin-bottom: 20px;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
     }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Adjust styles for moved elements */
+#praesens-details-container,
+#perfekt-examples-container,
+#praeteritum-konjugation-container,
+#konjunktiv-konjugation-container {
+    margin-bottom: 20px;
+}
