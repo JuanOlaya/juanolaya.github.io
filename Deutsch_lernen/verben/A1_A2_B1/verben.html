@@ -236,36 +236,50 @@
                     </div>
                 </details>
 
-                <!-- Verb Note -->
-                <p id="modal-verb-note" class="modal-note" style="display: none;"></p>
+                <!-- New Tab Navigation -->
+                <div class="modal-tabs-nav">
+                    <button class="modal-tab-btn active" id="tab-btn-infinitiv" data-tab="praesens">Infinitiv</button>
+                    <button class="modal-tab-btn" id="tab-btn-perfekt" data-tab="perfekt">Perfekt</button>
+                    <button class="modal-tab-btn" id="tab-btn-praeteritum" data-tab="praeteritum">Präteritum</button>
+                </div>
 
-                <!-- Präsens Details Section -->
-                <details id="praesens-details-container">
-                    <summary id="praesens-details-summary">
-                        Präsens Konjugation
-                        <span class="details-arrow">▶</span>
-                    </summary>
-                    <div id="modal-praesens-table" class="details-content">
-                        <!-- Conjugation table inserted here -->
+                <!-- Tab Content: Infinitiv (Präsens) -->
+                <div id="praesens-tab-content" class="tab-content active">
+                    <!-- Verb Note -->
+                    <p id="modal-verb-note" class="modal-note" style="display: none;"></p>
+
+                    <!-- Präsens Details Section -->
+                    <div id="praesens-details-container">
+                        <!-- We remove the details/summary wrapper and just show the content directly or keep it open? 
+                            User said "shows below the Präsens Konjugation". 
+                            Currently it is inside a <details>. The prompt implies the tab *is* the switch, so maybe we don't need the <details> for the conjugation table itself anymore, OR we keep it but opened? 
+                            Let's keep the structure simple: The tab shows the content. Inside the content, we can keep the tables. 
+                            Actually, usually tabs replace the need for <details> if singular. But here we have "Konjugation" and "Beispiele".
+                            Let's keep the containers but remove the <details> wrapper for the main conjugation table to make it immediately visible as per "showing below".
+                       -->
+                        <h4 class="section-title">Präsens Konjugation</h4>
+                        <div id="modal-praesens-table" class="details-content" style="display: block;">
+                            <!-- Conjugation table inserted here -->
+                        </div>
                     </div>
-                </details>
 
-                <!-- Präsens Examples Section -->
-                <details id="praesens-examples-container">
-                    <summary id="praesens-examples-summary">
-                        Präsens Beispiele
-                        <span class="details-arrow">▶</span>
-                    </summary>
-                    <div id="modal-praesens-examples-table" class="details-content">
-                        <!-- Präsens examples table inserted here -->
-                    </div>
-                </details>
+                    <!-- Präsens Examples Section -->
+                    <details id="praesens-examples-container">
+                        <summary id="praesens-examples-summary">
+                            Präsens Beispiele
+                            <span class="details-arrow">▶</span>
+                        </summary>
+                        <div id="modal-praesens-examples-table" class="details-content">
+                            <!-- Präsens examples table inserted here -->
+                        </div>
+                    </details>
+                </div>
 
-                <div data-form="perfekt">
+                <!-- Tab Content: Perfekt -->
+                <div id="perfekt-tab-content" class="tab-content" style="display: none;">
                     <!-- Perfekt Block -->
                     <div class="modal-verb-block">
                         <div class="modal-verb-line">
-                            <h4 id="modal-verb-perfekt"></h4>
                             <h4 id="modal-verb-perfekt"></h4>
                         </div>
                         <p id="modal-verb-perfekt-es" class="modal-translation" data-form="translation"
@@ -274,22 +288,20 @@
                     </div>
 
                     <!-- Perfekt Konjugation Section -->
-                    <details id="perfekt-examples-container">
-                        <summary id="perfekt-examples-summary">
-                            Perfekt Konjugation
-                            <span class="details-arrow">▶</span>
-                        </summary>
-                        <div id="modal-perfekt-examples-table" class="details-content">
+                    <!-- Unwrapped validation: User said "shows below the perfekt konjugation" -->
+                    <div id="perfekt-examples-container">
+                        <h4 class="section-title">Perfekt Konjugation</h4>
+                        <div id="modal-perfekt-examples-table" class="details-content" style="display: block;">
                             <!-- Perfekt conjugation table inserted here -->
                         </div>
-                    </details>
+                    </div>
                 </div>
 
-                <div data-form="praeteritum">
+                <!-- Tab Content: Präteritum -->
+                <div id="praeteritum-tab-content" class="tab-content" style="display: none;">
                     <!-- Präteritum Block -->
                     <div class="modal-verb-block">
                         <div class="modal-verb-line">
-                            <h4 id="modal-verb-praeteritum"></h4>
                             <h4 id="modal-verb-praeteritum"></h4>
                         </div>
                         <p id="modal-verb-praeteritum-es" class="modal-translation" data-form="translation"></p>
@@ -297,17 +309,19 @@
                     </div>
 
                     <!-- Präteritum Konjugation Section -->
-                    <details id="praeteritum-konjugation-container">
-                        <summary id="praeteritum-konjugation-summary">
-                            Präteritum Konjugation
-                            <span class="details-arrow">▶</span>
-                        </summary>
-                        <div id="modal-praeteritum-konjugation-table" class="details-content">
+                    <div id="praeteritum-konjugation-container">
+                        <h4 class="section-title">Präteritum Konjugation</h4>
+                        <div id="modal-praeteritum-konjugation-table" class="details-content" style="display: block;">
                             <!-- Präteritum conjugation table inserted here -->
                         </div>
-                    </details>
+                    </div>
                 </div>
 
+                <!-- Konjunktiv and Extra Info (kept separate for now, or should they be under a tab?)
+                     If the user didn't specify, I will leave them at the bottom, outside tabs, or maybe under Infinitiv?
+                     Usually separate. Let's keep them at the bottom common area or move Konjunktiv to its own logic if needed.
+                     But for now, I will leave them below the tabs area.
+                -->
                 <div data-form="konjunktiv">
                     <!-- Konjunktiv II Block -->
                     <div class="modal-verb-block">
@@ -331,28 +345,23 @@
                     </details>
                 </div>
 
-                <div data-form="perfekt">
-
-
-
-                    <!-- Example Sentence Container -->
-                    <div id="sentence-container">
-                        <p id="modal-text"></p>
-                    </div>
-
-                    <!-- More Info Details Section -->
-                    <details id="details-container">
-                        <summary id="details-summary">
-                            Más información
-                            <span class="details-arrow">▶</span>
-                        </summary>
-                        <div class="details-content">
-                            <div id="modal-phonetics"></div>
-                            <div id="modal-translations"></div>
-                            <div id="modal-grammar-explanation"></div>
-                        </div>
-                    </details>
+                <!-- Example Sentence Container -->
+                <div id="sentence-container">
+                    <p id="modal-text"></p>
                 </div>
+
+                <!-- More Info Details Section -->
+                <details id="details-container">
+                    <summary id="details-summary">
+                        Más información
+                        <span class="details-arrow">▶</span>
+                    </summary>
+                    <div class="details-content">
+                        <div id="modal-phonetics"></div>
+                        <div id="modal-translations"></div>
+                        <div id="modal-grammar-explanation"></div>
+                    </div>
+                </details>
 
                 <hr class="modal-separator">
 
