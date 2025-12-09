@@ -235,170 +235,127 @@
                         <!-- Word family content inserted here -->
                     </div>
                 </details>
+            </div><!-- End of top modal-body-content -->
 
-                <hr class="modal-separator">
+            <hr class="modal-separator" style="margin: 0; border: none; height: 1px; background-color: #e5e7eb;">
 
-                <!-- New Tab Navigation -->
-                <div class="modal-tabs-nav">
-                    <button class="modal-tab-btn active" id="tab-btn-infinitiv" data-tab="praesens">Infinitiv</button>
-                    <button class="modal-tab-btn" id="tab-btn-perfekt" data-tab="perfekt">Perfekt</button>
-                    <button class="modal-tab-btn" id="tab-btn-praeteritum" data-tab="praeteritum">Präteritum</button>
-                </div>
+            <!-- New Tab Navigation - Full Width -->
+            <div class="modal-tabs-nav">
+                <button class="modal-tab-btn active" id="tab-btn-infinitiv" data-tab="praesens">Infinitiv</button>
+                <button class="modal-tab-btn" id="tab-btn-perfekt" data-tab="perfekt">Perfekt</button>
+                <button class="modal-tab-btn" id="tab-btn-praeteritum" data-tab="praeteritum">Präteritum</button>
+                <button class="modal-tab-btn" id="tab-btn-konjunktiv" data-tab="konjunktiv"
+                    style="display: none;">Konjunktiv II</button>
+            </div>
 
-                <!-- Tab Content: Infinitiv (Präsens) -->
-                <div id="praesens-tab-content" class="tab-content active">
-                    <!-- Verb Note -->
-                    <p id="modal-verb-note" class="modal-note" style="display: none;"></p>
+            <!-- Tab Contents - Full Width Container -->
+            <div id="praesens-tab-content" class="tab-content active">
+                <!-- Verb Note -->
+                <p id="modal-verb-note" class="modal-note" style="display: none;"></p>
 
-                    <!-- Präsens Details Section -->
-                    <div id="praesens-details-container">
-                        <!-- We remove the details/summary wrapper and just show the content directly or keep it open? 
+                <!-- Präsens Details Section -->
+                <div id="praesens-details-container">
+                    <!-- We remove the details/summary wrapper and just show the content directly or keep it open? 
                             User said "shows below the Präsens Konjugation". 
                             Currently it is inside a <details>. The prompt implies the tab *is* the switch, so maybe we don't need the <details> for the conjugation table itself anymore, OR we keep it but opened? 
                             Let's keep the structure simple: The tab shows the content. Inside the content, we can keep the tables. 
                             Actually, usually tabs replace the need for <details> if singular. But here we have "Konjugation" and "Beispiele".
                             Let's keep the containers but remove the <details> wrapper for the main conjugation table to make it immediately visible as per "showing below".
                        -->
-                        <h4 class="section-title">Präsens Konjugation</h4>
-                        <div id="modal-praesens-table" class="details-content" style="display: block;">
-                            <!-- Conjugation table inserted here -->
-                        </div>
-                    </div>
-
-                    <!-- Präsens Examples Section -->
-                    <details id="praesens-examples-container">
-                        <summary id="praesens-examples-summary">
-                            Präsens Beispiele
-                            <span class="details-arrow">▶</span>
-                        </summary>
-                        <div id="modal-praesens-examples-table" class="details-content">
-                            <!-- Präsens examples table inserted here -->
-                        </div>
-                    </details>
-                </div>
-
-                <!-- Tab Content: Perfekt -->
-                <div id="perfekt-tab-content" class="tab-content" style="display: none;">
-                    <!-- Perfekt Block -->
-                    <div class="modal-verb-block">
-                        <div class="modal-verb-line">
-                            <h4 id="modal-verb-perfekt"></h4>
-                        </div>
-                        <p id="modal-verb-perfekt-es" class="modal-translation" data-form="translation"
-                            style="font-style: italic;"></p>
-                        <p id="modal-verb-english-perfekt" class="modal-translation" data-form="translation"></p>
-                    </div>
-
-                    <!-- Perfekt Konjugation Section -->
-                    <!-- Unwrapped validation: User said "shows below the perfekt konjugation" -->
-                    <div id="perfekt-examples-container">
-                        <h4 class="section-title">Perfekt Konjugation</h4>
-                        <div id="modal-perfekt-examples-table" class="details-content" style="display: block;">
-                            <!-- Perfekt conjugation table inserted here -->
-                        </div>
+                    <h4 class="section-title">Präsens Konjugation</h4>
+                    <div id="modal-praesens-table" class="details-content" style="display: block;">
+                        <!-- Conjugation table inserted here -->
                     </div>
                 </div>
 
-                <!-- Tab Content: Präteritum -->
-                <div id="praeteritum-tab-content" class="tab-content" style="display: none;">
-                    <!-- Präteritum Block -->
-                    <div class="modal-verb-block">
-                        <div class="modal-verb-line">
-                            <h4 id="modal-verb-praeteritum"></h4>
-                        </div>
-                        <p id="modal-verb-praeteritum-es" class="modal-translation" data-form="translation"></p>
-                        <p id="modal-verb-english-praeteritum" class="modal-translation" data-form="translation"></p>
+                <!-- Präsens Examples Section -->
+                <details id="praesens-examples-container">
+                    <summary id="praesens-examples-summary">
+                        Präsens Beispiele
+                        <span class="details-arrow">▶</span>
+                    </summary>
+                    <div id="modal-praesens-examples-table" class="details-content">
+                        <!-- Präsens examples table inserted here -->
                     </div>
+                </details>
+            </div>
 
-                    <!-- Präteritum Konjugation Section -->
-                    <div id="praeteritum-konjugation-container">
-                        <h4 class="section-title">Präteritum Konjugation</h4>
-                        <div id="modal-praeteritum-konjugation-table" class="details-content" style="display: block;">
-                            <!-- Präteritum conjugation table inserted here -->
-                        </div>
+            <!-- Tab Content: Perfekt -->
+            <div id="perfekt-tab-content" class="tab-content" style="display: none;">
+                <!-- Perfekt Block -->
+                <div class="modal-verb-block">
+                    <div class="modal-verb-line">
+                        <h4 id="modal-verb-perfekt"></h4>
+                    </div>
+                    <p id="modal-verb-perfekt-es" class="modal-translation" data-form="translation"
+                        style="font-style: italic;"></p>
+                    <p id="modal-verb-english-perfekt" class="modal-translation" data-form="translation"></p>
+                </div>
+
+                <!-- Perfekt Konjugation Section -->
+                <!-- Unwrapped validation: User said "shows below the perfekt konjugation" -->
+                <div id="perfekt-examples-container">
+                    <h4 class="section-title">Perfekt Konjugation</h4>
+                    <div id="modal-perfekt-examples-table" class="details-content" style="display: block;">
+                        <!-- Perfekt conjugation table inserted here -->
                     </div>
                 </div>
+            </div>
+
+            <!-- Tab Content: Präteritum -->
+            <div id="praeteritum-tab-content" class="tab-content" style="display: none;">
+                <!-- Präteritum Block -->
+                <div class="modal-verb-block">
+                    <div class="modal-verb-line">
+                        <h4 id="modal-verb-praeteritum"></h4>
+                    </div>
+                    <p id="modal-verb-praeteritum-es" class="modal-translation" data-form="translation"></p>
+                    <p id="modal-verb-english-praeteritum" class="modal-translation" data-form="translation"></p>
+                </div>
+
+                <!-- Präteritum Konjugation Section -->
+                <div id="praeteritum-konjugation-container">
+                    <h4 class="section-title">Präteritum Konjugation</h4>
+                    <div id="modal-praeteritum-konjugation-table" class="details-content" style="display: block;">
+                        <!-- Präteritum conjugation table inserted here -->
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Tab Content: Konjunktiv II -->
+            <div id="konjunktiv-tab-content" class="tab-content" style="display: none;">
+                <!-- Konjunktiv II Block -->
+                <div class="modal-verb-block">
+                    <div class="modal-verb-line">
+                        <!-- Title will be dynamic if needed, or static -->
+                        <h4 class="section-title">Konjunktiv II</h4>
+                    </div>
+                    <p class="modal-translation" data-form="translation">Modo condicional (expresa deseos, situaciones
+                        hipotéticas)</p>
+                </div>
+
+                <!-- Konjunktiv II Konjugation Section -->
+                <div id="konjunktiv-konjugation-container-tab">
+                    <h4 class="section-title">Konjunktiv II Konjugation</h4>
+                    <div id="modal-konjunktiv-konjugation-table-tab" class="details-content" style="display: block;">
+                        <!-- Konjunktiv II conjugation table inserted here -->
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Bottom Content (Padded) -->
+            <div class="modal-body-content">
 
                 <!-- Konjunktiv and Extra Info (kept separate for now, or should they be under a tab?)
                      If the user didn't specify, I will leave them at the bottom, outside tabs, or maybe under Infinitiv?
                      Usually separate. Let's keep them at the bottom common area or move Konjunktiv to its own logic if needed.
                      But for now, I will leave them below the tabs area.
                 -->
-                <div data-form="konjunktiv">
-                    <!-- Konjunktiv II Block -->
-                    <div class="modal-verb-block">
-                        <div class="modal-verb-line">
-                            <h4 id="modal-verb-konjunktiv">Konjunktiv II</h4>
-                        </div>
-                        <p class="modal-translation" data-form="translation">Modo condicional (expresa deseos,
-                            situaciones
-                            hipotéticas)</p>
-                    </div>
+                <!-- Konjunktiv II section removed (moved to tab) -->
 
-                    <!-- Konjunktiv II Konjugation Section -->
-                    <details id="konjunktiv-konjugation-container">
-                        <summary id="konjunktiv-konjugation-summary">
-                            Konjunktiv II Konjugation
-                            <span class="details-arrow">▶</span>
-                        </summary>
-                        <div id="modal-konjunktiv-konjugation-table" class="details-content">
-                            <!-- Konjunktiv II conjugation table inserted here -->
-                        </div>
-                    </details>
-                </div>
-
-                <!-- Example Sentence Container -->
-                <div id="sentence-container">
-                    <p id="modal-text"></p>
-                </div>
-
-                <!-- More Info Details Section -->
-                <details id="details-container">
-                    <summary id="details-summary">
-                        Más información
-                        <span class="details-arrow">▶</span>
-                    </summary>
-                    <div class="details-content">
-                        <div id="modal-phonetics"></div>
-                        <div id="modal-translations"></div>
-                        <div id="modal-grammar-explanation"></div>
-                    </div>
-                </details>
-
-                <hr class="modal-separator">
-
-                <!-- Example Navigation -->
-                <div class="modal-nav">
-                    <div class="example-progress-container">
-                        <span id="example-counter"></span>
-                        <div class="progress-bar-container" id="example-progress-bar"></div>
-                    </div>
-                    <div class="modal-nav-buttons">
-                        <button id="prev-example" class="nav-button">
-                            <svg viewBox="0 0 24 24">
-                                <polyline points="15 18 9 12 15 6"></polyline>
-                            </svg>
-                            <div>
-                                Zurück
-                                <span class="button-translation">(Anterior)</span>
-                            </div>
-                        </button>
-                        <button id="next-example" class="nav-button">
-                            <div>
-                                Weiter
-                                <span class="button-translation">(Siguiente)</span>
-                            </div>
-                            <svg viewBox="0 0 24 24">
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <button id="close-verb-modal" class="close-modal-btn">
-                    <strong>Schließen</strong>
-                    <span class="button-translation">(Cerrar)</span>
-                </button>
+                <!-- Footer elements removed as per request -->
             </div><!-- End of modal-body-content -->
         </div>
     </div>
