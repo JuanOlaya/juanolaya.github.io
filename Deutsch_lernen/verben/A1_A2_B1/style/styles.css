@@ -39,13 +39,13 @@ body {
 .modal-tabs-nav {
     display: flex;
     justify-content: space-between;
-    gap: 4px;
-    /* Small gap between tabs */
+    gap: 0;
+    /* No gap for full width */
     margin-bottom: 0;
     /* Connect to content */
     margin-top: 15px;
-    padding: 8px 8px 0 8px;
-    /* Padding for the "bar" look */
+    padding: 0;
+    /* No padding, full width */
     background-color: #e5e7eb;
     /* Light gray bar background */
     border-radius: 8px 8px 0 0;
@@ -59,6 +59,12 @@ body {
     background-color: #d1d5db;
     /* Darker gray for inactive */
     border: none;
+    border-radius: 0;
+    /* No rounded corners for full width look, or maybe just top? Let's keep top rounded but strictly square sides if they touch */
+    /* refined: keep radius but small? Or remove for "joined" look. */
+    border-radius: 0;
+    /* Actually, usually full width tabs are square or have top-left/top-right radius on first/last. 
+       Let's just remove radius for now or keep it minimal. */
     border-radius: 8px 8px 0 0;
     /* Top rounded only */
     padding: 12px 5px;
@@ -932,7 +938,8 @@ body {
     gap: 8px;
     background-color: #4682B4;
     /* Default SteelBlue */
-    margin-bottom: 10px;
+    margin-bottom: 0;
+    /* Removed margin */
     border-radius: 20px 20px 0 0;
 }
 
