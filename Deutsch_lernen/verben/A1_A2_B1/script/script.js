@@ -1133,6 +1133,46 @@ document.addEventListener('DOMContentLoaded', () => {
         closeThemeModalX.addEventListener('click', () => themeModal.classList.remove('visible'));
         closeThemeModalBtn.addEventListener('click', () => themeModal.classList.remove('visible'));
         themeModal.addEventListener('click', (e) => { if (e.target === themeModal) themeModal.classList.remove('visible'); });
+
+        // Setup Tabs
+        setupTabs();
+    }
+
+    // --- TAB FUNCTIONALITY ---
+    function setupTabs() {
+        const tabBtns = document.querySelectorAll('.modal-tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                // Show corresponding content
+                const tabId = btn.getAttribute('data-tab'); // praesens, perfekt, praeteritum
+                // Map data-tab to content id
+                // praesens -> praesens-tab-content
+                // perfekt -> perfekt-tab-content
+                // praeteritum -> praeteritum-tab-content
+                const contentId = `${tabId}-tab-content`;
+                const content = document.getElementById(contentId);
+                if (content) {
+                    content.classList.add('active');
+                    content.style.display = 'block'; // Ensure display block for active
+                }
+
+                // Hide other contents explicitly (optional if CSS handles it, but safest)
+                tabContents.forEach(c => {
+                    if (c.id !== contentId) {
+                        c.style.display = 'none';
+                    }
+                });
+            });
+        });
     }
 
     // --- THEME MODAL FUNCTION ---
@@ -1377,6 +1417,36 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modal-verb-perfekt').textContent = updatedData.perfekt || '---';
         document.getElementById('modal-verb-praeteritum').textContent = updatedData.praeteritum || '---';
 
+        // Update Tab Buttons (Dynamic Labels)
+        const tabBtnInfinitiv = document.getElementById('tab-btn-infinitiv');
+        const tabBtnPerfekt = document.getElementById('tab-btn-perfekt');
+        const tabBtnPraeteritum = document.getElementById('tab-btn-praeteritum');
+
+        if (tabBtnInfinitiv) {
+            tabBtnInfinitiv.textContent = verb;
+            tabBtnInfinitiv.classList.add('active'); // Reset to active
+        }
+
+        if (tabBtnPerfekt) {
+            tabBtnPerfekt.textContent = getCleanPerfekt(updatedData.perfekt);
+            tabBtnPerfekt.classList.remove('active');
+        }
+
+        if (tabBtnPraeteritum) {
+            tabBtnPraeteritum.textContent = getCleanPraeteritum(updatedData.praeteritum);
+            tabBtnPraeteritum.classList.remove('active');
+        }
+
+        // Reset Tab Content Visibility
+        document.getElementById('praesens-tab-content').classList.add('active');
+        document.getElementById('praesens-tab-content').style.display = 'block';
+
+        document.getElementById('perfekt-tab-content').classList.remove('active');
+        document.getElementById('perfekt-tab-content').style.display = 'none';
+
+        document.getElementById('praeteritum-tab-content').classList.remove('active');
+        document.getElementById('praeteritum-tab-content').style.display = 'none';
+
         // Emoji with TTS
         const modalEmojiEl = document.getElementById('modal-emoji');
         modalEmojiEl.textContent = updatedData.emoji || '❓';
@@ -1409,7 +1479,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (wortfamilieData[verb] && wortfamilieData[verb].length > 0) {
             wortfamilieContainer.style.display = 'block';
-            wortfamilieContainer.open = true; // Open by default when data exists
+            // wortfamilieContainer.open = true; // Removed to keep closed by default
 
             // Group words by level
             const wordsByLevel = {

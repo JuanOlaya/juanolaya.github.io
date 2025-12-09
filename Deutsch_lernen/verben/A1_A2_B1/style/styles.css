@@ -2891,4 +2891,11 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 .hide-de #modal-verb-infinitive,
 .hide-de .german-example {
     display: none !important;
-}
+
+    /* Adjust styles for moved elements */
+    #praesens-details-container,
+    #perfekt-examples-container,
+    #praeteritum-konjugation-container,
+    #konjunktiv-konjugation-container {
+        margin-bottom: 20px;
+    }
