@@ -933,6 +933,7 @@ body {
     background-color: #4682B4;
     /* Default SteelBlue */
     margin-bottom: 10px;
+    border-radius: 20px 20px 0 0;
 }
 
 .modal-emoji {
@@ -3001,4 +3002,31 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 #praeteritum-konjugation-container,
 #konjunktiv-konjugation-container {
     margin-bottom: 20px;
+}
+
+/* Mobile Responsive Adjustments for Modal Tabs */
+@media (max-width: 480px) {
+    .modal-tab-btn {
+        font-size: 0.85rem;
+        padding: 8px 2px;
+        min-width: 0;
+        /* Allow shrinking below content width if needed */
+    }
+
+    .modal-tabs-nav {
+        gap: 2px;
+        padding: 8px 2px 0 2px;
+    }
+
+    .modal-emoji {
+        font-size: 3rem;
+    }
+
+    .modal-word {
+        font-size: 1.8rem;
+    }
+
+    .modal-header {
+        padding: 15px 5px;
+    }
 }
