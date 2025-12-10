@@ -123,16 +123,36 @@ body {
         /* Hidden by default, shown via JS */
         flex: 0 0 33.333%;
         /* Show 3 tabs */
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         /* Smaller font for mobile */
-        padding: 12px 0;
-        /* Minimize side padding */
-        letter-spacing: -0.5px;
-        /* Tighten text slightly */
+        padding: 8px 1px;
+        /* Minimize padding */
+        letter-spacing: -0.2px;
+        white-space: normal;
+        /* Allow wrapping */
+        line-height: 1.1;
+        height: auto;
+        min-height: 44px;
+        /* Ensure touch target size */
+        display: flex !important;
+        /* Force flex for alignment if visible */
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Logic handles visibility by adding visible-tab class, 
+       but we need to override the display:none !important from general rule above 
+       if we want specific display behavior. 
+       Actually, the rule `.modal-tab-btn` has `display: none !important`.
+       Then `.modal-tab-btn.visible-tab` must override it.
+    */
+
+    .modal-tab-btn:not(.visible-tab) {
+        display: none !important;
     }
 
     .modal-tab-btn.visible-tab {
-        display: block !important;
+        display: flex !important;
     }
 
     .mobile-tab-arrow {
