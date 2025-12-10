@@ -1143,8 +1143,88 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- TAB FUNCTIONALITY ---
     function setupTabs() {
-        const tabBtns = document.querySelectorAll('.modal-tab-btn');
+        const tabBtns = Array.from(document.querySelectorAll('.modal-tab-btn'));
         const tabContents = document.querySelectorAll('.tab-content');
+        const modalTabsNav = document.querySelector('.modal-tabs-nav');
+
+        // Mobile Carousel State
+        let currentCarouselIndex = 0;
+        const visibleTabCount = 3;
+
+        // Create Arrows if they don't exist
+        if (!document.querySelector('.mobile-tab-arrow')) {
+            const leftArrow = document.createElement('div');
+            leftArrow.className = 'mobile-tab-arrow left';
+            leftArrow.innerHTML = '&#10094;'; // <
+
+            const rightArrow = document.createElement('div');
+            rightArrow.className = 'mobile-tab-arrow right';
+            rightArrow.innerHTML = '&#10095;'; // >
+
+            modalTabsNav.appendChild(leftArrow);
+            modalTabsNav.appendChild(rightArrow);
+
+            leftArrow.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent tab click
+                navigateCarousel(-1);
+            });
+
+            rightArrow.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navigateCarousel(1);
+            });
+        }
+
+        // Helper to update visibility
+        function updateCarousel() {
+            // Filter only currently relevant tabs (e.g. valid Konjunktiv)
+            // Note: Konjunktiv tab might be hidden via display:none style if not applicable.
+            // We should only consider visible tabs for the carousel.
+            // However, the display style is set dynamically in openModalForVerb.
+            // We need to re-evaluate this when modal opens.
+            // For now, let's just assume we operate on buttons that are not 'display: none' via inline style.
+
+            const visibleButtons = tabBtns.filter(btn => btn.style.display !== 'none');
+
+            // Adjust index if out of bounds
+            if (currentCarouselIndex < 0) currentCarouselIndex = 0;
+            if (currentCarouselIndex > Math.max(0, visibleButtons.length - visibleTabCount)) {
+                currentCarouselIndex = Math.max(0, visibleButtons.length - visibleTabCount);
+            }
+
+            // Update classes
+            tabBtns.forEach(btn => btn.classList.remove('visible-tab'));
+
+            visibleButtons.forEach((btn, index) => {
+                if (index >= currentCarouselIndex && index < currentCarouselIndex + visibleTabCount) {
+                    btn.classList.add('visible-tab');
+                }
+            });
+
+            // Toggle arrows visibility (optional: hide if at ends)
+            // For simple carousel, always show if count > visibleTabCount?
+            // User requested explicit arrows. 
+            const arrows = document.querySelectorAll('.mobile-tab-arrow');
+            const shouldShowArrows = visibleButtons.length > visibleTabCount && window.innerWidth <= 600;
+
+            arrows.forEach(arrow => {
+                arrow.style.display = shouldShowArrows ? 'flex' : 'none';
+            });
+        }
+
+        function navigateCarousel(direction) {
+            const visibleButtons = tabBtns.filter(btn => btn.style.display !== 'none');
+            const maxIndex = Math.max(0, visibleButtons.length - visibleTabCount);
+
+            currentCarouselIndex += direction;
+            if (currentCarouselIndex < 0) currentCarouselIndex = 0;
+            if (currentCarouselIndex > maxIndex) currentCarouselIndex = maxIndex;
+
+            updateCarousel();
+        }
+
+        // Expose update function to be called when modal opens
+        window.updateTabCarousel = updateCarousel;
 
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1156,19 +1236,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.classList.add('active');
 
                 // Show corresponding content
-                const tabId = btn.getAttribute('data-tab'); // praesens, perfekt, praeteritum
-                // Map data-tab to content id
-                // praesens -> praesens-tab-content
-                // perfekt -> perfekt-tab-content
-                // praeteritum -> praeteritum-tab-content
+                const tabId = btn.getAttribute('data-tab');
                 const contentId = `${tabId}-tab-content`;
                 const content = document.getElementById(contentId);
                 if (content) {
                     content.classList.add('active');
-                    content.style.display = 'block'; // Ensure display block for active
+                    content.style.display = 'block';
                 }
 
-                // Hide other contents explicitly (optional if CSS handles it, but safest)
+                // Hide other contents
                 tabContents.forEach(c => {
                     if (c.id !== contentId) {
                         c.style.display = 'none';
@@ -1176,6 +1252,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
         });
+
+        // Initialize
+        updateCarousel();
+        window.addEventListener('resize', updateCarousel);
     }
 
     // --- THEME MODAL FUNCTION ---
@@ -1897,6 +1977,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // modal-text removed as per user request
         // document.getElementById('modal-text').onclick = ...
 
+        if (window.updateTabCarousel) window.updateTabCarousel();
         verbModal.classList.add('visible');
     }
 
