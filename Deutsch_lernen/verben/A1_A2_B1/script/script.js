@@ -1571,62 +1571,119 @@ document.addEventListener('DOMContentLoaded', () => {
             noteElement.style.display = 'none';
         }
 
-        // Populate Wortfamilie section
-        const wortfamilieContainer = document.getElementById('wortfamilie-container');
-        const wortfamilieContent = document.getElementById('wortfamilie-content');
+        // Helper to parse string format: "word (Level) = translation"
+        const parseWordString = (str) => {
+            // Match "Word (Level) = Translation" or similar
+            // e.g., "verheiratet (A2) = casado/a (adjetivo)"
+            // e.g., "der Ehemann / die Ehefrau (A2) = esposo / esposa"
+            const match = str.match(/^(.*?)\s*\((\w+)\)\s*=\s*(.*)$/);
+            if (match) {
+                return {
+                    word: match[1].trim(),
+                    level: match[2].trim(), // e.g. "A2"
+                    type: '', // Type inferred from context or left empty
+                    es: match[3].trim()
+                };
+            }
+            // Fallback if format doesn't match
+            return {
+                word: str,
+                level: 'Extras',
+                type: '',
+                es: ''
+            };
+        };
 
-        if (wortfamilieData[verb] && wortfamilieData[verb].length > 0) {
-            wortfamilieContainer.style.display = 'block';
-            // wortfamilieContainer.open = true; // Removed to keep closed by default
+        // Helper to render standard Word List UI
+        const renderStandardWordList = (container, contentEl, wordObjects) => {
+            if (!container || !contentEl) return;
+
+            if (!wordObjects || wordObjects.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'block';
 
             // Group words by level
-            const wordsByLevel = {
-                'A1': [],
-                'A2': [],
-                'B1': []
-            };
+            const wordsByLevel = { 'A1': [], 'A2': [], 'B1': [] };
+            const extraLevels = {};
 
-            wortfamilieData[verb].forEach(wordData => {
-                if (wordsByLevel[wordData.level]) {
-                    wordsByLevel[wordData.level].push(wordData);
+            wordObjects.forEach(wordData => {
+                const lvl = wordData.level;
+                if (wordsByLevel[lvl]) {
+                    wordsByLevel[lvl].push(wordData);
+                } else {
+                    if (!extraLevels[lvl]) extraLevels[lvl] = [];
+                    extraLevels[lvl].push(wordData);
                 }
             });
 
-            // Type abbreviation mapping
-            const typeAbbrev = {
-                'noun': 'n',
-                'adjective': 'a',
-                'adverb': 'adv',
-                'verb': 'v'
-            };
-
+            const typeAbbrev = { 'noun': 'n', 'adjective': 'a', 'adverb': 'adv', 'verb': 'v' };
             let contentHTML = '';
 
-            // Iterate through levels in order (A1, A2, B1)
+            // Render standard levels
             ['A1', 'A2', 'B1'].forEach(level => {
                 if (wordsByLevel[level].length > 0) {
                     contentHTML += `<div class="wf-level-section">`;
-                    contentHTML += `<div class="wf-level-header">${level} Level:</div>`;
-
+                    contentHTML += `<div class="wf-level-header">${level}</div>`;
                     wordsByLevel[level].forEach(wordData => {
-                        const abbrev = typeAbbrev[wordData.type] || wordData.type;
+                        const abbrev = typeAbbrev[wordData.type] || wordData.type || '';
                         contentHTML += `<div class="wf-word-item">`;
                         contentHTML += `<div class="wf-word-line">`;
-                        contentHTML += `• <span class="wf-word-german">${wordData.word}</span>`;
-                        contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
+                        contentHTML += `• <span class="wf-word-german" onclick="speak('${wordData.word}')" title="Aussprache hören">${wordData.word}</span>`;
+                        if (abbrev) contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
                         contentHTML += `</div>`;
                         contentHTML += `<div class="wf-word-translation">${wordData.es}</div>`;
                         contentHTML += `</div>`;
                     });
-
                     contentHTML += `</div>`;
                 }
             });
 
-            wortfamilieContent.innerHTML = contentHTML;
-        } else {
-            wortfamilieContainer.style.display = 'none';
+            // Render extra levels
+            Object.keys(extraLevels).forEach(level => {
+                if (extraLevels[level].length > 0) {
+                    contentHTML += `<div class="wf-level-section">`;
+                    contentHTML += `<div class="wf-level-header">${level}</div>`;
+                    extraLevels[level].forEach(wordData => {
+                        const abbrev = typeAbbrev[wordData.type] || wordData.type || '';
+                        contentHTML += `<div class="wf-word-item">`;
+                        contentHTML += `<div class="wf-word-line">`;
+                        contentHTML += `• <span class="wf-word-german" onclick="speak('${wordData.word}')" title="Aussprache hören">${wordData.word}</span>`;
+                        if (abbrev) contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
+                        contentHTML += `</div>`;
+                        contentHTML += `<div class="wf-word-translation">${wordData.es}</div>`;
+                        contentHTML += `</div>`;
+                    });
+                    contentHTML += `</div>`;
+                }
+            });
+
+            contentEl.innerHTML = contentHTML;
+        };
+
+        // Populate Wortfamilie section
+        const wortfamilieContainer = document.getElementById('wortfamilie-container');
+        const wortfamilieContent = document.getElementById('wortfamilie-content');
+
+        let wortfamilieItems = [];
+        if (updatedData.wortfamilie && Array.isArray(updatedData.wortfamilie) && updatedData.wortfamilie.length > 0) {
+            wortfamilieItems = updatedData.wortfamilie.map(parseWordString);
+        } else if (wortfamilieData[verb] && wortfamilieData[verb].length > 0) {
+            wortfamilieItems = wortfamilieData[verb];
         }
+        renderStandardWordList(wortfamilieContainer, wortfamilieContent, wortfamilieItems);
+
+        // Populate Wortfeld section
+        const wortfeldContainer = document.getElementById('wortfeld-container');
+        const wortfeldContent = document.getElementById('wortfeld-content');
+
+        let wortfeldItems = [];
+        if (updatedData.wortfeld && Array.isArray(updatedData.wortfeld) && updatedData.wortfeld.length > 0) {
+            wortfeldItems = updatedData.wortfeld.map(parseWordString);
+        }
+        renderStandardWordList(wortfeldContainer, wortfeldContent, wortfeldItems);
 
         const praesensTableContainer = document.getElementById('modal-praesens-table');
         if (updatedData.praesens) {
