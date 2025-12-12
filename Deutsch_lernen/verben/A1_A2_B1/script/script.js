@@ -2122,7 +2122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             };
 
                             // Search in German infinitive and Spanish translation
-                            const germanMatch = verbName.toLowerCase().startsWith(searchTerm);
+                            const germanMatch = verbName.toLowerCase().includes(searchTerm);
                             let spanishMatch = containsWord(verbData.es, searchTerm);
 
                             // Also search in searchable Spanish variants
