@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Helper function to remove all parentheses from translations
     function removeParentheses(text) {
         if (!text) return text;
-        return text.replace(/[()]/g, '');
+        return text; // Return text with parentheses as requested for clarifications
     }
 
     // Helper function to extract clean Perfekt (remove auxiliary verb)
