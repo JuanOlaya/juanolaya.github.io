@@ -466,6 +466,20 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
+            position: relative;
+        }
+
+        .level-tag {
+            background-color: rgba(0, 0, 0, 0.2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .modal-emoji {
@@ -547,6 +561,11 @@
             background: #f0fdf4;
         }
 
+        .col-plural {
+            border-color: var(--color-die-plural);
+            background: #f3e8ff;
+        }
+
         .tips-title {
             font-weight: 800;
             text-align: center;
@@ -558,6 +577,18 @@
             gap: 10px;
         }
 
+        .tips-subheader {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+            font-weight: 700;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 2px;
+        }
+
         .tips-list {
             list-style: none;
             padding: 0;
@@ -566,14 +597,9 @@
         }
 
         .tips-list li {
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             font-size: 0.95rem;
             line-height: 1.4;
-        }
-
-        .tips-list strong {
-            display: inline-block;
-            min-width: 40px;
         }
 
         .legacy-link {
@@ -645,6 +671,7 @@
         <div class="modal-content">
             <button class="modal-close" id="modal-close">×</button>
             <div class="modal-header" id="modal-header-bg">
+                <div class="level-tag" id="modal-level"></div>
                 <div class="modal-emoji" id="modal-emoji"></div>
                 <div class="modal-word" id="modal-word"></div>
                 <div class="modal-translation" id="modal-translation"></div>
@@ -672,25 +699,48 @@
                 <!-- DER Column -->
                 <div class="tips-col col-der">
                     <div class="tips-title" style="color: var(--color-der);">DER 🔵 (Masculine)</div>
+                    <div class="tips-subheader">Endungen / Terminación</div>
                     <ul class="tips-list">
-                        <li><strong>-er</strong> (Lehrer, Computer)</li>
-                        <li><strong>-en</strong> (Garten, Wagen)</li>
-                        <li><strong>-ig</strong> (König, Honig)</li>
-                        <li><strong>-ling</strong> (Frühling, Schmetterling)</li>
-                        <li><strong>-or</strong> (Motor, Professor)</li>
+                        <li><strong>-er</strong> (Lehrer)</li>
+                        <li><strong>-en</strong> (Garten)</li>
+                        <li><strong>-ig</strong> (König)</li>
+                        <li><strong>-ling</strong> (Frühling)</li>
+                        <li><strong>-or</strong> (Motor)</li>
                         <li><strong>-ismus</strong> (Tourismus)</li>
-                        <li>Tage, Monate, Jahreszeiten</li>
-                        <li>Wetter, Himmelsrichtungen</li>
+                    </ul>
+                    <div class="tips-subheader">Regeln / <span style="color: black;">Regla</span></div>
+                    <ul class="tips-list">
+                        <li>
+                            Tage, Monate <i><b>(días, meses)</b></i>
+                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">der Montag, der Juli, der
+                                Freitag, der Mai</div>
+                        </li>
+                        <li>
+                            Jahreszeiten <i><b>(estaciones)</b></i>
+                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">der Sommer, der Winter, der
+                                Herbst, der Frühling</div>
+                        </li>
+                        <li>
+                            Wetter <i><b>(clima)</b></i>
+                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">der Regen, der Schnee, der
+                                Wind, der Nebel, der Hagel, der Blitz</div>
+                        </li>
+                        <li>
+                            Himmelsrichtungen <i><b>(direcciones)</b></i>
+                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">der Norden, der Süden, der
+                                Osten, der Westen</div>
+                        </li>
                     </ul>
                 </div>
 
                 <!-- DIE Column -->
                 <div class="tips-col col-die">
                     <div class="tips-title" style="color: var(--color-die);">DIE 🔴 (Feminine)</div>
+                    <div class="tips-subheader">Endungen / Terminación</div>
                     <ul class="tips-list">
-                        <li><strong>-e</strong> (Lampe, Tasche)</li>
-                        <li><strong>-ung</strong> (Zeitung, Wohnung)</li>
-                        <li><strong>-heit</strong> (Freiheit, Gesundheit)</li>
+                        <li><strong>-e</strong> (Lampe)</li>
+                        <li><strong>-ung</strong> (Zeitung)</li>
+                        <li><strong>-heit</strong> (Freiheit)</li>
                         <li><strong>-keit</strong> (Möglichkeit)</li>
                         <li><strong>-schaft</strong> (Freundschaft)</li>
                         <li><strong>-ion</strong> (Information)</li>
@@ -699,20 +749,79 @@
                         <li><strong>-ie</strong> (Familie)</li>
                         <li><strong>-ei</strong> (Bäckerei)</li>
                     </ul>
+                    <div class="tips-subheader">Regeln / <span style="color: black;">Regla</span></div>
+                    <ul class="tips-list">
+                        <li>
+                            Weibliche Berufe <i><b>(profesiones femeninas)</b></i>
+                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">die Lehrerin, die Ärztin,
+                                die
+                                Studentin, die Chefin</div>
+                        </li>
+                        <li>
+                            Zahlen <i><b>(números)</b></i>
+                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">die Eins, die Zwei, die
+                                Zehn,
+                                die Million</div>
+                        </li>
+                    </ul>
                 </div>
 
                 <!-- DAS Column -->
                 <div class="tips-col col-das">
                     <div class="tips-title" style="color: var(--color-das);">DAS 🟢 (Neuter)</div>
+                    <div class="tips-subheader">Endungen / Terminación</div>
                     <ul class="tips-list">
-                        <li><strong>-chen</strong> (Mädchen, Brötchen)</li>
+                        <li><strong>-chen</strong> (Mädchen)</li>
                         <li><strong>-lein</strong> (Büchlein)</li>
                         <li><strong>-ment</strong> (Dokument)</li>
                         <li><strong>-tum</strong> (Eigentum)</li>
-                        <li><strong>-um</strong> (Museum, Zentrum)</li>
-                        <li>Infinitiv als Nomen (das Essen)</li>
-                        <li>Farben (das Blau)</li>
-                        <li>Viele englische Wörter (das Handy)</li>
+                        <li><strong>-um</strong> (Museum)</li>
+                    </ul>
+                    <div class="tips-subheader">Regeln / <span style="color: black;">Regla</span></div>
+                    <ul class="tips-list">
+                        <li>
+                            Infinitiv als Nomen <i><b>(infinitivo como sustantivo)</b></i>
+                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">das Essen, das Leben, das
+                                Schlafen, das Lesen, das Schwimmen</div>
+                        </li>
+                        <li>
+                            Farben <i><b>(colores)</b></i>
+                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">das Blau, das Rot, das Grün,
+                                das Gelb, das Weiß</div>
+                        </li>
+                        <li>
+                            Viele englische Wörter <i><b>(muchas palabras en inglés)</b></i>
+                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">das Handy, das Baby, das
+                                Team,
+                                das Training, das Internet</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- PLURAL Column -->
+                <div class="tips-col col-plural">
+                    <div class="tips-title" style="color: var(--color-die-plural);">DIE 🟣 (Plural)</div>
+                    <div class="tips-subheader">Endungen / <span style="color: black;">Terminación</span></div>
+                    <ul class="tips-list">
+                        <li><strong>-(e)n</strong> (Frauen, Blumen)</li>
+                        <li><strong>-e</strong> (Tische, Freunde)</li>
+                        <li><strong>-er</strong> (Kinder, Bilder)</li>
+                        <li><strong>-s</strong> (Autos, Kinos)</li>
+                        <li><strong>Keine Änd. / No cambia</strong> (Lehrer, Fenster)</li>
+                    </ul>
+                    <div class="tips-subheader">Regeln / <span style="color: black;">Regla</span></div>
+                    <ul class="tips-list">
+                        <li>
+                            Gruppen von Personen <i><b>(grupos de personas)</b></i>
+                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">die Eltern, die Leute, die
+                                Kinder, die Geschwister</div>
+                        </li>
+                        <li>
+                            Pluraliatantum <i><b>(solo plural)</b></i>
+                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">die Ferien, die
+                                Lebensmittel,
+                                die Möbel</div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -748,6 +857,7 @@
         const modalEmoji = document.getElementById('modal-emoji');
         const modalWord = document.getElementById('modal-word');
         const modalTranslation = document.getElementById('modal-translation');
+        const modalLevel = document.getElementById('modal-level');
         const modalExampleDe = document.getElementById('modal-example-de');
         const modalExampleEs = document.getElementById('modal-example-es');
 
@@ -818,7 +928,7 @@
             container.innerHTML = '';
 
             group.nouns.forEach(noun => {
-                const card = createCard(noun);
+                const card = createCard(noun, group.level);
                 container.appendChild(card);
             });
 
@@ -826,10 +936,10 @@
             updateVisibility(); // Maintain state
         }
 
-        function createCard(noun) {
+        function createCard(noun, level) {
             const card = document.createElement('div');
             card.className = 'card';
-            card.onclick = () => openWordModal(noun);
+            card.onclick = () => openWordModal(noun, level);
 
             const articleColor = getColorForArticle(noun.article);
 
@@ -896,10 +1006,11 @@
             });
         }
 
-        function openWordModal(noun) {
+        function openWordModal(noun, level) {
             modalEmoji.textContent = noun.emoji;
             modalWord.innerHTML = `<span style="font-size:0.5em; display:block; margin-bottom:5px;">${noun.article}</span>${noun.word}`;
             modalTranslation.textContent = noun.translation_es;
+            modalLevel.textContent = level || ''; // Set level
             modalExampleDe.textContent = noun.example_de || '-';
             modalExampleEs.textContent = noun.example_es || '-';
 
@@ -955,7 +1066,7 @@
                     const en = noun.translation_en.toLowerCase();
 
                     if (de.includes(query) || es.includes(query) || en.includes(query)) {
-                        const card = createCard(noun);
+                        const card = createCard(noun, group.level);
                         container.appendChild(card);
                         matchCount++;
                     }
