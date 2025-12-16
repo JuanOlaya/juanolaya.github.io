@@ -210,7 +210,7 @@
         .card-header {
             background-color: var(--card-main);
             color: white;
-            padding: 20px 10px 35px 10px;
+            padding: 15px 5px 15px 5px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -223,19 +223,19 @@
 
         /* Floating Icon */
         .icon-floating {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             background-color: var(--card-pastel);
             color: var(--card-main);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
+            font-size: 1.4rem;
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translate(-50%, 50%);
+            top: 12px;
+            right: 15px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             z-index: 10;
             cursor: pointer;
@@ -243,13 +243,14 @@
         }
 
         .icon-floating:hover {
-            transform: translate(-50%, 50%) scale(1.1);
+            transform: translateY(50%) scale(1.1);
         }
 
         /* White Body */
         .card-body {
+            position: relative;
             background-color: white;
-            padding: 30px 10px 20px 10px;
+            padding: 15px 5px 15px 5px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -261,7 +262,7 @@
         /* German Word */
         .german-word {
             display: block;
-            font-size: 2.6rem;
+            font-size: 2.2rem;
             font-weight: 800;
             color: white;
             margin-bottom: 0;
@@ -272,7 +273,7 @@
         /* Spanish Translation */
         .spanish-meaning {
             display: block;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #6b7280;
             font-weight: 600;
             margin-bottom: 0;
@@ -914,9 +915,9 @@
                 card.innerHTML = `
                     <div class="card-header">
                         <span class="german-word" lang="de" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören" style="cursor: pointer;">${adj.word}</span>
-                        <div class="icon-floating" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören">${adj.emoji}</div>
                     </div>
                     <div class="card-body">
+                         <div class="icon-floating" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören">${adj.emoji}</div>
                          <span class="spanish-meaning" lang="es">${adj.spanish.replace(/[()]/g, '')}</span>
                          <span class="english-meaning" lang="en">${adj.english || ''}</span>
                     </div>
@@ -1087,9 +1088,9 @@
                 card.innerHTML = `
                     <div class="card-header">
                          <span class="german-word" lang="de" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören" style="cursor: pointer;">${adj.word}</span>
-                        <div class="icon-floating" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören">${adj.emoji}</div>
                     </div>
                     <div class="card-body">
+                        <div class="icon-floating" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören">${adj.emoji}</div>
                         <span class="spanish-meaning" lang="es">${adj.spanish.replace(/[()]/g, '')}</span>
                         <span class="english-meaning" lang="en">${adj.english || ''}</span>
                     </div>
