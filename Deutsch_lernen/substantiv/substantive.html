@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deutsche Substantive (A1-B1)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="../images/german_flag.png" type="image/png">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f3f4f6;
+            --text-color: #1f2937;
+            --card-bg: #ffffff;
+
+            /* Article Colors */
+            --color-der: #3b82f6;
+            /* Blue */
+            --color-die: #ef4444;
+            /* Red */
+            --color-das: #22c55e;
+            /* Green */
+            --color-die-plural: #a855f7;
+            /* Purple */
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #d1d5db;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+
+        h1 {
+            color: #111827;
+            margin-bottom: 15px;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.05rem;
+        }
+
+        h1 span {
+            color: #d97706;
+            border-bottom: 4px solid #d97706;
+        }
+
+        p.instruction {
+            color: #6b7280;
+            font-size: 1.25rem;
+        }
+
+        /* Controls Container */
+        .controls-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .action-button {
+            background-color: #f59e0b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Active Recall Toggle */
+        .active-recall-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .switch-label {
+            color: #414A5C;
+            cursor: pointer;
+            font-weight: 700;
+            text-align: right;
+            line-height: 1.2;
+        }
+
+        .label-translation {
+            display: block;
+            font-size: 0.8em;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #414A5C;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+            transform: translateX(26px);
+        }
+
+        input:not(:checked)+.slider {
+            background-color: #ccc;
+        }
+
+        input:not(:checked)+.slider:before {
+            transform: translateX(0px);
+        }
+
+        /* Navigation */
+        .navigation-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .nav-button {
+            background-color: #111827;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button:hover {
+            background-color: #1f2937;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-button:disabled {
+            background-color: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .group-indicator {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #111827;
+            text-align: center;
+            min-width: 300px;
+        }
+
+        /* Grid Layout */
+        .infographic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            padding-bottom: 60px;
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: visible;
+            display: flex;
+            flex-direction: column;
+            border: none;
+            margin-top: 10px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Header with Color */
+        .card-header {
+            /* Background color set via JS based on article */
+            color: white;
+            padding: 15px 5px 15px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-grow: 1;
+            height: auto;
+            border-radius: 20px 20px 0 0;
+            min-height: 80px;
+        }
+
+        /* Floating Icon */
+        .icon-floating {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .icon-floating:hover {
+            transform: translateY(50%) scale(1.1);
+        }
+
+        /* White Body */
+        .card-body {
+            position: relative;
+            background-color: white;
+            padding: 15px 5px 15px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 0;
+            border-radius: 0 0 20px 20px;
+        }
+
+        /* German Word */
+        .german-word {
+            display: block;
+            font-size: 2.0rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0;
+            line-height: 1.1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-span {
+            font-size: 0.7em;
+            opacity: 0.9;
+            margin-right: 5px;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* Spanish Translation */
+        .spanish-meaning {
+            display: block;
+            font-size: 1.1rem;
+            color: #6b7280;
+            font-weight: 600;
+            margin-bottom: 0;
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        .english-meaning {
+            display: block;
+            font-size: 1.0rem;
+            color: #9ca3af;
+            font-weight: 500;
+            margin-top: 0;
+            font-style: italic;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+        }
+
+        .english-meaning.visible {
+            max-height: 50px;
+            opacity: 1;
+            margin-top: 2px;
+        }
+
+        /* Search Bar */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        #search-input {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            border: 2px solid #d1d5db;
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s;
+            background-color: white;
+        }
+
+        #search-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            pointer-events: none;
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 45px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            display: none;
+        }
+
+        .clear-search.visible {
+            display: block;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: scale(0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .modal-header {
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-emoji {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        .modal-word {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .modal-translation {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .modal-section {
+            padding: 30px;
+        }
+
+        .modal-example {
+            background-color: #f3f4f6;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .modal-example-de {
+            font-size: 1.2rem;
+            color: #1f2937;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .modal-example-es {
+            font-size: 1rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        /* Tips Modal Specifics */
+        #tips-modal .modal-content {
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .tips-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 20px;
+        }
+
+        .tips-col {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+        }
+
+        .col-der {
+            border-color: var(--color-der);
+            background: #eff6ff;
+        }
+
+        .col-die {
+            border-color: var(--color-die);
+            background: #fef2f2;
+        }
+
+        .col-das {
+            border-color: var(--color-das);
+            background: #f0fdf4;
+        }
+
+        .tips-title {
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        .tips-list li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .tips-list strong {
+            display: inline-block;
+            min-width: 40px;
+        }
+
+        .legacy-link {
+            display: block;
+            text-align: center;
+            margin: 20px;
+            color: #6b7280;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Deutsche <span>Substantive</span></h1>
+        <p class="instruction">A1 - B1 • Wortschatz & Artikel</p>
+    </header>
+
+    <!-- Controls -->
+    <div class="controls-container">
+        <!-- Search Bar -->
+        <div class="search-wrapper">
+            <input type="text" id="search-input" placeholder="Suchen... (z.B. Apfel, manzana, apple)">
+            <button class="clear-search" id="clear-search">✕</button>
+            <span class="search-icon">🔍</span>
+        </div>
+
+        <button class="action-button" id="tips-btn">
+            💡 Tipps zum Geschlecht
+        </button>
+    </div>
+
+    <div class="toggle-container controls-container">
+        <div class="active-recall-toggle">
+            <label class="switch-label" for="english-switch">Englisch<span
+                    class="label-translation">(English)</span></label>
+            <label class="switch">
+                <input type="checkbox" id="english-switch">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="active-recall-toggle">
+            <label class="switch-label" for="recall-switch">Übersetzung<span
+                    class="label-translation">(traducción)</span></label>
+            <label class="switch">
+                <input type="checkbox" id="recall-switch" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <div id="search-results-info" style="text-align: center; color: #6b7280; margin-bottom: 1rem;"></div>
+
+    <!-- Navigation -->
+    <div class="navigation-wrapper">
+        <button class="nav-button" id="prev-group-btn">← Vorherige</button>
+        <span class="group-indicator" id="group-indicator">Gruppe 1: Essen & Trinken (A1)</span>
+        <button class="nav-button" id="next-group-btn">Nächste →</button>
+    </div>
+
+    <!-- Cards Container -->
+    <div id="cards-container" class="infographic-grid">
+        <!-- Cards loaded via JS -->
+    </div>
+
+    <!-- Word Detail Modal -->
+    <div class="modal-overlay" id="word-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">×</button>
+            <div class="modal-header" id="modal-header-bg">
+                <div class="modal-emoji" id="modal-emoji"></div>
+                <div class="modal-word" id="modal-word"></div>
+                <div class="modal-translation" id="modal-translation"></div>
+            </div>
+            <div class="modal-section">
+                <div class="modal-section-title">Beispiel / Ejemplo</div>
+                <div class="modal-example">
+                    <div class="modal-example-de" id="modal-example-de"></div>
+                    <div class="modal-example-es" id="modal-example-es"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tips Modal -->
+    <div class="modal-overlay" id="tips-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="tips-close" style="color: #333; background: #eee;">×</button>
+            <div style="padding: 30px; text-align: center;">
+                <h2 style="color: #1f2937; margin-bottom: 10px;">💡 Tipps zum Geschlecht</h2>
+                <p style="color: #6b7280;">Wichtige Regeln und Endungen</p>
+            </div>
+
+            <div class="tips-columns">
+                <!-- DER Column -->
+                <div class="tips-col col-der">
+                    <div class="tips-title" style="color: var(--color-der);">DER 🔵 (Masculine)</div>
+                    <ul class="tips-list">
+                        <li><strong>-er</strong> (Lehrer, Computer)</li>
+                        <li><strong>-en</strong> (Garten, Wagen)</li>
+                        <li><strong>-ig</strong> (König, Honig)</li>
+                        <li><strong>-ling</strong> (Frühling, Schmetterling)</li>
+                        <li><strong>-or</strong> (Motor, Professor)</li>
+                        <li><strong>-ismus</strong> (Tourismus)</li>
+                        <li>Tage, Monate, Jahreszeiten</li>
+                        <li>Wetter, Himmelsrichtungen</li>
+                    </ul>
+                </div>
+
+                <!-- DIE Column -->
+                <div class="tips-col col-die">
+                    <div class="tips-title" style="color: var(--color-die);">DIE 🔴 (Feminine)</div>
+                    <ul class="tips-list">
+                        <li><strong>-e</strong> (Lampe, Tasche)</li>
+                        <li><strong>-ung</strong> (Zeitung, Wohnung)</li>
+                        <li><strong>-heit</strong> (Freiheit, Gesundheit)</li>
+                        <li><strong>-keit</strong> (Möglichkeit)</li>
+                        <li><strong>-schaft</strong> (Freundschaft)</li>
+                        <li><strong>-ion</strong> (Information)</li>
+                        <li><strong>-tät</strong> (Universität)</li>
+                        <li><strong>-ik</strong> (Musik)</li>
+                        <li><strong>-ie</strong> (Familie)</li>
+                        <li><strong>-ei</strong> (Bäckerei)</li>
+                    </ul>
+                </div>
+
+                <!-- DAS Column -->
+                <div class="tips-col col-das">
+                    <div class="tips-title" style="color: var(--color-das);">DAS 🟢 (Neuter)</div>
+                    <ul class="tips-list">
+                        <li><strong>-chen</strong> (Mädchen, Brötchen)</li>
+                        <li><strong>-lein</strong> (Büchlein)</li>
+                        <li><strong>-ment</strong> (Dokument)</li>
+                        <li><strong>-tum</strong> (Eigentum)</li>
+                        <li><strong>-um</strong> (Museum, Zentrum)</li>
+                        <li>Infinitiv als Nomen (das Essen)</li>
+                        <li>Farben (das Blau)</li>
+                        <li>Viele englische Wörter (das Handy)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <a href="tipps-zum-geschlecht.html" class="legacy-link">Zur alten, detaillierten Version / Ver versión
+                detallada</a>
+        </div>
+    </div>
+
+    <!-- Data Source -->
+    <script src="substantive_data.js"></script>
+
+    <script>
+        // Use nounGroups from imported file
+
+        let currentGroupIndex = 0;
+
+        // DOM Elements
+        const container = document.getElementById('cards-container');
+        const prevBtn = document.getElementById('prev-group-btn');
+        const nextBtn = document.getElementById('next-group-btn');
+        const groupIndicator = document.getElementById('group-indicator');
+        const recallSwitch = document.getElementById('recall-switch');
+        const englishSwitch = document.getElementById('english-switch');
+        const searchInput = document.getElementById('search-input');
+        const clearSearchBtn = document.getElementById('clear-search');
+        const searchInfo = document.getElementById('search-results-info');
+
+        // Modal Elements
+        const modal = document.getElementById('word-modal');
+        const modalClose = document.getElementById('modal-close');
+        const modalHeader = document.getElementById('modal-header-bg');
+        const modalEmoji = document.getElementById('modal-emoji');
+        const modalWord = document.getElementById('modal-word');
+        const modalTranslation = document.getElementById('modal-translation');
+        const modalExampleDe = document.getElementById('modal-example-de');
+        const modalExampleEs = document.getElementById('modal-example-es');
+
+        // Tips Modal
+        const tipsBtn = document.getElementById('tips-btn');
+        const tipsModal = document.getElementById('tips-modal');
+        const tipsClose = document.getElementById('tips-close');
+
+        // Initial Render
+        function init() {
+            if (typeof nounGroups === 'undefined' || nounGroups.length === 0) {
+                container.innerHTML = '<p style="text-align:center; width:100%;">Daten werden geladen...</p>';
+                return;
+            }
+            renderGroup(0);
+            updateNavigation();
+
+            // Event Listeners
+            prevBtn.addEventListener('click', () => changeGroup(-1));
+            nextBtn.addEventListener('click', () => changeGroup(1));
+            recallSwitch.addEventListener('change', updateVisibility);
+            englishSwitch.addEventListener('change', updateVisibility);
+            searchInput.addEventListener('input', handleSearch);
+            clearSearchBtn.addEventListener('click', clearSearch);
+
+            // Modal Listeners
+            modalClose.addEventListener('click', closeWordModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeWordModal();
+            });
+
+            tipsBtn.addEventListener('click', () => {
+                tipsModal.classList.add('visible');
+            });
+            tipsClose.addEventListener('click', () => {
+                tipsModal.classList.remove('visible');
+            });
+            tipsModal.addEventListener('click', (e) => {
+                if (e.target === tipsModal) tipsModal.classList.remove('visible');
+            });
+
+            // Key listeners
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeWordModal();
+                    tipsModal.classList.remove('visible');
+                }
+                if (e.key === 'ArrowRight') changeGroup(1);
+                if (e.key === 'ArrowLeft') changeGroup(-1);
+            });
+        }
+
+        function getColorForArticle(article) {
+            switch (article.toLowerCase()) {
+                case 'der': return 'var(--color-der)';
+                case 'die': return 'var(--color-die)';
+                case 'das': return 'var(--color-das)';
+                case 'die (pl)': return 'var(--color-die-plural)';
+                default: return '#6b7280';
+            }
+        }
+
+        function renderGroup(index) {
+            currentGroupIndex = index;
+            const group = nounGroups[index];
+            groupIndicator.textContent = group.title;
+
+            container.innerHTML = '';
+
+            group.nouns.forEach(noun => {
+                const card = createCard(noun);
+                container.appendChild(card);
+            });
+
+            updateNavigation();
+            updateVisibility(); // Maintain state
+        }
+
+        function createCard(noun) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.onclick = () => openWordModal(noun);
+
+            const articleColor = getColorForArticle(noun.article);
+
+            // Header
+            const header = document.createElement('div');
+            header.className = 'card-header';
+            header.style.backgroundColor = articleColor;
+
+            // German Word Structure
+            const wordSpan = document.createElement('span');
+            wordSpan.className = 'german-word';
+            wordSpan.innerHTML = `<span class="article-span">${noun.article}</span>${noun.word}`;
+
+            header.appendChild(wordSpan);
+
+            // Floating Icon (inside Body visually in CSS, but structure here?)
+            // Adjektive moved it to body textually? No, visually.
+            // Let's keep it simple structure: Card -> Header, Body. Icon absolute.
+            const icon = document.createElement('div');
+            icon.className = 'icon-floating';
+            icon.textContent = noun.emoji;
+            // Append icon to card-body for z-index stacking if needed, or keep in header? 
+            // Adjektive latest: moved to card-body in JS? 
+            // Let's append to card (relative parent)
+
+            // Body
+            const body = document.createElement('div');
+            body.className = 'card-body';
+
+            const deExample = document.createElement('span'); // Hidden in card view usually? No, adjektive doesn't show example in card view.
+
+            const esMeaning = document.createElement('span');
+            esMeaning.className = 'spanish-meaning';
+            esMeaning.textContent = `(${noun.translation_es})`;
+
+            const enMeaning = document.createElement('span');
+            enMeaning.className = 'english-meaning';
+            enMeaning.textContent = noun.translation_en;
+
+            body.appendChild(icon); // Put icon here
+            body.appendChild(esMeaning);
+            body.appendChild(enMeaning);
+
+            card.appendChild(header);
+            card.appendChild(body);
+
+            return card;
+        }
+
+        function updateVisibility() {
+            const showRecall = recallSwitch.checked;
+            const showEnglish = englishSwitch.checked;
+
+            document.querySelectorAll('.spanish-meaning').forEach(el => {
+                el.style.opacity = showRecall ? '1' : '0';
+            });
+
+            document.querySelectorAll('.english-meaning').forEach(el => {
+                if (showEnglish) {
+                    el.classList.add('visible');
+                } else {
+                    el.classList.remove('visible');
+                }
+            });
+        }
+
+        function openWordModal(noun) {
+            modalEmoji.textContent = noun.emoji;
+            modalWord.innerHTML = `<span style="font-size:0.5em; display:block; margin-bottom:5px;">${noun.article}</span>${noun.word}`;
+            modalTranslation.textContent = noun.translation_es;
+            modalExampleDe.textContent = noun.example_de || '-';
+            modalExampleEs.textContent = noun.example_es || '-';
+
+            modalHeader.style.backgroundColor = getColorForArticle(noun.article);
+
+            modal.classList.add('visible');
+        }
+
+        function closeWordModal() {
+            modal.classList.remove('visible');
+        }
+
+        function changeGroup(direction) {
+            if (searchInput.value.trim() !== '') return; // Disable nav during search
+
+            let newIndex = currentGroupIndex + direction;
+            if (newIndex >= 0 && newIndex < nounGroups.length) {
+                renderGroup(newIndex);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function updateNavigation() {
+            prevBtn.disabled = currentGroupIndex === 0;
+            nextBtn.disabled = currentGroupIndex === nounGroups.length - 1;
+
+            // Hide nav if searching
+            if (searchInput.value.trim() !== '') {
+                document.querySelector('.navigation-wrapper').style.display = 'none';
+            } else {
+                document.querySelector('.navigation-wrapper').style.display = 'flex';
+            }
+        }
+
+        // Search Logic
+        function handleSearch() {
+            const query = searchInput.value.toLowerCase().trim();
+            clearSearchBtn.classList.toggle('visible', query.length > 0);
+
+            if (query === '') {
+                renderGroup(currentGroupIndex);
+                searchInfo.textContent = '';
+                return;
+            }
+
+            container.innerHTML = '';
+            let matchCount = 0;
+
+            nounGroups.forEach(group => {
+                group.nouns.forEach(noun => {
+                    const de = noun.word.toLowerCase();
+                    const es = noun.translation_es.toLowerCase();
+                    const en = noun.translation_en.toLowerCase();
+
+                    if (de.includes(query) || es.includes(query) || en.includes(query)) {
+                        const card = createCard(noun);
+                        container.appendChild(card);
+                        matchCount++;
+                    }
+                });
+            });
+
+            searchInfo.textContent = `${matchCount} Ergebnisse gefunden`;
+            updateNavigation();
+        }
+
+        function clearSearch() {
+            searchInput.value = '';
+            clearSearchBtn.classList.remove('visible');
+            handleSearch();
+        }
+
+        // Defer init slightly to ensure script is loaded
+        window.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+
+</html>
