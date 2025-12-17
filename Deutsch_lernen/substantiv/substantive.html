@@ -239,7 +239,7 @@
         .card-header {
             /* Background color set via JS based on article */
             color: white;
-            padding: 15px 5px 15px 5px;
+            padding: 10px 5px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -248,7 +248,7 @@
             flex-grow: 1;
             height: auto;
             border-radius: 20px 20px 0 0;
-            min-height: 80px;
+            min-height: 50px;
         }
 
         /* Floating Icon */
@@ -628,9 +628,15 @@
             <span class="search-icon">🔍</span>
         </div>
 
-        <button class="action-button" id="tips-btn">
-            💡 Tipps zum Geschlecht
-        </button>
+        <div class="buttons-row" style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+            <button class="action-button" id="tips-btn">
+                💡 Tipps zum Geschlecht
+            </button>
+
+            <a href="Deutsche_Substantivendungen.html" class="action-button" style="text-decoration: none;">
+                📜 Deutsche Substantivendungen
+            </a>
+        </div>
     </div>
 
     <div class="toggle-container controls-container">
@@ -936,10 +942,27 @@
             updateVisibility(); // Maintain state
         }
 
+        // TTS Function
+        function speak(text) {
+            if (!window.speechSynthesis) return;
+            // Cancel current speech to prevent queueing
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+
+            // Try to set a German voice if available
+            const voices = window.speechSynthesis.getVoices();
+            const germanVoice = voices.find(v => v.lang.startsWith('de'));
+            if (germanVoice) utterance.voice = germanVoice;
+
+            window.speechSynthesis.speak(utterance);
+        }
+
         function createCard(noun, level) {
             const card = document.createElement('div');
             card.className = 'card';
-            card.onclick = () => openWordModal(noun, level);
+            // card.onclick removed, logic moved to children
 
             const articleColor = getColorForArticle(noun.article);
 
@@ -947,6 +970,13 @@
             const header = document.createElement('div');
             header.className = 'card-header';
             header.style.backgroundColor = articleColor;
+            header.title = "Hören / Escuchar"; // Tooltip
+
+            // Header Click -> TTS
+            header.onclick = (e) => {
+                e.stopPropagation();
+                speak(`${noun.article} ${noun.word}`);
+            };
 
             // German Word Structure
             const wordSpan = document.createElement('span');
@@ -955,21 +985,24 @@
 
             header.appendChild(wordSpan);
 
-            // Floating Icon (inside Body visually in CSS, but structure here?)
-            // Adjektive moved it to body textually? No, visually.
-            // Let's keep it simple structure: Card -> Header, Body. Icon absolute.
+            // Floating Icon
             const icon = document.createElement('div');
             icon.className = 'icon-floating';
             icon.textContent = noun.emoji;
-            // Append icon to card-body for z-index stacking if needed, or keep in header? 
-            // Adjektive latest: moved to card-body in JS? 
-            // Let's append to card (relative parent)
+            // Icon Click -> TTS (consistent with header)
+            icon.onclick = (e) => {
+                e.stopPropagation();
+                speak(`${noun.article} ${noun.word}`);
+            };
 
             // Body
             const body = document.createElement('div');
             body.className = 'card-body';
 
-            const deExample = document.createElement('span'); // Hidden in card view usually? No, adjektive doesn't show example in card view.
+            // Body Click -> Open Modal
+            body.onclick = () => openWordModal(noun, level);
+
+            const deExample = document.createElement('span');
 
             const esMeaning = document.createElement('span');
             esMeaning.className = 'spanish-meaning';
@@ -979,7 +1012,7 @@
             enMeaning.className = 'english-meaning';
             enMeaning.textContent = noun.translation_en;
 
-            body.appendChild(icon); // Put icon here
+            body.appendChild(icon);
             body.appendChild(esMeaning);
             body.appendChild(enMeaning);
 
