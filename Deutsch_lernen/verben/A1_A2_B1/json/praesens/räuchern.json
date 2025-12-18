@@ -1,18 +1,60 @@
 {
-    "praesens": [
-        "ich räuchere",
-        "du räucherst",
-        "er/sie/es räuchert",
-        "wir räuchern",
-        "ihr räuchert",
-        "sie/Sie räuchern"
-    ],
-    "praesens_es": [
-        "yo ahumo",
-        "tú ahumas",
-        "él/ella ahúma",
-        "nosotros ahumamos",
-        "vosotros ahumáis",
-        "ellos/ellas ahúman"
-    ]
+  "praesens": {
+    "ich": "räuchere",
+    "du": "räucherst",
+    "er": "räuchert",
+    "sie": "räuchert",
+    "es": "räuchert",
+    "wir": "räucheren",
+    "ihr": "räuchert",
+    "sie (plural)": "räucheren",
+    "Sie (formal)": "räucheren"
+  },
+  "praesens_examples": {
+    "ich": {
+      "de": "Ich räuchere.",
+      "es": "Yo ahumar.",
+      "en": "I to smoke (food)."
+    },
+    "du": {
+      "de": "Du räucherst.",
+      "es": "Tú ahumar.",
+      "en": "You to smoke (food)."
+    },
+    "er": {
+      "de": "Er räuchert.",
+      "es": "Él ahumar.",
+      "en": "He to smoke (food)."
+    },
+    "sie": {
+      "de": "Sie räuchert.",
+      "es": "Ella ahumar.",
+      "en": "She to smoke (food)."
+    },
+    "es": {
+      "de": "Es räuchert.",
+      "es": "Eso ahumar.",
+      "en": "It to smoke (food)."
+    },
+    "wir": {
+      "de": "Wir räucheren.",
+      "es": "Nosotros ahumar.",
+      "en": "We to smoke (food)."
+    },
+    "ihr": {
+      "de": "Ihr räuchert.",
+      "es": "Vosotros ahumar.",
+      "en": "You to smoke (food)."
+    },
+    "sie (plural)": {
+      "de": "Sie räucheren.",
+      "es": "Ellos ahumar.",
+      "en": "They to smoke (food)."
+    },
+    "Sie (formal)": {
+      "de": "Sie räucheren.",
+      "es": "Usted ahumar.",
+      "en": "You to smoke (food)."
+    }
+  }
 }
