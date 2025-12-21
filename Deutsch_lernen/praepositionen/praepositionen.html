@@ -625,8 +625,8 @@
                 <ul class="prep-list">
                     <li class="prep-item" onclick="openModal('aus')">AUS<span class="example">De (salir) / Hecho
                             de</span></li>
-                    <li class="prep-item" onclick="openModal('bei')">BEI<span class="example">En casa de / Junto
-                            a</span></li>
+                    <li class="prep-item" onclick="openModal('bei')">BEI<span class="example">en / junto a / al lado de
+                            / con</span></li>
                     <li class="prep-item" onclick="openModal('mit')">MIT<span class="example">Con</span></li>
                     <li class="prep-item" onclick="openModal('nach')">NACH<span class="example">Hacia / Después</span>
                     </li>
@@ -674,6 +674,11 @@
             <span class="close-btn" onclick="closeModalBtn()">&times;</span>
             <h2 id="m-title" class="modal-title">TITLE</h2>
             <span id="m-type" class="modal-type">TYPE</span>
+
+            <div id="m-image-container" style="text-align:center; margin-bottom:15px; display:none;">
+                <img id="m-image" src="" alt="Wechselpräpositionen Illustration"
+                    style="max-width:100%; height:auto; border-radius:8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            </div>
 
             <div id="m-examples" class="example-container">
                 <!-- Examples injected by JS -->
@@ -773,7 +778,7 @@
                     { de: 'Die Bäckerei ist bei der Post.', es: 'La panadería está junto a correos.' },
                     { de: 'Ich habe kein Geld bei mir.', es: 'No llevo dinero encima.' }
                 ],
-                desc: 'Indica ubicación "en casa de", lugar de trabajo o condición simultánea.'
+                desc: '<strong>1) en / junto a / al lado de</strong><br>Indica proximidad o presencia.<br><br><strong>2) con (persona, institución, empresa)</strong><br>Muy común para trabajo o servicios.<br><br><strong>3) durante / en (situación, evento)</strong><br><br><strong>4) en caso de</strong><br><br><strong>Gramática</strong><br>bei + Dativ<br><br><strong>Ejemplos:</strong><br>bei mir / bei dir<br>bei dem Arzt → beim Arzt<br>bei der Arbeit'
             },
             'mit': {
                 title: 'MIT',
@@ -1063,7 +1068,22 @@
             titleElem.style.cursor = 'pointer';
             titleElem.title = 'Escuchar pronunciación';
 
-            document.getElementById('m-desc').textContent = data.desc;
+            // Image Logic
+            const imgContainer = document.getElementById('m-image-container');
+            const imgElem = document.getElementById('m-image');
+
+            if (data.type === 'wechsel') {
+                // Load specific image for the preposition
+                let imgName = key;
+                if (key === 'über') imgName = 'ueber'; // Fix for mapped filename
+
+                imgElem.src = `img/${imgName}.png`;
+                imgContainer.style.display = 'block';
+            } else {
+                imgContainer.style.display = 'none';
+            }
+
+            document.getElementById('m-desc').innerHTML = data.desc;
 
             // Set Header Color & Text
             const typeElem = document.getElementById('m-type');
