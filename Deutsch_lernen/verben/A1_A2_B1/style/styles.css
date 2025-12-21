@@ -725,7 +725,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-top: 5px;
+    margin-top: 10px;
     justify-content: center;
     align-items: center;
     /* Center the tags */
@@ -735,7 +735,13 @@ body {
 
 .modal-case-tags .case-tag {
     font-size: 0.9rem;
-    padding: 4px 10px;
+    padding: 4px 12px;
+    /* Style for blue header */
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
 }
 
 /* Tags row structure - each row is a separate line */
@@ -1089,22 +1095,74 @@ body {
 
 /* Level badge */
 .modal-level-badge {
-    position: absolute;
-    top: 20px;
-    left: 20px;
+    /* position: absolute; removed for flow */
+    /* top: 20px; removed */
+    /* left: 20px; removed */
     background-color: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(4px);
     color: #4682B4;
     /* Match header color if possible, or keep white text on colored badge */
     color: white;
-    padding: 6px 14px;
+    padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.9rem;
     font-weight: 700;
-    text-transform: uppercase;
+    /* text-transform: uppercase; removed */
     letter-spacing: 0.05em;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 20;
+    /* z-index: 20; not needed in flow */
+    margin-top: 8px;
+    /* Add spacing from translation */
+    display: inline-block;
+}
+
+/* Tags Wrapper for Toggle */
+.modal-tags-wrapper {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: 500px;
+    /* Arbitrary large height for expansion */
+    opacity: 1;
+    overflow: hidden;
+}
+
+.modal-tags-wrapper.collapsed {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+}
+
+/* Toggle Button */
+.modal-tags-toggle {
+    margin-top: 5px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 5px 20px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.modal-tags-toggle:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dots-icon {
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.chevron-icon {
+    font-size: 0.9rem;
 }
 
 /* Tags in header */
@@ -1657,6 +1715,33 @@ input:checked+.slider:before {
 }
 
 /* Modal Note Style */
+.modal-note-general {
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #4b5563;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #f3f4f6;
+    border-left: 5px solid #4682B4;
+    border-radius: 4px;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.modal-note-praesens {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #fffbeb;
+    /* light yellow */
+    border: 1px solid #fcd34d;
+    border-radius: 6px;
+    text-align: left;
+    font-style: italic;
+}
+
+/* Old note style kept for reference or legacy */
 .modal-note {
     font-style: italic;
     font-size: 0.9rem;
