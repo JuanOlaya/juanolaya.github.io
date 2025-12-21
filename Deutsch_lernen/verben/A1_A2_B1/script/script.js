@@ -61,6 +61,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeThemeModalX = document.getElementById('close-theme-modal-x');
     const closeThemeModalBtn = document.getElementById('close-theme-modal-btn');
 
+    // Header Tags Toggle Listener
+    const modalTagsToggle = document.getElementById('modal-tags-toggle');
+    if (modalTagsToggle) {
+        modalTagsToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const wrapper = document.getElementById('modal-tags-collapsible');
+            const dots = modalTagsToggle.querySelector('.dots-icon');
+            const chevron = modalTagsToggle.querySelector('.chevron-icon');
+
+            if (wrapper) {
+                const isCollapsed = wrapper.classList.toggle('collapsed');
+                if (isCollapsed) {
+                    dots.style.display = 'inline';
+                    chevron.style.display = 'none';
+                } else {
+                    dots.style.display = 'none';
+                    chevron.style.display = 'inline';
+                }
+            }
+        });
+    }
+
     // Theme data storage
     let currentThemeData = null;
 
@@ -1394,8 +1416,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Set infinitive with case tags
         const infinitiveElement = document.getElementById('modal-verb-infinitive');
-        const irregularMark = updatedData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
-        infinitiveElement.innerHTML = verb + irregularMark;
+        // const irregularMark = updatedData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
+        // Removed asterisk as requested
+        infinitiveElement.innerHTML = verb;
+
+        // Reset tags collapse state
+        const tagsCollapsible = document.getElementById('modal-tags-collapsible');
+        const tagsToggle = document.getElementById('modal-tags-toggle');
+
+        if (tagsCollapsible && tagsToggle) {
+            tagsCollapsible.classList.add('collapsed');
+            tagsToggle.querySelector('.dots-icon').style.display = 'inline';
+            tagsToggle.querySelector('.chevron-icon').style.display = 'none';
+        }
 
         // Add case tags below translations
         const caseTagsContainer = document.getElementById('modal-case-tags-container');
@@ -1564,15 +1597,42 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('modal-verb-english-infinitive').textContent = updatedData.en_verb || '';
         document.getElementById('modal-verb-english-perfekt').textContent = updatedData.en_perfekt || '';
         document.getElementById('modal-verb-english-praeteritum').textContent = updatedData.en_praeteritum || '';
-        document.getElementById('modal-level-badge').textContent = updatedData.level || 'A1';
+        const levelText = updatedData.level || 'A1';
+        let typeText = '';
+        if (updatedData.Wortart_type) {
+            const capitalizedType = updatedData.Wortart_type.charAt(0).toUpperCase() + updatedData.Wortart_type.slice(1);
+            typeText = ` - ${capitalizedType}`;
+        }
+        document.getElementById('modal-level-badge').textContent = levelText + typeText;
 
-        // Display note_es if it exists
-        const noteElement = document.getElementById('modal-verb-note');
-        if (updatedData.note_es) {
-            noteElement.innerHTML = updatedData.note_es;
-            noteElement.style.display = 'block';
+        // --- NEW NOTE LOGIC ---
+
+        // 1. General Card Note (displayed below Wortfamilie)
+        // Use 'note' attribute or fallback to 'note_es'
+        const generalNote = updatedData.note || updatedData.note_es;
+        const generalNoteElement = document.getElementById('modal-general-note');
+        if (generalNote) {
+            generalNoteElement.innerHTML = generalNote;
+            generalNoteElement.style.display = 'block';
         } else {
-            noteElement.style.display = 'none';
+            generalNoteElement.style.display = 'none';
+        }
+
+        // 2. Present Tense Note (displayed below conjugation table)
+        const praesensNote = updatedData.praesens_note;
+        const praesensNoteElement = document.getElementById('modal-praesens-note');
+        if (praesensNote) {
+            praesensNoteElement.innerHTML = praesensNote;
+            praesensNoteElement.style.display = 'block';
+        } else {
+            praesensNoteElement.style.display = 'none';
+        }
+
+        // Display note_es if it exists (REMOVED/REPLACED by General Note above)
+        // keeping the element ref just in case but logic is handled above
+        const oldNoteElement = document.getElementById('modal-verb-note');
+        if (oldNoteElement) {
+            oldNoteElement.style.display = 'none'; // Ensure old element is hidden
         }
 
         // Helper to parse string format: "word (Level) = translation"

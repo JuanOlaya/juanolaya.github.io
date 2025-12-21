@@ -208,19 +208,26 @@
     <div id="verb-modal" class="modal-overlay">
         <div class="modal-content">
             <button id="close-verb-modal-x" class="modal-close-x" title="Schließen (Cerrar)">×</button>
-            <div id="modal-level-badge" class="modal-level-badge">A1.1</div>
-
             <div class="modal-header">
                 <div id="modal-emoji" class="modal-emoji"></div>
                 <h3 id="modal-verb-infinitive" class="modal-word"></h3>
                 <p id="modal-verb-infinitive-es" class="modal-translation" data-form="translation"></p>
                 <p id="modal-verb-english-infinitive" class="modal-translation english" data-form="translation"></p>
-                <div id="modal-header-tags" class="modal-header-tags"></div>
-                <div id="modal-header-tags" class="modal-header-tags"></div>
+
+                <div id="modal-tags-collapsible" class="modal-tags-wrapper collapsed">
+                    <div id="modal-level-badge" class="modal-level-badge">A1.1</div>
+                    <div id="modal-header-tags" class="modal-header-tags"></div>
+                    <!-- Other tags moved to header -->
+                    <div id="modal-extra-tags" class="modal-extra-tags"></div>
+                    <div id="modal-case-tags-container" class="modal-case-tags"></div>
+                </div>
+
+                <div id="modal-tags-toggle" class="modal-tags-toggle" title="Details anzeigen">
+                    <span class="dots-icon">•••</span>
+                    <span class="chevron-icon" style="display:none;">▲</span>
+                </div>
             </div>
 
-            <div id="modal-extra-tags" class="modal-extra-tags"></div>
-            <div id="modal-case-tags-container" class="modal-case-tags"></div>
             <hr class="modal-separator">
 
             <div class="modal-body-content">
@@ -246,6 +253,9 @@
                         <!-- Word field content inserted here -->
                     </div>
                 </details>
+
+                <!-- General Card Note -->
+                <div id="modal-general-note" class="modal-note-general" style="display: none;"></div>
             </div><!-- End of top modal-body-content -->
 
             <hr class="modal-separator" style="margin: 0; border: none; height: 1px; background-color: #e5e7eb;">
@@ -261,22 +271,15 @@
 
             <!-- Tab Contents - Full Width Container -->
             <div id="praesens-tab-content" class="tab-content active">
-                <!-- Verb Note -->
-                <p id="modal-verb-note" class="modal-note" style="display: none;"></p>
 
                 <!-- Präsens Details Section -->
                 <div id="praesens-details-container">
-                    <!-- We remove the details/summary wrapper and just show the content directly or keep it open? 
-                            User said "shows below the Präsens Konjugation". 
-                            Currently it is inside a <details>. The prompt implies the tab *is* the switch, so maybe we don't need the <details> for the conjugation table itself anymore, OR we keep it but opened? 
-                            Let's keep the structure simple: The tab shows the content. Inside the content, we can keep the tables. 
-                            Actually, usually tabs replace the need for <details> if singular. But here we have "Konjugation" and "Beispiele".
-                            Let's keep the containers but remove the <details> wrapper for the main conjugation table to make it immediately visible as per "showing below".
-                       -->
                     <h4 class="section-title">Präsens Konjugation</h4>
                     <div id="modal-praesens-table" class="details-content" style="display: block;">
                         <!-- Conjugation table inserted here -->
                     </div>
+                    <!-- Present Tense Conjugation Note -->
+                    <div id="modal-praesens-note" class="modal-note-praesens" style="display: none;"></div>
                 </div>
 
                 <!-- Präsens Examples Section -->
