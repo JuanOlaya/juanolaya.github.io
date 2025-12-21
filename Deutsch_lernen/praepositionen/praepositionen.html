@@ -534,25 +534,65 @@
                 <h2>AKKUSATIV</h2>
                 <ul class="prep-list">
                     <!-- FUDOG ORDER - Toda la palabra coloreada -->
-                    <li class="prep-item" onclick="openModal('für')">
-                        <span class="acc-word"><span class="fudog-letter">F</span>ÜR</span>
-                        <span class="example">Para / Por</span>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('für'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            <span class="acc-word"><span class="fudog-letter">F</span>ÜR</span>
+                        </div>
+                        <div onclick="openModal('für'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Para / Por</span>
+                        </div>
                     </li>
-                    <li class="prep-item" onclick="openModal('um')">
-                        <span class="acc-word"><span class="fudog-letter">U</span>M</span>
-                        <span class="example">Alrededor / A las</span>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('um'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            <span class="acc-word"><span class="fudog-letter">U</span>M</span>
+                        </div>
+                        <div onclick="openModal('um'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Alrededor / A las</span>
+                        </div>
                     </li>
-                    <li class="prep-item" onclick="openModal('durch')">
-                        <span class="acc-word"><span class="fudog-letter">D</span>URCH</span>
-                        <span class="example">A través de</span>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('durch'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            <span class="acc-word"><span class="fudog-letter">D</span>URCH</span>
+                        </div>
+                        <div onclick="openModal('durch'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">A través de</span>
+                        </div>
                     </li>
-                    <li class="prep-item" onclick="openModal('ohne')">
-                        <span class="acc-word"><span class="fudog-letter">O</span>HNE</span>
-                        <span class="example">Sin</span>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('ohne'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            <span class="acc-word"><span class="fudog-letter">O</span>HNE</span>
+                        </div>
+                        <div onclick="openModal('ohne'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Sin</span>
+                        </div>
                     </li>
-                    <li class="prep-item" onclick="openModal('gegen')">
-                        <span class="acc-word"><span class="fudog-letter">G</span>EGEN</span>
-                        <span class="example">Contra / Hacia</span>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('gegen'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            <span class="acc-word"><span class="fudog-letter">G</span>EGEN</span>
+                        </div>
+                        <div onclick="openModal('gegen'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Contra / Hacia</span>
+                        </div>
+                    </li>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('bis'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            <span class="acc-word">BIS</span>
+                        </div>
+                        <div onclick="openModal('bis'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Hasta</span>
+                        </div>
                     </li>
                 </ul>
                 <div
@@ -570,50 +610,105 @@
                 </p>
 
                 <div class="wechsel-grid">
-                    <div class="wechsel-item" onclick="openModal('an')">
-                        <div style="display:flex; align-items:center; gap:6px;">AN <img src="img/an.png"
-                                style="height:40px;"></div>
-                        <span class="translation">en (vertical)/junto a</span>
+                    <div class="wechsel-item" style="cursor: default; padding: 0;">
+                        <div onclick="speak('an'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
+                            <div style="display:flex; align-items:center; justify-content: center; gap:6px;">AN <img
+                                    src="img/an.png" style="height:40px;"></div>
+                        </div>
+                        <div onclick="openModal('an'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
+                            <span class="translation">en (vertical)/junto a</span>
+                        </div>
                     </div>
-                    <div class="wechsel-item" onclick="openModal('auf')">
-                        <div style="display:flex; align-items:center; gap:6px;">AUF <img src="img/auf.png"
-                                style="height:40px;"></div>
-                        <span class="translation">sobre (encima)</span>
+                    <div class="wechsel-item" style="cursor: default; padding: 0;">
+                        <div onclick="speak('auf'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
+                            <div style="display:flex; align-items:center; justify-content: center; gap:6px;">AUF <img
+                                    src="img/auf.png" style="height:40px;"></div>
+                        </div>
+                        <div onclick="openModal('auf'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
+                            <span class="translation">sobre (encima)</span>
+                        </div>
                     </div>
-                    <div class="wechsel-item" onclick="openModal('hinter')">
-                        <div style="display:flex; align-items:center; gap:6px;">HINTER <img src="img/hinter.png"
-                                style="height:40px;"></div>
-                        <span class="translation">detrás de</span>
+                    <div class="wechsel-item" style="cursor: default; padding: 0;">
+                        <div onclick="speak('hinter'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
+                            <div style="display:flex; align-items:center; justify-content: center; gap:6px;">HINTER <img
+                                    src="img/hinter.png" style="height:40px;"></div>
+                        </div>
+                        <div onclick="openModal('hinter'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
+                            <span class="translation">detrás de</span>
+                        </div>
                     </div>
-                    <div class="wechsel-item" onclick="openModal('in')">
-                        <div style="display:flex; align-items:center; gap:6px;">IN <img src="img/in.png"
-                                style="height:40px;"></div>
-                        <span class="translation">en (dentro)</span>
+                    <div class="wechsel-item" style="cursor: default; padding: 0;">
+                        <div onclick="speak('in'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
+                            <div style="display:flex; align-items:center; justify-content: center; gap:6px;">IN <img
+                                    src="img/in.png" style="height:40px;"></div>
+                        </div>
+                        <div onclick="openModal('in'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
+                            <span class="translation">en (dentro)</span>
+                        </div>
                     </div>
-                    <div class="wechsel-item" onclick="openModal('neben')">
-                        <div style="display:flex; align-items:center; gap:6px;">NEBEN <img src="img/neben.png"
-                                style="height:40px;"></div>
-                        <span class="translation">al lado de</span>
+                    <div class="wechsel-item" style="cursor: default; padding: 0;">
+                        <div onclick="speak('neben'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
+                            <div style="display:flex; align-items:center; justify-content: center; gap:6px;">NEBEN <img
+                                    src="img/neben.png" style="height:40px;"></div>
+                        </div>
+                        <div onclick="openModal('neben'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
+                            <span class="translation">al lado de</span>
+                        </div>
                     </div>
-                    <div class="wechsel-item" onclick="openModal('über')">
-                        <div style="display:flex; align-items:center; gap:6px;">ÜBER <img src="img/ueber.png"
-                                style="height:40px;"></div>
-                        <span class="translation">sobre/encima de</span>
+                    <div class="wechsel-item" style="cursor: default; padding: 0;">
+                        <div onclick="speak('über'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
+                            <div style="display:flex; align-items:center; justify-content: center; gap:6px;">ÜBER <img
+                                    src="img/ueber.png" style="height:40px;"></div>
+                        </div>
+                        <div onclick="openModal('über'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
+                            <span class="translation">sobre/encima de</span>
+                        </div>
                     </div>
-                    <div class="wechsel-item" onclick="openModal('unter')">
-                        <div style="display:flex; align-items:center; gap:6px;">UNTER <img src="img/unter.png"
-                                style="height:40px;"></div>
-                        <span class="translation">debajo de</span>
+                    <div class="wechsel-item" style="cursor: default; padding: 0;">
+                        <div onclick="speak('unter'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
+                            <div style="display:flex; align-items:center; justify-content: center; gap:6px;">UNTER <img
+                                    src="img/unter.png" style="height:40px;"></div>
+                        </div>
+                        <div onclick="openModal('unter'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
+                            <span class="translation">debajo de</span>
+                        </div>
                     </div>
-                    <div class="wechsel-item" onclick="openModal('vor')">
-                        <div style="display:flex; align-items:center; gap:6px;">VOR <img src="img/vor.png"
-                                style="height:40px;"></div>
-                        <span class="translation">delante de</span>
+                    <div class="wechsel-item" style="cursor: default; padding: 0;">
+                        <div onclick="speak('vor'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
+                            <div style="display:flex; align-items:center; justify-content: center; gap:6px;">VOR <img
+                                    src="img/vor.png" style="height:40px;"></div>
+                        </div>
+                        <div onclick="openModal('vor'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
+                            <span class="translation">delante de</span>
+                        </div>
                     </div>
-                    <div class="wechsel-item" onclick="openModal('zwischen')">
-                        <div style="display:flex; align-items:center; gap:6px;">ZWISCHEN <img src="img/zwischen.png"
-                                style="height:40px;"></div>
-                        <span class="translation">entre</span>
+                    <div class="wechsel-item" style="cursor: default; padding: 0;">
+                        <div onclick="speak('zwischen'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
+                            <div style="display:flex; align-items:center; justify-content: center; gap:6px;">ZWISCHEN
+                                <img src="img/zwischen.png" style="height:40px;">
+                            </div>
+                        </div>
+                        <div onclick="openModal('zwischen'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
+                            <span class="translation">entre</span>
+                        </div>
                     </div>
                 </div>
 
@@ -650,19 +745,76 @@
             <div class="column col-dat">
                 <h2>DATIV</h2>
                 <ul class="prep-list">
-                    <li class="prep-item" onclick="openModal('aus')">AUS<span class="example">De (salir) / Hecho
-                            de</span></li>
-                    <li class="prep-item" onclick="openModal('bei')">BEI<span class="example">en / junto a / al lado de
-                            / con</span></li>
-                    <li class="prep-item" onclick="openModal('mit')">MIT<span class="example">Con</span></li>
-                    <li class="prep-item" onclick="openModal('nach')">NACH<span class="example">Hacia / Después</span>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('aus'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            AUS
+                        </div>
+                        <div onclick="openModal('aus'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">De (salir) / Hecho de</span>
+                        </div>
                     </li>
-                    <li class="prep-item" onclick="openModal('seit')">SEIT<span class="example">Desde (tiempo)</span>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('bei'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            BEI
+                        </div>
+                        <div onclick="openModal('bei'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">en / junto a / al lado de / con</span>
+                        </div>
                     </li>
-                    <li class="prep-item" onclick="openModal('von')">VON<span class="example">De
-                            (origen/propiedad)</span></li>
-                    <li class="prep-item" onclick="openModal('zu')">ZU<span class="example">Hacia
-                            (lugares/personas)</span></li>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('mit'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            MIT
+                        </div>
+                        <div onclick="openModal('mit'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Con</span>
+                        </div>
+                    </li>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('nach'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            NACH
+                        </div>
+                        <div onclick="openModal('nach'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Hacia / Después</span>
+                        </div>
+                    </li>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('seit'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            SEIT
+                        </div>
+                        <div onclick="openModal('seit'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Desde (tiempo)</span>
+                        </div>
+                    </li>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('von'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            VON
+                        </div>
+                        <div onclick="openModal('von'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">De (origen/propiedad)</span>
+                        </div>
+                    </li>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('zu'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            ZU
+                        </div>
+                        <div onclick="openModal('zu'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Hacia (lugares/personas)</span>
+                        </div>
+                    </li>
                 </ul>
                 <div
                     style="background:#fdedec; padding:10px; border-radius:5px; font-size:0.9rem; text-align:center; margin-top:auto;">
@@ -675,22 +827,86 @@
             <div style="margin-bottom:15px; text-transform:uppercase; letter-spacing:1px; font-size:0.9rem;">Genitiv
                 (Toca para ver ejemplos)</div>
             <div class="gen-grid">
-                <div class="gen-item" onclick="openModal('während')"><span class="gen-de">WÄHREND</span><span
-                        class="gen-es">durante</span></div>
-                <div class="gen-item" onclick="openModal('wegen')"><span class="gen-de">WEGEN</span><span
-                        class="gen-es">por causa de</span></div>
-                <div class="gen-item" onclick="openModal('trotz')"><span class="gen-de">TROTZ</span><span
-                        class="gen-es">a pesar de</span></div>
-                <div class="gen-item" onclick="openModal('anstatt')"><span class="gen-de">ANSTATT</span><span
-                        class="gen-es">en vez de</span></div>
-                <div class="gen-item" onclick="openModal('außerhalb')"><span class="gen-de">AUßERHALB</span><span
-                        class="gen-es">fuera de</span></div>
-                <div class="gen-item" onclick="openModal('innerhalb')"><span class="gen-de">INNERHALB</span><span
-                        class="gen-es">dentro de</span></div>
-                <div class="gen-item" onclick="openModal('jenseits')"><span class="gen-de">JENSEITS</span><span
-                        class="gen-es">al otro lado de</span></div>
-                <div class="gen-item" onclick="openModal('aufgrund')"><span class="gen-de">AUFGRUND</span><span
-                        class="gen-es">debido a</span></div>
+                <div class="gen-item" style="cursor: default; padding: 0;">
+                    <div onclick="speak('während'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.3); text-align: center;">
+                        <span class="gen-de">WÄHREND</span>
+                    </div>
+                    <div onclick="openModal('während'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
+                        <span class="gen-es">durante</span>
+                    </div>
+                </div>
+                <div class="gen-item" style="cursor: default; padding: 0;">
+                    <div onclick="speak('wegen'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.3); text-align: center;">
+                        <span class="gen-de">WEGEN</span>
+                    </div>
+                    <div onclick="openModal('wegen'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
+                        <span class="gen-es">por causa de</span>
+                    </div>
+                </div>
+                <div class="gen-item" style="cursor: default; padding: 0;">
+                    <div onclick="speak('trotz'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.3); text-align: center;">
+                        <span class="gen-de">TROTZ</span>
+                    </div>
+                    <div onclick="openModal('trotz'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
+                        <span class="gen-es">a pesar de</span>
+                    </div>
+                </div>
+                <div class="gen-item" style="cursor: default; padding: 0;">
+                    <div onclick="speak('anstatt'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.3); text-align: center;">
+                        <span class="gen-de">ANSTATT</span>
+                    </div>
+                    <div onclick="openModal('anstatt'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
+                        <span class="gen-es">en vez de</span>
+                    </div>
+                </div>
+                <div class="gen-item" style="cursor: default; padding: 0;">
+                    <div onclick="speak('außerhalb'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.3); text-align: center;">
+                        <span class="gen-de">AUßERHALB</span>
+                    </div>
+                    <div onclick="openModal('außerhalb'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
+                        <span class="gen-es">fuera de</span>
+                    </div>
+                </div>
+                <div class="gen-item" style="cursor: default; padding: 0;">
+                    <div onclick="speak('innerhalb'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.3); text-align: center;">
+                        <span class="gen-de">INNERHALB</span>
+                    </div>
+                    <div onclick="openModal('innerhalb'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
+                        <span class="gen-es">dentro de</span>
+                    </div>
+                </div>
+                <div class="gen-item" style="cursor: default; padding: 0;">
+                    <div onclick="speak('jenseits'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.3); text-align: center;">
+                        <span class="gen-de">JENSEITS</span>
+                    </div>
+                    <div onclick="openModal('jenseits'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
+                        <span class="gen-es">al otro lado de</span>
+                    </div>
+                </div>
+                <div class="gen-item" style="cursor: default; padding: 0;">
+                    <div onclick="speak('aufgrund'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.3); text-align: center;">
+                        <span class="gen-de">AUFGRUND</span>
+                    </div>
+                    <div onclick="openModal('aufgrund'); event.stopPropagation()"
+                        style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
+                        <span class="gen-es">debido a</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -780,6 +996,18 @@
                     { de: 'Er lehnt sich gegen die Wand.', es: 'Él se apoya contra la pared.' }
                 ],
                 desc: 'Significa "contra" (impacto físico o oposición) o "hacia/alrededor de" (tiempo aproximado).'
+            },
+            'bis': {
+                title: 'BIS',
+                type: 'acc',
+                examples: [
+                    { de: 'Bis später!', es: '¡Hasta luego!' },
+                    { de: 'Der Zug fährt bis München.', es: 'El tren va hasta Múnich.' },
+                    { de: 'Wir bleiben bis Freitag.', es: 'Nos quedamos hasta el viernes.' },
+                    { de: 'Tschüss, bis bald!', es: 'Adiós, ¡hasta pronto!' },
+                    { de: 'Bis hier und nicht weiter.', es: 'Hasta aquí y no más allá.' }
+                ],
+                desc: 'Significa "hasta". Indica un límite temporal o espacial. A menudo se usa sin artículo o seguido de otra preposición (ej. bis zu, bis an).'
             },
 
             // DATIVE
