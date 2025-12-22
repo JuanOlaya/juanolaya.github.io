@@ -18,9 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
         'A1_2': { groupCount: 8, displayName: 'A1.2' },
         'A2_1': { groupCount: 9, displayName: 'A2.1' },
         'A2_2': { groupCount: 13, displayName: 'A2.2' },
-        'B1_1': { groupCount: 7, displayName: 'B1.1' }
+        'B1_1': { groupCount: 7, displayName: 'B1.1' },
+        'B2_1': { groupCount: 1, displayName: 'B2.1' }
     };
-    const levelOrder = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1'];
+    const levelOrder = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1', 'B2_1'];
 
     // Verbs that support Konjunktiv II
     const konjunktivVerbs = ['sein', 'haben', 'werden', 'dürfen', 'müssen', 'wollen', 'sollen', 'mögen', 'können'];
@@ -477,6 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (displayLevel === 'A2.1') levelIndicator.classList.add('level-a2-1');
         else if (displayLevel === 'A2.2') levelIndicator.classList.add('level-a2-2');
         else if (displayLevel === 'B1.1') levelIndicator.classList.add('level-b1-1');
+        else if (displayLevel === 'B2.1') levelIndicator.classList.add('level-b2-1');
 
         // Update group theme indicator
         const themeName = group.theme || 'Gruppe';
