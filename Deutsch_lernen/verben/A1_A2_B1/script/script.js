@@ -1729,9 +1729,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let wortfamilieItems = [];
         if (updatedData.wortfamilie && Array.isArray(updatedData.wortfamilie) && updatedData.wortfamilie.length > 0) {
-            wortfamilieItems = updatedData.wortfamilie.map(parseWordString);
-        } else if (wortfamilieData[verb] && wortfamilieData[verb].length > 0) {
-            wortfamilieItems = wortfamilieData[verb];
+            wortfamilieItems = updatedData.wortfamilie.map(item => {
+                if (typeof item === 'string') {
+                    return parseWordString(item);
+                }
+                return item;
+            });
         }
         renderStandardWordList(wortfamilieContainer, wortfamilieContent, wortfamilieItems);
 
@@ -1741,7 +1744,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let wortfeldItems = [];
         if (updatedData.wortfeld && Array.isArray(updatedData.wortfeld) && updatedData.wortfeld.length > 0) {
-            wortfeldItems = updatedData.wortfeld.map(parseWordString);
+            wortfeldItems = updatedData.wortfeld.map(item => {
+                if (typeof item === 'string') {
+                    return parseWordString(item);
+                }
+                return item;
+            });
         }
         renderStandardWordList(wortfeldContainer, wortfeldContent, wortfeldItems);
 
@@ -2194,7 +2202,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                                 // Search in Perfekt (German and Spanish)
                                 let perfektMatch = false;
-                                if (verbData.perfekt) {
+                                if (verbData.perfekt && typeof verbData.perfekt === 'string') {
                                     const perfektWords = verbData.perfekt.toLowerCase().split(' ');
                                     // Exclude auxiliary verbs "hat" and "ist" from search
                                     const filteredPerfektWords = perfektWords.filter(word => word !== 'hat' && word !== 'ist');
