@@ -1,86 +1,1189 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Die Uhrzeit - Deutsch Lernen</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>German Clock Infographic</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --accent-green: #34d399;
+            /* Nach 0-25 */
+            --accent-red: #f87171;
+            /* Vor 35-60 */
+            --accent-yellow: #fbbf24;
+            /* Halb Zone 25-35 */
+            --blue-highlight: #3b82f6;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 80px;
+            /* Space for footer */
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Language Toggle Logic */
+        body.mode-es .lang-en {
+            display: none !important;
+        }
+
+        body.mode-en .lang-es {
+            display: none !important;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background: #111827;
+            color: white;
+            padding: 24px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-yellow);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        /* Main Grid Layout */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            /* Desktop: 2 columns */
+            gap: 40px;
+            padding: 40px;
+        }
+
+        /* Responsive Switch */
+        @media (max-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+                padding: 20px;
+                gap: 30px;
+            }
+        }
+
+        /* The Clock Visual */
+        .clock-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .clock-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .clock-face {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            border: 12px solid #1f2937;
+            position: relative;
+            /* The Magic: Conic Gradient for Zones */
+            background: conic-gradient(var(--accent-green) 0deg 150deg,
+                    /* 0-25 min: Nach */
+                    var(--accent-yellow) 150deg 210deg,
+                    /* 25-35 min: Halb Zone */
+                    var(--accent-red) 210deg 360deg
+                    /* 35-60 min: Vor */
+                );
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .clock-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            background: #1f2937;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            border: 2px solid white;
+        }
+
+        /* Clock Numbers */
+        .clock-number {
+            position: absolute;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #1f2937;
+            transform: translate(-50%, -50%);
+        }
+
+        .num-12 {
+            top: 4%;
+            left: 50%;
+            color: white;
+        }
+
+        .num-6 {
+            bottom: 4%;
+            left: 50%;
+        }
+
+        .num-3 {
+            top: 50%;
+            right: 4%;
+            color: white;
+        }
+
+        .num-9 {
+            top: 50%;
+            left: 4%;
+            color: white;
+        }
+
+        /* Labels on Clock */
+        .label-zone {
+            position: absolute;
+            font-weight: 800;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .label-nach {
+            top: 30%;
+            right: 12%;
+            transform: rotate(15deg);
+        }
+
+        .label-vor {
+            top: 30%;
+            left: 20%;
+            transform: rotate(-15deg);
+        }
+
+        .label-halb {
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #1f2937;
+            text-shadow: none;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        /* Legend */
+        .legend {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        /* The Rules Section */
+        .rules-container h2 {
+            margin-top: 0;
+            color: #111827;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        .rule-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-left: 5px solid #1f2937;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .rule-card strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1.05rem;
+        }
+
+        .rule-card small {
+            display: block;
+            margin-top: 6px;
+            color: var(--text-muted);
+        }
+
+        .rule-card.warning {
+            border-left-color: var(--accent-red);
+            background: #fef2f2;
+        }
+
+        .rule-card.info {
+            border-left-color: var(--accent-yellow);
+            background: #fffbeb;
+        }
+
+        /* Data Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background-color: #f3f4f6;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        /* New Examples Section */
+        .examples-section {
+            background: #f9fafb;
+            padding: 30px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #111827;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+        }
+
+        /* Grid for cards */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            /* Stacks rows vertically */
+            gap: 24px;
+        }
+
+        /* Card Layout: Left Icon | Center Text | Right Clock */
+        .example-card {
+            background: #EFF6FF;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: row;
+            /* Horizontal Layout */
+            align-items: center;
+            /* Vertically Center Items */
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+            justify-content: space-between;
+            /* Ensures spacing if content is short */
+        }
+
+        .example-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Left: Icon */
+        .icon-wrapper {
+            font-size: 2.5rem;
+            background: #ffffff;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            color: var(--blue-highlight);
+            flex-shrink: 0;
+            /* Prevents shrinking */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Center: Text Content */
+        .card-content {
+            flex: 1;
+            /* Takes available space */
+            padding: 0 24px;
+            /* Space between icon and clock */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .example-card h3 {
+            margin: 0 0 6px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .example-sentence {
+            font-size: 1.2rem;
+            font-weight: 500;
+            font-style: italic;
+            margin: 0 0 8px 0;
+            color: #1f2937;
+            line-height: 1.4;
+        }
+
+        .breakdown {
+            font-size: 0.95rem;
+            color: #4b5563;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .highlight-phrase {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #1d4ed8;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* Right: Clock */
+        .mini-clock {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            border: 4px solid #e5e7eb;
+            border-radius: 50%;
+            background: white;
+            flex-shrink: 0;
+            /* Prevents shrinking */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .mini-hand-hour {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 20px;
+            background: #1f2937;
+            transform-origin: bottom center;
+            border-radius: 2px;
+            z-index: 2;
+        }
+
+        .mini-hand-min {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 30px;
+            background: var(--accent-red);
+            transform-origin: bottom center;
+            border-radius: 2px;
+            z-index: 1;
+        }
+
+        .mini-clock-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: #1f2937;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+
+        .mini-clock-label {
+            position: absolute;
+            width: 100%;
+            bottom: -25px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #1f2937;
+            font-weight: bold;
+        }
+
+        /* INTERACTIVE PLAYGROUND CSS */
+        .interactive-section {
+            background: #1f2937;
+            padding: 30px;
+            color: white;
+            border-top: 1px solid #374151;
+        }
+
+        .playground-card {
+            background: #374151;
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .pg-clock-container {
+            flex-shrink: 0;
+            width: 180px;
+            height: 180px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            border: 8px solid #4b5563;
+        }
+
+        /* Reusing hands but bigger */
+        .pg-hand-hour {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 50px;
+            background: #1f2937;
+            transform-origin: bottom center;
+            border-radius: 4px;
+            z-index: 2;
+            transition: transform 0.3s cubic-bezier(0.4, 2.08, 0.55, 0.44);
+        }
+
+        .pg-hand-min {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 75px;
+            background: #f87171;
+            transform-origin: bottom center;
+            border-radius: 4px;
+            z-index: 1;
+            transition: transform 0.3s cubic-bezier(0.4, 2.08, 0.55, 0.44);
+        }
+
+        .pg-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background: #1f2937;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+
+        .pg-controls {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .time-input {
+            background: #1f2937;
+            border: 2px solid #4b5563;
+            color: white;
+            font-size: 1.5rem;
+            padding: 10px;
+            border-radius: 8px;
+            width: 80px;
+            text-align: center;
+        }
+
+        .time-input:focus {
+            outline: none;
+            border-color: var(--blue-highlight);
+        }
+
+        .result-display {
+            background: #1f2937;
+            padding: 20px;
+            border-radius: 12px;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .result-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .result-text {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--accent-yellow);
+        }
+
+        /* Footer Controls */
+        .footer-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+        }
+
+        .lang-toggle-container {
+            display: flex;
+            background: #f3f4f6;
+            padding: 4px;
+            border-radius: 30px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .lang-btn {
+            padding: 8px 24px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            background: transparent;
+            color: #6b7280;
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: #1f2937;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .example-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .card-content {
+                padding: 20px 0;
+                align-items: center;
+            }
+
+            .icon-wrapper {
+                margin-bottom: 10px;
+            }
+
+            .mini-clock {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            body {
+                padding-bottom: 90px;
+            }
+
+            .playground-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .input-group {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 
-<body>
-    <header>
-        <a href="../scalable_deutsch.html" class="back-link">← Zurück</a>
-        <h1>Die Uhrzeit</h1>
-    </header>
+<body class="mode-es">
 
-    <main>
-        <div class="infographic-container">
-            <div class="clock-visualization">
-                <div class="clock-face">
-                    <div class="center-point"></div>
-                    <div class="hand hour-hand"></div>
-                    <div class="hand minute-hand"></div>
+    <div class="container">
+        <header>
+            <h1>
+                <span class="lang-es">La Hora en Alemán</span>
+                <span class="lang-en">German Time Telling</span>
+            </h1>
+            <p>
+                <span class="lang-es">Die Uhrzeit: Oficial vs. Coloquial</span>
+                <span class="lang-en">Die Uhrzeit: Official vs. Colloquial</span>
+            </p>
+        </header>
 
-                    <!-- Numbers -->
-                    <div class="marker num-12">12</div>
-                    <div class="marker num-3">3</div>
-                    <div class="marker num-6">6</div>
-                    <div class="marker num-9">9</div>
+        <div class="grid-layout">
 
-                    <!-- Regions (Visual aids) -->
-                    <div class="region-text text-vor">VOR</div>
-                    <div class="region-text text-nach">NACH</div>
+            <!-- Left Column: The Visual -->
+            <div class="clock-section">
+                <div class="clock-wrapper">
+                    <div class="clock-face">
+                        <div class="clock-center"></div>
 
-                    <!-- External Labels -->
-                    <div class="label-viertel-nach">Viertel nach</div>
-                    <div class="label-viertel-vor">Viertel vor</div>
-                    <div class="label-halb">Halb</div>
+                        <!-- Labels -->
+                        <span class="label-zone label-nach">
+                            NACH<br>
+                            <span style="font-size:0.75em; font-weight:normal;">
+                                <span class="lang-es">(Pasadas las)</span>
+                                <span class="lang-en">(Past)</span>
+                            </span>
+                        </span>
+                        <span class="label-zone label-vor">
+                            VOR<br>
+                            <span style="font-size:0.75em; font-weight:normal;">
+                                <span class="lang-es">(Para las)</span>
+                                <span class="lang-en">(To)</span>
+                            </span>
+                        </span>
+                        <span class="label-zone label-halb">
+                            <span class="lang-es">ZONA HALB<br>(La Media)</span>
+                            <span class="lang-en">HALB ZONE<br>(The Half)</span>
+                        </span>
+
+                        <!-- Reference Numbers -->
+                        <div class="clock-number num-12">12</div>
+                        <div class="clock-number num-3">3</div>
+                        <div class="clock-number num-6">6</div>
+                        <div class="clock-number num-9">9</div>
+                    </div>
                 </div>
-                <!-- Mobile only labels container (managed by CSS) -->
-                <div class="clock-labels"></div>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="dot" style="background: var(--accent-green)"></div>
+                        <span class="lang-es"><strong>Verde (0–20):</strong> usa "nach" (pasadas las)</span>
+                        <span class="lang-en"><strong>Green (0–20):</strong> use "nach" (past)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="dot" style="background: var(--accent-yellow)"></div>
+                        <span class="lang-es"><strong>Amarillo (20–40):</strong> alrededor de la media</span>
+                        <span class="lang-en"><strong>Yellow (20–40):</strong> around the half</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="dot" style="background: var(--accent-red)"></div>
+                        <span class="lang-es"><strong>Rojo (40–60):</strong> usa "vor" (para las)</span>
+                        <span class="lang-en"><strong>Red (40–60):</strong> use "vor" (to)</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="examples-section">
-                <h2>Beispiele (A1)</h2>
+            <!-- Right Column: The Rules -->
+            <div class="rules-container">
+                <h2>
+                    <span class="lang-es">Las Reglas de Oro</span>
+                    <span class="lang-en">The Golden Rules</span>
+                </h2>
 
-                <div class="example-card">
-                    <span class="german-sentence">Wie spät ist es?</span>
-                    <span class="translation">What time is it?</span>
+                <div class="rule-card">
+                    <strong>
+                        <span class="lang-es">1. La Regla "Uhr" (Horas en punto)</span>
+                        <span class="lang-en">1. The "Uhr" Rule (Full Hours)</span>
+                    </strong>
+                    <span class="lang-es">Fórmula: <em>[Hora] + Uhr</em></span>
+                    <span class="lang-en">Formula: <em>[Hour] + Uhr</em></span>
+                    <small>8:00 = <em>Acht Uhr</em></small>
                 </div>
 
-                <div class="example-card">
-                    <span class="german-sentence">Es ist jetzt Viertel nach zwei.</span>
-                    <span class="translation">It is now a quarter past two.</span>
+                <div class="rule-card warning">
+                    <strong>
+                        <span class="lang-es">2. La Lógica "Halb" ⚠️</span>
+                        <span class="lang-en">2. The "Halb" Logic ⚠️</span>
+                    </strong>
+                    <span class="lang-es">"Halb" significa a mitad de camino <strong>DE</strong> la siguiente
+                        hora.</span>
+                    <span class="lang-en">"Halb" means halfway <strong>TO</strong> the next hour.</span>
+                    <small>8:30 = <em>Halb neun</em> (<span class="lang-es">NO "Halb acht"</span><span
+                            class="lang-en">NOT "Halb acht"</span>)</small>
                 </div>
 
-                <div class="example-card">
-                    <span class="german-sentence">Lisas Zug kommt nach halb eins an.</span>
-                    <span class="translation">Lisa's train arrives after half past twelve.</span>
+                <div class="rule-card info">
+                    <strong>
+                        <span class="lang-es">3. Matemática de Minutos</span>
+                        <span class="lang-en">3. The "Minute Math"</span>
+                    </strong>
+                    <span class="lang-es">Alrededor de la media hora (20-40), referencia la media.</span>
+                    <span class="lang-en">Around the half hour (20-40), reference the half.</span>
+                    <small>
+                        8:25 = <em>Fünf vor halb neun</em><br>
+                        8:35 = <em>Fünf nach halb neun</em>
+                    </small>
                 </div>
 
-                <div class="example-card">
-                    <span class="german-sentence">Der Film beginnt um acht Uhr.</span>
-                    <span class="translation">The movie starts at eight o'clock.</span>
-                </div>
-            </div>
-
-            <div class="examples-section">
-                <h2>Wichtige Regeln</h2>
-                <ul>
-                    <li><strong>Halb:</strong> "Halb" refers to the <em>next</em> hour. <br><em>Halb drei</em> = 2:30.
-                    </li>
-                    <li><strong>Viertel:</strong> "Viertel nach" (quarter past) vs "Viertel vor" (quarter to).</li>
-                    <li><strong>Ofﬁziell vs. Inoffiziell:</strong>
-                        <ul>
-                            <li>Offiziell (24h): 14:15 = "vierzehn Uhr fünfzehn"</li>
-                            <li>Inoffiziell (12h): 14:15 = "Viertel nach zwei"</li>
-                        </ul>
-                    </li>
-                </ul>
+                <table>
+                    <tr>
+                        <th>
+                            <span class="lang-es">Hora</span>
+                            <span class="lang-en">Time</span>
+                        </th>
+                        <th>
+                            <span class="lang-es">Coloquial (Hablado)</span>
+                            <span class="lang-en">Colloquial (Spoken)</span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>8:15</td>
+                        <td>Viertel nach acht</td>
+                    </tr>
+                    <tr>
+                        <td>8:30</td>
+                        <td><strong>Halb neun</strong> (+1 h)</td>
+                    </tr>
+                    <tr>
+                        <td>8:45</td>
+                        <td>Viertel vor neun</td>
+                    </tr>
+                </table>
             </div>
         </div>
-    </main>
+
+        <!-- Examples Section with Cards -->
+        <div class="examples-section">
+            <h2 class="section-title">
+                <span class="lang-es">Ejemplos de Contexto</span>
+                <span class="lang-en">Context Examples</span>
+            </h2>
+
+            <div class="examples-grid">
+
+                <!-- Basic Uhr Example -->
+                <div class="example-card">
+                    <div class="icon-wrapper" style="color: #4b5563;">⏰</div>
+                    <div class="card-content">
+                        <h3>
+                            <span class="lang-es">Básico "Uhr" (En punto)</span>
+                            <span class="lang-en">Basic "Uhr" (O'clock)</span>
+                        </h3>
+                        <p class="example-sentence">"Der Unterricht beginnt um <span class="highlight-phrase"
+                                style="color: #1f2937; background: #e5e7eb;">acht Uhr</span>."</p>
+                        <div class="breakdown">
+                            <span class="lang-es"><strong>Lógica:</strong> Hora exacta.<br><strong>Hora:</strong>
+                                08:00</span>
+                            <span class="lang-en"><strong>Logic:</strong> Exact hour.<br><strong>Target:</strong>
+                                08:00</span>
+                        </div>
+                    </div>
+                    <!-- Clock: 8:00 (Dark Border) -->
+                    <div class="mini-clock" style="border-color: #4b5563;">
+                        <div class="mini-clock-center"></div>
+                        <div class="mini-hand-hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                        <div class="mini-hand-min" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                        <div class="mini-clock-label">08:00</div>
+                    </div>
+                </div>
+
+                <!-- Basic Nach Example -->
+                <div class="example-card">
+                    <div class="icon-wrapper" style="color: var(--accent-green);">☕</div>
+                    <div class="card-content">
+                        <h3>
+                            <span class="lang-es">Básico "Nach" (Pasadas las)</span>
+                            <span class="lang-en">Basic "Nach" (Past)</span>
+                        </h3>
+                        <p class="example-sentence">"Die Pause ist um <span class="highlight-phrase"
+                                style="color: var(--accent-green); background: #ecfdf5;">zwanzig nach vier</span>."</p>
+                        <div class="breakdown">
+                            <span class="lang-es"><strong>Lógica:</strong> Pasadas las...<br><strong>Hora:</strong>
+                                04:20</span>
+                            <span class="lang-en"><strong>Logic:</strong> Simple past tense.<br><strong>Target:</strong>
+                                04:20</span>
+                        </div>
+                    </div>
+                    <div class="mini-clock" style="border-color: var(--accent-green);">
+                        <div class="mini-clock-center"></div>
+                        <div class="mini-hand-hour" style="transform: translate(-50%, -100%) rotate(130deg);"></div>
+                        <div class="mini-hand-min" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                        <div class="mini-clock-label">04:20</div>
+                    </div>
+                </div>
+
+                <!-- Basic Vor Example (Updated to Viertel) -->
+                <div class="example-card">
+                    <div class="icon-wrapper" style="color: var(--accent-red);">🎬</div>
+                    <div class="card-content">
+                        <h3>
+                            <span class="lang-es">Uso de "Viertel" (Cuarto)</span>
+                            <span class="lang-en">Using "Viertel" (Quarter)</span>
+                        </h3>
+                        <p class="example-sentence">"Der Film beginnt um <span class="highlight-phrase"
+                                style="color: var(--accent-red); background: #fef2f2;">Viertel vor elf</span>."</p>
+                        <div class="breakdown">
+                            <span class="lang-es"><strong>Lógica:</strong> Cuarto para las...<br><strong>Hora:</strong>
+                                10:45</span>
+                            <span class="lang-en"><strong>Logic:</strong> Quarter to...<br><strong>Target:</strong>
+                                10:45</span>
+                        </div>
+                    </div>
+                    <div class="mini-clock" style="border-color: var(--accent-red);">
+                        <div class="mini-clock-center"></div>
+                        <div class="mini-hand-hour" style="transform: translate(-50%, -100%) rotate(322.5deg);"></div>
+                        <div class="mini-hand-min" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                        <div class="mini-clock-label">10:45</div>
+                    </div>
+                </div>
+
+                <!-- Travel Example -->
+                <div class="example-card">
+                    <div class="icon-wrapper">🚆</div>
+                    <div class="card-content">
+                        <h3>
+                            <span class="lang-es">Viajes (Comprensión Lectora)</span>
+                            <span class="lang-en">Travel (Reading Comprehension)</span>
+                        </h3>
+                        <p class="example-sentence">"Lis Zug kommt <span class="highlight-phrase">nach halb eins</span>
+                            an."</p>
+                        <div class="breakdown">
+                            <span class="lang-es">
+                                <strong>El texto dice:</strong> 12:36<br>
+                                <strong>Lógica:</strong> 12:36 es <em>después de</em> 12:30 (halb eins).<br>
+                                <strong>Respuesta:</strong> Richtig (Verdadero) ✅
+                            </span>
+                            <span class="lang-en">
+                                <strong>Text says:</strong> 12:36<br>
+                                <strong>Logic:</strong> 12:36 is <em>after</em> 12:30 (halb eins).<br>
+                                <strong>Answer:</strong> Richtig (True) ✅
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mini-clock" style="border-color: #3B82F6;">
+                        <div class="mini-clock-center"></div>
+                        <div class="mini-hand-hour" style="transform: translate(-50%, -100%) rotate(15deg);"></div>
+                        <div class="mini-hand-min" style="transform: translate(-50%, -100%) rotate(216deg);"></div>
+                        <div class="mini-clock-label">12:36</div>
+                    </div>
+                </div>
+
+                <!-- Social Example -->
+                <div class="example-card">
+                    <div class="icon-wrapper" style="color: #d97706; background: #fffbeb;">🍽️</div>
+                    <div class="card-content">
+                        <h3>Social</h3>
+                        <p class="example-sentence">"Wir essen um <span class="highlight-phrase"
+                                style="color:#d97706; background:rgba(251, 191, 36, 0.15)">fünf vor halb sieben</span>."
+                        </p>
+                        <div class="breakdown">
+                            <span class="lang-es">
+                                <strong>Lógica:</strong> "Halb sieben" son las 6:30.<br>
+                                <strong>Cálculo:</strong> 6:30 menos 5 minutos.<br>
+                                <strong>Hora:</strong> 6:25
+                            </span>
+                            <span class="lang-en">
+                                <strong>Logic:</strong> "Halb sieben" is 6:30.<br>
+                                <strong>Calculation:</strong> 6:30 minus 5 minutes.<br>
+                                <strong>Target:</strong> 6:25
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mini-clock" style="border-color: var(--accent-yellow);">
+                        <div class="mini-clock-center"></div>
+                        <div class="mini-hand-hour" style="transform: translate(-50%, -100%) rotate(195deg);"></div>
+                        <div class="mini-hand-min" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                        <div class="mini-clock-label">06:25</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Interactive Playground Section -->
+        <div class="interactive-section">
+            <h2 class="section-title" style="color: white; margin-bottom: 30px;">
+                <span class="lang-es">Zona Interactiva: ¡Pruébalo!</span>
+                <span class="lang-en">Interactive Zone: Test Yourself!</span>
+            </h2>
+
+            <div class="playground-card">
+                <!-- Left: Big Dynamic Clock -->
+                <div class="pg-clock-container">
+                    <div class="pg-center"></div>
+                    <!-- Numbers simplified -->
+                    <div
+                        style="position:absolute; top:5px; left:50%; transform:translateX(-50%); font-weight:bold; color:#333;">
+                        12</div>
+                    <div
+                        style="position:absolute; bottom:5px; left:50%; transform:translateX(-50%); font-weight:bold; color:#333;">
+                        6</div>
+                    <div
+                        style="position:absolute; top:50%; right:5px; transform:translateY(-50%); font-weight:bold; color:#333;">
+                        3</div>
+                    <div
+                        style="position:absolute; top:50%; left:5px; transform:translateY(-50%); font-weight:bold; color:#333;">
+                        9</div>
+
+                    <div id="pg-hand-hour" class="pg-hand-hour"></div>
+                    <div id="pg-hand-min" class="pg-hand-min"></div>
+                </div>
+
+                <!-- Right: Controls & Output -->
+                <div class="pg-controls">
+
+                    <!-- Inputs Top Right -->
+                    <div class="input-group">
+                        <div>
+                            <label style="display:block; font-size:0.8rem; margin-bottom:5px; color:#9ca3af;">
+                                <span class="lang-es">HORA</span><span class="lang-en">HOUR</span>
+                            </label>
+                            <input type="number" id="input-hour" class="time-input" min="0" max="23" value="10"
+                                oninput="updatePlayground()">
+                        </div>
+                        <div style="font-size: 2rem; align-self: flex-end; margin-bottom: 10px;">:</div>
+                        <div>
+                            <label style="display:block; font-size:0.8rem; margin-bottom:5px; color:#9ca3af;">
+                                <span class="lang-es">MIN</span><span class="lang-en">MIN</span>
+                            </label>
+                            <input type="number" id="input-min" class="time-input" min="0" max="59" value="24"
+                                oninput="updatePlayground()">
+                        </div>
+                    </div>
+
+                    <!-- Result Bottom Right -->
+                    <div class="result-display">
+                        <div class="result-label">
+                            <span class="lang-es">En Alemán Coloquial:</span>
+                            <span class="lang-en">In Colloquial German:</span>
+                        </div>
+                        <div id="result-text" class="result-text">Sechs vor halb elf</div>
+
+                        <!-- NEW: LatAm Section added -->
+                        <div class="latam-section"
+                            style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #374151;">
+                            <div class="result-label" style="color: #60a5fa;">
+                                <span class="lang-es">En Latinoamérica (Coloquial):</span>
+                                <span class="lang-en">In Latin America (Colloquial):</span>
+                            </div>
+                            <div id="latam-text" class="result-text" style="color: #93c5fd; font-size: 1.4rem;">Seis
+                                para las diez y media</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-controls">
+        <div class="lang-toggle-container">
+            <button class="lang-btn active" id="btn-es" onclick="setLanguage('es')">Español</button>
+            <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">English</button>
+        </div>
+    </div>
+
+    <script>
+        function setLanguage(lang) {
+            // Toggle body class
+            document.body.classList.remove('mode-es', 'mode-en');
+            document.body.classList.add('mode-' + lang);
+
+            // Toggle button states
+            document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        }
+
+        // Number to German Word Map (Simplified for 1-12)
+        const numbers = {
+            1: 'eins', 2: 'zwei', 3: 'drei', 4: 'vier', 5: 'fünf',
+            6: 'sechs', 7: 'sieben', 8: 'acht', 9: 'neun', 10: 'zehn',
+            11: 'elf', 12: 'zwölf'
+        };
+
+        // --- SPANISH NUMBERS HELPER ---
+        const esNumbers = {
+            1: 'una', 2: 'dos', 3: 'tres', 4: 'cuatro', 5: 'cinco',
+            6: 'seis', 7: 'siete', 8: 'ocho', 9: 'nueve', 10: 'diez',
+            11: 'once', 12: 'doce', 20: 'veinte', 25: 'veinticinco'
+        };
+
+        // Helper function for numbers 0-29 in Spanish
+        function getEsNum(n) {
+            const basic = ["cero", "un", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez",
+                "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte",
+                "veintiuno", "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"];
+            return basic[n] || n;
+        }
+
+        function getGermanHour(h) {
+            // Convert 0-23 to 1-12 format for colloquial speech
+            let hour = h % 12;
+            if (hour === 0) hour = 12;
+            return numbers[hour];
+        }
+
+        // Function to handle next hour logic (circular 12)
+        function getNextHour(h) {
+            let hour = (h + 1) % 12;
+            if (hour === 0) hour = 12;
+            return numbers[hour];
+        }
+
+        function updatePlayground() {
+            let hInput = document.getElementById('input-hour').value;
+            let mInput = document.getElementById('input-min').value;
+
+            // Validation
+            if (hInput === '') hInput = 0;
+            if (mInput === '') mInput = 0;
+
+            let h = parseInt(hInput);
+            let m = parseInt(mInput);
+
+            // Clamp values
+            if (h > 23) h = 23; if (h < 0) h = 0;
+            if (m > 59) m = 59; if (m < 0) m = 0;
+
+            // Update Hands
+            const hourDeg = (h % 12) * 30 + (m / 60) * 30; // 30deg per hour + fraction
+            const minDeg = m * 6; // 6deg per minute
+
+            document.getElementById('pg-hand-hour').style.transform = `translate(-50%, -100%) rotate(${hourDeg}deg)`;
+            document.getElementById('pg-hand-min').style.transform = `translate(-50%, -100%) rotate(${minDeg}deg)`;
+
+            // --- GERMAN TEXT LOGIC ---
+            let text = "";
+
+            let currentHourWord = getGermanHour(h);
+            if (currentHourWord === 'eins' && m === 0) currentHourWord = 'ein';
+
+            if (m === 0) {
+                text = `${currentHourWord} Uhr`;
+            } else if (m === 15) {
+                text = `Viertel nach ${getGermanHour(h)}`;
+            } else if (m === 30) {
+                text = `Halb ${getNextHour(h)}`;
+            } else if (m === 45) {
+                text = `Viertel vor ${getNextHour(h)}`;
+            }
+            else if (m > 20 && m < 30) {
+                let diff = 30 - m;
+                let minWord = numbers[diff] || diff;
+                text = `${minWord} vor halb ${getNextHour(h)}`;
+            } else if (m > 30 && m < 40) {
+                let diff = m - 30;
+                let minWord = numbers[diff] || diff;
+                text = `${minWord} nach halb ${getNextHour(h)}`;
+            }
+            else if (m <= 20) {
+                let minWord = numbers[m] || m;
+                text = `${minWord} nach ${getGermanHour(h)}`;
+            }
+            else if (m >= 40) {
+                let diff = 60 - m;
+                let minWord = numbers[diff] || diff;
+                text = `${minWord} vor ${getNextHour(h)}`;
+            }
+
+            text = text.charAt(0).toUpperCase() + text.slice(1);
+            document.getElementById('result-text').innerText = text;
+
+            // --- LATAM LOGIC (UPDATED FOR VOR=PARA RULE) ---
+            let latamText = "";
+            let h12 = h % 12 || 12;
+            let esHour = (h12 === 1) ? "una" : esNumbers[h12];
+            let nextH12 = (h + 1) % 12 || 12;
+            let nextEsHour = (nextH12 === 1) ? "una" : esNumbers[nextH12];
+
+            // Articles & Prefixes
+            let prefixCurrent = (h12 === 1) ? "Es la" : "Son las";
+            let articleCurrent = (h12 === 1) ? "la" : "las";
+            let prefixNext = (nextH12 === 1) ? "la" : "las";
+
+            if (m === 0) {
+                latamText = `${prefixCurrent} ${esHour} en punto`;
+            } else if (m === 15) {
+                latamText = `${prefixCurrent} ${esHour} y cuarto`;
+            } else if (m === 30) {
+                latamText = `${prefixCurrent} ${esHour} y media`;
+            }
+            // NEW: "Around the half" zone logic to match VOR/NACH relative to Half
+            else if (m > 20 && m < 30) {
+                // German uses "VOR HALB" -> Spanish "PARA LA MEDIA"
+                // Ex: 10:24 -> 6 para las 10 y media
+                let diff = 30 - m;
+                let diffWord = getEsNum(diff);
+                latamText = `${diffWord} para ${articleCurrent} ${esHour} y media`;
+            }
+            else if (m > 30 && m < 40) {
+                // German uses "NACH HALB" -> Spanish "PASADAS LA MEDIA"
+                // Ex: 10:36 -> 6 pasadas las 10 y media
+                let diff = m - 30;
+                let diffWord = getEsNum(diff);
+                latamText = `${diffWord} pasadas ${articleCurrent} ${esHour} y media`;
+            }
+            // Standard "Nach" zone
+            else if (m <= 20) {
+                let mWord = getEsNum(m);
+                latamText = `${mWord} pasadas ${articleCurrent} ${esHour}`;
+            }
+            // Standard "Vor" zone
+            else if (m >= 40) {
+                let diff = 60 - m;
+                let diffWord = (diff === 15) ? "un cuarto" : getEsNum(diff);
+                latamText = `${diffWord} para ${prefixNext} ${nextEsHour}`;
+            }
+
+            latamText = latamText.charAt(0).toUpperCase() + latamText.slice(1);
+            document.getElementById('latam-text').innerText = latamText;
+        }
+
+        // Initialize
+        updatePlayground();
+
+    </script>
+
 </body>
 
 </html>
