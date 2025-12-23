@@ -1,0 +1,244 @@
+:root {
+    --primary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --bg-color: #f5f7fa;
+    --clock-bg: #ffffff;
+    --clock-border: #34495e;
+    --highlight-nach: #27ae60;
+    --highlight-vor: #c0392b;
+    --text-color: #333;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 300;
+}
+
+.back-link {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.infographic-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.clock-face {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: var(--clock-bg);
+    border: 10px solid var(--clock-border);
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.center-point {
+    width: 15px;
+    height: 15px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    border-radius: 5px;
+    z-index: 5;
+}
+
+.hour-hand {
+    width: 6px;
+    height: 80px;
+    background-color: var(--primary-color);
+    transform: translateX(-50%) rotate(45deg);
+    /* Example position */
+}
+
+.minute-hand {
+    width: 4px;
+    height: 120px;
+    background-color: var(--accent-color);
+    transform: translateX(-50%) rotate(0deg);
+    /* Example position */
+}
+
+.marker {
+    position: absolute;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    transform: translate(-50%, -50%);
+}
+
+/* Positioning numbers */
+.num-12 {
+    top: 10%;
+    left: 50%;
+}
+
+.num-3 {
+    top: 50%;
+    left: 90%;
+}
+
+.num-6 {
+    top: 90%;
+    left: 50%;
+}
+
+.num-9 {
+    top: 50%;
+    left: 10%;
+}
+
+.region-text {
+    position: absolute;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+.text-vor {
+    color: var(--highlight-vor);
+    top: 35%;
+    left: 25%;
+    transform: rotate(-30deg);
+}
+
+.text-nach {
+    color: var(--highlight-nach);
+    top: 35%;
+    right: 25%;
+    transform: rotate(30deg);
+}
+
+.label-viertel-nach {
+    position: absolute;
+    top: 50%;
+    right: -60px;
+    transform: translateY(-50%);
+    background: var(--highlight-nach);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.label-viertel-vor {
+    position: absolute;
+    top: 50%;
+    left: -60px;
+    transform: translateY(-50%);
+    background: var(--highlight-vor);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.label-halb {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.examples-section {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-top: 2rem;
+}
+
+.examples-section h2 {
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.example-card {
+    background-color: #f9f9f9;
+    border-left: 4px solid var(--accent-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.german-sentence {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.translation {
+    color: #666;
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .clock-face {
+        width: 250px;
+        height: 250px;
+    }
+
+    .label-viertel-nach,
+    .label-viertel-vor {
+        position: static;
+        transform: none;
+        margin: 10px;
+        display: inline-block;
+    }
+
+    .clock-labels {
+        text-align: center;
+        margin-top: 1rem;
+    }
+}

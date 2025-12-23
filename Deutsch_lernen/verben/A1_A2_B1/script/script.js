@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- GLOBAL STATE ---
-    const allVerbsData = {};
-    let verbGroupsByLevel = {}; // Groups organized by level
-    let wortfamilieData = {}; // Word family data
+    let allVerbsData = {}; // Global Data Containers
+    let verbGroupsByLevel = {}; // Global Data Containers
+    // let wortfamilieData = {}; // Removed: Loaded dynamically
     let verbTypesData = {}; // Verb types and notes data
     const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "Zwölfte", "Dreizehnte"];
     const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes", "Sechstes", "Siebtes", "Achtes"];
@@ -181,16 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return Promise.all(conjugationPromises).then(() => {
                     console.log('Conjugation data pre-loaded! Search will be fast.');
 
-                    // Load Wortfamilie data and Verb types data
-                    const wortfamiliePromise = fetch('json/wortfamilie_kompakt.json')
-                        .then(res => res.ok ? res.json() : {})
-                        .then(data => {
-                            wortfamilieData = data.verbs || {};
-                        })
-                        .catch(error => {
-                            console.warn('Failed to load Wortfamilie data:', error);
-                            wortfamilieData = {};
-                        });
 
                     const verbTypesPromise = fetch('json/verb_types.json')
                         .then(res => res.ok ? res.json() : {})
@@ -202,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             verbTypesData = {};
                         });
 
-                    return Promise.all([wortfamiliePromise, verbTypesPromise]);
+                    return verbTypesPromise;
                 });
             });
         });
@@ -1385,12 +1375,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const perfektKonjugationPromise = fetch(`json/perfekt_konjugation/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
                 const praeteritumKonjugationPromise = fetch(`json/praeteritum_konjugation/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
 
+                const wortfamiliePromise = fetch(`json/wortfamilie/${verb}.json`).then(res => res.ok ? res.json() : { wortfamilie: [] }).catch(() => ({ wortfamilie: [] }));
+
                 // Add Konjunktiv II data fetch for specific verbs
                 const konjunktivPromise = konjunktivVerbs.includes(verb)
                     ? fetch(`json/konjunktiv_ii/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
                     : Promise.resolve({});
 
-                const [praesensData, perfektData, fragenData, perfektKonjugationData, praeteritumKonjugationData, konjunktivData] = await Promise.all([praesensPromise, perfektPromise, fragenPromise, perfektKonjugationPromise, praeteritumKonjugationPromise, konjunktivPromise]);
+                const [praesensData, perfektData, fragenData, perfektKonjugationData, praeteritumKonjugationData, konjunktivData, wortfamilieData] = await Promise.all([praesensPromise, perfektPromise, fragenPromise, perfektKonjugationPromise, praeteritumKonjugationPromise, konjunktivPromise, wortfamiliePromise]);
 
                 // Rename praeteritum from konjugation data to avoid conflict with card praeteritum string
                 if (praeteritumKonjugationData.praeteritum) {
@@ -1399,6 +1391,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Merge the loaded data into allVerbsData
+                // IMPORTANT: merged "wortfamilie" into data.wortfamilie property
                 allVerbsData[verb] = {
                     ...data,
                     ...praesensData,
@@ -1406,7 +1399,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     ...perfektKonjugationData,
                     ...praeteritumKonjugationData,
                     ...konjunktivData,
-                    examples: perfektData
+                    examples: perfektData,
+                    wortfamilie: wortfamilieData.wortfamilie || [] // Ensure it's the array
                 };
             } catch (error) {
                 console.error(`Failed to load modal data for ${verb}:`, error);
