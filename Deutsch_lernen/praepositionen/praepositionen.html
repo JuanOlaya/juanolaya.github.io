@@ -756,6 +756,16 @@
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('am'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            AM
+                        </div>
+                        <div onclick="openModal('am'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">En (días/lugares)</span>
+                        </div>
+                    </li>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
                         <div onclick="speak('aus'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
                             AUS
@@ -1032,6 +1042,18 @@
                     { de: 'Das gilt ab sofort.', es: 'Eso vale a partir de ya (inmediatamente).' }
                 ],
                 desc: 'Indica un punto de inicio en el tiempo (futuro) o lugar. Significa "desde" o "a partir de".'
+            },
+            'am': {
+                title: 'AM',
+                type: 'dat',
+                examples: [
+                    { de: 'Am Morgen trinke ich Kaffee.', es: 'Por la mañana bebo café.' },
+                    { de: 'Wir treffen uns am Kino.', es: 'Nos encontramos en (junto al) el cine.' },
+                    { de: 'Am Wochenende habe ich frei.', es: 'El fin de semana tengo libre.' },
+                    { de: 'Er sitzt am Tisch.', es: 'Él está sentado a la mesa.' },
+                    { de: 'Am Montag gehe ich arbeiten.', es: 'El lunes voy a trabajar.' }
+                ],
+                desc: 'Contracción de <strong>an + dem</strong>. Se usa para días ("am Montag"), partes del día ("am Abend") y lugares específicos ("am Bahnhof").'
             },
             'aus': {
                 title: 'AUS',
