@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pronombres de Cantidad en Alemán</title>
+    <style>
+        :root {
+            /* --- DEFAULT DARK MODE PALETTE --- */
+            --bg-color: #0f172a;
+            /* Slate 900 */
+            --card-bg: #1e293b;
+            /* Slate 800 */
+            --header-bg: #020617;
+            /* Slate 950 */
+            --section-bg: #0f172a;
+            /* Slate 900 */
+
+            --text-main: #f1f5f9;
+            /* Slate 100 */
+            --text-muted: #94a3b8;
+            /* Slate 400 */
+            --border-color: #334155;
+            /* Slate 700 */
+
+            /* LEVEL COLORS */
+            --level-a1: #3b82f6;
+            /* 🟦 Blue */
+            --level-a2: #eab308;
+            /* 🟨 Yellow */
+            --level-b1: #f97316;
+            /* 🟧 Orange */
+            --level-b2: #ef4444;
+            /* 🟥 Red */
+
+            --accent-green: #00FFA1;
+            /* Main Accent */
+
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glow-strength: 20px;
+
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* --- LIGHT MODE OVERRIDES --- */
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            /* Slate 100 */
+            --card-bg: #ffffff;
+            /* White */
+            --header-bg: #ffffff;
+            /* White */
+            --section-bg: #e2e8f0;
+            /* Slate 200 */
+
+            --text-main: #1e293b;
+            /* Slate 800 */
+            --text-muted: #64748b;
+            /* Slate 500 */
+            --border-color: #cbd5e1;
+            /* Slate 300 */
+
+            /* DARKER ACCENTS FOR VISIBILITY */
+            --level-a1: #2563eb;
+            --level-a2: #ca8a04;
+            --level-b1: #ea580c;
+            --level-b2: #dc2626;
+
+            --accent-green: #059669;
+
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --glow-strength: 0px;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 80px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Header */
+        header {
+            background: var(--header-bg);
+            color: var(--text-main);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-green);
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Theme Toggle (Top Right) */
+        .theme-toggle-wrapper {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .theme-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px var(--shadow-color);
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-green);
+        }
+
+        body:not(.light-mode) .icon-sun {
+            display: block;
+        }
+
+        body:not(.light-mode) .icon-moon {
+            display: none;
+        }
+
+        body.light-mode .icon-sun {
+            display: none;
+        }
+
+        body.light-mode .icon-moon {
+            display: block;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: var(--accent-green);
+            text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.3);
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- UPDATED: THERMOMETER SECTION --- */
+        .quantity-scale-section {
+            padding: 30px 40px 80px 40px;
+            background: var(--section-bg);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .scale-bar {
+            flex-grow: 1;
+            height: 8px;
+            background: linear-gradient(90deg, var(--level-b2), var(--level-a2), var(--accent-green));
+            border-radius: 5px;
+            position: relative;
+            margin: 0 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .scale-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* Markers styled with translation */
+        .marker {
+            position: absolute;
+            top: 20px;
+            transform: translateX(-50%);
+            font-size: 0.85rem;
+            color: var(--text-main);
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.3;
+            white-space: nowrap;
+        }
+
+        .marker .trans {
+            color: var(--accent-green);
+            font-size: 0.75rem;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .marker .percent {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: normal;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .marker::after {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 8px;
+            background: var(--text-main);
+            opacity: 0.3;
+        }
+
+        /* Rule Section */
+        .rule-section {
+            padding: 30px 40px 50px 40px;
+            background: var(--section-bg);
+            border-top: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .rule-section {
+                grid-template-columns: 1fr;
+            }
+
+            .quantity-scale-section {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 40px;
+                padding-top: 40px;
+                padding-bottom: 100px;
+            }
+
+            .scale-bar {
+                margin: 0 5px;
+            }
+        }
+
+        .rule-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 6px solid var(--accent-green);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        /* NEW: Class for full-width card */
+        .rule-card.full-width {
+            grid-column: 1 / -1;
+            border-left-color: var(--level-a2);
+            /* Yellow warning color */
+        }
+
+        .rule-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--accent-green);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rule-content {
+            font-size: 1rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .rule-example {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(0, 255, 161, 0.05);
+            border-radius: 6px;
+            font-family: monospace;
+            border: 1px dashed var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .rule-example strong {
+            color: var(--text-main);
+        }
+
+        /* New Table for Declension in rule card */
+        .declension-table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .declension-table th {
+            text-align: left;
+            color: var(--level-a2);
+            padding: 5px;
+            border-bottom: 1px solid var(--border-color);
+            background: transparent;
+        }
+
+        .declension-table td {
+            padding: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .declension-table td strong {
+            color: var(--accent-green);
+        }
+
+        /* Grid Layout for Levels */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+            background: var(--bg-color);
+        }
+
+        @media (max-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+
+        /* Level Card */
+        .level-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 15px -3px var(--shadow-color);
+            transition: transform 0.2s;
+        }
+
+        .level-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .level-header {
+            padding: 15px 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .level-header.a1 {
+            background: var(--level-a1);
+            box-shadow: 0 0 var(--glow-strength) var(--level-a1);
+        }
+
+        .level-header.a2 {
+            background: var(--level-a2);
+            box-shadow: 0 0 var(--glow-strength) var(--level-a2);
+        }
+
+        .level-header.b1 {
+            background: var(--level-b1);
+            box-shadow: 0 0 var(--glow-strength) var(--level-b1);
+        }
+
+        .level-header.b2 {
+            background: var(--level-b2);
+            box-shadow: 0 0 var(--glow-strength) var(--level-b2);
+        }
+
+        .level-content {
+            padding: 0;
+        }
+
+        /* Tables inside cards */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 15px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Updated German Word Style for Audio Interaction */
+        .german-word {
+            font-weight: 700;
+            color: var(--accent-green);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.1s ease, color 0.2s;
+        }
+
+        .german-word:hover {
+            color: var(--text-main);
+        }
+
+        .audio-icon {
+            font-size: 0.9em;
+            opacity: 0.7;
+            filter: grayscale(1);
+            transition: filter 0.2s;
+        }
+
+        .german-word:hover .audio-icon {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+
+        .spanish-word {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .example-sent {
+            display: block;
+            margin-top: 4px;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--header-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body class="mode-es">
+
+    <div class="container">
+        <header>
+            <!-- THEME TOGGLE BUTTON -->
+            <div class="theme-toggle-wrapper">
+                <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Dark/Light Mode">
+                    <span class="icon-sun">☀️</span>
+                    <span class="icon-moon">🌙</span>
+                </button>
+            </div>
+
+            <h1>
+                Pronombres de Cantidad
+            </h1>
+            <p>
+                Mengenpronomen (A1 → B2)
+            </p>
+        </header>
+
+        <!-- Visual Thermometer Section -->
+        <div class="quantity-scale-section">
+            <div class="scale-label">Nichts (0%)</div>
+            <div class="scale-bar">
+                <!-- Markers with click-to-speak added manually via class 'speak-trigger' (script below will attach) -->
+                <div class="marker">
+                    Wenige
+                    <span class="trans">Pocos</span>
+                    <span class="percent">(~15%)</span>
+                </div>
+                <div class="marker" style="left: 35%">
+                    Einige/Manche
+                    <span class="trans">Algunos</span>
+                    <span class="percent">(~35%)</span>
+                </div>
+                <div class="marker" style="left: 60%">
+                    Viele
+                    <span class="trans">Muchos</span>
+                    <span class="percent">(~60%)</span>
+                </div>
+                <div class="marker" style="left: 85%">
+                    Die meisten
+                    <span class="trans">La mayoría</span>
+                    <span class="percent">(~85%)</span>
+                </div>
+            </div>
+            <div class="scale-label">Alles (100%)</div>
+        </div>
+
+        <!-- MAIN CONTENT GRID -->
+        <div class="grid-layout">
+
+            <!-- A1 LEVEL -->
+            <div class="level-card">
+                <div class="level-header a1">
+                    <span>A1 – Básico</span>
+                    <span>🟦</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pronombre / Español</th>
+                                <th>Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- NEW WORD -->
+                            <tr>
+                                <td>
+                                    <div class="german-word">nichts</div>
+                                    <div class="spanish-word">nada (0%)</div>
+                                </td>
+                                <td>
+                                    Ich habe nichts gesehen.<br>
+                                    <span class="example-sent">(No he visto nada.)</span>
+                                </td>
+                            </tr>
+                            <!-- NEW WORD -->
+                            <tr>
+                                <td>
+                                    <div class="german-word">niemand</div>
+                                    <div class="spanish-word">nadie</div>
+                                </td>
+                                <td>
+                                    Niemand ist zu Hause.<br>
+                                    <span class="example-sent">(Nadie está en casa.)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">alle</div>
+                                    <div class="spanish-word">todos (100%)</div>
+                                </td>
+                                <td>
+                                    Alle kommen.<br>
+                                    <span class="example-sent">(Todos vienen.)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word" data-speak="viel oder viele">viel(e)</div>
+                                    <div class="spanish-word">mucho(s)</div>
+                                </td>
+                                <td>
+                                    Viele arbeiten hier.<br>
+                                    <span class="example-sent">(Muchos trabajan aquí.)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word" data-speak="wenig oder wenige">wenig(e)</div>
+                                    <div class="spanish-word">poco(s)</div>
+                                </td>
+                                <td>
+                                    Wenige verstehen das.<br>
+                                    <span class="example-sent">(Pocos entienden eso.)</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- A2 LEVEL -->
+            <div class="level-card">
+                <div class="level-header a2">
+                    <span>A2 – Expansión</span>
+                    <span>🟨</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pronombre / Español</th>
+                                <th>Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- NEW WORD -->
+                            <tr>
+                                <td>
+                                    <div class="german-word" style="text-transform: none;">ein paar</div>
+                                    <div class="spanish-word">unos pocos / un par</div>
+                                </td>
+                                <td>
+                                    Ich kenne ein paar.<br>
+                                    <span class="example-sent">(Conozco a unos pocos.)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">einige</div>
+                                    <div class="spanish-word">algunos</div>
+                                </td>
+                                <td>
+                                    Einige fehlen heute.<br>
+                                    <span class="example-sent">(Algunos faltan hoy.)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">mehrere</div>
+                                    <div class="spanish-word">varios</div>
+                                </td>
+                                <td>
+                                    Mehrere haben gefragt.<br>
+                                    <span class="example-sent">(Varios han preguntado.)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">manche</div>
+                                    <div class="spanish-word">algunos / unos</div>
+                                </td>
+                                <td>
+                                    Manche mögen Kaffee.<br>
+                                    <span class="example-sent">(A algunos les gusta el café.)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word" data-speak="beide, alle beide">beide / alle beide</div>
+                                    <div class="spanish-word">ambos / los dos</div>
+                                </td>
+                                <td>
+                                    Beide sind da.<br>
+                                    <span class="example-sent">(Ambos están aquí.)</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- B1 LEVEL -->
+            <div class="level-card">
+                <div class="level-header b1">
+                    <span>B1 – Intermedio</span>
+                    <span>🟧</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pronombre / Español</th>
+                                <th>Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="german-word">die meisten</div>
+                                    <div class="spanish-word">la mayoría</div>
+                                </td>
+                                <td>
+                                    Die meisten arbeiten hier.<br>
+                                    <span class="example-sent">(La mayoría trabaja aquí.)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">die wenigsten</div>
+                                    <div class="spanish-word">la minoría</div>
+                                </td>
+                                <td>
+                                    Die wenigsten wissen das.<br>
+                                    <span class="example-sent">(Muy pocos saben eso.)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">genug</div>
+                                    <div class="spanish-word">suficiente</div>
+                                </td>
+                                <td>
+                                    Genug ist genug.<br>
+                                    <span class="example-sent">(Suficiente es suficiente.)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">zu viele</div>
+                                    <div class="spanish-word">demasiados</div>
+                                </td>
+                                <td>
+                                    Zu viele denken so.<br>
+                                    <span class="example-sent">(Demasiados piensan así.)</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- B2 LEVEL -->
+            <div class="level-card">
+                <div class="level-header b2">
+                    <span>B2 – Avanzado</span>
+                    <span>🟥</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pronombre / Español</th>
+                                <th>Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="german-word">etliche</div>
+                                    <div class="spanish-word">bastantes</div>
+                                </td>
+                                <td>
+                                    Etliche haben protestiert.<br>
+                                    <span class="example-sent">(Bastantes han protestado.)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">unzählige</div>
+                                    <div class="spanish-word">innumerables</div>
+                                </td>
+                                <td>
+                                    Unzählige leiden darunter.<br>
+                                    <span class="example-sent">(Innumerables sufren por ello.)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">zahlreiche</div>
+                                    <div class="spanish-word">numerosos</div>
+                                </td>
+                                <td>
+                                    Zahlreiche sind betroffen.<br>
+                                    <span class="example-sent">(Numerosos están afectados.)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">sämtliche</div>
+                                    <div class="spanish-word">todos (formal)</div>
+                                </td>
+                                <td>
+                                    Sämtliche wurden informiert.<br>
+                                    <span class="example-sent">(Todos fueron informados.)</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RULES & GRAMMAR NOTE -->
+        <div class="rule-section">
+            <!-- Rule 1: General Usage -->
+            <div class="rule-card">
+                <div class="rule-title">
+                    <span>👉 Regla Clave</span>
+                </div>
+                <div class="rule-content">
+                    Los pronombres de cantidad <strong>NO</strong> van acompañados de un sustantivo. Sustituyen al
+                    sustantivo por completo.
+                </div>
+                <div class="rule-example">
+                    ✅ <span style="color:var(--accent-green)">Viele</span> kommen.<br>
+                    ❌ <span style="text-decoration: line-through; opacity: 0.6;">Viele Leute</span> kommen.
+                </div>
+            </div>
+
+            <!-- Rule 2: Alles vs Alle -->
+            <div class="rule-card" style="border-left-color: var(--level-b2);">
+                <div class="rule-title" style="color: var(--level-b2);">
+                    <span>⚠️ No confundir</span>
+                </div>
+                <div class="rule-content">
+                    <ul style="margin: 0; padding-left: 20px; list-style: none;">
+                        <li style="margin-bottom: 10px;">
+                            <strong>Alles</strong> (Singular, Neutro) <br>
+                            Para conceptos abstractos o "todo" en general.<br>
+                            <em style="font-size: 0.85em; color: var(--text-muted);">"Alles ist gut."</em>
+                        </li>
+                        <li>
+                            <strong>Alle</strong> (Plural) <br>
+                            Para personas o cosas contables.<br>
+                            <em style="font-size: 0.85em; color: var(--text-muted);">"Alle sind hier."</em>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Rule 3: Declination (Full Width) -->
+            <div class="rule-card full-width">
+                <div class="rule-title" style="color: var(--level-a2);">
+                    <span>ℹ️ Nota Gramatical: Declinación</span>
+                </div>
+                <div class="rule-content">
+                    Estos pronombres funcionan como <strong>adjetivos</strong>. Sus terminaciones cambian según el caso
+                    (Nominativ, Akkusativ, Dativ). Como no hay artículo delante, suelen llevar la terminación fuerte
+                    (señal gramatical).
+
+                    <table class="declension-table">
+                        <thead>
+                            <tr>
+                                <th>Caso</th>
+                                <th>Terminación (Plural)</th>
+                                <th>Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nominativ</td>
+                                <td><strong>-e</strong></td>
+                                <td>Viel<strong>e</strong> sind hier. (Sujeto)</td>
+                            </tr>
+                            <tr>
+                                <td>Akkusativ</td>
+                                <td><strong>-e</strong></td>
+                                <td>Ich sehe viel<strong>e</strong>. (Objeto Directo)</td>
+                            </tr>
+                            <tr>
+                                <td>Dativ</td>
+                                <td><strong>-en</strong></td>
+                                <td>Ich helfe viel<strong>en</strong>. (Objeto Indirecto)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Infografía de Gramática Alemana &copy; 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
+
+        // Voice Synthesis Logic
+        function speak(text) {
+            if (!('speechSynthesis' in window)) {
+                alert("Lo siento, tu navegador no soporta la síntesis de voz.");
+                return;
+            }
+
+            // Cancel previous speech to avoid queue buildup
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE'; // German
+            utterance.rate = 0.9;     // Slightly slower for learning
+            utterance.pitch = 1;
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Initialize audio features on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const words = document.querySelectorAll('.german-word');
+
+            words.forEach(el => {
+                // Determine text to speak (use data attribute if present, else innerText)
+                const rawText = el.innerText.trim();
+                const textToSpeak = el.getAttribute('data-speak') || rawText;
+
+                // Add icon
+                const icon = document.createElement('span');
+                icon.textContent = '🔊';
+                icon.className = 'audio-icon';
+                el.appendChild(icon);
+
+                // Add tooltip
+                el.setAttribute('title', 'Clic para escuchar');
+
+                // Add click listener
+                el.addEventListener('click', (e) => {
+                    // Visual feedback
+                    el.style.transform = "scale(0.95)";
+                    setTimeout(() => el.style.transform = "scale(1)", 150);
+
+                    speak(textToSpeak);
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
