@@ -746,6 +746,16 @@
                 <h2>DATIV</h2>
                 <ul class="prep-list">
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('ab'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            AB
+                        </div>
+                        <div onclick="openModal('ab'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Desde / A partir de</span>
+                        </div>
+                    </li>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
                         <div onclick="speak('aus'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
                             AUS
@@ -1011,6 +1021,18 @@
             },
 
             // DATIVE
+            'ab': {
+                title: 'AB',
+                type: 'dat',
+                examples: [
+                    { de: 'Ab morgen lerne ich mehr.', es: 'A partir de mañana estudio más.' },
+                    { de: 'Wir fliegen ab Frankfurt.', es: 'Volamos desde Frankfurt.' },
+                    { de: 'Ab dem 1. Mai.', es: 'Desde el 1 de mayo.' },
+                    { de: 'Ab hier bitte zu Fuß.', es: 'Desde aquí a pie, por favor.' },
+                    { de: 'Das gilt ab sofort.', es: 'Eso vale a partir de ya (inmediatamente).' }
+                ],
+                desc: 'Indica un punto de inicio en el tiempo (futuro) o lugar. Significa "desde" o "a partir de".'
+            },
             'aus': {
                 title: 'AUS',
                 type: 'dat',
@@ -1105,9 +1127,9 @@
                     { de: 'Das Bild hängt an der Wand. (Dat)', es: 'El cuadro cuelga en la pared.' },
                     { de: 'Wir warten an der Bushaltestelle. (Dat)', es: 'Esperamos en la parada.' },
                     { de: 'Ich gehe an den Strand. (Akk)', es: 'Voy a la playa.' },
-                    { de: 'Er schreibt an die Tafel. (Akk)', es: 'Él escribe en la pizarra.' }
+                    { de: 'Wir arbeiten von morgens bis an den Abend.', es: 'Trabajamos desde la mañana hasta (an) la noche.' }
                 ],
-                desc: 'Contacto vertical (paredes) o límite lateral (agua, fronteras, paradas).'
+                desc: 'Contacto vertical (paredes) o límite lateral (agua, fronteras, paradas). También puede significar <strong>"hasta"</strong> (bis an) indicando un límite.'
             },
             'auf': {
                 title: 'AUF',

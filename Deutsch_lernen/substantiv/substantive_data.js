@@ -99,6 +99,8 @@ const nounGroups = [
             { article: "der", word: "Bahnhof", emoji: "🚂", translation_es: "estación de tren", translation_en: "train station", example_de: "Ich fahre zum Bahnhof.", example_es: "Voy a la estación de tren." },
             { article: "der", word: "Baum", emoji: "🌳", translation_es: "árbol", translation_en: "tree", example_de: "Der Baum ist groß.", example_es: "El árbol es grande." },
             { article: "der", word: "Bus", emoji: "🚌", translation_es: "autobús", translation_en: "bus", example_de: "Der Bus kommt gleich.", example_es: "El autobús llega pronto." },
+            { article: "das", word: "Dorf", emoji: "🏘️", translation_es: "pueblo", translation_en: "village", example_de: "Das Dorf ist sehr klein.", example_es: "El pueblo es muy pequeño." },
+            { article: "der", word: "Eingang", emoji: "🚪", translation_es: "entrada", translation_en: "entrance", example_de: "Der Eingang ist dort.", example_es: "La entrada está allí." },
             { article: "der", word: "Garten", emoji: "🌺", translation_es: "jardín", translation_en: "garden", example_de: "Mein Garten ist groß.", example_es: "Mi jardín es grande." },
             { article: "der", word: "Hund", emoji: "🐕", translation_es: "perro", translation_en: "dog", example_de: "Der Hund bellt.", example_es: "El perro ladra." },
             { article: "der", word: "Markt", emoji: "🥕", translation_es: "mercado", translation_en: "market", example_de: "Der Markt ist am Samstag.", example_es: "El mercado es el sábado." },
