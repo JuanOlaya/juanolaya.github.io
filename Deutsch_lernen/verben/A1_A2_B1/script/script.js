@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const levelConfig = {
         'A1_1': { groupCount: 10, displayName: 'A1.1' },
         'A1_2': { groupCount: 8, displayName: 'A1.2' },
-        'A2_1': { groupCount: 9, displayName: 'A2.1' },
+        'A2_1': { groupCount: 10, displayName: 'A2.1' },
         'A2_2': { groupCount: 13, displayName: 'A2.2' },
         'B1_1': { groupCount: 7, displayName: 'B1.1' },
         'B2_1': { groupCount: 1, displayName: 'B2.1' }
@@ -88,113 +88,138 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentThemeData = null;
 
     // --- NEW LOADING FUNCTION ---
-    function loadAppData() {
-        const groupPromises = [];
-
-        // Load groups from each level folder
+    async function loadAppData() {
+        // Collect all tasks first
+        const loadTasks = [];
         levelOrder.forEach(levelKey => {
             const config = levelConfig[levelKey];
-            const groups = [];
-
             for (let i = 1; i <= config.groupCount; i++) {
-                const promise = fetch(`json/groups/${levelKey}/${levelKey}_group_${i}.json?t=${new Date().getTime()}`)
-                    .then(res => {
-                        if (!res.ok) {
-                            throw new Error(`HTTP error! status: ${res.status} for ${levelKey}_group_${i}.json`);
-                        }
-                        return res.json();
-                    })
-                    .then(groupData => ({ levelKey, groupIndex: i - 1, data: groupData }));
-
-                groupPromises.push(promise);
+                loadTasks.push({ levelKey, i });
             }
         });
 
-        return Promise.all(groupPromises).then(groupResults => {
-            // Organize groups by level
-            groupResults.forEach(result => {
-                if (!verbGroupsByLevel[result.levelKey]) {
-                    verbGroupsByLevel[result.levelKey] = [];
+        const groupResults = [];
+        const BATCH_SIZE = 5; // Reduced concurrency
+        const DELAY_MS = 50;  // Small delay between batches
+
+        // Process in batches
+        for (let i = 0; i < loadTasks.length; i += BATCH_SIZE) {
+            const batch = loadTasks.slice(i, i + BATCH_SIZE);
+            const batchPromises = batch.map(task => {
+                return fetch(`json/groups/${task.levelKey}/${task.levelKey}_group_${task.i}.json`)
+                    .then(res => {
+                        if (!res.ok) throw new Error(`Status ${res.status}`);
+                        return res.json();
+                    })
+                    .then(data => ({ levelKey: task.levelKey, groupIndex: task.i - 1, data }))
+                    .catch(err => {
+                        console.warn(`Failed to load ${task.levelKey}_group_${task.i}:`, err);
+                        return null;
+                    });
+            });
+
+            // Wait for batch
+            const results = await Promise.all(batchPromises);
+            groupResults.push(...results);
+
+            // Add delay
+            if (i + BATCH_SIZE < loadTasks.length) {
+                await new Promise(r => setTimeout(r, DELAY_MS));
+            }
+        }
+
+        // Organize groups by level
+        groupResults.filter(r => r !== null).forEach(result => {
+            if (!verbGroupsByLevel[result.levelKey]) {
+                verbGroupsByLevel[result.levelKey] = [];
+            }
+            verbGroupsByLevel[result.levelKey][result.groupIndex] = result.data;
+        });
+
+        // Collect all unique verb names
+        const allVerbNames = new Set();
+        Object.values(verbGroupsByLevel).forEach(levelGroups => {
+            levelGroups.forEach(group => {
+                if (group && group.verbs) {
+                    group.verbs.forEach(verbName => allVerbNames.add(verbName));
                 }
-                verbGroupsByLevel[result.levelKey][result.groupIndex] = result.data;
             });
+        });
 
-            // Collect all unique verb names
-            const allVerbNames = new Set();
-            Object.values(verbGroupsByLevel).forEach(levelGroups => {
-                levelGroups.forEach(group => {
-                    if (group && group.verbs) {
-                        group.verbs.forEach(verbName => allVerbNames.add(verbName));
-                    }
+        // Load verb cards in batches as well
+        const allVerbNamesArray = Array.from(allVerbNames);
+        for (let i = 0; i < allVerbNamesArray.length; i += BATCH_SIZE) {
+            const batch = allVerbNamesArray.slice(i, i + BATCH_SIZE);
+            const batchPromises = batch.map(verbName =>
+                fetch(`json/cards/${verbName}.json`)
+                    .then(res => res.ok ? res.json() : {})
+                    .then(data => { allVerbsData[verbName] = data; })
+                    .catch(() => { allVerbsData[verbName] = {}; })
+            );
+            await Promise.all(batchPromises);
+            if (i + BATCH_SIZE < allVerbNamesArray.length) {
+                await new Promise(r => setTimeout(r, DELAY_MS));
+            }
+        }
+
+        // Pre-load all conjugation data
+        console.log('Pre-loading conjugation data for fast search...');
+        return loadConjugations(allVerbNames);
+    }
+
+    function loadConjugations(allVerbNames) {
+        const conjugationPromises = Array.from(allVerbNames).map(async verbName => {
+            try {
+                const fetchPromises = [
+                    fetch(`json/praesens/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
+                    fetch(`json/praeteritum_konjugation/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
+                    fetch(`json/perfekt_konjugation/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
+                    fetch(`json/praesens_fragen/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+                ];
+
+                // Add Konjunktiv II data for specific verbs
+                if (konjunktivVerbs.includes(verbName)) {
+                    fetchPromises.push(
+                        fetch(`json/konjunktiv_ii/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+                    );
+                }
+
+                const [praesensData, praeteritumData, perfektData, fragenData, konjunktivData] = await Promise.all(fetchPromises);
+
+                // Rename praeteritum from konjugation data to avoid conflict
+                if (praeteritumData.praeteritum) {
+                    praeteritumData.praeteritum_conjugations = praeteritumData.praeteritum;
+                    delete praeteritumData.praeteritum;
+                }
+
+                // Merge conjugation data into allVerbsData
+                allVerbsData[verbName] = {
+                    ...allVerbsData[verbName],
+                    ...praesensData,
+                    ...praeteritumData,
+                    ...perfektData,
+                    ...fragenData,
+                    ...(konjunktivData || {})
+                };
+            } catch (error) {
+                console.warn(`Failed to pre-load conjugations for ${verbName}:`, error);
+            }
+        });
+
+        return Promise.all(conjugationPromises).then(() => {
+            console.log('Conjugation data pre-loaded! Search will be fast.');
+
+            const verbTypesPromise = fetch('json/verb_types.json')
+                .then(res => res.ok ? res.json() : {})
+                .then(data => {
+                    verbTypesData = data || {};
+                })
+                .catch(error => {
+                    console.warn('Failed to load Verb types data:', error);
+                    verbTypesData = {};
                 });
-            });
 
-            const verbDataPromises = Array.from(allVerbNames).map(verbName => {
-                const cardPromise = fetch(`json/cards/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-
-                return cardPromise.then(cardData => {
-                    allVerbsData[verbName] = cardData;
-                });
-            });
-
-            return Promise.all(verbDataPromises).then(() => {
-                // Pre-load all conjugation data for fast search
-                console.log('Pre-loading conjugation data for fast search...');
-                const conjugationPromises = Array.from(allVerbNames).map(async verbName => {
-                    try {
-                        const fetchPromises = [
-                            fetch(`json/praesens/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
-                            fetch(`json/praeteritum_konjugation/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
-                            fetch(`json/perfekt_konjugation/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
-                            fetch(`json/praesens_fragen/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
-                        ];
-
-                        // Add Konjunktiv II data for specific verbs
-                        if (konjunktivVerbs.includes(verbName)) {
-                            fetchPromises.push(
-                                fetch(`json/konjunktiv_ii/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
-                            );
-                        }
-
-                        const [praesensData, praeteritumData, perfektData, fragenData, konjunktivData] = await Promise.all(fetchPromises);
-
-                        // Rename praeteritum from konjugation data to avoid conflict
-                        if (praeteritumData.praeteritum) {
-                            praeteritumData.praeteritum_conjugations = praeteritumData.praeteritum;
-                            delete praeteritumData.praeteritum;
-                        }
-
-                        // Merge conjugation data into allVerbsData
-                        allVerbsData[verbName] = {
-                            ...allVerbsData[verbName],
-                            ...praesensData,
-                            ...praeteritumData,
-                            ...perfektData,
-                            ...fragenData,
-                            ...(konjunktivData || {})
-                        };
-                    } catch (error) {
-                        console.warn(`Failed to pre-load conjugations for ${verbName}:`, error);
-                    }
-                });
-
-                return Promise.all(conjugationPromises).then(() => {
-                    console.log('Conjugation data pre-loaded! Search will be fast.');
-
-
-                    const verbTypesPromise = fetch('json/verb_types.json')
-                        .then(res => res.ok ? res.json() : {})
-                        .then(data => {
-                            verbTypesData = data || {};
-                        })
-                        .catch(error => {
-                            console.warn('Failed to load Verb types data:', error);
-                            verbTypesData = {};
-                        });
-
-                    return verbTypesPromise;
-                });
-            });
+            return verbTypesPromise;
         });
     }
 
@@ -293,11 +318,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const group = levelGroups[currentGroupInLevel];
+        console.log(`[DEBUG] Rendering group ${currentGroupInLevel} for level ${currentLevel}:`, group);
+
         if (!group.verbs) {
             console.error(`No verbs found in group`);
             cardsContainer.innerHTML = '<p>Fehler beim Laden der Verben.</p>';
             return;
         }
+        console.log(`[DEBUG] Verbs in group:`, group.verbs);
+        group.verbs.forEach(v => {
+            console.log(`[DEBUG] Data for ${v}:`, allVerbsData[v]);
+        });
 
         // Check which version is active
         const selectedVersionRadio = document.querySelector('input[name="card-version"]:checked');
