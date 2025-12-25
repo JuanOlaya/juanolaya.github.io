@@ -1,204 +1,889 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konjunktionen - Deutsche Sprachreferenz für A1</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../styles.css">
-    <!-- Carga de la fuente Inter de Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Conjunciones en Alemán</title>
     <style>
-        /* Aplicar la fuente Inter al cuerpo del documento */
-        body {
-            font-family: 'Inter', sans-serif;
+        :root {
+            /* --- DEFAULT DARK MODE PALETTE --- */
+            --bg-color: #0f172a;
+            /* Slate 900 */
+            --card-bg: #1e293b;
+            /* Slate 800 */
+            --header-bg: #020617;
+            /* Slate 950 */
+            --section-bg: #0f172a;
+            /* Slate 900 */
+
+            --text-main: #f1f5f9;
+            /* Slate 100 */
+            --text-muted: #94a3b8;
+            /* Slate 400 */
+            --border-color: #334155;
+            /* Slate 700 */
+
+            /* LEVEL COLORS */
+            --level-a1: #3b82f6;
+            /* 🟦 Blue */
+            --level-a2: #eab308;
+            /* 🟨 Yellow */
+            --level-b1: #f97316;
+            /* 🟧 Orange */
+            --level-b2: #ef4444;
+            /* 🟥 Red */
+
+            --accent-green: #00FFA1;
+            /* Main Accent */
+
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glow-strength: 20px;
+
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
-        /* Estilo para resaltar el verbo al final */
-        .verb-highlight {
+
+        /* --- LIGHT MODE OVERRIDES --- */
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            /* Slate 100 */
+            --card-bg: #ffffff;
+            /* White */
+            --header-bg: #ffffff;
+            /* White */
+            --section-bg: #e2e8f0;
+            /* Slate 200 */
+
+            --text-main: #1e293b;
+            /* Slate 800 */
+            --text-muted: #64748b;
+            /* Slate 500 */
+            --border-color: #cbd5e1;
+            /* Slate 300 */
+
+            /* DARKER ACCENTS FOR VISIBILITY */
+            --level-a1: #2563eb;
+            --level-a2: #ca8a04;
+            --level-b1: #ea580c;
+            --level-b2: #dc2626;
+
+            --accent-green: #059669;
+
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --glow-strength: 0px;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 80px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Header */
+        header {
+            background: var(--header-bg);
+            color: var(--text-main);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-green);
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle-wrapper {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .theme-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px var(--shadow-color);
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-green);
+        }
+
+        body:not(.light-mode) .icon-sun {
+            display: block;
+        }
+
+        body:not(.light-mode) .icon-moon {
+            display: none;
+        }
+
+        body.light-mode .icon-sun {
+            display: none;
+        }
+
+        body.light-mode .icon-moon {
+            display: block;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: var(--accent-green);
+            text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.3);
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- VISUAL GUIDE: WORD ORDER --- */
+        .visual-guide-section {
+            padding: 30px 40px;
+            background: var(--section-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .guide-title {
+            text-align: center;
+            color: var(--text-muted);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .position-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .pos-card {
+            flex: 1;
+            min-width: 180px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pos-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+
+        .pos-card.pos-0::before {
+            background: var(--accent-green);
+        }
+
+        .pos-card.pos-1::before {
+            background: var(--level-a2);
+        }
+
+        .pos-card.pos-end::before {
+            background: var(--level-b2);
+        }
+
+        .pos-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .pos-name {
+            font-weight: 800;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .pos-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .syntax-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .syntax-box span.verb {
+            color: var(--level-b2);
+            font-weight: bold;
+        }
+
+        .syntax-box span.subj {
+            color: var(--level-a1);
+            font-weight: bold;
+        }
+
+        /* Grid Layout */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+            background: var(--bg-color);
+        }
+
+        @media (max-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .position-cards {
+                flex-direction: column;
+            }
+        }
+
+        /* Level Card */
+        .level-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 15px -3px var(--shadow-color);
+            transition: transform 0.2s;
+        }
+
+        .level-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .level-header {
+            padding: 15px 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .level-header.a1 {
+            background: var(--level-a1);
+            box-shadow: 0 0 var(--glow-strength) var(--level-a1);
+        }
+
+        .level-header.a2 {
+            background: var(--level-a2);
+            box-shadow: 0 0 var(--glow-strength) var(--level-a2);
+        }
+
+        .level-header.b1 {
+            background: var(--level-b1);
+            box-shadow: 0 0 var(--glow-strength) var(--level-b1);
+        }
+
+        .level-header.b2 {
+            background: var(--level-b2);
+            box-shadow: 0 0 var(--glow-strength) var(--level-b2);
+        }
+
+        .level-content {
+            padding: 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 15px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Tag for Word Order Type */
+        .tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            margin-left: 5px;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+
+        .tag.zero {
+            background: rgba(0, 255, 161, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 255, 161, 0.3);
+        }
+
+        .tag.inv {
+            background: rgba(234, 179, 8, 0.15);
+            color: var(--level-a2);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        .tag.end {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--level-b2);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .german-word {
             font-weight: 700;
-            color: #D32F2F; /* Un rojo oscuro para el énfasis */
+            color: var(--accent-green);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.1s ease, color 0.2s;
+        }
+
+        .german-word:hover {
+            color: var(--text-main);
+        }
+
+        .audio-icon {
+            font-size: 0.9em;
+            opacity: 0.7;
+            filter: grayscale(1);
+            transition: filter 0.2s;
+        }
+
+        .german-word:hover .audio-icon {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+
+        .spanish-word {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .example-sent {
+            display: block;
+            margin-top: 4px;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            opacity: 0.8;
+        }
+
+        /* Rule Section */
+        .rule-section {
+            padding: 30px 40px 50px 40px;
+            background: var(--section-bg);
+            border-top: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .rule-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .rule-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 6px solid var(--accent-green);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .rule-card.warning {
+            border-left-color: var(--level-b2);
+        }
+
+        .rule-card.full-width {
+            grid-column: 1 / -1;
+            border-left-color: var(--level-a2);
+        }
+
+        .rule-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--accent-green);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rule-card.warning .rule-title {
+            color: var(--level-b2);
+        }
+
+        .rule-card.full-width .rule-title {
+            color: var(--level-a2);
+        }
+
+        .rule-content {
+            font-size: 1rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .rule-example {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(0, 255, 161, 0.05);
+            border-radius: 6px;
+            font-family: monospace;
+            border: 1px dashed var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .rule-example strong {
+            color: var(--text-main);
+        }
+
+        footer {
+            background: var(--header-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: auto;
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
 
-    <a href="../index.html" class="back-home">🏠 Zurück zur Hauptseite / Back to Home</a>
+<body class="mode-es">
 
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
-        <header class="text-center mb-10">
-            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900">🔗 Konjunktionen</h1>
-            <p class="text-lg text-gray-600 mt-2">🇩🇪 Deutsche Konjunktionen / 🇬🇧 German Conjunctions / 🇪🇸 Conjunciones Alemanas</p>
-            <p class="text-sm text-gray-500 mt-1">Niveles A1 y A2</p>
+    <div class="container">
+        <header>
+            <div class="theme-toggle-wrapper">
+                <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Dark/Light Mode">
+                    <span class="icon-sun">☀️</span>
+                    <span class="icon-moon">🌙</span>
+                </button>
+            </div>
+
+            <h1>Conjunciones</h1>
+            <p>Konjunktionen & Konnektoren (A1 → B2)</p>
         </header>
 
-        <!-- SECCIÓN A1 -->
-        <section id="a1" class="mb-12">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 border-l-4 border-blue-500 pl-4">Nivel A1: Las Bases</h2>
+        <!-- VISUAL GUIDE: WORD ORDER -->
+        <div class="visual-guide-section">
+            <div class="guide-title">La Llave Maestra: ¿Dónde va el verbo?</div>
+            <div class="position-cards">
 
-            <!-- Grupo 1: Conjunciones Coordinantes -->
-            <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Grupo 1: Conjunciones Coordinantes (Posición Cero)</h3>
-                <p class="mb-4 text-gray-700">Estas conjunciones conectan dos frases principales y **no alteran** el orden de las palabras. Son fáciles de recordar con el acrónimo <strong class="text-blue-600">ADUSO</strong>.</p>
-                
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-200">
+                <!-- Position 0 -->
+                <div class="pos-card pos-0">
+                    <span class="pos-icon">0️⃣</span>
+                    <span class="pos-name">Posición 0</span>
+                    <span class="pos-desc">Coordinantes (ADUSO)</span>
+                    <div class="syntax-box">
+                        Conj + <span class="subj">Sujeto</span> + <span class="verb">Verbo</span>
+                    </div>
+                </div>
+
+                <!-- Position 1 -->
+                <div class="pos-card pos-1">
+                    <span class="pos-icon">1️⃣</span>
+                    <span class="pos-name">Posición 1</span>
+                    <span class="pos-desc">Inversión (Adverbios)</span>
+                    <div class="syntax-box">
+                        Conj + <span class="verb">Verbo</span> + <span class="subj">Sujeto</span>
+                    </div>
+                </div>
+
+                <!-- End Position -->
+                <div class="pos-card pos-end">
+                    <span class="pos-icon">🔚</span>
+                    <span class="pos-name">Verbo al Final</span>
+                    <span class="pos-desc">Subordinantes (Nebensatz)</span>
+                    <div class="syntax-box">
+                        Conj + <span class="subj">Sujeto</span> ... <span class="verb">Verbo</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="grid-layout">
+
+            <!-- A1 LEVEL -->
+            <div class="level-card">
+                <div class="level-header a1">
+                    <span>A1 – Básicas (ADUSO)</span>
+                    <span>🟦</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <thead>
                             <tr>
-                                <th scope="col" class="px-6 py-3">Conjunción</th>
-                                <th scope="col" class="px-6 py-3">Significado</th>
-                                <th scope="col" class="px-6 py-3">Ejemplo en Alemán</th>
+                                <th>Conector / Español</th>
+                                <th>Ejemplo</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4 font-bold">Aber</td>
-                                <td class="px-6 py-4">pero</td>
-                                <td class="px-6 py-4 italic">Ich möchte ins Kino gehen, <strong>aber</strong> ich habe keine Zeit.</td>
+                            <tr>
+                                <td>
+                                    <div class="german-word">aber</div> <span class="tag zero">Pos 0</span>
+                                    <div class="spanish-word">pero</div>
+                                </td>
+                                <td>Ich bin müde, <strong>aber</strong> ich arbeite.</td>
                             </tr>
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4 font-bold">Denn</td>
-                                <td class="px-6 py-4">porque, pues</td>
-                                <td class="px-6 py-4 italic">Ich lerne Deutsch, <strong>denn</strong> ich möchte in Berlin arbeiten.</td>
+                            <tr>
+                                <td>
+                                    <div class="german-word">denn</div> <span class="tag zero">Pos 0</span>
+                                    <div class="spanish-word">pues / porque</div>
+                                </td>
+                                <td>Ich esse, <strong>denn</strong> ich habe Hunger.</td>
                             </tr>
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4 font-bold">Und</td>
-                                <td class="px-6 py-4">y</td>
-                                <td class="px-6 py-4 italic">Ich trinke einen Kaffee <strong>und</strong> ich esse einen Kuchen.</td>
+                            <tr>
+                                <td>
+                                    <div class="german-word">und</div> <span class="tag zero">Pos 0</span>
+                                    <div class="spanish-word">y</div>
+                                </td>
+                                <td>Er liest <strong>und</strong> sie schläft.</td>
                             </tr>
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4 font-bold">Sondern</td>
-                                <td class="px-6 py-4">sino</td>
-                                <td class="px-6 py-4 italic">Er kommt nicht aus Spanien, <strong>sondern</strong> aus Mexiko.</td>
+                            <tr>
+                                <td>
+                                    <div class="german-word">sondern</div> <span class="tag zero">Pos 0</span>
+                                    <div class="spanish-word">sino (tras negación)</div>
+                                </td>
+                                <td>Nicht Kaffee, <strong>sondern</strong> Tee.</td>
                             </tr>
-                            <tr class="bg-white">
-                                <td class="px-6 py-4 font-bold">Oder</td>
-                                <td class="px-6 py-4">o</td>
-                                <td class="px-6 py-4 italic">Möchtest du Tee <strong>oder</strong> möchtest du Kaffee?</td>
+                            <tr>
+                                <td>
+                                    <div class="german-word">oder</div> <span class="tag zero">Pos 0</span>
+                                    <div class="spanish-word">o</div>
+                                </td>
+                                <td>Kaffee <strong>oder</strong> Tee?</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Grupo 2: Conjunciones Subordinantes -->
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Grupo 2: Conjunciones Subordinantes (Verbo al Final)</h3>
-                <p class="mb-4 text-gray-700">Estas conjunciones introducen una frase subordinada y tienen una regla de oro: **el verbo conjugado se envía siempre al final de su cláusula**.</p>
-                
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-200">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">Conjunción</th>
-                                <th scope="col" class="px-6 py-3">Significado</th>
-                                <th scope="col" class="px-6 py-3">Ejemplo en Alemán (Verbo al final)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4 font-bold">Weil</td>
-                                <td class="px-6 py-4">porque</td>
-                                <td class="px-6 py-4 italic">Ich lerne Deutsch, <strong>weil</strong> ich in Berlin arbeiten <span class="verb-highlight">möchte</span>.</td>
-                            </tr>
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4 font-bold">Dass</td>
-                                <td class="px-6 py-4">que</td>
-                                <td class="px-6 py-4 italic">Ich denke, <strong>dass</strong> das Wetter heute gut <span class="verb-highlight">ist</span>.</td>
-                            </tr>
-                            <tr class="bg-white">
-                                <td class="px-6 py-4 font-bold">Wenn</td>
-                                <td class="px-6 py-4">si, cuando</td>
-                                <td class="px-6 py-4 italic"><strong>Wenn</strong> du Zeit <span class="verb-highlight">hast</span>, können wir ins Kino gehen.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <!-- A2 LEVEL -->
+            <div class="level-card">
+                <div class="level-header a2">
+                    <span>A2 – Subordinantes</span>
+                    <span>🟨</span>
                 </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN A2 -->
-        <section id="a2">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 border-l-4 border-green-500 pl-4">Nivel A2: Conectando Ideas Complejas</h2>
-
-            <!-- Grupo 1: Más Conjunciones Subordinantes -->
-            <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Más Conjunciones Subordinantes (Verbo al Final)</h3>
-                <p class="mb-4 text-gray-700">En A2, se amplía el repertorio de conjunciones que envían el verbo al final, permitiendo expresar relaciones de tiempo, condición y contraste.</p>
-                
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-200">
+                <div class="level-content">
+                    <table>
+                        <thead>
                             <tr>
-                                <th scope="col" class="px-6 py-3">Conjunción</th>
-                                <th scope="col" class="px-6 py-3">Significado</th>
-                                <th scope="col" class="px-6 py-3">Ejemplo en Alemán</th>
+                                <th>Conector / Español</th>
+                                <th>Ejemplo</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4 font-bold">Obwohl</td>
-                                <td class="px-6 py-4">aunque</td>
-                                <td class="px-6 py-4 italic">Er geht spazieren, <strong>obwohl</strong> es <span class="verb-highlight">regnet</span>.</td>
+                            <tr>
+                                <td>
+                                    <div class="german-word">weil</div> <span class="tag end">Final</span>
+                                    <div class="spanish-word">porque</div>
+                                </td>
+                                <td>... <strong>weil</strong> ich Hunger <span class="german-word"
+                                        style="font-size:0.9em">habe</span>.</td>
                             </tr>
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4 font-bold">Als</td>
-                                <td class="px-6 py-4">cuando (pasado, un evento)</td>
-                                <td class="px-6 py-4 italic"><strong>Als</strong> ich ein Kind <span class="verb-highlight">war</span>, habe ich in Spanien gewohnt.</td>
+                            <tr>
+                                <td>
+                                    <div class="german-word">dass</div> <span class="tag end">Final</span>
+                                    <div class="spanish-word">que (conector)</div>
+                                </td>
+                                <td>Ich weiß, <strong>dass</strong> es spät <span class="german-word"
+                                        style="font-size:0.9em">ist</span>.</td>
                             </tr>
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4 font-bold">Bevor</td>
-                                <td class="px-6 py-4">antes de que</td>
-                                <td class="px-6 py-4 italic">Ich putze die Zähne, <strong>bevor</strong> ich schlafen <span class="verb-highlight">gehe</span>.</td>
+                            <tr>
+                                <td>
+                                    <div class="german-word">wenn</div> <span class="tag end">Final</span>
+                                    <div class="spanish-word">si (condicional/temp)</div>
+                                </td>
+                                <td><strong>Wenn</strong> ich Zeit <span class="german-word"
+                                        style="font-size:0.9em">habe</span>, komme ich.</td>
                             </tr>
-                             <tr class="bg-white">
-                                <td class="px-6 py-4 font-bold">Während</td>
-                                <td class="px-6 py-4">mientras</td>
-                                <td class="px-6 py-4 italic">Sie liest ein Buch, <strong>während</strong> er Musik <span class="verb-highlight">hört</span>.</td>
+                            <tr>
+                                <td>
+                                    <div class="german-word">als</div> <span class="tag end">Final</span>
+                                    <div class="spanish-word">cuando (pasado único)</div>
+                                </td>
+                                <td><strong>Als</strong> ich Kind <span class="german-word"
+                                        style="font-size:0.9em">war</span>...</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Grupo 2: Conectores de dos partes -->
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Conectores de Dos Partes (Zweiteilige Konnektoren)</h3>
-                <p class="mb-4 text-gray-700">Estos conectores funcionan en pares para unir ideas, ofreciendo más matices a la comunicación.</p>
-                
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-200">
+            <!-- B1 LEVEL -->
+            <div class="level-card">
+                <div class="level-header b1">
+                    <span>B1 – Adverbiales</span>
+                    <span>🟧</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <thead>
                             <tr>
-                                <th scope="col" class="px-6 py-3">Conector</th>
-                                <th scope="col" class="px-6 py-3">Significado</th>
-                                <th scope="col" class="px-6 py-3">Ejemplo en Alemán</th>
+                                <th>Conector / Español</th>
+                                <th>Ejemplo</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4 font-bold">entweder ... oder</td>
-                                <td class="px-6 py-4">o ... o</td>
-                                <td class="px-6 py-4 italic">Wir fahren <strong>entweder</strong> nach Italien <strong>oder</strong> nach Spanien.</td>
+                            <tr>
+                                <td>
+                                    <div class="german-word">deshalb</div> <span class="tag inv">Pos 1</span>
+                                    <div class="spanish-word">por eso</div>
+                                </td>
+                                <td>Er ist krank, <strong>deshalb</strong> <span class="german-word"
+                                        style="font-size:0.9em">bleibt</span> er hier.</td>
                             </tr>
-                            <tr class="bg-white border-b">
-                                <td class="px-6 py-4 font-bold">weder ... noch</td>
-                                <td class="px-6 py-4">ni ... ni</td>
-                                <td class="px-6 py-4 italic">Er isst <strong>weder</strong> Fleisch <strong>noch</strong> Fisch.</td>
+                            <tr>
+                                <td>
+                                    <div class="german-word">trotzdem</div> <span class="tag inv">Pos 1</span>
+                                    <div class="spanish-word">sin embargo</div>
+                                </td>
+                                <td>Es regnet, <strong>trotzdem</strong> <span class="german-word"
+                                        style="font-size:0.9em">gehen</span> wir raus.</td>
                             </tr>
-                            <tr class="bg-white">
-                                <td class="px-6 py-4 font-bold">zwar ... aber</td>
-                                <td class="px-6 py-4">es cierto que ... pero</td>
-                                <td class="px-6 py-4 italic">Die Wohnung ist <strong>zwar</strong> klein, <strong>aber</strong> sehr gemütlich.</td>
+                            <tr>
+                                <td>
+                                    <div class="german-word">obwohl</div> <span class="tag end">Final</span>
+                                    <div class="spanish-word">aunque</div>
+                                </td>
+                                <td><strong>Obwohl</strong> es <span class="german-word"
+                                        style="font-size:0.9em">regnet</span>, gehen wir.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">da</div> <span class="tag end">Final</span>
+                                    <div class="spanish-word">como / ya que</div>
+                                </td>
+                                <td><strong>Da</strong> ich krank <span class="german-word"
+                                        style="font-size:0.9em">bin</span>, bleibe ich.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-        </section>
 
+            <!-- B2 LEVEL -->
+            <div class="level-card">
+                <div class="level-header b2">
+                    <span>B2 – Complejas</span>
+                    <span>🟥</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Conector / Español</th>
+                                <th>Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="german-word">je... desto</div> <span class="tag end">Mix</span>
+                                    <div class="spanish-word">cuanto más... más</div>
+                                </td>
+                                <td><strong>Je</strong> schneller, <strong>desto</strong> besser.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">zwar... aber</div> <span class="tag zero">Pos 0</span>
+                                    <div class="spanish-word">es cierto que... pero</div>
+                                </td>
+                                <td>Er ist <strong>zwar</strong> alt, <strong>aber</strong> fit.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">während</div> <span class="tag end">Final</span>
+                                    <div class="spanish-word">mientras (tiempo/contraste)</div>
+                                </td>
+                                <td><strong>Während</strong> er <span class="german-word"
+                                        style="font-size:0.9em">kocht</span>, spült sie.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">indem</div> <span class="tag end">Final</span>
+                                    <div class="spanish-word">al (+ infinitivo) / mediante</div>
+                                </td>
+                                <td>Man lernt, <strong>indem</strong> man <span class="german-word"
+                                        style="font-size:0.9em">übt</span>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RULES MOVED TO BOTTOM -->
+        <div class="rule-section">
+            <!-- Rule 1: ADUSO -->
+            <div class="rule-card">
+                <div class="rule-title">
+                    <span>0️⃣ Regla A1: ADUSO</span>
+                </div>
+                <div class="rule-content">
+                    Las conjunciones de <strong>Posición 0</strong> no ocupan espacio gramatical. Se conocen como ADUSO:
+                    <br><br>
+                    <strong>A</strong>ber, <strong>D</strong>enn, <strong>U</strong>nd, <strong>S</strong>ondern,
+                    <strong>O</strong>der.
+                </div>
+            </div>
+
+            <!-- Rule 2: Inversion -->
+            <div class="rule-card warning">
+                <div class="rule-title">
+                    <span>1️⃣ Regla B1: Inversión</span>
+                </div>
+                <div class="rule-content">
+                    Los conectores adverbiales (deshalb, trotzdem, dann) ocupan la <strong>Posición 1</strong>.
+                    <br>
+                    ¡Esto empuja al verbo a la posición 2 y al sujeto a la posición 3!
+                </div>
+                <div class="rule-example">
+                    ... <strong>deshalb</strong> <span style="text-decoration: underline;">bin</span> ich müde.
+                </div>
+            </div>
+
+            <!-- Rule 3: Nebensatz -->
+            <div class="rule-card full-width">
+                <div class="rule-title" style="color: var(--level-a2);">
+                    <span>🔚 Regla A2/B2: El Verbo al Final</span>
+                </div>
+                <div class="rule-content">
+                    Con las conjunciones subordinantes (weil, dass, wenn, obwohl, etc.), el verbo conjugado viaja hasta
+                    el <strong>FINAL</strong> absoluto de la frase.
+                    <br><br>
+                    ✅ Ich esse, <strong>weil</strong> ich Hunger <strong>habe</strong>.<br>
+                    ❌ <s>Ich esse, weil ich habe Hunger.</s> (Error típico hispanohablante)
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Infografía de Gramática Alemana &copy; 2025</p>
+        </footer>
     </div>
 
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
+
+        // Voice Synthesis Logic
+        function speak(text) {
+            if (!('speechSynthesis' in window)) {
+                alert("Lo siento, tu navegador no soporta la síntesis de voz.");
+                return;
+            }
+
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const words = document.querySelectorAll('.german-word');
+
+            words.forEach(el => {
+                const rawText = el.innerText.trim();
+                const textToSpeak = el.getAttribute('data-speak') || rawText;
+
+                const icon = document.createElement('span');
+                icon.textContent = '🔊';
+                icon.className = 'audio-icon';
+                el.appendChild(icon);
+
+                el.setAttribute('title', 'Clic para escuchar');
+
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    el.style.transform = "scale(0.95)";
+                    setTimeout(() => el.style.transform = "scale(1)", 150);
+                    speak(textToSpeak);
+                });
+            });
+        });
+    </script>
+
 </body>
+
 </html>
