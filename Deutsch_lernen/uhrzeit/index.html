@@ -7,18 +7,74 @@
     <title>German Clock Infographic</title>
     <style>
         :root {
-            --bg-color: #f0f2f5;
-            --card-bg: #ffffff;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
-            --accent-green: #34d399;
-            /* Nach 0-25 */
-            --accent-red: #f87171;
-            /* Vor 35-60 */
+            /* --- DEFAULT DARK MODE PALETTE --- */
+            --bg-color: #0f172a;
+            /* Slate 900 */
+            --card-bg: #1e293b;
+            /* Slate 800 */
+            --header-bg: #020617;
+            /* Slate 950 */
+            --section-bg: #0f172a;
+            /* Slate 900 */
+
+            --text-main: #f1f5f9;
+            /* Slate 100 */
+            --text-muted: #94a3b8;
+            /* Slate 400 */
+            --border-color: #334155;
+            /* Slate 700 */
+
+            /* NEON ACCENTS (High Contrast for Dark) */
+            --accent-green: #00FFA1;
+            --accent-red: #ff4a57;
             --accent-yellow: #fbbf24;
-            /* Halb Zone 25-35 */
-            --blue-highlight: #3b82f6;
+            --blue-highlight: #38bdf8;
+
+            /* Specific Elements */
+            --clock-face-border: #334155;
+            --clock-number-color: white;
+            --input-bg: #0f172a;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glow-strength: 20px;
+
             --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* --- LIGHT MODE OVERRIDES --- */
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            /* Slate 100 */
+            --card-bg: #ffffff;
+            /* White */
+            --header-bg: #ffffff;
+            /* White */
+            --section-bg: #e2e8f0;
+            /* Slate 200 */
+
+            --text-main: #1e293b;
+            /* Slate 800 */
+            --text-muted: #64748b;
+            /* Slate 500 */
+            --border-color: #cbd5e1;
+            /* Slate 300 */
+
+            /* DARKER ACCENTS (For visibility on Light) */
+            --accent-green: #059669;
+            /* Emerald 600 */
+            --accent-red: #dc2626;
+            /* Red 600 */
+            --accent-yellow: #d97706;
+            /* Amber 600 */
+            --blue-highlight: #0284c7;
+            /* Sky 600 */
+
+            /* Specific Elements */
+            --clock-face-border: #e2e8f0;
+            --clock-number-color: #1e293b;
+            --input-bg: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --glow-strength: 0px;
+            /* No neon glow in light mode */
         }
 
         body {
@@ -28,11 +84,11 @@
             margin: 0;
             padding: 20px;
             padding-bottom: 80px;
-            /* Space for footer */
             display: flex;
             justify-content: center;
             min-height: 100vh;
             box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Language Toggle Logic */
@@ -48,49 +104,94 @@
             max-width: 900px;
             width: 100%;
             background: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
-        /* Header */
+        /* Header redesign */
         header {
-            background: #111827;
-            color: white;
-            padding: 24px;
+            background: var(--header-bg);
+            color: var(--text-main);
+            padding: 30px;
             text-align: center;
-            border-bottom: 4px solid var(--accent-yellow);
+            border-bottom: 2px solid var(--accent-green);
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        /* THEME TOGGLE BUTTON STYLES */
+        .theme-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            margin-left: 15px;
+            /* Spacing from language toggle */
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-green);
+        }
+
+        /* Icon switching logic */
+        body:not(.light-mode) .icon-sun {
+            display: block;
+        }
+
+        body:not(.light-mode) .icon-moon {
+            display: none;
+        }
+
+        body.light-mode .icon-sun {
+            display: none;
+        }
+
+        body.light-mode .icon-moon {
+            display: block;
         }
 
         header h1 {
             margin: 0;
-            font-size: 1.75rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 800;
             letter-spacing: -0.025em;
+            color: var(--accent-green);
+            text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.3);
+            text-transform: uppercase;
         }
 
         header p {
-            margin: 8px 0 0;
-            opacity: 0.8;
-            font-size: 0.95rem;
+            margin: 10px 0 0;
+            color: var(--text-muted);
+            font-size: 1rem;
         }
 
         /* Main Grid Layout */
         .grid-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            /* Desktop: 2 columns */
             gap: 40px;
             padding: 40px;
         }
 
-        /* Responsive Switch */
         @media (max-width: 768px) {
             .grid-layout {
                 grid-template-columns: 1fr;
-                padding: 20px;
+                padding: 25px;
                 gap: 30px;
             }
         }
@@ -104,24 +205,20 @@
 
         .clock-wrapper {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .clock-face {
             width: 280px;
             height: 280px;
             border-radius: 50%;
-            border: 12px solid #1f2937;
+            border: 8px solid var(--clock-face-border);
             position: relative;
-            /* The Magic: Conic Gradient for Zones */
             background: conic-gradient(var(--accent-green) 0deg 150deg,
-                    /* 0-25 min: Nach */
                     var(--accent-yellow) 150deg 210deg,
-                    /* 25-35 min: Halb Zone */
-                    var(--accent-red) 210deg 360deg
-                    /* 35-60 min: Vor */
-                );
-            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.15);
+                    var(--accent-red) 210deg 360deg);
+            box-shadow: 0 0 30px var(--shadow-color);
+            transition: border-color 0.3s ease;
         }
 
         .clock-center {
@@ -130,283 +227,298 @@
             left: 50%;
             width: 16px;
             height: 16px;
-            background: #1f2937;
+            background: var(--card-bg);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
-            border: 2px solid white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
         /* Clock Numbers */
         .clock-number {
             position: absolute;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #1f2937;
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: var(--clock-number-color);
             transform: translate(-50%, -50%);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         .num-12 {
-            top: 4%;
+            top: 6%;
             left: 50%;
-            color: white;
         }
 
         .num-6 {
-            bottom: 4%;
+            bottom: 6%;
             left: 50%;
         }
 
         .num-3 {
             top: 50%;
-            right: 4%;
-            color: white;
+            right: 6%;
         }
 
         .num-9 {
             top: 50%;
-            left: 4%;
-            color: white;
+            left: 6%;
         }
 
         /* Labels on Clock */
         .label-zone {
             position: absolute;
             font-weight: 800;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
+        /* Adjusted colors for better contrast in both modes */
         .label-nach {
             top: 30%;
             right: 12%;
             transform: rotate(15deg);
+            color: #064e3b;
+            opacity: 0.8;
         }
 
         .label-vor {
             top: 30%;
             left: 20%;
             transform: rotate(-15deg);
+            color: #7f1d1d;
+            opacity: 0.8;
         }
 
         .label-halb {
-            bottom: 20%;
+            bottom: 22%;
             left: 50%;
             transform: translateX(-50%);
-            color: #1f2937;
-            text-shadow: none;
-            font-size: 0.8rem;
+            color: #78350f;
+            opacity: 0.9;
+            font-size: 0.9rem;
             text-align: center;
         }
 
         /* Legend */
         .legend {
-            background: #f9fafb;
-            padding: 15px;
-            border-radius: 8px;
+            background: var(--section-bg);
+            padding: 20px;
+            border-radius: 12px;
             width: 100%;
             font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        .legend-item strong {
+            margin-right: 5px;
         }
 
         .dot {
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            margin-right: 10px;
+            margin-right: 12px;
+            box-shadow: 0 0 8px currentColor;
         }
 
         /* The Rules Section */
         .rules-container h2 {
             margin-top: 0;
-            color: #111827;
-            font-size: 1.4rem;
-            border-bottom: 2px solid #e5e7eb;
-            padding-bottom: 12px;
-            margin-bottom: 20px;
+            color: var(--accent-green);
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .rule-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-left: 5px solid #1f2937;
-            padding: 16px;
-            margin-bottom: 16px;
-            border-radius: 4px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--text-muted);
+            padding: 18px;
+            margin-bottom: 18px;
+            border-radius: 0 8px 8px 0;
+            transition: background-color 0.3s ease;
         }
 
         .rule-card strong {
             display: block;
-            margin-bottom: 4px;
-            font-size: 1.05rem;
+            margin-bottom: 6px;
+            font-size: 1.1rem;
+            color: var(--text-main);
         }
 
         .rule-card small {
             display: block;
-            margin-top: 6px;
+            margin-top: 8px;
             color: var(--text-muted);
+            font-family: monospace;
         }
 
         .rule-card.warning {
             border-left-color: var(--accent-red);
-            background: #fef2f2;
+            background: rgba(255, 74, 87, 0.05);
         }
 
         .rule-card.info {
             border-left-color: var(--accent-yellow);
-            background: #fffbeb;
+            background: rgba(251, 191, 36, 0.05);
         }
 
         /* Data Table */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 25px;
             font-size: 0.95rem;
         }
 
         th,
         td {
-            padding: 10px;
+            padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
         }
 
         th {
-            background-color: #f3f4f6;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 0.85rem;
+            background-color: var(--section-bg);
+            color: var(--accent-green);
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 6px 6px 0 0;
         }
 
-        /* New Examples Section */
+        td {
+            color: var(--text-main);
+        }
+
+        td strong {
+            color: var(--accent-yellow);
+        }
+
+        /* Examples Section */
         .examples-section {
-            background: #f9fafb;
-            padding: 30px;
-            border-top: 1px solid #e5e7eb;
+            background: var(--section-bg);
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            transition: background-color 0.3s ease;
         }
 
         .section-title {
             text-align: center;
-            color: #111827;
+            color: var(--accent-green);
             margin-top: 0;
-            margin-bottom: 25px;
-            font-size: 1.4rem;
+            margin-bottom: 35px;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Grid for cards */
         .examples-grid {
             display: grid;
             grid-template-columns: 1fr;
-            /* Stacks rows vertically */
             gap: 24px;
         }
 
-        /* Card Layout: Left Icon | Center Text | Right Clock */
+        /* Card Layout */
         .example-card {
-            background: #EFF6FF;
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
             padding: 24px;
             display: flex;
             flex-direction: row;
-            /* Horizontal Layout */
             align-items: center;
-            /* Vertically Center Items */
             text-align: left;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
             justify-content: space-between;
-            /* Ensures spacing if content is short */
         }
 
         .example-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            border-color: var(--accent-green);
+            box-shadow: 0 4px 20px rgba(0, 255, 161, 0.1);
         }
 
-        /* Left: Icon */
         .icon-wrapper {
-            font-size: 2.5rem;
-            background: #ffffff;
-            width: 70px;
-            height: 70px;
+            font-size: 2rem;
+            background: var(--section-bg);
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 12px;
             color: var(--blue-highlight);
             flex-shrink: 0;
-            /* Prevents shrinking */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
         }
 
-        /* Center: Text Content */
         .card-content {
             flex: 1;
-            /* Takes available space */
             padding: 0 24px;
-            /* Space between icon and clock */
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
         .example-card h3 {
-            margin: 0 0 6px;
-            color: var(--text-muted);
+            margin: 0 0 8px;
+            color: var(--accent-green);
             text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
             font-weight: 700;
         }
 
         .example-sentence {
-            font-size: 1.2rem;
-            font-weight: 500;
+            font-size: 1.1rem;
+            font-weight: 400;
             font-style: italic;
             margin: 0 0 8px 0;
-            color: #1f2937;
-            line-height: 1.4;
+            color: var(--text-main);
+            line-height: 1.5;
         }
 
         .breakdown {
-            font-size: 0.95rem;
-            color: #4b5563;
+            font-size: 0.9rem;
+            color: var(--text-muted);
             line-height: 1.5;
             margin: 0;
         }
 
         .highlight-phrase {
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(0, 255, 161, 0.1);
             padding: 2px 6px;
             border-radius: 4px;
-            color: #1d4ed8;
+            color: var(--accent-green);
             font-weight: 600;
             white-space: nowrap;
+            border: 1px solid var(--accent-green);
         }
 
-        /* Right: Clock */
+        /* Mini Clocks */
         .mini-clock {
             position: relative;
             width: 80px;
             height: 80px;
-            border: 4px solid #e5e7eb;
+            border: 3px solid var(--text-muted);
             border-radius: 50%;
-            background: white;
+            background: var(--section-bg);
             flex-shrink: 0;
-            /* Prevents shrinking */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         .mini-hand-hour {
@@ -415,7 +527,7 @@
             left: 50%;
             width: 4px;
             height: 20px;
-            background: #1f2937;
+            background: var(--text-main);
             transform-origin: bottom center;
             border-radius: 2px;
             z-index: 2;
@@ -427,7 +539,7 @@
             left: 50%;
             width: 2px;
             height: 30px;
-            background: var(--accent-red);
+            background: var(--accent-green);
             transform-origin: bottom center;
             border-radius: 2px;
             z-index: 1;
@@ -437,9 +549,9 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 8px;
-            height: 8px;
-            background: #1f2937;
+            width: 6px;
+            height: 6px;
+            background: var(--text-main);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             z-index: 3;
@@ -451,46 +563,49 @@
             bottom: -25px;
             text-align: center;
             font-size: 0.8rem;
-            color: #1f2937;
+            color: var(--text-muted);
             font-weight: bold;
         }
 
         /* INTERACTIVE PLAYGROUND CSS */
         .interactive-section {
-            background: #1f2937;
-            padding: 30px;
-            color: white;
-            border-top: 1px solid #374151;
+            background: var(--header-bg);
+            padding: 40px;
+            color: var(--text-main);
+            border-top: 1px solid var(--accent-green);
+            transition: background-color 0.3s ease;
         }
 
         .playground-card {
-            background: #374151;
-            border-radius: 16px;
-            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
             display: flex;
-            gap: 40px;
+            gap: 50px;
             align-items: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease;
         }
 
         .pg-clock-container {
             flex-shrink: 0;
-            width: 180px;
-            height: 180px;
-            background: white;
+            width: 200px;
+            height: 200px;
+            background: var(--section-bg);
             border-radius: 50%;
             position: relative;
-            border: 8px solid #4b5563;
+            border: 4px solid var(--accent-green);
+            box-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.2);
         }
 
-        /* Reusing hands but bigger */
         .pg-hand-hour {
             position: absolute;
             top: 50%;
             left: 50%;
             width: 6px;
-            height: 50px;
-            background: #1f2937;
+            height: 55px;
+            background: var(--text-main);
             transform-origin: bottom center;
             border-radius: 4px;
             z-index: 2;
@@ -502,21 +617,22 @@
             top: 50%;
             left: 50%;
             width: 4px;
-            height: 75px;
-            background: #f87171;
+            height: 80px;
+            background: var(--accent-green);
             transform-origin: bottom center;
             border-radius: 4px;
             z-index: 1;
             transition: transform 0.3s cubic-bezier(0.4, 2.08, 0.55, 0.44);
+            box-shadow: 0 0 10px var(--accent-green);
         }
 
         .pg-center {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 12px;
-            height: 12px;
-            background: #1f2937;
+            width: 14px;
+            height: 14px;
+            background: var(--text-main);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             z-index: 3;
@@ -526,7 +642,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
         }
 
         .input-group {
@@ -536,43 +652,47 @@
         }
 
         .time-input {
-            background: #1f2937;
-            border: 2px solid #4b5563;
-            color: white;
-            font-size: 1.5rem;
+            background: var(--input-bg);
+            border: 2px solid var(--border-color);
+            color: var(--accent-green);
+            font-family: monospace;
+            font-size: 2rem;
             padding: 10px;
-            border-radius: 8px;
-            width: 80px;
+            border-radius: 12px;
+            width: 100px;
             text-align: center;
+            transition: all 0.2s;
         }
 
         .time-input:focus {
             outline: none;
-            border-color: var(--blue-highlight);
+            border-color: var(--accent-green);
         }
 
         .result-display {
-            background: #1f2937;
-            padding: 20px;
-            border-radius: 12px;
+            background: var(--section-bg);
+            padding: 25px;
+            border-radius: 16px;
             min-height: 80px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            border: 1px solid var(--border-color);
         }
 
         .result-label {
             font-size: 0.8rem;
             text-transform: uppercase;
-            color: #9ca3af;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            letter-spacing: 1.5px;
         }
 
         .result-text {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            color: var(--accent-yellow);
+            color: var(--accent-green);
+            text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.4);
         }
 
         /* Footer Controls */
@@ -581,22 +701,22 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: white;
-            border-top: 1px solid #e5e7eb;
+            background: var(--header-bg);
+            border-top: 1px solid var(--border-color);
             padding: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 -10px 20px var(--shadow-color);
             z-index: 100;
         }
 
         .lang-toggle-container {
             display: flex;
-            background: #f3f4f6;
-            padding: 4px;
+            background: var(--card-bg);
+            padding: 5px;
             border-radius: 30px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid var(--border-color);
         }
 
         .lang-btn {
@@ -608,17 +728,22 @@
             font-size: 0.9rem;
             transition: all 0.2s;
             background: transparent;
-            color: #6b7280;
+            color: var(--text-muted);
         }
 
         .lang-btn.active {
-            background: white;
-            color: #1f2937;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: var(--accent-green);
+            color: #020617;
+            /* Always dark text on active button */
+            box-shadow: 0 0 15px rgba(0, 255, 161, 0.4);
         }
 
-        /* Responsive */
         @media (max-width: 600px) {
+            .theme-btn {
+                font-size: 1rem;
+                padding: 6px 10px;
+            }
+
             .example-card {
                 flex-direction: column;
                 text-align: center;
@@ -645,7 +770,7 @@
             .playground-card {
                 flex-direction: column;
                 text-align: center;
-                gap: 20px;
+                gap: 30px;
             }
 
             .input-group {
@@ -707,9 +832,12 @@
 
                 <div class="legend">
                     <div class="legend-item">
-                        <div class="dot" style="background: var(--accent-green)"></div>
-                        <span class="lang-es"><strong>Verde (0–20):</strong> usa "nach" (pasadas las)</span>
-                        <span class="lang-en"><strong>Green (0–20):</strong> use "nach" (past)</span>
+                        <div class="dot"
+                            style="background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green);"></div>
+                        <span class="lang-es"><strong style="color:var(--accent-green)">Verde (0–20):</strong> usa
+                            "nach" (pasadas las)</span>
+                        <span class="lang-en"><strong style="color:var(--accent-green)">Green (0–20):</strong> use
+                            "nach" (past)</span>
                     </div>
                     <div class="legend-item">
                         <div class="dot" style="background: var(--accent-yellow)"></div>
@@ -782,12 +910,28 @@
                         <td>Viertel nach acht</td>
                     </tr>
                     <tr>
+                        <td>8:24</td>
+                        <td>Vierundzwanzig nach acht</td>
+                    </tr>
+                    <tr>
+                        <td>8:24</td>
+                        <td style="color: var(--accent-yellow); font-weight: 700;">Sechs vor halb neun</td>
+                    </tr>
+                    <tr>
                         <td>8:30</td>
                         <td><strong>Halb neun</strong> (+1 h)</td>
                     </tr>
                     <tr>
+                        <td>8:40</td>
+                        <td>Acht vierzig</td>
+                    </tr>
+                    <tr>
+                        <td>8:40</td>
+                        <td style="color: var(--accent-yellow); font-weight: 700;">Zwanzig vor neun</td>
+                    </tr>
+                    <tr>
                         <td>8:45</td>
-                        <td>Viertel vor neun</td>
+                        <td style="color: var(--accent-yellow); font-weight: 700;">Viertel vor neun</td>
                     </tr>
                 </table>
             </div>
@@ -804,14 +948,16 @@
 
                 <!-- Basic Uhr Example -->
                 <div class="example-card">
-                    <div class="icon-wrapper" style="color: #4b5563;">⏰</div>
+                    <div class="icon-wrapper" style="color: var(--text-muted); border-color:var(--border-color);">⏰
+                    </div>
                     <div class="card-content">
-                        <h3>
+                        <h3 style="color:var(--text-main);">
                             <span class="lang-es">Básico "Uhr" (En punto)</span>
                             <span class="lang-en">Basic "Uhr" (O'clock)</span>
                         </h3>
                         <p class="example-sentence">"Der Unterricht beginnt um <span class="highlight-phrase"
-                                style="color: #1f2937; background: #e5e7eb;">acht Uhr</span>."</p>
+                                style="color: var(--text-main); border-color:var(--text-main); background: rgba(125,125,125,0.1);">acht
+                                Uhr</span>."</p>
                         <div class="breakdown">
                             <span class="lang-es"><strong>Lógica:</strong> Hora exacta.<br><strong>Hora:</strong>
                                 08:00</span>
@@ -819,25 +965,29 @@
                                 08:00</span>
                         </div>
                     </div>
-                    <!-- Clock: 8:00 (Dark Border) -->
-                    <div class="mini-clock" style="border-color: #4b5563;">
+                    <!-- Clock: 8:00 -->
+                    <div class="mini-clock" style="border-color: var(--text-muted);">
                         <div class="mini-clock-center"></div>
                         <div class="mini-hand-hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
-                        <div class="mini-hand-min" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                        <div class="mini-hand-min"
+                            style="transform: translate(-50%, -100%) rotate(0deg); background:var(--text-main); box-shadow:none;">
+                        </div>
                         <div class="mini-clock-label">08:00</div>
                     </div>
                 </div>
 
                 <!-- Basic Nach Example -->
                 <div class="example-card">
-                    <div class="icon-wrapper" style="color: var(--accent-green);">☕</div>
+                    <div class="icon-wrapper" style="color: var(--accent-green); border-color:var(--accent-green);">☕
+                    </div>
                     <div class="card-content">
                         <h3>
                             <span class="lang-es">Básico "Nach" (Pasadas las)</span>
                             <span class="lang-en">Basic "Nach" (Past)</span>
                         </h3>
                         <p class="example-sentence">"Die Pause ist um <span class="highlight-phrase"
-                                style="color: var(--accent-green); background: #ecfdf5;">zwanzig nach vier</span>."</p>
+                                style="color: var(--accent-green); background: rgba(0, 255, 161, 0.1); border-color:var(--accent-green);">zwanzig
+                                nach vier</span>."</p>
                         <div class="breakdown">
                             <span class="lang-es"><strong>Lógica:</strong> Pasadas las...<br><strong>Hora:</strong>
                                 04:20</span>
@@ -855,14 +1005,15 @@
 
                 <!-- Basic Vor Example (Updated to Viertel) -->
                 <div class="example-card">
-                    <div class="icon-wrapper" style="color: var(--accent-red);">🎬</div>
+                    <div class="icon-wrapper" style="color: var(--accent-red); border-color:var(--accent-red);">🎬</div>
                     <div class="card-content">
-                        <h3>
+                        <h3 style="color:var(--accent-red);">
                             <span class="lang-es">Uso de "Viertel" (Cuarto)</span>
                             <span class="lang-en">Using "Viertel" (Quarter)</span>
                         </h3>
                         <p class="example-sentence">"Der Film beginnt um <span class="highlight-phrase"
-                                style="color: var(--accent-red); background: #fef2f2;">Viertel vor elf</span>."</p>
+                                style="color: var(--accent-red); background: rgba(255, 74, 87, 0.1); border-color:var(--accent-red);">Viertel
+                                vor elf</span>."</p>
                         <div class="breakdown">
                             <span class="lang-es"><strong>Lógica:</strong> Cuarto para las...<br><strong>Hora:</strong>
                                 10:45</span>
@@ -873,21 +1024,25 @@
                     <div class="mini-clock" style="border-color: var(--accent-red);">
                         <div class="mini-clock-center"></div>
                         <div class="mini-hand-hour" style="transform: translate(-50%, -100%) rotate(322.5deg);"></div>
-                        <div class="mini-hand-min" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                        <div class="mini-hand-min"
+                            style="transform: translate(-50%, -100%) rotate(270deg); background:var(--accent-red); box-shadow:0 0 5px var(--accent-red);">
+                        </div>
                         <div class="mini-clock-label">10:45</div>
                     </div>
                 </div>
 
                 <!-- Travel Example -->
                 <div class="example-card">
-                    <div class="icon-wrapper">🚆</div>
+                    <div class="icon-wrapper" style="color: var(--blue-highlight); border-color:var(--blue-highlight);">
+                        🚆</div>
                     <div class="card-content">
-                        <h3>
+                        <h3 style="color:var(--blue-highlight);">
                             <span class="lang-es">Viajes (Comprensión Lectora)</span>
                             <span class="lang-en">Travel (Reading Comprehension)</span>
                         </h3>
-                        <p class="example-sentence">"Lis Zug kommt <span class="highlight-phrase">nach halb eins</span>
-                            an."</p>
+                        <p class="example-sentence">"Lis Zug kommt <span class="highlight-phrase"
+                                style="color:var(--blue-highlight); border-color:var(--blue-highlight); background:rgba(56, 189, 248, 0.15);">nach
+                                halb eins</span> an."</p>
                         <div class="breakdown">
                             <span class="lang-es">
                                 <strong>El texto dice:</strong> 12:36<br>
@@ -901,22 +1056,25 @@
                             </span>
                         </div>
                     </div>
-                    <div class="mini-clock" style="border-color: #3B82F6;">
+                    <div class="mini-clock" style="border-color: var(--blue-highlight);">
                         <div class="mini-clock-center"></div>
                         <div class="mini-hand-hour" style="transform: translate(-50%, -100%) rotate(15deg);"></div>
-                        <div class="mini-hand-min" style="transform: translate(-50%, -100%) rotate(216deg);"></div>
+                        <div class="mini-hand-min"
+                            style="transform: translate(-50%, -100%) rotate(216deg); background:var(--blue-highlight); box-shadow:0 0 5px var(--blue-highlight);">
+                        </div>
                         <div class="mini-clock-label">12:36</div>
                     </div>
                 </div>
 
                 <!-- Social Example -->
                 <div class="example-card">
-                    <div class="icon-wrapper" style="color: #d97706; background: #fffbeb;">🍽️</div>
+                    <div class="icon-wrapper" style="color: var(--accent-yellow); border-color:var(--accent-yellow);">
+                        🍽️</div>
                     <div class="card-content">
-                        <h3>Social</h3>
+                        <h3 style="color:var(--accent-yellow);">Social</h3>
                         <p class="example-sentence">"Wir essen um <span class="highlight-phrase"
-                                style="color:#d97706; background:rgba(251, 191, 36, 0.15)">fünf vor halb sieben</span>."
-                        </p>
+                                style="color:var(--accent-yellow); background:rgba(251, 191, 36, 0.15); border-color:var(--accent-yellow);">fünf
+                                vor halb sieben</span>."</p>
                         <div class="breakdown">
                             <span class="lang-es">
                                 <strong>Lógica:</strong> "Halb sieben" son las 6:30.<br>
@@ -933,7 +1091,9 @@
                     <div class="mini-clock" style="border-color: var(--accent-yellow);">
                         <div class="mini-clock-center"></div>
                         <div class="mini-hand-hour" style="transform: translate(-50%, -100%) rotate(195deg);"></div>
-                        <div class="mini-hand-min" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                        <div class="mini-hand-min"
+                            style="transform: translate(-50%, -100%) rotate(150deg); background:var(--accent-yellow); box-shadow:0 0 5px var(--accent-yellow);">
+                        </div>
                         <div class="mini-clock-label">06:25</div>
                     </div>
                 </div>
@@ -943,7 +1103,8 @@
 
         <!-- Interactive Playground Section -->
         <div class="interactive-section">
-            <h2 class="section-title" style="color: white; margin-bottom: 30px;">
+            <h2 class="section-title"
+                style="color: var(--text-main); margin-bottom: 30px; text-shadow:0 0 10px rgba(255,255,255,0.3);">
                 <span class="lang-es">Zona Interactiva: ¡Pruébalo!</span>
                 <span class="lang-en">Interactive Zone: Test Yourself!</span>
             </h2>
@@ -953,18 +1114,10 @@
                 <div class="pg-clock-container">
                     <div class="pg-center"></div>
                     <!-- Numbers simplified -->
-                    <div
-                        style="position:absolute; top:5px; left:50%; transform:translateX(-50%); font-weight:bold; color:#333;">
-                        12</div>
-                    <div
-                        style="position:absolute; bottom:5px; left:50%; transform:translateX(-50%); font-weight:bold; color:#333;">
-                        6</div>
-                    <div
-                        style="position:absolute; top:50%; right:5px; transform:translateY(-50%); font-weight:bold; color:#333;">
-                        3</div>
-                    <div
-                        style="position:absolute; top:50%; left:5px; transform:translateY(-50%); font-weight:bold; color:#333;">
-                        9</div>
+                    <div class="clock-number num-12">12</div>
+                    <div class="clock-number num-6">6</div>
+                    <div class="clock-number num-3">3</div>
+                    <div class="clock-number num-9">9</div>
 
                     <div id="pg-hand-hour" class="pg-hand-hour"></div>
                     <div id="pg-hand-min" class="pg-hand-min"></div>
@@ -976,15 +1129,19 @@
                     <!-- Inputs Top Right -->
                     <div class="input-group">
                         <div>
-                            <label style="display:block; font-size:0.8rem; margin-bottom:5px; color:#9ca3af;">
+                            <label
+                                style="display:block; font-size:0.8rem; margin-bottom:5px; color:var(--text-muted); font-weight:bold;">
                                 <span class="lang-es">HORA</span><span class="lang-en">HOUR</span>
                             </label>
                             <input type="number" id="input-hour" class="time-input" min="0" max="23" value="10"
                                 oninput="updatePlayground()">
                         </div>
-                        <div style="font-size: 2rem; align-self: flex-end; margin-bottom: 10px;">:</div>
+                        <div
+                            style="font-size: 2rem; align-self: flex-end; margin-bottom: 10px; color:var(--text-main);">
+                            :</div>
                         <div>
-                            <label style="display:block; font-size:0.8rem; margin-bottom:5px; color:#9ca3af;">
+                            <label
+                                style="display:block; font-size:0.8rem; margin-bottom:5px; color:var(--text-muted); font-weight:bold;">
                                 <span class="lang-es">MIN</span><span class="lang-en">MIN</span>
                             </label>
                             <input type="number" id="input-min" class="time-input" min="0" max="59" value="24"
@@ -1002,13 +1159,14 @@
 
                         <!-- NEW: LatAm Section added -->
                         <div class="latam-section"
-                            style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #374151;">
-                            <div class="result-label" style="color: #60a5fa;">
+                            style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color);">
+                            <div class="result-label" style="color: var(--blue-highlight);">
                                 <span class="lang-es">En Latinoamérica (Coloquial):</span>
                                 <span class="lang-en">In Latin America (Colloquial):</span>
                             </div>
-                            <div id="latam-text" class="result-text" style="color: #93c5fd; font-size: 1.4rem;">Seis
-                                para las diez y media</div>
+                            <div id="latam-text" class="result-text"
+                                style="color: var(--blue-highlight); font-size: 1.4rem; text-shadow:0 0 5px rgba(147, 197, 253, 0.3);">
+                                Seis para las diez y media</div>
                         </div>
                     </div>
                 </div>
@@ -1021,9 +1179,18 @@
             <button class="lang-btn active" id="btn-es" onclick="setLanguage('es')">Español</button>
             <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">English</button>
         </div>
+        <!-- THEME TOGGLE BUTTON -->
+        <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Dark/Light Mode">
+            <span class="icon-sun">☀️</span>
+            <span class="icon-moon">🌙</span>
+        </button>
     </div>
 
     <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
+
         function setLanguage(lang) {
             // Toggle body class
             document.body.classList.remove('mode-es', 'mode-en');
