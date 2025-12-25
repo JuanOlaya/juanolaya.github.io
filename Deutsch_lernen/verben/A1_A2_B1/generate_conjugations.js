@@ -77,6 +77,7 @@ const verbsDB = {
     'lösen': { es: 'resolver', en: 'to solve' },
 
     // A2.1
+    'freuen': { es: 'alegrarse', en: 'to be happy', refl: true },
     'füllen': { es: 'llenar', en: 'to fill' },
     'verbieten': { type: 'strong', irregular: true, stem: 'verbot', pp: 'verboten', es: 'prohibir', en: 'to forbid' },
     'verlassen': { type: 'strong', irregular: true, stem: 'verließ', pp: 'verlassen', es: 'abandonar', en: 'to leave' },
