@@ -102,7 +102,8 @@ const verbsDB = {
     'rufen': { type: 'strong', irregular: true, stem: 'rief', pp: 'gerufen', es: 'llamar', en: 'to call' },
     'grüßen': { es: 'saludar', en: 'to greet' },
     'ziehen': { type: 'strong', irregular: true, stem: 'zog', pp: 'gezogen', es: 'tirar/mudar', en: 'to pull/move' },
-    'bewegen': { es: 'mover', en: 'to move' } // regular usually (emotion is strong, movement regular)
+    'bewegen': { es: 'mover', en: 'to move' }, // regular usually (emotion is strong, movement regular)
+    'empfehlen': { type: 'strong', irregular: true, stem: 'empfahl', pp: 'empfohlen', es: 'recomendar', en: 'to recommend' }
 };
 
 // Utils
@@ -146,6 +147,7 @@ function generatePraesens(verb, data) {
     if (verb === 'abfahren' || verb === 'anfahren') { du_stem = 'fähr'; er_stem = 'fähr'; }
     if (verb === 'lassen' || verb === 'verlassen') { du_stem = 'lässt'; er_stem = 'lässt'; st = 'est'; } // irregular
     if (verb === 'lesen') { du_stem = 'lies'; er_stem = 'lies'; }
+    if (verb === 'empfehlen') { du_stem = 'empfiehl'; er_stem = 'empfiehl'; }
 
     let prefix_suffix = data.prefix ? ` ${data.prefix}` : '';
 

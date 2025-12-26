@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const levelConfig = {
         'A1_1': { groupCount: 10, displayName: 'A1.1' },
         'A1_2': { groupCount: 8, displayName: 'A1.2' },
-        'A2_1': { groupCount: 10, displayName: 'A2.1' },
+        'A2_1': { groupCount: 9, displayName: 'A2.1' },
         'A2_2': { groupCount: 13, displayName: 'A2.2' },
         'B1_1': { groupCount: 7, displayName: 'B1.1' },
         'B2_1': { groupCount: 1, displayName: 'B2.1' }
@@ -1685,6 +1685,16 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         };
 
+        // Helper to toggle Mental Trick visibility
+        window.toggleTrick = function (btn) {
+            const content = btn.parentElement.nextElementSibling;
+            if (content && content.classList.contains('truco-content')) {
+                const isHidden = content.style.display === 'none';
+                content.style.display = isHidden ? 'block' : 'none';
+                btn.textContent = isHidden ? '▼' : '▶';
+            }
+        };
+
         // Helper to render standard Word List UI
         const renderStandardWordList = (container, contentEl, wordObjects) => {
             if (!container || !contentEl) return;
@@ -1725,7 +1735,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         contentHTML += `• <span class="wf-word-german" onclick="speak('${wordData.word}')" title="Aussprache hören">${wordData.word}</span>`;
                         if (abbrev) contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
                         contentHTML += `</div>`;
-                        contentHTML += `<div class="wf-word-translation">${wordData.es}</div>`;
+
+                        // Translation + Toggle Button
+                        contentHTML += `<div class="wf-word-translation">`;
+                        contentHTML += `${wordData.es}`;
+                        if (wordData.truco) {
+                            contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">▶</span>`;
+                        }
+                        contentHTML += `</div>`;
+
+                        // Hidden Truco Content
+                        if (wordData.truco) {
+                            contentHTML += `<div class="truco-content" style="display: none; margin-left: 15px; font-style: italic; color: #555; background-color: #f9f9f9; padding: 5px; border-left: 3px solid #ffd700; margin-top: 5px; border-radius: 4px;">`;
+                            contentHTML += `💡 <strong>Truco:</strong> ${wordData.truco}`;
+                            contentHTML += `</div>`;
+                        }
+
                         contentHTML += `</div>`;
                     });
                     contentHTML += `</div>`;
@@ -1744,7 +1769,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         contentHTML += `• <span class="wf-word-german" onclick="speak('${wordData.word}')" title="Aussprache hören">${wordData.word}</span>`;
                         if (abbrev) contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
                         contentHTML += `</div>`;
-                        contentHTML += `<div class="wf-word-translation">${wordData.es}</div>`;
+
+                        // Translation + Toggle Button
+                        contentHTML += `<div class="wf-word-translation">`;
+                        contentHTML += `${wordData.es}`;
+                        if (wordData.truco) {
+                            contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">▶</span>`;
+                        }
+                        contentHTML += `</div>`;
+
+                        // Hidden Truco Content
+                        if (wordData.truco) {
+                            contentHTML += `<div class="truco-content" style="display: none; margin-left: 15px; font-style: italic; color: #555; background-color: #f9f9f9; padding: 5px; border-left: 3px solid #ffd700; margin-top: 5px; border-radius: 4px;">`;
+                            contentHTML += `💡 <strong>Truco:</strong> ${wordData.truco}`;
+                            contentHTML += `</div>`;
+                        }
+
                         contentHTML += `</div>`;
                     });
                     contentHTML += `</div>`;
