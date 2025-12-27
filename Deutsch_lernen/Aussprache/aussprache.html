@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aussprache - Pronunciación Alemana</title>
+    <style>
+        :root {
+            /* --- DEFAULT DARK MODE PALETTE --- */
+            --bg-color: #0f172a;
+            /* Slate 900 */
+            --card-bg: #1e293b;
+            /* Slate 800 */
+            --header-bg: #020617;
+            /* Slate 950 */
+            --section-bg: #0f172a;
+            /* Slate 900 */
+
+            --text-main: #f1f5f9;
+            /* Slate 100 */
+            --text-muted: #94a3b8;
+            /* Slate 400 */
+            --border-color: #334155;
+            /* Slate 700 */
+
+            /* LEVEL COLORS - Reused for categories */
+            --level-a1: #3b82f6;
+            /* 🟦 Blue - Vocales Basics */
+            --level-a2: #eab308;
+            /* 🟨 Yellow - Umlauts */
+            --level-b1: #f97316;
+            /* 🟧 Orange - Sibilantes */
+            --level-b2: #ef4444;
+            /* 🟥 Red - Guturales/Complejas */
+
+            --accent-green: #00FFA1;
+            /* Main Accent */
+
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glow-strength: 20px;
+
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* --- LIGHT MODE OVERRIDES --- */
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            /* Slate 100 */
+            --card-bg: #ffffff;
+            /* White */
+            --header-bg: #ffffff;
+            /* White */
+            --section-bg: #e2e8f0;
+            /* Slate 200 */
+
+            --text-main: #1e293b;
+            /* Slate 800 */
+            --text-muted: #64748b;
+            /* Slate 500 */
+            --border-color: #cbd5e1;
+            /* Slate 300 */
+
+            /* DARKER ACCENTS FOR VISIBILITY */
+            --level-a1: #2563eb;
+            --level-a2: #ca8a04;
+            --level-b1: #ea580c;
+            --level-b2: #dc2626;
+
+            --accent-green: #059669;
+
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --glow-strength: 0px;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 80px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Header */
+        header {
+            background: var(--header-bg);
+            color: var(--text-main);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-green);
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle-wrapper {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .theme-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px var(--shadow-color);
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-green);
+        }
+
+        body:not(.light-mode) .icon-sun {
+            display: block;
+        }
+
+        body:not(.light-mode) .icon-moon {
+            display: none;
+        }
+
+        body.light-mode .icon-sun {
+            display: none;
+        }
+
+        body.light-mode .icon-moon {
+            display: block;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: var(--accent-green);
+            text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.3);
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- VISUAL GUIDE SECTION --- */
+        .visual-guide-section {
+            padding: 30px 40px;
+            background: var(--section-bg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .guide-title {
+            text-align: center;
+            color: var(--text-muted);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .position-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .pos-card {
+            flex: 1;
+            min-width: 180px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pos-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+
+        .pos-card.pos-0::before {
+            background: var(--level-a2);
+        }
+
+        /* Yellow for Umlauts */
+        .pos-card.pos-1::before {
+            background: var(--level-b2);
+        }
+
+        /* Red for Throat */
+        .pos-card.pos-end::before {
+            background: var(--level-b1);
+        }
+
+        /* Orange for Teeth */
+
+        .pos-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .pos-name {
+            font-weight: 800;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .pos-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .syntax-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .syntax-box span.highlight {
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        /* Grid Layout */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+            background: var(--bg-color);
+        }
+
+        @media (max-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .position-cards {
+                flex-direction: column;
+            }
+        }
+
+        /* Level Card */
+        .level-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 15px -3px var(--shadow-color);
+            transition: transform 0.2s;
+        }
+
+        .level-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .level-header {
+            padding: 15px 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .level-header.a1 {
+            background: var(--level-a1);
+            box-shadow: 0 0 var(--glow-strength) var(--level-a1);
+        }
+
+        .level-header.a2 {
+            background: var(--level-a2);
+            box-shadow: 0 0 var(--glow-strength) var(--level-a2);
+        }
+
+        .level-header.b1 {
+            background: var(--level-b1);
+            box-shadow: 0 0 var(--glow-strength) var(--level-b1);
+        }
+
+        .level-header.b2 {
+            background: var(--level-b2);
+            box-shadow: 0 0 var(--glow-strength) var(--level-b2);
+        }
+
+        .level-content {
+            padding: 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 15px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            margin-left: 5px;
+            vertical-align: middle;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* Replaced content with phonetic hints */
+        .tag.hint-blue {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--level-a1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .tag.hint-yellow {
+            background: rgba(234, 179, 8, 0.15);
+            color: var(--level-a2);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        .tag.hint-orange {
+            background: rgba(249, 115, 22, 0.15);
+            color: var(--level-b1);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+
+        .tag.hint-red {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--level-b2);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .german-word {
+            font-weight: 700;
+            color: var(--accent-green);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform 0.1s ease, color 0.2s;
+            font-size: 1.1rem;
+        }
+
+        .german-word:hover {
+            color: var(--text-main);
+        }
+
+        .audio-icon {
+            font-size: 0.8em;
+            opacity: 0.6;
+            filter: grayscale(1);
+            transition: filter 0.2s, opacity 0.2s;
+        }
+
+        .german-word:hover .audio-icon {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+
+        .spanish-word {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: block;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* Rule Section */
+        .rule-section {
+            padding: 30px 40px 50px 40px;
+            background: var(--section-bg);
+            border-top: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .rule-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .rule-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 6px solid var(--accent-green);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .rule-card.warning {
+            border-left-color: var(--level-b2);
+        }
+
+        /* Red warning */
+        .rule-card.info {
+            border-left-color: var(--level-a1);
+        }
+
+        /* Blue info */
+
+        .rule-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--accent-green);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rule-card.warning .rule-title {
+            color: var(--level-b2);
+        }
+
+        .rule-card.info .rule-title {
+            color: var(--level-a1);
+        }
+
+        .rule-content {
+            font-size: 1rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .rule-example {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(0, 255, 161, 0.05);
+            border-radius: 6px;
+            font-family: monospace;
+            border: 1px dashed var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .rule-card.warning .rule-example {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .rule-example strong {
+            color: var(--text-main);
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background: var(--header-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body class="mode-es">
+
+    <div class="container">
+        <header>
+            <div class="theme-toggle-wrapper">
+                <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Dark/Light Mode">
+                    <span class="icon-sun">☀️</span>
+                    <span class="icon-moon">🌙</span>
+                </button>
+            </div>
+
+            <h1>Aussprache - Pronunciación</h1>
+            <p>Guía de Alemán para Hispanohablantes: Vocales, Umlauts y Consonantes</p>
+        </header>
+
+        <!-- VISUAL GUIDE: MOUTH POSITIONS -->
+        <div class="visual-guide-section">
+            <div class="guide-title">Conceptos Clave: La Boca y la Garganta</div>
+            <div class="position-cards">
+
+                <!-- Position 0 -->
+                <div class="pos-card pos-0">
+                    <span class="pos-icon">😮 ➡️ 😊</span>
+                    <span class="pos-name">Labios Redondeados</span>
+                    <span class="pos-desc">Crucial para los Umlauts (Ö, Ü)</span>
+                    <div class="syntax-box">
+                        Pon boca de <span class="highlight">O/U</span>, pero di <span class="highlight">E/I</span>.
+                    </div>
+                </div>
+
+                <!-- Position 1 -->
+                <div class="pos-card pos-1">
+                    <span class="pos-icon">🌬️🐈‍⬛</span>
+                    <span class="pos-name">El Aire y la Garganta</span>
+                    <span class="pos-desc">Las dos "CH" y la "H" aspirada</span>
+                    <div class="syntax-box">
+                        Jota fuerte (Ach) vs. Soplido suave (Ich).
+                    </div>
+                </div>
+
+                <!-- End Position -->
+                <div class="pos-card pos-end">
+                    <span class="pos-icon">🦷💥</span>
+                    <span class="pos-name">Dientes y Explosiones</span>
+                    <span class="pos-desc">Sibilantes (SCH, ST, SP, ß, Z)</span>
+                    <div class="syntax-box">
+                        Sonidos fuertes y cortantes. ¡Sin 'E' delante!
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="grid-layout">
+
+            <!-- A1 LEVEL - UMLAUTS -->
+            <div class="level-card">
+                <div class="level-header a2">
+                    <span>Los Umlauts (Ä, Ö, Ü)</span>
+                    <span>🟨</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Letra / Truco</th>
+                                <th>Ejemplo y Audio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="german-word">Ä, ä</div> <span class="tag hint-yellow">Como 'E'
+                                        abierta</span>
+                                    <div class="spanish-word">Similar a una 'E' normal en español.</div>
+                                </td>
+                                <td>
+                                    <div class="german-word">Äpfel</div>
+                                    <div class="spanish-word">(Manzanas)</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">Ö, ö</div> <span class="tag hint-yellow">Boca 'O' -> di
+                                        'E'</span>
+                                    <div class="spanish-word">Redondea mucho los labios como para silbar.</div>
+                                </td>
+                                <td>
+                                    <div class="german-word">schön</div>
+                                    <div class="spanish-word">(bonito)</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">Ü, ü</div> <span class="tag hint-yellow">Boca 'U' -> di
+                                        'I'</span>
+                                    <div class="spanish-word">Como la 'u' francesa. Labios muy cerrados.</div>
+                                </td>
+                                <td>
+                                    <div class="german-word">üben</div>
+                                    <div class="spanish-word">(practicar)</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- A2 LEVEL - DIPHTHONGS & VOWELS -->
+            <div class="level-card">
+                <div class="level-header a1">
+                    <span>Diptongos y Vocales</span>
+                    <span>🟦</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Combinación</th>
+                                <th>Ejemplo y Audio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>ei / ai / ay</strong> <span class="tag hint-blue">Suena 'AI'</span>
+                                    <div class="spanish-word">Como en "b<strong>ai</strong>le".</div>
+                                </td>
+                                <td>
+                                    <div class="german-word">mein</div> / <div class="german-word">Mai</div><br>
+                                    <div class="german-word" style="font-size:0.95em">Weihnachten</div>
+                                    <div class="spanish-word">(mi / mayo / Navidad)</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>eu / äu</strong> <span class="tag hint-blue">Suena 'OI'</span>
+                                    <div class="spanish-word">Como en "b<strong>oi</strong>na".</div>
+                                </td>
+                                <td>
+                                    <div class="german-word">neu</div> / <div class="german-word">Häuser</div>
+                                    <div class="spanish-word">(nuevo / casas)</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>ie</strong> <span class="tag hint-blue">Suena 'I' larga</span>
+                                    <div class="spanish-word">¡No es diptongo! Es una 'i' muy larga.</div>
+                                </td>
+                                <td>
+                                    <div class="german-word">Liebe</div>
+                                    <div class="spanish-word">(amor)</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- NEW: SHORT VS LONG VOWELS -->
+            <div class="level-card">
+                <div class="level-header a1">
+                    <span>Vocales: Cortas vs Largas</span>
+                    <span>🟦</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Vocal</th>
+                                <th>Corta (Rápida) vs Larga (Sostenida)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>A / AA</strong></td>
+                                <td>
+                                    <div class="german-word">kann</div> (corta: poder)<br>
+                                    <div class="german-word">Name</div> (larga: nombre)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>E / EE</strong></td>
+                                <td>
+                                    <div class="german-word">Bett</div> (corta: cama)<br>
+                                    <div class="german-word">Tee</div> (larga: té)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>O / OO</strong></td>
+                                <td>
+                                    <div class="german-word">offen</div> (corta: abierto)<br>
+                                    <div class="german-word">Boot</div> (larga: barco)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>U / UU</strong></td>
+                                <td>
+                                    <div class="german-word">Mutter</div> (corta: madre)<br>
+                                    <div class="german-word">gut</div> (larga: bueno)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- B1 LEVEL - SIBILANTS -->
+            <div class="level-card">
+                <div class="level-header b1">
+                    <span>Sibilantes (S, SCH, ß)</span>
+                    <span>🟧</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sonido / Regla</th>
+                                <th>Ejemplo y Audio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="german-word">sch</div> <span class="tag hint-orange">Como 'SH'
+                                        inglesa</span>
+                                    <div class="spanish-word">Sonido de pedir silencio (shhh).</div>
+                                </td>
+                                <td>
+                                    <div class="german-word">Schule</div>
+                                    <div class="spanish-word">(escuela)</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">st- / sp-</div> <span class="tag hint-orange">SHT / SHP
+                                        (Inicio)</span>
+                                    <div class="spanish-word">Al inicio de sílaba = 'SH'.</div>
+                                </td>
+                                <td>
+                                    <div class="german-word">Straße</div> / <div class="german-word">Sport</div>
+                                    <div class="spanish-word">(calle / deporte)</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">ß (Eszett)</div> <span class="tag hint-orange">Tras vocal
+                                        LARGA</span>
+                                    <div class="spanish-word">Se usa tras diptongos o vocales largas.</div>
+                                </td>
+                                <td>
+                                    <div class="german-word">groß</div> / <div class="german-word">weiß</div>
+                                    <div class="spanish-word">(grande / blanco)</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">ss</div> <span class="tag hint-orange">Tras vocal
+                                        CORTA</span>
+                                    <div class="spanish-word">Se usa cuando la vocal anterior es rápida.</div>
+                                </td>
+                                <td>
+                                    <div class="german-word">Wasser</div> / <div class="german-word">dass</div>
+                                    <div class="spanish-word">(agua / que)</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- B2 LEVEL - COMPLEX/GUTTURAL -->
+            <div class="level-card">
+                <div class="level-header b2">
+                    <span>Guturales y Complejas (CH, PF, CK)</span>
+                    <span>🟥</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Consonante</th>
+                                <th>Ejemplo y Audio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>ch (Ach-Laut)</strong> <span class="tag hint-red">Jota fuerte</span>
+                                    <div class="spanish-word">Tras a, o, u, au. Gutural como 'J' española.</div>
+                                </td>
+                                <td>
+                                    <div class="german-word">Buch</div> / <div class="german-word">lachen</div>
+                                    <div class="spanish-word">(libro / reír)</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>ch (Ich-Laut)</strong> <span class="tag hint-red">Soplido suave</span>
+                                    <div class="spanish-word">Tras i, e, ä, ö, ü, consonantes. Como un gato bufando
+                                        suave.</div>
+                                </td>
+                                <td>
+                                    <div class="german-word">ich</div> / <div class="german-word">Mädchen</div>
+                                    <div class="spanish-word">(yo / chica)</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">pf</div> <span class="tag hint-red">Explosivo P+F</span>
+                                    <div class="spanish-word">Ambas letras suenan rápido. Labio inferior bajo dientes.
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="german-word">Pferd</div> / <div class="german-word">Apfel</div>
+                                    <div class="spanish-word">(caballo / manzana)</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="german-word">ck</div> <span class="tag hint-red">K corta-vocales</span>
+                                    <div class="spanish-word">Suena 'K'. Indica que la vocal ANTERIOR es corta.</div>
+                                </td>
+                                <td>
+                                    <div class="german-word">backen</div>
+                                    <div class="spanish-word">(hornear - 'a' corta)</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RULES SECTION -->
+        <div class="rule-section">
+            <!-- Rule 1: The CH challenge -->
+            <div class="rule-card info">
+                <div class="rule-title">
+                    <span>ℹ️ La regla de oro de la "CH"</span>
+                </div>
+                <div class="rule-content">
+                    La pronunciación de <strong>CH</strong> depende de la vocal que la precede.
+                    <br><br>
+                    1. <strong>Ach-Laut (Jota):</strong> Después de vocales "oscuras" (A, O, U, AU). La garganta raspa.
+                    <br>
+                    2. <strong>Ich-Laut (Soplido):</strong> Después de vocales "claras" (I, E, Ä, Ö, Ü, EI, EU) o
+                    consonantes (L, N, R). La lengua sube al paladar, el aire pasa silbando suavemente.
+                </div>
+                <div class="rule-example">
+                    A<strong style="color: var(--level-b2)">ch</strong>tung (Jota) vs. I<strong
+                        style="color: var(--accent-green)">ch</strong> (Soplido)
+                </div>
+            </div>
+
+            <!-- Rule 2: The SP/ST Trap -->
+            <div class="rule-card warning">
+                <div class="rule-title">
+                    <span>⚠️ La trampa mortal: ST / SP</span>
+                </div>
+                <div class="rule-content">
+                    El error número uno de los hispanohablantes es añadir una 'E' imaginaria antes de ST o SP al inicio
+                    de una palabra.
+                    <br><br>
+                    En alemán, la 'S' inicial ya contiene el sonido de la vocal de apoyo. ¡Empieza directamente con el
+                    sonido "SH"!
+                </div>
+                <div class="rule-example">
+                    Correcto: <strong>Sssht</strong>raße, <strong>Ssshp</strong>ort.
+                    <br>
+                    ❌ Incorrecto: <s>Estrasse</s>, <s>Esport</s>.
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Infografía de Pronunciación Alemana &copy; 2025 - Estilo adaptado</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
+
+        // Voice Synthesis Logic (Standard German)
+        function speak(text) {
+            if (!('speechSynthesis' in window)) {
+                alert("Lo siento, tu navegador no soporta la síntesis de voz.");
+                return;
+            }
+
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE'; // Set to German
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Attach click handlers to all german words for audio
+            const words = document.querySelectorAll('.german-word');
+
+            words.forEach(el => {
+                // Cleanup text for speech (remove parenthetical English/Spanish if present inside the tag)
+                let textToSpeak = el.innerText.split('(')[0].trim();
+                // Override if data-speak attribute exists
+                if (el.hasAttribute('data-speak')) {
+                    textToSpeak = el.getAttribute('data-speak');
+                }
+
+                const icon = document.createElement('span');
+                icon.textContent = '🔊';
+                icon.className = 'audio-icon';
+                el.appendChild(icon);
+
+                el.setAttribute('title', 'Clic para escuchar pronunciación');
+
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    // Visual feedback click effect
+                    el.style.transform = "scale(0.95)";
+                    setTimeout(() => el.style.transform = "scale(1)", 150);
+
+                    speak(textToSpeak);
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

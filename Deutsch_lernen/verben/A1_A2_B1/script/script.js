@@ -1742,6 +1742,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (wordData.truco) {
                             contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">▶</span>`;
                         }
+                        // Optional Example
+                        if (wordData.example) {
+                            contentHTML += `<div style="font-size: 0.9em; color: #666; font-style: italic; margin-top: 2px;">${wordData.example}</div>`;
+                        }
                         contentHTML += `</div>`;
 
                         // Hidden Truco Content
@@ -1775,6 +1779,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         contentHTML += `${wordData.es}`;
                         if (wordData.truco) {
                             contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">▶</span>`;
+                        }
+                        // Optional Example
+                        if (wordData.example) {
+                            contentHTML += `<div style="font-size: 0.9em; color: #666; font-style: italic; margin-top: 2px;">${wordData.example}</div>`;
                         }
                         contentHTML += `</div>`;
 
