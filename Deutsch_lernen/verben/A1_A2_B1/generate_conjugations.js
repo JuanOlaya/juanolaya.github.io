@@ -104,7 +104,8 @@ const verbsDB = {
     'prüfen': { es: 'examinar/probar', en: 'to test/check' },
     'ziehen': { type: 'strong', irregular: true, stem: 'zog', pp: 'gezogen', es: 'tirar/mudar', en: 'to pull/move' },
     'bewegen': { es: 'mover', en: 'to move' }, // regular usually (emotion is strong, movement regular)
-    'empfehlen': { type: 'strong', irregular: true, stem: 'empfahl', pp: 'empfohlen', es: 'recomendar', en: 'to recommend' }
+    'empfehlen': { type: 'strong', irregular: true, stem: 'empfahl', pp: 'empfohlen', es: 'recomendar', en: 'to recommend' },
+    'fangen': { type: 'strong', irregular: true, stem: 'fing', pp: 'gefangen', es: 'atrapar', en: 'to catch' }
 };
 
 // Utils
@@ -149,6 +150,7 @@ function generatePraesens(verb, data) {
     if (verb === 'lassen' || verb === 'verlassen') { du_stem = 'lässt'; er_stem = 'lässt'; st = 'est'; } // irregular
     if (verb === 'lesen') { du_stem = 'lies'; er_stem = 'lies'; }
     if (verb === 'empfehlen') { du_stem = 'empfiehl'; er_stem = 'empfiehl'; }
+    if (verb === 'fangen') { du_stem = 'fäng'; er_stem = 'fäng'; }
 
     let prefix_suffix = data.prefix ? ` ${data.prefix}` : '';
 
