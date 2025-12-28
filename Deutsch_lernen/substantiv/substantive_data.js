@@ -129,7 +129,8 @@ const nounGroups = [
             { article: "das", word: "Land", emoji: "🌾", translation_es: "campo", translation_en: "countryside", example_de: "Ich wohne auf dem Land.", example_es: "Vivo en el campo." },
             { article: "das", word: "Meer", emoji: "🌊", translation_es: "mar", translation_en: "sea", example_de: "Das Meer ist blau.", example_es: "El mar es azul." },
             { article: "das", word: "Restaurant", emoji: "🍽️", translation_es: "restaurante", translation_en: "restaurant", example_de: "Das Restaurant ist teuer.", example_es: "El restaurante es caro." },
-            { article: "das", word: "Tier", emoji: "🐾", translation_es: "animal", translation_en: "animal", example_de: "Das Tier ist süß.", example_es: "El animal es lindo." }
+            { article: "das", word: "Tier", emoji: "🐾", translation_es: "animal", translation_en: "animal", example_de: "Das Tier ist süß.", example_es: "El animal es lindo." },
+            { article: "der", word: "Verkehr", emoji: "🚦", translation_es: "transporte / tráfico", translation_en: "traffic", example_de: "Der Verkehr ist stark.", example_es: "El tráfico es intenso." }
         ]
     },
     {
