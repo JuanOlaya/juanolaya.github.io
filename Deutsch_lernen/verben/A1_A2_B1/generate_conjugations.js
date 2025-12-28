@@ -105,7 +105,8 @@ const verbsDB = {
     'ziehen': { type: 'strong', irregular: true, stem: 'zog', pp: 'gezogen', es: 'tirar/mudar', en: 'to pull/move' },
     'bewegen': { es: 'mover', en: 'to move' }, // regular usually (emotion is strong, movement regular)
     'empfehlen': { type: 'strong', irregular: true, stem: 'empfahl', pp: 'empfohlen', es: 'recomendar', en: 'to recommend' },
-    'fangen': { type: 'strong', irregular: true, stem: 'fing', pp: 'gefangen', es: 'atrapar', en: 'to catch' }
+    'fangen': { type: 'strong', irregular: true, stem: 'fing', pp: 'gefangen', es: 'atrapar', en: 'to catch' },
+    "räumen": { "es": "Desalojar / Despejar / Vaciar", "en": "To clear / To evacuate", "type": "regular", "aux": "haben" },
 };
 
 // Utils
