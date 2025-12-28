@@ -314,13 +314,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Auto-correct out-of-bounds index
         if (levelGroups && currentGroupInLevel >= levelGroups.length) {
-            console.warn(`Group index ${currentGroupInLevel} out of bounds for level ${currentLevel}. Resetting to 0.`);
+            console.warn(`Group index ${currentGroupInLevel} out of bounds for level ${currentLevel} (Max: ${levelGroups.length}). Resetting to 0.`);
             currentGroupInLevel = 0;
             saveProgress();
         }
 
         if (!levelGroups || !levelGroups[currentGroupInLevel]) {
-            console.error(`Group data for level ${currentLevel}, group ${currentGroupInLevel} is not loaded or invalid.`);
+            console.error(`Group data error: Level=${currentLevel}, GroupIndex=${currentGroupInLevel}, LoadedGroups=${levelGroups ? levelGroups.length : 'undefined'}`);
             cardsContainer.innerHTML = '<p>Fehler beim Laden der Verben. (Daten fehlen)</p>';
             return;
         }
