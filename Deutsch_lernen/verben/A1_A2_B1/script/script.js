@@ -311,9 +311,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- UPDATED RENDER FUNCTION ---
     function renderVerbGroup() {
         const levelGroups = verbGroupsByLevel[currentLevel];
+
+        // Auto-correct out-of-bounds index
+        if (levelGroups && currentGroupInLevel >= levelGroups.length) {
+            console.warn(`Group index ${currentGroupInLevel} out of bounds for level ${currentLevel}. Resetting to 0.`);
+            currentGroupInLevel = 0;
+            saveProgress();
+        }
+
         if (!levelGroups || !levelGroups[currentGroupInLevel]) {
             console.error(`Group data for level ${currentLevel}, group ${currentGroupInLevel} is not loaded or invalid.`);
-            cardsContainer.innerHTML = '<p>Fehler beim Laden der Verben.</p>';
+            cardsContainer.innerHTML = '<p>Fehler beim Laden der Verben. (Daten fehlen)</p>';
             return;
         }
 
@@ -630,7 +638,14 @@ document.addEventListener('DOMContentLoaded', () => {
             currentLevel = savedLevel;
             const savedGroup = parseInt(localStorage.getItem(`progress_${currentLevel}`));
             if (!isNaN(savedGroup)) {
-                currentGroupInLevel = savedGroup;
+                // Validate against max groups to prevent out-of-bounds errors
+                const maxGroups = levelConfig[currentLevel].groupCount;
+                if (savedGroup >= 0 && savedGroup < maxGroups) {
+                    currentGroupInLevel = savedGroup;
+                } else {
+                    console.warn(`Resetting invalid saved group ${savedGroup} for level ${currentLevel}`);
+                    currentGroupInLevel = 0;
+                }
             }
         }
     }
