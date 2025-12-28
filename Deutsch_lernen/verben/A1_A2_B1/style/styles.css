@@ -1251,13 +1251,16 @@ body {
 }
 
 #modal-verb-infinitive,
-#modal-verb-perfekt {
+#modal-verb-perfekt,
+#modal-verb-praeteritum,
+.modal-tab-btn {
     font-size: 1.9rem;
     /* Slightly larger */
     font-weight: bold;
     margin: 0;
     color: #2F4F4F;
     /* Dark Slate Gray */
+    text-transform: lowercase !important;
 }
 
 #modal-verb-perfekt {
