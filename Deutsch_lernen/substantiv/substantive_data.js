@@ -234,5 +234,112 @@ const nounGroups = [
             { article: "die", word: "Sekretäurin", emoji: "📝", translation_es: "secretaria", translation_en: "secretary (female)", example_de: "Die Sekretärin beantwortet Anrufe.", example_es: "La secretaria contesta llamadas." },
             { article: "die", word: "Verkäuferin", emoji: "👩‍💼", translation_es: "vendedora", translation_en: "salesperson (female)", example_de: "Die Verkäuferin zeigt das Produkt.", example_es: "La vendedora muestra el producto." }
         ]
+    },
+    {
+        id: "familie",
+        title: "Familie",
+        level: "A1",
+        nouns: [
+            { article: "der", word: "Vater", emoji: "👨", translation_es: "padre", translation_en: "father", example_de: "Mein Vater heißt Hans.", example_es: "Mi padre se llama Hans." },
+            { article: "die", word: "Mutter", emoji: "👩", translation_es: "madre", translation_en: "mother", example_de: "Meine Mutter ist nett.", example_es: "Mi madre es amable." },
+            { article: "die", word: "Eltern", emoji: "👪", translation_es: "padres", translation_en: "parents", example_de: "Meine Eltern wohnen in Berlin.", example_es: "Mis padres viven en Berlín." },
+            { article: "der", word: "Sohn", emoji: "👦", translation_es: "hijo", translation_en: "son", example_de: "Der Sohn spielt Fußball.", example_es: "El hijo juega al fútbol." },
+            { article: "die", word: "Tochter", emoji: "👧", translation_es: "hija", translation_en: "daughter", example_de: "Die Tochter liest ein Buch.", example_es: "La hija lee un libro." },
+            { article: "der", word: "Bruder", emoji: "👱‍♂️", translation_es: "hermano", translation_en: "brother", example_de: "Mein Bruder ist älter.", example_es: "Mi hermano es mayor." },
+            { article: "die", word: "Schwester", emoji: "👱‍♀️", translation_es: "hermana", translation_en: "sister", example_de: "Meine Schwester ist jünger.", example_es: "Mi hermana es menor." },
+            { article: "die", word: "Geschwister", emoji: "👫", translation_es: "hermanos", translation_en: "siblings", example_de: "Ich habe zwei Geschwister.", example_es: "Tengo dos hermanos." },
+            { article: "der", word: "Opa", emoji: "👴", translation_es: "abuelo", translation_en: "grandpa", example_de: "Mein Opa erzählt Geschichten.", example_es: "Mi abuelo cuenta historias." },
+            { article: "die", word: "Oma", emoji: "👵", translation_es: "abuela", translation_en: "grandma", example_de: "Meine Oma backt Kuchen.", example_es: "Mi abuela hornea pasteles." },
+            { article: "das", word: "Kind", emoji: "👶", translation_es: "niño/a", translation_en: "child", example_de: "Das Kind spielt.", example_es: "El niño juega." },
+            { article: "das", word: "Baby", emoji: "🍼", translation_es: "bebé", translation_en: "baby", example_de: "Das Baby schläft.", example_es: "El bebé duerme." },
+            { article: "der", word: "Mann", emoji: "👨", translation_es: "esposo / hombre", translation_en: "husband / man", example_de: "Ihr Mann ist Lehrer.", example_es: "Su esposo es profesor." },
+            { article: "die", word: "Frau", emoji: "👩", translation_es: "esposa / mujer", translation_en: "wife / woman", example_de: "Seine Frau ist Ärztin.", example_es: "Su esposa es médica." },
+            { article: "der", word: "Freund", emoji: "🙍‍♂️", translation_es: "amigo / novio", translation_en: "friend / boyfriend", example_de: " Das ist mein Freund.", example_es: "Ese es mi amigo." },
+            { article: "die", word: "Freundin", emoji: "🙍‍♀️", translation_es: "amiga / novia", translation_en: "friend / girlfriend", example_de: "Meine Freundin kommt heute.", example_es: "Mi amiga viene hoy." }
+        ]
+    },
+    {
+        id: "kleidung",
+        title: "Kleidung",
+        level: "A1",
+        nouns: [
+            { article: "das", word: "T-Shirt", emoji: "👕", translation_es: "camiseta", translation_en: "t-shirt", example_de: "Das T-Shirt ist blau.", example_es: "La camiseta es azul." },
+            { article: "die", word: "Hose", emoji: "👖", translation_es: "pantalones", translation_en: "trousers/pants", example_de: "Die Hose ist zu lang.", example_es: "Los pantalones son demasiado largos." },
+            { article: "der", word: "Pullover", emoji: "🧶", translation_es: "suéter / jersey", translation_en: "sweater", example_de: "Der Pullover ist warm.", example_es: "El suéter es cálido." },
+            { article: "die", word: "Jacke", emoji: "🧥", translation_es: "chaqueta", translation_en: "jacket", example_de: "Ich brauche meine Jacke.", example_es: "Necesito mi chaqueta." },
+            { article: "der", word: "Schuh", emoji: "👞", translation_es: "zapato", translation_en: "shoe", example_de: "Der Schuh drückt.", example_es: "El zapato aprieta." },
+            { article: "das", word: "Kleid", emoji: "👗", translation_es: "vestido", translation_en: "dress", example_de: "Das Kleid ist schön.", example_es: "El vestido es bonito." },
+            { article: "der", word: "Rock", emoji: "👗", translation_es: "falda", translation_en: "skirt", example_de: "Der Rock ist kurz.", example_es: "La falda es corta." },
+            { article: "das", word: "Hemd", emoji: "👔", translation_es: "camisa", translation_en: "shirt", example_de: "Er trägt ein weißes Hemd.", example_es: "Él lleva una camisa blanca." },
+            { article: "die", word: "Bluse", emoji: "👚", translation_es: "blusa", translation_en: "blouse", example_de: "Die Bluse ist aus Seide.", example_es: "La blusa es de seda." },
+            { article: "der", word: "Mantel", emoji: "🧥", translation_es: "abrigo", translation_en: "coat", example_de: "Der Mantel ist teuer.", example_es: "El abrigo es caro." },
+            { article: "die", word: "Brille", emoji: "👓", translation_es: "gafas", translation_en: "glasses", example_de: "Ich trage eine Brille.", example_es: "Llevo gafas." },
+            { article: "der", word: "Hut", emoji: "🎩", translation_es: "sombrero", translation_en: "hat", example_de: "Der Hut ist alt.", example_es: "El sombrero es viejo." },
+            { article: "die", word: "Mütze", emoji: "🧢", translation_es: "gorro", translation_en: "cap/beanie", example_de: "Im Winter trage ich eine Mütze.", example_es: "En invierno llevo un gorro." },
+            { article: "der", word: "Schal", emoji: "🧣", translation_es: "bufanda", translation_en: "scarf", example_de: "Der Schal ist rot.", example_es: "La bufanda es roja." },
+            { article: "die", word: "Socke", emoji: "🧦", translation_es: "calcetín", translation_en: "sock", example_de: "Wo ist meine andere Socke?", example_es: "¿Dónde está mi otro calcetín?" }
+        ]
+    },
+    {
+        id: "moebel",
+        title: "Möbel & Wohnen",
+        level: "A1",
+        nouns: [
+            { article: "der", word: "Tisch", emoji: "🪑", translation_es: "mesa", translation_en: "table", example_de: "Der Tisch ist gedeckt.", example_es: "La mesa está puesta." },
+            { article: "der", word: "Stuhl", emoji: "🪑", translation_es: "silla", translation_en: "chair", example_de: "Der Stuhl ist bequem.", example_es: "La silla es cómoda." },
+            { article: "das", word: "Bett", emoji: "🛏️", translation_es: "cama", translation_en: "bed", example_de: "Das Bett ist weich.", example_es: "La cama es suave." },
+            { article: "der", word: "Schrank", emoji: "🚪", translation_es: "armario", translation_en: "wardrobe/cupboard", example_de: "Der Schrank ist voll.", example_es: "El armario está lleno." },
+            { article: "das", word: "Sofa", emoji: "🛋️", translation_es: "sofá", translation_en: "sofa", example_de: "Wir sitzen auf dem Sofa.", example_es: "Nos sentamos en el sofá." },
+            { article: "die", word: "Lampe", emoji: "💡", translation_es: "lámpara", translation_en: "lamp", example_de: "Die Lampe ist hell.", example_es: "La lámpara es brillante." },
+            { article: "der", word: "Teppich", emoji: "🧶", translation_es: "alfombra", translation_en: "carpet", example_de: "Der Teppich ist neu.", example_es: "La alfombra es nueva." },
+            { article: "das", word: "Fenster", emoji: "🪟", translation_es: "ventana", translation_en: "window", example_de: "Das Fenster ist offen.", example_es: "La ventana está abierta." },
+            { article: "die", word: "Tür", emoji: "🚪", translation_es: "puerta", translation_en: "door", example_de: "Die Tür ist geschlossen.", example_es: "La puerta está cerrada." },
+            { article: "das", word: "Zimmer", emoji: "🏠", translation_es: "habitación", translation_en: "room", example_de: "Mein Zimmer ist groß.", example_es: "Mi habitación es grande." },
+            { article: "die", word: "Küche", emoji: "🍳", translation_es: "cocina", translation_en: "kitchen", example_de: "Ich koche in der Küche.", example_es: "Cocino en la cocina." },
+            { article: "das", word: "Bad", emoji: "🛁", translation_es: "baño", translation_en: "bathroom", example_de: "Wo ist das Bad?", example_es: "¿Dónde está el baño?" },
+            { article: "der", word: "Spiegel", emoji: "🪞", translation_es: "espejo", translation_en: "mirror", example_de: "Ich sehe in den Spiegel.", example_es: "Miro en el espejo." }
+        ]
+    },
+    {
+        id: "koerper",
+        title: "Körper",
+        level: "A1",
+        image: "../images/body_parts_illustration.png",
+        nouns: [
+            { article: "der", word: "Kopf", emoji: "🗣️", translation_es: "cabeza", translation_en: "head", example_de: "Mein Kopf tut weh.", example_es: "Me duele la cabeza." },
+            { article: "das", word: "Auge", emoji: "👁️", translation_es: "ojo", translation_en: "eye", example_de: "Sie hat blaue Augen.", example_es: "Ella tiene ojos azules." },
+            { article: "die", word: "Nase", emoji: "👃", translation_es: "nariz", translation_en: "nose", example_de: "Er hat eine große Nase.", example_es: "Él tiene una nariz grande." },
+            { article: "der", word: "Mund", emoji: "👄", translation_es: "boca", translation_en: "mouth", example_de: "Mach den Mund auf.", example_es: "Abre la boca." },
+            { article: "das", word: "Ohr", emoji: "👂", translation_es: "oreja", translation_en: "ear", example_de: "Meine Ohren sind kalt.", example_es: "Mis orejas están frías." },
+            { article: "die", word: "Hand", emoji: "✋", translation_es: "mano", translation_en: "hand", example_de: "Gib mir deine Hand.", example_es: "Dame tu mano." },
+            { article: "der", word: "Finger", emoji: "☝️", translation_es: "dedo", translation_en: "finger", example_de: "Ich habe zehn Finger.", example_es: "Tengo diez dedos." },
+            { article: "der", word: "Arm", emoji: "💪", translation_es: "brazo", translation_en: "arm", example_de: "Mein Arm ist stark.", example_es: "Mi brazo es fuerte." },
+            { article: "das", word: "Bein", emoji: "🦵", translation_es: "pierna", translation_en: "leg", example_de: "Das Bein ist gebrochen.", example_es: "La pierna está rota." },
+            { article: "der", word: "Fuß", emoji: "🦶", translation_es: "pie", translation_en: "foot", example_de: "Mein Fuß schmerzt.", example_es: "Me duele el pie." },
+            { article: "der", word: "Bauch", emoji: "🤰", translation_es: "barriga / estómago", translation_en: "belly", example_de: "Ich habe Bauchschmerzen.", example_es: "Tengo dolor de barriga." },
+            { article: "der", word: "Rücken", emoji: "🚶", translation_es: "espalda", translation_en: "back", example_de: "Der Rücken tut weh.", example_es: "La espalda duele." },
+            { article: "das", word: "Haar", emoji: "💇", translation_es: "pelo / cabello", translation_en: "hair", example_de: "Sie hat langes Haar.", example_es: "Ella tiene el pelo largo." },
+            { article: "der", word: "Zahn", emoji: "🦷", translation_es: "diente", translation_en: "tooth", example_de: "Ich muss den Zahn putzen.", example_es: "Debo lavar el diente." }
+        ]
+    },
+    {
+        id: "zeit",
+        title: "Zeit & Kalender",
+        level: "A1",
+        nouns: [
+            { article: "der", word: "Tag", emoji: "📅", translation_es: "día", translation_en: "day", example_de: "Der Tag ist lang.", example_es: "El día es largo." },
+            { article: "die", word: "Woche", emoji: "🗓️", translation_es: "semana", translation_en: "week", example_de: "Die Woche hat sieben Tage.", example_es: "La semana tiene siete días." },
+            { article: "der", word: "Monat", emoji: "📆", translation_es: "mes", translation_en: "month", example_de: "Der Monat endet bald.", example_es: "El mes termina pronto." },
+            { article: "das", word: "Jahr", emoji: "🎆", translation_es: "año", translation_en: "year", example_de: "Ein Jahr hat 12 Monate.", example_es: "Un año tiene 12 meses." },
+            { article: "die", word: "Uhr", emoji: "⌚", translation_es: "reloj / hora", translation_en: "clock / watch", example_de: "Ich habe keine Uhr.", example_es: "No tengo reloj." },
+            { article: "die", word: "Minute", emoji: "⏱️", translation_es: "minuto", translation_en: "minute", example_de: "Warte eine Minute.", example_es: "Espera un minuto." },
+            { article: "die", word: "Stunde", emoji: "⏳", translation_es: "hora", translation_en: "hour", example_de: "Die Stunde ist vorbei.", example_es: "La hora ha terminado." },
+            { article: "der", word: "Morgen", emoji: "🌅", translation_es: "mañana", translation_en: "morning", example_de: "Guten Morgen!", example_es: "¡Buenos días!" },
+            { article: "der", word: "Abend", emoji: "🌆", translation_es: "tarde/noche", translation_en: "evening", example_de: "Guten Abend!", example_es: "¡Buenas tardes/noches!" },
+            { article: "die", word: "Nacht", emoji: "🌙", translation_es: "noche", translation_en: "night", example_de: "Gute Nacht!", example_es: "¡Buenas noches!" },
+            { article: "das", word: "Wochenende", emoji: "🏖️", translation_es: "fin de semana", translation_en: "weekend", example_de: "Schönes Wochenende!", example_es: "¡Buen fin de semana!" },
+            { article: "die", word: "Zeit", emoji: "⏳", translation_es: "tiempo", translation_en: "time", example_de: "Hast du Zeit?", example_es: "¿Tienes tiempo?" },
+            { article: "das", word: "Datum", emoji: "📅", translation_es: "fecha", translation_en: "date", example_de: "Welches Datum haben wir heute?", example_es: "¿Qué fecha es hoy?" }
+        ]
     }
 ];
