@@ -659,6 +659,19 @@ body {
     /* Prevent emoji from shrinking */
 }
 
+/* This makes the emoji look like it's floating */
+.three-d-emoji {
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+    transition: transform 0.2s ease;
+    display: inline-block;
+    /* Ensure transform works */
+}
+
+/* Optional: Make it move when you hover over it */
+.three-d-emoji:hover {
+    transform: translateY(-5px) scale(1.1);
+}
+
 .text-container {
     display: flex;
     flex-direction: column;

@@ -474,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">
                         <span class="german-word">${verbName}</span>
                         <span class="spanish-translation" data-form="translation">${esTranslation}</span>
-                        <div class="icon-floating">${verbData.emoji || '❓'}</div>
+                        <div class="icon-floating"><span class="three-d-emoji">${verbData.emoji || '❓'}</span></div>
                     </div>
                     <div class="card-body">
                         <div class="text-container perfekt-hover-container">

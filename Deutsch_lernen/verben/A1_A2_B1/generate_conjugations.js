@@ -98,6 +98,7 @@ const verbsDB = {
     'sortieren': { es: 'ordenar/clasificar', en: 'to sort' },
 
     // A1.1
+    'aufwachen': { type: 'separable', prefix: 'auf', aux: 'sein', es: 'despertarse', en: 'to wake up' },
     'mittagessen': { type: 'separable', prefix: 'mittag', type: 'strong', irregular: true, stem: 'aß', pp: 'gegessen', es: 'almorzar', en: 'to have lunch' }, // 'essen' inside
     'rufen': { type: 'strong', irregular: true, stem: 'rief', pp: 'gerufen', es: 'llamar', en: 'to call' },
     'grüßen': { es: 'saludar', en: 'to greet' },

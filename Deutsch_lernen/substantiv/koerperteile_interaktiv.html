@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Körperteile - Interaktive Infografik</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .body-part-hotspot {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            fill: transparent;
+            stroke: transparent;
+        }
+
+        .body-part-hotspot:hover {
+            fill: rgba(59, 130, 246, 0.2);
+            stroke: rgba(59, 130, 246, 0.5);
+            stroke-width: 2;
+        }
+
+        .active-part {
+            fill: rgba(245, 158, 11, 0.3) !important;
+            stroke: #f59e0b !important;
+            stroke-width: 3 !important;
+        }
+
+        /* Human Figure Theming */
+        .human-path {
+            fill: #e5e7eb;
+            stroke: #9ca3af;
+            transition: fill 0.3s ease, stroke 0.3s ease;
+        }
+
+        .dark .human-path {
+            fill: #374151;
+            stroke: #6b7280;
+        }
+
+        .article-der {
+            color: #3b82f6;
+        }
+
+        .article-die {
+            color: #ef4444;
+        }
+
+        .article-das {
+            color: #22c55e;
+        }
+
+        .bg-der {
+            background-color: #3b82f6;
+        }
+
+        .bg-die {
+            background-color: #ef4444;
+        }
+
+        .bg-das {
+            background-color: #22c55e;
+        }
+
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-8 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+
+    <div class="max-w-6xl mx-auto">
+        <!-- Header with Toggle -->
+        <header class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+            <a href="substantive.html"
+                class="p-3 bg-white dark:bg-gray-800 rounded-2xl card-shadow hover:scale-110 transition-transform flex items-center gap-2 font-bold text-gray-700 dark:text-gray-200"
+                style="text-decoration:none;">
+                <span>⬅️</span>
+                <span class="text-sm">Zurück</span>
+            </a>
+            <div class="text-center md:text-left">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-2">
+                    Der menschliche <span class="text-amber-600 border-b-4 border-amber-600">Körper</span>
+                </h1>
+                <p class="text-gray-600 dark:text-gray-400 text-lg">Klicken Sie auf ein Körperteil, um Deutsch zu
+                    lernen.</p>
+            </div>
+
+            <!-- Dark Mode Toggle Button -->
+            <button id="theme-toggle"
+                class="p-3 bg-white dark:bg-gray-800 rounded-2xl card-shadow hover:scale-110 transition-transform flex items-center gap-2 font-bold text-gray-700 dark:text-gray-200">
+                <span id="theme-toggle-icon-light">☀️</span>
+                <span id="theme-toggle-icon-dark" class="hidden">🌙</span>
+                <span class="text-sm">Modus</span>
+            </button>
+
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+            <!-- Left Side: Interactive SVG -->
+            <div
+                class="bg-white dark:bg-gray-800 p-6 rounded-3xl card-shadow flex justify-center relative min-h-[500px] lg:sticky lg:top-8 transition-colors duration-300">
+                <svg viewBox="0 0 400 600" class="w-full max-w-md h-auto" id="body-svg">
+                    <!-- Human Figure Base -->
+                    <path class="human-path" d="M200,50 Q220,50 220,80 Q220,110 200,110 Q180,110 180,80 Q180,50 200,50"
+                        stroke-width="2" /> <!-- Head -->
+                    <path class="human-path"
+                        d="M160,120 L240,120 Q260,120 260,150 L260,300 Q260,320 230,320 L170,320 Q140,320 140,300 L140,150 Q140,120 160,120"
+                        stroke-width="2" /> <!-- Torso -->
+                    <path class="human-path" d="M140,130 L100,250 Q90,260 110,270 L140,160" stroke-width="2" />
+                    <!-- L Arm -->
+                    <path class="human-path" d="M260,130 L300,250 Q310,260 290,270 L260,160" stroke-width="2" />
+                    <!-- R Arm -->
+                    <path class="human-path" d="M170,320 L160,550 Q155,570 185,570 L195,570 L195,320"
+                        stroke-width="2" /> <!-- L Leg -->
+                    <path class="human-path" d="M230,320 L240,550 Q245,570 215,570 L205,570 L205,320"
+                        stroke-width="2" /> <!-- R Leg -->
+
+                    <!-- Interaction Hotspots (with data-part for bilateral selection) -->
+                    <!-- HEAD & FACE -->
+                    <path data-part="kopf" class="body-part-hotspot" d="M180,55 h40 v50 h-40 z"
+                        onclick="selectPart('kopf')" />
+                    <path data-part="haar" class="body-part-hotspot" d="M180,45 h40 v15 h-40 z"
+                        onclick="selectPart('haar')" />
+
+                    <circle data-part="auge" class="body-part-hotspot" cx="190" cy="75" r="8"
+                        onclick="selectPart('auge')" />
+                    <circle data-part="auge" class="body-part-hotspot" cx="210" cy="75" r="8"
+                        onclick="selectPart('auge')" />
+
+                    <circle data-part="nase" class="body-part-hotspot" cx="200" cy="85" r="6"
+                        onclick="selectPart('nase')" />
+                    <path data-part="mund" class="body-part-hotspot" d="M190,95 h20 v10 h-20 z"
+                        onclick="selectPart('mund')" />
+
+                    <circle data-part="ohr" class="body-part-hotspot" cx="175" cy="80" r="8"
+                        onclick="selectPart('ohr')" />
+                    <circle data-part="ohr" class="body-part-hotspot" cx="225" cy="80" r="8"
+                        onclick="selectPart('ohr')" />
+
+                    <!-- ARMS & HANDS -->
+                    <path data-part="arm" class="body-part-hotspot" d="M100,130 h40 v110 h-40 z"
+                        onclick="selectPart('arm')" />
+                    <path data-part="arm" class="body-part-hotspot" d="M260,130 h40 v110 h-40 z"
+                        onclick="selectPart('arm')" />
+
+                    <path data-part="hand" class="body-part-hotspot" d="M90,240 h35 v45 h-35 z"
+                        onclick="selectPart('hand')" />
+                    <path data-part="hand" class="body-part-hotspot" d="M275,240 h35 v45 h-35 z"
+                        onclick="selectPart('hand')" />
+
+                    <!-- TORSO -->
+                    <path data-part="bauch" class="body-part-hotspot" d="M165,200 h70 v100 h-70 z"
+                        onclick="selectPart('bauch')" />
+
+                    <!-- LEGS & FEET -->
+                    <path data-part="bein" class="body-part-hotspot" d="M160,330 h35 v180 h-35 z"
+                        onclick="selectPart('bein')" />
+                    <path data-part="bein" class="body-part-hotspot" d="M205,330 h35 v180 h-35 z"
+                        onclick="selectPart('bein')" />
+
+                    <path data-part="fuß" class="body-part-hotspot" d="M150,540 h45 v35 h-45 z"
+                        onclick="selectPart('fuß')" />
+                    <path data-part="fuß" class="body-part-hotspot" d="M205,540 h45 v35 h-45 z"
+                        onclick="selectPart('fuß')" />
+                </svg>
+
+                <div
+                    class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 px-4 py-1 rounded-full text-sm font-bold animate-bounce">
+                    Tippen Sie auf ein Körperteil
+                </div>
+            </div>
+
+            <!-- Right Side: Details & List -->
+            <div class="space-y-6">
+
+                <!-- Active Selection Card -->
+                <div id="selection-card"
+                    class="bg-white dark:bg-gray-800 p-8 rounded-3xl card-shadow border-l-8 border-gray-200 transition-all duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <span id="display-emoji" class="text-6xl">👤</span>
+                        <button onclick="speakActive()"
+                            class="p-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="dark:text-white">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div>
+                        <h2 class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-1">Körperteil</h2>
+                        <div class="flex items-baseline gap-2">
+                            <span id="display-article" class="text-2xl font-bold opacity-70">der/die/das</span>
+                            <span id="display-word" class="text-4xl font-extrabold text-gray-800 dark:text-white">Wählen
+                                Sie ein Teil</span>
+                        </div>
+
+                        <div class="mt-4 grid grid-cols-2 gap-4 border-t border-gray-100 dark:border-gray-700 pt-4">
+                            <div>
+                                <span class="block text-xs font-bold text-gray-400 uppercase">Español</span>
+                                <span id="display-es"
+                                    class="text-lg font-semibold text-gray-600 dark:text-gray-300 italic">-</span>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-bold text-gray-400 uppercase">English</span>
+                                <span id="display-en"
+                                    class="text-lg font-semibold text-gray-600 dark:text-gray-300 italic">-</span>
+                            </div>
+                        </div>
+
+                        <div
+                            class="mt-6 bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl italic text-gray-700 dark:text-gray-300">
+                            <p id="display-example-de">Wählen Sie ein Körperteil aus der Liste oder dem Diagramm.</p>
+                            <p id="display-example-es" class="text-sm text-gray-500 dark:text-gray-400 mt-1"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Word List -->
+                <div class="bg-white dark:bg-gray-800 rounded-3xl card-shadow overflow-hidden">
+                    <div class="p-4 bg-gray-800 dark:bg-gray-700 text-white flex justify-between items-center">
+                        <h3 class="font-bold">Wortschatz-Liste</h3>
+                        <div class="flex gap-2 text-xs">
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-der"></span>
+                                der</span>
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-die"></span>
+                                die</span>
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-das"></span>
+                                das</span>
+                        </div>
+                    </div>
+                    <div class="p-3 space-y-1" id="vocabulary-list">
+                        <!-- List populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const bodyParts = [
+            { id: "kopf", article: "der", word: "Kopf", emoji: "🗣️", translation_es: "cabeza", translation_en: "head", example_de: "Mein Kopf tut weh.", example_es: "Me duele la cabeza." },
+            { id: "haar", article: "das", word: "Haar", emoji: "💇", translation_es: "pelo / cabello", translation_en: "hair", example_de: "Sie hat langes Haar.", example_es: "Ella tiene el pelo largo." },
+            { id: "auge", article: "das", word: "Auge", emoji: "👁️", translation_es: "ojo", translation_en: "eye", example_de: "Sie hat blaue Augen.", example_es: "Ella tiene ojos azules." },
+            { id: "nase", article: "die", word: "Nase", emoji: "👃", translation_es: "nariz", translation_en: "nose", example_de: "Er hat eine große Nase.", example_es: "Él tiene una nariz grande." },
+            { id: "mund", article: "der", word: "Mund", emoji: "👄", translation_es: "boca", translation_en: "mouth", example_de: "Mach den Mund auf.", example_es: "Abre la boca." },
+            { id: "ohr", article: "das", word: "Ohr", emoji: "👂", translation_es: "oreja", translation_en: "ear", example_de: "Meine Ohren sind kalt.", example_es: "Mis orejas están frías." },
+            { id: "zahn", article: "der", word: "Zahn", emoji: "🦷", translation_es: "diente", translation_en: "tooth", example_de: "Ich muss den Zahn putzen.", example_es: "Debo lavar el diente." },
+            { id: "arm", article: "der", word: "Arm", emoji: "💪", translation_es: "brazo", translation_en: "arm", example_de: "Mein Arm ist stark.", example_es: "Mi brazo es fuerte." },
+            { id: "hand", article: "die", word: "Hand", emoji: "✋", translation_es: "mano", translation_en: "hand", example_de: "Gib mir deine Hand.", example_es: "Dame tu mano." },
+            { id: "finger", article: "der", word: "Finger", emoji: "☝️", translation_es: "dedo", translation_en: "finger", example_de: "Ich habe zehn Finger.", example_es: "Tengo diez dedos." },
+            { id: "bauch", article: "der", word: "Bauch", emoji: "🤰", translation_es: "barriga / estómago", translation_en: "belly", example_de: "Ich habe Bauchschmerzen.", example_es: "Tengo dolor de barriga." },
+            { id: "rucken", article: "der", word: "Rücken", emoji: "🚶", translation_es: "espalda", translation_en: "back", example_de: "Der Rücken tut weh.", example_es: "La espalda duele." },
+            { id: "bein", article: "das", word: "Bein", emoji: "🦵", translation_es: "pierna", translation_en: "leg", example_de: "Das Bein ist gebrochen.", example_es: "La pierna está rota." },
+            { id: "fuß", article: "der", word: "Fuß", emoji: "🦶", translation_es: "pie", translation_en: "foot", example_de: "Mein Fuß schmerzt.", example_es: "Me duele el pie." }
+        ]
+
+        let activeId = null;
+
+        function init() {
+            // Populate Vocabulary List
+            const listContainer = document.getElementById('vocabulary-list');
+            bodyParts.forEach(part => {
+                const item = document.createElement('div');
+                item.className = `flex items-center justify-between p-4 rounded-2xl cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-all border-l-4 border-transparent`;
+                item.id = `list-item-${part.id}`;
+                item.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl">${part.emoji}</span>
+                        <div>
+                            <span class="font-bold article-${part.article}">${part.article}</span>
+                            <span class="font-extrabold text-gray-800 dark:text-gray-100 text-lg">${part.word}</span>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-400 italic">${part.translation_es}</span>
+                `;
+                item.onclick = () => selectPart(part.id);
+                listContainer.appendChild(item);
+            });
+
+            // Theme Toggle Logic
+            const themeToggle = document.getElementById('theme-toggle');
+            const sunIcon = document.getElementById('theme-toggle-icon-light');
+            const moonIcon = document.getElementById('theme-toggle-icon-dark');
+
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                const isDark = document.documentElement.classList.contains('dark');
+                sunIcon.classList.toggle('hidden', isDark);
+                moonIcon.classList.toggle('hidden', !isDark);
+            });
+        }
+
+        function selectPart(id) {
+            const part = bodyParts.find(p => p.id === id);
+            if (!part) return;
+
+            activeId = id;
+
+            // Update UI Card
+            const card = document.getElementById('selection-card');
+            const displayEmoji = document.getElementById('display-emoji');
+            const displayArticle = document.getElementById('display-article');
+            const displayWord = document.getElementById('display-word');
+            const displayEs = document.getElementById('display-es');
+            const displayEn = document.getElementById('display-en');
+            const displayExDe = document.getElementById('display-example-de');
+            const displayExEs = document.getElementById('display-example-es');
+
+            displayEmoji.textContent = part.emoji;
+            displayArticle.textContent = part.article;
+            displayWord.textContent = part.word;
+            displayEs.textContent = part.translation_es;
+            displayEn.textContent = part.translation_en;
+            displayExDe.textContent = part.example_de;
+            displayExEs.textContent = part.example_es;
+
+            // Color Coding the Card
+            card.style.borderLeftColor = part.article === 'der' ? '#3b82f6' : (part.article === 'die' ? '#ef4444' : '#22c55e');
+            displayArticle.className = `text-2xl font-bold opacity-70 article-${part.article}`;
+
+            // Highlight in SVG - Handle multiple hotspots per part
+            document.querySelectorAll('.body-part-hotspot').forEach(el => el.classList.remove('active-part'));
+            const hotspots = document.querySelectorAll(`[data-part="${id}"]`);
+            hotspots.forEach(h => h.classList.add('active-part'));
+
+            // Highlight in List
+            document.querySelectorAll('#vocabulary-list > div').forEach(el => {
+                el.classList.remove('bg-amber-50', 'dark:bg-amber-900/30', 'border-amber-500', 'shadow-sm');
+            });
+            const listItem = document.getElementById(`list-item-${id}`);
+            if (listItem) {
+                listItem.classList.add('bg-amber-50', 'dark:bg-amber-900/30', 'border-amber-500', 'shadow-sm');
+            }
+
+            speakActive();
+        }
+
+        function speakActive() {
+            if (!activeId) return;
+            const part = bodyParts.find(p => p.id === activeId);
+            speak(`${part.article} ${part.word}`);
+        }
+
+        function speak(text) {
+            if (!window.speechSynthesis) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+            const voices = window.speechSynthesis.getVoices();
+            const germanVoice = voices.find(v => v.lang.startsWith('de'));
+            if (germanVoice) utterance.voice = germanVoice;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        window.onload = init;
+    </script>
+</body>
+
+</html>
