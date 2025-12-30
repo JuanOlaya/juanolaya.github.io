@@ -439,9 +439,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Generate tags HTML
+            // Generate tags HTML
             let tagsHTML = '';
-            if (verbData.tags && verbData.tags.length > 0) {
-                tagsHTML = verbData.tags.map(tag => `<span class="verb-tag">${tag}</span>`).join('');
+            let displayTags = verbData.tags ? [...verbData.tags] : [];
+
+            // Add theme as tag if present and not duplicate
+            if (verbData.theme && !displayTags.includes(verbData.theme)) {
+                displayTags.push(verbData.theme);
+            }
+
+            if (displayTags.length > 0) {
+                tagsHTML = displayTags.map(tag => `<span class="verb-tag">${tag}</span>`).join('');
             }
 
             // Generate case tags HTML
@@ -633,20 +641,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadProgress() {
+        // Load saved progress
         const savedLevel = localStorage.getItem('currentLevel');
+
+        // Retrieve group using level-specific key first (legacy), or generic (new)
+        // Actually, previous code used `progress_${currentLevel}`. We should stick to that or migrate.
+        // Let's rely on `progress_${level}` to allow independent progress per level.
+
         if (savedLevel && levelConfig[savedLevel]) {
             currentLevel = savedLevel;
-            const savedGroup = parseInt(localStorage.getItem(`progress_${currentLevel}`));
-            if (!isNaN(savedGroup)) {
-                // Validate against max groups to prevent out-of-bounds errors
-                const maxGroups = levelConfig[currentLevel].groupCount;
-                if (savedGroup >= 0 && savedGroup < maxGroups) {
-                    currentGroupInLevel = savedGroup;
-                } else {
-                    console.warn(`Resetting invalid saved group ${savedGroup} for level ${currentLevel}`);
-                    currentGroupInLevel = 0;
-                }
-            }
+        } else {
+            // Fallback/Correction
+            currentLevel = 'A1_1';
+        }
+
+        const savedGroup = parseInt(localStorage.getItem(`progress_${currentLevel}`));
+        const maxGroups = levelConfig[currentLevel].groupCount;
+
+        if (!isNaN(savedGroup) && savedGroup >= 0 && savedGroup < maxGroups) {
+            currentGroupInLevel = savedGroup;
+        } else {
+            console.warn(`Resetting invalid/missing saved group for level ${currentLevel}`);
+            currentGroupInLevel = 0;
         }
     }
 
@@ -1573,6 +1589,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (extraTagsContainer) {
                     extraTagsContainer.appendChild(typeRow);
                 }
+            }
+        }
+
+        // Render Usage Note (Custom rich text note)
+        const usageNoteContainer = document.getElementById('modal-usage-note-container');
+        if (usageNoteContainer) {
+            usageNoteContainer.innerHTML = ''; // Clear previous
+            if (updatedData.usage_note) {
+                const noteDiv = document.createElement('div');
+                noteDiv.className = 'verb-usage-note';
+                noteDiv.style.marginBottom = '15px'; // Spacing bottom
+                noteDiv.style.padding = '12px';
+                noteDiv.style.backgroundColor = '#f0f4f8';
+                noteDiv.style.borderLeft = '4px solid #4682B4';
+                noteDiv.style.fontSize = '0.95rem';
+                noteDiv.style.color = '#333';
+                noteDiv.style.textAlign = 'left';
+                noteDiv.style.borderRadius = '4px';
+                noteDiv.style.lineHeight = '1.5';
+                noteDiv.style.boxShadow = '0 2px 4px rgba(0,0,0,0.05)';
+                noteDiv.innerHTML = updatedData.usage_note;
+                usageNoteContainer.appendChild(noteDiv);
             }
         }
 
