@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografik: Zeit & Kalender</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Article Colors (Constant) */
+            --der-blue: #3b82f6;
+            --die-red: #ef4444;
+            --das-green: #22c55e;
+            --accent-purple: #8b5cf6;
+
+            /* Light Mode Variables */
+            --bg-body: #e5e7eb;
+            --bg-container: #ffffff;
+            --text-main: #1f2937;
+            --text-subtitle: #6b7280;
+            --section-border: #f3f4f6;
+            --card-border: #e5e7eb;
+
+            --der-light: #eff6ff;
+            --die-light: #fef2f2;
+            --das-light: #f0fdf4;
+            --relative-bg: #f3f4f6;
+            --footer-bg: #eff6ff;
+        }
+
+        /* Default to Dark Theme Variables */
+        [data-theme="dark"] {
+            --bg-body: #0f172a;
+            --bg-container: #1e293b;
+            --text-main: #f8fafc;
+            --text-subtitle: #94a3b8;
+            --section-border: #334155;
+            --card-border: #334155;
+
+            --der-light: rgba(59, 130, 246, 0.15);
+            --die-light: rgba(239, 68, 68, 0.15);
+            --das-light: rgba(34, 197, 94, 0.15);
+            --relative-bg: #334155;
+            --footer-bg: #1e293b;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--bg-container);
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        /* --- Theme Toggle --- */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--relative-bg);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .subtitle {
+            color: var(--text-subtitle);
+            font-size: 1.1rem;
+        }
+
+        /* --- Global Emoji Styling --- */
+        .emoji {
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+            display: inline-block;
+        }
+
+        /* --- Section Styling --- */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--section-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* --- Interactive Card Shared Logic --- */
+        .time-card,
+        .day-box,
+        .season-box,
+        .vocab-item,
+        .rel-item {
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .time-card:hover,
+        .day-box:hover,
+        .season-box:hover,
+        .vocab-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* --- Section 1: Tageszeiten --- */
+        .day-cycle {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .time-card {
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .morgen {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #802d31;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #1e4d63;
+        }
+
+        .abend {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #6e4e00;
+        }
+
+        .nacht {
+            background: linear-gradient(135deg, #243949 0%, #517fa4 100%);
+            color: #fff;
+        }
+
+        .time-card .emoji {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        .time-card .greeting {
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .time-card .article-word {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .time-card .time-range {
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            align-self: center;
+        }
+
+        /* --- Section 2: Wochentage --- */
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .day-box {
+            text-align: center;
+            padding: 10px 5px;
+            background: var(--der-light);
+            border: 2px solid var(--der-blue);
+            border-radius: 12px;
+        }
+
+        .day-box .abbr {
+            font-weight: 800;
+            color: var(--der-blue);
+            display: block;
+        }
+
+        .day-box .full {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* --- Section 3: Relativ zur Zeit --- */
+        .relative-time {
+            display: flex;
+            justify-content: space-between;
+            background: var(--relative-bg);
+            padding: 15px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+        }
+
+        .rel-item {
+            text-align: center;
+            flex: 1;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .rel-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .rel-item .label {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .rel-item .word {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--accent-purple);
+        }
+
+        .rel-arrow {
+            display: flex;
+            align-items: center;
+            color: #d1d5db;
+            font-weight: 800;
+        }
+
+        /* --- Section 4: Jahreszeiten --- */
+        .seasons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .season-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            border-radius: 16px;
+            background: var(--der-light);
+            border: 2px solid var(--der-blue);
+        }
+
+        .season-emoji {
+            font-size: 3rem;
+        }
+
+        .season-info .art {
+            color: var(--der-blue);
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .season-info .name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .season-info .months {
+            font-size: 0.85rem;
+            color: var(--text-subtitle);
+        }
+
+        /* --- Section 5: Units --- */
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .vocab-item {
+            padding: 25px 15px;
+            border-radius: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .vocab-item .emoji {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .vocab-item .art {
+            font-size: 0.9rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .vocab-item .word {
+            font-weight: 800;
+            font-size: 1.3rem;
+        }
+
+        .item-der {
+            background-color: var(--der-light);
+            border-bottom: 4px solid var(--der-blue);
+        }
+
+        .item-die {
+            background-color: var(--die-light);
+            border-bottom: 4px solid var(--die-red);
+        }
+
+        .item-das {
+            background-color: var(--das-light);
+            border-bottom: 4px solid var(--das-green);
+        }
+
+        .art-der {
+            color: var(--der-blue);
+        }
+
+        .art-die {
+            color: var(--die-red);
+        }
+
+        .art-das {
+            color: var(--das-green);
+        }
+
+        /* --- Prepositions --- */
+        .prep-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .prep-card {
+            padding: 15px;
+            border-radius: 16px;
+            background: var(--bg-container);
+            border: 2px dashed var(--section-border);
+        }
+
+        .prep-card strong {
+            color: var(--accent-purple);
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .prep-card ul {
+            padding-left: 18px;
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-subtitle);
+        }
+
+        /* --- Grammar Rules --- */
+        .rules-footer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: var(--footer-bg);
+            border-radius: 16px;
+            border-left: 5px solid var(--der-blue);
+        }
+
+        .rules-footer h3 {
+            margin-top: 0;
+            color: var(--der-blue);
+        }
+
+        .rules-footer p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 700px) {
+
+            .seasons-grid,
+            .prep-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .week-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .day-cycle {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .vocab-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body data-theme="dark">
+
+    <div class="container">
+        <button class="theme-toggle" id="theme-btn" title="Thema wechseln">☀️</button>
+
+        <header>
+            <h1>Zeit & Kalender</h1>
+            <p class="subtitle">Wortschatz & Grammatik für A1-B1</p>
+        </header>
+
+        <!-- Tageszeiten -->
+        <div class="section-title"><span class="emoji">🌞</span> Tageszeiten & Grüße</div>
+        <div class="day-cycle">
+            <div class="time-card morgen" onclick="speak('der Morgen')">
+                <span class="time-range">06:00 - 10:00</span>
+                <div class="emoji">🌅</div>
+                <div class="article-word">der Morgen</div>
+                <div class="greeting">Guten Morgen!</div>
+            </div>
+            <div class="time-card tag" onclick="speak('der Tag')">
+                <span class="time-range">10:00 - 17:00</span>
+                <div class="emoji">☀️</div>
+                <div class="article-word">der Tag</div>
+                <div class="greeting">Guten Tag!</div>
+            </div>
+            <div class="time-card abend" onclick="speak('der Abend')">
+                <span class="time-range">17:00 - 22:00</span>
+                <div class="emoji">🌆</div>
+                <div class="article-word">der Abend</div>
+                <div class="greeting">Guten Abend!</div>
+            </div>
+            <div class="time-card nacht" onclick="speak('die Nacht')">
+                <span class="time-range">22:00 - 06:00</span>
+                <div class="emoji">🌙</div>
+                <div class="article-word">die Nacht</div>
+                <div class="greeting">Gute Nacht!</div>
+            </div>
+        </div>
+
+        <!-- Wochentage -->
+        <div class="section-title"><span class="emoji">🗓️</span> Die Wochentage</div>
+        <div class="week-grid">
+            <div class="day-box" onclick="speak('der Montag')"><span class="abbr">Mo</span><span
+                    class="full">Montag</span></div>
+            <div class="day-box" onclick="speak('der Dienstag')"><span class="abbr">Di</span><span
+                    class="full">Dienstag</span></div>
+            <div class="day-box" onclick="speak('der Mittwoch')"><span class="abbr">Mi</span><span
+                    class="full">Mittwoch</span></div>
+            <div class="day-box" onclick="speak('der Donnerstag')"><span class="abbr">Do</span><span
+                    class="full">Donnerstag</span></div>
+            <div class="day-box" onclick="speak('der Freitag')"><span class="abbr">Fr</span><span
+                    class="full">Freitag</span></div>
+            <div class="day-box" onclick="speak('der Samstag')"
+                style="border-color: #f59e0b; background: rgba(245, 158, 11, 0.1);"><span class="abbr"
+                    style="color: #f59e0b;">Sa</span><span class="full">Samstag</span></div>
+            <div class="day-box" onclick="speak('der Sonntag')"
+                style="border-color: #f59e0b; background: rgba(245, 158, 11, 0.1);"><span class="abbr"
+                    style="color: #f59e0b;">So</span><span class="full">Sonntag</span></div>
+        </div>
+
+        <!-- Relative Time -->
+        <div class="relative-time">
+            <div class="rel-item" onclick="speak('vorgestern')"><span class="label">vorgestern</span><span
+                    class="word">anteayer</span></div>
+            <div class="rel-arrow">←</div>
+            <div class="rel-item" onclick="speak('gestern')"><span class="label">gestern</span><span
+                    class="word">ayer</span></div>
+            <div class="rel-arrow">←</div>
+            <div class="rel-item" onclick="speak('heute')"
+                style="background: var(--bg-container); border-radius: 10px; padding: 5px;"><span
+                    class="label">heute</span><span class="word" style="color: var(--der-blue)">HOY</span></div>
+            <div class="rel-arrow">→</div>
+            <div class="rel-item" onclick="speak('morgen')"><span class="label">morgen</span><span
+                    class="word">mañana</span></div>
+            <div class="rel-arrow">→</div>
+            <div class="rel-item" onclick="speak('übermorgen')"><span class="label">übermorgen</span><span
+                    class="word">pasado mañ.</span></div>
+        </div>
+
+        <!-- Jahreszeiten -->
+        <div class="section-title"><span class="emoji">🍂</span> Die Jahreszeiten</div>
+        <div class="seasons-grid">
+            <div class="season-box" onclick="speak('der Frühling')">
+                <div class="season-emoji emoji">🌷</div>
+                <div class="season-info">
+                    <span class="art art-der">der</span>
+                    <span class="name">Frühling</span>
+                    <span class="months">März, April, Mai</span>
+                </div>
+            </div>
+            <div class="season-box" onclick="speak('der Sommer')">
+                <div class="season-emoji emoji">☀️</div>
+                <div class="season-info">
+                    <span class="art art-der">der</span>
+                    <span class="name">Sommer</span>
+                    <span class="months">Juni, Juli, August</span>
+                </div>
+            </div>
+            <div class="season-box" onclick="speak('der Herbst')">
+                <div class="season-emoji emoji">🍂</div>
+                <div class="season-info">
+                    <span class="art art-der">der</span>
+                    <span class="name">Herbst</span>
+                    <span class="months">Sept, Okt, Nov</span>
+                </div>
+            </div>
+            <div class="season-box" onclick="speak('der Winter')">
+                <div class="season-emoji emoji">❄️</div>
+                <div class="season-info">
+                    <span class="art art-der">der</span>
+                    <span class="name">Winter</span>
+                    <span class="months">Dez, Jan, Feb</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar Units -->
+        <div class="section-title"><span class="emoji">📅</span> Kalender & Einheiten</div>
+        <div class="vocab-grid">
+            <div class="vocab-item item-die" onclick="speak('die Uhr')">
+                <div class="emoji">⌚</div>
+                <div class="art art-die">die</div>
+                <div class="word">Uhr</div>
+            </div>
+            <div class="vocab-item item-die" onclick="speak('die Stunde')">
+                <div class="emoji">⏳</div>
+                <div class="art art-die">die</div>
+                <div class="word">Stunde</div>
+            </div>
+            <div class="vocab-item item-die" onclick="speak('die Minute')">
+                <div class="emoji">⏱️</div>
+                <div class="art art-die">die</div>
+                <div class="word">Minute</div>
+            </div>
+            <div class="vocab-item item-die" onclick="speak('die Woche')">
+                <div class="emoji">🗓️</div>
+                <div class="art art-die">die</div>
+                <div class="word">Woche</div>
+            </div>
+            <div class="vocab-item item-der" onclick="speak('der Monat')">
+                <div class="emoji">📆</div>
+                <div class="art art-der">der</div>
+                <div class="word">Monat</div>
+            </div>
+            <div class="vocab-item item-das" onclick="speak('das Jahr')">
+                <div class="emoji">🎆</div>
+                <div class="art art-das">das</div>
+                <div class="word">Jahr</div>
+            </div>
+            <div class="vocab-item item-das" onclick="speak('das Datum')">
+                <div class="emoji">📅</div>
+                <div class="art art-das">das</div>
+                <div class="word">Datum</div>
+            </div>
+            <div class="vocab-item item-das" onclick="speak('das Wochenende')">
+                <div class="emoji">🏖️</div>
+                <div class="art art-das">das</div>
+                <div class="word">Wochenende</div>
+            </div>
+        </div>
+
+        <!-- Rules Footer -->
+        <div class="rules-footer">
+            <h3>💡 Wichtige Regel:</h3>
+            <p>
+                Fast alle Zeitbegriffe (Tage, Monate, Jahreszeiten) sind im Deutschen <strong>maskulin (der)</strong>.
+                Eine wichtige Ausnahme ist <strong>die Nacht</strong>.
+                <br><em>Beispiele: der Montag, der Juli, der Sommer.</em>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle Logic
+        const themeBtn = document.getElementById('theme-btn');
+        const body = document.body;
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            themeBtn.textContent = newTheme === 'light' ? '🌓' : '☀️';
+        });
+
+        // Voice Synthesis Logic
+        function speak(text) {
+            if (!window.speechSynthesis) return;
+
+            // Stop any current speech
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+
+            // Find German voice
+            const voices = window.speechSynthesis.getVoices();
+            const germanVoice = voices.find(v => v.lang.startsWith('de'));
+            if (germanVoice) utterance.voice = germanVoice;
+
+            utterance.rate = 0.9; // Slightly slower for clarity
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Ensure voices are loaded (for some browsers)
+        window.speechSynthesis.onvoiceschanged = () => { };
+    </script>
+
+</body>
+
+</html>
