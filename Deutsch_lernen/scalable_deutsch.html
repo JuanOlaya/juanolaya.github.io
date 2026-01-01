@@ -4,358 +4,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scalable Deutsch - Menú Principal</title>
+    <title>Scalable Deutsch - Dein interaktiver Deutschkurs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            /* Light Mode Variables */
+            --bg-body: #e5e7eb;
+            --bg-container: #ffffff;
+            --text-main: #1f2937;
+            --text-subtitle: #6b7280;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+            --toggle-bg: #f3f4f6;
+        }
+
+        /* Default to Dark Theme Variables */
+        [data-theme="dark"] {
+            --bg-body: #0f172a;
+            --bg-container: #1e293b;
+            --text-main: #f8fafc;
+            --text-subtitle: #94a3b8;
+            --card-shadow: rgba(0, 0, 0, 0.3);
+            --toggle-bg: #334155;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #fce4ec 100%);
-            min-height: 100vh;
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
             padding: 20px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            transition: background-color 0.3s ease;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            animation: fadeInDown 0.8s ease;
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            color: #880e4f;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(136, 14, 79, 0.2);
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            color: #ad1457;
-            font-weight: 500;
-        }
-
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+        .container {
             max-width: 1200px;
             width: 100%;
-            margin-bottom: 30px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 32px;
-            box-shadow: 0 8px 24px rgba(136, 14, 79, 0.15);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
+            background: var(--bg-container);
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            position: relative;
+            transition: background-color 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
+        }
+
+        /* --- Theme Toggle --- */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--toggle-bg);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            background: linear-gradient(135deg, #60a5fa, #c084fc);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-subtitle);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* --- Navigation Grid --- */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .nav-card {
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
-            animation: fadeInUp 0.6s ease backwards;
         }
 
-        .card:nth-child(1) {
-            animation-delay: 0.1s;
+        .nav-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .card:nth-child(2) {
-            animation-delay: 0.2s;
+        /* Gradient Variants */
+        .style-morgen {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #802d31;
         }
 
-        .card:nth-child(3) {
-            animation-delay: 0.3s;
+        .style-tag {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #1e4d63;
         }
 
-        .card:nth-child(4) {
-            animation-delay: 0.4s;
+        .style-abend {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #6e4e00;
         }
 
-        .card:nth-child(5) {
-            animation-delay: 0.5s;
+        .style-nacht {
+            background: linear-gradient(135deg, #243949 0%, #517fa4 100%);
+            color: #fff;
         }
 
-        .card:nth-child(6) {
-            animation-delay: 0.6s;
-        }
-
-        .card:nth-child(7) {
-            animation-delay: 0.7s;
-        }
-
-        .card:nth-child(8) {
-            animation-delay: 0.8s;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #e91e63, #f06292);
-            transform: scaleX(0);
-            transform-origin: left;
+        .nav-card .emoji {
+            font-size: 3.5rem;
+            margin-bottom: 5px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
             transition: transform 0.3s ease;
         }
 
-        .card:hover::before {
-            transform: scaleX(1);
+        .nav-card:hover .emoji {
+            transform: scale(1.1);
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(136, 14, 79, 0.25);
+        .nav-card .card-title {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin: 0;
+            line-height: 1.2;
         }
 
-        .card-icon {
-            font-size: 4rem;
-            margin-bottom: 8px;
+        .nav-card .card-desc {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-weight: 600;
+            margin-top: 5px;
         }
 
-        .card-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #880e4f;
-            text-align: center;
-            margin-bottom: 8px;
-        }
-
-        .card-description {
-            font-size: 1rem;
-            color: #6a1b3d;
-            text-align: center;
-            line-height: 1.5;
-        }
-
+        /* Sub-links styling for container cards */
         .card-links {
             display: flex;
             flex-direction: column;
             gap: 8px;
             width: 100%;
-            margin-top: 8px;
+            margin-top: 15px;
         }
 
         .sub-link {
-            background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
-            color: #880e4f;
-            padding: 10px 16px;
-            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.25);
+            color: white;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            text-align: center;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            backdrop-filter: blur(4px);
         }
 
         .sub-link:hover {
-            background: linear-gradient(135deg, #f48fb1 0%, #f06292 100%);
-            color: white;
-            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: translateX(5px);
         }
 
-        .old-version {
-            background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
-            border: 2px solid #9c27b0;
-        }
-
-        .old-version .card-title {
-            color: #6a1b9a;
-        }
-
-        .old-version .card-description {
-            color: #7b1fa2;
-        }
-
+        /* --- Footer --- */
         .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #ad1457;
+            margin-top: auto;
+            color: var(--text-subtitle);
             font-size: 0.9rem;
-            animation: fadeIn 1s ease 0.8s backwards;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+            width: 100%;
         }
 
         @media (max-width: 768px) {
-            .header h1 {
+            .container {
+                padding: 20px;
+                border-radius: 16px;
+            }
+
+            h1 {
                 font-size: 2rem;
             }
 
-            .header p {
-                font-size: 1rem;
-            }
-
-            .cards-container {
+            .nav-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .card {
-                padding: 24px;
-            }
-
-            .card-icon {
-                font-size: 3rem;
-            }
-
-            .card-title {
-                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 
-<body>
-    <div class="header">
-        <h1>🇩🇪 Scalable Deutsch</h1>
-        <p>Dein interaktiver Deutschkurs</p>
-    </div>
+<body data-theme="dark">
 
-    <div class="cards-container">
-        <!-- Fälle Card -->
-        <div class="card">
-            <div class="card-icon">📋</div>
-            <h2 class="card-title">Fälle</h2>
-            <p class="card-description">Lerne die deutschen Fälle: Nominativ, Akkusativ und Dativ</p>
-            <div class="card-links">
-                <a href="faelle/nominativ/nominativ.html" class="sub-link">📘 Nominativ</a>
-                <a href="faelle/akkusativ/akkusativ.html" class="sub-link">📗 Akkusativ</a>
-                <a href="faelle/dativ/dativ.html" class="sub-link">📙 Dativ</a>
+    <div class="container">
+        <button class="theme-toggle" id="theme-btn" title="Thema wechseln">☀️</button>
+
+        <header>
+            <h1>Scalable Deutsch</h1>
+            <p class="subtitle">Wähle ein Thema und starte deine Reise</p>
+        </header>
+
+        <div class="nav-grid">
+            <!-- Fälle (Nacht) - Container Card -->
+            <div class="nav-card style-nacht">
+                <div class="emoji">📋</div>
+                <h2 class="card-title">Fälle</h2>
+                <div class="card-desc">Deutsche Kasus lernen</div>
+                <div class="card-links">
+                    <a href="faelle/nominativ/nominativ.html" class="sub-link">📘 Nominativ</a>
+                    <a href="faelle/akkusativ/akkusativ.html" class="sub-link">📗 Akkusativ</a>
+                    <a href="faelle/dativ/dativ.html" class="sub-link">📙 Dativ</a>
+                </div>
             </div>
+
+            <!-- Verben (Nacht) -->
+            <a href="verben/A1_A2_B1/verben.html" class="nav-card style-nacht">
+                <div class="emoji">🔤</div>
+                <h2 class="card-title">Verben</h2>
+                <div class="card-desc">Konjugation & Training</div>
+            </a>
+
+            <!-- Substantive (Nacht) - Container Card -->
+            <div class="nav-card style-nacht">
+                <div class="emoji">📝</div>
+                <h2 class="card-title">Substantive</h2>
+                <div class="card-desc">Wortschatz & Genus</div>
+                <div class="card-links">
+                    <a href="substantiv/substantive.html" class="sub-link">📚 Hauptkurs</a>
+                    <a href="substantiv/koerperteile_interaktiv.html" class="sub-link">🏃 Körperteile</a>
+                    <a href="substantiv/zeit_kalender.html" class="sub-link">📅 Zeit & Kalender</a>
+                </div>
+            </div>
+
+            <!-- Conectores (Nacht) - Container Card -->
+            <div class="nav-card style-nacht">
+                <div class="emoji">⚡</div>
+                <h2 class="card-title">Conectores</h2>
+                <div class="card-desc">Verbindungen & Nuancen</div>
+                <div class="card-links">
+                    <a href="adverbs/adverbien.html" class="sub-link">⚡ Adverbien</a>
+                    <a href="adverbs/mengenpronomen.html" class="sub-link">📊 Pronomen</a>
+                    <a href="konjunktionen/konjunktionen.html" class="sub-link">🔗 Konjunktionen</a>
+                </div>
+            </div>
+
+            <!-- Präpositionen (Nacht) -->
+            <a href="praepositionen/praepositionen.html" class="nav-card style-nacht">
+                <div class="emoji">🧭</div>
+                <h2 class="card-title">Präpositionen</h2>
+                <div class="card-desc">Wechsel-, Dativ- & Akkusativ</div>
+            </a>
+
+            <!-- W-Fragen (Nacht) -->
+            <a href="w-fragen/w-fragen.html" class="nav-card style-nacht">
+                <div class="emoji">❓</div>
+                <h2 class="card-title">W-Fragen</h2>
+                <div class="card-desc">Wer, Wie, Was, Wo?</div>
+            </a>
+
+            <!-- Uhrzeit (Nacht) -->
+            <a href="uhrzeit/uhrzeit.html" class="nav-card style-nacht">
+                <div class="emoji">⏰</div>
+                <h2 class="card-title">Die Uhrzeit</h2>
+                <div class="card-desc">Zeitangaben lernen</div>
+            </a>
+
+            <!-- Adjektive (Nacht) -->
+            <a href="adjektive/adjektive.html" class="nav-card style-nacht">
+                <div class="emoji">🎨</div>
+                <h2 class="card-title">Adjektive</h2>
+                <div class="card-desc">Deklination & Farben</div>
+            </a>
+
+            <!-- Aussprache (Nacht) -->
+            <a href="Aussprache/aussprache.html" class="nav-card style-nacht">
+                <div class="emoji">🗣️</div>
+                <h2 class="card-title">Aussprache</h2>
+                <div class="card-desc">Laute & Phonetik</div>
+            </a>
+
+            <!-- Sprechen A1 (Nacht) -->
+            <a href="Sprechen/a1.html" class="nav-card style-nacht">
+                <div class="emoji">💬</div>
+                <h2 class="card-title">Sprechen A1</h2>
+                <div class="card-desc">Konversation üben</div>
+            </a>
+
+            <!-- Alte Version (Abend) -->
+            <a href="index.html" class="nav-card style-abend">
+                <div class="emoji">🕰️</div>
+                <h2 class="card-title">Alte Version</h2>
+                <div class="card-desc">Klassisches Design</div>
+            </a>
         </div>
 
-        <!-- Verben Card -->
-        <a href="verben/A1_A2_B1/verben.html" class="card">
-            <div class="card-icon">🔤</div>
-            <h2 class="card-title">Verben</h2>
-            <p class="card-description">Konjugation und Übung deutscher Verben mit interaktiven Karten</p>
-        </a>
-
-        <!-- Substantive Card -->
-        <div class="card">
-            <div class="card-icon">📝</div>
-            <h2 class="card-title">Substantive</h2>
-            <p class="card-description">Wortschatz, Artikel und Genus-Regeln</p>
-            <div class="card-links">
-                <a href="substantiv/substantive.html" class="sub-link">📚 Hauptkurs</a>
-                <a href="substantiv/koerperteile_interaktiv.html" class="sub-link">🏃 Körperteile Interaktiv</a>
-                <a href="substantiv/zeit_kalender.html" class="sub-link">📅 Infografik: Zeit & Kalender</a>
-            </div>
+        <div class="footer">
+            <p>Made with ❤️ for German Learners • 2024</p>
         </div>
-
-        <!-- Präpositionen Card -->
-        <a href="praepositionen/praepositionen.html" class="card">
-            <div class="card-icon">🧭</div>
-            <h2 class="card-title">Präpositionen</h2>
-            <p class="card-description">Beherrsche Akkusativ-, Dativ- und Wechselpräpositionen</p>
-        </a>
-
-        <!-- Conectores Card -->
-        <div class="card">
-            <div class="card-icon">⚡</div>
-            <h2 class="card-title">Conectores</h2>
-            <p class="card-description">Adverbien und Mengenpronomen üben</p>
-            <div class="card-links">
-                <a href="adverbs/adverbien.html" class="sub-link">⚡ Adverbien</a>
-                <a href="adverbs/mengenpronomen.html" class="sub-link">📊 Pronombres de Cantidad</a>
-                <a href="konjunktionen/konjunktionen.html" class="sub-link">🔗 Conjunciones</a>
-            </div>
-        </div>
-
-        <!-- W-Fragen Card -->
-        <a href="w-fragen/w-fragen.html" class="card">
-            <div class="card-icon">❓</div>
-            <h2 class="card-title">W-Fragen</h2>
-            <p class="card-description">Lerne die W-Fragen: Wer, Was, Wann, Wo, Warum...</p>
-        </a>
-
-        <!-- Uhrzeit Card -->
-        <a href="uhrzeit/uhrzeit.html" class="card">
-            <div class="card-icon">⏰</div>
-            <h2 class="card-title">Die Uhrzeit</h2>
-            <p class="card-description">Lerne die Uhr zu lesen: Viertel, Halb, Vor und Nach</p>
-        </a>
-
-        <!-- Adjektive Card -->
-        <a href="adjektive/adjektive.html" class="card">
-            <div class="card-icon">🎨</div>
-            <h2 class="card-title">Adjektive</h2>
-            <p class="card-description">Deutsche Adjektive lernen und üben</p>
-        </a>
-
-        <!-- Aussprache Card (New) -->
-        <a href="Aussprache/aussprache.html" class="card">
-            <div class="card-icon">🗣️</div>
-            <h2 class="card-title">Aussprache</h2>
-            <p class="card-description">Übe die deutsche Aussprache: Umlaute und Konsonanten</p>
-        </a>
-
-        <!-- A1 Sprechen Card -->
-        <a href="Sprechen/a1.html" class="card">
-            <div class="card-icon">💬</div>
-            <h2 class="card-title">A1 Sprechen</h2>
-            <p class="card-description">Sprachübungen und Konversation auf A1 Niveau</p>
-        </a>
-
-        <!-- Old Version Card -->
-        <a href="index.html" class="card old-version">
-            <div class="card-icon">🕰️</div>
-            <h2 class="card-title">Alte Version</h2>
-            <p class="card-description">Zurück zur klassischen Version der Anwendung</p>
-        </a>
     </div>
 
-    <div class="footer">
-        <p>✨ Viel Erfolg beim Deutschlernen! ✨</p>
-        <p style="margin-top: 8px; font-size: 0.85rem; opacity: 0.8;">© 2024 Scalable Deutsch</p>
-    </div>
+    <script>
+        // Theme Toggle Logic
+        const themeBtn = document.getElementById('theme-btn');
+        const body = document.body;
+
+        // Check local storage or system preference could be added here
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            themeBtn.textContent = newTheme === 'light' ? '🌓' : '☀️';
+        });
+    </script>
 </body>
 
 </html>
