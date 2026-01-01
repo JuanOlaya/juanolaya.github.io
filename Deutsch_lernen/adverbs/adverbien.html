@@ -836,7 +836,7 @@
                     { word: 'andererseits', emoji: '✋', spanish: '(por otro lado)', example_de: 'Er ist streng, aber andererseits sehr fair.', example_es: 'Es estricto, pero por otro lado muy justo.' },
                     { word: 'einerseits', emoji: '✋', spanish: '(por un lado)', example_de: 'Einerseits ja, andererseits nein.', example_es: 'Por un lado sí, por otro lado no.' },
                     { word: 'ansonsten', emoji: '⚠️', spanish: '(de lo contrario)', example_de: 'Beeil dich, ansonsten verpassen wir den Zug.', example_es: 'Date prisa, de lo contrario perderemos el tren.' },
-                    { word: 'beziehungsweise', emoji: '↔️', spanish: '(o sea / mejor dicho / respectivamente)', example_de: 'Ich nehme den Bus bzw. die Bahn.', example_es: 'Tomaré el autobús o mejor dicho el tren.', note: 'Nota: "bzw." es la abreviación.' },
+                    { word: 'beziehungsweise', emoji: '↔️', spanish: '(o sea / mejor dicho / respectivamente)', example_de: 'Ich nehme den Bus bzw. die Bahn.', example_es: 'Tomaré el autobús o mejor dicho el tren.', note: 'Nota: <u>"bzw."</u> es la abreviación.' },
                     { word: 'entweder', emoji: '⚖️', spanish: '(o ... o)', example_de: 'Entweder wir gehen ins Kino oder ins Theater.', example_es: 'O vamos al cine o al teatro.' },
                     { word: 'weder', emoji: '🚫', spanish: '(ni ... ni)', example_de: 'Ich mag weder Fisch noch Fleisch.', example_es: 'No me gusta ni el pescado ni la carne.' },
                     { word: 'zwar', emoji: '⚖️', spanish: '(es verdad que ... pero)', example_de: 'Das ist zwar teuer, aber gut.', example_es: 'Es verdad que es caro, pero es bueno.' },
@@ -1157,7 +1157,7 @@
 
             // Handle Note
             if (adverb.note) {
-                modalNote.textContent = adverb.note;
+                modalNote.innerHTML = adverb.note;
                 modalNote.style.display = 'block';
             } else {
                 modalNote.style.display = 'none';
