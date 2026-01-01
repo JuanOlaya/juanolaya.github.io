@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -105,8 +105,8 @@
             <!-- Dark Mode Toggle Button -->
             <button id="theme-toggle"
                 class="p-3 bg-white dark:bg-gray-800 rounded-2xl card-shadow hover:scale-110 transition-transform flex items-center gap-2 font-bold text-gray-700 dark:text-gray-200">
-                <span id="theme-toggle-icon-light">☀️</span>
-                <span id="theme-toggle-icon-dark" class="hidden">🌙</span>
+                <span id="theme-toggle-icon-light" class="hidden">☀️</span>
+                <span id="theme-toggle-icon-dark">🌙</span>
                 <span class="text-sm">Modus</span>
             </button>
 
@@ -154,6 +154,10 @@
                         onclick="selectPart('ohr')" />
                     <circle data-part="ohr" class="body-part-hotspot" cx="225" cy="80" r="8"
                         onclick="selectPart('ohr')" />
+
+                    <!-- SKIN (Haut) - Cheek area -->
+                    <circle data-part="haut" class="body-part-hotspot" cx="230" cy="100" r="7"
+                        onclick="selectPart('haut')" />
 
                     <!-- ARMS & HANDS -->
                     <path data-part="arm" class="body-part-hotspot" d="M100,130 h40 v110 h-40 z"
@@ -271,7 +275,8 @@
             { id: "bauch", article: "der", word: "Bauch", emoji: "🤰", translation_es: "barriga / estómago", translation_en: "belly", example_de: "Ich habe Bauchschmerzen.", example_es: "Tengo dolor de barriga." },
             { id: "rucken", article: "der", word: "Rücken", emoji: "🚶", translation_es: "espalda", translation_en: "back", example_de: "Der Rücken tut weh.", example_es: "La espalda duele." },
             { id: "bein", article: "das", word: "Bein", emoji: "🦵", translation_es: "pierna", translation_en: "leg", example_de: "Das Bein ist gebrochen.", example_es: "La pierna está rota." },
-            { id: "fuß", article: "der", word: "Fuß", emoji: "🦶", translation_es: "pie", translation_en: "foot", example_de: "Mein Fuß schmerzt.", example_es: "Me duele el pie." }
+            { id: "fuß", article: "der", word: "Fuß", emoji: "🦶", translation_es: "pie", translation_en: "foot", example_de: "Mein Fuß schmerzt.", example_es: "Me duele el pie." },
+            { id: "haut", article: "die", word: "Haut", emoji: "🧖", translation_es: "piel", translation_en: "skin", example_de: "Die Haut ist empfindlich.", example_es: "La piel es sensible." }
         ]
 
         let activeId = null;

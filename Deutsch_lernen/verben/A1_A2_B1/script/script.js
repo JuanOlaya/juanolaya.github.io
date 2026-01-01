@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- GLOBAL STATE ---
     let allVerbsData = {}; // Global Data Containers
     let verbGroupsByLevel = {}; // Global Data Containers
-    // let wortfamilieData = {}; // Removed: Loaded dynamically
     let verbTypesData = {}; // Verb types and notes data
+    let searchScope = 'verbs'; // 'verbs' or 'wortfamilie'
+    let wortfamilieIndex = null; // Lazy-loaded index for Wortfamilie search
     const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "Zwölfte", "Dreizehnte"];
     const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes", "Sechstes", "Siebtes", "Achtes"];
     const savedStories = [
@@ -221,6 +222,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
             return verbTypesPromise;
         });
+    }
+
+    // --- LAZY LOAD WORTFAMILIE INDEX ---
+    async function loadWortfamilieIndex() {
+        if (wortfamilieIndex !== null) return; // Already loaded
+
+        console.log('Lazy loading Wortfamilie index...');
+        const cardsContainer = document.getElementById('cards-container');
+        cardsContainer.innerHTML = '<div class="loading-spinner">Wortfamilie wird geladen...</div>';
+
+        const index = [];
+        const verbs = Object.keys(allVerbsData);
+        const BATCH_SIZE = 10;
+
+        for (let i = 0; i < verbs.length; i += BATCH_SIZE) {
+            const batch = verbs.slice(i, i + BATCH_SIZE);
+            const promises = batch.map(verb =>
+                fetch(`json/wortfamilie/${verb}.json`)
+                    .then(res => res.ok ? res.json() : null)
+                    .then(data => {
+                        if (data && data.wortfamilie) {
+                            data.wortfamilie.forEach(item => {
+                                index.push({
+                                    word: item.word,
+                                    type: item.type || '',
+                                    es: item.es || '',
+                                    en: item.en || '',
+                                    verb: verb, // Parent verb
+                                    level: item.level || ''
+                                });
+                            });
+                        }
+                    })
+                    .catch(() => { }) // Ignore missing files
+            );
+            await Promise.all(promises);
+        }
+
+        wortfamilieIndex = index;
+        console.log(`Wortfamilie index loaded with ${index.length} entries.`);
+        cardsContainer.innerHTML = ''; // Clear loading message
+
+        // If we are still in wortfamilie scope, re-run search
+        if (searchScope === 'wortfamilie') {
+            performSearch();
+        }
     }
 
     // Helper function to remove all parentheses from translations
@@ -2243,10 +2290,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearSearchBtn = document.getElementById('clear-search');
     const searchCounter = document.getElementById('search-counter');
 
+    // --- SCOPE TOGGLE LISTENERS ---
+    const scopeVerbsRadio = document.getElementById('scope-verbs');
+    const scopeWortfamilieRadio = document.getElementById('scope-wortfamilie');
+
+    if (scopeVerbsRadio && scopeWortfamilieRadio) {
+        scopeVerbsRadio.addEventListener('change', () => {
+            if (scopeVerbsRadio.checked) {
+                searchScope = 'verbs';
+                performSearch();
+            }
+        });
+        scopeWortfamilieRadio.addEventListener('change', () => {
+            if (scopeWortfamilieRadio.checked) {
+                searchScope = 'wortfamilie';
+                loadWortfamilieIndex().then(() => performSearch());
+            }
+        });
+    }
+
     async function performSearch() {
         if (!searchInput) return;
 
         const searchTerm = searchInput.value.trim().toLowerCase();
+
+        // --- SCOPE REDIRECT ---
+        if (searchScope === 'wortfamilie') {
+            return performWortfamilieSearch(searchTerm);
+        }
 
         // Show/hide clear button
         if (clearSearchBtn) {
@@ -2588,6 +2659,65 @@ document.addEventListener('DOMContentLoaded', () => {
                 searchCounter.textContent = `${totalMatches} ${totalMatches === 1 ? 'Verb' : 'Verben'} gefunden`;
             } else {
                 searchCounter.textContent = `${verbsToShow.length} von ${totalMatches} Verben angezeigt`;
+            }
+        }
+    }
+
+
+
+    function performWortfamilieSearch(searchTerm) {
+        if (!wortfamilieIndex) return;
+
+        if (clearSearchBtn) {
+            if (searchTerm.length > 0) {
+                clearSearchBtn.classList.add('visible');
+            } else {
+                clearSearchBtn.classList.remove('visible');
+            }
+        }
+
+        if (searchTerm.length < 2) {
+            cardsContainer.innerHTML = '<div class="cards-placeholder" style="text-align:center; padding: 20px; color: #666;">Geben Sie mindestens 2 Buchstaben ein, um in Wortfamilien zu suchen.</div>';
+            if (searchCounter) searchCounter.textContent = '';
+            return;
+        }
+
+        const results = wortfamilieIndex.filter(item =>
+            item.word.toLowerCase().includes(searchTerm) ||
+            item.es.toLowerCase().includes(searchTerm)
+        );
+
+        cardsContainer.innerHTML = '';
+
+        if (results.length === 0) {
+            cardsContainer.innerHTML = '<div class="no-results" style="text-align:center; padding: 20px;">Keine Ergebnisse gefunden.</div>';
+            if (searchCounter) searchCounter.textContent = '0 Ergebnisse';
+            return;
+        }
+
+        const maxResults = 50;
+        results.slice(0, maxResults).forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'wf-result-card';
+            card.onclick = () => openModalForVerb(item.verb);
+
+            card.innerHTML = `
+                <div class="wf-main-info">
+                    <span class="wf-word">${item.word}</span>
+                    <span class="wf-translation">${item.es}</span>
+                    <div class="wf-relationship">
+                        Gehört zu: <strong>${item.verb}</strong> <span class="wf-arrow">➔</span>
+                    </div>
+                </div>
+            `;
+            cardsContainer.appendChild(card);
+        });
+
+        if (searchCounter) {
+            if (results.length > maxResults) {
+                searchCounter.textContent = `${maxResults} von ${results.length} Ergebnisse angezeigt`;
+            } else {
+                searchCounter.textContent = `${results.length} Ergebnisse`;
             }
         }
     }

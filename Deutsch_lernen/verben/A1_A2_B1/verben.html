@@ -36,6 +36,17 @@
                             <input type="text" id="verb-search" class="search-input" placeholder="Suchen... (buscar)">
                             <button id="clear-search" class="clear-search-btn" title="Clear search">×</button>
                         </div>
+
+                        <!-- Search Scope Toggle -->
+                        <div class="search-scope-container">
+                            <div class="scope-toggle">
+                                <input type="radio" id="scope-verbs" name="search-scope" value="verbs" checked>
+                                <label for="scope-verbs" class="scope-label">Verben</label>
+
+                                <input type="radio" id="scope-wortfamilie" name="search-scope" value="wortfamilie">
+                                <label for="scope-wortfamilie" class="scope-label">Wortfamilie</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -78,6 +89,9 @@
                     </button>
                 </div>
             </div>
+            <span id="search-results-count" class="search-results-count"></span>
+
+
 
             <div class="cards-container" id="cards-container">
                 <!-- Verb cards will be generated here by JavaScript -->

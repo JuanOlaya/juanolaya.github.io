@@ -653,6 +653,10 @@
                 <div class="modal-word" id="modal-word"></div>
                 <div class="modal-translation" id="modal-translation"></div>
                 <div class="modal-badge" id="modal-badge"></div>
+                <!-- Note container -->
+                <div id="modal-note"
+                    style="margin-top: 15px; font-size: 0.9rem; color: rgba(255,255,255,0.9); font-style: italic; display: none;">
+                </div>
             </div>
             <div class="modal-section">
                 <div class="modal-section-title">Beispiel / Ejemplo</div>
@@ -832,12 +836,24 @@
                     { word: 'andererseits', emoji: '✋', spanish: '(por otro lado)', example_de: 'Er ist streng, aber andererseits sehr fair.', example_es: 'Es estricto, pero por otro lado muy justo.' },
                     { word: 'einerseits', emoji: '✋', spanish: '(por un lado)', example_de: 'Einerseits ja, andererseits nein.', example_es: 'Por un lado sí, por otro lado no.' },
                     { word: 'ansonsten', emoji: '⚠️', spanish: '(de lo contrario)', example_de: 'Beeil dich, ansonsten verpassen wir den Zug.', example_es: 'Date prisa, de lo contrario perderemos el tren.' },
-                    { word: 'beziehungsweise', emoji: '↔️', spanish: '(o sea / mejor dicho)', example_de: 'Ich nehme den Bus bzw. die Bahn.', example_es: 'Tomaré el autobús o mejor dicho el tren.' },
+                    { word: 'beziehungsweise', emoji: '↔️', spanish: '(o sea / mejor dicho / respectivamente)', example_de: 'Ich nehme den Bus bzw. die Bahn.', example_es: 'Tomaré el autobús o mejor dicho el tren.', note: 'Nota: "bzw." es la abreviación.' },
                     { word: 'entweder', emoji: '⚖️', spanish: '(o ... o)', example_de: 'Entweder wir gehen ins Kino oder ins Theater.', example_es: 'O vamos al cine o al teatro.' },
                     { word: 'weder', emoji: '🚫', spanish: '(ni ... ni)', example_de: 'Ich mag weder Fisch noch Fleisch.', example_es: 'No me gusta ni el pescado ni la carne.' },
                     { word: 'zwar', emoji: '⚖️', spanish: '(es verdad que ... pero)', example_de: 'Das ist zwar teuer, aber gut.', example_es: 'Es verdad que es caro, pero es bueno.' },
                     { word: 'nämlich', emoji: '💡', spanish: '(es que / es decir)', example_de: 'Ich habe keinen Hunger, ich habe nämlich schon gegessen.', example_es: 'No tengo hambre, es que ya he comido.' },
+                    { word: 'beispielsweise', emoji: '📝', spanish: '(por ejemplo)', example_de: 'Ich mag Obst, beispielsweise Äpfel.', example_es: 'Me gusta la fruta, por ejemplo manzanas.' },
                     { word: 'in Wirklichkeit', emoji: '🕶️', spanish: '(en realidad)', example_de: 'Er wirkt böse, aber in Wirklichkeit ist er nett.', example_es: 'Parece malo, pero en realidad es amable.' }
+                ]
+            },
+            {
+                title: '❓ Interrogativ & Relativ (A2)',
+                description: 'Fragewörter und Relativadverbien',
+                level: 'A2',
+                colorMain: '#f97316',
+                colorPastel: '#ffedd5',
+                badge: 'INT. & REL.',
+                adverbs: [
+                    { word: 'womit', emoji: '🛠️', spanish: '(¿con qué? / con lo cual)', example_de: 'Womit fährst du?', example_es: '¿Con qué vas? / ...con lo cual...' }
                 ]
             }
         ];
@@ -878,6 +894,7 @@
         const modalBadge = document.getElementById('modal-badge');
         const modalExampleDe = document.getElementById('modal-example-de');
         const modalExampleEs = document.getElementById('modal-example-es');
+        const modalNote = document.getElementById('modal-note');
 
         // Render current group
         function renderGroup() {
@@ -1137,6 +1154,14 @@
 
             modalExampleDe.textContent = adverb.example_de;
             modalExampleEs.textContent = adverb.example_es;
+
+            // Handle Note
+            if (adverb.note) {
+                modalNote.textContent = adverb.note;
+                modalNote.style.display = 'block';
+            } else {
+                modalNote.style.display = 'none';
+            }
 
             // Set TTS on word text click
             modalWord.onclick = (e) => {
