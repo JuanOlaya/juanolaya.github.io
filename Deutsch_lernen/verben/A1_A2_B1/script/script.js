@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const index = [];
         const verbs = Object.keys(allVerbsData);
-        const BATCH_SIZE = 10;
+        const BATCH_SIZE = 20;
 
         for (let i = 0; i < verbs.length; i += BATCH_SIZE) {
             const batch = verbs.slice(i, i + BATCH_SIZE);
@@ -244,14 +244,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(data => {
                         if (data && data.wortfamilie) {
                             data.wortfamilie.forEach(item => {
-                                index.push({
-                                    word: item.word,
-                                    type: item.type || '',
-                                    es: item.es || '',
-                                    en: item.en || '',
-                                    verb: verb, // Parent verb
-                                    level: item.level || ''
-                                });
+                                if (item && (item.word || item.es)) {
+                                    index.push({
+                                        word: item.word || '',
+                                        type: item.type || '',
+                                        es: item.es || '',
+                                        en: item.en || '',
+                                        verb: verb, // Parent verb
+                                        level: item.level || ''
+                                    });
+                                }
                             });
                         }
                     })
@@ -262,11 +264,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         wortfamilieIndex = index;
         console.log(`Wortfamilie index loaded with ${index.length} entries.`);
-        cardsContainer.innerHTML = ''; // Clear loading message
+
+        // Only clear loading message if we are NOT about to search immediately
+        // Actually, performSearch will handle clearing or showing results.
 
         // If we are still in wortfamilie scope, re-run search
         if (searchScope === 'wortfamilie') {
             performSearch();
+        } else {
+            cardsContainer.innerHTML = ''; // Clear loading message if user switched away
         }
     }
 
@@ -2682,43 +2688,50 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const results = wortfamilieIndex.filter(item =>
-            item.word.toLowerCase().includes(searchTerm) ||
-            item.es.toLowerCase().includes(searchTerm)
-        );
+        try {
+            const results = wortfamilieIndex.filter(item => {
+                const word = item.word || '';
+                const es = item.es || '';
+                return word.toLowerCase().includes(searchTerm) ||
+                    es.toLowerCase().includes(searchTerm);
+            });
 
-        cardsContainer.innerHTML = '';
+            cardsContainer.innerHTML = '';
 
-        if (results.length === 0) {
-            cardsContainer.innerHTML = '<div class="no-results" style="text-align:center; padding: 20px;">Keine Ergebnisse gefunden.</div>';
-            if (searchCounter) searchCounter.textContent = '0 Ergebnisse';
-            return;
-        }
-
-        const maxResults = 50;
-        results.slice(0, maxResults).forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'wf-result-card';
-            card.onclick = () => openModalForVerb(item.verb);
-
-            card.innerHTML = `
-                <div class="wf-main-info">
-                    <span class="wf-word">${item.word}</span>
-                    <span class="wf-translation">${item.es}</span>
-                    <div class="wf-relationship">
-                        Gehört zu: <strong>${item.verb}</strong> <span class="wf-arrow">➔</span>
-                    </div>
-                </div>
-            `;
-            cardsContainer.appendChild(card);
-        });
-
-        if (searchCounter) {
-            if (results.length > maxResults) {
-                searchCounter.textContent = `${maxResults} von ${results.length} Ergebnisse angezeigt`;
-            } else {
-                searchCounter.textContent = `${results.length} Ergebnisse`;
+            if (results.length === 0) {
+                cardsContainer.innerHTML = '<div class="no-results" style="text-align:center; padding: 20px;">Keine Ergebnisse gefunden.</div>';
+                if (searchCounter) searchCounter.textContent = '0 Ergebnisse';
+                return;
             }
+
+            const maxResults = 50;
+            results.slice(0, maxResults).forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'wf-result-card';
+                card.onclick = () => openModalForVerb(item.verb);
+
+                card.innerHTML = `
+                    <div class="wf-main-info">
+                        <span class="wf-word">${item.word}</span>
+                        <span class="wf-translation">${item.es}</span>
+                        <div class="wf-relationship">
+                            Gehört zu: <strong>${item.verb}</strong> <span class="wf-arrow">➔</span>
+                        </div>
+                    </div>
+                `;
+                cardsContainer.appendChild(card);
+            });
+
+            if (searchCounter) {
+                if (results.length > maxResults) {
+                    searchCounter.textContent = `${maxResults} von ${results.length} Ergebnisse angezeigt`;
+                } else {
+                    searchCounter.textContent = `${results.length} Ergebnisse`;
+                }
+            }
+        } catch (error) {
+            console.error("Error in Wortfamilie search:", error);
+            cardsContainer.innerHTML = '<div class="error-message" style="text-align:center; padding: 20px;">Ein Fehler ist aufgetreten.</div>';
         }
     }
 
