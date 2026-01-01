@@ -3299,3 +3299,136 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 .tab-content h4 {
     color: #0d3473;
 }
+
+/* Controls Container (Search + Toggle) */
+.controls-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    /* allow wrapping on very small screens */
+}
+
+/* Search Scope Toggle */
+.search-scope-container {
+    display: flex;
+    justify-content: center;
+    /* margins removed for side-by-side layout */
+    margin: 0;
+    gap: 10px;
+}
+
+.scope-toggle {
+    display: flex;
+    background-color: #f1f5f9;
+    border-radius: 99px;
+    /* Pill shape */
+    padding: 4px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.scope-toggle input[type="radio"] {
+    display: none;
+}
+
+.scope-label {
+    padding: 8px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 99px;
+    color: #64748b;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.scope-toggle input[type="radio"]:checked+.scope-label {
+    background-color: white;
+    color: #4682B4;
+    /* Primary Blue */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dark .scope-toggle {
+    background-color: #1e293b;
+    border-color: #334155;
+}
+
+.dark .scope-label {
+    color: #94a3b8;
+}
+
+.dark .scope-toggle input[type="radio"]:checked+.scope-label {
+    background-color: #334155;
+    color: #60a5fa;
+    /* Lighter Blue for Dark Mode */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Wortfamilie Result Card Styling */
+.wf-result-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-left: 4px solid #4682B4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dark .wf-result-card {
+    background: #1e293b;
+    border-left-color: #60a5fa;
+}
+
+.wf-result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.wf-main-info {
+    flex-grow: 1;
+}
+
+.wf-word {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.dark .wf-word {
+    color: #f1f5f9;
+}
+
+.wf-translation {
+    font-size: 1rem;
+    color: #64748b;
+    font-style: italic;
+}
+
+.dark .wf-translation {
+    color: #cbd5e1;
+}
+
+.wf-relationship {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.wf-arrow {
+    font-size: 1.2rem;
+    color: #cbd5e1;
+    margin-left: 10px;
+}
