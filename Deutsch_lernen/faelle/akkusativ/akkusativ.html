@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +10,9 @@
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { 
-            font-family: 'Outfit', sans-serif; 
-            background-color: #f0f4f8; 
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f0f4f8;
             color: #1e293b;
         }
 
@@ -19,22 +20,66 @@
         .info-card {
             transition: all 0.3s ease;
         }
+
         .info-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
 
         /* Column Colors - Standard German Grammar Colors */
-        .col-masc { background-color: #eff6ff; border-color: #bfdbfe; color: #1e40af; } /* Blue */
-        .col-fem { background-color: #fef2f2; border-color: #fecaca; color: #991b1b; } /* Red */
-        .col-neu { background-color: #f0fdf4; border-color: #bbf7d0; color: #166534; } /* Green */
-        .col-plu { background-color: #fffbeb; border-color: #fde68a; color: #92400e; } /* Yellow/Orange */
+        .col-masc {
+            background-color: #eff6ff;
+            border-color: #bfdbfe;
+            color: #1e40af;
+        }
+
+        /* Blue */
+        .col-fem {
+            background-color: #fef2f2;
+            border-color: #fecaca;
+            color: #991b1b;
+        }
+
+        /* Red */
+        .col-neu {
+            background-color: #f0fdf4;
+            border-color: #bbf7d0;
+            color: #166534;
+        }
+
+        /* Green */
+        .col-plu {
+            background-color: #fffbeb;
+            border-color: #fde68a;
+            color: #92400e;
+        }
+
+        /* Yellow/Orange */
 
         /* Updated Table 1 Headers to match Table 2 (Pastel) */
-        .header-masc-pastel { background-color: #eff6ff; color: #1e40af; border-bottom: 2px solid #bfdbfe; }
-        .header-fem-pastel { background-color: #fef2f2; color: #991b1b; border-bottom: 2px solid #fecaca; }
-        .header-neu-pastel { background-color: #f0fdf4; color: #166534; border-bottom: 2px solid #bbf7d0; }
-        .header-plu-pastel { background-color: #fffbeb; color: #92400e; border-bottom: 2px solid #fde68a; }
+        .header-masc-pastel {
+            background-color: #eff6ff;
+            color: #1e40af;
+            border-bottom: 2px solid #bfdbfe;
+        }
+
+        .header-fem-pastel {
+            background-color: #fef2f2;
+            color: #991b1b;
+            border-bottom: 2px solid #fecaca;
+        }
+
+        .header-neu-pastel {
+            background-color: #f0fdf4;
+            color: #166534;
+            border-bottom: 2px solid #bbf7d0;
+        }
+
+        .header-plu-pastel {
+            background-color: #fffbeb;
+            color: #92400e;
+            border-bottom: 2px solid #fde68a;
+        }
 
         /* The "Change" Highlighter */
         .morph-highlight {
@@ -48,6 +93,7 @@
             box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
             display: inline-block;
         }
+
         .morph-highlight::after {
             content: '⚠️';
             position: absolute;
@@ -68,6 +114,7 @@
             transition: max-height 0.3s ease-out, opacity 0.3s ease;
             opacity: 0;
         }
+
         .group:hover .detail-row {
             max-height: 100px;
             opacity: 1;
@@ -77,35 +124,40 @@
             scrollbar-width: thin;
             scrollbar-color: #cbd5e1 transparent;
         }
+
         .scroll-container::-webkit-scrollbar {
             height: 6px;
         }
+
         .scroll-container::-webkit-scrollbar-thumb {
             background-color: #cbd5e1;
             border-radius: 4px;
         }
     </style>
 </head>
+
 <body class="p-4 md:p-8">
 
     <div class="max-w-7xl mx-auto">
-        
+
         <!-- Header -->
         <div class="text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-2 tracking-tight">
                 Der Akkusativ
             </h1>
             <p class="text-lg text-slate-500 font-light">Guía Visual de Gramática (A1-A2)</p>
-            
+
             <!-- The Golden Rule Banner -->
             <div class="mt-6 inline-block bg-white p-4 rounded-xl shadow-lg border-l-4 border-blue-600">
                 <div class="flex items-center gap-4 text-left">
-                    <div class="bg-blue-100 text-blue-600 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold">
+                    <div
+                        class="bg-blue-100 text-blue-600 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold">
                         <i class="fa-solid fa-lightbulb"></i>
                     </div>
                     <div>
                         <h3 class="font-bold text-slate-800 uppercase text-sm tracking-wider">Regla de Oro</h3>
-                        <p class="text-slate-600">Solo el <span class="text-blue-600 font-bold">Masculino</span> cambia. El resto se mantiene igual que en Nominativo.</p>
+                        <p class="text-slate-600">Solo el <span class="text-blue-600 font-bold">Masculino</span> cambia.
+                            El resto se mantiene igual que en Nominativo.</p>
                     </div>
                 </div>
             </div>
@@ -114,44 +166,62 @@
         <!-- INFOGRAPHIC 1: ARTICLES -->
         <div class="mb-16">
             <div class="flex items-center gap-3 mb-6">
-                <span class="bg-slate-800 text-white w-8 h-8 rounded flex items-center justify-center font-bold">1</span>
+                <span
+                    class="bg-slate-800 text-white w-8 h-8 rounded flex items-center justify-center font-bold">1</span>
                 <h2 class="text-2xl font-bold text-slate-800">Determinantes (Artículos)</h2>
             </div>
-            
+
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
                 <!-- Grid Header -->
-                <div class="grid grid-cols-[120px_repeat(4,_minmax(140px,_1fr))] divide-x divide-slate-100 border-b border-slate-200 overflow-x-auto scroll-container">
-                    <div class="p-4 bg-slate-50 flex items-center justify-center font-bold text-slate-400 uppercase text-xs tracking-widest text-center sticky left-0 z-10 border-r shadow-[4px_0_10px_-5px_rgba(0,0,0,0.1)]">
+                <div
+                    class="grid grid-cols-[120px_repeat(4,_minmax(140px,_1fr))_200px] divide-x divide-slate-100 border-b border-slate-200 overflow-x-auto scroll-container">
+                    <div
+                        class="p-4 bg-slate-50 flex items-center justify-center font-bold text-slate-400 uppercase text-xs tracking-widest text-center sticky left-0 z-10 border-r shadow-[4px_0_10px_-5px_rgba(0,0,0,0.1)]">
                         Tipo
                     </div>
-                    
+
                     <!-- Masculine Header (Updated to Pastel) -->
-                    <div class="header-masc-pastel p-4 flex flex-col items-center justify-center relative overflow-hidden group">
-                        <i class="fa-solid fa-mars text-4xl opacity-10 absolute -right-2 -bottom-4 group-hover:scale-110 transition-transform"></i>
+                    <div
+                        class="header-masc-pastel p-4 flex flex-col items-center justify-center relative overflow-hidden group">
+                        <i
+                            class="fa-solid fa-mars text-4xl opacity-10 absolute -right-2 -bottom-4 group-hover:scale-110 transition-transform"></i>
                         <span class="font-bold text-lg">Männlich</span>
-                        <span class="text-xs opacity-80 uppercase tracking-widest">El Hombre</span>
-                        <div class="mt-2 bg-blue-100 border border-blue-200 text-blue-800 px-2 py-0.5 rounded text-xs font-bold">Cambia ⚠️</div>
+                        <span class="text-xs opacity-80 uppercase tracking-widest">Masculino</span>
+                        <div
+                            class="mt-2 bg-blue-100 border border-blue-200 text-blue-800 px-2 py-0.5 rounded text-xs font-bold">
+                            Cambia ⚠️</div>
                     </div>
 
                     <!-- Feminine Header (Updated to Pastel) -->
-                    <div class="header-fem-pastel p-4 flex flex-col items-center justify-center relative overflow-hidden group">
-                        <i class="fa-solid fa-venus text-4xl opacity-10 absolute -right-2 -bottom-4 group-hover:scale-110 transition-transform"></i>
+                    <div
+                        class="header-fem-pastel p-4 flex flex-col items-center justify-center relative overflow-hidden group">
+                        <i
+                            class="fa-solid fa-venus text-4xl opacity-10 absolute -right-2 -bottom-4 group-hover:scale-110 transition-transform"></i>
                         <span class="font-bold text-lg">Weiblich</span>
-                        <span class="text-xs opacity-80 uppercase tracking-widest">La Mujer</span>
+                        <span class="text-xs opacity-80 uppercase tracking-widest">Femenino</span>
                     </div>
 
                     <!-- Neutral Header (Updated to Pastel) -->
-                    <div class="header-neu-pastel p-4 flex flex-col items-center justify-center relative overflow-hidden group">
-                        <i class="fa-solid fa-circle-notch text-4xl opacity-10 absolute -right-2 -bottom-4 group-hover:scale-110 transition-transform"></i>
+                    <div
+                        class="header-neu-pastel p-4 flex flex-col items-center justify-center relative overflow-hidden group">
+                        <i
+                            class="fa-solid fa-circle-notch text-4xl opacity-10 absolute -right-2 -bottom-4 group-hover:scale-110 transition-transform"></i>
                         <span class="font-bold text-lg">Neutral</span>
                         <span class="text-xs opacity-80 uppercase tracking-widest">El Niño/Cosa</span>
                     </div>
 
                     <!-- Plural Header (Updated to Pastel) -->
-                    <div class="header-plu-pastel p-4 flex flex-col items-center justify-center relative overflow-hidden group">
-                        <i class="fa-solid fa-users text-4xl opacity-10 absolute -right-2 -bottom-4 group-hover:scale-110 transition-transform"></i>
+                    <div
+                        class="header-plu-pastel p-4 flex flex-col items-center justify-center relative overflow-hidden group">
+                        <i
+                            class="fa-solid fa-users text-4xl opacity-10 absolute -right-2 -bottom-4 group-hover:scale-110 transition-transform"></i>
                         <span class="font-bold text-lg">Plural</span>
                         <span class="text-xs opacity-80 uppercase tracking-widest">Los/Las</span>
+                    </div>
+
+                    <!-- Example Column Header (Moved to End) -->
+                    <div class="p-4 bg-slate-50 flex flex-col justify-center text-center border-r" title="Ejemplo">
+                        <span class="font-bold text-slate-500 uppercase text-xs tracking-widest">Beispiel</span>
                     </div>
                 </div>
 
@@ -160,37 +230,62 @@
                     <!-- Javascript will populate this -->
                 </div>
             </div>
-            <p class="text-center text-xs text-slate-400 mt-3 italic">Pasa el mouse (o toca) las celdas para ver ejemplos traducidos.</p>
+            <p class="text-center text-xs text-slate-400 mt-3 italic">Pasa el mouse (o toca) las celdas para ver
+                ejemplos traducidos.</p>
         </div>
 
 
         <!-- INFOGRAPHIC 2: PRONOUNS -->
         <div class="mb-12">
             <div class="flex items-center gap-3 mb-6">
-                <span class="bg-slate-800 text-white w-8 h-8 rounded flex items-center justify-center font-bold">2</span>
+                <span
+                    class="bg-slate-800 text-white w-8 h-8 rounded flex items-center justify-center font-bold">2</span>
                 <h2 class="text-2xl font-bold text-slate-800">Pronombres y Posesivos</h2>
             </div>
 
+            <!-- Toggle Switch Statement / Question -->
+            <div class="flex justify-center mb-6">
+                <div class="bg-slate-200 p-1 rounded-lg inline-flex shadow-inner">
+                    <button id="btn-statement" onclick="setMode('statement')"
+                        class="px-4 py-1.5 rounded-md text-sm font-bold transition-all shadow-sm bg-white text-slate-800">
+                        <i class="fa-solid fa-comment mr-2"></i>Frage
+                    </button>
+                    <button id="btn-question" onclick="setMode('question')"
+                        class="px-4 py-1.5 rounded-md text-sm font-bold transition-all text-slate-500 hover:bg-slate-100">
+                        <i class="fa-solid fa-circle-question mr-2"></i>Frage
+                    </button>
+                </div>
+            </div>
+
             <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200 relative">
-                
+
                 <!-- Scroll Indicator for mobile -->
-                <div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/5 to-transparent pointer-events-none md:hidden z-20"></div>
+                <div
+                    class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/5 to-transparent pointer-events-none md:hidden z-20">
+                </div>
 
                 <div class="overflow-x-auto scroll-container">
                     <!-- Increased min-width to accommodate new column -->
-                    <div class="min-w-[1500px]"> 
-                        
+                    <div class="min-w-[1500px]">
+
                         <!-- Header Row (Updated Grid) -->
-                        <div class="grid grid-cols-[140px_180px_240px_repeat(4,_1fr)_280px] text-2xl uppercase tracking-wider font-extrabold text-slate-600 border-b-2 border-slate-200 bg-slate-50">
-                            <div class="p-4 text-center flex flex-col justify-center border-r">Sujeto<span class="text-xs font-normal opacity-60">Nominativ</span></div>
-                            <div class="p-4 text-center flex flex-col justify-center border-r">Objeto<span class="text-xs font-normal opacity-60">Akkusativ</span></div>
-                            <div class="p-4 text-center flex flex-col justify-center border-r bg-slate-100 text-slate-500">Beispiel<span class="text-xs font-normal opacity-60">Ejemplo</span></div>
+                        <div
+                            class="grid grid-cols-[140px_180px_240px_repeat(4,_1fr)_280px] text-2xl uppercase tracking-wider font-extrabold text-slate-600 border-b-2 border-slate-200 bg-slate-50">
+                            <div class="p-4 text-center flex flex-col justify-center border-r">Sujeto<span
+                                    class="text-xs font-normal opacity-60">Nominativ</span></div>
+                            <div class="p-4 text-center flex flex-col justify-center border-r">Objeto<span
+                                    class="text-xs font-normal opacity-60">Akkusativ</span></div>
+                            <div
+                                class="p-4 text-center flex flex-col justify-center border-r bg-slate-100 text-slate-500">
+                                Beispiel<span class="text-xs font-normal opacity-60">Ejemplo</span></div>
                             <div class="p-4 col-masc text-center border-r text-blue-700">Masc.</div>
                             <div class="p-4 col-fem text-center border-r text-red-700">Fem.</div>
                             <div class="p-4 col-neu text-center border-r text-green-700">Neut.</div>
                             <div class="p-4 col-plu text-center border-r text-amber-800">Plur.</div>
                             <!-- New Column Header -->
-                            <div class="p-4 text-center flex flex-col justify-center bg-yellow-50 text-yellow-800">Uso Posesivo<span class="text-xs font-normal opacity-60">Contexto</span></div>
+                            <div class="p-4 text-center flex flex-col justify-center bg-yellow-50 text-yellow-800"
+                                title="Contexto">Uso
+                                Posesivo<span class="text-xs font-normal opacity-60">Contexto</span></div>
                         </div>
 
                         <!-- Rows Container -->
@@ -209,7 +304,7 @@
     <script>
         // Data from original request
         const tableData = [
-             {
+            {
                 "Sujeto (Nominativo)": "Art. Def.",
                 "DisplayTitle": "Definido",
                 "SubTitle": "El / La",
@@ -230,6 +325,7 @@
                 "Sujeto (Nominativo)": "Art. Indef.",
                 "DisplayTitle": "Indefinido",
                 "SubTitle": "Un / Una",
+                "Example": "Ich brauche einen Termin",
                 "den männlich (akkusativ)": "einen", "t_m": "un",
                 "Männlich (M) - Ejemplos con Verbos": "Du kaufst einen Apfel.",
                 "Trad. (M)": "Compras una manzana.",
@@ -247,6 +343,7 @@
                 "Sujeto (Nominativo)": "Art. Neg.",
                 "DisplayTitle": "Negativo",
                 "SubTitle": "Ningún",
+                "Example": "Ich habe keine Zeit.",
                 "den männlich (akkusativ)": "keinen", "t_m": "ningún",
                 "Männlich (M) - Ejemplos con Verbos": "Er nimmt keinen Stuhl.",
                 "Trad. (M)": "No toma ninguna silla.",
@@ -277,7 +374,7 @@
                 "Plural (P) - Ejemplos con Verbos": "Sie kaufen Äpfel.",
                 "Trad. (P)": "Compran manzanas."
             },
-             // Pronouns
+            // Pronouns
             {
                 "Sujeto (Nominativo)": "ich",
                 "Pronombre (Akkusativ)": "mich",
@@ -290,7 +387,13 @@
                 "die plural (akkusativ)": "meine",
                 "PossessiveExample": "Ich mag <b>meinen</b> Job.",
                 "Männlich (M) - Ejemplos con Verbos": "Ich sehe meinen Bruder",
-                "Trad. (M)": "Veo a mi hermano"
+                "Trad. (M)": "Veo a mi hermano",
+                "Weiblich (F) - Ejemplos con Verbos": "Ich suche meine Tasche.",
+                "Trad. (F)": "Busco mi bolso.",
+                "Neutral (N) - Ejemplos con Verbos": "Ich mag mein Haus.",
+                "Trad. (N)": "Me gusta mi casa.",
+                "Plural (P) - Ejemplos con Verbos": "Ich treffe meine Freunde.",
+                "Trad. (P)": "Me encuentro con mis amigos."
             },
             {
                 "Sujeto (Nominativo)": "du",
@@ -304,7 +407,13 @@
                 "die plural (akkusativ)": "deine",
                 "PossessiveExample": "Hast du <b>deinen</b> Pass?",
                 "Männlich (M) - Ejemplos con Verbos": "Du hast deinen Hund",
-                "Trad. (M)": "Tienes tu perro"
+                "Trad. (M)": "Tienes tu perro",
+                "Weiblich (F) - Ejemplos con Verbos": "Magst du deine Katze?",
+                "Trad. (F)": "¿Te gusta tu gato?",
+                "Neutral (N) - Ejemplos con Verbos": "Wo ist dein Buch?",
+                "Trad. (N)": "¿Dónde está tu libro?",
+                "Plural (P) - Ejemplos con Verbos": "Hast du deine Schlüssel?",
+                "Trad. (P)": "¿Tienes tus llaves?"
             },
             {
                 "Sujeto (Nominativo)": "er",
@@ -318,7 +427,13 @@
                 "die plural (akkusativ)": "seine",
                 "PossessiveExample": "Er sucht <b>seinen</b> Schlüssel.",
                 "Männlich (M) - Ejemplos con Verbos": "Er kauft seinen Ball",
-                "Trad. (M)": "Compra su pelota"
+                "Trad. (M)": "Compra su pelota",
+                "Weiblich (F) - Ejemplos con Verbos": "Er liebt seine Frau.",
+                "Trad. (F)": "Ama a su esposa.",
+                "Neutral (N) - Ejemplos con Verbos": "Er fährt sein Auto.",
+                "Trad. (N)": "Conduce su coche.",
+                "Plural (P) - Ejemplos con Verbos": "Er sucht seine Schuhe.",
+                "Trad. (P)": "Busca sus zapatos."
             },
             {
                 "Sujeto (Nominativo)": "sie (ella)",
@@ -332,7 +447,13 @@
                 "die plural (akkusativ)": "ihre",
                 "PossessiveExample": "Ich mag <b>ihre</b> Idee.",
                 "Männlich (M) - Ejemplos con Verbos": "Sie liest ihren Roman",
-                "Trad. (M)": "Lee su novela"
+                "Trad. (M)": "Lee su novela",
+                "Weiblich (F) - Ejemplos con Verbos": "Sie liest ihre Zeitung.",
+                "Trad. (F)": "Lee su periódico.",
+                "Neutral (N) - Ejemplos con Verbos": "Sie ruft ihr Kind.",
+                "Trad. (N)": "Llama a su hijo.",
+                "Plural (P) - Ejemplos con Verbos": "Sie mag ihre Blumen.",
+                "Trad. (P)": "Le gustan sus flores."
             },
             {
                 "Sujeto (Nominativo)": "es",
@@ -346,7 +467,13 @@
                 "die plural (akkusativ)": "seine",
                 "PossessiveExample": "Ich sehe <b>sein</b> Spielzeug.",
                 "Männlich (M) - Ejemplos con Verbos": "Das Baby findet seinen Ball",
-                "Trad. (M)": "El bebé encuentra su pelota"
+                "Trad. (M)": "El bebé encuentra su pelota",
+                "Weiblich (F) - Ejemplos con Verbos": "Das Kind sucht seine Mutter.",
+                "Trad. (F)": "El niño busca a su madre.",
+                "Neutral (N) - Ejemplos con Verbos": "Es mag sein Spielzeug.",
+                "Trad. (N)": "Le gusta su juguete.",
+                "Plural (P) - Ejemplos con Verbos": "Es isst seine Kekse.",
+                "Trad. (P)": "Come sus galletas."
             },
             {
                 "Sujeto (Nominativo)": "wir",
@@ -360,7 +487,13 @@
                 "die plural (akkusativ)": "unsere",
                 "PossessiveExample": "Ich mag <b>unser</b> Haus.",
                 "Männlich (M) - Ejemplos con Verbos": "Wir brauchen unseren Schlüssel",
-                "Trad. (M)": "Necesitamos nuestra llave"
+                "Trad. (M)": "Necesitamos nuestra llave",
+                "Weiblich (F) - Ejemplos con Verbos": "Wir lieben unsere Stadt.",
+                "Trad. (F)": "Amamos nuestra ciudad.",
+                "Neutral (N) - Ejemplos con Verbos": "Wir essen unser Brot.",
+                "Trad. (N)": "Comemos nuestro pan.",
+                "Plural (P) - Ejemplos con Verbos": "Wir besuchen unsere Eltern.",
+                "Trad. (P)": "Visitamos a nuestros padres."
             },
             {
                 "Sujeto (Nominativo)": "ihr (vos.)",
@@ -374,7 +507,13 @@
                 "die plural (akkusativ)": "eure",
                 "PossessiveExample": "Ich brauche <b>eure</b> Hilfe.",
                 "Männlich (M) - Ejemplos con Verbos": "Ihr esst euren Käse",
-                "Trad. (M)": "Coméis vuestro queso"
+                "Trad. (M)": "Coméis vuestro queso",
+                "Weiblich (F) - Ejemplos con Verbos": "Habt ihr aure Tickets?", // Note: Typo fixed in next step if caught, 'aure' -> 'eure'
+                "Trad. (F)": "¿Tenéis vuestras entradas?",
+                "Neutral (N) - Ejemplos con Verbos": "Trinkt ihr euer Wasser?",
+                "Trad. (N)": "¿Bebéis vuestra agua?",
+                "Plural (P) - Ejemplos con Verbos": "Wo sind eure Fahrräder?",
+                "Trad. (P)": "¿Dónde están vuestras bicicletas?"
             },
             {
                 "Sujeto (Nominativo)": "sie (ellos)",
@@ -388,9 +527,15 @@
                 "die plural (akkusativ)": "ihre",
                 "PossessiveExample": "Ich höre <b>ihre</b> Stimmen.",
                 "Männlich (M) - Ejemplos con Verbos": "Sie trinken ihren Tee",
-                "Trad. (M)": "Beben su té"
+                "Trad. (M)": "Beben su té",
+                "Weiblich (F) - Ejemplos con Verbos": "Sie suchen ihre Katze.",
+                "Trad. (F)": "Buscan a su gato.",
+                "Neutral (N) - Ejemplos con Verbos": "Sie verkaufen ihr Haus.",
+                "Trad. (N)": "Venden su casa.",
+                "Plural (P) - Ejemplos con Verbos": "Sie machen ihre Hausaufgaben.",
+                "Trad. (P)": "Hacen sus deberes."
             },
-             {
+            {
                 "Sujeto (Nominativo)": "Sie (formal)",
                 "Pronombre (Akkusativ)": "Sie",
                 "Trad. Pronombre": "Le",
@@ -400,11 +545,134 @@
                 "die weiblich (akkusativ)": "Ihre",
                 "das neutral (akkusativ)": "Ihr",
                 "die plural (akkusativ)": "Ihre",
-                "PossessiveExample": "Haben Sie <b>Ihren</b> Ausweis?",
+                "PossessiveExample": "Dank für <b>Ihre</b> Hilfe",
                 "Männlich (M) - Ejemplos con Verbos": "Sie tragen Ihren Anzug",
-                "Trad. (M)": "Lleva su traje"
+                "Trad. (M)": "Lleva su traje",
+                "Weiblich (F) - Ejemplos con Verbos": "Haben Sie Ihre Karte?",
+                "Trad. (F)": "¿Tiene su tarjeta?",
+                "Neutral (N) - Ejemplos con Verbos": "Trinken Sie Ihr Bier?",
+                "Trad. (N)": "¿Bebe su cerveza?",
+                "Plural (P) - Ejemplos con Verbos": "Wo sind Ihre Koffer?",
+                "Trad. (P)": "¿Dónde están sus maletas?"
             }
         ];
+
+        // NEW: Enriched Data for Toggle (Statement / Question)
+        const contentMap = {
+            "ich": {
+                statement: {
+                    PRO: "Er liebt <b>mich</b>.", PRO_TR: "Él me ama.",
+                    POSS: "Ich mag <b>meinen</b> Job.", POSS_TR: "Me gusta mi trabajo."
+                },
+                question: {
+                    PRO: "Hören Sie <b>mich</b>?", PRO_TR: "¿Me escucha?",
+                    POSS: "Mag ich <b>meinen</b> Job?", POSS_TR: "¿Me gusta mi trabajo?"
+                }
+            },
+            "du": {
+                statement: {
+                    PRO: "Ich sehe <b>dich</b>.", PRO_TR: "Te veo.",
+                    POSS: "Ich sehe <b>deinen</b> Hund.", POSS_TR: "Veo a tu perro."
+                },
+                question: {
+                    PRO: "Kann ich <b>dich</b> anrufen?", PRO_TR: "¿Puedo llamarte?",
+                    POSS: "Hast du <b>deinen</b> Schlüssel?", POSS_TR: "¿Tienes tu llave?"
+                }
+            },
+            "er": {
+                statement: {
+                    PRO: "Wir kennen <b>ihn</b>.", PRO_TR: "Lo conocemos.",
+                    POSS: "Er sucht <b>seinen</b> Schlüssel.", POSS_TR: "Él busca su llave."
+                },
+                question: {
+                    PRO: "Kennst du <b>ihn</b>?", PRO_TR: "¿Lo conoces?",
+                    POSS: "Sucht er <b>seinen</b> Stift?", POSS_TR: "¿Busca él su bolígrafo?"
+                }
+            },
+            "sie (ella)": {
+                statement: {
+                    PRO: "Ich frage <b>sie</b>.", PRO_TR: "Le pregunto a ella.",
+                    POSS: "Ich mag <b>ihre</b> Idee.", POSS_TR: "Me gusta su idea."
+                },
+                question: {
+                    PRO: "Wann triffst du <b>sie</b>?", PRO_TR: "¿Cuándo te encuentras con ella?",
+                    POSS: "Hat sie <b>ihren</b> Ausweis?", POSS_TR: "¿Tiene ella su identificación?"
+                }
+            },
+            "es": {
+                statement: {
+                    PRO: "Er hat <b>es</b>.", PRO_TR: "Él lo tiene.",
+                    POSS: "Ich sehe <b>sein</b> Spielzeug.", POSS_TR: "Veo su juguete."
+                },
+                question: {
+                    PRO: "Hast du <b>es</b>?", PRO_TR: "¿Lo tienes?",
+                    POSS: "Sucht es <b>sein</b> Spielzeug?", POSS_TR: "¿Busca (el niño/animal) su juguete?"
+                }
+            },
+            "wir": {
+                statement: {
+                    PRO: "Sie besuchen <b>uns</b>.", PRO_TR: "Ellos nos visitan.",
+                    POSS: "Ich mag <b>unser</b> Haus.", POSS_TR: "Me gusta nuestra casa."
+                },
+                question: {
+                    PRO: "Besucht ihr <b>uns</b> morgen?", PRO_TR: "¿Nos visitáis mañana?",
+                    POSS: "Mögt ihr <b>unser</b> Essen?", POSS_TR: "¿Os gusta nuestra comida?"
+                }
+            },
+            "ihr (vos.)": {
+                statement: {
+                    PRO: "Ich höre <b>euch</b>.", PRO_TR: "Os oigo.",
+                    POSS: "Ich brauche <b>eure</b> Hilfe.", POSS_TR: "Necesito vuestra ayuda."
+                },
+                question: {
+                    PRO: "Kann ich <b>euch</b> helfen?", PRO_TR: "¿Puedo ayudaros?",
+                    POSS: "Habt ihr <b>eure</b> Tickets?", POSS_TR: "¿Tenéis vuestros boletos?"
+                }
+            },
+            "sie (ellos)": {
+                statement: {
+                    PRO: "Wir rufen <b>sie</b> an.", PRO_TR: "Los llamamos.",
+                    POSS: "Ich höre <b>ihre</b> Stimmen.", POSS_TR: "Oigo sus voces."
+                },
+                question: {
+                    PRO: "Laden wir <b>sie</b> ein?", PRO_TR: "¿Los invitamos?",
+                    POSS: "Haben sie <b>ihre</b> Bücher?", POSS_TR: "¿Tienen ellos sus libros?"
+                }
+            },
+            "Sie (formal)": {
+                statement: {
+                    PRO: "Ich verstehe <b>Sie</b>.", PRO_TR: "Lo/La entiendo (a usted).",
+                    POSS: "Dank für <b>Ihre</b> Hilfe.", POSS_TR: "Gracias por su ayuda."
+                },
+                question: {
+                    PRO: "Hören Sie <b>mich</b>?", PRO_TR: "¿Me escucha?",
+                    POSS: "Haben Sie <b>Ihren</b> Pass?", POSS_TR: "¿Tiene su pasaporte?",
+                    details: {
+                        M: { ex: "Haben Sie Ihren Ausweis?", tr: "¿Tiene su identificación?" }
+                    }
+                }
+            }
+        };
+
+        let currentMode = 'statement'; // 'statement' or 'question'
+
+        function setMode(mode) {
+            currentMode = mode;
+            // Update buttons
+            const btnStatement = document.getElementById('btn-statement');
+            const btnQuestion = document.getElementById('btn-question');
+
+            if (mode === 'statement') {
+                btnStatement.className = "px-4 py-1.5 rounded-md text-sm font-bold transition-all shadow-sm bg-white text-slate-800";
+                btnQuestion.className = "px-4 py-1.5 rounded-md text-sm font-bold transition-all text-slate-500 hover:bg-slate-100";
+                btnStatement.innerHTML = '<i class="fa-solid fa-comment mr-2"></i>Aussage';
+            } else {
+                btnQuestion.className = "px-4 py-1.5 rounded-md text-sm font-bold transition-all shadow-sm bg-white text-slate-800";
+                btnStatement.className = "px-4 py-1.5 rounded-md text-sm font-bold transition-all text-slate-500 hover:bg-slate-100";
+                btnStatement.innerHTML = '<i class="fa-solid fa-comment mr-2"></i>Aussage';
+            }
+            renderPronouns();
+        }
 
         // RENDER INFOGRAPHIC 1: ARTICLES
         const articlesContainer = document.getElementById('articles-grid');
@@ -413,8 +681,8 @@
         articlesData.forEach(item => {
             const row = document.createElement('div');
             // CSS Grid layout matching header
-            row.className = 'grid grid-cols-[120px_repeat(4,_minmax(140px,_1fr))] divide-x divide-slate-100 border-b border-slate-100 group';
-            
+            row.className = 'grid grid-cols-[120px_repeat(4,_minmax(140px,_1fr))_200px] divide-x divide-slate-100 border-b border-slate-100 group';
+
             // Highlight Logic for Masculine
             const mascValue = item["den männlich (akkusativ)"];
             const isMorph = mascValue !== '-' && item["Sujeto (Nominativo)"] !== 'Nullartikel'; // Simplistic check for visual pop
@@ -478,6 +746,11 @@
                         <div class="text-[10px] text-amber-700/70">${item["Trad. (P)"]}</div>
                     </div>` : '<div class="text-xs text-amber-800/50 mt-1">-</div>'}
                 </div>
+
+                <!-- Example Column (Moved to End & Styled) -->
+                <div class="p-4 bg-white flex flex-col justify-center items-center text-center border-r">
+                    ${item.Example ? `<span class="italic text-slate-700 font-bold text-2xl leading-tight text-center block w-full px-2">${item.Example}</span>` : '<span class="text-slate-300">-</span>'}
+                </div>
             `;
             articlesContainer.appendChild(row);
         });
@@ -486,76 +759,134 @@
         const pronounsContainer = document.getElementById('pronouns-grid');
         const pronounsData = tableData.filter(row => row["Pronombre (Akkusativ)"]);
 
-        pronounsData.forEach((item, index) => {
-            const row = document.createElement('div');
-            const isOdd = index % 2 === 0;
-            const bgClass = isOdd ? 'bg-white' : 'bg-slate-50/50';
-            
-            // Adjust grid columns to match header including new column
-            row.className = `grid grid-cols-[140px_180px_240px_repeat(4,_1fr)_280px] border-b border-slate-100 group hover:bg-white hover:shadow-md transition-all z-0 hover:z-10 relative ${bgClass}`;
+        function renderPronouns() {
+            pronounsContainer.innerHTML = '';
+            pronounsData.forEach((item, index) => {
+                const row = document.createElement('div');
+                const isOdd = index % 2 === 0;
+                const bgClass = isOdd ? 'bg-white' : 'bg-slate-50/50';
 
-            // Clean up titles
-            const subject = item["Sujeto (Nominativo)"].replace(' (ella)', '').replace(' (vos.)', '').replace(' (ellos)', '');
-            const hint = item["Sujeto (Nominativo)"].includes('ella') ? 'ella' : 
-                         item["Sujeto (Nominativo)"].includes('vos') ? 'vos.' : 
-                         item["Sujeto (Nominativo)"].includes('formal') ? 'Usted' : '';
+                // Adjust grid columns to match header including new column
+                row.className = `grid grid-cols-[140px_180px_240px_repeat(4,_1fr)_280px] border-b border-slate-100 group hover:bg-white hover:shadow-md transition-all z-0 hover:z-10 relative ${bgClass}`;
 
-            // Apply warning style to masculine possessive
-            const mascPossessive = item["den männlich (akkusativ)"];
-            const mascClass = mascPossessive ? 'morph-highlight text-2xl md:text-3xl' : 'font-extrabold text-2xl md:text-3xl';
+                // Clean up titles
+                // Handle Sie (formal) specifically to make (formal) small
+                let subject = item["Sujeto (Nominativo)"].replace(' (ella)', '').replace(' (vos.)', '').replace(' (ellos)', '');
 
-            row.innerHTML = `
-                <!-- Subject -->
-                <div class="p-4 border-r flex flex-col justify-center items-center">
-                    <span class="font-extrabold text-slate-800 text-3xl md:text-4xl">${subject}</span>
-                    ${hint ? `<span class="text-xs text-slate-500 uppercase font-bold mt-1">${hint}</span>` : ''}
-                </div>
+                if (subject.includes('(formal)')) {
+                    subject = subject.replace(' (formal)', '');
+                    subject = `${subject}<span class="text-lg font-normal opacity-70 ml-1">(formal)</span>`;
+                }
+                const hint = item["Sujeto (Nominativo)"].includes('ella') ? 'ella' :
+                    item["Sujeto (Nominativo)"].includes('vos') ? 'vos.' :
+                        item["Sujeto (Nominativo)"].includes('formal') ? 'Usted' : '';
 
-                <!-- Pronoun Accusative (The main change) -->
-                <div class="p-4 border-r bg-indigo-50 flex flex-col justify-center items-center relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
-                    <!-- Black color -->
-                    <span class="font-extrabold text-black text-3xl md:text-4xl">${item["Pronombre (Akkusativ)"]}</span>
-                    <!-- DARK GRAY color -->
-                    <span class="text-2xl md:text-3xl text-slate-600 font-bold italic mt-2">${item["Trad. Pronombre"]}</span>
-                </div>
+                // Apply warning style to masculine possessive
+                const mascPossessive = item["den männlich (akkusativ)"];
+                const mascClass = mascPossessive ? 'morph-highlight text-2xl md:text-3xl' : 'font-extrabold text-2xl md:text-3xl';
 
-                <!-- Example Sentence -->
-                <div class="p-4 border-r bg-slate-50/80 flex flex-col justify-center items-center text-center">
-                    <span class="font-extrabold text-slate-800 text-2xl md:text-3xl leading-tight">${item["Example"]}</span>
-                </div>
+                // Get dynamic content based on mode
+                const key = item["Sujeto (Nominativo)"];
+                const modeData = contentMap[key] ? contentMap[key][currentMode] : null;
+                const mainContent = modeData || { PRO: item.Example, POSS: item.PossessiveExample };
+                const details = (currentMode === 'question' && modeData?.details) || {};
 
-                <!-- Possessives - Masculine -->
-                <div class="p-4 border-r col-masc flex justify-center items-center">
-                    <div class="${mascClass}">${mascPossessive}</div>
-                </div>
+                // Dynamic Hover Examples with Fallback to Static Data
+                const mEx = details.M?.ex || item["Männlich (M) - Ejemplos con Verbos"];
+                const mTr = details.M?.tr || item["Trad. (M)"];
+                const fEx = details.F?.ex || item["Weiblich (F) - Ejemplos con Verbos"];
+                const fTr = details.F?.tr || item["Trad. (F)"];
+                const nEx = details.N?.ex || item["Neutral (N) - Ejemplos con Verbos"];
+                const nTr = details.N?.tr || item["Trad. (N)"];
+                const pEx = details.P?.ex || item["Plural (P) - Ejemplos con Verbos"];
+                const pTr = details.P?.tr || item["Trad. (P)"];
 
-                <!-- Possessives - Feminine (WITH TRANSLATION) -->
-                <div class="p-4 border-r col-fem flex justify-center items-center">
-                    <div class="flex flex-col items-center justify-center">
-                        <span class="font-extrabold text-2xl md:text-3xl">${item["die weiblich (akkusativ)"]}</span>
-                        <span class="text-xl md:text-2xl text-slate-600 font-bold italic mt-1">${item["poss_trans"]}</span>
+                row.innerHTML = `
+                    <!-- Subject -->
+                    <div class="p-4 border-r flex flex-col justify-center items-center">
+                        <span class="font-extrabold text-slate-800 text-3xl md:text-4xl">${subject}</span>
+                        ${hint ? `<span class="text-xs text-slate-500 uppercase font-bold mt-1">${hint}</span>` : ''}
                     </div>
-                </div>
 
-                <!-- Possessives - Neutral -->
-                <div class="p-4 border-r col-neu flex justify-center items-center font-extrabold text-2xl md:text-3xl">
-                    ${item["das neutral (akkusativ)"]}
-                </div>
+                    <!-- Pronoun Accusative (The main change) -->
+                    <div class="p-4 border-r bg-indigo-50 flex flex-col justify-center items-center relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
+                        <!-- Black color -->
+                        <span class="font-extrabold text-black text-3xl md:text-4xl">${item["Pronombre (Akkusativ)"]}</span>
+                        <!-- DARK GRAY color -->
+                        <span class="text-2xl md:text-3xl text-slate-600 font-bold italic mt-2">${item["Trad. Pronombre"]}</span>
+                    </div>
 
-                <!-- Possessives - Plural -->
-                <div class="p-4 col-plu border-r flex justify-center items-center font-extrabold text-2xl md:text-3xl">
-                    ${item["die plural (akkusativ)"]}
-                </div>
+                    <!-- Example Sentence -->
+                    <div class="p-4 border-r bg-slate-50/80 flex flex-col justify-center items-center text-center group relative">
+                        <span class="font-extrabold text-slate-800 text-2xl md:text-3xl leading-tight">${mainContent.PRO}</span>
+                         ${mainContent.PRO_TR ? `
+                        <div class="detail-row text-center mt-2 relative z-10 w-full px-2">
+                            <div class="text-[16px] leading-snug text-slate-500 font-medium italic">${mainContent.PRO_TR}</div>
+                        </div>` : ''}
+                    </div>
 
-                <!-- New Column: Possessive Examples -->
-                <div class="p-4 bg-yellow-50 flex flex-col justify-center items-center text-center">
-                    <span class="font-bold text-slate-700 text-xl md:text-2xl leading-tight">${item["PossessiveExample"]}</span>
-                </div>
-            `;
-            pronounsContainer.appendChild(row);
-        });
+                    <!-- Possessives - Masculine -->
+                    <div class="p-4 border-r col-masc flex flex-col justify-center items-center relative overflow-hidden group cursor-pointer">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
+                        <div class="${mascClass} relative z-10">${mascPossessive}</div>
+                         ${mEx ? `
+                        <div class="detail-row text-center mt-2 relative z-10">
+                            <div class="text-xs italic text-blue-800 font-medium">${mEx}</div>
+                            <div class="text-[10px] text-blue-600/70">${mTr}</div>
+                        </div>` : ''}
+                    </div>
+
+                    <!-- Possessives - Feminine (WITH TRANSLATION) -->
+                    <div class="p-4 border-r col-fem flex flex-col justify-center items-center group cursor-pointer">
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-extrabold text-2xl md:text-3xl">${item["die weiblich (akkusativ)"]}</span>
+                            <span class="text-xl md:text-2xl text-slate-600 font-bold italic mt-1">${item["poss_trans"]}</span>
+                        </div>
+                         ${fEx ? `
+                        <div class="detail-row text-center mt-2">
+                            <div class="text-xs italic text-red-800 font-medium">${fEx}</div>
+                            <div class="text-[10px] text-red-600/70">${fTr}</div>
+                        </div>` : ''}
+                    </div>
+
+                    <!-- Possessives - Neutral -->
+                    <div class="p-4 border-r col-neu flex flex-col justify-center items-center font-extrabold text-2xl md:text-3xl group cursor-pointer">
+                        ${item["das neutral (akkusativ)"]}
+                         ${nEx ? `
+                        <div class="detail-row text-center mt-2 font-normal">
+                            <div class="text-xs italic text-green-800 font-medium">${nEx}</div>
+                            <div class="text-[10px] text-green-600/70">${nTr}</div>
+                        </div>` : ''}
+                    </div>
+
+                    <!-- Possessives - Plural -->
+                    <div class="p-4 col-plu border-r flex flex-col justify-center items-center font-extrabold text-2xl md:text-3xl group cursor-pointer">
+                        ${item["die plural (akkusativ)"]}
+                         ${pEx ? `
+                        <div class="detail-row text-center mt-2 font-normal">
+                            <div class="text-xs italic text-amber-800 font-medium">${pEx}</div>
+                            <div class="text-[10px] text-amber-700/70">${pTr}</div>
+                        </div>` : ''}
+                    </div>
+
+                    <!-- New Column: Possessive Examples -->
+                    <div class="p-4 bg-yellow-50 flex flex-col justify-center items-center text-center group relative">
+                        <span class="font-bold text-slate-700 text-xl md:text-2xl leading-tight">${mainContent.POSS}</span>
+                         ${mainContent.POSS_TR ? `
+                        <div class="detail-row text-center mt-2 relative z-10 w-full px-2">
+                            <div class="text-[16px] leading-snug text-slate-500 font-medium italic">${mainContent.POSS_TR}</div>
+                        </div>` : ''}
+                    </div>
+                `;
+                pronounsContainer.appendChild(row);
+            });
+        }
+
+        // Initial Render
+        setMode('statement');
 
     </script>
 </body>
+
 </html>
