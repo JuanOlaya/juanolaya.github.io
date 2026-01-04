@@ -417,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Prepare German perfekt with short (participle only) and full versions
             let germanPerfektShort = verbData.perfekt || '---';
             let germanPerfektFull = verbData.perfekt || '---';
-            if (verbData.perfekt && verbData.perfekt !== '---') {
+            if (verbData.perfekt && typeof verbData.perfekt === 'string' && verbData.perfekt !== '---') {
                 const germanParts = verbData.perfekt.split(' ');
                 if (germanParts.length >= 2) {
                     germanPerfektShort = germanParts.slice(1).join(' '); // participle only
@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Prepare Spanish perfekt with short (participle only) and full versions
             let spanishPerfektShort = esPerfektTranslation;
             let spanishPerfektFull = esPerfektTranslation;
-            if (esPerfektTranslation) {
+            if (esPerfektTranslation && typeof esPerfektTranslation === 'string') {
                 const spanishParts = esPerfektTranslation.split(' ');
                 if (spanishParts.length >= 2) {
                     spanishPerfektShort = spanishParts.slice(1).join(' '); // participle only
@@ -2520,7 +2520,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Prepare German perfekt with short and full versions
             let germanPerfektShort = verbData.perfekt || '---';
             let germanPerfektFull = verbData.perfekt || '---';
-            if (verbData.perfekt && verbData.perfekt !== '---') {
+            if (verbData.perfekt && typeof verbData.perfekt === 'string' && verbData.perfekt !== '---') {
                 const germanParts = verbData.perfekt.split(' ');
                 if (germanParts.length >= 2) {
                     germanPerfektShort = germanParts.slice(1).join(' ');
@@ -2531,7 +2531,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Prepare Spanish perfekt with short and full versions
             let spanishPerfektShort = esPerfektTranslation;
             let spanishPerfektFull = esPerfektTranslation;
-            if (esPerfektTranslation) {
+            if (esPerfektTranslation && typeof esPerfektTranslation === 'string') {
                 const spanishParts = esPerfektTranslation.split(' ');
                 if (spanishParts.length >= 2) {
                     spanishPerfektShort = spanishParts.slice(1).join(' ');
