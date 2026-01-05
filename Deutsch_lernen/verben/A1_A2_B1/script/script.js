@@ -1554,28 +1554,55 @@ document.addEventListener('DOMContentLoaded', () => {
             // Cancel any previous speech
             window.speechSynthesis.cancel();
 
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.rate = rate;
-
-            // Robust Voice Selection
             const voices = window.speechSynthesis.getVoices();
 
-            // 1. Try exact match (e.g., 'de-DE')
-            // 2. Try alternate format (e.g., 'de_DE')
-            // 3. Try any voice starting with the language code (e.g., 'de')
-            let targetVoice = voices.find(voice => voice.lang === lang) ||
-                voices.find(voice => voice.lang === lang.replace('-', '_')) ||
-                voices.find(voice => voice.lang.startsWith(lang.substring(0, 2)));
+            // Helper to get best voice
+            const getVoice = () => {
+                return voices.find(voice => voice.lang === lang && voice.name.includes('Google')) ||
+                    voices.find(voice => voice.lang === lang && voice.name.includes('Microsoft')) ||
+                    voices.find(voice => voice.lang === lang) ||
+                    voices.find(voice => voice.lang === lang.replace('-', '_')) ||
+                    voices.find(voice => voice.lang.startsWith(lang.substring(0, 2)));
+            };
 
-            if (targetVoice) {
-                utterance.voice = targetVoice;
-                utterance.lang = targetVoice.lang; // Ensure utterance lang matches voice lang
+            const targetVoice = getVoice();
+
+            // Helper to create and speak utterance
+            const speakUtterance = (txt, pitchVal, rateVal) => {
+                const u = new SpeechSynthesisUtterance(txt);
+                u.rate = rateVal;
+                u.pitch = pitchVal;
+                if (targetVoice) {
+                    u.voice = targetVoice;
+                    u.lang = targetVoice.lang;
+                } else {
+                    u.lang = lang;
+                }
+                window.speechSynthesis.speak(u);
+            };
+
+            const isQuestion = text.trim().endsWith('?');
+
+            // Experimental: For questions, split the last word to force pitch rise
+            if (isQuestion && text.trim().includes(' ')) {
+                const parts = text.trim().lastIndexOf(' ');
+                const firstPart = text.substring(0, parts); // e.g. "Stimmt"
+                const lastPart = text.substring(parts + 1); // e.g. "das?"
+
+                // Speak first part normal
+                speakUtterance(firstPart, 1.0, rate);
+
+                // Speak last part higher
+                // Using 1.3 pitch for noticeable rise
+                speakUtterance(lastPart, 1.3, rate);
+            } else if (isQuestion) {
+                // Single word question, just pitch up
+                speakUtterance(text, 1.2, rate);
             } else {
-                // Fallback: trust the browser to handle the requested lang
-                utterance.lang = lang;
+                // Normal Statement
+                speakUtterance(text, 1.0, rate);
             }
 
-            window.speechSynthesis.speak(utterance);
         } else {
             console.error("Speech synthesis not supported in this browser.");
         }
@@ -1943,7 +1970,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         const abbrev = typeAbbrev[wordData.type] || wordData.type || '';
                         contentHTML += `<div class="wf-word-item">`;
                         contentHTML += `<div class="wf-word-line">`;
-                        contentHTML += `• <span class="wf-word-german" onclick="speak('${wordData.word}')" title="Aussprache hören">${wordData.word}</span>`;
+                        // Safe stringify for onclick
+                        const safeWord = wordData.word.replace(/'/g, "\\'");
+                        contentHTML += `• <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hören">${wordData.word}</span>`;
                         if (abbrev) contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
                         contentHTML += `</div>`;
 
@@ -1981,7 +2010,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         const abbrev = typeAbbrev[wordData.type] || wordData.type || '';
                         contentHTML += `<div class="wf-word-item">`;
                         contentHTML += `<div class="wf-word-line">`;
-                        contentHTML += `• <span class="wf-word-german" onclick="speak('${wordData.word}')" title="Aussprache hören">${wordData.word}</span>`;
+                        // Safe stringify for onclick
+                        const safeWord = wordData.word.replace(/'/g, "\\'");
+                        contentHTML += `• <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hören">${wordData.word}</span>`;
                         if (abbrev) contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
                         contentHTML += `</div>`;
 
