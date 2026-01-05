@@ -3432,3 +3432,10 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
     color: #cbd5e1;
     margin-left: 10px;
 }
+
+/* Loading state for search bar placeholder */
+.search-input.loading-active::placeholder {
+    color: black !important;
+    opacity: 1;
+    /* Firefox */
+}

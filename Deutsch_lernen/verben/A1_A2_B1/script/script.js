@@ -96,9 +96,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!searchInput) return;
 
         if (percentage < 100) {
+            // Light blue progress bar background
+            const progressColor = 'rgba(70, 130, 180, 0.2)'; // Light SteelBlue
+            const remainingColor = '#ffffff';
+
+            searchInput.style.background = `linear-gradient(to right, ${progressColor} ${percentage}%, ${remainingColor} ${percentage}%)`;
             searchInput.placeholder = `Lade Daten... ${Math.round(percentage)}%`;
+            searchInput.classList.add('loading-active');
         } else {
+            // Reset background and placeholder
+            searchInput.style.background = '';
             searchInput.placeholder = "Suchen... (buscar)";
+            searchInput.classList.remove('loading-active');
         }
     }
 
