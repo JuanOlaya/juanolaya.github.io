@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>German Interjections Infographic (A1-A2) with TTS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            /* MODO CLARO (Opcional) */
+            --bg-page: #f8f9fa;
+            --text-main: #2d3436;
+            --card-main: #ffffff;
+            --card-inner: #f1f2f6;
+            --accent: #0984e3;
+            --border: #d1d5db;
+            --footer-blue-bg: #eff6ff;
+            --footer-orange-bg: #fff7ed;
+            --footer-blue-border: #dbeafe;
+            --footer-orange-border: #ffedd5;
+        }
+
+        .dark {
+            /* MODO OSCURO (Predeterminado) */
+            --bg-page: #0f172a;
+            --text-main: #f1f5f9;
+            --card-main: #1e293b;
+            --card-inner: #334155;
+            --accent: #fbbf24;
+            --border: #475569;
+            --footer-blue-bg: #1e3a8a33;
+            --footer-orange-bg: #7c2d1233;
+            --footer-blue-border: #1e40af;
+            --footer-orange-border: #9a3412;
+        }
+
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+        }
+
+        .dynamic-card {
+            background-color: var(--card-main);
+            color: var(--text-main);
+        }
+
+        .dynamic-inner {
+            background-color: var(--card-inner);
+            color: var(--text-main);
+        }
+
+        .dynamic-accent {
+            color: var(--accent);
+        }
+
+        .dynamic-border {
+            border-color: var(--border);
+        }
+
+        .footer-card-blue {
+            background-color: var(--footer-blue-bg);
+            border: 1px solid var(--footer-blue-border);
+        }
+
+        .footer-card-orange {
+            background-color: var(--footer-orange-bg);
+            border: 1px solid var(--footer-orange-border);
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .card-shadow {
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            padding: 2px 10px;
+            border-radius: 999px;
+            font-weight: bold;
+        }
+
+        .special-section {
+            border: 2px dashed var(--border);
+        }
+
+        /* TTS Pulse Animation */
+        @keyframes pulse-audio {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .loading-audio {
+            animation: pulse-audio 1s infinite;
+            color: #10b981 !important;
+        }
+
+        .tts-btn {
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 50%;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .tts-btn {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tts-btn:hover {
+            background: var(--accent);
+            color: white !important;
+        }
+
+        * {
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <!-- Header con explicación de Interjección -->
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl font-extrabold mb-3 tracking-tight">Interjecciones Alemanas</h1>
+                <p class="opacity-80 font-medium text-lg leading-relaxed border-l-4 border-blue-500 pl-4 py-1">
+                    Son palabras breves que expresan emociones, sentimientos o reacciones inmediatas.
+                </p>
+            </div>
+            <button id="themeToggle"
+                class="p-4 rounded-2xl dynamic-card shadow-lg hover:scale-105 border dynamic-border self-end md:self-center">
+                <i id="themeIcon" class="fas fa-sun text-xl dynamic-accent"></i>
+            </button>
+        </header>
+
+        <!-- Main Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Grupo 1: Acuerdo y Seguridad -->
+            <div class="space-y-4">
+                <h2 class="text-xl font-bold flex items-center gap-3 mb-4">
+                    <i class="fas fa-check-circle dynamic-accent text-2xl"></i> Acuerdo y Seguridad
+                </h2>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl border-l-4 border-l-yellow-500">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Stimmt!</span>
+                            <div class="tts-btn" onclick="playSpeech('Stimmt!')"><i
+                                    class="fas fa-volume-up text-sm"></i></div>
+                        </div>
+                        <span class="badge bg-blue-500 text-white">A1</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Cierto!" / "Así es"</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Genau!</span>
+                            <div class="tts-btn" onclick="playSpeech('Genau!')"><i class="fas fa-volume-up text-sm"></i>
+                            </div>
+                        </div>
+                        <span class="badge bg-blue-500 text-white">A1</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Exacto!"</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Natürlich!</span>
+                            <div class="tts-btn" onclick="playSpeech('Natürlich!')"><i
+                                    class="fas fa-volume-up text-sm"></i></div>
+                        </div>
+                        <span class="badge bg-blue-500 text-white">A1</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Por supuesto!"</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Klar!</span>
+                            <div class="tts-btn" onclick="playSpeech('Klar!')"><i class="fas fa-volume-up text-sm"></i>
+                            </div>
+                        </div>
+                        <span class="badge bg-blue-500 text-white">A1</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Claro!"</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Gerne!</span>
+                            <div class="tts-btn" onclick="playSpeech('Gerne!')"><i class="fas fa-volume-up text-sm"></i>
+                            </div>
+                        </div>
+                        <span class="badge bg-blue-500 text-white">A1</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Con gusto!" (Aceptar)</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Doch!</span>
+                            <div class="tts-btn" onclick="playSpeech('Doch!')"><i class="fas fa-volume-up text-sm"></i>
+                            </div>
+                        </div>
+                        <span class="badge bg-orange-500 text-white">A2</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Que sí!" / "pero sí"</p>
+                    <p class="text-xs mt-1 opacity-60">(para contradecir una negación)</p>
+                </div>
+            </div>
+
+            <!-- Grupo 2: Sorpresa y Duda -->
+            <div class="space-y-4">
+                <h2 class="text-xl font-bold flex items-center gap-3 mb-4">
+                    <i class="fas fa-bolt dynamic-accent text-2xl"></i> Sorpresa y Duda
+                </h2>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Ach so!</span>
+                            <div class="tts-btn" onclick="playSpeech('Ach so!')"><i
+                                    class="fas fa-volume-up text-sm"></i></div>
+                        </div>
+                        <span class="badge bg-blue-500 text-white">A1</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Ah, ya entiendo!"</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Echt?</span>
+                            <div class="tts-btn" onclick="playSpeech('Echt?')"><i class="fas fa-volume-up text-sm"></i>
+                            </div>
+                        </div>
+                        <span class="badge bg-blue-500 text-white">A1</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¿En serio?"</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Vielleicht.</span>
+                            <div class="tts-btn" onclick="playSpeech('Vielleicht.')"><i
+                                    class="fas fa-volume-up text-sm"></i></div>
+                        </div>
+                        <span class="badge bg-blue-500 text-white">A1</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"Quizás / Tal vez"</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Jein...</span>
+                            <div class="tts-btn" onclick="playSpeech('Jein')"><i class="fas fa-volume-up text-sm"></i>
+                            </div>
+                        </div>
+                        <span class="badge bg-orange-500 text-white">A2</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"Sí y no"</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Oje!</span>
+                            <div class="tts-btn" onclick="playSpeech('Oje!')"><i class="fas fa-volume-up text-sm"></i>
+                            </div>
+                        </div>
+                        <span class="badge bg-orange-500 text-white">A2</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Ay no! / ¡Madre mía!"</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Wahnsinn!</span>
+                            <div class="tts-btn" onclick="playSpeech('Wahnsinn!')"><i
+                                    class="fas fa-volume-up text-sm"></i></div>
+                        </div>
+                        <span class="badge bg-orange-500 text-white">A2</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Increíble! / ¡Locura!"</p>
+                </div>
+            </div>
+
+            <!-- Grupo 3: Social y Emoción -->
+            <div class="space-y-4">
+                <h2 class="text-xl font-bold flex items-center gap-3 mb-4">
+                    <i class="fas fa-heart dynamic-accent text-2xl"></i> Social y Emoción
+                </h2>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Schade!</span>
+                            <div class="tts-btn" onclick="playSpeech('Schade!')"><i
+                                    class="fas fa-volume-up text-sm"></i></div>
+                        </div>
+                        <span class="badge bg-blue-500 text-white">A1</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Qué lástima!"</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Toll!</span>
+                            <div class="tts-btn" onclick="playSpeech('Toll!')"><i class="fas fa-volume-up text-sm"></i>
+                            </div>
+                        </div>
+                        <span class="badge bg-blue-500 text-white">A1</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Genial!"</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Hoppla!</span>
+                            <div class="tts-btn" onclick="playSpeech('Hoppla!')"><i
+                                    class="fas fa-volume-up text-sm"></i></div>
+                        </div>
+                        <span class="badge bg-blue-500 text-white">A1</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Uy! / Ups"</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Igitt!</span>
+                            <div class="tts-btn" onclick="playSpeech('Igitt!')"><i class="fas fa-volume-up text-sm"></i>
+                            </div>
+                        </div>
+                        <span class="badge bg-blue-500 text-white">A1</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Qué asco!"</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Gesundheit!</span>
+                            <div class="tts-btn" onclick="playSpeech('Gesundheit!')"><i
+                                    class="fas fa-volume-up text-sm"></i></div>
+                        </div>
+                        <span class="badge bg-blue-500 text-white">A1</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"¡Salud!" (Estornudo)</p>
+                </div>
+                <div class="dynamic-card p-5 card-shadow rounded-2xl">
+                    <div class="flex justify-between items-start">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold dynamic-accent">Lieber nicht.</span>
+                            <div class="tts-btn" onclick="playSpeech('Lieber nicht.')"><i
+                                    class="fas fa-volume-up text-sm"></i></div>
+                        </div>
+                        <span class="badge bg-orange-500 text-white">A2</span>
+                    </div>
+                    <p class="font-semibold italic mt-1">"Mejor no" (Rechazar)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Especial NA? -->
+        <section
+            class="mt-16 dynamic-card special-section p-10 text-center relative overflow-hidden rounded-3xl shadow-xl">
+            <div class="relative z-10">
+                <h2 class="text-5xl font-black dynamic-accent mb-6">Na?</h2>
+                <p class="text-xl max-w-3xl mx-auto opacity-90 leading-relaxed font-medium">
+                    Es la <span class="dynamic-accent">"navaja suiza"</span> del idioma. Un saludo, una pregunta y una
+                    respuesta en solo dos letras.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+                    <div class="dynamic-inner p-6 rounded-2xl border dynamic-border flex flex-col items-center">
+                        <span class="block text-xs uppercase opacity-60 font-black mb-2 tracking-widest">Como
+                            Saludo</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg font-bold">Na, alles gut?</span>
+                            <div class="tts-btn" onclick="playSpeech('Na, alles gut?')"><i
+                                    class="fas fa-volume-up text-xs"></i></div>
+                        </div>
+                    </div>
+                    <div class="dynamic-inner p-6 rounded-2xl border dynamic-border flex flex-col items-center">
+                        <span class="block text-xs uppercase opacity-60 font-black mb-2 tracking-widest">Como
+                            Impaciencia</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg font-bold">Na und?</span>
+                            <div class="tts-btn" onclick="playSpeech('Na und?')"><i
+                                    class="fas fa-volume-up text-xs"></i></div>
+                        </div>
+                    </div>
+                    <div class="dynamic-inner p-6 rounded-2xl border dynamic-border flex flex-col items-center">
+                        <span class="block text-xs uppercase opacity-60 font-black mb-2 tracking-widest">Duda</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg font-bold">Na ja...</span>
+                            <div class="tts-btn" onclick="playSpeech('Na ja...')"><i
+                                    class="fas fa-volume-up text-xs"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="absolute -right-12 -bottom-12 opacity-5 text-[10rem] font-black italic select-none pointer-events-none">
+                DE</div>
+        </section>
+
+        <!-- Footer / Consejos -->
+        <footer class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="footer-card-blue p-8 rounded-2xl shadow-sm">
+                <h3 class="font-bold text-xl mb-4 flex items-center gap-3">
+                    <i class="fas fa-lightbulb text-yellow-500"></i> Tip Cultural
+                </h3>
+                <p class="leading-relaxed opacity-90">
+                    El alemán es directo, pero interjecciones como <strong>Gerne!</strong> o <strong>Lieber
+                        nicht.</strong> suavizan la comunicación y te hacen sonar natural y educado.
+                </p>
+            </div>
+            <div class="footer-card-orange p-8 rounded-2xl shadow-sm">
+                <h3 class="font-bold text-xl mb-4 flex items-center gap-3">
+                    <i class="fas fa-graduation-cap text-orange-500"></i> ¿Vielleicht o Wahrscheinlich?
+                </h3>
+                <p class="leading-relaxed opacity-90">
+                    Usa <strong>Vielleicht</strong> para un "quizás" general (50/50). Para niveles avanzados,
+                    <em>Wahrscheinlich</em> indica un 80-90% de certeza.
+                </p>
+            </div>
+        </footer>
+
+        <!-- Feedback Box -->
+        <div id="statusBox"
+            class="fixed bottom-4 right-4 p-4 rounded-xl shadow-2xl bg-white dark:bg-gray-800 border dynamic-border transform translate-y-24 transition-transform duration-300 pointer-events-none">
+            <div class="flex items-center gap-3">
+                <div id="statusIcon" class="w-2 h-2 rounded-full bg-green-500"></div>
+                <p id="statusMessage" class="text-sm font-medium"></p>
+            </div>
+        </div>
+
+        <div class="text-center mt-12 opacity-40 text-xs pb-12">
+            <p class="uppercase tracking-widest font-bold mb-1">Deutsch aprender con estilo</p>
+            <p>Infografía con Pronunciación Real AI</p>
+        </div>
+    </div>
+
+    <script>
+        // API Configuration
+        const apiKey = "";
+        let isSpeaking = false;
+
+        // Theme Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = htmlElement.classList.toggle('dark');
+            if (isDark) {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        // TTS Logic
+        async function playSpeech(text) {
+            if (isSpeaking) return;
+
+            const btn = event.currentTarget;
+            const icon = btn.querySelector('i');
+
+            setLoading(btn, icon, true);
+            showStatus("Generando audio en alemán...", "blue");
+
+            try {
+                const response = await callTtsApi(text);
+                if (!response.ok) throw new Error("Error en la API");
+
+                const result = await response.json();
+                const base64Data = result.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+
+                if (!base64Data) throw new Error("No se recibió audio");
+
+                const audioBlob = pcmToWav(base64Data, 24000);
+                const audioUrl = URL.createObjectURL(audioBlob);
+                const audio = new Audio(audioUrl);
+
+                audio.onended = () => {
+                    setLoading(btn, icon, false);
+                    isSpeaking = false;
+                    hideStatus();
+                };
+
+                isSpeaking = true;
+                audio.play();
+                showStatus("Reproduciendo...", "green");
+
+            } catch (err) {
+                console.error(err);
+                showStatus("Error al cargar audio", "red");
+                setTimeout(() => {
+                    setLoading(btn, icon, false);
+                    hideStatus();
+                }, 2000);
+            }
+        }
+
+        async function callTtsApi(text, retryCount = 0) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{
+                    parts: [{ text: `Say naturally in German: ${text}` }]
+                }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: {
+                        voiceConfig: {
+                            prebuiltVoiceConfig: { voiceName: "Kore" }
+                        }
+                    }
+                }
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.status === 429 && retryCount < 5) {
+                    const delay = Math.pow(2, retryCount) * 1000;
+                    await new Promise(r => setTimeout(r, delay));
+                    return callTtsApi(text, retryCount + 1);
+                }
+
+                return response;
+            } catch (e) {
+                if (retryCount < 5) {
+                    const delay = Math.pow(2, retryCount) * 1000;
+                    await new Promise(r => setTimeout(r, delay));
+                    return callTtsApi(text, retryCount + 1);
+                }
+                throw e;
+            }
+        }
+
+        // PCM (L16) to WAV converter
+        function pcmToWav(base64, sampleRate) {
+            const binaryString = atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+
+            const wavHeader = new ArrayBuffer(44);
+            const view = new DataView(wavHeader);
+
+            view.setUint32(0, 0x52494646, false);
+            view.setUint32(4, 36 + len, true);
+            view.setUint32(8, 0x57415645, false);
+
+            view.setUint32(12, 0x666d7420, false);
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true);
+            view.setUint16(22, 1, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * 2, true);
+            view.setUint16(32, 2, true);
+            view.setUint16(34, 16, true);
+
+            view.setUint32(36, 0x64617461, false);
+            view.setUint32(40, len, true);
+
+            return new Blob([wavHeader, bytes], { type: 'audio/wav' });
+        }
+
+        // UI Helpers
+        function setLoading(btn, icon, isLoading) {
+            if (isLoading) {
+                icon.classList.add('loading-audio');
+                btn.style.pointerEvents = 'none';
+            } else {
+                icon.classList.remove('loading-audio');
+                btn.style.pointerEvents = 'auto';
+            }
+        }
+
+        function showStatus(msg, color) {
+            const box = document.getElementById('statusBox');
+            const message = document.getElementById('statusMessage');
+            const icon = document.getElementById('statusIcon');
+
+            const colors = {
+                blue: '#3b82f6',
+                green: '#10b981',
+                red: '#ef4444'
+            };
+
+            message.innerText = msg;
+            icon.style.backgroundColor = colors[color] || colors.blue;
+            box.style.transform = 'translateY(0)';
+        }
+
+        function hideStatus() {
+            document.getElementById('statusBox').style.transform = 'translateY(100px)';
+        }
+    </script>
+</body>
+
+</html>
