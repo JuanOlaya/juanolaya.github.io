@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const storyButton = document.getElementById('story-button');
     const storyContainer = document.getElementById('story-container');
     const storyContent = document.getElementById('story-content');
+    const searchInput = document.getElementById('verb-search');
     const verbModal = document.getElementById('verb-modal');
     const infoModal = document.getElementById('info-modal');
     const closeVerbModalButton = document.getElementById('close-verb-modal');
@@ -87,6 +88,108 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Theme data storage
     let currentThemeData = null;
+
+    // --- BACKGROUND LOADING & PROGRESS ---
+    let isBackgroundLoading = false;
+
+    function updateLoadingProgress(percentage) {
+        if (!searchInput) return;
+
+        if (percentage < 100) {
+            searchInput.placeholder = `Lade Daten... ${Math.round(percentage)}%`;
+        } else {
+            searchInput.placeholder = "Suchen... (buscar)";
+        }
+    }
+
+    async function loadBackgroundData() {
+        if (isBackgroundLoading) return;
+        isBackgroundLoading = true;
+        console.log("Starting background data load...");
+
+        // Collect all tasks EXCEPT current one (already loading/loaded)
+        const loadTasks = [];
+        let totalTasks = 0;
+
+        levelOrder.forEach(levelKey => {
+            const config = levelConfig[levelKey];
+            for (let i = 1; i <= config.groupCount; i++) {
+                // Skip if this is the group currently being viewed (optimization)
+                // But safer to just check memory cache in the loop
+                loadTasks.push({ levelKey, i });
+            }
+        });
+        totalTasks = loadTasks.length;
+        let loadedTasks = 0;
+
+        const BATCH_SIZE = 3; // Conservative batch size for background
+        const DELAY_MS = 100; // Yield to UI thread
+
+        for (let i = 0; i < loadTasks.length; i += BATCH_SIZE) {
+            const batch = loadTasks.slice(i, i + BATCH_SIZE);
+
+            const batchPromises = batch.map(async task => {
+                const levelKey = task.levelKey;
+                const groupIndex = task.i - 1;
+
+                // 1. Check if already loaded
+                if (verbGroupsByLevel[levelKey] && verbGroupsByLevel[levelKey][groupIndex]) {
+                    return; // Already have this group
+                }
+
+                // 2. Fetch Group Data
+                try {
+                    const groupUrl = `json/groups/${levelKey}/${levelKey}_group_${task.i}.json`;
+                    const res = await fetch(groupUrl);
+                    if (!res.ok) return;
+                    const groupData = await res.json();
+
+                    if (!verbGroupsByLevel[levelKey]) verbGroupsByLevel[levelKey] = [];
+                    verbGroupsByLevel[levelKey][groupIndex] = groupData;
+
+                    // 3. Fetch Verbs that are NEW
+                    const verbsToLoad = groupData.verbs || [];
+                    const newVerbs = verbsToLoad.filter(v => !allVerbsData[v]);
+
+                    if (newVerbs.length > 0) {
+                        const cardPromises = newVerbs.map(verbName =>
+                            fetch(`json/cards/${verbName}.json`)
+                                .then(res => res.ok ? res.json() : {})
+                                .then(data => { allVerbsData[verbName] = data; })
+                                .catch(() => { allVerbsData[verbName] = {}; })
+                        );
+                        await Promise.all(cardPromises);
+
+                        // 4. Fetch Conjugations
+                        await loadConjugations(new Set(newVerbs));
+                    }
+                } catch (e) {
+                    console.warn(`Background load failed for ${levelKey} group ${task.i}`, e);
+                }
+            });
+
+            await Promise.all(batchPromises);
+
+            loadedTasks += batch.length; // Approximate
+            const percent = Math.min(100, (loadedTasks / totalTasks) * 100);
+            updateLoadingProgress(percent);
+
+            // Yield
+            if (i + BATCH_SIZE < loadTasks.length) {
+                await new Promise(r => setTimeout(r, DELAY_MS));
+            }
+        }
+
+        console.log("Background loading complete.");
+        updateLoadingProgress(100);
+        isBackgroundLoading = false;
+
+        // Re-run search if user typed something while loading
+        if (searchInput && searchInput.value.trim() !== '') {
+            // Dispatch input event to trigger search
+            searchInput.dispatchEvent(new Event('input'));
+        }
+    }
 
     // --- OPTIMIZED LAZY LOADING ---
     async function loadGroupData(levelKey, groupIndex) {
@@ -707,6 +810,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loadGroupData(currentLevel, currentGroupInLevel)
             .then(() => {
                 renderVerbGroup();
+                // Start background loading after initial render
+                loadBackgroundData();
 
                 prevGroupBtn.addEventListener('click', async () => {
                     let newLevel = currentLevel;
@@ -2283,7 +2388,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- SEARCH FUNCTIONALITY ---
-    const searchInput = document.getElementById('verb-search');
+    // searchInput moved to top
     const clearSearchBtn = document.getElementById('clear-search');
     const searchCounter = document.getElementById('search-counter');
 
