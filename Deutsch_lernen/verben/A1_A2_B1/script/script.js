@@ -88,84 +88,56 @@ document.addEventListener('DOMContentLoaded', () => {
     // Theme data storage
     let currentThemeData = null;
 
-    // --- NEW LOADING FUNCTION ---
-    async function loadAppData() {
-        // Collect all tasks first
-        const loadTasks = [];
-        levelOrder.forEach(levelKey => {
-            const config = levelConfig[levelKey];
-            for (let i = 1; i <= config.groupCount; i++) {
-                loadTasks.push({ levelKey, i });
-            }
-        });
+    // --- OPTIMIZED LAZY LOADING ---
+    async function loadGroupData(levelKey, groupIndex) {
+        // Validate inputs
+        if (!levelConfig[levelKey]) return;
 
-        const groupResults = [];
-        const BATCH_SIZE = 5; // Reduced concurrency
-        const DELAY_MS = 50;  // Small delay between batches
-
-        // Process in batches
-        for (let i = 0; i < loadTasks.length; i += BATCH_SIZE) {
-            const batch = loadTasks.slice(i, i + BATCH_SIZE);
-            const batchPromises = batch.map(task => {
-                return fetch(`json/groups/${task.levelKey}/${task.levelKey}_group_${task.i}.json`)
-                    .then(res => {
-                        if (!res.ok) throw new Error(`Status ${res.status}`);
-                        return res.json();
-                    })
-                    .then(data => ({ levelKey: task.levelKey, groupIndex: task.i - 1, data }))
-                    .catch(err => {
-                        console.warn(`Failed to load ${task.levelKey}_group_${task.i}:`, err);
-                        return null;
-                    });
-            });
-
-            // Wait for batch
-            const results = await Promise.all(batchPromises);
-            groupResults.push(...results);
-
-            // Add delay
-            if (i + BATCH_SIZE < loadTasks.length) {
-                await new Promise(r => setTimeout(r, DELAY_MS));
-            }
+        // 1. Check if group is already loaded in memory
+        if (verbGroupsByLevel[levelKey] && verbGroupsByLevel[levelKey][groupIndex]) {
+            return; // Data active
         }
 
-        // Organize groups by level
-        groupResults.filter(r => r !== null).forEach(result => {
-            if (!verbGroupsByLevel[result.levelKey]) {
-                verbGroupsByLevel[result.levelKey] = [];
-            }
-            verbGroupsByLevel[result.levelKey][result.groupIndex] = result.data;
-        });
+        // Show loading state
+        cardsContainer.innerHTML = '<div class="loading-spinner">Daten werden geladen...</div>';
 
-        // Collect all unique verb names
-        const allVerbNames = new Set();
-        Object.values(verbGroupsByLevel).forEach(levelGroups => {
-            levelGroups.forEach(group => {
-                if (group && group.verbs) {
-                    group.verbs.forEach(verbName => allVerbNames.add(verbName));
-                }
-            });
-        });
+        const groupNum = groupIndex + 1;
+        const groupUrl = `json/groups/${levelKey}/${levelKey}_group_${groupNum}.json`;
 
-        // Load verb cards in batches as well
-        const allVerbNamesArray = Array.from(allVerbNames);
-        for (let i = 0; i < allVerbNamesArray.length; i += BATCH_SIZE) {
-            const batch = allVerbNamesArray.slice(i, i + BATCH_SIZE);
-            const batchPromises = batch.map(verbName =>
-                fetch(`json/cards/${verbName}.json`)
-                    .then(res => res.ok ? res.json() : {})
-                    .then(data => { allVerbsData[verbName] = data; })
-                    .catch(() => { allVerbsData[verbName] = {}; })
-            );
-            await Promise.all(batchPromises);
-            if (i + BATCH_SIZE < allVerbNamesArray.length) {
-                await new Promise(r => setTimeout(r, DELAY_MS));
+        try {
+            const res = await fetch(groupUrl);
+            if (!res.ok) throw new Error(`Group not found: ${groupUrl}`);
+            const groupData = await res.json();
+
+            // Initialize level array if needed
+            if (!verbGroupsByLevel[levelKey]) {
+                verbGroupsByLevel[levelKey] = [];
             }
+            verbGroupsByLevel[levelKey][groupIndex] = groupData;
+
+            // 2. Identify new verbs to load
+            const verbsToLoad = groupData.verbs || [];
+            // Filter out verbs we already have data for
+            const newVerbs = verbsToLoad.filter(v => !allVerbsData[v]);
+
+            if (newVerbs.length > 0) {
+                // 3. Fetch Card Data for new verbs
+                const cardPromises = newVerbs.map(verbName =>
+                    fetch(`json/cards/${verbName}.json`)
+                        .then(res => res.ok ? res.json() : {})
+                        .then(data => { allVerbsData[verbName] = data; })
+                        .catch(() => { allVerbsData[verbName] = {}; })
+                );
+                await Promise.all(cardPromises);
+
+                // 4. Fetch Conjugations for new verbs
+                await loadConjugations(new Set(newVerbs));
+            }
+
+        } catch (error) {
+            console.error(`Failed to load group data (${levelKey} / ${groupNum}):`, error);
+            cardsContainer.innerHTML = '<p>Fehler beim Laden der Gruppe. Bitte Seite neu laden.</p>';
         }
-
-        // Pre-load all conjugation data
-        console.log('Pre-loading conjugation data for fast search...');
-        return loadConjugations(allVerbNames);
     }
 
     function loadConjugations(allVerbNames) {
@@ -208,19 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         return Promise.all(conjugationPromises).then(() => {
-            console.log('Conjugation data pre-loaded! Search will be fast.');
-
-            const verbTypesPromise = fetch('json/verb_types.json')
-                .then(res => res.ok ? res.json() : {})
-                .then(data => {
-                    verbTypesData = data || {};
-                })
-                .catch(error => {
-                    console.warn('Failed to load Verb types data:', error);
-                    verbTypesData = {};
-                });
-
-            return verbTypesPromise;
+            // Conjugations loaded
         });
     }
 
@@ -737,38 +697,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setupProgressBar();
 
-        loadAppData()
+        // Load Verb Types global data
+        fetch('json/verb_types.json')
+            .then(res => res.ok ? res.json() : {})
+            .then(data => { verbTypesData = data || {}; })
+            .catch(() => { verbTypesData = {}; });
+
+        // Lazy Load initial group
+        loadGroupData(currentLevel, currentGroupInLevel)
             .then(() => {
                 renderVerbGroup();
 
-                prevGroupBtn.addEventListener('click', () => {
+                prevGroupBtn.addEventListener('click', async () => {
+                    let newLevel = currentLevel;
+                    let newGroupIndex = currentGroupInLevel;
+
                     if (currentGroupInLevel > 0) {
                         // Previous group in current level
-                        currentGroupInLevel--;
+                        newGroupIndex--;
                     } else {
-                        // Go to previous level's last group (auto-advance)
+                        // Go to previous level's last group
                         const currentLevelIndex = levelOrder.indexOf(currentLevel);
                         if (currentLevelIndex > 0) {
-                            currentLevel = levelOrder[currentLevelIndex - 1];
-                            currentGroupInLevel = levelConfig[currentLevel].groupCount - 1;
+                            newLevel = levelOrder[currentLevelIndex - 1];
+                            newGroupIndex = levelConfig[newLevel].groupCount - 1;
+                        } else {
+                            return; // Start of content
                         }
                     }
+
+                    // Load new data BEFORE switching
+                    await loadGroupData(newLevel, newGroupIndex);
+
+                    // Update state and render
+                    currentLevel = newLevel;
+                    currentGroupInLevel = newGroupIndex;
                     clearSearchAndRender();
                 });
 
-                nextGroupBtn.addEventListener('click', () => {
+                nextGroupBtn.addEventListener('click', async () => {
+                    let newLevel = currentLevel;
+                    let newGroupIndex = currentGroupInLevel;
                     const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
+
                     if (currentGroupInLevel < totalGroupsInLevel - 1) {
                         // Next group in current level
-                        currentGroupInLevel++;
+                        newGroupIndex++;
                     } else {
-                        // Go to next level's first group (auto-advance)
+                        // Go to next level's first group
                         const currentLevelIndex = levelOrder.indexOf(currentLevel);
                         if (currentLevelIndex < levelOrder.length - 1) {
-                            currentLevel = levelOrder[currentLevelIndex + 1];
-                            currentGroupInLevel = 0;
+                            newLevel = levelOrder[currentLevelIndex + 1];
+                            newGroupIndex = 0;
+                        } else {
+                            return; // End of content
                         }
                     }
+
+                    // Load new data BEFORE switching
+                    await loadGroupData(newLevel, newGroupIndex);
+
+                    // Update state and render
+                    currentLevel = newLevel;
+                    currentGroupInLevel = newGroupIndex;
                     clearSearchAndRender();
                 });
 
