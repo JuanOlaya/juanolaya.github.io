@@ -113,15 +113,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadBackgroundData() {
         const CACHE_KEY = 'verbAppCache_v1';
+        let remoteVersion = null;
 
-        // 1. Try to load from LocalStorage first
+        // 1. Check for updates (Version Check)
+        try {
+            const vRes = await fetch('json/verbs_index.json');
+            if (vRes.ok) {
+                const vData = await vRes.json();
+                remoteVersion = vData.lastUpdated;
+                console.log("Remote version:", remoteVersion);
+            }
+        } catch (e) {
+            console.warn("Version check failed (offline?)", e);
+        }
+
+        // 2. Try to load from LocalStorage
         try {
             const cached = localStorage.getItem(CACHE_KEY);
             if (cached) {
                 const data = JSON.parse(cached);
-                // Simple validity check (optional: check timestamp or version)
-                if (data.allVerbsData && data.verbGroupsByLevel) {
-                    console.log("Loaded data from LocalStorage cache");
+
+                // Cache is valid IF:
+                // a) We failed to get remote version (assume offline/safe), OR
+                // b) Remote version matches cached version
+                const isCacheValid = !remoteVersion || (data.lastUpdated === remoteVersion);
+
+                if (isCacheValid && data.allVerbsData && data.verbGroupsByLevel) {
+                    console.log("Loaded data from LocalStorage cache (Version match).");
                     allVerbsData = data.allVerbsData;
                     verbGroupsByLevel = data.verbGroupsByLevel;
                     updateLoadingProgress(100);
@@ -131,10 +149,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         searchInput.dispatchEvent(new Event('input'));
                     }
                     return; // SKIP NETWORK LOADING
+                } else {
+                    console.log("Cache outdated or invalid. Reloading from network.");
                 }
             }
         } catch (e) {
-            console.warn("Failed to load from cache", e);
+            console.warn("Failed to load/parse cache", e);
         }
 
         if (isBackgroundLoading) return;
@@ -221,6 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const cachePayload = {
                 allVerbsData,
                 verbGroupsByLevel,
+                lastUpdated: remoteVersion || new Date().toISOString(),
                 timestamp: Date.now()
             };
             localStorage.setItem(CACHE_KEY, JSON.stringify(cachePayload));
