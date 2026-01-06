@@ -1,8 +1,8 @@
 const CACHE_NAME = 'deutsch-lernen-v1';
 const ASSETS_TO_CACHE = [
     './',
+    './index_OLD.html',
     './index.html',
-    './memodeutsch.html',
     './styles.css',
     // Verben Section
     './verben/A1_A2_B1/verben.html',
