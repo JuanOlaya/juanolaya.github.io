@@ -7,18 +7,7 @@
     <title>Scalable Deutsch - Dein interaktiver Deutschkurs</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Prefetch Verbs Resources -->
-    <link rel="prefetch" href="verben/A1_A2_B1/verben.html">
-    <link rel="prefetch" href="verben/A1_A2_B1/style/styles.css">
-    <link rel="prefetch" href="verben/A1_A2_B1/script/script.js">
-    <link rel="prefetch" href="verben/A1_A2_B1/json/verb_types.json">
 
-    <!-- Prefetch Initial Groups for Each Level -->
-    <link rel="prefetch" href="verben/A1_A2_B1/json/groups/A1_1/A1_1_group_1.json">
-    <link rel="prefetch" href="verben/A1_A2_B1/json/groups/A1_2/A1_2_group_1.json">
-    <link rel="prefetch" href="verben/A1_A2_B1/json/groups/A2_1/A2_1_group_1.json">
-    <link rel="prefetch" href="verben/A1_A2_B1/json/groups/A2_2/A2_2_group_1.json">
-    <link rel="prefetch" href="verben/A1_A2_B1/json/groups/B1_1/B1_1_group_1.json">
     <style>
         :root {
             /* Light Mode Variables */
@@ -367,6 +356,38 @@
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             body.setAttribute('data-theme', newTheme);
             themeBtn.textContent = newTheme === 'light' ? '🌓' : '☀️';
+        });
+
+        // Robust JS Prefetcher to warm up cache
+        window.addEventListener('load', () => {
+            const resources = [
+                'verben/A1_A2_B1/verben.html',
+                'verben/A1_A2_B1/style/styles.css',
+                'verben/A1_A2_B1/script/script.js',
+                'verben/A1_A2_B1/json/verb_types.json',
+                'verben/A1_A2_B1/json/groups/A1_1/A1_1_group_1.json',
+                'verben/A1_A2_B1/json/groups/A1_2/A1_2_group_1.json',
+                'verben/A1_A2_B1/json/groups/A2_1/A2_1_group_1.json',
+                'verben/A1_A2_B1/json/groups/A2_2/A2_2_group_1.json',
+                'verben/A1_A2_B1/json/groups/B1_1/B1_1_group_1.json'
+            ];
+
+            const prefetch = (url) => {
+                fetch(url, { priority: 'low' })
+                    .then(() => console.log(`Prefetched: ${url}`))
+                    .catch(err => console.warn(`Failed to prefetch ${url}`, err));
+            };
+
+            // Use requestIdleCallback if available, otherwise timeout
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(() => {
+                    resources.forEach(prefetch);
+                });
+            } else {
+                setTimeout(() => {
+                    resources.forEach(prefetch);
+                }, 2000);
+            }
         });
     </script>
 </body>
