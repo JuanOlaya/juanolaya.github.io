@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const remainingColor = '#ffffff';
 
             searchInput.style.background = `linear-gradient(to right, ${progressColor} ${percentage}%, ${remainingColor} ${percentage}%)`;
-            searchInput.placeholder = `Lade Daten... ${Math.round(percentage)}%`;
+            searchInput.placeholder = `${Math.round(percentage)}%`;
             searchInput.classList.add('loading-active');
         } else {
             // Reset background and placeholder
@@ -112,6 +112,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadBackgroundData() {
+        const CACHE_KEY = 'verbAppCache_v1';
+
+        // 1. Try to load from LocalStorage first
+        try {
+            const cached = localStorage.getItem(CACHE_KEY);
+            if (cached) {
+                const data = JSON.parse(cached);
+                // Simple validity check (optional: check timestamp or version)
+                if (data.allVerbsData && data.verbGroupsByLevel) {
+                    console.log("Loaded data from LocalStorage cache");
+                    allVerbsData = data.allVerbsData;
+                    verbGroupsByLevel = data.verbGroupsByLevel;
+                    updateLoadingProgress(100);
+                    isBackgroundLoading = false;
+
+                    if (searchInput && searchInput.value.trim() !== '') {
+                        searchInput.dispatchEvent(new Event('input'));
+                    }
+                    return; // SKIP NETWORK LOADING
+                }
+            }
+        } catch (e) {
+            console.warn("Failed to load from cache", e);
+        }
+
         if (isBackgroundLoading) return;
         isBackgroundLoading = true;
         console.log("Starting background data load...");
@@ -123,16 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
         levelOrder.forEach(levelKey => {
             const config = levelConfig[levelKey];
             for (let i = 1; i <= config.groupCount; i++) {
-                // Skip if this is the group currently being viewed (optimization)
-                // But safer to just check memory cache in the loop
                 loadTasks.push({ levelKey, i });
             }
         });
         totalTasks = loadTasks.length;
         let loadedTasks = 0;
 
-        const BATCH_SIZE = 10; // Increased batch size for faster processing
-        const DELAY_MS = 20; // Reduced yield time to speed up cached loads
+        const BATCH_SIZE = 10;
+        const DELAY_MS = 20;
 
         for (let i = 0; i < loadTasks.length; i += BATCH_SIZE) {
             const batch = loadTasks.slice(i, i + BATCH_SIZE);
@@ -143,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // 1. Check if already loaded
                 if (verbGroupsByLevel[levelKey] && verbGroupsByLevel[levelKey][groupIndex]) {
-                    return; // Already have this group
+                    return;
                 }
 
                 // 2. Fetch Group Data
@@ -179,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             await Promise.all(batchPromises);
 
-            loadedTasks += batch.length; // Approximate
+            loadedTasks += batch.length;
             const percent = Math.min(100, (loadedTasks / totalTasks) * 100);
             updateLoadingProgress(percent);
 
@@ -193,9 +216,21 @@ document.addEventListener('DOMContentLoaded', () => {
         updateLoadingProgress(100);
         isBackgroundLoading = false;
 
+        // Save to LocalStorage
+        try {
+            const cachePayload = {
+                allVerbsData,
+                verbGroupsByLevel,
+                timestamp: Date.now()
+            };
+            localStorage.setItem(CACHE_KEY, JSON.stringify(cachePayload));
+            console.log("Saved data to LocalStorage cache");
+        } catch (e) {
+            console.warn("Failed to save to cache", e);
+        }
+
         // Re-run search if user typed something while loading
         if (searchInput && searchInput.value.trim() !== '') {
-            // Dispatch input event to trigger search
             searchInput.dispatchEvent(new Event('input'));
         }
     }
