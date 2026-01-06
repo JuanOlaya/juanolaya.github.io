@@ -92,7 +92,7 @@
             font-size: 2.5rem;
             font-weight: 800;
             margin: 0 0 10px 0;
-            background: linear-gradient(135deg, #60a5fa, #c084fc);
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -156,8 +156,8 @@
         }
 
         .nav-card .emoji {
-            font-size: 4rem;
-            margin-bottom: 5px;
+            font-size: 3rem;
+            margin-top: 15px;
             /* 3D Effect */
             filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.25));
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -174,6 +174,13 @@
             font-size: 1.5rem;
             margin: 0;
             line-height: 1.2;
+        }
+
+        .style-nacht .card-title {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .nav-card .card-desc {
@@ -250,7 +257,7 @@
         <div class="nav-grid">
             <!-- Fälle (Nacht) - Container Card -->
             <div class="nav-card style-nacht">
-                <div class="emoji">📋</div>
+
                 <h2 class="card-title">Fälle</h2>
                 <div class="card-desc">Die Fälle im Deutschen</div>
                 <div class="card-links">
@@ -262,7 +269,7 @@
 
             <!-- Verben (Nacht) - Container Card -->
             <div class="nav-card style-nacht">
-                <div class="emoji">🔤</div>
+
                 <h2 class="card-title">Verben</h2>
                 <div class="card-desc">Konjugation</div>
                 <div class="card-links">
@@ -274,7 +281,7 @@
 
             <!-- Substantive (Nacht) - Container Card -->
             <div class="nav-card style-nacht">
-                <div class="emoji">📝</div>
+
                 <h2 class="card-title">Substantive</h2>
                 <div class="card-desc">Wortschatz & Genus</div>
                 <div class="card-links">
@@ -286,47 +293,48 @@
 
             <!-- Conectores (Nacht) - Container Card -->
             <div class="nav-card style-nacht">
-                <div class="emoji">⚡</div>
+
                 <h2 class="card-title">Conectores</h2>
                 <div class="card-desc">Verbindungen & Nuancen</div>
                 <div class="card-links">
-                    <a href="adverbs/adverbien.html" class="sub-link">⚡ Adverbien</a>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="adverbs/adverbien.html" class="sub-link" style="flex: 1;">Adverbien</a>
+                        <a href="praepositionen/praepositionen.html" class="sub-link" style="flex: 1;">Präpositionen</a>
+                    </div>
                     <a href="adverbs/mengenpronomen.html" class="sub-link">📊 Pronomen</a>
                     <a href="konjunktionen/konjunktionen.html" class="sub-link">🔗 Konjunktionen</a>
                 </div>
             </div>
 
-            <!-- Präpositionen (Nacht) -->
-            <a href="praepositionen/praepositionen.html" class="nav-card style-nacht">
-                <div class="emoji">🧭</div>
-                <h2 class="card-title">Präpositionen</h2>
-                <div class="card-desc">Wechsel-, Dativ- & Akkusativ</div>
-            </a>
+
 
             <!-- W-Fragen (Nacht) -->
             <a href="w-fragen/w-fragen.html" class="nav-card style-nacht">
-                <div class="emoji">❓</div>
+
                 <h2 class="card-title">W-Fragen</h2>
                 <div class="card-desc">Wer, Wie, Was, Wo?</div>
+                <div class="emoji">❓</div>
             </a>
 
             <!-- Uhrzeit (Nacht) -->
             <a href="uhrzeit/uhrzeit.html" class="nav-card style-nacht">
-                <div class="emoji">⏰</div>
+
                 <h2 class="card-title">Die Uhrzeit</h2>
                 <div class="card-desc">Zeitangaben lernen</div>
+                <div class="emoji">⏰</div>
             </a>
 
             <!-- Adjektive (Nacht) -->
             <a href="adjektive/adjektive.html" class="nav-card style-nacht">
-                <div class="emoji">🎨</div>
+
                 <h2 class="card-title">Adjektive</h2>
                 <div class="card-desc">Deklination & Farben</div>
+                <div class="emoji">🎨</div>
             </a>
 
             <!-- Sprechen (Nacht) - Container Card -->
             <div class="nav-card style-nacht">
-                <div class="emoji">🗣️</div>
+
                 <h2 class="card-title">Sprechen</h2>
                 <div class="card-desc">Konversation & Aussprache</div>
                 <div class="card-links">
@@ -338,14 +346,14 @@
 
             <!-- Alte Version (Abend) -->
             <a href="index_OLD.html" class="nav-card style-abend">
-                <div class="emoji">🕰️</div>
+
                 <h2 class="card-title">Alte Version</h2>
                 <div class="card-desc">Klassisches Design</div>
             </a>
         </div>
 
         <div class="footer">
-            <p>Made with ❤️ for German Learners • 2024</p>
+            <p>Made with ❤️ for German Learners • 2026</p>
         </div>
     </div>
 
