@@ -131,8 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
         totalTasks = loadTasks.length;
         let loadedTasks = 0;
 
-        const BATCH_SIZE = 3; // Conservative batch size for background
-        const DELAY_MS = 100; // Yield to UI thread
+        const BATCH_SIZE = 10; // Increased batch size for faster processing
+        const DELAY_MS = 20; // Reduced yield time to speed up cached loads
 
         for (let i = 0; i < loadTasks.length; i += BATCH_SIZE) {
             const batch = loadTasks.slice(i, i + BATCH_SIZE);
