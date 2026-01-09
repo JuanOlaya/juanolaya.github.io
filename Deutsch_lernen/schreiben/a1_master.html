@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A1 Schreiben Master - Deployment</title>
+    <!-- Tailwind CSS for Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM CDNs -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel for JSX Transpilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const App = () => {
+            // Hinweis: Wir nutzen Emojis statt Lucide-Icons für maximale Kompatibilität im CDN-Modus
+            const [showGrammarModal, setShowGrammarModal] = React.useState(false);
+            const [selectedItem, setSelectedItem] = React.useState(null);
+            const [copied, setCopied] = React.useState(false);
+            const [selectedReasons, setSelectedReasons] = React.useState({ 9: "GRUND" });
+
+            const handleReasonChange = (id, value) => {
+                setSelectedReasons(prev => ({ ...prev, [id]: value }));
+            };
+
+            const copyToClipboard = (text) => {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+                document.body.removeChild(textArea);
+            };
+
+            const examTasks = [
+                {
+                    id: 1,
+                    title: "Jemanden einladen",
+                    subtitle: "Geburtstagseinladung",
+                    probability: "Sehr Hoch",
+                    icon: "🥳",
+                    task: "Schreiben Sie eine E-Mail an Ihren Freund Alex. Laden Sie ihn zu Ihrer Geburtstagsparty ein. Schreiben Sie: Wann? Wo?",
+                    previewExample: "Lieber Alex,\n\nich habe am Freitag Geburtstag. Kommst du zu meiner Party? Die Party ist um 18:00 Uhr bei mir zu Hause. Bitte sag mir bald Bescheid. Ich freue mich sehr auf dich!\n\nViele Grüße,\n[Name]",
+                    originalExample: "Lieber Alex,\n\nich habe bald Geburtstag und mache eine große Party. Die Party ist am Samstag um 20:00 Uhr bei mir zu Hause. Kommst du auch? Bitte schreib mir bis Donnerstag. Ich freue mich auf dich!\n\nLiebe Grüße,\nSofia",
+                    translation: "Querido Alex, pronto es mi cumpleaños y hago una gran fiesta. La fiesta es el sábado a las 20:00 en mi casa. ¿Vienes tú también? Por favor, escríbeme hasta el jueves. ¡Te espero! Cariños, Sofía."
+                },
+                {
+                    id: 2,
+                    title: "Abwesenheit begründen",
+                    subtitle: "Entschuldigung Deutschkurs",
+                    probability: "Sehr Hoch",
+                    icon: "🤒",
+                    task: "Sie können am Montag nicht zum Deutschkurs kommen. Schreiben Sie eine E-Mail an Ihren Lehrer. Entschuldigen Sie sich und nennen Sie den Grund.",
+                    previewExample: "Sehr geehrte Frau Müller,\n\nich kann am Montag leider nicht zum Deutschkurs kommen. Ich habe einen wichtigen Arzttermin um 10:00 Uhr. Können Sie mir bitte die Hausaufgaben per Mail schicken?\n\nViele Grüße,\n[Name]",
+                    originalExample: "Sehr geehrte Frau Müller,\n\nich kann am Montag leider nicht zum Deutschkurs kommen. Ich habe einen wichtigen Arzttermin um 10 Uhr. Können Sie mir bitte die Hausaufgaben per E-Mail schicken? Vielen Dank für Ihre Hilfe.\n\nMit freundlichen Grüßen,\n[Ihr Name]",
+                    translation: "Estimada Sra. Müller, lamentablemente el lunes no puedo asistir a la clase de alemán. Tengo una cita médica importante a las 10 h. ¿Podría enviarme los deberes por correo electrónico, por favor? Muchas gracias por su ayuda. Atentamente, [Su Nombre]."
+                },
+                {
+                    id: 3,
+                    title: "Einladung ablehnen",
+                    subtitle: "Absage",
+                    probability: "Sehr Hoch",
+                    icon: "❌",
+                    task: "Ihre Freundin Sofia hat Sie zu ihrer Geburtstagsparty eingeladen. Sie können nicht kommen. Schreiben Sie eine E-Mail: Danken Sie, entschuldigen Sie sich und nennen Sie den Grund.",
+                    previewExample: "Hallo Sofia,\n\ndanke für die Einladung. Aber ich kann leider nicht kommen. Ich muss am Wochenende arbeiten und habe keine Zeit. Ich wünsche dir viel Spaß bei der Party!\n\nLiebe Grüße,\n[Name]",
+                    originalExample: "Liebe Sofia,\n\nvielen Dank für die Einladung zu deiner Party. Es tut mir sehr leid, aber ich kann leider nicht kommen. Ich muss am Wochenende meine Eltern besuchen und ihnen helfen. Ich wünsche dir viel Spaß!\n\nLiebe Grüße,\n[Name]",
+                    translation: "Querida Sofía, muchas gracias por la invitación a tu fiesta. Lo siento mucho, pero lamentablemente no puedo ir. Tengo que visitar a mis padres el fin de semana y ayudarlos. ¡Te deseo que te diviertas mucho! Cariños, [Nombre]."
+                },
+                {
+                    id: 4,
+                    title: "Einladung annehmen",
+                    subtitle: "Zusage",
+                    probability: "Sehr Hoch",
+                    icon: "✅",
+                    task: "Ihr Freund Paul hat Sie ins Kino eingeladen. Antworten Sie ihm. Schreiben Sie, dass Sie mitkommen und wann Sie Zeit haben.",
+                    previewExample: "Hallo Paul,\n\ndanke für die Einladung! Ich komme sehr gerne mit ins Kino. Ich habe am Samstag um 19 Uhr Zeit. Sollen wir uns dort treffen? Ich freue mich!\n\nViele Grüße,\n[Name]",
+                    originalExample: "Lieber Paul,\n\nvielen Dank für deine Einladung ins Kino! Ja, ich komme sehr gern mit. Samstag um 19:00 Uhr passt mir super. Sollen wir uns direkt vor dem Kino treffen? Ich freue mich sehr auf den Film!\n\nLiebe Grüße,\n[Name]",
+                    translation: "Querido Paul, ¡muchas gracias por tu invitación al cine! Sí, me encantaría ir. El sábado a las 19:00 me viene genial. ¿Nos encontramos directamente frente al cine? ¡Tengo muchas ganas de ver la película! Cariños, [Nombre]."
+                },
+                {
+                    id: 5,
+                    title: "Termin vereinbaren",
+                    subtitle: "Friseurtermin",
+                    probability: "Sehr Hoch",
+                    icon: "✂️",
+                    task: "Sie möchten zum Friseur gehen. Schreiben Sie eine E-Mail an den Salon und bitten Sie um einen Termin für nächsten Dienstag Nachmittag.",
+                    previewExample: "Guten Tag,\n\nich brauche einen Termin zum Haareschneiden. Haben Sie am nächsten Dienstag um 15 Uhr Zeit? Bitte schicken Sie mir eine kurze Bestätigung. Vielen Dank für Ihre Hilfe.\n\nViele Grüße,\n[Name]",
+                    originalExample: "Sehr geehrte Damen und Herren,\n\nich möchte bitte einen Termin zum Haareschneiden reservieren. Haben Sie am nächsten Dienstag Nachmittag gegen 15:00 Uhr Zeit? Bitte schicken Sie mir eine kurze Bestätigung per E-Mail. Vielen Dank im Voraus für Ihre Hilfe.\n\nMit freundlichen Grüßen,\n[Ihr Name]",
+                    translation: "Estimados señoras y señores, quisiera reservar una cita para cortarme el pelo. ¿Tienen tiempo el próximo martes por la tarde sobre las 15:00 h? Por favor, envíenme una breve confirmación por correo electrónico. Muchas gracias de antemano por su ayuda. Atentamente, [Su Nombre]."
+                },
+                {
+                    id: 6,
+                    title: "Termin absagen",
+                    subtitle: "Arzttermin absagen",
+                    probability: "Sehr Hoch",
+                    icon: "🩺",
+                    task: "Sie haben einen Termin beim Arzt, aber Sie können nicht kommen. Schreiben Sie eine E-Mail an die Praxis. Entschuldigen Sie sich und bitten Sie um einen neuen Termin.",
+                    previewExample: "Guten Tag,\n\nich habe einen Termin um 10 Uhr bei Dr. Schmidt. Ich kann leider nicht kommen, weil ich krank bin. Haben Sie einen neuen Termin für mich? Vielen Dank!\n\nViele Grüße,\n[Name]",
+                    originalExample: "Sehr geehrte Damen und Herren,\n\nich habe am Mittwoch um 10:00 Uhr einen Termin bei Dr. Schmidt. Leider bin ich krank und kann nicht kommen. Können wir bitte einen neuen Termin für nächste Woche machen? Vielen Dank für Ihr Verständnis.\n\nMit freundlichen Grüßen,\n[Ihr Name]",
+                    translation: "Estimados señoras y señores, tengo una cita el miércoles a las 10:00 h con el Dr. Schmidt. Lamentablemente estoy enfermo y no puedo ir. ¿Podríamos concertar una nueva cita para la próxima semana, por favor? Muchas gracias por su comprensión. Atentamente, [Su Nombre]."
+                },
+                {
+                    id: 7,
+                    title: "Wochenendpläne",
+                    subtitle: "Freizeitplanung",
+                    probability: "Sehr Hoch",
+                    icon: "🍿",
+                    task: "Sie möchten am Wochenende mit Ihrer Freundin Julia ins Kino gehen. Schreiben Sie ihr eine E-Mail. Schlagen Sie einen Tag und eine Uhrzeit vor.",
+                    previewExample: "Liebe Julia,\n\nhast du am Samstag Zeit? Wir können zusammen ins Kino gehen und den neuen Film sehen. Der Film beginnt um 20 Uhr. Hast du Lust?\n\nViele Grüße,\n[Name]",
+                    originalExample: "Liebe Julia,\n\nhast du am Samstagabend Zeit? Wir können zusammen ins Kino gehen und den neuen Film sehen. Der Film beginnt um 20:00 Uhr. Hast du Lust? Bitte antworte mir bald. Ich freue mich auf unseren Abend!\n\nLiebe Grüße,\n[Ihr Name]",
+                    translation: "Querida Julia, ¿tienes tiempo el sábado por la noche? Podemos ir juntos al cine y ver la nueva película. La película empieza a las 20:00 h. ¿Te apetece? Por favor, respóndeme pronto. ¡Espero con ganas nuestra velada! Cariños, [Su Nombre]."
+                },
+                {
+                    id: 8,
+                    title: "Gesundheitsproblem",
+                    subtitle: "Krankmeldung Arbeit",
+                    probability: "Hoch",
+                    icon: "🌡️",
+                    task: "Sie sind krank und können heute nicht zur Arbeit kommen. Schreiben Sie eine E-Mail an Ihren Chef. Sagen Sie, was Sie haben.",
+                    previewExample: "Sehr geehrte Frau Schmidt,\n\nich kann heute leider nicht zur Arbeit kommen. Ich habe starke Kopfschmerzen und hohes Fieber. Ich gehe jetzt zum Arzt und schicke Ihnen später die Krankmeldung.\n\nViele Grüße,\n[Name]",
+                    originalExample: "Sehr geehrte Frau Schmidt,\n\nleider kann ich heute nicht zur Arbeit kommen. Ich habe starke Kopfschmerzen und hohes Fieber. Ich gehe jetzt zum Arzt und schicke Ihnen später die Krankmeldung. Vielen Dank für Ihr Verständnis.\n\nMit freundlichen Grüßen,\n[Ihr Name]",
+                    translation: "Estimada Sra. Schmidt, lamentablemente hoy no puedo ir a trabajar. Tengo un fuerte dolor de cabeza y fiebre alta. Ahora voy al médico y le enviaré el justificante médico más tarde. Muchas gracias por su comprensión. Atentamente, [Su Nombre]."
+                },
+                {
+                    id: 9,
+                    title: "Termin vereinbaren",
+                    subtitle: "Terminreservierung",
+                    probability: "Sehr Hoch",
+                    icon: "📅",
+                    task: "Schreiben Sie eine E-Mail an eine Praxis oder ein Büro. Reservieren Sie einen Termin und nennen Sie einen Grund.",
+                    reasons: ["GRUND", "meine Anmeldung", "eine Reparatur", "einen Arztbesuch", "eine Besprechung"],
+                    parts: {
+                        before: "Guten Tag,\n\nmein Name ist [Name]. Ich möchte einen Termin reservieren. Haben Sie am Dienstag Zeit? Ich brauche den Termin für ",
+                        after: ". Bitte geben Sie mir bald Bescheid. Vielen Dank für Ihre Hilfe!\n\nMit freundlichen Grüßen,\n[Name]"
+                    },
+                    originalExample: "Sehr geehrte Damen und Herren,\n\nmein Name ist Carlos García. Ich möchte einen Termin reservieren. Haben Sie am Dienstag um 09:00 Uhr oder am Donnerstag um 11:30 Uhr Zeit? Ich brauche den Termin für meine Anmeldung im Büro. Bitte geben Sie mir Bescheid.\n\nMit freundlichen Grüßen,\nCarlos García",
+                    translation: "Estimados señoras y señores, mi nombre es Carlos García. Quisiera reservar una cita. ¿Tiene tiempo el martes a las 9:00 o el jueves a las 11:30? Necesito la cita para mi registro en la oficina. Por favor, avíseme. Saludos, Carlos García."
+                },
+                {
+                    id: 10,
+                    title: "Touristeninformation",
+                    subtitle: "Dresden Besuch",
+                    probability: "Sehr Hoch",
+                    icon: "🗺️",
+                    task: "Schreiben Sie an die Touristeninformation Dresden. Sie möchten im August kommen. Fragen Sie nach Kulturprogramm und Hoteladressen.",
+                    previewExample: "Guten Tag,\n\nich möchte im August Dresden besuchen. Haben Sie Informationen über das Kulturprogramm, zum Beispiel Filme und Museen? Ich brauche auch eine Liste mit Hoteladressen in der Stadt.\n\nVielen Dank,\n[Name]",
+                    originalExample: "Guten Tag,\n\nich möchte im August mit meiner Familie Dresden besuchen. Haben Sie Informationen über das Kulturprogramm, zum Beispiel Filme und Museen? Ich brauche auch eine Liste mit Hoteladressen in der Stadt. Vielen Dank für Ihre Hilfe.\n\nMit freundlichen Grüßen,\nCarlos García",
+                    translation: "Buenos días, quisiera visitar Dresden en agosto con mi familia. ¿Tienen información sobre el programa cultural, por ejemplo películas y museos? También necesito una lista con direcciones de hoteles en la ciudad. Muchas gracias por su ayuda. Atentamente, Carlos García."
+                }
+            ];
+
+            return (
+                <div className="min-h-screen pb-20">
+                    <nav className="bg-white border-b border-slate-200 sticky top-0 z-20 shadow-sm">
+                        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <div className="bg-blue-600 w-10 h-10 rounded-lg flex items-center justify-center text-white text-xl shadow-lg shadow-blue-200">
+                                    📖
+                                </div>
+                                <h1 className="font-bold text-xl tracking-tight">A1 Master</h1>
+                            </div>
+                            <button onClick={() => setShowGrammarModal(true)} className="flex items-center gap-2 bg-slate-100 px-4 py-2 rounded-full font-bold text-sm hover:bg-slate-200 transition-colors">
+                                💡 Grammatik
+                            </button>
+                        </div>
+                    </nav>
+
+                    <main className="max-w-6xl mx-auto px-4 py-10">
+                        <header className="mb-12 text-center">
+                            <h2 className="text-4xl font-black text-slate-800 mb-3 tracking-tight">A1 Schreiben Master</h2>
+                            <p className="text-slate-500 max-w-2xl font-medium mx-auto text-lg leading-relaxed px-4 text-center">
+                                Ejemplos interactivos para la Parte 2 del examen. Alle Vorlagen entsprechen dem offiziellen Format und erfüllen die geforderte Länge (~30 Wörter).
+                            </p>
+                        </header>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {examTasks.map(item => (
+                                <div key={item.id} className="group bg-white rounded-[2.5rem] border border-slate-200 shadow-sm flex flex-col hover:shadow-2xl hover:border-blue-200 transition-all duration-300 overflow-hidden">
+                                    <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-12 h-12 flex items-center justify-center bg-white rounded-2xl shadow-sm border border-slate-100 group-hover:scale-110 transition-transform text-2xl">
+                                                {item.icon}
+                                            </div>
+                                            <div>
+                                                <h3 className="font-bold text-slate-800">{item.title}</h3>
+                                                <div className="flex items-center gap-2 mt-0.5">
+                                                    <span className="text-[9px] text-slate-400 font-black uppercase tracking-widest">{item.subtitle}</span>
+                                                    <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded-full ${item.probability === 'Sehr Hoch' ? 'bg-red-50 text-red-500' : 'bg-orange-50 text-orange-500'}`}>
+                                                        {item.probability}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="p-6 flex-grow">
+                                        <div className="bg-slate-900 rounded-3xl p-6 text-sm font-mono text-blue-50 whitespace-pre-wrap border border-slate-800 leading-relaxed min-h-[160px]">
+                                            {item.parts ? (
+                                                <span>
+                                                    {item.parts.before}
+                                                    <span className="inline-flex relative align-middle mx-1" onClick={(e) => e.stopPropagation()}>
+                                                        <select
+                                                            value={selectedReasons[item.id]}
+                                                            onChange={(e) => handleReasonChange(item.id, e.target.value)}
+                                                            className="appearance-none bg-blue-600 hover:bg-blue-500 text-white text-[10px] font-bold py-1 px-2 pr-5 rounded cursor-pointer border-none transition-all outline-none shadow-sm max-w-[120px] truncate"
+                                                        >
+                                                            {item.reasons.map(r => (
+                                                                <option key={r} value={r} className="bg-white text-slate-900 font-sans">{r}</option>
+                                                            ))}
+                                                        </select>
+                                                        <span className="absolute right-1 top-1/2 -translate-y-1/2 text-[10px] pointer-events-none">▼</span>
+                                                    </span>
+                                                    {item.parts.after}
+                                                </span>
+                                            ) : item.previewExample}
+                                        </div>
+                                    </div>
+                                    <div className="px-6 pb-6 text-center">
+                                        <button
+                                            onClick={() => setSelectedItem(item)}
+                                            className="w-full bg-slate-50 hover:bg-blue-600 hover:text-white text-slate-600 py-4 rounded-2xl font-bold text-xs transition-all flex items-center justify-center gap-2 group-hover:shadow-lg active:scale-95"
+                                        >
+                                            👁️ Ver enunciado y traducción
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </main>
+
+                    {selectedItem && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-md">
+                            <div className="bg-white w-full max-w-2xl rounded-[3rem] shadow-2xl z-10 overflow-hidden max-h-[90vh] flex flex-col relative">
+                                <div className="p-8 pb-4 flex justify-between items-start sticky top-0 bg-white z-20 border-b border-slate-50">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-16 h-16 flex items-center justify-center bg-blue-50 rounded-2xl border border-blue-100 text-3xl">
+                                            {selectedItem.icon}
+                                        </div>
+                                        <div>
+                                            <h3 className="text-2xl font-black text-slate-800 tracking-tight">{selectedItem.title}</h3>
+                                            <p className="text-slate-500 font-medium text-sm">Wahrscheinlichkeit: <span className="text-red-600 font-bold">{selectedItem.probability}</span></p>
+                                        </div>
+                                    </div>
+                                    <button onClick={() => setSelectedItem(null)} className="bg-slate-100 hover:bg-slate-200 p-2 rounded-full transition-colors text-slate-400 text-xl w-10 h-10 flex items-center justify-center">
+                                        ✕
+                                    </button>
+                                </div>
+
+                                <div className="p-8 pt-6 space-y-8 overflow-y-auto">
+                                    <section className="space-y-3">
+                                        <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Aufgabenstellung (Examen)</p>
+                                        <div className="bg-slate-50 p-6 rounded-3xl text-slate-700 font-medium border border-slate-200 italic leading-relaxed">
+                                            "{selectedItem.task}"
+                                        </div>
+                                    </section>
+
+                                    <section className="space-y-3">
+                                        <div className="flex items-center justify-between">
+                                            <p className="text-[10px] font-black uppercase text-blue-500 tracking-widest">Musterantwort (+30 Wörter)</p>
+                                            <button
+                                                onClick={() => copyToClipboard(selectedItem.originalExample)}
+                                                className="flex items-center gap-2 bg-blue-50 px-3 py-1.5 rounded-lg text-[10px] font-bold text-blue-600 hover:bg-blue-100 transition-all"
+                                            >
+                                                {copied ? "✅ Copiado" : "📋 Copiar"}
+                                            </button>
+                                        </div>
+                                        <div className="bg-slate-900 text-blue-50 p-8 rounded-[2rem] font-mono text-sm whitespace-pre-wrap border border-slate-800 leading-relaxed shadow-inner">
+                                            {selectedItem.originalExample}
+                                        </div>
+                                    </section>
+
+                                    <section className="space-y-3 pb-4">
+                                        <p className="text-[10px] font-black uppercase text-emerald-500 tracking-widest">Traducción (Español)</p>
+                                        <div className="bg-emerald-50/50 p-6 rounded-3xl text-emerald-800 text-sm leading-relaxed border border-emerald-100 font-medium">
+                                            {selectedItem.translation}
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div className="p-8 pt-0 bg-white">
+                                    <button
+                                        onClick={() => setSelectedItem(null)}
+                                        className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 active:scale-95"
+                                    >
+                                        Entendido
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {showGrammarModal && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+                            <div className="bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl z-10 overflow-hidden transform transition-all">
+                                <div className="p-8 bg-slate-900 text-white flex justify-between items-center">
+                                    <div className="flex items-center gap-4">
+                                        <div className="bg-blue-500/20 p-2 w-10 h-10 flex items-center justify-center rounded-xl border border-blue-400/30 text-xl text-center">
+                                            💡
+                                        </div>
+                                        <h3 className="text-2xl font-bold tracking-tight text-center">Grammatik</h3>
+                                    </div>
+                                    <button onClick={() => setShowGrammarModal(false)} className="bg-white/10 hover:bg-white/20 w-10 h-10 flex items-center justify-center rounded-full transition-colors">
+                                        ✕
+                                    </button>
+                                </div>
+
+                                <div className="p-8 space-y-6 text-slate-800">
+                                    <div className="grid gap-4">
+                                        {[
+                                            { prep: "Am", desc: "Wochentage", ex: "Am Montag", color: "blue", icon: "🗓️" },
+                                            { prep: "Um", desc: "Uhrzeit", ex: "Um 10:00 Uhr", color: "purple", icon: "⏰" },
+                                            { prep: "Für", desc: "Grund / Zweck", ex: "Für eine Reparatur", color: "emerald", icon: "🎯" }
+                                        ].map((item, idx) => (
+                                            <div key={idx} className={`flex items-center gap-5 p-5 rounded-3xl bg-${item.color}-50/50 border border-${item.color}-100 transition-all hover:scale-[1.02]`}>
+                                                <div className={`w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-${item.color}-600 font-black text-xl shadow-sm border border-${item.color}-50 text-center`}>
+                                                    {item.prep}
+                                                </div>
+                                                <div>
+                                                    <p className="font-bold text-slate-800">{item.desc} {item.icon}</p>
+                                                    <p className={`text-sm text-${item.color}-600 font-bold opacity-80 italic`}>Bsp: {item.ex}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <button
+                                        onClick={() => setShowGrammarModal(false)}
+                                        className="w-full py-4 bg-slate-100 text-slate-900 rounded-2xl font-bold hover:bg-slate-200 transition-colors"
+                                    >
+                                        Listo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>

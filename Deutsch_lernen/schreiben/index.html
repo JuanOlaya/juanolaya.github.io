@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schreiben Lernen - MemoDeutsch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+
+<body class="p-6 md:p-12">
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-12 text-center">
+            <h1 class="text-4xl md:text-5xl font-black text-slate-800 mb-4 tracking-tight">Schreiben</h1>
+            <p class="text-lg text-slate-600">Verbessere deinen schriftlichen Ausdruck für Alltag und Prüfungen.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Card: Expresiones Administrativas -->
+            <a href="administrativ.html"
+                class="group block bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div
+                    class="mb-6 inline-flex p-4 rounded-2xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <i data-lucide="file-text" size="32"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
+                    Expresiones Administrativas</h2>
+                <div class="flex gap-2 mb-4">
+                    <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">A1</span>
+                    <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold">A2</span>
+                    <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-bold">B1</span>
+                </div>
+                <p class="text-slate-500 leading-relaxed">Guía completa de bloques léxicos para dominar cartas, emails y
+                    burocracia alemana.</p>
+            </a>
+
+            <!-- Card: A1 Schreiben Master -->
+            <a href="a1_master.html"
+                class="group block bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div
+                    class="mb-6 inline-flex p-4 rounded-2xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                    <span class="text-3xl">📝</span>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-800 mb-2 group-hover:text-indigo-600 transition-colors">A1
+                    Schreiben Master</h2>
+                <div class="flex gap-2 mb-4">
+                    <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">A1</span>
+                    <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold">Prüfung</span>
+                </div>
+                <p class="text-slate-500 leading-relaxed">Ejemplos interactivos para la Parte 2 del examen (Briefe &
+                    E-Mails).</p>
+            </a>
+        </div>
+
+        <div class="mt-16 text-center">
+            <a href="../index.html"
+                class="inline-flex items-center text-slate-500 hover:text-slate-800 font-semibold transition-colors">
+                <i data-lucide="arrow-left" class="mr-2"></i> Zurück zum Hauptmenü
+            </a>
+        </div>
+    </div>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
