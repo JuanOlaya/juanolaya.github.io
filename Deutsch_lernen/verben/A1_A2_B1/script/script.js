@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Theme data storage
     let currentThemeData = null;
+    let appVersion = null; // Global version for cache busting
 
     // --- BACKGROUND LOADING & PROGRESS ---
     let isBackgroundLoading = false;
@@ -121,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (vRes.ok) {
                 const vData = await vRes.json();
                 remoteVersion = vData.lastUpdated;
+                appVersion = remoteVersion;
                 console.log("Remote version:", remoteVersion);
             }
         } catch (e) {
@@ -191,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // 2. Fetch Group Data
                 try {
-                    const groupUrl = `json/groups/${levelKey}/${levelKey}_group_${task.i}.json`;
+                    const groupUrl = `json/groups/${levelKey}/${levelKey}_group_${task.i}.json${appVersion ? '?v=' + appVersion : ''}`;
                     const res = await fetch(groupUrl);
                     if (!res.ok) return;
                     const groupData = await res.json();
@@ -205,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (newVerbs.length > 0) {
                         const cardPromises = newVerbs.map(verbName =>
-                            fetch(`json/cards/${verbName}.json`)
+                            fetch(`json/cards/${verbName}.json${appVersion ? '?v=' + appVersion : ''}`)
                                 .then(res => res.ok ? res.json() : {})
                                 .then(data => { allVerbsData[verbName] = data; })
                                 .catch(() => { allVerbsData[verbName] = {}; })
@@ -270,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsContainer.innerHTML = '<div class="loading-spinner">Daten werden geladen...</div>';
 
         const groupNum = groupIndex + 1;
-        const groupUrl = `json/groups/${levelKey}/${levelKey}_group_${groupNum}.json`;
+        const groupUrl = `json/groups/${levelKey}/${levelKey}_group_${groupNum}.json${appVersion ? '?v=' + appVersion : ''}`;
 
         try {
             const res = await fetch(groupUrl);
@@ -291,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (newVerbs.length > 0) {
                 // 3. Fetch Card Data for new verbs
                 const cardPromises = newVerbs.map(verbName =>
-                    fetch(`json/cards/${verbName}.json`)
+                    fetch(`json/cards/${verbName}.json${appVersion ? '?v=' + appVersion : ''}`)
                         .then(res => res.ok ? res.json() : {})
                         .then(data => { allVerbsData[verbName] = data; })
                         .catch(() => { allVerbsData[verbName] = {}; })
