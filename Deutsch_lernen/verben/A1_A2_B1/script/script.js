@@ -1951,6 +1951,18 @@ document.addEventListener('DOMContentLoaded', () => {
             praesensNoteElement.style.display = 'none';
         }
 
+        // 3. Perfekt Note (displayed below Perfekt conjugation table)
+        const perfektNote = updatedData.note_perfekt;
+        const perfektNoteElement = document.getElementById('modal-perfekt-note');
+        if (perfektNoteElement) {
+            if (perfektNote) {
+                perfektNoteElement.innerHTML = perfektNote;
+                perfektNoteElement.style.display = 'block';
+            } else {
+                perfektNoteElement.style.display = 'none';
+            }
+        }
+
         // Display note_es if it exists (REMOVED/REPLACED by General Note above)
         // keeping the element ref just in case but logic is handled above
         const oldNoteElement = document.getElementById('modal-verb-note');
