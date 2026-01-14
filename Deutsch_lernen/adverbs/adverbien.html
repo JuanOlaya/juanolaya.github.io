@@ -654,15 +654,17 @@
                 <div class="modal-translation" id="modal-translation"></div>
                 <div class="modal-badge" id="modal-badge"></div>
                 <!-- Note container -->
-                <div id="modal-note"
-                    style="margin-top: 15px; font-size: 0.9rem; color: rgba(255,255,255,0.9); font-style: italic; display: none;">
-                </div>
+
             </div>
             <div class="modal-section">
                 <div class="modal-section-title">Beispiel / Ejemplo</div>
                 <div class="modal-example">
                     <div class="modal-example-de" id="modal-example-de"></div>
                     <div class="modal-example-es" id="modal-example-es"></div>
+                </div>
+                <!-- Note moved here -->
+                <div id="modal-note"
+                    style="margin-top: 15px; font-size: 0.9rem; color: #555; font-style: italic; display: none; border-top: 1px solid #eee; padding-top: 10px;">
                 </div>
             </div>
         </div>
@@ -822,6 +824,7 @@
                 colorPastel: '#e0e7ff',
                 badge: 'KONJUNKT.',
                 adverbs: [
+                    { word: 'damit', emoji: '👉', spanish: '(con eso / para eso)', example_de: 'Ich habe ein Auto. Damit fahre ich zur Arbeit.', example_es: 'Tengo un auto. Con eso voy al trabajo.', note: 'Frase común: <b>„Was ist damit gemeint?“</b> (¿Qué se quiere decir con eso?)<br>La expresión es muy común y conviene entenderla como una frase fija.' },
                     { word: 'aber', emoji: '⚖️', spanish: '(pero)', example_de: 'Ich bin müde, aber glücklich.', example_es: 'Estoy cansado, pero feliz.' },
                     { word: 'auch', emoji: '➕', spanish: '(también)', example_de: 'Ich möchte auch ein Eis.', example_es: 'Yo también quiero un helado.' },
                     { word: 'oder', emoji: '🤷', spanish: '(o)', example_de: 'Kaffee oder Tee?', example_es: '¿Café o té?' },
