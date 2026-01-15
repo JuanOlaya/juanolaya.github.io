@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Theme data storage
     let currentThemeData = null;
-    let appVersion = Date.now(); // Global version for cache busting
+    let appVersion = Date.now(); // Global version for cache busting (Updated)
 
     // --- BACKGROUND LOADING & PROGRESS ---
     let isBackgroundLoading = false;
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadBackgroundData() {
-        const CACHE_KEY = 'verbAppCache_v1';
+        const CACHE_KEY = 'verbAppCache_v2_restored'; // Force invalidation
         let remoteVersion = null;
 
         // 1. Check for updates (Version Check)
@@ -128,7 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (vRes.ok) {
                 const vData = await vRes.json();
                 remoteVersion = vData.lastUpdated;
-                appVersion = remoteVersion;
+                remoteVersion = vData.lastUpdated;
+                // appVersion = remoteVersion; // Don't overwrite our unique timestamp!
                 console.log("Remote version:", remoteVersion);
             }
         } catch (e) {
@@ -321,17 +322,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadConjugations(allVerbNames) {
         const conjugationPromises = Array.from(allVerbNames).map(async verbName => {
             try {
+                const query = appVersion ? `?v=${appVersion}` : '';
                 const fetchPromises = [
-                    fetch(`json/praesens/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
-                    fetch(`json/praeteritum_konjugation/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
-                    fetch(`json/perfekt_konjugation/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
-                    fetch(`json/praesens_fragen/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+                    fetch(`json/praesens/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
+                    fetch(`json/praeteritum_konjugation/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
+                    fetch(`json/perfekt_konjugation/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
+                    fetch(`json/praesens_fragen/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
                 ];
 
                 // Add Konjunktiv II data for specific verbs
                 if (konjunktivVerbs.includes(verbName)) {
                     fetchPromises.push(
-                        fetch(`json/konjunktiv_ii/${verbName}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+                        fetch(`json/konjunktiv_ii/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
                     );
                 }
 
@@ -377,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < verbs.length; i += BATCH_SIZE) {
             const batch = verbs.slice(i, i + BATCH_SIZE);
             const promises = batch.map(verb =>
-                fetch(`json/wortfamilie/${verb}.json`)
+                fetch(`json/wortfamilie/${verb}.json${appVersion ? '?v=' + appVersion : ''}`)
                     .then(res => res.ok ? res.json() : null)
                     .then(data => {
                         if (data && data.wortfamilie) {
@@ -1703,17 +1705,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // Lazy load praesens, perfekt, perfekt_konjugation, praeteritum_konjugation, fragen, and konjunktiv_ii data if not already loaded
         if (!data.praesens || !data.examples || !data.praesens_fragen || !data.perfekt_examples || !data.praeteritum_examples || (konjunktivVerbs.includes(verb) && !data.konjunktiv_ii)) {
             try {
-                const praesensPromise = fetch(`json/praesens/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-                const perfektPromise = fetch(`json/perfekt/${verb}.json`).then(res => res.ok ? res.json() : []).catch(() => []);
-                const fragenPromise = fetch(`json/praesens_fragen/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-                const perfektKonjugationPromise = fetch(`json/perfekt_konjugation/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-                const praeteritumKonjugationPromise = fetch(`json/praeteritum_konjugation/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
+                const query = appVersion ? `?v=${appVersion}` : '';
+                const praesensPromise = fetch(`json/praesens/${verb}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
+                const perfektPromise = fetch(`json/perfekt/${verb}.json${query}`).then(res => res.ok ? res.json() : []).catch(() => []);
+                const fragenPromise = fetch(`json/praesens_fragen/${verb}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
+                const perfektKonjugationPromise = fetch(`json/perfekt_konjugation/${verb}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
+                const praeteritumKonjugationPromise = fetch(`json/praeteritum_konjugation/${verb}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
 
-                const wortfamiliePromise = fetch(`json/wortfamilie/${verb}.json`).then(res => res.ok ? res.json() : { wortfamilie: [] }).catch(() => ({ wortfamilie: [] }));
+                const wortfamiliePromise = fetch(`json/wortfamilie/${verb}.json${query}`).then(res => res.ok ? res.json() : { wortfamilie: [] }).catch(() => ({ wortfamilie: [] }));
 
                 // Add Konjunktiv II data fetch for specific verbs
                 const konjunktivPromise = konjunktivVerbs.includes(verb)
-                    ? fetch(`json/konjunktiv_ii/${verb}.json`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+                    ? fetch(`json/konjunktiv_ii/${verb}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
                     : Promise.resolve({});
 
                 const [praesensData, perfektData, fragenData, perfektKonjugationData, praeteritumKonjugationData, konjunktivData, wortfamilieData] = await Promise.all([praesensPromise, perfektPromise, fragenPromise, perfektKonjugationPromise, praeteritumKonjugationPromise, konjunktivPromise, wortfamiliePromise]);
