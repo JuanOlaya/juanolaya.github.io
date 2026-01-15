@@ -67,6 +67,17 @@ const verbsDB = {
     'schulden': { es: 'deber', en: 'to owe' },
     'erreichen': { es: 'alcanzar', en: 'to reach' },
     'führen': { es: 'liderar/guiar', en: 'to lead' }, // "fuehren" in report
+    'wechseln': { es: 'cambiar', en: 'to change' },
+    // Reflexive Verben (A2.1 Group 10)
+    'wundern': { type: 'regular', es: 'sorprenderse', en: 'to be surprised', refl: true }, // sich wundern
+    'irren': { type: 'regular', es: 'equivocarse', en: 'to be mistaken', refl: true }, // sich irren
+    'beeilen': { type: 'regular', es: 'darse prisa', en: 'to hurry', refl: true }, // sich beeilen
+    'erkälten': { type: 'regular', es: 'resfriarse', en: 'to catch a cold', refl: true }, // sich erkälten
+    'wohlfühlen': { type: 'separable', prefix: 'wohl', es: 'sentirse bien', en: 'to feel good', refl: true }, // sich wohlfühlen
+    'schämen': { type: 'regular', es: 'avergonzarse', en: 'to be ashamed', refl: true }, // sich schämen
+    'erholen': { type: 'regular', es: 'descansar / recuperarse', en: 'to recover / rest', refl: true }, // sich erholen
+    'langweilen': { type: 'regular', es: 'aburrirse', en: 'to be bored', refl: true }, // sich langweilen
+    'konzentrieren': { type: 'regular', es: 'concentrarse', en: 'to concentrate', refl: true }, // sich konzentrieren
     'kochen': { es: 'cocinar', en: 'to cook' },
     'backen': { type: 'strong', irregular: true, stem: 'backte', pp: 'gebacken', es: 'hornear', en: 'to bake' }, // backte/buk mixed. 'backte' often regular now. let's stick to regular default or mixed. 
     'wiegen': { type: 'strong', irregular: true, stem: 'wog', pp: 'gewogen', es: 'pesar', en: 'to weigh' },
@@ -75,6 +86,7 @@ const verbsDB = {
     'aufbauen': { type: 'separable', prefix: 'auf', es: 'construir/montar', en: 'to build up' },
     'unterrichten': { es: 'enseñar', en: 'to teach', type: 'inseparable' },
     'lösen': { es: 'resolver', en: 'to solve' },
+    'einreichen': { type: 'separable', prefix: 'ein', es: 'presentar / entregar', en: 'to submit / to hand in' },
 
     // A2.1
     'freuen': { es: 'alegrarse', en: 'to be happy', refl: true },
