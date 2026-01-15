@@ -59,6 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const gustarCloseBtn = document.getElementById('gustar-close-btn');
     const gustarCloseFooterBtn = document.getElementById('gustar-close-footer-btn');
 
+    const reflexiveButtonContainer = document.getElementById('reflexive-button-container');
+    const reflexiveButton = document.getElementById('reflexive-button');
+    const reflexiveModal = document.getElementById('reflexive-modal');
+    const reflexiveCloseBtn = document.getElementById('reflexive-close-btn');
+    const reflexiveCloseFooterBtn = document.getElementById('reflexive-close-footer-btn');
+
     // Theme modal elements
     const themeModal = document.getElementById('theme-modal');
     const closeThemeModalX = document.getElementById('close-theme-modal-x');
@@ -88,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Theme data storage
     let currentThemeData = null;
-    let appVersion = null; // Global version for cache busting
+    let appVersion = Date.now(); // Global version for cache busting
 
     // --- BACKGROUND LOADING & PROGRESS ---
     let isBackgroundLoading = false;
@@ -146,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     verbGroupsByLevel = data.verbGroupsByLevel;
                     updateLoadingProgress(100);
                     isBackgroundLoading = false;
+                    generateTagFilters();
 
                     if (searchInput && searchInput.value.trim() !== '') {
                         searchInput.dispatchEvent(new Event('input'));
@@ -237,6 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Background loading complete.");
         updateLoadingProgress(100);
         isBackgroundLoading = false;
+        generateTagFilters();
 
         // Save to LocalStorage
         try {
@@ -783,10 +791,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateGustarButtonVisibility() {
         // Show gustar button only for A1.1 Group 8 (Modalverben - mögen, gefallen, lieben)
+        // Note: Logic allows only one special button at a time for simplicity
         if (currentLevel === 'A1_1' && currentGroupInLevel === 7) { // 7 is index for 8th group (0-indexed)
-            gustarButtonContainer.style.display = 'block';
+            if (gustarButtonContainer) gustarButtonContainer.style.display = 'block';
+            if (reflexiveButtonContainer) reflexiveButtonContainer.style.display = 'none';
+        } else if (currentLevel === 'A2_1' && currentGroupInLevel === 9) { // 9 is index for 10th group (0-indexed)
+            if (gustarButtonContainer) gustarButtonContainer.style.display = 'none';
+            if (reflexiveButtonContainer) reflexiveButtonContainer.style.display = 'block';
         } else {
-            gustarButtonContainer.style.display = 'none';
+            if (gustarButtonContainer) gustarButtonContainer.style.display = 'none';
+            if (reflexiveButtonContainer) reflexiveButtonContainer.style.display = 'none';
         }
     }
 
@@ -879,6 +893,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderVerbGroup();
                 // Start background loading after initial render
                 loadBackgroundData();
+                loadWortfamilieIndex().catch(e => console.warn("WF Index lazy load failed", e));
 
                 prevGroupBtn.addEventListener('click', async () => {
                     let newLevel = currentLevel;
@@ -1410,6 +1425,20 @@ document.addEventListener('DOMContentLoaded', () => {
         gustarCloseFooterBtn.addEventListener('click', () => gustarModal.classList.remove('visible'));
         gustarModal.addEventListener('click', (e) => { if (e.target === gustarModal) gustarModal.classList.remove('visible'); });
 
+        // Reflexive modal event listeners
+        if (reflexiveButton) {
+            reflexiveButton.addEventListener('click', () => reflexiveModal.classList.add('visible'));
+        }
+        if (reflexiveCloseBtn) {
+            reflexiveCloseBtn.addEventListener('click', () => reflexiveModal.classList.remove('visible'));
+        }
+        if (reflexiveCloseFooterBtn) {
+            reflexiveCloseFooterBtn.addEventListener('click', () => reflexiveModal.classList.remove('visible'));
+        }
+        if (reflexiveModal) {
+            reflexiveModal.addEventListener('click', (e) => { if (e.target === reflexiveModal) reflexiveModal.classList.remove('visible'); });
+        }
+
         // Modal event listeners (Removed invalid generic listeners)
 
         // TTS on Modal Header
@@ -1787,6 +1816,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     tagSpan.textContent = tagDisplay[tag] || tag;
                 }
+
+                tagSpan.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Stop TTS or other events
+                    // Close Modal
+                    const verbModal = document.getElementById('verb-modal');
+                    if (verbModal) verbModal.classList.remove('visible');
+
+                    // Trigger Search
+                    if (searchInput) {
+                        searchInput.value = `tag:${tag}`;
+                        performSearch();
+                    }
+                });
 
                 caseRow.appendChild(tagSpan);
             });
@@ -2513,23 +2555,24 @@ document.addEventListener('DOMContentLoaded', () => {
         isLoadingWortfamilie = true;
 
         try {
-            const response = await fetch('json/wortfamilie_index.json?t=' + Date.now());
+            const url = 'json/wortfamilie_index.json?t=' + Date.now();
+            console.log("Fetching Wortfamilie Index from:", url);
+            const response = await fetch(url);
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
             }
             wortfamilieIndex = await response.json();
+            console.log("Wortfamilie Index loaded successfully.");
             return wortfamilieIndex;
         } catch (error) {
             console.error("Failed to load Wortfamilie index:", error);
+            console.error("Error details:", error.message, error.name);
             // Fallback or retry logic could go here
             return null;
         } finally {
             isLoadingWortfamilie = false;
         }
     }
-
-    // Ensure Wortfamilie index is loaded for search
-    loadWortfamilieIndex().catch(err => console.log("Background loading of Wortfamilie index failed", err));
 
     async function performSearch() {
         if (!searchInput) return;
@@ -2644,13 +2687,24 @@ document.addEventListener('DOMContentLoaded', () => {
                                     perfektMatch = containsWord(verbData.es_perfekt, searchTerm);
                                 }
 
-                                // Also search in searchable Perfekt variants
                                 if (!perfektMatch && verbData.es_perfekt_searchable) {
                                     perfektMatch = verbData.es_perfekt_searchable.some(variant =>
                                         containsWord(variant, searchTerm)
                                     );
                                 }
 
+                                // TAG SEARCH LOGIC
+                                let tagMatch = false;
+                                if (searchTerm.startsWith('tag:')) {
+                                    const tagTerm = searchTerm.replace('tag:', '');
+                                    if (verbData.case_tags && verbData.case_tags.some(tag => tag.toLowerCase() === tagTerm)) {
+                                        tagMatch = true;
+                                    }
+                                } else {
+                                    if (verbData.case_tags && verbData.case_tags.some(tag => tag.toLowerCase().includes(searchTerm))) {
+                                        tagMatch = true;
+                                    }
+                                }
                                 // Search in Präsens conjugations (pre-loaded!)
                                 let praesensMatch = false;
                                 if (allVerbsData[verbName].praesens) {
@@ -2697,7 +2751,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     });
                                 }
 
-                                if (germanMatch || spanishMatch || perfektMatch || praesensMatch || praeteritumMatch || konjunktivMatch) {
+                                if (germanMatch || spanishMatch || perfektMatch || praesensMatch || praeteritumMatch || konjunktivMatch || tagMatch) {
                                     return {
                                         verb: verbName,
                                         data: verbData,
@@ -3106,4 +3160,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- START THE APP ---
     initializeApp();
+    // --- TAG FILTER IMPLEMENTATION ---
+    function generateTagFilters() {
+        const container = document.getElementById('tag-filters-container');
+        if (!container) return;
+
+        container.innerHTML = ''; // Clear existing
+
+        const allTags = new Set();
+        const tagCounts = {};
+
+        // Collect tags
+        Object.values(allVerbsData).forEach(verb => {
+            if (verb.case_tags && Array.isArray(verb.case_tags)) {
+                verb.case_tags.forEach(tag => {
+                    allTags.add(tag);
+                    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+                });
+            }
+        });
+
+        const customOrder = ['akk', 'dat', 'dat_akk', '💡 Reflexive', 'nom', 'gen'];
+        const sortedTags = Array.from(allTags).sort((a, b) => {
+            const indexA = customOrder.indexOf(a);
+            const indexB = customOrder.indexOf(b);
+
+            if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+            if (indexA !== -1) return -1;
+            if (indexB !== -1) return 1;
+            return a.localeCompare(b);
+        });
+
+        sortedTags.forEach(tag => {
+            const pill = document.createElement('div');
+            pill.className = 'tag-filter-pill';
+            pill.textContent = `${tag} (${tagCounts[tag]})`;
+
+            pill.addEventListener('click', () => {
+                const isActive = pill.classList.contains('active');
+                document.querySelectorAll('.tag-filter-pill').forEach(p => p.classList.remove('active'));
+
+                if (!isActive) {
+                    pill.classList.add('active');
+                    if (searchInput) {
+                        searchInput.value = `tag:${tag}`;
+                        performSearch();
+                    }
+                } else {
+                    if (searchInput) {
+                        searchInput.value = '';
+                        performSearch();
+                    }
+                }
+            });
+
+            container.appendChild(pill);
+        });
+    }
 });
