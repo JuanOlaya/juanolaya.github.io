@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Theme data storage
     let currentThemeData = null;
-    let appVersion = Date.now(); // Global version for cache busting (Updated)
+    let appVersion = "1.3_" + Date.now(); // Global version for cache busting (Updated Again)
 
     // --- BACKGROUND LOADING & PROGRESS ---
     let isBackgroundLoading = false;
