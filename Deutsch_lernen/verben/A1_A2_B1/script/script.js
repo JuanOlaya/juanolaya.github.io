@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const levelConfig = {
         'A1_1': { groupCount: 10, displayName: 'A1.1' },
         'A1_2': { groupCount: 8, displayName: 'A1.2' },
-        'A2_1': { groupCount: 9, displayName: 'A2.1' },
+        'A2_1': { groupCount: 10, displayName: 'A2.1' },
         'A2_2': { groupCount: 13, displayName: 'A2.2' },
         'B1_1': { groupCount: 7, displayName: 'B1.1' },
         'B2_1': { groupCount: 1, displayName: 'B2.1' }
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Check for updates (Version Check)
         try {
-            const vRes = await fetch('json/verbs_index.json');
+            const vRes = await fetch('json/verbs_index.json?t=' + Date.now());
             if (vRes.ok) {
                 const vData = await vRes.json();
                 remoteVersion = vData.lastUpdated;
@@ -1574,7 +1574,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const themeData = groupData;
 
         // Populate modal with theme data
-        document.getElementById('theme-modal-german-name').textContent = themeData.germanName;
+        document.getElementById('theme-modal-german-name').textContent = themeData.theme || themeData.germanName;
         document.getElementById('theme-modal-spanish-name').textContent = themeData.spanishName;
         document.getElementById('theme-modal-level').textContent = themeData.level;
         document.getElementById('theme-modal-group').textContent = themeData.group;
@@ -2502,34 +2502,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearSearchBtn = document.getElementById('clear-search');
     const searchCounter = document.getElementById('search-counter');
 
-    // --- SCOPE TOGGLE LISTENERS ---
-    const scopeVerbsRadio = document.getElementById('scope-verbs');
-    const scopeWortfamilieRadio = document.getElementById('scope-wortfamilie');
+    // --- UNIFIED SEARCH LOGIC ---
+    // wortfamilieIndex is defined globally
+    let isLoadingWortfamilie = false;
 
-    if (scopeVerbsRadio && scopeWortfamilieRadio) {
-        scopeVerbsRadio.addEventListener('change', () => {
-            if (scopeVerbsRadio.checked) {
-                searchScope = 'verbs';
-                performSearch();
+    async function loadWortfamilieIndex() {
+        if (wortfamilieIndex) return wortfamilieIndex;
+        if (isLoadingWortfamilie) return null; // Prevent double loading
+
+        isLoadingWortfamilie = true;
+
+        try {
+            const response = await fetch('json/wortfamilie_index.json?t=' + Date.now());
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-        });
-        scopeWortfamilieRadio.addEventListener('change', () => {
-            if (scopeWortfamilieRadio.checked) {
-                searchScope = 'wortfamilie';
-                loadWortfamilieIndex().then(() => performSearch());
-            }
-        });
+            wortfamilieIndex = await response.json();
+            return wortfamilieIndex;
+        } catch (error) {
+            console.error("Failed to load Wortfamilie index:", error);
+            // Fallback or retry logic could go here
+            return null;
+        } finally {
+            isLoadingWortfamilie = false;
+        }
     }
+
+    // Ensure Wortfamilie index is loaded for search
+    loadWortfamilieIndex().catch(err => console.log("Background loading of Wortfamilie index failed", err));
 
     async function performSearch() {
         if (!searchInput) return;
 
         const searchTerm = searchInput.value.trim().toLowerCase();
 
-        // --- SCOPE REDIRECT ---
-        if (searchScope === 'wortfamilie') {
-            return performWortfamilieSearch(searchTerm);
-        }
+        // Unified Search: We now search both Verbs and Wortfamilie
+
+        // 1. Wortfamilie Search (start async)
+        const wortfamiliePromise = loadWortfamilieIndex()
+            .then(() => performWortfamilieSearch(searchTerm, true)) // true = return results only, don't render yet
+            .catch(err => {
+                console.error("Wortfamilie search failed", err);
+                return [];
+            });
 
         // Show/hide clear button
         if (clearSearchBtn) {
@@ -2563,7 +2578,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Search across ALL groups in all levels
-        const matchingVerbs = [];
+
         const searchPromises = [];
 
         Object.keys(verbGroupsByLevel).forEach(levelKey => {
@@ -2703,15 +2718,74 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Wait for all search promises to resolve
-        const searchResults = await Promise.all(searchPromises);
-        const filteredResults = searchResults.filter(result => result !== null);
-        matchingVerbs.push(...filteredResults);
+        // Wait for both searches to complete
+        const [verbResults, wfResults] = await Promise.all([
+            Promise.all(searchPromises).then(results => results.filter(r => r !== null)),
+            wortfamiliePromise
+        ]);
 
-        // Clear current cards and display matching verbs (max 9)
+        // Flatten verb results
+        let finalVerbResults = verbResults.flat();
+
+        // Merge logic:
+        const uniqueVerbsMap = new Map();
+
+        // Add direct verb matches
+        finalVerbResults.forEach(res => {
+            uniqueVerbsMap.set(res.verb, res);
+        });
+
+        // Add Wortfamilie matches
+        // Add Wortfamilie matches
+        const wfPromises = wfResults.map(async wfRes => {
+            if (!uniqueVerbsMap.has(wfRes.verb)) {
+                // We need to fetch the verb data for this result
+                const levelData = findVerbLevelAndGroup(wfRes.verb);
+                if (levelData) {
+                    // Check if data is loaded
+                    if (!allVerbsData[wfRes.verb]) {
+                        try {
+                            const res = await fetch(`json/cards/${wfRes.verb}.json?v=${appVersion || '1'}`);
+                            if (res.ok) {
+                                allVerbsData[wfRes.verb] = await res.json();
+                            }
+                        } catch (e) {
+                            console.warn("Failed to load verb data for search result", wfRes.verb);
+                        }
+                    }
+
+                    if (allVerbsData[wfRes.verb]) {
+                        uniqueVerbsMap.set(wfRes.verb, {
+                            verb: wfRes.verb,
+                            data: allVerbsData[wfRes.verb],
+                            levelKey: levelData.levelKey,
+                            groupIndexInLevel: levelData.groupIndex
+                        });
+                    }
+                }
+            }
+        });
+
+        await Promise.all(wfPromises);
+
+        const matchingVerbs = Array.from(uniqueVerbsMap.values());
+
+        // Clear current cards and display matching verbs
         cardsContainer.innerHTML = '';
-        const maxVisible = 9;
-        const verbsToShow = matchingVerbs.slice(0, maxVisible);
+
+        // Show count
+        if (searchCounter) searchCounter.textContent = matchingVerbs.length.toString();
+        const countEl = document.getElementById('search-results-count');
+        if (matchingVerbs.length > 0) {
+            countEl.textContent = `${matchingVerbs.length} Ergebnis${matchingVerbs.length !== 1 ? 'se' : ''}`;
+            countEl.style.display = 'block';
+        } else {
+            countEl.style.display = 'none';
+            cardsContainer.innerHTML = '<div class="no-results">Keine Ergebnisse gefunden / No results found</div>';
+        }
+
+        const verbsToShow = matchingVerbs; // Show all results, or slice if pagination needed
+
 
         verbsToShow.forEach(match => {
             const verbName = match.verb;
@@ -2864,6 +2938,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update counter
         if (searchCounter) {
+            const maxVisible = 9;
             const totalMatches = matchingVerbs.length;
             if (totalMatches === 0) {
                 searchCounter.textContent = 'Keine Verben gefunden (no se encontraron verbos)';
@@ -2990,6 +3065,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     window.speak = speak;
+
+    // Helper to find verb location (needed for WF matches that weren't in direct search)
+    function findVerbLevelAndGroup(verbName) {
+        for (const levelKey in verbGroupsByLevel) {
+            const groups = verbGroupsByLevel[levelKey];
+            for (let i = 0; i < groups.length; i++) {
+                if (groups[i].verbs.includes(verbName)) {
+                    return { levelKey: levelKey, groupIndex: i };
+                }
+            }
+        }
+        return null;
+    }
+
+    // Modified to support returning results instead of rendering
+    function performWortfamilieSearch(term, returnOnly = false) {
+        if (!wortfamilieIndex) return returnOnly ? [] : null;
+
+        const results = [];
+        const termLower = term.toLowerCase();
+
+        for (const [word, data] of Object.entries(wortfamilieIndex)) {
+            // Check if the word matches (contains) the search term
+            if (word.toLowerCase().includes(termLower)) {
+                // Logic: Found a match in Wortfamilie (e.g. "Bewertung")
+                // data.verbs is an array of verbs associated with this word (e.g. ["bewerten"])
+                data.verbs.forEach(verb => {
+                    results.push({
+                        verb: verb,
+                        matchedWord: word,
+                        type: data.type
+                    });
+                });
+            }
+        }
+
+        if (returnOnly) return results;
+    }
 
     // --- START THE APP ---
     initializeApp();
