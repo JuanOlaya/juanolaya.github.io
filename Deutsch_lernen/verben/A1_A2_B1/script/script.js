@@ -794,7 +794,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateGustarButtonVisibility() {
         // Show gustar button only for A1.1 Group 8 (Modalverben - mögen, gefallen, lieben)
         // Note: Logic allows only one special button at a time for simplicity
-        if (currentLevel === 'A1_1' && currentGroupInLevel === 7) { // 7 is index for 8th group (0-indexed)
+        if (currentLevel === 'A1_1' && currentGroupInLevel === 8) { // 8 is index for 9th group (Modalverben)
             if (gustarButtonContainer) gustarButtonContainer.style.display = 'block';
             if (reflexiveButtonContainer) reflexiveButtonContainer.style.display = 'none';
         } else if (currentLevel === 'A2_1' && currentGroupInLevel === 9) { // 9 is index for 10th group (0-indexed)
