@@ -69,17 +69,17 @@ const verbsDB = {
     'führen': { es: 'liderar/guiar', en: 'to lead' }, // "fuehren" in report
     'wechseln': { es: 'cambiar', en: 'to change' },
     // Reflexive Verben (A2.1 Group 10)
-    'wundern': { type: 'regular', es: 'sorprenderse', en: 'to be surprised', refl: true }, // sich wundern
-    'irren': { type: 'regular', es: 'equivocarse', en: 'to be mistaken', refl: true }, // sich irren
-    'beeilen': { type: 'regular', es: 'darse prisa', en: 'to hurry', refl: true }, // sich beeilen
-    'erkälten': { type: 'regular', es: 'resfriarse', en: 'to catch a cold', refl: true }, // sich erkälten
-    'wohlfühlen': { type: 'separable', prefix: 'wohl', es: 'sentirse bien', en: 'to feel good', refl: true }, // sich wohlfühlen
-    'schämen': { type: 'regular', es: 'avergonzarse', en: 'to be ashamed', refl: true }, // sich schämen
-    'erholen': { type: 'regular', es: 'descansar / recuperarse', en: 'to recover / rest', refl: true }, // sich erholen
-    'langweilen': { type: 'regular', es: 'aburrirse', en: 'to be bored', refl: true }, // sich langweilen
-    'konzentrieren': { type: 'regular', es: 'concentrarse', en: 'to concentrate', refl: true }, // sich konzentrieren
+    'wundern': { type: 'regular', es: 'sorprenderse', en: 'to be surprised', refl: true },
+    'irren': { type: 'regular', es: 'equivocarse', en: 'to be mistaken', refl: true },
+    'beeilen': { type: 'regular', es: 'darse prisa', en: 'to hurry', refl: true },
+    'erkälten': { type: 'regular', es: 'resfriarse', en: 'to catch a cold', refl: true },
+    'wohlfühlen': { type: 'separable', prefix: 'wohl', es: 'sentirse bien', en: 'to feel good', refl: true },
+    'schämen': { type: 'regular', es: 'avergonzarse', en: 'to be ashamed', refl: true },
+    'erholen': { type: 'regular', es: 'descansar / recuperarse', en: 'to recover / rest', refl: true },
+    'langweilen': { type: 'regular', es: 'aburrirse', en: 'to be bored', refl: true },
+    'konzentrieren': { type: 'regular', es: 'concentrarse', en: 'to concentrate', refl: true },
     'kochen': { es: 'cocinar', en: 'to cook' },
-    'backen': { type: 'strong', irregular: true, stem: 'backte', pp: 'gebacken', es: 'hornear', en: 'to bake' }, // backte/buk mixed. 'backte' often regular now. let's stick to regular default or mixed. 
+    'backen': { type: 'strong', irregular: true, stem: 'backte', pp: 'gebacken', es: 'hornear', en: 'to bake' },
     'wiegen': { type: 'strong', irregular: true, stem: 'wog', pp: 'gewogen', es: 'pesar', en: 'to weigh' },
     'räuchern': { es: 'ahumar', en: 'to smoke (food)' },
     'bauen': { es: 'construir', en: 'to build' },
@@ -108,6 +108,7 @@ const verbsDB = {
     'buchstabieren': { es: 'deletrear', en: 'to spell' },
     // 'wählen': duplicate
     'sortieren': { es: 'ordenar/clasificar', en: 'to sort' },
+    'setzen': { es: 'sentar / colocar / poner', en: 'to sit / to place / to set', refl: true },
 
     // A1.1
     'aufwachen': { type: 'separable', prefix: 'auf', aux: 'sein', es: 'despertarse', en: 'to wake up' },
@@ -139,6 +140,11 @@ function generatePraesens(verb, data) {
 
     // Basic endings
     let e = 'e', st = 'st', t = 't', en = 'en';
+
+    // Adjustments for stems ending in el, er (wir/sie/Sie -> n)
+    if (stem.endsWith('el') || stem.endsWith('er')) {
+        en = 'n';
+    }
 
     // Adjustments for stems ending in t, d, m, n
     if (stem.endsWith('t') || stem.endsWith('d') || stem.endsWith('ffn') || stem.endsWith('chn')) {
@@ -341,19 +347,153 @@ async function generateAll() {
         const praesensPath = path.join(basePath, 'praesens', `${fileVerb}.json`);
         if (true || !fs.existsSync(praesensPath)) {
             const p = generatePraesens(genVerb, data);
+            const customReflexiveExamples = {
+                "freuen": {
+                    "ich": { es: "Me alegro.", en: "I am happy." },
+                    "du": { es: "Te alegras.", en: "You are happy." },
+                    "er": { es: "Se alegra.", en: "He is happy." },
+                    "sie": { es: "Se alegra.", en: "She is happy." },
+                    "es": { es: "Se alegra.", en: "It is happy." },
+                    "wir": { es: "Nos alegramos.", en: "We are happy." },
+                    "ihr": { es: "Os alegráis.", en: "You are happy." },
+                    "sie (plural)": { es: "Se alegran.", en: "They are happy." },
+                    "Sie (formal)": { es: "Se alegra.", en: "You are happy." }
+                },
+                "setzen": {
+                    "ich": { es: "Me siento (colocarse).", en: "I sit down." },
+                    "du": { es: "Te sientas.", en: "You sit down." },
+                    "er": { es: "Se sienta.", en: "He sits down." },
+                    "sie": { es: "Se sienta.", en: "She sits down." },
+                    "es": { es: "Se sienta.", en: "It sits down." },
+                    "wir": { es: "Nos sentamos.", en: "We sit down." },
+                    "ihr": { es: "Os sentáis.", en: "You sit down." },
+                    "sie (plural)": { es: "Se sientan.", en: "They sit down." },
+                    "Sie (formal)": { es: "Se sienta.", en: "You sit down." }
+                },
+                "wundern": {
+                    "ich": { es: "Me sorprendo.", en: "I am surprised." },
+                    "du": { es: "Te sorprendes.", en: "You are surprised." },
+                    "er": { es: "Se sorprende.", en: "He is surprised." },
+                    "sie": { es: "Se sorprende.", en: "She is surprised." },
+                    "es": { es: "Se sorprende.", en: "It is surprised." },
+                    "wir": { es: "Nos sorprendemos.", en: "We are surprised." },
+                    "ihr": { es: "Os sorprendéis.", en: "You are surprised." },
+                    "sie (plural)": { es: "Se sorprenden.", en: "They are surprised." },
+                    "Sie (formal)": { es: "Se sorprende.", en: "You are surprised." }
+                },
+                "irren": {
+                    "ich": { es: "Me equivoco.", en: "I am mistaken." },
+                    "du": { es: "Te equivocas.", en: "You are mistaken." },
+                    "er": { es: "Se equivoca.", en: "He is mistaken." },
+                    "sie": { es: "Se equivoca.", en: "She is mistaken." },
+                    "es": { es: "Se equivoca.", en: "It is mistaken." },
+                    "wir": { es: "Nos equivocamos.", en: "We are mistaken." },
+                    "ihr": { es: "Os equivocáis.", en: "You are mistaken." },
+                    "sie (plural)": { es: "Se equivocan.", en: "They are mistaken." },
+                    "Sie (formal)": { es: "Se equivoca.", en: "You are mistaken." }
+                },
+                "beeilen": {
+                    "ich": { es: "Me doy prisa.", en: "I hurry." },
+                    "du": { es: "Te das prisa.", en: "You hurry." },
+                    "er": { es: "Se da prisa.", en: "He hurries." },
+                    "sie": { es: "Se da prisa.", en: "She hurries." },
+                    "es": { es: "Se da prisa.", en: "It hurries." },
+                    "wir": { es: "Nos damos prisa.", en: "We hurry." },
+                    "ihr": { es: "Os dais prisa.", en: "You hurry." },
+                    "sie (plural)": { es: "Se dan prisa.", en: "They hurry." },
+                    "Sie (formal)": { es: "Se da prisa.", en: "You hurry." }
+                },
+                "erkälten": {
+                    "ich": { es: "Me resfrío.", en: "I catch a cold." },
+                    "du": { es: "Te resfrías.", en: "You catch a cold." },
+                    "er": { es: "Se resfría.", en: "He catches a cold." },
+                    "sie": { es: "Se resfría.", en: "She catches a cold." },
+                    "es": { es: "Se resfría.", en: "It catches a cold." },
+                    "wir": { es: "Nos resfriamos.", en: "We catch a cold." },
+                    "ihr": { es: "Os resfriáis.", en: "You catch a cold." },
+                    "sie (plural)": { es: "Se resfrían.", en: "They catch a cold." },
+                    "Sie (formal)": { es: "Se resfría.", en: "You catch a cold." }
+                },
+                "wohlfühlen": {
+                    "ich": { es: "Me siento bien.", en: "I feel good." },
+                    "du": { es: "Te sientes bien.", en: "You feel good." },
+                    "er": { es: "Se siente bien.", en: "He feels good." },
+                    "sie": { es: "Se siente bien.", en: "She feels good." },
+                    "es": { es: "Se siente bien.", en: "It feels good." },
+                    "wir": { es: "Nos sentimos bien.", en: "We feel good." },
+                    "ihr": { es: "Os sentís bien.", en: "You feel good." },
+                    "sie (plural)": { es: "Se sienten bien.", en: "They feel good." },
+                    "Sie (formal)": { es: "Se siente bien.", en: "You feel good." }
+                },
+                "schämen": {
+                    "ich": { es: "Me avergüenzo.", en: "I am ashamed." },
+                    "du": { es: "Te avergüenzas.", en: "You are ashamed." },
+                    "er": { es: "Se avergüenza.", en: "He is ashamed." },
+                    "sie": { es: "Se avergüenza.", en: "She is ashamed." },
+                    "es": { es: "Se avergüenza.", en: "It is ashamed." },
+                    "wir": { es: "Nos avergonzamos.", en: "We are ashamed." },
+                    "ihr": { es: "Os avergonzáis.", en: "You are ashamed." },
+                    "sie (plural)": { es: "Se avergüenzan.", en: "They are ashamed." },
+                    "Sie (formal)": { es: "Se avergüenza.", en: "You are ashamed." }
+                },
+                "erholen": {
+                    "ich": { es: "Me recupero.", en: "I recover." },
+                    "du": { es: "Te recuperas.", en: "You recover." },
+                    "er": { es: "Se recupera.", en: "He recovers." },
+                    "sie": { es: "Se recupera.", en: "She recovers." },
+                    "es": { es: "Se recupera.", en: "It recovers." },
+                    "wir": { es: "Nos recuperamos.", en: "We recover." },
+                    "ihr": { es: "Os recuperáis.", en: "You recover." },
+                    "sie (plural)": { es: "Se recuperan.", en: "They recover." },
+                    "Sie (formal)": { es: "Se recupera.", en: "You recover." }
+                },
+                "langweilen": {
+                    "ich": { es: "Me aburro.", en: "I am bored." },
+                    "du": { es: "Te aburres.", en: "You are bored." },
+                    "er": { es: "Se aburre.", en: "He is bored." },
+                    "sie": { es: "Se aburre.", en: "She is bored." },
+                    "es": { es: "Se aburre.", en: "It is bored." },
+                    "wir": { es: "Nos aburrimos.", en: "We are bored." },
+                    "ihr": { es: "Os aburrís.", en: "You are bored." },
+                    "sie (plural)": { es: "Se aburren.", en: "They are bored." },
+                    "Sie (formal)": { es: "Se aburre.", en: "You are bored." }
+                },
+                "konzentrieren": {
+                    "ich": { es: "Me concentro.", en: "I concentrate." },
+                    "du": { es: "Te concentras.", en: "You concentrate." },
+                    "er": { es: "Se concentra.", en: "He concentrates." },
+                    "sie": { es: "Se concentra.", en: "She concentrates." },
+                    "es": { es: "Se concentra.", en: "It concentrates." },
+                    "wir": { es: "Nos concentramos.", en: "We concentrate." },
+                    "ihr": { es: "Os concentráis.", en: "You concentrate." },
+                    "sie (plural)": { es: "Se concentran.", en: "They concentrate." },
+                    "Sie (formal)": { es: "Se concentra.", en: "You concentrate." }
+                }
+            };
+
+            let examples = {
+                "ich": { "de": `Ich ${p.ich}.`, "es": `Yo ${data.es.split('/')[0]}.`, "en": `I ${data.en.split('/')[0]}.` },
+                "du": { "de": `Du ${p.du}.`, "es": `Tú ${data.es.split('/')[0]}.`, "en": `You ${data.en.split('/')[0]}.` },
+                "er": { "de": `Er ${p.er}.`, "es": `Él ${data.es.split('/')[0]}.`, "en": `He ${data.en.split('/')[0]}.` },
+                "sie": { "de": `Sie ${p.sie}.`, "es": `Ella ${data.es.split('/')[0]}.`, "en": `She ${data.en.split('/')[0]}.` },
+                "es": { "de": `Es ${p.es}.`, "es": `Eso ${data.es.split('/')[0]}.`, "en": `It ${data.en.split('/')[0]}.` },
+                "wir": { "de": `Wir ${p.wir}.`, "es": `Nosotros ${data.es.split('/')[0]}.`, "en": `We ${data.en.split('/')[0]}.` },
+                "ihr": { "de": `Ihr ${p.ihr}.`, "es": `Vosotros ${data.es.split('/')[0]}.`, "en": `You ${data.en.split('/')[0]}.` },
+                "sie (plural)": { "de": `Sie ${p['sie (plural)']}.`, "es": `Ellos ${data.es.split('/')[0]}.`, "en": `They ${data.en.split('/')[0]}.` },
+                "Sie (formal)": { "de": `Sie ${p['Sie (formal)']}.`, "es": `Usted ${data.es.split('/')[0]}.`, "en": `You ${data.en.split('/')[0]}.` }
+            };
+
+            if (customReflexiveExamples[fileVerb]) {
+                const custom = customReflexiveExamples[fileVerb];
+                Object.keys(examples).forEach(key => {
+                    examples[key].es = custom[key].es;
+                    examples[key].en = custom[key].en;
+                });
+            }
+
             const json = {
                 praesens: p,
-                praesens_examples: {
-                    "ich": { "de": `Ich ${p.ich}.`, "es": `Yo ${data.es.split('/')[0]}.`, "en": `I ${data.en.split('/')[0]}.` },
-                    "du": { "de": `Du ${p.du}.`, "es": `Tú ${data.es.split('/')[0]}.`, "en": `You ${data.en.split('/')[0]}.` },
-                    "er": { "de": `Er ${p.er}.`, "es": `Él ${data.es.split('/')[0]}.`, "en": `He ${data.en.split('/')[0]}.` },
-                    "sie": { "de": `Sie ${p.sie}.`, "es": `Ella ${data.es.split('/')[0]}.`, "en": `She ${data.en.split('/')[0]}.` },
-                    "es": { "de": `Es ${p.es}.`, "es": `Eso ${data.es.split('/')[0]}.`, "en": `It ${data.en.split('/')[0]}.` },
-                    "wir": { "de": `Wir ${p.wir}.`, "es": `Nosotros ${data.es.split('/')[0]}.`, "en": `We ${data.en.split('/')[0]}.` },
-                    "ihr": { "de": `Ihr ${p.ihr}.`, "es": `Vosotros ${data.es.split('/')[0]}.`, "en": `You ${data.en.split('/')[0]}.` },
-                    "sie (plural)": { "de": `Sie ${p['sie (plural)']}.`, "es": `Ellos ${data.es.split('/')[0]}.`, "en": `They ${data.en.split('/')[0]}.` },
-                    "Sie (formal)": { "de": `Sie ${p['Sie (formal)']}.`, "es": `Usted ${data.es.split('/')[0]}.`, "en": `You ${data.en.split('/')[0]}.` }
-                }
+                praesens_examples: examples
             };
             fs.writeFileSync(praesensPath, JSON.stringify(json, null, 2));
             console.log(`Created praesens for ${fileVerb}`);
