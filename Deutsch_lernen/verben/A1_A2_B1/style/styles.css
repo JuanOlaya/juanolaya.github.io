@@ -1050,8 +1050,9 @@ body {
     /* Match cards */
     max-width: 550px;
     /* Slightly wider */
-    width: 100%;
+    width: 90%;
     /* Responsive width */
+    box-sizing: border-box;
     max-height: 90vh;
     /* Limit height and allow scrolling */
     overflow-y: auto;
