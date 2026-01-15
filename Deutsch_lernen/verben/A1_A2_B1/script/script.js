@@ -2827,6 +2827,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const matchingVerbs = Array.from(uniqueVerbsMap.values());
 
+        // SORTING LOGIC: Level Priority (A1.1 -> B2.1) then Alphabetical
+        matchingVerbs.sort((a, b) => {
+            const levelIndexA = levelOrder.indexOf(a.levelKey);
+            const levelIndexB = levelOrder.indexOf(b.levelKey);
+
+            // 1. Primary Sort: Level
+            if (levelIndexA !== levelIndexB) {
+                // If one level is unknown (-1), put it last
+                if (levelIndexA === -1) return 1;
+                if (levelIndexB === -1) return -1;
+                return levelIndexA - levelIndexB;
+            }
+
+            // 2. Secondary Sort: Alphabetical
+            return a.verb.localeCompare(b.verb);
+        });
+
         // Clear current cards and display matching verbs
         cardsContainer.innerHTML = '';
 
