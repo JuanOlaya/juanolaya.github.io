@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Theme data storage
     let currentThemeData = null;
-    let appVersion = "1.3_" + Date.now(); // Global version for cache busting (Updated Again)
+    let appVersion = "1.6_" + Date.now(); // Global version for cache busting (Updated for Tag Filters)
 
     // --- BACKGROUND LOADING & PROGRESS ---
     let isBackgroundLoading = false;
@@ -1796,89 +1796,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // ROW 2: Case tags (Dativ, Akkusativ, Intrans, Prep, etc.)
         if (updatedData.case_tags && updatedData.case_tags.length > 0) {
-            const caseRow = document.createElement('div');
-            caseRow.className = 'tags-row case-tags-row';
+            const tagsContainer = document.createElement('div');
+            tagsContainer.className = 'modal-tags-container';
 
-            const tagDisplay = {
-                'dat': '🔴 [+Dat]',
-                'dat_akk': '🔵 [+Dat + Akk]',
-                'akk': '🟢 [+Akk]',
-                'refl': '🟣 [Refl]',
-                'nom': '🟡 [+Nom]',
-                'intrans': '⚪ [Intrans]'
+            const groups = {
+                'Kasus': [],
+                'Reflexivität': [],
+                'Struktur': [],
+                'Präpositionen': []
             };
 
             updatedData.case_tags.forEach(tag => {
-                const tagSpan = document.createElement('span');
-                tagSpan.className = `case-tag case-tag-${tag.replace('_', '-')}`;
-
-                if (tag.startsWith('prep:')) {
-                    const prep = tag.substring(5);
-                    tagSpan.textContent = `⚪ [+Prep: ${prep}]`;
-                    tagSpan.className = 'case-tag case-tag-prep';
-                } else {
-                    tagSpan.textContent = tagDisplay[tag] || tag;
-                }
-
-                tagSpan.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Stop TTS or other events
-                    // Close Modal
-                    const verbModal = document.getElementById('verb-modal');
-                    if (verbModal) verbModal.classList.remove('visible');
-
-                    // Trigger Search
-                    if (searchInput) {
-                        searchInput.value = `tag:${tag}`;
-                        performSearch();
-                    }
-                });
-
-                caseRow.appendChild(tagSpan);
+                if (['Akkusativ', 'Dativ', 'Nominativ', 'Genitiv', 'Intransitive', 'intrans'].includes(tag)) groups['Kasus'].push(tag);
+                else if (tag === 'Reflexive') groups['Reflexivität'].push(tag);
+                else if (['Separable', 'Regular', 'Irregular'].includes(tag)) groups['Struktur'].push(tag);
+                else if (tag.startsWith('Präposition:')) groups['Präpositionen'].push(tag.replace('Präposition: ', ''));
+                else groups['Struktur'].push(tag); // Fallback
             });
 
-            caseTagsContainer.appendChild(caseRow);
+            Object.keys(groups).forEach(category => {
+                if (groups[category].length === 0) return;
+
+                const row = document.createElement('div');
+                row.className = 'tag-row';
+
+                const label = document.createElement('span');
+                label.className = 'tag-category-label';
+                label.textContent = category + ':';
+
+                const tagGroup = document.createElement('div');
+                tagGroup.className = 'tag-group';
+
+                groups[category].forEach(tag => {
+                    const tagSpan = document.createElement('span');
+                    // Create specific class based on tag name, remove special chars
+                    const tagClassSuffix = tag.toLowerCase().split(' ')[0].replace(/[^a-z0-9]/g, '');
+                    tagSpan.className = `modal-tag tag-${tagClassSuffix}`;
+                    tagSpan.textContent = tag;
+
+                    // Add Click-to-Search logic
+                    tagSpan.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const verbModal = document.getElementById('verb-modal');
+                        if (verbModal) verbModal.classList.remove('visible');
+                        if (searchInput) {
+                            searchInput.value = `tag:${tag}`;
+                            performSearch();
+                        }
+                    });
+
+                    tagGroup.appendChild(tagSpan);
+                });
+
+                row.appendChild(label);
+                row.appendChild(tagGroup);
+                tagsContainer.appendChild(row);
+            });
+
+            caseTagsContainer.appendChild(tagsContainer);
         }
 
         // ROW 3: Verb type and notes (Separable/Non-Separable + Notes)
-        if (verbTypesData[verb]) {
-            const typeInfo = verbTypesData[verb];
-            const typeRow = document.createElement('div');
-            typeRow.className = 'tags-row type-tags-row';
 
-            // Add type tag (Separable/Non-Separable)
-            if (typeInfo.type) {
-                const typeTag = document.createElement('span');
-                typeTag.className = 'verb-type-tag';
-
-                if (typeInfo.type === 'Separable') {
-                    typeTag.classList.add('type-separable');
-                    typeTag.textContent = '🔹 Separable';
-                } else if (typeInfo.type === 'Non-Separable') {
-                    typeTag.classList.add('type-non-separable');
-                    typeTag.textContent = '🔸 Non-Separable';
-                }
-
-                typeRow.appendChild(typeTag);
-            }
-
-            // Add notes tag if notes exist
-            if (typeInfo.notes && typeInfo.notes.trim() !== '') {
-                const notesTag = document.createElement('span');
-                notesTag.className = 'verb-notes-tag';
-                notesTag.textContent = `💡 ${typeInfo.notes}`;
-                typeRow.appendChild(notesTag);
-            }
-
-            // Only append the row if it has content
-            if (typeRow.children.length > 0) {
-                // Determine which container to use.
-                // User wants Separable/Notes tags OUTSIDE the header.
-                // We reference extraTagsContainer defined in upper scope.
-                if (extraTagsContainer) {
-                    extraTagsContainer.appendChild(typeRow);
-                }
-            }
-        }
 
         // Render Usage Note (Custom rich text note)
         const usageNoteContainer = document.getElementById('modal-usage-note-container');
@@ -3200,16 +3179,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        const customOrder = ['akk', 'dat', 'dat_akk', '💡 Reflexive', 'nom', 'gen'];
-        const sortedTags = Array.from(allTags).sort((a, b) => {
-            const indexA = customOrder.indexOf(a);
-            const indexB = customOrder.indexOf(b);
+        const customOrder = ['Akkusativ', 'Dativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular'];
+        const whitelistedTags = ['Akkusativ', 'Dativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular', 'Intransitive'];
+        const sortedTags = Array.from(allTags)
+            .filter(tag => whitelistedTags.includes(tag) || tag.startsWith('Präposition:'))
+            .sort((a, b) => {
+                const indexA = customOrder.indexOf(a);
+                const indexB = customOrder.indexOf(b);
 
-            if (indexA !== -1 && indexB !== -1) return indexA - indexB;
-            if (indexA !== -1) return -1;
-            if (indexB !== -1) return 1;
-            return a.localeCompare(b);
-        });
+                if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+                if (indexA !== -1) return -1;
+                if (indexB !== -1) return 1;
+                return a.localeCompare(b);
+            });
 
         sortedTags.forEach(tag => {
             const pill = document.createElement('div');
