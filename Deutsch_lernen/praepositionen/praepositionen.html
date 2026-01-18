@@ -531,7 +531,7 @@
 
             <!-- COLUMNA ACUSATIVO -->
             <div class="column col-acc">
-                <h2>AKKUSATIV</h2>
+                <h2 onclick="speak('Akkusativ')" style="cursor: pointer;" title="Escuchar pronunciación">AKKUSATIV</h2>
                 <ul class="prep-list">
                     <!-- FUDOG ORDER - Toda la palabra coloreada -->
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
@@ -603,7 +603,7 @@
 
             <!-- COLUMNA CENTRAL (WECHSEL - ROSADO) -->
             <div class="column col-wechsel">
-                <h2>WECHSEL</h2>
+                <h2 onclick="speak('Wechsel')" style="cursor: pointer;" title="Escuchar pronunciación">WECHSEL</h2>
                 <p
                     style="text-align:center; color:var(--two-way); margin-top: 0; margin-bottom: 20px; font-weight:500;">
                     Se usan con <strong>Acusativo</strong> (movimiento) O <strong>Dativo</strong> (posición)
@@ -717,7 +717,8 @@
                     <div class="comparison">
                         <!-- Lado Acusativo -->
                         <div class="comp-side comp-acc">
-                            <span class="case-tag" style="background:var(--accusative)">AKKUSATIV</span>
+                            <span class="case-tag" style="background:var(--accusative); cursor: pointer;"
+                                onclick="speak('Akkusativ')">AKKUSATIV</span>
                             <span class="action-icon">🏃‍♂️ ➡ 📦</span>
                             <span class="rule-title" style="color:var(--accusative)">WOHIN?</span>
                             <small>(¿A dónde?)</small>
@@ -729,7 +730,8 @@
 
                         <!-- Lado Dativo -->
                         <div class="comp-side comp-dat">
-                            <span class="case-tag" style="background:var(--dative)">DATIV</span>
+                            <span class="case-tag" style="background:var(--dative); cursor: pointer;"
+                                onclick="speak('Dativ')">DATIV</span>
                             <span class="action-icon">📍🧍‍♂️</span>
                             <span class="rule-title" style="color:var(--dative)">WO?</span>
                             <small>(¿Dónde?)</small>
@@ -743,7 +745,7 @@
 
             <!-- COLUMNA DATIVO -->
             <div class="column col-dat">
-                <h2>DATIV</h2>
+                <h2 onclick="speak('Dativ')" style="cursor: pointer;" title="Escuchar pronunciación">DATIV</h2>
                 <ul class="prep-list">
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
                         <div onclick="speak('ab'); event.stopPropagation()"
@@ -827,9 +829,9 @@
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
-                        <div onclick="speak('zu'); event.stopPropagation()"
+                        <div onclick="speak('zu zum'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
-                            ZU
+                            ZU / ZUM
                         </div>
                         <div onclick="openModal('zu'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
@@ -1131,7 +1133,7 @@
                 desc: 'Indica posesión (sustituye al genitivo en el habla cotidiana) u origen desde un punto/persona.'
             },
             'zu': {
-                title: 'ZU',
+                title: 'ZU / ZUM',
                 type: 'dat',
                 examples: [
                     { de: 'Ich gehe zu der (zur) Schule.', es: 'Voy a la escuela.' },
@@ -1140,7 +1142,7 @@
                     { de: 'Wir fahren zum Bahnhof.', es: 'Vamos a la estación.' },
                     { de: 'Er ist zu Hause.', es: 'Él está en casa.' }
                 ],
-                desc: 'Movimiento hacia una persona, edificio o lugar específico. También para celebraciones.'
+                desc: 'Movimiento hacia una persona, edificio o lugar específico. También para celebraciones.<br><br><strong>Contracciones:</strong><br><strong>zum</strong> = zu + dem<br><strong>zur</strong> = zu der'
             },
 
             // WECHSEL
