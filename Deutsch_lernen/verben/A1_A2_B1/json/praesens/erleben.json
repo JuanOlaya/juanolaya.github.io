@@ -1,40 +1,87 @@
 {
-    "praesens": [
-        {
-            "pronoun": "ich",
-            "verb_conjugation": "erlebe",
-            "example": "Ich erlebe ein Abenteuer.",
-            "strong_verb": false
-        },
-        {
-            "pronoun": "du",
-            "verb_conjugation": "erlebst",
-            "example": "Du erlebst eine Überraschung.",
-            "strong_verb": false
-        },
-        {
-            "pronoun": "er/sie/es",
-            "verb_conjugation": "erlebt",
-            "example": "Er erlebt eine Enttäuschung.",
-            "strong_verb": false
-        },
-        {
-            "pronoun": "wir",
-            "verb_conjugation": "erleben",
-            "example": "Wir erleben eine schöne Zeit.",
-            "strong_verb": false
-        },
-        {
-            "pronoun": "ihr",
-            "verb_conjugation": "erlebt",
-            "example": "Ihr erlebt den Moment.",
-            "strong_verb": false
-        },
-        {
-            "pronoun": "sie/Sie",
-            "verb_conjugation": "erleben",
-            "example": "Sie erleben die Natur.",
-            "strong_verb": false
-        }
-    ]
+  "praesens": [
+    {
+      "pronoun": "ich",
+      "verb_conjugation": "erlebe",
+      "example": "Ich erlebe ein Abenteuer.",
+      "strong_verb": false
+    },
+    {
+      "pronoun": "du",
+      "verb_conjugation": "erlebst",
+      "example": "Du erlebst eine Überraschung.",
+      "strong_verb": false
+    },
+    {
+      "pronoun": "er/sie/es",
+      "verb_conjugation": "erlebt",
+      "example": "Er erlebt eine Enttäuschung.",
+      "strong_verb": false
+    },
+    {
+      "pronoun": "wir",
+      "verb_conjugation": "erleben",
+      "example": "Wir erleben eine schöne Zeit.",
+      "strong_verb": false
+    },
+    {
+      "pronoun": "ihr",
+      "verb_conjugation": "erlebt",
+      "example": "Ihr erlebt den Moment.",
+      "strong_verb": false
+    },
+    {
+      "pronoun": "sie/Sie",
+      "verb_conjugation": "erleben",
+      "example": "Sie erleben die Natur.",
+      "strong_verb": false
+    }
+  ],
+  "praesens_examples": {
+    "ich": {
+      "de": "Ich erlebe viel.",
+      "en": "I experience a lot.",
+      "es": "Vivo muchas cosas."
+    },
+    "du": {
+      "de": "Du erlebst ein Abenteuer.",
+      "en": "You experience an adventure.",
+      "es": "Vives una aventura."
+    },
+    "er": {
+      "de": "Er erlebt eine Überraschung.",
+      "en": "He experiences a surprise.",
+      "es": "Él se lleva una sorpresa."
+    },
+    "sie": {
+      "de": "Sie erlebt Freude.",
+      "en": "She experiences joy.",
+      "es": "Ella siente alegría."
+    },
+    "es": {
+      "de": "Es erlebt eine Renaissance.",
+      "en": "It is experiencing a renaissance.",
+      "es": "Vive un renacimiento."
+    },
+    "wir": {
+      "de": "Wir erleben Geschichte.",
+      "en": "We experience history.",
+      "es": "Vivimos la historia."
+    },
+    "ihr": {
+      "de": "Ihr erlebt Spass.",
+      "en": "You experience fun.",
+      "es": "Os divertís."
+    },
+    "sie (plural)": {
+      "de": "Sie erleben Stress.",
+      "en": "They experience stress.",
+      "es": "Ellos sufren estrés."
+    },
+    "Sie (formal)": {
+      "de": "Sie erleben es live.",
+      "en": "You experience it live.",
+      "es": "Usted lo vive en directo."
+    }
+  }
 }
