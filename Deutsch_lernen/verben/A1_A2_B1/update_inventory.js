@@ -1,0 +1,60 @@
+const fs = require('fs');
+const path = require('path');
+
+const basePath = path.join(__dirname, 'json');
+const indexFilePath = path.join(basePath, 'verbs_index.json');
+const groupsPath = path.join(basePath, 'groups');
+
+const levelConfig = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1', 'B2_1'];
+
+function updateInventory() {
+    console.log('Updating inventory...');
+
+    let allGroups = [];
+    let totalVerbs = 0;
+
+    for (const level of levelConfig) {
+        const levelDir = path.join(groupsPath, level);
+        if (!fs.existsSync(levelDir)) continue;
+
+        const files = fs.readdirSync(levelDir).filter(f => f.endsWith('.json'));
+        // Sort files by number to ensure order, assuming format Level_group_N.json
+        files.sort((a, b) => {
+            const numA = parseInt(a.match(/group_(\d+)/)[1]);
+            const numB = parseInt(b.match(/group_(\d+)/)[1]);
+            return numA - numB;
+        });
+
+        files.forEach(file => {
+            const filePath = path.join(levelDir, file);
+            const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+            const verbCount = content.verbs ? content.verbs.length : 0;
+            const groupNum = parseInt(file.match(/group_(\d+)/)[1]);
+
+            // Format level for display (A1_1 -> A1.1)
+            const displayLevel = level.replace('_', '.');
+
+            allGroups.push({
+                level: displayLevel,
+                verbCount: verbCount,
+                verbs: content.verbs || [],
+                groupNumberPerLevel: groupNum,
+                groupNameGerman: content.germanName || content.theme || "Unbekannt",
+                groupNameSpanish: content.spanishName || ""
+            });
+            totalVerbs += verbCount;
+        });
+    }
+
+    const newIndexData = {
+        lastUpdated: new Date().toISOString(),
+        totalGroups: allGroups.length,
+        totalVerbs: totalVerbs,
+        groups: allGroups
+    };
+
+    fs.writeFileSync(indexFilePath, JSON.stringify(newIndexData, null, 4));
+    console.log(`Inventory updated. Total Groups: ${allGroups.length}, Total Verbs: ${totalVerbs}`);
+}
+
+updateInventory();
