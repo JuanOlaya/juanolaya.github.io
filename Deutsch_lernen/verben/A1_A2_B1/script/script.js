@@ -453,6 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="light-version-header-cell">Infinitiv</div>
             <div class="light-version-header-cell">Perfekt</div>
             <div class="light-version-header-cell">Präteritum</div>
+            <div class="light-version-header-cell">Übersetzung</div>
         `;
         lightContainer.appendChild(headerRow);
 
@@ -465,6 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const infinitiv = verbName;
             const perfekt = getCleanPerfekt(verbData.perfekt);
             const praeteritum = getCleanPraeteritum(verbData.praeteritum);
+            const translation = removeParentheses(verbData.es || '');
 
             // Create row
             const row = document.createElement('div');
@@ -474,6 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="light-version-cell infinitiv">${infinitiv}</div>
                 <div class="light-version-cell perfekt">${perfekt}</div>
                 <div class="light-version-cell praeteritum">${praeteritum}</div>
+                <div class="light-version-cell translation">${translation}</div>
             `;
             lightContainer.appendChild(row);
         });
@@ -536,11 +539,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeVersion = selectedVersionRadio ? selectedVersionRadio.value : 'normal';
 
         if (activeVersion === 'light') {
+            document.body.classList.add('light-version-global-dark');
             renderLightVersion(group);
             updateProgressBar();
             updateLevelNavigationButtons();
             saveProgress();
             return;
+        } else {
+            document.body.classList.remove('light-version-global-dark');
         }
 
         cardsContainer.innerHTML = '';

@@ -11,10 +11,12 @@ if (!fs.existsSync(csvDir)) {
     fs.mkdirSync(csvDir);
 }
 
-const outputPath = path.join(csvDir, 'A1_1_verbs.csv');
-
 function generateCSV() {
-    console.log('Generating CSV for A1.1 verbs...');
+    const targetLevel = process.argv[2] || 'A1.1';
+    const safeInfoLevel = targetLevel.replace('.', '_');
+    const outputPath = path.join(csvDir, `${safeInfoLevel}_verbs.csv`);
+
+    console.log(`Generating CSV for ${targetLevel} verbs...`);
 
     if (!fs.existsSync(indexFilePath)) {
         console.error('Error: verbs_index.json not found!');
@@ -23,12 +25,11 @@ function generateCSV() {
 
     const indexData = JSON.parse(fs.readFileSync(indexFilePath, 'utf8'));
 
-    // Filter for A1.1 groups containing 'A1.1' or matching exact string depending on file format
-    // Based on previous reads, the level key in groups is "A1.1" (string)
-    const targetGroups = indexData.groups.filter(g => g.level === 'A1.1');
+    // Filter for groups matching the target level
+    const targetGroups = indexData.groups.filter(g => g.level === targetLevel);
 
     if (targetGroups.length === 0) {
-        console.log('No groups found for level A1.1.');
+        console.log(`No groups found for level ${targetLevel}.`);
         return;
     }
 
@@ -45,7 +46,7 @@ function generateCSV() {
         csvContent += `\n${group.level}: ${germanName} - ${spanishName},,,\n`;
 
         // Column Headers
-        csvContent += `Infinitive,Perfekt,Präteritum,Spanish Translation\n`;
+        csvContent += `Infinitive,Perfekt,Präteritum,Übersetzung\n`;
 
         for (const verbName of group.verbs) {
             const cardPath = path.join(cardsPath, `${verbName}.json`);
