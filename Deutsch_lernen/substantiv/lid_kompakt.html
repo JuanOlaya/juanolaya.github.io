@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiD: Einbürgerungstest Kompakt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+
+            /* Neon Article Colors */
+            --color-der: #3b82f6;
+            /* Blue */
+            --color-die: #ef4444;
+            /* Red */
+            --color-das: #22c55e;
+            /* Green */
+            --color-pl: #a855f7;
+            /* Purple */
+
+            --modal-overlay: rgba(0, 0, 0, 0.75);
+            --accent-gold: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-color);
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            background: linear-gradient(to right, #facc15, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* GRID LAYOUT - RESPONSIVE */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            padding-bottom: 50px;
+        }
+
+        @media (min-width: 900px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+                align-items: start;
+            }
+        }
+
+        /* Interactive Title Word */
+        .audio-trigger {
+            color: var(--text-main);
+            border-bottom: 2px dashed var(--accent-gold);
+            cursor: pointer;
+            padding-bottom: 2px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .audio-trigger:hover {
+            color: var(--accent-gold);
+            border-bottom-style: solid;
+        }
+
+        .audio-icon-small {
+            font-size: 0.9rem;
+        }
+
+        /* Category Card Styles */
+        .category-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-header {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            /* Interaction Cue */
+            transition: background-color 0.2s;
+        }
+
+        .category-header:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .category-icon {
+            font-size: 1.8rem;
+        }
+
+        .category-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+            color: white;
+            flex-grow: 1;
+        }
+
+        .info-icon-header {
+            font-size: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Table Styles */
+        .word-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .word-table th {
+            text-align: left;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .word-table tr {
+            /* Removed row-wide pointer since interactions are split */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .word-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .word-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+            /* Subtle row hover */
+        }
+
+        .word-table td {
+            padding: 12px 20px;
+            vertical-align: middle;
+        }
+
+        /* Word Cell Styling (German) */
+        .col-word {
+            width: auto;
+            cursor: pointer;
+            /* Shows clickability */
+            transition: background-color 0.2s, color 0.2s;
+            position: relative;
+        }
+
+        .col-word:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Audio visual hint on hover */
+        .col-word:hover::after {
+            content: "🔊";
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .word-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .article-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px currentColor;
+            flex-shrink: 0;
+        }
+
+        .article-text {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 30px;
+            opacity: 0.9;
+            flex-shrink: 0;
+        }
+
+        .noun-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            white-space: nowrap;
+        }
+
+        /* Translation Cell Styling (Spanish) */
+        .col-trans {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.95rem;
+            text-align: right;
+            cursor: pointer;
+            /* Shows clickability */
+            transition: color 0.2s;
+        }
+
+        .col-trans:hover {
+            color: var(--text-main);
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+
+        /* Article Colors */
+        .der .article-text,
+        .der .article-dot {
+            color: var(--color-der);
+        }
+
+        .die .article-text,
+        .die .article-dot {
+            color: var(--color-die);
+        }
+
+        .das .article-text,
+        .das .article-dot {
+            color: var(--color-das);
+        }
+
+        .pl .article-text,
+        .pl .article-dot {
+            color: var(--color-pl);
+        }
+
+
+        /* MODAL STYLES */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--modal-overlay);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 30px 30px 10px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-body {
+            padding: 20px 30px 40px 30px;
+        }
+
+        .modal-emoji {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+        }
+
+        .modal-word-line {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .modal-article {
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .modal-noun {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            text-align: center;
+        }
+
+        .modal-trans {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            font-style: italic;
+            display: block;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal-speaker {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 1.5rem;
+            margin-left: 10px;
+            vertical-align: middle;
+            transition: transform 0.2s;
+        }
+
+        .modal-speaker:hover {
+            transform: scale(1.2);
+        }
+
+        .example-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .ex-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .ex-de {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .ex-es {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-style: italic;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 10;
+        }
+
+        .close-btn:hover {
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .article-text {
+                display: none;
+            }
+
+            .article-dot {
+                width: 12px;
+                height: 12px;
+            }
+
+            .col-trans {
+                display: none;
+            }
+
+            .word-table td {
+                padding: 12px 10px;
+            }
+
+            .noun-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🇩🇪 Leben in Deutschland</h1>
+        <p class="subtitle">Wortschatz-Übersicht für den
+            <span class="audio-trigger" onclick="speak('Einbürgerungstest')">
+                Einbürgerungstest <span class="audio-icon-small">🔊</span>
+            </span>
+        </p>
+    </header>
+
+    <div class="container" id="app-container">
+        <!-- Content will be injected here -->
+    </div>
+
+    <!-- Modal Template -->
+    <div class="modal-overlay" id="detail-modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal()">×</button>
+
+            <div class="modal-header">
+                <span class="modal-emoji" id="m-emoji"></span>
+                <div class="modal-word-line" id="m-header-line">
+                    <span class="modal-article" id="m-art"></span>
+                    <span class="modal-noun" id="m-word"></span>
+                    <span class="modal-speaker" id="m-speaker-icon">🔊</span>
+                </div>
+                <span class="modal-trans" id="m-trans"></span>
+            </div>
+
+            <div class="modal-body">
+                <div class="example-card" id="m-example-card">
+                    <span class="ex-label">Beispiel / Ejemplo</span>
+                    <div class="ex-de" id="m-ex-de"></div>
+                    <div class="ex-es" id="m-ex-es"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const data = [
+            {
+                id: "politik",
+                title: "Politik & Demokratie",
+                title_es: "Política y Democracia",
+                icon: "🏛️",
+                items: [
+                    { art: "der", w: "Bundestag", e: "🏛️", tr: "Parlamento Federal", ex: "Der Bundestag beschließt Gesetze.", ex_es: "El Parlamento aprueba leyes." },
+                    { art: "der", w: "Bundeskanzler", e: "🤵", tr: "Canciller Federal", ex: "Der Bundeskanzler leitet die Regierung.", ex_es: "El Canciller dirige el gobierno." },
+                    { art: "der", w: "Bundespräsident", e: "🇩🇪", tr: "Presidente Federal", ex: "Der Bundespräsident repräsentiert Deutschland.", ex_es: "El Presidente representa a Alemania." },
+                    { art: "die", w: "Demokratie", e: "🗳️", tr: "Democracia", ex: "Wir leben in einer Demokratie.", ex_es: "Vivimos en una democracia." },
+                    { art: "die", w: "Regierung", e: "🏛️", tr: "Gobierno", ex: "Die Regierung plant neue Gesetze.", ex_es: "El gobierno planea nuevas leyes." },
+                    { art: "die", w: "Partei", e: "🚩", tr: "Partido político", ex: "Ich bin Mitglied in einer Partei.", ex_es: "Soy miembro de un partido." },
+                    { art: "die", w: "Koalition", e: "🤝", tr: "Coalición", ex: "Die Parteien bilden eine Koalition.", ex_es: "Los partidos forman una coalición." },
+                    { art: "die", w: "Opposition", e: "🛑", tr: "Oposición", ex: "Die Opposition kontrolliert die Regierung.", ex_es: "La oposición controla al gobierno." },
+                    { art: "die", w: "Mehrheit", e: "📊", tr: "Mayoría", ex: "Für das Gesetz braucht man eine Mehrheit.", ex_es: "Para la ley se necesita una mayoría." },
+                    { art: "die", w: "Minderheit", e: "🤏", tr: "Minoría", ex: "Die Rechte der Minderheit werden geschützt.", ex_es: "Los derechos de la minoría son protegidos." },
+                    { art: "die", w: "Gewaltenteilung", e: "⚖️", tr: "División de poderes", ex: "Gewaltenteilung verhindert Machtmissbrauch.", ex_es: "La división de poderes previene el abuso de poder." },
+                    { art: "die", w: "Wahl", e: "🗳️", tr: "Elección", ex: "Bei der Wahl kann man entscheiden.", ex_es: "En la elección se puede decidir." },
+                    { art: "die", w: "Wählerin", e: "🗳️", tr: "Votante (mujer)", ex: "Die Wählerin gibt ihre Stimme ab.", ex_es: "La votante emite su voto." },
+                    { art: "der", w: "Wähler", e: "🗳️", tr: "Votante (hombre)", ex: "Der Wähler geht zur Wahl.", ex_es: "El votante va a votar." },
+                    { art: "die", w: "Stimme", e: "🗣️", tr: "Voto / Voz", ex: "Meine Stimme zählt.", ex_es: "Mi voto cuenta." },
+                    { art: "die", w: "Stimmabgabe", e: "📩", tr: "Emisión del voto", ex: "Die Stimmabgabe ist geheim.", ex_es: "La emisión del voto es secreta." }
+                ]
+            },
+            {
+                id: "rechte",
+                title: "Rechte & Pflichten",
+                title_es: "Derechos y Deberes",
+                icon: "⚖️",
+                items: [
+                    { art: "die", w: "Würde", e: "🤲", tr: "Dignidad", ex: "Die Würde des Menschen ist unantastbar.", ex_es: "La dignidad del ser humano es inviolable." },
+                    { art: "die", w: "Meinungsfreiheit", e: "🗣️", tr: "Libertad de opinión", ex: "Meinungsfreiheit ist wichtig für die Demokratie.", ex_es: "La libertad de opinión es importante." },
+                    { art: "die", w: "Pressefreiheit", e: "📰", tr: "Libertad de prensa", ex: "Journalisten brauchen Pressefreiheit.", ex_es: "Los periodistas necesitan libertad de prensa." },
+                    { art: "die (pl)", w: "Versammlungsfreiheit", e: "📢", tr: "Lib. de reunión", ex: "Wir haben das Recht auf Versammlungsfreiheit.", ex_es: "Tenemos derecho a la libertad de reunión." },
+                    { art: "die", w: "Glaubensfreiheit", e: "🛐", tr: "Libertad de creencias", ex: "Glaubensfreiheit ist ein Grundrecht.", ex_es: "La libertad de creencias es un derecho fundamental." },
+                    { art: "die", w: "Gewissensfreiheit", e: "💭", tr: "Libertad de conciencia", ex: "Jeder hat Gewissensfreiheit.", ex_es: "Todos tienen libertad de conciencia." },
+                    { art: "die", w: "Gleichberechtigung", e: "⚖️", tr: "Igualdad de derechos", ex: "Frauen und Männer haben Gleichberechtigung.", ex_es: "Mujeres y hombres tienen igualdad de derechos." },
+                    { art: "die (pl)", w: "Grundrechte", e: "📜", tr: "Derechos fundamentales", ex: "Die Grundrechte schützen uns.", ex_es: "Los derechos fundamentales nos protegen." },
+                    { art: "die", w: "Schulpflicht", e: "🎒", tr: "Escolarización obligatoria", ex: "In Deutschland gibt es Schulpflicht.", ex_es: "En Alemania hay escolarización obligatoria." },
+                    { art: "die", w: "Steuer", e: "💸", tr: "Impuesto", ex: "Jeder muss Steuern zahlen.", ex_es: "Todos deben pagar impuestos." },
+                    { art: "die", w: "Sozialversicherung", e: "🏥", tr: "Seguridad social", ex: "Die Sozialversicherung hilft im Notfall.", ex_es: "La seguridad social ayuda en emergencias." }
+                ]
+            },
+            {
+                id: "geschichte",
+                title: "Geschichte & Gesellschaft",
+                title_es: "Historia y Sociedad",
+                icon: "🦅",
+                items: [
+                    { art: "die", w: "Wiedervereinigung", e: "🤝", tr: "Reunificación", ex: "Wir feiern die Wiedervereinigung am 3. Oktober.", ex_es: "Celebramos la reunificación el 3 de octubre." },
+                    { art: "die", w: "Mauer", e: "🧱", tr: "Muro", ex: "Die Mauer teilte Berlin.", ex_es: "El muro dividió Berlín." },
+                    { art: "der", w: "Nationalsozialismus", e: "☠️", tr: "Nacionalsocialismo", ex: "Man muss über den Nationalsozialismus lernen.", ex_es: "Hay que aprender sobre el nacionalsocialismo." },
+                    { art: "der", w: "Weltkrieg", e: "💣", tr: "Guerra Mundial", ex: "Der Zweite Weltkrieg endete 1945.", ex_es: "La Segunda Guerra Mundial terminó en 1945." },
+                    { art: "das", w: "Wirtschaftswunder", e: "📈", tr: "Milagro económico", ex: "Das Wirtschaftswunder brachte Wohlstand.", ex_es: "El milagro económico trajo prosperidad." },
+                    { art: "die", w: "Nationalhymne", e: "🎵", tr: "Himno nacional", ex: "Wir singen die Nationalhymne.", ex_es: "Cantamos el himno nacional." },
+                    { art: "das", w: "Wappen", e: "🦅", tr: "Escudo de armas", ex: "Der Adler ist im Wappen.", ex_es: "El águila está en el escudo." },
+                    { art: "das", w: "Ehrenamt", e: "🤝", tr: "Voluntariado", ex: "Viele Menschen haben ein Ehrenamt.", ex_es: "Muchas personas hacen voluntariado." },
+                    { art: "der", w: "Verein", e: "⚽", tr: "Asociación / Club", ex: "Ich bin im Sportverein.", ex_es: "Estoy en el club deportivo." },
+                    { art: "die", w: "Gemeinde", e: "🏘️", tr: "Municipio", ex: "Die Gemeinde organisiert das Fest.", ex_es: "El municipio organiza la fiesta." },
+                    { art: "der", w: "Mensch", e: "👤", tr: "Ser humano", ex: "Die Würde des Menschen.", ex_es: "La dignidad del ser humano." },
+                    { art: "die", w: "Einwohnerin", e: "🏙️", tr: "Habitante (mujer)", ex: "Sie ist Einwohnerin dieser Stadt.", ex_es: "Ella es habitante de esta ciudad." },
+                    { art: "der", w: "Einwohner", e: "🏙️", tr: "Habitante (hombre)", ex: "Die Einwohner wählen den Bürgermeister.", ex_es: "Los habitantes eligen al alcalde." },
+                    { art: "der", w: "Nachteil", e: "👎", tr: "Desventaja", ex: "Das hat Nachteile.", ex_es: "Eso tiene desventajas." }
+                ]
+            },
+            {
+                id: "justiz",
+                title: "Recht & Justiz",
+                title_es: "Derecho y Justicia",
+                icon: "⚖️",
+                items: [
+                    { art: "das", w: "Gesetz", e: "⚖️", tr: "Ley", ex: "Alle müssen das Gesetz achten.", ex_es: "Todos deben respetar la ley." },
+                    { art: "das", w: "Grundgesetz", e: "📘", tr: "Ley Fundamental", ex: "Das Grundgesetz ist die Verfassung.", ex_es: "La Ley Fundamental es la Constitución." },
+                    { art: "die", w: "Verfassung", e: "📜", tr: "Constitución", ex: "Das Grundgesetz ist die deutsche Verfassung.", ex_es: "La Ley Fundamental es la Constitución alemana." },
+                    { art: "der", w: "Rechtsstaat", e: "🏛️", tr: "Estado de derecho", ex: "Deutschland ist ein Rechtsstaat.", ex_es: "Alemania es un Estado de derecho." },
+                    { art: "die (pl)", w: "Gerichte", e: "👨⚖️", tr: "Tribunales", ex: "Die Gerichte sind unabhängig.", ex_es: "Los tribunales son independientes." },
+                    { art: "das", w: "Gefängnis", e: "⛓️", tr: "Cárcel", ex: "Er ist im Gefängnis.", ex_es: "Él está en la cárcel." }
+                ]
+            }
+        ];
+
+        const app = document.getElementById('app-container');
+
+        // Helper: Get class based on article
+        function getArtClass(art) {
+            art = art.toLowerCase();
+            if (art.includes('der')) return 'der';
+            if (art.includes('die') && !art.includes('pl')) return 'die';
+            if (art.includes('das')) return 'das';
+            return 'pl';
+        }
+
+        // Helper: Clean speech text (remove parenthesis content)
+        function getSpeechText(art, word) {
+            const cleanArt = art.replace(/\(.*\)/, '').trim();
+            return `${cleanArt} ${word}`;
+        }
+
+        // Render Cards
+        data.forEach(cat => {
+            const card = document.createElement('div');
+            card.className = 'category-card';
+
+            // Header
+            const header = document.createElement('div');
+            header.className = 'category-header';
+            header.title = "Klicken für Übersetzung / Click para traducción";
+            header.onclick = () => openCategoryModal(cat); // Attach click listener
+
+            header.innerHTML = `
+                <div class="category-icon">${cat.icon}</div>
+                <h2 class="category-title">${cat.title}</h2>
+                <span class="info-icon-header">ℹ️</span>
+            `;
+
+            // Table
+            const table = document.createElement('table');
+            table.className = 'word-table';
+            table.innerHTML = `<thead>
+                <tr>
+                    <th>Wort (DE)</th>
+                    <th class="col-trans">Übersetzung (ES)</th>
+                </tr>
+            </thead>`;
+
+            const tbody = document.createElement('tbody');
+
+            cat.items.forEach(item => {
+                const artClass = getArtClass(item.art);
+                const tr = document.createElement('tr');
+                tr.className = artClass;
+                // Removed generic row click listener here to split actions
+
+                const speechText = getSpeechText(item.art, item.w);
+
+                // Build cells with distinct click handlers using DOM API for easier closure access
+
+                // 1. German Word Cell - Audio Only
+                const tdWord = document.createElement('td');
+                tdWord.className = 'col-word';
+                tdWord.title = "Hören / Escuchar";
+                tdWord.onclick = (e) => {
+                    e.stopPropagation();
+                    speak(speechText);
+                };
+                tdWord.innerHTML = `
+                    <div class="word-wrapper">
+                        <span class="article-dot"></span>
+                        <span class="article-text">${item.art.split(' ')[0]}</span>
+                        <span class="noun-text">${item.w}</span>
+                    </div>
+                `;
+
+                // 2. Translation Cell - Modal Only
+                const tdTrans = document.createElement('td');
+                tdTrans.className = 'col-trans';
+                tdTrans.title = "Details & Beispiele / Detalles y ejemplos";
+                tdTrans.onclick = (e) => {
+                    e.stopPropagation();
+                    openWordModal(item, artClass);
+                };
+                tdTrans.textContent = item.tr;
+
+                tr.appendChild(tdWord);
+                tr.appendChild(tdTrans);
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(tbody);
+            card.appendChild(header);
+            card.appendChild(table);
+            app.appendChild(card);
+        });
+
+        // Modal Logic
+        const modal = document.getElementById('detail-modal');
+        const mEmoji = document.getElementById('m-emoji');
+        const mArt = document.getElementById('m-art');
+        const mWord = document.getElementById('m-word');
+        const mTrans = document.getElementById('m-trans');
+        const mExDe = document.getElementById('m-ex-de');
+        const mExEs = document.getElementById('m-ex-es');
+        const mHeaderLine = document.getElementById('m-header-line');
+        const mSpeaker = document.getElementById('m-speaker-icon');
+        const mExampleCard = document.getElementById('m-example-card');
+
+        let currentSpeechText = "";
+
+        // Function to open Modal for a specific WORD
+        function openWordModal(item, artClass) {
+            // Populate Data
+            mEmoji.textContent = item.e;
+            mArt.textContent = item.art;
+            mWord.textContent = item.w;
+            mTrans.textContent = item.tr;
+            mExDe.textContent = item.ex;
+            mExEs.textContent = item.ex_es;
+
+            currentSpeechText = getSpeechText(item.art, item.w);
+
+            // Styling & Visibility
+            mArt.style.display = 'inline'; // Show Article
+            mExampleCard.style.display = 'block'; // Show Examples
+            mEmoji.style.filter = ''; // Reset filter logic later
+            mWord.style.color = 'white'; // Default
+
+            // Set dynamic colors based on article
+            mHeaderLine.className = `modal-word-line ${artClass}`;
+            let colorVar;
+            if (artClass === 'der') colorVar = 'var(--color-der)';
+            else if (artClass === 'die') colorVar = 'var(--color-die)';
+            else if (artClass === 'das') colorVar = 'var(--color-das)';
+            else colorVar = 'var(--color-pl)';
+
+            mArt.style.color = colorVar;
+            mEmoji.style.filter = `drop-shadow(0 0 15px ${colorVar})`;
+
+            modal.classList.add('active');
+
+            // REMOVED auto-speak here to keep actions distinct as requested
+            // speak(currentSpeechText); 
+        }
+
+        // Function to open Modal for a CATEGORY
+        function openCategoryModal(cat) {
+            // Populate Data
+            mEmoji.textContent = cat.icon;
+            mWord.textContent = cat.title;
+            mTrans.textContent = cat.title_es;
+
+            currentSpeechText = cat.title;
+
+            // Styling & Visibility
+            mArt.style.display = 'none'; // Hide Article
+            mExampleCard.style.display = 'none'; // Hide Examples
+
+            mHeaderLine.className = `modal-word-line`; // No specific article class
+            mWord.style.color = 'var(--accent-gold)'; // Special color for titles
+            mEmoji.style.filter = 'drop-shadow(0 0 15px rgba(255,255,255,0.3))';
+
+            modal.classList.add('active');
+
+            // Auto-speak Title
+            speak(currentSpeechText);
+        }
+
+        // Speaker click in modal
+        mSpeaker.onclick = (e) => {
+            e.stopPropagation();
+            if (currentSpeechText) speak(currentSpeechText);
+        }
+
+        function closeModal(event) {
+            if (event && event.target !== modal && !event.target.classList.contains('close-btn')) return;
+            modal.classList.remove('active');
+        }
+
+        // TTS
+        function speak(text) {
+            if (!window.speechSynthesis) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+
+            // Attempt to use a German voice specifically if available
+            const voices = window.speechSynthesis.getVoices();
+            const deVoice = voices.find(v => v.lang.includes('de'));
+            if (deVoice) utterance.voice = deVoice;
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Load voices initially to ensure they are available
+        if (window.speechSynthesis) {
+            window.speechSynthesis.getVoices();
+        }
+    </script>
+</body>
+
+</html>
