@@ -43,7 +43,7 @@ function generateCSV() {
         // Group Header Row
         const germanName = group.groupNameGerman || "Unbekannt";
         const spanishName = group.groupNameSpanish || "";
-        csvContent += `\n${group.level}: ${germanName} - ${spanishName},,,\n`;
+        csvContent += `${group.level}: ${germanName} - ${spanishName},,,\n`;
 
         // Column Headers
         csvContent += `Infinitive,Perfekt,Präteritum,Übersetzung\n`;
