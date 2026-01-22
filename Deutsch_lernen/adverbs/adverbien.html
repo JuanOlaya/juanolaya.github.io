@@ -381,7 +381,7 @@
         .group-indicator {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #111827;
+            color: var(--text-main);
             text-align: center;
             min-width: 300px;
         }
@@ -1012,7 +1012,7 @@
             },
             {
                 title: '🤔 Modal-Affirmativ (A2)',
-                description: 'Adverbios de afirmación y opinión',
+                description: 'Adverbios de afirmación',
                 level: 'A2',
                 colorMain: '#10b981',
                 colorPastel: '#d1fae5',
@@ -1118,7 +1118,7 @@
                     // Determine subtitle (e.g., "Teil 1/3")
                     const totalParts = Math.ceil(group.adverbs.length / chunkSize);
                     const currentPart = Math.floor(i / chunkSize) + 1;
-                    const subTitle = totalParts > 1 ? ` (Teil ${currentPart}/${totalParts})` : '';
+                    const subTitle = totalParts > 1 ? ` T${currentPart}` : '';
 
                     slides.push({
                         ...group, // Inherit group props (color, title etc)
@@ -1320,12 +1320,19 @@
             cardWrapper.className = 'card';
             cardWrapper.style.setProperty('--card-main', groupInfo.colorMain || groupInfo.groupColorMain);
             cardWrapper.style.maxWidth = '100%';
-            cardWrapper.style.gridColumn = '1 / -1'; // Spans full width if grid
+            // cardWrapper.style.gridColumn = '1 / -1'; // REMOVED to allow grid layout
             cardWrapper.style.cursor = 'default';
 
             const header = document.createElement('div');
             header.className = 'card-header';
+            header.style.cursor = 'pointer'; // Make header clickable
             header.innerHTML = `<span class="german-word" style="font-size:1.2rem;">${groupInfo.displayTitle || groupInfo.title || groupInfo.groupTitle}</span>`;
+
+            // Add click listener to header
+            header.onclick = (e) => {
+                e.stopPropagation();
+                openGroupModal(groupInfo);
+            };
 
             cardWrapper.appendChild(header);
             cardWrapper.appendChild(table);
@@ -1463,6 +1470,7 @@
         function renderSearchResults() {
             // Update UI
             groupIndicator.textContent = 'Suchergebnisse';
+            document.querySelector('.navigation-wrapper').style.display = 'flex'; // Ensure wrapper is visible (for padding/layout if needed, though empty)
             prevGroupBtn.style.display = 'none';
             nextGroupBtn.style.display = 'none';
 
@@ -1478,17 +1486,34 @@
 
             // Render search results based on current view
             if (currentView === ViewMode.COMPACT) {
-                // Pass a dummy group object if needed or adapt renderTable
-                // renderTable expects adverbs array and group info. 
-                // For search results, we have adverbs with group info embedded.
-                // We'll need a special renderTableForSearch or adapt renderTable.
-                // Let's reuse renderTable but we need to unify group styling or just list them.
-                // Simpler: Just render visual cards for search for now OR adapt.
-                // User asked for compact view. Let's try to render table.
+                // Ensure Container styling for vertical/grid stacking in search
+                cardsContainer.className = 'compact-grid-layout';
+                cardsContainer.style.display = '';
+                cardsContainer.style.overflowX = '';
 
-                // Grouping search results by group would be best, but for now simple table is ok.
-                const dummyGroup = { title: 'Suchergebnisse', colorMain: '#3b82f6' };
-                renderTable(searchResults, dummyGroup);
+                // Group results by original group to preserve detailed cards
+                const resultsByGroup = {};
+                searchResults.forEach(res => {
+                    const gTitle = res.groupTitle; // This was stored during search
+                    if (!resultsByGroup[gTitle]) {
+                        resultsByGroup[gTitle] = {
+                            title: gTitle,
+                            adverbs: [],
+                            // Recover group props
+                            colorMain: res.groupColorMain,
+                            colorPastel: res.groupColorPastel,
+                            badge: res.groupBadge,
+                            description: 'Suchergebnis' // Fallback
+                        };
+                    }
+                    resultsByGroup[gTitle].adverbs.push(res);
+                });
+
+                // Render a table for each group that has results
+                Object.values(resultsByGroup).forEach(groupObj => {
+                    renderTable(groupObj.adverbs, groupObj);
+                });
+
             } else {
                 renderCards(searchResults, { title: 'Suchergebnisse', colorMain: '#3b82f6' });
             }
@@ -1503,7 +1528,8 @@
             searchInput.value = '';
             searchResultsInfo.textContent = '';
             clearSearchBtn.classList.remove('visible');
-            prevGroupBtn.style.display = '';
+            document.querySelector('.navigation-wrapper').style.display = 'flex'; // Ensure wrapper is visible
+            prevGroupBtn.style.display = ''; // Reset to default (block/inline)
             nextGroupBtn.style.display = '';
             renderContent();
         }
@@ -1590,11 +1616,53 @@
             // Show modal
             adverbModal.classList.add('visible'); // Use visible class instead of active
             document.body.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Modal for Group Title (shows description)
+        function openGroupModal(group) {
+            // Set modal content
+            // Use group emoji if present in title string, or generic if none found (but actually adverbs have individual emojis)
+            // The user wants "translation to spanish". The group.description contains the Spanish description.
+            // Using a generic emoji or parsing from title if needed.
+
+            modalEmoji.textContent = 'ℹ️'; // Generic info emoji or maybe parse from title
+            modalWord.textContent = group.title || group.displayTitle;
+            modalTranslation.textContent = group.description || '';
+
+            modalBadge.textContent = group.badge || group.groupBadge;
+            document.querySelector('.modal-header').style.backgroundColor = group.colorMain || group.groupColorMain;
+
+            // Hide specific adverb fields
+            modalExampleDe.textContent = '';
+            modalExampleEs.textContent = '';
+            document.querySelector('.modal-section-title').style.display = 'none'; // Hide "Example" label
+            document.querySelector('.modal-example').style.display = 'none';
+            modalNote.style.display = 'none';
+
+            // Clear TTS click handlers (optional, or make title speakable if desired)
+            modalWord.onclick = null;
+            modalWord.style.cursor = 'default';
+            modalWord.title = '';
+
+            modalEmoji.onclick = null;
+            modalEmoji.style.cursor = 'default';
+
+            // Show modal
+            adverbModal.classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Restore modal defaults on close (helper function)
+        function resetModalState() {
+            document.querySelector('.modal-section-title').style.display = '';
+            document.querySelector('.modal-example').style.display = '';
         }
 
         function closeModal() {
             adverbModal.classList.remove('visible');
             document.body.style.overflow = '';
+            resetModalState(); // Reset visibility of sections
         }
 
         // Modal event listeners
