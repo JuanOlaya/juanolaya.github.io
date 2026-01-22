@@ -399,19 +399,16 @@
         /* Compact View Grid Layout */
         .compact-grid-layout {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
             width: 100%;
-            max-width: 1400px;
+            max-width: 1600px;
+            /* Increased max-width for 4 columns */
             padding-bottom: 60px;
+            align-items: start;
         }
 
-        @media (min-width: 900px) {
-            .compact-grid-layout {
-                grid-template-columns: repeat(2, 1fr);
-                align-items: start;
-            }
-        }
+        /* Removed specific media query in favor of auto-fill */
 
         /* Card Styles - Updated to match Adjektive */
         .card {
@@ -1185,9 +1182,9 @@
                 cardsContainer.style.display = '';
                 cardsContainer.style.overflowX = '';
 
-                // Render all groups
-                adverbGroups.forEach(group => {
-                    renderTable(group.adverbs, group);
+                // Render all slides (chunks of 6)
+                slides.forEach(slide => {
+                    renderTable(slide.adverbs, slide);
                 });
 
             } else {
