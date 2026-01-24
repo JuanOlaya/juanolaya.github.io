@@ -33,12 +33,23 @@
 
                     <div class="controls-container">
                         <div class="search-container">
-                            <input type="text" id="verb-search" class="search-input" placeholder="1%">
+                            <input type="text" id="verb-search" class="search-input" placeholder="Suchen... (buscar)">
                             <button id="clear-search" class="clear-search-btn" title="Clear search">×</button>
                         </div>
 
+                        <div class="view-switcher">
+                            <input type="radio" id="view-normal" name="card-version" value="normal">
+                            <label for="view-normal" title="Standard">Normal</label>
 
+                            <input type="radio" id="view-leicht" name="card-version" value="light">
+                            <label for="view-leicht" title="Druckfreundlich">Leicht</label>
 
+                            <input type="radio" id="view-niedlich" name="card-version" value="niedlich">
+                            <label for="view-niedlich" title="Verspielt / Bunt">Niedlich</label>
+
+                            <input type="radio" id="view-compact" name="card-version" value="compact" checked>
+                            <label for="view-compact" title="Kompakte Karten">Kompakt</label>
+                        </div>
                     </div>
                     <div id="tag-filters-container" class="tag-filters-container">
                         <!-- Tags will be generated here -->

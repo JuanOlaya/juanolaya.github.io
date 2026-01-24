@@ -438,9 +438,161 @@ document.addEventListener('DOMContentLoaded', () => {
         return cleaned;
     }
 
+    // --- KOMPAKT VERSION RENDER FUNCTION (Chunked Grid) ---
+    function renderCompactVersion(group) {
+        cardsContainer.innerHTML = '';
+        document.body.classList.add('compact-view');
+        document.body.classList.remove('light-version-global-dark');
+
+        // Chunk verbs into groups of 6
+        const chunkSize = 6;
+        const chunks = [];
+        for (let i = 0; i < group.verbs.length; i += chunkSize) {
+            chunks.push(group.verbs.slice(i, i + chunkSize));
+        }
+
+        chunks.forEach((chunk, index) => {
+            const chunkCard = document.createElement('div');
+            chunkCard.className = 'kompakt-chunk-card';
+
+            // Add a sub-header or just rely on the grid
+            // chunkCard.innerHTML = `<div class="chunk-header">Teil ${index + 1}</div>`; 
+
+            const grid = document.createElement('div');
+            grid.className = 'kompakt-chunk-grid';
+
+            chunk.forEach(verbName => {
+                const verbData = allVerbsData[verbName];
+                if (!verbData) return;
+
+                const cell = document.createElement('div');
+                cell.className = 'kompakt-verb-cell';
+                cell.onclick = () => openModalForVerb(verbName);
+
+                const translation = removeParentheses(verbData.es || '');
+
+                cell.innerHTML = `
+                    <div class="kompakt-verb-word">${verbName}</div>
+                    <div class="kompakt-verb-trans">${translation}</div>
+                `;
+                grid.appendChild(cell);
+            });
+
+            chunkCard.appendChild(grid);
+            cardsContainer.appendChild(chunkCard);
+        });
+
+        // Update indicators
+        updateIndicatorsForView(group);
+    }
+
+    // Helper to update indicators (shared between Light and Compact)
+    function updateIndicatorsForView(group) {
+        const displayLevel = levelConfig[currentLevel].displayName;
+        levelIndicator.textContent = displayLevel;
+        levelIndicator.className = 'level-indicator';
+        if (displayLevel === 'A1.1') levelIndicator.classList.add('level-a1-1');
+        else if (displayLevel === 'A1.2') levelIndicator.classList.add('level-a1-2');
+        else if (displayLevel === 'A2.1') levelIndicator.classList.add('level-a2-1');
+        else if (displayLevel === 'A2.2') levelIndicator.classList.add('level-a2-2');
+        else if (displayLevel === 'B1.1') levelIndicator.classList.add('level-b1-1');
+
+        const themeName = group.theme || 'Gruppe';
+        groupThemeIndicator.textContent = themeName;
+
+        const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
+        const themeNameForGroupIndicator = group.theme ? ` - ${group.theme}` : '';
+        groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}${themeNameForGroupIndicator}`;
+        prevGroupBtn.disabled = currentGroupInLevel === 0 && currentLevel === levelOrder[0];
+        nextGroupBtn.disabled = currentGroupInLevel === totalGroupsInLevel - 1 && currentLevel === levelOrder[levelOrder.length - 1];
+    }
+
+    // --- NIEDLICH (CUTE) VERSION RENDER FUNCTION ---
+    function renderNiedlichVersion(group) {
+        cardsContainer.innerHTML = '';
+        document.body.classList.remove('compact-view');
+        document.body.classList.remove('light-version-global-dark');
+
+        // Check English toggle state
+        const enSwitch = document.getElementById('en-switch');
+        const showEnglish = enSwitch ? enSwitch.checked : false;
+
+        const cardsHTML = group.verbs.map(verbName => {
+            const verbData = allVerbsData[verbName];
+            if (!verbData) return '';
+
+            // Header info: Verb + Translation (No Emoji)
+            const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
+            const esTranslation = verbData.es || '';
+            const enTranslation = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
+
+            // Tag Logic (Moved to Body)
+            let tagsHTML = '';
+            // Only keeping critical tags for header if desired, or all tags
+            if (verbData.case_tags) {
+                const visibleTags = verbData.case_tags.filter(t => !t.startsWith('Präposition:'));
+                tagsHTML = visibleTags.map(tag => `<span class="verb-tag">${tag}</span>`).join('');
+            }
+
+            // New Structure: Header (Word + Translation), Body (Tags Centered), No Emoji
+            return `
+            <div class="word-item" onclick="openModalForVerb('${verbName}')">
+                <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer; flex-direction: column; gap: 5px;">
+                    <span class="german-word" style="font-size: 1.5rem;">${verbName} ${irregularMark}</span>
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
+                        <span class="spanish-translation" style="font-size: 1.1rem; color: white; font-style: italic;">${esTranslation}</span>
+                        ${showEnglish ? `<span class="english-translation" style="font-size: 1.1rem; color: white; font-weight: 600;">${enTranslation}</span>` : ''}
+                    </div>
+                </div>
+                <div class="card-body niedlich-card-body">
+                    <div class="german-word-container" style="justify-content:center; width: 100%; flex-wrap: wrap; gap: 8px;">
+                        ${tagsHTML}
+                    </div>
+                </div>
+            </div>`;
+        }).join('');
+
+        cardsContainer.innerHTML = cardsHTML;
+        updateIndicatorsForView(group);
+        // No hover listeners needed for this simplified view as text is removed
+    }
+
+    // --- NORMAL VERSION RENDER FUNCTION ---
+    function renderNormalVersion(group) {
+        cardsContainer.innerHTML = '';
+        document.body.classList.remove('compact-view');
+        document.body.classList.remove('light-version-global-dark');
+
+        const cardsHTML = group.verbs.map(verbName => {
+            const verbData = allVerbsData[verbName];
+            if (!verbData) return '';
+
+            const translation = removeParentheses(verbData.es || '');
+            const irregular = verbData.irregularPraesens ? '*' : '';
+
+            const emoji = verbData.emoji || '📝';
+
+            // Cleaner, simpler card with header and emoji
+            return `
+            <div class="card normal-card" onclick="openModalForVerb('${verbName}')">
+                <div class="normal-card-header">
+                     <span class="normal-emoji">${emoji}</span>
+                     <h3 class="normal-german">${verbName}${irregular}</h3>
+                </div>
+                <div class="normal-card-content">
+                     <p class="normal-spanish">${translation}</p>
+                </div>
+            </div>`;
+        }).join('');
+
+        cardsContainer.innerHTML = cardsHTML;
+        updateIndicatorsForView(group);
+    }
+
     // --- LIGHT VERSION RENDER FUNCTION ---
     function renderLightVersion(group) {
         cardsContainer.innerHTML = '';
+        document.body.classList.remove('compact-view');
 
         // Create light version container
         const lightContainer = document.createElement('div');
@@ -482,26 +634,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         cardsContainer.appendChild(lightContainer);
-
-        // Update level and group indicators
-        const displayLevel = levelConfig[currentLevel].displayName;
-        levelIndicator.textContent = displayLevel;
-        levelIndicator.className = 'level-indicator';
-        if (displayLevel === 'A1.1') levelIndicator.classList.add('level-a1-1');
-        else if (displayLevel === 'A1.2') levelIndicator.classList.add('level-a1-2');
-        else if (displayLevel === 'A2.1') levelIndicator.classList.add('level-a2-1');
-        else if (displayLevel === 'A2.2') levelIndicator.classList.add('level-a2-2');
-        else if (displayLevel === 'B1.1') levelIndicator.classList.add('level-b1-1');
-
-        // Update group theme indicator
-        const themeName = group.theme || 'Gruppe';
-        groupThemeIndicator.textContent = themeName;
-
-        const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
-        const themeNameForGroupIndicator = group.theme ? ` - ${group.theme}` : '';
-        groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}${themeNameForGroupIndicator}`;
-        prevGroupBtn.disabled = currentGroupInLevel === 0 && currentLevel === levelOrder[0];
-        nextGroupBtn.disabled = currentGroupInLevel === totalGroupsInLevel - 1 && currentLevel === levelOrder[levelOrder.length - 1];
+        updateIndicatorsForView(group);
     }
 
     // --- UPDATED RENDER FUNCTION ---
@@ -536,202 +669,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Check which version is active
         const selectedVersionRadio = document.querySelector('input[name="card-version"]:checked');
-        const activeVersion = selectedVersionRadio ? selectedVersionRadio.value : 'normal';
+        const activeVersion = selectedVersionRadio ? selectedVersionRadio.value : 'compact';
 
-        if (activeVersion === 'light') {
+        if (activeVersion === 'compact') {
+            renderCompactVersion(group);
+        } else if (activeVersion === 'niedlich') {
+            renderNiedlichVersion(group);
+        } else if (activeVersion === 'normal') {
+            renderNormalVersion(group);
+        } else if (activeVersion === 'light') {
             document.body.classList.add('light-version-global-dark');
             renderLightVersion(group);
-            updateProgressBar();
-            updateLevelNavigationButtons();
-            saveProgress();
-            return;
         } else {
-            document.body.classList.remove('light-version-global-dark');
+            // Default to Kompakt if match fails, or Niedlich? User said Default Kompakt.
+            renderCompactVersion(group);
         }
 
-        cardsContainer.innerHTML = '';
-        const cardsHTML = group.verbs.map(verbName => {
-            const verbData = allVerbsData[verbName];
-            if (!verbData) return '';
-            const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
-
-            // Remove parentheses from translations (except main translation)
-            const esTranslation = verbData.es || '';
-            const esPerfektTranslation = removeParentheses(verbData.es_perfekt || '');
-            const esPraeteritumTranslation = removeParentheses(verbData.es_praeteritum || '');
-
-            // Prepare German perfekt with short (participle only) and full versions
-            let germanPerfektShort = verbData.perfekt || '---';
-            let germanPerfektFull = verbData.perfekt || '---';
-            if (verbData.perfekt && typeof verbData.perfekt === 'string' && verbData.perfekt !== '---') {
-                const germanParts = verbData.perfekt.split(' ');
-                if (germanParts.length >= 2) {
-                    germanPerfektShort = germanParts.slice(1).join(' '); // participle only
-                    germanPerfektFull = verbData.perfekt; // full: ist gegangen
-                }
-            }
-
-            // Prepare Spanish perfekt with short (participle only) and full versions
-            let spanishPerfektShort = esPerfektTranslation;
-            let spanishPerfektFull = esPerfektTranslation;
-            if (esPerfektTranslation && typeof esPerfektTranslation === 'string') {
-                const spanishParts = esPerfektTranslation.split(' ');
-                if (spanishParts.length >= 2) {
-                    spanishPerfektShort = spanishParts.slice(1).join(' '); // participle only
-                    spanishPerfektFull = esPerfektTranslation; // full: he ido
-                }
-            }
-
-            // Prepare Präteritum with short (verb only) and full versions
-            let germanPraeteritumShort = verbData.praeteritum || '---';
-            let germanPraeteritumFull = verbData.praeteritum || '---';
-            if (verbData.praeteritum && verbData.praeteritum !== '---') {
-                const germanPraeteritumParts = verbData.praeteritum.split(' ');
-                if (germanPraeteritumParts.length >= 2) {
-                    germanPraeteritumShort = germanPraeteritumParts.slice(1).join(' '); // verb only
-                    germanPraeteritumFull = verbData.praeteritum; // full: er/sie/es machte
-                }
-            }
-
-            // Prepare Spanish präteritum with short (verb only) and full versions
-            let spanishPraeteritumShort = esPraeteritumTranslation;
-            let spanishPraeteritumFull = esPraeteritumTranslation;
-            if (esPraeteritumTranslation) {
-                const spanishPraeteritumParts = esPraeteritumTranslation.split(' ');
-                if (spanishPraeteritumParts.length >= 2) {
-                    spanishPraeteritumShort = spanishPraeteritumParts.slice(1).join(' '); // verb only
-                    spanishPraeteritumFull = esPraeteritumTranslation; // full: él/ella hizo
-                }
-            }
-
-            // Prepare Konjunktiv II (only for specific verbs)
-            let germanKonjunktivShort = '';
-            let germanKonjunktivFull = '';
-            let spanishKonjunktivShort = '';
-            let spanishKonjunktivFull = '';
-            let konjunktivHTML = '';
-
-            if (konjunktivVerbs.includes(verbName) && verbData.konjunktiv_ii) {
-                // Use the "er_sie_es" form for display
-                germanKonjunktivShort = verbData.konjunktiv_ii.er_sie_es || '---';
-                germanKonjunktivFull = `er/sie/es ${germanKonjunktivShort}`;
-
-                // Spanish translation for Konjunktiv II
-                const konjunktivTranslations = {
-                    'sein': 'él/ella sería',
-                    'haben': 'él/ella tendría',
-                    'werden': 'él/ella se convertiría',
-                    'dürfen': 'él/ella podría (permiso)',
-                    'müssen': 'él/ella debería',
-                    'wollen': 'él/ella querría',
-                    'sollen': 'él/ella debería',
-                    'mögen': 'él/ella gustaría',
-                    'können': 'él/ella podría'
-                };
-                spanishKonjunktivFull = konjunktivTranslations[verbName] || '---';
-                spanishKonjunktivShort = spanishKonjunktivFull.split(' ').slice(1).join(' ');
-
-                konjunktivHTML = `
-                    <span class="german-konjunktiv konjunktiv-text" data-form="konjunktiv" data-short="${germanKonjunktivShort}" data-full="${germanKonjunktivFull}">${germanKonjunktivShort}</span>
-                    <span class="spanish-konjunktiv konjunktiv-text" data-form="translation konjunktiv" data-short="${spanishKonjunktivShort}" data-full="${spanishKonjunktivFull}">${spanishKonjunktivShort}</span>
-                `;
-            }
-
-            // Generate tags HTML
-            // Generate tags HTML
-            let tagsHTML = '';
-            let displayTags = verbData.tags ? [...verbData.tags] : [];
-
-            // Add theme as tag if present and not duplicate
-            if (verbData.theme && !displayTags.includes(verbData.theme)) {
-                displayTags.push(verbData.theme);
-            }
-
-            if (displayTags.length > 0) {
-                tagsHTML = displayTags.map(tag => `<span class="verb-tag">${tag}</span>`).join('');
-            }
-
-            // Generate case tags HTML
-            let caseTagsHTML = '';
-            if (verbData.case_tags && verbData.case_tags.length > 0) {
-                caseTagsHTML = '<div class="case-tags">' + verbData.case_tags.map(tag => {
-                    const tagDisplay = {
-                        'dat': '🔴 [+Dat]',
-                        'dat_akk': '🔵 [+Dat + Akk]',
-                        'akk': '🟢 [+Akk]',
-                        'refl': '🟣 [Refl]',
-                        'nom': '🟡 [+Nom]',
-                        'intrans': '⚪ [Intrans]'
-                    };
-
-                    // Handle prep tags with specific prepositions
-                    if (tag.startsWith('prep:')) {
-                        const prep = tag.substring(5);
-                        return `<span class="case-tag case-tag-prep">⚪ [+Prep: ${prep}]</span>`;
-                    }
-
-                    const display = tagDisplay[tag] || tag;
-                    const className = `case-tag case-tag-${tag.replace('_', '-')}`;
-                    return `<span class="${className}">${display}</span>`;
-                }).join(' ') + '</div>';
-            }
-
-            const cardHTML = `
-                <div class="word-item" onclick="openModalForVerb('${verbName}')">
-                    <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">
-                        <span class="german-word">${verbName}</span>
-                        <span class="spanish-translation" data-form="translation">${esTranslation}</span>
-                        <div class="icon-floating"><span class="three-d-emoji">${verbData.emoji || '❓'}</span></div>
-                    </div>
-                    <div class="card-body">
-                        <div class="text-container perfekt-hover-container">
-                            <div class="german-word-container">
-                                ${tagsHTML}
-                                ${caseTagsHTML}
-                            </div>
-                            <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
-                            <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
-                            <span class="german-praeteritum praeteritum-text" data-form="praeteritum" data-short="${germanPraeteritumShort}" data-full="${germanPraeteritumFull}">${germanPraeteritumShort}</span>
-                            <span class="spanish-praeteritum praeteritum-text" data-form="translation praeteritum" data-short="${spanishPraeteritumShort}" data-full="${spanishPraeteritumFull}">${spanishPraeteritumShort}</span>
-                            ${konjunktivHTML}
-                        </div>
-                        <div class="cute-translations">
-                            <div class="cute-translation-es">${esTranslation}</div>
-                            <div class="cute-translation-en">${(verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim()}</div>
-                        </div>
-                    </div>
-                </div>`;
-            return cardHTML;
-        }).join('');
-
-        cardsContainer.innerHTML = cardsHTML;
-
-        const displayLevel = levelConfig[currentLevel].displayName;
-        levelIndicator.textContent = displayLevel;
-        levelIndicator.className = 'level-indicator'; // Reset classes
-        if (displayLevel === 'A1.1') levelIndicator.classList.add('level-a1-1');
-        else if (displayLevel === 'A1.2') levelIndicator.classList.add('level-a1-2');
-        else if (displayLevel === 'A2.1') levelIndicator.classList.add('level-a2-1');
-        else if (displayLevel === 'A2.2') levelIndicator.classList.add('level-a2-2');
-        else if (displayLevel === 'B1.1') levelIndicator.classList.add('level-b1-1');
-        else if (displayLevel === 'B2.1') levelIndicator.classList.add('level-b2-1');
-
-        // Update group theme indicator
-        const themeName = group.theme || 'Gruppe';
-        groupThemeIndicator.textContent = themeName;
-
-        const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
-        const themeNameForGroupIndicator = group.theme ? ` - ${group.theme}` : '';
-        groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}${themeNameForGroupIndicator}`;
-        prevGroupBtn.disabled = currentGroupInLevel === 0 && currentLevel === levelOrder[0];
-        nextGroupBtn.disabled = currentGroupInLevel === totalGroupsInLevel - 1 && currentLevel === levelOrder[levelOrder.length - 1];
+        // Common post-render steps
         updateProgressBar();
         updateLevelNavigationButtons();
         saveProgress();
-
-        // Setup hover listeners for perfekt and präteritum forms
-        setupHoverListeners();
+        return; // Important to return to avoid running the old default code below
     }
+
+
 
     function setupHoverListeners() {
         const containers = document.querySelectorAll('.perfekt-hover-container');
@@ -1146,14 +1107,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         const esTranslation = removeParentheses(verbData.es || '');
                         const cardHTML = `
-                            <div class="word-item peek-card">
-                                <span class="emoji">${verbData.emoji || '❓'}</span>
-                                <div class="text-container">
-                                    <span class="german-word">${verbName}</span>
-                                    <span class="spanish-translation">${esTranslation}</span>
-                                </div>
+                        <div class="word-item peek-card">
+                            <span class="emoji">${verbData.emoji || '❓'}</span>
+                            <div class="text-container">
+                                <span class="german-word">${verbName}</span>
+                                <span class="spanish-translation">${esTranslation}</span>
                             </div>
-                        `;
+                        </div>
+                    `;
                         peekContainer.innerHTML += cardHTML;
                     }
 
@@ -2928,9 +2889,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 spanishKonjunktivShort = spanishKonjunktivFull.split(' ').slice(1).join(' ');
 
                 konjunktivHTML = `
-                    <span class="german-konjunktiv konjunktiv-text" data-form="konjunktiv" data-short="${germanKonjunktivShort}" data-full="${germanKonjunktivFull}">${germanKonjunktivShort}</span>
-                    <span class="spanish-konjunktiv konjunktiv-text" data-form="translation konjunktiv" data-short="${spanishKonjunktivShort}" data-full="${spanishKonjunktivFull}">${spanishKonjunktivShort}</span>
-                `;
+                <span class="german-konjunktiv konjunktiv-text" data-form="konjunktiv" data-short="${germanKonjunktivShort}" data-full="${germanKonjunktivFull}">${germanKonjunktivShort}</span>
+                <span class="spanish-konjunktiv konjunktiv-text" data-form="translation konjunktiv" data-short="${spanishKonjunktivShort}" data-full="${spanishKonjunktivFull}">${spanishKonjunktivShort}</span>
+            `;
             }
 
             // Generate tags HTML
@@ -2965,30 +2926,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const cardHTML = `
-                <div class="word-item" onclick="openModalForVerb('${verbName}')">
-                    <div class="card-header">
-                        <span class="german-word">${verbName}</span>
-                        <span class="spanish-translation" data-form="translation">${esTranslation}</span>
-                        <div class="icon-floating">${verbData.emoji || '❓'}</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="text-container perfekt-hover-container">
-                            <div class="german-word-container">
-                                ${tagsHTML}
-                                ${caseTagsHTML}
-                            </div>
-                            <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
-                            <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
-                            <span class="german-praeteritum praeteritum-text" data-form="praeteritum" data-short="${germanPraeteritumShort}" data-full="${germanPraeteritumFull}">${germanPraeteritumShort}</span>
-                            <span class="spanish-praeteritum praeteritum-text" data-form="translation praeteritum" data-short="${spanishPraeteritumShort}" data-full="${spanishPraeteritumFull}">${spanishPraeteritumShort}</span>
-                            ${konjunktivHTML}
+            <div class="word-item" onclick="openModalForVerb('${verbName}')">
+                <div class="card-header">
+                    <span class="german-word">${verbName}</span>
+                    <span class="spanish-translation" data-form="translation">${esTranslation}</span>
+                    <div class="icon-floating">${verbData.emoji || '❓'}</div>
+                </div>
+                <div class="card-body">
+                    <div class="text-container perfekt-hover-container">
+                        <div class="german-word-container">
+                            ${tagsHTML}
+                            ${caseTagsHTML}
                         </div>
-                        <div class="cute-translations">
-                            <div class="cute-translation-es">${esTranslation}</div>
-                            <div class="cute-translation-en">${(verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim()}</div>
-                        </div>
+                        <span class="german-past perfekt-text" data-form="perfekt" data-short="${germanPerfektShort}" data-full="${germanPerfektFull}">${germanPerfektShort}</span>
+                        <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShort}</span>
+                        <span class="german-praeteritum praeteritum-text" data-form="praeteritum" data-short="${germanPraeteritumShort}" data-full="${germanPraeteritumFull}">${germanPraeteritumShort}</span>
+                        <span class="spanish-praeteritum praeteritum-text" data-form="translation praeteritum" data-short="${spanishPraeteritumShort}" data-full="${spanishPraeteritumFull}">${spanishPraeteritumShort}</span>
+                        ${konjunktivHTML}
                     </div>
-                </div>`;
+                    <div class="cute-translations">
+                        <div class="cute-translation-es">${esTranslation}</div>
+                        <div class="cute-translation-en">${(verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim()}</div>
+                    </div>
+                </div>
+            </div>`;
             cardsContainer.innerHTML += cardHTML;
         });
 
@@ -3051,14 +3012,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.onclick = () => openModalForVerb(item.verb);
 
                 card.innerHTML = `
-                    <div class="wf-main-info">
-                        <span class="wf-word">${item.word}</span>
-                        <span class="wf-translation">${item.es}</span>
-                        <div class="wf-relationship">
-                            Gehört zu: <strong>${item.verb}</strong> <span class="wf-arrow">➔</span>
-                        </div>
+                <div class="wf-main-info">
+                    <span class="wf-word">${item.word}</span>
+                    <span class="wf-translation">${item.es}</span>
+                    <div class="wf-relationship">
+                        Gehört zu: <strong>${item.verb}</strong> <span class="wf-arrow">➔</span>
                     </div>
-                `;
+                </div>
+            `;
                 cardsContainer.appendChild(card);
             });
 
@@ -3225,4 +3186,23 @@ document.addEventListener('DOMContentLoaded', () => {
             container.appendChild(pill);
         });
     }
+    // --- EVENT LISTENERS FOR VIEW SWITCHER ---
+    const viewSwitchers = document.querySelectorAll('input[name="card-version"]');
+    viewSwitchers.forEach(radio => {
+        radio.addEventListener('change', () => {
+            renderVerbGroup();
+        });
+    });
+
+
+
+    // --- LISTENER FOR ENGLISH TOGGLE ---
+    const enSwitch = document.getElementById('en-switch');
+    if (enSwitch) {
+        enSwitch.addEventListener('change', () => {
+            // Re-render if in Niedlich mode (or generally to update views)
+            renderVerbGroup();
+        });
+    }
+
 });

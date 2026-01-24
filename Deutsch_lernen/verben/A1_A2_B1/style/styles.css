@@ -642,7 +642,7 @@ body {
     border: none;
     margin-top: 20px;
     /* Space for floating emoji */
-    min-height: 280px;
+    min-height: 120px;
 }
 
 .word-item:hover {
@@ -654,7 +654,7 @@ body {
 .card-header {
     background-color: #4682B4;
     color: white;
-    padding: 40px 15px 45px 15px;
+    padding: 20px 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -687,7 +687,7 @@ body {
 /* Card Body with Light Cyan Background */
 .card-body {
     background-color: #E0FFFF;
-    padding: 45px 20px 30px 20px;
+    padding: 20px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -3606,18 +3606,22 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
     opacity: 1;
     /* Firefox */
 }
+
 /* =========================================================
    GLOBAL DARK MODE FOR LEICHTE VERSION
    Override main styles when body has .light-version-global-dark
    ========================================================= */
 
 body.light-version-global-dark {
-    background-color: #0f172a !important; /* Index.html --bg-body */
-    color: #f8fafc !important; /* Index.html --text-main */
+    background-color: #0f172a !important;
+    /* Index.html --bg-body */
+    color: #f8fafc !important;
+    /* Index.html --text-main */
 }
 
 body.light-version-global-dark .main-container {
-    background-color: transparent !important; /* Or allow body bg to show */
+    background-color: transparent !important;
+    /* Or allow body bg to show */
     border-color: #334155 !important;
 }
 
@@ -3629,8 +3633,10 @@ body.light-version-global-dark .title {
 /* Tag Filters in Dark Mode */
 body.light-version-global-dark .tag-filter-pill {
     background-color: rgba(255, 255, 255, 0.1) !important;
-    border-color: #475569 !important; /* Slate-600 */
-    color: #94a3b8 !important; /* Slate-400 */
+    border-color: #475569 !important;
+    /* Slate-600 */
+    color: #94a3b8 !important;
+    /* Slate-400 */
 }
 
 body.light-version-global-dark .tag-filter-pill:hover {
@@ -3639,14 +3645,16 @@ body.light-version-global-dark .tag-filter-pill:hover {
 }
 
 body.light-version-global-dark .tag-filter-pill.active {
-    background-color: #3b82f6 !important; /* Blue-500 */
+    background-color: #3b82f6 !important;
+    /* Blue-500 */
     color: white !important;
     border-color: #3b82f6 !important;
 }
 
 /* Navigation Wrapper Background */
 body.light-version-global-dark .navigation-wrapper {
-    background-color: rgba(30, 41, 59, 0.5) !important; /* Slate-800 transparent */
+    background-color: rgba(30, 41, 59, 0.5) !important;
+    /* Slate-800 transparent */
     border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
@@ -3692,3 +3700,349 @@ body.light-version-global-dark .info-button {
     color: #f8fafc !important;
 }
 
+
+/* --- VIEW SWITCHER & COMPACT MODE --- */
+.view-switcher {
+    display: inline-flex;
+    background-color: #e5e7eb;
+    border-radius: 8px;
+    padding: 4px;
+    gap: 4px;
+    margin-left: 15px;
+    vertical-align: middle;
+}
+
+.view-switcher input {
+    display: none;
+}
+
+.view-switcher label {
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4b5563;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.view-switcher input:checked+label {
+    background-color: white;
+    color: #111827;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Compact Mode (Dark) Overrides */
+body.compact-view {
+    background-color: #0f172a !important;
+    /* Slate 900 */
+    color: #f1f5f9;
+}
+
+body.compact-view .main-container {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+body.compact-view .title {
+    color: #f1f5f9;
+    border-bottom-color: #3b82f6;
+    /* Blue for contrast */
+}
+
+body.compact-view .group-indicator,
+body.compact-view .level-indicator {
+    color: #f1f5f9;
+}
+
+body.compact-view .group-indicator {
+    color: #94a3b8;
+    /* Muted text */
+}
+
+/* Search input adjustments for dark mode */
+body.compact-view .search-input {
+    background-color: #1e293b;
+    border-color: #334155;
+    color: white;
+}
+
+body.compact-view .search-input::placeholder {
+    color: #64748b;
+}
+
+/* Hide standard elements in compact mode that define layout */
+body.compact-view .cards-container {
+    display: block;
+    /* Override flex/grid */
+    margin: 0;
+}
+
+/* Compact Table Styles */
+.verb-table-container {
+    background-color: #1e293b;
+    /* Slate 800 */
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 1px solid #334155;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
+.verb-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: left;
+}
+
+.verb-table th {
+    background-color: #0f172a;
+    /* Dark header */
+    color: #94a3b8;
+    padding: 15px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid #334155;
+    font-weight: 700;
+}
+
+.verb-table td {
+    padding: 15px;
+    border-bottom: 1px solid #334155;
+    color: #f1f5f9;
+    vertical-align: middle;
+}
+
+.verb-table tr:last-child td {
+    border-bottom: none;
+}
+
+.verb-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Column specifics */
+.col-infinitiv {
+    font-weight: 700;
+    color: #60a5fa !important;
+    /* Blue-400 */
+    font-size: 1.1rem;
+}
+
+.col-trans {
+    color: #94a3b8 !important;
+    font-style: italic;
+}
+
+.col-perfekt,
+.col-praeteritum {
+    font-family: monospace;
+    font-size: 0.95rem;
+    color: #cbd5e1;
+}
+
+/* Mobile responsiveness for table */
+@media (max-width: 768px) {
+
+    .verb-table th,
+    .verb-table td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .col-perfekt,
+    .col-praeteritum {
+        font-size: 0.8rem;
+    }
+}
+
+
+/* --- KOMPAKT MODE (CHUNKED GRID) --- */
+.kompakt-chunk-card {
+    background-color: #1e293b;
+    /* Slate 800 */
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px;
+    width: 340px;
+    /* Fixed width for consistent chunks */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    vertical-align: top;
+}
+
+.kompakt-chunk-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.kompakt-verb-cell {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kompakt-verb-cell:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.kompakt-verb-word {
+    font-weight: 700;
+    color: #60a5fa;
+    /* Blue-400 */
+    font-size: 1.1rem;
+}
+
+.kompakt-verb-trans {
+    font-style: italic;
+    color: #94a3b8;
+    font-size: 0.95rem;
+    text-align: right;
+}
+
+/* --- NORMAL MODE (CLEAN CARD) --- */
+.normal-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+}
+
+.normal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.normal-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+}
+
+.normal-german {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+}
+
+.normal-spanish {
+    font-size: 1rem;
+    color: #6b7280;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Dark mode adjustment for normal cards if needed? No, Normal is light. */
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .kompakt-chunk-card {
+        width: 100%;
+        /* Full width on mobile */
+        margin: 10px 0;
+    }
+
+    .kompakt-chunk-grid {
+        grid-template-columns: 1fr;
+        /* Stack vertically */
+    }
+
+    .normal-card {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+
+    .view-switcher label {
+        padding: 6px 8px;
+        /* Tighter padding */
+        font-size: 0.8rem;
+    }
+}
+
+
+/* --- EXPANDED NORMAL MODE STYLES --- */
+.normal-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* changed from center */
+    padding: 0;
+    /* Clear padding for header to sit flush */
+    overflow: hidden;
+    /* Ensure header radius matches */
+}
+
+.normal-card-header {
+    background-color: #f8fafc;
+    /* Slate 50 */
+    border-bottom: 1px solid #e5e7eb;
+    padding: 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.normal-emoji {
+    font-size: 1.2rem;
+}
+
+.normal-german {
+    font-size: 1.2rem;
+    /* Slightly smaller than before to fit with emoji */
+    margin: 0;
+}
+
+.normal-card-content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- REFINED NIEDLICH MODE STYLES --- */
+.niedlich-card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 20px;
+    /* Ensure enough height for the emoji */
+    padding: 5px 10px;
+}
+
+.niedlich-emoji-large {
+    font-size: 5rem;
+    /* Make it the hero */
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+    /* Add some depth */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.word-item:hover .niedlich-emoji-large {
+    transform: scale(1.2) rotate(5deg);
+}
