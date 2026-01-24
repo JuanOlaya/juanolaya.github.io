@@ -855,7 +855,7 @@
         <div class="view-switcher-wrapper">
             <span class="view-label">Ansicht / Vista</span>
             <div class="view-switcher">
-                <input type="radio" id="view-compact" name="view-mode" value="compact">
+                <input type="radio" id="view-compact" name="view-mode" value="compact" checked>
                 <label for="view-compact" title="Kompakte Tabelle (Dunkel)">Kompakt</label>
 
                 <input type="radio" id="view-visual" name="view-mode" value="visual">
@@ -991,7 +991,7 @@
             },
             {
                 title: '📊 Grad (A1 - A2)',
-                description: 'Adverbios de grado',
+                description: 'Adverbios de grado (Intensidad)',
                 level: 'A1-A2',
                 colorMain: '#f59e0b',
                 colorPastel: '#fef3c7',
@@ -1101,7 +1101,8 @@
         };
 
         let slides = [];
-        let currentSlideIndex = 0;
+        let currentSlideIndex = 0; // Still used for internal logic compatibility if needed, but mostly unused for visual
+        let currentGroupIndex = 0; // For Visual/Light modes
         let isSearchMode = false;
         let searchResults = [];
         let currentView = ViewMode.COMPACT; // Default
@@ -1188,29 +1189,29 @@
                 });
 
             } else {
-                // Visual / Light Mode: Show Slides
+                // Visual / Light Mode: Show Whole Groups (not chunks)
 
                 // Ensure buttons are visible
                 prevGroupBtn.style.display = '';
                 nextGroupBtn.style.display = '';
 
-                // Safety check for slides
-                if (currentSlideIndex < 0) currentSlideIndex = 0;
-                if (currentSlideIndex >= slides.length) currentSlideIndex = slides.length - 1;
+                // Safety check for groups
+                if (currentGroupIndex < 0) currentGroupIndex = 0;
+                if (currentGroupIndex >= adverbGroups.length) currentGroupIndex = adverbGroups.length - 1;
 
-                const slide = slides[currentSlideIndex];
-                groupIndicator.textContent = slide.displayTitle;
+                const group = adverbGroups[currentGroupIndex];
+                groupIndicator.textContent = group.title; // Use full group title (no T1/T2)
 
                 // Container styling for Grid/Slide
                 cardsContainer.className = 'infographic-grid';
                 cardsContainer.style.display = ''; // Reset inline styles
                 cardsContainer.style.overflowX = '';
 
-                renderCards(slide.adverbs, slide);
+                renderCards(group.adverbs, group);
 
                 // Update navigation buttons state
-                prevGroupBtn.disabled = currentSlideIndex === 0;
-                nextGroupBtn.disabled = currentSlideIndex === slides.length - 1;
+                prevGroupBtn.disabled = currentGroupIndex === 0;
+                nextGroupBtn.disabled = currentGroupIndex === adverbGroups.length - 1;
 
                 // Scroll container to start
                 if (cardsContainer.scrollTo) cardsContainer.scrollTo(0, 0);
@@ -1267,12 +1268,7 @@
             // Create Table Structure
             const table = document.createElement('table');
             table.className = 'word-table';
-            table.innerHTML = `<thead>
-                <tr>
-                    <th>Wort (DE)</th>
-                    <th class="col-trans">Bedeutung (ES)</th>
-                </tr>
-            </thead>`;
+            table.innerHTML = '';
 
             const tbody = document.createElement('tbody');
 
@@ -1684,10 +1680,10 @@
         function nextSlide() {
             if (currentView === ViewMode.COMPACT) return; // No nav in compact mode
 
-            if (currentSlideIndex < slides.length - 1) {
-                currentSlideIndex++;
+            // Visual/Light Mode: Next Group
+            if (currentGroupIndex < adverbGroups.length - 1) {
+                currentGroupIndex++;
                 renderContent();
-                // scroll to top of container if needed, but not page
                 cardsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
@@ -1695,8 +1691,9 @@
         function prevSlide() {
             if (currentView === ViewMode.COMPACT) return; // No nav in compact mode
 
-            if (currentSlideIndex > 0) {
-                currentSlideIndex--;
+            // Visual/Light Mode: Prev Group
+            if (currentGroupIndex > 0) {
+                currentGroupIndex--;
                 renderContent();
                 cardsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
@@ -1764,6 +1761,24 @@
             if (endX > startX + swipeThreshold) {
                 prevSlide();
             }
+        }
+
+        // Text-to-Speech Function
+        function speak(text) {
+            if (!text) return;
+            // Cancel current speech
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+            utterance.rate = 0.9; // Slightly slower for learners
+
+            // Try to select a German voice
+            const voices = window.speechSynthesis.getVoices();
+            const deVoice = voices.find(v => v.lang.includes('de'));
+            if (deVoice) utterance.voice = deVoice;
+
+            window.speechSynthesis.speak(utterance);
         }
 
         // Initialize
