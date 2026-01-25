@@ -1761,23 +1761,33 @@ document.addEventListener('DOMContentLoaded', () => {
             headerTagsContainer.appendChild(themeBadge);
         }
 
-        // ROW 2: Case tags (Dativ, Akkusativ, Intrans, Prep, etc.)
-        if (updatedData.case_tags && updatedData.case_tags.length > 0) {
+        // ROW 2: Case tags (Dativ, Akkusativ, Intrans, Prep, etc.) AND New Classification Tags
+        const allTags = [
+            ...(updatedData.case_tags || []),
+            ...(updatedData.tags || [])
+        ];
+
+        if (allTags.length > 0) {
             const tagsContainer = document.createElement('div');
             tagsContainer.className = 'modal-tags-container';
 
             const groups = {
+                'Hilfsverb': [],
                 'Kasus': [],
                 'Reflexivität': [],
                 'Struktur': [],
                 'Präpositionen': []
             };
 
-            updatedData.case_tags.forEach(tag => {
+            // Remove duplicates just in case
+            const uniqueTags = [...new Set(allTags)];
+
+            uniqueTags.forEach(tag => {
                 if (['Akkusativ', 'Dativ', 'Nominativ', 'Genitiv', 'Intransitive', 'intrans'].includes(tag)) groups['Kasus'].push(tag);
                 else if (tag === 'Reflexive') groups['Reflexivität'].push(tag);
                 else if (['Separable', 'Regular', 'Irregular'].includes(tag)) groups['Struktur'].push(tag);
                 else if (tag.startsWith('Präposition:')) groups['Präpositionen'].push(tag.replace('Präposition: ', ''));
+                else if (tag.includes('Movimiento') || tag.includes('Estático') || tag.includes('🚀') || tag.includes('🏠')) groups['Hilfsverb'].push(tag);
                 else groups['Struktur'].push(tag); // Fallback
             });
 
@@ -1797,8 +1807,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 groups[category].forEach(tag => {
                     const tagSpan = document.createElement('span');
                     // Create specific class based on tag name, remove special chars
-                    const tagClassSuffix = tag.toLowerCase().split(' ')[0].replace(/[^a-z0-9]/g, '');
-                    tagSpan.className = `modal-tag tag-${tagClassSuffix}`;
+                    // For emojis like 🚀, it might result in empty or invalid class if not careful, 
+                    // but usually only affects CSS selector matching. 
+                    // Let's make it robust:
+                    const safeTagClass = tag.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    tagSpan.className = `modal-tag tag-${safeTagClass}`;
                     tagSpan.textContent = tag;
 
                     // Add Click-to-Search logic
@@ -2646,11 +2659,16 @@ document.addEventListener('DOMContentLoaded', () => {
                                 let tagMatch = false;
                                 if (searchTerm.startsWith('tag:')) {
                                     const tagTerm = searchTerm.replace('tag:', '');
-                                    if (verbData.case_tags && verbData.case_tags.some(tag => tag.toLowerCase() === tagTerm)) {
+                                    const caseTagsMatch = verbData.case_tags && verbData.case_tags.some(tag => tag.toLowerCase() === tagTerm);
+                                    const generalTagsMatch = verbData.tags && verbData.tags.some(tag => tag.toLowerCase() === tagTerm);
+                                    if (caseTagsMatch || generalTagsMatch) {
                                         tagMatch = true;
                                     }
                                 } else {
-                                    if (verbData.case_tags && verbData.case_tags.some(tag => tag.toLowerCase().includes(searchTerm))) {
+                                    // General search includes filtering by tag naming too
+                                    const caseTagsMatch = verbData.case_tags && verbData.case_tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                                    const generalTagsMatch = verbData.tags && verbData.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                                    if (caseTagsMatch || generalTagsMatch) {
                                         tagMatch = true;
                                     }
                                 }
@@ -3144,10 +3162,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     tagCounts[tag] = (tagCounts[tag] || 0) + 1;
                 });
             }
+            // Also collect from general 'tags' (for Motion/Static)
+            if (verb.tags && Array.isArray(verb.tags)) {
+                verb.tags.forEach(tag => {
+                    allTags.add(tag);
+                    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+                });
+            }
         });
 
-        const customOrder = ['Akkusativ', 'Dativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular'];
-        const whitelistedTags = ['Akkusativ', 'Dativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular', 'Intransitive'];
+        const customOrder = ['Akkusativ', 'Dativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular', '🚀 Movimiento', '🏠 Estático'];
+        const whitelistedTags = ['Akkusativ', 'Dativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular', 'Intransitive', '🚀 Movimiento', '🏠 Estático'];
         const sortedTags = Array.from(allTags)
             .filter(tag => whitelistedTags.includes(tag) || tag.startsWith('Präposition:'))
             .sort((a, b) => {
