@@ -3021,7 +3021,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     htmlFragments.push(cardHTML);
                 } else {
                     // Normal Mode (Default)
-                    const shouldHideEmoji = searchTerm.startsWith('tag:') || searchTerm.includes('movimiento') || searchTerm.includes('estático') || searchTerm.includes('estatico');
+                    const shouldHideEmoji = (currentViewMode === 'niedlich' || currentViewMode === 'cute') || searchTerm.startsWith('tag:') || searchTerm.includes('movimiento') || searchTerm.includes('estático') || searchTerm.includes('estatico');
                     const cardHTML = `
                 <div class="word-item" onclick="openModalForVerb('${verbName}')">
                     <div class="card-header">
