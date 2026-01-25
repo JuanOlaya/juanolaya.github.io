@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sprechen A1 - Themen</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Kalam:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Kalam:wght@700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
         }
+
         html {
             height: 100%;
         }
+
         body {
             display: flex;
             justify-content: center;
             align-items: flex-start;
             min-height: 100%;
             margin: 0;
-            background-color: #85D2FF; /* Light Blue Background */
+            background-color: #85D2FF;
+            /* Light Blue Background */
             padding: 20px;
             font-family: 'Nunito', sans-serif;
             color: #414A5C;
         }
+
         .main-container {
             width: 100%;
             max-width: 1200px;
             text-align: center;
             padding: 10px 20px;
         }
+
         .title {
             font-family: 'Kalam', cursive;
             font-size: 3rem;
@@ -40,12 +47,14 @@
             margin-top: 0;
             margin-bottom: 2rem;
         }
+
         .cards-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 1.5rem;
         }
+
         .topic-card {
             background-color: #f0f8ff;
             border-radius: 12px;
@@ -60,14 +69,17 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
+
         .topic-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
+
         .topic-emoji {
             font-size: 3rem;
             margin-bottom: 0.5rem;
         }
+
         .topic-title {
             font-size: 1.5rem;
             font-weight: 700;
@@ -81,7 +93,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.6);
+            background-color: rgba(0, 0, 0, 0.6);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -91,6 +103,7 @@
             transition: opacity 0.3s, visibility 0.3s;
             padding: 1rem;
         }
+
         .modal-content {
             background-color: #fff;
             padding: 2rem;
@@ -103,13 +116,16 @@
             transform: scale(0.9);
             transition: transform 0.3s;
         }
+
         .modal-overlay.visible {
             opacity: 1;
             visibility: visible;
         }
+
         .modal-overlay.visible .modal-content {
             transform: scale(1);
         }
+
         #modal-topic-header {
             display: flex;
             align-items: center;
@@ -118,39 +134,47 @@
             border-bottom: 2px solid #E57373;
             padding-bottom: 1rem;
         }
+
         #modal-emoji {
             font-size: 2.5rem;
         }
+
         #modal-topic-title {
             font-size: 2rem;
             font-weight: 700;
             font-family: 'Kalam', cursive;
             color: #414A5C;
         }
+
         #qa-container {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
         }
+
         .qa-pair {
             background-color: #f9f9f9;
             padding: 1rem;
             border-radius: 8px;
             border-left: 5px solid #85D2FF;
         }
+
         .qa-question {
             font-weight: bold;
             color: #414A5C;
             margin-bottom: 0.5rem;
         }
+
         .qa-answer {
             color: #555;
         }
+
         .translation {
             font-style: italic;
             color: #777;
             font-size: 0.9rem;
         }
+
         #close-modal {
             margin-top: 1.5rem;
             padding: 10px 20px;
@@ -161,12 +185,103 @@
             cursor: pointer;
             float: right;
         }
+
+        /* Toggle Switch Styles */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            color: #414A5C;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #E57373;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #E57373;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
     </style>
 </head>
+
 <body>
 
     <div class="main-container">
         <h1 class="title">Sprechen A1 - Themen</h1>
+
+        <div class="toggle-container">
+            <span class="toggle-label-text">Allgemein</span>
+            <label class="switch">
+                <input type="checkbox" id="personalization-toggle" checked>
+                <span class="slider round"></span>
+            </label>
+            <span class="toggle-label-text">Juan</span>
+
+            <div style="width: 20px;"></div>
+
+            <span class="toggle-label-text">🇩🇪</span>
+            <label class="switch">
+                <input type="checkbox" id="english-toggle">
+                <span class="slider round"></span>
+            </label>
+            <span class="toggle-label-text">🇺🇸</span>
+        </div>
+
         <div class="cards-container">
             <!-- Cards will be injected here by JS -->
         </div>
@@ -261,12 +376,40 @@
             ]
         };
 
+        const juanData = {
+            personalInfo: [
+                { q: 'Wie heißen Sie? / Wie heißt du?', a: 'Ich heiße Juan.', q_en: "What's your name?", a_en: "My name is Juan." },
+                { q: 'Woher kommen Sie? / Woher kommst du?', a: 'Ich komme aus [Land/Stadt].', q_en: "Where are you from?", a_en: "I come from [Country/City]." },
+                { q: 'Wo wohnen Sie? / Wo wohnst du?', a: 'Ich wohnne in [Stadt].', q_en: "Where do you live?", a_en: "I live in [City]." },
+                { q: 'Wie alt sind Sie? / Wie alt bist du?', a: 'Ich bin einundvierzig Jahre alt.', q_en: "How old are you?", a_en: "I am forty-one years old." },
+                { q: 'Was sind Sie von Beruf? / Was bist du von Beruf?', a: 'Ich bin Ingenieur.', q_en: "What is your profession?", a_en: "I am an engineer." },
+                { q: 'Welche Sprachen sprechen Sie? / Welche Sprachen sprichst du?', a: 'Ich spreche Spanisch, Englisch und ein bisschen Deutsch.', q_en: "Which languages do you speak?", a_en: "I speak Spanish, English, and a little German." }
+            ],
+            familie: [
+                { q: 'Haben Sie Geschwister? / Hast du Geschwister?', a: 'Ja, ich habe einen Bruder und eine Schwester. / Nein, ich bin Einzelkind.', q_en: "Do you have siblings?", a_en: "Yes, I have a brother and a sister. / No, I am an only child." },
+                { q: 'Sind Sie verheiratet? / Bist du verheiratet?', a: 'Ja, ich bin verheiratet. / Nein, ich bin ledig.', q_en: "Are you married?", a_en: "Yes, I am married. / No, I am single." },
+                { q: 'Haben Sie Kinder? / Hast du Kinder?', a: 'Ja, ich habe eine Tochter.', q_en: "Do you have children?", a_en: "Yes, I have a daughter." }
+            ]
+        };
+
         const cardsContainer = document.querySelector('.cards-container');
         const modal = document.getElementById('topic-modal');
         const modalEmoji = document.getElementById('modal-emoji');
         const modalTopicTitle = document.getElementById('modal-topic-title');
         const qaContainer = document.getElementById('qa-container');
         const closeModalButton = document.getElementById('close-modal');
+        const englishToggle = document.getElementById('english-toggle');
+
+        // TTS Function
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Stop previous
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'de-DE';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
 
         function createTopicCards() {
             topics.forEach(topic => {
@@ -286,27 +429,60 @@
             modalEmoji.textContent = emoji;
             qaContainer.innerHTML = '';
 
-            const data = topicData[topicId];
+            const isJuanMode = document.getElementById('personalization-toggle').checked;
+            let data = topicData[topicId];
+
+            if (isJuanMode && juanData[topicId]) {
+                data = juanData[topicId];
+            }
+
+
+
+            const showEnglish = englishToggle.checked;
+
             if (data) {
                 data.forEach(item => {
                     const qaPair = document.createElement('div');
                     qaPair.className = 'qa-pair';
-                    qaPair.innerHTML = `
-                        <div class="qa-question">
-                            ${item.q}
-                            <div class="translation">${item.q_en}</div>
-                        </div>
-                        <div class="qa-answer">
-                            ${item.a}
-                            <div class="translation">${item.a_en}</div>
-                        </div>
-                    `;
+
+                    // Helper to clean text for TTS (remove slashes/parentheses if needed, but simple is usually ok)
+                    // We split by / to speak separate parts if it's a choice? No, speak full sentence is fine usually.
+
+                    const qDiv = document.createElement('div');
+                    qDiv.className = 'qa-question';
+                    qDiv.innerHTML = `${item.q} <span style="cursor:pointer; font-size: 0.8em;" onclick="event.stopPropagation(); speak('${item.q.replace(/'/g, "\\'")}')">🔊</span>`;
+
+                    const qEnDiv = document.createElement('div');
+                    qEnDiv.className = 'translation';
+                    qEnDiv.style.display = showEnglish ? 'block' : 'none';
+                    qEnDiv.textContent = item.q_en;
+                    qDiv.appendChild(qEnDiv);
+
+                    const aDiv = document.createElement('div');
+                    aDiv.className = 'qa-answer';
+                    aDiv.innerHTML = `${item.a} <span style="cursor:pointer; font-size: 0.8em;" onclick="event.stopPropagation(); speak('${item.a.replace(/'/g, "\\'")}')">🔊</span>`;
+
+                    const aEnDiv = document.createElement('div');
+                    aEnDiv.className = 'translation';
+                    aEnDiv.style.display = showEnglish ? 'block' : 'none';
+                    aEnDiv.textContent = item.a_en;
+                    aDiv.appendChild(aEnDiv);
+
+                    qaPair.appendChild(qDiv);
+                    qaPair.appendChild(aDiv);
                     qaContainer.appendChild(qaPair);
                 });
             }
 
             modal.classList.add('visible');
         }
+
+        englishToggle.addEventListener('change', () => {
+            const translations = document.querySelectorAll('.translation');
+            translations.forEach(el => {
+                el.style.display = englishToggle.checked ? 'block' : 'none';
+            });
+        });
 
         function hideModal() {
             modal.classList.remove('visible');
@@ -319,7 +495,71 @@
             }
         });
 
+        // Live Toggle Updates
+        let currentTopic = null;
+
+        function refreshModal() {
+            if (modal.classList.contains('visible') && currentTopic) {
+                openTopicModal(currentTopic.id, currentTopic.title, currentTopic.emoji);
+            }
+        }
+
+        document.getElementById('personalization-toggle').addEventListener('change', refreshModal);
+
+        // Update openTopicModal to store current topic
+        const originalOpenTopicModal = openTopicModal;
+        openTopicModal = function (topicId, title, emoji) {
+            currentTopic = { id: topicId, title: title, emoji: emoji };
+
+            modalTopicTitle.textContent = title;
+            modalEmoji.textContent = emoji;
+            qaContainer.innerHTML = '';
+
+            const isJuanMode = document.getElementById('personalization-toggle').checked;
+            let data = topicData[topicId];
+
+            if (isJuanMode && juanData[topicId]) {
+                data = juanData[topicId];
+            }
+
+            const showEnglish = englishToggle.checked;
+
+            if (data) {
+                data.forEach(item => {
+                    const qaPair = document.createElement('div');
+                    qaPair.className = 'qa-pair';
+
+                    const qDiv = document.createElement('div');
+                    qDiv.className = 'qa-question';
+                    qDiv.innerHTML = `${item.q} <span style="cursor:pointer; font-size: 0.8em;" onclick="event.stopPropagation(); speak('${item.q.replace(/'/g, "\\'")}')">🔊</span>`;
+
+                    const qEnDiv = document.createElement('div');
+                    qEnDiv.className = 'translation';
+                    qEnDiv.style.display = showEnglish ? 'block' : 'none';
+                    qEnDiv.textContent = item.q_en;
+                    qDiv.appendChild(qEnDiv);
+
+                    const aDiv = document.createElement('div');
+                    aDiv.className = 'qa-answer';
+                    aDiv.innerHTML = `${item.a} <span style="cursor:pointer; font-size: 0.8em;" onclick="event.stopPropagation(); speak('${item.a.replace(/'/g, "\\'")}')">🔊</span>`;
+
+                    const aEnDiv = document.createElement('div');
+                    aEnDiv.className = 'translation';
+                    aEnDiv.style.display = showEnglish ? 'block' : 'none';
+                    aEnDiv.textContent = item.a_en;
+                    aDiv.appendChild(aEnDiv);
+
+                    qaPair.appendChild(qDiv);
+                    qaPair.appendChild(aDiv);
+                    qaContainer.appendChild(qaPair);
+                });
+            }
+
+            modal.classList.add('visible');
+        };
+
         document.addEventListener('DOMContentLoaded', createTopicCards);
     </script>
 </body>
+
 </html>
