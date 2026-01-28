@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lerne Deutsch: Kleidung & Farben</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f8fafc;
+            transition: all 0.3s ease;
+        }
+
+        .gender-der {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .gender-die {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .gender-das {
+            color: #059669;
+            font-weight: bold;
+        }
+
+        .gender-pl {
+            color: #d97706;
+            font-weight: bold;
+        }
+
+        .card {
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .label-line {
+            stroke: #94a3b8;
+            stroke-width: 2;
+            stroke-dasharray: 4;
+        }
+
+        .audio-btn {
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .card:hover .audio-btn,
+        .label-group:hover .audio-btn {
+            opacity: 1;
+        }
+
+        .color-swatch {
+            width: 100%;
+            height: 45px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 6px;
+        }
+
+        .translation-text {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 11.5px;
+            fill: #64748b;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .label-group:hover .translation-text {
+            opacity: 1;
+        }
+
+        .label-group {
+            cursor: pointer;
+        }
+
+        .clickable-title {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .clickable-title:hover {
+            color: #4f46e5;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #cbd5e1;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #4f46e5;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+        }
+
+        .hide-es .trans-label,
+        .hide-es .translation-text,
+        .hide-es .beispiel-trans {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-8">
+
+    <header class="max-w-6xl mx-auto text-center mb-10">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-3">
+            <span class="clickable-title" onclick="speak('Kleidung')">Kleidung</span> &
+            <span class="clickable-title" onclick="speak('Farben')">Farben</span>
+        </h1>
+
+        <div class="flex flex-col items-center gap-4 mb-6">
+            <p class="text-slate-500">Pasa el ratón para ver la traducción y haz clic para escuchar</p>
+
+            <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-200">
+                <span class="text-xs font-bold text-slate-600 uppercase tracking-tighter">Spanisch</span>
+                <label class="switch">
+                    <input type="checkbox" id="transToggle" checked onchange="updateTranslationVisibility()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3 text-xs font-bold uppercase tracking-wider">
+            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-lg shadow-sm border border-blue-200">Der</span>
+            <span class="px-3 py-1 bg-red-100 text-red-700 rounded-lg shadow-sm border border-red-200">Die</span>
+            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-lg shadow-sm border border-green-200">Das</span>
+            <span
+                class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-lg shadow-sm border border-yellow-200">Plural</span>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-8">
+
+        <!-- COLUMNA IZQUIERDA: PERSONAJE -->
+        <div
+            class="lg:col-span-5 relative bg-white rounded-3xl p-6 shadow-xl flex justify-center items-center min-h-[600px] border border-slate-100">
+            <div class="absolute top-6 left-6 group cursor-help" onclick="speak('Was trägt er?')">
+                <h2 class="text-xl font-bold text-slate-700 flex flex-col text-left">
+                    <span><i class="fas fa-user-tie mr-2 text-indigo-500"></i> Was trägt er? <small
+                            class="text-slate-300 font-normal">🔊</small></span>
+                    <span
+                        class="text-sm font-normal text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity trans-label">¿Qué
+                        lleva puesto él?</span>
+                </h2>
+            </div>
+
+            <svg viewBox="0 0 400 600" class="w-full max-w-sm">
+                <!-- Cabeza -->
+                <circle cx="200" cy="80" r="30" fill="#ffdbac" />
+
+                <!-- Cuerpo -->
+                <rect x="175" y="110" width="50" height="150" fill="#ffdbac" />
+                <rect x="230" y="120" width="20" height="100" fill="#ffdbac" />
+                <rect x="150" y="120" width="20" height="100" fill="#ffdbac" />
+
+                <!-- Ropa -->
+                <g class="label-group" onclick="speak('die Mütze')">
+                    <path d="M170 65 Q200 30 230 65 L235 85 L165 85 Z" fill="#ef4444" />
+                    <text x="250" y="50" class="gender-die text-base font-bold">die Mütze <tspan
+                            class="fill-slate-400 font-normal">🔊</tspan></text>
+                    <text x="250" y="68" class="translation-text">(el gorro)</text>
+                    <line x1="220" y1="55" x2="245" y2="55" class="label-line" />
+                </g>
+
+                <!-- Handschuhe - Movido abajo y a la derecha -->
+                <g class="label-group" onclick="speak('die Handschuhe')">
+                    <rect x="145" y="210" width="30" height="25" rx="5" fill="#4b5563" />
+                    <text x="145" y="285" class="gender-pl text-base font-bold" text-anchor="end">die Handschuhe <tspan
+                            class="fill-slate-400 font-normal">🔊</tspan></text>
+                    <text x="145" y="303" class="translation-text" text-anchor="end">(los guantes)</text>
+                    <line x1="160" y1="230" x2="150" y2="275" class="label-line" />
+                </g>
+
+                <g class="label-group" onclick="speak('der Schal')">
+                    <rect x="170" y="105" width="60" height="15" rx="5" fill="#3b82f6" />
+                    <text x="250" y="112" class="gender-der text-base font-bold">der Schal <tspan
+                            class="fill-slate-400 font-normal">🔊</tspan></text>
+                    <text x="250" y="130" class="translation-text">(la bufanda)</text>
+                    <line x1="210" y1="112" x2="245" y2="115" class="label-line" />
+                </g>
+
+                <g class="label-group" onclick="speak('der Mantel')">
+                    <path d="M150 120 L250 120 L260 260 L140 260 Z" fill="#475569" />
+                    <text x="280" y="178" class="gender-der text-base font-bold">der Mantel <tspan
+                            class="fill-slate-400 font-normal">🔊</tspan></text>
+                    <text x="280" y="196" class="translation-text">(el abrigo)</text>
+                    <line x1="250" y1="180" x2="275" y2="180" class="label-line" />
+                </g>
+
+                <g class="label-group" onclick="speak('die Hose')">
+                    <path d="M170 260 L230 260 L240 450 L210 450 L200 320 L190 450 L160 450 Z" fill="#1e3a8a" />
+                    <text x="260" y="348" class="gender-die text-base font-bold">die Hose <tspan
+                            class="fill-slate-400 font-normal">🔊</tspan></text>
+                    <text x="260" y="366" class="translation-text">(el pantalón)</text>
+                    <line x1="225" y1="350" x2="255" y2="350" class="label-line" />
+                </g>
+
+                <g class="label-group" onclick="speak('die Schuhe')">
+                    <path d="M155 450 L190 450 L190 470 L150 470 Z" fill="#444" />
+                    <path d="M210 450 L245 450 L250 470 L210 470 Z" fill="#444" />
+                    <text x="200" y="505" class="gender-pl text-base font-bold" text-anchor="middle">die Schuhe <tspan
+                            class="fill-slate-400 font-normal">🔊</tspan></text>
+                    <text x="200" y="523" class="translation-text" text-anchor="middle">(los zapatos)</text>
+                    <line x1="200" y1="475" x2="200" y2="495" class="label-line" />
+                </g>
+
+                <g class="label-group" onclick="speak('die Brille')">
+                    <circle cx="188" cy="80" r="8" fill="white" fill-opacity="0.3" stroke="#334155"
+                        stroke-width="1.5" />
+                    <circle cx="212" cy="80" r="8" fill="white" fill-opacity="0.3" stroke="#334155"
+                        stroke-width="1.5" />
+                    <line x1="196" y1="80" x2="204" y2="80" stroke="#334155" stroke-width="1.5" />
+                    <text x="120" y="105" class="gender-die text-base font-bold" text-anchor="end">die Brille <tspan
+                            class="fill-slate-400 font-normal">🔊</tspan></text>
+                    <text x="120" y="122" class="translation-text" text-anchor="end">(las gafas)</text>
+                    <line x1="125" y1="108" x2="180" y2="80" class="label-line" />
+                </g>
+            </svg>
+        </div>
+
+        <!-- COLUMNA DERECHA: VOCABULARIO -->
+        <div class="lg:col-span-7 space-y-6">
+
+            <!-- DER KLEIDERSCHRANK -->
+            <div class="bg-white rounded-3xl p-6 shadow-xl border border-slate-100">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center clickable-title"
+                    onclick="speak('Der Kleiderschrank')">
+                    <i class="fas fa-door-closed mr-3 text-amber-700"></i> Der Kleiderschrank <small
+                        class="text-slate-300 ml-2 font-normal text-sm">🔊</small>
+                </h2>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <div class="card p-3 bg-blue-50 rounded-xl border-l-4 border-blue-500"
+                        onclick="speak('der Pullover')">
+                        <p class="gender-der">der Pullover <i
+                                class="fas fa-volume-up ml-1 text-slate-300 audio-btn"></i></p>
+                        <p class="text-[10px] text-slate-500 italic trans-label">el suéter</p>
+                    </div>
+                    <div class="card p-3 bg-green-50 rounded-xl border-l-4 border-green-500"
+                        onclick="speak('das Hemd')">
+                        <p class="gender-das">das Hemd <i class="fas fa-volume-up ml-1 text-slate-300 audio-btn"></i>
+                        </p>
+                        <p class="text-[10px] text-slate-500 italic trans-label">la camisa</p>
+                    </div>
+                    <div class="card p-3 bg-green-50 rounded-xl border-l-4 border-green-500"
+                        onclick="speak('das T-Shirt')">
+                        <p class="gender-das">das T-Shirt <i class="fas fa-volume-up ml-1 text-slate-300 audio-btn"></i>
+                        </p>
+                        <p class="text-[10px] text-slate-500 italic trans-label">la camiseta</p>
+                    </div>
+                    <div class="card p-3 bg-red-50 rounded-xl border-l-4 border-red-500" onclick="speak('die Bluse')">
+                        <p class="gender-die">die Bluse <i class="fas fa-volume-up ml-1 text-slate-300 audio-btn"></i>
+                        </p>
+                        <p class="text-[10px] text-slate-500 italic trans-label">la blusa (A2)</p>
+                    </div>
+                    <div class="card p-3 bg-red-50 rounded-xl border-l-4 border-red-500" onclick="speak('die Shorts')">
+                        <p class="gender-die">die Shorts <i class="fas fa-volume-up ml-1 text-slate-300 audio-btn"></i>
+                        </p>
+                        <p class="text-[10px] text-slate-500 italic trans-label">los pantalones cortos</p>
+                    </div>
+                    <div class="card p-3 bg-blue-50 rounded-xl border-l-4 border-blue-500"
+                        onclick="speak('der Schlafanzug')">
+                        <p class="gender-der">der Schlafanzug <i
+                                class="fas fa-volume-up ml-1 text-slate-300 audio-btn"></i></p>
+                        <p class="text-[10px] text-slate-500 italic trans-label">el pijama</p>
+                    </div>
+                    <div class="card p-3 bg-red-50 rounded-xl border-l-4 border-red-500"
+                        onclick="speak('die Unterwäsche')">
+                        <p class="gender-die">die Unterwäsche <i
+                                class="fas fa-volume-up ml-1 text-slate-300 audio-btn"></i></p>
+                        <p class="text-[10px] text-slate-500 italic trans-label">la ropa interior</p>
+                    </div>
+                    <div class="card p-3 bg-green-50 rounded-xl border-l-4 border-green-500"
+                        onclick="speak('das Sakko')">
+                        <p class="gender-das">das Sakko <i class="fas fa-volume-up ml-1 text-slate-300 audio-btn"></i>
+                        </p>
+                        <p class="text-[10px] text-slate-500 italic trans-label">la chaqueta de traje</p>
+                    </div>
+                    <div class="card p-3 bg-yellow-50 rounded-xl border-l-4 border-yellow-500"
+                        onclick="speak('die Socken')">
+                        <p class="gender-pl">die Socken <i class="fas fa-volume-up ml-1 text-slate-300 audio-btn"></i>
+                        </p>
+                        <p class="text-[10px] text-slate-500 italic trans-label">los calcetines</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VERBOS Y GRAMATICA -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-slate-800 text-white p-6 rounded-3xl shadow-lg">
+                    <h3 class="font-bold mb-4 text-indigo-300 flex items-center">
+                        <i class="fas fa-sync-alt mr-2"></i> Wichtige Verben
+                    </h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="cursor-pointer hover:text-indigo-200" onclick="speak('tragen')">
+                            <span class="font-mono text-yellow-400">tragen</span>
+                            <span class="trans-label">- llevar puesto</span>
+                        </li>
+                        <li class="cursor-pointer hover:text-indigo-200" onclick="speak('anziehen')">
+                            <span class="font-mono text-yellow-400">anziehen</span>
+                            <span class="trans-label">- ponerse</span>
+                        </li>
+                        <li class="cursor-pointer hover:text-indigo-200" onclick="speak('ausziehen')">
+                            <span class="font-mono text-yellow-400">ausziehen</span>
+                            <span class="trans-label">- quitarse</span>
+                        </li>
+                        <li class="cursor-pointer hover:text-indigo-200" onclick="speak('anprobieren')">
+                            <span class="font-mono text-yellow-400">anprobieren</span>
+                            <span class="trans-label">- probarse</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-indigo-50 p-6 rounded-3xl border border-indigo-100">
+                    <h3 class="font-bold mb-3 text-slate-700">Fragen (A1-A2)</h3>
+                    <div class="space-y-2 text-xs text-slate-600">
+                        <p class="bg-white p-2 rounded shadow-sm cursor-pointer"
+                            onclick="speak('Was trägst du heute?')">
+                            <b>Was trägst du heute?</b> <br>
+                            <span class="trans-label">¿Qué llevas hoy?</span>
+                        </p>
+                        <p class="bg-white p-2 rounded shadow-sm cursor-pointer"
+                            onclick="speak('Wie gefällt dir das Kleid?')">
+                            <b>Wie gefällt dir das Kleid?</b> <br>
+                            <span class="trans-label">¿Cómo te gusta el vestido?</span> <br>
+                            <span class="trans-label text-[10px] text-slate-400 block mt-1">¿Qué te parece el
+                                vestido?</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SECCIÓN DE COLORES -->
+    <section class="max-w-7xl mx-auto mb-8">
+        <div class="bg-white rounded-3xl p-8 shadow-lg border border-slate-100">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center justify-center clickable-title"
+                onclick="speak('Die Farben')">
+                <i class="fas fa-palette mr-3 text-pink-500"></i> Die Farben <small
+                    class="text-slate-300 ml-2 font-normal text-sm">🔊</small>
+            </h2>
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-4">
+                <div class="card text-center p-2" onclick="speak('rot')">
+                    <div class="color-swatch bg-red-600"></div>
+                    <p class="text-xs font-bold">Rot</p>
+                </div>
+                <div class="card text-center p-2" onclick="speak('blau')">
+                    <div class="color-swatch bg-blue-600"></div>
+                    <p class="text-xs font-bold">Blau</p>
+                </div>
+                <div class="card text-center p-2" onclick="speak('gelb')">
+                    <div class="color-swatch bg-yellow-400"></div>
+                    <p class="text-xs font-bold">Gelb</p>
+                </div>
+                <div class="card text-center p-2" onclick="speak('grün')">
+                    <div class="color-swatch bg-green-600"></div>
+                    <p class="text-xs font-bold">Grün</p>
+                </div>
+                <div class="card text-center p-2" onclick="speak('schwarz')">
+                    <div class="color-swatch bg-black"></div>
+                    <p class="text-xs font-bold">Schwarz</p>
+                </div>
+                <div class="card text-center p-2" onclick="speak('weiß')">
+                    <div class="color-swatch bg-white border-slate-300"></div>
+                    <p class="text-xs font-bold">Weiß</p>
+                </div>
+                <div class="card text-center p-2" onclick="speak('grau')">
+                    <div class="color-swatch bg-gray-500"></div>
+                    <p class="text-xs font-bold">Grau</p>
+                </div>
+                <div class="card text-center p-2" onclick="speak('braun')">
+                    <div class="color-swatch bg-amber-900"></div>
+                    <p class="text-xs font-bold">Braun</p>
+                </div>
+                <div class="card text-center p-2" onclick="speak('orange')">
+                    <div class="color-swatch bg-orange-500"></div>
+                    <p class="text-xs font-bold">Orange</p>
+                </div>
+                <div class="card text-center p-2" onclick="speak('lila')">
+                    <div class="color-swatch bg-purple-600"></div>
+                    <p class="text-xs font-bold">Lila</p>
+                </div>
+                <div class="card text-center p-2" onclick="speak('rosa')">
+                    <div class="color-swatch bg-pink-300"></div>
+                    <p class="text-xs font-bold">Rosa</p>
+                </div>
+                <div class="card text-center p-2" onclick="speak('hellblau')">
+                    <div class="color-swatch bg-sky-300"></div>
+                    <p class="text-xs font-bold text-[10px]">Hellblau</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NIVEL A2 / FORMAL -->
+    <section class="max-w-7xl mx-auto mb-8">
+        <div class="bg-blue-100 rounded-3xl p-8 shadow-xl text-slate-800 border border-blue-200">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-user-tie mr-3 text-blue-600"></i> Nivel A2 / Formal
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-blue-300"
+                    onclick="speak('der Anzug')">
+                    <p class="text-blue-600 font-bold">der Anzug <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">traje (Sakko & Krawatte)</p>
+                </div>
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-blue-300"
+                    onclick="speak('der Rock')">
+                    <p class="text-blue-600 font-bold">der Rock <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">la falda</p>
+                </div>
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-blue-300"
+                    onclick="speak('das Kleid')">
+                    <p class="text-green-600 font-bold">das Kleid <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">el vestido</p>
+                </div>
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-blue-300"
+                    onclick="speak('der Gürtel')">
+                    <p class="text-blue-600 font-bold">der Gürtel <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">el cinturón</p>
+                </div>
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-blue-300"
+                    onclick="speak('die Krawatte')">
+                    <p class="text-red-600 font-bold">die Krawatte <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">la corbata</p>
+                </div>
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-blue-300"
+                    onclick="speak('das Kostüm')">
+                    <p class="text-green-600 font-bold">das Kostüm <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">disfraz</p>
+                </div>
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-blue-300"
+                    onclick="speak('der Hut')">
+                    <p class="text-blue-600 font-bold">der Hut <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">el sombrero</p>
+                </div>
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-blue-300"
+                    onclick="speak('die Handtasche')">
+                    <p class="text-red-600 font-bold">die Handtasche <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">el bolso</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NIVEL B1 / ACCESORIOS Y DETALLES -->
+    <section class="max-w-7xl mx-auto mb-8">
+        <div class="bg-yellow-100 rounded-3xl p-8 shadow-xl text-slate-800 border border-yellow-200">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-gem mr-3 text-yellow-600"></i> Nivel B1 / Accesorios y Detalles
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-yellow-300"
+                    onclick="speak('der Kapuzenpullover')">
+                    <p class="text-blue-600 font-bold">der Kapuzenpullover <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-xs text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">sudadera con capucha</p>
+                </div>
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-yellow-300"
+                    onclick="speak('die Weste')">
+                    <p class="text-red-600 font-bold">die Weste <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-xs text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">el chaleco</p>
+                </div>
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-yellow-300"
+                    onclick="speak('die Halskette')">
+                    <p class="text-red-600 font-bold">die Halskette <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-xs text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">el collar</p>
+                </div>
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-yellow-300"
+                    onclick="speak('das Armband')">
+                    <p class="text-green-600 font-bold">das Armband <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-xs text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">la pulsera</p>
+                </div>
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-yellow-300"
+                    onclick="speak('die Regenjacke')">
+                    <p class="text-red-600 font-bold">die Regenjacke <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-xs text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">chaqueta impermeable</p>
+                </div>
+                <div class="card p-4 bg-white/60 backdrop-blur hover:bg-white/80 rounded-2xl border border-yellow-300"
+                    onclick="speak('der Ohrring')">
+                    <p class="text-blue-600 font-bold">der Ohrring <i
+                            class="fas fa-volume-up ml-1 opacity-50 text-xs text-slate-400"></i></p>
+                    <p class="text-sm text-slate-500 italic trans-label">el pendiente</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: BEISPIELE -->
+    <section class="max-w-7xl mx-auto mb-12">
+        <div class="bg-slate-200 rounded-3xl p-8 shadow-xl text-slate-800 border border-slate-300">
+            <h2 class="text-2xl font-bold mb-6 flex items-center clickable-title" onclick="speak('Beispiele')">
+                <i class="fas fa-comment-dots mr-3 text-slate-600"></i> Beispiele <small
+                    class="text-slate-300 ml-2 font-normal text-sm">🔊</small>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="card p-4 bg-white rounded-2xl shadow-sm flex flex-col justify-center border border-slate-200"
+                    onclick="speak('Ich habe die Kleidung vergessen')">
+                    <p class="font-bold text-slate-800">Ich habe die Kleidung vergessen <i
+                            class="fas fa-volume-up ml-1 opacity-40"></i></p>
+                    <p class="text-sm text-slate-500 italic beispiel-trans">He olvidado la ropa</p>
+                </div>
+                <div class="card p-4 bg-white rounded-2xl shadow-sm flex flex-col justify-center border border-slate-200"
+                    onclick="speak('Wie viel kostet dieser Mantel?')">
+                    <p class="font-bold text-slate-800">Wie viel kostet dieser Mantel? <i
+                            class="fas fa-volume-up ml-1 opacity-40"></i></p>
+                    <p class="text-sm text-slate-500 italic beispiel-trans">¿Cuánto cuesta este abrigo?</p>
+                </div>
+                <div class="card p-4 bg-white rounded-2xl shadow-sm flex flex-col justify-center border border-slate-200"
+                    onclick="speak('Wo ist meine Bluse?')">
+                    <p class="font-bold text-slate-800">Wo ist meine Bluse? <i
+                            class="fas fa-volume-up ml-1 opacity-40"></i></p>
+                    <p class="text-sm text-slate-500 italic beispiel-trans">¿Dónde está mi blusa?</p>
+                </div>
+                <div class="card p-4 bg-white rounded-2xl shadow-sm flex flex-col justify-center border border-slate-200"
+                    onclick="speak('Das T-Shirt ist weiß')">
+                    <p class="font-bold text-slate-800">Das T-Shirt ist weiß <i
+                            class="fas fa-volume-up ml-1 opacity-40"></i></p>
+                    <p class="text-sm text-slate-500 italic beispiel-trans">La camiseta es blanca</p>
+                </div>
+                <div class="card p-4 bg-white rounded-2xl shadow-sm flex flex-col justify-center border border-slate-200"
+                    onclick="speak('Ich brauche neue Schuhe')">
+                    <p class="font-bold text-slate-800">Ich brauche neue Schuhe <i
+                            class="fas fa-volume-up ml-1 opacity-40"></i></p>
+                    <p class="text-sm text-slate-500 italic beispiel-trans">Necesito zapatos nuevos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="max-w-6xl mx-auto mt-4 text-center text-slate-400 text-sm pb-10">
+        <p>© Deutsch Lernen Interactive - Kleidung & Farben</p>
+    </footer>
+
+    <script>
+        function updateTranslationVisibility() {
+            const isChecked = document.getElementById('transToggle').checked;
+            if (isChecked) {
+                document.body.classList.remove('hide-es');
+            } else {
+                document.body.classList.add('hide-es');
+            }
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'de-DE';
+                utterance.rate = 0.85;
+                utterance.pitch = 1;
+                const voices = window.speechSynthesis.getVoices();
+                const germanVoice = voices.find(v => v.lang.startsWith('de'));
+                if (germanVoice) utterance.voice = germanVoice;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        window.speechSynthesis.onvoiceschanged = () => { };
+    </script>
+</body>
+
+</html>
