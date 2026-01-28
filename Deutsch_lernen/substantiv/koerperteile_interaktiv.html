@@ -119,44 +119,77 @@
                 class="bg-white dark:bg-gray-800 p-6 rounded-3xl card-shadow flex justify-center relative min-h-[500px] lg:sticky lg:top-8 transition-colors duration-300">
                 <svg viewBox="0 0 400 600" class="w-full max-w-md h-auto" id="body-svg">
                     <!-- Human Figure Base -->
-                    <path class="human-path" d="M200,50 Q220,50 220,80 Q220,110 200,110 Q180,110 180,80 Q180,50 200,50"
-                        stroke-width="2" /> <!-- Head -->
-                    <path class="human-path"
-                        d="M160,120 L240,120 Q260,120 260,150 L260,300 Q260,320 230,320 L170,320 Q140,320 140,300 L140,150 Q140,120 160,120"
-                        stroke-width="2" /> <!-- Torso -->
-                    <path class="human-path" d="M140,130 L100,250 Q90,260 110,270 L140,160" stroke-width="2" />
-                    <!-- L Arm -->
-                    <path class="human-path" d="M260,130 L300,250 Q310,260 290,270 L260,160" stroke-width="2" />
-                    <!-- R Arm -->
-                    <path class="human-path" d="M170,320 L160,550 Q155,570 185,570 L195,570 L195,320"
-                        stroke-width="2" /> <!-- L Leg -->
-                    <path class="human-path" d="M230,320 L240,550 Q245,570 215,570 L205,570 L205,320"
-                        stroke-width="2" /> <!-- R Leg -->
 
-                    <!-- Interaction Hotspots (with data-part for bilateral selection) -->
-                    <!-- HEAD & FACE -->
-                    <path data-part="kopf" class="body-part-hotspot" d="M180,55 h40 v50 h-40 z"
+                    <!-- NECK (Hals) - Drawn before head to be behind -->
+                    <path class="human-path" d="M185,110 L185,130 L215,130 L215,110 Z" stroke-width="2" />
+
+                    <!-- HEAD (Enlarged) -->
+                    <!-- Old Head: M200,50 Q220,50 220,80 Q220,110 200,110 Q180,110 180,80 Q180,50 200,50 -->
+                    <!-- New Head: Center 200. Width 90 (155-245). Height 100 (20-120) -->
+                    <path class="human-path" d="M200,20 Q245,20 245,70 Q245,120 200,120 Q155,120 155,70 Q155,20 200,20"
+                        stroke-width="2" />
+
+                    <path class="human-path"
+                        d="M160,130 L240,130 Q260,130 260,150 L260,300 Q260,320 230,320 L170,320 Q140,320 140,300 L140,150 Q140,130 160,130"
+                        stroke-width="2" /> <!-- Torso (adjusted top y to 130) -->
+
+                    <!-- L Arm -->
+                    <path class="human-path" d="M140,140 L100,250 Q90,260 110,270 L140,160" stroke-width="2" />
+
+                    <!-- R Arm -->
+                    <path class="human-path" d="M260,140 L300,250 Q310,260 290,270 L260,160" stroke-width="2" />
+
+                    <!-- L Leg -->
+                    <path class="human-path" d="M170,320 L160,550 Q155,570 185,570 L195,570 L195,320"
+                        stroke-width="2" />
+                    <!-- R Leg -->
+                    <path class="human-path" d="M230,320 L240,550 Q245,570 215,570 L205,570 L205,320"
+                        stroke-width="2" />
+
+                    <!-- Interaction Hotspots -->
+
+                    <!-- HEAD PARTS (Adjusted for bigger head) -->
+                    <!-- Head Box: x:155-245, y:20-120 -->
+
+                    <!-- KOPF (General) -->
+                    <path data-part="kopf" class="body-part-hotspot" d="M155,20 h90 v100 h-90 z" fill="transparent"
                         onclick="selectPart('kopf')" />
-                    <path data-part="haar" class="body-part-hotspot" d="M180,45 h40 v15 h-40 z"
+
+                    <!-- HAAR -->
+                    <path data-part="haar" class="body-part-hotspot" d="M155,15 h90 v35 h-90 z"
                         onclick="selectPart('haar')" />
 
-                    <circle data-part="auge" class="body-part-hotspot" cx="190" cy="75" r="8"
+                    <!-- AUGEN -->
+                    <circle data-part="auge" class="body-part-hotspot" cx="180" cy="60" r="10"
                         onclick="selectPart('auge')" />
-                    <circle data-part="auge" class="body-part-hotspot" cx="210" cy="75" r="8"
+                    <circle data-part="auge" class="body-part-hotspot" cx="220" cy="60" r="10"
                         onclick="selectPart('auge')" />
 
-                    <circle data-part="nase" class="body-part-hotspot" cx="200" cy="85" r="6"
+                    <!-- NASE -->
+                    <circle data-part="nase" class="body-part-hotspot" cx="200" cy="75" r="8"
                         onclick="selectPart('nase')" />
-                    <path data-part="mund" class="body-part-hotspot" d="M190,95 h20 v10 h-20 z"
-                        onclick="selectPart('mund')" />
 
-                    <circle data-part="ohr" class="body-part-hotspot" cx="175" cy="80" r="8"
+                    <!-- MUND & ZAHN -->
+                    <path data-part="mund" class="body-part-hotspot" d="M180,90 h40 v15 h-40 z"
+                        onclick="selectPart('mund')" />
+                    <!-- Tooth (Visual representation inside mouth area, but clickable separately if needed, or part of mouth) -->
+                    <!-- User asked to draw tooth. Let's add a small white rect for tooth -->
+                    <rect x="195" y="92" width="10" height="5" fill="white" class="body-part-hotspot" data-part="zahn"
+                        onclick="selectPart('zahn')" />
+
+                    <!-- OHREN -->
+                    <circle data-part="ohr" class="body-part-hotspot" cx="150" cy="70" r="10"
                         onclick="selectPart('ohr')" />
-                    <circle data-part="ohr" class="body-part-hotspot" cx="225" cy="80" r="8"
+                    <circle data-part="ohr" class="body-part-hotspot" cx="250" cy="70" r="10"
                         onclick="selectPart('ohr')" />
+
+                    <!-- HALS (Neck) Hotspot -->
+                    <path data-part="hals" class="body-part-hotspot" d="M180,115 h40 v25 h-40 z"
+                        onclick="selectPart('hals')" />
+
 
                     <!-- SKIN (Haut) - Cheek area -->
-                    <circle data-part="haut" class="body-part-hotspot" cx="230" cy="100" r="7"
+                    <circle data-part="haut" class="body-part-hotspot" cx="230" cy="90" r="8"
                         onclick="selectPart('haut')" />
 
                     <!-- ARMS & HANDS -->
@@ -170,7 +203,15 @@
                     <path data-part="hand" class="body-part-hotspot" d="M275,240 h35 v45 h-35 z"
                         onclick="selectPart('hand')" />
 
+                    <!-- FINGER (Right Hand) -->
+                    <!-- Drawing a finger sticking out -->
+                    <path data-part="finger" class="body-part-hotspot" d="M310,250 L325,240 L330,245 L315,255 Z"
+                        fill="#ffdbac" stroke="#9ca3af" onclick="selectPart('finger')" />
+
+
                     <!-- TORSO -->
+                    <circle data-part="herz" class="body-part-hotspot" cx="215" cy="170" r="15"
+                        onclick="selectPart('herz')" />
                     <path data-part="bauch" class="body-part-hotspot" d="M165,200 h70 v100 h-70 z"
                         onclick="selectPart('bauch')" />
 
@@ -263,6 +304,7 @@
     <script>
         const bodyParts = [
             { id: "kopf", article: "der", word: "Kopf", emoji: "🗣️", translation_es: "cabeza", translation_en: "head", example_de: "Mein Kopf tut weh.", example_es: "Me duele la cabeza." },
+            { id: "hals", article: "der", word: "Hals", emoji: "🧣", translation_es: "cuello", translation_en: "neck", example_de: "Der Hals ist lang.", example_es: "El cuello es largo." },
             { id: "haar", article: "das", word: "Haar", emoji: "💇", translation_es: "pelo / cabello", translation_en: "hair", example_de: "Sie hat langes Haar.", example_es: "Ella tiene el pelo largo." },
             { id: "auge", article: "das", word: "Auge", emoji: "👁️", translation_es: "ojo", translation_en: "eye", example_de: "Sie hat blaue Augen.", example_es: "Ella tiene ojos azules." },
             { id: "nase", article: "die", word: "Nase", emoji: "👃", translation_es: "nariz", translation_en: "nose", example_de: "Er hat eine große Nase.", example_es: "Él tiene una nariz grande." },
@@ -272,6 +314,7 @@
             { id: "arm", article: "der", word: "Arm", emoji: "💪", translation_es: "brazo", translation_en: "arm", example_de: "Mein Arm ist stark.", example_es: "Mi brazo es fuerte." },
             { id: "hand", article: "die", word: "Hand", emoji: "✋", translation_es: "mano", translation_en: "hand", example_de: "Gib mir deine Hand.", example_es: "Dame tu mano." },
             { id: "finger", article: "der", word: "Finger", emoji: "☝️", translation_es: "dedo", translation_en: "finger", example_de: "Ich habe zehn Finger.", example_es: "Tengo diez dedos." },
+            { id: "herz", article: "das", word: "Herz", emoji: "❤️", translation_es: "corazón", translation_en: "heart", example_de: "Mein Herz schlägt schnell.", example_es: "Mi corazón late rápido." },
             { id: "bauch", article: "der", word: "Bauch", emoji: "🤰", translation_es: "barriga / estómago", translation_en: "belly", example_de: "Ich habe Bauchschmerzen.", example_es: "Tengo dolor de barriga." },
             { id: "rucken", article: "der", word: "Rücken", emoji: "🚶", translation_es: "espalda", translation_en: "back", example_de: "Der Rücken tut weh.", example_es: "La espalda duele." },
             { id: "bein", article: "das", word: "Bein", emoji: "🦵", translation_es: "pierna", translation_en: "leg", example_de: "Das Bein ist gebrochen.", example_es: "La pierna está rota." },
