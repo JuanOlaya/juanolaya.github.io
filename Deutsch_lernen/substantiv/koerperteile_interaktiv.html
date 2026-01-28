@@ -118,113 +118,156 @@
             <div
                 class="bg-white dark:bg-gray-800 p-6 rounded-3xl card-shadow flex justify-center relative min-h-[500px] lg:sticky lg:top-8 transition-colors duration-300">
                 <svg viewBox="0 0 400 600" class="w-full max-w-md h-auto" id="body-svg">
-                    <!-- Human Figure Base -->
+                    <!-- 
+                        COLOR PALETTE:
+                        Skin: #ffdbac
+                        Hair: #4a3b2a (Dark Brown)
+                        Shirt: #3b82f6 (Blue)
+                        Pants: #1e3a8a (Dark Blue)
+                        Shoes: #4b5563 (Gray)
+                    -->
 
-                    <!-- NECK (Hals) - Drawn before head to be behind -->
-                    <path class="human-path" d="M185,110 L185,130 L215,130 L215,110 Z" stroke-width="2" />
+                    <!-- NECK (Hals) -->
+                    <!-- Positioned behind head and torso -->
+                    <path class="human-path" d="M185,120 L185,150 L215,150 L215,120 Z" fill="#e0c298" stroke="none" />
+                    <!-- Clickable Neck Area -->
+                    <path data-part="hals" class="body-part-hotspot" d="M185,120 L185,150 L215,150 L215,120 Z"
+                        fill="transparent" onclick="selectPart('hals')" />
 
-                    <!-- HEAD (Enlarged) -->
-                    <!-- Old Head: M200,50 Q220,50 220,80 Q220,110 200,110 Q180,110 180,80 Q180,50 200,50 -->
-                    <!-- New Head: Center 200. Width 90 (155-245). Height 100 (20-120) -->
-                    <path class="human-path" d="M200,20 Q245,20 245,70 Q245,120 200,120 Q155,120 155,70 Q155,20 200,20"
-                        stroke-width="2" />
-
+                    <!-- TORSO (Upper Body) -->
                     <path class="human-path"
-                        d="M160,130 L240,130 Q260,130 260,150 L260,300 Q260,320 230,320 L170,320 Q140,320 140,300 L140,150 Q140,130 160,130"
-                        stroke-width="2" /> <!-- Torso (adjusted top y to 130) -->
+                        d="M160,150 L240,150 Q260,150 260,180 L260,300 Q260,320 230,320 L170,320 Q140,320 140,300 L140,180 Q140,150 160,150"
+                        fill="#3b82f6" stroke="none" />
 
-                    <!-- L Arm -->
-                    <path class="human-path" d="M140,140 L100,250 Q90,260 110,270 L140,160" stroke-width="2" />
+                    <!-- ARMS -->
+                    <!-- Left Arm -->
+                    <path class="human-path" d="M140,160 L100,250 Q90,260 110,270 L140,180" fill="#3b82f6"
+                        stroke="none" />
+                    <!-- Right Arm -->
+                    <path class="human-path" d="M260,160 L300,250 Q310,260 290,270 L260,180" fill="#3b82f6"
+                        stroke="none" />
 
-                    <!-- R Arm -->
-                    <path class="human-path" d="M260,140 L300,250 Q310,260 290,270 L260,160" stroke-width="2" />
+                    <!-- HANDS -->
+                    <!-- Left Hand (Simple) -->
+                    <path class="human-path" d="M90,250 Q80,260 90,275 Q100,290 115,280 L110,270 Z" fill="#ffdbac"
+                        stroke="none" />
+                    <circle data-part="hand" class="body-part-hotspot" cx="100" cy="270" r="15" fill="transparent"
+                        onclick="selectPart('hand')" />
 
-                    <!-- L Leg -->
-                    <path class="human-path" d="M170,320 L160,550 Q155,570 185,570 L195,570 L195,320"
-                        stroke-width="2" />
-                    <!-- R Leg -->
-                    <path class="human-path" d="M230,320 L240,550 Q245,570 215,570 L205,570 L205,320"
-                        stroke-width="2" />
+                    <!-- Right Hand (WITH FINGERS) - Hand at x=290, y=270 area -->
+                    <g transform="translate(290, 260) rotate(-20)">
+                        <!-- Palm -->
+                        <path d="M0,0 Q-5,20 10,25 L20,20 L10,-5 Z" fill="#ffdbac" />
+                        <!-- Fingers -->
+                        <path d="M5,25 L5,35 L9,35 L9,25 Z" fill="#ffdbac" /> <!-- Finger 1 -->
+                        <path d="M10,25 L10,37 L14,37 L14,23 Z" fill="#ffdbac" /> <!-- Finger 2 -->
+                        <path d="M15,22 L15,36 L19,36 L19,20 Z" fill="#ffdbac" /> <!-- Finger 3 -->
+                        <path d="M20,18 L20,30 L24,30 L24,18 Z" fill="#ffdbac" /> <!-- Finger 4 -->
+                        <!-- Thumb -->
+                        <path d="M20,5 L30,10 L28,15 L18,10 Z" fill="#ffdbac" />
+                    </g>
+                    <!-- Clickable Finger Area -->
+                    <circle data-part="finger" class="body-part-hotspot" cx="310" cy="290" r="15" fill="transparent"
+                        onclick="selectPart('finger')" />
+                    <!-- Clickable Hand Area (general) -->
+                    <circle data-part="hand" class="body-part-hotspot" cx="305" cy="275" r="15" fill="transparent"
+                        onclick="selectPart('hand')" />
 
-                    <!-- Interaction Hotspots -->
 
-                    <!-- HEAD PARTS (Adjusted for bigger head) -->
-                    <!-- Head Box: x:155-245, y:20-120 -->
+                    <!-- LEGS -->
+                    <!-- Left Leg -->
+                    <path class="human-path" d="M170,320 L160,550 L195,550 L195,320" fill="#1e3a8a" stroke="none" />
+                    <!-- Right Leg -->
+                    <path class="human-path" d="M205,320 L205,550 L240,550 L230,320" fill="#1e3a8a" stroke="none" />
 
-                    <!-- KOPF (General) -->
-                    <path data-part="kopf" class="body-part-hotspot" d="M155,20 h90 v100 h-90 z" fill="transparent"
+                    <!-- FEET -->
+                    <!-- Left Foot -->
+                    <path class="human-path" d="M150,550 L195,550 L195,570 Q160,580 150,550" fill="#4b5563"
+                        stroke="none" />
+                    <!-- Right Foot -->
+                    <path class="human-path" d="M205,550 L250,550 L250,570 Q215,580 205,550" fill="#4b5563"
+                        stroke="none" />
+
+
+                    <!-- HEAD & FACE (Big & Colorful) - Centered at 200,80. Size approx 100x110 -->
+
+                    <!-- SKIN/HEAD BASE -->
+                    <ellipse cx="200" cy="70" rx="55" ry="65" fill="#ffdbac" stroke="none" />
+                    <path data-part="kopf" class="body-part-hotspot" d="M155,20 H245 V120 H155 Z" fill="transparent"
                         onclick="selectPart('kopf')" />
-
-                    <!-- HAAR -->
-                    <path data-part="haar" class="body-part-hotspot" d="M155,15 h90 v35 h-90 z"
-                        onclick="selectPart('haar')" />
-
-                    <!-- AUGEN -->
-                    <circle data-part="auge" class="body-part-hotspot" cx="180" cy="60" r="10"
-                        onclick="selectPart('auge')" />
-                    <circle data-part="auge" class="body-part-hotspot" cx="220" cy="60" r="10"
-                        onclick="selectPart('auge')" />
-
-                    <!-- NASE -->
-                    <circle data-part="nase" class="body-part-hotspot" cx="200" cy="75" r="8"
-                        onclick="selectPart('nase')" />
-
-                    <!-- MUND & ZAHN -->
-                    <path data-part="mund" class="body-part-hotspot" d="M180,90 h40 v15 h-40 z"
-                        onclick="selectPart('mund')" />
-                    <!-- Tooth (Visual representation inside mouth area, but clickable separately if needed, or part of mouth) -->
-                    <!-- User asked to draw tooth. Let's add a small white rect for tooth -->
-                    <rect x="195" y="92" width="10" height="5" fill="white" class="body-part-hotspot" data-part="zahn"
-                        onclick="selectPart('zahn')" />
-
-                    <!-- OHREN -->
-                    <circle data-part="ohr" class="body-part-hotspot" cx="150" cy="70" r="10"
-                        onclick="selectPart('ohr')" />
-                    <circle data-part="ohr" class="body-part-hotspot" cx="250" cy="70" r="10"
-                        onclick="selectPart('ohr')" />
-
-                    <!-- HALS (Neck) Hotspot -->
-                    <path data-part="hals" class="body-part-hotspot" d="M180,115 h40 v25 h-40 z"
-                        onclick="selectPart('hals')" />
-
-
-                    <!-- SKIN (Haut) - Cheek area -->
-                    <circle data-part="haut" class="body-part-hotspot" cx="230" cy="90" r="8"
+                    <!-- Haut helper -->
+                    <circle data-part="haut" class="body-part-hotspot" cx="230" cy="90" r="10" fill="transparent"
                         onclick="selectPart('haut')" />
 
-                    <!-- ARMS & HANDS -->
-                    <path data-part="arm" class="body-part-hotspot" d="M100,130 h40 v110 h-40 z"
-                        onclick="selectPart('arm')" />
-                    <path data-part="arm" class="body-part-hotspot" d="M260,130 h40 v110 h-40 z"
-                        onclick="selectPart('arm')" />
+                    <!-- HAIR -->
+                    <path d="M150,60 Q150,10 200,10 Q250,10 250,60 Q260,30 250,10 Q200,-10 150,10 Q140,30 150,60"
+                        fill="#4a3b2a" />
+                    <path data-part="haar" class="body-part-hotspot" d="M140,0 H260 V60 H140 Z" fill="transparent"
+                        onclick="selectPart('haar')" />
 
-                    <path data-part="hand" class="body-part-hotspot" d="M90,240 h35 v45 h-35 z"
-                        onclick="selectPart('hand')" />
-                    <path data-part="hand" class="body-part-hotspot" d="M275,240 h35 v45 h-35 z"
-                        onclick="selectPart('hand')" />
+                    <!-- EARS -->
+                    <ellipse cx="145" cy="70" rx="6" ry="10" fill="#ffdbac" stroke="#e5e7eb" stroke-width="1" />
+                    <circle data-part="ohr" class="body-part-hotspot" cx="145" cy="70" r="10" fill="transparent"
+                        onclick="selectPart('ohr')" />
 
-                    <!-- FINGER (Right Hand) -->
-                    <!-- Drawing a finger sticking out -->
-                    <path data-part="finger" class="body-part-hotspot" d="M310,250 L325,240 L330,245 L315,255 Z"
-                        fill="#ffdbac" stroke="#9ca3af" onclick="selectPart('finger')" />
+                    <ellipse cx="255" cy="70" rx="6" ry="10" fill="#ffdbac" stroke="#e5e7eb" stroke-width="1" />
+                    <circle data-part="ohr" class="body-part-hotspot" cx="255" cy="70" r="10" fill="transparent"
+                        onclick="selectPart('ohr')" />
 
 
-                    <!-- TORSO -->
-                    <circle data-part="herz" class="body-part-hotspot" cx="215" cy="170" r="15"
+                    <!-- EYES -->
+                    <!-- Sclera -->
+                    <ellipse cx="180" cy="65" rx="10" ry="6" fill="white" />
+                    <ellipse cx="220" cy="65" rx="10" ry="6" fill="white" />
+                    <!-- Iris -->
+                    <circle cx="180" cy="65" r="3" fill="#3b82f6" />
+                    <circle cx="220" cy="65" r="3" fill="#3b82f6" />
+                    <!-- Hotspots -->
+                    <circle data-part="auge" class="body-part-hotspot" cx="180" cy="65" r="12" fill="transparent"
+                        onclick="selectPart('auge')" />
+                    <circle data-part="auge" class="body-part-hotspot" cx="220" cy="65" r="12" fill="transparent"
+                        onclick="selectPart('auge')" />
+
+
+                    <!-- NOSE -->
+                    <path d="M200,75 L195,90 L205,90 Z" fill="#e0c298" />
+                    <circle data-part="nase" class="body-part-hotspot" cx="200" cy="82" r="10" fill="transparent"
+                        onclick="selectPart('nase')" />
+
+
+                    <!-- MOUTH & TEETH -->
+                    <!-- Mouth Shape -->
+                    <path d="M185,100 Q200,115 215,100 Q200,105 185,100" fill="#be123c" />
+                    <!-- Teeth (small white strip inside) -->
+                    <path d="M190,102 Q200,105 210,102" stroke="white" stroke-width="3" fill="none" />
+                    <!-- Hotspots -->
+                    <ellipse data-part="mund" class="body-part-hotspot" cx="200" cy="105" rx="15" ry="8"
+                        fill="transparent" onclick="selectPart('mund')" />
+                    <rect data-part="zahn" class="body-part-hotspot" x="190" y="100" width="20" height="5"
+                        fill="transparent" onclick="selectPart('zahn')" />
+
+
+                    <!-- Hotspots for Body/Legs/Feet (overlay) -->
+                    <!-- HEART (Herz) - Visual visible heart -->
+                    <path
+                        d="M215,180 C215,180 200,165 200,158 Q200,150 208,150 Q215,150 215,158 Q215,150 222,150 Q230,150 230,158 C230,165 215,180 215,180 Z"
+                        fill="#ef4444" stroke="#be123c" stroke-width="1" />
+
+                    <rect data-part="bauch" class="body-part-hotspot" x="170" y="160" width="60" height="100"
+                        fill="transparent" onclick="selectPart('bauch')" />
+                    <circle data-part="herz" class="body-part-hotspot" cx="215" cy="165" r="18" fill="transparent"
                         onclick="selectPart('herz')" />
-                    <path data-part="bauch" class="body-part-hotspot" d="M165,200 h70 v100 h-70 z"
-                        onclick="selectPart('bauch')" />
 
-                    <!-- LEGS & FEET -->
-                    <path data-part="bein" class="body-part-hotspot" d="M160,330 h35 v180 h-35 z"
-                        onclick="selectPart('bein')" />
-                    <path data-part="bein" class="body-part-hotspot" d="M205,330 h35 v180 h-35 z"
-                        onclick="selectPart('bein')" />
+                    <rect data-part="bein" class="body-part-hotspot" x="160" y="320" width="35" height="200"
+                        fill="transparent" onclick="selectPart('bein')" />
+                    <rect data-part="bein" class="body-part-hotspot" x="205" y="320" width="35" height="200"
+                        fill="transparent" onclick="selectPart('bein')" />
 
-                    <path data-part="fuß" class="body-part-hotspot" d="M150,540 h45 v35 h-45 z"
-                        onclick="selectPart('fuß')" />
-                    <path data-part="fuß" class="body-part-hotspot" d="M205,540 h45 v35 h-45 z"
-                        onclick="selectPart('fuß')" />
+                    <rect data-part="fuß" class="body-part-hotspot" x="150" y="520" width="45" height="40"
+                        fill="transparent" onclick="selectPart('fuß')" />
+                    <rect data-part="fuß" class="body-part-hotspot" x="205" y="520" width="45" height="40"
+                        fill="transparent" onclick="selectPart('fuß')" />
+
                 </svg>
 
                 <div
