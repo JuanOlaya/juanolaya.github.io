@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMBOK 7: Guía Gestión de Proyectos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .card-hover:hover { transform: translateY(-3px); transition: all 0.2s ease; }
+        .gradient-principles { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); }
+        .gradient-domains { background: linear-gradient(135deg, #059669 0%, #064e3b 100%); }
+        .gradient-artifacts { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        
+        /* Modal Styles */
+        #modalOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            z-index: 50;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 2rem;
+            max-width: 700px;
+            width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform: scale(0.95);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        #modalOverlay.active { display: flex; }
+        #modalOverlay.active .modal-content { transform: scale(1); }
+
+        /* Custom Bullet List */
+        .infographic-list li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+        .infographic-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #4f46e5;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased p-4 md:p-8 text-sm">
+
+    <!-- VENTANA MODAL -->
+    <div id="modalOverlay" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-6 border-b pb-4">
+                <div>
+                    <h3 id="modalTitle" class="text-3xl font-black text-indigo-800 leading-tight"></h3>
+                    <p id="modalSub" class="text-lg font-medium text-indigo-500 italic mt-1"></p>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-rose-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="modalBody" class="text-slate-700 leading-relaxed text-base space-y-6">
+                <!-- Contenido inyectado vía JS -->
+            </div>
+
+            <div class="mt-8 pt-6 border-t">
+                <button onclick="closeModal()" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-700 hover:shadow-lg transition-all active:scale-95">
+                    Entendido, ¡continuemos!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-slate-800 mb-2">PMBOK 7: Guía Gestión de Proyectos</h1>
+            <p class="text-lg text-slate-600 italic">Estructura profesional: Del "Ser" (Ética) al "Hacer" (Ejecución y Artefactos)</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+            
+            <!-- SECCIÓN 1: LOS PRINCIPIOS -->
+            <section class="space-y-4">
+                <div class="gradient-principles p-6 rounded-2xl text-white shadow-lg">
+                    <h2 class="text-2xl font-bold mb-2 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-5.19 4.595-9.362 9.716-10.178" />
+                        </svg>
+                        12 Project Management Principles
+                    </h2>
+                    <p class="text-indigo-100 text-xs mb-6 italic">12 Principios (Mentalidad) — Brújula moral del proyecto.</p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="openModalById('Stewardship')" class="bg-white/10 p-3 rounded-xl border border-white/20 text-left hover:bg-white/20 transition group">
+                            <div class="font-bold text-xs uppercase tracking-wide">Stewardship</div>
+                            <div class="text-[11px] opacity-80">Responsabilidad</div>
+                        </button>
+                        <button onclick="openModalById('Team')" class="bg-white/10 p-3 rounded-xl border border-white/20 text-left hover:bg-white/20 transition group">
+                            <div class="font-bold text-xs uppercase tracking-wide">Team</div>
+                            <div class="text-[11px] opacity-80">Equipo</div>
+                        </button>
+                        <button onclick="openModalById('Stakeholders')" class="bg-white/10 p-3 rounded-xl border border-white/20 text-left hover:bg-white/20 transition group">
+                            <div class="font-bold text-xs uppercase tracking-wide">Stakeholders</div>
+                            <div class="text-[11px] opacity-80">Interesados</div>
+                        </button>
+                        <button onclick="openModalById('Value')" class="bg-white/10 p-3 rounded-xl border border-white/20 text-left hover:bg-white/20 transition group">
+                            <div class="font-bold text-xs uppercase tracking-wide">Value</div>
+                            <div class="text-[11px] opacity-80">Valor</div>
+                        </button>
+                        <button onclick="openModalById('Systems Thinking')" class="bg-white/10 p-3 rounded-xl border border-white/20 text-left hover:bg-white/20 transition group">
+                            <div class="font-bold text-xs uppercase tracking-wide">Systems Thinking</div>
+                            <div class="text-[11px] opacity-80">Pensa. Sistémico</div>
+                        </button>
+                        <button onclick="openModalById('Leadership')" class="bg-white/10 p-3 rounded-xl border border-white/20 text-left hover:bg-white/20 transition group">
+                            <div class="font-bold text-xs uppercase tracking-wide">Leadership</div>
+                            <div class="text-[11px] opacity-80">Liderazgo</div>
+                        </button>
+                        <button onclick="openModalById('Tailoring')" class="bg-white/10 p-3 rounded-xl border border-white/20 text-left hover:bg-white/20 transition group">
+                            <div class="font-bold text-xs uppercase tracking-wide">Tailoring</div>
+                            <div class="text-[11px] opacity-80">Adaptación</div>
+                        </button>
+                        <button onclick="openModalById('Quality')" class="bg-white/10 p-3 rounded-xl border border-white/20 text-left hover:bg-white/20 transition group">
+                            <div class="font-bold text-xs uppercase tracking-wide">Quality</div>
+                            <div class="text-[11px] opacity-80">Calidad</div>
+                        </button>
+                        <button onclick="openModalById('Complexity')" class="bg-white/10 p-3 rounded-xl border border-white/20 text-left hover:bg-white/20 transition group">
+                            <div class="font-bold text-xs uppercase tracking-wide">Complexity</div>
+                            <div class="text-[11px] opacity-80">Complejidad</div>
+                        </button>
+                        <button onclick="openModalById('Risk')" class="bg-white/10 p-3 rounded-xl border border-white/20 text-left hover:bg-white/20 transition group">
+                            <div class="font-bold text-xs uppercase tracking-wide">Risk</div>
+                            <div class="text-[11px] opacity-80">Riesgo</div>
+                        </button>
+                        <button onclick="openModalById('Adaptability & Resiliency')" class="bg-white/10 p-3 rounded-xl border border-white/20 text-left hover:bg-white/20 transition group">
+                            <div class="font-bold text-xs uppercase tracking-wide">Adaptability & Resiliency</div>
+                            <div class="text-[11px] opacity-80">Resiliencia</div>
+                        </button>
+                        <button onclick="openModalById('Change')" class="bg-white/10 p-3 rounded-xl border border-white/20 text-left hover:bg-white/20 transition group">
+                            <div class="font-bold text-xs uppercase tracking-wide">Change</div>
+                            <div class="text-[11px] opacity-80">Cambio</div>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: LOS DOMINIOS -->
+            <section class="space-y-4">
+                <div class="gradient-domains p-6 rounded-2xl text-white shadow-lg">
+                    <h2 class="text-2xl font-bold mb-2 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        8 Project Performance Domains
+                    </h2>
+                    <p class="text-emerald-100 text-xs mb-6 italic">8 Dominios: El Cuerpo Técnico — Estrategia de ejecución.</p>
+                    <div class="grid grid-cols-1 gap-2">
+                        <button onclick="openModalById('DomainStakeholders')" class="bg-white/10 p-2 rounded border-l-4 border-emerald-400 text-left hover:bg-white/20 transition w-full">
+                            <span class="font-bold text-xs uppercase tracking-wide block">Stakeholders</span>
+                            <span class="text-[10px] block font-semibold opacity-90 italic">Interesados — Estrategia y expectativas.</span>
+                        </button>
+                        <button onclick="openModalById('DomainTeam')" class="bg-white/10 p-2 rounded border-l-4 border-emerald-400 text-left hover:bg-white/20 transition w-full">
+                            <span class="font-bold text-xs uppercase tracking-wide block">Team</span>
+                            <span class="text-[10px] block font-semibold opacity-90 italic">Equipo — Estructura y gobernanza.</span>
+                        </button>
+                        <button onclick="openModalById('DomainLifecycle')" class="bg-white/10 p-2 rounded border-l-4 border-amber-400 text-left hover:bg-white/20 transition w-full">
+                            <span class="font-bold text-xs uppercase tracking-wide block text-amber-200">Development Approach and Life Cycle</span>
+                            <span class="text-[10px] block font-semibold opacity-90 italic text-amber-50">Ciclo de Vida — Metodología.</span>
+                        </button>
+                        <button onclick="openModalById('DomainPlanning')" class="bg-white/10 p-2 rounded border-l-4 border-amber-400 text-left hover:bg-white/20 transition w-full">
+                            <span class="font-bold text-xs uppercase tracking-wide block text-amber-200">Planning</span>
+                            <span class="text-[10px] block font-semibold opacity-90 italic text-amber-50">Planificación — Cronograma.</span>
+                        </button>
+                        <button onclick="openModalById('DomainWork')" class="bg-white/10 p-2 rounded border-l-4 border-emerald-400 text-left hover:bg-white/20 transition w-full">
+                            <span class="font-bold text-xs uppercase tracking-wide block">Project Work</span>
+                            <span class="text-[10px] block font-semibold opacity-90 italic text-emerald-50">Trabajo — Procesos operativos.</span>
+                        </button>
+                        <button onclick="openModalById('DomainDelivery')" class="bg-white/10 p-2 rounded border-l-4 border-emerald-500 bg-emerald-900/30 text-left hover:bg-white/20 transition w-full">
+                            <span class="font-bold text-xs uppercase tracking-wide block text-emerald-200">Delivery</span>
+                            <span class="text-[10px] block font-semibold opacity-90 italic text-emerald-100">Entrega — Alcance y Requisitos.</span>
+                        </button>
+                        <button onclick="openModalById('DomainMeasurement')" class="bg-white/10 p-2 rounded border-l-4 border-emerald-400 text-left hover:bg-white/20 transition w-full">
+                            <span class="font-bold text-xs uppercase tracking-wide block">Measurement</span>
+                            <span class="text-[10px] block font-semibold opacity-90 italic">Medición — KPIs y desempeño.</span>
+                        </button>
+                        <button onclick="openModalById('DomainUncertainty')" class="bg-white/10 p-2 rounded border-l-4 border-amber-400 text-left hover:bg-white/20 transition w-full">
+                            <span class="font-bold text-xs uppercase tracking-wide block text-amber-200">Uncertainty</span>
+                            <span class="text-[10px] block font-semibold opacity-90 italic text-amber-50">Incertidumbre — Riesgos.</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SECCIÓN DE ARTEFACTOS Y VISUALIZACIONES -->
+        <section class="gradient-artifacts p-8 rounded-3xl text-white shadow-xl mb-10 card-hover">
+            <h2 class="text-3xl font-extrabold mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/center" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                </svg>
+                Commonly Used Artifacts & Visualizations
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Columna 1 -->
+                <div class="bg-black/20 p-4 rounded-xl">
+                    <h3 class="font-bold border-b border-white/20 pb-2 mb-3">Ejecución y Flujo</h3>
+                    <ul class="text-xs space-y-2">
+                        <li class="flex items-center"><span class="mr-2">🎴</span> Tableros y Tarjetas Kanban</li>
+                        <li class="flex items-center"><span class="mr-2">📈</span> Diagrama de Gantt / Cronograma</li>
+                        <li class="flex items-center"><span class="mr-2">📉</span> Burndown / Burnup Charts</li>
+                        <li class="flex items-center"><span class="mr-2">📊</span> Curva S (Costos Acumulados)</li>
+                        <li class="flex items-center"><span class="mr-2">🌊</span> Flujo Acumulado (CFD)</li>
+                    </ul>
+                </div>
+                <!-- Columna 2 -->
+                <div class="bg-black/20 p-4 rounded-xl">
+                    <h3 class="font-bold border-b border-white/20 pb-2 mb-3">Requisitos e Informes</h3>
+                    <ul class="text-xs space-y-2">
+                        <li class="flex items-center"><span class="mr-2">📋</span> Matriz de Trazabilidad</li>
+                        <li class="flex items-center"><span class="mr-2">📑</span> Backlog / Historias de Usuario</li>
+                        <li class="flex items-center"><span class="mr-2">🌳</span> EDT / WBS (Jerarquía)</li>
+                        <li class="flex items-center"><span class="mr-2">📐</span> Líneas Base (Baselines)</li>
+                        <li class="flex items-center"><span class="mr-2">🔎</span> Diagrama de Pareto</li>
+                    </ul>
+                </div>
+                <!-- Columna 3 -->
+                <div class="bg-black/20 p-4 rounded-xl">
+                    <h3 class="font-bold border-b border-white/20 pb-2 mb-3">Estrategia y Riesgo</h3>
+                    <ul class="text-xs space-y-2">
+                        <li class="flex items-center"><span class="mr-2">🗺️</span> Roadmap del Proyecto</li>
+                        <li class="flex items-center"><span class="mr-2">🔥</span> Mapa de Calor de Riesgos</li>
+                        <li class="flex items-center"><span class="mr-2">🖥️</span> Dashboard de Desempeño</li>
+                        <li class="flex items-center"><span class="mr-2">💎</span> Mapa de Valor (VSM)</li>
+                        <li class="flex items-center"><span class="mr-2">🦴</span> Diagrama de Ishikawa</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- GUÍA RÁPIDA DE PROPUESTA -->
+        <section class="mt-8 mb-10 bg-white p-8 rounded-3xl shadow-lg border border-slate-200">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+                Guía rápida: Qué poner en tu documento de Propuesta
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <button onclick="openModalById('GuideGobernanza')" class="p-4 bg-slate-50 rounded-xl border-l-4 border-indigo-500 shadow-sm text-left hover:bg-indigo-50 transition card-hover">
+                    <h4 class="font-bold text-indigo-700 mb-1 text-xs text-center uppercase">Gobernanza</h4>
+                    <p class="text-[10px] text-slate-600">Modelo de liderazgo y aseguramiento de la ética y Compliance (Cumplimiento).</p>
+                </button>
+                <button onclick="openModalById('GuideTecnica')" class="p-4 bg-slate-50 rounded-xl border-l-4 border-emerald-500 shadow-sm text-left hover:bg-emerald-50 transition card-hover">
+                    <h4 class="font-bold text-emerald-700 mb-1 text-xs text-center uppercase">Cuerpo Técnico</h4>
+                    <p class="text-[10px] text-slate-600">Levantamiento de Requisitos y Metodología de Entrega elegida.</p>
+                </button>
+                <button onclick="openModalById('GuideVisual')" class="p-4 bg-slate-50 rounded-xl border-l-4 border-amber-500 shadow-sm text-left hover:bg-indigo-50 transition card-hover">
+                    <h4 class="font-bold text-amber-700 mb-1 text-xs text-center uppercase">Gestión Visual</h4>
+                    <p class="text-[10px] text-slate-600">Uso de Kanban y Dashboards (Tableros) para transparencia.</p>
+                </button>
+                <button onclick="openModalById('GuideCompliance')" class="p-4 bg-slate-50 rounded-xl border-l-4 border-rose-500 shadow-sm text-left hover:bg-rose-50 transition card-hover">
+                    <h4 class="font-bold text-rose-700 mb-1 text-xs text-center uppercase">Compliance</h4>
+                    <p class="text-[10px] text-slate-600">Monitorización de leyes y normas vigentes.</p>
+                </button>
+            </div>
+        </section>
+
+        <footer class="text-center text-slate-400 text-[10px] pb-4 italic">
+            "El éxito se encuentra en la intersección entre un Ser ético y un Hacer técnico impecable."
+        </footer>
+    </div>
+
+    <script>
+        const contentData = {
+            // Principles
+            'Stewardship': {
+                title: 'Stewardship',
+                sub: 'Responsabilidad',
+                body: `<div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800">Cuidar el proyecto como si fuera propio.</div>
+                       <ul class="infographic-list">
+                         <li>Integridad (Integrity): Actuar con honestidad en cada decisión.</li>
+                         <li>Cuidado (Care): Proteger recursos financieros y ambientales.</li>
+                         <li>Compliance (Cumplimiento): Respetar leyes y normas internas y externas.</li>
+                       </ul>`
+            },
+            'Team': {
+                title: 'Team',
+                sub: 'Equipo',
+                body: `<div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800">El corazón de la ejecución.</div>
+                       <ul class="infographic-list">
+                         <li>Cultura: Crear un entorno de seguridad psicológica.</li>
+                         <li>Respeto: Valorar la diversidad de pensamiento.</li>
+                         <li>Empoderamiento (Empowerment): Dar autonomía para resolver problemas.</li>
+                       </ul>`
+            },
+            'Stakeholders': {
+                title: 'Stakeholders',
+                sub: 'Interesados',
+                body: `<div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800">Gestionar relaciones, no solo nombres.</div>
+                       <ul class="infographic-list">
+                         <li>Involucramiento (Engagement): Mantenerlos activos y motivados.</li>
+                         <li>Expectativas: Alinear lo que desean con la realidad técnica.</li>
+                         <li>Colaboración: Construir puentes de comunicación efectivos.</li>
+                       </ul>`
+            },
+            'Value': {
+                title: 'Value',
+                sub: 'Valor',
+                body: `<div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800">El fin último de todo esfuerzo.</div>
+                       <ul class="infographic-list">
+                         <li>Beneficios: Medir el éxito por el impacto, no solo por tareas.</li>
+                         <li>Alineación: Asegurar que el proyecto ayude a la estrategia del negocio.</li>
+                         <li>Optimización: Entregar el máximo valor con los recursos disponibles.</li>
+                       </ul>`
+            },
+            'Systems Thinking': {
+                title: 'Systems Thinking',
+                sub: 'Pensamiento Sistémico',
+                body: `<div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800">Entender que todo está conectado.</div>
+                       <ul class="infographic-list">
+                         <li>Holismo: Mirar la imagen completa o Big Picture.</li>
+                         <li>Interacciones: Ver cómo una parte afecta a las demás del sistema.</li>
+                         <li>Contexto: No ignorar el entorno organizacional y externo.</li>
+                       </ul>`
+            },
+            'Leadership': {
+                title: 'Leadership',
+                sub: 'Liderazgo',
+                body: `<div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800">Influencia positiva sin jerarquías.</div>
+                       <ul class="infographic-list">
+                         <li>Inspiración: Motivar hacia una visión común compartida.</li>
+                         <li>Servicio (Servant Leadership): Liderar para que el equipo brille.</li>
+                         <li>Adaptabilidad: Cambiar el estilo de liderazgo según la necesidad.</li>
+                       </ul>`
+            },
+            'Tailoring': {
+                title: 'Tailoring',
+                sub: 'Adaptación',
+                body: `<div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800">No hay una receta mágica única.</div>
+                       <ul class="infographic-list">
+                         <li>Ajuste: Seleccionar los procesos que sirven específicamente hoy.</li>
+                         <li>Eficiencia: Eliminar burocracia innecesaria en la gestión.</li>
+                         <li>Evolución: Cambiar el método si el entorno del proyecto cambia.</li>
+                       </ul>`
+            },
+            'Quality': {
+                title: 'Quality',
+                sub: 'Calidad',
+                body: `<div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800">Hacerlo bien desde la primera vez.</div>
+                       <ul class="infographic-list">
+                         <li>Satisfacción: Cumplir con lo que el cliente espera recibir.</li>
+                         <li>Mejora Continua: Refinar procesos constantemente.</li>
+                         <li>Desempeño: Entregables que funcionan según las especificaciones.</li>
+                       </ul>`
+            },
+            'Complexity': {
+                title: 'Complexity',
+                sub: 'Complejidad',
+                body: `<div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800">Navegar en la niebla con seguridad.</div>
+                       <ul class="infographic-list">
+                         <li>Diagnóstico: Entender qué variables hacen complejo al proyecto.</li>
+                         <li>Estrategia: Simplificar lo difícil donde sea posible.</li>
+                         <li>Vigilancia: Monitorear cambios inesperados que aumenten el caos.</li>
+                       </ul>`
+            },
+            'Risk': {
+                title: 'Risk',
+                sub: 'Riesgo',
+                body: `<div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800">Anticiparse al futuro incierto.</div>
+                       <ul class="infographic-list">
+                         <li>Amenazas (Threats): Planear para lo que puede salir mal.</li>
+                         <li>Oportunidades (Opportunities): Listos para lo que puede salir mejor.</li>
+                         <li>Respuesta: Acciones rápidas y planeadas ante la incertidumbre.</li>
+                       </ul>`
+            },
+            'Adaptability & Resiliency': {
+                title: 'Adaptability & Resiliency',
+                sub: 'Adaptabilidad y Resiliencia',
+                body: `<div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800">Flexibilidad para ganar.</div>
+                       <ul class="infographic-list">
+                         <li>Reacción: Ajustar las velas cuando cambia el viento del proyecto.</li>
+                         <li>Recuperación: Aprender de los errores técnicos y seguir adelante.</li>
+                         <li>Constancia: No perder el foco estratégico ante el caos temporal.</li>
+                       </ul>`
+            },
+            'Change': {
+                title: 'Change',
+                sub: 'Cambio',
+                body: `<div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800">Acompañar la transformación organizacional.</div>
+                       <ul class="infographic-list">
+                         <li>Transición: Ayudar a la gente a adoptar los nuevos resultados.</li>
+                         <li>Sostenibilidad: Que el cambio perdure una vez finalizado el proyecto.</li>
+                         <li>Visión: Mirar siempre hacia el estado futuro deseado.</li>
+                       </ul>`
+            },
+
+            // Domains
+            'DomainStakeholders': {
+                title: 'Stakeholders',
+                sub: 'Interesados',
+                body: `<div class="bg-emerald-50 p-4 rounded-xl border-l-4 border-emerald-500 mb-4 font-semibold text-emerald-800">Este dominio establece una Estrategia de Relación (Engagement Strategy) efectiva.</div>
+                       <ul class="infographic-list">
+                         <li>Matrices de Poder e Interés: Saber quién decide de verdad.</li>
+                         <li>Planes de Comunicación: Determinar qué decir y cuándo hacerlo.</li>
+                         <li>Gestión de Expectativas: Evitar sorpresas negativas para el cliente.</li>
+                       </ul>`
+            },
+            'DomainTeam': {
+                title: 'Team',
+                sub: 'Equipo',
+                body: `<div class="bg-emerald-50 p-4 rounded-xl border-l-4 border-emerald-500 mb-4 font-semibold text-emerald-800">Aborda la Estructura y Gobernanza (Governance) del grupo de trabajo.</div>
+                       <ul class="infographic-list">
+                         <li>Matriz RACI: Claridad absoluta en responsabilidades y roles.</li>
+                         <li>Normas de Equipo: Reglas del juego claras para la convivencia.</li>
+                         <li>Desarrollo: Potenciar el talento y los SME (Expertos en la Materia).</li>
+                       </ul>`
+            },
+            'DomainLifecycle': {
+                title: 'Development Approach and Life Cycle',
+                sub: 'Ciclo de Vida',
+                body: `<div class="bg-amber-50 p-4 rounded-xl border-l-4 border-amber-500 mb-4 font-semibold text-amber-800">Define la Metodología de Entrega (Delivery Methodology).</div>
+                       <ul class="infographic-list">
+                         <li>Agile (Ágil): Para requisitos cambiantes y rapidez de entrega.</li>
+                         <li>Cascada (Waterfall): Para estabilidad y hitos fijos secuenciales.</li>
+                         <li>Híbrido: Combinar lo mejor de ambos mundos según el caso.</li>
+                       </ul>`
+            },
+            'DomainPlanning': {
+                title: 'Planning',
+                sub: 'Planificación',
+                body: `<div class="bg-amber-50 p-4 rounded-xl border-l-4 border-amber-500 mb-4 font-semibold text-amber-800">Cubre la organización técnica de recursos, tiempo y costos.</div>
+                       <ul class="infographic-list">
+                         <li>Líneas Base (Baselines): El punto de comparación inicial aprobado.</li>
+                         <li>EDT (Estructura de Desglose del Trabajo): Dividir para vencer.</li>
+                         <li>Estimación: Tiempos y costos realistas basados en datos.</li>
+                       </ul>`
+            },
+            'DomainWork': {
+                title: 'Project Work',
+                sub: 'Trabajo del Proyecto',
+                body: `<div class="bg-emerald-50 p-4 rounded-xl border-l-4 border-emerald-500 mb-4 font-semibold text-emerald-800">Se enfoca en la Operación Diaria (Daily Operations).</div>
+                       <ul class="infographic-list">
+                         <li>Flujos como Kanban: Visibilidad total de las tareas diarias.</li>
+                         <li>Logística: Recursos listos justo cuando se necesitan.</li>
+                         <li>Eliminación de Trabas: Desbloquear al equipo de forma rápida.</li>
+                       </ul>`
+            },
+            'DomainDelivery': {
+                title: 'Delivery',
+                sub: 'Entrega',
+                body: `<div class="bg-emerald-50 p-6 rounded-xl border-l-4 border-emerald-600 mb-4 font-semibold text-emerald-900 shadow-sm">🎯 Foco en Requisitos y Alcance (Scope). Es el dominio donde se realiza el Levantamiento de Requisitos.</div>
+                       <ul class="infographic-list">
+                         <li>Levantamiento (Requirements Gathering): Captura técnica de necesidades.</li>
+                         <li>Trazabilidad (Traceability): Seguir el requisito hasta su entrega.</li>
+                         <li>Criterios de Aceptación: Condiciones claras para dar el visto bueno.</li>
+                       </ul>`
+            },
+            'DomainMeasurement': {
+                title: 'Measurement',
+                sub: 'Medición',
+                body: `<div class="bg-slate-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800 italic">Este dominio es el corazón del control basado en datos cuantificables.</div>
+                       
+                       <div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-600 mb-6 shadow-sm">
+                         <p class="font-bold text-indigo-700 flex items-center">🎯 KPI (Key Performance Indicator)</p>
+                         <p class="text-[11px] font-semibold text-indigo-600 italic">Indicador Clave de Desempeño</p>
+                         <p class="text-[10px] mt-1 text-slate-600">Métrica cuantificable que evalúa el progreso hacia los objetivos operativos.</p>
+                       </div>
+
+                       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                         <div class="bg-blue-50 p-3 rounded-lg border border-blue-200 shadow-sm">
+                           <p class="font-bold text-blue-700 flex items-center">🚀 SPI</p>
+                           <p class="text-[11px] font-semibold text-blue-600 italic">Schedule Performance Index</p>
+                           <p class="text-[10px] mt-1 text-slate-600">Índice de desempeño del tiempo. Valores mayores a 1 indican adelanto.</p>
+                         </div>
+                         <div class="bg-emerald-50 p-3 rounded-lg border border-emerald-200 shadow-sm">
+                           <p class="font-bold text-emerald-700 flex items-center">💰 CPI</p>
+                           <p class="text-[11px] font-semibold text-emerald-600 italic">Cost Performance Index</p>
+                           <p class="text-[10px] mt-1 text-slate-600">Índice de desempeño del costo. Valores mayores a 1 indican ahorro.</p>
+                         </div>
+                       </div>
+
+                       <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mb-4 text-xs leading-relaxed">
+                         <h4 class="font-bold text-slate-800 text-sm mb-2 uppercase tracking-wide">Fórmulas y Tipos</h4>
+                         <ul class="infographic-list">
+                           <li>SPI = EV / PV: Valor Ganado (Earned Value) entre Valor Planificado.</li>
+                           <li>CPI = EV / AC: Valor Ganado (Earned Value) entre Costo Real.</li>
+                           <li>Leading Indicators (Indicadores Adelantados): Predicen cambios futuros.</li>
+                           <li>Lagging Indicators (Indicadores Atrasados): Confirman resultados pasados.</li>
+                         </ul>
+                       </div>`
+            },
+            'DomainUncertainty': {
+                title: 'Uncertainty',
+                sub: 'Incertidumbre',
+                body: `<div class="bg-amber-50 p-4 rounded-xl border-l-4 border-amber-500 mb-4 font-semibold text-amber-800">Gestiona el espectro completo de Riesgos y Oportunidades.</div>
+                       <ul class="infographic-list">
+                         <li>Heat Maps (Mapas de Calor): Priorizar riesgos por impacto y probabilidad.</li>
+                         <li>Contingencia: Tener un Plan B listo para ejecución inmediata.</li>
+                         <li>Oportunidades: Aprovechar lo inesperado a favor de los objetivos.</li>
+                       </ul>`
+            },
+
+            // Guide Quick Tips
+            'GuideGobernanza': {
+                title: 'Gobernanza',
+                sub: 'Liderazgo y Ética',
+                body: `<div class="bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800">El marco de decisión del proyecto.</div>
+                       <ul class="infographic-list">
+                         <li>Modelo de Liderazgo: Definir si será directivo, servicial o transformacional.</li>
+                         <li>Ética Profesional: Alineación con el código de conducta institucional.</li>
+                         <li>Compliance (Cumplimiento): Asegurar el respeto al marco legal desde el inicio.</li>
+                       </ul>`
+            },
+            'GuideTecnica': {
+                title: 'Cuerpo Técnico',
+                sub: 'Metodología y Alcance',
+                body: `<div class="bg-emerald-50 p-4 rounded-xl border-l-4 border-emerald-500 mb-4 font-semibold text-emerald-800">La arquitectura de la solución propuesta.</div>
+                       <ul class="infographic-list">
+                         <li>Levantamiento de Requisitos: Métodos para capturar necesidades técnicas.</li>
+                         <li>Entrega: Justificación del enfoque Agile, Cascada o Híbrido.</li>
+                         <li>Criterios de Éxito: Definir qué se considera un trabajo terminado.</li>
+                       </ul>`
+            },
+            'GuideVisual': {
+                title: 'Gestión Visual',
+                sub: 'Transparencia y Control',
+                body: `<div class="bg-amber-50 p-4 rounded-xl border-l-4 border-amber-500 mb-4 font-semibold text-amber-800">Mostrar el progreso en tiempo real.</div>
+                       <ul class="infographic-list">
+                         <li>Kanban: Visualización del flujo y detección de cuellos de botella.</li>
+                         <li>Dashboards (Tableros): Radiadores de información con métricas clave.</li>
+                         <li>Acceso a Datos: Transparencia total sobre la realidad operativa.</li>
+                       </ul>`
+            },
+            'GuideCompliance': {
+                title: 'Compliance',
+                sub: 'Normativa y Sostenibilidad',
+                body: `<div class="bg-rose-50 p-4 rounded-xl border-l-4 border-rose-500 mb-4 font-semibold text-rose-800">Protección legal y regulatoria.</div>
+                       <ul class="infographic-list">
+                         <li>Monitoreo: Auditorías periódicas de procesos y resultados técnicos.</li>
+                         <li>Leyes y Normas: Checklist de cumplimiento de estándares nacionales o internacionales.</li>
+                         <li>Prevención: Identificación proactiva de riesgos legales y normativos.</li>
+                       </ul>`
+            }
+        };
+
+        function openModalById(id) {
+            const data = contentData[id];
+            if (data) {
+                showModal(data.title, data.sub, data.body);
+            }
+        }
+
+        function showModal(title, sub, body) {
+            document.getElementById('modalTitle').innerHTML = title;
+            document.getElementById('modalSub').innerHTML = sub;
+            document.getElementById('modalBody').innerHTML = body;
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto'; 
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") closeModal();
+        });
+    </script>
+</body>
+</html>
