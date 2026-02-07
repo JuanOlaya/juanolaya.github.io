@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expresiones Adverbiales: Español vs. Alemán</title>
+    <style>
+        :root {
+            /* --- DEFAULT DARK MODE PALETTE --- */
+            --bg-color: #0f172a;
+            /* Slate 900 */
+            --card-bg: #1e293b;
+            /* Slate 800 */
+            --header-bg: #020617;
+            /* Slate 950 */
+            --section-bg: #0f172a;
+            /* Slate 900 */
+
+            /* Background for the Golden Rule */
+            --rule-bg: linear-gradient(135deg, #0f172a 0%, #0c4a6e 100%);
+
+            --text-main: #f1f5f9;
+            /* Slate 100 */
+            --text-muted: #94a3b8;
+            /* Slate 400 */
+            --border-color: #334155;
+            /* Slate 700 */
+
+            /* CATEGORY COLORS */
+            --cat-tiempo: #3b82f6;
+            /* Blue */
+            --cat-lugar: #10b981;
+            /* Emerald */
+            --cat-modo: #a855f7;
+            /* Purple */
+            --cat-cantidad: #f59e0b;
+            /* Amber */
+            --cat-negacion: #ef4444;
+            /* Red */
+            --cat-cortesia: #6366f1;
+            /* Indigo */
+
+            /* LEVEL COLORS */
+            --level-a1: #3b82f6;
+            --level-a2: #eab308;
+            --level-b1: #f97316;
+            --level-b2: #ef4444;
+
+            --accent-green: #00FFA1;
+            /* Main Accent */
+
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glow-strength: 20px;
+
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* --- LIGHT MODE OVERRIDES --- */
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            /* Slate 100 */
+            --card-bg: #ffffff;
+            /* White */
+            --header-bg: #ffffff;
+            /* White */
+            --section-bg: #e2e8f0;
+            /* Slate 200 */
+
+            --rule-bg: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
+
+            --text-main: #1e293b;
+            /* Slate 800 */
+            --text-muted: #64748b;
+            /* Slate 500 */
+            --border-color: #cbd5e1;
+            /* Slate 300 */
+
+            --accent-green: #059669;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --glow-strength: 0px;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 80px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        header {
+            background: var(--header-bg);
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-green);
+            position: relative;
+        }
+
+        /* Updated: Controls are now stacked vertically */
+        .controls-wrapper {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .theme-btn,
+        .lang-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            min-width: 80px;
+        }
+
+        .theme-btn:hover,
+        .lang-btn:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-green);
+        }
+
+        body:not(.light-mode) .icon-sun {
+            display: block;
+        }
+
+        body:not(.light-mode) .icon-moon {
+            display: none;
+        }
+
+        body.light-mode .icon-sun {
+            display: none;
+        }
+
+        body.light-mode .icon-moon {
+            display: block;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: var(--accent-green);
+            text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.3);
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* --- FREQUENCY SCALE --- */
+        .quantity-scale-section {
+            padding: 30px 40px 80px 40px;
+            background: var(--section-bg);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .scale-bar {
+            flex-grow: 1;
+            height: 8px;
+            background: linear-gradient(90deg, var(--cat-negacion), var(--cat-cantidad), var(--accent-green));
+            border-radius: 5px;
+            position: relative;
+            margin: 0 15px;
+        }
+
+        .scale-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .marker {
+            position: absolute;
+            top: 20px;
+            transform: translateX(-50%);
+            font-size: 0.85rem;
+            color: var(--text-main);
+            font-weight: bold;
+            text-align: center;
+            white-space: nowrap;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .marker .trans {
+            color: var(--accent-green);
+            font-size: 0.7rem;
+            display: block;
+            margin-top: 3px;
+            opacity: 0.7;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .marker::after {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 8px;
+            background: var(--text-main);
+            opacity: 0.3;
+        }
+
+        /* Grid Layout */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+            background: var(--bg-color);
+        }
+
+        @media (max-width: 850px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .quantity-scale-section {
+                flex-direction: column;
+                padding-bottom: 100px;
+                gap: 40px;
+            }
+        }
+
+        .level-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 15px -3px var(--shadow-color);
+            transition: transform 0.2s;
+        }
+
+        .level-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .level-header {
+            padding: 15px 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .level-header.tiempo {
+            background: var(--cat-tiempo);
+        }
+
+        .level-header.lugar {
+            background: var(--cat-lugar);
+        }
+
+        .level-header.modo {
+            background: var(--cat-modo);
+        }
+
+        .level-header.cantidad {
+            background: var(--cat-cantidad);
+        }
+
+        .level-header.negacion {
+            background: var(--cat-negacion);
+        }
+
+        .level-header.cortesia {
+            background: var(--cat-cortesia);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 15px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .german-word {
+            font-weight: 700;
+            color: var(--accent-green);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .german-word:hover {
+            text-decoration: underline;
+        }
+
+        .audio-icon {
+            font-size: 0.9em;
+            opacity: 0.7;
+            filter: grayscale(1);
+        }
+
+        .german-word:hover .audio-icon {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+
+        .spanish-word {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .example-clickable {
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .example-clickable:hover {
+            color: var(--accent-green);
+        }
+
+        /* --- RULE SECTION --- */
+        .rule-section {
+            padding: 30px 40px;
+            background: var(--section-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .rule-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 6px solid var(--accent-green);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+
+        .rule-card.full-width {
+            width: 100%;
+            box-sizing: border-box;
+            background: var(--rule-bg);
+            border: 1px solid #0ea5e9;
+            border-left: 8px solid var(--accent-green);
+        }
+
+        .rule-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rule-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* --- MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-green);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 255, 161, 0.2);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: var(--header-bg);
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: var(--accent-green);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .modal-level-badge {
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: var(--accent-green);
+        }
+
+        .modal-body {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .modal-body .example-de {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        .modal-body .example-translation {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        footer {
+            background: var(--header-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 30px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body class="lang-es">
+
+    <!-- Modal Window -->
+    <div id="exampleModal" class="modal-overlay">
+        <div class="modal-content">
+            <header class="modal-header">
+                <div class="modal-header-left">
+                    <h2 id="modalExpressionName">Expresión</h2>
+                    <span id="modalLevel" class="modal-level-badge">A1</span>
+                </div>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </header>
+            <div class="modal-body">
+                <p id="modalExampleDe" class="example-de">Ejemplo en Alemán</p>
+                <p id="modalExampleTranslation" class="example-translation">Traducción</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="controls-wrapper">
+                <button class="theme-btn" onclick="toggleTheme()" aria-label="Cambiar tema">
+                    <span class="icon-sun">☀️</span>
+                    <span class="icon-moon">🌙</span>
+                </button>
+                <button class="lang-btn" onclick="toggleLanguage()" id="langToggleBtn">
+                    ES / EN
+                </button>
+            </div>
+            <h1 id="ui-title" data-es="Expresiones Adverbiales" data-en="Adverbial Expressions">Expresiones Adverbiales
+            </h1>
+            <p id="ui-subtitle" data-es="Guía de locuciones y adverbios (Español vs. Alemán)"
+                data-en="Guide to phrases and adverbs (English vs. German)">Guía de locuciones y adverbios (Español vs.
+                Alemán)</p>
+        </header>
+
+        <!-- Escala de Frecuencia -->
+        <div class="quantity-scale-section">
+            <div class="scale-label" id="ui-nie" data-es="Nie (0%)" data-en="Never (0%)">Nie (0%)</div>
+            <div class="scale-bar">
+                <div class="marker german-word" style="left: 20%">selten<span class="trans" data-es="Raramente"
+                        data-en="Rarely">Raramente</span></div>
+                <div class="marker german-word" style="left: 45%">ab und zu<span class="trans" data-es="A veces"
+                        data-en="Sometimes">A veces</span></div>
+                <div class="marker german-word" style="left: 70%">oft<span class="trans" data-es="A menudo"
+                        data-en="Often">A menudo</span></div>
+                <div class="marker german-word" style="left: 95%">immer<span class="trans" data-es="Siempre"
+                        data-en="Always">Siempre</span></div>
+            </div>
+            <div class="scale-label" id="ui-immer" data-es="Immer (100%)" data-en="Always (100%)">Immer (100%)</div>
+        </div>
+
+        <div class="grid-layout">
+            <!-- TIEMPO -->
+            <div class="level-card">
+                <div class="level-header tiempo"><span data-es="Tiempo" data-en="Time">Tiempo</span><span>🕒</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-es="Alemán / Español" data-en="German / English">Alemán / Español</th>
+                                <th data-es="Ejemplo" data-en="Example">Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-level="A1">
+                                <td>
+                                    <div class="german-word">ab und zu</div>
+                                    <div class="spanish-word" data-es="de vez en cuando" data-en="now and then">de vez
+                                        en cuando</div>
+                                </td>
+                                <td class="example-clickable" data-es="Voy a correr de vez en cuando."
+                                    data-en="I go jogging now and then.">Ich gehe ab und zu joggen.</td>
+                            </tr>
+                            <tr data-level="A2">
+                                <td>
+                                    <div class="german-word">vor kurzem</div>
+                                    <div class="spanish-word" data-es="hace poco" data-en="recently">hace poco</div>
+                                </td>
+                                <td class="example-clickable" data-es="Nos vimos hace poco."
+                                    data-en="We saw each other recently.">Wir haben uns vor kurzem gesehen.</td>
+                            </tr>
+                            <tr data-level="A1">
+                                <td>
+                                    <div class="german-word">oft / häufig</div>
+                                    <div class="spanish-word" data-es="a menudo" data-en="often">a menudo</div>
+                                </td>
+                                <td class="example-clickable" data-es="Leo a menudo por la noche."
+                                    data-en="I often read in the evening.">Ich lese oft am Abend.</td>
+                            </tr>
+                            <tr data-level="A2">
+                                <td>
+                                    <div class="german-word">plötzlich</div>
+                                    <div class="spanish-word" data-es="de repente" data-en="suddenly">de repente</div>
+                                </td>
+                                <td class="example-clickable" data-es="De repente empezó a llover."
+                                    data-en="Suddenly it started to rain.">Plötzlich fing es an zu regnen.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- LUGAR -->
+            <div class="level-card">
+                <div class="level-header lugar"><span data-es="Lugar" data-en="Place">Lugar</span><span>📍</span></div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-es="Alemán / Español" data-en="German / English">Alemán / Español</th>
+                                <th data-es="Ejemplo" data-en="Example">Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-level="B1">
+                                <td>
+                                    <div class="german-word">in der Ferne</div>
+                                    <div class="spanish-word" data-es="a lo lejos" data-en="in the distance">a lo lejos
+                                    </div>
+                                </td>
+                                <td class="example-clickable" data-es="Veo un barco a lo lejos."
+                                    data-en="I see a ship in the distance.">Ein Schiff in der Ferne.</td>
+                            </tr>
+                            <tr data-level="A1">
+                                <td>
+                                    <div class="german-word">da vorne</div>
+                                    <div class="spanish-word" data-es="allí delante" data-en="over there (front)">allí
+                                        delante</div>
+                                </td>
+                                <td class="example-clickable" data-es="La oficina de correos está justo allí delante."
+                                    data-en="The post office is right over there in front.">Die Post ist gleich da
+                                    vorne.</td>
+                            </tr>
+                            <tr data-level="A2">
+                                <td>
+                                    <div class="german-word">von außen</div>
+                                    <div class="spanish-word" data-es="por fuera" data-en="from the outside">por fuera
+                                    </div>
+                                </td>
+                                <td class="example-clickable" data-es="La casa se ve bien por fuera."
+                                    data-en="The house looks good from the outside.">Das Haus sieht von außen gut aus.
+                                </td>
+                            </tr>
+                            <tr data-level="A1">
+                                <td>
+                                    <div class="german-word">nach rechts</div>
+                                    <div class="spanish-word" data-es="a la derecha" data-en="to the right">a la derecha
+                                    </div>
+                                </td>
+                                <td class="example-clickable" data-es="Gire a la derecha." data-en="Turn right.">Biegen
+                                    Sie nach rechts ab.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- MODO -->
+            <div class="level-card">
+                <div class="level-header modo"><span data-es="Modo" data-en="Manner">Modo</span><span>⚙️</span></div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-es="Alemán / Español" data-en="German / English">Alemán / Español</th>
+                                <th data-es="Ejemplo" data-en="Example">Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-level="B1">
+                                <td>
+                                    <div class="german-word">planlos</div>
+                                    <div class="spanish-word" data-es="a tontas y a locas" data-en="aimlessly">a tontas
+                                        y a locas</div>
+                                </td>
+                                <td class="example-clickable" data-es="Él trabaja a menudo sin ningún plan."
+                                    data-en="He often works aimlessly.">Er arbeitet oft planlos.</td>
+                            </tr>
+                            <tr data-level="A1">
+                                <td>
+                                    <div class="german-word">wirklich</div>
+                                    <div class="spanish-word" data-es="de verdad" data-en="really">de verdad</div>
+                                </td>
+                                <td class="example-clickable" data-es="¿De verdad has terminado?"
+                                    data-en="Are you really finished?">Bist du wirklich fertig?</td>
+                            </tr>
+                            <tr data-level="A2">
+                                <td>
+                                    <div class="german-word">mit Absicht</div>
+                                    <div class="spanish-word" data-es="a propósito" data-en="on purpose">a propósito
+                                    </div>
+                                </td>
+                                <td class="example-clickable" data-es="Él hizo eso a propósito."
+                                    data-en="He did that on purpose.">Das hat er mit Absicht gemacht.</td>
+                            </tr>
+                            <tr data-level="A1">
+                                <td>
+                                    <div class="german-word">gerne</div>
+                                    <div class="spanish-word" data-es="con gusto" data-en="gladly">con gusto</div>
+                                </td>
+                                <td class="example-clickable" data-es="Te ayudo con gusto."
+                                    data-en="I gladly help you.">Ich helfe dir gerne.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CANTIDAD -->
+            <div class="level-card">
+                <div class="level-header cantidad"><span data-es="Cantidad"
+                        data-en="Quantity">Cantidad</span><span>📊</span></div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-es="Alemán / Español" data-en="German / English">Alemán / Español</th>
+                                <th data-es="Ejemplo" data-en="Example">Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-level="A1">
+                                <td>
+                                    <div class="german-word">mehr oder weniger</div>
+                                    <div class="spanish-word" data-es="más o menos" data-en="more or less">más o menos
+                                    </div>
+                                </td>
+                                <td class="example-clickable" data-es="Está más o menos terminado."
+                                    data-en="It's more or less finished.">Es ist mehr o menos fertig.</td>
+                            </tr>
+                            <tr data-level="B1">
+                                <td>
+                                    <div class="german-word">höchstens</div>
+                                    <div class="spanish-word" data-es="como mucho" data-en="at most">como mucho</div>
+                                </td>
+                                <td class="example-clickable" data-es="Cuesta como mucho diez euros."
+                                    data-en="It costs at most ten euros.">Es kostet höchstens diez euros.</td>
+                            </tr>
+                            <tr data-level="A1">
+                                <td>
+                                    <div class="german-word">zu viel</div>
+                                    <div class="spanish-word" data-es="demasiado" data-en="too much">demasiado</div>
+                                </td>
+                                <td class="example-clickable" data-es="Eso es simplemente demasiado trabajo."
+                                    data-en="That is simply too much work.">Das ist simplemente demasiado trabajo.</td>
+                            </tr>
+                            <tr data-level="B1">
+                                <td>
+                                    <div class="german-word">mindestens</div>
+                                    <div class="spanish-word" data-es="por lo menos" data-en="at least">por lo menos
+                                    </div>
+                                </td>
+                                <td class="example-clickable" data-es="Tienes que dormir por lo menos ocho horas."
+                                    data-en="You have to sleep at least eight hours.">Du musst mindestens acht horas
+                                    schlafen.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- NEGACIÓN -->
+            <div class="level-card">
+                <div class="level-header negacion"><span data-es="Negación"
+                        data-en="Negation">Negación</span><span>🚫</span></div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-es="Alemán / Español" data-en="German / English">Alemán / Español</th>
+                                <th data-es="Ejemplo" data-en="Example">Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-level="A2">
+                                <td>
+                                    <div class="german-word">auf keinen Fall</div>
+                                    <div class="spanish-word" data-es="de ninguna manera" data-en="by no means">de
+                                        ninguna manera</div>
+                                </td>
+                                <td class="example-clickable" data-es="No haré eso de ninguna manera."
+                                    data-en="I will do that by no means.">Das mache ich auf keinen Fall.</td>
+                            </tr>
+                            <tr data-level="A1">
+                                <td>
+                                    <div class="german-word">auch nicht</div>
+                                    <div class="spanish-word" data-es="tampoco" data-en="not either">tampoco</div>
+                                </td>
+                                <td class="example-clickable" data-es="Yo tampoco voy conmigo."
+                                    data-en="I'm not coming either.">Ich komme auch nicht mit.</td>
+                            </tr>
+                            <tr data-level="B1">
+                                <td>
+                                    <div class="german-word">überhaupt nicht</div>
+                                    <div class="spanish-word" data-es="en absoluto" data-en="not at all">en absoluto
+                                    </div>
+                                </td>
+                                <td class="example-clickable" data-es="Eso no me molesta en absoluto."
+                                    data-en="That doesn't bother me at all.">Das stört mich überhaupt nicht.</td>
+                            </tr>
+                            <tr data-level="B2">
+                                <td>
+                                    <div class="german-word">nicht im Geringsten</div>
+                                    <div class="spanish-word" data-es="ni por asomo" data-en="not in the slightest">ni
+                                        por asomo</div>
+                                </td>
+                                <td class="example-clickable" data-es="No me interesa ni lo más mínimo."
+                                    data-en="It doesn't interest me in the slightest.">Es interessiert mich nicht im
+                                    Geringsten.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CORTESÍA -->
+            <div class="level-card">
+                <div class="level-header cortesia"><span data-es="Cortesía"
+                        data-en="Politeness">Cortesía</span><span>🤝</span></div>
+                <div class="level-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-es="Alemán / Español" data-en="German / English">Alemán / Español</th>
+                                <th data-es="Ejemplo" data-en="Example">Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-level="A1">
+                                <td>
+                                    <div class="german-word">bitte schön</div>
+                                    <div class="spanish-word" data-es="por favor / de nada"
+                                        data-en="please / you're welcome">por favor / de nada</div>
+                                </td>
+                                <td class="example-clickable" data-es="De nada, aquí tiene su café."
+                                    data-en="You're welcome, here is your coffee.">Bitte schön, hier ist Ihr Kaffee.
+                                </td>
+                            </tr>
+                            <tr data-level="B1">
+                                <td>
+                                    <div class="german-word">selbstverständlich</div>
+                                    <div class="spanish-word" data-es="por supuesto" data-en="of course">por supuesto
+                                    </div>
+                                </td>
+                                <td class="example-clickable" data-es="Por supuesto que le ayudo."
+                                    data-en="Of course I'll help you.">Selbstverständlich helfe ich Ihnen.</td>
+                            </tr>
+                            <tr data-level="A2">
+                                <td>
+                                    <div class="german-word">auf jeden Fall</div>
+                                    <div class="spanish-word" data-es="desde luego" data-en="definitely">desde luego
+                                    </div>
+                                </td>
+                                <td class="example-clickable" data-es="Vendremos desde luego (sin falta)."
+                                    data-en="We are coming definitely.">Wir kommen auf jeden Fall.</td>
+                            </tr>
+                            <tr data-level="B1">
+                                <td>
+                                    <div class="german-word">ohne Zweifel</div>
+                                    <div class="spanish-word" data-es="sin duda" data-en="without a doubt">sin duda
+                                    </div>
+                                </td>
+                                <td class="example-clickable" data-es="Él es sin duda el mejor."
+                                    data-en="He is without a doubt the best.">Er ist ohne Zweifel der Beste.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- REGLA DE POSICIÓN -->
+        <div class="rule-section">
+            <div class="rule-card full-width">
+                <div class="rule-title"><span data-es="💡 La Regla de Oro: Posición en la Frase"
+                        data-en="💡 The Golden Rule: Sentence Position">💡 La Regla de Oro: Posición en la Frase</span>
+                </div>
+                <div class="rule-content">
+                    <span
+                        data-es="En alemán, el adverbio es muy flexible, pero tiene una consecuencia vital: <strong>Si el adverbio inicia la oración, el verbo DEBE ser el segundo elemento</strong> (Inversión Sujeto-Verbo)."
+                        data-en="In German, the adverb is very flexible, but it has a vital consequence: <strong>If the adverb starts the sentence, the verb MUST be the second element</strong> (Subject-Verb Inversion).">En
+                        alemán, el adverbio es muy flexible, pero tiene una consecuencia vital: <strong>Si el adverbio
+                            inicia la oración, el verbo DEBE ser el segundo elemento</strong> (Inversión
+                        Sujeto-Verbo).</span>
+                    <div
+                        style="margin-top: 15px; padding: 15px; background: rgba(0, 255, 161, 0.05); border-radius: 8px; border: 1px dashed var(--border-color); font-family: monospace;">
+                        <div style="margin-bottom: 10px;">
+                            ✅ <span style="color:var(--accent-green)">Heute</span> <strong>gehe</strong> ich nach Hause.
+                            <span data-es="(Hoy voy a casa)" data-en="(Today I go home)">(Hoy voy a casa)</span><br>
+                            ✅ Ich <strong>gehe</strong> <span style="color:var(--accent-green)">heute</span> nach Hause.
+                            <span data-es="(Yo voy hoy a casa)" data-en="(I go today home)">(Yo voy hoy a casa)</span>
+                        </div>
+                        <div>
+                            ✅ <span style="color:var(--accent-green)">Jetzt</span> <strong>trinke</strong> ich einen
+                            Kaffee. <span data-es="(Ahora bebo un café)" data-en="(Now I drink a coffee)">(Ahora bebo un
+                                café)</span><br>
+                            ✅ Ich <strong>trinke</strong> <span style="color:var(--accent-green)">jetzt</span> einen
+                            Kaffee. <span data-es="(Yo bebo ahora un café)" data-en="(I drink now a coffee)">(Yo bebo
+                                ahora un café)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p id="ui-footer" data-es="Infografía de Gramática Alemana &copy; 2025"
+                data-en="German Grammar Infographic &copy; 2025">Infografía de Gramática Alemana &copy; 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        let currentLang = 'es';
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.body.className = document.body.classList.contains('light-mode')
+                ? `light-mode lang-${currentLang}`
+                : `lang-${currentLang}`;
+
+            document.querySelectorAll('[data-es]').forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${currentLang}`);
+            });
+
+            document.getElementById('langToggleBtn').innerText = currentLang === 'es' ? 'ES / EN' : 'EN / ES';
+
+            document.querySelectorAll('th').forEach(th => {
+                if (th.getAttribute(`data-${currentLang}`)) {
+                    th.innerText = th.getAttribute(`data-${currentLang}`);
+                }
+            });
+        }
+
+        function speak(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+            utterance.rate = 0.85;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        const modal = document.getElementById('exampleModal');
+        const modalExp = document.getElementById('modalExpressionName');
+        const modalLevel = document.getElementById('modalLevel');
+        const modalDe = document.getElementById('modalExampleDe');
+        const modalTranslation = document.getElementById('modalExampleTranslation');
+
+        function openModal(expression, exampleDe, translation, level) {
+            modalExp.textContent = expression;
+            modalLevel.textContent = level;
+
+            const levelColors = {
+                'A1': 'var(--level-a1)',
+                'A2': 'var(--level-a2)',
+                'B1': 'var(--level-b1)',
+                'B2': 'var(--level-b2)'
+            };
+            modalLevel.style.backgroundColor = levelColors[level] || 'var(--accent-green)';
+
+            modalDe.textContent = exampleDe;
+            modalTranslation.textContent = translation;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) closeModal();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const words = document.querySelectorAll('.german-word');
+            words.forEach(el => {
+                let textToSpeak = "";
+                for (let node of el.childNodes) {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        textToSpeak += node.textContent;
+                    }
+                }
+                textToSpeak = textToSpeak.trim();
+
+                const icon = document.createElement('span');
+                icon.textContent = '🔊';
+                icon.className = 'audio-icon';
+                el.insertBefore(icon, el.querySelector('.trans'));
+
+                if (!el.querySelector('.trans')) {
+                    el.appendChild(icon);
+                }
+
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    speak(textToSpeak);
+                });
+            });
+
+            const examples = document.querySelectorAll('.example-clickable');
+            examples.forEach(ex => {
+                ex.addEventListener('click', () => {
+                    const row = ex.closest('tr');
+                    const germanDiv = row.querySelector('.german-word');
+                    let expression = "";
+                    for (let node of germanDiv.childNodes) {
+                        if (node.nodeType === Node.TEXT_NODE) {
+                            expression += node.textContent;
+                        }
+                    }
+                    expression = expression.trim();
+
+                    const exampleDe = ex.childNodes[0].textContent.trim();
+                    const translation = ex.getAttribute(`data-${currentLang}`);
+                    const level = row.getAttribute('data-level') || 'A1';
+
+                    openModal(expression, exampleDe, translation, level);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,908 +1,774 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deutsche Adverbien (A1-B1)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="../images/german_flag.png" type="image/png">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
     <style>
         :root {
-            --bg-color: #f3f4f6;
-            --text-color: #1f2937;
-            --card-bg: #ffffff;
+            /* --- DEFAULT DARK MODE PALETTE --- */
+            --bg-color: #0f172a;
+            /* Slate 900 */
+            --card-bg: #1e293b;
+            /* Slate 800 */
+            --header-bg: #020617;
+            /* Slate 950 */
+            --section-bg: #0f172a;
+            /* Slate 900 */
+            --rule-bg: linear-gradient(135deg, #0f172a 0%, #0c4a6e 100%);
+            --text-main: #f1f5f9;
+            /* Slate 100 */
+            --text-muted: #94a3b8;
+            /* Slate 400 */
+            --border-color: #334155;
+            /* Slate 700 */
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glow-strength: 20px;
+            --accent-green: #22c55e;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        body {
-            font-family: 'Nunito', sans-serif;
-            background-color: #d1d5db;
-            /* Darker gray */
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            max-width: 800px;
-        }
-
-        h1 {
-            color: #111827;
-            margin-bottom: 15px;
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -0.05rem;
-        }
-
-        h1 span {
-            color: #d97706;
-            border-bottom: 4px solid #d97706;
-        }
-
-        p.instruction {
-            color: #6b7280;
-            font-size: 1.25rem;
-        }
-
-        /* Active Recall Toggle */
-        .toggle-container {
+        /* Search & Toggle Styles */
+        .search-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 2rem;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
-        }
-
-        /* View Switcher (Segmented Control) */
-        .view-switcher-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .view-label {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #4b5563;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .view-switcher {
-            background-color: #e5e7eb;
-            padding: 4px;
-            border-radius: 12px;
-            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
             position: relative;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
-        .view-switcher input {
-            display: none;
+        .search-input {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .view-switcher label {
-            padding: 8px 16px;
-            cursor: pointer;
-            z-index: 1;
-            font-weight: 600;
-            color: #4b5563;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-            border-radius: 8px;
-            user-select: none;
+        .search-input:focus {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(0, 255, 161, 0.2);
         }
 
-        .view-switcher input:checked+label {
-            color: #111827;
-        }
-
-        /* Slider Background Logic handled by JS or simple peer selector if possible, 
-           but for simplicity with 3 items, we can style the checked label directly 
-           or use a background element. simpler to style checked label background for now 
-           to avoid complex calculation errors in pure CSS without fixed widths.
-        */
-        .view-switcher input:checked+label {
-            background-color: white;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            color: #111827;
-        }
-
-        /* Compact View Variables & Styles */
-        body.compact-view {
-            background-color: #0f172a;
-            /* Dark BG */
-            color: #f1f5f9;
-        }
-
-        body.compact-view h1 {
-            color: #f1f5f9;
-        }
-
-        body.compact-view .instruction {
-            color: #94a3b8;
-        }
-
-        body.compact-view .group-indicator {
-            color: #f1f5f9;
-        }
-
-        body.compact-view .nav-button {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-        }
-
-        body.compact-view .nav-button:hover {
-            background-color: #334155;
-        }
-
-        body.compact-view .nav-button:disabled {
-            background-color: #1e293b;
-            opacity: 0.5;
-        }
-
-        /* Compact Table Styles */
-        .word-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            text-align: left;
-            margin-top: 10px;
-        }
-
-        .word-table th {
-            padding: 12px 15px;
-            color: #94a3b8;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border-bottom: 1px solid #334155;
-            font-weight: 600;
-        }
-
-        .word-table td {
-            padding: 12px 15px;
-            vertical-align: middle;
-            border-bottom: 1px solid #1e293b;
-            transition: background-color 0.2s;
-        }
-
-        .word-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        /* Compact Card Container */
-        body.compact-view .card {
-            background-color: #1e293b;
-            /* Dark Card */
-            border: 1px solid #334155;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            display: block;
-            /* Override flex */
-            padding: 0;
-            overflow: hidden;
-            cursor: default;
-            /* Individual items clickable */
-        }
-
-        body.compact-view .card:hover {
-            transform: none;
-            /* No lift */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-        }
-
-        body.compact-view .card-header {
-            border-radius: 0;
-            padding: 15px 20px;
-            flex-direction: row;
-            /* Horizontal header */
-            justify-content: flex-start;
-            gap: 15px;
-            min-height: auto;
-        }
-
-        body.compact-view .card-header .german-word {
-            font-size: 1.25rem;
-            text-shadow: none;
-            font-weight: 700;
-        }
-
-        /* Hide standard elements in compact view */
-        body.compact-view .card-body,
-        body.compact-view .icon-floating {
-            display: none;
-        }
-
-        /* Compact Row Interaction */
-        .compact-row {
-            cursor: pointer;
-        }
-
-        .compact-row:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .compact-word-cell {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #f1f5f9;
+        /* Lang Toggle Switch */
+        .lang-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
             display: flex;
-            align-items: center;
-            gap: 8px;
+            padding: 4px;
+            cursor: pointer;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Added for controls-wrapper positioning */
+            margin-top: 5px;
         }
 
-        .compact-word-cell:hover {
-            text-decoration: underline;
-            text-decoration-style: dotted;
-            color: #3b82f6;
+        .lang-option {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            border-radius: 40px;
+            transition: all 0.2s ease;
+            color: var(--text-muted);
+            opacity: 0.7;
         }
 
-        .compact-trans-cell {
-            color: #94a3b8;
-            font-style: italic;
-            text-align: right;
-            font-size: 0.95rem;
+        .lang-option:hover {
+            background: rgba(255, 255, 255, 0.05);
+            opacity: 1;
         }
 
-        .compact-trans-cell:hover {
-            color: #f1f5f9;
+        .lang-option.active {
+            background: var(--accent-green);
+            color: #020617;
+            /* Dark text on green */
+            opacity: 1;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        /* Search styling adjustments for dark mode */
-        body.compact-view #search-input {
-            background-color: #1e293b;
-            border-color: #334155;
+        body.light-mode .light-option.active {
             color: white;
         }
 
-        body.compact-view #search-input::placeholder {
-            color: #64748b;
+        /* --- LIGHT MODE OVERRIDES --- */
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --section-bg: #e2e8f0;
+            --rule-bg: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --accent-green: #059669;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --glow-strength: 0px;
         }
 
-        body.compact-view .view-label {
-            color: #94a3b8;
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 80px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .active-recall-toggle {
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        header {
+            background: var(--header-bg);
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-green);
+            position: relative;
+        }
+
+        .controls-wrapper {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .theme-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            min-width: 40px;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-green);
+        }
+
+        body:not(.light-mode) .icon-sun {
+            display: block;
+        }
+
+        body:not(.light-mode) .icon-moon {
+            display: none;
+        }
+
+        body.light-mode .icon-sun {
+            display: none;
+        }
+
+        body.light-mode .icon-moon {
+            display: block;
+        }
+
+        .info-btn {
+            background-color: #f97316;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: pulse-orange 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes pulse-orange {
+            0% {
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+            }
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: var(--accent-green);
+            text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.3);
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .rule-section {
+            padding: 30px 40px;
+            background: var(--section-bg);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+        }
+
+        .rule-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 6px solid var(--accent-green);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px var(--shadow-color);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .rule-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--accent-green);
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .switch-label {
-            color: #414A5C;
-            cursor: pointer;
-            font-weight: 700;
-            text-align: right;
-            line-height: 1.2;
-        }
-
-        .label-translation {
-            display: block;
-            font-size: 0.8em;
-            font-style: italic;
-            font-weight: 400;
-        }
-
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #414A5C;
-            transition: .4s;
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-            transform: translateX(26px);
-        }
-
-        input:not(:checked)+.slider {
-            background-color: #ccc;
-        }
-
-        input:not(:checked)+.slider:before {
-            transform: translateX(0px);
-        }
-
-        /* Navigation */
-        .navigation-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .nav-button {
-            background-color: #111827;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 12px;
-            cursor: pointer;
+        .rule-content {
             font-size: 1.1rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
         }
 
-        .nav-button:hover {
-            background-color: #1f2937;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        .rule-example {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .nav-button:disabled {
-            background-color: #d1d5db;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .group-indicator {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-main);
-            text-align: center;
-            min-width: 300px;
+        .check-icon {
+            color: var(--accent-green);
+            font-weight: bold;
         }
 
         /* Grid Layout */
-        .infographic-grid {
+        .grid-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            width: 100%;
-            padding-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            background: var(--bg-color);
         }
 
-        /* Compact View Grid Layout */
-        .compact-grid-layout {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 1600px;
-            /* Increased max-width for 4 columns */
-            padding-bottom: 60px;
-            align-items: start;
+        @media (min-width: 1100px) {
+            .grid-layout {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
-        /* Removed specific media query in favor of auto-fill */
-
-        /* Card Styles - Updated to match Adjektive */
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-align: center;
-            position: relative;
-            overflow: visible;
-            display: flex;
-            flex-direction: column;
-            border: none;
-            margin-top: 10px;
+        @media (max-width: 850px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        /* Header with Color */
-        .card-header {
-            background-color: var(--card-main);
-            color: white;
-            padding: 10px 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            flex-grow: 1;
-            height: auto;
-            border-radius: 20px 20px 0 0;
-            min-height: 50px;
-        }
-
-        /* Floating Icon */
-        .icon-floating {
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.9);
-            color: #333;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            position: absolute;
-            top: 12px;
-            right: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-            cursor: pointer;
+        .level-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 15px -3px var(--shadow-color);
             transition: transform 0.2s;
         }
 
-        .icon-floating:hover {
-            transform: translate(-50%, 50%) scale(1.1);
+        .level-card:hover {
+            transform: translateY(-5px);
         }
 
-        /* White Body */
-        .card-body {
-            position: relative;
-            background-color: white;
-            padding: 15px 5px 15px 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex-grow: 0;
-            border-radius: 0 0 20px 20px;
-        }
-
-        /* German Word */
-        .german-word {
-            display: block;
-            font-size: 2.0rem;
+        .level-header {
+            padding: 15px 20px;
             font-weight: 800;
-            color: white;
-            margin-bottom: 0;
-            line-height: 1.1;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .german-word.long-word {
-            font-size: 1.8rem;
-        }
-
-        /* Spanish Translation */
-        .spanish-meaning {
-            display: block;
-            font-size: 1.1rem;
-            color: #6b7280;
-            font-weight: 600;
-            margin-bottom: 0;
-            margin-top: 2px;
-            font-style: italic;
-        }
-
-        /* Badge */
-        .card-category-badge {
-            background-color: #f3f4f6;
-            color: #6b7280;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 15px;
-            display: inline-block;
-            box-shadow: none;
-        }
-
-        /* Example */
-        .card-exam-example {
-            width: 90%;
-            text-align: center;
+            letter-spacing: 1px;
+            color: white;
+            /* Text color for headers is white */
             display: flex;
-            flex-direction: column;
-            gap: 5px;
-            position: relative;
-            padding: 5px 0;
-            background-color: transparent;
-            border: none;
-            margin-top: auto;
+            justify-content: space-between;
+            align-items: center;
+            /* background-color set inline via JS */
         }
 
-        .example-text {
-            display: block;
-            line-height: 1.4;
+        .level-content {
+            padding: 0;
         }
 
-        .example-text.de {
-            font-size: 1.1rem;
-            color: #1f2937;
-            font-weight: 700;
-        }
-
-        .example-text.es {
-            font-size: 0.9rem;
-            color: #6b7280;
-            font-weight: 500;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-
-        /* Search Bar */
-        .search-container {
-            display: flex;
-            justify-content: center;
-            margin: 1.5rem 0;
-        }
-
-        .search-wrapper {
-            position: relative;
+        table {
             width: 100%;
-            max-width: 500px;
-        }
-
-        #search-input {
-            width: 100%;
-            padding: 12px 45px 12px 20px;
-            font-size: 1rem;
-            font-family: 'Nunito', sans-serif;
-            border: 2px solid #d1d5db;
-            border-radius: 12px;
-            outline: none;
-            transition: all 0.3s;
-            background-color: white;
-        }
-
-        #search-input:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        #search-input::placeholder {
-            color: #9ca3af;
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6b7280;
-            pointer-events: none;
-        }
-
-        .clear-search {
-            position: absolute;
-            right: 45px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #6b7280;
-            cursor: pointer;
-            font-size: 1.2rem;
-            padding: 5px;
-            display: none;
-        }
-
-        .clear-search.visible {
-            display: block;
-        }
-
-        .search-results-info {
-            text-align: center;
-            color: #6b7280;
-            margin: 1rem 0;
+            border-collapse: collapse;
             font-size: 0.95rem;
         }
 
-        /* Light Version Styles */
-        body.light-version .icon-floating {
-            display: none;
+        th {
+            text-align: left;
+            padding: 12px 15px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.1);
         }
 
-        body.light-version .card-exam-example {
-            display: none;
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+            vertical-align: middle;
         }
 
-        body.light-version .card-category-badge {
-            display: none;
+        tr:last-child td {
+            border-bottom: none;
         }
 
-        body.light-version .card-body {
-            display: none;
+        .german-word {
+            font-weight: 700;
+            color: var(--accent-green);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1.1rem;
         }
 
-        body.light-version .card {
-            min-height: auto;
-            background-color: #e5e7eb;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        .german-word:hover {
+            text-decoration: underline;
         }
 
-        body.light-version .card-header {
-            padding: 25px 15px;
-            border-radius: 20px;
-            background-color: #e5e7eb;
+        .audio-icon {
+            font-size: 0.9em;
+            opacity: 0.7;
+            filter: grayscale(1);
         }
 
-        body.light-version .german-word {
-            color: #1e3a8a;
-            text-shadow: none;
+        .german-word:hover .audio-icon {
+            filter: grayscale(0);
+            opacity: 1;
         }
 
-        body.light-version .german-word.long-word {
-            color: #1e3a8a;
+        .spanish-word {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 4px;
+            font-style: italic;
         }
 
-        body.light-version .spanish-meaning {
-            color: #3b82f6;
+        .example-clickable {
+            cursor: pointer;
+            transition: color 0.2s ease;
+            font-size: 0.95rem;
+            line-height: 1.4;
         }
 
-        /* Modal Styles */
+        .example-clickable:hover {
+            color: var(--accent-green);
+        }
+
+        .example-trans {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        footer {
+            background: var(--header-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 30px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        /* --- MODAL STYLES --- */
         .modal-overlay {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 1000;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease-out, visibility 0.3s;
-        }
-
-        .modal-overlay.visible {
-            display: flex;
-            opacity: 1;
-            visibility: visible;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
-            background-color: white;
-            padding: 0;
-            border-radius: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--accent-green);
             width: 90%;
             max-width: 500px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            transform: scale(0.9);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 20px;
             overflow: hidden;
-            position: relative;
+            box-shadow: 0 0 30px rgba(0, 255, 161, 0.2);
+            animation: modalFadeIn 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+            max-height: 85vh;
         }
 
-        .modal-overlay.visible .modal-content {
-            transform: scale(1);
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: white;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
             background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
-            font-size: 2rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            z-index: 10;
-            width: 40px;
-            height: 40px;
+            transition: background 0.2s;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.3s;
             line-height: 1;
         }
 
-        .modal-close:hover {
+        .close-modal:hover {
             background: rgba(255, 255, 255, 0.4);
-            color: white;
         }
 
-        .modal-header {
-            padding: 40px 30px;
+        .modal-body {
+            padding: 30px;
             text-align: center;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 0;
-            border-radius: 0;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-green) var(--bg-color);
         }
 
-        .modal-emoji {
-            font-size: 4rem;
-            margin-bottom: 15px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            display: inline-block;
+        .modal-body::-webkit-scrollbar {
+            width: 8px;
         }
 
-        .modal-emoji:hover {
-            transform: scale(1.1);
+        .modal-body::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
         }
 
-        .modal-word {
+        .modal-body::-webkit-scrollbar-thumb {
+            background-color: var(--accent-green);
+            border-radius: 4px;
+        }
+
+        .modal-main-word {
             font-size: 2.5rem;
             font-weight: 800;
-            margin-bottom: 10px;
+            color: var(--accent-green);
+            margin-bottom: 5px;
             cursor: pointer;
         }
 
-        .modal-translation {
-            font-size: 1.3rem;
-            font-weight: 600;
-            font-style: italic;
-            color: white;
-            /* Matches header text now */
-        }
-
-        .modal-badge {
-            display: inline-block;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-top: 15px;
-        }
-
-        .modal-section {
-            padding: 30px;
-            margin-top: 0;
-            border-top: none;
-        }
-
-        .modal-section-title {
+        .modal-sub-word {
             font-size: 1.2rem;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 25px;
         }
 
-        .modal-example {
-            background-color: #f9fafb;
+        .modal-example-box {
+            background-color: rgba(255, 255, 255, 0.05);
             padding: 20px;
             border-radius: 12px;
-            margin-bottom: 10px;
-        }
-
-        .modal-example-de {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 8px;
+            margin-top: 10px;
             cursor: pointer;
+            transition: background 0.2s;
         }
 
-        .modal-example-es {
+        .modal-example-box:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-ex-de {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .modal-ex-es {
             font-size: 1rem;
-            color: #6b7280;
-            font-weight: 500;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* --- INFO MODAL CONTENT SPECIFIC --- */
+        .info-content {
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .info-title {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-section {
+            margin-bottom: 25px;
+        }
+
+        .info-bullet {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 3px solid var(--accent-green);
         }
     </style>
 </head>
 
-<body>
+<body class="lang-es">
 
-    <header>
-        <h1>Deutsche <span>Adverbien</span></h1>
-        <p class="instruction">A1-B1 • Grammatische Kategorien</p>
-    </header>
+    <!-- Info Modal -->
+    <div id="infoModal" class="modal-overlay" onclick="closeModal('infoModal', event)">
+        <div class="modal-content" style="max-width: 650px;" onclick="event.stopPropagation()">
+            <header class="modal-header" style="background: var(--header-bg);">
+                <span
+                    style="color:white; font-weight:bold; font-size:1.1rem; display:flex; align-items:center; gap:10px;">
+                    <i class="fas fa-info-circle" style="color:var(--accent-green);"></i> Regla de Oro
+                </span>
+                <button class="close-modal" onclick="closeModal('infoModal')">&times;</button>
+            </header>
+            <div class="modal-body info-content">
+                <div class="info-title">🤔 ¿Qué es un Adverbio?</div>
+                <div class="info-section">
+                    <div class="info-bullet">Son palabras que describen <strong>cuándo, dónde, cómo o con qué
+                            frecuencia</strong> ocurre algo.</div>
+                    <div class="info-bullet"><strong>🚫 No se conjugan:</strong> A diferencia de los verbos, los
+                        adverbios son invariables. No cambian por persona, número o tiempo.</div>
+                    <div class="info-bullet">Modifican a un verbo, a un adjetivo o a otro adverbio.</div>
+                </div>
 
-    <!-- Search Bar -->
-    <div class="search-container">
-        <div class="search-wrapper">
-            <input type="text" id="search-input" placeholder="Suchen... (z.B. jetzt, ahora, now)">
-            <button class="clear-search" id="clear-search">✕</button>
-            <span class="search-icon">🔍</span>
-        </div>
-    </div>
-    <div id="search-results-info" class="search-results-info"></div>
+                <div class="info-title">💡 La Regla de Oro: Posición en la Frase</div>
+                <div class="info-section">
+                    <p style="margin-bottom: 20px;">
+                        En alemán, el adverbio es muy flexible. Puede ir al principio o en medio, pero <strong>el verbo
+                            SIEMPRE debe ser el segundo elemento</strong>.
+                    </p>
 
-    <!-- Navigation -->
-    <div class="navigation-wrapper">
-        <button class="nav-button" id="prev-group-btn">← Vorherige</button>
-        <span class="group-indicator" id="group-indicator">Gruppe wird geladen...</span>
-        <button class="nav-button" id="next-group-btn">Nächste →</button>
-    </div>
+                    <!-- Group 1: Heute -->
+                    <div
+                        style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                        <div
+                            style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">
+                            Ejemplo 1: Hoy (Heute)</div>
+                        <div style="display: grid; gap: 8px;">
+                            <div class="rule-example" style="margin:0;">
+                                <span class="check-icon">✅</span>
+                                <span><strong style="color: var(--accent-green);">Heute</strong> gehe ich nach
+                                    Hause.</span>
+                            </div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); padding-left: 30px;">(Adverbio en
+                                Posición 1 → Verbo en Posición 2)</div>
 
-    <!-- Cards Container -->
-    <div id="cards-container" class="infographic-grid">
-        <!-- Cards will be dynamically loaded here -->
-    </div>
+                            <div class="rule-example" style="margin:0;">
+                                <span class="check-icon">✅</span>
+                                <span>Ich gehe <strong style="color: var(--accent-green);">heute</strong> nach
+                                    Hause.</span>
+                            </div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); padding-left: 30px;">(Sujeto en
+                                Posición 1 → Verbo en Posición 2)</div>
+                        </div>
+                    </div>
 
-    <div class="toggle-container">
-        <!-- View Switcher -->
-        <div class="view-switcher-wrapper">
-            <span class="view-label">Ansicht / Vista</span>
-            <div class="view-switcher">
-                <input type="radio" id="view-compact" name="view-mode" value="compact" checked>
-                <label for="view-compact" title="Kompakte Tabelle (Dunkel)">Kompakt</label>
+                    <!-- Group 2: Morgen -->
+                    <div
+                        style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                        <div
+                            style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">
+                            Ejemplo 2: Mañana (Morgen)</div>
+                        <div style="display: grid; gap: 8px;">
+                            <div class="rule-example" style="margin:0;">
+                                <span class="check-icon">✅</span>
+                                <span><strong style="color: var(--accent-green);">Morgen</strong> habe ich frei.</span>
+                            </div>
+                            <div class="rule-example" style="margin:0;">
+                                <span class="check-icon">✅</span>
+                                <span>Ich habe <strong style="color: var(--accent-green);">morgen</strong> frei.</span>
+                            </div>
+                        </div>
+                    </div>
 
-                <input type="radio" id="view-visual" name="view-mode" value="visual">
-                <label for="view-visual" title="Kartenansicht">Visuell</label>
+                    <!-- Group 3: Oft -->
+                    <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px;">
+                        <div
+                            style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">
+                            Ejemplo 3: A menudo (Oft)</div>
+                        <div style="display: grid; gap: 8px;">
+                            <div class="rule-example" style="margin:0;">
+                                <span class="check-icon">✅</span>
+                                <span><strong style="color: var(--accent-green);">Oft</strong> besuche ich meine
+                                    Eltern.</span>
+                            </div>
+                            <div class="rule-example" style="margin:0;">
+                                <span class="check-icon">✅</span>
+                                <span>Ich besuche <strong style="color: var(--accent-green);">oft</strong> meine
+                                    Eltern.</span>
+                            </div>
+                        </div>
+                    </div>
 
-                <input type="radio" id="view-light" name="view-mode" value="light">
-                <label for="view-light" title="Druckfreundlich">Leicht</label>
+                </div>
             </div>
         </div>
-        <div class="active-recall-toggle">
-            <label class="switch-label" for="recall-switch">Übersetzung<span
-                    class="label-translation">(traducción)</span></label>
-            <label class="switch">
-                <input type="checkbox" id="recall-switch" checked>
-                <span class="slider"></span>
-            </label>
-        </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal-overlay" id="adverb-modal">
+    <!-- Modal Window -->
+    <div id="adverbModal" class="modal-overlay">
         <div class="modal-content">
-            <button class="modal-close" id="modal-close">×</button>
-            <div class="modal-header">
-                <div class="modal-emoji" id="modal-emoji"></div>
-                <div class="modal-word" id="modal-word"></div>
-                <div class="modal-translation" id="modal-translation"></div>
-                <div class="modal-badge" id="modal-badge"></div>
-                <!-- Note container -->
-
-            </div>
-            <div class="modal-section">
-                <div class="modal-section-title">Beispiel / Ejemplo</div>
-                <div class="modal-example">
-                    <div class="modal-example-de" id="modal-example-de"></div>
-                    <div class="modal-example-es" id="modal-example-es"></div>
+            <header class="modal-header" id="modalHeader">
+                <h2 id="modalCategory">Categoría</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </header>
+            <div class="modal-body">
+                <div class="modal-emoji" id="modalEmoji" style="font-size: 4rem; margin-bottom: 10px; cursor: pointer;">
                 </div>
-                <!-- Note moved here -->
-                <div id="modal-note"
-                    style="margin-top: 15px; font-size: 0.9rem; color: #555; font-style: italic; display: none; border-top: 1px solid #eee; padding-top: 10px;">
+                <div id="modalWord" class="modal-main-word" title="Escuchar">Wort</div>
+                <div id="modalTranslation" class="modal-sub-word">Traducción</div>
+
+                <div class="modal-example-box" id="modalExampleBox" title="Escuchar frase">
+                    <div id="modalExampleDe" class="modal-ex-de">Ejemplo Alemán</div>
+                    <div id="modalExampleEs" class="modal-ex-es">Traducción Ejemplo</div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="controls-wrapper">
+                <button class="theme-btn" onclick="toggleTheme()" aria-label="Cambiar tema">
+                    <span class="icon-sun">☀️</span>
+                    <span class="icon-moon">🌔</span>
+                </button>
+                <button class="info-btn" onclick="openInfoModal()" title="Información gramatical">
+                    INFO
+                </button>
+                <div class="lang-toggle" onclick="toggleLanguage()">
+                    <div id="langEs" class="lang-option active" data-lang="es">ES</div>
+                    <div id="langEn" class="lang-option" data-lang="en">EN</div>
+                </div>
+            </div>
+            <h1>Deutsche <span>Adverbien</span></h1>
+            <!-- Search & Toggle -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar / Search..."
+                    oninput="handleSearch()">
+            </div>
+
+        </header>
+
+        <div class="grid-layout" id="cards-container">
+            <!-- Cards inserted by JS -->
+        </div>
+
+        <footer>
+            <p>© 2024 Juan Olaya - Deutsch Lernen</p>
+        </footer>
     </div>
 
     <script>
-        // Group definitions with examples
+        // --- DATA ---
         const adverbGroups = [
             {
                 title: '⏰ Temporal (A1 - A2)',
@@ -911,26 +777,27 @@
                 colorMain: '#3b82f6',
                 colorPastel: '#dbeafe',
                 badge: 'TEMPORAL',
+                emoji: 'time',
                 adverbs: [
-                    { word: 'jetzt', emoji: '🕐', spanish: '(ahora)', example_de: 'Ich gehe jetzt nach Hause.', example_es: 'Ahora voy a casa.' },
-                    { word: 'heute', emoji: '📅', spanish: '(hoy)', example_de: 'Heute ist ein schöner Tag.', example_es: 'Hoy es un día bonito.' },
-                    { word: 'erst', emoji: '🥇', spanish: '(primero / recién)', example_de: 'Erst die Arbeit, dann das Vergnügen.', example_es: 'Primero el trabajo, luego el placer.' },
-                    { word: 'morgen', emoji: '🌅', spanish: '(mañana)', example_de: 'Morgen habe ich frei.', example_es: 'Mañana tengo libre.' },
-                    { word: 'gestern', emoji: '🔙', spanish: '(ayer)', example_de: 'Gestern war ich krank.', example_es: 'Ayer estuve enfermo.' },
-                    { word: 'dann', emoji: '👉', spanish: '(luego/entonces)', example_de: 'Erst essen wir, dann gehen wir.', example_es: 'Primero comemos, luego nos vamos.' },
-                    { word: 'später', emoji: '🔜', spanish: '(más tarde)', example_de: 'Wir sehen uns später.', example_es: 'Nos vemos más tarde.' },
-                    { word: 'sofort', emoji: '⚡', spanish: '(inmediatamente)', example_de: 'Komm bitte sofort her!', example_es: '¡Ven aquí inmediatamente, por favor!' },
-                    { word: 'bald', emoji: '⏳', spanish: '(pronto)', example_de: 'Bis bald!', example_es: '¡Hasta pronto!' },
-                    { word: 'gerade', emoji: '⏱️', spanish: '(justo ahora)', example_de: 'Er ruft gerade an.', example_es: 'Él está llamando justo ahora.' },
-                    { word: 'früher', emoji: '🕰️', spanish: '(antes)', example_de: 'Früher war alles billiger.', example_es: 'Antes todo era más barato.' },
-                    { word: 'damals', emoji: '📜', spanish: '(en aquel entonces)', example_de: 'Damals wohnte ich noch in Berlin.', example_es: 'En aquel entonces vivía todavía en Berlín.' },
-                    { word: 'danach', emoji: '⏩', spanish: '(después)', example_de: 'Erst essen wir, danach gehen wir.', example_es: 'Primero comemos, después nos vamos.' },
-                    { word: 'inzwischen', emoji: '⏳', spanish: '(mientras tanto)', example_de: 'Ich koche, inzwischen kannst du den Tisch decken.', example_es: 'Yo cocino, mientras tanto tú puedes poner la mesa.' },
-                    { word: 'noch', emoji: '⏳', spanish: '(todavía/aún)', example_de: 'Ich bin noch hier.', example_es: 'Todavía estoy aquí.' },
-                    { word: 'wieder', emoji: '🔄', spanish: '(de nuevo/otra vez)', example_de: 'Er kommt wieder.', example_es: 'Él viene de nuevo.' },
-                    { word: 'plötzlich', emoji: '💥', spanish: '(de repente)', example_de: 'Plötzlich fing es an zu regnen.', example_es: 'De repente empezó a llover.' },
-                    { word: 'heutzutage', emoji: '📱', spanish: '(hoy en día)', example_de: 'Heutzutage hat jeder ein Handy.', example_es: 'Hoy en día todo el mundo tiene un móvil.' },
-                    { word: 'jeweils', emoji: '🔢', spanish: '(respectivamente / cada uno)', example_de: 'Die Kurse kosten jeweils 50 Euro.', example_es: 'Los cursos cuestan 50 euros cada uno.' }
+                    { word: 'jetzt', emoji: '🕐', spanish: '(ahora)', english: 'now', example_de: 'Ich gehe jetzt nach Hause.', example_es: 'Ahora voy a casa.' },
+                    { word: 'heute', emoji: '📅', spanish: '(hoy)', english: 'today', example_de: 'Heute ist ein schöner Tag.', example_es: 'Hoy es un día bonito.' },
+                    { word: 'erst', emoji: '🥇', spanish: '(primero / recién)', english: 'first / only', example_de: 'Erst die Arbeit, dann das Vergnügen.', example_es: 'Primero el trabajo, luego el placer.' },
+                    { word: 'morgen', emoji: '🌅', spanish: '(mañana)', english: 'tomorrow', example_de: 'Morgen habe ich frei.', example_es: 'Mañana tengo libre.' },
+                    { word: 'gestern', emoji: '🔙', spanish: '(ayer)', english: 'yesterday', example_de: 'Gestern war ich krank.', example_es: 'Ayer estuve enfermo.' },
+                    { word: 'dann', emoji: '👉', spanish: '(luego/entonces)', english: 'then', example_de: 'Erst essen wir, dann gehen wir.', example_es: 'Primero comemos, luego nos vamos.' },
+                    { word: 'später', emoji: '🔜', spanish: '(más tarde)', english: 'later', example_de: 'Wir sehen uns später.', example_es: 'Nos vemos más tarde.' },
+                    { word: 'sofort', emoji: '⚡', spanish: '(inmediatamente)', english: 'immediately', example_de: 'Komm bitte sofort her!', example_es: '¡Ven aquí inmediatamente, por favor!' },
+                    { word: 'bald', emoji: '⏳', spanish: '(pronto)', english: 'soon', example_de: 'Bis bald!', example_es: '¡Hasta pronto!' },
+                    { word: 'gerade', emoji: '⏱️', spanish: '(justo ahora)', english: 'just / right now', example_de: 'Er ruft gerade an.', example_es: 'Él está llamando justo ahora.' },
+                    { word: 'früher', emoji: '🕰️', spanish: '(antes)', english: 'earlier / formerly', example_de: 'Früher war alles billiger.', example_es: 'Antes todo era más barato.' },
+                    { word: 'damals', emoji: '📜', spanish: '(en aquel entonces)', english: 'back then', example_de: 'Damals wohnte ich noch in Berlin.', example_es: 'En aquel entonces vivía todavía en Berlín.' },
+                    { word: 'danach', emoji: '⏩', spanish: '(después)', english: 'afterwards', example_de: 'Erst essen wir, danach gehen wir.', example_es: 'Primero comemos, después nos vamos.' },
+                    { word: 'inzwischen', emoji: '⏳', spanish: '(mientras tanto)', english: 'meantime', example_de: 'Ich koche, inzwischen kannst du den Tisch decken.', example_es: 'Yo cocino, mientras tanto tú puedes poner la mesa.' },
+                    { word: 'noch', emoji: '⏳', spanish: '(todavía/aún)', english: 'still / yet', example_de: 'Ich bin noch hier.', example_es: 'Todavía estoy aquí.' },
+                    { word: 'wieder', emoji: '🔄', spanish: '(de nuevo/otra vez)', english: 'again', example_de: 'Er kommt wieder.', example_es: 'Él viene de nuevo.' },
+                    { word: 'plötzlich', emoji: '💥', spanish: '(de repente)', english: 'suddenly', example_de: 'Plötzlich fing es an zu regnen.', example_es: 'De repente empezó a llover.' },
+                    { word: 'heutzutage', emoji: '📱', spanish: '(hoy en día)', english: 'nowadays', example_de: 'Heutzutage hat jeder ein Handy.', example_es: 'Hoy en día todo el mundo tiene un móvil.' },
+                    { word: 'jeweils', emoji: '🔢', spanish: '(respectivamente / cada uno)', english: 'respectively / each', example_de: 'Die Kurse kosten jeweils 50 Euro.', example_es: 'Los cursos cuestan 50 euros cada uno.' }
                 ]
             },
             {
@@ -940,19 +807,20 @@
                 colorMain: '#8b5cf6',
                 colorPastel: '#ede9fe',
                 badge: 'FREQUENZ',
+                emoji: 'repeat',
                 adverbs: [
-                    { word: 'immer', emoji: '♾️', spanish: '(siempre)', example_de: 'Ich trinke immer Kaffee zum Frühstück.', example_es: 'Siempre bebo café para el desayuno.' },
-                    { word: 'nie', emoji: '🚫', spanish: '(nunca)', example_de: 'Er kommt nie pünktlich.', example_es: 'Él nunca llega puntual.' },
-                    { word: 'oft', emoji: '🔁', spanish: '(a menudo)', example_de: 'Ich besuche oft meine Eltern.', example_es: 'Visito a menudo a mis padres.' },
-                    { word: 'manchmal', emoji: '🎲', spanish: '(a veces)', example_de: 'Manchmal gehe ich ins Kino.', example_es: 'A veces voy al cine.' },
-                    { word: 'selten', emoji: '🌘', spanish: '(rara vez)', example_de: 'Wir essen selten Fleisch.', example_es: 'Rara vez comemos carne.' },
-                    { word: 'meistens', emoji: '📊', spanish: '(la mayoría de las veces)', example_de: 'Meistens stehe ich um 7 Uhr auf.', example_es: 'La mayoría de las veces me levanto a las 7.' },
-                    { word: 'täglich', emoji: '📆', spanish: '(a diario)', example_de: 'Ich fahre täglich mit dem Bus.', example_es: 'Viajo a diario en autobús.' },
-                    { word: 'wöchentlich', emoji: '🗓️', spanish: '(semanalmente)', example_de: 'Das Team trifft sich wöchentlich.', example_es: 'El equipo se reúne semanalmente.' },
-                    { word: 'monatlich', emoji: '🌒', spanish: '(mensualmente)', example_de: 'Ich bezahle die Miete monatlich.', example_es: 'Pago el alquiler mensualmente.' },
-                    { word: 'jährlich', emoji: '🎂', spanish: '(anualmente)', example_de: 'Das Festival findet jährlich statt.', example_es: 'El festival tiene lugar anualmente.' },
-                    { word: 'gewöhnlich', emoji: '☕', spanish: '(habitualmente)', example_de: 'Gewöhnlich trinke ich Tee.', example_es: 'Habitualmente bebo té.' },
-                    { word: 'jemals', emoji: '❓', spanish: '(alguna vez)', example_de: 'Warst du jemals in Paris?', example_es: '¿Has estado alguna vez en París?' }
+                    { word: 'immer', emoji: '♾️', spanish: '(siempre)', english: 'always', example_de: 'Ich trinke immer Kaffee zum Frühstück.', example_es: 'Siempre bebo café para el desayuno.' },
+                    { word: 'nie', emoji: '🚫', spanish: '(nunca)', english: 'never', example_de: 'Er kommt nie pünktlich.', example_es: 'Él nunca llega puntual.' },
+                    { word: 'oft', emoji: '🔁', spanish: '(a menudo)', english: 'often', example_de: 'Ich besuche oft meine Eltern.', example_es: 'Visito a menudo a mis padres.' },
+                    { word: 'manchmal', emoji: '🎲', spanish: '(a veces)', english: 'sometimes', example_de: 'Manchmal gehe ich ins Kino.', example_es: 'A veces voy al cine.' },
+                    { word: 'selten', emoji: '🌘', spanish: '(rara vez)', english: 'rarely', example_de: 'Wir essen selten Fleisch.', example_es: 'Rara vez comemos carne.' },
+                    { word: 'meistens', emoji: '📊', spanish: '(la mayoría de las veces)', english: 'mostly', example_de: 'Meistens stehe ich um 7 Uhr auf.', example_es: 'La mayoría de las veces me levanto a las 7.' },
+                    { word: 'täglich', emoji: '📆', spanish: '(a diario)', english: 'daily', example_de: 'Ich fahre täglich mit dem Bus.', example_es: 'Viajo a diario en autobús.' },
+                    { word: 'wöchentlich', emoji: '🗓️', spanish: '(semanalmente)', english: 'weekly', example_de: 'Das Team trifft sich wöchentlich.', example_es: 'El equipo se reúne semanalmente.' },
+                    { word: 'monatlich', emoji: '🌒', spanish: '(mensualmente)', english: 'monthly', example_de: 'Ich bezahle die Miete monatlich.', example_es: 'Pago el alquiler mensualmente.' },
+                    { word: 'jährlich', emoji: '🎂', spanish: '(anualmente)', english: 'yearly', example_de: 'Das Festival findet jährlich statt.', example_es: 'El festival tiene lugar anualmente.' },
+                    { word: 'gewöhnlich', emoji: '☕', spanish: '(habitualmente)', english: 'usually', example_de: 'Gewöhnlich trinke ich Tee.', example_es: 'Habitualmente bebo té.' },
+                    { word: 'jemals', emoji: '❓', spanish: '(alguna vez)', english: 'ever', example_de: 'Warst du jemals in Paris?', example_es: '¿Has estado alguna vez en París?' }
                 ]
             },
             {
@@ -962,832 +830,312 @@
                 colorMain: '#ec4899',
                 colorPastel: '#fce7f3',
                 badge: 'LOKAL',
+                emoji: 'map',
                 adverbs: [
-                    { word: 'hier', emoji: '👇', spanish: '(aquí)', example_de: 'Ich bin hier.', example_es: 'Estoy aquí.' },
-                    { word: 'dort', emoji: '👉', spanish: '(allí)', example_de: 'Das Auto steht dort.', example_es: 'El coche está allí.' },
-                    { word: 'links', emoji: '⬅️', spanish: '(a la izquierda)', example_de: 'Biegen Sie bitte links ab.', example_es: 'Gire a la izquierda, por favor.' },
-                    { word: 'rechts', emoji: '➡️', spanish: '(a la derecha)', example_de: 'Die Post ist rechts.', example_es: 'El correo está a la derecha.' },
-                    { word: 'überall', emoji: '🌎', spanish: '(en todas partes)', example_de: 'Ich habe überall gesucht.', example_es: 'He buscado en todas partes.' },
-                    { word: 'nirgends', emoji: '❌', spanish: '(en ninguna parte)', example_de: 'Ich finde meinen Schlüssel nirgends.', example_es: 'No encuentro mi llave en ninguna parte.' }
+                    { word: 'hier', emoji: '👇', spanish: '(aquí)', english: 'here', example_de: 'Ich bin hier.', example_es: 'Estoy aquí.' },
+                    { word: 'dort', emoji: '👉', spanish: '(allí)', english: 'there', example_de: 'Das Auto steht dort.', example_es: 'El coche está allí.' },
+                    { word: 'links', emoji: '⬅️', spanish: '(a la izquierda)', english: 'left', example_de: 'Biegen Sie bitte links ab.', example_es: 'Gire a la izquierda, por favor.' },
+                    { word: 'rechts', emoji: '➡️', spanish: '(a la derecha)', english: 'right', example_de: 'Die Post ist rechts.', example_es: 'El correo está a la derecha.' },
+                    { word: 'überall', emoji: '🌎', spanish: '(en todas partes)', english: 'everywhere', example_de: 'Ich habe überall gesucht.', example_es: 'He buscado en todas partes.' },
+                    { word: 'nirgends', emoji: '❌', spanish: '(en ninguna parte)', english: 'nowhere', example_de: 'Ich finde meinen Schlüssel nirgends.', example_es: 'No encuentro mi llave en ninguna parte.' },
+                    { word: 'oben', emoji: '⬆️', spanish: '(arriba)', english: 'up / above', example_de: 'Die Nachbarn von oben sind laut.', example_es: 'Los vecinos de arriba son ruidosos.' },
+                    { word: 'unten', emoji: '⬇️', spanish: '(abajo)', english: 'down / below', example_de: 'Warte bitte unten.', example_es: 'Espera abajo, por favor.' },
+                    { word: 'vorne', emoji: '⏩', spanish: '(delante)', english: 'front / ahead', example_de: 'Bitte vorne einsteigen.', example_es: 'Por favor, suban por delante.' },
+                    { word: 'hinten', emoji: '⏪', spanish: '(detrás)', english: 'back / behind', example_de: 'Der Garten ist hinten.', example_es: 'El jardín está detrás.' },
+                    { word: 'draußen', emoji: '🌳', spanish: '(fuera)', english: 'outside', example_de: 'Die Kinder spielen draußen.', example_es: 'Los niños juegan fuera.' },
+                    { word: 'drinnen', emoji: '🏠', spanish: '(dentro)', english: 'inside', example_de: 'Es regnet, wir bleiben drinnen.', example_es: 'Llueve, nos quedamos dentro.' },
+                    { word: 'irgendwo', emoji: '🗺️', spanish: '(en algún lugar)', english: 'somewhere', example_de: 'Er muss irgendwo sein.', example_es: 'Él tiene que estar en algún lugar.' }
                 ]
             },
             {
-                title: '🎯 Modal (A1 - A2)',
-                description: 'Adverbios de modo',
-                level: 'A1-A2',
-                colorMain: '#14b8a6',
-                colorPastel: '#ccfbf1',
-                badge: 'MODAL',
-                adverbs: [
-                    { word: 'gut', emoji: '👍', spanish: '(bien)', example_de: 'Das hast du gut gemacht.', example_es: 'Eso lo has hecho bien.' },
-                    { word: 'schnell', emoji: '🏃', spanish: '(rápido)', example_de: 'Bitte fahr nicht so schnell.', example_es: 'Por favor, no conduzcas tan rápido.' },
-                    { word: 'langsam', emoji: '🐢', spanish: '(despacio)', example_de: 'Können Sie bitte langsamer sprechen?', example_es: '¿Puede hablar más despacio, por favor?' },
-                    { word: 'gerne', emoji: '😊', spanish: '(con gusto / sin problema! / ¡claro! / gustosamente)', example_de: 'Ich helfe dir gerne.', example_es: 'Te ayudo con gusto.' },
-                    { word: 'einfach', emoji: '👌', spanish: '(simplemente/fácil)', example_de: 'Das ist ganz einfach.', example_es: 'Eso es muy fácil/simple.' },
-                    { word: 'genau', emoji: '🎯', spanish: '(exactamente)', example_de: 'Das ist genau das Problem.', example_es: 'Ese es exactamente el problema.' },
-                    { word: 'deutlich', emoji: '🗣️', spanish: '(claramente)', example_de: 'Man kann es deutlich sehen.', example_es: 'Se puede ver claramente.' },
-                    { word: 'regelmäßig', emoji: '🔄', spanish: '(regularmente)', example_de: 'Du musst regelmäßig üben.', example_es: 'Tienes que practicar regularmente.' },
-                    { word: 'zusammen', emoji: '🤝', spanish: '(juntos)', example_de: 'Wir kochen oft zusammen.', example_es: 'A menudo cocinamos juntos.' }
-                ]
-            },
-            {
-                title: '📊 Grad (A1 - A2)',
-                description: 'Adverbios de grado (Intensidad)',
-                level: 'A1-A2',
+                title: '💡 Modal & Kausal (A1-B1)',
+                description: 'De modo y causa',
+                level: 'A1-B1',
                 colorMain: '#f59e0b',
                 colorPastel: '#fef3c7',
-                badge: 'GRAD',
+                badge: 'MODAL',
+                emoji: 'bulb',
                 adverbs: [
-                    { word: 'sehr', emoji: '❗', spanish: '(muy)', example_de: 'Das ist sehr interessant.', example_es: 'Eso es muy interesante.' },
-                    { word: 'ganz', emoji: '💯', spanish: '(bastante/completamente)', example_de: 'Ich bin ganz sicher.', example_es: 'Estoy completamente seguro.' },
-                    { word: 'ziemlich', emoji: '⚖️', spanish: '(bastante)', example_de: 'Es ist heute ziemlich kalt.', example_es: 'Hoy hace bastante frío.' },
-                    { word: 'fast', emoji: '🤏', spanish: '(casi)', example_de: 'Wir sind fast da.', example_es: 'Casi estamos ahí (llegando).' },
-                    { word: 'kaum', emoji: '🌑', spanish: '(apenas)', example_de: 'Ich habe kaum geschlafen.', example_es: 'Apenas he dormido.' },
-                    { word: 'etwa', emoji: '📉', spanish: '(aproximadamente)', example_de: 'Das kostet etwa 10 Euro.', example_es: 'Eso cuesta aproximadamente 10 euros.' },
-                    { word: 'besonders', emoji: '🌟', spanish: '(especialmente)', example_de: 'Dieser Kuchen schmeckt besonders gut.', example_es: 'Este pastel sabe especialmente bien.' },
-                    { word: 'überhaupt', emoji: '🚫', spanish: '(en absoluto)', example_de: 'Das schmeckt mir überhaupt nicht.', example_es: 'Eso no me gusta en absoluto.' },
-                    { word: 'unglaublich', emoji: '😲', spanish: '(increíblemente)', example_de: 'Der Film war unglaublich spannend.', example_es: 'La película fue increíblemente emocionante.' },
-                    { word: 'schrecklich', emoji: '😱', spanish: '(terriblemente)', example_de: 'Ich vermisse dich schrecklich.', example_es: 'Te extraño terriblemente.' },
-                    { word: 'völlig', emoji: '💯', spanish: '(completamente)', example_de: 'Das ist völlig falsch.', example_es: 'Eso es completamente incorrecto.' }
-                ]
-            },
-            {
-                title: '🤔 Modal-Affirmativ (A2)',
-                description: 'Adverbios de afirmación',
-                level: 'A2',
-                colorMain: '#10b981',
-                colorPastel: '#d1fae5',
-                badge: 'AFFIRMATIV',
-                adverbs: [
-                    { word: 'natürlich', emoji: '🌿', spanish: '(por supuesto)', example_de: 'Natürlich komme ich mit.', example_es: 'Por supuesto que voy contigo.' },
-                    { word: 'wirklich', emoji: '🤔', spanish: '(realmente)', example_de: 'Bist du wirklich sicher?', example_es: '¿Estás realmente seguro?' },
-                    { word: 'tatsächlich', emoji: '🗞️', spanish: '(de hecho)', example_de: 'Er hat tatsächlich gewonnen.', example_es: 'De hecho, él ha ganado.' },
-                    { word: 'ehrlich', emoji: '🤞', spanish: '(honestamente)', example_de: 'Ehrlich gesagt, ich weiß es nicht.', example_es: 'Honestamente, no lo sé.' },
-                    { word: 'eigentlich', emoji: '🤷', spanish: '(en realidad)', example_de: 'Eigentlich habe ich keine Zeit.', example_es: 'En realidad no tengo tiempo.' },
-                    { word: 'jedenfalls', emoji: '🛑', spanish: '(en cualquier caso)', example_de: 'Ich rufe dich jedenfalls an.', example_es: 'Te llamo en cualquier caso.' },
-                    { word: 'zumindest', emoji: '📉', spanish: '(al menos)', example_de: 'Du solltest zumindest fragen.', example_es: 'Deberías al menos preguntar.' },
-                    { word: 'endlich', emoji: '🏁', spanish: '(por fin)', example_de: 'Endlich ist Wochenende!', example_es: '¡Por fin es fin de semana!' },
-                    { word: 'herzlich', emoji: '❤️', spanish: '(cordialmente)', example_de: 'Herzlich willkommen!', example_es: '¡Cordialmente bienvenido! (¡Bienvenido!)' },
-                    { word: 'halt', emoji: '🤷', spanish: '(simplemente/pues)', example_de: 'Das ist halt so.', example_es: 'Es que es así (simplemente es así).' },
-                    { word: 'bestimmt', emoji: '💯', spanish: '(seguramente/fijo)', example_de: 'Das ist bestimmt richtig.', example_es: 'Eso es seguramente correcto.' },
-                    { word: 'doch', emoji: '☝️', spanish: '(sí/pues/pero)', example_de: 'Das war doch klar!', example_es: '¡Pero si estaba claro!' }
-                ]
-            },
-            {
-                title: '🎲 Wahrscheinlichkeit (A2 - B1)',
-                description: 'Adverbios de probabilidad',
-                level: 'A2-B1',
-                colorMain: '#ef4444',
-                colorPastel: '#fee2e2',
-                badge: 'WAHRSCHEIN.',
-                adverbs: [
-                    { word: 'vielleicht', emoji: '🤷‍♂️', spanish: '(tal vez)', example_de: 'Vielleicht regnet es später.', example_es: 'Tal vez llueva más tarde.' },
-                    { word: 'wahrscheinlich', emoji: '🌦️', spanish: '(probablemente)', example_de: 'Wahrscheinlich kommt er nicht.', example_es: 'Probablemente él no venga.' },
-                    { word: 'hoffentlich', emoji: '🙏', spanish: '(ojalá)', example_de: 'Hoffentlich geht es dir gut.', example_es: 'Ojalá estés bien.' },
-                    { word: 'leider', emoji: '😞', spanish: '(desafortunadamente / por desgracia)', example_de: 'Leider kann ich nicht kommen.', example_es: 'Por desgracia, no puedo ir.' },
-                    { word: 'glücklicherweise', emoji: '🍀', spanish: '(afortunadamente)', example_de: 'Glücklicherweise ist nichts passiert.', example_es: 'Afortunadamente no ha pasado nada.' },
-                    { word: 'willkürlich', emoji: '🎲', spanish: '(arbitrariamente)', example_de: 'Die Auswahl war völlig willkürlich.', example_es: 'La selección fue totalmente arbitraria.' }
-                ]
-            },
-            {
-                title: '🔗 Konjunktional (A1 - B1)',
-                description: 'Conectores y adverbios conjuntivos',
-                level: 'A1-B1',
-                colorMain: '#6366f1',
-                colorPastel: '#e0e7ff',
-                badge: 'KONJUNKT.',
-                adverbs: [
-                    { word: 'damit', emoji: '👉', spanish: '(con eso / para eso)', example_de: 'Ich habe ein Auto. Damit fahre ich zur Arbeit.', example_es: 'Tengo un auto. Con eso voy al trabajo.', note: 'Frase común: <b>„Was ist damit gemeint?“</b> (¿Qué se quiere decir con eso?)<br>La expresión es muy común y conviene entenderla como una frase fija.' },
-                    { word: 'aber', emoji: '⚖️', spanish: '(pero)', example_de: 'Ich bin müde, aber glücklich.', example_es: 'Estoy cansado, pero feliz.' },
-                    { word: 'auch', emoji: '➕', spanish: '(también)', example_de: 'Ich möchte auch ein Eis.', example_es: 'Yo también quiero un helado.' },
-                    { word: 'auch nicht', emoji: '🙅', spanish: '(tampoco)', example_de: 'Ich komme auch nicht.', example_es: 'Yo tampoco vengo.' },
-                    { word: 'oder', emoji: '🤷', spanish: '(o)', example_de: 'Kaffee oder Tee?', example_es: '¿Café o té?' },
-                    { word: 'nur', emoji: '☝️', spanish: '(solo)', example_de: 'Ich habe nur 5 Euro.', example_es: 'Solo tengo 5 euros.' },
-                    { word: 'deshalb', emoji: '👉', spanish: '(por eso)', example_de: 'Ich war krank, deshalb war ich zu Hause.', example_es: 'Estaba enfermo, por eso estaba en casa.' },
-                    { word: 'deswegen', emoji: '👉', spanish: '(por ese motivo)', example_de: 'Es regnet, deswegen bleiben wir hier.', example_es: 'Llueve, por ese motivo nos quedamos aquí.' },
-                    { word: 'darum', emoji: '👉', spanish: '(por eso - razón)', example_de: 'Ich liebe dich, darum heirate ich dich.', example_es: 'Te amo, por eso me caso contigo.' },
-                    { word: 'trotzdem', emoji: '☔', spanish: '(a pesar de ello / sin embargo)', example_de: 'Es ist kalt, trotzdem gehe ich raus.', example_es: 'Hace frío, a pesar de ello salgo.' },
-                    { word: 'jedoch', emoji: '✋', spanish: '(sin embargo)', example_de: 'Er wollte kommen, jedoch hatte er keine Zeit.', example_es: 'Él quería venir, sin embargo no tenía tiempo.' },
-                    { word: 'allerdings', emoji: '🧐', spanish: '(sin embargo/ciertamente)', example_de: 'Das ist allerdings wahr.', example_es: 'Eso es ciertamente verdad.' },
-                    { word: 'außerdem', emoji: '➕', spanish: '(además)', example_de: 'Das Hemd ist zu klein und außerdem zu teuer.', example_es: 'La camisa es demasiado pequeña y además demasiado cara.' },
-                    { word: 'andererseits', emoji: '✋', spanish: '(por otro lado)', example_de: 'Er ist streng, aber andererseits sehr fair.', example_es: 'Es estricto, pero por otro lado muy justo.' },
-                    { word: 'einerseits', emoji: '✋', spanish: '(por un lado)', example_de: 'Einerseits ja, andererseits nein.', example_es: 'Por un lado sí, por otro lado no.' },
-                    { word: 'ansonsten', emoji: '⚠️', spanish: '(de lo contrario)', example_de: 'Beeil dich, ansonsten verpassen wir den Zug.', example_es: 'Date prisa, de lo contrario perderemos el tren.' },
-                    { word: 'beziehungsweise', emoji: '↔️', spanish: '(o sea / mejor dicho / respectivamente)', example_de: 'Ich nehme den Bus bzw. die Bahn.', example_es: 'Tomaré el autobús o mejor dicho el tren.', note: 'Nota: <u>"bzw."</u> es la abreviación.' },
-                    { word: 'entweder', emoji: '⚖️', spanish: '(o ... o)', example_de: 'Entweder wir gehen ins Kino oder ins Theater.', example_es: 'O vamos al cine o al teatro.' },
-                    { word: 'weder ... noch', emoji: '🚫', spanish: '(ni ... ni)', example_de: 'Ich mag weder Fisch noch Fleisch.', example_es: 'No me gusta ni el pescado ni la carne.' },
-                    { word: 'zwar', emoji: '⚖️', spanish: '(es verdad que ... pero)', example_de: 'Das ist zwar teuer, aber gut.', example_es: 'Es verdad que es caro, pero es bueno.' },
-                    { word: 'nämlich', emoji: '💡', spanish: '(es que / es decir)', example_de: 'Ich habe keinen Hunger, ich habe nämlich schon gegessen.', example_es: 'No tengo hambre, es que ya he comido.' },
-                    { word: 'beispielsweise', emoji: '📝', spanish: '(por ejemplo)', example_de: 'Ich mag Obst, beispielsweise Äpfel.', example_es: 'Me gusta la fruta, por ejemplo manzanas.' },
-                    { word: 'in Wirklichkeit', emoji: '🕶️', spanish: '(en realidad)', example_de: 'Er wirkt böse, aber in Wirklichkeit ist er nett.', example_es: 'Parece malo, pero en realidad es amable.' }
-                ]
-            },
-            {
-                title: '❓ Interrogativ & Relativ (A2)',
-                description: 'Fragewörter und Relativadverbien',
-                level: 'A2',
-                colorMain: '#f97316',
-                colorPastel: '#ffedd5',
-                badge: 'INT. & REL.',
-                adverbs: [
-                    { word: 'womit', emoji: '🛠️', spanish: '(¿con qué? / con lo cual)', example_de: 'Womit fährst du?', example_es: '¿Con qué vas? / ...con lo cual...' }
+                    { word: 'sehr', emoji: '🔥', spanish: '(muy)', english: 'very', example_de: 'Das ist sehr gut.', example_es: 'Eso es muy bueno.' },
+                    { word: 'so', emoji: '🤏', spanish: '(así/tan)', english: 'so / that', example_de: 'Warum bist du so?', example_es: '¿Por qué eres así?' },
+                    { word: 'auch', emoji: '➕', spanish: '(también)', english: 'also / too', example_de: 'Ich komme auch.', example_es: 'Yo también vengo.' },
+                    { word: 'nur', emoji: '1️⃣', spanish: '(solo)', english: 'only / just', example_de: 'Ich habe nur 5 Euro.', example_es: 'Solo tengo 5 euros.' },
+                    { word: 'gern', emoji: '❤️', spanish: '(con gusto / gusta)', english: 'gladly / like to', example_de: 'Ich spiele gern Fußball.', example_es: 'Me gusta jugar al fútbol.' },
+                    { word: 'leider', emoji: '😞', spanish: '(desafortunadamente)', english: 'unfortunately', example_de: 'Leider habe ich keine Zeit.', example_es: 'Desafortunadamente no tengo tiempo.' },
+                    { word: 'vielleicht', emoji: '🤷', spanish: '(quizás)', english: 'maybe / perhaps', example_de: 'Vielleicht komme ich später.', example_es: 'Quizás venga más tarde.' },
+                    { word: 'hoffentlich', emoji: '🤞', spanish: '(ojalá)', english: 'hopefully', example_de: 'Hoffentlich regnet es nicht.', example_es: 'Ojalá no llueva.' },
+                    { word: 'wirklich', emoji: '❗', spanish: '(realmente/de verdad)', english: 'really', example_de: 'Bist du wirklich sicher?', example_es: '¿Estás realmente seguro?' },
+                    { word: 'fast', emoji: '🤏', spanish: '(casi)', english: 'almost', example_de: 'Ich bin fast fertig.', example_es: 'Estoy casi listo.' },
+                    { word: 'kaum', emoji: '📉', spanish: '(apenas)', english: 'barely / hardly', example_de: 'Ich kann dich kaum hören.', example_es: 'Apenas puedo oírte.' },
+                    { word: 'außerdem', emoji: '➕', spanish: '(además)', english: 'besides / also', example_de: 'Er ist nett und außerdem reich.', example_es: 'Él es amable y además rico.' },
+                    { word: 'allerdings', emoji: '☝️', spanish: '(ciertamente/sin embargo)', english: 'however / certainly', example_de: 'Das ist allerdings wahr.', example_es: 'Eso es ciertamente verdad.' },
+                    { word: 'trotzdem', emoji: '🛡️', spanish: '(a pesar de todo / sin embargo)', english: 'anyway / nevertheless', example_de: 'Es regnet, trotzdem gehe ich laufen.', example_es: 'Llueve, sin embargo voy a correr.' },
+                    { word: 'sogar', emoji: '😲', spanish: '(incluso)', english: 'even', example_de: 'Sogar er hat es verstanden.', example_es: 'Incluso él lo ha entendido.' },
+                    { word: 'besonders', emoji: '⭐', spanish: '(especialmente)', english: 'especially', example_de: 'Dieser Film ist besonders gut.', example_es: 'Esta película es especialmente buena.' },
+                    { word: 'zusammen', emoji: '👫', spanish: '(juntos)', english: 'together', example_de: 'Wir kochen zusammen.', example_es: 'Cocinamos juntos.' },
+                    { word: 'vermutlich', emoji: '🤔', spanish: '(probablemente)', english: 'presumably / probably', example_de: 'Er kommt vermutlich später.', example_es: 'Probablemente venga más tarde.' },
+                    { word: 'wahrscheinlich', emoji: '🎲', spanish: '(probablemente)', english: 'probably', example_de: 'Es wird wahrscheinlich regnen.', example_es: 'Probablemente va a llover.' },
+                    { word: 'sonst', emoji: '⚠️', spanish: '(si no / de lo contrario)', english: 'otherwise / else', example_de: 'Beeil dich, sonst verpasst du den Bus.', example_es: 'Date prisa, si no perderás el autobús.' }
                 ]
             }
         ];
 
-        // State
-        const ViewMode = {
-            COMPACT: 'compact',
-            VISUAL: 'visual',
-            LIGHT: 'light'
-        };
+        // --- RENDER Logic ---
+        const container = document.getElementById('cards-container');
+        let currentLang = 'es'; // Default
 
-        let slides = [];
-        let currentSlideIndex = 0; // Still used for internal logic compatibility if needed, but mostly unused for visual
-        let currentGroupIndex = 0; // For Visual/Light modes
-        let isSearchMode = false;
-        let searchResults = [];
-        let currentView = ViewMode.COMPACT; // Default
+        function renderContent(data = adverbGroups, query = '') {
+            container.innerHTML = '';
 
-        // Generate Slides from Groups (Chunking by 6)
-        function generateSlides() {
-            slides = [];
-            adverbGroups.forEach(group => {
-                // Chunk size of 6
-                const chunkSize = 6;
+            if (data.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted);">Keine Ergebnisse gefunden / No results found</div>';
+                return;
+            }
+
+            // Iterate Groups
+            data.forEach((group) => {
+                if (!group.adverbs || group.adverbs.length === 0) return;
+
+                const chunkSize = 5;
                 for (let i = 0; i < group.adverbs.length; i += chunkSize) {
                     const chunk = group.adverbs.slice(i, i + chunkSize);
 
-                    // Determine subtitle (e.g., "Teil 1/3")
-                    const totalParts = Math.ceil(group.adverbs.length / chunkSize);
-                    const currentPart = Math.floor(i / chunkSize) + 1;
-                    const subTitle = totalParts > 1 ? ` T${currentPart}` : '';
+                    // Filter Logic: If query exists, only show chunks that have at least one match
+                    if (query) {
+                        const hasMatch = chunk.some(adv => {
+                            const matchDe = adv.word.toLowerCase().includes(query.toLowerCase());
+                            const matchEs = adv.spanish.toLowerCase().includes(query.toLowerCase());
+                            const matchEn = adv.english ? adv.english.toLowerCase().includes(query.toLowerCase()) : false;
+                            return matchDe || matchEs || matchEn;
+                        });
+                        if (!hasMatch) continue;
+                    }
 
-                    slides.push({
-                        ...group, // Inherit group props (color, title etc)
-                        displayTitle: group.title + subTitle,
-                        adverbs: chunk,
-                        groupIndex: adverbGroups.indexOf(group), // reference if needed
-                        isLastInGroup: currentPart === totalParts
-                    });
+                    const card = document.createElement('div');
+                    card.className = 'level-card';
+
+                    // Title
+                    let displayTitle = group.title;
+                    if (group.adverbs.length > chunkSize) {
+                        const partNum = Math.floor(i / chunkSize) + 1;
+                        const totalParts = Math.ceil(group.adverbs.length / chunkSize);
+                        displayTitle += ` <span style="font-size: 0.8em; opacity: 0.8;">(${partNum}/${totalParts})</span>`;
+                    }
+
+                    // Header
+                    const header = document.createElement('div');
+                    header.className = 'level-header';
+                    header.style.backgroundColor = group.colorMain;
+                    header.innerHTML = `<span>${displayTitle}</span><span>${getGroupIcon(group.badge)}</span>`;
+
+                    // Table
+                    const content = document.createElement('div');
+                    content.className = 'level-content';
+
+                    const tableHTML = `
+                        <thead>
+                            <tr>
+                                <th>${currentLang === 'es' ? 'Alemán / Español' : 'German / English'}</th>
+                                <th>${currentLang === 'es' ? 'Ejemplo' : 'Example'}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${chunk.map(adv => createRow(adv, group, query)).join('')}
+                        </tbody>
+                    `;
+
+                    const table = document.createElement('table');
+                    table.innerHTML = tableHTML;
+                    content.appendChild(table);
+
+                    card.appendChild(header);
+                    card.appendChild(content);
+                    container.appendChild(card);
                 }
             });
         }
 
-        // Initialize Slides
-        generateSlides();
-
-        // Helper function to get first definition for card display
-        function getFirstDefinition(translation) {
-            const cleaned = translation.replace(/[()]/g, '');
-            const parts = cleaned.split('/');
-            return `(${parts[0].trim()})`;
+        function highlightMatch(text, query) {
+            if (!query || !text) return text;
+            // Escape special regex chars
+            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(escapedQuery, 'gi');
+            return text.replace(regex, (match) =>
+                `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${match}</span>`
+            );
         }
 
-        // Helper function to check if word needs smaller font
-        function isLongWord(word) {
-            return word.length > 13;
-        }
+        function createRow(adv, group, query) {
+            // Determine Translation
+            const translation = currentLang === 'es' ? adv.spanish : (adv.english || '-');
+            let displayTrans = translation.replace(/[()]/g, '');
 
-        // DOM elements
-        const cardsContainer = document.getElementById('cards-container');
-        const groupIndicator = document.getElementById('group-indicator');
-        const prevGroupBtn = document.getElementById('prev-group-btn');
-        const nextGroupBtn = document.getElementById('next-group-btn');
-        const recallSwitch = document.getElementById('recall-switch');
-        const searchInput = document.getElementById('search-input');
-        const clearSearchBtn = document.getElementById('clear-search');
-        const searchResultsInfo = document.getElementById('search-results-info');
-        const adverbModal = document.getElementById('adverb-modal');
-        const modalClose = document.getElementById('modal-close');
-        const modalEmoji = document.getElementById('modal-emoji');
-        const modalWord = document.getElementById('modal-word');
-        const modalTranslation = document.getElementById('modal-translation');
-        const modalBadge = document.getElementById('modal-badge');
-        const modalExampleDe = document.getElementById('modal-example-de');
-        const modalExampleEs = document.getElementById('modal-example-es');
-        const modalNote = document.getElementById('modal-note');
+            // Highlight Logic
+            let displayWord = adv.word;
 
-        // Render Content based on View Mode
-        function renderContent() {
-            cardsContainer.innerHTML = '';
-
-            if (currentView === ViewMode.COMPACT) {
-                // Compact Mode: Show ALL groups at once, vertically stacked
-                groupIndicator.textContent = "Alle Gruppen";
-
-                // Hide navigation buttons
-                prevGroupBtn.style.display = 'none';
-                nextGroupBtn.style.display = 'none';
-
-                // Container styling for vertical stacking
-                cardsContainer.className = 'compact-grid-layout';
-                cardsContainer.style.display = '';
-                cardsContainer.style.overflowX = '';
-
-                // Render all slides (chunks of 6)
-                slides.forEach(slide => {
-                    renderTable(slide.adverbs, slide);
-                });
-
-            } else {
-                // Visual / Light Mode: Show Whole Groups (not chunks)
-
-                // Ensure buttons are visible
-                prevGroupBtn.style.display = '';
-                nextGroupBtn.style.display = '';
-
-                // Safety check for groups
-                if (currentGroupIndex < 0) currentGroupIndex = 0;
-                if (currentGroupIndex >= adverbGroups.length) currentGroupIndex = adverbGroups.length - 1;
-
-                const group = adverbGroups[currentGroupIndex];
-                groupIndicator.textContent = group.title; // Use full group title (no T1/T2)
-
-                // Container styling for Grid/Slide
-                cardsContainer.className = 'infographic-grid';
-                cardsContainer.style.display = ''; // Reset inline styles
-                cardsContainer.style.overflowX = '';
-
-                renderCards(group.adverbs, group);
-
-                // Update navigation buttons state
-                prevGroupBtn.disabled = currentGroupIndex === 0;
-                nextGroupBtn.disabled = currentGroupIndex === adverbGroups.length - 1;
-
-                // Scroll container to start
-                if (cardsContainer.scrollTo) cardsContainer.scrollTo(0, 0);
+            if (query) {
+                displayWord = highlightMatch(displayWord, query);
+                displayTrans = highlightMatch(displayTrans, query);
             }
 
-            // Apply active recall state
-            setInitialTranslationState();
+            return `
+                <tr>
+                    <td>
+                        <div class="german-word" onclick="speak('${adv.word}')" title="Escuchar">
+                            ${displayWord} <span class="audio-icon">🔊</span>
+                        </div>
+                        <div class="spanish-word" style="font-style:italic; color:var(--text-muted);">${displayTrans}</div>
+                    </td>
+                    <td class="example-clickable" onclick="openModal('${adv.word}', '${group.badge}')">
+                        <div style="font-weight:600; color:var(--text-main);">${adv.example_de}</div>
+                        <div class="example-trans">${adv.example_es}</div>
+                    </td>
+                </tr>
+            `;
         }
 
-        // Render Cards (Visual & Light modes)
-        function renderCards(adverbs, groupInfo) {
-            adverbs.forEach(adv => {
-                const card = document.createElement('div');
-                card.className = 'card';
-
-                // Determine colors (Search results have colors on adv object)
-                const mainColor = adv.groupColorMain || groupInfo.colorMain || groupInfo.groupColorMain;
-                const pastelColor = adv.groupColorPastel || groupInfo.colorPastel || groupInfo.groupColorPastel;
-
-                card.style.setProperty('--card-main', mainColor);
-                card.style.setProperty('--card-pastel', pastelColor);
-
-                const longWordClass = isLongWord(adv.word) ? 'long-word' : '';
-
-                card.innerHTML = `
-                    <div class="card-header">
-                        <span class="german-word ${longWordClass}" lang="de" onclick="event.stopPropagation(); speak('${adv.word}')" title="Aussprache hören" style="cursor: pointer;">${adv.word}</span>
-                    </div>
-                    <div class="card-body">
-                         <div class="icon-floating" onclick="event.stopPropagation(); speak('${adv.word}')" title="Aussprache hören">${adv.emoji}</div>
-                         <span class="spanish-meaning" lang="es">${adv.spanish.replace(/[()]/g, '')}</span>
-                         <span class="english-meaning" lang="en"></span>
-                    </div>
-                `;
-
-                // Add click event to open modal
-                // Standardize group data
-                const groupData = {
-                    badge: adv.groupBadge || groupInfo.badge || groupInfo.groupBadge,
-                    colorMain: mainColor,
-                    colorPastel: pastelColor
-                };
-
-                card.addEventListener('click', () => {
-                    openModal(adv, groupData);
-                });
-
-                cardsContainer.appendChild(card);
-            });
-        }
-
-        // Render Table (Compact mode)
-        function renderTable(adverbs, groupInfo) {
-            // Create Table Structure
-            const table = document.createElement('table');
-            table.className = 'word-table';
-            table.innerHTML = '';
-
-            const tbody = document.createElement('tbody');
-
-            adverbs.forEach(adv => {
-                const tr = document.createElement('tr');
-                tr.className = 'compact-row';
-
-                // Determine colors (Search results have colors on adv object)
-                const mainColor = adv.groupColorMain || groupInfo.colorMain || groupInfo.groupColorMain;
-                const pastelColor = adv.groupColorPastel || groupInfo.colorPastel || groupInfo.groupColorPastel;
-
-                const groupData = {
-                    badge: adv.groupBadge || groupInfo.badge || groupInfo.groupBadge,
-                    colorMain: mainColor,
-                    colorPastel: pastelColor
-                };
-
-                // Word Cell
-                const tdWord = document.createElement('td');
-                tdWord.className = 'compact-word-cell';
-                tdWord.title = "Aussprache hören";
-                tdWord.onclick = (e) => {
-                    e.stopPropagation();
-                    speak(adv.word);
-                };
-                tdWord.innerHTML = `${adv.word}`;
-
-                // Translation Cell
-                const tdTrans = document.createElement('td');
-                tdTrans.className = 'compact-trans-cell';
-                tdTrans.innerHTML = `<span class="spanish-meaning" lang="es">${adv.spanish.replace(/[()]/g, '')}</span>`;
-
-                // Allow row click to open modal, but ensure word click (TTS) doesn't trigger it
-                tr.addEventListener('click', () => openModal(adv, groupData));
-
-                tr.appendChild(tdWord);
-                tr.appendChild(tdTrans);
-                tbody.appendChild(tr);
-            });
-
-            table.appendChild(tbody);
-
-            // Let's create a single container div that looks like a card to hold the table
-            const cardWrapper = document.createElement('div');
-            cardWrapper.className = 'card';
-            cardWrapper.style.setProperty('--card-main', groupInfo.colorMain || groupInfo.groupColorMain);
-            cardWrapper.style.maxWidth = '100%';
-            // cardWrapper.style.gridColumn = '1 / -1'; // REMOVED to allow grid layout
-            cardWrapper.style.cursor = 'default';
-
-            const header = document.createElement('div');
-            header.className = 'card-header';
-            header.style.cursor = 'pointer'; // Make header clickable
-            header.innerHTML = `<span class="german-word" style="font-size:1.2rem;">${groupInfo.displayTitle || groupInfo.title || groupInfo.groupTitle}</span>`;
-
-            // Add click listener to header
-            header.onclick = (e) => {
-                e.stopPropagation();
-                openGroupModal(groupInfo);
+        function getGroupIcon(badge) {
+            const icons = {
+                'TEMPORAL': '⏰',
+                'FREQUENZ': '🔄',
+                'LOKAL': '📍',
+                'MODAL': '💡'
             };
-
-            cardWrapper.appendChild(header);
-            cardWrapper.appendChild(table);
-
-            cardsContainer.appendChild(cardWrapper);
+            return icons[badge] || '📝';
         }
 
-        // Navigation logic is handled by nextSlide/prevSlide below
+        // --- SEARCH & TOGGLE ---
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
 
-        // View Switcher Logic
-        const viewRadios = document.querySelectorAll('input[name="view-mode"]');
+            const btnEs = document.getElementById('langEs');
+            const btnEn = document.getElementById('langEn');
 
-        function setViewMode(mode) {
-            currentView = mode;
-
-            // Remove all classes first
-            document.body.classList.remove('light-version', 'compact-view');
-
-            // Add appropriate class
-            if (mode === ViewMode.LIGHT) {
-                document.body.classList.add('light-version');
-            } else if (mode === ViewMode.COMPACT) {
-                document.body.classList.add('compact-view');
-            }
-
-            // Update radio button
-            document.getElementById(`view-${mode}`).checked = true;
-
-            // Save to localStorage
-            localStorage.setItem('adverbien-view-mode', mode);
-
-            // Re-render
-            if (isSearchMode) {
-                renderSearchResults();
+            if (currentLang === 'es') {
+                btnEs.classList.add('active');
+                btnEn.classList.remove('active');
+                document.documentElement.lang = 'es';
             } else {
-                renderContent();
+                btnEs.classList.remove('active');
+                btnEn.classList.add('active');
+                document.documentElement.lang = 'en';
             }
+
+            // Re-render via search to maintain efficiency
+            handleSearch();
         }
 
-        viewRadios.forEach(radio => {
-            radio.addEventListener('change', (e) => {
-                setViewMode(e.target.value);
-            });
-        });
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
 
-        // Load saved preferences from localStorage
-        function loadSavedPreferences() {
-            // Load View Mode
-            const savedView = localStorage.getItem('adverbien-view-mode');
-            if (savedView) {
-                setViewMode(savedView);
-            } else {
-                setViewMode(ViewMode.COMPACT); // Default
-                // Ensure the radio button is checked visually in default case
-                document.getElementById(`view-compact`).checked = true;
-            }
-
-            // Load translation preference
-            const savedTranslation = localStorage.getItem('adverbien-translation');
-            if (savedTranslation !== null) {
-                recallSwitch.checked = savedTranslation === 'true';
-            }
-        }
-
-        // Active Recall Toggle
-        recallSwitch.addEventListener('change', function () {
-            const translations = document.querySelectorAll('.spanish-meaning, .example-text.es');
-            if (this.checked) {
-                translations.forEach(span => {
-                    span.style.opacity = '1';
-                    span.style.visibility = 'visible';
-                });
-            } else {
-                translations.forEach(span => {
-                    span.style.opacity = '0';
-                    setTimeout(() => { span.style.visibility = 'hidden'; }, 300);
-                });
-            }
-            // Save to localStorage
-            localStorage.setItem('adverbien-translation', this.checked);
-        });
-
-        function setInitialTranslationState() {
-            const translations = document.querySelectorAll('.spanish-meaning, .example-text.es');
-            if (recallSwitch.checked) {
-                translations.forEach(span => {
-                    span.style.visibility = 'visible';
-                    span.style.opacity = '1';
-                });
-            } else {
-                translations.forEach(span => {
-                    span.style.visibility = 'hidden';
-                    span.style.opacity = '0';
-                });
-            }
-        }
-
-        // Search functionality
-        function performSearch(query) {
-            if (!query || query.trim() === '') {
-                exitSearchMode();
+            if (!query) {
+                renderContent(adverbGroups);
                 return;
             }
 
-            isSearchMode = true;
-            const searchTerm = query.toLowerCase().trim();
-            searchResults = [];
-
-            // Search across all groups
-            adverbGroups.forEach(group => {
-                group.adverbs.forEach(adv => {
-                    // Search in German word, Spanish translation, and examples
-                    const searchableText = [
-                        adv.word,
-                        adv.spanish,
-                        adv.example_de,
-                        adv.example_es
-                    ].join(' ').toLowerCase();
-
-                    if (searchableText.includes(searchTerm)) {
-                        searchResults.push({
-                            ...adv,
-                            groupTitle: group.title,
-                            groupColorMain: group.colorMain,
-                            groupColorPastel: group.colorPastel,
-                            groupBadge: group.badge
-                        });
-                    }
+            // Filter Groups that Contain ANY Match (keep all adverbs in group)
+            const filteredGroups = adverbGroups.filter(group => {
+                return group.adverbs.some(adv => {
+                    const matchDe = adv.word.toLowerCase().includes(query);
+                    const matchEs = adv.spanish.toLowerCase().includes(query);
+                    const matchEn = adv.english ? adv.english.toLowerCase().includes(query) : false;
+                    return matchDe || matchEs || matchEn;
                 });
             });
 
-            renderSearchResults();
+            renderContent(filteredGroups, query);
         }
 
-        function renderSearchResults() {
-            // Update UI
-            groupIndicator.textContent = 'Suchergebnisse';
-            document.querySelector('.navigation-wrapper').style.display = 'flex'; // Ensure wrapper is visible (for padding/layout if needed, though empty)
-            prevGroupBtn.style.display = 'none';
-            nextGroupBtn.style.display = 'none';
+        // --- MODAL ---
+        const modal = document.getElementById('adverbModal');
+        const infoModal = document.getElementById('infoModal');
+        const modalHeader = document.getElementById('modalHeader');
 
-            // Clear container
-            cardsContainer.innerHTML = '';
+        function openModal(word, groupBadge) {
+            // Find data
+            let foundAdverb = null;
+            let foundGroup = null;
 
-            if (searchResults.length === 0) {
-                searchResultsInfo.textContent = 'Keine Ergebnisse gefunden.';
-                return;
-            }
-
-            searchResultsInfo.textContent = `${searchResults.length} Ergebnis${searchResults.length > 1 ? 'se' : ''} gefunden`;
-
-            // Render search results based on current view
-            if (currentView === ViewMode.COMPACT) {
-                // Ensure Container styling for vertical/grid stacking in search
-                cardsContainer.className = 'compact-grid-layout';
-                cardsContainer.style.display = '';
-                cardsContainer.style.overflowX = '';
-
-                // Group results by original group to preserve detailed cards
-                const resultsByGroup = {};
-                searchResults.forEach(res => {
-                    const gTitle = res.groupTitle; // This was stored during search
-                    if (!resultsByGroup[gTitle]) {
-                        resultsByGroup[gTitle] = {
-                            title: gTitle,
-                            adverbs: [],
-                            // Recover group props
-                            colorMain: res.groupColorMain,
-                            colorPastel: res.groupColorPastel,
-                            badge: res.groupBadge,
-                            description: 'Suchergebnis' // Fallback
-                        };
+            for (const g of adverbGroups) {
+                if (g.badge === groupBadge || !groupBadge) { // If badge not provided, search all
+                    const match = g.adverbs.find(a => a.word === word);
+                    if (match) {
+                        foundAdverb = match;
+                        foundGroup = g;
+                        break;
                     }
-                    resultsByGroup[gTitle].adverbs.push(res);
-                });
+                }
+            }
 
-                // Render a table for each group that has results
-                Object.values(resultsByGroup).forEach(groupObj => {
-                    renderTable(groupObj.adverbs, groupObj);
-                });
+            if (!foundAdverb) return;
 
+            // Fill Data
+            document.getElementById('modalCategory').textContent = foundGroup.title;
+            modalHeader.style.backgroundColor = foundGroup.colorMain;
+
+            document.getElementById('modalEmoji').textContent = foundAdverb.emoji;
+            document.getElementById('modalWord').textContent = foundAdverb.word;
+            document.getElementById('modalTranslation').textContent = foundAdverb.spanish;
+            document.getElementById('modalExampleDe').textContent = foundAdverb.example_de;
+            document.getElementById('modalExampleEs').textContent = foundAdverb.example_es;
+
+            // TTS Handlers
+            document.getElementById('modalWord').onclick = () => speak(foundAdverb.word);
+            document.getElementById('modalEmoji').onclick = () => speak(foundAdverb.word);
+            document.getElementById('modalExampleBox').onclick = () => speak(foundAdverb.example_de);
+
+            // Show
+            modal.style.display = 'flex';
+        }
+
+        function openInfoModal() {
+            infoModal.style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            if (modalId) {
+                document.getElementById(modalId).style.display = 'none';
             } else {
-                renderCards(searchResults, { title: 'Suchergebnisse', colorMain: '#3b82f6' });
+                // Default close logic if no ID passed (backward compatibility or specific close buttons)
+                modal.style.display = 'none';
             }
-
-            // Apply active recall state
-            setInitialTranslationState();
         }
 
-        function exitSearchMode() {
-            isSearchMode = false;
-            searchResults = [];
-            searchInput.value = '';
-            searchResultsInfo.textContent = '';
-            clearSearchBtn.classList.remove('visible');
-            document.querySelector('.navigation-wrapper').style.display = 'flex'; // Ensure wrapper is visible
-            prevGroupBtn.style.display = ''; // Reset to default (block/inline)
-            nextGroupBtn.style.display = '';
-            renderContent();
-        }
-
-        // Search input event listeners
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value;
-
-            if (query.trim() !== '') {
-                clearSearchBtn.classList.add('visible');
-            } else {
-                clearSearchBtn.classList.remove('visible');
-            }
-
-            performSearch(query);
-        });
-
-        clearSearchBtn.addEventListener('click', () => {
-            exitSearchMode();
-        });
-
-        // Allow ESC key to exit search
-        searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                exitSearchMode();
-            }
-        });
-
-        // Modal functions
-        function openModal(adverb, group) {
-            // Set modal content
-            modalEmoji.textContent = adverb.emoji;
-            modalWord.textContent = adverb.word;
-            modalTranslation.textContent = adverb.spanish;
-
-            // Check if group has badge property directly or if we need to access it differently
-            // Handling both group object and search result object structures
-            // Check if group has badge property directly or if we need to access it differently
-            // Handling both group object and search result object structures
-            modalBadge.textContent = group.badge || group.groupBadge;
-            // The background color is now set on the header in new, but we need to ensure the badge 
-            // has the translucent background defined in CSS, so we don't need to specificy it here unless
-            // the colorMain variable is needed for something else.
-            // In adjektive.html, modalHeader.style.backgroundColor = groupData.colorMain;
-
-            // We need to set the header background color
-            document.querySelector('.modal-header').style.backgroundColor = group.colorMain || group.groupColorMain;
-
-            modalExampleDe.textContent = adverb.example_de;
-            modalExampleEs.textContent = adverb.example_es;
-
-            // Handle Note
-            if (adverb.note) {
-                modalNote.innerHTML = adverb.note;
-                modalNote.style.display = 'block';
-            } else {
-                modalNote.style.display = 'none';
-            }
-
-            // Set TTS on word text click
-            modalWord.onclick = (e) => {
-                e.stopPropagation();
-                speak(adverb.word);
-            };
-            modalWord.style.cursor = 'pointer';
-            modalWord.title = 'Aussprache hören';
-
-            // Set TTS on emoji click
-            modalEmoji.style.cursor = 'pointer';
-            modalEmoji.title = 'Aussprache hören';
-            modalEmoji.onclick = (e) => {
-                e.stopPropagation();
-                speak(adverb.word);
-            };
-
-            // Set TTS on example
-            modalExampleDe.onclick = (e) => {
-                e.stopPropagation();
-                speak(adverb.example_de);
-            };
-            modalExampleDe.style.cursor = 'pointer';
-            modalExampleDe.title = 'Satz aussprechen';
-
-            // Show modal
-            adverbModal.classList.add('visible'); // Use visible class instead of active
-            document.body.style.overflow = 'hidden';
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Modal for Group Title (shows description)
-        function openGroupModal(group) {
-            // Set modal content
-            // Use group emoji if present in title string, or generic if none found (but actually adverbs have individual emojis)
-            // The user wants "translation to spanish". The group.description contains the Spanish description.
-            // Using a generic emoji or parsing from title if needed.
-
-            modalEmoji.textContent = 'ℹ️'; // Generic info emoji or maybe parse from title
-            modalWord.textContent = group.title || group.displayTitle;
-            modalTranslation.textContent = group.description || '';
-
-            modalBadge.textContent = group.badge || group.groupBadge;
-            document.querySelector('.modal-header').style.backgroundColor = group.colorMain || group.groupColorMain;
-
-            // Hide specific adverb fields
-            modalExampleDe.textContent = '';
-            modalExampleEs.textContent = '';
-            document.querySelector('.modal-section-title').style.display = 'none'; // Hide "Example" label
-            document.querySelector('.modal-example').style.display = 'none';
-            modalNote.style.display = 'none';
-
-            // Clear TTS click handlers (optional, or make title speakable if desired)
-            modalWord.onclick = null;
-            modalWord.style.cursor = 'default';
-            modalWord.title = '';
-
-            modalEmoji.onclick = null;
-            modalEmoji.style.cursor = 'default';
-
-            // Show modal
-            adverbModal.classList.add('visible');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Restore modal defaults on close (helper function)
-        function resetModalState() {
-            document.querySelector('.modal-section-title').style.display = '';
-            document.querySelector('.modal-example').style.display = '';
-        }
-
-        function closeModal() {
-            adverbModal.classList.remove('visible');
-            document.body.style.overflow = '';
-            resetModalState(); // Reset visibility of sections
-        }
-
-        // Modal event listeners
-        modalClose.addEventListener('click', closeModal);
-
-        adverbModal.addEventListener('click', (e) => {
-            if (e.target === adverbModal) {
+        // Close on click outside
+        window.onclick = function (event) {
+            if (event.target == modal) {
                 closeModal();
             }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && adverbModal.classList.contains('visible')) {
-                closeModal();
-            }
-        });
-
-        // Navigation
-        function nextSlide() {
-            if (currentView === ViewMode.COMPACT) return; // No nav in compact mode
-
-            // Visual/Light Mode: Next Group
-            if (currentGroupIndex < adverbGroups.length - 1) {
-                currentGroupIndex++;
-                renderContent();
-                cardsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (event.target == infoModal) {
+                closeModal('infoModal');
             }
         }
 
-        function prevSlide() {
-            if (currentView === ViewMode.COMPACT) return; // No nav in compact mode
-
-            // Visual/Light Mode: Prev Group
-            if (currentGroupIndex > 0) {
-                currentGroupIndex--;
-                renderContent();
-                cardsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
-
-        prevGroupBtn.addEventListener('click', prevSlide);
-        nextGroupBtn.addEventListener('click', nextSlide);
-
-        // --- Drag / Swipe Support ---
-        let touchStartX = 0;
-        let touchEndX = 0;
-        let isDragging = false;
-        let startX = 0;
-
-        const gestureZone = document.getElementById('cards-container');
-
-        // Touch Events
-        gestureZone.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        gestureZone.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleGesture();
-        }, { passive: true });
-
-        // Mouse Events (for desktop dragging)
-        gestureZone.addEventListener('mousedown', e => {
-            isDragging = true;
-            startX = e.clientX;
-            gestureZone.style.cursor = 'grabbing';
-            // prevent default text selection during drag
-            e.preventDefault();
-        });
-
-        gestureZone.addEventListener('mouseup', e => {
-            if (!isDragging) return;
-            isDragging = false;
-            gestureZone.style.cursor = 'default';
-            handleMouseGesture(e.clientX);
-        });
-
-        gestureZone.addEventListener('mouseleave', () => {
-            if (isDragging) {
-                isDragging = false;
-                gestureZone.style.cursor = 'default';
-            }
-        });
-
-        function handleGesture() {
-            const swipeThreshold = 50; // min distance
-            if (touchEndX < touchStartX - swipeThreshold) {
-                nextSlide();
-            }
-            if (touchEndX > touchStartX + swipeThreshold) {
-                prevSlide();
-            }
-        }
-
-        function handleMouseGesture(endX) {
-            const swipeThreshold = 50;
-            if (endX < startX - swipeThreshold) {
-                nextSlide();
-            }
-            if (endX > startX + swipeThreshold) {
-                prevSlide();
-            }
-        }
-
-        // Text-to-Speech Function
+        // --- TTS ---
         function speak(text) {
             if (!text) return;
-            // Cancel current speech
-            window.speechSynthesis.cancel();
-
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'de-DE';
-            utterance.rate = 0.9; // Slightly slower for learners
-
-            // Try to select a German voice
-            const voices = window.speechSynthesis.getVoices();
-            const deVoice = voices.find(v => v.lang.includes('de'));
-            if (deVoice) utterance.voice = deVoice;
-
+            utterance.rate = 0.9;
             window.speechSynthesis.speak(utterance);
         }
 
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('light-mode');
+            const isLight = body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        }
+
         // Initialize
-        loadSavedPreferences();
-        renderContent();
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+            }
+            renderContent();
+        });
     </script>
 </body>
 
 </html>
-```
