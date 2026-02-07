@@ -519,6 +519,115 @@
             color: var(--text-muted);
             margin-top: auto;
         }
+
+        /* --- MODAL STYLES --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 5% auto;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        .close-btn {
+            color: var(--text-muted);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: var(--accent-green);
+        }
+
+        .modal-body {
+            line-height: 1.6;
+            color: var(--text-main);
+        }
+
+        .info-btn {
+            background: var(--card-bg);
+            /* Match theme-btn */
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            /* Match theme-btn icon size */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            height: 40px;
+            /* Ensure uniform height */
+            width: 40px;
+            /* Ensure uniform width */
+        }
+
+        .info-btn:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
     </style>
 </head>
 
@@ -526,7 +635,10 @@
 
     <div class="container">
         <header>
-            <div class="theme-toggle-wrapper">
+            <div class="theme-toggle-wrapper" style="display: flex; gap: 10px;">
+                <button id="infoBtn" class="info-btn" aria-label="Información">
+                    ℹ️
+                </button>
                 <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Dark/Light Mode">
                     <span class="icon-sun">☀️</span>
                     <span class="icon-moon">🌙</span>
@@ -846,7 +958,60 @@
         </footer>
     </div>
 
+    <!-- INFO MODAL -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-header">
+                <h2>¿Qué son las Conjunciones?</h2>
+            </div>
+            <div class="modal-body">
+                <p>Las <strong>conjunciones</strong> (Konjunktionen) son palabras que conectan frases o partes de una
+                    frase. En alemán, la clave es saber <strong>cómo afectan al orden de las palabras</strong>.</p>
+
+                <h3 style="color: var(--level-a1); margin-top: 20px;">1. Coordinantes (Posición 0)</h3>
+                <p>No cambian nada. Unen dos frases principales (Hauptsatz). El sujeto sigue al verbo normalmente.</p>
+                <div class="rule-example">
+                    Ich esse, <strong>aber</strong> ich trinke nicht.
+                </div>
+
+                <h3 style="color: var(--level-a2); margin-top: 20px;">2. Subordinantes (Verbo al Final)</h3>
+                <p>Envían el verbo conjugado al <strong>final absoluto</strong> de la frase subordinada (Nebensatz). Son
+                    las más comunes y difíciles.</p>
+                <div class="rule-example">
+                    Ich weiß, <strong>dass</strong> du hier <strong>bist</strong>.
+                </div>
+
+                <h3 style="color: var(--level-b1); margin-top: 20px;">3. Adverbiales (Posición 1)</h3>
+                <p>Actúan como el primer elemento de la frase, por lo que el verbo debe ir inmediatamente después
+                    (inversión).</p>
+                <div class="rule-example">
+                    Es regnet, <strong>deshalb</strong> <strong>bleibe</strong> ich zu Hause.
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Modal Logic
+        const modal = document.getElementById("infoModal");
+        const btn = document.getElementById("infoBtn");
+        const span = document.getElementsByClassName("close-btn")[0];
+
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
         }

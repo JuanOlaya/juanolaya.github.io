@@ -4,627 +4,987 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>German Interjections Infographic (A1-A2) with TTS</title>
+    <title>Interjecciones Alemanas: Guía Visual A1-A2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            /* MODO CLARO (Opcional) */
-            --bg-page: #f8f9fa;
-            --text-main: #2d3436;
-            --card-main: #ffffff;
-            --card-inner: #f1f2f6;
-            --accent: #0984e3;
-            --border: #d1d5db;
-            --footer-blue-bg: #eff6ff;
-            --footer-orange-bg: #fff7ed;
-            --footer-blue-border: #dbeafe;
-            --footer-orange-border: #ffedd5;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --header-bg: #020617;
+            --section-bg: #0f172a;
+            --rule-bg: linear-gradient(135deg, #0f172a 0%, #0c4a6e 100%);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+
+            --cat-acuerdo: #3b82f6;
+            --cat-sorpresa: #a855f7;
+            --cat-social: #10b981;
+            --cat-avisos: #ef4444;
+
+            --level-a1: #3b82f6;
+            --level-a2: #eab308;
+
+            --accent-green: #00FFA1;
+            --accent-orange: #f97316;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glow-strength: 20px;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
-        .dark {
-            /* MODO OSCURO (Predeterminado) */
-            --bg-page: #0f172a;
-            --text-main: #f1f5f9;
-            --card-main: #1e293b;
-            --card-inner: #334155;
-            --accent: #fbbf24;
-            --border: #475569;
-            --footer-blue-bg: #1e3a8a33;
-            --footer-orange-bg: #7c2d1233;
-            --footer-blue-border: #1e40af;
-            --footer-orange-border: #9a3412;
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --section-bg: #e2e8f0;
+            --rule-bg: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --accent-green: #059669;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --glow-strength: 0px;
         }
 
         body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
             transition: background-color 0.3s ease, color 0.3s ease;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-page);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px var(--shadow-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+        }
+
+        header {
+            background: var(--header-bg);
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-green);
+            position: relative;
+        }
+
+        .header-actions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+        }
+
+        .header-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             color: var(--text-main);
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
         }
 
-        .dynamic-card {
-            background-color: var(--card-main);
-            color: var(--text-main);
+        .theme-btn {
+            width: 44px;
+            font-size: 1.2rem;
         }
 
-        .dynamic-inner {
-            background-color: var(--card-inner);
-            color: var(--text-main);
+        .info-btn {
+            background-color: var(--accent-orange);
+            border-color: var(--accent-orange);
+            color: white;
+            width: auto;
+            padding: 0 15px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            animation: pulse-orange 2s infinite;
         }
 
-        .dynamic-accent {
-            color: var(--accent);
+        /* Lang Toggle Switch */
+        .lang-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            display: flex;
+            padding: 2px;
+            cursor: pointer;
+            overflow: hidden;
         }
 
-        .dynamic-border {
-            border-color: var(--border);
+        .lang-option {
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            border-radius: 7px;
+            transition: all 0.2s ease;
         }
 
-        .footer-card-blue {
-            background-color: var(--footer-blue-bg);
-            border: 1px solid var(--footer-blue-border);
+        .lang-option.active {
+            background: var(--accent-green);
+            color: #020617;
         }
 
-        .footer-card-orange {
-            background-color: var(--footer-orange-bg);
-            border: 1px solid var(--footer-orange-border);
-        }
-
-        .card-shadow {
-            box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .dark .card-shadow {
-            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5);
-        }
-
-        .badge {
-            font-size: 0.7rem;
-            padding: 2px 10px;
-            border-radius: 999px;
-            font-weight: bold;
-        }
-
-        .special-section {
-            border: 2px dashed var(--border);
-        }
-
-        /* TTS Pulse Animation */
-        @keyframes pulse-audio {
+        @keyframes pulse-orange {
             0% {
-                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+            }
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.3);
+            text-transform: uppercase;
+        }
+
+        .def-box {
+            margin-top: 15px;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: var(--bg-color);
+        }
+
+        .level-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 15px -3px var(--shadow-color);
+            transition: transform 0.2s;
+        }
+
+        .level-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .level-header {
+            padding: 12px 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .level-header.acuerdo {
+            background: var(--cat-acuerdo);
+        }
+
+        .level-header.sorpresa {
+            background: var(--cat-sorpresa);
+        }
+
+        .level-header.social {
+            background: var(--cat-social);
+        }
+
+        .level-header.avisos {
+            background: var(--cat-avisos);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.2s;
+        }
+
+        .german-word {
+            font-weight: 700;
+            color: var(--accent-green);
+            font-size: 1.05rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .german-word:hover {
+            text-decoration: underline;
+        }
+
+        .tts-icon {
+            font-size: 0.75rem;
+            opacity: 0.4;
+        }
+
+        .german-word:hover .tts-icon {
+            opacity: 1;
+        }
+
+        .spanish-word {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 6px;
+        }
+
+        .spanish-word:hover {
+            color: var(--text-main);
+        }
+
+        /* --- MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-green);
+            width: 95%;
+            max-width: 550px;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 255, 161, 0.15);
+            animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 20px 25px;
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .modal-body {
+            padding: 30px;
+            text-align: left;
+            overflow-y: auto;
+        }
+
+        .modal-de {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-green);
+            text-align: center;
+        }
+
+        .modal-es {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            opacity: 0.9;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .modal-explanation {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 3px solid var(--accent-green);
+        }
+
+        .modal-example-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 25px;
+        }
+
+        .example-item {
+            margin-bottom: 15px;
+        }
+
+        .example-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .example-de {
+            font-weight: 700;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .example-es {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .info-content {
+            line-height: 1.6;
+        }
+
+        .info-title {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-section {
+            margin-bottom: 25px;
+        }
+
+        .info-bullet {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 3px solid var(--accent-green);
+        }
+
+        .syntax-box {
+            background: #020617;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px dashed var(--accent-green);
+            font-family: ui-monospace, monospace;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        .pos-0 {
+            color: #f43f5e;
+            font-weight: 800;
+        }
+
+        .pos-1 {
+            color: #3b82f6;
+            font-weight: 800;
+        }
+
+        .pos-2 {
+            color: #fbbf24;
+            font-weight: 800;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .play-btn-large {
+            background: var(--accent-green);
+            color: #020617;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #statusBox {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--header-bg);
+            border: 1px solid var(--accent-green);
+            padding: 12px 20px;
+            border-radius: 12px;
+            transform: translateY(150%);
+            transition: transform 0.3s ease;
+            z-index: 2000;
+        }
+
+        @keyframes loading-pulse {
+            0% {
                 opacity: 1;
             }
 
             50% {
-                transform: scale(1.2);
-                opacity: 0.7;
+                opacity: 0.4;
             }
 
             100% {
-                transform: scale(1);
                 opacity: 1;
             }
         }
 
-        .loading-audio {
-            animation: pulse-audio 1s infinite;
+        .is-loading {
+            animation: loading-pulse 1s infinite;
             color: #10b981 !important;
         }
 
-        .tts-btn {
-            cursor: pointer;
-            padding: 4px;
-            border-radius: 50%;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            background: rgba(0, 0, 0, 0.05);
+        /* Mini Cards for Doch */
+        .mini-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
-        .dark .tts-btn {
-            background: rgba(255, 255, 255, 0.1);
+        .mini-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.2s, background 0.2s;
+            cursor: default;
         }
 
-        .tts-btn:hover {
-            background: var(--accent);
-            color: white !important;
+        .mini-card-title {
+            font-weight: 700;
+            color: var(--accent-green);
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            display: block;
         }
 
-        * {
-            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        .mini-card-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
         }
     </style>
 </head>
 
-<body class="min-h-screen p-4 md:p-8">
+<body>
 
-    <div class="max-w-6xl mx-auto">
-        <!-- Header con explicación de Interjección -->
-        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
-            <div class="max-w-3xl">
-                <h1 class="text-4xl font-extrabold mb-3 tracking-tight">Interjecciones Alemanas</h1>
-                <p class="opacity-80 font-medium text-lg leading-relaxed border-l-4 border-blue-500 pl-4 py-1">
-                    Son palabras breves que expresan emociones, sentimientos o reacciones inmediatas.
-                </p>
+    <!-- Word Modal -->
+    <div id="wordModal" class="modal-overlay" onclick="closeModal('wordModal', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <header class="modal-header">
+                <span id="modalLevel"
+                    class="text-white font-bold px-3 py-1 rounded-lg text-xs uppercase bg-blue-500">A1</span>
+                <button class="text-2xl text-slate-400 hover:text-white"
+                    onclick="closeModal('wordModal')">&times;</button>
+            </header>
+            <div class="modal-body">
+                <div id="modalDe" class="modal-de">Stimmt!</div>
+                <div id="modalEs" class="modal-es">¡Cierto! / Así es</div>
+
+                <div id="modalExplanation" class="modal-explanation hidden"></div>
+
+                <div class="modal-example-box" id="exampleContainer">
+                    <!-- Dynamic examples -->
+                </div>
+
+                <div class="btn-container">
+                    <button class="play-btn-large" onclick="triggerSpeech()">
+                        <i class="fas fa-volume-up"></i> <span id="btnSpeakText">ESCUCHAR</span>
+                    </button>
+                </div>
             </div>
-            <button id="themeToggle"
-                class="p-4 rounded-2xl dynamic-card shadow-lg hover:scale-105 border dynamic-border self-end md:self-center">
-                <i id="themeIcon" class="fas fa-sun text-xl dynamic-accent"></i>
-            </button>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="modal-overlay" onclick="closeModal('infoModal', event)">
+        <div class="modal-content" style="max-width: 600px;" onclick="event.stopPropagation()">
+            <header class="modal-header">
+                <span class="text-white font-bold px-3 py-1 rounded-lg text-xs uppercase bg-orange-600">Gramática &
+                    Sintaxis</span>
+                <button class="text-2xl text-slate-400 hover:text-white"
+                    onclick="closeModal('infoModal')">&times;</button>
+            </header>
+            <div class="modal-body info-content">
+                <div class="info-title">💡 ¿Qué es la Interjección?</div>
+                <div class="info-section">
+                    <p>Son palabras independientes que expresan emociones o reacciones. Al no tener una función
+                        sintáctica ligada al resto de la frase, se consideran elementos "extra" que dan matiz al habla.
+                    </p>
+                </div>
+
+                <div class="info-title">🇩🇪 La Regla de la "Posición 0"</div>
+                <div class="info-section">
+                    <p>En alemán, el verbo debe estar en la <span class="text-emerald-400">segunda posición</span>. Sin
+                        embargo, las interjecciones ocupan la <strong>Posición 0</strong>.</p>
+
+                    <div class="info-bullet mt-3">
+                        <strong>¿Qué significa esto?</strong> Que la interjección no cuenta para el orden de la frase.
+                        El conteo sintáctico comienza justo después de ella.
+                    </div>
+
+                    <div class="syntax-box">
+                        <div class="mb-2"><span class="pos-0">Ja</span> (0), <span class="pos-1">ich</span> (1) <span
+                                class="pos-2">bin</span> (2) hier.</div>
+                        <div><span class="pos-0">Oje</span> (0), <span class="pos-1">ich</span> (1) <span
+                                class="pos-2">habe</span> (2) den Termin vergessen.</div>
+                    </div>
+                </div>
+
+                <div class="info-title">📝 Uso de la Coma</div>
+                <div class="info-section">
+                    <div class="info-bullet">
+                        Para marcar visualmente esta independencia, las interjecciones suelen ir separadas del resto de
+                        la oración por una <strong>coma</strong> o un <strong>signo de exclamación</strong>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="header-actions">
+                <!-- Theme btn -->
+                <button class="header-btn theme-btn" onclick="toggleTheme()" aria-label="Cambiar tema">
+                    <i id="themeIcon" class="fas fa-sun"></i>
+                </button>
+                <!-- Info btn -->
+                <button class="header-btn info-btn" onclick="openInfoModal()" title="Información gramatical">
+                    INFO
+                </button>
+                <!-- Language Toggle -->
+                <div class="lang-toggle" onclick="toggleLanguage()">
+                    <div id="langEs" class="lang-option active">ES</div>
+                    <div id="langEn" class="lang-option">EN</div>
+                </div>
+            </div>
+            <h1 id="mainTitle">Interjecciones Alemanas</h1>
+            <p class="def-box" id="mainDef">
+                Palabras breves que dan vida y emoción a la conversación.
+            </p>
         </header>
 
-        <!-- Main Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <!-- Grupo 1: Acuerdo y Seguridad -->
-            <div class="space-y-4">
-                <h2 class="text-xl font-bold flex items-center gap-3 mb-4">
-                    <i class="fas fa-check-circle dynamic-accent text-2xl"></i> Acuerdo y Seguridad
-                </h2>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl border-l-4 border-l-yellow-500">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Stimmt!</span>
-                            <div class="tts-btn" onclick="playSpeech('Stimmt!')"><i
-                                    class="fas fa-volume-up text-sm"></i></div>
-                        </div>
-                        <span class="badge bg-blue-500 text-white">A1</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Cierto!" / "Así es"</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Genau!</span>
-                            <div class="tts-btn" onclick="playSpeech('Genau!')"><i class="fas fa-volume-up text-sm"></i>
-                            </div>
-                        </div>
-                        <span class="badge bg-blue-500 text-white">A1</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Exacto!"</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Natürlich!</span>
-                            <div class="tts-btn" onclick="playSpeech('Natürlich!')"><i
-                                    class="fas fa-volume-up text-sm"></i></div>
-                        </div>
-                        <span class="badge bg-blue-500 text-white">A1</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Por supuesto!"</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Klar!</span>
-                            <div class="tts-btn" onclick="playSpeech('Klar!')"><i class="fas fa-volume-up text-sm"></i>
-                            </div>
-                        </div>
-                        <span class="badge bg-blue-500 text-white">A1</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Claro!"</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Gerne!</span>
-                            <div class="tts-btn" onclick="playSpeech('Gerne!')"><i class="fas fa-volume-up text-sm"></i>
-                            </div>
-                        </div>
-                        <span class="badge bg-blue-500 text-white">A1</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Con gusto!" (Aceptar)</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Doch!</span>
-                            <div class="tts-btn" onclick="playSpeech('Doch!')"><i class="fas fa-volume-up text-sm"></i>
-                            </div>
-                        </div>
-                        <span class="badge bg-orange-500 text-white">A2</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Que sí!" / "pero sí"</p>
-                    <p class="text-xs mt-1 opacity-60">(para contradecir una negación)</p>
-                </div>
+        <div class="grid-layout">
+            <div class="level-card">
+                <div class="level-header acuerdo"><span id="titleAcuerdo">Acuerdo</span><span>✅</span></div>
+                <table>
+                    <tbody id="group-acuerdo"></tbody>
+                </table>
             </div>
-
-            <!-- Grupo 2: Sorpresa y Duda -->
-            <div class="space-y-4">
-                <h2 class="text-xl font-bold flex items-center gap-3 mb-4">
-                    <i class="fas fa-bolt dynamic-accent text-2xl"></i> Sorpresa y Duda
-                </h2>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Ach so!</span>
-                            <div class="tts-btn" onclick="playSpeech('Ach so!')"><i
-                                    class="fas fa-volume-up text-sm"></i></div>
-                        </div>
-                        <span class="badge bg-blue-500 text-white">A1</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Ah, ya entiendo!"</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Echt?</span>
-                            <div class="tts-btn" onclick="playSpeech('Echt?')"><i class="fas fa-volume-up text-sm"></i>
-                            </div>
-                        </div>
-                        <span class="badge bg-blue-500 text-white">A1</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¿En serio?"</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Vielleicht.</span>
-                            <div class="tts-btn" onclick="playSpeech('Vielleicht.')"><i
-                                    class="fas fa-volume-up text-sm"></i></div>
-                        </div>
-                        <span class="badge bg-blue-500 text-white">A1</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"Quizás / Tal vez"</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Jein...</span>
-                            <div class="tts-btn" onclick="playSpeech('Jein')"><i class="fas fa-volume-up text-sm"></i>
-                            </div>
-                        </div>
-                        <span class="badge bg-orange-500 text-white">A2</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"Sí y no"</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Oje!</span>
-                            <div class="tts-btn" onclick="playSpeech('Oje!')"><i class="fas fa-volume-up text-sm"></i>
-                            </div>
-                        </div>
-                        <span class="badge bg-orange-500 text-white">A2</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Ay no! / ¡Madre mía!"</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Wahnsinn!</span>
-                            <div class="tts-btn" onclick="playSpeech('Wahnsinn!')"><i
-                                    class="fas fa-volume-up text-sm"></i></div>
-                        </div>
-                        <span class="badge bg-orange-500 text-white">A2</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Increíble! / ¡Locura!"</p>
-                </div>
+            <div class="level-card">
+                <div class="level-header sorpresa"><span id="titleSorpresa">Sorpresa</span><span>⚡</span></div>
+                <table>
+                    <tbody id="group-sorpresa"></tbody>
+                </table>
             </div>
-
-            <!-- Grupo 3: Social y Emoción -->
-            <div class="space-y-4">
-                <h2 class="text-xl font-bold flex items-center gap-3 mb-4">
-                    <i class="fas fa-heart dynamic-accent text-2xl"></i> Social y Emoción
-                </h2>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Schade!</span>
-                            <div class="tts-btn" onclick="playSpeech('Schade!')"><i
-                                    class="fas fa-volume-up text-sm"></i></div>
-                        </div>
-                        <span class="badge bg-blue-500 text-white">A1</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Qué lástima!"</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Toll!</span>
-                            <div class="tts-btn" onclick="playSpeech('Toll!')"><i class="fas fa-volume-up text-sm"></i>
-                            </div>
-                        </div>
-                        <span class="badge bg-blue-500 text-white">A1</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Genial!"</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Hoppla!</span>
-                            <div class="tts-btn" onclick="playSpeech('Hoppla!')"><i
-                                    class="fas fa-volume-up text-sm"></i></div>
-                        </div>
-                        <span class="badge bg-blue-500 text-white">A1</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Uy! / Ups"</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Igitt!</span>
-                            <div class="tts-btn" onclick="playSpeech('Igitt!')"><i class="fas fa-volume-up text-sm"></i>
-                            </div>
-                        </div>
-                        <span class="badge bg-blue-500 text-white">A1</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Qué asco!"</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Gesundheit!</span>
-                            <div class="tts-btn" onclick="playSpeech('Gesundheit!')"><i
-                                    class="fas fa-volume-up text-sm"></i></div>
-                        </div>
-                        <span class="badge bg-blue-500 text-white">A1</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"¡Salud!" (Estornudo)</p>
-                </div>
-                <div class="dynamic-card p-5 card-shadow rounded-2xl">
-                    <div class="flex justify-between items-start">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl font-bold dynamic-accent">Lieber nicht.</span>
-                            <div class="tts-btn" onclick="playSpeech('Lieber nicht.')"><i
-                                    class="fas fa-volume-up text-sm"></i></div>
-                        </div>
-                        <span class="badge bg-orange-500 text-white">A2</span>
-                    </div>
-                    <p class="font-semibold italic mt-1">"Mejor no" (Rechazar)</p>
-                </div>
+            <div class="level-card">
+                <div class="level-header social"><span id="titleSocial">Social</span><span>🤝</span></div>
+                <table>
+                    <tbody id="group-social"></tbody>
+                </table>
+            </div>
+            <div class="level-card">
+                <div class="level-header avisos"><span id="titleAvisos">Avisos</span><span>📢</span></div>
+                <table>
+                    <tbody id="group-avisos"></tbody>
+                </table>
             </div>
         </div>
 
-        <!-- Sección Especial NA? -->
         <section
-            class="mt-16 dynamic-card special-section p-10 text-center relative overflow-hidden rounded-3xl shadow-xl">
-            <div class="relative z-10">
-                <h2 class="text-5xl font-black dynamic-accent mb-6">Na?</h2>
-                <p class="text-xl max-w-3xl mx-auto opacity-90 leading-relaxed font-medium">
-                    Es la <span class="dynamic-accent">"navaja suiza"</span> del idioma. Un saludo, una pregunta y una
-                    respuesta en solo dos letras.
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-                    <div class="dynamic-inner p-6 rounded-2xl border dynamic-border flex flex-col items-center">
-                        <span class="block text-xs uppercase opacity-60 font-black mb-2 tracking-widest">Como
-                            Saludo</span>
-                        <div class="flex items-center gap-2">
-                            <span class="text-lg font-bold">Na, alles gut?</span>
-                            <div class="tts-btn" onclick="playSpeech('Na, alles gut?')"><i
-                                    class="fas fa-volume-up text-xs"></i></div>
-                        </div>
-                    </div>
-                    <div class="dynamic-inner p-6 rounded-2xl border dynamic-border flex flex-col items-center">
-                        <span class="block text-xs uppercase opacity-60 font-black mb-2 tracking-widest">Como
-                            Impaciencia</span>
-                        <div class="flex items-center gap-2">
-                            <span class="text-lg font-bold">Na und?</span>
-                            <div class="tts-btn" onclick="playSpeech('Na und?')"><i
-                                    class="fas fa-volume-up text-xs"></i></div>
-                        </div>
-                    </div>
-                    <div class="dynamic-inner p-6 rounded-2xl border dynamic-border flex flex-col items-center">
-                        <span class="block text-xs uppercase opacity-60 font-black mb-2 tracking-widest">Duda</span>
-                        <div class="flex items-center gap-2">
-                            <span class="text-lg font-bold">Na ja...</span>
-                            <div class="tts-btn" onclick="playSpeech('Na ja...')"><i
-                                    class="fas fa-volume-up text-xs"></i></div>
-                        </div>
-                    </div>
-                </div>
+            class="mt-4 mb-10 dynamic-card p-8 text-center relative overflow-hidden rounded-3xl mx-8 border border-dashed border-slate-500">
+            <h2 class="text-4xl font-black dynamic-accent mb-4">Na?</h2>
+            <p class="text-lg max-w-2xl mx-auto opacity-90 leading-relaxed font-medium" id="naDef">La navaja suiza del
+                idioma. Cambia según el contexto.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6" id="naGrid">
+                <!-- Na items populated via JS -->
             </div>
-            <div
-                class="absolute -right-12 -bottom-12 opacity-5 text-[10rem] font-black italic select-none pointer-events-none">
-                DE</div>
         </section>
 
-        <!-- Footer / Consejos -->
-        <footer class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="footer-card-blue p-8 rounded-2xl shadow-sm">
-                <h3 class="font-bold text-xl mb-4 flex items-center gap-3">
-                    <i class="fas fa-lightbulb text-yellow-500"></i> Tip Cultural
-                </h3>
-                <p class="leading-relaxed opacity-90">
-                    El alemán es directo, pero interjecciones como <strong>Gerne!</strong> o <strong>Lieber
-                        nicht.</strong> suavizan la comunicación y te hacen sonar natural y educado.
-                </p>
-            </div>
-            <div class="footer-card-orange p-8 rounded-2xl shadow-sm">
-                <h3 class="font-bold text-xl mb-4 flex items-center gap-3">
-                    <i class="fas fa-graduation-cap text-orange-500"></i> ¿Vielleicht o Wahrscheinlich?
-                </h3>
-                <p class="leading-relaxed opacity-90">
-                    Usa <strong>Vielleicht</strong> para un "quizás" general (50/50). Para niveles avanzados,
-                    <em>Wahrscheinlich</em> indica un 80-90% de certeza.
-                </p>
-            </div>
+        <footer class="bg-black/20 p-6 text-center text-sm text-slate-500">
+            &copy; 2026 Infografía de Alemán Interactiva • Pronunciación IA
         </footer>
+    </div>
 
-        <!-- Feedback Box -->
-        <div id="statusBox"
-            class="fixed bottom-4 right-4 p-4 rounded-xl shadow-2xl bg-white dark:bg-gray-800 border dynamic-border transform translate-y-24 transition-transform duration-300 pointer-events-none">
-            <div class="flex items-center gap-3">
-                <div id="statusIcon" class="w-2 h-2 rounded-full bg-green-500"></div>
-                <p id="statusMessage" class="text-sm font-medium"></p>
-            </div>
-        </div>
-
-        <div class="text-center mt-12 opacity-40 text-xs pb-12">
-            <p class="uppercase tracking-widest font-bold mb-1">Deutsch aprender con estilo</p>
-            <p>Infografía con Pronunciación Real AI</p>
+    <div id="statusBox">
+        <div class="flex items-center gap-3">
+            <div id="statusIndicator" class="w-2 h-2 rounded-full bg-green-500"></div>
+            <span id="statusText" class="text-sm font-medium">Generando audio...</span>
         </div>
     </div>
 
     <script>
-        // API Configuration
         const apiKey = "";
-        let isSpeaking = false;
+        let currentText = "";
+        let isProcessing = false;
+        let currentLang = 'es'; // 'es' or 'en'
 
-        // Theme Logic
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const htmlElement = document.documentElement;
-
-        themeToggle.addEventListener('click', () => {
-            const isDark = htmlElement.classList.toggle('dark');
-            if (isDark) {
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
-            } else {
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
+        const labels = {
+            es: {
+                mainTitle: "Interjecciones Alemanas",
+                mainDef: "Palabras breves que dan vida y emoción a la conversación.",
+                titleAcuerdo: "Acuerdo",
+                titleSorpresa: "Sorpresa",
+                titleSocial: "Social",
+                titleAvisos: "Avisos",
+                naDef: "La navaja suiza del idioma. Cambia según el contexto.",
+                btnSpeak: "ESCUCHAR",
+                genAudio: "Generando audio...",
+                playing: "Reproduciendo..."
+            },
+            en: {
+                mainTitle: "German Interjections",
+                mainDef: "Short words that bring life and emotion to conversations.",
+                titleAcuerdo: "Agreement",
+                titleSorpresa: "Surprise",
+                titleSocial: "Social",
+                titleAvisos: "Warnings",
+                naDef: "The language's Swiss Army knife. Context is key.",
+                btnSpeak: "LISTEN",
+                genAudio: "Generating audio...",
+                playing: "Playing..."
             }
-        });
+        };
 
-        // TTS Logic
-        async function playSpeech(text) {
-            if (isSpeaking) return;
+        const data = {
+            acuerdo: [
+                { de: "Stimmt!", es: "¡Cierto! / Así es", en: "True! / Correct", lv: "A1", ex: [{ de: "Das ist richtig. Stimmt!", es: "Eso es correcto. ¡Así es!", en: "That is right. Correct!" }] },
+                { de: "Genau!", es: "¡Exacto!", en: "Exactly!", lv: "A1", ex: [{ de: "Du hast recht. Genau!", es: "Tienes razón. ¡Exacto!", en: "You're right. Exactly!" }] },
+                { de: "Natürlich!", es: "¡Por supuesto!", en: "Of course!", lv: "A1", ex: [{ de: "Kommst du? - Natürlich!", es: "¿Vienes? - ¡Por supuesto!", en: "Are you coming? - Of course!" }] },
+                { de: "Klar!", es: "¡Claro!", en: "Sure! / Clearly", lv: "A1", ex: [{ de: "Alles klar!", es: "¡Todo claro!", en: "All clear!" }] },
+                { de: "Gerne!", es: "¡Con gusto!", en: "Gladly!", lv: "A1", ex: [{ de: "Danke! - Gerne!", es: "¡Gracias! - ¡Con gusto!", en: "Thanks! - Gladly!" }] },
+                {
+                    de: "Doch!", es: "¡Al contrario! / ¡Sí que sí!", en: "On the contrary! / Yes!", lv: "A2",
+                    desc_es: "El 'Camaleón' Alemán. Una sola palabra que cambia de significado según si es adverbio o conjunción.",
+                    desc_en: "The German 'Chameleon'. A single word that changes meaning depending on whether it is an adverb or conjunction.",
+                    ex: [
+                        { type: 'header', title_es: '📋 Como Adverbio (Adverbien)', title_en: 'As Adverb' },
+                        {
+                            type: 'grid',
+                            items: [
+                                { es: "sin embargo", en: "however", de_context: "trotzdem" },
+                                { es: "a pesar de ello", en: "in spite of that", de_context: "trotzdem" },
+                                { es: "no obstante", en: "nevertheless", de_context: "dennoch" },
+                                { es: "después de todo", en: "after all", de_context: "schließlich" },
+                                { es: "por supuesto", en: "of course", de_context: "natürlich" },
+                                { es: "desde luego", en: "certainly", de_context: "freilich" },
+                                { es: "todavía", en: "still / yet", de_context: "noch immer" },
+                                { es: "con todo", en: "even so", de_context: "dennoch" },
+                                { es: "de todos modos", en: "anyway", de_context: "sowieso" }
+                            ]
+                        },
+                        { de: "\"Das weißt du doch!\" (por supuesto)", es: "¡Ya lo sabes! (desde luego)", en: "You know that! (of course)" },
+                        { de: "\"Kommst du nicht?\" - \"Doch!\" (¡sí!)", es: "\"¿No vienes?\" - \"¡Al contrario, sí!\"", en: "On the contrary, yes!" },
 
-            const btn = event.currentTarget;
-            const icon = btn.querySelector('i');
+                        { de: "Das ist doch nicht wahr!", es: "¡Eso no puede ser verdad! (énfasis)", en: "That cannot be true! (emphasis)" },
 
-            setLoading(btn, icon, true);
-            showStatus("Generando audio en alemán...", "blue");
+                        { type: 'header', title_es: '🔗 Como Conjunción (Konjunktionen)', title_en: 'As Conjunction' },
+                        {
+                            type: 'grid',
+                            items: [
+                                { es: "pero", en: "but", de_context: "aber" },
+                                { es: "mas", en: "yet", de_context: "sondern" },
+                                { es: "sino", en: "but rather", de_context: "sondern" },
+                                { es: "aun así", en: "even so", de_context: "trotzdem" }
+                            ]
+                        },
+                        { de: "Ich wollte gehen, doch es regnete.", es: "Quería ir, pero estaba lloviendo.", en: "I wanted to go, but it was raining." },
+                        { de: "Klein, doch oho!", es: "Pequeño, pero matón.", en: "Small but mighty!" },
+                        { de: "Er wollte nicht in die Kantine gehen, doch jetzt geht er!", es: "No quería ir a la cantina, ¡pero ahora sí que va!", en: "He didn't want to go to the canteen, but now he is going!" }
+                    ]
+                }
+            ],
+            sorpresa: [
+                { de: "Ach so!", es: "¡Ah, ya entiendo!", en: "Oh, I see!", lv: "A1", ex: [{ de: "Ach so, ahora entiendo.", es: "Ah, ya veo, ahora lo entiendo.", en: "Oh, I see, now I understand." }] },
+                { de: "Echt?", es: "¿En serio?", en: "Really?", lv: "A1", ex: [{ de: "Ich bin fertig. - Echt?", es: "He terminado. - ¿En serio?", en: "I'm finished. - Really?" }] },
+                { de: "Vielleicht.", es: "Quizás / Tal vez", en: "Maybe / Perhaps", lv: "A1", ex: [{ de: "Kommst du? - Vielleicht.", es: "¿Vienes? - Quizás.", en: "Are you coming? - Maybe." }] },
+                { de: "Oha!", es: "¡Vaya!", en: "Whoa!", lv: "A2", ex: [{ de: "Oha, das ist teuer!", es: "¡Vaya, eso es caro!", en: "Whoa, that's expensive!" }] },
+                { de: "Jein...", es: "Sí y no", en: "Yes and no", lv: "A2", ex: [{ de: "Magst du Pizza? - Jein.", es: "¿Te gusta la pizza? - Sí y no.", en: "Do you like pizza? - Yes and no." }] },
+                { de: "Mensch!", es: "¡Hombre!", en: "Man! / Gosh!", lv: "A2", ex: [{ de: "Mensch, beeil dich!", es: "¡Hombre, date prisa!", en: "Man, hurry up!" }] },
+                { de: "Wahnsinn!", es: "¡Increíble!", en: "Amazing! / Insane!", lv: "A2", ex: [{ de: "Das ist Wahnsinn!", es: "¡Eso es una locura!", en: "That's insane!" }] }
+            ],
+            social: [
+                { de: "Gleichfalls!", es: "¡Igualmente!", en: "Likewise! / Same to you", lv: "A1", ex: [{ de: "Schönes Wochenende! - Gleichfalls!", es: "¡Buen finde! - ¡Igualmente!", en: "Have a nice weekend! - Likewise!" }] },
+                { de: "Schade!", es: "¡Qué lástima!", en: "What a pity!", lv: "A1", ex: [{ de: "Ich can nicht kommen. - Schade!", es: "No puedo ir. - ¡Qué lástima!", en: "I can't come. - That's a pity!" }] },
+                { de: "Toll!", es: "¡Genial!", en: "Great! / Terrific", lv: "A1", ex: [{ de: "Das ist toll!", es: "¡Eso es genial!", en: "That is great!" }] },
+                { de: "Hoppla!", es: "¡Uy!", en: "Oops!", lv: "A1", ex: [{ de: "Hoppla, Entschuldigung!", es: "¡Uy, perdón!", en: "Oops, sorry!" }] },
+                { de: "Igitt!", es: "¡Qué asco!", en: "Yuck! / Gross", lv: "A1", ex: [{ de: "Igitt, das schmeckt nicht.", es: "¡Qué asco!, esto no sabe bien.", en: "Yuck, that doesn't taste good." }] },
+                { de: "Aua!", es: "¡Ay!", en: "Ouch!", lv: "A1", ex: [{ de: "Aua, mein Fuß!", es: "¡Ay, mi pie!", en: "Ouch, my foot!" }] },
+                { de: "Gesundheit!", es: "¡Salud!", en: "Bless you!", lv: "A1", ex: [{ de: "Hatschi! - Gesundheit!", es: "¡Achís! - ¡Salud!", en: "Achoo! - Bless you!" }] }
+            ],
+            avisos: [
+                { de: "Achtung!", es: "¡Atención!", en: "Attention! / Watch out", lv: "A1", ex: [{ de: "Achtung, die Tür schließt!", es: "¡Atención, la puerta se cierra!", en: "Attention, the door is closing!" }] },
+                { de: "Vorsicht!", es: "¡Cuidado!", en: "Careful! / Danger", lv: "A1", ex: [{ de: "Vorsicht, das Glas ist heiß!", es: "¡Cuidado, el vaso está caliente!", en: "Careful, the glass is hot!" }] },
+                { de: "Bitte schön", es: "De nada", en: "You're welcome", lv: "A1", ex: [{ de: "Bitte schön, Ihr Kaffee.", es: "Aquí tiene, su café.", en: "There you go, your coffee." }] },
+                { de: "Oje!", es: "¡Ay no!", en: "Oh dear!", lv: "A2", ex: [{ de: "Oje, ich habe kein Geld.", es: "¡Ay no!, no tengo dinero.", en: "Oh dear, I have no money." }] },
+                { de: "Zu viel!", es: "¡Demasiado!", en: "Too much!", lv: "A2", ex: [{ de: "Das ist simplemente demasiado.", es: "Eso es simplemente demasiado.", en: "That is simply too much." }] },
+                { de: "Lieber nicht.", es: "Mejor no", en: "Better not", lv: "A2", ex: [{ de: "Wollen wir gehen? - Lieber nicht.", es: "¿Quieres ir? - Mejor no.", en: "Shall we go? - Better not." }] }
+            ]
+        };
 
-            try {
-                const response = await callTtsApi(text);
-                if (!response.ok) throw new Error("Error en la API");
+        const naData = [
+            { de: 'Na, alles gut?', es: '¿Cómo vas?', en: 'How is it going?', lv: 'A1', ex: [{ de: 'Na, alles gut?', es: 'Hola, ¿todo bien?', en: 'Hey, everything good?' }] },
+            { de: 'Na und?', es: '¿Y qué?', en: 'So what?', lv: 'A2', ex: [{ de: 'Das ist verboten. - Na und?', es: 'Eso está prohibido. - ¿Y qué?', en: 'That is forbidden. - So what?' }] },
+            { de: 'Na ja...', es: 'Bueno...', en: 'Well...', lv: 'A1', ex: [{ de: 'Magst du es? - Na ja.', es: '¿Te gusta? - Bueno...', en: 'Do you like it? - Well...' }] },
+            { de: 'Na gut.', es: 'Vale', en: 'Alright', lv: 'A1', ex: [{ de: 'Kommst du mit? - Na gut.', es: '¿Vienes? - Vale, está bien.', en: 'Are you coming along? - Alright.' }] },
+            { de: 'Na also!', es: '¡Ves!', en: 'There you go!', lv: 'A2', ex: [{ de: 'Es funktioniert! - Na also!', es: '¡Funciona! - ¡Ves!', en: 'It works! - There you go!' }] },
+            { de: 'Na?', es: '¿Y bien?', en: 'And...?', lv: 'A2', ex: [{ de: 'Du bist zurück. Na?', es: 'Has vuelto. ¿Y bien?', en: 'You are back. And...?' }] }
+        ];
 
-                const result = await response.json();
-                const base64Data = result.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+        function populate() {
+            // Main Tables
+            for (let category in data) {
+                const tbody = document.getElementById(`group-${category}`);
+                tbody.innerHTML = "";
+                data[category].forEach(item => {
+                    const tr = document.createElement('tr');
+                    const tdDe = document.createElement('td');
+                    tdDe.innerHTML = `<div class="german-word">${item.de} <i class="fas fa-volume-up tts-icon"></i></div>`;
+                    tdDe.onclick = (e) => { e.stopPropagation(); playSpeech(item.de); };
+                    const tdEs = document.createElement('td');
+                    tdEs.className = "text-right hover:bg-slate-700/30";
+                    const trans = currentLang === 'es' ? item.es : item.en;
+                    tdEs.innerHTML = `<div class="spanish-word">${trans} <i class="fas fa-chevron-right ml-1 opacity-20 text-[0.6rem]"></i></div>`;
+                    tdEs.onclick = (e) => { e.stopPropagation(); openModal(item); };
+                    tr.appendChild(tdDe); tr.appendChild(tdEs); tbody.appendChild(tr);
+                });
+            }
 
-                if (!base64Data) throw new Error("No se recibió audio");
+            // Na Grid
+            const naGrid = document.getElementById('naGrid');
+            naGrid.innerHTML = "";
+            naData.forEach(item => {
+                const labelSub = currentLang === 'es' ? 'Español' : 'English';
+                const transText = currentLang === 'es' ? item.es : item.en;
+                const div = document.createElement('div');
+                div.className = "bg-slate-800/50 p-4 rounded-xl border border-slate-700 flex flex-col items-center group";
+                div.innerHTML = `
+                    <span class="block text-[0.6rem] uppercase opacity-60 font-black mb-1 cursor-pointer hover:text-emerald-400" onclick='openModal(${JSON.stringify(item)})'>${labelSub} <i class="fas fa-chevron-right text-[0.5rem] opacity-30"></i></span>
+                    <span class="text-md font-bold text-emerald-400 cursor-pointer hover:underline" onclick="playSpeech('${item.de}')">${item.de} <i class="fas fa-volume-up text-xs opacity-50"></i></span>
+                `;
+                naGrid.appendChild(div);
+            });
 
-                const audioBlob = pcmToWav(base64Data, 24000);
-                const audioUrl = URL.createObjectURL(audioBlob);
-                const audio = new Audio(audioUrl);
-
-                audio.onended = () => {
-                    setLoading(btn, icon, false);
-                    isSpeaking = false;
-                    hideStatus();
-                };
-
-                isSpeaking = true;
-                audio.play();
-                showStatus("Reproduciendo...", "green");
-
-            } catch (err) {
-                console.error(err);
-                showStatus("Error al cargar audio", "red");
-                setTimeout(() => {
-                    setLoading(btn, icon, false);
-                    hideStatus();
-                }, 2000);
+            // Update Labels
+            for (let id in labels[currentLang]) {
+                const el = document.getElementById(id);
+                if (el) el.innerText = labels[currentLang][id];
             }
         }
 
-        async function callTtsApi(text, retryCount = 0) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
-            const payload = {
-                contents: [{
-                    parts: [{ text: `Say naturally in German: ${text}` }]
-                }],
-                generationConfig: {
-                    responseModalities: ["AUDIO"],
-                    speechConfig: {
-                        voiceConfig: {
-                            prebuiltVoiceConfig: { voiceName: "Kore" }
-                        }
-                    }
-                }
-            };
+        function openModal(item) {
+            currentText = item.de;
+            document.getElementById('modalDe').innerText = item.de;
+            document.getElementById('modalEs').innerText = currentLang === 'es' ? item.es : item.en;
+            document.getElementById('modalLevel').innerText = item.lv;
+            document.getElementById('btnSpeakText').innerText = labels[currentLang].btnSpeak;
 
+            const expEl = document.getElementById('modalExplanation');
+            const desc = currentLang === 'es' ? item.desc_es : item.desc_en;
+            if (desc) {
+                expEl.innerText = desc;
+                expEl.classList.remove('hidden');
+            } else {
+                expEl.classList.add('hidden');
+            }
+
+            const container = document.getElementById('exampleContainer');
+            container.innerHTML = "";
+            item.ex.forEach(example => {
+                if (example.type === 'header') {
+                    const header = document.createElement('h3');
+                    header.className = "text-lg font-bold text-white mt-4 mb-2 border-b border-slate-600 pb-1";
+                    header.innerText = currentLang === 'es' ? example.title_es : example.title_en;
+                    container.appendChild(header);
+                    return;
+                }
+
+                if (example.type === 'grid') {
+                    const grid = document.createElement('div');
+                    grid.className = "mini-card-grid";
+                    example.items.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = "mini-card";
+                        const label = currentLang === 'es' ? item.es : item.en;
+                        card.innerHTML = `
+                            <span class="mini-card-title">${label}</span>
+                            <span class="mini-card-subtitle">${item.de_context || 'doch'}</span>
+                        `;
+                        grid.appendChild(card);
+                    });
+                    container.appendChild(grid);
+                    return;
+                }
+
+                if (example.de === "---") {
+                    container.appendChild(document.createElement('hr')).className = "my-3 border-slate-700";
+                    return;
+                }
+                const div = document.createElement('div');
+                div.className = "example-item";
+                const trans = currentLang === 'es' ? example.es : example.en;
+                div.innerHTML = `<div class="example-de">${example.de}</div><div class="example-es">${trans}</div>`;
+                container.appendChild(div);
+            });
+
+            const badge = document.getElementById('modalLevel');
+            badge.style.backgroundColor = item.lv === 'A1' ? 'var(--level-a1)' : 'var(--level-a2)';
+            document.getElementById('wordModal').style.display = 'flex';
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.getElementById('langEs').classList.toggle('active');
+            document.getElementById('langEn').classList.toggle('active');
+            populate();
+        }
+
+        function openInfoModal() { document.getElementById('infoModal').style.display = 'flex'; }
+        function closeModal(id, event) {
+            if (event && event.target !== document.getElementById(id)) return;
+            document.getElementById(id).style.display = 'none';
+        }
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            document.getElementById('themeIcon').className = document.body.classList.contains('light-mode') ? 'fas fa-moon' : 'fas fa-sun';
+        }
+
+        async function triggerSpeech() {
+            if (isProcessing) return;
+            isProcessing = true;
+            const btn = document.querySelector('.play-btn-large');
+            btn.style.opacity = "0.5";
+            showStatus(labels[currentLang].genAudio, "blue");
             try {
-                const response = await fetch(url, {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: `Say naturally in German: ${currentText}` }] }],
+                        generationConfig: { responseModalities: ["AUDIO"], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Kore" } } } }
+                    })
                 });
-
-                if (response.status === 429 && retryCount < 5) {
-                    const delay = Math.pow(2, retryCount) * 1000;
-                    await new Promise(r => setTimeout(r, delay));
-                    return callTtsApi(text, retryCount + 1);
-                }
-
-                return response;
-            } catch (e) {
-                if (retryCount < 5) {
-                    const delay = Math.pow(2, retryCount) * 1000;
-                    await new Promise(r => setTimeout(r, delay));
-                    return callTtsApi(text, retryCount + 1);
-                }
-                throw e;
+                const result = await response.json();
+                const part = result.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+                const rate = parseInt(part.inlineData.mimeType.match(/rate=(\d+)/)?.[1] || "24000");
+                const audio = new Audio(URL.createObjectURL(pcmToWav(part.inlineData.data, rate)));
+                audio.onplay = () => showStatus(labels[currentLang].playing, "green");
+                audio.onended = () => { hideStatus(); btn.style.opacity = "1"; isProcessing = false; };
+                audio.play();
+            } catch (err) {
+                showStatus("Error", "red");
+                setTimeout(() => { hideStatus(); btn.style.opacity = "1"; isProcessing = false; }, 2000);
             }
         }
 
-        // PCM (L16) to WAV converter
+        async function playSpeech(text) {
+            if (isProcessing) return;
+            isProcessing = true;
+            showStatus(labels[currentLang].genAudio, "blue");
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: `Say naturally in German: ${text}` }] }],
+                        generationConfig: { responseModalities: ["AUDIO"], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Kore" } } } }
+                    })
+                });
+                const result = await response.json();
+                const part = result.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+                const rate = parseInt(part.inlineData.mimeType.match(/rate=(\d+)/)?.[1] || "24000");
+                const audio = new Audio(URL.createObjectURL(pcmToWav(part.inlineData.data, rate)));
+                audio.onplay = () => showStatus(labels[currentLang].playing, "green");
+                audio.onended = () => { hideStatus(); isProcessing = false; };
+                audio.play();
+            } catch (err) {
+                showStatus("Error", "red");
+                setTimeout(() => { hideStatus(); isProcessing = false; }, 2000);
+            }
+        }
+
         function pcmToWav(base64, sampleRate) {
-            const binaryString = atob(base64);
-            const len = binaryString.length;
-            const bytes = new Uint8Array(len);
-            for (let i = 0; i < len; i++) {
-                bytes[i] = binaryString.charCodeAt(i);
-            }
-
-            const wavHeader = new ArrayBuffer(44);
-            const view = new DataView(wavHeader);
-
-            view.setUint32(0, 0x52494646, false);
-            view.setUint32(4, 36 + len, true);
-            view.setUint32(8, 0x57415645, false);
-
-            view.setUint32(12, 0x666d7420, false);
-            view.setUint32(16, 16, true);
-            view.setUint16(20, 1, true);
-            view.setUint16(22, 1, true);
-            view.setUint32(24, sampleRate, true);
-            view.setUint32(28, sampleRate * 2, true);
-            view.setUint16(32, 2, true);
-            view.setUint16(34, 16, true);
-
-            view.setUint32(36, 0x64617461, false);
-            view.setUint32(40, len, true);
-
-            return new Blob([wavHeader, bytes], { type: 'audio/wav' });
-        }
-
-        // UI Helpers
-        function setLoading(btn, icon, isLoading) {
-            if (isLoading) {
-                icon.classList.add('loading-audio');
-                btn.style.pointerEvents = 'none';
-            } else {
-                icon.classList.remove('loading-audio');
-                btn.style.pointerEvents = 'auto';
-            }
+            const bytes = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+            const wav = new ArrayBuffer(44 + bytes.length);
+            const view = new DataView(wav);
+            const writeString = (off, s) => { for (let i = 0; i < s.length; i++) view.setUint8(off + i, s.charCodeAt(i)); };
+            writeString(0, 'RIFF'); view.setUint32(4, 36 + bytes.length, true); writeString(8, 'WAVE');
+            writeString(12, 'fmt '); view.setUint32(16, 16, true); view.setUint16(20, 1, true);
+            view.setUint16(22, 1, true); view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * 2, true); view.setUint16(32, 2, true);
+            view.setUint16(34, 16, true); writeString(36, 'data');
+            view.setUint32(40, bytes.length, true); new Uint8Array(wav, 44).set(bytes);
+            return new Blob([wav], { type: 'audio/wav' });
         }
 
         function showStatus(msg, color) {
             const box = document.getElementById('statusBox');
-            const message = document.getElementById('statusMessage');
-            const icon = document.getElementById('statusIcon');
-
-            const colors = {
-                blue: '#3b82f6',
-                green: '#10b981',
-                red: '#ef4444'
-            };
-
-            message.innerText = msg;
-            icon.style.backgroundColor = colors[color] || colors.blue;
+            const colors = { blue: '#3b82f6', green: '#10b981', red: '#ef4444' };
+            document.getElementById('statusText').innerText = msg;
+            document.getElementById('statusIndicator').style.backgroundColor = colors[color];
             box.style.transform = 'translateY(0)';
         }
 
-        function hideStatus() {
-            document.getElementById('statusBox').style.transform = 'translateY(100px)';
-        }
+        function hideStatus() { document.getElementById('statusBox').style.transform = 'translateY(150%)'; }
+
+        window.onload = populate;
     </script>
 </body>
 
