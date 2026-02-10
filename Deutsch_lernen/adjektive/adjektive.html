@@ -5,65 +5,535 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deutsche Adjektive (A1-B1)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="../images/german_flag.png" type="image/png">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
     <style>
         :root {
-            --bg-color: #f3f4f6;
-            --text-color: #1f2937;
-            --card-bg: #ffffff;
+            /* --- DEFAULT DARK MODE PALETTE --- */
+            --bg-color: #0f172a;
+            /* Slate 900 */
+            --card-bg: #1e293b;
+            /* Slate 800 */
+            --header-bg: #020617;
+            /* Slate 950 */
+            --section-bg: #0f172a;
+            /* Slate 900 */
+            --rule-bg: linear-gradient(135deg, #0f172a 0%, #0c4a6e 100%);
+            --text-main: #f1f5f9;
+            /* Slate 100 */
+            --text-muted: #94a3b8;
+            /* Slate 400 */
+            --border-color: #334155;
+            /* Slate 700 */
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glow-strength: 20px;
+            --accent-green: #22c55e;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        body {
-            font-family: 'Nunito', sans-serif;
-            background-color: #d1d5db;
-            /* Darker gray */
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            max-width: 800px;
-        }
-
-        h1 {
-            color: #111827;
-            margin-bottom: 15px;
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -0.05rem;
-        }
-
-        h1 span {
-            color: #d97706;
-            border-bottom: 4px solid #d97706;
-        }
-
-        p.instruction {
-            color: #6b7280;
-            font-size: 1.25rem;
-        }
-
-        /* Active Recall Toggle */
-        .toggle-container {
+        /* Search & Toggle Styles */
+        .search-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 3rem;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(0, 255, 161, 0.2);
+        }
+
+        /* Lang Toggle Switch */
+        .lang-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            display: flex;
+            padding: 4px;
+            cursor: pointer;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 5px;
+        }
+
+        .lang-option {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            border-radius: 40px;
+            transition: all 0.2s ease;
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+
+        .lang-option:hover {
+            background: rgba(255, 255, 255, 0.05);
+            opacity: 1;
+        }
+
+        .lang-option.active {
+            background: var(--accent-green);
+            color: #020617;
+            /* Dark text on green */
+            opacity: 1;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- LIGHT MODE OVERRIDES --- */
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --section-bg: #e2e8f0;
+            --rule-bg: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --accent-green: #059669;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --glow-strength: 0px;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 80px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        header {
+            background: var(--header-bg);
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-green);
+            position: relative;
+        }
+
+        .controls-wrapper {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .theme-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            min-width: 40px;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-green);
+        }
+
+        body:not(.light-mode) .icon-sun {
+            display: block;
+        }
+
+        body:not(.light-mode) .icon-moon {
+            display: none;
+        }
+
+        body.light-mode .icon-sun {
+            display: none;
+        }
+
+        body.light-mode .icon-moon {
+            display: block;
+        }
+
+        /* Grid Layout (Kompakt) */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            background: var(--bg-color);
+        }
+
+        @media (min-width: 1100px) {
+            .grid-layout {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 850px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+
+        /* Single Layout (Alt) */
+        #cards-container-single {
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+            background: var(--bg-color);
+            min-height: 400px;
+            /* Placeholder height */
+        }
+
+        #cards-container-single .level-card {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        /* Compact Card Styles */
+        .level-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 15px -3px var(--shadow-color);
+            transition: transform 0.2s;
+        }
+
+        .level-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .level-header {
+            padding: 15px 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .level-content {
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 15px;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .german-word {
+            font-weight: 700;
+            color: var(--accent-green);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1.1rem;
+        }
+
+        .german-word:hover {
+            text-decoration: underline;
+        }
+
+        .audio-icon {
+            font-size: 0.9em;
+            opacity: 0.7;
+            filter: grayscale(1);
+        }
+
+        .german-word:hover .audio-icon {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+
+        .spanish-word {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .example-clickable {
+            cursor: pointer;
+            transition: color 0.2s ease;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .example-clickable:hover {
+            color: var(--accent-green);
+        }
+
+        .example-trans {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* --- MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-green);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 255, 161, 0.2);
+            animation: modalFadeIn 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+            max-height: 85vh;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: white;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .modal-body {
+            padding: 30px;
+            text-align: center;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-green) var(--bg-color);
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background-color: var(--accent-green);
+            border-radius: 4px;
+        }
+
+        .modal-main-word {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            margin-bottom: 5px;
+        }
+
+        .modal-sub-word {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 25px;
+        }
+
+        .modal-example-box {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .modal-example-box:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-ex-de {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .modal-ex-es {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: var(--accent-green);
+            text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.3);
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background: var(--header-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 30px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        /* Toggle Container (Footer Logic) */
+        .toggle-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.95);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        @media (max-width: 600px) {
+            .toggle-container {
+                width: 90%;
+                flex-wrap: wrap;
+                justify-content: center;
+                border-radius: 20px;
+            }
         }
 
         .active-recall-toggle {
@@ -73,25 +543,24 @@
         }
 
         .switch-label {
-            color: #414A5C;
-            cursor: pointer;
-            font-weight: 700;
-            text-align: right;
-            line-height: 1.2;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-weight: 600;
         }
 
         .label-translation {
             display: block;
-            font-size: 0.8em;
-            font-style: italic;
+            font-size: 0.75rem;
+            color: var(--text-muted);
             font-weight: 400;
         }
 
+        /* Toggle Switch */
         .switch {
             position: relative;
             display: inline-block;
             width: 50px;
-            height: 24px;
+            height: 26px;
         }
 
         .switch input {
@@ -107,7 +576,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #414A5C;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
             transition: .4s;
             border-radius: 34px;
         }
@@ -115,1179 +585,755 @@
         .slider:before {
             position: absolute;
             content: "";
-            height: 16px;
-            width: 16px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: var(--text-muted);
             transition: .4s;
             border-radius: 50%;
-            transform: translateX(26px);
         }
 
-        input:not(:checked)+.slider {
-            background-color: #ccc;
+        input:checked+.slider {
+            background-color: var(--accent-green);
+            border-color: var(--accent-green);
         }
 
-        input:not(:checked)+.slider:before {
-            transform: translateX(0px);
+        input:checked+.slider:before {
+            transform: translateX(24px);
+            background-color: white;
         }
 
-        /* Navigation */
+        /* Navigation Arrows (Alt View) */
         .navigation-wrapper {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: 2rem;
-            margin: 2rem 0;
+            pointer-events: none;
+            z-index: 50;
+            /* Below modal but above content */
+            padding: 0 20px;
+            margin: 0;
+            background: transparent;
+            border: none;
+            width: 100%;
         }
 
         .nav-button {
-            background-color: #111827;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.6);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
             transition: all 0.3s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .nav-button:hover {
-            background-color: #1f2937;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .nav-button:disabled {
-            background-color: #d1d5db;
-            cursor: not-allowed;
-            transform: none;
+            background: var(--accent-green);
+            color: #020617;
+            transform: scale(1.1);
+            border-color: var(--accent-green);
         }
 
         .group-indicator {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #111827;
-            text-align: center;
-            min-width: 300px;
-        }
-
-        /* Grid Layout */
-        .infographic-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            width: 100%;
-            padding-bottom: 60px;
-        }
-
-        /* Card Styles */
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-align: center;
-            position: relative;
-            overflow: visible;
-            display: flex;
-            flex-direction: column;
-            border: none;
-            margin-top: 10px;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        /* Header with Color */
-        .card-header {
-            background-color: var(--card-main);
-            color: white;
-            padding: 15px 5px 15px 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            flex-grow: 1;
-            height: auto;
-            border-radius: 20px 20px 0 0;
-        }
-
-        /* Floating Icon */
-        .icon-floating {
-            width: 40px;
-            height: 40px;
-            background-color: var(--card-pastel);
-            color: var(--card-main);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            font-size: 1.4rem;
-            position: absolute;
-            top: 12px;
-            right: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .icon-floating:hover {
-            transform: translateY(50%) scale(1.1);
-        }
-
-        /* White Body */
-        .card-body {
-            position: relative;
-            background-color: white;
-            padding: 15px 5px 15px 5px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex-grow: 0;
-            border-radius: 0 0 20px 20px;
-        }
-
-        /* German Word */
-        .german-word {
-            display: block;
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 0;
-            line-height: 1.1;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Spanish Translation */
-        .spanish-meaning {
-            display: block;
-            font-size: 1.1rem;
-            color: #6b7280;
-            font-weight: 600;
-            margin-bottom: 0;
-            margin-top: 2px;
-            font-style: italic;
-        }
-
-        .english-meaning {
-            display: block;
-            font-size: 1.0rem;
-            color: #9ca3af;
-            font-weight: 500;
-            margin-top: 0;
-            font-style: italic;
-
-            /* Collapsing animation */
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: all 0.3s ease-out;
-        }
-
-        .english-meaning.visible {
-            max-height: 50px;
-            /* Enough for 1-2 lines */
-            opacity: 1;
-            margin-top: 2px;
-        }
-
-        /* Badge */
-        .card-category-badge {
-            background-color: #f3f4f6;
-            color: #6b7280;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 15px;
-            display: inline-block;
-            box-shadow: none;
-        }
-
-        /* Example */
-        .card-exam-example {
-            width: 90%;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            position: relative;
-            padding: 5px 0;
-            background-color: transparent;
-            border: none;
-            margin-top: auto;
-        }
-
-        .example-text {
-            display: block;
-            line-height: 1.4;
-        }
-
-        .example-text.de {
-            font-size: 1.1rem;
-            color: #1f2937;
-            font-weight: 700;
-        }
-
-        .example-text.es {
-            font-size: 0.9rem;
-            color: #6b7280;
-            font-weight: 500;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-
-        /* Search Bar */
-        .search-container {
-            display: flex;
-            justify-content: center;
-            margin: 1.5rem 0;
-        }
-
-        .search-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        #search-input {
-            width: 100%;
-            padding: 12px 45px 12px 20px;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-            border: 2px solid #d1d5db;
-            border-radius: 12px;
-            outline: none;
-            transition: all 0.3s;
-            background-color: white;
-        }
-
-        #search-input:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        #search-input::placeholder {
-            color: #9ca3af;
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6b7280;
-            pointer-events: none;
-        }
-
-        .clear-search {
-            position: absolute;
-            right: 45px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #6b7280;
-            cursor: pointer;
-            font-size: 1.2rem;
-            padding: 5px;
+            /* Hide indicator for floating nav or style it differently */
             display: none;
-        }
-
-        .clear-search.visible {
-            display: block;
-        }
-
-        .search-results-info {
-            text-align: center;
-            color: #6b7280;
-            margin: 1rem 0;
-            font-size: 0.95rem;
-        }
-
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-overlay.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-content {
-            background-color: white;
-            padding: 0;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            transform: scale(0.9);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .modal-overlay.visible .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 10;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
-            line-height: 1;
-        }
-
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.4);
-        }
-
-        .modal-header {
-            padding: 40px 30px;
-            text-align: center;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .modal-emoji {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-        }
-
-        .modal-word {
-            font-size: 2.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .modal-word:hover {
-            transform: scale(1.05);
-        }
-
-        .modal-word:active {
-            transform: scale(0.95);
-        }
-
-        .modal-translation {
-            font-size: 1.5rem;
-            opacity: 0.9;
-            font-weight: 500;
-        }
-
-        .modal-badge {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-top: 10px;
-        }
-
-        .modal-section {
-            padding: 30px;
-        }
-
-        .modal-section-title {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #6b7280;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .modal-example {
-            background-color: #f3f4f6;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .modal-example-de {
-            font-size: 1.2rem;
-            color: #1f2937;
-            font-weight: 600;
-            margin-bottom: 8px;
-            cursor: pointer;
-        }
-
-        .modal-example-es {
-            font-size: 1rem;
-            color: #6b7280;
-            font-style: italic;
-        }
-
-        /* Light Version Styles */
-        body.light-version .icon-floating {
-            display: none;
-        }
-
-        body.light-version .card-exam-example {
-            display: none;
-        }
-
-        body.light-version .card-category-badge {
-            display: none;
-        }
-
-        body.light-version .card-body {
-            display: none;
-        }
-
-        body.light-version .card {
-            min-height: auto;
-            background-color: #e5e7eb;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-version .card-header {
-            padding: 25px 15px;
-            border-radius: 20px;
-            background-color: #e5e7eb;
-        }
-
-        body.light-version .german-word {
-            color: #1e3a8a;
-            text-shadow: none;
-            color: #6b7280;
-            font-style: italic;
         }
     </style>
 </head>
 
-<body>
+<body class="lang-es">
 
-    <header>
-        <h1>Deutsche <span>Adjektive</span></h1>
-        <p class="instruction">A1-B1 • Grammatische Kategorien</p>
-    </header>
-
-    <!-- Search Bar -->
-    <div class="search-container">
-        <div class="search-wrapper">
-            <input type="text" id="search-input" placeholder="Suchen... (z.B. groß, grande, big)">
-            <button class="clear-search" id="clear-search">✕</button>
-            <span class="search-icon">🔍</span>
-        </div>
-    </div>
-    <div id="search-results-info" class="search-results-info"></div>
-
-    <!-- Modal -->
-    <div class="modal-overlay" id="adjective-modal">
+    <!-- Modal Window -->
+    <div id="adjectiveModal" class="modal-overlay">
         <div class="modal-content">
-            <button class="modal-close" id="modal-close">×</button>
-            <div class="modal-header">
-                <div class="modal-emoji" id="modal-emoji"></div>
-                <div class="modal-word" id="modal-word"></div>
-                <div class="modal-translation" id="modal-translation"></div>
-                <span class="modal-badge" id="modal-badge"></span>
-            </div>
-            <div class="modal-section">
-                <div class="modal-section-title">Beispiel / Ejemplo</div>
-                <div class="modal-example">
-                    <div class="modal-example-de" id="modal-example-de"></div>
-                    <div class="modal-example-es" id="modal-example-es"></div>
+            <header class="modal-header" id="modalHeader">
+                <h2 id="modalCategory">Categoría</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </header>
+            <div class="modal-body">
+                <div class="modal-emoji" id="modalEmoji" style="font-size: 4rem; margin-bottom: 10px; cursor: pointer;">
+                </div>
+                <div id="modalWord" class="modal-main-word" title="Escuchar">Wort</div>
+                <div id="modalTranslation" class="modal-sub-word">Traducción</div>
+
+                <div class="modal-example-box" id="modalExampleBox" title="Escuchar frase">
+                    <div id="modalExampleDe" class="modal-ex-de">Ejemplo Alemán</div>
+                    <div id="modalExampleEs" class="modal-ex-es">Traducción Ejemplo</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Navigation -->
-    <div class="navigation-wrapper">
-        <button class="nav-button" id="prev-group-btn">← Vorherige</button>
-        <span class="group-indicator" id="group-indicator">Gruppe wird geladen...</span>
-        <button class="nav-button" id="next-group-btn">Nächste →</button>
+    <div class="container">
+        <header>
+            <div class="controls-wrapper">
+                <button class="theme-btn" onclick="toggleTheme()" aria-label="Cambiar tema">
+                    <span class="icon-sun">☀️</span>
+                    <span class="icon-moon">🌔</span>
+                </button>
+                <div class="lang-toggle" onclick="toggleLanguage()">
+                    <div id="langEs" class="lang-option active" data-lang="es">ES</div>
+                    <div id="langEn" class="lang-option" data-lang="en">EN</div>
+                </div>
+            </div>
+            <h1>Deutsche <span>Adjektive</span></h1>
+            <!-- Search & Toggle -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar / Search..."
+                    oninput="handleSearch()">
+            </div>
+        </header>
+
+        <!-- View: Grid (Default: Kompakt) -->
+        <div class="grid-layout" id="cards-container-grid">
+            <!-- Cards inserted by JS -->
+        </div>
+
+        <!-- View: Single Group (Alt) - Hidden by default -->
+        <div id="cards-container-single" class="grid-layout" style="display: none; padding-top: 0;">
+            <!-- Single Card inserted by JS -->
+        </div>
+
+        <!-- Navigation (Alt View - Fixed Arrows) -->
+        <div class="navigation-wrapper" id="navigation-wrapper" style="display: none;">
+            <button class="nav-button" onclick="prevGroup()" aria-label="Vorherige Gruppe">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <span class="group-indicator" id="group-indicator" style="display:none;"></span>
+            <button class="nav-button" onclick="nextGroup()" aria-label="Nächste Gruppe">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <footer>
+            <p>© 2024 Juan Olaya - Deutsch Lernen</p>
+        </footer>
     </div>
 
-    <!-- Cards Container -->
-    <div id="cards-container" class="infographic-grid">
-        <!-- Cards will be dynamically loaded here -->
-    </div>
-
+    <!-- Toggle Container (Footer) -->
     <div class="toggle-container">
         <div class="active-recall-toggle">
-            <label class="switch-label" for="light-version-switch">Versión ligera<span
-                    class="label-translation">(versión simple)</span></label>
+            <label class="switch-label" for="view-toggle">Ansicht: Alt / Kompakt</label>
             <label class="switch">
-                <input type="checkbox" id="light-version-switch">
+                <input type="checkbox" id="view-toggle" checked onchange="toggleViewMode()">
                 <span class="slider"></span>
             </label>
         </div>
+        <!-- Removed other toggles to simplify footer as requested, usually users want less clutter. Or keep them? -->
+        <!-- Keeping English Toggle as it's important -->
         <div class="active-recall-toggle">
-            <label class="switch-label" for="english-switch">Englisch<span
-                    class="label-translation">(English)</span></label>
+            <label class="switch-label" for="english-switch">English</label>
             <label class="switch">
-                <input type="checkbox" id="english-switch">
-                <span class="slider"></span>
-            </label>
-        </div>
-        <div class="active-recall-toggle">
-            <label class="switch-label" for="recall-switch">Übersetzung<span
-                    class="label-translation">(traducción)</span></label>
-            <label class="switch">
-                <input type="checkbox" id="recall-switch" checked>
+                <input type="checkbox" id="english-switch" onchange="renderContent()">
                 <span class="slider"></span>
             </label>
         </div>
     </div>
 
     <script>
-        // Group definitions with examples
+        // --- DATA ---
         const adjectiveGroups = [
             {
-                title: '🌟 Gruppe 1: Allgemeine Grundlagen (A1)',
+                title: '📌 G1: Allgemeine Grundlagen (A1)',
                 description: 'Fundamentos generales',
                 level: 'A1',
-                colorMain: '#3b82f6',
+                colorMain: '#2563eb', // Blue
                 colorPastel: '#dbeafe',
-                badge: 'GRUNDLAGEN',
+                badge: 'BASICS',
                 adjectives: [
-                    { word: 'gut', emoji: '👍', spanish: '(bueno)', english: 'good', example_de: 'Das Essen schmeckt sehr gut.', example_es: 'La comida sabe muy bien.' },
-                    { word: 'wichtig', emoji: '❗', spanish: '(importante)', english: 'important', example_de: 'Das ist ein wichtiger Termin.', example_es: 'Esa es una cita importante.' },
-                    { word: 'groß', emoji: '🐘', spanish: '(grande)', english: 'big', example_de: 'Berlin ist eine große Stadt.', example_es: 'Berlín es una ciudad grande.' },
-                    { word: 'klein', emoji: '🐭', spanish: '(pequeño)', english: 'small', example_de: 'Die Wohnung ist zu klein für uns.', example_es: 'El apartamento es demasiado pequeño para nosotros.' },
-                    { word: 'neu', emoji: '👶', spanish: '(nuevo)', english: 'new', example_de: 'Ich brauche eine neue Brille.', example_es: 'Necesito gafas nuevas.' },
-                    { word: 'alt', emoji: '👵', spanish: '(viejo)', english: 'old', example_de: 'Mein Fahrrad ist schon sehr alt.', example_es: 'Mi bicicleta ya es muy vieja.' },
-                    { word: 'lang', emoji: '📏', spanish: '(largo)', english: 'long', example_de: 'Der Weg ist sehr lang.', example_es: 'El camino es muy largo.' },
-                    { word: 'schön', emoji: '🥰', spanish: '(bonito)', english: 'beautiful', example_de: 'Der Ausblick ist wunderschön.', example_es: 'La vista es preciosa.' },
-                    { word: 'einfach', emoji: '👌', spanish: '(fácil)', english: 'simple/easy', example_de: 'Die Prüfung war sehr einfach.', example_es: 'El examen fue muy fácil.' },
-                    { word: 'schwer', emoji: '🏋️', spanish: '(difícil)', english: 'hard/heavy', example_de: 'Dieser Koffer ist extrem schwer.', example_es: 'Esta maleta es extremadamente pesada.' },
-                    { word: 'möglich', emoji: '✅', spanish: '(posible)', english: 'possible', example_de: 'Das ist heute nicht möglich.', example_es: 'Hoy no es posible.' },
-                    { word: 'schnell', emoji: '💨', spanish: '(rápido)', english: 'fast', example_de: 'Du fährst zu schnell.', example_es: 'Conduces demasiado rápido.' },
-                    { word: 'langsam', emoji: '🐌', spanish: '(lento)', english: 'slow', example_de: 'Bitte sprich etwas langsamer.', example_es: 'Por favor, habla un poco más despacio.' },
-                    { word: 'kalt', emoji: '🥶', spanish: '(frío)', english: 'cold', example_de: 'Mir ist an den Händen kalt.', example_es: 'Tengo frío en las manos.' },
-                    { word: 'warm', emoji: '☀️', spanish: '(cálido)', english: 'warm', example_de: 'Es ist heute angenehm warm.', example_es: 'Hoy hace un calor agradable.' },
-                    { word: 'teuer', emoji: '💸', spanish: '(caro)', english: 'expensive', example_de: 'Die Mieten hier sind sehr teuer.', example_es: 'Los alquileres aquí son muy caros.' },
-                    { word: 'billig', emoji: '💰', spanish: '(barato)', english: 'cheap', example_de: 'Diese Schuhe waren sehr billig.', example_es: 'Estos zapatos fueron muy baratos.' },
+                    { word: 'gut', emoji: '👍', spanish: '(bueno)', english: 'good', example_de: 'Das Buch ist sehr gut.', example_es: 'El libro es muy bueno.' },
                     { word: 'schlecht', emoji: '👎', spanish: '(malo)', english: 'bad', example_de: 'Das Wetter ist heute schlecht.', example_es: 'El tiempo hoy es malo.' },
-                    { word: 'stark', emoji: '💪', spanish: '(fuerte)', english: 'strong', example_de: 'Ich trinke meinen Kaffee gern stark.', example_es: 'Me gusta tomar mi café fuerte.' },
-                    { word: 'schwach', emoji: '🤕', spanish: '(débil)', english: 'weak', example_de: 'Das Signal ist hier sehr schwach.', example_es: 'La señal aquí es muy débil.' },
-                    { word: 'leicht', emoji: '🪶', spanish: '(fácil/ligero)', english: 'light/easy', example_de: 'Die Übung ist sehr leicht.', example_es: 'El ejercicio es muy fácil.' },
-                    { word: 'dringend', emoji: '🚨', spanish: '(urgente)', english: 'urgent', example_de: 'Ich muss dringend mit dir sprechen.', example_es: 'Tengo que hablar contigo urgentemente.' }
+                    { word: 'groß', emoji: '🐘', spanish: '(grande)', english: 'big', example_de: 'Berlin ist eine große Stadt.', example_es: 'Berlín es una ciudad grande.' },
+                    { word: 'klein', emoji: '🐭', spanish: '(pequeño)', english: 'small', example_de: 'Die Wohnung ist zu klein.', example_es: 'El apartamento es demasiado pequeño.' },
+                    { word: 'schön', emoji: '🌸', spanish: '(bonito)', english: 'beautiful', example_de: 'Sie hat ein schönes Lächeln.', example_es: 'Ella tiene una sonrisa bonita.' },
+                    { word: 'hässlich', emoji: '👹', spanish: '(feo)', english: 'ugly', example_de: 'Ich finde das Auto hässlich.', example_es: 'Encuentro el coche feo.' },
+                    { word: 'neu', emoji: '✨', spanish: '(nuevo)', english: 'new', example_de: 'Ich brauche ein neues Handy.', example_es: 'Necesito un móvil nuevo.' },
+                    { word: 'alt', emoji: '👴', spanish: '(viejo)', english: 'old', example_de: 'Mein Fahrrad ist sehr alt.', example_es: 'Mi bicicleta es muy vieja.' },
+                    { word: 'jung', emoji: '👶', spanish: '(joven)', english: 'young', example_de: 'Er ist noch sehr jung.', example_es: 'Él es todavía muy joven.' },
+                    { word: 'lang', emoji: '🦒', spanish: '(largo)', english: 'long', example_de: 'Der Weg ist lang.', example_es: 'El camino es largo.' },
+                    { word: 'kurz', emoji: '📏', spanish: '(corto)', english: 'short', example_de: 'Die Pause war zu kurz.', example_es: 'La pausa fue demasiado corta.' },
+                    { word: 'hoch', emoji: '🏙️', spanish: '(alto - edif./montaña)', english: 'high', example_de: 'Der Turm ist sehr hoch.', example_es: 'La torre es muy alta.' },
+                    { word: 'tief', emoji: '🕳️', spanish: '(profundo)', english: 'deep', example_de: 'Der See ist sehr tief.', example_es: 'El lago es muy profundo.' },
+                    { word: 'weit', emoji: '🔭', spanish: '(lejos/amplio)', english: 'far / wide', example_de: 'Wie weit ist es bis Berlin?', example_es: '¿Qué tan lejos está Berlín?' },
+                    { word: 'nah', emoji: '📍', spanish: '(cerca)', english: 'near', example_de: 'Die Schule ist ganz nah.', example_es: 'La escuela está muy cerca.' }
                 ]
             },
             {
-                title: '🏠 Gruppe 2: Physische Zustände & Umgebung (A1 - A2)',
-                description: 'Estados físicos y entorno',
+                title: '🎨 G2: Farben & Aussehen (A1)',
+                description: 'Colores y apariencia',
+                level: 'A1',
+                colorMain: '#ec4899', // Pink
+                colorPastel: '#fce7f3',
+                badge: 'FARBEN',
+                adjectives: [
+                    { word: 'rot', emoji: '🔴', spanish: '(rojo)', english: 'red', example_de: 'Die Rose ist rot.', example_es: 'La rosa es roja.' },
+                    { word: 'blau', emoji: '🔵', spanish: '(azul)', english: 'blue', example_de: 'Der Himmel ist blau.', example_es: 'El cielo es azul.' },
+                    { word: 'grün', emoji: '🟢', spanish: '(verde)', english: 'green', example_de: 'Der Wald ist grün.', example_es: 'El bosque es verde.' },
+                    { word: 'gelb', emoji: '🟡', spanish: '(amarillo)', english: 'yellow', example_de: 'Die Sonne ist gelb.', example_es: 'El sol es amarillo.' },
+                    { word: 'schwarz', emoji: '⚫', spanish: '(negro)', english: 'black', example_de: 'Die Katze ist schwarz.', example_es: 'El gato es negro.' },
+                    { word: 'weiß', emoji: '⚪', spanish: '(blanco)', english: 'white', example_de: 'Der Schnee ist weiß.', example_es: 'La nieve es blanca.' },
+                    { word: 'grau', emoji: '🌫️', spanish: '(gris)', english: 'gray', example_de: 'Der Himmel ist heute grau.', example_es: 'El cielo hoy está gris.' },
+                    { word: 'bunt', emoji: '🌈', spanish: '(colorido)', english: 'colorful', example_de: 'Der Garten ist sehr bunt.', example_es: 'El jardín es muy colorido.' },
+                    { word: 'hell', emoji: '☀️', spanish: '(claro/luminoso)', english: 'bright / light', example_de: 'Das Zimmer ist sehr hell.', example_es: 'La habitación es muy luminosa.' },
+                    { word: 'dunkel', emoji: '🌑', spanish: '(oscuro)', english: 'dark', example_de: 'Draußen ist es dunkel.', example_es: 'Afuera está oscuro.' },
+                    { word: 'dick', emoji: '🐘', spanish: '(gordo/grueso)', english: 'fat / thick', example_de: 'Das Buch ist sehr dick.', example_es: 'El libro es muy grueso.' },
+                    { word: 'dünn', emoji: '🥢', spanish: '(delgado/fino)', english: 'thin', example_de: 'Das Papier ist sehr dünn.', example_es: 'El papel es muy fino.' },
+                    { word: 'schlank', emoji: '💃', spanish: '(esbelto)', english: 'slender', example_de: 'Sie ist sehr schlank.', example_es: 'Ella es muy esbelta.' },
+                    { word: 'blond', emoji: '👱‍♀️', spanish: '(rubio)', english: 'blond', example_de: 'Er hat blonde Haare.', example_es: 'Él tiene el pelo rubio.' }
+                ]
+            },
+            {
+                title: '🧠 G3: Charakter & Eigenschaften (A1-A2)',
+                description: 'Carácter y cualidades',
                 level: 'A1-A2',
-                colorMain: '#8b5cf6',
+                colorMain: '#8b5cf6', // Violet
                 colorPastel: '#ede9fe',
+                badge: 'CHARAKTER',
+                adjectives: [
+                    { word: 'nett', emoji: '😊', spanish: '(amable)', english: 'nice', example_de: 'Dein Bruder ist sehr nett.', example_es: 'Tu hermano es muy amable.' },
+                    { word: 'freundlich', emoji: '🤝', spanish: '(amistoso)', english: 'friendly', example_de: 'Der Kellner war sehr freundlich.', example_es: 'El camarero fue muy amistoso.' },
+                    { word: 'böse', emoji: '👿', spanish: '(malo/malvado)', english: 'evil / angry', example_de: 'Die Hexe war böse.', example_es: 'La bruja era malvada.' },
+                    { word: 'lustig', emoji: '😂', spanish: '(divertido/gracioso)', english: 'funny', example_de: 'Der Film war sehr lustig.', example_es: 'La película fue muy divertida.' },
+                    { word: 'ernst', emoji: '😐', spanish: '(serio)', english: 'serious', example_de: 'Warum bist du so ernst?', example_es: '¿Por qué estás tan serio?' },
+                    { word: 'klug', emoji: '🧠', spanish: '(inteligente)', english: 'smart', example_de: 'Sie ist ein kluges Kind.', example_es: 'Ella es una niña inteligente.' },
+                    { word: 'dumm', emoji: '🤪', spanish: '(tonto)', english: 'stupid', example_de: 'Das war eine dumme Idee.', example_es: 'Esa fue una idea tonta.' },
+                    { word: 'faul', emoji: '🦥', spanish: '(perezoso)', english: 'lazy', example_de: 'Am Sonntag bin ich faul.', example_es: 'El domingo soy perezoso.' },
+                    { word: 'fleißig', emoji: '🐝', spanish: '(trabajador/diligente)', english: 'hard-working', example_de: 'Er lernt fleißig Deutsch.', example_es: 'Él estudia alemán diligentemente.' },
+                    { word: 'ehrlich', emoji: '🤞', spanish: '(honesto)', english: 'honest', example_de: 'Sei bitte ehrlich zu mir.', example_es: 'Por favor, sé honesto conmigo.' },
+                    { word: 'stark', emoji: '💪', spanish: '(fuerte)', english: 'strong', example_de: 'Er ist sehr stark.', example_es: 'Él es muy fuerte.' },
+                    { word: 'schwach', emoji: '🥀', spanish: '(débil)', english: 'weak', example_de: 'Ich fühle mich heute etwas schwach.', example_es: 'Hoy me siento un poco débil.' },
+                    { word: 'mutig', emoji: '🦁', spanish: '(valiente)', english: 'brave', example_de: 'Das war eine mutige Entscheidung.', example_es: 'Esa fue una decisión valiente.' },
+                    { word: 'ängstlich', emoji: '😨', spanish: '(miedoso)', english: 'anxious / fearful', example_de: 'Der Hund ist sehr ängstlich.', example_es: 'El perro es muy miedoso.' },
+                    { word: 'geduldig', emoji: '🧘', spanish: '(paciente)', english: 'patient', example_de: 'Man muss geduldig sein.', example_es: 'Hay que ser paciente.' }
+                ]
+            },
+            {
+                title: '🌡️ G4: Zustände & Gefühle (A1-A2)',
+                description: 'Estados y sentimientos',
+                level: 'A1-A2',
+                colorMain: '#f59e0b', // Amber
+                colorPastel: '#fef3c7',
                 badge: 'ZUSTÄNDE',
                 adjectives: [
-                    { word: 'sicher', emoji: '🔒', spanish: '(seguro)', english: 'safe/secure', example_de: 'Ist diese Gegend sicher?', example_es: '¿Es segura esta zona?' },
-                    { word: 'geöffnet', emoji: '🏪', spanish: '(abierto)', english: 'open', example_de: 'Das Museum ist täglich geöffnet.', example_es: 'El museo está abierto a diario.' },
-                    { word: 'geschlossen', emoji: '🔒', spanish: '(cerrado)', english: 'closed', example_de: 'Wegen Krankheit geschlossen.', example_es: 'Cerrado por enfermedad.' },
-                    { word: 'ruhig', emoji: '🤫', spanish: '(tranquilo)', english: 'quiet', example_de: 'Am Sonntag ist es hier ruhig.', example_es: 'El domingo aquí está tranquilo.' },
-                    { word: 'laut', emoji: '📢', spanish: '(ruidoso)', english: 'loud', example_de: 'Die Musik ist viel zu laut.', example_es: 'La música está demasiado alta.' },
-                    { word: 'kaputt', emoji: '💔', spanish: '(roto)', english: 'broken', example_de: 'Die Waschmaschine ist kaputt.', example_es: 'La lavadora está rota.' },
-                    { word: 'sauber', emoji: '✨', spanish: '(limpio)', english: 'clean', example_de: 'Das Badezimmer muss sauber sein.', example_es: 'El baño tiene que estar limpio.' },
-                    { word: 'schmutzig', emoji: '💩', spanish: '(sucio)', english: 'dirty', example_de: 'Deine Hände sind schmutzig.', example_es: 'Tus manos están sucias.' },
-                    { word: 'besetzt', emoji: '🚫', spanish: '(ocupado)', english: 'occupied', example_de: 'Die Toilette ist besetzt.', example_es: 'El baño está ocupado.' },
-                    { word: 'hell', emoji: '💡', spanish: '(claro)', english: 'bright', example_de: 'Im Sommer ist es lange hell.', example_es: 'En verano hay luz hasta tarde.' },
-                    { word: 'dunkel', emoji: '🌑', spanish: '(oscuro)', english: 'dark', example_de: 'Im Winter wird es früh dunkel.', example_es: 'En invierno oscurece temprano.' },
-                    { word: 'hoch', emoji: '⛰️', spanish: '(alto)', english: 'high', example_de: 'Die Preise sind sehr hoch.', example_es: 'Los precios son muy altos.' },
-                    { word: 'niedrig', emoji: '⬇️', spanish: '(bajo)', english: 'low', example_de: 'Die Decke in diesem Raum ist niedrig.', example_es: 'El techo en esta habitación es bajo.' },
-                    { word: 'modern', emoji: '📱', spanish: '(moderno)', english: 'modern', example_de: 'Das Hotel ist sehr modern.', example_es: 'El hotel es muy moderno.' },
-                    { word: 'bequem', emoji: '🛋️', spanish: '(cómodo)', english: 'comfortable', example_de: 'Diese Schuhe sind sehr bequem.', example_es: 'Estos zapatos son muy cómodos.' },
-                    { word: 'unbequem', emoji: '😫', spanish: '(incómodo)', english: 'uncomfortable', example_de: 'Der Stuhl ist hart und unbequem.', example_es: 'La silla es dura e incómoda.' },
-                    { word: 'gefährlich', emoji: '⚠️', spanish: '(peligroso)', english: 'dangerous', example_de: 'Diese Kreuzung ist gefährlich.', example_es: 'Este cruce es peligroso.' },
-                    { word: 'fertig', emoji: '🏁', spanish: '(listo/terminado)', english: 'ready/finished', example_de: 'Das Essen ist fertig.', example_es: 'La comida está lista.' },
-                    { word: 'verfügbar', emoji: '✅', spanish: '(disponible)', english: 'available', example_de: 'Ist dieser Platz noch verfügbar?', example_es: '¿Está este asiento todavía disponible?' }
+                    { word: 'müde', emoji: '🥱', spanish: '(cansado)', english: 'tired', example_de: 'Ich bin müde, ich gehe ins Bett.', example_es: 'Estoy cansado, me voy a la cama.' },
+                    { word: 'wach', emoji: '👀', spanish: '(despierto)', english: 'awake', example_de: 'Bist du schon wach?', example_es: '¿Ya estás despierto?' },
+                    { word: 'krank', emoji: '🤒', spanish: '(enfermo)', english: 'sick', example_de: 'Ich kann nicht arbeiten, ich bin krank.', example_es: 'No puedo trabajar, estoy enfermo.' },
+                    { word: 'gesund', emoji: '🍎', spanish: '(sano)', english: 'healthy', example_de: 'Obst ist sehr gesund.', example_es: 'La fruta es muy saludable.' },
+                    { word: 'hungrig', emoji: '🍕', spanish: '(hambriento)', english: 'hungry', example_de: 'Ich bin sehr hungrig.', example_es: 'Tengo mucha hambre.' },
+                    { word: 'satt', emoji: '😌', spanish: '(lleno/satisfecho)', english: 'full', example_de: 'Danke, ich bin satt.', example_es: 'Gracias, estoy lleno.' },
+                    { word: 'durstig', emoji: '🥤', spanish: '(sediento)', english: 'thirsty', example_de: 'Hast du Wasser? Ich bin durstig.', example_es: '¿Tienes agua? Tengo sed.' },
+                    { word: 'glücklich', emoji: '😄', spanish: '(feliz)', english: 'happy', example_de: 'Sie sieht sehr glücklich aus.', example_es: 'Ella se ve muy feliz.' },
+                    { word: 'traurig', emoji: '😢', spanish: '(triste)', english: 'sad', example_de: 'Warum bist du traurig?', example_es: '¿Por qué estás triste?' },
+                    { word: 'wütend', emoji: '😡', spanish: '(furioso)', english: 'angry', example_de: 'Er ist wütend auf seinen Chef.', example_es: 'Él está furioso con su jefe.' },
+                    { word: 'nervös', emoji: '😬', spanish: '(nervioso)', english: 'nervous', example_de: 'Vor der Prüfung bin ich immer nervös.', example_es: 'Antes del examen siempre estoy nervioso.' },
+                    { word: 'ruhig', emoji: '🤫', spanish: '(tranquilo)', english: 'calm / quiet', example_de: 'Bleib bitte ruhig.', example_es: 'Por favor, mantente tranquilo.' },
+                    { word: 'ledig', emoji: '👤', spanish: '(soltero)', english: 'single', example_de: 'Bist du verheiratet oder ledig?', example_es: '¿Estás casado o soltero?' },
+                    { word: 'verheiratet', emoji: '💍', spanish: '(casado)', english: 'married', example_de: 'Sie sind seit 10 Jahren verheiratet.', example_es: 'Están casados desde hace 10 años.' }
                 ]
             },
             {
-                title: '🧍 Gruppe 3: Körper, Gefühle & Menschen (A1 - A2)',
-                description: 'Cuerpo, sentimientos y personas',
-                level: 'A1-A2',
-                colorMain: '#ec4899',
-                colorPastel: '#fce7f3',
-                badge: 'GEFÜHLE',
-                adjectives: [
-                    { word: 'müde', emoji: '😴', spanish: '(cansado)', english: 'tired', example_de: 'Ich bin müde von der Arbeit.', example_es: 'Estoy cansado del trabajo.' },
-                    { word: 'krank', emoji: '🤒', spanish: '(enfermo)', english: 'sick', example_de: 'Ich kann nicht kommen, ich bin krank.', example_es: 'No puedo ir, estoy enfermo.' },
-                    { word: 'gesund', emoji: '🥗', spanish: '(sano)', english: 'healthy', example_de: 'Gemüse ist sehr gesund.', example_es: 'La verdura es muy saludable.' },
-                    { word: 'glücklich', emoji: '😄', spanish: '(feliz)', english: 'happy', example_de: 'Sie sind ein glückliches Paar.', example_es: 'Son una pareja feliz.' },
-                    { word: 'nett', emoji: '😊', spanish: '(amable)', english: 'nice', example_de: 'Das war sehr nett von dir.', example_es: 'Eso fue muy amable de tu parte.' },
-                    { word: 'freundlich', emoji: '😊', spanish: '(amigable)', english: 'friendly', example_de: 'Die Nachbarn sind sehr freundlich.', example_es: 'Los vecinos son muy amables.' },
-                    { word: 'zufrieden', emoji: '😊', spanish: '(satisfecho)', english: 'satisfied', example_de: 'Ich bin mit meinem Leben zufrieden.', example_es: 'Estoy satisfecho con mi vida.' },
-                    { word: 'verheiratet', emoji: '💍', spanish: '(casado)', english: 'married', example_de: 'Sind Sie verheiratet oder ledig?', example_es: '¿Está usted casado o soltero?' },
-                    { word: 'hungrig', emoji: '🤤', spanish: '(hambriento)', english: 'hungry', example_de: 'Die Kinder sind hungrig.', example_es: 'Los niños tienen hambre.' },
-                    { word: 'durstig', emoji: '🥤', spanish: '(sediento)', english: 'thirsty', example_de: 'Nach dem Sport bin ich durstig.', example_es: 'Después del deporte tengo sed.' },
-                    { word: 'traurig', emoji: '😥', spanish: '(triste)', english: 'sad', example_de: 'Warum bist du so traurig?', example_es: '¿Por qué estás tan triste?' },
-                    { word: 'wach', emoji: '👀', spanish: '(despierto)', english: 'awake', example_de: 'Ich bin schon seit sechs Uhr wach.', example_es: 'Estoy despierto desde las seis.' },
-                    { word: 'verliebt', emoji: '💕', spanish: '(enamorado)', english: 'in love', example_de: 'Sie sind total verliebt.', example_es: 'Ellos están totalmente enamorados.' },
-                    { word: 'unfreundlich', emoji: '😠', spanish: '(antipático)', english: 'unfriendly', example_de: 'Der Service war leider unfreundlich.', example_es: 'El servicio fue, lamentablemente, antipático.' },
-                    { word: 'vorsichtig', emoji: '👀', spanish: '(cuidadoso)', english: 'careful', example_de: 'Sei bitte vorsichtig!', example_es: '¡Por favor, ten cuidado!' }
-                ]
-            },
-            {
-                title: '🗣️ Gruppe 4: Meinungen & Eigenschaften (A2)',
-                description: 'Opiniones y cualidades',
+                title: '👫 G5: Spezifische & Situationsbezogene (A2)',
+                description: 'Específicos y situacionales',
                 level: 'A2',
-                colorMain: '#14b8a6',
-                colorPastel: '#ccfbf1',
-                badge: 'MEINUNGEN',
-                adjectives: [
-                    { word: 'toll', emoji: '🎉', spanish: '(genial)', english: 'great', example_de: 'Das war eine tolle Idee.', example_es: 'Esa fue una idea genial.' },
-                    { word: 'egal', emoji: '🤷', spanish: '(da igual)', english: 'it doesn\'t matter', example_de: 'Das Ergebnis ist mir egal.', example_es: 'El resultado me da igual.' },
-                    { word: 'lecker', emoji: '😋', spanish: '(delicioso)', english: 'delicious', example_de: 'Das Eis ist sehr lecker.', example_es: 'El helado está delicioso.' },
-                    { word: 'interessant', emoji: '🤔', spanish: '(interesante)', english: 'interesting', example_de: 'Die Dokumentation war sehr interessant.', example_es: 'El documental fue muy interesante.' },
-                    { word: 'bekannt', emoji: '⭐', spanish: '(conocido)', english: 'known/famous', example_de: 'Dieses Lied ist sehr bekannt.', example_es: 'Esta canción es muy conocida.' },
-                    { word: 'langweilig', emoji: '😴', spanish: '(aburrido)', english: 'boring', example_de: 'Mir ist langweilig.', example_es: 'Estoy aburrido.' },
-                    { word: 'gemütlich', emoji: '🛋️', spanish: '(acogedor)', english: 'cozy', example_de: 'Wir machen uns einen gemütlichen Abend.', example_es: 'Nos preparamos una noche acogedora.' },
-                    { word: 'persönlich', emoji: '👤', spanish: '(personal)', english: 'personal', example_de: 'Das ist meine persönliche Meinung.', example_es: 'Esa es mi opinión personal.' },
-                    { word: 'hilfreich', emoji: '🆘', spanish: '(útil)', english: 'helpful', example_de: 'Das Wörterbuch ist sehr hilfreich.', example_es: 'El diccionario es de gran ayuda.' },
-                    { word: 'nützlich', emoji: '🔧', spanish: '(útil)', english: 'useful', example_de: 'Dein Rat war sehr nützlich.', example_es: 'Tu consejo fue muy útil.' },
-                    { word: 'öffentlich', emoji: '🏛️', spanish: '(público)', english: 'public', example_de: 'Rauchen ist an öffentlichen Orten verboten.', example_es: 'Fumar está prohibido en lugares públicos.' },
-                    { word: 'ähnlich', emoji: '👯', spanish: '(similar)', english: 'similar', example_de: 'Deine Jacke sieht meiner ähnlich.', example_es: 'Tu chaqueta se parece a la mía.' },
-                    { word: 'hässlich', emoji: '🤢', spanish: '(feo)', english: 'ugly', example_de: 'Ich finde diesen Pullover hässlich.', example_es: 'Encuentro feo este suéter.' },
-                    { word: 'unwichtig', emoji: '🤷‍♀️', spanish: '(sin importancia)', english: 'unimportant', example_de: 'Die Details sind unwichtig.', example_es: 'Los detalles no son importantes.' }
-                ]
-            },
-            {
-                title: '🧠 Gruppe 5: Spezifische Beschreibungen (A2)',
-                description: 'Descripciones específicas',
-                level: 'A2',
-                colorMain: '#f59e0b',
-                colorPastel: '#fef3c7',
+                colorMain: '#10b981', // Emerald
+                colorPastel: '#d1fae5',
                 badge: 'SPEZIFISCH',
                 adjectives: [
-                    { word: 'pünktlich', emoji: '⏰', spanish: '(puntual)', english: 'punctual', example_de: 'Der Zug ist fast immer pünktlich.', example_es: 'El tren es casi siempre puntual.' },
-                    { word: 'reich', emoji: '🤑', spanish: '(rico)', english: 'rich', example_de: 'Sie möchte einen reichen Mann heiraten.', example_es: 'Ella quiere casarse con un hombre rico.' },
-                    { word: 'arm', emoji: '🥺', spanish: '(pobre)', english: 'poor', example_de: 'Er kommt aus einer armen Familie.', example_es: 'Él viene de una familia pobre.' },
-                    { word: 'sportlich', emoji: '⚽️', spanish: '(deportista)', english: 'athletic', example_de: 'Mein Bruder ist sehr sportlich.', example_es: 'Mi hermano es muy deportista.' },
-                    { word: 'fröhlich', emoji: '🥳', spanish: '(alegre)', english: 'cheerful', example_de: 'Die Musik klingt sehr fröhlich.', example_es: 'La música suena muy alegre.' },
-                    { word: 'weiblich', emoji: '🚺', spanish: '(femenino)', english: 'female', example_de: 'Sie hat eine sehr weibliche Stimme.', example_es: 'Ella tiene una voz muy femenina.' },
-                    { word: 'männlich', emoji: '🚹', spanish: '(masculino)', english: 'male', example_de: 'Er hat ein sehr männliches Gesicht.', example_es: 'Él tiene una cara muy masculina.' },
-                    { word: 'altmodisch', emoji: '🕰️', spanish: '(anticuado)', english: 'old-fashioned', example_de: 'Dieser Stil ist etwas altmodisch.', example_es: 'Este estilo es un poco anticuado.' },
-                    { word: 'aufrichtig', emoji: '🙏', spanish: '(sincero)', english: 'sincere', example_de: 'Das ist mein aufrichtiger Wunsch.', example_es: 'Ese es mi deseo sincero.' }
+                    { word: 'fertig', emoji: '🏁', spanish: '(listo/terminado)', english: 'finished / ready', example_de: 'Bist du fertig mit der Arbeit?', example_es: '¿Terminaste con el trabajo?' },
+                    { word: 'bereit', emoji: '🏃', spanish: '(preparado/listo)', english: 'ready', example_de: 'Ich bin bereit zu gehen.', example_es: 'Estoy listo para irme.' },
+                    { word: 'wichtig', emoji: '❗', spanish: '(importante)', english: 'important', example_de: 'Das ist ein wichtiges Thema.', example_es: 'Ese es un tema importante.' },
+                    { word: 'richtig', emoji: '✅', spanish: '(correcto)', english: 'right / correct', example_de: 'Das Ergebnis ist richtig.', example_es: 'El resultado es correcto.' },
+                    { word: 'falsch', emoji: '❌', spanish: '(falso/incorrecto)', english: 'wrong / false', example_de: 'Diese Antwort ist falsch.', example_es: 'Esta respuesta es incorrecta.' },
+                    { word: 'einfach', emoji: '👌', spanish: '(fácil/sencillo)', english: 'easy / simple', example_de: 'Die Aufgabe war sehr einfach.', example_es: 'La tarea fue muy fácil.' },
+                    { word: 'schwer', emoji: '🏋️', spanish: '(difícil/pesado)', english: 'difficult / heavy', example_de: 'Deutsch ist eine schwere Sprache.', example_es: 'El alemán es un idioma difícil.' },
+                    { word: 'schwierig', emoji: '🧩', spanish: '(difícil/complicado)', english: 'difficult', example_de: 'Die Situation ist schwierig.', example_es: 'La situación es difícil.' },
+                    { word: 'teuer', emoji: '💎', spanish: '(caro)', english: 'expensive', example_de: 'Das Auto ist zu teuer.', example_es: 'El coche es demasiado caro.' },
+                    { word: 'billig', emoji: '🏷️', spanish: '(barato)', english: 'cheap', example_de: 'Die Schuhe waren billig.', example_es: 'Los zapatos fueron baratos.' },
+                    { word: 'frei', emoji: '🕊️', spanish: '(libre)', english: 'free', example_de: 'Ist dieser Platz noch frei?', example_es: '¿Está libre este asiento?' },
+                    { word: 'besetzt', emoji: '🔒', spanish: '(ocupado)', english: 'occupied', example_de: 'Die Toilette ist besetzt.', example_es: 'El baño está ocupado.' },
+                    { word: 'offen', emoji: '🔓', spanish: '(abierto)', english: 'open', example_de: 'Das Fenster ist offen.', example_es: 'La ventana está abierta.' },
+                    { word: 'geschlossen', emoji: '🚪', spanish: '(cerrado)', english: 'closed', example_de: 'Die Tür ist geschlossen.', example_es: 'La puerta está cerrada.' }
                 ]
             },
             {
-                title: '🔢 Gruppe 6: Indefinitbegleiter & Mengenadjektive (A2)',
-                description: 'Artículos indefinidos y adjetivos de cantidad',
-                level: 'A2',
-                colorMain: '#10b981',
-                colorPastel: '#d1fae5',
+                title: '🔢 G6: Indefinit & Quantität (A2-B1)',
+                description: 'Indefinidos y cantidad',
+                level: 'A2-B1',
+                colorMain: '#14b8a6', // Teal
+                colorPastel: '#ccfbf1',
                 badge: 'INDEFINIT',
                 adjectives: [
-                    { word: 'viel', emoji: '📦', spanish: '(mucho)', english: 'much', example_de: 'Ich habe heute viel Arbeit.', example_es: 'Hoy tengo mucho trabajo.' },
-                    { word: 'alle', emoji: '💯', spanish: '(todos)', english: 'all', example_de: 'Alle Türen sind offen.', example_es: 'Todas las puertas están abiertas.' },
-                    { word: 'jeder', emoji: '1️⃣', spanish: '(cada)', english: 'each/every', example_de: 'Jeder Tag ist ein neuer Anfang.', example_es: 'Cada día es un nuevo comienzo.' },
-                    { word: 'andere', emoji: '🔄', spanish: '(otros)', english: 'other', example_de: 'Ich möchte das andere Kleid anprobieren.', example_es: 'Quiero probarme el otro vestido.' },
-                    { word: 'genug', emoji: '✔️', spanish: '(suficiente)', english: 'enough', example_de: 'Haben wir genug Geld dabei?', example_es: '¿Llevamos suficiente dinero?' },
-                    { word: 'ganz', emoji: '⭕', spanish: '(entero)', english: 'whole', example_de: 'Ich habe den ganzen Apfel gegessen.', example_es: 'Me he comido toda la manzana.' },
-                    { word: 'gesamt', emoji: '🌍', spanish: '(total/entero)', english: 'total/entire', example_de: 'Das gesamte Haus wurde renoviert.', example_es: 'La casa entera fue renovada.' },
-                    { word: 'beide', emoji: '2️⃣', spanish: '(ambos)', english: 'both', example_de: 'Beide Eltern arbeiten.', example_es: 'Ambos padres trabajan.' },
-                    { word: 'viele', emoji: '🔢', spanish: '(muchos)', english: 'many', example_de: 'Es gibt viele Probleme zu lösen.', example_es: 'Hay muchos problemas por resolver.' },
-                    { word: 'wenig', emoji: '🔸', spanish: '(poco)', english: 'little', example_de: 'Wir haben nur wenig Zeit.', example_es: 'Tenemos solo poco tiempo.' },
-                    { word: 'wenige', emoji: '🔹', spanish: '(pocos)', english: 'few', example_de: 'Nur wenige Leute kamen zur Party.', example_es: 'Solo poca gente vino a la fiesta.' },
-                    { word: 'mehrere', emoji: '📈', spanish: '(varios)', english: 'several', example_de: 'Er hat mehrere Autos.', example_es: 'Él tiene varios coches.' },
-                    { word: 'einige', emoji: '📊', spanish: '(algunos)', english: 'some', example_de: 'Ich habe einige Fragen dazu.', example_es: 'Tengo algunas preguntas al respecto.' },
-                    { word: 'manche', emoji: '🎲', spanish: '(algunos)', english: 'some', example_de: 'Manche Menschen mögen keinen Kaffee.', example_es: 'A algunas personas no les gusta el café.' },
-                    { word: 'zu viele', emoji: '🤯', spanish: '(demasiados)', english: 'too many', example_de: 'Du isst zu viele Süßigkeiten.', example_es: 'Comes demasiados dulces.' },
-                    { word: 'mehr', emoji: '➕', spanish: '(más)', english: 'more', example_de: 'Ich brauche mehr Informationen.', example_es: 'Necesito más información.' },
-                    { word: 'weniger', emoji: '📉', spanish: '(menos)', english: 'less', example_de: 'Wir sollten weniger Fleisch essen.', example_es: 'Deberíamos comer menos carne.' }
+                    { word: 'viel', emoji: '🌊', spanish: '(mucho)', english: 'much / a lot', example_de: 'Ich habe viel Arbeit.', example_es: 'Tengo mucho trabajo.' },
+                    { word: 'wenig', emoji: '💧', spanish: '(poco)', english: 'little', example_de: 'Ich habe wenig Zeit.', example_es: 'Tengo poco tiempo.' },
+                    { word: 'alles', emoji: '🌍', spanish: '(todo)', english: 'everything', example_de: 'Alles ist gut.', example_es: 'Todo está bien.' },
+                    { word: 'nichts', emoji: '🕳️', spanish: '(nada)', english: 'nothing', example_de: 'Ich höre nichts.', example_es: 'No oigo nada.' },
+                    { word: 'etwas', emoji: '🤏', spanish: '(algo)', english: 'something', example_de: 'Ich möchte etwas essen.', example_es: 'Quiero comer algo.' },
+                    { word: 'jeder', emoji: '☝️', spanish: '(cada/todos)', english: 'every / each', example_de: 'Jeder Mensch ist einzigartig.', example_es: 'Cada persona es única.' },
+                    { word: 'einige', emoji: '🔢', spanish: '(algunos)', english: 'some', example_de: 'Ich habe einige Fragen.', example_es: 'Tengo algunas preguntas.' },
+                    { word: 'alle', emoji: '👨‍👩‍👧‍👦', spanish: '(todos)', english: 'all', example_de: 'Alle sind hier.', example_es: 'Todos están aquí.' },
+                    { word: 'ganz', emoji: '⭕', spanish: '(todo/entero)', english: 'whole / entire', example_de: 'Die ganze Welt schaut zu.', example_es: 'El mundo entero está mirando.' },
+                    { word: 'genug', emoji: '✋', spanish: '(suficiente)', english: 'enough', example_de: 'Das ist genug.', example_es: 'Eso es suficiente.' },
+                    { word: 'kaum', emoji: '📉', spanish: '(apenas)', english: 'hardly / barely', example_de: 'Ich habe kaum geschlafen.', example_es: 'Apenas he dormido.' },
+                    { word: 'fast', emoji: '🤏', spanish: '(casi)', english: 'almost', example_de: 'Wir sind fast da.', example_es: 'Ya casi estamos ahí.' }
                 ]
             },
             {
-                title: '📈 Gruppe 7: Komparativ & Superlativ (A2 - B1)',
-                description: 'Comparativos y Superlativos',
+                title: '📈 G7: Komparativ & Superlativ (A2-B1)',
+                description: 'Comparativos y superlativos',
                 level: 'A2-B1',
-                colorMain: '#ef4444',
+                colorMain: '#ef4444', // Red
                 colorPastel: '#fee2e2',
                 badge: 'KOMPARATIV',
                 adjectives: [
-                    { word: 'besser', emoji: '👍', spanish: '(mejor)', english: 'better', example_de: 'Heute geht es mir schon besser.', example_es: 'Hoy ya me siento mejor.' },
-                    { word: 'schlechter', emoji: '👎', spanish: '(peor)', english: 'worse', example_de: 'Die Qualität ist schlechter geworden.', example_es: 'La calidad ha empeorado.' },
-                    { word: 'größer', emoji: '🐘', spanish: '(más grande)', english: 'bigger', example_de: 'Er ist größer als sein Vater.', example_es: 'Él es más alto que su padre.' },
-                    { word: 'kleiner', emoji: '🐭', spanish: '(más pequeño)', english: 'smaller', example_de: 'Mein Zimmer ist kleiner als deins.', example_es: 'Mi habitación es más pequeña que la tuya.' },
-                    { word: 'älter', emoji: '👴', spanish: '(más viejo)', english: 'older', example_de: 'Mein Auto ist älter als ich dachte.', example_es: 'Mi coche es más viejo de lo que pensaba.' },
-                    { word: 'jünger', emoji: '👶', spanish: '(más joven)', english: 'younger', example_de: 'Sie sieht jünger aus.', example_es: 'Ella parece más joven.' },
-                    { word: 'teurer', emoji: '💸', spanish: '(más caro)', english: 'more expensive', example_de: 'Das Flugticket war teurer als erwartet.', example_es: 'El billete de avión fue más caro de lo esperado.' },
-                    { word: 'billiger', emoji: '💰', spanish: '(más barato)', english: 'cheaper', example_de: 'Im Internet ist es oft billiger.', example_es: 'En internet a menudo es más barato.' },
-                    { word: 'am besten', emoji: '🥇', spanish: '(el mejor)', english: 'the best', example_de: 'Pizza schmeckt mir am besten.', example_es: 'La pizza es lo que más me gusta.' },
-                    { word: 'am schlechtesten', emoji: '💔', spanish: '(el peor)', english: 'the worst', example_de: 'Dieser Film war am schlechtesten.', example_es: 'Esta película fue la peor.' },
-                    { word: 'am größten', emoji: '🏔️', spanish: '(el más grande)', english: 'the biggest', example_de: 'Dieser Baum ist am größten.', example_es: 'Este árbol es el más grande.' },
-                    { word: 'am kleinsten', emoji: '🦠', spanish: '(el más pequeño)', english: 'the smallest', example_de: 'Welches Stück ist am kleinsten?', example_es: '¿Qué trozo es el más pequeño?' }
+                    { word: 'besser', emoji: '🥇', spanish: '(mejor)', english: 'better', example_de: 'Dieser Film ist besser.', example_es: 'Esta película es mejor.' },
+                    { word: 'schlechter', emoji: '🥉', spanish: '(peor)', english: 'worse', example_de: 'Das Wetter wird schlechter.', example_es: 'El tiempo está empeorando.' },
+                    { word: 'mehr', emoji: '➕', spanish: '(más)', english: 'more', example_de: 'Ich möchte mehr Kaffee.', example_es: 'Quiero más café.' },
+                    { word: 'weniger', emoji: '➖', spanish: '(menos)', english: 'less', example_de: 'Weniger ist manchmal mehr.', example_es: 'Menos es a veces más.' },
+                    { word: 'am besten', emoji: '🏆', spanish: '(el mejor)', english: 'the best', example_de: 'Am besten gehen wir jetzt.', example_es: 'Lo mejor es que nos vayamos ya.' },
+                    { word: 'am liebsten', emoji: '❤️', spanish: '(preferiblemente)', english: 'preferably', example_de: 'Am liebsten trinke ich Tee.', example_es: 'Lo que más me gusta beber es té.' },
+                    { word: 'höher', emoji: '⬆️', spanish: '(más alto)', english: 'higher', example_de: 'Die Mieten sind höher geworden.', example_es: 'Los alquileres han subido.' },
+                    { word: 'schneller', emoji: '🐆', spanish: '(más rápido)', english: 'faster', example_de: 'Kannst du schneller laufen?', example_es: '¿Puedes correr más rápido?' }
                 ]
             },
             {
-                title: '🧩 Gruppe 8: Partizipien als Adjektive (A2 - B1)',
-                description: 'Participios como adjetivos',
-                level: 'A2-B1',
-                colorMain: '#6366f1',
+                title: '🧩 G8: Partizipien als Adjektive (B1)',
+                description: 'Participios usados como adjetivos',
+                level: 'B1',
+                colorMain: '#6366f1', // Indigo
                 colorPastel: '#e0e7ff',
                 badge: 'PARTIZIP',
                 adjectives: [
-                    { word: 'spannend', emoji: '😮', spanish: '(emocionante)', english: 'exciting', example_de: 'Das Finale war sehr spannend.', example_es: 'La final fue muy emocionante.' },
-                    { word: 'gebraucht', emoji: '🔄', spanish: '(usado)', english: 'used', example_de: 'Ich kaufe nur gebrauchte Bücher.', example_es: 'Solo compro libros usados.' },
-                    { word: 'passend', emoji: '✅', spanish: '(apropiado)', english: 'fitting/appropriate', example_de: 'Ich habe keine passende Antwort.', example_es: 'No tengo una respuesta adecuada.' },
-                    { word: 'fehlend', emoji: '❌', spanish: '(faltante)', english: 'missing', example_de: 'Wir suchen das fehlende Teil.', example_es: 'Buscamos la pieza que falta.' },
-                    { word: 'laufend', emoji: '🏃', spanish: '(corriente)', english: 'ongoing/running', example_de: 'Wir haben hohe laufende Kosten.', example_es: 'Tenemos altos gastos corrientes.' },
-                    { word: 'folgend', emoji: '⏭️', spanish: '(siguiente)', english: 'following', example_de: 'Bitte beachten Sie folgende Hinweise.', example_es: 'Por favor, tenga en cuenta las siguientes indicaciones.' }
+                    { word: 'spannend', emoji: '🍿', spanish: '(emocionante)', english: 'exciting', example_de: 'Das Buch ist sehr spannend.', example_es: 'El libro es muy emocionante.' },
+                    { word: 'langweilig', emoji: '😴', spanish: '(aburrido)', english: 'boring', example_de: 'Der Film war langweilig.', example_es: 'La película fue aburrida.' },
+                    { word: 'überrascht', emoji: '😲', spanish: '(sorprendido)', english: 'surprised', example_de: 'Ich bin überrascht.', example_es: 'Estoy sorprendido.' },
+                    { word: 'enttäuscht', emoji: '😞', spanish: '(decepcionado)', english: 'disappointed', example_de: 'Er war sehr enttäuscht.', example_es: 'Él estaba muy decepcionado.' },
+                    { word: 'gestresst', emoji: '🤯', spanish: '(estresado)', english: 'stressed', example_de: 'Bist du gestresst?', example_es: '¿Estás estresado?' },
+                    { word: 'beschäftigt', emoji: '📅', spanish: '(ocupado)', english: 'busy', example_de: 'Ich bin sehr beschäftigt.', example_es: 'Estoy muy ocupado.' },
+                    { word: 'verrückt', emoji: '🤪', spanish: '(loco)', english: 'crazy', example_de: 'Das ist ja verrückt!', example_es: '¡Eso es una locura!' },
+                    { word: 'bekannt', emoji: '⭐', spanish: '(conocido)', english: 'known / famous', example_de: 'Er ist ein bekannter Schauspieler.', example_es: 'Él es un actor conocido.' }
                 ]
             },
             {
-                title: '🇩🇪 Gruppe 9: Leben in Deutschland (A2-B1)',
+                title: '🇩🇪 G9: Leben in Deutschland (B1)',
                 description: 'Vivir en Alemania',
-                level: 'A2-B1',
-                colorMain: '#10b981',
+                level: 'B1',
+                colorMain: '#10b981', // Emerald
                 colorPastel: '#d1fae5',
                 badge: 'DEUTSCHLAND',
                 adjectives: [
-                    { word: 'unantastbar', emoji: '🛡️', spanish: '(inviolable)', english: 'inviolable', example_de: 'Die Würde des Menschen ist unantastbar.', example_es: 'La dignidad del ser humano es inviolable.' },
-                    { word: 'gleich', emoji: '⚖️', spanish: '(igual)', english: 'equal', example_de: 'Alle Menschen sind vor dem Gesetz gleich.', example_es: 'Todas las personas son iguales ante la ley.' },
-                    { word: 'bestimmt', emoji: '🎯', spanish: '(determinado / específico)', english: 'certain / specific', example_de: 'Ich suche ein bestimmtes Buch.', example_es: 'Busco un libro específico.' },
-                    { word: 'gefangen', emoji: '⛓️', spanish: '(capturado / preso)', english: 'captured / imprisoned', example_de: 'Das Tier ist gefangen.', example_es: 'El animal está capturado.' },
-                    { word: 'gesichtet', emoji: '👀', spanish: '(observado / avistado)', english: 'sighted', example_de: 'Der Bär wurde im Wald gesichtet.', example_es: 'El oso fue avistado en el bosque.' },
-                    { word: 'gemeint', emoji: '🤔', spanish: '(querido / referido)', english: 'meant / intended', example_de: 'Das war nicht so gemeint.', example_es: 'No fue intencionado así.' },
-                    { word: 'gültig', emoji: '✅', spanish: '(válido)', english: 'valid', example_de: 'Mein Pass ist noch gültig.', example_es: 'Mi pasaporte todavía es válido.' },
-                    { word: 'frei', emoji: '🕊️', spanish: '(libre)', english: 'free', example_de: 'Die Gedanken sind frei.', example_es: 'Los pensamientos son libres.' }
+                    { word: 'pünktlich', emoji: '⌚', spanish: '(puntual)', english: 'punctual', example_de: 'Sei bitte pünktlich.', example_es: 'Por favor, sé puntual.' },
+                    { word: 'zuverlässig', emoji: '🤝', spanish: '(fiable)', english: 'reliable', example_de: 'Mein Kollege ist sehr zuverlässig.', example_es: 'Mi colega es muy fiable.' },
+                    { word: 'ordentlich', emoji: '🗂️', spanish: '(ordenado)', english: 'tidy / orderly', example_de: 'Sein Schreibtisch ist immer ordentlich.', example_es: 'Su escritorio siempre está ordenado.' },
+                    { word: 'genau', emoji: '🎯', spanish: '(exacto)', english: 'exact', example_de: 'Es ist genau 8 Uhr.', example_es: 'Son exactamente las 8.' },
+                    { word: 'gemütlich', emoji: '🛋️', spanish: '(acogedor)', english: 'cozy', example_de: 'Die Wohnung ist sehr gemütlich.', example_es: 'El apartamento es muy acogedor.' },
+                    { word: 'sparsam', emoji: '🐖', spanish: '(ahorrador)', english: 'thrifty', example_de: 'Er ist sehr sparsam.', example_es: 'Él es muy ahorrador.' },
+                    { word: 'verfügbar', emoji: '✅', spanish: '(disponible)', english: 'available', example_de: 'Ist dieser Platz noch verfügbar?', example_es: '¿Está este asiento todavía disponible?' }
                 ]
             }
         ];
 
-        // State
-        let currentGroupIndex = 0;
-        let isSearchMode = false;
-        let searchResults = [];
-
-        // DOM elements
-        const cardsContainer = document.getElementById('cards-container');
+        // --- GLOBAL VARIABLES ---
+        const containerGrid = document.getElementById('cards-container-grid');
+        const containerSingle = document.getElementById('cards-container-single');
+        const navWrapper = document.getElementById('navigation-wrapper');
         const groupIndicator = document.getElementById('group-indicator');
-        const prevGroupBtn = document.getElementById('prev-group-btn');
-        const nextGroupBtn = document.getElementById('next-group-btn');
-        const recallSwitch = document.getElementById('recall-switch');
-        const lightVersionSwitch = document.getElementById('light-version-switch');
-        const englishSwitch = document.getElementById('english-switch');
-        const searchInput = document.getElementById('search-input');
-        const clearSearchBtn = document.getElementById('clear-search');
-        const searchResultsInfo = document.getElementById('search-results-info');
+        const viewToggle = document.getElementById('view-toggle');
 
-        // Render current group
-        function renderGroup() {
+        let currentLang = 'es';
+        let isCompactMode = true; // True = Grid (Kompakt), False = Single (Alt)
+        let currentGroupIndex = 0;
+
+        // --- FUNCTIONS ---
+        function toggleViewMode() {
+            // Checkbox checked = Kompakt (Grid), unchecked = Alt (Pagination)
+            // Wait, toggle label is "Ansicht: Alt / Kompakt".
+            // Let's assume Checked = Kompakt/Grid (Default), Unchecked = Alt.
+            isCompactMode = viewToggle.checked;
+
+            if (isCompactMode) {
+                // Show Grid
+                containerGrid.style.display = 'grid'; // .grid-layout class uses display: grid
+                containerSingle.style.display = 'none';
+                navWrapper.style.display = 'none';
+                renderContentGrid(adjectiveGroups); // Re-render grid to be safe
+            } else {
+                // Show Single
+                containerGrid.style.display = 'none';
+                containerSingle.style.display = 'flex'; // Uses flex for centering
+                navWrapper.style.display = 'flex';
+                renderSingleGroup(currentGroupIndex);
+            }
+        }
+
+        function renderContent(data = adjectiveGroups, query = '') {
+            // Main entry point for rendering
+            // If query exists, force Grid View for results?
+            // Or filter within current view.
+
+            // Current Implementation: Always filter logic first
+            // If query is empty -> render based on isCompactMode
+
+            if (query) {
+                // If searching, we typically want to see all results.
+                // Grid view is best for search results.
+                // We can temporarily overlay grid view or just render grid.
+                containerGrid.style.display = 'grid';
+                containerSingle.style.display = 'none';
+                navWrapper.style.display = 'none';
+                renderContentGrid(data, query);
+            } else {
+                // No query, respect view preference
+                if (isCompactMode) {
+                    containerGrid.style.display = 'grid';
+                    containerSingle.style.display = 'none';
+                    navWrapper.style.display = 'none';
+                    renderContentGrid(data, '');
+                } else {
+                    containerGrid.style.display = 'none';
+                    containerSingle.style.display = 'flex';
+                    navWrapper.style.display = 'flex';
+                    renderSingleGroup(currentGroupIndex);
+                }
+            }
+        }
+
+        // 1. Grid Render (Kompakt)
+        function renderContentGrid(data, query) {
+            containerGrid.innerHTML = '';
+
+            if (data.length === 0) {
+                containerGrid.innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-muted); grid-column: 1/-1;">Keine Ergebnisse gefunden / No results found</div>';
+                return;
+            }
+
+            data.forEach((group) => {
+                if (!group.adjectives || group.adjectives.length === 0) return;
+
+                const chunkSize = 6;
+                // If query is active, flattening might be better, but user liked "chunks".
+                // We'll stick to chunk logic but filter content.
+
+                for (let i = 0; i < group.adjectives.length; i += chunkSize) {
+                    const chunk = group.adjectives.slice(i, i + chunkSize);
+
+                    // Filter Logic
+                    if (query) {
+                        const hasMatch = chunk.some(adj => {
+                            const matchDe = adj.word.toLowerCase().includes(query.toLowerCase());
+                            const matchEs = adj.spanish.toLowerCase().includes(query.toLowerCase());
+                            const matchEn = adj.english ? adj.english.toLowerCase().includes(query.toLowerCase()) : false;
+                            return matchDe || matchEs || matchEn;
+                        });
+                        if (!hasMatch) continue;
+                    }
+
+                    const card = createCardElement(group, chunk, i, chunkSize, query);
+                    containerGrid.appendChild(card);
+                }
+            });
+        }
+
+        // 2. Single Group Render (Alt)
+        function renderSingleGroup(index) {
+            // Ensure index is valid
+            if (index < 0) currentGroupIndex = 0;
+            if (index >= adjectiveGroups.length) currentGroupIndex = adjectiveGroups.length - 1;
+
             const group = adjectiveGroups[currentGroupIndex];
 
-            // Update group indicator
-            groupIndicator.textContent = group.title;
+            // Update Indicator
+            groupIndicator.textContent = `G ${currentGroupIndex + 1} / ${adjectiveGroups.length}`;
 
-            // Clear container
-            cardsContainer.innerHTML = '';
+            // Render Card (No Chunking, show all items in group)
+            containerSingle.innerHTML = '';
+            // For single view, pass ALL adjectives of the group to one card
+            // But reuse createCardElement? createCardElement handles title logic based on chunks.
+            // We can just create a custom card for this.
 
-            // Add cards
-            group.adjectives.forEach(adj => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.style.setProperty('--card-main', group.colorMain);
-                card.style.setProperty('--card-pastel', group.colorPastel);
+            const card = document.createElement('div');
+            card.className = 'level-card';
+            // Force max width for single view
+            card.style.maxWidth = '600px';
+            card.style.width = '100%';
 
-                card.innerHTML = `
-                    <div class="card-header">
-                        <span class="german-word" lang="de" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören" style="cursor: pointer;">${adj.word}</span>
+            const header = document.createElement('div');
+            header.className = 'level-header';
+            header.style.backgroundColor = group.colorMain;
+            header.innerHTML = `<span>${group.title}</span><span>${getGroupIcon(group.badge)}</span>`;
+
+            const content = document.createElement('div');
+            content.className = 'level-content';
+
+            const tableHTML = `
+                <thead>
+                    <tr>
+                        <th>${currentLang === 'es' ? 'Alemán / Español' : 'German / English'}</th>
+                        <th>${currentLang === 'es' ? 'Ejemplo' : 'Example'}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${group.adjectives.map(adj => createRow(adj, group, '')).join('')}
+                </tbody>
+            `;
+            const table = document.createElement('table');
+            table.innerHTML = tableHTML;
+            content.appendChild(table);
+
+            card.appendChild(header);
+            card.appendChild(content);
+            containerSingle.appendChild(card);
+        }
+
+        // Helper: Create Card Element (Shared logic mostly, used by Grid)
+        function createCardElement(group, chunk, startIndex, chunkSize, query) {
+            const card = document.createElement('div');
+            card.className = 'level-card';
+
+            // Title Logic
+            let displayTitle = group.title;
+            // Only add part number if not showing whole group?
+            // In Grid view (chunked), we add part numbers.
+            if (group.adjectives.length > chunkSize) {
+                const partNum = Math.floor(startIndex / chunkSize) + 1;
+                const totalParts = Math.ceil(group.adjectives.length / chunkSize);
+                displayTitle += ` <span style="font-size: 0.8em; opacity: 0.8;">(${partNum}/${totalParts})</span>`;
+            }
+
+            const header = document.createElement('div');
+            header.className = 'level-header';
+            header.style.backgroundColor = group.colorMain;
+            header.innerHTML = `<span>${displayTitle}</span><span>${getGroupIcon(group.badge)}</span>`;
+
+            const content = document.createElement('div');
+            content.className = 'level-content';
+
+            const tableHTML = `
+                <thead>
+                    <tr>
+                        <th>${currentLang === 'es' ? 'Alemán / Español' : 'German / English'}</th>
+                        <th>${currentLang === 'es' ? 'Ejemplo' : 'Example'}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${chunk.map(adj => createRow(adj, group, query)).join('')}
+                </tbody>
+            `;
+
+            const table = document.createElement('table');
+            table.innerHTML = tableHTML;
+            content.appendChild(table);
+
+            card.appendChild(header);
+            card.appendChild(content);
+            return card;
+        }
+
+        function createRow(adj, group, query) {
+            // Determine Translation
+            const translation = currentLang === 'es' ? adj.spanish : (adj.english || '-');
+            let displayTrans = translation.replace(/[()]/g, '');
+
+            // Highlight Logic
+            let displayWord = adj.word;
+
+            if (query) {
+                displayWord = highlightMatch(displayWord, query);
+                displayTrans = highlightMatch(displayTrans, query);
+            }
+
+            return `
+            <tr>
+                <td>
+                    <div class="german-word" onclick="speak('${adj.word}')" title="Escuchar">
+                        ${displayWord} <span class="audio-icon">🔊</span>
                     </div>
-                    <div class="card-body">
-                         <div class="icon-floating" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören">${adj.emoji}</div>
-                         <span class="spanish-meaning" lang="es">${adj.spanish.replace(/[()]/g, '')}</span>
-                         <span class="english-meaning" lang="en">${adj.english || ''}</span>
-                    </div>
-                `;
+                    <div class="spanish-word" style="font-style:italic; color:var(--text-muted);">${displayTrans}</div>
+                </td>
+                <td class="example-clickable" onclick="openModal('${adj.word}', '${group.badge}')">
+                    <div style="font-weight:600; color:var(--text-main);">${adj.example_de}</div>
+                    <div class="example-trans">${advExampleTrans(adj)}</div>
+                </td>
+            </tr>
+            `;
+        }
 
-                // Add click event to open modal
-                const groupData = {
-                    badge: group.badge,
-                    colorMain: group.colorMain,
-                    colorPastel: group.colorPastel
-                };
-                card.addEventListener('click', () => {
-                    openModal(adj, groupData);
-                });
+        function highlightMatch(text, query) {
+            if (!query || !text) return text;
+            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(escapedQuery, 'gi');
+            return text.replace(regex, (match) =>
+                `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${match}</span>`
+            );
+        }
 
-                cardsContainer.appendChild(card);
-            });
+        function advExampleTrans(adj) {
+            return currentLang === 'es' ? adj.example_es : (adj.english || '-');
+        }
 
-            // Update navigation buttons
-            prevGroupBtn.disabled = currentGroupIndex === 0;
-            nextGroupBtn.disabled = currentGroupIndex === adjectiveGroups.length - 1;
-
-            // Apply active recall state
-            setInitialTranslationState();
+        function getGroupIcon(badge) {
+            const icons = {
+                'BASICS': '📌',
+                'FARBEN': '🎨',
+                'CHARAKTER': '🧠',
+                'ZUSTÄNDE': '🌡️',
+                'SPEZIFISCH': '👫',
+                'INDEFINIT': '🔢',
+                'KOMPARATIV': '📈',
+                'PARTIZIP': '🧩',
+                'DEUTSCHLAND': '🇩🇪'
+            };
+            return icons[badge] || '📝';
         }
 
         // Navigation
-        prevGroupBtn.addEventListener('click', () => {
+        function prevGroup() {
             if (currentGroupIndex > 0) {
                 currentGroupIndex--;
-                renderGroup();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                renderSingleGroup(currentGroupIndex);
             }
-        });
+        }
 
-        nextGroupBtn.addEventListener('click', () => {
+        function nextGroup() {
             if (currentGroupIndex < adjectiveGroups.length - 1) {
                 currentGroupIndex++;
-                renderGroup();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        });
-
-        // Light Version Toggle
-        lightVersionSwitch.addEventListener('change', function () {
-            if (this.checked) {
-                document.body.classList.add('light-version');
-            } else {
-                document.body.classList.remove('light-version');
-            }
-            // Save to localStorage
-            localStorage.setItem('adjektive-light-version', this.checked);
-        });
-
-        // English Toggle
-        englishSwitch.addEventListener('change', function () {
-            const englishMeanings = document.querySelectorAll('.english-meaning');
-            if (this.checked) {
-                englishMeanings.forEach(span => span.classList.add('visible'));
-            } else {
-                englishMeanings.forEach(span => span.classList.remove('visible'));
-            }
-            // Save to localStorage
-            localStorage.setItem('adjektive-english', this.checked);
-        });
-
-        // Active Recall Toggle
-        recallSwitch.addEventListener('change', function () {
-            const translations = document.querySelectorAll('.spanish-meaning, .example-text.es');
-            if (this.checked) {
-                translations.forEach(span => {
-                    span.style.opacity = '1';
-                    span.style.visibility = 'visible';
-                });
-            } else {
-                translations.forEach(span => {
-                    span.style.opacity = '0';
-                    setTimeout(() => { span.style.visibility = 'hidden'; }, 300);
-                });
-            }
-            // Save to localStorage
-            localStorage.setItem('adjektive-translation', this.checked);
-        });
-
-        function setInitialTranslationState() {
-            const translations = document.querySelectorAll('.spanish-meaning, .example-text.es');
-            const englishMeanings = document.querySelectorAll('.english-meaning');
-
-            if (recallSwitch.checked) {
-                translations.forEach(span => {
-                    span.style.visibility = 'visible';
-                    span.style.opacity = '1';
-                });
-            } else {
-                translations.forEach(span => {
-                    span.style.visibility = 'hidden';
-                    span.style.opacity = '0';
-                });
-            }
-
-            if (englishSwitch.checked) {
-                englishMeanings.forEach(span => span.classList.add('visible'));
-            } else {
-                englishMeanings.forEach(span => span.classList.remove('visible'));
+                renderSingleGroup(currentGroupIndex);
             }
         }
 
-        // Search functionality
-        function performSearch(query) {
-            if (!query || query.trim() === '') {
-                exitSearchMode();
+        // --- SEARCH & TOGGLE ---
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+
+            const btnEs = document.getElementById('langEs');
+            const btnEn = document.getElementById('langEn');
+
+            if (currentLang === 'es') {
+                btnEs.classList.add('active');
+                btnEn.classList.remove('active');
+                document.documentElement.lang = 'es';
+            } else {
+                btnEs.classList.remove('active');
+                btnEn.classList.add('active');
+                document.documentElement.lang = 'en';
+            }
+
+            // Re-render
+            handleSearch();
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+
+            if (!query) {
+                renderContent(adjectiveGroups);
                 return;
             }
 
-            isSearchMode = true;
-            const searchTerm = query.toLowerCase().trim();
-            searchResults = [];
+            // Filter
+            const filteredGroups = adjectiveGroups.filter(group => {
+                return group.adjectives.some(adj => {
+                    const matchDe = adj.word.toLowerCase().includes(query);
+                    const matchEs = adj.spanish.toLowerCase().includes(query);
+                    const matchEn = adj.english ? adj.english.toLowerCase().includes(query) : false;
+                    return matchDe || matchEs || matchEn;
+                });
+            });
 
-            // Search across all groups
-            adjectiveGroups.forEach(group => {
-                group.adjectives.forEach(adj => {
-                    // Search in German word, Spanish translation, English translation, and examples
-                    const searchableText = [
-                        adj.word,
-                        adj.spanish,
-                        adj.example_de,
-                        adj.example_es
-                    ].join(' ').toLowerCase();
+            renderContent(filteredGroups, query);
+        }
 
-                    if (searchableText.includes(searchTerm)) {
-                        searchResults.push({
-                            ...adj,
-                            groupTitle: group.title,
-                            groupColorMain: group.colorMain,
-                            groupColorPastel: group.colorPastel,
-                            groupBadge: group.badge
-                        });
+        // --- MODAL ---
+        const modal = document.getElementById('adjectiveModal');
+        const modalHeader = document.getElementById('modalHeader');
+
+        function openModal(word, groupBadge) {
+            let foundAdjective = null;
+            let foundGroup = null;
+
+            for (const g of adjectiveGroups) {
+                if (g.badge === groupBadge || !groupBadge) {
+                    const match = g.adjectives.find(a => a.word === word);
+                    if (match) {
+                        foundAdjective = match;
+                        foundGroup = g;
+                        break;
                     }
-                });
-            });
-
-            renderSearchResults();
-        }
-
-        function renderSearchResults() {
-            // Update UI
-            groupIndicator.textContent = 'Suchergebnisse';
-            prevGroupBtn.style.display = 'none';
-            nextGroupBtn.style.display = 'none';
-
-            // Clear container
-            cardsContainer.innerHTML = '';
-
-            if (searchResults.length === 0) {
-                searchResultsInfo.textContent = 'Keine Ergebnisse gefunden.';
-                return;
-            }
-
-            searchResultsInfo.textContent = `${searchResults.length} Ergebnis${searchResults.length > 1 ? 'se' : ''} gefunden`;
-
-            // Render search results
-            searchResults.forEach(adj => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.style.setProperty('--card-main', adj.groupColorMain);
-                card.style.setProperty('--card-pastel', adj.groupColorPastel);
-
-                card.innerHTML = `
-                    <div class="card-header">
-                         <span class="german-word" lang="de" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören" style="cursor: pointer;">${adj.word}</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="icon-floating" onclick="event.stopPropagation(); speak('${adj.word}')" title="Aussprache hören">${adj.emoji}</div>
-                        <span class="spanish-meaning" lang="es">${adj.spanish.replace(/[()]/g, '')}</span>
-                        <span class="english-meaning" lang="en">${adj.english || ''}</span>
-                    </div>
-                `;
-
-                // Add click event to open modal
-                const groupData = {
-                    badge: adj.groupBadge,
-                    colorMain: adj.groupColorMain,
-                    colorPastel: adj.groupColorPastel
-                };
-                card.addEventListener('click', () => {
-                    openModal(adj, groupData);
-                });
-
-                cardsContainer.appendChild(card);
-            });
-
-            // Apply active recall state
-            setInitialTranslationState();
-        }
-
-        function exitSearchMode() {
-            isSearchMode = false;
-            searchResults = [];
-            searchInput.value = '';
-            searchResultsInfo.textContent = '';
-            clearSearchBtn.classList.remove('visible');
-            prevGroupBtn.style.display = '';
-            nextGroupBtn.style.display = '';
-            renderGroup();
-        }
-
-        // Search input event listeners
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value;
-
-            if (query.trim() !== '') {
-                clearSearchBtn.classList.add('visible');
-            } else {
-                clearSearchBtn.classList.remove('visible');
-            }
-
-            performSearch(query);
-        });
-
-        clearSearchBtn.addEventListener('click', () => {
-            exitSearchMode();
-        });
-
-        // Allow Enter key to search
-        searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                exitSearchMode();
-            }
-        });
-
-        // Load saved preferences from localStorage
-        function loadSavedPreferences() {
-            // Load light version preference
-            const savedLightVersion = localStorage.getItem('adjektive-light-version');
-            if (savedLightVersion !== null) {
-                lightVersionSwitch.checked = savedLightVersion === 'true';
-                if (lightVersionSwitch.checked) {
-                    document.body.classList.add('light-version');
                 }
             }
 
-            // Load translation preference
-            const savedTranslation = localStorage.getItem('adjektive-translation');
-            if (savedTranslation !== null) {
-                recallSwitch.checked = savedTranslation === 'true';
-            }
+            if (!foundAdjective) return;
 
-            // Load english preference
-            const savedEnglish = localStorage.getItem('adjektive-english');
-            if (savedEnglish !== null) {
-                englishSwitch.checked = savedEnglish === 'true';
-            }
-        }
+            document.getElementById('modalCategory').textContent = foundGroup.title;
+            modalHeader.style.backgroundColor = foundGroup.colorMain;
 
-        // --- Modal Logic ---
-        const modal = document.getElementById('adjective-modal');
-        const modalCloseBtn = document.getElementById('modal-close');
-        const modalEmoji = document.getElementById('modal-emoji');
-        const modalWord = document.getElementById('modal-word');
-        const modalTranslation = document.getElementById('modal-translation');
-        const modalBadge = document.getElementById('modal-badge');
-        const modalExampleDe = document.getElementById('modal-example-de');
-        const modalExampleEs = document.getElementById('modal-example-es');
-        const modalHeader = document.querySelector('.modal-header');
+            document.getElementById('modalEmoji').textContent = foundAdjective.emoji;
+            document.getElementById('modalWord').textContent = foundAdjective.word;
+            document.getElementById('modalTranslation').textContent = currentLang === 'es' ? foundAdjective.spanish : (foundAdjective.english || '-');
+            document.getElementById('modalExampleDe').textContent = foundAdjective.example_de;
+            document.getElementById('modalExampleEs').textContent = currentLang === 'es' ? foundAdjective.example_es : (foundAdjective.english || '-'); // Using English if not ES, simplified
 
-        function openModal(adj, groupData) {
-            // Populate content
-            modalEmoji.textContent = adj.emoji;
-            modalWord.textContent = adj.word;
-            modalTranslation.textContent = adj.spanish;
-            modalBadge.textContent = groupData.badge;
-            modalExampleDe.textContent = adj.example_de;
-            modalExampleEs.textContent = adj.example_es;
+            // TTS Handlers
+            document.getElementById('modalWord').onclick = () => speak(foundAdjective.word);
+            document.getElementById('modalEmoji').onclick = () => speak(foundAdjective.word);
+            // document.getElementById('modalExampleBox').onclick = () => speak(foundAdjective.example_de);
 
-            // Set colors
-            modalHeader.style.backgroundColor = groupData.colorMain;
-
-            // TTS Triggers
-            modalWord.onclick = (e) => {
-                e.stopPropagation();
-                speak(adj.word);
-            };
-            modalWord.title = "Aussprache hören";
-
-            modalEmoji.onclick = (e) => {
-                e.stopPropagation();
-                speak(adj.word);
-            };
-            modalEmoji.title = "Aussprache hören";
-            modalEmoji.style.cursor = "pointer";
-
-            modalExampleDe.onclick = (e) => {
-                e.stopPropagation();
-                speak(adj.example_de);
-            };
-            modalExampleDe.title = "Satz aussprechen";
-
-
-            // Show modal
-            modal.classList.add('visible');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            modal.style.display = 'flex';
         }
 
         function closeModal() {
-            modal.classList.remove('visible');
-            document.body.style.overflow = '';
+            modal.style.display = 'none';
+        }
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                closeModal();
+            }
         }
 
-        // Close events
-        modalCloseBtn.addEventListener('click', closeModal);
+        // --- TTS ---
+        function speak(text) {
+            if (!text) return;
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
+        }
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-
-        // Key press events
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('visible')) {
-                closeModal();
-            }
-        });
-
-        // --- TTS Function ---
-        function speak(text, lang = 'de-DE', rate = 0.9) {
-            if ('speechSynthesis' in window) {
-                // Cancel any previous speech
-                window.speechSynthesis.cancel();
-
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = lang;
-                utterance.rate = rate;
-
-                // Optional: Find a specific German voice
-                const voices = window.speechSynthesis.getVoices();
-                const germanVoice = voices.find(voice => voice.lang === 'de-DE');
-                if (germanVoice) {
-                    utterance.voice = germanVoice;
-                }
-
-                window.speechSynthesis.speak(utterance);
-            } else {
-                console.error("Speech synthesis not supported in this browser.");
-            }
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('light-mode');
+            const isLight = body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
         }
 
         // Initialize
-        loadSavedPreferences();
-        renderGroup();
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+            }
+
+            // Check saved view preference? For now default to Kompakt.
+            isCompactMode = true;
+            viewToggle.checked = true;
+
+            renderContent();
+        });
     </script>
 </body>
 

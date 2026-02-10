@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="dark">
 
 <head>
@@ -721,15 +721,20 @@
                 <button class="close-modal" onclick="closeModal()">&times;</button>
             </header>
             <div class="modal-body">
-                <div class="modal-emoji" id="modalEmoji" style="font-size: 4rem; margin-bottom: 10px; cursor: pointer;">
-                </div>
-                <div id="modalWord" class="modal-main-word" title="Escuchar">Wort</div>
-                <div id="modalTranslation" class="modal-sub-word">Traducción</div>
+                <div id="standardModalContent">
+                    <div class="modal-emoji" id="modalEmoji"
+                        style="font-size: 4rem; margin-bottom: 10px; cursor: pointer;">
+                    </div>
+                    <div id="modalWord" class="modal-main-word" title="Escuchar">Wort</div>
+                    <div id="modalTranslation" class="modal-sub-word">Traducción</div>
 
-                <div class="modal-example-box" id="modalExampleBox" title="Escuchar frase">
-                    <div id="modalExampleDe" class="modal-ex-de">Ejemplo Alemán</div>
-                    <div id="modalExampleEs" class="modal-ex-es">Traducción Ejemplo</div>
+                    <div class="modal-example-box" id="modalExampleBox" title="Escuchar frase">
+                        <div id="modalExampleDe" class="modal-ex-de">Ejemplo Alemán</div>
+                        <div id="modalExampleEs" class="modal-ex-es">Traducción Ejemplo</div>
+                    </div>
                 </div>
+                <!-- Custom Content Container -->
+                <div id="customModalContent" style="display:none; width:100%;"></div>
             </div>
         </div>
     </div>
@@ -820,6 +825,7 @@
                     { word: 'monatlich', emoji: '🌒', spanish: '(mensualmente)', english: 'monthly', example_de: 'Ich bezahle die Miete monatlich.', example_es: 'Pago el alquiler mensualmente.' },
                     { word: 'jährlich', emoji: '🎂', spanish: '(anualmente)', english: 'yearly', example_de: 'Das Festival findet jährlich statt.', example_es: 'El festival tiene lugar anualmente.' },
                     { word: 'gewöhnlich', emoji: '☕', spanish: '(habitualmente)', english: 'usually', example_de: 'Gewöhnlich trinke ich Tee.', example_es: 'Habitualmente bebo té.' },
+                    { word: 'normalerweise', emoji: '📏', spanish: '(normalmente)', english: 'normally / usually', example_de: 'Normalerweise stehe ich um 8 Uhr auf.', example_es: 'Normalmente me levanto a las 8.' },
                     { word: 'jemals', emoji: '❓', spanish: '(alguna vez)', english: 'ever', example_de: 'Warst du jemals in Paris?', example_es: '¿Has estado alguna vez en París?' }
                 ]
             },
@@ -875,6 +881,7 @@
                     { word: 'zusammen', emoji: '👫', spanish: '(juntos)', english: 'together', example_de: 'Wir kochen zusammen.', example_es: 'Cocinamos juntos.' },
                     { word: 'vermutlich', emoji: '🤔', spanish: '(probablemente)', english: 'presumably / probably', example_de: 'Er kommt vermutlich später.', example_es: 'Probablemente venga más tarde.' },
                     { word: 'wahrscheinlich', emoji: '🎲', spanish: '(probablemente)', english: 'probably', example_de: 'Es wird wahrscheinlich regnen.', example_es: 'Probablemente va a llover.' },
+                    { word: 'ganz', emoji: '⭕', spanish: '(bastante / completamente)', english: 'quite / completely', example_de: 'Das ist ganz gut.', example_es: 'Está bastante bien.' },
                     { word: 'sonst', emoji: '⚠️', spanish: '(si no / de lo contrario)', english: 'otherwise / else', example_de: 'Beeil dich, sonst verpasst du den Bus.', example_es: 'Date prisa, si no perderás el autobús.' }
                 ]
             }
@@ -1068,6 +1075,69 @@
             }
 
             if (!foundAdverb) return;
+
+            // --- GANZ SPECIAL LOGIC ---
+            const standardContent = document.getElementById('standardModalContent');
+            const customContent = document.getElementById('customModalContent');
+
+            if (foundAdverb.word === 'ganz') {
+                standardContent.style.display = 'none';
+                customContent.style.display = 'block';
+
+                // Color for Ganz special modal
+                document.getElementById('modalCategory').textContent = foundGroup.title;
+                modalHeader.style.backgroundColor = foundGroup.colorMain;
+
+                // Inject Custom HTML
+                customContent.innerHTML = `
+        <div style="text-align:center;">
+             <div class="modal-emoji" style="font-size: 4rem; margin-bottom: 10px; cursor: pointer;" onclick="speak('${foundAdverb.word}')">${foundAdverb.emoji}</div>
+             <div class="modal-main-word" style="color:var(--accent-green); font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; cursor:pointer;" onclick="speak('${foundAdverb.word}')">${foundAdverb.word}</div>
+        </div>
+        
+        <div style="overflow-x: auto; width: 100%;">
+            <table style="width: 100%; border-collapse: separate; border-spacing: 0; text-align: left; font-size: 0.9rem; color: var(--text-main); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden;">
+                <thead>
+                    <tr style="background: rgba(255,255,255,0.05);">
+                        <th style="padding: 12px; color: var(--accent-green); border-bottom: 2px solid var(--border-color);">Tipo</th>
+                        <th style="padding: 12px; color: var(--accent-green); border-bottom: 2px solid var(--border-color);">Significado (ES)</th>
+                        <th style="padding: 12px; color: var(--accent-green); border-bottom: 2px solid var(--border-color);">Meaning (EN)</th>
+                        <th style="padding: 12px; color: var(--accent-green); border-bottom: 2px solid var(--border-color);">Uso / Matiz</th>
+                        <th style="padding: 12px; color: var(--accent-green); border-bottom: 2px solid var(--border-color);">Ejemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--border-color);">
+                        <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Adverbio</strong><br><span style="font-size:0.8em; opacity:0.7;">(Moderado)</span></td>
+                        <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Bastante</td>
+                        <td style="padding: 12px; font-style: italic; opacity: 0.8; border-bottom: 1px solid var(--border-color);">Quite / Pretty</td>
+                        <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Modifica a un adjetivo. Indica un grado medio.</td>
+                        <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">
+                            <div style="font-weight:bold; cursor:pointer; color: var(--text-main);" onclick="speak('Das ist ganz gut.')">Das ist ganz gut. <span class="audio-icon">🔊</span></div>
+                            <div style="font-style:italic; opacity:0.7;">(Está bastante bien).</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px;"><strong>Adverbio</strong><br><span style="font-size:0.8em; opacity:0.7;">(Énfasis Total)</span></td>
+                        <td style="padding: 12px;">Completamente / Totalmente</td>
+                        <td style="padding: 12px; font-style: italic; opacity: 0.8;">Completely / Totally</td>
+                        <td style="padding: 12px;">Modifica a un adjetivo absoluto o de límite.</td>
+                        <td style="padding: 12px;">
+                            <div style="font-weight:bold; cursor:pointer; color: var(--text-main);" onclick="speak('Ich bin ganz sicher.')">Ich bin ganz sicher. <span class="audio-icon">🔊</span></div>
+                            <div style="font-style:italic; opacity:0.7;">(Estoy totalmente seguro).</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+                `;
+
+                modal.style.display = 'flex';
+                return;
+            } else {
+                standardContent.style.display = 'block';
+                customContent.style.display = 'none';
+            }
 
             // Fill Data
             document.getElementById('modalCategory').textContent = foundGroup.title;
