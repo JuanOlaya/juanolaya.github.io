@@ -868,7 +868,12 @@
                     { word: 'frei', emoji: '🕊️', spanish: '(libre)', english: 'free', example_de: 'Ist dieser Platz noch frei?', example_es: '¿Está libre este asiento?' },
                     { word: 'besetzt', emoji: '🔒', spanish: '(ocupado)', english: 'occupied', example_de: 'Die Toilette ist besetzt.', example_es: 'El baño está ocupado.' },
                     { word: 'offen', emoji: '🔓', spanish: '(abierto)', english: 'open', example_de: 'Das Fenster ist offen.', example_es: 'La ventana está abierta.' },
-                    { word: 'geschlossen', emoji: '🚪', spanish: '(cerrado)', english: 'closed', example_de: 'Die Tür ist geschlossen.', example_es: 'La puerta está cerrada.' }
+                    { word: 'geschlossen', emoji: '🚪', spanish: '(cerrado)', english: 'closed', example_de: 'Die Tür ist geschlossen.', example_es: 'La puerta está cerrada.' },
+                    { word: 'leer', emoji: '🕳️', spanish: '(vacío)', english: 'empty', example_de: 'Das Glas ist leer.', example_es: 'El vaso está vacío.' },
+                    { word: 'voll', emoji: '🍺', spanish: '(lleno)', english: 'full', example_de: 'Der Bus ist voll.', example_es: 'El autobús está lleno.' },
+                    { word: 'langsam', emoji: '🐌', spanish: '(lento)', english: 'slow', example_de: 'Er fährt sehr langsam.', example_es: 'Él conduce muy despacio.' },
+                    { word: 'laut', emoji: '🔊', spanish: '(ruidoso/alto)', english: 'loud', example_de: 'Die Musik ist zu laut.', example_es: 'La música está demasiado alta.' },
+                    { word: 'leise', emoji: '🤫', spanish: '(silencioso)', english: 'quiet', example_de: 'Sei bitte leise.', example_es: 'Por favor, guarda silencio.' }
                 ]
             },
             {
@@ -1084,8 +1089,8 @@
             const tableHTML = `
                 <thead>
                     <tr>
-                        <th>${currentLang === 'es' ? 'Alemán / Español' : 'German / English'}</th>
-                        <th>${currentLang === 'es' ? 'Ejemplo' : 'Example'}</th>
+                        <th>${currentLang === 'es' ? 'Alemán' : 'German'}</th>
+                        <th>${currentLang === 'es' ? 'Traducción' : 'Translation'}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1127,8 +1132,8 @@
             const tableHTML = `
                 <thead>
                     <tr>
-                        <th>${currentLang === 'es' ? 'Alemán / Español' : 'German / English'}</th>
-                        <th>${currentLang === 'es' ? 'Ejemplo' : 'Example'}</th>
+                        <th>${currentLang === 'es' ? 'Alemán' : 'German'}</th>
+                        <th>${currentLang === 'es' ? 'Traducción' : 'Translation'}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1159,16 +1164,14 @@
             }
 
             return `
-            <tr>
+            <tr onclick="openModal('${adj.word}', '${group.badge}')" style="cursor:pointer; transition: background-color 0.2s;">
                 <td>
-                    <div class="german-word" onclick="speak('${adj.word}')" title="Escuchar">
+                    <div class="german-word" onclick="event.stopPropagation(); speak('${adj.word}')" title="Escuchar">
                         ${displayWord} <span class="audio-icon">🔊</span>
                     </div>
-                    <div class="spanish-word" style="font-style:italic; color:var(--text-muted);">${displayTrans}</div>
                 </td>
-                <td class="example-clickable" onclick="openModal('${adj.word}', '${group.badge}')">
-                    <div style="font-weight:600; color:var(--text-main);">${adj.example_de}</div>
-                    <div class="example-trans">${advExampleTrans(adj)}</div>
+                <td class="spanish-word" style="font-style:italic; color:var(--text-muted); font-size:1rem;">
+                    ${displayTrans}
                 </td>
             </tr>
             `;
