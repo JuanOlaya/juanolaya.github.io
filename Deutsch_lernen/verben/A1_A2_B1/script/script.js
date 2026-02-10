@@ -1977,6 +1977,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // 4. Präteritum Note (displayed below Präteritum conjugation table)
+        const praeteritumNote = updatedData.praeteritum_note;
+        const praeteritumNoteElement = document.getElementById('modal-praeteritum-note');
+        if (praeteritumNoteElement) {
+            if (praeteritumNote) {
+                praeteritumNoteElement.innerHTML = praeteritumNote;
+                praeteritumNoteElement.style.display = 'block';
+            } else {
+                praeteritumNoteElement.style.display = 'none';
+            }
+        }
+
         // Display note_es if it exists (REMOVED/REPLACED by General Note above)
         // keeping the element ref just in case but logic is handled above
         const oldNoteElement = document.getElementById('modal-verb-note');
