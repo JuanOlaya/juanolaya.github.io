@@ -969,6 +969,24 @@
                         "example_de": "Die Kurse kosten jeweils 50 Euro.",
                         "example_es": "Los cursos cuestan 50 euros cada uno.",
                         "level": "A1-A2"
+                    },
+                    {
+                        "word": "gleich",
+                        "emoji": "🔜",
+                        "spanish": "(enseguida)",
+                        "english": "immediately / right away",
+                        "example_de": "Ich komme gleich.",
+                        "example_es": "Voy enseguida.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "vorhin",
+                        "emoji": "🔙",
+                        "spanish": "(hace poco)",
+                        "english": "a while ago",
+                        "example_de": "Wir haben vorhin gesprochen.",
+                        "example_es": "Hablamos hace poco.",
+                        "level": "A1-A2"
                     }
                 ]
             },
@@ -1234,6 +1252,24 @@
                         "example_de": "Er muss irgendwo sein.",
                         "example_es": "Él tiene que estar en algún lugar.",
                         "level": "A1"
+                    },
+                    {
+                        "word": "weg",
+                        "emoji": "💨",
+                        "spanish": "(ido / fuera)",
+                        "english": "away / gone",
+                        "example_de": "Meine Tasche ist weg.",
+                        "example_es": "Mi bolso no está / se ha ido.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "da",
+                        "emoji": "📍",
+                        "spanish": "(ahí / allí)",
+                        "english": "there",
+                        "example_de": "Ist Herr Müller da?",
+                        "example_es": "¿Está el Sr. Müller ahí?",
+                        "level": "A1"
                     }
                 ]
             },
@@ -1316,15 +1352,6 @@
                         "english": "hopefully",
                         "example_de": "Hoffentlich regnet es nicht.",
                         "example_es": "Ojalá no llueva.",
-                        "level": "A1-B1"
-                    },
-                    {
-                        "word": "wirklich",
-                        "emoji": "❗",
-                        "spanish": "(realmente/de verdad)",
-                        "english": "really",
-                        "example_de": "Bist du wirklich sicher?",
-                        "example_es": "¿Estás realmente seguro?",
                         "level": "A1-B1"
                     },
                     {
@@ -1436,6 +1463,15 @@
                         "level": "A1-B1"
                     },
                     {
+                        "word": "wirklich",
+                        "emoji": "❗",
+                        "spanish": "(realmente/de verdad)",
+                        "english": "really",
+                        "example_de": "Bist du wirklich sicher?",
+                        "example_es": "¿Estás realmente seguro?",
+                        "level": "A1-B1"
+                    },
+                    {
                         "word": "eigentlich",
                         "emoji": "🤔",
                         "spanish": "(en realidad)",
@@ -1460,6 +1496,51 @@
                         "english": "honestly",
                         "example_de": "Ehrlich gesagt, weiß ich es nicht.",
                         "example_es": "Honestamente, no lo sé.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "ziemlich",
+                        "emoji": "⚖️",
+                        "spanish": "(bastante)",
+                        "english": "quite / fairly",
+                        "example_de": "Es ist ziemlich kalt.",
+                        "example_es": "Hace bastante frío.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "bestimmt",
+                        "emoji": "💯",
+                        "spanish": "(seguramente)",
+                        "english": "definitely / certainly",
+                        "example_de": "Er kommt bestimmt.",
+                        "example_es": "Seguro que viene.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "glücklicherweise",
+                        "emoji": "🍀",
+                        "spanish": "(afortunadamente)",
+                        "english": "fortunately",
+                        "example_de": "Glücklicherweise ist nichts passiert.",
+                        "example_es": "Afortunadamente no pasó nada.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "überhaupt",
+                        "emoji": "🚫",
+                        "spanish": "(en absoluto)",
+                        "english": "at all",
+                        "example_de": "Das schmeckt mir überhaupt nicht.",
+                        "example_es": "No me gusta en absoluto.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "anders",
+                        "emoji": "🔄",
+                        "spanish": "(diferente)",
+                        "english": "differently / else",
+                        "example_de": "Wir machen das anders.",
+                        "example_es": "Lo hacemos de otra manera.",
                         "level": "A1-B1"
                     }
                 ]
@@ -1594,7 +1675,7 @@
             data.forEach((group) => {
                 if (!group.adverbs || group.adverbs.length === 0) return;
 
-                const chunkSize = 5;
+                const chunkSize = 6;
                 for (let i = 0; i < group.adverbs.length; i += chunkSize) {
                     const chunk = group.adverbs.slice(i, i + chunkSize);
 
@@ -1624,7 +1705,8 @@
                     const header = document.createElement('div');
                     header.className = 'level-header';
                     header.style.backgroundColor = group.colorMain;
-                    header.innerHTML = `<span>${displayTitle}</span><span>${getGroupIcon(group.badge)}</span>`;
+                    // Removed emoji from header as requested
+                    header.innerHTML = `<span>${displayTitle}</span>`;
 
                     // Table
                     const content = document.createElement('div');
@@ -1858,6 +1940,13 @@
         }
 
         function openInfoModal() {
+            // Update Stats
+            const totalAdverbs = adverbGroups.reduce((acc, group) => acc + (group.adverbs ? group.adverbs.length : 0), 0);
+            const statsElement = document.getElementById('infoStats');
+            if (statsElement) {
+                statsElement.innerHTML = `<p style="margin-top:20px; font-size:0.9rem; opacity:0.7;"><strong>Total Adverbs:</strong> ${totalAdverbs}</p>`;
+            }
+
             infoModal.style.display = 'flex';
         }
 
