@@ -614,6 +614,20 @@
             padding-left: 15px;
             border-left: 3px solid var(--accent-green);
         }
+
+        .modal-level-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
 
@@ -726,6 +740,7 @@
                         style="font-size: 4rem; margin-bottom: 10px; cursor: pointer;">
                     </div>
                     <div id="modalWord" class="modal-main-word" title="Escuchar">Wort</div>
+                    <div id="modalLevel" class="modal-level-badge">A1</div>
                     <div id="modalTranslation" class="modal-sub-word">Traducción</div>
 
                     <div class="modal-example-box" id="modalExampleBox" title="Escuchar frase">
@@ -776,117 +791,789 @@
         // --- DATA ---
         const adverbGroups = [
             {
-                title: '⏰ Temporal (A1 - A2)',
-                description: 'Adverbios de tiempo',
-                level: 'A1-A2',
-                colorMain: '#3b82f6',
-                colorPastel: '#dbeafe',
-                badge: 'TEMPORAL',
-                emoji: 'time',
-                adverbs: [
-                    { word: 'jetzt', emoji: '🕐', spanish: '(ahora)', english: 'now', example_de: 'Ich gehe jetzt nach Hause.', example_es: 'Ahora voy a casa.' },
-                    { word: 'heute', emoji: '📅', spanish: '(hoy)', english: 'today', example_de: 'Heute ist ein schöner Tag.', example_es: 'Hoy es un día bonito.' },
-                    { word: 'erst', emoji: '🥇', spanish: '(primero / recién)', english: 'first / only', example_de: 'Erst die Arbeit, dann das Vergnügen.', example_es: 'Primero el trabajo, luego el placer.' },
-                    { word: 'morgen', emoji: '🌅', spanish: '(mañana)', english: 'tomorrow', example_de: 'Morgen habe ich frei.', example_es: 'Mañana tengo libre.' },
-                    { word: 'gestern', emoji: '🔙', spanish: '(ayer)', english: 'yesterday', example_de: 'Gestern war ich krank.', example_es: 'Ayer estuve enfermo.' },
-                    { word: 'dann', emoji: '👉', spanish: '(luego/entonces)', english: 'then', example_de: 'Erst essen wir, dann gehen wir.', example_es: 'Primero comemos, luego nos vamos.' },
-                    { word: 'später', emoji: '🔜', spanish: '(más tarde)', english: 'later', example_de: 'Wir sehen uns später.', example_es: 'Nos vemos más tarde.' },
-                    { word: 'sofort', emoji: '⚡', spanish: '(inmediatamente)', english: 'immediately', example_de: 'Komm bitte sofort her!', example_es: '¡Ven aquí inmediatamente, por favor!' },
-                    { word: 'bald', emoji: '⏳', spanish: '(pronto)', english: 'soon', example_de: 'Bis bald!', example_es: '¡Hasta pronto!' },
-                    { word: 'gerade', emoji: '⏱️', spanish: '(justo ahora)', english: 'just / right now', example_de: 'Er ruft gerade an.', example_es: 'Él está llamando justo ahora.' },
-                    { word: 'früher', emoji: '🕰️', spanish: '(antes)', english: 'earlier / formerly', example_de: 'Früher war alles billiger.', example_es: 'Antes todo era más barato.' },
-                    { word: 'damals', emoji: '📜', spanish: '(en aquel entonces)', english: 'back then', example_de: 'Damals wohnte ich noch in Berlin.', example_es: 'En aquel entonces vivía todavía en Berlín.' },
-                    { word: 'danach', emoji: '⏩', spanish: '(después)', english: 'afterwards', example_de: 'Erst essen wir, danach gehen wir.', example_es: 'Primero comemos, después nos vamos.' },
-                    { word: 'inzwischen', emoji: '⏳', spanish: '(mientras tanto)', english: 'meantime', example_de: 'Ich koche, inzwischen kannst du den Tisch decken.', example_es: 'Yo cocino, mientras tanto tú puedes poner la mesa.' },
-                    { word: 'noch', emoji: '⏳', spanish: '(todavía/aún)', english: 'still / yet', example_de: 'Ich bin noch hier.', example_es: 'Todavía estoy aquí.' },
-                    { word: 'wieder', emoji: '🔄', spanish: '(de nuevo/otra vez)', english: 'again', example_de: 'Er kommt wieder.', example_es: 'Él viene de nuevo.' },
-                    { word: 'plötzlich', emoji: '💥', spanish: '(de repente)', english: 'suddenly', example_de: 'Plötzlich fing es an zu regnen.', example_es: 'De repente empezó a llover.' },
-                    { word: 'heutzutage', emoji: '📱', spanish: '(hoy en día)', english: 'nowadays', example_de: 'Heutzutage hat jeder ein Handy.', example_es: 'Hoy en día todo el mundo tiene un móvil.' },
-                    { word: 'jeweils', emoji: '🔢', spanish: '(respectivamente / cada uno)', english: 'respectively / each', example_de: 'Die Kurse kosten jeweils 50 Euro.', example_es: 'Los cursos cuestan 50 euros cada uno.' }
+                "title": "Temporal",
+                "description": "Adverbios de tiempo",
+                "level": "A1-A2",
+                "colorMain": "#06b6d4",
+                "colorPastel": "#cffafe",
+                "badge": "TEMPORAL",
+                "emoji": "time",
+                "adverbs": [
+                    {
+                        "word": "jetzt",
+                        "emoji": "🕐",
+                        "spanish": "(ahora)",
+                        "english": "now",
+                        "example_de": "Ich gehe jetzt nach Hause.",
+                        "example_es": "Ahora voy a casa.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "heute",
+                        "emoji": "📅",
+                        "spanish": "(hoy)",
+                        "english": "today",
+                        "example_de": "Heute ist ein schöner Tag.",
+                        "example_es": "Hoy es un día bonito.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "erst",
+                        "emoji": "🥇",
+                        "spanish": "(primero / recién)",
+                        "english": "first / only",
+                        "example_de": "Erst die Arbeit, dann das Vergnügen.",
+                        "example_es": "Primero el trabajo, luego el placer.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "morgen",
+                        "emoji": "🌅",
+                        "spanish": "(mañana)",
+                        "english": "tomorrow",
+                        "example_de": "Morgen habe ich frei.",
+                        "example_es": "Mañana tengo libre.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "gestern",
+                        "emoji": "🔙",
+                        "spanish": "(ayer)",
+                        "english": "yesterday",
+                        "example_de": "Gestern war ich krank.",
+                        "example_es": "Ayer estuve enfermo.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "dann",
+                        "emoji": "👉",
+                        "spanish": "(luego/entonces)",
+                        "english": "then",
+                        "example_de": "Erst essen wir, dann gehen wir.",
+                        "example_es": "Primero comemos, luego nos vamos.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "später",
+                        "emoji": "🔜",
+                        "spanish": "(más tarde)",
+                        "english": "later",
+                        "example_de": "Wir sehen uns später.",
+                        "example_es": "Nos vemos más tarde.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "sofort",
+                        "emoji": "⚡",
+                        "spanish": "(inmediatamente)",
+                        "english": "immediately",
+                        "example_de": "Komm bitte sofort her!",
+                        "example_es": "¡Ven aquí inmediatamente, por favor!",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "bald",
+                        "emoji": "⏳",
+                        "spanish": "(pronto)",
+                        "english": "soon",
+                        "example_de": "Bis bald!",
+                        "example_es": "¡Hasta pronto!",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "gerade",
+                        "emoji": "⏱️",
+                        "spanish": "(justo ahora)",
+                        "english": "just / right now",
+                        "example_de": "Er ruft gerade an.",
+                        "example_es": "Él está llamando justo ahora.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "früher",
+                        "emoji": "🕰️",
+                        "spanish": "(antes)",
+                        "english": "earlier / formerly",
+                        "example_de": "Früher war alles billiger.",
+                        "example_es": "Antes todo era más barato.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "damals",
+                        "emoji": "📜",
+                        "spanish": "(en aquel entonces)",
+                        "english": "back then",
+                        "example_de": "Damals wohnte ich noch in Berlin.",
+                        "example_es": "En aquel entonces vivía todavía en Berlín.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "danach",
+                        "emoji": "⏩",
+                        "spanish": "(después)",
+                        "english": "afterwards",
+                        "example_de": "Erst essen wir, danach gehen wir.",
+                        "example_es": "Primero comemos, después nos vamos.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "inzwischen",
+                        "emoji": "⏳",
+                        "spanish": "(mientras tanto)",
+                        "english": "meantime",
+                        "example_de": "Ich koche, inzwischen kannst du den Tisch decken.",
+                        "example_es": "Yo cocino, mientras tanto tú puedes poner la mesa.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "noch",
+                        "emoji": "⏳",
+                        "spanish": "(todavía/aún)",
+                        "english": "still / yet",
+                        "example_de": "Ich bin noch hier.",
+                        "example_es": "Todavía estoy aquí.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "wieder",
+                        "emoji": "🔄",
+                        "spanish": "(de nuevo/otra vez)",
+                        "english": "again",
+                        "example_de": "Er kommt wieder.",
+                        "example_es": "Él viene de nuevo.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "plötzlich",
+                        "emoji": "💥",
+                        "spanish": "(de repente)",
+                        "english": "suddenly",
+                        "example_de": "Plötzlich fing es an zu regnen.",
+                        "example_es": "De repente empezó a llover.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "heutzutage",
+                        "emoji": "📱",
+                        "spanish": "(hoy en día)",
+                        "english": "nowadays",
+                        "example_de": "Heutzutage hat jeder ein Handy.",
+                        "example_es": "Hoy en día todo el mundo tiene un móvil.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "jeweils",
+                        "emoji": "🔢",
+                        "spanish": "(respectivamente / cada uno)",
+                        "english": "respectively / each",
+                        "example_de": "Die Kurse kosten jeweils 50 Euro.",
+                        "example_es": "Los cursos cuestan 50 euros cada uno.",
+                        "level": "A1-A2"
+                    }
                 ]
             },
             {
-                title: '🔄 Frequenz (A1 - A2)',
-                description: 'Adverbios de frecuencia',
-                level: 'A1-A2',
-                colorMain: '#8b5cf6',
-                colorPastel: '#ede9fe',
-                badge: 'FREQUENZ',
-                emoji: 'repeat',
-                adverbs: [
-                    { word: 'immer', emoji: '♾️', spanish: '(siempre)', english: 'always', example_de: 'Ich trinke immer Kaffee zum Frühstück.', example_es: 'Siempre bebo café para el desayuno.' },
-                    { word: 'nie', emoji: '🚫', spanish: '(nunca)', english: 'never', example_de: 'Er kommt nie pünktlich.', example_es: 'Él nunca llega puntual.' },
-                    { word: 'oft', emoji: '🔁', spanish: '(a menudo)', english: 'often', example_de: 'Ich besuche oft meine Eltern.', example_es: 'Visito a menudo a mis padres.' },
-                    { word: 'manchmal', emoji: '🎲', spanish: '(a veces)', english: 'sometimes', example_de: 'Manchmal gehe ich ins Kino.', example_es: 'A veces voy al cine.' },
-                    { word: 'selten', emoji: '🌘', spanish: '(rara vez)', english: 'rarely', example_de: 'Wir essen selten Fleisch.', example_es: 'Rara vez comemos carne.' },
-                    { word: 'meistens', emoji: '📊', spanish: '(la mayoría de las veces)', english: 'mostly', example_de: 'Meistens stehe ich um 7 Uhr auf.', example_es: 'La mayoría de las veces me levanto a las 7.' },
-                    { word: 'täglich', emoji: '📆', spanish: '(a diario)', english: 'daily', example_de: 'Ich fahre täglich mit dem Bus.', example_es: 'Viajo a diario en autobús.' },
-                    { word: 'wöchentlich', emoji: '🗓️', spanish: '(semanalmente)', english: 'weekly', example_de: 'Das Team trifft sich wöchentlich.', example_es: 'El equipo se reúne semanalmente.' },
-                    { word: 'monatlich', emoji: '🌒', spanish: '(mensualmente)', english: 'monthly', example_de: 'Ich bezahle die Miete monatlich.', example_es: 'Pago el alquiler mensualmente.' },
-                    { word: 'jährlich', emoji: '🎂', spanish: '(anualmente)', english: 'yearly', example_de: 'Das Festival findet jährlich statt.', example_es: 'El festival tiene lugar anualmente.' },
-                    { word: 'gewöhnlich', emoji: '☕', spanish: '(habitualmente)', english: 'usually', example_de: 'Gewöhnlich trinke ich Tee.', example_es: 'Habitualmente bebo té.' },
-                    { word: 'normalerweise', emoji: '📏', spanish: '(normalmente)', english: 'normally / usually', example_de: 'Normalerweise stehe ich um 8 Uhr auf.', example_es: 'Normalmente me levanto a las 8.' },
-                    { word: 'jemals', emoji: '❓', spanish: '(alguna vez)', english: 'ever', example_de: 'Warst du jemals in Paris?', example_es: '¿Has estado alguna vez en París?' },
-                    { word: 'regelmäßig', emoji: '🔄', spanish: '(regularmente)', english: 'regularly', example_de: 'Ich lerne regelmäßig.', example_es: 'Estudio regularmente.' }
+                "title": "Frequenz",
+                "description": "Adverbios de frecuencia",
+                "level": "A1-A2",
+                "colorMain": "#8b5cf6",
+                "colorPastel": "#ede9fe",
+                "badge": "FREQUENZ",
+                "emoji": "repeat",
+                "adverbs": [
+                    {
+                        "word": "immer",
+                        "emoji": "♾️",
+                        "spanish": "(siempre)",
+                        "english": "always",
+                        "example_de": "Ich trinke immer Kaffee zum Frühstück.",
+                        "example_es": "Siempre bebo café para el desayuno.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "nie",
+                        "emoji": "🚫",
+                        "spanish": "(nunca)",
+                        "english": "never",
+                        "example_de": "Er kommt nie pünktlich.",
+                        "example_es": "Él nunca llega puntual.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "oft",
+                        "emoji": "🔁",
+                        "spanish": "(a menudo)",
+                        "english": "often",
+                        "example_de": "Ich besuche oft meine Eltern.",
+                        "example_es": "Visito a menudo a mis padres.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "manchmal",
+                        "emoji": "🎲",
+                        "spanish": "(a veces)",
+                        "english": "sometimes",
+                        "example_de": "Manchmal gehe ich ins Kino.",
+                        "example_es": "A veces voy al cine.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "selten",
+                        "emoji": "🌘",
+                        "spanish": "(rara vez)",
+                        "english": "rarely",
+                        "example_de": "Wir essen selten Fleisch.",
+                        "example_es": "Rara vez comemos carne.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "meistens",
+                        "emoji": "📊",
+                        "spanish": "(la mayoría de las veces)",
+                        "english": "mostly",
+                        "example_de": "Meistens stehe ich um 7 Uhr auf.",
+                        "example_es": "La mayoría de las veces me levanto a las 7.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "täglich",
+                        "emoji": "📆",
+                        "spanish": "(a diario)",
+                        "english": "daily",
+                        "example_de": "Ich fahre täglich mit dem Bus.",
+                        "example_es": "Viajo a diario en autobús.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "wöchentlich",
+                        "emoji": "🗓️",
+                        "spanish": "(semanalmente)",
+                        "english": "weekly",
+                        "example_de": "Das Team trifft sich wöchentlich.",
+                        "example_es": "El equipo se reúne semanalmente.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "monatlich",
+                        "emoji": "🌒",
+                        "spanish": "(mensualmente)",
+                        "english": "monthly",
+                        "example_de": "Ich bezahle die Miete monatlich.",
+                        "example_es": "Pago el alquiler mensualmente.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "jährlich",
+                        "emoji": "🎂",
+                        "spanish": "(anualmente)",
+                        "english": "yearly",
+                        "example_de": "Das Festival findet jährlich statt.",
+                        "example_es": "El festival tiene lugar anualmente.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "gewöhnlich",
+                        "emoji": "☕",
+                        "spanish": "(habitualmente)",
+                        "english": "usually",
+                        "example_de": "Gewöhnlich trinke ich Tee.",
+                        "example_es": "Habitualmente bebo té.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "normalerweise",
+                        "emoji": "📏",
+                        "spanish": "(normalmente)",
+                        "english": "normally / usually",
+                        "example_de": "Normalerweise stehe ich um 8 Uhr auf.",
+                        "example_es": "Normalmente me levanto a las 8.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "jemals",
+                        "emoji": "❓",
+                        "spanish": "(alguna vez)",
+                        "english": "ever",
+                        "example_de": "Warst du jemals in Paris?",
+                        "example_es": "¿Has estado alguna vez en París?",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "regelmäßig",
+                        "emoji": "🔄",
+                        "spanish": "(regularmente)",
+                        "english": "regularly",
+                        "example_de": "Ich lerne regelmäßig.",
+                        "example_es": "Estudio regularmente.",
+                        "level": "A1-A2"
+                    }
                 ]
             },
             {
-                title: '📍 Lokal (A1)',
-                description: 'Adverbios de lugar',
-                level: 'A1',
-                colorMain: '#ec4899',
-                colorPastel: '#fce7f3',
-                badge: 'LOKAL',
-                emoji: 'map',
-                adverbs: [
-                    { word: 'hier', emoji: '👇', spanish: '(aquí)', english: 'here', example_de: 'Ich bin hier.', example_es: 'Estoy aquí.' },
-                    { word: 'dort', emoji: '👉', spanish: '(allí)', english: 'there', example_de: 'Das Auto steht dort.', example_es: 'El coche está allí.' },
-                    { word: 'links', emoji: '⬅️', spanish: '(a la izquierda)', english: 'left', example_de: 'Biegen Sie bitte links ab.', example_es: 'Gire a la izquierda, por favor.' },
-                    { word: 'rechts', emoji: '➡️', spanish: '(a la derecha)', english: 'right', example_de: 'Die Post ist rechts.', example_es: 'El correo está a la derecha.' },
-                    { word: 'überall', emoji: '🌎', spanish: '(en todas partes)', english: 'everywhere', example_de: 'Ich habe überall gesucht.', example_es: 'He buscado en todas partes.' },
-                    { word: 'nirgends', emoji: '❌', spanish: '(en ninguna parte)', english: 'nowhere', example_de: 'Ich finde meinen Schlüssel nirgends.', example_es: 'No encuentro mi llave en ninguna parte.' },
-                    { word: 'oben', emoji: '⬆️', spanish: '(arriba)', english: 'up / above', example_de: 'Die Nachbarn von oben sind laut.', example_es: 'Los vecinos de arriba son ruidosos.' },
-                    { word: 'unten', emoji: '⬇️', spanish: '(abajo)', english: 'down / below', example_de: 'Warte bitte unten.', example_es: 'Espera abajo, por favor.' },
-                    { word: 'vorne', emoji: '⏩', spanish: '(delante)', english: 'front / ahead', example_de: 'Bitte vorne einsteigen.', example_es: 'Por favor, suban por delante.' },
-                    { word: 'hinten', emoji: '⏪', spanish: '(detrás)', english: 'back / behind', example_de: 'Der Garten ist hinten.', example_es: 'El jardín está detrás.' },
-                    { word: 'draußen', emoji: '🌳', spanish: '(fuera)', english: 'outside', example_de: 'Die Kinder spielen draußen.', example_es: 'Los niños juegan fuera.' },
-                    { word: 'drinnen', emoji: '🏠', spanish: '(dentro)', english: 'inside', example_de: 'Es regnet, wir bleiben drinnen.', example_es: 'Llueve, nos quedamos dentro.' },
-                    { word: 'irgendwo', emoji: '🗺️', spanish: '(en algún lugar)', english: 'somewhere', example_de: 'Er muss irgendwo sein.', example_es: 'Él tiene que estar en algún lugar.' }
+                "title": "Lokal",
+                "description": "Adverbios de lugar",
+                "level": "A1",
+                "colorMain": "#ec4899",
+                "colorPastel": "#fce7f3",
+                "badge": "LOKAL",
+                "emoji": "map",
+                "adverbs": [
+                    {
+                        "word": "hier",
+                        "emoji": "👇",
+                        "spanish": "(aquí)",
+                        "english": "here",
+                        "example_de": "Ich bin hier.",
+                        "example_es": "Estoy aquí.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "dort",
+                        "emoji": "👉",
+                        "spanish": "(allí)",
+                        "english": "there",
+                        "example_de": "Das Auto steht dort.",
+                        "example_es": "El coche está allí.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "links",
+                        "emoji": "⬅️",
+                        "spanish": "(a la izquierda)",
+                        "english": "left",
+                        "example_de": "Biegen Sie bitte links ab.",
+                        "example_es": "Gire a la izquierda, por favor.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "rechts",
+                        "emoji": "➡️",
+                        "spanish": "(a la derecha)",
+                        "english": "right",
+                        "example_de": "Die Post ist rechts.",
+                        "example_es": "El correo está a la derecha.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "überall",
+                        "emoji": "🌎",
+                        "spanish": "(en todas partes)",
+                        "english": "everywhere",
+                        "example_de": "Ich habe überall gesucht.",
+                        "example_es": "He buscado en todas partes.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "nirgends",
+                        "emoji": "❌",
+                        "spanish": "(en ninguna parte)",
+                        "english": "nowhere",
+                        "example_de": "Ich finde meinen Schlüssel nirgends.",
+                        "example_es": "No encuentro mi llave en ninguna parte.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "oben",
+                        "emoji": "⬆️",
+                        "spanish": "(arriba)",
+                        "english": "up / above",
+                        "example_de": "Die Nachbarn von oben sind laut.",
+                        "example_es": "Los vecinos de arriba son ruidosos.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "unten",
+                        "emoji": "⬇️",
+                        "spanish": "(abajo)",
+                        "english": "down / below",
+                        "example_de": "Warte bitte unten.",
+                        "example_es": "Espera abajo, por favor.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "vorne",
+                        "emoji": "⏩",
+                        "spanish": "(delante)",
+                        "english": "front / ahead",
+                        "example_de": "Bitte vorne einsteigen.",
+                        "example_es": "Por favor, suban por delante.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "hinten",
+                        "emoji": "⏪",
+                        "spanish": "(detrás)",
+                        "english": "back / behind",
+                        "example_de": "Der Garten ist hinten.",
+                        "example_es": "El jardín está detrás.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "draußen",
+                        "emoji": "🌳",
+                        "spanish": "(fuera)",
+                        "english": "outside",
+                        "example_de": "Die Kinder spielen draußen.",
+                        "example_es": "Los niños juegan fuera.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "drinnen",
+                        "emoji": "🏠",
+                        "spanish": "(dentro)",
+                        "english": "inside",
+                        "example_de": "Es regnet, wir bleiben drinnen.",
+                        "example_es": "Llueve, nos quedamos dentro.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "irgendwo",
+                        "emoji": "🗺️",
+                        "spanish": "(en algún lugar)",
+                        "english": "somewhere",
+                        "example_de": "Er muss irgendwo sein.",
+                        "example_es": "Él tiene que estar en algún lugar.",
+                        "level": "A1"
+                    }
                 ]
             },
             {
-                title: '💡 Modal & Kausal (A1-B1)',
-                description: 'De modo y causa',
-                level: 'A1-B1',
-                colorMain: '#f59e0b',
-                colorPastel: '#fef3c7',
-                badge: 'MODAL',
-                emoji: 'bulb',
-                adverbs: [
-                    { word: 'sehr', emoji: '🔥', spanish: '(muy)', english: 'very', example_de: 'Das ist sehr gut.', example_es: 'Eso es muy bueno.' },
-                    { word: 'so', emoji: '🤏', spanish: '(así/tan)', english: 'so / that', example_de: 'Warum bist du so?', example_es: '¿Por qué eres así?' },
-                    { word: 'auch', emoji: '➕', spanish: '(también)', english: 'also / too', example_de: 'Ich komme auch.', example_es: 'Yo también vengo.' },
-                    { word: 'nur', emoji: '1️⃣', spanish: '(solo)', english: 'only / just', example_de: 'Ich habe nur 5 Euro.', example_es: 'Solo tengo 5 euros.' },
-                    { word: 'gern', emoji: '❤️', spanish: '(con gusto / gusta)', english: 'gladly / like to', example_de: 'Ich spiele gern Fußball.', example_es: 'Me gusta jugar al fútbol.' },
-                    { word: 'leider', emoji: '😞', spanish: '(desafortunadamente)', english: 'unfortunately', example_de: 'Leider habe ich keine Zeit.', example_es: 'Desafortunadamente no tengo tiempo.' },
-                    { word: 'vielleicht', emoji: '🤷', spanish: '(quizás)', english: 'maybe / perhaps', example_de: 'Vielleicht komme ich später.', example_es: 'Quizás venga más tarde.' },
-                    { word: 'hoffentlich', emoji: '🤞', spanish: '(ojalá)', english: 'hopefully', example_de: 'Hoffentlich regnet es nicht.', example_es: 'Ojalá no llueva.' },
-                    { word: 'wirklich', emoji: '❗', spanish: '(realmente/de verdad)', english: 'really', example_de: 'Bist du wirklich sicher?', example_es: '¿Estás realmente seguro?' },
-                    { word: 'fast', emoji: '🤏', spanish: '(casi)', english: 'almost', example_de: 'Ich bin fast fertig.', example_es: 'Estoy casi listo.' },
-                    { word: 'kaum', emoji: '📉', spanish: '(apenas)', english: 'barely / hardly', example_de: 'Ich kann dich kaum hören.', example_es: 'Apenas puedo oírte.' },
-                    { word: 'außerdem', emoji: '➕', spanish: '(además)', english: 'besides / also', example_de: 'Er ist nett und außerdem reich.', example_es: 'Él es amable y además rico.' },
-                    { word: 'allerdings', emoji: '☝️', spanish: '(ciertamente/sin embargo)', english: 'however / certainly', example_de: 'Das ist allerdings wahr.', example_es: 'Eso es ciertamente verdad.' },
-                    { word: 'trotzdem', emoji: '🛡️', spanish: '(a pesar de todo / sin embargo)', english: 'anyway / nevertheless', example_de: 'Es regnet, trotzdem gehe ich laufen.', example_es: 'Llueve, sin embargo voy a correr.' },
-                    { word: 'sogar', emoji: '😲', spanish: '(incluso)', english: 'even', example_de: 'Sogar er hat es verstanden.', example_es: 'Incluso él lo ha entendido.' },
-                    { word: 'besonders', emoji: '⭐', spanish: '(especialmente)', english: 'especially', example_de: 'Dieser Film ist besonders gut.', example_es: 'Esta película es especialmente buena.' },
-                    { word: 'zusammen', emoji: '👫', spanish: '(juntos)', english: 'together', example_de: 'Wir kochen zusammen.', example_es: 'Cocinamos juntos.' },
-                    { word: 'vermutlich', emoji: '🤔', spanish: '(probablemente)', english: 'presumably / probably', example_de: 'Er kommt vermutlich später.', example_es: 'Probablemente venga más tarde.' },
-                    { word: 'wahrscheinlich', emoji: '🎲', spanish: '(probablemente)', english: 'probably', example_de: 'Es wird wahrscheinlich regnen.', example_es: 'Probablemente va a llover.' },
-                    { word: 'ganz', emoji: '⭕', spanish: '(bastante / completamente)', english: 'quite / completely', example_de: 'Das ist ganz gut.', example_es: 'Está bastante bien.' },
-                    { word: 'sonst', emoji: '⚠️', spanish: '(si no / de lo contrario)', english: 'otherwise / else', example_de: 'Beeil dich, sonst verpasst du den Bus.', example_es: 'Date prisa, si no perderás el autobús.' },
-                    { word: 'eigentlich', emoji: '🤔', spanish: '(en realidad)', english: 'actually', example_de: 'Eigentlich habe ich keine Zeit.', example_es: 'En realidad no tengo tiempo.' },
-                    { word: 'tatsächlich', emoji: '🧐', spanish: '(de hecho)', english: 'indeed / actually', example_de: 'Das ist tatsächlich wahr.', example_es: 'Eso es, de hecho, verdad.' },
-                    { word: 'ehrlich', emoji: '🤞', spanish: '(honestamente - de verdad)', english: 'honestly', example_de: 'Ehrlich gesagt, weiß ich es nicht.', example_es: 'Honestamente, no lo sé.' }
+                "title": "Modal & Kausal",
+                "description": "De modo y causa",
+                "level": "A1-B1",
+                "colorMain": "#f59e0b",
+                "colorPastel": "#fef3c7",
+                "badge": "MODAL",
+                "emoji": "bulb",
+                "adverbs": [
+                    {
+                        "word": "sehr",
+                        "emoji": "🔥",
+                        "spanish": "(muy)",
+                        "english": "very",
+                        "example_de": "Das ist sehr gut.",
+                        "example_es": "Eso es muy bueno.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "so",
+                        "emoji": "🤏",
+                        "spanish": "(así/tan)",
+                        "english": "so / that",
+                        "example_de": "Warum bist du so?",
+                        "example_es": "¿Por qué eres así?",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "auch",
+                        "emoji": "➕",
+                        "spanish": "(también)",
+                        "english": "also / too",
+                        "example_de": "Ich komme auch.",
+                        "example_es": "Yo también vengo.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "nur",
+                        "emoji": "1️⃣",
+                        "spanish": "(solo)",
+                        "english": "only / just",
+                        "example_de": "Ich habe nur 5 Euro.",
+                        "example_es": "Solo tengo 5 euros.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "gern",
+                        "emoji": "❤️",
+                        "spanish": "(con gusto / gusta)",
+                        "english": "gladly / like to",
+                        "example_de": "Ich spiele gern Fußball.",
+                        "example_es": "Me gusta jugar al fútbol.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "leider",
+                        "emoji": "😞",
+                        "spanish": "(desafortunadamente)",
+                        "english": "unfortunately",
+                        "example_de": "Leider habe ich keine Zeit.",
+                        "example_es": "Desafortunadamente no tengo tiempo.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "vielleicht",
+                        "emoji": "🤷",
+                        "spanish": "(quizás)",
+                        "english": "maybe / perhaps",
+                        "example_de": "Vielleicht komme ich später.",
+                        "example_es": "Quizás venga más tarde.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "hoffentlich",
+                        "emoji": "🤞",
+                        "spanish": "(ojalá)",
+                        "english": "hopefully",
+                        "example_de": "Hoffentlich regnet es nicht.",
+                        "example_es": "Ojalá no llueva.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "wirklich",
+                        "emoji": "❗",
+                        "spanish": "(realmente/de verdad)",
+                        "english": "really",
+                        "example_de": "Bist du wirklich sicher?",
+                        "example_es": "¿Estás realmente seguro?",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "fast",
+                        "emoji": "🤏",
+                        "spanish": "(casi)",
+                        "english": "almost",
+                        "example_de": "Ich bin fast fertig.",
+                        "example_es": "Estoy casi listo.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "kaum",
+                        "emoji": "📉",
+                        "spanish": "(apenas)",
+                        "english": "barely / hardly",
+                        "example_de": "Ich kann dich kaum hören.",
+                        "example_es": "Apenas puedo oírte.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "außerdem",
+                        "emoji": "➕",
+                        "spanish": "(además)",
+                        "english": "besides / also",
+                        "example_de": "Er ist nett und außerdem reich.",
+                        "example_es": "Él es amable y además rico.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "allerdings",
+                        "emoji": "☝️",
+                        "spanish": "(ciertamente/sin embargo)",
+                        "english": "however / certainly",
+                        "example_de": "Das ist allerdings wahr.",
+                        "example_es": "Eso es ciertamente verdad.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "trotzdem",
+                        "emoji": "🛡️",
+                        "spanish": "(a pesar de todo / sin embargo)",
+                        "english": "anyway / nevertheless",
+                        "example_de": "Es regnet, trotzdem gehe ich laufen.",
+                        "example_es": "Llueve, sin embargo voy a correr.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "sogar",
+                        "emoji": "😲",
+                        "spanish": "(incluso)",
+                        "english": "even",
+                        "example_de": "Sogar er hat es verstanden.",
+                        "example_es": "Incluso él lo ha entendido.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "besonders",
+                        "emoji": "⭐",
+                        "spanish": "(especialmente)",
+                        "english": "especially",
+                        "example_de": "Dieser Film ist besonders gut.",
+                        "example_es": "Esta película es especialmente buena.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "zusammen",
+                        "emoji": "👫",
+                        "spanish": "(juntos)",
+                        "english": "together",
+                        "example_de": "Wir kochen zusammen.",
+                        "example_es": "Cocinamos juntos.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "vermutlich",
+                        "emoji": "🤔",
+                        "spanish": "(probablemente)",
+                        "english": "presumably / probably",
+                        "example_de": "Er kommt vermutlich später.",
+                        "example_es": "Probablemente venga más tarde.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "wahrscheinlich",
+                        "emoji": "🎲",
+                        "spanish": "(probablemente)",
+                        "english": "probably",
+                        "example_de": "Es wird wahrscheinlich regnen.",
+                        "example_es": "Probablemente va a llover.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "ganz",
+                        "emoji": "⭕",
+                        "spanish": "(bastante / completamente)",
+                        "english": "quite / completely",
+                        "example_de": "Das ist ganz gut.",
+                        "example_es": "Está bastante bien.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "sonst",
+                        "emoji": "⚠️",
+                        "spanish": "(si no / de lo contrario)",
+                        "english": "otherwise / else",
+                        "example_de": "Beeil dich, sonst verpasst du den Bus.",
+                        "example_es": "Date prisa, si no perderás el autobús.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "eigentlich",
+                        "emoji": "🤔",
+                        "spanish": "(en realidad)",
+                        "english": "actually",
+                        "example_de": "Eigentlich habe ich keine Zeit.",
+                        "example_es": "En realidad no tengo tiempo.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "tatsächlich",
+                        "emoji": "🧐",
+                        "spanish": "(de hecho)",
+                        "english": "indeed / actually",
+                        "example_de": "Das ist tatsächlich wahr.",
+                        "example_es": "Eso es, de hecho, verdad.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "ehrlich",
+                        "emoji": "🤞",
+                        "spanish": "(honestamente - de verdad)",
+                        "english": "honestly",
+                        "example_de": "Ehrlich gesagt, weiß ich es nicht.",
+                        "example_es": "Honestamente, no lo sé.",
+                        "level": "A1-B1"
+                    }
+                ]
+            },
+            {
+                "title": "Zahl",
+                "description": "Adverbios de Cantidad (Veces)",
+                "level": "A1",
+                "colorMain": "#ea580c",
+                "colorPastel": "#ffedd5",
+                "badge": "ZAHL",
+                "emoji": "123",
+                "adverbs": [
+                    {
+                        "word": "einmal",
+                        "emoji": "1️⃣",
+                        "spanish": "(una vez)",
+                        "english": "once",
+                        "example_de": "Ich war einmal in Berlin.",
+                        "example_es": "Fui una vez a Berlín.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "zweimal",
+                        "emoji": "2️⃣",
+                        "spanish": "(dos veces)",
+                        "english": "twice",
+                        "example_de": "Ich habe den Film zweimal gesehen.",
+                        "example_es": "He visto la película dos veces.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "dreimal",
+                        "emoji": "3️⃣",
+                        "spanish": "(tres veces)",
+                        "english": "three times",
+                        "example_de": "Klopf bitte dreimal.",
+                        "example_es": "Toca tres veces, por favor.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "viermal",
+                        "emoji": "4️⃣",
+                        "spanish": "(cuatro veces)",
+                        "english": "four times",
+                        "example_de": "Wir waren schon viermal dort.",
+                        "example_es": "Ya hemos estado allí cuatro veces.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "fünfmal",
+                        "emoji": "5️⃣",
+                        "spanish": "(cinco veces)",
+                        "english": "five times",
+                        "example_de": "Ich habe dich fünfmal angerufen.",
+                        "example_es": "Te he llamado cinco veces.",
+                        "level": "A1"
+                    }
+                ]
+            },
+            {
+                "title": "Ordinalzahlen",
+                "description": "Adverbios de Orden / Enumeración",
+                "level": "A2",
+                "colorMain": "#22C55E",
+                "colorPastel": "#dcfce7",
+                "badge": "ORDINAL",
+                "emoji": "🔢",
+                "adverbs": [
+                    {
+                        "word": "erstens",
+                        "emoji": "🥇",
+                        "spanish": "(en primer lugar)",
+                        "english": "firstly",
+                        "example_de": "Erstens habe ich keine Zeit.",
+                        "example_es": "En primer lugar, no tengo tiempo.",
+                        "level": "A2"
+                    },
+                    {
+                        "word": "zweitens",
+                        "emoji": "🥈",
+                        "spanish": "(en segundo lugar)",
+                        "english": "secondly",
+                        "example_de": "Zweitens ist es zu teuer.",
+                        "example_es": "En segundo lugar, es demasiado caro.",
+                        "level": "A2"
+                    },
+                    {
+                        "word": "drittens",
+                        "emoji": "🥉",
+                        "spanish": "(en tercer lugar)",
+                        "english": "thirdly",
+                        "example_de": "Drittens will ich nicht.",
+                        "example_es": "En tercer lugar, no quiero.",
+                        "level": "A2"
+                    },
+                    {
+                        "word": "viertens",
+                        "emoji": "4️⃣",
+                        "spanish": "(en cuarto lugar)",
+                        "english": "fourthly",
+                        "example_de": "Viertens müssen wir sparen.",
+                        "example_es": "En cuarto lugar, tenemos que ahorrar.",
+                        "level": "A2"
+                    },
+                    {
+                        "word": "fünftens",
+                        "emoji": "5️⃣",
+                        "spanish": "(en quinto lugar)",
+                        "english": "fifthly",
+                        "example_de": "Fünftens ist es schon spät.",
+                        "example_es": "En quinto lugar, ya es tarde.",
+                        "level": "A2"
+                    }
                 ]
             }
         ];
@@ -946,8 +1633,8 @@
                     const tableHTML = `
                         <thead>
                             <tr>
-                                <th>${currentLang === 'es' ? 'Alemán / Español' : 'German / English'}</th>
-                                <th>${currentLang === 'es' ? 'Ejemplo' : 'Example'}</th>
+                                <th>${currentLang === 'es' ? 'Alemán' : 'German'}</th>
+                                <th>${currentLang === 'es' ? 'Traducción' : 'Translation'}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -990,18 +1677,16 @@
             }
 
             return `
-                <tr>
-                    <td>
-                        <div class="german-word" onclick="speak('${adv.word}')" title="Escuchar">
-                            ${displayWord} <span class="audio-icon">🔊</span>
-                        </div>
-                        <div class="spanish-word" style="font-style:italic; color:var(--text-muted);">${displayTrans}</div>
-                    </td>
-                    <td class="example-clickable" onclick="openModal('${adv.word}', '${group.badge}')">
-                        <div style="font-weight:600; color:var(--text-main);">${adv.example_de}</div>
-                        <div class="example-trans">${adv.example_es}</div>
-                    </td>
-                </tr>
+            <tr onclick="openModal('${adv.word}', '${group.badge}')" style="cursor:pointer; transition: background-color 0.2s;">
+                <td>
+                    <div class="german-word" onclick="event.stopPropagation(); speak('${adv.word}')" title="Escuchar">
+                        ${displayWord} <span class="audio-icon">🔊</span>
+                    </div>
+                </td>
+                <td class="spanish-word" style="font-style:italic; color:var(--text-muted); font-size:1rem;">
+                    ${displayTrans}
+                </td>
+            </tr>
             `;
         }
 
@@ -1010,7 +1695,9 @@
                 'TEMPORAL': '⏰',
                 'FREQUENZ': '🔄',
                 'LOKAL': '📍',
-                'MODAL': '💡'
+                'MODAL': '💡',
+                'ZAHL': '🔢',
+                'ORDINAL': '🥇'
             };
             return icons[badge] || '📝';
         }
@@ -1116,7 +1803,7 @@
                         <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Bastante</td>
                         <td style="padding: 12px; font-style: italic; opacity: 0.8; border-bottom: 1px solid var(--border-color);">Quite / Pretty</td>
                         <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Modifica a un adjetivo. Indica un grado medio.</td>
-                        <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">
+                        <td style="padding: 12px; bordpx solid var(--border-color);">
                             <div style="font-weight:bold; cursor:pointer; color: var(--text-main);" onclick="speak('Das ist ganz gut.')">Das ist ganz gut. <span class="audio-icon">🔊</span></div>
                             <div style="font-style:italic; opacity:0.7;">(Está bastante bien).</div>
                         </td>
@@ -1149,6 +1836,14 @@
 
             document.getElementById('modalEmoji').textContent = foundAdverb.emoji;
             document.getElementById('modalWord').textContent = foundAdverb.word;
+
+            const levelBadge = document.getElementById('modalLevel');
+            if (foundAdverb.level) {
+                levelBadge.textContent = foundAdverb.level;
+                levelBadge.style.display = 'inline-block';
+            } else {
+                levelBadge.style.display = 'none';
+            }
             document.getElementById('modalTranslation').textContent = foundAdverb.spanish;
             document.getElementById('modalExampleDe').textContent = foundAdverb.example_de;
             document.getElementById('modalExampleEs').textContent = foundAdverb.example_es;
