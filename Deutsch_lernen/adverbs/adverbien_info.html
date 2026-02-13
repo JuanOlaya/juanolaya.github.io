@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deutsche Adverbien - Info (A1-B1)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="../images/german_flag.png" type="image/png">
+    <style>
+        :root {
+            /* --- DEFAULT DARK MODE PALETTE --- */
+            --bg-color: #0f172a;
+            /* Slate 900 */
+            --card-bg: #1e293b;
+            /* Slate 800 */
+            --header-bg: #020617;
+            /* Slate 950 */
+            --section-bg: #0f172a;
+            /* Slate 900 */
+            --rule-bg: linear-gradient(135deg, #0f172a 0%, #0c4a6e 100%);
+            --text-main: #f1f5f9;
+            /* Slate 100 */
+            --text-muted: #94a3b8;
+            /* Slate 400 */
+            --border-color: #334155;
+            /* Slate 700 */
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --glow-strength: 20px;
+            --accent-green: #22c55e;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* --- LIGHT MODE OVERRIDES --- */
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --section-bg: #e2e8f0;
+            --rule-bg: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --accent-green: #059669;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --glow-strength: 0px;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 80px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        header {
+            background: var(--header-bg);
+            padding: 40px 30px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-green);
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: var(--accent-green);
+            text-shadow: 0 0 var(--glow-strength) rgba(0, 255, 161, 0.3);
+            text-transform: uppercase;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            /* Changed from right to left for back button logic */
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            text-decoration: none;
+            /* Make it look like button even if anchor */
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        /* --- CONTENT STYLES --- */
+        .content-body {
+            padding: 40px;
+            line-height: 1.6;
+        }
+
+        .info-title {
+            font-weight: 800;
+            font-size: 1.5rem;
+            /* Slightly larger than modal */
+            color: var(--accent-green);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+            /* Spacing between sections */
+        }
+
+        .info-title:first-child {
+            margin-top: 0;
+        }
+
+        .info-section {
+            margin-bottom: 30px;
+        }
+
+        .info-bullet {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 3px solid var(--accent-green);
+            font-size: 1.1rem;
+            /* Better readability */
+        }
+
+        .rule-example {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.05rem;
+        }
+
+        .check-icon {
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        /* --- VISUAL GUIDE STYLES FROM MODAL --- */
+        .visual-guide-section {
+            padding: 30px 40px;
+            background: var(--section-bg);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+            border-radius: 16px;
+            /* Added radius for contained look */
+        }
+
+        .guide-title {
+            text-align: center;
+            color: var(--text-muted);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .position-cards {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .pos-card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 450px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .pos-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pos-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+            /* Default glow */
+        }
+
+        .pos-name {
+            font-weight: 800;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.3rem;
+            color: var(--text-main);
+        }
+
+        .pos-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .syntax-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body class="lang-es">
+
+    <div class="container">
+        <header>
+            <a href="adverbien.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Zurück
+            </a>
+            <h1>Deutsche Adverbien - <span style="font-size: 0.8em; opacity: 0.8;">Info</span></h1>
+        </header>
+
+        <div class="content-body">
+
+            <!-- 1. VERB POSITION GUIDE (MOVED TO TOP) -->
+            <div class="visual-guide-section">
+                <div class="guide-title">
+                    <i class="fas fa-random" style="color:var(--accent-green);"></i> Wortstellung: Wo steht das Verb?
+                </div>
+                <div class="position-cards">
+
+                    <!-- Position 1 (Inversion) -->
+                    <div class="pos-card pos-1">
+                        <div
+                            style="position:absolute; top:0; left:0; width:100%; height:5px; background:var(--accent-green);">
+                        </div>
+                        <span class="pos-icon" style="color: var(--accent-green);">1️⃣</span>
+                        <span class="pos-name">Inversion (Position 1)</span>
+                        <span class="pos-desc">Adverb am Anfang <br>→ <strong
+                                style="color:var(--accent-green);">Verb</strong> kommt sofort!</span>
+
+                        <div class="syntax-box">
+                            <span
+                                style="color:var(--accent-green); font-weight:bold; border-bottom:2px solid var(--accent-green);">Heute</span>
+                            + <span
+                                style="color:var(--text-main); font-weight:bold; background:rgba(255,255,255,0.1); padding:2px 5px; border-radius:4px;">lerne</span>
+                            + ich...
+                        </div>
+                        <div
+                            style="margin-top:15px; font-size:0.9rem; color:var(--text-muted); line-height:1.4; border-top:1px solid var(--border-color); padding-top:10px;">
+                            <strong style="color:var(--accent-green);">Muy común (40-50%)</strong><br>
+                            Se usa para <strong>enfatizar</strong> el adverbio o conectar con la frase anterior.
+                        </div>
+                    </div>
+
+                    <!-- Middle Position -->
+                    <div class="pos-card pos-middle">
+                        <div style="position:absolute; top:0; left:0; width:100%; height:5px; background:#f59e0b;">
+                        </div>
+                        <span class="pos-icon" style="text-shadow:0 0 20px rgba(245,158,11,0.3);">🧩</span>
+                        <span class="pos-name">Satzmitte (Posición Normal)</span>
+                        <span class="pos-desc">Subjekt am Anfang <br>→ Adverb in der Mitte</span>
+
+                        <div class="syntax-box">
+                            Ich + <span
+                                style="color:var(--text-main); font-weight:bold; background:rgba(255,255,255,0.1); padding:2px 5px; border-radius:4px;">lerne</span>
+                            + <span
+                                style="color:#f59e0b; font-weight:bold; border-bottom:2px solid #f59e0b;">heute</span>...
+                        </div>
+                        <div
+                            style="margin-top:15px; font-size:0.9rem; color:var(--text-muted); line-height:1.4; border-top:1px solid var(--border-color); padding-top:10px;">
+                            <strong style="color:#f59e0b;">Estándar / Neutro</strong><br>
+                            Es la estructura básica sin énfasis especial.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 2. GENERAL INFO (BELOW) -->
+            <div class="info-title">🤔 ¿Qué es un Adverbio?</div>
+            <div class="info-section">
+                <div class="info-bullet">Son palabras que describen <strong>cuándo, dónde, cómo o con qué
+                        frecuencia</strong> ocurre algo.</div>
+                <div class="info-bullet"><strong>🚫 No se conjugan:</strong> A diferencia de los verbos, los adverbios
+                    son invariables. No cambian por persona, número o tiempo.</div>
+                <div class="info-bullet">Modifican a un verbo, a un adjetivo o a otro adverbio.</div>
+            </div>
+
+            <div class="info-title">💡 La Regla de Oro: Posición en la Frase</div>
+            <div class="info-section">
+                <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                    En alemán, el adverbio es muy flexible. Puede ir al principio o en medio, pero <strong>el verbo
+                        SIEMPRE debe ser el segundo elemento</strong>.
+                </p>
+
+                <!-- Group 1: Heute -->
+                <div
+                    style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                    <div
+                        style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">
+                        Ejemplo 1: Hoy (Heute)</div>
+                    <div style="display: grid; gap: 10px;">
+                        <div class="rule-example">
+                            <span class="check-icon">✅</span>
+                            <span><strong style="color: var(--accent-green);">Heute</strong> gehe ich nach Hause.</span>
+                        </div>
+                        <div
+                            style="font-size: 0.85rem; color: var(--text-muted); padding-left: 35px; margin-bottom: 10px;">
+                            (Adverbio en Posición 1 → Verbo en Posición 2)</div>
+
+                        <div class="rule-example">
+                            <span class="check-icon">✅</span>
+                            <span>Ich gehe <strong style="color: var(--accent-green);">heute</strong> nach Hause.</span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); padding-left: 35px;">(Sujeto en
+                            Posición 1 → Verbo en Posición 2)</div>
+                    </div>
+                </div>
+
+                <!-- Group 2: Morgen -->
+                <div
+                    style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+                    <div
+                        style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">
+                        Ejemplo 2: Mañana (Morgen)</div>
+                    <div style="display: grid; gap: 10px;">
+                        <div class="rule-example">
+                            <span class="check-icon">✅</span>
+                            <span><strong style="color: var(--accent-green);">Morgen</strong> habe ich frei.</span>
+                        </div>
+                        <div class="rule-example">
+                            <span class="check-icon">✅</span>
+                            <span>Ich habe <strong style="color: var(--accent-green);">morgen</strong> frei.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 3: Oft -->
+                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px;">
+                    <div
+                        style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">
+                        Ejemplo 3: A menudo (Oft)</div>
+                    <div style="display: grid; gap: 10px;">
+                        <div class="rule-example">
+                            <span class="check-icon">✅</span>
+                            <span><strong style="color: var(--accent-green);">Oft</strong> besuche ich meine
+                                Eltern.</span>
+                        </div>
+                        <div class="rule-example">
+                            <span class="check-icon">✅</span>
+                            <span>Ich besuche <strong style="color: var(--accent-green);">oft</strong> meine
+                                Eltern.</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="infoStats"
+                style="margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+                <!-- Could add stats here if passed via URL params or local storage, omitted for now -->
+            </div>
+
+        </div> <!-- End Content Body -->
+
+        <footer>
+            <p>© 2024 Juan Olaya - Deutsch Lernen</p>
+        </footer>
+    </div>
+
+    <script>
+        // Use user's preferred theme from localStorage if available
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+    </script>
+</body>
+
+</html>
