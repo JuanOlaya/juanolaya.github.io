@@ -388,7 +388,8 @@
 
         .german-word {
             font-weight: 700;
-            color: var(--accent-green);
+            color: #F8FAFC;
+            /* Slate 50 - High Contrast White */
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -412,7 +413,8 @@
         }
 
         .spanish-word {
-            color: var(--text-muted);
+            color: #E6EEF5;
+            /* Custom 'Slate 180' approximation (Light Grey-Blue) */
             font-size: 0.9rem;
             margin-top: 4px;
             font-style: italic;
@@ -1716,14 +1718,8 @@
                     content.className = 'level-content';
 
                     const tableHTML = `
-                        <thead>
-                            <tr>
-                                <th>${currentLang === 'es' ? 'Alemán' : 'German'}</th>
-                                <th>${currentLang === 'es' ? 'Traducción' : 'Translation'}</th>
-                            </tr>
-                        </thead>
                         <tbody>
-                            ${chunk.map(adv => createRow(adv, group, query)).join('')}
+                            ${chunk.map((adv, index) => createRow(adv, group, query, index)).join('')}
                         </tbody>
                     `;
 
@@ -1748,7 +1744,7 @@
             );
         }
 
-        function createRow(adv, group, query) {
+        function createRow(adv, group, query, index) {
             // Determine Translation
             const translation = currentLang === 'es' ? adv.spanish : (adv.english || '-');
             let displayTrans = translation.replace(/[()]/g, '');
@@ -1761,14 +1757,17 @@
                 displayTrans = highlightMatch(displayTrans, query);
             }
 
+            // Only show speaker icon for the first item in the chunk (index === 0)
+            const speakerIcon = index === 0 ? '<span class="audio-icon">🔊</span>' : '';
+
             return `
             <tr onclick="openModal('${adv.word}', '${group.badge}')" style="cursor:pointer; transition: background-color 0.2s;">
                 <td>
                     <div class="german-word" onclick="event.stopPropagation(); speak('${adv.word}')" title="Escuchar">
-                        ${displayWord} <span class="audio-icon">🔊</span>
+                        ${displayWord} ${speakerIcon}
                     </div>
                 </td>
-                <td class="spanish-word" style="font-style:italic; color:var(--text-muted); font-size:1rem;">
+                <td class="spanish-word" style="font-style:italic; font-size:1rem;">
                     ${displayTrans}
                 </td>
             </tr>
