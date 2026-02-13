@@ -26,6 +26,8 @@
 
             --modal-overlay: rgba(0, 0, 0, 0.75);
             --accent-gold: #f59e0b;
+            --accent-green: #00ffa1;
+            /* Neon Mint for Design System */
         }
 
         * {
@@ -58,6 +60,7 @@
             margin: 0 0 10px 0;
             background: linear-gradient(to right, #facc15, #f59e0b);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 800;
         }
@@ -150,22 +153,47 @@
             opacity: 0.5;
         }
 
+        /* --- STANDARD CARD DESIGN COLORS --- */
+        /* German Word: Mint */
+        .noun-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #CBF6DB;
+            /* Pale Mint Green from Design System */
+            white-space: nowrap;
+        }
+
+        /* Translation: Slate-White */
+        .col-trans {
+            color: #F3F4F7;
+            /* Off-White / Slate 50 from Design System */
+            font-style: italic;
+            font-size: 0.95rem;
+            text-align: right;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .col-trans:hover {
+            color: white;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+
+        /* Article Colors (kept distinct for meaning, but softened if needed or integrated) */
+        /* ... existing article colors ... */
+
+        /* MODAL STYLES aligned with Adverb Design */
+        /* ... (modal styles handled separately or below) ... */
+
         /* Table Styles */
         .word-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .word-table th {
-            text-align: left;
-            padding: 12px 20px;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid var(--border-color);
-            background: rgba(255, 255, 255, 0.02);
-        }
+        /* REMOVED thead blocks per Design System */
+
 
         .word-table tr {
             /* Removed row-wide pointer since interactions are split */
@@ -200,15 +228,8 @@
         }
 
         /* Audio visual hint on hover */
-        .col-word:hover::after {
-            content: "🔊";
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
+        /* Audio visual hint on hover REMOVED per design system */
+        /* .col-word:hover::after { content: "🔊"; ... } */
 
         .word-wrapper {
             display: flex;
@@ -309,8 +330,10 @@
             width: 90%;
             max-width: 500px;
             border-radius: 20px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--accent-green);
+            /* Updated per Design System */
+            box-shadow: 0 0 30px rgba(0, 255, 161, 0.2);
+            /* Neon Glow */
             transform: translateY(20px);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             overflow: hidden;
@@ -440,8 +463,8 @@
             }
 
             /* .col-trans {
-                display: none;
-            } - User requested to show translation */
+    display: none;
+    } - User requested to show translation */
 
             .word-table td {
                 padding: 12px 10px;
@@ -613,16 +636,12 @@
             // Table
             const table = document.createElement('table');
             table.className = 'word-table';
-            table.innerHTML = `<thead>
-                <tr>
-                    <th>Wort (DE)</th>
-                    <th class="col-trans">Übersetzung (ES)</th>
-                </tr>
-            </thead>`;
+            // REMOVED thead generation per Design System
+            // table.innerHTML = `<thead>...</thead>`;
 
             const tbody = document.createElement('tbody');
 
-            cat.items.forEach(item => {
+            cat.items.forEach((item, index) => {
                 const artClass = getArtClass(item.art);
                 const tr = document.createElement('tr');
                 tr.className = artClass;
@@ -640,11 +659,15 @@
                     e.stopPropagation();
                     speak(speechText);
                 };
+
+                // Speaker Icon Logic: Only on first item (index === 0)
+                const speakerIcon = index === 0 ? '<span style="margin-left:8px; font-size:0.9rem; vertical-align:middle;">🔊</span>' : '';
+
                 tdWord.innerHTML = `
                     <div class="word-wrapper">
                         <span class="article-dot"></span>
                         <span class="article-text">${item.art.split(' ')[0]}</span>
-                        <span class="noun-text">${item.w}</span>
+                        <span class="noun-text">${item.w} ${speakerIcon}</span>
                     </div>
                 `;
 
