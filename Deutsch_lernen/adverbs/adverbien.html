@@ -635,101 +635,7 @@
 
 <body class="lang-es">
 
-    <!-- Info Modal -->
-    <div id="infoModal" class="modal-overlay" onclick="closeModal('infoModal', event)">
-        <div class="modal-content" style="max-width: 650px;" onclick="event.stopPropagation()">
-            <header class="modal-header" style="background: var(--header-bg);">
-                <span
-                    style="color:white; font-weight:bold; font-size:1.1rem; display:flex; align-items:center; gap:10px;">
-                    <i class="fas fa-info-circle" style="color:var(--accent-green);"></i> Regla de Oro
-                </span>
-                <button class="close-modal" onclick="closeModal('infoModal')">&times;</button>
-            </header>
-            <div class="modal-body info-content">
-                <div class="info-title">🤔 ¿Qué es un Adverbio?</div>
-                <div class="info-section">
-                    <div class="info-bullet">Son palabras que describen <strong>cuándo, dónde, cómo o con qué
-                            frecuencia</strong> ocurre algo.</div>
-                    <div class="info-bullet"><strong>🚫 No se conjugan:</strong> A diferencia de los verbos, los
-                        adverbios son invariables. No cambian por persona, número o tiempo.</div>
-                    <div class="info-bullet">Modifican a un verbo, a un adjetivo o a otro adverbio.</div>
-                </div>
 
-                <div class="info-title">💡 La Regla de Oro: Posición en la Frase</div>
-                <div class="info-section">
-                    <p style="margin-bottom: 20px;">
-                        En alemán, el adverbio es muy flexible. Puede ir al principio o en medio, pero <strong>el verbo
-                            SIEMPRE debe ser el segundo elemento</strong>.
-                    </p>
-
-                    <!-- Group 1: Heute -->
-                    <div
-                        style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
-                        <div
-                            style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">
-                            Ejemplo 1: Hoy (Heute)</div>
-                        <div style="display: grid; gap: 8px;">
-                            <div class="rule-example" style="margin:0;">
-                                <span class="check-icon">✅</span>
-                                <span><strong style="color: var(--accent-green);">Heute</strong> gehe ich nach
-                                    Hause.</span>
-                            </div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted); padding-left: 30px;">(Adverbio en
-                                Posición 1 → Verbo en Posición 2)</div>
-
-                            <div class="rule-example" style="margin:0;">
-                                <span class="check-icon">✅</span>
-                                <span>Ich gehe <strong style="color: var(--accent-green);">heute</strong> nach
-                                    Hause.</span>
-                            </div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted); padding-left: 30px;">(Sujeto en
-                                Posición 1 → Verbo en Posición 2)</div>
-                        </div>
-                    </div>
-
-                    <!-- Group 2: Morgen -->
-                    <div
-                        style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
-                        <div
-                            style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">
-                            Ejemplo 2: Mañana (Morgen)</div>
-                        <div style="display: grid; gap: 8px;">
-                            <div class="rule-example" style="margin:0;">
-                                <span class="check-icon">✅</span>
-                                <span><strong style="color: var(--accent-green);">Morgen</strong> habe ich frei.</span>
-                            </div>
-                            <div class="rule-example" style="margin:0;">
-                                <span class="check-icon">✅</span>
-                                <span>Ich habe <strong style="color: var(--accent-green);">morgen</strong> frei.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Group 3: Oft -->
-                    <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px;">
-                        <div
-                            style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">
-                            Ejemplo 3: A menudo (Oft)</div>
-                        <div style="display: grid; gap: 8px;">
-                            <div class="rule-example" style="margin:0;">
-                                <span class="check-icon">✅</span>
-                                <span><strong style="color: var(--accent-green);">Oft</strong> besuche ich meine
-                                    Eltern.</span>
-                            </div>
-                            <div class="rule-example" style="margin:0;">
-                                <span class="check-icon">✅</span>
-                                <span>Ich besuche <strong style="color: var(--accent-green);">oft</strong> meine
-                                    Eltern.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div id="infoStats" style="margin-top: 20px; text-align: center;"></div>
-            </div>
-        </div>
-    </div>
     </div>
 
     <!-- Modal Window -->
@@ -766,7 +672,8 @@
                     <span class="icon-sun">☀️</span>
                     <span class="icon-moon">🌔</span>
                 </button>
-                <button class="info-btn" onclick="openInfoModal()" title="Información gramatical">
+                <button class="info-btn" onclick="window.location.href='adverbien_info.html'"
+                    title="Información gramatical">
                     INFO
                 </button>
                 <div class="lang-toggle" onclick="toggleLanguage()">
@@ -782,6 +689,9 @@
             </div>
 
         </header>
+
+
+
 
         <div class="grid-layout" id="cards-container">
             <!-- Cards inserted by JS -->
@@ -1387,6 +1297,15 @@
                         "level": "A1-B1"
                     },
                     {
+                        "word": "deshalb",
+                        "emoji": "👉",
+                        "spanish": "(por eso / por lo tanto)",
+                        "english": "therefore / that's why",
+                        "example_de": "Ich war krank, deshalb war ich nicht da.",
+                        "example_es": "Estaba enfermo, por eso no estuve allí.",
+                        "level": "A1-B1"
+                    },
+                    {
                         "word": "allerdings",
                         "emoji": "☝️",
                         "spanish": "(ciertamente/sin embargo)",
@@ -1830,7 +1749,7 @@
 
         // --- MODAL ---
         const modal = document.getElementById('adverbModal');
-        const infoModal = document.getElementById('infoModal');
+
         const modalHeader = document.getElementById('modalHeader');
 
         function openModal(word, groupBadge) {
@@ -1941,16 +1860,7 @@
             modal.style.display = 'flex';
         }
 
-        function openInfoModal() {
-            // Update Stats
-            const totalAdverbs = adverbGroups.reduce((acc, group) => acc + (group.adverbs ? group.adverbs.length : 0), 0);
-            const statsElement = document.getElementById('infoStats');
-            if (statsElement) {
-                statsElement.innerHTML = `<p style="margin-top:20px; font-size:0.9rem; opacity:0.7;"><strong>Total Adverbs:</strong> ${totalAdverbs}</p>`;
-            }
 
-            infoModal.style.display = 'flex';
-        }
 
         function closeModal(modalId) {
             if (modalId) {
@@ -1966,9 +1876,7 @@
             if (event.target == modal) {
                 closeModal();
             }
-            if (event.target == infoModal) {
-                closeModal('infoModal');
-            }
+
         }
 
         // --- TTS ---
