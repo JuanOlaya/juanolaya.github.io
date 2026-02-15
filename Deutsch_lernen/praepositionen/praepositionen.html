@@ -164,7 +164,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            margin-bottom: 30px;
+            margin-bottom: 5px;
         }
 
         .wechsel-item {
@@ -209,7 +209,7 @@
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            margin-top: auto;
+            margin-top: 5px;
         }
 
         .comparison {
@@ -342,6 +342,8 @@
             animation: slideIn 0.3s ease;
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
+            /* Ensure scroll on content itself */
         }
 
         @keyframes slideIn {
@@ -407,12 +409,22 @@
             color: white;
         }
 
+        .modal-tag {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+            font-weight: 600;
+            display: block;
+        }
+
         .example-container {
             margin-bottom: 15px;
             background: #f8f9fa;
             border-radius: 8px;
             overflow: hidden;
             border-left: 5px solid #ccc;
+            flex-shrink: 0;
+            /* Prevent shrinking if flex container is used */
         }
 
         .example-row {
@@ -517,6 +529,19 @@
             }
         }
     </style>
+    <style>
+        .subtitle-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            /* Slight shadow for depth */
+            text-align: center;
+            font-weight: 500;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+    </style>
 </head>
 
 <body>
@@ -533,7 +558,12 @@
             <div class="column col-acc">
                 <h2 onclick="speak('Akkusativ')" style="cursor: pointer;" title="Escuchar pronunciación">AKKUSATIV</h2>
                 <ul class="prep-list">
-                    <!-- FUDOG ORDER - Toda la palabra coloreada -->
+                    <!-- DESTINATARIO -->
+                    <li style="padding:10px 0 5px 0; text-align:center; margin-bottom:5px;">
+                        <span
+                            style="background:var(--accusative); color:white; padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:bold; display:inline-block;">FÜR
+                            WEN? (DESTINATARIO)</span>
+                    </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
                         <div onclick="speak('für'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
@@ -543,6 +573,13 @@
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
                             <span class="example">Para / Por</span>
                         </div>
+                    </li>
+
+                    <!-- TRÁNSITO / ESPACIAL -->
+                    <li style="padding:15px 0 5px 0; text-align:center; margin-bottom:5px;">
+                        <span
+                            style="background:var(--accusative); color:white; padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:bold; display:inline-block;">WOHIN?
+                            / WODURCH? (TRÁNSITO)</span>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
                         <div onclick="speak('um'); event.stopPropagation()"
@@ -565,16 +602,6 @@
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
-                        <div onclick="speak('ohne'); event.stopPropagation()"
-                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
-                            <span class="acc-word"><span class="fudog-letter">O</span>HNE</span>
-                        </div>
-                        <div onclick="openModal('ohne'); event.stopPropagation()"
-                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Sin</span>
-                        </div>
-                    </li>
-                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
                         <div onclick="speak('gegen'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
                             <span class="acc-word"><span class="fudog-letter">G</span>EGEN</span>
@@ -584,6 +611,30 @@
                             <span class="example">Contra / Hacia</span>
                         </div>
                     </li>
+
+                    <!-- CARENCIA -->
+                    <li style="padding:15px 0 5px 0; text-align:center; margin-bottom:5px;">
+                        <span
+                            style="background:var(--accusative); color:white; padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:bold; display:inline-block;">OHNE
+                            WEN? (CARENCIA)</span>
+                    </li>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('ohne'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            <span class="acc-word"><span class="fudog-letter">O</span>HNE</span>
+                        </div>
+                        <div onclick="openModal('ohne'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Sin</span>
+                        </div>
+                    </li>
+
+                    <!-- LÍMITE -->
+                    <li style="padding:15px 0 5px 0; text-align:center; margin-bottom:5px;">
+                        <span
+                            style="background:var(--accusative); color:white; padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:bold; display:inline-block;">BIS
+                            WANN? (LÍMITE)</span>
+                    </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
                         <div onclick="speak('bis'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
@@ -592,6 +643,16 @@
                         <div onclick="openModal('bis'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
                             <span class="example">Hasta</span>
+                        </div>
+                    </li>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('ins'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            <span class="acc-word">INS</span>
+                        </div>
+                        <div onclick="openModal('ins'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Al (in das - Edificio/Lugar)</span>
                         </div>
                     </li>
                 </ul>
@@ -651,7 +712,7 @@
                         </div>
                         <div onclick="openModal('in'); event.stopPropagation()"
                             style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
-                            <span class="translation">en (dentro)</span>
+                            <span class="translation" style="font-size:0.9em;">En / A (País / Ciudad / Edificio)</span>
                         </div>
                     </div>
                     <div class="wechsel-item" style="cursor: default; padding: 0;">
@@ -713,7 +774,11 @@
                 </div>
 
                 <div class="logic-box">
-                    <h3 style="text-align:center; margin-top:0; color:#555;">¿Cuándo usar cuál?</h3>
+                    <h3 style="text-align:center; margin-top:0; color:#555;">
+                        ¿Cuándo usar cuál?
+                        <br><span style="font-size:0.8em; font-weight:normal; color:var(--two-way);">(Solo
+                            Wechsel)</span>
+                    </h3>
                     <div class="comparison">
                         <!-- Lado Acusativo -->
                         <div class="comp-side comp-acc">
@@ -740,6 +805,13 @@
                             <div style="font-size: 0.85rem; margin-top:5px;">No hay cambio de lugar. Es estático.</div>
                         </div>
                     </div>
+
+                    <div
+                        style="margin-top:15px; font-size:0.85rem; color:#666; font-style:italic; border-top:1px solid #eee; padding-top:10px; text-align:center;">
+                        <strong>¡Cuidado!</strong> Las preposiciones fijas (columna roja) <strong
+                            style="color:var(--dative);">SIEMPRE</strong> van con Dativo, incluso si hay movimiento (ej.
+                        <em>zu</em> o <em>nach</em>).
+                    </div>
                 </div>
             </div>
 
@@ -747,25 +819,11 @@
             <div class="column col-dat">
                 <h2 onclick="speak('Dativ')" style="cursor: pointer;" title="Escuchar pronunciación">DATIV</h2>
                 <ul class="prep-list">
-                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
-                        <div onclick="speak('ab'); event.stopPropagation()"
-                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
-                            AB
-                        </div>
-                        <div onclick="openModal('ab'); event.stopPropagation()"
-                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Desde / A partir de</span>
-                        </div>
-                    </li>
-                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
-                        <div onclick="speak('am'); event.stopPropagation()"
-                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
-                            AM
-                        </div>
-                        <div onclick="openModal('am'); event.stopPropagation()"
-                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">En (días/lugares)</span>
-                        </div>
+                    <!-- ORÍGEN - WOHER? -->
+                    <li style="padding:10px 0 5px 0; text-align:center; margin-bottom:5px;">
+                        <span
+                            style="background:#E74C3C; color:white; padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:bold; display:inline-block;">WOHER?
+                            (ORIGEN)</span>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
                         <div onclick="speak('aus'); event.stopPropagation()"
@@ -774,8 +832,52 @@
                         </div>
                         <div onclick="openModal('aus'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">De (salir) / Hecho de</span>
+                            <span class="example">De (País / Ciudad / Edificio)</span>
                         </div>
+                    </li>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('von'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            VON
+                        </div>
+                        <div onclick="openModal('von'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">De <strong>(Persona / Profesional)</strong></span>
+                        </div>
+                    </li>
+
+                    <!-- DESTINO - WOHIN? -->
+                    <li style="padding:15px 0 5px 0; text-align:center; margin-bottom:5px;">
+                        <span
+                            style="background:#E74C3C; color:white; padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:bold; display:inline-block;">WOHIN?
+                            (DESTINO)</span>
+                    </li>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('nach'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            NACH
+                        </div>
+                        <div onclick="openModal('nach'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Hacia (País sin art. / Ciudad)</span>
+                        </div>
+                    </li>
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('zu zum'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            ZU / ZUM
+                        </div>
+                        <div onclick="openModal('zu'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">Hacia <strong>(Persona / Profesional)</strong> / Propósito</span>
+                        </div>
+                    </li>
+
+                    <!-- POSICIÓN / COMPAÑÍA -->
+                    <li style="padding:15px 0 5px 0; text-align:center; margin-bottom:5px;">
+                        <span
+                            style="background:#E74C3C; color:white; padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:bold; display:inline-block;">WO?
+                            / MIT WEM? (POSICIÓN / COMPAÑÍA)</span>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
                         <div onclick="speak('bei'); event.stopPropagation()"
@@ -784,10 +886,19 @@
                         </div>
                         <div onclick="openModal('bei'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">en / junto a / al lado de / con</span>
+                            <span class="example">En <strong>(Persona / Profesional)</strong></span>
                         </div>
                     </li>
-
+                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
+                        <div onclick="speak('im'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
+                            IM
+                        </div>
+                        <div onclick="openModal('im'); event.stopPropagation()"
+                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
+                            <span class="example">En el (in dem - Edificio/Lugar)</span>
+                        </div>
+                    </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
                         <div onclick="speak('mit'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
@@ -798,15 +909,12 @@
                             <span class="example">Con</span>
                         </div>
                     </li>
-                    <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
-                        <div onclick="speak('nach'); event.stopPropagation()"
-                            style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
-                            NACH
-                        </div>
-                        <div onclick="openModal('nach'); event.stopPropagation()"
-                            style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Hacia / Después</span>
-                        </div>
+
+                    <!-- TIEMPO -->
+                    <li style="padding:15px 0 5px 0; text-align:center; margin-bottom:5px;">
+                        <span
+                            style="background:#E74C3C; color:white; padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:bold; display:inline-block;">WANN?
+                            (TIEMPO)</span>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
                         <div onclick="speak('seit'); event.stopPropagation()"
@@ -815,33 +923,34 @@
                         </div>
                         <div onclick="openModal('seit'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Desde (tiempo)</span>
+                            <span class="example">Desde (hace)</span>
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
-                        <div onclick="speak('von'); event.stopPropagation()"
+                        <div onclick="speak('ab'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
-                            VON
+                            AB
                         </div>
-                        <div onclick="openModal('von'); event.stopPropagation()"
+                        <div onclick="openModal('ab'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">De (origen/propiedad)</span>
+                            <span class="example">A partir de</span>
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
-                        <div onclick="speak('zu zum'); event.stopPropagation()"
+                        <div onclick="speak('am'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
-                            ZU / ZUM
+                            AM
                         </div>
-                        <div onclick="openModal('zu'); event.stopPropagation()"
+                        <div onclick="openModal('am'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Hacia (lugares/personas)</span>
+                            <span class="example">El (Días/Partes del día)</span>
                         </div>
                     </li>
                 </ul>
                 <div
                     style="background:#fdedec; padding:10px; border-radius:5px; font-size:0.9rem; text-align:center; margin-top:auto;">
-                    <strong>Ojo:</strong> "Seit" siempre se usa para algo que empezó en el pasado y sigue hoy.
+                    <strong>Tip:</strong> Memoriza esta melodía: <em>"Aus, bei, mit, nach, seit, von, zu... immer mit
+                        dem Dativ du!"</em>
                 </div>
             </div>
         </div>
@@ -939,6 +1048,7 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeModalBtn()">&times;</span>
             <h2 id="m-title" class="modal-title">TITLE</h2>
+            <div id="m-tag" class="modal-tag"></div>
             <span id="m-type" class="modal-type">TYPE</span>
 
             <div id="m-image-container" style="text-align:center; margin-bottom:15px; display:none;">
@@ -963,6 +1073,8 @@
             'für': {
                 title: 'FÜR',
                 type: 'acc',
+                tag: 'FÜR WEN? (DESTINATARIO)',
+                usage: 'Destinatario / Propósito',
                 examples: [
                     { de: 'Dank für Ihre Hilfe', es: 'Gracias por su ayuda' },
                     { de: 'Das Geschenk ist für dich.', es: 'El regalo es para ti.' },
@@ -976,6 +1088,8 @@
             'um': {
                 title: 'UM',
                 type: 'acc',
+                tag: 'WOHIN? / WODURCH? (TRÁNSITO)',
+                usage: 'Alrededor / Hora Exacta',
                 examples: [
                     { de: 'Wir gehen um das Haus.', es: 'Vamos alrededor de la casa.' },
                     { de: 'Der Film beginnt um 8 Uhr.', es: 'La película empieza a las 8.' },
@@ -988,6 +1102,8 @@
             'durch': {
                 title: 'DURCH',
                 type: 'acc',
+                tag: 'WOHIN? / WODURCH? (TRÁNSITO)',
+                usage: 'A través / Medio',
                 examples: [
                     { de: 'Wir fahren durch den Tunnel.', es: 'Vamos a través del túnel.' },
                     { de: 'Wir spazieren durch den Park.', es: 'Paseamos por el parque.' },
@@ -1000,6 +1116,8 @@
             'ohne': {
                 title: 'OHNE',
                 type: 'acc',
+                tag: 'OHNE WEN? (CARENCIA)',
+                usage: 'Sin / Exclusión',
                 examples: [
                     { de: 'Ich trinke Kaffee ohne Zucker.', es: 'Bebo café sin azúcar.' },
                     { de: 'Ohne dich gehe ich nicht.', es: 'Sin ti no voy.' },
@@ -1012,6 +1130,8 @@
             'gegen': {
                 title: 'GEGEN',
                 type: 'acc',
+                tag: 'WOHIN? / WODURCH? (TRÁNSITO)',
+                usage: 'Contra / Hacia (Tiempo)',
                 examples: [
                     { de: 'Das Auto fährt gegen den Baum.', es: 'El coche choca contra el árbol.' },
                     { de: 'Ich bin gegen den Krieg.', es: 'Estoy en contra de la guerra.' },
@@ -1024,6 +1144,8 @@
             'bis': {
                 title: 'BIS',
                 type: 'acc',
+                tag: 'BIS WANN? (LÍMITE)',
+                usage: 'Hasta (Límite)',
                 examples: [
                     { de: 'Bis später!', es: '¡Hasta luego!' },
                     { de: 'Der Zug fährt bis München.', es: 'El tren va hasta Múnich.' },
@@ -1034,10 +1156,27 @@
                 desc: 'Significa "hasta". Indica un límite temporal o espacial. A menudo se usa sin artículo o seguido de otra preposición (ej. bis zu, bis an).'
             },
 
+            'ins': {
+                title: 'INS (IN DAS)',
+                type: 'acc',
+                tag: 'WOHIN? (DESTINO)',
+                usage: 'al (hacia dentro) (Lugar/Edificio)',
+                examples: [
+                    { de: 'Ich gehe ins Kino.', es: 'Voy al cine.' },
+                    { de: 'Wir steigen ins Auto.', es: 'Subimos al coche.' },
+                    { de: 'Der Ball fällt ins Wasser.', es: 'La pelota cae al agua.' },
+                    { de: 'Gehen wir ins Café?', es: '¿Vamos a la cafetería?' },
+                    { de: 'Komm schnell ins Haus!', es: '¡Entra rápido en casa!' }
+                ],
+                desc: 'Contracción de <strong>in + das</strong> (neutro Akkusativ). Se usa con direcciones hacia lugares/objetos neutros (p.ej. Kino, Auto, Wasser, Haus).<br><br><strong>Resumen A2 (WOHIN?):</strong><br>🏫 <strong>Edificio:</strong> ins Kino / ins Bett'
+            },
+
             // DATIVE
             'ab': {
                 title: 'AB',
                 type: 'dat',
+                tag: 'WANN? (TIEMPO)',
+                usage: 'Origen / Punto de Partida',
                 examples: [
                     { de: 'Ab morgen lerne ich mehr.', es: 'A partir de mañana estudio más.' },
                     { de: 'Wir fliegen ab Frankfurt.', es: 'Volamos desde Frankfurt.' },
@@ -1050,6 +1189,8 @@
             'am': {
                 title: 'AM',
                 type: 'dat',
+                tag: 'WANN? (TIEMPO)',
+                usage: 'El (dias/fechas)',
                 examples: [
                     { de: 'Am Morgen trinke ich Kaffee.', es: 'Por la mañana bebo café.' },
                     { de: 'Wir treffen uns am Kino.', es: 'Nos encontramos en (junto al) el cine.' },
@@ -1062,6 +1203,8 @@
             'aus': {
                 title: 'AUS',
                 type: 'dat',
+                tag: 'WOHER? (ORIGEN)',
+                usage: 'Origen (país/lugar cerrado)',
                 examples: [
                     { de: 'Ich komme aus Spanien.', es: 'Vengo de España.' },
                     { de: 'Er geht aus dem Haus.', es: 'Él sale de la casa.' },
@@ -1069,11 +1212,13 @@
                     { de: 'Sie trinkt aus dem Glas.', es: 'Ella bebe del vaso.' },
                     { de: 'Das weiß ich aus Erfahrung.', es: 'Lo sé por experiencia.' }
                 ],
-                desc: 'Indica procedencia (salir de un lugar cerrado o país) o material del que está hecho algo.'
+                desc: 'Indica procedencia (salir de un lugar cerrado o país) o material del que está hecho algo.<br><br><strong>Resumen A2 (WOHER?):</strong><br>🗺️ <strong>País/Ciudad:</strong> aus Italien / aus Berlin<br>🏫 <strong>Edificio:</strong> aus dem Kino'
             },
             'bei': {
                 title: 'BEI',
                 type: 'dat',
+                tag: 'WO? / MIT WEM? (POSICIÓN / COMPAÑÍA)',
+                usage: 'En casa de / Durante',
                 examples: [
                     { de: 'Ich wohne noch bei meinen Eltern.', es: 'Todavía vivo en casa de mis padres.' },
                     { de: 'Er arbeitet bei Siemens.', es: 'Él trabaja en Siemens.' },
@@ -1082,11 +1227,13 @@
                     { de: 'Beim Kochen höre ich Musik.', es: 'Al cocinar escucho música. (beim = bei dem)' },
                     { de: 'Ich habe kein Geld bei mir.', es: 'No llevo dinero encima.' },
                 ],
-                desc: '<strong>1) en / junto a / al lado de</strong><br>Indica proximidad o presencia.<br><br><strong>2) con (persona, institución, empresa)</strong><br>Muy común para trabajo o servicios.<br><br><strong>3) durante / en (situación, evento)</strong><br>A menudo se usa la contracción <strong>beim</strong> (bei dem).<br><br><strong>Gramática</strong><br>bei + Dativ<br><br><strong>Ejemplos:</strong><br>bei mir / bei dir<br>bei dem Arzt → beim Arzt<br>bei der Arbeit'
+                desc: '<strong>1) en / junto a / al lado de</strong><br>Indica proximidad o presencia.<br><br><strong>2) con (persona, institución, empresa)</strong><br>Muy común para trabajo o servicios.<br><br><strong>3) durante / en (situación, evento)</strong><br>A menudo se usa la contracción <strong>beim</strong> (bei dem).<br><br><strong>Resumen A2 (WO?):</strong><br>👤 <strong>Persona:</strong> bei Maria<br>👨‍⚕️ <strong>Profesional:</strong> beim Arzt'
             },
             'mit': {
                 title: 'MIT',
                 type: 'dat',
+                tag: 'WO? / MIT WEM? (POSICIÓN / COMPAÑÍA)',
+                usage: 'Con (compañía/medio) / Instrumento',
                 examples: [
                     { de: 'Ich fahre mit dem Bus.', es: 'Voy con el autobús (en autobús).' },
                     { de: 'Ich gehe mit meiner Freundin ins Kino.', es: 'Voy con mi amiga al cine.' },
@@ -1099,6 +1246,8 @@
             'nach': {
                 title: 'NACH',
                 type: 'dat',
+                tag: 'WOHIN? (DESTINO)',
+                usage: 'Hacia (ciudades/países)',
                 examples: [
                     { de: 'Wir fliegen nach Berlin.', es: 'Volamos a Berlín.' },
                     { de: 'Nach dem Essen trinke ich Kaffee.', es: 'Después de comer bebo café.' },
@@ -1106,11 +1255,13 @@
                     { de: 'Wir fahren nach Hause.', es: 'Vamos a casa.' },
                     { de: 'Nach meiner Meinung ist das falsch.', es: 'En mi opinión eso está mal.' }
                 ],
-                desc: 'Hacia ciudades o países (sin artículo). También significa "después de" (tiempo).'
+                desc: 'Hacia ciudades o países (sin artículo). También significa "después de" (tiempo).<br><br><strong>Resumen A2 (WOHIN?):</strong><br>🗺️ <strong>País (sin art.):</strong> nach Italien<br>🏙️ <strong>Ciudad:</strong> nach Berlin<br>⚠️ <em>(Hacia casa = nach Hause)</em>'
             },
             'seit': {
                 title: 'SEIT',
                 type: 'dat',
+                tag: 'WANN? (TIEMPO)',
+                usage: 'Desde (hace)',
                 examples: [
                     { de: 'Ich lerne seit einem Jahr Deutsch.', es: 'Estudio alemán desde hace un año.' },
                     { de: 'Seit gestern bin ich krank.', es: 'Desde ayer estoy enfermo.' },
@@ -1123,6 +1274,8 @@
             'von': {
                 title: 'VON',
                 type: 'dat',
+                tag: 'WOHER? (ORIGEN)',
+                usage: 'De (persona/lugar abierto)',
                 examples: [
                     { de: 'Das ist das Auto von meinem Bruder.', es: 'Ese es el coche de mi hermano.' },
                     { de: 'Ich komme gerade vom Arzt.', es: 'Vengo ahora mismo del médico.' },
@@ -1130,19 +1283,36 @@
                     { de: 'Ein Freund von mir.', es: 'Un amigo mío.' },
                     { de: 'Wir sprechen von dem Urlaub.', es: 'Hablamos de las vacaciones.' }
                 ],
-                desc: 'Indica posesión (sustituye al genitivo en el habla cotidiana) u origen desde un punto/persona.'
+                desc: 'Indica posesión (sustituye al genitivo en el habla cotidiana) u origen desde un punto/persona.<br><br><strong>Resumen A2 (WOHER?):</strong><br>👤 <strong>Persona:</strong> von Maria<br>👨‍⚕️ <strong>Profesional:</strong> vom Arzt'
             },
             'zu': {
                 title: 'ZU / ZUM',
                 type: 'dat',
+                tag: 'WOHIN? (DESTINO / PROPÓSITO)',
+                usage: 'Hacia (personas/lugares) / Ocasiones',
                 examples: [
-                    { de: 'Ich gehe zu der (zur) Schule.', es: 'Voy a la escuela.' },
-                    { de: 'Ich gehe zu Thomas.', es: 'Voy a casa de Thomas.' },
-                    { de: 'Zum Geburtstag viel Glück!', es: '¡Felicidades por el cumpleaños!' },
-                    { de: 'Wir fahren zum Bahnhof.', es: 'Vamos a la estación.' },
-                    { de: 'Er ist zu Hause.', es: 'Él está en casa.' }
+                    { de: 'Ich gehe zur Schule.', es: 'Voy a la escuela.' },
+                    { de: 'Kommst du zu mir?', es: '¿Vienes a mi casa?' },
+                    { de: 'Heute gibt es Nudeln zum Mittagessen.', es: 'Hoy hay pasta para comer.' },
+                    { de: 'Zum Geburtstag viel Glück!', es: '¡Felicidades por tu cumpleaños!' },
+                    { de: 'Wir fahren zum Flughafen.', es: 'Vamos al aeropuerto.' }
                 ],
-                desc: 'Movimiento hacia una persona, edificio o lugar específico. También para celebraciones.<br><br><strong>Contracciones:</strong><br><strong>zum</strong> = zu + dem<br><strong>zur</strong> = zu der'
+                desc: 'Indica movimiento hacia <strong>personas o lugares</strong> específicos.<br><br><strong>¡Ojo!</strong> También se usa para <strong>propósitos u ocasiones</strong> (fiestas, comidas).<br>Ej: <em>zum Frühstück</em> (para desayunar).'
+            },
+            'im': {
+                title: 'IM (IN DEM)',
+                type: 'dat',
+                tag: 'WO? / POSICIÓN',
+                usage: 'en (lugar cerrado/tiempo)',
+                examples: [
+                    { de: 'Ich bin im Kino.', es: 'Estoy en el cine.' },
+                    { de: 'Wir sind im Park.', es: 'Estamos en el parque.' },
+                    { de: 'Im Sommer ist es heiß.', es: 'En verano hace calor.' },
+                    { de: 'Der Schlüssel steckt im Schloss.', es: 'La llave está en la cerradura.' },
+                    { de: 'Im Moment habe ich keine Zeit.', es: 'En este momento no tengo tiempo.' }
+                ],
+                desc: 'Contracción de <strong>in + dem</strong> (masc/neutro Dativ). Se usa con lugares cerrados o definidos y partes del tiempo (días, meses, estaciones).<br><br><strong>Resumen A2 (WO?):</strong><br>🏫 <strong>Edificio:</strong> im Kino / im Supermarkt'
+
             },
 
             // WECHSEL
@@ -1192,7 +1362,7 @@
                     { de: 'Sie geht ins Kino. (Akk)', es: 'Ella va al cine.' },
                     { de: 'Wir wohnen in Berlin. (Dat)', es: 'Vivimos en Berlín.' }
                 ],
-                desc: 'Dentro de un espacio cerrado o área definida (parques, calles, edificios). También para tiempo futuro.<br><br><div style="background-color: #f0f7fb; padding: 12px; border-radius: 8px; border-left: 4px solid #3498db;"><strong style="color: #2c3e50;">kommen in</strong> — <em>llegar a (destino)</em><br><div style="font-style: italic; color: #555;">Lís Zug kommt in Hannover an.</div><div style="color: #7f8c8d; font-size: 0.9em; margin-top: 2px; margin-bottom: 8px;">El tren de Lis llega a Hannover.</div><strong style="color: #e74c3c;">diferente de:</strong><br><div style="font-style: italic; color: #555;">Lís Zug kommt aus Hannover.</div><div style="color: #7f8c8d; font-size: 0.9em; margin-top: 2px;">El tren de Lis sale de / viene de Hannover</div></div>'
+                desc: 'Dentro de un espacio cerrado o área definida. También para tiempo futuro.<br><br><strong>Resumen A2 (LUGAR):</strong><br>🗺️ <strong>País (con art.):</strong> in die Schweiz (Wohin) / in der Schweiz (Wo)<br>🏙️ <strong>Ciudad:</strong> in Berlin (Wo)<br>🏫 <strong>Edificio:</strong> ins Kino (Wohin) / im Kino (Wo)'
             },
             'neben': {
                 title: 'NEBEN',
@@ -1372,6 +1542,15 @@
             titleElem.style.cursor = 'pointer';
             titleElem.title = 'Escuchar pronunciación';
 
+            // Tag Logic
+            const tagElem = document.getElementById('m-tag');
+            if (data.tag) {
+                tagElem.textContent = data.tag;
+                tagElem.style.display = 'block';
+            } else {
+                tagElem.style.display = 'none';
+            }
+
             // Image Logic
             const imgContainer = document.getElementById('m-image-container');
             const imgElem = document.getElementById('m-image');
@@ -1417,11 +1596,11 @@
             });
 
             if (data.type === 'acc') {
-                typeElem.textContent = "SOLO ACUSATIVO";
+                typeElem.textContent = "SOLO ACUSATIVO" + (data.usage ? " (" + data.usage.toUpperCase() + ")" : "");
                 typeElem.style.backgroundColor = "var(--accusative)";
                 exampleContainer.style.borderLeftColor = "var(--accusative)";
             } else if (data.type === 'dat') {
-                typeElem.textContent = "SOLO DATIVO";
+                typeElem.textContent = "SOLO DATIVO" + (data.usage ? " (" + data.usage.toUpperCase() + ")" : "");
                 typeElem.style.backgroundColor = "var(--dative)";
                 exampleContainer.style.borderLeftColor = "var(--dative)";
             } else if (data.type === 'gen') {
