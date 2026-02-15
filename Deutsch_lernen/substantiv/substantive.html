@@ -13,11 +13,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f3f4f6;
-            --text-color: #1f2937;
-            --card-bg: #ffffff;
+            --bg-color: #0f172a;
+            /* Slate 900 */
+            --text-color: #e2e8f0;
+            /* Slate 200 */
+            --card-bg: #1e293b;
+            /* Slate 800 */
 
-            /* Article Colors */
+            /* Article Colors (Kept bright for contrast) */
             --color-der: #3b82f6;
             /* Blue */
             --color-die: #ef4444;
@@ -30,7 +33,8 @@
 
         body {
             font-family: 'Nunito', sans-serif;
-            background-color: #d1d5db;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             margin: 0;
             padding: 20px;
             min-height: 100vh;
@@ -46,7 +50,8 @@
         }
 
         h1 {
-            color: #111827;
+            color: #f8fafc;
+            /* Slate 50 */
             margin-bottom: 15px;
             font-size: 3rem;
             font-weight: 800;
@@ -55,11 +60,13 @@
 
         h1 span {
             color: #d97706;
+            /* Amber 600 - kept same */
             border-bottom: 4px solid #d97706;
         }
 
         p.instruction {
-            color: #6b7280;
+            color: #94a3b8;
+            /* Slate 400 */
             font-size: 1.25rem;
         }
 
@@ -86,12 +93,13 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            /* Stronger shadow */
         }
 
         .action-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
         }
 
         /* Active Recall Toggle */
@@ -102,7 +110,8 @@
         }
 
         .switch-label {
-            color: #414A5C;
+            color: #cbd5e1;
+            /* Slate 300 */
             cursor: pointer;
             font-weight: 700;
             text-align: right;
@@ -136,7 +145,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #414A5C;
+            background-color: #334155;
+            /* Slate 700 */
             transition: .4s;
             border-radius: 34px;
         }
@@ -155,7 +165,8 @@
         }
 
         input:not(:checked)+.slider {
-            background-color: #ccc;
+            background-color: #475569;
+            /* Slate 600 */
         }
 
         input:not(:checked)+.slider:before {
@@ -172,34 +183,46 @@
         }
 
         .nav-button {
-            background-color: #111827;
+            background-color: #1e293b;
+            /* Slate 800 */
             color: white;
-            border: none;
+            border: 1px solid #334155;
+            /* Slate 700 */
             padding: 12px 24px;
             border-radius: 12px;
             cursor: pointer;
             font-size: 1.1rem;
             font-weight: 600;
             transition: all 0.3s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .nav-button:hover {
-            background-color: #1f2937;
+            background-color: #334155;
+            /* Slate 700 */
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-color: #475569;
+            /* Slate 600 */
         }
 
         .nav-button:disabled {
-            background-color: #d1d5db;
+            background-color: #0f172a;
+            /* Slate 900 */
+            color: #475569;
+            /* Slate 600 */
+            border-color: #1e293b;
+            /* Slate 800 */
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
         .group-indicator {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #111827;
+            color: #f1f5f9;
+            /* Slate 100 */
             text-align: center;
             min-width: 300px;
         }
@@ -218,7 +241,7 @@
         .card {
             background-color: var(--card-bg);
             border-radius: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
@@ -226,7 +249,8 @@
             overflow: visible;
             display: flex;
             flex-direction: column;
-            border: none;
+            border: 1px solid #334155;
+            /* Slate 700 */
             margin-top: 10px;
         }
 
@@ -275,10 +299,11 @@
             transform: translateY(50%) scale(1.1);
         }
 
-        /* White Body */
+        /* White Body -> Dark Body */
         .card-body {
             position: relative;
-            background-color: white;
+            background-color: transparent;
+            /* Was white */
             padding: 15px 5px 15px 5px;
             display: flex;
             flex-direction: column;
@@ -293,10 +318,11 @@
             display: block;
             font-size: 2.0rem;
             font-weight: 800;
-            color: white;
+            color: #f1f5f9;
+            /* Slate 100 */
             margin-bottom: 0;
             line-height: 1.1;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .article-span {
@@ -311,7 +337,8 @@
         .spanish-meaning {
             display: block;
             font-size: 1.1rem;
-            color: #6b7280;
+            color: #cbd5e1;
+            /* Slate 300 */
             font-weight: 600;
             margin-bottom: 0;
             margin-top: 2px;
@@ -321,7 +348,8 @@
         .english-meaning {
             display: block;
             font-size: 1.0rem;
-            color: #9ca3af;
+            color: #94a3b8;
+            /* Slate 400 */
             font-weight: 500;
             margin-top: 0;
             font-style: italic;
@@ -355,16 +383,20 @@
             padding: 12px 45px 12px 20px;
             font-size: 1rem;
             font-family: 'Inter', sans-serif;
-            border: 2px solid #d1d5db;
+            border: 2px solid #334155;
+            /* Slate 700 */
             border-radius: 12px;
             outline: none;
             transition: all 0.3s;
-            background-color: white;
+            background-color: #1e293b;
+            /* Slate 800 */
+            color: #f1f5f9;
+            /* Slate 100 */
         }
 
         #search-input:focus {
             border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
 
         .search-icon {
@@ -372,7 +404,8 @@
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #6b7280;
+            color: #94a3b8;
+            /* Slate 400 */
             pointer-events: none;
         }
 
@@ -383,7 +416,8 @@
             transform: translateY(-50%);
             background: none;
             border: none;
-            color: #6b7280;
+            color: #94a3b8;
+            /* Slate 400 */
             cursor: pointer;
             font-size: 1.2rem;
             padding: 5px;
@@ -401,7 +435,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
+            /* Darker overlay */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -418,16 +453,20 @@
         }
 
         .modal-content {
-            background-color: white;
+            background-color: #1e293b;
+            /* Slate 800 */
             padding: 0;
             border-radius: 20px;
             width: 90%;
             max-width: 500px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
             transform: scale(0.9);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
             position: relative;
+            border: 1px solid #334155;
+            /* Slate 700 */
+            color: #f1f5f9;
         }
 
         .modal-overlay.visible .modal-content {
@@ -438,7 +477,7 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             border: none;
             color: white;
             font-size: 2rem;
@@ -455,7 +494,7 @@
         }
 
         .modal-close:hover {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .modal-header {
@@ -470,7 +509,7 @@
         }
 
         .level-tag {
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: rgba(0, 0, 0, 0.3);
             color: white;
             padding: 4px 12px;
             border-radius: 20px;
@@ -479,13 +518,13 @@
             margin-bottom: 5px;
             display: inline-block;
             backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .modal-emoji {
             font-size: 4rem;
             margin-bottom: 10px;
-            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
         }
 
         .modal-word {
@@ -498,6 +537,8 @@
             font-size: 1.5rem;
             opacity: 0.9;
             font-weight: 500;
+            color: #cbd5e1;
+            /* Slate 300 */
         }
 
         .modal-section {
@@ -505,22 +546,27 @@
         }
 
         .modal-example {
-            background-color: #f3f4f6;
+            background-color: #0f172a;
+            /* Slate 900 */
             padding: 20px;
             border-radius: 12px;
             text-align: center;
+            border: 1px solid #334155;
+            /* Slate 700 */
         }
 
         .modal-example-de {
             font-size: 1.2rem;
-            color: #1f2937;
+            color: #f1f5f9;
+            /* Slate 100 */
             font-weight: 600;
             margin-bottom: 8px;
         }
 
         .modal-example-es {
             font-size: 1rem;
-            color: #6b7280;
+            color: #94a3b8;
+            /* Slate 400 */
             font-style: italic;
         }
 
@@ -546,24 +592,30 @@
             border: 2px solid transparent;
         }
 
+        /* Tips Cols need adapted backgrounds for dark mode */
+        /* Use darker versions of the previous pastels or semi-transparent */
         .col-der {
             border-color: var(--color-der);
-            background: #eff6ff;
+            background: rgba(59, 130, 246, 0.1);
+            /* Blue tint */
         }
 
         .col-die {
             border-color: var(--color-die);
-            background: #fef2f2;
+            background: rgba(239, 68, 68, 0.1);
+            /* Red tint */
         }
 
         .col-das {
             border-color: var(--color-das);
-            background: #f0fdf4;
+            background: rgba(34, 197, 94, 0.1);
+            /* Green tint */
         }
 
         .col-plural {
             border-color: var(--color-die-plural);
-            background: #f3e8ff;
+            background: rgba(168, 85, 247, 0.1);
+            /* Purple tint */
         }
 
         .tips-title {
@@ -575,17 +627,19 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            color: #f1f5f9;
         }
 
         .tips-subheader {
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: #6b7280;
+            color: #94a3b8;
+            /* Slate 400 */
             font-weight: 700;
             margin-top: 15px;
             margin-bottom: 5px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding-bottom: 2px;
         }
 
@@ -594,6 +648,8 @@
             padding: 0;
             margin: 0;
             text-align: left;
+            color: #cbd5e1;
+            /* Slate 300 */
         }
 
         .tips-list li {
@@ -606,16 +662,18 @@
             display: block;
             text-align: center;
             margin: 20px;
-            color: #6b7280;
+            color: #64748b;
+            /* Slate 500 */
             text-decoration: underline;
         }
 
         /* --- VISUAL GUIDE: WORD ORDER --- */
         .visual-guide-section {
             padding: 30px 40px;
-            background: #e5e7eb;
-            /* Slightly darker than body bg */
-            border-bottom: 1px solid #d1d5db;
+            background: #1e293b;
+            /* Slate 800 */
+            border-bottom: 1px solid #334155;
+            /* Slate 700 */
             margin-bottom: 30px;
             border-radius: 12px;
             max-width: 900px;
@@ -624,8 +682,8 @@
 
         .guide-title {
             text-align: center;
-            color: #4b5563;
-            /* text-muted */
+            color: #cbd5e1;
+            /* Slate 300 */
             font-weight: bold;
             text-transform: uppercase;
             font-size: 0.9rem;
@@ -644,13 +702,14 @@
             flex: 1;
             min-width: 220px;
             background: var(--card-bg);
-            border: 1px solid #d1d5db;
+            border: 1px solid #334155;
+            /* Slate 700 */
             border-radius: 12px;
             padding: 15px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
         }
 
         .pos-card::before {
@@ -688,27 +747,139 @@
             display: block;
             margin-bottom: 5px;
             font-size: 1.1rem;
-            color: #111827;
+            color: #f1f5f9;
+            /* Slate 100 */
         }
 
         .pos-desc {
             font-size: 0.9rem;
-            color: #6b7280;
+            color: #94a3b8;
+            /* Slate 400 */
             display: block;
             margin-bottom: 10px;
             font-weight: 600;
         }
 
         .syntax-box {
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.05);
+            /* Dark theme transparent */
             padding: 8px;
             border-radius: 6px;
             font-family: monospace;
             font-size: 0.9rem;
-            color: #1f2937;
-            border: 1px solid #e5e7eb;
+            color: #e2e8f0;
+            /* Slate 200 */
+            border: 1px solid #334155;
+            /* Slate 700 */
+        }
+
+        /* --- SLATE-MINT THEME (Kompakt View) --- */
+        .level-card {
+            background-color: #1e293b;
+            /* Slate 800 - DARK BG */
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: 1px solid #334155;
+            /* Slate 700 - DARK BORDER */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            /* Reset text align */
+        }
+
+        .level-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            border-color: #475569;
+            /* Slate 600 */
+        }
+
+        .level-header {
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 0.025em;
+        }
+
+        .level-content {
+            padding: 0;
+            flex-grow: 1;
+        }
+
+        .level-content table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .level-content td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #334155;
+            /* Slate 700 */
+        }
+
+        .level-content tr:last-child td {
+            border-bottom: none;
+        }
+
+        .level-content tr:hover {
+            background-color: #334155;
+            /* Slate 700 Hover */
+        }
+
+        .kompakt-german-word {
+            display: block;
+            font-weight: 700;
+            color: #CBF6DB;
+            /* Pale Mint Green - DARK MODE TEXT */
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .kompakt-article {
+            font-size: 0.75em;
+            margin-right: 4px;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        .kompakt-spanish {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            /* Slate 400 */
+            font-style: italic;
+        }
+
+        /* Audio Icon */
+        .audio-icon {
+            color: #e2e8f0;
+            cursor: pointer;
+            margin-left: 6px;
+            opacity: 0.7;
+            font-size: 0.9em;
+            transition: opacity 0.2s;
+        }
+
+        .audio-icon:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Highlight Class */
+        .highlight {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #881337;
+            padding: 0 2px;
+            border-radius: 2px;
         }
     </style>
+
 </head>
 
 <body>
@@ -833,20 +1004,32 @@
                 <span class="slider"></span>
             </label>
         </div>
+        <div class="active-recall-toggle">
+            <label class="switch-label" for="view-toggle">Ansicht: Kompakt</label>
+            <label class="switch">
+                <input type="checkbox" id="view-toggle" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
     </div>
 
     <div id="search-results-info" style="text-align: center; color: #6b7280; margin-bottom: 1rem;"></div>
 
     <!-- Navigation -->
-    <div class="navigation-wrapper">
+    <div class="navigation-wrapper" id="navigation-wrapper">
         <button class="nav-button" id="prev-group-btn">← Vorherige</button>
         <span class="group-indicator" id="group-indicator">Gruppe 1: Essen & Trinken (A1)</span>
         <button class="nav-button" id="next-group-btn">Nächste →</button>
     </div>
 
-    <!-- Cards Container -->
+    <!-- Cards Containers -->
     <div id="cards-container" class="infographic-grid">
-        <!-- Cards loaded via JS -->
+        <!-- Single/Alt Mode Cards loaded via JS -->
+    </div>
+
+    <div id="cards-container-grid" class="infographic-grid"
+        style="display: none; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+        <!-- Kompakt Grid Cards loaded via JS -->
     </div>
 
     <!-- Word Detail Modal -->
@@ -1740,6 +1923,192 @@
 
         // Defer init slightly to ensure script is loaded
         window.addEventListener('DOMContentLoaded', init);
+
+        // --- KOMPAKT VIEW LOGIC ---
+        let isCompactMode = false;
+        const viewToggle = document.getElementById('view-toggle');
+        const gridContainer = document.getElementById('cards-container-grid');
+        const navigationWrapper = document.getElementById('navigation-wrapper');
+
+        // Colors for Compact Cards (cycle through)
+        const compactColors = [
+            '#8b5cf6', // Purple
+            '#ec4899', // Pink
+            '#f59e0b', // Amber
+            '#ea580c', // Orange
+            '#22C55E', // Green
+            '#06b6d4', // Cyan
+            '#3b82f6', // Blue
+            '#6366f1'  // Indigo
+        ];
+
+        function initCompactView() {
+            viewToggle.addEventListener('change', () => {
+                isCompactMode = viewToggle.checked;
+                toggleViewMode();
+            });
+        }
+
+        // Hook into init
+        // Fix: Simply invoke the compact view initializer on DOMContentLoaded
+        // since `init` was already registered with the old reference.
+        window.addEventListener('DOMContentLoaded', () => {
+            // Ensure view matches checkbox state on load (if browser remembers scroll/check)
+            isCompactMode = viewToggle.checked;
+            toggleViewMode();
+            initCompactView();
+        });
+
+        function toggleViewMode() {
+            // clear search filter when toggling to avoid confusion
+            if (searchInput.value.trim() !== '') {
+                searchInput.value = '';
+                clearSearchBtn.classList.remove('visible');
+                searchInfo.textContent = '';
+            }
+
+            if (isCompactMode) {
+                container.style.display = 'none';
+                navigationWrapper.style.display = 'none';
+                gridContainer.style.display = 'grid';
+                renderContentGrid();
+            } else {
+                container.style.display = 'grid'; // Original was flex/grid? "infographic-grid" is grid
+                navigationWrapper.style.display = 'flex';
+                gridContainer.style.display = 'none';
+                renderGroup(currentGroupIndex);
+            }
+        }
+
+        function renderContentGrid(groupsToRender = nounGroups) {
+            gridContainer.innerHTML = '';
+
+            groupsToRender.forEach((group, index) => {
+                const color = compactColors[index % compactColors.length];
+                const nouns = group.nouns;
+
+                // Chunk nouns into groups of 6
+                for (let i = 0; i < nouns.length; i += 6) {
+                    const chunk = nouns.slice(i, i + 6);
+                    const chunkIndex = Math.floor(i / 6) + 1;
+                    const totalChunks = Math.ceil(nouns.length / 6);
+
+                    const titleSuffix = totalChunks > 1 ? ` (${chunkIndex}/${totalChunks})` : '';
+                    const cardTitle = group.title + titleSuffix;
+
+                    const card = createKompaktCard(chunk, cardTitle, color, group.level);
+                    gridContainer.appendChild(card);
+                }
+            });
+        }
+
+        function createKompaktCard(nouns, title, color, level) {
+            const card = document.createElement('div');
+            card.className = 'level-card'; // Reusing class or new one? "level-card" defined in CSS
+
+            // Header
+            const header = document.createElement('div');
+            header.className = 'level-header';
+            header.style.backgroundColor = color;
+            header.textContent = title;
+
+            // Body
+            const content = document.createElement('div');
+            content.className = 'level-content';
+
+            const table = document.createElement('table');
+
+            nouns.forEach((noun, index) => {
+                const tr = document.createElement('tr');
+
+                // Cell 1: German
+                const tdDe = document.createElement('td');
+                const wordSpan = document.createElement('span');
+                wordSpan.className = 'kompakt-german-word';
+                wordSpan.innerHTML = `<span class="article-span kompakt-article">${noun.article}</span>${noun.word}`;
+
+                // Add Speaker Icon to first item ONLY
+                if (index === 0) {
+                    const speaker = document.createElement('span');
+                    speaker.className = 'audio-icon';
+                    speaker.textContent = '🔊';
+                    speaker.onclick = (e) => {
+                        e.stopPropagation();
+                        speak(`${noun.article} ${noun.word}`);
+                    };
+                    wordSpan.appendChild(speaker);
+                }
+
+                // Translation
+                const transSpan = document.createElement('span');
+                transSpan.className = 'kompakt-spanish';
+                transSpan.textContent = noun.translation_es;
+
+                tdDe.appendChild(wordSpan);
+                tdDe.appendChild(transSpan);
+
+                // Click to Open Modal
+                tr.style.cursor = 'pointer';
+                tr.onclick = () => openWordModal(noun, level);
+
+                tr.appendChild(tdDe);
+                table.appendChild(tr);
+            });
+
+            content.appendChild(table);
+            card.appendChild(header);
+            card.appendChild(content);
+
+            return card;
+        }
+
+        // Override handleSearch to support Kompakt Mode
+        const originalHandleSearch = handleSearch;
+        handleSearch = function () {
+            const query = searchInput.value.toLowerCase().trim();
+            clearSearchBtn.classList.toggle('visible', query.length > 0);
+
+            if (!isCompactMode) {
+                // Use original logic for Single Mode
+                originalHandleSearch();
+                return;
+            }
+
+            // Kompakt Mode Search Logic
+            gridContainer.innerHTML = '';
+
+            if (query === '') {
+                renderContentGrid();
+                searchInfo.textContent = '';
+                return;
+            }
+
+            let matchCount = 0;
+            // Filter groups
+            const filteredGroups = [];
+
+            nounGroups.forEach(group => {
+                const matchingNouns = group.nouns.filter(noun => {
+                    const de = noun.word.toLowerCase();
+                    const es = noun.translation_es.toLowerCase();
+                    const en = noun.translation_en.toLowerCase();
+                    return de.includes(query) || es.includes(query) || en.includes(query);
+                });
+
+                if (matchingNouns.length > 0) {
+                    matchCount += matchingNouns.length;
+                    // Create a temporary group object with filtered nouns
+                    filteredGroups.push({
+                        ...group,
+                        nouns: matchingNouns
+                    });
+                }
+            });
+
+            renderContentGrid(filteredGroups);
+            searchInfo.textContent = `${matchCount} Ergebnisse gefunden`;
+        };
+
 
     </script>
 </body>
