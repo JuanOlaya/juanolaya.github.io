@@ -363,6 +363,29 @@
             border-bottom: none;
         }
 
+        /* Interactive Rows */
+        tbody tr {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Prevent wrapping of German word + Tag */
+        td:first-child {
+            white-space: nowrap;
+        }
+
+        .spanish-word {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            white-space: normal;
+            /* Allow translation to wrap if needed */
+            margin-top: 4px;
+        }
+
         /* Tag for Word Order Type */
         .tag {
             display: inline-block;
@@ -419,10 +442,7 @@
             opacity: 1;
         }
 
-        .spanish-word {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+
 
         .example-sent {
             display: block;
@@ -628,6 +648,55 @@
             border-color: var(--accent-green);
             color: var(--accent-green);
         }
+
+        /* Word Modal Styles */
+        .word-modal-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .word-modal-title {
+            font-size: 2.5rem;
+            color: var(--accent-green);
+            margin: 0;
+            font-weight: 800;
+            text-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+        }
+
+        .word-modal-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        .word-modal-body {
+            text-align: center;
+        }
+
+        .word-modal-example {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .word-modal-example p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        .modal-tag {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 
@@ -699,45 +768,49 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Conector / Español</th>
-                                <th>Ejemplo</th>
+                                <th>Conector</th>
+                                <th>Traducción</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="aber" data-tag="Pos 0"
+                                data-tag-class="tag zero" data-trans="pero"
+                                data-example="Ich bin müde, <strong>aber</strong> ich arbeite.">
                                 <td>
                                     <div class="german-word">aber</div> <span class="tag zero">Pos 0</span>
-                                    <div class="spanish-word">pero</div>
                                 </td>
-                                <td>Ich bin müde, <strong>aber</strong> ich arbeite.</td>
+                                <td>pero</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="denn" data-tag="Pos 0"
+                                data-tag-class="tag zero" data-trans="pues / porque"
+                                data-example="Ich esse, <strong>denn</strong> ich habe Hunger.">
                                 <td>
                                     <div class="german-word">denn</div> <span class="tag zero">Pos 0</span>
-                                    <div class="spanish-word">pues / porque</div>
                                 </td>
-                                <td>Ich esse, <strong>denn</strong> ich habe Hunger.</td>
+                                <td>pues / porque</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="und" data-tag="Pos 0" data-tag-class="tag zero"
+                                data-trans="y" data-example="Er liest <strong>und</strong> sie schläft.">
                                 <td>
                                     <div class="german-word">und</div> <span class="tag zero">Pos 0</span>
-                                    <div class="spanish-word">y</div>
                                 </td>
-                                <td>Er liest <strong>und</strong> sie schläft.</td>
+                                <td>y</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="sondern" data-tag="Pos 0"
+                                data-tag-class="tag zero" data-trans="sino (tras negación)"
+                                data-example="Nicht Kaffee, <strong>sondern</strong> Tee.">
                                 <td>
                                     <div class="german-word">sondern</div> <span class="tag zero">Pos 0</span>
-                                    <div class="spanish-word">sino (tras negación)</div>
                                 </td>
-                                <td>Nicht Kaffee, <strong>sondern</strong> Tee.</td>
+                                <td>sino (tras negación)</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="oder" data-tag="Pos 0"
+                                data-tag-class="tag zero" data-trans="o"
+                                data-example="Kaffee <strong>oder</strong> Tee?">
                                 <td>
                                     <div class="german-word">oder</div> <span class="tag zero">Pos 0</span>
-                                    <div class="spanish-word">o</div>
                                 </td>
-                                <td>Kaffee <strong>oder</strong> Tee?</td>
+                                <td>o</td>
                             </tr>
                         </tbody>
                     </table>
@@ -754,50 +827,50 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Conector / Español</th>
-                                <th>Ejemplo</th>
+                                <th>Conector</th>
+                                <th>Traducción</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="weil" data-tag="Final" data-tag-class="tag end"
+                                data-trans="porque"
+                                data-example="... <strong>weil</strong> ich Hunger <span class='german-word' style='font-size:0.9em'>habe</span>.">
                                 <td>
                                     <div class="german-word">weil</div> <span class="tag end">Final</span>
-                                    <div class="spanish-word">porque</div>
                                 </td>
-                                <td>... <strong>weil</strong> ich Hunger <span class="german-word"
-                                        style="font-size:0.9em">habe</span>.</td>
+                                <td>porque</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="damit" data-tag="Final"
+                                data-tag-class="tag end" data-trans="para que"
+                                data-example="Ich lerne, <strong>damit</strong> ich besser <span class='german-word' style='font-size:0.9em'>werde</span>.">
                                 <td>
                                     <div class="german-word">damit</div> <span class="tag end">Final</span>
-                                    <div class="spanish-word">para que</div>
                                 </td>
-                                <td>Ich lerne, <strong>damit</strong> ich besser <span class="german-word"
-                                        style="font-size:0.9em">werde</span>.</td>
+                                <td>para que</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="dass" data-tag="Final" data-tag-class="tag end"
+                                data-trans="que (conector)"
+                                data-example="Ich weiß, <strong>dass</strong> es spät <span class='german-word' style='font-size:0.9em'>ist</span>.">
                                 <td>
                                     <div class="german-word">dass</div> <span class="tag end">Final</span>
-                                    <div class="spanish-word">que (conector)</div>
                                 </td>
-                                <td>Ich weiß, <strong>dass</strong> es spät <span class="german-word"
-                                        style="font-size:0.9em">ist</span>.</td>
+                                <td>que (conector)</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="wenn" data-tag="Final" data-tag-class="tag end"
+                                data-trans="si (condicional/temp)"
+                                data-example="<strong>Wenn</strong> ich Zeit <span class='german-word' style='font-size:0.9em'>habe</span>, komme ich.">
                                 <td>
                                     <div class="german-word">wenn</div> <span class="tag end">Final</span>
-                                    <div class="spanish-word">si (condicional/temp)</div>
                                 </td>
-                                <td><strong>Wenn</strong> ich Zeit <span class="german-word"
-                                        style="font-size:0.9em">habe</span>, komme ich.</td>
+                                <td>si (condicional/temp)</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="als" data-tag="Final" data-tag-class="tag end"
+                                data-trans="cuando (pasado único)"
+                                data-example="<strong>Als</strong> ich Kind <span class='german-word' style='font-size:0.9em'>war</span>...">
                                 <td>
                                     <div class="german-word">als</div> <span class="tag end">Final</span>
-                                    <div class="spanish-word">cuando (pasado único)</div>
                                 </td>
-                                <td><strong>Als</strong> ich Kind <span class="german-word"
-                                        style="font-size:0.9em">war</span>...</td>
+                                <td>cuando (pasado único)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -814,42 +887,42 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Conector / Español</th>
-                                <th>Ejemplo</th>
+                                <th>Conector</th>
+                                <th>Traducción</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="deshalb" data-tag="Pos 1"
+                                data-tag-class="tag inv" data-trans="por eso"
+                                data-example="Er ist krank, <strong>deshalb</strong> <span class='german-word' style='font-size:0.9em'>bleibt</span> er hier.">
                                 <td>
                                     <div class="german-word">deshalb</div> <span class="tag inv">Pos 1</span>
-                                    <div class="spanish-word">por eso</div>
                                 </td>
-                                <td>Er ist krank, <strong>deshalb</strong> <span class="german-word"
-                                        style="font-size:0.9em">bleibt</span> er hier.</td>
+                                <td>por eso</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="trotzdem" data-tag="Pos 1"
+                                data-tag-class="tag inv" data-trans="sin embargo"
+                                data-example="Es regnet, <strong>trotzdem</strong> <span class='german-word' style='font-size:0.9em'>gehen</span> wir raus.">
                                 <td>
                                     <div class="german-word">trotzdem</div> <span class="tag inv">Pos 1</span>
-                                    <div class="spanish-word">sin embargo</div>
                                 </td>
-                                <td>Es regnet, <strong>trotzdem</strong> <span class="german-word"
-                                        style="font-size:0.9em">gehen</span> wir raus.</td>
+                                <td>sin embargo</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="obwohl" data-tag="Final"
+                                data-tag-class="tag end" data-trans="aunque"
+                                data-example="<strong>Obwohl</strong> es <span class='german-word' style='font-size:0.9em'>regnet</span>, gehen wir.">
                                 <td>
                                     <div class="german-word">obwohl</div> <span class="tag end">Final</span>
-                                    <div class="spanish-word">aunque</div>
                                 </td>
-                                <td><strong>Obwohl</strong> es <span class="german-word"
-                                        style="font-size:0.9em">regnet</span>, gehen wir.</td>
+                                <td>aunque</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="da" data-tag="Final" data-tag-class="tag end"
+                                data-trans="como / ya que"
+                                data-example="<strong>Da</strong> ich krank <span class='german-word' style='font-size:0.9em'>bin</span>, bleibe ich.">
                                 <td>
                                     <div class="german-word">da</div> <span class="tag end">Final</span>
-                                    <div class="spanish-word">como / ya que</div>
                                 </td>
-                                <td><strong>Da</strong> ich krank <span class="german-word"
-                                        style="font-size:0.9em">bin</span>, bleibe ich.</td>
+                                <td>como / ya que</td>
                             </tr>
                         </tbody>
                     </table>
@@ -866,40 +939,42 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Conector / Español</th>
-                                <th>Ejemplo</th>
+                                <th>Conector</th>
+                                <th>Traducción</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="je... desto" data-tag="Mix"
+                                data-tag-class="tag end" data-trans="cuanto más... más"
+                                data-example="<strong>Je</strong> schneller, <strong>desto</strong> besser.">
                                 <td>
                                     <div class="german-word">je... desto</div> <span class="tag end">Mix</span>
-                                    <div class="spanish-word">cuanto más... más</div>
                                 </td>
-                                <td><strong>Je</strong> schneller, <strong>desto</strong> besser.</td>
+                                <td>cuanto más... más</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="zwar... aber" data-tag="Pos 0"
+                                data-tag-class="tag zero" data-trans="es cierto que... pero"
+                                data-example="Er ist <strong>zwar</strong> alt, <strong>aber</strong> fit.">
                                 <td>
                                     <div class="german-word">zwar... aber</div> <span class="tag zero">Pos 0</span>
-                                    <div class="spanish-word">es cierto que... pero</div>
                                 </td>
-                                <td>Er ist <strong>zwar</strong> alt, <strong>aber</strong> fit.</td>
+                                <td>es cierto que... pero</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="während" data-tag="Final"
+                                data-tag-class="tag end" data-trans="mientras (tiempo/contraste)"
+                                data-example="<strong>Während</strong> er <span class='german-word' style='font-size:0.9em'>kocht</span>, spült sie.">
                                 <td>
                                     <div class="german-word">während</div> <span class="tag end">Final</span>
-                                    <div class="spanish-word">mientras (tiempo/contraste)</div>
                                 </td>
-                                <td><strong>Während</strong> er <span class="german-word"
-                                        style="font-size:0.9em">kocht</span>, spült sie.</td>
+                                <td>mientras (tiempo/contraste)</td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal(this)" data-word="indem" data-tag="Final"
+                                data-tag-class="tag end" data-trans="al (+ infinitivo) / mediante"
+                                data-example="Man lernt, <strong>indem</strong> man <span class='german-word' style='font-size:0.9em'>übt</span>.">
                                 <td>
                                     <div class="german-word">indem</div> <span class="tag end">Final</span>
-                                    <div class="spanish-word">al (+ infinitivo) / mediante</div>
                                 </td>
-                                <td>Man lernt, <strong>indem</strong> man <span class="german-word"
-                                        style="font-size:0.9em">übt</span>.</td>
+                                <td>al (+ infinitivo) / mediante</td>
                             </tr>
                         </tbody>
                     </table>
@@ -992,8 +1067,65 @@
         </div>
     </div>
 
+    <!-- WORD MODAL (NEW) -->
+    <div id="wordModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeWordModal()">&times;</span>
+            <div class="word-modal-header">
+                <h2 id="modalWord" class="word-modal-title"></h2>
+                <div id="modalTranslation" class="word-modal-subtitle"></div>
+                <!-- Corrected div to close the tag container properly -->
+                <div id="modalTag" class="modal-tag"></div>
+            </div>
+            <div class="word-modal-body">
+                <div class="word-modal-example">
+                    <p id="modalExample"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Modal Logic
+        // WORD MODAL LOGIC
+        const wordModal = document.getElementById("wordModal");
+
+        function openWordModal(row) {
+            // Get data from attributes
+            const word = row.getAttribute('data-word');
+            const trans = row.getAttribute('data-trans');
+            const example = row.getAttribute('data-example');
+            const tag = row.getAttribute('data-tag');
+            const tagClass = row.getAttribute('data-tag-class');
+
+            // Populate Modal
+            document.getElementById('modalWord').innerText = word;
+            document.getElementById('modalTranslation').innerText = trans;
+            document.getElementById('modalExample').innerHTML = example; // innerHTML for styling (<strong>)
+
+            const tagEl = document.getElementById('modalTag');
+            tagEl.innerText = tag;
+            tagEl.className = 'modal-tag ' + tagClass;
+
+            // Show Modal
+            wordModal.style.display = "block";
+        }
+
+        function closeWordModal() {
+            wordModal.style.display = "none";
+        }
+
+        // Close Word Modal on outside click
+        window.onclick = function (event) {
+            const infoModal = document.getElementById("infoModal");
+            if (event.target == infoModal) {
+                infoModal.style.display = "none";
+            }
+            if (event.target == wordModal) {
+                wordModal.style.display = "none";
+            }
+        }
+
+        // INFO MODAL LOGIC
         const modal = document.getElementById("infoModal");
         const btn = document.getElementById("infoBtn");
         const span = document.getElementsByClassName("close-btn")[0];
@@ -1034,7 +1166,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const words = document.querySelectorAll('.german-word');
+            const words = document.querySelectorAll('td:first-child .german-word');
 
             words.forEach(el => {
                 const rawText = el.innerText.trim();
