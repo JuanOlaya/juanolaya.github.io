@@ -671,11 +671,7 @@
     </div>
 
     <script>
-        const apiKey = "";
-        let currentText = "";
-        let isProcessing = false;
         let currentLang = 'es'; // 'es' or 'en'
-
         const labels = {
             es: {
                 mainTitle: "Interjecciones Alemanas",
@@ -685,9 +681,7 @@
                 titleSocial: "Social",
                 titleAvisos: "Avisos",
                 naDef: "La navaja suiza del idioma. Cambia según el contexto.",
-                btnSpeak: "ESCUCHAR",
-                genAudio: "Generando audio...",
-                playing: "Reproduciendo..."
+                btnSpeak: "ESCUCHAR"
             },
             en: {
                 mainTitle: "German Interjections",
@@ -697,9 +691,7 @@
                 titleSocial: "Social",
                 titleAvisos: "Warnings",
                 naDef: "The language's Swiss Army knife. Context is key.",
-                btnSpeak: "LISTEN",
-                genAudio: "Generating audio...",
-                playing: "Playing..."
+                btnSpeak: "LISTEN"
             }
         };
 
@@ -752,7 +744,7 @@
                 }
             ],
             sorpresa: [
-                { de: "Ach so!", es: "¡Ah, ya entiendo!", en: "Oh, I see!", lv: "A1", ex: [{ de: "Ach so, ahora entiendo.", es: "Ah, ya veo, ahora lo entiendo.", en: "Oh, I see, now I understand." }] },
+                { de: "Ach so!", es: "¡Ah, ya entiendo!", en: "Oh, I see!", lv: "A1", ex: [{ de: "Ach so, jetzt verstehe ich.", es: "Ah, ya veo, ahora lo entiendo.", en: "Oh, I see, now I understand." }] },
                 { de: "Echt?", es: "¿En serio?", en: "Really?", lv: "A1", ex: [{ de: "Ich bin fertig. - Echt?", es: "He terminado. - ¿En serio?", en: "I'm finished. - Really?" }] },
                 { de: "Vielleicht.", es: "Quizás / Tal vez", en: "Maybe / Perhaps", lv: "A1", ex: [{ de: "Kommst du? - Vielleicht.", es: "¿Vienes? - Quizás.", en: "Are you coming? - Maybe." }] },
                 { de: "Oha!", es: "¡Vaya!", en: "Whoa!", lv: "A2", ex: [{ de: "Oha, das ist teuer!", es: "¡Vaya, eso es caro!", en: "Whoa, that's expensive!" }] },
@@ -762,7 +754,7 @@
             ],
             social: [
                 { de: "Gleichfalls!", es: "¡Igualmente!", en: "Likewise! / Same to you", lv: "A1", ex: [{ de: "Schönes Wochenende! - Gleichfalls!", es: "¡Buen finde! - ¡Igualmente!", en: "Have a nice weekend! - Likewise!" }] },
-                { de: "Schade!", es: "¡Qué lástima!", en: "What a pity!", lv: "A1", ex: [{ de: "Ich can nicht kommen. - Schade!", es: "No puedo ir. - ¡Qué lástima!", en: "I can't come. - That's a pity!" }] },
+                { de: "Schade!", es: "¡Qué lástima!", en: "What a pity!", lv: "A1", ex: [{ de: "Ich kann nicht kommen. - Schade!", es: "No puedo ir. - ¡Qué lástima!", en: "I can't come. - That's a pity!" }] },
                 { de: "Toll!", es: "¡Genial!", en: "Great! / Terrific", lv: "A1", ex: [{ de: "Das ist toll!", es: "¡Eso es genial!", en: "That is great!" }] },
                 { de: "Hoppla!", es: "¡Uy!", en: "Oops!", lv: "A1", ex: [{ de: "Hoppla, Entschuldigung!", es: "¡Uy, perdón!", en: "Oops, sorry!" }] },
                 { de: "Igitt!", es: "¡Qué asco!", en: "Yuck! / Gross", lv: "A1", ex: [{ de: "Igitt, das schmeckt nicht.", es: "¡Qué asco!, esto no sabe bien.", en: "Yuck, that doesn't taste good." }] },
@@ -774,7 +766,7 @@
                 { de: "Vorsicht!", es: "¡Cuidado!", en: "Careful! / Danger", lv: "A1", ex: [{ de: "Vorsicht, das Glas ist heiß!", es: "¡Cuidado, el vaso está caliente!", en: "Careful, the glass is hot!" }] },
                 { de: "Bitte schön", es: "De nada", en: "You're welcome", lv: "A1", ex: [{ de: "Bitte schön, Ihr Kaffee.", es: "Aquí tiene, su café.", en: "There you go, your coffee." }] },
                 { de: "Oje!", es: "¡Ay no!", en: "Oh dear!", lv: "A2", ex: [{ de: "Oje, ich habe kein Geld.", es: "¡Ay no!, no tengo dinero.", en: "Oh dear, I have no money." }] },
-                { de: "Zu viel!", es: "¡Demasiado!", en: "Too much!", lv: "A2", ex: [{ de: "Das ist simplemente demasiado.", es: "Eso es simplemente demasiado.", en: "That is simply too much." }] },
+                { de: "Zu viel!", es: "¡Demasiado!", en: "Too much!", lv: "A2", ex: [{ de: "Das ist einfach zu viel.", es: "Eso es simplemente demasiado.", en: "That is simply too much." }] },
                 { de: "Lieber nicht.", es: "Mejor no", en: "Better not", lv: "A2", ex: [{ de: "Wollen wir gehen? - Lieber nicht.", es: "¿Quieres ir? - Mejor no.", en: "Shall we go? - Better not." }] }
             ]
         };
@@ -797,13 +789,16 @@
                     const tr = document.createElement('tr');
                     const tdDe = document.createElement('td');
                     tdDe.innerHTML = `<div class="german-word">${item.de} <i class="fas fa-volume-up tts-icon"></i></div>`;
-                    tdDe.onclick = (e) => { e.stopPropagation(); playSpeech(item.de); };
+                    tdDe.onclick = (e) => { e.stopPropagation(); speak(item.de); };
+
                     const tdEs = document.createElement('td');
-                    tdEs.className = "text-right hover:bg-slate-700/30";
-                    const trans = currentLang === 'es' ? item.es : item.en;
-                    tdEs.innerHTML = `<div class="spanish-word">${trans} <i class="fas fa-chevron-right ml-1 opacity-20 text-[0.6rem]"></i></div>`;
-                    tdEs.onclick = (e) => { e.stopPropagation(); openModal(item); };
-                    tr.appendChild(tdDe); tr.appendChild(tdEs); tbody.appendChild(tr);
+                    tdEs.className = "spanish-word";
+                    tdEs.textContent = currentLang === 'es' ? item.es : item.en;
+                    tdEs.onclick = (e) => { e.stopPropagation(); openWordModal(item); };
+
+                    tr.appendChild(tdDe);
+                    tr.appendChild(tdEs);
+                    tbody.appendChild(tr);
                 });
             }
 
@@ -811,127 +806,165 @@
             const naGrid = document.getElementById('naGrid');
             naGrid.innerHTML = "";
             naData.forEach(item => {
-                const labelSub = currentLang === 'es' ? 'Español' : 'English';
-                const transText = currentLang === 'es' ? item.es : item.en;
-                const div = document.createElement('div');
-                div.className = "bg-slate-800/50 p-4 rounded-xl border border-slate-700 flex flex-col items-center group";
-                div.innerHTML = `
-                    <span class="block text-[0.6rem] uppercase opacity-60 font-black mb-1 cursor-pointer hover:text-emerald-400" onclick='openModal(${JSON.stringify(item)})'>${labelSub} <i class="fas fa-chevron-right text-[0.5rem] opacity-30"></i></span>
-                    <span class="text-md font-bold text-emerald-400 cursor-pointer hover:underline" onclick="playSpeech('${item.de}')">${item.de} <i class="fas fa-volume-up text-xs opacity-50"></i></span>
-                `;
-                naGrid.appendChild(div);
-            });
+                const card = document.createElement('div');
+                card.className = "bg-slate-800/80 p-6 rounded-2xl border border-slate-700 hover:border-emerald-400/50 transition-all cursor-pointer group shadow-lg hover:shadow-emerald-900/20";
+                card.onclick = () => openWordModal(item);
 
-            // Update Labels
-            for (let id in labels[currentLang]) {
-                const el = document.getElementById(id);
-                if (el) el.innerText = labels[currentLang][id];
+                const title = document.createElement('h3');
+                title.className = "text-2xl font-black text-emerald-400 mb-2 group-hover:text-emerald-300 flex items-center gap-2";
+                title.innerHTML = `${item.de} <i class="fas fa-volume-up text-sm opacity-50 group-hover:opacity-100 transition-opacity"></i>`;
+                title.onclick = (e) => { e.stopPropagation(); speak(item.de); };
+
+                const subtitle = document.createElement('p');
+                subtitle.className = "text-slate-400 italic";
+                subtitle.textContent = currentLang === 'es' ? item.es : item.en;
+
+                card.appendChild(title);
+                card.appendChild(subtitle);
+                naGrid.appendChild(card);
+            });
+        }
+
+        // --- MODAL LOGIC ---
+        let currentModalItem = null;
+
+        function openWordModal(item) {
+            currentModalItem = item;
+            const modal = document.getElementById('wordModal');
+
+            document.getElementById('modalDe').textContent = item.de;
+            document.getElementById('modalEs').textContent = currentLang === 'es' ? item.es : item.en;
+
+            const levelBadge = document.getElementById('modalLevel');
+            levelBadge.textContent = item.lv;
+            levelBadge.className = `text-white font-bold px-3 py-1 rounded-lg text-xs uppercase ${item.lv.startsWith('A1') ? 'bg-blue-500' : 'bg-yellow-500'}`;
+
+            // Explanation / Description
+            const explBox = document.getElementById('modalExplanation');
+            const desc = currentLang === 'es' ? (item.desc_es || "") : (item.desc_en || "");
+            if (desc) {
+                explBox.innerHTML = desc;
+                explBox.classList.remove('hidden');
+            } else {
+                explBox.classList.add('hidden');
+            }
+
+            // Examples
+            const exContainer = document.getElementById('exampleContainer');
+            exContainer.innerHTML = "";
+
+            if (item.ex && item.ex.length > 0) {
+                item.ex.forEach(ex => {
+                    if (ex.type === 'header') {
+                        const h = document.createElement('div');
+                        h.className = "text-orange-400 font-bold uppercase text-sm mt-4 mb-2 border-b border-white/10 pb-1";
+                        h.textContent = currentLang === 'es' ? ex.title_es : ex.title_en;
+                        exContainer.appendChild(h);
+                    } else if (ex.type === 'grid') {
+                        const grid = document.createElement('div');
+                        grid.className = "mini-card-grid";
+                        ex.items.forEach(mini => {
+                            const card = document.createElement('div');
+                            card.className = "mini-card";
+                            card.onclick = (e) => {
+                                e.stopPropagation();
+                                if (mini.de_context) speak(mini.de_context);
+                            }
+
+                            const t1 = document.createElement('span');
+                            t1.className = "mini-card-title";
+                            t1.textContent = mini.de_context || (currentLang === 'es' ? mini.es : mini.en);
+                            // Actually context is the German equivalent usually, logic specific to "Doch"
+
+                            const t2 = document.createElement('span');
+                            t2.className = "mini-card-subtitle";
+                            t2.textContent = currentLang === 'es' ? mini.es : mini.en;
+
+                            card.appendChild(t1);
+                            card.appendChild(t2);
+                            grid.appendChild(card);
+                        });
+                        exContainer.appendChild(grid);
+                    } else {
+                        const div = document.createElement('div');
+                        div.className = "example-item cursor-pointer hover:bg-white/5 p-2 rounded-lg transition-colors";
+                        div.onclick = () => speak(ex.de);
+
+                        const de = document.createElement('div');
+                        de.className = "example-de";
+                        de.innerHTML = `${ex.de} <i class="fas fa-volume-up text-xs opacity-50 ml-2"></i>`;
+
+                        const es = document.createElement('div');
+                        es.className = "example-es";
+                        es.textContent = currentLang === 'es' ? ex.es : ex.en;
+
+                        div.appendChild(de);
+                        div.appendChild(es);
+                        exContainer.appendChild(div);
+                    }
+                });
+            }
+
+            document.getElementById('btnSpeakText').textContent = labels[currentLang].btnSpeak;
+
+            modal.style.display = 'flex';
+        }
+
+        function closeModal(modalId, event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById(modalId).style.display = 'none';
+            currentModalItem = null;
+        }
+
+        function openInfoModal() {
+            document.getElementById('infoModal').style.display = 'flex';
+        }
+
+        // --- TTS (Browser Native) ---
+        function speak(text) {
+            if (!text) return;
+
+            // Clean specific chars if needed, though usually native synth handles UTF8 fine
+            // const cleanText = text.replace(/[!?,.]/g, ''); 
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+            utterance.rate = 0.9;
+
+            // Optional: Choose a specific voice if available (e.g. Google Deutsch)
+            const voices = window.speechSynthesis.getVoices();
+            const deVoice = voices.find(v => v.lang.includes('de') && (v.name.includes('Google') || v.name.includes('Female')));
+            if (deVoice) utterance.voice = deVoice;
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Ensure voices are loaded (Chrome sometimes needs this)
+        window.speechSynthesis.onvoiceschanged = () => {
+            // Voices loaded
+        };
+
+        // Modal Speak Button
+        function triggerSpeech() {
+            if (currentModalItem) {
+                speak(currentModalItem.de);
             }
         }
 
-        function openModal(item) {
-            currentText = item.de;
-            document.getElementById('modalDe').innerText = item.de;
-            document.getElementById('modalEs').innerText = currentLang === 'es' ? item.es : item.en;
-            document.getElementById('modalLevel').innerText = item.lv;
-            document.getElementById('btnSpeakText').innerText = labels[currentLang].btnSpeak;
+        // --- TOGGLES ---
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('light-mode');
+            const isLight = body.classList.contains('light-mode');
 
-            const expEl = document.getElementById('modalExplanation');
-            const desc = currentLang === 'es' ? item.desc_es : item.desc_en;
-            if (desc) {
-                expEl.innerText = desc;
-                expEl.classList.remove('hidden');
-            } else {
-                expEl.classList.add('hidden');
-            }
+            const icon = document.getElementById('themeIcon');
+            icon.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
 
-            const container = document.getElementById('exampleContainer');
-            container.innerHTML = "";
-            item.ex.forEach(example => {
-                if (example.type === 'header') {
-                    const header = document.createElement('h3');
-                    header.className = "text-lg font-bold text-white mt-4 mb-2 border-b border-slate-600 pb-1";
-                    header.innerText = currentLang === 'es' ? example.title_es : example.title_en;
-                    container.appendChild(header);
-                    return;
-                }
-
-                if (example.type === 'grid') {
-                    const grid = document.createElement('div');
-                    grid.className = "mini-card-grid";
-                    example.items.forEach(item => {
-                        const card = document.createElement('div');
-                        card.className = "mini-card";
-                        const label = currentLang === 'es' ? item.es : item.en;
-                        card.innerHTML = `
-                            <span class="mini-card-title">${label}</span>
-                            <span class="mini-card-subtitle">${item.de_context || 'doch'}</span>
-                        `;
-                        grid.appendChild(card);
-                    });
-                    container.appendChild(grid);
-                    return;
-                }
-
-                if (example.de === "---") {
-                    container.appendChild(document.createElement('hr')).className = "my-3 border-slate-700";
-                    return;
-                }
-                const div = document.createElement('div');
-                div.className = "example-item";
-                const trans = currentLang === 'es' ? example.es : example.en;
-                div.innerHTML = `<div class="example-de">${example.de}</div><div class="example-es">${trans}</div>`;
-                container.appendChild(div);
-            });
-
-            const badge = document.getElementById('modalLevel');
-            badge.style.backgroundColor = item.lv === 'A1' ? 'var(--level-a1)' : 'var(--level-a2)';
-            document.getElementById('wordModal').style.display = 'flex';
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
         }
 
         function toggleLanguage() {
             currentLang = currentLang === 'es' ? 'en' : 'es';
-            document.getElementById('langEs').classList.toggle('active');
-            document.getElementById('langEn').classList.toggle('active');
-            populate();
-        }
-
-        function openInfoModal() { document.getElementById('infoModal').style.display = 'flex'; }
-        function closeModal(id, event) {
-            if (event && event.target !== document.getElementById(id)) return;
-            document.getElementById(id).style.display = 'none';
-        }
-        function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-            document.getElementById('themeIcon').className = document.body.classList.contains('light-mode') ? 'fas fa-moon' : 'fas fa-sun';
-        }
-
-        async function triggerSpeech() {
-            if (isProcessing) return;
-            isProcessing = true;
-            const btn = document.querySelector('.play-btn-large');
-            btn.style.opacity = "0.5";
-            showStatus(labels[currentLang].genAudio, "blue");
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: `Say naturally in German: ${currentText}` }] }],
-                        generationConfig: { responseModalities: ["AUDIO"], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Kore" } } } }
-                    })
-                });
-                const result = await response.json();
-                const part = result.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
-                const rate = parseInt(part.inlineData.mimeType.match(/rate=(\d+)/)?.[1] || "24000");
-                const audio = new Audio(URL.createObjectURL(pcmToWav(part.inlineData.data, rate)));
-                audio.onplay = () => showStatus(labels[currentLang].playing, "green");
-                audio.onended = () => { hideStatus(); btn.style.opacity = "1"; isProcessing = false; };
-                audio.play();
-            } catch (err) {
-                showStatus("Error", "red");
-                setTimeout(() => { hideStatus(); btn.style.opacity = "1"; isProcessing = false; }, 2000);
-            }
         }
 
         async function playSpeech(text) {

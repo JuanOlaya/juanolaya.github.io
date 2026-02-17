@@ -2004,7 +2004,7 @@
 
         function createKompaktCard(nouns, title, color, level) {
             const card = document.createElement('div');
-            card.className = 'level-card'; // Reusing class or new one? "level-card" defined in CSS
+            card.className = 'level-card';
 
             // Header
             const header = document.createElement('div');
@@ -2021,37 +2021,41 @@
             nouns.forEach((noun, index) => {
                 const tr = document.createElement('tr');
 
+                // Beidseitiges Layout: Spalte 1 (Deutsch), Spalte 2 (Spanisch)
+
                 // Cell 1: German
                 const tdDe = document.createElement('td');
                 const wordSpan = document.createElement('span');
                 wordSpan.className = 'kompakt-german-word';
                 wordSpan.innerHTML = `<span class="article-span kompakt-article">${noun.article}</span>${noun.word}`;
 
-                // Add Speaker Icon to first item ONLY
-                if (index === 0) {
-                    const speaker = document.createElement('span');
-                    speaker.className = 'audio-icon';
-                    speaker.textContent = '🔊';
-                    speaker.onclick = (e) => {
-                        e.stopPropagation();
-                        speak(`${noun.article} ${noun.word}`);
-                    };
-                    wordSpan.appendChild(speaker);
-                }
+                // Add Speaker Icon to EVERY item
+                const speaker = document.createElement('span');
+                speaker.className = 'audio-icon';
+                speaker.textContent = '🔊';
+                speaker.onclick = (e) => {
+                    e.stopPropagation();
+                    speak(`${noun.article} ${noun.word}`);
+                };
+                wordSpan.appendChild(speaker);
 
-                // Translation
+                tdDe.appendChild(wordSpan);
+
+                // Cell 2: Translation
+                const tdEs = document.createElement('td');
                 const transSpan = document.createElement('span');
                 transSpan.className = 'kompakt-spanish';
                 transSpan.textContent = noun.translation_es;
+                tdEs.appendChild(transSpan);
 
-                tdDe.appendChild(wordSpan);
-                tdDe.appendChild(transSpan);
+                // Add Cells
+                tr.appendChild(tdDe);
+                tr.appendChild(tdEs);
 
                 // Click to Open Modal
                 tr.style.cursor = 'pointer';
                 tr.onclick = () => openWordModal(noun, level);
 
-                tr.appendChild(tdDe);
                 table.appendChild(tr);
             });
 

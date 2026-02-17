@@ -1,53 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Terminaciones de Sustantivos Alemanes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-der: #D32F2F;
-      --color-die: #1976D2;
-      --color-das: #388E3C;
-      --bg-color: #f0f2f5;
-      --text-color: #333;
+      --bg-color: #0f172a;
+      /* Slate 900 */
+      --text-color: #e2e8f0;
+      /* Slate 200 */
+      --card-bg: #1e293b;
+      /* Slate 800 */
+
+      --color-der: #3b82f6;
+      /* Blue */
+      --color-die: #ef4444;
+      /* Red */
+      --color-das: #22c55e;
+      /* Green */
+      --color-die-plural: #a855f7;
+      /* Purple */
+
+      /* Structure Section Colors */
+      --subject-color: #3b82f6;
+      /* Blue */
+      --object-color: #22c55e;
+      /* Green */
+      --place-color: #f97316;
+      /* Orange */
+      --possession-color: #a855f7;
+      /* Purple (Mint in original, but using purple here for possession) */
+      /* Wait, screenshot shows Green for Object, Orange for Place, Blue for Subject. */
     }
 
     body {
-      font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem;
-      background: var(--bg-color);
-      color: var(--text-color);
     }
 
     h1 {
-      text-align: center;
+      color: #f8fafc;
+      /* Slate 50 */
       margin-bottom: 0.5rem;
-      color: #1a1a1a;
-      font-size: 2rem;
-      font-weight: 700;
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.05rem;
     }
 
     p.subtitle {
       text-align: center;
-      color: #666;
-      margin-bottom: 2rem;
+      color: #94a3b8;
+      /* Slate 400 */
+      margin-bottom: 3rem;
       max-width: 600px;
-      line-height: 1.5;
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
 
-    /* Level Selector (Segmented Control) */
+    /* Level Selector */
     .level-selector {
       display: flex;
-      background: white;
+      background: #1e293b;
+      /* Slate 800 */
       padding: 5px;
       border-radius: 50px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
       margin-bottom: 30px;
-      position: relative;
+      border: 1px solid #334155;
+      /* Slate 700 */
     }
 
     .level-btn {
@@ -56,7 +86,8 @@
       padding: 10px 25px;
       font-size: 1rem;
       font-weight: 700;
-      color: #95a5a6;
+      color: #94a3b8;
+      /* Slate 400 */
       cursor: pointer;
       border-radius: 40px;
       transition: all 0.3s ease;
@@ -65,13 +96,15 @@
     }
 
     .level-btn:hover {
-      color: #555;
+      color: #f1f5f9;
+      /* Slate 100 */
     }
 
     .level-btn.active {
-      background-color: #2c3e50;
+      background-color: #3b82f6;
+      /* Blue 500 */
       color: white;
-      box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3);
+      box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
     }
 
     /* Summary Cards */
@@ -86,38 +119,54 @@
     }
 
     .summary-card {
-      background: white;
+      background: var(--card-bg);
       padding: 20px;
       border-radius: 16px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
       text-align: center;
       flex: 1;
       min-width: 140px;
+      border: 1px solid #334155;
+      /* Slate 700 */
       border-bottom: 5px solid transparent;
       transition: transform 0.2s, box-shadow 0.2s;
     }
+
     .summary-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+      border-color: #475569;
+      /* Slate 600 */
     }
 
-    .summary-card.der { border-color: var(--color-der); }
-    .summary-card.die { border-color: var(--color-die); }
-    .summary-card.das { border-color: var(--color-das); }
+    .summary-card.der {
+      border-color: var(--color-der);
+    }
+
+    .summary-card.die {
+      border-color: var(--color-die);
+    }
+
+    .summary-card.das {
+      border-color: var(--color-das);
+    }
 
     .summary-value {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 800;
       display: block;
-      color: #2c3e50;
+      color: #f8fafc;
+      /* Slate 50 */
       margin-bottom: 4px;
     }
+
     .summary-label {
-      font-size: 0.9rem;
-      color: #7f8c8d;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      /* Slate 400 */
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     /* Chart Area */
@@ -132,89 +181,198 @@
       align-items: center;
       margin-bottom: 4rem;
     }
-    
+
     canvas {
       max-width: 100%;
       max-height: 100%;
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
     }
 
-    /* Vocabulary Lists Section */
-    .vocab-section {
+    /* SENTENCE STRUCTURE SECTION STYLES (Previously separate, now merged/updated) */
+    .structure-section {
       width: 100%;
-      max-width: 1000px;
-      margin-top: 20px;
-    }
-    
-    .vocab-header {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-    .vocab-header h2 {
-      color: #2c3e50;
-      margin-bottom: 5px;
-    }
-    .vocab-header p {
-      color: #666;
-      font-size: 0.95rem;
+      max-width: 1100px;
+      margin-bottom: 4rem;
     }
 
-    .vocab-grid {
+    .structure-title {
+      text-align: center;
+      color: #cbd5e1;
+      /* Slate 300 - All Caps usually? */
+      text-transform: uppercase;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+
+    .structure-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 25px;
     }
 
-    .vocab-card {
-      background: white;
-      border-radius: 16px;
-      padding: 0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      overflow: hidden;
+    /* Structure Card Base */
+    .structure-card {
+      background: #1e293b;
+      /* Slate 800 */
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      border: 1px solid #334155;
+      /* Slate 700 */
+      border-top-width: 5px;
+      /* Colored Top Border */
+      transition: transform 0.2s;
+      position: relative;
+    }
+
+    .structure-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    }
+
+    .structure-card h3 {
+      font-size: 1.25rem;
+      color: white;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
       display: flex;
       flex-direction: column;
-      height: 100%;
+      /* Icon above text in screenshot? Or inline? Lets keep inline for space */
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .structure-card p {
+      color: #94a3b8;
+      /* Slate 400 */
+      text-align: center;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .structure-card ol {
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+      /* Custom list style in screenshot */
+      background: #0f172a;
+      /* Darker inner part */
+      border-radius: 8px;
+      padding: 15px;
+      border: 1px solid #334155;
+    }
+
+    .structure-card li {
+      margin-bottom: 10px;
+      line-height: 1.4;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 8px;
+    }
+
+    .structure-card li:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .structure-card strong {
+      color: white;
+    }
+
+    .example-text {
+      display: block;
+      margin-top: 5px;
+      font-style: italic;
+      color: #64748b;
+      /* Slate 500 */
+      font-size: 0.85rem;
+    }
+
+    /* Card Specific Colors */
+    .bg-subject {
+      border-top-color: var(--color-der);
+    }
+
+    /* Blue */
+    .bg-object {
+      border-top-color: var(--color-das);
+    }
+
+    /* Green */
+    .bg-place {
+      border-top-color: #f97316;
+    }
+
+    /* Orange */
+    .bg-possession {
+      border-top-color: var(--color-die-plural);
+    }
+
+    /* Purple? No, typically Genitive/Possession in dark layouts often Mint or Neutral. Let's use Mint/Green variant or keeping Possession style. Screenshot has Green Object. */
+
+    /* Vocab Section Updates */
+    .vocab-card {
+      background: var(--card-bg);
+      border: 1px solid #334155;
     }
 
     .vocab-title-bar {
-      padding: 15px 20px;
-      color: white;
-      font-weight: bold;
-      font-size: 1.1rem;
-      text-align: center;
-      letter-spacing: 0.5px;
-    }
-    .vocab-card.der .vocab-title-bar { background-color: var(--color-der); }
-    .vocab-card.die .vocab-title-bar { background-color: var(--color-die); }
-    .vocab-card.das .vocab-title-bar { background-color: var(--color-das); }
-
-    .vocab-list {
-      list-style: none;
-      padding: 10px 0;
-      margin: 0;
+      font-family: 'Nunito', sans-serif;
     }
 
     .vocab-item {
-      padding: 12px 20px;
       border-bottom: 1px solid #f0f0f0;
       display: flex;
       justify-content: space-between;
       align-items: center;
       transition: background 0.2s;
-      cursor: pointer; /* Indicates clickable */
+      cursor: pointer;
+      /* Indicates clickable */
     }
-    .vocab-item:last-child { border-bottom: none; }
-    .vocab-item:hover { background: #f0f4f8; }
 
-    .de-word { font-weight: 700; color: #333; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
-    .es-word { color: #888; font-style: italic; font-size: 0.9rem; }
-    
+    .vocab-item:last-child {
+      border-bottom: none;
+    }
+
+    .vocab-item:hover {
+      background: #f0f4f8;
+    }
+
+    .de-word {
+      font-weight: 700;
+      color: #333;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .es-word {
+      color: #888;
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
     .speaker-icon {
       font-size: 0.85rem;
       opacity: 0.5;
       transition: opacity 0.2s;
     }
-    .vocab-item:hover .speaker-icon { opacity: 1; transform: scale(1.1); }
+
+    .vocab-item:hover .speaker-icon {
+      opacity: 1;
+      transform: scale(1.1);
+    }
 
     /* Button inside cards */
     .view-more-btn {
@@ -229,6 +387,7 @@
       transition: background 0.2s;
       margin-top: auto;
     }
+
     .view-more-btn:hover {
       background: #e9ecef;
       color: #2c3e50;
@@ -241,7 +400,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(2px);
       z-index: 1000;
       display: none;
@@ -250,24 +409,26 @@
       opacity: 0;
       transition: opacity 0.3s ease;
     }
+
     .modal-overlay.open {
       display: flex;
       opacity: 1;
     }
-    
+
     .modal-content {
       background: white;
       width: 90%;
       max-width: 500px;
       max-height: 85vh;
       border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       display: flex;
       flex-direction: column;
       position: relative;
       transform: translateY(20px);
       transition: transform 0.3s ease;
     }
+
     .modal-overlay.open .modal-content {
       transform: translateY(0);
     }
@@ -281,12 +442,24 @@
       border-radius: 16px 16px 0 0;
       color: white;
     }
-    .modal-header.der { background-color: var(--color-der); }
-    .modal-header.die { background-color: var(--color-die); }
-    .modal-header.das { background-color: var(--color-das); }
 
-    .modal-title { font-weight: bold; font-size: 1.2rem; }
-    
+    .modal-header.der {
+      background-color: var(--color-der);
+    }
+
+    .modal-header.die {
+      background-color: var(--color-die);
+    }
+
+    .modal-header.das {
+      background-color: var(--color-das);
+    }
+
+    .modal-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
     .close-modal {
       background: none;
       border: none;
@@ -296,26 +469,106 @@
       cursor: pointer;
       padding: 0 5px;
     }
-    
+
     .modal-body {
       padding: 0;
       overflow-y: auto;
     }
 
     @media (max-width: 600px) {
-      h1 { font-size: 1.6rem; }
-      .chart-wrapper { height: 50vh; }
-      .summary-card { padding: 15px; }
-      .summary-value { font-size: 1.4rem; }
-      .vocab-grid { grid-template-columns: 1fr; }
-      .level-btn { padding: 8px 15px; min-width: 60px; font-size: 0.9rem; }
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .chart-wrapper {
+        height: 50vh;
+      }
+
+      .summary-card {
+        padding: 15px;
+      }
+
+      .summary-value {
+        font-size: 1.4rem;
+      }
+
+      .vocab-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .level-btn {
+        padding: 8px 15px;
+        min-width: 60px;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <h1>Terminaciones de Sustantivos</h1>
-  <p class="subtitle">Descubre patrones para el examen Telc y evita errores por interferencia del español (falsos amigos de género). Haz clic en las palabras para escuchar.</p>
+  <p class="subtitle">Descubre patrones para el examen Telc y evita errores por interferencia del español (falsos amigos
+    de género). Haz clic en las palabras para escuchar.</p>
+
+  <!-- Sentence Structure Section (Moved to Top) -->
+
+
+  <div class="structure-section">
+    <h2 class="structure-title">La Estructura de la Oración: ¿Dónde va el sustantivo?</h2>
+    <div class="structure-grid">
+
+      <!-- Sujeto -->
+      <div class="structure-card bg-subject">
+        <h3><span class="card-icon">👑</span> El Sujeto</h3>
+        <p><strong>El Actor (¿Quién? - Nominativo)</strong></p>
+        <ol>
+          <li><strong>1. Posición 1</strong><br><span class="example-text">"Der Hund spielt."</span></li>
+          <li><strong>2. Después del verbo</strong><br><span class="example-text">"Heute spielt der Hund."</span></li>
+        </ol>
+      </div>
+
+      <!-- Objeto -->
+      <div class="structure-card bg-object">
+        <h3><span class="card-icon">🎁</span> El Objeto</h3>
+        <p><strong>El Destino (Acusativo / Dativo)</strong></p>
+        <ol>
+          <li><strong>1. Involucra directamente</strong><br>(Acusativo - ¿Qué?)<br><span class="example-text">"Ich sehe
+              den Hund."</span></li>
+          <li><strong>2. Beneficia indirectamente</strong><br>(Dativo - ¿A quién?)<br><span class="example-text">"Er
+              hilft dem Kind."</span></li>
+        </ol>
+      </div>
+
+      <!-- Tiempo y Lugar -->
+      <div class="structure-card bg-place">
+        <h3><span class="card-icon">📍</span> Tiempo y Lugar</h3>
+        <p><strong>Regla de Oro (TeKaMoLo)</strong></p>
+        <ol>
+          <li>1. Temporal (¿Cuándo?)</li>
+          <li>2. Kausal (¿Por qué?)</li>
+          <li>3. Modal (¿Cómo?)</li>
+          <li>4. Lokal (¿Dónde?)</li>
+        </ol>
+        <div style="text-align:center; padding-top:10px; border-top:1px solid #334155; margin-top:10px;">
+          <p style="margin-bottom:5px; color:#f1f5f9;">Primero <strong>¿Cuándo?</strong>, luego <strong>¿Dónde?</strong>
+          </p>
+          <span class="example-text">"Ich gehe heute nach Hause."</span>
+        </div>
+      </div>
+
+      <!-- Posesión -->
+      <div class="structure-card bg-possession" style="grid-column: 1 / -1;">
+        <h3><span class="card-icon">🔗</span> La Posesión</h3>
+        <p style="margin-bottom:10px;"><strong>El Dueño (Genitivo)</strong></p>
+        <div style="background:#0f172a; border-radius:8px; padding:15px; border:1px solid #334155; text-align:center;">
+          <p style="color:white; font-weight:bold; margin-bottom:5px;">¿De quién? (Wessen?)</p>
+          <span class="example-text">"Das Auto des Vaters."</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- New Level Selector -->
   <div class="level-selector">
@@ -343,6 +596,8 @@
   <div class="chart-wrapper">
     <canvas id="myPieChart"></canvas>
   </div>
+
+
 
   <!-- Vocabulary Lists -->
   <div class="vocab-section">
@@ -396,43 +651,43 @@
   <!-- Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-  
+
   <script>
     // 1. Chart Data with A2 added
     const nounData = [
       // MASCULINE (Der)
-      { label: '–er (der)',   color: '#FFCDD2', a1: 25.0, a2: 21.0, b1: 17.3 }, 
-      { label: '–en (der)',   color: '#EF9A9A', a1: 18.0, a2: 15.0, b1: 12.4 }, 
-      { label: '–el (der)',   color: '#E57373', a1: 10.0, a2: 9.0,  b1: 7.5 },
-      { label: '–ig (der)',   color: '#EF5350', a1: 0.5,  a2: 0.8,  b1: 1.1 },
-      { label: '–ich (der)',  color: '#F44336', a1: 0.5,  a2: 0.8,  b1: 1.0 },
-      { label: '–or (der)',   color: '#E53935', a1: 0.1,  a2: 0.3,  b1: 0.6 }, 
-      { label: '–us (der)',   color: '#D32F2F', a1: 0.1,  a2: 0.2,  b1: 0.5 },
-      { label: '–ant (der)',  color: '#C62828', a1: 0.0,  a2: 0.1,  b1: 0.5 },
-      { label: '–ist (der)',  color: '#B71C1C', a1: 0.1,  a2: 0.2,  b1: 0.5 },
-      { label: '–ling (der)', color: '#FF8A80', a1: 0.2,  a2: 0.3,  b1: 0.4 },
-      { label: '–eur (der)',  color: '#FF5252', a1: 0.0,  a2: 0.1,  b1: 0.2 },
+      { label: '–er (der)', color: '#FFCDD2', a1: 25.0, a2: 21.0, b1: 17.3 },
+      { label: '–en (der)', color: '#EF9A9A', a1: 18.0, a2: 15.0, b1: 12.4 },
+      { label: '–el (der)', color: '#E57373', a1: 10.0, a2: 9.0, b1: 7.5 },
+      { label: '–ig (der)', color: '#EF5350', a1: 0.5, a2: 0.8, b1: 1.1 },
+      { label: '–ich (der)', color: '#F44336', a1: 0.5, a2: 0.8, b1: 1.0 },
+      { label: '–or (der)', color: '#E53935', a1: 0.1, a2: 0.3, b1: 0.6 },
+      { label: '–us (der)', color: '#D32F2F', a1: 0.1, a2: 0.2, b1: 0.5 },
+      { label: '–ant (der)', color: '#C62828', a1: 0.0, a2: 0.1, b1: 0.5 },
+      { label: '–ist (der)', color: '#B71C1C', a1: 0.1, a2: 0.2, b1: 0.5 },
+      { label: '–ling (der)', color: '#FF8A80', a1: 0.2, a2: 0.3, b1: 0.4 },
+      { label: '–eur (der)', color: '#FF5252', a1: 0.0, a2: 0.1, b1: 0.2 },
 
       // FEMININE (Die)
-      { label: '–ur (die)',     color: '#BBDEFB', a1: 2.0, a2: 8.0, b1: 15.98 },
+      { label: '–ur (die)', color: '#BBDEFB', a1: 2.0, a2: 8.0, b1: 15.98 },
       { label: '–schaft (die)', color: '#90CAF9', a1: 1.0, a2: 2.0, b1: 3.43 },
-      { label: '–ik (die)',     color: '#64B5F6', a1: 0.5, a2: 1.5, b1: 2.66 },
-      { label: '–ion (die)',    color: '#42A5F5', a1: 1.0, a2: 1.5, b1: 2.0 },
-      { label: '–ie (die)',     color: '#2196F3', a1: 3.0, a2: 2.2, b1: 1.4 },
-      { label: '–ei (die)',     color: '#1E88E5', a1: 2.0, a2: 1.5, b1: 1.1 },
-      { label: '–heit (die)',   color: '#1976D2', a1: 0.2, a2: 0.4, b1: 0.59 },
-      { label: '–ung (die)',    color: '#1565C0', a1: 8.0, a2: 4.0, b1: 0.58 }, 
-      { label: '–keit (die)',   color: '#0D47A1', a1: 0.1, a2: 0.3, b1: 0.54 },
-      { label: '–in (die)',     color: '#82B1FF', a1: 5.0, a2: 3.0, b1: 0.7 },
-      { label: '–tät (die)',    color: '#2962FF', a1: 0.1, a2: 0.1, b1: 0.05 },
+      { label: '–ik (die)', color: '#64B5F6', a1: 0.5, a2: 1.5, b1: 2.66 },
+      { label: '–ion (die)', color: '#42A5F5', a1: 1.0, a2: 1.5, b1: 2.0 },
+      { label: '–ie (die)', color: '#2196F3', a1: 3.0, a2: 2.2, b1: 1.4 },
+      { label: '–ei (die)', color: '#1E88E5', a1: 2.0, a2: 1.5, b1: 1.1 },
+      { label: '–heit (die)', color: '#1976D2', a1: 0.2, a2: 0.4, b1: 0.59 },
+      { label: '–ung (die)', color: '#1565C0', a1: 8.0, a2: 4.0, b1: 0.58 },
+      { label: '–keit (die)', color: '#0D47A1', a1: 0.1, a2: 0.3, b1: 0.54 },
+      { label: '–in (die)', color: '#82B1FF', a1: 5.0, a2: 3.0, b1: 0.7 },
+      { label: '–tät (die)', color: '#2962FF', a1: 0.1, a2: 0.1, b1: 0.05 },
 
       // NEUTRAL (Das)
-      { label: '–chen (das)',  color: '#C8E6C9', a1: 5.0,  a2: 3.0,  b1: 0.8 }, 
-      { label: '–lein (das)',  color: '#A5D6A7', a1: 1.0,  a2: 0.7,  b1: 0.4 },
-      { label: '–um (das)',    color: '#81C784', a1: 0.5,  a2: 0.5,  b1: 0.4 },
-      { label: '–ment (das)',  color: '#66BB6A', a1: 0.2,  a2: 0.2,  b1: 0.3 },
-      { label: '–tum (das)',   color: '#4CAF50', a1: 0.1,  a2: 0.1,  b1: 0.2 },
-      { label: '–ma (das)',    color: '#43A047', a1: 0.1,  a2: 0.1,  b1: 0.15 }
+      { label: '–chen (das)', color: '#C8E6C9', a1: 5.0, a2: 3.0, b1: 0.8 },
+      { label: '–lein (das)', color: '#A5D6A7', a1: 1.0, a2: 0.7, b1: 0.4 },
+      { label: '–um (das)', color: '#81C784', a1: 0.5, a2: 0.5, b1: 0.4 },
+      { label: '–ment (das)', color: '#66BB6A', a1: 0.2, a2: 0.2, b1: 0.3 },
+      { label: '–tum (das)', color: '#4CAF50', a1: 0.1, a2: 0.1, b1: 0.2 },
+      { label: '–ma (das)', color: '#43A047', a1: 0.1, a2: 0.1, b1: 0.15 }
     ];
 
     // 2. Vocabulary Data
@@ -482,7 +737,7 @@
           { de: 'die Uhr', es: 'el reloj' },
           { de: 'die Farbe', es: 'el color' },
           { de: 'die E-Mail', es: 'el correo' },
-          { de: 'die Banane', es: 'el plátano' }, 
+          { de: 'die Banane', es: 'el plátano' },
           { de: 'die Tomate', es: 'el tomate' },
           { de: 'die Zitrone', es: 'el limón' },
           { de: 'die Nachricht', es: 'el mensaje' },
@@ -767,7 +1022,7 @@
             titleFont: { size: 14 },
             bodyFont: { size: 14 },
             callbacks: {
-              label: function(context) {
+              label: function (context) {
                 return ` ${context.label}: ${context.raw}%`;
               }
             }
@@ -789,9 +1044,9 @@
             offset: 10,
             clamp: false,
             formatter: (value, ctx) => {
-              if (value < 1.5) return null; 
+              if (value < 1.5) return null;
               const label = ctx.chart.data.labels[ctx.dataIndex];
-              const shortLabel = label.split(' ')[0]; 
+              const shortLabel = label.split(' ')[0];
               return `${shortLabel}\n${value.toFixed(1)}%`;
             }
           }
@@ -806,7 +1061,7 @@
     const summaryDer = document.getElementById('total-der');
     const summaryDie = document.getElementById('total-die');
     const summaryDas = document.getElementById('total-das');
-    
+
     // List elements (Cards)
     const listDer = document.getElementById('list-der');
     const listDie = document.getElementById('list-die');
@@ -843,7 +1098,7 @@
       if ('speechSynthesis' in window) {
         // Cancel any pending utterances
         window.speechSynthesis.cancel();
-        
+
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'de-DE'; // German
         utterance.rate = 0.9; // Slightly slower for clarity
@@ -856,14 +1111,14 @@
     function renderList(ulElement, items, limit = null) {
       ulElement.innerHTML = '';
       const displayItems = limit ? items.slice(0, limit) : items;
-      
+
       displayItems.forEach(item => {
         const li = document.createElement('li');
         li.className = 'vocab-item';
         // Add click listener for speech
         li.onclick = () => speak(item.de);
         li.title = "Haz clic para escuchar";
-        
+
         li.innerHTML = `
           <span class="de-word">
             ${item.de} <span class="speaker-icon">🔊</span>
@@ -874,11 +1129,11 @@
       });
     }
 
-    window.setDashboardLevel = function(level) {
+    window.setDashboardLevel = function (level) {
       currentLevel = level;
       // 1. Data Selection
       let newData, currentVocab;
-      
+
       if (level === 'a1') {
         newData = nounData.map(d => d.a1);
         currentVocab = vocabData.a1;
@@ -893,7 +1148,7 @@
       // 2. Update UI Buttons
       buttons.forEach(btn => btn.classList.remove('active'));
       const activeBtn = Array.from(buttons).find(b => b.textContent.toLowerCase().includes(level));
-      if(activeBtn) activeBtn.classList.add('active');
+      if (activeBtn) activeBtn.classList.add('active');
 
       // 3. Update Chart
       myChart.data.datasets[0].data = newData;
@@ -912,7 +1167,7 @@
     }
 
     // Modal Functions
-    window.openModal = function(gender) {
+    window.openModal = function (gender) {
       const currentVocab = vocabData[currentLevel];
       let items = [];
       let titleText = "";
@@ -933,7 +1188,7 @@
       }
 
       modalTitle.innerText = titleText;
-      
+
       // Update Header Color
       modalHeader.classList.remove('der', 'die', 'das');
       modalHeader.classList.add(headerClass);
@@ -944,7 +1199,7 @@
       modal.classList.add('open');
     }
 
-    window.closeModal = function() {
+    window.closeModal = function () {
       modal.classList.remove('open');
     }
 
@@ -958,4 +1213,5 @@
 
   </script>
 </body>
+
 </html>
