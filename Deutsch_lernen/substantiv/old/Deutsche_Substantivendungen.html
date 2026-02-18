@@ -324,20 +324,48 @@
     .vocab-card {
       background: var(--card-bg);
       border: 1px solid #334155;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
 
     .vocab-title-bar {
       font-family: 'Nunito', sans-serif;
+      padding: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .vocab-card.der .vocab-title-bar {
+      color: var(--color-der);
+    }
+
+    .vocab-card.die .vocab-title-bar {
+      color: var(--color-die);
+    }
+
+    .vocab-card.das .vocab-title-bar {
+      color: var(--color-das);
+    }
+
+    .vocab-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
     }
 
     .vocab-item {
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid #334155;
+      /* Darker border */
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: background 0.2s;
+      transition: all 0.2s;
       cursor: pointer;
-      /* Indicates clickable */
+      padding: 12px 20px;
     }
 
     .vocab-item:last-child {
@@ -345,28 +373,33 @@
     }
 
     .vocab-item:hover {
-      background: #f0f4f8;
+      background: rgba(255, 255, 255, 0.05);
+      padding-left: 25px;
+      /* Subtle movement */
     }
 
     .de-word {
       font-weight: 700;
-      color: #333;
-      font-size: 1rem;
+      color: #f1f5f9;
+      /* Light text for dark mode */
+      font-size: 1.05rem;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .es-word {
-      color: #888;
+      color: #94a3b8;
+      /* Slate 400 */
       font-style: italic;
       font-size: 0.9rem;
     }
 
     .speaker-icon {
-      font-size: 0.85rem;
-      opacity: 0.5;
+      font-size: 0.9rem;
+      opacity: 0.4;
       transition: opacity 0.2s;
+      color: var(--text-color);
     }
 
     .vocab-item:hover .speaker-icon {
@@ -377,20 +410,33 @@
     /* Button inside cards */
     .view-more-btn {
       width: 100%;
-      padding: 12px;
-      background: #f8f9fa;
+      padding: 15px;
+      background: transparent;
       border: none;
-      border-top: 1px solid #eee;
-      color: #555;
-      font-weight: 600;
+      border-top: 1px solid #334155;
+      color: #94a3b8;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.3s;
       margin-top: auto;
     }
 
-    .view-more-btn:hover {
-      background: #e9ecef;
-      color: #2c3e50;
+    .vocab-card.der .view-more-btn:hover {
+      background: var(--color-der);
+      color: white;
+    }
+
+    .vocab-card.die .view-more-btn:hover {
+      background: var(--color-die);
+      color: white;
+    }
+
+    .vocab-card.das .view-more-btn:hover {
+      background: var(--color-das);
+      color: white;
     }
 
     /* Modal Styles */
