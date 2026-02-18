@@ -725,31 +725,37 @@
 
                 <!-- Position 0 -->
                 <div class="pos-card pos-0">
-                    <span class="pos-icon">0️⃣</span>
+                    <span class="tag zero"
+                        style="font-size: 1.2rem; display: inline-block; margin-bottom: 10px; padding: 5px 10px;">POS
+                        0</span>
                     <span class="pos-name">Posición 0</span>
                     <span class="pos-desc">Coordinantes (ADUSO)</span>
                     <div class="syntax-box">
-                        Conj + <span class="subj">Sujeto</span> + <span class="verb">Verbo</span>
+                        Conjunción + <span class="subj">Sujeto</span> + <span class="verb">Verbo conjugado</span>
                     </div>
                 </div>
 
                 <!-- Position 1 -->
                 <div class="pos-card pos-1">
-                    <span class="pos-icon">1️⃣</span>
+                    <span class="tag inv"
+                        style="font-size: 1.2rem; display: inline-block; margin-bottom: 10px; padding: 5px 10px;">POS
+                        1</span>
                     <span class="pos-name">Posición 1</span>
                     <span class="pos-desc">Inversión (Adverbios)</span>
                     <div class="syntax-box">
-                        Conj + <span class="verb">Verbo</span> + <span class="subj">Sujeto</span>
+                        Conjunción + <span class="verb">Verbo conjugado</span> + <span class="subj">Sujeto</span>
                     </div>
                 </div>
 
                 <!-- End Position -->
                 <div class="pos-card pos-end">
-                    <span class="pos-icon">🔚</span>
+                    <span class="tag end"
+                        style="font-size: 1.2rem; display: inline-block; margin-bottom: 10px; padding: 5px 10px;">FINAL</span>
                     <span class="pos-name">Verbo al Final</span>
                     <span class="pos-desc">Subordinantes (Nebensatz)</span>
                     <div class="syntax-box">
-                        Conj + <span class="subj">Sujeto</span> ... <span class="verb">Verbo</span>
+                        Conjunción + <span class="subj">Sujeto</span> ... <span style="white-space: nowrap;">+ <span
+                                class="verb">Verbo conjugado</span></span>
                     </div>
                 </div>
 
@@ -863,6 +869,14 @@
                                     <div class="german-word">wenn</div> <span class="tag end">Final</span>
                                 </td>
                                 <td>si (condicional/temp)</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="ob" data-tag="Final" data-tag-class="tag end"
+                                data-trans="si (duda / preg. indirecta)"
+                                data-example="Ich weiß nicht, <strong>ob</strong> er kommt.">
+                                <td>
+                                    <div class="german-word">ob</div> <span class="tag end">Final</span>
+                                </td>
+                                <td>si (duda / preg. indirecta)</td>
                             </tr>
                             <tr onclick="openWordModal(this)" data-word="als" data-tag="Final" data-tag-class="tag end"
                                 data-trans="cuando (pasado único)"
@@ -1081,6 +1095,7 @@
                 <div class="word-modal-example">
                     <p id="modalExample"></p>
                 </div>
+                <div id="modalExplanation" class="word-modal-explanation"></div>
             </div>
         </div>
     </div>
@@ -1088,6 +1103,81 @@
     <script>
         // WORD MODAL LOGIC
         const wordModal = document.getElementById("wordModal");
+
+        const explanations = {
+            "ob": `
+                <div style="text-align: left; margin-top: 20px; font-size: 0.95rem; line-height: 1.6; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                    <h3 style="color: var(--accent-green); margin-top: 0;">Sí, <em>ob</em> es una Conjunción Subordinante.</h3>
+                    <p>Esto significa dos cosas fundamentales:</p>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Une dos frases:</strong> Conecta la oración principal con la subordinada.</li>
+                        <li><strong>Manda el verbo al final:</strong> Al ser subordinante, obliga al verbo conjugado a irse a la última posición.</li>
+                    </ul>
+                    
+                    <h4 style="color: var(--text-muted); margin-top: 15px;">🧩 Análisis de la Oración</h4>
+                    <div style="overflow-x: auto; margin-bottom: 20px;">
+                        <table style="width:100%; border:1px solid var(--border-color); font-size: 0.9rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                            <tr style="background: rgba(255,255,255,0.05);">
+                                <th style="padding: 8px; text-align: center;">Principal (Hauptsatz)</th>
+                                <th style="padding: 8px; text-align: center;">Conector</th>
+                                <th style="padding: 8px; text-align: center;">Subordinada (Nebensatz)</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; text-align: center;">Ich frage dich,</td>
+                                <td style="padding: 8px; text-align: center; font-weight: bold; color: var(--accent-green);">ob</td>
+                                <td style="padding: 8px; text-align: center;">du Zeit <strong>hast</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; text-align: center; color: var(--text-muted); font-size: 0.8rem;">(Yo te pregunto,)</td>
+                                <td style="padding: 8px; text-align: center; color: var(--text-muted); font-size: 0.8rem;">si</td>
+                                <td style="padding: 8px; text-align: center; color: var(--text-muted); font-size: 0.8rem;">(tú tiempo tienes.)</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3 style="color: var(--level-b1);">💡 Regla de Oro: El "Si" de la Duda</h3>
+                    <p>En español usamos "si" para todo, pero en alemán <strong>ob</strong> se usa EXCLUSIVAMENTE para <strong>Preguntas Indirectas de Sí/No</strong>.</p>
+                    <p><strong>Truco:</strong> Si puedes cambiar el "si" por "si es que..." o "whether" (inglés), es <em>ob</em>.</p>
+                    <ul style="padding-left: 20px;">
+                        <li>No sé si vendrá. → <em>Ich weiß nicht, <span style="color:var(--accent-green)">ob</span> er kommt.</em> (¿Viene o no?)</li>
+                        <li>Te pregunto si tienes tiempo. → <em>Ich frage dich, <span style="color:var(--accent-green)">ob</span> du Zeit hast.</em></li>
+                    </ul>
+
+                    <h3 style="color: var(--level-b2); margin-top: 20px;">⚠️ ¡Cuidado con "Wenn"!</h3>
+                    <p>Si el "si" expresa una <strong>condición</strong>, NUNCA uses ob. Usa <em>wenn</em>.</p>
+                    <ul style="padding-left: 20px;">
+                        <li>Lámame si tienes tiempo. → <em>Ruf mich an, <span style="color:var(--level-a2)">wenn</span> du Zeit hast.</em></li>
+                    </ul>
+                    <p style="font-style: italic; color: var(--text-muted);">(Aquí no pregunto si tienes tiempo, pongo una condición).</p>
+                </div>
+            `,
+            "wenn": `
+                <div style="text-align: left; margin-top: 20px; font-size: 0.95rem; line-height: 1.6; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                    <h3 style="color: var(--level-a2); margin-top: 0;">⚠️ WENN vs OB</h3>
+                    <p>En español usamos "si" para ambos casos, pero en alemán es crucial distinguir:</p>
+                    
+                    <div style="background: rgba(234, 179, 8, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--level-a2); margin-bottom: 15px;">
+                        <strong style="color: var(--level-a2);">1. WENN (Condicional / Temporal)</strong>
+                        <p style="margin: 5px 0;">"Si pasa X, entonces Y" o "Cuando pase X".</p>
+                        <p style="margin: 5px 0; font-style: italic;">"Ruf mich an, <strong>wenn</strong> du Zeit hast."</p>
+                        <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">(Lámame SI tienes tiempo - Condición)</p>
+                    </div>
+
+                    <div style="background: rgba(59, 130, 246, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--level-a1);">
+                        <strong style="color: var(--level-a1);">2. OB (Duda / Pregunta Indirecta)</strong>
+                        <p style="margin: 5px 0;">"Si es que..." / "Whether". Solo para preguntas de Sí/No.</p>
+                        <p style="margin: 5px 0; font-style: italic;">"Ich weiß nicht, <strong>ob</strong> er kommt."</p>
+                        <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">(No sé SI vendrá - Duda)</p>
+                    </div>
+                    
+                    <p style="margin-top: 15px;"><strong>Regla simple:</strong></p>
+                    <ul style="padding-left: 20px;">
+                        <li>¿Es una condición? → <strong>WENN</strong></li>
+                        <li>¿Es una duda de Sí/No? → <strong>OB</strong></li>
+                    </ul>
+                </div>
+            `
+        };
 
         function openWordModal(row) {
             // Get data from attributes
@@ -1101,6 +1191,15 @@
             document.getElementById('modalWord').innerText = word;
             document.getElementById('modalTranslation').innerText = trans;
             document.getElementById('modalExample').innerHTML = example; // innerHTML for styling (<strong>)
+
+            // Inject Custom Explanation if available
+            const explContainer = document.getElementById('modalExplanation');
+            if (explanations[word]) {
+                explContainer.innerHTML = explanations[word];
+                explContainer.style.display = 'block';
+            } else {
+                explContainer.style.display = 'none';
+            }
 
             const tagEl = document.getElementById('modalTag');
             tagEl.innerText = tag;
