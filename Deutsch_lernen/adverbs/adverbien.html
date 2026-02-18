@@ -388,8 +388,7 @@
 
         .german-word {
             font-weight: 700;
-            color: #F8FAFC;
-            /* Slate 50 - High Contrast White */
+            color: var(--text-main);
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -413,8 +412,7 @@
         }
 
         .spanish-word {
-            color: #E6EEF5;
-            /* Custom 'Slate 180' approximation (Light Grey-Blue) */
+            color: var(--text-muted);
             font-size: 0.9rem;
             margin-top: 4px;
             font-style: italic;
@@ -778,12 +776,12 @@
                         "level": "A1-A2"
                     },
                     {
-                        "word": "sofort",
-                        "emoji": "⚡",
-                        "spanish": "(inmediatamente)",
-                        "english": "immediately",
-                        "example_de": "Komm bitte sofort her!",
-                        "example_es": "¡Ven aquí inmediatamente, por favor!",
+                        "word": "wieder",
+                        "emoji": "🔄",
+                        "spanish": "(de nuevo/otra vez)",
+                        "english": "again",
+                        "example_de": "Er kommt wieder.",
+                        "example_es": "Él viene de nuevo.",
                         "level": "A1-A2"
                     },
                     {
@@ -805,21 +803,21 @@
                         "level": "A1-A2"
                     },
                     {
-                        "word": "früher",
-                        "emoji": "🕰️",
-                        "spanish": "(antes)",
-                        "english": "earlier / formerly",
-                        "example_de": "Früher war alles billiger.",
-                        "example_es": "Antes todo era más barato.",
+                        "word": "schon",
+                        "emoji": "✅",
+                        "spanish": "(ya)",
+                        "english": "already",
+                        "example_de": "Ich bin schon da.",
+                        "example_es": "Ya estoy aquí.",
                         "level": "A1-A2"
                     },
                     {
-                        "word": "damals",
-                        "emoji": "📜",
-                        "spanish": "(en aquel entonces)",
-                        "english": "back then",
-                        "example_de": "Damals wohnte ich noch in Berlin.",
-                        "example_es": "En aquel entonces vivía todavía en Berlín.",
+                        "word": "noch",
+                        "emoji": "⏳",
+                        "spanish": "(todavía/aún)",
+                        "english": "still / yet",
+                        "example_de": "Ich bin noch hier.",
+                        "example_es": "Todavía estoy aquí.",
                         "level": "A1-A2"
                     },
                     {
@@ -841,21 +839,21 @@
                         "level": "A1-A2"
                     },
                     {
-                        "word": "noch",
-                        "emoji": "⏳",
-                        "spanish": "(todavía/aún)",
-                        "english": "still / yet",
-                        "example_de": "Ich bin noch hier.",
-                        "example_es": "Todavía estoy aquí.",
+                        "word": "damals",
+                        "emoji": "📜",
+                        "spanish": "(en aquel entonces)",
+                        "english": "back then",
+                        "example_de": "Damals wohnte ich noch in Berlin.",
+                        "example_es": "En aquel entonces vivía todavía en Berlín.",
                         "level": "A1-A2"
                     },
                     {
-                        "word": "wieder",
-                        "emoji": "🔄",
-                        "spanish": "(de nuevo/otra vez)",
-                        "english": "again",
-                        "example_de": "Er kommt wieder.",
-                        "example_es": "Él viene de nuevo.",
+                        "word": "sofort",
+                        "emoji": "⚡",
+                        "spanish": "(inmediatamente)",
+                        "english": "immediately",
+                        "example_de": "Komm bitte sofort her!",
+                        "example_es": "¡Ven aquí inmediatamente, por favor!",
                         "level": "A1-A2"
                     },
                     {
@@ -901,6 +899,24 @@
                         "english": "a while ago",
                         "example_de": "Wir haben vorhin gesprochen.",
                         "example_es": "Hablamos hace poco.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "früher",
+                        "emoji": "🕰️",
+                        "spanish": "(antes)",
+                        "english": "earlier / formerly",
+                        "example_de": "Früher war alles billiger.",
+                        "example_es": "Antes todo era más barato.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "endlich",
+                        "emoji": "🏁",
+                        "spanish": "(por fin / finalmente)",
+                        "english": "finally",
+                        "example_de": "Endlich sind wir da.",
+                        "example_es": "Por fin estamos aquí.",
                         "level": "A1-A2"
                     }
                 ]
@@ -1042,6 +1058,7 @@
                     }
                 ]
             },
+
             {
                 "title": "Lokal",
                 "description": "Adverbios de lugar",
@@ -1085,6 +1102,15 @@
                         "english": "right",
                         "example_de": "Die Post ist rechts.",
                         "example_es": "El correo está a la derecha.",
+                        "level": "A1"
+                    },
+                    {
+                        "word": "geradeaus",
+                        "emoji": "⬆️",
+                        "spanish": "(todo recto)",
+                        "english": "straight ahead",
+                        "example_de": "Gehen Sie immer geradeaus.",
+                        "example_es": "Siga todo recto.",
                         "level": "A1"
                     },
                     {
@@ -1261,6 +1287,15 @@
                         "level": "A1-B1"
                     },
                     {
+                        "word": "möglicherweise",
+                        "emoji": "🎲",
+                        "spanish": "(posiblemente)",
+                        "english": "possibly",
+                        "example_de": "Möglicherweise kommt er später.",
+                        "example_es": "Posiblemente venga más tarde.",
+                        "level": "B1"
+                    },
+                    {
                         "word": "hoffentlich",
                         "emoji": "🤞",
                         "spanish": "(ojalá)",
@@ -1279,30 +1314,30 @@
                         "level": "A1-B1"
                     },
                     {
-                        "word": "kaum",
-                        "emoji": "📉",
-                        "spanish": "(apenas)",
-                        "english": "barely / hardly",
-                        "example_de": "Ich kann dich kaum hören.",
-                        "example_es": "Apenas puedo oírte.",
+                        "word": "einfach",
+                        "emoji": "👌",
+                        "spanish": "(simplemente / fácil)",
+                        "english": "simply / easy",
+                        "example_de": "Das ist ganz einfach.",
+                        "example_es": "Eso es muy fácil.",
                         "level": "A1-B1"
                     },
                     {
-                        "word": "außerdem",
-                        "emoji": "➕",
-                        "spanish": "(además)",
-                        "english": "besides / also",
-                        "example_de": "Er ist nett und außerdem reich.",
-                        "example_es": "Él es amable y además rico.",
+                        "word": "wirklich",
+                        "emoji": "❗",
+                        "spanish": "(realmente/de verdad)",
+                        "english": "really",
+                        "example_de": "Bist du wirklich sicher?",
+                        "example_es": "¿Estás realmente seguro?",
                         "level": "A1-B1"
                     },
                     {
-                        "word": "deshalb",
-                        "emoji": "👉",
-                        "spanish": "(por eso / por lo tanto)",
-                        "english": "therefore / that's why",
-                        "example_de": "Ich war krank, deshalb war ich nicht da.",
-                        "example_es": "Estaba enfermo, por eso no estuve allí.",
+                        "word": "besonders",
+                        "emoji": "⭐",
+                        "spanish": "(especialmente)",
+                        "english": "especially",
+                        "example_de": "Dieser Film ist besonders gut.",
+                        "example_es": "Esta película es especialmente buena.",
                         "level": "A1-B1"
                     },
                     {
@@ -1333,13 +1368,22 @@
                         "level": "A1-B1"
                     },
                     {
-                        "word": "besonders",
-                        "emoji": "⭐",
-                        "spanish": "(especialmente)",
-                        "english": "especially",
-                        "example_de": "Dieser Film ist besonders gut.",
-                        "example_es": "Esta película es especialmente buena.",
+                        "word": "deshalb",
+                        "emoji": "👉",
+                        "spanish": "(por eso / por lo tanto)",
+                        "english": "therefore / that's why",
+                        "example_de": "Ich war krank, deshalb war ich nicht da.",
+                        "example_es": "Estaba enfermo, por eso no estuve allí.",
                         "level": "A1-B1"
+                    },
+                    {
+                        "word": "folglich",
+                        "emoji": "👉",
+                        "spanish": "(por lo tanto)",
+                        "english": "consequently",
+                        "example_de": "Er war krank, folglich war er nicht da.",
+                        "example_es": "Estaba enfermo, por lo tanto no estaba allí.",
+                        "level": "B1"
                     },
                     {
                         "word": "zusammen",
@@ -1387,12 +1431,12 @@
                         "level": "A1-B1"
                     },
                     {
-                        "word": "wirklich",
-                        "emoji": "❗",
-                        "spanish": "(realmente/de verdad)",
-                        "english": "really",
-                        "example_de": "Bist du wirklich sicher?",
-                        "example_es": "¿Estás realmente seguro?",
+                        "word": "außerdem",
+                        "emoji": "➕",
+                        "spanish": "(además)",
+                        "english": "besides / also",
+                        "example_de": "Er ist nett und außerdem reich.",
+                        "example_es": "Él es amable y además rico.",
                         "level": "A1-B1"
                     },
                     {
@@ -1441,6 +1485,15 @@
                         "level": "A1-B1"
                     },
                     {
+                        "word": "sicher",
+                        "emoji": "🔒",
+                        "spanish": "(seguramente)",
+                        "english": "certainly / surely",
+                        "example_de": "Er kommt sicher.",
+                        "example_es": "Viene seguro.",
+                        "level": "A2"
+                    },
+                    {
                         "word": "glücklicherweise",
                         "emoji": "🍀",
                         "spanish": "(afortunadamente)",
@@ -1448,6 +1501,15 @@
                         "example_de": "Glücklicherweise ist nichts passiert.",
                         "example_es": "Afortunadamente no pasó nada.",
                         "level": "A1-B1"
+                    },
+                    {
+                        "word": "glücklich",
+                        "emoji": "😊",
+                        "spanish": "(felizmente)",
+                        "english": "happily",
+                        "example_de": "Sie leben glücklich zusammen.",
+                        "example_es": "Viven felizmente juntos.",
+                        "level": "A1"
                     },
                     {
                         "word": "alleine",
@@ -1474,6 +1536,24 @@
                         "english": "differently / else",
                         "example_de": "Wir machen das anders.",
                         "example_es": "Lo hacemos de otra manera.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "kaum",
+                        "emoji": "📉",
+                        "spanish": "(apenas)",
+                        "english": "barely / hardly",
+                        "example_de": "Ich kann dich kaum hören.",
+                        "example_es": "Apenas puedo oírte.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "lieber",
+                        "emoji": "❤️",
+                        "spanish": "(preferiblemente)",
+                        "english": "rather / better",
+                        "example_de": "Ich trinke lieber Tee.",
+                        "example_es": "Prefiero beber té.",
                         "level": "A1-B1"
                     }
                 ]
