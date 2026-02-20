@@ -439,52 +439,109 @@ document.addEventListener('DOMContentLoaded', () => {
         return cleaned;
     }
 
-    // --- KOMPAKT VERSION RENDER FUNCTION (Chunked Grid) ---
-    function renderCompactVersion(group) {
+    // --- KOMPAKT VERSION RENDER FUNCTION (Adverb Port / Slate-Mint) ---
+    function renderCompactVersion() {
         cardsContainer.innerHTML = '';
         document.body.classList.add('compact-view');
         document.body.classList.remove('light-version-global-dark');
 
-        // Chunk verbs into groups of 6
-        const chunkSize = 6;
-        const chunks = [];
-        for (let i = 0; i < group.verbs.length; i += chunkSize) {
-            chunks.push(group.verbs.slice(i, i + chunkSize));
+        // Disable group arrows because we show ALL groups for the level at once
+        if (navigationWrapper) {
+            const groupNav = navigationWrapper.querySelector('.group-navigation');
+            if (groupNav) groupNav.style.display = 'none';
         }
 
-        chunks.forEach((chunk, index) => {
-            const chunkCard = document.createElement('div');
-            chunkCard.className = 'kompakt-chunk-card';
+        const levelGroups = verbGroupsByLevel[currentLevel];
+        if (!levelGroups) return;
 
-            // Add a sub-header or just rely on the grid
-            // chunkCard.innerHTML = `<div class="chunk-header">Teil ${index + 1}</div>`; 
+        // Create the main grid container matching the adverbs layout
+        const grid = document.createElement('div');
+        grid.className = 'kompakt-grid';
 
-            const grid = document.createElement('div');
-            grid.className = 'kompakt-chunk-grid';
+        // Standard palette logic (fallback sequence if theme colors are missing)
+        const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22C55E', '#3b82f6'];
 
-            chunk.forEach(verbName => {
-                const verbData = allVerbsData[verbName];
-                if (!verbData) return;
+        // Iterate over EVERY group loaded in this level
+        levelGroups.forEach((group, groupIndex) => {
+            if (!group || !group.verbs) return;
 
-                const cell = document.createElement('div');
-                cell.className = 'kompakt-verb-cell';
-                cell.onclick = () => openModalForVerb(verbName);
+            const groupName = group.theme || `Gruppe ${groupIndex + 1}`;
+            const themeColor = standardColors[groupIndex % standardColors.length]; // Fallback rotation
 
-                const translation = removeParentheses(verbData.es || '');
+            // Chunk verbs into strict maximums of 6 per card
+            const chunkSize = 6;
+            const chunks = [];
+            for (let i = 0; i < group.verbs.length; i += chunkSize) {
+                chunks.push(group.verbs.slice(i, i + chunkSize));
+            }
 
-                cell.innerHTML = `
-                    <div class="kompakt-verb-word">${verbName}</div>
-                    <div class="kompakt-verb-trans">${translation}</div>
-                `;
-                grid.appendChild(cell);
+            chunks.forEach((chunk, chunkIndex) => {
+                // Formatting Card Title (add pagination if >1 chunk exists for this group)
+                let cardTitle = groupName;
+                if (chunks.length > 1) {
+                    cardTitle += ` (${chunkIndex + 1}/${chunks.length})`;
+                }
+
+                // Build Semantic Card
+                const card = document.createElement('div');
+                card.className = 'kompakt-level-card';
+
+                // Header (Clickable Theme Title)
+                const header = document.createElement('div');
+                header.className = 'kompakt-level-header';
+                header.style.backgroundColor = themeColor;
+                header.style.cursor = 'pointer';
+                header.title = "Klicken Sie hier für Themeninfos";
+                header.onclick = () => openThemeModal(currentLevel, groupIndex);
+
+                // German side (left)
+                const germanSpan = document.createElement('span');
+                germanSpan.className = 'kompakt-header-de';
+                germanSpan.textContent = cardTitle;
+
+                // Spanish side (right)
+                const spanishSpan = document.createElement('span');
+                spanishSpan.className = 'kompakt-header-es';
+                spanishSpan.textContent = group.spanishName || '';
+
+                header.appendChild(germanSpan);
+                header.appendChild(spanishSpan);
+                card.appendChild(header);
+
+                // Content Area containing rows
+                const content = document.createElement('div');
+                content.className = 'kompakt-level-content';
+
+                chunk.forEach(verbName => {
+                    const verbData = allVerbsData[verbName];
+                    if (!verbData) return;
+
+                    const row = document.createElement('div');
+                    row.className = 'kompakt-row';
+                    row.onclick = () => openModalForVerb(verbName);
+
+                    const germanWord = document.createElement('div');
+                    germanWord.className = 'kompakt-german';
+                    germanWord.textContent = verbName;
+
+                    const spanishWord = document.createElement('div');
+                    spanishWord.className = 'kompakt-spanish';
+                    spanishWord.textContent = removeParentheses(verbData.es || '');
+
+                    row.appendChild(germanWord);
+                    row.appendChild(spanishWord);
+                    content.appendChild(row);
+                });
+
+                card.appendChild(content);
+                grid.appendChild(card);
             });
-
-            chunkCard.appendChild(grid);
-            cardsContainer.appendChild(chunkCard);
         });
 
-        // Update indicators
-        updateIndicatorsForView(group);
+        cardsContainer.appendChild(grid);
+
+        // Update indicators (Level Only, since group is irrelevant now)
+        updateIndicatorsForView(levelGroups[0]);
     }
 
     // Helper to update indicators (shared between Light and Compact)
@@ -513,6 +570,12 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsContainer.innerHTML = '';
         document.body.classList.remove('compact-view');
         document.body.classList.remove('light-version-global-dark');
+
+        // Restore group arrows because Niedlich is paginated by group
+        if (navigationWrapper) {
+            const groupNav = navigationWrapper.querySelector('.group-navigation');
+            if (groupNav) groupNav.style.display = 'flex';
+        }
 
         // Check English toggle state
         const enSwitch = document.getElementById('en-switch');
@@ -564,6 +627,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('compact-view');
         document.body.classList.remove('light-version-global-dark');
 
+        // Restore group arrows because Normal is paginated by group
+        if (navigationWrapper) {
+            const groupNav = navigationWrapper.querySelector('.group-navigation');
+            if (groupNav) groupNav.style.display = 'flex';
+        }
+
         const cardsHTML = group.verbs.map(verbName => {
             const verbData = allVerbsData[verbName];
             if (!verbData) return '';
@@ -594,6 +663,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderLightVersion(group) {
         cardsContainer.innerHTML = '';
         document.body.classList.remove('compact-view');
+
+        // Restore group arrows because Light is paginated by group
+        if (navigationWrapper) {
+            const groupNav = navigationWrapper.querySelector('.group-navigation');
+            if (groupNav) groupNav.style.display = 'flex';
+        }
 
         // Create light version container
         const lightContainer = document.createElement('div');
@@ -1563,18 +1638,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- THEME MODAL FUNCTION ---
-    async function openThemeModal() {
-        const levelKey = currentLevel; // e.g., 'A1_1'
-        const groupNum = currentGroupInLevel + 1; // 1-indexed
+    async function openThemeModal(optLevelKey, optGroupIndex) {
+        // Read explicitly passed variables or fallback to the global UI state
+        const levelKey = (typeof optLevelKey === 'string') ? optLevelKey : currentLevel;
+        const groupIndex = (typeof optGroupIndex === 'number') ? optGroupIndex : currentGroupInLevel;
+        const groupNum = groupIndex + 1; // 1-indexed
 
-        console.log(`[DEBUG] Opening Theme Modal for Level: ${levelKey}, Group: ${groupNum}`);
         console.log(`[DEBUG] Opening Theme Modal for Level: ${levelKey}, Group: ${groupNum}`);
 
         // Use pre-loaded group data from memory
-        const groupData = verbGroupsByLevel[levelKey][currentGroupInLevel];
+        const groupData = verbGroupsByLevel[levelKey][groupIndex];
 
         if (!groupData) {
-            console.error(`Group data not found for ${levelKey} group index ${currentGroupInLevel}`);
+            console.error(`Group data not found for ${levelKey} group index ${groupIndex}`);
             return;
         }
 
