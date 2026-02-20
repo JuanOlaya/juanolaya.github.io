@@ -35,20 +35,8 @@
                         <div class="search-container">
                             <input type="text" id="verb-search" class="search-input" placeholder="Suchen... (buscar)">
                             <button id="clear-search" class="clear-search-btn" title="Clear search">×</button>
-                        </div>
-
-                        <div class="view-switcher">
-                            <input type="radio" id="view-normal" name="card-version" value="normal">
-                            <label for="view-normal" title="Standard">Normal</label>
-
-                            <input type="radio" id="view-leicht" name="card-version" value="light">
-                            <label for="view-leicht" title="Druckfreundlich">Leicht</label>
-
-                            <input type="radio" id="view-niedlich" name="card-version" value="niedlich">
-                            <label for="view-niedlich" title="Verspielt / Bunt">Niedlich</label>
-
-                            <input type="radio" id="view-compact" name="card-version" value="compact" checked>
-                            <label for="view-compact" title="Kompakte Karten">Kompakt</label>
+                            <button id="settings-btn" class="settings-btn" title="Einstellungen"
+                                style="margin-left: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer; transition: transform 0.2s;">⚙️</button>
                         </div>
                     </div>
                     <div id="tag-filters-container" class="tag-filters-container">
@@ -131,82 +119,6 @@
 
             <div class="toggles-row">
                 <div class="info-button" id="info-button">info</div>
-                <div class="active-recall-toggle">
-                    <label for="de-switch" class="toggle-label">
-                        Deutsch
-                        <span class="toggle-sublabel">(Infinitiv)</span>
-                    </label>
-                    <label class="switch">
-                        <input type="checkbox" id="de-switch" class="visibility-toggle" data-toggle-class="hide-de"
-                            checked>
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="active-recall-toggle">
-                    <label for="es-switch" class="toggle-label">
-                        Spanisch
-                        <span class="toggle-sublabel">(Übersetzung)</span>
-                    </label>
-                    <label class="switch">
-                        <input type="checkbox" id="es-switch" class="visibility-toggle" data-toggle-class="hide-es">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="active-recall-toggle">
-                    <label for="en-switch" class="toggle-label">
-                        Englisch
-                        <span class="toggle-sublabel">(Übersetzung)</span>
-                    </label>
-                    <label class="switch">
-                        <input type="checkbox" id="en-switch" class="visibility-toggle" data-toggle-class="hide-en">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="active-recall-toggle">
-                    <label for="case-tags-switch" class="toggle-label">
-                        Kasus-Tags
-                        <span class="toggle-sublabel">(casos)</span>
-                    </label>
-                    <label class="switch">
-                        <input type="checkbox" id="case-tags-switch" class="visibility-toggle"
-                            data-toggle-class="hide-case-tags" checked>
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="active-recall-toggle">
-                    <label for="perfekt-switch" class="toggle-label">
-                        Perfekt
-                        <span class="toggle-sublabel">(verbo)</span>
-                    </label>
-                    <label class="switch">
-                        <input type="checkbox" id="perfekt-switch" class="visibility-toggle"
-                            data-toggle-class="hide-perfekt" checked>
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="active-recall-toggle">
-                    <label for="praeteritum-switch" class="toggle-label">
-                        Präteritum
-                        <span class="toggle-sublabel">(verbo)</span>
-                    </label>
-                    <label class="switch">
-                        <input type="checkbox" id="praeteritum-switch" class="visibility-toggle"
-                            data-toggle-class="hide-praeteritum">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                <div class="active-recall-toggle">
-                    <label for="konjunktiv-switch" class="toggle-label">
-                        Konjunktiv II
-                        <span class="toggle-sublabel">(condicional)</span>
-                    </label>
-                    <label class="switch">
-                        <input type="checkbox" id="konjunktiv-switch" class="visibility-toggle"
-                            data-toggle-class="hide-konjunktiv">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-
             </div>
 
             <button id="story-button">✨ Practicar con una Historia</button>
@@ -905,6 +817,159 @@
             </div>
         </div>
     </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal-content" style="padding: 20px; max-width: 400px; max-height: 80vh; overflow-y: auto;">
+            <div class="modal-header"
+                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px; margin-bottom: 15px;">
+                <h2 style="margin: 0; font-size: 1.5rem; color: #4682B4;">Einstellungen</h2>
+                <button id="close-settings-modal" class="close-modal-btn" title="Schließen"
+                    style="background: none; border: none; font-size: 2rem; color: #4b5563; cursor: pointer; padding: 0;">&times;</button>
+            </div>
+
+            <div class="modal-body" style="text-align: left;">
+                <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 1.2rem; color: #374151;">Karten Ansicht
+                    (Vista)</h3>
+                <div class="view-switcher" style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px;">
+                    <input type="radio" id="view-normal" name="card-version" value="normal">
+                    <label for="view-normal" title="Standard" style="margin: 0;">Normal</label>
+
+                    <input type="radio" id="view-leicht" name="card-version" value="light">
+                    <label for="view-leicht" title="Druckfreundlich" style="margin: 0;">Leicht</label>
+
+                    <input type="radio" id="view-niedlich" name="card-version" value="niedlich">
+                    <label for="view-niedlich" title="Verspielt / Bunt" style="margin: 0;">Niedlich</label>
+
+                    <input type="radio" id="view-compact" name="card-version" value="compact" checked>
+                    <label for="view-compact" title="Kompakte Karten" style="margin: 0;">Kompakt</label>
+                </div>
+
+                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
+
+                <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 1.2rem; color: #374151;">Sichtbarkeit
+                    (Visibilidad)</h3>
+                <div class="toggles-grid" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="de-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Deutsch</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Infinitiv)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="de-switch" class="visibility-toggle" data-toggle-class="hide-de"
+                                checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="es-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Spanisch</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Übersetzung)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="es-switch" class="visibility-toggle" data-toggle-class="hide-es">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="en-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Englisch</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Übersetzung)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="en-switch" class="visibility-toggle" data-toggle-class="hide-en">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="case-tags-switch" class="toggle-label"
+                            style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Kasus-Tags</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(casos)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="case-tags-switch" class="visibility-toggle"
+                                data-toggle-class="hide-case-tags" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="perfekt-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Perfekt</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(verbo)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="perfekt-switch" class="visibility-toggle"
+                                data-toggle-class="hide-perfekt" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="praeteritum-switch" class="toggle-label"
+                            style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Präteritum</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(verbo)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="praeteritum-switch" class="visibility-toggle"
+                                data-toggle-class="hide-praeteritum">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="konjunktiv-switch" class="toggle-label"
+                            style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Konjunktiv II</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(condicional)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="konjunktiv-switch" class="visibility-toggle"
+                                data-toggle-class="hide-konjunktiv">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const settingsBtn = document.getElementById('settings-btn');
+            const settingsModal = document.getElementById('settings-modal');
+            const closeSettingsBtn = document.getElementById('close-settings-modal');
+
+            if (settingsBtn && settingsModal && closeSettingsBtn) {
+                settingsBtn.addEventListener('click', () => {
+                    settingsModal.classList.add('visible');
+                });
+
+                closeSettingsBtn.addEventListener('click', () => {
+                    settingsModal.classList.remove('visible');
+                });
+
+                window.addEventListener('click', (e) => {
+                    if (e.target === settingsModal) {
+                        settingsModal.classList.remove('visible');
+                    }
+                });
+            }
+        });
+    </script>
 
     <script src="script/script.js?v=1.2"></script>
 </body>
