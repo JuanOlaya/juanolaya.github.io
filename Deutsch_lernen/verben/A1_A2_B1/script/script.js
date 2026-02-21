@@ -13,14 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
         `<p>Am Wochenende <span class="highlighted-word">habe ich</span> zu Hause <span class="highlighted-word">gearbeitet</span>. Ich <span class="highlighted-word">habe</span> für eine Prüfung <span class="highlighted-word">gelernt</span>. Ich <span class="highlighted-word">habe</span> eine Frage nicht <span class="highlighted-word">gewusst</span>, also <span class="highlighted-word">habe ich</span> meinen Lehrer <span class="highlighted-word">gefragt</span>. Er <span class="highlighted-word">hat</span> mir alles gut erklärt. Ich <span class="highlighted-word">habe</span> die Antwort schnell <span class="highlighted-word">gefunden</span>.</p>`
     ];
 
-    // Level configuration
     const levelConfig = {
         'A1_1': { groupCount: 10, displayName: 'A1.1' },
         'A1_2': { groupCount: 8, displayName: 'A1.2' },
         'A2_1': { groupCount: 10, displayName: 'A2.1' },
-        'A2_2': { groupCount: 13, displayName: 'A2.2' },
-        'B1_1': { groupCount: 9, displayName: 'B1.1' },
-        'B2_1': { groupCount: 1, displayName: 'B2.1' }
+        'A2_2': { groupCount: 14, displayName: 'A2.2' },
+        'B1_1': { groupCount: 10, displayName: 'B1.1' },
+        'B2_1': { groupCount: 2, displayName: 'B2.1' }
     };
     const levelOrder = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1', 'B2_1'];
 
@@ -32,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentVerbInModal = '';
     let currentIndexInModal = 0;
     let storyClickCounter = 0;
-    let currentViewMode = 'normal'; // Tracks active view: 'normal', 'cute' (niedlich), 'light', 'kompakt'
+    let currentViewMode = 'kompakt'; // Tracks active view: 'normal', 'cute' (niedlich), 'light', 'kompakt'
 
     // --- DOM ELEMENTS ---
     const mainContainer = document.getElementById('main-container');
@@ -477,9 +476,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             chunks.forEach((chunk, chunkIndex) => {
                 // Formatting Card Title (add pagination if >1 chunk exists for this group)
-                let cardTitle = groupName;
+                let cardTitleHTML = groupName;
                 if (chunks.length > 1) {
-                    cardTitle += ` (${chunkIndex + 1}/${chunks.length})`;
+                    cardTitleHTML += ` <span class="kompakt-pagination">(${chunkIndex + 1}/${chunks.length})</span>`;
                 }
 
                 // Build Semantic Card
@@ -497,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // German side (left)
                 const germanSpan = document.createElement('span');
                 germanSpan.className = 'kompakt-header-de';
-                germanSpan.textContent = cardTitle;
+                germanSpan.innerHTML = cardTitleHTML;
 
                 // Spanish side (right)
                 const spanishSpan = document.createElement('span');
