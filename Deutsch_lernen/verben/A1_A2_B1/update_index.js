@@ -29,7 +29,9 @@ function updateVerbsIndex() {
                     allGroups.push({
                         level: data.level,
                         verbCount: data.verbs ? data.verbs.length : 0,
-                        verbs: data.verbs || []
+                        verbs: data.verbs || [],
+                        groupNameGerman: data.germanName || data.theme || "Unbekannt",
+                        groupNameSpanish: data.spanishName || ""
                     });
                 } catch (error) {
                     console.error(`⚠ Error reading ${file}:`, error.message);

@@ -72,6 +72,10 @@ body.compact-view .group-indicator {
     color: var(--text-muted);
 }
 
+body.compact-view .content-block {
+    max-width: 1200px;
+}
+
 /* === END KOMPAKT THEME GLOBALS === */
 
 .content-block {
@@ -581,9 +585,13 @@ body.compact-view .group-indicator {
     opacity: 0.85;
 }
 
-.kompakt-header-de {
-    /* Main German topic heading */
+.kompakt-pagination {
+    font-size: 0.95rem;
+    font-weight: normal;
+    opacity: 0.8;
 }
+
+/* Main German topic heading is handled by parent .kompakt-level-header */
 
 .kompakt-header-es {
     font-size: 0.95rem;
@@ -594,7 +602,7 @@ body.compact-view .group-indicator {
 }
 
 .kompakt-level-content {
-    background: var(--section-bg);
+    background: transparent;
     padding: 10px 20px;
     text-align: left;
     flex: 1;
@@ -621,13 +629,13 @@ body.compact-view .group-indicator {
 }
 
 .kompakt-german {
-    font-size: 1.1rem;
+    font-size: 1.32rem;
     font-weight: 700;
     color: var(--text-main);
 }
 
 .kompakt-spanish {
-    font-size: 0.9rem;
+    font-size: 1.08rem;
     font-style: italic;
     color: var(--text-muted);
     text-align: right;
