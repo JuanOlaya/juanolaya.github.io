@@ -478,7 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
         levelGroups.forEach((group, groupIndex) => {
             if (!group || !group.verbs) return;
 
-            const groupName = group.theme || `Gruppe ${groupIndex + 1}`;
+            const groupName = group.theme || group.groupNameGerman || `Gruppe ${groupIndex + 1}`;
             const themeColor = standardColors[groupIndex % standardColors.length]; // Fallback rotation
 
             // Chunk verbs into strict maximums of 7 per card
@@ -515,7 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Spanish side (right)
                 const spanishSpan = document.createElement('span');
                 spanishSpan.className = 'kompakt-header-es';
-                spanishSpan.textContent = group.spanishName || '';
+                spanishSpan.textContent = group.spanishName || group.groupNameSpanish || '';
 
                 header.appendChild(germanSpan);
                 header.appendChild(spanishSpan);
@@ -573,11 +573,12 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (displayLevel === 'A2.2') levelIndicator.classList.add('level-a2-2');
         else if (displayLevel === 'B1.1') levelIndicator.classList.add('level-b1-1');
 
-        const themeName = group.theme || 'Gruppe';
+        const themeName = group.theme || group.groupNameGerman || 'Gruppe';
         groupThemeIndicator.textContent = themeName;
 
         const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
-        const themeNameForGroupIndicator = group.theme ? ` - ${group.theme}` : '';
+        const activeTheme = group.theme || group.groupNameGerman;
+        const themeNameForGroupIndicator = activeTheme ? ` - ${activeTheme}` : '';
         groupIndicator.textContent = `${germanOrdinals[currentGroupInLevel]} Gruppe von ${totalGroupsInLevel}${themeNameForGroupIndicator}`;
         prevGroupBtn.disabled = currentGroupInLevel === 0 && currentLevel === levelOrder[0];
         nextGroupBtn.disabled = currentGroupInLevel === totalGroupsInLevel - 1 && currentLevel === levelOrder[levelOrder.length - 1];
@@ -2987,9 +2988,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!groupedMatches[groupKey]) {
                     let spanishName = '';
                     if (verbGroupsByLevel[level] && verbGroupsByLevel[level][groupIndex]) {
-                        spanishName = verbGroupsByLevel[level][groupIndex].spanishName || '';
-                        if (verbGroupsByLevel[level][groupIndex].theme) {
-                            theme = verbGroupsByLevel[level][groupIndex].theme;
+                        spanishName = verbGroupsByLevel[level][groupIndex].spanishName || verbGroupsByLevel[level][groupIndex].groupNameSpanish || '';
+                        const extractedTheme = verbGroupsByLevel[level][groupIndex].theme || verbGroupsByLevel[level][groupIndex].groupNameGerman;
+                        if (extractedTheme) {
+                            theme = extractedTheme;
                         }
                     }
 
@@ -3016,7 +3018,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 chunks.forEach((chunk, chunkIndex) => {
-                    let cardTitleHTML = group.theme;
+                    let cardTitleHTML = group.theme || group.groupNameGerman || 'Gruppe';
                     if (chunks.length > 1) {
                         cardTitleHTML += ` <span class="kompakt-pagination">(${chunkIndex + 1}/${chunks.length})</span>`;
                     }
@@ -3025,7 +3027,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="kompakt-level-card">
                 <div class="kompakt-level-header" style="background-color: ${themeColor}; cursor: pointer;" title="Klicken Sie hier für Themeninfos" onclick="openThemeModal('${group.level}', ${group.groupIndex})">
                     <span class="kompakt-header-de">${cardTitleHTML}</span>
-                    <span class="kompakt-header-es">${group.spanishName}</span>
+                    <span class="kompakt-header-es">${group.spanishName || group.groupNameSpanish || ''}</span>
                 </div>
                 <div class="kompakt-level-content">
             `;
