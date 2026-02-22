@@ -141,6 +141,14 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
+        /* Wide Card Modifiers */
+        @media (min-width: 640px) {
+            .nav-card-wide {
+                grid-column: span 2;
+                aspect-ratio: 16 / 9;
+            }
+        }
+
         /* Gradient Variants */
         .style-morgen {
             background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
@@ -206,6 +214,15 @@
             margin-top: 15px;
         }
 
+        /* Rectangular grid layout specifically for levels */
+        .card-links-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            width: 75%;
+            margin: 15px auto 0 auto;
+        }
+
         .sub-link {
             background-color: rgba(255, 255, 255, 0.25);
             color: white;
@@ -216,6 +233,17 @@
             font-weight: 700;
             transition: background-color 0.2s ease, transform 0.2s ease;
             backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-links-grid .sub-link {
+            aspect-ratio: 16 / 9;
+            font-size: 1.1rem;
+            flex-direction: column;
+            gap: 5px;
+            border-radius: 12px;
         }
 
         .sub-link:hover {
@@ -275,28 +303,31 @@
 
         <div class="nav-grid">
             <!-- Fälle (Nacht) - Container Card -->
-            <div class="nav-card style-nacht">
-
-                <h2 class="card-title">Fälle</h2>
-                <div class="card-desc">Die Fälle im Deutschen</div>
-                <div class="card-links">
-                    <a href="faelle/nominativ/nominativ.html" class="sub-link">📘 Nominativ</a>
-                    <a href="faelle/akkusativ/akkusativ.html" class="sub-link">📗 Akkusativ</a>
-                    <a href="faelle/dativ/dativ.html" class="sub-link">📙 Dativ</a>
-                </div>
-            </div>
-
-            <!-- Verben (Nacht) - Container Card -->
-            <div class="nav-card style-nacht">
+            <!-- Verben (Nacht) - Container Card (WIDE) -->
+            <div class="nav-card nav-card-wide style-nacht">
 
                 <h2 class="card-title">Verben</h2>
-                <div class="card-desc">Konjugation</div>
-                <div class="card-links">
-                    <a href="verben/A1_A2_B1/verben.html?level=A1.1" class="sub-link">🟦 A1</a>
-                    <a href="verben/A1_A2_B1/verben.html?level=A2.1" class="sub-link">🟨 A2</a>
-                    <a href="verben/A1_A2_B1/verben.html?level=B1.1" class="sub-link">🟧 B1</a>
+                <div class="card-links-grid">
+                    <a href="verben/A1_A2_B1/verben.html?level=A1.1" class="sub-link">
+                        <span style="font-size: 1.5rem;">A1</span>
+                        <span style="font-size: 0.85rem; font-weight: 600; opacity: 0.9;">Supervivencia</span>
+                    </a>
+                    <a href="verben/A1_A2_B1/verben.html?level=A2.1" class="sub-link">
+                        <span style="font-size: 1.5rem;">A2</span>
+                        <span style="font-size: 0.85rem; font-weight: 600; opacity: 0.9;">Cotidianidad</span>
+                    </a>
+                    <a href="verben/A1_A2_B1/verben.html?level=B1.1" class="sub-link">
+                        <span style="font-size: 1.5rem;">B1</span>
+                        <span style="font-size: 0.85rem; font-weight: 600; opacity: 0.9;">Abstracción</span>
+                    </a>
+                    <a href="verben/A1_A2_B1/verben.html?level=B2.1" class="sub-link">
+                        <span style="font-size: 1.5rem;">B2</span>
+                        <span style="font-size: 0.85rem; font-weight: 600; opacity: 0.9;">Fluidez</span>
+                    </a>
                 </div>
             </div>
+
+
 
             <!-- Substantive (Nacht) - Container Card -->
             <div class="nav-card style-nacht">
@@ -305,10 +336,14 @@
                 <div class="card-desc">Wortschatz & Genus</div>
                 <div class="card-links">
                     <a href="substantiv/substantive.html" class="sub-link">📚 Hauptkurs</a>
-                    <a href="substantiv/koerperteile_interaktiv.html" class="sub-link">🏃 Körperteile</a>
-                    <a href="substantiv/zeit_kalender.html" class="sub-link">📅 Zeit & Kalender</a>
-                    <a href="substantiv/kleidung.html" class="sub-link">👕 Kleidung</a>
-                    <a href="substantiv/lid_kompakt.html" class="sub-link sub-link-lid">Einbürgerungstest / LiD</a>
+                    <a href="substantiv/koerperteile_interaktiv.html" class="sub-link"
+                        style="justify-content: flex-start; gap: 8px;">🏃 Körperteile</a>
+                    <a href="substantiv/zeit_kalender.html" class="sub-link"
+                        style="justify-content: flex-start; gap: 8px;">📅 Zeit & Kalender</a>
+                    <a href="substantiv/kleidung.html" class="sub-link"
+                        style="justify-content: flex-start; gap: 8px;">👕 Kleidung</a>
+                    <a href="substantiv/lid_kompakt.html" class="sub-link sub-link-lid"
+                        style="justify-content: flex-start; gap: 8px;">Einbürgerungstest / LiD</a>
                 </div>
             </div>
 
@@ -336,6 +371,17 @@
             </div>
 
 
+
+            <!-- Fälle (Nacht) - Container Card -->
+            <div class="nav-card style-nacht">
+                <h2 class="card-title">Fälle</h2>
+                <div class="card-desc">Die Fälle im Deutschen</div>
+                <div class="card-links">
+                    <a href="faelle/nominativ/nominativ.html" class="sub-link">📘 Nominativ</a>
+                    <a href="faelle/akkusativ/akkusativ.html" class="sub-link">📗 Akkusativ</a>
+                    <a href="faelle/dativ/dativ.html" class="sub-link">📙 Dativ</a>
+                </div>
+            </div>
 
             <!-- W-Fragen (Nacht) -->
             <a href="w-fragen/w-fragen.html" class="nav-card style-nacht">

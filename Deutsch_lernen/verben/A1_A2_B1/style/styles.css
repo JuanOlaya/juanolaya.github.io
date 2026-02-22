@@ -53,6 +53,26 @@ body.compact-view {
     color: var(--text-main);
 }
 
+/* === KOMPAKT LIGHT MODE OVERRIDE === */
+body.compact-view.compact-light-mode {
+    --bg-color: #f8fafc;
+    /* Slate 50 */
+    --card-bg: #ffffff;
+    --header-bg: #f1f5f9;
+    --section-bg: #f8fafc;
+    --rule-bg: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%);
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    /* Lighter shadow */
+    --glow-strength: 10px;
+    --accent-green: #16a34a;
+    /* Lighter contrast mode */
+
+    background-color: var(--bg-color) !important;
+}
+
 body.compact-view .main-container {
     background-color: transparent;
 }
@@ -62,14 +82,34 @@ body.compact-view .title {
     border-bottom: 3px dashed var(--border-color);
 }
 
+body.compact-view.compact-light-mode .title {
+    color: var(--text-main);
+}
+
 body.compact-view .level-indicator {
     background-color: var(--card-bg);
     border: 1px solid var(--accent-green);
     color: var(--accent-green);
 }
 
+body.compact-view.compact-light-mode .level-indicator {
+    color: var(--text-main);
+    border-color: var(--border-color);
+}
+
 body.compact-view .group-indicator {
     color: var(--text-muted);
+}
+
+body.compact-view .group-theme-indicator {
+    background-color: var(--card-bg);
+    border: 1px solid var(--accent-green);
+    color: var(--text-main);
+}
+
+body.compact-view.compact-light-mode .group-theme-indicator {
+    color: var(--text-main);
+    border-color: var(--border-color);
 }
 
 body.compact-view .content-block {
@@ -593,14 +633,20 @@ body.compact-view .content-block {
 
 /* Main German topic heading is handled by parent .kompakt-level-header */
 
+body.compact-view.compact-light-mode .kompakt-level-header,
+body.compact-view.compact-light-mode .kompakt-header-de,
+body.compact-view.compact-light-mode .kompakt-pagination,
+body.compact-view.compact-light-mode .kompakt-header-es {
+    color: var(--text-main) !important;
+}
+
 .kompakt-header-es {
-    font-size: 0.95rem;
-    font-weight: normal;
+    font-size: 1.2rem;
+    font-weight: bold;
     font-style: italic;
     opacity: 0.9;
     text-align: right;
 }
-
 .kompakt-level-content {
     background: transparent;
     padding: 10px 20px;
@@ -635,7 +681,8 @@ body.compact-view .content-block {
 }
 
 .kompakt-spanish {
-    font-size: 1.08rem;
+    font-size: 1.2rem;
+    font-weight: bold;
     font-style: italic;
     color: var(--text-muted);
     text-align: right;
@@ -4215,4 +4262,3 @@ body.compact-view .cards-container {
 
 .word-item:hover .niedlich-emoji-large {
     transform: scale(1.2) rotate(5deg);
-}
