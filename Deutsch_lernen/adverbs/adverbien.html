@@ -1746,7 +1746,9 @@
             if (!query || !text) return text;
             // Escape special regex chars
             const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regex = new RegExp(escapedQuery, 'gi');
+            // Regex matches any whole word (\b...\b) containing the query sequence
+            // We use [\wäöüÄÖÜß]* to also grab trailing/leading German characters
+            const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
             return text.replace(regex, (match) =>
                 `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${match}</span>`
             );

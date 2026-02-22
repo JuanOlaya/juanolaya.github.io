@@ -1,84 +1,90 @@
 {
-    "lastUpdated": "2026-02-21T17:52:12.398Z",
-    "totalGroups": 54,
-    "totalVerbs": 390,
+    "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below.",
+    "lastUpdated": "2026-02-22T19:44:15.942Z",
+    "totalGroups": 83,
+    "totalVerbs": 380,
     "groups": [
-        {
-            "level": "A1.1",
-            "verbCount": 8,
-            "verbs": [
-                "sein",
-                "haben",
-                "werden",
-                "wohnen",
-                "geben",
-                "machen",
-                "kommen",
-                "gehen"
-            ],
-            "groupNameGerman": "Existenz",
-            "groupNameSpanish": "Existencia",
-            "groupNumberPerLevel": 1
-        },
-        {
-            "level": "A1.1",
-            "verbCount": 10,
-            "verbs": [
-                "gefallen",
-                "lieben",
-                "hassen",
-                "lachen",
-                "weinen",
-                "fühlen",
-                "freuen",
-                "empfehlen",
-                "spielen",
-                "zahlen"
-            ],
-            "groupNameGerman": "Gefühle",
-            "groupNameSpanish": "Sentimientos",
-            "groupNumberPerLevel": 2
-        },
         {
             "level": "A1.1",
             "verbCount": 7,
             "verbs": [
+                "sein",
+                "haben",
+                "werden",
+                "geben",
+                "kommen",
+                "gehen",
+                "wohnen"
+            ],
+            "groupNameGerman": "Existenz",
+            "groupNameSpanish": "Existencia",
+            "groupNameEnglish": "Existence",
+            "groupNumberPerLevel": 1
+        },
+        {
+            "level": "A1.1",
+            "verbCount": 6,
+            "verbs": [
+                "spielen",
+                "treiben",
+                "laufen",
+                "wandern",
+                "spazieren",
+                "fernsehen"
+            ],
+            "groupNameGerman": "Freizeit",
+            "groupNameSpanish": "Ocio",
+            "groupNameEnglish": "Leisure",
+            "groupNumberPerLevel": 2
+        },
+        {
+            "level": "A1.1",
+            "verbCount": 5,
+            "verbs": [
                 "essen",
                 "trinken",
-                "rauchen",
-                "sehen",
                 "bringen",
                 "brauchen",
                 "schlafen"
             ],
             "groupNameGerman": "Grundbedürfnisse",
             "groupNameSpanish": "Necesidades básicas",
+            "groupNameEnglish": "Basic needs",
             "groupNumberPerLevel": 3
         },
         {
             "level": "A1.1",
-            "verbCount": 12,
+            "verbCount": 6,
             "verbs": [
                 "aufwachen",
                 "aufstehen",
                 "frühstücken",
                 "mittagessen",
-                "lesen",
-                "hören",
-                "schreiben",
-                "sprechen",
-                "arbeiten",
                 "wecken",
-                "rufen",
-                "grüßen"
+                "einschlafen"
             ],
             "groupNameGerman": "Routine",
             "groupNameSpanish": "Rutina",
+            "groupNameEnglish": "Routine",
             "groupNumberPerLevel": 4
         },
         {
             "level": "A1.1",
-            "verbCount": 8,
+            "verbCount": 4,
+            "verbs": [
+                "arbeiten",
+                "lesen",
+                "schreiben",
+                "berichten"
+            ],
+            "groupNameGerman": "Arbeit",
+            "groupNameSpanish": "Trabajo",
+            "groupNameEnglish": "Work",
+            "groupNumberPerLevel": 5
+        },
+        {
+            "level": "A1.1",
+            "verbCount": 7,
             "verbs": [
                 "öffnen",
                 "schließen",
@@ -86,45 +92,53 @@
                 "drücken",
                 "ziehen",
                 "schneiden",
-                "bitten",
-                "bedanken"
+                "machen"
             ],
-            "groupNameGerman": "Alltag",
+            "groupNameGerman": "Handgriffe",
             "groupNameSpanish": "Vida diaria",
-            "groupNumberPerLevel": 5
-        },
-        {
-            "level": "A1.1",
-            "verbCount": 7,
-            "verbs": [
-                "treiben",
-                "laufen",
-                "tanzen",
-                "wandern",
-                "spazieren",
-                "bewegen",
-                "fangen"
-            ],
-            "groupNameGerman": "Bewegung",
-            "groupNameSpanish": "Movimiento",
+            "groupNameEnglish": "Daily life",
             "groupNumberPerLevel": 6
         },
         {
             "level": "A1.1",
-            "verbCount": 8,
+            "verbCount": 2,
+            "verbs": [
+                "bitten",
+                "bedanken"
+            ],
+            "groupNameGerman": "Höflichkeit",
+            "groupNameSpanish": "Cortesía",
+            "groupNameEnglish": "Politeness",
+            "groupNumberPerLevel": 7
+        },
+        {
+            "level": "A1.1",
+            "verbCount": 6,
             "verbs": [
                 "wissen",
                 "kennen",
                 "denken",
                 "glauben",
-                "träumen",
+                "merken",
+                "träumen"
+            ],
+            "groupNameGerman": "Denken",
+            "groupNameSpanish": "Pensamiento",
+            "groupNameEnglish": "Thought",
+            "groupNumberPerLevel": 8
+        },
+        {
+            "level": "A1.1",
+            "verbCount": 3,
+            "verbs": [
                 "kennenlernen",
                 "vergessen",
                 "erinnern"
             ],
-            "groupNameGerman": "Gedanken",
-            "groupNameSpanish": "Pensamientos",
-            "groupNumberPerLevel": 7
+            "groupNameGerman": "Gedächtnis",
+            "groupNameSpanish": "Memoria",
+            "groupNameEnglish": "Memory",
+            "groupNumberPerLevel": 9
         },
         {
             "level": "A1.1",
@@ -139,24 +153,53 @@
             ],
             "groupNameGerman": "Einkauf",
             "groupNameSpanish": "Compras",
-            "groupNumberPerLevel": 8
+            "groupNameEnglish": "Shopping",
+            "groupNumberPerLevel": 10
         },
         {
             "level": "A1.1",
-            "verbCount": 8,
+            "verbCount": 7,
             "verbs": [
-                "packen",
-                "auspacken",
+                "lieben",
+                "hassen",
+                "lachen",
+                "weinen",
+                "fühlen",
+                "freuen",
+                "gefallen"
+            ],
+            "groupNameGerman": "Emotion",
+            "groupNameSpanish": "Emoción",
+            "groupNameEnglish": "Emotion",
+            "groupNumberPerLevel": 11
+        },
+        {
+            "level": "A1.1",
+            "verbCount": 5,
+            "verbs": [
                 "schicken",
                 "versenden",
                 "liefern",
-                "laden",
                 "zurückbringen",
                 "abgeben"
             ],
             "groupNameGerman": "Logistik",
             "groupNameSpanish": "Logística",
-            "groupNumberPerLevel": 9
+            "groupNameEnglish": "Logistics",
+            "groupNumberPerLevel": 12
+        },
+        {
+            "level": "A1.1",
+            "verbCount": 3,
+            "verbs": [
+                "packen",
+                "auspacken",
+                "laden"
+            ],
+            "groupNameGerman": "Gepäck",
+            "groupNameSpanish": "Equipaje",
+            "groupNameEnglish": "Luggage",
+            "groupNumberPerLevel": 13
         },
         {
             "level": "A1.1",
@@ -170,26 +213,57 @@
                 "mögen"
             ],
             "groupNameGerman": "Modalverben",
-            "groupNameSpanish": "Verbos modales",
-            "groupNumberPerLevel": 10
+            "groupNameSpanish": "Modales",
+            "groupNameEnglish": "Modals",
+            "groupNumberPerLevel": 14
         },
         {
             "level": "A1.2",
-            "verbCount": 9,
+            "verbCount": 5,
+            "verbs": [
+                "suchen",
+                "besuchen",
+                "finden",
+                "parken",
+                "zeigen"
+            ],
+            "groupNameGerman": "Stadtleben",
+            "groupNameSpanish": "Vida urbana",
+            "groupNameEnglish": "City life",
+            "groupNumberPerLevel": 1
+        },
+        {
+            "level": "A1.2",
+            "verbCount": 6,
             "verbs": [
                 "helfen",
                 "danken",
                 "treffen",
                 "anrufen",
+                "vertrauen",
+                "passen"
+            ],
+            "groupNameGerman": "Soziales",
+            "groupNameSpanish": "Social",
+            "groupNameEnglish": "Social",
+            "groupNumberPerLevel": 2
+        },
+        {
+            "level": "A1.2",
+            "verbCount": 7,
+            "verbs": [
+                "tanzen",
                 "einladen",
                 "gratulieren",
                 "schenken",
-                "passen",
-                "vertrauen"
+                "rauchen",
+                "betrinken",
+                "feiern"
             ],
-            "groupNameGerman": "Soziales",
-            "groupNameSpanish": "Vida social",
-            "groupNumberPerLevel": 1
+            "groupNameGerman": "Fest",
+            "groupNameSpanish": "Fiesta",
+            "groupNameEnglish": "Celebration",
+            "groupNumberPerLevel": 3
         },
         {
             "level": "A1.2",
@@ -203,131 +277,183 @@
                 "wegwerfen",
                 "räumen"
             ],
-            "groupNameGerman": "Körperpflege",
+            "groupNameGerman": "Hygiene",
             "groupNameSpanish": "Higiene",
-            "groupNumberPerLevel": 2
-        },
-        {
-            "level": "A1.2",
-            "verbCount": 7,
-            "verbs": [
-                "aussehen",
-                "scheinen",
-                "tragen",
-                "anziehen",
-                "ausziehen",
-                "folgen",
-                "benutzen"
-            ],
-            "groupNameGerman": "Kleidung",
-            "groupNameSpanish": "Ropa",
-            "groupNumberPerLevel": 3
-        },
-        {
-            "level": "A1.2",
-            "verbCount": 9,
-            "verbs": [
-                "fahren",
-                "ankommen",
-                "abfahren",
-                "halten",
-                "nehmen",
-                "einsteigen",
-                "aussteigen",
-                "umsteigen",
-                "anfahren"
-            ],
-            "groupNameGerman": "Pendeln",
-            "groupNameSpanish": "Transporte",
+            "groupNameEnglish": "Hygiene",
             "groupNumberPerLevel": 4
         },
         {
             "level": "A1.2",
-            "verbCount": 6,
+            "verbCount": 4,
+            "verbs": [
+                "tragen",
+                "anziehen",
+                "ausziehen",
+                "benutzen"
+            ],
+            "groupNameGerman": "Kleidung",
+            "groupNameSpanish": "Ropa",
+            "groupNameEnglish": "Clothing",
+            "groupNumberPerLevel": 5
+        },
+        {
+            "level": "A1.2",
+            "verbCount": 5,
             "verbs": [
                 "fliegen",
                 "reisen",
                 "buchen",
                 "reservieren",
-                "verpassen",
-                "übernachten"
+                "verpassen"
             ],
             "groupNameGerman": "Reisen",
             "groupNameSpanish": "Viajes",
-            "groupNumberPerLevel": 5
-        },
-        {
-            "level": "A1.2",
-            "verbCount": 8,
-            "verbs": [
-                "suchen",
-                "besuchen",
-                "finden",
-                "mieten",
-                "umziehen",
-                "zeigen",
-                "parken",
-                "anmelden"
-            ],
-            "groupNameGerman": "Stadtleben",
-            "groupNameSpanish": "Vida urbana",
+            "groupNameEnglish": "Travel",
             "groupNumberPerLevel": 6
         },
         {
             "level": "A1.2",
-            "verbCount": 8,
+            "verbCount": 3,
             "verbs": [
-                "buchstabieren",
-                "wählen",
-                "sortieren",
-                "sagen",
-                "fragen",
-                "antworten",
                 "beantworten",
+                "buchstabieren",
                 "stimmen"
             ],
-            "groupNameGerman": "Sprechen",
-            "groupNameSpanish": "Hablar",
+            "groupNameGerman": "Dialog",
+            "groupNameSpanish": "Diálogo",
+            "groupNameEnglish": "Dialogue",
             "groupNumberPerLevel": 7
         },
         {
             "level": "A1.2",
-            "verbCount": 9,
+            "verbCount": 2,
+            "verbs": [
+                "sortieren",
+                "ordnen"
+            ],
+            "groupNameGerman": "Ordnung",
+            "groupNameSpanish": "Orden",
+            "groupNameEnglish": "Order",
+            "groupNumberPerLevel": 8
+        },
+        {
+            "level": "A1.2",
+            "verbCount": 5,
             "verbs": [
                 "liegen",
                 "stehen",
                 "sitzen",
+                "hängen",
+                "bleiben"
+            ],
+            "groupNameGerman": "Position",
+            "groupNameSpanish": "Posición",
+            "groupNameEnglish": "Position",
+            "groupNumberPerLevel": 9
+        },
+        {
+            "level": "A1.2",
+            "verbCount": 4,
+            "verbs": [
                 "legen",
                 "stellen",
                 "setzen",
-                "hängen",
-                "leben",
-                "bleiben"
+                "stecken"
             ],
-            "groupNameGerman": "Positionieren",
-            "groupNameSpanish": "Posición",
-            "groupNumberPerLevel": 8
+            "groupNameGerman": "Richtung",
+            "groupNameSpanish": "Dirección",
+            "groupNameEnglish": "Direction",
+            "groupNumberPerLevel": 10
+        },
+        {
+            "level": "A1.2",
+            "verbCount": 5,
+            "verbs": [
+                "fahren",
+                "ankommen",
+                "abfahren",
+                "halten",
+                "anfahren"
+            ],
+            "groupNameGerman": "Verkehr",
+            "groupNameSpanish": "Tráfico",
+            "groupNameEnglish": "Traffic",
+            "groupNumberPerLevel": 11
+        },
+        {
+            "level": "A1.2",
+            "verbCount": 4,
+            "verbs": [
+                "nehmen",
+                "einsteigen",
+                "aussteigen",
+                "umsteigen"
+            ],
+            "groupNameGerman": "Pendeln",
+            "groupNameSpanish": "Desplazamiento",
+            "groupNameEnglish": "Commuting",
+            "groupNumberPerLevel": 12
+        },
+        {
+            "level": "A1.2",
+            "verbCount": 5,
+            "verbs": [
+                "mieten",
+                "umziehen",
+                "übernachten",
+                "einziehen",
+                "einrichten"
+            ],
+            "groupNameGerman": "Unterkunft",
+            "groupNameSpanish": "Alojamiento",
+            "groupNameEnglish": "Accommodation",
+            "groupNumberPerLevel": 13
+        },
+        {
+            "level": "A1.2",
+            "verbCount": 6,
+            "verbs": [
+                "sprechen",
+                "sagen",
+                "fragen",
+                "antworten",
+                "rufen",
+                "grüßen"
+            ],
+            "groupNameGerman": "Kommunikation",
+            "groupNameSpanish": "Comunicación",
+            "groupNameEnglish": "Communication",
+            "groupNumberPerLevel": 14
         },
         {
             "level": "A2.1",
-            "verbCount": 8,
+            "verbCount": 5,
             "verbs": [
                 "unterhalten",
                 "erzählen",
                 "versprechen",
-                "mitmachen",
                 "gehören",
-                "streiten",
-                "stören",
                 "küssen"
             ],
             "groupNameGerman": "Beziehungen",
             "groupNameSpanish": "Relaciones",
+            "groupNameEnglish": "Relations",
             "groupNumberPerLevel": 1
         },
         {
             "level": "A2.1",
-            "verbCount": 9,
+            "verbCount": 1,
+            "verbs": [
+                "mitmachen"
+            ],
+            "groupNameGerman": "Distanz",
+            "groupNameSpanish": "Distancia",
+            "groupNameEnglish": "Distance",
+            "groupNumberPerLevel": 2
+        },
+        {
+            "level": "A2.1",
+            "verbCount": 7,
             "verbs": [
                 "wundern",
                 "irren",
@@ -335,58 +461,78 @@
                 "erkälten",
                 "wohlfühlen",
                 "schämen",
-                "erholen",
-                "langweilen",
-                "konzentrieren"
+                "erholen"
             ],
             "groupNameGerman": "Reflexiv",
             "groupNameSpanish": "Reflexivo",
-            "groupNumberPerLevel": 2
-        },
-        {
-            "level": "A2.1",
-            "verbCount": 4,
-            "verbs": [
-                "fernsehen",
-                "mitbringen",
-                "beginnen",
-                "feiern"
-            ],
-            "groupNameGerman": "Freizeit",
-            "groupNameSpanish": "Ocio",
+            "groupNameEnglish": "Reflexive",
             "groupNumberPerLevel": 3
         },
         {
             "level": "A2.1",
-            "verbCount": 4,
+            "verbCount": 2,
             "verbs": [
+                "langweilen",
+                "konzentrieren"
+            ],
+            "groupNameGerman": "Fokus",
+            "groupNameSpanish": "Enfoque",
+            "groupNameEnglish": "Focus",
+            "groupNumberPerLevel": 4
+        },
+        {
+            "level": "A2.1",
+            "verbCount": 0,
+            "verbs": [],
+            "groupNameGerman": "Event",
+            "groupNameSpanish": "Evento",
+            "groupNameEnglish": "Event",
+            "groupNumberPerLevel": 5
+        },
+        {
+            "level": "A2.1",
+            "verbCount": 5,
+            "verbs": [
+                "mitbringen",
                 "abholen",
                 "mitkommen",
                 "zurückgeben",
                 "bekommen"
             ],
-            "groupNameGerman": "Erledigungen",
-            "groupNameSpanish": "Gestiones",
-            "groupNumberPerLevel": 4
+            "groupNameGerman": "Besorgung",
+            "groupNameSpanish": "Encargos",
+            "groupNameEnglish": "Errands",
+            "groupNumberPerLevel": 6
         },
         {
             "level": "A2.1",
-            "verbCount": 10,
+            "verbCount": 5,
             "verbs": [
-                "verschieben",
                 "vereinbaren",
+                "absagen",
+                "planen",
+                "vorhaben",
+                "verschieben"
+            ],
+            "groupNameGerman": "Termine",
+            "groupNameSpanish": "Citas",
+            "groupNameEnglish": "Appointments",
+            "groupNumberPerLevel": 7
+        },
+        {
+            "level": "A2.1",
+            "verbCount": 5,
+            "verbs": [
                 "dauern",
                 "warten",
                 "anfangen",
                 "aufhören",
-                "absagen",
-                "planen",
-                "vorhaben",
-                "füllen"
+                "beginnen"
             ],
-            "groupNameGerman": "Termine",
-            "groupNameSpanish": "Citas",
-            "groupNumberPerLevel": 5
+            "groupNameGerman": "Zeit",
+            "groupNameSpanish": "Tiempo",
+            "groupNameEnglish": "Time",
+            "groupNumberPerLevel": 8
         },
         {
             "level": "A2.1",
@@ -399,43 +545,67 @@
                 "verbieten",
                 "lassen",
                 "verlassen",
-                "fehlen"
+                "wählen"
             ],
             "groupNameGerman": "Wahl",
             "groupNameSpanish": "Elección",
-            "groupNumberPerLevel": 6
+            "groupNameEnglish": "Choice",
+            "groupNumberPerLevel": 9
         },
         {
             "level": "A2.1",
-            "verbCount": 7,
+            "verbCount": 5,
             "verbs": [
-                "tun",
+                "fehlen",
                 "enden",
-                "ändern",
-                "wechseln",
                 "fallen",
                 "brechen",
                 "verschwinden"
             ],
-            "groupNameGerman": "Veränderung",
-            "groupNameSpanish": "Cambio",
-            "groupNumberPerLevel": 7
+            "groupNameGerman": "Zustand",
+            "groupNameSpanish": "Estado",
+            "groupNameEnglish": "State",
+            "groupNumberPerLevel": 10
         },
         {
             "level": "A2.1",
-            "verbCount": 7,
+            "verbCount": 3,
+            "verbs": [
+                "tun",
+                "ändern",
+                "wechseln"
+            ],
+            "groupNameGerman": "Änderung",
+            "groupNameSpanish": "Cambio",
+            "groupNameEnglish": "Alteration",
+            "groupNumberPerLevel": 11
+        },
+        {
+            "level": "A2.1",
+            "verbCount": 2,
             "verbs": [
                 "regnen",
-                "schneien",
+                "schneien"
+            ],
+            "groupNameGerman": "Wetter",
+            "groupNameSpanish": "Clima",
+            "groupNameEnglish": "Weather",
+            "groupNumberPerLevel": 12
+        },
+        {
+            "level": "A2.1",
+            "verbCount": 5,
+            "verbs": [
                 "passieren",
                 "geschehen",
                 "verlieren",
                 "rauschen",
                 "hoffen"
             ],
-            "groupNameGerman": "Ereignisse",
-            "groupNameSpanish": "Eventos",
-            "groupNumberPerLevel": 8
+            "groupNameGerman": "Schicksal",
+            "groupNameSpanish": "Destino",
+            "groupNameEnglish": "Fate",
+            "groupNumberPerLevel": 13
         },
         {
             "level": "A2.1",
@@ -447,7 +617,8 @@
             ],
             "groupNameGerman": "Kreativität",
             "groupNameSpanish": "Creatividad",
-            "groupNumberPerLevel": 9
+            "groupNameEnglish": "Creativity",
+            "groupNumberPerLevel": 14
         },
         {
             "level": "A2.1",
@@ -462,31 +633,39 @@
             ],
             "groupNameGerman": "Bedeutung",
             "groupNameSpanish": "Significado",
-            "groupNumberPerLevel": 10
+            "groupNameEnglish": "Meaning",
+            "groupNumberPerLevel": 15
         },
         {
             "level": "A2.2",
-            "verbCount": 15,
+            "verbCount": 7,
             "verbs": [
+                "begrüßen",
+                "verabschieden",
                 "anbieten",
                 "mitnehmen",
                 "holen",
                 "wiederholen",
-                "begrüßen",
-                "verabschieden",
-                "merken",
-                "organisieren",
-                "senden",
+                "organisieren"
+            ],
+            "groupNameGerman": "Interaktion",
+            "groupNameSpanish": "Interacción",
+            "groupNameEnglish": "Interaction",
+            "groupNumberPerLevel": 1
+        },
+        {
+            "level": "A2.2",
+            "verbCount": 4,
+            "verbs": [
                 "werfen",
                 "springen",
-                "ärgern",
-                "abnehmen",
-                "zunehmen",
-                "steigen"
+                "bewegen",
+                "fangen"
             ],
-            "groupNameGerman": "Wandel",
-            "groupNameSpanish": "Cambio",
-            "groupNumberPerLevel": 1
+            "groupNameGerman": "Motorik",
+            "groupNameSpanish": "Motricidad",
+            "groupNameEnglish": "Motorics",
+            "groupNumberPerLevel": 2
         },
         {
             "level": "A2.2",
@@ -499,51 +678,52 @@
                 "verschenken"
             ],
             "groupNameGerman": "Beruf",
-            "groupNameSpanish": "Profesión o Trabajo",
-            "groupNumberPerLevel": 2
-        },
-        {
-            "level": "A2.2",
-            "verbCount": 3,
-            "verbs": [
-                "bewerben",
-                "berichten",
-                "beraten"
-            ],
-            "groupNameGerman": "Büro",
-            "groupNameSpanish": "Oficina",
+            "groupNameSpanish": "Trabajo",
+            "groupNameEnglish": "Job",
             "groupNumberPerLevel": 3
         },
         {
             "level": "A2.2",
-            "verbCount": 12,
+            "verbCount": 2,
             "verbs": [
-                "studieren",
-                "lernen",
-                "teilnehmen",
-                "unterrichten",
-                "erklären",
-                "verstehen",
-                "üben",
-                "bestehen",
-                "lösen",
-                "lösen",
-                "prüfen",
-                "lehren"
+                "bewerben",
+                "beraten"
             ],
-            "groupNameGerman": "Bildung",
-            "groupNameSpanish": "Educación",
+            "groupNameGerman": "Büro",
+            "groupNameSpanish": "Oficina",
+            "groupNameEnglish": "Office",
             "groupNumberPerLevel": 4
         },
         {
             "level": "A2.2",
-            "verbCount": 1,
+            "verbCount": 6,
             "verbs": [
-                "klappen"
+                "studieren",
+                "lernen",
+                "teilnehmen",
+                "verstehen",
+                "üben",
+                "lösen"
             ],
-            "groupNameGerman": "Funktion",
-            "groupNameSpanish": "Funcionamiento",
+            "groupNameGerman": "Lernen",
+            "groupNameSpanish": "Aprendizaje",
+            "groupNameEnglish": "Learning",
             "groupNumberPerLevel": 5
+        },
+        {
+            "level": "A2.2",
+            "verbCount": 5,
+            "verbs": [
+                "unterrichten",
+                "erklären",
+                "bestehen",
+                "prüfen",
+                "lehren"
+            ],
+            "groupNameGerman": "Lehre",
+            "groupNameSpanish": "Enseñanza",
+            "groupNameEnglish": "Teaching",
+            "groupNumberPerLevel": 6
         },
         {
             "level": "A2.2",
@@ -551,12 +731,13 @@
             "verbs": [
                 "herstellen",
                 "bauen",
-                "zerstören",
-                "aufbauen"
+                "aufbauen",
+                "klappen"
             ],
             "groupNameGerman": "Werk",
             "groupNameSpanish": "Taller",
-            "groupNumberPerLevel": 6
+            "groupNameEnglish": "Workshop",
+            "groupNumberPerLevel": 7
         },
         {
             "level": "A2.2",
@@ -566,35 +747,52 @@
                 "zuhören",
                 "regeln"
             ],
-            "groupNameGerman": "Vorbereitung",
-            "groupNameSpanish": "Preparación",
-            "groupNumberPerLevel": 7
-        },
-        {
-            "level": "A2.2",
-            "verbCount": 2,
-            "verbs": [
-                "drucken",
-                "heiraten"
-            ],
-            "groupNameGerman": "Ereignisse",
-            "groupNameSpanish": "Eventos",
+            "groupNameGerman": "Planung",
+            "groupNameSpanish": "Planificación",
+            "groupNameEnglish": "Planning",
             "groupNumberPerLevel": 8
         },
         {
             "level": "A2.2",
-            "verbCount": 6,
+            "verbCount": 4,
             "verbs": [
-                "verdienen",
-                "sparen",
-                "überweisen",
-                "leihen",
-                "ausgeben",
-                "schulden"
+                "braten",
+                "kochen",
+                "backen",
+                "räuchern"
             ],
-            "groupNameGerman": "Geschäft",
-            "groupNameSpanish": "Negocio",
+            "groupNameGerman": "Kochen",
+            "groupNameSpanish": "Cocina",
+            "groupNameEnglish": "Cooking",
             "groupNumberPerLevel": 9
+        },
+        {
+            "level": "A2.2",
+            "verbCount": 4,
+            "verbs": [
+                "mischen",
+                "vermischen",
+                "wiegen",
+                "einmachen"
+            ],
+            "groupNameGerman": "Rezept",
+            "groupNameSpanish": "Receta",
+            "groupNameEnglish": "Recipe",
+            "groupNumberPerLevel": 10
+        },
+        {
+            "level": "A2.2",
+            "verbCount": 4,
+            "verbs": [
+                "husten",
+                "schmerzen",
+                "untersuchen",
+                "wehtun"
+            ],
+            "groupNameGerman": "Gesundheit",
+            "groupNameSpanish": "Salud",
+            "groupNameEnglish": "Health",
+            "groupNumberPerLevel": 11
         },
         {
             "level": "A2.2",
@@ -607,107 +805,117 @@
                 "weiterhelfen",
                 "führen"
             ],
-            "groupNameGerman": "Unternehmertum",
-            "groupNameSpanish": "Emprendimiento",
-            "groupNumberPerLevel": 10
-        },
-        {
-            "level": "A2.2",
-            "verbCount": 10,
-            "verbs": [
-                "braten",
-                "kochen",
-                "backen",
-                "mischen",
-                "vermischen",
-                "schmecken",
-                "riechen",
-                "wiegen",
-                "räuchern",
-                "einmachen"
-            ],
-            "groupNameGerman": "Kochen",
-            "groupNameSpanish": "Cocina",
-            "groupNumberPerLevel": 11
-        },
-        {
-            "level": "A2.2",
-            "verbCount": 5,
-            "verbs": [
-                "husten",
-                "schmerzen",
-                "sterben",
-                "untersuchen",
-                "wehtun"
-            ],
-            "groupNameGerman": "Gesundheit",
-            "groupNameSpanish": "Salud",
+            "groupNameGerman": "Firma",
+            "groupNameSpanish": "Empresa",
+            "groupNameEnglish": "Company",
             "groupNumberPerLevel": 12
         },
         {
             "level": "A2.2",
-            "verbCount": 4,
+            "verbCount": 6,
             "verbs": [
-                "lügen",
-                "sammeln",
-                "speichern",
-                "einreichen"
+                "sehen",
+                "hören",
+                "riechen",
+                "schmecken",
+                "aussehen",
+                "scheinen"
             ],
-            "groupNameGerman": "das Management",
-            "groupNameSpanish": "Administración",
+            "groupNameGerman": "Wahrnehmung",
+            "groupNameSpanish": "Percepción",
+            "groupNameEnglish": "Perception",
             "groupNumberPerLevel": 13
         },
         {
             "level": "A2.2",
-            "verbCount": 6,
+            "verbCount": 7,
             "verbs": [
-                "entscheiden",
-                "ordnen",
-                "schimpfen",
-                "raten",
-                "wachsen",
-                "beschweren"
+                "verdienen",
+                "sparen",
+                "überweisen",
+                "leihen",
+                "ausgeben",
+                "schulden",
+                "zahlen"
             ],
-            "groupNameGerman": "Management",
-            "groupNameSpanish": "Gestión",
+            "groupNameGerman": "Finanzen",
+            "groupNameSpanish": "Finanzas",
+            "groupNameEnglish": "Finances",
             "groupNumberPerLevel": 14
         },
         {
+            "level": "A2.2",
+            "verbCount": 5,
+            "verbs": [
+                "steigen",
+                "sinken",
+                "wachsen",
+                "zunehmen",
+                "abnehmen"
+            ],
+            "groupNameGerman": "Wandel",
+            "groupNameSpanish": "Cambio",
+            "groupNameEnglish": "Change",
+            "groupNumberPerLevel": 15
+        },
+        {
+            "level": "A2.2",
+            "verbCount": 3,
+            "verbs": [
+                "heiraten",
+                "sterben",
+                "leben"
+            ],
+            "groupNameGerman": "Biografie",
+            "groupNameSpanish": "Biografía",
+            "groupNameEnglish": "Biography",
+            "groupNumberPerLevel": 16
+        },
+        {
+            "level": "A2.2",
+            "verbCount": 2,
+            "verbs": [
+                "entscheiden",
+                "raten"
+            ],
+            "groupNameGerman": "Struktur",
+            "groupNameSpanish": "Estructura",
+            "groupNameEnglish": "Structure",
+            "groupNumberPerLevel": 17
+        },
+        {
             "level": "B1.1",
-            "verbCount": 6,
+            "verbCount": 4,
             "verbs": [
                 "spenden",
                 "aufsuchen",
                 "stehlen",
-                "zurückbringen",
-                "laden",
                 "bewerten"
             ],
             "groupNameGerman": "Ethik",
             "groupNameSpanish": "Ética",
+            "groupNameEnglish": "Ethics",
             "groupNumberPerLevel": 1
         },
         {
             "level": "B1.1",
-            "verbCount": 5,
+            "verbCount": 3,
             "verbs": [
-                "betrinken",
-                "folgen",
                 "bestätigen",
                 "gelingen",
                 "misslingen"
             ],
             "groupNameGerman": "Erfolg",
             "groupNameSpanish": "Éxito",
+            "groupNameEnglish": "Success",
             "groupNumberPerLevel": 2
         },
         {
             "level": "B1.1",
-            "verbCount": 8,
+            "verbCount": 7,
             "verbs": [
                 "schmücken",
                 "verzieren",
-                "beraten",
                 "erstellen",
                 "vorstellen",
                 "wünschen",
@@ -716,129 +924,168 @@
             ],
             "groupNameGerman": "Präsentation",
             "groupNameSpanish": "Presentación",
+            "groupNameEnglish": "Presentation",
             "groupNumberPerLevel": 3
         },
         {
             "level": "B1.1",
-            "verbCount": 14,
+            "verbCount": 6,
             "verbs": [
                 "forschen",
                 "erforschen",
                 "analysieren",
                 "dokumentieren",
-                "beantragen",
-                "entschließen",
-                "entwickeln",
-                "erhalten",
-                "gründen",
                 "unterscheiden",
-                "ähneln",
-                "aufgeben",
-                "einziehen",
-                "erleben"
+                "ähneln"
             ],
             "groupNameGerman": "Forschung",
             "groupNameSpanish": "Investigación",
+            "groupNameEnglish": "Research",
             "groupNumberPerLevel": 4
         },
         {
             "level": "B1.1",
-            "verbCount": 13,
+            "verbCount": 6,
+            "verbs": [
+                "entschließen",
+                "entwickeln",
+                "erhalten",
+                "gründen",
+                "erleben",
+                "aufgeben"
+            ],
+            "groupNameGerman": "Innovation",
+            "groupNameSpanish": "Innovación",
+            "groupNameEnglish": "Innovation",
+            "groupNumberPerLevel": 5
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 6,
             "verbs": [
                 "schützen",
                 "verschmutzen",
                 "verbrauchen",
                 "trennen",
                 "recyceln",
-                "zerstören",
-                "verzichten",
-                "heilen",
-                "behandeln",
-                "verletzen",
-                "pflegen",
-                "retten",
-                "sinken"
+                "verzichten"
             ],
-            "groupNameGerman": "Umwelt",
-            "groupNameSpanish": "Medio ambiente",
-            "groupNumberPerLevel": 5
-        },
-        {
-            "level": "B1.1",
-            "verbCount": 9,
-            "verbs": [
-                "herunterladen",
-                "hochladen",
-                "löschen",
-                "einschalten",
-                "ausschalten",
-                "klicken",
-                "teilen",
-                "posten",
-                "nutzen"
-            ],
-            "groupNameGerman": "Digital",
-            "groupNameSpanish": "Digital",
+            "groupNameGerman": "Ökologie",
+            "groupNameSpanish": "Ecología",
+            "groupNameEnglish": "Ecology",
             "groupNumberPerLevel": 6
-        },
-        {
-            "level": "B1.1",
-            "verbCount": 9,
-            "verbs": [
-                "funktionieren",
-                "probieren",
-                "reparieren",
-                "installieren",
-                "einstellen",
-                "auswählen",
-                "ersetzen",
-                "einrichten",
-                "verbinden"
-            ],
-            "groupNameGerman": "Technologie",
-            "groupNameSpanish": "Tecnología",
-            "groupNumberPerLevel": 7
-        },
-        {
-            "level": "B1.1",
-            "verbCount": 18,
-            "verbs": [
-                "wählen",
-                "diskutieren",
-                "engagieren",
-                "fordern",
-                "unterstützen",
-                "akzeptieren",
-                "überzeugen",
-                "respektieren",
-                "regieren",
-                "richten",
-                "empfangen",
-                "kritisieren",
-                "loben",
-                "widersprechen",
-                "kündigen",
-                "kämpfen",
-                "siegen",
-                "wirken"
-            ],
-            "groupNameGerman": "Gesellschaft",
-            "groupNameSpanish": "Sociedad",
-            "groupNumberPerLevel": 8
         },
         {
             "level": "B1.1",
             "verbCount": 5,
             "verbs": [
+                "heilen",
+                "behandeln",
+                "verletzen",
+                "pflegen",
+                "retten"
+            ],
+            "groupNameGerman": "Pflege",
+            "groupNameSpanish": "Cuidado",
+            "groupNameEnglish": "Care",
+            "groupNumberPerLevel": 7
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 5,
+            "verbs": [
+                "funktionieren",
+                "reparieren",
+                "einstellen",
+                "installieren",
+                "drucken"
+            ],
+            "groupNameGerman": "Technik",
+            "groupNameSpanish": "Tecnología",
+            "groupNameEnglish": "Technology",
+            "groupNumberPerLevel": 8
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 3,
+            "verbs": [
+                "löschen",
+                "einschalten",
+                "ausschalten"
+            ],
+            "groupNameGerman": "Daten",
+            "groupNameSpanish": "Datos",
+            "groupNameEnglish": "Data",
+            "groupNumberPerLevel": 9
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 4,
+            "verbs": [
+                "klicken",
+                "posten",
+                "nutzen",
+                "senden"
+            ],
+            "groupNameGerman": "Medien",
+            "groupNameSpanish": "Medios",
+            "groupNameEnglish": "Media",
+            "groupNumberPerLevel": 10
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 4,
+            "verbs": [
+                "regieren",
+                "fordern",
+                "richten",
+                "empfangen"
+            ],
+            "groupNameGerman": "Politik",
+            "groupNameSpanish": "Política",
+            "groupNameEnglish": "Politics",
+            "groupNumberPerLevel": 11
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 4,
+            "verbs": [
+                "engagieren",
+                "unterstützen",
+                "akzeptieren",
+                "respektieren"
+            ],
+            "groupNameGerman": "Haltung",
+            "groupNameSpanish": "Postura",
+            "groupNameEnglish": "Stance",
+            "groupNumberPerLevel": 12
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 4,
+            "verbs": [
+                "kämpfen",
+                "siegen",
+                "wirken",
+                "kündigen"
+            ],
+            "groupNameGerman": "Wettbewerb",
+            "groupNameSpanish": "Competencia",
+            "groupNameEnglish": "Competition",
+            "groupNumberPerLevel": 13
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 3,
+            "verbs": [
                 "zwingen",
                 "beeinflussen",
-                "halten",
-                "meinen",
                 "gelten"
             ],
             "groupNameGerman": "Leben in Deutschland",
-            "groupNameSpanish": "",
-            "groupNumberPerLevel": 9
+            "groupNameSpanish": "Vida en Alemania",
+            "groupNameEnglish": "Life in Germany",
+            "groupNumberPerLevel": 14
         },
         {
             "level": "B1.1",
@@ -848,24 +1095,102 @@
                 "mitteilen",
                 "verwandeln"
             ],
-            "groupNameGerman": "Richtung",
-            "groupNameSpanish": "Dirección",
-            "groupNumberPerLevel": 10
+            "groupNameGerman": "Transformation",
+            "groupNameSpanish": "Transformación",
+            "groupNameEnglish": "Transformation",
+            "groupNumberPerLevel": 15
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 5,
+            "verbs": [
+                "diskutieren",
+                "kritisieren",
+                "loben",
+                "widersprechen",
+                "überzeugen"
+            ],
+            "groupNameGerman": "Debatte",
+            "groupNameSpanish": "Debate",
+            "groupNameEnglish": "Debate",
+            "groupNumberPerLevel": 16
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 6,
+            "verbs": [
+                "beantragen",
+                "anmelden",
+                "einreichen",
+                "sammeln",
+                "speichern",
+                "füllen"
+            ],
+            "groupNameGerman": "Verwaltung",
+            "groupNameSpanish": "Administración",
+            "groupNameEnglish": "Administration",
+            "groupNumberPerLevel": 17
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 7,
+            "verbs": [
+                "ärgern",
+                "lügen",
+                "zerstören",
+                "beschweren",
+                "streiten",
+                "schimpfen",
+                "stören"
+            ],
+            "groupNameGerman": "Konflikt",
+            "groupNameSpanish": "Conflicto",
+            "groupNameEnglish": "Conflict",
+            "groupNumberPerLevel": 18
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 3,
+            "verbs": [
+                "probieren",
+                "auswählen",
+                "ersetzen"
+            ],
+            "groupNameGerman": "Versuch",
+            "groupNameSpanish": "Prueba",
+            "groupNameEnglish": "Trial",
+            "groupNumberPerLevel": 19
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 6,
+            "verbs": [
+                "teilen",
+                "herunterladen",
+                "hochladen",
+                "verbinden",
+                "folgen",
+                "empfehlen"
+            ],
+            "groupNameGerman": "Internet",
+            "groupNameSpanish": "Internet",
+            "groupNameEnglish": "Internet",
+            "groupNumberPerLevel": 20
         },
         {
             "level": "B2.1",
-            "verbCount": 7,
+            "verbCount": 6,
             "verbs": [
                 "befehlen",
                 "betrügen",
                 "beurteilen",
                 "entstehen",
                 "erscheinen",
-                "scheitern",
-                "zwingen"
+                "scheitern"
             ],
             "groupNameGerman": "Konzepte",
             "groupNameSpanish": "Conceptos",
+            "groupNameEnglish": "Concepts",
             "groupNumberPerLevel": 1
         },
         {
@@ -877,6 +1202,7 @@
             ],
             "groupNameGerman": "Wirtschaft",
             "groupNameSpanish": "Economía",
+            "groupNameEnglish": "Economy",
             "groupNumberPerLevel": 2
         }
     ]

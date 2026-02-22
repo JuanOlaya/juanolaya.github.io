@@ -107,7 +107,8 @@ Words are grouped by semantic function. Each group is assigned a unique **Theme 
     - If a search query matches *at least one* word in a card, **the entire card (up to 6 items) is rendered**, showing the matched item alongside its original grouped neighbors.
     - If an entire card contains zero matches, that specific card is hidden entirely.
 -   **Visual Feedback**:
-    -   Exact matches within the rendered cards are **highlighted dynamically** using `.replace()` logic in JS to inject a span containing: `background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00;`.
+    -   Matches within the rendered cards are **highlighted dynamically** using `.replace()` logic in JS to inject a span containing: `background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00;`.
+    -   **Whole-Word Highlighting**: Instead of highlighting only the exact query substring, the system uses a Regex `([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)` to capture the entire word containing the match (including German umlauts) so the full word background is highlighted seamlessly.
 
 ## 8. Modal Window Design
 An overlaid popover to focus detailed grammar content triggered by generic clicks across any row item (`.level-content table tr`).
