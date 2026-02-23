@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const levelConfig = {
         'A1_1': { groupCount: 14, displayName: 'A1.1' },
         'A1_2': { groupCount: 14, displayName: 'A1.2' },
-        'A2_1': { groupCount: 14, displayName: 'A2.1' },
+        'A2_1': { groupCount: 13, displayName: 'A2.1' },
         'A2_2': { groupCount: 17, displayName: 'A2.2' },
         'B1_1': { groupCount: 20, displayName: 'B1.1' },
         'B2_1': { groupCount: 2, displayName: 'B2.1' }

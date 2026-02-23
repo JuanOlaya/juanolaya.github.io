@@ -1,7 +1,7 @@
 {
     "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below.",
-    "lastUpdated": "2026-02-23T00:14:04.552Z",
-    "totalGroups": 82,
+    "lastUpdated": "2026-02-23T00:45:16.526Z",
+    "totalGroups": 81,
     "totalVerbs": 380,
     "groups": [
         {
@@ -39,13 +39,15 @@
         },
         {
             "level": "A1.1",
-            "verbCount": 5,
+            "verbCount": 7,
             "verbs": [
                 "essen",
                 "trinken",
                 "bringen",
                 "brauchen",
-                "schlafen"
+                "schlafen",
+                "lesen",
+                "schreiben"
             ],
             "groupNameGerman": "Grundbedürfnisse",
             "groupNameSpanish": "Necesidades básicas",
@@ -73,10 +75,10 @@
             "verbCount": 5,
             "verbs": [
                 "arbeiten",
-                "lesen",
-                "schreiben",
                 "berichten",
-                "machen"
+                "machen",
+                "verzichten",
+                "bewerben"
             ],
             "groupNameGerman": "Arbeit",
             "groupNameSpanish": "Trabajo",
@@ -410,15 +412,14 @@
         },
         {
             "level": "A1.2",
-            "verbCount": 7,
+            "verbCount": 6,
             "verbs": [
                 "sprechen",
                 "sagen",
                 "fragen",
                 "antworten",
                 "rufen",
-                "grüßen",
-                "vorschlagen"
+                "grüßen"
             ],
             "groupNameGerman": "Kommunikation",
             "groupNameSpanish": "Comunicación",
@@ -442,17 +443,6 @@
         },
         {
             "level": "A2.1",
-            "verbCount": 1,
-            "verbs": [
-                "mitmachen"
-            ],
-            "groupNameGerman": "Distanz",
-            "groupNameSpanish": "Distancia",
-            "groupNameEnglish": "Distance",
-            "groupNumberPerLevel": 2
-        },
-        {
-            "level": "A2.1",
             "verbCount": 7,
             "verbs": [
                 "wundern",
@@ -466,7 +456,7 @@
             "groupNameGerman": "Reflexiv",
             "groupNameSpanish": "Reflexivo",
             "groupNameEnglish": "Reflexive",
-            "groupNumberPerLevel": 3
+            "groupNumberPerLevel": 2
         },
         {
             "level": "A2.1",
@@ -478,7 +468,7 @@
             "groupNameGerman": "Fokus",
             "groupNameSpanish": "Enfoque",
             "groupNameEnglish": "Focus",
-            "groupNumberPerLevel": 4
+            "groupNumberPerLevel": 3
         },
         {
             "level": "A2.1",
@@ -493,7 +483,7 @@
             "groupNameGerman": "Besorgung",
             "groupNameSpanish": "Encargos",
             "groupNameEnglish": "Errands",
-            "groupNumberPerLevel": 5
+            "groupNumberPerLevel": 4
         },
         {
             "level": "A2.1",
@@ -508,7 +498,7 @@
             "groupNameGerman": "Termine",
             "groupNameSpanish": "Citas",
             "groupNameEnglish": "Appointments",
-            "groupNumberPerLevel": 6
+            "groupNumberPerLevel": 5
         },
         {
             "level": "A2.1",
@@ -523,7 +513,7 @@
             "groupNameGerman": "Zeit",
             "groupNameSpanish": "Tiempo",
             "groupNameEnglish": "Time",
-            "groupNumberPerLevel": 7
+            "groupNumberPerLevel": 6
         },
         {
             "level": "A2.1",
@@ -540,7 +530,7 @@
             "groupNameGerman": "Wahl",
             "groupNameSpanish": "Elección",
             "groupNameEnglish": "Choice",
-            "groupNumberPerLevel": 8
+            "groupNumberPerLevel": 7
         },
         {
             "level": "A2.1",
@@ -555,7 +545,7 @@
             "groupNameGerman": "Zustand",
             "groupNameSpanish": "Estado",
             "groupNameEnglish": "State",
-            "groupNumberPerLevel": 9
+            "groupNumberPerLevel": 8
         },
         {
             "level": "A2.1",
@@ -568,7 +558,7 @@
             "groupNameGerman": "Änderung",
             "groupNameSpanish": "Cambio",
             "groupNameEnglish": "Alteration",
-            "groupNumberPerLevel": 10
+            "groupNumberPerLevel": 9
         },
         {
             "level": "A2.1",
@@ -580,7 +570,7 @@
             "groupNameGerman": "Wetter",
             "groupNameSpanish": "Clima",
             "groupNameEnglish": "Weather",
-            "groupNumberPerLevel": 11
+            "groupNumberPerLevel": 10
         },
         {
             "level": "A2.1",
@@ -595,7 +585,7 @@
             "groupNameGerman": "Schicksal",
             "groupNameSpanish": "Destino",
             "groupNameEnglish": "Fate",
-            "groupNumberPerLevel": 12
+            "groupNumberPerLevel": 11
         },
         {
             "level": "A2.1",
@@ -608,7 +598,7 @@
             "groupNameGerman": "Kreativität",
             "groupNameSpanish": "Creatividad",
             "groupNameEnglish": "Creativity",
-            "groupNumberPerLevel": 13
+            "groupNumberPerLevel": 12
         },
         {
             "level": "A2.1",
@@ -623,7 +613,7 @@
             "groupNameGerman": "Bedeutung",
             "groupNameSpanish": "Significado",
             "groupNameEnglish": "Meaning",
-            "groupNumberPerLevel": 14
+            "groupNumberPerLevel": 13
         },
         {
             "level": "A2.2",
@@ -673,9 +663,8 @@
         },
         {
             "level": "A2.2",
-            "verbCount": 2,
+            "verbCount": 1,
             "verbs": [
-                "bewerben",
                 "beraten"
             ],
             "groupNameGerman": "Büro",
@@ -685,14 +674,15 @@
         },
         {
             "level": "A2.2",
-            "verbCount": 6,
+            "verbCount": 7,
             "verbs": [
                 "studieren",
                 "lernen",
                 "teilnehmen",
                 "verstehen",
                 "üben",
-                "lösen"
+                "lösen",
+                "mitmachen"
             ],
             "groupNameGerman": "Lernen",
             "groupNameSpanish": "Aprendizaje",
@@ -785,14 +775,15 @@
         },
         {
             "level": "A2.2",
-            "verbCount": 6,
+            "verbCount": 7,
             "verbs": [
                 "schaffen",
                 "erreichen",
                 "gewinnen",
                 "unternehmen",
                 "weiterhelfen",
-                "führen"
+                "führen",
+                "vorschlagen"
             ],
             "groupNameGerman": "Firma",
             "groupNameSpanish": "Empresa",
@@ -950,14 +941,13 @@
         },
         {
             "level": "B1.1",
-            "verbCount": 6,
+            "verbCount": 5,
             "verbs": [
                 "schützen",
                 "verschmutzen",
                 "verbrauchen",
                 "trennen",
-                "recyceln",
-                "verzichten"
+                "recyceln"
             ],
             "groupNameGerman": "Ökologie",
             "groupNameSpanish": "Ecología",
