@@ -20,7 +20,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Nunito:wght@400;700&family=Poppins:wght@400;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style/styles.css?v=1.2">
+    <link rel="stylesheet" href="style/styles.css?v=1.7">
 </head>
 
 <body>
@@ -892,6 +892,45 @@
                     </div>
                     <div class="active-recall-toggle"
                         style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="refl-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Reflexiv-Tag (refl)</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Sichtbarkeit)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="refl-switch" class="visibility-toggle"
+                                data-toggle-class="hide-refl" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="dat-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">DAT (dativo fijo / casi fijo)</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Sichtbarkeit)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="dat-switch" class="visibility-toggle"
+                                data-toggle-class="hide-dat" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="intr-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">INTR (intransitivo: sin objeto)</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Sichtbarkeit)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="intr-switch" class="visibility-toggle"
+                                data-toggle-class="hide-intr" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                         <label for="case-tags-switch" class="toggle-label"
                             style="display: flex; flex-direction: column;">
                             <span style="font-weight: 600; color: #374151;">Kasus-Tags</span>
@@ -987,7 +1026,7 @@
         });
     </script>
 
-    <script src="script/script.js?v=1.2"></script>
+    <script src="script/script.js?v=1.12"></script>
 </body>
 
 </html>

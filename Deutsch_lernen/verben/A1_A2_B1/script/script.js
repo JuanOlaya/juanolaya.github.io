@@ -13,20 +13,38 @@ document.addEventListener('DOMContentLoaded', () => {
         `<p>Am Wochenende <span class="highlighted-word">habe ich</span> zu Hause <span class="highlighted-word">gearbeitet</span>. Ich <span class="highlighted-word">habe</span> für eine Prüfung <span class="highlighted-word">gelernt</span>. Ich <span class="highlighted-word">habe</span> eine Frage nicht <span class="highlighted-word">gewusst</span>, also <span class="highlighted-word">habe ich</span> meinen Lehrer <span class="highlighted-word">gefragt</span>. Er <span class="highlighted-word">hat</span> mir alles gut erklärt. Ich <span class="highlighted-word">habe</span> die Antwort schnell <span class="highlighted-word">gefunden</span>.</p>`
     ];
 
-    const levelConfig = {
-        'A1_1': { groupCount: 14, displayName: 'A1.1' },
-        'A1_2': { groupCount: 14, displayName: 'A1.2' },
-        'A2_1': { groupCount: 13, displayName: 'A2.1' },
-        'A2_2': { groupCount: 17, displayName: 'A2.2' },
-        'B1_1': { groupCount: 20, displayName: 'B1.1' },
-        'B2_1': { groupCount: 2, displayName: 'B2.1' }
+    const physicalLevelMap = {
+        'A1': [{ key: 'A1_1', count: 14 }, { key: 'A1_2', count: 14 }],
+        'A2': [{ key: 'A2_1', count: 13 }, { key: 'A2_2', count: 17 }],
+        'B1': [{ key: 'B1_1', count: 20 }],
+        'B2': [{ key: 'B2_1', count: 2 }]
     };
-    const levelOrder = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1', 'B2_1'];
+
+    function getPhysicalGroupData(macroLevel, globalIndex) {
+        const layers = physicalLevelMap[macroLevel] || [];
+        let offset = 0;
+        for (let i = 0; i < layers.length; i++) {
+            let layer = layers[i];
+            if (globalIndex < offset + layer.count) {
+                return { physicalKey: layer.key, localIndex: globalIndex - offset };
+            }
+            offset += layer.count;
+        }
+        return null;
+    }
+
+    const levelConfig = {
+        'A1': { groupCount: 28, displayName: 'A1' },
+        'A2': { groupCount: 30, displayName: 'A2' },
+        'B1': { groupCount: 20, displayName: 'B1' },
+        'B2': { groupCount: 2, displayName: 'B2' }
+    };
+    const levelOrder = ['A1', 'A2', 'B1', 'B2'];
 
     // Verbs that support Konjunktiv II
     const konjunktivVerbs = ['sein', 'haben', 'werden', 'dürfen', 'müssen', 'wollen', 'sollen', 'mögen', 'können'];
 
-    let currentLevel = 'A1_1';
+    let currentLevel = 'A1';
     let currentGroupInLevel = 0; // 0-indexed position within current level
     let currentVerbInModal = '';
     let currentIndexInModal = 0;
@@ -119,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadBackgroundData() {
-        const CACHE_KEY = 'verbAppCache_v4_stecken'; // Force invalidation
+        const CACHE_KEY = 'verbAppCache_v14_intr_badge'; // Force invalidation
         let remoteVersion = null;
 
         // 1. Check for updates (Version Check)
@@ -199,9 +217,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
+                const physData = getPhysicalGroupData(levelKey, groupIndex);
+                if (!physData) return;
+                const fileNumber = physData.localIndex + 1;
+
                 // 2. Fetch Group Data
                 try {
-                    const groupUrl = `json/groups/${levelKey}/${levelKey}_group_${task.i}.json${appVersion ? '?v=' + appVersion : ''}`;
+                    const groupUrl = `json/groups/${physData.physicalKey}/${physData.physicalKey}_group_${fileNumber}.json${appVersion ? '?v=' + appVersion : ''}`;
                     const res = await fetch(groupUrl);
                     if (!res.ok) return;
                     const groupData = await res.json();
@@ -277,11 +299,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return; // Data active
         }
 
+        const physData = getPhysicalGroupData(levelKey, groupIndex);
+        if (!physData) return;
+        const fileNumber = physData.localIndex + 1;
+
         // Show loading state
         cardsContainer.innerHTML = '<div class="loading-spinner">Daten werden geladen...</div>';
 
-        const groupNum = groupIndex + 1;
-        const groupUrl = `json/groups/${levelKey}/${levelKey}_group_${groupNum}.json${appVersion ? '?v=' + appVersion : ''}`;
+        const groupUrl = `json/groups/${physData.physicalKey}/${physData.physicalKey}_group_${fileNumber}.json${appVersion ? '?v=' + appVersion : ''}`;
 
         try {
             const res = await fetch(groupUrl);
@@ -532,9 +557,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     const row = document.createElement('div');
                     row.className = 'kompakt-row';
 
+                    const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
+                    const reflBadge = isReflexive ? `<span class="reflexiv-badge" style="margin-left: 8px;">refl</span>` : '';
+                    const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
+                    const datBadge = isDativ ? `<span class="dativ-badge" style="margin-left: 8px;">dat</span>` : '';
+                    const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
+                    const intrBadge = isIntransitive ? `<span class="intr-badge" style="margin-left: 8px;">intr</span>` : '';
+
                     const germanWord = document.createElement('div');
                     germanWord.className = 'kompakt-german';
-                    germanWord.textContent = verbName;
+                    germanWord.innerHTML = `${verbName}${reflBadge}${datBadge}${intrBadge}`;
                     germanWord.style.cursor = 'pointer';
                     germanWord.title = 'Aussprache hören';
                     germanWord.onclick = (e) => { e.stopPropagation(); window.speak(verbName); };
@@ -617,11 +649,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 tagsHTML = visibleTags.map(tag => `<span class="verb-tag">${tag}</span>`).join('');
             }
 
+            const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
+            const reflBadge = isReflexive ? ` <span class="reflexiv-badge" style="vertical-align: super; font-size: 0.55rem; padding: 1px 4px; margin-left: 6px;">refl</span>` : '';
+            const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
+            const datBadge = isDativ ? ` <span class="dativ-badge" style="vertical-align: super; font-size: 0.55rem; padding: 1px 4px; margin-left: 6px;">dat</span>` : '';
+            const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
+            const intrBadge = isIntransitive ? ` <span class="intr-badge" style="vertical-align: super; font-size: 0.55rem; padding: 1px 4px; margin-left: 6px;">intr</span>` : '';
+
             // New Structure: Header (Word + Translation), Body (Tags Centered), No Emoji
             return `
             <div class="word-item">
                 <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer; flex-direction: column; gap: 5px;">
-                    <span class="german-word" style="font-size: 1.5rem;">${verbName} ${irregularMark}</span>
+                    <span class="german-word" style="font-size: 1.5rem;">${verbName} ${irregularMark}${reflBadge}${datBadge}${intrBadge}</span>
                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
                         <span class="spanish-translation" style="font-size: 1.1rem; color: white; font-style: italic;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${esTranslation}</span>
                         ${showEnglish ? `<span class="english-translation" style="font-size: 1.1rem; color: white; font-weight: 600;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${enTranslation}</span>` : ''}
@@ -658,6 +697,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const translation = removeParentheses(verbData.es || '');
             const irregular = verbData.irregularPraesens ? '*' : '';
+            const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
+            const reflBadge = isReflexive ? `<span class="reflexiv-badge" style="margin-top: 4px; margin-left: 8px;">refl</span>` : '';
+            const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
+            const datBadge = isDativ ? `<span class="dativ-badge" style="margin-top: 4px; margin-left: 8px;">dat</span>` : '';
+            const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
+            const intrBadge = isIntransitive ? `<span class="intr-badge" style="margin-top: 4px; margin-left: 8px;">intr</span>` : '';
 
             const emoji = verbData.emoji || '📝';
 
@@ -667,6 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">
                      <span class="normal-emoji">${emoji}</span>
                      <h3 class="normal-german">${verbName}${irregular}</h3>
+                     ${reflBadge}${datBadge}${intrBadge}
                 </div>
                 <div class="normal-card-content" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
                      <p class="normal-spanish">${translation}</p>
@@ -714,12 +760,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const perfekt = getCleanPerfekt(verbData.perfekt);
             const praeteritum = getCleanPraeteritum(verbData.praeteritum);
             const translation = removeParentheses(verbData.es || '');
+            const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
+            const reflBadge = isReflexive ? ` <span class="reflexiv-badge" style="padding: 1px 4px; font-size: 0.6rem; margin-left: 8px;">refl</span>` : '';
+            const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
+            const datBadge = isDativ ? ` <span class="dativ-badge" style="padding: 1px 4px; font-size: 0.6rem; margin-left: 8px;">dat</span>` : '';
+            const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
+            const intrBadge = isIntransitive ? ` <span class="intr-badge" style="padding: 1px 4px; font-size: 0.6rem; margin-left: 8px;">intr</span>` : '';
 
             // Create row
             const row = document.createElement('div');
             row.className = 'light-version-row';
             row.innerHTML = `
-                <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${infinitiv}</div>
+                <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${infinitiv}${reflBadge}${datBadge}${intrBadge}</div>
                 <div class="light-version-cell perfekt" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${perfekt}</div>
                 <div class="light-version-cell praeteritum" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${praeteritum}</div>
                 <div class="light-version-cell translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${translation}</div>
@@ -853,14 +905,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateGustarButtonVisibility() {
-        // Show gustar button only for A1.1 Group 8 (Modalverben - mögen, gefallen, lieben)
-        // Note: Logic allows only one special button at a time for simplicity
-        if (currentLevel === 'A1_1' && currentGroupInLevel === 8) { // 8 is index for 9th group (Modalverben)
+        if (currentLevel === 'A1' && currentGroupInLevel === 8) {
             if (gustarButtonContainer) gustarButtonContainer.style.display = 'block';
             if (reflexiveButtonContainer) reflexiveButtonContainer.style.display = 'none';
-        } else if (currentLevel === 'A2_1' && currentGroupInLevel === 9) { // 9 is index for 10th group (0-indexed)
-            if (gustarButtonContainer) gustarButtonContainer.style.display = 'none';
-            if (reflexiveButtonContainer) reflexiveButtonContainer.style.display = 'block';
         } else {
             if (gustarButtonContainer) gustarButtonContainer.style.display = 'none';
             if (reflexiveButtonContainer) reflexiveButtonContainer.style.display = 'none';
@@ -912,7 +959,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentLevel = savedLevel;
         } else {
             // Fallback/Correction
-            currentLevel = 'A1_1';
+            currentLevel = 'A1';
         }
 
         const savedGroup = parseInt(localStorage.getItem(`progress_${currentLevel}`));
@@ -1470,8 +1517,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetGroup = parseInt(e.target.dataset.group);
 
                 if (targetLevel && targetGroup) {
-                    // Convert display level (e.g., "B1.1") to internal key (e.g., "B1_1")
+                    // Convert display level (e.g., "A1.1") to unified macro level ("A1")
+                    const macroLevel = targetLevel.split('.')[0];
                     const levelKey = targetLevel.replace('.', '_');
+
+                    // Calculate the unified global index
+                    let newGroupIndex = targetGroup - 1; // 0-indexed local
+                    const layers = physicalLevelMap[macroLevel] || [];
+                    for (let layer of layers) {
+                        if (layer.key === levelKey) break;
+                        newGroupIndex += layer.count;
+                    }
 
                     // Close the verb modal
                     verbModal.classList.remove('visible');
@@ -1493,8 +1549,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     // Navigate to the target level and group
-                    currentLevel = levelKey;
-                    currentGroupInLevel = targetGroup - 1; // Convert to 0-indexed
+                    currentLevel = macroLevel;
+                    currentGroupInLevel = newGroupIndex;
 
                     // Reset transform before rendering new group
                     cardsContainer.style.transform = 'translateX(0) scale(1)';
