@@ -1,6 +1,6 @@
 {
-    "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below.",
-    "lastUpdated": "2026-02-23T00:45:16.526Z",
+    "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word. Never use spaces.",
+    "lastUpdated": "2026-02-23T13:39:53.463Z",
     "totalGroups": 81,
     "totalVerbs": 380,
     "groups": [
@@ -443,16 +443,8 @@
         },
         {
             "level": "A2.1",
-            "verbCount": 7,
-            "verbs": [
-                "wundern",
-                "irren",
-                "beeilen",
-                "erkälten",
-                "wohlfühlen",
-                "schämen",
-                "erholen"
-            ],
+            "verbCount": 0,
+            "verbs": [],
             "groupNameGerman": "Reflexiv",
             "groupNameSpanish": "Reflexivo",
             "groupNameEnglish": "Reflexive",
@@ -460,13 +452,16 @@
         },
         {
             "level": "A2.1",
-            "verbCount": 2,
+            "verbCount": 5,
             "verbs": [
                 "langweilen",
-                "konzentrieren"
+                "konzentrieren",
+                "wundern",
+                "schämen",
+                "irren"
             ],
-            "groupNameGerman": "Fokus",
-            "groupNameSpanish": "Enfoque",
+            "groupNameGerman": "Empfindung",
+            "groupNameSpanish": "Sensación",
             "groupNameEnglish": "Focus",
             "groupNumberPerLevel": 3
         },
@@ -502,13 +497,14 @@
         },
         {
             "level": "A2.1",
-            "verbCount": 5,
+            "verbCount": 6,
             "verbs": [
                 "dauern",
                 "warten",
                 "anfangen",
                 "aufhören",
-                "beginnen"
+                "beginnen",
+                "beeilen"
             ],
             "groupNameGerman": "Zeit",
             "groupNameSpanish": "Tiempo",
@@ -517,17 +513,14 @@
         },
         {
             "level": "A2.1",
-            "verbCount": 7,
+            "verbCount": 4,
             "verbs": [
                 "vergleichen",
                 "begründen",
-                "erlauben",
-                "verbieten",
-                "lassen",
-                "verlassen",
-                "wählen"
+                "wählen",
+                "entscheiden"
             ],
-            "groupNameGerman": "Wahl",
+            "groupNameGerman": "Entscheidung",
             "groupNameSpanish": "Elección",
             "groupNameEnglish": "Choice",
             "groupNumberPerLevel": 7
@@ -761,12 +754,15 @@
         },
         {
             "level": "A2.2",
-            "verbCount": 4,
+            "verbCount": 7,
             "verbs": [
                 "husten",
                 "schmerzen",
                 "untersuchen",
-                "wehtun"
+                "wehtun",
+                "erkälten",
+                "erholen",
+                "wohlfühlen"
             ],
             "groupNameGerman": "Gesundheit",
             "groupNameSpanish": "Salud",
@@ -853,10 +849,13 @@
         },
         {
             "level": "A2.2",
-            "verbCount": 2,
+            "verbCount": 5,
             "verbs": [
-                "entscheiden",
-                "raten"
+                "raten",
+                "erlauben",
+                "verbieten",
+                "lassen",
+                "verlassen"
             ],
             "groupNameGerman": "Struktur",
             "groupNameSpanish": "Estructura",

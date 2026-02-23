@@ -49,6 +49,10 @@ body.compact-view {
     --glow-strength: 20px;
     --accent-green: #22c55e;
 
+    /* --- Píldora "refl" Minimalista --- */
+    --badge-bg-dark: rgba(255, 255, 255, 0.12);
+    --badge-text-dark: rgba(255, 255, 255, 0.85);
+
     background-color: var(--bg-color);
     color: var(--text-main);
 }
@@ -647,6 +651,7 @@ body.compact-view.compact-light-mode .kompakt-header-es {
     opacity: 0.9;
     text-align: right;
 }
+
 .kompakt-level-content {
     background: transparent;
     padding: 10px 20px;
@@ -4262,3 +4267,68 @@ body.compact-view .cards-container {
 
 .word-item:hover .niedlich-emoji-large {
     transform: scale(1.2) rotate(5deg);
+}
+
+/* --- REFLEXIV BADGE (POS 1 Style) --- */
+.reflexiv-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    margin-left: 6px;
+    vertical-align: middle;
+    text-transform: lowercase;
+    background: rgba(234, 179, 8, 0.15);
+    color: #eab308;
+    border: 1px solid rgba(234, 179, 8, 0.3);
+    pointer-events: none;
+}
+
+/* Hide Reflexiv Tags when Toggle is Disabled */
+body.hide-refl .reflexiv-badge {
+    display: none !important;
+}
+
+/* --- DATIV BADGE --- */
+.dativ-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    margin-left: 6px;
+    vertical-align: middle;
+    text-transform: lowercase;
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    pointer-events: none;
+}
+
+/* Hide Dativ Tags when Toggle is Disabled */
+body.hide-dat .dativ-badge {
+    display: none !important;
+}
+
+/* --- INTRANSTIV BADGE --- */
+.intr-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    margin-left: 6px;
+    vertical-align: middle;
+    text-transform: lowercase;
+    background: rgba(16, 185, 129, 0.15);
+    /* Emerald green tone */
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    pointer-events: none;
+}
+
+/* Hide Intransitiv Tags when Toggle is Disabled */
+body.hide-intr .intr-badge {
+    display: none !important;
+}
