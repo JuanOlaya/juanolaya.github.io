@@ -1,5 +1,46 @@
 # Changelog - German Verbs Group Structure
 
+## 2026-03-10 (Typo Fix)
+- **Typo Fixed**: Corrected `gewwinning` to `gewinnen` in B1.1 Wettbewerb.
+
+---
+
+## 2026-03-10 (Minor Update)
+- **Renamed Group**: `Grundbedürfnisse` (A1.1) changed to `Alltag` (Cotidiano / Everyday)
+
+---
+
+## 2026-03-10 (Innovation Dissolved)
+- **Dissolved**: `Innovation` (B1.1)
+  - `aufgeben` moved to `Erfolg` (B1.1)
+  - `erleben` moved to `Biografie` (A2.2)
+  - `erhalten` moved to NEW group `Austausch` (A2.1)
+  - `ersetzen` moved to `Änderung` (A2.1)
+- **Created**: `Austausch` (A2.1) (Intercambio)
+  - Contains: `mitbringen` (from Interaktion), `zurückgeben` (from Logistik), `bekommen` (from Einkauf), `erhalten` (from Innovation).
+- **Cleanup**: Removed duplicated verb `betrügen` from B2.1 Konzepte (remains in B1.1 Ethik).
+- **Totals**: 77 Theme Groups, 382 Verbs.
+
+---
+
+## 2026-03-10 (Minor Update)
+- **Moved verb**: `entschließen` (from B1.1 Innovation to A2.1 Entscheidung)
+- **Moved verb**: `bewerten` (from B2.1 Bewertung to A2.2 Lehre)
+
+---
+
+## 2026-03-10
+
+### Global Restructuring (A1 - B2)
+- **Logical Expansion**: Added analytical and abstract B2 groups (Analyse, Bewertung, Entwicklung, Tendenz). Moved social rules (erlauben, verbieten) to B1.
+- **Pedagogical Fixes**: Kept transactional verbs (verdienen, ausgeben) in A2 (Finanzen).
+- **Optimization**: Dissolved weak semantic groups (Besorgung, Beruf, Büro, Versuch, Transformation) and redistributed verbs logically.
+- **Config Enforcement**: Enforced single-word group names and proper structure.
+- **Clean up**: Removed redundant reflexive tags from group configurations.
+- **Totals**: 77 Theme Groups, 382 Verbs.
+
+---
+
 ## 2025-12-03 (Latest Update)
 
 ### A1.1 Changes

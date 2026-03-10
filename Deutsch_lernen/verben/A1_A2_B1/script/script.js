@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const physicalLevelMap = {
         'A1': [{ key: 'A1_1', count: 14 }, { key: 'A1_2', count: 14 }],
-        'A2': [{ key: 'A2_1', count: 13 }, { key: 'A2_2', count: 17 }],
-        'B1': [{ key: 'B1_1', count: 20 }],
-        'B2': [{ key: 'B2_1', count: 2 }]
+        'A2': [{ key: 'A2_1', count: 12 }, { key: 'A2_2', count: 12 }],
+        'B1': [{ key: 'B1_1', count: 18 }],
+        'B2': [{ key: 'B2_1', count: 7 }]
     };
 
     function getPhysicalGroupData(macroLevel, globalIndex) {
@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const levelConfig = {
         'A1': { groupCount: 28, displayName: 'A1' },
-        'A2': { groupCount: 30, displayName: 'A2' },
-        'B1': { groupCount: 20, displayName: 'B1' },
-        'B2': { groupCount: 2, displayName: 'B2' }
+        'A2': { groupCount: 24, displayName: 'A2' },
+        'B1': { groupCount: 18, displayName: 'B1' },
+        'B2': { groupCount: 7, displayName: 'B2' }
     };
     const levelOrder = ['A1', 'A2', 'B1', 'B2'];
 
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadBackgroundData() {
-        const CACHE_KEY = 'verbAppCache_v18_erfolgen_create'; // Force invalidation
+        const CACHE_KEY = 'verbAppCache_v21_alltag_rename'; // Force invalidation
         let remoteVersion = null;
 
         // 1. Check for updates (Version Check)

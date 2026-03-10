@@ -3,14 +3,15 @@ const path = require('path');
 
 // Level configuration
 const levelConfig = {
-    'A1_1': { groupCount: 10, displayName: 'A1.1' },
-    'A1_2': { groupCount: 9, displayName: 'A1.2' },
-    'A2_1': { groupCount: 9, displayName: 'A2.1' },
+    'A1_1': { groupCount: 14, displayName: 'A1.1' },
+    'A1_2': { groupCount: 14, displayName: 'A1.2' },
+    'A2_1': { groupCount: 12, displayName: 'A2.1' },
     'A2_2': { groupCount: 12, displayName: 'A2.2' },
-    'B1_1': { groupCount: 7, displayName: 'B1.1' }
+    'B1_1': { groupCount: 18, displayName: 'B1.1' },
+    'B2_1': { groupCount: 7, displayName: 'B2.1' }
 };
 
-const levelOrder = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1'];
+const levelOrder = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1', 'B2_1'];
 
 console.log('Synchronizing theme files with group files...\n');
 
