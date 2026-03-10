@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadBackgroundData() {
-        const CACHE_KEY = 'verbAppCache_v14_intr_badge'; // Force invalidation
+        const CACHE_KEY = 'verbAppCache_v18_erfolgen_create'; // Force invalidation
         let remoteVersion = null;
 
         // 1. Check for updates (Version Check)
