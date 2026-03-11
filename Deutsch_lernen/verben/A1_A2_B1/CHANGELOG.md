@@ -1,9 +1,25 @@
 # Changelog - German Verbs Group Structure
 
-## 2026-03-11 (Verb Relocations)
+## 2026-03-11 (Group Updates)
+- **Renamed Group Translation**: `Alltag` (A1.1) Spanish translation changed from "Cotidiano" to "Cotidianidad".
+
+## 2026-03-11 (Verb Relocations - Batch 4)
+- **Moved verb**: `bewerten` (Lehre A2.2 → Bewertung B2.1)
+
+## 2026-03-11 (Verb Relocations - Batch 3)
+- **Moved verb**: `merken` (Denken A1.1 → Gedächtnis A1.1)
+- **Moved verb**: `tanzen` (Fest A1.2 → Kreativität A2.1)
+- **Moved verb**: `organisieren` (Interaktion A2.2 → Planung A2.2)
+- **Moved verb**: `lügen` (Konflikt B1.1 → Ethik B1.1)
+- **Moved verb**: `sammeln` (Verwaltung B1.1 → Forschung B1.1)
+
+## 2026-03-11 (Verb Relocations - Batch 2)
+- **Moved verbs**: `aufräumen`, `räumen`, `wegwerfen` (Hygiene A1.2 → Ordnung A1.2)
+- **Moved verbs**: `danken` (Soziales A1.2), `grüßen` (Kommunikation A1.2) → Höflichkeit A1.1
+- **Moved verb**: `scheinen` (Wahrnehmung A2.2 → Wetter A2.1)
+
+## 2026-03-11 (Verb Relocations - Batch 1)
 - **Moved verb**: `erstellen` (Präsentation B1.1 → Daten B1.1)
-- **Moved verb**: `aufsuchen` (Ethik B1.1 → Pflege B1.1)
-- **Moved verb**: `zuhören` (Planung A2.2 → Kommunikation A1.2)
 - **Moved verb**: `rauschen` (Schicksal A2.1 → Wahrnehmung A2.2)
 - **Moved verb**: `behalten` (Zustand A2.1 → Austausch A2.1)
 - **Moved verb**: `benutzen` (Kleidung A1.2 → Werk A2.2)

@@ -1,0 +1,47 @@
+const fs = require('fs');
+const path = require('path');
+
+const indexFile = path.join(__dirname, 'json', 'verbs_index.json');
+const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
+
+data.lastUpdated = new Date().toISOString();
+
+function moveVerb(verb, targetGroupGerman) {
+    let fromGroup = "";
+    // Remove
+    for (let group of data.groups) {
+        const idx = group.verbs.indexOf(verb);
+        if (idx !== -1) {
+            fromGroup = group.groupNameGerman + " (" + group.level + ")";
+            group.verbs.splice(idx, 1);
+            group.verbCount = group.verbs.length;
+            break;
+        }
+    }
+    // Add
+    for (let group of data.groups) {
+        if (group.groupNameGerman === targetGroupGerman) {
+            if (!group.verbs.includes(verb)) {
+                group.verbs.push(verb);
+                group.verbCount = group.verbs.length;
+                console.log(`Moved ${verb} from ${fromGroup} to ${targetGroupGerman} (${group.level}). Verbs now in group: ${group.verbs.join(', ')}`);
+            }
+            break;
+        }
+    }
+}
+
+// 1. aufräumen, räumen, wegwerfen -> Ordnung (A1.2)
+moveVerb('aufräumen', 'Ordnung');
+moveVerb('räumen', 'Ordnung');
+moveVerb('wegwerfen', 'Ordnung');
+
+// 2. danken, grüßen -> Höflichkeit (A1.1)
+moveVerb('danken', 'Höflichkeit');
+moveVerb('grüßen', 'Höflichkeit');
+
+// 3. scheinen -> Wetter (A2.1)
+moveVerb('scheinen', 'Wetter');
+
+fs.writeFileSync(indexFile, JSON.stringify(data, null, 4));
+console.log('Batch verb relocation completed successfully.');
