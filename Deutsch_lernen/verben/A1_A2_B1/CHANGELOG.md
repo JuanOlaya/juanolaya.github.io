@@ -4,7 +4,7 @@
 - **Renamed Group Translation**: `Alltag` (A1.1) Spanish translation changed from "Cotidiano" to "Cotidianidad".
 
 ## 2026-03-11 (Verb Relocations - Batch 4)
-- **Moved verb**: `bewerten` (Lehre A2.2 → Bewertung B2.1)
+- **Fix Duplicate**: `bewerten` removed from Lehre (A2.2), now exists exclusively in Bewertung (B2.1)
 
 ## 2026-03-11 (Verb Relocations - Batch 3)
 - **Moved verb**: `merken` (Denken A1.1 → Gedächtnis A1.1)
