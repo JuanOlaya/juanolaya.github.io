@@ -1,5 +1,17 @@
 # Changelog - German Verbs Group Structure
 
+## 2026-03-11 (Verb Relocations)
+- **Moved verb**: `erstellen` (Präsentation B1.1 → Daten B1.1)
+- **Moved verb**: `aufsuchen` (Ethik B1.1 → Pflege B1.1)
+- **Moved verb**: `zuhören` (Planung A2.2 → Kommunikation A1.2)
+- **Moved verb**: `rauschen` (Schicksal A2.1 → Wahrnehmung A2.2)
+- **Moved verb**: `behalten` (Zustand A2.1 → Austausch A2.1)
+- **Moved verb**: `benutzen` (Kleidung A1.2 → Werk A2.2)
+- **Moved verb**: `verschenken` (Beziehungen A2.1 → Austausch A2.1)
+- **Moved verb**: `wiederholen` (Interaktion A2.2 → Dialog A1.2)
+
+---
+
 ## 2026-03-10 (Typo Fix)
 - **Typo Fixed**: Corrected `gewwinning` to `gewinnen` in B1.1 Wettbewerb.
 
