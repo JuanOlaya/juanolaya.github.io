@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadBackgroundData() {
-        const CACHE_KEY = 'verbAppCache_v21_alltag_rename'; // Force invalidation
+        const CACHE_KEY = 'verbAppCache_v23_erstellen_move'; // Force invalidation
         let remoteVersion = null;
 
         // 1. Check for updates (Version Check)
