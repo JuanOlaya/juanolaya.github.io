@@ -1,5 +1,17 @@
 # Changelog - German Verbs Group Structure
 
+## 2026-03-12 (Structural Changes, New Verbs, & Relocations - Batch 5)
+- **New Verbs Added (B2.1)**: `überprüfen` (Bewertung), `validieren` (Bewertung), `einordnen` (Analyse), `klassifizieren` (Analyse).
+- **Group Renamed**: `Struktur` (B1.1) renamed to `Regeln` (B1.1).
+- **Group Elevated**: `Forschung` moved from B1.1 to B2.1.
+- **Moved verb**: `verlassen` (Struktur B1.1 → Richtung A1.2)
+- **Moved verb**: `kündigen` (Wettbewerb B1.1 → Verwaltung B1.1)
+- **Moved verb**: `raten` (Struktur B1.1 → Soziales A1.2)
+- **Moved verb**: `befehlen` (Konzepte B2.1 → Regeln B1.1)
+- **Moved verb**: `prüfen` (Analyse B2.1 → Lehre A2.2)
+- **Translation Update**: `bestätigen` Spanish translation updated strictly to "confirmar / validar".
+- **UI Reorder**: `Hygiene` and `Ordnung` (A1.2) now appear side-by-side in the layout.
+
 ## 2026-03-11 (Group Updates)
 - **Renamed Group Translation**: `Alltag` (A1.1) Spanish translation changed from "Cotidiano" to "Cotidianidad".
 
