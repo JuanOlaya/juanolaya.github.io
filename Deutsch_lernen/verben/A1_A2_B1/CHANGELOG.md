@@ -1,5 +1,32 @@
 # Changelog - German Verbs Group Structure
 
+## 2026-03-13 (Massive Expansion - Batch 7)
+- **New Vocab Base**: Expanded database from 412 to exactly 435 unique verbs (+23 verbs).
+- **New Groups Created**: `Körper` (A2.1), `Gefahr` (B1.1), `Psyche` (B1.1), `Personal` (B2.1), and `Innovation` (B2.1).
+- **Matrix Expansion**: Elevated global structure to exactly 85 Groups. Updated internal logic maps sequentially mapping the indices.
+
+## 2026-03-13 (JSON Schema Fixes - Batch 6.1)
+- **Ghost Eradication**: Fixed a bug where a duplicate "Debatte" group lived in B1.1 alongside Meinung. Removed the B1.1 ghost entirely, reducing global group count to exactly 79.
+- **Duplicate Prevention**: Extracted `begründen` from the new `Debatte` (B2.1) to ensure it only exists in `Bewertung` (B2.1).
+- **Schema Hygiene**: Removed legacy `theme` keys that were polluting the schema of the 5 new groups. Matrix limit updated (B1.1 now holds 17 groups).
+
+## 2026-03-13 (Massive Integration - Batch 6)
+- **New Vocab Base**: Expanded database from 386 to exactly 412 unique verbs (+26 verbs).
+- **New Groups Created**: Added `Meinung` (B1.1, formerly Debatte), `Debatte` (B2.1), `Rhetorik` (B2.1), `Besitz` (A2.2), and `Recht` (B1.1).
+- **Relocated Verbs**: Migrated `meinen`, `stimmen`, `loben`, `kritisieren` to `Meinung`. Migrated `diskutieren`, `überzeugen`, `widersprechen`, `begründen` to `Debatte` (B2.1).
+- **Matrix Expansion**: Elevated global structure to exactly 80 Groups. Updated internal logic maps in `script.js` and `sync_theme_files.js`.
+
+## 2026-03-13 (Group Dissolution & Verb Relocations)
+- **Moved verb**: `versichern` (Sicherheit B2.1 → Wirtschaft B2.1).
+- **Deleted Group**: `Sicherheit` (B2.1) was completely dissolved and removed as it became empty. Re-indexed B2.1 groups (now 7 groups).
+
+## 2026-03-13 (Verb Relocations)
+- **Moved verb**: `sichern` (Sicherheit B2.1 → Daten B1.1). Daten group specifically reordered to: löschen, speichern, sichern, erstellen, einschalten, ausschalten.
+
+## 2026-03-13 (JSON Cleanup)
+- **Fix Metadata**: Updated `totalVerbs` global count from 382 to exactly 386 in `verbs_index.json`.
+- **Fix Group Details**: Cleaned up legacy `englishName` and `theme` tags from `Regeln` (B1.1) and corrected its `groupNameEnglish` strictly to "Rules".
+
 ## 2026-03-12 (Structural Changes, New Verbs, & Relocations - Batch 5)
 - **New Verbs Added (B2.1)**: `überprüfen` (Bewertung), `validieren` (Bewertung), `einordnen` (Analyse), `klassifizieren` (Analyse).
 - **Group Renamed**: `Struktur` (B1.1) renamed to `Regeln` (B1.1).
