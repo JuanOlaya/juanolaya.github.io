@@ -1,8 +1,8 @@
 {
     "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word, with the STRICT EXCEPTION of the group 'Leben in Deutschland'.",
-    "lastUpdated": "2026-03-12T22:09:23.542Z",
-    "totalGroups": 77,
-    "totalVerbs": 382,
+    "lastUpdated": "2026-03-13T12:07:56.606Z",
+    "totalGroups": 85,
+    "totalVerbs": 435,
     "groups": [
         {
             "level": "A1.1",
@@ -72,10 +72,11 @@
         },
         {
             "level": "A1.1",
-            "verbCount": 2,
+            "verbCount": 3,
             "verbs": [
                 "arbeiten",
-                "machen"
+                "machen",
+                "erledigen"
             ],
             "groupNameGerman": "Arbeit",
             "groupNameSpanish": "Trabajo",
@@ -593,14 +594,15 @@
         },
         {
             "level": "A2.1",
-            "verbCount": 6,
+            "verbCount": 7,
             "verbs": [
                 "mitbringen",
                 "zurückgeben",
                 "bekommen",
                 "erhalten",
                 "behalten",
-                "verschenken"
+                "verschenken",
+                "empfangen"
             ],
             "groupNameGerman": "Austausch",
             "groupNameSpanish": "Intercambio",
@@ -801,10 +803,8 @@
             ],
             "groupNameGerman": "Regeln",
             "groupNameSpanish": "Reglas",
-            "groupNameEnglish": "Structure",
-            "groupNumberPerLevel": 1,
-            "englishName": "Rules",
-            "theme": "Regeln"
+            "groupNameEnglish": "Rules",
+            "groupNumberPerLevel": 1
         },
         {
             "level": "B1.1",
@@ -883,13 +883,15 @@
         },
         {
             "level": "B1.1",
-            "verbCount": 5,
+            "verbCount": 7,
             "verbs": [
                 "funktionieren",
                 "reparieren",
                 "einstellen",
                 "installieren",
-                "drucken"
+                "drucken",
+                "überwachen",
+                "kontrollieren"
             ],
             "groupNameGerman": "Technik",
             "groupNameSpanish": "Tecnología",
@@ -898,12 +900,14 @@
         },
         {
             "level": "B1.1",
-            "verbCount": 4,
+            "verbCount": 6,
             "verbs": [
                 "löschen",
+                "sichern",
+                "erstellen",
                 "einschalten",
                 "ausschalten",
-                "erstellen"
+                "absichern"
             ],
             "groupNameGerman": "Daten",
             "groupNameSpanish": "Datos",
@@ -933,8 +937,8 @@
                 "regieren",
                 "fordern",
                 "richten",
-                "empfangen",
-                "beraten"
+                "beraten",
+                "regulieren"
             ],
             "groupNameGerman": "Politik",
             "groupNameSpanish": "Política",
@@ -984,19 +988,18 @@
         },
         {
             "level": "B1.1",
-            "verbCount": 7,
+            "verbCount": 6,
             "verbs": [
-                "diskutieren",
-                "kritisieren",
-                "loben",
-                "widersprechen",
-                "überzeugen",
+                "meinen",
                 "stimmen",
-                "meinen"
+                "loben",
+                "kritisieren",
+                "zustimmen",
+                "ablehnen"
             ],
-            "groupNameGerman": "Debatte",
-            "groupNameSpanish": "Debate",
-            "groupNameEnglish": "Debate",
+            "groupNameGerman": "Meinung",
+            "groupNameSpanish": "Opinión",
+            "groupNameEnglish": "Opinion",
             "groupNumberPerLevel": 14
         },
         {
@@ -1062,12 +1065,13 @@
         },
         {
             "level": "B2.1",
-            "verbCount": 4,
+            "verbCount": 5,
             "verbs": [
                 "wirtschaften",
                 "investieren",
                 "unternehmen",
-                "führen"
+                "führen",
+                "versichern"
             ],
             "groupNameGerman": "Wirtschaft",
             "groupNameSpanish": "Economía",
@@ -1076,14 +1080,15 @@
         },
         {
             "level": "B2.1",
-            "verbCount": 6,
+            "verbCount": 7,
             "verbs": [
                 "analysieren",
                 "unterscheiden",
                 "dokumentieren",
                 "vergleichen",
                 "einordnen",
-                "klassifizieren"
+                "klassifizieren",
+                "feststellen"
             ],
             "groupNameGerman": "Analyse",
             "groupNameSpanish": "Análisis",
@@ -1092,14 +1097,15 @@
         },
         {
             "level": "B2.1",
-            "verbCount": 6,
+            "verbCount": 7,
             "verbs": [
                 "beurteilen",
                 "bestätigen",
-                "begründen",
                 "bewerten",
                 "überprüfen",
-                "validieren"
+                "validieren",
+                "belegen",
+                "begründen"
             ],
             "groupNameGerman": "Bewertung",
             "groupNameSpanish": "Evaluación",
@@ -1108,13 +1114,15 @@
         },
         {
             "level": "B2.1",
-            "verbCount": 5,
+            "verbCount": 7,
             "verbs": [
                 "entwickeln",
                 "gründen",
                 "entstehen",
                 "erscheinen",
-                "scheitern"
+                "scheitern",
+                "optimieren",
+                "integrieren"
             ],
             "groupNameGerman": "Entwicklung",
             "groupNameSpanish": "Desarrollo",
@@ -1138,18 +1146,6 @@
         },
         {
             "level": "B2.1",
-            "verbCount": 2,
-            "verbs": [
-                "sichern",
-                "versichern"
-            ],
-            "groupNameGerman": "Sicherheit",
-            "groupNameSpanish": "Seguridad",
-            "groupNameEnglish": "Security",
-            "groupNumberPerLevel": 7
-        },
-        {
-            "level": "B2.1",
             "verbCount": 4,
             "verbs": [
                 "forschen",
@@ -1160,7 +1156,138 @@
             "groupNameGerman": "Forschung",
             "groupNameSpanish": "Investigación",
             "groupNameEnglish": "Research",
+            "groupNumberPerLevel": 7
+        },
+        {
+            "level": "B2.1",
+            "verbCount": 5,
+            "verbs": [
+                "diskutieren",
+                "überzeugen",
+                "widersprechen",
+                "argumentieren",
+                "widerlegen"
+            ],
+            "groupNameGerman": "Debatte",
+            "groupNameSpanish": "Debate",
+            "groupNameEnglish": "Debate",
             "groupNumberPerLevel": 8
+        },
+        {
+            "level": "B2.1",
+            "verbCount": 4,
+            "verbs": [
+                "behaupten",
+                "einwenden",
+                "entgegnen",
+                "darlegen"
+            ],
+            "groupNameGerman": "Rhetorik",
+            "groupNameSpanish": "Retórica",
+            "groupNameEnglish": "Rhetoric",
+            "groupNumberPerLevel": 9
+        },
+        {
+            "level": "A2.2",
+            "verbCount": 3,
+            "verbs": [
+                "besitzen",
+                "ausleihen",
+                "verleihen"
+            ],
+            "groupNameGerman": "Besitz",
+            "groupNameSpanish": "Posesión",
+            "groupNameEnglish": "Possession",
+            "groupNumberPerLevel": 13
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 6,
+            "verbs": [
+                "verhandeln",
+                "anklagen",
+                "klagen",
+                "verteidigen",
+                "bestrafen",
+                "verurteilen"
+            ],
+            "groupNameGerman": "Recht",
+            "groupNameSpanish": "Derecho",
+            "groupNameEnglish": "Law",
+            "groupNumberPerLevel": 18
+        },
+        {
+            "level": "A2.1",
+            "verbCount": 4,
+            "verbs": [
+                "atmen",
+                "schwitzen",
+                "frieren",
+                "bluten"
+            ],
+            "groupNameGerman": "Körper",
+            "groupNameSpanish": "Cuerpo",
+            "groupNameEnglish": "Body",
+            "groupNumberPerLevel": 13
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 5,
+            "verbs": [
+                "warnen",
+                "vermeiden",
+                "fliehen",
+                "brennen",
+                "verstecken"
+            ],
+            "groupNameGerman": "Gefahr",
+            "groupNameSpanish": "Peligro",
+            "groupNameEnglish": "Danger",
+            "groupNumberPerLevel": 19
+        },
+        {
+            "level": "B1.1",
+            "verbCount": 5,
+            "verbs": [
+                "fürchten",
+                "begeistern",
+                "enttäuschen",
+                "beruhigen",
+                "aufregen"
+            ],
+            "groupNameGerman": "Psyche",
+            "groupNameSpanish": "Psique",
+            "groupNameEnglish": "Psyche",
+            "groupNumberPerLevel": 20
+        },
+        {
+            "level": "B2.1",
+            "verbCount": 5,
+            "verbs": [
+                "beschäftigen",
+                "entlassen",
+                "befördern",
+                "streiken",
+                "vertreten"
+            ],
+            "groupNameGerman": "Personal",
+            "groupNameSpanish": "Personal",
+            "groupNameEnglish": "Staff",
+            "groupNumberPerLevel": 10
+        },
+        {
+            "level": "B2.1",
+            "verbCount": 4,
+            "verbs": [
+                "erfinden",
+                "entdecken",
+                "veröffentlichen",
+                "anwenden"
+            ],
+            "groupNameGerman": "Innovation",
+            "groupNameSpanish": "Innovación",
+            "groupNameEnglish": "Innovation",
+            "groupNumberPerLevel": 11
         }
     ]
 }
