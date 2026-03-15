@@ -124,7 +124,6 @@
             /* Background set dynamically via JS */
             display: flex;
             align-items: center;
-            gap: 12px;
             border-bottom: 1px solid var(--border-color);
             cursor: pointer;
             /* Interaction Cue */
@@ -141,12 +140,11 @@
 
         .category-title {
             font-size: 1.1rem;
-            font-weight: 700;
+            font-weight: 500;
             margin: 0;
             color: white;
             flex-grow: 1;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: -0.2px;
         }
 
         .info-icon-header {
@@ -815,6 +813,11 @@
             return cleanArt ? `${cleanArt} ${word}` : word;
         }
 
+        function formatHeaderTitle(text) {
+            if (!text) return "";
+            return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+        }
+
         // --- SEARCH LOGIC ---
         function handleSearch() {
             const query = document.getElementById('searchInput').value.toLowerCase().trim();
@@ -846,7 +849,7 @@
                 // If no items match in this category, skip
                 if (filteredItems.length === 0) return;
 
-                const chunkSize = 6;
+                const chunkSize = 7;
                 const totalChunks = Math.ceil(filteredItems.length / chunkSize);
 
                 for (let i = 0; i < filteredItems.length; i += chunkSize) {
@@ -857,7 +860,7 @@
                     card.className = 'category-card';
 
                     // Title with Pagination if needed
-                    let displayTitle = cat.title;
+                    let displayTitle = formatHeaderTitle(cat.title);
                     if (totalChunks > 1) {
                         displayTitle += ` <span style="opacity:0.7; font-size:0.9em;">(${chunkIndex + 1}/${totalChunks})</span>`;
                     }
@@ -870,9 +873,7 @@
                     header.onclick = () => openCategoryModal(cat);
 
                     header.innerHTML = `
-                        <div class="category-icon">${cat.icon}</div>
                         <h2 class="category-title">${displayTitle}</h2>
-                        <span class="info-icon-header">ℹ️</span>
                     `;
 
                     // Table
@@ -1005,7 +1006,7 @@
         function openCategoryModal(cat) {
             // Populate Data
             mEmoji.textContent = cat.icon;
-            mWord.textContent = cat.title;
+            mWord.textContent = formatHeaderTitle(cat.title);
             mTrans.textContent = cat.title_es;
 
             currentSpeechText = cat.title;
