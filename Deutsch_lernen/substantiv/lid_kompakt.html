@@ -58,11 +58,10 @@
         h1 {
             font-size: 2.5rem;
             margin: 0 0 10px 0;
-            background: linear-gradient(to right, #facc15, #f59e0b);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
+            color: #333;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            display: inline-block;
         }
 
         .subtitle {
@@ -90,8 +89,8 @@
 
         /* Interactive Title Word */
         .audio-trigger {
-            color: var(--text-main);
-            border-bottom: 2px dashed var(--accent-gold);
+            color: #333;
+            border-bottom: 3px dashed #4682B4;
             cursor: pointer;
             padding-bottom: 2px;
             transition: all 0.2s;
@@ -101,7 +100,7 @@
         }
 
         .audio-trigger:hover {
-            color: var(--accent-gold);
+            color: #4682B4;
             border-bottom-style: solid;
         }
 
@@ -527,14 +526,14 @@
 
 <body>
     <header>
-        <h1>🇩🇪 Leben in Deutschland</h1>
+        <h1>Leben in deutschland</h1>
         <span class="audio-trigger" onclick="speak('Einbürgerungstest')">
-            Einbürgerungstest <span class="audio-icon-small">🔊</span>
+            Einbürgerungstest
         </span>
 
         <!-- Search Bar -->
         <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="🔍 Begriffe suchen / Search terms..."
+            <input type="text" id="searchInput" class="search-input" placeholder="Begriffe suchen / Search terms..."
                 oninput="handleSearch()">
         </div>
     </header>
