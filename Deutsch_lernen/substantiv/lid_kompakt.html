@@ -282,6 +282,14 @@
             text-decoration-style: dotted;
         }
 
+        .importance-star {
+            color: var(--accent-gold);
+            font-size: 0.95rem;
+            margin-left: 6px;
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.45);
+            vertical-align: middle;
+        }
+
         /* Article Colors */
         .der .article-text,
         .der .article-dot {
@@ -301,6 +309,16 @@
         .pl .article-text,
         .pl .article-dot {
             color: var(--color-pl);
+        }
+
+        .mixed .article-text,
+        .mixed .article-dot {
+            color: var(--accent-gold);
+        }
+
+        .none .article-dot {
+            opacity: 0;
+            box-shadow: none;
         }
 
 
