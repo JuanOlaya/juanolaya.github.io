@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Theme data storage
     let currentThemeData = null;
-    let appVersion = "1.6_" + Date.now(); // Global version for cache busting (Updated for Tag Filters)
+    let appVersion = '1.6_static'; // Stable version; replaced by verbs_index.lastUpdated when available
 
     // --- BACKGROUND LOADING & PROGRESS ---
     let isBackgroundLoading = false;
@@ -142,12 +142,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Check for updates (Version Check)
         try {
-            const vRes = await fetch('json/verbs_index.json?t=' + Date.now());
+            const vRes = await fetch('json/verbs_index.json', { cache: 'no-cache' });
             if (vRes.ok) {
                 const vData = await vRes.json();
                 remoteVersion = vData.lastUpdated;
-                remoteVersion = vData.lastUpdated;
-                // appVersion = remoteVersion; // Don't overwrite our unique timestamp!
+                if (remoteVersion) {
+                    appVersion = remoteVersion;
+                }
                 console.log("Remote version:", remoteVersion);
             }
         } catch (e) {
@@ -169,6 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log("Loaded data from LocalStorage cache (Version match).");
                     allVerbsData = data.allVerbsData;
                     verbGroupsByLevel = data.verbGroupsByLevel;
+                    if (data.lastUpdated) {
+                        appVersion = data.lastUpdated;
+                    }
                     updateLoadingProgress(100);
                     isBackgroundLoading = false;
                     generateTagFilters();
@@ -344,6 +348,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    async function loadAllGroupsForLevel(levelKey) {
+        const config = levelConfig[levelKey];
+        if (!config) return;
+
+        const loadPromises = [];
+        for (let groupIndex = 0; groupIndex < config.groupCount; groupIndex++) {
+            loadPromises.push(loadGroupData(levelKey, groupIndex));
+        }
+        await Promise.all(loadPromises);
+    }
+
     function loadConjugations(allVerbNames) {
         const conjugationPromises = Array.from(allVerbNames).map(async verbName => {
             try {
@@ -483,7 +498,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('compact-view');
         document.body.classList.remove('light-version-global-dark');
 
-        // Disable group arrows because we show ALL groups for the level at once
+        // Disable group arrows because we show ALL groups for the current level at once
         if (navigationWrapper) {
             const groupNav = navigationWrapper.querySelector('.group-navigation');
             if (groupNav) groupNav.style.display = 'none';
@@ -499,7 +514,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Standard palette logic (fallback sequence if theme colors are missing)
         const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22C55E', '#3b82f6'];
 
-        // Iterate over EVERY group loaded in this level
         levelGroups.forEach((group, groupIndex) => {
             if (!group || !group.verbs) return;
 
@@ -590,8 +604,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cardsContainer.appendChild(grid);
 
-        // Update indicators (Level Only, since group is irrelevant now)
-        updateIndicatorsForView(levelGroups[0]);
+        updateIndicatorsForView(levelGroups[currentGroupInLevel] || levelGroups[0]);
     }
 
     // Helper to update indicators (shared between Light and Compact)
@@ -973,6 +986,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function getSavedGroupForLevel(levelKey) {
+        const maxGroups = levelConfig[levelKey] ? levelConfig[levelKey].groupCount : 0;
+        const savedGroup = parseInt(localStorage.getItem(`progress_${levelKey}`));
+        if (!isNaN(savedGroup) && savedGroup >= 0 && savedGroup < maxGroups) {
+            return savedGroup;
+        }
+        return 0;
+    }
+
     function initializeApp() {
         // Load saved progress from localStorage
         loadProgress();
@@ -991,14 +1013,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setupProgressBar();
 
+        let initialViewMode = localStorage.getItem('verben-card-version') || 'compact';
+        if (!document.querySelector(`input[name="card-version"][value="${initialViewMode}"]`)) {
+            initialViewMode = 'compact';
+        }
+
         // Load Verb Types global data
         fetch('json/verb_types.json')
             .then(res => res.ok ? res.json() : {})
             .then(data => { verbTypesData = data || {}; })
             .catch(() => { verbTypesData = {}; });
 
-        // Lazy Load initial group
-        loadGroupData(currentLevel, currentGroupInLevel)
+        // Load enough data for the initial view
+        const initialLoadPromise = initialViewMode === 'compact'
+            ? loadAllGroupsForLevel(currentLevel)
+            : loadGroupData(currentLevel, currentGroupInLevel);
+
+        initialLoadPromise
             .then(() => {
                 renderVerbGroup();
                 // Start background loading after initial render
@@ -1080,28 +1111,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 const prevLevelBtn = document.getElementById('prev-level-btn');
                 const nextLevelBtn = document.getElementById('next-level-btn');
 
-                prevLevelBtn.addEventListener('click', () => {
+                prevLevelBtn.addEventListener('click', async () => {
                     const currentLevelIndex = levelOrder.indexOf(currentLevel);
 
                     if (currentLevelIndex > 0) {
-                        currentLevel = levelOrder[currentLevelIndex - 1];
-                        currentGroupInLevel = 0;
+                        const targetLevel = levelOrder[currentLevelIndex - 1];
+                        const targetGroup = getSavedGroupForLevel(targetLevel);
+                        await loadGroupData(targetLevel, targetGroup);
+                        currentLevel = targetLevel;
+                        currentGroupInLevel = targetGroup;
                         clearSearchAndRender();
                     }
                 });
 
-                nextLevelBtn.addEventListener('click', () => {
+                nextLevelBtn.addEventListener('click', async () => {
                     const currentLevelIndex = levelOrder.indexOf(currentLevel);
 
                     if (currentLevelIndex < levelOrder.length - 1) {
-                        currentLevel = levelOrder[currentLevelIndex + 1];
-                        currentGroupInLevel = 0;
+                        const targetLevel = levelOrder[currentLevelIndex + 1];
+                        const targetGroup = getSavedGroupForLevel(targetLevel);
+                        await loadGroupData(targetLevel, targetGroup);
+                        currentLevel = targetLevel;
+                        currentGroupInLevel = targetGroup;
                         clearSearchAndRender();
                     }
                 });
 
                 // Keyboard navigation for levels (Up/Down arrows)
-                document.addEventListener('keydown', (e) => {
+                document.addEventListener('keydown', async (e) => {
                     // Only handle if not typing in search input
                     if (document.activeElement.tagName === 'INPUT') return;
 
@@ -1110,15 +1147,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (e.key === 'ArrowUp') {
                         e.preventDefault();
                         if (currentLevelIndex > 0) {
-                            currentLevel = levelOrder[currentLevelIndex - 1];
-                            currentGroupInLevel = 0;
+                            const targetLevel = levelOrder[currentLevelIndex - 1];
+                            const targetGroup = getSavedGroupForLevel(targetLevel);
+                            await loadGroupData(targetLevel, targetGroup);
+                            currentLevel = targetLevel;
+                            currentGroupInLevel = targetGroup;
                             clearSearchAndRender();
                         }
                     } else if (e.key === 'ArrowDown') {
                         e.preventDefault();
                         if (currentLevelIndex < levelOrder.length - 1) {
-                            currentLevel = levelOrder[currentLevelIndex + 1];
-                            currentGroupInLevel = 0;
+                            const targetLevel = levelOrder[currentLevelIndex + 1];
+                            const targetGroup = getSavedGroupForLevel(targetLevel);
+                            await loadGroupData(targetLevel, targetGroup);
+                            currentLevel = targetLevel;
+                            currentGroupInLevel = targetGroup;
                             clearSearchAndRender();
                         }
                     }
@@ -2445,7 +2488,9 @@ document.addEventListener('DOMContentLoaded', () => {
         isLoadingWortfamilie = true;
 
         try {
-            const url = 'json/wortfamilie_index.json?t=' + Date.now();
+            const url = appVersion
+                ? `json/wortfamilie_index.json?v=${encodeURIComponent(appVersion)}`
+                : 'json/wortfamilie_index.json';
             console.log("Fetching Wortfamilie Index from:", url);
             const response = await fetch(url);
             if (!response.ok) {
@@ -2792,16 +2837,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     const spanishName = resolvedGroup
                         ? (resolvedGroup.spanishName || resolvedGroup.groupNameSpanish || '')
                         : '';
+                    const fullGroupVerbs = resolvedGroup && Array.isArray(resolvedGroup.verbs)
+                        ? resolvedGroup.verbs.map(groupVerbName => ({
+                            verb: groupVerbName,
+                            data: allVerbsData[groupVerbName] || {},
+                            levelKey: level,
+                            groupIndexInLevel: groupIndex
+                        }))
+                        : [];
 
                     groupedMatches[groupKey] = {
                         level: level,
                         theme: theme,
                         spanishName: spanishName,
                         groupIndex: groupIndex,
-                        verbs: []
+                        verbs: fullGroupVerbs.length > 0 ? fullGroupVerbs : [match]
                     };
                 }
-                groupedMatches[groupKey].verbs.push(match);
             });
 
             const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22C55E', '#3b82f6'];
