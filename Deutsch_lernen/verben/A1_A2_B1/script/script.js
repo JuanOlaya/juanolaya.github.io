@@ -1634,8 +1634,11 @@ document.addEventListener('DOMContentLoaded', () => {
             englishObj.style.display = 'none';
         }
         document.getElementById('theme-modal-level').textContent = themeData.level;
-        document.getElementById('theme-modal-group').textContent = themeData.group;
-        document.getElementById('theme-modal-short-name').textContent = themeData.shortName;
+        const defaultDescription = [themeData.group ? `Grupo ${themeData.group}` : '', themeData.shortName || ''].filter(Boolean).join(' · ');
+        const customDescription = (themeData.theme === 'Schicksal' || themeData.germanName === 'Schicksal')
+            ? 'circunstancias inevitables de la vida'
+            : defaultDescription;
+        document.getElementById('theme-modal-description').textContent = customDescription;
         document.getElementById('theme-modal-german-desc').textContent = themeData.germanDescription;
         document.getElementById('theme-modal-spanish-desc').textContent = themeData.spanishDescription;
 
