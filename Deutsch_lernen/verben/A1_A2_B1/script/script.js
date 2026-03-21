@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentVerbInModal = '';
     let currentIndexInModal = 0;
     let storyClickCounter = 0;
-    let currentViewMode = 'kompakt'; // Tracks active view: 'normal', 'cute' (niedlich), 'light', 'kompakt'
+    let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
 
     // --- DOM ELEMENTS ---
     const mainContainer = document.getElementById('main-container');
@@ -1060,273 +1060,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     clearSearchAndRender();
                 });
 
-                // Swipe/Drag navigation for groups with resistance effect
-                let touchStartX = 0;
-                let touchStartY = 0;
-                let touchEndX = 0;
-                let touchEndY = 0;
-                let currentX = 0;
-                let isDragging = false;
-                const swipeThreshold = 80; // minimum distance for swipe
-                const resistance = 0.4; // 40% resistance for visual feedback
-
-                // Touch events (mobile)
-                cardsContainer.addEventListener('touchstart', (e) => {
-                    touchStartX = e.changedTouches[0].screenX;
-                    touchStartY = e.changedTouches[0].screenY;
-                    isDragging = true;
-                    cardsContainer.style.transition = 'none'; // Disable transition during drag
-                }, { passive: true });
-
-                cardsContainer.addEventListener('touchmove', (e) => {
-                    if (!isDragging) return;
-
-                    currentX = e.changedTouches[0].screenX;
-                    const currentY = e.changedTouches[0].screenY;
-                    const deltaX = currentX - touchStartX;
-                    const deltaY = currentY - touchStartY;
-
-                    // Only apply horizontal drag if movement is more horizontal than vertical
-                    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                        e.preventDefault(); // Prevent scrolling when dragging horizontally
-                        applyDragEffects(deltaX);
-                    }
-                }, { passive: false });
-
-                cardsContainer.addEventListener('touchend', (e) => {
-                    if (!isDragging) return;
-
-                    touchEndX = e.changedTouches[0].screenX;
-                    touchEndY = e.changedTouches[0].screenY;
-
-                    const deltaX = touchEndX - touchStartX;
-                    const deltaY = touchEndY - touchStartY;
-
-                    // Only trigger swipe if movement is primarily horizontal
-                    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                        handleSwipe(deltaX);
-                    } else {
-                        // Reset position if it was vertical scroll
-                        resetPosition();
-                    }
-
-                    isDragging = false;
-                }, { passive: true });
-
-                // Mouse events (desktop)
-                let mouseStartX = 0;
-                let mouseStartY = 0;
-                let isMouseDragging = false;
-
-                cardsContainer.addEventListener('mousedown', (e) => {
-                    mouseStartX = e.screenX;
-                    mouseStartY = e.screenY;
-                    isMouseDragging = true;
-                    cardsContainer.style.cursor = 'grabbing';
-                    cardsContainer.style.transition = 'none';
-                });
-
-                cardsContainer.addEventListener('mousemove', (e) => {
-                    if (!isMouseDragging) return;
-
-                    const currentMouseX = e.screenX;
-                    const currentMouseY = e.screenY;
-                    const deltaX = currentMouseX - mouseStartX;
-                    const deltaY = currentMouseY - mouseStartY;
-
-                    // Only apply horizontal drag if movement is more horizontal than vertical
-                    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                        applyDragEffects(deltaX);
-                    }
-                });
-
-                cardsContainer.addEventListener('mouseup', (e) => {
-                    if (!isMouseDragging) return;
-
-                    const mouseEndX = e.screenX;
-                    const mouseEndY = e.screenY;
-                    const deltaX = mouseEndX - mouseStartX;
-                    const deltaY = mouseEndY - mouseStartY;
-
-                    // Only trigger swipe if movement is primarily horizontal
-                    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                        handleSwipe(deltaX);
-                    } else {
-                        resetPosition();
-                    }
-
-                    isMouseDragging = false;
-                    cardsContainer.style.cursor = 'grab';
-                });
-
-                cardsContainer.addEventListener('mouseleave', () => {
-                    if (isMouseDragging) {
-                        resetPosition();
-                        isMouseDragging = false;
-                        cardsContainer.style.cursor = 'grab';
-                    }
-                });
-
-                // Create peek container for preview cards
-                let peekContainer = document.getElementById('peek-container');
-                if (!peekContainer) {
-                    peekContainer = document.createElement('div');
-                    peekContainer.id = 'peek-container';
-                    peekContainer.className = 'peek-container';
-                    mainContainer.appendChild(peekContainer);
-                }
-
-                // Apply drag visual effects (scale + peek)
-                function applyDragEffects(deltaX) {
-                    const translateX = deltaX * resistance; // Apply resistance
-
-                    // Calculate scale (0.9 to 1.0 based on drag distance)
-                    const dragProgress = Math.min(Math.abs(deltaX) / swipeThreshold, 1);
-                    const scale = 1 - (dragProgress * 0.1); // Scale down to 0.9
-
-                    // Apply transform with both translate and scale
-                    cardsContainer.style.transform = `translateX(${translateX}px) scale(${scale})`;
-
-                    // Show peek effect
-                    const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
-                    const currentLevelIndex = levelOrder.indexOf(currentLevel);
-
-                    if (deltaX < -20) {
-                        // Dragging left, show next group
-                        let nextLevel = currentLevel;
-                        let nextGroup = currentGroupInLevel + 1;
-
-                        if (nextGroup >= totalGroupsInLevel) {
-                            // Next level's first group
-                            if (currentLevelIndex < levelOrder.length - 1) {
-                                nextLevel = levelOrder[currentLevelIndex + 1];
-                                nextGroup = 0;
-                            } else {
-                                return; // No next group
-                            }
-                        }
-
-                        showPeek(nextLevel, nextGroup, 'right', Math.abs(deltaX));
-                    } else if (deltaX > 20) {
-                        // Dragging right, show previous group
-                        let prevLevel = currentLevel;
-                        let prevGroup = currentGroupInLevel - 1;
-
-                        if (prevGroup < 0) {
-                            // Previous level's last group
-                            if (currentLevelIndex > 0) {
-                                prevLevel = levelOrder[currentLevelIndex - 1];
-                                prevGroup = levelConfig[prevLevel].groupCount - 1;
-                            } else {
-                                return; // No previous group
-                            }
-                        }
-
-                        showPeek(prevLevel, prevGroup, 'left', Math.abs(deltaX));
-                    } else {
-                        // Hide peek if drag is too small
-                        hidePeek();
-                    }
-                }
-
-                // Show peek preview of adjacent group
-                function showPeek(levelKey, groupIndexInLevel, side, dragDistance) {
-                    const levelGroups = verbGroupsByLevel[levelKey];
-                    if (!levelGroups || !levelGroups[groupIndexInLevel]) return;
-                    const group = levelGroups[groupIndexInLevel];
-                    if (!group || !group.verbs) return;
-
-                    peekContainer.innerHTML = '';
-                    peekContainer.className = `peek-container peek-${side}`;
-
-                    // Render up to 4 cards as preview
-                    const previewCount = Math.min(4, group.verbs.length);
-                    for (let i = 0; i < previewCount; i++) {
-                        const verbName = group.verbs[i];
-                        const verbData = allVerbsData[verbName];
-                        if (!verbData) continue;
-
-                        const esTranslation = removeParentheses(verbData.es || '');
-                        const cardHTML = `
-                        <div class="word-item peek-card">
-                            <span class="emoji">${verbData.emoji || '❓'}</span>
-                            <div class="text-container">
-                                <span class="german-word">${verbName}</span>
-                                <span class="spanish-translation">${esTranslation}</span>
-                            </div>
-                        </div>
-                    `;
-                        peekContainer.innerHTML += cardHTML;
-                    }
-
-                    // Calculate peek visibility based on drag distance
-                    const peekProgress = Math.min(dragDistance / 100, 1);
-                    peekContainer.style.opacity = peekProgress * 0.7;
-                    peekContainer.style.display = 'flex';
-
-                    // Position peek container
-                    if (side === 'right') {
-                        peekContainer.style.right = '0';
-                        peekContainer.style.left = 'auto';
-                        peekContainer.style.transform = `translateX(${100 - (peekProgress * 100)}%)`;
-                    } else {
-                        peekContainer.style.left = '0';
-                        peekContainer.style.right = 'auto';
-                        peekContainer.style.transform = `translateX(-${100 - (peekProgress * 100)}%)`;
-                    }
-                }
-
-                // Hide peek container
-                function hidePeek() {
-                    if (peekContainer) {
-                        peekContainer.style.display = 'none';
-                        peekContainer.innerHTML = '';
-                    }
-                }
-
-                // Handle swipe/drag logic
-                function handleSwipe(deltaX) {
-                    hidePeek(); // Hide peek when swipe ends
-                    cardsContainer.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-
-                    const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
-                    const currentLevelIndex = levelOrder.indexOf(currentLevel);
-
-                    // Swipe left (next group)
-                    if (deltaX < -swipeThreshold) {
-                        if (currentGroupInLevel < totalGroupsInLevel - 1) {
-                            currentGroupInLevel++;
-                        } else if (currentLevelIndex < levelOrder.length - 1) {
-                            // Auto-advance to next level
-                            currentLevel = levelOrder[currentLevelIndex + 1];
-                            currentGroupInLevel = 0;
-                        }
-                        clearSearchAndRender();
-                    }
-                    // Swipe right (previous group)
-                    else if (deltaX > swipeThreshold) {
-                        if (currentGroupInLevel > 0) {
-                            currentGroupInLevel--;
-                        } else if (currentLevelIndex > 0) {
-                            // Auto-advance to previous level
-                            currentLevel = levelOrder[currentLevelIndex - 1];
-                            currentGroupInLevel = levelConfig[currentLevel].groupCount - 1;
-                        }
-                        clearSearchAndRender();
-                    }
-                    // Not enough distance, spring back
-                    else {
-                        resetPosition();
-                    }
-                }
-
-                // Reset position with animation
-                function resetPosition() {
-                    hidePeek(); // Hide peek container
-                    cardsContainer.style.transition = 'transform 0.3s ease';
-                    cardsContainer.style.transform = 'translateX(0) scale(1)'; // Reset both position and scale
-                }
-
                 // Helper function to clear search and render
                 function clearSearchAndRender() {
                     const searchInput = document.getElementById('verb-search');
@@ -1338,7 +1071,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     // Reset transform before rendering new group
-                    cardsContainer.style.transform = 'translateX(0) scale(1)';
+                    cardsContainer.style.transform = '';
+                    cardsContainer.style.transition = '';
                     renderVerbGroup();
                 }
 
@@ -1446,12 +1180,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Version selector (Normal, Leichte, Niedliche)
         const versionRadios = document.querySelectorAll('input[name="card-version"]');
 
-        // Load saved state from localStorage (default to 'cute')
-        let savedVersion = localStorage.getItem('verben-card-version') || 'cute';
+        // Load saved state from localStorage (default to 'compact')
+        let savedVersion = localStorage.getItem('verben-card-version') || 'compact';
 
         // Validate against available options
         if (!document.querySelector(`input[name="card-version"][value="${savedVersion}"]`)) {
-            savedVersion = 'cute'; // Fallback if invalid
+            savedVersion = 'compact'; // Fallback if invalid
         }
 
         currentViewMode = savedVersion; // Initialize global state
@@ -2785,10 +2519,14 @@ document.addEventListener('DOMContentLoaded', () => {
             levelGroups.forEach((group, groupIndexInLevel) => {
                 if (!group || !group.verbs) return;
 
-                // Check if group name matches search term (German or Spanish)
+                // Check if group name matches search term (German, Spanish, or English)
                 const groupNameMatch = (group.theme && group.theme.toLowerCase().includes(searchTerm)) ||
                     (group.germanName && group.germanName.toLowerCase().includes(searchTerm)) ||
-                    (group.spanishName && group.spanishName.toLowerCase().includes(searchTerm));
+                    (group.spanishName && group.spanishName.toLowerCase().includes(searchTerm)) ||
+                    (group.englishName && group.englishName.toLowerCase().includes(searchTerm)) ||
+                    (group.groupNameGerman && group.groupNameGerman.toLowerCase().includes(searchTerm)) ||
+                    (group.groupNameSpanish && group.groupNameSpanish.toLowerCase().includes(searchTerm)) ||
+                    (group.groupNameEnglish && group.groupNameEnglish.toLowerCase().includes(searchTerm));
 
                 if (groupNameMatch) {
                     console.log(`MATCH FOUND! Group: ${group.theme} matches term: "${searchTerm}"`);
@@ -3032,24 +2770,28 @@ document.addEventListener('DOMContentLoaded', () => {
             );
         }
 
-        if (currentViewMode === 'compact') {
+        const renderFullSearchCards = false;
+
+        if (!renderFullSearchCards && (currentViewMode === 'compact' || currentViewMode === 'kompakt')) {
             const groupedMatches = {};
             verbsToShow.forEach(match => {
                 const verbData = match.data;
-                const level = verbData.level || 'A1.1';
-                let theme = verbData.theme || 'Gruppe';
-                const groupIndex = verbData.group ? verbData.group - 1 : 0;
+                const level = match.levelKey || (verbData.level ? verbData.level.split('.')[0] : 'A1');
+                const groupIndex = Number.isInteger(match.groupIndexInLevel)
+                    ? match.groupIndexInLevel
+                    : (verbData.group ? verbData.group - 1 : 0);
+                const resolvedGroup = verbGroupsByLevel[level] && verbGroupsByLevel[level][groupIndex]
+                    ? verbGroupsByLevel[level][groupIndex]
+                    : null;
+                let theme = resolvedGroup
+                    ? (resolvedGroup.theme || resolvedGroup.germanName || resolvedGroup.groupNameGerman || 'Gruppe')
+                    : (verbData.theme || 'Gruppe');
 
                 const groupKey = `${level}-${theme}`;
                 if (!groupedMatches[groupKey]) {
-                    let spanishName = '';
-                    if (verbGroupsByLevel[level] && verbGroupsByLevel[level][groupIndex]) {
-                        spanishName = verbGroupsByLevel[level][groupIndex].spanishName || verbGroupsByLevel[level][groupIndex].groupNameSpanish || '';
-                        const extractedTheme = verbGroupsByLevel[level][groupIndex].theme || verbGroupsByLevel[level][groupIndex].groupNameGerman;
-                        if (extractedTheme) {
-                            theme = extractedTheme;
-                        }
-                    }
+                    const spanishName = resolvedGroup
+                        ? (resolvedGroup.spanishName || resolvedGroup.groupNameSpanish || '')
+                        : '';
 
                     groupedMatches[groupKey] = {
                         level: level,
@@ -3067,7 +2809,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             Object.values(groupedMatches).forEach((group) => {
                 const themeColor = standardColors[group.groupIndex % standardColors.length];
-                const chunkSize = 6;
+                const chunkSize = 7;
                 const chunks = [];
                 for (let i = 0; i < group.verbs.length; i += chunkSize) {
                     chunks.push(group.verbs.slice(i, i + chunkSize));
