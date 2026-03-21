@@ -15,10 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const physicalLevelMap = {
         'A1': [{ key: 'A1_1', count: 14 }, { key: 'A1_2', count: 14 }],
-        'A2': [{ key: 'A2_1', count: 13 }, { key: 'A2_2', count: 13 }],
+        'A2': [{ key: 'A2_1', count: 13 }, { key: 'A2_2', count: 14 }],
         'B1': [{ key: 'B1_1', count: 20 }],
         'B2': [{ key: 'B2_1', count: 11 }]
     };
+    const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22C55E', '#3b82f6'];
 
     function getPhysicalGroupData(macroLevel, globalIndex) {
         const layers = physicalLevelMap[macroLevel] || [];
@@ -33,9 +34,84 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
+    function getThemeColorForVerbData(verbData) {
+        if (!verbData || !verbData.level || !verbData.group) {
+            return '#4682B4';
+        }
+
+        const macroLevel = verbData.level.split('.')[0];
+        const physicalKey = verbData.level.replace('.', '_');
+        const layers = physicalLevelMap[macroLevel] || [];
+        let globalGroupIndex = Number(verbData.group) - 1;
+
+        for (let i = 0; i < layers.length; i++) {
+            const layer = layers[i];
+            if (layer.key === physicalKey) {
+                break;
+            }
+            globalGroupIndex += layer.count;
+        }
+
+        return standardColors[((globalGroupIndex % standardColors.length) + standardColors.length) % standardColors.length];
+    }
+
+    function hexToRgb(hex) {
+        if (!hex) return null;
+        const normalized = hex.replace('#', '').trim();
+        const full = normalized.length === 3
+            ? normalized.split('').map(ch => ch + ch).join('')
+            : normalized;
+        const int = parseInt(full, 16);
+        if (Number.isNaN(int) || full.length !== 6) return null;
+        return {
+            r: (int >> 16) & 255,
+            g: (int >> 8) & 255,
+            b: int & 255
+        };
+    }
+
+    function rgbToHex({ r, g, b }) {
+        const toHex = (value) => Math.max(0, Math.min(255, Math.round(value))).toString(16).padStart(2, '0');
+        return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    }
+
+    function mixHexColors(colorA, colorB, weight = 0.5) {
+        const a = hexToRgb(colorA);
+        const b = hexToRgb(colorB);
+        if (!a) return colorB;
+        if (!b) return colorA;
+        return rgbToHex({
+            r: a.r * (1 - weight) + b.r * weight,
+            g: a.g * (1 - weight) + b.g * weight,
+            b: a.b * (1 - weight) + b.b * weight
+        });
+    }
+
+    function applyModalThemePalette(verbData) {
+        const modalContentEl = document.querySelector('#verb-modal .modal-content');
+        const modalHeaderEl = document.querySelector('#verb-modal .modal-header');
+        if (!modalContentEl) return;
+
+        const themeColor = getThemeColorForVerbData(verbData);
+        const softColor = mixHexColors(themeColor, '#ffffff', 0.78);
+        const paleColor = mixHexColors(themeColor, '#ffffff', 0.9);
+        const strongColor = mixHexColors(themeColor, '#0f172a', 0.22);
+        const borderColor = mixHexColors(themeColor, '#cbd5e1', 0.55);
+
+        modalContentEl.style.setProperty('--modal-theme', themeColor);
+        modalContentEl.style.setProperty('--modal-theme-soft', softColor);
+        modalContentEl.style.setProperty('--modal-theme-pale', paleColor);
+        modalContentEl.style.setProperty('--modal-theme-strong', strongColor);
+        modalContentEl.style.setProperty('--modal-theme-border', borderColor);
+
+        if (modalHeaderEl) {
+            modalHeaderEl.style.backgroundColor = themeColor;
+        }
+    }
+
     const levelConfig = {
         'A1': { groupCount: 28, displayName: 'A1' },
-        'A2': { groupCount: 26, displayName: 'A2' },
+        'A2': { groupCount: 27, displayName: 'A2' },
         'B1': { groupCount: 20, displayName: 'B1' },
         'B2': { groupCount: 11, displayName: 'B2' }
     };
@@ -87,6 +163,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeModal = document.getElementById('theme-modal');
     const closeThemeModalX = document.getElementById('close-theme-modal-x');
     const closeThemeModalBtn = document.getElementById('close-theme-modal-btn');
+
+    function setupModalHeaderLayout() {
+        const modalHeader = document.querySelector('#verb-modal .modal-header');
+        const spanishTranslation = document.getElementById('modal-verb-infinitive-es');
+        const tagsToggle = document.getElementById('modal-tags-toggle');
+        if (!modalHeader || !spanishTranslation || !tagsToggle) return;
+
+        let translationRow = modalHeader.querySelector('.modal-translation-row');
+        if (!translationRow) {
+            translationRow = document.createElement('div');
+            translationRow.className = 'modal-translation-row';
+            modalHeader.insertBefore(translationRow, spanishTranslation);
+        }
+
+        translationRow.appendChild(spanishTranslation);
+        translationRow.appendChild(tagsToggle);
+    }
+
+    setupModalHeaderLayout();
 
     // Header Tags Toggle Listener
     const modalTagsToggle = document.getElementById('modal-tags-toggle');
@@ -479,8 +574,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Helper function to extract clean Perfekt (remove auxiliary verb)
     function getCleanPerfekt(perfekt) {
         if (!perfekt || perfekt === '---') return '---';
-        // Remove "hat " or "ist " from the beginning
-        const cleaned = perfekt.replace(/^(hat|ist)\s+/, '');
+        // Remove any conjugated auxiliary of haben/sein from the beginning
+        const cleaned = perfekt.replace(/^(habe|hast|hat|haben|habt|bin|bist|ist|sind|seid|sein)\s+/i, '');
         return cleaned;
     }
 
@@ -512,7 +607,6 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.className = 'kompakt-grid';
 
         // Standard palette logic (fallback sequence if theme colors are missing)
-        const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22C55E', '#3b82f6'];
 
         levelGroups.forEach((group, groupIndex) => {
             if (!group || !group.verbs) return;
@@ -1868,6 +1962,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        applyModalThemePalette(updatedData);
+
         // Emoji with TTS
         const modalEmojiEl = document.getElementById('modal-emoji');
         modalEmojiEl.textContent = updatedData.emoji || '❓';
@@ -2134,25 +2230,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 { key: 'Sie (formal)', display: 'Sie', spanish: 'usted(es)' }
             ];
 
+            const hasAussageExamples = !!(updatedData.praesens_examples && Object.keys(updatedData.praesens_examples).length);
+            const hasFrageExamples = !!(updatedData.praesens_fragen && Object.keys(updatedData.praesens_fragen).length);
+            const hasDativExamples = !!(updatedData.praesens_dativ && Object.keys(updatedData.praesens_dativ).length);
+            const beispielModes = [
+                hasAussageExamples ? { key: 'aussage', label: 'Aussage' } : null,
+                hasFrageExamples ? { key: 'frage', label: 'Frage' } : null,
+                hasDativExamples ? { key: 'dativ', label: 'Dativ' } : null
+            ].filter(Boolean);
+
             let tableHTML = '<table>';
-            tableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel <button id="toggle-beispiel-type" class="toggle-beispiel-btn" title="Zwischen Aussagen und Fragen wechseln">⇄</button></th></tr>';
+            tableHTML += `<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel <span id="beispiel-mode-tag" class="beispiel-mode-tag">${beispielModes[0]?.label || 'Aussage'}</span><button id="toggle-beispiel-type" class="toggle-beispiel-btn" title="Beispielmodus wechseln">⇄</button></th></tr>`;
 
             for (const { key, display, spanish } of pronounOrder) {
                 const conjugation = updatedData.praesens[key];
                 if (conjugation) {
                     const example = updatedData.praesens_examples && updatedData.praesens_examples[key];
                     const frage = updatedData.praesens_fragen && updatedData.praesens_fragen[key];
+                    const dativ = updatedData.praesens_dativ && updatedData.praesens_dativ[key];
                     let exampleCell = '';
 
-                    if (example || frage) {
+                    if (example || frage || dativ) {
                         exampleCell = `<div class="example-cell">`;
 
                         // Aussage (statement) examples
                         if (example) {
                             exampleCell += `<div class="example-aussage" style="display: block;">`;
                             if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
-                            if (example.en) exampleCell += `<div class="example-translation example-en">🇬🇧 ${example.en}</div>`;
-                            if (example.es) exampleCell += `<div class="example-translation example-es">🇪🇸 ${example.es}</div>`;
+                            if (example.en) exampleCell += `<div class="example-translation example-en">${example.en}</div>`;
+                            if (example.es) exampleCell += `<div class="example-translation example-es">${example.es}</div>`;
                             exampleCell += `</div>`;
                         }
 
@@ -2160,8 +2266,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (frage) {
                             exampleCell += `<div class="example-frage" style="display: none;">`;
                             if (frage.de) exampleCell += `<div class="example-de">${frage.de}</div>`;
-                            if (frage.en) exampleCell += `<div class="example-translation example-en">🇬🇧 ${frage.en}</div>`;
-                            if (frage.es) exampleCell += `<div class="example-translation example-es">🇪🇸 ${frage.es}</div>`;
+                            if (frage.en) exampleCell += `<div class="example-translation example-en">${frage.en}</div>`;
+                            if (frage.es) exampleCell += `<div class="example-translation example-es">${frage.es}</div>`;
+                            exampleCell += `</div>`;
+                        }
+
+                        if (dativ) {
+                            exampleCell += `<div class="example-dativ" style="display: none;">`;
+                            if (dativ.de) exampleCell += `<div class="example-de">${dativ.de}</div>`;
+                            if (dativ.en) exampleCell += `<div class="example-translation example-en">${dativ.en}</div>`;
+                            if (dativ.es) exampleCell += `<div class="example-translation example-es">${dativ.es}</div>`;
                             exampleCell += `</div>`;
                         }
 
@@ -2210,25 +2324,37 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add event listener for toggle button
             const toggleBtn = document.getElementById('toggle-beispiel-type');
             if (toggleBtn) {
-                toggleBtn.addEventListener('click', () => {
+                let currentModeIndex = 0;
+                const modeTag = document.getElementById('beispiel-mode-tag');
+                const updateExampleMode = () => {
+                    const currentMode = beispielModes[currentModeIndex] || { key: 'aussage', label: 'Aussage' };
                     const aussageExamples = document.querySelectorAll('.example-aussage');
                     const frageExamples = document.querySelectorAll('.example-frage');
+                    const dativExamples = document.querySelectorAll('.example-dativ');
 
                     aussageExamples.forEach(el => {
-                        if (el.style.display === 'none') {
-                            el.style.display = 'block';
-                        } else {
-                            el.style.display = 'none';
-                        }
+                        el.style.display = currentMode.key === 'aussage' ? 'block' : 'none';
                     });
 
                     frageExamples.forEach(el => {
-                        if (el.style.display === 'none') {
-                            el.style.display = 'block';
-                        } else {
-                            el.style.display = 'none';
-                        }
+                        el.style.display = currentMode.key === 'frage' ? 'block' : 'none';
                     });
+
+                    dativExamples.forEach(el => {
+                        el.style.display = currentMode.key === 'dativ' ? 'block' : 'none';
+                    });
+
+                    if (modeTag) {
+                        modeTag.textContent = currentMode.label;
+                    }
+                    toggleBtn.title = `Beispielmodus: ${currentMode.label}`;
+                };
+
+                updateExampleMode();
+                toggleBtn.addEventListener('click', () => {
+                    if (beispielModes.length <= 1) return;
+                    currentModeIndex = (currentModeIndex + 1) % beispielModes.length;
+                    updateExampleMode();
                 });
             }
         } else {
@@ -2272,8 +2398,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (example) {
                         exampleCell = `<div class="example-cell">`;
                         if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
-                        if (example.en) exampleCell += `<div class="example-translation example-en">🇬🇧 ${example.en}</div>`;
-                        if (example.es) exampleCell += `<div class="example-translation example-es">🇪🇸 ${example.es}</div>`;
+                        if (example.en) exampleCell += `<div class="example-translation example-en">${example.en}</div>`;
+                        if (example.es) exampleCell += `<div class="example-translation example-es">${example.es}</div>`;
                         exampleCell += `</div>`;
                     }
 
@@ -2343,8 +2469,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (example) {
                         exampleCell = `<div class="example-cell">`;
                         if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
-                        if (example.en) exampleCell += `<div class="example-translation example-en">🇬🇧 ${example.en}</div>`;
-                        if (example.es) exampleCell += `<div class="example-translation example-es">🇪🇸 ${example.es}</div>`;
+                        if (example.en) exampleCell += `<div class="example-translation example-en">${example.en}</div>`;
+                        if (example.es) exampleCell += `<div class="example-translation example-es">${example.es}</div>`;
                         exampleCell += `</div>`;
                     }
 
@@ -2418,8 +2544,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (example) {
                         exampleCell = `<div class="example-cell">`;
                         if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
-                        if (example.en) exampleCell += `<div class="example-translation example-en">🇬🇧 ${example.en}</div>`;
-                        if (example.es) exampleCell += `<div class="example-translation example-es">🇪🇸 ${example.es}</div>`;
+                        if (example.en) exampleCell += `<div class="example-translation example-en">${example.en}</div>`;
+                        if (example.es) exampleCell += `<div class="example-translation example-es">${example.es}</div>`;
                         exampleCell += `</div>`;
                     }
 
@@ -2856,7 +2982,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22C55E', '#3b82f6'];
             htmlFragments.push('<div class="kompakt-grid">');
 
             Object.values(groupedMatches).forEach((group) => {

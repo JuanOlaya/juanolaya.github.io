@@ -141,7 +141,7 @@ body.compact-view .content-block {
     margin-top: 15px;
     padding: 0;
     /* No padding, full width */
-    background-color: #e5e7eb;
+    background-color: var(--modal-theme-soft, #e5e7eb);
     /* Light gray bar background */
     border-radius: 8px 8px 0 0;
     width: 100%;
@@ -151,7 +151,7 @@ body.compact-view .content-block {
 
 .modal-tab-btn {
     flex: 1;
-    background-color: #d1d5db;
+    background-color: var(--modal-theme, #d1d5db);
     /* Darker gray for inactive */
     border: none;
     border-radius: 0;
@@ -168,7 +168,7 @@ body.compact-view .content-block {
     font-family: 'Nunito', sans-serif;
     font-size: 0.95rem;
     font-weight: 700;
-    color: #4b5563;
+    color: white;
     /* Dark gray text */
     cursor: pointer;
     transition: all 0.2s ease;
@@ -274,24 +274,20 @@ body.compact-view .content-block {
 }
 
 .modal-tab-btn:hover {
-    background-color: #e5e7eb;
-    /* Lighter on hover */
-    color: #1f2937;
+    background-color: var(--modal-theme-strong, #e5e7eb);
+    color: white;
 }
 
 .modal-tab-btn.active {
-    background-color: white;
-    /* White for active (matches content) */
-    color: #4682B4;
-    /* Steel blue text for nice contrast */
+    background-color: var(--modal-theme-pale, white);
+    color: #0f172a;
     z-index: 2;
     /* Sit on top */
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
     /* Subtle lift */
     padding-top: 14px;
     /* Slightly taller to pop up */
-    border-top: 3px solid #4682B4;
-    /* Blue top indicator */
+    border-top: 3px solid var(--modal-theme, #4682B4);
 }
 
 /* Tab Content Container Styling to match */
@@ -315,7 +311,7 @@ body.compact-view .content-block {
 .section-title {
     font-family: 'Poppins', sans-serif;
     font-size: 1.3rem;
-    color: #4682B4;
+    color: #0f172a;
     margin: 0 0 15px 0;
     /* Reduced top margin since tab connects */
     font-weight: 700;
@@ -1354,6 +1350,11 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 }
 
 .modal-content {
+    --modal-theme: #4682B4;
+    --modal-theme-soft: #b9d5ee;
+    --modal-theme-pale: #e8f2fb;
+    --modal-theme-strong: #2c5270;
+    --modal-theme-border: #a9cce3;
     background-color: #fff;
     padding: 0;
     border-radius: 20px;
@@ -1405,13 +1406,13 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 
 /* Modal Header Styles (New) */
 .modal-header {
-    padding: 20px 20px;
+    padding: 12px 18px 10px 18px;
     text-align: center;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     background-color: #4682B4;
     /* Default SteelBlue */
     margin-bottom: 0;
@@ -1420,6 +1421,7 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 }
 
 .modal-emoji {
+    display: none;
     font-size: 4rem;
     margin-bottom: 5px;
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
@@ -1432,7 +1434,7 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 }
 
 .modal-word {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 800;
     line-height: 1.1;
     cursor: pointer;
@@ -1452,7 +1454,7 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 
 /* Translations in header */
 .modal-header .modal-translation {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     opacity: 0.95;
     font-weight: 600;
     color: white;
@@ -1460,8 +1462,15 @@ body.compact-view.compact-light-mode .kompakt-header-es {
     font-style: italic;
 }
 
+.modal-translation-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
 .modal-header .modal-translation.english {
-    font-size: 1rem;
+    font-size: 0.9rem;
     opacity: 0.8;
     font-weight: 500;
     margin-top: 2px;
@@ -1493,7 +1502,7 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 /* Tags Wrapper for Toggle */
 .modal-tags-wrapper {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1512,10 +1521,10 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 
 /* Toggle Button */
 .modal-tags-toggle {
-    margin-top: 5px;
+    margin-top: 0;
     cursor: pointer;
     color: rgba(255, 255, 255, 0.7);
-    padding: 5px 20px;
+    padding: 2px 10px;
     border-radius: 12px;
     transition: all 0.2s ease;
     display: flex;
@@ -1523,6 +1532,7 @@ body.compact-view.compact-light-mode .kompakt-header-es {
     align-items: center;
     font-size: 1.2rem;
     line-height: 1;
+    flex-shrink: 0;
 }
 
 .modal-tags-toggle:hover {
@@ -1634,7 +1644,6 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 
 #modal-verb-perfekt {
     color: #4682B4;
-    /* Steel Blue */
 }
 
 .modal-translation {
@@ -1646,8 +1655,7 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 }
 
 .modal-verb-block {
-    border-bottom: 2px solid #A9CCE3;
-    /* Light Blue */
+    border-bottom: 2px solid var(--modal-theme-border, #A9CCE3);
     padding-bottom: 1.2rem;
     margin-bottom: 1.2rem;
 }
@@ -1662,7 +1670,7 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 
 /* Add border between praesens details and perfekt block */
 #praesens-details-container {
-    border-bottom: 2px solid #A9CCE3;
+    border-bottom: 2px solid var(--modal-theme-border, #A9CCE3);
     margin-bottom: 1.2rem;
     border-radius: 0;
     /* Remove double radius */
@@ -1684,9 +1692,7 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 
 #praesens-details-container .details-content {
     padding: 10px 0 15px 0;
-    /* Adjust padding */
-    border-top: 1px solid #eee;
-    /* Light line separator */
+    border-top: 1px solid var(--modal-theme-border, #eee);
 }
 
 
@@ -2836,13 +2842,13 @@ details[open]>summary .details-arrow {
     color: #4a5568;
     cursor: pointer;
     padding: 12px 16px;
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    background: linear-gradient(135deg, var(--modal-theme-pale, #f0f9ff) 0%, var(--modal-theme-soft, #e0f2fe) 100%);
     border-radius: 8px;
     transition: all 0.3s ease;
 }
 
 #wortfamilie-summary:hover {
-    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    background: linear-gradient(135deg, var(--modal-theme-soft, #e0f2fe) 0%, var(--modal-theme-border, #bae6fd) 100%);
 }
 
 #wortfamilie-content {
@@ -2880,7 +2886,7 @@ details[open]>summary .details-arrow {
 
 .wf-word-german {
     color: #0f172a;
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    background: linear-gradient(135deg, var(--modal-theme-pale, #fef3c7) 0%, var(--modal-theme-soft, #fde68a) 100%);
     padding: 2px 8px;
     border-radius: 6px;
     display: inline-block;
@@ -2894,7 +2900,7 @@ details[open]>summary .details-arrow {
 
 .wf-word-type {
     font-style: italic;
-    color: #64748b;
+    color: var(--modal-theme, #64748b);
     font-size: 0.9rem;
     margin-left: 6px;
 }
@@ -3040,6 +3046,19 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 }
 
 /* Toggle button for Beispiel (Aussage/Frage) */
+.beispiel-mode-tag {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    vertical-align: middle;
+    background-color: rgba(255, 255, 255, 0.16);
+    color: inherit;
+}
+
 .toggle-beispiel-btn {
     background: linear-gradient(135deg, #4682B4 0%, #5a9fd4 100%);
     border: none;
@@ -3066,7 +3085,8 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 
 /* Example containers for Aussage and Frage */
 .example-aussage,
-.example-frage {
+.example-frage,
+.example-dativ {
     transition: opacity 0.3s ease-in-out;
 }
 
@@ -3627,17 +3647,14 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
     /* No separators */
     margin-bottom: 0;
     /* Remove margin to connect with content */
-    border-bottom: 4px solid #89B3F7;
-    /* Match active tab color */
+    border-bottom: 4px solid var(--modal-theme-soft, #89B3F7);
     width: 100%;
     justify-content: start;
 }
 
 .modal-tab-btn {
-    background-color: #174EA6;
-    /* Inactive Tabs: Dark Blue */
+    background-color: var(--modal-theme, #174EA6);
     color: #FFFFFF;
-    /* White text for contrast */
     border: none;
     padding: 14px 28px;
     /* Further increased padding */
@@ -3655,38 +3672,125 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 }
 
 .modal-tab-btn:hover {
-    background-color: #1a5bb8;
+    background-color: var(--modal-theme-strong, #1a5bb8);
     color: #FFFFFF;
     opacity: 1;
 }
 
 .modal-tab-btn.active {
-    background-color: #89B3F7;
-    /* Active Tab: Light Blue */
-    color: #0d3473;
-    /* Dark Blue text for contrast on light background */
+    background-color: var(--modal-theme-soft, #89B3F7);
+    color: #0f172a;
     box-shadow: none;
     opacity: 1;
 }
 
 .modal-tab-btn.active:hover {
-    background-color: #89B3F7;
-    /* Maintain active color */
+    background-color: var(--modal-theme-soft, #89B3F7);
 }
 
 /* Style for the content area to match active tab */
 .tab-content {
-    background-color: #89B3F7;
+    background-color: var(--modal-theme-soft, #89B3F7);
     padding: 20px;
     border-radius: 0 0 15px 15px;
-    /* Rounded bottom */
-    color: #0d3473;
-    /* Dark text for readability */
+    color: #0f172a;
 }
 
 /* Ensure headings inside are readable */
 .tab-content h4 {
-    color: #0d3473;
+    color: #0f172a;
+}
+
+body.compact-view .modal-tab-btn.active {
+    background-color: #0F172A;
+    color: #f8fafc;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+    border-top: 9px solid var(--modal-theme, #ec4899);
+}
+
+body.compact-view .tab-content {
+    background-color: #0F172A;
+    color: #f8fafc;
+}
+
+body.compact-view .tab-content h4,
+body.compact-view .section-title,
+body.compact-view .wf-level-header,
+body.compact-view #wortfamilie-summary,
+body.compact-view .wf-word-translation {
+    color: #f8fafc;
+}
+
+body.compact-view .wf-word-type {
+    color: #64748b;
+}
+
+body.compact-view #wortfamilie-summary {
+    background: #0F172A;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.compact-view #wortfamilie-summary:hover {
+    background: #1e293b;
+}
+
+body.compact-view #wortfamilie-content {
+    background-color: #0F172A;
+    border-radius: 0 0 12px 12px;
+}
+
+body.compact-view .wf-word-german {
+    color: #0f172a;
+}
+
+body.compact-view #praesens-details-container .details-content,
+body.compact-view #modal-praesens-table table,
+body.compact-view #modal-perfekt-examples-table table,
+body.compact-view #modal-praeteritum-konjugation-table table,
+body.compact-view #modal-konjunktiv-konjugation-table-tab table {
+    background-color: #0F172A;
+}
+
+body.compact-view .modal-tab-btn {
+    background-color: #0F172A;
+    color: #f8fafc;
+    border-top: 2px solid rgba(255, 255, 255, 0.85);
+}
+
+body.compact-view .modal-tab-btn:hover {
+    background-color: #1e293b;
+    color: #f8fafc;
+}
+
+body.compact-view .modal-tabs-nav {
+    background-color: #0F172A;
+    border-bottom-color: #0F172A;
+}
+
+body.compact-view #modal-praesens-table th,
+body.compact-view #modal-praesens-table td,
+body.compact-view #modal-perfekt-examples-table th,
+body.compact-view #modal-perfekt-examples-table td,
+body.compact-view #modal-praeteritum-konjugation-table th,
+body.compact-view #modal-praeteritum-konjugation-table td,
+body.compact-view #modal-konjunktiv-konjugation-table-tab th,
+body.compact-view #modal-konjunktiv-konjugation-table-tab td {
+    border-color: #334155;
+    color: #f8fafc;
+}
+
+body.compact-view #modal-praesens-table .example-de,
+body.compact-view #modal-perfekt-examples-table .example-de,
+body.compact-view #modal-praeteritum-konjugation-table .example-de,
+body.compact-view #modal-konjunktiv-konjugation-table-tab .example-de {
+    color: #94A3B8;
+}
+
+body.compact-view #modal-praesens-table th,
+body.compact-view #modal-perfekt-examples-table th,
+body.compact-view #modal-praeteritum-konjugation-table th,
+body.compact-view #modal-konjunktiv-konjugation-table-tab th {
+    background-color: #1e293b;
 }
 
 /* Controls Container (Search + Toggle) */
@@ -3993,6 +4097,11 @@ body.compact-view .search-input {
 
 body.compact-view .search-input::placeholder {
     color: #64748b;
+}
+
+body.compact-view #verb-modal .modal-content {
+    background-color: #0F172A;
+    color: #f1f5f9;
 }
 
 /* Hide standard elements in compact mode that define layout */
