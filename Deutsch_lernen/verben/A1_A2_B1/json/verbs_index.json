@@ -1,6 +1,6 @@
 {
     "_configuration_rules":  "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word, with the STRICT EXCEPTION of the group \u0027Leben in Deutschland\u0027. MAINTENANCE RULE: whenever this file changes, update lastUpdated.",
-    "lastUpdated":  "2026-03-21T22:28:00.000Z",
+    "lastUpdated":  "2026-03-22T09:05:00.000Z",
     "totalGroups":  86,
     "totalVerbs":  446,
     "groups":  [
@@ -146,14 +146,15 @@
                    },
                    {
                        "level":  "A1.1",
-                       "verbCount":  6,
+                       "verbCount":  7,
                        "verbs":  [
                                      "kaufen",
                                      "einkaufen",
                                      "bezahlen",
                                      "verkaufen",
                                      "kosten",
-                                     "bestellen"
+                                     "bestellen",
+                                     "holen"
                                  ],
                        "groupNameGerman":  "Einkauf",
                        "groupNameSpanish":  "Compras",
@@ -187,7 +188,7 @@
                                      "zurückbringen",
                                      "abgeben",
                                      "abholen",
-                                     "holen"
+                                     "laden"
                                  ],
                        "groupNameGerman":  "Logistik",
                        "groupNameSpanish":  "Logística",
@@ -196,11 +197,10 @@
                    },
                    {
                        "level":  "A1.1",
-                       "verbCount":  5,
+                       "verbCount":  4,
                        "verbs":  [
                                      "packen",
                                      "auspacken",
-                                     "laden",
                                      "zumachen",
                                      "aufmachen"
                                  ],
@@ -1035,9 +1035,9 @@
                                      "kündigen",
                                      "erfolgen"
                                  ],
-                       "groupNameGerman":  "Verwaltung",
-                       "groupNameSpanish":  "Administración",
-                       "groupNameEnglish":  "Administration",
+                       "groupNameGerman":  "Formalitäten",
+                       "groupNameSpanish":  "Trámites",
+                       "groupNameEnglish":  "Formalities",
                        "groupNumberPerLevel":  15
                    },
                    {
