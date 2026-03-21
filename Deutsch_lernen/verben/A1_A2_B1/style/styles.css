@@ -3408,7 +3408,7 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 
 .theme-info-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: minmax(140px, 180px) minmax(0, 1fr);
     gap: 1rem;
     margin-bottom: 2rem;
 }
@@ -3433,6 +3433,11 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
     font-size: 1.2rem;
     color: #880e4f;
     font-weight: 700;
+}
+
+.theme-info-item-wide {
+    align-items: flex-start;
+    text-align: left;
 }
 
 .theme-descriptions {
