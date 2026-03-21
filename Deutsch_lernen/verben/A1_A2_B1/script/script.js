@@ -1615,6 +1615,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentThemeData = groupData;
         const themeData = groupData;
+        const themeColor = standardColors[groupIndex % standardColors.length];
+
+        const themeModalContent = themeModal.querySelector('.theme-modal-content');
+        if (themeModalContent) {
+            themeModalContent.style.setProperty('--theme-modal-accent', themeColor);
+        }
 
         // Populate modal with theme data
         document.getElementById('theme-modal-german-name').textContent = themeData.theme || themeData.germanName;
@@ -1656,6 +1662,8 @@ document.addEventListener('DOMContentLoaded', () => {
         themeModal.classList.add('visible');
 
     }
+
+    window.openThemeModal = openThemeModal;
 
     // --- TTS FUNCTION ---
     window.speak = function (text, lang = 'de-DE', rate = 0.9) {
@@ -3015,7 +3023,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const esTranslationDisplay = highlightMatch(esTranslationRaw, searchTerm);
 
                         cardHTML += `
-                    <div class="kompakt-row">
+                    <div class="kompakt-row" data-verb="${verbName}" onclick="openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
                         <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${displayVerbName}</div>
                         <div class="kompakt-spanish" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${esTranslationDisplay}</div>
                     </div>
@@ -3241,6 +3249,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         cardsContainer.innerHTML = htmlFragments.join('');
+
+        cardsContainer.querySelectorAll('.kompakt-row[data-verb]').forEach((row) => {
+            const verbName = row.dataset.verb;
+            row.onclick = () => openModalForVerb(verbName);
+
+            const germanWord = row.querySelector('.kompakt-german');
+            if (germanWord) {
+                germanWord.onclick = (event) => {
+                    event.stopPropagation();
+                    openModalForVerb(verbName);
+                };
+            }
+
+            const spanishWord = row.querySelector('.kompakt-spanish');
+            if (spanishWord) {
+                spanishWord.onclick = (event) => {
+                    event.stopPropagation();
+                    openModalForVerb(verbName);
+                };
+            }
+        });
 
         // Re-setup hover listeners for new cards
         setupHoverListeners();
