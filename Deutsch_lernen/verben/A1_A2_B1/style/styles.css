@@ -3367,32 +3367,43 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 
 .theme-modal-content {
     max-width: 600px;
-    padding: 2rem;
+    padding: 0;
+    overflow: hidden;
+    --theme-modal-accent: #e91e63;
 }
 
 .theme-modal-header {
     text-align: center;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid #e91e63;
-    padding-bottom: 1rem;
+    margin-bottom: 0;
+    padding: 2rem 2rem 1.5rem;
+    background: var(--theme-modal-accent);
 }
 
 .theme-german-name {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #880e4f;
+    color: #ffffff;
     margin: 0 0 0.5rem 0;
 }
 
 .theme-spanish-name {
     font-size: 1.5rem;
-    color: #ad1457;
+    color: #ffffff;
     margin: 0;
     font-style: italic;
 }
 
+.theme-english-name {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.95rem;
+    font-style: italic;
+    margin: 0.35rem 0 0;
+}
+
 .theme-modal-body {
-    margin-bottom: 2rem;
+    margin-bottom: 0;
+    padding: 2rem;
+    background: #ffffff;
 }
 
 .theme-info-grid {
@@ -3454,7 +3465,8 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 
 .theme-modal-footer {
     text-align: center;
-    padding-top: 1rem;
+    padding: 1rem 2rem 2rem;
+    background: #ffffff;
     border-top: 1px solid #f8bbd0;
 }
 

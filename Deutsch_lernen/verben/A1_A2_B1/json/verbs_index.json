@@ -1,8 +1,8 @@
 {
     "_configuration_rules":  "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word, with the STRICT EXCEPTION of the group \u0027Leben in Deutschland\u0027. MAINTENANCE RULE: whenever this file changes, update lastUpdated.",
-    "lastUpdated":  "2026-03-21T12:45:00.000Z",
+    "lastUpdated":  "2026-03-21T22:28:00.000Z",
     "totalGroups":  86,
-    "totalVerbs":  444,
+    "totalVerbs":  446,
     "groups":  [
                    {
                        "level":  "A1.1",
@@ -92,8 +92,8 @@
                                      "abschließen",
                                      "drücken",
                                      "ziehen",
-                                     "zumachen",
-                                     "schneiden"
+                                     "schneiden",
+                                     "füllen"
                                  ],
                        "groupNameGerman":  "Handgriffe",
                        "groupNameSpanish":  "Manipulación",
@@ -196,15 +196,17 @@
                    },
                    {
                        "level":  "A1.1",
-                       "verbCount":  3,
+                       "verbCount":  5,
                        "verbs":  [
                                      "packen",
                                      "auspacken",
-                                     "laden"
+                                     "laden",
+                                     "zumachen",
+                                     "aufmachen"
                                  ],
-                       "groupNameGerman":  "Gepäck",
-                       "groupNameSpanish":  "Equipaje",
-                       "groupNameEnglish":  "Luggage",
+                       "groupNameGerman":  "Verpackung",
+                       "groupNameSpanish":  "Embalaje",
+                       "groupNameEnglish":  "Packaging",
                        "groupNumberPerLevel":  13
                    },
                    {
@@ -703,12 +705,13 @@
                    },
                    {
                        "level":  "A2.2",
-                       "verbCount":  4,
+                       "verbCount":  5,
                        "verbs":  [
                                      "handeln",
                                      "reagieren",
                                      "eingreifen",
-                                     "ergreifen"
+                                     "ergreifen",
+                                     "versuchen"
                                  ],
                        "groupNameGerman":  "Handlung",
                         "groupNameSpanish":  "Acción",
@@ -841,11 +844,10 @@
                    },
                    {
                        "level":  "B1.1",
-                       "verbCount":  6,
+                       "verbCount":  5,
                        "verbs":  [
                                      "gelingen",
                                      "misslingen",
-                                     "versuchen",
                                      "schaffen",
                                      "erreichen",
                                      "aufgeben"
@@ -919,14 +921,15 @@
                    },
                    {
                        "level":  "B1.1",
-                       "verbCount":  6,
+                       "verbCount":  7,
                        "verbs":  [
                                      "löschen",
                                      "sichern",
                                      "erstellen",
                                      "einschalten",
                                      "ausschalten",
-                                     "absichern"
+                                     "absichern",
+                                     "speichern"
                                  ],
                        "groupNameGerman":  "Daten",
                        "groupNameSpanish":  "Datos",
@@ -1023,15 +1026,14 @@
                    },
                    {
                        "level":  "B1.1",
-                       "verbCount":  7,
+                       "verbCount":  6,
                        "verbs":  [
                                      "beantragen",
                                      "anmelden",
                                      "einreichen",
-                                     "speichern",
-                                     "füllen",
                                      "bewerben",
-                                     "kündigen"
+                                     "kündigen",
+                                     "erfolgen"
                                  ],
                        "groupNameGerman":  "Verwaltung",
                        "groupNameSpanish":  "Administración",
@@ -1308,5 +1310,5 @@
                        "groupNameEnglish":  "Innovation",
                        "groupNumberPerLevel":  11
                    }
-               ]
+                ]
 }
