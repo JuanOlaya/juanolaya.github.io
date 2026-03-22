@@ -681,16 +681,46 @@ body.compact-view.compact-light-mode .kompakt-header-es {
     color: var(--text-main);
 }
 
+.kompakt-translations {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    margin-left: auto;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
 .kompakt-spanish {
     font-size: 1.2rem;
     font-weight: bold;
     font-style: italic;
     color: var(--text-muted);
     text-align: right;
-    max-width: 50%;
+    width: 100%;
+    max-width: 19ch;
+    margin-left: auto;
+    padding-right: 0.2em;
+    box-sizing: border-box;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.kompakt-english {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-align: right;
+    width: 100%;
+    max-width: 19ch;
+    margin-left: auto;
+    padding-right: 0.2em;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.9;
 }
 
 /* === END KOMPAKT STRUCTURAL === */
@@ -1227,6 +1257,8 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 .hide-es #modal-verb-perfekt-es,
 .hide-es #modal-verb-praeteritum-es,
 .hide-es #modal-verb-note,
+.hide-es .kompakt-header-es,
+.hide-es .kompakt-spanish,
 .hide-es [data-form~='translation'] {
     display: none !important;
 }
@@ -1237,6 +1269,7 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 .hide-en #modal-verb-english-infinitive,
 .hide-en #modal-verb-english-perfekt,
 .hide-en #modal-verb-english-praeteritum,
+.hide-en .kompakt-english,
 .hide-en .english {
     display: none !important;
 }
@@ -3606,6 +3639,8 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
 .hide-de .german-word-container .verb-tag,
 .hide-de .german-word-container .case-tags,
 .hide-de #modal-verb-infinitive,
+.hide-de .kompakt-header-de,
+.hide-de .kompakt-german,
 .hide-de .german-example {
     display: none !important;
 }

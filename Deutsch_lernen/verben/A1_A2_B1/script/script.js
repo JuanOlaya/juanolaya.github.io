@@ -551,6 +551,26 @@
         }
     }
 
+    function findMatchingTextEntry(entries, searchTerm, extractor = null) {
+        if (!entries) return '';
+
+        for (const entry of entries) {
+            const text = extractor ? extractor(entry) : entry;
+            if (typeof text === 'string' && findMatchingWordInText(text, searchTerm)) {
+                return text;
+            }
+        }
+
+        return '';
+    }
+
+    function findMatchingWordInText(text, searchTerm) {
+        if (!text || typeof text !== 'string') return '';
+        const normalized = text.replace(/[()]/g, '');
+        const words = normalized.split(/[\s,/]+/).filter(Boolean);
+        return words.find(word => word.toLowerCase().startsWith(searchTerm)) || '';
+    }
+
     // Helper function to dynamically parse and strip parentheses from translations
     function removeParentheses(text) {
         if (!text) return text;
@@ -569,6 +589,12 @@
         parsed = parsed.replace(/ o /g, ' / ');
 
         return parsed.trim();
+    }
+
+    function getPrimaryTranslation(text) {
+        const cleaned = removeParentheses(text || '');
+        if (!cleaned) return cleaned;
+        return cleaned.split('/')[0].trim();
     }
 
     // Helper function to extract clean Perfekt (remove auxiliary verb)
@@ -592,6 +618,13 @@
         cardsContainer.innerHTML = '';
         document.body.classList.add('compact-view');
         document.body.classList.remove('light-version-global-dark');
+
+        const deSwitch = document.getElementById('de-switch');
+        const esSwitch = document.getElementById('es-switch');
+        const enSwitch = document.getElementById('en-switch');
+        const showGerman = deSwitch ? deSwitch.checked : true;
+        const showSpanish = esSwitch ? esSwitch.checked : true;
+        const showEnglish = enSwitch ? enSwitch.checked : false;
 
         // Disable group arrows because we show ALL groups for the current level at once
         if (navigationWrapper) {
@@ -642,6 +675,7 @@
                 const germanSpan = document.createElement('span');
                 germanSpan.className = 'kompakt-header-de';
                 germanSpan.innerHTML = cardTitleHTML;
+                germanSpan.style.display = showGerman ? '' : 'none';
                 germanSpan.style.cursor = 'pointer';
                 germanSpan.title = 'Aussprache h??ren';
                 germanSpan.onclick = (event) => {
@@ -653,6 +687,7 @@
                 const spanishSpan = document.createElement('span');
                 spanishSpan.className = 'kompakt-header-es';
                 spanishSpan.textContent = group.spanishName || group.groupNameSpanish || '';
+                spanishSpan.style.display = showSpanish ? '' : 'none';
                 spanishSpan.style.cursor = 'pointer';
                 spanishSpan.title = 'Themeninfos anzeigen';
                 spanishSpan.onclick = (event) => {
@@ -685,19 +720,34 @@
                     const germanWord = document.createElement('div');
                     germanWord.className = 'kompakt-german';
                     germanWord.innerHTML = `${verbName}${reflBadge}${datBadge}${intrBadge}`;
+                    germanWord.style.display = showGerman ? '' : 'none';
                     germanWord.style.cursor = 'pointer';
                     germanWord.title = 'Aussprache hÃ¶ren';
                     germanWord.onclick = (e) => { e.stopPropagation(); window.speak(verbName); };
 
+                    const translations = document.createElement('div');
+                    translations.className = 'kompakt-translations';
+
                     const spanishWord = document.createElement('div');
                     spanishWord.className = 'kompakt-spanish';
-                    spanishWord.textContent = removeParentheses(verbData.es || '');
+                    spanishWord.textContent = getPrimaryTranslation(verbData.es || '');
+                    spanishWord.style.display = showSpanish ? '' : 'none';
                     spanishWord.style.cursor = 'pointer';
                     spanishWord.title = 'Details anzeigen';
                     spanishWord.onclick = (e) => { e.stopPropagation(); openModalForVerb(verbName); };
 
+                    const englishWord = document.createElement('div');
+                    englishWord.className = 'kompakt-english';
+                    englishWord.textContent = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
+                    englishWord.style.display = showEnglish && englishWord.textContent ? '' : 'none';
+                    englishWord.style.cursor = 'pointer';
+                    englishWord.title = 'Details anzeigen';
+                    englishWord.onclick = (e) => { e.stopPropagation(); openModalForVerb(verbName); };
+
                     row.appendChild(germanWord);
-                    row.appendChild(spanishWord);
+                    translations.appendChild(spanishWord);
+                    translations.appendChild(englishWord);
+                    row.appendChild(translations);
                     content.appendChild(row);
                 });
 
@@ -755,7 +805,7 @@
 
             // Header info: Verb + Translation (No Emoji)
             const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
-            const esTranslation = verbData.es || '';
+            const esTranslation = getPrimaryTranslation(verbData.es || '');
             const enTranslation = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
 
             // Tag Logic (Moved to Body)
@@ -812,7 +862,7 @@
             const verbData = allVerbsData[verbName];
             if (!verbData) return '';
 
-            const translation = removeParentheses(verbData.es || '');
+            const translation = getPrimaryTranslation(verbData.es || '');
             const irregular = verbData.irregularPraesens ? '*' : '';
             const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
             const reflBadge = isReflexive ? `<span class="reflexiv-badge" style="margin-top: 4px; margin-left: 8px;">refl</span>` : '';
@@ -876,7 +926,7 @@
             const infinitiv = verbName;
             const perfekt = getCleanPerfekt(verbData.perfekt);
             const praeteritum = getCleanPraeteritum(verbData.praeteritum);
-            const translation = removeParentheses(verbData.es || '');
+            const translation = getPrimaryTranslation(verbData.es || '');
             const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
             const reflBadge = isReflexive ? ` <span class="reflexiv-badge" style="padding: 1px 4px; font-size: 0.6rem; margin-left: 8px;">refl</span>` : '';
             const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
@@ -1307,6 +1357,14 @@
 
                 // Save to localStorage
                 localStorage.setItem(`toggle-${toggleId}`, isChecked);
+
+                if (currentViewMode === 'compact' || currentViewMode === 'kompakt') {
+                    if (searchInput && searchInput.value.trim() !== '') {
+                        performSearch();
+                    } else {
+                        renderVerbGroup();
+                    }
+                }
             });
         });
 
@@ -2745,12 +2803,12 @@
                                 }
 
                                 // Helper function to check if search term is contained as a word in text
-                                const containsWord = (text, term) => {
-                                    if (!text) return false;
-                                    const normalized = text.toLowerCase().replace(/[()]/g, '');
-                                    const words = normalized.split(/[\s,/]+/);
-                                    return words.some(word => word.startsWith(term));
-                                };
+                                const containsWord = (text, term) => Boolean(findMatchingWordInText(text, term));
+
+                                let matchedPraesensForm = '';
+                                let matchedPerfektForm = '';
+                                let matchedPraeteritumForm = '';
+                                let matchedKonjunktivForm = '';
 
                                 // Search in German infinitive and Spanish translation
                                 const germanMatch = verbName.toLowerCase().includes(searchTerm);
@@ -2770,6 +2828,15 @@
                                     // Exclude auxiliary verbs "hat" and "ist" from search
                                     const filteredPerfektWords = perfektWords.filter(word => word !== 'hat' && word !== 'ist');
                                     perfektMatch = filteredPerfektWords.some(word => word.startsWith(searchTerm));
+                                    if (perfektMatch) {
+                                        matchedPerfektForm = filteredPerfektWords.find(word => word.startsWith(searchTerm)) || '';
+                                    }
+                                }
+
+                                if (!perfektMatch && allVerbsData[verbName].perfekt_examples) {
+                                    const perfektEntries = Object.values(allVerbsData[verbName].perfekt_examples);
+                                    matchedPerfektForm = findMatchingTextEntry(perfektEntries, searchTerm, (entry) => entry && entry.de);
+                                    perfektMatch = Boolean(matchedPerfektForm);
                                 }
 
                                 // Search in Spanish Perfekt forms (he dado, ha dado, etc.)
@@ -2804,22 +2871,19 @@
                                 let praesensMatch = false;
                                 if (allVerbsData[verbName].praesens) {
                                     const conjugations = Object.values(allVerbsData[verbName].praesens);
-                                    praesensMatch = conjugations.some(conj => typeof conj === 'string' && conj.toLowerCase().startsWith(searchTerm));
+                                    matchedPraesensForm = findMatchingTextEntry(conjugations, searchTerm);
+                                    praesensMatch = Boolean(matchedPraesensForm);
                                 }
 
                                 // Search in PrÃ¤teritum conjugations (pre-loaded!)
                                 let praeteritumMatch = false;
                                 if (allVerbsData[verbName].praeteritum_conjugations) {
                                     const conjugations = Object.values(allVerbsData[verbName].praeteritum_conjugations);
-                                    praeteritumMatch = conjugations.some(conj => {
-                                        // PrÃ¤teritum conjugations are objects with de, en, es properties
-                                        if (typeof conj === 'string') {
-                                            return conj.toLowerCase().startsWith(searchTerm);
-                                        } else if (conj && conj.de) {
-                                            return conj.de.toLowerCase().startsWith(searchTerm);
-                                        }
-                                        return false;
+                                    matchedPraeteritumForm = findMatchingTextEntry(conjugations, searchTerm, (conj) => {
+                                        if (typeof conj === 'string') return conj;
+                                        return conj && conj.de ? conj.de : '';
                                     });
+                                    praeteritumMatch = Boolean(matchedPraeteritumForm);
                                 }
 
                                 // Search in Spanish PrÃ¤teritum forms (Ã©l/ella dio, etc.)
@@ -2838,12 +2902,8 @@
                                 let konjunktivMatch = false;
                                 if (allVerbsData[verbName].konjunktiv_ii) {
                                     const conjugations = Object.values(allVerbsData[verbName].konjunktiv_ii);
-                                    konjunktivMatch = conjugations.some(conj => {
-                                        if (typeof conj === 'string') {
-                                            return conj.toLowerCase().startsWith(searchTerm);
-                                        }
-                                        return false;
-                                    });
+                                    matchedKonjunktivForm = findMatchingTextEntry(conjugations, searchTerm);
+                                    konjunktivMatch = Boolean(matchedKonjunktivForm);
                                 }
 
                                 if (germanMatch || spanishMatch || perfektMatch || praesensMatch || praeteritumMatch || konjunktivMatch || tagMatch) {
@@ -2851,7 +2911,11 @@
                                         verb: verbName,
                                         data: verbData,
                                         levelKey: levelKey,
-                                        groupIndexInLevel: groupIndexInLevel
+                                        groupIndexInLevel: groupIndexInLevel,
+                                        matchedPraesensForm,
+                                        matchedPerfektForm,
+                                        matchedPraeteritumForm,
+                                        matchedKonjunktivForm
                                     };
                                 }
                                 return null;
@@ -2969,6 +3033,12 @@
         const renderFullSearchCards = false;
 
         if (!renderFullSearchCards && (currentViewMode === 'compact' || currentViewMode === 'kompakt')) {
+            const deSwitch = document.getElementById('de-switch');
+            const esSwitch = document.getElementById('es-switch');
+            const enSwitch = document.getElementById('en-switch');
+            const showGerman = deSwitch ? deSwitch.checked : true;
+            const showSpanish = esSwitch ? esSwitch.checked : true;
+            const showEnglish = enSwitch ? enSwitch.checked : false;
             const groupedMatches = {};
             verbsToShow.forEach(match => {
                 const verbData = match.data;
@@ -3026,8 +3096,8 @@
                     let cardHTML = `
             <div class="kompakt-level-card">
                 <div class="kompakt-level-header" style="background-color: ${themeColor}; cursor: default;">
-                    <span class="kompakt-header-de" onclick="event.stopPropagation(); window.speak('${group.theme || group.groupNameGerman || 'Gruppe'}')" title="Aussprache h??ren" style="cursor: pointer;">${cardTitleHTML}</span>
-                    <span class="kompakt-header-es" onclick="event.stopPropagation(); openThemeModal('${group.level}', ${group.groupIndex})" title="Themeninfos anzeigen" style="cursor: pointer;">${group.spanishName || group.groupNameSpanish || ''}</span>
+                    <span class="kompakt-header-de" onclick="event.stopPropagation(); window.speak('${group.theme || group.groupNameGerman || 'Gruppe'}')" title="Aussprache h??ren" style="cursor: pointer; display: ${showGerman ? 'inline' : 'none'};">${cardTitleHTML}</span>
+                    <span class="kompakt-header-es" onclick="event.stopPropagation(); openThemeModal('${group.level}', ${group.groupIndex})" title="Themeninfos anzeigen" style="cursor: pointer; display: ${showSpanish ? 'inline' : 'none'};">${group.spanishName || group.groupNameSpanish || ''}</span>
                 </div>
                 <div class="kompakt-level-content">
             `;
@@ -3035,14 +3105,22 @@
                     chunk.forEach(match => {
                         const verbName = match.verb;
                         const verbData = match.data;
-                        const displayVerbName = highlightMatch(verbName, searchTerm);
-                        const esTranslationRaw = removeParentheses(verbData.es || '');
+                        let displayVerbName = highlightMatch(verbName, searchTerm);
+                        if (!verbName.toLowerCase().includes(searchTerm) && match.matchedPraesensForm) {
+                            displayVerbName = `${verbName} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(match.matchedPraesensForm, searchTerm)})</span>`;
+                        }
+                        const esTranslationRaw = getPrimaryTranslation(verbData.es || '');
                         const esTranslationDisplay = highlightMatch(esTranslationRaw, searchTerm);
+                        const enTranslationRaw = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
+                        const enTranslationDisplay = highlightMatch(enTranslationRaw, searchTerm);
 
                         cardHTML += `
                     <div class="kompakt-row" data-verb="${verbName}" onclick="openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
-                        <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerbName}</div>
-                        <div class="kompakt-spanish" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${esTranslationDisplay}</div>
+                        <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}</div>
+                        <div class="kompakt-translations">
+                            <div class="kompakt-spanish" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showSpanish ? 'block' : 'none'};">${esTranslationDisplay}</div>
+                            <div class="kompakt-english" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showEnglish && enTranslationRaw ? 'block' : 'none'};">${enTranslationDisplay}</div>
+                        </div>
                     </div>
                 `;
                     });
@@ -3063,16 +3141,19 @@
                     const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
 
                     // Generate highlighted display names dynamically
-                    const displayVerbName = highlightMatch(verbName, searchTerm);
+                    let displayVerbName = highlightMatch(verbName, searchTerm);
+                    if (!verbName.toLowerCase().includes(searchTerm) && match.matchedPraesensForm) {
+                        displayVerbName = `${verbName} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(match.matchedPraesensForm, searchTerm)})</span>`;
+                    }
 
                     // Remove parentheses from translations and highlight
-                    const esTranslationRaw = removeParentheses(verbData.es || '');
+                    const esTranslationRaw = getPrimaryTranslation(verbData.es || '');
                     const esTranslation = highlightMatch(esTranslationRaw, searchTerm);
 
-                    const esPerfektTranslationRaw = removeParentheses(verbData.es_perfekt || '');
+                    const esPerfektTranslationRaw = getPrimaryTranslation(verbData.es_perfekt || '');
                     const esPerfektTranslation = highlightMatch(esPerfektTranslationRaw, searchTerm);
 
-                    const esPraeteritumTranslationRaw = removeParentheses(verbData.es_praeteritum || '');
+                    const esPraeteritumTranslationRaw = getPrimaryTranslation(verbData.es_praeteritum || '');
                     const esPraeteritumTranslation = highlightMatch(esPraeteritumTranslationRaw, searchTerm);
 
                     // Prepare German perfekt with short and full versions
@@ -3087,6 +3168,11 @@
                     }
 
                     let germanPerfektShortDisplay = highlightMatch(germanPerfektShort, searchTerm);
+                    if (match.matchedPerfektForm && !germanPerfektShort.toLowerCase().includes(searchTerm)) {
+                        germanPerfektShort = match.matchedPerfektForm;
+                        germanPerfektFull = match.matchedPerfektForm;
+                        germanPerfektShortDisplay = highlightMatch(match.matchedPerfektForm, searchTerm);
+                    }
 
                     // Prepare Spanish perfekt with short and full versions
                     let spanishPerfektShort = esPerfektTranslation;
@@ -3113,6 +3199,11 @@
                     }
 
                     let germanPraeteritumShortDisplay = highlightMatch(germanPraeteritumShort, searchTerm);
+                    if (match.matchedPraeteritumForm && !germanPraeteritumShort.toLowerCase().includes(searchTerm)) {
+                        germanPraeteritumShort = match.matchedPraeteritumForm;
+                        germanPraeteritumFull = match.matchedPraeteritumForm;
+                        germanPraeteritumShortDisplay = highlightMatch(match.matchedPraeteritumForm, searchTerm);
+                    }
 
                     // Prepare Spanish prÃ¤teritum with short (verb only) and full versions
                     let spanishPraeteritumShort = esPraeteritumTranslation;
@@ -3161,6 +3252,12 @@
 
                         germanKonjunktivShortDisplay = highlightMatch(germanKonjunktivShort, searchTerm);
                         spanishKonjunktivShortDisplay = highlightMatch(spanishKonjunktivShortRaw, searchTerm);
+
+                        if (match.matchedKonjunktivForm && !germanKonjunktivShort.toLowerCase().includes(searchTerm)) {
+                            germanKonjunktivShort = match.matchedKonjunktivForm;
+                            germanKonjunktivFull = match.matchedKonjunktivForm;
+                            germanKonjunktivShortDisplay = highlightMatch(match.matchedKonjunktivForm, searchTerm);
+                        }
 
                         konjunktivHTML = `
                 <span class="german-konjunktiv konjunktiv-text" data-form="konjunktiv" data-short="${germanKonjunktivShort}" data-full="${germanKonjunktivFull}">${germanKonjunktivShortDisplay}</span>
