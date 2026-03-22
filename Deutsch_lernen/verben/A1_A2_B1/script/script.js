@@ -638,7 +638,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 header.style.backgroundColor = themeColor;
                 header.style.cursor = 'pointer';
                 header.title = "Klicken Sie hier für Themeninfos";
-                header.onclick = () => openThemeModal(currentLevel, groupIndex);
+                header.onclick = () => {
+                    window.speak(groupName);
+                    openThemeModal(currentLevel, groupIndex);
+                };
 
                 // German side (left)
                 const germanSpan = document.createElement('span');
@@ -3011,7 +3014,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     let cardHTML = `
             <div class="kompakt-level-card">
-                <div class="kompakt-level-header" style="background-color: ${themeColor}; cursor: pointer;" title="Klicken Sie hier für Themeninfos" onclick="openThemeModal('${group.level}', ${group.groupIndex})">
+                <div class="kompakt-level-header" style="background-color: ${themeColor}; cursor: pointer;" title="Klicken Sie hier für Themeninfos" onclick="window.speak('${group.theme || group.groupNameGerman || 'Gruppe'}'); openThemeModal('${group.level}', ${group.groupIndex})">
                     <span class="kompakt-header-de">${cardTitleHTML}</span>
                     <span class="kompakt-header-es">${group.spanishName || group.groupNameSpanish || ''}</span>
                 </div>
@@ -3261,7 +3264,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (germanWord) {
                 germanWord.onclick = (event) => {
                     event.stopPropagation();
-                    openModalForVerb(verbName);
+                    window.speak(verbName);
                 };
             }
 
