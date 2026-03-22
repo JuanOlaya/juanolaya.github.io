@@ -1,16 +1,16 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     // --- GLOBAL STATE ---
     let allVerbsData = {}; // Global Data Containers
     let verbGroupsByLevel = {}; // Global Data Containers
     let verbTypesData = {}; // Verb types and notes data
     let searchScope = 'verbs'; // 'verbs' or 'wortfamilie'
     let wortfamilieIndex = null; // Lazy-loaded index for Wortfamilie search
-    const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "Zwölfte", "Dreizehnte"];
-    const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes", "Sechstes", "Siebtes", "Achtes"];
+    const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "FÃ¼nfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "ZwÃ¶lfte", "Dreizehnte"];
+    const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "FÃ¼nftes", "Sechstes", "Siebtes", "Achtes"];
     const savedStories = [
-        `<p>Gestern <span class="highlighted-word">bin ich</span> in Berlin <span class="highlighted-word">gewesen</span>. Ich <span class="highlighted-word">bin</span> mit dem Zug <span class="highlighted-word">gefahren</span>. In der Stadt <span class="highlighted-word">habe ich</span> eine Freundin <span class="highlighted-word">gesehen</span>. Wir <span class="highlighted-word">haben</span> in einem Café <span class="highlighted-word">gesprochen</span> und einen Kaffee <span class="highlighted-word">getrunken</span>. Danach <span class="highlighted-word">habe ich</span> ein Buch <span class="highlighted-word">gekauft</span> und mit Karte <span class="highlighted-word">bezahlt</span>. Es <span class="highlighted-word">hat</span> viel Spaß <span class="highlighted-word">gemacht</span>!</p>`,
-        `<p>Heute Morgen <span class="highlighted-word">habe ich</span> lange <span class="highlighted-word">geschlafen</span>. Zum Frühstück <span class="highlighted-word">habe ich</span> ein Brötchen <span class="highlighted-word">gegessen</span>. Dann <span class="highlighted-word">habe ich</span> eine E-Mail an meine Familie <span class="highlighted-word">geschrieben</span>. Ich <span class="highlighted-word">habe</span> ihnen <span class="highlighted-word">gesagt</span>, dass ich bald nach Hause <span class="highlighted-word">komme</span>. Später <span class="highlighted-word">habe ich</span> die Zeitung <span class="highlighted-word">gelesen</span>.</p>`,
-        `<p>Am Wochenende <span class="highlighted-word">habe ich</span> zu Hause <span class="highlighted-word">gearbeitet</span>. Ich <span class="highlighted-word">habe</span> für eine Prüfung <span class="highlighted-word">gelernt</span>. Ich <span class="highlighted-word">habe</span> eine Frage nicht <span class="highlighted-word">gewusst</span>, also <span class="highlighted-word">habe ich</span> meinen Lehrer <span class="highlighted-word">gefragt</span>. Er <span class="highlighted-word">hat</span> mir alles gut erklärt. Ich <span class="highlighted-word">habe</span> die Antwort schnell <span class="highlighted-word">gefunden</span>.</p>`
+        `<p>Gestern <span class="highlighted-word">bin ich</span> in Berlin <span class="highlighted-word">gewesen</span>. Ich <span class="highlighted-word">bin</span> mit dem Zug <span class="highlighted-word">gefahren</span>. In der Stadt <span class="highlighted-word">habe ich</span> eine Freundin <span class="highlighted-word">gesehen</span>. Wir <span class="highlighted-word">haben</span> in einem CafÃ© <span class="highlighted-word">gesprochen</span> und einen Kaffee <span class="highlighted-word">getrunken</span>. Danach <span class="highlighted-word">habe ich</span> ein Buch <span class="highlighted-word">gekauft</span> und mit Karte <span class="highlighted-word">bezahlt</span>. Es <span class="highlighted-word">hat</span> viel SpaÃŸ <span class="highlighted-word">gemacht</span>!</p>`,
+        `<p>Heute Morgen <span class="highlighted-word">habe ich</span> lange <span class="highlighted-word">geschlafen</span>. Zum FrÃ¼hstÃ¼ck <span class="highlighted-word">habe ich</span> ein BrÃ¶tchen <span class="highlighted-word">gegessen</span>. Dann <span class="highlighted-word">habe ich</span> eine E-Mail an meine Familie <span class="highlighted-word">geschrieben</span>. Ich <span class="highlighted-word">habe</span> ihnen <span class="highlighted-word">gesagt</span>, dass ich bald nach Hause <span class="highlighted-word">komme</span>. SpÃ¤ter <span class="highlighted-word">habe ich</span> die Zeitung <span class="highlighted-word">gelesen</span>.</p>`,
+        `<p>Am Wochenende <span class="highlighted-word">habe ich</span> zu Hause <span class="highlighted-word">gearbeitet</span>. Ich <span class="highlighted-word">habe</span> fÃ¼r eine PrÃ¼fung <span class="highlighted-word">gelernt</span>. Ich <span class="highlighted-word">habe</span> eine Frage nicht <span class="highlighted-word">gewusst</span>, also <span class="highlighted-word">habe ich</span> meinen Lehrer <span class="highlighted-word">gefragt</span>. Er <span class="highlighted-word">hat</span> mir alles gut erklÃ¤rt. Ich <span class="highlighted-word">habe</span> die Antwort schnell <span class="highlighted-word">gefunden</span>.</p>`
     ];
 
     const physicalLevelMap = {
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const levelOrder = ['A1', 'A2', 'B1', 'B2'];
 
     // Verbs that support Konjunktiv II
-    const konjunktivVerbs = ['sein', 'haben', 'werden', 'dürfen', 'müssen', 'wollen', 'sollen', 'mögen', 'können'];
+    const konjunktivVerbs = ['sein', 'haben', 'werden', 'dÃ¼rfen', 'mÃ¼ssen', 'wollen', 'sollen', 'mÃ¶gen', 'kÃ¶nnen'];
 
     let currentLevel = 'A1';
     let currentGroupInLevel = 0; // 0-indexed position within current level
@@ -579,7 +579,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return cleaned;
     }
 
-    // Helper function to extract clean Präteritum (remove pronouns)
+    // Helper function to extract clean PrÃ¤teritum (remove pronouns)
     function getCleanPraeteritum(praeteritum) {
         if (!praeteritum || praeteritum === '---') return '---';
         // Remove "er/sie/es " from the beginning
@@ -636,22 +636,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 const header = document.createElement('div');
                 header.className = 'kompakt-level-header';
                 header.style.backgroundColor = themeColor;
-                header.style.cursor = 'pointer';
-                header.title = "Klicken Sie hier für Themeninfos";
-                header.onclick = () => {
-                    window.speak(groupName);
-                    openThemeModal(currentLevel, groupIndex);
-                };
+                header.style.cursor = 'default';
 
                 // German side (left)
                 const germanSpan = document.createElement('span');
                 germanSpan.className = 'kompakt-header-de';
                 germanSpan.innerHTML = cardTitleHTML;
+                germanSpan.style.cursor = 'pointer';
+                germanSpan.title = 'Aussprache h??ren';
+                germanSpan.onclick = (event) => {
+                    event.stopPropagation();
+                    window.speak(groupName);
+                };
 
                 // Spanish side (right)
                 const spanishSpan = document.createElement('span');
                 spanishSpan.className = 'kompakt-header-es';
                 spanishSpan.textContent = group.spanishName || group.groupNameSpanish || '';
+                spanishSpan.style.cursor = 'pointer';
+                spanishSpan.title = 'Themeninfos anzeigen';
+                spanishSpan.onclick = (event) => {
+                    event.stopPropagation();
+                    openThemeModal(currentLevel, groupIndex);
+                };
 
                 header.appendChild(germanSpan);
                 header.appendChild(spanishSpan);
@@ -679,7 +686,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     germanWord.className = 'kompakt-german';
                     germanWord.innerHTML = `${verbName}${reflBadge}${datBadge}${intrBadge}`;
                     germanWord.style.cursor = 'pointer';
-                    germanWord.title = 'Aussprache hören';
+                    germanWord.title = 'Aussprache hÃ¶ren';
                     germanWord.onclick = (e) => { e.stopPropagation(); window.speak(verbName); };
 
                     const spanishWord = document.createElement('div');
@@ -755,7 +762,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let tagsHTML = '';
             // Only keeping critical tags for header if desired, or all tags
             if (verbData.case_tags) {
-                const visibleTags = verbData.case_tags.filter(t => !t.startsWith('Präposition:'));
+                const visibleTags = verbData.case_tags.filter(t => !t.startsWith('PrÃ¤position:'));
                 tagsHTML = visibleTags.map(tag => `<span class="verb-tag">${tag}</span>`).join('');
             }
 
@@ -769,7 +776,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // New Structure: Header (Word + Translation), Body (Tags Centered), No Emoji
             return `
             <div class="word-item">
-                <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer; flex-direction: column; gap: 5px;">
+                <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; flex-direction: column; gap: 5px;">
                     <span class="german-word" style="font-size: 1.5rem;">${verbName} ${irregularMark}${reflBadge}${datBadge}${intrBadge}</span>
                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
                         <span class="spanish-translation" style="font-size: 1.1rem; color: white; font-style: italic;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${esTranslation}</span>
@@ -814,12 +821,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
             const intrBadge = isIntransitive ? `<span class="intr-badge" style="margin-top: 4px; margin-left: 8px;">intr</span>` : '';
 
-            const emoji = verbData.emoji || '📝';
+            const emoji = verbData.emoji || 'ðŸ“';
 
             // Cleaner, simpler card with header and emoji
             return `
             <div class="card normal-card">
-                <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">
+                <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">
                      <span class="normal-emoji">${emoji}</span>
                      <h3 class="normal-german">${verbName}${irregular}</h3>
                      ${reflBadge}${datBadge}${intrBadge}
@@ -855,8 +862,8 @@ document.addEventListener('DOMContentLoaded', () => {
         headerRow.innerHTML = `
             <div class="light-version-header-cell">Infinitiv</div>
             <div class="light-version-header-cell">Perfekt</div>
-            <div class="light-version-header-cell">Präteritum</div>
-            <div class="light-version-header-cell">Übersetzung</div>
+            <div class="light-version-header-cell">PrÃ¤teritum</div>
+            <div class="light-version-header-cell">Ãœbersetzung</div>
         `;
         lightContainer.appendChild(headerRow);
 
@@ -881,7 +888,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const row = document.createElement('div');
             row.className = 'light-version-row';
             row.innerHTML = `
-                <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${infinitiv}${reflBadge}${datBadge}${intrBadge}</div>
+                <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${infinitiv}${reflBadge}${datBadge}${intrBadge}</div>
                 <div class="light-version-cell perfekt" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${perfekt}</div>
                 <div class="light-version-cell praeteritum" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${praeteritum}</div>
                 <div class="light-version-cell translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${translation}</div>
@@ -975,17 +982,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
-            // Add hover listeners to each präteritum text element
+            // Add hover listeners to each prÃ¤teritum text element
             praeteritumTexts.forEach(praeteritumText => {
                 praeteritumText.addEventListener('mouseenter', () => {
-                    // Show full version for all präteritum texts in this container
+                    // Show full version for all prÃ¤teritum texts in this container
                     container.querySelectorAll('.praeteritum-text').forEach(text => {
                         text.textContent = text.getAttribute('data-full');
                     });
                 });
 
                 praeteritumText.addEventListener('mouseleave', () => {
-                    // Show short version for all präteritum texts in this container
+                    // Show short version for all prÃ¤teritum texts in this container
                     container.querySelectorAll('.praeteritum-text').forEach(text => {
                         text.textContent = text.getAttribute('data-short');
                     });
@@ -1266,7 +1273,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => {
                 console.error("Failed to load verb data:", error);
-                cardsContainer.innerHTML = '<p>Ein Fehler ist beim Laden der Verben aufgetreten. Bitte versuchen Sie es später erneut.</p>';
+                cardsContainer.innerHTML = '<p>Ein Fehler ist beim Laden der Verben aufgetreten. Bitte versuchen Sie es spÃ¤ter erneut.</p>';
             });
 
         const toggles = document.querySelectorAll('.visibility-toggle');
@@ -1461,7 +1468,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const modalHeader = document.querySelector('.modal-header');
         if (modalHeader) {
             modalHeader.style.cursor = 'pointer';
-            modalHeader.title = 'Aussprache hören';
+            modalHeader.title = 'Aussprache hÃ¶ren';
             modalHeader.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -1601,6 +1608,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- THEME MODAL FUNCTION ---
     async function openThemeModal(optLevelKey, optGroupIndex) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+        }
+
         // Read explicitly passed variables or fallback to the global UI state
         const levelKey = (typeof optLevelKey === 'string') ? optLevelKey : currentLevel;
         const groupIndex = (typeof optGroupIndex === 'number') ? optGroupIndex : currentGroupInLevel;
@@ -1637,7 +1648,7 @@ document.addEventListener('DOMContentLoaded', () => {
             englishObj.style.display = 'none';
         }
         document.getElementById('theme-modal-level').textContent = themeData.level;
-        const defaultDescription = [themeData.group ? `Grupo ${themeData.group}` : '', themeData.shortName || ''].filter(Boolean).join(' · ');
+        const defaultDescription = [themeData.group ? `Grupo ${themeData.group}` : '', themeData.shortName || ''].filter(Boolean).join(' Â· ');
         const customDescription = (themeData.theme === 'Schicksal' || themeData.germanName === 'Schicksal')
             ? 'circunstancias inevitables de la vida'
             : defaultDescription;
@@ -1841,9 +1852,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const groups = {
                 'Hilfsverb': [],
                 'Kasus': [],
-                'Reflexivität': [],
+                'ReflexivitÃ¤t': [],
                 'Struktur': [],
-                'Präpositionen': []
+                'PrÃ¤positionen': []
             };
 
             // Remove duplicates just in case
@@ -1851,10 +1862,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             uniqueTags.forEach(tag => {
                 if (['Akkusativ', 'Dativ', 'Nominativ', 'Genitiv', 'Intransitive', 'intrans'].includes(tag)) groups['Kasus'].push(tag);
-                else if (tag === 'Reflexive') groups['Reflexivität'].push(tag);
+                else if (tag === 'Reflexive') groups['ReflexivitÃ¤t'].push(tag);
                 else if (['Separable', 'Regular', 'Irregular'].includes(tag)) groups['Struktur'].push(tag);
-                else if (tag.startsWith('Präposition:')) groups['Präpositionen'].push(tag.replace('Präposition: ', ''));
-                else if (tag.includes('Movimiento') || tag.includes('Estático') || tag.includes('🚀') || tag.includes('🏠')) groups['Hilfsverb'].push(tag);
+                else if (tag.startsWith('PrÃ¤position:')) groups['PrÃ¤positionen'].push(tag.replace('PrÃ¤position: ', ''));
+                else if (tag.includes('Movimiento') || tag.includes('EstÃ¡tico') || tag.includes('ðŸš€') || tag.includes('ðŸ ')) groups['Hilfsverb'].push(tag);
                 else groups['Struktur'].push(tag); // Fallback
             });
 
@@ -1874,7 +1885,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 groups[category].forEach(tag => {
                     const tagSpan = document.createElement('span');
                     // Create specific class based on tag name, remove special chars
-                    // For emojis like 🚀, it might result in empty or invalid class if not careful, 
+                    // For emojis like ðŸš€, it might result in empty or invalid class if not careful, 
                     // but usually only affects CSS selector matching. 
                     // Let's make it robust:
                     const safeTagClass = tag.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -1980,12 +1991,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Emoji with TTS
         const modalEmojiEl = document.getElementById('modal-emoji');
-        modalEmojiEl.textContent = updatedData.emoji || '❓';
+        modalEmojiEl.textContent = updatedData.emoji || 'â“';
         modalEmojiEl.onclick = (e) => {
             e.stopPropagation();
             speak(verb);
         };
-        modalEmojiEl.title = "Aussprache hören";
+        modalEmojiEl.title = "Aussprache hÃ¶ren";
 
         document.getElementById('modal-verb-infinitive-es').textContent = updatedData.es || '';
         document.getElementById('modal-verb-perfekt-es').textContent = updatedData.es_perfekt || '';
@@ -2036,7 +2047,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // 4. Präteritum Note (displayed below Präteritum conjugation table)
+        // 4. PrÃ¤teritum Note (displayed below PrÃ¤teritum conjugation table)
         const praeteritumNote = updatedData.praeteritum_note;
         const praeteritumNoteElement = document.getElementById('modal-praeteritum-note');
         if (praeteritumNoteElement) {
@@ -2084,7 +2095,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (content && content.classList.contains('truco-content')) {
                 const isHidden = content.style.display === 'none';
                 content.style.display = isHidden ? 'block' : 'none';
-                btn.textContent = isHidden ? '▼' : '▶';
+                btn.textContent = isHidden ? 'â–¼' : 'â–¶';
             }
         };
 
@@ -2127,7 +2138,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         contentHTML += `<div class="wf-word-line">`;
                         // Safe stringify for onclick
                         const safeWord = wordData.word.replace(/'/g, "\\'");
-                        contentHTML += `• <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hören">${wordData.word}</span>`;
+                        contentHTML += `â€¢ <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hÃ¶ren">${wordData.word}</span>`;
                         if (abbrev) contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
                         contentHTML += `</div>`;
 
@@ -2135,7 +2146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         contentHTML += `<div class="wf-word-translation">`;
                         contentHTML += `${wordData.es}`;
                         if (wordData.truco) {
-                            contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">▶</span>`;
+                            contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">â–¶</span>`;
                         }
                         // Optional Example
                         if (wordData.example) {
@@ -2146,7 +2157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Hidden Truco Content
                         if (wordData.truco) {
                             contentHTML += `<div class="truco-content" style="display: none; margin-left: 15px; font-style: italic; color: #555; background-color: #f9f9f9; padding: 5px; border-left: 3px solid #ffd700; margin-top: 5px; border-radius: 4px;">`;
-                            contentHTML += `💡 <strong>Truco:</strong> ${wordData.truco}`;
+                            contentHTML += `ðŸ’¡ <strong>Truco:</strong> ${wordData.truco}`;
                             contentHTML += `</div>`;
                         }
 
@@ -2167,7 +2178,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         contentHTML += `<div class="wf-word-line">`;
                         // Safe stringify for onclick
                         const safeWord = wordData.word.replace(/'/g, "\\'");
-                        contentHTML += `• <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hören">${wordData.word}</span>`;
+                        contentHTML += `â€¢ <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hÃ¶ren">${wordData.word}</span>`;
                         if (abbrev) contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
                         contentHTML += `</div>`;
 
@@ -2175,7 +2186,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         contentHTML += `<div class="wf-word-translation">`;
                         contentHTML += `${wordData.es}`;
                         if (wordData.truco) {
-                            contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">▶</span>`;
+                            contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">â–¶</span>`;
                         }
                         // Optional Example
                         if (wordData.example) {
@@ -2186,7 +2197,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Hidden Truco Content
                         if (wordData.truco) {
                             contentHTML += `<div class="truco-content" style="display: none; margin-left: 15px; font-style: italic; color: #555; background-color: #f9f9f9; padding: 5px; border-left: 3px solid #ffd700; margin-top: 5px; border-radius: 4px;">`;
-                            contentHTML += `💡 <strong>Truco:</strong> ${wordData.truco}`;
+                            contentHTML += `ðŸ’¡ <strong>Truco:</strong> ${wordData.truco}`;
                             contentHTML += `</div>`;
                         }
 
@@ -2234,8 +2245,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Define the desired pronoun order with Spanish translations
             const pronounOrder = [
                 { key: 'ich', display: 'ich', spanish: 'yo' },
-                { key: 'du', display: 'du', spanish: 'tú' },
-                { key: 'er', display: 'er', spanish: 'él' },
+                { key: 'du', display: 'du', spanish: 'tÃº' },
+                { key: 'er', display: 'er', spanish: 'Ã©l' },
                 { key: 'sie', display: 'sie', spanish: 'ella' },
                 { key: 'es', display: 'es', spanish: 'neutro' },
                 { key: 'wir', display: 'wir', spanish: 'nosotr@s' },
@@ -2254,7 +2265,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ].filter(Boolean);
 
             let tableHTML = '<table>';
-            tableHTML += `<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel <span id="beispiel-mode-tag" class="beispiel-mode-tag">${beispielModes[0]?.label || 'Aussage'}</span><button id="toggle-beispiel-type" class="toggle-beispiel-btn" title="Beispielmodus wechseln">⇄</button></th></tr>`;
+            tableHTML += `<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel <span id="beispiel-mode-tag" class="beispiel-mode-tag">${beispielModes[0]?.label || 'Aussage'}</span><button id="toggle-beispiel-type" class="toggle-beispiel-btn" title="Beispielmodus wechseln">â‡„</button></th></tr>`;
 
             for (const { key, display, spanish } of pronounOrder) {
                 const conjugation = updatedData.praesens[key];
@@ -2299,7 +2310,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Create pronoun cell with German pronoun and Spanish translation
                     let pronounCell = `<div class="pronoun-de">${display}</div>`;
                     if (spanish) {
-                        pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
+                        pronounCell += `<div class="pronoun-es">ðŸ‡ªðŸ‡¸ ${spanish}</div>`;
                     }
 
                     // Add special classes for er/sie/es rows and hide conjugation for er and es
@@ -2391,8 +2402,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const pronounOrder = [
                 { key: 'ich', display: 'ich', spanish: 'yo', auxIndex: 0 },
-                { key: 'du', display: 'du', spanish: 'tú', auxIndex: 1 },
-                { key: 'er', display: 'er', spanish: 'él', auxIndex: 2 },
+                { key: 'du', display: 'du', spanish: 'tÃº', auxIndex: 1 },
+                { key: 'er', display: 'er', spanish: 'Ã©l', auxIndex: 2 },
                 { key: 'sie', display: 'sie', spanish: 'ella', auxIndex: 2 },
                 { key: 'es', display: 'es', spanish: 'neutro', auxIndex: 2 },
                 { key: 'wir', display: 'wir', spanish: 'nosotr@s', auxIndex: 3 },
@@ -2420,7 +2431,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Create pronoun cell with German pronoun and Spanish translation
                     let pronounCell = `<div class="pronoun-de">${display}</div>`;
                     if (spanish) {
-                        pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
+                        pronounCell += `<div class="pronoun-es">ðŸ‡ªðŸ‡¸ ${spanish}</div>`;
                     }
 
                     // Get auxiliary verb conjugation
@@ -2455,13 +2466,13 @@ document.addEventListener('DOMContentLoaded', () => {
             perfektExamplesTableContainer.innerHTML = '';
         }
 
-        // Generate Präteritum conjugation and examples table
+        // Generate PrÃ¤teritum conjugation and examples table
         const praeteritumKonjugationTableContainer = document.getElementById('modal-praeteritum-konjugation-table');
         if (updatedData.praeteritum_conjugations && updatedData.praeteritum_examples) {
             const pronounOrder = [
                 { key: 'ich', display: 'ich', spanish: 'yo' },
-                { key: 'du', display: 'du', spanish: 'tú' },
-                { key: 'er', display: 'er', spanish: 'él' },
+                { key: 'du', display: 'du', spanish: 'tÃº' },
+                { key: 'er', display: 'er', spanish: 'Ã©l' },
                 { key: 'sie', display: 'sie', spanish: 'ella' },
                 { key: 'es', display: 'es', spanish: 'neutro' },
                 { key: 'wir', display: 'wir', spanish: 'nosotr@s' },
@@ -2491,7 +2502,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Create pronoun cell with German pronoun and Spanish translation
                     let pronounCell = `<div class="pronoun-de">${display}</div>`;
                     if (spanish) {
-                        pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
+                        pronounCell += `<div class="pronoun-es">ðŸ‡ªðŸ‡¸ ${spanish}</div>`;
                     }
 
                     // Add special classes for er/sie/es rows and hide conjugation for duplicates
@@ -2532,8 +2543,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const pronounOrder = [
                 { key: 'ich', display: 'ich', spanish: 'yo' },
-                { key: 'du', display: 'du', spanish: 'tú' },
-                { key: 'er_sie_es', display: 'er/sie/es', spanish: 'él/ella' },
+                { key: 'du', display: 'du', spanish: 'tÃº' },
+                { key: 'er_sie_es', display: 'er/sie/es', spanish: 'Ã©l/ella' },
                 { key: 'wir', display: 'wir', spanish: 'nosotr@s' },
                 { key: 'ihr', display: 'ihr', spanish: 'vosotr@s' },
                 { key: 'sie_Sie', display: 'sie/Sie', spanish: 'ell@s/usted(es)' }
@@ -2550,7 +2561,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Create pronoun cell with German pronoun and Spanish translation
                     let pronounCell = `<div class="pronoun-de">${display}</div>`;
                     if (spanish) {
-                        pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
+                        pronounCell += `<div class="pronoun-es">ðŸ‡ªðŸ‡¸ ${spanish}</div>`;
                     }
 
                     // Create example cell with German, English, and Spanish
@@ -2589,21 +2600,21 @@ document.addEventListener('DOMContentLoaded', () => {
             speak(verb);
         };
         document.getElementById('modal-verb-infinitive').style.cursor = 'pointer';
-        document.getElementById('modal-verb-infinitive').title = 'Aussprache hören';
+        document.getElementById('modal-verb-infinitive').title = 'Aussprache hÃ¶ren';
 
         document.getElementById('modal-verb-perfekt').onclick = (e) => {
             e.stopPropagation();
             speak(updatedData.perfekt);
         };
         document.getElementById('modal-verb-perfekt').style.cursor = 'pointer';
-        document.getElementById('modal-verb-perfekt').title = 'Aussprache hören';
+        document.getElementById('modal-verb-perfekt').title = 'Aussprache hÃ¶ren';
 
         document.getElementById('modal-verb-praeteritum').onclick = (e) => {
             e.stopPropagation();
             speak(updatedData.praeteritum);
         };
         document.getElementById('modal-verb-praeteritum').style.cursor = 'pointer';
-        document.getElementById('modal-verb-praeteritum').title = 'Aussprache hören';
+        document.getElementById('modal-verb-praeteritum').title = 'Aussprache hÃ¶ren';
 
         // modal-text removed as per user request
         // document.getElementById('modal-text').onclick = ...
@@ -2789,19 +2800,19 @@ document.addEventListener('DOMContentLoaded', () => {
                                         tagMatch = true;
                                     }
                                 }
-                                // Search in Präsens conjugations (pre-loaded!)
+                                // Search in PrÃ¤sens conjugations (pre-loaded!)
                                 let praesensMatch = false;
                                 if (allVerbsData[verbName].praesens) {
                                     const conjugations = Object.values(allVerbsData[verbName].praesens);
                                     praesensMatch = conjugations.some(conj => typeof conj === 'string' && conj.toLowerCase().startsWith(searchTerm));
                                 }
 
-                                // Search in Präteritum conjugations (pre-loaded!)
+                                // Search in PrÃ¤teritum conjugations (pre-loaded!)
                                 let praeteritumMatch = false;
                                 if (allVerbsData[verbName].praeteritum_conjugations) {
                                     const conjugations = Object.values(allVerbsData[verbName].praeteritum_conjugations);
                                     praeteritumMatch = conjugations.some(conj => {
-                                        // Präteritum conjugations are objects with de, en, es properties
+                                        // PrÃ¤teritum conjugations are objects with de, en, es properties
                                         if (typeof conj === 'string') {
                                             return conj.toLowerCase().startsWith(searchTerm);
                                         } else if (conj && conj.de) {
@@ -2811,12 +2822,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                     });
                                 }
 
-                                // Search in Spanish Präteritum forms (él/ella dio, etc.)
+                                // Search in Spanish PrÃ¤teritum forms (Ã©l/ella dio, etc.)
                                 if (!praeteritumMatch && verbData.es_praeteritum) {
                                     praeteritumMatch = containsWord(verbData.es_praeteritum, searchTerm);
                                 }
 
-                                // Also search in searchable Präteritum variants
+                                // Also search in searchable PrÃ¤teritum variants
                                 if (!praeteritumMatch && verbData.es_praeteritum_searchable) {
                                     praeteritumMatch = verbData.es_praeteritum_searchable.some(variant =>
                                         containsWord(variant, searchTerm)
@@ -2949,7 +2960,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!query || !text) return text;
             const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             // Matches any whole word (\b...\b) containing the query sequence including trailing/leading German characters
-            const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
+            const regex = new RegExp(`([\\wÃ¤Ã¶Ã¼Ã„Ã–ÃœÃŸ]*${escapedQuery}[\\wÃ¤Ã¶Ã¼Ã„Ã–ÃœÃŸ]*)`, 'gi');
             return text.replace(regex, (match) =>
                 `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${match}</span>`
             );
@@ -3014,9 +3025,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     let cardHTML = `
             <div class="kompakt-level-card">
-                <div class="kompakt-level-header" style="background-color: ${themeColor}; cursor: pointer;" title="Klicken Sie hier für Themeninfos" onclick="window.speak('${group.theme || group.groupNameGerman || 'Gruppe'}'); openThemeModal('${group.level}', ${group.groupIndex})">
-                    <span class="kompakt-header-de">${cardTitleHTML}</span>
-                    <span class="kompakt-header-es">${group.spanishName || group.groupNameSpanish || ''}</span>
+                <div class="kompakt-level-header" style="background-color: ${themeColor}; cursor: default;">
+                    <span class="kompakt-header-de" onclick="event.stopPropagation(); window.speak('${group.theme || group.groupNameGerman || 'Gruppe'}')" title="Aussprache h??ren" style="cursor: pointer;">${cardTitleHTML}</span>
+                    <span class="kompakt-header-es" onclick="event.stopPropagation(); openThemeModal('${group.level}', ${group.groupIndex})" title="Themeninfos anzeigen" style="cursor: pointer;">${group.spanishName || group.groupNameSpanish || ''}</span>
                 </div>
                 <div class="kompakt-level-content">
             `;
@@ -3030,7 +3041,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         cardHTML += `
                     <div class="kompakt-row" data-verb="${verbName}" onclick="openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
-                        <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${displayVerbName}</div>
+                        <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerbName}</div>
                         <div class="kompakt-spanish" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${esTranslationDisplay}</div>
                     </div>
                 `;
@@ -3090,7 +3101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }
 
-                    // Prepare Präteritum with short (verb only) and full versions
+                    // Prepare PrÃ¤teritum with short (verb only) and full versions
                     let germanPraeteritumShort = verbData.praeteritum || '---';
                     let germanPraeteritumFull = verbData.praeteritum || '---';
                     if (verbData.praeteritum && verbData.praeteritum !== '---') {
@@ -3103,7 +3114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     let germanPraeteritumShortDisplay = highlightMatch(germanPraeteritumShort, searchTerm);
 
-                    // Prepare Spanish präteritum with short (verb only) and full versions
+                    // Prepare Spanish prÃ¤teritum with short (verb only) and full versions
                     let spanishPraeteritumShort = esPraeteritumTranslation;
                     let spanishPraeteritumFull = esPraeteritumTranslation;
                     let spanishPraeteritumShortDisplay = esPraeteritumTranslation;
@@ -3111,7 +3122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const spanishPraeteritumParts = esPraeteritumTranslationRaw.split(' ');
                         if (spanishPraeteritumParts.length >= 2) {
                             spanishPraeteritumShort = spanishPraeteritumParts.slice(1).join(' '); // verb only
-                            spanishPraeteritumFull = esPraeteritumTranslationRaw; // full: él/ella hizo
+                            spanishPraeteritumFull = esPraeteritumTranslationRaw; // full: Ã©l/ella hizo
                             spanishPraeteritumShortDisplay = highlightMatch(spanishPraeteritumShort, searchTerm);
                         }
                     }
@@ -3132,15 +3143,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         // Spanish translation for Konjunktiv II
                         const konjunktivTranslations = {
-                            'sein': 'él/ella sería',
-                            'haben': 'él/ella tendría',
-                            'werden': 'él/ella se convertiría',
-                            'dürfen': 'él/ella podría (permiso)',
-                            'müssen': 'él/ella debería',
-                            'wollen': 'él/ella querría',
-                            'sollen': 'él/ella debería',
-                            'mögen': 'él/ella gustaría',
-                            'können': 'él/ella podría'
+                            'sein': 'Ã©l/ella serÃ­a',
+                            'haben': 'Ã©l/ella tendrÃ­a',
+                            'werden': 'Ã©l/ella se convertirÃ­a',
+                            'dÃ¼rfen': 'Ã©l/ella podrÃ­a (permiso)',
+                            'mÃ¼ssen': 'Ã©l/ella deberÃ­a',
+                            'wollen': 'Ã©l/ella querrÃ­a',
+                            'sollen': 'Ã©l/ella deberÃ­a',
+                            'mÃ¶gen': 'Ã©l/ella gustarÃ­a',
+                            'kÃ¶nnen': 'Ã©l/ella podrÃ­a'
                         };
                         const spanishKonjunktivFullRaw = konjunktivTranslations[verbName] || '---';
                         const spanishKonjunktivShortRaw = spanishKonjunktivFullRaw.split(' ').slice(1).join(' ');
@@ -3168,18 +3179,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (verbData.case_tags && verbData.case_tags.length > 0) {
                         caseTagsHTML = '<div class="case-tags">' + verbData.case_tags.map(tag => {
                             const tagDisplay = {
-                                'dat': '🔴 [+Dat]',
-                                'dat_akk': '🔵 [+Dat + Akk]',
-                                'akk': '🟢 [+Akk]',
-                                'refl': '🟣 [Refl]',
-                                'nom': '🟡 [+Nom]',
-                                'intrans': '⚪ [Intrans]'
+                                'dat': 'ðŸ”´ [+Dat]',
+                                'dat_akk': 'ðŸ”µ [+Dat + Akk]',
+                                'akk': 'ðŸŸ¢ [+Akk]',
+                                'refl': 'ðŸŸ£ [Refl]',
+                                'nom': 'ðŸŸ¡ [+Nom]',
+                                'intrans': 'âšª [Intrans]'
                             };
 
                             // Handle prep tags with specific prepositions
                             if (tag.startsWith('prep:')) {
                                 const prep = tag.substring(5);
-                                return `<span class="case-tag case-tag-prep">⚪ [+Prep: ${prep}]</span>`;
+                                return `<span class="case-tag case-tag-prep">âšª [+Prep: ${prep}]</span>`;
                             }
 
                             const display = tagDisplay[tag] || tag;
@@ -3217,13 +3228,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     } else {
                         // Normal Mode (Default)
-                        const shouldHideEmoji = (currentViewMode === 'niedlich' || currentViewMode === 'cute') || searchTerm.startsWith('tag:') || searchTerm.includes('movimiento') || searchTerm.includes('estático') || searchTerm.includes('estatico');
+                        const shouldHideEmoji = (currentViewMode === 'niedlich' || currentViewMode === 'cute') || searchTerm.startsWith('tag:') || searchTerm.includes('movimiento') || searchTerm.includes('estÃ¡tico') || searchTerm.includes('estatico');
                         const cardHTML = `
                 <div class="word-item">
                     <div class="card-header">
-                        <span class="german-word" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${displayVerbName}</span>
+                        <span class="german-word" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerbName}</span>
                         <span class="spanish-translation" data-form="translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${esTranslation}</span>
-                        ${shouldHideEmoji ? '' : `<div class="icon-floating" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" style="cursor: pointer;">${verbData.emoji || '❓'}</div>`}
+                        ${shouldHideEmoji ? '' : `<div class="icon-floating" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" style="cursor: pointer;">${verbData.emoji || 'â“'}</div>`}
                     </div>
                     <div class="card-body" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" style="cursor: pointer;">
                         <div class="text-container perfekt-hover-container">
@@ -3340,7 +3351,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="wf-word">${item.word}</span>
                     <span class="wf-translation">${item.es}</span>
                     <div class="wf-relationship">
-                        Gehört zu: <strong>${item.verb}</strong> <span class="wf-arrow">➔</span>
+                        GehÃ¶rt zu: <strong>${item.verb}</strong> <span class="wf-arrow">âž”</span>
                     </div>
                 </div>
             `;
@@ -3477,10 +3488,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        const customOrder = ['Akkusativ', 'Dativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular', '🚀 Movimiento', '🏠 Estático'];
-        const whitelistedTags = ['Akkusativ', 'Dativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular', 'Intransitive', '🚀 Movimiento', '🏠 Estático'];
+        const customOrder = ['Akkusativ', 'Dativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular', 'ðŸš€ Movimiento', 'ðŸ  EstÃ¡tico'];
+        const whitelistedTags = ['Akkusativ', 'Dativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular', 'Intransitive', 'ðŸš€ Movimiento', 'ðŸ  EstÃ¡tico'];
         const sortedTags = Array.from(allTags)
-            .filter(tag => whitelistedTags.includes(tag) || tag.startsWith('Präposition:'))
+            .filter(tag => whitelistedTags.includes(tag) || tag.startsWith('PrÃ¤position:'))
             .sort((a, b) => {
                 const indexA = customOrder.indexOf(a);
                 const indexB = customOrder.indexOf(b);
@@ -3537,3 +3548,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
