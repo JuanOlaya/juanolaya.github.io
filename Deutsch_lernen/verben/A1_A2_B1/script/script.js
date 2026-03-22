@@ -2972,9 +2972,16 @@
                             verb: wfRes.verb,
                             data: allVerbsData[wfRes.verb],
                             levelKey: levelData.levelKey,
-                            groupIndexInLevel: levelData.groupIndex
+                            groupIndexInLevel: levelData.groupIndex,
+                            matchedRelatedForm: wfRes.matchedWord || ''
                         });
                     }
+                }
+            } else {
+                const existing = uniqueVerbsMap.get(wfRes.verb);
+                if (existing && !existing.matchedRelatedForm) {
+                    existing.matchedRelatedForm = wfRes.matchedWord || '';
+                    uniqueVerbsMap.set(wfRes.verb, existing);
                 }
             }
         });
@@ -3028,6 +3035,20 @@
             return text.replace(regex, (match) =>
                 `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${match}</span>`
             );
+        }
+
+        function highlightBaseVerb(text) {
+            if (!text) return text;
+            return `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${text}</span>`;
+        }
+
+        function getMatchHint(match) {
+            return match.matchedPraesensForm ||
+                match.matchedPerfektForm ||
+                match.matchedPraeteritumForm ||
+                match.matchedKonjunktivForm ||
+                match.matchedRelatedForm ||
+                '';
         }
 
         const renderFullSearchCards = false;
@@ -3105,9 +3126,10 @@
                     chunk.forEach(match => {
                         const verbName = match.verb;
                         const verbData = match.data;
+                        const matchHint = getMatchHint(match);
                         let displayVerbName = highlightMatch(verbName, searchTerm);
-                        if (!verbName.toLowerCase().includes(searchTerm) && match.matchedPraesensForm) {
-                            displayVerbName = `${verbName} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(match.matchedPraesensForm, searchTerm)})</span>`;
+                        if (!verbName.toLowerCase().includes(searchTerm) && matchHint) {
+                            displayVerbName = `${highlightBaseVerb(verbName)} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, searchTerm)})</span>`;
                         }
                         const esTranslationRaw = getPrimaryTranslation(verbData.es || '');
                         const esTranslationDisplay = highlightMatch(esTranslationRaw, searchTerm);
@@ -3141,9 +3163,10 @@
                     const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
 
                     // Generate highlighted display names dynamically
+                    const matchHint = getMatchHint(match);
                     let displayVerbName = highlightMatch(verbName, searchTerm);
-                    if (!verbName.toLowerCase().includes(searchTerm) && match.matchedPraesensForm) {
-                        displayVerbName = `${verbName} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(match.matchedPraesensForm, searchTerm)})</span>`;
+                    if (!verbName.toLowerCase().includes(searchTerm) && matchHint) {
+                        displayVerbName = `${highlightBaseVerb(verbName)} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, searchTerm)})</span>`;
                     }
 
                     // Remove parentheses from translations and highlight
@@ -3645,4 +3668,3 @@
     }
 
 });
-
