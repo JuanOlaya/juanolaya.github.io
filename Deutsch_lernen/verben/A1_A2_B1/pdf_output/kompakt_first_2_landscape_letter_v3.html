@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompakt First 2 Landscape Letter</title>
+    <style>
+        @page {
+            size: Letter landscape;
+            margin: 0;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #0f172a;
+        }
+
+        .page {
+            box-sizing: border-box;
+            width: 11in;
+            height: 8.5in;
+            padding: 0.05in;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: 1fr;
+            gap: 0.05in;
+            background: #ffffff;
+        }
+
+        .kompakt-card {
+            display: flex;
+            flex-direction: column;
+            border-radius: 0.14in;
+            overflow: hidden;
+            background: #ffffff;
+            border: 1px solid #dbe4f0;
+            box-shadow: 0 0.02in 0.08in rgba(15, 23, 42, 0.08);
+            min-height: 0;
+        }
+
+        .kompakt-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.1in;
+            padding: 0.1in 0.14in;
+            min-height: 0.76in;
+        }
+
+        .header-de {
+            font-size: 0.58in;
+            font-weight: 800;
+            line-height: 1.05;
+            color: #0f172a;
+            min-width: 0;
+        }
+
+        .header-es {
+            font-size: 0.42in;
+            font-weight: 700;
+            font-style: italic;
+            text-align: right;
+            color: #0f172a;
+            line-height: 1.05;
+            max-width: 48%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .kompakt-content {
+            flex: 1;
+            padding: 0.04in 0.14in 0.04in;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            min-height: 0;
+        }
+
+        .kompakt-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.08in;
+            border-bottom: 1px solid #dbe4f0;
+            padding: 0.02in 0;
+            min-height: 0.66in;
+        }
+
+        .kompakt-row:last-child {
+            border-bottom: none;
+        }
+
+        .kompakt-german {
+            font-size: 0.47in;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.05;
+            flex: 1 1 auto;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .kompakt-spanish {
+            font-size: 0.39in;
+            font-weight: 700;
+            font-style: italic;
+            color: #0f172a;
+            text-align: right;
+            line-height: 1.05;
+            flex: 0 0 45%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #8b5cf6;">
+                <div class="header-de">Existenz</div>
+                <div class="header-es">Existencia</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-german">sein</div>
+            <div class="kompakt-spanish">ser</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-german">haben</div>
+            <div class="kompakt-spanish">tener</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-german">werden</div>
+            <div class="kompakt-spanish">llegar a ser</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-german">geben</div>
+            <div class="kompakt-spanish">dar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-german">kommen</div>
+            <div class="kompakt-spanish">venir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-german">gehen</div>
+            <div class="kompakt-spanish">ir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-german">wohnen</div>
+            <div class="kompakt-spanish">vivir</div>
+        </div>
+    
+            </div>
+        </section>
+    
+
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #ec4899;">
+                <div class="header-de">Freizeit</div>
+                <div class="header-es">Ocio</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-german">spielen</div>
+            <div class="kompakt-spanish">jugar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-german">treiben</div>
+            <div class="kompakt-spanish">prac. deportes</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-german">laufen</div>
+            <div class="kompakt-spanish">correr</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-german">wandern</div>
+            <div class="kompakt-spanish">hac. senderismo</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-german">spazieren</div>
+            <div class="kompakt-spanish">pasear</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-german">fernsehen</div>
+            <div class="kompakt-spanish">ver la televisión</div>
+        </div>
+    
+            </div>
+        </section>
+    
+    </main>
+</body>
+</html>
