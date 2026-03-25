@@ -1,8 +1,8 @@
 {
     "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word, with the STRICT EXCEPTION of the group 'Leben in Deutschland'. MAINTENANCE RULE: whenever this file changes, update lastUpdated.",
-    "lastUpdated": "2026-03-25T11:25:00.000Z",
+    "lastUpdated": "2026-03-25T12:00:00.000Z",
     "totalGroups": 86,
-    "totalVerbs": 452,
+    "totalVerbs": 453,
     "groups": [
         {
             "level": "A1.1",
@@ -454,12 +454,10 @@
         },
         {
             "level": "A2.1",
-            "verbCount": 5,
+            "verbCount": 3,
             "verbs": [
                 "vereinbaren",
                 "absagen",
-                "planen",
-                "vorhaben",
                 "verschieben"
             ],
             "groupNameGerman": "Termine",
@@ -629,12 +627,13 @@
         },
         {
             "level": "A2.2",
-            "verbCount": 4,
+            "verbCount": 5,
             "verbs": [
                 "werfen",
                 "springen",
                 "bewegen",
-                "fangen"
+                "fangen",
+                "schlagen"
             ],
             "groupNameGerman": "Motorik",
             "groupNameSpanish": "Motricidad",
@@ -690,12 +689,13 @@
         },
         {
             "level": "A2.2",
-            "verbCount": 4,
+            "verbCount": 5,
             "verbs": [
                 "vorbereiten",
                 "regeln",
-                "vorschlagen",
-                "organisieren"
+                "organisieren",
+                "planen",
+                "vorhaben"
             ],
             "groupNameGerman": "Planung",
             "groupNameSpanish": "Planificación",
@@ -1259,13 +1259,14 @@
         },
         {
             "level": "B2.1",
-            "verbCount": 5,
+            "verbCount": 6,
             "verbs": [
                 "diskutieren",
                 "überzeugen",
                 "widersprechen",
                 "argumentieren",
-                "widerlegen"
+                "widerlegen",
+                "vorschlagen"
             ],
             "groupNameGerman": "Debatte",
             "groupNameSpanish": "Debate",
