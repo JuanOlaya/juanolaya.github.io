@@ -29,12 +29,12 @@ const canonicalGroups = [
     {
         groupNameGerman: 'Alltag',
         groupNameSpanish: 'Cotidianidad',
-        verbs: ['essen', 'trinken', 'bringen', 'brauchen', 'einschlafen', 'lesen', 'schreiben']
+        verbs: ['essen', 'trinken', 'bringen', 'brauchen', 'schlafen', 'lesen', 'schreiben']
     },
     {
         groupNameGerman: 'Routine',
         groupNameSpanish: 'Rutina',
-        verbs: ['aufwachen', 'aufstehen', 'frühstücken', 'mittagessen', 'wecken', 'schlafen']
+        verbs: ['aufwachen', 'aufstehen', 'frühstücken', 'mittagessen', 'wecken', 'einschlafen']
     }
 ];
 
@@ -288,8 +288,8 @@ writePdf({
 });
 
 writePdf({
-    htmlName: 'kompakt_first_4_portrait_letter_v9.html',
-    pdfName: 'kompakt_first_4_portrait_letter_v9.pdf',
+    htmlName: 'kompakt_first_4_portrait_letter_v10.html',
+    pdfName: 'kompakt_first_4_portrait_letter_v10.pdf',
     html: buildHtml({
         title: 'Kompakt First 4 Portrait Letter',
         orientation: 'portrait',
@@ -299,15 +299,15 @@ writePdf({
         rows: 2,
         gap: '0.04in',
         padding: '0.04in',
-        headerMinHeight: '0.92in',
-        headerPadding: '0.14in 0.13in',
-        deSize: '0.4in',
-        esSize: '0.33in',
-        contentPadding: '0.065in 0.11in 0.05in',
-        rowMinHeight: '0.425in',
+        headerMinHeight: '0.9in',
+        headerPadding: '0.14in 0.14in',
+        deSize: '0.38in',
+        esSize: '0.31in',
+        contentPadding: '0.07in 0.12in 0.05in',
+        rowMinHeight: '0.41in',
         rowPadding: '0.038in 0',
-        germanSize: '0.305in',
-        spanishSize: '0.265in'
+        germanSize: '0.285in',
+        spanishSize: '0.245in'
     })
 });
 
