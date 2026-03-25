@@ -14,10 +14,10 @@
     ];
 
     const physicalLevelMap = {
-        'A1': [{ key: 'A1_1', count: 14 }, { key: 'A1_2', count: 14 }],
+        'A1': [{ key: 'A1_1', count: 15 }, { key: 'A1_2', count: 13 }],
         'A2': [{ key: 'A2_1', count: 13 }, { key: 'A2_2', count: 14 }],
         'B1': [{ key: 'B1_1', count: 20 }],
-        'B2': [{ key: 'B2_1', count: 11 }]
+        'B2': [{ key: 'B2_1', count: 12 }]
     };
     const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22C55E', '#3b82f6'];
 
@@ -113,7 +113,7 @@
         'A1': { groupCount: 28, displayName: 'A1' },
         'A2': { groupCount: 27, displayName: 'A2' },
         'B1': { groupCount: 20, displayName: 'B1' },
-        'B2': { groupCount: 11, displayName: 'B2' }
+        'B2': { groupCount: 12, displayName: 'B2' }
     };
     const levelOrder = ['A1', 'A2', 'B1', 'B2'];
 
@@ -253,14 +253,16 @@
     }
 
     function hasCachedGroup(levelKey, groupIndex) {
-        return !!(verbGroupsByLevel[levelKey] && verbGroupsByLevel[levelKey][groupIndex]);
+        const group = verbGroupsByLevel[levelKey] && verbGroupsByLevel[levelKey][groupIndex];
+        if (!group || !Array.isArray(group.verbs)) return false;
+        return group.verbs.every(verbName => !!allVerbsData[verbName]);
     }
 
     function hasCachedLevel(levelKey) {
         const config = levelConfig[levelKey];
         if (!config || !verbGroupsByLevel[levelKey]) return false;
         for (let i = 0; i < config.groupCount; i++) {
-            if (!verbGroupsByLevel[levelKey][i]) return false;
+            if (!hasCachedGroup(levelKey, i)) return false;
         }
         return true;
     }
@@ -367,7 +369,7 @@
                 const groupIndex = task.i - 1;
 
                 // 1. Check if already loaded
-                if (verbGroupsByLevel[levelKey] && verbGroupsByLevel[levelKey][groupIndex]) {
+                if (hasCachedGroup(levelKey, groupIndex)) {
                     return;
                 }
 
@@ -449,7 +451,7 @@
         if (!levelConfig[levelKey]) return;
 
         // 1. Check if group is already loaded in memory
-        if (verbGroupsByLevel[levelKey] && verbGroupsByLevel[levelKey][groupIndex]) {
+        if (hasCachedGroup(levelKey, groupIndex)) {
             return; // Data active
         }
 
@@ -773,10 +775,14 @@
                     const datBadge = isDativ ? `<span class="dativ-badge" style="margin-left: 8px;">dat</span>` : '';
                     const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
                     const intrBadge = isIntransitive ? `<span class="intr-badge" style="margin-left: 8px;">intr</span>` : '';
+                    const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
+                    const ikBadge = isIK ? `<span class="ik-badge" style="margin-left: 8px;">IK</span>` : '';
+                    const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
+                    const lidBadge = isLiD ? `<span class="lid-badge" style="margin-left: 8px;">LiD</span>` : '';
 
                     const germanWord = document.createElement('div');
                     germanWord.className = 'kompakt-german';
-                    germanWord.innerHTML = `${verbName}${reflBadge}${datBadge}${intrBadge}`;
+                    germanWord.innerHTML = `${verbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}`;
                     germanWord.style.display = showGerman ? '' : 'none';
                     germanWord.style.cursor = 'pointer';
                     germanWord.title = 'Aussprache hören';
@@ -879,12 +885,16 @@
             const datBadge = isDativ ? ` <span class="dativ-badge" style="vertical-align: super; font-size: 0.55rem; padding: 1px 4px; margin-left: 6px;">dat</span>` : '';
             const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
             const intrBadge = isIntransitive ? ` <span class="intr-badge" style="vertical-align: super; font-size: 0.55rem; padding: 1px 4px; margin-left: 6px;">intr</span>` : '';
+            const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
+            const ikBadge = isIK ? ` <span class="ik-badge" style="vertical-align: super; font-size: 0.55rem; padding: 1px 4px; margin-left: 6px;">IK</span>` : '';
+            const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
+            const lidBadge = isLiD ? ` <span class="lid-badge" style="vertical-align: super; font-size: 0.55rem; padding: 1px 4px; margin-left: 6px;">LiD</span>` : '';
 
             // New Structure: Header (Word + Translation), Body (Tags Centered), No Emoji
             return `
             <div class="word-item">
                 <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer; flex-direction: column; gap: 5px;">
-                    <span class="german-word" style="font-size: 1.5rem;">${verbName} ${irregularMark}${reflBadge}${datBadge}${intrBadge}</span>
+                    <span class="german-word" style="font-size: 1.5rem;">${verbName} ${irregularMark}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}</span>
                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
                         <span class="spanish-translation" style="font-size: 1.1rem; color: white; font-style: italic;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${esTranslation}</span>
                         ${showEnglish ? `<span class="english-translation" style="font-size: 1.1rem; color: white; font-weight: 600;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${enTranslation}</span>` : ''}
@@ -927,6 +937,10 @@
             const datBadge = isDativ ? `<span class="dativ-badge" style="margin-top: 4px; margin-left: 8px;">dat</span>` : '';
             const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
             const intrBadge = isIntransitive ? `<span class="intr-badge" style="margin-top: 4px; margin-left: 8px;">intr</span>` : '';
+            const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
+            const ikBadge = isIK ? `<span class="ik-badge" style="margin-top: 4px; margin-left: 8px;">IK</span>` : '';
+            const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
+            const lidBadge = isLiD ? `<span class="lid-badge" style="margin-top: 4px; margin-left: 8px;">LiD</span>` : '';
 
             const emoji = verbData.emoji || '📝';
 
@@ -936,7 +950,7 @@
                 <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">
                      <span class="normal-emoji">${emoji}</span>
                      <h3 class="normal-german">${verbName}${irregular}</h3>
-                     ${reflBadge}${datBadge}${intrBadge}
+                     ${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}
                 </div>
                 <div class="normal-card-content" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
                      <p class="normal-spanish">${translation}</p>
@@ -990,12 +1004,16 @@
             const datBadge = isDativ ? ` <span class="dativ-badge" style="padding: 1px 4px; font-size: 0.6rem; margin-left: 8px;">dat</span>` : '';
             const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
             const intrBadge = isIntransitive ? ` <span class="intr-badge" style="padding: 1px 4px; font-size: 0.6rem; margin-left: 8px;">intr</span>` : '';
+            const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
+            const ikBadge = isIK ? ` <span class="ik-badge" style="padding: 1px 4px; font-size: 0.6rem; margin-left: 8px;">IK</span>` : '';
+            const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
+            const lidBadge = isLiD ? ` <span class="lid-badge" style="padding: 1px 4px; font-size: 0.6rem; margin-left: 8px;">LiD</span>` : '';
 
             // Create row
             const row = document.createElement('div');
             row.className = 'light-version-row';
             row.innerHTML = `
-                <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${infinitiv}${reflBadge}${datBadge}${intrBadge}</div>
+                <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${infinitiv}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}</div>
                 <div class="light-version-cell perfekt" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${perfekt}</div>
                 <div class="light-version-cell praeteritum" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${praeteritum}</div>
                 <div class="light-version-cell translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${translation}</div>
@@ -3202,10 +3220,20 @@
                         const esTranslationDisplay = highlightMatch(esTranslationRaw, searchTerm);
                         const enTranslationRaw = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
                         const enTranslationDisplay = highlightMatch(enTranslationRaw, searchTerm);
+                        const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
+                        const reflBadge = isReflexive ? `<span class="reflexiv-badge" style="margin-left: 8px;">refl</span>` : '';
+                        const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
+                        const datBadge = isDativ ? `<span class="dativ-badge" style="margin-left: 8px;">dat</span>` : '';
+                        const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
+                        const intrBadge = isIntransitive ? `<span class="intr-badge" style="margin-left: 8px;">intr</span>` : '';
+                        const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
+                        const ikBadge = isIK ? `<span class="ik-badge" style="margin-left: 8px;">IK</span>` : '';
+                        const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
+                        const lidBadge = isLiD ? `<span class="lid-badge" style="margin-left: 8px;">LiD</span>` : '';
 
                         cardHTML += `
                     <div class="kompakt-row" data-verb="${verbName}" onclick="openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
-                        <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}</div>
+                        <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}</div>
                         <div class="kompakt-translations">
                             <div class="kompakt-spanish" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showSpanish ? 'block' : 'none'};">${esTranslationDisplay}</div>
                             <div class="kompakt-english" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showEnglish && enTranslationRaw ? 'block' : 'none'};">${enTranslationDisplay}</div>
@@ -3371,7 +3399,9 @@
                                 'akk': '🟢 [+Akk]',
                                 'refl': '🟣 [Refl]',
                                 'nom': '🟡 [+Nom]',
-                                'intrans': '⚪ [Intrans]'
+                                'intrans': '⚪ [Intrans]',
+                                'IK': '🟣 [IK]',
+                                'LiD': '🔵 [LiD]'
                             };
 
                             // Handle prep tags with specific prepositions

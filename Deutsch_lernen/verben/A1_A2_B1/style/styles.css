@@ -4447,7 +4447,7 @@ body.compact-view .cards-container {
 }
 
 /* Hide Reflexiv Tags when Toggle is Disabled */
-body.hide-refl .reflexiv-badge {
+.hide-refl .reflexiv-badge {
     display: none !important;
 }
 
@@ -4468,7 +4468,7 @@ body.hide-refl .reflexiv-badge {
 }
 
 /* Hide Dativ Tags when Toggle is Disabled */
-body.hide-dat .dativ-badge {
+.hide-dat .dativ-badge {
     display: none !important;
 }
 
@@ -4490,6 +4490,52 @@ body.hide-dat .dativ-badge {
 }
 
 /* Hide Intransitiv Tags when Toggle is Disabled */
-body.hide-intr .intr-badge {
+.hide-intr .intr-badge {
+    display: none !important;
+}
+
+.ik-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    margin-left: 6px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    background: rgba(168, 85, 247, 0.15);
+    color: #a855f7;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    pointer-events: none;
+}
+
+.hide-ik .ik-badge {
+    display: none !important;
+}
+
+#verb-modal .modal-content.hide-ik .case-tag-IK {
+    display: none !important;
+}
+
+.lid-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    margin-left: 6px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    background: rgba(14, 165, 233, 0.15);
+    color: #0ea5e9;
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    pointer-events: none;
+}
+
+.hide-lid .lid-badge {
+    display: none !important;
+}
+
+#verb-modal .modal-content.hide-lid .case-tag-LiD {
     display: none !important;
 }
