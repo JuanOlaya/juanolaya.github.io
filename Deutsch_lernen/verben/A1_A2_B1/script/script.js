@@ -126,7 +126,8 @@
     let currentIndexInModal = 0;
     let storyClickCounter = 0;
     let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
-    const CACHE_KEY = 'verbAppCache_v35_batch7_new_groups';
+    const CACHE_KEY = 'verbAppCache_v36_ik_lid_refresh';
+    const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
     let cachePersistTimeout = null;
 
     // --- DOM ELEMENTS ---
@@ -1419,6 +1420,15 @@
 
         const toggles = document.querySelectorAll('.visibility-toggle');
         const verbModalContent = document.querySelector('#verb-modal .modal-content');
+
+        // Newer visibility tags should default to visible even for users carrying older localStorage.
+        // We migrate once so stale hidden states do not keep IK/LiD invisible forever in the app.
+        if (!localStorage.getItem(SETTINGS_MIGRATION_KEY)) {
+            localStorage.setItem('toggle-ik-switch', 'true');
+            localStorage.setItem('toggle-lid-switch', 'true');
+            localStorage.setItem(SETTINGS_MIGRATION_KEY, 'true');
+        }
+
         toggles.forEach(toggle => {
             const toggleClass = toggle.dataset.toggleClass;
             const toggleId = toggle.id;

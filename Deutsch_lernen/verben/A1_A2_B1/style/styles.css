@@ -4503,9 +4503,10 @@ body.compact-view .cards-container {
     margin-left: 6px;
     vertical-align: middle;
     text-transform: uppercase;
-    background: rgba(168, 85, 247, 0.15);
-    color: #a855f7;
-    border: 1px solid rgba(168, 85, 247, 0.3);
+    white-space: nowrap;
+    background: #7c3aed;
+    color: #ffffff;
+    border: 1px solid #8b5cf6;
     pointer-events: none;
 }
 
@@ -4526,9 +4527,10 @@ body.compact-view .cards-container {
     margin-left: 6px;
     vertical-align: middle;
     text-transform: uppercase;
-    background: rgba(14, 165, 233, 0.15);
-    color: #0ea5e9;
-    border: 1px solid rgba(14, 165, 233, 0.3);
+    white-space: nowrap;
+    background: #0284c7;
+    color: #ffffff;
+    border: 1px solid #38bdf8;
     pointer-events: none;
 }
 
