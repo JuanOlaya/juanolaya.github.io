@@ -439,6 +439,12 @@
             console.warn("Failed to save to cache", e);
         }
 
+        // If the UI started from stale cache, repaint the current view once
+        // fresh background data is ready so moved verbs/groups appear immediately.
+        if (searchInput && searchInput.value.trim() === '') {
+            clearSearchAndRender();
+        }
+
         // Re-run search if user typed something while loading
         if (searchInput && searchInput.value.trim() !== '') {
             searchInput.dispatchEvent(new Event('input'));
