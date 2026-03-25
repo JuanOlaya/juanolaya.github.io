@@ -126,6 +126,8 @@
     let currentIndexInModal = 0;
     let storyClickCounter = 0;
     let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
+    const CACHE_KEY = 'verbAppCache_v35_batch7_new_groups';
+    let cachePersistTimeout = null;
 
     // --- DOM ELEMENTS ---
     const mainContainer = document.getElementById('main-container');
@@ -209,6 +211,60 @@
     let currentThemeData = null;
     let appVersion = '1.6_static'; // Stable version; replaced by verbs_index.lastUpdated when available
 
+    function persistCacheSnapshot() {
+        try {
+            const cachePayload = {
+                allVerbsData,
+                verbGroupsByLevel,
+                lastUpdated: appVersion || new Date().toISOString(),
+                timestamp: Date.now()
+            };
+            localStorage.setItem(CACHE_KEY, JSON.stringify(cachePayload));
+        } catch (e) {
+            console.warn("Failed to save cache snapshot", e);
+        }
+    }
+
+    function scheduleCachePersist() {
+        clearTimeout(cachePersistTimeout);
+        cachePersistTimeout = setTimeout(() => {
+            persistCacheSnapshot();
+        }, 250);
+    }
+
+    function hydrateFromLocalCache() {
+        try {
+            const cached = localStorage.getItem(CACHE_KEY);
+            if (!cached) return false;
+
+            const data = JSON.parse(cached);
+            if (!data || !data.allVerbsData || !data.verbGroupsByLevel) return false;
+
+            allVerbsData = data.allVerbsData;
+            verbGroupsByLevel = data.verbGroupsByLevel;
+            if (data.lastUpdated) {
+                appVersion = data.lastUpdated;
+            }
+            return true;
+        } catch (e) {
+            console.warn("Failed to hydrate from local cache", e);
+            return false;
+        }
+    }
+
+    function hasCachedGroup(levelKey, groupIndex) {
+        return !!(verbGroupsByLevel[levelKey] && verbGroupsByLevel[levelKey][groupIndex]);
+    }
+
+    function hasCachedLevel(levelKey) {
+        const config = levelConfig[levelKey];
+        if (!config || !verbGroupsByLevel[levelKey]) return false;
+        for (let i = 0; i < config.groupCount; i++) {
+            if (!verbGroupsByLevel[levelKey][i]) return false;
+        }
+        return true;
+    }
+
     // --- BACKGROUND LOADING & PROGRESS ---
     let isBackgroundLoading = false;
 
@@ -232,7 +288,6 @@
     }
 
     async function loadBackgroundData() {
-        const CACHE_KEY = 'verbAppCache_v35_batch7_new_groups'; // Force invalidation
         let remoteVersion = null;
 
         // 1. Check for updates (Version Check)
@@ -436,6 +491,8 @@
                 // 4. Fetch Conjugations for new verbs
                 await loadConjugations(new Set(newVerbs));
             }
+
+            scheduleCachePersist();
 
         } catch (error) {
             console.error(`Failed to load group data (${levelKey} / ${groupNum}):`, error);
@@ -1178,10 +1235,20 @@
             .then(data => { verbTypesData = data || {}; })
             .catch(() => { verbTypesData = {}; });
 
-        // Load enough data for the initial view
-        const initialLoadPromise = initialViewMode === 'compact'
-            ? loadAllGroupsForLevel(currentLevel)
-            : loadGroupData(currentLevel, currentGroupInLevel);
+        // Hydrate from cache first so returning to the app feels instant on mobile.
+        const hydratedFromCache = hydrateFromLocalCache();
+        const hasInitialDataInCache = hydratedFromCache && (
+            initialViewMode === 'compact'
+                ? hasCachedLevel(currentLevel)
+                : hasCachedGroup(currentLevel, currentGroupInLevel)
+        );
+
+        // Load enough data for the initial view only if cache cannot already render it.
+        const initialLoadPromise = hasInitialDataInCache
+            ? Promise.resolve()
+            : (initialViewMode === 'compact'
+                ? loadAllGroupsForLevel(currentLevel)
+                : loadGroupData(currentLevel, currentGroupInLevel));
 
         initialLoadPromise
             .then(() => {
