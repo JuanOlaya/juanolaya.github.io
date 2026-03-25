@@ -11,37 +11,8 @@ if (!fs.existsSync(outputDir)) {
 
 const indexPath = path.join(rootDir, 'json', 'verbs_index.json');
 const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
-
 const firstFourGroups = indexData.groups.slice(0, 4);
 const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c'];
-
-const canonicalGroups = [
-    {
-        groupNameGerman: 'Existenz',
-        groupNameSpanish: 'Existencia',
-        verbs: ['sein', 'haben', 'werden', 'geben', 'kommen', 'gehen', 'wohnen']
-    },
-    {
-        groupNameGerman: 'Freizeit',
-        groupNameSpanish: 'Ocio',
-        verbs: ['spielen', 'treiben', 'laufen', 'wandern', 'spazieren', 'fernsehen']
-    },
-    {
-        groupNameGerman: 'Alltag',
-        groupNameSpanish: 'Cotidianidad',
-        verbs: ['essen', 'trinken', 'bringen', 'brauchen', 'schlafen', 'lesen', 'schreiben']
-    },
-    {
-        groupNameGerman: 'Routine',
-        groupNameSpanish: 'Rutina',
-        verbs: ['aufwachen', 'aufstehen', 'frühstücken', 'mittagessen', 'wecken', 'einschlafen']
-    }
-];
-
-const canonicalVerbOverrides = {
-    fernsehen: { es: 'ver la televisión' },
-    frühstücken: { es: 'desayunar' }
-};
 
 function removeParentheses(text) {
     if (!text) return '';
@@ -66,21 +37,36 @@ function escapeHtml(text) {
         .replace(/'/g, '&#39;');
 }
 
-function getVerbTranslation(verb) {
+function getVerbCard(verb) {
     const cardPath = path.join(rootDir, 'json', 'cards', `${verb}.json`);
-    if (canonicalVerbOverrides[verb]?.es) {
-        return getPrimaryTranslation(canonicalVerbOverrides[verb].es);
-    }
-    if (!fs.existsSync(cardPath)) return '';
-    const cardData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+    if (!fs.existsSync(cardPath)) return {};
+    return JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+}
+
+function getVerbTranslation(verb) {
+    const cardData = getVerbCard(verb);
     return getPrimaryTranslation(cardData.es || '');
+}
+
+function getVisibleBadges(verb) {
+    const cardData = getVerbCard(verb);
+    const tags = Array.isArray(cardData.case_tags) ? cardData.case_tags : [];
+    return [
+        tags.includes('IK') ? 'IK' : null,
+        tags.includes('LiD') ? 'LiD' : null
+    ].filter(Boolean);
 }
 
 function buildCard(group, index) {
     const themeColor = standardColors[index % standardColors.length];
     const rowsHtml = group.verbs.map((verb) => `
         <div class="kompakt-row">
-            <div class="kompakt-german">${escapeHtml(verb)}</div>
+            <div class="kompakt-german-wrap">
+                <div class="kompakt-german">${escapeHtml(verb)}</div>
+                <div class="kompakt-badges">
+                    ${getVisibleBadges(verb).map(tag => `<span class="mini-badge mini-badge-${tag}">${escapeHtml(tag)}</span>`).join('')}
+                </div>
+            </div>
             <div class="kompakt-spanish">${escapeHtml(getVerbTranslation(verb))}</div>
         </div>
     `).join('');
@@ -99,7 +85,7 @@ function buildCard(group, index) {
 }
 
 function buildHtml({ title, orientation, pageWidth, pageHeight, columns, rows, gap, padding, headerMinHeight, headerPadding, deSize, esSize, contentPadding, rowMinHeight, rowPadding, germanSize, spanishSize }) {
-    const cardsHtml = canonicalGroups.map((group, index) => buildCard(group, index)).join('\n');
+    const cardsHtml = firstFourGroups.map((group, index) => buildCard(group, index)).join('\n');
 
     return `<!DOCTYPE html>
 <html lang="de">
@@ -202,16 +188,59 @@ function buildHtml({ title, orientation, pageWidth, pageHeight, columns, rows, g
             border-bottom: none;
         }
 
+        .kompakt-german-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.05in;
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+
         .kompakt-german {
             font-size: ${germanSize};
             font-weight: 800;
             color: #0f172a;
             line-height: 1.05;
-            flex: 1 1 auto;
+            flex: 0 1 auto;
             min-width: 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+
+        .kompakt-badges {
+            display: flex;
+            align-items: center;
+            gap: 0.03in;
+            flex: 0 0 auto;
+        }
+
+        .mini-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 0.28in;
+            height: 0.18in;
+            padding: 0 0.04in;
+            border-radius: 999px;
+            font-size: 0.105in;
+            font-weight: 800;
+            letter-spacing: 0.01in;
+            line-height: 1;
+            border: 1px solid transparent;
+            box-sizing: border-box;
+        }
+
+        .mini-badge-IK {
+            color: #1d4ed8;
+            background: #dbeafe;
+            border-color: #93c5fd;
+        }
+
+        .mini-badge-LiD {
+            color: #166534;
+            background: #dcfce7;
+            border-color: #86efac;
         }
 
         .kompakt-spanish {
@@ -288,10 +317,10 @@ writePdf({
 });
 
 writePdf({
-    htmlName: 'kompakt_first_4_portrait_letter_v10.html',
-    pdfName: 'kompakt_first_4_portrait_letter_v10.pdf',
+    htmlName: 'kompakt_first_4_portrait_letter_v11_with_tags.html',
+    pdfName: 'kompakt_first_4_portrait_letter_v11_with_tags.pdf',
     html: buildHtml({
-        title: 'Kompakt First 4 Portrait Letter',
+        title: 'Kompakt First 4 Portrait Letter With Tags',
         orientation: 'portrait',
         pageWidth: '8.5in',
         pageHeight: '11in',
