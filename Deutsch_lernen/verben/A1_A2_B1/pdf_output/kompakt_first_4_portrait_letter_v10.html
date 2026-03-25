@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kompakt First 4 Landscape Letter</title>
+    <title>Kompakt First 4 Portrait Letter</title>
     <style>
         @page {
-            size: Letter landscape;
+            size: Letter portrait;
             margin: 0;
         }
 
@@ -22,13 +22,13 @@
 
         .page {
             box-sizing: border-box;
-            width: 11in;
-            height: 8.5in;
-            padding: 0.12in;
+            width: 8.5in;
+            height: 11in;
+            padding: 0.04in;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             grid-template-rows: repeat(2, 1fr);
-            gap: 0.1in;
+            gap: 0.04in;
             background: #ffffff;
         }
 
@@ -48,12 +48,12 @@
             align-items: center;
             justify-content: space-between;
             gap: 0.1in;
-            padding: 0.14in 0.18in;
-            min-height: 0.72in;
+            padding: 0.14in 0.14in;
+            min-height: 0.9in;
         }
 
         .header-de {
-            font-size: 0.3in;
+            font-size: 0.38in;
             font-weight: 800;
             line-height: 1.05;
             color: #0f172a;
@@ -64,7 +64,7 @@
         }
 
         .header-es {
-            font-size: 0.24in;
+            font-size: 0.31in;
             font-weight: 700;
             font-style: italic;
             text-align: right;
@@ -78,7 +78,7 @@
 
         .kompakt-content {
             flex: 1;
-            padding: 0.1in 0.18in 0.08in;
+            padding: 0.07in 0.12in 0.05in;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -91,8 +91,8 @@
             justify-content: space-between;
             gap: 0.08in;
             border-bottom: 1px solid #dbe4f0;
-            padding: 0.04in 0;
-            min-height: 0.36in;
+            padding: 0.038in 0;
+            min-height: 0.41in;
         }
 
         .kompakt-row:last-child {
@@ -100,7 +100,7 @@
         }
 
         .kompakt-german {
-            font-size: 0.24in;
+            font-size: 0.285in;
             font-weight: 800;
             color: #0f172a;
             line-height: 1.05;
@@ -112,7 +112,7 @@
         }
 
         .kompakt-spanish {
-            font-size: 0.2in;
+            font-size: 0.245in;
             font-weight: 700;
             font-style: italic;
             color: #0f172a;
