@@ -1,8 +1,8 @@
 {
   "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word, with the STRICT EXCEPTION of the group 'Leben in Deutschland'. MAINTENANCE RULE: whenever this file changes, update lastUpdated.",
-  "lastUpdated": "2026-03-25T16:20:00.000Z",
-  "totalGroups": 87,
-  "totalVerbs": 476,
+  "lastUpdated": "2026-03-26T10:20:00.000Z",
+  "totalGroups": 88,
+  "totalVerbs": 481,
   "groups": [
     {
       "level": "A1.1",
@@ -28,7 +28,8 @@
         "laufen",
         "wandern",
         "spazieren",
-        "fernsehen"
+        "fernsehen",
+        "genießen"
       ],
       "groupNameGerman": "Freizeit",
       "groupNameSpanish": "Ocio",
@@ -198,7 +199,8 @@
         "auspacken",
         "zumachen",
         "aufmachen",
-        "laden"
+        "laden",
+        "heben"
       ],
       "groupNameGerman": "Paket",
       "groupNameSpanish": "Embalaje",
@@ -223,13 +225,15 @@
     },
     {
       "level": "A1.1",
-      "verbCount": 5,
+      "verbCount": 7,
       "verbs": [
         "spielen",
         "treiben",
         "rennen",
         "schwimmen",
-        "reiten"
+        "reiten",
+        "treten",
+        "schießen"
       ],
       "groupNameGerman": "Sport",
       "groupNameSpanish": "Deporte",
@@ -245,7 +249,8 @@
         "finden",
         "parken",
         "zeigen",
-        "umziehen"
+        "umziehen",
+        "beschweren"
       ],
       "groupNameGerman": "Stadtleben",
       "groupNameSpanish": "Ciudad",
@@ -461,8 +466,7 @@
         "konzentrieren",
         "wundern",
         "schämen",
-        "irren",
-        "genießen"
+        "irren"
       ],
       "groupNameGerman": "Empfindung",
       "groupNameSpanish": "Sensación",
@@ -656,7 +660,6 @@
         "bewegen",
         "fangen",
         "schlagen",
-        "heben",
         "stoßen"
       ],
       "groupNameGerman": "Motorik",
@@ -1027,14 +1030,12 @@
     },
     {
       "level": "B1.1",
-      "verbCount": 6,
+      "verbCount": 4,
       "verbs": [
         "kämpfen",
         "siegen",
         "wirken",
-        "gewinnen",
-        "treten",
-        "schießen"
+        "gewinnen"
       ],
       "groupNameGerman": "Wettbewerb",
       "groupNameSpanish": "Competencia",
@@ -1063,7 +1064,8 @@
         "loben",
         "kritisieren",
         "zustimmen",
-        "ablehnen"
+        "ablehnen",
+        "vertreten"
       ],
       "groupNameGerman": "Meinung",
       "groupNameSpanish": "Opinión",
@@ -1092,7 +1094,6 @@
       "verbs": [
         "ärgern",
         "zerstören",
-        "beschweren",
         "streiten",
         "schimpfen",
         "stören",
@@ -1328,7 +1329,6 @@
         "entlassen",
         "befördern",
         "streiken",
-        "vertreten",
         "ernennen"
       ],
       "groupNameGerman": "Arbeitswelt",
@@ -1348,6 +1348,21 @@
       "groupNameSpanish": "Innovación",
       "groupNameEnglish": "Innovation",
       "groupNumberPerLevel": 12
+    },
+    {
+      "level": "B2.1",
+      "verbCount": 5,
+      "verbs": [
+        "töten",
+        "erstechen",
+        "überfallen",
+        "ermorden",
+        "verhaften"
+      ],
+      "groupNameGerman": "Kriminalität",
+      "groupNameSpanish": "Criminalidad",
+      "groupNameEnglish": "Crime",
+      "groupNumberPerLevel": 13
     }
   ]
 }
