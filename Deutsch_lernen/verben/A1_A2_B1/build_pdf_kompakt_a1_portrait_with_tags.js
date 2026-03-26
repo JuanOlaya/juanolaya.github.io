@@ -13,8 +13,8 @@ const indexPath = path.join(rootDir, 'json', 'verbs_index.json');
 const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
 const a1Groups = indexData.groups.filter(group => group.level === 'A1.1' || group.level === 'A1.2');
 
-const htmlPath = path.join(outputDir, 'kompakt_a1_portrait_with_all_tags.html');
-const pdfPath = path.join(outputDir, 'kompakt_a1_portrait_with_all_tags.pdf');
+const htmlPath = path.join(outputDir, 'kompakt_a1_portrait_with_ik_lid_refl.html');
+const pdfPath = path.join(outputDir, 'kompakt_a1_portrait_with_ik_lid_refl.pdf');
 
 const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22c55e', '#3b82f6', '#14b8a6', '#6366f1', '#a855f7'];
 const groupsPerPage = 4;
@@ -74,16 +74,10 @@ function getVisibleBadges(verb) {
         const text = String(tag || '').toLowerCase();
         return text === 'refl' || text.includes('reflexiv');
     });
-    const hasDativ = tags.some(tag => {
-        const text = String(tag || '').toLowerCase();
-        return text === 'dat' || text === 'dativ' || text.includes('(+dat)');
-    });
-
     return [
         hasIK ? 'IK' : null,
         hasLiD ? 'LiD' : null,
-        hasRefl ? 'refl' : null,
-        hasDativ ? 'dativo' : null
+        hasRefl ? 'refl' : null
     ].filter(Boolean);
 }
 
@@ -142,7 +136,7 @@ function buildHtml() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kompakt A1 Portrait With All Tags</title>
+    <title>Kompakt A1 Portrait With IK LiD Refl</title>
     <style>
         @page {
             size: Letter portrait;
@@ -295,6 +289,10 @@ function buildHtml() {
             color: #1d4ed8;
             background: #dbeafe;
             border-color: #93c5fd;
+            min-width: 0.39in;
+            height: 0.225in;
+            padding: 0 0.045in;
+            font-size: 0.126in;
         }
 
         .mini-badge-LiD {
@@ -307,12 +305,6 @@ function buildHtml() {
             color: #92400e;
             background: #fef3c7;
             border-color: #fcd34d;
-        }
-
-        .mini-badge-dativo {
-            color: #7c2d12;
-            background: #ffedd5;
-            border-color: #fdba74;
         }
 
         .kompakt-spanish {
