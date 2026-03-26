@@ -1,8 +1,8 @@
 {
   "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word, with the STRICT EXCEPTION of the group 'Leben in Deutschland'. MAINTENANCE RULE: whenever this file changes, update lastUpdated.",
-  "lastUpdated": "2026-03-26T12:00:00.000Z",
-  "totalGroups": 87,
-  "totalVerbs": 481,
+  "lastUpdated": "2026-03-26T14:34:53.897Z",
+  "totalGroups": 88,
+  "totalVerbs": 483,
   "groups": [
     {
       "level": "A1.1",
@@ -250,20 +250,36 @@
     },
     {
       "level": "A1.2",
-      "verbCount": 7,
+      "verbCount": 2,
+      "verbs": [
+        "treffen",
+        "mitkommen"
+      ],
+      "groupNameGerman": "Interaktion",
+      "groupNameSpanish": "Interacción",
+      "groupNameEnglish": "Interaction",
+      "groupNumberPerLevel": 2,
+      "descriptionGerman": "Direkte soziale Handlungen zwischen Personen",
+      "descriptionSpanish": "Acciones sociales directas entre personas",
+      "descriptionEnglish": "Direct social actions between people"
+    },
+    {
+      "level": "A1.2",
+      "verbCount": 5,
       "verbs": [
         "helfen",
-        "treffen",
-        "anrufen",
         "vertrauen",
+        "raten",
         "passen",
-        "mitkommen",
-        "raten"
+        "begegnen"
       ],
-      "groupNameGerman": "Soziales",
-      "groupNameSpanish": "Social",
-      "groupNameEnglish": "Social",
-      "groupNumberPerLevel": 2
+      "groupNameGerman": "Beziehung",
+      "groupNameSpanish": "Relación",
+      "groupNameEnglish": "Relationship",
+      "groupNumberPerLevel": 3,
+      "descriptionGerman": "Zwischenmenschliche Beziehungen, Hilfe, Vertrauen und Ratschläge",
+      "descriptionSpanish": "Relaciones interpersonales, ayuda, confianza y consejos",
+      "descriptionEnglish": "Interpersonal relationships, help, trust, and advice"
     },
     {
       "level": "A1.2",
@@ -279,7 +295,7 @@
       "groupNameGerman": "Fest",
       "groupNameSpanish": "Fiesta",
       "groupNameEnglish": "Celebration",
-      "groupNumberPerLevel": 3
+      "groupNumberPerLevel": 4
     },
     {
       "level": "A1.2",
@@ -296,7 +312,7 @@
       "groupNameGerman": "Haushalt",
       "groupNameSpanish": "Tareas del hogar",
       "groupNameEnglish": "Household",
-      "groupNumberPerLevel": 4
+      "groupNumberPerLevel": 5
     },
     {
       "level": "A1.2",
@@ -309,7 +325,7 @@
       "groupNameGerman": "Kleidung",
       "groupNameSpanish": "Ropa",
       "groupNameEnglish": "Clothing",
-      "groupNumberPerLevel": 5
+      "groupNumberPerLevel": 6
     },
     {
       "level": "A1.2",
@@ -324,21 +340,23 @@
       "groupNameGerman": "Reisen",
       "groupNameSpanish": "Viajes",
       "groupNameEnglish": "Travel",
-      "groupNumberPerLevel": 6
+      "groupNumberPerLevel": 7
     },
     {
       "level": "A1.2",
-      "verbCount": 4,
+      "verbCount": 6,
       "verbs": [
         "beantworten",
         "buchstabieren",
         "wiederholen",
-        "unterbrechen"
+        "unterbrechen",
+        "erzählen",
+        "zuhören"
       ],
       "groupNameGerman": "Dialog",
       "groupNameSpanish": "Diálogo",
       "groupNameEnglish": "Dialogue",
-      "groupNumberPerLevel": 7
+      "groupNumberPerLevel": 8
     },
     {
       "level": "A1.2",
@@ -353,7 +371,7 @@
       "groupNameGerman": "Position",
       "groupNameSpanish": "Posición",
       "groupNameEnglish": "Position",
-      "groupNumberPerLevel": 8
+      "groupNumberPerLevel": 9
     },
     {
       "level": "A1.2",
@@ -370,7 +388,7 @@
       "groupNameGerman": "Richtung",
       "groupNameSpanish": "Dirección",
       "groupNameEnglish": "Direction",
-      "groupNumberPerLevel": 9
+      "groupNumberPerLevel": 10
     },
     {
       "level": "A1.2",
@@ -387,7 +405,7 @@
       "groupNameGerman": "Verkehr",
       "groupNameSpanish": "Tráfico",
       "groupNameEnglish": "Traffic",
-      "groupNumberPerLevel": 10
+      "groupNumberPerLevel": 11
     },
     {
       "level": "A1.2",
@@ -401,7 +419,7 @@
       "groupNameGerman": "Pendeln",
       "groupNameSpanish": "Tránsito",
       "groupNameEnglish": "Commuting",
-      "groupNumberPerLevel": 11
+      "groupNumberPerLevel": 12
     },
     {
       "level": "A1.2",
@@ -416,24 +434,23 @@
       "groupNameGerman": "Unterkunft",
       "groupNameSpanish": "Alojamiento",
       "groupNameEnglish": "Accommodation",
-      "groupNumberPerLevel": 12
+      "groupNumberPerLevel": 13
     },
     {
       "level": "A1.2",
-      "verbCount": 7,
+      "verbCount": 6,
       "verbs": [
         "sprechen",
         "sagen",
         "fragen",
         "antworten",
         "rufen",
-        "zuhören",
-        "erzählen"
+        "anrufen"
       ],
       "groupNameGerman": "Kommunikation",
       "groupNameSpanish": "Comunicación",
       "groupNameEnglish": "Communication",
-      "groupNumberPerLevel": 13
+      "groupNumberPerLevel": 14
     },
     {
       "level": "A2.1",
@@ -1161,10 +1178,11 @@
     },
     {
       "level": "B2.1",
-      "verbCount": 2,
+      "verbCount": 3,
       "verbs": [
         "verzichten",
-        "verwandeln"
+        "verwandeln",
+        "dienen"
       ],
       "groupNameGerman": "Konzepte",
       "groupNameSpanish": "Conceptos",
