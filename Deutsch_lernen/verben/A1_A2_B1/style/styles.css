@@ -4526,12 +4526,16 @@ body.compact-view .cards-container {
     font-weight: bold;
     margin-left: 6px;
     vertical-align: middle;
-    text-transform: uppercase;
+    text-transform: none;
     white-space: nowrap;
     background: #0284c7;
     color: #ffffff;
     border: 1px solid #38bdf8;
     pointer-events: none;
+}
+
+.case-tag-LiD {
+    text-transform: none !important;
 }
 
 .hide-lid .lid-badge {
