@@ -126,7 +126,7 @@
     let currentIndexInModal = 0;
     let storyClickCounter = 0;
     let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
-    const CACHE_KEY = 'verbAppCache_v36_ik_lid_refresh';
+    const CACHE_KEY = 'verbAppCache_v37_sport_refresh';
     const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
     let cachePersistTimeout = null;
 
