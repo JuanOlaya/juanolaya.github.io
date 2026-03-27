@@ -227,6 +227,30 @@
             min-width: 300px;
         }
 
+        .group-indicator-content {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .lid-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            background: rgba(245, 158, 11, 0.18);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            white-space: nowrap;
+        }
+
         /* Grid Layout */
         .infographic-grid {
             display: grid;
@@ -818,6 +842,28 @@
             letter-spacing: 0.025em;
         }
 
+        .level-header-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .level-header-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .level-header-translation {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.82);
+            white-space: nowrap;
+        }
+
         .level-content {
             padding: 0;
             flex-grow: 1;
@@ -845,7 +891,10 @@
         }
 
         .kompakt-german-word {
-            display: block;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
             font-weight: 700;
             color: #CBF6DB;
             /* Pale Mint Green - DARK MODE TEXT */
@@ -871,10 +920,13 @@
         .audio-icon {
             color: #e2e8f0;
             cursor: pointer;
-            margin-left: 6px;
             opacity: 0.7;
             font-size: 0.9em;
             transition: opacity 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
         }
 
         .audio-icon:hover {
@@ -1019,6 +1071,14 @@
             <label class="switch-label" for="view-toggle">Ansicht: Kompakt</label>
             <label class="switch">
                 <input type="checkbox" id="view-toggle" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="active-recall-toggle">
+            <label class="switch-label" for="lid-switch">Leben in Deutschland<span
+                    class="label-translation">(LiD)</span></label>
+            <label class="switch">
+                <input type="checkbox" id="lid-switch" checked>
                 <span class="slider"></span>
             </label>
         </div>
@@ -1560,8 +1620,8 @@
                 ]
             },
             {
-                id: "lid_politik",
-                title: "LiD: Politik & Demokratie",
+                id: "lid_demokratie",
+                title: "Demokratie",
                 level: "B1",
                 nouns: [
                     { article: "der", word: "Bundestag", emoji: "🏛️", translation_es: "Parlamento Federal", translation_en: "Federal Parliament", example_de: "Der Bundestag beschließt Gesetze.", example_es: "El Parlamento aprueba leyes." },
@@ -1570,21 +1630,34 @@
                     { article: "die", word: "Demokratie", emoji: "🗳️", translation_es: "democracia", translation_en: "democracy", example_de: "Wir leben in einer Demokratie.", example_es: "Vivimos en una democracia." },
                     { article: "die", word: "Regierung", emoji: "🏛️", translation_es: "gobierno", translation_en: "government", example_de: "Die Regierung plant neue Gesetze.", example_es: "El gobierno planea nuevas leyes." },
                     { article: "die", word: "Partei", emoji: "🚩", translation_es: "partido político", translation_en: "political party", example_de: "Ich bin Mitglied in einer Partei.", example_es: "Soy miembro de un partido." },
-                    { article: "die", word: "Koalition", emoji: "🤝", translation_es: "coalición", translation_en: "coalition", example_de: "Die Parteien bilden eine Koalition.", example_es: "Los partidos forman una coalición." },
-                    { article: "die", word: "Opposition", emoji: "🛑", translation_es: "oposición", translation_en: "opposition", example_de: "Die Opposition kontrolliert die Regierung.", example_es: "La oposición controla al gobierno." },
-                    { article: "die", word: "Mehrheit", emoji: "📊", translation_es: "mayoría", translation_en: "majority", example_de: "Für das Gesetz braucht man eine Mehrheit.", example_es: "Para la ley se necesita una mayoría." },
-                    { article: "die", word: "Minderheit", emoji: "🤏", translation_es: "minoría", translation_en: "minority", example_de: "Die Rechte der Minderheit werden geschützt.", example_es: "Los derechos de la minoría son protegidos." },
-                    { article: "die", word: "Gewaltenteilung", emoji: "⚖️", translation_es: "división de poderes", translation_en: "separation of powers", example_de: "Gewaltenteilung verhindert Machtmissbrauch.", example_es: "La división de poderes previene el abuso de poder." },
+                    { article: "die", word: "Opposition", emoji: "🛑", translation_es: "oposición", translation_en: "opposition", example_de: "Die Opposition kontrolliert die Regierung.", example_es: "La oposición controla al gobierno." }
+                ]
+            },
+            {
+                id: "lid_wahlen",
+                title: "Wahlen",
+                level: "B1",
+                nouns: [
                     { article: "die", word: "Wahl", emoji: "🗳️", translation_es: "elección", translation_en: "election", example_de: "Bei der Wahl kann man entscheiden.", example_es: "En la elección se puede decidir." },
                     { article: "die", word: "Wählerin", emoji: "🗳️", translation_es: "votante (mujer)", translation_en: "voter (female)", example_de: "Die Wählerin gibt ihre Stimme ab.", example_es: "La votante emite su voto." },
                     { article: "der", word: "Wähler", emoji: "🗳️", translation_es: "votante (hombre)", translation_en: "voter (male)", example_de: "Der Wähler geht zur Wahl.", example_es: "El votante va a votar." },
-                    { article: "die", word: "Stimme", emoji: "🗣️", translation_es: "voz / voto", translation_en: "voice / vote", example_de: "Meine Stimme zählt.", example_es: "Mi voto cuenta." },
                     { article: "die", word: "Stimmabgabe", emoji: "🗳️", translation_es: "emisión del voto", translation_en: "casting of vote", example_de: "Die Stimmabgabe ist geheim.", example_es: "La emisión del voto es secreta." }
                 ]
             },
             {
-                id: "lid_rechte",
-                title: "LiD: Rechte & Pflichten",
+                id: "lid_mehrheiten",
+                title: "Mehrheiten",
+                level: "B1",
+                nouns: [
+                    { article: "die", word: "Koalition", emoji: "🤝", translation_es: "coalición", translation_en: "coalition", example_de: "Die Parteien bilden eine Koalition.", example_es: "Los partidos forman una coalición." },
+                    { article: "die", word: "Mehrheit", emoji: "📊", translation_es: "mayoría", translation_en: "majority", example_de: "Für das Gesetz braucht man eine Mehrheit.", example_es: "Para la ley se necesita una mayoría." },
+                    { article: "die", word: "Minderheit", emoji: "🤏", translation_es: "minoría", translation_en: "minority", example_de: "Die Rechte der Minderheit werden geschützt.", example_es: "Los derechos de la minoría son protegidos." },
+                    { article: "die", word: "Stimme", emoji: "🗣️", translation_es: "voz / voto", translation_en: "voice / vote", example_de: "Meine Stimme zählt.", example_es: "Mi voto cuenta." }
+                ]
+            },
+            {
+                id: "lid_freiheit",
+                title: "Freiheit",
                 level: "B1",
                 nouns: [
                     { article: "die", word: "Würde", emoji: "🤲", translation_es: "dignidad", translation_en: "dignity", example_de: "Die Würde des Menschen ist unantastbar.", example_es: "La dignidad del ser humano es inviolable." },
@@ -1593,7 +1666,14 @@
                     { article: "die (pl)", word: "Versammlungsfreiheit", emoji: "📢", translation_es: "libertad de reunión", translation_en: "freedom of assembly", example_de: "Wir haben das Recht auf Versammlungsfreiheit.", example_es: "Tenemos derecho a la libertad de reunión." },
                     { article: "die", word: "Glaubensfreiheit", emoji: "🛐", translation_es: "libertad de creencias", translation_en: "freedom of belief", example_de: "Glaubensfreiheit ist ein Grundrecht.", example_es: "La libertad de creencias es un derecho fundamental." },
                     { article: "die", word: "Gewissensfreiheit", emoji: "💭", translation_es: "libertad de conciencia", translation_en: "freedom of conscience", example_de: "Jeder hat Gewissensfreiheit.", example_es: "Todos tienen libertad de conciencia." },
-                    { article: "die", word: "Gleichberechtigung", emoji: "⚖️", translation_es: "igualdad de derechos", translation_en: "equal rights", example_de: "Frauen und Männer haben Gleichberechtigung.", example_es: "Mujeres y hombres tienen igualdad de derechos." },
+                    { article: "die", word: "Gleichberechtigung", emoji: "⚖️", translation_es: "igualdad de derechos", translation_en: "equal rights", example_de: "Frauen und Männer haben Gleichberechtigung.", example_es: "Mujeres y hombres tienen igualdad de derechos." }
+                ]
+            },
+            {
+                id: "lid_pflichten",
+                title: "Pflichten",
+                level: "B1",
+                nouns: [
                     { article: "die (pl)", word: "Grundrechte", emoji: "📜", translation_es: "derechos fundamentales", translation_en: "fundamental rights", example_de: "Die Grundrechte schützen uns.", example_es: "Los derechos fundamentales nos protegen." },
                     { article: "die", word: "Schulpflicht", emoji: "🎒", translation_es: "escolarización obligatoria", translation_en: "compulsory schooling", example_de: "In Deutschland gibt es Schulpflicht.", example_es: "En Alemania hay escolarización obligatoria." },
                     { article: "die", word: "Steuer", emoji: "💸", translation_es: "impuesto", translation_en: "tax", example_de: "Jeder muss Steuern zahlen.", example_es: "Todos deben pagar impuestos." },
@@ -1602,7 +1682,7 @@
             },
             {
                 id: "lid_geschichte",
-                title: "LiD: Geschichte & Gesellschaft",
+                title: "Geschichte",
                 level: "B1",
                 nouns: [
                     { article: "die", word: "Wiedervereinigung", emoji: "🤝", translation_es: "reunificación", translation_en: "reunification", example_de: "Wir feiern die Wiedervereinigung am 3. Oktober.", example_es: "Celebramos la reunificación el 3 de octubre." },
@@ -1611,7 +1691,14 @@
                     { article: "der", word: "Weltkrieg", emoji: "💣", translation_es: "Guerra Mundial", translation_en: "World War", example_de: "Der Zweite Weltkrieg endete 1945.", example_es: "La Segunda Guerra Mundial terminó en 1945." },
                     { article: "das", word: "Wirtschaftswunder", emoji: "📈", translation_es: "milagro económico", translation_en: "economic miracle", example_de: "Das Wirtschaftswunder brachte Wohlstand.", example_es: "El milagro económico trajo prosperidad." },
                     { article: "die", word: "Nationalhymne", emoji: "🎵", translation_es: "himno nacional", translation_en: "national anthem", example_de: "Wir singen die Nationalhymne.", example_es: "Cantamos el himno nacional." },
-                    { article: "das", word: "Wappen", emoji: "🦅", translation_es: "escudo de armas", translation_en: "coat of arms", example_de: "Der Adler ist im Wappen.", example_es: "El águila está en el escudo." },
+                    { article: "das", word: "Wappen", emoji: "🦅", translation_es: "escudo de armas", translation_en: "coat of arms", example_de: "Der Adler ist im Wappen.", example_es: "El águila está en el escudo." }
+                ]
+            },
+            {
+                id: "lid_gesellschaft",
+                title: "Gesellschaft",
+                level: "B1",
+                nouns: [
                     { article: "das", word: "Ehrenamt", emoji: "🤝", translation_es: "voluntariado", translation_en: "volunteering", example_de: "Viele Menschen haben ein Ehrenamt.", example_es: "Muchas personas tienen un voluntariado." },
                     { article: "der", word: "Verein", emoji: "⚽", translation_es: "asociación / club", translation_en: "association / club", example_de: "Ich bin im Sportverein.", example_es: "Estoy en el club deportivo." },
                     { article: "die", word: "Gemeinde", emoji: "🏘️", translation_es: "municipio", translation_en: "municipality", example_de: "Die Gemeinde organisiert das Fest.", example_es: "El municipio organiza la fiesta." },
@@ -1622,8 +1709,8 @@
                 ]
             },
             {
-                id: "lid_justiz",
-                title: "LiD: Recht & Justiz",
+                id: "lid_recht",
+                title: "Recht",
                 level: "B1",
                 nouns: [
                     { article: "das", word: "Gesetz", emoji: "⚖️", translation_es: "ley", translation_en: "law", example_de: "Alle müssen das Gesetz achten.", example_es: "Todos deben respetar la ley." },
@@ -1718,6 +1805,905 @@
             }
         );
 
+        // Reorganize non-LiD nouns into cleaner theme groups while preserving
+        // the existing noun objects, examples, and translations.
+        const normalizeThemeKey = (value) => value
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .split(String.fromCharCode(223))
+            .join('ss');
+
+        const originalNonLiDGroups = nounGroups.filter(group => !group.id.startsWith('lid_'));
+        const lidThemeTranslations = {
+            lid_demokratie: { title_es: "Democracia", title_en: "Democracy" },
+            lid_wahlen: { title_es: "Elecciones", title_en: "Elections" },
+            lid_mehrheiten: { title_es: "Mayorías", title_en: "Majorities" },
+            lid_freiheit: { title_es: "Libertad", title_en: "Freedom" },
+            lid_pflichten: { title_es: "Deberes", title_en: "Duties" },
+            lid_geschichte: { title_es: "Historia", title_en: "History" },
+            lid_gesellschaft: { title_es: "Sociedad", title_en: "Society" },
+            lid_recht: { title_es: "Derecho", title_en: "Law" }
+        };
+        const lidThemeGroups = nounGroups
+            .filter(group => group.id.startsWith('lid_'))
+            .map(group => ({
+                ...group,
+                ...(lidThemeTranslations[group.id] || {})
+            }));
+        const nonLiDByKey = new Map();
+
+        originalNonLiDGroups.forEach(group => {
+            group.nouns.forEach(noun => {
+                const key = normalizeThemeKey(`${noun.article}|${noun.word}`);
+                if (!nonLiDByKey.has(key)) {
+                    nonLiDByKey.set(key, noun);
+                }
+            });
+        });
+
+        const pickThemeNouns = (keys) => keys.map((key) => {
+            const normalizedKey = normalizeThemeKey(key);
+            const noun = nonLiDByKey.get(normalizedKey);
+            if (!noun) {
+                throw new Error(`Missing noun for theme regrouping: ${key}`);
+            }
+            return noun;
+        });
+
+        const reorganizedNonLiDThemes = [
+            {
+                id: "familie",
+                title: "Familie",
+                title_es: "Familia",
+                title_en: "Family",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "der|vater", "die|mutter", "die|eltern", "der|sohn", "die|tochter",
+                    "der|bruder", "die|schwester", "die|geschwister", "der|opa", "die|oma"
+                ])
+            },
+            {
+                id: "menschen",
+                title: "Menschen",
+                title_es: "Personas",
+                title_en: "People",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "der|mann", "die|frau", "das|kind", "das|baby", "der|freund",
+                    "die|freundin", "der|benutzer", "der|einwohner", "die|einwohnerin"
+                ])
+            },
+            {
+                id: "berufe",
+                title: "Berufe",
+                title_es: "Oficios",
+                title_en: "Jobs",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "der|arzt", "die|arztin", "der|bauer", "der|backer", "die|backerin",
+                    "der|elektriker", "die|elektrikerin", "der|fahrer", "die|fahrerin",
+                    "der|feuerwehrmann", "die|feuerwehrfrau", "der|friseur", "die|friseurin",
+                    "der|informatiker", "die|informatikerin", "der|kellner", "die|kellnerin",
+                    "der|koch", "die|kochin", "der|krankenpfleger", "die|krankenschwester",
+                    "der|mechaniker", "die|mechanikerin", "der|polizist", "die|polizistin",
+                    "der|sekretar", "die|sekretaurin", "der|verkaufer", "die|verkauferin",
+                    "der|professor", "die|professorin", "der|lehrer", "die|lehrerin",
+                    "die|malerin"
+                ])
+            },
+            {
+                id: "bildung",
+                title: "Bildung",
+                title_es: "Estudios",
+                title_en: "Study",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "die|universitat", "die|hochschule", "der|student", "die|studentin",
+                    "die|vorlesung", "das|seminar", "der|kurs", "die|bibliothek",
+                    "das|buch", "das|heft", "der|stift", "der|bleistift",
+                    "der|radiergummi", "das|lineal", "die|schere", "das|papier",
+                    "die|prufung", "der|test", "die|hausaufgabe", "die|aufgabe",
+                    "die|note", "das|zeugnis", "das|diplom", "das|studium", "das|lernen"
+                ])
+            },
+            {
+                id: "haus",
+                title: "Haus",
+                title_es: "Casa",
+                title_en: "Home",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "das|haus", "der|eingang", "das|fenster", "die|tur",
+                    "das|zimmer", "die|kuche", "das|bad"
+                ])
+            },
+            {
+                id: "moebel",
+                title: "Möbel",
+                title_es: "Muebles",
+                title_en: "Furniture",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "der|tisch", "der|stuhl", "das|bett", "der|schrank",
+                    "das|sofa", "die|lampe", "der|teppich", "der|spiegel"
+                ])
+            },
+            {
+                id: "wohnen",
+                title: "Wohnen",
+                title_es: "Vivienda",
+                title_en: "Housing",
+                level: "A1-B1",
+                nouns: pickThemeNouns([
+                    "die|wohnung", "der|strom", "der|rauchmelder", "die|haushaltshilfe"
+                ])
+            },
+            {
+                id: "stadt",
+                title: "Stadt",
+                title_es: "Ciudad",
+                title_en: "City",
+                level: "A1-B1",
+                nouns: pickThemeNouns([
+                    "die|stadt", "die|strasse", "der|platz", "der|markt", "die|bank",
+                    "die|post", "die|schule", "das|cafe", "das|restaurant", "das|kino",
+                    "das|hotel", "das|krankenhaus", "die|polizei", "das|dorf",
+                    "der|larm", "die|gemeinde"
+                ])
+            },
+            {
+                id: "natur",
+                title: "Natur",
+                title_es: "Naturaleza",
+                title_en: "Nature",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "der|baum", "die|blume", "der|garten", "der|park", "die|sonne",
+                    "das|meer", "das|land", "das|tier", "der|hund", "die|katze"
+                ])
+            },
+            {
+                id: "verkehr",
+                title: "Verkehr",
+                title_es: "Tráfico",
+                title_en: "Traffic",
+                level: "A1-B1",
+                nouns: pickThemeNouns([
+                    "der|bus", "der|zug", "das|auto", "das|fahrrad", "der|verkehr",
+                    "der|unfall", "der|stau", "die|umleitung", "die|verspatung",
+                    "die|fahrspur", "die|autobahn", "die|sperrung"
+                ])
+            },
+            {
+                id: "reisen",
+                title: "Reisen",
+                title_es: "Viajes",
+                title_en: "Travel",
+                level: "A1-B1",
+                nouns: pickThemeNouns([
+                    "der|bahnhof", "die|bushaltestelle", "der|fahrplan", "die|fahrkarte",
+                    "der|bahnsteig", "das|gleis", "der|anschluss", "die|strecke",
+                    "die|abfahrt", "die|ankunft"
+                ])
+            },
+            {
+                id: "essen",
+                title: "Essen",
+                title_es: "Comida",
+                title_en: "Food",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "der|apfel", "die|banane", "das|brot", "das|fleisch", "der|fisch",
+                    "das|ei", "der|kase", "die|wurst", "der|salat", "das|obst",
+                    "das|gemuse", "der|zucker", "das|salz", "der|pfeffer"
+                ])
+            },
+            {
+                id: "trinken",
+                title: "Trinken",
+                title_es: "Bebidas",
+                title_en: "Drinks",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "die|milch", "das|wasser", "der|kaffee", "der|tee", "das|bier", "der|wein"
+                ])
+            },
+            {
+                id: "kaufen",
+                title: "Kaufen",
+                title_es: "Compras",
+                title_en: "Shopping",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "der|supermarkt", "der|laden", "die|backerei", "die|metzgerei",
+                    "die|apotheke", "der|kunde", "die|kundin", "die|einkaufsliste",
+                    "der|einkaufswagen", "der|korb", "die|tasche", "die|plastiktute",
+                    "die|umkleidekabine", "die|ruckgabe", "die|offnungszeiten",
+                    "der|schlussverkauf"
+                ])
+            },
+            {
+                id: "produkte",
+                title: "Produkte",
+                title_es: "Productos",
+                title_en: "Products",
+                level: "A1-B1",
+                nouns: pickThemeNouns([
+                    "das|produkt", "die|ware", "die|marke", "das|angebot",
+                    "die|qualitat", "die|grosse", "die|farbe", "die|garantie"
+                ])
+            },
+            {
+                id: "geld",
+                title: "Geld",
+                title_es: "Dinero",
+                title_en: "Money",
+                level: "A1-B1",
+                nouns: pickThemeNouns([
+                    "das|geld", "der|euro", "der|cent", "der|preis", "die|rechnung",
+                    "die|kasse", "der|rabatt", "die|kreditkarte", "das|bargeld",
+                    "das|wechselgeld", "die|gebuhr", "der|beitrag", "die|kosten"
+                ])
+            },
+            {
+                id: "gesundheit",
+                title: "Gesundheit",
+                title_es: "Salud",
+                title_en: "Health",
+                level: "A1-B1",
+                nouns: pickThemeNouns([
+                    "das|rezept", "der|husten", "der|schnupfen", "die|versicherung",
+                    "die|krankenversicherung", "der|notfall", "der|notarzt",
+                    "der|krankenwagen", "das|beruhigungsmittel", "die (pl)|tropfen"
+                ])
+            },
+            {
+                id: "medien",
+                title: "Medien",
+                title_es: "Medios",
+                title_en: "Media",
+                level: "A1-B1",
+                nouns: pickThemeNouns([
+                    "die|nachrichten", "die|werbung", "das|horspiel", "der|krimi",
+                    "das|radio", "das|telefon", "das|e-mail", "das|fax"
+                ])
+            },
+            {
+                id: "freizeit",
+                title: "Freizeit",
+                title_es: "Ocio",
+                title_en: "Leisure",
+                level: "A1-B1",
+                nouns: pickThemeNouns([
+                    "die|veranstaltung", "das|fest", "die|feier", "die|einweihung",
+                    "der|jubilaum", "die|eintrittskarte", "das|gewinnspiel",
+                    "der|verein", "der|spass"
+                ])
+            },
+            {
+                id: "technik",
+                title: "Technik",
+                title_es: "Tecnología",
+                title_en: "Tech",
+                level: "A1-B1",
+                nouns: pickThemeNouns([
+                    "die|technologie", "die|kunstliche intelligenz", "das|handy",
+                    "das|internet", "das|smartphone", "das|tablet", "der|computer",
+                    "der|laptop", "der|drucker", "die|einstellung", "die|verbindung",
+                    "das|kennwort", "die|datei", "der|fehler", "die|taste"
+                ])
+            },
+            {
+                id: "kleidung",
+                title: "Kleidung",
+                title_es: "Ropa",
+                title_en: "Clothes",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "das|t-shirt", "die|hose", "der|pullover", "die|jacke",
+                    "das|kleid", "der|rock", "das|hemd", "die|bluse", "der|mantel"
+                ])
+            },
+            {
+                id: "accessoires",
+                title: "Accessoires",
+                title_es: "Accesorios",
+                title_en: "Accessories",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "die|brille", "der|hut", "die|mutze", "der|schal"
+                ])
+            },
+            {
+                id: "schuhe",
+                title: "Schuhe",
+                title_es: "Zapatos",
+                title_en: "Shoes",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "der|schuh", "die|socke"
+                ])
+            },
+            {
+                id: "koerper",
+                title: "Körper",
+                title_es: "Cuerpo",
+                title_en: "Body",
+                level: "A1",
+                image: "../images/body_parts_illustration.png",
+                nouns: pickThemeNouns([
+                    "der|kopf", "das|auge", "die|nase", "der|mund", "das|ohr",
+                    "die|hand", "der|finger", "der|arm", "das|bein", "der|fuss",
+                    "der|bauch", "der|rucken", "das|haar", "der|zahn"
+                ])
+            },
+            {
+                id: "zeit",
+                title: "Zeit",
+                title_es: "Tiempo",
+                title_en: "Time",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "der|tag", "die|woche", "der|monat", "das|jahr", "die|uhr",
+                    "die|minute", "die|stunde", "der|morgen", "der|abend",
+                    "die|nacht", "das|wochenende", "das|datum", "die|zeit"
+                ])
+            },
+            {
+                id: "gefuehle",
+                title: "Gefühle",
+                title_es: "Emociones",
+                title_en: "Emotions",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "die|liebe", "das|gluck", "die|angst", "der|frieden",
+                    "die|freude", "die|geduld", "der|traum"
+                ])
+            },
+            {
+                id: "ideen",
+                title: "Ideen",
+                title_es: "Ideas",
+                title_en: "Ideas",
+                level: "A1",
+                nouns: pickThemeNouns([
+                    "die|arbeit", "die|freiheit", "die|idee", "das|problem",
+                    "die|hilfe", "der|erfolg", "die|neuigkeiten", "die|vorsicht"
+                ])
+            },
+            {
+                id: "amt",
+                title: "Amt",
+                title_es: "Gestión",
+                title_en: "Admin",
+                level: "A1-B1",
+                nouns: pickThemeNouns([
+                    "die|unterlagen", "der|ausweis", "die|bewerbung"
+                ])
+            }
+        ];
+
+        const specificNonLiDThemes = [
+            {
+                id: "familie",
+                title: "Familie",
+                title_es: "Familia",
+                title_en: "Family",
+                level: "A1",
+                nouns: pickThemeNouns(["der|vater", "die|mutter", "die|eltern", "der|opa", "die|oma"])
+            },
+            {
+                id: "geschwister",
+                title: "Geschwister",
+                title_es: "Hermanos",
+                title_en: "Siblings",
+                level: "A1",
+                nouns: pickThemeNouns(["der|sohn", "die|tochter", "der|bruder", "die|schwester", "die|geschwister"])
+            },
+            {
+                id: "menschen",
+                title: "Menschen",
+                title_es: "Personas",
+                title_en: "People",
+                level: "A1",
+                nouns: pickThemeNouns(["der|mann", "die|frau", "das|kind", "das|baby", "der|freund", "die|freundin", "der|benutzer"])
+            },
+            {
+                id: "bewohner",
+                title: "Bewohner",
+                title_es: "Habitantes",
+                title_en: "Residents",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["der|einwohner", "die|einwohnerin"])
+            },
+            {
+                id: "medizinberufe",
+                title: "Medizin",
+                title_es: "Sanidad",
+                title_en: "Medical",
+                level: "A1",
+                nouns: pickThemeNouns(["der|arzt", "die|arztin", "der|krankenpfleger", "die|krankenschwester"])
+            },
+            {
+                id: "lehre",
+                title: "Lehre",
+                title_es: "Docencia",
+                title_en: "Teaching",
+                level: "A1",
+                nouns: pickThemeNouns(["der|professor", "die|professorin", "der|lehrer", "die|lehrerin"])
+            },
+            {
+                id: "service",
+                title: "Service",
+                title_es: "Servicio",
+                title_en: "Service",
+                level: "A1",
+                nouns: pickThemeNouns(["der|kellner", "die|kellnerin", "der|verkaufer", "die|verkauferin", "der|sekretar", "die|sekretaurin"])
+            },
+            {
+                id: "itberufe",
+                title: "IT",
+                title_es: "Informática",
+                title_en: "IT",
+                level: "A1",
+                nouns: pickThemeNouns(["der|informatiker", "die|informatikerin"])
+            },
+            {
+                id: "handwerk",
+                title: "Handwerk",
+                title_es: "Oficios",
+                title_en: "Trades",
+                level: "A1",
+                nouns: pickThemeNouns(["der|backer", "die|backerin", "der|elektriker", "die|elektrikerin", "der|mechaniker", "die|mechanikerin", "die|malerin"])
+            },
+            {
+                id: "alltagjobs",
+                title: "Arbeit",
+                title_es: "Trabajo",
+                title_en: "Work",
+                level: "A1",
+                nouns: pickThemeNouns(["der|bauer", "der|koch", "die|kochin", "der|fahrer", "die|fahrerin"])
+            },
+            {
+                id: "pflege",
+                title: "Pflege",
+                title_es: "Cuidado",
+                title_en: "Care",
+                level: "A1",
+                nouns: pickThemeNouns(["der|friseur", "die|friseurin"])
+            },
+            {
+                id: "sicherheit",
+                title: "Sicherheit",
+                title_es: "Seguridad",
+                title_en: "Safety",
+                level: "A1",
+                nouns: pickThemeNouns(["der|polizist", "die|polizistin", "der|feuerwehrmann", "die|feuerwehrfrau"])
+            },
+            {
+                id: "hochschule",
+                title: "Hochschule",
+                title_es: "Universidad",
+                title_en: "College",
+                level: "A1",
+                nouns: pickThemeNouns(["die|universitat", "die|hochschule", "der|student", "die|studentin", "das|studium", "das|seminar", "die|vorlesung"])
+            },
+            {
+                id: "lernen",
+                title: "Lernen",
+                title_es: "Estudio",
+                title_en: "Study",
+                level: "A1",
+                nouns: pickThemeNouns(["der|kurs", "die|bibliothek", "das|buch", "das|heft", "das|lernen", "die|hausaufgabe", "die|aufgabe"])
+            },
+            {
+                id: "schreiben",
+                title: "Schreiben",
+                title_es: "Escritura",
+                title_en: "Writing",
+                level: "A1",
+                nouns: pickThemeNouns(["der|stift", "der|bleistift", "der|radiergummi", "das|lineal", "die|schere", "das|papier"])
+            },
+            {
+                id: "pruefungen",
+                title: "Prüfungen",
+                title_es: "Exámenes",
+                title_en: "Exams",
+                level: "A1",
+                nouns: pickThemeNouns(["die|prufung", "der|test", "die|note", "das|zeugnis", "das|diplom"])
+            },
+            {
+                id: "haus",
+                title: "Haus",
+                title_es: "Casa",
+                title_en: "Home",
+                level: "A1",
+                nouns: pickThemeNouns(["das|haus", "der|eingang", "das|fenster", "die|tur", "das|zimmer", "die|kuche", "das|bad"])
+            },
+            {
+                id: "moebel",
+                title: "Möbel",
+                title_es: "Muebles",
+                title_en: "Furniture",
+                level: "A1",
+                nouns: pickThemeNouns(["der|tisch", "der|stuhl", "das|bett", "der|schrank", "das|sofa", "der|teppich", "der|spiegel"])
+            },
+            {
+                id: "wohnen",
+                title: "Wohnen",
+                title_es: "Vivienda",
+                title_en: "Housing",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["die|wohnung", "der|strom", "der|rauchmelder", "die|haushaltshilfe", "die|lampe"])
+            },
+            {
+                id: "orte",
+                title: "Orte",
+                title_es: "Lugares",
+                title_en: "Places",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["die|stadt", "der|platz", "der|markt", "die|bank", "die|post", "die|schule", "die|gemeinde"])
+            },
+            {
+                id: "ausgehen",
+                title: "Ausgehen",
+                title_es: "Salida",
+                title_en: "Outing",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["das|cafe", "das|restaurant", "das|kino", "das|hotel"])
+            },
+            {
+                id: "dienste",
+                title: "Dienste",
+                title_es: "Servicios",
+                title_en: "Services",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["das|krankenhaus", "die|polizei", "die|anzeige", "die|besprechung", "der|larm", "das|dorf", "die|strasse"])
+            },
+            {
+                id: "natur",
+                title: "Natur",
+                title_es: "Naturaleza",
+                title_en: "Nature",
+                level: "A1",
+                nouns: pickThemeNouns(["der|baum", "die|blume", "der|garten", "der|park", "die|sonne", "das|meer", "das|land"])
+            },
+            {
+                id: "tiere",
+                title: "Tiere",
+                title_es: "Animales",
+                title_en: "Animals",
+                level: "A1",
+                nouns: pickThemeNouns(["das|tier", "der|hund", "die|katze"])
+            },
+            {
+                id: "verkehr",
+                title: "Verkehr",
+                title_es: "Tráfico",
+                title_en: "Traffic",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["der|bus", "der|zug", "das|auto", "das|fahrrad", "der|verkehr", "der|unfall"])
+            },
+            {
+                id: "strassenverkehr",
+                title: "Straßen",
+                title_es: "Calles",
+                title_en: "Roads",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["der|stau", "die|umleitung", "die|verspatung", "die|fahrspur", "die|autobahn", "die|sperrung"])
+            },
+            {
+                id: "reisen",
+                title: "Reisen",
+                title_es: "Viajes",
+                title_en: "Travel",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["der|bahnhof", "die|bushaltestelle", "der|fahrplan", "die|fahrkarte", "der|bahnsteig", "das|gleis", "der|anschluss"])
+            },
+            {
+                id: "reiseweg",
+                title: "Route",
+                title_es: "Ruta",
+                title_en: "Route",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["die|strecke", "die|abfahrt", "die|ankunft"])
+            },
+            {
+                id: "obst",
+                title: "Obst",
+                title_es: "Fruta",
+                title_en: "Fruit",
+                level: "A1",
+                nouns: pickThemeNouns(["der|apfel", "die|banane", "das|obst", "das|gemuse"])
+            },
+            {
+                id: "mahlzeit",
+                title: "Mahlzeit",
+                title_es: "Comida",
+                title_en: "Meal",
+                level: "A1",
+                nouns: pickThemeNouns(["das|brot", "das|fleisch", "der|fisch", "das|ei", "der|salat"])
+            },
+            {
+                id: "zutaten",
+                title: "Zutaten",
+                title_es: "Ingredientes",
+                title_en: "Ingredients",
+                level: "A1",
+                nouns: pickThemeNouns(["der|kase", "die|wurst", "der|zucker", "das|salz", "der|pfeffer"])
+            },
+            {
+                id: "trinken",
+                title: "Trinken",
+                title_es: "Bebidas",
+                title_en: "Drinks",
+                level: "A1",
+                nouns: pickThemeNouns(["die|milch", "das|wasser", "der|kaffee", "der|tee", "das|bier", "der|wein"])
+            },
+            {
+                id: "geschaefte",
+                title: "Geschäfte",
+                title_es: "Tiendas",
+                title_en: "Stores",
+                level: "A1",
+                nouns: pickThemeNouns(["der|supermarkt", "der|laden", "die|backerei", "die|metzgerei", "die|apotheke"])
+            },
+            {
+                id: "einkauf",
+                title: "Einkauf",
+                title_es: "Compra",
+                title_en: "Purchase",
+                level: "A1",
+                nouns: pickThemeNouns(["der|kunde", "die|kundin", "die|einkaufsliste", "der|einkaufswagen", "der|korb", "die|tasche"])
+            },
+            {
+                id: "servicekauf",
+                title: "Service",
+                title_es: "Servicio",
+                title_en: "Service",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["die|plastiktute", "die|umkleidekabine", "die|ruckgabe", "die|offnungszeiten", "der|schlussverkauf"])
+            },
+            {
+                id: "waren",
+                title: "Waren",
+                title_es: "Productos",
+                title_en: "Goods",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["das|produkt", "die|ware", "die|marke", "das|angebot"])
+            },
+            {
+                id: "merkmale",
+                title: "Merkmale",
+                title_es: "Detalles",
+                title_en: "Features",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["die|qualitat", "die|grosse", "die|farbe", "die|garantie"])
+            },
+            {
+                id: "preise",
+                title: "Preise",
+                title_es: "Precios",
+                title_en: "Prices",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["das|geld", "der|euro", "der|cent", "der|preis", "der|rabatt"])
+            },
+            {
+                id: "zahlung",
+                title: "Zahlung",
+                title_es: "Pago",
+                title_en: "Payment",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["die|rechnung", "die|kasse", "die|kreditkarte", "das|bargeld", "das|wechselgeld"])
+            },
+            {
+                id: "abgaben",
+                title: "Abgaben",
+                title_es: "Cargos",
+                title_en: "Fees",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["die|gebuhr", "der|beitrag", "die|kosten"])
+            },
+            {
+                id: "symptome",
+                title: "Symptome",
+                title_es: "Síntomas",
+                title_en: "Symptoms",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["der|husten", "der|schnupfen"])
+            },
+            {
+                id: "medizin",
+                title: "Medizin",
+                title_es: "Medicina",
+                title_en: "Medicine",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["das|rezept", "die|versicherung", "die|krankenversicherung", "das|beruhigungsmittel", "die (pl)|tropfen"])
+            },
+            {
+                id: "notfall",
+                title: "Notfall",
+                title_es: "Urgencia",
+                title_en: "Emergency",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["der|notfall", "der|notarzt", "der|krankenwagen"])
+            },
+            {
+                id: "medien",
+                title: "Medien",
+                title_es: "Medios",
+                title_en: "Media",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["die|nachrichten", "die|werbung", "das|horspiel", "das|radio", "der|krimi"])
+            },
+            {
+                id: "kontakte",
+                title: "Kontakte",
+                title_es: "Contacto",
+                title_en: "Contact",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["das|telefon", "das|e-mail", "das|fax"])
+            },
+            {
+                id: "feiern",
+                title: "Feiern",
+                title_es: "Fiestas",
+                title_en: "Celebrations",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["das|fest", "die|feier", "die|einweihung", "der|jubilaum"])
+            },
+            {
+                id: "events",
+                title: "Events",
+                title_es: "Eventos",
+                title_en: "Events",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["die|veranstaltung", "die|eintrittskarte", "das|gewinnspiel"])
+            },
+            {
+                id: "freizeit",
+                title: "Freizeit",
+                title_es: "Ocio",
+                title_en: "Leisure",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["der|verein", "der|spass"])
+            },
+            {
+                id: "geraete",
+                title: "Geräte",
+                title_es: "Dispositivos",
+                title_en: "Devices",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["das|handy", "das|smartphone", "das|tablet", "der|computer", "der|laptop", "der|drucker"])
+            },
+            {
+                id: "internet",
+                title: "Internet",
+                title_es: "Internet",
+                title_en: "Internet",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["das|internet", "die|verbindung", "das|kennwort", "die|datei"])
+            },
+            {
+                id: "digital",
+                title: "Digital",
+                title_es: "Digital",
+                title_en: "Digital",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["die|technologie", "die|kunstliche intelligenz", "die|einstellung", "die|taste", "der|fehler"])
+            },
+            {
+                id: "oberteile",
+                title: "Oberteile",
+                title_es: "Prendas",
+                title_en: "Tops",
+                level: "A1",
+                nouns: pickThemeNouns(["das|t-shirt", "der|pullover", "die|jacke", "das|hemd", "die|bluse"])
+            },
+            {
+                id: "kleidung",
+                title: "Kleidung",
+                title_es: "Ropa",
+                title_en: "Clothes",
+                level: "A1",
+                nouns: pickThemeNouns(["die|hose", "das|kleid", "der|rock", "der|mantel"])
+            },
+            {
+                id: "accessoires",
+                title: "Accessoires",
+                title_es: "Accesorios",
+                title_en: "Accessories",
+                level: "A1",
+                nouns: pickThemeNouns(["die|brille", "der|hut", "die|mutze", "der|schal"])
+            },
+            {
+                id: "schuhe",
+                title: "Schuhe",
+                title_es: "Zapatos",
+                title_en: "Shoes",
+                level: "A1",
+                nouns: pickThemeNouns(["der|schuh", "die|socke"])
+            },
+            {
+                id: "gesicht",
+                title: "Gesicht",
+                title_es: "Cara",
+                title_en: "Face",
+                level: "A1",
+                image: "../images/body_parts_illustration.png",
+                nouns: pickThemeNouns(["der|kopf", "das|auge", "die|nase", "der|mund", "das|ohr", "das|haar", "der|zahn"])
+            },
+            {
+                id: "koerper",
+                title: "Körper",
+                title_es: "Cuerpo",
+                title_en: "Body",
+                level: "A1",
+                image: "../images/body_parts_illustration.png",
+                nouns: pickThemeNouns(["die|hand", "der|finger", "der|arm", "das|bein", "der|fuss", "der|bauch", "der|rucken"])
+            },
+            {
+                id: "kalender",
+                title: "Kalender",
+                title_es: "Calendario",
+                title_en: "Calendar",
+                level: "A1",
+                nouns: pickThemeNouns(["der|tag", "die|woche", "der|monat", "das|jahr", "das|datum"])
+            },
+            {
+                id: "uhrzeit",
+                title: "Uhrzeit",
+                title_es: "Hora",
+                title_en: "Time",
+                level: "A1",
+                nouns: pickThemeNouns(["die|uhr", "die|minute", "die|stunde"])
+            },
+            {
+                id: "tageszeit",
+                title: "Tageszeit",
+                title_es: "Momento",
+                title_en: "Daytime",
+                level: "A1",
+                nouns: pickThemeNouns(["der|morgen", "der|abend", "die|nacht", "das|wochenende", "die|zeit"])
+            },
+            {
+                id: "gefuehle",
+                title: "Gefühle",
+                title_es: "Emociones",
+                title_en: "Emotions",
+                level: "A1",
+                nouns: pickThemeNouns(["die|liebe", "das|gluck", "die|angst", "der|frieden", "die|freude", "die|geduld", "der|traum"])
+            },
+            {
+                id: "begriffe",
+                title: "Begriffe",
+                title_es: "Conceptos",
+                title_en: "Concepts",
+                level: "A1",
+                nouns: pickThemeNouns(["die|arbeit", "die|freiheit", "die|idee", "das|problem"])
+            },
+            {
+                id: "hilfe",
+                title: "Hilfe",
+                title_es: "Ayuda",
+                title_en: "Help",
+                level: "A1",
+                nouns: pickThemeNouns(["die|hilfe", "der|erfolg", "die|neuigkeiten", "die|vorsicht"])
+            },
+            {
+                id: "amt",
+                title: "Amt",
+                title_es: "Gestión",
+                title_en: "Admin",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["die|unterlagen", "der|ausweis", "die|bewerbung"])
+            }
+        ];
+
+        nounGroups.length = 0;
+        nounGroups.push(...specificNonLiDThemes, ...lidThemeGroups);
+
     </script>
 
     <script>
@@ -1732,6 +2718,7 @@
         const groupIndicator = document.getElementById('group-indicator');
         const recallSwitch = document.getElementById('recall-switch');
         const englishSwitch = document.getElementById('english-switch');
+        const lidSwitch = document.getElementById('lid-switch');
         const searchInput = document.getElementById('search-input');
         const clearSearchBtn = document.getElementById('clear-search');
         const searchInfo = document.getElementById('search-results-info');
@@ -1753,6 +2740,14 @@
         const tipsClose = document.getElementById('tips-close');
 
         // Initial Render
+        function isLiDGroup(group) {
+            return Boolean(group && group.id && group.id.startsWith('lid_'));
+        }
+
+        function getVisibleGroups() {
+            return nounGroups.filter(group => lidSwitch.checked || !isLiDGroup(group));
+        }
+
         function init() {
             if (typeof nounGroups === 'undefined' || nounGroups.length === 0) {
                 container.innerHTML = '<p style="text-align:center; width:100%;">Daten werden geladen...</p>';
@@ -1766,6 +2761,7 @@
             nextBtn.addEventListener('click', () => changeGroup(1));
             recallSwitch.addEventListener('change', updateVisibility);
             englishSwitch.addEventListener('change', updateVisibility);
+            lidSwitch.addEventListener('change', handleLiDToggle);
             searchInput.addEventListener('input', handleSearch);
             clearSearchBtn.addEventListener('click', clearSearch);
 
@@ -1807,9 +2803,20 @@
         }
 
         function renderGroup(index) {
-            currentGroupIndex = index;
-            const group = nounGroups[index];
-            groupIndicator.textContent = group.title;
+            const visibleGroups = getVisibleGroups();
+
+            if (visibleGroups.length === 0) {
+                currentGroupIndex = 0;
+                groupIndicator.innerHTML = '<span class="group-indicator-content"><span>Keine Gruppen sichtbar</span></span>';
+                container.innerHTML = '<p style="text-align:center; width:100%;">Aktiviere LiD, um die LiD-Gruppen anzuzeigen.</p>';
+                updateNavigation();
+                return;
+            }
+
+            currentGroupIndex = Math.max(0, Math.min(index, visibleGroups.length - 1));
+            const group = visibleGroups[currentGroupIndex];
+            const lidBadge = isLiDGroup(group) ? '<span class="lid-badge">LiD</span>' : '';
+            groupIndicator.innerHTML = `<span class="group-indicator-content"><span>${group.title}</span>${lidBadge}</span>`;
 
             container.innerHTML = '';
 
@@ -1938,6 +2945,10 @@
                     el.classList.remove('visible');
                 }
             });
+
+            document.querySelectorAll('.level-header-translation').forEach(el => {
+                el.textContent = showEnglish ? (el.dataset.en || '') : (el.dataset.es || '');
+            });
         }
 
         function openWordModal(noun, level) {
@@ -1960,16 +2971,18 @@
         function changeGroup(direction) {
             if (searchInput.value.trim() !== '') return; // Disable nav during search
 
+            const visibleGroups = getVisibleGroups();
             let newIndex = currentGroupIndex + direction;
-            if (newIndex >= 0 && newIndex < nounGroups.length) {
+            if (newIndex >= 0 && newIndex < visibleGroups.length) {
                 renderGroup(newIndex);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
         function updateNavigation() {
-            prevBtn.disabled = currentGroupIndex === 0;
-            nextBtn.disabled = currentGroupIndex === nounGroups.length - 1;
+            const visibleGroups = getVisibleGroups();
+            prevBtn.disabled = visibleGroups.length === 0 || currentGroupIndex === 0;
+            nextBtn.disabled = visibleGroups.length === 0 || currentGroupIndex === visibleGroups.length - 1;
 
             // Hide nav if searching
             if (searchInput.value.trim() !== '') {
@@ -1977,6 +2990,27 @@
             } else {
                 document.querySelector('.navigation-wrapper').style.display = 'flex';
             }
+        }
+
+        function handleLiDToggle() {
+            if (searchInput.value.trim() !== '') {
+                handleSearch();
+                return;
+            }
+
+            if (isCompactMode) {
+                handleSearch();
+                return;
+            }
+
+            const visibleGroups = getVisibleGroups();
+            if (visibleGroups.length === 0) {
+                renderGroup(0);
+                return;
+            }
+
+            currentGroupIndex = Math.min(currentGroupIndex, visibleGroups.length - 1);
+            renderGroup(currentGroupIndex);
         }
 
         // Search Logic
@@ -1993,7 +3027,7 @@
             container.innerHTML = '';
             let matchCount = 0;
 
-            nounGroups.forEach(group => {
+            getVisibleGroups().forEach(group => {
                 group.nouns.forEach(noun => {
                     const de = noun.word.toLowerCase();
                     const es = noun.translation_es.toLowerCase();
@@ -2076,29 +3110,37 @@
             }
         }
 
-        function renderContentGrid(groupsToRender = nounGroups) {
+        function renderContentGrid(groupsToRender = getVisibleGroups()) {
             gridContainer.innerHTML = '';
 
             groupsToRender.forEach((group, index) => {
                 const color = compactColors[index % compactColors.length];
                 const nouns = group.nouns;
 
-                // Chunk nouns into groups of 6
-                for (let i = 0; i < nouns.length; i += 6) {
-                    const chunk = nouns.slice(i, i + 6);
-                    const chunkIndex = Math.floor(i / 6) + 1;
-                    const totalChunks = Math.ceil(nouns.length / 6);
+                // Chunk nouns into groups of 7
+                for (let i = 0; i < nouns.length; i += 7) {
+                    const chunk = nouns.slice(i, i + 7);
+                    const chunkIndex = Math.floor(i / 7) + 1;
+                    const totalChunks = Math.ceil(nouns.length / 7);
 
                     const titleSuffix = totalChunks > 1 ? ` (${chunkIndex}/${totalChunks})` : '';
                     const cardTitle = group.title + titleSuffix;
 
-                    const card = createKompaktCard(chunk, cardTitle, color, group.level);
+                    const card = createKompaktCard(
+                        chunk,
+                        cardTitle,
+                        color,
+                        group.level,
+                        isLiDGroup(group),
+                        group.title_es,
+                        group.title_en
+                    );
                     gridContainer.appendChild(card);
                 }
             });
         }
 
-        function createKompaktCard(nouns, title, color, level) {
+        function createKompaktCard(nouns, title, color, level, isLiDTheme = false, titleEs = '', titleEn = '') {
             const card = document.createElement('div');
             card.className = 'level-card';
 
@@ -2106,7 +3148,35 @@
             const header = document.createElement('div');
             header.className = 'level-header';
             header.style.backgroundColor = color;
-            header.textContent = title;
+
+            const headerText = document.createElement('div');
+            headerText.className = 'level-header-text';
+
+            const titleSpan = document.createElement('span');
+            titleSpan.textContent = title;
+            headerText.appendChild(titleSpan);
+
+            const headerMeta = document.createElement('div');
+            headerMeta.className = 'level-header-meta';
+
+            if (titleEs || titleEn) {
+                const translationSpan = document.createElement('span');
+                translationSpan.className = 'level-header-translation';
+                translationSpan.dataset.es = titleEs || '';
+                translationSpan.dataset.en = titleEn || '';
+                translationSpan.textContent = englishSwitch.checked ? (titleEn || '') : (titleEs || '');
+                headerMeta.appendChild(translationSpan);
+            }
+
+            if (isLiDTheme) {
+                const badge = document.createElement('span');
+                badge.className = 'lid-badge';
+                badge.textContent = 'LiD';
+                headerMeta.appendChild(badge);
+            }
+
+            header.appendChild(headerText);
+            header.appendChild(headerMeta);
 
             // Body
             const content = document.createElement('div');
@@ -2123,7 +3193,7 @@
                 const tdDe = document.createElement('td');
                 const wordSpan = document.createElement('span');
                 wordSpan.className = 'kompakt-german-word';
-                wordSpan.innerHTML = `<span class="article-span kompakt-article">${noun.article}</span>${noun.word}`;
+                wordSpan.innerHTML = `<span class="article-span kompakt-article">${noun.article}</span><span>${noun.word}</span>`;
 
                 // Add Speaker Icon to EVERY item
                 const speaker = document.createElement('span');
@@ -2187,7 +3257,7 @@
             // Filter groups
             const filteredGroups = [];
 
-            nounGroups.forEach(group => {
+            getVisibleGroups().forEach(group => {
                 const matchingNouns = group.nouns.filter(noun => {
                     const de = noun.word.toLowerCase();
                     const es = noun.translation_es.toLowerCase();
