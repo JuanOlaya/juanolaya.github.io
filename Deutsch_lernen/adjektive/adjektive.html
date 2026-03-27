@@ -2738,18 +2738,12 @@
             const header = document.createElement('div');
             header.className = 'level-header';
             header.style.backgroundColor = group.colorMain;
-            header.innerHTML = `<span>${group.title}</span><span>${getGroupIcon(group.badge)}</span>`;
+            header.innerHTML = `<span>${formatGroupTitle(group.title)}</span>`;
 
             const content = document.createElement('div');
             content.className = 'level-content';
 
             const tableHTML = `
-                <thead>
-                    <tr>
-                        <th>${currentLang === 'es' ? 'Alemán' : 'German'}</th>
-                        <th>${currentLang === 'es' ? 'Traducción' : 'Translation'}</th>
-                    </tr>
-                </thead>
                 <tbody>
                     ${group.adjectives.map(adj => createRow(adj, group, '')).join('')}
                 </tbody>
@@ -2769,7 +2763,7 @@
             card.className = 'level-card';
 
             // Title Logic
-            let displayTitle = group.title;
+            let displayTitle = formatGroupTitle(group.title);
             // Only add part number if not showing whole group?
             // In Grid view (chunked), we add part numbers.
             if (group.adjectives.length > chunkSize) {
@@ -2781,18 +2775,12 @@
             const header = document.createElement('div');
             header.className = 'level-header';
             header.style.backgroundColor = group.colorMain;
-            header.innerHTML = `<span>${displayTitle}</span><span>${getGroupIcon(group.badge)}</span>`;
+            header.innerHTML = `<span>${displayTitle}</span>`;
 
             const content = document.createElement('div');
             content.className = 'level-content';
 
             const tableHTML = `
-                <thead>
-                    <tr>
-                        <th>${currentLang === 'es' ? 'Alemán' : 'German'}</th>
-                        <th>${currentLang === 'es' ? 'Traducción' : 'Translation'}</th>
-                    </tr>
-                </thead>
                 <tbody>
                     ${chunk.map(adj => createRow(adj, group, query)).join('')}
                 </tbody>
@@ -2834,6 +2822,10 @@
             `;
         }
 
+        function formatGroupTitle(title) {
+            return title.replace(/^G\d+:\s*/, '').trim();
+        }
+
         function highlightMatch(text, query) {
             if (!query || !text) return text;
             const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -2845,21 +2837,6 @@
 
         function advExampleTrans(adj) {
             return currentLang === 'es' ? adj.example_es : (adj.english || '-');
-        }
-
-        function getGroupIcon(badge) {
-            const icons = {
-                'BASICS': '📌',
-                'FARBEN': '🎨',
-                'CHARAKTER': '🧠',
-                'ZUSTÄNDE': '🌡️',
-                'SPEZIFISCH': '👫',
-                'INDEFINIT': '🔢',
-                'KOMPARATIV': '📈',
-                'PARTIZIP': '🧩',
-                'DEUTSCHLAND': '🇩🇪'
-            };
-            return icons[badge] || '📝';
         }
 
         // Navigation
@@ -2965,7 +2942,7 @@
 
             if (!foundAdjective) return;
 
-            document.getElementById('modalCategory').textContent = foundGroup.title;
+            document.getElementById('modalCategory').textContent = formatGroupTitle(foundGroup.title);
             modalHeader.style.backgroundColor = foundGroup.colorMain;
 
             document.getElementById('modalEmoji').textContent = foundAdjective.emoji;
@@ -3083,4 +3060,3 @@
 </body>
 
 </html>
-
