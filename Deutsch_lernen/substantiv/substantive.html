@@ -692,15 +692,14 @@
         }
 
         .position-cards {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
+            width: 100%;
         }
 
         .pos-card {
-            flex: 1;
-            min-width: 220px;
+            min-width: 0;
             background: var(--card-bg);
             border: 1px solid #334155;
             /* Slate 700 */
@@ -710,6 +709,18 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 980px) {
+            .position-cards {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .position-cards {
+                grid-template-columns: 1fr;
+            }
         }
 
         .pos-card::before {
@@ -1320,6 +1331,7 @@
                     { article: "die", word: "Schule", emoji: "🏫", translation_es: "escuela", translation_en: "school", example_de: "Die Schule beginnt um 8 Uhr.", example_es: "La escuela empieza a las 8." },
                     { article: "die", word: "Sonne", emoji: "☀️", translation_es: "sol", translation_en: "sun", example_de: "Die Sonne scheint.", example_es: "El sol brilla." },
                     { article: "die", word: "Stadt", emoji: "🏙️", translation_es: "ciudad", translation_en: "city", example_de: "Ich wohne in der Stadt.", example_es: "Vivo en la ciudad." },
+                    { article: "der", word: "Lärm", emoji: "🔊", translation_es: "ruido", translation_en: "noise", example_de: "Der Lärm auf der Straße ist laut.", example_es: "El ruido en la calle es fuerte." },
                     { article: "die", word: "Straße", emoji: "🛣️", translation_es: "calle", translation_en: "street", example_de: "Die Straße ist lang.", example_es: "La calle es larga." },
                     { article: "die", word: "Wohnung", emoji: "🏠", translation_es: "apartamento", translation_en: "apartment", example_de: "Meine Wohnung ist klein.", example_es: "Mi apartamento es pequeño." },
                     { article: "das", word: "Auto", emoji: "🚗", translation_es: "coche", translation_en: "car", example_de: "Mein Auto ist blau.", example_es: "Mi coche es azul." },
