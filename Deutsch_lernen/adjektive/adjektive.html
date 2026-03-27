@@ -253,12 +253,27 @@
         .level-header {
             padding: 15px 20px;
             font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
+        }
+
+        .level-header-title {
+            text-transform: lowercase;
+            letter-spacing: 0.5px;
+            font-size: 1.85rem;
+            line-height: 1;
+        }
+
+        .level-header-translation {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.04em;
+            text-transform: none;
+            text-align: right;
         }
 
         .level-content {
@@ -322,6 +337,13 @@
             font-size: 0.9rem;
             margin-top: 4px;
             font-style: italic;
+            cursor: pointer;
+            transition: color 0.2s ease, opacity 0.2s ease;
+        }
+
+        .spanish-word:hover {
+            color: var(--text-main);
+            opacity: 1;
         }
 
         .example-clickable {
@@ -667,6 +689,17 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 700px) {
+            .level-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .level-header-translation {
+                text-align: left;
+            }
         }
     </style>
 </head>
@@ -4527,6 +4560,7 @@
         let currentLang = 'es';
         let isCompactMode = true; // True = Grid (Kompakt), False = Single (Alt)
         let currentGroupIndex = 0;
+        const MAX_ITEMS_PER_CARD = 7;
 
         // --- FUNCTIONS ---
         function toggleViewMode() {
@@ -4594,7 +4628,7 @@
             data.forEach((group) => {
                 if (!group.adjectives || group.adjectives.length === 0) return;
 
-                const chunkSize = 6;
+                const chunkSize = MAX_ITEMS_PER_CARD;
                 // If query is active, flattening might be better, but user liked "chunks".
                 // We'll stick to chunk logic but filter content.
 
@@ -4644,7 +4678,7 @@
             const header = document.createElement('div');
             header.className = 'level-header';
             header.style.backgroundColor = group.colorMain;
-            header.innerHTML = `<span>${formatGroupTitle(group.title)}</span>`;
+            header.innerHTML = createHeaderMarkup(group);
 
             const content = document.createElement('div');
             content.className = 'level-content';
@@ -4681,7 +4715,7 @@
             const header = document.createElement('div');
             header.className = 'level-header';
             header.style.backgroundColor = group.colorMain;
-            header.innerHTML = `<span>${displayTitle}</span>`;
+            header.innerHTML = createHeaderMarkup(group, displayTitle);
 
             const content = document.createElement('div');
             content.className = 'level-content';
@@ -4715,13 +4749,13 @@
             }
 
             return `
-            <tr onclick="openModal('${adj.word}', '${group.badge}')" style="cursor:pointer; transition: background-color 0.2s;">
+            <tr style="transition: background-color 0.2s;">
                 <td>
                     <div class="german-word" onclick="event.stopPropagation(); speak('${adj.word}')" title="Escuchar">
                         ${displayWord} <span class="audio-icon">🔊</span>
                     </div>
                 </td>
-                <td class="spanish-word" style="font-style:italic; color:var(--text-muted); font-size:1rem;">
+                <td class="spanish-word" style="font-style:italic; color:var(--text-muted); font-size:1rem;" onclick="openModal('${adj.word}', '${group.badge}')" title="Abrir detalle">
                     ${displayTrans}
                 </td>
             </tr>
@@ -4730,6 +4764,15 @@
 
         function formatGroupTitle(title) {
             return title.replace(/^G\d+:\s*/, '').trim();
+        }
+
+        function createHeaderMarkup(group, customTitle = null) {
+            const title = (customTitle || formatGroupTitle(group.title)).toLowerCase();
+            const translation = group.description || '';
+            return `
+                <span class="level-header-title">${title}</span>
+                <span class="level-header-translation">${translation}</span>
+            `;
         }
 
         function highlightMatch(text, query) {
