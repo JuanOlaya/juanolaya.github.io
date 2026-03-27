@@ -4,6 +4,7 @@
     let verbGroupsByLevel = {}; // Global Data Containers
     let verbTypesData = {}; // Verb types and notes data
     let allGroupsIndex = []; // Full groups index from verbs_index.json for reliable theme search
+    let fileIndexData = null; // Existing JSON files by folder to avoid noisy 404 fetches
     let searchScope = 'verbs'; // 'verbs' or 'wortfamilie'
     let wortfamilieIndex = null; // Lazy-loaded index for Wortfamilie search
     const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "Zwölfte", "Dreizehnte"];
@@ -224,17 +225,47 @@
     let appVersion = '1.6_static'; // Stable version; replaced by verbs_index.lastUpdated when available
 
     function persistCacheSnapshot() {
+        const buildCompactCachePayload = () => {
+            const compactGroups = {};
+            const compactVerbsData = {};
+            const groups = verbGroupsByLevel[currentLevel] || [];
+            compactGroups[currentLevel] = groups;
+            groups.forEach(group => {
+                if (!group || !Array.isArray(group.verbs)) return;
+                group.verbs.forEach(verbName => {
+                    if (allVerbsData[verbName]) {
+                        compactVerbsData[verbName] = allVerbsData[verbName];
+                    }
+                });
+            });
+            return {
+                allVerbsData: compactVerbsData,
+                verbGroupsByLevel: compactGroups,
+                allGroupsIndex,
+                fileIndexData,
+                lastUpdated: appVersion || new Date().toISOString(),
+                timestamp: Date.now(),
+                cacheMode: 'compact'
+            };
+        };
+
         try {
             const cachePayload = {
                 allVerbsData,
                 verbGroupsByLevel,
                 allGroupsIndex,
+                fileIndexData,
                 lastUpdated: appVersion || new Date().toISOString(),
                 timestamp: Date.now()
             };
             localStorage.setItem(CACHE_KEY, JSON.stringify(cachePayload));
         } catch (e) {
-            console.warn("Failed to save cache snapshot", e);
+            try {
+                localStorage.setItem(CACHE_KEY, JSON.stringify(buildCompactCachePayload()));
+                console.warn("Saved compact cache snapshot after quota warning.");
+            } catch (compactError) {
+                console.warn("Failed to save cache snapshot", compactError);
+            }
         }
     }
 
@@ -256,6 +287,7 @@
             allVerbsData = data.allVerbsData;
             verbGroupsByLevel = data.verbGroupsByLevel;
             allGroupsIndex = Array.isArray(data.allGroupsIndex) ? data.allGroupsIndex : [];
+            fileIndexData = data.fileIndexData || null;
             if (data.lastUpdated) {
                 appVersion = data.lastUpdated;
             }
@@ -309,7 +341,7 @@
         // 1. Check for updates (Version Check)
         try {
             const vRes = await fetch('json/verbs_index.json', { cache: 'no-cache' });
-            if (vRes.ok) {
+                if (vRes.ok) {
                 const vData = await vRes.json();
                 remoteVersion = vData.lastUpdated;
                 allGroupsIndex = Array.isArray(vData.groups) ? vData.groups : allGroupsIndex;
@@ -339,6 +371,9 @@
                     verbGroupsByLevel = data.verbGroupsByLevel;
                     if ((!Array.isArray(allGroupsIndex) || allGroupsIndex.length === 0) && Array.isArray(data.allGroupsIndex)) {
                         allGroupsIndex = data.allGroupsIndex;
+                    }
+                    if (!fileIndexData && data.fileIndexData) {
+                        fileIndexData = data.fileIndexData;
                     }
                     if (data.lastUpdated) {
                         appVersion = data.lastUpdated;
@@ -449,13 +484,18 @@
                 allVerbsData,
                 verbGroupsByLevel,
                 allGroupsIndex,
+                fileIndexData,
                 lastUpdated: remoteVersion || new Date().toISOString(),
                 timestamp: Date.now()
             };
             localStorage.setItem(CACHE_KEY, JSON.stringify(cachePayload));
             console.log("Saved data to LocalStorage cache");
         } catch (e) {
-            console.warn("Failed to save to cache", e);
+            try {
+                persistCacheSnapshot();
+            } catch (nestedError) {
+                console.warn("Failed to save to cache", nestedError);
+            }
         }
 
         // If the UI started from stale cache, repaint the current view once
@@ -543,19 +583,43 @@
         await Promise.all(loadPromises);
     }
 
+    async function loadFileIndex() {
+        if (fileIndexData) return fileIndexData;
+        try {
+            const query = appVersion ? `?v=${encodeURIComponent(appVersion)}` : '';
+            const response = await fetch(`json/file_index.json${query}`, { cache: 'no-cache' });
+            if (!response.ok) throw new Error(`Failed to load file index: ${response.status}`);
+            fileIndexData = await response.json();
+        } catch (error) {
+            console.warn('Failed to load file index, falling back to direct fetches.', error);
+            fileIndexData = {};
+        }
+        return fileIndexData;
+    }
+
+    function fileExistsInIndex(folder, verbName) {
+        if (!fileIndexData || !fileIndexData[folder]) return true;
+        return fileIndexData[folder].includes(verbName);
+    }
+
     function loadConjugations(allVerbNames) {
-        const conjugationPromises = Array.from(allVerbNames).map(async verbName => {
+        return loadFileIndex().then(() => Promise.all(Array.from(allVerbNames).map(async verbName => {
             try {
                 const query = appVersion ? `?v=${appVersion}` : '';
+                const maybeFetchJson = (folder) =>
+                    fileExistsInIndex(folder, verbName)
+                        ? fetch(`json/${folder}/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+                        : Promise.resolve({});
+
                 const fetchPromises = [
-                    fetch(`json/praesens/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
-                    fetch(`json/praeteritum_konjugation/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
-                    fetch(`json/perfekt_konjugation/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({})),
-                    fetch(`json/praesens_fragen/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+                    maybeFetchJson('praesens'),
+                    maybeFetchJson('praeteritum_konjugation'),
+                    maybeFetchJson('perfekt_konjugation'),
+                    maybeFetchJson('praesens_fragen')
                 ];
 
                 // Add Konjunktiv II data for specific verbs
-                if (konjunktivVerbs.includes(verbName)) {
+                if (konjunktivVerbs.includes(verbName) && fileExistsInIndex('konjunktiv_ii', verbName)) {
                     fetchPromises.push(
                         fetch(`json/konjunktiv_ii/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
                     );
@@ -581,9 +645,7 @@
             } catch (error) {
                 console.warn(`Failed to pre-load conjugations for ${verbName}:`, error);
             }
-        });
-
-        return Promise.all(conjugationPromises).then(() => {
+        }))).then(() => {
             // Conjugations loaded
         });
     }
@@ -1284,6 +1346,22 @@
             return savedGroup;
         }
         return 0;
+    }
+
+    function clearSearchAndRender() {
+        if (searchInput) {
+            searchInput.value = '';
+        }
+        const clearSearchBtn = document.getElementById('clear-search');
+        const searchCounter = document.getElementById('search-counter');
+        if (clearSearchBtn) clearSearchBtn.classList.remove('visible');
+        if (searchCounter) searchCounter.textContent = '';
+        if (levelIndicator) {
+            levelIndicator.style.opacity = '1';
+            levelIndicator.style.pointerEvents = 'auto';
+        }
+        cardsContainer.style.transform = 'translateX(0) scale(1)';
+        renderVerbGroup();
     }
 
     function initializeApp() {
