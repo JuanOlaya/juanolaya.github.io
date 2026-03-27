@@ -3,6 +3,7 @@
     let allVerbsData = {}; // Global Data Containers
     let verbGroupsByLevel = {}; // Global Data Containers
     let verbTypesData = {}; // Verb types and notes data
+    let allGroupsIndex = []; // Full groups index from verbs_index.json for reliable theme search
     let searchScope = 'verbs'; // 'verbs' or 'wortfamilie'
     let wortfamilieIndex = null; // Lazy-loaded index for Wortfamilie search
     const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "Zwölfte", "Dreizehnte"];
@@ -126,7 +127,7 @@
     let currentIndexInModal = 0;
     let storyClickCounter = 0;
     let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
-    const CACHE_KEY = 'verbAppCache_v37_sport_refresh';
+    const CACHE_KEY = 'verbAppCache_v38_theme_search_index';
     const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
     let cachePersistTimeout = null;
 
@@ -217,6 +218,7 @@
             const cachePayload = {
                 allVerbsData,
                 verbGroupsByLevel,
+                allGroupsIndex,
                 lastUpdated: appVersion || new Date().toISOString(),
                 timestamp: Date.now()
             };
@@ -243,6 +245,7 @@
 
             allVerbsData = data.allVerbsData;
             verbGroupsByLevel = data.verbGroupsByLevel;
+            allGroupsIndex = Array.isArray(data.allGroupsIndex) ? data.allGroupsIndex : [];
             if (data.lastUpdated) {
                 appVersion = data.lastUpdated;
             }
@@ -299,6 +302,7 @@
             if (vRes.ok) {
                 const vData = await vRes.json();
                 remoteVersion = vData.lastUpdated;
+                allGroupsIndex = Array.isArray(vData.groups) ? vData.groups : allGroupsIndex;
                 if (remoteVersion) {
                     appVersion = remoteVersion;
                 }
@@ -323,6 +327,9 @@
                     console.log("Loaded data from LocalStorage cache (Version match).");
                     allVerbsData = data.allVerbsData;
                     verbGroupsByLevel = data.verbGroupsByLevel;
+                    if ((!Array.isArray(allGroupsIndex) || allGroupsIndex.length === 0) && Array.isArray(data.allGroupsIndex)) {
+                        allGroupsIndex = data.allGroupsIndex;
+                    }
                     if (data.lastUpdated) {
                         appVersion = data.lastUpdated;
                     }
@@ -431,6 +438,7 @@
             const cachePayload = {
                 allVerbsData,
                 verbGroupsByLevel,
+                allGroupsIndex,
                 lastUpdated: remoteVersion || new Date().toISOString(),
                 timestamp: Date.now()
             };
@@ -453,7 +461,8 @@
     }
 
     // --- OPTIMIZED LAZY LOADING ---
-    async function loadGroupData(levelKey, groupIndex) {
+    async function loadGroupData(levelKey, groupIndex, options = {}) {
+        const { silent = false } = options;
         // Validate inputs
         if (!levelConfig[levelKey]) return;
 
@@ -467,7 +476,9 @@
         const fileNumber = physData.localIndex + 1;
 
         // Show loading state
-        cardsContainer.innerHTML = '<div class="loading-spinner">Daten werden geladen...</div>';
+        if (!silent) {
+            cardsContainer.innerHTML = '<div class="loading-spinner">Daten werden geladen...</div>';
+        }
 
         const groupUrl = `json/groups/${physData.physicalKey}/${physData.physicalKey}_group_${fileNumber}.json${appVersion ? '?v=' + appVersion : ''}`;
 
@@ -504,8 +515,10 @@
             scheduleCachePersist();
 
         } catch (error) {
-            console.error(`Failed to load group data (${levelKey} / ${groupNum}):`, error);
-            cardsContainer.innerHTML = '<p>Fehler beim Laden der Gruppe. Bitte Seite neu laden.</p>';
+            console.error(`Failed to load group data (${levelKey} / ${groupIndex + 1}):`, error);
+            if (!silent) {
+                cardsContainer.innerHTML = '<p>Fehler beim Laden der Gruppe. Bitte Seite neu laden.</p>';
+            }
         }
     }
 
@@ -635,6 +648,38 @@
         const normalized = text.replace(/[()]/g, '');
         const words = normalized.split(/[\s,/]+/).filter(Boolean);
         return words.find(word => word.toLowerCase().startsWith(searchTerm)) || '';
+    }
+
+    function getAllSearchGroupEntries() {
+        const groupedMap = new Map();
+
+        if (Array.isArray(allGroupsIndex)) {
+            allGroupsIndex.forEach(group => {
+                if (!group || !group.level || !Array.isArray(group.verbs)) return;
+                const levelKey = group.level.split('.')[0];
+                const groupIndexInLevel = Number(group.groupNumberPerLevel) - 1;
+                if (!levelKey || !Number.isInteger(groupIndexInLevel) || groupIndexInLevel < 0) return;
+                groupedMap.set(`${levelKey}-${groupIndexInLevel}`, {
+                    levelKey,
+                    groupIndexInLevel,
+                    group
+                });
+            });
+        }
+
+        Object.keys(verbGroupsByLevel).forEach(levelKey => {
+            const levelGroups = verbGroupsByLevel[levelKey] || [];
+            levelGroups.forEach((group, groupIndexInLevel) => {
+                if (!group || !Array.isArray(group.verbs)) return;
+                groupedMap.set(`${levelKey}-${groupIndexInLevel}`, {
+                    levelKey,
+                    groupIndexInLevel,
+                    group
+                });
+            });
+        });
+
+        return Array.from(groupedMap.values());
     }
 
     // Helper function to dynamically parse and strip parentheses from translations
@@ -2868,40 +2913,54 @@
         // Search across ALL groups in all levels
 
         const searchPromises = [];
+        const groupEntries = getAllSearchGroupEntries();
 
-        Object.keys(verbGroupsByLevel).forEach(levelKey => {
-            const levelGroups = verbGroupsByLevel[levelKey];
-            levelGroups.forEach((group, groupIndexInLevel) => {
-                if (!group || !group.verbs) return;
+        for (const entry of groupEntries) {
+            const levelKey = entry.levelKey;
+            const groupIndexInLevel = entry.groupIndexInLevel;
+            let group = entry.group;
+            if (!group || !Array.isArray(group.verbs)) continue;
 
-                // Check if group name matches search term (German, Spanish, or English)
-                const groupNameMatch = (group.theme && group.theme.toLowerCase().includes(searchTerm)) ||
-                    (group.germanName && group.germanName.toLowerCase().includes(searchTerm)) ||
-                    (group.spanishName && group.spanishName.toLowerCase().includes(searchTerm)) ||
-                    (group.englishName && group.englishName.toLowerCase().includes(searchTerm)) ||
-                    (group.groupNameGerman && group.groupNameGerman.toLowerCase().includes(searchTerm)) ||
-                    (group.groupNameSpanish && group.groupNameSpanish.toLowerCase().includes(searchTerm)) ||
-                    (group.groupNameEnglish && group.groupNameEnglish.toLowerCase().includes(searchTerm));
+            // Check if group name matches search term (German, Spanish, or English)
+            const groupNameMatch = (group.theme && group.theme.toLowerCase().includes(searchTerm)) ||
+                (group.germanName && group.germanName.toLowerCase().includes(searchTerm)) ||
+                (group.spanishName && group.spanishName.toLowerCase().includes(searchTerm)) ||
+                (group.englishName && group.englishName.toLowerCase().includes(searchTerm)) ||
+                (group.groupNameGerman && group.groupNameGerman.toLowerCase().includes(searchTerm)) ||
+                (group.groupNameSpanish && group.groupNameSpanish.toLowerCase().includes(searchTerm)) ||
+                (group.groupNameEnglish && group.groupNameEnglish.toLowerCase().includes(searchTerm));
 
-                if (groupNameMatch) {
-                    console.log(`MATCH FOUND! Group: ${group.theme} matches term: "${searchTerm}"`);
+            if (groupNameMatch && !hasCachedGroup(levelKey, groupIndexInLevel)) {
+                try {
+                    await loadGroupData(levelKey, groupIndexInLevel, { silent: true });
+                    const hydratedGroup = verbGroupsByLevel[levelKey] && verbGroupsByLevel[levelKey][groupIndexInLevel];
+                    if (hydratedGroup && Array.isArray(hydratedGroup.verbs)) {
+                        group = hydratedGroup;
+                    }
+                } catch (e) {
+                    console.warn(`Failed to silently hydrate search group ${levelKey}/${groupIndexInLevel + 1}`, e);
                 }
+            }
 
-                group.verbs.forEach(verbName => {
-                    const verbData = allVerbsData[verbName];
-                    if (verbData) {
-                        // Create a promise for each verb to search (including lazy-loaded praesens)
-                        const searchPromise = (async () => {
-                            try {
-                                // If the group matches, return this verb immediately as a match
-                                if (groupNameMatch) {
-                                    return {
-                                        verb: verbName,
-                                        data: verbData,
-                                        levelKey: levelKey,
-                                        groupIndexInLevel: groupIndexInLevel
-                                    };
-                                }
+            if (groupNameMatch) {
+                console.log(`MATCH FOUND! Group: ${group.theme || group.groupNameGerman} matches term: "${searchTerm}"`);
+            }
+
+            group.verbs.forEach(verbName => {
+                const verbData = allVerbsData[verbName];
+                if (verbData) {
+                    // Create a promise for each verb to search (including lazy-loaded praesens)
+                    const searchPromise = (async () => {
+                        try {
+                            // If the group matches, return this verb immediately as a match
+                            if (groupNameMatch) {
+                                return {
+                                    verb: verbName,
+                                    data: verbData,
+                                    levelKey: levelKey,
+                                    groupIndexInLevel: groupIndexInLevel
+                                };
+                            }
 
                                 // Helper function to check if search term is contained as a word in text
                                 const containsWord = (text, term) => Boolean(findMatchingWordInText(text, term));
@@ -3019,18 +3078,17 @@
                                         matchedKonjunktivForm
                                     };
                                 }
-                                return null;
-                            } catch (e) {
-                                console.error(`Error searching verb ${verbName}:`, e);
-                                return null;
-                            }
-                        })();
+                            return null;
+                        } catch (e) {
+                            console.error(`Error searching verb ${verbName}:`, e);
+                            return null;
+                        }
+                    })();
 
-                        searchPromises.push(searchPromise);
-                    }
-                });
+                    searchPromises.push(searchPromise);
+                }
             });
-        });
+        }
 
         // Wait for both searches to complete
         const [verbResults, wfResults] = await Promise.all([
@@ -3661,6 +3719,15 @@
             for (let i = 0; i < groups.length; i++) {
                 if (groups[i].verbs.includes(verbName)) {
                     return { levelKey: levelKey, groupIndex: i };
+                }
+            }
+        }
+        for (const group of allGroupsIndex) {
+            if (group && Array.isArray(group.verbs) && group.verbs.includes(verbName)) {
+                const levelKey = group.level ? group.level.split('.')[0] : '';
+                const groupIndex = Number(group.groupNumberPerLevel) - 1;
+                if (levelKey && Number.isInteger(groupIndex) && groupIndex >= 0) {
+                    return { levelKey, groupIndex };
                 }
             }
         }

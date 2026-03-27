@@ -183,6 +183,10 @@
             border-color: var(--accent-green);
         }
 
+        .settings-btn {
+            min-width: 40px;
+        }
+
         body:not(.light-mode) .icon-sun {
             display: block;
         }
@@ -333,10 +337,12 @@
         }
 
         .spanish-word {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            color: color-mix(in srgb, var(--text-main) 72%, var(--text-muted) 28%);
+            font-size: 1.1rem;
             margin-top: 4px;
             font-style: italic;
+            font-weight: 700;
+            text-align: right;
             cursor: pointer;
             transition: color 0.2s ease, opacity 0.2s ease;
         }
@@ -392,6 +398,31 @@
             display: flex;
             flex-direction: column;
             max-height: 85vh;
+        }
+
+        .settings-modal-content {
+            max-width: 420px;
+        }
+
+        .settings-modal-body {
+            padding: 24px;
+            text-align: left;
+        }
+
+        .settings-section-title {
+            margin: 0 0 16px;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .settings-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
         }
 
         @keyframes modalFadeIn {
@@ -538,14 +569,14 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(15, 23, 42, 0.95);
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 1px solid var(--border-color);
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
+            border: none;
             display: flex;
             gap: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
+            box-shadow: none;
+            backdrop-filter: none;
             z-index: 100;
         }
 
@@ -562,6 +593,10 @@
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .toggle-container .lang-toggle {
+            margin-top: 0;
         }
 
         .switch-label {
@@ -798,10 +833,9 @@
                     <span class="icon-sun">☀️</span>
                     <span class="icon-moon">🌔</span>
                 </button>
-                <div class="lang-toggle" onclick="toggleLanguage()">
-                    <div id="langEs" class="lang-option active" data-lang="es">ES</div>
-                    <div id="langEn" class="lang-option" data-lang="en">EN</div>
-                </div>
+                <button class="theme-btn settings-btn" onclick="openSettingsModal()" aria-label="Abrir ajustes">
+                    <i class="fas fa-sliders-h"></i>
+                </button>
             </div>
             <h1>Deutsche <span>Adjektive</span></h1>
             <!-- Search & Toggle -->
@@ -840,20 +874,29 @@
     <!-- Toggle Container (Footer) -->
     <div class="toggle-container">
         <div class="active-recall-toggle">
-            <label class="switch-label" for="view-toggle">Ansicht: Alt / Kompakt</label>
-            <label class="switch">
-                <input type="checkbox" id="view-toggle" checked onchange="toggleViewMode()">
-                <span class="slider"></span>
-            </label>
+            <div class="lang-toggle" onclick="toggleLanguage()">
+                <div id="langEs" class="lang-option active" data-lang="es">ES</div>
+                <div id="langEn" class="lang-option" data-lang="en">EN</div>
+            </div>
         </div>
-        <!-- Removed other toggles to simplify footer as requested, usually users want less clutter. Or keep them? -->
-        <!-- Keeping English Toggle as it's important -->
-        <div class="active-recall-toggle">
-            <label class="switch-label" for="english-switch">English</label>
-            <label class="switch">
-                <input type="checkbox" id="english-switch" onchange="renderContent()">
-                <span class="slider"></span>
-            </label>
+    </div>
+
+    <div id="settingsModal" class="modal-overlay">
+        <div class="modal-content settings-modal-content">
+            <header class="modal-header">
+                <h2>Einstellungen</h2>
+                <button class="close-modal" onclick="closeSettingsModal()">&times;</button>
+            </header>
+            <div class="settings-modal-body">
+                <h3 class="settings-section-title">Ansicht</h3>
+                <div class="settings-row">
+                    <label class="switch-label" for="view-toggle">Alt / Kompakt</label>
+                    <label class="switch">
+                        <input type="checkbox" id="view-toggle" checked onchange="toggleViewMode()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -4556,11 +4599,34 @@
         const navWrapper = document.getElementById('navigation-wrapper');
         const groupIndicator = document.getElementById('group-indicator');
         const viewToggle = document.getElementById('view-toggle');
+        const settingsModal = document.getElementById('settingsModal');
 
         let currentLang = 'es';
         let isCompactMode = true; // True = Grid (Kompakt), False = Single (Alt)
         let currentGroupIndex = 0;
         const MAX_ITEMS_PER_CARD = 7;
+        const GROUP_TRANSLATIONS = {
+            Bewertung: { es: 'Valoracion', en: 'Evaluation' },
+            'Maße': { es: 'Medidas', en: 'Dimensions' },
+            Zeit: { es: 'Tiempo', en: 'Time' },
+            Farben: { es: 'Colores', en: 'Colors' },
+            Aussehen: { es: 'Apariencia', en: 'Appearance' },
+            'Körper': { es: 'Cuerpo', en: 'Body' },
+            Charakter: { es: 'Caracter', en: 'Character' },
+            Verhalten: { es: 'Comportamiento', en: 'Behavior' },
+            Befinden: { es: 'Estado fisico', en: 'Physical state' },
+            'Gefühle': { es: 'Emociones', en: 'Emotions' },
+            'Bedürfnisse': { es: 'Necesidades', en: 'Needs' },
+            Status: { es: 'Estado social', en: 'Status' },
+            Zustand: { es: 'Condicion', en: 'Condition' },
+            Schwierigkeit: { es: 'Dificultad', en: 'Difficulty' },
+            Alltag: { es: 'Vida diaria', en: 'Daily life' },
+            Lebensstil: { es: 'Estilo de vida', en: 'Lifestyle' },
+            Menge: { es: 'Cantidad', en: 'Quantity' },
+            Verteilung: { es: 'Distribucion', en: 'Distribution' },
+            Vergleich: { es: 'Comparacion', en: 'Comparison' },
+            Besonderes: { es: 'Especiales', en: 'Specials' }
+        };
 
         // --- FUNCTIONS ---
         function toggleViewMode() {
@@ -4755,7 +4821,7 @@
                         ${displayWord} <span class="audio-icon">🔊</span>
                     </div>
                 </td>
-                <td class="spanish-word" style="font-style:italic; color:var(--text-muted); font-size:1rem;" onclick="openModal('${adj.word}', '${group.badge}')" title="Abrir detalle">
+                <td class="spanish-word" onclick="openModal('${adj.word}', '${group.badge}')" title="Abrir detalle">
                     ${displayTrans}
                 </td>
             </tr>
@@ -4768,11 +4834,20 @@
 
         function createHeaderMarkup(group, customTitle = null) {
             const title = (customTitle || formatGroupTitle(group.title)).toLowerCase();
-            const translation = group.description || '';
+            const translation = getGroupTranslation(group);
             return `
                 <span class="level-header-title">${title}</span>
                 <span class="level-header-translation">${translation}</span>
             `;
+        }
+
+        function getGroupTranslation(group) {
+            const cleanTitle = formatGroupTitle(group.title);
+            const translations = GROUP_TRANSLATIONS[cleanTitle];
+            if (translations) {
+                return currentLang === 'en' ? translations.en : translations.es;
+            }
+            return group.description || cleanTitle;
         }
 
         function highlightMatch(text, query) {
@@ -4804,9 +4879,8 @@
         }
 
         // --- SEARCH & TOGGLE ---
-        function toggleLanguage() {
-            currentLang = currentLang === 'es' ? 'en' : 'es';
-
+        function setLanguage(lang) {
+            currentLang = lang;
             const btnEs = document.getElementById('langEs');
             const btnEn = document.getElementById('langEn');
 
@@ -4820,8 +4894,11 @@
                 document.documentElement.lang = 'en';
             }
 
-            // Re-render
             handleSearch();
+        }
+
+        function toggleLanguage() {
+            setLanguage(currentLang === 'es' ? 'en' : 'es');
         }
 
         function handleSearch() {
@@ -4970,9 +5047,13 @@
         function closeModal() {
             modal.style.display = 'none';
         }
-        window.onclick = function (event) {
-            if (event.target == modal) {
+
+        function handleOverlayClick(event) {
+            if (event.target === modal) {
                 closeModal();
+            }
+            if (event.target === settingsModal) {
+                closeSettingsModal();
             }
         }
 
@@ -4992,6 +5073,14 @@
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
         }
 
+        function openSettingsModal() {
+            settingsModal.style.display = 'flex';
+        }
+
+        function closeSettingsModal() {
+            settingsModal.style.display = 'none';
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('theme');
@@ -5002,9 +5091,12 @@
             // Check saved view preference? For now default to Kompakt.
             isCompactMode = true;
             viewToggle.checked = true;
+            setLanguage('es');
 
             renderContent();
         });
+
+        window.addEventListener('click', handleOverlayClick);
     </script>
 </body>
 
