@@ -15,10 +15,16 @@
     ];
 
     const physicalLevelMap = {
-        'A1': [{ key: 'A1_1', count: 15 }, { key: 'A1_2', count: 13 }],
-        'A2': [{ key: 'A2_1', count: 13 }, { key: 'A2_2', count: 14 }],
+        'A1': [
+            { key: 'A1_1', count: 14, fileNumbers: [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] },
+            { key: 'A1_2', count: 13, fileNumbers: [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] }
+        ],
+        'A2': [
+            { key: 'A2_1', count: 13 },
+            { key: 'A2_2', count: 14 }
+        ],
         'B1': [{ key: 'B1_1', count: 20 }],
-        'B2': [{ key: 'B2_1', count: 12 }]
+        'B2': [{ key: 'B2_1', count: 13 }]
     };
     const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22C55E', '#3b82f6'];
 
@@ -28,7 +34,11 @@
         for (let i = 0; i < layers.length; i++) {
             let layer = layers[i];
             if (globalIndex < offset + layer.count) {
-                return { physicalKey: layer.key, localIndex: globalIndex - offset };
+                const localIndex = globalIndex - offset;
+                const fileNumber = Array.isArray(layer.fileNumbers)
+                    ? layer.fileNumbers[localIndex]
+                    : localIndex + 1;
+                return { physicalKey: layer.key, localIndex, fileNumber };
             }
             offset += layer.count;
         }
@@ -111,10 +121,10 @@
     }
 
     const levelConfig = {
-        'A1': { groupCount: 28, displayName: 'A1' },
+        'A1': { groupCount: 27, displayName: 'A1' },
         'A2': { groupCount: 27, displayName: 'A2' },
         'B1': { groupCount: 20, displayName: 'B1' },
-        'B2': { groupCount: 12, displayName: 'B2' }
+        'B2': { groupCount: 13, displayName: 'B2' }
     };
     const levelOrder = ['A1', 'A2', 'B1', 'B2'];
 
@@ -383,7 +393,7 @@
 
                 const physData = getPhysicalGroupData(levelKey, groupIndex);
                 if (!physData) return;
-                const fileNumber = physData.localIndex + 1;
+                const fileNumber = physData.fileNumber;
 
                 // 2. Fetch Group Data
                 try {
@@ -473,7 +483,7 @@
 
         const physData = getPhysicalGroupData(levelKey, groupIndex);
         if (!physData) return;
-        const fileNumber = physData.localIndex + 1;
+        const fileNumber = physData.fileNumber;
 
         // Show loading state
         if (!silent) {
