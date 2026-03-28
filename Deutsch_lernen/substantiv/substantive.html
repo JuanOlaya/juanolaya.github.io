@@ -704,15 +704,47 @@
             width: 100%;
         }
 
+        .guide-toggle {
+            width: 100%;
+        }
+
+        .guide-summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            cursor: pointer;
+        }
+
+        .guide-summary::-webkit-details-marker {
+            display: none;
+        }
+
         .guide-title {
-            text-align: center;
             color: #cbd5e1;
             /* Slate 300 */
             font-weight: bold;
             text-transform: uppercase;
             font-size: 0.9rem;
-            margin-bottom: 20px;
             letter-spacing: 1px;
+            margin: 0;
+        }
+
+        .guide-arrow {
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            line-height: 1;
+            transition: transform 0.2s ease;
+            flex: 0 0 auto;
+        }
+
+        .guide-toggle[open] .guide-arrow {
+            transform: rotate(180deg);
+        }
+
+        .guide-content {
+            margin-top: 20px;
         }
 
         .position-cards {
@@ -954,14 +986,19 @@
 
     <!-- VISUAL GUIDE: WORD ORDER -->
     <div class="visual-guide-section">
-        <div class="guide-title">La Estructura de la Oración: ¿Dónde va el sustantivo?</div>
+        <details class="guide-toggle">
+            <summary class="guide-summary">
+                <div class="guide-title">Estructura: ¿Dónde va el sustantivo?</div>
+                <span class="guide-arrow" aria-hidden="true">▾</span>
+            </summary>
+            <div class="guide-content">
         <div class="position-cards">
 
             <!-- Card 1: Subject -->
             <div class="pos-card pos-subj">
                 <span class="pos-icon">👑</span>
                 <span class="pos-name">El Sujeto</span>
-                <span class="pos-desc">El Actor (¿Quién? - Nominativo)</span>
+                <span class="pos-desc">El Actor (¿Quién? - <strong>Nominativo</strong>)</span>
                 <div class="syntax-box">
                     <div>1. <strong>Posición 1</strong></div>
                     <div>2. <strong>Después del verbo</strong></div>
@@ -976,7 +1013,7 @@
             <div class="pos-card pos-obj">
                 <span class="pos-icon">🎁</span>
                 <span class="pos-name">El Objeto</span>
-                <span class="pos-desc">El Destino (Acusativo / Dativo)</span>
+                <span class="pos-desc">El Destino (<strong>Acusativo / Dativo</strong>)</span>
                 <div class="syntax-box">
                     <div>1. <strong>Involucra directamente</strong></div>
                     <div style="margin-bottom: 4px;">(Acusativo - ¿Qué?)</div>
@@ -993,7 +1030,7 @@
             <div class="pos-card pos-time">
                 <span class="pos-icon">📍</span>
                 <span class="pos-name">Tiempo y Lugar</span>
-                <span class="pos-desc">Regla de Oro (TeKaMoLo)</span>
+                <span class="pos-desc">Regla de Oro (<strong>TeKaMoLo</strong>)</span>
                 <div class="syntax-box" style="text-align: left; padding-left: 20px;">
                     <div>1. <strong>Te</strong>mporal (¿Cuándo?)</div>
                     <div>2. <strong>Ka</strong>usal (¿Por qué?)</div>
@@ -1013,7 +1050,7 @@
             <div class="pos-card pos-obj">
                 <span class="pos-icon">🔗</span>
                 <span class="pos-name">La Posesión</span>
-                <span class="pos-desc">El Dueño (Genitivo)</span>
+                <span class="pos-desc">El Dueño (<strong>Genitivo</strong>)</span>
                 <div class="syntax-box">
                     <strong>¿De quién?</strong> (Wessen?)
                 </div>
@@ -1082,6 +1119,8 @@
                 <span class="slider"></span>
             </label>
         </div>
+            </div>
+        </details>
     </div>
 
     <div id="search-results-info" style="text-align: center; color: #6b7280; margin-bottom: 1rem;"></div>
