@@ -44,9 +44,17 @@
         }
 
         header {
+            position: relative;
             text-align: center;
             margin-bottom: 30px;
             max-width: 800px;
+            width: 100%;
+        }
+
+        .header-settings {
+            position: absolute;
+            top: 0;
+            right: 0;
         }
 
         h1 {
@@ -100,6 +108,49 @@
         .action-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .settings-button {
+            background-color: #334155;
+            padding: 10px 12px;
+            min-width: 44px;
+            justify-content: center;
+        }
+
+        .settings-button:hover {
+            background-color: #475569;
+        }
+
+        .level-filter-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 0.5rem 0 1.25rem;
+        }
+
+        .level-filter-button {
+            background: #1e293b;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .level-filter-button:hover {
+            background: #334155;
+            color: #f8fafc;
+        }
+
+        .level-filter-button.active {
+            background: #f59e0b;
+            border-color: #f59e0b;
+            color: #fff;
         }
 
         /* Active Recall Toggle */
@@ -244,7 +295,7 @@
             font-size: 0.75rem;
             font-weight: 800;
             letter-spacing: 0.04em;
-            text-transform: uppercase;
+            text-transform: none;
             background: rgba(245, 158, 11, 0.18);
             color: #fbbf24;
             border: 1px solid rgba(245, 158, 11, 0.4);
@@ -601,6 +652,118 @@
             overflow-y: auto;
         }
 
+        #settings-modal .modal-content {
+            max-width: 720px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+        }
+
+        .settings-modal-body {
+            padding: 28px 30px 32px;
+        }
+
+        .settings-modal-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #f8fafc;
+            margin-bottom: 8px;
+        }
+
+        .settings-modal-subtitle {
+            color: #94a3b8;
+            margin-bottom: 24px;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .settings-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 16px 18px;
+        }
+
+        .settings-item .switch-label {
+            text-align: left;
+        }
+
+        .lang-toggle {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 999px;
+            display: inline-flex;
+            padding: 4px;
+            cursor: pointer;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.12);
+        }
+
+        .lang-option {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            border-radius: 999px;
+            transition: all 0.2s ease;
+            color: #94a3b8;
+            opacity: 0.8;
+            user-select: none;
+        }
+
+        .lang-option:hover {
+            background: rgba(255, 255, 255, 0.06);
+            opacity: 1;
+        }
+
+        .lang-option.active {
+            background: #f59e0b;
+            color: #fff;
+            opacity: 1;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .level-filter-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .level-filter-btn {
+            background: #1e293b;
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .level-filter-btn:hover {
+            background: #334155;
+            color: #f8fafc;
+        }
+
+        .level-filter-btn.active {
+            background: #f59e0b;
+            color: white;
+            border-color: #f59e0b;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.25);
+        }
+
         .tips-columns {
             display: flex;
             flex-wrap: wrap;
@@ -692,16 +855,31 @@
         }
 
         /* --- VISUAL GUIDE: WORD ORDER --- */
+        .guide-sections-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 36px;
+            width: 100%;
+            max-width: 1040px;
+            align-items: start;
+        }
+
         .visual-guide-section {
-            padding: 30px 40px;
+            padding: 22px 28px;
             background: #1e293b;
             /* Slate 800 */
             border-bottom: 1px solid #334155;
             /* Slate 700 */
             margin-bottom: 30px;
             border-radius: 12px;
-            max-width: 900px;
+            max-width: none;
             width: 100%;
+        }
+
+        @media (max-width: 980px) {
+            .guide-sections-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .guide-toggle {
@@ -865,9 +1043,10 @@
 
         .level-header {
             padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
             align-items: center;
+            gap: 12px;
             color: white;
             font-weight: 800;
             font-size: 1.1rem;
@@ -879,6 +1058,8 @@
             align-items: center;
             gap: 10px;
             flex-wrap: wrap;
+            justify-self: start;
+            min-width: 0;
         }
 
         .level-header-audio {
@@ -895,8 +1076,18 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            margin-left: auto;
+            justify-self: end;
             text-align: right;
+            min-width: 0;
+        }
+
+        .level-header-tags {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            justify-self: center;
+            min-width: 0;
         }
 
         .level-header-translation {
@@ -976,6 +1167,13 @@
             transform: scale(1.1);
         }
 
+        .audio-icon svg {
+            width: 0.95em;
+            height: 0.95em;
+            display: block;
+            fill: currentColor;
+        }
+
         /* Highlight Class */
         .highlight {
             background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
@@ -990,19 +1188,23 @@
 <body>
 
     <header>
+        <button class="action-button settings-button header-settings" id="settings-btn" aria-label="Einstellungen" title="Einstellungen">
+            ⚙
+        </button>
         <h1>Deutsche <span>Substantive</span></h1>
 
     </header>
 
     <!-- VISUAL GUIDE: WORD ORDER -->
-    <div class="visual-guide-section">
-        <details class="guide-toggle">
-            <summary class="guide-summary">
-                <div class="guide-title">Estructura: ¿Dónde va el sustantivo?</div>
-                <span class="guide-arrow" aria-hidden="true">▾</span>
-            </summary>
-            <div class="guide-content">
-        <div class="position-cards">
+    <div class="guide-sections-grid">
+        <div class="visual-guide-section">
+            <details class="guide-toggle">
+                <summary class="guide-summary">
+                    <div class="guide-title">Estructura: ¿Dónde va el sustantivo?</div>
+                    <span class="guide-arrow" aria-hidden="true">▾</span>
+                </summary>
+                <div class="guide-content">
+                    <div class="position-cards">
 
             <!-- Card 1: Subject -->
             <div class="pos-card pos-subj">
@@ -1069,68 +1271,52 @@
                 </div>
             </div>
 
+                    </div>
+                </div>
+            </details>
+        </div>
+        <div class="visual-guide-section">
+            <details class="guide-toggle">
+                <summary class="guide-summary">
+                    <div class="guide-title">Tipps</div>
+                    <span class="guide-arrow" aria-hidden="true">▾</span>
+                </summary>
+                <div class="guide-content">
+                    <div class="controls-container">
+                        <div class="buttons-row" style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+
+                            <button class="action-button" id="tips-btn">
+                                💡 Tipps zum Geschlecht
+                            </button>
+
+                            <a href="old/Deutsche_Substantivendungen.html" class="action-button" style="text-decoration: none;">
+                                📜 Deutsche Substantivendungen
+                            </a>
+
+                            <a href="kleidung.html" class="action-button" style="text-decoration: none; background-color: #3b82f6;">
+                                👕 Kleidung & Farben
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </details>
         </div>
     </div>
 
-    <!-- Controls -->
     <div class="controls-container">
-        <!-- Search Bar -->
         <div class="search-wrapper">
-            <input type="text" id="search-input" placeholder="Suchen... (z.B. Apfel, manzana, apple)">
+            <input type="text" id="search-input" placeholder="Suchen... (z.B. Apfel, manzana, apple, tech, LiD)">
             <button class="clear-search" id="clear-search">✕</button>
             <span class="search-icon">🔍</span>
         </div>
-
-        <div class="buttons-row" style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-
-            <button class="action-button" id="tips-btn">
-                💡 Tipps zum Geschlecht
-            </button>
-
-            <a href="old/Deutsche_Substantivendungen.html" class="action-button" style="text-decoration: none;">
-                📜 Deutsche Substantivendungen
-            </a>
-
-            <a href="kleidung.html" class="action-button" style="text-decoration: none; background-color: #3b82f6;">
-                👕 Kleidung & Farben
-            </a>
-        </div>
     </div>
 
-    <div class="toggle-container controls-container">
-        <div class="active-recall-toggle">
-            <label class="switch-label" for="english-switch">Englisch<span
-                    class="label-translation">(English)</span></label>
-            <label class="switch">
-                <input type="checkbox" id="english-switch">
-                <span class="slider"></span>
-            </label>
-        </div>
-        <div class="active-recall-toggle">
-            <label class="switch-label" for="recall-switch">Übersetzung<span
-                    class="label-translation">(traducción)</span></label>
-            <label class="switch">
-                <input type="checkbox" id="recall-switch" checked>
-                <span class="slider"></span>
-            </label>
-        </div>
-        <div class="active-recall-toggle">
-            <label class="switch-label" for="view-toggle">Ansicht: Kompakt</label>
-            <label class="switch">
-                <input type="checkbox" id="view-toggle" checked>
-                <span class="slider"></span>
-            </label>
-        </div>
-        <div class="active-recall-toggle">
-            <label class="switch-label" for="lid-switch">Leben in Deutschland<span
-                    class="label-translation">(LiD)</span></label>
-            <label class="switch">
-                <input type="checkbox" id="lid-switch" checked>
-                <span class="slider"></span>
-            </label>
-        </div>
-            </div>
-        </details>
+    <div class="level-filter-bar" id="level-filter-bar">
+        <button class="level-filter-btn" data-level="all">Alle</button>
+        <button class="level-filter-btn active" data-level="A1">A1</button>
+        <button class="level-filter-btn" data-level="A2">A2</button>
+        <button class="level-filter-btn" data-level="B1">B1</button>
+        <button class="level-filter-btn" data-level="B1_LID">B1 LiD</button>
     </div>
 
     <div id="search-results-info" style="text-align: center; color: #6b7280; margin-bottom: 1rem;"></div>
@@ -1345,6 +1531,10 @@
                     { article: "das", word: "Gemüse", emoji: "🥕", translation_es: "verdura", translation_en: "vegetable", example_de: "Gemüse ist wichtig.", example_es: "La verdura es importante." },
                     { article: "der", word: "Zucker", emoji: "🍬", translation_es: "azúcar", translation_en: "sugar", example_de: "Der Zucker ist süß.", example_es: "El azúcar es dulce." },
                     { article: "das", word: "Salz", emoji: "🧂", translation_es: "sal", translation_en: "salt", example_de: "Das Salz ist weiß.", example_es: "La sal es blanca." },
+                    { article: "die", word: "Kekse", emoji: "🍪", translation_es: "galletas", translation_en: "cookies", example_de: "Die Kekse sind süß.", example_es: "Las galletas son dulces." },
+                    { article: "die", word: "Schokolade", emoji: "🍫", translation_es: "chocolate", translation_en: "chocolate", example_de: "Die Schokolade schmeckt gut.", example_es: "El chocolate sabe bien." },
+                    { article: "der", word: "Kuchen", emoji: "🍰", translation_es: "pastel", translation_en: "cake", example_de: "Der Kuchen ist frisch.", example_es: "El pastel está fresco." },
+                    { article: "das", word: "Bonbon", emoji: "🍬", translation_es: "caramelo", translation_en: "candy", example_de: "Das Bonbon ist bunt.", example_es: "El caramelo es colorido." },
                     { article: "der", word: "Pfeffer", emoji: "🌶️", translation_es: "pimienta", translation_en: "pepper", example_de: "Der Pfeffer ist scharf.", example_es: "La pimienta es picante." }
                 ]
             },
@@ -1644,6 +1834,10 @@
                     { article: "der", word: "Fuß", emoji: "🦶", translation_es: "pie", translation_en: "foot", example_de: "Mein Fuß schmerzt.", example_es: "Me duele el pie." },
                     { article: "der", word: "Bauch", emoji: "🤰", translation_es: "barriga / estómago", translation_en: "belly", example_de: "Ich habe Bauchschmerzen.", example_es: "Tengo dolor de barriga." },
                     { article: "der", word: "Rücken", emoji: "🚶", translation_es: "espalda", translation_en: "back", example_de: "Der Rücken tut weh.", example_es: "La espalda duele." },
+                    { article: "das", word: "Herz", emoji: "❤️", translation_es: "corazón", translation_en: "heart", example_de: "Mein Herz schlägt schnell.", example_es: "Mi corazón late rápido." },
+                    { article: "die", word: "Lunge", emoji: "🫁", translation_es: "pulmón", translation_en: "lung", example_de: "Die Lunge braucht frische Luft.", example_es: "El pulmón necesita aire fresco." },
+                    { article: "die", word: "Leber", emoji: "🫀", translation_es: "hígado", translation_en: "liver", example_de: "Die Leber ist ein wichtiges Organ.", example_es: "El hígado es un órgano importante." },
+                    { article: "das", word: "Gehirn", emoji: "🧠", translation_es: "cerebro", translation_en: "brain", example_de: "Das Gehirn verarbeitet Informationen.", example_es: "El cerebro procesa información." },
                     { article: "das", word: "Haar", emoji: "💇", translation_es: "pelo / cabello", translation_en: "hair", example_de: "Sie hat langes Haar.", example_es: "Ella tiene el pelo largo." },
                     { article: "der", word: "Zahn", emoji: "🦷", translation_es: "diente", translation_en: "tooth", example_de: "Ich muss den Zahn putzen.", example_es: "Debo lavar el diente." }
                 ]
@@ -1854,6 +2048,116 @@
             }
         );
 
+        nounGroups.push({
+            id: "a1_erweiterung",
+            title: "A1 Erweiterung",
+            level: "A1",
+            nouns: [
+                { article: "das", word: "Blau", emoji: "🔵", translation_es: "azul", translation_en: "blue", example_de: "Blau ist meine Lieblingsfarbe.", example_es: "El azul es mi color favorito." },
+                { article: "das", word: "Rot", emoji: "🔴", translation_es: "rojo", translation_en: "red", example_de: "Rot ist eine starke Farbe.", example_es: "El rojo es un color fuerte." },
+                { article: "das", word: "Grün", emoji: "🟢", translation_es: "verde", translation_en: "green", example_de: "Grün steht für Natur.", example_es: "El verde representa la naturaleza." },
+                { article: "das", word: "Gelb", emoji: "🟡", translation_es: "amarillo", translation_en: "yellow", example_de: "Gelb ist sehr hell.", example_es: "El amarillo es muy brillante." },
+                { article: "das", word: "Weiß", emoji: "⚪", translation_es: "blanco", translation_en: "white", example_de: "Weiß passt zu allem.", example_es: "El blanco combina con todo." },
+                { article: "das", word: "Schwarz", emoji: "⚫", translation_es: "negro", translation_en: "black", example_de: "Schwarz ist sehr elegant.", example_es: "El negro es muy elegante." },
+                { article: "der", word: "Regen", emoji: "🌧️", translation_es: "lluvia", translation_en: "rain", example_de: "Der Regen macht die Straße nass.", example_es: "La lluvia moja la calle." },
+                { article: "der", word: "Schnee", emoji: "❄️", translation_es: "nieve", translation_en: "snow", example_de: "Der Schnee ist kalt.", example_es: "La nieve está fría." },
+                { article: "der", word: "Wind", emoji: "💨", translation_es: "viento", translation_en: "wind", example_de: "Der Wind ist heute stark.", example_es: "Hoy hace mucho viento." },
+                { article: "die", word: "Wolke", emoji: "☁️", translation_es: "nube", translation_en: "cloud", example_de: "Die Wolke ist grau.", example_es: "La nube es gris." },
+                { article: "das", word: "Wetter", emoji: "🌦️", translation_es: "clima", translation_en: "weather", example_de: "Das Wetter ist schön.", example_es: "Hace buen clima." },
+                { article: "die", word: "Butter", emoji: "🧈", translation_es: "mantequilla", translation_en: "butter", example_de: "Ich esse Brot mit Butter.", example_es: "Como pan con mantequilla." },
+                { article: "die", word: "Marmelade", emoji: "🍓", translation_es: "mermelada", translation_en: "jam", example_de: "Die Marmelade ist süß.", example_es: "La mermelada es dulce." },
+                { article: "das", word: "Brötchen", emoji: "🥐", translation_es: "panecillo", translation_en: "bread roll", example_de: "Zum Frühstück esse ich ein Brötchen.", example_es: "En el desayuno como un panecillo." },
+                { article: "der", word: "Honig", emoji: "🍯", translation_es: "miel", translation_en: "honey", example_de: "Der Honig schmeckt gut im Tee.", example_es: "La miel sabe bien en el té." },
+                { article: "das", word: "Frühstück", emoji: "🥣", translation_es: "desayuno", translation_en: "breakfast", example_de: "Das Frühstück ist um sieben Uhr.", example_es: "El desayuno es a las siete." },
+                { article: "die", word: "Dusche", emoji: "🚿", translation_es: "ducha", translation_en: "shower", example_de: "Die Dusche ist im Bad.", example_es: "La ducha está en el baño." },
+                { article: "die", word: "Toilette", emoji: "🚽", translation_es: "inodoro", translation_en: "toilet", example_de: "Die Toilette ist besetzt.", example_es: "El inodoro está ocupado." },
+                { article: "das", word: "Waschbecken", emoji: "🚰", translation_es: "lavamanos", translation_en: "sink", example_de: "Das Waschbecken ist sauber.", example_es: "El lavamanos está limpio." },
+                { article: "das", word: "Handtuch", emoji: "🧻", translation_es: "toalla", translation_en: "towel", example_de: "Das Handtuch ist nass.", example_es: "La toalla está mojada." },
+                { article: "die", word: "Seife", emoji: "🧼", translation_es: "jabón", translation_en: "soap", example_de: "Die Seife riecht gut.", example_es: "El jabón huele bien." },
+                { article: "die", word: "Zahnbürste", emoji: "🪥", translation_es: "cepillo de dientes", translation_en: "toothbrush", example_de: "Ich brauche meine Zahnbürste.", example_es: "Necesito mi cepillo de dientes." },
+                { article: "die", word: "Zahnpasta", emoji: "🦷", translation_es: "pasta dental", translation_en: "toothpaste", example_de: "Die Zahnpasta ist neu.", example_es: "La pasta dental es nueva." },
+                { article: "die", word: "Klasse", emoji: "🏫", translation_es: "clase", translation_en: "class", example_de: "Die Klasse ist groß.", example_es: "La clase es grande." },
+                { article: "der", word: "Schüler", emoji: "🧑‍🎓", translation_es: "alumno", translation_en: "pupil", example_de: "Der Schüler liest ein Buch.", example_es: "El alumno lee un libro." },
+                { article: "die", word: "Schülerin", emoji: "👩‍🎓", translation_es: "alumna", translation_en: "pupil", example_de: "Die Schülerin schreibt schnell.", example_es: "La alumna escribe rápido." },
+                { article: "die", word: "Tafel", emoji: "⬛", translation_es: "pizarra", translation_en: "board", example_de: "Die Tafel ist schwarz.", example_es: "La pizarra es negra." },
+                { article: "das", word: "Wörterbuch", emoji: "📘", translation_es: "diccionario", translation_en: "dictionary", example_de: "Das Wörterbuch hilft mir.", example_es: "El diccionario me ayuda." },
+                { article: "der", word: "Vogel", emoji: "🐦", translation_es: "pájaro", translation_en: "bird", example_de: "Der Vogel singt morgens.", example_es: "El pájaro canta por la mañana." },
+                { article: "der", word: "Hamster", emoji: "🐹", translation_es: "hámster", translation_en: "hamster", example_de: "Der Hamster schläft viel.", example_es: "El hámster duerme mucho." },
+                { article: "das", word: "Haustier", emoji: "🐾", translation_es: "mascota", translation_en: "pet", example_de: "Das Haustier ist sehr lieb.", example_es: "La mascota es muy cariñosa." },
+                { article: "der", word: "Ball", emoji: "⚽", translation_es: "pelota", translation_en: "ball", example_de: "Der Ball ist im Garten.", example_es: "La pelota está en el jardín." },
+                { article: "die", word: "Puppe", emoji: "🪆", translation_es: "muñeca", translation_en: "doll", example_de: "Die Puppe liegt im Zimmer.", example_es: "La muñeca está en la habitación." },
+                { article: "das", word: "Spielzeug", emoji: "🧸", translation_es: "juguete", translation_en: "toy", example_de: "Das Spielzeug liegt auf dem Boden.", example_es: "El juguete está en el suelo." },
+                { article: "das", word: "Spiel", emoji: "🎲", translation_es: "juego", translation_en: "game", example_de: "Das Spiel macht Spaß.", example_es: "El juego es divertido." },
+                { article: "die", word: "Orange", emoji: "🍊", translation_es: "naranja", translation_en: "orange", example_de: "Die Orange ist süß.", example_es: "La naranja es dulce." },
+                { article: "die", word: "Traube", emoji: "🍇", translation_es: "uva", translation_en: "grape", example_de: "Die Traube ist klein.", example_es: "La uva es pequeña." },
+                { article: "die", word: "Erdbeere", emoji: "🍓", translation_es: "fresa", translation_en: "strawberry", example_de: "Die Erdbeere ist rot.", example_es: "La fresa es roja." },
+                { article: "die", word: "Birne", emoji: "🍐", translation_es: "pera", translation_en: "pear", example_de: "Die Birne ist reif.", example_es: "La pera está madura." },
+                { article: "die", word: "Kartoffel", emoji: "🥔", translation_es: "patata", translation_en: "potato", example_de: "Die Kartoffel ist gekocht.", example_es: "La patata está cocida." },
+                { article: "die", word: "Tomate", emoji: "🍅", translation_es: "tomate", translation_en: "tomato", example_de: "Die Tomate ist rot.", example_es: "El tomate es rojo." },
+                { article: "die", word: "Zwiebel", emoji: "🧅", translation_es: "cebolla", translation_en: "onion", example_de: "Die Zwiebel riecht stark.", example_es: "La cebolla huele fuerte." },
+                { article: "die", word: "Karotte", emoji: "🥕", translation_es: "zanahoria", translation_en: "carrot", example_de: "Die Karotte ist gesund.", example_es: "La zanahoria es saludable." },
+                { article: "der", word: "Onkel", emoji: "👨", translation_es: "tío", translation_en: "uncle", example_de: "Mein Onkel wohnt in Köln.", example_es: "Mi tío vive en Colonia." },
+                { article: "die", word: "Tante", emoji: "👩", translation_es: "tía", translation_en: "aunt", example_de: "Meine Tante kommt heute.", example_es: "Mi tía viene hoy." },
+                { article: "der", word: "Cousin", emoji: "👦", translation_es: "primo", translation_en: "cousin", example_de: "Mein Cousin spielt Fußball.", example_es: "Mi primo juega fútbol." },
+                { article: "die", word: "Cousine", emoji: "👧", translation_es: "prima", translation_en: "cousin", example_de: "Meine Cousine studiert in Berlin.", example_es: "Mi prima estudia en Berlín." },
+                { article: "der", word: "Balkon", emoji: "🏢", translation_es: "balcón", translation_en: "balcony", example_de: "Der Balkon ist klein.", example_es: "El balcón es pequeño." },
+                { article: "die", word: "Wand", emoji: "🧱", translation_es: "pared", translation_en: "wall", example_de: "Die Wand ist weiß.", example_es: "La pared es blanca." },
+                { article: "der", word: "Boden", emoji: "🟫", translation_es: "suelo", translation_en: "floor", example_de: "Der Boden ist sauber.", example_es: "El suelo está limpio." },
+                { article: "das", word: "Regal", emoji: "🗄️", translation_es: "estantería", translation_en: "shelf", example_de: "Das Regal steht im Zimmer.", example_es: "La estantería está en la habitación." },
+                { article: "die", word: "Kommode", emoji: "🗄️", translation_es: "cómoda", translation_en: "dresser", example_de: "Die Kommode ist aus Holz.", example_es: "La cómoda es de madera." },
+                { article: "das", word: "Knie", emoji: "🦵", translation_es: "rodilla", translation_en: "knee", example_de: "Mein Knie tut weh.", example_es: "Me duele la rodilla." },
+                { article: "die", word: "Schulter", emoji: "💪", translation_es: "hombro", translation_en: "shoulder", example_de: "Die Schulter ist verletzt.", example_es: "El hombro está lesionado." },
+                { article: "das", word: "Eis", emoji: "🍨", translation_es: "helado", translation_en: "ice cream", example_de: "Das Eis schmeckt gut.", example_es: "El helado sabe bien." },
+                { article: "der", word: "Keks", emoji: "🍪", translation_es: "galleta", translation_en: "cookie", example_de: "Der Keks ist knusprig.", example_es: "La galleta está crujiente." },
+                { article: "der", word: "Teller", emoji: "🍽️", translation_es: "plato", translation_en: "plate", example_de: "Der Teller steht auf dem Tisch.", example_es: "El plato está sobre la mesa." },
+                { article: "das", word: "Glas", emoji: "🥛", translation_es: "vaso", translation_en: "glass", example_de: "Das Glas ist voll.", example_es: "El vaso está lleno." },
+                { article: "die", word: "Tasse", emoji: "☕", translation_es: "taza", translation_en: "cup", example_de: "Die Tasse ist heiß.", example_es: "La taza está caliente." },
+                { article: "das", word: "Messer", emoji: "🔪", translation_es: "cuchillo", translation_en: "knife", example_de: "Das Messer ist scharf.", example_es: "El cuchillo está afilado." },
+                { article: "die", word: "Gabel", emoji: "🍴", translation_es: "tenedor", translation_en: "fork", example_de: "Die Gabel liegt neben dem Teller.", example_es: "El tenedor está al lado del plato." },
+                { article: "der", word: "Löffel", emoji: "🥄", translation_es: "cuchara", translation_en: "spoon", example_de: "Der Löffel ist in der Tasse.", example_es: "La cuchara está en la taza." },
+                { article: "der", word: "Nachbar", emoji: "🏘️", translation_es: "vecino", translation_en: "neighbor", example_de: "Mein Nachbar ist sehr freundlich.", example_es: "Mi vecino es muy amable." },
+                { article: "die", word: "Nachbarin", emoji: "🏘️", translation_es: "vecina", translation_en: "neighbor", example_de: "Die Nachbarin grüßt jeden Morgen.", example_es: "La vecina saluda cada mañana." },
+                { article: "der", word: "Kollege", emoji: "💼", translation_es: "compañero de trabajo", translation_en: "colleague", example_de: "Mein Kollege arbeitet im Büro.", example_es: "Mi compañero trabaja en la oficina." },
+                { article: "die", word: "Kollegin", emoji: "💼", translation_es: "compañera de trabajo", translation_en: "colleague", example_de: "Die Kollegin schreibt eine E-Mail.", example_es: "La compañera escribe un correo." },
+                { article: "die", word: "Kuh", emoji: "🐄", translation_es: "vaca", translation_en: "cow", example_de: "Die Kuh steht auf der Wiese.", example_es: "La vaca está en el prado." },
+                { article: "das", word: "Pferd", emoji: "🐎", translation_es: "caballo", translation_en: "horse", example_de: "Das Pferd läuft schnell.", example_es: "El caballo corre rápido." },
+                { article: "das", word: "Schwein", emoji: "🐖", translation_es: "cerdo", translation_en: "pig", example_de: "Das Schwein ist auf dem Bauernhof.", example_es: "El cerdo está en la granja." },
+                { article: "das", word: "Huhn", emoji: "🐓", translation_es: "gallina", translation_en: "chicken", example_de: "Das Huhn legt ein Ei.", example_es: "La gallina pone un huevo." },
+                { article: "der", word: "Saft", emoji: "🧃", translation_es: "zumo", translation_en: "juice", example_de: "Der Saft ist frisch.", example_es: "El zumo está fresco." },
+                { article: "die", word: "Cola", emoji: "🥤", translation_es: "cola", translation_en: "cola", example_de: "Die Cola ist kalt.", example_es: "La cola está fría." },
+                { article: "die", word: "Suppe", emoji: "🍲", translation_es: "sopa", translation_en: "soup", example_de: "Die Suppe ist warm.", example_es: "La sopa está caliente." },
+                { article: "der", word: "Reis", emoji: "🍚", translation_es: "arroz", translation_en: "rice", example_de: "Der Reis ist fertig.", example_es: "El arroz está listo." },
+                { article: "der", word: "Hals", emoji: "🧣", translation_es: "cuello", translation_en: "neck", example_de: "Mein Hals tut weh.", example_es: "Me duele el cuello." },
+                { article: "der", word: "Kamm", emoji: "🪮", translation_es: "peine", translation_en: "comb", example_de: "Der Kamm liegt im Bad.", example_es: "El peine está en el baño." },
+                { article: "der", word: "Gürtel", emoji: "👖", translation_es: "cinturón", translation_en: "belt", example_de: "Der Gürtel ist braun.", example_es: "El cinturón es marrón." },
+                { article: "der", word: "Kleiderschrank", emoji: "👔", translation_es: "armario", translation_en: "wardrobe", example_de: "Der Kleiderschrank steht im Schlafzimmer.", example_es: "El armario está en el dormitorio." },
+                { article: "der", word: "Kühlschrank", emoji: "🧊", translation_es: "nevera", translation_en: "fridge", example_de: "Der Kühlschrank ist in der Küche.", example_es: "La nevera está en la cocina." },
+                { article: "der", word: "Fernseher", emoji: "📺", translation_es: "televisor", translation_en: "television", example_de: "Der Fernseher steht im Wohnzimmer.", example_es: "El televisor está en la sala." },
+                { article: "die", word: "Heizung", emoji: "🔥", translation_es: "calefacción", translation_en: "heating", example_de: "Die Heizung ist im Winter wichtig.", example_es: "La calefacción es importante en invierno." },
+                { article: "der", word: "Ofen", emoji: "🧑‍🍳", translation_es: "horno", translation_en: "oven", example_de: "Der Ofen ist schon warm.", example_es: "El horno ya está caliente." },
+                { article: "die", word: "Waschmaschine", emoji: "🧺", translation_es: "lavadora", translation_en: "washing machine", example_de: "Die Waschmaschine läuft gerade.", example_es: "La lavadora está funcionando." },
+                { article: "der", word: "Staubsauger", emoji: "🧹", translation_es: "aspiradora", translation_en: "vacuum cleaner", example_de: "Der Staubsauger steht im Flur.", example_es: "La aspiradora está en el pasillo." },
+                { article: "der", word: "Besen", emoji: "🧹", translation_es: "escoba", translation_en: "broom", example_de: "Der Besen ist hinter der Tür.", example_es: "La escoba está detrás de la puerta." },
+                { article: "der", word: "Eimer", emoji: "🪣", translation_es: "cubo", translation_en: "bucket", example_de: "Der Eimer ist voll Wasser.", example_es: "El cubo está lleno de agua." },
+                { article: "die", word: "Decke", emoji: "🛏️", translation_es: "manta", translation_en: "blanket", example_de: "Die Decke ist warm.", example_es: "La manta está caliente." },
+                { article: "das", word: "Kissen", emoji: "🛏️", translation_es: "almohada", translation_en: "pillow", example_de: "Das Kissen liegt auf dem Bett.", example_es: "La almohada está sobre la cama." },
+                { article: "die", word: "Matratze", emoji: "🛏️", translation_es: "colchón", translation_en: "mattress", example_de: "Die Matratze ist weich.", example_es: "El colchón es blando." },
+                { article: "der", word: "Schlaf", emoji: "😴", translation_es: "sueño", translation_en: "sleep", example_de: "Der Schlaf ist wichtig.", example_es: "El sueño es importante." },
+                { article: "die", word: "Musik", emoji: "🎵", translation_es: "música", translation_en: "music", example_de: "Die Musik ist laut.", example_es: "La música está alta." },
+                { article: "das", word: "Lied", emoji: "🎶", translation_es: "canción", translation_en: "song", example_de: "Das Lied ist schön.", example_es: "La canción es bonita." },
+                { article: "die", word: "Gitarre", emoji: "🎸", translation_es: "guitarra", translation_en: "guitar", example_de: "Die Gitarre klingt gut.", example_es: "La guitarra suena bien." },
+                { article: "das", word: "Klavier", emoji: "🎹", translation_es: "piano", translation_en: "piano", example_de: "Das Klavier steht im Zimmer.", example_es: "El piano está en la habitación." },
+                { article: "der", word: "Ausflug", emoji: "🧭", translation_es: "excursión", translation_en: "trip", example_de: "Der Ausflug ist am Sonntag.", example_es: "La excursión es el domingo." },
+                { article: "der", word: "Spaziergang", emoji: "🚶", translation_es: "paseo", translation_en: "walk", example_de: "Der Spaziergang macht Spaß.", example_es: "El paseo es divertido." },
+                { article: "das", word: "Picknick", emoji: "🧺", translation_es: "picnic", translation_en: "picnic", example_de: "Das Picknick ist im Park.", example_es: "El picnic es en el parque." },
+                { article: "das", word: "Shampoo", emoji: "🧴", translation_es: "champú", translation_en: "shampoo", example_de: "Das Shampoo riecht gut.", example_es: "El champú huele bien." },
+                { article: "der", word: "Föhn", emoji: "💨", translation_es: "secador", translation_en: "hair dryer", example_de: "Der Föhn ist im Bad.", example_es: "El secador está en el baño." },
+                { article: "der", word: "Topf", emoji: "🍲", translation_es: "olla", translation_en: "pot", example_de: "Der Topf steht auf dem Herd.", example_es: "La olla está sobre la estufa." },
+                { article: "die", word: "Pfanne", emoji: "🍳", translation_es: "sartén", translation_en: "pan", example_de: "Die Pfanne ist heiß.", example_es: "La sartén está caliente." },
+                { article: "der", word: "Rucksack", emoji: "🎒", translation_es: "mochila", translation_en: "backpack", example_de: "Der Rucksack liegt unter dem Tisch.", example_es: "La mochila está debajo de la mesa." }
+            ]
+        });
+
         // Reorganize non-LiD nouns into cleaner theme groups while preserving
         // the existing noun objects, examples, and translations.
         const normalizeThemeKey = (value) => value
@@ -1878,7 +2182,8 @@
             .filter(group => group.id.startsWith('lid_'))
             .map(group => ({
                 ...group,
-                ...(lidThemeTranslations[group.id] || {})
+                ...(lidThemeTranslations[group.id] || {}),
+                tags: ['LiD']
             }));
         const nonLiDByKey = new Map();
 
@@ -2251,20 +2556,20 @@
                 nouns: pickThemeNouns(["der|sohn", "die|tochter", "der|bruder", "die|schwester", "die|geschwister"])
             },
             {
+                id: "verwandte",
+                title: "Verwandte",
+                title_es: "Parientes",
+                title_en: "Relatives",
+                level: "A1",
+                nouns: pickThemeNouns(["der|onkel", "die|tante", "der|cousin", "die|cousine"])
+            },
+            {
                 id: "menschen",
                 title: "Menschen",
                 title_es: "Personas",
                 title_en: "People",
                 level: "A1",
                 nouns: pickThemeNouns(["der|mann", "die|frau", "das|kind", "das|baby", "der|freund", "die|freundin", "der|benutzer"])
-            },
-            {
-                id: "bewohner",
-                title: "Bewohner",
-                title_es: "Habitantes",
-                title_en: "Residents",
-                level: "A1-B1",
-                nouns: pickThemeNouns(["der|einwohner", "die|einwohnerin"])
             },
             {
                 id: "medizinberufe",
@@ -2289,14 +2594,6 @@
                 title_en: "Service",
                 level: "A1",
                 nouns: pickThemeNouns(["der|kellner", "die|kellnerin", "der|verkaufer", "die|verkauferin", "der|sekretar", "die|sekretaurin"])
-            },
-            {
-                id: "itberufe",
-                title: "IT",
-                title_es: "Informática",
-                title_en: "IT",
-                level: "A1",
-                nouns: pickThemeNouns(["der|informatiker", "die|informatikerin"])
             },
             {
                 id: "handwerk",
@@ -2371,6 +2668,14 @@
                 nouns: pickThemeNouns(["das|haus", "der|eingang", "das|fenster", "die|tur", "das|zimmer", "die|kuche", "das|bad"])
             },
             {
+                id: "bauteile",
+                title: "Bauteile",
+                title_es: "Partes",
+                title_en: "Parts",
+                level: "A1",
+                nouns: pickThemeNouns(["der|balkon", "die|wand", "der|boden"])
+            },
+            {
                 id: "moebel",
                 title: "Möbel",
                 title_es: "Muebles",
@@ -2379,12 +2684,36 @@
                 nouns: pickThemeNouns(["der|tisch", "der|stuhl", "das|bett", "der|schrank", "das|sofa", "der|teppich", "der|spiegel"])
             },
             {
+                id: "aufbewahrung",
+                title: "Aufbewahrung",
+                title_es: "Almacenaje",
+                title_en: "Storage",
+                level: "A1",
+                nouns: pickThemeNouns(["das|regal", "die|kommode", "der|kleiderschrank"])
+            },
+            {
+                id: "haushaltstechnik",
+                title: "Haushaltstechnik",
+                title_es: "Electrodomésticos",
+                title_en: "Appliances",
+                level: "A1",
+                nouns: pickThemeNouns(["der|fernseher", "der|kuhlschrank", "die|heizung", "der|ofen"])
+            },
+            {
+                id: "haushalt",
+                title: "Haushalt",
+                title_es: "Hogar",
+                title_en: "Household",
+                level: "A1",
+                nouns: pickThemeNouns(["die|waschmaschine", "der|staubsauger", "der|besen", "der|eimer"])
+            },
+            {
                 id: "wohnen",
                 title: "Wohnen",
                 title_es: "Vivienda",
                 title_en: "Housing",
                 level: "A1-B1",
-                nouns: pickThemeNouns(["die|wohnung", "der|strom", "der|rauchmelder", "die|haushaltshilfe", "die|lampe"])
+                nouns: pickThemeNouns(["die|wohnung", "der|strom", "der|rauchmelder", "die|haushaltshilfe", "die|lampe", "der|einwohner", "die|einwohnerin"])
             },
             {
                 id: "orte",
@@ -2419,12 +2748,36 @@
                 nouns: pickThemeNouns(["der|baum", "die|blume", "der|garten", "der|park", "die|sonne", "das|meer", "das|land"])
             },
             {
+                id: "wetter",
+                title: "Wetter",
+                title_es: "Clima",
+                title_en: "Weather",
+                level: "A1",
+                nouns: pickThemeNouns(["die|sonne", "der|regen", "der|schnee", "der|wind", "die|wolke", "das|wetter"])
+            },
+            {
                 id: "tiere",
                 title: "Tiere",
                 title_es: "Animales",
                 title_en: "Animals",
                 level: "A1",
                 nouns: pickThemeNouns(["das|tier", "der|hund", "die|katze"])
+            },
+            {
+                id: "haustiere",
+                title: "Haustiere",
+                title_es: "Mascotas",
+                title_en: "Pets",
+                level: "A1",
+                nouns: pickThemeNouns(["der|vogel", "der|fisch", "der|hamster", "das|haustier"])
+            },
+            {
+                id: "bauernhof",
+                title: "Bauernhof",
+                title_es: "Granja",
+                title_en: "Farm",
+                level: "A1",
+                nouns: pickThemeNouns(["die|kuh", "das|pferd", "das|schwein", "das|huhn"])
             },
             {
                 id: "verkehr",
@@ -2467,12 +2820,28 @@
                 nouns: pickThemeNouns(["der|apfel", "die|banane", "das|obst", "das|gemuse"])
             },
             {
+                id: "fruechte",
+                title: "Früchte",
+                title_es: "Frutas",
+                title_en: "Fruits",
+                level: "A1",
+                nouns: pickThemeNouns(["die|orange", "die|traube", "die|erdbeere", "die|birne"])
+            },
+            {
+                id: "gemuese",
+                title: "Gemüse",
+                title_es: "Verduras",
+                title_en: "Vegetables",
+                level: "A1",
+                nouns: pickThemeNouns(["die|kartoffel", "die|tomate", "die|zwiebel", "die|karotte"])
+            },
+            {
                 id: "mahlzeit",
                 title: "Mahlzeit",
                 title_es: "Comida",
                 title_en: "Meal",
                 level: "A1",
-                nouns: pickThemeNouns(["das|brot", "das|fleisch", "der|fisch", "das|ei", "der|salat"])
+                nouns: pickThemeNouns(["das|brot", "das|fleisch", "der|fisch", "das|ei", "der|salat", "die|suppe", "der|reis"])
             },
             {
                 id: "zutaten",
@@ -2483,12 +2852,100 @@
                 nouns: pickThemeNouns(["der|kase", "die|wurst", "der|zucker", "das|salz", "der|pfeffer"])
             },
             {
+                id: "suesses",
+                title: "Süßes",
+                title_es: "Dulces",
+                title_en: "Sweets",
+                level: "A1",
+                nouns: pickThemeNouns(["die|kekse", "die|schokolade", "der|kuchen", "das|bonbon", "das|eis", "der|keks"])
+            },
+            {
+                id: "fruehstueck",
+                title: "Frühstück",
+                title_es: "Desayuno",
+                title_en: "Breakfast",
+                level: "A1",
+                nouns: pickThemeNouns(["die|butter", "die|marmelade", "das|brotchen", "der|honig", "das|fruhstuck"])
+            },
+            {
                 id: "trinken",
                 title: "Trinken",
                 title_es: "Bebidas",
                 title_en: "Drinks",
                 level: "A1",
-                nouns: pickThemeNouns(["die|milch", "das|wasser", "der|kaffee", "der|tee", "das|bier", "der|wein"])
+                nouns: pickThemeNouns(["die|milch", "das|wasser", "der|kaffee", "der|tee", "das|bier", "der|wein", "der|saft"])
+            },
+            {
+                id: "kaltgetraenke",
+                title: "Kaltgetränke",
+                title_es: "Refrescos",
+                title_en: "Softdrinks",
+                level: "A1",
+                nouns: pickThemeNouns(["die|cola"])
+            },
+            {
+                id: "kueche",
+                title: "Küche",
+                title_es: "Cocina",
+                title_en: "Kitchen",
+                level: "A1",
+                nouns: pickThemeNouns(["der|teller", "das|glas", "die|tasse", "das|messer", "die|gabel", "der|loffel"])
+            },
+            {
+                id: "kochen",
+                title: "Kochen",
+                title_es: "Cocinar",
+                title_en: "Cooking",
+                level: "A1",
+                nouns: pickThemeNouns(["der|topf", "die|pfanne"])
+            },
+            {
+                id: "farben",
+                title: "Farben",
+                title_es: "Colores",
+                title_en: "Colors",
+                level: "A1",
+                nouns: pickThemeNouns(["die|farbe", "das|blau", "das|rot", "das|grun", "das|gelb", "das|weiss", "das|schwarz"])
+            },
+            {
+                id: "bad",
+                title: "Bad",
+                title_es: "Baño",
+                title_en: "Bathroom",
+                level: "A1",
+                nouns: pickThemeNouns(["die|dusche", "die|toilette", "das|waschbecken", "das|handtuch", "die|seife", "die|zahnburste", "der|kamm"])
+            },
+            {
+                id: "pflegeartikel",
+                title: "Pflegeartikel",
+                title_es: "Aseo",
+                title_en: "Toiletries",
+                level: "A1",
+                nouns: pickThemeNouns(["das|shampoo", "der|fohn"])
+            },
+            {
+                id: "schule",
+                title: "Schule",
+                title_es: "Escuela",
+                title_en: "School",
+                level: "A1",
+                nouns: pickThemeNouns(["die|klasse", "der|schuler", "die|schulerin", "die|tafel", "das|worterbuch", "der|rucksack"])
+            },
+            {
+                id: "freunde",
+                title: "Freunde",
+                title_es: "Amistad",
+                title_en: "Friends",
+                level: "A1",
+                nouns: pickThemeNouns(["der|nachbar", "die|nachbarin", "der|kollege", "die|kollegin"])
+            },
+            {
+                id: "schlafzimmer",
+                title: "Schlafzimmer",
+                title_es: "Dormitorio",
+                title_en: "Bedroom",
+                level: "A1",
+                nouns: pickThemeNouns(["die|decke", "das|kissen", "die|matratze", "der|schlaf"])
             },
             {
                 id: "geschaefte",
@@ -2592,6 +3049,7 @@
                 title_es: "Contacto",
                 title_en: "Contact",
                 level: "A1-B1",
+                tags: ["tech"],
                 nouns: pickThemeNouns(["das|telefon", "das|e-mail", "das|fax"])
             },
             {
@@ -2619,24 +3077,55 @@
                 nouns: pickThemeNouns(["der|verein", "der|spass"])
             },
             {
-                id: "technik",
-                title: "Technik",
-                title_es: "Tecnología",
-                title_en: "Tech",
+                id: "wochenende",
+                title: "Wochenende",
+                title_es: "Planes",
+                title_en: "Weekend",
+                level: "A1",
+                nouns: pickThemeNouns(["der|ausflug", "der|spaziergang", "das|picknick"])
+            },
+            {
+                id: "geraete",
+                title: "Geräte",
+                title_es: "Dispositivos",
+                title_en: "Devices",
                 level: "A1-B1",
+                tags: ["tech"],
                 nouns: pickThemeNouns([
                     "das|handy",
                     "das|smartphone",
                     "das|tablet",
                     "der|computer",
                     "der|laptop",
-                    "der|drucker",
+                    "der|drucker"
+                ])
+            },
+            {
+                id: "informatik",
+                title: "Informatik",
+                title_es: "Informática",
+                title_en: "Computing",
+                level: "A1-B1",
+                tags: ["tech"],
+                nouns: pickThemeNouns([
                     "das|internet",
                     "die|verbindung",
                     "das|kennwort",
-                    "die|datei",
                     "die|technologie",
                     "die|kunstliche intelligenz",
+                    "der|informatiker",
+                    "die|informatikerin"
+                ])
+            },
+            {
+                id: "system",
+                title: "System",
+                title_es: "Sistema",
+                title_en: "System",
+                level: "A1-B1",
+                tags: ["tech"],
+                nouns: pickThemeNouns([
+                    "die|datei",
                     "die|einstellung",
                     "die|taste",
                     "der|fehler"
@@ -2664,7 +3153,7 @@
                 title_es: "Accesorios",
                 title_en: "Accessories",
                 level: "A1",
-                nouns: pickThemeNouns(["die|brille", "der|hut", "die|mutze", "der|schal"])
+                nouns: pickThemeNouns(["die|brille", "der|hut", "die|mutze", "der|schal", "der|gurtel"])
             },
             {
                 id: "schuhe",
@@ -2691,6 +3180,40 @@
                 level: "A1",
                 image: "../images/body_parts_illustration.png",
                 nouns: pickThemeNouns(["die|hand", "der|finger", "der|arm", "das|bein", "der|fuss", "der|bauch", "der|rucken"])
+            },
+            {
+                id: "organe",
+                title: "Organe",
+                title_es: "Órganos",
+                title_en: "Organs",
+                level: "A1",
+                image: "../images/body_parts_illustration.png",
+                nouns: pickThemeNouns(["das|herz", "die|lunge", "die|leber", "das|gehirn"])
+            },
+            {
+                id: "gelenke",
+                title: "Gelenke",
+                title_es: "Articulaciones",
+                title_en: "Joints",
+                level: "A1",
+                image: "../images/body_parts_illustration.png",
+                nouns: pickThemeNouns(["das|knie", "die|schulter", "der|hals"])
+            },
+            {
+                id: "spielzeug",
+                title: "Spielzeug",
+                title_es: "Juguetes",
+                title_en: "Toys",
+                level: "A1",
+                nouns: pickThemeNouns(["der|ball", "die|puppe", "das|spielzeug", "das|spiel"])
+            },
+            {
+                id: "musik",
+                title: "Klänge",
+                title_es: "Sonidos",
+                title_en: "Sounds",
+                level: "A1",
+                nouns: pickThemeNouns(["die|musik", "das|lied", "die|gitarre", "das|klavier"])
             },
             {
                 id: "kalender",
@@ -2750,15 +3273,156 @@
             }
         ];
 
+        const normalizedThemeLevels = {
+            familie: "A1",
+            geschwister: "A1",
+            verwandte: "A1",
+            menschen: "A1",
+            haus: "A1",
+            bauteile: "A1",
+            moebel: "A1",
+            aufbewahrung: "A1",
+            haushaltstechnik: "A1",
+            haushalt: "A1",
+            natur: "A1",
+            wetter: "A1",
+            tiere: "A1",
+            haustiere: "A1",
+            bauernhof: "A1",
+            obst: "A1",
+            fruechte: "A1",
+            gemuese: "A1",
+            mahlzeit: "A1",
+            zutaten: "A1",
+            suesses: "A1",
+            fruehstueck: "A1",
+            trinken: "A1",
+            kaltgetraenke: "A1",
+            kueche: "A1",
+            kochen: "A1",
+            farben: "A1",
+            bad: "A1",
+            pflegeartikel: "A1",
+            schule: "A1",
+            freunde: "A1",
+            schlafzimmer: "A1",
+            gesicht: "A1",
+            koerper: "A1",
+            organe: "A1",
+            gelenke: "A1",
+            spielzeug: "A1",
+            musik: "A1",
+            kalender: "A1",
+            uhrzeit: "A1",
+            tageszeit: "A1",
+            wochenende: "A1",
+            kleidung: "A1",
+            oberteile: "A1",
+            accessoires: "A1",
+            schuhe: "A1",
+            bewohner: "A2",
+            wohnen: "A2",
+            orte: "A2",
+            ausgehen: "A2",
+            verkehr: "A2",
+            strassenverkehr: "A2",
+            reisen: "A2",
+            reiseweg: "A2",
+            geschaefte: "A2",
+            einkauf: "A2",
+            waren: "A2",
+            preise: "A2",
+            zahlung: "A2",
+            kontakte: "A2",
+            geraete: "A2",
+            system: "A2",
+            freizeit: "A2",
+            gefuehle: "A2",
+            medizinberufe: "B1",
+            lehre: "B1",
+            service: "B1",
+            handwerk: "B1",
+            alltagjobs: "B1",
+            pflege: "B1",
+            sicherheit: "B1",
+            hochschule: "B1",
+            lernen: "B1",
+            schreiben: "B1",
+            pruefungen: "B1",
+            dienste: "B1",
+            merkmale: "B1",
+            abgaben: "B1",
+            symptome: "B1",
+            medizin: "B1",
+            notfall: "B1",
+            medien: "B1",
+            feiern: "B1",
+            events: "B1",
+            informatik: "B1",
+            begriffe: "B1",
+            hilfe: "B1",
+            amt: "B1"
+        };
+
+        const normalizedSpecificNonLiDThemes = specificNonLiDThemes.map(group => ({
+            ...group,
+            level: normalizedThemeLevels[group.id] || group.level
+        }));
+
         nounGroups.length = 0;
-        nounGroups.push(...specificNonLiDThemes, ...lidThemeGroups);
+        nounGroups.push(...normalizedSpecificNonLiDThemes, ...lidThemeGroups.map(group => ({
+            ...group,
+            level: 'B1'
+        })));
 
     </script>
+
+    <div class="modal-overlay" id="settings-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="settings-close">×</button>
+            <div class="settings-modal-body">
+                <div class="settings-modal-title">Einstellungen</div>
+                <div class="settings-modal-subtitle">Anzeige und Lernoptionen</div>
+                <div class="settings-grid">
+                    <div class="settings-item">
+                        <label class="switch-label">Übersetzungssprache<span class="label-translation">(ES / EN)</span></label>
+                        <div class="lang-toggle" id="translation-lang-toggle" role="tablist" aria-label="Übersetzungssprache">
+                            <div id="langEs" class="lang-option active" data-lang="es" role="tab" aria-selected="true">ES</div>
+                            <div id="langEn" class="lang-option" data-lang="en" role="tab" aria-selected="false">EN</div>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <label class="switch-label" for="recall-switch">Übersetzung<span class="label-translation">(traducción)</span></label>
+                        <label class="switch">
+                            <input type="checkbox" id="recall-switch" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-item">
+                        <label class="switch-label" for="view-toggle">Ansicht: Kompakt</label>
+                        <label class="switch">
+                            <input type="checkbox" id="view-toggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-item">
+                        <label class="switch-label" for="lid-switch">Leben in Deutschland<span class="label-translation">(LiD)</span></label>
+                        <label class="switch">
+                            <input type="checkbox" id="lid-switch" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Use nounGroups from imported file
 
         let currentGroupIndex = 0;
+        let currentLevelFilter = 'A1';
+        let currentTranslationLang = 'es';
 
         // DOM Elements
         const container = document.getElementById('cards-container');
@@ -2766,11 +3430,14 @@
         const nextBtn = document.getElementById('next-group-btn');
         const groupIndicator = document.getElementById('group-indicator');
         const recallSwitch = document.getElementById('recall-switch');
-        const englishSwitch = document.getElementById('english-switch');
         const lidSwitch = document.getElementById('lid-switch');
         const searchInput = document.getElementById('search-input');
         const clearSearchBtn = document.getElementById('clear-search');
         const searchInfo = document.getElementById('search-results-info');
+        const levelFilterButtons = Array.from(document.querySelectorAll('.level-filter-btn'));
+        const langEs = document.getElementById('langEs');
+        const langEn = document.getElementById('langEn');
+        const translationLangToggle = document.getElementById('translation-lang-toggle');
 
         // Modal Elements
         const modal = document.getElementById('word-modal');
@@ -2787,6 +3454,9 @@
         const tipsBtn = document.getElementById('tips-btn');
         const tipsModal = document.getElementById('tips-modal');
         const tipsClose = document.getElementById('tips-close');
+        const settingsBtn = document.getElementById('settings-btn');
+        const settingsModal = document.getElementById('settings-modal');
+        const settingsClose = document.getElementById('settings-close');
 
         // Initial Render
         function isLiDGroup(group) {
@@ -2794,7 +3464,40 @@
         }
 
         function getVisibleGroups() {
-            return nounGroups.filter(group => lidSwitch.checked || !isLiDGroup(group));
+            if (currentLevelFilter === 'B1_LID') {
+                return nounGroups.filter(group => isLiDGroup(group));
+            }
+
+            const baseGroups = nounGroups.filter(group => lidSwitch.checked || !isLiDGroup(group));
+
+            if (currentLevelFilter === 'all') {
+                return baseGroups;
+            }
+
+            return baseGroups.filter(group => !isLiDGroup(group) && group.level === currentLevelFilter);
+        }
+
+        function updateLevelFilterButtons() {
+            levelFilterButtons.forEach(button => {
+                button.classList.toggle('active', button.dataset.level === currentLevelFilter);
+            });
+        }
+
+        function setLevelFilter(level) {
+            currentLevelFilter = level;
+            currentGroupIndex = 0;
+            updateLevelFilterButtons();
+
+            if (searchInput.value.trim() !== '') {
+                handleSearch();
+                return;
+            }
+
+            if (isCompactMode) {
+                renderContentGrid();
+            } else {
+                renderGroup(0);
+            }
         }
 
         function init() {
@@ -2809,10 +3512,13 @@
             prevBtn.addEventListener('click', () => changeGroup(-1));
             nextBtn.addEventListener('click', () => changeGroup(1));
             recallSwitch.addEventListener('change', updateVisibility);
-            englishSwitch.addEventListener('change', updateVisibility);
             lidSwitch.addEventListener('change', handleLiDToggle);
             searchInput.addEventListener('input', handleSearch);
             clearSearchBtn.addEventListener('click', clearSearch);
+            translationLangToggle.addEventListener('click', handleLanguageToggle);
+            levelFilterButtons.forEach(button => {
+                button.addEventListener('click', () => setLevelFilter(button.dataset.level));
+            });
 
             // Modal Listeners
             modalClose.addEventListener('click', closeWordModal);
@@ -2829,12 +3535,22 @@
             tipsModal.addEventListener('click', (e) => {
                 if (e.target === tipsModal) tipsModal.classList.remove('visible');
             });
+            settingsBtn.addEventListener('click', () => {
+                settingsModal.classList.add('visible');
+            });
+            settingsClose.addEventListener('click', () => {
+                settingsModal.classList.remove('visible');
+            });
+            settingsModal.addEventListener('click', (e) => {
+                if (e.target === settingsModal) settingsModal.classList.remove('visible');
+            });
 
             // Key listeners
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     closeWordModal();
                     tipsModal.classList.remove('visible');
+                    settingsModal.classList.remove('visible');
                 }
                 if (e.key === 'ArrowRight') changeGroup(1);
                 if (e.key === 'ArrowLeft') changeGroup(-1);
@@ -2857,15 +3573,15 @@
             if (visibleGroups.length === 0) {
                 currentGroupIndex = 0;
                 groupIndicator.innerHTML = '<span class="group-indicator-content"><span>Keine Gruppen sichtbar</span></span>';
-                container.innerHTML = '<p style="text-align:center; width:100%;">Aktiviere LiD, um die LiD-Gruppen anzuzeigen.</p>';
+                container.innerHTML = '<p style="text-align:center; width:100%;">Keine Gruppen für diesen Filter gefunden.</p>';
                 updateNavigation();
                 return;
             }
 
             currentGroupIndex = Math.max(0, Math.min(index, visibleGroups.length - 1));
             const group = visibleGroups[currentGroupIndex];
-            const lidBadge = isLiDGroup(group) ? '<span class="lid-badge">LiD</span>' : '';
-            groupIndicator.innerHTML = `<span class="group-indicator-content"><span>${group.title}</span>${lidBadge}</span>`;
+            const groupTags = createTagMarkup(getGroupTags(group));
+            groupIndicator.innerHTML = `<span class="group-indicator-content"><span>${group.title}</span>${groupTags}</span>`;
 
             container.innerHTML = '';
 
@@ -2916,7 +3632,18 @@
             window.speechSynthesis.speak(utterance);
         }
 
-        function createCard(noun, level) {
+        function createFilledSpeakerIcon() {
+            const icon = document.createElement('span');
+            icon.innerHTML = `
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M3 9v6h4l5 4V5L7 9H3z"></path>
+                    <path d="M15.5 9.25a1 1 0 0 1 1.41 0 4.25 4.25 0 0 1 0 6.01 1 1 0 0 1-1.41-1.41 2.25 2.25 0 0 0 0-3.19 1 1 0 0 1 0-1.41z"></path>
+                </svg>
+            `;
+            return icon.firstElementChild;
+        }
+
+        function createCard(noun, level, highlightQuery = '') {
             const card = document.createElement('div');
             card.className = 'card';
             // card.onclick removed, logic moved to children
@@ -2938,7 +3665,7 @@
             // German Word Structure
             const wordSpan = document.createElement('span');
             wordSpan.className = 'german-word';
-            wordSpan.innerHTML = `<span class="article-span">${noun.article}</span>${noun.word}`;
+            wordSpan.innerHTML = `<span class="article-span">${escapeHtml(noun.article)}</span>${highlightText(noun.word, highlightQuery)}`;
 
             header.appendChild(wordSpan);
 
@@ -2963,11 +3690,11 @@
 
             const esMeaning = document.createElement('span');
             esMeaning.className = 'spanish-meaning';
-            esMeaning.textContent = noun.translation_es;
+            esMeaning.innerHTML = highlightText(noun.translation_es, highlightQuery);
 
             const enMeaning = document.createElement('span');
             enMeaning.className = 'english-meaning';
-            enMeaning.textContent = noun.translation_en;
+            enMeaning.innerHTML = highlightText(noun.translation_en, highlightQuery);
 
             body.appendChild(icon);
             body.appendChild(esMeaning);
@@ -2981,29 +3708,53 @@
 
         function updateVisibility() {
             const showRecall = recallSwitch.checked;
-            const showEnglish = englishSwitch.checked;
 
             document.querySelectorAll('.spanish-meaning').forEach(el => {
-                el.style.opacity = showRecall ? '1' : '0';
+                const shouldShow = showRecall && currentTranslationLang === 'es';
+                el.style.opacity = shouldShow ? '1' : '0';
+                el.style.display = shouldShow ? '' : 'none';
             });
 
             document.querySelectorAll('.english-meaning').forEach(el => {
-                if (showEnglish) {
-                    el.classList.add('visible');
-                } else {
-                    el.classList.remove('visible');
-                }
+                const shouldShow = showRecall && currentTranslationLang === 'en';
+                el.style.opacity = shouldShow ? '1' : '0';
+                el.style.display = shouldShow ? '' : 'none';
             });
 
             document.querySelectorAll('.level-header-translation').forEach(el => {
-                el.textContent = showEnglish ? (el.dataset.en || '') : (el.dataset.es || '');
+                el.textContent = currentTranslationLang === 'en' ? (el.dataset.en || '') : (el.dataset.es || '');
             });
+
+            document.querySelectorAll('.kompakt-translation').forEach(el => {
+                el.textContent = currentTranslationLang === 'en' ? (el.dataset.en || '') : (el.dataset.es || '');
+            });
+        }
+
+        function setTranslationLanguage(lang) {
+            currentTranslationLang = lang === 'en' ? 'en' : 'es';
+            langEs.classList.toggle('active', currentTranslationLang === 'es');
+            langEn.classList.toggle('active', currentTranslationLang === 'en');
+            langEs.setAttribute('aria-selected', currentTranslationLang === 'es' ? 'true' : 'false');
+            langEn.setAttribute('aria-selected', currentTranslationLang === 'en' ? 'true' : 'false');
+
+            if (searchInput.value.trim() !== '') {
+                handleSearch();
+                return;
+            }
+
+            updateVisibility();
+        }
+
+        function handleLanguageToggle(event) {
+            const option = event.target.closest('.lang-option');
+            if (!option) return;
+            setTranslationLanguage(option.dataset.lang);
         }
 
         function openWordModal(noun, level) {
             modalEmoji.textContent = noun.emoji;
             modalWord.innerHTML = `<span style="font-size:0.5em; display:block; margin-bottom:5px;">${noun.article}</span>${noun.word}`;
-            modalTranslation.textContent = noun.translation_es;
+            modalTranslation.textContent = currentTranslationLang === 'en' ? noun.translation_en : noun.translation_es;
             modalLevel.textContent = level || ''; // Set level
             modalExampleDe.textContent = noun.example_de || '-';
             modalExampleEs.textContent = noun.example_es || '-';
@@ -3071,11 +3822,20 @@
                 .trim();
         }
 
+        function getGroupTags(group) {
+            return Array.isArray(group.tags) ? group.tags : [];
+        }
+
+        function createTagMarkup(tags = []) {
+            return tags.map(tag => `<span class="lid-badge">${tag}</span>`).join('');
+        }
+
         function groupMatchesQuery(group, query) {
             const fields = [
                 group.title,
                 group.title_es,
-                group.title_en
+                group.title_en,
+                ...getGroupTags(group)
             ];
 
             return fields.some(field => normalizeSearchText(field).includes(query));
@@ -3093,9 +3853,36 @@
             return fields.some(field => normalizeSearchText(field).includes(query));
         }
 
+        function escapeHtml(value = '') {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function escapeRegExp(value = '') {
+            return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function highlightText(text, rawQuery) {
+            const cleanQuery = String(rawQuery || '').trim();
+            if (!cleanQuery) return escapeHtml(text);
+
+            const terms = [...new Set(cleanQuery.split(/\s+/).filter(Boolean))];
+            if (terms.length === 0) return escapeHtml(text);
+
+            const pattern = terms.map(term => escapeRegExp(term)).join('|');
+            const regex = new RegExp(`(${pattern})`, 'gi');
+
+            return escapeHtml(text).replace(regex, '<span class="highlight">$1</span>');
+        }
+
         // Search Logic
         function handleSearch() {
-            const query = normalizeSearchText(searchInput.value);
+            const rawQuery = searchInput.value.trim();
+            const query = normalizeSearchText(rawQuery);
             clearSearchBtn.classList.toggle('visible', query.length > 0);
 
             if (query === '') {
@@ -3114,7 +3901,7 @@
                     : group.nouns.filter(noun => nounMatchesQuery(noun, query));
 
                 matchingNouns.forEach(noun => {
-                    const card = createCard(noun, group.level);
+                    const card = createCard(noun, group.level, rawQuery);
                     container.appendChild(card);
                     matchCount++;
                 });
@@ -3189,7 +3976,7 @@
             }
         }
 
-        function renderContentGrid(groupsToRender = getVisibleGroups()) {
+        function renderContentGrid(groupsToRender = getVisibleGroups(), highlightQuery = '') {
             gridContainer.innerHTML = '';
 
             groupsToRender.forEach((group, index) => {
@@ -3210,17 +3997,18 @@
                         cardTitle,
                         color,
                         group.level,
-                        isLiDGroup(group),
                         group.title_es,
                         group.title_en,
-                        group.title
+                        group.title,
+                        getGroupTags(group),
+                        highlightQuery
                     );
                     gridContainer.appendChild(card);
                 }
             });
         }
 
-        function createKompaktCard(nouns, title, color, level, isLiDTheme = false, titleEs = '', titleEn = '', spokenTitle = title) {
+        function createKompaktCard(nouns, title, color, level, titleEs = '', titleEn = '', spokenTitle = title, tags = [], highlightQuery = '') {
             const card = document.createElement('div');
             card.className = 'level-card';
 
@@ -3233,14 +4021,14 @@
             headerText.className = 'level-header-text';
 
             const titleSpan = document.createElement('span');
-            titleSpan.textContent = title;
+            titleSpan.innerHTML = highlightText(title, highlightQuery);
             headerText.appendChild(titleSpan);
 
             const headerSpeaker = document.createElement('span');
             headerSpeaker.className = 'audio-icon level-header-audio';
-            headerSpeaker.textContent = '🔊';
             headerSpeaker.title = `Aussprache: ${spokenTitle}`;
             headerSpeaker.setAttribute('aria-label', `Aussprache: ${spokenTitle}`);
+            headerSpeaker.appendChild(createFilledSpeakerIcon());
             headerSpeaker.onclick = (e) => {
                 e.stopPropagation();
                 speak(spokenTitle);
@@ -3250,23 +4038,26 @@
             const headerMeta = document.createElement('div');
             headerMeta.className = 'level-header-meta';
 
+            const headerTags = document.createElement('div');
+            headerTags.className = 'level-header-tags';
+            tags.forEach(tag => {
+                const badge = document.createElement('span');
+                badge.className = 'lid-badge';
+                badge.textContent = tag;
+                headerTags.appendChild(badge);
+            });
+
             if (titleEs || titleEn) {
                 const translationSpan = document.createElement('span');
                 translationSpan.className = 'level-header-translation';
                 translationSpan.dataset.es = titleEs || '';
                 translationSpan.dataset.en = titleEn || '';
-                translationSpan.textContent = englishSwitch.checked ? (titleEn || '') : (titleEs || '');
+                translationSpan.innerHTML = highlightText(currentTranslationLang === 'en' ? (titleEn || '') : (titleEs || ''), highlightQuery);
                 headerMeta.appendChild(translationSpan);
             }
 
-            if (isLiDTheme) {
-                const badge = document.createElement('span');
-                badge.className = 'lid-badge';
-                badge.textContent = 'LiD';
-                headerMeta.appendChild(badge);
-            }
-
             header.appendChild(headerText);
+            header.appendChild(headerTags);
             header.appendChild(headerMeta);
 
             // Body
@@ -3284,25 +4075,17 @@
                 const tdDe = document.createElement('td');
                 const wordSpan = document.createElement('span');
                 wordSpan.className = 'kompakt-german-word';
-                wordSpan.innerHTML = `<span class="article-span kompakt-article">${noun.article}</span><span>${noun.word}</span>`;
-
-                // Add Speaker Icon to EVERY item
-                const speaker = document.createElement('span');
-                speaker.className = 'audio-icon';
-                speaker.textContent = '🔊';
-                speaker.onclick = (e) => {
-                    e.stopPropagation();
-                    speak(`${noun.article} ${noun.word}`);
-                };
-                wordSpan.appendChild(speaker);
+                wordSpan.innerHTML = `<span class="article-span kompakt-article">${escapeHtml(noun.article)}</span><span>${highlightText(noun.word, highlightQuery)}</span>`;
 
                 tdDe.appendChild(wordSpan);
 
                 // Cell 2: Translation
                 const tdEs = document.createElement('td');
                 const transSpan = document.createElement('span');
-                transSpan.className = 'kompakt-spanish';
-                transSpan.textContent = noun.translation_es;
+                transSpan.className = 'kompakt-spanish kompakt-translation';
+                transSpan.dataset.es = noun.translation_es || '';
+                transSpan.dataset.en = noun.translation_en || '';
+                transSpan.innerHTML = highlightText(currentTranslationLang === 'en' ? noun.translation_en : noun.translation_es, highlightQuery);
                 tdEs.appendChild(transSpan);
 
                 // Add Cells
@@ -3326,7 +4109,8 @@
         // Override handleSearch to support Kompakt Mode
         const originalHandleSearch = handleSearch;
         handleSearch = function () {
-            const query = normalizeSearchText(searchInput.value);
+            const rawQuery = searchInput.value.trim();
+            const query = normalizeSearchText(rawQuery);
             clearSearchBtn.classList.toggle('visible', query.length > 0);
 
             if (!isCompactMode) {
@@ -3350,21 +4134,18 @@
 
             getVisibleGroups().forEach(group => {
                 const matchesTheme = groupMatchesQuery(group, query);
-                const matchingNouns = matchesTheme
-                    ? group.nouns
-                    : group.nouns.filter(noun => nounMatchesQuery(noun, query));
+                const matchingNouns = group.nouns.filter(noun => nounMatchesQuery(noun, query));
 
-                if (matchingNouns.length > 0) {
-                    matchCount += matchingNouns.length;
-                    // Create a temporary group object with filtered nouns
+                if (matchesTheme || matchingNouns.length > 0) {
+                    matchCount += matchesTheme ? group.nouns.length : matchingNouns.length;
                     filteredGroups.push({
                         ...group,
-                        nouns: matchingNouns
+                        nouns: group.nouns
                     });
                 }
             });
 
-            renderContentGrid(filteredGroups);
+            renderContentGrid(filteredGroups, rawQuery);
             searchInfo.textContent = `${matchCount} Ergebnisse gefunden`;
         };
 
