@@ -1,6 +1,6 @@
 {
   "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word, with the STRICT EXCEPTION of the group 'Leben in Deutschland'. MAINTENANCE RULE: whenever this file changes, update lastUpdated.",
-  "lastUpdated": "2026-03-28T10:15:00.000Z",
+  "lastUpdated": "2026-03-29T09:00:00.000Z",
   "totalGroups": 87,
   "totalVerbs": 485,
   "groups": [
@@ -861,7 +861,7 @@
         "verbieten",
         "befehlen",
         "berechtigen",
-        "bestimmen",
+        "gelten",
         "einhalten",
         "einschränken"
       ],
@@ -869,6 +869,22 @@
       "groupNameSpanish": "Reglas",
       "groupNameEnglish": "Rules",
       "groupNumberPerLevel": 1
+    },
+    {
+      "level": "B1.1",
+      "verbCount": 5,
+      "verbs": [
+        "regieren",
+        "fordern",
+        "richten",
+        "beraten",
+        "regulieren",
+        "führen"
+      ],
+      "groupNameGerman": "Politik",
+      "groupNameSpanish": "Política",
+      "groupNameEnglish": "Politics",
+      "groupNumberPerLevel": 2
     },
     {
       "level": "B1.1",
@@ -882,15 +898,14 @@
       "groupNameGerman": "Ethik",
       "groupNameSpanish": "Ética",
       "groupNameEnglish": "Ethics",
-      "groupNumberPerLevel": 2
+      "groupNumberPerLevel": 3
     },
     {
       "level": "B1.1",
-      "verbCount": 6,
+      "verbCount": 5,
       "verbs": [
         "gelingen",
         "misslingen",
-        "schaffen",
         "erreichen",
         "aufgeben",
         "scheitern"
@@ -898,7 +913,7 @@
       "groupNameGerman": "Erfolg",
       "groupNameSpanish": "Éxito",
       "groupNameEnglish": "Success",
-      "groupNumberPerLevel": 3
+      "groupNumberPerLevel": 4
     },
     {
       "level": "B1.1",
@@ -912,7 +927,7 @@
       "groupNameGerman": "Präsentation",
       "groupNameSpanish": "Presentación",
       "groupNameEnglish": "Presentation",
-      "groupNumberPerLevel": 4
+      "groupNumberPerLevel": 5
     },
     {
       "level": "B1.1",
@@ -927,7 +942,7 @@
       "groupNameGerman": "Ökologie",
       "groupNameSpanish": "Ecología",
       "groupNameEnglish": "Ecology",
-      "groupNumberPerLevel": 5
+      "groupNumberPerLevel": 6
     },
     {
       "level": "B1.1",
@@ -943,7 +958,7 @@
       "groupNameGerman": "Pflege",
       "groupNameSpanish": "Cuidado",
       "groupNameEnglish": "Care",
-      "groupNumberPerLevel": 6
+      "groupNumberPerLevel": 7
     },
     {
       "level": "B1.1",
@@ -959,7 +974,7 @@
       "groupNameGerman": "Technik",
       "groupNameSpanish": "Tecnología",
       "groupNameEnglish": "Technology",
-      "groupNumberPerLevel": 7
+      "groupNumberPerLevel": 8
     },
     {
       "level": "B1.1",
@@ -976,7 +991,7 @@
       "groupNameGerman": "Daten",
       "groupNameSpanish": "Datos",
       "groupNameEnglish": "Data",
-      "groupNumberPerLevel": 8
+      "groupNumberPerLevel": 9
     },
     {
       "level": "B1.1",
@@ -993,23 +1008,6 @@
       "groupNameGerman": "Medien",
       "groupNameSpanish": "Medios",
       "groupNameEnglish": "Media",
-      "groupNumberPerLevel": 9
-    },
-    {
-      "level": "B1.1",
-      "verbCount": 7,
-      "verbs": [
-        "regieren",
-        "fordern",
-        "richten",
-        "beraten",
-        "regulieren",
-        "führen",
-        "kontrollieren"
-      ],
-      "groupNameGerman": "Politik",
-      "groupNameSpanish": "Política",
-      "groupNameEnglish": "Politics",
       "groupNumberPerLevel": 10
     },
     {
@@ -1042,15 +1040,16 @@
     },
     {
       "level": "B1.1",
-      "verbCount": 3,
+      "verbCount": 4,
       "verbs": [
         "zwingen",
         "beeinflussen",
-        "gelten"
+        "bestimmen",
+        "kontrollieren"
       ],
-      "groupNameGerman": "Leben in Deutschland",
-      "groupNameSpanish": "Vida en Alemania",
-      "groupNameEnglish": "Life in Germany",
+      "groupNameGerman": "Macht",
+      "groupNameSpanish": "Poder",
+      "groupNameEnglish": "Power",
       "groupNumberPerLevel": 13
     },
     {
@@ -1182,11 +1181,10 @@
     },
     {
       "level": "B2.1",
-      "verbCount": 4,
+      "verbCount": 3,
       "verbs": [
         "wirtschaften",
         "investieren",
-        "unternehmen",
         "versichern"
       ],
       "groupNameGerman": "Wirtschaft",
@@ -1336,11 +1334,13 @@
     },
     {
       "level": "B2.1",
-      "verbCount": 3,
+      "verbCount": 5,
       "verbs": [
         "erfinden",
         "entdecken",
-        "veröffentlichen"
+        "veröffentlichen",
+        "schaffen",
+        "unternehmen"
       ],
       "groupNameGerman": "Innovation",
       "groupNameSpanish": "Innovación",
