@@ -2619,28 +2619,28 @@
                 nouns: pickThemeNouns(["der|verein", "der|spass"])
             },
             {
-                id: "geraete",
-                title: "Geräte",
-                title_es: "Dispositivos",
-                title_en: "Devices",
+                id: "technik",
+                title: "Technik",
+                title_es: "Tecnología",
+                title_en: "Tech",
                 level: "A1-B1",
-                nouns: pickThemeNouns(["das|handy", "das|smartphone", "das|tablet", "der|computer", "der|laptop", "der|drucker"])
-            },
-            {
-                id: "internet",
-                title: "Internet",
-                title_es: "Internet",
-                title_en: "Internet",
-                level: "A1-B1",
-                nouns: pickThemeNouns(["das|internet", "die|verbindung", "das|kennwort", "die|datei"])
-            },
-            {
-                id: "digital",
-                title: "Digital",
-                title_es: "Digital",
-                title_en: "Digital",
-                level: "A1-B1",
-                nouns: pickThemeNouns(["die|technologie", "die|kunstliche intelligenz", "die|einstellung", "die|taste", "der|fehler"])
+                nouns: pickThemeNouns([
+                    "das|handy",
+                    "das|smartphone",
+                    "das|tablet",
+                    "der|computer",
+                    "der|laptop",
+                    "der|drucker",
+                    "das|internet",
+                    "die|verbindung",
+                    "das|kennwort",
+                    "die|datei",
+                    "die|technologie",
+                    "die|kunstliche intelligenz",
+                    "die|einstellung",
+                    "die|taste",
+                    "der|fehler"
+                ])
             },
             {
                 id: "oberteile",
@@ -3062,9 +3062,40 @@
             renderGroup(currentGroupIndex);
         }
 
+        function normalizeSearchText(value = '') {
+            return String(value)
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/ß/g, 'ss')
+                .trim();
+        }
+
+        function groupMatchesQuery(group, query) {
+            const fields = [
+                group.title,
+                group.title_es,
+                group.title_en
+            ];
+
+            return fields.some(field => normalizeSearchText(field).includes(query));
+        }
+
+        function nounMatchesQuery(noun, query) {
+            const fields = [
+                noun.article,
+                noun.word,
+                `${noun.article} ${noun.word}`,
+                noun.translation_es,
+                noun.translation_en
+            ];
+
+            return fields.some(field => normalizeSearchText(field).includes(query));
+        }
+
         // Search Logic
         function handleSearch() {
-            const query = searchInput.value.toLowerCase().trim();
+            const query = normalizeSearchText(searchInput.value);
             clearSearchBtn.classList.toggle('visible', query.length > 0);
 
             if (query === '') {
@@ -3077,16 +3108,15 @@
             let matchCount = 0;
 
             getVisibleGroups().forEach(group => {
-                group.nouns.forEach(noun => {
-                    const de = noun.word.toLowerCase();
-                    const es = noun.translation_es.toLowerCase();
-                    const en = noun.translation_en.toLowerCase();
+                const matchesTheme = groupMatchesQuery(group, query);
+                const matchingNouns = matchesTheme
+                    ? group.nouns
+                    : group.nouns.filter(noun => nounMatchesQuery(noun, query));
 
-                    if (de.includes(query) || es.includes(query) || en.includes(query)) {
-                        const card = createCard(noun, group.level);
-                        container.appendChild(card);
-                        matchCount++;
-                    }
+                matchingNouns.forEach(noun => {
+                    const card = createCard(noun, group.level);
+                    container.appendChild(card);
+                    matchCount++;
                 });
             });
 
@@ -3296,7 +3326,7 @@
         // Override handleSearch to support Kompakt Mode
         const originalHandleSearch = handleSearch;
         handleSearch = function () {
-            const query = searchInput.value.toLowerCase().trim();
+            const query = normalizeSearchText(searchInput.value);
             clearSearchBtn.classList.toggle('visible', query.length > 0);
 
             if (!isCompactMode) {
@@ -3319,12 +3349,10 @@
             const filteredGroups = [];
 
             getVisibleGroups().forEach(group => {
-                const matchingNouns = group.nouns.filter(noun => {
-                    const de = noun.word.toLowerCase();
-                    const es = noun.translation_es.toLowerCase();
-                    const en = noun.translation_en.toLowerCase();
-                    return de.includes(query) || es.includes(query) || en.includes(query);
-                });
+                const matchesTheme = groupMatchesQuery(group, query);
+                const matchingNouns = matchesTheme
+                    ? group.nouns
+                    : group.nouns.filter(noun => nounMatchesQuery(noun, query));
 
                 if (matchingNouns.length > 0) {
                     matchCount += matchingNouns.length;
