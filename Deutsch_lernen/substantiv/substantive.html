@@ -881,6 +881,16 @@
             flex-wrap: wrap;
         }
 
+        .level-header-audio {
+            color: rgba(255, 255, 255, 0.92);
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+
+        .level-header-audio:hover {
+            opacity: 1;
+        }
+
         .level-header-meta {
             display: inline-flex;
             align-items: center;
@@ -3172,14 +3182,15 @@
                         group.level,
                         isLiDGroup(group),
                         group.title_es,
-                        group.title_en
+                        group.title_en,
+                        group.title
                     );
                     gridContainer.appendChild(card);
                 }
             });
         }
 
-        function createKompaktCard(nouns, title, color, level, isLiDTheme = false, titleEs = '', titleEn = '') {
+        function createKompaktCard(nouns, title, color, level, isLiDTheme = false, titleEs = '', titleEn = '', spokenTitle = title) {
             const card = document.createElement('div');
             card.className = 'level-card';
 
@@ -3194,6 +3205,17 @@
             const titleSpan = document.createElement('span');
             titleSpan.textContent = title;
             headerText.appendChild(titleSpan);
+
+            const headerSpeaker = document.createElement('span');
+            headerSpeaker.className = 'audio-icon level-header-audio';
+            headerSpeaker.textContent = '🔊';
+            headerSpeaker.title = `Aussprache: ${spokenTitle}`;
+            headerSpeaker.setAttribute('aria-label', `Aussprache: ${spokenTitle}`);
+            headerSpeaker.onclick = (e) => {
+                e.stopPropagation();
+                speak(spokenTitle);
+            };
+            headerText.appendChild(headerSpeaker);
 
             const headerMeta = document.createElement('div');
             headerMeta.className = 'level-header-meta';
