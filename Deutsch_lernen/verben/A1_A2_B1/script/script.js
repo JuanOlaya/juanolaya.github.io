@@ -516,7 +516,7 @@
 
     // --- OPTIMIZED LAZY LOADING ---
     async function loadGroupData(levelKey, groupIndex, options = {}) {
-        const { silent = false } = options;
+        const { silent = false, includeConjugations = true } = options;
         // Validate inputs
         if (!levelConfig[levelKey]) return;
 
@@ -562,8 +562,11 @@
                 );
                 await Promise.all(cardPromises);
 
-                // 4. Fetch Conjugations for new verbs
-                await loadConjugations(new Set(newVerbs));
+                // 4. Fetch Conjugations for new verbs only when needed.
+                // Compact mode initial render only needs the card data.
+                if (includeConjugations) {
+                    await loadConjugations(new Set(newVerbs));
+                }
             }
 
             scheduleCachePersist();
@@ -582,7 +585,7 @@
 
         const loadPromises = [];
         for (let groupIndex = 0; groupIndex < config.groupCount; groupIndex++) {
-            loadPromises.push(loadGroupData(levelKey, groupIndex));
+            loadPromises.push(loadGroupData(levelKey, groupIndex, { silent: true, includeConjugations: false }));
         }
         await Promise.all(loadPromises);
     }
