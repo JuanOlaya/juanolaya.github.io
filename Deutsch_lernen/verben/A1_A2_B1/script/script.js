@@ -141,6 +141,7 @@
     const CACHE_KEY = 'verbAppCache_v38_theme_search_index';
     const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
     let cachePersistTimeout = null;
+    let cachePersistenceDisabled = false;
 
     // --- DOM ELEMENTS ---
     const mainContainer = document.getElementById('main-container');
@@ -225,6 +226,8 @@
     let appVersion = '1.6_static'; // Stable version; replaced by verbs_index.lastUpdated when available
 
     function persistCacheSnapshot() {
+        if (cachePersistenceDisabled) return;
+
         const buildCompactCachePayload = () => {
             const compactGroups = {};
             const compactVerbsData = {};
@@ -262,14 +265,15 @@
         } catch (e) {
             try {
                 localStorage.setItem(CACHE_KEY, JSON.stringify(buildCompactCachePayload()));
-                console.warn("Saved compact cache snapshot after quota warning.");
             } catch (compactError) {
-                console.warn("Failed to save cache snapshot", compactError);
+                cachePersistenceDisabled = true;
+                clearTimeout(cachePersistTimeout);
             }
         }
     }
 
     function scheduleCachePersist() {
+        if (cachePersistenceDisabled) return;
         clearTimeout(cachePersistTimeout);
         cachePersistTimeout = setTimeout(() => {
             persistCacheSnapshot();

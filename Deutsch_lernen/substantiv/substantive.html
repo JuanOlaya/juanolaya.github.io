@@ -2092,10 +2092,15 @@
                 { article: "die", word: "Traube", emoji: "🍇", translation_es: "uva", translation_en: "grape", example_de: "Die Traube ist klein.", example_es: "La uva es pequeña." },
                 { article: "die", word: "Erdbeere", emoji: "🍓", translation_es: "fresa", translation_en: "strawberry", example_de: "Die Erdbeere ist rot.", example_es: "La fresa es roja." },
                 { article: "die", word: "Birne", emoji: "🍐", translation_es: "pera", translation_en: "pear", example_de: "Die Birne ist reif.", example_es: "La pera está madura." },
+                { article: "die", word: "Pflaume", emoji: "🟣", translation_es: "ciruela", translation_en: "plum", example_de: "Die Pflaume ist süß.", example_es: "La ciruela es dulce." },
+                { article: "die", word: "Kirsche", emoji: "🍒", translation_es: "cereza", translation_en: "cherry", example_de: "Die Kirsche ist rot.", example_es: "La cereza es roja." },
+                { article: "die", word: "Zitrone", emoji: "🍋", translation_es: "limón", translation_en: "lemon", example_de: "Die Zitrone ist sauer.", example_es: "El limón es ácido." },
                 { article: "die", word: "Kartoffel", emoji: "🥔", translation_es: "patata", translation_en: "potato", example_de: "Die Kartoffel ist gekocht.", example_es: "La patata está cocida." },
                 { article: "die", word: "Tomate", emoji: "🍅", translation_es: "tomate", translation_en: "tomato", example_de: "Die Tomate ist rot.", example_es: "El tomate es rojo." },
                 { article: "die", word: "Zwiebel", emoji: "🧅", translation_es: "cebolla", translation_en: "onion", example_de: "Die Zwiebel riecht stark.", example_es: "La cebolla huele fuerte." },
                 { article: "die", word: "Karotte", emoji: "🥕", translation_es: "zanahoria", translation_en: "carrot", example_de: "Die Karotte ist gesund.", example_es: "La zanahoria es saludable." },
+                { article: "die", word: "Gurke", emoji: "🥒", translation_es: "pepino", translation_en: "cucumber", example_de: "Die Gurke ist frisch.", example_es: "El pepino está fresco." },
+                { article: "die", word: "Paprika", emoji: "🫑", translation_es: "pimiento", translation_en: "bell pepper", example_de: "Die Paprika ist grün.", example_es: "El pimiento es verde." },
                 { article: "der", word: "Onkel", emoji: "👨", translation_es: "tío", translation_en: "uncle", example_de: "Mein Onkel wohnt in Köln.", example_es: "Mi tío vive en Colonia." },
                 { article: "die", word: "Tante", emoji: "👩", translation_es: "tía", translation_en: "aunt", example_de: "Meine Tante kommt heute.", example_es: "Mi tía viene hoy." },
                 { article: "der", word: "Cousin", emoji: "👦", translation_es: "primo", translation_en: "cousin", example_de: "Mein Cousin spielt Fußball.", example_es: "Mi primo juega fútbol." },
@@ -2139,6 +2144,7 @@
                 { article: "der", word: "Staubsauger", emoji: "🧹", translation_es: "aspiradora", translation_en: "vacuum cleaner", example_de: "Der Staubsauger steht im Flur.", example_es: "La aspiradora está en el pasillo." },
                 { article: "der", word: "Besen", emoji: "🧹", translation_es: "escoba", translation_en: "broom", example_de: "Der Besen ist hinter der Tür.", example_es: "La escoba está detrás de la puerta." },
                 { article: "der", word: "Eimer", emoji: "🪣", translation_es: "cubo", translation_en: "bucket", example_de: "Der Eimer ist voll Wasser.", example_es: "El cubo está lleno de agua." },
+                { article: "der", word: "Dinkel", emoji: "🌾", translation_es: "espelta", translation_en: "spelt", example_de: "Dinkel ist ein gesundes Getreide.", example_es: "La espelta es un cereal saludable." },
                 { article: "die", word: "Decke", emoji: "🛏️", translation_es: "manta", translation_en: "blanket", example_de: "Die Decke ist warm.", example_es: "La manta está caliente." },
                 { article: "das", word: "Kissen", emoji: "🛏️", translation_es: "almohada", translation_en: "pillow", example_de: "Das Kissen liegt auf dem Bett.", example_es: "La almohada está sobre la cama." },
                 { article: "die", word: "Matratze", emoji: "🛏️", translation_es: "colchón", translation_en: "mattress", example_de: "Die Matratze ist weich.", example_es: "El colchón es blando." },
@@ -2817,7 +2823,7 @@
                 title_es: "Fruta",
                 title_en: "Fruit",
                 level: "A1",
-                nouns: pickThemeNouns(["der|apfel", "die|banane", "das|obst", "das|gemuse"])
+                nouns: pickThemeNouns(["der|apfel", "die|banane", "das|obst", "die|traube", "die|pflaume", "die|kirsche", "die|zitrone"])
             },
             {
                 id: "fruechte",
@@ -2825,7 +2831,7 @@
                 title_es: "Frutas",
                 title_en: "Fruits",
                 level: "A1",
-                nouns: pickThemeNouns(["die|orange", "die|traube", "die|erdbeere", "die|birne"])
+                nouns: pickThemeNouns(["die|orange", "die|erdbeere", "die|birne"])
             },
             {
                 id: "gemuese",
@@ -2833,7 +2839,7 @@
                 title_es: "Verduras",
                 title_en: "Vegetables",
                 level: "A1",
-                nouns: pickThemeNouns(["die|kartoffel", "die|tomate", "die|zwiebel", "die|karotte"])
+                nouns: pickThemeNouns(["die|kartoffel", "die|tomate", "die|zwiebel", "die|karotte", "die|gurke", "der|salat", "die|paprika"])
             },
             {
                 id: "mahlzeit",
@@ -2849,7 +2855,7 @@
                 title_es: "Ingredientes",
                 title_en: "Ingredients",
                 level: "A1",
-                nouns: pickThemeNouns(["der|kase", "die|wurst", "der|zucker", "das|salz", "der|pfeffer"])
+                nouns: pickThemeNouns(["der|kase", "die|wurst", "der|zucker", "das|salz", "der|pfeffer", "der|dinkel"])
             },
             {
                 id: "suesses",
