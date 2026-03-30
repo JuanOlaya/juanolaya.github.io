@@ -616,6 +616,42 @@
             /* Slate 300 */
         }
 
+        .modal-variant {
+            margin-top: 14px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: rgba(15, 23, 42, 0.32);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            min-width: min(100%, 360px);
+            text-align: center;
+        }
+
+        .modal-variant[hidden] {
+            display: none;
+        }
+
+        .modal-variant-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 6px;
+        }
+
+        .modal-variant-word {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+
+        .modal-variant-translation {
+            margin-top: 4px;
+            font-size: 0.98rem;
+            color: #cbd5e1;
+            opacity: 0.95;
+        }
+
         .modal-section {
             padding: 30px;
         }
@@ -1347,6 +1383,11 @@
                 <div class="modal-emoji" id="modal-emoji"></div>
                 <div class="modal-word" id="modal-word"></div>
                 <div class="modal-translation" id="modal-translation"></div>
+                <div class="modal-variant" id="modal-feminine-block" hidden>
+                    <div class="modal-variant-label">Femininum / Forma femenina</div>
+                    <div class="modal-variant-word" id="modal-feminine-word"></div>
+                    <div class="modal-variant-translation" id="modal-feminine-translation"></div>
+                </div>
             </div>
             <div class="modal-section">
                 <div class="modal-section-title">Beispiel / Ejemplo</div>
@@ -2101,6 +2142,12 @@
                 { article: "die", word: "Karotte", emoji: "🥕", translation_es: "zanahoria", translation_en: "carrot", example_de: "Die Karotte ist gesund.", example_es: "La zanahoria es saludable." },
                 { article: "die", word: "Gurke", emoji: "🥒", translation_es: "pepino", translation_en: "cucumber", example_de: "Die Gurke ist frisch.", example_es: "El pepino está fresco." },
                 { article: "die", word: "Paprika", emoji: "🫑", translation_es: "pimiento", translation_en: "bell pepper", example_de: "Die Paprika ist grün.", example_es: "El pimiento es verde." },
+                { article: "die", word: "Warnung", emoji: "⚠️", translation_es: "advertencia", translation_en: "warning", example_de: "Die Warnung steht an der Tür.", example_es: "La advertencia está en la puerta." },
+                { article: "der", word: "Feuerlöscher", emoji: "🧯", translation_es: "extintor", translation_en: "fire extinguisher", example_de: "Der Feuerlöscher hängt an der Wand.", example_es: "El extintor cuelga de la pared." },
+                { article: "der", word: "Notausgang", emoji: "🚪", translation_es: "salida de emergencia", translation_en: "emergency exit", example_de: "Der Notausgang ist links.", example_es: "La salida de emergencia está a la izquierda." },
+                { article: "die", word: "Vorsicht", emoji: "⚠️", translation_es: "precaución", translation_en: "caution", example_de: "Vorsicht auf der Treppe!", example_es: "¡Precaución en la escalera!" },
+                { article: "das", word: "Verbot", emoji: "🚫", translation_es: "prohibición", translation_en: "prohibition", example_de: "Hier gilt ein Verbot.", example_es: "Aquí hay una prohibición." },
+                { article: "der", word: "Alarm", emoji: "🚨", translation_es: "alarma", translation_en: "alarm", example_de: "Der Alarm ist sehr laut.", example_es: "La alarma es muy fuerte." },
                 { article: "der", word: "Onkel", emoji: "👨", translation_es: "tío", translation_en: "uncle", example_de: "Mein Onkel wohnt in Köln.", example_es: "Mi tío vive en Colonia." },
                 { article: "die", word: "Tante", emoji: "👩", translation_es: "tía", translation_en: "aunt", example_de: "Meine Tante kommt heute.", example_es: "Mi tía viene hoy." },
                 { article: "der", word: "Cousin", emoji: "👦", translation_es: "primo", translation_en: "cousin", example_de: "Mein Cousin spielt Fußball.", example_es: "Mi primo juega fútbol." },
@@ -2145,6 +2192,8 @@
                 { article: "der", word: "Besen", emoji: "🧹", translation_es: "escoba", translation_en: "broom", example_de: "Der Besen ist hinter der Tür.", example_es: "La escoba está detrás de la puerta." },
                 { article: "der", word: "Eimer", emoji: "🪣", translation_es: "cubo", translation_en: "bucket", example_de: "Der Eimer ist voll Wasser.", example_es: "El cubo está lleno de agua." },
                 { article: "der", word: "Dinkel", emoji: "🌾", translation_es: "espelta", translation_en: "spelt", example_de: "Dinkel ist ein gesundes Getreide.", example_es: "La espelta es un cereal saludable." },
+                { article: "der", word: "Zahnarzt", emoji: "🦷", translation_es: "odontólogo", translation_en: "dentist", example_de: "Der Zahnarzt kontrolliert meine Zähne.", example_es: "El odontólogo revisa mis dientes." },
+                { article: "die", word: "Zahnärztin", emoji: "🦷", translation_es: "odontóloga", translation_en: "dentist", example_de: "Die Zahnärztin arbeitet in einer Praxis.", example_es: "La odontóloga trabaja en una consulta." },
                 { article: "die", word: "Decke", emoji: "🛏️", translation_es: "manta", translation_en: "blanket", example_de: "Die Decke ist warm.", example_es: "La manta está caliente." },
                 { article: "das", word: "Kissen", emoji: "🛏️", translation_es: "almohada", translation_en: "pillow", example_de: "Das Kissen liegt auf dem Bett.", example_es: "La almohada está sobre la cama." },
                 { article: "die", word: "Matratze", emoji: "🛏️", translation_es: "colchón", translation_en: "mattress", example_de: "Die Matratze ist weich.", example_es: "El colchón es blando." },
@@ -2201,6 +2250,38 @@
                 }
             });
         });
+
+        const feminineVariantKeyByWord = {
+            arzt: "die|arztin",
+            backer: "die|backerin",
+            elektriker: "die|elektrikerin",
+            fahrer: "die|fahrerin",
+            feuerwehrmann: "die|feuerwehrfrau",
+            friseur: "die|friseurin",
+            informatiker: "die|informatikerin",
+            kellner: "die|kellnerin",
+            koch: "die|kochin",
+            krankenpfleger: "die|krankenschwester",
+            zahnarzt: "die|zahnarztin",
+            mechaniker: "die|mechanikerin",
+            polizist: "die|polizistin",
+            sekretar: "die|sekretaurin",
+            verkaufer: "die|verkauferin",
+            professor: "die|professorin",
+            lehrer: "die|lehrerin",
+            student: "die|studentin",
+            schuler: "die|schulerin",
+            kunde: "die|kundin",
+            nachbar: "die|nachbarin",
+            kollege: "die|kollegin",
+            einwohner: "die|einwohnerin",
+            wahler: "die|wahlerin",
+            freund: "die|freundin",
+            cousin: "die|cousine"
+        };
+
+        window.rawNonLiDNounsByKey = nonLiDByKey;
+        window.feminineVariantKeyByWord = feminineVariantKeyByWord;
 
         const pickThemeNouns = (keys) => keys.map((key) => {
             const normalizedKey = normalizeThemeKey(key);
@@ -2567,7 +2648,7 @@
                 title_es: "Parientes",
                 title_en: "Relatives",
                 level: "A1",
-                nouns: pickThemeNouns(["der|onkel", "die|tante", "der|cousin", "die|cousine"])
+                nouns: pickThemeNouns(["der|onkel", "die|tante", "der|cousin"])
             },
             {
                 id: "menschen",
@@ -2575,15 +2656,15 @@
                 title_es: "Personas",
                 title_en: "People",
                 level: "A1",
-                nouns: pickThemeNouns(["der|mann", "die|frau", "das|kind", "das|baby", "der|freund", "die|freundin", "der|benutzer"])
+                nouns: pickThemeNouns(["der|mann", "die|frau", "das|kind", "das|baby", "der|freund", "der|benutzer"])
             },
             {
                 id: "medizinberufe",
-                title: "Medizin",
-                title_es: "Sanidad",
-                title_en: "Medical",
+                title: "Medizinberufe",
+                title_es: "Profesiones médicas",
+                title_en: "Medical jobs",
                 level: "A1",
-                nouns: pickThemeNouns(["der|arzt", "die|arztin", "der|krankenpfleger", "die|krankenschwester"])
+                nouns: pickThemeNouns(["der|arzt", "der|krankenpfleger", "der|zahnarzt", "der|notarzt"])
             },
             {
                 id: "lehre",
@@ -2591,7 +2672,7 @@
                 title_es: "Docencia",
                 title_en: "Teaching",
                 level: "A1",
-                nouns: pickThemeNouns(["der|professor", "die|professorin", "der|lehrer", "die|lehrerin"])
+                nouns: pickThemeNouns(["der|professor", "der|lehrer"])
             },
             {
                 id: "service",
@@ -2599,7 +2680,7 @@
                 title_es: "Servicio",
                 title_en: "Service",
                 level: "A1",
-                nouns: pickThemeNouns(["der|kellner", "die|kellnerin", "der|verkaufer", "die|verkauferin", "der|sekretar", "die|sekretaurin"])
+                nouns: pickThemeNouns(["der|kellner", "der|verkaufer", "der|sekretar"])
             },
             {
                 id: "handwerk",
@@ -2607,7 +2688,7 @@
                 title_es: "Oficios",
                 title_en: "Trades",
                 level: "A1",
-                nouns: pickThemeNouns(["der|backer", "die|backerin", "der|elektriker", "die|elektrikerin", "der|mechaniker", "die|mechanikerin", "die|malerin"])
+                nouns: pickThemeNouns(["der|backer", "der|elektriker", "der|mechaniker"])
             },
             {
                 id: "alltagjobs",
@@ -2615,7 +2696,7 @@
                 title_es: "Trabajo",
                 title_en: "Work",
                 level: "A1",
-                nouns: pickThemeNouns(["der|bauer", "der|koch", "die|kochin", "der|fahrer", "die|fahrerin"])
+                nouns: pickThemeNouns(["der|bauer", "der|koch", "der|fahrer"])
             },
             {
                 id: "pflege",
@@ -2623,7 +2704,7 @@
                 title_es: "Cuidado",
                 title_en: "Care",
                 level: "A1",
-                nouns: pickThemeNouns(["der|friseur", "die|friseurin"])
+                nouns: pickThemeNouns(["der|friseur"])
             },
             {
                 id: "sicherheit",
@@ -2631,7 +2712,15 @@
                 title_es: "Seguridad",
                 title_en: "Safety",
                 level: "A1",
-                nouns: pickThemeNouns(["der|polizist", "die|polizistin", "der|feuerwehrmann", "die|feuerwehrfrau"])
+                nouns: pickThemeNouns(["der|polizist", "der|feuerwehrmann"])
+            },
+            {
+                id: "praevention",
+                title: "Prävention",
+                title_es: "Prevención",
+                title_en: "Prevention",
+                level: "A2",
+                nouns: pickThemeNouns(["die|warnung", "der|rauchmelder", "der|feuerloscher", "der|notausgang", "die|vorsicht", "das|verbot", "der|alarm"])
             },
             {
                 id: "hochschule",
@@ -2639,7 +2728,7 @@
                 title_es: "Universidad",
                 title_en: "College",
                 level: "A1",
-                nouns: pickThemeNouns(["die|universitat", "die|hochschule", "der|student", "die|studentin", "das|studium", "das|seminar", "die|vorlesung"])
+                nouns: pickThemeNouns(["die|universitat", "die|hochschule", "der|student", "das|studium", "das|seminar", "die|vorlesung"])
             },
             {
                 id: "lernen",
@@ -2719,7 +2808,7 @@
                 title_es: "Vivienda",
                 title_en: "Housing",
                 level: "A1-B1",
-                nouns: pickThemeNouns(["die|wohnung", "der|strom", "der|rauchmelder", "die|haushaltshilfe", "die|lampe", "der|einwohner", "die|einwohnerin"])
+                nouns: pickThemeNouns(["die|wohnung", "der|strom", "die|haushaltshilfe", "die|lampe", "der|einwohner"])
             },
             {
                 id: "orte",
@@ -2935,7 +3024,7 @@
                 title_es: "Escuela",
                 title_en: "School",
                 level: "A1",
-                nouns: pickThemeNouns(["die|klasse", "der|schuler", "die|schulerin", "die|tafel", "das|worterbuch", "der|rucksack"])
+                nouns: pickThemeNouns(["die|klasse", "der|schuler", "die|tafel", "das|worterbuch", "der|rucksack"])
             },
             {
                 id: "freunde",
@@ -2943,7 +3032,7 @@
                 title_es: "Amistad",
                 title_en: "Friends",
                 level: "A1",
-                nouns: pickThemeNouns(["der|nachbar", "die|nachbarin", "der|kollege", "die|kollegin"])
+                nouns: pickThemeNouns(["der|nachbar", "der|kollege"])
             },
             {
                 id: "schlafzimmer",
@@ -2967,7 +3056,7 @@
                 title_es: "Compra",
                 title_en: "Purchase",
                 level: "A1",
-                nouns: pickThemeNouns(["der|kunde", "die|kundin", "die|einkaufsliste", "der|einkaufswagen", "der|korb", "die|tasche"])
+                nouns: pickThemeNouns(["der|kunde", "die|einkaufsliste", "der|einkaufswagen", "der|korb", "die|tasche"])
             },
             {
                 id: "servicekauf",
@@ -3039,7 +3128,7 @@
                 title_es: "Urgencia",
                 title_en: "Emergency",
                 level: "A1-B1",
-                nouns: pickThemeNouns(["der|notfall", "der|notarzt", "der|krankenwagen"])
+                nouns: pickThemeNouns(["der|notfall", "der|krankenwagen"])
             },
             {
                 id: "medien",
@@ -3344,6 +3433,7 @@
             system: "A2",
             freizeit: "A2",
             gefuehle: "A2",
+            praevention: "A2",
             medizinberufe: "B1",
             lehre: "B1",
             service: "B1",
@@ -3429,6 +3519,8 @@
         let currentGroupIndex = 0;
         let currentLevelFilter = 'A1';
         let currentTranslationLang = 'es';
+        let currentModalNoun = null;
+        let currentModalLevel = '';
 
         // DOM Elements
         const container = document.getElementById('cards-container');
@@ -3455,6 +3547,9 @@
         const modalLevel = document.getElementById('modal-level');
         const modalExampleDe = document.getElementById('modal-example-de');
         const modalExampleEs = document.getElementById('modal-example-es');
+        const modalFeminineBlock = document.getElementById('modal-feminine-block');
+        const modalFeminineWord = document.getElementById('modal-feminine-word');
+        const modalFeminineTranslation = document.getElementById('modal-feminine-translation');
 
         // Tips Modal
         const tipsBtn = document.getElementById('tips-btn');
@@ -3463,6 +3558,8 @@
         const settingsBtn = document.getElementById('settings-btn');
         const settingsModal = document.getElementById('settings-modal');
         const settingsClose = document.getElementById('settings-close');
+        const rawNonLiDNounsByKey = window.rawNonLiDNounsByKey || new Map();
+        const feminineVariantLookup = window.feminineVariantKeyByWord || {};
 
         // Initial Render
         function isLiDGroup(group) {
@@ -3481,6 +3578,10 @@
             }
 
             return baseGroups.filter(group => !isLiDGroup(group) && group.level === currentLevelFilter);
+        }
+
+        function getSearchableGroups() {
+            return nounGroups.filter(group => lidSwitch.checked || !isLiDGroup(group));
         }
 
         function updateLevelFilterButtons() {
@@ -3734,6 +3835,10 @@
             document.querySelectorAll('.kompakt-translation').forEach(el => {
                 el.textContent = currentTranslationLang === 'en' ? (el.dataset.en || '') : (el.dataset.es || '');
             });
+
+            if (modal.classList.contains('visible') && currentModalNoun) {
+                renderModalContent(currentModalNoun, currentModalLevel);
+            }
         }
 
         function setTranslationLanguage(lang) {
@@ -3757,20 +3862,53 @@
             setTranslationLanguage(option.dataset.lang);
         }
 
-        function openWordModal(noun, level) {
+        function getFeminineVariant(noun) {
+            if (!noun || normalizeSearchText(noun.article) !== 'der') {
+                return null;
+            }
+
+            const normalizedWord = normalizeSearchText(noun.word);
+            const feminineKey = feminineVariantLookup[normalizedWord];
+            if (!feminineKey) {
+                return null;
+            }
+
+            return rawNonLiDNounsByKey.get(normalizeSearchText(feminineKey)) || null;
+        }
+
+        function renderModalContent(noun, level) {
             modalEmoji.textContent = noun.emoji;
             modalWord.innerHTML = `<span style="font-size:0.5em; display:block; margin-bottom:5px;">${noun.article}</span>${noun.word}`;
             modalTranslation.textContent = currentTranslationLang === 'en' ? noun.translation_en : noun.translation_es;
-            modalLevel.textContent = level || ''; // Set level
+            modalLevel.textContent = level || '';
             modalExampleDe.textContent = noun.example_de || '-';
             modalExampleEs.textContent = noun.example_es || '-';
-
             modalHeader.style.backgroundColor = getColorForArticle(noun.article);
 
+            const feminineVariant = getFeminineVariant(noun);
+            if (feminineVariant) {
+                modalFeminineBlock.hidden = false;
+                modalFeminineWord.textContent = `${feminineVariant.article} ${feminineVariant.word}`;
+                modalFeminineTranslation.textContent = currentTranslationLang === 'en'
+                    ? (feminineVariant.translation_en || '')
+                    : (feminineVariant.translation_es || '');
+            } else {
+                modalFeminineBlock.hidden = true;
+                modalFeminineWord.textContent = '';
+                modalFeminineTranslation.textContent = '';
+            }
+        }
+
+        function openWordModal(noun, level) {
+            currentModalNoun = noun;
+            currentModalLevel = level || '';
+            renderModalContent(noun, level);
             modal.classList.add('visible');
         }
 
         function closeWordModal() {
+            currentModalNoun = null;
+            currentModalLevel = '';
             modal.classList.remove('visible');
         }
 
@@ -3900,7 +4038,7 @@
             container.innerHTML = '';
             let matchCount = 0;
 
-            getVisibleGroups().forEach(group => {
+            getSearchableGroups().forEach(group => {
                 const matchesTheme = groupMatchesQuery(group, query);
                 const matchingNouns = matchesTheme
                     ? group.nouns
@@ -4138,7 +4276,7 @@
             // Filter groups
             const filteredGroups = [];
 
-            getVisibleGroups().forEach(group => {
+            getSearchableGroups().forEach(group => {
                 const matchesTheme = groupMatchesQuery(group, query);
                 const matchingNouns = group.nouns.filter(noun => nounMatchesQuery(noun, query));
 
