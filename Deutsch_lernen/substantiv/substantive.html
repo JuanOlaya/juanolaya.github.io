@@ -2636,9 +2636,9 @@
             },
             {
                 id: "geschwister",
-                title: "Geschwister",
-                title_es: "Hermanos",
-                title_en: "Siblings",
+                title: "Kinder",
+                title_es: "Hijos",
+                title_en: "Children",
                 level: "A1",
                 nouns: pickThemeNouns(["der|sohn", "die|tochter", "der|bruder", "die|schwester", "die|geschwister"])
             },
@@ -3753,7 +3753,6 @@
         function createCard(noun, level, highlightQuery = '') {
             const card = document.createElement('div');
             card.className = 'card';
-            // card.onclick removed, logic moved to children
 
             const articleColor = getColorForArticle(noun.article);
 
@@ -3761,18 +3760,17 @@
             const header = document.createElement('div');
             header.className = 'card-header';
             header.style.backgroundColor = articleColor;
-            header.title = "Hören / Escuchar"; // Tooltip
-
-            // Header Click -> TTS
-            header.onclick = (e) => {
-                e.stopPropagation();
-                speak(`${noun.article} ${noun.word}`);
-            };
 
             // German Word Structure
             const wordSpan = document.createElement('span');
             wordSpan.className = 'german-word';
             wordSpan.innerHTML = `<span class="article-span">${escapeHtml(noun.article)}</span>${highlightText(noun.word, highlightQuery)}`;
+            wordSpan.style.cursor = 'pointer';
+            wordSpan.title = 'Aussprache / Pronunciar';
+            wordSpan.onclick = (e) => {
+                e.stopPropagation();
+                speak(`${noun.article} ${noun.word}`);
+            };
 
             header.appendChild(wordSpan);
 
@@ -3780,28 +3778,32 @@
             const icon = document.createElement('div');
             icon.className = 'icon-floating';
             icon.textContent = noun.emoji;
-            // Icon Click -> TTS (consistent with header)
-            icon.onclick = (e) => {
-                e.stopPropagation();
-                speak(`${noun.article} ${noun.word}`);
-            };
 
             // Body
             const body = document.createElement('div');
             body.className = 'card-body';
-
-            // Body Click -> Open Modal
-            body.onclick = () => openWordModal(noun, level);
 
             const deExample = document.createElement('span');
 
             const esMeaning = document.createElement('span');
             esMeaning.className = 'spanish-meaning';
             esMeaning.innerHTML = highlightText(noun.translation_es, highlightQuery);
+            esMeaning.style.cursor = 'pointer';
+            esMeaning.title = 'Mehr Infos / Abrir detalles';
+            esMeaning.onclick = (e) => {
+                e.stopPropagation();
+                openWordModal(noun, level);
+            };
 
             const enMeaning = document.createElement('span');
             enMeaning.className = 'english-meaning';
             enMeaning.innerHTML = highlightText(noun.translation_en, highlightQuery);
+            enMeaning.style.cursor = 'pointer';
+            enMeaning.title = 'More info / Open details';
+            enMeaning.onclick = (e) => {
+                e.stopPropagation();
+                openWordModal(noun, level);
+            };
 
             body.appendChild(icon);
             body.appendChild(esMeaning);
@@ -4166,6 +4168,12 @@
 
             const titleSpan = document.createElement('span');
             titleSpan.innerHTML = highlightText(title, highlightQuery);
+            titleSpan.style.cursor = 'pointer';
+            titleSpan.title = `Aussprache: ${spokenTitle}`;
+            titleSpan.onclick = (e) => {
+                e.stopPropagation();
+                speak(spokenTitle);
+            };
             headerText.appendChild(titleSpan);
 
             const headerSpeaker = document.createElement('span');
@@ -4220,6 +4228,12 @@
                 const wordSpan = document.createElement('span');
                 wordSpan.className = 'kompakt-german-word';
                 wordSpan.innerHTML = `<span class="article-span kompakt-article">${escapeHtml(noun.article)}</span><span>${highlightText(noun.word, highlightQuery)}</span>`;
+                wordSpan.style.cursor = 'pointer';
+                wordSpan.title = 'Aussprache / Pronunciar';
+                wordSpan.onclick = (e) => {
+                    e.stopPropagation();
+                    speak(`${noun.article} ${noun.word}`);
+                };
 
                 tdDe.appendChild(wordSpan);
 
@@ -4230,15 +4244,17 @@
                 transSpan.dataset.es = noun.translation_es || '';
                 transSpan.dataset.en = noun.translation_en || '';
                 transSpan.innerHTML = highlightText(currentTranslationLang === 'en' ? noun.translation_en : noun.translation_es, highlightQuery);
+                transSpan.style.cursor = 'pointer';
+                transSpan.title = 'Mehr Infos / Abrir detalles';
+                transSpan.onclick = (e) => {
+                    e.stopPropagation();
+                    openWordModal(noun, level);
+                };
                 tdEs.appendChild(transSpan);
 
                 // Add Cells
                 tr.appendChild(tdDe);
                 tr.appendChild(tdEs);
-
-                // Click to Open Modal
-                tr.style.cursor = 'pointer';
-                tr.onclick = () => openWordModal(noun, level);
 
                 table.appendChild(tr);
             });
