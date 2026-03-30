@@ -54,7 +54,13 @@
         .header-settings {
             position: absolute;
             top: 0;
-            right: 0;
+            right: -18px;
+        }
+
+        @media (max-width: 900px) {
+            .header-settings {
+                right: 0;
+            }
         }
 
         h1 {
@@ -1352,6 +1358,7 @@
         <button class="level-filter-btn active" data-level="A1">A1</button>
         <button class="level-filter-btn" data-level="A2">A2</button>
         <button class="level-filter-btn" data-level="B1">B1</button>
+        <button class="level-filter-btn" data-level="B2">B2</button>
         <button class="level-filter-btn" data-level="B1_LID">B1 LiD</button>
     </div>
 
@@ -2148,6 +2155,21 @@
                 { article: "die", word: "Vorsicht", emoji: "⚠️", translation_es: "precaución", translation_en: "caution", example_de: "Vorsicht auf der Treppe!", example_es: "¡Precaución en la escalera!" },
                 { article: "das", word: "Verbot", emoji: "🚫", translation_es: "prohibición", translation_en: "prohibition", example_de: "Hier gilt ein Verbot.", example_es: "Aquí hay una prohibición." },
                 { article: "der", word: "Alarm", emoji: "🚨", translation_es: "alarma", translation_en: "alarm", example_de: "Der Alarm ist sehr laut.", example_es: "La alarma es muy fuerte." },
+                { article: "das", word: "Feuerwerk", emoji: "🎆", translation_es: "fuegos artificiales", translation_en: "fireworks", example_de: "Das Feuerwerk beginnt um Mitternacht.", example_es: "Los fuegos artificiales empiezan a medianoche." },
+                { article: "das", word: "Werk", emoji: "🏭", translation_es: "obra", translation_en: "work", example_de: "Das Werk ist sehr bekannt.", example_es: "La obra es muy conocida." },
+                { article: "das", word: "Bild", emoji: "🖼️", translation_es: "cuadro", translation_en: "picture", example_de: "Das Bild hängt an der Wand.", example_es: "El cuadro cuelga en la pared." },
+                { article: "der", word: "Künstler", emoji: "🎨", translation_es: "artista", translation_en: "artist", example_de: "Der Künstler malt im Atelier.", example_es: "El artista pinta en el estudio." },
+                { article: "die", word: "Künstlerin", emoji: "🎨", translation_es: "artista", translation_en: "artist", example_de: "Die Künstlerin arbeitet im Museum.", example_es: "La artista trabaja en el museo." },
+                { article: "das", word: "Museum", emoji: "🏛️", translation_es: "museo", translation_en: "museum", example_de: "Das Museum ist heute geöffnet.", example_es: "El museo está abierto hoy." },
+                { article: "die", word: "Ausstellung", emoji: "🖼️", translation_es: "exposición", translation_en: "exhibition", example_de: "Die Ausstellung ist sehr interessant.", example_es: "La exposición es muy interesante." },
+                { article: "die", word: "Galerie", emoji: "🖼️", translation_es: "galería", translation_en: "gallery", example_de: "Die Galerie ist in der Innenstadt.", example_es: "La galería está en el centro." },
+                { article: "das", word: "Gemälde", emoji: "🖌️", translation_es: "pintura", translation_en: "painting", example_de: "Das Gemälde ist sehr alt.", example_es: "La pintura es muy antigua." },
+                { article: "die", word: "Leinwand", emoji: "🖼️", translation_es: "lienzo", translation_en: "canvas", example_de: "Die Leinwand steht im Atelier.", example_es: "El lienzo está en el estudio." },
+                { article: "der", word: "Pinsel", emoji: "🖌️", translation_es: "pincel", translation_en: "paintbrush", example_de: "Der Pinsel liegt auf dem Tisch.", example_es: "El pincel está sobre la mesa." },
+                { article: "das", word: "Porträt", emoji: "🧑‍🎨", translation_es: "retrato", translation_en: "portrait", example_de: "Das Porträt hängt im Museum.", example_es: "El retrato cuelga en el museo." },
+                { article: "die", word: "Landschaft", emoji: "🏞️", translation_es: "paisaje", translation_en: "landscape", example_de: "Die Landschaft auf dem Bild ist schön.", example_es: "El paisaje del cuadro es bonito." },
+                { article: "die", word: "Zeichnung", emoji: "✏️", translation_es: "dibujo", translation_en: "drawing", example_de: "Die Zeichnung ist sehr genau.", example_es: "El dibujo es muy preciso." },
+                { article: "die", word: "Skizze", emoji: "✏️", translation_es: "boceto", translation_en: "sketch", example_de: "Die Skizze ist noch nicht fertig.", example_es: "El boceto aún no está terminado." },
                 { article: "der", word: "Onkel", emoji: "👨", translation_es: "tío", translation_en: "uncle", example_de: "Mein Onkel wohnt in Köln.", example_es: "Mi tío vive en Colonia." },
                 { article: "die", word: "Tante", emoji: "👩", translation_es: "tía", translation_en: "aunt", example_de: "Meine Tante kommt heute.", example_es: "Mi tía viene hoy." },
                 { article: "der", word: "Cousin", emoji: "👦", translation_es: "primo", translation_en: "cousin", example_de: "Mein Cousin spielt Fußball.", example_es: "Mi primo juega fútbol." },
@@ -2277,7 +2299,8 @@
             einwohner: "die|einwohnerin",
             wahler: "die|wahlerin",
             freund: "die|freundin",
-            cousin: "die|cousine"
+            cousin: "die|cousine",
+            kunstler: "die|kunstlerin"
         };
 
         window.rawNonLiDNounsByKey = nonLiDByKey;
@@ -2696,7 +2719,7 @@
                 title_es: "Trabajo",
                 title_en: "Work",
                 level: "A1",
-                nouns: pickThemeNouns(["der|bauer", "der|koch", "der|fahrer"])
+                nouns: pickThemeNouns(["der|bauer", "der|koch", "der|fahrer", "das|werk"])
             },
             {
                 id: "pflege",
@@ -3153,7 +3176,7 @@
                 title_es: "Fiestas",
                 title_en: "Celebrations",
                 level: "A1-B1",
-                nouns: pickThemeNouns(["das|fest", "die|feier", "die|einweihung", "der|jubilaum"])
+                nouns: pickThemeNouns(["das|fest", "die|feier", "die|einweihung", "der|jubilaum", "das|feuerwerk"])
             },
             {
                 id: "events",
@@ -3359,6 +3382,22 @@
                 nouns: pickThemeNouns(["die|hilfe", "der|erfolg", "die|neuigkeiten", "die|vorsicht"])
             },
             {
+                id: "kunst",
+                title: "Kunst",
+                title_es: "Arte",
+                title_en: "Art",
+                level: "A2",
+                nouns: pickThemeNouns(["der|kunstler", "das|bild", "das|museum", "die|ausstellung", "die|galerie"])
+            },
+            {
+                id: "malerei",
+                title: "Malerei",
+                title_es: "Pintura",
+                title_en: "Painting",
+                level: "B1",
+                nouns: pickThemeNouns(["die|leinwand", "das|gemalde", "der|pinsel", "das|portrat", "die|landschaft", "die|zeichnung", "die|skizze"])
+            },
+            {
                 id: "amt",
                 title: "Amt",
                 title_es: "Gestión",
@@ -3434,6 +3473,7 @@
             freizeit: "A2",
             gefuehle: "A2",
             praevention: "A2",
+            kunst: "A2",
             medizinberufe: "B1",
             lehre: "B1",
             service: "B1",
@@ -3457,6 +3497,7 @@
             informatik: "B1",
             begriffe: "B1",
             hilfe: "B1",
+            malerei: "B1",
             amt: "B1"
         };
 
