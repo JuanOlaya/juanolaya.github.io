@@ -2059,6 +2059,16 @@ input:checked+.slider:before {
     align-items: center;
 }
 
+.loading-status {
+    min-height: 18px;
+    margin-top: 8px;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #4f6f96;
+    font-style: italic;
+    letter-spacing: 0.01em;
+}
+
 .search-input {
     padding: 8px 35px 8px 12px;
     border: 2px solid #4682B4;

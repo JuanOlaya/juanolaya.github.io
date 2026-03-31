@@ -136,12 +136,23 @@
     let currentGroupInLevel = 0; // 0-indexed position within current level
     let currentVerbInModal = '';
     let currentIndexInModal = 0;
+    let modalDeferredLoadToken = 0;
     let storyClickCounter = 0;
     let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
-    const CACHE_KEY = 'verbAppCache_v38_theme_search_index';
+    const CACHE_KEY = 'verbAppCache_v39_lightweight_cards';
     const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
     let cachePersistTimeout = null;
     let cachePersistenceDisabled = false;
+    const HEAVY_VERB_DATA_KEYS = [
+        'praesens',
+        'praesens_examples',
+        'praeteritum_conjugations',
+        'praeteritum_examples',
+        'perfekt_examples',
+        'praesens_fragen',
+        'konjunktiv_ii',
+        'wortfamilie'
+    ];
 
     // --- DOM ELEMENTS ---
     const mainContainer = document.getElementById('main-container');
@@ -157,6 +168,7 @@
     const storyContainer = document.getElementById('story-container');
     const storyContent = document.getElementById('story-content');
     const searchInput = document.getElementById('verb-search');
+    const loadingStatus = document.getElementById('loading-status');
     const verbModal = document.getElementById('verb-modal');
     const infoModal = document.getElementById('info-modal');
     const closeVerbModalButton = document.getElementById('close-verb-modal');
@@ -225,46 +237,63 @@
     let currentThemeData = null;
     let appVersion = '1.6_static'; // Stable version; replaced by verbs_index.lastUpdated when available
 
+    function createLightweightVerbDataSnapshot(source = allVerbsData) {
+        const snapshot = {};
+        Object.entries(source || {}).forEach(([verbName, verbData]) => {
+            if (!verbData || typeof verbData !== 'object' || Array.isArray(verbData)) return;
+            const compactVerbData = { ...verbData };
+            HEAVY_VERB_DATA_KEYS.forEach(key => {
+                delete compactVerbData[key];
+            });
+            snapshot[verbName] = compactVerbData;
+        });
+        return snapshot;
+    }
+
+    function createCachePayload({ compact = false } = {}) {
+        const lightweightVerbs = createLightweightVerbDataSnapshot(allVerbsData);
+        const payload = {
+            allVerbsData: lightweightVerbs,
+            verbGroupsByLevel,
+            allGroupsIndex,
+            fileIndexData,
+            lastUpdated: appVersion || new Date().toISOString(),
+            timestamp: Date.now(),
+            cacheMode: compact ? 'compact' : 'full'
+        };
+
+        if (!compact) {
+            return payload;
+        }
+
+        const compactGroups = {};
+        const compactVerbsData = {};
+        const groups = verbGroupsByLevel[currentLevel] || [];
+        compactGroups[currentLevel] = groups;
+        groups.forEach(group => {
+            if (!group || !Array.isArray(group.verbs)) return;
+            group.verbs.forEach(verbName => {
+                if (lightweightVerbs[verbName]) {
+                    compactVerbsData[verbName] = lightweightVerbs[verbName];
+                }
+            });
+        });
+
+        return {
+            ...payload,
+            allVerbsData: compactVerbsData,
+            verbGroupsByLevel: compactGroups
+        };
+    }
+
     function persistCacheSnapshot() {
         if (cachePersistenceDisabled) return;
 
-        const buildCompactCachePayload = () => {
-            const compactGroups = {};
-            const compactVerbsData = {};
-            const groups = verbGroupsByLevel[currentLevel] || [];
-            compactGroups[currentLevel] = groups;
-            groups.forEach(group => {
-                if (!group || !Array.isArray(group.verbs)) return;
-                group.verbs.forEach(verbName => {
-                    if (allVerbsData[verbName]) {
-                        compactVerbsData[verbName] = allVerbsData[verbName];
-                    }
-                });
-            });
-            return {
-                allVerbsData: compactVerbsData,
-                verbGroupsByLevel: compactGroups,
-                allGroupsIndex,
-                fileIndexData,
-                lastUpdated: appVersion || new Date().toISOString(),
-                timestamp: Date.now(),
-                cacheMode: 'compact'
-            };
-        };
-
         try {
-            const cachePayload = {
-                allVerbsData,
-                verbGroupsByLevel,
-                allGroupsIndex,
-                fileIndexData,
-                lastUpdated: appVersion || new Date().toISOString(),
-                timestamp: Date.now()
-            };
-            localStorage.setItem(CACHE_KEY, JSON.stringify(cachePayload));
+            localStorage.setItem(CACHE_KEY, JSON.stringify(createCachePayload()));
         } catch (e) {
             try {
-                localStorage.setItem(CACHE_KEY, JSON.stringify(buildCompactCachePayload()));
+                localStorage.setItem(CACHE_KEY, JSON.stringify(createCachePayload({ compact: true })));
             } catch (compactError) {
                 cachePersistenceDisabled = true;
                 clearTimeout(cachePersistTimeout);
@@ -319,23 +348,36 @@
 
     // --- BACKGROUND LOADING & PROGRESS ---
     let isBackgroundLoading = false;
+    let loadingProgressState = { cards: 0, conjugations: 0 };
 
-    function updateLoadingProgress(percentage) {
+    function updateLoadingProgress(percentage, phase = 'cards') {
         if (!searchInput) return;
+        loadingProgressState[phase] = Math.max(0, Math.min(100, percentage));
+        const cardsProgress = Math.round(loadingProgressState.cards || 0);
+        const conjugationsProgress = Math.round(loadingProgressState.conjugations || 0);
 
         if (percentage < 100) {
-            // Light blue progress bar background
-            const progressColor = 'rgba(70, 130, 180, 0.2)'; // Light SteelBlue
+            const progressColor = phase === 'cards'
+                ? 'rgba(70, 130, 180, 0.2)'
+                : 'rgba(34, 197, 94, 0.18)';
             const remainingColor = '#ffffff';
 
             searchInput.style.background = `linear-gradient(to right, ${progressColor} ${percentage}%, ${remainingColor} ${percentage}%)`;
-            searchInput.placeholder = `${Math.round(percentage)}%`;
+            searchInput.placeholder = `${phase === 'cards' ? 'Tarjetas' : 'Konjugationen'} ${Math.round(percentage)}%`;
             searchInput.classList.add('loading-active');
+            if (loadingStatus) {
+                loadingStatus.textContent = `Tarjetas ${cardsProgress}% · Konjugationen ${conjugationsProgress}%`;
+            }
         } else {
-            // Reset background and placeholder
-            searchInput.style.background = '';
-            searchInput.placeholder = "Suchen... (buscar)";
-            searchInput.classList.remove('loading-active');
+            if (loadingStatus) {
+                loadingStatus.textContent = `Tarjetas ${cardsProgress}% · Konjugationen ${conjugationsProgress}%`;
+            }
+            if (cardsProgress >= 100 && conjugationsProgress >= 100) {
+                searchInput.style.background = '';
+                searchInput.placeholder = "Suchen... (buscar)";
+                searchInput.classList.remove('loading-active');
+                if (loadingStatus) loadingStatus.textContent = '';
+            }
         }
     }
 
@@ -382,7 +424,9 @@
                     if (data.lastUpdated) {
                         appVersion = data.lastUpdated;
                     }
-                    updateLoadingProgress(100);
+                    loadingProgressState = { cards: 100, conjugations: 100 };
+                    updateLoadingProgress(100, 'cards');
+                    updateLoadingProgress(100, 'conjugations');
                     isBackgroundLoading = false;
                     generateTagFilters();
 
@@ -401,6 +445,8 @@
         if (isBackgroundLoading) return;
         isBackgroundLoading = true;
         console.log("Starting background data load...");
+        loadingProgressState = { cards: 0, conjugations: 0 };
+        updateLoadingProgress(0, 'cards');
 
         // Collect all tasks EXCEPT current one (already loading/loaded)
         const loadTasks = [];
@@ -457,8 +503,6 @@
                         );
                         await Promise.all(cardPromises);
 
-                        // 4. Fetch Conjugations
-                        await loadConjugations(new Set(newVerbs));
                     }
                 } catch (e) {
                     console.warn(`Background load failed for ${levelKey} group ${task.i}`, e);
@@ -469,7 +513,7 @@
 
             loadedTasks += batch.length;
             const percent = Math.min(100, (loadedTasks / totalTasks) * 100);
-            updateLoadingProgress(percent);
+            updateLoadingProgress(percent, 'cards');
 
             // Yield
             if (i + BATCH_SIZE < loadTasks.length) {
@@ -477,22 +521,36 @@
             }
         }
 
+        updateLoadingProgress(100, 'cards');
+
+        const verbsNeedingConjugations = Object.keys(allVerbsData).filter(verbName => {
+            const verbData = allVerbsData[verbName] || {};
+            if (!verbData.praesens || !verbData.praeteritum_conjugations || !verbData.praesens_fragen) {
+                return true;
+            }
+            return konjunktivVerbs.includes(verbName) && !verbData.konjunktiv_ii;
+        });
+
+        const CONJUGATION_BATCH_SIZE = 12;
+        for (let i = 0; i < verbsNeedingConjugations.length; i += CONJUGATION_BATCH_SIZE) {
+            const batch = verbsNeedingConjugations.slice(i, i + CONJUGATION_BATCH_SIZE);
+            await loadConjugations(new Set(batch));
+            const percent = Math.min(100, ((i + batch.length) / Math.max(verbsNeedingConjugations.length, 1)) * 100);
+            updateLoadingProgress(percent, 'conjugations');
+
+            if (i + CONJUGATION_BATCH_SIZE < verbsNeedingConjugations.length) {
+                await new Promise(r => setTimeout(r, 15));
+            }
+        }
+
         console.log("Background loading complete.");
-        updateLoadingProgress(100);
+        updateLoadingProgress(100, 'conjugations');
         isBackgroundLoading = false;
         generateTagFilters();
 
         // Save to LocalStorage
         try {
-            const cachePayload = {
-                allVerbsData,
-                verbGroupsByLevel,
-                allGroupsIndex,
-                fileIndexData,
-                lastUpdated: remoteVersion || new Date().toISOString(),
-                timestamp: Date.now()
-            };
-            localStorage.setItem(CACHE_KEY, JSON.stringify(cachePayload));
+            localStorage.setItem(CACHE_KEY, JSON.stringify(createCachePayload()));
             console.log("Saved data to LocalStorage cache");
         } catch (e) {
             try {
@@ -655,6 +713,86 @@
         }))).then(() => {
             // Conjugations loaded
         });
+    }
+
+    async function loadVerbPraesensData(verbName) {
+        await loadFileIndex();
+        const existingData = allVerbsData[verbName] || {};
+        if (existingData.praesens) {
+            return existingData;
+        }
+
+        const query = appVersion ? `?v=${appVersion}` : '';
+        const praesensData = fileExistsInIndex('praesens', verbName)
+            ? await fetch(`json/praesens/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+            : {};
+
+        allVerbsData[verbName] = {
+            ...existingData,
+            ...praesensData
+        };
+
+        return allVerbsData[verbName];
+    }
+
+    async function loadVerbModalDeferredData(verbName) {
+        await loadFileIndex();
+        const existingData = allVerbsData[verbName] || {};
+        const query = appVersion ? `?v=${appVersion}` : '';
+        const maybeFetchJson = (folder, fallback = {}) =>
+            fileExistsInIndex(folder, verbName)
+                ? fetch(`json/${folder}/${verbName}.json${query}`).then(res => res.ok ? res.json() : fallback).catch(() => fallback)
+                : Promise.resolve(fallback);
+
+        const [
+            perfektExamples,
+            fragenData,
+            perfektKonjugationData,
+            praeteritumKonjugationData,
+            konjunktivData,
+            wortfamilieData
+        ] = await Promise.all([
+            !existingData.examples ? maybeFetchJson('perfekt', []) : Promise.resolve(existingData.examples),
+            !existingData.praesens_fragen ? maybeFetchJson('praesens_fragen', {}) : Promise.resolve(existingData.praesens_fragen),
+            !existingData.perfekt_examples ? maybeFetchJson('perfekt_konjugation', {}) : Promise.resolve({}),
+            !existingData.praeteritum_conjugations ? maybeFetchJson('praeteritum_konjugation', {}) : Promise.resolve({}),
+            konjunktivVerbs.includes(verbName) && !existingData.konjunktiv_ii
+                ? maybeFetchJson('konjunktiv_ii', {})
+                : Promise.resolve({}),
+            !Array.isArray(existingData.wortfamilie) ? maybeFetchJson('wortfamilie', { wortfamilie: [] }) : Promise.resolve({ wortfamilie: existingData.wortfamilie })
+        ]);
+
+        if (praeteritumKonjugationData.praeteritum) {
+            praeteritumKonjugationData.praeteritum_conjugations = praeteritumKonjugationData.praeteritum;
+            delete praeteritumKonjugationData.praeteritum;
+        }
+
+        allVerbsData[verbName] = {
+            ...existingData,
+            ...fragenData,
+            ...perfektKonjugationData,
+            ...praeteritumKonjugationData,
+            ...konjunktivData,
+            examples: Array.isArray(perfektExamples) ? perfektExamples : (existingData.examples || []),
+            wortfamilie: Array.isArray(wortfamilieData.wortfamilie) ? wortfamilieData.wortfamilie : (existingData.wortfamilie || [])
+        };
+
+        scheduleCachePersist();
+        return allVerbsData[verbName];
+    }
+
+    function restoreModalActiveTab(tabId) {
+        const targetTabId = tabId || 'infinitiv';
+        const targetButton = document.querySelector(`.modal-tab-btn[data-tab="${targetTabId}"]`);
+        if (targetButton && targetButton.style.display !== 'none') {
+            targetButton.click();
+            return;
+        }
+
+        const fallbackButton = document.querySelector('.modal-tab-btn[data-tab="infinitiv"]');
+        if (fallbackButton) {
+            fallbackButton.click();
+        }
     }
 
     // --- LAZY LOAD WORTFAMILIE INDEX ---
@@ -1420,7 +1558,6 @@
                 renderVerbGroup();
                 // Start background loading after initial render
                 loadBackgroundData();
-                loadWortfamilieIndex().catch(e => console.warn("WF Index lazy load failed", e));
 
                 prevGroupBtn.addEventListener('click', async () => {
                     let newLevel = currentLevel;
@@ -2042,54 +2179,30 @@
     };
 
     // --- UPDATED MODAL FUNCTION WITH LAZY LOADING ---
-    window.openModalForVerb = async function (verb) {
+    window.openModalForVerb = async function (verb, options = {}) {
+        const { skipDeferredReload = false, preferredTab = null } = options;
         const data = allVerbsData[verb];
         if (!data) return;
+        const activeTabBeforeRefresh = preferredTab || document.querySelector('.modal-tab-btn.active')?.dataset.tab || 'infinitiv';
 
-        // Lazy load praesens, perfekt, perfekt_konjugation, praeteritum_konjugation, fragen, and konjunktiv_ii data if not already loaded
-        if (!data.praesens || !data.examples || !data.praesens_fragen || !data.perfekt_examples || !data.praeteritum_examples || (konjunktivVerbs.includes(verb) && !data.konjunktiv_ii)) {
+        // Open the modal fast with Präsens first, then load the rest in the background.
+        if (!data.praesens) {
             try {
-                const query = appVersion ? `?v=${appVersion}` : '';
-                const praesensPromise = fetch(`json/praesens/${verb}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-                const perfektPromise = fetch(`json/perfekt/${verb}.json${query}`).then(res => res.ok ? res.json() : []).catch(() => []);
-                const fragenPromise = fetch(`json/praesens_fragen/${verb}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-                const perfektKonjugationPromise = fetch(`json/perfekt_konjugation/${verb}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-                const praeteritumKonjugationPromise = fetch(`json/praeteritum_konjugation/${verb}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}));
-
-                const wortfamiliePromise = fetch(`json/wortfamilie/${verb}.json${query}`).then(res => res.ok ? res.json() : { wortfamilie: [] }).catch(() => ({ wortfamilie: [] }));
-
-                // Add Konjunktiv II data fetch for specific verbs
-                const konjunktivPromise = konjunktivVerbs.includes(verb)
-                    ? fetch(`json/konjunktiv_ii/${verb}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
-                    : Promise.resolve({});
-
-                const [praesensData, perfektData, fragenData, perfektKonjugationData, praeteritumKonjugationData, konjunktivData, wortfamilieData] = await Promise.all([praesensPromise, perfektPromise, fragenPromise, perfektKonjugationPromise, praeteritumKonjugationPromise, konjunktivPromise, wortfamiliePromise]);
-
-                // Rename praeteritum from konjugation data to avoid conflict with card praeteritum string
-                if (praeteritumKonjugationData.praeteritum) {
-                    praeteritumKonjugationData.praeteritum_conjugations = praeteritumKonjugationData.praeteritum;
-                    delete praeteritumKonjugationData.praeteritum;
-                }
-
-                // Merge the loaded data into allVerbsData
-                // IMPORTANT: merged "wortfamilie" into data.wortfamilie property
-                allVerbsData[verb] = {
-                    ...data,
-                    ...praesensData,
-                    ...fragenData,
-                    ...perfektKonjugationData,
-                    ...praeteritumKonjugationData,
-                    ...konjunktivData,
-                    examples: perfektData,
-                    wortfamilie: wortfamilieData.wortfamilie || [] // Ensure it's the array
-                };
+                await loadVerbPraesensData(verb);
             } catch (error) {
-                console.error(`Failed to load modal data for ${verb}:`, error);
+                console.error(`Failed to load Präsens data for ${verb}:`, error);
             }
         }
 
         // Get the updated data reference
         const updatedData = allVerbsData[verb];
+        const needsDeferredModalData =
+            !updatedData.examples ||
+            !updatedData.praesens_fragen ||
+            !updatedData.perfekt_examples ||
+            !updatedData.praeteritum_conjugations ||
+            !Array.isArray(updatedData.wortfamilie) ||
+            (konjunktivVerbs.includes(verb) && !updatedData.konjunktiv_ii);
 
         // Set infinitive with case tags
         const infinitiveElement = document.getElementById('modal-verb-infinitive');
@@ -2920,6 +3033,20 @@
 
         if (window.updateTabCarousel) window.updateTabCarousel();
         verbModal.classList.add('visible');
+        restoreModalActiveTab(activeTabBeforeRefresh);
+
+        if (!skipDeferredReload && needsDeferredModalData) {
+            const token = ++modalDeferredLoadToken;
+            loadVerbModalDeferredData(verb)
+                .then(() => {
+                    if (modalDeferredLoadToken !== token || currentVerbInModal !== verb) return;
+                    const activeTabNow = document.querySelector('.modal-tab-btn.active')?.dataset.tab || activeTabBeforeRefresh;
+                    window.openModalForVerb(verb, { skipDeferredReload: true, preferredTab: activeTabNow });
+                })
+                .catch(error => {
+                    console.error(`Failed to load deferred modal data for ${verb}:`, error);
+                });
+        }
     }
 
     // --- SEARCH FUNCTIONALITY ---
@@ -3122,6 +3249,16 @@
                                         tagMatch = true;
                                     }
                                 }
+
+                                const needsConjugationData =
+                                    !allVerbsData[verbName].praesens ||
+                                    !allVerbsData[verbName].praeteritum_conjugations ||
+                                    (konjunktivVerbs.includes(verbName) && !allVerbsData[verbName].konjunktiv_ii);
+
+                                if (needsConjugationData) {
+                                    await loadConjugations(new Set([verbName]));
+                                }
+
                                 // Search in Präsens conjugations (pre-loaded!)
                                 let praesensMatch = false;
                                 if (allVerbsData[verbName].praesens) {
