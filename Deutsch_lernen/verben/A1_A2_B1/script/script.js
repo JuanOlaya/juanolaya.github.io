@@ -27,7 +27,7 @@
         'B1': [{ key: 'B1_1', count: 20 }],
         'B2': [{ key: 'B2_1', count: 13 }]
     };
-    const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22C55E', '#3b82f6'];
+    const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#3b82f6', '#ea580c', '#22C55E', '#a855f7', '#facc15'];
 
     function getPhysicalGroupData(macroLevel, globalIndex) {
         const layers = physicalLevelMap[macroLevel] || [];
