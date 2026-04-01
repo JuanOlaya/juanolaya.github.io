@@ -1,6 +1,6 @@
 {
   "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word, with the STRICT EXCEPTION of the group 'Leben in Deutschland'. MAINTENANCE RULE: whenever this file changes, update lastUpdated.",
-  "lastUpdated": "2026-03-29T09:00:00.000Z",
+  "lastUpdated": "2026-04-01T10:32:02.285Z",
   "totalGroups": 87,
   "totalVerbs": 485,
   "groups": [
@@ -872,7 +872,7 @@
     },
     {
       "level": "B1.1",
-      "verbCount": 5,
+      "verbCount": 6,
       "verbs": [
         "regieren",
         "fordern",
@@ -890,108 +890,81 @@
       "level": "B1.1",
       "verbCount": 4,
       "verbs": [
-        "spenden",
-        "stehlen",
-        "betrügen",
-        "lügen"
+        "zwingen",
+        "beeinflussen",
+        "bestimmen",
+        "kontrollieren"
       ],
-      "groupNameGerman": "Ethik",
-      "groupNameSpanish": "Ética",
-      "groupNameEnglish": "Ethics",
+      "groupNameGerman": "Macht",
+      "groupNameSpanish": "Poder",
+      "groupNameEnglish": "Power",
       "groupNumberPerLevel": 3
     },
     {
       "level": "B1.1",
-      "verbCount": 5,
+      "verbCount": 6,
       "verbs": [
-        "gelingen",
-        "misslingen",
-        "erreichen",
-        "aufgeben",
-        "scheitern"
+        "verhandeln",
+        "anklagen",
+        "klagen",
+        "verteidigen",
+        "bestrafen",
+        "verurteilen"
       ],
-      "groupNameGerman": "Erfolg",
-      "groupNameSpanish": "Éxito",
-      "groupNameEnglish": "Success",
+      "groupNameGerman": "Recht",
+      "groupNameSpanish": "Derecho",
+      "groupNameEnglish": "Law",
       "groupNumberPerLevel": 4
     },
     {
       "level": "B1.1",
-      "verbCount": 4,
+      "verbCount": 7,
       "verbs": [
-        "schmücken",
-        "verzieren",
-        "vorstellen",
-        "wünschen"
+        "beantragen",
+        "anmelden",
+        "einreichen",
+        "bewerben",
+        "kündigen",
+        "erfolgen",
+        "beschweren"
       ],
-      "groupNameGerman": "Präsentation",
-      "groupNameSpanish": "Presentación",
-      "groupNameEnglish": "Presentation",
+      "groupNameGerman": "Formalitäten",
+      "groupNameSpanish": "Trámites",
+      "groupNameEnglish": "Formalities",
       "groupNumberPerLevel": 5
     },
     {
       "level": "B1.1",
-      "verbCount": 5,
+      "verbCount": 7,
       "verbs": [
-        "schützen",
-        "verschmutzen",
-        "verbrauchen",
-        "trennen",
-        "recyceln"
+        "meinen",
+        "stimmen",
+        "loben",
+        "kritisieren",
+        "zustimmen",
+        "ablehnen",
+        "vertreten"
       ],
-      "groupNameGerman": "Ökologie",
-      "groupNameSpanish": "Ecología",
-      "groupNameEnglish": "Ecology",
+      "groupNameGerman": "Meinung",
+      "groupNameSpanish": "Opinión",
+      "groupNameEnglish": "Opinion",
       "groupNumberPerLevel": 6
     },
     {
       "level": "B1.1",
       "verbCount": 6,
       "verbs": [
-        "heilen",
-        "behandeln",
-        "verletzen",
-        "pflegen",
-        "retten",
-        "aufsuchen"
+        "ärgern",
+        "zerstören",
+        "streiten",
+        "schimpfen",
+        "stören",
+        "schreien"
       ],
-      "groupNameGerman": "Pflege",
-      "groupNameSpanish": "Cuidado",
-      "groupNameEnglish": "Care",
+      "groupNameGerman": "Konflikt",
+      "groupNameSpanish": "Conflicto",
+      "groupNameEnglish": "Conflict",
       "groupNumberPerLevel": 7
-    },
-    {
-      "level": "B1.1",
-      "verbCount": 6,
-      "verbs": [
-        "funktionieren",
-        "reparieren",
-        "einstellen",
-        "installieren",
-        "drucken",
-        "überwachen"
-      ],
-      "groupNameGerman": "Technik",
-      "groupNameSpanish": "Tecnología",
-      "groupNameEnglish": "Technology",
-      "groupNumberPerLevel": 8
-    },
-    {
-      "level": "B1.1",
-      "verbCount": 7,
-      "verbs": [
-        "löschen",
-        "sichern",
-        "erstellen",
-        "einschalten",
-        "ausschalten",
-        "absichern",
-        "speichern"
-      ],
-      "groupNameGerman": "Daten",
-      "groupNameSpanish": "Datos",
-      "groupNameEnglish": "Data",
-      "groupNumberPerLevel": 9
     },
     {
       "level": "B1.1",
@@ -1008,20 +981,54 @@
       "groupNameGerman": "Medien",
       "groupNameSpanish": "Medios",
       "groupNameEnglish": "Media",
+      "groupNumberPerLevel": 8
+    },
+    {
+      "level": "B1.1",
+      "verbCount": 6,
+      "verbs": [
+        "teilen",
+        "herunterladen",
+        "hochladen",
+        "verbinden",
+        "folgen",
+        "empfehlen"
+      ],
+      "groupNameGerman": "Internet",
+      "groupNameSpanish": "Internet",
+      "groupNameEnglish": "Internet",
+      "groupNumberPerLevel": 9
+    },
+    {
+      "level": "B1.1",
+      "verbCount": 7,
+      "verbs": [
+        "fürchten",
+        "begeistern",
+        "enttäuschen",
+        "beruhigen",
+        "aufregen",
+        "erschrecken",
+        "leiden"
+      ],
+      "groupNameGerman": "Psyche",
+      "groupNameSpanish": "Psique",
+      "groupNameEnglish": "Psyche",
       "groupNumberPerLevel": 10
     },
     {
       "level": "B1.1",
-      "verbCount": 4,
+      "verbCount": 5,
       "verbs": [
-        "engagieren",
-        "unterstützen",
-        "akzeptieren",
-        "respektieren"
+        "warnen",
+        "vermeiden",
+        "fliehen",
+        "brennen",
+        "verstecken"
       ],
-      "groupNameGerman": "Haltung",
-      "groupNameSpanish": "Postura",
-      "groupNameEnglish": "Stance",
+      "groupNameGerman": "Gefahr",
+      "groupNameSpanish": "Peligro",
+      "groupNameEnglish": "Danger",
       "groupNumberPerLevel": 11
     },
     {
@@ -1042,128 +1049,121 @@
       "level": "B1.1",
       "verbCount": 4,
       "verbs": [
-        "zwingen",
-        "beeinflussen",
-        "bestimmen",
-        "kontrollieren"
+        "spenden",
+        "stehlen",
+        "betrügen",
+        "lügen"
       ],
-      "groupNameGerman": "Macht",
-      "groupNameSpanish": "Poder",
-      "groupNameEnglish": "Power",
+      "groupNameGerman": "Ethik",
+      "groupNameSpanish": "Ética",
+      "groupNameEnglish": "Ethics",
       "groupNumberPerLevel": 13
     },
     {
       "level": "B1.1",
-      "verbCount": 7,
+      "verbCount": 5,
       "verbs": [
-        "meinen",
-        "stimmen",
-        "loben",
-        "kritisieren",
-        "zustimmen",
-        "ablehnen",
-        "vertreten"
+        "gelingen",
+        "misslingen",
+        "erreichen",
+        "aufgeben",
+        "scheitern"
       ],
-      "groupNameGerman": "Meinung",
-      "groupNameSpanish": "Opinión",
-      "groupNameEnglish": "Opinion",
+      "groupNameGerman": "Erfolg",
+      "groupNameSpanish": "Éxito",
+      "groupNameEnglish": "Success",
       "groupNumberPerLevel": 14
     },
     {
       "level": "B1.1",
-      "verbCount": 7,
+      "verbCount": 4,
       "verbs": [
-        "beantragen",
-        "anmelden",
-        "einreichen",
-        "bewerben",
-        "kündigen",
-        "erfolgen",
-        "beschweren"
+        "schmücken",
+        "verzieren",
+        "vorstellen",
+        "wünschen"
       ],
-      "groupNameGerman": "Formalitäten",
-      "groupNameSpanish": "Trámites",
-      "groupNameEnglish": "Formalities",
+      "groupNameGerman": "Präsentation",
+      "groupNameSpanish": "Presentación",
+      "groupNameEnglish": "Presentation",
       "groupNumberPerLevel": 15
     },
     {
       "level": "B1.1",
-      "verbCount": 6,
+      "verbCount": 5,
       "verbs": [
-        "ärgern",
-        "zerstören",
-        "streiten",
-        "schimpfen",
-        "stören",
-        "schreien"
+        "schützen",
+        "verschmutzen",
+        "verbrauchen",
+        "trennen",
+        "recyceln"
       ],
-      "groupNameGerman": "Konflikt",
-      "groupNameSpanish": "Conflicto",
-      "groupNameEnglish": "Conflict",
+      "groupNameGerman": "Ökologie",
+      "groupNameSpanish": "Ecología",
+      "groupNameEnglish": "Ecology",
       "groupNumberPerLevel": 16
     },
     {
       "level": "B1.1",
       "verbCount": 6,
       "verbs": [
-        "teilen",
-        "herunterladen",
-        "hochladen",
-        "verbinden",
-        "folgen",
-        "empfehlen"
+        "heilen",
+        "behandeln",
+        "verletzen",
+        "pflegen",
+        "retten",
+        "aufsuchen"
       ],
-      "groupNameGerman": "Internet",
-      "groupNameSpanish": "Internet",
-      "groupNameEnglish": "Internet",
+      "groupNameGerman": "Pflege",
+      "groupNameSpanish": "Cuidado",
+      "groupNameEnglish": "Care",
       "groupNumberPerLevel": 17
     },
     {
       "level": "B1.1",
       "verbCount": 6,
       "verbs": [
-        "verhandeln",
-        "anklagen",
-        "klagen",
-        "verteidigen",
-        "bestrafen",
-        "verurteilen"
+        "funktionieren",
+        "reparieren",
+        "einstellen",
+        "installieren",
+        "drucken",
+        "überwachen"
       ],
-      "groupNameGerman": "Recht",
-      "groupNameSpanish": "Derecho",
-      "groupNameEnglish": "Law",
+      "groupNameGerman": "Technik",
+      "groupNameSpanish": "Tecnología",
+      "groupNameEnglish": "Technology",
       "groupNumberPerLevel": 18
-    },
-    {
-      "level": "B1.1",
-      "verbCount": 5,
-      "verbs": [
-        "warnen",
-        "vermeiden",
-        "fliehen",
-        "brennen",
-        "verstecken"
-      ],
-      "groupNameGerman": "Gefahr",
-      "groupNameSpanish": "Peligro",
-      "groupNameEnglish": "Danger",
-      "groupNumberPerLevel": 19
     },
     {
       "level": "B1.1",
       "verbCount": 7,
       "verbs": [
-        "fürchten",
-        "begeistern",
-        "enttäuschen",
-        "beruhigen",
-        "aufregen",
-        "erschrecken",
-        "leiden"
+        "löschen",
+        "sichern",
+        "erstellen",
+        "einschalten",
+        "ausschalten",
+        "absichern",
+        "speichern"
       ],
-      "groupNameGerman": "Psyche",
-      "groupNameSpanish": "Psique",
-      "groupNameEnglish": "Psyche",
+      "groupNameGerman": "Daten",
+      "groupNameSpanish": "Datos",
+      "groupNameEnglish": "Data",
+      "groupNumberPerLevel": 19
+    },
+    {
+      "level": "B1.1",
+      "verbCount": 4,
+      "verbs": [
+        "engagieren",
+        "unterstützen",
+        "akzeptieren",
+        "respektieren"
+      ],
+      "groupNameGerman": "Haltung",
+      "groupNameSpanish": "Postura",
+      "groupNameEnglish": "Stance",
       "groupNumberPerLevel": 20
     },
     {

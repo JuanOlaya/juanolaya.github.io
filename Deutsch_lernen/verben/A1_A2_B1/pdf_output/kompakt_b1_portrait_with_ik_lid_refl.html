@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompakt B1 Portrait With IK LiD Refl</title>
+    <style>
+        @page {
+            size: Letter portrait;
+            margin: 0;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #0f172a;
+        }
+
+        body {
+            width: 8.5in;
+        }
+
+        .page {
+            box-sizing: border-box;
+            width: 8.5in;
+            height: 11in;
+            padding: 0.06in;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 0.05in;
+            page-break-after: always;
+            break-after: page;
+            background: #ffffff;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+            break-after: auto;
+        }
+
+        .kompakt-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            overflow: hidden;
+            border-radius: 0.18in;
+            background: #ffffff;
+            border: 1px solid #dbe4f0;
+            box-shadow: 0 0.02in 0.08in rgba(15, 23, 42, 0.08);
+        }
+
+        .kompakt-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.08in;
+            min-height: 0.92in;
+            padding: 0.14in 0.16in;
+        }
+
+        .header-de {
+            font-size: 0.33in;
+            font-weight: 800;
+            line-height: 1.02;
+            color: #0f172a;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header-es {
+            font-size: 0.27in;
+            font-weight: 700;
+            font-style: italic;
+            line-height: 1.02;
+            color: #0f172a;
+            text-align: right;
+            max-width: 48%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .kompakt-content {
+            flex: 1;
+            min-height: 0;
+            padding: 0.08in 0.14in 0.06in;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .kompakt-row {
+            min-height: 0.37in;
+            padding: 0.025in 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.08in;
+            border-bottom: 1px solid #dbe4f0;
+        }
+
+        .kompakt-row:last-child {
+            border-bottom: none;
+        }
+
+        .kompakt-left {
+            display: flex;
+            align-items: center;
+            gap: 0.04in;
+            min-width: 0;
+            flex: 1 1 auto;
+        }
+
+        .kompakt-german {
+            font-size: 0.245in;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.02;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
+        }
+
+        .kompakt-badges {
+            display: flex;
+            align-items: center;
+            gap: 0.025in;
+            flex: 0 0 auto;
+        }
+
+        .mini-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 0.29in;
+            height: 0.17in;
+            padding: 0 0.035in;
+            border-radius: 999px;
+            font-size: 0.095in;
+            font-weight: 800;
+            line-height: 1;
+            border: 1px solid transparent;
+            box-sizing: border-box;
+            text-transform: none;
+        }
+
+        .mini-badge-IK {
+            color: #1d4ed8;
+            background: #dbeafe;
+            border-color: #93c5fd;
+            min-width: 0.377in;
+            height: 0.221in;
+            padding: 0 0.045in;
+            font-size: 0.124in;
+        }
+
+        .mini-badge-LiD {
+            color: #166534;
+            background: #dcfce7;
+            border-color: #86efac;
+        }
+
+        .mini-badge-refl {
+            color: #92400e;
+            background: #fef3c7;
+            border-color: #fcd34d;
+        }
+
+        .kompakt-spanish {
+            flex: 0 0 42%;
+            font-size: 0.205in;
+            font-weight: 700;
+            font-style: italic;
+            line-height: 1.02;
+            color: #0f172a;
+            text-align: right;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+<section class="page">
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #c4b5fd; border-top: 0.05in solid #8b5cf6;">
+                <div class="header-de">Regeln</div>
+                <div class="header-es">Reglas</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">erlauben</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">permitir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">verbieten</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">prohibir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">befehlen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">ordenar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">berechtigen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">autorizar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">gelten</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-IK">IK</span><span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">ser válido</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">einhalten</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">cumplir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">einschränken</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">restringir</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #f9a8d4; border-top: 0.05in solid #ec4899;">
+                <div class="header-de">Politik</div>
+                <div class="header-es">Política</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">regieren</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">gobernar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">fordern</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">exigir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">richten</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">dirigir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">beraten</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">asesorar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">regulieren</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">regular</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">führen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">liderar</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #fcd34d; border-top: 0.05in solid #f59e0b;">
+                <div class="header-de">Macht</div>
+                <div class="header-es">Poder</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">zwingen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">obligar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">beeinflussen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">influenciar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">bestimmen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">determinar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">kontrollieren</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">controlar</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #fdba74; border-top: 0.05in solid #ea580c;">
+                <div class="header-de">Recht</div>
+                <div class="header-es">Derecho</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">verhandeln</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">negociar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">anklagen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">acusar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">klagen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">demandar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">verteidigen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">defender</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">bestrafen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">castigar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">verurteilen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">condenar</div>
+        </div>
+    
+            </div>
+        </section>
+    </section><section class="page">
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #86efac; border-top: 0.05in solid #22c55e;">
+                <div class="header-de">Formalitäten</div>
+                <div class="header-es">Trámites</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">beantragen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">solicitar (algo oficial)</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">anmelden</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">inscribirse</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">einreichen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">presentar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">bewerben</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-IK">IK</span><span class="mini-badge mini-badge-refl">refl</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">postularse</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">kündigen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">cancelar suscripción o contrato</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">erfolgen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">ocurrir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">beschweren</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-refl">refl</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">quejarse</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #93c5fd; border-top: 0.05in solid #3b82f6;">
+                <div class="header-de">Meinung</div>
+                <div class="header-es">Opinión</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">meinen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">opinar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">stimmen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">ser correcto</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">loben</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">elogiar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">kritisieren</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">criticar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">zustimmen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">estar de acuerdo</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">ablehnen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">rechazar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">vertreten</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">representar</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #67e8f9; border-top: 0.05in solid #14b8a6;">
+                <div class="header-de">Konflikt</div>
+                <div class="header-es">Conflicto</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">ärgern</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-refl">refl</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">molestarse</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">zerstören</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">destruir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">streiten</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-IK">IK</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">discutir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">schimpfen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">regañar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">stören</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">molestar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">schreien</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-IK">IK</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">gritar</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #a5b4fc; border-top: 0.05in solid #6366f1;">
+                <div class="header-de">Medien</div>
+                <div class="header-es">Medios</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">klicken</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">hacer clic</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">posten</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">publicar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">nutzen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">utilizar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">senden</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-IK">IK</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">enviar (email</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">berichten</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">informar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">mitteilen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">comunicar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">erscheinen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">publicarse</div>
+        </div>
+    
+            </div>
+        </section>
+    </section><section class="page">
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #d8b4fe; border-top: 0.05in solid #a855f7;">
+                <div class="header-de">Internet</div>
+                <div class="header-es">Internet</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">teilen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">compartir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">herunterladen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">descargar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">hochladen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">subir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">verbinden</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-IK">IK</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">conectar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">folgen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">seguir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">empfehlen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-IK">IK</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">recomendar</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #c4b5fd; border-top: 0.05in solid #8b5cf6;">
+                <div class="header-de">Psyche</div>
+                <div class="header-es">Psique</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">fürchten</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">temer</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">begeistern</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">entusiasmar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">enttäuschen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">decepcionar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">beruhigen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">calmar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">aufregen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-refl">refl</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">alterar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">erschrecken</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-IK">IK</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">asustar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">leiden</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-IK">IK</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">sufrir</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #f9a8d4; border-top: 0.05in solid #ec4899;">
+                <div class="header-de">Gefahr</div>
+                <div class="header-es">Peligro</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">warnen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">advertir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">vermeiden</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-IK">IK</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">evitar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">fliehen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">huir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">brennen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">arder</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">verstecken</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">esconder(se)</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #fcd34d; border-top: 0.05in solid #f59e0b;">
+                <div class="header-de">Wettbewerb</div>
+                <div class="header-es">Competencia</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">kämpfen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">luchar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">siegen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">vencer</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">wirken</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">surtir efecto</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">gewinnen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-IK">IK</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">ganar</div>
+        </div>
+    
+            </div>
+        </section>
+    </section><section class="page">
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #fdba74; border-top: 0.05in solid #ea580c;">
+                <div class="header-de">Ethik</div>
+                <div class="header-es">Ética</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">spenden</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">donar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">stehlen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-IK">IK</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">robar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">betrügen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">engañar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">lügen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">mentir</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #86efac; border-top: 0.05in solid #22c55e;">
+                <div class="header-de">Erfolg</div>
+                <div class="header-es">Éxito</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">gelingen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">salir bien</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">misslingen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">salir mal</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">erreichen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">alcanzar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">aufgeben</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">rendirse</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">scheitern</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">fracasar estrepitosamente</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #93c5fd; border-top: 0.05in solid #3b82f6;">
+                <div class="header-de">Präsentation</div>
+                <div class="header-es">Presentación</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">schmücken</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">decorar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">verzieren</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">decorar con detalles</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">vorstellen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-refl">refl</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">imaginarse</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">wünschen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">desear</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #67e8f9; border-top: 0.05in solid #14b8a6;">
+                <div class="header-de">Ökologie</div>
+                <div class="header-es">Ecología</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">schützen</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-LiD">LiD</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">proteger</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">verschmutzen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">contaminar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">verbrauchen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">consumir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">trennen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">separar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">recyceln</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">reciclar</div>
+        </div>
+    
+            </div>
+        </section>
+    </section><section class="page">
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #a5b4fc; border-top: 0.05in solid #6366f1;">
+                <div class="header-de">Pflege</div>
+                <div class="header-es">Cuidado</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">heilen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">curar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">behandeln</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">tratar (médico</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">verletzen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">herir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">pflegen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">cuidar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">retten</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">salvar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">aufsuchen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">visitar</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #d8b4fe; border-top: 0.05in solid #a855f7;">
+                <div class="header-de">Technik</div>
+                <div class="header-es">Tecnología</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">funktionieren</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">funcionar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">reparieren</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">reparar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">einstellen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">ajustar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">installieren</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">instalar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">drucken</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">imprimir</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">überwachen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">supervisar</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #c4b5fd; border-top: 0.05in solid #8b5cf6;">
+                <div class="header-de">Daten</div>
+                <div class="header-es">Datos</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">löschen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">borrar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">sichern</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">asegurar, proteger, resguardar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">erstellen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">crear</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">einschalten</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">encender</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">ausschalten</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">apagar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">absichern</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">asegurar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">speichern</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">guardar</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #f9a8d4; border-top: 0.05in solid #ec4899;">
+                <div class="header-de">Haltung</div>
+                <div class="header-es">Postura</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">engagieren</div>
+                <div class="kompakt-badges">
+                    <span class="mini-badge mini-badge-refl">refl</span>
+                </div>
+            </div>
+            <div class="kompakt-spanish">comprometerse</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">unterstützen</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">apoyar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">akzeptieren</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">aceptar</div>
+        </div>
+    
+        <div class="kompakt-row">
+            <div class="kompakt-left">
+                <div class="kompakt-german">respektieren</div>
+                <div class="kompakt-badges">
+                    
+                </div>
+            </div>
+            <div class="kompakt-spanish">respetar</div>
+        </div>
+    
+            </div>
+        </section>
+    </section>
+</body>
+</html>

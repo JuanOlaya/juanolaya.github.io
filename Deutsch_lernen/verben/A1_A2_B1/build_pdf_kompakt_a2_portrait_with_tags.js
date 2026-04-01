@@ -17,6 +17,7 @@ const htmlPath = path.join(outputDir, 'kompakt_a2_portrait_with_ik_lid_refl.html
 const pdfPath = path.join(outputDir, 'kompakt_a2_portrait_with_ik_lid_refl.pdf');
 
 const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22c55e', '#3b82f6', '#14b8a6', '#6366f1', '#a855f7'];
+const lightHeaderColors = ['#c4b5fd', '#f9a8d4', '#fcd34d', '#fdba74', '#86efac', '#93c5fd', '#67e8f9', '#a5b4fc', '#d8b4fe'];
 const groupsPerPage = 4;
 
 function repairMojibake(text) {
@@ -101,11 +102,12 @@ function buildVerbRow(verb) {
 
 function buildCard(group, index) {
     const themeColor = standardColors[index % standardColors.length];
+    const lightThemeColor = lightHeaderColors[index % lightHeaderColors.length];
     const rowsHtml = group.verbs.map(buildVerbRow).join('');
 
     return `
         <section class="kompakt-card">
-            <header class="kompakt-header" style="background-color: ${themeColor};">
+            <header class="kompakt-header" style="background-color: ${lightThemeColor}; border-top: 0.05in solid ${themeColor};">
                 <div class="header-de">${escapeHtml(normalizeText(group.groupNameGerman))}</div>
                 <div class="header-es">${escapeHtml(normalizeText(group.groupNameSpanish))}</div>
             </header>
