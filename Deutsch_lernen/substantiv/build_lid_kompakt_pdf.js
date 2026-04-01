@@ -7,8 +7,11 @@ const rootDir = __dirname;
 const sourcePath = path.join(rootDir, 'lid_kompakt.html');
 const outputDir = path.join(rootDir, 'pdf_output');
 const variant = process.argv.includes('--light') ? 'light' : 'dark';
-const htmlPath = path.join(outputDir, `lid_kompakt_4up_portrait_${variant}.html`);
-const pdfPath = path.join(outputDir, `lid_kompakt_4up_portrait_${variant}.pdf`);
+const suffixArg = process.argv.find(arg => arg.startsWith('--suffix='));
+const suffix = suffixArg ? suffixArg.slice('--suffix='.length).trim() : '';
+const outputBaseName = `lid_kompakt_4up_portrait_${variant}${suffix ? `_${suffix}` : ''}`;
+const htmlPath = path.join(outputDir, `${outputBaseName}.html`);
+const pdfPath = path.join(outputDir, `${outputBaseName}.pdf`);
 
 if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
@@ -136,6 +139,48 @@ function getCardTranslation(item) {
     return parts[maleIndex] || parts[0];
 }
 
+function abbreviateSpanishTranslation(text) {
+    let value = normalizeWhitespace(text);
+    const replacements = [
+        ['Ministerio de Asuntos Exteriores', 'Min. As. Exteriores'],
+        ['oficina de orden público', 'of. orden publ.'],
+        ['oficina de impuestos', 'of. impuestos'],
+        ['administración municipal', 'adm. municipal'],
+        ['comunidad religiosa', 'com. religiosa'],
+        ['comunidad judía', 'com. judía'],
+        ['seguridad social', 'seg. social'],
+        ['cotizaciones sociales', 'cotiz. sociales'],
+        ['participación electoral', 'part. electoral'],
+        ['poder legislativo', 'poder leg.'],
+        ['poder ejecutivo', 'poder ejec.'],
+        ['poder judicial', 'poder jud.'],
+        ['estado federal', 'est. federal'],
+        ['estado federado', 'est. federado'],
+        ['estados federados', 'est. federados'],
+        ['derecho fundamental', 'der. fundamental'],
+        ['derechos fundamentales', 'der. fundamentales'],
+        ['soberanía popular', 'sob. popular'],
+        ['autoridad pública', 'autoridad publ.'],
+        ['jefe de gobierno', 'jefe gob.'],
+        ['presidente federal', 'pres. federal'],
+        ['presidente del Bundesrat', 'pres. Bundesrat'],
+        ['presidente del Bundestag', 'pres. Bundestag'],
+        ['presidente del estado federado', 'pres. est. federado'],
+        ['persona que trabaja', 'persona empleada'],
+        ['persona empleada', 'pers. empleada'],
+        ['igualdad de derechos', 'igualdad der.'],
+        ['libertad de residencia', 'lib. residencia'],
+        ['libre circulación', 'libre circ.'],
+        ['separación de poderes', 'sep. de poderes']
+    ];
+
+    for (const [from, to] of replacements) {
+        value = value.replace(from, to);
+    }
+
+    return value;
+}
+
 function getArticleClass(art) {
     const value = normalizeWhitespace(art).toLowerCase();
     if (!value) return 'none';
@@ -156,7 +201,7 @@ function getHeaderLabels(group, labels) {
 function buildRow(item) {
     const artClass = getArticleClass(item.art);
     const cardWord = getCardWord(item);
-    const cardTranslation = getCardTranslation(item);
+    const cardTranslation = abbreviateSpanishTranslation(getCardTranslation(item));
     const importantStar = item.important ? '<span class="importance-star">★</span>' : '';
 
     return `
@@ -345,7 +390,7 @@ function buildHtml() {
 
         .kompakt-german {
             font-size: 0.24in;
-            font-weight: 800;
+            font-weight: 600;
             color: ${germanColor};
             line-height: 1.06;
             white-space: nowrap;
@@ -362,8 +407,8 @@ function buildHtml() {
         }
 
         .kompakt-spanish {
-            flex: 0 0 43%;
-            font-size: 0.2in;
+            flex: 0 0 39%;
+            font-size: 0.18in;
             font-weight: 600;
             font-style: italic;
             line-height: 1.06;
