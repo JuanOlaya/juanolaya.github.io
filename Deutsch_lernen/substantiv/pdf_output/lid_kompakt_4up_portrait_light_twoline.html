@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiD Kompakt 4-up Portrait</title>
+    <style>
+        @page {
+            size: Letter portrait;
+            margin: 0;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #0f172a;
+        }
+
+        body {
+            width: 8.5in;
+        }
+
+        .page {
+            box-sizing: border-box;
+            width: 8.5in;
+            height: 11in;
+            padding: 0.08in;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 0.08in;
+            page-break-after: always;
+            break-after: page;
+            background: #ffffff;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+            break-after: auto;
+        }
+
+        .kompakt-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            overflow: hidden;
+            border-radius: 0.18in;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 0.02in 0.08in rgba(15, 23, 42, 0.08);
+        }
+
+        .kompakt-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.08in;
+            min-height: 0.7in;
+            padding: 0.14in 0.16in;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .header-de {
+            font-size: 0.3in;
+            font-weight: 800;
+            line-height: 1.05;
+            color: #111827;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header-es {
+            font-size: 0.22in;
+            font-style: italic;
+            color: rgba(17, 24, 39, 0.72);
+            text-align: right;
+            max-width: 44%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .kompakt-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            min-height: 0;
+        }
+
+        .kompakt-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.07in;
+            padding: 0.1in 0.15in;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.10);
+            min-height: 0;
+            box-sizing: border-box;
+        }
+
+        .kompakt-row:last-child {
+            border-bottom: none;
+        }
+
+        .kompakt-left {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.06in;
+            min-width: 0;
+            flex: 1 1 auto;
+        }
+
+        .article-dot {
+            width: 0.12in;
+            height: 0.12in;
+            border-radius: 999px;
+            background: currentColor;
+            box-shadow: 0 0 8px currentColor;
+            flex: 0 0 auto;
+        }
+
+        .kompakt-german {
+            font-size: 0.22in;
+            font-weight: 600;
+            color: #111827;
+            line-height: 1.02;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            overflow-wrap: anywhere;
+            min-width: 0;
+        }
+
+        .importance-star {
+            color: #f59e0b;
+            font-size: 0.18in;
+            margin-left: 0.03in;
+            vertical-align: baseline;
+        }
+
+        .kompakt-spanish {
+            flex: 0 0 34%;
+            font-size: 0.165in;
+            font-weight: 600;
+            font-style: italic;
+            line-height: 1.06;
+            color: #374151;
+            text-align: right;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            overflow-wrap: anywhere;
+        }
+
+        .der { color: #60a5fa; }
+        .die { color: #fb7185; }
+        .das { color: #34d399; }
+        .mixed { color: #fbbf24; }
+        .pl { color: #a78bfa; }
+        .none { color: #94a3b8; }
+    </style>
+</head>
+<body>
+<section class="page">
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #c4b5fd;">
+                <div class="header-de">Rechte</div>
+                <div class="header-es">Derechos</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row pl">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Grundrechte<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Derechos<br>fundamentales</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Grundrecht<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">derecho<br>fundamental</div>
+        </div>
+    
+        <div class="kompakt-row pl">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Menschenrechte<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Derechos<br>humanos</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Gleichberechtigung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Igualdad<br>de derechos</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Meinungsfreiheit<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Libertad<br>de opinión</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Pressefreiheit</div>
+            </div>
+            <div class="kompakt-spanish">Libertad<br>de prensa</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #f9a8d4;">
+                <div class="header-de">Freiheiten</div>
+                <div class="header-es">Libertades</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Freizügigkeit<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">libre<br>circulación</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Religionsfreiheit<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Libertad<br>religiosa</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Glaubensfreiheit</div>
+            </div>
+            <div class="kompakt-spanish">Libertad de<br>creencias</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Gewissensfreiheit</div>
+            </div>
+            <div class="kompakt-spanish">Libertad de<br>conciencia</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Versammlungsfreiheit<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Libertad<br>de reunión</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Demonstration<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">manifestación</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #fcd34d;">
+                <div class="header-de">Medien</div>
+                <div class="header-es">Medios</div>
+            </header>
+            <div class="kompakt-content">
+                
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #fdba74;">
+                <div class="header-de">Werte</div>
+                <div class="header-es">Valores</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Menschenwürde<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Dignidad<br>humana</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Unantastbarkeit<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">inviolabilidad</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Freiheit<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Libertad</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Gleichheit</div>
+            </div>
+            <div class="kompakt-spanish">Igualdad</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Toleranz</div>
+            </div>
+            <div class="kompakt-spanish">Tolerancia</div>
+        </div>
+    
+            </div>
+        </section>
+    </section><section class="page">
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #86efac;">
+                <div class="header-de">Diskriminierung</div>
+                <div class="header-es">Discriminacion</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Diskriminierung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">discriminación</div>
+        </div>
+    
+        <div class="kompakt-row none">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">ungleich</div>
+            </div>
+            <div class="kompakt-spanish">desigual</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Ungleichbehandlung</div>
+            </div>
+            <div class="kompakt-spanish">trato<br>desigual</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Würde</div>
+            </div>
+            <div class="kompakt-spanish">dignidad</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Folter<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">tortura</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Todesstrafe<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">pena de<br>muerte</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Zwangsarbeit<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">trabajo<br>forzado</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #93c5fd;">
+                <div class="header-de">Staatsprinzipien</div>
+                <div class="header-es">Principios</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Demokratie<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Democracia</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Republik</div>
+            </div>
+            <div class="kompakt-spanish">República</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bundesrepublik<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">república<br>federal</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Diktatur<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Dictadura</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Staat<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">el<br>Estado</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Rechtsstaat<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Estado de<br>derecho</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Volkssouveränität<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">soberanía<br>popular</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #67e8f9;">
+                <div class="header-de">Institutionen</div>
+                <div class="header-es">Instituciones</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bundestag<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Parlamento<br>federal</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bundesrat</div>
+            </div>
+            <div class="kompakt-spanish">Consejo<br>Federal</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Parlament</div>
+            </div>
+            <div class="kompakt-spanish">Parlamento</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Regierung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Gobierno</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bundeskanzler<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Canciller<br>federal</div>
+        </div>
+    
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bundespräsident<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">presidente<br>federal</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bundesregierung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">gobierno<br>federal</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #a5b4fc;">
+                <div class="header-de">Staatsgewalten</div>
+                <div class="header-es">Poderes</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Gewaltenteilung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Separación<br>de poderes</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Gewalt<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">autoridad</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Legislative<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">poder<br>legislativo</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Exekutive<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">poder<br>ejecutivo</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Judikative<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">poder<br>judicial</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Volk<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Pueblo</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Presse<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">prensa</div>
+        </div>
+    
+            </div>
+        </section>
+    </section><section class="page">
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #d8b4fe;">
+                <div class="header-de">Wahlen</div>
+                <div class="header-es">Elecciones</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Wahl<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Elección</div>
+        </div>
+    
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Wähler<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Votante</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Stimme<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Voto</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Stimmabgabe</div>
+            </div>
+            <div class="kompakt-spanish">Emisión<br>del voto</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Wahllokal</div>
+            </div>
+            <div class="kompakt-spanish">Colegio<br>electoral</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Wahlgeheimnis<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">secreto<br>del voto</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #c4b5fd;">
+                <div class="header-de">Wahlrecht</div>
+                <div class="header-es">Sufragio</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Wahlberechtigte<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">autorizado<br>a votar</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Wahlrecht<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">derecho<br>al voto</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Wahlbeteiligung</div>
+            </div>
+            <div class="kompakt-spanish">participación<br>electoral</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #f9a8d4;">
+                <div class="header-de">Parteien</div>
+                <div class="header-es">Partidos</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Partei<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Partido<br>político</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Koalition<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Coalición</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Opposition<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Oposición</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Mehrheit<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Mayoría</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Minderheit</div>
+            </div>
+            <div class="kompakt-spanish">Minoría</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Fraktion</div>
+            </div>
+            <div class="kompakt-spanish">Grupo<br>parlamentario</div>
+        </div>
+    
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Abgeordnete<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Diputado</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #fcd34d;">
+                <div class="header-de">Foderalismus</div>
+                <div class="header-es">Federalismo</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bundesstaat<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">estado<br>federal</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bund<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">federación</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bundesland<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">estado<br>federado</div>
+        </div>
+    
+        <div class="kompakt-row pl">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Länder<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">los estados<br>federados</div>
+        </div>
+    
+        <div class="kompakt-row pl">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">16 Bundesländer<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">los 16 estados<br>federados</div>
+        </div>
+    
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Ministerpräsident<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">primer<br>ministro</div>
+        </div>
+    
+            </div>
+        </section>
+    </section><section class="page">
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #fdba74;">
+                <div class="header-de">EU</div>
+                <div class="header-es">Union Europea</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Europäische Union<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Unión<br>Europea</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Euro<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">euro</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Währung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">moneda</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #86efac;">
+                <div class="header-de">Staatsamter</div>
+                <div class="header-es">Cargos</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Regierungschef<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">jefe de<br>gobierno</div>
+        </div>
+    
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bundespräsident<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">presidente<br>federal</div>
+        </div>
+    
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bundesratspräsident<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">presidente<br>del Bundesrat</div>
+        </div>
+    
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bundestagspräsident</div>
+            </div>
+            <div class="kompakt-spanish">presidente<br>del Bundestag</div>
+        </div>
+    
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Minister</div>
+            </div>
+            <div class="kompakt-spanish">ministro</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Regierende Bürgermeister<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">alcalde<br>gobernante</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #93c5fd;">
+                <div class="header-de">Kommune</div>
+                <div class="header-es">Municipio</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Kommune<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">municipio</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Gemeinde</div>
+            </div>
+            <div class="kompakt-spanish">municipio</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Gemeindeverwaltung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">administración<br>municipal</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Rathaus<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">ayuntamiento</div>
+        </div>
+    
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bürgermeister<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">alcalde</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #67e8f9;">
+                <div class="header-de">Behörden</div>
+                <div class="header-es">Autoridades</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Behörde</div>
+            </div>
+            <div class="kompakt-spanish">autoridad<br>pública</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Ordnungsamt<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">oficina de<br>orden público</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Finanzamt<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">oficina de<br>impuestos</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Auswärtige Amt<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Ministerio de<br>Asuntos Exteriores</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Ausländerbehörde<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">oficina de<br>extranjería</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Pfarramt</div>
+            </div>
+            <div class="kompakt-spanish">oficina<br>parroquial</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Steuer<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">impuesto</div>
+        </div>
+    
+            </div>
+        </section>
+    </section><section class="page">
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #a5b4fc;">
+                <div class="header-de">Grundlagen</div>
+                <div class="header-es">Bases</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Gesetz<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Ley</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Gesetzgebung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">legislación</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Verfassung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Constitución</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bundesverfassungsgericht<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Tribunal<br>constitucional</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Grundgesetz<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Ley<br>Fundamental</div>
+        </div>
+    
+        <div class="kompakt-row none">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">verfassungswidrig<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">inconstitucional</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #d8b4fe;">
+                <div class="header-de">Justiz</div>
+                <div class="header-es">Justicia</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Gericht</div>
+            </div>
+            <div class="kompakt-spanish">tribunal</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Rechtsprechung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">jurisprudencia</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Polizei</div>
+            </div>
+            <div class="kompakt-spanish">Policía</div>
+        </div>
+    
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Richter</div>
+            </div>
+            <div class="kompakt-spanish">juez</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Urteil</div>
+            </div>
+            <div class="kompakt-spanish">sentencia</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #c4b5fd;">
+                <div class="header-de">Strafen</div>
+                <div class="header-es">Penas</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Strafe</div>
+            </div>
+            <div class="kompakt-spanish">pena</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Geldstrafe</div>
+            </div>
+            <div class="kompakt-spanish">multa</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Freiheitsstrafe</div>
+            </div>
+            <div class="kompakt-spanish">pena de<br>prisión</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Gefängnis</div>
+            </div>
+            <div class="kompakt-spanish">cárcel</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Anzeige</div>
+            </div>
+            <div class="kompakt-spanish">denuncia</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Steuer<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">impuesto</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #f9a8d4;">
+                <div class="header-de">Gesellschaft</div>
+                <div class="header-es">Sociedad</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bevölkerung</div>
+            </div>
+            <div class="kompakt-spanish">población</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Religion</div>
+            </div>
+            <div class="kompakt-spanish">religión</div>
+        </div>
+    
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Erwerbstätige</div>
+            </div>
+            <div class="kompakt-spanish">persona<br>que trabaja</div>
+        </div>
+    
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Einwohner</div>
+            </div>
+            <div class="kompakt-spanish">habitante</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bürger<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">ciudadano</div>
+        </div>
+    
+            </div>
+        </section>
+    </section><section class="page">
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #fcd34d;">
+                <div class="header-de">Migration</div>
+                <div class="header-es">Migracion</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Einwanderung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">inmigración</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Auswanderung</div>
+            </div>
+            <div class="kompakt-spanish">emigración</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Zuwanderung</div>
+            </div>
+            <div class="kompakt-spanish">llegada<br>migratoria</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Integration<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">integración</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Asyl<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">asilo</div>
+        </div>
+    
+        <div class="kompakt-row mixed">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Flüchtling<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">refugiado</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Aufenthaltserlaubnis<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">permiso de<br>residencia</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #fdba74;">
+                <div class="header-de">Religion</div>
+                <div class="header-es">Religion</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Religionsgemeinschaft<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">comunidad<br>religiosa</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Pfarramt</div>
+            </div>
+            <div class="kompakt-spanish">oficina<br>parroquial</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">jüdische Gemeinde<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">comunidad<br>judía</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #86efac;">
+                <div class="header-de">Sozialsystem</div>
+                <div class="header-es">Sistema</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row pl">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Sozialabgaben<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">cotizaciones<br>sociales</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">soziale Sicherheit<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">seguridad<br>social</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Maßnahme<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">medida</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Haftpflichtversicherung</div>
+            </div>
+            <div class="kompakt-spanish">seguro de<br>responsabilidad civil</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Krankenversicherung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">seguro<br>de salud</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Sozialversicherung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">seguridad<br>social</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Rente<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">jubilación</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #93c5fd;">
+                <div class="header-de">Geschichte</div>
+                <div class="header-es">Historia</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Nationalsozialismus<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">nacionalsocialismo</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Holocaust<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Holocausto</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Dritte Reich<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Tercer<br>Reich</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Zweite Weltkrieg<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Segunda<br>Guerra Mundial</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">DDR<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Alemania<br>oriental</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">BRD<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Alemania<br>occidental</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Berliner Mauer<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Muro de<br>Berlín</div>
+        </div>
+    
+            </div>
+        </section>
+    </section><section class="page">
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #67e8f9;">
+                <div class="header-de">Wiedervereinigung</div>
+                <div class="header-es">Reunificacion</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Wiedervereinigung<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">reunificación</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">3. Oktober<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">3 de<br>octubre</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">9. November</div>
+            </div>
+            <div class="kompakt-spanish">9 de<br>noviembre</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Wirtschaftswunder</div>
+            </div>
+            <div class="kompakt-spanish">milagro<br>económico</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Nationalhymne</div>
+            </div>
+            <div class="kompakt-spanish">himno<br>nacional</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Wappen</div>
+            </div>
+            <div class="kompakt-spanish">escudo</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Mensch</div>
+            </div>
+            <div class="kompakt-spanish">ser<br>humano</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #a5b4fc;">
+                <div class="header-de">Berlin</div>
+                <div class="header-es">Berlin</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bär<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">oso</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Adler<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">águila</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Brandenburger Tor<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">Puerta de<br>Brandeburgo</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Wahrzeichen</div>
+            </div>
+            <div class="kompakt-spanish">monumento<br>emblemático</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Stadtstaat<span class="importance-star">★</span></div>
+            </div>
+            <div class="kompakt-spanish">estado-ciudad</div>
+        </div>
+    
+        <div class="kompakt-row das">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Ehrenamt</div>
+            </div>
+            <div class="kompakt-spanish">voluntariado</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Verein</div>
+            </div>
+            <div class="kompakt-spanish">asociación</div>
+        </div>
+    
+            </div>
+        </section>
+    
+        <section class="kompakt-card">
+            <header class="kompakt-header" style="background-color: #d8b4fe;">
+                <div class="header-de">Prufungslogik</div>
+                <div class="header-es">Examen</div>
+            </header>
+            <div class="kompakt-content">
+                
+        <div class="kompakt-row none">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">gelten</div>
+            </div>
+            <div class="kompakt-spanish">aplicarse</div>
+        </div>
+    
+        <div class="kompakt-row none">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">gilt</div>
+            </div>
+            <div class="kompakt-spanish">se<br>aplica</div>
+        </div>
+    
+        <div class="kompakt-row none">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Bundes-</div>
+            </div>
+            <div class="kompakt-spanish">federal</div>
+        </div>
+    
+        <div class="kompakt-row none">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">genannt</div>
+            </div>
+            <div class="kompakt-spanish">llamado</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Begriff</div>
+            </div>
+            <div class="kompakt-spanish">concepto</div>
+        </div>
+    
+        <div class="kompakt-row die">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Verbreitung</div>
+            </div>
+            <div class="kompakt-spanish">difusión</div>
+        </div>
+    
+        <div class="kompakt-row der">
+            <div class="kompakt-left">
+                <span class="article-dot"></span>
+                <div class="kompakt-german">Nachteil</div>
+            </div>
+            <div class="kompakt-spanish">desventaja</div>
+        </div>
+    
+            </div>
+        </section>
+    </section>
+</body>
+</html>

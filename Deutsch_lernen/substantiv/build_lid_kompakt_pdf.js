@@ -139,46 +139,29 @@ function getCardTranslation(item) {
     return parts[maleIndex] || parts[0];
 }
 
-function abbreviateSpanishTranslation(text) {
-    let value = normalizeWhitespace(text);
-    const replacements = [
-        ['Ministerio de Asuntos Exteriores', 'Min. As. Exteriores'],
-        ['oficina de orden público', 'of. orden publ.'],
-        ['oficina de impuestos', 'of. impuestos'],
-        ['administración municipal', 'adm. municipal'],
-        ['comunidad religiosa', 'com. religiosa'],
-        ['comunidad judía', 'com. judía'],
-        ['seguridad social', 'seg. social'],
-        ['cotizaciones sociales', 'cotiz. sociales'],
-        ['participación electoral', 'part. electoral'],
-        ['poder legislativo', 'poder leg.'],
-        ['poder ejecutivo', 'poder ejec.'],
-        ['poder judicial', 'poder jud.'],
-        ['estado federal', 'est. federal'],
-        ['estado federado', 'est. federado'],
-        ['estados federados', 'est. federados'],
-        ['derecho fundamental', 'der. fundamental'],
-        ['derechos fundamentales', 'der. fundamentales'],
-        ['soberanía popular', 'sob. popular'],
-        ['autoridad pública', 'autoridad publ.'],
-        ['jefe de gobierno', 'jefe gob.'],
-        ['presidente federal', 'pres. federal'],
-        ['presidente del Bundesrat', 'pres. Bundesrat'],
-        ['presidente del Bundestag', 'pres. Bundestag'],
-        ['presidente del estado federado', 'pres. est. federado'],
-        ['persona que trabaja', 'persona empleada'],
-        ['persona empleada', 'pers. empleada'],
-        ['igualdad de derechos', 'igualdad der.'],
-        ['libertad de residencia', 'lib. residencia'],
-        ['libre circulación', 'libre circ.'],
-        ['separación de poderes', 'sep. de poderes']
-    ];
+function formatSpanishTranslation(text) {
+    const value = normalizeWhitespace(text);
+    const words = value.split(' ').filter(Boolean);
 
-    for (const [from, to] of replacements) {
-        value = value.replace(from, to);
+    if (words.length < 2) {
+        return escapeHtml(value);
     }
 
-    return value;
+    let bestIndex = 1;
+    let bestDiff = Infinity;
+    for (let i = 1; i < words.length; i += 1) {
+        const left = words.slice(0, i).join(' ');
+        const right = words.slice(i).join(' ');
+        const diff = Math.abs(left.length - right.length);
+        if (diff < bestDiff) {
+            bestDiff = diff;
+            bestIndex = i;
+        }
+    }
+
+    const left = escapeHtml(words.slice(0, bestIndex).join(' '));
+    const right = escapeHtml(words.slice(bestIndex).join(' '));
+    return `${left}<br>${right}`;
 }
 
 function getArticleClass(art) {
@@ -201,7 +184,7 @@ function getHeaderLabels(group, labels) {
 function buildRow(item) {
     const artClass = getArticleClass(item.art);
     const cardWord = getCardWord(item);
-    const cardTranslation = abbreviateSpanishTranslation(getCardTranslation(item));
+    const cardTranslation = formatSpanishTranslation(getCardTranslation(item));
     const importantStar = item.important ? '<span class="importance-star">★</span>' : '';
 
     return `
@@ -210,7 +193,7 @@ function buildRow(item) {
                 <span class="article-dot"></span>
                 <div class="kompakt-german">${escapeHtml(cardWord)}${importantStar}</div>
             </div>
-            <div class="kompakt-spanish">${escapeHtml(cardTranslation)}</div>
+            <div class="kompakt-spanish">${cardTranslation}</div>
         </div>
     `;
 }
@@ -340,6 +323,7 @@ function buildHtml() {
 
         .header-es {
             font-size: 0.22in;
+            font-weight: 700;
             font-style: italic;
             color: ${headerEsColor};
             text-align: right;
@@ -358,10 +342,10 @@ function buildHtml() {
 
         .kompakt-row {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
-            gap: 0.1in;
-            padding: 0.11in 0.16in;
+            gap: 0.07in;
+            padding: 0.1in 0.15in;
             border-bottom: 1px solid ${rowBorder};
             min-height: 0;
             box-sizing: border-box;
@@ -373,8 +357,8 @@ function buildHtml() {
 
         .kompakt-left {
             display: flex;
-            align-items: center;
-            gap: 0.08in;
+            align-items: flex-start;
+            gap: 0.06in;
             min-width: 0;
             flex: 1 1 auto;
         }
@@ -389,13 +373,14 @@ function buildHtml() {
         }
 
         .kompakt-german {
-            font-size: 0.24in;
-            font-weight: 600;
+            font-size: 0.22in;
+            font-weight: 700;
             color: ${germanColor};
-            line-height: 1.06;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            line-height: 1.02;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            overflow-wrap: anywhere;
             min-width: 0;
         }
 
@@ -407,16 +392,17 @@ function buildHtml() {
         }
 
         .kompakt-spanish {
-            flex: 0 0 39%;
-            font-size: 0.18in;
-            font-weight: 600;
+            flex: 0 0 34%;
+            font-size: 0.182in;
+            font-weight: 700;
             font-style: italic;
             line-height: 1.06;
             color: ${spanishColor};
             text-align: right;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            overflow-wrap: anywhere;
         }
 
         .der { color: #60a5fa; }

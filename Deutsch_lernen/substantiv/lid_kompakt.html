@@ -438,6 +438,15 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
+        .modal-note-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--accent-gold);
+            margin-top: 16px;
+        }
+
         .ex-label {
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -571,6 +580,10 @@
                     <div class="ex-de" id="m-ex-de"></div>
                     <div class="ex-es" id="m-ex-es"></div>
                 </div>
+                <div class="modal-note-card" id="m-note-card" style="display:none;">
+                    <span class="ex-label">Hinweis / Nota</span>
+                    <div class="ex-de" id="m-note"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -622,15 +635,6 @@
                               },
                               {
                                         "art": "die",
-                                        "w": "Gleichberechtigung",
-                                        "e": "⚖️",
-                                        "tr": "Igualdad de derechos",
-                                        "ex": "Frauen und Männer haben Gleichberechtigung.",
-                                        "ex_es": "Mujeres y hombres tienen igualdad de derechos.",
-                                        "important": true
-                              },
-                              {
-                                        "art": "die",
                                         "w": "Meinungsfreiheit",
                                         "e": "🗣️",
                                         "tr": "Libertad de opinión",
@@ -647,12 +651,14 @@
                                         "ex_es": "La libertad de prensa protege a los periodistas."
                               },
                               {
-                                        "art": "das",
-                                        "w": "Asyl",
-                                        "e": "⛺",
-                                        "tr": "Asilo",
-                                        "ex": "Verfolgte Menschen können Asyl bekommen.",
-                                        "ex_es": "Las personas perseguidas pueden recibir asilo."
+                                        "art": "die",
+                                        "w": "Gleichberechtigung",
+                                        "e": "⚖️",
+                                        "tr": "Igualdad de derechos",
+                                        "ex": "Frauen und Männer haben Gleichberechtigung.",
+                                        "ex_es": "Mujeres y hombres tienen igualdad de derechos.",
+                                        "note": "Verwandtes Wort: gleichfalls = igualmente / asimismo.",
+                                        "important": true
                               }
                     ]
           },
@@ -663,15 +669,6 @@
                     "icon": "🕊️",
                     "color": "#0891b2",
                     "items": [
-                              {
-                                        "art": "die",
-                                        "w": "Freizügigkeit",
-                                        "e": "🚉",
-                                        "tr": "libertad de residencia / libre circulación",
-                                        "ex": "Die Freizügigkeit erlaubt den Wohnort frei zu wählen.",
-                                        "ex_es": "La libre circulación permite elegir libremente el lugar de residencia.",
-                                        "important": true
-                              },
                               {
                                         "art": "die",
                                         "w": "Religionsfreiheit",
@@ -714,23 +711,14 @@
                                         "ex": "Eine Demonstration ist in Deutschland erlaubt.",
                                         "ex_es": "Una manifestación está permitida en Alemania.",
                                         "important": true
-                              }
-                    ]
-          },
-          {
-                    "id": "grundrechte-medien",
-                    "title": "Grundrechte: Medien",
-                    "title_es": "Medios y opinión",
-                    "icon": "📰",
-                    "color": "#0284c7",
-                    "items": [
+                              },
                               {
                                         "art": "die",
-                                        "w": "Presse",
-                                        "e": "📰",
-                                        "tr": "prensa",
-                                        "ex": "Die Presse informiert die Bevölkerung.",
-                                        "ex_es": "La prensa informa a la población.",
+                                        "w": "Freizügigkeit",
+                                        "e": "🚉",
+                                        "tr": "libertad de residencia / libre circulación",
+                                        "ex": "Die Freizügigkeit erlaubt den Wohnort frei zu wählen.",
+                                        "ex_es": "La libre circulación permite elegir libremente el lugar de residencia.",
                                         "important": true
                               }
                     ]
@@ -750,6 +738,14 @@
                                         "ex": "Die Menschenwürde ist unantastbar.",
                                         "ex_es": "La dignidad humana es inviolable.",
                                         "important": true
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Mensch",
+                                        "e": "👤",
+                                        "tr": "ser humano",
+                                        "ex": "Der Mensch steht im Mittelpunkt der Rechte.",
+                                        "ex_es": "El ser humano está en el centro de los derechos."
                               },
                               {
                                         "art": "die",
@@ -775,7 +771,8 @@
                                         "e": "⚖️",
                                         "tr": "Igualdad",
                                         "ex": "Vor dem Gesetz gilt Gleichheit.",
-                                        "ex_es": "Ante la ley rige la igualdad."
+                                        "ex_es": "Ante la ley rige la igualdad.",
+                                        "note": "Verwandtes Wort: gleichfalls = igualmente / asimismo."
                               },
                               {
                                         "art": "die",
@@ -908,6 +905,15 @@
                                         "important": true
                               },
                               {
+                                        "art": "der",
+                                        "w": "Rechtsstaat",
+                                        "e": "⚖️",
+                                        "tr": "Estado de derecho",
+                                        "ex": "Deutschland ist ein demokratischer Rechtsstaat.",
+                                        "ex_es": "Alemania es un Estado de derecho democrático.",
+                                        "important": true
+                              },
+                              {
                                         "art": "die",
                                         "w": "Volkssouveränität",
                                         "e": "🗳️",
@@ -969,15 +975,6 @@
                                         "important": true
                               },
                               {
-                                        "art": "die / der",
-                                        "w": "Bundespräsidentin / Bundespräsident",
-                                        "e": "🇩🇪",
-                                        "tr": "presidenta / presidente federal",
-                                        "ex": "Die Bundespräsidentin oder der Bundespräsident ernennt die Ministerinnen und Minister der Bundesregierung.",
-                                        "ex_es": "La presidenta o el presidente federal nombra a las ministras y los ministros del Gobierno federal.",
-                                        "important": true
-                              },
-                              {
                                         "art": "die",
                                         "w": "Bundesregierung",
                                         "e": "🏢",
@@ -996,12 +993,12 @@
                     "color": "#0f766e",
                     "items": [
                               {
-                                        "art": "die",
-                                        "w": "Gewaltenteilung",
-                                        "e": "⚖️",
-                                        "tr": "Separación de poderes",
-                                        "ex": "Die Gewaltenteilung schützt die Demokratie.",
-                                        "ex_es": "La separación de poderes protege la democracia.",
+                                        "art": "der",
+                                        "w": "Volk",
+                                        "e": "👥",
+                                        "tr": "Pueblo",
+                                        "ex": "Alle Staatsgewalt geht vom Volk aus.",
+                                        "ex_es": "Todo poder del Estado emana del pueblo.",
                                         "important": true
                               },
                               {
@@ -1011,6 +1008,15 @@
                                         "tr": "poder estatal / autoridad",
                                         "ex": "Die Gewalt ist im Staat verteilt.",
                                         "ex_es": "El poder estatal está repartido en el Estado.",
+                                        "important": true
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Gewaltenteilung",
+                                        "e": "⚖️",
+                                        "tr": "Separación de poderes",
+                                        "ex": "Die Gewaltenteilung schützt die Demokratie.",
+                                        "ex_es": "La separación de poderes protege la democracia.",
                                         "important": true
                               },
                               {
@@ -1041,12 +1047,12 @@
                                         "important": true
                               },
                               {
-                                        "art": "der",
-                                        "w": "Volk",
-                                        "e": "👥",
-                                        "tr": "Pueblo",
-                                        "ex": "Alle Staatsgewalt geht vom Volk aus.",
-                                        "ex_es": "Todo poder del Estado emana del pueblo.",
+                                        "art": "die",
+                                        "w": "Presse",
+                                        "e": "📰",
+                                        "tr": "prensa",
+                                        "ex": "Die Presse informiert die Bevölkerung.",
+                                        "ex_es": "La prensa informa a la población.",
                                         "important": true
                               }
                     ]
@@ -1068,21 +1074,22 @@
                                         "important": true
                               },
                               {
-                                        "art": "der",
-                                        "w": "Wähler",
+                                        "art": "der / die",
+                                        "w": "Wähler / Wählerin",
                                         "e": "🙋",
-                                        "tr": "Votante",
-                                        "ex": "Der Wähler gibt seine Stimme ab.",
-                                        "ex_es": "El votante emite su voto.",
+                                        "tr": "Votante / votante (mujer)",
+                                        "ex": "Der Wähler oder die Wählerin gibt die Stimme ab.",
+                                        "ex_es": "El votante o la votante emite el voto.",
                                         "important": true
                               },
                               {
-                                        "art": "die",
-                                        "w": "Wählerin",
-                                        "e": "🙋‍♀️",
-                                        "tr": "Votante (mujer)",
-                                        "ex": "Die Wählerin geht ins Wahllokal.",
-                                        "ex_es": "La votante va al colegio electoral."
+                                        "art": "das",
+                                        "w": "Wahlgeheimnis",
+                                        "e": "🔒",
+                                        "tr": "secreto del voto",
+                                        "ex": "Das Wahlgeheimnis schützt jede Wählerin und jeden Wähler.",
+                                        "ex_es": "El secreto del voto protege a cada votante.",
+                                        "important": true
                               },
                               {
                                         "art": "die",
@@ -1101,14 +1108,6 @@
                                         "ex": "Die Stimmabgabe ist anonym.",
                                         "ex_es": "La emisión del voto es anónima."
                               },
-                              {
-                                        "art": "das",
-                                        "w": "Wahllokal",
-                                        "e": "🏫",
-                                        "tr": "Colegio electoral",
-                                        "ex": "Das Wahllokal öffnet um acht Uhr.",
-                                        "ex_es": "El colegio electoral abre a las ocho."
-                              }
                     ]
           },
           {
@@ -1119,15 +1118,6 @@
                     "color": "#1d4ed8",
                     "items": [
                               {
-                                        "art": "der/die",
-                                        "w": "Wahlberechtigte",
-                                        "e": "🗳️",
-                                        "tr": "autorizado a votar",
-                                        "ex": "Jede Wahlberechtigte und jeder Wahlberechtigte darf abstimmen.",
-                                        "ex_es": "Toda persona autorizada a votar puede emitir su voto.",
-                                        "important": true
-                              },
-                              {
                                         "art": "das",
                                         "w": "Wahlrecht",
                                         "e": "📜",
@@ -1137,12 +1127,29 @@
                                         "important": true
                               },
                               {
+                                        "art": "der/die",
+                                        "w": "Wahlberechtigte",
+                                        "e": "🗳️",
+                                        "tr": "autorizado a votar",
+                                        "ex": "Jede Wahlberechtigte und jeder Wahlberechtigte darf abstimmen.",
+                                        "ex_es": "Toda persona autorizada a votar puede emitir su voto.",
+                                        "important": true
+                              },
+                              {
                                         "art": "die",
                                         "w": "Wahlbeteiligung",
                                         "e": "📊",
                                         "tr": "participación electoral",
                                         "ex": "Die Wahlbeteiligung war hoch.",
                                         "ex_es": "La participación electoral fue alta."
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Wahllokal",
+                                        "e": "🏫",
+                                        "tr": "Colegio electoral",
+                                        "ex": "Das Wahllokal öffnet um acht Uhr.",
+                                        "ex_es": "El colegio electoral abre a las ocho."
                               }
                     ]
           },
@@ -1225,20 +1232,20 @@
                     "items": [
                               {
                                         "art": "der",
-                                        "w": "Bundesstaat",
-                                        "e": "🇩🇪",
-                                        "tr": "estado federal",
-                                        "ex": "Deutschland ist ein Bundesstaat.",
-                                        "ex_es": "Alemania es un estado federal.",
-                                        "important": true
-                              },
-                              {
-                                        "art": "der",
                                         "w": "Bund",
                                         "e": "🇩🇪",
                                         "tr": "federación",
                                         "ex": "Der Bund regelt Aufgaben für ganz Deutschland.",
                                         "ex_es": "La federación regula tareas para toda Alemania.",
+                                        "important": true
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Bundesstaat",
+                                        "e": "🇩🇪",
+                                        "tr": "estado federal",
+                                        "ex": "Deutschland ist ein Bundesstaat.",
+                                        "ex_es": "Alemania es un estado federal.",
                                         "important": true
                               },
                               {
@@ -1261,11 +1268,47 @@
                               },
                               {
                                         "art": "die (pl)",
-                                        "w": "Bundesländer",
+                                        "w": "16 Bundesländer",
                                         "e": "🗺️",
-                                        "tr": "estados federados",
+                                        "tr": "los 16 estados federados",
                                         "ex": "Deutschland hat 16 Bundesländer.",
                                         "ex_es": "Alemania tiene 16 estados federados.",
+                                        "important": true
+                              },
+                              {
+                                        "art": "die / der",
+                                        "w": "Ministerpräsidentin / Ministerpräsident",
+                                        "e": "🏰",
+                                        "tr": "primera ministra / primer ministro",
+                                        "ex": "Die Ministerpräsidentin oder der Ministerpräsident leitet ein Bundesland.",
+                                        "ex_es": "La primera ministra o el primer ministro dirige un estado federado.",
+                                        "important": true
+                              }
+                    ]
+          },
+          {
+                    "id": "eu",
+                    "title": "Europäische Union",
+                    "title_es": "Unión Europea",
+                    "icon": "🇪🇺",
+                    "color": "#2563eb",
+                    "items": [
+                              {
+                                        "art": "der",
+                                        "w": "Euro",
+                                        "e": "💶",
+                                        "tr": "euro",
+                                        "ex": "Der Euro ist die gemeinsame Währung in vielen EU-Ländern.",
+                                        "ex_es": "El euro es la moneda común en muchos países de la UE.",
+                                        "important": true
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Europäische Union",
+                                        "e": "🇪🇺",
+                                        "tr": "Unión Europea",
+                                        "ex": "Deutschland ist Mitglied der Europäischen Union.",
+                                        "ex_es": "Alemania es miembro de la Unión Europea.",
                                         "important": true
                               },
                               {
@@ -1275,15 +1318,6 @@
                                         "tr": "moneda",
                                         "ex": "Der Euro ist die Währung in Deutschland.",
                                         "ex_es": "El euro es la moneda en Alemania.",
-                                        "important": true
-                              },
-                              {
-                                        "art": "die / der",
-                                        "w": "Ministerpräsidentin / Ministerpräsident",
-                                        "e": "🏰",
-                                        "tr": "presidente/a del estado federado",
-                                        "ex": "Die Ministerpräsidentin oder der Ministerpräsident leitet ein Bundesland.",
-                                        "ex_es": "La presidenta o el presidente de un estado federado dirige un Bundesland.",
                                         "important": true
                               }
                     ]
@@ -1299,7 +1333,7 @@
                                         "art": "die / der",
                                         "w": "Regierungschefin / Regierungschef",
                                         "e": "🏛️",
-                                        "tr": "jefe/a de gobierno",
+                                        "tr": "jefa de gobierno / jefe de gobierno",
                                         "ex": "Die Regierungschefin oder der Regierungschef leitet die Regierung.",
                                         "ex_es": "La jefa o el jefe de gobierno dirige el gobierno.",
                                         "important": true
@@ -1418,6 +1452,16 @@
                                         "ex_es": "La autoridad pública tramita la solicitud."
                               },
                               {
+                                        "art": "die",
+                                        "w": "Ausländerbehörde",
+                                        "e": "🛂",
+                                        "tr": "oficina de extranjería",
+                                        "ex": "Die Ausländerbehörde bearbeitet Fragen zum Aufenthalt.",
+                                        "ex_es": "La oficina de extranjería tramita asuntos de residencia.",
+                                        "note": "Hinweis: Ausländerbehörde ist der übliche offizielle Begriff in Deutschland. Einwanderungsbehörde ist verständlich, aber nicht die normale Amtsbezeichnung.",
+                                        "important": true
+                              },
+                              {
                                         "art": "das",
                                         "w": "Ordnungsamt",
                                         "e": "🚓",
@@ -1436,29 +1480,21 @@
                                         "important": true
                               },
                               {
-                                        "art": "das",
-                                        "w": "Auswärtige Amt",
-                                        "e": "🌍",
-                                        "tr": "Ministerio de Asuntos Exteriores",
-                                        "ex": "Das Auswärtige Amt vertritt Deutschland im Ausland.",
-                                        "ex_es": "El Ministerio de Asuntos Exteriores representa a Alemania en el exterior.",
-                                        "important": true
-                              },
-                              {
-                                        "art": "das",
-                                        "w": "Pfarramt",
-                                        "e": "📍",
-                                        "tr": "oficina parroquial",
-                                        "ex": "Das Pfarramt hilft bei Fragen zur Gemeinde.",
-                                        "ex_es": "La oficina parroquial ayuda con preguntas sobre la comunidad."
-                              },
-                              {
                                         "art": "die",
                                         "w": "Steuer",
                                         "e": "💸",
                                         "tr": "impuesto",
                                         "ex": "Arbeitnehmer zahlen Steuer.",
                                         "ex_es": "Los trabajadores pagan impuesto.",
+                                        "important": true
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Auswärtige Amt",
+                                        "e": "🌍",
+                                        "tr": "Ministerio de Asuntos Exteriores",
+                                        "ex": "Das Auswärtige Amt vertritt Deutschland im Ausland.",
+                                        "ex_es": "El Ministerio de Asuntos Exteriores representa a Alemania en el exterior.",
                                         "important": true
                               }
                     ]
@@ -1470,6 +1506,24 @@
                     "icon": "📜",
                     "color": "#1d4ed8",
                     "items": [
+                              {
+                                        "art": "das",
+                                        "w": "Grundgesetz",
+                                        "e": "📘",
+                                        "tr": "Ley Fundamental",
+                                        "ex": "Das Grundgesetz ist die deutsche Verfassung.",
+                                        "ex_es": "La Ley Fundamental es la constitución alemana.",
+                                        "important": true
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Verfassung",
+                                        "e": "📜",
+                                        "tr": "Constitución",
+                                        "ex": "Die Verfassung schützt die Demokratie.",
+                                        "ex_es": "La constitución protege la democracia.",
+                                        "important": true
+                              },
                               {
                                         "art": "das",
                                         "w": "Gesetz",
@@ -1489,30 +1543,12 @@
                                         "important": true
                               },
                               {
-                                        "art": "die",
-                                        "w": "Verfassung",
-                                        "e": "📜",
-                                        "tr": "Constitución",
-                                        "ex": "Die Verfassung schützt die Demokratie.",
-                                        "ex_es": "La constitución protege la democracia.",
-                                        "important": true
-                              },
-                              {
                                         "art": "das",
                                         "w": "Bundesverfassungsgericht",
                                         "e": "🏛️",
                                         "tr": "Tribunal constitucional",
                                         "ex": "Das Bundesverfassungsgericht prüft Gesetze.",
                                         "ex_es": "El tribunal constitucional revisa leyes.",
-                                        "important": true
-                              },
-                              {
-                                        "art": "das",
-                                        "w": "Grundgesetz",
-                                        "e": "📘",
-                                        "tr": "Ley Fundamental",
-                                        "ex": "Das Grundgesetz ist die deutsche Verfassung.",
-                                        "ex_es": "La Ley Fundamental es la constitución alemana.",
                                         "important": true
                               },
                               {
@@ -1622,15 +1658,6 @@
                                         "tr": "denuncia",
                                         "ex": "Sie macht eine Anzeige bei der Polizei.",
                                         "ex_es": "Presenta una denuncia ante la policía."
-                              },
-                              {
-                                        "art": "die",
-                                        "w": "Steuer",
-                                        "e": "💸",
-                                        "tr": "impuesto",
-                                        "ex": "Arbeitnehmer zahlen Steuer.",
-                                        "ex_es": "Los trabajadores pagan impuesto.",
-                                        "important": true
                               }
                     ]
           },
@@ -1642,20 +1669,12 @@
                     "color": "#059669",
                     "items": [
                               {
-                                        "art": "die",
-                                        "w": "Bevölkerung",
-                                        "e": "👥",
-                                        "tr": "población",
-                                        "ex": "Die Bevölkerung wächst in der Stadt.",
-                                        "ex_es": "La población crece en la ciudad."
-                              },
-                              {
-                                        "art": "die",
-                                        "w": "Integration",
-                                        "e": "🤝",
-                                        "tr": "integración",
-                                        "ex": "Integration ist wichtig für das Zusammenleben.",
-                                        "ex_es": "La integración es importante para la convivencia."
+                                        "art": "der / die",
+                                        "w": "Einwohner / Einwohnerin",
+                                        "e": "🏙️",
+                                        "tr": "habitante / habitante (mujer)",
+                                        "ex": "Der Einwohner oder die Einwohnerin lebt in dieser Stadt.",
+                                        "ex_es": "El habitante o la habitante vive en esta ciudad."
                               },
                               {
                                         "art": "die",
@@ -1664,6 +1683,14 @@
                                         "tr": "religión",
                                         "ex": "Religion ist Privatsache.",
                                         "ex_es": "La religión es un asunto privado."
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Bevölkerung",
+                                        "e": "👥",
+                                        "tr": "población",
+                                        "ex": "Die Bevölkerung wächst in der Stadt.",
+                                        "ex_es": "La población crece en la ciudad."
                               },
                               {
                                         "art": "der/die",
@@ -1675,27 +1702,81 @@
                               },
                               {
                                         "art": "der",
-                                        "w": "Einwohner",
-                                        "e": "🏙️",
-                                        "tr": "habitante",
-                                        "ex": "Der Einwohner lebt in dieser Stadt.",
-                                        "ex_es": "El habitante vive en esta ciudad."
-                              },
-                              {
-                                        "art": "die",
-                                        "w": "Einwohnerin",
-                                        "e": "🏙️",
-                                        "tr": "habitante (mujer)",
-                                        "ex": "Die Einwohnerin kennt ihre Nachbarn.",
-                                        "ex_es": "La habitante conoce a sus vecinos."
-                              },
-                              {
-                                        "art": "der",
                                         "w": "Bürger",
                                         "e": "🧑",
                                         "tr": "ciudadano",
                                         "ex": "Der Bürger beteiligt sich am Gemeindeleben.",
                                         "ex_es": "El ciudadano participa en la vida del municipio.",
+                                        "important": true
+                              }
+                    ]
+          },
+          {
+                    "id": "migration",
+                    "title": "Migration",
+                    "title_es": "Migración",
+                    "icon": "🧳",
+                    "color": "#0ea5e9",
+                    "items": [
+                              {
+                                        "art": "die",
+                                        "w": "Einwanderung",
+                                        "e": "➡️",
+                                        "tr": "inmigración",
+                                        "ex": "Einwanderung hat Deutschland geprägt.",
+                                        "ex_es": "La inmigración ha marcado a Alemania.",
+                                        "important": true
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Zuwanderung",
+                                        "e": "🚶",
+                                        "tr": "llegada migratoria",
+                                        "ex": "Zuwanderung verändert die Gesellschaft.",
+                                        "ex_es": "La llegada migratoria cambia la sociedad."
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Auswanderung",
+                                        "e": "⬅️",
+                                        "tr": "emigración",
+                                        "ex": "Auswanderung bedeutet, ein Land zu verlassen.",
+                                        "ex_es": "Emigración significa salir de un país."
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Integration",
+                                        "e": "🤝",
+                                        "tr": "integración",
+                                        "ex": "Integration ist wichtig für das Zusammenleben.",
+                                        "ex_es": "La integración es importante para la convivencia.",
+                                        "important": true
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Asyl",
+                                        "e": "⛺",
+                                        "tr": "asilo",
+                                        "ex": "Verfolgte Menschen können Asyl bekommen.",
+                                        "ex_es": "Las personas perseguidas pueden recibir asilo.",
+                                        "important": true
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Aufenthaltserlaubnis",
+                                        "e": "📄",
+                                        "tr": "permiso de residencia",
+                                        "ex": "Die Aufenthaltserlaubnis erlaubt den legalen Aufenthalt in Deutschland.",
+                                        "ex_es": "El permiso de residencia permite la estancia legal en Alemania.",
+                                        "important": true
+                              },
+                              {
+                                        "art": "der / die (pl)",
+                                        "w": "Flüchtling / Flüchtlinge",
+                                        "e": "🛟",
+                                        "tr": "refugiado / refugiados",
+                                        "ex": "Viele Flüchtlinge brauchen Schutz und Hilfe.",
+                                        "ex_es": "Muchos refugiados necesitan protección y ayuda.",
                                         "important": true
                               }
                     ]
@@ -1794,6 +1875,15 @@
                                         "ex": "Die Sozialversicherung hilft vielen Menschen.",
                                         "ex_es": "La seguridad social ayuda a muchas personas.",
                                         "important": true
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Rente",
+                                        "e": "👵",
+                                        "tr": "pensión / jubilación",
+                                        "ex": "Viele Menschen bekommen im Alter eine Rente.",
+                                        "ex_es": "Muchas personas reciben una pensión en la vejez.",
+                                        "important": true
                               }
                     ]
           },
@@ -1871,8 +1961,8 @@
           },
           {
                     "id": "wiedervereinigung",
-                    "title": "Wiedervereinigung",
-                    "title_es": "Reunificación",
+                    "title": "Deutschland",
+                    "title_es": "Alemania",
                     "icon": "🤝",
                     "color": "#ca8a04",
                     "items": [
@@ -1887,15 +1977,6 @@
                               },
                               {
                                         "art": "der",
-                                        "w": "3. Oktober",
-                                        "e": "🎆",
-                                        "tr": "3 de octubre",
-                                        "ex": "Der 3. Oktober ist der Tag der Deutschen Einheit.",
-                                        "ex_es": "El 3 de octubre es el Día de la Unidad Alemana.",
-                                        "important": true
-                              },
-                              {
-                                        "art": "der",
                                         "w": "9. November",
                                         "e": "📅",
                                         "tr": "9 de noviembre",
@@ -1903,12 +1984,13 @@
                                         "ex_es": "El 9 de noviembre es históricamente importante."
                               },
                               {
-                                        "art": "das",
-                                        "w": "Wirtschaftswunder",
-                                        "e": "📈",
-                                        "tr": "milagro económico",
-                                        "ex": "Das Wirtschaftswunder brachte Wachstum.",
-                                        "ex_es": "El milagro económico trajo crecimiento."
+                                        "art": "der",
+                                        "w": "3. Oktober",
+                                        "e": "🎆",
+                                        "tr": "3 de octubre",
+                                        "ex": "Der 3. Oktober ist der Tag der Deutschen Einheit.",
+                                        "ex_es": "El 3 de octubre es el Día de la Unidad Alemana.",
+                                        "important": true
                               },
                               {
                                         "art": "die",
@@ -1927,12 +2009,12 @@
                                         "ex_es": "El águila se ve en el escudo."
                               },
                               {
-                                        "art": "der",
-                                        "w": "Mensch",
-                                        "e": "👤",
-                                        "tr": "ser humano",
-                                        "ex": "Der Mensch steht im Mittelpunkt der Rechte.",
-                                        "ex_es": "El ser humano está en el centro de los derechos."
+                                        "art": "das",
+                                        "w": "Wirtschaftswunder",
+                                        "e": "📈",
+                                        "tr": "milagro económico",
+                                        "ex": "Das Wirtschaftswunder brachte Wachstum.",
+                                        "ex_es": "El milagro económico trajo crecimiento."
                               }
                     ]
           },
@@ -2139,21 +2221,22 @@
             werte: { de: "Werte", es: "Valores" },
             rechte: { de: "Rechte", es: "Derechos" },
             freiheiten: { de: "Freiheiten", es: "Libertades" },
-            "grundrechte-medien": { de: "Medien", es: "Medios" },
             "recht-grundlagen": { de: "Grundlagen", es: "Bases" },
             gerichte: { de: "Justiz", es: "Justicia" },
             strafen: { de: "Strafen", es: "Penas" },
             diskriminierung: { de: "Diskriminierung", es: "Discriminacion" },
             pruefungslogik: { de: "Prufungslogik", es: "Examen" },
             "deutsche-geschichte": { de: "Geschichte", es: "Historia" },
-            wiedervereinigung: { de: "Wiedervereinigung", es: "Reunificacion" },
+            wiedervereinigung: { de: "Deutschland", es: "Alemania" },
             berlin: { de: "Berlin", es: "Berlin" },
             gesellschaft: { de: "Gesellschaft", es: "Sociedad" },
+            migration: { de: "Migration", es: "Migracion" },
             "religion-gemeinschaft": { de: "Religion", es: "Religion" },
             sozialsystem: { de: "Sozialsystem", es: "Sistema" },
             foederalismus: { de: "Foderalismus", es: "Federalismo" },
+            eu: { de: "EU", es: "Union Europea" },
             "kommune-aemter": { de: "Kommune", es: "Municipio" },
-            behoerden: { de: "Behorden", es: "Autoridades" },
+            behoerden: { de: "Behörden", es: "Autoridades" },
             staatsgewalten: { de: "Staatsgewalten", es: "Poderes" },
             staatsaemter: { de: "Staatsamter", es: "Cargos" }
         };
@@ -2316,6 +2399,8 @@
         const mHeaderLine = document.getElementById('m-header-line');
         const mSpeaker = document.getElementById('m-speaker-icon');
         const mExampleCard = document.getElementById('m-example-card');
+        const mNoteCard = document.getElementById('m-note-card');
+        const mNote = document.getElementById('m-note');
 
         let currentSpeechText = "";
 
@@ -2328,12 +2413,14 @@
             mTrans.textContent = item.tr;
             mExDe.textContent = item.ex;
             mExEs.textContent = item.ex_es;
+            mNote.textContent = item.note || "";
 
             currentSpeechText = getSpeechText(item.art, item.w);
 
             // Styling & Visibility
             mArt.style.display = item.art ? 'inline' : 'none';
             mExampleCard.style.display = 'block'; // Show Examples
+            mNoteCard.style.display = item.note ? 'block' : 'none';
             mEmoji.style.filter = ''; // Reset filter logic later
             mWord.style.color = 'white'; // Default
 
@@ -2368,6 +2455,7 @@
             // Styling & Visibility
             mArt.style.display = 'none'; // Hide Article
             mExampleCard.style.display = 'none'; // Hide Examples
+            mNoteCard.style.display = 'none';
 
             mHeaderLine.className = `modal-word-line`; // No specific article class
             mWord.style.color = 'var(--accent-gold)'; // Special color for titles
