@@ -1008,6 +1008,7 @@
                                         "tr": "poder estatal / autoridad",
                                         "ex": "Die Gewalt ist im Staat verteilt.",
                                         "ex_es": "El poder estatal está repartido en el Estado.",
+                                        "note": "Hinweis: In diesem politischen Kontext bedeutet Gewalt poder estatal / autoridad. Normalerweise kann Gewalt im Deutschen aber auch violencia bedeuten.",
                                         "important": true
                               },
                               {
@@ -1077,9 +1078,10 @@
                                         "art": "der / die",
                                         "w": "Wähler / Wählerin",
                                         "e": "🙋",
-                                        "tr": "Votante / votante (mujer)",
+                                        "tr": "elector / electora",
+                                        "modal_tr": "Votante / votante (mujer)",
                                         "ex": "Der Wähler oder die Wählerin gibt die Stimme ab.",
-                                        "ex_es": "El votante o la votante emite el voto.",
+                                        "ex_es": "El elector o la electora emite el voto.",
                                         "important": true
                               },
                               {
@@ -1934,7 +1936,7 @@
                                         "art": "die",
                                         "w": "DDR",
                                         "e": "🧱",
-                                        "tr": "Alemania oriental",
+                                        "tr": "República Democrática Alemana",
                                         "ex": "Die DDR lag im Osten Deutschlands.",
                                         "ex_es": "La RDA estaba en el este de Alemania.",
                                         "important": true
@@ -1943,7 +1945,7 @@
                                         "art": "die",
                                         "w": "BRD",
                                         "e": "🇩🇪",
-                                        "tr": "Alemania occidental",
+                                        "tr": "República Federal de Alemania",
                                         "ex": "Die BRD lag im Westen Deutschlands.",
                                         "ex_es": "La RFA estaba en el oeste de Alemania.",
                                         "important": true
@@ -2224,21 +2226,21 @@
             "recht-grundlagen": { de: "Grundlagen", es: "Bases" },
             gerichte: { de: "Justiz", es: "Justicia" },
             strafen: { de: "Strafen", es: "Penas" },
-            diskriminierung: { de: "Diskriminierung", es: "Discriminacion" },
-            pruefungslogik: { de: "Prufungslogik", es: "Examen" },
+            diskriminierung: { de: "Diskriminierung", es: "Discriminación" },
+            pruefungslogik: { de: "Prüfungslogik", es: "Examen" },
             "deutsche-geschichte": { de: "Geschichte", es: "Historia" },
             wiedervereinigung: { de: "Deutschland", es: "Alemania" },
             berlin: { de: "Berlin", es: "Berlin" },
             gesellschaft: { de: "Gesellschaft", es: "Sociedad" },
-            migration: { de: "Migration", es: "Migracion" },
+            migration: { de: "Migration", es: "Migración" },
             "religion-gemeinschaft": { de: "Religion", es: "Religion" },
             sozialsystem: { de: "Sozialsystem", es: "Sistema" },
-            foederalismus: { de: "Foderalismus", es: "Federalismo" },
-            eu: { de: "EU", es: "Union Europea" },
+            foederalismus: { de: "Föderalismus", es: "Federalismo" },
+            eu: { de: "EU", es: "Unión Europea" },
             "kommune-aemter": { de: "Kommune", es: "Municipio" },
             behoerden: { de: "Behörden", es: "Autoridades" },
             staatsgewalten: { de: "Staatsgewalten", es: "Poderes" },
-            staatsaemter: { de: "Staatsamter", es: "Cargos" }
+            staatsaemter: { de: "Staatsämter", es: "Cargos" }
         };
 
         function getHeaderLabels(cat) {
@@ -2410,7 +2412,7 @@
             mEmoji.textContent = item.e;
             mArt.textContent = item.art;
             mWord.innerHTML = item.important ? `${item.w} <span class="importance-star" title="Importante">★</span>` : item.w;
-            mTrans.textContent = item.tr;
+            mTrans.textContent = item.modal_tr || item.tr;
             mExDe.textContent = item.ex;
             mExEs.textContent = item.ex_es;
             mNote.textContent = item.note || "";
