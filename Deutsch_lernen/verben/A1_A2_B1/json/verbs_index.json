@@ -1,8 +1,8 @@
 {
   "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word, with the STRICT EXCEPTION of the group 'Leben in Deutschland'. MAINTENANCE RULE: whenever this file changes, update lastUpdated.",
-  "lastUpdated": "2026-04-01T10:32:02.285Z",
+  "lastUpdated": "2026-04-02T11:25:00.000Z",
   "totalGroups": 87,
-  "totalVerbs": 485,
+  "totalVerbs": 487,
   "groups": [
     {
       "level": "A1.1",
@@ -103,14 +103,15 @@
     },
     {
       "level": "A1.1",
-      "verbCount": 6,
+      "verbCount": 7,
       "verbs": [
         "wissen",
         "kennen",
         "denken",
         "glauben",
         "träumen",
-        "überlegen"
+        "überlegen",
+        "hoffen"
       ],
       "groupNameGerman": "Denken",
       "groupNameSpanish": "Pensamiento",
@@ -557,12 +558,11 @@
     },
     {
       "level": "A2.1",
-      "verbCount": 4,
+      "verbCount": 3,
       "verbs": [
         "passieren",
         "geschehen",
-        "verlieren",
-        "hoffen"
+        "verlieren"
       ],
       "groupNameGerman": "Schicksal",
       "groupNameSpanish": "Sucesos",
@@ -826,12 +826,14 @@
     },
     {
       "level": "A2.2",
-      "verbCount": 4,
+      "verbCount": 6,
       "verbs": [
-        "heiraten",
-        "sterben",
+        "geboren werden",
+        "aufwachsen",
         "leben",
-        "erleben"
+        "erleben",
+        "heiraten",
+        "sterben"
       ],
       "groupNameGerman": "Biografie",
       "groupNameSpanish": "Biografía",
