@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="de" translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>Deutsche Satzmuster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --panel: #1e293b;
+            --panel-2: #243247;
+            --line: #334155;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --accent: #f59e0b;
+            --accent-2: #fb7185;
+            --a1: #22c55e;
+            --a2: #3b82f6;
+            --b1: #ec4899;
+            --shadow: rgba(0, 0, 0, 0.28);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Nunito', sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(245, 158, 11, 0.08), transparent 30%),
+                radial-gradient(circle at top right, rgba(236, 72, 153, 0.08), transparent 28%),
+                var(--bg);
+            color: var(--text);
+        }
+
+        .page {
+            width: min(1240px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 28px 0 56px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(30, 41, 59, 0.9);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 26px;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .hero .accent {
+            color: var(--accent);
+        }
+
+        .hero .underline {
+            width: min(420px, 72%);
+            height: 6px;
+            border-radius: 999px;
+            margin: 12px auto 0;
+            background: linear-gradient(90deg, var(--accent), #fbbf24);
+        }
+
+        .hero p {
+            margin: 18px auto 0;
+            max-width: 760px;
+            color: var(--muted);
+            font-size: 1.04rem;
+            font-weight: 600;
+        }
+
+        .toolbar {
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) auto;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .search-wrap {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            border: 2px solid rgba(148, 163, 184, 0.2);
+            background: var(--panel);
+            color: var(--text);
+            border-radius: 18px;
+            padding: 16px 52px 16px 18px;
+            font: inherit;
+            font-size: 1rem;
+            font-weight: 700;
+            outline: none;
+            box-shadow: 0 14px 30px var(--shadow);
+        }
+
+        .search-input::placeholder {
+            color: #7c8aa0;
+            font-weight: 600;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            pointer-events: none;
+        }
+
+        .level-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .level-btn {
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background: var(--panel);
+            color: var(--text);
+            border-radius: 999px;
+            padding: 12px 18px;
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .level-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .level-btn.active[data-level="all"] {
+            background: linear-gradient(135deg, #475569, #334155);
+            box-shadow: 0 10px 24px rgba(51, 65, 85, 0.35);
+        }
+
+        .level-btn.active[data-level="A1"] {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            box-shadow: 0 10px 24px rgba(34, 197, 94, 0.28);
+        }
+
+        .level-btn.active[data-level="A2"] {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 10px 24px rgba(59, 130, 246, 0.28);
+        }
+
+        .level-btn.active[data-level="B1"] {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            box-shadow: 0 10px 24px rgba(236, 72, 153, 0.28);
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 22px;
+        }
+
+        .section-card {
+            background: linear-gradient(180deg, rgba(36, 50, 71, 0.98), rgba(30, 41, 59, 0.98));
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            border-radius: 26px;
+            overflow: hidden;
+            box-shadow: 0 18px 36px var(--shadow);
+        }
+
+        .section-header {
+            padding: 18px 20px;
+            color: white;
+        }
+
+        .section-header[data-level="A1"] {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+        }
+
+        .section-header[data-level="A2"] {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+        }
+
+        .section-header[data-level="B1"] {
+            background: linear-gradient(135deg, #db2777, #ec4899);
+        }
+
+        .section-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .section-title {
+            margin: 0;
+            font-size: 1.9rem;
+            line-height: 1;
+        }
+
+        .section-translation {
+            font-size: 1rem;
+            font-weight: 700;
+            opacity: 0.9;
+            text-align: right;
+        }
+
+        .section-level {
+            display: inline-flex;
+            margin-top: 10px;
+            border-radius: 999px;
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: rgba(15, 23, 42, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .pattern-list {
+            padding: 10px 0 0;
+        }
+
+        .pattern-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+            gap: 12px 18px;
+            padding: 16px 20px;
+            border-top: 1px solid var(--line);
+        }
+
+        .pattern-main {
+            min-width: 0;
+        }
+
+        .pattern-structure {
+            margin: 0;
+            font-size: 1.18rem;
+            font-weight: 800;
+            color: #fef3c7;
+        }
+
+        .pattern-translation {
+            margin-top: 6px;
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .pattern-translation span {
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .pattern-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .use-chip {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(59, 130, 246, 0.16);
+            color: #bfdbfe;
+            font-size: 0.84rem;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .row-level {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 999px;
+            padding: 5px 9px;
+            font-size: 0.74rem;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: white;
+        }
+
+        .row-level[data-level="A1"] {
+            background: var(--a1);
+        }
+
+        .row-level[data-level="A2"] {
+            background: var(--a2);
+        }
+
+        .row-level[data-level="B1"] {
+            background: var(--b1);
+        }
+
+        .empty-state {
+            display: none;
+            margin-top: 20px;
+            padding: 24px;
+            border-radius: 24px;
+            background: var(--panel);
+            color: var(--muted);
+            text-align: center;
+            font-weight: 700;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+        }
+
+        .mark {
+            background: linear-gradient(135deg, #fde68a, #fb7185);
+            color: #4a044e;
+            border-radius: 6px;
+            padding: 0 4px;
+        }
+
+        @media (max-width: 900px) {
+            .toolbar {
+                grid-template-columns: 1fr;
+            }
+
+            .level-filters {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .page {
+                width: min(100% - 18px, 1240px);
+                padding-top: 18px;
+            }
+
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pattern-row {
+                grid-template-columns: 1fr;
+            }
+
+            .pattern-meta {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="topbar">
+            <a class="back-link" href="../index.html">← Zurück</a>
+        </div>
+
+        <header class="hero">
+            <h1>Deutsche <span class="accent">Satzmuster</span></h1>
+            <div class="underline"></div>
+            <p>Strukturen para hablar con más naturalidad: opinión, obligación, posibilidad, tiempo, pasiva y expresiones impersonales.</p>
+        </header>
+
+        <div class="toolbar">
+            <div class="search-wrap">
+                <input id="searchInput" class="search-input" type="search"
+                    placeholder="Suchen... (z.B. es gibt, because, obligación, generalización)">
+                <span class="search-icon">🔎</span>
+            </div>
+            <div class="level-filters" id="levelFilters">
+                <button class="level-btn active" data-level="all">Alle</button>
+                <button class="level-btn" data-level="A1">A1</button>
+                <button class="level-btn" data-level="A2">A2</button>
+                <button class="level-btn" data-level="B1">B1</button>
+            </div>
+        </div>
+
+        <div id="sectionGrid" class="section-grid"></div>
+        <div id="emptyState" class="empty-state">No hay resultados para ese nivel o búsqueda.</div>
+    </div>
+
+    <script>
+        const sections = [
+            {
+                id: "grundlagen",
+                title: "Grundlagen",
+                title_es: "Bases",
+                title_en: "Basics",
+                level: "A1",
+                items: [
+                    { de: "es gibt", es: "hay", en: "there is / there are", use: "existencia", level: "A1" },
+                    { de: "es ist", es: "es / está", en: "it is", use: "estado general", level: "A1" },
+                    { de: "es + verbo (impersonal)", es: "llueve / ocurre", en: "it rains / it happens", use: "fenómenos", level: "A1" }
+                ]
+            },
+            {
+                id: "meinung",
+                title: "Meinung",
+                title_es: "Opinión",
+                title_en: "Opinion",
+                level: "B1",
+                items: [
+                    { de: "ich finde", es: "me parece", en: "I think / I find", use: "opinión", level: "A1" },
+                    { de: "ich glaube", es: "creo", en: "I believe", use: "creencia", level: "A1" },
+                    { de: "man sagt", es: "se dice", en: "people say", use: "opinión general", level: "B1" },
+                    { de: "meiner Meinung nach", es: "en mi opinión", en: "in my opinion", use: "opinión formal", level: "B1" }
+                ]
+            },
+            {
+                id: "faehigkeit",
+                title: "Fähigkeit",
+                title_es: "Capacidad",
+                title_en: "Ability",
+                level: "A2",
+                items: [
+                    { de: "ich kann", es: "puedo", en: "I can", use: "capacidad", level: "A1" },
+                    { de: "man kann", es: "se puede", en: "one can", use: "posibilidad general", level: "A2" },
+                    { de: "es ist möglich", es: "es posible", en: "it is possible", use: "posibilidad", level: "A2" }
+                ]
+            },
+            {
+                id: "pflicht",
+                title: "Pflicht",
+                title_es: "Obligación",
+                title_en: "Obligation",
+                level: "B1",
+                items: [
+                    { de: "ich muss", es: "tengo que", en: "I must / have to", use: "obligación", level: "A1" },
+                    { de: "ich soll", es: "debo (según otros)", en: "I should", use: "recomendación externa", level: "A2" },
+                    { de: "haben + zu + Inf.", es: "tener que", en: "to have to", use: "obligación formal", level: "B1" },
+                    { de: "sein + zu + Inf.", es: "deber / poder", en: "to be to", use: "obligación pasiva", level: "B1" }
+                ]
+            },
+            {
+                id: "wunsch",
+                title: "Wunsch",
+                title_es: "Deseo",
+                title_en: "Desire",
+                level: "A1",
+                items: [
+                    { de: "ich mag", es: "me gusta", en: "I like", use: "gusto", level: "A1" },
+                    { de: "ich möchte", es: "me gustaría", en: "I would like", use: "deseo", level: "A1" }
+                ]
+            },
+            {
+                id: "zeit",
+                title: "Zeit",
+                title_es: "Tiempo",
+                title_en: "Time",
+                level: "A2",
+                items: [
+                    { de: "ich habe Zeit", es: "tengo tiempo", en: "I have time", use: "disponibilidad", level: "A1" },
+                    { de: "ich habe keine Zeit", es: "no tengo tiempo", en: "I have no time", use: "falta de tiempo", level: "A1" },
+                    { de: "werden (Futur)", es: "ir a", en: "will", use: "futuro", level: "A1" },
+                    { de: "ich war", es: "fui / estuve", en: "I was", use: "pasado básico", level: "A1" },
+                    { de: "ich habe gemacht", es: "he hecho", en: "I have done", use: "experiencia", level: "A2" }
+                ]
+            },
+            {
+                id: "passiv",
+                title: "Passiv",
+                title_es: "Pasiva",
+                title_en: "Passive",
+                level: "B1",
+                items: [
+                    { de: "werden (Passiv)", es: "ser", en: "to be (passive)", use: "voz pasiva", level: "B1" },
+                    { de: "das wird gemacht", es: "se hace", en: "it is done", use: "pasiva ejemplo", level: "B1" },
+                    { de: "lassen + Inf.", es: "dejar / hacer que", en: "to let / to have done", use: "acción indirecta", level: "B1" }
+                ]
+            },
+            {
+                id: "verbindungen",
+                title: "Verbindungen",
+                title_es: "Conectores",
+                title_en: "Connectors",
+                level: "A2",
+                items: [
+                    { de: "weil", es: "porque", en: "because", use: "causa", level: "A2" },
+                    { de: "deshalb", es: "por eso", en: "therefore", use: "consecuencia", level: "A2" },
+                    { de: "um zu + Inf.", es: "para", en: "in order to", use: "propósito", level: "A2" }
+                ]
+            },
+            {
+                id: "unpersoenlich",
+                title: "Unpersönlich",
+                title_es: "Impersonal",
+                title_en: "Impersonal",
+                level: "A2",
+                items: [
+                    { de: "es geht (um)", es: "se trata de", en: "it is about", use: "tema", level: "A2" },
+                    { de: "es geht + Dativ", es: "cómo está / me va", en: "how it goes", use: "estado personal", level: "A1" },
+                    { de: "man", es: "uno / la gente", en: "people / one", use: "generalización", level: "A2" }
+                ]
+            }
+        ];
+
+        const sectionGrid = document.getElementById('sectionGrid');
+        const emptyState = document.getElementById('emptyState');
+        const searchInput = document.getElementById('searchInput');
+        const levelButtons = Array.from(document.querySelectorAll('.level-btn'));
+        let currentLevel = 'all';
+
+        function escapeRegExp(value) {
+            return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function highlight(text, query) {
+            if (!query) return text;
+            const pattern = new RegExp(`(${escapeRegExp(query)})`, 'ig');
+            return text.replace(pattern, '<mark class="mark">$1</mark>');
+        }
+
+        function matchesLevel(itemLevel, selectedLevel) {
+            return selectedLevel === 'all' || itemLevel === selectedLevel;
+        }
+
+        function filterSections() {
+            const query = searchInput.value.trim().toLowerCase();
+
+            const filtered = sections
+                .map(section => {
+                    const matchedItems = section.items.filter(item => {
+                        const haystack = [
+                            section.title,
+                            section.title_es,
+                            section.title_en,
+                            item.de,
+                            item.es,
+                            item.en,
+                            item.use,
+                            item.level
+                        ].join(' ').toLowerCase();
+
+                        const queryMatches = !query || haystack.includes(query);
+                        const levelMatches = matchesLevel(item.level, currentLevel);
+                        return queryMatches && levelMatches;
+                    });
+
+                    return { ...section, matchedItems };
+                })
+                .filter(section => section.matchedItems.length > 0);
+
+            renderSections(filtered, query);
+        }
+
+        function renderSections(filteredSections, query) {
+            if (!filteredSections.length) {
+                sectionGrid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            sectionGrid.innerHTML = filteredSections.map(section => {
+                const cardLevel = currentLevel === 'all'
+                    ? section.matchedItems.reduce((acc, item) => {
+                        const rank = { A1: 1, A2: 2, B1: 3 };
+                        return rank[item.level] > rank[acc] ? item.level : acc;
+                    }, section.matchedItems[0].level)
+                    : currentLevel;
+
+                return `
+                    <section class="section-card">
+                        <div class="section-header" data-level="${cardLevel}">
+                            <div class="section-title-row">
+                                <h2 class="section-title">${highlight(section.title, query)}</h2>
+                                <div class="section-translation">${highlight(section.title_es, query)} / ${highlight(section.title_en, query)}</div>
+                            </div>
+                            <div class="section-level">${cardLevel}</div>
+                        </div>
+                        <div class="pattern-list">
+                            ${section.matchedItems.map(item => `
+                                <article class="pattern-row">
+                                    <div class="pattern-main">
+                                        <p class="pattern-structure">${highlight(item.de, query)}</p>
+                                        <div class="pattern-translation">
+                                            ${highlight(item.es, query)}
+                                            <span>/</span>
+                                            ${highlight(item.en, query)}
+                                        </div>
+                                    </div>
+                                    <div class="pattern-meta">
+                                        <div class="use-chip">${highlight(item.use, query)}</div>
+                                        <div class="row-level" data-level="${item.level}">${item.level}</div>
+                                    </div>
+                                </article>
+                            `).join('')}
+                        </div>
+                    </section>
+                `;
+            }).join('');
+        }
+
+        levelButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                levelButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                currentLevel = button.dataset.level;
+                filterSections();
+            });
+        });
+
+        searchInput.addEventListener('input', filterSections);
+
+        filterSections();
+    </script>
+</body>
+
+</html>
