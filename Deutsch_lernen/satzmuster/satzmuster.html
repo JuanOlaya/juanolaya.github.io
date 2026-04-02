@@ -52,6 +52,14 @@
             margin-bottom: 22px;
         }
 
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-left: auto;
+        }
+
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -103,6 +111,33 @@
             gap: 16px;
             align-items: center;
             margin-bottom: 22px;
+        }
+
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            background: var(--panel);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 999px;
+            padding: 4px;
+            box-shadow: 0 14px 30px var(--shadow);
+        }
+
+        .lang-btn {
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            border-radius: 999px;
+            padding: 10px 14px;
+            font: inherit;
+            font-weight: 900;
+            cursor: pointer;
+            min-width: 56px;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            color: #1f2937;
         }
 
         .search-wrap {
@@ -254,6 +289,12 @@
             gap: 12px 18px;
             padding: 16px 20px;
             border-top: 1px solid var(--line);
+            cursor: pointer;
+            transition: background-color 0.18s ease;
+        }
+
+        .pattern-row:hover {
+            background: rgba(51, 65, 85, 0.52);
         }
 
         .pattern-main {
@@ -271,11 +312,6 @@
             margin-top: 6px;
             color: var(--text);
             font-weight: 700;
-        }
-
-        .pattern-translation span {
-            color: var(--muted);
-            font-weight: 600;
         }
 
         .pattern-meta {
@@ -337,6 +373,117 @@
             border: 1px solid rgba(148, 163, 184, 0.16);
         }
 
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            background: rgba(15, 23, 42, 0.72);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal {
+            width: min(760px, 100%);
+            background: linear-gradient(180deg, #233146, #1e293b);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            border-radius: 26px;
+            box-shadow: 0 22px 50px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 22px 24px 14px;
+            background: linear-gradient(135deg, #f59e0b, #fb7185);
+            color: white;
+        }
+
+        .modal-title {
+            margin: 0;
+            font-size: 2rem;
+            line-height: 1.05;
+        }
+
+        .modal-subtitle {
+            margin-top: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            opacity: 0.96;
+        }
+
+        .modal-close {
+            border: none;
+            background: rgba(15, 23, 42, 0.18);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            font: inherit;
+            font-size: 1.4rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 20px 24px 24px;
+        }
+
+        .modal-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .modal-chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(59, 130, 246, 0.14);
+            color: #bfdbfe;
+            font-weight: 800;
+        }
+
+        .modal-section-title {
+            margin: 0 0 10px;
+            font-size: 1rem;
+            color: #cbd5e1;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .modal-example {
+            background: rgba(15, 23, 42, 0.3);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 18px;
+            padding: 16px;
+        }
+
+        .modal-example-de {
+            margin: 0 0 10px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fef3c7;
+        }
+
+        .modal-example-translation {
+            margin: 0;
+            color: var(--text);
+            font-weight: 700;
+        }
+
         .mark {
             background: linear-gradient(135deg, #fde68a, #fb7185);
             color: #4a044e;
@@ -379,6 +526,12 @@
     <div class="page">
         <div class="topbar">
             <a class="back-link" href="../index.html">← Zurück</a>
+            <div class="topbar-right">
+                <div class="lang-toggle" id="langToggle" aria-label="Translation language">
+                    <button class="lang-btn active" data-lang="es">ES</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
         </div>
 
         <header class="hero">
@@ -405,6 +558,26 @@
         <div id="emptyState" class="empty-state">No hay resultados para ese nivel o búsqueda.</div>
     </div>
 
+    <div id="patternModalOverlay" class="modal-overlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="patternModalTitle">
+            <div class="modal-header">
+                <div>
+                    <h2 id="patternModalTitle" class="modal-title"></h2>
+                    <div id="patternModalSubtitle" class="modal-subtitle"></div>
+                </div>
+                <button id="patternModalClose" class="modal-close" type="button" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="patternModalMeta" class="modal-meta"></div>
+                <h3 class="modal-section-title">Beispiel</h3>
+                <div class="modal-example">
+                    <p id="patternModalExampleDe" class="modal-example-de"></p>
+                    <p id="patternModalExampleTranslation" class="modal-example-translation"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         const sections = [
             {
@@ -414,9 +587,9 @@
                 title_en: "Basics",
                 level: "A1",
                 items: [
-                    { de: "es gibt", es: "hay", en: "there is / there are", use: "existencia", level: "A1" },
-                    { de: "es ist", es: "es / está", en: "it is", use: "estado general", level: "A1" },
-                    { de: "es + verbo (impersonal)", es: "llueve / ocurre", en: "it rains / it happens", use: "fenómenos", level: "A1" }
+                    { de: "es gibt", es: "hay", en: "there is / there are", use: "existencia", level: "A1", example_de: "Es gibt heute einen Markt im Zentrum.", example_es: "Hay hoy un mercado en el centro.", example_en: "There is a market in the center today." },
+                    { de: "es ist", es: "es / está", en: "it is", use: "estado general", level: "A1", example_de: "Es ist heute sehr kalt.", example_es: "Hoy hace mucho frío.", example_en: "It is very cold today." },
+                    { de: "es + verbo (impersonal)", es: "llueve / ocurre", en: "it rains / it happens", use: "fenómenos", level: "A1", example_de: "Es regnet seit dem Morgen.", example_es: "Llueve desde la mañana.", example_en: "It has been raining since the morning." }
                 ]
             },
             {
@@ -426,10 +599,10 @@
                 title_en: "Opinion",
                 level: "B1",
                 items: [
-                    { de: "ich finde", es: "me parece", en: "I think / I find", use: "opinión", level: "A1" },
-                    { de: "ich glaube", es: "creo", en: "I believe", use: "creencia", level: "A1" },
-                    { de: "man sagt", es: "se dice", en: "people say", use: "opinión general", level: "B1" },
-                    { de: "meiner Meinung nach", es: "en mi opinión", en: "in my opinion", use: "opinión formal", level: "B1" }
+                    { de: "ich finde", es: "me parece", en: "I think / I find", use: "opinión", level: "A1", example_de: "Ich finde den Film sehr interessant.", example_es: "Me parece muy interesante la película.", example_en: "I find the movie very interesting." },
+                    { de: "ich glaube", es: "creo", en: "I believe", use: "creencia", level: "A1", example_de: "Ich glaube, er kommt später.", example_es: "Creo que él llega más tarde.", example_en: "I believe he is coming later." },
+                    { de: "man sagt", es: "se dice", en: "people say", use: "opinión general", level: "B1", example_de: "Man sagt, dass der Winter hart wird.", example_es: "Se dice que el invierno será duro.", example_en: "People say the winter will be harsh." },
+                    { de: "meiner Meinung nach", es: "en mi opinión", en: "in my opinion", use: "opinión formal", level: "B1", example_de: "Meiner Meinung nach ist das eine gute Lösung.", example_es: "En mi opinión, esa es una buena solución.", example_en: "In my opinion, that is a good solution." }
                 ]
             },
             {
@@ -439,9 +612,9 @@
                 title_en: "Ability",
                 level: "A2",
                 items: [
-                    { de: "ich kann", es: "puedo", en: "I can", use: "capacidad", level: "A1" },
-                    { de: "man kann", es: "se puede", en: "one can", use: "posibilidad general", level: "A2" },
-                    { de: "es ist möglich", es: "es posible", en: "it is possible", use: "posibilidad", level: "A2" }
+                    { de: "ich kann", es: "puedo", en: "I can", use: "capacidad", level: "A1", example_de: "Ich kann heute länger bleiben.", example_es: "Puedo quedarme más tiempo hoy.", example_en: "I can stay longer today." },
+                    { de: "man kann", es: "se puede", en: "one can", use: "posibilidad general", level: "A2", example_de: "Hier kann man gut spazieren gehen.", example_es: "Aquí se puede pasear bien.", example_en: "One can go for a nice walk here." },
+                    { de: "es ist möglich", es: "es posible", en: "it is possible", use: "posibilidad", level: "A2", example_de: "Es ist möglich, online zu bezahlen.", example_es: "Es posible pagar en línea.", example_en: "It is possible to pay online." }
                 ]
             },
             {
@@ -451,10 +624,10 @@
                 title_en: "Obligation",
                 level: "B1",
                 items: [
-                    { de: "ich muss", es: "tengo que", en: "I must / have to", use: "obligación", level: "A1" },
-                    { de: "ich soll", es: "debo (según otros)", en: "I should", use: "recomendación externa", level: "A2" },
-                    { de: "haben + zu + Inf.", es: "tener que", en: "to have to", use: "obligación formal", level: "B1" },
-                    { de: "sein + zu + Inf.", es: "deber / poder", en: "to be to", use: "obligación pasiva", level: "B1" }
+                    { de: "ich muss", es: "tengo que", en: "I must / have to", use: "obligación", level: "A1", example_de: "Ich muss morgen früh arbeiten.", example_es: "Tengo que trabajar mañana temprano.", example_en: "I have to work early tomorrow." },
+                    { de: "ich soll", es: "debo (según otros)", en: "I should", use: "recomendación externa", level: "A2", example_de: "Ich soll mehr Wasser trinken.", example_es: "Debo beber más agua.", example_en: "I should drink more water." },
+                    { de: "haben + zu + Inf.", es: "tener que", en: "to have to", use: "obligación formal", level: "B1", example_de: "Wir haben den Bericht heute abzugeben.", example_es: "Tenemos que entregar el informe hoy.", example_en: "We have to hand in the report today." },
+                    { de: "sein + zu + Inf.", es: "deber / poder", en: "to be to", use: "obligación pasiva", level: "B1", example_de: "Das Problem ist sofort zu lösen.", example_es: "El problema debe resolverse de inmediato.", example_en: "The problem is to be solved immediately." }
                 ]
             },
             {
@@ -464,8 +637,8 @@
                 title_en: "Desire",
                 level: "A1",
                 items: [
-                    { de: "ich mag", es: "me gusta", en: "I like", use: "gusto", level: "A1" },
-                    { de: "ich möchte", es: "me gustaría", en: "I would like", use: "deseo", level: "A1" }
+                    { de: "ich mag", es: "me gusta", en: "I like", use: "gusto", level: "A1", example_de: "Ich mag ruhige Cafés.", example_es: "Me gustan los cafés tranquilos.", example_en: "I like quiet cafés." },
+                    { de: "ich möchte", es: "me gustaría", en: "I would like", use: "deseo", level: "A1", example_de: "Ich möchte einen Tee bestellen.", example_es: "Me gustaría pedir un té.", example_en: "I would like to order a tea." }
                 ]
             },
             {
@@ -475,11 +648,11 @@
                 title_en: "Time",
                 level: "A2",
                 items: [
-                    { de: "ich habe Zeit", es: "tengo tiempo", en: "I have time", use: "disponibilidad", level: "A1" },
-                    { de: "ich habe keine Zeit", es: "no tengo tiempo", en: "I have no time", use: "falta de tiempo", level: "A1" },
-                    { de: "werden (Futur)", es: "ir a", en: "will", use: "futuro", level: "A1" },
-                    { de: "ich war", es: "fui / estuve", en: "I was", use: "pasado básico", level: "A1" },
-                    { de: "ich habe gemacht", es: "he hecho", en: "I have done", use: "experiencia", level: "A2" }
+                    { de: "ich habe Zeit", es: "tengo tiempo", en: "I have time", use: "disponibilidad", level: "A1", example_de: "Ich habe heute Abend Zeit.", example_es: "Tengo tiempo esta noche.", example_en: "I have time this evening." },
+                    { de: "ich habe keine Zeit", es: "no tengo tiempo", en: "I have no time", use: "falta de tiempo", level: "A1", example_de: "Ich habe gerade keine Zeit für ein Treffen.", example_es: "Ahora no tengo tiempo para una reunión.", example_en: "I don't have time for a meeting right now." },
+                    { de: "werden (Futur)", es: "ir a", en: "will", use: "futuro", level: "A1", example_de: "Ich werde morgen zu Hause bleiben.", example_es: "Mañana me quedaré en casa.", example_en: "I will stay at home tomorrow." },
+                    { de: "ich war", es: "fui / estuve", en: "I was", use: "pasado básico", level: "A1", example_de: "Ich war gestern im Büro.", example_es: "Ayer estuve en la oficina.", example_en: "I was at the office yesterday." },
+                    { de: "ich habe gemacht", es: "he hecho", en: "I have done", use: "experiencia", level: "A2", example_de: "Ich habe die Aufgabe schon gemacht.", example_es: "Ya he hecho la tarea.", example_en: "I have already done the task." }
                 ]
             },
             {
@@ -489,9 +662,9 @@
                 title_en: "Passive",
                 level: "B1",
                 items: [
-                    { de: "werden (Passiv)", es: "ser", en: "to be (passive)", use: "voz pasiva", level: "B1" },
-                    { de: "das wird gemacht", es: "se hace", en: "it is done", use: "pasiva ejemplo", level: "B1" },
-                    { de: "lassen + Inf.", es: "dejar / hacer que", en: "to let / to have done", use: "acción indirecta", level: "B1" }
+                    { de: "werden (Passiv)", es: "ser", en: "to be (passive)", use: "voz pasiva", level: "B1", example_de: "Die E-Mail wird heute geschrieben.", example_es: "El correo se escribe hoy.", example_en: "The email is written today." },
+                    { de: "das wird gemacht", es: "se hace", en: "it is done", use: "pasiva ejemplo", level: "B1", example_de: "Das wird morgen gemacht.", example_es: "Eso se hace mañana.", example_en: "That will be done tomorrow." },
+                    { de: "lassen + Inf.", es: "dejar / hacer que", en: "to let / to have done", use: "acción indirecta", level: "B1", example_de: "Ich lasse mein Fahrrad reparieren.", example_es: "Voy a mandar reparar mi bicicleta.", example_en: "I am having my bike repaired." }
                 ]
             },
             {
@@ -501,9 +674,9 @@
                 title_en: "Connectors",
                 level: "A2",
                 items: [
-                    { de: "weil", es: "porque", en: "because", use: "causa", level: "A2" },
-                    { de: "deshalb", es: "por eso", en: "therefore", use: "consecuencia", level: "A2" },
-                    { de: "um zu + Inf.", es: "para", en: "in order to", use: "propósito", level: "A2" }
+                    { de: "weil", es: "porque", en: "because", use: "causa", level: "A2", example_de: "Ich bleibe zu Hause, weil ich krank bin.", example_es: "Me quedo en casa porque estoy enfermo.", example_en: "I stay at home because I am sick." },
+                    { de: "deshalb", es: "por eso", en: "therefore", use: "consecuencia", level: "A2", example_de: "Es regnet, deshalb nehme ich den Bus.", example_es: "Llueve, por eso tomo el autobús.", example_en: "It is raining, therefore I am taking the bus." },
+                    { de: "um zu + Inf.", es: "para", en: "in order to", use: "propósito", level: "A2", example_de: "Ich lerne Deutsch, um in Berlin zu arbeiten.", example_es: "Aprendo alemán para trabajar en Berlín.", example_en: "I am learning German in order to work in Berlin." }
                 ]
             },
             {
@@ -513,9 +686,9 @@
                 title_en: "Impersonal",
                 level: "A2",
                 items: [
-                    { de: "es geht (um)", es: "se trata de", en: "it is about", use: "tema", level: "A2" },
-                    { de: "es geht + Dativ", es: "cómo está / me va", en: "how it goes", use: "estado personal", level: "A1" },
-                    { de: "man", es: "uno / la gente", en: "people / one", use: "generalización", level: "A2" }
+                    { de: "es geht (um)", es: "se trata de", en: "it is about", use: "tema", level: "A2", example_de: "Im Artikel geht es um Sprache und Kultur.", example_es: "El artículo trata sobre lengua y cultura.", example_en: "The article is about language and culture." },
+                    { de: "es geht + Dativ", es: "cómo está / me va", en: "how it goes", use: "estado personal", level: "A1", example_de: "Mir geht es heute viel besser.", example_es: "Hoy me va mucho mejor.", example_en: "I am doing much better today." },
+                    { de: "man", es: "uno / la gente", en: "people / one", use: "generalización", level: "A2", example_de: "In Deutschland trinkt man viel Kaffee.", example_es: "En Alemania la gente bebe mucho café.", example_en: "In Germany people drink a lot of coffee." }
                 ]
             }
         ];
@@ -524,7 +697,17 @@
         const emptyState = document.getElementById('emptyState');
         const searchInput = document.getElementById('searchInput');
         const levelButtons = Array.from(document.querySelectorAll('.level-btn'));
+        const langButtons = Array.from(document.querySelectorAll('.lang-btn'));
+        const modalOverlay = document.getElementById('patternModalOverlay');
+        const modalClose = document.getElementById('patternModalClose');
+        const modalTitle = document.getElementById('patternModalTitle');
+        const modalSubtitle = document.getElementById('patternModalSubtitle');
+        const modalMeta = document.getElementById('patternModalMeta');
+        const modalExampleDe = document.getElementById('patternModalExampleDe');
+        const modalExampleTranslation = document.getElementById('patternModalExampleTranslation');
         let currentLevel = 'all';
+        let currentLang = 'es';
+        let currentModalItem = null;
 
         function escapeRegExp(value) {
             return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -569,6 +752,34 @@
             renderSections(filtered, query);
         }
 
+        function getActiveTranslation(item) {
+            return currentLang === 'en' ? item.en : item.es;
+        }
+
+        function getActiveExampleTranslation(item) {
+            return currentLang === 'en' ? item.example_en : item.example_es;
+        }
+
+        function openModal(item) {
+            currentModalItem = item;
+            modalTitle.textContent = item.de;
+            modalSubtitle.textContent = getActiveTranslation(item);
+            modalMeta.innerHTML = `
+                <div class="modal-chip">${item.use}</div>
+                <div class="row-level" data-level="${item.level}">${item.level}</div>
+            `;
+            modalExampleDe.textContent = item.example_de;
+            modalExampleTranslation.textContent = getActiveExampleTranslation(item);
+            modalOverlay.classList.add('open');
+            modalOverlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('open');
+            modalOverlay.setAttribute('aria-hidden', 'true');
+            currentModalItem = null;
+        }
+
         function renderSections(filteredSections, query) {
             if (!filteredSections.length) {
                 sectionGrid.innerHTML = '';
@@ -596,13 +807,11 @@
                         </div>
                         <div class="pattern-list">
                             ${section.matchedItems.map(item => `
-                                <article class="pattern-row">
+                                <article class="pattern-row" data-section-id="${section.id}" data-item-de="${item.de}">
                                     <div class="pattern-main">
                                         <p class="pattern-structure">${highlight(item.de, query)}</p>
                                         <div class="pattern-translation">
-                                            ${highlight(item.es, query)}
-                                            <span>/</span>
-                                            ${highlight(item.en, query)}
+                                            ${highlight(getActiveTranslation(item), query)}
                                         </div>
                                     </div>
                                     <div class="pattern-meta">
@@ -615,6 +824,12 @@
                     </section>
                 `;
             }).join('');
+
+            sectionGrid.querySelectorAll('.pattern-row').forEach((row, index) => {
+                const flatItems = filteredSections.flatMap(section => section.matchedItems);
+                const item = flatItems[index];
+                row.addEventListener('click', () => openModal(item));
+            });
         }
 
         levelButtons.forEach(button => {
@@ -626,7 +841,30 @@
             });
         });
 
+        langButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                langButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                currentLang = button.dataset.lang;
+                if (currentModalItem) {
+                    openModal(currentModalItem);
+                }
+                filterSections();
+            });
+        });
+
         searchInput.addEventListener('input', filterSections);
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (event) => {
+            if (event.target === modalOverlay) {
+                closeModal();
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modalOverlay.classList.contains('open')) {
+                closeModal();
+            }
+        });
 
         filterSections();
     </script>
