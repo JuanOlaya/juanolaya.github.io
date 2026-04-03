@@ -697,6 +697,45 @@
             line-height: 1.6;
         }
 
+        .theme-modal-body {
+            padding: 24px;
+        }
+
+        .theme-modal-subtitle {
+            color: #cbd5e1;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .theme-modal-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .theme-modal-table th,
+        .theme-modal-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #334155;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .theme-modal-table th {
+            color: #cbd5e1;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .theme-modal-table td {
+            color: #f8fafc;
+        }
+
+        .theme-modal-table tr:last-child td {
+            border-bottom: none;
+        }
+
         /* Tips Modal Specifics */
         #tips-modal .modal-content {
             max-width: 800px;
@@ -1424,6 +1463,30 @@
         </div>
     </div>
 
+    <div class="modal-overlay" id="theme-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="theme-modal-close">×</button>
+            <div class="modal-header" id="theme-modal-header-bg">
+                <div class="level-tag" id="theme-modal-level"></div>
+                <div class="modal-word" id="theme-modal-word"></div>
+                <div class="modal-translation" id="theme-modal-translation"></div>
+            </div>
+            <div class="theme-modal-body">
+                <div class="theme-modal-subtitle" id="theme-modal-subtitle"></div>
+                <table class="theme-modal-table">
+                    <thead>
+                        <tr>
+                            <th>Deutsch</th>
+                            <th>Singular</th>
+                            <th>Plural</th>
+                        </tr>
+                    </thead>
+                    <tbody id="theme-modal-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <!-- Tips Modal -->
     <div class="modal-overlay" id="tips-modal">
         <div class="modal-content">
@@ -1682,7 +1745,9 @@
                     { article: "das", word: "Dorf", emoji: "🏘️", translation_es: "pueblo", translation_en: "village", example_de: "Das Dorf ist sehr klein.", example_es: "El pueblo es muy pequeño." },
                     { article: "der", word: "Eingang", emoji: "🚪", translation_es: "entrada", translation_en: "entrance", example_de: "Der Eingang ist dort.", example_es: "La entrada está allí." },
                     { article: "der", word: "Garten", emoji: "🌺", translation_es: "jardín", translation_en: "garden", example_de: "Mein Garten ist groß.", example_es: "Mi jardín es grande." },
+                    { article: "das", word: "Kaninchen", emoji: "🐇", translation_es: "conejo", translation_en: "rabbit", example_de: "Das Kaninchen frisst eine Karotte.", example_es: "El conejo come una zanahoria." },
                     { article: "der", word: "Hund", emoji: "🐕", translation_es: "perro", translation_en: "dog", example_de: "Der Hund bellt.", example_es: "El perro ladra." },
+                    { article: "der", word: "Hase", emoji: "🐰", translation_es: "liebre", translation_en: "hare", example_de: "Der Hase läuft schnell über das Feld.", example_es: "La liebre corre rápido por el campo." },
                     { article: "der", word: "Markt", emoji: "🥕", translation_es: "mercado", translation_en: "market", example_de: "Der Markt ist am Samstag.", example_es: "El mercado es el sábado." },
                     { article: "der", word: "Park", emoji: "🌳", translation_es: "parque", translation_en: "park", example_de: "Ich gehe in den Park.", example_es: "Voy al parque." },
                     { article: "der", word: "Platz", emoji: "🏛️", translation_es: "plaza", translation_en: "square", example_de: "Der Platz ist sehr schön.", example_es: "La plaza es muy bonita." },
@@ -2912,7 +2977,7 @@
                 title_es: "Animales",
                 title_en: "Animals",
                 level: "A1",
-                nouns: pickThemeNouns(["das|tier", "der|bar", "der|frosch", "der|vogel", "der|fisch"])
+                nouns: pickThemeNouns(["der|bar", "der|frosch", "der|vogel", "der|fisch", "das|kaninchen", "der|hase"])
             },
             {
                 id: "haustiere",
@@ -3646,6 +3711,14 @@
         const modalFeminineBlock = document.getElementById('modal-feminine-block');
         const modalFeminineWord = document.getElementById('modal-feminine-word');
         const modalFeminineTranslation = document.getElementById('modal-feminine-translation');
+        const themeModal = document.getElementById('theme-modal');
+        const themeModalClose = document.getElementById('theme-modal-close');
+        const themeModalHeader = document.getElementById('theme-modal-header-bg');
+        const themeModalLevel = document.getElementById('theme-modal-level');
+        const themeModalWord = document.getElementById('theme-modal-word');
+        const themeModalTranslation = document.getElementById('theme-modal-translation');
+        const themeModalSubtitle = document.getElementById('theme-modal-subtitle');
+        const themeModalTableBody = document.getElementById('theme-modal-table-body');
 
         // Tips Modal
         const tipsBtn = document.getElementById('tips-btn');
@@ -3669,6 +3742,8 @@
             eltern: null,
             mobel: null
         };
+        let currentThemeModalGroup = null;
+        let currentThemeModalColor = 'var(--color-der)';
 
         // Initial Render
         function isLiDGroup(group) {
@@ -3741,6 +3816,10 @@
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) closeWordModal();
             });
+            themeModalClose.addEventListener('click', closeThemeModal);
+            themeModal.addEventListener('click', (e) => {
+                if (e.target === themeModal) closeThemeModal();
+            });
 
             tipsBtn.addEventListener('click', () => {
                 tipsModal.classList.add('visible');
@@ -3765,6 +3844,7 @@
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     closeWordModal();
+                    closeThemeModal();
                     tipsModal.classList.remove('visible');
                     settingsModal.classList.remove('visible');
                 }
@@ -3950,6 +4030,10 @@
             if (modal.classList.contains('visible') && currentModalNoun) {
                 renderModalContent(currentModalNoun, currentModalLevel);
             }
+
+            if (themeModal.classList.contains('visible') && currentThemeModalGroup) {
+                renderThemeModalContent(currentThemeModalGroup, currentThemeModalColor);
+            }
         }
 
         function setTranslationLanguage(lang) {
@@ -4004,6 +4088,43 @@
             return noun;
         }
 
+        function getPluralDisplay(noun) {
+            const singularVariant = getSingularVariant(noun);
+            if (singularVariant && singularVariant !== noun) {
+                return `${noun.article} ${noun.word}`;
+            }
+            return '—';
+        }
+
+        function renderThemeModalContent(group, color = 'var(--color-der)') {
+            if (!group) return;
+
+            currentThemeModalGroup = group;
+            currentThemeModalColor = color;
+
+            themeModalLevel.textContent = group.level || '';
+            themeModalWord.textContent = group.title || '';
+            themeModalTranslation.textContent = currentTranslationLang === 'en'
+                ? (group.title_en || '')
+                : (group.title_es || '');
+            themeModalSubtitle.textContent = 'Singular- und Pluralformen der Wörter in dieser Gruppe';
+            themeModalHeader.style.backgroundColor = color;
+
+            themeModalTableBody.innerHTML = group.nouns.map(noun => {
+                const singularVariant = getSingularVariant(noun);
+                const singularText = singularVariant ? `${singularVariant.article} ${singularVariant.word}` : '—';
+                const pluralText = getPluralDisplay(noun);
+
+                return `
+                    <tr>
+                        <td>${escapeHtml(`${noun.article} ${noun.word}`)}</td>
+                        <td>${escapeHtml(singularText)}</td>
+                        <td>${escapeHtml(pluralText)}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
         function renderModalContent(noun, level) {
             modalEmoji.textContent = noun.emoji;
             modalWord.innerHTML = `<span style="font-size:0.5em; display:block; margin-bottom:5px;">${noun.article}</span>${noun.word}`;
@@ -4055,6 +4176,16 @@
             currentModalNoun = null;
             currentModalLevel = '';
             modal.classList.remove('visible');
+        }
+
+        function openThemeModal(group, color) {
+            renderThemeModalContent(group, color);
+            themeModal.classList.add('visible');
+        }
+
+        function closeThemeModal() {
+            currentThemeModalGroup = null;
+            themeModal.classList.remove('visible');
         }
 
         function changeGroup(direction) {
@@ -4348,6 +4479,18 @@
                 translationSpan.dataset.es = titleEs || '';
                 translationSpan.dataset.en = titleEn || '';
                 translationSpan.innerHTML = highlightText(currentTranslationLang === 'en' ? (titleEn || '') : (titleEs || ''), highlightQuery);
+                translationSpan.style.cursor = 'pointer';
+                translationSpan.title = 'Mehr Infos / Abrir grupo';
+                translationSpan.onclick = (e) => {
+                    e.stopPropagation();
+                    openThemeModal({
+                        title: spokenTitle,
+                        title_es: titleEs || '',
+                        title_en: titleEn || '',
+                        level,
+                        nouns
+                    }, color);
+                };
                 headerMeta.appendChild(translationSpan);
             }
 
