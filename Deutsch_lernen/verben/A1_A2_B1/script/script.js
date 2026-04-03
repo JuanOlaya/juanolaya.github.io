@@ -24,7 +24,7 @@
             { key: 'A2_1', count: 13 },
             { key: 'A2_2', count: 14 }
         ],
-        'B1': [{ key: 'B1_1', count: 22 }],
+        'B1': [{ key: 'B1_1', count: 23 }],
         'B2': [{ key: 'B2_1', count: 13 }]
     };
     const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#3b82f6', '#ea580c', '#22C55E', '#a855f7', '#facc15'];
@@ -124,7 +124,7 @@
     const levelConfig = {
         'A1': { groupCount: 27, displayName: 'A1' },
         'A2': { groupCount: 27, displayName: 'A2' },
-        'B1': { groupCount: 22, displayName: 'B1' },
+        'B1': { groupCount: 23, displayName: 'B1' },
         'B2': { groupCount: 13, displayName: 'B2' }
     };
     const levelOrder = ['A1', 'A2', 'B1', 'B2'];
@@ -2685,7 +2685,7 @@
             ].filter(Boolean);
 
             let tableHTML = '<table>';
-            tableHTML += `<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel <span id="beispiel-mode-tag" class="beispiel-mode-tag">${beispielModes[0]?.label || 'Aussage'}</span><button id="toggle-beispiel-type" class="toggle-beispiel-btn" title="Beispielmodus wechseln">⇄</button></th></tr>`;
+            tableHTML += `<tr><th>Pron.</th><th>Konjugation</th><th>Beispiel <span id="beispiel-mode-tag" class="beispiel-mode-tag">${beispielModes[0]?.label || 'Aussage'}</span><button id="toggle-beispiel-type" class="toggle-beispiel-btn" title="Beispielmodus wechseln">⇄</button></th></tr>`;
 
             for (const { key, display, spanish } of pronounOrder) {
                 const conjugation = updatedData.praesens[key];
@@ -2730,7 +2730,7 @@
                     // Create pronoun cell with German pronoun and Spanish translation
                     let pronounCell = `<div class="pronoun-de">${display}</div>`;
                     if (spanish) {
-                        pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
+                    pronounCell += `<div class="pronoun-es">${spanish}</div>`;
                     }
 
                     // Add special classes for er/sie/es rows and hide conjugation for er and es
@@ -2833,7 +2833,7 @@
             ];
 
             let perfektTableHTML = '<table>';
-            perfektTableHTML += '<tr><th>Pronomen</th><th>Aux. Konjug.</th><th>Beispiel</th></tr>';
+            perfektTableHTML += '<tr><th>Pron.</th><th>Aux. Konjug.</th><th>Beispiel</th></tr>';
 
             for (const { key, display, spanish, auxIndex } of pronounOrder) {
                 const example = updatedData.perfekt_examples[key];
@@ -2851,7 +2851,7 @@
                     // Create pronoun cell with German pronoun and Spanish translation
                     let pronounCell = `<div class="pronoun-de">${display}</div>`;
                     if (spanish) {
-                        pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
+                    pronounCell += `<div class="pronoun-es">${spanish}</div>`;
                     }
 
                     // Get auxiliary verb conjugation
@@ -2902,7 +2902,7 @@
             ];
 
             let praeteritumTableHTML = '<table>';
-            praeteritumTableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel</th></tr>';
+            praeteritumTableHTML += '<tr><th>Pron.</th><th>Konjugation</th><th>Beispiel</th></tr>';
 
             for (const { key, display, spanish } of pronounOrder) {
                 const conjugation = updatedData.praeteritum_conjugations[key];
@@ -2922,7 +2922,7 @@
                     // Create pronoun cell with German pronoun and Spanish translation
                     let pronounCell = `<div class="pronoun-de">${display}</div>`;
                     if (spanish) {
-                        pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
+                    pronounCell += `<div class="pronoun-es">${spanish}</div>`;
                     }
 
                     // Add special classes for er/sie/es rows and hide conjugation for duplicates
@@ -2971,7 +2971,7 @@
             ];
 
             let konjunktivTableHTML = '<table>';
-            konjunktivTableHTML += '<tr><th>Pronomen</th><th>Konjugation</th><th>Beispiel</th></tr>';
+            konjunktivTableHTML += '<tr><th>Pron.</th><th>Konjugation</th><th>Beispiel</th></tr>';
 
             for (const { key, display, spanish } of pronounOrder) {
                 const conjugation = updatedData.konjunktiv_ii[key];
@@ -2981,7 +2981,7 @@
                     // Create pronoun cell with German pronoun and Spanish translation
                     let pronounCell = `<div class="pronoun-de">${display}</div>`;
                     if (spanish) {
-                        pronounCell += `<div class="pronoun-es">🇪🇸 ${spanish}</div>`;
+                    pronounCell += `<div class="pronoun-es">${spanish}</div>`;
                     }
 
                     // Create example cell with German, English, and Spanish

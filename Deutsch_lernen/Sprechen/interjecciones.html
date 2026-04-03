@@ -21,6 +21,7 @@
             --cat-acuerdo: #3b82f6;
             --cat-sorpresa: #a855f7;
             --cat-social: #10b981;
+            --cat-reacciones: #f97316;
             --cat-avisos: #ef4444;
 
             --level-a1: #3b82f6;
@@ -219,6 +220,10 @@
 
         .level-header.social {
             background: var(--cat-social);
+        }
+
+        .level-header.reacciones {
+            background: var(--cat-reacciones);
         }
 
         .level-header.avisos {
@@ -640,6 +645,12 @@
                 </table>
             </div>
             <div class="level-card">
+                <div class="level-header reacciones"><span id="titleReacciones">Reacciones</span><span>💥</span></div>
+                <table>
+                    <tbody id="group-reacciones"></tbody>
+                </table>
+            </div>
+            <div class="level-card">
                 <div class="level-header avisos"><span id="titleAvisos">Avisos</span><span>📢</span></div>
                 <table>
                     <tbody id="group-avisos"></tbody>
@@ -679,6 +690,7 @@
                 titleAcuerdo: "Acuerdo",
                 titleSorpresa: "Sorpresa",
                 titleSocial: "Social",
+                titleReacciones: "Reacciones",
                 titleAvisos: "Avisos",
                 naDef: "La navaja suiza del idioma. Cambia según el contexto.",
                 btnSpeak: "ESCUCHAR"
@@ -689,12 +701,14 @@
                 titleAcuerdo: "Agreement",
                 titleSorpresa: "Surprise",
                 titleSocial: "Social",
+                titleReacciones: "Reactions",
                 titleAvisos: "Warnings",
                 naDef: "The language's Swiss Army knife. Context is key.",
                 btnSpeak: "LISTEN"
             }
         };
 
+        // Rule: keep each main card at a maximum of 7 entries.
         const data = {
             acuerdo: [
                 { de: "Stimmt!", es: "¡Cierto! / Así es", en: "True! / Correct", lv: "A1", ex: [{ de: "Das ist richtig. Stimmt!", es: "Eso es correcto. ¡Así es!", en: "That is right. Correct!" }] },
@@ -757,11 +771,16 @@
                 { de: "Ebenfalls!", es: "¡Igualmente!", en: "Likewise! / Same to you", lv: "A1", ex: [{ de: "Schönen Tag noch! - Ebenfalls!", es: "¡Que tengas buen día! - ¡Igualmente!", en: "Have a nice day! - Likewise!" }] },
                 { de: "Schade!", es: "¡Qué lástima!", en: "What a pity!", lv: "A1", ex: [{ de: "Ich kann nicht kommen. - Schade!", es: "No puedo ir. - ¡Qué lástima!", en: "I can't come. - That's a pity!" }] },
                 { de: "Toll!", es: "¡Genial!", en: "Great! / Terrific", lv: "A1", ex: [{ de: "Das ist toll!", es: "¡Eso es genial!", en: "That is great!" }] },
+                { de: "Prima!", es: "¡Estupendo!", en: "Great! / Excellent!", lv: "A1", ex: [{ de: "Prima, dann gehen wir los!", es: "¡Estupendo!, entonces nos vamos.", en: "Great, then let's go!" }] },
+                { de: "Gesundheit!", es: "¡Salud!", en: "Bless you!", lv: "A1", ex: [{ de: "Hatschi! - Gesundheit!", es: "¡Achís! - ¡Salud!", en: "Achoo! - Bless you!" }] },
+                { de: "Mach's gut!", es: "¡Cuídate!", en: "Take care!", lv: "A2", ex: [{ de: "Bis morgen, mach's gut!", es: "Hasta mañana, ¡cuídate!", en: "See you tomorrow, take care!" }] }
+            ],
+            reacciones: [
                 { de: "Hoppla!", es: "¡Uy!", en: "Oops!", lv: "A1", ex: [{ de: "Hoppla, Entschuldigung!", es: "¡Uy, perdón!", en: "Oops, sorry!" }] },
                 { de: "Igitt!", es: "¡Qué asco!", en: "Yuck! / Gross", lv: "A1", ex: [{ de: "Igitt, das schmeckt nicht.", es: "¡Qué asco!, esto no sabe bien.", en: "Yuck, that doesn't taste good." }] },
                 { de: "Aua!", es: "¡Ay!", en: "Ouch!", lv: "A1", ex: [{ de: "Aua, mein Fuß!", es: "¡Ay, mi pie!", en: "Ouch, my foot!" }] },
-                { de: "Gesundheit!", es: "¡Salud!", en: "Bless you!", lv: "A1", ex: [{ de: "Hatschi! - Gesundheit!", es: "¡Achís! - ¡Salud!", en: "Achoo! - Bless you!" }] },
-                { de: "Mach's gut!", es: "¡Cuídate!", en: "Take care!", lv: "A2", ex: [{ de: "Bis morgen, mach's gut!", es: "Hasta mañana, ¡cuídate!", en: "See you tomorrow, take care!" }] }
+                { de: "Zum Glück!", es: "¡Menos mal!", en: "Luckily! / Thank goodness!", lv: "A2", ex: [{ de: "Zum Glück ist alles gut gegangen.", es: "¡Menos mal que todo salió bien!", en: "Luckily, everything went well." }] },
+                { de: "Scheiße!", es: "¡Mierda!", en: "Shit!", lv: "A2", ex: [{ de: "Scheiße, ich habe meinen Schlüssel vergessen!", es: "¡Mierda, olvidé mi llave!", en: "Shit, I forgot my key!" }] }
             ],
             avisos: [
                 { de: "Achtung!", es: "¡Atención!", en: "Attention! / Watch out", lv: "A1", ex: [{ de: "Achtung, die Tür schließt!", es: "¡Atención, la puerta se cierra!", en: "Attention, the door is closing!" }] },
@@ -825,6 +844,29 @@
                 card.appendChild(subtitle);
                 naGrid.appendChild(card);
             });
+        }
+
+        function applyTranslations() {
+            const langLabels = labels[currentLang];
+
+            document.getElementById('mainTitle').textContent = langLabels.mainTitle;
+            document.getElementById('mainDef').textContent = langLabels.mainDef;
+            document.getElementById('titleAcuerdo').textContent = langLabels.titleAcuerdo;
+            document.getElementById('titleSorpresa').textContent = langLabels.titleSorpresa;
+            document.getElementById('titleSocial').textContent = langLabels.titleSocial;
+            document.getElementById('titleReacciones').textContent = langLabels.titleReacciones;
+            document.getElementById('titleAvisos').textContent = langLabels.titleAvisos;
+            document.getElementById('naDef').textContent = langLabels.naDef;
+            document.getElementById('btnSpeakText').textContent = langLabels.btnSpeak;
+
+            document.getElementById('langEs').classList.toggle('active', currentLang === 'es');
+            document.getElementById('langEn').classList.toggle('active', currentLang === 'en');
+
+            populate();
+
+            if (currentModalItem) {
+                openWordModal(currentModalItem);
+            }
         }
 
         // --- MODAL LOGIC ---
@@ -967,6 +1009,7 @@
 
         function toggleLanguage() {
             currentLang = currentLang === 'es' ? 'en' : 'es';
+            applyTranslations();
         }
 
         async function playSpeech(text) {
@@ -1019,7 +1062,7 @@
 
         function hideStatus() { document.getElementById('statusBox').style.transform = 'translateY(150%)'; }
 
-        window.onload = populate;
+        window.onload = applyTranslations;
     </script>
 </body>
 
