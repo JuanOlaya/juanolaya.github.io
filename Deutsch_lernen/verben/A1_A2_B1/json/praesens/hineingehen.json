@@ -1,38 +1,60 @@
-[
-  {
-    "person": "ich",
-    "verb": "gehe hinein",
-    "example": "Ich gehe jetzt hinein.",
-    "es": "Voy adentro ahora."
+{
+  "praesens": {
+    "ich": "gehe hinein",
+    "du": "gehst hinein",
+    "er": "geht hinein",
+    "sie": "geht hinein",
+    "es": "geht hinein",
+    "wir": "gehen hinein",
+    "ihr": "geht hinein",
+    "sie (plural)": "gehen hinein",
+    "Sie (formal)": "gehen hinein"
   },
-  {
-    "person": "du",
-    "verb": "gehst hinein",
-    "example": "Gehst du schon hinein?",
-    "es": "¿Ya vas adentro?"
-  },
-  {
-    "person": "er/sie/es",
-    "verb": "geht hinein",
-    "example": "Er geht ins Haus hinein.",
-    "es": "Él entra en la casa."
-  },
-  {
-    "person": "wir",
-    "verb": "gehen hinein",
-    "example": "Wir gehen zusammen hinein.",
-    "es": "Entramos juntos."
-  },
-  {
-    "person": "ihr",
-    "verb": "geht hinein",
-    "example": "Geht ihr bitte hinein?",
-    "es": "¿Entráis por favor?"
-  },
-  {
-    "person": "sie/Sie",
-    "verb": "gehen hinein",
-    "example": "Sie gehen in den Saal hinein.",
-    "es": "Ellos entran en la sala."
+  "praesens_examples": {
+    "ich": {
+      "de": "Ich gehe jetzt ins Haus hinein.",
+      "en": "I am going into the house now.",
+      "es": "Entro ahora en la casa."
+    },
+    "du": {
+      "de": "Du gehst ohne Schuhe hinein.",
+      "en": "You go inside without shoes.",
+      "es": "Entras sin zapatos."
+    },
+    "er": {
+      "de": "Er geht schnell in den Laden hinein.",
+      "en": "He goes quickly into the shop.",
+      "es": "Él entra rápido en la tienda."
+    },
+    "sie": {
+      "de": "Sie geht zuerst in die Küche hinein.",
+      "en": "She goes into the kitchen first.",
+      "es": "Ella entra primero en la cocina."
+    },
+    "es": {
+      "de": "Das Kind geht allein ins Zimmer hinein.",
+      "en": "The child goes into the room alone.",
+      "es": "El niño entra solo en la habitación."
+    },
+    "wir": {
+      "de": "Wir gehen zusammen ins Kino hinein.",
+      "en": "We go into the cinema together.",
+      "es": "Entramos juntos en el cine."
+    },
+    "ihr": {
+      "de": "Ihr geht durch diese Tür hinein.",
+      "en": "You go in through this door.",
+      "es": "Entráis por esta puerta."
+    },
+    "sie (plural)": {
+      "de": "Sie gehen bei Regen ins Café hinein.",
+      "en": "They go into the café when it rains.",
+      "es": "Ellos entran en el café cuando llueve."
+    },
+    "Sie (formal)": {
+      "de": "Sie gehen bitte gleich ins Büro hinein.",
+      "en": "Please go into the office right away.",
+      "es": "Entre usted ahora mismo en la oficina, por favor."
+    }
   }
-]
+}

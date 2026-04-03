@@ -1,0 +1,237 @@
+# Reporte de Ejemplos de Präsens
+
+Fecha: 2026-04-03
+
+Total de verbos auditados: 498
+
+## Präsens Aussage
+
+- Archivos faltantes: 9
+- Archivos incompletos: 60
+- Total con problemas: 69
+- Completos: 429
+
+### Archivos faltantes
+
+- auslegen
+- beeinflussen
+- bestimmen
+- einhalten
+- engagieren
+- investieren
+- stecken
+- verschwinden
+- wirtschaften
+
+### Verbos con los 9 ejemplos faltantes
+
+- ablehnen
+- absichern
+- anklagen
+- anmelden
+- anwenden
+- argumentieren
+- atmen
+- aufregen
+- ausleihen
+- befördern
+- begeistern
+- behaupten
+- belegen
+- beruhigen
+- beschäftigen
+- besitzen
+- bestrafen
+- bluten
+- brennen
+- darlegen
+- einordnen
+- einwenden
+- entdecken
+- entgegnen
+- entlassen
+- enttäuschen
+- erfinden
+- erfolgen
+- erledigen
+- feststellen
+- fliehen
+- frieren
+- fürchten
+- gelten
+- hineingehen
+- klagen
+- klassifizieren
+- kontrollieren
+- lehren
+- mitteilen
+- optimieren
+- regulieren
+- schwitzen
+- stimmen
+- streiken
+- überprüfen
+- überwachen
+- validieren
+- verhandeln
+- verleihen
+- vermeiden
+- veröffentlichen
+- verstecken
+- verteidigen
+- vertreten
+- verurteilen
+- verwandeln
+- warnen
+- widerlegen
+- zustimmen
+
+## Präsens Frage
+
+- Archivos faltantes: 32
+- Archivos incompletos: 105
+- Total con problemas: 137
+- Completos: 361
+
+### Archivos faltantes
+
+- absagen
+- anmelden
+- aufsuchen
+- auslegen
+- beeinflussen
+- bestimmen
+- drücken
+- einhalten
+- einmachen
+- einstellen
+- engagieren
+- erfolgen
+- fallen
+- hassen
+- installieren
+- investieren
+- laufen
+- mitteilen
+- planen
+- reparieren
+- schmerzen
+- spenden
+- stecken
+- stehlen
+- tanzen
+- treiben
+- verbinden
+- verschwinden
+- verwandeln
+- vorhaben
+- wirtschaften
+- zurückbringen
+
+### Verbos con los 9 ejemplos faltantes
+
+- ablehnen
+- abnehmen
+- absichern
+- ähneln
+- anklagen
+- anwenden
+- ärgern
+- argumentieren
+- atmen
+- aufgeben
+- aufregen
+- ausleihen
+- beantragen
+- befehlen
+- befördern
+- begegnen
+- begeistern
+- begrüßen
+- behandeln
+- behaupten
+- belegen
+- beruhigen
+- beschäftigen
+- besitzen
+- bestrafen
+- betrügen
+- beurteilen
+- bluten
+- brennen
+- darlegen
+- dienen
+- einordnen
+- einwenden
+- einziehen
+- empfangen
+- entdecken
+- entgegnen
+- entlassen
+- entschließen
+- enttäuschen
+- entwickeln
+- erfinden
+- erhalten
+- erleben
+- erledigen
+- erscheinen
+- feststellen
+- fliehen
+- frieren
+- frühstücken
+- fürchten
+- gelten
+- gründen
+- heilen
+- hineingehen
+- holen
+- kämpfen
+- klagen
+- klassifizieren
+- kontrollieren
+- kritisieren
+- kündigen
+- lehren
+- leiten
+- loben
+- merken
+- optimieren
+- organisieren
+- pflegen
+- regulieren
+- retten
+- scheitern
+- schwitzen
+- senden
+- siegen
+- sinken
+- spielen
+- springen
+- steigen
+- stimmen
+- streiken
+- überprüfen
+- überwachen
+- unterscheiden
+- validieren
+- verabschieden
+- verhandeln
+- verleihen
+- verletzen
+- vermeiden
+- veröffentlichen
+- verstecken
+- verteidigen
+- vertreten
+- verurteilen
+- warnen
+- werfen
+- widerlegen
+- widersprechen
+- wiederholen
+- wirken
+- zahlen
+- zunehmen
+- zustimmen
+- zwingen
