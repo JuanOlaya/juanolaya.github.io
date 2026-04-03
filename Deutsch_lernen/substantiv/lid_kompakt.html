@@ -1576,6 +1576,7 @@
                                         "w": "Gericht",
                                         "e": "⚖️",
                                         "tr": "tribunal",
+                                        "card_tr": "Corte<br>Tribunal",
                                         "modal_tr": "tribunal / corte",
                                         "ex": "Das Gericht spricht ein Urteil.",
                                         "ex_es": "El tribunal dicta una sentencia."
@@ -2199,6 +2200,7 @@
         }
 
         function getCardTranslation(item) {
+            if (item.card_tr) return item.card_tr;
             const translation = (item.tr || "").trim();
             if (!translation.includes('/')) return translation;
 
