@@ -208,6 +208,35 @@
             align-self: center;
         }
 
+        .time-card .subtime-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .time-card .subtime-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 5px 9px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.28);
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .time-card .usage-note {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+            align-self: center;
+            margin-top: 4px;
+            line-height: 1.2;
+        }
+
         /* --- Section 2: Wochentage --- */
         .week-grid {
             display: grid;
@@ -475,6 +504,10 @@
                 <div class="emoji">☀️</div>
                 <div class="article-word">der Tag</div>
                 <div class="greeting">Guten Tag!</div>
+                <div class="subtime-badges">
+                    <span class="subtime-badge">Vormittag 10:00 - 12:00</span>
+                    <span class="subtime-badge">Nachmittag 12:00 - 17:00</span>
+                </div>
             </div>
             <div class="time-card abend" onclick="speak('der Abend')">
                 <span class="time-range">17:00 - 22:00</span>
@@ -487,6 +520,7 @@
                 <div class="emoji">🌙</div>
                 <div class="article-word">die Nacht</div>
                 <div class="greeting">Gute Nacht!</div>
+                <div class="usage-note">despedida antes de dormir</div>
             </div>
         </div>
 
