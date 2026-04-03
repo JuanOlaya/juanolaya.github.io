@@ -687,6 +687,16 @@
             font-style: italic;
         }
 
+        .modal-note {
+            margin-top: 12px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #cbd5e1;
+            border: 1px solid #334155;
+            line-height: 1.6;
+        }
+
         /* Tips Modal Specifics */
         #tips-modal .modal-content {
             max-width: 800px;
@@ -1390,6 +1400,10 @@
                 <div class="modal-emoji" id="modal-emoji"></div>
                 <div class="modal-word" id="modal-word"></div>
                 <div class="modal-translation" id="modal-translation"></div>
+                <div class="modal-variant" id="modal-singular-block">
+                    <div class="modal-variant-label">Singular / Plural</div>
+                    <div class="modal-variant-word" id="modal-singular-word"></div>
+                </div>
                 <div class="modal-variant" id="modal-feminine-block" hidden>
                     <div class="modal-variant-label">Femininum / Forma femenina</div>
                     <div class="modal-variant-word" id="modal-feminine-word"></div>
@@ -1402,6 +1416,10 @@
                     <div class="modal-example-de" id="modal-example-de"></div>
                     <div class="modal-example-es" id="modal-example-es"></div>
                 </div>
+            </div>
+            <div class="modal-section" id="modal-note-block" hidden>
+                <div class="modal-section-title">Hinweis / Nota</div>
+                <div class="modal-note" id="modal-note-text"></div>
             </div>
         </div>
     </div>
@@ -1668,6 +1686,7 @@
                     { article: "der", word: "Markt", emoji: "🥕", translation_es: "mercado", translation_en: "market", example_de: "Der Markt ist am Samstag.", example_es: "El mercado es el sábado." },
                     { article: "der", word: "Park", emoji: "🌳", translation_es: "parque", translation_en: "park", example_de: "Ich gehe in den Park.", example_es: "Voy al parque." },
                     { article: "der", word: "Platz", emoji: "🏛️", translation_es: "plaza", translation_en: "square", example_de: "Der Platz ist sehr schön.", example_es: "La plaza es muy bonita." },
+                    { article: "der", word: "Bär", emoji: "🐻", translation_es: "oso", translation_en: "bear", example_de: "Der Bär lebt im Wald.", example_es: "El oso vive en el bosque." },
                     { article: "der", word: "Zug", emoji: "🚆", translation_es: "tren", translation_en: "train", example_de: "Der Zug ist schnell.", example_es: "El tren es rápido." },
                     { article: "die", word: "Bank", emoji: "🏦", translation_es: "banco", translation_en: "bank", example_de: "Ich gehe zur Bank.", example_es: "Voy al banco." },
                     { article: "die", word: "Blume", emoji: "🌸", translation_es: "flor", translation_en: "flower", example_de: "Die Blume ist schön.", example_es: "La flor es bonita." },
@@ -1678,6 +1697,7 @@
                     { article: "die", word: "Schule", emoji: "🏫", translation_es: "escuela", translation_en: "school", example_de: "Die Schule beginnt um 8 Uhr.", example_es: "La escuela empieza a las 8." },
                     { article: "die", word: "Sonne", emoji: "☀️", translation_es: "sol", translation_en: "sun", example_de: "Die Sonne scheint.", example_es: "El sol brilla." },
                     { article: "die", word: "Stadt", emoji: "🏙️", translation_es: "ciudad", translation_en: "city", example_de: "Ich wohne in der Stadt.", example_es: "Vivo en la ciudad." },
+                    { article: "der", word: "Frosch", emoji: "🐸", translation_es: "rana", translation_en: "frog", example_de: "Der Frosch sitzt am Wasser.", example_es: "La rana está junto al agua." },
                     { article: "der", word: "Lärm", emoji: "🔊", translation_es: "ruido", translation_en: "noise", example_de: "Der Lärm auf der Straße ist laut.", example_es: "El ruido en la calle es fuerte." },
                     { article: "die", word: "Straße", emoji: "🛣️", translation_es: "calle", translation_en: "street", example_de: "Die Straße ist lang.", example_es: "La calle es larga." },
                     { article: "die", word: "Wohnung", emoji: "🏠", translation_es: "apartamento", translation_en: "apartment", example_de: "Meine Wohnung ist klein.", example_es: "Mi apartamento es pequeño." },
@@ -2227,6 +2247,7 @@
                 { article: "der", word: "Eimer", emoji: "🪣", translation_es: "cubo", translation_en: "bucket", example_de: "Der Eimer ist voll Wasser.", example_es: "El cubo está lleno de agua." },
                 { article: "der", word: "Dinkel", emoji: "🌾", translation_es: "espelta", translation_en: "spelt", example_de: "Dinkel ist ein gesundes Getreide.", example_es: "La espelta es un cereal saludable." },
                 { article: "der", word: "Zahnarzt", emoji: "🦷", translation_es: "odontólogo", translation_en: "dentist", example_de: "Der Zahnarzt kontrolliert meine Zähne.", example_es: "El odontólogo revisa mis dientes." },
+                { article: "die", word: "Pflegefachkraft", emoji: "🩺", translation_es: "profesional de enfermería", translation_en: "nursing professional", example_de: "Die Pflegefachkraft betreut die Patienten im Krankenhaus.", example_es: "La profesional de enfermería atiende a los pacientes en el hospital." },
                 { article: "die", word: "Zahnärztin", emoji: "🦷", translation_es: "odontóloga", translation_en: "dentist", example_de: "Die Zahnärztin arbeitet in einer Praxis.", example_es: "La odontóloga trabaja en una consulta." },
                 { article: "die", word: "Decke", emoji: "🛏️", translation_es: "manta", translation_en: "blanket", example_de: "Die Decke ist warm.", example_es: "La manta está caliente." },
                 { article: "das", word: "Kissen", emoji: "🛏️", translation_es: "almohada", translation_en: "pillow", example_de: "Das Kissen liegt auf dem Bett.", example_es: "La almohada está sobre la cama." },
@@ -2699,7 +2720,7 @@
                 title_es: "Profesiones médicas",
                 title_en: "Medical jobs",
                 level: "A1",
-                nouns: pickThemeNouns(["der|arzt", "der|krankenpfleger", "der|zahnarzt", "der|notarzt"])
+                nouns: pickThemeNouns(["der|arzt", "der|krankenpfleger", "die|pflegefachkraft", "der|zahnarzt", "der|notarzt"])
             },
             {
                 id: "lehre",
@@ -2891,7 +2912,7 @@
                 title_es: "Animales",
                 title_en: "Animals",
                 level: "A1",
-                nouns: pickThemeNouns(["das|tier", "der|hund", "die|katze"])
+                nouns: pickThemeNouns(["das|tier", "der|bar", "der|frosch", "der|vogel", "der|fisch"])
             },
             {
                 id: "haustiere",
@@ -2899,7 +2920,7 @@
                 title_es: "Mascotas",
                 title_en: "Pets",
                 level: "A1",
-                nouns: pickThemeNouns(["der|vogel", "der|fisch", "der|hamster", "das|haustier"])
+                nouns: pickThemeNouns(["der|hund", "die|katze", "der|hamster"])
             },
             {
                 id: "bauernhof",
@@ -3618,6 +3639,10 @@
         const modalLevel = document.getElementById('modal-level');
         const modalExampleDe = document.getElementById('modal-example-de');
         const modalExampleEs = document.getElementById('modal-example-es');
+        const modalNoteBlock = document.getElementById('modal-note-block');
+        const modalNoteText = document.getElementById('modal-note-text');
+        const modalSingularBlock = document.getElementById('modal-singular-block');
+        const modalSingularWord = document.getElementById('modal-singular-word');
         const modalFeminineBlock = document.getElementById('modal-feminine-block');
         const modalFeminineWord = document.getElementById('modal-feminine-word');
         const modalFeminineTranslation = document.getElementById('modal-feminine-translation');
@@ -3631,6 +3656,19 @@
         const settingsClose = document.getElementById('settings-close');
         const rawNonLiDNounsByKey = window.rawNonLiDNounsByKey || new Map();
         const feminineVariantLookup = window.feminineVariantKeyByWord || {};
+        const singularVariantKeyByWord = {
+            kekse: 'der|keks',
+            offnungszeiten: 'die|offnungszeit',
+            neuigkeiten: 'die|neuigkeit',
+            nachrichten: 'die|nachricht',
+            unterlagen: 'die|unterlage',
+            grundrechte: 'das|grundrecht',
+            gerichte: 'das|gericht',
+            geschwister: null,
+            kosten: null,
+            eltern: null,
+            mobel: null
+        };
 
         // Initial Render
         function isLiDGroup(group) {
@@ -3949,6 +3987,23 @@
             return rawNonLiDNounsByKey.get(normalizeSearchText(feminineKey)) || null;
         }
 
+        function getSingularVariant(noun) {
+            if (!noun) {
+                return null;
+            }
+
+            const normalizedWord = normalizeSearchText(noun.word);
+            if (Object.prototype.hasOwnProperty.call(singularVariantKeyByWord, normalizedWord)) {
+                const singularKey = singularVariantKeyByWord[normalizedWord];
+                if (!singularKey) {
+                    return null;
+                }
+                return rawNonLiDNounsByKey.get(normalizeSearchText(singularKey)) || null;
+            }
+
+            return noun;
+        }
+
         function renderModalContent(noun, level) {
             modalEmoji.textContent = noun.emoji;
             modalWord.innerHTML = `<span style="font-size:0.5em; display:block; margin-bottom:5px;">${noun.article}</span>${noun.word}`;
@@ -3957,6 +4012,15 @@
             modalExampleDe.textContent = noun.example_de || '-';
             modalExampleEs.textContent = noun.example_es || '-';
             modalHeader.style.backgroundColor = getColorForArticle(noun.article);
+
+            const singularVariant = getSingularVariant(noun);
+            if (singularVariant) {
+                modalSingularBlock.hidden = false;
+                modalSingularWord.textContent = `${singularVariant.article} ${singularVariant.word}`;
+            } else {
+                modalSingularBlock.hidden = true;
+                modalSingularWord.textContent = '';
+            }
 
             const feminineVariant = getFeminineVariant(noun);
             if (feminineVariant) {
@@ -3969,6 +4033,14 @@
                 modalFeminineBlock.hidden = true;
                 modalFeminineWord.textContent = '';
                 modalFeminineTranslation.textContent = '';
+            }
+
+            if (normalizeSearchText(noun.word) === 'krankenschwester') {
+                modalNoteBlock.hidden = false;
+                modalNoteText.textContent = 'Krankenschwester se entiende perfectamente, pero hoy también se usa mucho die Pflegefachkraft en contextos más modernos y neutrales.';
+            } else {
+                modalNoteBlock.hidden = true;
+                modalNoteText.textContent = '';
             }
         }
 
