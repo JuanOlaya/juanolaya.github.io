@@ -2863,6 +2863,41 @@
                                 "trans": "La agenda del hombre ocupado está llena."
                             }
                         ]
+                    },
+                    {
+                        "word": "ruhig",
+                        "emoji": "🤫",
+                        "spanish": "(tranquilo)",
+                        "english": "calm / quiet",
+                        "example_de": "Bleib bitte ruhig.",
+                        "example_es": "Por favor, mantente tranquilo.",
+                        "level": "A1-A2",
+                        "cases": [
+                            {
+                                "case": "Nominativ",
+                                "level": "A1",
+                                "sentence": "Ein ruhiger Ort ist entspannend.",
+                                "trans": "Un lugar tranquilo es relajante."
+                            },
+                            {
+                                "case": "Akkusativ",
+                                "level": "A2",
+                                "sentence": "Sie sucht ein ruhiges Zimmer.",
+                                "trans": "Ella busca una habitación tranquila."
+                            },
+                            {
+                                "case": "Dativ",
+                                "level": "A2",
+                                "sentence": "An einem ruhigen Tag lese ich.",
+                                "trans": "En un día tranquilo leo."
+                            },
+                            {
+                                "case": "Genitiv",
+                                "level": "B1",
+                                "sentence": "Die Kraft des ruhigen Meeres ist tief.",
+                                "trans": "La fuerza del mar tranquilo es profunda."
+                            }
+                        ]
                     }
                 ]
             },
@@ -3015,37 +3050,37 @@
                         ]
                     },
                     {
-                        "word": "ruhig",
-                        "emoji": "🤫",
-                        "spanish": "(tranquilo)",
-                        "english": "calm / quiet",
-                        "example_de": "Bleib bitte ruhig.",
-                        "example_es": "Por favor, mantente tranquilo.",
-                        "level": "A1-A2",
+                        "word": "froh",
+                        "emoji": "🙂",
+                        "spanish": "(feliz/contento)",
+                        "english": "glad / happy",
+                        "example_de": "Ich bin froh, dass du da bist.",
+                        "example_es": "Estoy contento de que estés aquí.",
+                        "level": "A2-B1",
                         "cases": [
                             {
                                 "case": "Nominativ",
                                 "level": "A1",
-                                "sentence": "Ein ruhiger Ort ist entspannend.",
-                                "trans": "Un lugar tranquilo es relajante."
+                                "sentence": "Der frohe Besucher lacht laut.",
+                                "trans": "El visitante contento se ríe fuerte."
                             },
                             {
                                 "case": "Akkusativ",
                                 "level": "A2",
-                                "sentence": "Sie sucht ein ruhiges Zimmer.",
-                                "trans": "Ella busca una habitación tranquila."
+                                "sentence": "Wir begrüßen den frohen Gewinner.",
+                                "trans": "Recibimos al ganador contento."
                             },
                             {
                                 "case": "Dativ",
                                 "level": "A2",
-                                "sentence": "An einem ruhigen Tag lese ich.",
-                                "trans": "En un día tranquilo leo."
+                                "sentence": "Mit einer frohen Stimme ruft sie an.",
+                                "trans": "Llama con una voz contenta."
                             },
                             {
                                 "case": "Genitiv",
                                 "level": "B1",
-                                "sentence": "Die Kraft des ruhigen Meeres ist tief.",
-                                "trans": "La fuerza del mar tranquilo es profunda."
+                                "sentence": "Das Lachen des frohen Kindes ist ansteckend.",
+                                "trans": "La risa del niño contento es contagiosa."
                             }
                         ]
                     },
@@ -4738,13 +4773,16 @@
 
                     // Filter Logic
                     if (query) {
+                        const queryLower = query.toLowerCase();
+                        const groupTitleMatch = formatGroupTitle(group.title).toLowerCase().includes(queryLower);
+                        const groupDescriptionMatch = getGroupTranslation(group).toLowerCase().includes(queryLower);
                         const hasMatch = chunk.some(adj => {
-                            const matchDe = adj.word.toLowerCase().includes(query.toLowerCase());
-                            const matchEs = adj.spanish.toLowerCase().includes(query.toLowerCase());
-                            const matchEn = adj.english ? adj.english.toLowerCase().includes(query.toLowerCase()) : false;
+                            const matchDe = adj.word.toLowerCase().includes(queryLower);
+                            const matchEs = adj.spanish.toLowerCase().includes(queryLower);
+                            const matchEn = adj.english ? adj.english.toLowerCase().includes(queryLower) : false;
                             return matchDe || matchEs || matchEn;
                         });
-                        if (!hasMatch) continue;
+                        if (!hasMatch && !groupTitleMatch && !groupDescriptionMatch) continue;
                     }
 
                     const card = createCardElement(group, chunk, i, chunkSize, query);
@@ -4946,6 +4984,12 @@
 
             // Filter
             const filteredGroups = adjectiveGroups.filter(group => {
+                const groupTitleMatch = formatGroupTitle(group.title).toLowerCase().includes(query);
+                const groupDescriptionMatch = getGroupTranslation(group).toLowerCase().includes(query);
+                if (groupTitleMatch || groupDescriptionMatch) {
+                    return true;
+                }
+
                 return group.adjectives.some(adj => {
                     const matchDe = adj.word.toLowerCase().includes(query);
                     const matchEs = adj.spanish.toLowerCase().includes(query);
