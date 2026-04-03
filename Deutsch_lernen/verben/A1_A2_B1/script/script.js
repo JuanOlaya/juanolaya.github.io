@@ -139,7 +139,7 @@
     let modalDeferredLoadToken = 0;
     let storyClickCounter = 0;
     let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
-    const CACHE_KEY = 'verbAppCache_v39_lightweight_cards';
+    const CACHE_KEY = 'verbAppCache_v40_lightweight_cards';
     const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
     let cachePersistTimeout = null;
     let cachePersistenceDisabled = false;
@@ -860,11 +860,19 @@
         return '';
     }
 
+    function normalizeSearchValue(value) {
+        if (value === null || value === undefined) return '';
+        return String(value)
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase();
+    }
+
     function findMatchingWordInText(text, searchTerm) {
         if (!text || typeof text !== 'string') return '';
         const normalized = text.replace(/[()]/g, '');
         const words = normalized.split(/[\s,/]+/).filter(Boolean);
-        return words.find(word => word.toLowerCase().startsWith(searchTerm)) || '';
+        return words.find(word => normalizeSearchValue(word).startsWith(searchTerm)) || '';
     }
 
     function getAllSearchGroupEntries() {
@@ -3089,7 +3097,7 @@
     async function performSearch() {
         if (!searchInput) return;
 
-        const searchTerm = searchInput.value.trim().toLowerCase();
+        const searchTerm = normalizeSearchValue(searchInput.value.trim());
 
         // Unified Search: We now search both Verbs and Wortfamilie
 
@@ -3144,13 +3152,13 @@
             if (!group || !Array.isArray(group.verbs)) continue;
 
             // Check if group name matches search term (German, Spanish, or English)
-            const groupNameMatch = (group.theme && group.theme.toLowerCase().includes(searchTerm)) ||
-                (group.germanName && group.germanName.toLowerCase().includes(searchTerm)) ||
-                (group.spanishName && group.spanishName.toLowerCase().includes(searchTerm)) ||
-                (group.englishName && group.englishName.toLowerCase().includes(searchTerm)) ||
-                (group.groupNameGerman && group.groupNameGerman.toLowerCase().includes(searchTerm)) ||
-                (group.groupNameSpanish && group.groupNameSpanish.toLowerCase().includes(searchTerm)) ||
-                (group.groupNameEnglish && group.groupNameEnglish.toLowerCase().includes(searchTerm));
+            const groupNameMatch = (group.theme && normalizeSearchValue(group.theme).includes(searchTerm)) ||
+                (group.germanName && normalizeSearchValue(group.germanName).includes(searchTerm)) ||
+                (group.spanishName && normalizeSearchValue(group.spanishName).includes(searchTerm)) ||
+                (group.englishName && normalizeSearchValue(group.englishName).includes(searchTerm)) ||
+                (group.groupNameGerman && normalizeSearchValue(group.groupNameGerman).includes(searchTerm)) ||
+                (group.groupNameSpanish && normalizeSearchValue(group.groupNameSpanish).includes(searchTerm)) ||
+                (group.groupNameEnglish && normalizeSearchValue(group.groupNameEnglish).includes(searchTerm));
 
             if (groupNameMatch && !hasCachedGroup(levelKey, groupIndexInLevel)) {
                 try {
