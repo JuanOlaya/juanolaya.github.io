@@ -3,24 +3,39 @@
   "praesens": {
     "ich": "bleibe",
     "du": "bleibst",
-    "wir": "bleiben",
-    "ihr": "bleibt",
     "er": "bleibt",
     "sie": "bleibt",
     "es": "bleibt",
+    "wir": "bleiben",
+    "ihr": "bleibt",
     "sie (plural)": "bleiben",
     "Sie (formal)": "bleiben"
   },
   "praesens_examples": {
     "ich": {
       "de": "Ich bleibe heute zu Hause.",
-      "en": "I'm staying home today.",
+      "en": "I stay at home today.",
       "es": "Hoy me quedo en casa."
     },
     "du": {
-      "en": "You stay here for a long time today.",
       "de": "Du bleibst heute noch lange hier.",
+      "en": "You stay here for a long time today.",
       "es": "Te quedas aquí mucho rato hoy."
+    },
+    "er": {
+      "de": "Er bleibt im Bett, weil er krank ist.",
+      "en": "He stays in bed because he is sick.",
+      "es": "Él se queda en la cama porque está enfermo."
+    },
+    "sie": {
+      "de": "Sie bleibt nach der Arbeit noch kurz im Büro.",
+      "en": "She stays in the office a bit after work.",
+      "es": "Ella se queda un rato en la oficina después del trabajo."
+    },
+    "es": {
+      "de": "Das Essen bleibt im Ofen warm.",
+      "en": "The food stays warm in the oven.",
+      "es": "La comida se queda caliente en el horno."
     },
     "wir": {
       "de": "Wir bleiben Freunde.",
@@ -28,34 +43,19 @@
       "es": "Seguimos siendo amigos."
     },
     "ihr": {
-      "en": "You stay for dinner.",
       "de": "Ihr bleibt zum Abendessen.",
+      "en": "You stay for dinner.",
       "es": "Os quedáis a cenar."
     },
-    "er": {
-      "de": "Er bleibt im Bett.",
-      "en": "He is staying in bed.",
-      "es": "Él se queda en la cama."
-    },
-    "sie": {
-      "de": "Er bleibt im Bett.",
-      "en": "He is staying in bed.",
-      "es": "Él se queda en la cama."
-    },
-    "es": {
-      "de": "Er bleibt im Bett.",
-      "en": "He is staying in bed.",
-      "es": "Él se queda en la cama."
-    },
     "sie (plural)": {
-      "de": "Sie bleiben über Nacht.",
-      "en": "They are staying overnight.",
-      "es": "Se quedan a pasar la noche."
+      "de": "Sie bleiben über Nacht bei uns.",
+      "en": "They stay overnight with us.",
+      "es": "Ellos se quedan a dormir con nosotros."
     },
     "Sie (formal)": {
-      "de": "Sie bleiben über Nacht.",
-      "en": "They are staying overnight.",
-      "es": "Se quedan a pasar la noche."
+      "de": "Sie bleiben heute im Hotel.",
+      "en": "You stay at the hotel today.",
+      "es": "Usted se queda hoy en el hotel."
     }
   }
 }
