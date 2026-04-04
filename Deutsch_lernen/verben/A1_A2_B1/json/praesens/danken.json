@@ -2,24 +2,39 @@
   "praesens": {
     "ich": "danke",
     "du": "dankst",
-    "wir": "danken",
-    "ihr": "dankt",
     "er": "dankt",
     "sie": "dankt",
     "es": "dankt",
+    "wir": "danken",
+    "ihr": "dankt",
     "sie (plural)": "danken",
     "Sie (formal)": "danken"
   },
   "praesens_examples": {
     "ich": {
       "de": "Ich danke Ihnen für die Einladung.",
-      "en": "I thank you (formal) for the invitation.",
+      "en": "I thank you for the invitation.",
       "es": "Le agradezco la invitación."
     },
     "du": {
-      "de": "Ich weiß nicht, wie ich dir danke.",
-      "en": "I don't know how to thank you.",
-      "es": "No sé cómo agradecerte."
+      "de": "Du dankst deiner Mutter für das Essen.",
+      "en": "You thank your mother for the meal.",
+      "es": "Le agradeces a tu madre la comida."
+    },
+    "er": {
+      "de": "Er dankt seinem Freund für die Hilfe.",
+      "en": "He thanks his friend for the help.",
+      "es": "Él le agradece a su amigo la ayuda."
+    },
+    "sie": {
+      "de": "Sie dankt dem Arzt nach dem Termin.",
+      "en": "She thanks the doctor after the appointment.",
+      "es": "Ella le da las gracias al médico después de la cita."
+    },
+    "es": {
+      "de": "Das Kind dankt der Oma für das Geschenk.",
+      "en": "The child thanks grandma for the gift.",
+      "es": "El niño le da las gracias a la abuela por el regalo."
     },
     "wir": {
       "de": "Wir danken für Ihr Verständnis.",
@@ -27,34 +42,19 @@
       "es": "Agradecemos su comprensión."
     },
     "ihr": {
-      "en": "You also thank him for the help.",
       "de": "Ihr dankt ihm auch für die Hilfe.",
+      "en": "You also thank him for the help.",
       "es": "También le dais las gracias por la ayuda."
     },
-    "er": {
-      "de": "Er dankt seinem Freund für die Hilfe.",
-      "en": "He thanks his friend for the help.",
-      "es": "Él agradece a su amigo por la ayuda."
-    },
-    "sie": {
-      "de": "Er dankt seinem Freund für die Hilfe.",
-      "en": "He thanks his friend for the help.",
-      "es": "Él agradece a su amigo por la ayuda."
-    },
-    "es": {
-      "de": "Er dankt seinem Freund für die Hilfe.",
-      "en": "He thanks his friend for the help.",
-      "es": "Él agradece a su amigo por la ayuda."
-    },
     "sie (plural)": {
-      "de": "Sie danken dem Arzt.",
-      "en": "They thank the doctor.",
-      "es": "Ellos agradecen al médico."
+      "de": "Sie danken dem Lehrer am Ende des Kurses.",
+      "en": "They thank the teacher at the end of the course.",
+      "es": "Ellos le dan las gracias al profesor al final del curso."
     },
     "Sie (formal)": {
-      "de": "Sie danken dem Arzt.",
-      "en": "They thank the doctor.",
-      "es": "Ellos agradecen al médico."
+      "de": "Sie danken der Kollegin für die Information.",
+      "en": "You thank your colleague for the information.",
+      "es": "Usted le agradece a la colega la información."
     }
   }
 }
