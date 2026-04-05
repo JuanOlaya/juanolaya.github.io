@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Politische System Deutschlands - Estructura</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .node {
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        .node:hover {
+            transform: scale(1.02);
+            filter: brightness(1.05);
+        }
+        .federal-bg { background-color: #1e3a8a; color: white; }
+        .state-bg { background-color: #0f766e; color: white; }
+        .head-bg { background-color: #065f46; color: white; }
+        .court-bg { background-color: #c2410c; color: white; }
+        .people-bg { background-color: #334155; color: white; }
+        .opp-bg { background-color: #475569; color: white; }
+        
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        /* Estilo para el texto de las flechas (Regla: Alemán arriba, Español abajo) */
+        .arrow-text {
+            font-size: 13px;
+            fill: #1e293b;
+            font-weight: 800;
+            paint-order: stroke;
+            stroke: #ffffff;
+            stroke-width: 5px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .container-main {
+            position: relative;
+            min-height: 1200px;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="mb-12 text-center">
+        <h1 class="text-3xl font-bold text-slate-800 uppercase tracking-tight">Das Politische System Deutschlands</h1>
+        <p class="text-xl text-slate-600">Struktur für den Einbürgerungstest (Estructura para el examen)</p>
+    </header>
+
+    <div class="max-w-6xl mx-auto container-main grid grid-cols-12 gap-4">
+        
+        <!-- TOP: THE PEOPLE (Deutschland / das Volk) -->
+        <div id="people" class="col-start-5 col-span-4 flex flex-col items-center p-6 rounded-2xl shadow-xl node people-bg z-10 border-4 border-slate-400">
+            <svg class="w-12 h-12 mb-2" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+            <span class="font-bold text-lg text-center uppercase tracking-wider">DEUTSCHLAND</span>
+            <span class="text-md font-semibold">(das Volk)</span>
+            <span class="text-xs opacity-90 mt-1">(El pueblo alemán)</span>
+        </div>
+
+        <!-- LEVEL 1: PARLIAMENTS -->
+        <div id="bundestag" class="col-start-2 col-span-3 mt-24 p-5 rounded-xl shadow-md node federal-bg z-10 text-center border-2 border-white">
+            <span class="block font-bold text-lg">BUNDESTAG</span>
+            <span class="text-xs block mt-1">(Parlamento federal)</span>
+        </div>
+
+        <div id="landtag" class="col-start-8 col-span-3 mt-24 p-5 rounded-xl shadow-md node state-bg z-10 text-center border-2 border-white">
+            <span class="block font-bold text-lg text-white uppercase">der LANDTAG</span>
+            <span class="text-xs block mt-1">(Parlamento estatal)</span>
+        </div>
+
+        <!-- LEVEL 2: EXECUTIVES & ASSEMBLY -->
+        <div class="col-start-1 col-span-5 mt-16 p-6 border-2 border-dashed border-slate-300 rounded-2xl bg-white/60 relative">
+            <h3 class="text-center font-bold text-slate-500 mb-4 uppercase text-[10px] tracking-widest italic">Bundesregierung / Gobierno federal</h3>
+            <div id="bundeskanzler" class="mb-6 p-4 rounded-xl shadow-md node federal-bg text-center">
+                <span class="block font-bold text-lg uppercase">der BUNDESKANZLER</span>
+                <span class="text-sm block mt-1">(Canciller)</span>
+            </div>
+            <div id="bundesminister" class="p-4 rounded-xl shadow-md node federal-bg text-center">
+                <span class="block font-bold text-lg uppercase">die BUNDESMINISTER</span>
+                <span class="text-sm block mt-1">(los Ministros Federales)</span>
+            </div>
+            <div class="text-center mt-3">
+                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Bundeskabinett (El Gabinete)</span>
+            </div>
+        </div>
+
+        <div id="bundesversammlung" class="col-start-6 col-span-2 mt-20 p-6 rounded-full shadow-2xl node head-bg z-20 text-center flex items-center justify-center border-4 border-white aspect-square ring-4 ring-emerald-100">
+            <div>
+                <span class="block font-bold text-xs leading-tight uppercase">BUNDES-<br>VERSAMMLUNG</span>
+                <span class="text-[10px] font-medium mt-2 block border-t border-white/20 pt-1">(Asamblea Federal)</span>
+            </div>
+        </div>
+
+        <div class="col-start-8 col-span-5 mt-16 p-6 border-2 border-dashed border-slate-300 rounded-2xl bg-white/60">
+            <h3 class="text-center font-bold text-slate-500 mb-4 uppercase text-[10px] tracking-widest italic">Landesebene / Nivel estatal</h3>
+            <div id="min-pres" class="mb-6 p-4 rounded-xl shadow-md node state-bg text-center">
+                <span class="block font-bold text-lg uppercase">MINISTERPRÄSIDENT</span>
+                <span class="text-sm block mt-1">(Primer Ministro estatal)</span>
+            </div>
+            <div id="land-reg" class="p-4 rounded-xl shadow-md node state-bg text-center">
+                <span class="block font-bold text-lg uppercase">LANDESREGIERUNG</span>
+                <span class="text-sm block mt-1">(Gobierno estatal)</span>
+            </div>
+        </div>
+
+        <!-- LEVEL 3: HEAD OF STATE & COUNCIL - ENLARGED NODE WITH ADJUSTED TEXT SIZE -->
+        <div id="bundespräsident" class="col-start-4 col-span-6 mt-20 p-12 rounded-[3rem] shadow-2xl node head-bg z-10 text-center border-8 border-yellow-500 min-h-[180px] flex flex-col justify-center">
+            <!-- Reducido a text-3xl para que quepa mejor -->
+            <span class="block font-bold text-3xl tracking-widest uppercase mb-1">BUNDESPRÄSIDENT</span>
+            <span class="text-2xl font-semibold block text-emerald-50 mb-6">(Presidente Federal)</span>
+            
+            <div class="bg-yellow-500 text-emerald-900 font-extrabold py-3 px-8 rounded-3xl inline-block mx-auto uppercase text-sm shadow-lg leading-tight">
+                <div>Staatsoberhaupt</div>
+                <div class="text-xs normal-case mt-1 font-bold border-t border-emerald-900/20 pt-1">(Jefe de Estado)</div>
+            </div>
+        </div>
+
+        <div id="bundesrat" class="col-start-4 col-span-6 mt-20 p-6 rounded-2xl shadow-xl node state-bg z-10 text-center border-4 border-emerald-900/20">
+            <span class="block font-bold text-2xl uppercase">der BUNDESRAT</span>
+            <span class="text-sm block mt-1">(Consejo Federal)</span>
+        </div>
+
+        <!-- BOTTOM: COURT & LAW -->
+        <div id="opposition" class="col-start-1 col-span-2 mt-28 p-4 rounded-xl shadow node opp-bg z-10 text-center">
+            <span class="block font-bold text-sm text-white uppercase">OPPOSITION</span>
+            <span class="text-[10px] text-white block mt-1">(Oposición)</span>
+        </div>
+
+        <div id="verfassungsgericht" class="col-start-4 col-span-6 mt-32 p-6 rounded-2xl shadow-2xl node court-bg z-10 text-center border-t-8 border-orange-900">
+            <span class="block font-bold text-xl uppercase tracking-tighter">Bundesverfassungsgericht</span>
+            <span class="text-sm font-medium block mt-1">(Tribunal Constitucional Federal)</span>
+        </div>
+
+        <div id="grundgesetz" class="col-start-5 col-span-4 mt-12 p-5 bg-white border-4 border-orange-700 rounded-lg shadow-inner text-center italic text-orange-900">
+            <span class="block font-bold text-lg uppercase">GRUNDGESETZ</span>
+            <span class="text-sm block mt-1">(Ley Fundamental / Constitución)</span>
+        </div>
+
+        <!-- SVG FOR CONNECTIONS -->
+        <svg id="lines-svg"></svg>
+    </div>
+
+    <script>
+        /**
+         * Regla General de Traducción:
+         * El texto se divide por el paréntesis '('. 
+         * La parte izquierda (Alemán) se coloca arriba.
+         * La parte derecha (Español) se coloca abajo en un renglón distinto.
+         */
+        function drawLine(fromId, toId, text = "", color = "#94a3b8", dash = false, weight = 2) {
+            const from = document.getElementById(fromId);
+            const to = document.getElementById(toId);
+            const svg = document.getElementById('lines-svg');
+            
+            if(!from || !to) return;
+
+            const fromRect = from.getBoundingClientRect();
+            const toRect = to.getBoundingClientRect();
+            const containerRect = document.querySelector('.container-main').getBoundingClientRect();
+
+            const x1 = fromRect.left + fromRect.width / 2 - containerRect.left;
+            const y1 = fromRect.top + fromRect.height / 2 - containerRect.top;
+            const x2 = toRect.left + toRect.width / 2 - containerRect.left;
+            const y2 = toRect.top + toRect.height / 2 - containerRect.top;
+
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", x1);
+            line.setAttribute("y1", y1);
+            line.setAttribute("x2", x2);
+            line.setAttribute("y2", y2);
+            line.setAttribute("stroke", color);
+            line.setAttribute("stroke-width", weight);
+            if(dash) line.setAttribute("stroke-dasharray", "5,5");
+            
+            svg.appendChild(line);
+
+            if(text) {
+                const textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                const midX = (x1 + x2) / 2;
+                const midY = (y1 + y2) / 2;
+                textEl.setAttribute("x", midX);
+                textEl.setAttribute("y", midY - 15);
+                textEl.setAttribute("text-anchor", "middle");
+                textEl.setAttribute("class", "arrow-text");
+
+                const parts = text.split('(');
+                if (parts.length > 1) {
+                    // Parte 1: Alemán
+                    const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                    tspan1.setAttribute("x", midX);
+                    tspan1.textContent = parts[0].trim();
+                    textEl.appendChild(tspan1);
+
+                    // Parte 2: Traducción (Renglón abajo)
+                    const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                    tspan2.setAttribute("x", midX);
+                    tspan2.setAttribute("dy", "16"); // Regla de salto de línea
+                    tspan2.setAttribute("font-size", "11px");
+                    tspan2.setAttribute("font-weight", "600");
+                    tspan2.textContent = "(" + parts[1];
+                    textEl.appendChild(tspan2);
+                } else {
+                    textEl.textContent = text;
+                }
+                
+                svg.appendChild(textEl);
+            }
+        }
+
+        window.onload = () => {
+            // Relaciones con regla de traducción abajo aplicada mediante la función drawLine
+            drawLine('people', 'bundestag', 'wählt (elige)', '#60a5fa', false, 3);
+            drawLine('people', 'landtag', 'wählt (elige)', '#60a5fa', false, 3);
+
+            drawLine('bundestag', 'bundeskanzler', 'wählt (elige)', '#60a5fa', false, 3);
+            drawLine('bundestag', 'bundesversammlung', 'stellt Mitglieder (aporta miembros)', '#10b981', false, 2);
+            drawLine('bundeskanzler', 'bundesminister', 'schlägt vor / leitet (propone / dirige)', '#94a3b8', false, 2);
+
+            drawLine('landtag', 'min-pres', 'wählt (elige)', '#60a5fa', false, 3);
+            drawLine('landtag', 'bundesversammlung', 'entsendet Vertreter (envía representantes)', '#10b981', false, 2);
+            drawLine('min-pres', 'land-reg', 'leitet (dirige)', '#94a3b8', false, 2);
+            
+            drawLine('land-reg', 'bundesrat', 'entsenden Vertreter (envía representantes)', '#10b981', false, 2);
+
+            drawLine('bundesversammlung', 'bundespräsident', 'WÄHLT (elige)', '#2563eb', false, 4);
+
+            drawLine('bundestag', 'bundesrat', 'wirkt mit (participa)', '#cbd5e1', true, 2);
+
+            drawLine('opposition', 'bundestag', 'kontrolliert (controla)', '#475569', false, 2);
+            drawLine('verfassungsgericht', 'grundgesetz', 'interpretiert (interpreta)', '#f97316', false, 3);
+        };
+
+        window.onresize = () => {
+            document.getElementById('lines-svg').innerHTML = '';
+            window.onload();
+        };
+    </script>
+</body>
+</html>
