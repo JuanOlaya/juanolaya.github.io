@@ -2,24 +2,39 @@
   "praesens": {
     "ich": "verkaufe",
     "du": "verkaufst",
-    "wir": "verkaufen",
-    "ihr": "verkauft",
     "er": "verkauft",
     "sie": "verkauft",
     "es": "verkauft",
+    "wir": "verkaufen",
+    "ihr": "verkauft",
     "sie (plural)": "verkaufen",
     "Sie (formal)": "verkaufen"
   },
   "praesens_examples": {
     "ich": {
       "de": "Ich verkaufe mein altes Auto.",
-      "en": "I'm selling my old car.",
+      "en": "I sell my old car.",
       "es": "Vendo mi coche viejo."
     },
     "du": {
-      "en": "You sell your old bicycle.",
       "de": "Du verkaufst dein altes Fahrrad.",
+      "en": "You sell your old bicycle.",
       "es": "Vendes tu bicicleta vieja."
+    },
+    "er": {
+      "de": "Er verkauft Bücher auf dem Markt.",
+      "en": "He sells books at the market.",
+      "es": "Él vende libros en el mercado."
+    },
+    "sie": {
+      "de": "Sie verkauft Kuchen im Café.",
+      "en": "She sells cakes in the café.",
+      "es": "Ella vende pasteles en el café."
+    },
+    "es": {
+      "de": "Das Geschäft verkauft heute keine Milch.",
+      "en": "The shop does not sell milk today.",
+      "es": "La tienda no vende leche hoy."
     },
     "wir": {
       "de": "Wir verkaufen unsere Produkte online.",
@@ -27,34 +42,19 @@
       "es": "Vendemos nuestros productos en línea."
     },
     "ihr": {
-      "en": "You also sell clothes.",
       "de": "Ihr verkauft auch Kleidung.",
+      "en": "You also sell clothes.",
       "es": "También vendéis ropa."
     },
-    "er": {
-      "de": "Er verkauft Bücher.",
-      "en": "He sells books.",
-      "es": "Él vende libros."
-    },
-    "sie": {
-      "de": "Er verkauft Bücher.",
-      "en": "He sells books.",
-      "es": "Él vende libros."
-    },
-    "es": {
-      "de": "Er verkauft Bücher.",
-      "en": "He sells books.",
-      "es": "Él vende libros."
-    },
     "sie (plural)": {
-      "de": "Sie verkaufen Kunst.",
-      "en": "They sell art.",
-      "es": "Ellos venden arte."
+      "de": "Sie verkaufen Kunst in der Stadt.",
+      "en": "They sell art in the city.",
+      "es": "Ellos venden arte en la ciudad."
     },
     "Sie (formal)": {
-      "de": "Sie verkaufen Kunst.",
-      "en": "They sell art.",
-      "es": "Ellos venden arte."
+      "de": "Sie verkaufen heute frisches Brot.",
+      "en": "You sell fresh bread today.",
+      "es": "Usted vende hoy pan fresco."
     }
   }
 }
