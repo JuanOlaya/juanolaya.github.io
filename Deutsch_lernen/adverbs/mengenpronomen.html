@@ -170,6 +170,77 @@
             font-size: 1rem;
         }
 
+        .search-container {
+            margin: 22px auto 0;
+            max-width: 360px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px 42px 12px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(0, 255, 161, 0.12);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .clear-search-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.15rem;
+            padding: 4px;
+            display: none;
+        }
+
+        .clear-search-btn.visible {
+            display: block;
+        }
+
+        .search-results-count {
+            margin-top: 12px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            min-height: 1.2em;
+        }
+
+        .search-highlight {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #6e4e00;
+            padding: 0 2px;
+            border-radius: 4px;
+        }
+
+        .no-results {
+            display: none;
+            margin: 10px 40px 0;
+            padding: 18px 20px;
+            border: 1px dashed var(--border-color);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+            text-align: center;
+        }
+
         /* --- UPDATED: THERMOMETER SECTION --- */
         .quantity-scale-section {
             padding: 30px 40px 80px 40px;
@@ -505,6 +576,12 @@
             <p>
                 Mengenpronomen (A1 → B2)
             </p>
+            <div class="search-container">
+                <input type="text" id="mengen-search" class="search-input"
+                    placeholder="Suchen... (buscar cantidad)">
+                <button id="clear-search" class="clear-search-btn" type="button" aria-label="Limpiar búsqueda">×</button>
+            </div>
+            <div id="search-results-count" class="search-results-count"></div>
         </header>
 
         <!-- Visual Thermometer Section -->
@@ -892,6 +969,8 @@
             </div>
         </div>
 
+        <div id="no-results" class="no-results">Keine Ergebnisse gefunden / No results found</div>
+
         <footer>
             <p>Infografía de Gramática Alemana &copy; 2025</p>
         </footer>
@@ -920,32 +999,148 @@
             window.speechSynthesis.speak(utterance);
         }
 
+        function escapeRegExp(text) {
+            return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function normalizeForSearch(text) {
+            return (text || '')
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLowerCase();
+        }
+
+        function highlightMatch(text, query) {
+            if (!text || !query) return text;
+            const escapedQuery = escapeRegExp(query);
+            const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
+            return text.replace(regex, '<span class="search-highlight">$1</span>');
+        }
+
         // Initialize audio features on load
         document.addEventListener('DOMContentLoaded', () => {
-            const words = document.querySelectorAll('.german-word');
+            const searchInput = document.getElementById('mengen-search');
+            const clearSearchButton = document.getElementById('clear-search');
+            const resultCount = document.getElementById('search-results-count');
+            const noResults = document.getElementById('no-results');
+            const levelCards = document.querySelectorAll('.level-card');
+            const searchableRows = document.querySelectorAll('.level-card tbody tr');
 
-            words.forEach(el => {
-                // Determine text to speak (use data attribute if present, else innerText)
-                const rawText = el.innerText.trim();
-                const textToSpeak = el.getAttribute('data-speak') || rawText;
+            function enhanceGermanWords() {
+                const words = document.querySelectorAll('.german-word');
 
-                // Add icon
-                const icon = document.createElement('span');
-                icon.textContent = '🔊';
-                icon.className = 'audio-icon';
-                el.appendChild(icon);
+                words.forEach(el => {
+                    if (!el.dataset.baseText) {
+                        el.dataset.baseText = el.textContent.trim();
+                    }
 
-                // Add tooltip
-                el.setAttribute('title', 'Clic para escuchar');
+                    let icon = el.querySelector('.audio-icon');
+                    if (!icon) {
+                        icon = document.createElement('span');
+                        icon.textContent = '🔊';
+                        icon.className = 'audio-icon';
+                        el.appendChild(icon);
+                    }
 
-                // Add click listener
-                el.addEventListener('click', (e) => {
-                    // Visual feedback
-                    el.style.transform = "scale(0.95)";
-                    setTimeout(() => el.style.transform = "scale(1)", 150);
-
-                    speak(textToSpeak);
+                    if (!el.dataset.audioBound) {
+                        el.setAttribute('title', 'Clic para escuchar');
+                        el.addEventListener('click', () => {
+                            el.style.transform = "scale(0.95)";
+                            setTimeout(() => el.style.transform = "scale(1)", 150);
+                            speak(el.getAttribute('data-speak') || el.dataset.baseText || el.textContent.trim());
+                        });
+                        el.dataset.audioBound = 'true';
+                    }
                 });
+            }
+
+            function setupSearchableContent() {
+                document.querySelectorAll('.german-word, .spanish-word, .example-sent').forEach(el => {
+                    if (!el.dataset.baseText) {
+                        el.dataset.baseText = el.textContent.trim();
+                    }
+                });
+            }
+
+            function clearHighlights() {
+                document.querySelectorAll('.german-word, .spanish-word, .example-sent').forEach(el => {
+                    const baseText = el.dataset.baseText || el.textContent.trim();
+                    const icon = el.querySelector('.audio-icon');
+
+                    if (el.classList.contains('german-word')) {
+                        el.innerHTML = baseText;
+                        if (icon) el.appendChild(icon);
+                    } else {
+                        el.textContent = baseText;
+                    }
+                });
+            }
+
+            function applyHighlights(query) {
+                document.querySelectorAll('.german-word, .spanish-word, .example-sent').forEach(el => {
+                    const baseText = el.dataset.baseText || el.textContent.trim();
+                    const icon = el.querySelector('.audio-icon');
+
+                    if (el.classList.contains('german-word')) {
+                        el.innerHTML = highlightMatch(baseText, query);
+                        if (icon) el.appendChild(icon);
+                    } else {
+                        el.innerHTML = highlightMatch(baseText, query);
+                    }
+                });
+            }
+
+            function filterRows() {
+                const rawQuery = searchInput.value.trim();
+                const normalizedQuery = normalizeForSearch(rawQuery);
+                let visibleRows = 0;
+
+                clearSearchButton.classList.toggle('visible', rawQuery.length > 0);
+                clearHighlights();
+
+                searchableRows.forEach(row => {
+                    const germanWord = row.querySelector('.german-word');
+                    const searchSource = [
+                        row.textContent,
+                        germanWord ? germanWord.getAttribute('data-speak') : ''
+                    ].join(' ');
+                    const matches = !normalizedQuery || normalizeForSearch(searchSource).includes(normalizedQuery);
+
+                    row.style.display = matches ? '' : 'none';
+                    if (matches) visibleRows += 1;
+                });
+
+                levelCards.forEach(card => {
+                    const hasVisibleRows = Array.from(card.querySelectorAll('tbody tr'))
+                        .some(row => row.style.display !== 'none');
+                    card.style.display = hasVisibleRows ? '' : 'none';
+                });
+
+                if (rawQuery) {
+                    applyHighlights(rawQuery);
+                }
+
+                if (!rawQuery) {
+                    resultCount.textContent = '';
+                    noResults.style.display = 'none';
+                } else if (visibleRows > 0) {
+                    resultCount.textContent = `${visibleRows} resultado${visibleRows !== 1 ? 's' : ''}`;
+                    noResults.style.display = 'none';
+                } else {
+                    resultCount.textContent = '0 resultados';
+                    noResults.style.display = 'block';
+                }
+            }
+
+            enhanceGermanWords();
+            setupSearchableContent();
+            filterRows();
+
+            searchInput.addEventListener('input', filterRows);
+            clearSearchButton.addEventListener('click', () => {
+                searchInput.value = '';
+                filterRows();
+                searchInput.focus();
             });
         });
     </script>

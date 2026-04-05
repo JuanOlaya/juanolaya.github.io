@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interjecciones Alemanas: Guía Visual A1-A2</title>
+    <title>Interjecciones!!!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -208,6 +208,73 @@
             justify-content: space-between;
             align-items: center;
             font-size: 0.9rem;
+        }
+
+        .card-header-translation {
+            font-size: 0.8rem;
+            font-style: italic;
+            font-weight: 600;
+            text-transform: none;
+            opacity: 0.95;
+        }
+
+        .card-footer {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            align-items: center;
+            padding: 10px 15px 12px;
+            border-top: 1px solid var(--border-color);
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .card-footer-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .card-footer-left {
+            font-weight: 700;
+        }
+
+        .card-footer-middle {
+            font-style: italic;
+        }
+
+        .card-footer-right {
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 999px;
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            padding: 4px 9px;
+            white-space: nowrap;
+        }
+
+        .level-card.acuerdo-card .card-footer {
+            background: var(--cat-acuerdo);
+        }
+
+        .level-card.sorpresa-card .card-footer {
+            background: var(--cat-sorpresa);
+        }
+
+        .level-card.social-card .card-footer {
+            background: var(--cat-social);
+        }
+
+        .level-card.reacciones-card .card-footer {
+            background: var(--cat-reacciones);
+        }
+
+        .level-card.avisos-card .card-footer {
+            background: var(--cat-avisos);
         }
 
         .level-header.acuerdo {
@@ -540,6 +607,7 @@
             <div class="modal-body">
                 <div id="modalDe" class="modal-de">Stimmt!</div>
                 <div id="modalEs" class="modal-es">¡Cierto! / Así es</div>
+                <div id="modalLvText" class="modal-es" style="font-size: 0.95rem; margin-top: -10px;">Nivel: A1</div>
 
                 <div id="modalExplanation" class="modal-explanation hidden"></div>
 
@@ -619,42 +687,47 @@
                     <div id="langEn" class="lang-option">EN</div>
                 </div>
             </div>
-            <h1 id="mainTitle">Interjecciones Alemanas</h1>
+            <h1 id="mainTitle">Interjecciones!!!</h1>
             <p class="def-box" id="mainDef">
                 Palabras breves que dan vida y emoción a la conversación.
             </p>
         </header>
 
         <div class="grid-layout">
-            <div class="level-card">
-                <div class="level-header acuerdo"><span id="titleAcuerdo">Acuerdo</span><span>✅</span></div>
+            <div class="level-card acuerdo-card">
+                <div class="level-header acuerdo"><span>Zustimmung</span><span id="titleAcuerdo" class="card-header-translation">Acuerdo</span></div>
                 <table>
                     <tbody id="group-acuerdo"></tbody>
                 </table>
+                <div class="card-footer"><span class="card-footer-group"><span class="card-footer-left">Zwischenruf</span><span id="footerWordEs" class="card-footer-middle">interjección</span></span><span class="card-footer-right">A1-A2</span></div>
             </div>
-            <div class="level-card">
-                <div class="level-header sorpresa"><span id="titleSorpresa">Sorpresa</span><span>⚡</span></div>
+            <div class="level-card sorpresa-card">
+                <div class="level-header sorpresa"><span>Überraschung</span><span id="titleSorpresa" class="card-header-translation">Sorpresa</span></div>
                 <table>
                     <tbody id="group-sorpresa"></tbody>
                 </table>
+                <div class="card-footer"><span class="card-footer-group"><span class="card-footer-left">Zwischenruf</span><span id="footerWordEs2" class="card-footer-middle">interjección</span></span><span class="card-footer-right">A1-A2</span></div>
             </div>
-            <div class="level-card">
-                <div class="level-header social"><span id="titleSocial">Social</span><span>🤝</span></div>
+            <div class="level-card social-card">
+                <div class="level-header social"><span>Soziales</span><span id="titleSocial" class="card-header-translation">Social</span></div>
                 <table>
                     <tbody id="group-social"></tbody>
                 </table>
+                <div class="card-footer"><span class="card-footer-group"><span class="card-footer-left">Zwischenruf</span><span id="footerWordEs3" class="card-footer-middle">interjección</span></span><span class="card-footer-right">A1-A2</span></div>
             </div>
-            <div class="level-card">
-                <div class="level-header reacciones"><span id="titleReacciones">Reacciones</span><span>💥</span></div>
+            <div class="level-card reacciones-card">
+                <div class="level-header reacciones"><span>Reaktionen</span><span id="titleReacciones" class="card-header-translation">Reacciones</span></div>
                 <table>
                     <tbody id="group-reacciones"></tbody>
                 </table>
+                <div class="card-footer"><span class="card-footer-group"><span class="card-footer-left">Zwischenruf</span><span id="footerWordEs4" class="card-footer-middle">interjección</span></span><span class="card-footer-right">A1-A2</span></div>
             </div>
-            <div class="level-card">
-                <div class="level-header avisos"><span id="titleAvisos">Avisos</span><span>📢</span></div>
+            <div class="level-card avisos-card">
+                <div class="level-header avisos"><span>Warnungen</span><span id="titleAvisos" class="card-header-translation">Avisos</span></div>
                 <table>
                     <tbody id="group-avisos"></tbody>
                 </table>
+                <div class="card-footer"><span class="card-footer-group"><span class="card-footer-left">Zwischenruf</span><span id="footerWordEs5" class="card-footer-middle">interjección</span></span><span class="card-footer-right">A1-A2</span></div>
             </div>
         </div>
 
@@ -685,24 +758,26 @@
         let currentLang = 'es'; // 'es' or 'en'
         const labels = {
             es: {
-                mainTitle: "Interjecciones Alemanas",
+                mainTitle: "Interjecciones!!!",
                 mainDef: "Palabras breves que dan vida y emoción a la conversación.",
                 titleAcuerdo: "Acuerdo",
                 titleSorpresa: "Sorpresa",
                 titleSocial: "Social",
                 titleReacciones: "Reacciones",
                 titleAvisos: "Avisos",
+                footerInterjection: "interjección",
                 naDef: "La navaja suiza del idioma. Cambia según el contexto.",
                 btnSpeak: "ESCUCHAR"
             },
             en: {
-                mainTitle: "German Interjections",
+                mainTitle: "Interjections!!!",
                 mainDef: "Short words that bring life and emotion to conversations.",
                 titleAcuerdo: "Agreement",
                 titleSorpresa: "Surprise",
                 titleSocial: "Social",
                 titleReacciones: "Reactions",
                 titleAvisos: "Warnings",
+                footerInterjection: "interjection",
                 naDef: "The language's Swiss Army knife. Context is key.",
                 btnSpeak: "LISTEN"
             }
@@ -857,6 +932,11 @@
             document.getElementById('titleSocial').textContent = langLabels.titleSocial;
             document.getElementById('titleReacciones').textContent = langLabels.titleReacciones;
             document.getElementById('titleAvisos').textContent = langLabels.titleAvisos;
+            document.getElementById('footerWordEs').textContent = langLabels.footerInterjection;
+            document.getElementById('footerWordEs2').textContent = langLabels.footerInterjection;
+            document.getElementById('footerWordEs3').textContent = langLabels.footerInterjection;
+            document.getElementById('footerWordEs4').textContent = langLabels.footerInterjection;
+            document.getElementById('footerWordEs5').textContent = langLabels.footerInterjection;
             document.getElementById('naDef').textContent = langLabels.naDef;
             document.getElementById('btnSpeakText').textContent = langLabels.btnSpeak;
 
@@ -879,10 +959,16 @@
 
             document.getElementById('modalDe').textContent = item.de;
             document.getElementById('modalEs').textContent = currentLang === 'es' ? item.es : item.en;
+            document.getElementById('modalLvText').textContent = `${currentLang === 'es' ? 'Nivel' : 'Level'}: ${item.lv}`;
 
             const levelBadge = document.getElementById('modalLevel');
             levelBadge.textContent = item.lv;
-            levelBadge.className = `text-white font-bold px-3 py-1 rounded-lg text-xs uppercase ${item.lv.startsWith('A1') ? 'bg-blue-500' : 'bg-yellow-500'}`;
+            const levelColorClass = item.lv.startsWith('A1')
+                ? 'bg-blue-500'
+                : item.lv.startsWith('A2')
+                    ? 'bg-yellow-500'
+                    : 'bg-orange-500';
+            levelBadge.className = `text-white font-bold px-3 py-1 rounded-lg text-xs uppercase ${levelColorClass}`;
 
             // Explanation / Description
             const explBox = document.getElementById('modalExplanation');
