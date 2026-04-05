@@ -24,7 +24,7 @@
             { key: 'A2_1', count: 13 },
             { key: 'A2_2', count: 14 }
         ],
-        'B1': [{ key: 'B1_1', count: 23 }],
+        'B1': [{ key: 'B1_1', count: 24 }],
         'B2': [{ key: 'B2_1', count: 13 }]
     };
     const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#3b82f6', '#ea580c', '#22C55E', '#a855f7', '#facc15'];
@@ -124,7 +124,7 @@
     const levelConfig = {
         'A1': { groupCount: 27, displayName: 'A1' },
         'A2': { groupCount: 27, displayName: 'A2' },
-        'B1': { groupCount: 23, displayName: 'B1' },
+        'B1': { groupCount: 24, displayName: 'B1' },
         'B2': { groupCount: 13, displayName: 'B2' }
     };
     const levelOrder = ['A1', 'A2', 'B1', 'B2'];
