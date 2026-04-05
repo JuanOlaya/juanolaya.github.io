@@ -171,6 +171,20 @@
             /* Pale Mint Green from Design System */
             white-space: nowrap;
         }
+        .noun-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+        }
+        .noun-tag-light {
+            color: #E6F3FF;
+            background: rgba(230, 243, 255, 0.16);
+            border: 1px solid rgba(230, 243, 255, 0.28);
+        }
 
         /* Translation: Slate-White */
         .col-trans {
@@ -1153,6 +1167,33 @@
                                         "tr": "participación electoral",
                                         "ex": "Die Wahlbeteiligung war hoch.",
                                         "ex_es": "La participación electoral fue alta."
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Erststimme",
+                                        "e": "🗳️",
+                                        "tr": "primer voto",
+                                        "ex": "Mit der Erststimme wählt man eine Person.",
+                                        "ex_es": "Con el primer voto se elige a una persona.",
+                                        "important": true
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Zweitstimme",
+                                        "e": "🗳️",
+                                        "tr": "segundo voto",
+                                        "ex": "Mit der Zweitstimme wählt man eine Partei.",
+                                        "ex_es": "Con el segundo voto se elige a un partido.",
+                                        "important": true
+                              },
+                              {
+                                        "art": "die (pl)",
+                                        "w": "Sitze",
+                                        "e": "💺",
+                                        "tr": "escaños",
+                                        "ex": "Die Sitze im Bundestag werden verteilt.",
+                                        "ex_es": "Los escaños en el Bundestag se distribuyen.",
+                                        "important": true
                               },
                               {
                                         "art": "das",
@@ -2358,6 +2399,8 @@
                         }
 
                         const importantStar = item.important ? '<span class="importance-star" title="Importante">★</span>' : '';
+                        const useTag = item.tag === 'light';
+                        const wordHTML = useTag ? `<span class="noun-tag noun-tag-light">${displayWord}</span>` : displayWord;
 
                         // 1. German Word Cell
                         const tdWord = document.createElement('td');
@@ -2374,7 +2417,7 @@
                         tdWord.innerHTML = `
                             <div class="word-wrapper">
                                 <span class="article-dot"></span>
-                                <span class="noun-text">${displayWord}${importantStar} ${speakerIcon}</span>
+                                <span class="noun-text">${wordHTML}${importantStar} ${speakerIcon}</span>
                             </div>
                         `;
 
