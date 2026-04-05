@@ -193,6 +193,8 @@
             border: 1px solid var(--border-color);
             box-shadow: 0 10px 15px -3px var(--shadow-color);
             transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
         }
 
         .level-card:hover {
@@ -277,6 +279,10 @@
             background: var(--cat-avisos);
         }
 
+        .level-card .card-footer {
+            margin-top: auto;
+        }
+
         .level-header.acuerdo {
             background: var(--cat-acuerdo);
         }
@@ -300,6 +306,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            flex: 1 1 auto;
         }
 
         td {
