@@ -412,6 +412,30 @@
             flex-shrink: 0;
         }
 
+        .modal-header.theme-acuerdo {
+            background: var(--cat-acuerdo);
+        }
+
+        .modal-header.theme-sorpresa {
+            background: var(--cat-sorpresa);
+        }
+
+        .modal-header.theme-social {
+            background: var(--cat-social);
+        }
+
+        .modal-header.theme-reacciones {
+            background: var(--cat-reacciones);
+        }
+
+        .modal-header.theme-avisos {
+            background: var(--cat-avisos);
+        }
+
+        .modal-header.theme-na {
+            background: var(--accent-green);
+        }
+
         .modal-body {
             padding: 30px;
             text-align: left;
@@ -613,7 +637,7 @@
     <!-- Word Modal -->
     <div id="wordModal" class="modal-overlay" onclick="closeModal('wordModal', event)">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <header class="modal-header">
+            <header id="wordModalHeader" class="modal-header">
                 <span id="modalLevel"
                     class="text-white font-bold px-3 py-1 rounded-lg text-xs uppercase bg-blue-500">A1</span>
                 <button class="text-2xl text-slate-400 hover:text-white"
@@ -899,6 +923,7 @@
                 const tbody = document.getElementById(`group-${category}`);
                 tbody.innerHTML = "";
                 data[category].forEach(item => {
+                    item.category = category;
                     const tr = document.createElement('tr');
                     const tdDe = document.createElement('td');
                     tdDe.innerHTML = `<div class="german-word">${item.de} <i class="fas fa-volume-up tts-icon"></i></div>`;
@@ -919,6 +944,7 @@
             const naGrid = document.getElementById('naGrid');
             naGrid.innerHTML = "";
             naData.forEach(item => {
+                item.category = 'na';
                 const card = document.createElement('div');
                 card.className = "bg-slate-800/80 p-6 rounded-2xl border border-slate-700 hover:border-emerald-400/50 transition-all cursor-pointer group shadow-lg hover:shadow-emerald-900/20";
                 card.onclick = () => openWordModal(item);
@@ -972,6 +998,13 @@
         function openWordModal(item) {
             currentModalItem = item;
             const modal = document.getElementById('wordModal');
+            const modalHeader = document.getElementById('wordModalHeader');
+            const modalThemeClass = item.category ? `theme-${item.category}` : '';
+
+            modalHeader.className = 'modal-header';
+            if (modalThemeClass) {
+                modalHeader.classList.add(modalThemeClass);
+            }
 
             document.getElementById('modalDe').textContent = item.de;
             document.getElementById('modalEs').textContent = currentLang === 'es' ? item.es : item.en;

@@ -116,7 +116,10 @@
                 <span class="text-sm block mt-1">(los Ministros Federales)</span>
             </div>
             <div class="text-center mt-3">
-                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter german-speak" data-speak="Bundeskabinett" title="Aussprache h&ouml;ren">Bundeskabinett (El Gabinete)</span>
+                <div class="inline-block bg-blue-200 text-blue-900 px-4 py-2 rounded-xl border border-blue-300 shadow-sm">
+                    <div class="text-[10px] font-bold uppercase tracking-tighter german-speak" data-speak="Bundeskabinett" title="Aussprache h&ouml;ren">Bundeskabinett (gabinete)</div>
+                    <div class="text-[10px] mt-1">reuni&oacute;n del gobierno (kanzler + minister)</div>
+                </div>
             </div>
         </div>
 
@@ -128,7 +131,7 @@
         </div>
 
         <div class="col-start-8 col-span-5 mt-16 p-6 pt-24 border-2 border-dashed border-slate-300 rounded-2xl bg-white/60 relative">
-            <div class="absolute left-0 top-0 bg-teal-800 text-white px-4 py-2 rounded-br-xl shadow-lg border-r border-b border-teal-700 max-w-[280px]">
+            <div id="landesregierung-tag" class="absolute left-0 top-0 bg-teal-800 text-white px-4 py-2 rounded-br-xl shadow-lg border-r border-b border-teal-700 max-w-[280px]">
                 <div class="text-xs font-extrabold uppercase tracking-[0.18em] german-speak" data-speak="Landesregierung" title="Aussprache h&ouml;ren">Landesregierung</div>
                 <div class="text-[10px] text-teal-100 italic mt-1">Gobierno estatal</div>
                 <div class="text-[10px] text-teal-100 mt-1">Nivel estatal / por cada Bundesland</div>
@@ -148,7 +151,6 @@
             <span class="block font-bold text-3xl tracking-widest uppercase mb-1 german-speak" data-speak="Bundespräsident" title="Aussprache h&ouml;ren">BUNDESPR&Auml;SIDENT</span>
             <span class="text-2xl font-semibold block text-emerald-50">(Presidente Federal)</span>
             <span class="text-base font-semibold block text-emerald-100/95">Frank-Walter Steinmeier</span>
-            <span class="text-lg font-semibold block text-emerald-100">(Jefe del Estado)</span>
             <span class="text-sm font-medium block text-emerald-100/90">(Representa a Alemania para prop&oacute;sitos de derecho internacional)</span>
             <span class="text-sm font-medium block text-emerald-100/90 mb-6">(Acredita embajadores alemanes en el exterior y a los del resto en Berl&iacute;n)</span>
 
@@ -156,7 +158,8 @@
                 <div class="german-speak" data-speak="Staatsoberhaupt" title="Aussprache h&ouml;ren">Staatsoberhaupt</div>
                 <div class="text-xs normal-case mt-1 font-bold border-t border-emerald-900/20 pt-1">(Jefe de Estado)</div>
             </div>
-            <span class="text-base font-semibold block text-emerald-100 underline underline-offset-4 mt-4">representa al Estado</span>
+            <span class="text-base font-semibold block text-emerald-100 underline underline-offset-4 mt-4 german-speak" data-speak="repräsentiert das Land" title="Aussprache h&ouml;ren">repr&auml;sentiert das Land</span>
+            <span class="text-sm font-medium block text-emerald-100/90">(representa al pa&iacute;s)</span>
         </div>
 
         <div class="col-start-4 col-span-6 mt-4 z-10">
@@ -181,8 +184,8 @@
                 <span class="block font-bold text-2xl uppercase german-speak" data-speak="Bundesrat" title="Aussprache h&ouml;ren">der BUNDESRAT</span>
                 <div class="flex flex-col">
                     <span class="text-sm block">(Consejo Federal)</span>
-                    <span class="text-xs block mt-1 opacity-90">C&aacute;mara alta que representa los estados de la federaci&oacute;n</span>
-                    <span class="text-xs block mt-1 opacity-90">Est&aacute; conformado por representantes de los gobiernos de los estados federados</span>
+                    <span class="text-xs block mt-1 opacity-90 german-speak" data-speak="die Regierungsvertreter der Bundesländer" title="Aussprache h&ouml;ren">die Regierungsvertreter der Bundesl&auml;nder</span>
+                    <span class="text-xs block mt-1 opacity-90">(conformado por los representantes de los gobiernos de los estados federados)</span>
                 </div>
             </div>
         </div>
@@ -224,6 +227,10 @@
                     <li class="flex justify-between gap-4">
                         <span class="font-semibold german-speak" data-speak="Gesetz" title="Aussprache h&ouml;ren">das Gesetz</span>
                         <span class="text-slate-600 italic text-right">Ley</span>
+                    </li>
+                    <li class="flex justify-between gap-4">
+                        <span class="font-semibold german-speak" data-speak="Regierung" title="Aussprache h&ouml;ren">die Regierung</span>
+                        <span class="text-slate-600 italic text-right">Gobierno</span>
                     </li>
                 </ul>
                 <div class="mt-5 pt-4 border-t border-slate-200 text-sm text-slate-700 space-y-2">
@@ -334,7 +341,6 @@
             drawLine("landtag", "bundesversammlung", "entsendet Vertreter (env\u00EDa representantes)", "#10b981", false, 2);
             drawLine("min-pres", "land-reg", "leitet (dirige)", "#94a3b8", false, 2);
 
-            drawLine("land-reg", "bundesrat", "", "#10b981", false, 2);
             drawLine("bundesrat", "landtag", "", "#0f766e", true, 2);
 
             drawLine("bundesversammlung", "bundespraesident", "W\u00C4HLT (elige)", "#2563eb", false, 4);
