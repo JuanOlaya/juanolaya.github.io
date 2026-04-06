@@ -770,6 +770,35 @@ body.compact-view.compact-light-mode .kompakt-header-es {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.settings-modal-content {
+    max-width: 560px;
+}
+
+.settings-tag-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 0;
+    margin-top: 0;
+    max-width: none;
+    overflow: visible;
+}
+
+.settings-tag-filters::-webkit-scrollbar {
+    display: none;
+}
+
+.settings-tag-filters .tag-filter-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 10px 12px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.25;
+}
+
 /* New unified navigation layout */
 .navigation-wrapper {
     display: flex;
@@ -2386,12 +2415,19 @@ details[open]>summary .details-arrow {
 
 /* Media Query for smaller screens */
 @media (max-width: 600px) {
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
     body {
         padding: 6px;
     }
 
     .main-container {
         padding: 8px 6px;
+        max-width: 100%;
     }
 
     .content-block {
