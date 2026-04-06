@@ -158,6 +158,8 @@
     const mainContainer = document.getElementById('main-container');
     const cardsContainer = document.getElementById('cards-container');
     const levelIndicator = document.getElementById('level-indicator');
+    const levelToggleContainer = document.querySelector('.level-toggle-container');
+    const levelToggleFooter = document.querySelector('.level-toggle-footer');
     const levelToggleButtons = document.querySelectorAll('.level-option');
     const groupThemeIndicator = document.getElementById('group-theme-indicator');
     const groupIndicator = document.getElementById('group-indicator');
@@ -237,11 +239,22 @@
     // Theme data storage
     let currentThemeData = null;
     let appVersion = '1.6_static'; // Stable version; replaced by verbs_index.lastUpdated when available
+    let isMobileLevelMenuExpanded = false;
+    const mobileLevelMediaQuery = window.matchMedia('(max-width: 600px)');
 
     async function parseJsonUtf8(response) {
         const buffer = await response.arrayBuffer();
         const text = new TextDecoder('utf-8').decode(buffer);
         return JSON.parse(text);
+    }
+
+    function syncMobileLevelToggleState() {
+        if (!levelToggleFooter) return;
+
+        const isMobile = mobileLevelMediaQuery.matches;
+        levelToggleFooter.classList.toggle('mobile-collapsed', isMobile && !isMobileLevelMenuExpanded);
+        levelToggleFooter.classList.toggle('mobile-expanded', isMobile && isMobileLevelMenuExpanded);
+        levelToggleContainer?.classList.toggle('mobile-right-docked', isMobile);
     }
 
     function createLightweightVerbDataSnapshot(source = allVerbsData) {
@@ -1123,7 +1136,9 @@
             const isActive = button.dataset.level === currentLevel;
             button.classList.toggle('active', isActive);
             button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            button.style.order = isActive ? String(levelOrder.length) : String(levelOrder.indexOf(button.dataset.level) + 1);
         });
+        syncMobileLevelToggleState();
 
         const themeName = group.theme || group.groupNameGerman || 'Gruppe';
         groupThemeIndicator.textContent = themeName;
@@ -1521,6 +1536,7 @@
         await loadGroupData(targetLevel, targetGroup);
         currentLevel = targetLevel;
         currentGroupInLevel = targetGroup;
+        isMobileLevelMenuExpanded = false;
         clearSearchAndRender();
     }
 
@@ -1684,9 +1700,32 @@
                 levelToggleButtons.forEach(button => {
                     button.addEventListener('click', async () => {
                         const targetLevel = button.dataset.level;
-                        if (!targetLevel || targetLevel === currentLevel) return;
+                        if (!targetLevel) return;
+
+                        if (mobileLevelMediaQuery.matches && targetLevel === currentLevel) {
+                            isMobileLevelMenuExpanded = !isMobileLevelMenuExpanded;
+                            syncMobileLevelToggleState();
+                            return;
+                        }
+
+                        if (targetLevel === currentLevel) return;
                         await navigateToLevel(targetLevel);
                     });
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!mobileLevelMediaQuery.matches || !isMobileLevelMenuExpanded || !levelToggleContainer) return;
+                    if (!levelToggleContainer.contains(event.target)) {
+                        isMobileLevelMenuExpanded = false;
+                        syncMobileLevelToggleState();
+                    }
+                });
+
+                mobileLevelMediaQuery.addEventListener('change', () => {
+                    if (!mobileLevelMediaQuery.matches) {
+                        isMobileLevelMenuExpanded = false;
+                    }
+                    syncMobileLevelToggleState();
                 });
 
                 // Keyboard navigation for levels (Up/Down arrows)

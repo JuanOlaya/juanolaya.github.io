@@ -1255,6 +1255,30 @@ window.lidKompaktModalData = {
                               }
                     ]
           },
+          "wahlen::Wahlbenachrichtigung": {
+                    "ex": "Die Wahlbenachrichtigung informiert Ã¼ber den Wahltag und das Wahllokal.",
+                    "ex_es": "La notificaciÃ³n electoral informa sobre el dÃ­a de la elecciÃ³n y el colegio electoral.",
+                    "qa": [
+                              {
+                                        "q": "Welches Schreiben bekommt man vor einer Wahl mit Informationen zum Wahltag?",
+                                        "a": "Die Wahlbenachrichtigung.",
+                                        "q_es": "Â¿QuÃ© documento se recibe antes de una elecciÃ³n con informaciÃ³n sobre el dÃ­a de votaciÃ³n?",
+                                        "a_es": "La notificaciÃ³n electoral."
+                              },
+                              {
+                                        "q": "Wo steht, in welches Wahllokal man gehen soll?",
+                                        "a": "In der Wahlbenachrichtigung.",
+                                        "q_es": "Â¿DÃ³nde aparece a quÃ© colegio electoral hay que ir?",
+                                        "a_es": "En la notificaciÃ³n electoral."
+                              },
+                              {
+                                        "q": "Wie heiÃŸt der Brief mit den wichtigsten Angaben zur Wahl?",
+                                        "a": "Die Wahlbenachrichtigung.",
+                                        "q_es": "Â¿CÃ³mo se llama la carta con los datos mÃ¡s importantes de la elecciÃ³n?",
+                                        "a_es": "La notificaciÃ³n electoral."
+                              }
+                    ]
+          },
           "wahlrecht::Wahlrecht": {
                     "ex": "Viele Bürger haben das Wahlrecht.",
                     "ex_es": "Muchos ciudadanos tienen derecho al voto.",

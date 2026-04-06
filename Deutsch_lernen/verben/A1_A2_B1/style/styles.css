@@ -427,6 +427,14 @@ body.compact-view .content-block {
     margin: 0;
 }
 
+.level-toggle-footer.mobile-collapsed {
+    width: auto;
+}
+
+.level-toggle-footer.mobile-collapsed .level-option:not(.active) {
+    display: none;
+}
+
 .level-option {
     border: none;
     background: transparent;
@@ -2555,23 +2563,31 @@ details[open]>summary .details-arrow {
     }
 
     .level-toggle-container {
-        width: calc(100vw - 20px);
-        max-width: 440px;
+        width: auto;
+        max-width: calc(100vw - 20px);
         bottom: 10px;
+        left: auto;
+        right: 10px;
+        transform: none;
     }
 
     .level-toggle-footer {
-        width: 100%;
+        width: auto;
         border-radius: 20px;
         padding: 6px;
         box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
+        justify-content: flex-end;
     }
 
     .level-option {
         flex: 1 1 0;
-        min-width: 0;
+        min-width: 72px;
         text-align: center;
         padding: 8px 6px;
+    }
+
+    .level-toggle-footer.mobile-collapsed .level-option.active {
+        min-width: 84px;
     }
 
     .group-navigation {
@@ -4501,9 +4517,9 @@ body.compact-view .cards-container {
 /* Responsive adjustments */
 @media (max-width: 600px) {
     .kompakt-chunk-card {
-        width: 100%;
-        /* Full width on mobile */
-        margin: 10px 0;
+        width: calc(100vw - 20px);
+        max-width: 100%;
+        margin: 8px auto;
     }
 
     .kompakt-chunk-grid {
