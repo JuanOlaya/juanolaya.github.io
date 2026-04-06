@@ -978,6 +978,12 @@ window.lidKompaktData = [
                                         "e": "🏫",
                                         "tr": "escolaridad obligatoria",
                                         "important": true
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Willen",
+                                        "e": "??",
+                                        "tr": "voluntad"
                               }
                     ]
           },

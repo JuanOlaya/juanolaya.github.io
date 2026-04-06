@@ -3812,5 +3812,29 @@ window.lidKompaktModalData = {
           "pruefungslogik::Nachteil": {
                     "ex": "Das ist ein Nachteil.",
                     "ex_es": "Eso es una desventaja."
+          },
+          "gesellschaft::Willen": {
+                    "ex": "Niemand darf gegen seinen Willen zu etwas gezwungen werden.",
+                    "ex_es": "Nadie puede ser obligado a hacer algo contra su voluntad.",
+                    "qa": [
+                              {
+                                        "q": "Was bedeutet es, wenn etwas gegen den Willen eines Menschen geschieht?",
+                                        "a": "Es geschieht gegen das, was die Person selbst m?chte.",
+                                        "q_es": "?Qu? significa que algo ocurra contra la voluntad de una persona?",
+                                        "a_es": "Que ocurre contra lo que la persona misma quiere."
+                              },
+                              {
+                                        "q": "Wie nennt man das pers?nliche Wollen oder den inneren Entschluss eines Menschen?",
+                                        "a": "Den Willen.",
+                                        "q_es": "?C?mo se llama el querer personal o la decisi?n interior de una persona?",
+                                        "a_es": "La voluntad."
+                              },
+                              {
+                                        "q": "Darf man Menschen in Deutschland gegen ihren Willen zu etwas zwingen?",
+                                        "a": "Nein.",
+                                        "q_es": "?Se puede obligar en Alemania a las personas a hacer algo contra su voluntad?",
+                                        "a_es": "No."
+                              }
+                    ]
           }
 }
