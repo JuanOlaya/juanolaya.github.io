@@ -238,6 +238,12 @@
     let currentThemeData = null;
     let appVersion = '1.6_static'; // Stable version; replaced by verbs_index.lastUpdated when available
 
+    async function parseJsonUtf8(response) {
+        const buffer = await response.arrayBuffer();
+        const text = new TextDecoder('utf-8').decode(buffer);
+        return JSON.parse(text);
+    }
+
     function createLightweightVerbDataSnapshot(source = allVerbsData) {
         const snapshot = {};
         Object.entries(source || {}).forEach(([verbName, verbData]) => {
@@ -389,7 +395,7 @@
         try {
             const vRes = await fetch('json/verbs_index.json', { cache: 'no-cache' });
                 if (vRes.ok) {
-                const vData = await vRes.json();
+                const vData = await parseJsonUtf8(vRes);
                 remoteVersion = vData.lastUpdated;
                 allGroupsIndex = Array.isArray(vData.groups) ? vData.groups : allGroupsIndex;
                 if (remoteVersion) {
@@ -486,7 +492,7 @@
                     const groupUrl = `json/groups/${physData.physicalKey}/${physData.physicalKey}_group_${fileNumber}.json${appVersion ? '?v=' + appVersion : ''}`;
                     const res = await fetch(groupUrl);
                     if (!res.ok) return;
-                    const groupData = await res.json();
+                    const groupData = await parseJsonUtf8(res);
 
                     if (!verbGroupsByLevel[levelKey]) verbGroupsByLevel[levelKey] = [];
                     verbGroupsByLevel[levelKey][groupIndex] = groupData;
@@ -498,7 +504,7 @@
                     if (newVerbs.length > 0) {
                         const cardPromises = newVerbs.map(verbName =>
                             fetch(`json/cards/${verbName}.json${appVersion ? '?v=' + appVersion : ''}`)
-                                .then(res => res.ok ? res.json() : {})
+                                .then(res => res.ok ? parseJsonUtf8(res) : {})
                                 .then(data => { allVerbsData[verbName] = data; })
                                 .catch(() => { allVerbsData[verbName] = {}; })
                         );
@@ -598,7 +604,7 @@
         try {
             const res = await fetch(groupUrl);
             if (!res.ok) throw new Error(`Group not found: ${groupUrl}`);
-            const groupData = await res.json();
+            const groupData = await parseJsonUtf8(res);
 
             // Initialize level array if needed
             if (!verbGroupsByLevel[levelKey]) {
@@ -615,7 +621,7 @@
                 // 3. Fetch Card Data for new verbs
                 const cardPromises = newVerbs.map(verbName =>
                     fetch(`json/cards/${verbName}.json${appVersion ? '?v=' + appVersion : ''}`)
-                        .then(res => res.ok ? res.json() : {})
+                        .then(res => res.ok ? parseJsonUtf8(res) : {})
                         .then(data => { allVerbsData[verbName] = data; })
                         .catch(() => { allVerbsData[verbName] = {}; })
                 );
@@ -655,7 +661,7 @@
             const query = appVersion ? `?v=${encodeURIComponent(appVersion)}` : '';
             const response = await fetch(`json/file_index.json${query}`, { cache: 'no-cache' });
             if (!response.ok) throw new Error(`Failed to load file index: ${response.status}`);
-            fileIndexData = await response.json();
+            fileIndexData = await parseJsonUtf8(response);
         } catch (error) {
             console.warn('Failed to load file index, falling back to direct fetches.', error);
             fileIndexData = {};
@@ -674,7 +680,7 @@
                 const query = appVersion ? `?v=${appVersion}` : '';
                 const maybeFetchJson = (folder) =>
                     fileExistsInIndex(folder, verbName)
-                        ? fetch(`json/${folder}/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+                        ? fetch(`json/${folder}/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
                         : Promise.resolve({});
 
                 const fetchPromises = [
@@ -687,7 +693,7 @@
                 // Add Konjunktiv II data for specific verbs
                 if (konjunktivVerbs.includes(verbName) && fileExistsInIndex('konjunktiv_ii', verbName)) {
                     fetchPromises.push(
-                        fetch(`json/konjunktiv_ii/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+                        fetch(`json/konjunktiv_ii/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
                     );
                 }
 
@@ -725,7 +731,7 @@
 
         const query = appVersion ? `?v=${appVersion}` : '';
         const praesensData = fileExistsInIndex('praesens', verbName)
-            ? await fetch(`json/praesens/${verbName}.json${query}`).then(res => res.ok ? res.json() : {}).catch(() => ({}))
+            ? await fetch(`json/praesens/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
             : {};
 
         allVerbsData[verbName] = {
@@ -742,7 +748,7 @@
         const query = appVersion ? `?v=${appVersion}` : '';
         const maybeFetchJson = (folder, fallback = {}) =>
             fileExistsInIndex(folder, verbName)
-                ? fetch(`json/${folder}/${verbName}.json${query}`).then(res => res.ok ? res.json() : fallback).catch(() => fallback)
+                ? fetch(`json/${folder}/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : fallback).catch(() => fallback)
                 : Promise.resolve(fallback);
 
         const [
@@ -812,7 +818,7 @@
             const batch = verbs.slice(i, i + BATCH_SIZE);
             const promises = batch.map(verb =>
                 fetch(`json/wortfamilie/${verb}.json${appVersion ? '?v=' + appVersion : ''}`)
-                    .then(res => res.ok ? res.json() : null)
+                    .then(res => res.ok ? parseJsonUtf8(res) : null)
                     .then(data => {
                         if (data && data.wortfamilie) {
                             data.wortfamilie.forEach(item => {
@@ -1559,7 +1565,7 @@
 
         // Load Verb Types global data
         fetch('json/verb_types.json')
-            .then(res => res.ok ? res.json() : {})
+            .then(res => res.ok ? parseJsonUtf8(res) : {})
             .then(data => { verbTypesData = data || {}; })
             .catch(() => { verbTypesData = {}; });
 
@@ -3086,7 +3092,7 @@
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
             }
-            wortfamilieIndex = await response.json();
+            wortfamilieIndex = await parseJsonUtf8(response);
             console.log("Wortfamilie Index loaded successfully.");
             return wortfamilieIndex;
         } catch (error) {
@@ -3364,7 +3370,7 @@
                         try {
                             const res = await fetch(`json/cards/${wfRes.verb}.json?v=${appVersion || '1'}`);
                             if (res.ok) {
-                                allVerbsData[wfRes.verb] = await res.json();
+                                allVerbsData[wfRes.verb] = await parseJsonUtf8(res);
                             }
                         } catch (e) {
                             console.warn("Failed to load verb data for search result", wfRes.verb);
