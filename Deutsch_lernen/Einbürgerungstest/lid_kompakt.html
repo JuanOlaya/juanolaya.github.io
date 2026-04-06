@@ -1,0 +1,1236 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiD: Einbürgerungstest Kompakt</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+
+            /* Neon Article Colors */
+            --color-der: #3b82f6;
+            /* Blue */
+            --color-die: #ef4444;
+            /* Red */
+            --color-das: #22c55e;
+            /* Green */
+            --color-pl: #a855f7;
+            /* Purple */
+
+            --modal-overlay: rgba(0, 0, 0, 0.75);
+            --accent-gold: #f59e0b;
+            --accent-green: #00ffa1;
+            /* Neon Mint for Design System */
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-color);
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* GRID LAYOUT - RESPONSIVE */
+        .container {
+            width: 100%;
+            max-width: 1500px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            padding-bottom: 50px;
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                grid-template-columns: repeat(3, 1fr);
+                align-items: start;
+            }
+        }
+
+        /* Interactive Title Word */
+        .audio-trigger {
+            color: #333;
+            border-bottom: 3px dashed #4682B4;
+            cursor: pointer;
+            padding-bottom: 2px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .audio-trigger:hover {
+            color: #4682B4;
+            border-bottom-style: solid;
+        }
+
+        .audio-icon-small {
+            font-size: 0.9rem;
+        }
+
+        /* Category Card Styles */
+        .category-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-header {
+            padding: 12px 20px;
+            /* Background set dynamically via JS */
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            /* Interaction Cue */
+            transition: filter 0.2s;
+        }
+
+        .category-header:hover {
+            filter: brightness(1.1);
+        }
+
+        .category-icon {
+            font-size: 1.4rem;
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 0;
+            color: white;
+            flex-grow: 1;
+            letter-spacing: -0.2px;
+        }
+
+        .category-title-es {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.72);
+            margin-left: 16px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .info-icon-header {
+            font-size: 1rem;
+            opacity: 0.5;
+        }
+
+        /* --- STANDARD CARD DESIGN COLORS --- */
+        /* German Word: Mint */
+        .noun-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #CBF6DB;
+            /* Pale Mint Green from Design System */
+            white-space: nowrap;
+        }
+        .noun-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+        }
+        .noun-tag-light {
+            color: #E6F3FF;
+            background: rgba(230, 243, 255, 0.16);
+            border: 1px solid rgba(230, 243, 255, 0.28);
+        }
+
+        /* Translation: Slate-White */
+        .col-trans {
+            color: #F3F4F7;
+            /* Off-White / Slate 50 from Design System */
+            font-style: italic;
+            font-size: 0.95rem;
+            text-align: right;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .col-trans:hover {
+            color: white;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+
+        /* Article Colors (kept distinct for meaning, but softened if needed or integrated) */
+        /* ... existing article colors ... */
+
+        /* MODAL STYLES aligned with Adverb Design */
+        /* ... (modal styles handled separately or below) ... */
+
+        /* Table Styles */
+        .word-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        /* REMOVED thead blocks per Design System */
+
+
+        .word-table tr {
+            /* Removed row-wide pointer since interactions are split */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .word-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .word-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+            /* Subtle row hover */
+        }
+
+        .word-table td {
+            padding: 12px 20px;
+            vertical-align: middle;
+        }
+
+        /* Word Cell Styling (German) */
+        .col-word {
+            width: auto;
+            cursor: pointer;
+            /* Shows clickability */
+            transition: background-color 0.2s, color 0.2s;
+            position: relative;
+        }
+
+        .col-word:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Audio visual hint on hover */
+        /* Audio visual hint on hover REMOVED per design system */
+        /* .col-word:hover::after { content: "🔊"; ... } */
+
+        .word-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .article-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px currentColor;
+            flex-shrink: 0;
+        }
+
+        .article-text {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 30px;
+            opacity: 0.9;
+            flex-shrink: 0;
+        }
+
+        .noun-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            white-space: nowrap;
+        }
+
+        /* Translation Cell Styling (Spanish) */
+        .col-trans {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.95rem;
+            text-align: right;
+            cursor: pointer;
+            /* Shows clickability */
+            transition: color 0.2s;
+        }
+
+        .col-trans:hover {
+            color: var(--text-main);
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+
+        .importance-star {
+            color: var(--accent-gold);
+            font-size: 0.95rem;
+            margin-left: 6px;
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.45);
+            vertical-align: middle;
+        }
+
+        /* Article Colors */
+        .der .article-text,
+        .der .article-dot {
+            color: var(--color-der);
+        }
+
+        .die .article-text,
+        .die .article-dot {
+            color: var(--color-die);
+        }
+
+        .das .article-text,
+        .das .article-dot {
+            color: var(--color-das);
+        }
+
+        .pl .article-text,
+        .pl .article-dot {
+            color: var(--color-pl);
+        }
+
+        .mixed .article-text,
+        .mixed .article-dot {
+            color: var(--accent-gold);
+        }
+
+        .none .article-dot {
+            opacity: 0;
+            box-shadow: none;
+        }
+
+
+        /* MODAL STYLES */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--modal-overlay);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            border: 1px solid var(--accent-green);
+            /* Updated per Design System */
+            box-shadow: 0 0 30px rgba(0, 255, 161, 0.2);
+            /* Neon Glow */
+            transform: translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 30px 30px 10px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-body {
+            padding: 20px 30px 40px 30px;
+        }
+
+        .modal-emoji {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+        }
+
+        .modal-word-line {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 5px;
+        }
+
+        .modal-article {
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .modal-noun {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            text-align: center;
+        }
+
+        .modal-trans {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            font-style: italic;
+            display: block;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal-speaker {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 1.5rem;
+            margin-left: 10px;
+            vertical-align: middle;
+            transition: transform 0.2s;
+        }
+
+        .modal-speaker:hover {
+            transform: scale(1.2);
+        }
+
+        .example-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .modal-note-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--accent-gold);
+            margin-top: 16px;
+        }
+
+        .qa-section {
+            margin-top: 16px;
+        }
+
+        .qa-slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .qa-counter {
+            font-size: 0.78rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .qa-slider-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qa-slider-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .qa-slider-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .qa-slider-btn:disabled {
+            opacity: 0.4;
+            cursor: default;
+        }
+
+        .qa-slider-dots {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .qa-slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .qa-slider-dot.active {
+            background: var(--accent-green);
+            transform: scale(1.15);
+        }
+
+        .qa-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 18px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 12px;
+        }
+
+        .qa-row + .qa-row {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .qa-kind {
+            display: inline-block;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-green);
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .qa-text-de {
+            font-size: 1.02rem;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        .qa-text-es {
+            font-size: 0.96rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.45;
+            margin-top: 6px;
+        }
+
+        .ex-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .ex-de {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .ex-es {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-style: italic;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 10;
+        }
+
+        .close-btn:hover {
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .article-text {
+                display: none;
+            }
+
+            .article-dot {
+                width: 12px;
+                height: 12px;
+            }
+
+            /* .col-trans {
+    display: none;
+    } - User requested to show translation */
+
+            .word-table td {
+                padding: 12px 10px;
+            }
+
+            .noun-text {
+                font-size: 1rem;
+            }
+        }
+
+        /* Search Container */
+        .search-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(0, 255, 161, 0.2);
+            transform: scale(1.02);
+        }
+
+        .search-hit td {
+            background: rgba(0, 255, 161, 0.06);
+        }
+
+        .search-hit .word-wrapper,
+        .search-hit .col-trans {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Leben in Deutschland</h1>
+        <span class="audio-trigger" onclick="speak('Einbürgerungstest')">
+            Einbürgerungstest
+        </span>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Begriffe suchen / Search terms..."
+                oninput="handleSearch()">
+        </div>
+    </header>
+
+    <div class="container" id="app-container">
+        <!-- Content will be injected here -->
+    </div>
+
+    <!-- Modal Template -->
+    <div class="modal-overlay" id="detail-modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeModal()">×</button>
+
+            <div class="modal-header">
+                <span class="modal-emoji" id="m-emoji"></span>
+                <div class="modal-word-line" id="m-header-line">
+                    <span class="modal-article" id="m-art"></span>
+                    <span class="modal-noun" id="m-word"></span>
+                    <span class="modal-speaker" id="m-speaker-icon">🔊</span>
+                </div>
+                <span class="modal-trans" id="m-trans"></span>
+            </div>
+
+            <div class="modal-body">
+                <div class="example-card" id="m-example-card">
+                    <span class="ex-label">Beispiel / Ejemplo</span>
+                    <div class="ex-de" id="m-ex-de"></div>
+                    <div class="ex-es" id="m-ex-es"></div>
+                </div>
+                <div class="qa-section" id="m-qa-section" style="display:none;">
+                    <span class="ex-label">Einbürgerungstest Q&A</span>
+                    <div class="qa-slider-header" id="m-qa-slider-header" style="display:none;">
+                        <span class="qa-counter" id="m-qa-counter"></span>
+                        <div class="qa-slider-controls">
+                            <button class="qa-slider-btn" id="m-qa-prev" type="button" aria-label="Previous question">‹</button>
+                            <div class="qa-slider-dots" id="m-qa-dots"></div>
+                            <button class="qa-slider-btn" id="m-qa-next" type="button" aria-label="Next question">›</button>
+                        </div>
+                    </div>
+                    <div id="m-qa-list"></div>
+                </div>
+                <div class="modal-note-card" id="m-note-card" style="display:none;">
+                    <span class="ex-label">Hinweis / Nota</span>
+                    <div class="ex-de" id="m-note"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="lid_kompakt_nouns.js"></script>
+    <script src="lid_kompakt_modal.js"></script>
+    <script>
+        const verbenPalette = [
+            "#8b5cf6",
+            "#ec4899",
+            "#f59e0b",
+            "#f97316",
+            "#22c55e",
+            "#3b82f6"
+        ];
+
+        function getModalEntryKey(groupId, itemWord) {
+            return `${groupId}::${itemWord}`;
+        }
+
+        function mergeModalData(groups, modalData) {
+            return (groups || []).map(group => ({
+                ...group,
+                items: (group.items || []).map(item => ({
+                    ...item,
+                    ...((modalData || {})[getModalEntryKey(group.id, item.w)] || {})
+                }))
+            }));
+        }
+
+        const data = mergeModalData(window.lidKompaktData || [], window.lidKompaktModalData || {});
+
+        // Helper: Get class based on article
+        function getArtClass(art) {
+            art = (art || "").toLowerCase().trim();
+            if (!art) return 'none';
+            if (art.includes('/')) return 'mixed';
+            if (art.includes('der')) return 'der';
+            if (art.includes('die') && !art.includes('pl')) return 'die';
+            if (art.includes('das')) return 'das';
+            return 'pl';
+        }
+
+        // Helper: Clean speech text (remove parenthesis content)
+        function getSpeechText(art, word) {
+            const cleanArt = (art || "").replace(/\(.*\)/, '').trim();
+            return cleanArt ? `${cleanArt} ${word}` : word;
+        }
+
+        function getCardWord(item) {
+            const word = (item.w || "").trim();
+            if (!word.includes('/')) return word;
+
+            const parts = word.split('/').map(part => part.trim()).filter(Boolean);
+            if (parts.length < 2) return word;
+
+            const normalizedArt = (item.art || "").toLowerCase().replace(/\s+/g, '');
+            const maleIndex = normalizedArt.startsWith('der') ? 0 : 1;
+            return parts[maleIndex] || parts[0];
+        }
+
+        function getCardArticle(item) {
+            const art = (item.art || "").trim();
+            if (!art.includes('/')) return art;
+
+            const parts = art.split('/').map(part => part.trim()).filter(Boolean);
+            if (parts.length < 2) return art;
+
+            const normalizedArt = art.toLowerCase().replace(/\s+/g, '');
+            const maleIndex = normalizedArt.startsWith('der') ? 0 : 1;
+            return parts[maleIndex] || parts[0];
+        }
+
+        function getCardTranslation(item) {
+            if (item.card_tr) return item.card_tr;
+            const translation = (item.tr || "").trim();
+            if (!translation.includes('/')) return translation;
+
+            const parts = translation.split('/').map(part => part.trim()).filter(Boolean);
+            if (parts.length < 2) return translation;
+
+            const normalizedArt = (item.art || "").toLowerCase().replace(/\s+/g, '');
+            const maleIndex = normalizedArt.startsWith('der') ? 0 : 1;
+            return parts[maleIndex] || parts[0];
+        }
+
+        function formatHeaderTitle(text) {
+            if (!text) return "";
+            return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+        }
+
+        const headerThemeLabels = {
+            institutionen: { de: "Institutionen", es: "Instituciones" },
+            bundesregierung: { de: "Bundesregierung", es: "Gobierno federal" },
+            wahlen: { de: "Wahlen", es: "Elecciones" },
+            wahlrecht: { de: "Wahlrecht", es: "Sufragio" },
+            parteien: { de: "Parteien", es: "Partidos" },
+            staatsprinzipien: { de: "Staatsprinzipien", es: "Principios" },
+            werte: { de: "Werte", es: "Valores" },
+            rechte: { de: "Rechte", es: "Derechos" },
+            freiheiten: { de: "Freiheiten", es: "Libertades" },
+            "recht-grundlagen": { de: "Grundlagen", es: "Bases" },
+            gerichte: { de: "Justiz", es: "Justicia" },
+            strafen: { de: "Strafen", es: "Penas" },
+            diskriminierung: { de: "Diskriminierung", es: "Discriminación" },
+            pruefungslogik: { de: "Prüfungslogik", es: "Examen" },
+            "deutsche-geschichte": { de: "Geschichte", es: "Historia" },
+            wiedervereinigung: { de: "Deutschland", es: "Alemania" },
+            berlin: { de: "Berlin", es: "Berlin" },
+            gesellschaft: { de: "Gesellschaft", es: "Sociedad" },
+            migration: { de: "Migration", es: "Migración" },
+            "religion-gemeinschaft": { de: "Religion", es: "Religion" },
+            sozialsystem: { de: "Sozialsystem", es: "Sistema" },
+            foederalismus: { de: "Föderalismus", es: "Federalismo" },
+            eu: { de: "EU", es: "Unión Europea" },
+            "kommune-aemter": { de: "Kommune", es: "Municipio" },
+            behoerden: { de: "Behörden", es: "Autoridades" },
+            staatsgewalten: { de: "Staatsgewalten", es: "Poderes" },
+            staatsaemter: { de: "Staatsämter", es: "Cargos" }
+        };
+
+        function getHeaderLabels(cat) {
+            return headerThemeLabels[cat.id] || {
+                de: formatHeaderTitle(cat.title),
+                es: cat.title_es
+            };
+        }
+
+        function validateCategorySize(groups) {
+            const oversizedCategory = groups.find(cat => (cat.items || []).length > 7);
+            if (!oversizedCategory) return;
+
+            throw new Error(`Category "${oversizedCategory.id}" exceeds the maximum of 7 items.`);
+        }
+
+        // Initialize
+        validateCategorySize(data);
+        renderCards(data);
+
+        // --- SEARCH LOGIC ---
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            renderCards(data, query);
+        }
+
+        function highlightMatch(text, query) {
+            if (!query || !text) return text;
+            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(`(${escapedQuery})`, 'gi');
+            return text.replace(regex, '<span style="color:#00ffa1; font-weight:bold; text-decoration:underline;">$1</span>');
+        }
+
+        function itemMatchesQuery(item, query) {
+            if (!query) return true;
+
+            const article = item.art || "";
+            const translation = item.tr || "";
+            const modalTranslation = item.modal_tr || "";
+            const cardTranslation = item.card_tr ? item.card_tr.replace(/<br\s*\/?>/gi, ' ') : "";
+            const example = item.ex || "";
+            const exampleEs = item.ex_es || "";
+            const qaText = item.qa ? item.qa.map(entry =>
+                [entry.q, entry.a, entry.q_es, entry.a_es].join(' ')
+            ).join(' ') : "";
+
+            return [
+                item.w,
+                article,
+                translation,
+                modalTranslation,
+                cardTranslation,
+                example,
+                exampleEs,
+                qaText
+            ].some(value => (value || "").toLowerCase().includes(query));
+        }
+
+        // --- RENDER LOGIC ---
+        function renderCards(groups, query = "") {
+            const container = document.getElementById('app-container');
+            container.innerHTML = ""; // Clear existing
+
+            groups.forEach((cat, catIndex) => {
+                const categoryMatchesQuery = query && [
+                    cat.title,
+                    cat.title_es
+                ].some(value => (value || "").toLowerCase().includes(query));
+
+                const cardMatchesQuery = query
+                    ? categoryMatchesQuery || cat.items.some(item => itemMatchesQuery(item, query))
+                    : true;
+
+                if (!cardMatchesQuery) return;
+
+                const card = document.createElement('div');
+                card.className = 'category-card';
+
+                const headerLabels = getHeaderLabels(cat);
+                const displayTitle = query && categoryMatchesQuery
+                    ? highlightMatch(headerLabels.de, query)
+                    : headerLabels.de;
+                const displayTitleEs = query && categoryMatchesQuery
+                    ? highlightMatch(headerLabels.es, query)
+                    : headerLabels.es;
+
+                const header = document.createElement('div');
+                header.className = 'category-header';
+                header.style.backgroundColor = verbenPalette[catIndex % verbenPalette.length];
+                header.title = "Klicken für Übersetzung / Click para traducción";
+                header.onclick = () => openCategoryModal(cat);
+
+                header.innerHTML = `
+                        <h2 class="category-title">${displayTitle}</h2>
+                        <span class="category-title-es">${displayTitleEs}</span>
+                    `;
+
+                const table = document.createElement('table');
+                table.className = 'word-table';
+                const tbody = document.createElement('tbody');
+
+                cat.items.forEach((item, index) => {
+                    const artClass = getArtClass(item.art);
+                    const tr = document.createElement('tr');
+                    tr.className = artClass;
+
+                    const cardWord = getCardWord(item);
+                    const speechText = getSpeechText(getCardArticle(item), cardWord);
+                    const itemMatches = categoryMatchesQuery || itemMatchesQuery(item, query);
+
+                    let displayWord = cardWord;
+                    let displayTrans = getCardTranslation(item);
+
+                    if (query && itemMatches) {
+                        displayWord = highlightMatch(displayWord, query);
+                        displayTrans = highlightMatch(displayTrans, query);
+                    }
+
+                    if (query && itemMatches) {
+                        tr.classList.add('search-hit');
+                    }
+
+                    const importantStar = item.important ? '<span class="importance-star" title="Importante">★</span>' : '';
+                    const useTag = item.tag === 'light';
+                    const wordHTML = useTag ? `<span class="noun-tag noun-tag-light">${displayWord}</span>` : displayWord;
+
+                    const tdWord = document.createElement('td');
+                    tdWord.className = 'col-word';
+                    tdWord.title = "Hören / Escuchar";
+                    tdWord.onclick = (e) => {
+                        e.stopPropagation();
+                        speak(speechText);
+                    };
+
+                    const speakerIcon = index === 0 ? '<span style="margin-left:8px; font-size:0.9rem; vertical-align:middle;">🔊</span>' : '';
+
+                    tdWord.innerHTML = `
+                            <div class="word-wrapper">
+                                <span class="article-dot"></span>
+                                <span class="noun-text">${wordHTML}${importantStar} ${speakerIcon}</span>
+                            </div>
+                        `;
+
+                    const tdTrans = document.createElement('td');
+                    tdTrans.className = 'col-trans';
+                    tdTrans.title = "Details & Beispiele / Detalles y ejemplos";
+                    tdTrans.onclick = (e) => {
+                        e.stopPropagation();
+                        openWordModal(item, artClass);
+                    };
+                    tdTrans.innerHTML = displayTrans;
+
+                    tr.appendChild(tdWord);
+                    tr.appendChild(tdTrans);
+                    tbody.appendChild(tr);
+                });
+
+                table.appendChild(tbody);
+                card.appendChild(header);
+                card.appendChild(table);
+                container.appendChild(card);
+            });
+
+            // No Results Message
+            if (container.innerHTML === "") {
+                container.innerHTML = `
+                    <div style="text-align:center; padding:40px; color:var(--text-muted); grid-column: 1 / -1;">
+                        <div style="font-size:3rem; margin-bottom:10px;">🔍</div>
+                        <p>Keine Ergebnisse gefunden / No results found</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('detail-modal');
+        const mEmoji = document.getElementById('m-emoji');
+        const mArt = document.getElementById('m-art');
+        const mWord = document.getElementById('m-word');
+        const mTrans = document.getElementById('m-trans');
+        const mExDe = document.getElementById('m-ex-de');
+        const mExEs = document.getElementById('m-ex-es');
+        const mHeaderLine = document.getElementById('m-header-line');
+        const mSpeaker = document.getElementById('m-speaker-icon');
+        const mExampleCard = document.getElementById('m-example-card');
+        const mQaSection = document.getElementById('m-qa-section');
+        const mQaList = document.getElementById('m-qa-list');
+        const mQaSliderHeader = document.getElementById('m-qa-slider-header');
+        const mQaCounter = document.getElementById('m-qa-counter');
+        const mQaPrev = document.getElementById('m-qa-prev');
+        const mQaNext = document.getElementById('m-qa-next');
+        const mQaDots = document.getElementById('m-qa-dots');
+        const mNoteCard = document.getElementById('m-note-card');
+        const mNote = document.getElementById('m-note');
+
+        let currentSpeechText = "";
+        let currentQaEntries = [];
+        let currentQaIndex = 0;
+        let currentQaStorageKey = "";
+
+        function getQaStorageKey(item) {
+            const art = item.art || '';
+            return `lid_qa_index::${art}::${item.w}`;
+        }
+
+        function loadStoredQaIndex(storageKey, total) {
+            if (!storageKey || !total || !window.localStorage) return 0;
+            try {
+                const storedValue = window.localStorage.getItem(storageKey);
+                const parsed = Number.parseInt(storedValue, 10);
+                if (Number.isInteger(parsed) && parsed >= 0 && parsed < total) return parsed;
+            } catch (error) {
+                return 0;
+            }
+            return 0;
+        }
+
+        function saveStoredQaIndex() {
+            if (!currentQaStorageKey || !currentQaEntries.length || !window.localStorage) return;
+            try {
+                window.localStorage.setItem(currentQaStorageKey, String(currentQaIndex));
+            } catch (error) {
+                // Ignore storage failures quietly.
+            }
+        }
+
+        function renderQaSlider() {
+            mQaList.innerHTML = "";
+            mQaDots.innerHTML = "";
+
+            if (!currentQaEntries.length) {
+                mQaSliderHeader.style.display = 'none';
+                return;
+            }
+
+            const entry = currentQaEntries[currentQaIndex];
+            const qaCard = document.createElement('div');
+            qaCard.className = 'qa-card';
+            qaCard.innerHTML = `
+                <div class="qa-row">
+                    <span class="qa-kind">Frage</span>
+                    <div class="qa-text-de">${entry.q}</div>
+                    <div class="qa-text-es">${entry.q_es}</div>
+                </div>
+                <div class="qa-row">
+                    <span class="qa-kind">Antwort</span>
+                    <div class="qa-text-de">${entry.a}</div>
+                    <div class="qa-text-es">${entry.a_es}</div>
+                </div>
+            `;
+            mQaList.appendChild(qaCard);
+
+            mQaCounter.textContent = `${currentQaIndex + 1} / ${currentQaEntries.length}`;
+            mQaSliderHeader.style.display = currentQaEntries.length > 1 ? 'flex' : 'none';
+            mQaPrev.disabled = currentQaEntries.length <= 1;
+            mQaNext.disabled = currentQaEntries.length <= 1;
+
+            currentQaEntries.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.className = `qa-slider-dot${index === currentQaIndex ? ' active' : ''}`;
+                mQaDots.appendChild(dot);
+            });
+        }
+
+        function stepQa(direction) {
+            if (currentQaEntries.length <= 1) return;
+            currentQaIndex = (currentQaIndex + direction + currentQaEntries.length) % currentQaEntries.length;
+            saveStoredQaIndex();
+            renderQaSlider();
+        }
+
+        // Function to open Modal for a specific WORD
+        function openWordModal(item, artClass) {
+            // Populate Data
+            mEmoji.textContent = item.e;
+            mArt.textContent = item.art;
+            mWord.innerHTML = item.important ? `${item.w} <span class="importance-star" title="Importante">★</span>` : item.w;
+            mTrans.textContent = item.modal_tr || item.tr;
+            mExDe.textContent = item.ex;
+            mExEs.textContent = item.ex_es;
+            mNote.textContent = item.note || "";
+            currentQaEntries = item.qa || [];
+            currentQaStorageKey = currentQaEntries.length ? getQaStorageKey(item) : "";
+            currentQaIndex = loadStoredQaIndex(currentQaStorageKey, currentQaEntries.length);
+            renderQaSlider();
+
+            currentSpeechText = getSpeechText(item.art, item.w);
+
+            // Styling & Visibility
+            mArt.style.display = item.art ? 'inline' : 'none';
+            mExampleCard.style.display = item.qa && item.qa.length ? 'none' : 'block';
+            mQaSection.style.display = item.qa && item.qa.length ? 'block' : 'none';
+            mNoteCard.style.display = item.note ? 'block' : 'none';
+            mEmoji.style.filter = ''; // Reset filter logic later
+            mWord.style.color = 'white'; // Default
+
+            // Set dynamic colors based on article
+            mHeaderLine.className = `modal-word-line ${artClass}`;
+            let colorVar;
+            if (artClass === 'der') colorVar = 'var(--color-der)';
+            else if (artClass === 'die') colorVar = 'var(--color-die)';
+            else if (artClass === 'das') colorVar = 'var(--color-das)';
+            else if (artClass === 'mixed') colorVar = 'var(--accent-gold)';
+            else if (artClass === 'none') colorVar = 'var(--accent-green)';
+            else colorVar = 'var(--color-pl)';
+
+            mArt.style.color = colorVar;
+            mEmoji.style.filter = `drop-shadow(0 0 15px ${colorVar})`;
+
+            modal.classList.add('active');
+
+            // REMOVED auto-speak here to keep actions distinct as requested
+            // speak(currentSpeechText); 
+        }
+
+        // Function to open Modal for a CATEGORY
+        function openCategoryModal(cat) {
+            // Populate Data
+            mEmoji.textContent = cat.icon;
+            mWord.textContent = formatHeaderTitle(cat.title);
+            mTrans.textContent = cat.title_es;
+
+            currentSpeechText = cat.title;
+
+            // Styling & Visibility
+            mArt.style.display = 'none'; // Hide Article
+            mExampleCard.style.display = 'none'; // Hide Examples
+            mQaSection.style.display = 'none';
+            mNoteCard.style.display = 'none';
+            currentQaEntries = [];
+            currentQaIndex = 0;
+            currentQaStorageKey = "";
+            renderQaSlider();
+
+            mHeaderLine.className = `modal-word-line`; // No specific article class
+            mWord.style.color = 'var(--accent-gold)'; // Special color for titles
+            mEmoji.style.filter = 'drop-shadow(0 0 15px rgba(255,255,255,0.3))';
+
+            modal.classList.add('active');
+
+            // Auto-speak Title
+            speak(currentSpeechText);
+        }
+
+        // Speaker click in modal
+        mSpeaker.onclick = (e) => {
+            e.stopPropagation();
+            if (currentSpeechText) speak(currentSpeechText);
+        }
+
+        mQaPrev.onclick = (e) => {
+            e.stopPropagation();
+            stepQa(-1);
+        };
+
+        mQaNext.onclick = (e) => {
+            e.stopPropagation();
+            stepQa(1);
+        };
+
+        function closeModal(event) {
+            if (event && event.target !== modal && !event.target.classList.contains('close-btn')) return;
+            modal.classList.remove('active');
+        }
+
+        // TTS
+        function speak(text) {
+            if (!window.speechSynthesis) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';
+
+            // Attempt to use a German voice specifically if available
+            const voices = window.speechSynthesis.getVoices();
+            const deVoice = voices.find(v => v.lang.includes('de'));
+            if (deVoice) utterance.voice = deVoice;
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Load voices initially to ensure they are available
+        if (window.speechSynthesis) {
+            window.speechSynthesis.getVoices();
+        }
+    </script>
+</body>
+
+</html>
+
