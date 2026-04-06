@@ -454,7 +454,7 @@ body.compact-view .content-block {
 .navigation-wrapper .level-toggle,
 .level-indicator,
 .level-navigation .level-nav-arrow {
-    display: none;
+    display: none !important;
 }
 
 /* Group navigation section */
