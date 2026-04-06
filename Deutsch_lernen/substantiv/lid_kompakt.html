@@ -461,6 +461,48 @@
             margin-top: 16px;
         }
 
+        .qa-section {
+            margin-top: 16px;
+        }
+
+        .qa-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 18px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 12px;
+        }
+
+        .qa-row + .qa-row {
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .qa-kind {
+            display: inline-block;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-green);
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .qa-text-de {
+            font-size: 1.02rem;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        .qa-text-es {
+            font-size: 0.96rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.45;
+            margin-top: 6px;
+        }
+
         .ex-label {
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -594,6 +636,10 @@
                     <div class="ex-de" id="m-ex-de"></div>
                     <div class="ex-es" id="m-ex-es"></div>
                 </div>
+                <div class="qa-section" id="m-qa-section" style="display:none;">
+                    <span class="ex-label">Einbürgerungstest Q&A</span>
+                    <div id="m-qa-list"></div>
+                </div>
                 <div class="modal-note-card" id="m-note-card" style="display:none;">
                     <span class="ex-label">Hinweis / Nota</span>
                     <div class="ex-de" id="m-note"></div>
@@ -627,6 +673,14 @@
                                         "tr": "derechos fundamentales",
                                         "ex": "Die Grundrechte gelten für alle.",
                                         "ex_es": "Los derechos fundamentales se aplican a todos.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welche Rechte gehören in Deutschland zu den Grundrechten?",
+                                                            "a": "Zum Beispiel die Meinungsfreiheit.",
+                                                            "q_es": "¿Qué derechos pertenecen en Alemania a los derechos fundamentales?",
+                                                            "a_es": "Por ejemplo, la libertad de opinión."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -636,6 +690,14 @@
                                         "tr": "derecho fundamental",
                                         "ex": "Die Meinungsfreiheit ist ein Grundrecht.",
                                         "ex_es": "La libertad de opinión es un derecho fundamental.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Ist die Meinungsfreiheit in Deutschland ein Grundrecht?",
+                                                            "a": "Ja.",
+                                                            "q_es": "¿La libertad de opinión es en Alemania un derecho fundamental?",
+                                                            "a_es": "Sí."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -645,6 +707,14 @@
                                         "tr": "derechos humanos",
                                         "ex": "Menschenrechte sind weltweit wichtig.",
                                         "ex_es": "Los derechos humanos son importantes en todo el mundo.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welche Rechte gelten für alle Menschen auf der Welt?",
+                                                            "a": "Die Menschenrechte.",
+                                                            "q_es": "¿Qué derechos valen para todas las personas del mundo?",
+                                                            "a_es": "Los derechos humanos."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -654,6 +724,14 @@
                                         "tr": "libertad de opinión",
                                         "ex": "Meinungsfreiheit ist ein Grundrecht.",
                                         "ex_es": "La libertad de opinión es un derecho fundamental.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Warum dürfen Menschen in Deutschland offen etwas gegen die Regierung sagen?",
+                                                            "a": "Weil hier Meinungsfreiheit gilt.",
+                                                            "q_es": "¿Por qué la gente en Alemania puede decir abiertamente algo contra el gobierno?",
+                                                            "a_es": "Porque aquí existe la libertad de opinión."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -662,7 +740,15 @@
                                         "e": "📰",
                                         "tr": "libertad de prensa",
                                         "ex": "Pressefreiheit schützt Journalisten.",
-                                        "ex_es": "La libertad de prensa protege a los periodistas."
+                                        "ex_es": "La libertad de prensa protege a los periodistas.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welches Grundrecht schützt Zeitungen, Radio und Fernsehen vor staatlicher Zensur?",
+                                                            "a": "Die Pressefreiheit.",
+                                                            "q_es": "¿Qué derecho fundamental protege a periódicos, radio y televisión frente a la censura estatal?",
+                                                            "a_es": "La libertad de prensa."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -672,6 +758,14 @@
                                         "ex": "Frauen und Männer haben Gleichberechtigung.",
                                         "ex_es": "Mujeres y hombres tienen igualdad de derechos.",
                                         "note": "Verwandtes Wort: gleichfalls = igualmente / asimismo.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man es, wenn Frauen und Männer die gleichen Rechte haben?",
+                                                            "a": "Gleichberechtigung.",
+                                                            "q_es": "¿Cómo se llama cuando mujeres y hombres tienen los mismos derechos?",
+                                                            "a_es": "Igualdad de derechos."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -690,6 +784,14 @@
                                         "tr": "libertad religiosa",
                                         "ex": "Jeder Mensch hat Religionsfreiheit.",
                                         "ex_es": "Toda persona tiene libertad religiosa.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welches Grundrecht gilt in Deutschland?",
+                                                            "a": "Die Religionsfreiheit.",
+                                                            "q_es": "¿Qué derecho fundamental existe en Alemania?",
+                                                            "a_es": "La libertad religiosa."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -706,7 +808,15 @@
                                         "e": "💭",
                                         "tr": "libertad de conciencia",
                                         "ex": "Auch Gewissensfreiheit ist geschützt.",
-                                        "ex_es": "La libertad de conciencia también está protegida."
+                                        "ex_es": "La libertad de conciencia también está protegida.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welches Grundrecht schützt das Gewissen eines Menschen?",
+                                                            "a": "Die Gewissensfreiheit.",
+                                                            "q_es": "¿Qué derecho fundamental protege la conciencia de una persona?",
+                                                            "a_es": "La libertad de conciencia."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -715,6 +825,14 @@
                                         "tr": "libertad de reunión",
                                         "ex": "Die Versammlungsfreiheit erlaubt Demonstrationen.",
                                         "ex_es": "La libertad de reunión permite manifestaciones.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welches Grundrecht erlaubt Demonstrationen in Deutschland?",
+                                                            "a": "Die Versammlungsfreiheit.",
+                                                            "q_es": "¿Qué derecho fundamental permite manifestaciones en Alemania?",
+                                                            "a_es": "La libertad de reunión."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -724,6 +842,14 @@
                                         "tr": "manifestación",
                                         "ex": "Eine Demonstration ist in Deutschland erlaubt.",
                                         "ex_es": "Una manifestación está permitida en Alemania.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was darf man in Deutschland aufgrund der Versammlungsfreiheit machen?",
+                                                            "a": "Eine Demonstration.",
+                                                            "q_es": "¿Qué se puede hacer en Alemania gracias a la libertad de reunión?",
+                                                            "a_es": "Una manifestación."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -733,6 +859,14 @@
                                         "tr": "libertad de residencia / libre circulación",
                                         "ex": "Die Freizügigkeit erlaubt den Wohnort frei zu wählen.",
                                         "ex_es": "La libre circulación permite elegir libremente el lugar de residencia.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welches Grundrecht erlaubt in Deutschland, den Wohnort frei zu wählen?",
+                                                            "a": "Die Freizügigkeit.",
+                                                            "q_es": "¿Qué derecho fundamental permite elegir libremente el lugar de residencia en Alemania?",
+                                                            "a_es": "La libre circulación."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -751,6 +885,14 @@
                                         "tr": "dignidad humana",
                                         "ex": "Die Menschenwürde ist unantastbar.",
                                         "ex_es": "La dignidad humana es inviolable.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was ist in Deutschland unantastbar?",
+                                                            "a": "Die Würde des Menschen.",
+                                                            "q_es": "¿Qué es inviolable en Alemania?",
+                                                            "a_es": "La dignidad humana."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -759,7 +901,15 @@
                                         "e": "👤",
                                         "tr": "ser humano",
                                         "ex": "Der Mensch steht im Mittelpunkt der Rechte.",
-                                        "ex_es": "El ser humano está en el centro de los derechos."
+                                        "ex_es": "El ser humano está en el centro de los derechos.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wessen Würde ist nach dem Grundgesetz unantastbar?",
+                                                            "a": "Die Würde des Menschen.",
+                                                            "q_es": "¿La dignidad de quién es inviolable según la Ley Fundamental?",
+                                                            "a_es": "La dignidad del ser humano."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -768,6 +918,14 @@
                                         "tr": "inviolabilidad",
                                         "ex": "Die Unantastbarkeit der Menschenwürde ist zentral.",
                                         "ex_es": "La inviolabilidad de la dignidad humana es central.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie heißt es, wenn etwas nicht verletzt oder angetastet werden darf?",
+                                                            "a": "Unantastbarkeit.",
+                                                            "q_es": "¿Cómo se llama cuando algo no puede ser vulnerado ni tocado?",
+                                                            "a_es": "Inviolabilidad."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -777,6 +935,14 @@
                                         "tr": "libertad",
                                         "ex": "Freiheit ist ein wichtiges Recht.",
                                         "ex_es": "La libertad es un derecho importante.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was ist in Deutschland ein Grundrecht der Menschen?",
+                                                            "a": "Die Freiheit.",
+                                                            "q_es": "¿Qué es un derecho fundamental de las personas en Alemania?",
+                                                            "a_es": "La libertad."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -794,7 +960,15 @@
                                         "e": "🤝",
                                         "tr": "tolerancia",
                                         "ex": "Toleranz ist wichtig im Zusammenleben.",
-                                        "ex_es": "La tolerancia es importante para convivir."
+                                        "ex_es": "La tolerancia es importante para convivir.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was ist wichtig für das Zusammenleben von Menschen mit unterschiedlicher Religion oder Herkunft?",
+                                                            "a": "Toleranz.",
+                                                            "q_es": "¿Qué es importante para la convivencia entre personas de distinta religión o procedencia?",
+                                                            "a_es": "La tolerancia."
+                                                  }
+                                        ]
                               }
                     ]
           },
@@ -812,6 +986,14 @@
                                         "tr": "discriminación",
                                         "ex": "Diskriminierung ist verboten.",
                                         "ex_es": "La discriminación está prohibida.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was ist in Deutschland verboten, wenn Menschen wegen Herkunft, Geschlecht oder Religion benachteiligt werden?",
+                                                            "a": "Diskriminierung.",
+                                                            "q_es": "¿Qué está prohibido en Alemania cuando se perjudica a personas por su origen, sexo o religión?",
+                                                            "a_es": "La discriminación."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -828,7 +1010,15 @@
                                         "e": "⚖️",
                                         "tr": "trato desigual",
                                         "ex": "Ungleichbehandlung verletzt Rechte.",
-                                        "ex_es": "El trato desigual viola derechos."
+                                        "ex_es": "El trato desigual viola derechos.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man es, wenn Menschen ohne sachlichen Grund unterschiedlich behandelt werden?",
+                                                            "a": "Ungleichbehandlung.",
+                                                            "q_es": "¿Cómo se llama cuando se trata a las personas de manera diferente sin motivo justificado?",
+                                                            "a_es": "Trato desigual."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -836,7 +1026,15 @@
                                         "e": "🤲",
                                         "tr": "dignidad",
                                         "ex": "Die Würde jedes Menschen muss geschützt werden.",
-                                        "ex_es": "La dignidad de cada persona debe protegerse."
+                                        "ex_es": "La dignidad de cada persona debe protegerse.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was ist laut Artikel 1 des Grundgesetzes unantastbar?",
+                                                            "a": "Die Würde des Menschen.",
+                                                            "q_es": "¿Qué es inviolable según el artículo 1 de la Ley Fundamental?",
+                                                            "a_es": "La dignidad del ser humano."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -845,6 +1043,14 @@
                                         "tr": "tortura",
                                         "ex": "Folter ist absolut verboten.",
                                         "ex_es": "La tortura está absolutamente prohibida.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was ist in Deutschland absolut verboten?",
+                                                            "a": "Folter.",
+                                                            "q_es": "¿Qué está absolutamente prohibido en Alemania?",
+                                                            "a_es": "La tortura."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -854,6 +1060,14 @@
                                         "tr": "pena de muerte",
                                         "ex": "Die Todesstrafe ist in Deutschland abgeschafft.",
                                         "ex_es": "La pena de muerte está abolida en Alemania.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welche Strafe gibt es in Deutschland nicht mehr?",
+                                                            "a": "Die Todesstrafe.",
+                                                            "q_es": "¿Qué pena ya no existe en Alemania?",
+                                                            "a_es": "La pena de muerte."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -863,6 +1077,14 @@
                                         "tr": "trabajo forzado",
                                         "ex": "Zwangsarbeit ist verboten.",
                                         "ex_es": "El trabajo forzado está prohibido.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welche Arbeit ist in Deutschland verboten, wenn Menschen dazu gezwungen werden?",
+                                                            "a": "Zwangsarbeit.",
+                                                            "q_es": "¿Qué trabajo está prohibido en Alemania si las personas son obligadas a hacerlo?",
+                                                            "a_es": "El trabajo forzado."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -881,6 +1103,14 @@
                                         "tr": "democracia",
                                         "ex": "Deutschland ist eine Demokratie.",
                                         "ex_es": "Alemania es una democracia.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Deutschland ist ein demokratischer Staat. Was bedeutet das?",
+                                                            "a": "Das Volk wählt die politische Vertretung.",
+                                                            "q_es": "Alemania es un Estado democrático. ¿Qué significa eso?",
+                                                            "a_es": "El pueblo elige la representación política."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -889,7 +1119,15 @@
                                         "e": "🇩🇪",
                                         "tr": "república",
                                         "ex": "Deutschland ist eine Republik.",
-                                        "ex_es": "Alemania es una república."
+                                        "ex_es": "Alemania es una república.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Deutschland ist ein demokratischer und sozialer Bundesstaat. Welche Staatsform ist das Land außerdem?",
+                                                            "a": "Eine Republik.",
+                                                            "q_es": "Alemania es un Estado federal democrático y social. ¿Qué forma de Estado es además el país?",
+                                                            "a_es": "Una república."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -898,6 +1136,14 @@
                                         "tr": "república federal",
                                         "ex": "Deutschland ist eine Bundesrepublik.",
                                         "ex_es": "Alemania es una república federal.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie heißt Deutschland mit vollem Namen?",
+                                                            "a": "Bundesrepublik Deutschland.",
+                                                            "q_es": "¿Cuál es el nombre completo de Alemania?",
+                                                            "a_es": "República Federal de Alemania."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -907,6 +1153,14 @@
                                         "tr": "dictadura",
                                         "ex": "In einer Diktatur gibt es wenig Freiheit.",
                                         "ex_es": "En una dictadura hay poca libertad.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was gab es in Deutschland unter dem Nationalsozialismus?",
+                                                            "a": "Eine Diktatur.",
+                                                            "q_es": "¿Qué hubo en Alemania bajo el nacionalsocialismo?",
+                                                            "a_es": "Una dictadura."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -916,6 +1170,14 @@
                                         "tr": "el estado",
                                         "ex": "Der Staat schützt die Grundrechte.",
                                         "ex_es": "El Estado protege los derechos fundamentales.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer muss sich in Deutschland auch an die Gesetze halten?",
+                                                            "a": "Der Staat.",
+                                                            "q_es": "¿Quién debe en Alemania también respetar las leyes?",
+                                                            "a_es": "El Estado."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -924,7 +1186,15 @@
                                         "e": "⚖️",
                                         "tr": "estado de derecho",
                                         "ex": "Deutschland ist ein demokratischer Rechtsstaat.",
-                                        "ex_es": "Alemania es un Estado de derecho democrático.",
+                                        "ex_es": "Alemania es un estado de derecho democrático.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Deutschland ist ein Rechtsstaat. Was bedeutet das?",
+                                                            "a": "Alle Einwohnerinnen und Einwohner und der Staat müssen sich an die Gesetze halten.",
+                                                            "q_es": "Alemania es un Estado de derecho. ¿Qué significa eso?",
+                                                            "a_es": "Todas las personas y también el Estado deben respetar las leyes."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -934,6 +1204,14 @@
                                         "tr": "soberanía popular",
                                         "ex": "Volkssouveränität bedeutet: Alle Staatsgewalt geht vom Volk aus.",
                                         "ex_es": "La soberanía popular significa: todo poder del Estado emana del pueblo.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Von wem geht in Deutschland die Staatsgewalt aus?",
+                                                            "a": "Vom Volk.",
+                                                            "q_es": "¿De quién emana en Alemania el poder del Estado?",
+                                                            "a_es": "Del pueblo."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -952,6 +1230,14 @@
                                         "tr": "Bundestag / parlamento federal",
                                         "ex": "Der Bundestag wählt den Bundeskanzler.",
                                         "ex_es": "El Bundestag elige al canciller federal.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer wählt in Deutschland den Bundeskanzler oder die Bundeskanzlerin?",
+                                                            "a": "Der Bundestag.",
+                                                            "q_es": "¿Quién elige en Alemania al canciller federal?",
+                                                            "a_es": "El Bundestag."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -960,7 +1246,15 @@
                                         "e": "🏛️",
                                         "tr": "Bundesrat / Consejo Federal",
                                         "ex": "Der Bundesrat wirkt bei der Gesetzgebung mit.",
-                                        "ex_es": "El Bundesrat participa en la legislación."
+                                        "ex_es": "El Bundesrat participa en la legislación.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer wirkt in Deutschland bei der Gesetzgebung des Bundes mit?",
+                                                            "a": "Der Bundesrat.",
+                                                            "q_es": "¿Quién participa en Alemania en la legislación federal?",
+                                                            "a_es": "El Bundesrat."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -969,6 +1263,14 @@
                                         "tr": "Asamblea Federal",
                                         "ex": "Die Bundesversammlung wählt den Bundespräsidenten.",
                                         "ex_es": "La Asamblea Federal elige al presidente federal.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer wählt den Bundespräsidenten oder die Bundespräsidentin?",
+                                                            "a": "Die Bundesversammlung.",
+                                                            "q_es": "¿Quién elige al presidente federal?",
+                                                            "a_es": "La Asamblea Federal."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -977,7 +1279,15 @@
                                         "e": "🗣️",
                                         "tr": "parlamento",
                                         "ex": "Das Parlament diskutiert neue Regeln.",
-                                        "ex_es": "El parlamento debate nuevas reglas."
+                                        "ex_es": "El parlamento debate nuevas reglas.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wo sitzen die gewählten politischen Vertreterinnen und Vertreter?",
+                                                            "a": "Im Parlament.",
+                                                            "q_es": "¿Dónde se sientan las representantes y los representantes políticos elegidos?",
+                                                            "a_es": "En el parlamento."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -986,6 +1296,14 @@
                                         "tr": "gobierno",
                                         "ex": "Die Regierung plant ein neues Gesetz.",
                                         "ex_es": "El gobierno prepara una nueva ley.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Warum dürfen Menschen in Deutschland offen etwas gegen die Regierung sagen?",
+                                                            "a": "Weil hier Meinungsfreiheit gilt.",
+                                                            "q_es": "¿Por qué la gente en Alemania puede decir abiertamente algo contra el gobierno?",
+                                                            "a_es": "Porque aquí existe la libertad de opinión."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -995,6 +1313,14 @@
                                         "tr": "canciller federal",
                                         "ex": "Der Bundeskanzler leitet die Bundesregierung.",
                                         "ex_es": "El canciller federal dirige el gobierno federal.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer leitet die Bundesregierung?",
+                                                            "a": "Der Bundeskanzler oder die Bundeskanzlerin.",
+                                                            "q_es": "¿Quién dirige el gobierno federal?",
+                                                            "a_es": "El canciller federal."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1004,6 +1330,14 @@
                                         "tr": "gabinete federal",
                                         "ex": "Das Bundeskabinett beschließt wichtige Maßnahmen.",
                                         "ex_es": "El gabinete federal decide medidas importantes.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man die gemeinsame Runde aus Bundeskanzler und Bundesministern?",
+                                                            "a": "Das Bundeskabinett.",
+                                                            "q_es": "¿Cómo se llama el grupo formado por el canciller federal y los ministros federales?",
+                                                            "a_es": "El gabinete federal."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1013,6 +1347,14 @@
                                         "tr": "gobierno federal",
                                         "ex": "Die Bundesregierung plant neue Gesetze.",
                                         "ex_es": "El gobierno federal planea nuevas leyes.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer gehört zur Bundesregierung?",
+                                                            "a": "Der Bundeskanzler oder die Bundeskanzlerin und die Bundesministerinnen und Bundesminister.",
+                                                            "q_es": "¿Quién forma parte del gobierno federal?",
+                                                            "a_es": "El canciller federal y las ministras y ministros federales."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -1031,6 +1373,14 @@
                                         "tr": "pueblo",
                                         "ex": "Alle Staatsgewalt geht vom Volk aus.",
                                         "ex_es": "Todo poder del Estado emana del pueblo.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Von wem geht in Deutschland die Staatsgewalt aus?",
+                                                            "a": "Vom Volk.",
+                                                            "q_es": "¿De quién emana en Alemania el poder del Estado?",
+                                                            "a_es": "Del pueblo."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1041,6 +1391,14 @@
                                         "ex": "Die Gewalt ist im Staat verteilt.",
                                         "ex_es": "El poder estatal está repartido en el Estado.",
                                         "note": "Hinweis: In diesem politischen Kontext bedeutet Gewalt poder estatal / autoridad. Normalerweise kann Gewalt im Deutschen aber auch violencia bedeuten.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was ist in Deutschland zwischen Legislative, Exekutive und Judikative aufgeteilt?",
+                                                            "a": "Die Gewalt.",
+                                                            "q_es": "¿Qué está repartido en Alemania entre el poder legislativo, ejecutivo y judicial?",
+                                                            "a_es": "El poder del Estado."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1059,6 +1417,14 @@
                                         "tr": "poder legislativo",
                                         "ex": "Der Bundestag und der Bundesrat gehören zur Legislative.",
                                         "ex_es": "El Bundestag y el Bundesrat pertenecen al poder legislativo.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man die gesetzgebende Gewalt in Deutschland?",
+                                                            "a": "Die Legislative.",
+                                                            "q_es": "¿Cómo se llama el poder legislativo en Alemania?",
+                                                            "a_es": "El poder legislativo."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1068,6 +1434,14 @@
                                         "tr": "poder ejecutivo",
                                         "ex": "Die Regierung gehört zur Exekutive.",
                                         "ex_es": "El gobierno pertenece al poder ejecutivo.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man die vollziehende Gewalt in Deutschland?",
+                                                            "a": "Die Exekutive.",
+                                                            "q_es": "¿Cómo se llama el poder ejecutivo en Alemania?",
+                                                            "a_es": "El poder ejecutivo."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1077,6 +1451,14 @@
                                         "tr": "poder judicial",
                                         "ex": "Die Gerichte gehören zur Judikative.",
                                         "ex_es": "Los tribunales pertenecen al poder judicial.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man die rechtsprechende Gewalt in Deutschland?",
+                                                            "a": "Die Judikative.",
+                                                            "q_es": "¿Cómo se llama el poder judicial en Alemania?",
+                                                            "a_es": "El poder judicial."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1086,6 +1468,14 @@
                                         "tr": "prensa",
                                         "ex": "Die Presse informiert die Bevölkerung.",
                                         "ex_es": "La prensa informa a la población.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was schützt Journalistinnen und Journalisten in Deutschland?",
+                                                            "a": "Die Pressefreiheit.",
+                                                            "q_es": "¿Qué protege a las y los periodistas en Alemania?",
+                                                            "a_es": "La libertad de prensa."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -1104,6 +1494,14 @@
                                         "tr": "elección",
                                         "ex": "Die Wahl ist frei und geheim.",
                                         "ex_es": "La elección es libre y secreta.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wahlen in Deutschland sind frei. Was bedeutet das?",
+                                                            "a": "Die Wählerin oder der Wähler darf weder beeinflusst noch zu einer bestimmten Wahl gezwungen werden.",
+                                                            "q_es": "Las elecciones en Alemania son libres. ¿Qué significa eso?",
+                                                            "a_es": "La votante o el votante no puede ser influido ni obligado a una elección determinada."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1114,6 +1512,14 @@
                                         "modal_tr": "Votante / votante (mujer)",
                                         "ex": "Der Wähler oder die Wählerin gibt die Stimme ab.",
                                         "ex_es": "El elector o la electora emite el voto.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer darf bei einer Wahl in Deutschland weder beeinflusst noch gezwungen werden?",
+                                                            "a": "Die Wählerin oder der Wähler.",
+                                                            "q_es": "¿Quién no puede ser influido ni obligado en una elección en Alemania?",
+                                                            "a_es": "La votante o el votante."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1130,8 +1536,16 @@
                                         "w": "Stimme",
                                         "e": "🗣️",
                                         "tr": "voto",
-                                        "ex": "Jede Stimme zählt.",
-                                        "ex_es": "Cada voto cuenta.",
+                                        "ex": "Wahlen in Deutschland gewinnt die Partei, die die meisten Stimmen bekommt.",
+                                        "ex_es": "En Alemania gana las elecciones el partido que obtiene la mayor cantidad de votos.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welche Partei gewinnt die Wahl in Deutschland?",
+                                                            "a": "Die Partei, die die meisten Stimmen bekommt.",
+                                                            "q_es": "¿Qué partido gana las elecciones en Alemania?",
+                                                            "a_es": "El partido que obtiene la mayor cantidad de votos."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1140,7 +1554,15 @@
                                         "e": "📩",
                                         "tr": "emisión del voto",
                                         "ex": "Die Stimmabgabe ist anonym.",
-                                        "ex_es": "La emisión del voto es anónima."
+                                        "ex_es": "La emisión del voto es anónima.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was bedeutet es, dass Wahlen frei sind?",
+                                                            "a": "Niemand darf zu einer bestimmten Stimmabgabe gezwungen werden.",
+                                                            "q_es": "¿Qué significa que las elecciones sean libres?",
+                                                            "a_es": "Nadie puede ser obligado a emitir un voto determinado."
+                                                  }
+                                        ]
                               },
                     ]
           },
@@ -1158,6 +1580,14 @@
                                         "tr": "derecho al voto",
                                         "ex": "Viele Bürger haben das Wahlrecht.",
                                         "ex_es": "Muchos ciudadanos tienen derecho al voto.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Warum dürfen Menschen in Deutschland wählen?",
+                                                            "a": "Weil sie das Wahlrecht haben.",
+                                                            "q_es": "¿Por qué puede votar la gente en Alemania?",
+                                                            "a_es": "Porque tiene derecho al voto."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1202,6 +1632,14 @@
                                         "tr": "escaños",
                                         "ex": "Die Sitze im Bundestag werden verteilt.",
                                         "ex_es": "Los escaños en el Bundestag se distribuyen.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was wird nach einer Bundestagswahl im Parlament verteilt?",
+                                                            "a": "Die Sitze.",
+                                                            "q_es": "¿Qué se distribuye en el parlamento después de una elección federal?",
+                                                            "a_es": "Los escaños."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1228,6 +1666,14 @@
                                         "tr": "partido político",
                                         "ex": "Die Partei stellt Kandidaten auf.",
                                         "ex_es": "El partido presenta candidatos.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer gewinnt die Wahl in Deutschland?",
+                                                            "a": "Die Partei, die die meisten Stimmen bekommt.",
+                                                            "q_es": "¿Quién gana las elecciones en Alemania?",
+                                                            "a_es": "El partido que obtiene la mayor cantidad de votos."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1237,6 +1683,14 @@
                                         "tr": "coalición",
                                         "ex": "Mehrere Parteien bilden eine Koalition.",
                                         "ex_es": "Varios partidos forman una coalición.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was bilden mehrere Parteien oft zusammen, um zu regieren?",
+                                                            "a": "Eine Koalition.",
+                                                            "q_es": "¿Qué forman a menudo varios partidos juntos para gobernar?",
+                                                            "a_es": "Una coalición."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1246,6 +1700,14 @@
                                         "tr": "oposición",
                                         "ex": "Die Opposition kontrolliert die Regierung.",
                                         "ex_es": "La oposición controla al gobierno.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer kontrolliert in einer Demokratie die Regierung?",
+                                                            "a": "Die Opposition.",
+                                                            "q_es": "¿Quién controla al gobierno en una democracia?",
+                                                            "a_es": "La oposición."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1255,6 +1717,14 @@
                                         "tr": "mayoría",
                                         "ex": "Das Gesetz braucht eine Mehrheit.",
                                         "ex_es": "La ley necesita una mayoría.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was braucht man im Parlament oft für eine Entscheidung?",
+                                                            "a": "Eine Mehrheit.",
+                                                            "q_es": "¿Qué se necesita a menudo en el parlamento para una decisión?",
+                                                            "a_es": "Una mayoría."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1263,7 +1733,15 @@
                                         "e": "🤏",
                                         "tr": "minoría",
                                         "ex": "Auch die Minderheit hat Rechte.",
-                                        "ex_es": "También la minoría tiene derechos."
+                                        "ex_es": "También la minoría tiene derechos.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man eine kleinere Gruppe in der Gesellschaft, die ebenfalls geschützt werden muss?",
+                                                            "a": "Die Minderheit.",
+                                                            "q_es": "¿Cómo se llama un grupo más pequeño de la sociedad que también debe ser protegido?",
+                                                            "a_es": "La minoría."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -1271,7 +1749,15 @@
                                         "e": "👥",
                                         "tr": "fracción parlamentaria",
                                         "ex": "Die Fraktion berät sich vor der Abstimmung.",
-                                        "ex_es": "La fracción parlamentaria delibera antes de la votación."
+                                        "ex_es": "La fracción parlamentaria delibera antes de la votación.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man den Zusammenschluss von Abgeordneten einer Partei im Parlament?",
+                                                            "a": "Eine Fraktion.",
+                                                            "q_es": "¿Cómo se llama el grupo de diputados de un partido dentro del parlamento?",
+                                                            "a_es": "Una fracción parlamentaria."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "der/die",
@@ -1280,6 +1766,14 @@
                                         "tr": "diputado/a",
                                         "ex": "Der oder die Abgeordnete spricht im Parlament.",
                                         "ex_es": "El o la diputada habla en el parlamento.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man die gewählten Vertreterinnen und Vertreter im Parlament?",
+                                                            "a": "Abgeordnete.",
+                                                            "q_es": "¿Cómo se llama a las representantes y los representantes elegidos en el parlamento?",
+                                                            "a_es": "Diputadas y diputados."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -1298,6 +1792,14 @@
                                         "tr": "federación",
                                         "ex": "Der Bund regelt Aufgaben für ganz Deutschland.",
                                         "ex_es": "La federación regula tareas para toda Alemania.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man in Deutschland die Ebene des Gesamtstaates im Unterschied zu den Ländern?",
+                                                            "a": "Den Bund.",
+                                                            "q_es": "¿Cómo se llama en Alemania el nivel del Estado federal en contraste con los estados federados?",
+                                                            "a_es": "La federación."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1307,6 +1809,14 @@
                                         "tr": "estado federal",
                                         "ex": "Deutschland ist ein Bundesstaat.",
                                         "ex_es": "Alemania es un estado federal.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man ein Land mit mehreren Bundesländern wie Deutschland?",
+                                                            "a": "Einen Bundesstaat.",
+                                                            "q_es": "¿Cómo se llama un país con varios estados federados como Alemania?",
+                                                            "a_es": "Un Estado federal."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1316,6 +1826,14 @@
                                         "tr": "estado federado",
                                         "ex": "Deutschland hat 16 Bundesländer.",
                                         "ex_es": "Alemania tiene 16 estados federados.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie viele Bundesländer hat die Bundesrepublik Deutschland?",
+                                                            "a": "16.",
+                                                            "q_es": "¿Cuántos estados federados tiene la República Federal de Alemania?",
+                                                            "a_es": "16."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1325,6 +1843,14 @@
                                         "tr": "los estados federados",
                                         "ex": "Die Länder haben eigene Aufgaben und Regierungen.",
                                         "ex_es": "Los estados federados tienen tareas y gobiernos propios.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer hat in Deutschland neben dem Bund eigene Aufgaben und Regierungen?",
+                                                            "a": "Die Länder.",
+                                                            "q_es": "¿Quién tiene en Alemania, además de la federación, tareas y gobiernos propios?",
+                                                            "a_es": "Los estados federados."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1334,6 +1860,14 @@
                                         "tr": "los 16 estados federados",
                                         "ex": "Deutschland hat 16 Bundesländer.",
                                         "ex_es": "Alemania tiene 16 estados federados.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie viele Bundesländer gibt es in Deutschland?",
+                                                            "a": "16.",
+                                                            "q_es": "¿Cuántos estados federados hay en Alemania?",
+                                                            "a_es": "16."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1343,6 +1877,14 @@
                                         "tr": "primera ministra / primer ministro",
                                         "ex": "Die Ministerpräsidentin oder der Ministerpräsident leitet ein Bundesland.",
                                         "ex_es": "La primera ministra o el primer ministro dirige un estado federado.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie heißt die Regierungschefin oder der Regierungschef eines Bundeslandes?",
+                                                            "a": "Ministerpräsidentin oder Ministerpräsident.",
+                                                            "q_es": "¿Cómo se llama la jefa o el jefe de gobierno de un estado federado?",
+                                                            "a_es": "Primera ministra o primer ministro del estado."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -1361,6 +1903,14 @@
                                         "tr": "euro",
                                         "ex": "Der Euro ist die gemeinsame Währung in vielen EU-Ländern.",
                                         "ex_es": "El euro es la moneda común en muchos países de la UE.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie heißt die Währung in Deutschland?",
+                                                            "a": "Euro.",
+                                                            "q_es": "¿Cómo se llama la moneda de Alemania?",
+                                                            "a_es": "Euro."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1370,6 +1920,14 @@
                                         "tr": "Unión Europea",
                                         "ex": "Deutschland ist Mitglied der Europäischen Union.",
                                         "ex_es": "Alemania es miembro de la Unión Europea.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Zu welchem Staatenverbund gehört Deutschland?",
+                                                            "a": "Zur Europäischen Union.",
+                                                            "q_es": "¿A qué unión de Estados pertenece Alemania?",
+                                                            "a_es": "A la Unión Europea."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1379,6 +1937,14 @@
                                         "tr": "moneda",
                                         "ex": "Der Euro ist die Währung in Deutschland.",
                                         "ex_es": "El euro es la moneda en Alemania.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man das offizielle Geld eines Landes?",
+                                                            "a": "Die Währung.",
+                                                            "q_es": "¿Cómo se llama el dinero oficial de un país?",
+                                                            "a_es": "La moneda."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -1406,6 +1972,14 @@
                                         "tr": "jefe del Estado",
                                         "ex": "Der Bundespräsident ist das Staatsoberhaupt Deutschlands.",
                                         "ex_es": "El presidente federal es el jefe del Estado de Alemania.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer ist das Staatsoberhaupt Deutschlands?",
+                                                            "a": "Der Bundespräsident oder die Bundespräsidentin.",
+                                                            "q_es": "¿Quién es el jefe del Estado de Alemania?",
+                                                            "a_es": "El presidente federal."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1415,6 +1989,14 @@
                                         "tr": "jefe del gobierno",
                                         "ex": "Der Bundeskanzler ist der Regierungschef Deutschlands.",
                                         "ex_es": "El canciller federal es el jefe del gobierno de Alemania.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man den Bundeskanzler auch?",
+                                                            "a": "Regierungschef.",
+                                                            "q_es": "¿Cómo se llama también al canciller federal?",
+                                                            "a_es": "Jefe del gobierno."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1424,6 +2006,14 @@
                                         "tr": "canciller",
                                         "ex": "Der Kanzler leitet die Regierung.",
                                         "ex_es": "El canciller dirige el gobierno.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man den Regierungschef in Deutschland kurz?",
+                                                            "a": "Den Kanzler.",
+                                                            "q_es": "¿Cómo se llama de forma breve al jefe del gobierno en Alemania?",
+                                                            "a_es": "El canciller."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1431,8 +2021,16 @@
                                         "w": "Bundespräsidentin / Bundespräsident",
                                         "e": "🇩🇪",
                                         "tr": "presidenta / presidente federal",
-                                        "ex": "Die Bundespräsidentin oder der Bundespräsident ist das Staatsoberhaupt Deutschlands.",
-                                        "ex_es": "La presidenta o el presidente federal es la jefa o el jefe del Estado de Alemania.",
+                                        "ex": "Der Bundespräsident ist das Staatsoberhaupt Deutschlands.",
+                                        "ex_es": "El presidente federal es el jefe del Estado de Alemania.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer ist das Staatsoberhaupt Deutschlands?",
+                                                            "a": "Der Bundespräsident oder die Bundespräsidentin.",
+                                                            "q_es": "¿Quién es el jefe del Estado de Alemania?",
+                                                            "a_es": "El presidente federal."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1442,6 +2040,14 @@
                                         "tr": "presidenta / presidente del Bundesrat",
                                         "ex": "Die Bundesratspräsidentin oder der Bundesratspräsident leitet die Sitzungen des Bundesrates.",
                                         "ex_es": "La presidenta o el presidente del Bundesrat dirige las sesiones del Bundesrat.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer leitet die Sitzungen des Bundesrates?",
+                                                            "a": "Die Bundesratspräsidentin oder der Bundesratspräsident.",
+                                                            "q_es": "¿Quién dirige las sesiones del Bundesrat?",
+                                                            "a_es": "La presidenta o el presidente del Bundesrat."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1450,7 +2056,15 @@
                                         "e": "🏛️",
                                         "tr": "presidenta / presidente del Bundestag",
                                         "ex": "Die Bundestagspräsidentin oder der Bundestagspräsident leitet die Sitzungen des Bundestages.",
-                                        "ex_es": "La presidenta o el presidente del Bundestag dirige las sesiones del Bundestag."
+                                        "ex_es": "La presidenta o el presidente del Bundestag dirige las sesiones del Bundestag.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer leitet die Sitzungen des Bundestages?",
+                                                            "a": "Die Bundestagspräsidentin oder der Bundestagspräsident.",
+                                                            "q_es": "¿Quién dirige las sesiones del Bundestag?",
+                                                            "a_es": "La presidenta o el presidente del Bundestag."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die / der",
@@ -1458,7 +2072,15 @@
                                         "e": "👩‍💼",
                                         "tr": "ministra / ministro",
                                         "ex": "Die Ministerinnen und Minister gehören zur Bundesregierung.",
-                                        "ex_es": "Las ministras y los ministros pertenecen al Gobierno federal."
+                                        "ex_es": "Las ministras y los ministros pertenecen al Gobierno federal.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer gehört neben dem Bundeskanzler zur Bundesregierung?",
+                                                            "a": "Die Bundesministerinnen und Bundesminister.",
+                                                            "q_es": "¿Quién forma parte del gobierno federal además del canciller?",
+                                                            "a_es": "Las ministras y los ministros federales."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "der",
@@ -1467,6 +2089,14 @@
                                         "tr": "alcalde gobernante",
                                         "ex": "Der Regierende Bürgermeister arbeitet im Roten Rathaus.",
                                         "ex_es": "El alcalde gobernante trabaja en el Ayuntamiento Rojo.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie heißt die Regierungschefin oder der Regierungschef des Stadtstaates Berlin?",
+                                                            "a": "Regierende Bürgermeisterin oder Regierender Bürgermeister.",
+                                                            "q_es": "¿Cómo se llama la jefa o el jefe de gobierno del estado-ciudad de Berlín?",
+                                                            "a_es": "Alcaldesa gobernante o alcalde gobernante."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -1493,7 +2123,15 @@
                                         "e": "🏘️",
                                         "tr": "municipio",
                                         "ex": "Die Gemeinde organisiert Angebote für Familien.",
-                                        "ex_es": "El municipio organiza servicios para las familias."
+                                        "ex_es": "El municipio organiza servicios para las familias.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man die kleinste politische Einheit mit eigener Verwaltung vor Ort?",
+                                                            "a": "Die Gemeinde.",
+                                                            "q_es": "¿Cómo se llama la unidad política más pequeña con administración propia a nivel local?",
+                                                            "a_es": "El municipio."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -1502,6 +2140,14 @@
                                         "tr": "administración municipal",
                                         "ex": "Die Gemeindeverwaltung organisiert viele lokale Aufgaben.",
                                         "ex_es": "La administración municipal organiza muchas tareas locales.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welche Stelle in einer Gemeinde ist oft für Anträge und Verwaltung zuständig?",
+                                                            "a": "Die Gemeindeverwaltung.",
+                                                            "q_es": "¿Qué organismo en un municipio suele encargarse de solicitudes y administración?",
+                                                            "a_es": "La administración municipal."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1520,6 +2166,14 @@
                                         "tr": "alcalde / alcaldesa",
                                         "ex": "Der Bürgermeister oder die Bürgermeisterin leitet die Stadtverwaltung.",
                                         "ex_es": "El alcalde o la alcaldesa dirige la administración de la ciudad.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer leitet in vielen Gemeinden die Stadt- oder Gemeindeverwaltung?",
+                                                            "a": "Die Bürgermeisterin oder der Bürgermeister.",
+                                                            "q_es": "¿Quién dirige en muchos municipios la administración local?",
+                                                            "a_es": "La alcaldesa o el alcalde."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -1537,7 +2191,15 @@
                                         "e": "🏢",
                                         "tr": "autoridad pública",
                                         "ex": "Die Behörde bearbeitet den Antrag.",
-                                        "ex_es": "La autoridad pública tramita la solicitud."
+                                        "ex_es": "La autoridad pública tramita la solicitud.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man eine staatliche Stelle, die Anträge bearbeitet?",
+                                                            "a": "Eine Behörde.",
+                                                            "q_es": "¿Cómo se llama una oficina estatal que tramita solicitudes?",
+                                                            "a_es": "Una autoridad pública."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -1556,6 +2218,14 @@
                                         "tr": "oficina de orden público",
                                         "ex": "Das Ordnungsamt ist für Ordnung und Sicherheit zuständig.",
                                         "ex_es": "La oficina de orden público es responsable del orden y la seguridad.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welche Behörde ist in einer Gemeinde oft für Ordnung und Sicherheit zuständig?",
+                                                            "a": "Das Ordnungsamt.",
+                                                            "q_es": "¿Qué autoridad es responsable en un municipio del orden y la seguridad?",
+                                                            "a_es": "La oficina de orden público."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1565,6 +2235,14 @@
                                         "tr": "oficina de impuestos",
                                         "ex": "Das Finanzamt bearbeitet Steuerfragen.",
                                         "ex_es": "La oficina de impuestos tramita asuntos fiscales.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welche Behörde kümmert sich um Steuern?",
+                                                            "a": "Das Finanzamt.",
+                                                            "q_es": "¿Qué autoridad se ocupa de los impuestos?",
+                                                            "a_es": "La oficina de impuestos."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1583,6 +2261,14 @@
                                         "tr": "Ministerio de Asuntos Exteriores",
                                         "ex": "Das Auswärtige Amt vertritt Deutschland im Ausland.",
                                         "ex_es": "El Ministerio de Asuntos Exteriores representa a Alemania en el exterior.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welches Ministerium ist für die Beziehungen Deutschlands zum Ausland zuständig?",
+                                                            "a": "Das Auswärtige Amt.",
+                                                            "q_es": "¿Qué ministerio es responsable de las relaciones de Alemania con el extranjero?",
+                                                            "a_es": "El Ministerio de Asuntos Exteriores."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -1601,6 +2287,14 @@
                                         "tr": "Ley Fundamental",
                                         "ex": "Das Grundgesetz ist die deutsche Verfassung.",
                                         "ex_es": "La Ley Fundamental es la constitución alemana.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie heißt die deutsche Verfassung?",
+                                                            "a": "Grundgesetz.",
+                                                            "q_es": "¿Cómo se llama la constitución alemana?",
+                                                            "a_es": "Ley Fundamental."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1610,6 +2304,14 @@
                                         "tr": "constitución",
                                         "ex": "Die Verfassung schützt die Demokratie.",
                                         "ex_es": "La constitución protege la democracia.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie heißt die deutsche Verfassung?",
+                                                            "a": "Das Grundgesetz.",
+                                                            "q_es": "¿Cómo se llama la constitución alemana?",
+                                                            "a_es": "La Ley Fundamental."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1619,6 +2321,14 @@
                                         "tr": "ley",
                                         "ex": "Alle müssen das Gesetz achten.",
                                         "ex_es": "Todos deben respetar la ley.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was müssen in einem Rechtsstaat alle Einwohnerinnen und Einwohner und auch der Staat beachten?",
+                                                            "a": "Die Gesetze.",
+                                                            "q_es": "¿Qué deben respetar en un Estado de derecho todas las personas y también el Estado?",
+                                                            "a_es": "Las leyes."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1628,6 +2338,14 @@
                                         "tr": "legislación",
                                         "ex": "Die Gesetzgebung liegt beim Parlament.",
                                         "ex_es": "La legislación corresponde al parlamento.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Woran wirkt der Bundesrat in Deutschland mit?",
+                                                            "a": "An der Gesetzgebung.",
+                                                            "q_es": "¿En qué participa el Bundesrat en Alemania?",
+                                                            "a_es": "En la legislación."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1635,8 +2353,16 @@
                                         "w": "Bundesverfassungsgericht",
                                         "e": "🏛️",
                                         "tr": "Tribunal Constitucional Federal",
-                                        "ex": "Das Bundesverfassungsgericht überwacht das Grundgesetz.",
-                                        "ex_es": "El Tribunal Constitucional Federal supervisa la Constitución.",
+                                        "ex": "Das Bundesverfassungsgericht interpretiert das Grundgesetz.",
+                                        "ex_es": "El Tribunal Constitucional Federal interpreta la Ley Fundamental.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welches Gericht wacht über das Grundgesetz?",
+                                                            "a": "Das Bundesverfassungsgericht.",
+                                                            "q_es": "¿Qué tribunal vela por la Ley Fundamental?",
+                                                            "a_es": "El Tribunal Constitucional Federal."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1665,7 +2391,15 @@
                                         "card_tr": "Corte<br>Tribunal",
                                         "modal_tr": "tribunal / corte",
                                         "ex": "Das Gericht spricht ein Urteil.",
-                                        "ex_es": "El tribunal dicta una sentencia."
+                                        "ex_es": "El tribunal dicta una sentencia.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer entscheidet in Deutschland über Schuld und Strafe?",
+                                                            "a": "Das Gericht.",
+                                                            "q_es": "¿Quién decide en Alemania sobre culpa y pena?",
+                                                            "a_es": "El tribunal."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -1674,6 +2408,14 @@
                                         "tr": "poder judicial / jurisprudencia",
                                         "ex": "Die Rechtsprechung ist unabhängig.",
                                         "ex_es": "El poder judicial es independiente.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man die richterliche Gewalt in Deutschland?",
+                                                            "a": "Die Rechtsprechung.",
+                                                            "q_es": "¿Cómo se llama el poder de los jueces en Alemania?",
+                                                            "a_es": "El poder judicial."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1682,7 +2424,15 @@
                                         "e": "🚓",
                                         "tr": "policía",
                                         "ex": "Die Polizei hilft im Notfall.",
-                                        "ex_es": "La policía ayuda en caso de emergencia."
+                                        "ex_es": "La policía ayuda en caso de emergencia.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer hilft in Deutschland bei einem Notfall oder nach einer Straftat?",
+                                                            "a": "Die Polizei.",
+                                                            "q_es": "¿Quién ayuda en Alemania en una emergencia o después de un delito?",
+                                                            "a_es": "La policía."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "der/die",
@@ -1690,7 +2440,15 @@
                                         "e": "👩‍⚖️",
                                         "tr": "juez / jueza",
                                         "ex": "Der Richter oder die Richterin entscheidet im Gericht.",
-                                        "ex_es": "El juez o la jueza decide en el tribunal."
+                                        "ex_es": "El juez o la jueza decide en el tribunal.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer entscheidet in Deutschland vor Gericht über Schuld und Strafe?",
+                                                            "a": "Der Richter oder die Richterin.",
+                                                            "q_es": "¿Quién decide en Alemania ante un tribunal sobre culpa y pena?",
+                                                            "a_es": "El juez o la jueza."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "das",
@@ -1715,7 +2473,15 @@
                                         "e": "👮",
                                         "tr": "pena",
                                         "ex": "Auf die Tat folgt eine Strafe.",
-                                        "ex_es": "Al acto le sigue una pena."
+                                        "ex_es": "Al acto le sigue una pena.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was kann der Staat verhängen, wenn jemand eine Straftat begeht?",
+                                                            "a": "Eine Strafe.",
+                                                            "q_es": "¿Qué puede imponer el Estado cuando alguien comete un delito?",
+                                                            "a_es": "Una pena."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -1723,7 +2489,15 @@
                                         "e": "💶",
                                         "tr": "multa",
                                         "ex": "Er muss eine Geldstrafe zahlen.",
-                                        "ex_es": "Tiene que pagar una multa."
+                                        "ex_es": "Tiene que pagar una multa.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man eine Strafe, die man mit Geld bezahlt?",
+                                                            "a": "Geldstrafe.",
+                                                            "q_es": "¿Cómo se llama una pena que se paga con dinero?",
+                                                            "a_es": "Multa."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -1731,7 +2505,15 @@
                                         "e": "⛓️",
                                         "tr": "pena de prisión",
                                         "ex": "Schwere Taten führen zu Freiheitsstrafe.",
-                                        "ex_es": "Los delitos graves llevan a pena de prisión."
+                                        "ex_es": "Los delitos graves llevan a pena de prisión.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man eine Strafe, bei der man ins Gefängnis muss?",
+                                                            "a": "Freiheitsstrafe.",
+                                                            "q_es": "¿Cómo se llama una pena en la que uno tiene que ir a la cárcel?",
+                                                            "a_es": "Pena de prisión."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "das",
@@ -1739,7 +2521,15 @@
                                         "e": "🚔",
                                         "tr": "cárcel",
                                         "ex": "Er sitzt im Gefängnis.",
-                                        "ex_es": "Está en la cárcel."
+                                        "ex_es": "Está en la cárcel.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wohin kommt man in Deutschland bei schweren Straftaten oft?",
+                                                            "a": "Ins Gefängnis.",
+                                                            "q_es": "¿A dónde se va en Alemania a menudo por delitos graves?",
+                                                            "a_es": "A la cárcel."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -1747,7 +2537,15 @@
                                         "e": "📝",
                                         "tr": "denuncia",
                                         "ex": "Sie macht eine Anzeige bei der Polizei.",
-                                        "ex_es": "Presenta una denuncia ante la policía."
+                                        "ex_es": "Presenta una denuncia ante la policía.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was kann man bei der Polizei machen, wenn man Opfer einer Straftat wurde?",
+                                                            "a": "Eine Anzeige.",
+                                                            "q_es": "¿Qué se puede presentar ante la policía si se ha sido víctima de un delito?",
+                                                            "a_es": "Una denuncia."
+                                                  }
+                                        ]
                               }
                     ]
           },
@@ -1764,7 +2562,15 @@
                                         "e": "🏙️",
                                         "tr": "habitante / habitante (mujer)",
                                         "ex": "Der Einwohner oder die Einwohnerin lebt in dieser Stadt.",
-                                        "ex_es": "El habitante o la habitante vive en esta ciudad."
+                                        "ex_es": "El habitante o la habitante vive en esta ciudad.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man eine Person, die in einer Stadt oder Gemeinde lebt?",
+                                                            "a": "Einwohner oder Einwohnerin.",
+                                                            "q_es": "¿Cómo se llama una persona que vive en una ciudad o municipio?",
+                                                            "a_es": "Habitante."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -1772,7 +2578,15 @@
                                         "e": "🛐",
                                         "tr": "religión",
                                         "ex": "Religion ist Privatsache.",
-                                        "ex_es": "La religión es un asunto privado."
+                                        "ex_es": "La religión es un asunto privado.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was ist in Deutschland Privatsache?",
+                                                            "a": "Die Religion.",
+                                                            "q_es": "¿Qué es un asunto privado en Alemania?",
+                                                            "a_es": "La religión."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -1780,7 +2594,15 @@
                                         "e": "👥",
                                         "tr": "población",
                                         "ex": "Die Bevölkerung wächst in der Stadt.",
-                                        "ex_es": "La población crece en la ciudad."
+                                        "ex_es": "La población crece en la ciudad.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man alle Menschen, die in einem Land oder Gebiet leben?",
+                                                            "a": "Die Bevölkerung.",
+                                                            "q_es": "¿Cómo se llama al conjunto de personas que vive en un país o territorio?",
+                                                            "a_es": "La población."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "der/die",
@@ -1797,6 +2619,14 @@
                                         "tr": "ciudadano",
                                         "ex": "Der Bürger beteiligt sich am Gemeindeleben.",
                                         "ex_es": "El ciudadano participa en la vida del municipio.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wer hat in Deutschland oft das Wahlrecht?",
+                                                            "a": "Die Bürgerinnen und Bürger.",
+                                                            "q_es": "¿Quién tiene en Alemania a menudo el derecho al voto?",
+                                                            "a_es": "Las ciudadanas y los ciudadanos."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1806,6 +2636,14 @@
                                         "tr": "escolaridad obligatoria",
                                         "ex": "In Deutschland gibt es eine Schulpflicht.",
                                         "ex_es": "En Alemania existe la escolaridad obligatoria.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was gibt es in Deutschland für Kinder im Schulalter?",
+                                                            "a": "Eine Schulpflicht.",
+                                                            "q_es": "¿Qué existe en Alemania para los niños en edad escolar?",
+                                                            "a_es": "La escolaridad obligatoria."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -1858,6 +2696,14 @@
                                         "tr": "asilo",
                                         "ex": "Verfolgte Menschen können Asyl bekommen.",
                                         "ex_es": "Las personas perseguidas pueden recibir asilo.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was können politisch Verfolgte in Deutschland beantragen?",
+                                                            "a": "Asyl.",
+                                                            "q_es": "¿Qué pueden solicitar en Alemania las personas perseguidas políticamente?",
+                                                            "a_es": "Asilo."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1902,7 +2748,15 @@
                                         "e": "📍",
                                         "tr": "oficina parroquial",
                                         "ex": "Das Pfarramt hilft bei Fragen zur Gemeinde.",
-                                        "ex_es": "La oficina parroquial ayuda con preguntas sobre la comunidad."
+                                        "ex_es": "La oficina parroquial ayuda con preguntas sobre la comunidad.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie heißt das Büro einer Kirchengemeinde?",
+                                                            "a": "Das Pfarramt.",
+                                                            "q_es": "¿Cómo se llama la oficina de una comunidad parroquial?",
+                                                            "a_es": "La oficina parroquial."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -1911,6 +2765,14 @@
                                         "tr": "comunidad judía",
                                         "ex": "Vor etwa 1700 Jahren gab es erstmals eine jüdische Gemeinde auf dem Gebiet des heutigen Deutschlands.",
                                         "ex_es": "Hace unos 1700 años existió por primera vez una comunidad judía en el territorio de la Alemania actual.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welche Religionsgemeinschaft gibt es seit etwa 1700 Jahren auf dem Gebiet des heutigen Deutschlands?",
+                                                            "a": "Die jüdische Gemeinde.",
+                                                            "q_es": "¿Qué comunidad religiosa existe desde hace unos 1700 años en el territorio de la Alemania actual?",
+                                                            "a_es": "La comunidad judía."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -1929,6 +2791,14 @@
                                         "tr": "cotizaciones sociales",
                                         "ex": "Arbeitnehmer und Arbeitgeber zahlen Sozialabgaben.",
                                         "ex_es": "Los trabajadores y los empleadores pagan cotizaciones sociales.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was zahlen Arbeitnehmer und Arbeitgeber in Deutschland gemeinsam?",
+                                                            "a": "Sozialabgaben.",
+                                                            "q_es": "¿Qué pagan conjuntamente trabajadores y empleadores en Alemania?",
+                                                            "a_es": "Cotizaciones sociales."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1938,6 +2808,14 @@
                                         "tr": "seguridad social",
                                         "ex": "Die soziale Sicherheit schützt Menschen in schwierigen Situationen.",
                                         "ex_es": "La seguridad social protege a las personas en situaciones difíciles.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was soll Menschen in Deutschland bei Krankheit, Arbeitslosigkeit oder Alter schützen?",
+                                                            "a": "Die soziale Sicherheit.",
+                                                            "q_es": "¿Qué debe proteger a las personas en Alemania en caso de enfermedad, desempleo o vejez?",
+                                                            "a_es": "La seguridad social."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1947,6 +2825,14 @@
                                         "tr": "medida",
                                         "ex": "Die Regierung ergreift eine neue Maßnahme.",
                                         "ex_es": "El gobierno adopta una nueva medida.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man einen konkreten Schritt der Regierung, um ein Problem zu lösen?",
+                                                            "a": "Eine Maßnahme.",
+                                                            "q_es": "¿Cómo se llama una acción concreta del gobierno para resolver un problema?",
+                                                            "a_es": "Una medida."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1955,7 +2841,15 @@
                                         "e": "📄",
                                         "tr": "seguro de responsabilidad civil",
                                         "ex": "Eine Haftpflichtversicherung ist im Alltag oft wichtig.",
-                                        "ex_es": "Un seguro de responsabilidad civil suele ser importante en la vida diaria."
+                                        "ex_es": "Un seguro de responsabilidad civil suele ser importante en la vida diaria.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welche Versicherung zahlt, wenn man jemand anderem einen Schaden zufügt?",
+                                                            "a": "Die Haftpflichtversicherung.",
+                                                            "q_es": "¿Qué seguro paga cuando uno causa un daño a otra persona?",
+                                                            "a_es": "El seguro de responsabilidad civil."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -1964,6 +2858,14 @@
                                         "tr": "seguro de salud",
                                         "ex": "Die Krankenversicherung übernimmt viele medizinische Kosten.",
                                         "ex_es": "El seguro de salud cubre muchos gastos médicos.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welche Versicherung ist in Deutschland für Arzt und Krankenhaus wichtig?",
+                                                            "a": "Die Krankenversicherung.",
+                                                            "q_es": "¿Qué seguro es importante en Alemania para el médico y el hospital?",
+                                                            "a_es": "El seguro de salud."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -1973,6 +2875,14 @@
                                         "tr": "seguridad social",
                                         "ex": "Die Sozialversicherung hilft vielen Menschen.",
                                         "ex_es": "La seguridad social ayuda a muchas personas.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wozu zahlen Arbeitnehmer und Arbeitgeber in Deutschland Beiträge?",
+                                                            "a": "Zur Sozialversicherung.",
+                                                            "q_es": "¿Para qué pagan aportes trabajadores y empleadores en Alemania?",
+                                                            "a_es": "Para la seguridad social."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -2000,6 +2910,14 @@
                                         "tr": "nacionalsocialismo",
                                         "ex": "Man muss über den Nationalsozialismus lernen.",
                                         "ex_es": "Hay que aprender sobre el nacionalsocialismo.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Warum muss man den Nationalsozialismus und den Holocaust kennen?",
+                                                            "a": "Weil man aus der deutschen Geschichte lernen soll.",
+                                                            "q_es": "¿Por qué hay que conocer el nacionalsocialismo y el Holocausto?",
+                                                            "a_es": "Porque hay que aprender de la historia alemana."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -2009,6 +2927,14 @@
                                         "tr": "Holocausto",
                                         "ex": "Wir erinnern an den Holocaust.",
                                         "ex_es": "Recordamos el Holocausto.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Warum muss man den Nationalsozialismus und den Holocaust kennen?",
+                                                            "a": "Weil man aus der deutschen Geschichte lernen soll.",
+                                                            "q_es": "¿Por qué hay que conocer el nacionalsocialismo y el Holocausto?",
+                                                            "a_es": "Porque hay que aprender de la historia alemana."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -2018,6 +2944,14 @@
                                         "tr": "Tercer Reich",
                                         "ex": "Das Dritte Reich war eine Diktatur.",
                                         "ex_es": "El Tercer Reich fue una dictadura.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man die Zeit der nationalsozialistischen Herrschaft in Deutschland auch?",
+                                                            "a": "Das Dritte Reich.",
+                                                            "q_es": "¿Cómo se llama también el período del dominio nacionalsocialista en Alemania?",
+                                                            "a_es": "El Tercer Reich."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -2027,6 +2961,14 @@
                                         "tr": "Segunda Guerra Mundial",
                                         "ex": "Der Zweite Weltkrieg endete 1945.",
                                         "ex_es": "La Segunda Guerra Mundial terminó en 1945.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welcher Krieg endete in Europa 1945?",
+                                                            "a": "Der Zweite Weltkrieg.",
+                                                            "q_es": "¿Qué guerra terminó en Europa en 1945?",
+                                                            "a_es": "La Segunda Guerra Mundial."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -2036,6 +2978,14 @@
                                         "tr": "República Democrática Alemana",
                                         "ex": "Die DDR lag im Osten Deutschlands.",
                                         "ex_es": "La RDA estaba en el este de Alemania.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie hieß der ostdeutsche Staat vor der Wiedervereinigung?",
+                                                            "a": "DDR.",
+                                                            "q_es": "¿Cómo se llamaba el Estado alemán oriental antes de la reunificación?",
+                                                            "a_es": "RDA."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -2045,6 +2995,14 @@
                                         "tr": "República Federal de Alemania",
                                         "ex": "Die BRD lag im Westen Deutschlands.",
                                         "ex_es": "La RFA estaba en el oeste de Alemania.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie hieß der westdeutsche Staat vor der Wiedervereinigung?",
+                                                            "a": "BRD.",
+                                                            "q_es": "¿Cómo se llamaba el Estado alemán occidental antes de la reunificación?",
+                                                            "a_es": "RFA."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -2054,6 +3012,14 @@
                                         "tr": "Muro de Berlín",
                                         "ex": "Die Berliner Mauer fiel 1989.",
                                         "ex_es": "El Muro de Berlín cayó en 1989.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wann wurde die Mauer in Berlin für alle geöffnet?",
+                                                            "a": "1989.",
+                                                            "q_es": "¿Cuándo se abrió el Muro de Berlín para todos?",
+                                                            "a_es": "En 1989."
+                                                  }
+                                        ],
                                         "important": true
                               }
                     ]
@@ -2072,6 +3038,14 @@
                                         "tr": "reunificación",
                                         "ex": "Die Wiedervereinigung war 1990.",
                                         "ex_es": "La reunificación fue en 1990.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wann war die deutsche Wiedervereinigung?",
+                                                            "a": "1990.",
+                                                            "q_es": "¿Cuándo fue la reunificación alemana?",
+                                                            "a_es": "En 1990."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -2080,7 +3054,15 @@
                                         "e": "📅",
                                         "tr": "9 de noviembre",
                                         "ex": "Der 9. November ist historisch wichtig.",
-                                        "ex_es": "El 9 de noviembre es históricamente importante."
+                                        "ex_es": "El 9 de noviembre es históricamente importante.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welches wichtige Ereignis in Deutschland geschah am 9. November 1989?",
+                                                            "a": "Die Mauer in Berlin wurde geöffnet.",
+                                                            "q_es": "¿Qué acontecimiento importante ocurrió en Alemania el 9 de noviembre de 1989?",
+                                                            "a_es": "Se abrió el Muro de Berlín."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "der",
@@ -2089,6 +3071,14 @@
                                         "tr": "3 de octubre",
                                         "ex": "Der 3. Oktober ist der Tag der Deutschen Einheit.",
                                         "ex_es": "El 3 de octubre es el Día de la Unidad Alemana.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was feiert man in Deutschland am 3. Oktober?",
+                                                            "a": "Den Tag der Deutschen Einheit.",
+                                                            "q_es": "¿Qué se celebra en Alemania el 3 de octubre?",
+                                                            "a_es": "El Día de la Unidad Alemana."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -2097,7 +3087,15 @@
                                         "e": "🎵",
                                         "tr": "himno nacional",
                                         "ex": "Wir hören die Nationalhymne.",
-                                        "ex_es": "Escuchamos el himno nacional."
+                                        "ex_es": "Escuchamos el himno nacional.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie heißt das Lied, das Deutschland offiziell repräsentiert?",
+                                                            "a": "Die Nationalhymne.",
+                                                            "q_es": "¿Cómo se llama la canción que representa oficialmente a Alemania?",
+                                                            "a_es": "El himno nacional."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "das",
@@ -2105,7 +3103,15 @@
                                         "e": "🦅",
                                         "tr": "escudo",
                                         "ex": "Der Adler ist im Wappen zu sehen.",
-                                        "ex_es": "El águila se ve en el escudo."
+                                        "ex_es": "El águila se ve en el escudo.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welches Tier ist das Wappentier der Bundesrepublik Deutschland?",
+                                                            "a": "Der Adler.",
+                                                            "q_es": "¿Qué animal aparece en el escudo de la República Federal de Alemania?",
+                                                            "a_es": "El águila."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "das",
@@ -2113,7 +3119,15 @@
                                         "e": "📈",
                                         "tr": "milagro económico",
                                         "ex": "Das Wirtschaftswunder brachte Wachstum.",
-                                        "ex_es": "El milagro económico trajo crecimiento."
+                                        "ex_es": "El milagro económico trajo crecimiento.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man den starken wirtschaftlichen Aufschwung in Westdeutschland nach dem Zweiten Weltkrieg?",
+                                                            "a": "Das Wirtschaftswunder.",
+                                                            "q_es": "¿Cómo se llama el fuerte auge económico de Alemania Occidental después de la Segunda Guerra Mundial?",
+                                                            "a_es": "El milagro económico."
+                                                  }
+                                        ]
                               }
                     ]
           },
@@ -2131,6 +3145,14 @@
                                         "tr": "oso",
                                         "ex": "Der Bär ist ein Symbol von Berlin.",
                                         "ex_es": "El oso es un símbolo de Berlín.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welches Tier ist ein bekanntes Symbol von Berlin?",
+                                                            "a": "Der Bär.",
+                                                            "q_es": "¿Qué animal es un símbolo conocido de Berlín?",
+                                                            "a_es": "El oso."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -2140,6 +3162,14 @@
                                         "tr": "águila",
                                         "ex": "Der Adler steht im Wappen Deutschlands.",
                                         "ex_es": "El águila aparece en el escudo de Alemania.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Welches Tier ist das Wappentier Deutschlands?",
+                                                            "a": "Der Adler.",
+                                                            "q_es": "¿Qué animal es el símbolo del escudo de Alemania?",
+                                                            "a_es": "El águila."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -2166,6 +3196,14 @@
                                         "tr": "estado-ciudad",
                                         "ex": "Berlin ist ein Stadtstaat.",
                                         "ex_es": "Berlín es un estado-ciudad.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was für ein Bundesland ist Berlin?",
+                                                            "a": "Ein Stadtstaat.",
+                                                            "q_es": "¿Qué tipo de estado federado es Berlín?",
+                                                            "a_es": "Un estado-ciudad."
+                                                  }
+                                        ],
                                         "important": true
                               },
                               {
@@ -2174,7 +3212,15 @@
                                         "e": "🤝",
                                         "tr": "voluntariado",
                                         "ex": "Viele Berliner machen ein Ehrenamt.",
-                                        "ex_es": "Muchos berlineses hacen voluntariado."
+                                        "ex_es": "Muchos berlineses hacen voluntariado.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wie nennt man eine freiwillige Arbeit, für die man meistens kein Geld bekommt?",
+                                                            "a": "Ehrenamt.",
+                                                            "q_es": "¿Cómo se llama un trabajo voluntario por el que normalmente no se recibe dinero?",
+                                                            "a_es": "Voluntariado."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "der",
@@ -2182,7 +3228,15 @@
                                         "e": "⚽",
                                         "tr": "asociación",
                                         "ex": "Im Verein lernt man andere Menschen kennen.",
-                                        "ex_es": "En una asociación uno conoce a otras personas."
+                                        "ex_es": "En una asociación uno conoce a otras personas.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Wo engagieren sich viele Menschen in Deutschland freiwillig in ihrer Freizeit?",
+                                                            "a": "Im Verein.",
+                                                            "q_es": "¿Dónde participan voluntariamente muchas personas en Alemania en su tiempo libre?",
+                                                            "a_es": "En una asociación."
+                                                  }
+                                        ]
                               }
                     ]
           },
@@ -2231,7 +3285,15 @@
                                         "e": "📘",
                                         "tr": "concepto",
                                         "ex": "Der Begriff ist im Test wichtig.",
-                                        "ex_es": "El concepto es importante en el examen."
+                                        "ex_es": "El concepto es importante en el examen.",
+                                        "qa": [
+                                                  {
+                                                            "q": "Was bedeutet der Begriff \"Demokratie\"?",
+                                                            "a": "Volksherrschaft.",
+                                                            "q_es": "¿Qué significa el concepto \"democracia\"?",
+                                                            "a_es": "Gobierno del pueblo."
+                                                  }
+                                        ]
                               },
                               {
                                         "art": "die",
@@ -2364,31 +3426,63 @@
             return text.replace(regex, '<span style="color:#00ffa1; font-weight:bold; text-decoration:underline;">$1</span>');
         }
 
+        function itemMatchesQuery(item, query) {
+            if (!query) return true;
+
+            const article = item.art || "";
+            const translation = item.tr || "";
+            const modalTranslation = item.modal_tr || "";
+            const cardTranslation = item.card_tr ? item.card_tr.replace(/<br\s*\/?>/gi, ' ') : "";
+            const example = item.ex || "";
+            const exampleEs = item.ex_es || "";
+            const qaText = item.qa ? item.qa.map(entry =>
+                [entry.q, entry.a, entry.q_es, entry.a_es].join(' ')
+            ).join(' ') : "";
+
+            return [
+                item.w,
+                article,
+                translation,
+                modalTranslation,
+                cardTranslation,
+                example,
+                exampleEs,
+                qaText
+            ].some(value => (value || "").toLowerCase().includes(query));
+        }
+
         // --- RENDER LOGIC ---
         function renderCards(groups, query = "") {
             const container = document.getElementById('app-container');
             container.innerHTML = ""; // Clear existing
 
             groups.forEach((cat, catIndex) => {
-                // Filter Items if Query exists
-                let filteredItems = cat.items;
-                if (query) {
-                    filteredItems = cat.items.filter(item =>
-                        item.w.toLowerCase().includes(query) ||
-                        item.tr.toLowerCase().includes(query)
-                    );
+                const chunkSize = 7;
+                const allChunks = [];
+                for (let i = 0; i < cat.items.length; i += chunkSize) {
+                    allChunks.push({
+                        items: cat.items.slice(i, i + chunkSize),
+                        index: Math.floor(i / chunkSize)
+                    });
                 }
 
-                // If no items match in this category, skip
-                if (filteredItems.length === 0) return;
+                const categoryMatchesQuery = query && [
+                    cat.title,
+                    cat.title_es
+                ].some(value => (value || "").toLowerCase().includes(query));
 
-                // Keep cards to a maximum of 7 words each.
-                const chunkSize = 7;
-                const totalChunks = Math.ceil(filteredItems.length / chunkSize);
+                const visibleChunks = query
+                    ? allChunks.filter(chunk =>
+                        categoryMatchesQuery ||
+                        chunk.items.some(item => itemMatchesQuery(item, query))
+                    )
+                    : allChunks;
 
-                for (let i = 0; i < filteredItems.length; i += chunkSize) {
-                    const chunk = filteredItems.slice(i, i + chunkSize);
-                    const chunkIndex = Math.floor(i / chunkSize);
+                if (visibleChunks.length === 0) return;
+
+                const totalChunks = allChunks.length;
+
+                visibleChunks.forEach(({ items: chunk, index: chunkIndex }) => {
 
                     const card = document.createElement('div');
                     card.className = 'category-card';
@@ -2424,12 +3518,13 @@
 
                         const cardWord = getCardWord(item);
                         const speechText = getSpeechText(getCardArticle(item), cardWord);
+                        const itemMatches = itemMatchesQuery(item, query);
 
                         // Display Strings (with Highlight)
                         let displayWord = cardWord;
                         let displayTrans = getCardTranslation(item);
 
-                        if (query) {
+                        if (query && itemMatches) {
                             displayWord = highlightMatch(displayWord, query);
                             displayTrans = highlightMatch(displayTrans, query);
                         }
@@ -2476,7 +3571,7 @@
                     card.appendChild(header);
                     card.appendChild(table);
                     container.appendChild(card);
-                }
+                });
             });
 
             // No Results Message
@@ -2501,6 +3596,8 @@
         const mHeaderLine = document.getElementById('m-header-line');
         const mSpeaker = document.getElementById('m-speaker-icon');
         const mExampleCard = document.getElementById('m-example-card');
+        const mQaSection = document.getElementById('m-qa-section');
+        const mQaList = document.getElementById('m-qa-list');
         const mNoteCard = document.getElementById('m-note-card');
         const mNote = document.getElementById('m-note');
 
@@ -2516,12 +3613,34 @@
             mExDe.textContent = item.ex;
             mExEs.textContent = item.ex_es;
             mNote.textContent = item.note || "";
+            mQaList.innerHTML = "";
+
+            if (item.qa && item.qa.length) {
+                item.qa.forEach(entry => {
+                    const qaCard = document.createElement('div');
+                    qaCard.className = 'qa-card';
+                    qaCard.innerHTML = `
+                        <div class="qa-row">
+                            <span class="qa-kind">Frage</span>
+                            <div class="qa-text-de">${entry.q}</div>
+                            <div class="qa-text-es">${entry.q_es}</div>
+                        </div>
+                        <div class="qa-row">
+                            <span class="qa-kind">Antwort</span>
+                            <div class="qa-text-de">${entry.a}</div>
+                            <div class="qa-text-es">${entry.a_es}</div>
+                        </div>
+                    `;
+                    mQaList.appendChild(qaCard);
+                });
+            }
 
             currentSpeechText = getSpeechText(item.art, item.w);
 
             // Styling & Visibility
             mArt.style.display = item.art ? 'inline' : 'none';
-            mExampleCard.style.display = 'block'; // Show Examples
+            mExampleCard.style.display = item.qa && item.qa.length ? 'none' : 'block';
+            mQaSection.style.display = item.qa && item.qa.length ? 'block' : 'none';
             mNoteCard.style.display = item.note ? 'block' : 'none';
             mEmoji.style.filter = ''; // Reset filter logic later
             mWord.style.color = 'white'; // Default
@@ -2557,6 +3676,7 @@
             // Styling & Visibility
             mArt.style.display = 'none'; // Hide Article
             mExampleCard.style.display = 'none'; // Hide Examples
+            mQaSection.style.display = 'none';
             mNoteCard.style.display = 'none';
 
             mHeaderLine.className = `modal-word-line`; // No specific article class
