@@ -2596,6 +2596,23 @@ details[open]>summary .details-arrow {
 
     .level-toggle-footer.mobile-collapsed .level-option.active {
         min-width: 84px;
+        padding-right: 20px;
+        position: relative;
+    }
+
+    .level-toggle-footer.mobile-collapsed .level-option.active::before {
+        content: '‹';
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-52%);
+        font-size: 0.95rem;
+        font-weight: 900;
+        opacity: 0.8;
+    }
+
+    .level-toggle-footer.mobile-expanded .level-option.active::before {
+        content: '';
     }
 
     .group-navigation {
