@@ -55,6 +55,12 @@
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </button>
+                    <div class="level-toggle" id="level-toggle" aria-label="Level auswählen">
+                        <button type="button" class="level-option active" data-level="A1" aria-pressed="true">A1</button>
+                        <button type="button" class="level-option" data-level="A2" aria-pressed="false">A2</button>
+                        <button type="button" class="level-option" data-level="B1" aria-pressed="false">B1</button>
+                        <button type="button" class="level-option" data-level="B2" aria-pressed="false">B2</button>
+                    </div>
                     <div class="level-indicator" id="level-indicator">A1.1</div>
                     <button id="next-level-btn" class="level-nav-arrow" title="Nächstes Niveau (Next Level)">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -806,6 +812,15 @@
             <div class="theme-modal-footer">
                 <button id="close-theme-modal-btn" class="theme-close-btn">Verstanden (Entendido)</button>
             </div>
+        </div>
+    </div>
+
+    <div class="level-toggle-container" aria-label="Level Navigation">
+        <div class="level-toggle level-toggle-footer" aria-label="Level auswählen">
+            <button type="button" class="level-option active" data-level="A1" aria-pressed="true">A1</button>
+            <button type="button" class="level-option" data-level="A2" aria-pressed="false">A2</button>
+            <button type="button" class="level-option" data-level="B1" aria-pressed="false">B1</button>
+            <button type="button" class="level-option" data-level="B2" aria-pressed="false">B2</button>
         </div>
     </div>
 

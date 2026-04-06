@@ -158,6 +158,7 @@
     const mainContainer = document.getElementById('main-container');
     const cardsContainer = document.getElementById('cards-container');
     const levelIndicator = document.getElementById('level-indicator');
+    const levelToggleButtons = document.querySelectorAll('.level-option');
     const groupThemeIndicator = document.getElementById('group-theme-indicator');
     const groupIndicator = document.getElementById('group-indicator');
     const progressBar = document.getElementById('progress-bar');
@@ -1112,6 +1113,12 @@
         else if (displayLevel === 'A2.2') levelIndicator.classList.add('level-a2-2');
         else if (displayLevel === 'B1.1') levelIndicator.classList.add('level-b1-1');
 
+        levelToggleButtons.forEach(button => {
+            const isActive = button.dataset.level === currentLevel;
+            button.classList.toggle('active', isActive);
+            button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
         const themeName = group.theme || group.groupNameGerman || 'Gruppe';
         groupThemeIndicator.textContent = themeName;
 
@@ -1501,6 +1508,16 @@
         return 0;
     }
 
+    async function navigateToLevel(targetLevel) {
+        if (!levelConfig[targetLevel]) return;
+
+        const targetGroup = getSavedGroupForLevel(targetLevel);
+        await loadGroupData(targetLevel, targetGroup);
+        currentLevel = targetLevel;
+        currentGroupInLevel = targetGroup;
+        clearSearchAndRender();
+    }
+
     function clearSearchAndRender() {
         if (searchInput) {
             searchInput.value = '';
@@ -1646,12 +1663,7 @@
                     const currentLevelIndex = levelOrder.indexOf(currentLevel);
 
                     if (currentLevelIndex > 0) {
-                        const targetLevel = levelOrder[currentLevelIndex - 1];
-                        const targetGroup = getSavedGroupForLevel(targetLevel);
-                        await loadGroupData(targetLevel, targetGroup);
-                        currentLevel = targetLevel;
-                        currentGroupInLevel = targetGroup;
-                        clearSearchAndRender();
+                        await navigateToLevel(levelOrder[currentLevelIndex - 1]);
                     }
                 });
 
@@ -1659,13 +1671,16 @@
                     const currentLevelIndex = levelOrder.indexOf(currentLevel);
 
                     if (currentLevelIndex < levelOrder.length - 1) {
-                        const targetLevel = levelOrder[currentLevelIndex + 1];
-                        const targetGroup = getSavedGroupForLevel(targetLevel);
-                        await loadGroupData(targetLevel, targetGroup);
-                        currentLevel = targetLevel;
-                        currentGroupInLevel = targetGroup;
-                        clearSearchAndRender();
+                        await navigateToLevel(levelOrder[currentLevelIndex + 1]);
                     }
+                });
+
+                levelToggleButtons.forEach(button => {
+                    button.addEventListener('click', async () => {
+                        const targetLevel = button.dataset.level;
+                        if (!targetLevel || targetLevel === currentLevel) return;
+                        await navigateToLevel(targetLevel);
+                    });
                 });
 
                 // Keyboard navigation for levels (Up/Down arrows)
@@ -1678,22 +1693,12 @@
                     if (e.key === 'ArrowUp') {
                         e.preventDefault();
                         if (currentLevelIndex > 0) {
-                            const targetLevel = levelOrder[currentLevelIndex - 1];
-                            const targetGroup = getSavedGroupForLevel(targetLevel);
-                            await loadGroupData(targetLevel, targetGroup);
-                            currentLevel = targetLevel;
-                            currentGroupInLevel = targetGroup;
-                            clearSearchAndRender();
+                            await navigateToLevel(levelOrder[currentLevelIndex - 1]);
                         }
                     } else if (e.key === 'ArrowDown') {
                         e.preventDefault();
                         if (currentLevelIndex < levelOrder.length - 1) {
-                            const targetLevel = levelOrder[currentLevelIndex + 1];
-                            const targetGroup = getSavedGroupForLevel(targetLevel);
-                            await loadGroupData(targetLevel, targetGroup);
-                            currentLevel = targetLevel;
-                            currentGroupInLevel = targetGroup;
-                            clearSearchAndRender();
+                            await navigateToLevel(levelOrder[currentLevelIndex + 1]);
                         }
                     }
                 });
