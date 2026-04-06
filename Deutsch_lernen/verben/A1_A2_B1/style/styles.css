@@ -2550,7 +2550,7 @@ details[open]>summary .details-arrow {
     .level-toggle {
         width: 100%;
         justify-content: center;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         border-radius: 20px;
     }
 
@@ -2568,9 +2568,10 @@ details[open]>summary .details-arrow {
     }
 
     .level-option {
-        flex: 1 1 calc(50% - 4px);
-        min-width: 64px;
+        flex: 1 1 0;
+        min-width: 0;
         text-align: center;
+        padding: 8px 6px;
     }
 
     .group-navigation {
