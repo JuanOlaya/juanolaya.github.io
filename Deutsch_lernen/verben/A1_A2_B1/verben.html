@@ -40,9 +40,6 @@
                         </div>
                         <div id="loading-status" class="loading-status" aria-live="polite"></div>
                     </div>
-                    <div id="tag-filters-container" class="tag-filters-container">
-                        <!-- Tags will be generated here -->
-                    </div>
                 </div>
             </div>
 
@@ -814,7 +811,8 @@
 
     <!-- Settings Modal -->
     <div id="settings-modal" class="modal-overlay">
-        <div class="modal-content" style="padding: 20px; max-width: 400px; max-height: 80vh; overflow-y: auto;">
+        <div class="modal-content settings-modal-content"
+            style="padding: 20px; max-width: 560px; max-height: 80vh; overflow-y: auto;">
             <div class="modal-header"
                 style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px; margin-bottom: 15px;">
                 <h2 style="margin: 0; font-size: 1.5rem; color: #4682B4;">Einstellungen</h2>
@@ -837,6 +835,16 @@
 
                     <input type="radio" id="view-compact" name="card-version" value="compact" checked>
                     <label for="view-compact" title="Kompakte Karten" style="margin: 0;">Kompakt</label>
+                </div>
+
+                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
+
+                <h3 style="margin-top: 0; margin-bottom: 10px; font-size: 1.2rem; color: #374151;">Tag-Filter
+                    (Filtro rápido)</h3>
+                <p style="margin: 0 0 12px 0; font-size: 0.9rem; color: #6b7280;">Tippe un Tag para filtrar al
+                    instante.</p>
+                <div id="tag-filters-container" class="tag-filters-container settings-tag-filters">
+                    <!-- Tags will be generated here -->
                 </div>
 
                 <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
