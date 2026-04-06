@@ -438,8 +438,8 @@
                               {
                                         "art": "die",
                                         "w": "Wahlbenachrichtigung",
-                                        "e": "??",
-                                        "tr": "notificaci?n electoral"
+                                        "e": "📨",
+                                        "tr": "notificación electoral"
                               }
                     ]
           },
