@@ -1279,6 +1279,30 @@ window.lidKompaktModalData = {
                               }
                     ]
           },
+          "wahlen::Stimmzettel": {
+                    "ex": "Auf dem Stimmzettel kreuzt man seine Wahl an.",
+                    "ex_es": "En la papeleta de votación se marca la elección.",
+                    "qa": [
+                              {
+                                        "q": "Wie heißt das Papier, auf dem man bei einer Wahl ankreuzt?",
+                                        "a": "Der Stimmzettel.",
+                                        "q_es": "¿Cómo se llama el papel en el que se marca el voto en una elección?",
+                                        "a_es": "La papeleta de votación."
+                              },
+                              {
+                                        "q": "Worauf gibt man im Wahllokal seine Stimme ab?",
+                                        "a": "Auf dem Stimmzettel.",
+                                        "q_es": "¿Sobre qué se emite el voto en el colegio electoral?",
+                                        "a_es": "Sobre la papeleta de votación."
+                              },
+                              {
+                                        "q": "Wie heißt das Formular mit den Auswahlmöglichkeiten bei einer Wahl?",
+                                        "a": "Der Stimmzettel.",
+                                        "q_es": "¿Cómo se llama el formulario con las opciones en una elección?",
+                                        "a_es": "La papeleta de votación."
+                              }
+                    ]
+          },
           "wahlrecht::Wahlrecht": {
                     "ex": "Viele Bürger haben das Wahlrecht.",
                     "ex_es": "Muchos ciudadanos tienen derecho al voto.",

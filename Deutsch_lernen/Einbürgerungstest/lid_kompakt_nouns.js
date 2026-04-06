@@ -440,6 +440,12 @@
                                         "w": "Wahlbenachrichtigung",
                                         "e": "📨",
                                         "tr": "notificación electoral"
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Stimmzettel",
+                                        "e": "🗳️",
+                                        "tr": "papeleta de votación"
                               }
                     ]
           },
