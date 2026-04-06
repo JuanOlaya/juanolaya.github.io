@@ -4,7 +4,8 @@ const vm = require('vm');
 const { execSync } = require('child_process');
 
 const rootDir = __dirname;
-const sourcePath = path.join(rootDir, 'lid_kompakt.html');
+const sourcePath = path.join(rootDir, '..', 'Einbürgerungstest', 'lid_kompakt.html');
+const dataSourcePath = path.join(rootDir, '..', 'Einbürgerungstest', 'lid_kompakt_nouns.js');
 const outputDir = path.join(rootDir, 'pdf_output');
 const variant = process.argv.includes('--light') ? 'light' : 'dark';
 const suffixArg = process.argv.find(arg => arg.startsWith('--suffix='));
@@ -93,7 +94,8 @@ function extractLiteral(source, startMarker) {
 
 function loadSourceData() {
     const source = fs.readFileSync(sourcePath, 'utf8');
-    const dataLiteral = extractLiteral(source, 'const data = [');
+    const dataSource = fs.readFileSync(dataSourcePath, 'utf8');
+    const dataLiteral = extractLiteral(dataSource, 'window.lidKompaktData = [');
     const labelsLiteral = extractLiteral(source, 'const headerThemeLabels = {');
 
     const data = vm.runInNewContext(`(${dataLiteral})`);
