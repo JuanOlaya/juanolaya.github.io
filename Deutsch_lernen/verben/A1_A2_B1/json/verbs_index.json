@@ -1,8 +1,8 @@
 {
     "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word, with the STRICT EXCEPTION of the group 'Leben in Deutschland'. MAINTENANCE RULE: whenever this file changes, update lastUpdated.",
-    "lastUpdated": "2026-04-07T16:12:30Z",
-    "totalGroups": 91,
-    "totalVerbs": 509,
+    "lastUpdated": "2026-04-07T20:40:20Z",
+    "totalGroups": 93,
+    "totalVerbs": 512,
     "groups": [
         {
             "level": "A1.2",
@@ -21,13 +21,14 @@
         },
         {
             "level": "A2.2",
-            "verbCount": 5,
+            "verbCount": 6,
             "verbs": [
                 "begrüßen",
                 "verabschieden",
                 "anbieten",
                 "mitnehmen",
-                "bieten"
+                "bieten",
+                "verhalten"
             ],
             "groupNameGerman": "Interaktion",
             "groupNameSpanish": "Interacción",
@@ -1425,6 +1426,28 @@
             "groupNameSpanish": "Consecuencia",
             "groupNameEnglish": "Consequence",
             "groupNumberPerLevel": 24
+        },
+        {
+            "level": "B1.2",
+            "verbCount": 1,
+            "verbs": [
+                "errichten"
+            ],
+            "groupNameGerman": "Staat",
+            "groupNameSpanish": "Estado",
+            "groupNameEnglish": "State",
+            "groupNumberPerLevel": 1
+        },
+        {
+            "level": "B2.1",
+            "verbCount": 1,
+            "verbs": [
+                "kennzeichnen"
+            ],
+            "groupNameGerman": "Analyse",
+            "groupNameSpanish": "Análisis",
+            "groupNameEnglish": "Analysis",
+            "groupNumberPerLevel": 1
         }
     ]
 }
