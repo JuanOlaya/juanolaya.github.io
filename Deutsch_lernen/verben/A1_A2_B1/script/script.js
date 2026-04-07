@@ -945,7 +945,9 @@
             konjunktivVerbs.includes(verbName) && !existingData.konjunktiv_ii
                 ? maybeFetchJson('konjunktiv_ii', {})
                 : Promise.resolve({}),
-            !Array.isArray(existingData.wortfamilie) ? maybeFetchJson('wortfamilie', { wortfamilie: [] }) : Promise.resolve({ wortfamilie: existingData.wortfamilie })
+            existingData._wortfamilieLoaded === true
+                ? Promise.resolve({ wortfamilie: existingData.wortfamilie || [] })
+                : maybeFetchJson('wortfamilie', { wortfamilie: [] })
         ]);
 
         if (praeteritumKonjugationData.praeteritum) {
@@ -960,7 +962,8 @@
             ...praeteritumKonjugationData,
             ...konjunktivData,
             examples: Array.isArray(perfektExamples) ? perfektExamples : (existingData.examples || []),
-            wortfamilie: Array.isArray(wortfamilieData.wortfamilie) ? wortfamilieData.wortfamilie : (existingData.wortfamilie || [])
+            wortfamilie: Array.isArray(wortfamilieData.wortfamilie) ? wortfamilieData.wortfamilie : (existingData.wortfamilie || []),
+            _wortfamilieLoaded: true
         };
 
         scheduleCachePersist();
@@ -1119,6 +1122,10 @@
         return cleaned.split('/')[0].trim();
     }
 
+    function getCardTranslation(verbData) {
+        return (verbData && verbData.card_es) || getPrimaryTranslation((verbData && verbData.es) || '');
+    }
+
     // Helper function to extract clean Perfekt (remove auxiliary verb)
     function getCleanPerfekt(perfekt) {
         if (!perfekt || perfekt === '---') return '---';
@@ -1256,7 +1263,7 @@
 
                     const spanishWord = document.createElement('div');
                     spanishWord.className = 'kompakt-spanish';
-                    spanishWord.textContent = getPrimaryTranslation(verbData.es || '');
+                    spanishWord.textContent = getCardTranslation(verbData);
                     spanishWord.style.display = showSpanish ? '' : 'none';
                     spanishWord.style.cursor = 'pointer';
                     spanishWord.title = 'Details anzeigen';
@@ -1341,7 +1348,7 @@
 
             // Header info: Verb + Translation (No Emoji)
             const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
-            const esTranslation = getPrimaryTranslation(verbData.es || '');
+            const esTranslation = getCardTranslation(verbData);
             const enTranslation = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
 
             // Tag Logic (Moved to Body)
@@ -1402,7 +1409,7 @@
             const verbData = allVerbsData[verbName];
             if (!verbData) return '';
 
-            const translation = getPrimaryTranslation(verbData.es || '');
+            const translation = getCardTranslation(verbData);
             const irregular = verbData.irregularPraesens ? '*' : '';
             const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
             const reflBadge = isReflexive ? `<span class="reflexiv-badge" style="margin-top: 4px; margin-left: 8px;">refl</span>` : '';
@@ -1470,7 +1477,7 @@
             const infinitiv = verbName;
             const perfekt = getCleanPerfekt(verbData.perfekt);
             const praeteritum = getCleanPraeteritum(verbData.praeteritum);
-            const translation = getPrimaryTranslation(verbData.es || '');
+            const translation = getCardTranslation(verbData);
             const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
             const reflBadge = isReflexive ? ` <span class="reflexiv-badge" style="padding: 1px 4px; font-size: 0.6rem; margin-left: 8px;">refl</span>` : '';
             const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
@@ -2457,6 +2464,7 @@
         const { skipDeferredReload = false, preferredTab = null } = options;
         const data = allVerbsData[verb];
         if (!data) return;
+        currentVerbInModal = verb;
         const activeTabBeforeRefresh = preferredTab || document.querySelector('.modal-tab-btn.active')?.dataset.tab || 'infinitiv';
 
         // Open the modal fast with Präsens first, then load the rest in the background.
@@ -3796,7 +3804,7 @@
                         if (!verbName.toLowerCase().includes(searchTerm) && matchHint) {
                             displayVerbName = `${highlightBaseVerb(verbName)} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, searchTerm)})</span>`;
                         }
-                        const esTranslationRaw = getPrimaryTranslation(verbData.es || '');
+                        const esTranslationRaw = getCardTranslation(verbData);
                         const esTranslationDisplay = highlightMatch(esTranslationRaw, searchTerm);
                         const enTranslationRaw = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
                         const enTranslationDisplay = highlightMatch(enTranslationRaw, searchTerm);
@@ -3845,7 +3853,7 @@
                     }
 
                     // Remove parentheses from translations and highlight
-                    const esTranslationRaw = getPrimaryTranslation(verbData.es || '');
+                    const esTranslationRaw = getCardTranslation(verbData);
                     const esTranslation = highlightMatch(esTranslationRaw, searchTerm);
 
                     const esPerfektTranslationRaw = getPrimaryTranslation(verbData.es_perfekt || '');

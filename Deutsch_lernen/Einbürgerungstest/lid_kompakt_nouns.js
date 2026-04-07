@@ -172,6 +172,12 @@ window.lidKompaktData = [
                                         "tr": "desigual"
                               },
                               {
+                                        "art": "",
+                                        "w": "ungerechtfertigt",
+                                        "e": "\ud83d\udeab",
+                                        "tr": "injustificado"
+                              },
+                              {
                                         "art": "die",
                                         "w": "Ungleichbehandlung",
                                         "e": "\u2696\ufe0f",
@@ -1061,6 +1067,21 @@ window.lidKompaktData = [
                                         "w": "Willen",
                                         "e": "??",
                                         "tr": "voluntad"
+                              }
+                    ]
+          },
+          {
+                    "id": "arbeitswelt",
+                    "title": "Arbeitswelt",
+                    "title_es": "Mundo laboral",
+                    "icon": "🤝",
+                    "color": "#0f766e",
+                    "items": [
+                              {
+                                        "art": "die (pl)",
+                                        "w": "Gewerkschaften",
+                                        "e": "🤝",
+                                        "tr": "sindicatos"
                               }
                     ]
           },
