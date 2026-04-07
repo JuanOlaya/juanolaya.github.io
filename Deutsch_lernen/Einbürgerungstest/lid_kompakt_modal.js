@@ -1639,6 +1639,30 @@ window.lidKompaktModalData = {
                               }
                     ]
           },
+          "wahlformen::Briefwahl": {
+                    "ex": "Bei der Briefwahl schickt man den Stimmzettel per Post zur\u00fcck.",
+                    "ex_es": "En el voto por correo se devuelve la papeleta por correo postal.",
+                    "qa": [
+                              {
+                                        "q": "Wie hei\u00dft die Wahl, bei der man nicht im Wahllokal, sondern per Post abstimmt?",
+                                        "a": "Die Briefwahl.",
+                                        "q_es": "\u00bfC\u00f3mo se llama la votaci\u00f3n en la que no se vota en el colegio electoral, sino por correo?",
+                                        "a_es": "El voto por correo."
+                              },
+                              {
+                                        "q": "Welche Wahlform nutzt man in Deutschland, wenn man die Unterlagen zu Hause ausf\u00fcllt und abschickt?",
+                                        "a": "Die Briefwahl.",
+                                        "q_es": "\u00bfQu\u00e9 forma de votaci\u00f3n se usa en Alemania cuando se rellenan los documentos en casa y se env\u00edan?",
+                                        "a_es": "El voto por correo."
+                              },
+                              {
+                                        "q": "Wie nennt man das W\u00e4hlen per Post?",
+                                        "a": "Die Briefwahl.",
+                                        "q_es": "\u00bfC\u00f3mo se llama votar por correo?",
+                                        "a_es": "El voto por correo."
+                              }
+                    ]
+          },
           "parteien::Partei": {
                     "ex": "Die Partei stellt Kandidaten auf.",
                     "ex_es": "El partido presenta candidatos.",

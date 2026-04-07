@@ -557,6 +557,21 @@ window.lidKompaktData = [
                     ]
           },
           {
+                    "id": "wahlformen",
+                    "title": "Wahlformen",
+                    "title_es": "Formas de voto",
+                    "icon": "\ud83d\udcee",
+                    "color": "#8b5cf6",
+                    "items": [
+                              {
+                                        "art": "die",
+                                        "w": "Briefwahl",
+                                        "e": "\ud83d\udcee",
+                                        "tr": "voto por correo"
+                              }
+                    ]
+          },
+          {
                     "id": "parteien",
                     "title": "Parteien & Macht",
                     "title_es": "Partidos y poder",
