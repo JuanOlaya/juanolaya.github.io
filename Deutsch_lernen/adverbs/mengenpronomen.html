@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pronombres de Cantidad en Alemán</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
             /* --- DEFAULT DARK MODE PALETTE --- */
@@ -531,10 +532,175 @@
             opacity: 1;
         }
 
-        .spanish-word {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+
+        /* --- MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
         }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-green);
+            width: 95%;
+            max-width: 550px;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 255, 161, 0.15);
+            animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 20px 25px;
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .modal-body {
+            padding: 30px;
+            text-align: left;
+            overflow-y: auto;
+        }
+
+        .modal-de {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent-green);
+            text-align: center;
+        }
+
+        .modal-es {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            opacity: 0.9;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .modal-example-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 25px;
+        }
+
+        .example-de {
+            font-weight: 700;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .example-es {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .play-btn-large {
+            background: var(--accent-green);
+            color: #020617;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        /* Update spanish-word */
+        .spanish-word {
+            color: var(--text-main);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .spanish-word:hover {
+            opacity: 0.8;
+        }
+
+        tr {
+            cursor: pointer;
+        }
+        
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .card-footer {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px 12px;
+            border-top: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 0.8rem;
+        }
+
+        .card-footer-tag {
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 999px;
+            padding: 5px 12px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .card-footer-level {
+            background: rgba(255, 255, 255, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.42);
+            color: #ffffff;
+            font-weight: 900;
+        }
+
 
         .example-sent {
             display: block;
@@ -559,6 +725,32 @@
 </head>
 
 <body class="mode-es">
+
+    <!-- Word Modal -->
+    <div id="wordModal" class="modal-overlay" onclick="closeModal('wordModal', event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <header id="wordModalHeader" class="modal-header">
+                <div></div>
+                <button style="font-size: 1.5rem; color: var(--text-muted); background: none; border: none; cursor: pointer; line-height: 1; padding: 0 10px;" onclick="closeModal('wordModal')">&times;</button>
+            </header>
+            <div class="modal-body">
+                <div id="modalDe" class="modal-de"></div>
+                <div id="modalEs" class="modal-es"></div>
+
+                <div class="modal-example-box" id="exampleContainer">
+                    <div class="example-de" id="modalExDe"></div>
+                    <div class="example-es" id="modalExEs"></div>
+                </div>
+
+                <div class="btn-container">
+                    <button class="play-btn-large" onclick="triggerSpeech()">
+                        🔊 ESCUCHAR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="container">
         <header>
@@ -620,283 +812,219 @@
             <div class="level-card">
                 <div class="level-header a1">
                     <span>A1 – Básico</span>
-                    <span>🟦</span>
                 </div>
                 <div class="level-content">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Pronombre / Español</th>
-                                <th>Ejemplo</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <!-- NEW WORD -->
-                            <tr>
+                            <tr onclick="openWordModal('nichts', 'nada (0%)', 'Ich habe nichts gesehen.', 'No he visto nada.')">
                                 <td>
                                     <div class="german-word">nichts</div>
-                                    <div class="spanish-word">nada (0%)</div>
                                 </td>
-                                <td>
-                                    Ich habe nichts gesehen.<br>
-                                    <span class="example-sent">(No he visto nada.)</span>
+                                <td class="spanish-word">
+                                    nada (0%)
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('etwas', 'algo / un poco', 'Ich moechte etwas essen.', 'Quiero comer algo.')">
                                 <td>
                                     <div class="german-word">etwas</div>
-                                    <div class="spanish-word">algo / un poco</div>
                                 </td>
-                                <td>
-                                    Ich moechte etwas essen.<br>
-                                    <span class="example-sent">(Quiero comer algo.)</span>
+                                <td class="spanish-word">
+                                    algo / un poco
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('jemand', 'alguien', 'Jemand wartet draußen.', 'Alguien espera afuera.')">
                                 <td>
                                     <div class="german-word">jemand</div>
-                                    <div class="spanish-word">alguien</div>
                                 </td>
-                                <td>
-                                    Jemand wartet draußen.<br>
-                                    <span class="example-sent">(Alguien espera afuera.)</span>
+                                <td class="spanish-word">
+                                    alguien
                                 </td>
                             </tr>
                             <!-- NEW WORD -->
-                            <tr>
+                            <tr onclick="openWordModal('niemand', 'nadie', 'Niemand ist zu Hause.', 'Nadie está en casa.')">
                                 <td>
                                     <div class="german-word">niemand</div>
-                                    <div class="spanish-word">nadie</div>
                                 </td>
-                                <td>
-                                    Niemand ist zu Hause.<br>
-                                    <span class="example-sent">(Nadie está en casa.)</span>
+                                <td class="spanish-word">
+                                    nadie
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('alle', 'todos (100%)', 'Alle kommen.', 'Todos vienen.')">
                                 <td>
                                     <div class="german-word">alle</div>
-                                    <div class="spanish-word">todos (100%)</div>
                                 </td>
-                                <td>
-                                    Alle kommen.<br>
-                                    <span class="example-sent">(Todos vienen.)</span>
+                                <td class="spanish-word">
+                                    todos (100%)
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('viel oder viele', 'mucho(s)', 'Viele arbeiten hier.', 'Muchos trabajan aquí.')">
                                 <td>
                                     <div class="german-word" data-speak="viel oder viele">viel(e)</div>
-                                    <div class="spanish-word">mucho(s)</div>
                                 </td>
-                                <td>
-                                    Viele arbeiten hier.<br>
-                                    <span class="example-sent">(Muchos trabajan aquí.)</span>
+                                <td class="spanish-word">
+                                    mucho(s)
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('wenig oder wenige', 'poco(s)', 'Wenige verstehen das.', 'Pocos entienden eso.')">
                                 <td>
                                     <div class="german-word" data-speak="wenig oder wenige">wenig(e)</div>
-                                    <div class="spanish-word">poco(s)</div>
                                 </td>
-                                <td>
-                                    Wenige verstehen das.<br>
-                                    <span class="example-sent">(Pocos entienden eso.)</span>
+                                <td class="spanish-word">
+                                    poco(s)
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <div class="card-footer a1"><span class="card-footer-tag card-footer-level">A1</span><span class="card-footer-tag">pronombre</span></div>
             </div>
 
             <!-- A2 LEVEL -->
             <div class="level-card">
                 <div class="level-header a2">
                     <span>A2 – Expansión</span>
-                    <span>🟨</span>
                 </div>
                 <div class="level-content">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Pronombre / Español</th>
-                                <th>Ejemplo</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <!-- NEW WORD -->
-                            <tr>
+                            <tr onclick="openWordModal('ein paar', 'unos pocos / un par', 'Ich kenne ein paar.', 'Conozco a unos pocos.')">
                                 <td>
                                     <div class="german-word" style="text-transform: none;">ein paar</div>
-                                    <div class="spanish-word">unos pocos / un par</div>
                                 </td>
-                                <td>
-                                    Ich kenne ein paar.<br>
-                                    <span class="example-sent">(Conozco a unos pocos.)</span>
+                                <td class="spanish-word">
+                                    unos pocos / un par
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('einige', 'algunos', 'Einige fehlen heute.', 'Algunos faltan hoy.')">
                                 <td>
                                     <div class="german-word">einige</div>
-                                    <div class="spanish-word">algunos</div>
                                 </td>
-                                <td>
-                                    Einige fehlen heute.<br>
-                                    <span class="example-sent">(Algunos faltan hoy.)</span>
+                                <td class="spanish-word">
+                                    algunos
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('mehrere', 'varios', 'Mehrere haben gefragt.', 'Varios han preguntado.')">
                                 <td>
                                     <div class="german-word">mehrere</div>
-                                    <div class="spanish-word">varios</div>
                                 </td>
-                                <td>
-                                    Mehrere haben gefragt.<br>
-                                    <span class="example-sent">(Varios han preguntado.)</span>
+                                <td class="spanish-word">
+                                    varios
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('manche', 'algunos / unos', 'Manche mögen Kaffee.', 'A algunos les gusta el café.')">
                                 <td>
                                     <div class="german-word">manche</div>
-                                    <div class="spanish-word">algunos / unos</div>
                                 </td>
-                                <td>
-                                    Manche mögen Kaffee.<br>
-                                    <span class="example-sent">(A algunos les gusta el café.)</span>
+                                <td class="spanish-word">
+                                    algunos / unos
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('beide, beiden, alle beide', 'ambos / los dos', 'Beide sind da. Ich helfe beiden.', 'Ambos están aquí. Ayudo a ambos.')">
                                 <td>
                                     <div class="german-word" data-speak="beide, beiden, alle beide">beide / beiden / alle beide</div>
-                                    <div class="spanish-word">ambos / los dos</div>
                                 </td>
-                                <td>
-                                    Beide sind da. Ich helfe beiden.<br>
-                                    <span class="example-sent">(Ambos están aquí. Ayudo a ambos.)</span>
+                                <td class="spanish-word">
+                                    ambos / los dos
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <div class="card-footer a2"><span class="card-footer-tag card-footer-level">A2</span><span class="card-footer-tag">pronombre</span></div>
             </div>
 
             <!-- B1 LEVEL -->
             <div class="level-card">
                 <div class="level-header b1">
                     <span>B1 – Intermedio</span>
-                    <span>🟧</span>
                 </div>
                 <div class="level-content">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Pronombre / Español</th>
-                                <th>Ejemplo</th>
-                            </tr>
-                        </thead>
                         <tbody>
-                            <tr>
+                            <tr onclick="openWordModal('die meisten', 'la mayoría', 'Die meisten arbeiten hier.', 'La mayoría trabaja aquí.')">
                                 <td>
                                     <div class="german-word">die meisten</div>
-                                    <div class="spanish-word">la mayoría</div>
                                 </td>
-                                <td>
-                                    Die meisten arbeiten hier.<br>
-                                    <span class="example-sent">(La mayoría trabaja aquí.)</span>
+                                <td class="spanish-word">
+                                    la mayoría
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('die wenigsten', 'la minoría', 'Die wenigsten wissen das.', 'Muy pocos saben eso.')">
                                 <td>
                                     <div class="german-word">die wenigsten</div>
-                                    <div class="spanish-word">la minoría</div>
                                 </td>
-                                <td>
-                                    Die wenigsten wissen das.<br>
-                                    <span class="example-sent">(Muy pocos saben eso.)</span>
+                                <td class="spanish-word">
+                                    la minoría
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('genug', 'suficiente', 'Genug ist genug.', 'Suficiente es suficiente.')">
                                 <td>
                                     <div class="german-word">genug</div>
-                                    <div class="spanish-word">suficiente</div>
                                 </td>
-                                <td>
-                                    Genug ist genug.<br>
-                                    <span class="example-sent">(Suficiente es suficiente.)</span>
+                                <td class="spanish-word">
+                                    suficiente
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('zu viele', 'demasiados', 'Zu viele denken so.', 'Demasiados piensan así.')">
                                 <td>
                                     <div class="german-word">zu viele</div>
-                                    <div class="spanish-word">demasiados</div>
                                 </td>
-                                <td>
-                                    Zu viele denken so.<br>
-                                    <span class="example-sent">(Demasiados piensan así.)</span>
+                                <td class="spanish-word">
+                                    demasiados
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <div class="card-footer b1"><span class="card-footer-tag card-footer-level">B1</span><span class="card-footer-tag">pronombre</span></div>
             </div>
 
             <!-- B2 LEVEL -->
             <div class="level-card">
                 <div class="level-header b2">
                     <span>B2 – Avanzado</span>
-                    <span>🟥</span>
                 </div>
                 <div class="level-content">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Pronombre / Español</th>
-                                <th>Ejemplo</th>
-                            </tr>
-                        </thead>
                         <tbody>
-                            <tr>
+                            <tr onclick="openWordModal('etliche', 'bastantes', 'Etliche haben protestiert.', 'Bastantes han protestado.')">
                                 <td>
                                     <div class="german-word">etliche</div>
-                                    <div class="spanish-word">bastantes</div>
                                 </td>
-                                <td>
-                                    Etliche haben protestiert.<br>
-                                    <span class="example-sent">(Bastantes han protestado.)</span>
+                                <td class="spanish-word">
+                                    bastantes
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('unzählige', 'innumerables', 'Unzählige leiden darunter.', 'Innumerables sufren por ello.')">
                                 <td>
                                     <div class="german-word">unzählige</div>
-                                    <div class="spanish-word">innumerables</div>
                                 </td>
-                                <td>
-                                    Unzählige leiden darunter.<br>
-                                    <span class="example-sent">(Innumerables sufren por ello.)</span>
+                                <td class="spanish-word">
+                                    innumerables
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('zahlreiche', 'numerosos', 'Zahlreiche sind betroffen.', 'Numerosos están afectados.')">
                                 <td>
                                     <div class="german-word">zahlreiche</div>
-                                    <div class="spanish-word">numerosos</div>
                                 </td>
-                                <td>
-                                    Zahlreiche sind betroffen.<br>
-                                    <span class="example-sent">(Numerosos están afectados.)</span>
+                                <td class="spanish-word">
+                                    numerosos
                                 </td>
                             </tr>
-                            <tr>
+                            <tr onclick="openWordModal('sämtliche', 'todos (formal)', 'Sämtliche wurden informiert.', 'Todos fueron informados.')">
                                 <td>
                                     <div class="german-word">sämtliche</div>
-                                    <div class="spanish-word">todos (formal)</div>
                                 </td>
-                                <td>
-                                    Sämtliche wurden informiert.<br>
-                                    <span class="example-sent">(Todos fueron informados.)</span>
+                                <td class="spanish-word">
+                                    todos (formal)
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <div class="card-footer b2"><span class="card-footer-tag card-footer-level">B2</span><span class="card-footer-tag">pronombre</span></div>
             </div>
 
         </div>
@@ -987,6 +1115,35 @@
     </div>
 
     <script>
+        
+        function openWordModal(de, es, exDe, exEs) {
+            document.getElementById('wordModal').style.display = 'flex';
+            document.getElementById('modalDe').textContent = de;
+            document.getElementById('modalEs').textContent = es;
+            document.getElementById('modalExDe').innerHTML = exDe + ' <i class="fas fa-volume-up text-xs opacity-50 ml-2"></i>';
+            document.getElementById('modalExEs').textContent = exEs;
+        }
+
+        function closeModal(modalId, event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function triggerSpeech() {
+            const text = document.getElementById('modalDe').textContent;
+            speak(text);
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const modEx = document.getElementById('modalExDe');
+            if(modEx) {
+                modEx.addEventListener('click', () => {
+                   speak(modEx.textContent);
+                });
+                modEx.style.cursor = 'pointer';
+            }
+        });
+
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
         }

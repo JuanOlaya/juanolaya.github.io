@@ -186,15 +186,8 @@ window.lidKompaktData = [
                               {
                                         "art": "die",
                                         "w": "Folter",
-                                        "e": "\ud83d\uded1",
+                                        "e": "🛑",
                                         "tr": "tortura",
-                                        "important": true
-                              },
-                              {
-                                        "art": "die",
-                                        "w": "Todesstrafe",
-                                        "e": "\u2620\ufe0f",
-                                        "tr": "pena de muerte",
                                         "important": true
                               },
                               {
@@ -1012,8 +1005,22 @@ window.lidKompaktData = [
                               {
                                         "art": "die",
                                         "w": "Anzeige",
-                                        "e": "\ud83d\udcdd",
+                                        "e": "📝",
                                         "tr": "denuncia"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Todesstrafe",
+                                        "e": "☠️",
+                                        "tr": "pena de muerte",
+                                        "important": true
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Straftat",
+                                        "e": "🚔",
+                                        "tr": "delito / hecho delictivo",
+                                        "important": true
                               }
                     ]
           },
@@ -1082,6 +1089,13 @@ window.lidKompaktData = [
                                         "w": "Gewerkschaften",
                                         "e": "🤝",
                                         "tr": "sindicatos"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Kündigungsschutzklage",
+                                        "e": "⚖️",
+                                        "tr": "demanda por despido",
+                                        "important": true
                               }
                     ]
           },

@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // --- GLOBAL STATE ---
     let allVerbsData = {}; // Global Data Containers
     let verbGroupsByLevel = {}; // Global Data Containers
@@ -124,7 +124,7 @@
     const levelConfig = {
         'A1': { groupCount: 27, displayName: 'A1' },
         'A2': { groupCount: 27, displayName: 'A2' },
-        'B1': { groupCount: 24, displayName: 'B1' },
+        'B1': { groupCount: 25, displayName: 'B1' },
         'B2': { groupCount: 13, displayName: 'B2' }
     };
     const levelOrder = ['A1', 'A2', 'B1', 'B2'];
@@ -139,7 +139,7 @@
     let modalDeferredLoadToken = 0;
     let storyClickCounter = 0;
     let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
-    const CACHE_KEY = 'verbAppCache_v41_utf8_normalized';
+    const CACHE_KEY = 'verbAppCache_v42_utf8_normalized';
     const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
     let cachePersistTimeout = null;
     let cachePersistenceDisabled = false;
@@ -263,35 +263,35 @@
 
         let normalized = value;
         const replacements = [
-            ['Ãƒâ€ž', 'Ä'],
-            ['Ãƒâ€“', 'Ö'],
-            ['ÃƒÅ“', 'Ü'],
-            ['ÃƒÂ¤', 'ä'],
-            ['ÃƒÂ¶', 'ö'],
-            ['ÃƒÂ¼', 'ü'],
-            ['ÃƒÅ¸', 'ß'],
-            ['ÃƒÂ¡', 'á'],
-            ['ÃƒÂ©', 'é'],
-            ['ÃƒÂ­', 'í'],
-            ['ÃƒÂ³', 'ó'],
-            ['ÃƒÂº', 'ú'],
-            ['ÃƒÂ±', 'ñ'],
-            ['Ãƒâ€°', 'É'],
-            ['Ã„', 'Ä'],
-            ['Ã–', 'Ö'],
-            ['Ãœ', 'Ü'],
-            ['Ã¤', 'ä'],
-            ['Ã¶', 'ö'],
-            ['Ã¼', 'ü'],
-            ['ÃŸ', 'ß'],
-            ['Ã¡', 'á'],
-            ['Ã©', 'é'],
-            ['Ã­', 'í'],
-            ['Ã³', 'ó'],
-            ['Ãº', 'ú'],
-            ['Ã±', 'ñ'],
-            ['Â¿', '¿'],
-            ['Â¡', '¡']
+            ['íƒâ€ž', 'Ä'],
+            ['Ö', 'Ö'],
+            ['íƒÅ“', 'Ü'],
+            ['ä', 'ä'],
+            ['ö', 'ö'],
+            ['ü', 'ü'],
+            ['ß', 'ß'],
+            ['á', 'á'],
+            ['é', 'é'],
+            ['í', 'í'],
+            ['ó', 'ó'],
+            ['ú', 'ú'],
+            ['ñ', 'ñ'],
+            ['íƒâ€°', 'É'],
+            ['í„', 'Ä'],
+            ['í–', 'Ö'],
+            ['íœ', 'Ü'],
+            ['ä', 'ä'],
+            ['ö', 'ö'],
+            ['ü', 'ü'],
+            ['ß', 'ß'],
+            ['á', 'á'],
+            ['é', 'é'],
+            ['í', 'í'],
+            ['ó', 'ó'],
+            ['ú', 'ú'],
+            ['ñ', 'ñ'],
+            ['¿', '¿'],
+            ['¡', '¡']
         ];
 
         for (let pass = 0; pass < 3; pass++) {
@@ -1285,6 +1285,26 @@
                 });
 
                 card.appendChild(content);
+
+                // Footer
+                const footer = document.createElement('div');
+                footer.className = 'card-footer';
+                footer.style.backgroundColor = themeColor;
+
+                const levelBadge = document.createElement('span');
+                levelBadge.className = 'card-footer-tag card-footer-level';
+                const rawLevel = group.level || currentLevel; // e.g. "A1.1"
+                const formattedLevel = rawLevel.toUpperCase().replace(/([A-Z])(\d).*/, '$1.$2'); // e.g. "A.1"
+                levelBadge.textContent = formattedLevel;
+
+                const verbsLabel = document.createElement('span');
+                verbsLabel.className = 'card-footer-tag';
+                verbsLabel.textContent = showEnglish ? 'verbs' : 'verbos';
+
+                footer.appendChild(levelBadge);
+                footer.appendChild(verbsLabel);
+                card.appendChild(footer);
+
                 grid.appendChild(card);
             });
         });
