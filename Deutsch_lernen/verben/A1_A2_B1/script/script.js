@@ -291,7 +291,16 @@ document.addEventListener('DOMContentLoaded', () => {
             ['ú', 'ú'],
             ['ñ', 'ñ'],
             ['¿', '¿'],
-            ['¡', '¡']
+            ['¡', '¡'],
+            // Mojibake for emojis (UTF-8 bytes read as Windows-1252)
+            ['ðŸ“š', '📚'],
+            ['ðŸ  ', '🏠'],
+            ['ðŸ’¼', '💼'],
+            ['ðŸš¢', '🚢'],
+            ['ðŸš€', '🚀'],
+            ['ðŸ’¬', '💬'],
+            ['ðŸ“–', '📖'],
+            ['ðŸ’¡', '💡']
         ];
 
         for (let pass = 0; pass < 3; pass++) {
@@ -955,16 +964,36 @@ document.addEventListener('DOMContentLoaded', () => {
             delete praeteritumKonjugationData.praeteritum;
         }
 
-        allVerbsData[verbName] = {
-            ...existingData,
-            ...fragenData,
-            ...perfektKonjugationData,
-            ...praeteritumKonjugationData,
-            ...konjunktivData,
-            examples: Array.isArray(perfektExamples) ? perfektExamples : (existingData.examples || []),
-            wortfamilie: Array.isArray(wortfamilieData.wortfamilie) ? wortfamilieData.wortfamilie : (existingData.wortfamilie || []),
-            _wortfamilieLoaded: true
+        // PROTECT CORE PROPERTIES: Ensure conjugation data (which might have rogue root "es" keys) 
+        // doesn't overwrite the verb's translation and basic info.
+        const safeMerge = (target, source) => {
+            if (!source || typeof source !== 'object') return;
+            Object.entries(source).forEach(([key, value]) => {
+                // Ignore if the key is a German pronoun at root level (likely a rogue JSON structure)
+                if (['es', 'wir', 'ihr', 'sie'].includes(key) && typeof value === 'object' && !['cards'].includes(key)) {
+                    return;
+                }
+                // Protect established core strings
+                if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') {
+                    return;
+                }
+                target[key] = value;
+            });
         };
+
+        const mergedData = { ...existingData };
+        safeMerge(mergedData, fragenData);
+        safeMerge(mergedData, perfektKonjugationData);
+        safeMerge(mergedData, praeteritumKonjugationData);
+        safeMerge(mergedData, konjunktivData);
+
+        // Specific handling for examples and word family
+        mergedData.examples = Array.isArray(perfektExamples) ? perfektExamples : (mergedData.examples || []);
+        mergedData.wortfamilie = Array.isArray(wortfamilieData.wortfamilie) ? wortfamilieData.wortfamilie : (mergedData.wortfamilie || []);
+        mergedData._wortfamilieLoaded = true;
+        mergedData._deferredLoaded = true;
+
+        allVerbsData[verbName] = mergedData;
 
         scheduleCachePersist();
         return allVerbsData[verbName];
