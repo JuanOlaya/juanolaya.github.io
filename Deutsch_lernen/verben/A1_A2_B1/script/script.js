@@ -139,7 +139,7 @@
     let modalDeferredLoadToken = 0;
     let storyClickCounter = 0;
     let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
-    const CACHE_KEY = 'verbAppCache_v40_lightweight_cards';
+    const CACHE_KEY = 'verbAppCache_v41_utf8_normalized';
     const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
     let cachePersistTimeout = null;
     let cachePersistenceDisabled = false;
@@ -158,9 +158,11 @@
     const mainContainer = document.getElementById('main-container');
     const cardsContainer = document.getElementById('cards-container');
     const levelIndicator = document.getElementById('level-indicator');
+    const controlsContainer = document.querySelector('.controls-container');
+    const headerSearchContainer = document.querySelector('.controls-container .search-container');
     const levelToggleContainer = document.querySelector('.level-toggle-container');
     const levelToggleFooter = document.querySelector('.level-toggle-footer');
-    const levelToggleButtons = document.querySelectorAll('.level-option');
+    const levelToggleButtons = document.querySelectorAll('.level-toggle-footer .level-option');
     const groupThemeIndicator = document.getElementById('group-theme-indicator');
     const groupIndicator = document.getElementById('group-indicator');
     const progressBar = document.getElementById('progress-bar');
@@ -171,7 +173,7 @@
     const storyContainer = document.getElementById('story-container');
     const storyContent = document.getElementById('story-content');
     const searchInput = document.getElementById('verb-search');
-    const loadingStatus = document.getElementById('loading-status');
+    const settingsBtn = document.getElementById('settings-btn');
     const verbModal = document.getElementById('verb-modal');
     const infoModal = document.getElementById('info-modal');
     const closeVerbModalButton = document.getElementById('close-verb-modal');
@@ -241,19 +243,150 @@
     let appVersion = '1.6_static'; // Stable version; replaced by verbs_index.lastUpdated when available
     let isMobileLevelMenuExpanded = false;
     const mobileLevelMediaQuery = window.matchMedia('(max-width: 600px)');
+    let footerUtilityBar = null;
+    let footerSearchShell = null;
+    let footerSearchPanel = null;
+    let footerSearchToggle = null;
+    let isFooterSearchExpanded = false;
+    let isFooterSearchForcedOpen = false;
 
     async function parseJsonUtf8(response) {
         const buffer = await response.arrayBuffer();
         const text = new TextDecoder('utf-8').decode(buffer);
-        return JSON.parse(text);
+        return normalizeMojibakeDeep(JSON.parse(text));
     }
+
+    function normalizeMojibakeString(value) {
+        if (typeof value !== 'string') return value;
+
+        let normalized = value;
+        const replacements = [
+            ['Ãƒâ€ž', 'Ä'],
+            ['Ãƒâ€“', 'Ö'],
+            ['ÃƒÅ“', 'Ü'],
+            ['ÃƒÂ¤', 'ä'],
+            ['ÃƒÂ¶', 'ö'],
+            ['ÃƒÂ¼', 'ü'],
+            ['ÃƒÅ¸', 'ß'],
+            ['ÃƒÂ¡', 'á'],
+            ['ÃƒÂ©', 'é'],
+            ['ÃƒÂ­', 'í'],
+            ['ÃƒÂ³', 'ó'],
+            ['ÃƒÂº', 'ú'],
+            ['ÃƒÂ±', 'ñ'],
+            ['Ãƒâ€°', 'É'],
+            ['Ã„', 'Ä'],
+            ['Ã–', 'Ö'],
+            ['Ãœ', 'Ü'],
+            ['Ã¤', 'ä'],
+            ['Ã¶', 'ö'],
+            ['Ã¼', 'ü'],
+            ['ÃŸ', 'ß'],
+            ['Ã¡', 'á'],
+            ['Ã©', 'é'],
+            ['Ã­', 'í'],
+            ['Ã³', 'ó'],
+            ['Ãº', 'ú'],
+            ['Ã±', 'ñ'],
+            ['Â¿', '¿'],
+            ['Â¡', '¡']
+        ];
+
+        for (let pass = 0; pass < 3; pass++) {
+            let changed = false;
+            for (const [broken, fixed] of replacements) {
+                if (normalized.includes(broken)) {
+                    normalized = normalized.split(broken).join(fixed);
+                    changed = true;
+                }
+            }
+            if (!changed) break;
+        }
+
+        return normalized;
+    }
+
+    function normalizeMojibakeDeep(value) {
+        if (typeof value === 'string') {
+            return normalizeMojibakeString(value);
+        }
+
+        if (Array.isArray(value)) {
+            return value.map(item => normalizeMojibakeDeep(item));
+        }
+
+        if (!value || typeof value !== 'object') {
+            return value;
+        }
+
+        const normalizedObject = {};
+        Object.entries(value).forEach(([key, entryValue]) => {
+            normalizedObject[normalizeMojibakeString(key)] = normalizeMojibakeDeep(entryValue);
+        });
+        return normalizedObject;
+    }
+
+    function setupFooterUtilityBar() {
+        if (!levelToggleContainer || !headerSearchContainer || !controlsContainer) return;
+
+        const settingsButton = settingsBtn;
+        if (settingsButton && settingsButton.parentElement === headerSearchContainer) {
+            controlsContainer.appendChild(settingsButton);
+        }
+
+        footerUtilityBar = document.createElement('div');
+        footerUtilityBar.className = 'footer-utility-bar';
+
+        const footerSearch = document.createElement('div');
+        footerSearch.className = 'footer-search-shell footer-search-collapsed';
+        footerSearch.innerHTML = `
+            <div class="footer-search-panel">
+            </div>
+            <button id="footer-search-toggle" class="footer-search-toggle" type="button" aria-expanded="false" aria-label="Search">
+                <span class="footer-search-arrow">‹</span>
+                <span class="footer-search-icon">⌕</span>
+            </button>
+        `;
+
+        footerSearchPanel = footerSearch.querySelector('.footer-search-panel');
+        footerSearchToggle = footerSearch.querySelector('#footer-search-toggle');
+        headerSearchContainer.classList.add('footer-search-container');
+        footerSearchPanel.prepend(headerSearchContainer);
+
+        const settingsModal = document.getElementById('settings-modal');
+        const footerParent = settingsModal?.parentElement || document.body;
+        footerParent.insertBefore(footerUtilityBar, settingsModal || null);
+        footerUtilityBar.appendChild(levelToggleContainer);
+        footerUtilityBar.appendChild(footerSearch);
+
+        footerSearchShell = footerSearch;
+    }
+
+    function setFooterSearchExpanded(expanded, { forced = false } = {}) {
+        if (!footerSearchShell || !footerSearchToggle) return;
+        isFooterSearchExpanded = expanded;
+        isFooterSearchForcedOpen = forced ? expanded : (expanded && isFooterSearchForcedOpen);
+        if (!expanded) {
+            isFooterSearchForcedOpen = false;
+        } else {
+            isMobileLevelMenuExpanded = false;
+        }
+        footerSearchShell.classList.toggle('footer-search-expanded', expanded);
+        footerSearchShell.classList.toggle('footer-search-collapsed', !expanded);
+        footerSearchToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        syncMobileLevelToggleState();
+    }
+
+    setupFooterUtilityBar();
 
     function syncMobileLevelToggleState() {
         if (!levelToggleFooter) return;
 
         const isMobile = mobileLevelMediaQuery.matches;
-        levelToggleFooter.classList.toggle('mobile-collapsed', isMobile && !isMobileLevelMenuExpanded);
-        levelToggleFooter.classList.toggle('mobile-expanded', isMobile && isMobileLevelMenuExpanded);
+        const isCollapsed = isMobile && (!isMobileLevelMenuExpanded || isFooterSearchExpanded);
+        levelToggleFooter.classList.toggle('mobile-collapsed', isCollapsed);
+        levelToggleFooter.classList.toggle('mobile-expanded', isMobile && isMobileLevelMenuExpanded && !isFooterSearchExpanded);
+        levelToggleFooter.classList.toggle('search-collapsed', isFooterSearchExpanded);
         levelToggleContainer?.classList.toggle('mobile-right-docked', isMobile);
     }
 
@@ -334,7 +467,7 @@
             const cached = localStorage.getItem(CACHE_KEY);
             if (!cached) return false;
 
-            const data = JSON.parse(cached);
+            const data = normalizeMojibakeDeep(JSON.parse(cached));
             if (!data || !data.allVerbsData || !data.verbGroupsByLevel) return false;
 
             allVerbsData = data.allVerbsData;
@@ -375,28 +508,27 @@
         loadingProgressState[phase] = Math.max(0, Math.min(100, percentage));
         const cardsProgress = Math.round(loadingProgressState.cards || 0);
         const conjugationsProgress = Math.round(loadingProgressState.conjugations || 0);
+        const overallProgress = cardsProgress;
 
-        if (percentage < 100) {
-            const progressColor = phase === 'cards'
-                ? 'rgba(70, 130, 180, 0.2)'
-                : 'rgba(34, 197, 94, 0.18)';
-            const remainingColor = '#ffffff';
+        if (phase === 'conjugations') {
+            console.log(`Konjugationen ${conjugationsProgress}%`);
+        }
 
-            searchInput.style.background = `linear-gradient(to right, ${progressColor} ${percentage}%, ${remainingColor} ${percentage}%)`;
-            searchInput.placeholder = `${phase === 'cards' ? 'Tarjetas' : 'Konjugationen'} ${Math.round(percentage)}%`;
+        if (phase === 'cards' && percentage < 100) {
+            setFooterSearchExpanded(true, { forced: true });
+            footerSearchShell?.classList.add('loading-active');
+            searchInput.style.background = `linear-gradient(to right, rgba(250,112,154,0.65) 0%, rgba(254,225,64,0.65) ${overallProgress}%, rgba(15,23,42,0.92) ${overallProgress}%, rgba(15,23,42,0.92) 100%)`;
+            searchInput.placeholder = `cards ${Math.round(percentage)}%`;
             searchInput.classList.add('loading-active');
-            if (loadingStatus) {
-                loadingStatus.textContent = `Tarjetas ${cardsProgress}% · Konjugationen ${conjugationsProgress}%`;
-            }
         } else {
-            if (loadingStatus) {
-                loadingStatus.textContent = `Tarjetas ${cardsProgress}% · Konjugationen ${conjugationsProgress}%`;
-            }
             if (cardsProgress >= 100 && conjugationsProgress >= 100) {
-                searchInput.style.background = '';
                 searchInput.placeholder = "Suchen... (buscar)";
                 searchInput.classList.remove('loading-active');
-                if (loadingStatus) loadingStatus.textContent = '';
+                searchInput.style.background = '';
+                footerSearchShell?.classList.remove('loading-active');
+                if (isFooterSearchForcedOpen) {
+                    setFooterSearchExpanded(false);
+                }
             }
         }
     }
@@ -424,7 +556,7 @@
         try {
             const cached = localStorage.getItem(CACHE_KEY);
             if (cached) {
-                const data = JSON.parse(cached);
+                const data = normalizeMojibakeDeep(JSON.parse(cached));
 
                 // Cache is valid IF:
                 // a) We failed to get remote version (assume offline/safe), OR
@@ -1136,7 +1268,9 @@
             const isActive = button.dataset.level === currentLevel;
             button.classList.toggle('active', isActive);
             button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-            button.style.order = isActive ? String(levelOrder.length) : String(levelOrder.indexOf(button.dataset.level) + 1);
+            button.style.order = mobileLevelMediaQuery.matches
+                ? (isActive ? String(levelOrder.length) : String(levelOrder.indexOf(button.dataset.level) + 1))
+                : '';
         });
         syncMobileLevelToggleState();
 
@@ -1713,11 +1847,28 @@
                     });
                 });
 
+                if (footerSearchToggle) {
+                    footerSearchToggle.addEventListener('click', () => {
+                        if (isFooterSearchExpanded && !isFooterSearchForcedOpen && (!searchInput || !searchInput.value.trim())) {
+                            setFooterSearchExpanded(false);
+                            return;
+                        }
+                        setFooterSearchExpanded(true);
+                        if (searchInput) searchInput.focus();
+                    });
+                }
+
+                if (searchInput) {
+                    searchInput.addEventListener('focus', () => setFooterSearchExpanded(true));
+                }
+
                 document.addEventListener('click', (event) => {
-                    if (!mobileLevelMediaQuery.matches || !isMobileLevelMenuExpanded || !levelToggleContainer) return;
-                    if (!levelToggleContainer.contains(event.target)) {
+                    if (mobileLevelMediaQuery.matches && isMobileLevelMenuExpanded && levelToggleContainer && !levelToggleContainer.contains(event.target)) {
                         isMobileLevelMenuExpanded = false;
                         syncMobileLevelToggleState();
+                    }
+                    if (footerSearchShell && isFooterSearchExpanded && !isFooterSearchForcedOpen && !footerSearchShell.contains(event.target) && (!searchInput || !searchInput.value.trim())) {
+                        setFooterSearchExpanded(false);
                     }
                 });
 
