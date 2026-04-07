@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 
 <head>
@@ -5003,6 +5003,88 @@
                         ]
                     }
                 ]
+            },
+            {
+                "title": "Recht",
+                "description": "Leyes y Justiza",
+                "level": "B1",
+                "badge": "JURISTISCH",
+                "colorMain": "#ef4444",
+                "colorDark": "#991b1b",
+                "adjectives": [
+                    {
+                        "word": "begangen",
+                        "emoji": "🚔",
+                        "spanish": "(cometido / perpetrado)",
+                        "english": "committed",
+                        "example_de": "Die Tat wurde vor vielen Jahren begangen.",
+                        "example_es": "El hecho fue cometido hace muchos años.",
+                        "level": "B1",
+                        "lid": true,
+                        "cases": [
+                            {
+                                "case": "Nominativ",
+                                "level": "A1",
+                                "sentence": "Eine begangene Straftat wird verfolgt.",
+                                "trans": "Un delito cometido es perseguido."
+                            },
+                            {
+                                "case": "Akkusativ",
+                                "level": "A2",
+                                "sentence": "Er bereut die begangene Tat.",
+                                "trans": "El lamenta el hecho cometido."
+                            },
+                            {
+                                "case": "Dativ",
+                                "level": "A2",
+                                "sentence": "Mit der begangenen Sünde muss er leben.",
+                                "trans": "Con el pecado cometido tiene que vivir."
+                            },
+                            {
+                                "case": "Genitiv",
+                                "level": "B1",
+                                "sentence": "Die Folgen der begangenen Straftat sind schwerwiegend.",
+                                "trans": "Las consecuencias del delito cometido son graves."
+                            }
+                        ]
+                    },
+                    {
+                        "word": "angeklagt",
+                        "emoji": "👩‍⚖️",
+                        "spanish": "(acusado / imputado)",
+                        "english": "accused / charged",
+                        "example_de": "Er ist wegen Betrugs angeklagt.",
+                        "example_es": "Él está acusado de fraude.",
+                        "level": "B1",
+                        "lid": true,
+                        "cases": [
+                            {
+                                "case": "Nominativ",
+                                "level": "A1",
+                                "sentence": "Der angeklagte Mann schweigt.",
+                                "trans": "El hombre acusado calla."
+                            },
+                            {
+                                "case": "Akkusativ",
+                                "level": "A2",
+                                "sentence": "Wir sehen den angeklagten Politiker.",
+                                "trans": "Vemos al político acusado."
+                            },
+                            {
+                                "case": "Dativ",
+                                "level": "A2",
+                                "sentence": "Mit dem angeklagten Zeugen wird gesprochen.",
+                                "trans": "Se habla con el testigo acusado."
+                            },
+                            {
+                                "case": "Genitiv",
+                                "level": "B1",
+                                "sentence": "Die Verteidigung des angeklagten Mörders ist schwierig.",
+                                "trans": "La defensa del asesino acusado es difícil."
+                            }
+                        ]
+                    }
+                ]
             }
         ];
 
@@ -5529,7 +5611,36 @@
             viewToggle.checked = true;
             setLanguage('es');
 
-            renderContent();
+            // --- Handle URL Parameters ---
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // 1. Level Filter (?level=A1, ?level=A2, ?level=B1)
+            const levelParam = urlParams.get('level');
+            if (levelParam) {
+                // Determine group to show based on level
+                const levelIndex = adjectiveGroups.findIndex(g => g.level && g.level.includes(levelParam.toUpperCase()));
+                if (levelIndex !== -1) {
+                    currentGroupIndex = levelIndex;
+                }
+            }
+
+            // 2. Search Filter (?search=word)
+            const searchParam = urlParams.get('search');
+            if (searchParam) {
+                const searchInput = document.getElementById('search-input');
+                if (searchInput) {
+                    searchInput.value = searchParam;
+                }
+            }
+
+            // 3. LiD Tag Visibility (?lid=true or ?lid=false)
+            const lidParam = urlParams.get('lid');
+            if (lidParam !== null) {
+                toggleLiDTags(lidParam === 'true');
+                if (lidTagsSwitch) lidTagsSwitch.checked = (lidParam === 'true');
+            }
+
+            renderContent(adjectiveGroups, searchParam || '');
         });
 
         window.addEventListener('click', handleOverlayClick);

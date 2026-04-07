@@ -960,14 +960,27 @@ window.lidKompaktData = [
                               {
                                         "art": "der/die",
                                         "w": "Richter / Richterin",
-                                        "e": "\ud83d\udc69\u200d\u2696\ufe0f",
+                                        "e": "👩‍⚖️",
                                         "tr": "juez / jueza"
                               },
                               {
-                                        "art": "das",
-                                        "w": "Urteil",
-                                        "e": "\ud83d\udd28",
-                                        "tr": "sentencia"
+                                        "art": "der/die",
+                                        "w": "Schöffe / Schöffin",
+                                        "e": "🧑‍⚖️",
+                                        "tr": "juez honorario / juez lego",
+                                        "important": true
+                              },
+                              {
+                                        "art": "der/die",
+                                        "w": "Rechtsanwalt / Rechtsanwältin",
+                                        "e": "💼",
+                                        "tr": "abogado / abogada"
+                              },
+                              {
+                                        "art": "das / die (pl)",
+                                        "w": "Urteil / Urteile",
+                                        "e": "🔨",
+                                        "tr": "sentencia / sentencias"
                               }
                     ]
           },
