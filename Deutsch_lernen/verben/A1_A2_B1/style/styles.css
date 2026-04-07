@@ -2777,6 +2777,14 @@ details[open]>summary .details-arrow {
         margin-right: 10px;
     }
 
+    .group-progress-section,
+    .cards-toggles-separator,
+    .toggles-row,
+    #gustar-button-container,
+    #reflexive-button-container {
+        display: none !important;
+    }
+
     .level-toggle-footer .level-option:not(.active) {
         display: none;
     }

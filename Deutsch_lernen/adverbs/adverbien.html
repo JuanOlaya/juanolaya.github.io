@@ -347,20 +347,65 @@
 
         .level-header {
             padding: 15px 20px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             color: white;
-            /* Text color for headers is white */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            cursor: pointer;
-            /* background-color set inline via JS */
+            gap: 16px;
         }
 
-        .level-header:hover {
-            filter: brightness(1.05);
+        .level-header-main {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            min-width: 0;
+        }
+
+        .theme-header-german {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 0;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .theme-header-german:hover {
+            text-decoration: underline;
+        }
+
+        .theme-header-translation {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.95rem;
+            font-style: italic;
+            font-weight: 700;
+            padding: 0;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .theme-header-translation:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .theme-header-part {
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 999px;
+            padding: 5px 10px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            line-height: 1;
         }
 
         .theme-modal-title {
@@ -790,7 +835,7 @@
 
     <script>
         // --- DATA ---
-        const adverbGroups = [
+        const rawAdverbGroups = [
             {
                 "title": "Temporal",
                 "description": "Adverbios de tiempo",
@@ -1777,6 +1822,58 @@
                 ]
             }
         ];
+
+        const themeBlueprints = [
+            { title: 'Gegenwart', translation: '(presente)', level: 'A1-A2', colorMain: '#0ea5e9', badge: 'GEGENWART', words: ['jetzt', 'heute', 'gerade', 'gleich', 'sofort', 'bald', 'schon'] },
+            { title: 'Abfolge', translation: '(secuencia)', level: 'A1-A2', colorMain: '#0284c7', badge: 'ABFOLGE', words: ['gestern', 'morgen', 'dann', 'danach', 'sp\u00e4ter', 'vorhin', 'fr\u00fcher'] },
+            { title: 'Zeitlauf', translation: '(curso del tiempo)', level: 'A1-A2', colorMain: '#0891b2', badge: 'ZEITLAUF', words: ['noch', 'inzwischen', 'damals', 'heutzutage', 'wieder', 'endlich', 'pl\u00f6tzlich'] },
+            { title: 'Ordnung', translation: '(orden)', level: 'A2', colorMain: '#16a34a', badge: 'ORDNUNG', words: ['erst', 'erstmals', 'erstens', 'zweitens', 'drittens', 'viertens', 'f\u00fcnftens'] },
+            { title: 'Z\u00e4hlung', translation: '(enumeraci\u00f3n)', level: 'A1-A2', colorMain: '#65a30d', badge: 'ZAEHLUNG', words: ['einmal', 'zweimal', 'dreimal', 'viermal', 'f\u00fcnfmal', 'jeweils'] },
+            { title: 'H\u00e4ufigkeit', translation: '(frecuencia)', level: 'A1-A2', colorMain: '#7c3aed', badge: 'HAEUFIGKEIT', words: ['immer', 'nie', 'oft', 'manchmal', 'selten', 'meistens', 'jemals'] },
+            { title: 'Rhythmus', translation: '(ritmo)', level: 'A1-A2', colorMain: '#9333ea', badge: 'RHYTHMUS', words: ['t\u00e4glich', 'w\u00f6chentlich', 'monatlich', 'j\u00e4hrlich', 'gew\u00f6hnlich', 'normalerweise', 'regelm\u00e4\u00dfig'] },
+            { title: 'Richtung', translation: '(direcci\u00f3n)', level: 'A1', colorMain: '#db2777', badge: 'RICHTUNG', words: ['links', 'rechts', 'geradeaus', 'vorne', 'hinten'] },
+            { title: 'Position', translation: '(posici\u00f3n)', level: 'A1', colorMain: '#e11d48', badge: 'POSITION', words: ['oben', 'unten', 'drinnen', 'drau\u00dfen', 'da'] },
+            { title: 'Raum', translation: '(espacio)', level: 'A1', colorMain: '#f43f5e', badge: 'RAUM', words: ['hier', 'dort', '\u00fcberall', 'nirgends', 'irgendwo', 'weg'] },
+            { title: 'Grad', translation: '(grado)', level: 'A1-B1', colorMain: '#ea580c', badge: 'GRAD', words: ['sehr', 'fast', 'ganz', 'ziemlich', 'besonders', 'sogar', 'so'] },
+            { title: 'Vermutung', translation: '(suposici\u00f3n)', level: 'A1-B1', colorMain: '#d97706', badge: 'VERMUTUNG', words: ['vielleicht', 'm\u00f6glicherweise', 'vermutlich', 'wahrscheinlich', 'bestimmt', 'sicher', 'hoffentlich'] },
+            { title: 'Fokus', translation: '(enfoque)', level: 'A1-B1', colorMain: '#2563eb', badge: 'FOKUS', words: ['auch', 'nur', 'wirklich', 'eigentlich', 'tats\u00e4chlich', '\u00fcberhaupt'] },
+            { title: 'Haltung', translation: '(actitud)', level: 'A1-B1', colorMain: '#059669', badge: 'HALTUNG', words: ['gern', 'ehrlich', 'h\u00f6flich', 'lieber', 'gl\u00fccklich', 'gl\u00fccklicherweise'] },
+            { title: 'Weise', translation: '(manera)', level: 'A1-B1', colorMain: '#0891b2', badge: 'WEISE', words: ['zusammen', 'alleine', 'anders', 'einfach', 'kaum', 'leider'] },
+            { title: 'Logik', translation: '(l\u00f3gica)', level: 'A1-B1', colorMain: '#f59e0b', badge: 'LOGIK', words: ['allerdings', 'trotzdem', 'deshalb', 'folglich', 'sonst', 'au\u00dferdem'] }
+        ];
+
+        function createWordMap(groups) {
+            const map = new Map();
+            groups.forEach((group) => {
+                group.adverbs.forEach((adverb) => {
+                    map.set(adverb.word, adverb);
+                });
+            });
+            return map;
+        }
+
+        const wordMap = createWordMap(rawAdverbGroups);
+
+        function buildThemeGroups() {
+            return themeBlueprints.map((theme) => ({
+                title: theme.title,
+                description: theme.translation,
+                level: theme.level,
+                colorMain: theme.colorMain,
+                colorPastel: '',
+                badge: theme.badge,
+                emoji: '',
+                adverbs: theme.words.map((word) => {
+                    const adverb = wordMap.get(word);
+                    if (!adverb) {
+                        throw new Error(`Missing adverb in theme map: ${word}`);
+                    }
+                    return adverb;
+                })
+            }));
+        }
+
+        const adverbGroups = buildThemeGroups();
 
         // --- RENDER Logic ---
         const container = document.getElementById('cards-container');
