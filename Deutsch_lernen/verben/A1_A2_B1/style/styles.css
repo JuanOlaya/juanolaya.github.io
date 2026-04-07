@@ -438,12 +438,16 @@ body.compact-view .content-block {
 .level-toggle-footer.mobile-collapsed,
 .level-toggle-footer.selector-collapsed {
     width: auto;
-    padding: 3px;
+    padding: 4px;
     gap: 0;
     border: 2px solid transparent;
     border-radius: 999px;
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%) border-box;
-    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.16);
+    background:
+        linear-gradient(135deg, #fa709a 0%, #fee140 100%) border-box;
+    box-shadow:
+        0 0 0 1px rgba(250, 112, 154, 0.38),
+        0 0 18px rgba(254, 225, 64, 0.16),
+        0 8px 18px rgba(15, 23, 42, 0.16);
 }
 
 .level-toggle-footer.selector-collapsed .level-option:not(.active),
@@ -486,9 +490,10 @@ body.compact-view .content-block {
 .level-toggle-footer.selector-collapsed .level-option.active,
 .level-toggle-footer.mobile-collapsed .level-option.active {
     min-width: 80px;
-    padding: 10px 14px;
+    padding: 9px 13px;
     border-radius: 999px;
-    box-shadow: none;
+    background: linear-gradient(135deg, #f9789f 0%, #ffc35c 58%, #fee140 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .navigation-wrapper .level-toggle,
