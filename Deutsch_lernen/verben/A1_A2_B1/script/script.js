@@ -922,10 +922,24 @@ document.addEventListener('DOMContentLoaded', () => {
             ? await fetch(`json/praesens/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
             : {};
 
-        allVerbsData[verbName] = {
-            ...existingData,
-            ...praesensData
+        const safeMerge = (target, source) => {
+            if (!source || typeof source !== 'object') return;
+            Object.entries(source).forEach(([key, value]) => {
+                // Ignore if the key is a German pronoun at root level (likely a rogue JSON structure)
+                if (['es', 'wir', 'ihr', 'sie', 'es_example', 'en_example'].includes(key) && typeof value === 'object') {
+                    return;
+                }
+                // Protect established core strings
+                if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') {
+                    return;
+                }
+                target[key] = value;
+            });
         };
+
+        const mergedData = { ...existingData };
+        safeMerge(mergedData, praesensData);
+        allVerbsData[verbName] = mergedData;
 
         return allVerbsData[verbName];
     }
@@ -994,6 +1008,13 @@ document.addEventListener('DOMContentLoaded', () => {
         mergedData._deferredLoaded = true;
 
         allVerbsData[verbName] = mergedData;
+
+        // PERSISTENCE & RELIABILITY: Double-check if the merge created a corruption ([object Object])
+        // This acts as a recovery mechanism for users with corrupted localStorage.
+        if (allVerbsData[verbName] && typeof allVerbsData[verbName].es === 'object') {
+            console.error(`Detected data corruption for ${verbName}. Restoring basic translation.`);
+            allVerbsData[verbName].es = existingData.es || "hablar";
+        }
 
         scheduleCachePersist();
         return allVerbsData[verbName];
