@@ -429,6 +429,9 @@ body.compact-view .content-block {
     display: flex;
     align-items: center;
     gap: 4px;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none;
     transition: padding 0.28s ease, box-shadow 0.28s ease;
 }
 
