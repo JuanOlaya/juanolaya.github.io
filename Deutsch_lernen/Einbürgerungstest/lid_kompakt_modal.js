@@ -485,6 +485,24 @@ window.lidKompaktModalData = {
                     "ex": "Ungleiche Behandlung ist unfair.",
                     "ex_es": "El trato desigual es injusto."
           },
+          "diskriminierung::ungerechtfertigt": {
+                    "ex": "Eine ungerechtfertigte Benachteiligung ist verboten.",
+                    "ex_es": "Una desventaja injustificada está prohibida.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man etwas, das keinen sachlichen Grund hat?",
+                                        "a": "Ungerechtfertigt.",
+                                        "q_es": "¿Cómo se llama algo que no tiene una razón objetiva?",
+                                        "a_es": "Injustificado."
+                              },
+                              {
+                                        "q": "Wie ist eine Benachteiligung ohne guten Grund?",
+                                        "a": "Ungerechtfertigt.",
+                                        "q_es": "¿Cómo es una desventaja sin una buena razón?",
+                                        "a_es": "Injustificada."
+                              }
+                    ]
+          },
           "diskriminierung::Ungleichbehandlung": {
                     "ex": "Ungleichbehandlung verletzt Rechte.",
                     "ex_es": "El trato desigual viola derechos.",
@@ -3054,6 +3072,30 @@ window.lidKompaktModalData = {
                                         "a": "Die Schulpflicht.",
                                         "q_es": "\ufffdC\ufffdmo se llama la obligaci\ufffdn de los ni\ufffdos de asistir a la escuela?",
                                         "a_es": "La escolaridad obligatoria."
+                              }
+                    ]
+          },
+          "arbeitswelt::Gewerkschaften": {
+                    "ex": "Gewerkschaften vertreten die Interessen von Arbeitnehmerinnen und Arbeitnehmern.",
+                    "ex_es": "Los sindicatos representan los intereses de las trabajadoras y los trabajadores.",
+                    "qa": [
+                              {
+                                        "q": "Welche Organisationen vertreten in Deutschland die Interessen von Beschäftigten?",
+                                        "a": "Die Gewerkschaften.",
+                                        "q_es": "¿Qué organizaciones representan en Alemania los intereses de las personas trabajadoras?",
+                                        "a_es": "Los sindicatos."
+                              },
+                              {
+                                        "q": "Wie heißen Zusammenschlüsse von Arbeitnehmern zur Vertretung ihrer Rechte?",
+                                        "a": "Gewerkschaften.",
+                                        "q_es": "¿Cómo se llaman las asociaciones de trabajadores para defender sus derechos?",
+                                        "a_es": "Sindicatos."
+                              },
+                              {
+                                        "q": "Wer setzt sich oft für bessere Arbeitsbedingungen und Löhne ein?",
+                                        "a": "Die Gewerkschaften.",
+                                        "q_es": "¿Quién defiende a menudo mejores condiciones laborales y salarios?",
+                                        "a_es": "Los sindicatos."
                               }
                     ]
           },
