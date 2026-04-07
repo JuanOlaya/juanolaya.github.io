@@ -356,10 +356,10 @@
 
         .level-header-main {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 6px;
+            align-items: center;
+            gap: 14px;
             min-width: 0;
+            flex: 1;
         }
 
         .theme-header-german {
@@ -373,6 +373,7 @@
             padding: 0;
             cursor: pointer;
             text-align: left;
+            white-space: nowrap;
         }
 
         .theme-header-german:hover {
@@ -389,6 +390,9 @@
             padding: 0;
             cursor: pointer;
             text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .theme-header-translation:hover {
