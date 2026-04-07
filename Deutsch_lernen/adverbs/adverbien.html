@@ -1891,7 +1891,7 @@
             data.forEach((group) => {
                 if (!group.adverbs || group.adverbs.length === 0) return;
 
-                const chunkSize = 6;
+                const chunkSize = 7;
                 for (let i = 0; i < group.adverbs.length; i += chunkSize) {
                     const chunk = group.adverbs.slice(i, i + chunkSize);
 
@@ -1910,29 +1910,37 @@
                     card.className = 'level-card';
 
                     // Title
-                    let displayTitle = group.title;
+                    let partLabel = '';
                     if (group.adverbs.length > chunkSize) {
                         const partNum = Math.floor(i / chunkSize) + 1;
                         const totalParts = Math.ceil(group.adverbs.length / chunkSize);
-                        displayTitle += ` <span style="font-size: 0.8em; opacity: 0.8;">(${partNum}/${totalParts})</span>`;
+                        partLabel = `(${partNum}/${totalParts})`;
                     }
 
                     // Header
                     const header = document.createElement('div');
                     header.className = 'level-header';
                     header.style.backgroundColor = group.colorMain;
-                    header.setAttribute('role', 'button');
-                    header.setAttribute('tabindex', '0');
-                    header.setAttribute('aria-label', `Show theme name for ${group.title}`);
-                    header.onclick = () => openThemeNameModal(group);
-                    header.onkeydown = (event) => {
-                        if (event.key === 'Enter' || event.key === ' ') {
-                            event.preventDefault();
-                            openThemeNameModal(group);
-                        }
+                    header.innerHTML = `
+                        <div class="level-header-main">
+                            <button class="theme-header-german" type="button" title="Escuchar tema">${group.title}</button>
+                            <button class="theme-header-translation" type="button" title="Abrir tema">${group.description}</button>
+                        </div>
+                        ${partLabel ? `<span class="theme-header-part">${partLabel}</span>` : ''}
+                    `;
+
+                    const germanButton = header.querySelector('.theme-header-german');
+                    const translationButton = header.querySelector('.theme-header-translation');
+
+                    germanButton.onclick = (event) => {
+                        event.stopPropagation();
+                        speak(group.title);
                     };
-                    // Removed emoji from header as requested
-                    header.innerHTML = `<span>${displayTitle}</span>`;
+
+                    translationButton.onclick = (event) => {
+                        event.stopPropagation();
+                        openThemeNameModal(group);
+                    };
 
                     // Table
                     const content = document.createElement('div');

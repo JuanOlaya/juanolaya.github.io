@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiD: Adjektive & Adverbien</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --line: #334155;
+            --accent: #00ffa1;
+            --accent-2: #f59e0b;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding: 24px;
+        }
+
+        .wrap {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+
+        .search {
+            width: 100%;
+            margin-bottom: 24px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(255,255,255,0.04);
+            color: var(--text);
+            padding: 16px 22px;
+            font-size: 1.05rem;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+        }
+
+        .card-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            background: var(--accent-2);
+            color: white;
+        }
+
+        .card-head h2 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .rows {
+            display: grid;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 24px;
+            align-items: center;
+            padding: 22px 24px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .row.match {
+            background: rgba(0,255,161,0.06);
+        }
+
+        .de {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .es {
+            text-align: right;
+            font-size: 1.2rem;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .meta {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .ex {
+            margin-top: 10px;
+            color: #cbd5e1;
+            line-height: 1.45;
+            font-size: 0.98rem;
+        }
+
+        mark {
+            background: transparent;
+            color: var(--accent);
+            text-decoration: underline;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <h1>Einbürgerungstest</h1>
+        <div class="subtitle">Adjektive & adverbiale Wörter</div>
+        <input id="search" class="search" type="text" placeholder="Suchen / buscar..." oninput="render()">
+
+        <section class="card">
+            <div class="card-head">
+                <h2>Wichtige Wörter</h2>
+                <div>Palabras clave</div>
+            </div>
+            <div id="rows" class="rows"></div>
+        </section>
+    </div>
+
+    <script>
+        const items = [
+            {
+                w: "ehrenamtlich",
+                tr: "de forma voluntaria",
+                type: "Adjektiv / adverbial",
+                ex: "Viele Menschen arbeiten ehrenamtlich in einem Verein.",
+                ex_es: "Muchas personas trabajan de forma voluntaria en una asociación."
+            },
+            {
+                w: "freiwillig",
+                tr: "voluntariamente",
+                type: "Adjektiv / adverbial",
+                ex: "Niemand darf in Deutschland zu einer Wahl gezwungen werden, man entscheidet freiwillig.",
+                ex_es: "En Alemania nadie puede ser obligado a votar; se decide voluntariamente."
+            },
+            {
+                w: "unbezahlt",
+                tr: "no remunerado",
+                type: "Adjektiv",
+                ex: "Ein Ehrenamt ist meistens unbezahlt.",
+                ex_es: "Un voluntariado normalmente no es remunerado."
+            }
+        ];
+
+        function highlight(text, query) {
+            if (!query) return text;
+            const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
+        }
+
+        function render() {
+            const q = document.getElementById('search').value.trim().toLowerCase();
+            const rows = document.getElementById('rows');
+            rows.innerHTML = "";
+
+            items
+                .filter(item => !q || [item.w, item.tr, item.type, item.ex, item.ex_es].some(v => v.toLowerCase().includes(q)))
+                .forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'row' + (q ? ' match' : '');
+                    row.innerHTML = `
+                        <div>
+                            <div class="de">${highlight(item.w, q)}</div>
+                            <div class="meta">${item.type}</div>
+                            <div class="ex">${highlight(item.ex, q)}</div>
+                            <div class="ex">${highlight(item.ex_es, q)}</div>
+                        </div>
+                        <div class="es">${highlight(item.tr, q)}</div>
+                    `;
+                    rows.appendChild(row);
+                });
+        }
+
+        render();
+    </script>
+</body>
+
+</html>
