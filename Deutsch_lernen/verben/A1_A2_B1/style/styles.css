@@ -833,6 +833,27 @@ body.compact-view.compact-light-mode .kompakt-header-es {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px rgba(0, 0, 0, 0.12);
     color: #ffffff;
     font-weight: 900;
+    text-transform: uppercase; /* Ensure A.1 style stays uppercase */
+}
+
+/* Contrast adjustment for light headers (like Yellow) */
+.kompakt-level-card.light-header .kompakt-level-header,
+.kompakt-level-card.light-header .card-footer {
+    color: #1e293b !important;
+}
+
+.kompakt-level-card.light-header .kompakt-header-es,
+.kompakt-level-card.light-header .kompakt-pagination,
+.kompakt-level-card.light-header .card-footer-tag {
+    color: #1e293b !important;
+    border-color: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.kompakt-level-card.light-header .card-footer-level {
+    background: rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.25);
+    color: #0f172a;
 }
 
 .kompakt-german {

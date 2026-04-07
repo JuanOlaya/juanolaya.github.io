@@ -1194,6 +1194,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const card = document.createElement('div');
                 card.className = 'kompakt-level-card';
 
+                // Contrast check for Yellow (#FFD700) or other bright colors
+                if (themeColor && (themeColor.toUpperCase() === '#FFD700' || themeColor.toLowerCase() === 'gold')) {
+                    card.classList.add('light-header');
+                }
+
                 // Header (Clickable Theme Title)
                 const header = document.createElement('div');
                 header.className = 'kompakt-level-header';
