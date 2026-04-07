@@ -3,46 +3,46 @@ window.lidKompaktData = [
                     "id": "rechte",
                     "title": "Rechte",
                     "title_es": "Derechos",
-                    "icon": "\u00f0\u0178\u201c\u0153",
+                    "icon": "\ud83d\udcdc",
                     "color": "#10b981",
                     "items": [
                               {
                                         "art": "die (pl)",
                                         "w": "Grundrechte",
-                                        "e": "\u00f0\u0178\u201c\u0153",
+                                        "e": "\ud83d\udcdc",
                                         "tr": "derechos fundamentales",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Grundrecht",
-                                        "e": "\u00f0\u0178\u201c\u0153",
+                                        "e": "\ud83d\udcdc",
                                         "tr": "derecho fundamental",
                                         "important": true
                               },
                               {
                                         "art": "die (pl)",
                                         "w": "Menschenrechte",
-                                        "e": "\u00f0\u0178\u0152\u008d",
+                                        "e": "\ud83c\udf0d",
                                         "tr": "derechos humanos",
                                         "important": true
                               },
                               {
                                         "w": "Meinungsfreiheit",
-                                        "e": "\u00f0\u0178\u2014\u00a3\u00ef\u00b8\u008f",
-                                        "tr": "libertad de opini\u00c3\u00b3n",
+                                        "e": "\ud83d\udde3\ufe0f",
+                                        "tr": "libertad de opini\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Pressefreiheit",
-                                        "e": "\u00f0\u0178\u201c\u00b0",
+                                        "e": "\ud83d\udcf0",
                                         "tr": "libertad de prensa"
                               },
                               {
                                         "art": "die",
                                         "w": "Gleichberechtigung",
-                                        "e": "\u00e2\u0161\u2013\u00ef\u00b8\u008f",
+                                        "e": "\u2696\ufe0f",
                                         "tr": "igualdad de derechos",
                                         "important": true
                               }
@@ -52,47 +52,47 @@ window.lidKompaktData = [
                     "id": "freiheiten",
                     "title": "Grundrechte: Freiheiten",
                     "title_es": "Libertades",
-                    "icon": "\u00f0\u0178\u2022\u0160\u00ef\u00b8\u008f",
+                    "icon": "\ud83d\udd4a\ufe0f",
                     "color": "#0891b2",
                     "items": [
                               {
                                         "art": "die",
                                         "w": "Religionsfreiheit",
-                                        "e": "\u00f0\u0178\u203a\u0090",
+                                        "e": "\ud83d\uded0",
                                         "tr": "libertad religiosa",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Glaubensfreiheit",
-                                        "e": "\u00f0\u0178\u2122\u008f",
+                                        "e": "\ud83d\ude4f",
                                         "tr": "libertad de creencias"
                               },
                               {
                                         "art": "die",
                                         "w": "Gewissensfreiheit",
-                                        "e": "\u00f0\u0178\u2019\u00ad",
+                                        "e": "\ud83d\udcad",
                                         "tr": "libertad de conciencia"
                               },
                               {
                                         "art": "die",
                                         "w": "Versammlungsfreiheit",
-                                        "e": "\u00f0\u0178\u201c\u00a2",
-                                        "tr": "libertad de reuni\u00c3\u00b3n",
+                                        "e": "\ud83d\udce2",
+                                        "tr": "libertad de reuni\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Demonstration",
-                                        "e": "\u00f0\u0178\u201c\u00a2",
-                                        "tr": "manifestaci\u00c3\u00b3n",
+                                        "e": "\ud83d\udce2",
+                                        "tr": "manifestaci\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "die",
-                                        "w": "Freiz\u00c3\u00bcgigkeit",
-                                        "e": "\u00f0\u0178\u0161\u2030",
-                                        "tr": "libertad de residencia / libre circulaci\u00c3\u00b3n",
+                                        "w": "Freiz\u00fcgigkeit",
+                                        "e": "\ud83d\ude89",
+                                        "tr": "libertad de residencia / libre circulaci\u00f3n",
                                         "important": true
                               }
                     ]
@@ -101,52 +101,52 @@ window.lidKompaktData = [
                     "id": "werte",
                     "title": "Grundrechte: Werte",
                     "title_es": "Valores",
-                    "icon": "\u00f0\u0178\u0152\u0178",
+                    "icon": "\ud83c\udf1f",
                     "color": "#16a34a",
                     "items": [
                               {
                                         "art": "die",
-                                        "w": "Menschenw\u00c3\u00bcrde",
-                                        "e": "\u00f0\u0178\u00a4\u00b2",
+                                        "w": "Menschenw\u00fcrde",
+                                        "e": "\ud83e\udd32",
                                         "tr": "dignidad humana",
                                         "important": true
                               },
                               {
                                         "art": "die",
-                                        "w": "W\u00c3\u00bcrde",
-                                        "e": "\u00f0\u0178\u00a4\u00b2",
+                                        "w": "W\u00fcrde",
+                                        "e": "\ud83e\udd32",
                                         "tr": "dignidad"
                               },
                               {
                                         "art": "der",
                                         "w": "Mensch",
-                                        "e": "\u00f0\u0178\u2018\u00a4",
+                                        "e": "\ud83d\udc64",
                                         "tr": "ser humano"
                               },
                               {
                                         "art": "die",
                                         "w": "Unantastbarkeit",
-                                        "e": "\u00f0\u0178\u203a\u00a1\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\udee1\ufe0f",
                                         "tr": "inviolabilidad",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Freiheit",
-                                        "e": "\u00f0\u0178\u2022\u0160\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\udd4a\ufe0f",
                                         "tr": "libertad",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Gleichheit",
-                                        "e": "\u00e2\u0161\u2013\u00ef\u00b8\u008f",
+                                        "e": "\u2696\ufe0f",
                                         "tr": "igualdad"
                               },
                               {
                                         "art": "die",
                                         "w": "Toleranz",
-                                        "e": "\u00f0\u0178\u00a4\u009d",
+                                        "e": "\ud83e\udd1d",
                                         "tr": "tolerancia"
                               }
                     ]
@@ -154,54 +154,54 @@ window.lidKompaktData = [
           {
                     "id": "diskriminierung",
                     "title": "Diskriminierung & Schutz",
-                    "title_es": "Disc. y protecci\u00c3\u00b3n",
-                    "icon": "\u00f0\u0178\u203a\u00a1\u00ef\u00b8\u008f",
+                    "title_es": "Disc. y protecci\u00f3n",
+                    "icon": "\ud83d\udee1\ufe0f",
                     "color": "#ea580c",
                     "items": [
                               {
                                         "art": "die",
                                         "w": "Diskriminierung",
-                                        "e": "\u00f0\u0178\u0161\u00ab",
-                                        "tr": "discriminaci\u00c3\u00b3n",
+                                        "e": "\ud83d\udeab",
+                                        "tr": "discriminaci\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "",
                                         "w": "ungleich",
-                                        "e": "\u00e2\u2020\u201d\u00ef\u00b8\u008f",
+                                        "e": "\u2194\ufe0f",
                                         "tr": "desigual"
                               },
                               {
                                         "art": "die",
                                         "w": "Ungleichbehandlung",
-                                        "e": "\u00e2\u0161\u2013\u00ef\u00b8\u008f",
+                                        "e": "\u2696\ufe0f",
                                         "tr": "trato desigual"
                               },
                               {
                                         "art": "die",
                                         "w": "Folter",
-                                        "e": "\u00f0\u0178\u203a\u2018",
+                                        "e": "\ud83d\uded1",
                                         "tr": "tortura",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Todesstrafe",
-                                        "e": "\u00e2\u02dc\u00a0\u00ef\u00b8\u008f",
+                                        "e": "\u2620\ufe0f",
                                         "tr": "pena de muerte",
                                         "important": true
                               },
                               {
                                         "art": "der",
                                         "w": "Zwang",
-                                        "e": "\u00e2\u203a\u201c\u00ef\u00b8\u008f",
-                                        "tr": "coacci\u00c3\u00b3n",
+                                        "e": "\u26d3\ufe0f",
+                                        "tr": "coacci\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Zwangsarbeit",
-                                        "e": "\u00e2\u203a\u201c\u00ef\u00b8\u008f",
+                                        "e": "\u26d3\ufe0f",
                                         "tr": "trabajo forzado",
                                         "important": true
                               }
@@ -211,55 +211,55 @@ window.lidKompaktData = [
                     "id": "staatsprinzipien",
                     "title": "Staatsprinzipien",
                     "title_es": "Princ. del Estado",
-                    "icon": "\u00e2\u0161\u2013\u00ef\u00b8\u008f",
+                    "icon": "\u2696\ufe0f",
                     "color": "#0f766e",
                     "items": [
                               {
                                         "art": "die",
                                         "w": "Demokratie",
-                                        "e": "\u00f0\u0178\u2014\u00b3\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\uddf3\ufe0f",
                                         "tr": "democracia",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Republik",
-                                        "e": "\u00f0\u0178\u2021\u00a9\u00f0\u0178\u2021\u00aa",
-                                        "tr": "rep\u00c3\u00bablica"
+                                        "e": "\ud83c\udde9\ud83c\uddea",
+                                        "tr": "rep\u00fablica"
                               },
                               {
                                         "art": "die",
                                         "w": "Bundesrepublik",
-                                        "e": "\u00f0\u0178\u2021\u00a9\u00f0\u0178\u2021\u00aa",
-                                        "tr": "rep\u00c3\u00bablica federal",
+                                        "e": "\ud83c\udde9\ud83c\uddea",
+                                        "tr": "rep\u00fablica federal",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Diktatur",
-                                        "e": "\u00f0\u0178\u0161\u00ab",
+                                        "e": "\ud83d\udeab",
                                         "tr": "dictadura",
                                         "important": true
                               },
                               {
                                         "art": "der",
                                         "w": "Staat",
-                                        "e": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udfdb\ufe0f",
                                         "tr": "el estado",
                                         "important": true
                               },
                               {
                                         "art": "der",
                                         "w": "Rechtsstaat",
-                                        "e": "\u00e2\u0161\u2013\u00ef\u00b8\u008f",
+                                        "e": "\u2696\ufe0f",
                                         "tr": "estado de derecho",
                                         "important": true
                               },
                               {
                                         "art": "die",
-                                        "w": "Volkssouver\u00c3\u00a4nit\u00c3\u00a4t",
-                                        "e": "\u00f0\u0178\u2014\u00b3\u00ef\u00b8\u008f",
-                                        "tr": "soberan\u00c3\u00ada popular",
+                                        "w": "Volkssouver\u00e4nit\u00e4t",
+                                        "e": "\ud83d\uddf3\ufe0f",
+                                        "tr": "soberan\u00eda popular",
                                         "important": true
                               }
                     ]
@@ -268,39 +268,39 @@ window.lidKompaktData = [
                     "id": "institutionen",
                     "title": "Demokratie: Institutionen",
                     "title_es": "Instituciones",
-                    "icon": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                    "icon": "\ud83c\udfdb\ufe0f",
                     "color": "#7c3aed",
                     "items": [
                               {
                                         "art": "der",
                                         "w": "Bundestag",
-                                        "e": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udfdb\ufe0f",
                                         "tr": "Bundestag / parlamento federal",
                                         "important": true
                               },
                               {
                                         "art": "der",
                                         "w": "Bundesrat",
-                                        "e": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udfdb\ufe0f",
                                         "tr": "Bundesrat / Consejo Federal"
                               },
                               {
                                         "art": "die",
                                         "w": "Bundesversammlung",
-                                        "e": "\u00f0\u0178\u2014\u00b3\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\uddf3\ufe0f",
                                         "tr": "Asamblea Federal",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Parlament",
-                                        "e": "\u00f0\u0178\u2014\u00a3\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\udde3\ufe0f",
                                         "tr": "parlamento"
                               },
                               {
                                         "art": "die",
                                         "w": "Regierung",
-                                        "e": "\u00f0\u0178\u008f\u00a2",
+                                        "e": "\ud83c\udfe2",
                                         "tr": "gobierno",
                                         "important": true
                               }
@@ -310,27 +310,27 @@ window.lidKompaktData = [
                     "id": "bundesregierung",
                     "title": "Bundesregierung",
                     "title_es": "Gobierno federal",
-                    "icon": "\u00f0\u0178\u008f\u00a2",
+                    "icon": "\ud83c\udfe2",
                     "color": "#2563eb",
                     "items": [
                               {
                                         "art": "der",
                                         "w": "Bundeskanzler",
-                                        "e": "\u00f0\u0178\u00a4\u00b5",
+                                        "e": "\ud83e\udd35",
                                         "tr": "canciller federal",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Bundeskabinett",
-                                        "e": "\u00f0\u0178\u2018\u00a5",
+                                        "e": "\ud83d\udc65",
                                         "tr": "gabinete federal",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Bundesregierung",
-                                        "e": "\u00f0\u0178\u008f\u00a2",
+                                        "e": "\ud83c\udfe2",
                                         "tr": "gobierno federal",
                                         "important": true
                               }
@@ -340,55 +340,55 @@ window.lidKompaktData = [
                     "id": "staatsgewalten",
                     "title": "Staatsgewalten",
                     "title_es": "Poderes del Estado",
-                    "icon": "\u00e2\u0161\u2013\u00ef\u00b8\u008f",
+                    "icon": "\u2696\ufe0f",
                     "color": "#0f766e",
                     "items": [
                               {
                                         "art": "der",
                                         "w": "Volk",
-                                        "e": "\u00f0\u0178\u2018\u00a5",
+                                        "e": "\ud83d\udc65",
                                         "tr": "pueblo",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Gewalt",
-                                        "e": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udfdb\ufe0f",
                                         "tr": "poder estatal / autoridad",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Gewaltenteilung",
-                                        "e": "\u00e2\u0161\u2013\u00ef\u00b8\u008f",
-                                        "tr": "separaci\u00c3\u00b3n de poderes",
+                                        "e": "\u2696\ufe0f",
+                                        "tr": "separaci\u00f3n de poderes",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Legislative",
-                                        "e": "\u00f0\u0178\u201c\u0153",
+                                        "e": "\ud83d\udcdc",
                                         "tr": "poder legislativo",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Exekutive",
-                                        "e": "\u00f0\u0178\u008f\u00a2",
+                                        "e": "\ud83c\udfe2",
                                         "tr": "poder ejecutivo",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Judikative",
-                                        "e": "\u00e2\u0161\u2013\u00ef\u00b8\u008f",
+                                        "e": "\u2696\ufe0f",
                                         "tr": "poder judicial",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Presse",
-                                        "e": "\u00f0\u0178\u201c\u00b0",
+                                        "e": "\ud83d\udcf0",
                                         "tr": "prensa",
                                         "important": true
                               }
@@ -398,42 +398,42 @@ window.lidKompaktData = [
                     "id": "wahlen",
                     "title": "Demokratie: Wahlen",
                     "title_es": "Elecciones",
-                    "icon": "\u00f0\u0178\u2014\u00b3\u00ef\u00b8\u008f",
+                    "icon": "\ud83d\uddf3\ufe0f",
                     "color": "#2563eb",
                     "items": [
                               {
                                         "art": "die",
                                         "w": "Wahl",
-                                        "e": "\u00f0\u0178\u2014\u00b3\u00ef\u00b8\u008f",
-                                        "tr": "elecci\u00c3\u00b3n",
+                                        "e": "\ud83d\uddf3\ufe0f",
+                                        "tr": "elecci\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "der / die",
-                                        "w": "W\u00c3\u00a4hler / W\u00c3\u00a4hlerin",
-                                        "e": "\u00f0\u0178\u2122\u2039",
+                                        "w": "W\u00e4hler / W\u00e4hlerin",
+                                        "e": "\ud83d\ude4b",
                                         "tr": "elector / electora",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Wahlgeheimnis",
-                                        "e": "\u00f0\u0178\u201d\u2019",
+                                        "e": "\ud83d\udd12",
                                         "tr": "secreto del voto",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Stimme",
-                                        "e": "\u00f0\u0178\u2014\u00a3\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\udde3\ufe0f",
                                         "tr": "voto",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Stimmabgabe",
-                                        "e": "\u00f0\u0178\u201c\u00a9",
-                                        "tr": "emisi\u00c3\u00b3n del voto"
+                                        "e": "\ud83d\udce9",
+                                        "tr": "emisi\u00f3n del voto"
                               },
                               {
                                         "art": "die",
@@ -452,56 +452,107 @@ window.lidKompaktData = [
           {
                     "id": "wahlrecht",
                     "title": "Wahlrecht & Teilnahme",
-                    "title_es": "Derecho y participaci\u00c3\u00b3n",
-                    "icon": "\u00f0\u0178\u2014\u00b3\u00ef\u00b8\u008f",
+                    "title_es": "Derecho y participaci\u00f3n",
+                    "icon": "\ud83d\uddf3\ufe0f",
                     "color": "#1d4ed8",
                     "items": [
                               {
                                         "art": "das",
                                         "w": "Wahlrecht",
-                                        "e": "\u00f0\u0178\u201c\u0153",
+                                        "e": "\ud83d\udcdc",
                                         "tr": "derecho al voto",
                                         "important": true
                               },
                               {
                                         "art": "der/die",
                                         "w": "Wahlberechtigte",
-                                        "e": "\u00f0\u0178\u2014\u00b3\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\uddf3\ufe0f",
                                         "tr": "autorizado a votar",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Wahlbeteiligung",
-                                        "e": "\u00f0\u0178\u201c\u0160",
-                                        "tr": "participaci\u00c3\u00b3n electoral"
+                                        "e": "\ud83d\udcca",
+                                        "tr": "participaci\u00f3n electoral"
                               },
                               {
                                         "art": "die",
                                         "w": "Erststimme",
-                                        "e": "\u00f0\u0178\u2014\u00b3\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\uddf3\ufe0f",
                                         "tr": "primer voto",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Zweitstimme",
-                                        "e": "\u00f0\u0178\u2014\u00b3\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\uddf3\ufe0f",
                                         "tr": "segundo voto",
                                         "important": true
                               },
                               {
                                         "art": "die (pl)",
                                         "w": "Sitze",
-                                        "e": "\u00f0\u0178\u2019\u00ba",
-                                        "tr": "esca\u00c3\u00b1os",
+                                        "e": "\ud83d\udcba",
+                                        "tr": "esca\u00f1os",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Wahllokal",
-                                        "e": "\u00f0\u0178\u008f\u00ab",
+                                        "e": "\ud83c\udfeb",
                                         "tr": "colegio electoral"
+                              }
+                    ]
+          },
+          {
+                    "id": "wahlsystem",
+                    "title": "Wahlsystem",
+                    "title_es": "Sistema electoral",
+                    "icon": "\ud83d\udcca",
+                    "color": "#7c3aed",
+                    "items": [
+                              {
+                                        "art": "das",
+                                        "w": "Mehrheitswahlrecht",
+                                        "e": "\ud83c\udfc6",
+                                        "tr": "sistema mayoritario"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Verh\u00e4ltniswahlrecht",
+                                        "e": "\u2696\ufe0f",
+                                        "tr": "sistema proporcional"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "5%-H\u00fcrde",
+                                        "e": "\ud83d\udcc9",
+                                        "tr": "barrera del 5%"
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Mindestanteil",
+                                        "e": "\ud83d\udcca",
+                                        "tr": "porcentaje m\u00ednimo"
+                              },
+                              {
+                                        "art": "die (pl)",
+                                        "w": "W\u00e4hlerstimmen",
+                                        "e": "\ud83d\udde3\ufe0f",
+                                        "tr": "votos de los electores"
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Grundsatz",
+                                        "e": "\ud83d\udcdc",
+                                        "tr": "principio"
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Verband",
+                                        "e": "\ud83e\udd1d",
+                                        "tr": "organizaci\u00f3n / federaci\u00f3n"
                               }
                     ]
           },
@@ -509,53 +560,53 @@ window.lidKompaktData = [
                     "id": "parteien",
                     "title": "Parteien & Macht",
                     "title_es": "Partidos y poder",
-                    "icon": "\u00f0\u0178\u0161\u00a9",
+                    "icon": "\ud83d\udea9",
                     "color": "#db2777",
                     "items": [
                               {
                                         "art": "die",
                                         "w": "Partei",
-                                        "e": "\u00f0\u0178\u0161\u00a9",
-                                        "tr": "partido pol\u00c3\u00adtico",
+                                        "e": "\ud83d\udea9",
+                                        "tr": "partido pol\u00edtico",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Koalition",
-                                        "e": "\u00f0\u0178\u00a4\u009d",
-                                        "tr": "coalici\u00c3\u00b3n",
+                                        "e": "\ud83e\udd1d",
+                                        "tr": "coalici\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Opposition",
-                                        "e": "\u00f0\u0178\u203a\u2018",
-                                        "tr": "oposici\u00c3\u00b3n",
+                                        "e": "\ud83d\uded1",
+                                        "tr": "oposici\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Mehrheit",
-                                        "e": "\u00f0\u0178\u201c\u0160",
-                                        "tr": "mayor\u00c3\u00ada",
+                                        "e": "\ud83d\udcca",
+                                        "tr": "mayor\u00eda",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Minderheit",
-                                        "e": "\u00f0\u0178\u00a4\u008f",
-                                        "tr": "minor\u00c3\u00ada"
+                                        "e": "\ud83e\udd0f",
+                                        "tr": "minor\u00eda"
                               },
                               {
                                         "art": "die",
                                         "w": "Fraktion",
-                                        "e": "\u00f0\u0178\u2018\u00a5",
-                                        "tr": "fracci\u00c3\u00b3n parlamentaria"
+                                        "e": "\ud83d\udc65",
+                                        "tr": "fracci\u00f3n parlamentaria"
                               },
                               {
                                         "art": "der/die",
                                         "w": "Abgeordnete",
-                                        "e": "\u00f0\u0178\u00a7\u2018\u00e2\u20ac\u008d\u00f0\u0178\u2019\u00bc",
+                                        "e": "\ud83e\uddd1\u200d\ud83d\udcbc",
                                         "tr": "diputado/a",
                                         "important": true
                               }
@@ -563,50 +614,50 @@ window.lidKompaktData = [
           },
           {
                     "id": "foederalismus",
-                    "title": "F\u00c3\u00b6deralismus",
+                    "title": "F\u00f6deralismus",
                     "title_es": "Federalismo",
-                    "icon": "\u00f0\u0178\u2014\u00ba\u00ef\u00b8\u008f",
+                    "icon": "\ud83d\uddfa\ufe0f",
                     "color": "#dc2626",
                     "items": [
                               {
                                         "art": "der",
                                         "w": "Bund",
-                                        "e": "\u00f0\u0178\u2021\u00a9\u00f0\u0178\u2021\u00aa",
-                                        "tr": "federaci\u00c3\u00b3n",
+                                        "e": "\ud83c\udde9\ud83c\uddea",
+                                        "tr": "federaci\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "der",
                                         "w": "Bundesstaat",
-                                        "e": "\u00f0\u0178\u2021\u00a9\u00f0\u0178\u2021\u00aa",
+                                        "e": "\ud83c\udde9\ud83c\uddea",
                                         "tr": "estado federal",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Bundesland",
-                                        "e": "\u00f0\u0178\u2014\u00ba\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\uddfa\ufe0f",
                                         "tr": "estado federado",
                                         "important": true
                               },
                               {
                                         "art": "die (pl)",
-                                        "w": "L\u00c3\u00a4nder",
-                                        "e": "\u00f0\u0178\u2014\u00ba\u00ef\u00b8\u008f",
+                                        "w": "L\u00e4nder",
+                                        "e": "\ud83d\uddfa\ufe0f",
                                         "tr": "los estados federados",
                                         "important": true
                               },
                               {
                                         "art": "die (pl)",
-                                        "w": "16 Bundesl\u00c3\u00a4nder",
-                                        "e": "\u00f0\u0178\u2014\u00ba\u00ef\u00b8\u008f",
+                                        "w": "16 Bundesl\u00e4nder",
+                                        "e": "\ud83d\uddfa\ufe0f",
                                         "tr": "los 16 estados federados",
                                         "important": true
                               },
                               {
                                         "art": "die / der",
-                                        "w": "Ministerpr\u00c3\u00a4sidentin / Ministerpr\u00c3\u00a4sident",
-                                        "e": "\u00f0\u0178\u008f\u00b0",
+                                        "w": "Ministerpr\u00e4sidentin / Ministerpr\u00e4sident",
+                                        "e": "\ud83c\udff0",
                                         "tr": "primera ministra / primer ministro",
                                         "important": true
                               }
@@ -614,29 +665,29 @@ window.lidKompaktData = [
           },
           {
                     "id": "eu",
-                    "title": "Europ\u00c3\u00a4ische Union",
-                    "title_es": "Uni\u00c3\u00b3n Europea",
-                    "icon": "\u00f0\u0178\u2021\u00aa\u00f0\u0178\u2021\u00ba",
+                    "title": "Europ\u00e4ische Union",
+                    "title_es": "Uni\u00f3n Europea",
+                    "icon": "\ud83c\uddea\ud83c\uddfa",
                     "color": "#2563eb",
                     "items": [
                               {
                                         "art": "der",
                                         "w": "Euro",
-                                        "e": "\u00f0\u0178\u2019\u00b6",
+                                        "e": "\ud83d\udcb6",
                                         "tr": "euro",
                                         "important": true
                               },
                               {
                                         "art": "die",
-                                        "w": "Europ\u00c3\u00a4ische Union",
-                                        "e": "\u00f0\u0178\u2021\u00aa\u00f0\u0178\u2021\u00ba",
-                                        "tr": "Uni\u00c3\u00b3n Europea",
+                                        "w": "Europ\u00e4ische Union",
+                                        "e": "\ud83c\uddea\ud83c\uddfa",
+                                        "tr": "Uni\u00f3n Europea",
                                         "important": true
                               },
                               {
                                         "art": "die",
-                                        "w": "W\u00c3\u00a4hrung",
-                                        "e": "\u00f0\u0178\u2019\u00b6",
+                                        "w": "W\u00e4hrung",
+                                        "e": "\ud83d\udcb6",
                                         "tr": "moneda",
                                         "important": true
                               }
@@ -644,43 +695,43 @@ window.lidKompaktData = [
           },
           {
                     "id": "staatsaemter",
-                    "title": "Staats\u00c3\u00a4mter",
+                    "title": "Staats\u00e4mter",
                     "title_es": "Cargos del Estado",
-                    "icon": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                    "icon": "\ud83c\udfdb\ufe0f",
                     "color": "#f59e0b",
                     "items": [
                               {
                                         "art": "die / der",
                                         "w": "Regierungschefin / Regierungschef",
-                                        "e": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udfdb\ufe0f",
                                         "tr": "jefa de gobierno / jefe de gobierno",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Staatsoberhaupt",
-                                        "e": "\u00f0\u0178\u2018\u2018",
+                                        "e": "\ud83d\udc51",
                                         "tr": "jefe del Estado",
                                         "important": true
                               },
                               {
                                         "art": "der",
                                         "w": "Regierungschef",
-                                        "e": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udfdb\ufe0f",
                                         "tr": "jefe del gobierno",
                                         "important": true
                               },
                               {
                                         "art": "der",
                                         "w": "Kanzler",
-                                        "e": "\u00f0\u0178\u00a4\u00b5",
+                                        "e": "\ud83e\udd35",
                                         "tr": "canciller",
                                         "important": true
                               },
                               {
                                         "art": "die / der",
-                                        "w": "Bundespr\u00c3\u00a4sidentin / Bundespr\u00c3\u00a4sident",
-                                        "e": "\u00f0\u0178\u2021\u00a9\u00f0\u0178\u2021\u00aa",
+                                        "w": "Bundespr\u00e4sidentin / Bundespr\u00e4sident",
+                                        "e": "\ud83c\udde9\ud83c\uddea",
                                         "tr": "presidenta / presidente federal",
                                         "important": true
                               }
@@ -688,34 +739,34 @@ window.lidKompaktData = [
           },
           {
                     "id": "staatsaemter-2",
-                    "title": "Staats\u00c3\u00a4mter II",
+                    "title": "Staats\u00e4mter II",
                     "title_es": "Cargos del Estado II",
-                    "icon": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                    "icon": "\ud83c\udfdb\ufe0f",
                     "color": "#f59e0b",
                     "items": [
                               {
                                         "art": "die / der",
-                                        "w": "Bundesratspr\u00c3\u00a4sidentin / Bundesratspr\u00c3\u00a4sident",
-                                        "e": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                                        "w": "Bundesratspr\u00e4sidentin / Bundesratspr\u00e4sident",
+                                        "e": "\ud83c\udfdb\ufe0f",
                                         "tr": "presidenta / presidente del Bundesrat",
                                         "important": true
                               },
                               {
                                         "art": "die / der",
-                                        "w": "Bundestagspr\u00c3\u00a4sidentin / Bundestagspr\u00c3\u00a4sident",
-                                        "e": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                                        "w": "Bundestagspr\u00e4sidentin / Bundestagspr\u00e4sident",
+                                        "e": "\ud83c\udfdb\ufe0f",
                                         "tr": "presidenta / presidente del Bundestag"
                               },
                               {
                                         "art": "die / der",
                                         "w": "Ministerin / Minister",
-                                        "e": "\u00f0\u0178\u2018\u00a9\u00e2\u20ac\u008d\u00f0\u0178\u2019\u00bc",
+                                        "e": "\ud83d\udc69\u200d\ud83d\udcbc",
                                         "tr": "ministra / ministro"
                               },
                               {
                                         "art": "der",
-                                        "w": "Regierende B\u00c3\u00bcrgermeister",
-                                        "e": "\u00f0\u0178\u008f\u2122\u00ef\u00b8\u008f",
+                                        "w": "Regierende B\u00fcrgermeister",
+                                        "e": "\ud83c\udfd9\ufe0f",
                                         "tr": "alcalde gobernante",
                                         "important": true
                               }
@@ -723,42 +774,42 @@ window.lidKompaktData = [
           },
           {
                     "id": "kommune-aemter",
-                    "title": "Kommune & \u00c3\u201emter",
+                    "title": "Kommune & \u00c4mter",
                     "title_es": "Municipio y oficinas",
-                    "icon": "\u00f0\u0178\u008f\u00a2",
+                    "icon": "\ud83c\udfe2",
                     "color": "#16a34a",
                     "items": [
                               {
                                         "art": "die",
                                         "w": "Kommune",
-                                        "e": "\u00f0\u0178\u008f\u02dc\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udfd8\ufe0f",
                                         "tr": "municipio",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Gemeinde",
-                                        "e": "\u00f0\u0178\u008f\u02dc\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udfd8\ufe0f",
                                         "tr": "municipio"
                               },
                               {
                                         "art": "die",
                                         "w": "Gemeindeverwaltung",
-                                        "e": "\u00f0\u0178\u008f\u02dc\u00ef\u00b8\u008f",
-                                        "tr": "administraci\u00c3\u00b3n municipal",
+                                        "e": "\ud83c\udfd8\ufe0f",
+                                        "tr": "administraci\u00f3n municipal",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Rathaus",
-                                        "e": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udfdb\ufe0f",
                                         "tr": "ayuntamiento",
                                         "important": true
                               },
                               {
                                         "art": "der / die",
-                                        "w": "B\u00c3\u00bcrgermeister / B\u00c3\u00bcrgermeisterin",
-                                        "e": "\u00f0\u0178\u00a7\u2018\u00e2\u20ac\u008d\u00f0\u0178\u2019\u00bc",
+                                        "w": "B\u00fcrgermeister / B\u00fcrgermeisterin",
+                                        "e": "\ud83e\uddd1\u200d\ud83d\udcbc",
                                         "tr": "alcalde / alcaldesa",
                                         "important": true
                               }
@@ -766,49 +817,49 @@ window.lidKompaktData = [
           },
           {
                     "id": "behoerden",
-                    "title": "Beh\u00c3\u00b6rden",
+                    "title": "Beh\u00f6rden",
                     "title_es": "Autoridades",
-                    "icon": "\u00f0\u0178\u008f\u00a2",
+                    "icon": "\ud83c\udfe2",
                     "color": "#7c3aed",
                     "items": [
                               {
                                         "art": "die",
-                                        "w": "Beh\u00c3\u00b6rde",
-                                        "e": "\u00f0\u0178\u008f\u00a2",
-                                        "tr": "autoridad p\u00c3\u00bablica"
+                                        "w": "Beh\u00f6rde",
+                                        "e": "\ud83c\udfe2",
+                                        "tr": "autoridad p\u00fablica"
                               },
                               {
                                         "art": "die",
-                                        "w": "Ausl\u00c3\u00a4nderbeh\u00c3\u00b6rde",
-                                        "e": "\u00f0\u0178\u203a\u201a",
-                                        "tr": "oficina de extranjer\u00c3\u00ada",
+                                        "w": "Ausl\u00e4nderbeh\u00f6rde",
+                                        "e": "\ud83d\udec2",
+                                        "tr": "oficina de extranjer\u00eda",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Ordnungsamt",
-                                        "e": "\u00f0\u0178\u0161\u201c",
-                                        "tr": "oficina de orden p\u00c3\u00bablico",
+                                        "e": "\ud83d\ude93",
+                                        "tr": "oficina de orden p\u00fablico",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Finanzamt",
-                                        "e": "\u00f0\u0178\u2019\u00b0",
+                                        "e": "\ud83d\udcb0",
                                         "tr": "oficina de impuestos",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Steuer",
-                                        "e": "\u00f0\u0178\u2019\u00b8",
+                                        "e": "\ud83d\udcb8",
                                         "tr": "impuesto",
                                         "important": true
                               },
                               {
                                         "art": "das",
-                                        "w": "Ausw\u00c3\u00a4rtige Amt",
-                                        "e": "\u00f0\u0178\u0152\u008d",
+                                        "w": "Ausw\u00e4rtige Amt",
+                                        "e": "\ud83c\udf0d",
                                         "tr": "Ministerio de Asuntos Exteriores",
                                         "important": true
                               }
@@ -818,48 +869,48 @@ window.lidKompaktData = [
                     "id": "recht-grundlagen",
                     "title": "Recht: Grundlagen",
                     "title_es": "Bases del derecho",
-                    "icon": "\u00f0\u0178\u201c\u0153",
+                    "icon": "\ud83d\udcdc",
                     "color": "#1d4ed8",
                     "items": [
                               {
                                         "art": "das",
                                         "w": "Grundgesetz",
-                                        "e": "\u00f0\u0178\u201c\u02dc",
+                                        "e": "\ud83d\udcd8",
                                         "tr": "Ley Fundamental",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Verfassung",
-                                        "e": "\u00f0\u0178\u201c\u0153",
-                                        "tr": "constituci\u00c3\u00b3n",
+                                        "e": "\ud83d\udcdc",
+                                        "tr": "constituci\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Gesetz",
-                                        "e": "\u00e2\u0161\u2013\u00ef\u00b8\u008f",
+                                        "e": "\u2696\ufe0f",
                                         "tr": "ley",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Gesetzgebung",
-                                        "e": "\u00f0\u0178\u201c\u0161",
-                                        "tr": "legislaci\u00c3\u00b3n",
+                                        "e": "\ud83d\udcda",
+                                        "tr": "legislaci\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Bundesverfassungsgericht",
-                                        "e": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udfdb\ufe0f",
                                         "tr": "Tribunal Constitucional Federal",
                                         "important": true
                               },
                               {
                                         "art": "",
                                         "w": "verfassungswidrig",
-                                        "e": "\u00f0\u0178\u0161\u00ab",
+                                        "e": "\ud83d\udeab",
                                         "tr": "inconstitucional",
                                         "important": true
                               }
@@ -868,40 +919,40 @@ window.lidKompaktData = [
           {
                     "id": "gerichte",
                     "title": "Justiz & Polizei",
-                    "title_es": "Justicia y polic\u00c3\u00ada",
-                    "icon": "\u00f0\u0178\u2018\u00a9\u00e2\u20ac\u008d\u00e2\u0161\u2013\u00ef\u00b8\u008f",
+                    "title_es": "Justicia y polic\u00eda",
+                    "icon": "\ud83d\udc69\u200d\u2696\ufe0f",
                     "color": "#1d4ed8",
                     "items": [
                               {
                                         "art": "das",
                                         "w": "Gericht",
-                                        "e": "\u00e2\u0161\u2013\u00ef\u00b8\u008f",
+                                        "e": "\u2696\ufe0f",
                                         "tr": "tribunal",
                                         "card_tr": "Corte<br>Tribunal"
                               },
                               {
                                         "art": "die",
                                         "w": "Rechtsprechung",
-                                        "e": "\u00e2\u0161\u2013\u00ef\u00b8\u008f",
+                                        "e": "\u2696\ufe0f",
                                         "tr": "poder judicial / jurisprudencia",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Polizei",
-                                        "e": "\u00f0\u0178\u0161\u201c",
-                                        "tr": "polic\u00c3\u00ada"
+                                        "e": "\ud83d\ude93",
+                                        "tr": "polic\u00eda"
                               },
                               {
                                         "art": "der/die",
                                         "w": "Richter / Richterin",
-                                        "e": "\u00f0\u0178\u2018\u00a9\u00e2\u20ac\u008d\u00e2\u0161\u2013\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\udc69\u200d\u2696\ufe0f",
                                         "tr": "juez / jueza"
                               },
                               {
                                         "art": "das",
                                         "w": "Urteil",
-                                        "e": "\u00f0\u0178\u201d\u00a8",
+                                        "e": "\ud83d\udd28",
                                         "tr": "sentencia"
                               }
                     ]
@@ -910,37 +961,37 @@ window.lidKompaktData = [
                     "id": "strafen",
                     "title": "Strafen",
                     "title_es": "Penas",
-                    "icon": "\u00e2\u203a\u201c\u00ef\u00b8\u008f",
+                    "icon": "\u26d3\ufe0f",
                     "color": "#b91c1c",
                     "items": [
                               {
                                         "art": "die",
                                         "w": "Strafe",
-                                        "e": "\u00f0\u0178\u2018\u00ae",
+                                        "e": "\ud83d\udc6e",
                                         "tr": "pena"
                               },
                               {
                                         "art": "die",
                                         "w": "Geldstrafe",
-                                        "e": "\u00f0\u0178\u2019\u00b6",
+                                        "e": "\ud83d\udcb6",
                                         "tr": "multa"
                               },
                               {
                                         "art": "die",
                                         "w": "Freiheitsstrafe",
-                                        "e": "\u00e2\u203a\u201c\u00ef\u00b8\u008f",
-                                        "tr": "pena de prisi\u00c3\u00b3n"
+                                        "e": "\u26d3\ufe0f",
+                                        "tr": "pena de prisi\u00f3n"
                               },
                               {
                                         "art": "das",
-                                        "w": "Gef\u00c3\u00a4ngnis",
-                                        "e": "\u00f0\u0178\u0161\u201d",
-                                        "tr": "c\u00c3\u00a1rcel"
+                                        "w": "Gef\u00e4ngnis",
+                                        "e": "\ud83d\ude94",
+                                        "tr": "c\u00e1rcel"
                               },
                               {
                                         "art": "die",
                                         "w": "Anzeige",
-                                        "e": "\u00f0\u0178\u201c\u009d",
+                                        "e": "\ud83d\udcdd",
                                         "tr": "denuncia"
                               }
                     ]
@@ -949,44 +1000,44 @@ window.lidKompaktData = [
                     "id": "gesellschaft",
                     "title": "Gesellschaft",
                     "title_es": "Sociedad",
-                    "icon": "\u00f0\u0178\u008f\u02dc\u00ef\u00b8\u008f",
+                    "icon": "\ud83c\udfd8\ufe0f",
                     "color": "#059669",
                     "items": [
                               {
                                         "art": "der / die",
                                         "w": "Einwohner / Einwohnerin",
-                                        "e": "\u00f0\u0178\u008f\u2122\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udfd9\ufe0f",
                                         "tr": "habitante / habitante (mujer)"
                               },
                               {
                                         "art": "die",
                                         "w": "Religion",
-                                        "e": "\u00f0\u0178\u203a\u0090",
-                                        "tr": "religi\u00c3\u00b3n"
+                                        "e": "\ud83d\uded0",
+                                        "tr": "religi\u00f3n"
                               },
                               {
                                         "art": "die",
-                                        "w": "Bev\u00c3\u00b6lkerung",
-                                        "e": "\u00f0\u0178\u2018\u00a5",
-                                        "tr": "poblaci\u00c3\u00b3n"
+                                        "w": "Bev\u00f6lkerung",
+                                        "e": "\ud83d\udc65",
+                                        "tr": "poblaci\u00f3n"
                               },
                               {
                                         "art": "der/die",
-                                        "w": "Erwerbst\u00c3\u00a4tige",
-                                        "e": "\u00f0\u0178\u2019\u00bc",
+                                        "w": "Erwerbst\u00e4tige",
+                                        "e": "\ud83d\udcbc",
                                         "tr": "persona que trabaja / persona empleada"
                               },
                               {
                                         "art": "der",
-                                        "w": "B\u00c3\u00bcrger",
-                                        "e": "\u00f0\u0178\u00a7\u2018",
+                                        "w": "B\u00fcrger",
+                                        "e": "\ud83e\uddd1",
                                         "tr": "ciudadano",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Schulpflicht",
-                                        "e": "\u00f0\u0178\u008f\u00ab",
+                                        "e": "\ud83c\udfeb",
                                         "tr": "escolaridad obligatoria",
                                         "important": true
                               },
@@ -1001,54 +1052,54 @@ window.lidKompaktData = [
           {
                     "id": "migration",
                     "title": "Migration",
-                    "title_es": "Migraci\u00c3\u00b3n",
-                    "icon": "\u00f0\u0178\u00a7\u00b3",
+                    "title_es": "Migraci\u00f3n",
+                    "icon": "\ud83e\uddf3",
                     "color": "#0ea5e9",
                     "items": [
                               {
                                         "art": "die",
                                         "w": "Einwanderung",
-                                        "e": "\u00e2\u017e\u00a1\u00ef\u00b8\u008f",
-                                        "tr": "inmigraci\u00c3\u00b3n",
+                                        "e": "\u27a1\ufe0f",
+                                        "tr": "inmigraci\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Zuwanderung",
-                                        "e": "\u00f0\u0178\u0161\u00b6",
+                                        "e": "\ud83d\udeb6",
                                         "tr": "llegada migratoria"
                               },
                               {
                                         "art": "die",
                                         "w": "Auswanderung",
-                                        "e": "\u00e2\u00ac\u2026\u00ef\u00b8\u008f",
-                                        "tr": "emigraci\u00c3\u00b3n"
+                                        "e": "\u2b05\ufe0f",
+                                        "tr": "emigraci\u00f3n"
                               },
                               {
                                         "art": "die",
                                         "w": "Integration",
-                                        "e": "\u00f0\u0178\u00a4\u009d",
-                                        "tr": "integraci\u00c3\u00b3n",
+                                        "e": "\ud83e\udd1d",
+                                        "tr": "integraci\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Asyl",
-                                        "e": "\u00e2\u203a\u00ba",
+                                        "e": "\u26fa",
                                         "tr": "asilo",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Aufenthaltserlaubnis",
-                                        "e": "\u00f0\u0178\u201c\u201e",
+                                        "e": "\ud83d\udcc4",
                                         "tr": "permiso de residencia",
                                         "important": true
                               },
                               {
                                         "art": "der / die (pl)",
-                                        "w": "Fl\u00c3\u00bcchtling / Fl\u00c3\u00bcchtlinge",
-                                        "e": "\u00f0\u0178\u203a\u0178",
+                                        "w": "Fl\u00fcchtling / Fl\u00fcchtlinge",
+                                        "e": "\ud83d\udedf",
                                         "tr": "refugiado / refugiados",
                                         "important": true
                               }
@@ -1057,28 +1108,28 @@ window.lidKompaktData = [
           {
                     "id": "religion-gemeinschaft",
                     "title": "Religion & Gemeinschaft",
-                    "title_es": "Religi\u00c3\u00b3n",
-                    "icon": "\u00f0\u0178\u203a\u0090",
+                    "title_es": "Religi\u00f3n",
+                    "icon": "\ud83d\uded0",
                     "color": "#8b5cf6",
                     "items": [
                               {
                                         "art": "die",
                                         "w": "Religionsgemeinschaft",
-                                        "e": "\u00e2\u203a\u00aa",
+                                        "e": "\u26ea",
                                         "tr": "comunidad religiosa",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Pfarramt",
-                                        "e": "\u00f0\u0178\u201c\u008d",
+                                        "e": "\ud83d\udccd",
                                         "tr": "oficina parroquial"
                               },
                               {
                                         "art": "die",
-                                        "w": "j\u00c3\u00bcdische Gemeinde",
-                                        "e": "\u00e2\u0153\u00a1\u00ef\u00b8\u008f",
-                                        "tr": "comunidad jud\u00c3\u00ada",
+                                        "w": "j\u00fcdische Gemeinde",
+                                        "e": "\u2721\ufe0f",
+                                        "tr": "comunidad jud\u00eda",
                                         "important": true
                               }
                     ]
@@ -1087,55 +1138,55 @@ window.lidKompaktData = [
                     "id": "sozialsystem",
                     "title": "Sozialsystem",
                     "title_es": "Sistema social",
-                    "icon": "\u00f0\u0178\u00a7\u00be",
+                    "icon": "\ud83e\uddfe",
                     "color": "#0ea5e9",
                     "items": [
                               {
                                         "art": "die (pl)",
                                         "w": "Sozialabgaben",
-                                        "e": "\u00f0\u0178\u2019\u00b6",
+                                        "e": "\ud83d\udcb6",
                                         "tr": "cotizaciones sociales",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "soziale Sicherheit",
-                                        "e": "\u00f0\u0178\u203a\u00a1\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\udee1\ufe0f",
                                         "tr": "seguridad social",
                                         "important": true
                               },
                               {
                                         "art": "die",
-                                        "w": "Ma\u00c3\u0178nahme",
-                                        "e": "\u00f0\u0178\u201c\u2039",
+                                        "w": "Ma\u00dfnahme",
+                                        "e": "\ud83d\udccb",
                                         "tr": "medida",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Haftpflichtversicherung",
-                                        "e": "\u00f0\u0178\u201c\u201e",
+                                        "e": "\ud83d\udcc4",
                                         "tr": "seguro de responsabilidad civil"
                               },
                               {
                                         "art": "die",
                                         "w": "Krankenversicherung",
-                                        "e": "\u00f0\u0178\u008f\u00a5",
+                                        "e": "\ud83c\udfe5",
                                         "tr": "seguro de salud",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Sozialversicherung",
-                                        "e": "\u00f0\u0178\u008f\u00a5",
+                                        "e": "\ud83c\udfe5",
                                         "tr": "seguridad social",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Rente",
-                                        "e": "\u00f0\u0178\u2018\u00b5",
-                                        "tr": "pensi\u00c3\u00b3n / jubilaci\u00c3\u00b3n",
+                                        "e": "\ud83d\udc75",
+                                        "tr": "pensi\u00f3n / jubilaci\u00f3n",
                                         "important": true
                               }
                     ]
@@ -1144,56 +1195,56 @@ window.lidKompaktData = [
                     "id": "deutsche-geschichte",
                     "title": "Deutsche Geschichte",
                     "title_es": "Historia alemana",
-                    "icon": "\u00f0\u0178\u2022\u00af\u00ef\u00b8\u008f",
+                    "icon": "\ud83d\udd6f\ufe0f",
                     "color": "#7c2d12",
                     "items": [
                               {
                                         "art": "der",
                                         "w": "Nationalsozialismus",
-                                        "e": "\u00e2\u02dc\u00a0\u00ef\u00b8\u008f",
+                                        "e": "\u2620\ufe0f",
                                         "tr": "nacionalsocialismo",
                                         "important": true
                               },
                               {
                                         "art": "der",
                                         "w": "Holocaust",
-                                        "e": "\u00f0\u0178\u2022\u00af\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\udd6f\ufe0f",
                                         "tr": "Holocausto",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Dritte Reich",
-                                        "e": "\u00e2\u0161\u00ab",
+                                        "e": "\u26ab",
                                         "tr": "Tercer Reich",
                                         "important": true
                               },
                               {
                                         "art": "der",
                                         "w": "Zweite Weltkrieg",
-                                        "e": "\u00f0\u0178\u2019\u00a3",
+                                        "e": "\ud83d\udca3",
                                         "tr": "Segunda Guerra Mundial",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "DDR",
-                                        "e": "\u00f0\u0178\u00a7\u00b1",
-                                        "tr": "Rep\u00c3\u00bablica Democr\u00c3\u00a1tica Alemana",
+                                        "e": "\ud83e\uddf1",
+                                        "tr": "Rep\u00fablica Democr\u00e1tica Alemana",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "BRD",
-                                        "e": "\u00f0\u0178\u2021\u00a9\u00f0\u0178\u2021\u00aa",
-                                        "tr": "Rep\u00c3\u00bablica Federal de Alemania",
+                                        "e": "\ud83c\udde9\ud83c\uddea",
+                                        "tr": "Rep\u00fablica Federal de Alemania",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Berliner Mauer",
-                                        "e": "\u00f0\u0178\u00a7\u00b1",
-                                        "tr": "Muro de Berl\u00c3\u00adn",
+                                        "e": "\ud83e\uddf1",
+                                        "tr": "Muro de Berl\u00edn",
                                         "important": true
                               }
                     ]
@@ -1202,151 +1253,151 @@ window.lidKompaktData = [
                     "id": "wiedervereinigung",
                     "title": "Deutschland",
                     "title_es": "Alemania",
-                    "icon": "\u00f0\u0178\u00a4\u009d",
+                    "icon": "\ud83e\udd1d",
                     "color": "#ca8a04",
                     "items": [
                               {
                                         "art": "die",
                                         "w": "Wiedervereinigung",
-                                        "e": "\u00f0\u0178\u00a4\u009d",
-                                        "tr": "reunificaci\u00c3\u00b3n",
+                                        "e": "\ud83e\udd1d",
+                                        "tr": "reunificaci\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "der",
                                         "w": "9. November",
-                                        "e": "\u00f0\u0178\u201c\u2026",
+                                        "e": "\ud83d\udcc5",
                                         "tr": "9 de noviembre"
                               },
                               {
                                         "art": "der",
                                         "w": "3. Oktober",
-                                        "e": "\u00f0\u0178\u017d\u2020",
+                                        "e": "\ud83c\udf86",
                                         "tr": "3 de octubre",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Nationalhymne",
-                                        "e": "\u00f0\u0178\u017d\u00b5",
+                                        "e": "\ud83c\udfb5",
                                         "tr": "himno nacional"
                               },
                               {
                                         "art": "das",
                                         "w": "Wappen",
-                                        "e": "\u00f0\u0178\u00a6\u2026",
+                                        "e": "\ud83e\udd85",
                                         "tr": "escudo"
                               },
                               {
                                         "art": "das",
                                         "w": "Wirtschaftswunder",
-                                        "e": "\u00f0\u0178\u201c\u02c6",
-                                        "tr": "milagro econ\u00c3\u00b3mico"
+                                        "e": "\ud83d\udcc8",
+                                        "tr": "milagro econ\u00f3mico"
                               }
                     ]
           },
           {
                     "id": "berlin",
                     "title": "Berlin",
-                    "title_es": "Berl\u00c3\u00adn",
-                    "icon": "\u00f0\u0178\u0090\u00bb",
+                    "title_es": "Berl\u00edn",
+                    "icon": "\ud83d\udc3b",
                     "color": "#be123c",
                     "items": [
                               {
                                         "art": "der",
-                                        "w": "B\u00c3\u00a4r",
-                                        "e": "\u00f0\u0178\u0090\u00bb",
+                                        "w": "B\u00e4r",
+                                        "e": "\ud83d\udc3b",
                                         "tr": "oso",
                                         "important": true
                               },
                               {
                                         "art": "der",
                                         "w": "Adler",
-                                        "e": "\u00f0\u0178\u00a6\u2026",
-                                        "tr": "\u00c3\u00a1guila",
+                                        "e": "\ud83e\udd85",
+                                        "tr": "\u00e1guila",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Brandenburger Tor",
-                                        "e": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udfdb\ufe0f",
                                         "tr": "Puerta de Brandeburgo",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Wahrzeichen",
-                                        "e": "\u00f0\u0178\u2014\u00bd",
-                                        "tr": "monumento emblem\u00c3\u00a1tico"
+                                        "e": "\ud83d\uddfd",
+                                        "tr": "monumento emblem\u00e1tico"
                               },
                               {
                                         "art": "der",
                                         "w": "Stadtstaat",
-                                        "e": "\u00f0\u0178\u2014\u00ba\u00ef\u00b8\u008f",
+                                        "e": "\ud83d\uddfa\ufe0f",
                                         "tr": "estado-ciudad",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Ehrenamt",
-                                        "e": "\u00f0\u0178\u00a4\u009d",
+                                        "e": "\ud83e\udd1d",
                                         "tr": "voluntariado"
                               },
                               {
                                         "art": "der",
                                         "w": "Verein",
-                                        "e": "\u00e2\u0161\u00bd",
-                                        "tr": "asociaci\u00c3\u00b3n"
+                                        "e": "\u26bd",
+                                        "tr": "asociaci\u00f3n"
                               }
                     ]
           },
           {
                     "id": "pruefungslogik",
-                    "title": "Pr\u00c3\u00bcfungslogik",
+                    "title": "Pr\u00fcfungslogik",
                     "title_es": "Lenguaje examen",
-                    "icon": "\u00f0\u0178\u201c\u02dc",
+                    "icon": "\ud83d\udcd8",
                     "color": "#475569",
                     "items": [
                               {
                                         "art": "",
                                         "w": "gelten",
-                                        "e": "\u00e2\u0153\u2026",
+                                        "e": "\u2705",
                                         "tr": "aplicarse"
                               },
                               {
                                         "art": "",
                                         "w": "gilt",
-                                        "e": "\u00f0\u0178\u201c\u0152",
+                                        "e": "\ud83d\udccc",
                                         "tr": "se aplica"
                               },
                               {
                                         "art": "",
                                         "w": "Bundes-",
-                                        "e": "\u00f0\u0178\u008f\u203a\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udfdb\ufe0f",
                                         "tr": "federal"
                               },
                               {
                                         "art": "",
                                         "w": "genannt",
-                                        "e": "\u00f0\u0178\u008f\u00b7\u00ef\u00b8\u008f",
+                                        "e": "\ud83c\udff7\ufe0f",
                                         "tr": "llamado"
                               },
                               {
                                         "art": "der",
                                         "w": "Begriff",
-                                        "e": "\u00f0\u0178\u201c\u02dc",
+                                        "e": "\ud83d\udcd8",
                                         "tr": "concepto"
                               },
                               {
                                         "art": "die",
                                         "w": "Verbreitung",
-                                        "e": "\u00f0\u0178\u201c\u00a3",
-                                        "tr": "difusi\u00c3\u00b3n"
+                                        "e": "\ud83d\udce3",
+                                        "tr": "difusi\u00f3n"
                               },
                               {
                                         "art": "der",
                                         "w": "Nachteil",
-                                        "e": "\u00f0\u0178\u2018\u017d",
+                                        "e": "\ud83d\udc4e",
                                         "tr": "desventaja"
                               }
                     ]

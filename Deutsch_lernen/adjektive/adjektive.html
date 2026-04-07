@@ -352,6 +352,39 @@
             opacity: 1;
         }
 
+        .word-tags {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: 6px;
+        }
+
+        .word-tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(15, 23, 42, 0.24);
+            color: rgba(255, 255, 255, 0.86);
+            vertical-align: middle;
+        }
+
+        .word-tag-lid {
+            background: rgba(15, 118, 110, 0.22);
+            border-color: rgba(20, 184, 166, 0.45);
+            color: #ccfbf1;
+        }
+
+        body.hide-lid-tags .word-tag-lid {
+            display: none;
+        }
+
         .example-clickable {
             cursor: pointer;
             transition: color 0.2s ease;
@@ -893,6 +926,13 @@
                     <label class="switch-label" for="view-toggle">Alt / Kompakt</label>
                     <label class="switch">
                         <input type="checkbox" id="view-toggle" checked onchange="toggleViewMode()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="settings-row" style="margin-top: 16px;">
+                    <label class="switch-label" for="lid-tags-switch">Leben in Deutschland (LiD)</label>
+                    <label class="switch">
+                        <input type="checkbox" id="lid-tags-switch" checked onchange="toggleLiDTags(this.checked)">
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -4279,6 +4319,124 @@
                 ]
             },
             {
+                "title": "Engagement",
+                "description": "Compromiso",
+                "level": "B1",
+                "badge": "DEUTSCHLAND",
+                "colorMain": "#0d9488",
+                "colorDark": "#115e59",
+                "adjectives": [
+                    {
+                        "word": "ehrenamtlich",
+                        "emoji": "🤝",
+                        "spanish": "(voluntario/benéfico/ad honorem)",
+                        "english": "voluntary / honorary",
+                        "example_de": "Sie arbeitet ehrenamtlich im Verein.",
+                        "example_es": "Ella trabaja como voluntaria en la asociación.",
+                        "level": "B1",
+                        "lid": true,
+                        "cases": [
+                            {
+                                "case": "Nominativ",
+                                "level": "A1",
+                                "sentence": "Die ehrenamtliche Arbeit hilft vielen Menschen.",
+                                "trans": "El trabajo voluntario ayuda a muchas personas."
+                            },
+                            {
+                                "case": "Akkusativ",
+                                "level": "A2",
+                                "sentence": "Wir unterstützen eine ehrenamtliche Initiative.",
+                                "trans": "Apoyamos una iniciativa voluntaria."
+                            },
+                            {
+                                "case": "Dativ",
+                                "level": "A2",
+                                "sentence": "Mit ehrenamtlichem Einsatz verändert man viel.",
+                                "trans": "Con esfuerzo voluntario se cambia mucho."
+                            },
+                            {
+                                "case": "Genitiv",
+                                "level": "B1",
+                                "sentence": "Die Wirkung ehrenamtlicher Projekte ist groß.",
+                                "trans": "El efecto de los proyectos voluntarios es grande."
+                            }
+                        ]
+                    },
+                    {
+                        "word": "freiwillig",
+                        "emoji": "🙋",
+                        "spanish": "(voluntario/por voluntad propia)",
+                        "english": "voluntary / willingly",
+                        "example_de": "Er hilft freiwillig.",
+                        "example_es": "Él ayuda voluntariamente.",
+                        "level": "A2-B1",
+                        "lid": true,
+                        "cases": [
+                            {
+                                "case": "Nominativ",
+                                "level": "A1",
+                                "sentence": "Die freiwillige Hilfe kommt zur richtigen Zeit.",
+                                "trans": "La ayuda voluntaria llega en el momento adecuado."
+                            },
+                            {
+                                "case": "Akkusativ",
+                                "level": "A2",
+                                "sentence": "Wir suchen freiwillige Helfer.",
+                                "trans": "Buscamos ayudantes voluntarios."
+                            },
+                            {
+                                "case": "Dativ",
+                                "level": "A2",
+                                "sentence": "Mit freiwilligem Einsatz lernen viele dazu.",
+                                "trans": "Con participación voluntaria muchos aprenden más."
+                            },
+                            {
+                                "case": "Genitiv",
+                                "level": "B1",
+                                "sentence": "Der Wert freiwilliger Arbeit ist hoch.",
+                                "trans": "El valor del trabajo voluntario es alto."
+                            }
+                        ]
+                    },
+                    {
+                        "word": "unbezahlt",
+                        "emoji": "💸",
+                        "spanish": "(no pagado)",
+                        "english": "unpaid",
+                        "example_de": "Das Praktikum ist unbezahlt.",
+                        "example_es": "Las prácticas no son pagadas.",
+                        "level": "B1",
+                        "lid": true,
+                        "cases": [
+                            {
+                                "case": "Nominativ",
+                                "level": "A1",
+                                "sentence": "Die unbezahlte Arbeit kostet viel Zeit.",
+                                "trans": "El trabajo no pagado cuesta mucho tiempo."
+                            },
+                            {
+                                "case": "Akkusativ",
+                                "level": "A2",
+                                "sentence": "Viele machen ein unbezahltes Praktikum.",
+                                "trans": "Muchos hacen unas prácticas no pagadas."
+                            },
+                            {
+                                "case": "Dativ",
+                                "level": "A2",
+                                "sentence": "Mit unbezahlter Hilfe wird das Fest möglich.",
+                                "trans": "Con ayuda no pagada la fiesta es posible."
+                            },
+                            {
+                                "case": "Genitiv",
+                                "level": "B1",
+                                "sentence": "Die Belastung unbezahlter Tätigkeiten ist oft hoch.",
+                                "trans": "La carga de las actividades no pagadas suele ser alta."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "title": "Menge",
                 "description": "Cantidad",
                 "level": "A2-B1",
@@ -4855,6 +5013,7 @@
         const groupIndicator = document.getElementById('group-indicator');
         const viewToggle = document.getElementById('view-toggle');
         const settingsModal = document.getElementById('settingsModal');
+        const lidTagsSwitch = document.getElementById('lid-tags-switch');
 
         let currentLang = 'es';
         let isCompactMode = true; // True = Grid (Kompakt), False = Single (Alt)
@@ -4878,6 +5037,7 @@
             Schwierigkeit: { es: 'Dificultad', en: 'Difficulty' },
             Alltag: { es: 'Vida diaria', en: 'Daily life' },
             Lebensstil: { es: 'Estilo de vida', en: 'Lifestyle' },
+            Engagement: { es: 'Compromiso', en: 'Engagement' },
             Menge: { es: 'Cantidad', en: 'Quantity' },
             Verteilung: { es: 'Distribucion', en: 'Distribution' },
             Vergleich: { es: 'Comparacion', en: 'Comparison' },
@@ -5064,6 +5224,7 @@
             // Determine Translation
             const translation = currentLang === 'es' ? adj.spanish : (adj.english || '-');
             let displayTrans = translation.replace(/[()]/g, '');
+            const tagsMarkup = adj.lid ? `<span class="word-tags"><span class="word-tag word-tag-lid">LiD</span></span>` : '';
 
             // Highlight Logic
             let displayWord = adj.word;
@@ -5077,7 +5238,7 @@
             <tr style="transition: background-color 0.2s;">
                 <td>
                     <div class="german-word" onclick="event.stopPropagation(); speak('${adj.word}')" title="Escuchar">
-                        ${displayWord} <span class="audio-icon">🔊</span>
+                        ${displayWord}${tagsMarkup} <span class="audio-icon">🔊</span>
                     </div>
                 </td>
                 <td class="spanish-word" onclick="openModal('${adj.word}', '${group.badge}')" title="Abrir detalle">
@@ -5338,6 +5499,14 @@
             localStorage.setItem('theme', isLight ? 'light' : 'dark');
         }
 
+        function toggleLiDTags(showTags) {
+            document.body.classList.toggle('hide-lid-tags', !showTags);
+            localStorage.setItem('showLiDTags', showTags ? 'true' : 'false');
+            if (lidTagsSwitch) {
+                lidTagsSwitch.checked = showTags;
+            }
+        }
+
         function openSettingsModal() {
             settingsModal.style.display = 'flex';
         }
@@ -5352,6 +5521,8 @@
             if (savedTheme === 'light') {
                 document.body.classList.add('light-mode');
             }
+            const savedLiDTags = localStorage.getItem('showLiDTags');
+            toggleLiDTags(savedLiDTags !== 'false');
 
             // Check saved view preference? For now default to Kompakt.
             isCompactMode = true;

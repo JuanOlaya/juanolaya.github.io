@@ -1471,6 +1471,174 @@ window.lidKompaktModalData = {
                               }
                     ]
           },
+          "wahlsystem::Mehrheitswahlrecht": {
+                    "ex": "Beim Mehrheitswahlrecht gewinnt, wer die meisten Stimmen bekommt.",
+                    "ex_es": "En el sistema mayoritario gana quien obtiene la mayor cantidad de votos.",
+                    "qa": [
+                              {
+                                        "q": "Wie hei\u00dft ein Wahlsystem, bei dem die Person oder Partei mit den meisten Stimmen gewinnt?",
+                                        "a": "Das Mehrheitswahlrecht.",
+                                        "q_es": "\u00bfC\u00f3mo se llama un sistema electoral en el que gana la persona o el partido con m\u00e1s votos?",
+                                        "a_es": "El sistema mayoritario."
+                              },
+                              {
+                                        "q": "Welches Wahlsystem richtet sich vor allem danach, wer vorne liegt?",
+                                        "a": "Das Mehrheitswahlrecht.",
+                                        "q_es": "\u00bfQu\u00e9 sistema electoral se orienta sobre todo por qui\u00e9n va en cabeza?",
+                                        "a_es": "El sistema mayoritario."
+                              },
+                              {
+                                        "q": "Wie nennt man ein Wahlsystem, in dem nicht die proportionale Verteilung, sondern die Mehrheit entscheidet?",
+                                        "a": "Das Mehrheitswahlrecht.",
+                                        "q_es": "\u00bfC\u00f3mo se llama un sistema electoral en el que no decide la distribuci\u00f3n proporcional, sino la mayor\u00eda?",
+                                        "a_es": "El sistema mayoritario."
+                              }
+                    ]
+          },
+          "wahlsystem::Verh\u00e4ltniswahlrecht": {
+                    "ex": "Beim Verh\u00e4ltniswahlrecht werden Sitze nach dem Stimmenanteil verteilt.",
+                    "ex_es": "En el sistema proporcional los esca\u00f1os se reparten seg\u00fan el porcentaje de votos.",
+                    "qa": [
+                              {
+                                        "q": "Wie hei\u00dft ein Wahlsystem, bei dem die Sitze nach dem Stimmenanteil verteilt werden?",
+                                        "a": "Das Verh\u00e4ltniswahlrecht.",
+                                        "q_es": "\u00bfC\u00f3mo se llama un sistema electoral en el que los esca\u00f1os se reparten seg\u00fan el porcentaje de votos?",
+                                        "a_es": "El sistema proporcional."
+                              },
+                              {
+                                        "q": "Welches Wahlsystem sorgt daf\u00fcr, dass Parteien entsprechend ihrem Stimmenanteil Sitze bekommen?",
+                                        "a": "Das Verh\u00e4ltniswahlrecht.",
+                                        "q_es": "\u00bfQu\u00e9 sistema electoral hace que los partidos reciban esca\u00f1os seg\u00fan su porcentaje de votos?",
+                                        "a_es": "El sistema proporcional."
+                              },
+                              {
+                                        "q": "Wie nennt man das Wahlsystem, das auf Proportionen zwischen Stimmen und Sitzen achtet?",
+                                        "a": "Das Verh\u00e4ltniswahlrecht.",
+                                        "q_es": "\u00bfC\u00f3mo se llama el sistema electoral que atiende a la proporci\u00f3n entre votos y esca\u00f1os?",
+                                        "a_es": "El sistema proporcional."
+                              }
+                    ]
+          },
+          "wahlsystem::5%-H\u00fcrde": {
+                    "ex": "Die 5%-H\u00fcrde legt fest, wie viel eine Partei mindestens erreichen muss.",
+                    "ex_es": "La barrera del 5% fija cu\u00e1nto debe alcanzar como m\u00ednimo un partido.",
+                    "qa": [
+                              {
+                                        "q": "Wie hei\u00dft die Regel, nach der eine Partei mindestens f\u00fcnf Prozent der Stimmen braucht?",
+                                        "a": "Die 5%-H\u00fcrde.",
+                                        "q_es": "\u00bfC\u00f3mo se llama la regla seg\u00fan la cual un partido necesita al menos el cinco por ciento de los votos?",
+                                        "a_es": "La barrera del 5%."
+                              },
+                              {
+                                        "q": "Welche H\u00fcrde muss eine Partei oft \u00fcberschreiten, um in den Bundestag einzuziehen?",
+                                        "a": "Die 5%-H\u00fcrde.",
+                                        "q_es": "\u00bfQu\u00e9 barrera debe superar a menudo un partido para entrar en el Bundestag?",
+                                        "a_es": "La barrera del 5%."
+                              },
+                              {
+                                        "q": "Wie nennt man den Mindestwert von f\u00fcnf Prozent bei Wahlen?",
+                                        "a": "Die 5%-H\u00fcrde.",
+                                        "q_es": "\u00bfC\u00f3mo se llama el valor m\u00ednimo del cinco por ciento en las elecciones?",
+                                        "a_es": "La barrera del 5%."
+                              }
+                    ]
+          },
+          "wahlsystem::Mindestanteil": {
+                    "ex": "Ein Mindestanteil ist ein festgelegter unterer Prozentsatz.",
+                    "ex_es": "Un porcentaje m\u00ednimo es un porcentaje inferior fijado previamente.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man einen vorgeschriebenen unteren Prozentsatz?",
+                                        "a": "Den Mindestanteil.",
+                                        "q_es": "\u00bfC\u00f3mo se llama un porcentaje m\u00ednimo exigido?",
+                                        "a_es": "El porcentaje m\u00ednimo."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einem festgelegten Minimum bei Prozenten?",
+                                        "a": "Der Mindestanteil.",
+                                        "q_es": "\u00bfQu\u00e9 t\u00e9rmino corresponde a un m\u00ednimo fijado en porcentajes?",
+                                        "a_es": "El porcentaje m\u00ednimo."
+                              },
+                              {
+                                        "q": "Wie hei\u00dft der kleinste erforderliche Anteil an Stimmen oder Prozenten?",
+                                        "a": "Der Mindestanteil.",
+                                        "q_es": "\u00bfC\u00f3mo se llama la parte m\u00e1s peque\u00f1a exigida de votos o porcentajes?",
+                                        "a_es": "El porcentaje m\u00ednimo."
+                              }
+                    ]
+          },
+          "wahlsystem::W\u00e4hlerstimmen": {
+                    "ex": "Die W\u00e4hlerstimmen entscheiden \u00fcber das Wahlergebnis.",
+                    "ex_es": "Los votos de los electores deciden el resultado electoral.",
+                    "qa": [
+                              {
+                                        "q": "Was entscheidet \u00fcber das Ergebnis einer Wahl?",
+                                        "a": "Die W\u00e4hlerstimmen.",
+                                        "q_es": "\u00bfQu\u00e9 decide el resultado de una elecci\u00f3n?",
+                                        "a_es": "Los votos de los electores."
+                              },
+                              {
+                                        "q": "Wie nennt man die Stimmen, die von den Wahlberechtigten abgegeben werden?",
+                                        "a": "Die W\u00e4hlerstimmen.",
+                                        "q_es": "\u00bfC\u00f3mo se llaman los votos emitidos por las personas con derecho a voto?",
+                                        "a_es": "Los votos de los electores."
+                              },
+                              {
+                                        "q": "Was z\u00e4hlt man bei einer Wahl aus, um Parteien oder Kandidaten zu vergleichen?",
+                                        "a": "Die W\u00e4hlerstimmen.",
+                                        "q_es": "\u00bfQu\u00e9 se cuenta en una elecci\u00f3n para comparar partidos o candidatos?",
+                                        "a_es": "Los votos de los electores."
+                              }
+                    ]
+          },
+          "wahlsystem::Grundsatz": {
+                    "ex": "Freie und geheime Wahlen sind ein demokratischer Grundsatz.",
+                    "ex_es": "Las elecciones libres y secretas son un principio democr\u00e1tico.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man ein grundlegendes Prinzip einer Ordnung oder eines Gesetzes?",
+                                        "a": "Den Grundsatz.",
+                                        "q_es": "\u00bfC\u00f3mo se llama un principio b\u00e1sico de un orden o de una ley?",
+                                        "a_es": "El principio."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer grundlegenden Regel in Staat und Demokratie?",
+                                        "a": "Der Grundsatz.",
+                                        "q_es": "\u00bfQu\u00e9 t\u00e9rmino corresponde a una regla fundamental en el Estado y la democracia?",
+                                        "a_es": "El principio."
+                              },
+                              {
+                                        "q": "Wie nennt man eine allgemeine Leitregel, zum Beispiel bei Wahlen?",
+                                        "a": "Den Grundsatz.",
+                                        "q_es": "\u00bfC\u00f3mo se llama una regla general orientadora, por ejemplo en las elecciones?",
+                                        "a_es": "El principio."
+                              }
+                    ]
+          },
+          "wahlsystem::Verband": {
+                    "ex": "Ein Verband vertritt gemeinsame Interessen vieler Mitglieder.",
+                    "ex_es": "Una organizaci\u00f3n representa intereses comunes de muchos miembros.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man einen Zusammenschluss, der gemeinsame Interessen vertritt?",
+                                        "a": "Den Verband.",
+                                        "q_es": "\u00bfC\u00f3mo se llama una agrupaci\u00f3n que representa intereses comunes?",
+                                        "a_es": "La organizaci\u00f3n o federaci\u00f3n."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer gr\u00f6\u00dferen Organisation mit gemeinsamen Zielen?",
+                                        "a": "Der Verband.",
+                                        "q_es": "\u00bfQu\u00e9 t\u00e9rmino corresponde a una organizaci\u00f3n m\u00e1s grande con objetivos comunes?",
+                                        "a_es": "La organizaci\u00f3n o federaci\u00f3n."
+                              },
+                              {
+                                        "q": "Wie nennt man eine organisierte Vereinigung von Gruppen oder Mitgliedern?",
+                                        "a": "Den Verband.",
+                                        "q_es": "\u00bfC\u00f3mo se llama una uni\u00f3n organizada de grupos o miembros?",
+                                        "a_es": "La organizaci\u00f3n o federaci\u00f3n."
+                              }
+                    ]
+          },
           "parteien::Partei": {
                     "ex": "Die Partei stellt Kandidaten auf.",
                     "ex_es": "El partido presenta candidatos.",
@@ -3867,20 +4035,20 @@ window.lidKompaktModalData = {
                     "qa": [
                               {
                                         "q": "Was bedeutet es, wenn etwas gegen den Willen eines Menschen geschieht?",
-                                        "a": "Es geschieht gegen das, was die Person selbst m?chte.",
-                                        "q_es": "?Qu? significa que algo ocurra contra la voluntad de una persona?",
+                                        "a": "Es geschieht gegen das, was die Person selbst m\u00f6chte.",
+                                        "q_es": "\u00bfQu\u00e9 significa que algo ocurra contra la voluntad de una persona?",
                                         "a_es": "Que ocurre contra lo que la persona misma quiere."
                               },
                               {
-                                        "q": "Wie nennt man das pers?nliche Wollen oder den inneren Entschluss eines Menschen?",
+                                        "q": "Wie nennt man das pers\u00f6nliche Wollen oder den inneren Entschluss eines Menschen?",
                                         "a": "Den Willen.",
-                                        "q_es": "?C?mo se llama el querer personal o la decisi?n interior de una persona?",
+                                        "q_es": "\u00bfC\u00f3mo se llama el querer personal o la decisi\u00f3n interior de una persona?",
                                         "a_es": "La voluntad."
                               },
                               {
                                         "q": "Darf man Menschen in Deutschland gegen ihren Willen zu etwas zwingen?",
                                         "a": "Nein.",
-                                        "q_es": "?Se puede obligar en Alemania a las personas a hacer algo contra su voluntad?",
+                                        "q_es": "\u00bfSe puede obligar en Alemania a las personas a hacer algo contra su voluntad?",
                                         "a_es": "No."
                               }
                     ]
