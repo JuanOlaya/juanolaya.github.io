@@ -34,9 +34,14 @@
                     <div class="controls-container">
                         <div class="search-container">
                             <input type="text" id="verb-search" class="search-input" placeholder="Suchen... (buscar)">
-                            <button id="clear-search" class="clear-search-btn" title="Clear search">Ã—</button>
+                            <button id="clear-search" class="clear-search-btn" title="Clear search">&times;</button>
                             <button id="settings-btn" class="settings-btn" title="Einstellungen"
-                                style="margin-left: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer; transition: transform 0.2s;">âš™ï¸</button>
+                                style="margin-left: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer; transition: transform 0.2s; display: inline-flex; align-items: center; justify-content: center;">
+                                <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.02a1.65 1.65 0 0 0 .98-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 .99 1.51h.02a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.02a1.65 1.65 0 0 0 1.51.98H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51.99z"></path>
+                                </svg>
+                            </button>
                         </div>
                         <div id="loading-status" class="loading-status" aria-live="polite"></div>
                     </div>
@@ -79,7 +84,7 @@
                         </svg>
                     </button>
                     <div class="group-theme-indicator" id="group-theme-indicator">Being & Existence</div>
-                    <button id="next-group-btn" class="group-nav-arrow" title="NÃ¤chste Gruppe">
+                    <button id="next-group-btn" class="group-nav-arrow" title="Nächste Gruppe">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="9 18 15 12 9 6"></polyline>
@@ -105,8 +110,8 @@
 
             <!-- Gustar button for Sechste Gruppe -->
             <div id="gustar-button-container" class="gustar-button-wrapper" style="display: block;">
-                <button id="gustar-button" class="gustar-btn" title="MÃ¶gen, Gern & Gefallen Info">
-                    <span class="gustar-emoji">â¤ï¸</span>
+                <button id="gustar-button" class="gustar-btn" title="Mögen, Gern &amp; Gefallen Info">
+                    <span class="gustar-emoji">&hearts;</span>
                     <span class="gustar-text">gustar</span>
                 </button>
             </div>
@@ -114,7 +119,7 @@
             <!-- Reflexive Button for Zehnte Gruppe (A2.1) -->
             <div id="reflexive-button-container" class="gustar-button-wrapper" style="display: none;">
                 <button id="reflexive-button" class="gustar-btn" title="Reflexive Verben Info">
-                    <span class="gustar-emoji">ðŸªž</span>
+                    <span class="gustar-emoji">&#8635;</span>
                     <span class="gustar-text">Reflexiv</span>
                 </button>
             </div>
@@ -131,7 +136,7 @@
     <!-- Verb Modal -->
     <div id="verb-modal" class="modal-overlay">
         <div class="modal-content">
-            <button id="close-verb-modal-x" class="modal-close-x" title="SchlieÃŸen (Cerrar)">Ã—</button>
+            <button id="close-verb-modal-x" class="modal-close-x" title="Schließen (Cerrar)">&times;</button>
             <div class="modal-header">
                 <div id="modal-emoji" class="modal-emoji"></div>
                 <h3 id="modal-verb-infinitive" class="modal-word"></h3>
@@ -147,8 +152,8 @@
                 </div>
 
                 <div id="modal-tags-toggle" class="modal-tags-toggle" title="Details anzeigen">
-                    <span class="dots-icon">â€¢â€¢â€¢</span>
-                    <span class="chevron-icon" style="display:none;">â–²</span>
+                    <span class="dots-icon">&bull;&bull;&bull;</span>
+                    <span class="chevron-icon" style="display:none;">&#9650;</span>
                 </div>
             </div>
 
@@ -161,7 +166,7 @@
                 <details id="wortfamilie-container">
                     <summary id="wortfamilie-summary">
                         ðŸ“š Wortfamilie
-                        <span class="details-arrow">â–¶</span>
+                        <span class="details-arrow">&#9654;</span>
                     </summary>
                     <div id="wortfamilie-content" class="details-content">
                         <!-- Word family content inserted here -->
@@ -172,7 +177,7 @@
                 <details id="wortfeld-container" style="display: none;">
                     <summary id="wortfeld-summary">
                         ðŸŽ¨ Wortfeld
-                        <span class="details-arrow">â–¶</span>
+                        <span class="details-arrow">&#9654;</span>
                     </summary>
                     <div id="wortfeld-content" class="details-content">
                         <!-- Word field content inserted here -->
@@ -209,7 +214,7 @@
                 <details id="praesens-examples-container">
                     <summary id="praesens-examples-summary">
                         PrÃ¤sens Beispiele
-                        <span class="details-arrow">â–¶</span>
+                        <span class="details-arrow">&#9654;</span>
                     </summary>
                     <div id="modal-praesens-examples-table" class="details-content">
                         <!-- PrÃ¤sens examples table inserted here -->
