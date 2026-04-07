@@ -945,10 +945,10 @@ window.lidKompaktData = [
                                         "card_tr": "Corte<br>Tribunal"
                               },
                               {
-                                        "art": "die",
-                                        "w": "Rechtsprechung",
-                                        "e": "\u2696\ufe0f",
-                                        "tr": "poder judicial / jurisprudencia",
+                                        "art": "die / -",
+                                        "w": "Rechtsprechung / rechtsprechende(n)",
+                                        "e": "⚖️",
+                                        "tr": "poder judicial / jurisdiccional (que juzga)",
                                         "important": true
                               },
                               {
