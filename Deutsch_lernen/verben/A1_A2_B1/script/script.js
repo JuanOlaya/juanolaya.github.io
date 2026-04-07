@@ -241,7 +241,7 @@
     // Theme data storage
     let currentThemeData = null;
     let appVersion = '1.6_static'; // Stable version; replaced by verbs_index.lastUpdated when available
-    let isMobileLevelMenuExpanded = false;
+    let isLevelMenuExpanded = false;
     const mobileLevelMediaQuery = window.matchMedia('(max-width: 600px)');
     let footerUtilityBar = null;
     let footerSearchShell = null;
@@ -249,6 +249,8 @@
     let footerSearchToggle = null;
     let isFooterSearchExpanded = false;
     let isFooterSearchForcedOpen = false;
+    let levelMenuIdleTimeout = null;
+    let searchIdleTimeout = null;
 
     async function parseJsonUtf8(response) {
         const buffer = await response.arrayBuffer();
@@ -362,6 +364,26 @@
         footerSearchShell = footerSearch;
     }
 
+    function scheduleLevelMenuIdleCollapse() {
+        clearTimeout(levelMenuIdleTimeout);
+        if (!isLevelMenuExpanded || isFooterSearchExpanded) return;
+        levelMenuIdleTimeout = setTimeout(() => {
+            isLevelMenuExpanded = false;
+            syncMobileLevelToggleState();
+        }, 1800);
+    }
+
+    function scheduleSearchIdleCollapse() {
+        clearTimeout(searchIdleTimeout);
+        if (!isFooterSearchExpanded || isFooterSearchForcedOpen) return;
+        if (searchInput && searchInput.value.trim()) return;
+        searchIdleTimeout = setTimeout(() => {
+            if (searchInput && document.activeElement === searchInput) return;
+            if (searchInput && searchInput.value.trim()) return;
+            setFooterSearchExpanded(false);
+        }, 1800);
+    }
+
     function setFooterSearchExpanded(expanded, { forced = false } = {}) {
         if (!footerSearchShell || !footerSearchToggle) return;
         isFooterSearchExpanded = expanded;
@@ -369,11 +391,16 @@
         if (!expanded) {
             isFooterSearchForcedOpen = false;
         } else {
-            isMobileLevelMenuExpanded = false;
+            isLevelMenuExpanded = false;
         }
         footerSearchShell.classList.toggle('footer-search-expanded', expanded);
         footerSearchShell.classList.toggle('footer-search-collapsed', !expanded);
         footerSearchToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        if (expanded) {
+            scheduleSearchIdleCollapse();
+        } else {
+            clearTimeout(searchIdleTimeout);
+        }
         syncMobileLevelToggleState();
     }
 
@@ -383,11 +410,18 @@
         if (!levelToggleFooter) return;
 
         const isMobile = mobileLevelMediaQuery.matches;
-        const isCollapsed = isMobile && (!isMobileLevelMenuExpanded || isFooterSearchExpanded);
+        const isCollapsed = !isLevelMenuExpanded || isFooterSearchExpanded;
         levelToggleFooter.classList.toggle('mobile-collapsed', isCollapsed);
-        levelToggleFooter.classList.toggle('mobile-expanded', isMobile && isMobileLevelMenuExpanded && !isFooterSearchExpanded);
+        levelToggleFooter.classList.toggle('mobile-expanded', !isCollapsed);
+        levelToggleFooter.classList.toggle('selector-collapsed', isCollapsed);
+        levelToggleFooter.classList.toggle('selector-expanded', !isCollapsed);
         levelToggleFooter.classList.toggle('search-collapsed', isFooterSearchExpanded);
         levelToggleContainer?.classList.toggle('mobile-right-docked', isMobile);
+        if (isCollapsed) {
+            clearTimeout(levelMenuIdleTimeout);
+        } else {
+            scheduleLevelMenuIdleCollapse();
+        }
     }
 
     function createLightweightVerbDataSnapshot(source = allVerbsData) {
@@ -1670,7 +1704,8 @@
         await loadGroupData(targetLevel, targetGroup);
         currentLevel = targetLevel;
         currentGroupInLevel = targetGroup;
-        isMobileLevelMenuExpanded = false;
+        isLevelMenuExpanded = false;
+        syncMobileLevelToggleState();
         clearSearchAndRender();
     }
 
@@ -1836,14 +1871,14 @@
                         const targetLevel = button.dataset.level;
                         if (!targetLevel) return;
 
-                        if (mobileLevelMediaQuery.matches && targetLevel === currentLevel) {
-                            isMobileLevelMenuExpanded = !isMobileLevelMenuExpanded;
+                        if (targetLevel === currentLevel) {
+                            isLevelMenuExpanded = !isLevelMenuExpanded;
                             syncMobileLevelToggleState();
                             return;
                         }
-
-                        if (targetLevel === currentLevel) return;
                         await navigateToLevel(targetLevel);
+                        isLevelMenuExpanded = false;
+                        syncMobileLevelToggleState();
                     });
                 });
 
@@ -1860,11 +1895,41 @@
 
                 if (searchInput) {
                     searchInput.addEventListener('focus', () => setFooterSearchExpanded(true));
+                    searchInput.addEventListener('input', () => {
+                        if (!searchInput.value.trim()) {
+                            scheduleSearchIdleCollapse();
+                        } else {
+                            clearTimeout(searchIdleTimeout);
+                        }
+                    });
+                    searchInput.addEventListener('blur', () => {
+                        scheduleSearchIdleCollapse();
+                    });
+                }
+
+                if (levelToggleContainer) {
+                    ['pointermove', 'focusin', 'touchstart'].forEach(eventName => {
+                        levelToggleContainer.addEventListener(eventName, () => {
+                            if (isLevelMenuExpanded && !isFooterSearchExpanded) {
+                                scheduleLevelMenuIdleCollapse();
+                            }
+                        }, { passive: true });
+                    });
+                }
+
+                if (footerSearchShell) {
+                    ['pointermove', 'focusin', 'touchstart'].forEach(eventName => {
+                        footerSearchShell.addEventListener(eventName, () => {
+                            if (isFooterSearchExpanded && !isFooterSearchForcedOpen) {
+                                scheduleSearchIdleCollapse();
+                            }
+                        }, { passive: true });
+                    });
                 }
 
                 document.addEventListener('click', (event) => {
-                    if (mobileLevelMediaQuery.matches && isMobileLevelMenuExpanded && levelToggleContainer && !levelToggleContainer.contains(event.target)) {
-                        isMobileLevelMenuExpanded = false;
+                    if (isLevelMenuExpanded && levelToggleContainer && !levelToggleContainer.contains(event.target)) {
+                        isLevelMenuExpanded = false;
                         syncMobileLevelToggleState();
                     }
                     if (footerSearchShell && isFooterSearchExpanded && !isFooterSearchForcedOpen && !footerSearchShell.contains(event.target) && (!searchInput || !searchInput.value.trim())) {
@@ -1874,7 +1939,7 @@
 
                 mobileLevelMediaQuery.addEventListener('change', () => {
                     if (!mobileLevelMediaQuery.matches) {
-                        isMobileLevelMenuExpanded = false;
+                        isLevelMenuExpanded = false;
                     }
                     syncMobileLevelToggleState();
                 });

@@ -426,12 +426,24 @@ body.compact-view .content-block {
 
 .level-toggle-footer {
     margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: padding 0.28s ease, box-shadow 0.28s ease;
 }
 
-.level-toggle-footer.mobile-collapsed {
+.level-toggle-footer.mobile-collapsed,
+.level-toggle-footer.selector-collapsed {
     width: auto;
+    padding: 3px;
+    gap: 0;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.16);
 }
 
+.level-toggle-footer.selector-collapsed .level-option:not(.active),
 .level-toggle-footer.mobile-collapsed .level-option:not(.active),
 .level-toggle-footer.search-collapsed .level-option:not(.active) {
     display: none;
@@ -447,8 +459,14 @@ body.compact-view .content-block {
     font-size: 0.9rem;
     font-weight: 800;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, opacity 0.28s ease, max-width 0.28s ease, padding 0.28s ease, margin 0.28s ease, transform 0.28s ease;
     min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 96px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .level-option:hover {
@@ -460,6 +478,14 @@ body.compact-view .content-block {
     background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
     color: #6e4e00;
     box-shadow: 0 8px 18px rgba(15, 23, 42, 0.22);
+}
+
+.level-toggle-footer.selector-collapsed .level-option.active,
+.level-toggle-footer.mobile-collapsed .level-option.active {
+    min-width: 80px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    box-shadow: none;
 }
 
 .navigation-wrapper .level-toggle,
@@ -2198,6 +2224,7 @@ input:checked+.slider:before {
 .footer-search-shell {
     display: flex;
     align-items: center;
+    transition: transform 0.28s ease, opacity 0.22s ease;
 }
 
 .footer-search-panel {
@@ -2246,13 +2273,40 @@ input:checked+.slider:before {
     border-radius: 28px;
 }
 
-.footer-search-arrow {
+.footer-search-shell.footer-search-collapsed .footer-search-arrow {
+    display: inline-flex;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.footer-search-shell.footer-search-expanded .footer-search-arrow {
     display: none;
 }
 
 .footer-search-icon {
     font-size: 1.15rem;
     line-height: 1;
+}
+
+.level-toggle-footer.selector-collapsed .level-option:not(.active),
+.level-toggle-footer.search-collapsed .level-option:not(.active) {
+    display: inline-flex !important;
+    max-width: 0;
+    opacity: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    transform: translateX(8px);
+    pointer-events: none;
+}
+
+.level-toggle-footer.selector-expanded .level-option,
+.level-toggle-footer.mobile-expanded .level-option {
+    display: inline-flex !important;
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
 }
 
 .search-input {
@@ -2702,6 +2756,47 @@ details[open]>summary .details-arrow {
 
     .level-toggle-footer.mobile-expanded .level-option.active::before {
         content: '';
+    }
+
+    .level-toggle-footer.selector-collapsed .level-option:not(.active) {
+        display: none;
+    }
+
+    .level-toggle-footer.selector-expanded .level-option {
+        display: block;
+    }
+
+    .level-toggle-footer.selector-collapsed .level-option.active {
+        min-width: 80px;
+        padding-right: 24px;
+        position: relative;
+    }
+
+    .level-toggle-footer.selector-collapsed .level-option.active::before {
+        content: '';
+    }
+
+    .level-toggle-footer.selector-collapsed .level-option.active::after {
+        content: '›';
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-52%);
+        font-size: 1.15rem;
+        font-weight: 900;
+        opacity: 0.8;
+    }
+
+    .level-toggle-footer.selector-expanded .level-option.active::after {
+        content: '';
+    }
+
+    .level-toggle-footer.mobile-collapsed .level-option.active::before {
+        content: '' !important;
+    }
+
+    .level-toggle-footer.selector-collapsed .level-option.active::after {
+        content: "\203A" !important;
     }
 
     .group-navigation {
