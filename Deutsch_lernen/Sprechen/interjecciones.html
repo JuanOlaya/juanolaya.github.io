@@ -232,6 +232,18 @@
             font-size: 0.8rem;
         }
 
+        .card-footer-theme {
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .card-footer-translation {
+            font-size: 0.9rem;
+            font-style: italic;
+            font-weight: 800;
+            text-transform: none;
+        }
+
         .card-level-badge {
             background: rgba(255, 255, 255, 0.18);
             border: 1px solid rgba(255, 255, 255, 0.28);
@@ -735,39 +747,39 @@
 
         <div class="grid-layout">
             <div class="level-card acuerdo-card">
-                <div class="level-header acuerdo"><span>Zustimmung</span><span id="titleAcuerdo" class="card-header-translation">Acuerdo</span></div>
+                <div class="level-header acuerdo"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="headerWordEs" class="card-footer-tag">interjección</span></div>
                 <table>
                     <tbody id="group-acuerdo"></tbody>
                 </table>
-                <div class="card-footer"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="footerWordEs" class="card-footer-tag">interjección</span></div>
+                <div class="card-footer"><span class="card-footer-theme">Zustimmung</span><span id="titleAcuerdo" class="card-footer-translation">Acuerdo</span></div>
             </div>
             <div class="level-card sorpresa-card">
-                <div class="level-header sorpresa"><span>Überraschung</span><span id="titleSorpresa" class="card-header-translation">Sorpresa</span></div>
+                <div class="level-header sorpresa"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="headerWordEs2" class="card-footer-tag">interjección</span></div>
                 <table>
                     <tbody id="group-sorpresa"></tbody>
                 </table>
-                <div class="card-footer"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="footerWordEs2" class="card-footer-tag">interjección</span></div>
+                <div class="card-footer"><span class="card-footer-theme">Überraschung</span><span id="titleSorpresa" class="card-footer-translation">Sorpresa</span></div>
             </div>
             <div class="level-card social-card">
-                <div class="level-header social"><span>Soziales</span><span id="titleSocial" class="card-header-translation">Social</span></div>
+                <div class="level-header social"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="headerWordEs3" class="card-footer-tag">interjección</span></div>
                 <table>
                     <tbody id="group-social"></tbody>
                 </table>
-                <div class="card-footer"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="footerWordEs3" class="card-footer-tag">interjección</span></div>
+                <div class="card-footer"><span class="card-footer-theme">Soziales</span><span id="titleSocial" class="card-footer-translation">Social</span></div>
             </div>
             <div class="level-card reacciones-card">
-                <div class="level-header reacciones"><span>Reaktionen</span><span id="titleReacciones" class="card-header-translation">Reacciones</span></div>
+                <div class="level-header reacciones"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="headerWordEs4" class="card-footer-tag">interjección</span></div>
                 <table>
                     <tbody id="group-reacciones"></tbody>
                 </table>
-                <div class="card-footer"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="footerWordEs4" class="card-footer-tag">interjección</span></div>
+                <div class="card-footer"><span class="card-footer-theme">Reaktionen</span><span id="titleReacciones" class="card-footer-translation">Reacciones</span></div>
             </div>
             <div class="level-card avisos-card">
-                <div class="level-header avisos"><span>Warnungen</span><span id="titleAvisos" class="card-header-translation">Avisos</span></div>
+                <div class="level-header avisos"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="headerWordEs5" class="card-footer-tag">interjección</span></div>
                 <table>
                     <tbody id="group-avisos"></tbody>
                 </table>
-                <div class="card-footer"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="footerWordEs5" class="card-footer-tag">interjección</span></div>
+                <div class="card-footer"><span class="card-footer-theme">Warnungen</span><span id="titleAvisos" class="card-footer-translation">Avisos</span></div>
             </div>
         </div>
 
@@ -975,11 +987,11 @@
             document.getElementById('titleSocial').textContent = langLabels.titleSocial;
             document.getElementById('titleReacciones').textContent = langLabels.titleReacciones;
             document.getElementById('titleAvisos').textContent = langLabels.titleAvisos;
-            document.getElementById('footerWordEs').textContent = langLabels.footerInterjection;
-            document.getElementById('footerWordEs2').textContent = langLabels.footerInterjection;
-            document.getElementById('footerWordEs3').textContent = langLabels.footerInterjection;
-            document.getElementById('footerWordEs4').textContent = langLabels.footerInterjection;
-            document.getElementById('footerWordEs5').textContent = langLabels.footerInterjection;
+            document.getElementById('headerWordEs').textContent = langLabels.footerInterjection;
+            document.getElementById('headerWordEs2').textContent = langLabels.footerInterjection;
+            document.getElementById('headerWordEs3').textContent = langLabels.footerInterjection;
+            document.getElementById('headerWordEs4').textContent = langLabels.footerInterjection;
+            document.getElementById('headerWordEs5').textContent = langLabels.footerInterjection;
             document.getElementById('naDef').textContent = langLabels.naDef;
             document.getElementById('btnSpeakText').textContent = langLabels.btnSpeak;
 
