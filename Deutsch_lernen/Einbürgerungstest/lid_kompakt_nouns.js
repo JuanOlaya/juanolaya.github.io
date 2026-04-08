@@ -1,4 +1,4 @@
-window.lidKompaktData = [
+﻿window.lidKompaktData = [
           {
                     "id": "rechte",
                     "title": "Rechte",
@@ -1385,18 +1385,6 @@ window.lidKompaktData = [
                                         "important": true
                               },
                               {
-                                        "art": "die",
-                                        "w": "Nationalhymne",
-                                        "e": "\ud83c\udfb5",
-                                        "tr": "himno nacional"
-                              },
-                              {
-                                        "art": "das",
-                                        "w": "Wappen",
-                                        "e": "\ud83e\udd85",
-                                        "tr": "escudo"
-                              },
-                              {
                                         "art": "die (pl)",
                                         "w": "Besatzungszonen",
                                         "e": "\ud83d\uddfa\ufe0f",
@@ -1407,6 +1395,20 @@ window.lidKompaktData = [
                                         "w": "Einheit",
                                         "e": "\ud83e\udd1d",
                                         "tr": "unidad"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Wende",
+                                        "e": "\ud83d\udd04",
+                                        "tr": "cambio político",
+                                        "important": true
+                              },
+                              {
+                                        "art": "die (pl)",
+                                        "w": "neuen Bundesländer",
+                                        "e": "\ud83d\uddfa\ufe0f",
+                                        "tr": "nuevos estados federados",
+                                        "important": true
                               }
 
                     ]
@@ -1510,11 +1512,12 @@ window.lidKompaktData = [
                                         "tr": "difusi\u00f3n"
                               },
                               {
-                                        "art": "der",
-                                        "w": "Nachteil",
-                                        "e": "\ud83d\udc4e",
-                                        "tr": "desventaja"
-                              }
+                                        "art": "die",
+                                        "w": "Abk\u00fcrzung",
+                                        "e": "\u2702\ufe0f",
+                                        "tr": "abreviatura"
+                              },
+                              
                     ]
           },
           {
@@ -1741,6 +1744,12 @@ window.lidKompaktData = [
                                         "tr": "monarqu?a"
                               },
                               {
+                                        "art": "der",
+                                        "w": "Nachteil",
+                                        "e": "\ud83d\udc4e",
+                                        "tr": "desventaja"
+                              },
+                              {
                                         "art": "die",
                                         "w": "Mauer",
                                         "e": "\ud83e\uddf1",
@@ -1827,6 +1836,18 @@ window.lidKompaktData = [
                     "icon": "\ud83c\udfdb\ufe0f",
                     "color": "#7c3aed",
                     "items": [
+                              {
+                                        "art": "die",
+                                        "w": "Nationalhymne",
+                                        "e": "\ud83c\udfb5",
+                                        "tr": "himno nacional"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Wappen",
+                                        "e": "\ud83e\udd85",
+                                        "tr": "escudo"
+                              },
                               {
                                         "art": "die",
                                         "w": "Verwaltung",

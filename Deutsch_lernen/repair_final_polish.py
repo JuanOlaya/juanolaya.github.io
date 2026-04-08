@@ -1,11 +1,11 @@
 import os
 
 def final_polish(file_path):
-    # Specific brain emoji mojibake patterns
+    # Precise byte patterns for the brain emoji mojibake
     replacements = {
-        b'\xc3\xb0\xc5\xb8\xc2\xa7\xc2\xa0': b'\xf0\x9f\xa7\xa0', # 🧠 (Brain)
-        b'\xc3\xb0\xc5\xb8\xc2\xa7': b'\xf0\x9f\xa7\xa0', # Variant
-        b'ðŸ§ ': '🧠'.encode('utf-8'), # Direct string replacement if needed
+        # Sequence observed in forensic audit for 🧠: ðŸ§ 
+        b'\xc3\xb0\xc5\xb8\xc2\xa7\xc2\xa0': b'\xf0\x9f\xa7\xa0',
+        b'\xc3\xb0\xc5\xb8\xc2\xa7': b'\xf0\x9f\xa7\xa0',
     }
     
     try:
@@ -41,7 +41,7 @@ if __name__ == "__main__":
         r'c:\Users\juan\Documents\GitHub\juanolaya.github.io\Deutsch_lernen\Einbürgerungstest'
     ]
     fixed = run_polish(targets)
-    print(f"--- REPORTE DE PULIDO FINAL (AUDITOR) ---")
+    print(f"--- REPORTE DE PULIDO FINAL V2 (AUDITOR) ---")
     print(f"Archivos saneados: {len(fixed)}")
     print("-" * 40)
     for f in fixed:
