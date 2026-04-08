@@ -1039,8 +1039,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "gesellschaft",
-                    "title": "Gesellschaft",
-                    "title_es": "Sociedad",
+                    "title": "Gemeinschaft",
+                    "title_es": "Comunidad",
                     "icon": "\ud83c\udfd8\ufe0f",
                     "color": "#059669",
                     "items": [
