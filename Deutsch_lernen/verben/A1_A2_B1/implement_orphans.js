@@ -200,16 +200,16 @@ async function implement() {
         // }
 
         // B. Generate Conjugations (Simplified for speed)
-        const pTags = ['praesens', 'praeteritum_konjugation', 'perfekt_konjugation', 'praesens_fragen'];
+        const pTags = ['conjugations/praesens', 'conjugations/praeteritum', 'examples/perfekt_examples', 'examples/praesens_question_examples'];
         pTags.forEach(tag => {
             const dir = path.join(BASE_PATH, tag);
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         });
 
-        fs.writeFileSync(path.join(BASE_PATH, 'praesens', `${verb}.json`), JSON.stringify({ praesens: generatePraesens(verb, verbData) }, null, 2));
-        fs.writeFileSync(path.join(BASE_PATH, 'praeteritum_konjugation', `${verb}.json`), JSON.stringify({ praeteritum: generatePraeteritum(verb, verbData) }, null, 2));
-        fs.writeFileSync(path.join(BASE_PATH, 'perfekt_konjugation', `${verb}.json`), JSON.stringify({ perfekt_examples: { ich: { de: "Automated" } } }, null, 2)); // placeholder
-        fs.writeFileSync(path.join(BASE_PATH, 'praesens_fragen', `${verb}.json`), JSON.stringify({ praesens_fragen: {} }, null, 2)); // placeholder
+        fs.writeFileSync(path.join(BASE_PATH, 'conjugations/praesens', `${verb}.json`), JSON.stringify({ praesens: generatePraesens(verb, verbData) }, null, 2));
+        fs.writeFileSync(path.join(BASE_PATH, 'conjugations/praeteritum', `${verb}.json`), JSON.stringify({ praeteritum: generatePraeteritum(verb, verbData) }, null, 2));
+        fs.writeFileSync(path.join(BASE_PATH, 'examples/perfekt_examples', `${verb}.json`), JSON.stringify({ perfekt_examples: { ich: { de: "Automated" } } }, null, 2)); // placeholder
+        fs.writeFileSync(path.join(BASE_PATH, 'examples/praesens_question_examples', `${verb}.json`), JSON.stringify({ praesens_fragen: {} }, null, 2)); // placeholder
 
         // C. Update Group File
         const groupFilePath = path.join(GROUPS_PATH, verbData.groupFile);

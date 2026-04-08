@@ -12,10 +12,10 @@ const levelConfig = {
 
 const requiredFolders = [
     'cards',
-    'praesens',
-    'praeteritum_konjugation',
-    'perfekt_konjugation'
-    // 'praesens_fragen' // Optional
+    'conjugations/praesens',
+    'conjugations/praeteritum',
+    'examples/perfekt_examples'
+    // 'examples/praesens_question_examples' // Optional
 ];
 
 async function verify() {

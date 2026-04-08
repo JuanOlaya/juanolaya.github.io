@@ -137,12 +137,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentVerbInModal = '';
     let currentIndexInModal = 0;
     let modalDeferredLoadToken = 0;
+    let modalExampleLoadToken = 0;
     let storyClickCounter = 0;
     let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
     const CACHE_KEY = 'verbAppCache_v42_utf8_normalized';
     const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
     let cachePersistTimeout = null;
     let cachePersistenceDisabled = false;
+    const lazyExampleLoadPromises = new Map();
     const HEAVY_VERB_DATA_KEYS = [
         'praesens',
         'praesens_examples',
@@ -720,7 +722,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const verbsNeedingConjugations = Object.keys(allVerbsData).filter(verbName => {
             const verbData = allVerbsData[verbName] || {};
-            if (!verbData.praesens || !verbData.praeteritum_conjugations || !verbData.praesens_fragen) {
+            if (!verbData.praesens || !verbData.praeteritum_conjugations) {
                 return true;
             }
             return konjunktivVerbs.includes(verbName) && !verbData.konjunktiv_ii;
@@ -872,25 +874,27 @@ document.addEventListener('DOMContentLoaded', () => {
                         : Promise.resolve({});
 
                 const fetchPromises = [
-                    maybeFetchJson('praesens'),
-                    maybeFetchJson('praeteritum_konjugation'),
-                    maybeFetchJson('perfekt_konjugation'),
-                    maybeFetchJson('praesens_fragen')
+                    maybeFetchJson('conjugations/praesens'),
+                    maybeFetchJson('conjugations/praeteritum')
                 ];
 
                 // Add Konjunktiv II data for specific verbs
-                if (konjunktivVerbs.includes(verbName) && fileExistsInIndex('konjunktiv_ii', verbName)) {
+                if (konjunktivVerbs.includes(verbName) && fileExistsInIndex('conjugations/konjunktiv_ii', verbName)) {
                     fetchPromises.push(
-                        fetch(`json/konjunktiv_ii/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
+                        fetch(`json/conjugations/konjunktiv_ii/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
                     );
                 }
 
-                const [praesensData, praeteritumData, perfektData, fragenData, konjunktivData] = await Promise.all(fetchPromises);
+                const [praesensData, praeteritumData, konjunktivData] = await Promise.all(fetchPromises);
 
                 // Rename praeteritum from konjugation data to avoid conflict
                 if (praeteritumData.praeteritum) {
                     praeteritumData.praeteritum_conjugations = praeteritumData.praeteritum;
                     delete praeteritumData.praeteritum;
+                }
+                if (praeteritumData.praeteritum_conjugation) {
+                    praeteritumData.praeteritum_conjugations = praeteritumData.praeteritum_conjugation;
+                    delete praeteritumData.praeteritum_conjugation;
                 }
 
                 // Merge conjugation data into allVerbsData
@@ -898,8 +902,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     ...allVerbsData[verbName],
                     ...praesensData,
                     ...praeteritumData,
-                    ...perfektData,
-                    ...fragenData,
                     ...(konjunktivData || {})
                 };
             } catch (error) {
@@ -918,8 +920,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const query = appVersion ? `?v=${appVersion}` : '';
-        const praesensData = fileExistsInIndex('praesens', verbName)
-            ? await fetch(`json/praesens/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
+        const praesensData = fileExistsInIndex('conjugations/praesens', verbName)
+            ? await fetch(`json/conjugations/praesens/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
             : {};
 
         const safeMerge = (target, source) => {
@@ -954,29 +956,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 : Promise.resolve(fallback);
 
         const [
-            perfektExamples,
-            fragenData,
-            perfektKonjugationData,
-            praeteritumKonjugationData,
             konjunktivData,
             wortfamilieData
         ] = await Promise.all([
-            !existingData.examples ? maybeFetchJson('perfekt', []) : Promise.resolve(existingData.examples),
-            !existingData.praesens_fragen ? maybeFetchJson('praesens_fragen', {}) : Promise.resolve(existingData.praesens_fragen),
-            !existingData.perfekt_examples ? maybeFetchJson('perfekt_konjugation', {}) : Promise.resolve({}),
-            !existingData.praeteritum_conjugations ? maybeFetchJson('praeteritum_konjugation', {}) : Promise.resolve({}),
             konjunktivVerbs.includes(verbName) && !existingData.konjunktiv_ii
-                ? maybeFetchJson('konjunktiv_ii', {})
+                ? maybeFetchJson('conjugations/konjunktiv_ii', {})
                 : Promise.resolve({}),
             existingData._wortfamilieLoaded === true
                 ? Promise.resolve({ wortfamilie: existingData.wortfamilie || [] })
                 : maybeFetchJson('wortfamilie', { wortfamilie: [] })
         ]);
-
-        if (praeteritumKonjugationData.praeteritum) {
-            praeteritumKonjugationData.praeteritum_conjugations = praeteritumKonjugationData.praeteritum;
-            delete praeteritumKonjugationData.praeteritum;
-        }
 
         // PROTECT CORE PROPERTIES: Ensure conjugation data (which might have rogue root "es" keys) 
         // doesn't overwrite the verb's translation and basic info.
@@ -996,13 +985,9 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const mergedData = { ...existingData };
-        safeMerge(mergedData, fragenData);
-        safeMerge(mergedData, perfektKonjugationData);
-        safeMerge(mergedData, praeteritumKonjugationData);
         safeMerge(mergedData, konjunktivData);
 
-        // Specific handling for examples and word family
-        mergedData.examples = Array.isArray(perfektExamples) ? perfektExamples : (mergedData.examples || []);
+        // Specific handling for word family
         mergedData.wortfamilie = Array.isArray(wortfamilieData.wortfamilie) ? wortfamilieData.wortfamilie : (mergedData.wortfamilie || []);
         mergedData._wortfamilieLoaded = true;
         mergedData._deferredLoaded = true;
@@ -1018,6 +1003,167 @@ document.addEventListener('DOMContentLoaded', () => {
 
         scheduleCachePersist();
         return allVerbsData[verbName];
+    }
+
+    function getExampleLoadKey(verbName, tabId) {
+        return `${verbName}::${tabId}`;
+    }
+
+    function normalizeModalTabId(tabId) {
+        return tabId === 'praesens' ? 'infinitiv' : (tabId || 'infinitiv');
+    }
+
+    function tabNeedsLazyExamples(verbName, verbData, tabId) {
+        const normalizedTab = normalizeModalTabId(tabId);
+        if (!verbData) return false;
+
+        if (normalizedTab === 'infinitiv') {
+            return !verbData.praesens_examples || !verbData.praesens_fragen;
+        }
+
+        if (normalizedTab === 'perfekt') {
+            return !verbData.perfekt_examples;
+        }
+
+        if (normalizedTab === 'praeteritum') {
+            return !verbData.praeteritum_conjugations || !verbData.praeteritum_examples;
+        }
+
+        if (normalizedTab === 'konjunktiv') {
+            return konjunktivVerbs.includes(verbName) &&
+                (!verbData.konjunktiv_ii || !verbData.konjunktiv_ii_examples);
+        }
+
+        return false;
+    }
+
+    async function loadVerbExamplesData(verbName, tabId = 'infinitiv') {
+        await loadFileIndex();
+        const normalizedTab = normalizeModalTabId(tabId);
+        const existingData = allVerbsData[verbName] || {};
+
+        if (!tabNeedsLazyExamples(verbName, existingData, normalizedTab)) {
+            return existingData;
+        }
+
+        const requestKey = getExampleLoadKey(verbName, normalizedTab);
+        if (lazyExampleLoadPromises.has(requestKey)) {
+            return lazyExampleLoadPromises.get(requestKey);
+        }
+
+        const query = appVersion ? `?v=${appVersion}` : '';
+        const maybeFetchJson = (folder, fallback = {}) =>
+            fileExistsInIndex(folder, verbName)
+                ? fetch(`json/${folder}/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : fallback).catch(() => fallback)
+                : Promise.resolve(fallback);
+
+        const safeMerge = (target, source) => {
+            if (!source || typeof source !== 'object') return;
+            Object.entries(source).forEach(([key, value]) => {
+                if (['es', 'wir', 'ihr', 'sie'].includes(key) && typeof value === 'object') {
+                    return;
+                }
+                if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') {
+                    return;
+                }
+                target[key] = value;
+            });
+        };
+
+        const loadPromise = (async () => {
+            let exampleData = {};
+            let conjugationData = {};
+
+            if (normalizedTab === 'infinitiv') {
+                const [praesensExamplesData, praesensQuestionData] = await Promise.all([
+                    !existingData.praesens_examples
+                        ? maybeFetchJson('examples/praesens_examples', {})
+                        : Promise.resolve({}),
+                    !existingData.praesens_fragen
+                        ? maybeFetchJson('examples/praesens_question_examples', {})
+                        : Promise.resolve({})
+                ]);
+
+                exampleData = {
+                    ...praesensExamplesData,
+                    ...praesensQuestionData
+                };
+            } else if (normalizedTab === 'perfekt') {
+                exampleData = !existingData.perfekt_examples
+                    ? await maybeFetchJson('examples/perfekt_examples', {})
+                    : {};
+            } else if (normalizedTab === 'praeteritum') {
+                const [praeteritumExamplesData, praeteritumConjugationData] = await Promise.all([
+                    !existingData.praeteritum_examples
+                        ? maybeFetchJson('examples/praeteritum_examples', {})
+                        : Promise.resolve({}),
+                    !existingData.praeteritum_conjugations
+                        ? maybeFetchJson('conjugations/praeteritum', {})
+                        : Promise.resolve({})
+                ]);
+
+                exampleData = praeteritumExamplesData;
+                conjugationData = praeteritumConjugationData;
+
+                if (conjugationData.praeteritum) {
+                    conjugationData.praeteritum_conjugations = conjugationData.praeteritum;
+                    delete conjugationData.praeteritum;
+                }
+                if (conjugationData.praeteritum_conjugation) {
+                    conjugationData.praeteritum_conjugations = conjugationData.praeteritum_conjugation;
+                    delete conjugationData.praeteritum_conjugation;
+                }
+            } else if (normalizedTab === 'konjunktiv') {
+                const [konjunktivExamplesData, konjunktivConjugationData] = await Promise.all([
+                    !existingData.konjunktiv_ii_examples
+                        ? maybeFetchJson('examples/konjunktiv_ii_examples', {})
+                        : Promise.resolve({}),
+                    (konjunktivVerbs.includes(verbName) && !existingData.konjunktiv_ii)
+                        ? maybeFetchJson('conjugations/konjunktiv_ii', {})
+                        : Promise.resolve({})
+                ]);
+
+                exampleData = konjunktivExamplesData;
+                conjugationData = konjunktivConjugationData;
+            }
+
+            const mergedData = { ...(allVerbsData[verbName] || {}) };
+            safeMerge(mergedData, conjugationData);
+            safeMerge(mergedData, exampleData);
+            allVerbsData[verbName] = mergedData;
+            scheduleCachePersist();
+            return mergedData;
+        })();
+
+        lazyExampleLoadPromises.set(requestKey, loadPromise);
+        try {
+            return await loadPromise;
+        } finally {
+            lazyExampleLoadPromises.delete(requestKey);
+        }
+    }
+
+    function maybeLoadExamplesForActiveTab(verbName, tabId) {
+        const normalizedTab = normalizeModalTabId(tabId);
+        const verbData = allVerbsData[verbName] || {};
+        if (!tabNeedsLazyExamples(verbName, verbData, normalizedTab)) {
+            return;
+        }
+
+        const token = ++modalExampleLoadToken;
+        loadVerbExamplesData(verbName, normalizedTab)
+            .then(() => {
+                if (modalExampleLoadToken !== token || currentVerbInModal !== verbName) return;
+                const activeTabNow = document.querySelector('.modal-tab-btn.active')?.dataset.tab || normalizedTab;
+                window.openModalForVerb(verbName, {
+                    skipDeferredReload: true,
+                    skipExampleReload: true,
+                    preferredTab: activeTabNow
+                });
+            })
+            .catch(error => {
+                console.error(`Failed to load lazy examples for ${verbName} (${normalizedTab}):`, error);
+            });
     }
 
     function restoreModalActiveTab(tabId) {
@@ -2390,6 +2536,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         c.style.display = 'none';
                     }
                 });
+
+                if (currentVerbInModal) {
+                    maybeLoadExamplesForActiveTab(currentVerbInModal, tabId);
+                }
             });
         });
 
@@ -2536,7 +2686,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- UPDATED MODAL FUNCTION WITH LAZY LOADING ---
     window.openModalForVerb = async function (verb, options = {}) {
-        const { skipDeferredReload = false, preferredTab = null } = options;
+        const { skipDeferredReload = false, skipExampleReload = false, preferredTab = null } = options;
         const data = allVerbsData[verb];
         if (!data) return;
         currentVerbInModal = verb;
@@ -2554,10 +2704,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Get the updated data reference
         const updatedData = allVerbsData[verb];
         const needsDeferredModalData =
-            !updatedData.examples ||
-            !updatedData.praesens_fragen ||
-            !updatedData.perfekt_examples ||
-            !updatedData.praeteritum_conjugations ||
             !Array.isArray(updatedData.wortfamilie) ||
             (konjunktivVerbs.includes(verb) && !updatedData.konjunktiv_ii);
 
@@ -3397,13 +3543,21 @@ document.addEventListener('DOMContentLoaded', () => {
         verbModal.classList.add('visible');
         restoreModalActiveTab(activeTabBeforeRefresh);
 
+        if (!skipExampleReload) {
+            const activeTabNow = document.querySelector('.modal-tab-btn.active')?.dataset.tab || activeTabBeforeRefresh;
+            maybeLoadExamplesForActiveTab(verb, activeTabNow);
+        }
+
         if (!skipDeferredReload && needsDeferredModalData) {
             const token = ++modalDeferredLoadToken;
             loadVerbModalDeferredData(verb)
                 .then(() => {
                     if (modalDeferredLoadToken !== token || currentVerbInModal !== verb) return;
                     const activeTabNow = document.querySelector('.modal-tab-btn.active')?.dataset.tab || activeTabBeforeRefresh;
-                    window.openModalForVerb(verb, { skipDeferredReload: true, preferredTab: activeTabNow });
+                    window.openModalForVerb(verb, {
+                        skipDeferredReload: true,
+                        preferredTab: activeTabNow
+                    });
                 })
                 .catch(error => {
                     console.error(`Failed to load deferred modal data for ${verb}:`, error);
