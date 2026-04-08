@@ -710,6 +710,13 @@ window.lidKompaktData = [
                                         "e": "\ud83d\udcb6",
                                         "tr": "moneda",
                                         "important": true
+                              },
+                              {
+                                        "art": "die (pl)",
+                                        "w": "Vereinten Nationen",
+                                        "e": "\ud83c\udf10",
+                                        "tr": "Naciones Unidas",
+                                        "important": true
                               }
                     ]
           },

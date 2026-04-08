@@ -3626,6 +3626,24 @@ window.lidKompaktModalData = {
                               }
                     ]
           },
+          "eu::Vereinten Nationen": {
+                    "ex": "Die Vereinten Nationen setzen sich für Frieden und Zusammenarbeit ein.",
+                    "ex_es": "Las Naciones Unidas trabajan por la paz y la cooperación.",
+                    "qa": [
+                              {
+                                        "q": "Wie heißt die internationale Organisation, die sich weltweit für Frieden einsetzt?",
+                                        "a": "Die Vereinten Nationen.",
+                                        "q_es": "¿Cómo se llama la organización internacional que trabaja por la paz en todo el mundo?",
+                                        "a_es": "Las Naciones Unidas."
+                              },
+                              {
+                                        "q": "Wie nennt man auf Deutsch die United Nations?",
+                                        "a": "Die Vereinten Nationen.",
+                                        "q_es": "¿Cómo se llama en alemán la United Nations?",
+                                        "a_es": "Las Naciones Unidas."
+                              }
+                    ]
+          },
           "deutsche-geschichte::DDR": {
                     "ex": "Die DDR lag im Osten Deutschlands.",
                     "ex_es": "La RDA estaba en el este de Alemania.",
