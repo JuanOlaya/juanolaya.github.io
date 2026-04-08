@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
             { key: 'A2_1', count: 13 },
             { key: 'A2_2', count: 14 }
         ],
-        'B1': [{ key: 'B1_1', count: 24 }],
-        'B2': [{ key: 'B2_1', count: 13 }]
+        'B1': [{ key: 'B1_1', count: 25, fileNumbers: [1, 25, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] }],
+        'B2': [{ key: 'B2_1', count: 14 }]
     };
     const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#3b82f6', '#ea580c', '#22C55E', '#a855f7', '#facc15'];
 
