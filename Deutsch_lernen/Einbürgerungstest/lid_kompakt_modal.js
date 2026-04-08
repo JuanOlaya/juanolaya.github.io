@@ -1997,6 +1997,24 @@ window.lidKompaktModalData = {
                               }
                     ]
           },
+          "foederalismus::aufgeteilt": {
+                    "ex": "Deutschland ist in 16 Bundesländer aufgeteilt.",
+                    "ex_es": "Alemania está dividida en 16 estados federados.",
+                    "qa": [
+                              {
+                                        "q": "Wie ist Deutschland föderal organisiert?",
+                                        "a": "In 16 Bundesländer aufgeteilt.",
+                                        "q_es": "¿Cómo está organizada Alemania en el sistema federal?",
+                                        "a_es": "Dividida en 16 estados federados."
+                              },
+                              {
+                                        "q": "Wie ist Deutschland zwischen Bund und Ländern organisiert?",
+                                        "a": "Föderal aufgeteilt.",
+                                        "q_es": "¿Cómo está organizada Alemania entre la federación y los estados federados?",
+                                        "a_es": "Dividida de forma federal."
+                              }
+                    ]
+          },
           "eu::Euro": {
                     "ex": "Der Euro ist die gemeinsame W\ufffdhrung in vielen EU-L\ufffdndern.",
                     "ex_es": "El euro es la moneda com\ufffdn en muchos pa\ufffdses de la UE.",
@@ -3821,6 +3839,31 @@ window.lidKompaktModalData = {
                                         "a": "Das Wirtschaftswunder.",
                                         "q_es": "\ufffdC\ufffdmo se llama el auge econ\ufffdmico de Alemania Occidental en la posguerra?",
                                         "a_es": "El milagro econ\ufffdmico."
+                              }
+                    ]
+          },
+          "wiedervereinigung::Besatzungszonen": {
+                    "ex": "Nach dem Zweiten Weltkrieg wurde Deutschland in vier Besatzungszonen geteilt.",
+                    "ex_es": "Después de la Segunda Guerra Mundial, Alemania fue dividida en cuatro zonas de ocupación.",
+                    "note": "Pluralwort: Besatzungszonen. Singular: die Besatzungszone.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man die vier Bereiche, in die Deutschland nach 1945 aufgeteilt wurde?",
+                                        "a": "Die Besatzungszonen.",
+                                        "q_es": "¿Cómo se llaman las cuatro áreas en las que se dividió Alemania después de 1945?",
+                                        "a_es": "Las zonas de ocupación."
+                              },
+                              {
+                                        "q": "Was entstand in Deutschland nach dem Zweiten Weltkrieg unter der Kontrolle der Siegermächte?",
+                                        "a": "Die Besatzungszonen.",
+                                        "q_es": "¿Qué surgió en Alemania después de la Segunda Guerra Mundial bajo el control de las potencias vencedoras?",
+                                        "a_es": "Las zonas de ocupación."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zur Teilung Deutschlands in amerikanische, britische, französische und sowjetische Bereiche?",
+                                        "a": "Die Besatzungszonen.",
+                                        "q_es": "¿Qué término corresponde a la división de Alemania en zonas estadounidense, británica, francesa y soviética?",
+                                        "a_es": "Las zonas de ocupación."
                               }
                     ]
           },

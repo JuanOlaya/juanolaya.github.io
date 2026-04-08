@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'A1': { groupCount: 27, displayName: 'A1' },
         'A2': { groupCount: 27, displayName: 'A2' },
         'B1': { groupCount: 25, displayName: 'B1' },
-        'B2': { groupCount: 13, displayName: 'B2' }
+        'B2': { groupCount: 14, displayName: 'B2' }
     };
     const levelOrder = ['A1', 'A2', 'B1', 'B2'];
 
