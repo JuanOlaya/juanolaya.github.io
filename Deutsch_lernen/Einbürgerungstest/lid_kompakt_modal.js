@@ -1997,7 +1997,7 @@ window.lidKompaktModalData = {
                               }
                     ]
           },
-          "foederalismus::aufgeteilt": {
+          "staatsstruktur::aufgeteilt": {
                     "ex": "Deutschland ist in 16 Bundesländer aufgeteilt.",
                     "ex_es": "Alemania está dividida en 16 estados federados.",
                     "qa": [
@@ -3878,7 +3878,7 @@ window.lidKompaktModalData = {
                               }
                     ]
           },
-          "wiedervereinigung::Wirtschaftswunder": {
+          "wirtschaft-extra::Wirtschaftswunder": {
                     "ex": "Das Wirtschaftswunder brachte Wachstum.",
                     "ex_es": "El milagro econ\ufffdmico trajo crecimiento.",
                     "qa": [
@@ -4974,7 +4974,7 @@ window.lidKompaktModalData = {
                               }
                     ]
           },
-          "weitere-begriffe::Einheit": {
+          "wiedervereinigung::Einheit": {
                     "ex": "Der 3. Oktober ist der Tag der Deutschen Einheit.",
                     "ex_es": "El 3 de octubre es el D?a de la Unidad Alemana.",
                     "note": "Plural: Einheiten.",
