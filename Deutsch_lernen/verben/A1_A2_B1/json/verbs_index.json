@@ -1,8 +1,8 @@
 {
   "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word, with the STRICT EXCEPTION of the group 'Leben in Deutschland'. MAINTENANCE RULE: whenever this file changes, update lastUpdated.",
-  "lastUpdated": "2026-04-08T10:54:42Z",
-  "totalGroups": 94,
-  "totalVerbs": 534,
+  "lastUpdated": "2026-04-08T13:36:00Z",
+  "totalGroups": 95,
+  "totalVerbs": 538,
   "groups": [
     {
       "level": "A1.2",
@@ -1477,6 +1477,20 @@
       "groupNameSpanish": "V?a legal",
       "groupNameEnglish": "Legal recourse",
       "groupNumberPerLevel": 25
+    },
+    {
+      "level": "B2.1",
+      "verbCount": 4,
+      "verbs": [
+        "summieren",
+        "subtrahieren",
+        "multiplizieren",
+        "dividieren"
+      ],
+      "groupNameGerman": "Math",
+      "groupNameSpanish": "Matem?ticas",
+      "groupNameEnglish": "Math",
+      "groupNumberPerLevel": 14
     }
   ]
 }

@@ -674,6 +674,12 @@ window.lidKompaktData = [
                                         "e": "\ud83c\udff0",
                                         "tr": "primera ministra / primer ministro",
                                         "important": true
+                              },
+                              {
+                                        "art": "",
+                                        "w": "aufgeteilt",
+                                        "e": "\ud83e\udde9",
+                                        "tr": "dividido"
                               }
                     ]
           },
@@ -1356,6 +1362,12 @@ window.lidKompaktData = [
                                         "w": "Wirtschaftswunder",
                                         "e": "\ud83d\udcc8",
                                         "tr": "milagro econ\u00f3mico"
+                              },
+                              {
+                                        "art": "die (pl)",
+                                        "w": "Besatzungszonen",
+                                        "e": "\ud83d\uddfa\ufe0f",
+                                        "tr": "zonas de ocupación"
                               }
                     ]
           },
