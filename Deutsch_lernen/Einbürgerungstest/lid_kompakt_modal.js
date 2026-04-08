@@ -262,7 +262,8 @@ window.lidKompaktModalData = {
                                         "q_es": "\ufffdQu\ufffd forma de protesta pac\ufffdfica est\ufffd protegida por derechos fundamentales en Alemania?",
                                         "a_es": "La manifestaci\ufffdn."
                               }
-                    ]
+                    ],
+                    "note": "Plural: Demonstrationen."
           },
           "freiheiten::Freiz\ufffdgigkeit": {
                     "ex": "Die Freiz\ufffdgigkeit erlaubt den Wohnort frei zu w\ufffdhlen.",
@@ -487,18 +488,18 @@ window.lidKompaktModalData = {
           },
           "diskriminierung::ungerechtfertigt": {
                     "ex": "Eine ungerechtfertigte Benachteiligung ist verboten.",
-                    "ex_es": "Una desventaja injustificada está prohibida.",
+                    "ex_es": "Una desventaja injustificada est\u00e1 prohibida.",
                     "qa": [
                               {
                                         "q": "Wie nennt man etwas, das keinen sachlichen Grund hat?",
                                         "a": "Ungerechtfertigt.",
-                                        "q_es": "¿Cómo se llama algo que no tiene una razón objetiva?",
+                                        "q_es": "\u00bfC\u00f3mo se llama algo que no tiene una raz\u00f3n objetiva?",
                                         "a_es": "Injustificado."
                               },
                               {
                                         "q": "Wie ist eine Benachteiligung ohne guten Grund?",
                                         "a": "Ungerechtfertigt.",
-                                        "q_es": "¿Cómo es una desventaja sin una buena razón?",
+                                        "q_es": "\u00bfC\u00f3mo es una desventaja sin una buena raz\u00f3n?",
                                         "a_es": "Injustificada."
                               }
                     ]
@@ -741,7 +742,8 @@ window.lidKompaktModalData = {
                                         "q_es": "\ufffdQui\ufffdn no puede actuar contra las leyes en un Estado de derecho?",
                                         "a_es": "Tampoco el Estado."
                               }
-                    ]
+                    ],
+                    "note": "Plural: Staaten."
           },
           "staatsprinzipien::Rechtsstaat": {
                     "ex": "Deutschland ist ein demokratischer Rechtsstaat.",
@@ -1703,7 +1705,8 @@ window.lidKompaktModalData = {
                                         "q_es": "\ufffdQui\ufffdn presenta candidatas y candidatos para las elecciones?",
                                         "a_es": "El partido."
                               }
-                    ]
+                    ],
+                    "note": "Plural: Parteien."
           },
           "parteien::Koalition": {
                     "ex": "Mehrere Parteien bilden eine Koalition.",
@@ -1919,7 +1922,8 @@ window.lidKompaktModalData = {
                                         "q_es": "\ufffdEs Baviera un Estado, un estado federado o un municipio?",
                                         "a_es": "Un estado federado."
                               }
-                    ]
+                    ],
+                    "note": "Plural: Bundesl?nder."
           },
           "foederalismus::L\ufffdnder": {
                     "ex": "Die L\ufffdnder haben eigene Aufgaben und Regierungen.",
@@ -2616,7 +2620,8 @@ window.lidKompaktModalData = {
                                         "q_es": "\ufffdA qu\ufffd deben atenerse todos en Alemania?",
                                         "a_es": "A las leyes."
                               }
-                    ]
+                    ],
+                    "note": "Plural: Gesetze."
           },
           "recht-grundlagen::Gesetzgebung": {
                     "ex": "Die Gesetzgebung liegt beim Parlament.",
@@ -3080,21 +3085,21 @@ window.lidKompaktModalData = {
                     "ex_es": "Los sindicatos representan los intereses de las trabajadoras y los trabajadores.",
                     "qa": [
                               {
-                                        "q": "Welche Organisationen vertreten in Deutschland die Interessen von Beschäftigten?",
+                                        "q": "Welche Organisationen vertreten in Deutschland die Interessen von Besch\u00e4ftigten?",
                                         "a": "Die Gewerkschaften.",
-                                        "q_es": "¿Qué organizaciones representan en Alemania los intereses de las personas trabajadoras?",
+                                        "q_es": "\u00bfQu\u00e9 organizaciones representan en Alemania los intereses de las personas trabajadoras?",
                                         "a_es": "Los sindicatos."
                               },
                               {
-                                        "q": "Wie heißen Zusammenschlüsse von Arbeitnehmern zur Vertretung ihrer Rechte?",
+                                        "q": "Wie hei\u00dfen Zusammenschl\u00fcsse von Arbeitnehmern zur Vertretung ihrer Rechte?",
                                         "a": "Gewerkschaften.",
-                                        "q_es": "¿Cómo se llaman las asociaciones de trabajadores para defender sus derechos?",
+                                        "q_es": "\u00bfC\u00f3mo se llaman las asociaciones de trabajadores para defender sus derechos?",
                                         "a_es": "Sindicatos."
                               },
                               {
-                                        "q": "Wer setzt sich oft für bessere Arbeitsbedingungen und Löhne ein?",
+                                        "q": "Wer setzt sich oft f\u00fcr bessere Arbeitsbedingungen und L\u00f6hne ein?",
                                         "a": "Die Gewerkschaften.",
-                                        "q_es": "¿Quién defiende a menudo mejores condiciones laborales y salarios?",
+                                        "q_es": "\u00bfQui\u00e9n defiende a menudo mejores condiciones laborales y salarios?",
                                         "a_es": "Los sindicatos."
                               }
                     ]
@@ -4116,6 +4121,803 @@ window.lidKompaktModalData = {
                                         "a": "Nein.",
                                         "q_es": "\u00bfSe puede obligar en Alemania a las personas a hacer algo contra su voluntad?",
                                         "a_es": "No."
+                              }
+                    ]
+          },
+          "landespolitik::Landtag": {
+                    "ex": "Der Landtag ist das Parlament eines Bundeslandes.",
+                    "ex_es": "El Landtag es el parlamento de un estado federado.",
+                    "note": "Plural: Landtage.",
+                    "qa": [
+                              {
+                                        "q": "Wie hei?t das Parlament eines Bundeslandes?",
+                                        "a": "Der Landtag.",
+                                        "q_es": "?C?mo se llama el parlamento de un estado federado?",
+                                        "a_es": "El Landtag."
+                              },
+                              {
+                                        "q": "Wo sitzen die Abgeordneten eines Bundeslandes?",
+                                        "a": "Im Landtag.",
+                                        "q_es": "?D?nde se sientan los diputados de un estado federado?",
+                                        "a_es": "En el Landtag."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zum Landesparlament eines Bundeslandes?",
+                                        "a": "Der Landtag.",
+                                        "q_es": "?Qu? t?rmino corresponde al parlamento regional de un estado federado?",
+                                        "a_es": "El Landtag."
+                              }
+                    ]
+          },
+          "landespolitik::Landesflagge": {
+                    "ex": "Jedes Bundesland hat eine eigene Landesflagge.",
+                    "ex_es": "Cada estado federado tiene su propia bandera regional.",
+                    "note": "Plural: Landesflaggen.",
+                    "qa": [
+                              {
+                                        "q": "Wie hei?t die Flagge eines Bundeslandes?",
+                                        "a": "Die Landesflagge.",
+                                        "q_es": "?C?mo se llama la bandera de un estado federado?",
+                                        "a_es": "La bandera regional."
+                              },
+                              {
+                                        "q": "Was hat jedes Bundesland als eigenes Symbol aus Stoff?",
+                                        "a": "Eine Landesflagge.",
+                                        "q_es": "?Qu? tiene cada estado federado como s?mbolo propio de tela?",
+                                        "a_es": "Una bandera regional."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zur Flagge eines Landes innerhalb Deutschlands?",
+                                        "a": "Die Landesflagge.",
+                                        "q_es": "?Qu? t?rmino corresponde a la bandera de un estado dentro de Alemania?",
+                                        "a_es": "La bandera regional."
+                              }
+                    ]
+          },
+          "landespolitik::Landeshauptstadt": {
+                    "ex": "M?nchen ist die Landeshauptstadt von Bayern.",
+                    "ex_es": "M?nich es la capital del estado federado de Baviera.",
+                    "note": "Plural: Landeshauptst?dte.",
+                    "qa": [
+                              {
+                                        "q": "Wie hei?t die Hauptstadt eines Bundeslandes?",
+                                        "a": "Die Landeshauptstadt.",
+                                        "q_es": "?C?mo se llama la capital de un estado federado?",
+                                        "a_es": "La capital regional."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zur Hauptstadt von Bayern, Hessen oder Sachsen?",
+                                        "a": "Die Landeshauptstadt.",
+                                        "q_es": "?Qu? t?rmino corresponde a la capital de Baviera, Hesse o Sajonia?",
+                                        "a_es": "La capital regional."
+                              },
+                              {
+                                        "q": "Wie nennt man die Hauptstadt auf Ebene eines Bundeslandes?",
+                                        "a": "Die Landeshauptstadt.",
+                                        "q_es": "?C?mo se llama la capital a nivel de un estado federado?",
+                                        "a_es": "La capital regional."
+                              }
+                    ]
+          },
+          "landespolitik::Landkreis": {
+                    "ex": "Ein Landkreis umfasst mehrere St?dte und Gemeinden.",
+                    "ex_es": "Un distrito administrativo abarca varias ciudades y municipios.",
+                    "note": "Plural: Landkreise.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man einen Verwaltungsbezirk mit mehreren Gemeinden?",
+                                        "a": "Den Landkreis.",
+                                        "q_es": "?C?mo se llama una circunscripci?n administrativa con varios municipios?",
+                                        "a_es": "El distrito administrativo."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer Verwaltungseinheit zwischen Gemeinde und Bundesland?",
+                                        "a": "Der Landkreis.",
+                                        "q_es": "?Qu? t?rmino corresponde a una unidad administrativa entre el municipio y el estado federado?",
+                                        "a_es": "El distrito administrativo."
+                              },
+                              {
+                                        "q": "Wie hei?t ein Kreis auf dem Land mit eigener Verwaltung?",
+                                        "a": "Der Landkreis.",
+                                        "q_es": "?C?mo se llama un distrito rural con administraci?n propia?",
+                                        "a_es": "El distrito administrativo."
+                              }
+                    ]
+          },
+          "landespolitik::Kommunalwahlen": {
+                    "ex": "Bei Kommunalwahlen w?hlt man Vertretungen vor Ort.",
+                    "ex_es": "En las elecciones municipales se eligen representantes locales.",
+                    "note": "Singular im Gebrauch selten; ?blich ist die Pluralform Kommunalwahlen.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man Wahlen auf Gemeinde- oder Stadtebene?",
+                                        "a": "Die Kommunalwahlen.",
+                                        "q_es": "?C?mo se llaman las elecciones a nivel municipal o local?",
+                                        "a_es": "Las elecciones municipales."
+                              },
+                              {
+                                        "q": "Welche Wahlen betreffen B?rgermeister, Gemeinderat oder Stadtrat?",
+                                        "a": "Die Kommunalwahlen.",
+                                        "q_es": "?Qu? elecciones afectan al alcalde o al consejo municipal?",
+                                        "a_es": "Las elecciones municipales."
+                              },
+                              {
+                                        "q": "Wie hei?en Wahlen, die direkt die lokale Politik betreffen?",
+                                        "a": "Die Kommunalwahlen.",
+                                        "q_es": "?C?mo se llaman las elecciones que afectan directamente a la pol?tica local?",
+                                        "a_es": "Las elecciones municipales."
+                              }
+                    ]
+          },
+          "landespolitik::Freistaat": {
+                    "ex": "Bayern bezeichnet sich als Freistaat.",
+                    "ex_es": "Baviera se denomina estado libre.",
+                    "note": "Plural: Freistaaten.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt sich Bayern offiziell?",
+                                        "a": "Freistaat Bayern.",
+                                        "q_es": "?C?mo se denomina oficialmente Baviera?",
+                                        "a_es": "Estado Libre de Baviera."
+                              },
+                              {
+                                        "q": "Welcher Begriff steht in Deutschland bei manchen L?ndern im offiziellen Namen?",
+                                        "a": "Der Freistaat.",
+                                        "q_es": "?Qu? t?rmino aparece en Alemania en el nombre oficial de algunos estados federados?",
+                                        "a_es": "El estado libre."
+                              },
+                              {
+                                        "q": "Wie hei?t ein Land wie Bayern oder Sachsen in seiner amtlichen Bezeichnung?",
+                                        "a": "Freistaat.",
+                                        "q_es": "?C?mo se llama un estado como Baviera o Sajonia en su denominaci?n oficial?",
+                                        "a_es": "Estado libre."
+                              }
+                    ]
+          },
+          "landespolitik::Landesparlament": {
+                    "ex": "Das Landesparlament beschlie?t Gesetze auf Landesebene.",
+                    "ex_es": "El parlamento regional aprueba leyes a nivel del estado federado.",
+                    "note": "Plural: Landesparlamente. Verwandtes Wort: Landtag.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man das Parlament eines Bundeslandes allgemein?",
+                                        "a": "Das Landesparlament.",
+                                        "q_es": "?C?mo se llama en general el parlamento de un estado federado?",
+                                        "a_es": "El parlamento regional."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einem Parlament auf Landesebene?",
+                                        "a": "Das Landesparlament.",
+                                        "q_es": "?Qu? t?rmino corresponde a un parlamento a nivel regional?",
+                                        "a_es": "El parlamento regional."
+                              },
+                              {
+                                        "q": "Wo werden politische Entscheidungen eines Bundeslandes getroffen?",
+                                        "a": "Im Landesparlament.",
+                                        "q_es": "?D?nde se toman las decisiones pol?ticas de un estado federado?",
+                                        "a_es": "En el parlamento regional."
+                              }
+                    ]
+          },
+          "verwaltung-soziales::Verbraucherzentrale": {
+                    "ex": "Die Verbraucherzentrale informiert Verbraucherinnen und Verbraucher.",
+                    "ex_es": "La oficina de defensa del consumidor informa a las consumidoras y los consumidores.",
+                    "note": "Plural: Verbraucherzentralen.",
+                    "qa": [
+                              {
+                                        "q": "Welche Stelle ber?t in Deutschland Verbraucherinnen und Verbraucher?",
+                                        "a": "Die Verbraucherzentrale.",
+                                        "q_es": "?Qu? organismo asesora en Alemania a las consumidoras y los consumidores?",
+                                        "a_es": "La oficina de defensa del consumidor."
+                              },
+                              {
+                                        "q": "Wohin kann man sich bei Fragen zu Vertr?gen oder K?ufen wenden?",
+                                        "a": "An die Verbraucherzentrale.",
+                                        "q_es": "?A d?nde se puede acudir con preguntas sobre contratos o compras?",
+                                        "a_es": "A la oficina de defensa del consumidor."
+                              },
+                              {
+                                        "q": "Wie hei?t eine Beratungsstelle zum Schutz von Konsumenten?",
+                                        "a": "Die Verbraucherzentrale.",
+                                        "q_es": "?C?mo se llama un centro de asesoramiento para la protecci?n de consumidores?",
+                                        "a_es": "La oficina de defensa del consumidor."
+                              }
+                    ]
+          },
+          "verwaltung-soziales::Landeszentrale": {
+                    "ex": "Eine Landeszentrale organisiert Informationen auf Landesebene.",
+                    "ex_es": "Un centro estatal organiza informaci?n a nivel regional.",
+                    "note": "Plural: Landeszentralen.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man eine zentrale Stelle auf Ebene eines Bundeslandes?",
+                                        "a": "Die Landeszentrale.",
+                                        "q_es": "?C?mo se llama una oficina central a nivel de un estado federado?",
+                                        "a_es": "El centro estatal."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer zentralen Einrichtung eines Bundeslandes?",
+                                        "a": "Die Landeszentrale.",
+                                        "q_es": "?Qu? t?rmino corresponde a una instituci?n central de un estado federado?",
+                                        "a_es": "El centro estatal."
+                              },
+                              {
+                                        "q": "Wie hei?t eine zentrale Organisation auf Landesebene?",
+                                        "a": "Die Landeszentrale.",
+                                        "q_es": "?C?mo se llama una organizaci?n central a nivel regional?",
+                                        "a_es": "El centro estatal."
+                              }
+                    ]
+          },
+          "verwaltung-soziales::Bundeskanzleramt": {
+                    "ex": "Das Bundeskanzleramt unterst?tzt den Bundeskanzler bei der Regierungsarbeit.",
+                    "ex_es": "La Canciller?a Federal apoya al canciller en el trabajo de gobierno.",
+                    "note": "Plural selten.",
+                    "qa": [
+                              {
+                                        "q": "Wie hei?t die Beh?rde des Bundeskanzlers?",
+                                        "a": "Das Bundeskanzleramt.",
+                                        "q_es": "?C?mo se llama la oficina del canciller federal?",
+                                        "a_es": "La Canciller?a Federal."
+                              },
+                              {
+                                        "q": "Welche Stelle unterst?tzt den Bundeskanzler direkt?",
+                                        "a": "Das Bundeskanzleramt.",
+                                        "q_es": "?Qu? organismo apoya directamente al canciller federal?",
+                                        "a_es": "La Canciller?a Federal."
+                              },
+                              {
+                                        "q": "Wo arbeitet die Leitung des Kanzlers organisatorisch?",
+                                        "a": "Im Bundeskanzleramt.",
+                                        "q_es": "?D?nde trabaja organizativamente el entorno del canciller?",
+                                        "a_es": "En la Canciller?a Federal."
+                              }
+                    ]
+          },
+          "verwaltung-soziales::Ministerium": {
+                    "ex": "Ein Ministerium ist f?r einen bestimmten Politikbereich zust?ndig.",
+                    "ex_es": "Un ministerio es responsable de un ?mbito pol?tico determinado.",
+                    "note": "Plural: Ministerien.",
+                    "qa": [
+                              {
+                                        "q": "Wie hei?t eine staatliche Stelle f?r einen bestimmten Politikbereich?",
+                                        "a": "Das Ministerium.",
+                                        "q_es": "?C?mo se llama un organismo estatal para un ?mbito pol?tico concreto?",
+                                        "a_es": "El ministerio."
+                              },
+                              {
+                                        "q": "Welche Beh?rde leitet ein Minister oder eine Ministerin?",
+                                        "a": "Ein Ministerium.",
+                                        "q_es": "?Qu? organismo dirige un ministro o una ministra?",
+                                        "a_es": "Un ministerio."
+                              },
+                              {
+                                        "q": "Wie nennt man zum Beispiel das Innenministerium oder Au?enministerium allgemein?",
+                                        "a": "Ein Ministerium.",
+                                        "q_es": "?C?mo se llama en general, por ejemplo, el Ministerio del Interior o de Exteriores?",
+                                        "a_es": "Un ministerio."
+                              }
+                    ]
+          },
+          "verwaltung-soziales::Einwohnermeldeamt": {
+                    "ex": "Beim Einwohnermeldeamt meldet man seinen Wohnsitz an.",
+                    "ex_es": "En la oficina de empadronamiento se registra el domicilio.",
+                    "note": "Plural: Einwohnermelde?mter.",
+                    "qa": [
+                              {
+                                        "q": "Wo meldet man in Deutschland eine neue Adresse an?",
+                                        "a": "Beim Einwohnermeldeamt.",
+                                        "q_es": "?D?nde se registra en Alemania una nueva direcci?n?",
+                                        "a_es": "En la oficina de empadronamiento."
+                              },
+                              {
+                                        "q": "Welche Beh?rde ist oft f?r die Anmeldung des Wohnsitzes zust?ndig?",
+                                        "a": "Das Einwohnermeldeamt.",
+                                        "q_es": "?Qu? organismo se encarga a menudo del registro del domicilio?",
+                                        "a_es": "La oficina de empadronamiento."
+                              },
+                              {
+                                        "q": "Wie hei?t das Amt f?r Meldeangelegenheiten der Einwohner?",
+                                        "a": "Das Einwohnermeldeamt.",
+                                        "q_es": "?C?mo se llama la oficina para asuntos de empadronamiento de los habitantes?",
+                                        "a_es": "La oficina de empadronamiento."
+                              }
+                    ]
+          },
+          "verwaltung-soziales::Jugendamt": {
+                    "ex": "Das Jugendamt unterst?tzt Kinder, Jugendliche und Familien.",
+                    "ex_es": "La oficina de bienestar juvenil apoya a ni?os, j?venes y familias.",
+                    "note": "Plural: Jugend?mter.",
+                    "qa": [
+                              {
+                                        "q": "Welche Beh?rde k?mmert sich in Deutschland besonders um Kinder und Jugendliche?",
+                                        "a": "Das Jugendamt.",
+                                        "q_es": "?Qu? organismo se ocupa especialmente en Alemania de ni?os y j?venes?",
+                                        "a_es": "La oficina de bienestar juvenil."
+                              },
+                              {
+                                        "q": "Wohin kann man sich bei Fragen zum Kindeswohl wenden?",
+                                        "a": "An das Jugendamt.",
+                                        "q_es": "?A d?nde se puede acudir con preguntas sobre el bienestar del menor?",
+                                        "a_es": "A la oficina de bienestar juvenil."
+                              },
+                              {
+                                        "q": "Wie hei?t die staatliche Stelle f?r Hilfen rund um Kinder und Jugend?",
+                                        "a": "Das Jugendamt.",
+                                        "q_es": "?C?mo se llama el organismo estatal para ayudas relacionadas con la infancia y la juventud?",
+                                        "a_es": "La oficina de bienestar juvenil."
+                              }
+                    ]
+          },
+          "verwaltung-soziales::Steuererkl?rung": {
+                    "ex": "Mit der Steuererkl?rung gibt man dem Finanzamt wichtige Angaben an.",
+                    "ex_es": "Con la declaraci?n de impuestos se comunican datos importantes a la oficina tributaria.",
+                    "note": "Plural: Steuererkl?rungen.",
+                    "qa": [
+                              {
+                                        "q": "Wie hei?t das Formular f?r Angaben an das Finanzamt?",
+                                        "a": "Die Steuererkl?rung.",
+                                        "q_es": "?C?mo se llama el formulario con datos para la oficina de impuestos?",
+                                        "a_es": "La declaraci?n de impuestos."
+                              },
+                              {
+                                        "q": "Was gibt man oft einmal im Jahr beim Finanzamt ab?",
+                                        "a": "Die Steuererkl?rung.",
+                                        "q_es": "?Qu? se presenta a menudo una vez al a?o ante la oficina tributaria?",
+                                        "a_es": "La declaraci?n de impuestos."
+                              },
+                              {
+                                        "q": "Wie nennt man die Erkl?rung zu Einkommen und Steuern?",
+                                        "a": "Die Steuererkl?rung.",
+                                        "q_es": "?C?mo se llama la declaraci?n sobre ingresos e impuestos?",
+                                        "a_es": "La declaraci?n de impuestos."
+                              }
+                    ]
+          },
+          "gesellschaft-extra::Recht": {
+                    "ex": "Jeder Mensch hat in Deutschland Rechte.",
+                    "ex_es": "Toda persona tiene derechos en Alemania.",
+                    "note": "Plural: Rechte.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man einen rechtlichen Anspruch oder eine erlaubte Befugnis?",
+                                        "a": "Das Recht.",
+                                        "q_es": "?C?mo se llama una pretensi?n jur?dica o una facultad permitida?",
+                                        "a_es": "El derecho."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu etwas, das einem gesetzlich zusteht?",
+                                        "a": "Das Recht.",
+                                        "q_es": "?Qu? t?rmino corresponde a algo que legalmente le corresponde a alguien?",
+                                        "a_es": "El derecho."
+                              },
+                              {
+                                        "q": "Wie hei?t ein Anspruch, den Menschen durch Gesetze haben?",
+                                        "a": "Das Recht.",
+                                        "q_es": "?C?mo se llama una facultad que las personas tienen por ley?",
+                                        "a_es": "El derecho."
+                              }
+                    ]
+          },
+          "gesellschaft-extra::Schule": {
+                    "ex": "Kinder gehen in Deutschland in die Schule.",
+                    "ex_es": "Los ni?os van a la escuela en Alemania.",
+                    "note": "Plural: Schulen.",
+                    "qa": [
+                              {
+                                        "q": "Wohin m?ssen Kinder in Deutschland wegen der Schulpflicht gehen?",
+                                        "a": "In die Schule.",
+                                        "q_es": "?A d?nde deben ir los ni?os en Alemania debido a la escolaridad obligatoria?",
+                                        "a_es": "A la escuela."
+                              },
+                              {
+                                        "q": "Wo findet f?r Kinder Unterricht statt?",
+                                        "a": "In der Schule.",
+                                        "q_es": "?D?nde tiene lugar la ense?anza para los ni?os?",
+                                        "a_es": "En la escuela."
+                              },
+                              {
+                                        "q": "Wie hei?t der Ort des Lernens f?r Kinder und Jugendliche?",
+                                        "a": "Die Schule.",
+                                        "q_es": "?C?mo se llama el lugar de aprendizaje para ni?os y j?venes?",
+                                        "a_es": "La escuela."
+                              }
+                    ]
+          },
+          "gesellschaft-extra::Kirche": {
+                    "ex": "Viele Menschen geh?ren einer Kirche an.",
+                    "ex_es": "Muchas personas pertenecen a una iglesia.",
+                    "note": "Plural: Kirchen.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man ein christliches Gotteshaus oder die christliche Religionsgemeinschaft?",
+                                        "a": "Die Kirche.",
+                                        "q_es": "?C?mo se llama un templo cristiano o la comunidad religiosa cristiana?",
+                                        "a_es": "La iglesia."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer gro?en christlichen Religionsgemeinschaft?",
+                                        "a": "Die Kirche.",
+                                        "q_es": "?Qu? t?rmino corresponde a una gran comunidad religiosa cristiana?",
+                                        "a_es": "La iglesia."
+                              },
+                              {
+                                        "q": "Wie hei?t das Geb?ude, in dem oft christliche Gottesdienste stattfinden?",
+                                        "a": "Die Kirche.",
+                                        "q_es": "?C?mo se llama el edificio en el que a menudo tienen lugar los oficios cristianos?",
+                                        "a_es": "La iglesia."
+                              }
+                    ]
+          },
+          "gesellschaft-extra::Schutz": {
+                    "ex": "Der Staat muss die Grundrechte unter besonderen Schutz stellen.",
+                    "ex_es": "El Estado debe poner los derechos fundamentales bajo especial protecci?n.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man das Bewahren vor Gefahr oder Schaden?",
+                                        "a": "Den Schutz.",
+                                        "q_es": "?C?mo se llama el resguardo frente al peligro o al da?o?",
+                                        "a_es": "La protecci?n."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt dazu, dass Menschen oder Rechte gesichert werden?",
+                                        "a": "Der Schutz.",
+                                        "q_es": "?Qu? t?rmino corresponde a que las personas o los derechos sean resguardados?",
+                                        "a_es": "La protecci?n."
+                              },
+                              {
+                                        "q": "Wie hei?t das Sichern und Bewahren von Personen oder Dingen?",
+                                        "a": "Der Schutz.",
+                                        "q_es": "?C?mo se llama el asegurar y preservar a personas o cosas?",
+                                        "a_es": "La protecci?n."
+                              }
+                    ]
+          },
+          "gesellschaft-extra::Meinung": {
+                    "ex": "Jeder Mensch darf seine Meinung sagen.",
+                    "ex_es": "Toda persona puede expresar su opini?n.",
+                    "note": "Plural: Meinungen.",
+                    "qa": [
+                              {
+                                        "q": "Was darf man in Deutschland frei ?u?ern?",
+                                        "a": "Seine Meinung.",
+                                        "q_es": "?Qu? se puede expresar libremente en Alemania?",
+                                        "a_es": "La opini?n propia."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer pers?nlichen Ansicht?",
+                                        "a": "Die Meinung.",
+                                        "q_es": "?Qu? t?rmino corresponde a una opini?n personal?",
+                                        "a_es": "La opini?n."
+                              },
+                              {
+                                        "q": "Wie nennt man das, was jemand ?ber ein Thema denkt?",
+                                        "a": "Die Meinung.",
+                                        "q_es": "?C?mo se llama lo que alguien piensa sobre un tema?",
+                                        "a_es": "La opini?n."
+                              }
+                    ]
+          },
+          "gesellschaft-extra::Kindergeld": {
+                    "ex": "Viele Familien bekommen in Deutschland Kindergeld.",
+                    "ex_es": "Muchas familias reciben en Alemania una prestaci?n por hijo.",
+                    "qa": [
+                              {
+                                        "q": "Wie hei?t die staatliche Leistung f?r Kinder, die viele Familien bekommen?",
+                                        "a": "Das Kindergeld.",
+                                        "q_es": "?C?mo se llama la prestaci?n estatal por hijos que reciben muchas familias?",
+                                        "a_es": "La prestaci?n por hijo."
+                              },
+                              {
+                                        "q": "Welche finanzielle Hilfe gibt es in Deutschland f?r Eltern mit Kindern?",
+                                        "a": "Das Kindergeld.",
+                                        "q_es": "?Qu? ayuda econ?mica existe en Alemania para padres con hijos?",
+                                        "a_es": "La prestaci?n por hijo."
+                              },
+                              {
+                                        "q": "Wie nennt man Geld vom Staat zur Unterst?tzung von Familien mit Kindern?",
+                                        "a": "Das Kindergeld.",
+                                        "q_es": "?C?mo se llama el dinero del Estado para apoyar a familias con hijos?",
+                                        "a_es": "La prestaci?n por hijo."
+                              }
+                    ]
+          },
+          "gesellschaft-extra::Politiker": {
+                    "ex": "Politiker treffen politische Entscheidungen.",
+                    "ex_es": "Los pol?ticos toman decisiones pol?ticas.",
+                    "note": "Plural: Politiker.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man eine Person, die beruflich Politik macht?",
+                                        "a": "Den Politiker.",
+                                        "q_es": "?C?mo se llama una persona que se dedica profesionalmente a la pol?tica?",
+                                        "a_es": "El pol?tico."
+                              },
+                              {
+                                        "q": "Wer arbeitet oft in Parlamenten oder Regierungen?",
+                                        "a": "Politiker.",
+                                        "q_es": "?Qui?n trabaja a menudo en parlamentos o gobiernos?",
+                                        "a_es": "Los pol?ticos."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer Person mit politischem Amt oder Einfluss?",
+                                        "a": "Der Politiker.",
+                                        "q_es": "?Qu? t?rmino corresponde a una persona con cargo o influencia pol?tica?",
+                                        "a_es": "El pol?tico."
+                              }
+                    ]
+          },
+          "beruf-wirtschaft::Unternehmen": {
+                    "ex": "Ein Unternehmen produziert Waren oder bietet Dienstleistungen an.",
+                    "ex_es": "Una empresa produce bienes u ofrece servicios.",
+                    "note": "Plural: Unternehmen.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man eine wirtschaftliche Organisation, die Waren oder Dienstleistungen anbietet?",
+                                        "a": "Das Unternehmen.",
+                                        "q_es": "?C?mo se llama una organizaci?n econ?mica que ofrece bienes o servicios?",
+                                        "a_es": "La empresa."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer Firma im allgemeinen Sinn?",
+                                        "a": "Das Unternehmen.",
+                                        "q_es": "?Qu? t?rmino corresponde a una firma en sentido general?",
+                                        "a_es": "La empresa."
+                              },
+                              {
+                                        "q": "Wo arbeiten oft viele Erwerbst?tige?",
+                                        "a": "In einem Unternehmen.",
+                                        "q_es": "?D?nde trabajan a menudo muchas personas activas laboralmente?",
+                                        "a_es": "En una empresa."
+                              }
+                    ]
+          },
+          "beruf-wirtschaft::Beruf": {
+                    "ex": "Jeder Mensch kann in Deutschland seinen Beruf frei w?hlen.",
+                    "ex_es": "Toda persona puede elegir libremente su profesi?n en Alemania.",
+                    "note": "Plural: Berufe.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man die regelm??ige berufliche T?tigkeit eines Menschen?",
+                                        "a": "Den Beruf.",
+                                        "q_es": "?C?mo se llama la actividad profesional habitual de una persona?",
+                                        "a_es": "La profesi?n."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu dem, was jemand als Arbeit gelernt hat?",
+                                        "a": "Der Beruf.",
+                                        "q_es": "?Qu? t?rmino corresponde a lo que alguien ha aprendido como trabajo?",
+                                        "a_es": "La profesi?n."
+                              },
+                              {
+                                        "q": "Was darf man in Deutschland grunds?tzlich frei w?hlen?",
+                                        "a": "Den Beruf.",
+                                        "q_es": "?Qu? se puede elegir libremente en Alemania en principio?",
+                                        "a_es": "La profesi?n."
+                              }
+                    ]
+          },
+          "beruf-wirtschaft::Firma": {
+                    "ex": "Viele Menschen sind bei einer Firma besch?ftigt.",
+                    "ex_es": "Muchas personas trabajan en una empresa.",
+                    "note": "Plural: Firmen.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man ein Unternehmen im allt?glichen Sprachgebrauch oft?",
+                                        "a": "Die Firma.",
+                                        "q_es": "?C?mo se llama a menudo una empresa en el uso cotidiano?",
+                                        "a_es": "La empresa."
+                              },
+                              {
+                                        "q": "Wo sind viele Erwerbst?tige besch?ftigt?",
+                                        "a": "Bei einer Firma.",
+                                        "q_es": "?D?nde est?n empleadas muchas personas activas laboralmente?",
+                                        "a_es": "En una empresa."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einem gesch?ftlichen Betrieb?",
+                                        "a": "Die Firma.",
+                                        "q_es": "?Qu? t?rmino corresponde a un negocio o empresa?",
+                                        "a_es": "La empresa."
+                              }
+                    ]
+          },
+          "beruf-wirtschaft::Mitglied": {
+                    "ex": "Ein Mitglied geh?rt zu einer Gruppe oder Organisation.",
+                    "ex_es": "Un miembro pertenece a un grupo u organizaci?n.",
+                    "note": "Plural: Mitglieder.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man eine Person, die zu einer Gruppe geh?rt?",
+                                        "a": "Das Mitglied.",
+                                        "q_es": "?C?mo se llama una persona que pertenece a un grupo?",
+                                        "a_es": "El miembro."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer Person in einem Verein oder Verband?",
+                                        "a": "Das Mitglied.",
+                                        "q_es": "?Qu? t?rmino corresponde a una persona en una asociaci?n o federaci?n?",
+                                        "a_es": "El miembro."
+                              },
+                              {
+                                        "q": "Wie hei?t jemand, der Teil einer Organisation ist?",
+                                        "a": "Das Mitglied.",
+                                        "q_es": "?C?mo se llama alguien que forma parte de una organizaci?n?",
+                                        "a_es": "El miembro."
+                              }
+                    ]
+          },
+          "beruf-wirtschaft::Marktwirtschaft": {
+                    "ex": "Deutschland hat eine soziale Marktwirtschaft.",
+                    "ex_es": "Alemania tiene una econom?a social de mercado.",
+                    "qa": [
+                              {
+                                        "q": "Wie hei?t ein Wirtschaftssystem mit Angebot und Nachfrage?",
+                                        "a": "Die Marktwirtschaft.",
+                                        "q_es": "?C?mo se llama un sistema econ?mico con oferta y demanda?",
+                                        "a_es": "La econom?a de mercado."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer Wirtschaftsordnung ohne zentrale Planvorgaben f?r alles?",
+                                        "a": "Die Marktwirtschaft.",
+                                        "q_es": "?Qu? t?rmino corresponde a un orden econ?mico sin planificaci?n central para todo?",
+                                        "a_es": "La econom?a de mercado."
+                              },
+                              {
+                                        "q": "Welche Wirtschaftsordnung gilt in Deutschland?",
+                                        "a": "Die soziale Marktwirtschaft.",
+                                        "q_es": "?Qu? orden econ?mico rige en Alemania?",
+                                        "a_es": "La econom?a social de mercado."
+                              }
+                    ]
+          },
+          "beruf-wirtschaft::Staatsgewalt": {
+                    "ex": "Alle Staatsgewalt geht vom Volke aus.",
+                    "ex_es": "Todo poder del Estado emana del pueblo.",
+                    "note": "Plural: Staatsgewalten.",
+                    "qa": [
+                              {
+                                        "q": "Von wem geht in Deutschland die Staatsgewalt aus?",
+                                        "a": "Vom Volke.",
+                                        "q_es": "?De qui?n emana en Alemania el poder del Estado?",
+                                        "a_es": "Del pueblo."
+                              },
+                              {
+                                        "q": "Wie nennt man die Macht des Staates insgesamt?",
+                                        "a": "Die Staatsgewalt.",
+                                        "q_es": "?C?mo se llama el poder del Estado en su conjunto?",
+                                        "a_es": "El poder del Estado."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zur staatlichen Macht in einer Demokratie?",
+                                        "a": "Die Staatsgewalt.",
+                                        "q_es": "?Qu? t?rmino corresponde al poder estatal en una democracia?",
+                                        "a_es": "El poder del Estado."
+                              }
+                    ]
+          },
+          "beruf-wirtschaft::Vertrag": {
+                    "ex": "Ein Vertrag regelt Rechte und Pflichten.",
+                    "ex_es": "Un contrato regula derechos y obligaciones.",
+                    "note": "Plural: Vertr?ge.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man eine verbindliche Vereinbarung zwischen zwei Seiten?",
+                                        "a": "Den Vertrag.",
+                                        "q_es": "?C?mo se llama un acuerdo vinculante entre dos partes?",
+                                        "a_es": "El contrato."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer rechtlich bindenden Abmachung?",
+                                        "a": "Der Vertrag.",
+                                        "q_es": "?Qu? t?rmino corresponde a un acuerdo jur?dicamente vinculante?",
+                                        "a_es": "El contrato."
+                              },
+                              {
+                                        "q": "Was unterschreibt man oft bei einer Miete oder einem Kauf?",
+                                        "a": "Einen Vertrag.",
+                                        "q_es": "?Qu? se firma a menudo en un alquiler o una compra?",
+                                        "a_es": "Un contrato."
+                              }
+                    ]
+          },
+          "weitere-begriffe::Aufgabe": {
+                    "ex": "Der Staat hat viele Aufgaben.",
+                    "ex_es": "El Estado tiene muchas tareas.",
+                    "note": "Plural: Aufgaben.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man etwas, das erledigt oder erf?llt werden muss?",
+                                        "a": "Die Aufgabe.",
+                                        "q_es": "?C?mo se llama algo que debe realizarse o cumplirse?",
+                                        "a_es": "La tarea."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer Pflicht oder Funktion?",
+                                        "a": "Die Aufgabe.",
+                                        "q_es": "?Qu? t?rmino corresponde a una tarea o funci?n?",
+                                        "a_es": "La tarea."
+                              },
+                              {
+                                        "q": "Wie hei?t etwas, wof?r jemand zust?ndig ist?",
+                                        "a": "Die Aufgabe.",
+                                        "q_es": "?C?mo se llama aquello de lo que alguien es responsable?",
+                                        "a_es": "La tarea."
+                              }
+                    ]
+          },
+          "weitere-begriffe::Monarchie": {
+                    "ex": "In einer Monarchie ist ein K?nig oder eine K?nigin Staatsoberhaupt.",
+                    "ex_es": "En una monarqu?a, un rey o una reina es jefe del Estado.",
+                    "note": "Plural: Monarchien.",
+                    "qa": [
+                              {
+                                        "q": "Wie hei?t eine Staatsform mit K?nig oder K?nigin an der Spitze?",
+                                        "a": "Die Monarchie.",
+                                        "q_es": "?C?mo se llama una forma de Estado con un rey o una reina al frente?",
+                                        "a_es": "La monarqu?a."
+                              },
+                              {
+                                        "q": "Welche Staatsform hat Deutschland nicht?",
+                                        "a": "Die Monarchie.",
+                                        "q_es": "?Qu? forma de Estado no tiene Alemania?",
+                                        "a_es": "La monarqu?a."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einem Staat mit Krone als Spitze?",
+                                        "a": "Die Monarchie.",
+                                        "q_es": "?Qu? t?rmino corresponde a un Estado con corona como jefatura?",
+                                        "a_es": "La monarqu?a."
+                              }
+                    ]
+          },
+          "weitere-begriffe::Einheit": {
+                    "ex": "Der 3. Oktober ist der Tag der Deutschen Einheit.",
+                    "ex_es": "El 3 de octubre es el D?a de la Unidad Alemana.",
+                    "note": "Plural: Einheiten.",
+                    "qa": [
+                              {
+                                        "q": "Was feiert man in Deutschland am 3. Oktober?",
+                                        "a": "Die deutsche Einheit.",
+                                        "q_es": "?Qu? se celebra en Alemania el 3 de octubre?",
+                                        "a_es": "La unidad alemana."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zum Zusammengehen von Ost- und Westdeutschland?",
+                                        "a": "Die Einheit.",
+                                        "q_es": "?Qu? t?rmino corresponde a la uni?n de Alemania Oriental y Occidental?",
+                                        "a_es": "La unidad."
+                              },
+                              {
+                                        "q": "Wie nennt man das Einswerden eines geteilten Landes?",
+                                        "a": "Die Einheit.",
+                                        "q_es": "?C?mo se llama que un pa?s dividido vuelva a ser uno?",
+                                        "a_es": "La unidad."
+                              }
+                    ]
+          },
+          "weitere-begriffe::Mauer": {
+                    "ex": "Die Mauer trennte fr?her Ost- und West-Berlin.",
+                    "ex_es": "El muro separaba antes Berl?n Este y Berl?n Oeste.",
+                    "note": "Plural: Mauern. Verwandtes Wort: Berliner Mauer.",
+                    "qa": [
+                              {
+                                        "q": "Was trennte fr?her Ost- und West-Berlin?",
+                                        "a": "Die Mauer.",
+                                        "q_es": "?Qu? separaba antes Berl?n Este y Berl?n Oeste?",
+                                        "a_es": "El muro."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer hohen Wand aus Stein oder Beton?",
+                                        "a": "Die Mauer.",
+                                        "q_es": "?Qu? t?rmino corresponde a una pared alta de piedra o de hormig?n?",
+                                        "a_es": "El muro."
+                              },
+                              {
+                                        "q": "Wie hei?t das Bauwerk, das Berlin fr?her teilte?",
+                                        "a": "Die Mauer.",
+                                        "q_es": "?C?mo se llama la construcci?n que antes divid?a Berl?n?",
+                                        "a_es": "El muro."
                               }
                     ]
           }

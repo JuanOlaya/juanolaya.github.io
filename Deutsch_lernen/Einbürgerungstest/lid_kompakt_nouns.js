@@ -186,7 +186,7 @@ window.lidKompaktData = [
                               {
                                         "art": "die",
                                         "w": "Folter",
-                                        "e": "🛑",
+                                        "e": "\ud83d\uded1",
                                         "tr": "tortura",
                                         "important": true
                               },
@@ -947,7 +947,7 @@ window.lidKompaktData = [
                               {
                                         "art": "die / -",
                                         "w": "Rechtsprechung / rechtsprechende(n)",
-                                        "e": "⚖️",
+                                        "e": "\u2696\ufe0f",
                                         "tr": "poder judicial / jurisdiccional (que juzga)",
                                         "important": true
                               },
@@ -960,26 +960,26 @@ window.lidKompaktData = [
                               {
                                         "art": "der/die",
                                         "w": "Richter / Richterin",
-                                        "e": "👩‍⚖️",
+                                        "e": "\ud83d\udc69\u200d\u2696\ufe0f",
                                         "tr": "juez / jueza"
                               },
                               {
                                         "art": "der/die",
-                                        "w": "Schöffe / Schöffin",
-                                        "e": "🧑‍⚖️",
+                                        "w": "Sch\u00f6ffe / Sch\u00f6ffin",
+                                        "e": "\ud83e\uddd1\u200d\u2696\ufe0f",
                                         "tr": "juez honorario / juez lego",
                                         "important": true
                               },
                               {
                                         "art": "der/die",
-                                        "w": "Rechtsanwalt / Rechtsanwältin",
-                                        "e": "💼",
+                                        "w": "Rechtsanwalt / Rechtsanw\u00e4ltin",
+                                        "e": "\ud83d\udcbc",
                                         "tr": "abogado / abogada"
                               },
                               {
                                         "art": "das / die (pl)",
                                         "w": "Urteil / Urteile",
-                                        "e": "🔨",
+                                        "e": "\ud83d\udd28",
                                         "tr": "sentencia / sentencias"
                               }
                     ]
@@ -1018,20 +1018,20 @@ window.lidKompaktData = [
                               {
                                         "art": "die",
                                         "w": "Anzeige",
-                                        "e": "📝",
+                                        "e": "\ud83d\udcdd",
                                         "tr": "denuncia"
                               },
                               {
                                         "art": "die",
                                         "w": "Todesstrafe",
-                                        "e": "☠️",
+                                        "e": "\u2620\ufe0f",
                                         "tr": "pena de muerte",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Straftat",
-                                        "e": "🚔",
+                                        "e": "\ud83d\ude94",
                                         "tr": "delito / hecho delictivo",
                                         "important": true
                               }
@@ -1094,19 +1094,19 @@ window.lidKompaktData = [
                     "id": "arbeitswelt",
                     "title": "Arbeitswelt",
                     "title_es": "Mundo laboral",
-                    "icon": "🤝",
+                    "icon": "\ud83e\udd1d",
                     "color": "#0f766e",
                     "items": [
                               {
                                         "art": "die (pl)",
                                         "w": "Gewerkschaften",
-                                        "e": "🤝",
+                                        "e": "\ud83e\udd1d",
                                         "tr": "sindicatos"
                               },
                               {
                                         "art": "die",
-                                        "w": "Kündigungsschutzklage",
-                                        "e": "⚖️",
+                                        "w": "K\u00fcndigungsschutzklage",
+                                        "e": "\u2696\ufe0f",
                                         "tr": "demanda por despido",
                                         "important": true
                               }
@@ -1462,6 +1462,243 @@ window.lidKompaktData = [
                                         "w": "Nachteil",
                                         "e": "\ud83d\udc4e",
                                         "tr": "desventaja"
+                              }
+                    ]
+          },
+          {
+                    "id": "landespolitik",
+                    "title": "Landespolitik",
+                    "title_es": "Pol?tica regional",
+                    "icon": "\ud83c\udff3\ufe0f",
+                    "color": "#2563eb",
+                    "items": [
+                              {
+                                        "art": "der",
+                                        "w": "Landtag",
+                                        "e": "\ud83c\udfdb\ufe0f",
+                                        "tr": "parlamento regional"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Landesflagge",
+                                        "e": "\ud83c\udff3\ufe0f",
+                                        "tr": "bandera del estado federado"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Landeshauptstadt",
+                                        "e": "\ud83c\udfd9\ufe0f",
+                                        "tr": "capital del estado federado"
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Landkreis",
+                                        "e": "\ud83d\uddfa\ufe0f",
+                                        "tr": "distrito administrativo"
+                              },
+                              {
+                                        "art": "die (pl)",
+                                        "w": "Kommunalwahlen",
+                                        "e": "\ud83d\uddf3\ufe0f",
+                                        "tr": "elecciones municipales"
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Freistaat",
+                                        "e": "\ud83c\udff0",
+                                        "tr": "estado libre"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Landesparlament",
+                                        "e": "\ud83c\udfdb\ufe0f",
+                                        "tr": "parlamento regional"
+                              }
+                    ]
+          },
+          {
+                    "id": "verwaltung-soziales",
+                    "title": "Verwaltung & Soziales",
+                    "title_es": "Administraci?n y sociedad",
+                    "icon": "\ud83c\udfe2",
+                    "color": "#7c3aed",
+                    "items": [
+                              {
+                                        "art": "die",
+                                        "w": "Verbraucherzentrale",
+                                        "e": "\ud83d\uded2",
+                                        "tr": "oficina de defensa del consumidor"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Landeszentrale",
+                                        "e": "\ud83c\udfe2",
+                                        "tr": "centro estatal / oficina estatal"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Bundeskanzleramt",
+                                        "e": "\ud83c\udfdb\ufe0f",
+                                        "tr": "Canciller?a Federal"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Ministerium",
+                                        "e": "\ud83c\udfe2",
+                                        "tr": "ministerio"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Einwohnermeldeamt",
+                                        "e": "\ud83d\udccb",
+                                        "tr": "oficina de empadronamiento"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Jugendamt",
+                                        "e": "\ud83d\udce9",
+                                        "tr": "oficina de bienestar juvenil"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Steuererkl?rung",
+                                        "e": "\ud83d\udcc4",
+                                        "tr": "declaraci?n de impuestos"
+                              }
+                    ]
+          },
+          {
+                    "id": "gesellschaft-extra",
+                    "title": "Gesellschaft II",
+                    "title_es": "Sociedad II",
+                    "icon": "\ud83d\udc65",
+                    "color": "#059669",
+                    "items": [
+                              {
+                                        "art": "das",
+                                        "w": "Recht",
+                                        "e": "\u2696\ufe0f",
+                                        "tr": "derecho"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Schule",
+                                        "e": "\ud83c\udfeb",
+                                        "tr": "escuela"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Kirche",
+                                        "e": "\u26ea",
+                                        "tr": "iglesia"
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Schutz",
+                                        "e": "\ud83d\udee1\ufe0f",
+                                        "tr": "protecci?n"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Meinung",
+                                        "e": "\ud83d\udcac",
+                                        "tr": "opini?n"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Kindergeld",
+                                        "e": "\ud83d\udcb6",
+                                        "tr": "prestaci?n por hijo"
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Politiker",
+                                        "e": "\ud83e\uddd1\u200d\ud83d\udcbc",
+                                        "tr": "pol?tico"
+                              }
+                    ]
+          },
+          {
+                    "id": "beruf-wirtschaft",
+                    "title": "Beruf & Wirtschaft",
+                    "title_es": "Profesi?n y econom?a",
+                    "icon": "\ud83d\udcbc",
+                    "color": "#0f766e",
+                    "items": [
+                              {
+                                        "art": "das",
+                                        "w": "Unternehmen",
+                                        "e": "\ud83c\udfe2",
+                                        "tr": "empresa"
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Beruf",
+                                        "e": "\ud83d\udcbc",
+                                        "tr": "profesi?n"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Firma",
+                                        "e": "\ud83c\udfe2",
+                                        "tr": "empresa"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Mitglied",
+                                        "e": "\ud83d\udc64",
+                                        "tr": "miembro"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Marktwirtschaft",
+                                        "e": "\ud83d\udcc8",
+                                        "tr": "econom?a de mercado"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Staatsgewalt",
+                                        "e": "\ud83c\udfdb\ufe0f",
+                                        "tr": "poder del Estado"
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Vertrag",
+                                        "e": "\ud83d\udcc4",
+                                        "tr": "tratado / contrato"
+                              }
+                    ]
+          },
+          {
+                    "id": "weitere-begriffe",
+                    "title": "Weitere Begriffe",
+                    "title_es": "Otros conceptos",
+                    "icon": "\ud83d\udcd8",
+                    "color": "#b45309",
+                    "items": [
+                              {
+                                        "art": "die",
+                                        "w": "Aufgabe",
+                                        "e": "\ud83d\udcdd",
+                                        "tr": "tarea / funci?n"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Monarchie",
+                                        "e": "\ud83d\udc51",
+                                        "tr": "monarqu?a"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Einheit",
+                                        "e": "\ud83e\udd1d",
+                                        "tr": "unidad"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Mauer",
+                                        "e": "\ud83e\uddf1",
+                                        "tr": "muro"
                               }
                     ]
           }
