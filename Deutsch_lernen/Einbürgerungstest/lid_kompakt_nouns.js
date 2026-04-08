@@ -50,7 +50,7 @@ window.lidKompaktData = [
           },
           {
                     "id": "freiheiten",
-                    "title": "Grundrechte: Freiheiten",
+                    "title": "Freiheiten",
                     "title_es": "Libertades",
                     "icon": "\ud83d\udd4a\ufe0f",
                     "color": "#0891b2",
@@ -99,7 +99,7 @@ window.lidKompaktData = [
           },
           {
                     "id": "werte",
-                    "title": "Grundrechte: Werte",
+                    "title": "Werte",
                     "title_es": "Valores",
                     "icon": "\ud83c\udf1f",
                     "color": "#16a34a",
@@ -153,8 +153,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "diskriminierung",
-                    "title": "Diskriminierung & Schutz",
-                    "title_es": "Disc. y protecci\u00f3n",
+                    "title": "Schutz",
+                    "title_es": "Protecci?n",
                     "icon": "\ud83d\udee1\ufe0f",
                     "color": "#ea580c",
                     "items": [
@@ -208,8 +208,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "staatsprinzipien",
-                    "title": "Staatsprinzipien",
-                    "title_es": "Princ. del Estado",
+                    "title": "Prinzipien",
+                    "title_es": "Principios",
                     "icon": "\u2696\ufe0f",
                     "color": "#0f766e",
                     "items": [
@@ -265,8 +265,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "institutionen",
-                    "title": "Demokratie: Institutionen",
-                    "title_es": "Instituciones",
+                    "title": "Organe",
+                    "title_es": "?rganos",
                     "icon": "\ud83c\udfdb\ufe0f",
                     "color": "#7c3aed",
                     "items": [
@@ -307,8 +307,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "bundesregierung",
-                    "title": "Bundesregierung",
-                    "title_es": "Gobierno federal",
+                    "title": "Regierung",
+                    "title_es": "Gobierno",
                     "icon": "\ud83c\udfe2",
                     "color": "#2563eb",
                     "items": [
@@ -337,8 +337,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "staatsgewalten",
-                    "title": "Staatsgewalten",
-                    "title_es": "Poderes del Estado",
+                    "title": "Gewalten",
+                    "title_es": "Poderes",
                     "icon": "\u2696\ufe0f",
                     "color": "#0f766e",
                     "items": [
@@ -395,7 +395,7 @@ window.lidKompaktData = [
           },
           {
                     "id": "wahlen",
-                    "title": "Demokratie: Wahlen",
+                    "title": "Wahlen",
                     "title_es": "Elecciones",
                     "icon": "\ud83d\uddf3\ufe0f",
                     "color": "#2563eb",
@@ -450,8 +450,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "wahlrecht",
-                    "title": "Wahlrecht & Teilnahme",
-                    "title_es": "Derecho y participaci\u00f3n",
+                    "title": "Beteiligung",
+                    "title_es": "Participaci?n",
                     "icon": "\ud83d\uddf3\ufe0f",
                     "color": "#1d4ed8",
                     "items": [
@@ -572,8 +572,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "parteien",
-                    "title": "Parteien & Macht",
-                    "title_es": "Partidos y poder",
+                    "title": "Parteien",
+                    "title_es": "Partidos",
                     "icon": "\ud83d\udea9",
                     "color": "#db2777",
                     "items": [
@@ -674,7 +674,16 @@ window.lidKompaktData = [
                                         "e": "\ud83c\udff0",
                                         "tr": "primera ministra / primer ministro",
                                         "important": true
-                              },
+                              }
+                    ]
+          },
+          {
+                    "id": "staatsstruktur",
+                    "title": "Struktur",
+                    "title_es": "Estructura",
+                    "icon": "\ud83e\udde9",
+                    "color": "#64748b",
+                    "items": [
                               {
                                         "art": "",
                                         "w": "aufgeteilt",
@@ -685,8 +694,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "eu",
-                    "title": "Europ\u00e4ische Union",
-                    "title_es": "Uni\u00f3n Europea",
+                    "title": "Europa",
+                    "title_es": "Europa",
                     "icon": "\ud83c\uddea\ud83c\uddfa",
                     "color": "#2563eb",
                     "items": [
@@ -722,8 +731,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "staatsaemter",
-                    "title": "Staats\u00e4mter",
-                    "title_es": "Cargos del Estado",
+                    "title": "?mter",
+                    "title_es": "Cargos",
                     "icon": "\ud83c\udfdb\ufe0f",
                     "color": "#f59e0b",
                     "items": [
@@ -766,8 +775,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "staatsaemter-2",
-                    "title": "Staats\u00e4mter II",
-                    "title_es": "Cargos del Estado II",
+                    "title": "?mter II",
+                    "title_es": "Cargos II",
                     "icon": "\ud83c\udfdb\ufe0f",
                     "color": "#f59e0b",
                     "items": [
@@ -801,8 +810,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "kommune-aemter",
-                    "title": "Kommune & \u00c4mter",
-                    "title_es": "Municipio y oficinas",
+                    "title": "Kommune",
+                    "title_es": "Municipio",
                     "icon": "\ud83c\udfe2",
                     "color": "#16a34a",
                     "items": [
@@ -894,8 +903,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "recht-grundlagen",
-                    "title": "Recht: Grundlagen",
-                    "title_es": "Bases del derecho",
+                    "title": "Recht",
+                    "title_es": "Derecho",
                     "icon": "\ud83d\udcdc",
                     "color": "#1d4ed8",
                     "items": [
@@ -945,8 +954,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "gerichte",
-                    "title": "Justiz & Polizei",
-                    "title_es": "Justicia y polic\u00eda",
+                    "title": "Justiz",
+                    "title_es": "Justicia",
                     "icon": "\ud83d\udc69\u200d\u2696\ufe0f",
                     "color": "#1d4ed8",
                     "items": [
@@ -1052,8 +1061,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "gesellschaft",
-                    "title": "Gemeinschaft",
-                    "title_es": "Comunidad",
+                    "title": "Gesellschaft",
+                    "title_es": "Sociedad",
                     "icon": "\ud83c\udfd8\ufe0f",
                     "color": "#059669",
                     "items": [
@@ -1105,8 +1114,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "arbeitswelt",
-                    "title": "Arbeitswelt",
-                    "title_es": "Mundo laboral",
+                    "title": "Arbeit",
+                    "title_es": "Trabajo",
                     "icon": "\ud83e\udd1d",
                     "color": "#0f766e",
                     "items": [
@@ -1183,7 +1192,7 @@ window.lidKompaktData = [
           },
           {
                     "id": "religion-gemeinschaft",
-                    "title": "Religion & Gemeinschaft",
+                    "title": "Religion",
                     "title_es": "Religi\u00f3n",
                     "icon": "\ud83d\uded0",
                     "color": "#8b5cf6",
@@ -1212,8 +1221,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "sozialsystem",
-                    "title": "Sozialsystem",
-                    "title_es": "Sistema social",
+                    "title": "Soziales",
+                    "title_es": "Social",
                     "icon": "\ud83e\uddfe",
                     "color": "#0ea5e9",
                     "items": [
@@ -1269,8 +1278,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "deutsche-geschichte",
-                    "title": "Deutsche Geschichte",
-                    "title_es": "Historia alemana",
+                    "title": "Geschichte",
+                    "title_es": "Historia",
                     "icon": "\ud83d\udd6f\ufe0f",
                     "color": "#7c2d12",
                     "items": [
@@ -1350,8 +1359,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "wiedervereinigung",
-                    "title": "Deutschland",
-                    "title_es": "Alemania",
+                    "title": "Einheit",
+                    "title_es": "Unidad",
                     "icon": "\ud83e\udd1d",
                     "color": "#ca8a04",
                     "items": [
@@ -1388,17 +1397,18 @@ window.lidKompaktData = [
                                         "tr": "escudo"
                               },
                               {
-                                        "art": "das",
-                                        "w": "Wirtschaftswunder",
-                                        "e": "\ud83d\udcc8",
-                                        "tr": "milagro econ\u00f3mico"
-                              },
-                              {
                                         "art": "die (pl)",
                                         "w": "Besatzungszonen",
                                         "e": "\ud83d\uddfa\ufe0f",
                                         "tr": "zonas de ocupación"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Einheit",
+                                        "e": "\ud83e\udd1d",
+                                        "tr": "unidad"
                               }
+
                     ]
           },
           {
@@ -1509,8 +1519,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "landespolitik",
-                    "title": "Landespolitik",
-                    "title_es": "Pol?tica regional",
+                    "title": "L?nder",
+                    "title_es": "Estados federados",
                     "icon": "\ud83c\udff3\ufe0f",
                     "color": "#2563eb",
                     "items": [
@@ -1560,8 +1570,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "verwaltung-soziales",
-                    "title": "Verwaltung & Soziales",
-                    "title_es": "Administraci?n y sociedad",
+                    "title": "Verwaltung",
+                    "title_es": "Administraci?n",
                     "icon": "\ud83c\udfe2",
                     "color": "#7c3aed",
                     "items": [
@@ -1611,8 +1621,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "gesellschaft-extra",
-                    "title": "Gesellschaft II",
-                    "title_es": "Sociedad II",
+                    "title": "Alltag",
+                    "title_es": "Vida cotidiana",
                     "icon": "\ud83d\udc65",
                     "color": "#059669",
                     "items": [
@@ -1662,8 +1672,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "beruf-wirtschaft",
-                    "title": "Beruf & Wirtschaft",
-                    "title_es": "Profesi?n y econom?a",
+                    "title": "Wirtschaft",
+                    "title_es": "Econom?a",
                     "icon": "\ud83d\udcbc",
                     "color": "#0f766e",
                     "items": [
@@ -1713,8 +1723,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "weitere-begriffe",
-                    "title": "Weitere Begriffe",
-                    "title_es": "Otros conceptos",
+                    "title": "Begriffe",
+                    "title_es": "Conceptos",
                     "icon": "\ud83d\udcd8",
                     "color": "#b45309",
                     "items": [
@@ -1729,12 +1739,6 @@ window.lidKompaktData = [
                                         "w": "Monarchie",
                                         "e": "\ud83d\udc51",
                                         "tr": "monarqu?a"
-                              },
-                              {
-                                        "art": "die",
-                                        "w": "Einheit",
-                                        "e": "\ud83e\udd1d",
-                                        "tr": "unidad"
                               },
                               {
                                         "art": "die",
@@ -1818,8 +1822,8 @@ window.lidKompaktData = [
           },
           {
                     "id": "staat-extra",
-                    "title": "Institutionen",
-                    "title_es": "Instituciones",
+                    "title": "Staat",
+                    "title_es": "Estado",
                     "icon": "\ud83c\udfdb\ufe0f",
                     "color": "#7c3aed",
                     "items": [
@@ -1879,7 +1883,14 @@ window.lidKompaktData = [
                                         "w": "Wohnung",
                                         "e": "\ud83c\udfe0",
                                         "tr": "vivienda / piso"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Wirtschaftswunder",
+                                        "e": "\ud83d\udcc8",
+                                        "tr": "milagro econ?mico"
                               }
+
                     ]
           }
 ]

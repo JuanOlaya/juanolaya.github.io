@@ -3181,8 +3181,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 { key: 'Sie (formal)', display: 'Sie', spanish: 'usted(es)', auxIndex: 6 }
             ];
 
+            const perfektPartizip = getCleanPerfekt(updatedData.perfekt);
+
             let perfektTableHTML = '<table>';
-            perfektTableHTML += '<tr><th>Pron.</th><th>Aux. Konjug.</th><th>Beispiel</th></tr>';
+            perfektTableHTML += '<tr><th>Pron.</th><th>Konjugation</th><th>Beispiel</th></tr>';
 
             for (const { key, display, spanish, auxIndex } of pronounOrder) {
                 const example = updatedData.perfekt_examples[key];
@@ -3203,13 +3205,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     pronounCell += `<div class="pronoun-es">${spanish}</div>`;
                     }
 
-                    // Get auxiliary verb conjugation
+                    // Build full Perfekt form with auxiliary + Partizip II
                     let auxVerb = '';
                     if (usesSein) {
                         auxVerb = auxSein[auxIndex];
                     } else {
                         auxVerb = auxHaben[auxIndex];
                     }
+                    const perfektKonjugation = perfektPartizip && perfektPartizip !== '---'
+                        ? `${auxVerb} ${perfektPartizip}`
+                        : auxVerb;
 
                     // Add special classes for er/sie/es rows
                     let rowClass = '';
@@ -3225,7 +3230,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         rowClass = ' class="pronoun-row-Sie-formal"';
                     }
 
-                    perfektTableHTML += `<tr${rowClass}><td>${pronounCell}</td><td class="aux-verb">${auxVerb}</td><td>${exampleCell}</td></tr>`;
+                    perfektTableHTML += `<tr${rowClass}><td>${pronounCell}</td><td class="aux-verb">${perfektKonjugation}</td><td>${exampleCell}</td></tr>`;
                 }
             }
 
