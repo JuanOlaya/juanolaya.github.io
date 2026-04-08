@@ -5246,6 +5246,31 @@ window.lidKompaktModalData = {
                               }
                     ]
           },
+          "staat-extra::Gründungsmitglied": {
+                    "ex": "Deutschland ist ein Gründungsmitglied der Europäischen Union.",
+                    "ex_es": "Alemania es un miembro fundador de la Unión Europea.",
+                    "note": "Plural: Gründungsmitglieder.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man ein Land oder eine Person, die von Anfang an bei einer Organisation dabei war?",
+                                        "a": "Das Gründungsmitglied.",
+                                        "q_es": "¿Cómo se llama un país o una persona que estuvo desde el principio en una organización?",
+                                        "a_es": "El miembro fundador."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einem Staat, der die Europäische Union von Beginn an mit aufgebaut hat?",
+                                        "a": "Das Gründungsmitglied.",
+                                        "q_es": "¿Qué término corresponde a un Estado que ayudó a construir la Unión Europea desde el comienzo?",
+                                        "a_es": "El miembro fundador."
+                              },
+                              {
+                                        "q": "Wie heißt ein ursprüngliches Mitglied einer Gemeinschaft oder eines Verbandes?",
+                                        "a": "Das Gründungsmitglied.",
+                                        "q_es": "¿Cómo se llama un miembro original de una comunidad o federación?",
+                                        "a_es": "El miembro fundador."
+                              }
+                    ]
+          },
           "wirtschaft-extra::Wirtschaft": {
                     "ex": "Die Wirtschaft umfasst Produktion, Handel und Dienstleistungen.",
                     "ex_es": "La economía abarca producción, comercio y servicios.",
