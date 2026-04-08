@@ -138,6 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndexInModal = 0;
     let modalDeferredLoadToken = 0;
     let modalExampleLoadToken = 0;
+    let modalSessionId = 0;
+    let isRestoringModalTab = false;
     let storyClickCounter = 0;
     let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
     const CACHE_KEY = 'verbAppCache_v42_utf8_normalized';
@@ -1151,9 +1153,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const token = ++modalExampleLoadToken;
+        const sessionId = modalSessionId;
         loadVerbExamplesData(verbName, normalizedTab)
             .then(() => {
-                if (modalExampleLoadToken !== token || currentVerbInModal !== verbName) return;
+                if (modalExampleLoadToken !== token || modalSessionId !== sessionId || currentVerbInModal !== verbName || !verbModal.classList.contains('visible')) return;
                 const activeTabNow = document.querySelector('.modal-tab-btn.active')?.dataset.tab || normalizedTab;
                 window.openModalForVerb(verbName, {
                     skipDeferredReload: true,
@@ -1166,17 +1169,30 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
+    function closeVerbModal() {
+        currentVerbInModal = '';
+        modalDeferredLoadToken += 1;
+        modalExampleLoadToken += 1;
+        modalSessionId += 1;
+        isRestoringModalTab = false;
+        verbModal.classList.remove('visible');
+    }
+
     function restoreModalActiveTab(tabId) {
         const targetTabId = tabId || 'infinitiv';
         const targetButton = document.querySelector(`.modal-tab-btn[data-tab="${targetTabId}"]`);
         if (targetButton && targetButton.style.display !== 'none') {
+            isRestoringModalTab = true;
             targetButton.click();
+            isRestoringModalTab = false;
             return;
         }
 
         const fallbackButton = document.querySelector('.modal-tab-btn[data-tab="infinitiv"]');
         if (fallbackButton) {
+            isRestoringModalTab = true;
             fallbackButton.click();
+            isRestoringModalTab = false;
         }
     }
 
@@ -2320,10 +2336,10 @@ document.addEventListener('DOMContentLoaded', () => {
         infoModal.addEventListener('click', (e) => { if (e.target === infoModal) infoModal.classList.remove('visible'); });
 
         if (closeVerbModalButton) {
-            closeVerbModalButton.addEventListener('click', () => verbModal.classList.remove('visible'));
+            closeVerbModalButton.addEventListener('click', closeVerbModal);
         }
-        closeVerbModalXButton.addEventListener('click', () => verbModal.classList.remove('visible'));
-        verbModal.addEventListener('click', (e) => { if (e.target === verbModal) verbModal.classList.remove('visible'); });
+        closeVerbModalXButton.addEventListener('click', closeVerbModal);
+        verbModal.addEventListener('click', (e) => { if (e.target === verbModal) closeVerbModal(); });
 
         // Theme badge click handler - using event delegation since badge is created dynamically
         // Note: We attach to header tags container now
@@ -2537,7 +2553,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                if (currentVerbInModal) {
+                if (!isRestoringModalTab && currentVerbInModal && verbModal.classList.contains('visible')) {
                     maybeLoadExamplesForActiveTab(currentVerbInModal, tabId);
                 }
             });
@@ -2704,7 +2720,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Get the updated data reference
         const updatedData = allVerbsData[verb];
         const needsDeferredModalData =
-            !Array.isArray(updatedData.wortfamilie) ||
+            updatedData._wortfamilieLoaded !== true ||
             (konjunktivVerbs.includes(verb) && !updatedData.konjunktiv_ii);
 
         // Set infinitive with case tags
@@ -3306,7 +3322,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Generate Perfekt examples table
         const perfektExamplesTableContainer = document.getElementById('modal-perfekt-examples-table');
-        if (updatedData.perfekt_examples) {
+        if (updatedData.perfekt) {
             // Determine if verb uses haben or sein
             const usesHaben = updatedData.perfekt && updatedData.perfekt.startsWith('hat');
             const usesSein = updatedData.perfekt && updatedData.perfekt.startsWith('ist');
@@ -3333,51 +3349,49 @@ document.addEventListener('DOMContentLoaded', () => {
             perfektTableHTML += '<tr><th>Pron.</th><th>Konjugation</th><th>Beispiel</th></tr>';
 
             for (const { key, display, spanish, auxIndex } of pronounOrder) {
-                const example = updatedData.perfekt_examples[key];
+                const example = updatedData.perfekt_examples && updatedData.perfekt_examples[key];
+                let exampleCell = '';
+
                 if (example) {
-                    let exampleCell = '';
-
-                    if (example) {
-                        exampleCell = `<div class="example-cell">`;
-                        if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
-                        if (example.en) exampleCell += `<div class="example-translation example-en">${example.en}</div>`;
-                        if (example.es) exampleCell += `<div class="example-translation example-es">${example.es}</div>`;
-                        exampleCell += `</div>`;
-                    }
-
-                    // Create pronoun cell with German pronoun and Spanish translation
-                    let pronounCell = `<div class="pronoun-de">${display}</div>`;
-                    if (spanish) {
-                    pronounCell += `<div class="pronoun-es">${spanish}</div>`;
-                    }
-
-                    // Build full Perfekt form with auxiliary + Partizip II
-                    let auxVerb = '';
-                    if (usesSein) {
-                        auxVerb = auxSein[auxIndex];
-                    } else {
-                        auxVerb = auxHaben[auxIndex];
-                    }
-                    const perfektKonjugation = perfektPartizip && perfektPartizip !== '---'
-                        ? `${auxVerb} ${perfektPartizip}`
-                        : auxVerb;
-
-                    // Add special classes for er/sie/es rows
-                    let rowClass = '';
-                    if (key === 'er') {
-                        rowClass = ' class="pronoun-row-er"';
-                    } else if (key === 'sie') {
-                        rowClass = ' class="pronoun-row-sie"';
-                    } else if (key === 'es') {
-                        rowClass = ' class="pronoun-row-es"';
-                    } else if (key === 'sie (plural)') {
-                        rowClass = ' class="pronoun-row-sie-plural"';
-                    } else if (key === 'Sie (formal)') {
-                        rowClass = ' class="pronoun-row-Sie-formal"';
-                    }
-
-                    perfektTableHTML += `<tr${rowClass}><td>${pronounCell}</td><td class="aux-verb">${perfektKonjugation}</td><td>${exampleCell}</td></tr>`;
+                    exampleCell = `<div class="example-cell">`;
+                    if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
+                    if (example.en) exampleCell += `<div class="example-translation example-en">${example.en}</div>`;
+                    if (example.es) exampleCell += `<div class="example-translation example-es">${example.es}</div>`;
+                    exampleCell += `</div>`;
                 }
+
+                // Create pronoun cell with German pronoun and Spanish translation
+                let pronounCell = `<div class="pronoun-de">${display}</div>`;
+                if (spanish) {
+                pronounCell += `<div class="pronoun-es">${spanish}</div>`;
+                }
+
+                // Build full Perfekt form with auxiliary + Partizip II
+                let auxVerb = '';
+                if (usesSein) {
+                    auxVerb = auxSein[auxIndex];
+                } else {
+                    auxVerb = auxHaben[auxIndex];
+                }
+                const perfektKonjugation = perfektPartizip && perfektPartizip !== '---'
+                    ? `${auxVerb} ${perfektPartizip}`
+                    : auxVerb;
+
+                // Add special classes for er/sie/es rows
+                let rowClass = '';
+                if (key === 'er') {
+                    rowClass = ' class="pronoun-row-er"';
+                } else if (key === 'sie') {
+                    rowClass = ' class="pronoun-row-sie"';
+                } else if (key === 'es') {
+                    rowClass = ' class="pronoun-row-es"';
+                } else if (key === 'sie (plural)') {
+                    rowClass = ' class="pronoun-row-sie-plural"';
+                } else if (key === 'Sie (formal)') {
+                    rowClass = ' class="pronoun-row-Sie-formal"';
+                }
+
+                perfektTableHTML += `<tr${rowClass}><td>${pronounCell}</td><td class="aux-verb">${perfektKonjugation}</td><td>${exampleCell}</td></tr>`;
             }
 
             perfektTableHTML += '</table>';
@@ -3388,7 +3402,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Generate Präteritum conjugation and examples table
         const praeteritumKonjugationTableContainer = document.getElementById('modal-praeteritum-konjugation-table');
-        if (updatedData.praeteritum_conjugations && updatedData.praeteritum_examples) {
+        if (updatedData.praeteritum_conjugations) {
             const pronounOrder = [
                 { key: 'ich', display: 'ich', spanish: 'yo' },
                 { key: 'du', display: 'du', spanish: 'tú' },
@@ -3406,7 +3420,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             for (const { key, display, spanish } of pronounOrder) {
                 const conjugation = updatedData.praeteritum_conjugations[key];
-                const example = updatedData.praeteritum_examples[key];
+                const example = updatedData.praeteritum_examples && updatedData.praeteritum_examples[key];
 
                 if (conjugation || example) {
                     let exampleCell = '';
@@ -4482,19 +4496,42 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
+    function resolveWortfamilieVerbs(word, data) {
+        if (!data || typeof data !== 'object') return [];
+
+        if (Array.isArray(data.verbs)) {
+            return data.verbs.filter(Boolean);
+        }
+
+        if (Array.isArray(data.base)) {
+            return data.base.filter(Boolean);
+        }
+
+        // Root entries in the newer index can use { related: [...] } without an explicit
+        // verbs/base array. In that case, fall back to the matched word itself if it is a verb.
+        if (Array.isArray(data.related) && allVerbsData[word]) {
+            return [word];
+        }
+
+        return [];
+    }
+
     // Modified to support returning results instead of rendering
     function performWortfamilieSearch(term, returnOnly = false) {
         if (!wortfamilieIndex) return returnOnly ? [] : null;
 
         const results = [];
+        const seenResults = new Set();
         const termLower = term.toLowerCase();
 
         for (const [word, data] of Object.entries(wortfamilieIndex)) {
             // Check if the word matches (contains) the search term
             if (word.toLowerCase().includes(termLower)) {
-                // Logic: Found a match in Wortfamilie (e.g. "Bewertung")
-                // data.verbs is an array of verbs associated with this word (e.g. ["bewerten"])
-                data.verbs.forEach(verb => {
+                const candidateVerbs = resolveWortfamilieVerbs(word, data);
+                candidateVerbs.forEach(verb => {
+                    const resultKey = `${verb}::${word}`;
+                    if (seenResults.has(resultKey)) return;
+                    seenResults.add(resultKey);
                     results.push({
                         verb: verb,
                         matchedWord: word,
