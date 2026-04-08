@@ -220,27 +220,51 @@
             text-transform: none;
         }
 
+        .card-header-label {
+            font-size: 1.05rem;
+            font-style: italic;
+            font-weight: 700;
+            text-transform: none;
+            opacity: 0.95;
+        }
+
         .card-footer {
-            display: grid;
-            grid-template-columns: auto auto;
-            gap: 10px;
+            display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             padding: 10px 15px 12px;
             border-top: 1px solid var(--border-color);
             color: white;
             font-size: 0.8rem;
         }
 
+        .card-footer-content {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+        }
+
         .card-footer-theme {
+            font-size: 1.05rem;
             font-weight: 800;
             text-transform: uppercase;
+            cursor: pointer;
+            transition: opacity 0.2s ease, text-decoration-color 0.2s ease;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+        }
+
+        .card-footer-theme:hover {
+            opacity: 0.9;
+            text-decoration-color: currentColor;
         }
 
         .card-footer-translation {
-            font-size: 0.9rem;
+            font-size: 1.05rem;
             font-style: italic;
-            font-weight: 800;
+            font-weight: 600;
             text-transform: none;
         }
 
@@ -267,12 +291,10 @@
         }
 
         .card-footer-level {
-            background: rgba(255, 255, 255, 0.28);
-            border: 1px solid rgba(255, 255, 255, 0.42);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px rgba(0, 0, 0, 0.12);
             color: #ffffff;
             font-weight: 900;
             letter-spacing: 0.04em;
+            font-size: 1.05rem;
         }
 
         .level-card.acuerdo-card .card-footer {
@@ -362,6 +384,7 @@
         .spanish-word {
             color: var(--text-muted);
             font-size: 0.85rem;
+            font-style: italic;
             cursor: pointer;
             transition: color 0.2s;
             display: flex;
@@ -469,6 +492,13 @@
             opacity: 0.9;
             text-align: center;
             font-weight: 600;
+            font-style: italic;
+        }
+
+        .modal-level-text {
+            font-size: 0.95rem;
+            margin-top: -10px;
+            font-style: normal;
         }
 
         .modal-explanation {
@@ -659,7 +689,7 @@
             <div class="modal-body">
                 <div id="modalDe" class="modal-de">Stimmt!</div>
                 <div id="modalEs" class="modal-es">¡Cierto! / Así es</div>
-                <div id="modalLvText" class="modal-es" style="font-size: 0.95rem; margin-top: -10px;">Nivel: A1</div>
+                <div id="modalLvText" class="modal-es modal-level-text">Nivel: A1</div>
 
                 <div id="modalExplanation" class="modal-explanation hidden"></div>
 
@@ -747,39 +777,39 @@
 
         <div class="grid-layout">
             <div class="level-card acuerdo-card">
-                <div class="level-header acuerdo"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="headerWordEs" class="card-footer-tag">interjección</span></div>
+                <div class="level-header acuerdo"><span class="card-footer-level">A1-A2</span><span id="headerWordEs" class="card-header-label">interjecciones</span></div>
                 <table>
                     <tbody id="group-acuerdo"></tbody>
                 </table>
-                <div class="card-footer"><span class="card-footer-theme">Zustimmung</span><span id="titleAcuerdo" class="card-footer-translation">Acuerdo</span></div>
+                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Zustimmung')">Zustimmung</span><span id="titleAcuerdo" class="card-footer-translation">Acuerdo</span></span></div>
             </div>
             <div class="level-card sorpresa-card">
-                <div class="level-header sorpresa"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="headerWordEs2" class="card-footer-tag">interjección</span></div>
+                <div class="level-header sorpresa"><span class="card-footer-level">A1-A2</span><span id="headerWordEs2" class="card-header-label">interjecciones</span></div>
                 <table>
                     <tbody id="group-sorpresa"></tbody>
                 </table>
-                <div class="card-footer"><span class="card-footer-theme">Überraschung</span><span id="titleSorpresa" class="card-footer-translation">Sorpresa</span></div>
+                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Überraschung')">Überraschung</span><span id="titleSorpresa" class="card-footer-translation">Sorpresa</span></span></div>
             </div>
             <div class="level-card social-card">
-                <div class="level-header social"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="headerWordEs3" class="card-footer-tag">interjección</span></div>
+                <div class="level-header social"><span class="card-footer-level">A1-A2</span><span id="headerWordEs3" class="card-header-label">interjecciones</span></div>
                 <table>
                     <tbody id="group-social"></tbody>
                 </table>
-                <div class="card-footer"><span class="card-footer-theme">Soziales</span><span id="titleSocial" class="card-footer-translation">Social</span></div>
+                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Soziales')">Soziales</span><span id="titleSocial" class="card-footer-translation">Social</span></span></div>
             </div>
             <div class="level-card reacciones-card">
-                <div class="level-header reacciones"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="headerWordEs4" class="card-footer-tag">interjección</span></div>
+                <div class="level-header reacciones"><span class="card-footer-level">A1-A2</span><span id="headerWordEs4" class="card-header-label">interjecciones</span></div>
                 <table>
                     <tbody id="group-reacciones"></tbody>
                 </table>
-                <div class="card-footer"><span class="card-footer-theme">Reaktionen</span><span id="titleReacciones" class="card-footer-translation">Reacciones</span></div>
+                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Reaktionen')">Reaktionen</span><span id="titleReacciones" class="card-footer-translation">Reacciones</span></span></div>
             </div>
             <div class="level-card avisos-card">
-                <div class="level-header avisos"><span class="card-footer-tag card-footer-level">A1-A2</span><span id="headerWordEs5" class="card-footer-tag">interjección</span></div>
+                <div class="level-header avisos"><span class="card-footer-level">A1-A2</span><span id="headerWordEs5" class="card-header-label">interjecciones</span></div>
                 <table>
                     <tbody id="group-avisos"></tbody>
                 </table>
-                <div class="card-footer"><span class="card-footer-theme">Warnungen</span><span id="titleAvisos" class="card-footer-translation">Avisos</span></div>
+                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Warnungen')">Warnungen</span><span id="titleAvisos" class="card-footer-translation">Avisos</span></span></div>
             </div>
         </div>
 
@@ -817,7 +847,7 @@
                 titleSocial: "Social",
                 titleReacciones: "Reacciones",
                 titleAvisos: "Avisos",
-                footerInterjection: "interjección",
+                footerInterjection: "interjecciones",
                 naDef: "La navaja suiza del idioma. Cambia según el contexto.",
                 btnSpeak: "ESCUCHAR"
             },
@@ -829,7 +859,7 @@
                 titleSocial: "Social",
                 titleReacciones: "Reactions",
                 titleAvisos: "Warnings",
-                footerInterjection: "interjection",
+                footerInterjection: "interjections",
                 naDef: "The language's Swiss Army knife. Context is key.",
                 btnSpeak: "LISTEN"
             }
@@ -930,17 +960,26 @@
             { de: 'Na?', es: '¿Y bien?', en: 'And...?', lv: 'A2', ex: [{ de: 'Du bist zurück. Na?', es: 'Has vuelto. ¿Y bien?', en: 'You are back. And...?' }] }
         ];
 
+        const activeSpeakerIndexByCategory = {};
+
         function populate() {
             // Main Tables
             for (let category in data) {
                 const tbody = document.getElementById(`group-${category}`);
                 tbody.innerHTML = "";
-                data[category].forEach(item => {
+                const activeIndex = activeSpeakerIndexByCategory[category] ?? 0;
+                data[category].forEach((item, index) => {
                     item.category = category;
                     const tr = document.createElement('tr');
                     const tdDe = document.createElement('td');
-                    tdDe.innerHTML = `<div class="german-word">${item.de} <i class="fas fa-volume-up tts-icon"></i></div>`;
-                    tdDe.onclick = (e) => { e.stopPropagation(); speak(item.de); };
+                    const speakerIcon = index === activeIndex ? ' <i class="fas fa-volume-up tts-icon"></i>' : '';
+                    tdDe.innerHTML = `<div class="german-word">${item.de}${speakerIcon}</div>`;
+                    tdDe.onclick = (e) => {
+                        e.stopPropagation();
+                        activeSpeakerIndexByCategory[category] = index;
+                        populate();
+                        speak(item.de);
+                    };
 
                     const tdEs = document.createElement('td');
                     tdEs.className = "spanish-word";
@@ -964,7 +1003,7 @@
 
                 const title = document.createElement('h3');
                 title.className = "text-2xl font-black text-emerald-400 mb-2 group-hover:text-emerald-300 flex items-center gap-2";
-                title.innerHTML = `${item.de} <i class="fas fa-volume-up text-sm opacity-50 group-hover:opacity-100 transition-opacity"></i>`;
+                title.textContent = item.de;
                 title.onclick = (e) => { e.stopPropagation(); speak(item.de); };
 
                 const subtitle = document.createElement('p');
@@ -1085,7 +1124,7 @@
 
                         const de = document.createElement('div');
                         de.className = "example-de";
-                        de.innerHTML = `${ex.de} <i class="fas fa-volume-up text-xs opacity-50 ml-2"></i>`;
+                        de.textContent = ex.de;
 
                         const es = document.createElement('div');
                         es.className = "example-es";
