@@ -1804,6 +1804,12 @@ window.lidKompaktData = [
                                         "w": "Fürstentum",
                                         "e": "\ud83c\udff0",
                                         "tr": "principado"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Gründungsmitglied",
+                                        "e": "\ud83e\udd1d",
+                                        "tr": "miembro fundador"
                               }
                     ]
           },
