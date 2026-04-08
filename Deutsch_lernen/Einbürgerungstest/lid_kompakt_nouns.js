@@ -1701,5 +1701,137 @@ window.lidKompaktData = [
                                         "tr": "muro"
                               }
                     ]
+          },
+          {
+                    "id": "bildung",
+                    "title": "Bildung",
+                    "title_es": "Educación",
+                    "icon": "\ud83c\udfeb",
+                    "color": "#0284c7",
+                    "items": [
+                              {
+                                        "art": "der",
+                                        "w": "Religionsunterricht",
+                                        "e": "\ud83d\uded0",
+                                        "tr": "clase de religión"
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Geschichtsunterricht",
+                                        "e": "\ud83d\udcdc",
+                                        "tr": "clase de historia"
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Politikunterricht",
+                                        "e": "\ud83c\udfdb\ufe0f",
+                                        "tr": "clase de política"
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Sprachunterricht",
+                                        "e": "\ud83d\udcd6",
+                                        "tr": "clase de lengua / idioma"
+                              }
+                    ]
+          },
+          {
+                    "id": "ordnung",
+                    "title": "Ordnung",
+                    "title_es": "Orden",
+                    "icon": "\u2696\ufe0f",
+                    "color": "#dc2626",
+                    "items": [
+                              {
+                                        "art": "der",
+                                        "w": "Waffenbesitz",
+                                        "e": "\ud83d\udd2b",
+                                        "tr": "posesión de armas"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Faustrecht",
+                                        "e": "\ud83d\udc4a",
+                                        "tr": "ley del más fuerte"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Selbstjustiz",
+                                        "e": "\ud83d\udee1\ufe0f",
+                                        "tr": "justicia por mano propia"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Pressezensur",
+                                        "e": "\ud83d\udcf0",
+                                        "tr": "censura de prensa"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Militär",
+                                        "e": "\ud83e\ude96",
+                                        "tr": "ejército / fuerzas armadas"
+                              }
+                    ]
+          },
+          {
+                    "id": "staat-extra",
+                    "title": "Institutionen",
+                    "title_es": "Instituciones",
+                    "icon": "\ud83c\udfdb\ufe0f",
+                    "color": "#7c3aed",
+                    "items": [
+                              {
+                                        "art": "die",
+                                        "w": "Verwaltung",
+                                        "e": "\ud83c\udfe2",
+                                        "tr": "administración"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Landesregierung",
+                                        "e": "\ud83c\udff3\ufe0f",
+                                        "tr": "gobierno regional"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Wappentier",
+                                        "e": "\ud83e\udd85",
+                                        "tr": "animal heráldico"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Fürstentum",
+                                        "e": "\ud83c\udff0",
+                                        "tr": "principado"
+                              }
+                    ]
+          },
+          {
+                    "id": "wirtschaft-extra",
+                    "title": "Wirtschaft",
+                    "title_es": "Economía",
+                    "icon": "\ud83d\udcc8",
+                    "color": "#0f766e",
+                    "items": [
+                              {
+                                        "art": "die",
+                                        "w": "Wirtschaft",
+                                        "e": "\ud83d\udcc8",
+                                        "tr": "economía"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Familienunternehmen",
+                                        "e": "\ud83c\udfe2",
+                                        "tr": "empresa familiar"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Wohnung",
+                                        "e": "\ud83c\udfe0",
+                                        "tr": "vivienda / piso"
+                              }
+                    ]
           }
 ]

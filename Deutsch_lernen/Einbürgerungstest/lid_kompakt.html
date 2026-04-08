@@ -668,6 +668,21 @@
         .search-hit .col-trans {
             position: relative;
         }
+
+        .search-hit .col-word {
+            box-shadow: inset 3px 0 0 rgba(0, 255, 161, 0.75);
+        }
+
+        mark.search-highlight {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #4a3410;
+            -webkit-text-fill-color: #4a3410;
+            padding: 0;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 800;
+            box-shadow: none;
+        }
     </style>
 </head>
 
@@ -823,11 +838,15 @@
             wahlen: { de: "Wahlen", es: "Elecciones" },
             wahlrecht: { de: "Wahlrecht", es: "Sufragio" },
             wahlsystem: { de: "Wahlsystem", es: "Sistema electoral" },
+            bildung: { de: "Bildung", es: "Educación" },
+            ordnung: { de: "Ordnung", es: "Orden" },
             landespolitik: { de: "Länder", es: "Política regional" },
             "verwaltung-soziales": { de: "Verwaltung", es: "Administración" },
             "gesellschaft-extra": { de: "Gesellschaft II", es: "Sociedad II" },
             "beruf-wirtschaft": { de: "Beruf", es: "Economía" },
             "weitere-begriffe": { de: "Weitere", es: "Conceptos" },
+            "staat-extra": { de: "Institutionen", es: "Instituciones" },
+            "wirtschaft-extra": { de: "Wirtschaft", es: "Economía" },
             wahlformen: { de: "Wahlformen", es: "Voto" },
             parteien: { de: "Parteien", es: "Partidos" },
             staatsprinzipien: { de: "Staatsprinzipien", es: "Principios" },
@@ -878,11 +897,57 @@
             renderCards(data, query);
         }
 
+        function normalizeForSearch(text) {
+            return (text || "")
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLowerCase();
+        }
+
         function highlightMatch(text, query) {
             if (!query || !text) return text;
-            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regex = new RegExp(`(${escapedQuery})`, 'gi');
-            return text.replace(regex, '<span style="color:#00ffa1; font-weight:bold; text-decoration:underline;">$1</span>');
+            const originalText = String(text);
+            const normalizedText = normalizeForSearch(originalText);
+            const normalizedQuery = normalizeForSearch(query);
+
+            if (!normalizedQuery) return originalText;
+
+            const ranges = [];
+            let startIndex = 0;
+
+            while (startIndex < normalizedText.length) {
+                const matchIndex = normalizedText.indexOf(normalizedQuery, startIndex);
+                if (matchIndex === -1) break;
+                ranges.push([matchIndex, matchIndex + normalizedQuery.length]);
+                startIndex = matchIndex + normalizedQuery.length;
+            }
+
+            if (!ranges.length) return originalText;
+
+            const normalizedCharMap = [];
+            for (let i = 0; i < originalText.length; i++) {
+                const folded = normalizeForSearch(originalText[i]) || originalText[i].toLowerCase();
+                for (let j = 0; j < folded.length; j++) {
+                    normalizedCharMap.push(i);
+                }
+            }
+
+            let result = "";
+            let originalCursor = 0;
+
+            ranges.forEach(([normStart, normEnd]) => {
+                const originalStart = normalizedCharMap[normStart];
+                const originalEnd = normalizedCharMap[normEnd - 1] + 1;
+
+                if (originalStart == null || originalEnd == null) return;
+
+                result += originalText.slice(originalCursor, originalStart);
+                result += `<mark class="search-highlight">${originalText.slice(originalStart, originalEnd)}</mark>`;
+                originalCursor = originalEnd;
+            });
+
+            result += originalText.slice(originalCursor);
+            return result;
         }
 
         function itemMatchesQuery(item, query) {
@@ -897,6 +962,8 @@
             const qaText = item.qa ? item.qa.map(entry =>
                 [entry.q, entry.a, entry.q_es, entry.a_es].join(' ')
             ).join(' ') : "";
+            const noteText = item.note || "";
+            const normalizedQuery = normalizeForSearch(query);
 
             return [
                 item.w,
@@ -906,8 +973,9 @@
                 cardTranslation,
                 example,
                 exampleEs,
-                qaText
-            ].some(value => (value || "").toLowerCase().includes(query));
+                qaText,
+                noteText
+            ].some(value => normalizeForSearch(value).includes(normalizedQuery));
         }
 
         // --- RENDER LOGIC ---
@@ -960,7 +1028,7 @@
 
                     const cardWord = getCardWord(item);
                     const speechText = getSpeechText(getCardArticle(item), cardWord);
-                    const itemMatches = categoryMatchesQuery || itemMatchesQuery(item, query);
+                    const itemMatches = itemMatchesQuery(item, query);
 
                     let displayWord = cardWord;
                     let displayTrans = getCardTranslation(item);
