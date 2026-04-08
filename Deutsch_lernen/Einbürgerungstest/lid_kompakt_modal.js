@@ -4920,5 +4920,405 @@ window.lidKompaktModalData = {
                                         "a_es": "El muro."
                               }
                     ]
+          },
+          "bildung::Religionsunterricht": {
+                    "ex": "In manchen Schulen gibt es Religionsunterricht.",
+                    "ex_es": "En algunas escuelas hay clase de religión.",
+                    "note": "Plural selten. Verwandte Form: Religionsunterrichte.",
+                    "qa": [
+                              {
+                                        "q": "Wie heißt das Schulfach über Religion?",
+                                        "a": "Der Religionsunterricht.",
+                                        "q_es": "¿Cómo se llama la asignatura escolar sobre religión?",
+                                        "a_es": "La clase de religión."
+                              },
+                              {
+                                        "q": "Welchen Unterricht kann es an deutschen Schulen neben Ethik geben?",
+                                        "a": "Den Religionsunterricht.",
+                                        "q_es": "¿Qué tipo de clase puede haber en las escuelas alemanas además de Ética?",
+                                        "a_es": "La clase de religión."
+                              },
+                              {
+                                        "q": "Wie nennt man Unterricht zu Glaubensfragen in der Schule?",
+                                        "a": "Religionsunterricht.",
+                                        "q_es": "¿Cómo se llama la enseñanza sobre cuestiones de fe en la escuela?",
+                                        "a_es": "Clase de religión."
+                              }
+                    ]
+          },
+          "bildung::Geschichtsunterricht": {
+                    "ex": "Im Geschichtsunterricht lernt man viel über die deutsche Vergangenheit.",
+                    "ex_es": "En la clase de historia se aprende mucho sobre el pasado alemán.",
+                    "note": "Plural selten. Verwandte Form: Geschichtsunterrichte.",
+                    "qa": [
+                              {
+                                        "q": "Wie heißt das Schulfach über Vergangenheit und historische Ereignisse?",
+                                        "a": "Der Geschichtsunterricht.",
+                                        "q_es": "¿Cómo se llama la asignatura escolar sobre el pasado y los hechos históricos?",
+                                        "a_es": "La clase de historia."
+                              },
+                              {
+                                        "q": "Wo lernt man in der Schule etwas über Nationalsozialismus und Wiedervereinigung?",
+                                        "a": "Im Geschichtsunterricht.",
+                                        "q_es": "¿Dónde se aprende en la escuela sobre el nacionalsocialismo y la reunificación?",
+                                        "a_es": "En la clase de historia."
+                              },
+                              {
+                                        "q": "Wie nennt man Unterricht über die Geschichte eines Landes?",
+                                        "a": "Geschichtsunterricht.",
+                                        "q_es": "¿Cómo se llama la enseñanza sobre la historia de un país?",
+                                        "a_es": "Clase de historia."
+                              }
+                    ]
+          },
+          "bildung::Politikunterricht": {
+                    "ex": "Im Politikunterricht spricht man über Demokratie und Wahlen.",
+                    "ex_es": "En la clase de política se habla de democracia y elecciones.",
+                    "note": "Plural selten. Verwandte Form: Politikunterrichte.",
+                    "qa": [
+                              {
+                                        "q": "Wie heißt das Schulfach über Demokratie, Staat und Wahlen?",
+                                        "a": "Der Politikunterricht.",
+                                        "q_es": "¿Cómo se llama la asignatura escolar sobre democracia, Estado y elecciones?",
+                                        "a_es": "La clase de política."
+                              },
+                              {
+                                        "q": "Wo lernt man in der Schule etwas über Grundgesetz und Bundestag?",
+                                        "a": "Im Politikunterricht.",
+                                        "q_es": "¿Dónde se aprende en la escuela sobre la Ley Fundamental y el Bundestag?",
+                                        "a_es": "En la clase de política."
+                              },
+                              {
+                                        "q": "Wie nennt man Unterricht über politische Ordnung und Mitbestimmung?",
+                                        "a": "Politikunterricht.",
+                                        "q_es": "¿Cómo se llama la enseñanza sobre el orden político y la participación?",
+                                        "a_es": "Clase de política."
+                              }
+                    ]
+          },
+          "bildung::Sprachunterricht": {
+                    "ex": "Im Sprachunterricht übt man Lesen, Schreiben und Sprechen.",
+                    "ex_es": "En la clase de idioma se practican la lectura, la escritura y el habla.",
+                    "note": "Plural selten. Verwandte Form: Sprachunterrichte.",
+                    "qa": [
+                              {
+                                        "q": "Wie heißt Unterricht, in dem man eine Sprache lernt?",
+                                        "a": "Der Sprachunterricht.",
+                                        "q_es": "¿Cómo se llama la enseñanza en la que se aprende un idioma?",
+                                        "a_es": "La clase de idioma."
+                              },
+                              {
+                                        "q": "Wo lernt man Grammatik, Wortschatz und Aussprache?",
+                                        "a": "Im Sprachunterricht.",
+                                        "q_es": "¿Dónde se aprenden gramática, vocabulario y pronunciación?",
+                                        "a_es": "En la clase de idioma."
+                              },
+                              {
+                                        "q": "Wie nennt man Unterricht zum Lernen einer Fremd- oder Landessprache?",
+                                        "a": "Sprachunterricht.",
+                                        "q_es": "¿Cómo se llama la enseñanza para aprender una lengua extranjera o nacional?",
+                                        "a_es": "Clase de idioma."
+                              }
+                    ]
+          },
+          "ordnung::Waffenbesitz": {
+                    "ex": "Waffenbesitz ist in Deutschland streng geregelt.",
+                    "ex_es": "La posesión de armas está estrictamente regulada en Alemania.",
+                    "note": "Ohne Plural im üblichen Gebrauch.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man es, wenn jemand Waffen besitzt?",
+                                        "a": "Den Waffenbesitz.",
+                                        "q_es": "¿Cómo se llama cuando alguien posee armas?",
+                                        "a_es": "La posesión de armas."
+                              },
+                              {
+                                        "q": "Was ist in Deutschland streng gesetzlich geregelt, wenn es um Pistolen oder Gewehre geht?",
+                                        "a": "Der Waffenbesitz.",
+                                        "q_es": "¿Qué está estrictamente regulado por ley en Alemania cuando se trata de pistolas o rifles?",
+                                        "a_es": "La posesión de armas."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt dazu, legal Waffen zu haben?",
+                                        "a": "Der Waffenbesitz.",
+                                        "q_es": "¿Qué término corresponde a tener armas legalmente?",
+                                        "a_es": "La posesión de armas."
+                              }
+                    ]
+          },
+          "ordnung::Faustrecht": {
+                    "ex": "In einem Rechtsstaat gilt nicht das Faustrecht.",
+                    "ex_es": "En un Estado de derecho no rige la ley del más fuerte.",
+                    "note": "Ohne Plural im üblichen Gebrauch.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man die Regel, dass der Stärkere einfach macht, was er will?",
+                                        "a": "Das Faustrecht.",
+                                        "q_es": "¿Cómo se llama la regla según la cual el más fuerte simplemente hace lo que quiere?",
+                                        "a_es": "La ley del más fuerte."
+                              },
+                              {
+                                        "q": "Was gilt in Deutschland nicht, weil hier ein Rechtsstaat besteht?",
+                                        "a": "Das Faustrecht.",
+                                        "q_es": "¿Qué no rige en Alemania porque aquí existe un Estado de derecho?",
+                                        "a_es": "La ley del más fuerte."
+                              },
+                              {
+                                        "q": "Welcher Begriff steht für Gewalt statt Recht?",
+                                        "a": "Das Faustrecht.",
+                                        "q_es": "¿Qué término representa la violencia en lugar del derecho?",
+                                        "a_es": "La ley del más fuerte."
+                              }
+                    ]
+          },
+          "ordnung::Selbstjustiz": {
+                    "ex": "Selbstjustiz ist in Deutschland verboten.",
+                    "ex_es": "La justicia por mano propia está prohibida en Alemania.",
+                    "note": "Ohne Plural im üblichen Gebrauch.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man es, wenn Menschen Strafen selbst durchsetzen wollen?",
+                                        "a": "Die Selbstjustiz.",
+                                        "q_es": "¿Cómo se llama cuando las personas quieren imponer castigos por su cuenta?",
+                                        "a_es": "La justicia por mano propia."
+                              },
+                              {
+                                        "q": "Was ist in Deutschland verboten, weil Gerichte über Schuld und Strafe entscheiden?",
+                                        "a": "Die Selbstjustiz.",
+                                        "q_es": "¿Qué está prohibido en Alemania porque son los tribunales los que deciden sobre culpa y pena?",
+                                        "a_es": "La justicia por mano propia."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt dazu, das Recht in die eigene Hand zu nehmen?",
+                                        "a": "Die Selbstjustiz.",
+                                        "q_es": "¿Qué término corresponde a tomarse la justicia por la propia mano?",
+                                        "a_es": "La justicia por mano propia."
+                              }
+                    ]
+          },
+          "ordnung::Pressezensur": {
+                    "ex": "Pressezensur ist mit der Pressefreiheit unvereinbar.",
+                    "ex_es": "La censura de prensa es incompatible con la libertad de prensa.",
+                    "note": "Ohne Plural im üblichen Gebrauch.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man es, wenn der Staat Zeitungen und Medien inhaltlich kontrolliert?",
+                                        "a": "Die Pressezensur.",
+                                        "q_es": "¿Cómo se llama cuando el Estado controla el contenido de periódicos y medios?",
+                                        "a_es": "La censura de prensa."
+                              },
+                              {
+                                        "q": "Was ist in Deutschland wegen der Pressefreiheit nicht erlaubt?",
+                                        "a": "Die Pressezensur.",
+                                        "q_es": "¿Qué no está permitido en Alemania debido a la libertad de prensa?",
+                                        "a_es": "La censura de prensa."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zur staatlichen Zensur von Medien?",
+                                        "a": "Die Pressezensur.",
+                                        "q_es": "¿Qué término corresponde a la censura estatal de los medios?",
+                                        "a_es": "La censura de prensa."
+                              }
+                    ]
+          },
+          "ordnung::Militär": {
+                    "ex": "Das Militär verteidigt ein Land im Ernstfall.",
+                    "ex_es": "El ejército defiende un país en caso de necesidad.",
+                    "note": "Ohne Plural im üblichen Gebrauch.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man die Streitkräfte eines Staates?",
+                                        "a": "Das Militär.",
+                                        "q_es": "¿Cómo se llaman las fuerzas armadas de un Estado?",
+                                        "a_es": "El ejército."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu Armee oder Streitkräften?",
+                                        "a": "Das Militär.",
+                                        "q_es": "¿Qué término corresponde al ejército o a las fuerzas armadas?",
+                                        "a_es": "El ejército."
+                              },
+                              {
+                                        "q": "Wie nennt man die bewaffnete Organisation zur Landesverteidigung?",
+                                        "a": "Das Militär.",
+                                        "q_es": "¿Cómo se llama la organización armada para la defensa nacional?",
+                                        "a_es": "El ejército."
+                              }
+                    ]
+          },
+          "staat-extra::Verwaltung": {
+                    "ex": "Die Verwaltung setzt Gesetze und Entscheidungen praktisch um.",
+                    "ex_es": "La administración aplica en la práctica leyes y decisiones.",
+                    "note": "Plural: Verwaltungen.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man den Bereich des Staates, der Entscheidungen organisiert und umsetzt?",
+                                        "a": "Die Verwaltung.",
+                                        "q_es": "¿Cómo se llama el ámbito del Estado que organiza y aplica decisiones?",
+                                        "a_es": "La administración."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu Behörden und Ämtern zusammen?",
+                                        "a": "Die Verwaltung.",
+                                        "q_es": "¿Qué término corresponde al conjunto de autoridades y oficinas públicas?",
+                                        "a_es": "La administración."
+                              },
+                              {
+                                        "q": "Wie heißt die praktische Durchführung staatlicher Aufgaben?",
+                                        "a": "Die Verwaltung.",
+                                        "q_es": "¿Cómo se llama la ejecución práctica de las tareas del Estado?",
+                                        "a_es": "La administración."
+                              }
+                    ]
+          },
+          "staat-extra::Landesregierung": {
+                    "ex": "Die Landesregierung regiert ein Bundesland.",
+                    "ex_es": "El gobierno regional gobierna un estado federado.",
+                    "note": "Plural: Landesregierungen.",
+                    "qa": [
+                              {
+                                        "q": "Wie heißt die Regierung eines Bundeslandes?",
+                                        "a": "Die Landesregierung.",
+                                        "q_es": "¿Cómo se llama el gobierno de un estado federado?",
+                                        "a_es": "El gobierno regional."
+                              },
+                              {
+                                        "q": "Wer leitet die Politik auf Ebene eines Bundeslandes?",
+                                        "a": "Die Landesregierung.",
+                                        "q_es": "¿Quién dirige la política a nivel de un estado federado?",
+                                        "a_es": "El gobierno regional."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zur Regierung von Bayern, Hessen oder Sachsen?",
+                                        "a": "Die Landesregierung.",
+                                        "q_es": "¿Qué término corresponde al gobierno de Baviera, Hesse o Sajonia?",
+                                        "a_es": "El gobierno regional."
+                              }
+                    ]
+          },
+          "staat-extra::Wappentier": {
+                    "ex": "Der Adler ist das Wappentier Deutschlands.",
+                    "ex_es": "El águila es el animal heráldico de Alemania.",
+                    "note": "Plural: Wappentiere.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man ein Tier, das in einem Wappen als Symbol erscheint?",
+                                        "a": "Das Wappentier.",
+                                        "q_es": "¿Cómo se llama un animal que aparece como símbolo en un escudo?",
+                                        "a_es": "El animal heráldico."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zum Adler im deutschen Wappen?",
+                                        "a": "Das Wappentier.",
+                                        "q_es": "¿Qué término corresponde al águila en el escudo alemán?",
+                                        "a_es": "El animal heráldico."
+                              },
+                              {
+                                        "q": "Wie heißt ein tierisches Symbol in einem Staatswappen?",
+                                        "a": "Das Wappentier.",
+                                        "q_es": "¿Cómo se llama un símbolo animal en un escudo estatal?",
+                                        "a_es": "El animal heráldico."
+                              }
+                    ]
+          },
+          "staat-extra::Fürstentum": {
+                    "ex": "Ein Fürstentum ist ein Staat mit einem Fürsten an der Spitze.",
+                    "ex_es": "Un principado es un Estado con un príncipe al frente.",
+                    "note": "Plural: Fürstentümer.",
+                    "qa": [
+                              {
+                                        "q": "Wie heißt ein Staat, der von einem Fürsten regiert wird?",
+                                        "a": "Das Fürstentum.",
+                                        "q_es": "¿Cómo se llama un Estado gobernado por un príncipe?",
+                                        "a_es": "El principado."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer monarchischen Herrschaftsform mit Fürst an der Spitze?",
+                                        "a": "Das Fürstentum.",
+                                        "q_es": "¿Qué término corresponde a una forma monárquica con un príncipe al frente?",
+                                        "a_es": "El principado."
+                              },
+                              {
+                                        "q": "Wie nennt man ein Land wie Liechtenstein nach seiner Staatsform?",
+                                        "a": "Ein Fürstentum.",
+                                        "q_es": "¿Cómo se llama un país como Liechtenstein según su forma de Estado?",
+                                        "a_es": "Un principado."
+                              }
+                    ]
+          },
+          "wirtschaft-extra::Wirtschaft": {
+                    "ex": "Die Wirtschaft umfasst Produktion, Handel und Dienstleistungen.",
+                    "ex_es": "La economía abarca producción, comercio y servicios.",
+                    "note": "Ohne Plural im üblichen Gebrauch.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man das gesamte wirtschaftliche Leben eines Landes?",
+                                        "a": "Die Wirtschaft.",
+                                        "q_es": "¿Cómo se llama la vida económica total de un país?",
+                                        "a_es": "La economía."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu Produktion, Handel und Konsum zusammen?",
+                                        "a": "Die Wirtschaft.",
+                                        "q_es": "¿Qué término corresponde en conjunto a producción, comercio y consumo?",
+                                        "a_es": "La economía."
+                              },
+                              {
+                                        "q": "Wie heißt der Bereich mit Unternehmen, Arbeit und Geldkreisläufen?",
+                                        "a": "Die Wirtschaft.",
+                                        "q_es": "¿Cómo se llama el ámbito de las empresas, el trabajo y los flujos de dinero?",
+                                        "a_es": "La economía."
+                              }
+                    ]
+          },
+          "wirtschaft-extra::Familienunternehmen": {
+                    "ex": "Ein Familienunternehmen gehört oft über Generationen einer Familie.",
+                    "ex_es": "Una empresa familiar suele pertenecer a una familia durante generaciones.",
+                    "note": "Plural: Familienunternehmen.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man eine Firma, die einer Familie gehört?",
+                                        "a": "Das Familienunternehmen.",
+                                        "q_es": "¿Cómo se llama una empresa que pertenece a una familia?",
+                                        "a_es": "La empresa familiar."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer Firma in Familienbesitz?",
+                                        "a": "Das Familienunternehmen.",
+                                        "q_es": "¿Qué término corresponde a una empresa en manos de una familia?",
+                                        "a_es": "La empresa familiar."
+                              },
+                              {
+                                        "q": "Wie heißt ein Unternehmen, das oft von Eltern an Kinder weitergegeben wird?",
+                                        "a": "Ein Familienunternehmen.",
+                                        "q_es": "¿Cómo se llama una empresa que a menudo pasa de padres a hijos?",
+                                        "a_es": "Una empresa familiar."
+                              }
+                    ]
+          },
+          "wirtschaft-extra::Wohnung": {
+                    "ex": "Viele Menschen wohnen in einer Mietwohnung.",
+                    "ex_es": "Muchas personas viven en un piso de alquiler.",
+                    "note": "Plural: Wohnungen.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man die Räume, in denen jemand wohnt?",
+                                        "a": "Die Wohnung.",
+                                        "q_es": "¿Cómo se llaman las habitaciones o el espacio donde vive alguien?",
+                                        "a_es": "La vivienda."
+                              },
+                              {
+                                        "q": "Was mietet man oft in einer Stadt, um dort zu leben?",
+                                        "a": "Eine Wohnung.",
+                                        "q_es": "¿Qué se alquila a menudo en una ciudad para vivir allí?",
+                                        "a_es": "Una vivienda."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einem Zuhause in einem Haus oder Gebäude?",
+                                        "a": "Die Wohnung.",
+                                        "q_es": "¿Qué término corresponde a un hogar dentro de una casa o edificio?",
+                                        "a_es": "La vivienda."
+                              }
+                    ]
           }
 }
