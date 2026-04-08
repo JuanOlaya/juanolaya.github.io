@@ -40,6 +40,7 @@ const newVerbs = [
 
 function writeJ(folder, name, obj) {
     const p = path.join(baseDir, folder, name + '.json');
+    fs.mkdirSync(path.dirname(p), { recursive: true });
     if (!fs.existsSync(p)) {
         fs.writeFileSync(p, JSON.stringify(obj, null, 4));
     }
@@ -60,10 +61,10 @@ newVerbs.forEach(data => {
         tags: ["🏠 Estático"],
         emoji: "🔹"
     });
-    writeJ('praesens', v, { verb: v, ich: v, du: v, "er/sie/es": v, wir: v, ihr: v, "Sie/sie": v });
-    writeJ('praeteritum_konjugation', v, { verb: v, ich: v, du: v, "er/sie/es": v, wir: v, ihr: v, "Sie/sie": v });
-    writeJ('perfekt_konjugation', v, { verb: v, ich: v, du: v, "er/sie/es": v, wir: v, ihr: v, "Sie/sie": v });
-    writeJ('praesens_fragen', v, { praesens_fragen: {} });
+    writeJ('conjugations/praesens', v, { praesens: { verb: v, ich: v, du: v, "er/sie/es": v, wir: v, ihr: v, "Sie/sie": v } });
+    writeJ('conjugations/praeteritum', v, { praeteritum_conjugation: { verb: v, ich: v, du: v, "er/sie/es": v, wir: v, ihr: v, "Sie/sie": v } });
+    writeJ('examples/perfekt_examples', v, { perfekt_examples: {} });
+    writeJ('examples/praesens_question_examples', v, { praesens_fragen: {} });
     writeJ('wortfamilie', v, { wortfamilie: [] });
 });
 

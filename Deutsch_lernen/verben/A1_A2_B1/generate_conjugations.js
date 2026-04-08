@@ -292,7 +292,15 @@ async function generateAll() {
     let createdCount = 0;
 
     // Ensure base directories exist
-    const subDirs = ['cards', 'praesens', 'praeteritum_konjugation', 'perfekt_konjugation', 'praesens_fragen'];
+    const subDirs = [
+        'cards',
+        'conjugations/praesens',
+        'conjugations/praeteritum',
+        'examples/praesens_examples',
+        'examples/praesens_question_examples',
+        'examples/perfekt_examples',
+        'examples/praeteritum_examples'
+    ];
     subDirs.forEach(dir => {
         const fullPath = path.join(basePath, dir);
         if (!fs.existsSync(fullPath)) {
@@ -344,8 +352,9 @@ async function generateAll() {
         }
 
         // 2. PRAESENS
-        const praesensPath = path.join(basePath, 'praesens', `${fileVerb}.json`);
-        if (true || !fs.existsSync(praesensPath)) {
+        const praesensConjugationPath = path.join(basePath, 'conjugations/praesens', `${fileVerb}.json`);
+        const praesensExamplesPath = path.join(basePath, 'examples/praesens_examples', `${fileVerb}.json`);
+        if (true || !fs.existsSync(praesensConjugationPath) || !fs.existsSync(praesensExamplesPath)) {
             const p = generatePraesens(genVerb, data);
             const customReflexiveExamples = {
                 "freuen": {
@@ -491,21 +500,19 @@ async function generateAll() {
                 });
             }
 
-            const json = {
-                praesens: p,
-                praesens_examples: examples
-            };
-            fs.writeFileSync(praesensPath, JSON.stringify(json, null, 2));
+            fs.writeFileSync(praesensConjugationPath, JSON.stringify({ praesens: p }, null, 2));
+            fs.writeFileSync(praesensExamplesPath, JSON.stringify({ praesens_examples: examples }, null, 2));
             console.log(`Created praesens for ${fileVerb}`);
             createdCount++;
         }
 
         // 3. PRAETERITUM (KONJUGATION)
-        const praetPath = path.join(basePath, 'praeteritum_konjugation', `${fileVerb}.json`);
-        if (true || !fs.existsSync(praetPath)) {
+        const praetConjugationPath = path.join(basePath, 'conjugations/praeteritum', `${fileVerb}.json`);
+        const praetExamplesPath = path.join(basePath, 'examples/praeteritum_examples', `${fileVerb}.json`);
+        if (true || !fs.existsSync(praetConjugationPath) || !fs.existsSync(praetExamplesPath)) {
             const p = generatePraeteritum(genVerb, data);
-            const json = {
-                praeteritum: p,
+            fs.writeFileSync(praetConjugationPath, JSON.stringify({ praeteritum: p }, null, 2));
+            fs.writeFileSync(praetExamplesPath, JSON.stringify({
                 praeteritum_examples: {
                     "ich": { "de": `Ich ${p.ich} gestern.`, "es": `Yo ${data.es.split('/')[0]} ayer.`, "en": `I ${data.en.split('/')[0]} yesterday.` },
                     "du": { "de": `Du ${p.du}.`, "es": `...`, "en": `...` },
@@ -517,15 +524,14 @@ async function generateAll() {
                     "sie (plural)": { "de": `Sie ${p['sie (plural)']}.`, "es": `...`, "en": `...` },
                     "Sie (formal)": { "de": `Sie ${p['Sie (formal)']}.`, "es": `...`, "en": `...` }
                 }
-            };
-            fs.writeFileSync(praetPath, JSON.stringify(json, null, 2));
+            }, null, 2));
             console.log(`Created praeteritum for ${fileVerb}`);
             createdCount++;
         }
 
         // 4. PERFEKT EXAMPLES
-        const perfKonjPath = path.join(basePath, 'perfekt_konjugation', `${fileVerb}.json`);
-        if (true || !fs.existsSync(perfKonjPath)) {
+        const perfExamplesPath = path.join(basePath, 'examples/perfekt_examples', `${fileVerb}.json`);
+        if (true || !fs.existsSync(perfExamplesPath)) {
             const perfect_aux = data.aux || 'haben';
             const perfect_pp = data.pp || ('ge' + getStem(genVerb) + 't');
 
@@ -542,17 +548,17 @@ async function generateAll() {
                     "Sie (formal)": { "de": `Sie ${perfect_aux === 'sein' ? 'sind' : 'haben'} ... ${perfect_pp}.`, "es": `(Perfekt Sie Formal)`, "en": `(Perfect You Formal)` }
                 }
             };
-            fs.writeFileSync(perfKonjPath, JSON.stringify(json, null, 2));
-            console.log(`Created perfekt_konjugation for ${fileVerb}`);
+            fs.writeFileSync(perfExamplesPath, JSON.stringify(json, null, 2));
+            console.log(`Created perfekt_examples for ${fileVerb}`);
             createdCount++;
         }
 
         // 5. QUESTIONS (praesens_fragen)
-        const questPath = path.join(basePath, 'praesens_fragen', `${fileVerb}.json`);
+        const questPath = path.join(basePath, 'examples/praesens_question_examples', `${fileVerb}.json`);
         if (true || !fs.existsSync(questPath)) {
             const json = generateQuestions(genVerb, data);
             fs.writeFileSync(questPath, JSON.stringify(json, null, 2));
-            console.log(`Created praesens_fragen for ${fileVerb}`);
+            console.log(`Created praesens_question_examples for ${fileVerb}`);
             createdCount++;
         }
 
