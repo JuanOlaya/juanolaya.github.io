@@ -3716,6 +3716,42 @@ window.lidKompaktModalData = {
                               }
                     ]
           },
+          "kalter-krieg::Eiserner Vorhang": {
+                    "ex": "Der Eiserne Vorhang trennte Europa in Ost und West.",
+                    "ex_es": "El Telón de Acero dividía Europa en Este y Oeste.",
+                    "qa": [
+                              {
+                                        "q": "Wie nannte man die politische und ideologische Trennung zwischen Osteuropa und Westeuropa?",
+                                        "a": "Den Eisernen Vorhang.",
+                                        "q_es": "¿Cómo se llamaba la separación política e ideológica entre Europa del Este y Europa Occidental?",
+                                        "a_es": "El Telón de Acero."
+                              },
+                              {
+                                        "q": "Was trennte Europa zur Zeit des Kalten Krieges in Ost und West?",
+                                        "a": "Der Eiserne Vorhang.",
+                                        "q_es": "¿Qué separó Europa en Este y Oeste durante la Guerra Fría?",
+                                        "a_es": "El Telón de Acero."
+                              }
+                    ]
+          },
+          "kalter-krieg::Warschauer Pakt": {
+                    "ex": "Der Warschauer Pakt war ein Militärbündnis im Osten Europas.",
+                    "ex_es": "El Pacto de Varsovia fue una alianza militar en Europa del Este.",
+                    "qa": [
+                              {
+                                        "q": "Wie hieß das Militärbündnis der osteuropäischen Staaten im Kalten Krieg?",
+                                        "a": "Der Warschauer Pakt.",
+                                        "q_es": "¿Cómo se llamaba la alianza militar de los Estados de Europa del Este durante la Guerra Fría?",
+                                        "a_es": "El Pacto de Varsovia."
+                              },
+                              {
+                                        "q": "Welches Bündnis stand im Osten Europas im Gegensatz zur NATO?",
+                                        "a": "Der Warschauer Pakt.",
+                                        "q_es": "¿Qué alianza estaba en Europa del Este en oposición a la OTAN?",
+                                        "a_es": "El Pacto de Varsovia."
+                              }
+                    ]
+          },
           "wiedervereinigung::Wiedervereinigung": {
                     "ex": "Die Wiedervereinigung war 1990.",
                     "ex_es": "La reunificaci\ufffdn fue en 1990.",

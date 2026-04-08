@@ -1326,6 +1326,29 @@ window.lidKompaktData = [
                     ]
           },
           {
+                    "id": "kalter-krieg",
+                    "title": "Kalter Krieg",
+                    "title_es": "Guerra Fría",
+                    "icon": "\ud83e\uddf1",
+                    "color": "#475569",
+                    "items": [
+                              {
+                                        "art": "der",
+                                        "w": "Eiserner Vorhang",
+                                        "e": "\ud83e\uddf1",
+                                        "tr": "Telón de Acero",
+                                        "important": true
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "Warschauer Pakt",
+                                        "e": "\ud83d\udee1\ufe0f",
+                                        "tr": "Pacto de Varsovia",
+                                        "important": true
+                              }
+                    ]
+          },
+          {
                     "id": "wiedervereinigung",
                     "title": "Deutschland",
                     "title_es": "Alemania",
