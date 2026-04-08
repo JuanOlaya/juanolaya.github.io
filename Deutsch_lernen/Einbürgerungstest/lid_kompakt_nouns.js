@@ -726,6 +726,12 @@
                                         "e": "\ud83c\udf10",
                                         "tr": "Naciones Unidas",
                                         "important": true
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Nachbarland",
+                                        "e": "\ud83d\uddfa\ufe0f",
+                                        "tr": "país vecino"
                               }
                     ]
           },
@@ -1354,6 +1360,29 @@
                                         "e": "\ud83d\udee1\ufe0f",
                                         "tr": "Pacto de Varsovia",
                                         "important": true
+                              },
+                              {
+                                        "art": "der",
+                                        "w": "17. Juni 1953",
+                                        "e": "\ud83d\udcc5",
+                                        "tr": "17 de junio de 1953",
+                                        "important": true
+                              }
+                    ]
+          },
+          {
+                    "id": "gedenken",
+                    "title": "Gedenken",
+                    "title_es": "Memoria",
+                    "icon": "\ud83d\udd6f\ufe0f",
+                    "color": "#9f1239",
+                    "items": [
+                              {
+                                        "art": "der",
+                                        "w": "27. Januar",
+                                        "e": "\ud83d\udcc5",
+                                        "tr": "27 de enero",
+                                        "important": true
                               }
                     ]
           },
@@ -1754,6 +1783,24 @@
                                         "w": "Mauer",
                                         "e": "\ud83e\uddf1",
                                         "tr": "muro"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Opfer",
+                                        "e": "\ud83d\udd6f\ufe0f",
+                                        "tr": "víctima"
+                              },
+                              {
+                                        "art": "die (pl)",
+                                        "w": "Stolpersteine",
+                                        "e": "\ud83e\udea8",
+                                        "tr": "adoquines conmemorativos"
+                              },
+                              {
+                                        "art": "die (pl)",
+                                        "w": "Grenzen",
+                                        "e": "\ud83d\uddfa\ufe0f",
+                                        "tr": "fronteras / límites"
                               }
                     ]
           },

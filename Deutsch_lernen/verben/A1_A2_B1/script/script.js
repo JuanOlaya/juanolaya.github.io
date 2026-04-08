@@ -957,6 +957,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 ? fetch(`json/${folder}/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : fallback).catch(() => fallback)
                 : Promise.resolve(fallback);
 
+        const shouldRefetchWortfamilie =
+            existingData._wortfamilieLoaded !== true ||
+            !Array.isArray(existingData.wortfamilie) ||
+            existingData.wortfamilie.length === 0;
+
         const [
             konjunktivData,
             wortfamilieData
@@ -964,7 +969,7 @@ document.addEventListener('DOMContentLoaded', () => {
             konjunktivVerbs.includes(verbName) && !existingData.konjunktiv_ii
                 ? maybeFetchJson('conjugations/konjunktiv_ii', {})
                 : Promise.resolve({}),
-            existingData._wortfamilieLoaded === true
+            !shouldRefetchWortfamilie
                 ? Promise.resolve({ wortfamilie: existingData.wortfamilie || [] })
                 : maybeFetchJson('wortfamilie', { wortfamilie: [] })
         ]);

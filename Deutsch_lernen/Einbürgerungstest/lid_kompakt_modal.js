@@ -622,6 +622,31 @@ window.lidKompaktModalData = {
                     "ex": "Die Vereinten Nationen setzen sich für Frieden und Zusammenarbeit ein.",
                     "ex_es": "Las Naciones Unidas trabajan por la paz y la cooperación."
           },
+          "eu::Nachbarland": {
+                    "ex": "Deutschland hat mehrere Nachbarländer in Europa.",
+                    "ex_es": "Alemania tiene varios países vecinos en Europa.",
+                    "note": "Plural: Nachbarländer. Deutschland grenzt an Dänemark, Polen, Tschechien, Österreich, die Schweiz, Frankreich, Luxemburg, Belgien und die Niederlande.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man ein Land, das direkt an ein anderes grenzt?",
+                                        "a": "Das Nachbarland.",
+                                        "q_es": "¿Cómo se llama un país que limita directamente con otro?",
+                                        "a_es": "El país vecino."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu Polen, Frankreich oder Österreich aus deutscher Sicht?",
+                                        "a": "Das Nachbarland.",
+                                        "q_es": "¿Qué término corresponde a Polonia, Francia o Austria desde la perspectiva alemana?",
+                                        "a_es": "El país vecino."
+                              },
+                              {
+                                        "q": "Wie nennt man einen Staat an der gemeinsamen Grenze zu Deutschland?",
+                                        "a": "Ein Nachbarland.",
+                                        "q_es": "¿Cómo se llama un Estado en la frontera común con Alemania?",
+                                        "a_es": "Un país vecino."
+                              }
+                    ]
+          },
           "deutsche-geschichte::DDR": {
                     "ex": "Die DDR lag im Osten Deutschlands.",
                     "ex_es": "La RDA estaba en el este de Alemania."
@@ -649,6 +674,32 @@ window.lidKompaktModalData = {
           "kalter-krieg::Warschauer Pakt": {
                     "ex": "Der Warschauer Pakt war ein Militärbündnis im Osten Europas.",
                     "ex_es": "El Pacto de Varsovia fue una alianza militar en Europa del Este."
+          },
+          "kalter-krieg::17. Juni 1953": {
+                    "ex": "Der 17. Juni 1953 ist ein wichtiges Datum in der Geschichte der DDR.",
+                    "ex_es": "El 17 de junio de 1953 es una fecha importante en la historia de la RDA.",
+                    "note": "Am 17. Juni 1953 gab es in der DDR landesweite Streiks und einen Volksaufstand.",
+                    "qa": [
+                              {
+                                        "q": "Was ereignete sich am 17. Juni 1953 in der DDR?",
+                                        "a": "landesweite Streiks und ein Volksaufstand",
+                                        "q_es": "¿Qué ocurrió el 17 de junio de 1953 en la RDA?",
+                                        "a_es": "huelgas en todo el país y un levantamiento popular"
+                              }
+                    ]
+          },
+          "gedenken::27. Januar": {
+                    "ex": "Der 27. Januar ist in Deutschland ein offizieller Gedenktag.",
+                    "ex_es": "El 27 de enero es en Alemania un día oficial de conmemoración.",
+                    "note": "Der Tag erinnert an die Opfer des Nationalsozialismus und an die Befreiung des Vernichtungslagers Auschwitz.",
+                    "qa": [
+                              {
+                                        "q": "Der 27. Januar ist in Deutschland ein offizieller Gedenktag. Woran erinnert dieser Tag?",
+                                        "a": "an die Opfer des Nationalsozialismus (Tag der Befreiung des Vernichtungslagers Auschwitz)",
+                                        "q_es": "El 27 de enero es en Alemania un día oficial de conmemoración. ¿Qué recuerda ese día?",
+                                        "a_es": "a las víctimas del nacionalsocialismo (día de la liberación del campo de exterminio de Auschwitz)"
+                              }
+                    ]
           },
           "wiedervereinigung::Wiedervereinigung": {
                     "ex": "Die Wiedervereinigung war 1990.",
@@ -917,6 +968,81 @@ window.lidKompaktModalData = {
                     "ex": "Die Mauer trennte fr?her Ost- und West-Berlin.",
                     "ex_es": "El muro separaba antes Berl?n Este y Berl?n Oeste.",
                     "note": "Plural: Mauern. Verwandtes Wort: Berliner Mauer."
+          },
+          "weitere-begriffe::Opfer": {
+                    "ex": "Viele Menschen wurden Opfer des Nationalsozialismus.",
+                    "ex_es": "Muchas personas fueron víctimas del nacionalsocialismo.",
+                    "note": "Plural: Opfer.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man Menschen, die unter Gewalt oder Verbrechen leiden?",
+                                        "a": "Die Opfer.",
+                                        "q_es": "¿Cómo se llama a las personas que sufren violencia o crímenes?",
+                                        "a_es": "Las víctimas."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu Menschen, denen Unrecht angetan wurde?",
+                                        "a": "Das Opfer.",
+                                        "q_es": "¿Qué término corresponde a personas a las que se les hizo una injusticia?",
+                                        "a_es": "La víctima."
+                              },
+                              {
+                                        "q": "Wie nennt man eine Person, die durch Krieg, Verfolgung oder Gewalt geschädigt wurde?",
+                                        "a": "Das Opfer.",
+                                        "q_es": "¿Cómo se llama una persona perjudicada por guerra, persecución o violencia?",
+                                        "a_es": "La víctima."
+                              }
+                    ]
+          },
+          "weitere-begriffe::Stolpersteine": {
+                    "ex": "Stolpersteine erinnern in vielen Städten an Opfer des Nationalsozialismus.",
+                    "ex_es": "Los Stolpersteine recuerdan en muchas ciudades a las víctimas del nacionalsocialismo.",
+                    "note": "Pluralwort: Stolpersteine. Singular: der Stolperstein.",
+                    "qa": [
+                              {
+                                        "q": "Wie heißen kleine Gedenksteine im Gehweg, die an Opfer des Nationalsozialismus erinnern?",
+                                        "a": "Die Stolpersteine.",
+                                        "q_es": "¿Cómo se llaman las pequeñas piedras conmemorativas en la acera que recuerdan a las víctimas del nacionalsocialismo?",
+                                        "a_es": "Los Stolpersteine."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu Messingsteinen vor Häusern zur Erinnerung an verfolgte Menschen?",
+                                        "a": "Die Stolpersteine.",
+                                        "q_es": "¿Qué término corresponde a las piedras de latón delante de las casas en recuerdo de personas perseguidas?",
+                                        "a_es": "Los Stolpersteine."
+                              },
+                              {
+                                        "q": "Wie nennt man in Deutschland ein bekanntes dezentrales Denkmal für NS-Opfer im Straßenraum?",
+                                        "a": "Die Stolpersteine.",
+                                        "q_es": "¿Cómo se llama en Alemania un conocido monumento descentralizado para las víctimas del nazismo en el espacio público?",
+                                        "a_es": "Los Stolpersteine."
+                              }
+                    ]
+          },
+          "weitere-begriffe::Grenzen": {
+                    "ex": "In Europa wurden viele Grenzen geöffnet.",
+                    "ex_es": "En Europa se abrieron muchas fronteras.",
+                    "note": "Pluralwort: Grenzen. Singular: die Grenze.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man die Linien zwischen Staaten oder Gebieten?",
+                                        "a": "Die Grenzen.",
+                                        "q_es": "¿Cómo se llaman las líneas entre Estados o territorios?",
+                                        "a_es": "Las fronteras."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu Trennlinien zwischen Ländern?",
+                                        "a": "Die Grenzen.",
+                                        "q_es": "¿Qué término corresponde a las líneas divisorias entre países?",
+                                        "a_es": "Las fronteras."
+                              },
+                              {
+                                        "q": "Was wurde in Teilen Europas für Reisen und Handel einfacher, weil viele Kontrollen abgebaut wurden?",
+                                        "a": "Die Grenzen.",
+                                        "q_es": "¿Qué se volvió más fácil en partes de Europa para viajar y comerciar porque se redujeron muchos controles?",
+                                        "a_es": "Las fronteras."
+                              }
+                    ]
           },
           "bildung::Religionsunterricht": {
                     "ex": "In manchen Schulen gibt es Religionsunterricht.",
