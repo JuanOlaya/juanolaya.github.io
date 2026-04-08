@@ -23,7 +23,7 @@ const groupsPerPage = 4;
 function repairMojibake(text) {
     if (text == null) return '';
     let value = String(text);
-    const suspicious = /[ÃƒÃ‚Ã¢Ã°]|ï¿½|\?/;
+    const suspicious = /[ÃƒÃ‚âð]|�|\?/;
     for (let i = 0; i < 3; i += 1) {
         if (!suspicious.test(value)) break;
         const repaired = Buffer.from(value, 'latin1').toString('utf8');

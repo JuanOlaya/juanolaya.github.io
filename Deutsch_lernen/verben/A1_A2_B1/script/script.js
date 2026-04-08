@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ['¡', '¡'],
             // Mojibake for emojis (UTF-8 bytes read as Windows-1252)
             ['ðŸ“š', '📚'],
-            ['ðŸ  ', '🏠'],
+            ['🏠', '🏠'],
             ['ðŸ’¼', '💼'],
             ['ðŸš¢', '🚢'],
             ['ðŸš€', '🚀'],
