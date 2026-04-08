@@ -3703,6 +3703,12 @@ window.lidKompaktModalData = {
                                         "a_es": "En 1989."
                               },
                               {
+                                        "q": "In welchem Jahr wurde die Berliner Mauer gebaut?",
+                                        "a": "1961.",
+                                        "q_es": "\u00bfEn qu\u00e9 a\u00f1o se construy\u00f3 el Muro de Berl\u00edn?",
+                                        "a_es": "En 1961."
+                              },
+                              {
                                         "q": "Was trennte fr\ufffdher Ost- und West-Berlin?",
                                         "a": "Die Berliner Mauer.",
                                         "q_es": "\ufffdQu\ufffd separaba antes Berl\ufffdn Este y Berl\ufffdn Oeste?",
