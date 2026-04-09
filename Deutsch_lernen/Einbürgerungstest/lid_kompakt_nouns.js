@@ -45,6 +45,13 @@
                                         "e": "\u2696\ufe0f",
                                         "tr": "igualdad de derechos",
                                         "important": true
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Gleichbehandlung",
+                                        "e": "\u2696\ufe0f",
+                                        "tr": "igualdad de trato",
+                                        "important": true
                               }
                     ]
           },
@@ -202,6 +209,22 @@
                                         "w": "Zwangsarbeit",
                                         "e": "\u26d3\ufe0f",
                                         "tr": "trabajo forzado",
+                                        "important": true
+                              }
+                    ]
+          },
+          {
+                    "id": "inklusion",
+                    "title": "Inklusion",
+                    "title_es": "Inclusi\u00f3n",
+                    "icon": "\ud83e\uddd1\u200d\ud83e\uddbd",
+                    "color": "#7c3aed",
+                    "items": [
+                              {
+                                        "art": "die",
+                                        "w": "Behinderung",
+                                        "e": "\ud83e\uddd1\u200d\ud83e\uddbd",
+                                        "tr": "discapacidad",
                                         "important": true
                               }
                     ]
