@@ -1013,6 +1013,12 @@
                                         "e": "\ud83d\udeab",
                                         "tr": "inconstitucional",
                                         "important": true
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Entscheidung",
+                                        "e": "\u2705",
+                                        "tr": "decisión"
                               }
                     ]
           },
@@ -1067,12 +1073,6 @@
                                         "w": "Urteil / Urteile",
                                         "e": "\ud83d\udd28",
                                         "tr": "sentencia / sentencias"
-                              },
-                              {
-                                        "art": "die",
-                                        "w": "Entscheidung",
-                                        "e": "\u2705",
-                                        "tr": "decisión"
                               }
                     ]
           },

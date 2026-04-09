@@ -138,6 +138,10 @@
             border-color: var(--accent-green);
         }
 
+        .theme-toggle-wrapper .theme-btn {
+            display: none;
+        }
+
         body:not(.light-mode) .icon-sun {
             display: block;
         }
@@ -295,6 +299,9 @@
             border: 1px solid var(--border-color);
             box-shadow: 0 10px 15px -3px var(--shadow-color);
             transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .level-card:hover {
@@ -310,6 +317,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .level-header-label {
+            font-size: 1.08rem;
+            opacity: 0.92;
+            text-transform: none;
         }
 
         .level-header.a1 {
@@ -334,6 +347,36 @@
 
         .level-content {
             padding: 0;
+            flex: 1;
+        }
+
+        .level-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.08rem;
+            letter-spacing: 1px;
+            text-transform: none;
+            color: white;
+        }
+
+        .level-footer.a1 {
+            background: var(--level-a1);
+        }
+
+        .level-footer.a2 {
+            background: var(--level-a2);
+        }
+
+        .level-footer.b1 {
+            background: var(--level-b1);
+        }
+
+        .level-footer.b2 {
+            background: var(--level-b2);
         }
 
         /* Tables */
@@ -341,6 +384,7 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 0.95rem;
+            height: 100%;
         }
 
         th {
@@ -537,7 +581,18 @@
             text-align: center;
             font-size: 0.9rem;
             color: var(--text-muted);
-            margin-top: auto;
+        }
+
+        .footer-actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .footer-groups {
+            display: none;
         }
 
         /* --- MODAL STYLES --- */
@@ -669,6 +724,12 @@
             margin-top: 5px;
         }
 
+        .word-modal-meta {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
         .word-modal-body {
             text-align: center;
         }
@@ -714,8 +775,8 @@
                 </button>
             </div>
 
-            <h1>Conjunciones</h1>
-            <p>Konjunktionen & Konnektoren (A1 → B2)</p>
+            <h1>Conectores del Alemán</h1>
+            <p>Konjunktionen, Konnektoren y orden de palabras (A1 → B2)</p>
         </header>
 
         <!-- VISUAL GUIDE: WORD ORDER -->
@@ -767,17 +828,11 @@
             <!-- A1 LEVEL -->
             <div class="level-card">
                 <div class="level-header a1">
-                    <span>A1 – Básicas (ADUSO)</span>
-                    <span>🟦</span>
+                    <span>A1</span>
+                    <span class="level-header-label">conectores</span>
                 </div>
                 <div class="level-content">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Conector</th>
-                                <th>Traducción</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr onclick="openWordModal(this)" data-word="aber" data-tag="Pos 0"
                                 data-tag-class="tag zero" data-trans="pero"
@@ -786,6 +841,14 @@
                                     <div class="german-word">aber</div> <span class="tag zero">Pos 0</span>
                                 </td>
                                 <td>pero</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="doch" data-tag="Pos 0"
+                                data-tag-class="tag zero" data-trans="pero / sin embargo"
+                                data-example="Er ist klein, <strong>doch</strong> er ist sehr stark.">
+                                <td>
+                                    <div class="german-word">doch</div> <span class="tag zero">Pos 0</span>
+                                </td>
+                                <td>pero / sin embargo</td>
                             </tr>
                             <tr onclick="openWordModal(this)" data-word="denn" data-tag="Pos 0"
                                 data-tag-class="tag zero" data-trans="pues / porque"
@@ -821,22 +884,17 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="level-footer a1">básicas (ADUSO)</div>
             </div>
 
             <!-- A2 LEVEL -->
             <div class="level-card">
                 <div class="level-header a2">
-                    <span>A2 – Subordinantes</span>
-                    <span>🟨</span>
+                    <span>A2</span>
+                    <span class="level-header-label">conectores</span>
                 </div>
                 <div class="level-content">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Conector</th>
-                                <th>Traducción</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr onclick="openWordModal(this)" data-word="weil" data-tag="Final" data-tag-class="tag end"
                                 data-trans="porque"
@@ -886,25 +944,52 @@
                                 </td>
                                 <td>cuando (pasado único)</td>
                             </tr>
+                            <tr onclick="openWordModal(this)" data-word="bevor" data-tag="Final"
+                                data-tag-class="tag end" data-trans="antes de que"
+                                data-example="<strong>Bevor</strong> ich gehe, <span class='german-word' style='font-size:0.9em'>rufe</span> ich dich an.">
+                                <td>
+                                    <div class="german-word">bevor</div> <span class="tag end">Final</span>
+                                </td>
+                                <td>antes de que</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="seit" data-tag="Final" data-tag-class="tag end"
+                                data-trans="desde que"
+                                data-example="<strong>Seit</strong> ich hier <span class='german-word' style='font-size:0.9em'>wohne</span>, lerne ich Deutsch.">
+                                <td>
+                                    <div class="german-word">seit</div> <span class="tag end">Final</span>
+                                </td>
+                                <td>desde que</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="seitdem" data-tag="Final"
+                                data-tag-class="tag end" data-trans="desde entonces / desde que"
+                                data-example="Ich bin umgezogen. <strong>Seitdem</strong> ich hier <span class='german-word' style='font-size:0.9em'>wohne</span>, ist alles ruhiger.">
+                                <td>
+                                    <div class="german-word">seitdem</div> <span class="tag end">Final</span>
+                                </td>
+                                <td>desde entonces / desde que</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="sobald" data-tag="Final"
+                                data-tag-class="tag end" data-trans="en cuanto"
+                                data-example="<strong>Sobald</strong> ich Zeit <span class='german-word' style='font-size:0.9em'>habe</span>, komme ich.">
+                                <td>
+                                    <div class="german-word">sobald</div> <span class="tag end">Final</span>
+                                </td>
+                                <td>en cuanto</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
+                <div class="level-footer a2">subordinantes</div>
             </div>
 
             <!-- B1 LEVEL -->
             <div class="level-card">
                 <div class="level-header b1">
-                    <span>B1 – Adverbiales</span>
-                    <span>🟧</span>
+                    <span>B1</span>
+                    <span class="level-header-label">conectores</span>
                 </div>
                 <div class="level-content">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Conector</th>
-                                <th>Traducción</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr onclick="openWordModal(this)" data-word="deshalb" data-tag="Pos 1"
                                 data-tag-class="tag inv" data-trans="por eso"
@@ -914,6 +999,30 @@
                                 </td>
                                 <td>por eso</td>
                             </tr>
+                            <tr onclick="openWordModal(this)" data-word="deswegen" data-tag="Pos 1"
+                                data-tag-class="tag inv" data-trans="por eso"
+                                data-example="Es ist spät, <strong>deswegen</strong> <span class='german-word' style='font-size:0.9em'>gehe</span> ich nach Hause.">
+                                <td>
+                                    <div class="german-word">deswegen</div> <span class="tag inv">Pos 1</span>
+                                </td>
+                                <td>por eso</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="darum" data-tag="Pos 1"
+                                data-tag-class="tag inv" data-trans="por eso"
+                                data-example="Ich bin müde, <strong>darum</strong> <span class='german-word' style='font-size:0.9em'>bleibe</span> ich zu Hause.">
+                                <td>
+                                    <div class="german-word">darum</div> <span class="tag inv">Pos 1</span>
+                                </td>
+                                <td>por eso</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="außerdem" data-tag="Pos 1"
+                                data-tag-class="tag inv" data-trans="además"
+                                data-example="Er lernt Deutsch. <strong>Außerdem</strong> <span class='german-word' style='font-size:0.9em'>arbeitet</span> er viel.">
+                                <td>
+                                    <div class="german-word">außerdem</div> <span class="tag inv">Pos 1</span>
+                                </td>
+                                <td>además</td>
+                            </tr>
                             <tr onclick="openWordModal(this)" data-word="trotzdem" data-tag="Pos 1"
                                 data-tag-class="tag inv" data-trans="sin embargo"
                                 data-example="Es regnet, <strong>trotzdem</strong> <span class='german-word' style='font-size:0.9em'>gehen</span> wir raus.">
@@ -921,6 +1030,14 @@
                                     <div class="german-word">trotzdem</div> <span class="tag inv">Pos 1</span>
                                 </td>
                                 <td>sin embargo</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="dennoch" data-tag="Pos 1"
+                                data-tag-class="tag inv" data-trans="sin embargo / no obstante"
+                                data-example="Es ist schwer. <strong>Dennoch</strong> <span class='german-word' style='font-size:0.9em'>versuchen</span> wir es.">
+                                <td>
+                                    <div class="german-word">dennoch</div> <span class="tag inv">Pos 1</span>
+                                </td>
+                                <td>sin embargo / no obstante</td>
                             </tr>
                             <tr onclick="openWordModal(this)" data-word="obwohl" data-tag="Final"
                                 data-tag-class="tag end" data-trans="aunque"
@@ -941,22 +1058,17 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="level-footer b1">adverbiales</div>
             </div>
 
             <!-- B2 LEVEL -->
             <div class="level-card">
                 <div class="level-header b2">
-                    <span>B2 – Complejas</span>
-                    <span>🟥</span>
+                    <span>B2</span>
+                    <span class="level-header-label">conectores</span>
                 </div>
                 <div class="level-content">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>Conector</th>
-                                <th>Traducción</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr onclick="openWordModal(this)" data-word="je... desto" data-tag="Mix"
                                 data-tag-class="tag end" data-trans="cuanto más... más"
@@ -990,9 +1102,18 @@
                                 </td>
                                 <td>al (+ infinitivo) / mediante</td>
                             </tr>
+                            <tr onclick="openWordModal(this)" data-word="falls" data-tag="Final"
+                                data-tag-class="tag end" data-trans="en caso de que / si acaso"
+                                data-example="<strong>Falls</strong> du Zeit <span class='german-word' style='font-size:0.9em'>hast</span>, komm vorbei.">
+                                <td>
+                                    <div class="german-word">falls</div> <span class="tag end">Final</span>
+                                </td>
+                                <td>en caso de que / si acaso</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
+                <div class="level-footer b2">complejas</div>
             </div>
 
         </div>
@@ -1043,7 +1164,16 @@
         </div>
 
         <footer>
+            <div class="footer-groups">
+                <span class="footer-group a1">Básicas (ADUSO)</span>
+                <span class="footer-group a2">Subordinantes</span>
+                <span class="footer-group b1">Adverbiales</span>
+                <span class="footer-group b2">Complejas</span>
+            </div>
             <p>Infografía de Gramática Alemana &copy; 2025</p>
+            <div class="footer-actions">
+                <button class="theme-btn" onclick="toggleTheme()" aria-label="Cambiar tema">Cambiar tema</button>
+            </div>
         </footer>
     </div>
 
@@ -1088,6 +1218,7 @@
             <div class="word-modal-header">
                 <h2 id="modalWord" class="word-modal-title"></h2>
                 <div id="modalTranslation" class="word-modal-subtitle"></div>
+                <div id="modalWordType" class="word-modal-meta"></div>
                 <!-- Corrected div to close the tag container properly -->
                 <div id="modalTag" class="modal-tag"></div>
             </div>
@@ -1103,6 +1234,38 @@
     <script>
         // WORD MODAL LOGIC
         const wordModal = document.getElementById("wordModal");
+
+        const wordTypes = {
+            "aber": "Conjuncion coordinante",
+            "doch": "Conjuncion coordinante",
+            "denn": "Conjuncion coordinante",
+            "und": "Conjuncion coordinante",
+            "sondern": "Conjuncion coordinante",
+            "oder": "Conjuncion coordinante",
+            "weil": "Conjuncion subordinante",
+            "damit": "Conjuncion subordinante",
+            "dass": "Conjuncion subordinante",
+            "wenn": "Conjuncion subordinante",
+            "ob": "Conjuncion subordinante",
+            "als": "Conjuncion subordinante",
+            "bevor": "Conjuncion subordinante",
+            "seit": "Conjuncion subordinante",
+            "seitdem": "Conjuncion subordinante",
+            "sobald": "Conjuncion subordinante",
+            "deshalb": "Conector adverbial",
+            "deswegen": "Conector adverbial",
+            "darum": "Conector adverbial",
+            "außerdem": "Conector adverbial",
+            "trotzdem": "Conector adverbial",
+            "dennoch": "Conector adverbial",
+            "obwohl": "Conjuncion subordinante",
+            "da": "Conjuncion subordinante",
+            "je... desto": "Estructura correlativa",
+            "zwar... aber": "Estructura correlativa",
+            "wÃ¤hrend": "Conjuncion subordinante",
+            "indem": "Conjuncion subordinante",
+            "falls": "Conjuncion subordinante"
+        };
 
         const explanations = {
             "ob": `
@@ -1186,10 +1349,12 @@
             const example = row.getAttribute('data-example');
             const tag = row.getAttribute('data-tag');
             const tagClass = row.getAttribute('data-tag-class');
+            const wordType = wordTypes[word] || 'Conector';
 
             // Populate Modal
             document.getElementById('modalWord').innerText = word;
             document.getElementById('modalTranslation').innerText = trans;
+            document.getElementById('modalWordType').innerText = 'Tipo de palabra: ' + wordType;
             document.getElementById('modalExample').innerHTML = example; // innerHTML for styling (<strong>)
 
             // Inject Custom Explanation if available
