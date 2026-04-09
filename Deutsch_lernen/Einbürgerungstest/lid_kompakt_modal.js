@@ -540,6 +540,17 @@ window.lidKompaktModalData = {
                     "ex": "Sie macht eine Anzeige bei der Polizei.",
                     "ex_es": "Presenta una denuncia ante la polic�a."
           },
+          "strafrecht::Strafgesetz": {
+                    "note": "Plural: Strafgesetze. Im Test kommt oft die Formulierung gegen Strafgesetze verstoßen vor.",
+                    "qa": [
+                              {
+                                        "q": "In Deutschland sind Jugendliche ab 14 Jahren strafmündig. Das bedeutet: Jugendliche, die 14 Jahre und älter sind und gegen Strafgesetze verstoßen, …",
+                                        "a": "werden bestraft.",
+                                        "q_es": "En Alemania los jóvenes son penalmente responsables a partir de los 14 años. Eso significa: los jóvenes de 14 años o más que infringen leyes penales …",
+                                        "a_es": "son castigados."
+                              }
+                    ]
+          },
           "gesellschaft::Einwohner / Einwohnerin": {
                     "ex": "Der Einwohner oder die Einwohnerin lebt in dieser Stadt.",
                     "ex_es": "El habitante o la habitante vive en esta ciudad."
@@ -872,6 +883,17 @@ window.lidKompaktModalData = {
                                         "a": "an die Opfer des Nationalsozialismus (Tag der Befreiung des Vernichtungslagers Auschwitz)",
                                         "q_es": "El 27 de enero es en Alemania un día oficial de conmemoración. ¿Qué recuerda ese día?",
                                         "a_es": "a las víctimas del nacionalsocialismo (día de la liberación del campo de exterminio de Auschwitz)"
+                              }
+                    ]
+          },
+          "feste::Rosenmontag": {
+                    "note": "Teil des Karnevals / Faschings. An diesem Tag gibt es oft bunte Kostüme, Masken und Umzüge.",
+                    "qa": [
+                              {
+                                        "q": "Zu welchem Fest tragen Menschen in Deutschland bunte Kostüme und Masken?",
+                                        "a": "am Rosenmontag",
+                                        "q_es": "¿En qué fiesta la gente en Alemania lleva disfraces y máscaras de colores?",
+                                        "a_es": "en el Lunes de Carnaval"
                               }
                     ]
           },
@@ -1534,5 +1556,16 @@ window.lidKompaktModalData = {
                     "ex": "Viele Menschen wohnen in einer Mietwohnung.",
                     "ex_es": "Muchas personas viven en un piso de alquiler.",
                     "note": "Plural: Wohnungen."
+          },
+          "aemter::Standesamt": {
+                    "note": "Plural: Standesämter. Zuständig zum Beispiel für Eheschließung, Geburts- und Sterbeurkunden.",
+                    "qa": [
+                              {
+                                        "q": "Wohin muss man in Deutschland zuerst gehen, wenn man heiraten möchte?",
+                                        "a": "zum Standesamt",
+                                        "q_es": "¿Adónde hay que ir primero en Alemania si uno quiere casarse?",
+                                        "a_es": "al registro civil"
+                              }
+                    ]
           }
 }
