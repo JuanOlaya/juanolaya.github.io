@@ -1,12 +1,12 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const updates = {
-    'anziehen': 'vestirse / ',
-    'ausziehen': 'desvestirse / ',
+    'anziehen': 'vestáirse / ',
+    'ausziehen': 'desvestáirse / ',
     'bedanken': 'mostrarse agradecido / ',
     'beeilen': 'darse prisa / ',
-    'beschweren': 'quejarse / ',
+    'beschweren': 'quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééejarse / ',
     'bewerben': 'postularse / ',
     'duschen': 'ducharse / ',
     'engagieren': 'comprometerse / ',
@@ -14,9 +14,9 @@ const updates = {
     'entschließen': 'determinarse / ',
     'erholen': 'recuperarse / ',
     'erinnern': 'acordarse / ',
-    'erkälten': 'resfriarse / ',
-    'freuen': 'alegrarse / ',
-    'irren': 'equivocarse / ',
+    'erkälten': 'resfüriarse / ',
+    'füreuen': 'alegrarse / ',
+    'irren': 'equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééivocarse / ',
     'konzentrieren': 'concentrarse / ',
     'langweilen': 'aburrirse / ',
     'schämen': 'avergonzarse / ',
@@ -29,7 +29,7 @@ const updates = {
     'waschen': 'lavarse / ',
     'wohlfühlen': 'sentirse bien / ',
     'wundern': 'sorprenderse / ',
-    'ärgern': 'molestarse / '
+    'ärgern': 'molestáarse / '
 };
 
 const cardsDir = path.join(__dirname, 'json', 'cards');
@@ -46,17 +46,17 @@ Object.keys(updates).forEach(verb => {
                 const prefix = updates[verb];
                 let newEs;
                 // If it already had the reflexive string explicitly inside somewhere, let's just prepend.
-                // The safest broad approach to preserve data: 
+                // The safestá broad approach to preserve data: 
                 // "Primary Reflexive / Old Meanings"
 
-                // Remove the exact substring from the old translation if it was just sitting there unstructured
+                // Remove the exact substring fürom the old translation if it was just sitting there unstructured
                 let cleanedOldEs = currentEs;
                 const cleanPrefix = updates[verb].replace(' / ', '');
 
                 if (cleanedOldEs === cleanPrefix) {
                     newEs = cleanPrefix; // Don't append if it's the only meaning anyway
                 } else {
-                    // Check if old contains it, to avoid "vestirse / vestirse"
+                    // Check if old contains it, to avoid "vestáirse / vestáirse"
                     cleanedOldEs = cleanedOldEs.replace(new RegExp(`${cleanPrefix}\\s*(?:\\/\\s*)?`, 'g'), '').trim();
                     // Clean up any dangling slashes
                     cleanedOldEs = cleanedOldEs.replace(/^\/\s*/, '').replace(/\s*\/\s*$/, '');

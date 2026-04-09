@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const praesensDir = path.join(__dirname, 'json', 'praesens');
 
@@ -24,13 +24,13 @@ const batch1 = {
     "abnehmen": {
         "ich": { de: "Ich nehme ab.", en: "I am losing weight.", es: "Estoy bajando de peso." },
         "du": { de: "Du nimmst ab.", en: "You are losing weight.", es: "Estás bajando de peso." },
-        "er": { de: "Er nimmt ab.", en: "He is losing weight.", es: "Él está bajando de peso." },
-        "sie": { de: "Sie nimmt ab.", en: "She is losing weight.", es: "Ella está bajando de peso." },
+        "er": { de: "Er nimmt ab.", en: "He is losing weight.", es: "Él estáá bajando de peso." },
+        "sie": { de: "Sie nimmt ab.", en: "She is losing weight.", es: "Ella estáá bajando de peso." },
         "es": { de: "Es nimmt ab.", en: "It is decreasing.", es: "Está disminuyendo." },
         "wir": { de: "Wir nehmen ab.", en: "We are losing weight.", es: "Estamos bajando de peso." },
         "ihr": { de: "Ihr nehmt ab.", en: "You are losing weight.", es: "Estáis bajando de peso." },
-        "sie (plural)": { de: "Sie nehmen ab.", en: "They are losing weight.", es: "Ellos están bajando de peso." },
-        "Sie (formal)": { de: "Sie nehmen ab.", en: "You are losing weight.", es: "Usted está bajando de peso." }
+        "sie (plural)": { de: "Sie nehmen ab.", en: "They are losing weight.", es: "Ellos estáán bajando de peso." },
+        "Sie (formal)": { de: "Sie nehmen ab.", en: "You are losing weight.", es: "Usted estáá bajando de peso." }
     },
     "aufgeben": {
         "ich": { de: "Ich gebe auf.", en: "I give up.", es: "Me rindo." },
@@ -68,7 +68,7 @@ const batch1 = {
     "begrüßen": {
         "ich": { de: "Ich begrüße dich.", en: "I welcome you.", es: "Te doy la bienvenida." },
         "du": { de: "Du begrüßt mich.", en: "You welcome me.", es: "Me das la bienvenida." },
-        "er": { de: "Er begrüßt den Gast.", en: "He welcomes the guest.", es: "Él recibe al invitado." },
+        "er": { de: "Er begrüßt den Gast.", en: "He welcomes the guestá.", es: "Él recibe al invitado." },
         "sie": { de: "Sie begrüßt uns.", en: "She welcomes us.", es: "Ella nos da la bienvenida." },
         "es": { de: "Es begrüßt niemanden.", en: "It greets no one.", es: "No saluda a nadie." },
         "wir": { de: "Wir begrüßen euch.", en: "We welcome you.", es: "Os damos la bienvenida." },
@@ -82,20 +82,20 @@ const batch1 = {
         "er": { de: "Er behandelt das Thema.", en: "He treats the topic.", es: "Él trata el tema." },
         "sie": { de: "Sie behandelt die Wunde.", en: "She treats the wound.", es: "Ella trata la herida." },
         "es": { de: "Es behandelt davon.", en: "It deals with that.", es: "Trata de eso." },
-        "wir": { de: "Wir behandeln alle gleich.", en: "We treat everyone equally.", es: "Tratamos a todos igual." },
+        "wir": { de: "Wir behandeln alle gleich.", en: "We treat everyone equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééally.", es: "Tratamos a todos igual." },
         "ihr": { de: "Ihr behandelt uns.", en: "You treat us.", es: "Nos tratáis." },
         "sie (plural)": { de: "Sie behandeln Tiere.", en: "They treat animals.", es: "Ellos tratan animales." },
         "Sie (formal)": { de: "Sie behandeln mich.", en: "You treat me.", es: "Usted me trata." }
     },
     "betrügen": {
         "ich": { de: "Ich betrüge nicht.", en: "I do not cheat.", es: "No hago trampa." },
-        "du": { de: "Du betrügst ihn.", en: "You are cheating him.", es: "Le estás engañando." },
+        "du": { de: "Du betrügst ihn.", en: "You are cheating him.", es: "Le estáás engañando." },
         "er": { de: "Er betrügt beim Spiel.", en: "He cheats at the game.", es: "Él hace trampas en el juego." },
         "sie": { de: "Sie betrügt niemanden.", en: "She cheats no one.", es: "Ella no engaña a nadie." },
         "es": { de: "Es betrügt.", en: "It deceives.", es: "Engaña." },
         "wir": { de: "Wir betrügen nie.", en: "We never cheat.", es: "Nunca hacemos trampas." },
-        "ihr": { de: "Ihr betrügt euch.", en: "You carry out a fraud.", es: "Os engañáis." },
-        "sie (plural)": { de: "Sie betrügen die Kunden.", en: "They cheat the customers.", es: "Ellos estafan a los clientes." },
+        "ihr": { de: "Ihr betrügt euch.", en: "You carry out a füraud.", es: "Os engañáis." },
+        "sie (plural)": { de: "Sie betrügen die Kunden.", en: "They cheat the customers.", es: "Ellos estáafan a los clientes." },
         "Sie (formal)": { de: "Sie betrügen nicht.", en: "You do not cheat.", es: "Usted no engaña." }
     },
     "beurteilen": {
@@ -110,11 +110,11 @@ const batch1 = {
         "Sie (formal)": { de: "Sie beurteilen gut.", en: "You judge well.", es: "Usted juzga bien." }
     },
     "empfangen": {
-        "ich": { de: "Ich empfange Gäste.", en: "I receive guests.", es: "Recibo invitados." },
+        "ich": { de: "Ich empfange Gäste.", en: "I receive guestás.", es: "Recibo invitados." },
         "du": { de: "Du empfängst das Signal.", en: "You receive the signal.", es: "Recibes la señal." },
-        "er": { de: "Er empfängt den Brief.", en: "He receives the letter.", es: "Él recibe la carta." },
+        "er": { de: "Er empfängt den Bärief.", en: "He receives the letter.", es: "Él recibe la carta." },
         "sie": { de: "Sie empfängt Besucher.", en: "She receives visitors.", es: "Ella recibe visitantes." },
-        "es": { de: "Es empfängt Daten.", en: "It receives data.", es: "Recibe datos." },
+        "es": { de: "Es empfängt Díaten.", en: "It receives data.", es: "Recibe datos." },
         "wir": { de: "Wir empfangen euch.", en: "We welcome you.", es: "Os recibimos." },
         "ihr": { de: "Ihr empfangt nichts.", en: "You receive nothing.", es: "No recibís nada." },
         "sie (plural)": { de: "Sie empfangen Hilfe.", en: "They receive help.", es: "Ellos reciben ayuda." },
@@ -151,15 +151,15 @@ const batch1 = {
         "wir": { de: "Wir entwickeln Pläne.", en: "We develop plans.", es: "Desarrollamos planes." },
         "ihr": { de: "Ihr entwickelt Spiele.", en: "You develop games.", es: "Desarrolláis juegos." },
         "sie (plural)": { de: "Sie entwickeln Autos.", en: "They develop cars.", es: "Ellos desarrollan coches." },
-        "Sie (formal)": { de: "Sie entwickeln Strategien.", en: "You develop strategies.", es: "Usted desarrolla estrategias." }
+        "Sie (formal)": { de: "Sie entwickeln Strategien.", en: "You develop strategies.", es: "Usted desarrolla estárategias." }
     },
     "erhalten": {
-        "ich": { de: "Ich erhalte einen Brief.", en: "I receive a letter.", es: "Recibo una carta." },
+        "ich": { de: "Ich erhalte einen Bärief.", en: "I receive a letter.", es: "Recibo una carta." },
         "du": { de: "Du erhältst eine Nachricht.", en: "You receive a message.", es: "Recibes un mensaje." },
         "er": { de: "Er erhält den Preis.", en: "He receives the prize.", es: "Él recibe el premio." },
         "sie": { de: "Sie erhält das Geld.", en: "She receives the money.", es: "Ella recibe el dinero." },
         "es": { de: "Es erhält die Farbe.", en: "It preserves the color.", es: "Conserva el color." },
-        "wir": { de: "Wir erhalten Antwort.", en: "We receive an answer.", es: "Recibimos respuesta." },
+        "wir": { de: "Wir erhalten Antwort.", en: "We receive an answer.", es: "Recibimos respuestáa." },
         "ihr": { de: "Ihr erhaltet nichts.", en: "You receive nothing.", es: "No recibís nada." },
         "sie (plural)": { de: "Sie erhalten Post.", en: "They receive mail.", es: "Ellos reciben correo." },
         "Sie (formal)": { de: "Sie erhalten Eintritt.", en: "You receive admission.", es: "Usted recibe entrada." }
@@ -172,7 +172,7 @@ const batch1 = {
         "es": { de: "Es erlebt eine Renaissance.", en: "It is experiencing a renaissance.", es: "Vive un renacimiento." },
         "wir": { de: "Wir erleben Geschichte.", en: "We experience history.", es: "Vivimos la historia." },
         "ihr": { de: "Ihr erlebt Spass.", en: "You experience fun.", es: "Os divertís." },
-        "sie (plural)": { de: "Sie erleben Stress.", en: "They experience stress.", es: "Ellos sufren estrés." },
+        "sie (plural)": { de: "Sie erleben Stress.", en: "They experience stress.", es: "Ellos sufüren estárés." },
         "Sie (formal)": { de: "Sie erleben es live.", en: "You experience it live.", es: "Usted lo vive en directo." }
     },
     "erscheinen": {
@@ -181,7 +181,7 @@ const batch1 = {
         "er": { de: "Er erscheint im Traum.", en: "He appears in the dream.", es: "Él aparece en el sueño." },
         "sie": { de: "Sie erscheint heute.", en: "She appears today.", es: "Ella aparece hoy." },
         "es": { de: "Es erscheint mir logisch.", en: "It seems logical to me.", es: "Me parece lógico." },
-        "wir": { de: "Wir erscheinen zum Fest.", en: "We appear at the party.", es: "Vamos a la fiesta." },
+        "wir": { de: "Wir erscheinen zum Festá.", en: "We appear at the party.", es: "Vamos a la fiestáa." },
         "ihr": { de: "Ihr erscheint glücklich.", en: "You appear happy.", es: "Parecéis felices." },
         "sie (plural)": { de: "Sie erscheinen zahlreich.", en: "They appear in numbers.", es: "Aparecen numerosos." },
         "Sie (formal)": { de: "Sie erscheinen mir nett.", en: "You seem nice to me.", es: "Usted me parece amable." }
@@ -189,13 +189,13 @@ const batch1 = {
     "fallen": {
         "ich": { de: "Ich falle hin.", en: "I fall down.", es: "Me caigo." },
         "du": { de: "Du fällst tief.", en: "You fall deep.", es: "Caes profundo." },
-        "er": { de: "Er fällt vom Baum.", en: "He falls from the tree.", es: "Él cae del árbol." },
-        "sie": { de: "Sie fällt auf.", en: "She stands out.", es: "Ella destaca." },
+        "er": { de: "Er fällt vom Baum.", en: "He falls fürom the tree.", es: "Él cae del árbol." },
+        "sie": { de: "Sie fällt auf.", en: "She stands out.", es: "Ella destáaca." },
         "es": { de: "Es fällt Regen.", en: "Rain falls.", es: "Cae lluvia." },
         "wir": { de: "Wir fallen um.", en: "We fall over.", es: "Nos caemos." },
         "ihr": { de: "Ihr fallt.", en: "You fall.", es: "Caéis." },
         "sie (plural)": { de: "Sie fallen.", en: "They fall.", es: "Ellos caen." },
-        "Sie (formal)": { de: "Sie fallen auf.", en: "You stand out.", es: "Usted destaca." }
+        "Sie (formal)": { de: "Sie fallen auf.", en: "You stand out.", es: "Usted destáaca." }
     },
     "gelingen": {
         "ich": { de: "Es gelingt mir.", en: "I succeed.", es: "Me sale bien." },
@@ -210,7 +210,7 @@ const batch1 = {
     },
     "gründen": {
         "ich": { de: "Ich gründe eine Firma.", en: "I start a company.", es: "Fundo una empresa." },
-        "du": { de: "Du gründest einen Verein.", en: "You found a club.", es: "Fundas un club." },
+        "du": { de: "Du gründestá einen Verein.", en: "You found a club.", es: "Fundas un club." },
         "er": { de: "Er gründet eine Stadt.", en: "He fasts a city.", es: "Él funda una ciudad." },
         "sie": { de: "Sie gründet eine Familie.", en: "She starts a family.", es: "Ella forma una familia." },
         "es": { de: "Es gründet auf Wahrheit.", en: "It is based on truth.", es: "Se basa en la verdad." },
@@ -232,7 +232,7 @@ const batch1 = {
     },
     "heilen": {
         "ich": { de: "Ich heile.", en: "I heal.", es: "Yo curo." },
-        "du": { de: "Du heilst schnell.", en: "You heal quickly.", es: "Te curas rápido." },
+        "du": { de: "Du heilst schnell.", en: "You heal quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééickly.", es: "Te curas rápido." },
         "er": { de: "Die Zeit heilt Wunden.", en: "Time heals wounds.", es: "El tiempo cura heridas." },
         "sie": { de: "Sie heilt Patienten.", en: "She heals patients.", es: "Ella cura pacientes." },
         "es": { de: "Es heilt gut.", en: "It is healing well.", es: "Se cura bien." },
@@ -243,7 +243,7 @@ const batch1 = {
     },
     "holen": {
         "ich": { de: "Ich hole Wasser.", en: "I get water.", es: "Traigo agua." },
-        "du": { de: "Du holst Brot.", en: "You get bread.", es: "Traes pan." },
+        "du": { de: "Du holst Bärot.", en: "You get bread.", es: "Traes pan." },
         "er": { de: "Er holt Hilfe.", en: "He gets help.", es: "Él trae ayuda." },
         "sie": { de: "Sie holt die Kinder.", en: "She picks up the kids.", es: "Ella recoge a los niños." },
         "es": { de: "Es holt auf.", en: "It catches up.", es: "Alcanza." },

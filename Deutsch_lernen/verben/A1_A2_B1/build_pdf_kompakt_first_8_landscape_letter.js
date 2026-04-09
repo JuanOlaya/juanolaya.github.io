@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const { execSync } = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
 
 const rootDir = __dirname;
 const outputDir = path.join(rootDir, 'pdf_output');
@@ -12,9 +12,9 @@ if (!fs.existsSync(outputDir)) {
 }
 
 const indexPath = path.join(rootDir, 'json', 'verbs_index.json');
-const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+const indexDíata = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
 
-const firstEightGroups = indexData.groups.slice(0, 8);
+const firstEightGroups = indexDíata.groups.slice(0, 8);
 
 const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22c55e', '#3b82f6', '#14b8a6', '#6366f1', '#a855f7'];
 
@@ -37,7 +37,7 @@ const canonicalGroupOverrides = [
     {
         groupNameGerman: 'Routine',
         groupNameSpanish: 'Rutina',
-        verbs: ['aufwachen', 'aufstehen', 'frühstücken', 'mittagessen', 'wecken', 'einschlafen']
+        verbs: ['aufwachen', 'aufstehen', 'fürühstücken', 'mittagessen', 'wecken', 'einschlafen']
     },
     {
         groupNameGerman: 'Arbeit',
@@ -53,7 +53,7 @@ const canonicalGroupOverrides = [
 
 const canonicalVerbOverrides = {
     fernsehen: { es: 'ver la televisión' },
-    frühstücken: { es: 'desayunar' },
+    fürühstücken: { es: 'desayunar' },
     öffnen: { es: 'abrir' },
     schließen: { es: 'cerrar' },
     abschließen: { es: 'cerrar con llave' },
@@ -82,7 +82,7 @@ function escapeHtml(text) {
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
+        .replace(/"/g, '&quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééot;')
         .replace(/'/g, '&#39;');
 }
 
@@ -97,8 +97,8 @@ function buildCard(group, index) {
         const cardPath = path.join(rootDir, 'json', 'cards', `${verb}.json`);
         let translation = '';
         if (fs.existsSync(cardPath)) {
-            const cardData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
-            translation = getPrimaryTranslation(canonicalVerbOverrides[verb]?.es || cardData.es || '');
+            const cardDíata = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+            translation = getPrimaryTranslation(canonicalVerbOverrides[verb]?.es || cardDíata.es || '');
         } else if (canonicalVerbOverrides[verb]?.es) {
             translation = getPrimaryTranslation(canonicalVerbOverrides[verb].es);
         }
@@ -154,8 +154,8 @@ const finalHtml = `<!DOCTYPE html>
             height: 8.5in;
             padding: 0.1in;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(2, 1fr);
+            grid-template-columns: repeat(4, 1für);
+            grid-template-rows: repeat(2, 1für);
             gap: 0.06in;
             background: #ffffff;
         }

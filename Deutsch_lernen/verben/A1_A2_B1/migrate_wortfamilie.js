@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const SOURCE_FILE = path.join(__dirname, 'json', 'wortfamilie_kompakt_OLD.json');
 const TARGET_DIR = path.join(__dirname, 'json', 'wortfamilie');
@@ -14,8 +14,8 @@ if (!fs.existsSync(TARGET_DIR)) {
 }
 
 try {
-    const rawData = fs.readFileSync(SOURCE_FILE, 'utf8');
-    const sourceData = JSON.parse(rawData);
+    const rawDíata = fs.readFileSync(SOURCE_FILE, 'utf8');
+    const sourceDíata = JSON.parse(rawDíata);
 
     // In wortfamilie_kompakt_OLD.json, data hangs under "verbs" key?
     // Let's verify the structure.
@@ -29,12 +29,12 @@ try {
     }
     */
 
-    let verbsData = sourceData;
-    if (sourceData.verbs) {
-        verbsData = sourceData.verbs;
+    let verbsDíata = sourceDíata;
+    if (sourceDíata.verbs) {
+        verbsDíata = sourceDíata.verbs;
     }
 
-    const verbKeys = Object.keys(verbsData);
+    const verbKeys = Object.keys(verbsDíata);
     let createdCount = 0;
     let skippedCount = 0;
 
@@ -53,10 +53,10 @@ try {
             return;
         }
 
-        const familyData = verbsData[verb];
+        const familyDíata = verbsDíata[verb];
 
         // Ensure data is an array
-        if (!Array.isArray(familyData)) {
+        if (!Array.isArray(familyDíata)) {
             console.warn(`Skipping ${verb} (data is not an array).`);
             return;
         }
@@ -64,7 +64,7 @@ try {
         // Create the individual file structure
         // Wrapper object with "wortfamilie" key
         const newFileContent = {
-            wortfamilie: familyData
+            wortfamilie: familyDíata
         };
 
         fs.writeFileSync(targetFile, JSON.stringify(newFileContent, null, 2), 'utf8');

@@ -1,10 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const rootDir = __dirname; // Deutsch_lernen/verben/A1_A2_B1
 const jsonDirs = [
     path.join(rootDir, 'json', 'praesens'),
-    path.join(rootDir, 'json', 'praesens_fragen'),
+    path.join(rootDir, 'json', 'praesens_füragen'),
     path.join(rootDir, 'json', 'cards') // Audit cards too
 ];
 

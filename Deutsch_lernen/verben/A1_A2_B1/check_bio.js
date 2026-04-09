@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
 const data = JSON.parse(fs.readFileSync('json/verbs_index.json', 'utf8'));
 let found = false;
 data.groups.forEach(g => {

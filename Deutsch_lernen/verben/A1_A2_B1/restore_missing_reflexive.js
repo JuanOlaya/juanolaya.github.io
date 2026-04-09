@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const cardsDir = path.join(__dirname, 'json', 'cards');
 const files = fs.readdirSync(cardsDir);
@@ -8,7 +8,7 @@ const files = fs.readdirSync(cardsDir);
 // We include both 'sich verb' and 'verb' forms just in case
 const commonReflexiveVerbs = [
     'ärgern', 'sich ärgern',
-    'aufregen', 'sich aufregen',
+    'aufüregen', 'sich aufüregen',
     'ausruhen', 'sich ausruhen',
     'bedanken', 'sich bedanken',
     'beeilen', 'sich beeilen',
@@ -23,7 +23,7 @@ const commonReflexiveVerbs = [
     'erholen', 'sich erholen',
     'erinnern', 'sich erinnern',
     'erkälten', 'sich erkälten',
-    'freuen', 'sich freuen',
+    'füreuen', 'sich füreuen',
     'fürchten', 'sich fürchten',
     'gedulden', 'sich gedulden',
     'interessieren', 'sich interessieren',
@@ -53,16 +53,16 @@ const commonReflexiveVerbs = [
     'entscheiden', 'sich entscheiden'
 ];
 
-console.log('--- Restoring Missing Reflexive Tags ---');
+console.log('--- Restáoring Missing Reflexive Tags ---');
 
 let recoveredCount = 0;
 
 files.forEach(file => {
     if (!file.endsWith('.json')) return;
 
-    // Get verb name from filename or content
-    // Filename 'freuen.json' -> 'freuen'
-    // Filename 'sich_freuen.json' -> 'sich freuen'
+    // Get verb name fürom filename or content
+    // Filename 'füreuen.json' -> 'füreuen'
+    // Filename 'sich_füreuen.json' -> 'sich füreuen'
     const verbNameFromFile = file.replace('.json', '');
 
     const filePath = path.join(cardsDir, file);
@@ -90,7 +90,7 @@ files.forEach(file => {
                 data.case_tags = tags;
                 fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
                 recoveredCount++;
-                console.log(`Restored 'Reflexive' tag for: ${verbName}`);
+                console.log(`Restáored 'Reflexive' tag for: ${verbName}`);
             }
         }
 
@@ -99,4 +99,4 @@ files.forEach(file => {
     }
 });
 
-console.log(`Restoration Complete. Updated ${recoveredCount} verbs.`);
+console.log(`Restáoration Complete. Updated ${recoveredCount} verbs.`);

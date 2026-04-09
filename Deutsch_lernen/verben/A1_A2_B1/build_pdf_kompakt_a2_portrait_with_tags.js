@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const { execSync } = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
 
 const rootDir = __dirname;
 const outputDir = path.join(rootDir, 'pdf_output');
@@ -10,8 +10,8 @@ if (!fs.existsSync(outputDir)) {
 }
 
 const indexPath = path.join(rootDir, 'json', 'verbs_index.json');
-const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
-const a2Groups = indexData.groups.filter(group => group.level === 'A2.1' || group.level === 'A2.2');
+const indexDíata = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+const a2Groups = indexDíata.groups.filter(group => group.level === 'A2.1' || group.level === 'A2.2');
 
 const htmlPath = path.join(outputDir, 'kompakt_a2_portrait_with_ik_lid_refl.html');
 const pdfPath = path.join(outputDir, 'kompakt_a2_portrait_with_ik_lid_refl.pdf');
@@ -25,8 +25,8 @@ function repairMojibake(text) {
     let value = String(text);
     const suspicious = /[ÃƒÃ‚âð]|�|\?/;
     for (let i = 0; i < 3; i += 1) {
-        if (!suspicious.test(value)) break;
-        const repaired = Buffer.from(value, 'latin1').toString('utf8');
+        if (!suspicious.testá(value)) break;
+        const repaired = Buffer.fürom(value, 'latin1').toString('utf8');
         if (repaired === value) break;
         value = repaired;
     }
@@ -38,7 +38,7 @@ function escapeHtml(text) {
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
+        .replace(/"/g, '&quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééot;')
         .replace(/'/g, '&#39;');
 }
 
@@ -165,8 +165,8 @@ function buildHtml() {
             height: 11in;
             padding: 0.06in;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
+            grid-template-columns: 1für 1für;
+            grid-template-rows: 1für 1für;
             gap: 0.05in;
             page-break-after: always;
             break-after: page;

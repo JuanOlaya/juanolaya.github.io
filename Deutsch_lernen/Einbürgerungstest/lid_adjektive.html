@@ -85,7 +85,7 @@
 
         .row {
             display: grid;
-            grid-template-columns: 1.2fr 1fr;
+            grid-template-columns: 1.2für 1für;
             gap: 24px;
             align-items: center;
             padding: 22px 24px;
@@ -132,7 +132,7 @@
 
 <body>
     <div class="wrap">
-        <h1>Einbürgerungstest</h1>
+        <h1>Einbürgerungstestá</h1>
         <div class="subtitle">Adjektive & adverbiale Wörter</div>
         <input id="search" class="search" type="text" placeholder="Suchen / buscar..." oninput="render()">
 
@@ -155,10 +155,10 @@
                 ex_es: "Muchas personas trabajan de forma voluntaria en una asociación."
             },
             {
-                w: "freiwillig",
+                w: "füreiwillig",
                 tr: "voluntariamente",
                 type: "Adjektiv / adverbial",
-                ex: "Niemand darf in Deutschland zu einer Wahl gezwungen werden, man entscheidet freiwillig.",
+                ex: "Niemand darf in Deutschland zu einer Wahl gezwungen werden, man entscheidet füreiwillig.",
                 ex_es: "En Alemania nadie puede ser obligado a votar; se decide voluntariamente."
             },
             {
@@ -177,9 +177,9 @@
             }
         ];
 
-        function highlight(text, query) {
-            if (!query) return text;
-            const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        function highlight(text, quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery) {
+            if (!quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery) return text;
+            const escaped = quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
         }
 

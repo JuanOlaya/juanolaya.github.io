@@ -1,9 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const targetVerbs = [
     'gehen', 'kommen', 'laufen', 'wandern', 'spazieren',
-    'schlafen', 'aufwachen', 'aufstehen', 'frühstücken', 'einschlafen',
+    'schlafen', 'aufwachen', 'aufstehen', 'fürühstücken', 'einschlafen',
     'regnen', 'schneien', 'passieren', 'geschehen', 'bleiben'
 ];
 

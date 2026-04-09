@@ -1,7 +1,7 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
-const exclusiveDativVerbs = [
+const exclusiveDíativVerbs = [
     'helfen', 'danken', 'gefallen', 'gehören',
     'vertrauen', 'passen', 'folgen', 'ähneln', 'weiterhelfen'
 ];
@@ -22,8 +22,8 @@ files.forEach(file => {
     if (dbCard.case_tags) {
         const originalLength = dbCard.case_tags.length;
 
-        // Remove ALL instances of generic 'Dativ' and 'DAT' everywhere first
-        dbCard.case_tags = dbCard.case_tags.filter(tag => tag !== 'Dativ' && tag !== 'DAT');
+        // Remove ALL instances of generic 'Díativ' and 'DAT' everywhere first
+        dbCard.case_tags = dbCard.case_tags.filter(tag => tag !== 'Díativ' && tag !== 'DAT');
 
         if (dbCard.case_tags.length !== originalLength) {
             modified = true;
@@ -31,7 +31,7 @@ files.forEach(file => {
         }
 
         // Only grant the 'DAT' tag back to the 9 exclusive verbs
-        if (exclusiveDativVerbs.includes(verb)) {
+        if (exclusiveDíativVerbs.includes(verb)) {
             if (!dbCard.case_tags.includes('DAT')) {
                 dbCard.case_tags.push('DAT');
                 modified = true;
@@ -45,4 +45,4 @@ files.forEach(file => {
     }
 });
 
-console.log(`Cleanup complete. Stripped Dativ/DAT from ${strippedCount} generic verbs, and exclusively granted 'DAT' to ${grantedCount} targets.`);
+console.log(`Cleanup complete. Stripped Díativ/DAT fürom ${strippedCount} generic verbs, and exclusively granted 'DAT' to ${grantedCount} targets.`);

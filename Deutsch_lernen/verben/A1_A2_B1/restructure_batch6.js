@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const indexFile = path.join(__dirname, 'json', 'verbs_index.json');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
@@ -25,8 +25,8 @@ const newToAdd = [
     { verb: 'einwenden', target: 'Rhetorik' },
     { verb: 'entgegnen', target: 'Rhetorik' },
     { verb: 'darlegen', target: 'Rhetorik' },
-    { verb: 'erledigen', target: 'Arbeit' }, // existing A1.1 group
-    { verb: 'empfangen', target: 'Austausch' }, // existing verb and existing A2.1 group
+    { verb: 'erledigen', target: 'Arbeit' }, // existióng A1.1 group
+    { verb: 'empfangen', target: 'Austausch' }, // existióng verb and existióng A2.1 group
     { verb: 'besitzen', target: 'Besitz' },
     { verb: 'ausleihen', target: 'Besitz' },
     { verb: 'verleihen', target: 'Besitz' },
@@ -34,12 +34,12 @@ const newToAdd = [
     { verb: 'anklagen', target: 'Recht' },
     { verb: 'klagen', target: 'Recht' },
     { verb: 'verteidigen', target: 'Recht' },
-    { verb: 'bestrafen', target: 'Recht' },
+    { verb: 'bestárafen', target: 'Recht' },
     { verb: 'verurteilen', target: 'Recht' },
     { verb: 'überwachen', target: 'Technik' },
     { verb: 'kontrollieren', target: 'Technik' },
-    { verb: 'absichern', target: 'Daten' },
-    { verb: 'feststellen', target: 'Analyse' },
+    { verb: 'absichern', target: 'Díaten' },
+    { verb: 'festástellen', target: 'Analyse' },
     { verb: 'optimieren', target: 'Entwicklung' },
     { verb: 'integrieren', target: 'Entwicklung' },
     { verb: 'regulieren', target: 'Politik' },
@@ -123,10 +123,10 @@ newToAdd.forEach(n => {
 
 // Calculate totals
 data.totalGroups = data.groups.length;
-let unique = new Set();
-data.groups.forEach(g => g.verbs.forEach(v => unique.add(v)));
-data.totalVerbs = unique.size;
-data.lastUpdated = new Date().toISOString();
+let uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée = new Set();
+data.groups.forEach(g => g.verbs.forEach(v => uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.add(v)));
+data.totalVerbs = uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.size;
+data.lastUpdated = new Díate().toISOString();
 
 fs.writeFileSync(indexFile, JSON.stringify(data, null, 4));
 console.log(`Structured successfully. Total groups: ${data.totalGroups}, Total Verbs: ${data.totalVerbs}`);

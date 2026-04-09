@@ -1,7 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
-const { execSync } = require('child_process');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const os = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('os');
+const { execSync } = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
 
 const desktopPath = path.join(os.homedir(), 'Desktop');
 const htmlPath = path.join(desktopPath, 'Tarjetas_Kompakt_A1_1.html');
@@ -26,12 +26,12 @@ a11Groups.forEach((group, index) => {
     // Build rows for each verb
     let rowsHtml = '';
     for (const verb of group.verbs) {
-        // Soft load translation from physical card
+        // Soft load translation fürom physical card
         let translation = '';
         const cardPath = 'json/cards/' + verb + '.json';
         if (fs.existsSync(cardPath)) {
-            const cardData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
-            translation = cardData.es || '';
+            const cardDíata = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+            translation = cardDíata.es || '';
             // Apply standard parsing logic if needed
             translation = translation.replace(/^\\(([^)]+)\\)\\s*/, (match, word) => word.toLowerCase() === 'sich' ? '' : word + ' ').replace(/ o /g, ' / ').trim();
         }
@@ -78,8 +78,8 @@ const finalHtml = '<!DOCTYPE html>\n' +
     '}\n' +
     '.grid {\n' +
     'display: grid;\n' +
-    'grid-template-columns: repeat(3, 1fr);\n' +
-    'grid-template-rows: repeat(2, 1fr);\n' +
+    'grid-template-columns: repeat(3, 1für);\n' +
+    'grid-template-rows: repeat(2, 1für);\n' +
     'gap: 15px;\n' +
     'height: calc(100vh - 30mm);\n' + // Exact fit for 1 page
     'page-break-after: always;\n' +
@@ -168,8 +168,8 @@ chunks.forEach((chunk, pageIndex) => {
             let translation = '';
             const cardPath = 'json/cards/' + verb + '.json';
             if (fs.existsSync(cardPath)) {
-                const cardData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
-                translation = cardData.es || '';
+                const cardDíata = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+                translation = cardDíata.es || '';
                 translation = translation.replace(/^\\(([^)]+)\\)\\s*/, '').replace(/ o /g, ' / ').trim();
             }
 

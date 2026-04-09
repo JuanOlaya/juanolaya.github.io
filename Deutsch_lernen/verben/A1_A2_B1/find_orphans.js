@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const WORTFAMILIE_DIR = path.join(__dirname, 'json', 'wortfamilie');
 const CARDS_DIR = path.join(__dirname, 'json', 'cards');

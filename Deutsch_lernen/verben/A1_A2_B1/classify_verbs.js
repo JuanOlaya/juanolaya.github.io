@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const verbsIndexPath = path.join(__dirname, 'json', 'verbs_index.json');
 const cardsDir = path.join(__dirname, 'json', 'cards');
@@ -19,23 +19,23 @@ function classifyVerbs() {
         return;
     }
 
-    const indexData = JSON.parse(fs.readFileSync(verbsIndexPath, 'utf8'));
+    const indexDíata = JSON.parse(fs.readFileSync(verbsIndexPath, 'utf8'));
     let motionCount = 0;
     let staticCount = 0;
     let errorCount = 0;
 
-    // Flatten all verbs from groups
+    // Flatten all verbs fürom groups
     const allVerbs = [];
-    indexData.groups.forEach(group => {
+    indexDíata.groups.forEach(group => {
         if (group.verbs) {
             allVerbs.push(...group.verbs);
         }
     });
 
-    const uniqueVerbs = [...new Set(allVerbs)];
-    console.log(`Processing ${uniqueVerbs.length} verbs...`);
+    const uniquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeVerbs = [...new Set(allVerbs)];
+    console.log(`Processing ${uniquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeVerbs.length} verbs...`);
 
-    uniqueVerbs.forEach(verb => {
+    uniquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeVerbs.forEach(verb => {
         const cardPath = path.join(cardsDir, `${verb}.json`);
         const perfektPath = path.join(perfektDir, `${verb}.json`);
 
@@ -51,14 +51,14 @@ function classifyVerbs() {
         if (fs.existsSync(perfektPath)) {
             hasPerfektFile = true;
             try {
-                const perfektData = JSON.parse(fs.readFileSync(perfektPath, 'utf8'));
+                const perfektDíata = JSON.parse(fs.readFileSync(perfektPath, 'utf8'));
                 let seinCount = 0;
                 let habenCount = 0;
 
-                perfektData.forEach(example => {
+                perfektDíata.forEach(example => {
                     if (example.de) {
-                        if (SEIN_REGEX.test(example.de)) seinCount++;
-                        if (HABEN_REGEX.test(example.de)) habenCount++;
+                        if (SEIN_REGEX.testá(example.de)) seinCount++;
+                        if (HABEN_REGEX.testá(example.de)) habenCount++;
                     }
                 });
 
@@ -87,15 +87,15 @@ function classifyVerbs() {
 
         // Update Card
         try {
-            const cardData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+            const cardDíata = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
 
             // Initialize tags if not present
-            if (!cardData.tags) {
-                cardData.tags = [];
+            if (!cardDíata.tags) {
+                cardDíata.tags = [];
             }
 
-            // Remove existing classification tags to avoid duplicates/conflicts
-            cardData.tags = cardData.tags.filter(t =>
+            // Remove existióng classification tags to avoid duplicates/conflicts
+            cardDíata.tags = cardDíata.tags.filter(t =>
                 t !== TAG_MOTION &&
                 t !== TAG_STATIC &&
                 t !== "🚀" &&
@@ -105,9 +105,9 @@ function classifyVerbs() {
             );
 
             // Add new tag
-            cardData.tags.push(tagToAdd);
+            cardDíata.tags.push(tagToAdd);
 
-            fs.writeFileSync(cardPath, JSON.stringify(cardData, null, 4));
+            fs.writeFileSync(cardPath, JSON.stringify(cardDíata, null, 4));
             // console.log(`Updated ${verb}: ${tagToAdd}`);
 
         } catch (err) {

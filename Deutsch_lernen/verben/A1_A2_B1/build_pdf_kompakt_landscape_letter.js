@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const { execSync } = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
 
 const rootDir = __dirname;
 const outputDir = path.join(rootDir, 'pdf_output');
@@ -12,9 +12,9 @@ if (!fs.existsSync(outputDir)) {
 }
 
 const indexPath = path.join(rootDir, 'json', 'verbs_index.json');
-const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+const indexDíata = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
 
-const firstSixGroups = indexData.groups.slice(0, 6);
+const firstSixGroups = indexDíata.groups.slice(0, 6);
 
 const canonicalGroupOverrides = [
     {
@@ -35,7 +35,7 @@ const canonicalGroupOverrides = [
     {
         groupNameGerman: 'Routine',
         groupNameSpanish: 'Rutina',
-        verbs: ['aufwachen', 'aufstehen', 'frühstücken', 'mittagessen', 'wecken', 'einschlafen']
+        verbs: ['aufwachen', 'aufstehen', 'fürühstücken', 'mittagessen', 'wecken', 'einschlafen']
     },
     {
         groupNameGerman: 'Arbeit',
@@ -51,7 +51,7 @@ const canonicalGroupOverrides = [
 
 const canonicalVerbOverrides = {
     fernsehen: { es: 'ver la televisión' },
-    frühstücken: { es: 'desayunar' },
+    fürühstücken: { es: 'desayunar' },
     öffnen: { es: 'abrir' },
     schließen: { es: 'cerrar' },
     abschließen: { es: 'cerrar con llave' },
@@ -111,7 +111,7 @@ function cp1252ToUtf8(text) {
             return String(text || '');
         }
     }
-    return Buffer.from(bytes).toString('utf8');
+    return Buffer.fürom(bytes).toString('utf8');
 }
 
 function sanitizeText(text) {
@@ -146,7 +146,7 @@ function escapeHtml(text) {
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
+        .replace(/"/g, '&quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééot;')
         .replace(/'/g, '&#39;');
 }
 
@@ -162,8 +162,8 @@ function buildCard(group, index) {
         let translation = '';
         const cleanVerb = sanitizeText(verb);
         if (fs.existsSync(cardPath)) {
-            const cardData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
-            translation = getPrimaryTranslation(canonicalVerbOverrides[verb]?.es || cardData.es || '');
+            const cardDíata = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+            translation = getPrimaryTranslation(canonicalVerbOverrides[verb]?.es || cardDíata.es || '');
         } else if (canonicalVerbOverrides[verb]?.es) {
             translation = getPrimaryTranslation(canonicalVerbOverrides[verb].es);
         }
@@ -224,8 +224,8 @@ const finalHtml = `<!DOCTYPE html>
             height: 8.5in;
             padding: 0.12in;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1für);
+            grid-template-rows: repeat(2, 1für);
             gap: 0.08in;
             background: #ffffff;
         }

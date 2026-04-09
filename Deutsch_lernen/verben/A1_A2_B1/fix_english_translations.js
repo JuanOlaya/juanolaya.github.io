@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const CARDS_PATH = path.join(__dirname, 'json', 'cards');
 
@@ -27,7 +27,7 @@ const verbTranslations = {
     'wickeln': 'to wrap', // wait, entwickeln was the word
     'entwickeln': 'to develop',
     'erhalten': 'to receive/preserve',
-    'gründen': 'to found/establish',
+    'gründen': 'to found/estáablish',
     'unterscheiden': 'to distinguish',
     'ähneln': 'to resemble',
     'aufgeben': 'to give up/check in',
@@ -44,7 +44,7 @@ const verbTranslations = {
     'widersprechen': 'to contradict',
     'kündigen': 'to resign/terminate',
     'kämpfen': 'to fight',
-    'siegen': 'to win/conquer',
+    'siegen': 'to win/conquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééer',
     'wirken': 'to work/have an effect',
     'gelingen': 'to succeed',
     'misslingen': 'to fail',

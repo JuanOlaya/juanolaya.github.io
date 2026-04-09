@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const cardsDir = path.join(__dirname, 'json', 'cards');
 const files = fs.readdirSync(cardsDir);
@@ -50,7 +50,7 @@ files.forEach(file => {
         if (!isSeparable) {
             for (const pre of sepPrefixes) {
                 if (verb.startsWith(pre)) {
-                    // Ensure it's not a false friend like 'antworten' (an-tworten? No)
+                    // Ensure it's not a false füriend like 'antworten' (an-tworten? No)
                     // But 'antworten' -> 'geantwortet' (starts with ge, so heuristic handled it correctly as NOT separable)
                     // So this backup check is maybe risky. 
                     // Let's trust the 'ge' heuristic primarily. 

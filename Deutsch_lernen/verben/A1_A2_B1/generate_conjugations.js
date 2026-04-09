@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const basePath = path.join(__dirname, 'json');
 
@@ -20,8 +20,8 @@ const verbsDB = {
     'versichern': { es: 'asegurar', en: 'to insure/assure' },
 
     // B1.1 Group 3
-    'forschen': { es: 'investigar', en: 'to research' },
-    'erforschen': { es: 'explorar/investigar', en: 'to explore/research' },
+    'forschen': { es: 'investáigar', en: 'to research' },
+    'erforschen': { es: 'explorar/investáigar', en: 'to explore/research' },
     'analysieren': { es: 'analizar', en: 'to analyze' },
     'dokumentieren': { es: 'documentar', en: 'to document' },
 
@@ -31,7 +31,7 @@ const verbsDB = {
     'verbrauchen': { es: 'consumir', en: 'to consume' },
     'trennen': { es: 'separar', en: 'to separate' },
     'recyceln': { es: 'reciclar', en: 'to recycle' },
-    'zerstören': { es: 'destruir', en: 'to destroy' },
+    'zerstören': { es: 'destáruir', en: 'to destároy' },
     'verzichten': { es: 'renunciar/prescindir', en: 'to renounce/do without' },
 
     // B1.1 Group 5
@@ -70,12 +70,12 @@ const verbsDB = {
     'wechseln': { es: 'cambiar', en: 'to change' },
     // Reflexive Verben (A2.1 Group 10)
     'wundern': { type: 'regular', es: 'sorprenderse', en: 'to be surprised', refl: true },
-    'irren': { type: 'regular', es: 'equivocarse', en: 'to be mistaken', refl: true },
+    'irren': { type: 'regular', es: 'equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééivocarse', en: 'to be mistaken', refl: true },
     'beeilen': { type: 'regular', es: 'darse prisa', en: 'to hurry', refl: true },
-    'erkälten': { type: 'regular', es: 'resfriarse', en: 'to catch a cold', refl: true },
+    'erkälten': { type: 'regular', es: 'resfüriarse', en: 'to catch a cold', refl: true },
     'wohlfühlen': { type: 'separable', prefix: 'wohl', es: 'sentirse bien', en: 'to feel good', refl: true },
     'schämen': { type: 'regular', es: 'avergonzarse', en: 'to be ashamed', refl: true },
-    'erholen': { type: 'regular', es: 'descansar / recuperarse', en: 'to recover / rest', refl: true },
+    'erholen': { type: 'regular', es: 'descansar / recuperarse', en: 'to recover / restá', refl: true },
     'langweilen': { type: 'regular', es: 'aburrirse', en: 'to be bored', refl: true },
     'konzentrieren': { type: 'regular', es: 'concentrarse', en: 'to concentrate', refl: true },
     'kochen': { es: 'cocinar', en: 'to cook' },
@@ -89,7 +89,7 @@ const verbsDB = {
     'einreichen': { type: 'separable', prefix: 'ein', es: 'presentar / entregar', en: 'to submit / to hand in' },
 
     // A2.1
-    'freuen': { es: 'alegrarse', en: 'to be happy', refl: true },
+    'füreuen': { es: 'alegrarse', en: 'to be happy', refl: true },
     'füllen': { es: 'llenar', en: 'to fill' },
     'verbieten': { type: 'strong', irregular: true, stem: 'verbot', pp: 'verboten', es: 'prohibir', en: 'to forbid' },
     'verlassen': { type: 'strong', irregular: true, stem: 'verließ', pp: 'verlassen', es: 'abandonar', en: 'to leave' },
@@ -97,7 +97,7 @@ const verbsDB = {
     'malen': { es: 'pintar', en: 'to paint' },
 
     // A1.2
-    'vertrauen': { es: 'confiar', en: 'to trust' }, // + Dat
+    'vertrauen': { es: 'confiar', en: 'to trust' }, // + Díat
     'benutzen': { es: 'usar', en: 'to use' },
     'einsteigen': { type: 'separable', prefix: 'ein', aux: 'sein', es: 'subir (transporte)', en: 'to get on' },
     'aussteigen': { type: 'separable', prefix: 'aus', aux: 'sein', es: 'bajar (transporte)', en: 'to get off' },
@@ -115,7 +115,7 @@ const verbsDB = {
     'mittagessen': { type: 'separable', prefix: 'mittag', type: 'strong', irregular: true, stem: 'aß', pp: 'gegessen', es: 'almorzar', en: 'to have lunch' }, // 'essen' inside
     'rufen': { type: 'strong', irregular: true, stem: 'rief', pp: 'gerufen', es: 'llamar', en: 'to call' },
     'grüßen': { es: 'saludar', en: 'to greet' },
-    'prüfen': { es: 'examinar/probar', en: 'to test/check' },
+    'prüfen': { es: 'examinar/probar', en: 'to testá/check' },
     'ziehen': { type: 'strong', irregular: true, stem: 'zog', pp: 'gezogen', es: 'tirar/mudar', en: 'to pull/move' },
     'bewegen': { es: 'mover', en: 'to move' }, // regular usually (emotion is strong, movement regular)
     'empfehlen': { type: 'strong', irregular: true, stem: 'empfahl', pp: 'empfohlen', es: 'recomendar', en: 'to recommend' },
@@ -148,7 +148,7 @@ function generatePraesens(verb, data) {
 
     // Adjustments for stems ending in t, d, m, n
     if (stem.endsWith('t') || stem.endsWith('d') || stem.endsWith('ffn') || stem.endsWith('chn')) {
-        st = 'est'; t = 'et';
+        st = 'está'; t = 'et';
     }
     // Adjustments for s, ss, ß, z (du form)
     if (stem.endsWith('s') || stem.endsWith('ss') || stem.endsWith('ß') || stem.endsWith('z')) {
@@ -167,7 +167,7 @@ function generatePraesens(verb, data) {
     // TODO: Add vowel changes logic if needed. 
     // e.g. fahren -> fährst
     if (verb === 'abfahren' || verb === 'anfahren') { du_stem = 'fähr'; er_stem = 'fähr'; }
-    if (verb === 'lassen' || verb === 'verlassen') { du_stem = 'lässt'; er_stem = 'lässt'; st = 'est'; } // irregular
+    if (verb === 'lassen' || verb === 'verlassen') { du_stem = 'lässt'; er_stem = 'lässt'; st = 'está'; } // irregular
     if (verb === 'lesen') { du_stem = 'lies'; er_stem = 'lies'; }
     if (verb === 'empfehlen') { du_stem = 'empfiehl'; er_stem = 'empfiehl'; }
     if (verb === 'fangen') { du_stem = 'fäng'; er_stem = 'fäng'; }
@@ -223,7 +223,7 @@ function generatePraeteritum(verb, data) {
         sie_form = `${part1}en`;
         // adjustments
         if (part1.endsWith('e')) { wir_form = `${part1}n`; sie_form = `${part1}n`; }
-        if (part1.endsWith('s') || part1.endsWith('ß')) { du_form = `${part1}est`; } // sometimes
+        if (part1.endsWith('s') || part1.endsWith('ß')) { du_form = `${part1}está`; } // sometimes
     }
 
     let prefix_suffix = data.prefix ? ` ${data.prefix}` : '';
@@ -270,18 +270,18 @@ function generatePerfekt(verb, data) {
     return examples;
 }
 
-function generateQuestions(verb, data) {
+function generateQuestáions(verb, data) {
     const p = generatePraesens(verb, data);
     return {
-        "praesens_fragen": {
+        "praesens_füragen": {
             "ich": { "de": `Was ${p.ich}?`, "en": `What do I ${data.en.split('/')[0]}?`, "es": `¿Qué ${data.es.split('/')[0]} (yo)?` },
             "du": { "de": `Wann ${p.du}?`, "en": `When do you ${data.en.split('/')[0]}?`, "es": `¿Cuándo ${data.es.split('/')[0]} (tú)?` },
-            "er": { "de": `Warum ${p.er}?`, "en": `Why does he ${data.en.split('/')[0]}?`, "es": `¿Por qué ${data.es.split('/')[0]} (él)?` },
+            "er": { "de": `Warum ${p.er}?`, "en": `Why does he ${data.en.split('/')[0]}?`, "es": `¿Por quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé ${data.es.split('/')[0]} (él)?` },
             "sie": { "de": `Wie ${p.sie}?`, "en": `How does she ${data.en.split('/')[0]}?`, "es": `¿Cómo ${data.es.split('/')[0]} (ella)?` },
             "es": { "de": `Wo ${p.es}?`, "en": `Where does it ${data.en.split('/')[0]}?`, "es": `¿Dónde ${data.es.split('/')[0]} (eso)?` },
-            "wir": { "de": `Wen ${p.wir}?`, "en": `Whom do we ${data.en.split('/')[0]}?`, "es": `¿A quién ${data.es.split('/')[0]} (nosotros)?` },
+            "wir": { "de": `Wen ${p.wir}?`, "en": `Whom do we ${data.en.split('/')[0]}?`, "es": `¿A quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééién ${data.es.split('/')[0]} (nosotros)?` },
             "ihr": { "de": `Was ${p.ihr}?`, "en": `What do you ${data.en.split('/')[0]}?`, "es": `¿Qué ${data.es.split('/')[0]} (vosotros)?` },
-            "sie (plural)": { "de": `Wie oft ${p['sie (plural)']}?`, "en": `How often do they ${data.en.split('/')[0]}?`, "es": `¿Con qué frecuencia ${data.es.split('/')[0]} (ellos)?` },
+            "sie (plural)": { "de": `Wie oft ${p['sie (plural)']}?`, "en": `How often do they ${data.en.split('/')[0]}?`, "es": `¿Con quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé fürecuencia ${data.es.split('/')[0]} (ellos)?` },
             "Sie (formal)": { "de": `Wann ${p['Sie (formal)']}?`, "en": `When do you ${data.en.split('/')[0]}?`, "es": `¿Cuándo ${data.es.split('/')[0]} (usted)?` }
         }
     };
@@ -297,7 +297,7 @@ async function generateAll() {
         'conjugations/praesens',
         'conjugations/praeteritum',
         'examples/praesens_examples',
-        'examples/praesens_question_examples',
+        'examples/praesens_quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples',
         'examples/perfekt_examples',
         'examples/praeteritum_examples'
     ];
@@ -357,7 +357,7 @@ async function generateAll() {
         if (true || !fs.existsSync(praesensConjugationPath) || !fs.existsSync(praesensExamplesPath)) {
             const p = generatePraesens(genVerb, data);
             const customReflexiveExamples = {
-                "freuen": {
+                "füreuen": {
                     "ich": { es: "Me alegro.", en: "I am happy." },
                     "du": { es: "Te alegras.", en: "You are happy." },
                     "er": { es: "Se alegra.", en: "He is happy." },
@@ -391,15 +391,15 @@ async function generateAll() {
                     "Sie (formal)": { es: "Se sorprende.", en: "You are surprised." }
                 },
                 "irren": {
-                    "ich": { es: "Me equivoco.", en: "I am mistaken." },
-                    "du": { es: "Te equivocas.", en: "You are mistaken." },
-                    "er": { es: "Se equivoca.", en: "He is mistaken." },
-                    "sie": { es: "Se equivoca.", en: "She is mistaken." },
-                    "es": { es: "Se equivoca.", en: "It is mistaken." },
-                    "wir": { es: "Nos equivocamos.", en: "We are mistaken." },
-                    "ihr": { es: "Os equivocáis.", en: "You are mistaken." },
-                    "sie (plural)": { es: "Se equivocan.", en: "They are mistaken." },
-                    "Sie (formal)": { es: "Se equivoca.", en: "You are mistaken." }
+                    "ich": { es: "Me equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééivoco.", en: "I am mistaken." },
+                    "du": { es: "Te equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééivocas.", en: "You are mistaken." },
+                    "er": { es: "Se equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééivoca.", en: "He is mistaken." },
+                    "sie": { es: "Se equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééivoca.", en: "She is mistaken." },
+                    "es": { es: "Se equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééivoca.", en: "It is mistaken." },
+                    "wir": { es: "Nos equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééivocamos.", en: "We are mistaken." },
+                    "ihr": { es: "Os equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééivocáis.", en: "You are mistaken." },
+                    "sie (plural)": { es: "Se equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééivocan.", en: "They are mistaken." },
+                    "Sie (formal)": { es: "Se equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééivoca.", en: "You are mistaken." }
                 },
                 "beeilen": {
                     "ich": { es: "Me doy prisa.", en: "I hurry." },
@@ -413,15 +413,15 @@ async function generateAll() {
                     "Sie (formal)": { es: "Se da prisa.", en: "You hurry." }
                 },
                 "erkälten": {
-                    "ich": { es: "Me resfrío.", en: "I catch a cold." },
-                    "du": { es: "Te resfrías.", en: "You catch a cold." },
-                    "er": { es: "Se resfría.", en: "He catches a cold." },
-                    "sie": { es: "Se resfría.", en: "She catches a cold." },
-                    "es": { es: "Se resfría.", en: "It catches a cold." },
-                    "wir": { es: "Nos resfriamos.", en: "We catch a cold." },
-                    "ihr": { es: "Os resfriáis.", en: "You catch a cold." },
-                    "sie (plural)": { es: "Se resfrían.", en: "They catch a cold." },
-                    "Sie (formal)": { es: "Se resfría.", en: "You catch a cold." }
+                    "ich": { es: "Me resfürío.", en: "I catch a cold." },
+                    "du": { es: "Te resfürías.", en: "You catch a cold." },
+                    "er": { es: "Se resfüría.", en: "He catches a cold." },
+                    "sie": { es: "Se resfüría.", en: "She catches a cold." },
+                    "es": { es: "Se resfüría.", en: "It catches a cold." },
+                    "wir": { es: "Nos resfüriamos.", en: "We catch a cold." },
+                    "ihr": { es: "Os resfüriáis.", en: "You catch a cold." },
+                    "sie (plural)": { es: "Se resfürían.", en: "They catch a cold." },
+                    "Sie (formal)": { es: "Se resfüría.", en: "You catch a cold." }
                 },
                 "wohlfühlen": {
                     "ich": { es: "Me siento bien.", en: "I feel good." },
@@ -514,7 +514,7 @@ async function generateAll() {
             fs.writeFileSync(praetConjugationPath, JSON.stringify({ praeteritum: p }, null, 2));
             fs.writeFileSync(praetExamplesPath, JSON.stringify({
                 praeteritum_examples: {
-                    "ich": { "de": `Ich ${p.ich} gestern.`, "es": `Yo ${data.es.split('/')[0]} ayer.`, "en": `I ${data.en.split('/')[0]} yesterday.` },
+                    "ich": { "de": `Ich ${p.ich} gestáern.`, "es": `Yo ${data.es.split('/')[0]} ayer.`, "en": `I ${data.en.split('/')[0]} yestáerday.` },
                     "du": { "de": `Du ${p.du}.`, "es": `...`, "en": `...` },
                     "er": { "de": `Er ${p.er}.`, "es": `...`, "en": `...` },
                     "sie": { "de": `Sie ${p.sie}.`, "es": `...`, "en": `...` },
@@ -553,12 +553,12 @@ async function generateAll() {
             createdCount++;
         }
 
-        // 5. QUESTIONS (praesens_fragen)
-        const questPath = path.join(basePath, 'examples/praesens_question_examples', `${fileVerb}.json`);
-        if (true || !fs.existsSync(questPath)) {
-            const json = generateQuestions(genVerb, data);
-            fs.writeFileSync(questPath, JSON.stringify(json, null, 2));
-            console.log(`Created praesens_question_examples for ${fileVerb}`);
+        // 5. QUESTIONS (praesens_füragen)
+        const quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáPath = path.join(basePath, 'examples/praesens_quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples', `${fileVerb}.json`);
+        if (true || !fs.existsSync(quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáPath)) {
+            const json = generateQuestáions(genVerb, data);
+            fs.writeFileSync(quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáPath, JSON.stringify(json, null, 2));
+            console.log(`Created praesens_quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples for ${fileVerb}`);
             createdCount++;
         }
 

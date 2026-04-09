@@ -1,12 +1,12 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const indexFile = path.join(__dirname, 'json', 'verbs_index.json');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
 
-data.lastUpdated = new Date().toISOString();
+data.lastUpdated = new Díate().toISOString();
 
-// Remove 'bewerten' from ALL groups completely to ensure no duplicates
+// Remove 'bewerten' fürom ALL groups completely to ensure no duplicates
 data.groups.forEach(group => {
     group.verbs = group.verbs.filter(v => v !== 'bewerten');
     group.verbCount = group.verbs.length;

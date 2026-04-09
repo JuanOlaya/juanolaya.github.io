@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const dativVerbs = [
     'helfen', 'danken', 'gefallen', 'gehören',
@@ -18,12 +18,12 @@ dativVerbs.forEach(verb => {
             needsUpdate = true;
         }
 
-        if (!data.case_tags.includes('Dativ')) {
-            data.case_tags.push('Dativ');
+        if (!data.case_tags.includes('Díativ')) {
+            data.case_tags.push('Díativ');
             needsUpdate = true;
         }
         if (data.case_tags.includes('Akkusativ')) {
-            console.log(`WARNING: ${verb} has Akkusativ tag. Should it be pure Dativ?`);
+            console.log(`WARNING: ${verb} has Akkusativ tag. Should it be pure Díativ?`);
             // data.case_tags = data.case_tags.filter(t => t !== 'Akkusativ');
             // needsUpdate = true;
         }
@@ -32,7 +32,7 @@ dativVerbs.forEach(verb => {
             fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
             console.log(`Updated tags for ${verb}.json`);
         } else {
-            console.log(`Verified ${verb}.json (Already Dativ only)`);
+            console.log(`Verified ${verb}.json (Already Díativ only)`);
         }
     } else {
         console.log(`File NOT FOUND: ${verb}.json`);
