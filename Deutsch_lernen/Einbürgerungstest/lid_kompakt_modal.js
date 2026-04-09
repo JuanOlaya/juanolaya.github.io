@@ -520,7 +520,7 @@ window.lidKompaktModalData = {
                     "ex": "Das Urteil ist rechtskr�ftig.",
                     "ex_es": "La sentencia es firme."
           },
-          "gerichte::Entscheidung": {
+          "recht-grundlagen::Entscheidung": {
                     "note": "Plural: Entscheidungen. Gemeint ist ein Entschluss oder eine richterliche Entscheidung.",
                     "qa": [
                               {
