@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const basePath = path.join(__dirname, 'json');
 const indexFilePath = path.join(basePath, 'verbs_index.json');
@@ -10,12 +10,12 @@ const levelConfig = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1', 'B2_1'];
 function verifyInventory() {
     console.log('Verifying inventory...');
 
-    // 1. Load existióng index
+    // 1. Load existing index
     if (!fs.existsSync(indexFilePath)) {
         console.log('Index file does not exist.');
         return;
     }
-    const indexDíata = JSON.parse(fs.readFileSync(indexFilePath, 'utf8'));
+    const indexData = JSON.parse(fs.readFileSync(indexFilePath, 'utf8'));
 
     // 2. Re-calculate inventory
     let calculatedGroups = [];
@@ -55,18 +55,18 @@ function verifyInventory() {
     // 3. Compare
     let discrepancies = [];
 
-    if (indexDíata.totalGroups !== calculatedGroups.length) {
-        discrepancies.push(`Total groups mismatch: Index says ${indexDíata.totalGroups}, Found ${calculatedGroups.length}`);
+    if (indexData.totalGroups !== calculatedGroups.length) {
+        discrepancies.push(`Total groups mismatch: Index says ${indexData.totalGroups}, Found ${calculatedGroups.length}`);
     }
 
-    if (indexDíata.totalVerbs !== totalVerbs) {
-        discrepancies.push(`Total verbs mismatch: Index says ${indexDíata.totalVerbs}, Found ${totalVerbs}`);
+    if (indexData.totalVerbs !== totalVerbs) {
+        discrepancies.push(`Total verbs mismatch: Index says ${indexData.totalVerbs}, Found ${totalVerbs}`);
     }
 
     // Deep comparison of groups
     // We try to match by level and groupNumberPerLevel
     calculatedGroups.forEach(calcGroup => {
-        const indexGroup = indexDíata.groups.find(g => g.level === calcGroup.level && g.groupNumberPerLevel === calcGroup.groupNumberPerLevel);
+        const indexGroup = indexData.groups.find(g => g.level === calcGroup.level && g.groupNumberPerLevel === calcGroup.groupNumberPerLevel);
 
         if (!indexGroup) {
             discrepancies.push(`Group missing in index: ${calcGroup.level} Group ${calcGroup.groupNumberPerLevel}`);

@@ -1,12 +1,12 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const updates = {
     'anziehen': 'vestáirse / ',
     'ausziehen': 'desvestáirse / ',
     'bedanken': 'mostrarse agradecido / ',
     'beeilen': 'darse prisa / ',
-    'beschweren': 'quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééejarse / ',
+    'beschweren': 'queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééejarse / ',
     'bewerben': 'postularse / ',
     'duschen': 'ducharse / ',
     'engagieren': 'comprometerse / ',
@@ -16,7 +16,7 @@ const updates = {
     'erinnern': 'acordarse / ',
     'erkälten': 'resfüriarse / ',
     'füreuen': 'alegrarse / ',
-    'irren': 'equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééivocarse / ',
+    'irren': 'equeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééivocarse / ',
     'konzentrieren': 'concentrarse / ',
     'langweilen': 'aburrirse / ',
     'schämen': 'avergonzarse / ',

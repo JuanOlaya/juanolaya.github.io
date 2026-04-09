@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const verbs = [
     "abnehmen", "aufgeben", "beantragen", "befehlen", "begrüßen", "behandeln", "betrügen", "beurteilen",

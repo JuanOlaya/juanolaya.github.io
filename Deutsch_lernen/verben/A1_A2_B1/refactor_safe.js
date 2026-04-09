@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const basePath = path.join('c:', 'Users', 'juan', 'Documents', 'GitHub', 'juanolaya.github.io', 'Deutsch_lernen', 'verben', 'A1_A2_B1', 'json', 'groups');
 
@@ -54,13 +54,13 @@ levels.forEach(level => {
             fs.writeFileSync(fullPath, JSON.stringify(data, null, 4), 'utf8');
             console.log(`Split Büro on [${file}]`);
 
-            let werkDíata = JSON.parse(JSON.stringify(data));
-            werkDíata.theme = "Werk";
-            werkDíata.germanName = "Werk";
-            werkDíata.shortName = "Werk";
-            werkDíata.spanishName = "Taller";
-            werkDíata.verbs = ["herstellen", "bauen", "zerstören", "aufbauen"];
-            fs.writeFileSync(path.join(levelPath, 'A2_2_group_14.json'), JSON.stringify(werkDíata, null, 4), 'utf8');
+            let werkData = JSON.parse(JSON.stringify(data));
+            werkData.theme = "Werk";
+            werkData.germanName = "Werk";
+            werkData.shortName = "Werk";
+            werkData.spanishName = "Taller";
+            werkData.verbs = ["herstellen", "bauen", "zerstören", "aufbauen"];
+            fs.writeFileSync(path.join(levelPath, 'A2_2_group_14.json'), JSON.stringify(werkData, null, 4), 'utf8');
         }
 
         // Handle Wirtschaft & Konzepte Split
@@ -73,13 +73,13 @@ levels.forEach(level => {
             fs.writeFileSync(fullPath, JSON.stringify(data, null, 4), 'utf8');
             console.log(`Split Konzepte on [${file}]`);
 
-            let wirtschaftDíata = JSON.parse(JSON.stringify(data));
-            wirtschaftDíata.theme = "Wirtschaft";
-            wirtschaftDíata.germanName = "Wirtschaft";
-            wirtschaftDíata.shortName = "Wirtschaft";
-            wirtschaftDíata.spanishName = "Economía";
-            wirtschaftDíata.verbs = ["wirtschaften", "investáieren"];
-            fs.writeFileSync(path.join(levelPath, 'B2_1_group_2.json'), JSON.stringify(wirtschaftDíata, null, 4), 'utf8');
+            let wirtschaftData = JSON.parse(JSON.stringify(data));
+            wirtschaftData.theme = "Wirtschaft";
+            wirtschaftData.germanName = "Wirtschaft";
+            wirtschaftData.shortName = "Wirtschaft";
+            wirtschaftData.spanishName = "Economía";
+            wirtschaftData.verbs = ["wirtschaften", "investáieren"];
+            fs.writeFileSync(path.join(levelPath, 'B2_1_group_2.json'), JSON.stringify(wirtschaftData, null, 4), 'utf8');
         }
     });
 });

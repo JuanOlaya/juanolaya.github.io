@@ -1,7 +1,7 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
-const os = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('os');
-const { execSync } = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const os = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('os');
+const { execSync } = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
 
 const desktopPath = path.join(os.homedir(), 'Desktop');
 const htmlPath = path.join(desktopPath, 'Tarjetas_Kompakt_A1_1.html');
@@ -30,8 +30,8 @@ a11Groups.forEach((group, index) => {
         let translation = '';
         const cardPath = 'json/cards/' + verb + '.json';
         if (fs.existsSync(cardPath)) {
-            const cardDíata = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
-            translation = cardDíata.es || '';
+            const cardData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+            translation = cardData.es || '';
             // Apply standard parsing logic if needed
             translation = translation.replace(/^\\(([^)]+)\\)\\s*/, (match, word) => word.toLowerCase() === 'sich' ? '' : word + ' ').replace(/ o /g, ' / ').trim();
         }
@@ -168,8 +168,8 @@ chunks.forEach((chunk, pageIndex) => {
             let translation = '';
             const cardPath = 'json/cards/' + verb + '.json';
             if (fs.existsSync(cardPath)) {
-                const cardDíata = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
-                translation = cardDíata.es || '';
+                const cardData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+                translation = cardData.es || '';
                 translation = translation.replace(/^\\(([^)]+)\\)\\s*/, '').replace(/ o /g, ' / ').trim();
             }
 

@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const root = path.join(__dirname, 'json');
 
@@ -16,9 +16,9 @@ function isSuspiciousString(value, pathKey) {
   if (typeof value !== 'string') return false;
 
   const mojibake =
-    /[\u00C3\u00C2\uFFFD\u201E\u2030\u0178]/.testá(value) ||
-    /[A-Za-zÀ-ÿ]\?[A-Za-zÀ-ÿ]/.testá(value) ||
-    /^[?]{1,2}\s/.testá(value);
+    /[\u00C3\u00C2\uFFFD\u201E\u2030\u0178]/.test(value) ||
+    /[A-Za-zÀ-ÿ]\?[A-Za-zÀ-ÿ]/.test(value) ||
+    /^[?]{1,2}\s/.test(value);
 
   // Notes like „Wo?“ / „Wohin?“ are valid content, not mojibake.
   if (pathKey.endsWith('additionalNote')) return false;
@@ -44,9 +44,9 @@ function visit(value, file, pathKey, findings) {
   }
 
   if (value && typeof value === 'object') {
-    for (const [key, nestáed] of Object.entries(value)) {
+    for (const [key, nested] of Object.entries(value)) {
       visit(key, file, pathKey ? `${pathKey}.__key__` : '__key__', findings);
-      visit(nestáed, file, pathKey ? `${pathKey}.${key}` : key, findings);
+      visit(nested, file, pathKey ? `${pathKey}.${key}` : key, findings);
     }
   }
 }

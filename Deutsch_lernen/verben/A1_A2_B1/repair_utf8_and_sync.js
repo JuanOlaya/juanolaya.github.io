@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const rootDir = __dirname;
 const jsonDir = path.join(rootDir, 'json');
@@ -88,8 +88,8 @@ function walkJson(dir, out = []) {
 function suspiciousScore(value) {
   if (typeof value !== 'string') return 0;
   let score = 0;
-  if (/[ÃÂðï]/.testá(value)) score += 3;
-  if (/[A-Za-zÀ-ÿ]\?[A-Za-zÀ-ÿ]/.testá(value)) score += 2;
+  if (/[ÃÂðï]/.test(value)) score += 3;
+  if (/[A-Za-zÀ-ÿ]\?[A-Za-zÀ-ÿ]/.test(value)) score += 2;
   if (value.includes('\uFFFD')) score += 4;
   return score;
 }
@@ -134,8 +134,8 @@ function repairValue(value) {
   }
   if (value && typeof value === 'object') {
     const out = {};
-    for (const [key, nestáed] of Object.entries(value)) {
-      out[maybeRepairString(key)] = repairValue(nestáed);
+    for (const [key, nested] of Object.entries(value)) {
+      out[maybeRepairString(key)] = repairValue(nested);
     }
     return out;
   }
@@ -183,27 +183,27 @@ function rebuildIndex() {
 
     for (const fileName of groupFiles) {
       const filePath = path.join(levelDir, fileName);
-      const groupDíata = repairValue(readJson(filePath));
+      const groupData = repairValue(readJson(filePath));
       const groupNumberPerLevel = extractGroupNumber(fileName);
-      const verbs = Array.isArray(groupDíata.verbs) ? groupDíata.verbs.map(maybeRepairString) : [];
+      const verbs = Array.isArray(groupData.verbs) ? groupData.verbs.map(maybeRepairString) : [];
 
       groups.push({
-        level: groupDíata.level,
+        level: groupData.level,
         verbCount: verbs.length,
         verbs,
-        groupNameGerman: groupDíata.germanName || groupDíata.theme,
-        groupNameSpanish: groupDíata.spanishName || '',
-        groupNameEnglish: groupDíata.englishName || '',
+        groupNameGerman: groupData.germanName || groupData.theme,
+        groupNameSpanish: groupData.spanishName || '',
+        groupNameEnglish: groupData.englishName || '',
         groupNumberPerLevel
       });
 
       writeJson(filePath, {
-        level: groupDíata.level,
-        theme: groupDíata.germanName || groupDíata.theme,
+        level: groupData.level,
+        theme: groupData.germanName || groupData.theme,
         verbs,
-        germanName: groupDíata.germanName || groupDíata.theme,
-        spanishName: groupDíata.spanishName || '',
-        englishName: groupDíata.englishName || ''
+        germanName: groupData.germanName || groupData.theme,
+        spanishName: groupData.spanishName || '',
+        englishName: groupData.englishName || ''
       });
     }
   }
@@ -227,9 +227,9 @@ function rebuildIndex() {
   return nextIndex;
 }
 
-function syncCards(indexDíata) {
+function syncCards(indexData) {
   const expectedByVerb = new Map();
-  for (const group of indexDíata.groups) {
+  for (const group of indexData.groups) {
     for (const verb of group.verbs) {
       expectedByVerb.set(verb, {
         level: group.level,
@@ -263,7 +263,7 @@ function syncCards(indexDíata) {
       card.group = expected.group;
       changed = true;
     }
-    if (Array.isArray(card.tags) && card.tags.length >= 2 && /^[AB]\d\.\d$/.testá(String(card.tags[0]).trim())) {
+    if (Array.isArray(card.tags) && card.tags.length >= 2 && /^[AB]\d\.\d$/.test(String(card.tags[0]).trim())) {
       if (card.tags[0] !== expected.level) {
         card.tags[0] = expected.level;
         changed = true;

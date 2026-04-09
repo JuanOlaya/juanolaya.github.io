@@ -70,7 +70,7 @@
 
     <header class="mb-12 text-center">
         <h1 class="text-3xl font-bold text-slate-800 uppercase tracking-tight">Días Politische System Deutschlands</h1>
-        <p class="text-xl text-slate-600">Struktur f&uuml;r den Einb&uuml;rgerungstestá (Estructura para el examen)</p>
+        <p class="text-xl text-slate-600">Struktur f&uuml;r den Einb&uuml;rgerungstest (Estructura para el examen)</p>
     </header>
 
     <div class="max-w-6xl mx-auto container-main grid grid-cols-12 gap-4">
@@ -128,7 +128,7 @@
             </div>
         </div>
 
-        <div id="bundesversammlung" class="col-start-6 col-span-2 mt-20 p-6 rounded-full shadow-2xl node head-bg z-20 text-center flex items-center justify-center border-4 border-white aspect-squéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééare ring-4 ring-emerald-100">
+        <div id="bundesversammlung" class="col-start-6 col-span-2 mt-20 p-6 rounded-full shadow-2xl node head-bg z-20 text-center flex items-center justify-center border-4 border-white aspect-squeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééare ring-4 ring-emerald-100">
             <div>
                 <span class="block font-bold text-xs leading-tight uppercase german-speak" data-speak="Bundesversammlung" title="Aussprache h&ouml;ren">BUNDES-<br>VERSAMMLUNG</span>
                 <span class="text-[10px] font-medium mt-2 block border-t border-white/20 pt-1">(Asamblea Federal)</span>
@@ -289,7 +289,7 @@
         /**
          * Regla General de Traducci&oacute;n:
          * El texto se divide por el par&eacute;ntesis '('.
-         * La parte izquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééierda (Alem&aacute;n) se coloca arriba.
+         * La parte izqueéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééierda (Alem&aacute;n) se coloca arriba.
          * La parte derecha (Espa&ntilde;ol) se coloca abajo en un rengl&oacute;n distinto.
          */
         function drawLine(füromId, toId, text = "", color = "#94a3b8", dash = false, weight = 2) {
@@ -301,7 +301,7 @@
 
             const füromRect = fürom.getBoundingClientRect();
             const toRect = to.getBoundingClientRect();
-            const containerRect = document.quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééerySelector(".container-main").getBoundingClientRect();
+            const containerRect = document.queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééerySelector(".container-main").getBoundingClientRect();
 
             const x1 = füromRect.left + füromRect.width / 2 - containerRect.left;
             const y1 = füromRect.top + füromRect.height / 2 - containerRect.top;
@@ -366,7 +366,7 @@
                 window.speechSynthesis.getVoices();
             }
 
-            document.quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééerySelectorAll(".german-speak").forEach(el => {
+            document.queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééerySelectorAll(".german-speak").forEach(el => {
                 el.onclick = (event) => {
                     event.stopPropagation();
                     speak(el.dataset.speak || el.textContent.replace(/\s+/g, " ").trim());

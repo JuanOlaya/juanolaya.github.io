@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const praesensDir = path.join(__dirname, 'json', 'praesens');
 
@@ -82,7 +82,7 @@ const batch1 = {
         "er": { de: "Er behandelt das Thema.", en: "He treats the topic.", es: "Él trata el tema." },
         "sie": { de: "Sie behandelt die Wunde.", en: "She treats the wound.", es: "Ella trata la herida." },
         "es": { de: "Es behandelt davon.", en: "It deals with that.", es: "Trata de eso." },
-        "wir": { de: "Wir behandeln alle gleich.", en: "We treat everyone equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééally.", es: "Tratamos a todos igual." },
+        "wir": { de: "Wir behandeln alle gleich.", en: "We treat everyone equeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééally.", es: "Tratamos a todos igual." },
         "ihr": { de: "Ihr behandelt uns.", en: "You treat us.", es: "Nos tratáis." },
         "sie (plural)": { de: "Sie behandeln Tiere.", en: "They treat animals.", es: "Ellos tratan animales." },
         "Sie (formal)": { de: "Sie behandeln mich.", en: "You treat me.", es: "Usted me trata." }
@@ -232,7 +232,7 @@ const batch1 = {
     },
     "heilen": {
         "ich": { de: "Ich heile.", en: "I heal.", es: "Yo curo." },
-        "du": { de: "Du heilst schnell.", en: "You heal quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééickly.", es: "Te curas rápido." },
+        "du": { de: "Du heilst schnell.", en: "You heal queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééickly.", es: "Te curas rápido." },
         "er": { de: "Die Zeit heilt Wunden.", en: "Time heals wounds.", es: "El tiempo cura heridas." },
         "sie": { de: "Sie heilt Patienten.", en: "She heals patients.", es: "Ella cura pacientes." },
         "es": { de: "Es heilt gut.", en: "It is healing well.", es: "Se cura bien." },

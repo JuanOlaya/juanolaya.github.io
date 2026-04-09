@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const CARDS_PATH = path.join(__dirname, 'json', 'cards');
 
@@ -44,7 +44,7 @@ const verbTranslations = {
     'widersprechen': 'to contradict',
     'kündigen': 'to resign/terminate',
     'kämpfen': 'to fight',
-    'siegen': 'to win/conquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééer',
+    'siegen': 'to win/conqueéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééer',
     'wirken': 'to work/have an effect',
     'gelingen': 'to succeed',
     'misslingen': 'to fail',

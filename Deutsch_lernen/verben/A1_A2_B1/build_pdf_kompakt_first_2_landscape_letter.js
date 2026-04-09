@@ -1,6 +1,6 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
-const { execSync } = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const { execSync } = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
 
 const rootDir = __dirname;
 const outputDir = path.join(rootDir, 'pdf_output');
@@ -49,7 +49,7 @@ function escapeHtml(text) {
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééot;')
+        .replace(/"/g, '&queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééot;')
         .replace(/'/g, '&#39;');
 }
 
@@ -59,8 +59,8 @@ function getVerbTranslation(verb) {
         return getPrimaryTranslation(canonicalVerbOverrides[verb].es);
     }
     if (!fs.existsSync(cardPath)) return '';
-    const cardDíata = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
-    return getPrimaryTranslation(cardDíata.es || '');
+    const cardData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+    return getPrimaryTranslation(cardData.es || '');
 }
 
 function buildCard(group) {

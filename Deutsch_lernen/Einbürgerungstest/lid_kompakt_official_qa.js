@@ -1,4 +1,4 @@
-window.lidOfficialQaDíata = {
+window.lidOfficialQaData = {
   "rechte::Grundrechte": {
     "qa": [
       {

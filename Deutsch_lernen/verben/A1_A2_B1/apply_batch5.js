@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const indexFile = path.join(__dirname, 'json', 'verbs_index.json');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
@@ -73,7 +73,7 @@ if (forschungGroup) {
     }
 }
 
-// 5. Reorder Hygiene and Ordnung (both A1.2) to be sequéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééential
+// 5. Reorder Hygiene and Ordnung (both A1.2) to be sequeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééential
 const hygieneIdx = data.groups.findIndex(g => g.groupNameGerman === 'Hygiene' && g.level === 'A1.2');
 const ordnungIdx = data.groups.findIndex(g => g.groupNameGerman === 'Ordnung' && g.level === 'A1.2');
 

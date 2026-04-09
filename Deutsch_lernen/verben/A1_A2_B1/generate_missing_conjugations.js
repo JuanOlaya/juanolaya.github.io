@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const baseDir = path.join(__dirname, 'json');
 
@@ -24,7 +24,7 @@ function writePerfektExamples(filename, forms) {
 writePraeteritumConjugation('überprüfen.json', {
     verb: 'überprüfen',
     ich: 'überprüfte',
-    du: 'überprüftestá',
+    du: 'überprüftest',
     'er/sie/es': 'überprüfte',
     wir: 'überprüften',
     ihr: 'überprüftet',
@@ -43,7 +43,7 @@ writePerfektExamples('überprüfen.json', {
 writePraeteritumConjugation('validieren.json', {
     verb: 'validieren',
     ich: 'validierte',
-    du: 'validiertestá',
+    du: 'validiertest',
     'er/sie/es': 'validierte',
     wir: 'validierten',
     ihr: 'validiertet',
@@ -62,7 +62,7 @@ writePerfektExamples('validieren.json', {
 writePraeteritumConjugation('klassifizieren.json', {
     verb: 'klassifizieren',
     ich: 'klassifizierte',
-    du: 'klassifiziertestá',
+    du: 'klassifiziertest',
     'er/sie/es': 'klassifizierte',
     wir: 'klassifizierten',
     ihr: 'klassifiziertet',

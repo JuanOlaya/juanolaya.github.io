@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const baseDir = path.join(__dirname, 'json');
 
@@ -14,7 +14,7 @@ const newVerbs = [
     { v: 'warnen', t: 'Gefahr', l: 'B1.1', es: 'advertir', en: 'to warn' },
     { v: 'vermeiden', t: 'Gefahr', l: 'B1.1', es: 'evitar', en: 'to avoid' },
     { v: 'fliehen', t: 'Gefahr', l: 'B1.1', es: 'huir', en: 'to flee' },
-    { v: 'brennen', t: 'Gefahr', l: 'B1.1', es: 'arder / quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééemarse', en: 'to burn' },
+    { v: 'brennen', t: 'Gefahr', l: 'B1.1', es: 'arder / queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééemarse', en: 'to burn' },
     { v: 'verstecken', t: 'Gefahr', l: 'B1.1', es: 'esconder(se)', en: 'to hide' },
     
     // Psyche (B1.1)
@@ -64,7 +64,7 @@ newVerbs.forEach(data => {
     writeJ('conjugations/praesens', v, { praesens: { verb: v, ich: v, du: v, "er/sie/es": v, wir: v, ihr: v, "Sie/sie": v } });
     writeJ('conjugations/praeteritum', v, { praeteritum_conjugation: { verb: v, ich: v, du: v, "er/sie/es": v, wir: v, ihr: v, "Sie/sie": v } });
     writeJ('examples/perfekt_examples', v, { perfekt_examples: {} });
-    writeJ('examples/praesens_quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples', v, { praesens_füragen: {} });
+    writeJ('examples/praesens_queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples', v, { praesens_füragen: {} });
     writeJ('wortfamilie', v, { wortfamilie: [] });
 });
 

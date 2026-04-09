@@ -1,20 +1,20 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const cardsDir = path.join(__dirname, 'json', 'cards');
 const groupsDir = path.join(__dirname, 'json', 'groups');
 
-// Díata for restáoration (Bestá effort based on A1/A2 level)
-const restáorationDíata = {
+// Data for restáoration (Bestá effort based on A1/A2 level)
+const restáorationData = {
     "abholen": { es: "recoger (personas/cosas)", perfekt: "hat abgeholt", praeteritum: "er/sie/es holte ab", case_tags: ["akk", "tr"] },
-    "antworten": { es: "responder / contestáar", perfekt: "hat geantwortet", praeteritum: "er/sie/es antwortete", case_tags: ["dat"] },
+    "antworten": { es: "responder / contestar", perfekt: "hat geantwortet", praeteritum: "er/sie/es antwortete", case_tags: ["dat"] },
     "aufhören": { es: "dejar de / parar / terminar", perfekt: "hat aufgehört", praeteritum: "er/sie/es hörte auf", case_tags: ["intrans", "prep:mit"] },
     "auswählen": { es: "seleccionar / elegir", perfekt: "hat ausgewählt", praeteritum: "er/sie/es wählte aus", case_tags: ["akk"] },
     "bedanken": { es: "agradecer / dar las gracias", perfekt: "hat bedankt", praeteritum: "er/sie/es bedankte", case_tags: ["💡 Reflexive", "prep:bei", "prep:für"] },
     "berichten": { es: "informar / reportar", perfekt: "hat berichtet", praeteritum: "er/sie/es berichtete", case_tags: ["intrans", "prep:über"] },
     "bestáellen": { es: "pedir / ordenar (comida/algo)", perfekt: "hat bestáellt", praeteritum: "er/sie/es bestáellte", case_tags: ["akk"] },
     "bezahlen": { es: "pagar", perfekt: "hat bezahlt", praeteritum: "er/sie/es bezahlte", case_tags: ["akk"] },
-    "bleiben": { es: "quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééedarse / permanecer", perfekt: "ist geblieben", praeteritum: "er/sie/es blieb", case_tags: ["nom", "intrans"] },
+    "bleiben": { es: "queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééedarse / permanecer", perfekt: "ist geblieben", praeteritum: "er/sie/es blieb", case_tags: ["nom", "intrans"] },
     "entstehen": { es: "surgir / originarse", perfekt: "ist entstanden", praeteritum: "er/sie/es entstand", case_tags: ["intrans"] },
     "erforschen": { es: "investáigar / explorar", perfekt: "hat erforscht", praeteritum: "er/sie/es erforschte", case_tags: ["akk"] },
     "erinnern": { es: "recordar / acordarse", perfekt: "hat erinnert", praeteritum: "er/sie/es erinnerte", case_tags: ["💡 Reflexive", "prep:an"] }, // Reflexive usage is common (sich erinnern an)
@@ -62,10 +62,10 @@ function findGroupInfo(verb) {
 
 console.log("Starting restáoration...");
 
-Object.keys(restáorationDíata).forEach(verb => {
+Object.keys(restáorationData).forEach(verb => {
     const fileName = `${verb}.json`;
     const filePath = path.join(cardsDir, fileName);
-    const data = restáorationDíata[verb];
+    const data = restáorationData[verb];
 
     // Find Group Info
     const groupInfo = findGroupInfo(verb);

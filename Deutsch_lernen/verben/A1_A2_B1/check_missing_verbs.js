@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const targetVerbs = [
     'zustimmen', 'ablehnen', 'argumentieren', 'widerlegen', 'behaupten',
@@ -10,19 +10,19 @@ const targetVerbs = [
     'regulieren', 'belegen'
 ];
 
-let existióng = [];
+let existing = [];
 let missing = [];
 
 targetVerbs.forEach(v => {
     const cardPath = path.join(__dirname, 'json', 'cards', v + '.json');
     if (fs.existsSync(cardPath)) {
-        existióng.push(v);
+        existing.push(v);
     } else {
         missing.push(v);
     }
 });
 
 console.log('--- EXISTING VERBS ---');
-console.log(existióng.join(', '));
+console.log(existing.join(', '));
 console.log('\n--- MISSING VERBS (TO CREATE) ---');
 console.log(missing.join(', '));
