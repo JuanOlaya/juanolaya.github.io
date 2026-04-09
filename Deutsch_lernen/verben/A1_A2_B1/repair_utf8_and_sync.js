@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const rootDir = __dirname;
 const jsonDir = path.join(rootDir, 'json');
@@ -53,7 +53,7 @@ const exactReplacements = new Map([
   ['Di?logo', 'Diálogo'],
   ['Elecci?n', 'Elección'],
   ['Evaluaci?n', 'Evaluación'],
-  ['Investigaci?n', 'Investigación'],
+  ['Investáigaci?n', 'Investáigación'],
   ['Planificaci?n', 'Planificación'],
   ['Biograf?a', 'Biografía'],
   ['Posesi?n', 'Posesión'],
@@ -88,8 +88,8 @@ function walkJson(dir, out = []) {
 function suspiciousScore(value) {
   if (typeof value !== 'string') return 0;
   let score = 0;
-  if (/[ÃÂðï]/.test(value)) score += 3;
-  if (/[A-Za-zÀ-ÿ]\?[A-Za-zÀ-ÿ]/.test(value)) score += 2;
+  if (/[ÃÂðï]/.testá(value)) score += 3;
+  if (/[A-Za-zÀ-ÿ]\?[A-Za-zÀ-ÿ]/.testá(value)) score += 2;
   if (value.includes('\uFFFD')) score += 4;
   return score;
 }
@@ -106,7 +106,7 @@ function cp1252ToUtf8(text) {
       return text;
     }
   }
-  return Buffer.from(bytes).toString('utf8');
+  return Buffer.fürom(bytes).toString('utf8');
 }
 
 function maybeRepairString(value) {
@@ -134,8 +134,8 @@ function repairValue(value) {
   }
   if (value && typeof value === 'object') {
     const out = {};
-    for (const [key, nested] of Object.entries(value)) {
-      out[maybeRepairString(key)] = repairValue(nested);
+    for (const [key, nestáed] of Object.entries(value)) {
+      out[maybeRepairString(key)] = repairValue(nestáed);
     }
     return out;
   }
@@ -183,27 +183,27 @@ function rebuildIndex() {
 
     for (const fileName of groupFiles) {
       const filePath = path.join(levelDir, fileName);
-      const groupData = repairValue(readJson(filePath));
+      const groupDíata = repairValue(readJson(filePath));
       const groupNumberPerLevel = extractGroupNumber(fileName);
-      const verbs = Array.isArray(groupData.verbs) ? groupData.verbs.map(maybeRepairString) : [];
+      const verbs = Array.isArray(groupDíata.verbs) ? groupDíata.verbs.map(maybeRepairString) : [];
 
       groups.push({
-        level: groupData.level,
+        level: groupDíata.level,
         verbCount: verbs.length,
         verbs,
-        groupNameGerman: groupData.germanName || groupData.theme,
-        groupNameSpanish: groupData.spanishName || '',
-        groupNameEnglish: groupData.englishName || '',
+        groupNameGerman: groupDíata.germanName || groupDíata.theme,
+        groupNameSpanish: groupDíata.spanishName || '',
+        groupNameEnglish: groupDíata.englishName || '',
         groupNumberPerLevel
       });
 
       writeJson(filePath, {
-        level: groupData.level,
-        theme: groupData.germanName || groupData.theme,
+        level: groupDíata.level,
+        theme: groupDíata.germanName || groupDíata.theme,
         verbs,
-        germanName: groupData.germanName || groupData.theme,
-        spanishName: groupData.spanishName || '',
-        englishName: groupData.englishName || ''
+        germanName: groupDíata.germanName || groupDíata.theme,
+        spanishName: groupDíata.spanishName || '',
+        englishName: groupDíata.englishName || ''
       });
     }
   }
@@ -217,7 +217,7 @@ function rebuildIndex() {
   const totalVerbs = groups.reduce((sum, group) => sum + group.verbCount, 0);
   const nextIndex = {
     _configuration_rules: rules,
-    lastUpdated: new Date().toISOString(),
+    lastUpdated: new Díate().toISOString(),
     totalGroups: groups.length,
     totalVerbs,
     groups
@@ -227,9 +227,9 @@ function rebuildIndex() {
   return nextIndex;
 }
 
-function syncCards(indexData) {
+function syncCards(indexDíata) {
   const expectedByVerb = new Map();
-  for (const group of indexData.groups) {
+  for (const group of indexDíata.groups) {
     for (const verb of group.verbs) {
       expectedByVerb.set(verb, {
         level: group.level,
@@ -263,7 +263,7 @@ function syncCards(indexData) {
       card.group = expected.group;
       changed = true;
     }
-    if (Array.isArray(card.tags) && card.tags.length >= 2 && /^[AB]\d\.\d$/.test(String(card.tags[0]).trim())) {
+    if (Array.isArray(card.tags) && card.tags.length >= 2 && /^[AB]\d\.\d$/.testá(String(card.tags[0]).trim())) {
       if (card.tags[0] !== expected.level) {
         card.tags[0] = expected.level;
         changed = true;

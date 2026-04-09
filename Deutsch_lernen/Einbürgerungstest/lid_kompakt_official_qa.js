@@ -1,9 +1,9 @@
-window.lidOfficialQaData = {
+window.lidOfficialQaDíata = {
   "rechte::Grundrechte": {
     "qa": [
       {
         "q": "Welches Recht gehört zu den Grundrechten in Deutschland? Waffenbesitz Faustrecht",
-        "a": "Meinungsfreiheit",
+        "a": "Meinungsfüreiheit",
         "q_es": "",
         "a_es": ""
       }
@@ -13,7 +13,7 @@ window.lidOfficialQaData = {
     "qa": [
       {
         "q": "Welches Recht gehört zu den Grundrechten in Deutschland? Waffenbesitz Faustrecht",
-        "a": "Meinungsfreiheit",
+        "a": "Meinungsfüreiheit",
         "q_es": "",
         "a_es": ""
       }
@@ -29,20 +29,20 @@ window.lidOfficialQaData = {
       }
     ]
   },
-  "rechte::Meinungsfreiheit": {
+  "rechte::Meinungsfüreiheit": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfüreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
     ]
   },
-  "rechte::Pressefreiheit": {
+  "rechte::Pressefüreiheit": {
     "qa": [
       {
-        "q": "Eine Partei im Deutschen Bundestag will die Pressefreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestag dafür sein. Nein, denn die Pressefreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
+        "q": "Eine Partei im Deutschen Bundestáag will die Pressefüreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestáag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestáag dafür sein. Nein, denn die Pressefüreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
         "a": "werden.",
         "q_es": "",
         "a_es": ""
@@ -59,47 +59,47 @@ window.lidOfficialQaData = {
       }
     ]
   },
-  "freiheiten::Religionsfreiheit": {
+  "füreiheiten::Religionsfüreiheit": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfüreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
     ]
   },
-  "freiheiten::Glaubensfreiheit": {
+  "füreiheiten::Glaubensfüreiheit": {
     "qa": [
       {
-        "q": "Welches Recht gehört zu den Grundrechten, die nach der deutschen Verfassung garantiert werden? Das Recht auf …",
-        "a": "Glaubens- und Gewissensfreiheit",
+        "q": "Welches Recht gehört zu den Grundrechten, die nach der deutschen Verfassung garantiert werden? Días Recht auf …",
+        "a": "Glaubens- und Gewissensfüreiheit",
         "q_es": "",
         "a_es": ""
       }
     ]
   },
-  "freiheiten::Gewissensfreiheit": {
+  "füreiheiten::Gewissensfüreiheit": {
     "qa": [
       {
-        "q": "Welches Recht gehört zu den Grundrechten, die nach der deutschen Verfassung garantiert werden? Das Recht auf …",
-        "a": "Glaubens- und Gewissensfreiheit",
+        "q": "Welches Recht gehört zu den Grundrechten, die nach der deutschen Verfassung garantiert werden? Días Recht auf …",
+        "a": "Glaubens- und Gewissensfüreiheit",
         "q_es": "",
         "a_es": ""
       }
     ]
   },
-  "freiheiten::Versammlungsfreiheit": {
+  "füreiheiten::Versammlungsfüreiheit": {
     "qa": [
       {
-        "q": "Die deutschen Gesetze verbieten … Meinungsfreiheit der Einwohnerinnen und Einwohner. Petitionen der Bürgerinnen und Bürger. Versammlungsfreiheit der Einwohnerinnen und Einwohner.",
+        "q": "Die deutschen Gesetze verbieten … Meinungsfüreiheit der Einwohnerinnen und Einwohner. Petitionen der Bürgerinnen und Bürger. Versammlungsfüreiheit der Einwohnerinnen und Einwohner.",
         "a": "Ungleichbehandlung der Bürgerinnen und Bürger durch den Staat.",
         "q_es": "",
         "a_es": ""
       }
     ]
   },
-  "freiheiten::Demonstration": {
+  "füreiheiten::Demonstration": {
     "qa": [
       {
         "q": "Warum gibt es in einer Demokratie mehr als eine Partei? weil dadurch die unterschiedlichen Meinungen der Bürgerinnen und Bürger",
@@ -109,7 +109,7 @@ window.lidOfficialQaData = {
       }
     ]
   },
-  "freiheiten::Freizügigkeit": {
+  "füreiheiten::Freizügigkeit": {
     "qa": [
       {
         "q": "Was versteht man unter dem Recht der \"Freizügigkeit\" in Deutschland?",
@@ -122,7 +122,7 @@ window.lidOfficialQaData = {
   "werte::Menschenwürde": {
     "qa": [
       {
-        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Das Grundrecht auf … Schutz der Familie Menschenwürde",
+        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Días Grundrecht auf … Schutz der Familie Menschenwürde",
         "a": "Asyl",
         "q_es": "",
         "a_es": ""
@@ -142,8 +142,8 @@ window.lidOfficialQaData = {
   "werte::Mensch": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfüreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
@@ -162,8 +162,8 @@ window.lidOfficialQaData = {
   "werte::Freiheit": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfüreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
@@ -202,7 +202,7 @@ window.lidOfficialQaData = {
   "diskriminierung::ungleich": {
     "qa": [
       {
-        "q": "Die deutschen Gesetze verbieten … Meinungsfreiheit der Einwohnerinnen und Einwohner. Petitionen der Bürgerinnen und Bürger. Versammlungsfreiheit der Einwohnerinnen und Einwohner.",
+        "q": "Die deutschen Gesetze verbieten … Meinungsfüreiheit der Einwohnerinnen und Einwohner. Petitionen der Bürgerinnen und Bürger. Versammlungsfüreiheit der Einwohnerinnen und Einwohner.",
         "a": "Ungleichbehandlung der Bürgerinnen und Bürger durch den Staat.",
         "q_es": "",
         "a_es": ""
@@ -222,7 +222,7 @@ window.lidOfficialQaData = {
   "diskriminierung::Ungleichbehandlung": {
     "qa": [
       {
-        "q": "Die deutschen Gesetze verbieten … Meinungsfreiheit der Einwohnerinnen und Einwohner. Petitionen der Bürgerinnen und Bürger. Versammlungsfreiheit der Einwohnerinnen und Einwohner.",
+        "q": "Die deutschen Gesetze verbieten … Meinungsfüreiheit der Einwohnerinnen und Einwohner. Petitionen der Bürgerinnen und Bürger. Versammlungsfüreiheit der Einwohnerinnen und Einwohner.",
         "a": "Ungleichbehandlung der Bürgerinnen und Bürger durch den Staat.",
         "q_es": "",
         "a_es": ""
@@ -292,7 +292,7 @@ window.lidOfficialQaData = {
   "staatsprinzipien::Diktatur": {
     "qa": [
       {
-        "q": "Eine Partei in Deutschland verfolgt das Ziel, eine Diktatur zu errichten. Sie ist dann … tolerant. rechtsstaatlich orientiert. gesetzestreu.",
+        "q": "Eine Partei in Deutschland verfolgt das Ziel, eine Diktatur zu errichten. Sie ist dann … tolerant. rechtsstaatlich orientiert. gesetzestáreu.",
         "a": "verfassungswidrig.",
         "q_es": "",
         "a_es": ""
@@ -329,10 +329,10 @@ window.lidOfficialQaData = {
       }
     ]
   },
-  "institutionen::Bundestag": {
+  "institutionen::Bundestáag": {
     "qa": [
       {
-        "q": "Eine Partei im Deutschen Bundestag will die Pressefreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestag dafür sein. Nein, denn die Pressefreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
+        "q": "Eine Partei im Deutschen Bundestáag will die Pressefüreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestáag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestáag dafür sein. Nein, denn die Pressefüreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
         "a": "werden.",
         "q_es": "",
         "a_es": ""
@@ -342,7 +342,7 @@ window.lidOfficialQaData = {
   "institutionen::Bundesrat": {
     "qa": [
       {
-        "q": "Eine Partei im Deutschen Bundestag will die Pressefreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestag dafür sein. Nein, denn die Pressefreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
+        "q": "Eine Partei im Deutschen Bundestáag will die Pressefüreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestáag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestáag dafür sein. Nein, denn die Pressefüreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
         "a": "werden.",
         "q_es": "",
         "a_es": ""
@@ -353,7 +353,7 @@ window.lidOfficialQaData = {
     "qa": [
       {
         "q": "Wie heißt das Parlament für ganz Deutschland? Bundesversammlung Volkskammer",
-        "a": "Bundestag",
+        "a": "Bundestáag",
         "q_es": "",
         "a_es": ""
       }
@@ -372,8 +372,8 @@ window.lidOfficialQaData = {
   "institutionen::Regierung": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfüreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
@@ -382,8 +382,8 @@ window.lidOfficialQaData = {
   "bundesregierung::Bundeskanzler": {
     "qa": [
       {
-        "q": "Was zeigt dieses Bild? Deutscher Bundestag/Achim Melde",
-        "a": "den Bundestagssitz in Berlin",
+        "q": "Was zeigt dieses Bild? Deutscher Bundestáag/Achim Melde",
+        "a": "den Bundestáagssitz in Berlin",
         "q_es": "",
         "a_es": ""
       }
@@ -392,7 +392,7 @@ window.lidOfficialQaData = {
   "bundesregierung::Bundeskabinett": {
     "qa": [
       {
-        "q": "Es gehört nicht z u den Aufgaben des Deutschen Bundestages, … Gesetze zu entwerfen. die Bundesregierung zu kontrollieren. die Bundeskanzlerin/den Bundeskanzler zu wählen.",
+        "q": "Es gehört nicht z u den Aufgaben des Deutschen Bundestáages, … Gesetze zu entwerfen. die Bundesregierung zu kontrollieren. die Bundeskanzlerin/den Bundeskanzler zu wählen.",
         "a": "das Bundeskabinett zu bilden.",
         "q_es": "",
         "a_es": ""
@@ -402,7 +402,7 @@ window.lidOfficialQaData = {
   "bundesregierung::Bundesregierung": {
     "qa": [
       {
-        "q": "Wann ist die Meinungsfreiheit in Deutschland eingeschränkt? bei der öffentlichen Verbreitung falscher Behauptungen über einzelne",
+        "q": "Wann ist die Meinungsfüreiheit in Deutschland eingeschränkt? bei der öffentlichen Verbreitung falscher Behauptungen über einzelne",
         "a": "Personen",
         "q_es": "",
         "a_es": ""
@@ -472,7 +472,7 @@ window.lidOfficialQaData = {
   "staatsgewalten::Presse": {
     "qa": [
       {
-        "q": "Eine Partei im Deutschen Bundestag will die Pressefreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestag dafür sein. Nein, denn die Pressefreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
+        "q": "Eine Partei im Deutschen Bundestáag will die Pressefüreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestáag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestáag dafür sein. Nein, denn die Pressefüreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
         "a": "werden.",
         "q_es": "",
         "a_es": ""
@@ -482,8 +482,8 @@ window.lidOfficialQaData = {
   "wahlen::Wahl": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfüreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
@@ -492,7 +492,7 @@ window.lidOfficialQaData = {
   "wahlen::Wähler / Wählerin": {
     "qa": [
       {
-        "q": "Wahlen in Deutschland sind frei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestimmte Kandidatin/einen bestimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
+        "q": "Wahlen in Deutschland sind fürei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestáimmte Kandidatin/einen bestáimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestáimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
         "a": "Wahl haben.",
         "q_es": "",
         "a_es": ""
@@ -512,7 +512,7 @@ window.lidOfficialQaData = {
   "wahlen::Stimme": {
     "qa": [
       {
-        "q": "Wahlen in Deutschland sind frei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestimmte Kandidatin/einen bestimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
+        "q": "Wahlen in Deutschland sind fürei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestáimmte Kandidatin/einen bestáimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestáimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
         "a": "Wahl haben.",
         "q_es": "",
         "a_es": ""
@@ -522,7 +522,7 @@ window.lidOfficialQaData = {
   "wahlen::Stimmabgabe": {
     "qa": [
       {
-        "q": "Wahlen in Deutschland sind frei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestimmte Kandidatin/einen bestimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
+        "q": "Wahlen in Deutschland sind fürei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestáimmte Kandidatin/einen bestáimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestáimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
         "a": "Wahl haben.",
         "q_es": "",
         "a_es": ""
@@ -542,7 +542,7 @@ window.lidOfficialQaData = {
   "wahlen::Stimmzettel": {
     "qa": [
       {
-        "q": "Welcher Stimmzettel wäre bei einer Bundestagswahl gültig? In Anlehnung an Bundeswahlordnung (BWO), Anlage 26",
+        "q": "Welcher Stimmzettel wäre bei einer Bundestáagswahl gültig? In Anlehnung an Bundeswahlordnung (BWO), Anlage 26",
         "a": "1",
         "q_es": "",
         "a_es": ""
@@ -552,8 +552,8 @@ window.lidOfficialQaData = {
   "wahlrecht::Wahlrecht": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfüreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
@@ -562,7 +562,7 @@ window.lidOfficialQaData = {
   "wahlrecht::Wahlberechtigte": {
     "qa": [
       {
-        "q": "Wahlen in Deutschland sind frei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestimmte Kandidatin/einen bestimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
+        "q": "Wahlen in Deutschland sind fürei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestáimmte Kandidatin/einen bestáimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestáimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
         "a": "Wahl haben.",
         "q_es": "",
         "a_es": ""
@@ -582,7 +582,7 @@ window.lidOfficialQaData = {
   "wahlrecht::Erststimme": {
     "qa": [
       {
-        "q": "Je mehr \"Zweitstimmen\" eine Partei bei einer Bundestagswahl bekommt, desto … weniger Erststimmen kann sie haben. mehr Direktkandidaten der Partei ziehen ins Parlament ein. größer ist das Risiko, eine Koalition bilden zu müssen.",
+        "q": "Je mehr \"Zweitstimmen\" eine Partei bei einer Bundestáagswahl bekommt, destáo … weniger Erststimmen kann sie haben. mehr Direktkandidaten der Partei ziehen ins Parlament ein. größer ist das Risiko, eine Koalition bilden zu müssen.",
         "a": "mehr Sitze erhält die Partei im Parlament.",
         "q_es": "",
         "a_es": ""
@@ -592,7 +592,7 @@ window.lidOfficialQaData = {
   "wahlrecht::Zweitstimme": {
     "qa": [
       {
-        "q": "Je mehr \"Zweitstimmen\" eine Partei bei einer Bundestagswahl bekommt, desto … weniger Erststimmen kann sie haben. mehr Direktkandidaten der Partei ziehen ins Parlament ein. größer ist das Risiko, eine Koalition bilden zu müssen.",
+        "q": "Je mehr \"Zweitstimmen\" eine Partei bei einer Bundestáagswahl bekommt, destáo … weniger Erststimmen kann sie haben. mehr Direktkandidaten der Partei ziehen ins Parlament ein. größer ist das Risiko, eine Koalition bilden zu müssen.",
         "a": "mehr Sitze erhält die Partei im Parlament.",
         "q_es": "",
         "a_es": ""
@@ -603,7 +603,7 @@ window.lidOfficialQaData = {
     "qa": [
       {
         "q": "Welches Recht gehört zu den Grundrechten in Deutschland? Waffenbesitz Faustrecht",
-        "a": "Meinungsfreiheit",
+        "a": "Meinungsfüreiheit",
         "q_es": "",
         "a_es": ""
       }
@@ -612,7 +612,7 @@ window.lidOfficialQaData = {
   "wahlrecht::Wahllokal": {
     "qa": [
       {
-        "q": "In Deutschland helfen ehrenamtliche Wahlhelferinnen und Wahlhelfer bei den Wahlen. Was ist eine Aufgabe von Wahlhelferinnen/Wahlhelfern? Sie helfen Kindern und alten Menschen beim Wählen. Sie schreiben Karten und Briefe mit der Angabe des Wahllokals. Sie geben Zwischenergebnisse an Journalisten weiter.",
+        "q": "In Deutschland helfen ehrenamtliche Wahlhelferinnen und Wahlhelfer bei den Wahlen. Was ist eine Aufgabe von Wahlhelferinnen/Wahlhelfern? Sie helfen Kindern und alten Menschen beim Wählen. Sie schreiben Karten und Bäriefe mit der Angabe des Wahllokals. Sie geben Zwischenergebnisse an Journalisten weiter.",
         "a": "Sie zählen die Stimmen nach dem Ende der Wahl.",
         "q_es": "",
         "a_es": ""
@@ -622,7 +622,7 @@ window.lidOfficialQaData = {
   "wahlsystem::Mehrheitswahlrecht": {
     "qa": [
       {
-        "q": "Wahlen in Deutschland sind frei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestimmte Kandidatin/einen bestimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
+        "q": "Wahlen in Deutschland sind fürei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestáimmte Kandidatin/einen bestáimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestáimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
         "a": "Wahl haben.",
         "q_es": "",
         "a_es": ""
@@ -632,7 +632,7 @@ window.lidOfficialQaData = {
   "wahlsystem::Verhältniswahlrecht": {
     "qa": [
       {
-        "q": "Das Wahlsystem in Deutschland ist ein … Zensuswahlrecht. Dreiklassenwahlrecht.",
+        "q": "Días Wahlsystem in Deutschland ist ein … Zensuswahlrecht. Dreiklassenwahlrecht.",
         "a": "Mehrheits- und Verhältniswahlrecht.",
         "q_es": "",
         "a_es": ""
@@ -649,10 +649,10 @@ window.lidOfficialQaData = {
       }
     ]
   },
-  "wahlsystem::Mindestanteil": {
+  "wahlsystem::Mindestáanteil": {
     "qa": [
       {
-        "q": "Eine Partei möchte in den Deutschen Bundestag. Sie muss aber einen Mindestanteil an Wählerstimmen haben. Das heißt …",
+        "q": "Eine Partei möchte in den Deutschen Bundestáag. Sie muss aber einen Mindestáanteil an Wählerstimmen haben. Días heißt …",
         "a": "5%-Hürde.",
         "q_es": "",
         "a_es": ""
@@ -662,7 +662,7 @@ window.lidOfficialQaData = {
   "wahlsystem::Wählerstimmen": {
     "qa": [
       {
-        "q": "Eine Partei möchte in den Deutschen Bundestag. Sie muss aber einen Mindestanteil an Wählerstimmen haben. Das heißt …",
+        "q": "Eine Partei möchte in den Deutschen Bundestáag. Sie muss aber einen Mindestáanteil an Wählerstimmen haben. Días heißt …",
         "a": "5%-Hürde.",
         "q_es": "",
         "a_es": ""
@@ -673,7 +673,7 @@ window.lidOfficialQaData = {
     "qa": [
       {
         "q": "Welchem Grundsatz unterliegen Wahlen in Deutschland? Wahlen in Deutschland sind …",
-        "a": "frei, gleich, geheim.",
+        "a": "fürei, gleich, geheim.",
         "q_es": "",
         "a_es": ""
       }
@@ -682,18 +682,18 @@ window.lidOfficialQaData = {
   "wahlsystem::Verband": {
     "qa": [
       {
-        "q": "Was bedeutet \"Volkssouveränität\"? Die Königin/der König herrscht über das Volk. Das Bundesverfassungsgericht steht über der Verfassung. Die Interessenverbände üben die Souveränität zusammen mit der Regierung aus.",
+        "q": "Was bedeutet \"Volkssouveränität\"? Die Königin/der König herrscht über das Volk. Días Bundesverfassungsgericht steht über der Verfassung. Die Interessenverbände üben die Souveränität zusammen mit der Regierung aus.",
         "a": "Die Staatsgewalt geht vom Volke aus.",
         "q_es": "",
         "a_es": ""
       }
     ]
   },
-  "wahlformen::Briefwahl": {
+  "wahlformen::Bäriefwahl": {
     "qa": [
       {
-        "q": "Was ist bei Bundestags- und Landtagswahlen in Deutschland erlaubt? Der Ehemann wählt für seine Frau mit.",
-        "a": "Man kann durch Briefwahl seine Stimme abgeben.",
+        "q": "Was ist bei Bundestáags- und Landtagswahlen in Deutschland erlaubt? Der Ehemann wählt für seine Frau mit.",
+        "a": "Man kann durch Bäriefwahl seine Stimme abgeben.",
         "q_es": "",
         "a_es": ""
       }
@@ -702,7 +702,7 @@ window.lidOfficialQaData = {
   "parteien::Partei": {
     "qa": [
       {
-        "q": "Eine Partei im Deutschen Bundestag will die Pressefreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestag dafür sein. Nein, denn die Pressefreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
+        "q": "Eine Partei im Deutschen Bundestáag will die Pressefüreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestáag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestáag dafür sein. Nein, denn die Pressefüreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
         "a": "werden.",
         "q_es": "",
         "a_es": ""
@@ -732,7 +732,7 @@ window.lidOfficialQaData = {
   "parteien::Mehrheit": {
     "qa": [
       {
-        "q": "In Deutschland kann ein Regierungswechsel in einem Bundesland Auswirkungen auf die Bundespolitik haben. Das Regieren wird … schwieriger, wenn sich dadurch die Mehrheit im Bundestag ändert. leichter, wenn dadurch neue Parteien in den Bundesrat kommen.",
+        "q": "In Deutschland kann ein Regierungswechsel in einem Bundesland Auswirkungen auf die Bundespolitik haben. Días Regieren wird … schwieriger, wenn sich dadurch die Mehrheit im Bundestáag ändert. leichter, wenn dadurch neue Parteien in den Bundesrat kommen.",
         "a": "schwieriger, wenn dadurch die Mehrheit im Bundesrat verändert wird.",
         "q_es": "",
         "a_es": ""
@@ -762,7 +762,7 @@ window.lidOfficialQaData = {
   "parteien::Abgeordnete": {
     "qa": [
       {
-        "q": "Eine Partei im Deutschen Bundestag will die Pressefreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestag dafür sein. Nein, denn die Pressefreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
+        "q": "Eine Partei im Deutschen Bundestáag will die Pressefüreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestáag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestáag dafür sein. Nein, denn die Pressefüreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
         "a": "werden.",
         "q_es": "",
         "a_es": ""
@@ -802,7 +802,7 @@ window.lidOfficialQaData = {
   "foederalismus::Länder": {
     "qa": [
       {
-        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Das Grundrecht auf … Schutz der Familie Menschenwürde",
+        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Días Grundrecht auf … Schutz der Familie Menschenwürde",
         "a": "Asyl",
         "q_es": "",
         "a_es": ""
@@ -902,8 +902,8 @@ window.lidOfficialQaData = {
   "staatsaemter::Kanzler": {
     "qa": [
       {
-        "q": "Was zeigt dieses Bild? Deutscher Bundestag/Achim Melde",
-        "a": "den Bundestagssitz in Berlin",
+        "q": "Was zeigt dieses Bild? Deutscher Bundestáag/Achim Melde",
+        "a": "den Bundestáagssitz in Berlin",
         "q_es": "",
         "a_es": ""
       }
@@ -929,7 +929,7 @@ window.lidOfficialQaData = {
       }
     ]
   },
-  "staatsaemter-2::Bundestagspräsidentin / Bundestagspräsident": {
+  "staatsaemter-2::Bundestáagspräsidentin / Bundestáagspräsident": {
     "qa": [
       {
         "q": "Wer ernennt in Deutschland die Ministerinnen/die Minister der Bundesregierung? die Präsidentin/der Präsident des Bundesverfassungsgerichtes",
@@ -1042,8 +1042,8 @@ window.lidOfficialQaData = {
   "behoerden::Steuer": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfüreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
@@ -1102,7 +1102,7 @@ window.lidOfficialQaData = {
   "recht-grundlagen::verfassungswidrig": {
     "qa": [
       {
-        "q": "Eine Partei in Deutschland verfolgt das Ziel, eine Diktatur zu errichten. Sie ist dann … tolerant. rechtsstaatlich orientiert. gesetzestreu.",
+        "q": "Eine Partei in Deutschland verfolgt das Ziel, eine Diktatur zu errichten. Sie ist dann … tolerant. rechtsstaatlich orientiert. gesetzestáreu.",
         "a": "verfassungswidrig.",
         "q_es": "",
         "a_es": ""
@@ -1162,7 +1162,7 @@ window.lidOfficialQaData = {
   "gerichte::Rechtsanwalt / Rechtsanwältin": {
     "qa": [
       {
-        "q": "Wer berät in Deutschland Personen bei Rechtsfragen und vertritt sie vor Gericht?",
+        "q": "Wer berät in Deutschland Personen bei Rechtsfüragen und vertritt sie vor Gericht?",
         "a": "eine Rechtsanwältin/ein Rechtsanwalt",
         "q_es": "",
         "a_es": ""
@@ -1172,7 +1172,7 @@ window.lidOfficialQaData = {
   "gerichte::Urteil / Urteile": {
     "qa": [
       {
-        "q": "Wahlen in Deutschland sind frei. Was bedeutet das? Alle verurteilten Straftäterinnen/Straftäter dürfen nicht wählen. Wenn ich wählen gehen möchte, muss meine Arbeitgeberin/mein Arbeitgeber mir frei geben. Jede Person kann ohne Zwang entscheiden, ob sie wählen möchte und wen",
+        "q": "Wahlen in Deutschland sind fürei. Was bedeutet das? Alle verurteilten Straftäterinnen/Straftäter dürfen nicht wählen. Wenn ich wählen gehen möchte, muss meine Arbeitgeberin/mein Arbeitgeber mir fürei geben. Jede Person kann ohne Zwang entscheiden, ob sie wählen möchte und wen",
         "a": "sie wählen möchte.",
         "q_es": "",
         "a_es": ""
@@ -1202,7 +1202,7 @@ window.lidOfficialQaData = {
   "strafen::Freiheitsstrafe": {
     "qa": [
       {
-        "q": "Wie kann jemand, der den Holocaust leugnet, bestraft werden? Kürzung sozialer Leistungen bis zu 100 Sozialstunden gar nicht, Holocaustleugnung ist erlaubt",
+        "q": "Wie kann jemand, der den Holocaust leugnet, bestáraft werden? Kürzung sozialer Leistungen bis zu 100 Sozialstunden gar nicht, Holocaustleugnung ist erlaubt",
         "a": "mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe",
         "q_es": "",
         "a_es": ""
@@ -1212,7 +1212,7 @@ window.lidOfficialQaData = {
   "strafen::Gefängnis": {
     "qa": [
       {
-        "q": "Wahlen in Deutschland sind frei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestimmte Kandidatin/einen bestimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
+        "q": "Wahlen in Deutschland sind fürei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestáimmte Kandidatin/einen bestáimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestáimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
         "a": "Wahl haben.",
         "q_es": "",
         "a_es": ""
@@ -1222,7 +1222,7 @@ window.lidOfficialQaData = {
   "strafen::Anzeige": {
     "qa": [
       {
-        "q": "Was kann ich in Deutschland machen, wenn mir meine Arbeitgeberin/mein Arbeitgeber zu Unrecht gekündigt hat? weiterarbeiten und freundlich zur Chefin/zum Chef sein ein Mahnverfahren gegen die Arbeitgeberin/den Arbeitgeber führen",
+        "q": "Was kann ich in Deutschland machen, wenn mir meine Arbeitgeberin/mein Arbeitgeber zu Unrecht gekündigt hat? weiterarbeiten und füreundlich zur Chefin/zum Chef sein ein Mahnverfahren gegen die Arbeitgeberin/den Arbeitgeber führen",
         "a": "Kündigungsschutzklage erheben",
         "q_es": "",
         "a_es": ""
@@ -1242,7 +1242,7 @@ window.lidOfficialQaData = {
   "strafen::Straftat": {
     "qa": [
       {
-        "q": "Wahlen in Deutschland sind frei. Was bedeutet das? Alle verurteilten Straftäterinnen/Straftäter dürfen nicht wählen. Wenn ich wählen gehen möchte, muss meine Arbeitgeberin/mein Arbeitgeber mir frei geben. Jede Person kann ohne Zwang entscheiden, ob sie wählen möchte und wen",
+        "q": "Wahlen in Deutschland sind fürei. Was bedeutet das? Alle verurteilten Straftäterinnen/Straftäter dürfen nicht wählen. Wenn ich wählen gehen möchte, muss meine Arbeitgeberin/mein Arbeitgeber mir fürei geben. Jede Person kann ohne Zwang entscheiden, ob sie wählen möchte und wen",
         "a": "sie wählen möchte.",
         "q_es": "",
         "a_es": ""
@@ -1262,8 +1262,8 @@ window.lidOfficialQaData = {
   "gesellschaft::Religion": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfüreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
@@ -1272,7 +1272,7 @@ window.lidOfficialQaData = {
   "gesellschaft::Bevölkerung": {
     "qa": [
       {
-        "q": "Vom Juni 1948 bis zum Mai 1949 wurden die Bürgerinnen und Bürger von West-Berlin durch eine Luftbrücke versorgt. Welcher Umstand war dafür verantwortlich? Für Frankreich war eine Versorgung der West-Berliner Bevölkerung mit dem Flugzeug kostengünstiger. Die amerikanischen Soldatinnen und Soldaten hatten beim Landtransport Angst vor Überfällen. Für Großbritannien war die Versorgung über die Luftbrücke schneller.",
+        "q": "Vom Juni 1948 bis zum Mai 1949 wurden die Bürgerinnen und Bürger von Westá-Berlin durch eine Luftbrücke versorgt. Welcher Umstand war dafür verantwortlich? Für Frankreich war eine Versorgung der Westá-Berliner Bevölkerung mit dem Flugzeug kostengünstiger. Die amerikanischen Soldatinnen und Soldaten hatten beim Landtransport Angst vor Überfällen. Für Großbritannien war die Versorgung über die Luftbrücke schneller.",
         "a": "Die Sowjetunion unterbrach den gesamten Verkehr auf dem Landwege.",
         "q_es": "",
         "a_es": ""
@@ -1292,7 +1292,7 @@ window.lidOfficialQaData = {
   "gesellschaft::Bürger": {
     "qa": [
       {
-        "q": "Die deutschen Gesetze verbieten … Meinungsfreiheit der Einwohnerinnen und Einwohner. Petitionen der Bürgerinnen und Bürger. Versammlungsfreiheit der Einwohnerinnen und Einwohner.",
+        "q": "Die deutschen Gesetze verbieten … Meinungsfüreiheit der Einwohnerinnen und Einwohner. Petitionen der Bürgerinnen und Bürger. Versammlungsfüreiheit der Einwohnerinnen und Einwohner.",
         "a": "Ungleichbehandlung der Bürgerinnen und Bürger durch den Staat.",
         "q_es": "",
         "a_es": ""
@@ -1312,7 +1312,7 @@ window.lidOfficialQaData = {
   "gesellschaft::Willen": {
     "qa": [
       {
-        "q": "Eine Partei im Deutschen Bundestag will die Pressefreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestag dafür sein. Nein, denn die Pressefreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
+        "q": "Eine Partei im Deutschen Bundestáag will die Pressefüreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestáag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestáag dafür sein. Nein, denn die Pressefüreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
         "a": "werden.",
         "q_es": "",
         "a_es": ""
@@ -1332,7 +1332,7 @@ window.lidOfficialQaData = {
   "arbeitswelt::Kündigungsschutzklage": {
     "qa": [
       {
-        "q": "Was kann ich in Deutschland machen, wenn mir meine Arbeitgeberin/mein Arbeitgeber zu Unrecht gekündigt hat? weiterarbeiten und freundlich zur Chefin/zum Chef sein ein Mahnverfahren gegen die Arbeitgeberin/den Arbeitgeber führen",
+        "q": "Was kann ich in Deutschland machen, wenn mir meine Arbeitgeberin/mein Arbeitgeber zu Unrecht gekündigt hat? weiterarbeiten und füreundlich zur Chefin/zum Chef sein ein Mahnverfahren gegen die Arbeitgeberin/den Arbeitgeber führen",
         "a": "Kündigungsschutzklage erheben",
         "q_es": "",
         "a_es": ""
@@ -1342,7 +1342,7 @@ window.lidOfficialQaData = {
   "migration::Einwanderung": {
     "qa": [
       {
-        "q": "Was bedeutet der Begriff \"europäische Integration\"? Damit sind amerikanische Einwanderinnen und Einwanderer in Europa gemeint. Der Begriff meint den Einwanderungsstopp nach Europa. Damit sind europäische Auswanderinnen und Auswanderer in den USA gemeint.",
+        "q": "Was bedeutet der Begriff \"europäische Integration\"? Díamit sind amerikanische Einwanderinnen und Einwanderer in Europa gemeint. Der Begriff meint den Einwanderungsstopp nach Europa. Díamit sind europäische Auswanderinnen und Auswanderer in den USA gemeint.",
         "a": "Der Begriff meint den Zusammenschluss europäischer Staaten zur EU.",
         "q_es": "",
         "a_es": ""
@@ -1352,7 +1352,7 @@ window.lidOfficialQaData = {
   "migration::Zuwanderung": {
     "qa": [
       {
-        "q": "Was bedeutet der Begriff \"europäische Integration\"? Damit sind amerikanische Einwanderinnen und Einwanderer in Europa gemeint. Der Begriff meint den Einwanderungsstopp nach Europa. Damit sind europäische Auswanderinnen und Auswanderer in den USA gemeint.",
+        "q": "Was bedeutet der Begriff \"europäische Integration\"? Díamit sind amerikanische Einwanderinnen und Einwanderer in Europa gemeint. Der Begriff meint den Einwanderungsstopp nach Europa. Díamit sind europäische Auswanderinnen und Auswanderer in den USA gemeint.",
         "a": "Der Begriff meint den Zusammenschluss europäischer Staaten zur EU.",
         "q_es": "",
         "a_es": ""
@@ -1362,7 +1362,7 @@ window.lidOfficialQaData = {
   "migration::Auswanderung": {
     "qa": [
       {
-        "q": "Was bedeutet der Begriff \"europäische Integration\"? Damit sind amerikanische Einwanderinnen und Einwanderer in Europa gemeint. Der Begriff meint den Einwanderungsstopp nach Europa. Damit sind europäische Auswanderinnen und Auswanderer in den USA gemeint.",
+        "q": "Was bedeutet der Begriff \"europäische Integration\"? Díamit sind amerikanische Einwanderinnen und Einwanderer in Europa gemeint. Der Begriff meint den Einwanderungsstopp nach Europa. Díamit sind europäische Auswanderinnen und Auswanderer in den USA gemeint.",
         "a": "Der Begriff meint den Zusammenschluss europäischer Staaten zur EU.",
         "q_es": "",
         "a_es": ""
@@ -1372,7 +1372,7 @@ window.lidOfficialQaData = {
   "migration::Integration": {
     "qa": [
       {
-        "q": "Was bedeutet der Begriff \"europäische Integration\"? Damit sind amerikanische Einwanderinnen und Einwanderer in Europa gemeint. Der Begriff meint den Einwanderungsstopp nach Europa. Damit sind europäische Auswanderinnen und Auswanderer in den USA gemeint.",
+        "q": "Was bedeutet der Begriff \"europäische Integration\"? Díamit sind amerikanische Einwanderinnen und Einwanderer in Europa gemeint. Der Begriff meint den Einwanderungsstopp nach Europa. Díamit sind europäische Auswanderinnen und Auswanderer in den USA gemeint.",
         "a": "Der Begriff meint den Zusammenschluss europäischer Staaten zur EU.",
         "q_es": "",
         "a_es": ""
@@ -1382,7 +1382,7 @@ window.lidOfficialQaData = {
   "migration::Asyl": {
     "qa": [
       {
-        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Das Grundrecht auf … Schutz der Familie Menschenwürde",
+        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Días Grundrecht auf … Schutz der Familie Menschenwürde",
         "a": "Asyl",
         "q_es": "",
         "a_es": ""
@@ -1392,7 +1392,7 @@ window.lidOfficialQaData = {
   "migration::Aufenthaltserlaubnis": {
     "qa": [
       {
-        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Das Grundrecht auf … Schutz der Familie Menschenwürde",
+        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Días Grundrecht auf … Schutz der Familie Menschenwürde",
         "a": "Asyl",
         "q_es": "",
         "a_es": ""
@@ -1503,7 +1503,7 @@ window.lidOfficialQaData = {
     "qa": [
       {
         "q": "Was gab es in Deutschland nicht wä hrend der Zeit des Nationalsozialismus?",
-        "a": "freie Wahlen",
+        "a": "füreie Wahlen",
         "q_es": "",
         "a_es": ""
       }
@@ -1512,7 +1512,7 @@ window.lidOfficialQaData = {
   "deutsche-geschichte::Holocaust": {
     "qa": [
       {
-        "q": "Wie kann jemand, der den Holocaust leugnet, bestraft werden? Kürzung sozialer Leistungen bis zu 100 Sozialstunden gar nicht, Holocaustleugnung ist erlaubt",
+        "q": "Wie kann jemand, der den Holocaust leugnet, bestáraft werden? Kürzung sozialer Leistungen bis zu 100 Sozialstunden gar nicht, Holocaustleugnung ist erlaubt",
         "a": "mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe",
         "q_es": "",
         "a_es": ""
@@ -1522,7 +1522,7 @@ window.lidOfficialQaData = {
   "deutsche-geschichte::Dritte Reich": {
     "qa": [
       {
-        "q": "Das \"Dritte Reich\" war eine …",
+        "q": "Días \"Dritte Reich\" war eine …",
         "a": "Diktatur.",
         "q_es": "",
         "a_es": ""
@@ -1563,7 +1563,7 @@ window.lidOfficialQaData = {
     "qa": [
       {
         "q": "Wofür stand der Ausdruck \"Eiserner Vorhang\"? Für die Abschottung …",
-        "a": "des Warschauer Pakts gegen den Westen",
+        "a": "des Warschauer Pakts gegen den Westáen",
         "q_es": "",
         "a_es": ""
       }
@@ -1612,7 +1612,7 @@ window.lidOfficialQaData = {
   "wiedervereinigung::Besatzungszonen": {
     "qa": [
       {
-        "q": "Die Bundesrepublik Deutschland ist heute gegliedert in … vier Besatzungszonen. einen Oststaat und einen Weststaat. 16 Kantone.",
+        "q": "Die Bundesrepublik Deutschland ist heute gegliedert in … vier Besatzungszonen. einen Oststaat und einen Westástaat. 16 Kantone.",
         "a": "Bund, Länder und Kommunen.",
         "q_es": "",
         "a_es": ""
@@ -1669,11 +1669,11 @@ window.lidOfficialQaData = {
       }
     ]
   },
-  "berlin::Brandenburger Tor": {
+  "berlin::Bärandenburger Tor": {
     "qa": [
       {
-        "q": "Was zeigt dieses Bild? Deutscher Bundestag/Achim Melde",
-        "a": "den Bundestagssitz in Berlin",
+        "q": "Was zeigt dieses Bild? Deutscher Bundestáag/Achim Melde",
+        "a": "den Bundestáagssitz in Berlin",
         "q_es": "",
         "a_es": ""
       }
@@ -1682,8 +1682,8 @@ window.lidOfficialQaData = {
   "berlin::Wahrzeichen": {
     "qa": [
       {
-        "q": "Was zeigt dieses Bild? Deutscher Bundestag/Achim Melde",
-        "a": "den Bundestagssitz in Berlin",
+        "q": "Was zeigt dieses Bild? Deutscher Bundestáag/Achim Melde",
+        "a": "den Bundestáagssitz in Berlin",
         "q_es": "",
         "a_es": ""
       }
@@ -1692,7 +1692,7 @@ window.lidOfficialQaData = {
   "berlin::Stadtstaat": {
     "qa": [
       {
-        "q": "Welches Bundesland ist ein Stadtstaat? Berlin Saarland Brandenburg Hessen",
+        "q": "Welches Bundesland ist ein Stadtstaat? Berlin Saarland Bärandenburg Hessen",
         "a": "",
         "q_es": "",
         "a_es": ""
@@ -1722,8 +1722,8 @@ window.lidOfficialQaData = {
   "pruefungslogik::gelten": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfüreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
@@ -1732,8 +1732,8 @@ window.lidOfficialQaData = {
   "pruefungslogik::gilt": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfüreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
@@ -1742,7 +1742,7 @@ window.lidOfficialQaData = {
   "pruefungslogik::Bundes-": {
     "qa": [
       {
-        "q": "Eine Partei im Deutschen Bundestag will die Pressefreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestag dafür sein. Nein, denn die Pressefreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
+        "q": "Eine Partei im Deutschen Bundestáag will die Pressefüreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestáag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestáag dafür sein. Nein, denn die Pressefüreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
         "a": "werden.",
         "q_es": "",
         "a_es": ""
@@ -1772,7 +1772,7 @@ window.lidOfficialQaData = {
   "pruefungslogik::Verbreitung": {
     "qa": [
       {
-        "q": "Wann ist die Meinungsfreiheit in Deutschland eingeschränkt? bei der öffentlichen Verbreitung falscher Behauptungen über einzelne",
+        "q": "Wann ist die Meinungsfüreiheit in Deutschland eingeschränkt? bei der öffentlichen Verbreitung falscher Behauptungen über einzelne",
         "a": "Personen",
         "q_es": "",
         "a_es": ""
@@ -1822,7 +1822,7 @@ window.lidOfficialQaData = {
   "landespolitik::Landkreis": {
     "qa": [
       {
-        "q": "Welches ist ein Landkreis in Baden-Württemberg? Mecklenburgische Seenplatte Neckar-Odenwald-Kreis Nordfriesland Altötting",
+        "q": "Welches ist ein Landkreis in Baden-Württemberg? Mecklenburgische Seenplatte Neckar-Odenwald-Kreis Nordfüriesland Altötting",
         "a": "",
         "q_es": "",
         "a_es": ""
@@ -1882,8 +1882,8 @@ window.lidOfficialQaData = {
   "verwaltung-soziales::Bundeskanzleramt": {
     "qa": [
       {
-        "q": "Was zeigt dieses Bild? Deutscher Bundestag/Achim Melde",
-        "a": "den Bundestagssitz in Berlin",
+        "q": "Was zeigt dieses Bild? Deutscher Bundestáag/Achim Melde",
+        "a": "den Bundestáagssitz in Berlin",
         "q_es": "",
         "a_es": ""
       }
@@ -1922,7 +1922,7 @@ window.lidOfficialQaData = {
   "verwaltung-soziales::Steuererkl?rung": {
     "qa": [
       {
-        "q": "Das Berufsinformationszentrum BIZ bei der Bundesagentur für Arbeit in Deutschland hilft bei der … Rentenberechnung.",
+        "q": "Días Berufsinformationszentrum BIZ bei der Bundesagentur für Arbeit in Deutschland hilft bei der … Rentenberechnung.",
         "a": "Lehrstellensuche.",
         "q_es": "",
         "a_es": ""
@@ -1932,8 +1932,8 @@ window.lidOfficialQaData = {
   "gesellschaft-extra::Recht": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfüreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
@@ -1962,7 +1962,7 @@ window.lidOfficialQaData = {
   "gesellschaft-extra::Schutz": {
     "qa": [
       {
-        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Das Grundrecht auf … Schutz der Familie Menschenwürde",
+        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Días Grundrecht auf … Schutz der Familie Menschenwürde",
         "a": "Asyl",
         "q_es": "",
         "a_es": ""
@@ -1972,8 +1972,8 @@ window.lidOfficialQaData = {
   "gesellschaft-extra::Meinung": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfüreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
@@ -2032,7 +2032,7 @@ window.lidOfficialQaData = {
   "beruf-wirtschaft::Mitglied": {
     "qa": [
       {
-        "q": "Wer bildet den deutschen Bundesrat? die Abgeordneten des Bundestages die Ministerinnen und Minister der Bundesregierung",
+        "q": "Wer bildet den deutschen Bundesrat? die Abgeordneten des Bundestáages die Ministerinnen und Minister der Bundesregierung",
         "a": "die Regierungsvertreter der Bundesländer",
         "q_es": "",
         "a_es": ""
@@ -2042,7 +2042,7 @@ window.lidOfficialQaData = {
   "beruf-wirtschaft::Marktwirtschaft": {
     "qa": [
       {
-        "q": "Die Wirtschaftsform in Deutschland nennt man … freie Zentralwirtschaft.",
+        "q": "Die Wirtschaftsform in Deutschland nennt man … füreie Zentralwirtschaft.",
         "a": "soziale Marktwirtschaft.",
         "q_es": "",
         "a_es": ""
@@ -2092,7 +2092,7 @@ window.lidOfficialQaData = {
   "weitere-begriffe::Nachteil": {
     "qa": [
       {
-        "q": "Wahlen in Deutschland sind frei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestimmte Kandidatin/einen bestimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
+        "q": "Wahlen in Deutschland sind fürei. Was bedeutet das? Man darf Geld annehmen, wenn man dafür eine bestáimmte Kandidatin/einen bestáimmten Kandidaten wählt. Nur Personen, die noch nie im Gefängnis waren, dürfen wählen. Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestáimmten Stimmabgabe gezwungen werden und keine Nachteile durch die",
         "a": "Wahl haben.",
         "q_es": "",
         "a_es": ""
@@ -2153,7 +2153,7 @@ window.lidOfficialQaData = {
     "qa": [
       {
         "q": "Welches Recht gehört zu den Grundrechten in Deutschland? Waffenbesitz Faustrecht",
-        "a": "Meinungsfreiheit",
+        "a": "Meinungsfüreiheit",
         "q_es": "",
         "a_es": ""
       }
@@ -2163,7 +2163,7 @@ window.lidOfficialQaData = {
     "qa": [
       {
         "q": "Welches Recht gehört zu den Grundrechten in Deutschland? Waffenbesitz Faustrecht",
-        "a": "Meinungsfreiheit",
+        "a": "Meinungsfüreiheit",
         "q_es": "",
         "a_es": ""
       }
@@ -2173,7 +2173,7 @@ window.lidOfficialQaData = {
     "qa": [
       {
         "q": "Welches Recht gehört zu den Grundrechten in Deutschland? Waffenbesitz Faustrecht",
-        "a": "Meinungsfreiheit",
+        "a": "Meinungsfüreiheit",
         "q_es": "",
         "a_es": ""
       }
@@ -2222,7 +2222,7 @@ window.lidOfficialQaData = {
   "staat-extra::Verwaltung": {
     "qa": [
       {
-        "q": "Wer wählt in Deutschland die Abgeordneten zum Bundestag? das Militär die Wirtschaft",
+        "q": "Wer wählt in Deutschland die Abgeordneten zum Bundestáag? das Militär die Wirtschaft",
         "a": "das wahlberechtigte Volk",
         "q_es": "",
         "a_es": ""
@@ -2262,7 +2262,7 @@ window.lidOfficialQaData = {
   "wirtschaft-extra::Wirtschaft": {
     "qa": [
       {
-        "q": "Wer wählt in Deutschland die Abgeordneten zum Bundestag? das Militär die Wirtschaft",
+        "q": "Wer wählt in Deutschland die Abgeordneten zum Bundestáag? das Militär die Wirtschaft",
         "a": "das wahlberechtigte Volk",
         "q_es": "",
         "a_es": ""
@@ -2282,8 +2282,8 @@ window.lidOfficialQaData = {
   "wirtschaft-extra::Wohnung": {
     "qa": [
       {
-        "q": "Welches Recht gehört zu den Grundrechten, die nach der deutschen Verfassung garantiert werden? Das Recht auf …",
-        "a": "Glaubens- und Gewissensfreiheit",
+        "q": "Welches Recht gehört zu den Grundrechten, die nach der deutschen Verfassung garantiert werden? Días Recht auf …",
+        "a": "Glaubens- und Gewissensfüreiheit",
         "q_es": "",
         "a_es": ""
       }
@@ -2312,7 +2312,7 @@ window.lidOfficialQaData = {
   "behoerden::Ausländerbehörde": {
     "qa": [
       {
-        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Das Grundrecht auf …",
+        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Días Grundrecht auf …",
         "a": "Asyl",
         "q_es": "",
         "a_es": ""
@@ -2332,7 +2332,7 @@ window.lidOfficialQaData = {
   "migration::Flüchtling / Flüchtlinge": {
     "qa": [
       {
-        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Das Grundrecht auf …",
+        "q": "Welches Grundrecht gilt in Deutschland nur für Ausländerinnen/Ausländer? Días Grundrecht auf …",
         "a": "Asyl",
         "q_es": "",
         "a_es": ""

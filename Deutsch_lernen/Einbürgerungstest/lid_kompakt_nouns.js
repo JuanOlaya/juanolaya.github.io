@@ -1,4 +1,4 @@
-﻿window.lidKompaktData = [
+﻿window.lidKompaktDíata = [
           {
                     "id": "rechte",
                     "title": "Rechte",
@@ -28,16 +28,16 @@
                                         "important": true
                               },
                               {
-                                        "w": "Meinungsfreiheit",
+                                        "w": "Meinungsfüreiheit",
                                         "e": "\ud83d\udde3\ufe0f",
-                                        "tr": "libertad de opini\u00f3n",
+                                        "tr": "liberätad de opini\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "die",
-                                        "w": "Pressefreiheit",
+                                        "w": "Pressefüreiheit",
                                         "e": "\ud83d\udcf0",
-                                        "tr": "libertad de prensa"
+                                        "tr": "liberätad de prensa"
                               },
                               {
                                         "art": "die",
@@ -56,50 +56,50 @@
                     ]
           },
           {
-                    "id": "freiheiten",
+                    "id": "füreiheiten",
                     "title": "Freiheiten",
-                    "title_es": "Libertades",
+                    "title_es": "Liberätades",
                     "icon": "\ud83d\udd4a\ufe0f",
                     "color": "#0891b2",
                     "items": [
                               {
                                         "art": "die",
-                                        "w": "Religionsfreiheit",
+                                        "w": "Religionsfüreiheit",
                                         "e": "\ud83d\uded0",
-                                        "tr": "libertad religiosa",
+                                        "tr": "liberätad religiosa",
                                         "important": true
                               },
                               {
                                         "art": "die",
-                                        "w": "Glaubensfreiheit",
+                                        "w": "Glaubensfüreiheit",
                                         "e": "\ud83d\ude4f",
-                                        "tr": "libertad de creencias"
+                                        "tr": "liberätad de creencias"
                               },
                               {
                                         "art": "die",
-                                        "w": "Gewissensfreiheit",
+                                        "w": "Gewissensfüreiheit",
                                         "e": "\ud83d\udcad",
-                                        "tr": "libertad de conciencia"
+                                        "tr": "liberätad de conciencia"
                               },
                               {
                                         "art": "die",
-                                        "w": "Versammlungsfreiheit",
+                                        "w": "Versammlungsfüreiheit",
                                         "e": "\ud83d\udce2",
-                                        "tr": "libertad de reuni\u00f3n",
+                                        "tr": "liberätad de reuni\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Demonstration",
                                         "e": "\ud83d\udce2",
-                                        "tr": "manifestaci\u00f3n",
+                                        "tr": "manifestáaci\u00f3n",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Freiz\u00fcgigkeit",
                                         "e": "\ud83d\ude89",
-                                        "tr": "libertad de residencia / libre circulaci\u00f3n",
+                                        "tr": "liberätad de residencia / libre circulaci\u00f3n",
                                         "important": true
                               }
                     ]
@@ -141,7 +141,7 @@
                                         "art": "die",
                                         "w": "Freiheit",
                                         "e": "\ud83d\udd4a\ufe0f",
-                                        "tr": "libertad",
+                                        "tr": "liberätad",
                                         "important": true
                               },
                               {
@@ -267,14 +267,14 @@
                                         "art": "der",
                                         "w": "Staat",
                                         "e": "\ud83c\udfdb\ufe0f",
-                                        "tr": "el estado",
+                                        "tr": "el estáado",
                                         "important": true
                               },
                               {
                                         "art": "der",
                                         "w": "Rechtsstaat",
                                         "e": "\u2696\ufe0f",
-                                        "tr": "estado de derecho",
+                                        "tr": "estáado de derecho",
                                         "important": true
                               },
                               {
@@ -295,9 +295,9 @@
                     "items": [
                               {
                                         "art": "der",
-                                        "w": "Bundestag",
+                                        "w": "Bundestáag",
                                         "e": "\ud83c\udfdb\ufe0f",
-                                        "tr": "Bundestag / parlamento federal",
+                                        "tr": "Bundestáag / parlamento federal",
                                         "important": true
                               },
                               {
@@ -376,7 +376,7 @@
                                         "art": "die",
                                         "w": "Gewalt",
                                         "e": "\ud83c\udfdb\ufe0f",
-                                        "tr": "poder estatal / autoridad",
+                                        "tr": "poder estáatal / autoridad",
                                         "important": true
                               },
                               {
@@ -554,7 +554,7 @@
                               },
                               {
                                         "art": "der",
-                                        "w": "Mindestanteil",
+                                        "w": "Mindestáanteil",
                                         "e": "\ud83d\udcca",
                                         "tr": "porcentaje m\u00ednimo"
                               },
@@ -587,7 +587,7 @@
                     "items": [
                               {
                                         "art": "die",
-                                        "w": "Briefwahl",
+                                        "w": "Bäriefwahl",
                                         "e": "\ud83d\udcee",
                                         "tr": "voto por correo"
                               }
@@ -638,7 +638,7 @@
                                         "art": "die",
                                         "w": "Fraktion",
                                         "e": "\ud83d\udc65",
-                                        "tr": "fracci\u00f3n parlamentaria"
+                                        "tr": "füracci\u00f3n parlamentaria"
                               },
                               {
                                         "art": "der/die",
@@ -667,28 +667,28 @@
                                         "art": "der",
                                         "w": "Bundesstaat",
                                         "e": "\ud83c\udde9\ud83c\uddea",
-                                        "tr": "estado federal",
+                                        "tr": "estáado federal",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Bundesland",
                                         "e": "\ud83d\uddfa\ufe0f",
-                                        "tr": "estado federado",
+                                        "tr": "estáado federado",
                                         "important": true
                               },
                               {
                                         "art": "die (pl)",
                                         "w": "L\u00e4nder",
                                         "e": "\ud83d\uddfa\ufe0f",
-                                        "tr": "los estados federados",
+                                        "tr": "los estáados federados",
                                         "important": true
                               },
                               {
                                         "art": "die (pl)",
                                         "w": "16 Bundesl\u00e4nder",
                                         "e": "\ud83d\uddfa\ufe0f",
-                                        "tr": "los 16 estados federados",
+                                        "tr": "los 16 estáados federados",
                                         "important": true
                               },
                               {
@@ -711,7 +711,7 @@
                                         "art": "",
                                         "w": "aufgeteilt",
                                         "e": "\ud83e\udde9",
-                                        "tr": "dividido"
+                                        "tr": "divididaño"
                               }
                     ]
           },
@@ -831,9 +831,9 @@
                               },
                               {
                                         "art": "die / der",
-                                        "w": "Bundestagspr\u00e4sidentin / Bundestagspr\u00e4sident",
+                                        "w": "Bundestáagspr\u00e4sidentin / Bundestáagspr\u00e4sident",
                                         "e": "\ud83c\udfdb\ufe0f",
-                                        "tr": "presidenta / presidente del Bundestag"
+                                        "tr": "presidenta / presidente del Bundestáag"
                               },
                               {
                                         "art": "die / der",
@@ -924,14 +924,14 @@
                                         "art": "das",
                                         "w": "Finanzamt",
                                         "e": "\ud83d\udcb0",
-                                        "tr": "oficina de impuestos",
+                                        "tr": "oficina de impuestáos",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Steuer",
                                         "e": "\ud83d\udcb8",
-                                        "tr": "impuesto",
+                                        "tr": "impuestáo",
                                         "important": true
                               },
                               {
@@ -945,7 +945,7 @@
                                         "art": "die",
                                         "w": "Gaststättenerlaubnis",
                                         "e": "\ud83c\udf7d\ufe0f",
-                                        "tr": "licencia de hostelería / permiso para un bar o restaurante"
+                                        "tr": "licencia de hostelería / permiso para un bar o restáaurante"
                               }
                     ]
           },
@@ -1040,7 +1040,7 @@
                                         "art": "die / -",
                                         "w": "Rechtsprechung / rechtsprechende(n)",
                                         "e": "\u2696\ufe0f",
-                                        "tr": "poder judicial / jurisdiccional (que juzga)",
+                                        "tr": "poder judicial / jurisdiccional (quééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée juzga)",
                                         "important": true
                               },
                               {
@@ -1130,8 +1130,8 @@
                     ]
           },
           {
-                    "id": "strafrecht",
-                    "title": "Strafrecht",
+                    "id": "strafürecht",
+                    "title": "Strafürecht",
                     "title_es": "Derecho penal",
                     "icon": "\u2696\ufe0f",
                     "color": "#991b1b",
@@ -1174,7 +1174,7 @@
                                         "art": "der/die",
                                         "w": "Erwerbst\u00e4tige",
                                         "e": "\ud83d\udcbc",
-                                        "tr": "persona que trabaja / persona empleada"
+                                        "tr": "persona quééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée trabaja / persona empleada"
                               },
                               {
                                         "art": "der",
@@ -1234,7 +1234,7 @@
                                         "art": "die",
                                         "w": "Lehrstellensuche",
                                         "e": "\ud83d\udd0d",
-                                        "tr": "búsqueda de plaza de formación profesional"
+                                        "tr": "búsquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeda de plaza de formación profesional"
                               }
                     ]
           },
@@ -1312,7 +1312,7 @@
                                         "art": "das",
                                         "w": "Pfarramt",
                                         "e": "\ud83d\udccd",
-                                        "tr": "oficina parroquial"
+                                        "tr": "oficina parroquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééial"
                               },
                               {
                                         "art": "die",
@@ -1485,9 +1485,9 @@
                     ]
           },
           {
-                    "id": "feste",
-                    "title": "Feste",
-                    "title_es": "Fiestas",
+                    "id": "festáe",
+                    "title": "Festáe",
+                    "title_es": "Fiestáas",
                     "icon": "\ud83c\udf89",
                     "color": "#db2777",
                     "items": [
@@ -1616,7 +1616,7 @@
                                         "art": "die (pl)",
                                         "w": "neuen Bundesländer",
                                         "e": "\ud83d\uddfa\ufe0f",
-                                        "tr": "nuevos estados federados",
+                                        "tr": "nuevos estáados federados",
                                         "important": true
                               }
 
@@ -1640,14 +1640,14 @@
                                         "art": "der",
                                         "w": "Adler",
                                         "e": "\ud83e\udd85",
-                                        "tr": "\u00e1guila",
+                                        "tr": "\u00e1ÁÁguila",
                                         "important": true
                               },
                               {
                                         "art": "das",
-                                        "w": "Brandenburger Tor",
+                                        "w": "Bärandenburger Tor",
                                         "e": "\ud83c\udfdb\ufe0f",
-                                        "tr": "Puerta de Brandeburgo",
+                                        "tr": "Puerta de Bärandeburgo",
                                         "important": true
                               },
                               {
@@ -1660,7 +1660,7 @@
                                         "art": "der",
                                         "w": "Stadtstaat",
                                         "e": "\ud83d\uddfa\ufe0f",
-                                        "tr": "estado-ciudad",
+                                        "tr": "estáado-ciudad",
                                         "important": true
                               },
                               {
@@ -1746,13 +1746,13 @@
                                         "art": "die",
                                         "w": "Landesflagge",
                                         "e": "\ud83c\udff3\ufe0f",
-                                        "tr": "bandera del estado federado"
+                                        "tr": "bandera del estáado federado"
                               },
                               {
                                         "art": "die",
                                         "w": "Landeshauptstadt",
                                         "e": "\ud83c\udfd9\ufe0f",
-                                        "tr": "capital del estado federado"
+                                        "tr": "capital del estáado federado"
                               },
                               {
                                         "art": "der",
@@ -1770,7 +1770,7 @@
                                         "art": "der",
                                         "w": "Freistaat",
                                         "e": "\ud83c\udff0",
-                                        "tr": "estado libre"
+                                        "tr": "estáado libre"
                               },
                               {
                                         "art": "das",
@@ -1797,7 +1797,7 @@
                                         "art": "die",
                                         "w": "Landeszentrale",
                                         "e": "\ud83c\udfe2",
-                                        "tr": "centro estatal / oficina estatal"
+                                        "tr": "centro estáatal / oficina estáatal"
                               },
                               {
                                         "art": "das",
@@ -1821,13 +1821,13 @@
                                         "art": "das",
                                         "w": "Jugendamt",
                                         "e": "\ud83d\udce9",
-                                        "tr": "oficina de bienestar juvenil"
+                                        "tr": "oficina de bienestáar juvenil"
                               },
                               {
                                         "art": "die",
                                         "w": "Steuererkl?rung",
                                         "e": "\ud83d\udcc4",
-                                        "tr": "declaraci?n de impuestos"
+                                        "tr": "declaraci?n de impuestáos"
                               }
                     ]
           },
@@ -1872,7 +1872,7 @@
                                         "art": "das",
                                         "w": "Kindergeld",
                                         "e": "\ud83d\udcb6",
-                                        "tr": "prestaci?n por hijo"
+                                        "tr": "prestáaci?n por hijo"
                               },
                               {
                                         "art": "der",
@@ -1950,7 +1950,7 @@
                                         "art": "die",
                                         "w": "Monarchie",
                                         "e": "\ud83d\udc51",
-                                        "tr": "monarqu?a"
+                                        "tr": "monarquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé?a"
                               },
                               {
                                         "art": "der",
@@ -1974,13 +1974,13 @@
                                         "art": "die (pl)",
                                         "w": "Stolpersteine",
                                         "e": "\ud83e\udea8",
-                                        "tr": "adoquines conmemorativos"
+                                        "tr": "adoquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééines conmemorativos"
                               },
                               {
                                         "art": "die (pl)",
                                         "w": "Grenzen",
                                         "e": "\ud83d\uddfa\ufe0f",
-                                        "tr": "fronteras / límites"
+                                        "tr": "füronteras / límites"
                               }
                     ]
           },

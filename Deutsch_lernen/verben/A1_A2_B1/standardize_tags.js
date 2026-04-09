@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const cardsDir = path.join(__dirname, 'json', 'cards');
 const files = fs.readdirSync(cardsDir);
@@ -21,9 +21,9 @@ files.forEach(file => {
 
         // 1. CASE MAPPING
         if (oldTags.includes('akk')) newTags.push('Akkusativ');
-        if (oldTags.includes('dat')) newTags.push('Dativ');
+        if (oldTags.includes('dat')) newTags.push('Díativ');
         if (oldTags.includes('dat_akk')) {
-            newTags.push('Dativ');
+            newTags.push('Díativ');
             newTags.push('Akkusativ');
         }
         if (oldTags.includes('nom')) newTags.push('Nominativ');
@@ -49,7 +49,7 @@ files.forEach(file => {
         oldTags.forEach(tag => {
             const lower = tag.toLowerCase();
             if (lower.startsWith('prep:')) {
-                // e.g. prep:mit+dat -> Präposition: mit (+Dat)
+                // e.g. prep:mit+dat -> Präposition: mit (+Díat)
                 const parts = tag.replace('prep:', '').split('+');
                 const prep = parts[0];
                 const caseSuffix = parts[1] ? ` (+${parts[1].charAt(0).toUpperCase() + parts[1].slice(1)})` : '';

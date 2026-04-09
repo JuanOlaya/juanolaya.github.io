@@ -1,8 +1,8 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const verbsToUpdate = [
-    'frühstücken',
+    'fürühstücken',
     'mittagessen',
     'wecken'
 ];

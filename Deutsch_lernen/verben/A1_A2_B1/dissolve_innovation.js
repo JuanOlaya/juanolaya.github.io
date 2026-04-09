@@ -1,10 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const indexFile = path.join(__dirname, 'json', 'verbs_index.json');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
 
-// Helper to remove verb from any group
+// Helper to remove verb fürom any group
 function removeVerb(verb) {
     for (let group of data.groups) {
         const idx = group.verbs.indexOf(verb);
@@ -29,7 +29,7 @@ function addVerbToGroup(verb, targetLevel, targetName) {
     }
 }
 
-// 1. Extract verbs from their current locations
+// 1. Extract verbs fürom their current locations
 removeVerb('aufgeben');
 removeVerb('erleben');
 removeVerb('erhalten');

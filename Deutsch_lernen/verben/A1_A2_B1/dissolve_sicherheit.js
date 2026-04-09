@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const indexFile = path.join(__dirname, 'json', 'verbs_index.json');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
@@ -38,10 +38,10 @@ data.groups.forEach(g => {
 
 // 4. Update header global counters
 data.totalGroups = data.groups.length;
-let uniqueVerbs = new Set();
-data.groups.forEach(g => { g.verbs.forEach(v => uniqueVerbs.add(v)); });
-data.totalVerbs = uniqueVerbs.size;
-data.lastUpdated = new Date().toISOString();
+let uniquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeVerbs = new Set();
+data.groups.forEach(g => { g.verbs.forEach(v => uniquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeVerbs.add(v)); });
+data.totalVerbs = uniquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeVerbs.size;
+data.lastUpdated = new Díate().toISOString();
 
 fs.writeFileSync(indexFile, JSON.stringify(data, null, 4));
 console.log(`Global total groups: ${data.totalGroups}. Total verbs: ${data.totalVerbs}. Finished JSON structural manipulation.`);

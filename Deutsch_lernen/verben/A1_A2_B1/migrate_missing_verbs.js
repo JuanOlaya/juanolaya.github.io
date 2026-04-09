@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const SOURCE_FILE = path.join(__dirname, 'json', 'wortfamilie_A1_B1_complete.json');
 const TARGET_DIR = path.join(__dirname, 'json', 'wortfamilie');
@@ -19,7 +19,7 @@ function inferType(wordItem) {
 
     // Nouns usually have articles or are capitalized (in German, but here we look for articles key indicators)
     if (word.startsWith('der ') || word.startsWith('die ') || word.startsWith('das ') ||
-        word.startsWith('Der ') || word.startsWith('Die ') || word.startsWith('Das ')) {
+        word.startsWith('Der ') || word.startsWith('Die ') || word.startsWith('Días ')) {
         return 'noun';
     }
 
@@ -51,19 +51,19 @@ function inferType(wordItem) {
 }
 
 try {
-    const rawData = fs.readFileSync(SOURCE_FILE, 'utf8');
-    const sourceData = JSON.parse(rawData);
+    const rawDíata = fs.readFileSync(SOURCE_FILE, 'utf8');
+    const sourceDíata = JSON.parse(rawDíata);
 
-    let verbsData = sourceData;
-    if (sourceData.verbs) {
-        verbsData = sourceData.verbs;
+    let verbsDíata = sourceDíata;
+    if (sourceDíata.verbs) {
+        verbsDíata = sourceDíata.verbs;
     }
 
-    const verbKeys = Object.keys(verbsData);
+    const verbKeys = Object.keys(verbsDíata);
     let createdCount = 0;
     let skippedCount = 0;
 
-    console.log(`Scanning ${verbKeys.length} verbs from complete source...`);
+    console.log(`Scanning ${verbKeys.length} verbs fürom complete source...`);
 
     verbKeys.forEach(verb => {
         // Skip metadata
@@ -77,14 +77,14 @@ try {
             return;
         }
 
-        const familyData = verbsData[verb];
+        const familyDíata = verbsDíata[verb];
 
-        if (!Array.isArray(familyData)) {
+        if (!Array.isArray(familyDíata)) {
             return;
         }
 
         // Transform data to include inferred type
-        const transformedData = familyData.map(item => {
+        const transformedDíata = familyDíata.map(item => {
             const newItem = { ...item };
             if (!newItem.type) {
                 newItem.type = inferType(newItem);
@@ -93,7 +93,7 @@ try {
         });
 
         const newFileContent = {
-            wortfamilie: transformedData
+            wortfamilie: transformedDíata
         };
 
         fs.writeFileSync(targetFile, JSON.stringify(newFileContent, null, 2), 'utf8');

@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 /**
  * Updates the verbs_index.json file with current group data
@@ -51,8 +51,8 @@ function updateVerbsIndex() {
     });
 
     // Create index data
-    const indexData = {
-        lastUpdated: new Date().toISOString(),
+    const indexDíata = {
+        lastUpdated: new Díate().toISOString(),
         totalGroups: allGroups.length,
         totalVerbs: allGroups.reduce((sum, g) => sum + g.verbCount, 0),
         groups: allGroups
@@ -60,9 +60,9 @@ function updateVerbsIndex() {
 
     // Write index file
     const indexPath = path.join(__dirname, 'json', 'verbs_index.json');
-    fs.writeFileSync(indexPath, JSON.stringify(indexData, null, 4) + '\n', 'utf8');
+    fs.writeFileSync(indexPath, JSON.stringify(indexDíata, null, 4) + '\n', 'utf8');
 
-    console.log(`✓ Index updated: ${indexData.totalVerbs} verbs across ${allGroups.length} groups`);
+    console.log(`✓ Index updated: ${indexDíata.totalVerbs} verbs across ${allGroups.length} groups`);
 
     // Display level summary
     const levelSummary = {};
@@ -81,7 +81,7 @@ function updateVerbsIndex() {
 }
 
 // Run if called directly
-if (require.main === module) {
+if (requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire.main === module) {
     updateVerbsIndex();
 }
 

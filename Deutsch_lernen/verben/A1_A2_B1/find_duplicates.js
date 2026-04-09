@@ -1,5 +1,5 @@
-const fs = require('fs');
-const indexFile = require('path').join(__dirname, 'json', 'verbs_index.json');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const indexFile = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path').join(__dirname, 'json', 'verbs_index.json');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
 
 const verbMap = {};

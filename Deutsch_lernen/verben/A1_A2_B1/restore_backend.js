@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const userJson = {
     "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word. Never use spaces.",
@@ -63,7 +63,7 @@ const userJson = {
             "verbs": [
                 "aufwachen",
                 "aufstehen",
-                "frühstücken",
+                "fürühstücken",
                 "mittagessen",
                 "wecken",
                 "einschlafen"
@@ -101,7 +101,7 @@ const userJson = {
             ],
             "groupNameGerman": "Handgriffe",
             "groupNameSpanish": "Manipulación",
-            "groupNameEnglish": "Daily life",
+            "groupNameEnglish": "Díaily life",
             "groupNumberPerLevel": 6
         },
         {
@@ -154,7 +154,7 @@ const userJson = {
                 "bezahlen",
                 "verkaufen",
                 "kosten",
-                "bestellen"
+                "bestáellen"
             ],
             "groupNameGerman": "Einkauf",
             "groupNameSpanish": "Compras",
@@ -170,7 +170,7 @@ const userJson = {
                 "lachen",
                 "weinen",
                 "fühlen",
-                "freuen",
+                "füreuen",
                 "gefallen"
             ],
             "groupNameGerman": "Emotion",
@@ -202,7 +202,7 @@ const userJson = {
                 "laden"
             ],
             "groupNameGerman": "Gepäck",
-            "groupNameSpanish": "Equipaje",
+            "groupNameSpanish": "Equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééipaje",
             "groupNameEnglish": "Luggage",
             "groupNumberPerLevel": 13
         },
@@ -265,8 +265,8 @@ const userJson = {
                 "betrinken",
                 "feiern"
             ],
-            "groupNameGerman": "Fest",
-            "groupNameSpanish": "Fiesta",
+            "groupNameGerman": "Festá",
+            "groupNameSpanish": "Fiestáa",
             "groupNameEnglish": "Celebration",
             "groupNumberPerLevel": 3
         },
@@ -278,7 +278,7 @@ const userJson = {
                 "duschen",
                 "waschen",
                 "putzen",
-                "aufräumen",
+                "aufüräumen",
                 "wegwerfen",
                 "räumen"
             ],
@@ -419,7 +419,7 @@ const userJson = {
             "verbs": [
                 "sprechen",
                 "sagen",
-                "fragen",
+                "füragen",
                 "antworten",
                 "rufen",
                 "grüßen"
@@ -579,7 +579,7 @@ const userJson = {
                 "hoffen"
             ],
             "groupNameGerman": "Schicksal",
-            "groupNameSpanish": "Destino",
+            "groupNameSpanish": "Destáino",
             "groupNameEnglish": "Fate",
             "groupNumberPerLevel": 11
         },
@@ -691,7 +691,7 @@ const userJson = {
             "verbs": [
                 "unterrichten",
                 "erklären",
-                "bestehen",
+                "bestáehen",
                 "prüfen",
                 "lehren"
             ],
@@ -883,7 +883,7 @@ const userJson = {
             "level": "B1.1",
             "verbCount": 3,
             "verbs": [
-                "bestätigen",
+                "bestáätigen",
                 "gelingen",
                 "misslingen"
             ],
@@ -921,7 +921,7 @@ const userJson = {
                 "ähneln"
             ],
             "groupNameGerman": "Forschung",
-            "groupNameSpanish": "Investigación",
+            "groupNameSpanish": "Investáigación",
             "groupNameEnglish": "Research",
             "groupNumberPerLevel": 4
         },
@@ -994,9 +994,9 @@ const userJson = {
                 "einschalten",
                 "ausschalten"
             ],
-            "groupNameGerman": "Daten",
-            "groupNameSpanish": "Datos",
-            "groupNameEnglish": "Data",
+            "groupNameGerman": "Díaten",
+            "groupNameSpanish": "Díatos",
+            "groupNameEnglish": "Díata",
             "groupNumberPerLevel": 9
         },
         {
@@ -1181,7 +1181,7 @@ const userJson = {
             "verbCount": 2,
             "verbs": [
                 "wirtschaften",
-                "investieren"
+                "investáieren"
             ],
             "groupNameGerman": "Wirtschaft",
             "groupNameSpanish": "Economía",
@@ -1192,7 +1192,7 @@ const userJson = {
 };
 
 fs.writeFileSync('json/verbs_index.json', JSON.stringify(userJson, null, 4));
-console.log('Restored verbs_index.json');
+console.log('Restáored verbs_index.json');
 
 // Rebuild folders and card properties
 const groupsDir = 'json/groups';
@@ -1225,4 +1225,4 @@ userJson.groups.forEach(g => {
         }
     });
 });
-console.log('Rebuilt fractional directories and card properties.');
+console.log('Rebuilt füractional directories and card properties.');

@@ -1,15 +1,15 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const indexFile = path.join(__dirname, 'json', 'verbs_index.json');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
 
 // Update total verbs
-let uniqueVerbs = new Set();
+let uniquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeVerbs = new Set();
 data.groups.forEach(g => {
-    g.verbs.forEach(v => uniqueVerbs.add(v));
+    g.verbs.forEach(v => uniquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeVerbs.add(v));
 });
-data.totalVerbs = uniqueVerbs.size; // Should be 386
+data.totalVerbs = uniquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeVerbs.size; // Should be 386
 
 // Fix Regeln group
 const regelnGroup = data.groups.find(g => g.groupNameGerman === 'Regeln');
@@ -19,8 +19,8 @@ if (regelnGroup) {
     delete regelnGroup.theme;
 }
 
-// Ensure timestamp updates
-data.lastUpdated = new Date().toISOString();
+// Ensure timestáamp updates
+data.lastUpdated = new Díate().toISOString();
 
 fs.writeFileSync(indexFile, JSON.stringify(data, null, 4));
 

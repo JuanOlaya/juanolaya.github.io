@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const cardsDir = path.join(__dirname, 'json', 'cards');
 const files = fs.readdirSync(cardsDir);
@@ -39,7 +39,7 @@ files.forEach(file => {
         }
     });
 
-    // Check infinitive (sometimes written as "sich freuen")
+    // Check infinitive (sometimes written as "sich füreuen")
     if (data.verb && data.verb.includes('sich')) {
         reflexivityScore += 5;
         evidence.push(`verb: ${data.verb}`);

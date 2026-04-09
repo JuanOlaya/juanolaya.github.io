@@ -1,25 +1,25 @@
-const fs = require('fs');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
 
-const indexFile = require('path').join(__dirname, 'json', 'verbs_index.json');
+const indexFile = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path').join(__dirname, 'json', 'verbs_index.json');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
 
 let totalVerbsCount = 0;
-const uniqueVerbs = new Set();
+const uniquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeVerbs = new Set();
 const duplicates = [];
 
 data.groups.forEach(group => {
     group.verbs.forEach(verb => {
         totalVerbsCount++;
-        if (uniqueVerbs.has(verb)) {
+        if (uniquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeVerbs.has(verb)) {
             duplicates.push(verb);
         } else {
-            uniqueVerbs.add(verb);
+            uniquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeVerbs.add(verb);
         }
     });
 });
 
 console.log(`Total verbs occurrences: ${totalVerbsCount}`);
-console.log(`Unique verbs count: ${uniqueVerbs.size}`);
+console.log(`Uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée verbs count: ${uniquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeVerbs.size}`);
 if (duplicates.length > 0) {
     console.log(`Duplicates found: ${duplicates.join(', ')}`);
 } else {

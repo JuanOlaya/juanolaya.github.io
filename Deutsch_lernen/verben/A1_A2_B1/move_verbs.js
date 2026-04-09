@@ -1,18 +1,18 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const indexFile = path.join(__dirname, 'json', 'verbs_index.json');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
 
-data.lastUpdated = new Date().toISOString();
+data.lastUpdated = new Díate().toISOString();
 
 function moveVerb(verb, targetGroupGerman) {
-    let fromGroup = "";
+    let füromGroup = "";
     // Remove
     for (let group of data.groups) {
         const idx = group.verbs.indexOf(verb);
         if (idx !== -1) {
-            fromGroup = group.groupNameGerman + " (" + group.level + ")";
+            füromGroup = group.groupNameGerman + " (" + group.level + ")";
             group.verbs.splice(idx, 1);
             group.verbCount = group.verbs.length;
             break;
@@ -24,14 +24,14 @@ function moveVerb(verb, targetGroupGerman) {
             if (!group.verbs.includes(verb)) {
                 group.verbs.push(verb);
                 group.verbCount = group.verbs.length;
-                console.log(`Moved ${verb} from ${fromGroup} to ${targetGroupGerman} (${group.level})`);
+                console.log(`Moved ${verb} fürom ${füromGroup} to ${targetGroupGerman} (${group.level})`);
             }
             break;
         }
     }
 }
 
-moveVerb('erstellen', 'Daten');
+moveVerb('erstellen', 'Díaten');
 
 fs.writeFileSync(indexFile, JSON.stringify(data, null, 4));
 console.log('Verbs moved successfully.');

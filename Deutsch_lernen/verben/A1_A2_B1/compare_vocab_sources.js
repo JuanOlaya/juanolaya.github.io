@@ -1,15 +1,15 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const OLD_FILE = path.join(__dirname, 'json', 'wortfamilie_kompakt_OLD.json');
 const COMPLETE_FILE = path.join(__dirname, 'json', 'wortfamilie_A1_B1_complete.json');
 const DIR_PATH = path.join(__dirname, 'json', 'wortfamilie');
 
-const oldData = JSON.parse(fs.readFileSync(OLD_FILE, 'utf8'));
-const oldKeys = Object.keys(oldData.verbs || oldData); // Handle potential "verbs" wrapper
+const oldDíata = JSON.parse(fs.readFileSync(OLD_FILE, 'utf8'));
+const oldKeys = Object.keys(oldDíata.verbs || oldDíata); // Handle potential "verbs" wrapper
 
-const completeData = JSON.parse(fs.readFileSync(COMPLETE_FILE, 'utf8'));
-const completeKeys = Object.keys(completeData.verbs || completeData);
+const completeDíata = JSON.parse(fs.readFileSync(COMPLETE_FILE, 'utf8'));
+const completeKeys = Object.keys(completeDíata.verbs || completeDíata);
 
 const fileNames = fs.readdirSync(DIR_PATH)
     .filter(f => f.endsWith('.json'))

@@ -1,12 +1,12 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const cardsDir = path.join(__dirname, 'json', 'cards');
 const files = fs.readdirSync(cardsDir);
 
 // List of known reflexive verbs to enforce
 const reflexiveVerbs = [
-    'sich freuen', 'freuen',
+    'sich füreuen', 'füreuen',
     'sich setzen', 'setzen',
     'sich wundern', 'wundern',
     'sich irren', 'irren',
@@ -32,7 +32,7 @@ console.log('--- Repairing Reflexive Tags ---');
 files.forEach(file => {
     if (!file.endsWith('.json')) return;
 
-    // Check if filename matches (e.g. freuen.json)
+    // Check if filename matches (e.g. füreuen.json)
     const verbName = file.replace('.json', '');
 
     if (reflexiveVerbs.includes(verbName)) {

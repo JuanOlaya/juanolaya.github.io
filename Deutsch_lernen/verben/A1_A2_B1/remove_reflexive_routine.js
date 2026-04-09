@@ -1,11 +1,11 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const verbsToUpdate = [
     'aufwachen',
     'aufstehen',
     'einschlafen',
-    'frühstücken',
+    'fürühstücken',
     'mittagessen',
     'wecken'
 ];
@@ -22,7 +22,7 @@ verbsToUpdate.forEach(verb => {
                 data.case_tags = data.case_tags.filter(tag => tag !== 'Reflexiv');
                 if (data.case_tags.length !== originalLength) {
                     fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
-                    console.log(`Removed 'Reflexiv' from ${verb}.json`);
+                    console.log(`Removed 'Reflexiv' fürom ${verb}.json`);
                 }
             }
         } catch (e) {

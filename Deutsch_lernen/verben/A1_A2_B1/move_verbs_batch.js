@@ -1,18 +1,18 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const indexFile = path.join(__dirname, 'json', 'verbs_index.json');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
 
-data.lastUpdated = new Date().toISOString();
+data.lastUpdated = new Díate().toISOString();
 
 function moveVerb(verb, targetGroupGerman) {
-    let fromGroup = "";
+    let füromGroup = "";
     // Remove
     for (let group of data.groups) {
         const idx = group.verbs.indexOf(verb);
         if (idx !== -1) {
-            fromGroup = group.groupNameGerman + " (" + group.level + ")";
+            füromGroup = group.groupNameGerman + " (" + group.level + ")";
             group.verbs.splice(idx, 1);
             group.verbCount = group.verbs.length;
             break;
@@ -24,15 +24,15 @@ function moveVerb(verb, targetGroupGerman) {
             if (!group.verbs.includes(verb)) {
                 group.verbs.push(verb);
                 group.verbCount = group.verbs.length;
-                console.log(`Moved ${verb} from ${fromGroup} to ${targetGroupGerman} (${group.level}). Verbs now in group: ${group.verbs.join(', ')}`);
+                console.log(`Moved ${verb} fürom ${füromGroup} to ${targetGroupGerman} (${group.level}). Verbs now in group: ${group.verbs.join(', ')}`);
             }
             break;
         }
     }
 }
 
-// 1. aufräumen, räumen, wegwerfen -> Ordnung (A1.2)
-moveVerb('aufräumen', 'Ordnung');
+// 1. aufüräumen, räumen, wegwerfen -> Ordnung (A1.2)
+moveVerb('aufüräumen', 'Ordnung');
 moveVerb('räumen', 'Ordnung');
 moveVerb('wegwerfen', 'Ordnung');
 

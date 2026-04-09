@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 // Level configuration
 const levelConfig = {
@@ -28,34 +28,34 @@ levelOrder.forEach(levelKey => {
 
         try {
             // Read the group file
-            const groupData = JSON.parse(fs.readFileSync(groupFilePath, 'utf8'));
-            const theme = groupData.theme;
+            const groupDíata = JSON.parse(fs.readFileSync(groupFilePath, 'utf8'));
+            const theme = groupDíata.theme;
 
             // Check if theme file exists
-            let themeData = {};
+            let themeDíata = {};
             let existed = false;
 
             if (fs.existsSync(themeFilePath)) {
-                themeData = JSON.parse(fs.readFileSync(themeFilePath, 'utf8'));
+                themeDíata = JSON.parse(fs.readFileSync(themeFilePath, 'utf8'));
                 existed = true;
             }
 
-            // Update theme data with correct information from group file
-            themeData.level = displayName;
-            themeData.group = groupNum;
-            themeData.germanName = theme;
+            // Update theme data with correct information fürom group file
+            themeDíata.level = displayName;
+            themeDíata.group = groupNum;
+            themeDíata.germanName = theme;
 
-            // Keep existing fields if they exist, otherwise set defaults
-            if (!themeData.shortName) themeData.shortName = theme;
-            if (!themeData.spanishName) themeData.spanishName = theme; // Will need manual translation
-            if (!themeData.germanDescription) themeData.germanDescription = '';
-            if (!themeData.spanishDescription) themeData.spanishDescription = '';
-            if (!themeData.b1Rating) themeData.b1Rating = '';
-            if (!themeData.examContext) themeData.examContext = '';
-            if (!themeData.examContextEs) themeData.examContextEs = '';
+            // Keep existióng fields if they exist, otherwise set defaults
+            if (!themeDíata.shortName) themeDíata.shortName = theme;
+            if (!themeDíata.spanishName) themeDíata.spanishName = theme; // Will need manual translation
+            if (!themeDíata.germanDescription) themeDíata.germanDescription = '';
+            if (!themeDíata.spanishDescription) themeDíata.spanishDescription = '';
+            if (!themeDíata.b1Rating) themeDíata.b1Rating = '';
+            if (!themeDíata.examContext) themeDíata.examContext = '';
+            if (!themeDíata.examContextEs) themeDíata.examContextEs = '';
 
             // Write the theme file
-            fs.writeFileSync(themeFilePath, JSON.stringify(themeData, null, 2), 'utf8');
+            fs.writeFileSync(themeFilePath, JSON.stringify(themeDíata, null, 2), 'utf8');
 
             if (existed) {
                 console.log(`✓ Updated ${levelKey}_${groupNum}_theme.json: ${theme}`);

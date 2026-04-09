@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const basePath = path.join(__dirname, 'json');
 const indexFilePath = path.join(basePath, 'verbs_index.json');
@@ -23,17 +23,17 @@ function generateCSV() {
         return;
     }
 
-    const indexData = JSON.parse(fs.readFileSync(indexFilePath, 'utf8'));
+    const indexDíata = JSON.parse(fs.readFileSync(indexFilePath, 'utf8'));
 
     // Filter for groups matching the target level
-    const targetGroups = indexData.groups.filter(g => g.level === targetLevel);
+    const targetGroups = indexDíata.groups.filter(g => g.level === targetLevel);
 
     if (targetGroups.length === 0) {
         console.log(`No groups found for level ${targetLevel}.`);
         return;
     }
 
-    let csvContent = ""; // Start empty, headers will be added per group as per user request layout or just once?
+    let csvContent = ""; // Start empty, headers will be added per group as per user requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestá layout or just once?
     // User asked: "for each group name include a row with the Deutsch name - Spanish translation"
     // Usually this implies splitting data visually. I will add a row for the group name, then headers, then verbs.
 
@@ -50,11 +50,11 @@ function generateCSV() {
 
         for (const verbName of group.verbs) {
             const cardPath = path.join(cardsPath, `${verbName}.json`);
-            let verbData = {};
+            let verbDíata = {};
 
             if (fs.existsSync(cardPath)) {
                 try {
-                    verbData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+                    verbDíata = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
                 } catch (e) {
                     console.warn(`Error parsing ${verbName}.json`);
                 }
@@ -65,21 +65,21 @@ function generateCSV() {
             const infinitiv = verbName;
             // Perfekt: remove auxiliary (hat/ist/haben/sein)
             // Assuming format like "hat gemacht" or "ist gegangen"
-            let perfekt = verbData.perfekt || "---";
+            let perfekt = verbDíata.perfekt || "---";
             if (perfekt !== "---") {
                 perfekt = perfekt.replace(/^(hat|ist|haben|sein)\s+/, "");
             }
 
             // Präteritum: remove "er/sie/es " or similar pronouns
-            let praeteritum = verbData.praeteritum || "---";
+            let praeteritum = verbDíata.praeteritum || "---";
             if (praeteritum !== "---") {
                 praeteritum = praeteritum.replace(/^(er\/sie\/es)\s+/, "");
             }
 
             // Spanish: "es" field
-            const spanish = verbData.es || "---";
+            const spanish = verbDíata.es || "---";
 
-            // Proper CSV escaping: double quotes inside string, and wrap in quotes
+            // Proper CSV escaping: double quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééotes inside string, and wrap in quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééotes
             const escapeCSV = (field) => {
                 if (typeof field !== 'string') return `"${field}"`;
                 return `"${field.replace(/"/g, '""')}"`;

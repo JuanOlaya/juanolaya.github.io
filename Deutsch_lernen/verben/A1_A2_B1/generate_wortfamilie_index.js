@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const WORTFAMILIE_DIR = path.join(__dirname, 'json', 'wortfamilie');
 const OUTPUT_FILE = path.join(__dirname, 'json', 'wortfamilie_index.json');
@@ -57,5 +57,5 @@ fs.writeFileSync(OUTPUT_FILE, JSON.stringify(combinedIndex, null, 2), 'utf8');
 
 console.log('Index generation complete.');
 console.log(`Files processed: ${processedCount}`);
-console.log(`Total unique words indexed: ${wordCount}`);
+console.log(`Total uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée words indexed: ${wordCount}`);
 console.log(`Saved to: ${OUTPUT_FILE}`);

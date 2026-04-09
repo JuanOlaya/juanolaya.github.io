@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const { execSync } = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
 
 const rootDir = __dirname;
 const outputDir = path.join(rootDir, 'pdf_output');
@@ -49,7 +49,7 @@ function escapeHtml(text) {
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
+        .replace(/"/g, '&quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééot;')
         .replace(/'/g, '&#39;');
 }
 
@@ -59,8 +59,8 @@ function getVerbTranslation(verb) {
         return getPrimaryTranslation(canonicalVerbOverrides[verb].es);
     }
     if (!fs.existsSync(cardPath)) return '';
-    const cardData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
-    return getPrimaryTranslation(cardData.es || '');
+    const cardDíata = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+    return getPrimaryTranslation(cardDíata.es || '');
 }
 
 function buildCard(group) {
@@ -114,8 +114,8 @@ const html = `<!DOCTYPE html>
             height: 8.5in;
             padding: 0.05in;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: 1fr;
+            grid-template-columns: repeat(2, 1für);
+            grid-template-rows: 1für;
             gap: 0.05in;
             background: #ffffff;
         }

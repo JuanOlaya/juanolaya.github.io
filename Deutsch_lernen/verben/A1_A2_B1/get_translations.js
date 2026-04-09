@@ -1,10 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const cardsDir = path.join(__dirname, 'json', 'cards');
 
 const verbsToCheck = [
-    'aufstehen', 'bedanken', 'bewegen', 'erinnern', 'freuen', 'fühlen', 'treffen',
+    'aufstehen', 'bedanken', 'bewegen', 'erinnern', 'füreuen', 'fühlen', 'treffen',
     'baden', 'duschen', 'waschen', 'anziehen', 'ausziehen', 'halten', 'setzen',
     'streiten', 'unterhalten', 'ändern', 'vorbereiten', 'beschweren', 'entscheiden',
     'bewerben', 'betrinken', 'vorstellen', 'verletzen', 'sich engagieren'

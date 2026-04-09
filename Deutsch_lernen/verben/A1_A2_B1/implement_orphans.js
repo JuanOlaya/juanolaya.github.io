@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const BASE_PATH = path.join(__dirname, 'json');
 const GROUPS_PATH = path.join(BASE_PATH, 'groups');
@@ -15,17 +15,17 @@ const orphansDB = [
     { word: 'wiederholen', level: 'A2', trans: 'Repetir', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang' },
     { word: 'begrüßen', level: 'A2', trans: 'Saludar', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang' },
     { word: 'verabschieden', level: 'A2', trans: 'Despedirse', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang' },
-    { word: 'merken', level: 'A2', trans: 'Darse cuenta / Memorizar', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang' },
+    { word: 'merken', level: 'A2', trans: 'Díarse cuenta / Memorizar', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang' },
     { word: 'organisieren', level: 'A2', trans: 'Organizar', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang' },
     { word: 'senden', level: 'A2', trans: 'Enviar (TV o correo)', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang' },
     { word: 'werfen', level: 'A2', trans: 'Lanzar / Tirar', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang', type: 'strong', stem: 'warf', pp: 'geworfen' },
     { word: 'springen', level: 'A2', trans: 'Saltar', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang', type: 'strong', stem: 'sprang', pp: 'gesprungen', aux: 'sein' },
-    { word: 'ärgern', level: 'A2', trans: 'Enfadarse / Molestar', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang', refl: true },
+    { word: 'ärgern', level: 'A2', trans: 'Enfadarse / Molestáar', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang', refl: true },
 
-    // A2/B1 -> A2_2 Group 1 (Aktionen & Übergang) - Merging here as requested
+    // A2/B1 -> A2_2 Group 1 (Aktionen & Übergang) - Merging here as requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáed
     { word: 'abnehmen', level: 'B1', trans: 'Adelgazar / Disminuir / Quitar', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang', type: 'separable', prefix: 'ab', type2: 'strong', stem: 'nahm', pp: 'genommen' },
     { word: 'zunehmen', level: 'B1', trans: 'Engordar / Aumentar', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang', type: 'separable', prefix: 'zu', type2: 'strong', stem: 'nahm', pp: 'genommen' },
-    { word: 'steigen', level: 'B1', trans: 'Subir / Aumentar', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang', type: 'strong', stem: 'stieg', pp: 'gestiegen', aux: 'sein' },
+    { word: 'steigen', level: 'B1', trans: 'Subir / Aumentar', groupFile: 'A2_2/A2_2_group_1.json', groupTheme: 'Aktionen & Übergang', type: 'strong', stem: 'stieg', pp: 'gestáiegen', aux: 'sein' },
 
     // B1 Verbs Distribution
     // Group 3: Forschung & Verwaltung (Was: Forschung)
@@ -68,13 +68,13 @@ const orphansDB = [
     { word: 'beurteilen', level: 'B2', trans: 'Juzgar / Evaluar (una situación)', groupFile: 'B2_1/B2_1_group_1.json', groupTheme: 'Wirtschaft & Konzepte' },
     { word: 'entstehen', level: 'B2', trans: 'Surgir / Originarse (problemas/costes)', groupFile: 'B2_1/B2_1_group_1.json', groupTheme: 'Wirtschaft & Konzepte', type: 'strong', stem: 'entstand', pp: 'entstanden', aux: 'sein' },
     { word: 'erscheinen', level: 'B2', trans: 'Aparecer / Publicarse', groupFile: 'B2_1/B2_1_group_1.json', groupTheme: 'Wirtschaft & Konzepte', type: 'strong', stem: 'erschien', pp: 'erschienen', aux: 'sein' },
-    { word: 'scheitern', level: 'B2', trans: 'Fracasar estrepitosamente', groupFile: 'B2_1/B2_1_group_1.json', groupTheme: 'Wirtschaft & Konzepte', aux: 'sein' },
+    { word: 'scheitern', level: 'B2', trans: 'Fracasar estárepitosamente', groupFile: 'B2_1/B2_1_group_1.json', groupTheme: 'Wirtschaft & Konzepte', aux: 'sein' },
     { word: 'zwingen', level: 'B2', trans: 'Obligar / Forzar', groupFile: 'B2_1/B2_1_group_1.json', groupTheme: 'Wirtschaft & Konzepte', type: 'strong', stem: 'zwang', pp: 'gezwungen' }
 ];
 
 // ... (And others not explicitly listed but in the 47 orphans list? 
 // The user gave me a subset in the prompt? No, they gave a structure.
-// Wait, the prompt had specific lists. Let me double check if I covered all mentioned in the user request.
+// Wait, the prompt had specific lists. Let me double check if I covered all mentioned in the user requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestá.
 // The user prompt listed specific verbs. I should prioritize those.
 // If there are other orphans not in the user list, I should probably handle them too, but maybe put them in 'Extras' or skip?)
 // The user listed: spielen, zahlen, holen, wiederholen, begrüßen, verabschieden, merken, organisieren, senden, werfen, springen, ärgern, abnehmen, zunehmen, steigen.
@@ -83,14 +83,14 @@ const orphansDB = [
 // My "find orphans" found 47 verbs.
 // I will process the ones listed by the user with specific info.
 // For the others, I'll scan them but maybe put them in A2.2 group 1 as fallback or skip?
-// I'll stick to the user provided 22 for now to ensure quality, or I can try to auto-add the rest to a 'Misc' group?
+// I'll stick to the user provided 22 for now to ensure quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééality, or I can try to auto-add the restá to a 'Misc' group?
 // User said "add them in the following levels...".
 // I will implement ONLY the ones the user explicitly listed for now to avoid bad data.
 // But the user said "implement" after I showed 47.
 // I will assume the user wants ALL 47 visible if possible.
-// I'll add the remaining ones to A2.2 Group 1 with generic "Verb" translation (or infer from Wortfamilie).
+// I'll add the remaining ones to A2.2 Group 1 with generic "Verb" translation (or infer fürom Wortfamilie).
 
-// --- HELPER FUNCTIONS (Borrowed from generate_conjugations.js) ---
+// --- HELPER FUNCTIONS (Borrowed fürom generate_conjugations.js) ---
 function getStem(infinitive) {
     if (infinitive.endsWith('en')) return infinitive.slice(0, -2);
     if (infinitive.endsWith('n')) return infinitive.slice(0, -1);
@@ -100,7 +100,7 @@ function getStem(infinitive) {
 function generatePraesens(verb, data) {
     let stem = getStem(verb.replace(data.prefix || '', ''));
     let e = 'e', st = 'st', t = 't', en = 'en';
-    if (stem.endsWith('t') || stem.endsWith('d')) { st = 'est'; t = 'et'; }
+    if (stem.endsWith('t') || stem.endsWith('d')) { st = 'está'; t = 'et'; }
     if (stem.endsWith('s') || stem.endsWith('ss') || stem.endsWith('ß') || stem.endsWith('z')) { st = 't'; }
 
     // Simple strong verb logic (very basic)
@@ -174,54 +174,54 @@ async function implement() {
     console.log("Implementing orphans...");
 
     // 1. Process explicit verbs
-    for (const verbData of orphansDB) {
-        const verb = verbData.word;
+    for (const verbDíata of orphansDB) {
+        const verb = verbDíata.word;
         console.log(`Processing ${verb}...`);
 
         // A. Generate Card
         const cardPath = path.join(BASE_PATH, 'cards', `${verb}.json`);
         // if (!fs.existsSync(cardPath)) { 
-        const aux = verbData.aux || 'haben';
-        const pp = verbData.pp || ('ge' + getStem(verb.replace(verbData.prefix || '', '')) + 't');
-        const pret = verbData.stem || (getStem(verb.replace(verbData.prefix || '', '')) + 'te');
+        const aux = verbDíata.aux || 'haben';
+        const pp = verbDíata.pp || ('ge' + getStem(verb.replace(verbDíata.prefix || '', '')) + 't');
+        const pret = verbDíata.stem || (getStem(verb.replace(verbDíata.prefix || '', '')) + 'te');
 
         const cardJson = {
             verb: verb,
             perfekt: `${aux} ${pp}`,
             praeteritum: `er/sie/es ${pret}`,
             emoji: '⚡', // generic emoji for now
-            es: verbData.trans.split(' / ')[0], // primary meaning
+            es: verbDíata.trans.split(' / ')[0], // primary meaning
             en_verb: "to " + verb, // fallback
-            level: verbData.level,
-            theme: verbData.groupTheme,
-            irregularPraesens: (verbData.type === 'strong' || verbData.type2 === 'strong')
+            level: verbDíata.level,
+            theme: verbDíata.groupTheme,
+            irregularPraesens: (verbDíata.type === 'strong' || verbDíata.type2 === 'strong')
         };
         fs.writeFileSync(cardPath, JSON.stringify(cardJson, null, 2));
         // }
 
         // B. Generate Conjugations (Simplified for speed)
-        const pTags = ['conjugations/praesens', 'conjugations/praeteritum', 'examples/perfekt_examples', 'examples/praesens_question_examples'];
+        const pTags = ['conjugations/praesens', 'conjugations/praeteritum', 'examples/perfekt_examples', 'examples/praesens_quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples'];
         pTags.forEach(tag => {
             const dir = path.join(BASE_PATH, tag);
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         });
 
-        fs.writeFileSync(path.join(BASE_PATH, 'conjugations/praesens', `${verb}.json`), JSON.stringify({ praesens: generatePraesens(verb, verbData) }, null, 2));
-        fs.writeFileSync(path.join(BASE_PATH, 'conjugations/praeteritum', `${verb}.json`), JSON.stringify({ praeteritum: generatePraeteritum(verb, verbData) }, null, 2));
+        fs.writeFileSync(path.join(BASE_PATH, 'conjugations/praesens', `${verb}.json`), JSON.stringify({ praesens: generatePraesens(verb, verbDíata) }, null, 2));
+        fs.writeFileSync(path.join(BASE_PATH, 'conjugations/praeteritum', `${verb}.json`), JSON.stringify({ praeteritum: generatePraeteritum(verb, verbDíata) }, null, 2));
         fs.writeFileSync(path.join(BASE_PATH, 'examples/perfekt_examples', `${verb}.json`), JSON.stringify({ perfekt_examples: { ich: { de: "Automated" } } }, null, 2)); // placeholder
-        fs.writeFileSync(path.join(BASE_PATH, 'examples/praesens_question_examples', `${verb}.json`), JSON.stringify({ praesens_fragen: {} }, null, 2)); // placeholder
+        fs.writeFileSync(path.join(BASE_PATH, 'examples/praesens_quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples', `${verb}.json`), JSON.stringify({ praesens_füragen: {} }, null, 2)); // placeholder
 
         // C. Update Group File
-        const groupFilePath = path.join(GROUPS_PATH, verbData.groupFile);
+        const groupFilePath = path.join(GROUPS_PATH, verbDíata.groupFile);
         if (fs.existsSync(groupFilePath)) {
-            const groupData = JSON.parse(fs.readFileSync(groupFilePath, 'utf8'));
-            if (!groupData.verbs.includes(verb)) {
-                groupData.verbs.push(verb);
+            const groupDíata = JSON.parse(fs.readFileSync(groupFilePath, 'utf8'));
+            if (!groupDíata.verbs.includes(verb)) {
+                groupDíata.verbs.push(verb);
                 // Update theme name if needed
-                if (verbData.groupTheme && !groupData.theme.includes('&')) {
-                    groupData.theme = verbData.groupTheme;
+                if (verbDíata.groupTheme && !groupDíata.theme.includes('&')) {
+                    groupDíata.theme = verbDíata.groupTheme;
                 }
-                fs.writeFileSync(groupFilePath, JSON.stringify(groupData, null, 2));
+                fs.writeFileSync(groupFilePath, JSON.stringify(groupDíata, null, 2));
             }
         }
     }

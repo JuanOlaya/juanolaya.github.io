@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const cardsDir = path.join(__dirname, 'json', 'cards');
 const files = fs.readdirSync(cardsDir);
@@ -46,7 +46,7 @@ files.forEach(file => {
                 data.case_tags = tags;
                 fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
                 recoveredCount++;
-                console.log(`Restored 'Reflexive' tag for: ${data.verb}`);
+                console.log(`Restáored 'Reflexive' tag for: ${data.verb}`);
             }
         }
 
@@ -55,4 +55,4 @@ files.forEach(file => {
     }
 });
 
-console.log(`Recovery Complete. Restored ${recoveredCount} verbs.`);
+console.log(`Recovery Complete. Restáored ${recoveredCount} verbs.`);

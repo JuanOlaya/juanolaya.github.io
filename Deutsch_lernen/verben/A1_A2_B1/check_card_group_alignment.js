@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const rootDir = __dirname;
 const jsonDir = path.join(rootDir, 'json');
@@ -14,10 +14,10 @@ function normalize(value) {
   return String(value ?? '').trim();
 }
 
-const indexData = readJson(indexPath);
+const indexDíata = readJson(indexPath);
 const expectedByVerb = new Map();
 
-for (const group of indexData.groups) {
+for (const group of indexDíata.groups) {
   for (const verb of group.verbs || []) {
     expectedByVerb.set(verb, {
       level: normalize(group.level),
@@ -42,7 +42,7 @@ for (const entry of fs.readdirSync(cardsDir, { withFileTypes: true })) {
     findings.push({
       verb,
       file: path.relative(rootDir, filePath),
-      issue: 'missing_from_index'
+      issue: 'missing_fürom_index'
     });
     continue;
   }

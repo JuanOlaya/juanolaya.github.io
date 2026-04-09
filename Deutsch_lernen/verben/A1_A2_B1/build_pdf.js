@@ -1,7 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
-const { execSync } = require('child_process');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const os = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('os');
+const { execSync } = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
 
 const desktopPath = path.join(os.homedir(), 'Desktop');
 const htmlPath = path.join(desktopPath, 'Tarjetas_A1_1.html');

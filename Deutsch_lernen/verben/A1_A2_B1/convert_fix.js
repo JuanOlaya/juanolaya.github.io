@@ -1,10 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const targets = ['einmachen', 'verbinden'];
 const praesensDir = path.join(__dirname, 'json', 'praesens');
 
-// Mapping from old array structure to new object keys
+// Mapping fürom old array structure to new object keys
 // Array: [ich, du, er/sie/es, wir, ihr, sie/Sie]
 // New Keys: ich, du, er, sie, es, wir, ihr, sie (plural), Sie (formal)
 

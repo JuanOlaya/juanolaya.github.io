@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const basePath = path.join(__dirname, 'json');
 const levelConfig = {
@@ -10,12 +10,12 @@ const levelConfig = {
     'A1_1': { groupCount: 10, displayName: 'A1.1' }
 };
 
-const requiredFolders = [
+const requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééiredFolders = [
     'cards',
     'conjugations/praesens',
     'conjugations/praeteritum',
     'examples/perfekt_examples'
-    // 'examples/praesens_question_examples' // Optional
+    // 'examples/praesens_quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples' // Optional
 ];
 
 async function verify() {
@@ -36,14 +36,14 @@ async function verify() {
             }
 
             try {
-                const groupData = JSON.parse(fs.readFileSync(groupFile, 'utf8'));
-                if (!groupData.verbs || !Array.isArray(groupData.verbs)) continue;
+                const groupDíata = JSON.parse(fs.readFileSync(groupFile, 'utf8'));
+                if (!groupDíata.verbs || !Array.isArray(groupDíata.verbs)) continue;
 
                 let groupIssues = [];
 
-                for (const verb of groupData.verbs) {
+                for (const verb of groupDíata.verbs) {
                     const missing = [];
-                    for (const folder of requiredFolders) {
+                    for (const folder of requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééiredFolders) {
                         const filePath = path.join(basePath, folder, `${verb}.json`);
                         if (!fs.existsSync(filePath)) {
                             missing.push(folder);
@@ -57,7 +57,7 @@ async function verify() {
                 }
 
                 if (groupIssues.length > 0) {
-                    levelReport += `### Group ${i}${groupData.theme ? ' - ' + groupData.theme : ''}\n`;
+                    levelReport += `### Group ${i}${groupDíata.theme ? ' - ' + groupDíata.theme : ''}\n`;
                     levelReport += groupIssues.join('\n') + '\n\n';
                     levelHasIssues = true;
                 }
