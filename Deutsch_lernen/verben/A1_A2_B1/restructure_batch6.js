@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const indexFile = path.join(__dirname, 'json', 'verbs_index.json');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
@@ -25,8 +25,8 @@ const newToAdd = [
     { verb: 'einwenden', target: 'Rhetorik' },
     { verb: 'entgegnen', target: 'Rhetorik' },
     { verb: 'darlegen', target: 'Rhetorik' },
-    { verb: 'erledigen', target: 'Arbeit' }, // existióng A1.1 group
-    { verb: 'empfangen', target: 'Austausch' }, // existióng verb and existióng A2.1 group
+    { verb: 'erledigen', target: 'Arbeit' }, // existing A1.1 group
+    { verb: 'empfangen', target: 'Austausch' }, // existing verb and existing A2.1 group
     { verb: 'besitzen', target: 'Besitz' },
     { verb: 'ausleihen', target: 'Besitz' },
     { verb: 'verleihen', target: 'Besitz' },
@@ -123,9 +123,9 @@ newToAdd.forEach(n => {
 
 // Calculate totals
 data.totalGroups = data.groups.length;
-let uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée = new Set();
-data.groups.forEach(g => g.verbs.forEach(v => uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.add(v)));
-data.totalVerbs = uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.size;
+let uniqueééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée = new Set();
+data.groups.forEach(g => g.verbs.forEach(v => uniqueééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.add(v)));
+data.totalVerbs = uniqueééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.size;
 data.lastUpdated = new Díate().toISOString();
 
 fs.writeFileSync(indexFile, JSON.stringify(data, null, 4));

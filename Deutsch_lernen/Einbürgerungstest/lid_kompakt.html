@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiD: Einbürgerungstestá Kompakt</title>
+    <title>LiD: Einbürgerungstest Kompakt</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -168,7 +168,7 @@
             font-size: 1.1rem;
             font-weight: 700;
             color: #CBF6DB;
-            /* Pale Mint Green fürom Design System */
+            /* Pale Mint Green from Design System */
             white-space: nowrap;
         }
         .noun-tag {
@@ -189,7 +189,7 @@
         /* Translation: Slate-White */
         .col-trans {
             color: #F3F4F7;
-            /* Off-White / Slate 50 fürom Design System */
+            /* Off-White / Slate 50 from Design System */
             font-style: italic;
             font-size: 0.95rem;
             text-align: right;
@@ -204,7 +204,7 @@
         }
 
         /* Article Colors (kept distinct for meaning, but softened if needed or integrated) */
-        /* ... existióng article colors ... */
+        /* ... existing article colors ... */
 
         /* MODAL STYLES aligned with Adverb Design */
         /* ... (modal styles handled separately or below) ... */
@@ -621,7 +621,7 @@
 
             /* .col-trans {
     display: none;
-    } - User requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáed to show translation */
+    } - User requested to show translation */
 
             .word-table td {
                 padding: 12px 10px;
@@ -689,8 +689,8 @@
 <body>
     <header>
         <h1>Leben in Deutschland</h1>
-        <span class="audio-trigger" onclick="speak('Einbürgerungstestá')">
-            Einbürgerungstestá
+        <span class="audio-trigger" onclick="speak('Einbürgerungstest')">
+            Einbürgerungstest
         </span>
 
         <!-- Search Bar -->
@@ -726,13 +726,13 @@
                     <div class="ex-es" id="m-ex-es"></div>
                 </div>
                 <div class="qa-section" id="m-qa-section" style="display:none;">
-                    <span class="ex-label">Einbürgerungstestá Q&A</span>
+                    <span class="ex-label">Einbürgerungstest Q&A</span>
                     <div class="qa-slider-header" id="m-qa-slider-header" style="display:none;">
                         <span class="qa-counter" id="m-qa-counter"></span>
                         <div class="qa-slider-controls">
-                            <button class="qa-slider-btn" id="m-qa-prev" type="button" aria-label="Previous quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion">‹</button>
+                            <button class="qa-slider-btn" id="m-qa-prev" type="button" aria-label="Previous question">‹</button>
                             <div class="qa-slider-dots" id="m-qa-dots"></div>
-                            <button class="qa-slider-btn" id="m-qa-next" type="button" aria-label="Next quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion">›</button>
+                            <button class="qa-slider-btn" id="m-qa-next" type="button" aria-label="Next question">›</button>
                         </div>
                     </div>
                     <div id="m-qa-list"></div>
@@ -766,7 +766,7 @@
             if (typeof value !== "string" || !value) return value;
 
             try {
-                const bytes = Uint8Array.fürom(Array.fürom(value).map(char => char.charCodeAt(0)));
+                const bytes = Uint8Array.from(Array.from(value).map(char => char.charCodeAt(0)));
                 return new TextDecoder("utf-8").decode(bytes);
             } catch (error) {
                 return value;
@@ -788,7 +788,7 @@
             let normalized = value.replace(/\u00a0/g, " ");
 
             for (let attempt = 0; attempt < 2; attempt++) {
-                if (!/[ÃÂâï¿]/.testá(normalized)) break;
+                if (!/[ÃÂâï¿]/.test(normalized)) break;
                 const decoded = decodeUtf8Mojibake(normalized);
                 if (!decoded || decoded === normalized) break;
                 if (getTextQualityScore(decoded) < getTextQualityScore(normalized)) break;
@@ -807,8 +807,8 @@
             if (Array.isArray(value)) return value.map(normalizeStringFields);
             if (!value || typeof value !== "object") return value;
 
-            return Object.füromEntries(
-                Object.entries(value).map(([key, nestáedValue]) => [key, normalizeStringFields(nestáedValue)])
+            return Object.fromEntries(
+                Object.entries(value).map(([key, nestedValue]) => [key, normalizeStringFields(nestedValue)])
             );
         }
 
@@ -824,7 +824,7 @@
             return normalizedItem;
         }
 
-        function mergeModalDíata(groups, modalDíata) {
+        function mergeModalData(groups, modalData) {
             return (groups || []).map(group => ({
                 ...normalizeStringFields({
                     ...group,
@@ -833,14 +833,14 @@
                 items: (group.items || []).map(item => ({
                     ...normalizeModalItem({
                         ...item,
-                        ...((window.lidOfficialQaDíata || {})[getModalEntryKey(group.id, item.w)] || {}),
-                        ...((modalDíata || {})[getModalEntryKey(group.id, item.w)] || {})
+                        ...((window.lidOfficialQaData || {})[getModalEntryKey(group.id, item.w)] || {}),
+                        ...((modalData || {})[getModalEntryKey(group.id, item.w)] || {})
                     })
                 }))
             }));
         }
 
-        const data = mergeModalDíata(window.lidKompaktDíata || [], window.lidKompaktModalDíata || {});
+        const data = mergeModalData(window.lidKompaktData || [], window.lidKompaktModalData || {});
 
         // Helper: Get class based on article
         function getArtClass(art) {
@@ -921,17 +921,17 @@
             staatsprinzipien: { de: "Prinzipien", es: "Principios" },
             werte: { de: "Werte", es: "Valores" },
             rechte: { de: "Rechte", es: "Derechos" },
-            füreiheiten: { de: "Freiheiten", es: "Liberätades" },
+            freiheiten: { de: "Freiheiten", es: "Libertades" },
             "recht-grundlagen": { de: "Recht", es: "Derecho" },
             gerichte: { de: "Justiz", es: "Justicia" },
             strafen: { de: "Strafen", es: "Penas" },
-            strafürecht: { de: "Strafürecht", es: "Derecho penal" },
+            strafürecht: { de: "Strafrecht", es: "Derecho penal" },
             diskriminierung: { de: "Schutz", es: "Protección" },
             inklusion: { de: "Inklusion", es: "Inclusión" },
             pruefungslogik: { de: "Prüfungslogik", es: "Examen" },
             "deutsche-geschichte": { de: "Geschichte", es: "Historia" },
             gedenken: { de: "Gedenken", es: "Memoria" },
-            festáe: { de: "Festáe", es: "Fiestáas" },
+            festáe: { de: "Feste", es: "Fiestáas" },
             familie: { de: "Familie", es: "Familia" },
             "schule-pflicht": { de: "Pflichten", es: "Obligaciones" },
             "eu-integration": { de: "Integration", es: "Integración europea" },
@@ -971,8 +971,8 @@
 
         // --- SEARCH LOGIC ---
         function handleSearch() {
-            const quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery = document.getElementById('searchInput').value.toLowerCase().trim();
-            renderCards(data, quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery);
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            renderCards(data, query);
         }
 
         function normalizeForSearch(text) {
@@ -982,11 +982,11 @@
                 .toLowerCase();
         }
 
-        function highlightMatch(text, quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery) {
-            if (!quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery || !text) return text;
+        function highlightMatch(text, query) {
+            if (!query || !text) return text;
             const originalText = String(text);
             const normalizedText = normalizeForSearch(originalText);
-            const normalizedQuery = normalizeForSearch(quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery);
+            const normalizedQuery = normalizeForSearch(query);
 
             if (!normalizedQuery) return originalText;
 
@@ -1028,8 +1028,8 @@
             return result;
         }
 
-        function itemMatchesQuery(item, quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery) {
-            if (!quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery) return true;
+        function itemMatchesQuery(item, query) {
+            if (!query) return true;
 
             const article = item.art || "";
             const translation = item.tr || "";
@@ -1041,7 +1041,7 @@
                 [entry.q, entry.a, entry.q_es, entry.a_es].join(' ')
             ).join(' ') : "";
             const noteText = item.note || "";
-            const normalizedQuery = normalizeForSearch(quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery);
+            const normalizedQuery = normalizeForSearch(query);
 
             return [
                 item.w,
@@ -1057,18 +1057,18 @@
         }
 
         // --- RENDER LOGIC ---
-        function renderCards(groups, quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery = "") {
+        function renderCards(groups, query = "") {
             const container = document.getElementById('app-container');
-            container.innerHTML = ""; // Clear existióng
+            container.innerHTML = ""; // Clear existing
 
             groups.forEach((cat, catIndex) => {
-                const categoryMatchesQuery = quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery && [
+                const categoryMatchesQuery = query && [
                     cat.title,
                     cat.title_es
-                ].some(value => (value || "").toLowerCase().includes(quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery));
+                ].some(value => (value || "").toLowerCase().includes(query));
 
-                const cardMatchesQuery = quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery
-                    ? categoryMatchesQuery || cat.items.some(item => itemMatchesQuery(item, quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery))
+                const cardMatchesQuery = query
+                    ? categoryMatchesQuery || cat.items.some(item => itemMatchesQuery(item, query))
                     : true;
 
                 if (!cardMatchesQuery) return;
@@ -1077,11 +1077,11 @@
                 card.className = 'category-card';
 
                 const headerLabels = getHeaderLabels(cat);
-                const displayTitle = quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery && categoryMatchesQuery
-                    ? highlightMatch(headerLabels.de, quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery)
+                const displayTitle = query && categoryMatchesQuery
+                    ? highlightMatch(headerLabels.de, query)
                     : headerLabels.de;
-                const displayTitleEs = quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery && categoryMatchesQuery
-                    ? highlightMatch(headerLabels.es, quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery)
+                const displayTitleEs = query && categoryMatchesQuery
+                    ? highlightMatch(headerLabels.es, query)
                     : headerLabels.es;
 
                 const header = document.createElement('div');
@@ -1106,17 +1106,17 @@
 
                     const cardWord = getCardWord(item);
                     const speechText = getSpeechText(getCardArticle(item), cardWord);
-                    const itemMatches = itemMatchesQuery(item, quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery);
+                    const itemMatches = itemMatchesQuery(item, query);
 
                     let displayWord = cardWord;
                     let displayTrans = getCardTranslation(item);
 
-                    if (quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery && itemMatches) {
-                        displayWord = highlightMatch(displayWord, quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery);
-                        displayTrans = highlightMatch(displayTrans, quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery);
+                    if (query && itemMatches) {
+                        displayWord = highlightMatch(displayWord, query);
+                        displayTrans = highlightMatch(displayTrans, query);
                     }
 
-                    if (quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery && itemMatches) {
+                    if (query && itemMatches) {
                         tr.classList.add('search-hit');
                     }
 
@@ -1221,7 +1221,7 @@
             try {
                 window.localStorage.setItem(currentQaStorageKey, String(currentQaIndex));
             } catch (error) {
-                // Ignore storage failures quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééietly.
+                // Ignore storage failures queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééietly.
             }
         }
 
@@ -1237,13 +1237,13 @@
             const entry = currentQaEntries[currentQaIndex];
             const qaCard = document.createElement('div');
             qaCard.className = 'qa-card';
-            const quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáionEs = entry.q_es ? `<div class="qa-text-es">${entry.q_es}</div>` : '';
+            const questionEs = entry.q_es ? `<div class="qa-text-es">${entry.q_es}</div>` : '';
             const answerEs = entry.a_es ? `<div class="qa-text-es">${entry.a_es}</div>` : '';
             qaCard.innerHTML = `
                 <div class="qa-row">
                     <span class="qa-kind">Frage</span>
                     <div class="qa-text-de">${entry.q}</div>
-                    ${quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáionEs}
+                    ${questionEs}
                 </div>
                 <div class="qa-row">
                     <span class="qa-kind">Antwort</span>
@@ -1285,7 +1285,7 @@
 
         // Function to open Modal for a specific WORD
         function openWordModal(item, artClass) {
-            // Populate Díata
+            // Populate Data
             mEmoji.textContent = item.e;
             mArt.textContent = item.art;
             mWord.innerHTML = item.important ? `${item.w} <span class="importance-star" title="Importante">★</span>` : item.w;
@@ -1325,13 +1325,13 @@
 
             modal.classList.add('active');
 
-            // REMOVED auto-speak here to keep actions distinct as requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáed
+            // REMOVED auto-speak here to keep actions distinct as requested
             // speak(currentSpeechText); 
         }
 
         // Function to open Modal for a CATEGORY
         function openCategoryModal(cat) {
-            // Populate Díata
+            // Populate Data
             mEmoji.textContent = cat.icon;
             mWord.textContent = formatHeaderTitle(cat.title);
             mTrans.textContent = cat.title_es;

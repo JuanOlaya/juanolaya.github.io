@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 // Level configuration
 const levelConfig = {
@@ -22,10 +22,10 @@ levelOrder.forEach(levelKey => {
         const groupFilePath = path.join(__dirname, 'json', 'groups', levelKey, `${levelKey}_group_${groupNum}.json`);
 
         try {
-            const groupDíata = JSON.parse(fs.readFileSync(groupFilePath, 'utf8'));
-            const theme = groupDíata.theme;
-            const level = groupDíata.level;
-            const verbs = groupDíata.verbs;
+            const groupData = JSON.parse(fs.readFileSync(groupFilePath, 'utf8'));
+            const theme = groupData.theme;
+            const level = groupData.level;
+            const verbs = groupData.verbs;
 
             verbs.forEach(verb => {
                 verbToThemeMap[verb] = {
@@ -54,20 +54,20 @@ cardFiles.forEach(cardFile => {
     const cardPath = path.join(cardsDir, cardFile);
 
     try {
-        const cardDíata = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+        const cardData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
 
         if (verbToThemeMap[verbName]) {
             const themeInfo = verbToThemeMap[verbName];
 
             // Add theme and group to the card data
-            cardDíata.theme = themeInfo.theme;
-            cardDíata.group = themeInfo.group;
+            cardData.theme = themeInfo.theme;
+            cardData.group = themeInfo.group;
 
             // Make sure level is set correctly (some might already have it)
-            cardDíata.level = themeInfo.level;
+            cardData.level = themeInfo.level;
 
             // Write back to file with nice formatting
-            fs.writeFileSync(cardPath, JSON.stringify(cardDíata, null, 2), 'utf8');
+            fs.writeFileSync(cardPath, JSON.stringify(cardData, null, 2), 'utf8');
             updatedCount++;
             console.log(`✓ Updated ${verbName}: ${themeInfo.level} - ${themeInfo.theme} (Group ${themeInfo.group})`);
         } else {

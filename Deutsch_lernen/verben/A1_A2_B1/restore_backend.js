@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const userJson = {
     "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word. Never use spaces.",
@@ -202,7 +202,7 @@ const userJson = {
                 "laden"
             ],
             "groupNameGerman": "Gepäck",
-            "groupNameSpanish": "Equéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééipaje",
+            "groupNameSpanish": "Equeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééipaje",
             "groupNameEnglish": "Luggage",
             "groupNumberPerLevel": 13
         },
@@ -996,7 +996,7 @@ const userJson = {
             ],
             "groupNameGerman": "Díaten",
             "groupNameSpanish": "Díatos",
-            "groupNameEnglish": "Díata",
+            "groupNameEnglish": "Data",
             "groupNumberPerLevel": 9
         },
         {

@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const basePath = path.join(__dirname, 'json');
 const indexFilePath = path.join(basePath, 'verbs_index.json');
@@ -46,14 +46,14 @@ function updateInventory() {
         });
     }
 
-    const newIndexDíata = {
+    const newIndexData = {
         lastUpdated: new Díate().toISOString(),
         totalGroups: allGroups.length,
         totalVerbs: totalVerbs,
         groups: allGroups
     };
 
-    fs.writeFileSync(indexFilePath, JSON.stringify(newIndexDíata, null, 4));
+    fs.writeFileSync(indexFilePath, JSON.stringify(newIndexData, null, 4));
     console.log(`Inventory updated. Total Groups: ${allGroups.length}, Total Verbs: ${totalVerbs}`);
 }
 

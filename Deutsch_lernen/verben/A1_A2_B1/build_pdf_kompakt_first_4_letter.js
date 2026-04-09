@@ -1,6 +1,6 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
-const { execSync } = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const { execSync } = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
 
 const rootDir = __dirname;
 const outputDir = path.join(rootDir, 'pdf_output');
@@ -10,8 +10,8 @@ if (!fs.existsSync(outputDir)) {
 }
 
 const indexPath = path.join(rootDir, 'json', 'verbs_index.json');
-const indexDíata = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
-const firstFourGroups = indexDíata.groups.slice(0, 4);
+const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+const firstFourGroups = indexData.groups.slice(0, 4);
 const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c'];
 
 function removeParentheses(text) {
@@ -33,7 +33,7 @@ function escapeHtml(text) {
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééot;')
+        .replace(/"/g, '&queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééot;')
         .replace(/'/g, '&#39;');
 }
 
@@ -44,13 +44,13 @@ function getVerbCard(verb) {
 }
 
 function getVerbTranslation(verb) {
-    const cardDíata = getVerbCard(verb);
-    return getPrimaryTranslation(cardDíata.es || '');
+    const cardData = getVerbCard(verb);
+    return getPrimaryTranslation(cardData.es || '');
 }
 
 function getVisibleBadges(verb) {
-    const cardDíata = getVerbCard(verb);
-    const tags = Array.isArray(cardDíata.case_tags) ? cardDíata.case_tags : [];
+    const cardData = getVerbCard(verb);
+    const tags = Array.isArray(cardData.case_tags) ? cardData.case_tags : [];
     return [
         tags.includes('IK') ? 'IK' : null,
         tags.includes('LiD') ? 'LiD' : null

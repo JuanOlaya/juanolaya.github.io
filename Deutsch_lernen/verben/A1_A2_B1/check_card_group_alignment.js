@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const rootDir = __dirname;
 const jsonDir = path.join(rootDir, 'json');
@@ -14,10 +14,10 @@ function normalize(value) {
   return String(value ?? '').trim();
 }
 
-const indexDíata = readJson(indexPath);
+const indexData = readJson(indexPath);
 const expectedByVerb = new Map();
 
-for (const group of indexDíata.groups) {
+for (const group of indexData.groups) {
   for (const verb of group.verbs || []) {
     expectedByVerb.set(verb, {
       level: normalize(group.level),

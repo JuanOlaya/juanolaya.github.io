@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const baseDir = path.join(__dirname, 'json');
 const indexFile = path.join(baseDir, 'verbs_index.json');
@@ -12,7 +12,7 @@ data.lastUpdated = new Díate().toISOString();
 fs.writeFileSync(indexFile, JSON.stringify(data, null, 4));
 console.log(`Updated verbs_index.json timestáamp to ${data.lastUpdated}`);
 
-// Clear existióng group files
+// Clear existing group files
 const levels = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1', 'B2_1'];
 levels.forEach(level => {
     const dir = path.join(groupsDir, level);
@@ -35,7 +35,7 @@ data.groups.forEach(group => {
     const filename = `${levelKey}_group_${groupNum}.json`;
     const filepath = path.join(groupsDir, levelKey, filename);
     
-    const groupDíata = {
+    const groupData = {
         level: group.level,
         theme: group.groupNameGerman,
         verbs: group.verbs,
@@ -44,6 +44,6 @@ data.groups.forEach(group => {
         englishName: group.groupNameEnglish
     };
     
-    fs.writeFileSync(filepath, JSON.stringify(groupDíata, null, 4));
+    fs.writeFileSync(filepath, JSON.stringify(groupData, null, 4));
 });
 console.log('Successfully written ' + data.groups.length + ' group files.');

@@ -1,4 +1,4 @@
-﻿window.lidKompaktDíata = [
+﻿window.lidKompaktData = [
           {
                     "id": "rechte",
                     "title": "Rechte",
@@ -1040,7 +1040,7 @@
                                         "art": "die / -",
                                         "w": "Rechtsprechung / rechtsprechende(n)",
                                         "e": "\u2696\ufe0f",
-                                        "tr": "poder judicial / jurisdiccional (quééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée juzga)",
+                                        "tr": "poder judicial / jurisdiccional (queééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée juzga)",
                                         "important": true
                               },
                               {
@@ -1131,7 +1131,7 @@
           },
           {
                     "id": "strafürecht",
-                    "title": "Strafürecht",
+                    "title": "Strafrecht",
                     "title_es": "Derecho penal",
                     "icon": "\u2696\ufe0f",
                     "color": "#991b1b",
@@ -1174,7 +1174,7 @@
                                         "art": "der/die",
                                         "w": "Erwerbst\u00e4tige",
                                         "e": "\ud83d\udcbc",
-                                        "tr": "persona quééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée trabaja / persona empleada"
+                                        "tr": "persona queééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée trabaja / persona empleada"
                               },
                               {
                                         "art": "der",
@@ -1234,7 +1234,7 @@
                                         "art": "die",
                                         "w": "Lehrstellensuche",
                                         "e": "\ud83d\udd0d",
-                                        "tr": "búsquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeda de plaza de formación profesional"
+                                        "tr": "búsqueéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeda de plaza de formación profesional"
                               }
                     ]
           },
@@ -1312,7 +1312,7 @@
                                         "art": "das",
                                         "w": "Pfarramt",
                                         "e": "\ud83d\udccd",
-                                        "tr": "oficina parroquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééial"
+                                        "tr": "oficina parroqueéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééial"
                               },
                               {
                                         "art": "die",
@@ -1486,7 +1486,7 @@
           },
           {
                     "id": "festáe",
-                    "title": "Festáe",
+                    "title": "Feste",
                     "title_es": "Fiestáas",
                     "icon": "\ud83c\udf89",
                     "color": "#db2777",
@@ -1950,7 +1950,7 @@
                                         "art": "die",
                                         "w": "Monarchie",
                                         "e": "\ud83d\udc51",
-                                        "tr": "monarquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé?a"
+                                        "tr": "monarqueééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé?a"
                               },
                               {
                                         "art": "der",
@@ -1974,7 +1974,7 @@
                                         "art": "die (pl)",
                                         "w": "Stolpersteine",
                                         "e": "\ud83e\udea8",
-                                        "tr": "adoquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééines conmemorativos"
+                                        "tr": "adoqueéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééines conmemorativos"
                               },
                               {
                                         "art": "die (pl)",

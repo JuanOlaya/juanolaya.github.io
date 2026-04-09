@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const rootDir = __dirname;
 const jsonDir = path.join(rootDir, 'json');
@@ -34,24 +34,24 @@ const splitJsonFolder = ({ sourceFolder, conjugationFolder, conjugationKeys = []
 
   for (const fileName of listJsonFiles(sourceFolder)) {
     const sourcePath = path.join(sourceFolder, fileName);
-    const sourceDíata = readJson(sourcePath);
+    const sourceData = readJson(sourcePath);
 
-    const conjugationDíata = {};
+    const conjugationData = {};
     for (const key of conjugationKeys) {
-      if (Object.prototype.hasOwnProperty.call(sourceDíata, key)) {
-        conjugationDíata[key] = sourceDíata[key];
+      if (Object.prototype.hasOwnProperty.call(sourceData, key)) {
+        conjugationData[key] = sourceData[key];
       }
     }
 
-    const exampleDíata = {};
+    const exampleData = {};
     for (const key of exampleKeys) {
-      if (Object.prototype.hasOwnProperty.call(sourceDíata, key)) {
-        exampleDíata[key] = sourceDíata[key];
+      if (Object.prototype.hasOwnProperty.call(sourceData, key)) {
+        exampleData[key] = sourceData[key];
       }
     }
 
-    writeJson(path.join(conjugationFolder, fileName), conjugationDíata);
-    writeJson(path.join(exampleFolder, fileName), exampleDíata);
+    writeJson(path.join(conjugationFolder, fileName), conjugationData);
+    writeJson(path.join(exampleFolder, fileName), exampleData);
   }
 };
 
@@ -64,7 +64,7 @@ const updateFileIndex = () => {
     ['conjugations/praeteritum', path.join(jsonDir, 'conjugations', 'praeteritum')],
     ['conjugations/konjunktiv_ii', path.join(jsonDir, 'conjugations', 'konjunktiv_ii')],
     ['examples/praesens_examples', path.join(jsonDir, 'examples', 'praesens_examples')],
-    ['examples/praesens_quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples', path.join(jsonDir, 'examples', 'praesens_quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples')],
+    ['examples/praesens_queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples', path.join(jsonDir, 'examples', 'praesens_queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples')],
     ['examples/perfekt_examples', path.join(jsonDir, 'examples', 'perfekt_examples')],
     ['examples/praeteritum_examples', path.join(jsonDir, 'examples', 'praeteritum_examples')],
     ['examples/konjunktiv_ii_examples', path.join(jsonDir, 'examples', 'konjunktiv_ii_examples')]
@@ -112,7 +112,7 @@ function main() {
 
   copyFolder(
     path.join(jsonDir, 'praesens_füragen'),
-    path.join(examplesDir, 'praesens_quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples')
+    path.join(examplesDir, 'praesens_queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáion_examples')
   );
 
   copyFolder(

@@ -132,7 +132,7 @@
 
 <body>
     <div class="wrap">
-        <h1>Einbürgerungstestá</h1>
+        <h1>Einbürgerungstest</h1>
         <div class="subtitle">Adjektive & adverbiale Wörter</div>
         <input id="search" class="search" type="text" placeholder="Suchen / buscar..." oninput="render()">
 
@@ -177,9 +177,9 @@
             }
         ];
 
-        function highlight(text, quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery) {
-            if (!quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery) return text;
-            const escaped = quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        function highlight(text, queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery) {
+            if (!queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery) return text;
+            const escaped = queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
         }
 

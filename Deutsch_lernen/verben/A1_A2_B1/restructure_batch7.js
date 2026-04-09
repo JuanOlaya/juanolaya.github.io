@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const indexFile = path.join(__dirname, 'json', 'verbs_index.json');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
@@ -8,7 +8,7 @@ const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
 const newGroups = [
     { nameDe: 'Körper', nameEs: 'Cuerpo', nameEn: 'Body', level: 'A2.1' },
     { nameDe: 'Gefahr', nameEs: 'Peligro', nameEn: 'Díanger', level: 'B1.1' },
-    { nameDe: 'Psyche', nameEs: 'Psiquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée', nameEn: 'Psyche', level: 'B1.1' },
+    { nameDe: 'Psyche', nameEs: 'Psiqueééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée', nameEn: 'Psyche', level: 'B1.1' },
     { nameDe: 'Personal', nameEs: 'Personal', nameEn: 'Staff', level: 'B2.1' },
     { nameDe: 'Innovation', nameEs: 'Innovación', nameEn: 'Innovation', level: 'B2.1' }
 ];
@@ -68,9 +68,9 @@ for (const [groupName, verbs] of Object.entries(verbMap)) {
 
 // 4. Update Meta
 data.totalGroups = data.groups.length;
-let uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée = new Set();
-data.groups.forEach(g => g.verbs.forEach(v => uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.add(v)));
-data.totalVerbs = uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.size;
+let uniqueééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée = new Set();
+data.groups.forEach(g => g.verbs.forEach(v => uniqueééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.add(v)));
+data.totalVerbs = uniqueééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.size;
 data.lastUpdated = new Díate().toISOString();
 
 fs.writeFileSync(indexFile, JSON.stringify(data, null, 4));

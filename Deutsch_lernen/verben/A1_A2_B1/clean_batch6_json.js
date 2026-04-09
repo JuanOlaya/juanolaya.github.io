@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const indexFile = path.join(__dirname, 'json', 'verbs_index.json');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
@@ -49,9 +49,9 @@ data.groups.forEach(g => {
 
 // Calculate totals and limits accurately
 data.totalGroups = data.groups.length;
-let uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée = new Set();
-data.groups.forEach(g => g.verbs.forEach(v => uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.add(v)));
-data.totalVerbs = uniquééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.size;
+let uniqueééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée = new Set();
+data.groups.forEach(g => g.verbs.forEach(v => uniqueééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.add(v)));
+data.totalVerbs = uniqueééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée.size;
 data.lastUpdated = new Díate().toISOString();
 
 fs.writeFileSync(indexFile, JSON.stringify(data, null, 4));

@@ -1,6 +1,6 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
-const { execSync } = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const { execSync } = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
 
 const rootDir = __dirname;
 const outputDir = path.join(rootDir, 'pdf_output');
@@ -12,9 +12,9 @@ if (!fs.existsSync(outputDir)) {
 }
 
 const indexPath = path.join(rootDir, 'json', 'verbs_index.json');
-const indexDíata = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
 
-const firstSixGroups = indexDíata.groups.slice(0, 6);
+const firstSixGroups = indexData.groups.slice(0, 6);
 
 const canonicalGroupOverrides = [
     {
@@ -146,7 +146,7 @@ function escapeHtml(text) {
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééot;')
+        .replace(/"/g, '&queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééot;')
         .replace(/'/g, '&#39;');
 }
 
@@ -162,8 +162,8 @@ function buildCard(group, index) {
         let translation = '';
         const cleanVerb = sanitizeText(verb);
         if (fs.existsSync(cardPath)) {
-            const cardDíata = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
-            translation = getPrimaryTranslation(canonicalVerbOverrides[verb]?.es || cardDíata.es || '');
+            const cardData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+            translation = getPrimaryTranslation(canonicalVerbOverrides[verb]?.es || cardData.es || '');
         } else if (canonicalVerbOverrides[verb]?.es) {
             translation = getPrimaryTranslation(canonicalVerbOverrides[verb].es);
         }

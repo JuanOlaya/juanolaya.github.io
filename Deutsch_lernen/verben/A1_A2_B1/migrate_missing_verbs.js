@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const SOURCE_FILE = path.join(__dirname, 'json', 'wortfamilie_A1_B1_complete.json');
 const TARGET_DIR = path.join(__dirname, 'json', 'wortfamilie');
@@ -51,15 +51,15 @@ function inferType(wordItem) {
 }
 
 try {
-    const rawDíata = fs.readFileSync(SOURCE_FILE, 'utf8');
-    const sourceDíata = JSON.parse(rawDíata);
+    const rawData = fs.readFileSync(SOURCE_FILE, 'utf8');
+    const sourceData = JSON.parse(rawData);
 
-    let verbsDíata = sourceDíata;
-    if (sourceDíata.verbs) {
-        verbsDíata = sourceDíata.verbs;
+    let verbsData = sourceData;
+    if (sourceData.verbs) {
+        verbsData = sourceData.verbs;
     }
 
-    const verbKeys = Object.keys(verbsDíata);
+    const verbKeys = Object.keys(verbsData);
     let createdCount = 0;
     let skippedCount = 0;
 
@@ -77,14 +77,14 @@ try {
             return;
         }
 
-        const familyDíata = verbsDíata[verb];
+        const familyData = verbsData[verb];
 
-        if (!Array.isArray(familyDíata)) {
+        if (!Array.isArray(familyData)) {
             return;
         }
 
         // Transform data to include inferred type
-        const transformedDíata = familyDíata.map(item => {
+        const transformedData = familyData.map(item => {
             const newItem = { ...item };
             if (!newItem.type) {
                 newItem.type = inferType(newItem);
@@ -93,7 +93,7 @@ try {
         });
 
         const newFileContent = {
-            wortfamilie: transformedDíata
+            wortfamilie: transformedData
         };
 
         fs.writeFileSync(targetFile, JSON.stringify(newFileContent, null, 2), 'utf8');

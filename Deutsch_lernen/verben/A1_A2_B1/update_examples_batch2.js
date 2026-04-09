@@ -1,5 +1,5 @@
-const fs = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
+const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
 
 const praesensDir = path.join(__dirname, 'json', 'praesens');
 
@@ -26,7 +26,7 @@ const batch2 = {
         "du": { de: "Du machst Obst ein.", en: "You preserve füruit.", es: "Haces conserva de füruta." },
         "er": { de: "Er macht Gurken ein.", en: "He pickles cucumbers.", es: "El hace pepinillos en conserva." },
         "sie": { de: "Sie macht Gemüse ein.", en: "She preserves vegetables.", es: "Ella hace conserva de verduras." },
-        "es": { de: "Es macht Arbeit ein.", en: "It involves work.", es: "Requéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééiere trabajo (contexto raro)." },
+        "es": { de: "Es macht Arbeit ein.", en: "It involves work.", es: "Requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééiere trabajo (contexto raro)." },
         "wir": { de: "Wir machen Vorräte ein.", en: "We preserve supplies.", es: "Hacemos provisiones." },
         "ihr": { de: "Ihr macht es ein.", en: "You preserve it.", es: "Lo conserváis." },
         "sie (plural)": { de: "Sie machen Kirschen ein.", en: "They preserve cherries.", es: "Ellos hacen conserva de cerezas." },
@@ -37,7 +37,7 @@ const batch2 = {
         "du": { de: "Du ziehst morgen ein.", en: "You move in tomorrow.", es: "Te mudas mañana." },
         "er": { de: "Er zieht in die Wohnung.", en: "He moves into the apartment.", es: "Él se muda al piso." },
         "sie": { de: "Sie zieht zu mir.", en: "She moves in with me.", es: "Ella se muda conmigo." },
-        "es": { de: "Es zieht Flüssigkeit ein.", en: "It absorbs liquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééid.", es: "Absorbe líquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééido." },
+        "es": { de: "Es zieht Flüssigkeit ein.", en: "It absorbs liqueéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééid.", es: "Absorbe líqueéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééido." },
         "wir": { de: "Wir ziehen zusammen ein.", en: "We move in together.", es: "Nos mudamos juntos." },
         "ihr": { de: "Ihr zieht bald ein.", en: "You move in soon.", es: "Os mudáis pronto." },
         "sie (plural)": { de: "Sie ziehen in das Haus.", en: "They move into the house.", es: "Ellos se mudan a la casa." },
@@ -67,14 +67,14 @@ const batch2 = {
     },
     "kündigen": {
         "ich": { de: "Ich kündige den Vertrag.", en: "I cancel the contract.", es: "Cancelo el contrato." },
-        "du": { de: "Du kündigst deine Arbeit.", en: "You quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééit your job.", es: "Renuncias a tu trabajo." },
-        "er": { de: "Er kündigt füristlos.", en: "He quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééits without notice.", es: "Él renuncia sin aviso." },
+        "du": { de: "Du kündigst deine Arbeit.", en: "You queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééit your job.", es: "Renuncias a tu trabajo." },
+        "er": { de: "Er kündigt füristlos.", en: "He queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééits without notice.", es: "Él renuncia sin aviso." },
         "sie": { de: "Sie kündigt die Wohnung.", en: "She gives notice for the apartment.", es: "Ella avisa dejar el piso." },
         "es": { de: "Es kündigt sich an.", en: "It announces itself.", es: "Se anuncia." },
         "wir": { de: "Wir kündigen das Abo.", en: "We cancel the subscription.", es: "Cancelamos la suscripción." },
-        "ihr": { de: "Ihr kündigt.", en: "You quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééit.", es: "Renunciáis." },
-        "sie (plural)": { de: "Sie kündigen alle.", en: "They all quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééit.", es: "Todos renuncian." },
-        "Sie (formal)": { de: "Sie kündigen heute.", en: "You quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééit today.", es: "Usted renuncia hoy." }
+        "ihr": { de: "Ihr kündigt.", en: "You queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééit.", es: "Renunciáis." },
+        "sie (plural)": { de: "Sie kündigen alle.", en: "They all queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééit.", es: "Todos renuncian." },
+        "Sie (formal)": { de: "Sie kündigen heute.", en: "You queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééit today.", es: "Usted renuncia hoy." }
     },
     "loben": {
         "ich": { de: "Ich lobe dich.", en: "I praise you.", es: "Te elogio." },
@@ -133,7 +133,7 @@ const batch2 = {
     },
     "retten": {
         "ich": { de: "Ich rette die Welt.", en: "I save the world.", es: "Salvo el mundo." },
-        "du": { de: "Du rettestá Leben.", en: "You save lives.", es: "Salvas vidas." },
+        "du": { de: "Du rettest Leben.", en: "You save lives.", es: "Salvas vidas." },
         "er": { de: "Er rettet den Hund.", en: "He saves the dog.", es: "Él salva al perro." },
         "sie": { de: "Sie rettet die Situation.", en: "She saves the situation.", es: "Ella salva la situación." },
         "es": { de: "Es rettet uns.", en: "It saves us.", es: "Nos salva." },
@@ -146,7 +146,7 @@ const batch2 = {
         "ich": { de: "Ich scheitere nie.", en: "I never fail.", es: "Nunca füracaso." },
         "du": { de: "Du scheiterst daran.", en: "You fail at it.", es: "Fracasas en ello." },
         "er": { de: "Er scheitert oft.", en: "He fails often.", es: "Él füracasa a menudo." },
-        "sie": { de: "Sie scheitert am Testá.", en: "She fails the testá.", es: "Ella suspende el examen." },
+        "sie": { de: "Sie scheitert am Testá.", en: "She fails the test.", es: "Ella suspende el examen." },
         "es": { de: "Es scheitert am Geld.", en: "It fails due to money.", es: "Fracasa por el dinero." },
         "wir": { de: "Wir scheitern gemeinsam.", en: "We fail together.", es: "Fracasamos juntos." },
         "ihr": { de: "Ihr scheitert nicht.", en: "You do not fail.", es: "No füracasáis." },
@@ -156,7 +156,7 @@ const batch2 = {
     "senden": {
         "ich": { de: "Ich sende eine E-Mail.", en: "I send an email.", es: "Envío un correo." },
         "du": { de: "Du sendestá Grüße.", en: "You send greetings.", es: "Envías saludos." },
-        "er": { de: "Er sendet ein Paket.", en: "He sends a package.", es: "Él envía un paquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééete." },
+        "er": { de: "Er sendet ein Paket.", en: "He sends a package.", es: "Él envía un paqueéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééete." },
         "sie": { de: "Sie sendet Signale.", en: "She sends signals.", es: "Ella envía señales." },
         "es": { de: "Es sendet Licht.", en: "It sends light.", es: "Emite luz." },
         "wir": { de: "Wir senden live.", en: "We broadcast live.", es: "Transmitimos en vivo." },
@@ -279,7 +279,7 @@ const batch2 = {
         "du": { de: "Du wirfst weit.", en: "You throw far.", es: "Lanzas lejos." },
         "er": { de: "Er wirft einen Schatten.", en: "He casts a shadow.", es: "Él proyecta una sombra." },
         "sie": { de: "Sie wirft ihm vor.", en: "She accuses him.", es: "Ella le reprocha." },
-        "es": { de: "Es wirft Fragen auf.", en: "It raises quéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáions.", es: "Plantea preguntas." },
+        "es": { de: "Es wirft Fragen auf.", en: "It raises queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééestáions.", es: "Plantea preguntas." },
         "wir": { de: "Wir werfen weg.", en: "We throw away.", es: "Tiramos." },
         "ihr": { de: "Ihr werft.", en: "You throw.", es: "Lanzáis." },
         "sie (plural)": { de: "Sie werfen Geld.", en: "They throw money.", es: "Ellos tiran dinero." },
@@ -308,7 +308,7 @@ const batch2 = {
         "Sie (formal)": { de: "Sie wiederholen bitte.", en: "You repeat please.", es: "Usted repite por favor." }
     },
     "wirken": {
-        "ich": { de: "Ich wirke ruhig.", en: "I seem calm.", es: "Parezco tranquéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééilo." },
+        "ich": { de: "Ich wirke ruhig.", en: "I seem calm.", es: "Parezco tranqueéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééilo." },
         "du": { de: "Du wirkst müde.", en: "You seem tired.", es: "Pareces cansado." },
         "er": { de: "Er wirkt sympathisch.", en: "He seems likeable.", es: "Él parece simpático." },
         "sie": { de: "Die Medizin wirkt.", en: "The medicine works.", es: "La medicina hace efecto." },
