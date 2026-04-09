@@ -622,6 +622,31 @@ window.lidKompaktModalData = {
                     "ex": "Die Vereinten Nationen setzen sich für Frieden und Zusammenarbeit ein.",
                     "ex_es": "Las Naciones Unidas trabajan por la paz y la cooperación."
           },
+          "eu::Frieden": {
+                    "ex": "Frieden ist ein wichtiges Ziel der Vereinten Nationen.",
+                    "ex_es": "La paz es un objetivo importante de las Naciones Unidas.",
+                    "note": "Ohne Plural im üblichen Gebrauch.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man den Zustand ohne Krieg und Gewalt zwischen Staaten?",
+                                        "a": "Den Frieden.",
+                                        "q_es": "¿Cómo se llama el estado sin guerra ni violencia entre Estados?",
+                                        "a_es": "La paz."
+                              },
+                              {
+                                        "q": "Wofür setzen sich die Vereinten Nationen ein?",
+                                        "a": "Für Frieden.",
+                                        "q_es": "¿Por qué trabajan las Naciones Unidas?",
+                                        "a_es": "Por la paz."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zum Gegenteil von Krieg?",
+                                        "a": "Der Frieden.",
+                                        "q_es": "¿Qué término corresponde a lo contrario de la guerra?",
+                                        "a_es": "La paz."
+                              }
+                    ]
+          },
           "eu::Nachbarland": {
                     "ex": "Deutschland hat mehrere Nachbarländer in Europa.",
                     "ex_es": "Alemania tiene varios países vecinos en Europa.",
@@ -644,6 +669,29 @@ window.lidKompaktModalData = {
                                         "a": "Ein Nachbarland.",
                                         "q_es": "¿Cómo se llama un Estado en la frontera común con Alemania?",
                                         "a_es": "Un país vecino."
+                              }
+                    ]
+          },
+          "eu::Römischen Verträge": {
+                    "note": "Pluralwort: die Römischen Verträge. Sie wurden 1957 unterzeichnet und sind ein wichtiger Schritt der europäischen Integration.",
+                    "qa": [
+                              {
+                                        "q": "Was unterzeichneten die sechs Staaten, um die europäische Wirtschaftsgemeinschaft zu gründen?",
+                                        "a": "die Römischen Verträge",
+                                        "q_es": "¿Qué firmaron los seis Estados para fundar la Comunidad Económica Europea?",
+                                        "a_es": "los Tratados de Roma"
+                              },
+                              {
+                                        "q": "Wie heißen die Verträge von 1957, die ein wichtiger Schritt zur Europäischen Union waren?",
+                                        "a": "die Römischen Verträge",
+                                        "q_es": "¿Cómo se llaman los tratados de 1957 que fueron un paso importante hacia la Unión Europea?",
+                                        "a_es": "los Tratados de Roma"
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einem frühen Grunddokument der europäischen Einigung?",
+                                        "a": "die Römischen Verträge",
+                                        "q_es": "¿Qué término corresponde a un documento fundacional temprano de la unificación europea?",
+                                        "a_es": "los Tratados de Roma"
                               }
                     ]
           },
@@ -698,6 +746,29 @@ window.lidKompaktModalData = {
                                         "a": "an die Opfer des Nationalsozialismus (Tag der Befreiung des Vernichtungslagers Auschwitz)",
                                         "q_es": "El 27 de enero es en Alemania un día oficial de conmemoración. ¿Qué recuerda ese día?",
                                         "a_es": "a las víctimas del nacionalsocialismo (día de la liberación del campo de exterminio de Auschwitz)"
+                              }
+                    ]
+          },
+          "eu-integration::Europäischen Wirtschaftsgemeinschaft": {
+                    "note": "Die Europäische Wirtschaftsgemeinschaft, kurz EWG, war ein wichtiger Vorläufer der Europäischen Union.",
+                    "qa": [
+                              {
+                                        "q": "Wie hieß die frühere Gemeinschaft, aus der sich die Europäische Union entwickelt hat?",
+                                        "a": "die Europäische Wirtschaftsgemeinschaft",
+                                        "q_es": "¿Cómo se llamaba la comunidad anterior de la que se desarrolló la Unión Europea?",
+                                        "a_es": "la Comunidad Económica Europea"
+                              },
+                              {
+                                        "q": "Welche Gemeinschaft wurde durch die Römischen Verträge gegründet?",
+                                        "a": "die Europäische Wirtschaftsgemeinschaft",
+                                        "q_es": "¿Qué comunidad fue fundada por los Tratados de Roma?",
+                                        "a_es": "la Comunidad Económica Europea"
+                              },
+                              {
+                                        "q": "Wofür steht die Abkürzung EWG?",
+                                        "a": "für Europäische Wirtschaftsgemeinschaft",
+                                        "q_es": "¿Qué significa la abreviatura EWG?",
+                                        "a_es": "Comunidad Económica Europea"
                               }
                     ]
           },
@@ -1064,6 +1135,52 @@ window.lidKompaktModalData = {
                     "ex_es": "En la clase de idioma se practican la lectura, la escritura y el habla.",
                     "note": "Plural selten. Verwandte Form: Sprachunterrichte."
           },
+          "bildung::Erziehung": {
+                    "note": "Ohne Plural im üblichen Gebrauch. Das Wort kann die Erziehung von Kindern oder allgemeine Wertevermittlung meinen.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man die Vermittlung von Werten und Regeln an Kinder?",
+                                        "a": "die Erziehung",
+                                        "q_es": "¿Cómo se llama la transmisión de valores y normas a los niños?",
+                                        "a_es": "la educación / crianza"
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu dem, was Eltern und Schule bei Kindern mitprägen?",
+                                        "a": "die Erziehung",
+                                        "q_es": "¿Qué término corresponde a lo que padres y escuela ayudan a formar en los niños?",
+                                        "a_es": "la educación / crianza"
+                              },
+                              {
+                                        "q": "Wie nennt man die Anleitung zu verantwortlichem Verhalten im Alltag?",
+                                        "a": "die Erziehung",
+                                        "q_es": "¿Cómo se llama la guía hacia un comportamiento responsable en la vida cotidiana?",
+                                        "a_es": "la educación / crianza"
+                              }
+                    ]
+          },
+          "bildung::Kindererziehung": {
+                    "note": "Ohne Plural im üblichen Gebrauch. Gemeint ist speziell die Erziehung von Kindern.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man die Erziehung von Kindern durch Eltern oder andere Bezugspersonen?",
+                                        "a": "die Kindererziehung",
+                                        "q_es": "¿Cómo se llama la educación de los niños por parte de los padres u otras personas de referencia?",
+                                        "a_es": "la educación de los hijos / la crianza"
+                              },
+                              {
+                                        "q": "Welcher Begriff passt speziell zur Erziehung im familiären Alltag?",
+                                        "a": "die Kindererziehung",
+                                        "q_es": "¿Qué término corresponde específicamente a la educación en la vida familiar cotidiana?",
+                                        "a_es": "la educación de los hijos / la crianza"
+                              },
+                              {
+                                        "q": "Wie nennt man die verantwortliche Begleitung von Kindern beim Aufwachsen?",
+                                        "a": "die Kindererziehung",
+                                        "q_es": "¿Cómo se llama el acompañamiento responsable de los niños durante su crecimiento?",
+                                        "a_es": "la educación de los hijos / la crianza"
+                              }
+                    ]
+          },
           "ordnung::Waffenbesitz": {
                     "ex": "Waffenbesitz ist in Deutschland streng geregelt.",
                     "ex_es": "La posesión de armas está estrictamente regulada en Alemania.",
@@ -1088,6 +1205,31 @@ window.lidKompaktModalData = {
                     "ex": "Das Militär verteidigt ein Land im Ernstfall.",
                     "ex_es": "El ejército defiende un país en caso de necesidad.",
                     "note": "Ohne Plural im üblichen Gebrauch."
+          },
+          "ordnung::Sicherheit": {
+                    "ex": "Sicherheit ist eine wichtige Aufgabe des Staates.",
+                    "ex_es": "La seguridad es una tarea importante del Estado.",
+                    "note": "Ohne Plural im üblichen Gebrauch.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man den Zustand, in dem Menschen vor Gefahr geschützt sind?",
+                                        "a": "Die Sicherheit.",
+                                        "q_es": "¿Cómo se llama el estado en el que las personas están protegidas del peligro?",
+                                        "a_es": "La seguridad."
+                              },
+                              {
+                                        "q": "Wofür sind Polizei und andere staatliche Stellen mit zuständig?",
+                                        "a": "Für die Sicherheit.",
+                                        "q_es": "¿De qué son responsables también la policía y otras autoridades estatales?",
+                                        "a_es": "De la seguridad."
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu Schutz vor Gefahr im öffentlichen Leben?",
+                                        "a": "Die Sicherheit.",
+                                        "q_es": "¿Qué término corresponde a la protección frente al peligro en la vida pública?",
+                                        "a_es": "La seguridad."
+                              }
+                    ]
           },
           "staat-extra::Verwaltung": {
                     "ex": "Die Verwaltung setzt Gesetze und Entscheidungen praktisch um.",
