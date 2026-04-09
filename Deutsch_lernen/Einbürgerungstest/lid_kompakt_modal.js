@@ -24,6 +24,23 @@ window.lidKompaktModalData = {
                     "ex_es": "Mujeres y hombres tienen igualdad de derechos.",
                     "note": "Verwandtes Wort: gleichfalls = igualmente / asimismo."
           },
+          "rechte::Gleichbehandlung": {
+                    "note": "Verwandtes Wort: Ungleichbehandlung = trato desigual.",
+                    "qa": [
+                              {
+                                        "q": "Was bedeutet in Deutschland der Grundsatz der Gleichbehandlung?",
+                                        "a": "Niemand darf z.B. wegen einer Behinderung benachteiligt werden.",
+                                        "q_es": "¿Qué significa en Alemania el principio de igualdad de trato?",
+                                        "a_es": "Nadie puede ser perjudicado, por ejemplo, por tener una discapacidad."
+                              },
+                              {
+                                        "q": "Zwei Freunde wollen in ein öffentliches Schwimmbad in Deutschland. Beide haben eine dunkle Hautfarbe und werden deshalb nicht hineingelassen. Welches Recht wird in dieser Situation verletzt? Das Recht auf …",
+                                        "a": "Gleichbehandlung",
+                                        "q_es": "Dos amigos quieren entrar en una piscina pública en Alemania. Ambos tienen la piel oscura y por eso no los dejan entrar. ¿Qué derecho se vulnera en esta situación? El derecho a la …",
+                                        "a_es": "igualdad de trato"
+                              }
+                    ]
+          },
           "freiheiten::Religionsfreiheit": {
                     "ex": "Jeder Mensch hat Religionsfreiheit.",
                     "ex_es": "Toda persona tiene libertad religiosa."
@@ -109,6 +126,23 @@ window.lidKompaktModalData = {
           "diskriminierung::Zwangsarbeit": {
                     "ex": "Zwangsarbeit ist verboten.",
                     "ex_es": "El trabajo forzado est� prohibido."
+          },
+          "inklusion::Behinderung": {
+                    "note": "Wichtiger Ausdruck im Test: wegen einer Behinderung benachteiligt werden.",
+                    "qa": [
+                              {
+                                        "q": "Was bedeutet in Deutschland der Grundsatz der Gleichbehandlung?",
+                                        "a": "Niemand darf z.B. wegen einer Behinderung benachteiligt werden.",
+                                        "q_es": "¿Qué significa en Alemania el principio de igualdad de trato?",
+                                        "a_es": "Nadie puede ser perjudicado, por ejemplo, por tener una discapacidad."
+                              },
+                              {
+                                        "q": "Zwei Freunde wollen in ein öffentliches Schwimmbad in Deutschland. Beide haben eine dunkle Hautfarbe und werden deshalb nicht hineingelassen. Welches Recht wird in dieser Situation verletzt? Das Recht auf …",
+                                        "a": "Gleichbehandlung",
+                                        "q_es": "Dos amigos quieren entrar en una piscina pública en Alemania. Ambos tienen la piel oscura y por eso no los dejan entrar. ¿Qué derecho se vulnera en esta situación? El derecho a la …",
+                                        "a_es": "igualdad de trato"
+                              }
+                    ]
           },
           "staatsprinzipien::Demokratie": {
                     "ex": "Deutschland ist eine Demokratie.",
