@@ -773,8 +773,8 @@
           },
           {
                     "id": "staatsaemter",
-                    "title": "?mter",
-                    "title_es": "Cargos",
+                    "title": "Verfassungsorgane",
+                    "title_es": "Órganos constitucionales",
                     "icon": "\ud83c\udfdb\ufe0f",
                     "color": "#f59e0b",
                     "items": [
@@ -817,8 +817,8 @@
           },
           {
                     "id": "staatsaemter-2",
-                    "title": "?mter II",
-                    "title_es": "Cargos II",
+                    "title": "Staatsspitze",
+                    "title_es": "Alta dirección del Estado",
                     "icon": "\ud83c\udfdb\ufe0f",
                     "color": "#f59e0b",
                     "items": [
@@ -1067,6 +1067,12 @@
                                         "w": "Urteil / Urteile",
                                         "e": "\ud83d\udd28",
                                         "tr": "sentencia / sentencias"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Entscheidung",
+                                        "e": "\u2705",
+                                        "tr": "decisión"
                               }
                     ]
           },

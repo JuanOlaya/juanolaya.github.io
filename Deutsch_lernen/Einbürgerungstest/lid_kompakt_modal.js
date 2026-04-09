@@ -520,6 +520,23 @@ window.lidKompaktModalData = {
                     "ex": "Das Urteil ist rechtskr�ftig.",
                     "ex_es": "La sentencia es firme."
           },
+          "gerichte::Entscheidung": {
+                    "note": "Plural: Entscheidungen. Gemeint ist ein Entschluss oder eine richterliche Entscheidung.",
+                    "qa": [
+                              {
+                                        "q": "Ihre Tochter wird in Deutschland nach einigen Jahren volljährig. Sie möchten, dass sie auf keinen Fall einen bestimmten Mann heiratet. Was tun Sie?",
+                                        "a": "Sie müssen die Entscheidung der volljährigen Tochter respektieren.",
+                                        "q_es": "Su hija alcanza la mayoría de edad en Alemania después de algunos años. Usted quiere que de ninguna manera se case con un determinado hombre. ¿Qué hace?",
+                                        "a_es": "Tiene que respetar la decisión de su hija mayor de edad."
+                              },
+                              {
+                                        "q": "Wer entscheidet, ob ein Kind in Deutschland in den Kindergarten geht?",
+                                        "a": "die Eltern/die Erziehungsberechtigten",
+                                        "q_es": "¿Quién decide si un niño en Alemania va al jardín de infancia?",
+                                        "a_es": "los padres / las personas con patria potestad"
+                              }
+                    ]
+          },
           "strafen::Strafe": {
                     "ex": "Auf die Tat folgt eine Strafe.",
                     "ex_es": "Al acto le sigue una pena."
