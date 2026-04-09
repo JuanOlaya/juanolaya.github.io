@@ -721,7 +721,7 @@
 
             <div class="modal-body">
                 <div class="example-card" id="m-example-card">
-                    <span class="ex-label">Beispiel / Ejemplo</span>
+                    <span class="ex-label" id="m-example-label">Beispiel / Ejemplo</span>
                     <div class="ex-de" id="m-ex-de"></div>
                     <div class="ex-es" id="m-ex-es"></div>
                 </div>
@@ -746,6 +746,7 @@
     </div>
 
     <script charset="UTF-8" src="lid_kompakt_nouns.js?v=2026-04-08-2"></script>
+    <script charset="UTF-8" src="lid_kompakt_official_qa.js?v=2026-04-09-1"></script>
     <script charset="UTF-8" src="lid_kompakt_modal.js?v=2026-04-08-2"></script>
     <script>
         const verbenPalette = [
@@ -761,10 +762,60 @@
             return `${groupId}::${itemWord}`;
         }
 
+        function decodeUtf8Mojibake(value) {
+            if (typeof value !== "string" || !value) return value;
+
+            try {
+                const bytes = Uint8Array.from(Array.from(value).map(char => char.charCodeAt(0)));
+                return new TextDecoder("utf-8").decode(bytes);
+            } catch (error) {
+                return value;
+            }
+        }
+
+        function getTextQualityScore(value) {
+            if (typeof value !== "string" || !value) return 0;
+
+            const goodMatches = value.match(/[ÄÖÜäöüß…„“”‚‘’–—]/g) || [];
+            const badMatches = value.match(/[ÃÂâï¿]/g) || [];
+            const replacementMatches = value.match(/�/g) || [];
+            return goodMatches.length - badMatches.length - (replacementMatches.length * 2);
+        }
+
+        function normalizeDisplayText(value) {
+            if (typeof value !== "string" || !value) return value;
+
+            let normalized = value.replace(/\u00a0/g, " ");
+
+            for (let attempt = 0; attempt < 2; attempt++) {
+                if (!/[ÃÂâï¿]/.test(normalized)) break;
+                const decoded = decodeUtf8Mojibake(normalized);
+                if (!decoded || decoded === normalized) break;
+                if (getTextQualityScore(decoded) < getTextQualityScore(normalized)) break;
+                normalized = decoded;
+            }
+
+            return normalized
+                .replace(/\s+/g, " ")
+                .replace(/\s+([,.;:!?])/g, "$1")
+                .replace(/…\s*\./g, "…")
+                .trim();
+        }
+
+        function normalizeStringFields(value) {
+            if (typeof value === "string") return normalizeDisplayText(value);
+            if (Array.isArray(value)) return value.map(normalizeStringFields);
+            if (!value || typeof value !== "object") return value;
+
+            return Object.fromEntries(
+                Object.entries(value).map(([key, nestedValue]) => [key, normalizeStringFields(nestedValue)])
+            );
+        }
+
         function normalizeModalItem(item) {
             if (!item) return item;
 
-            const normalizedItem = { ...item };
+            const normalizedItem = normalizeStringFields({ ...item });
             if (Array.isArray(normalizedItem.qa) && normalizedItem.qa.length) {
                 delete normalizedItem.ex;
                 delete normalizedItem.ex_es;
@@ -775,10 +826,14 @@
 
         function mergeModalData(groups, modalData) {
             return (groups || []).map(group => ({
-                ...group,
+                ...normalizeStringFields({
+                    ...group,
+                    items: undefined
+                }),
                 items: (group.items || []).map(item => ({
                     ...normalizeModalItem({
                         ...item,
+                        ...((window.lidOfficialQaData || {})[getModalEntryKey(group.id, item.w)] || {}),
                         ...((modalData || {})[getModalEntryKey(group.id, item.w)] || {})
                     })
                 }))
@@ -874,6 +929,8 @@
             pruefungslogik: { de: "Prüfungslogik", es: "Examen" },
             "deutsche-geschichte": { de: "Geschichte", es: "Historia" },
             gedenken: { de: "Gedenken", es: "Memoria" },
+            familie: { de: "Familie", es: "Familia" },
+            "schule-pflicht": { de: "Pflichten", es: "Obligaciones" },
             "eu-integration": { de: "Integration", es: "Integración europea" },
             wiedervereinigung: { de: "Einheit", es: "Unidad" },
             berlin: { de: "Berlin", es: "Berlin" },
@@ -1121,6 +1178,7 @@
         const mHeaderLine = document.getElementById('m-header-line');
         const mSpeaker = document.getElementById('m-speaker-icon');
         const mExampleCard = document.getElementById('m-example-card');
+        const mExampleLabel = document.getElementById('m-example-label');
         const mQaSection = document.getElementById('m-qa-section');
         const mQaList = document.getElementById('m-qa-list');
         const mQaSliderHeader = document.getElementById('m-qa-slider-header');
@@ -1174,16 +1232,18 @@
             const entry = currentQaEntries[currentQaIndex];
             const qaCard = document.createElement('div');
             qaCard.className = 'qa-card';
+            const questionEs = entry.q_es ? `<div class="qa-text-es">${entry.q_es}</div>` : '';
+            const answerEs = entry.a_es ? `<div class="qa-text-es">${entry.a_es}</div>` : '';
             qaCard.innerHTML = `
                 <div class="qa-row">
                     <span class="qa-kind">Frage</span>
                     <div class="qa-text-de">${entry.q}</div>
-                    <div class="qa-text-es">${entry.q_es}</div>
+                    ${questionEs}
                 </div>
                 <div class="qa-row">
                     <span class="qa-kind">Antwort</span>
                     <div class="qa-text-de">${entry.a}</div>
-                    <div class="qa-text-es">${entry.a_es}</div>
+                    ${answerEs}
                 </div>
             `;
             mQaList.appendChild(qaCard);
@@ -1207,6 +1267,17 @@
             renderQaSlider();
         }
 
+        function getOfficialTestExample(item) {
+            const entries = Array.isArray(item.qa) ? item.qa : [];
+            if (!entries.length) return null;
+
+            const first = entries[0];
+            return {
+                de: `${first.q} ${first.a}`.trim(),
+                es: `${first.q_es || ""} ${first.a_es || ""}`.trim()
+            };
+        }
+
         // Function to open Modal for a specific WORD
         function openWordModal(item, artClass) {
             // Populate Data
@@ -1214,10 +1285,12 @@
             mArt.textContent = item.art;
             mWord.innerHTML = item.important ? `${item.w} <span class="importance-star" title="Importante">★</span>` : item.w;
             mTrans.textContent = item.modal_tr || item.tr;
-            mExDe.textContent = item.ex;
-            mExEs.textContent = item.ex_es;
             mNote.textContent = item.note || "";
             currentQaEntries = item.qa || [];
+            const officialTestExample = getOfficialTestExample(item);
+            mExDe.textContent = officialTestExample ? officialTestExample.de : "";
+            mExEs.textContent = officialTestExample ? officialTestExample.es : "";
+            mExampleLabel.textContent = officialTestExample ? 'Offizielles Testbeispiel' : 'Beispiel / Ejemplo';
             currentQaStorageKey = currentQaEntries.length ? getQaStorageKey(item) : "";
             currentQaIndex = loadStoredQaIndex(currentQaStorageKey, currentQaEntries.length);
             renderQaSlider();
@@ -1226,7 +1299,7 @@
 
             // Styling & Visibility
             mArt.style.display = item.art ? 'inline' : 'none';
-            mExampleCard.style.display = item.qa && item.qa.length ? 'none' : 'block';
+            mExampleCard.style.display = officialTestExample ? 'block' : 'none';
             mQaSection.style.display = item.qa && item.qa.length ? 'block' : 'none';
             mNoteCard.style.display = item.note ? 'block' : 'none';
             mEmoji.style.filter = ''; // Reset filter logic later
