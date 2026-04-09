@@ -534,6 +534,75 @@ window.lidKompaktModalData = {
                     "ex": "Gewerkschaften vertreten die Interessen von Arbeitnehmerinnen und Arbeitnehmern.",
                     "ex_es": "Los sindicatos representan los intereses de las trabajadoras y los trabajadores."
           },
+          "arbeitswelt::Berufinformationzentrum": {
+                    "note": "Plural: Berufinformationszentren. Oft auch kurz BIZ genannt.",
+                    "qa": [
+                              {
+                                        "q": "Wie heißt die Stelle, an der man Informationen zu Berufen und Ausbildung bekommen kann?",
+                                        "a": "das Berufinformationzentrum",
+                                        "q_es": "¿Cómo se llama el lugar donde se puede obtener información sobre profesiones y formación?",
+                                        "a_es": "el centro de información profesional"
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einem Informationszentrum für Berufswahl und Ausbildung?",
+                                        "a": "das Berufinformationzentrum",
+                                        "q_es": "¿Qué término corresponde a un centro de información para la elección de profesión y formación?",
+                                        "a_es": "el centro de información profesional"
+                              },
+                              {
+                                        "q": "Wie nennt man das BIZ ausgeschrieben?",
+                                        "a": "das Berufinformationzentrum",
+                                        "q_es": "¿Cómo se escribe completa la sigla BIZ?",
+                                        "a_es": "el centro de información profesional"
+                              }
+                    ]
+          },
+          "arbeitswelt::Bundesagentur für Arbeit": {
+                    "note": "Plural im üblichen Gebrauch selten. Zuständig für Arbeitsvermittlung und Beratung.",
+                    "qa": [
+                              {
+                                        "q": "Wie heißt in Deutschland die Behörde für Arbeitsvermittlung und Berufsberatung?",
+                                        "a": "die Bundesagentur für Arbeit",
+                                        "q_es": "¿Cómo se llama en Alemania la autoridad encargada de la intermediación laboral y la orientación profesional?",
+                                        "a_es": "la Agencia Federal de Empleo"
+                              },
+                              {
+                                        "q": "Welche Stelle hilft bei der Suche nach Arbeit oder Ausbildung?",
+                                        "a": "die Bundesagentur für Arbeit",
+                                        "q_es": "¿Qué organismo ayuda en la búsqueda de trabajo o formación?",
+                                        "a_es": "la Agencia Federal de Empleo"
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zur zentralen Arbeitsbehörde in Deutschland?",
+                                        "a": "die Bundesagentur für Arbeit",
+                                        "q_es": "¿Qué término corresponde a la autoridad laboral central en Alemania?",
+                                        "a_es": "la Agencia Federal de Empleo"
+                              }
+                    ]
+          },
+          "arbeitswelt::Lehrstellensuche": {
+                    "note": "Ohne Plural im üblichen Gebrauch. Gemeint ist die Suche nach einem Ausbildungsplatz.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man die Suche nach einem Ausbildungsplatz in einem Betrieb?",
+                                        "a": "die Lehrstellensuche",
+                                        "q_es": "¿Cómo se llama la búsqueda de una plaza de formación en una empresa?",
+                                        "a_es": "la búsqueda de plaza de formación profesional"
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zur Suche nach einer Lehrstelle?",
+                                        "a": "die Lehrstellensuche",
+                                        "q_es": "¿Qué término corresponde a la búsqueda de una plaza de aprendizaje?",
+                                        "a_es": "la búsqueda de plaza de formación profesional"
+                              },
+                              {
+                                        "q": "Wie nennt man den Prozess, bei dem Jugendliche oder Erwachsene einen Ausbildungsplatz suchen?",
+                                        "a": "die Lehrstellensuche",
+                                        "q_es": "¿Cómo se llama el proceso en el que jóvenes o adultos buscan una plaza de formación?",
+                                        "a_es": "la búsqueda de plaza de formación profesional"
+                              }
+                    ]
+          },
           "migration::Einwanderung": {
                     "ex": "Einwanderung hat Deutschland gepr�gt.",
                     "ex_es": "La inmigraci�n ha marcado a Alemania."
@@ -601,6 +670,29 @@ window.lidKompaktModalData = {
           "sozialsystem::Rente": {
                     "ex": "Viele Menschen bekommen im Alter eine Rente.",
                     "ex_es": "Muchas personas reciben una pensi�n en la vejez."
+          },
+          "behoerden::Gaststättenerlaubnis": {
+                    "note": "Plural: Gaststättenerlaubnisse. Gemeint ist die behördliche Erlaubnis zum Betrieb einer Gaststätte.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man die behördliche Erlaubnis, ein Restaurant oder eine Kneipe zu betreiben?",
+                                        "a": "die Gaststättenerlaubnis",
+                                        "q_es": "¿Cómo se llama la autorización administrativa para explotar un restaurante o un bar?",
+                                        "a_es": "la licencia de hostelería"
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer offiziellen Genehmigung für eine Gaststätte?",
+                                        "a": "die Gaststättenerlaubnis",
+                                        "q_es": "¿Qué término corresponde a un permiso oficial para un establecimiento de hostelería?",
+                                        "a_es": "la licencia de hostelería"
+                              },
+                              {
+                                        "q": "Wie heißt das Dokument, das man für den Betrieb eines Lokals mit Bewirtung braucht?",
+                                        "a": "die Gaststättenerlaubnis",
+                                        "q_es": "¿Cómo se llama el documento que se necesita para explotar un local con servicio de comida o bebida?",
+                                        "a_es": "la licencia de hostelería"
+                              }
+                    ]
           },
           "deutsche-geschichte::Nationalsozialismus": {
                     "ex": "Man muss �ber den Nationalsozialismus lernen.",
@@ -746,6 +838,144 @@ window.lidKompaktModalData = {
                                         "a": "an die Opfer des Nationalsozialismus (Tag der Befreiung des Vernichtungslagers Auschwitz)",
                                         "q_es": "El 27 de enero es en Alemania un día oficial de conmemoración. ¿Qué recuerda ese día?",
                                         "a_es": "a las víctimas del nacionalsocialismo (día de la liberación del campo de exterminio de Auschwitz)"
+                              }
+                    ]
+          },
+          "familie::Ehepaare": {
+                    "note": "Pluralwort: Ehepaare. Singular: das Ehepaar.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man zwei Menschen, die miteinander verheiratet sind?",
+                                        "a": "ein Ehepaar / Ehepaare",
+                                        "q_es": "¿Cómo se llama a dos personas que están casadas entre sí?",
+                                        "a_es": "una pareja casada / parejas casadas"
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu verheirateten Paaren?",
+                                        "a": "die Ehepaare",
+                                        "q_es": "¿Qué término corresponde a las parejas casadas?",
+                                        "a_es": "las parejas casadas"
+                              },
+                              {
+                                        "q": "Wie nennt man Paare mit einer rechtlich geschlossenen Ehe?",
+                                        "a": "die Ehepaare",
+                                        "q_es": "¿Cómo se llama a las parejas con un matrimonio legalmente celebrado?",
+                                        "a_es": "las parejas casadas"
+                              }
+                    ]
+          },
+          "familie::Trennungsjahr": {
+                    "note": "Ohne Plural im üblichen Gebrauch. Gemeint ist das Jahr des Getrenntlebens vor einer Scheidung.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man in Deutschland das Jahr, in dem ein Ehepaar vor der Scheidung getrennt lebt?",
+                                        "a": "das Trennungsjahr",
+                                        "q_es": "¿Cómo se llama en Alemania el año en el que una pareja casada vive separada antes del divorcio?",
+                                        "a_es": "el año de separación"
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zur vorgeschriebenen Zeit des Getrenntlebens vor einer Scheidung?",
+                                        "a": "das Trennungsjahr",
+                                        "q_es": "¿Qué término corresponde al tiempo de separación exigido antes de un divorcio?",
+                                        "a_es": "el año de separación"
+                              },
+                              {
+                                        "q": "Wie heißt die Phase vor einer Scheidung, in der Eheleute getrennt wohnen?",
+                                        "a": "das Trennungsjahr",
+                                        "q_es": "¿Cómo se llama la fase anterior al divorcio en la que los cónyuges viven separados?",
+                                        "a_es": "el año de separación"
+                              }
+                    ]
+          },
+          "familie::Ehegatten": {
+                    "note": "Pluralwort: Ehegatten. Singular: der Ehegatte / die Ehegattin. Oft in amtlicher oder juristischer Sprache.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man in formeller Sprache zwei Menschen, die miteinander verheiratet sind?",
+                                        "a": "die Ehegatten",
+                                        "q_es": "¿Cómo se llama en lenguaje formal a dos personas que están casadas entre sí?",
+                                        "a_es": "los cónyuges"
+                              },
+                              {
+                                        "q": "Welcher Begriff wird in amtlichen Texten oft für verheiratete Personen verwendet?",
+                                        "a": "die Ehegatten",
+                                        "q_es": "¿Qué término se usa a menudo en textos oficiales para personas casadas?",
+                                        "a_es": "los cónyuges"
+                              },
+                              {
+                                        "q": "Wie nennt man verheiratete Partner im juristischen Sprachgebrauch?",
+                                        "a": "die Ehegatten",
+                                        "q_es": "¿Cómo se llama a los esposos en el lenguaje jurídico?",
+                                        "a_es": "los cónyuges"
+                              }
+                    ]
+          },
+          "familie::Scheidung": {
+                    "note": "Plural: Scheidungen. Gemeint ist die rechtliche Auflösung einer Ehe.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man die rechtliche Beendigung einer Ehe?",
+                                        "a": "die Scheidung",
+                                        "q_es": "¿Cómo se llama la terminación legal de un matrimonio?",
+                                        "a_es": "el divorcio"
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zur Auflösung einer Ehe durch Gericht oder Gesetz?",
+                                        "a": "die Scheidung",
+                                        "q_es": "¿Qué término corresponde a la disolución de un matrimonio por vía legal o judicial?",
+                                        "a_es": "el divorcio"
+                              },
+                              {
+                                        "q": "Wie heißt der rechtliche Schritt nach dem Trennungsjahr, wenn eine Ehe beendet wird?",
+                                        "a": "die Scheidung",
+                                        "q_es": "¿Cómo se llama el paso legal después del año de separación cuando se termina un matrimonio?",
+                                        "a_es": "el divorcio"
+                              }
+                    ]
+          },
+          "bildung::Abendgymnasium": {
+                    "note": "Plural: Abendgymnasien. Gemeint ist eine Schule für Erwachsene, die meist abends besucht wird.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man eine Schule, an der Erwachsene abends das Abitur nachholen können?",
+                                        "a": "das Abendgymnasium",
+                                        "q_es": "¿Cómo se llama una escuela en la que los adultos pueden obtener el bachillerato por la noche?",
+                                        "a_es": "el instituto nocturno / bachillerato nocturno"
+                              },
+                              {
+                                        "q": "Welcher Begriff passt zu einer weiterführenden Schule für Erwachsene am Abend?",
+                                        "a": "das Abendgymnasium",
+                                        "q_es": "¿Qué término corresponde a una escuela secundaria para adultos por la tarde o la noche?",
+                                        "a_es": "el instituto nocturno"
+                              },
+                              {
+                                        "q": "Wie heißt eine Bildungsform, in der man später am Abend einen höheren Schulabschluss machen kann?",
+                                        "a": "das Abendgymnasium",
+                                        "q_es": "¿Cómo se llama una modalidad educativa en la que se puede obtener más tarde un título escolar superior por la noche?",
+                                        "a_es": "el bachillerato nocturno"
+                              }
+                    ]
+          },
+          "schule-pflicht::Anwesenheitspflicht": {
+                    "note": "Ohne Plural im üblichen Gebrauch. Gemeint ist die Pflicht, bei Unterricht oder Terminen anwesend zu sein.",
+                    "qa": [
+                              {
+                                        "q": "Wie nennt man die Pflicht, im Unterricht oder bei einer Veranstaltung anwesend zu sein?",
+                                        "a": "die Anwesenheitspflicht",
+                                        "q_es": "¿Cómo se llama la obligación de estar presente en clase o en una actividad?",
+                                        "a_es": "la obligación de asistencia"
+                              },
+                              {
+                                        "q": "Welcher Begriff passt dazu, dass man bei Schule, Kurs oder Termin erscheinen muss?",
+                                        "a": "die Anwesenheitspflicht",
+                                        "q_es": "¿Qué término corresponde a tener que presentarse en la escuela, un curso o una cita?",
+                                        "a_es": "la obligación de asistencia"
+                              },
+                              {
+                                        "q": "Wie heißt die Regel, dass Teilnehmer nicht einfach fernbleiben dürfen?",
+                                        "a": "die Anwesenheitspflicht",
+                                        "q_es": "¿Cómo se llama la regla según la cual los participantes no pueden faltar sin más?",
+                                        "a_es": "la obligación de asistencia"
                               }
                     ]
           },

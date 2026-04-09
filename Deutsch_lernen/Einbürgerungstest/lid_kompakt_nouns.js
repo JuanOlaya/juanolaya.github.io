@@ -917,6 +917,12 @@
                                         "e": "\ud83c\udf0d",
                                         "tr": "Ministerio de Asuntos Exteriores",
                                         "important": true
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Gaststättenerlaubnis",
+                                        "e": "\ud83c\udf7d\ufe0f",
+                                        "tr": "licencia de hostelería / permiso para un bar o restaurante"
                               }
                     ]
           },
@@ -1150,6 +1156,24 @@
                                         "e": "\u2696\ufe0f",
                                         "tr": "demanda por despido",
                                         "important": true
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Berufinformationzentrum",
+                                        "e": "\ud83d\udcc1",
+                                        "tr": "centro de información profesional"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Bundesagentur für Arbeit",
+                                        "e": "\ud83c\udfe2",
+                                        "tr": "Agencia Federal de Empleo"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Lehrstellensuche",
+                                        "e": "\ud83d\udd0d",
+                                        "tr": "búsqueda de plaza de formación profesional"
                               }
                     ]
           },
@@ -1395,6 +1419,56 @@
                                         "w": "27. Januar",
                                         "e": "\ud83d\udcc5",
                                         "tr": "27 de enero",
+                                        "important": true
+                              }
+                    ]
+          },
+          {
+                    "id": "familie",
+                    "title": "Familie",
+                    "title_es": "Familia",
+                    "icon": "\ud83d\udc6a",
+                    "color": "#db2777",
+                    "items": [
+                              {
+                                        "art": "die (pl)",
+                                        "w": "Ehepaare",
+                                        "e": "\ud83d\udc8d",
+                                        "tr": "parejas casadas",
+                                        "important": true
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Trennungsjahr",
+                                        "e": "\ud83d\uddd3\ufe0f",
+                                        "tr": "año de separación"
+                              },
+                              {
+                                        "art": "die (pl)",
+                                        "w": "Ehegatten",
+                                        "e": "\ud83d\udc8d",
+                                        "tr": "cónyuges"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Scheidung",
+                                        "e": "\ud83d\udc94",
+                                        "tr": "divorcio"
+                              }
+                    ]
+          },
+          {
+                    "id": "schule-pflicht",
+                    "title": "Pflichten",
+                    "title_es": "Obligaciones",
+                    "icon": "\ud83d\udccb",
+                    "color": "#0891b2",
+                    "items": [
+                              {
+                                        "art": "die",
+                                        "w": "Anwesenheitspflicht",
+                                        "e": "\ud83d\udccb",
+                                        "tr": "obligación de asistencia",
                                         "important": true
                               }
                     ]
@@ -1875,6 +1949,12 @@
                                         "w": "Kindererziehung",
                                         "e": "\ud83d\udc76",
                                         "tr": "educación de los hijos / crianza"
+                              },
+                              {
+                                        "art": "das",
+                                        "w": "Abendgymnasium",
+                                        "e": "\ud83c\udfeb",
+                                        "tr": "instituto nocturno / bachillerato nocturno"
                               }
                     ]
           },
