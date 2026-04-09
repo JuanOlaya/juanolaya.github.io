@@ -950,6 +950,22 @@
                     ]
           },
           {
+                    "id": "aemter",
+                    "title": "Ämter",
+                    "title_es": "Oficinas",
+                    "icon": "\ud83d\udccb",
+                    "color": "#8b5cf6",
+                    "items": [
+                              {
+                                        "art": "das",
+                                        "w": "Standesamt",
+                                        "e": "\ud83d\udc8d",
+                                        "tr": "registro civil",
+                                        "important": true
+                              }
+                    ]
+          },
+          {
                     "id": "recht-grundlagen",
                     "title": "Recht",
                     "title_es": "Derecho",
@@ -1103,6 +1119,22 @@
                                         "w": "Straftat",
                                         "e": "\ud83d\ude94",
                                         "tr": "delito / hecho delictivo",
+                                        "important": true
+                              }
+                    ]
+          },
+          {
+                    "id": "strafrecht",
+                    "title": "Strafrecht",
+                    "title_es": "Derecho penal",
+                    "icon": "\u2696\ufe0f",
+                    "color": "#991b1b",
+                    "items": [
+                              {
+                                        "art": "das",
+                                        "w": "Strafgesetz",
+                                        "e": "\ud83d\udcd5",
+                                        "tr": "ley penal",
                                         "important": true
                               }
                     ]
@@ -1442,6 +1474,22 @@
                                         "w": "27. Januar",
                                         "e": "\ud83d\udcc5",
                                         "tr": "27 de enero",
+                                        "important": true
+                              }
+                    ]
+          },
+          {
+                    "id": "feste",
+                    "title": "Feste",
+                    "title_es": "Fiestas",
+                    "icon": "\ud83c\udf89",
+                    "color": "#db2777",
+                    "items": [
+                              {
+                                        "art": "der",
+                                        "w": "Rosenmontag",
+                                        "e": "\ud83c\udf89",
+                                        "tr": "Lunes de Carnaval",
                                         "important": true
                               }
                     ]
