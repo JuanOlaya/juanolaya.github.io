@@ -728,10 +728,23 @@
                                         "important": true
                               },
                               {
+                                        "art": "der",
+                                        "w": "Frieden",
+                                        "e": "\u270c\ufe0f",
+                                        "tr": "paz"
+                              },
+                              {
                                         "art": "das",
                                         "w": "Nachbarland",
                                         "e": "\ud83d\uddfa\ufe0f",
                                         "tr": "país vecino"
+                              },
+                              {
+                                        "art": "die (pl)",
+                                        "w": "Römischen Verträge",
+                                        "e": "\ud83d\udcc4",
+                                        "tr": "Tratados de Roma",
+                                        "important": true
                               }
                     ]
           },
@@ -1387,6 +1400,22 @@
                     ]
           },
           {
+                    "id": "eu-integration",
+                    "title": "Integration",
+                    "title_es": "Integración europea",
+                    "icon": "\ud83c\udf0d",
+                    "color": "#1d4ed8",
+                    "items": [
+                              {
+                                        "art": "die",
+                                        "w": "Europäischen Wirtschaftsgemeinschaft",
+                                        "e": "\ud83c\udf0d",
+                                        "tr": "Comunidad Económica Europea",
+                                        "important": true
+                              }
+                    ]
+          },
+          {
                     "id": "wiedervereinigung",
                     "title": "Einheit",
                     "title_es": "Unidad",
@@ -1834,6 +1863,18 @@
                                         "w": "Sprachunterricht",
                                         "e": "\ud83d\udcd6",
                                         "tr": "clase de lengua / idioma"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Erziehung",
+                                        "e": "\ud83e\uddd2",
+                                        "tr": "educación / crianza"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Kindererziehung",
+                                        "e": "\ud83d\udc76",
+                                        "tr": "educación de los hijos / crianza"
                               }
                     ]
           },
@@ -1873,6 +1914,12 @@
                                         "w": "Militär",
                                         "e": "\ud83e\ude96",
                                         "tr": "ejército / fuerzas armadas"
+                              },
+                              {
+                                        "art": "die",
+                                        "w": "Sicherheit",
+                                        "e": "\ud83d\udee1\ufe0f",
+                                        "tr": "seguridad"
                               }
                     ]
           },

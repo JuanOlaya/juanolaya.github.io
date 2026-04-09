@@ -761,12 +761,26 @@
             return `${groupId}::${itemWord}`;
         }
 
+        function normalizeModalItem(item) {
+            if (!item) return item;
+
+            const normalizedItem = { ...item };
+            if (Array.isArray(normalizedItem.qa) && normalizedItem.qa.length) {
+                delete normalizedItem.ex;
+                delete normalizedItem.ex_es;
+            }
+
+            return normalizedItem;
+        }
+
         function mergeModalData(groups, modalData) {
             return (groups || []).map(group => ({
                 ...group,
                 items: (group.items || []).map(item => ({
-                    ...item,
-                    ...((modalData || {})[getModalEntryKey(group.id, item.w)] || {})
+                    ...normalizeModalItem({
+                        ...item,
+                        ...((modalData || {})[getModalEntryKey(group.id, item.w)] || {})
+                    })
                 }))
             }));
         }
@@ -860,6 +874,7 @@
             pruefungslogik: { de: "Prüfungslogik", es: "Examen" },
             "deutsche-geschichte": { de: "Geschichte", es: "Historia" },
             gedenken: { de: "Gedenken", es: "Memoria" },
+            "eu-integration": { de: "Integration", es: "Integración europea" },
             wiedervereinigung: { de: "Einheit", es: "Unidad" },
             berlin: { de: "Berlin", es: "Berlin" },
             gesellschaft: { de: "Gesellschaft", es: "Sociedad" },
