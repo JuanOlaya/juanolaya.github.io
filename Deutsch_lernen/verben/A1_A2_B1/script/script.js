@@ -358,8 +358,8 @@
  <div class="footer-search-panel">
  </div>
  <button id="footer-search-toggle" class="footer-search-toggle" type="button" aria-expanded="false" aria-label="Search">
- <span class="footer-search-arrow">â€¹</span>
- <span class="footer-search-icon">âŒ•</span>
+ <span class="footer-search-arrow">‹</span>
+ <span class="footer-search-icon">⌕</span>
  </button>
  `;
 
@@ -1477,7 +1477,7 @@
  germanWord.innerHTML = `${verbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}`;
  germanWord.style.display = showGerman ? '' : 'none';
  germanWord.style.cursor = 'pointer';
- germanWord.title = 'Aussprache hÃ¶ren';
+ germanWord.title = 'Aussprache hören';
  germanWord.onclick = (e) => { e.stopPropagation(); window.speak(verbName); };
 
  const translations = document.createElement('div');
@@ -1615,7 +1615,7 @@
  // New Structure: Header (Word + Translation), Body (Tags Centered), No Emoji
  return `
  <div class="word-item">
- <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; flex-direction: column; gap: 5px;">
+ <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer; flex-direction: column; gap: 5px;">
  <span class="german-word" style="font-size: 1.5rem;">${verbName} ${irregularMark}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}</span>
  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
  <span class="spanish-translation" style="font-size: 1.1rem; color: white; font-style: italic;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${esTranslation}</span>
@@ -1669,7 +1669,7 @@
  // Cleaner, simpler card with header and emoji
  return `
  <div class="card normal-card">
- <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">
+ <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">
  <span class="normal-emoji">${emoji}</span>
  <h3 class="normal-german">${verbName}${irregular}</h3>
  ${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}
@@ -1735,7 +1735,7 @@
  const row = document.createElement('div');
  row.className = 'light-version-row';
  row.innerHTML = `
- <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${infinitiv}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}</div>
+ <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${infinitiv}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}</div>
  <div class="light-version-cell perfekt" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${perfekt}</div>
  <div class="light-version-cell praeteritum" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${praeteritum}</div>
  <div class="light-version-cell translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${translation}</div>
@@ -2427,7 +2427,7 @@
  const modalHeader = document.querySelector('.modal-header');
  if (modalHeader) {
  modalHeader.style.cursor = 'pointer';
- modalHeader.title = 'Aussprache hÃ¶ren';
+ modalHeader.title = 'Aussprache hören';
  modalHeader.addEventListener('click', (e) => {
  e.preventDefault();
  e.stopPropagation();
@@ -2932,7 +2932,7 @@
  e.stopPropagation();
  speak(verb);
  };
- modalEmojiEl.title = "Aussprache hÃ¶ren";
+ modalEmojiEl.title = "Aussprache hören";
 
  document.getElementById('modal-verb-infinitive-es').textContent = updatedData.es || '';
  document.getElementById('modal-verb-perfekt-es').textContent = updatedData.es_perfekt || '';
@@ -3031,7 +3031,7 @@
  if (content && content.classList.contains('truco-content')) {
  const isHidden = content.style.display === 'none';
  content.style.display = isHidden ? 'block' : 'none';
- btn.textContent = isHidden ? 'â–¼' : 'â–¶';
+ btn.textContent = isHidden ? '▼' : '▶';
  }
  };
 
@@ -3074,7 +3074,7 @@
  contentHTML += `<div class="wf-word-line">`;
  // Safe stringify for onclick
  const safeWord = wordData.word.replace(/'/g, "\\'");
- contentHTML += `â€¢ <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hÃ¶ren">${wordData.word}</span>`;
+ contentHTML += `• <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hören">${wordData.word}</span>`;
  if (abbrev) contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
  contentHTML += `</div>`;
 
@@ -3082,7 +3082,7 @@
  contentHTML += `<div class="wf-word-translation">`;
  contentHTML += `${wordData.es}`;
  if (wordData.truco) {
- contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">â–¶</span>`;
+ contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">▶</span>`;
  }
  // Optional Example
  if (wordData.example) {
@@ -3114,7 +3114,7 @@
  contentHTML += `<div class="wf-word-line">`;
  // Safe stringify for onclick
  const safeWord = wordData.word.replace(/'/g, "\\'");
- contentHTML += `â€¢ <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hÃ¶ren">${wordData.word}</span>`;
+ contentHTML += `• <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hören">${wordData.word}</span>`;
  if (abbrev) contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
  contentHTML += `</div>`;
 
@@ -3122,7 +3122,7 @@
  contentHTML += `<div class="wf-word-translation">`;
  contentHTML += `${wordData.es}`;
  if (wordData.truco) {
- contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">â–¶</span>`;
+ contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">▶</span>`;
  }
  // Optional Example
  if (wordData.example) {
@@ -3201,7 +3201,7 @@
  ].filter(Boolean);
 
  let tableHTML = '<table>';
- tableHTML += `<tr><th>Pron.</th><th>Konjugation</th><th>Beispiel <span id="beispiel-mode-tag" class="beispiel-mode-tag">${beispielModes[0]?.label || 'Aussage'}</span><button id="toggle-beispiel-type" class="toggle-beispiel-btn" title="Beispielmodus wechseln">â‡„</button></th></tr>`;
+ tableHTML += `<tr><th>Pron.</th><th>Konjugation</th><th>Beispiel <span id="beispiel-mode-tag" class="beispiel-mode-tag">${beispielModes[0]?.label || 'Aussage'}</span><button id="toggle-beispiel-type" class="toggle-beispiel-btn" title="Beispielmodus wechseln">⇄</button></th></tr>`;
 
  for (const { key, display, spanish } of pronounOrder) {
  const conjugation = updatedData.praesens[key];
@@ -3539,21 +3539,21 @@
  speak(verb);
  };
  document.getElementById('modal-verb-infinitive').style.cursor = 'pointer';
- document.getElementById('modal-verb-infinitive').title = 'Aussprache hÃ¶ren';
+ document.getElementById('modal-verb-infinitive').title = 'Aussprache hören';
 
  document.getElementById('modal-verb-perfekt').onclick = (e) => {
  e.stopPropagation();
  speak(updatedData.perfekt);
  };
  document.getElementById('modal-verb-perfekt').style.cursor = 'pointer';
- document.getElementById('modal-verb-perfekt').title = 'Aussprache hÃ¶ren';
+ document.getElementById('modal-verb-perfekt').title = 'Aussprache hören';
 
  document.getElementById('modal-verb-praeteritum').onclick = (e) => {
  e.stopPropagation();
  speak(updatedData.praeteritum);
  };
  document.getElementById('modal-verb-praeteritum').style.cursor = 'pointer';
- document.getElementById('modal-verb-praeteritum').title = 'Aussprache hÃ¶ren';
+ document.getElementById('modal-verb-praeteritum').title = 'Aussprache hören';
 
  // modal-text removed as per user request
  // document.getElementById('modal-text').onclick = ...
@@ -4074,7 +4074,7 @@
 
  cardHTML += `
  <div class="kompakt-row" data-verb="${verbName}" onclick="openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
- <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}</div>
+ <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}</div>
  <div class="kompakt-translations">
  <div class="kompakt-spanish" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showSpanish ? 'block' : 'none'};">${esTranslationDisplay}</div>
  <div class="kompakt-english" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showEnglish && enTranslationRaw ? 'block' : 'none'};">${enTranslationDisplay}</div>
@@ -4240,7 +4240,7 @@
  'akk': 'ðŸŸ¢ [+Akk]',
  'refl': 'ðŸŸ£ [Refl]',
  'nom': 'ðŸŸ¡ [+Nom]',
- 'intrans': 'âšª [Intrans]',
+ 'intrans': '⚪ [Intrans]',
  'IK': 'ðŸŸ£ [IK]',
  'LiD': 'ðŸ”µ [LiD]'
  };
@@ -4248,7 +4248,7 @@
  // Handle prep tags with specific prepositions
  if (tag.startsWith('prep:')) {
  const prep = tag.substring(5);
- return `<span class="case-tag case-tag-prep">âšª [+Prep: ${prep}]</span>`;
+ return `<span class="case-tag case-tag-prep">⚪ [+Prep: ${prep}]</span>`;
  }
 
  const display = tagDisplay[tag] || tag;
@@ -4290,7 +4290,7 @@
  const cardHTML = `
  <div class="word-item">
  <div class="card-header">
- <span class="german-word" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerbName}</span>
+ <span class="german-word" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${displayVerbName}</span>
  <span class="spanish-translation" data-form="translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${esTranslation}</span>
  ${shouldHideEmoji ? '' : `<div class="icon-floating" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" style="cursor: pointer;">${verbData.emoji || 'â“'}</div>`}
  </div>
@@ -4409,7 +4409,7 @@
  <span class="wf-word">${item.word}</span>
  <span class="wf-translation">${item.es}</span>
  <div class="wf-relationship">
- GehÃ¶rt zu: <strong>${item.verb}</strong> <span class="wf-arrow">âž”</span>
+ Gehört zu: <strong>${item.verb}</strong> <span class="wf-arrow">➔</span>
  </div>
  </div>
  `;
