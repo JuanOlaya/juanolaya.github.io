@@ -10,7 +10,7 @@
  const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "FÃ¼nfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "ZwÃ¶lfte", "Dreizehnte"];
  const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "FÃ¼nftes", "Sechstes", "Siebtes", "Achtes"];
  const savedStories = [
- `<p>GestÃ¡ern <span class="highlighted-word">bin ich</span> in Berlin <span class="highlighted-word">gewesen</span>. Ich <span class="highlighted-word">bin</span> mit dem Zug <span class="highlighted-word">gefahren</span>. In der Stadt <span class="highlighted-word">habe ich</span> eine Freundin <span class="highlighted-word">gesehen</span>. Wir <span class="highlighted-word">haben</span> in einem CafÃ© <span class="highlighted-word">gesprochen</span> und einen Kaffee <span class="highlighted-word">getrunken</span>. DÃ­anach <span class="highlighted-word">habe ich</span> ein Buch <span class="highlighted-word">gekauft</span> und mit Karte <span class="highlighted-word">bezahlt</span>. Es <span class="highlighted-word">hat</span> viel SpaÃŸ <span class="highlighted-word">gemacht</span>!</p>`,
+ `<p>Gestern <span class="highlighted-word">bin ich</span> in Berlin <span class="highlighted-word">gewesen</span>. Ich <span class="highlighted-word">bin</span> mit dem Zug <span class="highlighted-word">gefahren</span>. In der Stadt <span class="highlighted-word">habe ich</span> eine Freundin <span class="highlighted-word">gesehen</span>. Wir <span class="highlighted-word">haben</span> in einem CafÃ© <span class="highlighted-word">gesprochen</span> und einen Kaffee <span class="highlighted-word">getrunken</span>. DÃ­anach <span class="highlighted-word">habe ich</span> ein Buch <span class="highlighted-word">gekauft</span> und mit Karte <span class="highlighted-word">bezahlt</span>. Es <span class="highlighted-word">hat</span> viel SpaÃŸ <span class="highlighted-word">gemacht</span>!</p>`,
  `<p>Heute Morgen <span class="highlighted-word">habe ich</span> lange <span class="highlighted-word">geschlafen</span>. Zum FrÃ¼hstÃ¼ck <span class="highlighted-word">habe ich</span> ein BÃ¤rÃ¶tchen <span class="highlighted-word">gegessen</span>. DÃ­ann <span class="highlighted-word">habe ich</span> eine E-Mail an meine Familie <span class="highlighted-word">geschrieben</span>. Ich <span class="highlighted-word">habe</span> ihnen <span class="highlighted-word">gesagt</span>, dass ich bald nach Hause <span class="highlighted-word">komme</span>. SpÃ¤ter <span class="highlighted-word">habe ich</span> die Zeitung <span class="highlighted-word">gelesen</span>.</p>`,
  `<p>Am Wochenende <span class="highlighted-word">habe ich</span> zu Hause <span class="highlighted-word">gearbeitet</span>. Ich <span class="highlighted-word">habe</span> fÃ¼r eine PrÃ¼fung <span class="highlighted-word">gelernt</span>. Ich <span class="highlighted-word">habe</span> eine Frage nicht <span class="highlighted-word">gewusst</span>, also <span class="highlighted-word">habe ich</span> meinen Lehrer <span class="highlighted-word">gefÃ¼ragt</span>. Er <span class="highlighted-word">hat</span> mir alles gut erklÃ¤rt. Ich <span class="highlighted-word">habe</span> die Antwort schnell <span class="highlighted-word">gefunden</span>.</p>`
  ];
@@ -588,7 +588,7 @@
  const vRes = await fetch('json/verbs_index.json', { cache: 'no-cache' });
  if (vRes.ok) {
  const vData = await parseJsonUtf8(vRes);
- remoteVersion = vDated;
+ remoteVersion = vData.lastUpdated;
  allGroupsIndex = Array.isArray(vData.groups) ? vData.groups : allGroupsIndex;
  if (remoteVersion) {
  appVersion = remoteVersion;
@@ -933,7 +933,7 @@
  if (['es', 'wir', 'ihr', 'sie', 'es_example', 'en_example'].includes(key) && typeof value === 'object') {
  return;
  }
- // Protect estÃ¡ablished core strings
+ // Protect established core strings
  if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') {
  return;
  }
@@ -983,7 +983,7 @@
  if (['es', 'wir', 'ihr', 'sie'].includes(key) && typeof value === 'object' && !['cards'].includes(key)) {
  return;
  }
- // Protect estÃ¡ablished core strings
+ // Protect established core strings
  if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') {
  return;
  }
@@ -1004,7 +1004,7 @@
  // PERSISTENCE & RELIABILITY: Double-check if the merge created a corruption ([object Object])
  // This acts as a recovery mechanism for users with corrupted localStorage.
  if (allVerbsData[verbName] && typeof allVerbsData[verbName].es === 'object') {
- console.error(`Detected data corruption for ${verbName}. RestÃ¡oring basic translation.`);
+ console.error(`Detected data corruption for ${verbName}. Restoring basic translation.`);
  allVerbsData[verbName].es = existingData.es || "hablar";
  }
 
@@ -1087,7 +1087,7 @@
  ? maybeFetchJson('examples/praesens_examples', {})
  : Promise.resolve({}),
  !existingData.praesens_fragen
- ? maybeFetchJson('examples/praesens_quÃ©estÃ¡ion_examples', {})
+ ? maybeFetchJson('examples/praesens_question_examples', {})
  : Promise.resolve({})
  ]);
 
@@ -1574,7 +1574,7 @@
  document.body.classList.remove('compact-view');
  document.body.classList.remove('light-version-global-dark');
 
- // RestÃ¡ore group arrows because Niedlich is paginated by group
+ // Restore group arrows because Niedlich is paginated by group
  if (navigationWrapper) {
  const groupNav = navigationWrapper.querySelector('.group-navigation');
  if (groupNav) groupNav.style.display = 'flex';
@@ -1641,7 +1641,7 @@
  document.body.classList.remove('compact-view');
  document.body.classList.remove('light-version-global-dark');
 
- // RestÃ¡ore group arrows because Normal is paginated by group
+ // Restore group arrows because Normal is paginated by group
  if (navigationWrapper) {
  const groupNav = navigationWrapper.querySelector('.group-navigation');
  if (groupNav) groupNav.style.display = 'flex';
@@ -1689,7 +1689,7 @@
  cardsContainer.innerHTML = '';
  document.body.classList.remove('compact-view');
 
- // RestÃ¡ore group arrows because Light is paginated by group
+ // Restore group arrows because Light is paginated by group
  if (navigationWrapper) {
  const groupNav = navigationWrapper.querySelector('.group-navigation');
  if (groupNav) groupNav.style.display = 'flex';
@@ -2510,7 +2510,7 @@
 
  // Toggle arrows visibility (optional: hide if at ends)
  // For simple carousel, always show if count > visibleTabCount?
- // User requÃ©estÃ¡ed explicit arrows. 
+ // User requested explicit arrows. 
  const arrows = document.querySelectorAll('.mobile-tab-arrow');
  const shouldShowArrows = visibleButtons.length > visibleTabCount && window.innerWidth <= 600;
 
@@ -2680,7 +2680,7 @@
 
  const isQuestion = text.trim().endsWith('?');
 
- // Experimental: For quÃ©estÃ¡ions, split the last word to force pitch rise
+ // Experimental: For questions, split the last word to force pitch rise
  if (isQuestion && text.trim().includes(' ')) {
  const parts = text.trim().lastIndexOf(' ');
  const firstPart = text.substring(0, parts); // e.g. "Stimmt"
@@ -2693,7 +2693,7 @@
  // Using 1.3 pitch for noticeable rise
  speakUtterance(lastPart, 1.3, rate);
  } else if (isQuestion) {
- // Single word quÃ©estÃ¡ion, just pitch up
+ // Single word question, just pitch up
  speakUtterance(text, 1.2, rate);
  } else {
  // Normal Statement
@@ -2731,7 +2731,7 @@
  // Set infinitive with case tags
  const infinitiveElement = document.getElementById('modal-verb-infinitive');
  // const irregularMark = updatedData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
- // Removed asterisk as requÃ©estÃ¡ed
+ // Removed asterisk as requested
  infinitiveElement.innerHTML = verb;
 
  // Reset tags collapse state
@@ -3223,7 +3223,7 @@
  exampleCell += `</div>`;
  }
 
- // Frage (quÃ©estÃ¡ion) examples
+ // Frage (question) examples
  if (frage) {
  exampleCell += `<div class="example-frage" style="display: none;">`;
  if (frage.de) exampleCell += `<div class="example-de">${frage.de}</div>`;
@@ -3555,7 +3555,7 @@
  document.getElementById('modal-verb-praeteritum').style.cursor = 'pointer';
  document.getElementById('modal-verb-praeteritum').title = 'Aussprache hÃ¶ren';
 
- // modal-text removed as per user requÃ©estÃ¡
+ // modal-text removed as per user request
  // document.getElementById('modal-text').onclick = ...
 
  if (window.updateTabCarousel) window.updateTabCarousel();
@@ -4258,7 +4258,7 @@
  }
 
  if (false && currentViewMode === 'niedlich') {
- // Niedlich Mode Rendering - DISABLED per user requÃ©estÃ¡ (User prefers Normal layout even in Cute mode)
+ // Niedlich Mode Rendering - DISABLED per user request (User prefers Normal layout even in Cute mode)
  const showEnglish = document.getElementById('en-switch') ? document.getElementById('en-switch').checked : false;
 
  // Construct English translation HTML if toggle is active
@@ -4286,7 +4286,7 @@
 
  } else {
  // Normal Mode (Default)
- const shouldHideEmoji = (currentViewMode === 'niedlich' || currentViewMode === 'cute') || searchTerm.startsWith('tag:') || searchTerm.includes('movimiento') || searchTerm.includes('estÃ¡tico') || searchTerm.includes('estÃ¡atico');
+ const shouldHideEmoji = (currentViewMode === 'niedlich' || currentViewMode === 'cute') || searchTerm.startsWith('tag:') || searchTerm.includes('movimiento') || searchTerm.includes('estÃ¡tico') || searchTerm.includes('estático');
  const cardHTML = `
  <div class="word-item">
  <div class="card-header">
@@ -4377,7 +4377,7 @@
  }
 
  if (searchTerm.length < 2) {
- cardsContainer.innerHTML = '<div class="cards-placeholder" style="text-align:center; padding: 20px; color: #666;">Geben Sie mindestÃ¡ens 2 Buchstaben ein, um in Wortfamilien zu suchen.</div>';
+ cardsContainer.innerHTML = '<div class="cards-placeholder" style="text-align:center; padding: 20px; color: #666;">Geben Sie mindestens 2 Buchstaben ein, um in Wortfamilien zu suchen.</div>';
  if (searchCounter) searchCounter.textContent = '';
  return;
  }
@@ -4439,7 +4439,7 @@
  levelIndicator.style.opacity = '1';
  levelIndicator.style.pointerEvents = 'auto';
  }
- // RestÃ¡ore the current group
+ // Restore the current group
  renderVerbGroup();
  }
 
