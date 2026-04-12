@@ -1758,6 +1758,13 @@
                     { article: "die", word: "Bank", emoji: "🏦", translation_es: "banco", translation_en: "bank", example_de: "Ich gehe zur Bank.", example_es: "Voy al banco." },
                     { article: "die", word: "Blume", emoji: "🌸", translation_es: "flor", translation_en: "flower", example_de: "Die Blume ist schön.", example_es: "La flor es bonita." },
                     { article: "die", word: "Bushaltestelle", emoji: "🚏", translation_es: "parada de autobús", translation_en: "bus stop", example_de: "Ich warte an der Bushaltestelle.", example_es: "Espero en la parada de autobús." },
+                    { article: "die", word: "Ameise", emoji: "🐜", translation_es: "hormiga", translation_en: "ant", example_de: "Die Ameise trägt ein Blatt.", example_es: "La hormiga lleva una hoja." },
+                    { article: "die", word: "Biene", emoji: "🐝", translation_es: "abeja", translation_en: "bee", example_de: "Die Biene fliegt zu den Blumen.", example_es: "La abeja vuela hacia las flores." },
+                    { article: "die", word: "Fliege", emoji: "🪰", translation_es: "mosca", translation_en: "fly", example_de: "Die Fliege sitzt am Fenster.", example_es: "La mosca está en la ventana." },
+                    { article: "der", word: "Schmetterling", emoji: "🦋", translation_es: "mariposa", translation_en: "butterfly", example_de: "Der Schmetterling ist bunt.", example_es: "La mariposa es colorida." },
+                    { article: "die", word: "Mücke", emoji: "🦟", translation_es: "mosquito", translation_en: "mosquito", example_de: "Die Mücke sticht mich.", example_es: "El mosquito me pica." },
+                    { article: "der", word: "Käfer", emoji: "🪲", translation_es: "escarabajo", translation_en: "beetle", example_de: "Der Käfer sitzt auf dem Blatt.", example_es: "El escarabajo está sobre la hoja." },
+                    { article: "die", word: "Spinne", emoji: "🕷️", translation_es: "araña", translation_en: "spider", example_de: "Die Spinne baut ein Netz.", example_es: "La araña teje una red." },
                     { article: "die", word: "Katze", emoji: "🐱", translation_es: "gato", translation_en: "cat", example_de: "Die Katze schläft.", example_es: "El gato duerme." },
                     { article: "die", word: "Polizei", emoji: "👮", translation_es: "policía", translation_en: "police", example_de: "Ich rufe die Polizei.", example_es: "Llamo a la policía." },
                     { article: "die", word: "Post", emoji: "📮", translation_es: "oficina de correos", translation_en: "post office", example_de: "Ich gehe zur Post.", example_es: "Voy a correos." },
@@ -2304,6 +2311,8 @@
                 { article: "die", word: "Kollegin", emoji: "💼", translation_es: "compañera de trabajo", translation_en: "colleague", example_de: "Die Kollegin schreibt eine E-Mail.", example_es: "La compañera escribe un correo." },
                 { article: "die", word: "Kuh", emoji: "🐄", translation_es: "vaca", translation_en: "cow", example_de: "Die Kuh steht auf der Wiese.", example_es: "La vaca está en el prado." },
                 { article: "das", word: "Pferd", emoji: "🐎", translation_es: "caballo", translation_en: "horse", example_de: "Das Pferd läuft schnell.", example_es: "El caballo corre rápido." },
+                { article: "das", word: "Schaf", emoji: "🐑", translation_es: "oveja", translation_en: "sheep", example_de: "Das Schaf frisst Gras.", example_es: "La oveja come hierba." },
+                { article: "das", word: "Lamm", emoji: "🐑", translation_es: "cordero", translation_en: "lamb", example_de: "Das Lamm läuft neben dem Schaf.", example_es: "El cordero corre junto a la oveja." },
                 { article: "das", word: "Schwein", emoji: "🐖", translation_es: "cerdo", translation_en: "pig", example_de: "Das Schwein ist auf dem Bauernhof.", example_es: "El cerdo está en la granja." },
                 { article: "das", word: "Huhn", emoji: "🐓", translation_es: "gallina", translation_en: "chicken", example_de: "Das Huhn legt ein Ei.", example_es: "La gallina pone un huevo." },
                 { article: "der", word: "Saft", emoji: "🧃", translation_es: "zumo", translation_en: "juice", example_de: "Der Saft ist frisch.", example_es: "El zumo está fresco." },
@@ -2993,6 +3002,14 @@
                 nouns: pickThemeNouns(["der|bar", "der|frosch", "der|vogel", "der|fisch", "das|kaninchen", "der|hase", "der|lowe"])
             },
             {
+                id: "insekten",
+                title: "Insekten",
+                title_es: "Insectos",
+                title_en: "Insects",
+                level: "A1",
+                nouns: pickThemeNouns(["die|ameise", "die|biene", "die|fliege", "der|schmetterling", "die|mucke", "der|kafer", "die|spinne"])
+            },
+            {
                 id: "haustiere",
                 title: "Haustiere",
                 title_es: "Mascotas",
@@ -3006,7 +3023,7 @@
                 title_es: "Granja",
                 title_en: "Farm",
                 level: "A1",
-                nouns: pickThemeNouns(["die|kuh", "das|pferd", "das|schwein", "das|huhn"])
+                nouns: pickThemeNouns(["die|kuh", "das|pferd", "das|schaf", "das|lamm", "das|schwein", "das|huhn"])
             },
             {
                 id: "verkehr",
@@ -3548,6 +3565,7 @@
             natur: "A1",
             wetter: "A1",
             tiere: "A1",
+            insekten: "A1",
             haustiere: "A1",
             bauernhof: "A1",
             obst: "A1",
@@ -4172,6 +4190,9 @@
             if (normalizeSearchText(noun.word) === 'krankenschwester') {
                 modalNoteBlock.hidden = false;
                 modalNoteText.textContent = 'Krankenschwester se entiende perfectamente, pero hoy también se usa mucho die Pflegefachkraft en contextos más modernos y neutrales.';
+            } else if (normalizeSearchText(noun.word) === 'spinne') {
+                modalNoteBlock.hidden = false;
+                modalNoteText.textContent = 'Nota: no es insecto biológicamente, pero en vocabulario básico suele ir junto con ellos.';
             } else {
                 modalNoteBlock.hidden = true;
                 modalNoteText.textContent = '';
