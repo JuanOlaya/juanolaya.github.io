@@ -1290,22 +1290,28 @@
         }
 
         .level-footer {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+            display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
             padding: 12px 18px;
             color: #ffffff;
             margin-top: auto;
             border-top: 1px solid rgba(255, 255, 255, 0.12);
         }
 
+        .level-footer-content {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+            min-width: 0;
+        }
+
         .level-footer-theme {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            justify-self: start;
-            min-width: 0;
             font-size: 1rem;
             font-weight: 800;
             cursor: pointer;
@@ -1317,13 +1323,7 @@
             text-overflow: ellipsis;
         }
 
-        .level-footer-center {
-            justify-self: center;
-            min-width: 0;
-        }
-
         .level-footer-translation {
-            justify-self: end;
             min-width: 0;
             font-size: 0.95rem;
             font-style: italic;
@@ -4720,6 +4720,9 @@
             footer.className = 'level-footer';
             footer.style.backgroundColor = color;
 
+            const footerContent = document.createElement('div');
+            footerContent.className = 'level-footer-content';
+
             const footerTheme = document.createElement('div');
             footerTheme.className = 'level-footer-theme';
             footerTheme.title = `Aussprache: ${spokenTitle}`;
@@ -4732,9 +4735,6 @@
             footerThemeText.className = 'level-footer-theme-text';
             footerThemeText.innerHTML = highlightText(title, highlightQuery);
             footerTheme.appendChild(footerThemeText);
-
-            const footerCenter = document.createElement('div');
-            footerCenter.className = 'level-footer-center';
 
             const footerTranslation = document.createElement('span');
             footerTranslation.className = 'level-footer-translation kompakt-theme-translation';
@@ -4754,9 +4754,9 @@
                 }, color);
             };
 
-            footer.appendChild(footerTheme);
-            footer.appendChild(footerCenter);
-            footer.appendChild(footerTranslation);
+            footerContent.appendChild(footerTheme);
+            footerContent.appendChild(footerTranslation);
+            footer.appendChild(footerContent);
             card.appendChild(footer);
 
             return card;
