@@ -708,6 +708,13 @@
             margin-bottom: 18px;
         }
 
+        .theme-modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
         .theme-modal-table {
             width: 100%;
             border-collapse: collapse;
@@ -1153,6 +1160,22 @@
             min-width: 0;
         }
 
+        .level-header-level {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            color: #ffffff;
+            font-size: 0.78rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
         .level-header-audio {
             color: rgba(255, 255, 255, 0.92);
             opacity: 0.9;
@@ -1185,6 +1208,14 @@
             font-size: 0.85rem;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.82);
+            white-space: nowrap;
+        }
+
+        .level-header-label {
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.94);
+            text-transform: none;
             white-space: nowrap;
         }
 
@@ -1256,6 +1287,52 @@
         .audio-icon:hover {
             opacity: 1;
             transform: scale(1.1);
+        }
+
+        .level-footer {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+            align-items: center;
+            gap: 12px;
+            padding: 12px 18px;
+            color: #ffffff;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .level-footer-theme {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            justify-self: start;
+            min-width: 0;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .level-footer-theme-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .level-footer-center {
+            justify-self: center;
+            min-width: 0;
+        }
+
+        .level-footer-translation {
+            justify-self: end;
+            min-width: 0;
+            font-size: 0.95rem;
+            font-style: italic;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.92);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
         }
 
         .audio-icon svg {
@@ -1448,6 +1525,11 @@
                     <div class="modal-variant-word" id="modal-feminine-word"></div>
                     <div class="modal-variant-translation" id="modal-feminine-translation"></div>
                 </div>
+                <div class="modal-variant" id="modal-variants-block" hidden>
+                    <div class="modal-variant-label">Varianten / Variantes</div>
+                    <div class="modal-variant-word" id="modal-variants-word"></div>
+                    <div class="modal-variant-translation" id="modal-variants-translation"></div>
+                </div>
             </div>
             <div class="modal-section">
                 <div class="modal-section-title">Beispiel / Ejemplo</div>
@@ -1473,6 +1555,7 @@
             </div>
             <div class="theme-modal-body">
                 <div class="theme-modal-subtitle" id="theme-modal-subtitle"></div>
+                <div class="theme-modal-tags" id="theme-modal-tags"></div>
                 <table class="theme-modal-table">
                     <thead>
                         <tr>
@@ -1753,6 +1836,7 @@
                     { article: "der", word: "Park", emoji: "🌳", translation_es: "parque", translation_en: "park", example_de: "Ich gehe in den Park.", example_es: "Voy al parque." },
                     { article: "der", word: "Platz", emoji: "🏛️", translation_es: "plaza", translation_en: "square", example_de: "Der Platz ist sehr schön.", example_es: "La plaza es muy bonita." },
                     { article: "der", word: "Bär", emoji: "🐻", translation_es: "oso", translation_en: "bear", example_de: "Der Bär lebt im Wald.", example_es: "El oso vive en el bosque." },
+                    { article: "die", word: "Maus", emoji: "🐭", translation_es: "ratón", translation_en: "mouse", example_de: "Die Maus läuft schnell ins Loch.", example_es: "El ratón corre rápido al agujero." },
                     { article: "der", word: "Zug", emoji: "🚆", translation_es: "tren", translation_en: "train", example_de: "Der Zug ist schnell.", example_es: "El tren es rápido." },
                     { article: "der", word: "Löwe", emoji: "🦁", translation_es: "león", translation_en: "lion", example_de: "Der Löwe ist ein starkes Tier.", example_es: "El león es un animal fuerte." },
                     { article: "die", word: "Bank", emoji: "🏦", translation_es: "banco", translation_en: "bank", example_de: "Ich gehe zur Bank.", example_es: "Voy al banco." },
@@ -2311,10 +2395,20 @@
                 { article: "die", word: "Kollegin", emoji: "💼", translation_es: "compañera de trabajo", translation_en: "colleague", example_de: "Die Kollegin schreibt eine E-Mail.", example_es: "La compañera escribe un correo." },
                 { article: "die", word: "Kuh", emoji: "🐄", translation_es: "vaca", translation_en: "cow", example_de: "Die Kuh steht auf der Wiese.", example_es: "La vaca está en el prado." },
                 { article: "das", word: "Pferd", emoji: "🐎", translation_es: "caballo", translation_en: "horse", example_de: "Das Pferd läuft schnell.", example_es: "El caballo corre rápido." },
+                { article: "die", word: "Ziege", emoji: "🐐", translation_es: "cabra", translation_en: "goat", example_de: "Die Ziege frisst Gras.", example_es: "La cabra come hierba." },
                 { article: "das", word: "Schaf", emoji: "🐑", translation_es: "oveja", translation_en: "sheep", example_de: "Das Schaf frisst Gras.", example_es: "La oveja come hierba." },
                 { article: "das", word: "Lamm", emoji: "🐑", translation_es: "cordero", translation_en: "lamb", example_de: "Das Lamm läuft neben dem Schaf.", example_es: "El cordero corre junto a la oveja." },
                 { article: "das", word: "Schwein", emoji: "🐖", translation_es: "cerdo", translation_en: "pig", example_de: "Das Schwein ist auf dem Bauernhof.", example_es: "El cerdo está en la granja." },
+                { article: "der", word: "Hahn", emoji: "🐓", translation_es: "gallo", translation_en: "rooster", example_de: "Der Hahn kräht am Morgen.", example_es: "El gallo canta por la mañana." },
                 { article: "das", word: "Huhn", emoji: "🐓", translation_es: "gallina", translation_en: "chicken", example_de: "Das Huhn legt ein Ei.", example_es: "La gallina pone un huevo." },
+                { article: "die", word: "Pute", emoji: "🦃", translation_es: "pavo", translation_en: "turkey", example_de: "Die Pute läuft über den Hof.", example_es: "El pavo camina por el patio." },
+                { article: "der", word: "Truthahn", emoji: "🦃", translation_es: "pavo macho", translation_en: "turkey", example_de: "Der Truthahn ist größer als das Huhn.", example_es: "El pavo macho es más grande que la gallina." },
+                { article: "die", word: "Gans", emoji: "🪿", translation_es: "ganso", translation_en: "goose", example_de: "Die Gans schwimmt im Teich.", example_es: "El ganso nada en el estanque." },
+                { article: "die", word: "Ente", emoji: "🦆", translation_es: "pato", translation_en: "duck", example_de: "Die Ente schwimmt im Wasser.", example_es: "El pato nada en el agua." },
+                { article: "der", word: "Bauernhof", emoji: "🚜", translation_es: "granja", translation_en: "farm", example_de: "Der Bauernhof ist außerhalb der Stadt.", example_es: "La granja está fuera de la ciudad." },
+                { article: "der", word: "Stall", emoji: "🐄", translation_es: "establo", translation_en: "stable / barn", example_de: "Die Tiere schlafen im Stall.", example_es: "Los animales duermen en el establo." },
+                { article: "die", word: "Wiese", emoji: "🌿", translation_es: "prado", translation_en: "meadow", example_de: "Die Kuh steht auf der Wiese.", example_es: "La vaca está en el prado." },
+                { article: "der", word: "Traktor", emoji: "🚜", translation_es: "tractor", translation_en: "tractor", example_de: "Der Traktor fährt über das Feld.", example_es: "El tractor pasa por el campo." },
                 { article: "der", word: "Saft", emoji: "🧃", translation_es: "zumo", translation_en: "juice", example_de: "Der Saft ist frisch.", example_es: "El zumo está fresco." },
                 { article: "die", word: "Cola", emoji: "🥤", translation_es: "cola", translation_en: "cola", example_de: "Die Cola ist kalt.", example_es: "La cola está fría." },
                 { article: "die", word: "Suppe", emoji: "🍲", translation_es: "sopa", translation_en: "soup", example_de: "Die Suppe ist warm.", example_es: "La sopa está caliente." },
@@ -2999,7 +3093,8 @@
                 title_es: "Animales",
                 title_en: "Animals",
                 level: "A1",
-                nouns: pickThemeNouns(["der|bar", "der|frosch", "der|vogel", "der|fisch", "das|kaninchen", "der|hase", "der|lowe"])
+                tags: ["Tiere"],
+                nouns: pickThemeNouns(["der|bar", "der|frosch", "der|fisch", "das|kaninchen", "der|hase", "der|lowe", "die|maus"])
             },
             {
                 id: "insekten",
@@ -3010,12 +3105,30 @@
                 nouns: pickThemeNouns(["die|ameise", "die|biene", "die|fliege", "der|schmetterling", "die|mucke", "der|kafer", "die|spinne"])
             },
             {
+                id: "gefluegel",
+                title: "Geflügel",
+                title_es: "Aves de granja",
+                title_en: "Poultry",
+                level: "A1",
+                tags: ["Tiere"],
+                nouns: pickThemeNouns(["der|vogel", "die|ente", "der|hahn", "das|huhn", "die|pute", "der|truthahn", "die|gans"])
+            },
+            {
                 id: "haustiere",
                 title: "Haustiere",
                 title_es: "Mascotas",
                 title_en: "Pets",
                 level: "A1",
+                tags: ["Tiere"],
                 nouns: pickThemeNouns(["der|hund", "die|katze", "der|hamster"])
+            },
+            {
+                id: "nutztiere",
+                title: "Nutztiere",
+                title_es: "Animales de granja",
+                title_en: "Farm animals",
+                level: "A1",
+                nouns: pickThemeNouns(["die|kuh", "das|pferd", "die|ziege", "das|schaf", "das|lamm", "das|schwein"])
             },
             {
                 id: "bauernhof",
@@ -3023,7 +3136,8 @@
                 title_es: "Granja",
                 title_en: "Farm",
                 level: "A1",
-                nouns: pickThemeNouns(["die|kuh", "das|pferd", "das|schaf", "das|lamm", "das|schwein", "das|huhn"])
+                tags: ["Tiere"],
+                nouns: pickThemeNouns(["der|bauernhof", "der|bauer", "der|stall", "die|wiese", "der|traktor"])
             },
             {
                 id: "verkehr",
@@ -3566,7 +3680,9 @@
             wetter: "A1",
             tiere: "A1",
             insekten: "A1",
+            gefluegel: "A1",
             haustiere: "A1",
+            nutztiere: "A1",
             bauernhof: "A1",
             obst: "A1",
             fruechte: "A1",
@@ -3742,6 +3858,9 @@
         const modalFeminineBlock = document.getElementById('modal-feminine-block');
         const modalFeminineWord = document.getElementById('modal-feminine-word');
         const modalFeminineTranslation = document.getElementById('modal-feminine-translation');
+        const modalVariantsBlock = document.getElementById('modal-variants-block');
+        const modalVariantsWord = document.getElementById('modal-variants-word');
+        const modalVariantsTranslation = document.getElementById('modal-variants-translation');
         const themeModal = document.getElementById('theme-modal');
         const themeModalClose = document.getElementById('theme-modal-close');
         const themeModalHeader = document.getElementById('theme-modal-header-bg');
@@ -3749,6 +3868,7 @@
         const themeModalWord = document.getElementById('theme-modal-word');
         const themeModalTranslation = document.getElementById('theme-modal-translation');
         const themeModalSubtitle = document.getElementById('theme-modal-subtitle');
+        const themeModalTags = document.getElementById('theme-modal-tags');
         const themeModalTableBody = document.getElementById('theme-modal-table-body');
 
         // Tips Modal
@@ -4058,6 +4178,14 @@
                 el.textContent = currentTranslationLang === 'en' ? (el.dataset.en || '') : (el.dataset.es || '');
             });
 
+            document.querySelectorAll('.kompakt-card-label').forEach(el => {
+                el.textContent = currentTranslationLang === 'en' ? (el.dataset.en || '') : (el.dataset.es || '');
+            });
+
+            document.querySelectorAll('.kompakt-theme-translation').forEach(el => {
+                el.textContent = currentTranslationLang === 'en' ? (el.dataset.en || '') : (el.dataset.es || '');
+            });
+
             if (modal.classList.contains('visible') && currentModalNoun) {
                 renderModalContent(currentModalNoun, currentModalLevel);
             }
@@ -4140,6 +4268,9 @@
                 : (group.title_es || '');
             themeModalSubtitle.textContent = 'Singular- und Pluralformen der Wörter in dieser Gruppe';
             themeModalHeader.style.backgroundColor = color;
+            themeModalTags.innerHTML = (getGroupTags(group) || [])
+                .map(tag => `<span class="lid-badge">${escapeHtml(tag)}</span>`)
+                .join('');
 
             themeModalTableBody.innerHTML = group.nouns.map(noun => {
                 const singularVariant = getSingularVariant(noun);
@@ -4185,6 +4316,18 @@
                 modalFeminineBlock.hidden = true;
                 modalFeminineWord.textContent = '';
                 modalFeminineTranslation.textContent = '';
+            }
+
+            if (normalizeSearchText(noun.word) === 'huhn' || normalizeSearchText(noun.word) === 'hahn') {
+                modalVariantsBlock.hidden = false;
+                modalVariantsWord.innerHTML = 'das Hühnchen: pollito<br>das Hähnchen: pollo / pollo asado';
+                modalVariantsTranslation.innerHTML = currentTranslationLang === 'en'
+                    ? 'das Hühnchen: little chicken<br>das Hähnchen: chicken / roast chicken'
+                    : '';
+            } else {
+                modalVariantsBlock.hidden = true;
+                modalVariantsWord.innerHTML = '';
+                modalVariantsTranslation.innerHTML = '';
             }
 
             if (normalizeSearchText(noun.word) === 'krankenschwester') {
@@ -4280,8 +4423,13 @@
             return Array.isArray(group.tags) ? group.tags : [];
         }
 
+        function getHeaderTags(groupOrTags) {
+            const tags = Array.isArray(groupOrTags) ? groupOrTags : getGroupTags(groupOrTags);
+            return tags.filter(tag => normalizeSearchText(tag) !== 'tiere');
+        }
+
         function createTagMarkup(tags = []) {
-            return tags.map(tag => `<span class="lid-badge">${tag}</span>`).join('');
+            return getHeaderTags(tags).map(tag => `<span class="lid-badge">${tag}</span>`).join('');
         }
 
         function groupMatchesQuery(group, query) {
@@ -4291,6 +4439,10 @@
                 group.title_en,
                 ...getGroupTags(group)
             ];
+
+            if (getGroupTags(group).some(tag => normalizeSearchText(tag) === 'tiere')) {
+                fields.push('animal', 'animals', 'animales');
+            }
 
             return fields.some(field => normalizeSearchText(field).includes(query));
         }
@@ -4474,15 +4626,10 @@
             const headerText = document.createElement('div');
             headerText.className = 'level-header-text';
 
-            const titleSpan = document.createElement('span');
-            titleSpan.innerHTML = highlightText(title, highlightQuery);
-            titleSpan.style.cursor = 'pointer';
-            titleSpan.title = `Aussprache: ${spokenTitle}`;
-            titleSpan.onclick = (e) => {
-                e.stopPropagation();
-                speak(spokenTitle);
-            };
-            headerText.appendChild(titleSpan);
+            const levelBadge = document.createElement('span');
+            levelBadge.className = 'level-header-level';
+            levelBadge.textContent = level;
+            headerText.appendChild(levelBadge);
 
             const headerSpeaker = document.createElement('span');
             headerSpeaker.className = 'audio-icon level-header-audio';
@@ -4500,33 +4647,19 @@
 
             const headerTags = document.createElement('div');
             headerTags.className = 'level-header-tags';
-            tags.forEach(tag => {
+            getHeaderTags(tags).forEach(tag => {
                 const badge = document.createElement('span');
                 badge.className = 'lid-badge';
                 badge.textContent = tag;
                 headerTags.appendChild(badge);
             });
 
-            if (titleEs || titleEn) {
-                const translationSpan = document.createElement('span');
-                translationSpan.className = 'level-header-translation';
-                translationSpan.dataset.es = titleEs || '';
-                translationSpan.dataset.en = titleEn || '';
-                translationSpan.innerHTML = highlightText(currentTranslationLang === 'en' ? (titleEn || '') : (titleEs || ''), highlightQuery);
-                translationSpan.style.cursor = 'pointer';
-                translationSpan.title = 'Mehr Infos / Abrir grupo';
-                translationSpan.onclick = (e) => {
-                    e.stopPropagation();
-                    openThemeModal({
-                        title: spokenTitle,
-                        title_es: titleEs || '',
-                        title_en: titleEn || '',
-                        level,
-                        nouns
-                    }, color);
-                };
-                headerMeta.appendChild(translationSpan);
-            }
+            const headerLabel = document.createElement('span');
+            headerLabel.className = 'level-header-label kompakt-card-label';
+            headerLabel.dataset.es = 'sustantivos';
+            headerLabel.dataset.en = 'nouns';
+            headerLabel.textContent = currentTranslationLang === 'en' ? 'nouns' : 'sustantivos';
+            headerMeta.appendChild(headerLabel);
 
             header.appendChild(headerText);
             header.appendChild(headerTags);
@@ -4582,6 +4715,49 @@
             content.appendChild(table);
             card.appendChild(header);
             card.appendChild(content);
+
+            const footer = document.createElement('div');
+            footer.className = 'level-footer';
+            footer.style.backgroundColor = color;
+
+            const footerTheme = document.createElement('div');
+            footerTheme.className = 'level-footer-theme';
+            footerTheme.title = `Aussprache: ${spokenTitle}`;
+            footerTheme.onclick = (e) => {
+                e.stopPropagation();
+                speak(spokenTitle);
+            };
+
+            const footerThemeText = document.createElement('span');
+            footerThemeText.className = 'level-footer-theme-text';
+            footerThemeText.innerHTML = highlightText(title, highlightQuery);
+            footerTheme.appendChild(footerThemeText);
+
+            const footerCenter = document.createElement('div');
+            footerCenter.className = 'level-footer-center';
+
+            const footerTranslation = document.createElement('span');
+            footerTranslation.className = 'level-footer-translation kompakt-theme-translation';
+            footerTranslation.dataset.es = titleEs || '';
+            footerTranslation.dataset.en = titleEn || '';
+            footerTranslation.innerHTML = highlightText(currentTranslationLang === 'en' ? (titleEn || '') : (titleEs || ''), highlightQuery);
+            footerTranslation.title = 'Mehr Infos / Abrir grupo';
+            footerTranslation.onclick = (e) => {
+                e.stopPropagation();
+                openThemeModal({
+                    title: spokenTitle,
+                    title_es: titleEs || '',
+                    title_en: titleEn || '',
+                    level,
+                    nouns,
+                    tags
+                }, color);
+            };
+
+            footer.appendChild(footerTheme);
+            footer.appendChild(footerCenter);
+            footer.appendChild(footerTranslation);
+            card.appendChild(footer);
 
             return card;
         }
