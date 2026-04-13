@@ -6,7 +6,7 @@
  let allGroupsIndex = []; // Full groups index from verbs_index.json for reliable theme search
  let fileIndexData = null; // Existing JSON files by folder to avoid noisy 404 fetches
  let searchScope = 'verbs'; // 'verbs' or 'wortfamilie'
- let wortfamilieIndex = null; // Lazy-loaded index for Wortfamilie search
+let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cache/background load
  const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "FÃ¼nfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "ZwÃ¶lfte", "Dreizehnte"];
  const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "FÃ¼nftes", "Sechstes", "Siebtes", "Achtes"];
  const savedStories = [
@@ -141,12 +141,15 @@
  let modalSessionId = 0;
  let isRestoringModalTab = false;
  let storyClickCounter = 0;
- let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
- const CACHE_KEY = 'verbAppCache_v42_utf8_normalized';
- const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
- let cachePersistTimeout = null;
- let cachePersistenceDisabled = false;
- const lazyExampleLoadPromises = new Map();
+let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
+const CACHE_KEY = 'verbAppCache_v43_wortfamilie_search_ready';
+const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
+let cachePersistTimeout = null;
+let cachePersistenceDisabled = false;
+let cacheHydrated = false;
+let hydratedCacheVersion = null;
+const PRELOAD_CONJUGATIONS_IN_BACKGROUND = true;
+const lazyExampleLoadPromises = new Map();
  const HEAVY_VERB_DATA_KEYS = [
  'praesens',
  'praesens_examples',
@@ -457,6 +460,7 @@
  verbGroupsByLevel,
  allGroupsIndex,
  fileIndexData,
+ wortfamilieIndex,
  lastUpdated: appVersion || new Date().toISOString(),
  timestamp: Date.now(),
  cacheMode: compact ? 'compact' : 'full'
@@ -509,7 +513,7 @@
  }, 250);
  }
 
- function hydrateFromLocalCache() {
+function hydrateFromLocalCache() {
  try {
  const cached = localStorage.getItem(CACHE_KEY);
  if (!cached) return false;
@@ -521,15 +525,22 @@
  verbGroupsByLevel = data.verbGroupsByLevel;
  allGroupsIndex = Array.isArray(data.allGroupsIndex) ? data.allGroupsIndex : [];
  fileIndexData = data.fileIndexData || null;
+ if (data.wortfamilieIndex && typeof data.wortfamilieIndex === 'object') {
+ wortfamilieIndex = data.wortfamilieIndex;
+ }
  if (data.lastUpdated) {
  appVersion = data.lastUpdated;
+ hydratedCacheVersion = data.lastUpdated;
  }
+ cacheHydrated = true;
  return true;
  } catch (e) {
  console.warn("Failed to hydrate from local cache", e);
+ cacheHydrated = false;
+ hydratedCacheVersion = null;
  return false;
  }
- }
+}
 
  function hasCachedGroup(levelKey, groupIndex) {
  const group = verbGroupsByLevel[levelKey] && verbGroupsByLevel[levelKey][groupIndex];
@@ -580,7 +591,7 @@
  }
  }
 
- async function loadBackgroundData() {
+async function loadBackgroundData() {
  let remoteVersion = null;
 
  // 1. Check for updates (Version Check)
@@ -593,10 +604,26 @@
  if (remoteVersion) {
  appVersion = remoteVersion;
  }
- console.log("Remote version:", remoteVersion);
- }
+  console.log("Remote version:", remoteVersion);
+  }
  } catch (e) {
  console.warn("Version check failed (offline?)", e);
+ }
+
+ const cacheMatchesRemoteVersion =
+ cacheHydrated && hydratedCacheVersion && remoteVersion && hydratedCacheVersion === remoteVersion;
+
+ if (cacheHydrated && (!remoteVersion || cacheMatchesRemoteVersion)) {
+ if (!wortfamilieIndex) {
+ await loadWortfamilieIndex();
+ scheduleCachePersist();
+ }
+ console.log("Skipping background load because local cache already matches the current version.");
+ loadingProgressState = { cards: 100, conjugations: 100 };
+ updateLoadingProgress(100, 'cards');
+ updateLoadingProgress(100, 'conjugations');
+ isBackgroundLoading = false;
+ return;
  }
 
  // 2. Try to load from LocalStorage
@@ -620,8 +647,15 @@
  if (!fileIndexData && data.fileIndexData) {
  fileIndexData = data.fileIndexData;
  }
+ if (data.wortfamilieIndex && typeof data.wortfamilieIndex === 'object') {
+ wortfamilieIndex = data.wortfamilieIndex;
+ }
  if (data.lastUpdated) {
  appVersion = data.lastUpdated;
+ }
+ if (!wortfamilieIndex) {
+ await loadWortfamilieIndex();
+ scheduleCachePersist();
  }
  loadingProgressState = { cards: 100, conjugations: 100 };
  updateLoadingProgress(100, 'cards');
@@ -722,6 +756,10 @@
 
  updateLoadingProgress(100, 'cards');
 
+ await loadWortfamilieIndex();
+ scheduleCachePersist();
+
+ if (PRELOAD_CONJUGATIONS_IN_BACKGROUND) {
  const verbsNeedingConjugations = Object.keys(allVerbsData).filter(verbName => {
  const verbData = allVerbsData[verbName] || {};
  if (!verbData.praesens || !verbData.praeteritum_conjugations) {
@@ -740,6 +778,9 @@
  if (i + CONJUGATION_BATCH_SIZE < verbsNeedingConjugations.length) {
  await new Promise(r => setTimeout(r, 15));
  }
+ }
+ } else {
+ loadingProgressState.conjugations = 100;
  }
 
  console.log("Background loading complete.");
@@ -876,14 +917,14 @@
  : Promise.resolve({});
 
  const fetchPromises = [
- maybeFetchJson('conjugations/praesens'),
- maybeFetchJson('conjugations/praeteritum')
+ maybeFetchJson('praesens'),
+ maybeFetchJson('praeteritum_konjugation')
  ];
 
  // Add Konjunktiv II data for specific verbs
- if (konjunktivVerbs.includes(verbName) && fileExistsInIndex('conjugations/konjunktiv_ii', verbName)) {
+ if (konjunktivVerbs.includes(verbName) && fileExistsInIndex('konjunktiv_ii', verbName)) {
  fetchPromises.push(
- fetch(`json/conjugations/konjunktiv_ii/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
+ fetch(`json/konjunktiv_ii/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
  );
  }
 
@@ -922,8 +963,8 @@
  }
 
  const query = appVersion ? `?v=${appVersion}` : '';
- const praesensData = fileExistsInIndex('conjugations/praesens', verbName)
- ? await fetch(`json/conjugations/praesens/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
+ const praesensData = fileExistsInIndex('praesens', verbName)
+ ? await fetch(`json/praesens/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
  : {};
 
  const safeMerge = (target, source) => {
@@ -967,7 +1008,7 @@
  wortfamilieData
  ] = await Promise.all([
  konjunktivVerbs.includes(verbName) && !existingData.konjunktiv_ii
- ? maybeFetchJson('conjugations/konjunktiv_ii', {})
+ ? maybeFetchJson('konjunktiv_ii', {})
  : Promise.resolve({}),
  !shouldRefetchWortfamilie
  ? Promise.resolve({ wortfamilie: existingData.wortfamilie || [] })
@@ -1105,7 +1146,7 @@
  ? maybeFetchJson('examples/praeteritum_examples', {})
  : Promise.resolve({}),
  !existingData.praeteritum_conjugations
- ? maybeFetchJson('conjugations/praeteritum', {})
+ ? maybeFetchJson('praeteritum_konjugation', {})
  : Promise.resolve({})
  ]);
 
@@ -1126,7 +1167,7 @@
  ? maybeFetchJson('examples/konjunktiv_ii_examples', {})
  : Promise.resolve({}),
  (konjunktivVerbs.includes(verbName) && !existingData.konjunktiv_ii)
- ? maybeFetchJson('conjugations/konjunktiv_ii', {})
+ ? maybeFetchJson('konjunktiv_ii', {})
  : Promise.resolve({})
  ]);
 
@@ -1198,58 +1239,6 @@
  isRestoringModalTab = true;
  fallbackButton.click();
  isRestoringModalTab = false;
- }
- }
-
- // --- LAZY LOAD WORTFAMILIE INDEX ---
- async function loadWortfamilieIndex() {
- if (wortfamilieIndex !== null) return; // Already loaded
-
- console.log('Lazy loading Wortfamilie index...');
- const cardsContainer = document.getElementById('cards-container');
- cardsContainer.innerHTML = '<div class="loading-spinner">Wortfamilie wird geladen...</div>';
-
- const index = [];
- const verbs = Object.keys(allVerbsData);
- const BATCH_SIZE = 20;
-
- for (let i = 0; i < verbs.length; i += BATCH_SIZE) {
- const batch = verbs.slice(i, i + BATCH_SIZE);
- const promises = batch.map(verb =>
- fetch(`json/wortfamilie/${verb}.json${appVersion ? '?v=' + appVersion : ''}`)
- .then(res => res.ok ? parseJsonUtf8(res) : null)
- .then(data => {
- if (data && data.wortfamilie) {
- data.wortfamilie.forEach(item => {
- if (item && (item.word || item.es)) {
- index.push({
- word: item.word || '',
- type: item.type || '',
- es: item.es || '',
- en: item.en || '',
- verb: verb, // Parent verb
- level: item.level || ''
- });
- }
- });
- }
- })
- .catch(() => { }) // Ignore missing files
- );
- await Promise.all(promises);
- }
-
- wortfamilieIndex = index;
- console.log(`Wortfamilie index loaded with ${index.length} entries.`);
-
- // Only clear loading message if we are NOT about to search immediately
- // Actually, performSearch will handle clearing or showing results.
-
- // If we are still in wortfamilie scope, re-run search
- if (searchScope === 'wortfamilie') {
- performSearch();
- } else {
- cardsContainer.innerHTML = ''; // Clear loading message if user switched away
  }
  }
 
@@ -2018,7 +2007,11 @@
  ? loadAllGroupsForLevel(currentLevel)
  : loadGroupData(currentLevel, currentGroupInLevel));
 
- initialLoadPromise
+ const initialWortfamiliePromise = wortfamilieIndex
+ ? Promise.resolve(wortfamilieIndex)
+ : loadWortfamilieIndex().catch(() => null);
+
+ Promise.all([initialLoadPromise, initialWortfamiliePromise])
  .then(() => {
  renderVerbGroup();
  // Start background loading after initial render
@@ -3590,10 +3583,10 @@
  const searchCounter = document.getElementById('search-counter');
 
  // --- UNIFIED SEARCH LOGIC ---
- // wortfamilieIndex is defined globally
+ // wortfamilieIndex is preloaded for search and refreshed through cache/version checks
  let isLoadingWortfamilie = false;
 
- async function loadWortfamilieIndex() {
+async function loadWortfamilieIndex() {
  if (wortfamilieIndex) return wortfamilieIndex;
  if (isLoadingWortfamilie) return null; // Prevent double loading
 
@@ -3609,6 +3602,7 @@
  throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
  }
  wortfamilieIndex = await parseJsonUtf8(response);
+ scheduleCachePersist();
  console.log("Wortfamilie Index loaded successfully.");
  return wortfamilieIndex;
  } catch (error) {
