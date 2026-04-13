@@ -35,7 +35,6 @@ const ASSETS_TO_CACHE = [
     './Sprechen/interjecciones.html',
     './Sprechen/a1.html',
     // Common Assets
-    'https://cdn.tailwindcss.com', // Critical for sub-pages
     './images/german_flag.png'
 ];
 
@@ -52,6 +51,11 @@ self.addEventListener('install', (event) => {
 
 // Fetch Event: Network First, Fallback to Cache
 self.addEventListener('fetch', (event) => {
+    const requestUrl = new URL(event.request.url);
+    if (requestUrl.origin !== self.location.origin) {
+        return;
+    }
+
     event.respondWith(
         fetch(event.request)
             .then((response) => {
