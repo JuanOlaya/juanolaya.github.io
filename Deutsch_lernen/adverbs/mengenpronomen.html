@@ -701,6 +701,55 @@
             font-weight: 900;
         }
 
+        .word-level-tag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 38px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.68rem;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            line-height: 1;
+            border: 1px solid transparent;
+            flex-shrink: 0;
+        }
+
+        .level-tag-a {
+            background: #ffd9e6;
+            border-color: #dc7fa0;
+            color: #8a244b;
+        }
+
+        .level-tag-b {
+            background: #dcebff;
+            border-color: #7aaee6;
+            color: #124f87;
+        }
+
+        .card-footer.a1 .card-footer-level,
+        .card-footer.a2 .card-footer-level {
+            background: #ffd9e6;
+            border-color: #dc7fa0;
+            color: #8a244b;
+        }
+
+        .card-footer.b1 .card-footer-level,
+        .card-footer.b2 .card-footer-level {
+            background: #dcebff;
+            border-color: #7aaee6;
+            color: #124f87;
+        }
+
+        @media print {
+            .word-level-tag,
+            .card-footer-level {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
 
         .example-sent {
             display: block;
@@ -807,22 +856,20 @@
 
         <!-- MAIN CONTENT GRID -->
         <div class="grid-layout">
-
             <!-- A1 LEVEL -->
             <div class="level-card">
                 <div class="level-header a1">
-                    <span>A1 – Básico</span>
+                    <span>A1 &ndash; B&aacute;sico</span>
                 </div>
                 <div class="level-content">
                     <table>
                         <tbody>
-                            <!-- NEW WORD -->
                             <tr onclick="openWordModal('nichts', 'nada (0%)', 'Ich habe nichts gesehen.', 'No he visto nada.')">
                                 <td>
                                     <div class="german-word">nichts</div>
                                 </td>
                                 <td class="spanish-word">
-                                    nada (0%)
+                                    nada (0%) <span class="word-level-tag level-tag-a">A1</span>
                                 </td>
                             </tr>
                             <tr onclick="openWordModal('etwas', 'algo / un poco', 'Ich moechte etwas essen.', 'Quiero comer algo.')">
@@ -830,24 +877,7 @@
                                     <div class="german-word">etwas</div>
                                 </td>
                                 <td class="spanish-word">
-                                    algo / un poco
-                                </td>
-                            </tr>
-                            <tr onclick="openWordModal('jemand', 'alguien', 'Jemand wartet draußen.', 'Alguien espera afuera.')">
-                                <td>
-                                    <div class="german-word">jemand</div>
-                                </td>
-                                <td class="spanish-word">
-                                    alguien
-                                </td>
-                            </tr>
-                            <!-- NEW WORD -->
-                            <tr onclick="openWordModal('niemand', 'nadie', 'Niemand ist zu Hause.', 'Nadie está en casa.')">
-                                <td>
-                                    <div class="german-word">niemand</div>
-                                </td>
-                                <td class="spanish-word">
-                                    nadie
+                                    algo / un poco <span class="word-level-tag level-tag-a">A1</span>
                                 </td>
                             </tr>
                             <tr onclick="openWordModal('alle', 'todos (100%)', 'Alle kommen.', 'Todos vienen.')">
@@ -855,15 +885,15 @@
                                     <div class="german-word">alle</div>
                                 </td>
                                 <td class="spanish-word">
-                                    todos (100%)
+                                    todos (100%) <span class="word-level-tag level-tag-a">A1</span>
                                 </td>
                             </tr>
-                            <tr onclick="openWordModal('viel oder viele', 'mucho(s)', 'Viele arbeiten hier.', 'Muchos trabajan aquí.')">
+                            <tr onclick="openWordModal('viel oder viele', 'mucho(s)', 'Viele arbeiten hier.', 'Muchos trabajan aqu&iacute;.')">
                                 <td>
                                     <div class="german-word" data-speak="viel oder viele">viel(e)</div>
                                 </td>
                                 <td class="spanish-word">
-                                    mucho(s)
+                                    mucho(s) <span class="word-level-tag level-tag-a">A1</span>
                                 </td>
                             </tr>
                             <tr onclick="openWordModal('wenig oder wenige', 'poco(s)', 'Wenige verstehen das.', 'Pocos entienden eso.')">
@@ -871,30 +901,44 @@
                                     <div class="german-word" data-speak="wenig oder wenige">wenig(e)</div>
                                 </td>
                                 <td class="spanish-word">
-                                    poco(s)
+                                    poco(s) <span class="word-level-tag level-tag-a">A1</span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer a1"><span class="card-footer-tag card-footer-level">A1</span><span class="card-footer-tag">pronombre</span></div>
+                <div class="card-footer a1"><span class="card-footer-tag card-footer-level">A1</span><span class="card-footer-tag">Goethe</span></div>
             </div>
-
             <!-- A2 LEVEL -->
             <div class="level-card">
                 <div class="level-header a2">
-                    <span>A2 – Expansión</span>
+                    <span>A2 &ndash; Expansi&oacute;n</span>
                 </div>
                 <div class="level-content">
                     <table>
                         <tbody>
-                            <!-- NEW WORD -->
                             <tr onclick="openWordModal('ein paar', 'unos pocos / un par', 'Ich kenne ein paar.', 'Conozco a unos pocos.')">
                                 <td>
                                     <div class="german-word" style="text-transform: none;">ein paar</div>
                                 </td>
                                 <td class="spanish-word">
-                                    unos pocos / un par
+                                    unos pocos / un par <span class="word-level-tag level-tag-a">A2</span>
+                                </td>
+                            </tr>
+                            <tr onclick="openWordModal('jemand', 'alguien', 'Jemand wartet drau&szlig;en.', 'Alguien espera afuera.')">
+                                <td>
+                                    <div class="german-word">jemand</div>
+                                </td>
+                                <td class="spanish-word">
+                                    alguien <span class="word-level-tag level-tag-a">A2</span>
+                                </td>
+                            </tr>
+                            <tr onclick="openWordModal('niemand', 'nadie', 'Niemand ist zu Hause.', 'Nadie est&aacute; en casa.')">
+                                <td>
+                                    <div class="german-word">niemand</div>
+                                </td>
+                                <td class="spanish-word">
+                                    nadie <span class="word-level-tag level-tag-a">A2</span>
                                 </td>
                             </tr>
                             <tr onclick="openWordModal('einige', 'algunos', 'Einige fehlen heute.', 'Algunos faltan hoy.')">
@@ -902,61 +946,31 @@
                                     <div class="german-word">einige</div>
                                 </td>
                                 <td class="spanish-word">
-                                    algunos
+                                    algunos <span class="word-level-tag level-tag-a">A2</span>
                                 </td>
                             </tr>
-                            <tr onclick="openWordModal('mehrere', 'varios', 'Mehrere haben gefragt.', 'Varios han preguntado.')">
-                                <td>
-                                    <div class="german-word">mehrere</div>
-                                </td>
-                                <td class="spanish-word">
-                                    varios
-                                </td>
-                            </tr>
-                            <tr onclick="openWordModal('manche', 'algunos / unos', 'Manche mögen Kaffee.', 'A algunos les gusta el café.')">
+                            <tr onclick="openWordModal('manche', 'algunos / unos', 'Manche m&ouml;gen Kaffee.', 'A algunos les gusta el caf&eacute;.')">
                                 <td>
                                     <div class="german-word">manche</div>
                                 </td>
                                 <td class="spanish-word">
-                                    algunos / unos
+                                    algunos / unos <span class="word-level-tag level-tag-a">A2</span>
                                 </td>
                             </tr>
-                            <tr onclick="openWordModal('beide, beiden, alle beide', 'ambos / los dos', 'Beide sind da. Ich helfe beiden.', 'Ambos están aquí. Ayudo a ambos.')">
+                            <tr onclick="openWordModal('beide, beiden, alle beide', 'ambos / los dos', 'Beide sind da. Ich helfe beiden.', 'Ambos est&aacute;n aqu&iacute;. Ayudo a ambos.')">
                                 <td>
                                     <div class="german-word" data-speak="beide, beiden, alle beide">beide / beiden / alle beide</div>
                                 </td>
                                 <td class="spanish-word">
-                                    ambos / los dos
+                                    ambos / los dos <span class="word-level-tag level-tag-a">A2</span>
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="card-footer a2"><span class="card-footer-tag card-footer-level">A2</span><span class="card-footer-tag">pronombre</span></div>
-            </div>
-
-            <!-- B1 LEVEL -->
-            <div class="level-card">
-                <div class="level-header b1">
-                    <span>B1 – Intermedio</span>
-                </div>
-                <div class="level-content">
-                    <table>
-                        <tbody>
-                            <tr onclick="openWordModal('die meisten', 'la mayoría', 'Die meisten arbeiten hier.', 'La mayoría trabaja aquí.')">
+                            <tr onclick="openWordModal('die meisten', 'la mayor&iacute;a', 'Die meisten arbeiten hier.', 'La mayor&iacute;a trabaja aqu&iacute;.')">
                                 <td>
                                     <div class="german-word">die meisten</div>
                                 </td>
                                 <td class="spanish-word">
-                                    la mayoría
-                                </td>
-                            </tr>
-                            <tr onclick="openWordModal('die wenigsten', 'la minoría', 'Die wenigsten wissen das.', 'Muy pocos saben eso.')">
-                                <td>
-                                    <div class="german-word">die wenigsten</div>
-                                </td>
-                                <td class="spanish-word">
-                                    la minoría
+                                    la mayor&iacute;a <span class="word-level-tag level-tag-a">A2</span>
                                 </td>
                             </tr>
                             <tr onclick="openWordModal('genug', 'suficiente', 'Genug ist genug.', 'Suficiente es suficiente.')">
@@ -964,67 +978,95 @@
                                     <div class="german-word">genug</div>
                                 </td>
                                 <td class="spanish-word">
-                                    suficiente
-                                </td>
-                            </tr>
-                            <tr onclick="openWordModal('zu viele', 'demasiados', 'Zu viele denken so.', 'Demasiados piensan así.')">
-                                <td>
-                                    <div class="german-word">zu viele</div>
-                                </td>
-                                <td class="spanish-word">
-                                    demasiados
+                                    suficiente <span class="word-level-tag level-tag-a">A2</span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer b1"><span class="card-footer-tag card-footer-level">B1</span><span class="card-footer-tag">pronombre</span></div>
+                <div class="card-footer a2"><span class="card-footer-tag card-footer-level">A2</span><span class="card-footer-tag">Goethe</span></div>
             </div>
-
-            <!-- B2 LEVEL -->
+            <!-- B1 LEVEL -->
             <div class="level-card">
-                <div class="level-header b2">
-                    <span>B2 – Avanzado</span>
+                <div class="level-header b1">
+                    <span>B1 &ndash; Intermedio</span>
                 </div>
                 <div class="level-content">
                     <table>
                         <tbody>
+                            <tr onclick="openWordModal('mehrere', 'varios', 'Mehrere haben gefragt.', 'Varios han preguntado.')">
+                                <td>
+                                    <div class="german-word">mehrere</div>
+                                </td>
+                                <td class="spanish-word">
+                                    varios <span class="word-level-tag level-tag-b">B1</span>
+                                </td>
+                            </tr>
+                            <tr onclick="openWordModal('zu viele', 'demasiados', 'Zu viele denken so.', 'Demasiados piensan as&iacute;.')">
+                                <td>
+                                    <div class="german-word">zu viele</div>
+                                </td>
+                                <td class="spanish-word">
+                                    demasiados <span class="word-level-tag level-tag-b">B1</span>
+                                </td>
+                            </tr>
+                            <tr onclick="openWordModal('zahlreiche', 'numerosos', 'Zahlreiche sind betroffen.', 'Numerosos est&aacute;n afectados.')">
+                                <td>
+                                    <div class="german-word">zahlreiche</div>
+                                </td>
+                                <td class="spanish-word">
+                                    numerosos <span class="word-level-tag level-tag-b">B1</span>
+                                </td>
+                            </tr>
+                            <tr onclick="openWordModal('s&auml;mtliche', 'todos (formal)', 'S&auml;mtliche wurden informiert.', 'Todos fueron informados.')">
+                                <td>
+                                    <div class="german-word">s&auml;mtliche</div>
+                                </td>
+                                <td class="spanish-word">
+                                    todos (formal) <span class="word-level-tag level-tag-b">B1</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer b1"><span class="card-footer-tag card-footer-level">B1</span><span class="card-footer-tag">Goethe / OeSD</span></div>
+            </div>
+            <!-- B2 LEVEL -->
+            <div class="level-card">
+                <div class="level-header b2">
+                    <span>B2 &ndash; Avanzado</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <tbody>
+                            <tr onclick="openWordModal('die wenigsten', 'la minor&iacute;a', 'Die wenigsten wissen das.', 'Muy pocos saben eso.')">
+                                <td>
+                                    <div class="german-word">die wenigsten</div>
+                                </td>
+                                <td class="spanish-word">
+                                    la minor&iacute;a <span class="word-level-tag level-tag-b">B2</span>
+                                </td>
+                            </tr>
                             <tr onclick="openWordModal('etliche', 'bastantes', 'Etliche haben protestiert.', 'Bastantes han protestado.')">
                                 <td>
                                     <div class="german-word">etliche</div>
                                 </td>
                                 <td class="spanish-word">
-                                    bastantes
+                                    bastantes <span class="word-level-tag level-tag-b">B2</span>
                                 </td>
                             </tr>
-                            <tr onclick="openWordModal('unzählige', 'innumerables', 'Unzählige leiden darunter.', 'Innumerables sufren por ello.')">
+                            <tr onclick="openWordModal('unz&auml;hlige', 'innumerables', 'Unz&auml;hlige leiden darunter.', 'Innumerables sufren por ello.')">
                                 <td>
-                                    <div class="german-word">unzählige</div>
+                                    <div class="german-word">unz&auml;hlige</div>
                                 </td>
                                 <td class="spanish-word">
-                                    innumerables
-                                </td>
-                            </tr>
-                            <tr onclick="openWordModal('zahlreiche', 'numerosos', 'Zahlreiche sind betroffen.', 'Numerosos están afectados.')">
-                                <td>
-                                    <div class="german-word">zahlreiche</div>
-                                </td>
-                                <td class="spanish-word">
-                                    numerosos
-                                </td>
-                            </tr>
-                            <tr onclick="openWordModal('sämtliche', 'todos (formal)', 'Sämtliche wurden informiert.', 'Todos fueron informados.')">
-                                <td>
-                                    <div class="german-word">sämtliche</div>
-                                </td>
-                                <td class="spanish-word">
-                                    todos (formal)
+                                    innumerables <span class="word-level-tag level-tag-b">B2</span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer b2"><span class="card-footer-tag card-footer-level">B2</span><span class="card-footer-tag">pronombre</span></div>
+                <div class="card-footer b2"><span class="card-footer-tag card-footer-level">B2</span><span class="card-footer-tag">inferido &gt; B1</span></div>
             </div>
 
         </div>
