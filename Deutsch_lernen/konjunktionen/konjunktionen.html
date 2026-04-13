@@ -304,6 +304,10 @@
             height: 100%;
         }
 
+        .level-card.full-width {
+            grid-column: 1 / -1;
+        }
+
         .level-card:hover {
             transform: translateY(-5px);
         }
@@ -458,6 +462,40 @@
             background: rgba(239, 68, 68, 0.15);
             color: var(--level-b2);
             border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .tag.level-tag {
+            margin-left: 8px;
+        }
+
+        .tag.level-tag.a1,
+        .tag.level-tag.a2 {
+            background: #fce7f3;
+            color: #9d174d;
+            border: 1px solid #f9a8d4;
+        }
+
+        .tag.level-tag.b1,
+        .tag.level-tag.b2 {
+            background: #dbeafe;
+            color: #1d4ed8;
+            border: 1px solid #93c5fd;
+        }
+
+        @media print {
+            .tag.level-tag.a1,
+            .tag.level-tag.a2 {
+                background: #fbcfe8 !important;
+                color: #831843 !important;
+                border-color: #db2777 !important;
+            }
+
+            .tag.level-tag.b1,
+            .tag.level-tag.b2 {
+                background: #bfdbfe !important;
+                color: #1e3a8a !important;
+                border-color: #2563eb !important;
+            }
         }
 
         .german-word {
@@ -1039,6 +1077,14 @@
                                 </td>
                                 <td>sin embargo / no obstante</td>
                             </tr>
+                            <tr onclick="openWordModal(this)" data-word="jedoch" data-tag="Pos 1"
+                                data-tag-class="tag inv" data-trans="sin embargo / no obstante"
+                                data-example="Er ist müde. <strong>Jedoch</strong> <span class='german-word' style='font-size:0.9em'>arbeitet</span> er weiter.">
+                                <td>
+                                    <div class="german-word">jedoch</div> <span class="tag inv">Pos 1</span>
+                                </td>
+                                <td>sin embargo / no obstante</td>
+                            </tr>
                             <tr onclick="openWordModal(this)" data-word="obwohl" data-tag="Final"
                                 data-tag-class="tag end" data-trans="aunque"
                                 data-example="<strong>Obwohl</strong> es <span class='german-word' style='font-size:0.9em'>regnet</span>, gehen wir.">
@@ -1114,6 +1160,60 @@
                     </table>
                 </div>
                 <div class="level-footer b2">complejas</div>
+            </div>
+
+            <div class="level-card full-width">
+                <div class="level-header a2">
+                    <span>Pares</span>
+                    <span class="level-header-label">contrastes</span>
+                </div>
+                <div class="level-content">
+                    <table>
+                        <tbody>
+                            <tr onclick="openWordModal(this)" data-word="ob / wenn" data-tag="Contraste"
+                                data-tag-class="tag inv" data-trans="duda vs condición"
+                                data-example="<strong>Ob</strong> introduce duda o pregunta indirecta; <strong>wenn</strong> expresa condición o tiempo repetido.">
+                                <td>
+                                    <div class="german-word">ob / wenn</div> <span class="tag inv">Contraste</span>
+                                </td>
+                                <td>duda vs condición</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="als / wenn" data-tag="Contraste"
+                                data-tag-class="tag inv" data-trans="pasado único vs repetición"
+                                data-example="<strong>Als</strong> se usa para un hecho único en el pasado; <strong>wenn</strong> para condiciones o acciones repetidas.">
+                                <td>
+                                    <div class="german-word">als / wenn</div> <span class="tag inv">Contraste</span>
+                                </td>
+                                <td>pasado único vs repetición</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="seit / seitdem" data-tag="Contraste"
+                                data-tag-class="tag inv" data-trans="desde que vs desde entonces"
+                                data-example="<strong>Seit</strong> suele unir directamente una subordinada temporal; <strong>seitdem</strong> enfatiza la idea de 'desde entonces'.">
+                                <td>
+                                    <div class="german-word">seit / seitdem</div> <span class="tag inv">Contraste</span>
+                                </td>
+                                <td>desde que vs desde entonces</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="deshalb / trotzdem / dennoch" data-tag="Contraste"
+                                data-tag-class="tag inv" data-trans="causa vs concesión"
+                                data-example="<strong>Deshalb</strong> y <strong>deswegen</strong> expresan consecuencia; <strong>trotzdem</strong> y <strong>dennoch</strong> introducen contraste.">
+                                <td>
+                                    <div class="german-word">deshalb / trotzdem / dennoch</div> <span class="tag inv">Contraste</span>
+                                </td>
+                                <td>causa vs concesión</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="bevor / vor" data-tag="Contraste"
+                                data-tag-class="tag inv" data-trans="conjunción vs preposición"
+                                data-example="<strong>Bevor</strong> introduce una subordinada; <strong>vor</strong> va con un sustantivo o pronombre.">
+                                <td>
+                                    <div class="german-word">bevor / vor</div> <span class="tag inv">Contraste</span>
+                                </td>
+                                <td>conjunción vs preposición</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="level-footer a2">pares clave</div>
             </div>
 
         </div>
@@ -1258,10 +1358,16 @@
             "außerdem": "Conector adverbial",
             "trotzdem": "Conector adverbial",
             "dennoch": "Conector adverbial",
+            "jedoch": "Conector adverbial",
             "obwohl": "Conjuncion subordinante",
             "da": "Conjuncion subordinante",
             "je... desto": "Estructura correlativa",
             "zwar... aber": "Estructura correlativa",
+            "ob / wenn": "Contraste clave",
+            "als / wenn": "Contraste clave",
+            "seit / seitdem": "Contraste clave",
+            "deshalb / trotzdem / dennoch": "Contraste clave",
+            "bevor / vor": "Contraste clave",
             "wÃ¤hrend": "Conjuncion subordinante",
             "indem": "Conjuncion subordinante",
             "falls": "Conjuncion subordinante"
@@ -1350,11 +1456,14 @@
             const tag = row.getAttribute('data-tag');
             const tagClass = row.getAttribute('data-tag-class');
             const wordType = wordTypes[word] || 'Conector';
+            const level = getRowLevel(row);
 
             // Populate Modal
             document.getElementById('modalWord').innerText = word;
             document.getElementById('modalTranslation').innerText = trans;
-            document.getElementById('modalWordType').innerText = 'Tipo de palabra: ' + wordType;
+            document.getElementById('modalWordType').innerText = level
+                ? 'Tipo de palabra: ' + wordType + ' | Nivel sugerido: ' + level
+                : 'Tipo de palabra: ' + wordType;
             document.getElementById('modalExample').innerHTML = example; // innerHTML for styling (<strong>)
 
             // Inject Custom Explanation if available
@@ -1412,6 +1521,12 @@
             document.body.classList.toggle('light-mode');
         }
 
+        function getRowLevel(row) {
+            const header = row.closest('.level-card')?.querySelector('.level-header span:first-child');
+            const level = header?.innerText?.trim();
+            return /^(A1|A2|B1|B2)$/.test(level) ? level : '';
+        }
+
         // Voice Synthesis Logic
         function speak(text) {
             if (!('speechSynthesis' in window)) {
@@ -1430,6 +1545,21 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            const rows = document.querySelectorAll('.level-card tbody tr');
+            rows.forEach(row => {
+                const level = getRowLevel(row);
+                if (!level) return;
+
+                const firstCell = row.querySelector('td:first-child');
+                const positionTag = firstCell?.querySelector('.tag:not(.level-tag)');
+                if (!firstCell || !positionTag || firstCell.querySelector('.level-tag')) return;
+
+                const levelTag = document.createElement('span');
+                levelTag.className = 'tag level-tag ' + level.toLowerCase();
+                levelTag.innerText = level;
+                positionTag.before(levelTag);
+            });
+
             const words = document.querySelectorAll('td:first-child .german-word');
 
             words.forEach(el => {

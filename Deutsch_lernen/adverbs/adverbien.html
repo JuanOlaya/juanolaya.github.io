@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deutsche Adverbien (A1-B1)</title>
+    <title>Deutsche Adverbien</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="../images/german_flag.png" type="image/png">
@@ -541,6 +541,46 @@
             font-style: italic;
         }
 
+        .row-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .row-level-tag {
+            flex-shrink: 0;
+            background: #2563eb;
+            color: #ffffff;
+            border: 1px solid #60a5fa;
+            border-radius: 999px;
+            padding: 5px 10px;
+            font-size: 0.72rem;
+            font-weight: 900;
+            font-style: normal;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            text-transform: uppercase;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 4px 10px rgba(37, 99, 235, 0.35);
+        }
+
+        .row-level-tag.level-a1,
+        .row-level-tag.level-a2 {
+            background: #e11d74;
+            color: #ffffff;
+            border-color: #be185d;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 4px 10px rgba(190, 24, 93, 0.28);
+        }
+
+        .row-level-tag.level-b1,
+        .row-level-tag.level-b2 {
+            background: #2563eb;
+            color: #ffffff;
+            border-color: #1d4ed8;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 4px 10px rgba(37, 99, 235, 0.35);
+        }
+
         .example-clickable {
             cursor: pointer;
             transition: color 0.2s ease;
@@ -686,6 +726,19 @@
             margin-bottom: 25px;
         }
 
+        .modal-usage-note {
+            display: none;
+            margin: -10px auto 20px;
+            max-width: 360px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.45;
+        }
+
         .modal-example-box {
             background-color: rgba(255, 255, 255, 0.05);
             padding: 20px;
@@ -774,6 +827,7 @@
                     <div id="modalWord" class="modal-main-word" title="Escuchar">Wort</div>
                     <div id="modalLevel" class="modal-level-badge">A1</div>
                     <div id="modalTranslation" class="modal-sub-word">Traducción</div>
+                    <div id="modalUsageNote" class="modal-usage-note"></div>
 
                     <div class="modal-example-box" id="modalExampleBox" title="Escuchar frase">
                         <div id="modalExampleDe" class="modal-ex-de">Ejemplo Alemán</div>
@@ -795,7 +849,7 @@
             <div class="modal-body">
                 <div id="themeModalTitle" class="theme-modal-title">Modal &amp; Kausal</div>
                 <div id="themeModalSubtitle" class="theme-modal-subtitle">De modo y causa</div>
-                <div id="themeModalLevel" class="theme-modal-chip">A1-B1</div>
+                <div id="themeModalLevel" class="theme-modal-chip">A1</div>
             </div>
         </div>
     </div>
@@ -874,6 +928,15 @@
                         "english": "first / only",
                         "example_de": "Erst die Arbeit, dann das Vergnügen.",
                         "example_es": "Primero el trabajo, luego el placer.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "zuerst",
+                        "emoji": "\uD83E\uDD47",
+                        "spanish": "(primero / primero que nada)",
+                        "english": "first / first of all",
+                        "example_de": "Zuerst mache ich meine Hausaufgaben.",
+                        "example_es": "Primero hago mis tareas.",
                         "level": "A1-A2"
                     },
                     {
@@ -1018,6 +1081,33 @@
                         "english": "nowadays",
                         "example_de": "Heutzutage hat jeder ein Handy.",
                         "example_es": "Hoy en día todo el mundo tiene un móvil.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "jederzeit",
+                        "emoji": "\u23F0",
+                        "spanish": "(en cualquier momento)",
+                        "english": "at any time",
+                        "example_de": "Du kannst mich jederzeit anrufen.",
+                        "example_es": "Puedes llamarme en cualquier momento.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "neuerdings",
+                        "emoji": "\u2728",
+                        "spanish": "(recientemente / \u00faltimamente)",
+                        "english": "recently / lately",
+                        "example_de": "Neuerdings lese ich viel mehr.",
+                        "example_es": "\u00daltimamente leo mucho m\u00e1s.",
+                        "level": "A2-B1"
+                    },
+                    {
+                        "word": "mehrmals",
+                        "emoji": "\uD83D\uDD01",
+                        "spanish": "(varias veces)",
+                        "english": "several times / repeatedly",
+                        "example_de": "Ich habe ihn mehrmals angerufen.",
+                        "example_es": "Lo he llamado varias veces.",
                         "level": "A1-A2"
                     },
                     {
@@ -1341,6 +1431,24 @@
                         "level": "A1"
                     },
                     {
+                        "word": "irgendwohin",
+                        "emoji": "\uD83E\uDDED",
+                        "spanish": "(a alg\u00fan lugar)",
+                        "english": "to some place / somewhere",
+                        "example_de": "Wir m\u00fcssen irgendwohin fahren.",
+                        "example_es": "Tenemos que ir a alg\u00fan lugar.",
+                        "level": "A1-A2"
+                    },
+                    {
+                        "word": "nirgendwohin",
+                        "emoji": "\uD83D\uDEAB",
+                        "spanish": "(a ninguna parte)",
+                        "english": "to nowhere",
+                        "example_de": "Am Sonntag gehe ich nirgendwohin.",
+                        "example_es": "El domingo no voy a ninguna parte.",
+                        "level": "A1-A2"
+                    },
+                    {
                         "word": "weg",
                         "emoji": "💨",
                         "spanish": "(ido / fuera)",
@@ -1403,6 +1511,15 @@
                         "english": "only / just",
                         "example_de": "Ich habe nur 5 Euro.",
                         "example_es": "Solo tengo 5 euros.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "nat\u00fcrlich",
+                        "emoji": "\uD83C\uDF3F",
+                        "spanish": "(naturalmente / por supuesto)",
+                        "english": "naturally / of course",
+                        "example_de": "Nat\u00fcrlich komme ich mit.",
+                        "example_es": "Por supuesto voy contigo.",
                         "level": "A1-B1"
                     },
                     {
@@ -1514,6 +1631,42 @@
                         "level": "A1-B1"
                     },
                     {
+                        "word": "insbesondere",
+                        "emoji": "\u2728",
+                        "spanish": "(especialmente / en particular)",
+                        "english": "especially / in particular",
+                        "example_de": "Ich mag Musik, insbesondere Jazz.",
+                        "example_es": "Me gusta la m\u00fasica, en particular el jazz.",
+                        "level": "B1"
+                    },
+                    {
+                        "word": "teilweise",
+                        "emoji": "\uD83E\uDDE9",
+                        "spanish": "(parcialmente / en parte)",
+                        "english": "partly / partially",
+                        "example_de": "Der Text ist teilweise schwer.",
+                        "example_es": "El texto es parcialmente dif\u00edcil.",
+                        "level": "B1"
+                    },
+                    {
+                        "word": "deswegen",
+                        "emoji": "\u27A1\uFE0F",
+                        "spanish": "(por eso / por esa raz\u00f3n)",
+                        "english": "therefore / that is why",
+                        "example_de": "Ich bin m\u00fcde, deswegen gehe ich fr\u00fch schlafen.",
+                        "example_es": "Estoy cansado, por eso me voy a dormir temprano.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "daher",
+                        "emoji": "\u27A1\uFE0F",
+                        "spanish": "(de ah\u00ed / por eso)",
+                        "english": "hence / therefore",
+                        "example_de": "Es regnet, daher bleiben wir zu Hause.",
+                        "example_es": "Llueve, por eso nos quedamos en casa.",
+                        "level": "A2-B1"
+                    },
+                    {
                         "word": "deshalb",
                         "emoji": "👉",
                         "spanish": "(por eso / por lo tanto)",
@@ -1595,6 +1748,24 @@
                         "level": "A1-B1"
                     },
                     {
+                        "word": "dennoch",
+                        "emoji": "\u26D3",
+                        "spanish": "(sin embargo / no obstante)",
+                        "english": "nevertheless / nonetheless",
+                        "example_de": "Es war kalt, dennoch sind wir spazieren gegangen.",
+                        "example_es": "Hac\u00eda fr\u00edo; sin embargo, salimos a caminar.",
+                        "level": "B1"
+                    },
+                    {
+                        "word": "eben",
+                        "emoji": "\u2705",
+                        "spanish": "(precisamente / simplemente)",
+                        "english": "just / simply / exactly",
+                        "example_de": "So ist das eben.",
+                        "example_es": "As\u00ed es simplemente.",
+                        "level": "A2-B1"
+                    },
+                    {
                         "word": "eigentlich",
                         "emoji": "🤔",
                         "spanish": "(en realidad)",
@@ -1620,6 +1791,33 @@
                         "example_de": "Wir sprechen haupts\u00e4chlich Deutsch.",
                         "example_es": "Hablamos principalmente alem\u00e1n.",
                         "level": "A1-B1"
+                    },
+                    {
+                        "word": "pers\u00f6nlich",
+                        "emoji": "\uD83D\uDC64",
+                        "spanish": "(personalmente)",
+                        "english": "personally",
+                        "example_de": "Ich sehe das pers\u00f6nlich anders.",
+                        "example_es": "Yo personalmente lo veo de otra manera.",
+                        "level": "A1-B1"
+                    },
+                    {
+                        "word": "konsequent",
+                        "emoji": "\uD83D\uDCCD",
+                        "spanish": "(constantemente / con coherencia)",
+                        "english": "consistently",
+                        "example_de": "Er handelt konsequent.",
+                        "example_es": "\u00c9l act\u00faa con coherencia.",
+                        "level": "A2-B1"
+                    },
+                    {
+                        "word": "regelrecht",
+                        "emoji": "\uD83D\uDCA5",
+                        "spanish": "(propiamente / verdaderamente)",
+                        "english": "properly / downright",
+                        "example_de": "Das war regelrecht peinlich.",
+                        "example_es": "Eso fue verdaderamente vergonzoso.",
+                        "level": "B1"
                     },
                     {
                         "word": "ehrlich",
@@ -1866,21 +2064,26 @@
         const themeBlueprints = [
             { title: 'Gegenwart', translation: '(presente)', level: 'A1-A2', colorMain: '#0ea5e9', badge: 'GEGENWART', words: ['jetzt', 'heute', 'gerade', 'gleich', 'sofort', 'bald', 'schon'] },
             { title: 'Abfolge', translation: '(secuencia)', level: 'A1-A2', colorMain: '#0284c7', badge: 'ABFOLGE', words: ['gestern', 'morgen', 'dann', 'danach', 'sp\u00e4ter', 'vorhin', 'fr\u00fcher'] },
-            { title: 'Zeitlauf', translation: '(curso del tiempo)', level: 'A1-A2', colorMain: '#0891b2', badge: 'ZEITLAUF', words: ['noch', 'inzwischen', 'damals', 'heutzutage', 'wieder', 'endlich', 'pl\u00f6tzlich'] },
-            { title: 'Ordnung', translation: '(orden)', level: 'A2', colorMain: '#16a34a', badge: 'ORDNUNG', words: ['erst', 'erstmals', 'erstens', 'zweitens', 'drittens', 'viertens', 'f\u00fcnftens'] },
-            { title: 'Z\u00e4hlung', translation: '(enumeraci\u00f3n)', level: 'A1-A2', colorMain: '#65a30d', badge: 'ZAEHLUNG', words: ['einmal', 'zweimal', 'dreimal', 'viermal', 'f\u00fcnfmal', 'jeweils'] },
+            { title: 'Beginn', translation: '(inicio)', level: 'A1-A2', colorMain: '#0f766e', badge: 'BEGINN', words: ['erst', 'zuerst', 'erstmals'] },
+            { title: 'Zeitlauf', translation: '(curso del tiempo)', level: 'A1-A2', colorMain: '#0891b2', badge: 'ZEITLAUF', words: ['noch', 'inzwischen', 'wieder', 'endlich', 'pl\u00f6tzlich', 'jederzeit'] },
+            { title: 'Wandel', translation: '(cambio)', level: 'A1-A2', colorMain: '#0f766e', badge: 'WANDEL', words: ['damals', 'heutzutage', 'neuerdings'] },
+            { title: 'Ordnung', translation: '(orden)', level: 'A2', colorMain: '#16a34a', badge: 'ORDNUNG', words: ['erstens', 'zweitens', 'drittens', 'viertens', 'f\u00fcnftens'] },
+            { title: 'Z\u00e4hlung', translation: '(enumeraci\u00f3n)', level: 'A1-A2', colorMain: '#65a30d', badge: 'ZAEHLUNG', words: ['einmal', 'zweimal', 'dreimal', 'viermal', 'f\u00fcnfmal', 'mehrmals', 'jeweils'] },
             { title: 'H\u00e4ufigkeit', translation: '(frecuencia)', level: 'A1-A2', colorMain: '#7c3aed', badge: 'HAEUFIGKEIT', words: ['immer', 'nie', 'oft', 'manchmal', 'selten', 'meistens', 'jemals'] },
             { title: 'Rhythmus', translation: '(ritmo)', level: 'A1-A2', colorMain: '#9333ea', badge: 'RHYTHMUS', words: ['t\u00e4glich', 'w\u00f6chentlich', 'monatlich', 'j\u00e4hrlich', 'gew\u00f6hnlich', 'normalerweise', 'regelm\u00e4\u00dfig'] },
-            { title: 'Richtung', translation: '(direcci\u00f3n)', level: 'A1', colorMain: '#db2777', badge: 'RICHTUNG', words: ['links', 'rechts', 'geradeaus', 'vorne', 'hinten'] },
+            { title: 'Richtung', translation: '(direcci\u00f3n)', level: 'A1-A2', colorMain: '#db2777', badge: 'RICHTUNG', words: ['links', 'rechts', 'geradeaus', 'vorne', 'hinten', 'irgendwohin', 'nirgendwohin'] },
             { title: 'Position', translation: '(posici\u00f3n)', level: 'A1', colorMain: '#e11d48', badge: 'POSITION', words: ['oben', 'unten', 'drinnen', 'drau\u00dfen', 'da'] },
             { title: 'Raum', translation: '(espacio)', level: 'A1', colorMain: '#f43f5e', badge: 'RAUM', words: ['hier', 'dort', '\u00fcberall', 'nirgends', 'irgendwo', 'weg'] },
             { title: 'Grad', translation: '(grado)', level: 'A1-B1', colorMain: '#ea580c', badge: 'GRAD', words: ['sehr', 'fast', 'ganz', 'ziemlich', 'besonders', 'sogar', 'so'] },
+            { title: 'Anteil', translation: '(proporci\u00f3n)', level: 'A1-B1', colorMain: '#7c2d12', badge: 'ANTEIL', words: ['haupts\u00e4chlich', 'insbesondere', 'teilweise'] },
             { title: 'Vermutung', translation: '(suposici\u00f3n)', level: 'A1-B1', colorMain: '#d97706', badge: 'VERMUTUNG', words: ['vielleicht', 'm\u00f6glicherweise', 'vermutlich', 'wahrscheinlich', 'bestimmt', 'sicher', 'hoffentlich'] },
-            { title: 'Fokus', translation: '(enfoque)', level: 'A1-B1', colorMain: '#2563eb', badge: 'FOKUS', words: ['auch', 'nur', 'wirklich', 'eigentlich', 'tats\u00e4chlich', 'haupts\u00e4chlich', '\u00fcberhaupt'] },
-            { title: 'Haltung', translation: '(actitud)', level: 'A1-B1', colorMain: '#059669', badge: 'HALTUNG', words: ['gern', 'ehrlich', 'h\u00f6flich', 'lieber', 'gl\u00fccklich', 'gl\u00fccklicherweise'] },
+            { title: 'Fokus', translation: '(enfoque)', level: 'A1-B1', colorMain: '#2563eb', badge: 'FOKUS', words: ['auch', 'nur', 'wirklich', 'eigentlich', 'tats\u00e4chlich', '\u00fcberhaupt', 'eben'] },
+            { title: 'Haltung', translation: '(actitud)', level: 'A1-B1', colorMain: '#059669', badge: 'HALTUNG', words: ['nat\u00fcrlich', 'gern', 'ehrlich', 'h\u00f6flich', 'lieber', 'gl\u00fccklich', 'gl\u00fccklicherweise'] },
             { title: 'Weise', translation: '(manera)', level: 'A1-B1', colorMain: '#0891b2', badge: 'WEISE', words: ['zusammen', 'alleine', 'anders', 'einfach', 'kaum', 'leider'] },
+            { title: 'Stil', translation: '(estilo)', level: 'A1-B1', colorMain: '#64748b', badge: 'STIL', words: ['pers\u00f6nlich', 'konsequent', 'regelrecht'] },
             { title: 'Recht', translation: '(derecho)', level: 'B1', colorMain: '#475569', badge: 'RECHT', words: ['rechtlich', 'gesetzlich'] },
-            { title: 'Logik', translation: '(l\u00f3gica)', level: 'A1-B1', colorMain: '#f59e0b', badge: 'LOGIK', words: ['allerdings', 'trotzdem', 'deshalb', 'folglich', 'sonst', 'au\u00dferdem', 'n\u00e4mlich'] }
+            { title: 'Logik', translation: '(l\u00f3gica)', level: 'A1-B1', colorMain: '#f59e0b', badge: 'LOGIK', words: ['allerdings', 'trotzdem', 'dennoch', 'sonst', 'au\u00dferdem', 'n\u00e4mlich'] },
+            { title: 'Kausal', translation: '(causalidad)', level: 'A1-B1', colorMain: '#b45309', badge: 'KAUSAL', words: ['deshalb', 'deswegen', 'daher', 'folglich'] }
         ];
 
         function createWordMap(groups) {
@@ -1894,24 +2097,69 @@
         }
 
         const wordMap = createWordMap(rawAdverbGroups);
+        const adjectiveLikeWords = new Set(['nat\u00fcrlich', 'haupts\u00e4chlich', 'pers\u00f6nlich', 'konsequent', 'regelrecht']);
+        const levelRank = { A1: 1, A2: 2, B1: 3 };
+        const a1Words = new Set([
+            'jetzt', 'heute', 'morgen', 'gestern', 'dann', 'sp\u00e4ter', 'bald', 'schon', 'noch', 'gleich',
+            'immer', 'nie', 'oft', 'manchmal',
+            'hier', 'dort', 'da', 'links', 'rechts', 'geradeaus', 'vorne', 'hinten', 'oben', 'unten', 'drinnen', 'drau\u00dfen', '\u00fcberall', 'nirgends', 'irgendwo', 'weg',
+            'sehr', 'so', 'auch', 'nur', 'gern', 'leider',
+            'einmal', 'zweimal', 'dreimal', 'viermal', 'f\u00fcnfmal'
+        ]);
+        const a2Words = new Set([
+            'erst', 'zuerst', 'erstmals', 'gerade', 'sofort', 'wieder', 'danach', 'inzwischen', 'damals', 'endlich', 'pl\u00f6tzlich', 'heutzutage', 'jederzeit', 'mehrmals', 'vorhin', 'fr\u00fcher',
+            'selten', 'meistens', 't\u00e4glich', 'w\u00f6chentlich', 'monatlich', 'j\u00e4hrlich', 'gew\u00f6hnlich', 'normalerweise', 'regelm\u00e4\u00dfig', 'jemals',
+            'irgendwohin', 'nirgendwohin',
+            'fast', 'ganz', 'ziemlich', 'besonders', 'sogar',
+            'vielleicht', 'wahrscheinlich', 'hoffentlich', 'bestimmt', 'sicher',
+            'nat\u00fcrlich', 'wirklich', 'eigentlich',
+            'zusammen', 'alleine', 'anders', 'einfach', 'lieber', 'gl\u00fccklich', 'ehrlich', 'h\u00f6flich',
+            'erstens', 'zweitens', 'drittens', 'viertens', 'f\u00fcnftens',
+            'deshalb', 'deswegen', 'daher', 'trotzdem', 'au\u00dferdem', 'sonst'
+        ]);
+
+        function getExactLevel(word) {
+            if (a1Words.has(word)) return 'A1';
+            if (a2Words.has(word)) return 'A2';
+            return 'B1';
+        }
+
+        function getHighestLevel(adverbs) {
+            return adverbs.reduce((highest, adverb) => {
+                const currentLevel = adverb.level || 'B1';
+                return levelRank[currentLevel] > levelRank[highest] ? currentLevel : highest;
+            }, 'A1');
+        }
+
+        function getLevelTagClass(level) {
+            const normalizedLevel = (level || 'B1').toLowerCase();
+            return `row-level-tag level-${normalizedLevel}`;
+        }
 
         function buildThemeGroups() {
-            return themeBlueprints.map((theme) => ({
-                title: theme.title,
-                description: theme.translation,
-                level: theme.level,
-                colorMain: theme.colorMain,
-                colorPastel: '',
-                badge: theme.badge,
-                emoji: '',
-                adverbs: theme.words.map((word) => {
+            return themeBlueprints.map((theme) => {
+                const adverbs = theme.words.map((word) => {
                     const adverb = wordMap.get(word);
                     if (!adverb) {
                         throw new Error(`Missing adverb in theme map: ${word}`);
                     }
-                    return adverb;
-                })
-            }));
+                    return {
+                        ...adverb,
+                        level: getExactLevel(word)
+                    };
+                });
+
+                return {
+                    title: theme.title,
+                    description: theme.translation,
+                    level: getHighestLevel(adverbs),
+                    colorMain: theme.colorMain,
+                    colorPastel: '',
+                    badge: theme.badge,
+                    emoji: '',
+                    adverbs
+                };
+            });
         }
 
         const adverbGroups = buildThemeGroups();
@@ -1935,6 +2183,7 @@
                 const chunkSize = 7;
                 for (let i = 0; i < group.adverbs.length; i += chunkSize) {
                     const chunk = group.adverbs.slice(i, i + chunkSize);
+                    const chunkLevel = getHighestLevel(chunk);
 
                     // Filter Logic: If query exists, only show chunks that have at least one match
                     if (query) {
@@ -2001,7 +2250,7 @@
                     footer.className = 'card-footer';
                     footer.style.backgroundColor = group.colorMain;
                     footer.innerHTML = `
-                        <span class="card-footer-tag card-footer-level">${group.level || 'A1-B1'}</span>
+                        <span class="card-footer-tag card-footer-level">${chunkLevel}</span>
                         <span class="card-footer-tag">${getCardTypeLabel()}</span>
                     `;
 
@@ -2053,7 +2302,10 @@
                     </div>
                 </td>
                 <td class="spanish-word" style="font-style:italic; font-size:1rem;">
-                    ${displayTrans}
+                    <div class="row-meta">
+                        <span>${displayTrans}</span>
+                        <span class="${getLevelTagClass(adv.level)}">${adv.level || 'B1'}</span>
+                    </div>
                 </td>
             </tr>
             `;
@@ -2123,7 +2375,7 @@
         function openThemeNameModal(group) {
             document.getElementById('themeModalTitle').textContent = group.title;
             document.getElementById('themeModalSubtitle').textContent = group.description || 'Theme';
-            document.getElementById('themeModalLevel').textContent = group.level || 'A1-B1';
+            document.getElementById('themeModalLevel').textContent = group.level || 'B1';
             themeNameHeader.style.backgroundColor = group.colorMain;
             themeNameModal.style.display = 'flex';
         }
@@ -2224,6 +2476,14 @@
                 levelBadge.style.display = 'none';
             }
             document.getElementById('modalTranslation').textContent = foundAdverb.spanish;
+            const usageNote = document.getElementById('modalUsageNote');
+            if (adjectiveLikeWords.has(foundAdverb.word)) {
+                usageNote.textContent = 'Tambi\u00e9n puede funcionar como adjetivo seg\u00fan la estructura.';
+                usageNote.style.display = 'block';
+            } else {
+                usageNote.style.display = 'none';
+                usageNote.textContent = '';
+            }
             document.getElementById('modalExampleDe').textContent = foundAdverb.example_de;
             document.getElementById('modalExampleEs').textContent = foundAdverb.example_es;
 
