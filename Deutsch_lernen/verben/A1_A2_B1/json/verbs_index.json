@@ -1,8 +1,8 @@
 {
   "_configuration_rules": "STRICT MAX 7 VERBS PER GROUP (Aplicando la Ley de Miller). Do not exceed 7 verbs in any array below. ADDITIONALLY, the theme group name (groupNameGerman/groupNameSpanish) MUST ONLY be exactly ONE word, with the STRICT EXCEPTION of the group 'Leben in Deutschland'. MAINTENANCE RULE: whenever any app data changes (cards, groups, themes, conjugations, indexes, wortfamilie, examples), update lastUpdated.",
-  "lastUpdated": "2026-04-14T10:10:00Z",
-  "totalGroups": 94,
-  "totalVerbs": 541,
+  "lastUpdated": "2026-04-14T14:55:56.122Z",
+  "totalGroups": 95,
+  "totalVerbs": 551,
   "groups": [
     {
       "level": "A1.1",
@@ -168,14 +168,15 @@
     },
     {
       "level": "A1.1",
-      "verbCount": 6,
+      "verbCount": 7,
       "verbs": [
         "schicken",
         "liefern",
         "zurÃ¼ckbringen",
         "abgeben",
         "abholen",
-        "bringen"
+        "bringen",
+        "kriegen"
       ],
       "groupNameGerman": "Logistik",
       "groupNameSpanish": "LogÃ­stica",
@@ -234,13 +235,14 @@
     },
     {
       "level": "A1.2",
-      "verbCount": 5,
+      "verbCount": 6,
       "verbs": [
         "suchen",
         "besuchen",
         "finden",
         "parken",
-        "zeigen"
+        "zeigen",
+        "besichtigen"
       ],
       "groupNameGerman": "Stadtleben",
       "groupNameSpanish": "Ciudad",
@@ -249,14 +251,15 @@
     },
     {
       "level": "A1.2",
-      "verbCount": 6,
+      "verbCount": 7,
       "verbs": [
         "treffen",
         "helfen",
         "vertrauen",
         "raten",
         "passen",
-        "begegnen"
+        "begegnen",
+        "telefonieren"
       ],
       "groupNameGerman": "Social",
       "groupNameSpanish": "Social",
@@ -313,13 +316,14 @@
     },
     {
       "level": "A1.2",
-      "verbCount": 5,
+      "verbCount": 6,
       "verbs": [
         "fliegen",
         "reisen",
         "buchen",
         "reservieren",
-        "verpassen"
+        "verpassen",
+        "abfliegen"
       ],
       "groupNameGerman": "Reisen",
       "groupNameSpanish": "Viajes",
@@ -408,13 +412,14 @@
     },
     {
       "level": "A1.2",
-      "verbCount": 5,
+      "verbCount": 6,
       "verbs": [
         "mieten",
         "Ã¼bernachten",
         "einziehen",
         "einrichten",
-        "lÃ¼ften"
+        "lÃ¼ften",
+        "vermieten"
       ],
       "groupNameGerman": "Unterkunft",
       "groupNameSpanish": "Alojamiento",
@@ -437,6 +442,18 @@
       "groupNameSpanish": "ComunicaciÃ³n",
       "groupNameEnglish": "Communication",
       "groupNumberPerLevel": 27
+    },
+    {
+      "level": "A1.2",
+      "verbCount": 2,
+      "verbs": [
+        "unterschreiben",
+        "ankreuzen"
+      ],
+      "groupNameGerman": "Vertrag",
+      "groupNameSpanish": "Contrato",
+      "groupNameEnglish": "Contract",
+      "groupNumberPerLevel": 28
     },
     {
       "level": "A2.1",
@@ -863,6 +880,20 @@
       "groupNumberPerLevel": 27
     },
     {
+      "level": "A2.2",
+      "verbCount": 4,
+      "verbs": [
+        "erledigen",
+        "vorbereiten",
+        "fertigmachen",
+        "nachholen"
+      ],
+      "groupNameGerman": "Erledigung",
+      "groupNameSpanish": "Gesti?n",
+      "groupNameEnglish": "Completion",
+      "groupNumberPerLevel": 28
+    },
+    {
       "level": "B1.1",
       "verbCount": 6,
       "verbs": [
@@ -1169,12 +1200,15 @@
     },
     {
       "level": "B1.1",
-      "verbCount": 4,
+      "verbCount": 7,
       "verbs": [
         "funktionieren",
         "drucken",
         "Ã¼berwachen",
-        "nutzen"
+        "nutzen",
+        "anmachen",
+        "ausmachen",
+        "anklicken"
       ],
       "groupNameGerman": "Technik",
       "groupNameSpanish": "TecnologÃ­a",
@@ -1470,20 +1504,6 @@
       "groupNameSpanish": "MatemÃ¡ticas",
       "groupNameEnglish": "Math",
       "groupNumberPerLevel": 14
-    },
-    {
-      "level": "A2.2",
-      "verbCount": 4,
-      "verbs": [
-        "erledigen",
-        "vorbereiten",
-        "fertigmachen",
-        "nachholen"
-      ],
-      "groupNameGerman": "Erledigung",
-      "groupNameSpanish": "Gesti?n",
-      "groupNameEnglish": "Completion",
-      "groupNumberPerLevel": 28
     }
   ]
 }
