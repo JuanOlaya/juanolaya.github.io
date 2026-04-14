@@ -22,7 +22,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  ],
  'A2': [
  { key: 'A2_1', count: 13 },
- { key: 'A2_2', count: 14 }
+ { key: 'A2_2', count: 15 }
  ],
  'B1': [{ key: 'B1_1', count: 25, fileNumbers: [1, 25, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] }],
  'B2': [{ key: 'B2_1', count: 14 }]
@@ -123,7 +123,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
  const levelConfig = {
  'A1': { groupCount: 27, displayName: 'A1' },
- 'A2': { groupCount: 27, displayName: 'A2' },
+ 'A2': { groupCount: 28, displayName: 'A2' },
  'B1': { groupCount: 25, displayName: 'B1' },
  'B2': { groupCount: 14, displayName: 'B2' }
  };

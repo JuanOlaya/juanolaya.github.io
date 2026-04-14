@@ -441,6 +441,64 @@
             text-transform: uppercase;
         }
 
+        .theme-modal-body {
+            margin-top: 22px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .theme-modal-lead {
+            color: var(--text-main);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .theme-modal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+        }
+
+        .theme-modal-card {
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px 18px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .theme-modal-card h3 {
+            margin: 0 0 8px;
+            color: var(--accent-green);
+            font-size: 1.1rem;
+        }
+
+        .theme-modal-card p {
+            margin: 0 0 10px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .theme-modal-example {
+            margin: 0;
+            padding-left: 14px;
+            border-left: 3px solid rgba(255, 255, 255, 0.18);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            line-height: 1.55;
+        }
+
+        .theme-modal-note {
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 16px 18px;
+            background: rgba(34, 197, 94, 0.08);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
         .level-content {
             padding: 0;
             display: flex;
@@ -850,6 +908,7 @@
                 <div id="themeModalTitle" class="theme-modal-title">Modal &amp; Kausal</div>
                 <div id="themeModalSubtitle" class="theme-modal-subtitle">De modo y causa</div>
                 <div id="themeModalLevel" class="theme-modal-chip">A1</div>
+                <div id="themeModalBody" class="theme-modal-body"></div>
             </div>
         </div>
     </div>
@@ -2092,8 +2151,75 @@
             { title: 'Stil', translation: '(estilo)', level: 'A1-B1', colorMain: '#64748b', badge: 'STIL', words: ['pers\u00f6nlich', 'konsequent', 'regelrecht'] },
             { title: 'Recht', translation: '(derecho)', level: 'B1', colorMain: '#475569', badge: 'RECHT', words: ['rechtlich', 'gesetzlich'] },
             { title: 'Logik', translation: '(l\u00f3gica)', level: 'A1-B1', colorMain: '#f59e0b', badge: 'LOGIK', words: ['allerdings', 'trotzdem', 'dennoch', 'au\u00dferdem', 'dabei', 'n\u00e4mlich'] },
-            { title: 'Kausal', translation: '(causalidad)', level: 'A1-B1', colorMain: '#b45309', badge: 'KAUSAL', words: ['deshalb', 'deswegen', 'daher', 'folglich', 'sonst'] }
+            { title: 'Kausal', translation: '(causalidad)', level: 'A1-B1', colorMain: '#b45309', badge: 'KAUSAL', words: ['deshalb', 'deswegen', 'daher', 'folglich', 'sonst'] },
+            { title: 'Modalpartikeln', translation: '(part\u00edculas modales)', level: 'A2-B1', colorMain: '#7c3aed', badge: 'PARTIKELN', custom: true }
         ];
+
+        const modalParticlesGroup = {
+            title: 'Modalpartikeln',
+            description: '(part\u00edculas modales)',
+            level: 'B1',
+            colorMain: '#7c3aed',
+            colorPastel: '',
+            badge: 'PARTIKELN',
+            emoji: '',
+            modalContent: `
+                <p class="theme-modal-lead">
+                    Las <strong>part\u00edculas modales</strong> no suelen cambiar la idea principal de la frase; cambian el <strong>tono</strong>.
+                    Hacen que una pregunta, una petici\u00f3n o una reacci\u00f3n suene m\u00e1s natural, m\u00e1s suave, m\u00e1s evidente o m\u00e1s resignada.
+                </p>
+                <div class="theme-modal-grid">
+                    <article class="theme-modal-card">
+                        <h3>mal</h3>
+                        <p>Suaviza una propuesta o invitaci\u00f3n. Muchas veces equivale a "a ver", "un momento" o "prueba".</p>
+                        <p class="theme-modal-example">Probierst du es mal?<br>Prueba a ver si funciona.</p>
+                    </article>
+                    <article class="theme-modal-card">
+                        <h3>doch</h3>
+                        <p>A\u00f1ade correcci\u00f3n, insistencia o anima al oyente. Muy frecuente en invitaciones y respuestas.</p>
+                        <p class="theme-modal-example">Komm doch rein.<br>Anda, entra.</p>
+                    </article>
+                    <article class="theme-modal-card">
+                        <h3>denn</h3>
+                        <p>Aparece mucho en preguntas y las hace m\u00e1s conversacionales. No significa aqu\u00ed "porque".</p>
+                        <p class="theme-modal-example">Was machst du denn hier?<br>\u00bfQu\u00e9 haces aqu\u00ed entonces?</p>
+                    </article>
+                    <article class="theme-modal-card">
+                        <h3>eben</h3>
+                        <p>Expresa aceptaci\u00f3n o conclusi\u00f3n: "as\u00ed es", "simplemente", "no hay m\u00e1s".</p>
+                        <p class="theme-modal-example">Dann ist es eben so.<br>Pues entonces es as\u00ed.</p>
+                    </article>
+                    <article class="theme-modal-card">
+                        <h3>ja</h3>
+                        <p>Marca que algo es obvio, conocido o compartido por ambos interlocutores.</p>
+                        <p class="theme-modal-example">Das ist ja interessant.<br>Vaya, eso s\u00ed que es interesante.</p>
+                    </article>
+                    <article class="theme-modal-card">
+                        <h3>halt</h3>
+                        <p>Se parece a <em>eben</em>, pero con un matiz m\u00e1s coloquial y resignado: "es lo que hay".</p>
+                        <p class="theme-modal-example">Ich habe halt keine Zeit.<br>Es que no tengo tiempo.</p>
+                    </article>
+                    <article class="theme-modal-card">
+                        <h3>schon</h3>
+                        <p>Puede tranquilizar, dar confianza o indicar que algo acabar\u00e1 saliendo bien.</p>
+                        <p class="theme-modal-example">Das wird schon klappen.<br>Ya ver\u00e1s, saldr\u00e1 bien.</p>
+                    </article>
+                </div>
+                <div class="theme-modal-note">
+                    Truco r\u00e1pido: si quitas la part\u00edcula, la frase sigue siendo correcta, pero cambia el matiz. Por eso
+                    <strong>Probierst du es?</strong> suena m\u00e1s directo que <strong>Probierst du es mal?</strong>
+                </div>
+            `,
+            adverbs: [
+                { word: 'mal', spanish: 'suaviza peticiones', english: 'softens a request', example_de: 'Probierst du es mal?', example_es: 'Prueba a ver / \u00bfLo pruebas?', emoji: '🙂', usage_note: 'Hace la frase m\u00e1s ligera y menos directa.' },
+                { word: 'doch', spanish: 'anima / insiste', english: 'encourages / nudges', example_de: 'Komm doch rein.', example_es: 'Anda, entra.', emoji: '➡️', usage_note: 'Muy com\u00fan para invitar o corregir suavemente.' },
+                { word: 'denn', spanish: 'da tono conversacional a preguntas', english: 'makes questions sound conversational', example_de: 'Was machst du denn hier?', example_es: '\u00bfQu\u00e9 haces aqu\u00ed entonces?', emoji: '❓', usage_note: 'En preguntas no significa "porque".' },
+                { word: 'eben', spanish: 'as\u00ed es / simplemente', english: 'that is just how it is', example_de: 'Dann ist es eben so.', example_es: 'Pues entonces es as\u00ed.', emoji: '🧩', usage_note: 'Aporta idea de aceptaci\u00f3n o conclusi\u00f3n.' },
+                { word: 'ja', spanish: 'como ya sabes', english: 'as you know / obviously', example_de: 'Das ist ja interessant.', example_es: 'Vaya, eso s\u00ed que es interesante.', emoji: '💡', usage_note: 'Presenta algo como obvio o compartido.' },
+                { word: 'halt', spanish: 'es lo que hay', english: 'that is just the way it is', example_de: 'Ich habe halt keine Zeit.', example_es: 'Es que no tengo tiempo.', emoji: '🤷', usage_note: 'Muy coloquial; suena m\u00e1s resignado que eben.' },
+                { word: 'schon', spanish: 'ya ver\u00e1s / seguro', english: 'it will work out / surely', example_de: 'Das wird schon klappen.', example_es: 'Ya ver\u00e1s, saldr\u00e1 bien.', emoji: '🌤️', usage_note: 'Suele tranquilizar o transmitir confianza.' }
+            ]
+        };
 
         function createWordMap(groups) {
             const map = new Map();
@@ -2147,6 +2273,10 @@
 
         function buildThemeGroups() {
             return themeBlueprints.map((theme) => {
+                if (theme.custom) {
+                    return modalParticlesGroup;
+                }
+
                 const adverbs = theme.words.map((word) => {
                     const adverb = wordMap.get(word);
                     if (!adverb) {
@@ -2385,6 +2515,7 @@
             document.getElementById('themeModalTitle').textContent = group.title;
             document.getElementById('themeModalSubtitle').textContent = group.description || 'Theme';
             document.getElementById('themeModalLevel').textContent = group.level || 'B1';
+            document.getElementById('themeModalBody').innerHTML = group.modalContent || '';
             themeNameHeader.style.backgroundColor = group.colorMain;
             themeNameModal.style.display = 'flex';
         }
