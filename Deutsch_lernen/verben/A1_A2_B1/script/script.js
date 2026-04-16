@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
  // --- GLOBAL STATE ---
  let allVerbsData = {}; // Global Data Containers
  let verbGroupsByLevel = {}; // Global Data Containers
@@ -17,14 +17,14 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
  const physicalLevelMap = {
  'A1': [
- { key: 'A1_1', count: 14, fileNumbers: [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] },
- { key: 'A1_2', count: 13, fileNumbers: [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] }
+ { key: 'A1_1', count: 14 },
+ { key: 'A1_2', count: 14 }
  ],
  'A2': [
  { key: 'A2_1', count: 13 },
- { key: 'A2_2', count: 15 }
+ { key: 'A2_2', count: 16 }
  ],
- 'B1': [{ key: 'B1_1', count: 25, fileNumbers: [1, 25, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] }],
+ 'B1': [{ key: 'B1_1', count: 25 }],
  'B2': [{ key: 'B2_1', count: 14 }]
  };
  const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#3b82f6', '#ea580c', '#22C55E', '#a855f7', '#facc15'];
@@ -38,7 +38,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  const localIndex = globalIndex - offset;
  const fileNumber = Array.isArray(layer.fileNumbers)
  ? layer.fileNumbers[localIndex]
- : localIndex + 1;
+ : globalIndex + 1;
  return { physicalKey: layer.key, localIndex, fileNumber };
  }
  offset += layer.count;
@@ -122,8 +122,8 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  }
 
  const levelConfig = {
- 'A1': { groupCount: 27, displayName: 'A1' },
- 'A2': { groupCount: 28, displayName: 'A2' },
+ 'A1': { groupCount: 28, displayName: 'A1' },
+ 'A2': { groupCount: 29, displayName: 'A2' },
  'B1': { groupCount: 25, displayName: 'B1' },
  'B2': { groupCount: 14, displayName: 'B2' }
  };
@@ -142,7 +142,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  let isRestoringModalTab = false;
  let storyClickCounter = 0;
 let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
-const CACHE_KEY = 'verbAppCache_v43_wortfamilie_search_ready';
+const CACHE_KEY = 'verbAppCache_v45_wortfamilie_search_ready';
 const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
 let cachePersistTimeout = null;
 let cachePersistenceDisabled = false;
