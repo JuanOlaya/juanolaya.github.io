@@ -29,8 +29,10 @@ Get-ChildItem -Path $groupsPath -Recurse -Filter "*_group_*.json" | ForEach-Obje
             $content | Add-Member -MemberType NoteProperty -Name "examContext" -Value $themeContent.examContext -Force
             $content | Add-Member -MemberType NoteProperty -Name "examContextEs" -Value $themeContent.examContextEs -Force
             
-            # Save updated content
-            $content | ConvertTo-Json -Depth 10 | Set-Content $groupFile.FullName
+            # Save updated content (Forcing UTF8 without BOM)
+            $jsonContent = $content | ConvertTo-Json -Depth 10
+            $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+            [System.IO.File]::WriteAllText($groupFile.FullName, $jsonContent, $utf8NoBom)
         } else {
             Write-Warning "Theme file not found for $($groupFile.Name): $themeFilePath"
         }

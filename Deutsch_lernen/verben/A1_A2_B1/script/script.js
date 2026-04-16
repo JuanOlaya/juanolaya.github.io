@@ -15,7 +15,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  `<p>Am Wochenende <span class="highlighted-word">habe ich</span> zu Hause <span class="highlighted-word">gearbeitet</span>. Ich <span class="highlighted-word">habe</span> fÃ¼r eine PrÃ¼fung <span class="highlighted-word">gelernt</span>. Ich <span class="highlighted-word">habe</span> eine Frage nicht <span class="highlighted-word">gewusst</span>, also <span class="highlighted-word">habe ich</span> meinen Lehrer <span class="highlighted-word">gefÃ¼ragt</span>. Er <span class="highlighted-word">hat</span> mir alles gut erklÃ¤rt. Ich <span class="highlighted-word">habe</span> die Antwort schnell <span class="highlighted-word">gefunden</span>.</p>`
  ];
 
- const physicalLevelMap = {
+ let physicalLevelMap = {
  'A1': [
  { key: 'A1_1', count: 14 },
  { key: 'A1_2', count: 14 }
@@ -121,12 +121,32 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  }
  }
 
- const levelConfig = {
+ let levelConfig = {
  'A1': { groupCount: 28, displayName: 'A1' },
  'A2': { groupCount: 29, displayName: 'A2' },
  'B1': { groupCount: 25, displayName: 'B1' },
  'B2': { groupCount: 14, displayName: 'B2' }
  };
+
+ function autoConfigureLevelsFromGroups(groupsArray) {
+ if (!Array.isArray(groupsArray) || groupsArray.length === 0) return;
+ const tempPhysicalMap = {};
+ const tempLevelConfig = {};
+ groupsArray.forEach(group => {
+ if (!group || !group.level) return;
+ const parts = String(group.level).split('.');
+ const macroLevel = parts[0];
+ const physicalKey = String(group.level).replace('.', '_');
+ if (!tempPhysicalMap[macroLevel]) tempPhysicalMap[macroLevel] = [];
+ if (!tempLevelConfig[macroLevel]) tempLevelConfig[macroLevel] = { groupCount: 0, displayName: macroLevel };
+ tempLevelConfig[macroLevel].groupCount++;
+ let layer = tempPhysicalMap[macroLevel].find(l => l.key === physicalKey);
+ if (!layer) { layer = { key: physicalKey, count: 0 }; tempPhysicalMap[macroLevel].push(layer); }
+ layer.count++;
+ });
+ physicalLevelMap = tempPhysicalMap;
+ levelConfig = tempLevelConfig;
+ }
  const levelOrder = ['A1', 'A2', 'B1', 'B2'];
 
  // Verbs that support Konjunktiv II
@@ -524,6 +544,7 @@ function hydrateFromLocalCache() {
  allVerbsData = data.allVerbsData;
  verbGroupsByLevel = data.verbGroupsByLevel;
  allGroupsIndex = Array.isArray(data.allGroupsIndex) ? data.allGroupsIndex : [];
+ if (allGroupsIndex.length > 0) autoConfigureLevelsFromGroups(allGroupsIndex);
  fileIndexData = data.fileIndexData || null;
  if (data.wortfamilieIndex && typeof data.wortfamilieIndex === 'object') {
  wortfamilieIndex = data.wortfamilieIndex;
@@ -601,6 +622,7 @@ async function loadBackgroundData() {
  const vData = await parseJsonUtf8(vRes);
  remoteVersion = vData.lastUpdated;
  allGroupsIndex = Array.isArray(vData.groups) ? vData.groups : allGroupsIndex;
+ if (allGroupsIndex.length > 0) autoConfigureLevelsFromGroups(allGroupsIndex);
  if (remoteVersion) {
  appVersion = remoteVersion;
  }
@@ -3722,7 +3744,7 @@ async function loadWortfamilieIndex() {
  let matchedKonjunktivForm = '';
 
  // Search in German infinitive and Spanish translation
- const germanMatch = verbName.toLowerCase().includes(searchTerm);
+ const germanMatch = normalizeSearchValue(verbName).includes(searchTerm);
  let spanishMatch = containsWord(verbData.es, searchTerm);
 
  // Also search in searchable Spanish variants
@@ -4380,8 +4402,8 @@ async function loadWortfamilieIndex() {
  const results = wortfamilieIndex.filter(item => {
  const word = item.word || '';
  const es = item.es || '';
- return word.toLowerCase().includes(searchTerm) ||
- es.toLowerCase().includes(searchTerm);
+ return normalizeSearchValue(word).includes(searchTerm) ||
+ normalizeSearchValue(es).includes(searchTerm);
  });
 
  cardsContainer.innerHTML = '';
@@ -4525,7 +4547,7 @@ async function loadWortfamilieIndex() {
 
  for (const [word, data] of Object.entries(wortfamilieIndex)) {
  // Check if the word matches (contains) the search term
- if (word.toLowerCase().includes(termLower)) {
+ if (normalizeSearchValue(word).includes(termLower)) {
  const candidateVerbs = resolveWortfamilieVerbs(word, data);
  candidateVerbs.forEach(verb => {
  const resultKey = `${verb}::${word}`;
