@@ -23,6 +23,8 @@
             --cat-social: #10b981;
             --cat-reacciones: #f97316;
             --cat-avisos: #ef4444;
+            --cat-kinder: #ec4899;
+            --cat-despedidas: #14b8a6;
 
             --level-a1: #3b82f6;
             --level-a2: #eab308;
@@ -317,6 +319,14 @@
             background: var(--cat-avisos);
         }
 
+        .level-card.kinder-card .card-footer {
+            background: var(--cat-kinder);
+        }
+
+        .level-card.despedidas-card .card-footer {
+            background: var(--cat-despedidas);
+        }
+
         .level-card .card-footer {
             margin-top: auto;
         }
@@ -339,6 +349,14 @@
 
         .level-header.avisos {
             background: var(--cat-avisos);
+        }
+
+        .level-header.kinder {
+            background: var(--cat-kinder);
+        }
+
+        .level-header.despedidas {
+            background: var(--cat-despedidas);
         }
 
         table {
@@ -466,6 +484,14 @@
 
         .modal-header.theme-avisos {
             background: var(--cat-avisos);
+        }
+
+        .modal-header.theme-kinder {
+            background: var(--cat-kinder);
+        }
+
+        .modal-header.theme-despedidas {
+            background: var(--cat-despedidas);
         }
 
         .modal-header.theme-na {
@@ -811,6 +837,20 @@
                 </table>
                 <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Warnungen')">Warnungen</span><span id="titleAvisos" class="card-footer-translation">Avisos</span></span></div>
             </div>
+            <div class="level-card kinder-card">
+                <div class="level-header kinder"><span class="card-footer-level">A1-A2</span><span id="headerWordEs6" class="card-header-label">interjecciones</span></div>
+                <table>
+                    <tbody id="group-kinder"></tbody>
+                </table>
+                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Kindersprache')">Kindersprache</span><span id="titleKinder" class="card-footer-translation">Niños</span></span></div>
+            </div>
+            <div class="level-card despedidas-card">
+                <div class="level-header despedidas"><span class="card-footer-level">A1-A2</span><span id="headerWordEs7" class="card-header-label">interjecciones</span></div>
+                <table>
+                    <tbody id="group-despedidas"></tbody>
+                </table>
+                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Abschiede')">Abschiede</span><span id="titleDespedidas" class="card-footer-translation">Despedidas</span></span></div>
+            </div>
         </div>
 
         <section
@@ -847,6 +887,8 @@
                 titleSocial: "Social",
                 titleReacciones: "Reacciones",
                 titleAvisos: "Avisos",
+                titleKinder: "Niños",
+                titleDespedidas: "Despedidas",
                 footerInterjection: "interjecciones",
                 naDef: "La navaja suiza del idioma. Cambia según el contexto.",
                 btnSpeak: "ESCUCHAR"
@@ -859,6 +901,8 @@
                 titleSocial: "Social",
                 titleReacciones: "Reactions",
                 titleAvisos: "Warnings",
+                titleKinder: "Kids",
+                titleDespedidas: "Farewells",
                 footerInterjection: "interjections",
                 naDef: "The language's Swiss Army knife. Context is key.",
                 btnSpeak: "LISTEN"
@@ -948,6 +992,19 @@
                 { de: "Oje!", es: "¡Ay no!", en: "Oh dear!", lv: "A2", ex: [{ de: "Oje, ich habe kein Geld.", es: "¡Ay no!, no tengo dinero.", en: "Oh dear, I have no money." }] },
                 { de: "Zu viel!", es: "¡Demasiado!", en: "Too much!", lv: "A2", ex: [{ de: "Das ist einfach zu viel.", es: "Eso es simplemente demasiado.", en: "That is simply too much." }] },
                 { de: "Lieber nicht.", es: "Mejor no", en: "Better not", lv: "A2", ex: [{ de: "Wollen wir gehen? - Lieber nicht.", es: "¿Quieres ir? - Mejor no.", en: "Shall we go? - Better not." }] }
+            ],
+            kinder: [
+                { de: "Kuckuck!", es: "¡Cucú!", en: "Peekaboo!", lv: "A1", ex: [{ de: "Kuckuck! Wo bin ich?", es: "¡Cucú! ¿Dónde estoy?", en: "Peekaboo! Where am I?" }] },
+                { de: "Still und starr!", es: "¡Quietos y congelados!", en: "Freeze and stay still!", lv: "A2", ex: [{ de: "Still und starr, keiner bewegt sich!", es: "¡Quietos y congelados, nadie se mueve!", en: "Freeze and stay still, nobody moves!" }] },
+                { de: "Auf die Plätze, fertig, los!", es: "¡En sus marcas, listos, ya!", en: "Ready, set, go!", lv: "A2", ex: [{ de: "Auf die Plätze, fertig, los! Das Rennen beginnt.", es: "¡En sus marcas, listos, ya! La carrera empieza.", en: "Ready, set, go! The race begins." }] },
+                { de: "Geschafft!", es: "¡Lo logré! / ¡Hecho!", en: "I did it! / Done!", lv: "A2", ex: [{ de: "Geschafft, das Puzzle ist fertig!", es: "¡Lo logré, el rompecabezas está listo!", en: "I did it, the puzzle is finished!" }] }
+            ],
+            despedidas: [
+                { de: "Tschüss!", es: "¡Chao!", en: "Bye!", lv: "A1", ex: [{ de: "Tschüss, bis morgen!", es: "¡Chao, hasta mañana!", en: "Bye, see you tomorrow!" }] },
+                { de: "Bis bald!", es: "¡Hasta pronto!", en: "See you soon!", lv: "A1", ex: [{ de: "Danke für alles, bis bald!", es: "Gracias por todo, ¡hasta pronto!", en: "Thanks for everything, see you soon!" }] },
+                { de: "Bis später!", es: "¡Hasta luego!", en: "See you later!", lv: "A1", ex: [{ de: "Ich muss los, bis später!", es: "Me tengo que ir, ¡hasta luego!", en: "I have to go, see you later!" }] },
+                { de: "Bis morgen!", es: "¡Hasta mañana!", en: "See you tomorrow!", lv: "A1", ex: [{ de: "Schlaf gut, bis morgen!", es: "Duerme bien, ¡hasta mañana!", en: "Sleep well, see you tomorrow!" }] },
+                { de: "Bis dann!", es: "¡Hasta entonces!", en: "See you then!", lv: "A1", ex: [{ de: "Alles klar, bis dann!", es: "Todo bien, ¡hasta entonces!", en: "Alright, see you then!" }] }
             ]
         };
 
@@ -1026,11 +1083,15 @@
             document.getElementById('titleSocial').textContent = langLabels.titleSocial;
             document.getElementById('titleReacciones').textContent = langLabels.titleReacciones;
             document.getElementById('titleAvisos').textContent = langLabels.titleAvisos;
+            document.getElementById('titleKinder').textContent = langLabels.titleKinder;
+            document.getElementById('titleDespedidas').textContent = langLabels.titleDespedidas;
             document.getElementById('headerWordEs').textContent = langLabels.footerInterjection;
             document.getElementById('headerWordEs2').textContent = langLabels.footerInterjection;
             document.getElementById('headerWordEs3').textContent = langLabels.footerInterjection;
             document.getElementById('headerWordEs4').textContent = langLabels.footerInterjection;
             document.getElementById('headerWordEs5').textContent = langLabels.footerInterjection;
+            document.getElementById('headerWordEs6').textContent = langLabels.footerInterjection;
+            document.getElementById('headerWordEs7').textContent = langLabels.footerInterjection;
             document.getElementById('naDef').textContent = langLabels.naDef;
             document.getElementById('btnSpeakText').textContent = langLabels.btnSpeak;
 
