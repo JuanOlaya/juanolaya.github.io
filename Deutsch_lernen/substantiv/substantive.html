@@ -2488,7 +2488,18 @@
                 { article: "der", word: "Vorname", emoji: "🪪", translation_es: "nombre de pila", translation_en: "first name", example_de: "Mein Vorname ist Juan.", example_es: "Mi nombre de pila es Juan." },
                 { article: "das", word: "Wort", emoji: "💬", translation_es: "palabra", translation_en: "word", example_de: "Dieses Wort ist neu.", example_es: "Esta palabra es nueva." },
                 { article: "die", word: "Zeitung", emoji: "📰", translation_es: "periódico", translation_en: "newspaper", example_de: "Die Zeitung liegt auf dem Tisch.", example_es: "El periódico está sobre la mesa." },
-                { article: "der", word: "Zoll", emoji: "🛃", translation_es: "aduana", translation_en: "customs", example_de: "Der Zoll kontrolliert das Gepäck.", example_es: "La aduana controla el equipaje." }
+                { article: "der", word: "Zoll", emoji: "🛃", translation_es: "aduana", translation_en: "customs", example_de: "Der Zoll kontrolliert das Gepäck.", example_es: "La aduana controla el equipaje." },
+                { article: "das", word: "Schloss", emoji: "🔒", translation_es: "cerradura", translation_en: "lock", example_de: "Das Schloss an der Tür ist neu.", example_es: "La cerradura de la puerta es nueva." },
+                { article: "der", word: "Schlüssel", emoji: "🔑", translation_es: "llave", translation_en: "key", example_de: "Der Schlüssel liegt auf dem Tisch.", example_es: "La llave está sobre la mesa." },
+                { article: "der", word: "Schluss", emoji: "🏁", translation_es: "final", translation_en: "end", example_de: "Am Schluss des Textes gibt es eine Frage.", example_es: "Al final del texto hay una pregunta." },
+                { article: "der", word: "Müll", emoji: "🗑️", translation_es: "basura", translation_en: "trash", example_de: "Der Müll kommt in die Tonne.", example_es: "La basura va al cubo." },
+                { article: "die", word: "Gefahr", emoji: "⚠️", translation_es: "peligro", translation_en: "danger", example_de: "Achtung, hier besteht Gefahr.", example_es: "Atención, aquí hay peligro." },
+                { article: "die", word: "Vorbereitung", emoji: "📝", translation_es: "preparación", translation_en: "preparation", example_de: "Die Vorbereitung auf die Prüfung dauert lange.", example_es: "La preparación para el examen dura mucho." },
+                { article: "der", word: "Ausfall", emoji: "⛔", translation_es: "fallo / cancelación", translation_en: "failure / cancellation", example_de: "Wegen des Ausfalls kommt der Zug nicht.", example_es: "Por el fallo, el tren no llega." },
+                { article: "die", word: "Begründung", emoji: "💡", translation_es: "justificación", translation_en: "reasoning", example_de: "Die Begründung ist logisch.", example_es: "La justificación es lógica." },
+                { article: "der", word: "Kleber", emoji: "🧴", translation_es: "pegamento", translation_en: "glue", example_de: "Der Kleber liegt neben der Schere.", example_es: "El pegamento está junto a las tijeras." },
+                { article: "die", word: "Wartung", emoji: "🛠️", translation_es: "mantenimiento", translation_en: "maintenance", example_de: "Die Wartung der Maschine dauert eine Stunde.", example_es: "El mantenimiento de la máquina dura una hora." },
+                { article: "die", word: "Leistung", emoji: "📈", translation_es: "rendimiento", translation_en: "performance", example_de: "Die Leistung des Motors ist gut.", example_es: "El rendimiento del motor es bueno." }
             ]
         });
 
@@ -2993,7 +3004,7 @@
                 title_es: "Seguridad",
                 title_en: "Safety",
                 level: "A1",
-                nouns: pickThemeNouns(["der|polizist", "der|feuerwehrmann"])
+                nouns: pickThemeNouns(["der|polizist", "der|feuerwehrmann", "die|gefahr"])
             },
             {
                 id: "praevention",
@@ -3065,7 +3076,7 @@
                 title_es: "Exámenes",
                 title_en: "Exams",
                 level: "A1",
-                nouns: pickThemeNouns(["die|prufung", "der|test", "die|note", "das|zeugnis", "das|diplom"])
+                nouns: pickThemeNouns(["die|prufung", "der|test", "die|note", "das|zeugnis", "das|diplom", "die|vorbereitung"])
             },
             {
                 id: "haus",
@@ -3074,6 +3085,14 @@
                 title_en: "Home",
                 level: "A1",
                 nouns: pickThemeNouns(["das|haus", "der|eingang", "das|fenster", "die|tur", "das|zimmer", "die|kuche", "das|bad"])
+            },
+            {
+                id: "zugang",
+                title: "Zugang",
+                title_es: "Acceso",
+                title_en: "Access",
+                level: "A1",
+                nouns: pickThemeNouns(["das|schloss", "der|schlussel"])
             },
             {
                 id: "bauteile",
@@ -3105,7 +3124,7 @@
                 title_es: "Electrodomésticos",
                 title_en: "Appliances",
                 level: "A1",
-                nouns: pickThemeNouns(["der|fernseher", "die|heizung", "die|waschmaschine", "der|staubsauger"])
+                nouns: pickThemeNouns(["der|fernseher", "die|heizung", "die|waschmaschine", "der|staubsauger", "die|wartung"])
             },
             {
                 id: "haushalt",
@@ -3113,7 +3132,7 @@
                 title_es: "Hogar",
                 title_en: "Household",
                 level: "A1",
-                nouns: pickThemeNouns(["der|besen", "der|eimer"])
+                nouns: pickThemeNouns(["der|besen", "der|eimer", "der|mull"])
             },
             {
                 id: "wohnen",
@@ -3588,8 +3607,17 @@
                     "die|datei",
                     "die|einstellung",
                     "die|taste",
-                    "der|fehler"
+                    "der|fehler",
+                    "der|ausfall"
                 ])
+            },
+            {
+                id: "basteln",
+                title: "Basteln",
+                title_es: "Manualidades",
+                title_en: "Crafts",
+                level: "A1",
+                nouns: pickThemeNouns(["der|kleber"])
             },
             {
                 id: "oberteile",
@@ -3721,7 +3749,7 @@
                 title_es: "Conceptos",
                 title_en: "Concepts",
                 level: "A1",
-                nouns: pickThemeNouns(["die|arbeit", "die|freiheit", "die|idee", "der|vorschlag", "das|problem"])
+                nouns: pickThemeNouns(["die|freiheit", "die|idee", "der|vorschlag", "das|problem", "der|schluss", "die|begrundung", "die|leistung"])
             },
             {
                 id: "hilfe",
@@ -3779,6 +3807,7 @@
             verwandte: "A1",
             menschen: "A1",
             haus: "A1",
+            zugang: "A1",
             bauteile: "A1",
             moebel: "A1",
             aufbewahrung: "A1",
@@ -3809,6 +3838,7 @@
             schule: "A1",
             freunde: "A1",
             schlafzimmer: "A1",
+            basteln: "A1",
             gesicht: "A1",
             koerper: "A1",
             organe: "A1",

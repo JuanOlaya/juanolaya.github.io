@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pronombres de Cantidad en Alemán</title>
+    <title>Pronombres de Cantidad en Aleman</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -27,13 +27,13 @@
 
             /* LEVEL COLORS */
             --level-a1: #3b82f6;
-            /* 🟦 Blue */
+            /* Blue */
             --level-a2: #eab308;
-            /* 🟨 Yellow */
+            /* Yellow */
             --level-b1: #f97316;
-            /* 🟧 Orange */
+            /* Orange */
             --level-b2: #ef4444;
-            /* 🟥 Red */
+            /* Red */
 
             --accent-green: #00FFA1;
             /* Main Accent */
@@ -247,9 +247,24 @@
             padding: 30px 40px 80px 40px;
             background: var(--section-bg);
             display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 18px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .visual-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: 0.01em;
+        }
+
+        .scale-row {
+            display: flex;
             align-items: center;
             gap: 15px;
-            border-bottom: 1px solid var(--border-color);
+            width: 100%;
         }
 
         .scale-bar {
@@ -269,6 +284,32 @@
             white-space: nowrap;
         }
 
+        .scale-label-interactive {
+            cursor: pointer;
+            text-align: center;
+            line-height: 1.3;
+            transition: transform 0.15s ease, opacity 0.2s ease;
+        }
+
+        .scale-label-interactive:hover {
+            opacity: 0.9;
+            transform: scale(1.04);
+        }
+
+        .scale-label-interactive .trans {
+            color: var(--accent-green);
+            font-size: 0.75rem;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .scale-label-interactive .audio-icon-inline {
+            display: inline-block;
+            margin-left: 6px;
+            font-size: 0.8em;
+            opacity: 0.75;
+        }
+
         /* Markers styled with translation */
         .marker {
             position: absolute;
@@ -280,6 +321,20 @@
             text-align: center;
             line-height: 1.3;
             white-space: nowrap;
+            cursor: pointer;
+            transition: transform 0.15s ease, opacity 0.2s ease;
+        }
+
+        .marker:hover {
+            opacity: 0.9;
+            transform: translateX(-50%) scale(1.04);
+        }
+
+        .marker .audio-icon-inline {
+            display: inline-block;
+            margin-left: 6px;
+            font-size: 0.8em;
+            opacity: 0.75;
         }
 
         .marker .trans {
@@ -325,11 +380,15 @@
             }
 
             .quantity-scale-section {
+                gap: 28px;
+                padding-top: 40px;
+                padding-bottom: 100px;
+            }
+
+            .scale-row {
                 flex-direction: column;
                 align-items: stretch;
                 gap: 40px;
-                padding-top: 40px;
-                padding-bottom: 100px;
             }
 
             .scale-bar {
@@ -596,13 +655,28 @@
             text-align: center;
         }
 
+        .modal-audio-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
         .modal-es {
             font-size: 1.2rem;
             color: var(--text-main);
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             opacity: 0.9;
             text-align: center;
             font-weight: 600;
+        }
+
+        .modal-note {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         .modal-example-box {
@@ -611,6 +685,13 @@
             border-radius: 16px;
             border: 1px solid var(--border-color);
             margin-bottom: 25px;
+        }
+
+        .modal-example-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
         }
 
         .example-de {
@@ -624,6 +705,21 @@
             font-style: italic;
             color: var(--text-muted);
             font-size: 0.95rem;
+        }
+
+        .inline-speaker-btn {
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-main);
+            border-radius: 999px;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            flex-shrink: 0;
         }
 
         .btn-container {
@@ -783,17 +879,24 @@
                 <button style="font-size: 1.5rem; color: var(--text-muted); background: none; border: none; cursor: pointer; line-height: 1; padding: 0 10px;" onclick="closeModal('wordModal')">&times;</button>
             </header>
             <div class="modal-body">
-                <div id="modalDe" class="modal-de"></div>
+                <div class="modal-audio-row">
+                    <div id="modalDe" class="modal-de"></div>
+                    <button class="inline-speaker-btn" type="button" onclick="triggerSpeech('word')" aria-label="Escuchar palabra">&#128266;</button>
+                </div>
                 <div id="modalEs" class="modal-es"></div>
+                <div id="modalNote" class="modal-note"></div>
 
                 <div class="modal-example-box" id="exampleContainer">
-                    <div class="example-de" id="modalExDe"></div>
+                    <div class="modal-example-row">
+                        <div class="example-de" id="modalExDe"></div>
+                        <button class="inline-speaker-btn" type="button" onclick="triggerSpeech('example')" aria-label="Escuchar ejemplo">&#128266;</button>
+                    </div>
                     <div class="example-es" id="modalExEs"></div>
                 </div>
 
                 <div class="btn-container">
                     <button class="play-btn-large" onclick="triggerSpeech()">
-                        🔊 ESCUCHAR
+                        &#128266; ESCUCHAR
                     </button>
                 </div>
             </div>
@@ -806,8 +909,8 @@
             <!-- THEME TOGGLE BUTTON -->
             <div class="theme-toggle-wrapper">
                 <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Dark/Light Mode">
-                    <span class="icon-sun">☀️</span>
-                    <span class="icon-moon">🌙</span>
+                    <span class="icon-sun">&#9728;</span>
+                    <span class="icon-moon">&#127769;</span>
                 </button>
             </div>
 
@@ -815,43 +918,115 @@
                 Pronombres de Cantidad
             </h1>
             <p>
-                Mengenpronomen (A1 → B2)
+                Mengenpronomen (A1 &rarr; B2)
             </p>
             <div class="search-container">
                 <input type="text" id="mengen-search" class="search-input"
                     placeholder="Suchen... (buscar cantidad)">
-                <button id="clear-search" class="clear-search-btn" type="button" aria-label="Limpiar búsqueda">×</button>
+                <button id="clear-search" class="clear-search-btn" type="button" aria-label="Limpiar busqueda">&times;</button>
             </div>
             <div id="search-results-count" class="search-results-count"></div>
         </header>
 
         <!-- Visual Thermometer Section -->
         <div class="quantity-scale-section">
-            <div class="scale-label">Nichts (0%)</div>
-            <div class="scale-bar">
-                <!-- Markers with click-to-speak added manually via class 'speak-trigger' (script below will attach) -->
-                <div class="marker">
-                    Wenige
-                    <span class="trans">Pocos</span>
-                    <span class="percent">(~15%)</span>
+            <div class="visual-title">Cantidad general</div>
+            <div class="scale-row">
+                <div class="scale-label scale-label-interactive" data-speak="nichts">
+                    Nichts (0%) <span class="audio-icon-inline">&#128266;</span>
+                    <span class="trans">nada</span>
                 </div>
-                <div class="marker" style="left: 35%">
-                    Einige/Manche
-                    <span class="trans">Algunos</span>
-                    <span class="percent">(~35%)</span>
+                <div class="scale-bar">
+                    <div class="marker" data-speak="wenig">
+                        wenig <span class="audio-icon-inline">&#128266;</span>
+                        <span class="trans">poco</span>
+                        <span class="percent">(~15%)</span>
+                    </div>
+                    <div class="marker" style="left: 35%" data-speak="etwas">
+                        etwas <span class="audio-icon-inline">&#128266;</span>
+                        <span class="trans">algo</span>
+                        <span class="percent">(~35%)</span>
+                    </div>
+                    <div class="marker" style="left: 60%" data-speak="viel">
+                        viel <span class="audio-icon-inline">&#128266;</span>
+                        <span class="trans">mucho</span>
+                        <span class="percent">(~60%)</span>
+                    </div>
+                    <div class="marker" style="left: 85%" data-speak="die meisten">
+                        die meisten <span class="audio-icon-inline">&#128266;</span>
+                        <span class="trans">la mayor&iacute;a</span>
+                        <span class="percent">(~85%)</span>
+                    </div>
                 </div>
-                <div class="marker" style="left: 60%">
-                    Viele
-                    <span class="trans">Muchos</span>
-                    <span class="percent">(~60%)</span>
-                </div>
-                <div class="marker" style="left: 85%">
-                    Die meisten
-                    <span class="trans">La mayoría</span>
-                    <span class="percent">(~85%)</span>
+                <div class="scale-label scale-label-interactive" data-speak="alles">
+                    Alles (100%) <span class="audio-icon-inline">&#128266;</span>
+                    <span class="trans">todo</span>
                 </div>
             </div>
-            <div class="scale-label">Alles (100%)</div>
+        </div>
+
+        <div class="quantity-scale-section">
+            <div class="visual-title">Personas</div>
+            <div class="scale-row">
+                <div class="scale-label scale-label-interactive" data-speak="niemand">
+                    Niemand <span class="audio-icon-inline">&#128266;</span>
+                    <span class="trans">nadie</span>
+                </div>
+                <div class="scale-bar">
+                    <div class="marker" data-speak="jemand">
+                        jemand <span class="audio-icon-inline">&#128266;</span>
+                        <span class="trans">alguien</span>
+                    </div>
+                    <div class="marker" style="left: 35%" data-speak="einige">
+                        einige <span class="audio-icon-inline">&#128266;</span>
+                        <span class="trans">algunos</span>
+                    </div>
+                    <div class="marker" style="left: 60%" data-speak="viele">
+                        viele <span class="audio-icon-inline">&#128266;</span>
+                        <span class="trans">muchos</span>
+                    </div>
+                    <div class="marker" style="left: 85%" data-speak="alle">
+                        alle <span class="audio-icon-inline">&#128266;</span>
+                        <span class="trans">todos</span>
+                    </div>
+                </div>
+                <div class="scale-label scale-label-interactive" data-speak="alle">
+                    Alle <span class="audio-icon-inline">&#128266;</span>
+                    <span class="trans">todos</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="quantity-scale-section">
+            <div class="visual-title">Frecuencia / repeticion</div>
+            <div class="scale-row">
+                <div class="scale-label scale-label-interactive" data-speak="nie">
+                    Nie <span class="audio-icon-inline">&#128266;</span>
+                    <span class="trans">nunca</span>
+                </div>
+                <div class="scale-bar">
+                    <div class="marker" data-speak="selten">
+                        selten <span class="audio-icon-inline">&#128266;</span>
+                        <span class="trans">pocas veces</span>
+                    </div>
+                    <div class="marker" style="left: 35%" data-speak="manchmal">
+                        manchmal <span class="audio-icon-inline">&#128266;</span>
+                        <span class="trans">a veces</span>
+                    </div>
+                    <div class="marker" style="left: 60%" data-speak="mehrmals">
+                        mehrmals <span class="audio-icon-inline">&#128266;</span>
+                        <span class="trans">varias veces</span>
+                    </div>
+                    <div class="marker" style="left: 85%" data-speak="oft">
+                        oft <span class="audio-icon-inline">&#128266;</span>
+                        <span class="trans">muchas veces</span>
+                    </div>
+                </div>
+                <div class="scale-label scale-label-interactive" data-speak="immer">
+                    Immer <span class="audio-icon-inline">&#128266;</span>
+                    <span class="trans">siempre</span>
+                </div>
+            </div>
         </div>
 
         <!-- MAIN CONTENT GRID -->
@@ -880,7 +1055,15 @@
                                     algo / un poco <span class="word-level-tag level-tag-a">A1</span>
                                 </td>
                             </tr>
-                            <tr onclick="openWordModal('alle', 'todos (100%)', 'Alle kommen.', 'Todos vienen.')">
+                            <tr onclick="openWordModal('alles', 'todo', 'Alles ist gut.', 'Todo esta bien.', 'Plural de personas o cosas contables: alle')">
+                                <td>
+                                    <div class="german-word">alles</div>
+                                </td>
+                                <td class="spanish-word">
+                                    todo <span class="word-level-tag level-tag-a">A1</span>
+                                </td>
+                            </tr>
+                            <tr onclick="openWordModal('alle', 'todos (100%)', 'Alle kommen.', 'Todos vienen.', 'Singular neutro: alles')">
                                 <td>
                                     <div class="german-word">alle</div>
                                 </td>
@@ -888,20 +1071,20 @@
                                     todos (100%) <span class="word-level-tag level-tag-a">A1</span>
                                 </td>
                             </tr>
-                            <tr onclick="openWordModal('viel oder viele', 'mucho(s)', 'Viele arbeiten hier.', 'Muchos trabajan aqu&iacute;.')">
+                            <tr onclick="openWordModal('viel', 'mucho', 'Ich habe viel Arbeit.', 'Tengo mucho trabajo.', 'Plural habitual: viele')">
                                 <td>
-                                    <div class="german-word" data-speak="viel oder viele">viel(e)</div>
+                                    <div class="german-word" data-speak="viel, viele">viel</div>
                                 </td>
                                 <td class="spanish-word">
-                                    mucho(s) <span class="word-level-tag level-tag-a">A1</span>
+                                    mucho <span class="word-level-tag level-tag-a">A1</span>
                                 </td>
                             </tr>
-                            <tr onclick="openWordModal('wenig oder wenige', 'poco(s)', 'Wenige verstehen das.', 'Pocos entienden eso.')">
+                            <tr onclick="openWordModal('wenig', 'poco', 'Ich habe wenig Zeit.', 'Tengo poco tiempo.', 'Plural habitual: wenige')">
                                 <td>
-                                    <div class="german-word" data-speak="wenig oder wenige">wenig(e)</div>
+                                    <div class="german-word" data-speak="wenig, wenige">wenig</div>
                                 </td>
                                 <td class="spanish-word">
-                                    poco(s) <span class="word-level-tag level-tag-a">A1</span>
+                                    poco <span class="word-level-tag level-tag-a">A1</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -1076,22 +1259,22 @@
             <!-- Rule 1: General Usage -->
             <div class="rule-card">
                 <div class="rule-title">
-                    <span>👉 Regla Clave</span>
+                    <span>Regla Clave</span>
                 </div>
                 <div class="rule-content">
-                    Los pronombres de cantidad <strong>NO</strong> van acompañados de un sustantivo. Sustituyen al
+                    Los pronombres de cantidad <strong>NO</strong> van acompanados de un sustantivo. Sustituyen al
                     sustantivo por completo.
                 </div>
                 <div class="rule-example">
-                    ✅ <span style="color:var(--accent-green)">Viele</span> kommen.<br>
-                    ❌ <span style="text-decoration: line-through; opacity: 0.6;">Viele Leute</span> kommen.
+                    OK <span style="color:var(--accent-green)">Viele</span> kommen.<br>
+                    No <span style="text-decoration: line-through; opacity: 0.6;">Viele Leute</span> kommen.
                 </div>
             </div>
 
             <!-- Rule 2: Alles vs Alle -->
             <div class="rule-card" style="border-left-color: var(--level-b2);">
                 <div class="rule-title" style="color: var(--level-b2);">
-                    <span>⚠️ No confundir</span>
+                    <span>No confundir</span>
                 </div>
                 <div class="rule-content">
                     <ul style="margin: 0; padding-left: 20px; list-style: none;">
@@ -1112,18 +1295,18 @@
             <!-- Rule 3: Declination (Full Width) -->
             <div class="rule-card full-width">
                 <div class="rule-title" style="color: var(--level-a2);">
-                    <span>ℹ️ Nota Gramatical: Declinación</span>
+                    <span>Nota Gramatical: Declinacion</span>
                 </div>
                 <div class="rule-content">
-                    Estos pronombres funcionan como <strong>adjetivos</strong>. Sus terminaciones cambian según el caso
-                    (Nominativ, Akkusativ, Dativ). Como no hay artículo delante, suelen llevar la terminación fuerte
-                    (señal gramatical).
+                    Estos pronombres funcionan como <strong>adjetivos</strong>. Sus terminaciones cambian segun el caso
+                    (Nominativ, Akkusativ, Dativ). Como no hay articulo delante, suelen llevar la terminacion fuerte
+                    (senal gramatical).
 
                     <table class="declension-table">
                         <thead>
                             <tr>
                                 <th>Caso</th>
-                                <th>Terminación (Plural)</th>
+                                <th>Terminacion (Plural)</th>
                                 <th>Ejemplo</th>
                             </tr>
                         </thead>
@@ -1152,17 +1335,18 @@
         <div id="no-results" class="no-results">Keine Ergebnisse gefunden / No results found</div>
 
         <footer>
-            <p>Infografía de Gramática Alemana &copy; 2025</p>
+            <p>Infografia de Gramatica Alemana &copy; 2025</p>
         </footer>
     </div>
 
     <script>
         
-        function openWordModal(de, es, exDe, exEs) {
+        function openWordModal(de, es, exDe, exEs, note = '') {
             document.getElementById('wordModal').style.display = 'flex';
             document.getElementById('modalDe').textContent = de;
             document.getElementById('modalEs').textContent = es;
-            document.getElementById('modalExDe').innerHTML = exDe + ' <i class="fas fa-volume-up text-xs opacity-50 ml-2"></i>';
+            document.getElementById('modalNote').textContent = note;
+            document.getElementById('modalExDe').textContent = exDe;
             document.getElementById('modalExEs').textContent = exEs;
         }
 
@@ -1171,8 +1355,10 @@
             document.getElementById(modalId).style.display = 'none';
         }
 
-        function triggerSpeech() {
-            const text = document.getElementById('modalDe').textContent;
+        function triggerSpeech(target = 'word') {
+            const text = target === 'example'
+                ? document.getElementById('modalExDe').textContent
+                : document.getElementById('modalDe').textContent;
             speak(text);
         }
         
@@ -1193,7 +1379,7 @@
         // Voice Synthesis Logic
         function speak(text) {
             if (!('speechSynthesis' in window)) {
-                alert("Lo siento, tu navegador no soporta la síntesis de voz.");
+                alert("Lo siento, tu navegador no soporta la sintesis de voz.");
                 return;
             }
 
@@ -1222,7 +1408,7 @@
         function highlightMatch(text, query) {
             if (!text || !query) return text;
             const escapedQuery = escapeRegExp(query);
-            const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
+            const regex = new RegExp(`([\\w\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00DF]*${escapedQuery}[\\w\\u00E4\\u00F6\\u00FC\\u00C4\\u00D6\\u00DC\\u00DF]*)`, 'gi');
             return text.replace(regex, '<span class="search-highlight">$1</span>');
         }
 
@@ -1234,6 +1420,8 @@
             const noResults = document.getElementById('no-results');
             const levelCards = document.querySelectorAll('.level-card');
             const searchableRows = document.querySelectorAll('.level-card tbody tr');
+            const visualMarkers = document.querySelectorAll('.marker[data-speak]');
+            const visualLabels = document.querySelectorAll('.scale-label-interactive[data-speak]');
 
             function enhanceGermanWords() {
                 const words = document.querySelectorAll('.german-word');
@@ -1246,7 +1434,7 @@
                     let icon = el.querySelector('.audio-icon');
                     if (!icon) {
                         icon = document.createElement('span');
-                        icon.textContent = '🔊';
+                        icon.textContent = "\uD83D\uDD0A";
                         icon.className = 'audio-icon';
                         el.appendChild(icon);
                     }
@@ -1344,6 +1532,28 @@
             enhanceGermanWords();
             setupSearchableContent();
             filterRows();
+
+            visualMarkers.forEach(marker => {
+                marker.setAttribute('title', 'Clic para escuchar');
+                marker.addEventListener('click', () => {
+                    marker.style.transform = 'translateX(-50%) scale(0.97)';
+                    setTimeout(() => {
+                        marker.style.transform = 'translateX(-50%) scale(1)';
+                    }, 150);
+                    speak(marker.getAttribute('data-speak') || marker.textContent.trim());
+                });
+            });
+
+            visualLabels.forEach(label => {
+                label.setAttribute('title', 'Clic para escuchar');
+                label.addEventListener('click', () => {
+                    label.style.transform = 'scale(0.97)';
+                    setTimeout(() => {
+                        label.style.transform = 'scale(1)';
+                    }, 150);
+                    speak(label.getAttribute('data-speak') || label.textContent.trim());
+                });
+            });
 
             searchInput.addEventListener('input', filterRows);
             clearSearchButton.addEventListener('click', () => {

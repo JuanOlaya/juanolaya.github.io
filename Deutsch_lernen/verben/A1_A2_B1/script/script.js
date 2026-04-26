@@ -18,7 +18,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  let physicalLevelMap = {
  'A1': [
  { key: 'A1_1', count: 14 },
- { key: 'A1_2', count: 14 }
+ { key: 'A1_2', count: 16 }
  ],
  'A2': [
  { key: 'A2_1', count: 13 },
@@ -122,7 +122,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  }
 
  let levelConfig = {
- 'A1': { groupCount: 28, displayName: 'A1' },
+ 'A1': { groupCount: 30, displayName: 'A1' },
  'A2': { groupCount: 29, displayName: 'A2' },
  'B1': { groupCount: 25, displayName: 'B1' },
  'B2': { groupCount: 14, displayName: 'B2' }
