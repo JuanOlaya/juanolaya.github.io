@@ -162,7 +162,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  let isRestoringModalTab = false;
  let storyClickCounter = 0;
 let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
-const CACHE_KEY = 'verbAppCache_v45_wortfamilie_search_ready';
+const CACHE_KEY = 'verbAppCache_v46_wortfamilie_search_ready';
 const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
 let cachePersistTimeout = null;
 let cachePersistenceDisabled = false;
@@ -1526,8 +1526,9 @@ async function loadBackgroundData() {
 
  const levelBadge = document.createElement('span');
  levelBadge.className = 'card-footer-tag card-footer-level';
+ levelBadge.style.border = 'none';
  const rawLevel = group.level || currentLevel; // e.g. "A1.1"
- const formattedLevel = rawLevel.toUpperCase().replace(/([A-Z])(\d).*/, '$1.$2'); // e.g. "A.1"
+ const formattedLevel = rawLevel.toUpperCase().replace(/([A-Z])(\d).*/, '$1$2'); // e.g. "A1"
  levelBadge.textContent = formattedLevel;
 
  const verbsLabel = document.createElement('span');
