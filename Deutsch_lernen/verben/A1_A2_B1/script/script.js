@@ -29,6 +29,38 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  };
  const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#3b82f6', '#ea580c', '#22C55E', '#a855f7', '#facc15'];
 
+ const separablePrefixesMap = {
+ "abbiegen": "ab", "abfahren": "ab", "abfliegen": "ab", "abgeben": "ab", "abhalten": "ab", "abheben": "ab", "abholen": "ab", "absagen": "ab", "abschließen": "ab", "ablehnen": "ab", "abnehmen": "ab", "abschaffen": "ab", "absichern": "ab",
+ "anbieten": "an", "anfahren": "an", "anfangen": "an", "ankommen": "an", "ankreuzen": "an", "anprobieren": "an", "anrufen": "an", "ansehen": "an", "anziehen": "an", "anklagen": "an", "anklicken": "an", "anmachen": "an", "anmelden": "an", "anregen": "an", "anwenden": "an",
+ "aufbauen": "auf", "aufhören": "auf", "aufmachen": "auf", "aufpassen": "auf", "aufräumen": "auf", "aufstehen": "auf", "aufwachen": "auf", "aufwachsen": "auf", "aufgeben": "auf", "aufregen": "auf", "aufsuchen": "auf",
+ "ausfallen": "aus", "ausfüllen": "aus", "ausgehen": "aus", "ausgeben": "aus", "auslegen": "aus", "ausleihen": "aus", "auspacken": "aus", "ausruhen": "aus", "aussehen": "aus", "aussprechen": "aus", "aussteigen": "aus", "aussuchen": "aus", "auswählen": "aus", "ausziehen": "aus", "ausgrenzen": "aus", "auslösen": "aus", "ausmachen": "aus", "ausschalten": "aus",
+ "beitreten": "bei", "dabeihaben": "dabei", "durchstreichen": "durch",
+ "darlegen": "dar",
+ "eingreifen": "ein", "einkaufen": "ein", "einladen": "ein", "einmachen": "ein", "einpacken": "ein", "einrichten": "ein", "einschlafen": "ein", "einsteigen": "ein", "eintragen": "ein", "einziehen": "ein", "einhalten": "ein", "einlegen": "ein", "einordnen": "ein", "einreichen": "ein", "einschalten": "ein", "einschränken": "ein", "einstellen": "ein", "einwenden": "ein",
+ "fernsehen": "fern", "fertigmachen": "fertig", "herstellen": "her", "hineingehen": "hinein",
+ "feststellen": "fest", "herunterladen": "herunter", "hochladen": "hoch",
+ "kennenlernen": "kennen",
+ "mitbringen": "mit", "mitkommen": "mit", "mitmachen": "mit", "mitnehmen": "mit", "mitteilen": "mit", "mitwirken": "mit",
+ "nachholen": "nach", "stattfinden": "statt",
+ "teilnehmen": "teil",
+ "umsteigen": "um", "umtauschen": "um", "umziehen": "um",
+ "vorbereiten": "vor", "vorhaben": "vor", "weiterhelfen": "weiter", "vorschlagen": "vor", "vorstellen": "vor",
+ "wegtun": "weg", "wegwerfen": "weg", "wehtun": "weh", "wohlfühlen": "wohl",
+ "zuhören": "zu", "zumachen": "zu", "zuordnen": "zu", "zunehmen": "zu", "zustimmen": "zu",
+ "zurückbringen": "zurück", "zurückgeben": "zurück", "zurückkommen": "zurück"
+ };
+
+ function formatVerbPrefix(verbName) {
+ if (separablePrefixesMap[verbName]) {
+ const prefix = separablePrefixesMap[verbName];
+ if (verbName.startsWith(prefix)) {
+ return `<span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}`;
+ }
+ }
+ return verbName;
+ }
+
+
  function getPhysicalGroupData(macroLevel, globalIndex) {
  const layers = physicalLevelMap[macroLevel] || [];
  let offset = 0;
@@ -1485,7 +1517,8 @@ async function loadBackgroundData() {
 
  const germanWord = document.createElement('div');
  germanWord.className = 'kompakt-german';
- germanWord.innerHTML = `${verbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}`;
+ const displayVerb = formatVerbPrefix(verbName);
+ germanWord.innerHTML = `${displayVerb}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}`;
  germanWord.style.display = showGerman ? '' : 'none';
  germanWord.style.cursor = 'pointer';
  germanWord.title = 'Aussprache hören';
@@ -1625,10 +1658,11 @@ async function loadBackgroundData() {
  const lidBadge = isLiD ? ` <span class="lid-badge" style="vertical-align: super; font-size: 0.55rem; padding: 1px 4px; margin-left: 6px;">LiD</span>` : '';
 
  // New Structure: Header (Word + Translation), Body (Tags Centered), No Emoji
+ const displayVerb = formatVerbPrefix(verbName);
  return `
  <div class="word-item">
  <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer; flex-direction: column; gap: 5px;">
- <span class="german-word" style="font-size: 1.5rem;">${verbName} ${irregularMark}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}</span>
+ <span class="german-word" style="font-size: 1.5rem;">${displayVerb} ${irregularMark}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}</span>
  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
  <span class="spanish-translation" style="font-size: 1.1rem; color: white; font-style: italic;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${esTranslation}</span>
  ${showEnglish ? `<span class="english-translation" style="font-size: 1.1rem; color: white; font-weight: 600;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${enTranslation}</span>` : ''}
@@ -1683,7 +1717,7 @@ async function loadBackgroundData() {
  <div class="card normal-card">
  <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">
  <span class="normal-emoji">${emoji}</span>
- <h3 class="normal-german">${verbName}${irregular}</h3>
+ <h3 class="normal-german">${formatVerbPrefix(verbName)}${irregular}</h3>
  ${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}
  </div>
  <div class="normal-card-content" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
@@ -1740,14 +1774,14 @@ async function loadBackgroundData() {
  const intrBadge = isIntransitive ? ` <span class="intr-badge" style="padding: 1px 4px; font-size: 0.6rem; margin-left: 8px;">intr</span>` : '';
  const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
  const ikBadge = isIK ? ` <span class="ik-badge" style="padding: 1px 4px; font-size: 0.6rem; margin-left: 8px;">IK</span>` : '';
- const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
  const lidBadge = isLiD ? ` <span class="lid-badge" style="padding: 1px 4px; font-size: 0.6rem; margin-left: 8px;">LiD</span>` : '';
+ const displayVerb = formatVerbPrefix(verbName);
 
  // Create row
  const row = document.createElement('div');
  row.className = 'light-version-row';
  row.innerHTML = `
- <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${infinitiv}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}</div>
+ <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hören" style="cursor: pointer;">${displayVerb}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}</div>
  <div class="light-version-cell perfekt" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${perfekt}</div>
  <div class="light-version-cell praeteritum" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${praeteritum}</div>
  <div class="light-version-cell translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${translation}</div>
@@ -2748,7 +2782,7 @@ async function loadBackgroundData() {
  const infinitiveElement = document.getElementById('modal-verb-infinitive');
  // const irregularMark = updatedData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
  // Removed asterisk as requested
- infinitiveElement.innerHTML = verb;
+ infinitiveElement.innerHTML = formatVerbPrefix(verb);
 
  // Reset tags collapse state
  const tagsCollapsible = document.getElementById('modal-tags-collapsible');

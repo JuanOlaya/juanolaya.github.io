@@ -5037,3 +5037,26 @@ body.compact-view .cards-container {
 #verb-modal .modal-content.hide-lid .case-tag-LiD {
     display: none !important;
 }
+
+/* === Separable Prefixes (Trennbare Verben) === */
+.separable-prefix {
+    transition: text-decoration 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+/* When the toggle is checked, we add a class to body/main-container/modal to show underlines. 
+   Actually, the toggle logic removes the class when checked if we use "hide-", 
+   or adds it if we reverse. Let's use the 'hide-separable-prefixes' logic. */
+body:not(.hide-separable-prefixes) .separable-prefix,
+.main-container:not(.hide-separable-prefixes) .separable-prefix,
+#verb-modal .modal-content:not(.hide-separable-prefixes) .separable-prefix {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: #facc15;
+    text-decoration-thickness: 2.5px;
+}
+
+body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
+.compact-light-mode .main-container:not(.hide-separable-prefixes) .separable-prefix,
+.compact-light-mode #verb-modal .modal-content:not(.hide-separable-prefixes) .separable-prefix {
+    text-decoration-color: #1e293b;
+}
