@@ -1,6 +1,6 @@
-const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const indexFile = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path').join(__dirname, 'json', 'verbs_index.json');
-const cardsDir = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path').join(__dirname, 'json', 'cards');
+const fs = require('fs');
+const indexFile = require('path').join(__dirname, 'json', 'verbs_index.json');
+const cardsDir = require('path').join(__dirname, 'json', 'cards');
 const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
 
 // build a map of verb -> groupNumber
@@ -13,7 +13,7 @@ data.groups.forEach(g => {
 
 fs.readdirSync(cardsDir).forEach(file => {
     if (!file.endsWith('.json')) return;
-    const cardPath = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path').join(cardsDir, file);
+    const cardPath = require('path').join(cardsDir, file);
     let cardData;
     try {
         cardData = JSON.parse(fs.readFileSync(cardPath, 'utf8'));
