@@ -819,7 +819,7 @@ body.compact-view.compact-light-mode .kompakt-header-es {
     border: none;
     border-radius: 999px;
     padding: 4px 12px;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     font-weight: 800;
     letter-spacing: 0.05em;
     line-height: 1;
@@ -1268,9 +1268,9 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 }
 
 .tag-dativ {
-    background: rgba(234, 179, 8, 0.2);
-    border-color: rgba(234, 179, 8, 0.3);
-    color: #fde047;
+    background: #46866E;
+    border-color: #46866E;
+    color: #ffffff;
 }
 
 .tag-reflexive {
@@ -3817,6 +3817,8 @@ tr.pronoun-row-Sie-formal td:nth-child(2) {
     font-style: italic;
     font-weight: 600;
     font-size: 1.2rem;
+    white-space: pre-line;
+    line-height: 1.15;
 }
 
 /* ===== CUTE VERSION STYLES ===== */
@@ -4927,14 +4929,14 @@ body.compact-view .cards-container {
     display: inline-block;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 0.65rem;
+    font-size: 0.9rem;
     font-weight: bold;
     margin-left: 6px;
     vertical-align: middle;
     text-transform: lowercase;
-    background: rgba(234, 179, 8, 0.15);
-    color: #eab308;
-    border: 1px solid rgba(234, 179, 8, 0.3);
+    background: #FCDC5F;
+    color: #000000;
+    border: 1px solid #c9a632;
     pointer-events: none;
 }
 
@@ -4948,15 +4950,21 @@ body.compact-view .cards-container {
     display: inline-block;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 0.65rem;
+    font-size: 0.9rem;
     font-weight: bold;
     margin-left: 6px;
     vertical-align: middle;
     text-transform: lowercase;
-    background: rgba(59, 130, 246, 0.15);
-    color: #3b82f6;
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: #46866E;
+    color: #ffffff;
+    border: 1px solid #46866E;
     pointer-events: none;
+}
+
+.case-tag-DAT {
+    background: #46866E !important;
+    color: #ffffff !important;
+    border-color: #46866E !important;
 }
 
 /* Hide Dativ Tags when Toggle is Disabled */
@@ -4969,7 +4977,7 @@ body.compact-view .cards-container {
     display: inline-block;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 0.65rem;
+    font-size: 0.9rem;
     font-weight: bold;
     margin-left: 6px;
     vertical-align: middle;
@@ -4990,7 +4998,7 @@ body.compact-view .cards-container {
     display: inline-block;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 0.65rem;
+    font-size: 0.9rem;
     font-weight: bold;
     margin-left: 6px;
     vertical-align: middle;
@@ -5014,7 +5022,7 @@ body.compact-view .cards-container {
     display: inline-block;
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 0.65rem;
+    font-size: 0.9rem;
     font-weight: bold;
     margin-left: 6px;
     vertical-align: middle;
@@ -5035,6 +5043,29 @@ body.compact-view .cards-container {
 }
 
 #verb-modal .modal-content.hide-lid .case-tag-LiD {
+    display: none !important;
+}
+
+.a1test-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-left: 6px;
+    vertical-align: middle;
+    background: #ef4444;
+    color: #ffffff;
+    border: 1px solid #dc2626;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.hide-a1-test [class*="case-tag-A1"] {
+    display: none !important;
+}
+
+#verb-modal .modal-content.hide-a1-test [class*="case-tag-A1"] {
     display: none !important;
 }
 
