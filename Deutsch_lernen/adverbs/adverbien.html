@@ -1089,6 +1089,15 @@
                         "level": "A1-A2"
                     },
                     {
+                        "word": "bereits",
+                        "emoji": "\u2705",
+                        "spanish": "(ya / previamente)",
+                        "english": "already / previously",
+                        "example_de": "Er ist bereits zu Hause.",
+                        "example_es": "\u00c9l ya est\u00e1 en casa.",
+                        "level": "A2"
+                    },
+                    {
                         "word": "noch",
                         "emoji": "⏳",
                         "spanish": "(todavía/aún)",
@@ -1499,6 +1508,15 @@
                         "level": "A1"
                     },
                     {
+                        "word": "weiter",
+                        "emoji": "\u27A1\uFE0F",
+                        "spanish": "(m\u00e1s / adelante)",
+                        "english": "further / on",
+                        "example_de": "Gehen Sie bitte weiter.",
+                        "example_es": "Siga m\u00e1s adelante, por favor.",
+                        "level": "A2"
+                    },
+                    {
                         "word": "drinnen",
                         "emoji": "🏠",
                         "spanish": "(dentro)",
@@ -1751,6 +1769,15 @@
                         "example_de": "Es regnet, daher bleiben wir zu Hause.",
                         "example_es": "Llueve, por eso nos quedamos en casa.",
                         "level": "A2-B1"
+                    },
+                    {
+                        "word": "also",
+                        "emoji": "\uD83D\uDC49",
+                        "spanish": "(entonces / as\u00ed que)",
+                        "english": "so / then",
+                        "example_de": "Also, was machen wir jetzt?",
+                        "example_es": "Entonces, \u00bfqu\u00e9 hacemos ahora?",
+                        "level": "A2"
                     },
                     {
                         "word": "deshalb",
@@ -2175,17 +2202,18 @@
         ];
 
         const themeBlueprints = [
-            { title: 'Gegenwart', translation: '(presente)', level: 'A1-A2', colorMain: '#0ea5e9', badge: 'GEGENWART', words: ['jetzt', 'heute', 'gerade', 'gleich', 'sofort', 'bald', 'schon'] },
+            { title: 'Gegenwart', translation: '(presente)', level: 'A1-A2', colorMain: '#0ea5e9', badge: 'GEGENWART', words: ['jetzt', 'heute', 'gerade', 'gleich', 'sofort', 'bald'] },
             { title: 'Abfolge', translation: '(secuencia)', level: 'A1-A2', colorMain: '#0284c7', badge: 'ABFOLGE', words: ['gestern', 'morgen', 'dann', 'danach', 'sp\u00e4ter', 'vorhin', 'zuletzt'] },
             { title: 'Beginn', translation: '(inicio)', level: 'A1-A2', colorMain: '#0f766e', badge: 'BEGINN', words: ['erst', 'zuerst', 'erstmals'] },
-            { title: 'Zeitlauf', translation: '(curso del tiempo)', level: 'A1-A2', colorMain: '#0891b2', badge: 'ZEITLAUF', words: ['noch', 'inzwischen', 'wieder', 'erneut', 'endlich', 'pl\u00f6tzlich', 'jederzeit'] },
+            { title: 'Status', translation: '(estado)', level: 'A1-A2', colorMain: '#0284c7', badge: 'STATUS', words: ['schon', 'noch', 'bereits'] },
+            { title: 'Zeitlauf', translation: '(curso del tiempo)', level: 'A1-A2', colorMain: '#0891b2', badge: 'ZEITLAUF', words: ['inzwischen', 'wieder', 'erneut', 'endlich', 'pl\u00f6tzlich', 'jederzeit'] },
             { title: 'Wandel', translation: '(cambio)', level: 'A1-A2', colorMain: '#0f766e', badge: 'WANDEL', words: ['damals', 'heutzutage', 'neuerdings', 'fr\u00fcher'] },
             { title: 'Ordnung', translation: '(orden)', level: 'A2', colorMain: '#16a34a', badge: 'ORDNUNG', words: ['erstens', 'zweitens', 'drittens', 'viertens', 'f\u00fcnftens'] },
             { title: 'Z\u00e4hlung', translation: '(enumeraci\u00f3n)', level: 'A1-A2', colorMain: '#65a30d', badge: 'ZAEHLUNG', words: ['einmal', 'zweimal', 'dreimal', 'viermal', 'f\u00fcnfmal', 'mehrmals', 'jeweils'] },
             { title: 'H\u00e4ufigkeit', translation: '(frecuencia)', level: 'A1-A2', colorMain: '#7c3aed', badge: 'HAEUFIGKEIT', words: ['immer', 'nie', 'oft', 'manchmal', 'selten', 'meistens', 'jemals'] },
             { title: 'Rhythmus', translation: '(ritmo)', level: 'A1-A2', colorMain: '#9333ea', badge: 'RHYTHMUS', words: ['t\u00e4glich', 'w\u00f6chentlich', 'monatlich', 'j\u00e4hrlich', 'gew\u00f6hnlich', 'normalerweise', 'regelm\u00e4\u00dfig'] },
-            { title: 'Richtung', translation: '(direcci\u00f3n)', level: 'A1-A2', colorMain: '#db2777', badge: 'RICHTUNG', words: ['links', 'rechts', 'geradeaus', 'vorne', 'hinten', 'irgendwohin', 'nirgendwohin'] },
-            { title: 'Position', translation: '(posici\u00f3n)', level: 'A1', colorMain: '#e11d48', badge: 'POSITION', words: ['oben', 'unten', 'drinnen', 'drau\u00dfen', 'da'] },
+            { title: 'Richtung', translation: '(direcci\u00f3n)', level: 'A1-A2', colorMain: '#db2777', badge: 'RICHTUNG', words: ['links', 'rechts', 'geradeaus', 'weiter', 'irgendwohin', 'nirgendwohin'] },
+            { title: 'Position', translation: '(posici\u00f3n)', level: 'A1', colorMain: '#e11d48', badge: 'POSITION', words: ['oben', 'unten', 'vorne', 'hinten', 'drinnen', 'drau\u00dfen', 'da'] },
             { title: 'Raum', translation: '(espacio)', level: 'A1', colorMain: '#f43f5e', badge: 'RAUM', words: ['hier', 'dort', '\u00fcberall', 'nirgends', 'irgendwo', 'weg'] },
             { title: 'Grad', translation: '(grado)', level: 'A1-B1', colorMain: '#ea580c', badge: 'GRAD', words: ['sehr', 'fast', 'ganz', 'ziemlich', 'besonders', 'sogar', 'so'] },
             { title: 'Anteil', translation: '(proporci\u00f3n)', level: 'A1-B1', colorMain: '#7c2d12', badge: 'ANTEIL', words: ['haupts\u00e4chlich', 'insbesondere', 'teilweise'] },
@@ -2196,7 +2224,7 @@
             { title: 'Stil', translation: '(estilo)', level: 'A1-B1', colorMain: '#64748b', badge: 'STIL', words: ['pers\u00f6nlich', 'konsequent', 'theoretisch', 'quasi', 'regelrecht'] },
             { title: 'Recht', translation: '(derecho)', level: 'B1', colorMain: '#475569', badge: 'RECHT', words: ['rechtlich', 'gesetzlich'] },
             { title: 'Logik', translation: '(l\u00f3gica)', level: 'A1-B1', colorMain: '#f59e0b', badge: 'LOGIK', words: ['allerdings', 'trotzdem', 'dennoch', 'au\u00dferdem', 'n\u00e4mlich', 'schlie\u00dflich'] },
-            { title: 'Kausal', translation: '(causalidad)', level: 'A1-B1', colorMain: '#b45309', badge: 'KAUSAL', words: ['deshalb', 'deswegen', 'daher', 'folglich', 'sonst'] },
+            { title: 'Kausal', translation: '(causalidad)', level: 'A1-B1', colorMain: '#b45309', badge: 'KAUSAL', words: ['also', 'deshalb', 'deswegen', 'daher', 'folglich', 'sonst'] },
             { title: 'Modalpartikeln', translation: '(part\u00edculas modales)', level: 'A2-B1', colorMain: '#7c3aed', badge: 'PARTIKELN', custom: true }
         ];
 
@@ -2296,15 +2324,15 @@
             'einmal', 'zweimal', 'dreimal', 'viermal', 'f\u00fcnfmal'
         ]);
         const a2Words = new Set([
-            'erst', 'zuerst', 'erstmals', 'gerade', 'sofort', 'wieder', 'erneut', 'danach', 'inzwischen', 'damals', 'endlich', 'pl\u00f6tzlich', 'heutzutage', 'jederzeit', 'mehrmals', 'vorhin', 'fr\u00fcher', 'zuletzt',
+            'erst', 'zuerst', 'erstmals', 'gerade', 'sofort', 'wieder', 'erneut', 'danach', 'inzwischen', 'damals', 'endlich', 'pl\u00f6tzlich', 'heutzutage', 'jederzeit', 'mehrmals', 'vorhin', 'fr\u00fcher', 'zuletzt', 'bereits',
             'selten', 'meistens', 't\u00e4glich', 'w\u00f6chentlich', 'monatlich', 'j\u00e4hrlich', 'gew\u00f6hnlich', 'normalerweise', 'regelm\u00e4\u00dfig', 'jemals',
-            'irgendwohin', 'nirgendwohin',
+            'weiter', 'irgendwohin', 'nirgendwohin',
             'fast', 'ganz', 'ziemlich', 'besonders', 'sogar',
             'vielleicht', 'wahrscheinlich', 'hoffentlich', 'bestimmt', 'sicher',
             'nat\u00fcrlich', 'wirklich', 'eigentlich',
             'zusammen', 'alleine', 'anders', 'einfach', 'lieber', 'gl\u00fccklich', 'ehrlich', 'h\u00f6flich',
             'erstens', 'zweitens', 'drittens', 'viertens', 'f\u00fcnftens',
-            'deshalb', 'deswegen', 'daher', 'trotzdem', 'au\u00dferdem', 'sonst', 'dabei'
+            'also', 'deshalb', 'deswegen', 'daher', 'trotzdem', 'au\u00dferdem', 'sonst', 'dabei'
         ]);
 
         function getExactLevel(word) {
