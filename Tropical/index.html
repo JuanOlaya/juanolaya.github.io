@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tropical | Exotisches Handwerkliches Gelato</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tropical: '#0d2c25',
+                        'neon-pink': '#ff2d75',
+                        'accent-green': '#baff39',
+                    },
+                    fontFamily: {
+                        unbounded: ['Unbounded', 'cursive'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            scroll-behavior: smooth;
+        }
+        .tropical-gradient {
+            background: linear-gradient(135deg, #0d2c25 0%, #1a4d40 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Máxima legibilidad: Texto verde oscuro sobre fondo neón */
+        .badge-pill {
+            background-color: #baff39;
+            color: #0d2c25; 
+            padding: 8px 24px;
+            border-radius: 9999px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            box-shadow: 0 4px 14px rgba(186, 255, 57, 0.2);
+            text-transform: uppercase;
+        }
+        .badge-signature {
+            background-color: #baff39;
+            color: #0d2c25;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        [data-i18n] {
+            transition: opacity 0.2s ease-in-out;
+        }
+        .fade-out { opacity: 0; }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-900 font-sans">
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-50 bg-tropical/90 backdrop-blur-md py-4 px-6 md:px-12 flex justify-between items-center border-b border-white/10">
+        <div class="flex items-center gap-3">
+            <svg class="w-8 h-8 text-accent-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17a5 5 0 0 0 5-5c0-4-5-8-5-8s-5 4-5 8a5 5 0 0 0 5 5z"/><path d="M7 12a5 5 0 0 1 10 0"/></svg>
+            <div>
+                <span class="text-white font-bold text-xl tracking-tighter uppercase font-unbounded block leading-none">Tropical</span>
+                <span class="text-[10px] text-accent-green font-bold uppercase tracking-widest mt-1 block" data-i18n="logo_subtitle">Eisdiele</span>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-6">
+            <div class="hidden md:flex gap-8 text-white text-sm font-semibold uppercase tracking-widest">
+                <a href="#about" class="hover:text-accent-green transition-colors" data-i18n="nav_history">Geschichte</a>
+                <a href="#flavors" class="hover:text-accent-green transition-colors" data-i18n="nav_flavors">Sorten</a>
+                <a href="#visit" class="hover:text-accent-green transition-colors" data-i18n="nav_location">Standort</a>
+            </div>
+            
+            <button id="langToggle" class="bg-white/10 border border-white/20 text-white text-[10px] font-bold px-3 py-1 rounded hover:bg-white/20 transition-all flex items-center gap-2">
+                <span id="langLabel">DE</span>
+                <div class="w-8 h-4 bg-white/20 rounded-full relative">
+                    <div id="toggleDot" class="absolute left-1 top-1 w-2 h-2 bg-accent-green rounded-full transition-all" style="left: 4px;"></div>
+                </div>
+                <span>EN</span>
+            </button>
+
+            <a href="#visit" class="bg-neon-pink text-white px-5 py-2 rounded-full text-xs font-bold hover:scale-105 transition-transform uppercase tracking-tighter" data-i18n="nav_order">Jetzt Bestellen</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center tropical-gradient overflow-hidden pt-20">
+        <div class="absolute top-20 -left-20 w-64 h-64 bg-accent-green/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 -right-20 w-80 h-80 bg-neon-pink/20 rounded-full blur-3xl"></div>
+        
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="text-white">
+                <span class="badge-pill mb-6 text-sm" data-i18n="hero_badge">SEIT 2024</span>
+                <h1 class="text-5xl md:text-7xl font-bold font-unbounded leading-tight mb-6">
+                    <span data-i18n="hero_h1_p1">Ein</span> <span class="text-neon-pink" data-i18n="hero_h1_span">Urlaub</span> <span data-i18n="hero_h1_p2">in jeder Kugel.</span>
+                </h1>
+                <p class="text-stone-300 text-lg mb-8 max-w-md leading-relaxed" data-i18n="hero_p">
+                    Wir bringen die pulsierende Hitze des Äquators in das Herz Berlins. Handgemachtes Gelato, inspiriert von den Tropen.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#flavors" class="bg-white text-tropical px-8 py-4 rounded-full font-bold text-center hover:bg-accent-green hover:text-tropical transition-colors uppercase text-sm" data-i18n="btn_flavors">Sorten Entdecken</a>
+                    <a href="#visit" class="border border-white/30 text-white px-8 py-4 rounded-full font-bold text-center hover:bg-white/10 transition-colors uppercase text-sm" data-i18n="btn_visit">Besuche unsere Oase</a>
+                </div>
+            </div>
+            <div class="relative flex justify-center">
+                <div class="w-full max-w-md float-animation">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-white/10 blur-3xl rounded-full"></div>
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="relative z-10">
+                            <path fill="#baff39" d="M44.7,-76.4C58.3,-69.2,70,-57.9,78.3,-44.6C86.7,-31.3,91.8,-15.7,91.2,-0.3C90.7,15,84.4,30,75,43C65.5,56,52.8,67,38.6,74.5C24.4,82,8.6,86,-6.9,82C-22.4,78,-37.6,66,-49.4,53.2C-61.2,40.4,-69.6,26.8,-73.8,11.8C-78,-3.2,-78,-19.6,-71.5,-33.4C-64.9,-47.1,-51.8,-58.3,-38.1,-65.4C-24.4,-72.6,-10.1,-75.7,3.1,-81.1C16.3,-86.5,31.2,-83.6,44.7,-76.4Z" transform="translate(100 100)" />
+                            <text x="50" y="115" font-family="Unbounded" font-size="60" fill="white">🍦</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Geschichte Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-16">
+                <div class="md:w-1/2">
+                    <div class="badge-pill mb-6 text-xs" data-i18n="nav_history">Geschichte</div>
+                    <h2 class="text-4xl font-unbounded mb-8" data-i18n="about_h2">Aus den Tropen direkt nach Berlin</h2>
+                    <p class="text-stone-600 text-lg leading-relaxed mb-6" data-i18n="about_p1">
+                        Alles begann mit einer Reise in ferne, exotische Länder. Wir verliebten uns in die Farben, die Energie und vor allem in den Geschmack tropischer Früchte.
+                    </p>
+                    <p class="text-stone-600 text-lg leading-relaxed mb-6" data-i18n="about_p2">
+                        Tropical ist unsere Antwort auf die Berliner Wintertage – eine Fusion aus urbanem Lifestyle und purer tropischer Lebensfreude.
+                    </p>
+                    <div class="p-6 bg-accent-green/5 rounded-3xl border border-accent-green/20">
+                        <h4 class="font-bold text-tropical uppercase text-xs tracking-widest mb-3" data-i18n="about_ethics_title">Unsere Verantwortung</h4>
+                        <p class="text-stone-600 text-sm leading-relaxed" data-i18n="about_p_ethics">
+                            Wir glauben an Fairness. Deshalb arbeiten wir direkt mit Kleinbauern zusammen, zahlen Preise weit über dem Weltmarktniveau und unterstützen Erntemethoden, die die tropische Natur bewahren.
+                        </p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                    <div class="aspect-square bg-tropical rounded-3xl flex items-center justify-center text-5xl">🌴</div>
+                    <div class="aspect-square bg-neon-pink/10 rounded-3xl flex items-center justify-center text-5xl">🍦</div>
+                    <div class="aspect-square bg-accent-green/10 rounded-3xl flex items-center justify-center text-5xl">🦜</div>
+                    <div class="aspect-square bg-tropical rounded-3xl flex items-center justify-center text-5xl">🥥</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sorten Section -->
+    <section id="flavors" class="py-24 bg-tropical text-white overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+                <div>
+                    <span class="text-accent-green uppercase tracking-widest text-sm font-bold" data-i18n="flavors_sub">Die Expedition</span>
+                    <h2 class="text-4xl mt-2 font-unbounded italic" data-i18n="flavors_h2">Unsere 6 Eissorten</h2>
+                </div>
+                <div class="md:text-right">
+                    <p class="text-stone-400 max-w-xs font-sans" data-i18n="flavors_p">Wöchentlich aktualisiert mit saisonalen Experimenten.</p>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 1. Berlin Tropical -->
+                <div class="glass-card p-8 rounded-3xl border-accent-green/30 hover:border-accent-green transition-all group">
+                    <div class="w-full h-56 bg-accent-green/10 rounded-2xl mb-6 flex items-center justify-center text-7xl group-hover:scale-110 transition-transform">🍍</div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl text-accent-green font-unbounded">Berlin Tropical</h3>
+                        <span class="badge-signature" data-i18n="badge_sig">SIGNATURE</span>
+                    </div>
+                    <p class="text-stone-300 text-sm mb-6 leading-relaxed" data-i18n="f1_p">
+                        Wilde Waldbeeren aus Brandenburg verschmelzen mit einer cremigen Basis aus Guave.
+                    </p>
+                </div>
+
+                <!-- 2. Tropen-Kakao -->
+                <div class="glass-card p-8 rounded-3xl border-neon-pink/30 hover:border-neon-pink transition-all group">
+                    <div class="w-full h-56 bg-amber-900/40 rounded-2xl mb-6 flex items-center justify-center text-7xl group-hover:scale-110 transition-transform">🍫</div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl text-neon-pink font-unbounded" data-i18n="f2_h">Tropen-Kakao</h3>
+                        <span class="bg-neon-pink text-white text-[10px] font-bold px-2 py-1 rounded uppercase" data-i18n="badge_new">NEU</span>
+                    </div>
+                    <p class="text-stone-300 text-sm mb-6 leading-relaxed" data-i18n="f2_p">
+                        Edler Kakao mit Meersalz und Tonkabohne. Tief, dunkel und exotisch.
+                    </p>
+                </div>
+
+                <!-- 3. Mango & Chili -->
+                <div class="glass-card p-8 rounded-3xl border-white/10 hover:border-accent-green transition-all group">
+                    <div class="w-full h-56 bg-orange-500/30 rounded-2xl mb-6 flex items-center justify-center text-7xl group-hover:scale-110 transition-transform">🥭</div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl text-white font-unbounded">Mango & Chili</h3>
+                        <span class="badge-signature opacity-80" data-i18n="badge_best">Bestseller</span>
+                    </div>
+                    <p class="text-stone-300 text-sm mb-6 leading-relaxed" data-i18n="f3_p">
+                        Süße Alphonso-Mango mit einem Kick aus Chili. Die perfekte Balance.
+                    </p>
+                </div>
+
+                <!-- 4. Kokos Wolke -->
+                <div class="glass-card p-8 rounded-3xl border-white/10 hover:border-white/30 transition-all group">
+                    <div class="w-full h-56 bg-stone-100/10 rounded-2xl mb-6 flex items-center justify-center text-7xl group-hover:scale-110 transition-transform">🥥</div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl text-white font-unbounded" data-i18n="f4_h">Kokos Wolke</h3>
+                        <span class="text-[10px] border border-accent-green text-accent-green px-2 py-1 rounded uppercase font-bold" data-i18n="badge_vegan">Vegan</span>
+                    </div>
+                    <p class="text-stone-300 text-sm mb-6 leading-relaxed" data-i18n="f4_p">
+                        Cremige Kokosmilch mit gerösteten Kokosflocken. Pure Seligkeit.
+                    </p>
+                </div>
+
+                <!-- 5. Tropical Açaí -->
+                <div class="glass-card p-8 rounded-3xl border-white/10 hover:border-white/30 transition-all group">
+                    <div class="w-full h-56 bg-purple-900/30 rounded-2xl mb-6 flex items-center justify-center text-7xl group-hover:scale-110 transition-transform">🫐</div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl text-white font-unbounded" data-i18n="f5_h">Tropical Açaí</h3>
+                        <span class="text-[10px] border border-white/40 text-white px-2 py-1 rounded uppercase font-bold" data-i18n="badge_energy">Energy</span>
+                    </div>
+                    <p class="text-stone-300 text-sm mb-6 leading-relaxed" data-i18n="f5_p">
+                        Echte Açaí-Beere mit natürlichem Guaraná. Ein Kraftschub für den Tag.
+                    </p>
+                </div>
+
+                <!-- 6. Maracuja Punch -->
+                <div class="glass-card p-8 rounded-3xl border-white/10 hover:border-white/30 transition-all group">
+                    <div class="w-full h-56 bg-pink-500/20 rounded-2xl mb-6 flex items-center justify-center text-7xl group-hover:scale-110 transition-transform">🍹</div>
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl text-white font-unbounded">Maracuja Punch</h3>
+                        <span class="text-[10px] border border-neon-pink text-neon-pink px-2 py-1 rounded uppercase font-bold" data-i18n="badge_seasonal">Saisonal</span>
+                    </div>
+                    <p class="text-stone-300 text-sm mb-6 leading-relaxed" data-i18n="f6_p">
+                        Saure Maracuja trifft auf zarte weiße Schokoladen-Splits. Erfrischend spritzig.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="visit" class="bg-stone-50 py-24 border-t border-stone-200">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="text-4xl mb-8 font-unbounded uppercase" data-i18n="footer_h2">Besuche die Oase</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold uppercase text-xs text-stone-400 tracking-widest mb-2" data-i18n="footer_loc">Standort</h4>
+                            <p class="text-xl italic font-sans">Rosenthaler Str. 40, 10119 Berlin</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-tropical rounded-3xl p-8 text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h3 class="text-2xl mb-4 italic font-unbounded uppercase" data-i18n="footer_club">Tropical Club</h3>
+                        <p class="text-stone-400 mb-8 font-sans" data-i18n="footer_p">Exklusive Angebote und neue Sorten.</p>
+                        <form class="flex flex-col gap-4">
+                            <input type="email" placeholder="Deine E-Mail" class="bg-white/10 border border-white/20 rounded-full px-6 py-4 focus:outline-none focus:border-accent-green transition-colors font-sans">
+                            <button type="submit" class="bg-accent-green text-tropical font-bold rounded-full py-4 hover:scale-105 transition-transform uppercase tracking-tighter font-sans" data-i18n="footer_btn">Abonnieren</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            de: {
+                logo_subtitle: "Eisdiele",
+                nav_history: "Geschichte",
+                nav_flavors: "Sorten",
+                nav_location: "Standort",
+                nav_order: "Jetzt Bestellen",
+                hero_badge: "SEIT 2024",
+                hero_h1_p1: "Ein",
+                hero_h1_span: "Urlaub",
+                hero_h1_p2: "in jeder Kugel.",
+                hero_p: "Wir bringen die pulsierende Hitze des Äquators in das Herz Berlins. Handgemachtes Gelato, inspiriert von den Tropen.",
+                btn_flavors: "Sorten Entdecken",
+                btn_visit: "Besuche unsere Oase",
+                about_h2: "Aus den Tropen direkt nach Berlin",
+                about_p1: "Alles begann mit einer Reise in ferne, exotische Länder. Wir verliebten uns in die Farben, die Energie und vor allem in den Geschmack tropischer Früchte.",
+                about_p2: "Tropical ist unsere Antwort auf die Berliner Wintertage – eine Fusion aus urbanem Lifestyle und purer tropischer Lebensfreude.",
+                about_ethics_title: "Unsere Verantwortung",
+                about_p_ethics: "Wir glauben an Fairness. Deshalb arbeiten wir direkt mit Kleinbauern zusammen, zahlen Preise weit über dem Weltmarktniveau und unterstützen Erntemethoden, die die tropische Natur bewahren.",
+                flavors_sub: "Die Expedition",
+                flavors_h2: "Unsere 6 Eissorten",
+                flavors_p: "Wöchentlich aktualisiert mit saisonalen Experimenten.",
+                badge_sig: "SIGNATURE",
+                badge_new: "NEU",
+                badge_best: "Bestseller",
+                badge_vegan: "Vegan",
+                badge_energy: "Energy",
+                badge_seasonal: "Saisonal",
+                f1_p: "Wilde Waldbeeren aus Brandenburg verschmelzen mit einer cremigen Basis aus Guave.",
+                f2_h: "Tropen-Kakao",
+                f2_p: "Edler Kakao mit Meersalz und Tonkabohne. Tief, dunkel und exotisch.",
+                f3_p: "Süße Alphonso-Mango mit einem Kick aus Chili. Die perfekte Balance.",
+                f4_h: "Kokos Wolke",
+                f4_p: "Cremige Kokosmilch mit gerösteten Kokosflocken. Pure Seligkeit.",
+                f5_h: "Tropical Açaí",
+                f5_p: "Echte Açaí-Beere mit natürlichem Guaraná. Ein Kraftschub für den Tag.",
+                f6_p: "Saure Maracuja trifft auf zarte weiße Schokoladen-Splits. Erfrischend spritzig.",
+                footer_h2: "Besuche die Oase",
+                footer_loc: "Standort",
+                footer_club: "Tropical Club",
+                footer_p: "Exklusive Angebote und neue Sorten.",
+                footer_btn: "Abonnieren"
+            },
+            en: {
+                logo_subtitle: "Ice cream shop",
+                nav_history: "Our Story",
+                nav_flavors: "Flavors",
+                nav_location: "Location",
+                nav_order: "Order Now",
+                hero_badge: "SINCE 2024",
+                hero_h1_p1: "A",
+                hero_h1_span: "Vacation",
+                hero_h1_p2: "in every scoop.",
+                hero_p: "We bring the vibrant heat of the tropics to the heart of Berlin. Handcrafted gelato inspired by exotic lands.",
+                btn_flavors: "Explore Flavors",
+                btn_visit: "Visit our Oasis",
+                about_h2: "From the Tropics straight to Berlin",
+                about_p1: "It all started with a journey to distant, exotic lands. We fell in love with the colors, the energy, and above all, the taste of tropical fruits.",
+                about_p2: "Tropical is our answer to Berlin winter days – a fusion of urban lifestyle and pure tropical joy.",
+                about_ethics_title: "Our Responsibility",
+                about_p_ethics: "We believe in fairness. That's why we work directly with small farmers, paying prices far above the global market level and supporting harvesting methods that preserve tropical nature.",
+                flavors_sub: "The Expedition",
+                flavors_h2: "Our 6 Flavors",
+                flavors_p: "Updated weekly with seasonal experiments.",
+                badge_sig: "SIGNATURE",
+                badge_new: "NEW",
+                badge_best: "Bestseller",
+                badge_vegan: "Vegan",
+                badge_energy: "Energy",
+                badge_seasonal: "Seasonal",
+                f1_p: "Wild forest berries from Brandenburg merge with a creamy Guava base.",
+                f2_h: "Tropical Cocoa",
+                f2_p: "Fine cocoa with sea salt and tonka bean. Deep, dark and exotic.",
+                f3_p: "Sweet Alphonso mango with a kick of chili. The perfect balance.",
+                f4_h: "Coconut Cloud",
+                f4_p: "Creamy coconut milk with toasted coconut flakes. Pure bliss.",
+                f5_h: "Tropical Açaí",
+                f5_p: "Real Açaí berry with natural Guaraná. A power boost for your day.",
+                f6_p: "Sour passionfruit meets delicate white chocolate splits. Refreshingly vibrant.",
+                footer_h2: "Visit the Oasis",
+                footer_loc: "Location",
+                footer_club: "Tropical Club",
+                footer_p: "Exclusive offers and new flavor drops.",
+                footer_btn: "Subscribe"
+            }
+        };
+
+        let currentLang = 'de';
+        const toggleBtn = document.getElementById('langToggle');
+        const toggleDot = document.getElementById('toggleDot');
+
+        toggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'de' ? 'en' : 'de';
+            toggleDot.style.left = currentLang === 'en' ? 'calc(100% - 12px)' : '4px';
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.classList.add('fade-out');
+                setTimeout(() => {
+                    if (translations[currentLang][key]) {
+                        el.textContent = translations[currentLang][key];
+                    }
+                    el.classList.remove('fade-out');
+                }, 200);
+            });
+        });
+
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            if (section.id !== '') {
+                section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+                observer.observe(section);
+            }
+        });
+    </script>
+</body>
+</html>
