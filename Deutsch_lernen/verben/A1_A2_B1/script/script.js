@@ -1,4 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
  // --- GLOBAL STATE ---
  let allVerbsData = {}; // Global Data Containers
  let verbGroupsByLevel = {}; // Global Data Containers
@@ -24,7 +24,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  { key: 'A2_1', count: 12, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
  { key: 'A2_2', count: 16, fileNumbers: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28] }
  ],
- 'B1': [{ key: 'B1_1', count: 25, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25] }],
+ 'B1': [{ key: 'B1_1', count: 26, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26] }],
  'B2': [{ key: 'B2_1', count: 14, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] }]
  };
  const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#3b82f6', '#ea580c', '#22C55E', '#a855f7', '#facc15'];
@@ -156,7 +156,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  let levelConfig = {
  'A1': { groupCount: 30, displayName: 'A1' },
  'A2': { groupCount: 28, displayName: 'A2' },
- 'B1': { groupCount: 25, displayName: 'B1' },
+ 'B1': { groupCount: 26, displayName: 'B1' },
  'B2': { groupCount: 14, displayName: 'B2' }
  };
 
@@ -216,13 +216,9 @@ const PRELOAD_CONJUGATIONS_IN_BACKGROUND = true;
 const PRELOAD_CONJUGATIONS_SCOPE = 'current-group';
 const lazyExampleLoadPromises = new Map();
  const HEAVY_VERB_DATA_KEYS = [
- 'praesens',
  'praesens_examples',
- 'praeteritum_conjugations',
  'praeteritum_examples',
- 'perfekt_examples',
  'praesens_fragen',
- 'konjunktiv_ii',
  'wortfamilie'
  ];
 
@@ -426,8 +422,8 @@ const lazyExampleLoadPromises = new Map();
  <div class="footer-search-panel">
  </div>
  <button id="footer-search-toggle" class="footer-search-toggle" type="button" aria-expanded="false" aria-label="Search">
- <span class="footer-search-arrow">â€¹</span>
- <span class="footer-search-icon">âŒ•</span>
+ <span class="footer-search-arrow">‹</span>
+ <span class="footer-search-icon">⌕</span>
  </button>
  `;
 
@@ -823,37 +819,9 @@ async function loadBackgroundData() {
  scheduleCachePersist();
 
  if (PRELOAD_CONJUGATIONS_IN_BACKGROUND) {
- const candidateVerbNames = PRELOAD_CONJUGATIONS_SCOPE === 'current-group'
- ? (() => {
- const activeGroup = verbGroupsByLevel[currentLevel]?.[currentGroupIndex];
- return Array.isArray(activeGroup?.verbs) ? [...activeGroup.verbs] : [];
- })()
- : PRELOAD_CONJUGATIONS_SCOPE === 'current-level'
- ? (() => {
- const groups = verbGroupsByLevel[currentLevel] || [];
- return Array.from(new Set(groups.flatMap(group => Array.isArray(group?.verbs) ? group.verbs : [])));
- })()
- : Object.keys(allVerbsData);
-
- const verbsNeedingConjugations = candidateVerbNames.filter(verbName => {
- const verbData = allVerbsData[verbName] || {};
- if (!verbData.praesens || !verbData.praeteritum_conjugations) {
- return true;
- }
- return konjunktivVerbs.includes(verbName) && !verbData.konjunktiv_ii;
- });
-
- const CONJUGATION_BATCH_SIZE = 12;
- for (let i = 0; i < verbsNeedingConjugations.length; i += CONJUGATION_BATCH_SIZE) {
- const batch = verbsNeedingConjugations.slice(i, i + CONJUGATION_BATCH_SIZE);
- await loadConjugations(new Set(batch));
- const percent = Math.min(100, ((i + batch.length) / Math.max(verbsNeedingConjugations.length, 1)) * 100);
- updateLoadingProgress(percent, 'conjugations');
-
- if (i + CONJUGATION_BATCH_SIZE < verbsNeedingConjugations.length) {
- await new Promise(r => setTimeout(r, 15));
- }
- }
+ const physicalLayers = physicalLevelMap[currentLevel] || [];
+ const layersToLoad = physicalLayers.map(l => l.key);
+ await loadBulkConjugations(layersToLoad, updateLoadingProgress);
  } else {
  loadingProgressState.conjugations = 100;
  }
@@ -938,7 +906,10 @@ async function loadBackgroundData() {
  // 4. Fetch Conjugations for new verbs only when needed.
  // Compact mode initial render only needs the card data.
  if (includeConjugations) {
- await loadConjugations(new Set(newVerbs));
+ const physData = getPhysicalGroupData(levelKey, groupIndex);
+ if (physData) {
+ await loadBulkConjugations([physData.physicalKey], () => {});
+ }
  }
  }
 
@@ -982,52 +953,49 @@ async function loadBackgroundData() {
  return fileIndexData[folder].includes(verbName);
  }
 
- function loadConjugations(allVerbNames) {
- return loadFileIndex().then(() => Promise.all(Array.from(allVerbNames).map(async verbName => {
+ let loadedBulkConjugations = new Set();
+ 
+ async function loadBulkConjugations(physicalLayers, progressCallback = null) {
+ const layersToFetch = physicalLayers.filter(layer => !loadedBulkConjugations.has(layer));
+ if (layersToFetch.length === 0) {
+ if (progressCallback) progressCallback(100, 'conjugations');
+ return;
+ }
+ 
+ let loaded = 0;
+ const total = layersToFetch.length;
+ 
+ for (const layer of layersToFetch) {
  try {
  const query = appVersion ? `?v=${appVersion}` : '';
- const maybeFetchJson = (folder) =>
- fileExistsInIndex(folder, verbName)
- ? fetch(`json/${folder}/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
- : Promise.resolve({});
-
- const fetchPromises = [
- maybeFetchJson('praesens'),
- maybeFetchJson('praeteritum_konjugation')
- ];
-
- // Add Konjunktiv II data for specific verbs
- if (konjunktivVerbs.includes(verbName) && fileExistsInIndex('konjunktiv_ii', verbName)) {
- fetchPromises.push(
- fetch(`json/konjunktiv_ii/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
- );
- }
-
- const [praesensData, praeteritumData, konjunktivData] = await Promise.all(fetchPromises);
-
- // Rename praeteritum from konjugation data to avoid conflict
- if (praeteritumData.praeteritum) {
- praeteritumData.praeteritum_conjugations = praeteritumData.praeteritum;
- delete praeteritumData.praeteritum;
- }
- if (praeteritumData.praeteritum_conjugation) {
- praeteritumData.praeteritum_conjugations = praeteritumData.praeteritum_conjugation;
- delete praeteritumData.praeteritum_conjugation;
- }
-
- // Merge conjugation data into allVerbsData
- allVerbsData[verbName] = {
- ...allVerbsData[verbName],
- ...praesensData,
- ...praeteritumData,
- ...(konjunktivData || {})
- };
- } catch (error) {
- console.warn(`Failed to pre-load conjugations for ${verbName}:`, error);
- }
- }))).then(() => {
- // Conjugations loaded
+ const url = `json/conjugations_bulk/${layer}_conjugations.json${query}`;
+ const res = await fetch(url);
+ if (res.ok) {
+ const data = await parseJsonUtf8(res);
+ for (const [verbName, verbData] of Object.entries(data)) {
+ if (!allVerbsData[verbName]) allVerbsData[verbName] = {};
+ 
+ const safeMerge = (target, source) => {
+ if (!source || typeof source !== 'object') return;
+ Object.entries(source).forEach(([key, value]) => {
+ if (['es', 'wir', 'ihr', 'sie'].includes(key) && typeof value === 'object' && !['cards'].includes(key)) return;
+ if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') return;
+ target[key] = value;
  });
+ };
+ 
+ safeMerge(allVerbsData[verbName], verbData);
+ }
+ loadedBulkConjugations.add(layer);
+ }
+ } catch (e) {
+ console.warn(`Failed to load bulk conjugations for ${layer}:`, e);
+ }
+ loaded++;
+ if (progressCallback) {
+ progressCallback(Math.min(100, (loaded / total) * 100), 'conjugations');
+ }
+ }
  }
 
  async function loadVerbPraesensData(verbName) {
@@ -3865,7 +3833,10 @@ async function loadWortfamilieIndex() {
  const shouldAttemptConjugationSearch = !baseMatchAlreadyFound && searchTerm.length >= 3;
 
  if (shouldAttemptConjugationSearch && needsConjugationData) {
- await loadConjugations(new Set([verbName]));
+ const physicalLayer = (allVerbsData[verbName].level || '').replace('.', '_');
+ if (physicalLayer) {
+ await loadBulkConjugations([physicalLayer]);
+ }
  }
 
  // Search in Praesens conjugations (pre-loaded when needed)

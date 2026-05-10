@@ -20,7 +20,13 @@ function updateVerbsIndex() {
             return;
         }
 
-        const files = fs.readdirSync(levelDir);
+        const files = fs.readdirSync(levelDir).sort((a, b) => {
+            const matchA = a.match(/_group_(\d+)\.json$/);
+            const matchB = b.match(/_group_(\d+)\.json$/);
+            const numA = matchA ? parseInt(matchA[1], 10) : 0;
+            const numB = matchB ? parseInt(matchB[1], 10) : 0;
+            return numA - numB;
+        });
         files.forEach(file => {
             if (file.endsWith('.json') && file.includes('_group_')) {
                 const filePath = path.join(levelDir, file);

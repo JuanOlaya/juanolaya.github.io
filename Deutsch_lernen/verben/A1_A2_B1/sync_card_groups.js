@@ -1,7 +1,7 @@
 const fs = require('fs');
 const indexFile = require('path').join(__dirname, 'json', 'verbs_index.json');
 const cardsDir = require('path').join(__dirname, 'json', 'cards');
-const data = JSON.parse(fs.readFileSync(indexFile, 'utf8'));
+const data = JSON.parse(fs.readFileSync(indexFile, 'utf8').replace(/^\uFEFF/, ''));
 
 // build a map of verb -> groupNumber
 const verbToGroup = {};
