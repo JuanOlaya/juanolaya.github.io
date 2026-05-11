@@ -38,8 +38,8 @@ This document is the "single source of truth" for the visual identity and design
 ## Data Structure Rules
 * **Max Items:** A maximum of **7 verbs per thematic group**. This is a strict cognitive load rule to prevent overwhelming the user.
 
-## Component Anatomy: Group Cards (Kompakt Mode)
-The "Group Card" (`.kompakt-level-card`) is the core layout element for presenting verbs grouped by theme.
+## Component Anatomy: Verb Group Cards (Kompakt Mode)
+The "Verb Group Card" (`.kompakt-level-card`) is the core layout element for presenting verbs grouped by theme within the Verben section.
 
 1. **Header/Top:**
    * Contains the thematic group name (e.g., "Existenz", "Modalverben").
