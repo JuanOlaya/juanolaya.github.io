@@ -623,7 +623,13 @@
             box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 4px 10px rgba(37, 99, 235, 0.35);
         }
 
-        .row-level-tag.level-a1,
+        .row-level-tag.level-a1 {
+            background: #22C55E;
+            color: #ffffff;
+            border-color: #16a34a;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 4px 10px rgba(34, 197, 94, 0.28);
+        }
+
         .row-level-tag.level-a2 {
             background: #e11d74;
             color: #ffffff;
@@ -1701,7 +1707,7 @@
                     {
                         "word": "besonders",
                         "emoji": "⭐",
-                        "spanish": "(especialmente)",
+                        "spanish": "(particularmente, especialmente)",
                         "english": "especially",
                         "example_de": "Dieser Film ist besonders gut.",
                         "example_es": "Esta película es especialmente buena.",
@@ -2371,6 +2377,8 @@
                         level: getExactLevel(word)
                     };
                 });
+
+                adverbs.sort((a, b) => (levelRank[a.level] || 99) - (levelRank[b.level] || 99));
 
                 return {
                     title: theme.title,
