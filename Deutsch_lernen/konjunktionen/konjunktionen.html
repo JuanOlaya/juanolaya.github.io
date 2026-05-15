@@ -465,7 +465,9 @@
         }
 
         .tag.level-tag {
-            margin-left: 8px;
+            margin-left: 0;
+            margin-top: 6px;
+            display: inline-block;
         }
 
         .tag.level-tag.a1,
@@ -506,6 +508,14 @@
             align-items: center;
             gap: 6px;
             transition: transform 0.1s ease, color 0.2s;
+        }
+
+        .word-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+            align-items: center;
         }
 
         .german-word:hover {
@@ -1588,12 +1598,26 @@
 
                 const firstCell = row.querySelector('td:first-child');
                 const positionTag = firstCell?.querySelector('.tag:not(.level-tag)');
+                const word = firstCell?.querySelector('.german-word');
                 if (!firstCell || !positionTag || firstCell.querySelector('.level-tag')) return;
 
                 const levelTag = document.createElement('span');
                 levelTag.className = 'tag level-tag ' + level.toLowerCase();
                 levelTag.innerText = level;
-                positionTag.before(levelTag);
+
+                let badgeWrap = firstCell.querySelector('.word-badges');
+                if (!badgeWrap) {
+                    badgeWrap = document.createElement('div');
+                    badgeWrap.className = 'word-badges';
+                    if (word) {
+                        word.insertAdjacentElement('afterend', badgeWrap);
+                    } else {
+                        firstCell.appendChild(badgeWrap);
+                    }
+                }
+
+                badgeWrap.appendChild(levelTag);
+                badgeWrap.appendChild(positionTag);
             });
 
             const words = document.querySelectorAll('td:first-child .german-word');
