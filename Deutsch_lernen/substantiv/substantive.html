@@ -2534,12 +2534,17 @@
                 { article: "die", word: "Lösung", emoji: "✅", translation_es: "solución / respuesta", translation_en: "solution / answer", example_de: "Die Lösung steht auf Seite zwei.", example_es: "La solución está en la página dos." },
                 { article: "die", word: "Ordnung", emoji: "✅", translation_es: "orden (está bien)", translation_en: "order (it's okay)", example_de: "Alles ist in Ordnung.", example_es: "Todo está en orden." },
                 { article: "die", word: "Pause", emoji: "☕", translation_es: "descanso", translation_en: "break", example_de: "In der Pause trinke ich Kaffee.", example_es: "En el descanso tomo café." },
+                { article: "das", word: "Benzin", emoji: "⛽", translation_es: "gasolina", translation_en: "gasoline", example_de: "Das Benzin ist heute teuer.", example_es: "La gasolina está cara hoy." },
+                { article: "der", word: "Bereich", emoji: "📍", translation_es: "área / zona / recinto", translation_en: "area / zone / section", example_de: "Dieser Bereich ist nur für Kunden.", example_es: "Esta área es solo para clientes." },
+                { article: "der", word: "Führerschein", emoji: "🪪", translation_es: "permiso de conducir", translation_en: "driver's license", example_de: "Ich habe meinen Führerschein dabei.", example_es: "Llevo conmigo mi permiso de conducir." },
+                { article: "die", word: "Parkgebühr", emoji: "🅿️", translation_es: "tarifa de aparcamiento", translation_en: "parking fee", example_de: "Die Parkgebühr ist hier hoch.", example_es: "La tarifa de aparcamiento aquí es alta." },
                 { article: "die", word: "Quittung", emoji: "🧾", translation_es: "recibo", translation_en: "receipt", example_de: "Brauchen Sie eine Quittung?", example_es: "¿Necesita un recibo?" },
                 { article: "der", word: "Prospekt", emoji: "📄", translation_es: "folleto", translation_en: "brochure", example_de: "Der Prospekt liegt am Eingang.", example_es: "El folleto está en la entrada." },
                 { article: "die", word: "S-Bahn", emoji: "🚆", translation_es: "tren de cercanías", translation_en: "suburban train", example_de: "Die S-Bahn kommt in fünf Minuten.", example_es: "El tren de cercanías llega en cinco minutos." },
                 { article: "das", word: "Schild", emoji: "🪧", translation_es: "letrero / señal", translation_en: "sign", example_de: "Das Schild hängt an der Tür.", example_es: "El letrero cuelga de la puerta." },
                 { article: "der", word: "Schmerz", emoji: "🤕", translation_es: "dolor", translation_en: "pain", example_de: "Ich habe starke Schmerzen im Rücken.", example_es: "Tengo dolores fuertes en la espalda." },
                 { article: "der", word: "Stock", emoji: "🏢", translation_es: "piso / planta", translation_en: "floor / level", example_de: "Wir wohnen im dritten Stock.", example_es: "Vivimos en el tercer piso." },
+                { article: "der", word: "Strafzettel", emoji: "🧾", translation_es: "multa de aparcamiento", translation_en: "parking ticket / fine", example_de: "Ich habe einen Strafzettel am Auto.", example_es: "Tengo una multa en el coche." },
                 { article: "die", word: "Sehenswürdigkeit", emoji: "📍", translation_es: "lugar de interés", translation_en: "tourist attraction", example_de: "Die Sehenswürdigkeit ist sehr bekannt.", example_es: "El lugar de interés es muy conocido." },
                 { article: "der", word: "Teil", emoji: "🧩", translation_es: "parte", translation_en: "part", example_de: "Dieser Teil ist leicht.", example_es: "Esta parte es fácil." },
                 { article: "der", word: "Termin", emoji: "📅", translation_es: "cita", translation_en: "appointment", example_de: "Ich habe morgen einen Termin beim Amt.", example_es: "Mañana tengo una cita en la oficina pública." },
@@ -3042,6 +3047,14 @@
                 nouns: pickThemeNouns(["der|mann", "die|frau", "das|kind", "das|baby", "der|freund", "der|benutzer", "der|erwachsene"])
             },
             {
+                id: "rollen",
+                title: "Rollen",
+                title_es: "Roles",
+                title_en: "Roles",
+                level: "A1",
+                nouns: pickThemeNouns(["der|gast", "der|fahrgast", "das|mitglied", "der|fussganger", "der|besucher", "der|nachbar", "der|burger"])
+            },
+            {
                 id: "medizinberufe",
                 title: "Medizinberufe",
                 title_es: "Profesiones médicas",
@@ -3255,7 +3268,7 @@
                 title_es: "Atención",
                 title_en: "Service",
                 level: "A1",
-                nouns: pickThemeNouns(["die|auskunft", "die|rezeption", "die|praxis", "der|kiosk", "das|schild"])
+                nouns: pickThemeNouns(["die|auskunft", "die|rezeption", "die|praxis", "der|kiosk", "das|schild", "der|bereich"])
             },
             {
                 id: "dienste",
@@ -3499,7 +3512,7 @@
                 title_es: "Escuela",
                 title_en: "School",
                 level: "A1",
-                nouns: pickThemeNouns(["die|klasse", "der|schuler", "die|tafel", "das|worterbuch", "der|rucksack", "die|pause"])
+                nouns: pickThemeNouns(["die|klasse", "der|schuler", "die|tafel", "das|worterbuch", "der|rucksack", "die|pause", "der|lehrer"])
             },
             {
                 id: "berufsleben",
@@ -3672,11 +3685,19 @@
             },
             {
                 id: "wochenende",
-                title: "Wochenende",
-                title_es: "Planes",
-                title_en: "Weekend",
+                title: "Draußen",
+                title_es: "Afuera",
+                title_en: "Outdoors",
                 level: "A1",
-                nouns: pickThemeNouns(["der|ausflug", "der|spaziergang", "das|picknick"])
+                nouns: pickThemeNouns(["der|ausflug", "der|spaziergang", "das|picknick", "der|spass"])
+            },
+            {
+                id: "auto",
+                title: "Auto",
+                title_es: "Auto",
+                title_en: "Car",
+                level: "A2",
+                nouns: pickThemeNouns(["das|auto", "das|benzin", "der|strafzettel", "die|parkgebuhr", "der|fuhrerschein"])
             },
             {
                 id: "geraete",
@@ -4247,13 +4268,7 @@
                 return nounGroups.filter(group => isLiDGroup(group));
             }
 
-            const baseGroups = nounGroups.filter(group => lidSwitch.checked || !isLiDGroup(group));
-
-            if (currentLevelFilter === 'all') {
-                return baseGroups;
-            }
-
-            return baseGroups.filter(group => !isLiDGroup(group) && group.level === currentLevelFilter);
+            return nounGroups.filter(group => lidSwitch.checked || !isLiDGroup(group));
         }
 
         function updateLevelFilterButtons() {
