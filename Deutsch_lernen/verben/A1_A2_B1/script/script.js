@@ -3310,6 +3310,10 @@ async function loadBackgroundData() {
  rowClass = ' class="pronoun-row-Sie-formal"';
  }
 
+ if (conjugationCell) {
+     const safeConjugation = conjugationCell.replace(/'/g, "\\'");
+     conjugationCell = `<span class="german-word conjugation-cell-speak" onclick="event.stopPropagation(); window.speak('${safeConjugation}')" title="Aussprache hören" style="cursor: pointer; display: inline-block;">${conjugationCell}</span>`;
+ }
  tableHTML += `<tr${rowClass}><td>${pronounCell}</td><td>${conjugationCell}</td><td>${exampleCell}</td></tr>`;
  }
  }
