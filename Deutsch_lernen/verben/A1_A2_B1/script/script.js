@@ -50,14 +50,17 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  "zurÃ¼ckbringen": "zurÃ¼ck", "zurÃ¼ckgeben": "zurÃ¼ck", "zurÃ¼ckkommen": "zurÃ¼ck"
  };
 
- function formatVerbPrefix(verbName) {
- if (separablePrefixesMap[verbName]) {
- const prefix = separablePrefixesMap[verbName];
- if (verbName.startsWith(prefix)) {
- return `<span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}`;
- }
- }
- return verbName;
+ function formatVerbPrefix(verbName, isModal = false) {
+  if (verbName === 'geboren werden' && !isModal) {
+    return 'geboren';
+  }
+  if (separablePrefixesMap[verbName]) {
+    const prefix = separablePrefixesMap[verbName];
+    if (verbName.startsWith(prefix)) {
+      return `<span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}`;
+    }
+  }
+  return verbName;
  }
 
 
@@ -1520,7 +1523,7 @@ async function loadBackgroundData() {
  germanWord.style.display = showGerman ? '' : 'none';
  germanWord.style.cursor = 'pointer';
  germanWord.title = 'Aussprache hÃ¶ren';
- germanWord.onclick = (e) => { e.stopPropagation(); window.speak(verbName); };
+ germanWord.onclick = (e) => { e.stopPropagation(); window.speak(verbName === 'geboren werden' ? 'geboren' : verbName); };
 
  const translations = document.createElement('div');
  translations.className = 'kompakt-translations';
@@ -1661,7 +1664,7 @@ async function loadBackgroundData() {
  const displayVerb = formatVerbPrefix(verbName);
  return `
  <div class="word-item">
- <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; flex-direction: column; gap: 5px;">
+ <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName === \'geboren werden\' ? \'geboren\' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; flex-direction: column; gap: 5px;">
  <span class="german-word" style="font-size: 1.5rem;">${displayVerb} ${irregularMark}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</span>
  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
  <span class="spanish-translation" style="font-size: 1.1rem; color: white; font-style: italic;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${esTranslation}</span>
@@ -1717,7 +1720,7 @@ async function loadBackgroundData() {
  // Cleaner, simpler card with header and emoji
  return `
  <div class="card normal-card">
- <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">
+ <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName === \'geboren werden\' ? \'geboren\' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">
  <span class="normal-emoji">${emoji}</span>
  <h3 class="normal-german">${formatVerbPrefix(verbName)}${irregular}</h3>
  ${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}
@@ -1785,7 +1788,7 @@ async function loadBackgroundData() {
  const row = document.createElement('div');
  row.className = 'light-version-row';
  row.innerHTML = `
- <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerb}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
+ <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName === \'geboren werden\' ? \'geboren\' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerb}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
  <div class="light-version-cell perfekt" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${perfekt}</div>
  <div class="light-version-cell praeteritum" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${praeteritum}</div>
  <div class="light-version-cell translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${translation}</div>
@@ -2780,7 +2783,7 @@ async function loadBackgroundData() {
  const infinitiveElement = document.getElementById('modal-verb-infinitive');
  // const irregularMark = updatedData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
  // Removed asterisk as requested
- infinitiveElement.innerHTML = formatVerbPrefix(verb);
+ infinitiveElement.innerHTML = formatVerbPrefix(verb, true);
 
  // Reset tags collapse state
  const tagsCollapsible = document.getElementById('modal-tags-collapsible');
@@ -4109,9 +4112,9 @@ async function loadWortfamilieIndex() {
  const verbName = match.verb;
  const verbData = match.data;
  const matchHint = getMatchHint(match);
- let displayVerbName = highlightMatch(verbName, searchTerm);
+ let displayVerbName = highlightMatch(verbName === 'geboren werden' ? 'geboren' : formatVerbPrefix(verbName), searchTerm);
  if (!verbName.toLowerCase().includes(searchTerm) && matchHint) {
- displayVerbName = `${highlightBaseVerb(verbName)} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, searchTerm)})</span>`;
+ displayVerbName = `${highlightBaseVerb(verbName === 'geboren werden' ? 'geboren' : formatVerbPrefix(verbName))} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, searchTerm)})</span>`;
  }
  const esTranslationRaw = getCardTranslation(verbData);
  const esTranslationDisplay = highlightMatch(esTranslationRaw, searchTerm);
@@ -4132,7 +4135,7 @@ async function loadWortfamilieIndex() {
 
  cardHTML += `
  <div class="kompakt-row" data-verb="${verbName}" onclick="openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
- <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
+ <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName === \'geboren werden\' ? \'geboren\' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
  <div class="kompakt-translations">
  <div class="kompakt-spanish" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showSpanish ? 'block' : 'none'};">${esTranslationDisplay}</div>
  <div class="kompakt-english" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showEnglish && enTranslationRaw ? 'block' : 'none'};">${enTranslationDisplay}</div>
@@ -4158,9 +4161,9 @@ async function loadWortfamilieIndex() {
 
  // Generate highlighted display names dynamically
  const matchHint = getMatchHint(match);
- let displayVerbName = highlightMatch(verbName, searchTerm);
+ let displayVerbName = highlightMatch(verbName === 'geboren werden' ? 'geboren' : formatVerbPrefix(verbName), searchTerm);
  if (!verbName.toLowerCase().includes(searchTerm) && matchHint) {
- displayVerbName = `${highlightBaseVerb(verbName)} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, searchTerm)})</span>`;
+ displayVerbName = `${highlightBaseVerb(verbName === 'geboren werden' ? 'geboren' : formatVerbPrefix(verbName))} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, searchTerm)})</span>`;
  }
 
  // Remove parentheses from translations and highlight
@@ -4348,7 +4351,7 @@ async function loadWortfamilieIndex() {
  const cardHTML = `
  <div class="word-item">
  <div class="card-header">
- <span class="german-word" onclick="event.stopPropagation(); window.speak('${verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerbName}</span>
+ <span class="german-word" onclick="event.stopPropagation(); window.speak('${verbName === \'geboren werden\' ? \'geboren\' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerbName}</span>
  <span class="spanish-translation" data-form="translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${esTranslation}</span>
  ${shouldHideEmoji ? '' : `<div class="icon-floating" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" style="cursor: pointer;">${verbData.emoji || 'Ã¢Ââ€œ'}</div>`}
  </div>
