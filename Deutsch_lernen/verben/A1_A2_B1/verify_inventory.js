@@ -1,5 +1,5 @@
-const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = require('fs');
+const path = require('path');
 
 const basePath = path.join(__dirname, 'json');
 const indexFilePath = path.join(basePath, 'verbs_index.json');
@@ -21,6 +21,7 @@ function verifyInventory() {
     let calculatedGroups = [];
     let totalVerbs = 0;
 
+    const levelCounts = {};
     for (const level of levelConfig) {
         const levelDir = path.join(groupsPath, level);
         if (!fs.existsSync(levelDir)) continue;
@@ -33,20 +34,24 @@ function verifyInventory() {
             return numA - numB;
         });
 
+        const displayLevel = level.replace('_', '.');
+        if (!levelCounts[displayLevel]) {
+            levelCounts[displayLevel] = 0;
+        }
+
         files.forEach(file => {
             const filePath = path.join(levelDir, file);
             const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
             const verbCount = content.verbs ? content.verbs.length : 0;
-            const groupNum = parseInt(file.match(/group_(\d+)/)[1]);
 
-            // Format level for display (A1_1 -> A1.1)
-            const displayLevel = level.replace('_', '.');
+            levelCounts[displayLevel]++;
+            const groupNumSeq = levelCounts[displayLevel];
 
             calculatedGroups.push({
                 level: displayLevel,
                 verbCount: verbCount,
                 verbs: content.verbs || [],
-                groupNumberPerLevel: groupNum
+                groupNumberPerLevel: groupNumSeq
             });
             totalVerbs += verbCount;
         });
