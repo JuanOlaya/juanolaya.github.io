@@ -17,12 +17,12 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
  let physicalLevelMap = {
  'A1': [
- { key: 'A1_1', count: 14, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] },
+ { key: 'A1_1', count: 15, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] },
  { key: 'A1_2', count: 16, fileNumbers: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30] }
  ],
  'A2': [
  { key: 'A2_1', count: 12, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
- { key: 'A2_2', count: 16, fileNumbers: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28] }
+ { key: 'A2_2', count: 17, fileNumbers: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29] }
  ],
  'B1': [{ key: 'B1_1', count: 26, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26] }],
  'B2': [{ key: 'B2_1', count: 14, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] }]
@@ -181,8 +181,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  layers.forEach(layer => {
  const macroLevel = layer.key.split('_')[0];
  const previousLayer = (previousPhysicalMap[macroLevel] || []).find(item => item.key === layer.key);
- if (previousLayer && Array.isArray(previousLayer.fileNumbers) && previousLayer.fileNumbers.length >= layer.count) {
+ if (previousLayer && Array.isArray(previousLayer.fileNumbers)) {
+ if (layer.count > previousLayer.fileNumbers.length) {
+ const lastNum = previousLayer.fileNumbers.length > 0 ? previousLayer.fileNumbers[previousLayer.fileNumbers.length - 1] : 0;
+ const diff = layer.count - previousLayer.fileNumbers.length;
+ const extension = Array.from({ length: diff }, (_, index) => lastNum + index + 1);
+ layer.fileNumbers = [...previousLayer.fileNumbers, ...extension];
+ } else {
  layer.fileNumbers = previousLayer.fileNumbers.slice(0, layer.count);
+ }
  } else {
  layer.fileNumbers = Array.from({ length: layer.count }, (_, index) => index + 1);
  }
