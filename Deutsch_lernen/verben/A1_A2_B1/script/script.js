@@ -1664,7 +1664,7 @@ async function loadBackgroundData() {
  const displayVerb = formatVerbPrefix(verbName);
  return `
  <div class="word-item">
- <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName === \'geboren werden\' ? \'geboren\' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; flex-direction: column; gap: 5px;">
+ <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; flex-direction: column; gap: 5px;">
  <span class="german-word" style="font-size: 1.5rem;">${displayVerb} ${irregularMark}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</span>
  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
  <span class="spanish-translation" style="font-size: 1.1rem; color: white; font-style: italic;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${esTranslation}</span>
@@ -1720,7 +1720,7 @@ async function loadBackgroundData() {
  // Cleaner, simpler card with header and emoji
  return `
  <div class="card normal-card">
- <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName === \'geboren werden\' ? \'geboren\' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">
+ <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">
  <span class="normal-emoji">${emoji}</span>
  <h3 class="normal-german">${formatVerbPrefix(verbName)}${irregular}</h3>
  ${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}
@@ -1788,7 +1788,7 @@ async function loadBackgroundData() {
  const row = document.createElement('div');
  row.className = 'light-version-row';
  row.innerHTML = `
- <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName === \'geboren werden\' ? \'geboren\' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerb}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
+ <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerb}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
  <div class="light-version-cell perfekt" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${perfekt}</div>
  <div class="light-version-cell praeteritum" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${praeteritum}</div>
  <div class="light-version-cell translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${translation}</div>
@@ -4135,7 +4135,7 @@ async function loadWortfamilieIndex() {
 
  cardHTML += `
  <div class="kompakt-row" data-verb="${verbName}" onclick="openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
- <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName === \'geboren werden\' ? \'geboren\' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
+ <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
  <div class="kompakt-translations">
  <div class="kompakt-spanish" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showSpanish ? 'block' : 'none'};">${esTranslationDisplay}</div>
  <div class="kompakt-english" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showEnglish && enTranslationRaw ? 'block' : 'none'};">${enTranslationDisplay}</div>
@@ -4351,7 +4351,7 @@ async function loadWortfamilieIndex() {
  const cardHTML = `
  <div class="word-item">
  <div class="card-header">
- <span class="german-word" onclick="event.stopPropagation(); window.speak('${verbName === \'geboren werden\' ? \'geboren\' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerbName}</span>
+ <span class="german-word" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerbName}</span>
  <span class="spanish-translation" data-form="translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${esTranslation}</span>
  ${shouldHideEmoji ? '' : `<div class="icon-floating" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" style="cursor: pointer;">${verbData.emoji || 'Ã¢Ââ€œ'}</div>`}
  </div>
