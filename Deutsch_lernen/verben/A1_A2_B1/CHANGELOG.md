@@ -1,5 +1,22 @@
 # Changelog - German Verbs Group Structure
 
+## 2026-05-20 (Verb Relocations & Theme Renaming)
+- **Renamed Group**: `Emotion` (A1.1) ➔ `Gefühl` (sentimiento, feeling).
+  - Updated card files for the 7 verbs (`freuen`, `fühlen`, `gefallen`, `hassen`, `lachen`, `lieben`, `weinen`) to reflect theme change.
+  - Added rich translations and terms to the theme modal window (sentimiento, emoción, sensación, presentimiento, estado emocional / feeling, emotion, sensation, intuition / gut feeling, emotional state).
+- **Moved verb**: `einpacken` (Reisen A1.2 ➔ Paket A1.1).
+- **Moved verb**: `beeilen` (Empfindung A2.1 ➔ Zeit A1.2).
+- **Moved verb**: `erleben` (Biografie A2.2 ➔ Empfindung A2.1).
+- **Added verb**: `verwitwen` (enviudar / quedar viudo/a) in `Biografie` (A2.2).
+- **Biografie Group Reordering**: Organized verbs chronologically to show the life process: `geboren werden` ➔ `aufwachsen` ➔ `leben` ➔ `heiraten` ➔ `scheiden` ➔ `verwitwen` ➔ `sterben`.
+- **Group counts check**:
+  - `Paket` (A1.1): 6 verbs (Max 7 limit satisfied)
+  - `Reisen` (A1.2): 6 verbs (Max 7 limit satisfied)
+  - `Zeit` (A1.2): 6 verbs (Max 7 limit satisfied)
+  - `Empfindung` (A2.1): 7 verbs (Max 7 limit satisfied)
+  - `Biografie` (A2.2): 6 verbs (Max 7 limit satisfied)
+  - `Gefühl` (A1.1): 7 verbs (Max 7 limit satisfied)
+
 ## 2026-03-13 (Massive Expansion - Batch 7)
 - **New Vocab Base**: Expanded database from 412 to exactly 435 unique verbs (+23 verbs).
 - **New Groups Created**: `Körper` (A2.1), `Gefahr` (B1.1), `Psyche` (B1.1), `Personal` (B2.1), and `Innovation` (B2.1).
