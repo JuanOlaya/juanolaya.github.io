@@ -5091,3 +5091,14 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 .compact-light-mode #verb-modal .modal-content:not(.hide-separable-prefixes) .separable-prefix {
     text-decoration-color: #1e293b;
 }
+
+/* === Compact Mode Badge Sizing Overrides (33% reduction) === */
+.kompakt-row .reflexiv-badge,
+.kompakt-row .dativ-badge,
+.kompakt-row .intr-badge,
+.kompakt-row .ik-badge,
+.kompakt-row .lid-badge,
+.kompakt-row .a1test-badge {
+    font-size: 0.6rem !important;
+    padding: 1.3px 4px !important;
+}

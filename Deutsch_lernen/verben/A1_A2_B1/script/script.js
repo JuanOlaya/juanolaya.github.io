@@ -1385,6 +1385,16 @@ async function loadBackgroundData() {
  return (verbData && verbData.card_es) || getPrimaryTranslation((verbData && verbData.es) || '');
  }
 
+ function getCardTranslationLines(verbData) {
+ if (!verbData) return [];
+ let text = verbData.card_es;
+ if (!text) {
+ text = getCardTranslation(verbData);
+ }
+ if (!text) return [];
+ return text.split(/[,/\n\r]+/).map(p => p.trim()).filter(p => p.length > 0);
+ }
+
  // Helper function to extract clean Perfekt (remove auxiliary verb)
  function getCleanPerfekt(perfekt) {
  if (!perfekt || perfekt === '---') return '---';
@@ -1504,25 +1514,28 @@ async function loadBackgroundData() {
  row.className = 'kompakt-row';
 
  const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
- const reflBadge = isReflexive ? `<span class="reflexiv-badge" style="margin-left: 8px;">refl</span>` : '';
+ const reflBadge = isReflexive ? `<span class="reflexiv-badge">refl</span>` : '';
  const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
- const datBadge = isDativ ? `<span class="dativ-badge" style="margin-left: 8px;">dat</span>` : '';
+ const datBadge = isDativ ? `<span class="dativ-badge">dat</span>` : '';
  const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
- const intrBadge = isIntransitive ? `<span class="intr-badge" style="margin-left: 8px;">intr</span>` : '';
+ const intrBadge = isIntransitive ? `<span class="intr-badge">intr</span>` : '';
  const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
- const ikBadge = isIK ? `<span class="ik-badge" style="margin-left: 8px;">IK</span>` : '';
+ const ikBadge = isIK ? `<span class="ik-badge">IK</span>` : '';
  const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
- const lidBadge = isLiD ? `<span class="lid-badge" style="margin-left: 8px;">LiD</span>` : '';
+ const lidBadge = isLiD ? `<span class="lid-badge">LiD</span>` : '';
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
- const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}" style="margin-left: 8px;">${a1testTag}</span>` : '';
+ const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}">${a1testTag}</span>` : '';
 
  const germanWord = document.createElement('div');
  germanWord.className = 'kompakt-german';
+ germanWord.style.display = 'flex';
+ germanWord.style.flexDirection = 'column';
+ germanWord.style.gap = '2px';
  const displayVerb = formatVerbPrefix(verbName);
- germanWord.innerHTML = `${displayVerb}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}`;
- germanWord.style.display = showGerman ? '' : 'none';
+ germanWord.innerHTML = `<div class="kompakt-verb-main">${displayVerb}</div><div class="kompakt-verb-tags" style="display: flex; gap: 4px; flex-wrap: wrap;">${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>`;
+ germanWord.style.display = showGerman ? 'flex' : 'none';
  germanWord.style.cursor = 'pointer';
- germanWord.title = 'Aussprache hÃ¶ren';
+ germanWord.title = 'Aussprache hören';
  germanWord.onclick = (e) => { e.stopPropagation(); window.speak(verbName === 'geboren werden' ? 'geboren' : verbName); };
 
  const translations = document.createElement('div');
@@ -1530,7 +1543,8 @@ async function loadBackgroundData() {
 
  const spanishWord = document.createElement('div');
  spanishWord.className = 'kompakt-spanish';
- spanishWord.textContent = getCardTranslation(verbData);
+ const esTranslationLines = getCardTranslationLines(verbData);
+ spanishWord.innerHTML = esTranslationLines.map(line => `<div class="translation-line" style="line-height: 1.2;">${line}</div>`).join('');
  spanishWord.style.display = showSpanish ? '' : 'none';
  spanishWord.style.cursor = 'pointer';
  spanishWord.title = 'Details anzeigen';
@@ -4117,25 +4131,29 @@ async function loadWortfamilieIndex() {
  displayVerbName = `${highlightBaseVerb(verbName === 'geboren werden' ? 'geboren' : formatVerbPrefix(verbName))} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, searchTerm)})</span>`;
  }
  const esTranslationRaw = getCardTranslation(verbData);
- const esTranslationDisplay = highlightMatch(esTranslationRaw, searchTerm);
+ const esTranslationLinesRaw = getCardTranslationLines(verbData);
+ const esTranslationDisplay = esTranslationLinesRaw.map(line => `<div class="translation-line" style="line-height: 1.2;">${highlightMatch(line, searchTerm)}</div>`).join('');
  const enTranslationRaw = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
  const enTranslationDisplay = highlightMatch(enTranslationRaw, searchTerm);
  const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
- const reflBadge = isReflexive ? `<span class="reflexiv-badge" style="margin-left: 8px;">refl</span>` : '';
+ const reflBadge = isReflexive ? `<span class="reflexiv-badge">refl</span>` : '';
  const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
- const datBadge = isDativ ? `<span class="dativ-badge" style="margin-left: 8px;">dat</span>` : '';
+ const datBadge = isDativ ? `<span class="dativ-badge">dat</span>` : '';
  const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
- const intrBadge = isIntransitive ? `<span class="intr-badge" style="margin-left: 8px;">intr</span>` : '';
+ const intrBadge = isIntransitive ? `<span class="intr-badge">intr</span>` : '';
  const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
- const ikBadge = isIK ? `<span class="ik-badge" style="margin-left: 8px;">IK</span>` : '';
+ const ikBadge = isIK ? `<span class="ik-badge">IK</span>` : '';
  const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
- const lidBadge = isLiD ? `<span class="lid-badge" style="margin-left: 8px;">LiD</span>` : '';
+ const lidBadge = isLiD ? `<span class="lid-badge">LiD</span>` : '';
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
- const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}" style="margin-left: 8px;">${a1testTag}</span>` : '';
+ const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}">${a1testTag}</span>` : '';
 
  cardHTML += `
  <div class="kompakt-row" data-verb="${verbName}" onclick="openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
- <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
+ <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer; display: ${showGerman ? 'flex' : 'none'}; flex-direction: column; gap: 2px;">
+ <div class="kompakt-verb-main">${displayVerbName}</div>
+ <div class="kompakt-verb-tags" style="display: flex; gap: 4px; flex-wrap: wrap;">${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
+ </div>
  <div class="kompakt-translations">
  <div class="kompakt-spanish" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showSpanish ? 'block' : 'none'};">${esTranslationDisplay}</div>
  <div class="kompakt-english" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showEnglish && enTranslationRaw ? 'block' : 'none'};">${enTranslationDisplay}</div>
