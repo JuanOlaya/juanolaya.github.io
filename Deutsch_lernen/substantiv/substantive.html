@@ -1520,6 +1520,7 @@
                 <div class="modal-emoji" id="modal-emoji"></div>
                 <div class="modal-word" id="modal-word"></div>
                 <div class="modal-translation" id="modal-translation"></div>
+                <div class="theme-modal-tags" id="modal-tags" hidden></div>
                 <div class="modal-variant" id="modal-singular-block">
                     <div class="modal-variant-label">Singular / Plural</div>
                     <div class="modal-variant-word" id="modal-singular-word"></div>
@@ -2554,6 +2555,7 @@
                 { article: "der", word: "Geburtstag", emoji: "🎂", translation_es: "cumpleaños", translation_en: "birthday", example_de: "Mein Geburtstag ist im Mai.", example_es: "Mi cumpleaños es en mayo." },
                 { article: "das", word: "Gewitter", emoji: "⛈️", translation_es: "tormenta eléctrica", translation_en: "thunderstorm", example_de: "Das Gewitter kommt am Abend.", example_es: "La tormenta eléctrica llega por la tarde." },
                 { article: "das", word: "Gift", emoji: "☠️", translation_es: "veneno", translation_en: "poison", example_de: "Das Gift ist gefährlich.", example_es: "El veneno es peligroso." },
+                { article: "der", word: "Inbus", emoji: "🔧", translation_es: "llave hexagonal / llave Bristol / llave Allen", translation_en: "Allen wrench / Allen key", example_de: "Ich brauche einen Inbus für die Schraube.", example_es: "Necesito una llave Allen para el tornillo." },
                 { article: "die", word: "Parkgebühr", emoji: "🅿️", translation_es: "tarifa de aparcamiento", translation_en: "parking fee", example_de: "Die Parkgebühr ist hier hoch.", example_es: "La tarifa de aparcamiento aquí es alta." },
                 { article: "die (pl)", word: "Parkgebühren", emoji: "🅿️", translation_es: "tasas de aparcamiento", translation_en: "parking fees", example_de: "Die Parkgebühren sind im Zentrum teuer.", example_es: "Las tasas de aparcamiento son caras en el centro." },
                 { article: "die", word: "Quittung", emoji: "🧾", translation_es: "recibo", translation_en: "receipt", example_de: "Brauchen Sie eine Quittung?", example_es: "¿Necesita un recibo?" },
@@ -2561,6 +2563,7 @@
                 { article: "die", word: "S-Bahn", emoji: "🚆", translation_es: "tren de cercanías", translation_en: "suburban train", example_de: "Die S-Bahn kommt in fünf Minuten.", example_es: "El tren de cercanías llega en cinco minutos." },
                 { article: "das", word: "Schild", emoji: "🪧", translation_es: "letrero / señal", translation_en: "sign", example_de: "Das Schild hängt an der Tür.", example_es: "El letrero cuelga de la puerta." },
                 { article: "der", word: "Schmerz", emoji: "🤕", translation_es: "dolor", translation_en: "pain", example_de: "Ich habe starke Schmerzen im Rücken.", example_es: "Tengo dolores fuertes en la espalda." },
+                { article: "der", word: "Schwimmer", emoji: "🏊", translation_es: "nadador", translation_en: "swimmer", example_de: "Der Schwimmer trainiert jeden Tag.", example_es: "El nadador entrena todos los días." },
                 { article: "der", word: "Stock", emoji: "🏢", translation_es: "piso / planta", translation_en: "floor / level", example_de: "Wir wohnen im dritten Stock.", example_es: "Vivimos en el tercer piso." },
                 { article: "der", word: "Strafzettel", emoji: "🧾", translation_es: "multa de aparcamiento", translation_en: "parking ticket / fine", example_de: "Ich habe einen Strafzettel am Auto.", example_es: "Tengo una multa en el coche." },
                 { article: "die", word: "Mittagspause", emoji: "🍱", translation_es: "pausa del mediodía", translation_en: "lunch break", example_de: "In der Mittagspause esse ich etwas.", example_es: "En la pausa del mediodía como algo." },
@@ -2568,8 +2571,23 @@
                 { article: "die", word: "Sehenswürdigkeit", emoji: "📍", translation_es: "lugar de interés", translation_en: "tourist attraction", example_de: "Die Sehenswürdigkeit ist sehr bekannt.", example_es: "El lugar de interés es muy conocido." },
                 { article: "der", word: "Teil", emoji: "🧩", translation_es: "parte", translation_en: "part", example_de: "Dieser Teil ist leicht.", example_es: "Esta parte es fácil." },
                 { article: "der", word: "Termin", emoji: "📅", translation_es: "cita", translation_en: "appointment", example_de: "Ich habe morgen einen Termin beim Amt.", example_es: "Mañana tengo una cita en la oficina pública." },
+                { article: "die", word: "Taschenuhr", emoji: "🕰️", translation_es: "reloj de bolsillo", translation_en: "pocket watch", example_de: "Die Taschenuhr ist sehr alt.", example_es: "El reloj de bolsillo es muy antiguo." },
+                { article: "das", word: "Trinkglas", emoji: "🥛", translation_es: "vaso para beber", translation_en: "drinking glass", example_de: "Das Trinkglas steht auf dem Tisch.", example_es: "El vaso para beber está sobre la mesa." },
                 { article: "die", word: "Unterschrift", emoji: "✍️", translation_es: "firma", translation_en: "signature", example_de: "Hier fehlt noch Ihre Unterschrift.", example_es: "Aquí todavía falta su firma." },
                 { article: "die", word: "U-Bahn", emoji: "🚇", translation_es: "metro", translation_en: "subway", example_de: "Die U-Bahn fährt alle zehn Minuten.", example_es: "El metro pasa cada diez minutos." },
+                { article: "die", word: "Uhr", emoji: "🕒", translation_es: "reloj", translation_en: "clock / watch", example_de: "Die Uhr zeigt acht Uhr.", example_es: "El reloj marca las ocho." },
+                { article: "die", word: "Armbanduhr", emoji: "⌚", translation_es: "reloj de pulsera", translation_en: "wristwatch", example_de: "Meine Armbanduhr ist neu.", example_es: "Mi reloj de pulsera es nuevo." },
+                { article: "das", word: "Besteck", emoji: "🍴", translation_es: "cubiertos", translation_en: "cutlery", example_de: "Das Besteck liegt auf dem Tisch.", example_es: "Los cubiertos están sobre la mesa." },
+                { article: "die (pl)", word: "Blumen", emoji: "💐", translation_es: "flores", translation_en: "flowers", example_de: "Die Blumen sind für meine Mutter.", example_es: "Las flores son para mi madre." },
+                { article: "der", word: "Blumenstrauß", emoji: "💐", translation_es: "ramo de flores", translation_en: "bouquet", example_de: "Der Blumenstrauß ist sehr schön.", example_es: "El ramo de flores es muy bonito." },
+                { article: "die", word: "Kinokarte", emoji: "🎟️", translation_es: "entrada de cine", translation_en: "movie ticket", example_de: "Die Kinokarte kostet zehn Euro.", example_es: "La entrada de cine cuesta diez euros." },
+                { article: "der", word: "Kugelschreiber", emoji: "🖊️", translation_es: "bolígrafo", translation_en: "ballpoint pen", example_de: "Ich schreibe mit dem Kugelschreiber.", example_es: "Escribo con el bolígrafo." },
+                { article: "die", word: "Mappe", emoji: "📁", translation_es: "carpeta", translation_en: "folder", example_de: "Die Mappe liegt auf dem Stuhl.", example_es: "La carpeta está sobre la silla." },
+                { article: "das", word: "Musikinstrument", emoji: "🎼", translation_es: "instrumento musical", translation_en: "musical instrument", example_de: "Das Musikinstrument ist sehr teuer.", example_es: "El instrumento musical es muy caro." },
+                { article: "der", word: "Ordner", emoji: "🗂️", translation_es: "carpeta / archivador", translation_en: "binder / file folder", example_de: "Der Ordner steht im Regal.", example_es: "La carpeta está en el estante." },
+                { article: "das", word: "Paket", emoji: "📦", translation_es: "paquete", translation_en: "package", example_de: "Das Paket kommt morgen an.", example_es: "El paquete llega mañana." },
+                { article: "das", word: "Postamt", emoji: "🏤", translation_es: "oficina de correos", translation_en: "post office", example_de: "Das Postamt ist am Marktplatz.", example_es: "La oficina de correos está en la plaza del mercado." },
+                { article: "die", word: "Zigarette", emoji: "🚬", translation_es: "cigarrillo", translation_en: "cigarette", example_de: "Die Zigarette ist hier verboten.", example_es: "El cigarrillo está prohibido aquí." },
                 { article: "der", word: "Volleyball", emoji: "🏐", translation_es: "voleibol", translation_en: "volleyball", example_de: "Wir spielen Volleyball im Park.", example_es: "Jugamos voleibol en el parque." },
                 { article: "die", word: "Wissenschaft", emoji: "🧪", translation_es: "ciencia", translation_en: "science", example_de: "Die Wissenschaft sucht Antworten.", example_es: "La ciencia busca respuestas." },
                 { article: "das", word: "Schwimmbad", emoji: "🏊", translation_es: "piscina", translation_en: "swimming pool", example_de: "Das Schwimmbad ist heute geöffnet.", example_es: "La piscina está abierta hoy." },
@@ -3207,6 +3225,15 @@
                 nouns: pickThemeNouns(["der|antwortbogen", "die|aussage", "das|beispiel", "die|losung", "der|teil"])
             },
             {
+                id: "sprechteil3",
+                title: "A1 Sprechen Teil 3",
+                title_es: "",
+                title_en: "",
+                level: "A1",
+                tags: ["A1💬"],
+                nouns: pickThemeNouns(["das|trinkglas", "die|kinokarte", "der|kugelschreiber", "das|paket", "der|blumenstrauss", "die (pl)|blumen", "die|uhr", "die|armbanduhr", "die|taschenuhr", "das|musikinstrument", "das|besteck", "der|ordner", "die|mappe", "das|postamt", "der|schwimmer", "die|zigarette"])
+            },
+            {
                 id: "pruefungen",
                 title: "Prüfungen",
                 title_es: "Exámenes",
@@ -3732,6 +3759,14 @@
                 nouns: pickThemeNouns(["das|basteln"])
             },
             {
+                id: "handarbeit",
+                title: "Handarbeit",
+                title_es: "Manualidades",
+                title_en: "Handwork",
+                level: "A2",
+                nouns: pickThemeNouns(["der|inbus"])
+            },
+            {
                 id: "tourismus",
                 title: "Tourismus",
                 title_es: "Turismo",
@@ -4073,6 +4108,7 @@
             schlafzimmer: "A1",
             basteln: "A1",
             hobbys: "A1",
+            handarbeit: "A2",
             gesicht: "A1",
             koerper: "A1",
             organe: "A1",
@@ -4096,6 +4132,7 @@
             daten: "A1",
             post: "A1",
             pruefung: "A1",
+            sprechteil3: "A1",
             bewohner: "A2",
             wohnen: "A2",
             orte: "A2",
@@ -4213,6 +4250,58 @@
             });
         });
 
+        const a1SpeakingTagWords = new Set([
+            'hund',
+            'haustier',
+            'glas',
+            'trinkglas',
+            'kinokarte',
+            'kugelschreiber',
+            'bleistift',
+            'briefmarke',
+            'brief',
+            'paket',
+            'stuhl',
+            'tur',
+            'eingang',
+            'fahrrad',
+            'kuchen',
+            'brotchen',
+            'bier',
+            'getrank',
+            'blumenstrauss',
+            'blumen',
+            'uhr',
+            'armbanduhr',
+            'taschenuhr',
+            'kuhlschrank',
+            'gitarre',
+            'musikinstrument',
+            'besteck',
+            'messer',
+            'gabel',
+            'fenster',
+            'ordner',
+            'mappe',
+            'post',
+            'postamt',
+            'rechnung',
+            'schwimmer',
+            'schwimmbad',
+            'zigarette'
+        ]);
+
+        nounGroups.forEach(group => {
+            group.nouns.forEach(noun => {
+                const key = normalizeThemeKey(noun.word);
+                if (a1SpeakingTagWords.has(key)) {
+                    noun.tags = Array.isArray(noun.tags)
+                        ? [...new Set([...noun.tags, 'A1💬'])]
+                        : ['A1💬'];
+                }
+            });
+        });
+
     </script>
 
     <div class="modal-overlay" id="settings-modal">
@@ -4297,6 +4386,7 @@
         const modalExampleEs = document.getElementById('modal-example-es');
         const modalNoteBlock = document.getElementById('modal-note-block');
         const modalNoteText = document.getElementById('modal-note-text');
+        const modalTags = document.getElementById('modal-tags');
         const modalSingularBlock = document.getElementById('modal-singular-block');
         const modalSingularWord = document.getElementById('modal-singular-word');
         const modalFeminineBlock = document.getElementById('modal-feminine-block');
@@ -4331,6 +4421,7 @@
             nachrichten: 'die|nachricht',
             unterlagen: 'die|unterlage',
             grundrechte: 'das|grundrecht',
+            blumen: 'die|blume',
             gerichte: 'das|gericht',
             bilder: 'das|bild',
             freunde: 'der|freund',
@@ -4747,6 +4838,17 @@
             modalExampleEs.textContent = noun.example_es || '-';
             modalHeader.style.backgroundColor = getColorForArticle(noun.article);
 
+            const nounTags = Array.isArray(noun.tags) ? noun.tags : [];
+            if (nounTags.length > 0) {
+                modalTags.hidden = false;
+                modalTags.innerHTML = nounTags
+                    .map(tag => `<span class="lid-badge">${escapeHtml(tag)}</span>`)
+                    .join('');
+            } else {
+                modalTags.hidden = true;
+                modalTags.innerHTML = '';
+            }
+
             const singularVariant = getSingularVariant(noun);
             if (singularVariant) {
                 modalSingularBlock.hidden = false;
@@ -4904,7 +5006,8 @@
                 noun.word,
                 `${noun.article} ${noun.word}`,
                 noun.translation_es,
-                noun.translation_en
+                noun.translation_en,
+                ...(Array.isArray(noun.tags) ? noun.tags : [])
             ];
 
             return fields.some(field => normalizeSearchText(field).includes(query));
