@@ -66,7 +66,7 @@
         /* MAIN GRID */
         .main-content {
             display: grid;
-            grid-template-columns: 1fr 1.6fr 1fr;
+            grid-template-columns: 1fr 1.9fr 1fr;
             gap: 2px;
             background-color: #ecf0f1;
         }
@@ -584,11 +584,9 @@
                         </div>
                         <div onclick="openModal('für'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Destinatario (para) / Propósito (para/por) / Duración (por)</span>
+                            <span class="example">Destinatario (<strong>para</strong>)<br>Propósito (<strong>para/por</strong>)<br>Duración (<strong>por</strong>)</span>
                         </div>
                     </li>
-
-                    <!-- TRÁNSITO / ESPACIAL -->
                     <li style="padding:15px 0 5px 0; text-align:center; margin-bottom:5px;">
                         <span
                             style="background:var(--accusative); color:white; padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:bold; display:inline-block;">WOHIN?
@@ -601,7 +599,7 @@
                         </div>
                         <div onclick="openModal('um'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Alrededor (espacio) / Hora exacta (a) / Petición (por)</span>
+                            <span class="example"><strong>Alrededor</strong> (espacio)<br>Hora exacta (<strong>a</strong>)<br>Petición (<strong>por</strong>)</span>
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
@@ -611,7 +609,7 @@
                         </div>
                         <div onclick="openModal('durch'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Tránsito (a través de/por) / Medio (por)</span>
+                            <span class="example">Tránsito (<strong>a través de/por</strong>)<br>Medio (<strong>por</strong>)</span>
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
@@ -621,11 +619,9 @@
                         </div>
                         <div onclick="openModal('gegen'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Contacto (contra) / Oposición (en contra/para) / Hora aprox. (hacia)</span>
+                            <span class="example">Contacto (<strong>contra</strong>)<br>Oposición (<strong>en contra/para</strong>)<br>Hora aprox. (<strong>hacia</strong>)</span>
                         </div>
                     </li>
-
-                    <!-- CARENCIA -->
                     <li style="padding:15px 0 5px 0; text-align:center; margin-bottom:5px;">
                         <span
                             style="background:var(--accusative); color:white; padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:bold; display:inline-block;">OHNE
@@ -638,11 +634,9 @@
                         </div>
                         <div onclick="openModal('ohne'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Sin personas / Sin cosas</span>
+                            <span class="example"><strong>Sin</strong> personas<br><strong>Sin</strong> cosas</span>
                         </div>
                     </li>
-
-                    <!-- LÍMITE -->
                     <li style="padding:15px 0 5px 0; text-align:center; margin-bottom:5px;">
                         <span
                             style="background:var(--accusative); color:white; padding:4px 10px; border-radius:12px; font-size:0.8rem; font-weight:bold; display:inline-block;">BIS
@@ -655,7 +649,7 @@
                         </div>
                         <div onclick="openModal('bis'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Tiempo (hasta) / Espacio (hasta)</span>
+                            <span class="example">Tiempo (<strong>hasta</strong>)<br>Espacio (<strong>hasta</strong>)</span>
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
@@ -665,7 +659,7 @@
                         </div>
                         <div onclick="openModal('ins'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Edificio (al) / Vehículo o Agua (al/en)</span>
+                            <span class="example">Edificio (<strong>al</strong>)<br>Vehículo o Agua (<strong>al/en</strong>)</span>
                         </div>
                     </li>
                 </ul>
@@ -688,88 +682,88 @@
                         <div onclick="speak('an'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
                             <div style="display:flex; align-items:center; justify-content: center; gap:6px;">AN <img
-                                    src="img/an.png" style="height:40px;"></div>
+                                     src="img/an.png" style="height:40px;"></div>
                         </div>
                         <div onclick="openModal('an'); event.stopPropagation()"
                             style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
-                            <span class="translation">Ort Acusativo (a/en) / Ort Dativo (en/junto a) / Tiempo (hasta)</span>
+                            <span class="translation">Ort Acusativo (<strong>a/en</strong>)<br>Ort Dativo (<strong>en/junto a</strong>)<br>Tiempo (<strong>hasta</strong>)</span>
                         </div>
                     </div>
                     <div class="wechsel-item" style="cursor: default; padding: 0;">
                         <div onclick="speak('auf'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
                             <div style="display:flex; align-items:center; justify-content: center; gap:6px;">AUF <img
-                                    src="img/auf.png" style="height:40px;"></div>
+                                     src="img/auf.png" style="height:40px;"></div>
                         </div>
                         <div onclick="openModal('auf'); event.stopPropagation()"
                             style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
-                            <span class="translation">Ort Acusativo (sobre/al) / Ort Dativo (sobre/en) / Eventos (en)</span>
+                            <span class="translation">Ort Acusativo (<strong>sobre/al</strong>)<br>Ort Dativo (<strong>sobre/en</strong>)<br>Eventos (<strong>en</strong>)</span>
                         </div>
                     </div>
                     <div class="wechsel-item" style="cursor: default; padding: 0;">
                         <div onclick="speak('hinter'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
                             <div style="display:flex; align-items:center; justify-content: center; gap:6px;">HINTER <img
-                                    src="img/hinter.png" style="height:40px;"></div>
+                                     src="img/hinter.png" style="height:40px;"></div>
                         </div>
                         <div onclick="openModal('hinter'); event.stopPropagation()"
                             style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
-                            <span class="translation">Ort Acusativo (detrás de/del) / Ort Dativo (detrás de/del)</span>
+                            <span class="translation">Ort Acusativo (<strong>detrás de/del</strong>)<br>Ort Dativo (<strong>detrás de/del</strong>)</span>
                         </div>
                     </div>
                     <div class="wechsel-item" style="cursor: default; padding: 0;">
                         <div onclick="speak('in'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
                             <div style="display:flex; align-items:center; justify-content: center; gap:6px;">IN <img
-                                    src="img/in.png" style="height:40px;"></div>
+                                     src="img/in.png" style="height:40px;"></div>
                         </div>
                         <div onclick="openModal('in'); event.stopPropagation()"
                             style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
-                            <span class="translation" style="font-size:0.9em;">Ort Acusativo (al/a) / Ort Dativo (en/en el) / Tiempo (en)</span>
+                            <span class="translation">Ort Acusativo (<strong>al/a</strong>)<br>Ort Dativo (<strong>en/en el</strong>)<br>Tiempo (<strong>en</strong>)</span>
                         </div>
                     </div>
                     <div class="wechsel-item" style="cursor: default; padding: 0;">
                         <div onclick="speak('neben'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
                             <div style="display:flex; align-items:center; justify-content: center; gap:6px;">NEBEN <img
-                                    src="img/neben.png" style="height:40px;"></div>
+                                     src="img/neben.png" style="height:40px;"></div>
                         </div>
                         <div onclick="openModal('neben'); event.stopPropagation()"
                             style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
-                            <span class="translation">Ort Acusativo (al lado de/a... lado) / Ort Dativo (al lado de/junto a)</span>
+                            <span class="translation">Ort Acusativo (<strong>al lado de/a... lado</strong>)<br>Ort Dativo (<strong>al lado de/junto a</strong>)</span>
                         </div>
                     </div>
                     <div class="wechsel-item" style="cursor: default; padding: 0;">
                         <div onclick="speak('über'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
                             <div style="display:flex; align-items:center; justify-content: center; gap:6px;">ÜBER <img
-                                    src="img/ueber.png" style="height:40px;"></div>
+                                     src="img/ueber.png" style="height:40px;"></div>
                         </div>
                         <div onclick="openModal('über'); event.stopPropagation()"
                             style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
-                            <span class="translation">Ort Acusativo (sobre/por encima) / Ort Dativo (sobre/encima de) / Tema (sobre/acerca de)</span>
+                            <span class="translation">Ort Acusativo (<strong>sobre/por encima</strong>)<br>Ort Dativo (<strong>sobre/encima de</strong>)<br>Tema (<strong>sobre/acerca de</strong>)</span>
                         </div>
                     </div>
                     <div class="wechsel-item" style="cursor: default; padding: 0;">
                         <div onclick="speak('unter'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
                             <div style="display:flex; align-items:center; justify-content: center; gap:6px;">UNTER <img
-                                    src="img/unter.png" style="height:40px;"></div>
+                                     src="img/unter.png" style="height:40px;"></div>
                         </div>
                         <div onclick="openModal('unter'); event.stopPropagation()"
                             style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
-                            <span class="translation">Ort Acusativo (debajo de/bajo) / Ort Dativo (debajo de/bajo)</span>
+                            <span class="translation">Ort Acusativo (<strong>debajo de/bajo</strong>)<br>Ort Dativo (<strong>debajo de/bajo</strong>)</span>
                         </div>
                     </div>
                     <div class="wechsel-item" style="cursor: default; padding: 0;">
                         <div onclick="speak('vor'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px 5px 5px 5px; width: 100%;">
                             <div style="display:flex; align-items:center; justify-content: center; gap:6px;">VOR <img
-                                    src="img/vor.png" style="height:40px;"></div>
+                                     src="img/vor.png" style="height:40px;"></div>
                         </div>
                         <div onclick="openModal('vor'); event.stopPropagation()"
                             style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
-                            <span class="translation">Ort Acusativo (delante de/ante) / Ort Dativo (delante de/ante) / Tiempo (hace)</span>
+                            <span class="translation">Ort Acusativo (<strong>delante de/ante</strong>)<br>Ort Dativo (<strong>delante de/ante</strong>)<br>Tiempo (<strong>hace</strong>)</span>
                         </div>
                     </div>
                     <div class="wechsel-item" style="cursor: default; padding: 0;">
@@ -781,9 +775,9 @@
                         </div>
                         <div onclick="openModal('zwischen'); event.stopPropagation()"
                             style="cursor: pointer; padding: 5px 5px 12px 5px; width: 100%; border-top: 1px solid rgba(233, 30, 99, 0.2);">
-                            <span class="translation">Ort Acusativo (entre) / Ort Dativo (entre)</span>
+                            <span class="translation">Ort Acusativo (<strong>entre</strong>)<br>Ort Dativo (<strong>entre</strong>)</span>
                         </div>
-                    </div>
+                </div>
                 </div>
 
                 <div class="logic-box">
@@ -845,7 +839,7 @@
                         </div>
                         <div onclick="openModal('aus'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Procedencia (de/del) / Material y Causa (de/por)</span>
+                            <span class="example">Procedencia (<strong>de/del</strong>)<br>Material y Causa (<strong>de/por</strong>)</span>
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
@@ -855,7 +849,7 @@
                         </div>
                         <div onclick="openModal('von'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Posesión (de) / Procedencia (de/del) / Tema (de/sobre)</span>
+                            <span class="example">Posesión (<strong>de</strong>)<br>Procedencia (<strong>de/del</strong>)<br>Tema (<strong>de/sobre</strong>)</span>
                         </div>
                     </li>
 
@@ -872,7 +866,7 @@
                         </div>
                         <div onclick="openModal('nach'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Destino (a/hacia) / Tiempo (después de/y) / Criterio (según)</span>
+                            <span class="example">Destino (<strong>a/hacia</strong>)<br>Tiempo (<strong>después de/y</strong>)<br>Criterio (<strong>según</strong>)</span>
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
@@ -882,7 +876,7 @@
                         </div>
                         <div onclick="openModal('zu'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Persona (a/con) / Profesional (al/a la) / Lugares (al/a la) / Ocasiones (para/por)</span>
+                            <span class="example">Persona (<strong>a/con</strong>)<br>Profesional (<strong>al/a la</strong>)<br>Lugares (<strong>al/a la</strong>)<br>Ocasiones (<strong>para/por</strong>)</span>
                         </div>
                     </li>
 
@@ -899,7 +893,7 @@
                         </div>
                         <div onclick="openModal('bei'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Persona (en/con) / Profesional y Empresa (en/al) / Actividad (al)</span>
+                            <span class="example">Persona (<strong>en/con</strong>)<br>Profesional y Empresa (<strong>en/al</strong>)<br>Actividad (<strong>al</strong>)</span>
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
@@ -909,7 +903,7 @@
                         </div>
                         <div onclick="openModal('im'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Espacio (en/en el) / Tiempo (en/en el)</span>
+                            <span class="example">Espacio (<strong>en/en el</strong>)<br>Tiempo (<strong>en/en el</strong>)</span>
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
@@ -919,7 +913,7 @@
                         </div>
                         <div onclick="openModal('mit'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Compañía (con) / Transporte (en/con) / Instrumento (con)</span>
+                            <span class="example">Compañía (<strong>con</strong>)<br>Transporte (<strong>en/con</strong>)<br>Instrumento (<strong>con</strong>)</span>
                         </div>
                     </li>
 
@@ -936,7 +930,7 @@
                         </div>
                         <div onclick="openModal('seit'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Momento (desde) / Duración (desde hace)</span>
+                            <span class="example">Momento (<strong>desde</strong>)<br>Duración (<strong>desde hace</strong>)</span>
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
@@ -946,7 +940,7 @@
                         </div>
                         <div onclick="openModal('ab'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Tiempo (a partir de/desde) / Espacio (desde)</span>
+                            <span class="example">Tiempo (<strong>a partir de/desde</strong>)<br>Espacio (<strong>desde</strong>)</span>
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
@@ -956,7 +950,7 @@
                         </div>
                         <div onclick="openModal('am'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
-                            <span class="example">Tiempo (el/por la) / Espacio (junto al/a la)</span>
+                            <span class="example">Tiempo (<strong>el/por la</strong>)<br>Espacio (<strong>junto al/a la</strong>)</span>
                         </div>
                     </li>
                 </ul>
@@ -980,7 +974,7 @@
                     </div>
                     <div onclick="openModal('während'); event.stopPropagation()"
                         style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
-                        <span class="gen-es">Tiempo (durante)</span>
+                        <span class="gen-es">Tiempo (<strong>durante</strong>)</span>
                     </div>
                 </div>
                 <div class="gen-item" style="cursor: default; padding: 0;">
@@ -990,7 +984,7 @@
                     </div>
                     <div onclick="openModal('wegen'); event.stopPropagation()"
                         style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
-                        <span class="gen-es">Causa/Motivo (por/a causa de/por culpa de)</span>
+                        <span class="gen-es">Causa/Motivo (<strong>por/a causa de/por culpa de</strong>)</span>
                     </div>
                 </div>
                 <div class="gen-item" style="cursor: default; padding: 0;">
@@ -1000,7 +994,7 @@
                     </div>
                     <div onclick="openModal('trotz'); event.stopPropagation()"
                         style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
-                        <span class="gen-es">Concesión (a pesar de/del)</span>
+                        <span class="gen-es">Concesión (<strong>a pesar de/del</strong>)</span>
                     </div>
                 </div>
                 <div class="gen-item" style="cursor: default; padding: 0;">
@@ -1010,7 +1004,7 @@
                     </div>
                     <div onclick="openModal('anstatt'); event.stopPropagation()"
                         style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
-                        <span class="gen-es">Sustitución (en vez de/en lugar de)</span>
+                        <span class="gen-es">Sustitución (<strong>en vez de/en lugar de</strong>)</span>
                     </div>
                 </div>
                 <div class="gen-item" style="cursor: default; padding: 0;">
@@ -1020,7 +1014,7 @@
                     </div>
                     <div onclick="openModal('außerhalb'); event.stopPropagation()"
                         style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
-                        <span class="gen-es">Espacio (fuera de/del) / Tiempo (fuera de/del)</span>
+                        <span class="gen-es">Espacio (<strong>fuera de/del</strong>)<br>Tiempo (<strong>fuera de/del</strong>)</span>
                     </div>
                 </div>
                 <div class="gen-item" style="cursor: default; padding: 0;">
@@ -1030,7 +1024,7 @@
                     </div>
                     <div onclick="openModal('innerhalb'); event.stopPropagation()"
                         style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
-                        <span class="gen-es">Tiempo (dentro de) / Espacio (dentro de/del)</span>
+                        <span class="gen-es">Tiempo (<strong>dentro de</strong>)<br>Espacio (<strong>dentro de/del</strong>)</span>
                     </div>
                 </div>
                 <div class="gen-item" style="cursor: default; padding: 0;">
@@ -1040,7 +1034,7 @@
                     </div>
                     <div onclick="openModal('jenseits'); event.stopPropagation()"
                         style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
-                        <span class="gen-es">Espacio (al otro lado de/del) / Figurativo (más allá de/del)</span>
+                        <span class="gen-es">Espacio (<strong>al otro lado de/del</strong>)<br>Figurativo (<strong>más allá de/del</strong>)</span>
                     </div>
                 </div>
                 <div class="gen-item" style="cursor: default; padding: 0;">
@@ -1050,7 +1044,7 @@
                     </div>
                     <div onclick="openModal('aufgrund'); event.stopPropagation()"
                         style="cursor: pointer; padding: 8px; width: 100%; text-align: center;">
-                        <span class="gen-es">Causa formal (debido a/al/por)</span>
+                        <span class="gen-es">Causa formal (<strong>debido a/al/por</strong>)</span>
                     </div>
                 </div>
             </div>
