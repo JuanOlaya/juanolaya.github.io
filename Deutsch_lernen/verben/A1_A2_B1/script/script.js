@@ -7,12 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
  let fileIndexData = null; // Existing JSON files by folder to avoid noisy 404 fetches
  let searchScope = 'verbs'; // 'verbs' or 'wortfamilie'
 let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cache/background load
- const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "FÃƒÂ¼nfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "ZwÃƒÂ¶lfte", "Dreizehnte"];
- const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "FÃƒÂ¼nftes", "Sechstes", "Siebtes", "Achtes"];
+ const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "Zwölfte", "Dreizehnte"];
+ const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes", "Sechstes", "Siebtes", "Achtes"];
  const savedStories = [
- `<p>Gestern <span class="highlighted-word">bin ich</span> in Berlin <span class="highlighted-word">gewesen</span>. Ich <span class="highlighted-word">bin</span> mit dem Zug <span class="highlighted-word">gefahren</span>. In der Stadt <span class="highlighted-word">habe ich</span> eine Freundin <span class="highlighted-word">gesehen</span>. Wir <span class="highlighted-word">haben</span> in einem CafÃƒÂ© <span class="highlighted-word">gesprochen</span> und einen Kaffee <span class="highlighted-word">getrunken</span>. DÃƒÂ­anach <span class="highlighted-word">habe ich</span> ein Buch <span class="highlighted-word">gekauft</span> und mit Karte <span class="highlighted-word">bezahlt</span>. Es <span class="highlighted-word">hat</span> viel SpaÃƒÅ¸ <span class="highlighted-word">gemacht</span>!</p>`,
- `<p>Heute Morgen <span class="highlighted-word">habe ich</span> lange <span class="highlighted-word">geschlafen</span>. Zum FrÃƒÂ¼hstÃƒÂ¼ck <span class="highlighted-word">habe ich</span> ein BÃƒÂ¤rÃƒÂ¶tchen <span class="highlighted-word">gegessen</span>. DÃƒÂ­ann <span class="highlighted-word">habe ich</span> eine E-Mail an meine Familie <span class="highlighted-word">geschrieben</span>. Ich <span class="highlighted-word">habe</span> ihnen <span class="highlighted-word">gesagt</span>, dass ich bald nach Hause <span class="highlighted-word">komme</span>. SpÃƒÂ¤ter <span class="highlighted-word">habe ich</span> die Zeitung <span class="highlighted-word">gelesen</span>.</p>`,
- `<p>Am Wochenende <span class="highlighted-word">habe ich</span> zu Hause <span class="highlighted-word">gearbeitet</span>. Ich <span class="highlighted-word">habe</span> fÃƒÂ¼r eine PrÃƒÂ¼fung <span class="highlighted-word">gelernt</span>. Ich <span class="highlighted-word">habe</span> eine Frage nicht <span class="highlighted-word">gewusst</span>, also <span class="highlighted-word">habe ich</span> meinen Lehrer <span class="highlighted-word">gefÃƒÂ¼ragt</span>. Er <span class="highlighted-word">hat</span> mir alles gut erklÃƒÂ¤rt. Ich <span class="highlighted-word">habe</span> die Antwort schnell <span class="highlighted-word">gefunden</span>.</p>`
+ `<p>Gestern <span class="highlighted-word">bin ich</span> in Berlin <span class="highlighted-word">gewesen</span>. Ich <span class="highlighted-word">bin</span> mit dem Zug <span class="highlighted-word">gefahren</span>. In der Stadt <span class="highlighted-word">habe ich</span> eine Freundin <span class="highlighted-word">gesehen</span>. Wir <span class="highlighted-word">haben</span> in einem Café <span class="highlighted-word">gesprochen</span> und einen Kaffee <span class="highlighted-word">getrunken</span>. Danach <span class="highlighted-word">habe ich</span> ein Buch <span class="highlighted-word">gekauft</span> und mit Karte <span class="highlighted-word">bezahlt</span>. Es <span class="highlighted-word">hat</span> viel Spaß <span class="highlighted-word">gemacht</span>!</p>`,
+ `<p>Heute Morgen <span class="highlighted-word">habe ich</span> lange <span class="highlighted-word">geschlafen</span>. Zum Frühstück <span class="highlighted-word">habe ich</span> ein Brötchen <span class="highlighted-word">gegessen</span>. Dann <span class="highlighted-word">habe ich</span> eine E-Mail an meine Familie <span class="highlighted-word">geschrieben</span>. Ich <span class="highlighted-word">habe</span> ihnen <span class="highlighted-word">gesagt</span>, dass ich bald nach Hause <span class="highlighted-word">komme</span>. Später <span class="highlighted-word">habe ich</span> die Zeitung <span class="highlighted-word">gelesen</span>.</p>`,
+ `<p>Am Wochenende <span class="highlighted-word">habe ich</span> zu Hause <span class="highlighted-word">gearbeitet</span>. Ich <span class="highlighted-word">habe</span> für eine Prüfung <span class="highlighted-word">gelernt</span>. Ich <span class="highlighted-word">habe</span> eine Frage nicht <span class="highlighted-word">gewusst</span>, also <span class="highlighted-word">habe ich</span> meinen Lehrer <span class="highlighted-word">gefüragt</span>. Er <span class="highlighted-word">hat</span> mir alles gut erklärt. Ich <span class="highlighted-word">habe</span> die Antwort schnell <span class="highlighted-word">gefunden</span>.</p>`
  ];
 
  let physicalLevelMap = {
@@ -30,13 +30,13 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#3b82f6', '#ea580c', '#22C55E', '#a855f7', '#facc15'];
 
  const separablePrefixesMap = {
- "abbiegen": "ab", "abfahren": "ab", "abfliegen": "ab", "abgeben": "ab", "abhalten": "ab", "abheben": "ab", "abholen": "ab", "absagen": "ab", "abschlieÃŸen": "ab", "ablehnen": "ab", "abnehmen": "ab", "abschaffen": "ab", "absichern": "ab",
+ "abbiegen": "ab", "abfahren": "ab", "abfliegen": "ab", "abgeben": "ab", "abhalten": "ab", "abheben": "ab", "abholen": "ab", "absagen": "ab", "abschließen": "ab", "ablehnen": "ab", "abnehmen": "ab", "abschaffen": "ab", "absichern": "ab",
  "anbieten": "an", "anfahren": "an", "anfangen": "an", "ankommen": "an", "ankreuzen": "an", "anprobieren": "an", "anrufen": "an", "ansehen": "an", "anziehen": "an", "anklagen": "an", "anklicken": "an", "anmachen": "an", "anmelden": "an", "anregen": "an", "anwenden": "an",
- "aufbauen": "auf", "aufhÃ¶ren": "auf", "aufmachen": "auf", "aufpassen": "auf", "aufrÃ¤umen": "auf", "aufstehen": "auf", "aufwachen": "auf", "aufwachsen": "auf", "aufgeben": "auf", "aufregen": "auf", "aufsuchen": "auf",
- "ausfallen": "aus", "ausfÃ¼llen": "aus", "ausgehen": "aus", "ausgeben": "aus", "auslegen": "aus", "ausleihen": "aus", "auspacken": "aus", "ausruhen": "aus", "aussehen": "aus", "aussprechen": "aus", "aussteigen": "aus", "aussuchen": "aus", "auswÃ¤hlen": "aus", "ausziehen": "aus", "ausgrenzen": "aus", "auslÃ¶sen": "aus", "ausmachen": "aus", "ausschalten": "aus",
+ "aufbauen": "auf", "aufhören": "auf", "aufmachen": "auf", "aufpassen": "auf", "aufräumen": "auf", "aufstehen": "auf", "aufwachen": "auf", "aufwachsen": "auf", "aufgeben": "auf", "aufregen": "auf", "aufsuchen": "auf",
+ "ausfallen": "aus", "ausfüllen": "aus", "ausgehen": "aus", "ausgeben": "aus", "auslegen": "aus", "ausleihen": "aus", "auspacken": "aus", "ausruhen": "aus", "aussehen": "aus", "aussprechen": "aus", "aussteigen": "aus", "aussuchen": "aus", "auswählen": "aus", "ausziehen": "aus", "ausgrenzen": "aus", "auslösen": "aus", "ausmachen": "aus", "ausschalten": "aus",
  "beitreten": "bei", "dabeihaben": "dabei", "durchstreichen": "durch",
  "darlegen": "dar",
- "eingreifen": "ein", "einkaufen": "ein", "einladen": "ein", "einmachen": "ein", "einpacken": "ein", "einrichten": "ein", "einschlafen": "ein", "einsteigen": "ein", "eintragen": "ein", "einziehen": "ein", "einhalten": "ein", "einlegen": "ein", "einordnen": "ein", "einreichen": "ein", "einschalten": "ein", "einschrÃ¤nken": "ein", "einstellen": "ein", "einwenden": "ein",
+ "eingreifen": "ein", "einkaufen": "ein", "einladen": "ein", "einmachen": "ein", "einpacken": "ein", "einrichten": "ein", "einschlafen": "ein", "einsteigen": "ein", "eintragen": "ein", "einziehen": "ein", "einhalten": "ein", "einlegen": "ein", "einordnen": "ein", "einreichen": "ein", "einschalten": "ein", "einschränken": "ein", "einstellen": "ein", "einwenden": "ein",
  "fernsehen": "fern", "fertigmachen": "fertig", "herstellen": "her", "hineingehen": "hinein",
  "feststellen": "fest", "herunterladen": "herunter", "hochladen": "hoch",
  "kennenlernen": "kennen",
@@ -45,9 +45,9 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  "teilnehmen": "teil",
  "umsteigen": "um", "umtauschen": "um", "umziehen": "um",
  "vorbereiten": "vor", "vorhaben": "vor", "weiterhelfen": "weiter", "vorschlagen": "vor", "vorstellen": "vor",
- "wegtun": "weg", "wegwerfen": "weg", "wehtun": "weh", "wohlfÃ¼hlen": "wohl",
- "zuhÃ¶ren": "zu", "zumachen": "zu", "zuordnen": "zu", "zunehmen": "zu", "zustimmen": "zu",
- "zurÃ¼ckbringen": "zurÃ¼ck", "zurÃ¼ckgeben": "zurÃ¼ck", "zurÃ¼ckkommen": "zurÃ¼ck"
+ "wegtun": "weg", "wegwerfen": "weg", "wehtun": "weh", "wohlfühlen": "wohl",
+ "zuhören": "zu", "zumachen": "zu", "zuordnen": "zu", "zunehmen": "zu", "zustimmen": "zu",
+ "zurückbringen": "zurück", "zurückgeben": "zurück", "zurückkommen": "zurück"
  };
 
  function formatVerbPrefix(verbName, isModal = false) {
@@ -204,7 +204,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  const levelOrder = ['A1', 'A2', 'B1', 'B2'];
 
  // Verbs that support Konjunktiv II
- const konjunktivVerbs = ['sein', 'haben', 'werden', 'dÃƒÂ¼rfen', 'mÃƒÂ¼ssen', 'wollen', 'sollen', 'mÃƒÂ¶gen', 'kÃƒÂ¶nnen'];
+ const konjunktivVerbs = ['sein', 'haben', 'werden', 'dürfen', 'müssen', 'wollen', 'sollen', 'mögen', 'können'];
 
  let currentLevel = 'A1';
  let currentGroupInLevel = 0; // 0-indexed position within current level
@@ -341,44 +341,44 @@ const lazyExampleLoadPromises = new Map();
 
  let normalized = value;
  const replacements = [
- ['ÃƒÂ­Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾', 'Ãƒâ€ž'],
- ['Ãƒâ€“', 'Ãƒâ€“'],
- ['ÃƒÂ­Ã†â€™Ãƒâ€¦Ã¢â‚¬Å“', 'ÃƒÅ“'],
- ['ÃƒÂ¤', 'ÃƒÂ¤'],
- ['ÃƒÂ¶', 'ÃƒÂ¶'],
- ['ÃƒÂ¼', 'ÃƒÂ¼'],
- ['ÃƒÅ¸', 'ÃƒÅ¸'],
- ['ÃƒÂ¡', 'ÃƒÂ¡'],
- ['ÃƒÂ©', 'ÃƒÂ©'],
- ['ÃƒÂ­', 'ÃƒÂ­'],
- ['ÃƒÂ³', 'ÃƒÂ³'],
- ['ÃƒÂº', 'ÃƒÂº'],
- ['ÃƒÂ±', 'ÃƒÂ±'],
- ['ÃƒÂ­Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â°', 'Ãƒâ€°'],
- ['ÃƒÂ­Ã¢â‚¬Å¾', 'Ãƒâ€ž'],
- ['ÃƒÂ­Ã¢â‚¬â€œ', 'Ãƒâ€“'],
- ['ÃƒÂ­Ã…â€œ', 'ÃƒÅ“'],
- ['ÃƒÂ¤', 'ÃƒÂ¤'],
- ['ÃƒÂ¶', 'ÃƒÂ¶'],
- ['ÃƒÂ¼', 'ÃƒÂ¼'],
- ['ÃƒÅ¸', 'ÃƒÅ¸'],
- ['ÃƒÂ¡', 'ÃƒÂ¡'],
- ['ÃƒÂ©', 'ÃƒÂ©'],
- ['ÃƒÂ­', 'ÃƒÂ­'],
- ['ÃƒÂ³', 'ÃƒÂ³'],
- ['ÃƒÂº', 'ÃƒÂº'],
- ['ÃƒÂ±', 'ÃƒÂ±'],
+ ['íÃ†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾', 'Ä'],
+ ['Ö', 'Ö'],
+ ['íÃ†â€™Ãƒâ€¦Ã¢â‚¬Å“', 'Ü'],
+ ['ä', 'ä'],
+ ['ö', 'ö'],
+ ['ü', 'ü'],
+ ['ß', 'ß'],
+ ['á', 'á'],
+ ['é', 'é'],
+ ['í', 'í'],
+ ['ó', 'ó'],
+ ['ú', 'ú'],
+ ['ñ', 'ñ'],
+ ['íÃ†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â°', 'Ãƒâ€°'],
+ ['íÃ¢â‚¬Å¾', 'Ä'],
+ ['íÃ¢â‚¬â€œ', 'Ö'],
+ ['íÃ…â€œ', 'Ü'],
+ ['ä', 'ä'],
+ ['ö', 'ö'],
+ ['ü', 'ü'],
+ ['ß', 'ß'],
+ ['á', 'á'],
+ ['é', 'é'],
+ ['í', 'í'],
+ ['ó', 'ó'],
+ ['ú', 'ú'],
+ ['ñ', 'ñ'],
  ['Ã‚Â¿', 'Ã‚Â¿'],
  ['Ã‚Â¡', 'Ã‚Â¡'],
  // Mojibake for emojis (UTF-8 bytes read as Windows-1252)
- ['ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã…Â¡', 'Ã°Å¸â€œÅ¡'],
- ['Ã°Å¸ÂÂ ', 'Ã°Å¸ÂÂ '],
- ['ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¼', 'Ã°Å¸â€™Â¼'],
+ ['ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã…Â¡', '🔵œÅ¡'],
+ ['🏡', '🏡'],
+ ['ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¼', '🔵™Â¼'],
  ['ÃƒÂ°Ã…Â¸Ã…Â¡Ã‚Â¢', 'Ã°Å¸Å¡Â¢'],
- ['ÃƒÂ°Ã…Â¸Ã…Â¡Ã¢â€šÂ¬', 'Ã°Å¸Å¡â‚¬'],
- ['ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¬', 'Ã°Å¸â€™Â¬'],
- ['ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã¢â‚¬â€œ', 'Ã°Å¸â€œâ€“'],
- ['ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¡', 'Ã°Å¸â€™Â¡']
+ ['ÃƒÂ°Ã…Â¸Ã…Â¡Ã¢â€šÂ¬', '🚀'],
+ ['ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¬', '🔵™Â¬'],
+ ['ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã¢â‚¬â€œ', '🔵œâ€“'],
+ ['ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¡', '💡']
  ];
 
  for (let pass = 0; pass < 3; pass++) {
@@ -854,7 +854,7 @@ async function loadBackgroundData() {
  }
 
  // If the UI started from stale cache, repaint the current view once
- // fÃƒÂ¼resh background data is ready so moved verbs/groups appear immediately.
+ // füresh background data is ready so moved verbs/groups appear immediately.
  if (searchInput && searchInput.value.trim() === '') {
  clearSearchAndRender();
  }
@@ -1403,7 +1403,7 @@ async function loadBackgroundData() {
  return cleaned;
  }
 
- // Helper function to extract clean PrÃƒÂ¤teritum (remove pronouns)
+ // Helper function to extract clean Präteritum (remove pronouns)
  function getCleanPraeteritum(praeteritum) {
  if (!praeteritum || praeteritum === '---') return '---';
  // Remove "er/sie/es " from the beginning
@@ -1437,7 +1437,7 @@ async function loadBackgroundData() {
  const grid = document.createElement('div');
  grid.className = 'kompakt-grid';
 
- // Standard palette logic (fallback sequÃƒÂ©ence if theme colors are missing)
+ // Standard palette logic (fallback sequence if theme colors are missing)
 
  levelGroups.forEach((group, groupIndex) => {
  if (!group || !group.verbs) return;
@@ -1655,7 +1655,7 @@ async function loadBackgroundData() {
  let tagsHTML = '';
  // Only keeping critical tags for header if desired, or all tags
  if (verbData.case_tags) {
- const visibleTags = verbData.case_tags.filter(t => !t.startsWith('PrÃƒÂ¤position:'));
+ const visibleTags = verbData.case_tags.filter(t => !t.startsWith('Präposition:'));
  tagsHTML = visibleTags.map(tag => `<span class="verb-tag">${tag}</span>`).join('');
  }
 
@@ -1676,7 +1676,7 @@ async function loadBackgroundData() {
  const displayVerb = formatVerbPrefix(verbName);
  return `
  <div class="word-item">
- <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer; flex-direction: column; gap: 5px;">
+ <div class="card-header" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer; flex-direction: column; gap: 5px;">
  <span class="german-word" style="font-size: 1.5rem;">${displayVerb} ${irregularMark}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</span>
  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
  <span class="spanish-translation" style="font-size: 1.1rem; color: white; font-style: italic;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${esTranslation}</span>
@@ -1727,12 +1727,12 @@ async function loadBackgroundData() {
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
  const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}" style="margin-top: 4px; margin-left: 8px;">${a1testTag}</span>` : '';
 
- const emoji = verbData.emoji || 'Ã°Å¸â€œÂ';
+ const emoji = verbData.emoji || '🔵œÂ';
 
  // Cleaner, simpler card with header and emoji
  return `
  <div class="card normal-card">
- <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">
+ <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer;">
  <span class="normal-emoji">${emoji}</span>
  <h3 class="normal-german">${formatVerbPrefix(verbName)}${irregular}</h3>
  ${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}
@@ -1768,8 +1768,8 @@ async function loadBackgroundData() {
  headerRow.innerHTML = `
  <div class="light-version-header-cell">Infinitiv</div>
  <div class="light-version-header-cell">Perfekt</div>
- <div class="light-version-header-cell">PrÃƒÂ¤teritum</div>
- <div class="light-version-header-cell">ÃƒÅ“bersetzung</div>
+ <div class="light-version-header-cell">Präteritum</div>
+ <div class="light-version-header-cell">Übersetzung</div>
  `;
  lightContainer.appendChild(headerRow);
 
@@ -1800,7 +1800,7 @@ async function loadBackgroundData() {
  const row = document.createElement('div');
  row.className = 'light-version-row';
  row.innerHTML = `
- <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerb}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
+ <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer;">${displayVerb}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
  <div class="light-version-cell perfekt" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${perfekt}</div>
  <div class="light-version-cell praeteritum" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${praeteritum}</div>
  <div class="light-version-cell translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${translation}</div>
@@ -1889,17 +1889,17 @@ async function loadBackgroundData() {
  });
  });
 
- // Add hover listeners to each prÃƒÂ¤teritum text element
+ // Add hover listeners to each präteritum text element
  praeteritumTexts.forEach(praeteritumText => {
  praeteritumText.addEventListener('mouseenter', () => {
- // Show full version for all prÃƒÂ¤teritum texts in this container
+ // Show full version for all präteritum texts in this container
  container.querySelectorAll('.praeteritum-text').forEach(text => {
  text.textContent = text.getAttribute('data-full');
  });
  });
 
  praeteritumText.addEventListener('mouseleave', () => {
- // Show short version for all prÃƒÂ¤teritum texts in this container
+ // Show short version for all präteritum texts in this container
  container.querySelectorAll('.praeteritum-text').forEach(text => {
  text.textContent = text.getAttribute('data-short');
  });
@@ -2279,7 +2279,7 @@ async function loadBackgroundData() {
  })
  .catch(error => {
  console.error("Failed to load verb data:", error);
- cardsContainer.innerHTML = '<p>Ein Fehler ist beim Laden der Verben aufgetreten. Bitte versuchen Sie es spÃƒÂ¤ter erneut.</p>';
+ cardsContainer.innerHTML = '<p>Ein Fehler ist beim Laden der Verben aufgetreten. Bitte versuchen Sie es später erneut.</p>';
  });
 
  const toggles = document.querySelectorAll('.visibility-toggle');
@@ -2491,7 +2491,7 @@ async function loadBackgroundData() {
  const modalHeader = document.querySelector('.modal-header');
  if (modalHeader) {
  modalHeader.style.cursor = 'pointer';
- modalHeader.title = 'Aussprache hÃ¶ren';
+ modalHeader.title = 'Aussprache hören';
  modalHeader.addEventListener('click', (e) => {
  e.preventDefault();
  e.stopPropagation();
@@ -2674,7 +2674,7 @@ async function loadBackgroundData() {
  englishObj.style.display = 'none';
  }
  document.getElementById('theme-modal-level').textContent = themeData.level;
- const defaultDescription = [themeData.group ? `Grupo ${themeData.group}` : '', themeData.shortName || ''].filter(Boolean).join(' Ã‚Â· ');
+ const defaultDescription = [themeData.group ? `Grupo ${themeData.group}` : '', themeData.shortName || ''].filter(Boolean).join(' · ');
  const customDescription = (themeData.theme === 'Schicksal' || themeData.germanName === 'Schicksal')
  ? 'circunstancias inevitables de la vida'
  : defaultDescription;
@@ -2716,7 +2716,7 @@ async function loadBackgroundData() {
 
  const voices = window.speechSynthesis.getVoices();
 
- // Helper to get bestÃƒÂ¡ voice
+ // Helper to get best voice
  const getVoice = () => {
  return voices.find(voice => voice.lang === lang && voice.name.includes('Google')) ||
  voices.find(voice => voice.lang === lang && voice.name.includes('Microsoft')) ||
@@ -2776,12 +2776,12 @@ async function loadBackgroundData() {
  currentVerbInModal = verb;
  const activeTabBeforeRefresh = preferredTab || document.querySelector('.modal-tab-btn.active')?.dataset.tab || 'infinitiv';
 
- // Open the modal fast with PrÃƒÂ¤sens first, then load the restÃƒÂ¡ in the background.
+ // Open the modal fast with Präsens first, then load the rest in the background.
  if (!data.praesens) {
  try {
  await loadVerbPraesensData(verb);
  } catch (error) {
- console.error(`Failed to load PrÃƒÂ¤sens data for ${verb}:`, error);
+ console.error(`Failed to load Präsens data for ${verb}:`, error);
  }
  }
 
@@ -2838,7 +2838,7 @@ async function loadBackgroundData() {
  headerTagsContainer.appendChild(themeBadge);
  }
 
- // ROW 2: Case tags (DÃƒÂ­ativ, Akkusativ, Intrans, Prep, etc.) AND New Classification Tags
+ // ROW 2: Case tags (Dativ, Akkusativ, Intrans, Prep, etc.) AND New Classification Tags
  const allTags = [
  ...(updatedData.case_tags || []),
  ...(updatedData.tags || [])
@@ -2851,20 +2851,20 @@ async function loadBackgroundData() {
  const groups = {
  'Hilfsverb': [],
  'Kasus': [],
- 'ReflexivitÃƒÂ¤t': [],
+ 'Reflexivität': [],
  'Struktur': [],
- 'PrÃƒÂ¤positionen': []
+ 'Präpositionen': []
  };
 
  // Remove duplicates just in case
  const uniqueTags = [...new Set(allTags)];
 
  uniqueTags.forEach(tag => {
- if (['Akkusativ', 'DÃƒÂ­ativ', 'Nominativ', 'Genitiv', 'Intransitive', 'intrans'].includes(tag)) groups['Kasus'].push(tag);
- else if (tag === 'Reflexive') groups['ReflexivitÃƒÂ¤t'].push(tag);
+ if (['Akkusativ', 'Dativ', 'Nominativ', 'Genitiv', 'Intransitive', 'intrans'].includes(tag)) groups['Kasus'].push(tag);
+ else if (tag === 'Reflexive') groups['Reflexivität'].push(tag);
  else if (['Separable', 'Regular', 'Irregular'].includes(tag)) groups['Struktur'].push(tag);
- else if (tag.startsWith('PrÃƒÂ¤position:')) groups['PrÃƒÂ¤positionen'].push(tag.replace('PrÃƒÂ¤position: ', ''));
- else if (tag.includes('Movimiento') || tag.includes('EstÃƒÂ¡tico') || tag.includes('Ã°Å¸Å¡â‚¬') || tag.includes('Ã°Å¸ÂÂ ')) groups['Hilfsverb'].push(tag);
+ else if (tag.startsWith('Präposition:')) groups['Präpositionen'].push(tag.replace('Präposition: ', ''));
+ else if (tag.includes('Movimiento') || tag.includes('Estático') || tag.includes('🚀') || tag.includes('🏡')) groups['Hilfsverb'].push(tag);
  else groups['Struktur'].push(tag); // Fallback
  });
 
@@ -2884,7 +2884,7 @@ async function loadBackgroundData() {
  groups[category].forEach(tag => {
  const tagSpan = document.createElement('span');
  // Create specific class based on tag name, remove special chars
- // For emojis like Ã°Å¸Å¡â‚¬, it might result in empty or invalid class if not careful, 
+ // For emojis like 🚀, it might result in empty or invalid class if not careful, 
  // but usually only affects CSS selector matching. 
  // Let's make it robust:
  const safeTagClass = tag.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -2990,12 +2990,12 @@ async function loadBackgroundData() {
 
  // Emoji with TTS
  const modalEmojiEl = document.getElementById('modal-emoji');
- modalEmojiEl.textContent = updatedData.emoji || 'Ã¢Ââ€œ';
+ modalEmojiEl.textContent = updatedData.emoji || '❔';
  modalEmojiEl.onclick = (e) => {
  e.stopPropagation();
  speak(verb);
  };
- modalEmojiEl.title = "Aussprache hÃ¶ren";
+ modalEmojiEl.title = "Aussprache hören";
 
  document.getElementById('modal-verb-infinitive-es').textContent = updatedData.es || '';
  document.getElementById('modal-verb-perfekt-es').textContent = updatedData.es_perfekt || '';
@@ -3046,7 +3046,7 @@ async function loadBackgroundData() {
  }
  }
 
- // 4. PrÃƒÂ¤teritum Note (displayed below PrÃƒÂ¤teritum conjugation table)
+ // 4. Präteritum Note (displayed below Präteritum conjugation table)
  const praeteritumNote = updatedData.praeteritum_note;
  const praeteritumNoteElement = document.getElementById('modal-praeteritum-note');
  if (praeteritumNoteElement) {
@@ -3069,7 +3069,7 @@ async function loadBackgroundData() {
  const parseWordString = (str) => {
  // Match "Word (Level) = Translation" or similar
  // e.g., "verheiratet (A2) = casado/a (adjetivo)"
- // e.g., "der Ehemann / die EhefÃƒÂ¼rau (A2) = esposo / esposa"
+ // e.g., "der Ehemann / die Ehefürau (A2) = esposo / esposa"
  const match = str.match(/^(.*?)\s*\((\w+)\)\s*=\s*(.*)$/);
  if (match) {
  return {
@@ -3094,7 +3094,7 @@ async function loadBackgroundData() {
  if (content && content.classList.contains('truco-content')) {
  const isHidden = content.style.display === 'none';
  content.style.display = isHidden ? 'block' : 'none';
- btn.textContent = isHidden ? 'â–¼' : 'â–¶';
+ btn.textContent = isHidden ? '▼' : '▶';
  }
  };
 
@@ -3137,7 +3137,7 @@ async function loadBackgroundData() {
  contentHTML += `<div class="wf-word-line">`;
  // Safe stringify for onclick
  const safeWord = wordData.word.replace(/'/g, "\\'");
- contentHTML += `â€¢ <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hÃ¶ren">${wordData.word}</span>`;
+ contentHTML += `• <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hören">${wordData.word}</span>`;
  if (abbrev) contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
  contentHTML += `</div>`;
 
@@ -3145,7 +3145,7 @@ async function loadBackgroundData() {
  contentHTML += `<div class="wf-word-translation">`;
  contentHTML += `${wordData.es}`;
  if (wordData.truco) {
- contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">â–¶</span>`;
+ contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">▶</span>`;
  }
  // Optional Example
  if (wordData.example) {
@@ -3156,7 +3156,7 @@ async function loadBackgroundData() {
  // Hidden Truco Content
  if (wordData.truco) {
  contentHTML += `<div class="truco-content" style="display: none; margin-left: 15px; font-style: italic; color: #555; background-color: #f9f9f9; padding: 5px; border-left: 3px solid #ffd700; margin-top: 5px; border-radius: 4px;">`;
- contentHTML += `Ã°Å¸â€™Â¡ <strong>Truco:</strong> ${wordData.truco}`;
+ contentHTML += `💡 <strong>Truco:</strong> ${wordData.truco}`;
  contentHTML += `</div>`;
  }
 
@@ -3177,7 +3177,7 @@ async function loadBackgroundData() {
  contentHTML += `<div class="wf-word-line">`;
  // Safe stringify for onclick
  const safeWord = wordData.word.replace(/'/g, "\\'");
- contentHTML += `â€¢ <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hÃ¶ren">${wordData.word}</span>`;
+ contentHTML += `• <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hören">${wordData.word}</span>`;
  if (abbrev) contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
  contentHTML += `</div>`;
 
@@ -3185,7 +3185,7 @@ async function loadBackgroundData() {
  contentHTML += `<div class="wf-word-translation">`;
  contentHTML += `${wordData.es}`;
  if (wordData.truco) {
- contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">â–¶</span>`;
+ contentHTML += ` <span class="truco-toggle-btn" onclick="toggleTrick(this)" style="cursor: pointer; margin-left: 5px; user-select: none;">▶</span>`;
  }
  // Optional Example
  if (wordData.example) {
@@ -3196,7 +3196,7 @@ async function loadBackgroundData() {
  // Hidden Truco Content
  if (wordData.truco) {
  contentHTML += `<div class="truco-content" style="display: none; margin-left: 15px; font-style: italic; color: #555; background-color: #f9f9f9; padding: 5px; border-left: 3px solid #ffd700; margin-top: 5px; border-radius: 4px;">`;
- contentHTML += `Ã°Å¸â€™Â¡ <strong>Truco:</strong> ${wordData.truco}`;
+ contentHTML += `💡 <strong>Truco:</strong> ${wordData.truco}`;
  contentHTML += `</div>`;
  }
 
@@ -3244,8 +3244,8 @@ async function loadBackgroundData() {
  // Define the desired pronoun order with Spanish translations
  const pronounOrder = [
  { key: 'ich', display: 'ich', spanish: 'yo' },
- { key: 'du', display: 'du', spanish: 'tÃƒÂº' },
- { key: 'er', display: 'er', spanish: 'ÃƒÂ©l' },
+ { key: 'du', display: 'du', spanish: 'tú' },
+ { key: 'er', display: 'er', spanish: 'él' },
  { key: 'sie', display: 'sie', spanish: 'ella' },
  { key: 'es', display: 'es', spanish: 'neutro' },
  { key: 'wir', display: 'wir', spanish: 'nosotr@s' },
@@ -3405,8 +3405,8 @@ async function loadBackgroundData() {
 
  const pronounOrder = [
  { key: 'ich', display: 'ich', spanish: 'yo', auxIndex: 0 },
- { key: 'du', display: 'du', spanish: 'tÃƒÂº', auxIndex: 1 },
- { key: 'er', display: 'er', spanish: 'ÃƒÂ©l', auxIndex: 2 },
+ { key: 'du', display: 'du', spanish: 'tú', auxIndex: 1 },
+ { key: 'er', display: 'er', spanish: 'él', auxIndex: 2 },
  { key: 'sie', display: 'sie', spanish: 'ella', auxIndex: 2 },
  { key: 'es', display: 'es', spanish: 'neutro', auxIndex: 2 },
  { key: 'wir', display: 'wir', spanish: 'nosotr@s', auxIndex: 3 },
@@ -3472,13 +3472,13 @@ async function loadBackgroundData() {
  perfektExamplesTableContainer.innerHTML = '';
  }
 
- // Generate PrÃƒÂ¤teritum conjugation and examples table
+ // Generate Präteritum conjugation and examples table
  const praeteritumKonjugationTableContainer = document.getElementById('modal-praeteritum-konjugation-table');
  if (updatedData.praeteritum_conjugations) {
  const pronounOrder = [
  { key: 'ich', display: 'ich', spanish: 'yo' },
- { key: 'du', display: 'du', spanish: 'tÃƒÂº' },
- { key: 'er', display: 'er', spanish: 'ÃƒÂ©l' },
+ { key: 'du', display: 'du', spanish: 'tú' },
+ { key: 'er', display: 'er', spanish: 'él' },
  { key: 'sie', display: 'sie', spanish: 'ella' },
  { key: 'es', display: 'es', spanish: 'neutro' },
  { key: 'wir', display: 'wir', spanish: 'nosotr@s' },
@@ -3549,8 +3549,8 @@ async function loadBackgroundData() {
 
  const pronounOrder = [
  { key: 'ich', display: 'ich', spanish: 'yo' },
- { key: 'du', display: 'du', spanish: 'tÃƒÂº' },
- { key: 'er_sie_es', display: 'er/sie/es', spanish: 'ÃƒÂ©l/ella' },
+ { key: 'du', display: 'du', spanish: 'tú' },
+ { key: 'er_sie_es', display: 'er/sie/es', spanish: 'él/ella' },
  { key: 'wir', display: 'wir', spanish: 'nosotr@s' },
  { key: 'ihr', display: 'ihr', spanish: 'vosotr@s' },
  { key: 'sie_Sie', display: 'sie/Sie', spanish: 'ell@s/usted(es)' }
@@ -3606,21 +3606,21 @@ async function loadBackgroundData() {
  speak(verb);
  };
  document.getElementById('modal-verb-infinitive').style.cursor = 'pointer';
- document.getElementById('modal-verb-infinitive').title = 'Aussprache hÃ¶ren';
+ document.getElementById('modal-verb-infinitive').title = 'Aussprache hören';
 
  document.getElementById('modal-verb-perfekt').onclick = (e) => {
  e.stopPropagation();
  speak(updatedData.perfekt);
  };
  document.getElementById('modal-verb-perfekt').style.cursor = 'pointer';
- document.getElementById('modal-verb-perfekt').title = 'Aussprache hÃ¶ren';
+ document.getElementById('modal-verb-perfekt').title = 'Aussprache hören';
 
  document.getElementById('modal-verb-praeteritum').onclick = (e) => {
  e.stopPropagation();
  speak(updatedData.praeteritum);
  };
  document.getElementById('modal-verb-praeteritum').style.cursor = 'pointer';
- document.getElementById('modal-verb-praeteritum').title = 'Aussprache hÃ¶ren';
+ document.getElementById('modal-verb-praeteritum').title = 'Aussprache hören';
 
  // modal-text removed as per user request
  // document.getElementById('modal-text').onclick = ...
@@ -4027,8 +4027,8 @@ async function loadWortfamilieIndex() {
  function highlightMatch(text, query) {
  if (!query || !text) return text;
  const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
- // Matches any whole word (\b...\b) containing the query sequÃƒÂ©ence including trailing/leading German characters
- const regex = new RegExp(`([\\wÃƒÂ¤ÃƒÂ¶ÃƒÂ¼Ãƒâ€žÃƒâ€“ÃƒÅ“ÃƒÅ¸]*${escapedQuery}[\\wÃƒÂ¤ÃƒÂ¶ÃƒÂ¼Ãƒâ€žÃƒâ€“ÃƒÅ“ÃƒÅ¸]*)`, 'gi');
+ // Matches any whole word (\b...\b) containing the query sequence including trailing/leading German characters
+ const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
  return text.replace(regex, (match) =>
  `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${match}</span>`
  );
@@ -4229,7 +4229,7 @@ async function loadWortfamilieIndex() {
  }
  }
 
- // Prepare PrÃƒÂ¤teritum with short (verb only) and full versions
+ // Prepare Präteritum with short (verb only) and full versions
  let germanPraeteritumShort = verbData.praeteritum || '---';
  let germanPraeteritumFull = verbData.praeteritum || '---';
  if (verbData.praeteritum && verbData.praeteritum !== '---') {
@@ -4247,7 +4247,7 @@ async function loadWortfamilieIndex() {
  germanPraeteritumShortDisplay = highlightMatch(match.matchedPraeteritumForm, searchTerm);
  }
 
- // Prepare Spanish prÃƒÂ¤teritum with short (verb only) and full versions
+ // Prepare Spanish präteritum with short (verb only) and full versions
  let spanishPraeteritumShort = esPraeteritumTranslation;
  let spanishPraeteritumFull = esPraeteritumTranslation;
  let spanishPraeteritumShortDisplay = esPraeteritumTranslation;
@@ -4255,7 +4255,7 @@ async function loadWortfamilieIndex() {
  const spanishPraeteritumParts = esPraeteritumTranslationRaw.split(' ');
  if (spanishPraeteritumParts.length >= 2) {
  spanishPraeteritumShort = spanishPraeteritumParts.slice(1).join(' '); // verb only
- spanishPraeteritumFull = esPraeteritumTranslationRaw; // full: ÃƒÂ©l/ella hizo
+ spanishPraeteritumFull = esPraeteritumTranslationRaw; // full: él/ella hizo
  spanishPraeteritumShortDisplay = highlightMatch(spanishPraeteritumShort, searchTerm);
  }
  }
@@ -4276,15 +4276,15 @@ async function loadWortfamilieIndex() {
 
  // Spanish translation for Konjunktiv II
  const konjunktivTranslations = {
- 'sein': 'ÃƒÂ©l/ella serÃƒÂ­a',
- 'haben': 'ÃƒÂ©l/ella tendrÃƒÂ­a',
- 'werden': 'ÃƒÂ©l/ella se convertirÃƒÂ­a',
- 'dÃƒÂ¼rfen': 'ÃƒÂ©l/ella podrÃƒÂ­a (permiso)',
- 'mÃƒÂ¼ssen': 'ÃƒÂ©l/ella deberÃƒÂ­a',
- 'wollen': 'ÃƒÂ©l/ella quÃƒÂ©errÃƒÂ­a',
- 'sollen': 'ÃƒÂ©l/ella deberÃƒÂ­a',
- 'mÃƒÂ¶gen': 'ÃƒÂ©l/ella gustarÃƒÂ­a',
- 'kÃƒÂ¶nnen': 'ÃƒÂ©l/ella podrÃƒÂ­a'
+ 'sein': 'él/ella sería',
+ 'haben': 'él/ella tendría',
+ 'werden': 'él/ella se convertiría',
+ 'dürfen': 'él/ella podría (permiso)',
+ 'müssen': 'él/ella debería',
+ 'wollen': 'él/ella querría',
+ 'sollen': 'él/ella debería',
+ 'mögen': 'él/ella gustaría',
+ 'können': 'él/ella podría'
  };
  const spanishKonjunktivFullRaw = konjunktivTranslations[verbName] || '---';
  const spanishKonjunktivShortRaw = spanishKonjunktivFullRaw.split(' ').slice(1).join(' ');
@@ -4318,20 +4318,20 @@ async function loadWortfamilieIndex() {
  if (verbData.case_tags && verbData.case_tags.length > 0) {
  caseTagsHTML = '<div class="case-tags">' + verbData.case_tags.map(tag => {
  const tagDisplay = {
- 'dat': 'Ã°Å¸â€Â´ [+DÃƒÂ­at]',
- 'dat_akk': 'Ã°Å¸â€Âµ [+DÃƒÂ­at + Akk]',
- 'akk': 'Ã°Å¸Å¸Â¢ [+Akk]',
- 'refl': 'Ã°Å¸Å¸Â£ [Refl]',
- 'nom': 'Ã°Å¸Å¸Â¡ [+Nom]',
- 'intrans': 'âšª [Intrans]',
- 'IK': 'Ã°Å¸Å¸Â£ [IK]',
- 'LiD': 'Ã°Å¸â€Âµ [LiD]'
+ 'dat': '🔴 [+Díat]',
+ 'dat_akk': '🔵 [+Díat + Akk]',
+ 'akk': '🟢 [+Akk]',
+ 'refl': '🟣 [Refl]',
+ 'nom': '🟡 [+Nom]',
+ 'intrans': '⚪ [Intrans]',
+ 'IK': '🟣 [IK]',
+ 'LiD': '🔵 [LiD]'
  };
 
  // Handle prep tags with specific prepositions
  if (tag.startsWith('prep:')) {
  const prep = tag.substring(5);
- return `<span class="case-tag case-tag-prep">âšª [+Prep: ${prep}]</span>`;
+ return `<span class="case-tag case-tag-prep">⚪ [+Prep: ${prep}]</span>`;
  }
 
  const display = tagDisplay[tag] || tag;
@@ -4369,13 +4369,13 @@ async function loadWortfamilieIndex() {
 
  } else {
  // Normal Mode (Default)
- const shouldHideEmoji = (currentViewMode === 'niedlich' || currentViewMode === 'cute') || searchTerm.startsWith('tag:') || searchTerm.includes('movimiento') || searchTerm.includes('estÃƒÂ¡tico') || searchTerm.includes('estÃ¡tico');
+ const shouldHideEmoji = (currentViewMode === 'niedlich' || currentViewMode === 'cute') || searchTerm.startsWith('tag:') || searchTerm.includes('movimiento') || searchTerm.includes('estático') || searchTerm.includes('estático');
  const cardHTML = `
  <div class="word-item">
  <div class="card-header">
- <span class="german-word" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hÃ¶ren" style="cursor: pointer;">${displayVerbName}</span>
+ <span class="german-word" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer;">${displayVerbName}</span>
  <span class="spanish-translation" data-form="translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${esTranslation}</span>
- ${shouldHideEmoji ? '' : `<div class="icon-floating" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" style="cursor: pointer;">${verbData.emoji || 'Ã¢Ââ€œ'}</div>`}
+ ${shouldHideEmoji ? '' : `<div class="icon-floating" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" style="cursor: pointer;">${verbData.emoji || '❔'}</div>`}
  </div>
  <div class="card-body" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" style="cursor: pointer;">
  <div class="text-container perfekt-hover-container">
@@ -4492,7 +4492,7 @@ async function loadWortfamilieIndex() {
  <span class="wf-word">${item.word}</span>
  <span class="wf-translation">${item.es}</span>
  <div class="wf-relationship">
- GehÃ¶rt zu: <strong>${item.verb}</strong> <span class="wf-arrow">âž”</span>
+ Gehört zu: <strong>${item.verb}</strong> <span class="wf-arrow">➔</span>
  </div>
  </div>
  `;
@@ -4661,10 +4661,10 @@ async function loadWortfamilieIndex() {
  }
  });
 
- const customOrder = ['Akkusativ', 'DÃƒÂ­ativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular', 'Ã°Å¸Å¡â‚¬ Movimiento', 'Ã°Å¸ÂÂ  EstÃƒÂ¡tico'];
- const whitelistedTags = ['Akkusativ', 'DÃƒÂ­ativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular', 'Intransitive', 'Ã°Å¸Å¡â‚¬ Movimiento', 'Ã°Å¸ÂÂ  EstÃƒÂ¡tico'];
+ const customOrder = ['Akkusativ', 'Dativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular', '🚀 Movimiento', '🏡 Estático'];
+ const whitelistedTags = ['Akkusativ', 'Dativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular', 'Intransitive', '🚀 Movimiento', '🏡 Estático'];
  const sortedTags = Array.from(allTags)
- .filter(tag => whitelistedTags.includes(tag) || tag.startsWith('PrÃƒÂ¤position:'))
+ .filter(tag => whitelistedTags.includes(tag) || tag.startsWith('Präposition:'))
  .sort((a, b) => {
  const indexA = customOrder.indexOf(a);
  const indexB = customOrder.indexOf(b);
