@@ -541,6 +541,21 @@
             font-weight: 500;
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
+        .modal-section-header {
+            background-color: #f1f3f5;
+            color: #495057;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 15px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+        }
+        .modal-section-header:not(:first-child) {
+            border-top: 1px solid #dee2e6;
+        }
     </style>
 </head>
 
@@ -863,9 +878,9 @@
                         </div>
                     </li>
                     <li class="prep-item" style="cursor: default; display: flex; flex-direction: column; padding: 0;">
-                        <div onclick="speak('zu zum'); event.stopPropagation()"
+                        <div onclick="speak('zu zum zur'); event.stopPropagation()"
                             style="cursor: pointer; padding: 12px; width: 100%; text-align: center;">
-                            ZU / ZUM
+                            ZU / ZUM / ZUR
                         </div>
                         <div onclick="openModal('zu'); event.stopPropagation()"
                             style="cursor: pointer; padding: 0 12px 12px 12px; width: 100%; text-align: center;">
@@ -1287,18 +1302,33 @@
                 desc: 'Indica posesión (sustituye al genitivo en el habla cotidiana) u origen desde un punto/persona.<br><br><strong>Resumen A2 (WOHER?):</strong><br>👤 <strong>Persona:</strong> von Maria<br>👨‍⚕️ <strong>Profesional:</strong> vom Arzt'
             },
             'zu': {
-                title: 'ZU / ZUM',
+                title: 'ZU / ZUM / ZUR',
                 type: 'dat',
                 tag: 'WOHIN? (DESTINO / PROPÓSITO)',
                 usage: 'Hacia (personas/lugares) / Ocasiones',
                 examples: [
-                    { de: 'Ich gehe zur Schule.', es: 'Voy a la escuela.' },
-                    { de: 'Kommst du zu mir?', es: '¿Vienes a mi casa?' },
-                    { de: 'Heute gibt es Nudeln zum Mittagessen.', es: 'Hoy hay pasta para comer.' },
-                    { de: 'Zum Geburtstag viel Glück!', es: '¡Felicidades por tu cumpleaños!' },
-                    { de: 'Wir fahren zum Flughafen.', es: 'Vamos al aeropuerto.' }
+                    {
+                        category: 'Persona oder Profesional',
+                        items: [
+                            { de: 'Kommst du zu mir?', es: '¿Vienes a mi casa?' }
+                        ]
+                    },
+                    {
+                        category: 'Lugares',
+                        items: [
+                            { de: 'Ich gehe zur Schule.', es: 'Voy a la escuela.' },
+                            { de: 'Wir fahren zum Flughafen.', es: 'Vamos al aeropuerto.' }
+                        ]
+                    },
+                    {
+                        category: 'Ocasiones',
+                        items: [
+                            { de: 'Heute gibt es Nudeln zum Mittagessen.', es: 'Hoy hay pasta para comer.' },
+                            { de: 'Zum Geburtstag viel Glück!', es: '¡Felicidades por tu cumpleaños!' }
+                        ]
+                    }
                 ],
-                desc: 'Indica movimiento hacia <strong>personas o lugares</strong> específicos.<br><br><strong>¡Ojo!</strong> También se usa para <strong>propósitos u ocasiones</strong> (fiestas, comidas).<br>Ej: <em>zum Frühstück</em> (para desayunar).'
+                desc: 'Indica movimiento hacia <strong>personas o lugares</strong> específicos. También se usa para <strong>propósitos u ocasiones</strong>.<br><br><strong>Diferencia y contracciones (Dativ):</strong><br>• <strong>zu</strong>: Preposición base.<br>• <strong>zum</strong>: Contracción de <em>zu + dem</em> (masculino/neutro). Ej: <em>zum Flughafen</em> (der), <em>zum Mittagessen</em> (das).<br>• <strong>zur</strong>: Contracción de <em>zu + der</em> (femenino). Ej: <em>zur Schule</em> (die).'
             },
             'im': {
                 title: 'IM (IN DEM)',
@@ -1576,8 +1606,7 @@
             // Clear previous examples
             exampleContainer.innerHTML = '';
 
-            // Inject new examples
-            data.examples.forEach(ex => {
+            const createExampleRow = (ex) => {
                 const row = document.createElement('div');
                 row.className = 'example-row';
 
@@ -1593,8 +1622,26 @@
 
                 row.appendChild(de);
                 row.appendChild(es);
-                exampleContainer.appendChild(row);
-            });
+                return row;
+            };
+
+            // Inject new examples
+            if (Array.isArray(data.examples) && data.examples.length > 0 && data.examples[0].category) {
+                data.examples.forEach(section => {
+                    const header = document.createElement('div');
+                    header.className = 'modal-section-header';
+                    header.textContent = section.category;
+                    exampleContainer.appendChild(header);
+
+                    section.items.forEach(ex => {
+                        exampleContainer.appendChild(createExampleRow(ex));
+                    });
+                });
+            } else {
+                data.examples.forEach(ex => {
+                    exampleContainer.appendChild(createExampleRow(ex));
+                });
+            }
 
             if (data.type === 'acc') {
                 typeElem.textContent = "SOLO ACUSATIVO" + (data.usage ? " (" + data.usage.toUpperCase() + ")" : "");
