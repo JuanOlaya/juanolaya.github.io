@@ -3264,7 +3264,7 @@ async function loadBackgroundData() {
  ].filter(Boolean);
 
  let tableHTML = '<table>';
- tableHTML += `<tr><th>Pron.</th><th>Konjugation</th><th>Beispiel <span id="beispiel-mode-tag" class="beispiel-mode-tag">${beispielModes[0]?.label || 'Aussage'}</span><button id="toggle-beispiel-type" class="toggle-beispiel-btn" title="Beispielmodus wechseln">â‡„</button></th></tr>`;
+ tableHTML += `<tr><th>Pron.</th><th>Konjugation</th><th>Beispiel <span id="beispiel-mode-tag" class="beispiel-mode-tag">${beispielModes[0]?.label || 'Aussage'}</span><button id="toggle-beispiel-type" class="toggle-beispiel-btn" title="Beispielmodus wechseln">&#8644;</button></th></tr>`;
 
  for (const { key, display, spanish } of pronounOrder) {
  const conjugation = updatedData.praesens[key];
