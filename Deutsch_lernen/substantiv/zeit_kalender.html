@@ -255,7 +255,7 @@
             flex-direction: column;
             gap: 4px;
             justify-content: center;
-            min-height: 110px;
+            min-height: 130px;
         }
 
         .day-box .abbr {
@@ -544,6 +544,23 @@
 
         .prep-card strong {
             color: var(--accent-purple);
+
+        /* --- Prepositions --- */
+        .prep-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .prep-card {
+            padding: 15px;
+            border-radius: 16px;
+            background: var(--bg-container);
+            border: 2px dashed var(--section-border);
+        }
+
+        .prep-card strong {
+            color: var(--accent-purple);
             font-size: 1.2rem;
             display: block;
             margin-bottom: 5px;
@@ -554,6 +571,39 @@
             margin: 0;
             font-size: 0.85rem;
             color: var(--text-subtitle);
+        }
+
+        /* --- Preposition Badges --- */
+        .prep-badge {
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.25);
+            color: inherit;
+            margin-top: 4px;
+            display: inline-block;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            align-self: center;
+        }
+
+        /* Ajuste para tarjetas oscuras en tema oscuro o claro */
+        [data-theme="dark"] .prep-badge {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .prep-badge:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .prep-badge:hover {
+            background: rgba(255, 255, 255, 0.25);
         }
 
         /* --- Grammar Rules --- */
@@ -627,29 +677,33 @@
                 <span class="time-range">06:00 - 10:00</span>
                 <div class="emoji">🌅</div>
                 <div class="article-word">der Morgen</div>
+                <span class="prep-badge" onclick="speak('am Morgen'); event.stopPropagation();" title="Escuchar preposición">am Morgen</span>
                 <div class="greeting">Guten Morgen!</div>
             </div>
             <div class="time-card tag" onclick="speak('der Tag')">
                 <span class="time-range">10:00 - 17:00</span>
                 <div class="emoji">☀️</div>
                 <div class="article-word">der Tag</div>
+                <span class="prep-badge" onclick="speak('am Tag'); event.stopPropagation();" title="Escuchar preposición">am Tag</span>
                 <div class="greeting">Guten Tag!</div>
                 <div class="subtime-badges">
-                    <span class="subtime-badge">Vormittag 10:00 - 12:00</span>
-                    <span class="subtime-badge">Mittag 12:00 - 14:00</span>
-                    <span class="subtime-badge">Nachmittag 14:00 - 17:00</span>
+                    <span class="subtime-badge" onclick="speak('am Vormittag'); event.stopPropagation();" title="Escuchar: am Vormittag">Vormittag 10:00 - 12:00</span>
+                    <span class="subtime-badge" onclick="speak('am Mittag'); event.stopPropagation();" title="Escuchar: am Mittag">Mittag 12:00 - 14:00</span>
+                    <span class="subtime-badge" onclick="speak('am Nachmittag'); event.stopPropagation();" title="Escuchar: am Nachmittag">Nachmittag 14:00 - 17:00</span>
                 </div>
             </div>
             <div class="time-card abend" onclick="speak('der Abend')">
                 <span class="time-range">17:00 - 22:00</span>
                 <div class="emoji">🌆</div>
                 <div class="article-word">der Abend</div>
+                <span class="prep-badge" onclick="speak('am Abend'); event.stopPropagation();" title="Escuchar preposición">am Abend</span>
                 <div class="greeting">Guten Abend!</div>
             </div>
             <div class="time-card nacht" onclick="speak('die Nacht')">
                 <span class="time-range">22:00 - 06:00</span>
                 <div class="emoji">🌙</div>
                 <div class="article-word">die Nacht</div>
+                <span class="prep-badge" onclick="speak('in der Nacht'); event.stopPropagation();" title="Escuchar preposición">in der Nacht</span>
                 <div class="greeting">Gute Nacht!</div>
                 <div class="usage-note">despedida antes de dormir</div>
             </div>
@@ -658,20 +712,48 @@
         <!-- Wochentage -->
         <div class="section-title"><span class="emoji">🗓️</span> Die Wochentage</div>
         <div class="week-grid">
-            <div class="day-box monday" onclick="speak('der Montag')"><span class="abbr">Mo</span><span
-                    class="full">Montag</span><span class="day-type">Werktag</span></div>
-            <div class="day-box tuesday" onclick="speak('der Dienstag')"><span class="abbr">Di</span><span
-                    class="full">Dienstag</span><span class="day-type">Werktag</span></div>
-            <div class="day-box wednesday" onclick="speak('der Mittwoch')"><span class="abbr">Mi</span><span
-                    class="full">Mittwoch</span><span class="day-type">Werktag</span></div>
-            <div class="day-box thursday" onclick="speak('der Donnerstag')"><span class="abbr">Do</span><span
-                    class="full">Donnerstag</span><span class="day-type">Werktag</span></div>
-            <div class="day-box friday" onclick="speak('der Freitag')"><span class="abbr">Fr</span><span
-                    class="full">Freitag</span><span class="day-type">Freitag</span></div>
-            <div class="day-box saturday" onclick="speak('der Samstag')"><span class="abbr">Sa</span><span
-                    class="full">Samstag</span><span class="day-type">Wochenende</span></div>
-            <div class="day-box sunday" onclick="speak('der Sonntag')"><span class="abbr">So</span><span
-                    class="full">Sonntag</span><span class="day-type">Ruhetag</span></div>
+            <div class="day-box monday" onclick="speak('der Montag')">
+                <span class="abbr">Mo</span>
+                <span class="full">Montag</span>
+                <span class="prep-badge" onclick="speak('am Montag'); event.stopPropagation();" title="Escuchar preposición">am Montag</span>
+                <span class="day-type">Werktag</span>
+            </div>
+            <div class="day-box tuesday" onclick="speak('der Dienstag')">
+                <span class="abbr">Di</span>
+                <span class="full">Dienstag</span>
+                <span class="prep-badge" onclick="speak('am Dienstag'); event.stopPropagation();" title="Escuchar preposición">am Dienstag</span>
+                <span class="day-type">Werktag</span>
+            </div>
+            <div class="day-box wednesday" onclick="speak('der Mittwoch')">
+                <span class="abbr">Mi</span>
+                <span class="full">Mittwoch</span>
+                <span class="prep-badge" onclick="speak('am Mittwoch'); event.stopPropagation();" title="Escuchar preposición">am Mittwoch</span>
+                <span class="day-type">Werktag</span>
+            </div>
+            <div class="day-box thursday" onclick="speak('der Donnerstag')">
+                <span class="abbr">Do</span>
+                <span class="full">Donnerstag</span>
+                <span class="prep-badge" onclick="speak('am Donnerstag'); event.stopPropagation();" title="Escuchar preposición">am Donnerstag</span>
+                <span class="day-type">Werktag</span>
+            </div>
+            <div class="day-box friday" onclick="speak('der Freitag')">
+                <span class="abbr">Fr</span>
+                <span class="full">Freitag</span>
+                <span class="prep-badge" onclick="speak('am Freitag'); event.stopPropagation();" title="Escuchar preposición">am Freitag</span>
+                <span class="day-type">Freitag</span>
+            </div>
+            <div class="day-box saturday" onclick="speak('der Samstag')">
+                <span class="abbr">Sa</span>
+                <span class="full">Samstag</span>
+                <span class="prep-badge" onclick="speak('am Samstag'); event.stopPropagation();" title="Escuchar preposición">am Samstag</span>
+                <span class="day-type">Wochenende</span>
+            </div>
+            <div class="day-box sunday" onclick="speak('der Sonntag')">
+                <span class="abbr">So</span>
+                <span class="full">Sonntag</span>
+                <span class="prep-badge" onclick="speak('am Sonntag'); event.stopPropagation();" title="Escuchar preposición">am Sonntag</span>
+                <span class="day-type">Ruhetag</span>
+            </div>
         </div>
 
         <!-- Relative Time -->
@@ -692,6 +774,10 @@
             <div class="rel-item" onclick="speak('übermorgen')"><span class="label">übermorgen</span><span
                     class="word">pasado mañ.</span></div>
         </div>
+        <div style="text-align: center; font-size: 0.85rem; color: var(--text-subtitle); margin-top: -30px; margin-bottom: 40px; line-height: 1.6;">
+            💡 Los adverbios de tiempo relativo no llevan preposición (ej. <em>Ich komme heute</em>). <br>
+            Fórmulas comunes: <strong class="prep-badge" style="margin-top:0;" onclick="speak('seit gestern'); event.stopPropagation();" title="seit gestern">seit gestern</strong> (desde ayer) y <strong class="prep-badge" style="margin-top:0;" onclick="speak('bis morgen'); event.stopPropagation();" title="bis morgen">bis morgen</strong> (hasta mañana).
+        </div>
 
         <!-- Jahreszeiten -->
         <div class="section-title"><span class="emoji">🍂</span> Die Jahreszeiten</div>
@@ -701,6 +787,7 @@
                 <div class="season-info">
                     <span class="art art-der">der</span>
                     <span class="name">Frühling</span>
+                    <span class="prep-badge" onclick="speak('im Frühling'); event.stopPropagation();" title="Escuchar preposición">im Frühling</span>
                     <span class="months">März, April, Mai</span>
                 </div>
             </div>
@@ -709,6 +796,7 @@
                 <div class="season-info">
                     <span class="art art-der">der</span>
                     <span class="name">Sommer</span>
+                    <span class="prep-badge" onclick="speak('im Sommer'); event.stopPropagation();" title="Escuchar preposición">im Sommer</span>
                     <span class="months">Juni, Juli, August</span>
                 </div>
             </div>
@@ -717,6 +805,7 @@
                 <div class="season-info">
                     <span class="art art-der">der</span>
                     <span class="name">Herbst</span>
+                    <span class="prep-badge" onclick="speak('im Herbst'); event.stopPropagation();" title="Escuchar preposición">im Herbst</span>
                     <span class="months">Sept, Okt, Nov</span>
                 </div>
             </div>
@@ -725,6 +814,7 @@
                 <div class="season-info">
                     <span class="art art-der">der</span>
                     <span class="name">Winter</span>
+                    <span class="prep-badge" onclick="speak('im Winter'); event.stopPropagation();" title="Escuchar preposición">im Winter</span>
                     <span class="months">Dez, Jan, Feb</span>
                 </div>
             </div>
@@ -737,49 +827,88 @@
                 <div class="emoji">⌚</div>
                 <div class="art art-die">die</div>
                 <div class="word">Uhr</div>
+                <span class="prep-badge" onclick="speak('um acht Uhr'); event.stopPropagation();" title="Escuchar ejemplo: um 8 Uhr">um ... Uhr</span>
                 <div class="unit-note">Zeit ablesen</div>
             </div>
             <div class="vocab-item item-hour" onclick="speak('die Stunde')">
                 <div class="emoji">⏳</div>
                 <div class="art art-die">die</div>
                 <div class="word">Stunde</div>
+                <span class="prep-badge" onclick="speak('in einer Stunde'); event.stopPropagation();" title="Escuchar ejemplo: in einer Stunde">in einer Stunde</span>
                 <div class="unit-note">60 Minuten</div>
             </div>
             <div class="vocab-item item-minute" onclick="speak('die Minute')">
                 <div class="emoji">⏱️</div>
                 <div class="art art-die">die</div>
                 <div class="word">Minute</div>
+                <span class="prep-badge" onclick="speak('in fünf Minuten'); event.stopPropagation();" title="Escuchar ejemplo: in 5 Minuten">in 5 Min.</span>
                 <div class="unit-note">60 Sekunden</div>
             </div>
             <div class="vocab-item item-week" onclick="speak('die Woche')">
                 <div class="emoji">🗓️</div>
                 <div class="art art-die">die</div>
                 <div class="word">Woche</div>
+                <span class="prep-badge" onclick="speak('in einer Woche'); event.stopPropagation();" title="Escuchar ejemplo: in einer Woche">in einer Woche</span>
                 <div class="unit-note">7 Tage</div>
             </div>
             <div class="vocab-item item-month" onclick="speak('der Monat')">
                 <div class="emoji">📆</div>
                 <div class="art art-der">der</div>
                 <div class="word">Monat</div>
+                <span class="prep-badge" onclick="speak('in einem Monat'); event.stopPropagation();" title="Escuchar ejemplo: in einem Monat">in einem Monat</span>
                 <div class="unit-note">im Kalender</div>
             </div>
             <div class="vocab-item item-year" onclick="speak('das Jahr')">
                 <div class="emoji">🎆</div>
                 <div class="art art-das">das</div>
                 <div class="word">Jahr</div>
+                <span class="prep-badge" onclick="speak('in einem Jahr'); event.stopPropagation();" title="Escuchar ejemplo: in einem Jahr">in einem Jahr</span>
                 <div class="unit-note">12 Monate</div>
             </div>
             <div class="vocab-item item-date" onclick="speak('das Datum')">
                 <div class="emoji">📅</div>
                 <div class="art art-das">das</div>
                 <div class="word">Datum</div>
+                <span class="prep-badge" onclick="speak('am vierundzwanzigsten Mai'); event.stopPropagation();" title="Escuchar ejemplo: am 24. Mai">am ...</span>
                 <div class="unit-note">Tag + Monat + Jahr</div>
             </div>
             <div class="vocab-item item-weekend" onclick="speak('das Wochenende')">
                 <div class="emoji">🏖️</div>
                 <div class="art art-das">das</div>
                 <div class="word">Wochenende</div>
+                <span class="prep-badge" onclick="speak('am Wochenende'); event.stopPropagation();" title="Escuchar preposición: am Wochenende">am Wochenende</span>
                 <div class="unit-note">Samstag + Sonntag</div>
+            </div>
+        </div>
+
+        <!-- Temporale Präpositionen Summary Section -->
+        <div class="section-title"><span class="emoji">✏️</span> Temporale Präpositionen (Resumen)</div>
+        <div class="prep-grid">
+            <div class="prep-card">
+                <strong onclick="speak('am')" style="cursor: pointer;" title="Escuchar pronunciación">am <span style="font-size:0.8rem; font-weight:normal; color:var(--text-subtitle);">(an dem)</span></strong>
+                <ul>
+                    <li onclick="speak('am Morgen')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: am Morgen">am Morgen / Mittag / Abend</li>
+                    <li onclick="speak('am Montag')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: am Montag">am Montag / Dienstag ...</li>
+                    <li onclick="speak('am Wochenende')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: am Wochenende">am Wochenende</li>
+                    <li onclick="speak('am ersten Mai')" style="cursor: pointer;" title="Escuchar: am 1. Mai">am 1. Mai <span style="opacity:0.75; font-style:italic;">(Fechas)</span></li>
+                </ul>
+            </div>
+            <div class="prep-card">
+                <strong onclick="speak('im')" style="cursor: pointer;" title="Escuchar pronunciación">im <span style="font-size:0.8rem; font-weight:normal; color:var(--text-subtitle);">(in dem)</span></strong>
+                <ul>
+                    <li onclick="speak('im Frühling')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: im Frühling">im Frühling / Sommer ...</li>
+                    <li onclick="speak('im Januar')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: im Januar">im Januar / Februar ... <span style="opacity:0.75; font-style:italic;">(Meses)</span></li>
+                    <li onclick="speak('im Jahr zweitausendsechsundzwanzig')" style="cursor: pointer;" title="Escuchar: im Jahr 2026">im Jahr 2026 / im Monat ...</li>
+                </ul>
+            </div>
+            <div class="prep-card">
+                <strong onclick="speak('um')" style="cursor: pointer;" title="Escuchar pronunciación">otras preposiciones</strong>
+                <ul>
+                    <li onclick="speak('um acht Uhr')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: um 8 Uhr"><strong>um</strong> 8:00 Uhr <span style="opacity:0.75; font-style:italic;">(Horas)</span></li>
+                    <li onclick="speak('in einer Stunde')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: in einer Stunde"><strong>in</strong> einer Stunde / 5 Minuten</li>
+                    <li onclick="speak('nach der Arbeit')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: nach der Arbeit"><strong>nach</strong> / <strong>vor</strong> der Arbeit</li>
+                    <li onclick="speak('seit gestern')" style="cursor: pointer;" title="Escuchar: seit gestern"><strong>seit</strong> gestern / <strong>bis</strong> morgen</li>
+                </ul>
             </div>
         </div>
 
