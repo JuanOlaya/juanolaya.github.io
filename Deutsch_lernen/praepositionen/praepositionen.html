@@ -272,7 +272,7 @@
 
         .gen-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
             max-width: 1000px;
             margin: 0 auto;
@@ -969,7 +969,8 @@
         </div>
 
         <div class="footer-genitive">
-            <div style="margin-bottom:15px; text-transform:uppercase; letter-spacing:1px; font-size:0.9rem;">Genitiv
+            <h2 onclick="speak('Genitiv')" style="cursor: pointer; color: white; border-bottom: none; padding-bottom: 0; margin-bottom: 5px; margin-top: 0; font-weight: bold; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px;" title="Escuchar pronunciación">GENITIV</h2>
+            <div style="margin-bottom:15px; text-transform:uppercase; letter-spacing:1px; font-size:0.9rem; opacity: 0.9;">
                 (Toca para ver ejemplos)</div>
             <div class="gen-grid">
                 <div class="gen-item" style="cursor: default; padding: 0;">
@@ -1077,7 +1078,12 @@
 
             <!-- New Mobile Friendly Close Button -->
             <button class="close-btn-bottom" onclick="closeModalBtn()">CERRAR</button>
-              'für': {
+        </div>
+    </div>
+
+    <script>
+        const prepData = {
+            'für': {
                 title: 'FÜR',
                 type: 'acc',
                 tag: 'FÜR WEN? (DESTINATARIO)',
@@ -1259,7 +1265,9 @@
                         ]
                     }
                 ],
-                desc: 'Contracción de <strong>in + das</strong> (neutro Akkusativ). Se usa con direcciones hacia lugares/objet            'ab': {
+                desc: 'Contracción de <strong>in + das</strong> (neutro Akkusativ). Se usa con direcciones hacia lugares/objetos neutros (p.ej. Kino, Auto, Wasser, Haus).<br><br><strong>Resumen A2 (WOHIN?):</strong><br>🏫 <strong>Edificio:</strong> ins Kino / ins Bett'
+            },
+            'ab': {
                 title: 'AB',
                 type: 'dat',
                 tag: 'WANN? (TIEMPO)',
