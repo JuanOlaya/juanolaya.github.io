@@ -4158,7 +4158,15 @@ async function loadWortfamilieIndex() {
  `;
  });
 
+ const rawLevel = group.level || '';
+ const formattedLevel = rawLevel.toUpperCase().replace(/([A-Z])(\d).*/, '$1$2');
+ const verbsLabelText = showEnglish ? 'verbs' : 'verbos';
+
  cardHTML += `
+ </div>
+ <div class="card-footer" style="background-color: ${themeColor};">
+ <span class="card-footer-tag card-footer-level" style="border: none;">${formattedLevel}</span>
+ <span class="card-footer-tag">${verbsLabelText}</span>
  </div>
  </div>`;
  htmlFragments.push(cardHTML);
