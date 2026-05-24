@@ -1528,12 +1528,9 @@ async function loadBackgroundData() {
 
  const germanWord = document.createElement('div');
  germanWord.className = 'kompakt-german';
- germanWord.style.display = 'flex';
- germanWord.style.flexDirection = 'column';
- germanWord.style.gap = '2px';
  const displayVerb = formatVerbPrefix(verbName);
- germanWord.innerHTML = `<div class="kompakt-verb-main">${displayVerb}</div><div class="kompakt-verb-tags" style="display: flex; gap: 4px; flex-wrap: wrap;">${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>`;
- germanWord.style.display = showGerman ? 'flex' : 'none';
+ germanWord.innerHTML = `${displayVerb}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}`;
+ germanWord.style.display = showGerman ? '' : 'none';
  germanWord.style.cursor = 'pointer';
  germanWord.title = 'Aussprache hören';
  germanWord.onclick = (e) => { e.stopPropagation(); window.speak(verbName === 'geboren werden' ? 'geboren' : verbName); };
@@ -1541,10 +1538,11 @@ async function loadBackgroundData() {
  const translations = document.createElement('div');
  translations.className = 'kompakt-translations';
 
+ const esTranslationLines = getCardTranslationLines(verbData).slice(0, 2);
+ const isLong = esTranslationLines.length > 1 || (esTranslationLines[0] && esTranslationLines[0].length > 12);
  const spanishWord = document.createElement('div');
- spanishWord.className = 'kompakt-spanish';
- const esTranslationLines = getCardTranslationLines(verbData);
- spanishWord.innerHTML = esTranslationLines.map(line => `<div class="translation-line" style="line-height: 1.2;">${line}</div>`).join('');
+ spanishWord.className = 'kompakt-spanish' + (isLong ? ' long-translation' : '');
+ spanishWord.innerHTML = esTranslationLines.map(line => `<div class="translation-line">${line}</div>`).join('');
  spanishWord.style.display = showSpanish ? '' : 'none';
  spanishWord.style.cursor = 'pointer';
  spanishWord.title = 'Details anzeigen';
@@ -4131,8 +4129,9 @@ async function loadWortfamilieIndex() {
  displayVerbName = `${highlightBaseVerb(verbName === 'geboren werden' ? 'geboren' : formatVerbPrefix(verbName))} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, searchTerm)})</span>`;
  }
  const esTranslationRaw = getCardTranslation(verbData);
- const esTranslationLinesRaw = getCardTranslationLines(verbData);
- const esTranslationDisplay = esTranslationLinesRaw.map(line => `<div class="translation-line" style="line-height: 1.2;">${highlightMatch(line, searchTerm)}</div>`).join('');
+ const esTranslationLinesRaw = getCardTranslationLines(verbData).slice(0, 2);
+ const isLong = esTranslationLinesRaw.length > 1 || (esTranslationLinesRaw[0] && esTranslationLinesRaw[0].length > 12);
+ const esTranslationDisplay = esTranslationLinesRaw.map(line => `<div class="translation-line">${highlightMatch(line, searchTerm)}</div>`).join('');
  const enTranslationRaw = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
  const enTranslationDisplay = highlightMatch(enTranslationRaw, searchTerm);
  const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
@@ -4150,12 +4149,9 @@ async function loadWortfamilieIndex() {
 
  cardHTML += `
  <div class="kompakt-row" data-verb="${verbName}" onclick="openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
- <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer; display: ${showGerman ? 'flex' : 'none'}; flex-direction: column; gap: 2px;">
- <div class="kompakt-verb-main">${displayVerbName}</div>
- <div class="kompakt-verb-tags" style="display: flex; gap: 4px; flex-wrap: wrap;">${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
- </div>
+ <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
  <div class="kompakt-translations">
- <div class="kompakt-spanish" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showSpanish ? 'block' : 'none'};">${esTranslationDisplay}</div>
+ <div class="kompakt-spanish${isLong ? ' long-translation' : ''}" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showSpanish ? 'block' : 'none'};">${esTranslationDisplay}</div>
  <div class="kompakt-english" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showEnglish && enTranslationRaw ? 'block' : 'none'};">${enTranslationDisplay}</div>
  </div>
  </div>

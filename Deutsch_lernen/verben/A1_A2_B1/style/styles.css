@@ -5101,4 +5101,18 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 .kompakt-row .a1test-badge {
     font-size: 0.6rem !important;
     padding: 1.3px 4px !important;
+    margin-left: 4px !important;
+    vertical-align: middle;
+}
+
+/* === Compact Mode Long Translation Sizing === */
+.kompakt-spanish.long-translation {
+    font-size: 0.85rem !important;
+    line-height: 1.15 !important;
+}
+.kompakt-spanish.long-translation .translation-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }
