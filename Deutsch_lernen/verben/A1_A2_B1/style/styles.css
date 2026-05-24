@@ -3115,6 +3115,7 @@ details[open]>summary .details-arrow {
 
 .gustar-modal-content {
     background: white;
+    color: #1e293b; /* Explicit dark text color for contrast */
     border-radius: 16px;
     max-width: 900px;
     width: 100%;
@@ -3202,6 +3203,7 @@ details[open]>summary .details-arrow {
 
 .highlight-box {
     background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #78350f; /* Dark amber text color */
     border: none;
     padding: 16px 20px;
     margin: 12px 0;
@@ -3211,6 +3213,7 @@ details[open]>summary .details-arrow {
 
 .negative-row {
     background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #7f1d1d; /* Dark red text color */
     border: none;
     padding: 16px 20px;
     margin: 12px 0;
@@ -3224,6 +3227,7 @@ details[open]>summary .details-arrow {
 
 .gustar-summary {
     background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    color: #0369a1; /* Dark blue text color */
     border: 2px solid #0ea5e9;
     border-radius: 16px;
     padding: 24px;
@@ -3247,6 +3251,7 @@ details[open]>summary .details-arrow {
 
 .summary-item {
     background: white;
+    color: #1e293b; /* Explicit dark text color for items */
     border-radius: 12px;
     padding: 18px;
     display: flex;
@@ -3316,6 +3321,7 @@ details[open]>summary .details-arrow {
 
 .example-box {
     background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    color: #1e3a8a; /* Dark blue text color */
     border: none;
     padding: 16px 20px;
     margin: 12px 0;
@@ -3325,6 +3331,7 @@ details[open]>summary .details-arrow {
 
 .negative-example {
     background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 100%);
+    color: #9f1239; /* Dark rose text color */
     border: none;
     padding: 16px 20px;
     margin: 12px 0;
