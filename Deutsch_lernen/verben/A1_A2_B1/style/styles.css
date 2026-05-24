@@ -3363,6 +3363,130 @@ details[open]>summary .details-arrow {
     box-shadow: 0 4px 12px rgba(192, 108, 132, 0.3);
 }
 
+/* Ensure all text inside the Gustar and Reflexive modals is fully visible with excellent contrast */
+.gustar-modal-content {
+    color: #1e293b !important;
+}
+
+/* Force standard elements to inherit the dark color, overriding global compact-view rules */
+.gustar-modal-content p,
+.gustar-modal-content td,
+.gustar-modal-content th,
+.gustar-modal-content li,
+.gustar-modal-content span:not(.summary-emoji),
+.gustar-modal-content em,
+.gustar-modal-content strong {
+    color: inherit;
+}
+
+/* Ensure headings and summaries have proper dark styling */
+.gustar-modal-content h3 {
+    color: #0f172a !important;
+}
+
+/* Specific styling for summaries (accordions) */
+.gustar-modal-content .gustar-section summary {
+    color: #495057 !important;
+}
+
+.gustar-modal-content .gustar-section[open] summary {
+    color: white !important;
+}
+
+/* Force correct text colors on highlighted boxes/rows */
+.gustar-modal-content .highlight-box {
+    color: #78350f !important;
+}
+.gustar-modal-content .highlight-box p,
+.gustar-modal-content .highlight-box strong {
+    color: #78350f !important;
+}
+
+.gustar-modal-content .negative-row {
+    color: #7f1d1d !important;
+}
+.gustar-modal-content .negative-row td,
+.gustar-modal-content .negative-row strong {
+    color: #7f1d1d !important;
+}
+
+.gustar-modal-content .negative-example {
+    color: #9f1239 !important;
+}
+.gustar-modal-content .negative-example p,
+.gustar-modal-content .negative-example strong {
+    color: #9f1239 !important;
+}
+
+.gustar-modal-content .example-box {
+    color: #1e3a8a !important;
+}
+.gustar-modal-content .example-box p,
+.gustar-modal-content .example-box strong {
+    color: #1e3a8a !important;
+}
+
+.gustar-modal-content .gustar-summary {
+    color: #0369a1 !important;
+}
+.gustar-modal-content .gustar-summary h3 {
+    color: #0c4a6e !important;
+}
+
+.gustar-modal-content .summary-item {
+    color: #1e293b !important;
+}
+.gustar-modal-content .summary-item strong {
+    color: #1e40af !important;
+}
+
+.gustar-modal-content .summary-positive {
+    color: #0d47a1 !important;
+}
+
+.gustar-modal-content .summary-negative {
+    color: #880e4f !important;
+}
+
+.gustar-modal-content table th {
+    color: #495057 !important;
+    background-color: #f1f5f9 !important;
+}
+
+.gustar-modal-content table td {
+    color: #1e293b !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+/* Tailwind utility styles fallback for the modals */
+.gustar-modal-content .text-blue-600 {
+    color: #2563eb !important;
+}
+
+.gustar-modal-content .text-purple-600 {
+    color: #9333ea !important;
+}
+
+.gustar-modal-content .font-bold {
+    font-weight: 700 !important;
+}
+
+.gustar-modal-content .font-semibold {
+    font-weight: 600 !important;
+}
+
+.gustar-modal-content .text-sm {
+    font-size: 0.875rem !important;
+}
+
+.gustar-modal-content .mt-2 {
+    margin-top: 0.5rem !important;
+}
+
+.gustar-modal-content .mb-2 {
+    margin-bottom: 0.5rem !important;
+}
+
 /* Wortfamilie Styles */
 #wortfamilie-container {
     margin: 16px 0;
