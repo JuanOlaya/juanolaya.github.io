@@ -4039,6 +4039,22 @@ async function loadWortfamilieIndex() {
  return `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${text}</span>`;
  }
 
+ function highlightVerbName(verbName, query) {
+ if (!verbName) return '';
+ if (verbName === 'geboren werden') {
+ return highlightMatch('geboren', query);
+ }
+ if (separablePrefixesMap[verbName]) {
+ const prefix = separablePrefixesMap[verbName];
+ if (verbName.startsWith(prefix)) {
+ const highlightedPrefix = highlightMatch(prefix, query);
+ const highlightedSuffix = highlightMatch(verbName.slice(prefix.length), query);
+ return `<span class="separable-prefix">${highlightedPrefix}</span>${highlightedSuffix}`;
+ }
+ }
+ return highlightMatch(verbName, query);
+ }
+
  function getMatchHint(match) {
  return match.matchedPraesensForm ||
  match.matchedPerfektForm ||
@@ -4124,7 +4140,7 @@ async function loadWortfamilieIndex() {
  const verbName = match.verb;
  const verbData = match.data;
  const matchHint = getMatchHint(match);
- let displayVerbName = highlightMatch(verbName === 'geboren werden' ? 'geboren' : formatVerbPrefix(verbName), searchTerm);
+ let displayVerbName = highlightVerbName(verbName, searchTerm);
  if (!verbName.toLowerCase().includes(searchTerm) && matchHint) {
  displayVerbName = `${highlightBaseVerb(verbName === 'geboren werden' ? 'geboren' : formatVerbPrefix(verbName))} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, searchTerm)})</span>`;
  }
@@ -4183,7 +4199,7 @@ async function loadWortfamilieIndex() {
 
  // Generate highlighted display names dynamically
  const matchHint = getMatchHint(match);
- let displayVerbName = highlightMatch(verbName === 'geboren werden' ? 'geboren' : formatVerbPrefix(verbName), searchTerm);
+ let displayVerbName = highlightVerbName(verbName, searchTerm);
  if (!verbName.toLowerCase().includes(searchTerm) && matchHint) {
  displayVerbName = `${highlightBaseVerb(verbName === 'geboren werden' ? 'geboren' : formatVerbPrefix(verbName))} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, searchTerm)})</span>`;
  }

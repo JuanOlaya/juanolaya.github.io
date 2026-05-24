@@ -16,6 +16,24 @@
 
             /* Light Mode Variables */
             --bg-body: #e5e7eb;
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografik: Zeit & Kalender</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Article Colors (Constant) */
+            --der-blue: #3b82f6;
+            --die-red: #ef4444;
+            --das-green: #22c55e;
+            --accent-purple: #8b5cf6;
+
+            /* Light Mode Variables */
+            --bg-body: #e5e7eb;
             --bg-container: #ffffff;
             --text-main: #1f2937;
             --text-subtitle: #6b7280;
@@ -27,6 +45,14 @@
             --das-light: #f0fdf4;
             --relative-bg: #f3f4f6;
             --footer-bg: #eff6ff;
+
+            /* Sobres / Muted colors for Prepositions Summary */
+            --prep-card-bg: #f8fafc;
+            --prep-card-border: #cbd5e1;
+            --prep-divider: #cbd5e1;
+            --prep-item-bg: #ffffff;
+            --prep-item-border: #e2e8f0;
+            --prep-item-hover-bg: #f1f5f9;
         }
 
         /* Default to Dark Theme Variables */
@@ -43,6 +69,14 @@
             --das-light: rgba(34, 197, 94, 0.15);
             --relative-bg: #334155;
             --footer-bg: #1e293b;
+
+            /* Sobres / Muted colors for Prepositions Summary */
+            --prep-card-bg: #1e293b;
+            --prep-card-border: #334155;
+            --prep-divider: #334155;
+            --prep-item-bg: #0f172a;
+            --prep-item-border: #334155;
+            --prep-item-hover-bg: #1e293b;
         }
 
         body {
@@ -516,61 +550,57 @@
             color: #4a2c00;
         }
 
-        .art-der {
-            color: inherit;
-        }
-
-        .art-die {
-            color: inherit;
-        }
-
-        .art-das {
-            color: inherit;
-        }
-
-        /* --- Prepositions --- */
+        /* --- Resumen de Preposiciones (Tarjetas Sobrias) --- */
         .prep-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 20px;
+            margin-top: 20px;
         }
 
         .prep-card {
-            padding: 15px;
+            padding: 18px 20px;
             border-radius: 16px;
-            background: var(--bg-container);
+            background: var(--bg-body);
             border: 2px dashed var(--section-border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .prep-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
         }
 
         .prep-card strong {
             color: var(--accent-purple);
-
-        /* --- Prepositions --- */
-        .prep-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .prep-card {
-            padding: 15px;
-            border-radius: 16px;
-            background: var(--bg-container);
-            border: 2px dashed var(--section-border);
-        }
-
-        .prep-card strong {
-            color: var(--accent-purple);
-            font-size: 1.2rem;
+            font-size: 1.25rem;
+            font-weight: 800;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed var(--section-border);
+            padding-bottom: 8px;
         }
 
         .prep-card ul {
             padding-left: 18px;
             margin: 0;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             color: var(--text-subtitle);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .prep-card li {
+            color: var(--text-main);
+            font-weight: 700;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .prep-card li:hover {
+            color: var(--accent-purple);
+            transform: translateX(4px);
         }
 
         /* --- Preposition Badges --- */
@@ -887,27 +917,27 @@
             <div class="prep-card">
                 <strong onclick="speak('am')" style="cursor: pointer;" title="Escuchar pronunciación">am <span style="font-size:0.8rem; font-weight:normal; color:var(--text-subtitle);">(an dem)</span></strong>
                 <ul>
-                    <li onclick="speak('am Morgen')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: am Morgen">am Morgen / Mittag / Abend</li>
-                    <li onclick="speak('am Montag')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: am Montag">am Montag / Dienstag ...</li>
-                    <li onclick="speak('am Wochenende')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: am Wochenende">am Wochenende</li>
-                    <li onclick="speak('am ersten Mai')" style="cursor: pointer;" title="Escuchar: am 1. Mai">am 1. Mai <span style="opacity:0.75; font-style:italic;">(Fechas)</span></li>
+                    <li onclick="speak('am Morgen, am Mittag, am Abend')" title="Escuchar: am Morgen / Mittag / Abend"><span style="color: var(--accent-purple); font-weight: 800;">am</span> Morgen / Mittag / Abend</li>
+                    <li onclick="speak('am Montag, am Dienstag')" title="Escuchar: am Montag / Dienstag ..."><span style="color: var(--accent-purple); font-weight: 800;">am</span> Montag / Dienstag ...</li>
+                    <li onclick="speak('am Wochenende')" title="Escuchar: am Wochenende"><span style="color: var(--accent-purple); font-weight: 800;">am</span> Wochenende</li>
+                    <li onclick="speak('am ersten Mai')" title="Escuchar: am 1. Mai"><span style="color: var(--accent-purple); font-weight: 800;">am</span> 1. Mai <span style="font-style: italic; color: var(--text-subtitle); font-weight: normal; font-size: 0.85rem;">(Fechas)</span></li>
                 </ul>
             </div>
             <div class="prep-card">
                 <strong onclick="speak('im')" style="cursor: pointer;" title="Escuchar pronunciación">im <span style="font-size:0.8rem; font-weight:normal; color:var(--text-subtitle);">(in dem)</span></strong>
                 <ul>
-                    <li onclick="speak('im Frühling')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: im Frühling">im Frühling / Sommer ...</li>
-                    <li onclick="speak('im Januar')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: im Januar">im Januar / Februar ... <span style="opacity:0.75; font-style:italic;">(Meses)</span></li>
-                    <li onclick="speak('im Jahr zweitausendsechsundzwanzig')" style="cursor: pointer;" title="Escuchar: im Jahr 2026">im Jahr 2026 / im Monat ...</li>
+                    <li onclick="speak('im Frühling, im Sommer')" title="Escuchar: im Frühling / Sommer ..."><span style="color: var(--accent-purple); font-weight: 800;">im</span> Frühling / Sommer ...</li>
+                    <li onclick="speak('im Januar, im Februar')" title="Escuchar: im Januar / Februar ..."><span style="color: var(--accent-purple); font-weight: 800;">im</span> Januar / Februar ... <span style="font-style: italic; color: var(--text-subtitle); font-weight: normal; font-size: 0.85rem;">(Meses)</span></li>
+                    <li onclick="speak('im Jahr zweitausendsechsundzwanzig, im Monat')" title="Escuchar: im Jahr 2026 / im Monat ..."><span style="color: var(--accent-purple); font-weight: 800;">im</span> Jahr 2026 / <span style="color: var(--accent-purple); font-weight: 800;">im</span> Monat ...</li>
                 </ul>
             </div>
             <div class="prep-card">
-                <strong onclick="speak('um')" style="cursor: pointer;" title="Escuchar pronunciación">otras preposiciones</strong>
+                <strong style="cursor: pointer;" title="Escuchar pronunciación">otras preposiciones</strong>
                 <ul>
-                    <li onclick="speak('um acht Uhr')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: um 8 Uhr"><strong>um</strong> 8:00 Uhr <span style="opacity:0.75; font-style:italic;">(Horas)</span></li>
-                    <li onclick="speak('in einer Stunde')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: in einer Stunde"><strong>in</strong> einer Stunde / 5 Minuten</li>
-                    <li onclick="speak('nach der Arbeit')" style="cursor: pointer; margin-bottom: 4px;" title="Escuchar: nach der Arbeit"><strong>nach</strong> / <strong>vor</strong> der Arbeit</li>
-                    <li onclick="speak('seit gestern')" style="cursor: pointer;" title="Escuchar: seit gestern"><strong>seit</strong> gestern / <strong>bis</strong> morgen</li>
+                    <li onclick="speak('um acht Uhr')" title="Escuchar: um 8:00 Uhr"><span style="color: var(--accent-purple); font-weight: 800;">um</span> 8:00 Uhr <span style="font-style: italic; color: var(--text-subtitle); font-weight: normal; font-size: 0.85rem;">(Horas)</span></li>
+                    <li onclick="speak('in einer Stunde, in fünf Minuten')" title="Escuchar: in einer Stunde / 5 Minuten"><span style="color: var(--accent-purple); font-weight: 800;">in</span> einer Stunde / 5 Minuten</li>
+                    <li onclick="speak('nach der Arbeit, vor der Arbeit')" title="Escuchar: nach / vor der Arbeit"><span style="color: var(--accent-purple); font-weight: 800;">nach</span> / <span style="color: var(--accent-purple); font-weight: 800;">vor</span> der Arbeit</li>
+                    <li onclick="speak('seit gestern, bis morgen')" title="Escuchar: seit gestern / bis morgen"><span style="color: var(--accent-purple); font-weight: 800;">seit</span> gestern / <span style="color: var(--accent-purple); font-weight: 800;">bis</span> morgen</li>
                 </ul>
             </div>
         </div>
