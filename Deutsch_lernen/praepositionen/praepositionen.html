@@ -542,19 +542,17 @@
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
         .modal-section-header {
-            background-color: #f1f3f5;
-            color: #495057;
             font-size: 0.8rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             padding: 8px 15px;
-            border-bottom: 1px solid #e9ecef;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
         }
         .modal-section-header:not(:first-child) {
-            border-top: 1px solid #dee2e6;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -1308,9 +1306,15 @@
                 usage: 'Hacia (personas/lugares) / Ocasiones',
                 examples: [
                     {
-                        category: 'Persona oder Profesional',
+                        category: 'Persona',
                         items: [
                             { de: 'Kommst du zu mir?', es: '¿Vienes a mi casa?' }
+                        ]
+                    },
+                    {
+                        category: 'Profesional',
+                        items: [
+                            { de: 'Ich gehe zum Arzt.', es: 'Voy al médico.' }
                         ]
                     },
                     {
@@ -1323,7 +1327,7 @@
                     {
                         category: 'Ocasiones',
                         items: [
-                            { de: 'Heute gibt es Nudeln zum Mittagessen.', es: 'Hoy hay pasta para comer.' },
+                            { de: 'Heute gibt es Nudeln zum Mittagessen.', es: 'Hoy hay pasta para el almuerzo.' },
                             { de: 'Zum Geburtstag viel Glück!', es: '¡Felicidades por tu cumpleaños!' }
                         ]
                     }
@@ -1627,10 +1631,17 @@
 
             // Inject new examples
             if (Array.isArray(data.examples) && data.examples.length > 0 && data.examples[0].category) {
+                let caseColor = "var(--dative)";
+                if (data.type === 'acc') caseColor = "var(--accusative)";
+                else if (data.type === 'wechsel') caseColor = "var(--two-way)";
+                else if (data.type === 'gen') caseColor = "var(--genitive)";
+
                 data.examples.forEach(section => {
                     const header = document.createElement('div');
                     header.className = 'modal-section-header';
                     header.textContent = section.category;
+                    header.style.backgroundColor = caseColor;
+                    header.style.color = "white";
                     exampleContainer.appendChild(header);
 
                     section.items.forEach(ex => {
