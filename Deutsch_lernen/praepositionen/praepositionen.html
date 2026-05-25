@@ -544,12 +544,11 @@
         .modal-section-header {
             font-size: 0.8rem;
             font-weight: 700;
-            text-transform: uppercase;
+            text-transform: none;
             letter-spacing: 1px;
             padding: 8px 15px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
+            display: block;
         }
         .modal-section-header:not(:first-child) {
             border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -1997,10 +1996,28 @@
                     header.className = 'modal-section-header';
                     
                     let catText = section.category.toLowerCase();
-                    catText = catText.replace('ort / acusativo', 'ort akk.');
-                    catText = catText.replace('ort / dativo', 'ort dat.');
+                    let hasMatch = false;
+                    if (catText.includes('ort / acusativo') || catText.includes('ort akk.')) {
+                        let preps = '';
+                        const match = catText.match(/\(([^)]+)\)/);
+                        if (match) {
+                            preps = `(${match[1]})`;
+                        }
+                        header.innerHTML = `akkusativ ${preps}<br>(movimiento hacia un lugar). wohin? → ¿hacia dónde?`;
+                        hasMatch = true;
+                    } else if (catText.includes('ort / dativo') || catText.includes('ort dat.')) {
+                        let preps = '';
+                        const match = catText.match(/\(([^)]+)\)/);
+                        if (match) {
+                            preps = `(${match[1]})`;
+                        }
+                        header.innerHTML = `dativ ${preps}<br>(posición fija). wo? → ¿dónde?`;
+                        hasMatch = true;
+                    }
                     
-                    header.textContent = catText;
+                    if (!hasMatch) {
+                        header.textContent = catText;
+                    }
                     header.style.backgroundColor = caseColor;
                     header.style.color = "white";
                     exampleContainer.appendChild(header);
