@@ -1995,7 +1995,12 @@
                 data.examples.forEach(section => {
                     const header = document.createElement('div');
                     header.className = 'modal-section-header';
-                    header.textContent = section.category;
+                    
+                    let catText = section.category.toLowerCase();
+                    catText = catText.replace('ort / acusativo', 'ort akk.');
+                    catText = catText.replace('ort / dativo', 'ort dat.');
+                    
+                    header.textContent = catText;
                     header.style.backgroundColor = caseColor;
                     header.style.color = "white";
                     exampleContainer.appendChild(header);
