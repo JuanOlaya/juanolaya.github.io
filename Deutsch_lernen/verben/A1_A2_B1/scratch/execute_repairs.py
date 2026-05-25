@@ -16,8 +16,20 @@ VALID_ESTA_FORMS = {
 }
 
 def clean_esta_in_word(word):
+    w_lower = word.lower()
     # If the word is a valid Spanish form of estar, leave it alone
-    if word.lower() in VALID_ESTA_FORMS:
+    if w_lower in VALID_ESTA_FORMS:
+        return word
+    
+    # Exclude other correct Spanish words containing "está":
+    # 1. Words ending in "áis" (e.g. estáis, molestáis, prestáis, apestáis)
+    if w_lower.endswith("áis"):
+        return word
+    # 2. Words starting with "estátic" (e.g. estático, estática, estáticos, estáticas)
+    if w_lower.startswith("estátic"):
+        return word
+    # 3. Words starting with "estándar" (e.g. estándar, estándares)
+    if w_lower.startswith("estándar"):
         return word
     
     # Otherwise, if "está" is inside the word, replace all occurrences with "est"
