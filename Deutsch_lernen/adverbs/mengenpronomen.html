@@ -409,6 +409,187 @@
             box-sizing: border-box;
         }
 
+        /* --- TIMELINE SECTION STYLING --- */
+        .timeline-section {
+            padding-bottom: 110px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .timeline-labels-above {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: bold;
+            padding: 0 15px;
+        }
+        .timeline-label-top.past {
+            color: var(--level-b2);
+            text-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+        }
+        .timeline-label-top.present {
+            color: var(--accent-green);
+            position: absolute;
+            left: 10%;
+            transform: translateX(-50%);
+            text-shadow: 0 0 10px rgba(0, 255, 161, 0.4);
+        }
+        .timeline-label-top.future {
+            color: var(--level-b1);
+        }
+        
+        .timeline-container {
+            width: 100%;
+            padding: 10px 0;
+            position: relative;
+            margin: 0 15px;
+        }
+        
+        .timeline-bar {
+            height: 6px;
+            position: relative;
+            background: linear-gradient(90deg, rgba(148, 163, 184, 0.2) 0%, rgba(148, 163, 184, 0.2) 10%, var(--accent-green) 10%, var(--level-a2) 60%, var(--level-b1) 100%);
+            border-radius: 3px;
+        }
+        
+        .timeline-bar::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10%;
+            height: 6px;
+            background: var(--section-bg); /* Match section background for masking */
+            z-index: 1;
+        }
+
+        .timeline-bar::after {
+            content: '••••';
+            letter-spacing: 3px;
+            overflow: hidden;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-55%);
+            width: 10%;
+            font-size: 10px;
+            color: var(--text-muted);
+            opacity: 0.5;
+            z-index: 2;
+            white-space: nowrap;
+        }
+        .timeline-bar.past-bar {
+            background: linear-gradient(90deg, var(--level-b2) 0%, var(--level-a1) 50%, var(--accent-green) 95%, rgba(148, 163, 184, 0.2) 95%);
+        }
+        .timeline-bar.past-bar::before {
+            content: '';
+            position: absolute;
+            right: 0 !important;
+            left: auto !important;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5% !important;
+            height: 6px;
+            background: var(--section-bg) !important;
+            z-index: 1;
+            display: block !important;
+        }
+        .timeline-bar.past-bar::after {
+            content: '••';
+            letter-spacing: 2px;
+            overflow: hidden;
+            position: absolute;
+            right: 0 !important;
+            left: auto !important;
+            top: 50%;
+            transform: translateY(-55%);
+            width: 5% !important;
+            font-size: 10px;
+            color: var(--text-muted);
+            opacity: 0.5;
+            z-index: 2;
+            white-space: nowrap;
+            display: block !important;
+        }
+        
+        .timeline-dot-present {
+            position: absolute;
+            left: 10%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            background-color: var(--accent-green);
+            border: 3px solid var(--card-bg);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-green);
+            z-index: 4;
+        }
+        
+        .timeline-arrow-future {
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 12px solid var(--level-b1);
+            z-index: 4;
+        }
+
+        .timeline-sentence-container {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            border-top: 1px dashed var(--border-color);
+            padding-top: 16px;
+        }
+
+        .timeline-sentence {
+            color: var(--text-main);
+            font-weight: bold;
+            font-family: monospace;
+            background: rgba(0, 255, 161, 0.05);
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px dashed rgba(0, 255, 161, 0.2);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .timeline-sentence:hover {
+            background: rgba(0, 255, 161, 0.1);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        @media (max-width: 768px) {
+            .timeline-section {
+                padding-bottom: 140px;
+            }
+            .timeline-marker {
+                font-size: 0.75rem !important;
+            }
+            .timeline-marker .trans {
+                font-size: 0.65rem !important;
+                white-space: normal;
+                max-width: 70px;
+                margin: 2px auto 0 auto;
+            }
+            .timeline-sentence-container {
+                margin-top: 80px;
+            }
+        }
+
         /* NEW: Class for full-width card */
         .rule-card.full-width {
             grid-column: 1 / -1;
@@ -1029,6 +1210,113 @@
                 <div class="scale-label scale-label-interactive" data-speak="immer">
                     Immer <span class="audio-icon-inline">&#128266;</span>
                     <span class="trans">siempre</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline Section (Past to Present) -->
+        <div class="quantity-scale-section timeline-section">
+            <div class="visual-title">Adverbios para pasado</div>
+            
+            <div class="timeline-labels-above">
+                <span class="timeline-label-top past">pasado</span>
+                <span class="timeline-label-top present" style="left: 95%">presente</span>
+            </div>
+
+            <div class="scale-row">
+                <div class="timeline-container">
+                    <div class="timeline-bar past-bar">
+                        <!-- Present dot at the end -->
+                        <div class="timeline-dot-present" style="left: 95%"></div>
+                        
+                        <!-- Markers for words -->
+                        <div class="marker timeline-marker" style="left: 10%" data-speak="in der Vergangenheit">
+                            in der Vergangenheit <span class="audio-icon-inline">&#128266;</span>
+                            <span class="trans">en el pasado</span>
+                        </div>
+                        <div class="marker timeline-marker" style="left: 27%" data-speak="früher">
+                            früher <span class="audio-icon-inline">&#128266;</span>
+                            <span class="trans">antes / antiguamente</span>
+                        </div>
+                        <div class="marker timeline-marker" style="left: 44%" data-speak="damals">
+                            damals <span class="audio-icon-inline">&#128266;</span>
+                            <span class="trans">en aquel entonces</span>
+                        </div>
+                        <div class="marker timeline-marker" style="left: 61%" data-speak="gestern">
+                            gestern <span class="audio-icon-inline">&#128266;</span>
+                            <span class="trans">ayer</span>
+                        </div>
+                        <div class="marker timeline-marker" style="left: 78%" data-speak="gerade eben">
+                            gerade eben <span class="audio-icon-inline">&#128266;</span>
+                            <span class="trans">hace un momento</span>
+                        </div>
+                        <div class="marker timeline-marker" style="left: 95%" data-speak="jetzt">
+                            jetzt <span class="audio-icon-inline">&#128266;</span>
+                            <span class="trans">ahora</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline Section (Present to Future) -->
+        <div class="quantity-scale-section timeline-section">
+            <div class="visual-title">Adverbios para futuro</div>
+            
+            <div class="timeline-labels-above">
+                <span></span>
+                <span class="timeline-label-top present">presente</span>
+                <span class="timeline-label-top future">futuro</span>
+            </div>
+
+            <div class="scale-row">
+                <div class="timeline-container">
+                    <div class="timeline-bar">
+                        <!-- Present dot -->
+                        <div class="timeline-dot-present"></div>
+                        <!-- Arrowhead at the end -->
+                        <div class="timeline-arrow-future"></div>
+                        
+                        <!-- Markers for words -->
+                        <div class="marker timeline-marker" style="left: 10%" data-speak="jetzt">
+                            jetzt <span class="audio-icon-inline">&#128266;</span>
+                            <span class="trans">ahora</span>
+                        </div>
+                        <div class="marker timeline-marker" style="left: 24%" data-speak="sofort">
+                            sofort <span class="audio-icon-inline">&#128266;</span>
+                            <span class="trans">inmediato</span>
+                        </div>
+                        <div class="marker timeline-marker" style="left: 38%" data-speak="gleich">
+                            gleich <span class="audio-icon-inline">&#128266;</span>
+                            <span class="trans">enseguida</span>
+                        </div>
+                        <div class="marker timeline-marker" style="left: 52%" data-speak="bald">
+                            bald <span class="audio-icon-inline">&#128266;</span>
+                            <span class="trans">pronto</span>
+                        </div>
+                        <div class="marker timeline-marker" style="left: 66%" data-speak="später">
+                            später <span class="audio-icon-inline">&#128266;</span>
+                            <span class="trans">más tarde</span>
+                        </div>
+                        <div class="marker timeline-marker" style="left: 80%" data-speak="irgendwann">
+                            irgendwann <span class="audio-icon-inline">&#128266;</span>
+                            <span class="trans">algún día</span>
+                        </div>
+                        <div class="marker timeline-marker" style="left: 94%" data-speak="in Zukunft">
+                            in Zukunft <span class="audio-icon-inline">&#128266;</span>
+                            <span class="trans">en el futuro</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-sentence-container">
+                <span>Frase de ejemplo:</span>
+                <span class="timeline-sentence" onclick="speak('Wir gehen gleich los')" title="Clic para escuchar">
+                    Wir gehen gleich los <span class="audio-icon-inline">&#128266;</span>
+                </span>
+                <div style="font-size: 0.85rem; font-style: italic; margin-top: 4px;">
+                    Nos vamos enseguida / Nos vamos ya mismo
                 </div>
             </div>
         </div>
