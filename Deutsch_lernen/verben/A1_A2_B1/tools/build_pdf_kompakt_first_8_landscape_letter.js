@@ -20,8 +20,8 @@ const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22c55e', '
 
 const canonicalGroupOverrides = [
     {
-        groupNameGerman: 'Existenz',
-        groupNameSpanish: 'Existencia',
+        groupNameGerman: 'Grundlagen',
+        groupNameSpanish: 'Fundamentos',
         verbs: ['sein', 'haben', 'werden', 'geben', 'kommen', 'gehen', 'wohnen']
     },
     {

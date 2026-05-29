@@ -15,7 +15,7 @@ const a1Groups = indexData.groups
 
 const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#ea580c', '#22c55e', '#3b82f6', '#14b8a6', '#6366f1', '#a855f7'];
 const groupsPerPage = 4;
-const preferredA1Order = ['Existenz', 'Modalverben', 'Freizeit'];
+const preferredA1Order = ['Grundlagen', 'Modalverben', 'Freizeit'];
 
 if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });

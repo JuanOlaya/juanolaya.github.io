@@ -19,9 +19,9 @@ const userJson = {
                 "gehen",
                 "wohnen"
             ],
-            "groupNameGerman": "Existenz",
-            "groupNameSpanish": "Existencia",
-            "groupNameEnglish": "Existence",
+            "groupNameGerman": "Grundlagen",
+            "groupNameSpanish": "Fundamentos",
+            "groupNameEnglish": "Basics",
             "groupNumberPerLevel": 1
         },
         {

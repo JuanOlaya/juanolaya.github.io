@@ -13,8 +13,8 @@ if (!fs.existsSync(outputDir)) {
 
 const canonicalGroups = [
     {
-        groupNameGerman: 'Existenz',
-        groupNameSpanish: 'Existencia',
+        groupNameGerman: 'Grundlagen',
+        groupNameSpanish: 'Fundamentos',
         color: '#8b5cf6',
         verbs: ['sein', 'haben', 'werden', 'geben', 'kommen', 'gehen', 'wohnen']
     },

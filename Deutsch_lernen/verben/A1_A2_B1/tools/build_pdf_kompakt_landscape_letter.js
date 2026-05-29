@@ -18,8 +18,8 @@ const firstSixGroups = indexData.groups.slice(0, 6);
 
 const canonicalGroupOverrides = [
     {
-        groupNameGerman: 'Existenz',
-        groupNameSpanish: 'Existencia',
+        groupNameGerman: 'Grundlagen',
+        groupNameSpanish: 'Fundamentos',
         verbs: ['sein', 'haben', 'werden', 'geben', 'kommen', 'gehen', 'wohnen']
     },
     {
