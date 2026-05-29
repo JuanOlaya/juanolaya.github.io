@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const rootDir = __dirname;
+const rootDir = path.join(__dirname, '..');
 const outputDir = path.join(rootDir, 'pdf_output');
 const indexPath = path.join(rootDir, 'json', 'verbs_index.json');
 const htmlPath = path.join(outputDir, 'kompakt_a1_portrait_with_all_tags_v2.html');
