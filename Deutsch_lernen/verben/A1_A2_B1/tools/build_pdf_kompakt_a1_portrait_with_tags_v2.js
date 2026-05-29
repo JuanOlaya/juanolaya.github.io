@@ -405,7 +405,7 @@ ${pagesHtml}
 function writePdf() {
     fs.writeFileSync(htmlPath, buildHtml(), 'utf8');
 
-    const headlessProfileDir = path.join('C:\\tmp', 'edge-headless-profile-a1-verben-a1');
+    const headlessProfileDir = path.join('C:\\tmp', `edge-headless-profile-a1-${Date.now()}`);
     if (!fs.existsSync(headlessProfileDir)) {
         fs.mkdirSync(headlessProfileDir, { recursive: true });
     }
