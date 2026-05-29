@@ -37,7 +37,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  "beitreten": "bei", "dabeihaben": "dabei", "durchstreichen": "durch",
  "darlegen": "dar",
  "eingreifen": "ein", "einkaufen": "ein", "einladen": "ein", "einmachen": "ein", "einpacken": "ein", "einrichten": "ein", "einschlafen": "ein", "einsteigen": "ein", "eintragen": "ein", "einziehen": "ein", "einhalten": "ein", "einlegen": "ein", "einordnen": "ein", "einreichen": "ein", "einschalten": "ein", "einschränken": "ein", "einstellen": "ein", "einwenden": "ein",
- "fernsehen": "fern", "fertigmachen": "fertig", "herstellen": "her", "hineingehen": "hinein",
+ "fernsehen": "fern", "fertigmachen": "fertig", "herstellen": "her", "hineingehen": "hinein", "hinzufügen": "hinzu",
  "feststellen": "fest", "herunterladen": "herunter", "hochladen": "hoch",
  "kennenlernen": "kennen",
  "mitbringen": "mit", "mitkommen": "mit", "mitmachen": "mit", "mitnehmen": "mit", "mitteilen": "mit", "mitwirken": "mit",
