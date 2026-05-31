@@ -1,14 +1,14 @@
-const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
+const fs = require('fs');
+const path = require('path');
 
 // Level configuration
 const levelConfig = {
-    'A1_1': { groupCount: 14, displayName: 'A1.1' },
-    'A1_2': { groupCount: 14, displayName: 'A1.2' },
+    'A1_1': { groupCount: 16, displayName: 'A1.1' },
+    'A1_2': { groupCount: 16, displayName: 'A1.2' },
     'A2_1': { groupCount: 13, displayName: 'A2.1' },
-    'A2_2': { groupCount: 13, displayName: 'A2.2' },
-    'B1_1': { groupCount: 20, displayName: 'B1.1' },
-    'B2_1': { groupCount: 11, displayName: 'B2.1' }
+    'A2_2': { groupCount: 18, displayName: 'A2.2' },
+    'B1_1': { groupCount: 26, displayName: 'B1.1' },
+    'B2_1': { groupCount: 14, displayName: 'B2.1' }
 };
 
 const levelOrder = ['A1_1', 'A1_2', 'A2_1', 'A2_2', 'B1_1', 'B2_1'];
@@ -21,10 +21,21 @@ let createdCount = 0;
 levelOrder.forEach(levelKey => {
     const config = levelConfig[levelKey];
     const displayName = config.displayName;
+    const levelDir = path.join(__dirname, '..', 'json', 'groups', levelKey);
 
-    for (let groupNum = 1; groupNum <= config.groupCount; groupNum++) {
-        const groupFilePath = path.join(__dirname, 'json', 'groups', levelKey, `${levelKey}_group_${groupNum}.json`);
-        const themeFilePath = path.join(__dirname, 'json', 'themes', `${levelKey}_${groupNum}_theme.json`);
+    if (!fs.existsSync(levelDir)) {
+        console.warn(`Warning: Directory not found: ${levelDir}`);
+        return;
+    }
+
+    const files = fs.readdirSync(levelDir);
+    files.forEach(file => {
+        const match = file.match(/_group_(\d+)\.json$/);
+        if (!match) return;
+
+        const groupNum = parseInt(match[1], 10);
+        const groupFilePath = path.join(levelDir, file);
+        const themeFilePath = path.join(__dirname, '..', 'json', 'themes', `${levelKey}_${groupNum}_theme.json`);
 
         try {
             // Read the group file
@@ -40,7 +51,7 @@ levelOrder.forEach(levelKey => {
                 existed = true;
             }
 
-            // Update theme data with correct information fürom group file
+            // Update theme data with correct information from group file
             themeData.level = displayName;
             themeData.group = groupNum;
             themeData.germanName = theme;
@@ -68,7 +79,7 @@ levelOrder.forEach(levelKey => {
         } catch (error) {
             console.error(`✗ Error processing ${levelKey} group ${groupNum}:`, error.message);
         }
-    }
+    });
 });
 
 console.log('\n=== Summary ===');
