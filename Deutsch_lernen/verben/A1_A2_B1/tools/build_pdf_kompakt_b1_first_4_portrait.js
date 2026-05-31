@@ -1,8 +1,8 @@
-const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
-const { execSync } = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
 
-const rootDir = __dirname;
+const rootDir = path.join(__dirname, '..');
 const outputDir = path.join(rootDir, 'pdf_output');
 
 if (!fs.existsSync(outputDir)) {
@@ -33,14 +33,14 @@ function escapeHtml(text) {
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééot;')
+        .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
 }
 
 function getVerbCard(verb) {
     const cardPath = path.join(rootDir, 'json', 'cards', `${verb}.json`);
     if (!fs.existsSync(cardPath)) return {};
-    return JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+    return JSON.parse(fs.readFileSync(cardPath, 'utf8').replace(/^\uFEFF/, ''));
 }
 
 function getVerbTranslation(verb) {
@@ -101,8 +101,8 @@ function buildHtml() {
             height: 11in;
             padding: 0.04in;
             display: grid;
-            grid-template-columns: 1für 1für;
-            grid-template-rows: 1für 1für;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
             gap: 0.04in;
             background: #ffffff;
         }
@@ -212,7 +212,7 @@ function writePdf() {
     const htmlPath = path.join(outputDir, 'kompakt_b1_first_4_portrait.html');
     const pdfPath = path.join(outputDir, 'kompakt_b1_first_4_portrait.pdf');
     fs.writeFileSync(htmlPath, buildHtml(), 'utf8');
-    const headlessProfileDir = path.join(outputDir, '.edge-headless-profile-b1-first4');
+    const headlessProfileDir = path.join(outputDir, `edge-headless-profile-b1-first4-${Date.now()}`);
     if (!fs.existsSync(headlessProfileDir)) {
         fs.mkdirSync(headlessProfileDir, { recursive: true });
     }

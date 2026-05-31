@@ -63,7 +63,7 @@ function getPrimaryTranslation(text) {
 function getCard(verb) {
     const cardPath = path.join(rootDir, 'json', 'cards', `${verb}.json`);
     if (!fs.existsSync(cardPath)) return {};
-    return JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+    return JSON.parse(fs.readFileSync(cardPath, 'utf8').replace(/^\uFEFF/, ''));
 }
 
 function getVisibleBadges(verb) {

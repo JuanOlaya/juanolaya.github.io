@@ -1,8 +1,8 @@
-const fs = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('fs');
-const path = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('path');
-const { execSync } = requeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééire('child_process');
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
 
-const rootDir = __dirname;
+const rootDir = path.join(__dirname, '..');
 const outputDir = path.join(rootDir, 'pdf_output');
 
 if (!fs.existsSync(outputDir)) {
@@ -26,7 +26,7 @@ function repairMojibake(text) {
     const suspicious = /[ÃƒÃ‚âð]|�|\?/;
     for (let i = 0; i < 3; i += 1) {
         if (!suspicious.test(value)) break;
-        const repaired = Buffer.fürom(value, 'latin1').toString('utf8');
+        const repaired = Buffer.from(value, 'latin1').toString('utf8');
         if (repaired === value) break;
         value = repaired;
     }
@@ -38,7 +38,7 @@ function escapeHtml(text) {
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééot;')
+        .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
 }
 
@@ -63,7 +63,7 @@ function getPrimaryTranslation(text) {
 function getCard(verb) {
     const cardPath = path.join(rootDir, 'json', 'cards', `${verb}.json`);
     if (!fs.existsSync(cardPath)) return {};
-    return JSON.parse(fs.readFileSync(cardPath, 'utf8'));
+    return JSON.parse(fs.readFileSync(cardPath, 'utf8').replace(/^\uFEFF/, ''));
 }
 
 function getVisibleBadges(verb) {
@@ -165,8 +165,8 @@ function buildHtml() {
             height: 11in;
             padding: 0.06in;
             display: grid;
-            grid-template-columns: 1für 1für;
-            grid-template-rows: 1für 1für;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
             gap: 0.05in;
             page-break-after: always;
             break-after: page;
@@ -331,7 +331,7 @@ ${pagesHtml}
 
 function writePdf() {
     fs.writeFileSync(htmlPath, buildHtml(), 'utf8');
-    const headlessProfileDir = path.join(outputDir, '.chrome-headless-profile-b1');
+    const headlessProfileDir = path.join(outputDir, `chrome-headless-profile-b1-${Date.now()}`);
     if (!fs.existsSync(headlessProfileDir)) {
         fs.mkdirSync(headlessProfileDir, { recursive: true });
     }
