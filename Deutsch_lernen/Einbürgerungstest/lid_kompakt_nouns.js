@@ -267,14 +267,14 @@
                                         "art": "der",
                                         "w": "Staat",
                                         "e": "\ud83c\udfdb\ufe0f",
-                                        "tr": "el estáado",
+                                        "tr": "el estado",
                                         "important": true
                               },
                               {
                                         "art": "der",
                                         "w": "Rechtsstaat",
                                         "e": "\u2696\ufe0f",
-                                        "tr": "estáado de derecho",
+                                        "tr": "estado de derecho",
                                         "important": true
                               },
                               {
@@ -474,7 +474,7 @@
           {
                     "id": "wahlrecht",
                     "title": "Beteiligung",
-                    "title_es": "Participaci?n",
+                    "title_es": "Participación",
                     "icon": "\ud83d\uddf3\ufe0f",
                     "color": "#1d4ed8",
                     "items": [
@@ -667,28 +667,28 @@
                                         "art": "der",
                                         "w": "Bundesstaat",
                                         "e": "\ud83c\udde9\ud83c\uddea",
-                                        "tr": "estáado federal",
+                                        "tr": "estado federal",
                                         "important": true
                               },
                               {
                                         "art": "das",
                                         "w": "Bundesland",
                                         "e": "\ud83d\uddfa\ufe0f",
-                                        "tr": "estáado federado",
+                                        "tr": "estado federado",
                                         "important": true
                               },
                               {
                                         "art": "die (pl)",
                                         "w": "L\u00e4nder",
                                         "e": "\ud83d\uddfa\ufe0f",
-                                        "tr": "los estáados federados",
+                                        "tr": "los estados federados",
                                         "important": true
                               },
                               {
                                         "art": "die (pl)",
                                         "w": "16 Bundesl\u00e4nder",
                                         "e": "\ud83d\uddfa\ufe0f",
-                                        "tr": "los 16 estáados federados",
+                                        "tr": "los 16 estados federados",
                                         "important": true
                               },
                               {
@@ -1616,7 +1616,7 @@
                                         "art": "die (pl)",
                                         "w": "neuen Bundesländer",
                                         "e": "\ud83d\uddfa\ufe0f",
-                                        "tr": "nuevos estáados federados",
+                                        "tr": "nuevos estados federados",
                                         "important": true
                               }
 
@@ -1640,14 +1640,14 @@
                                         "art": "der",
                                         "w": "Adler",
                                         "e": "\ud83e\udd85",
-                                        "tr": "\u00e1ÁÁguila",
+                                        "tr": "águila",
                                         "important": true
                               },
                               {
                                         "art": "das",
-                                        "w": "Bärandenburger Tor",
+                                        "w": "Brandenburger Tor",
                                         "e": "\ud83c\udfdb\ufe0f",
-                                        "tr": "Puerta de Bärandeburgo",
+                                        "tr": "Puerta de Brandeburgo",
                                         "important": true
                               },
                               {
@@ -1660,7 +1660,7 @@
                                         "art": "der",
                                         "w": "Stadtstaat",
                                         "e": "\ud83d\uddfa\ufe0f",
-                                        "tr": "estáado-ciudad",
+                                        "tr": "estado-ciudad",
                                         "important": true
                               },
                               {
@@ -1731,7 +1731,7 @@
           },
           {
                     "id": "landespolitik",
-                    "title": "L?nder",
+                    "title": "Länder",
                     "title_es": "Estados federados",
                     "icon": "\ud83c\udff3\ufe0f",
                     "color": "#2563eb",
@@ -1746,13 +1746,13 @@
                                         "art": "die",
                                         "w": "Landesflagge",
                                         "e": "\ud83c\udff3\ufe0f",
-                                        "tr": "bandera del estáado federado"
+                                        "tr": "bandera del estado federado"
                               },
                               {
                                         "art": "die",
                                         "w": "Landeshauptstadt",
                                         "e": "\ud83c\udfd9\ufe0f",
-                                        "tr": "capital del estáado federado"
+                                        "tr": "capital del estado federado"
                               },
                               {
                                         "art": "der",
@@ -1770,7 +1770,7 @@
                                         "art": "der",
                                         "w": "Freistaat",
                                         "e": "\ud83c\udff0",
-                                        "tr": "estáado libre"
+                                        "tr": "estado libre"
                               },
                               {
                                         "art": "das",
@@ -1783,7 +1783,7 @@
           {
                     "id": "verwaltung-soziales",
                     "title": "Verwaltung",
-                    "title_es": "Administraci?n",
+                    "title_es": "Administración",
                     "icon": "\ud83c\udfe2",
                     "color": "#7c3aed",
                     "items": [
@@ -1797,13 +1797,13 @@
                                         "art": "die",
                                         "w": "Landeszentrale",
                                         "e": "\ud83c\udfe2",
-                                        "tr": "centro estáatal / oficina estáatal"
+                                        "tr": "centro estatal / oficina estatal"
                               },
                               {
                                         "art": "das",
                                         "w": "Bundeskanzleramt",
                                         "e": "\ud83c\udfdb\ufe0f",
-                                        "tr": "Canciller?a Federal"
+                                        "tr": "Cancillería Federal"
                               },
                               {
                                         "art": "das",
@@ -1866,7 +1866,7 @@
                                         "art": "die",
                                         "w": "Meinung",
                                         "e": "\ud83d\udcac",
-                                        "tr": "opini?n"
+                                        "tr": "opinión"
                               },
                               {
                                         "art": "das",
@@ -1899,7 +1899,7 @@
                                         "art": "der",
                                         "w": "Beruf",
                                         "e": "\ud83d\udcbc",
-                                        "tr": "profesi?n"
+                                        "tr": "profesión"
                               },
                               {
                                         "art": "die",
@@ -2160,7 +2160,7 @@
                                         "art": "das",
                                         "w": "Wirtschaftswunder",
                                         "e": "\ud83d\udcc8",
-                                        "tr": "milagro econ?mico"
+                                        "tr": "milagro económico"
                               }
 
                     ]
