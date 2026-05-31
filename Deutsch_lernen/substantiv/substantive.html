@@ -862,70 +862,127 @@
             box-shadow: 0 4px 10px rgba(245, 158, 11, 0.25);
         }
 
+        .tips-modal-panel {
+            padding: 32px 32px 10px;
+            text-align: center;
+            background:
+                radial-gradient(circle at top, rgba(245, 158, 11, 0.15), transparent 42%),
+                linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.88));
+            border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+        }
+
+        .tips-modal-title {
+            color: #f8fafc;
+            margin: 0 0 10px;
+            font-size: clamp(1.8rem, 3vw, 2.35rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .tips-modal-subtitle {
+            margin: 0;
+            color: #cbd5e1;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
         .tips-columns {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 18px;
+            padding: 22px;
         }
 
         .tips-col {
-            flex: 1;
-            min-width: 250px;
-            padding: 15px;
-            border-radius: 12px;
+            min-width: 0;
+            padding: 22px 20px 20px;
+            border-radius: 22px;
             border: 2px solid transparent;
+            background: rgba(15, 23, 42, 0.82);
+            box-shadow: 0 18px 44px rgba(2, 6, 23, 0.26);
+            backdrop-filter: blur(8px);
         }
 
-        /* Tips Cols need adapted backgrounds for dark mode */
-        /* Use darker versions of the previous pastels or semi-transparent */
         .col-der {
             border-color: var(--color-der);
-            background: rgba(59, 130, 246, 0.1);
-            /* Blue tint */
+            background: linear-gradient(180deg, rgba(37, 99, 235, 0.18), rgba(30, 41, 59, 0.9));
         }
 
         .col-die {
             border-color: var(--color-die);
-            background: rgba(239, 68, 68, 0.1);
-            /* Red tint */
+            background: linear-gradient(180deg, rgba(239, 68, 68, 0.16), rgba(30, 41, 59, 0.9));
         }
 
         .col-das {
             border-color: var(--color-das);
-            background: rgba(34, 197, 94, 0.1);
-            /* Green tint */
+            background: linear-gradient(180deg, rgba(34, 197, 94, 0.16), rgba(22, 101, 52, 0.34), rgba(30, 41, 59, 0.92));
         }
 
         .col-plural {
             border-color: var(--color-die-plural);
-            background: rgba(168, 85, 247, 0.1);
-            /* Purple tint */
+            background: linear-gradient(180deg, rgba(168, 85, 247, 0.17), rgba(49, 46, 129, 0.42), rgba(30, 41, 59, 0.92));
         }
 
         .tips-title {
             font-weight: 800;
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
+            margin-bottom: 18px;
+            font-size: clamp(1.45rem, 2vw, 1.9rem);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            flex-wrap: wrap;
+            gap: 12px;
             color: #f1f5f9;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
+        .tips-title-main {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tips-title-sub {
+            font-size: 0.92em;
+            opacity: 0.92;
+            font-weight: 700;
+        }
+
+        .tips-orb {
+            width: 1.1em;
+            height: 1.1em;
+            border-radius: 50%;
+            box-shadow: inset 0 4px 10px rgba(255, 255, 255, 0.18), 0 6px 16px rgba(15, 23, 42, 0.28);
+        }
+
+        .orb-der {
+            background: radial-gradient(circle at 30% 30%, #7dd3fc, #2563eb 70%);
+        }
+
+        .orb-die {
+            background: radial-gradient(circle at 30% 30%, #fda4af, #e11d48 70%);
+        }
+
+        .orb-das {
+            background: radial-gradient(circle at 30% 30%, #86efac, #22c55e 70%);
+        }
+
+        .orb-plural {
+            background: radial-gradient(circle at 30% 30%, #c4b5fd, #8b5cf6 70%);
         }
 
         .tips-subheader {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #94a3b8;
-            /* Slate 400 */
-            font-weight: 700;
-            margin-top: 15px;
-            margin-bottom: 5px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 2px;
+            letter-spacing: 0.16em;
+            color: #cbd5e1;
+            font-weight: 800;
+            margin-top: 18px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+            padding-bottom: 7px;
         }
 
         .tips-list {
@@ -933,8 +990,62 @@
             padding: 0;
             margin: 0;
             text-align: left;
+            color: #e2e8f0;
+        }
+
+        .tips-list li {
+            margin-bottom: 12px;
+            font-size: 0.98rem;
+            line-height: 1.55;
+        }
+
+        .tips-suffix {
+            font-weight: 800;
+            color: #f8fafc;
+        }
+
+        .tips-rule {
+            font-weight: 700;
+            color: #f8fafc;
+        }
+
+        .tips-rule-translation {
+            color: #bfdbfe;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        .tips-example-line {
+            margin-top: 4px;
+            font-size: 0.9rem;
+            line-height: 1.5;
             color: #cbd5e1;
-            /* Slate 300 */
+        }
+
+        .tips-rule-note {
+            color: #f8fafc;
+            font-weight: 800;
+        }
+
+        .tips-legacy-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 8px auto 26px;
+            padding: 12px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            background: rgba(15, 23, 42, 0.65);
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .tips-legacy-link:hover {
+            transform: translateY(-1px);
+            color: #f8fafc;
+            border-color: rgba(248, 250, 252, 0.35);
         }
 
         .tips-list li {
@@ -1578,45 +1689,48 @@
     <!-- Tips Modal -->
     <div class="modal-overlay" id="tips-modal">
         <div class="modal-content">
-            <button class="modal-close" id="tips-close" style="color: #333; background: #eee;">×</button>
-            <div style="padding: 30px; text-align: center;">
-                <h2 style="color: #1f2937; margin-bottom: 10px;">💡 Tipps zum Geschlecht</h2>
-                <p style="color: #6b7280;">Wichtige Regeln und Endungen</p>
+            <button class="modal-close" id="tips-close" style="color: #e2e8f0; background: rgba(15, 23, 42, 0.78);">×</button>
+            <div class="tips-modal-panel">
+                <h2 class="tips-modal-title">💡 Tipps zum Geschlecht</h2>
+                <p class="tips-modal-subtitle">Klare Endungen, typische Muster und kurze Beispiele für schnellere Orientierung.</p>
             </div>
 
             <div class="tips-columns">
                 <!-- DER Column -->
                 <div class="tips-col col-der">
-                    <div class="tips-title" style="color: var(--color-der);">DER 🔵 (Masculine)</div>
+                    <div class="tips-title" style="color: var(--color-der);">
+                        <span class="tips-title-main">DER <span class="tips-orb orb-der"></span></span>
+                        <span class="tips-title-sub">(Masculine)</span>
+                    </div>
                     <div class="tips-subheader">Endungen / Terminación</div>
                     <ul class="tips-list">
-                        <li><strong>-er</strong> (Lehrer)</li>
-                        <li><strong>-en</strong> (Garten)</li>
-                        <li><strong>-ig</strong> (König)</li>
-                        <li><strong>-ling</strong> (Frühling)</li>
-                        <li><strong>-or</strong> (Motor)</li>
-                        <li><strong>-ismus</strong> (Tourismus)</li>
+                        <li><span class="tips-suffix">-er</span> (Lehrer)</li>
+                        <li><span class="tips-suffix">-en</span> (Garten)</li>
+                        <li><span class="tips-suffix">-ig</span> (König)</li>
+                        <li><span class="tips-suffix">-ling</span> (Frühling)</li>
+                        <li><span class="tips-suffix">-or</span> (Motor)</li>
+                        <li><span class="tips-suffix">-ismus</span> (Tourismus)</li>
                     </ul>
-                    <div class="tips-subheader">Regeln / <span style="color: black;">Regla</span></div>
+                    <div class="tips-subheader">Regeln / Regla</div>
                     <ul class="tips-list">
                         <li>
-                            Tage, Monate <i><b>(días, meses)</b></i>
-                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">der Montag, der Juli, der
+                            <span class="tips-rule">Tage, Monate</span> <span class="tips-rule-translation">(días, meses)</span>
+                            <div class="tips-example-line">der Montag, der Juli, der
                                 Freitag, der Mai</div>
                         </li>
                         <li>
-                            Jahreszeiten <i><b>(estaciones)</b></i>
-                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">der Sommer, der Winter, der
+                            <span class="tips-rule">Jahreszeiten</span> <span class="tips-rule-translation">(estaciones)</span>
+                            <div class="tips-example-line">der Sommer, der Winter, der
                                 Herbst, der Frühling</div>
                         </li>
                         <li>
-                            Wetter <i><b>(clima)</b></i>
-                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">der Regen, der Schnee, der
+                            <span class="tips-rule">Wetter</span> <span class="tips-rule-translation">(clima)</span>
+                            <div class="tips-example-line">der Regen, der Schnee, der
                                 Wind, der Nebel, der Hagel, der Blitz</div>
                         </li>
                         <li>
-                            Himmelsrichtungen <i><b>(direcciones)</b></i>
-                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">der Norden, der Süden, der
+                            <span class="tips-rule">Himmelsrichtungen</span> <span class="tips-rule-translation">(direcciones)</span>
+                            <div class="tips-example-line">der Norden, der Süden, der
                                 Osten, der Westen</div>
                         </li>
                     </ul>
@@ -1624,31 +1738,34 @@
 
                 <!-- DIE Column -->
                 <div class="tips-col col-die">
-                    <div class="tips-title" style="color: var(--color-die);">DIE 🔴 (Feminine)</div>
+                    <div class="tips-title" style="color: var(--color-die);">
+                        <span class="tips-title-main">DIE <span class="tips-orb orb-die"></span></span>
+                        <span class="tips-title-sub">(Feminine)</span>
+                    </div>
                     <div class="tips-subheader">Endungen / Terminación</div>
                     <ul class="tips-list">
-                        <li><strong>-e</strong> (Lampe)</li>
-                        <li><strong>-ung</strong> (Zeitung)</li>
-                        <li><strong>-heit</strong> (Freiheit)</li>
-                        <li><strong>-keit</strong> (Möglichkeit)</li>
-                        <li><strong>-schaft</strong> (Freundschaft)</li>
-                        <li><strong>-ion</strong> (Information)</li>
-                        <li><strong>-tät</strong> (Universität)</li>
-                        <li><strong>-ik</strong> (Musik)</li>
-                        <li><strong>-ie</strong> (Familie)</li>
-                        <li><strong>-ei</strong> (Bäckerei)</li>
+                        <li><span class="tips-suffix">-e</span> (Lampe)</li>
+                        <li><span class="tips-suffix">-ung</span> (Zeitung)</li>
+                        <li><span class="tips-suffix">-heit</span> (Freiheit)</li>
+                        <li><span class="tips-suffix">-keit</span> (Möglichkeit)</li>
+                        <li><span class="tips-suffix">-schaft</span> (Freundschaft)</li>
+                        <li><span class="tips-suffix">-ion</span> (Information)</li>
+                        <li><span class="tips-suffix">-tät</span> (Universität)</li>
+                        <li><span class="tips-suffix">-ik</span> (Musik)</li>
+                        <li><span class="tips-suffix">-ie</span> (Familie)</li>
+                        <li><span class="tips-suffix">-ei</span> (Bäckerei)</li>
                     </ul>
-                    <div class="tips-subheader">Regeln / <span style="color: black;">Regla</span></div>
+                    <div class="tips-subheader">Regeln / Regla</div>
                     <ul class="tips-list">
                         <li>
-                            Weibliche Berufe <i><b>(profesiones femeninas)</b></i>
-                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">die Lehrerin, die Ärztin,
+                            <span class="tips-rule">Weibliche Berufe</span> <span class="tips-rule-translation">(profesiones femeninas)</span>
+                            <div class="tips-example-line">die Lehrerin, die Ärztin,
                                 die
                                 Studentin, die Chefin</div>
                         </li>
                         <li>
-                            Zahlen <i><b>(números)</b></i>
-                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">die Eins, die Zwei, die
+                            <span class="tips-rule">Zahlen</span> <span class="tips-rule-translation">(números)</span>
+                            <div class="tips-example-line">die Eins, die Zwei, die
                                 Zehn,
                                 die Million</div>
                         </li>
@@ -1657,31 +1774,34 @@
 
                 <!-- DAS Column -->
                 <div class="tips-col col-das">
-                    <div class="tips-title" style="color: var(--color-das);">DAS 🟢 (Neuter)</div>
+                    <div class="tips-title" style="color: var(--color-das);">
+                        <span class="tips-title-main">DAS <span class="tips-orb orb-das"></span></span>
+                        <span class="tips-title-sub">(Neuter)</span>
+                    </div>
                     <div class="tips-subheader">Endungen / Terminación</div>
                     <ul class="tips-list">
-                        <li><strong>-chen</strong> (Mädchen)</li>
-                        <li><strong>-lein</strong> (Büchlein)</li>
-                        <li><strong>-ment</strong> (Dokument)</li>
-                        <li><strong>-tum</strong> (Eigentum)</li>
-                        <li><strong>-um</strong> (Museum)</li>
-                        <li><strong>-ett</strong> (Bankett)</li>
+                        <li><span class="tips-suffix">-chen</span> (Mädchen)</li>
+                        <li><span class="tips-suffix">-lein</span> (Büchlein)</li>
+                        <li><span class="tips-suffix">-ment</span> (Dokument)</li>
+                        <li><span class="tips-suffix">-tum</span> (Eigentum)</li>
+                        <li><span class="tips-suffix">-um</span> (Museum)</li>
+                        <li><span class="tips-suffix">-ett</span> (Bankett)</li>
                     </ul>
-                    <div class="tips-subheader">Regeln / <span style="color: black;">Regla</span></div>
+                    <div class="tips-subheader">Regeln / Regla</div>
                     <ul class="tips-list">
                         <li>
-                            Infinitiv als Nomen <i><b>(infinitivo como sustantivo)</b></i>
-                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">das Essen, das Leben, das
+                            <span class="tips-rule">Infinitiv als Nomen</span> <span class="tips-rule-translation">(infinitivo como sustantivo)</span>
+                            <div class="tips-example-line">das Essen, das Leben, das
                                 Schlafen, das Lesen, das Schwimmen</div>
                         </li>
                         <li>
-                            Farben <i><b>(colores)</b></i>
-                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">das Blau, das Rot, das Grün,
+                            <span class="tips-rule">Farben</span> <span class="tips-rule-translation">(colores)</span>
+                            <div class="tips-example-line">das Blau, das Rot, das Grün,
                                 das Gelb, das Weiß</div>
                         </li>
                         <li>
-                            Viele englische Wörter <i><b>(muchas palabras en inglés)</b></i>
-                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">das Handy, das Baby, das
+                            <span class="tips-rule">Viele englische Wörter</span> <span class="tips-rule-translation">(muchas palabras en inglés)</span>
+                            <div class="tips-example-line">das Handy, das Baby, das
                                 Team,
                                 das Training, das Internet</div>
                         </li>
@@ -1690,25 +1810,28 @@
 
                 <!-- PLURAL Column -->
                 <div class="tips-col col-plural">
-                    <div class="tips-title" style="color: var(--color-die-plural);">DIE 🟣 (Plural)</div>
-                    <div class="tips-subheader">Endungen / <span style="color: black;">Terminación</span></div>
+                    <div class="tips-title" style="color: var(--color-die-plural);">
+                        <span class="tips-title-main">DIE <span class="tips-orb orb-plural"></span></span>
+                        <span class="tips-title-sub">(Plural)</span>
+                    </div>
+                    <div class="tips-subheader">Endungen / Terminación</div>
                     <ul class="tips-list">
-                        <li><strong>-(e)n</strong> (Frauen, Blumen)</li>
-                        <li><strong>-e</strong> (Tische, Freunde)</li>
-                        <li><strong>-er</strong> (Kinder, Bilder)</li>
-                        <li><strong>-s</strong> (Autos, Kinos)</li>
-                        <li><strong>Keine Änd. / No cambia</strong> (Lehrer, Fenster)</li>
+                        <li><span class="tips-suffix">-(e)n</span> (Frauen, Blumen)</li>
+                        <li><span class="tips-suffix">-e</span> (Tische, Freunde)</li>
+                        <li><span class="tips-suffix">-er</span> (Kinder, Bilder)</li>
+                        <li><span class="tips-suffix">-s</span> (Autos, Kinos)</li>
+                        <li><span class="tips-rule-note">Keine Änd. / No cambia</span> (Lehrer, Fenster)</li>
                     </ul>
-                    <div class="tips-subheader">Regeln / <span style="color: black;">Regla</span></div>
+                    <div class="tips-subheader">Regeln / Regla</div>
                     <ul class="tips-list">
                         <li>
-                            Gruppen von Personen <i><b>(grupos de personas)</b></i>
-                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">die Eltern, die Leute, die
+                            <span class="tips-rule">Gruppen von Personen</span> <span class="tips-rule-translation">(grupos de personas)</span>
+                            <div class="tips-example-line">die Eltern, die Leute, die
                                 Kinder, die Geschwister</div>
                         </li>
                         <li>
-                            Pluraliatantum <i><b>(solo plural)</b></i>
-                            <div style="font-size: 0.85em; color: #4b5563; margin-top:2px;">die Ferien, die
+                            <span class="tips-rule">Pluraliatantum</span> <span class="tips-rule-translation">(solo plural)</span>
+                            <div class="tips-example-line">die Ferien, die
                                 Lebensmittel,
                                 die Möbel</div>
                         </li>
@@ -1716,7 +1839,7 @@
                 </div>
             </div>
 
-            <a href="old/tipps-zum-geschlecht.html" class="legacy-link">Zur alten, detaillierten Version / Ver versión
+            <a href="old/tipps-zum-geschlecht.html" class="legacy-link tips-legacy-link">Zur alten, detaillierten Version / Ver versión
                 detallada</a>
         </div>
     </div>
