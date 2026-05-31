@@ -736,9 +736,23 @@ async function loadBackgroundData() {
  searchInput.dispatchEvent(new Event('input'));
  }
  return; // SKIP NETWORK LOADING
- } else {
- console.log("Cache outdated or invalid. Reloading from network.");
- }
+  } else {
+  console.log("Cache outdated or invalid. Reloading from network.");
+  wortfamilieIndex = null;
+  if (allVerbsData) {
+  Object.keys(allVerbsData).forEach(verbName => {
+  if (allVerbsData[verbName]) {
+  delete allVerbsData[verbName].wortfamilie;
+  delete allVerbsData[verbName]._wortfamilieLoaded;
+  delete allVerbsData[verbName]._deferredLoaded;
+  delete allVerbsData[verbName].konjunktiv_ii;
+  delete allVerbsData[verbName].praesens_examples;
+  delete allVerbsData[verbName].praeteritum_examples;
+  delete allVerbsData[verbName].praesens_fragen;
+  }
+  });
+  }
+  }
  }
  } catch (e) {
  console.warn("Failed to load/parse cache", e);
@@ -794,7 +808,9 @@ async function loadBackgroundData() {
 
  // 3. Fetch Verbs that are NEW
  const verbsToLoad = groupData.verbs || [];
- const newVerbs = verbsToLoad.filter(v => !allVerbsData[v]);
+ const newVerbs = (cacheHydrated && cacheMatchesRemoteVersion)
+ ? verbsToLoad.filter(v => !allVerbsData[v])
+ : verbsToLoad;
 
  if (newVerbs.length > 0) {
  const cardPromises = newVerbs.map(verbName =>
