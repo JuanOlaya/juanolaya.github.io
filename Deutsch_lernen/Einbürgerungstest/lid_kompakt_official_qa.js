@@ -29,20 +29,20 @@ window.lidOfficialQaData = {
       }
     ]
   },
-  "rechte::Meinungsfüreiheit": {
+  "rechte::Meinungsfreiheit": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfüreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
     ]
   },
-  "rechte::Pressefüreiheit": {
+  "rechte::Pressefreiheit": {
     "qa": [
       {
-        "q": "Eine Partei im Deutschen Bundestáag will die Pressefüreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestáag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestáag dafür sein. Nein, denn die Pressefüreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
+        "q": "Eine Partei im Deutschen Bundestag will die Pressefreiheit abschaffen. Ist das möglich? Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestag dafür sind. Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestag dafür sein. Nein, denn die Pressefreiheit ist ein Grundrecht. Sie kann nicht abgeschafft",
         "a": "werden.",
         "q_es": "",
         "a_es": ""
@@ -59,47 +59,47 @@ window.lidOfficialQaData = {
       }
     ]
   },
-  "füreiheiten::Religionsfüreiheit": {
+  "freiheiten::Religionsfreiheit": {
     "qa": [
       {
-        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfüreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
-        "a": "hier Meinungsfüreiheit gilt.",
+        "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil … hier Religionsfreiheit gilt. die Menschen Steuern zahlen. die Menschen das Wahlrecht haben.",
+        "a": "hier Meinungsfreiheit gilt.",
         "q_es": "",
         "a_es": ""
       }
     ]
   },
-  "füreiheiten::Glaubensfüreiheit": {
+  "freiheiten::Glaubensfreiheit": {
     "qa": [
       {
         "q": "Welches Recht gehört zu den Grundrechten, die nach der deutschen Verfassung garantiert werden? Días Recht auf …",
-        "a": "Glaubens- und Gewissensfüreiheit",
+        "a": "Glaubens- und Gewissensfreiheit",
         "q_es": "",
         "a_es": ""
       }
     ]
   },
-  "füreiheiten::Gewissensfüreiheit": {
+  "freiheiten::Gewissensfreiheit": {
     "qa": [
       {
         "q": "Welches Recht gehört zu den Grundrechten, die nach der deutschen Verfassung garantiert werden? Días Recht auf …",
-        "a": "Glaubens- und Gewissensfüreiheit",
+        "a": "Glaubens- und Gewissensfreiheit",
         "q_es": "",
         "a_es": ""
       }
     ]
   },
-  "füreiheiten::Versammlungsfüreiheit": {
+  "freiheiten::Versammlungsfreiheit": {
     "qa": [
       {
-        "q": "Die deutschen Gesetze verbieten … Meinungsfüreiheit der Einwohnerinnen und Einwohner. Petitionen der Bürgerinnen und Bürger. Versammlungsfüreiheit der Einwohnerinnen und Einwohner.",
+        "q": "Die deutschen Gesetze verbieten … Meinungsfreiheit der Einwohnerinnen und Einwohner. Petitionen der Bürgerinnen und Bürger. Versammlungsfreiheit der Einwohnerinnen und Einwohner.",
         "a": "Ungleichbehandlung der Bürgerinnen und Bürger durch den Staat.",
         "q_es": "",
         "a_es": ""
       }
     ]
   },
-  "füreiheiten::Demonstration": {
+  "freiheiten::Demonstration": {
     "qa": [
       {
         "q": "Warum gibt es in einer Demokratie mehr als eine Partei? weil dadurch die unterschiedlichen Meinungen der Bürgerinnen und Bürger",
@@ -109,7 +109,7 @@ window.lidOfficialQaData = {
       }
     ]
   },
-  "füreiheiten::Freizügigkeit": {
+  "freiheiten::Freizügigkeit": {
     "qa": [
       {
         "q": "Was versteht man unter dem Recht der \"Freizügigkeit\" in Deutschland?",
@@ -1919,7 +1919,7 @@ window.lidOfficialQaData = {
       }
     ]
   },
-  "verwaltung-soziales::Steuererkl?rung": {
+  "verwaltung-soziales::Steuererklärung": {
     "qa": [
       {
         "q": "Días Berufsinformationszentrum BIZ bei der Bundesagentur für Arbeit in Deutschland hilft bei der … Rentenberechnung.",

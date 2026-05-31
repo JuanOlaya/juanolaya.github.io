@@ -28,16 +28,16 @@
                                         "important": true
                               },
                               {
-                                        "w": "Meinungsfüreiheit",
+                                        "w": "Meinungsfreiheit",
                                         "e": "\ud83d\udde3\ufe0f",
-                                        "tr": "liberätad de opini\u00f3n",
+                                        "tr": "libertad de opinión",
                                         "important": true
                               },
                               {
                                         "art": "die",
-                                        "w": "Pressefüreiheit",
+                                        "w": "Pressefreiheit",
                                         "e": "\ud83d\udcf0",
-                                        "tr": "liberätad de prensa"
+                                        "tr": "libertad de prensa"
                               },
                               {
                                         "art": "die",
@@ -56,50 +56,50 @@
                     ]
           },
           {
-                    "id": "füreiheiten",
+                    "id": "freiheiten",
                     "title": "Freiheiten",
-                    "title_es": "Liberätades",
+                    "title_es": "Libertades",
                     "icon": "\ud83d\udd4a\ufe0f",
                     "color": "#0891b2",
                     "items": [
                               {
                                         "art": "die",
-                                        "w": "Religionsfüreiheit",
+                                        "w": "Religionsfreiheit",
                                         "e": "\ud83d\uded0",
-                                        "tr": "liberätad religiosa",
+                                        "tr": "libertad religiosa",
                                         "important": true
                               },
                               {
                                         "art": "die",
-                                        "w": "Glaubensfüreiheit",
+                                        "w": "Glaubensfreiheit",
                                         "e": "\ud83d\ude4f",
-                                        "tr": "liberätad de creencias"
+                                        "tr": "libertad de creencias"
                               },
                               {
                                         "art": "die",
-                                        "w": "Gewissensfüreiheit",
+                                        "w": "Gewissensfreiheit",
                                         "e": "\ud83d\udcad",
-                                        "tr": "liberätad de conciencia"
+                                        "tr": "libertad de conciencia"
                               },
                               {
                                         "art": "die",
-                                        "w": "Versammlungsfüreiheit",
+                                        "w": "Versammlungsfreiheit",
                                         "e": "\ud83d\udce2",
-                                        "tr": "liberätad de reuni\u00f3n",
+                                        "tr": "libertad de reunión",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Demonstration",
                                         "e": "\ud83d\udce2",
-                                        "tr": "manifestáaci\u00f3n",
+                                        "tr": "manifestación",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Freiz\u00fcgigkeit",
                                         "e": "\ud83d\ude89",
-                                        "tr": "liberätad de residencia / libre circulaci\u00f3n",
+                                        "tr": "libertad de residencia / libre circulación",
                                         "important": true
                               }
                     ]
@@ -141,7 +141,7 @@
                                         "art": "die",
                                         "w": "Freiheit",
                                         "e": "\ud83d\udd4a\ufe0f",
-                                        "tr": "liberätad",
+                                        "tr": "libertad",
                                         "important": true
                               },
                               {
@@ -161,7 +161,7 @@
           {
                     "id": "diskriminierung",
                     "title": "Schutz",
-                    "title_es": "Protecci?n",
+                    "title_es": "Protección",
                     "icon": "\ud83d\udee1\ufe0f",
                     "color": "#ea580c",
                     "items": [
@@ -289,7 +289,7 @@
           {
                     "id": "institutionen",
                     "title": "Organe",
-                    "title_es": "?rganos",
+                    "title_es": "Órganos",
                     "icon": "\ud83c\udfdb\ufe0f",
                     "color": "#7c3aed",
                     "items": [
@@ -924,14 +924,14 @@
                                         "art": "das",
                                         "w": "Finanzamt",
                                         "e": "\ud83d\udcb0",
-                                        "tr": "oficina de impuestáos",
+                                        "tr": "oficina de impuestos",
                                         "important": true
                               },
                               {
                                         "art": "die",
                                         "w": "Steuer",
                                         "e": "\ud83d\udcb8",
-                                        "tr": "impuestáo",
+                                        "tr": "impuesto",
                                         "important": true
                               },
                               {
@@ -1821,13 +1821,13 @@
                                         "art": "das",
                                         "w": "Jugendamt",
                                         "e": "\ud83d\udce9",
-                                        "tr": "oficina de bienestáar juvenil"
+                                        "tr": "oficina de bienestar juvenil"
                               },
                               {
                                         "art": "die",
-                                        "w": "Steuererkl?rung",
+                                        "w": "Steuererklärung",
                                         "e": "\ud83d\udcc4",
-                                        "tr": "declaraci?n de impuestáos"
+                                        "tr": "declaración de impuestos"
                               }
                     ]
           },
@@ -1860,7 +1860,7 @@
                                         "art": "der",
                                         "w": "Schutz",
                                         "e": "\ud83d\udee1\ufe0f",
-                                        "tr": "protecci?n"
+                                        "tr": "protección"
                               },
                               {
                                         "art": "die",
@@ -1872,20 +1872,20 @@
                                         "art": "das",
                                         "w": "Kindergeld",
                                         "e": "\ud83d\udcb6",
-                                        "tr": "prestáaci?n por hijo"
+                                        "tr": "prestación por hijo"
                               },
                               {
                                         "art": "der",
                                         "w": "Politiker",
                                         "e": "\ud83e\uddd1\u200d\ud83d\udcbc",
-                                        "tr": "pol?tico"
+                                        "tr": "político"
                               }
                     ]
           },
           {
                     "id": "beruf-wirtschaft",
                     "title": "Wirtschaft",
-                    "title_es": "Econom?a",
+                    "title_es": "Economía",
                     "icon": "\ud83d\udcbc",
                     "color": "#0f766e",
                     "items": [
@@ -1917,7 +1917,7 @@
                                         "art": "die",
                                         "w": "Marktwirtschaft",
                                         "e": "\ud83d\udcc8",
-                                        "tr": "econom?a de mercado"
+                                        "tr": "economía de mercado"
                               },
                               {
                                         "art": "die",
@@ -1944,13 +1944,13 @@
                                         "art": "die",
                                         "w": "Aufgabe",
                                         "e": "\ud83d\udcdd",
-                                        "tr": "tarea / funci?n"
+                                        "tr": "tarea / función"
                               },
                               {
                                         "art": "die",
                                         "w": "Monarchie",
                                         "e": "\ud83d\udc51",
-                                        "tr": "monarqueééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé?a"
+                                        "tr": "monarquía"
                               },
                               {
                                         "art": "der",
@@ -1974,13 +1974,13 @@
                                         "art": "die (pl)",
                                         "w": "Stolpersteine",
                                         "e": "\ud83e\udea8",
-                                        "tr": "adoqueéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééines conmemorativos"
+                                        "tr": "adoquines conmemorativos"
                               },
                               {
                                         "art": "die (pl)",
                                         "w": "Grenzen",
                                         "e": "\ud83d\uddfa\ufe0f",
-                                        "tr": "füronteras / límites"
+                                        "tr": "fronteras / límites"
                               }
                     ]
           },

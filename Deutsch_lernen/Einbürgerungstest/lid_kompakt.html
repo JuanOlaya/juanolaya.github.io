@@ -807,6 +807,49 @@
                 normalized = decoded;
             }
 
+            const targetedReplacements = [
+                ["Meinungsfüreiheit", "Meinungsfreiheit"],
+                ["Pressefüreiheit", "Pressefreiheit"],
+                ["Religionsfüreiheit", "Religionsfreiheit"],
+                ["Glaubensfüreiheit", "Glaubensfreiheit"],
+                ["Gewissensfüreiheit", "Gewissensfreiheit"],
+                ["Versammlungsfüreiheit", "Versammlungsfreiheit"],
+                ["Glaubens- und Gewissensfüreiheit", "Glaubens- und Gewissensfreiheit"],
+                ["liberätad", "libertad"],
+                ["Liberätades", "Libertades"],
+                ["manifestáacin", "manifestación"],
+                ["manifestáaciones", "manifestaciones"],
+                ["Bundestáag", "Bundestag"],
+                ["Bundestáages", "Bundestages"],
+                ["Bundestáags", "Bundestags"],
+                ["Bundestáagssitz", "Bundestagssitz"],
+                ["destáo", "desto"],
+                ["Mindestáanteil", "Mindestanteil"],
+                ["Whlerin", "Wählerin"],
+                ["Whler", "Wähler"],
+                ["beschliet", "beschließt"],
+                ["Bärandenburger", "Brandenburger"],
+                ["füronteras", "fronteras"],
+                ["proteccin", "protección"],
+                ["protecci?n", "protección"],
+                ["declaraci?n", "declaración"],
+                ["impuestáos", "impuestos"],
+                ["impuestáo", "impuesto"],
+                ["bienestáar", "bienestar"],
+                ["prestáaci?n", "prestación"],
+                ["pol?tico", "político"],
+                ["pol?ticos", "políticos"],
+                ["Econom?a", "Economía"],
+                ["econom?a", "economía"],
+                ["funci?n", "función"],
+                ["Das Berufsinformationszentrum", "Das Berufsinformationszentrum"],
+                ["Días ", "Das "]
+            ];
+
+            for (const [from, to] of targetedReplacements) {
+                normalized = normalized.split(from).join(to);
+            }
+
             return normalized
                 .replace(/\s+/g, " ")
                 .replace(/\s+([,.;:!?])/g, "$1")

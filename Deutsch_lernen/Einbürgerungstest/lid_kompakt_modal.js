@@ -11,14 +11,14 @@ window.lidKompaktModalData = {
  "ex": "Menschenrechte sind weltweit wichtig.",
  "ex_es": "Los derechos humanos son importantes en todo el mundo."
  },
- "rechte::Meinungsfüreiheit": {
- "ex": "Meinungsfüreiheit ist ein Grundrecht.",
- "ex_es": "La liberätad de opinión es un derecho fundamental."
- },
- "rechte::Pressefüreiheit": {
- "ex": "Pressefüreiheit schützt Journalisten.",
- "ex_es": "La liberätad de prensa protege a los periodistas."
- },
+          "rechte::Meinungsfreiheit": {
+                    "ex": "Meinungsfreiheit ist ein Grundrecht.",
+                    "ex_es": "La libertad de opinión es un derecho fundamental."
+          },
+          "rechte::Pressefreiheit": {
+                    "ex": "Pressefreiheit schützt Journalisten.",
+                    "ex_es": "La libertad de prensa protege a los periodistas."
+          },
  "rechte::Gleichberechtigung": {
  "ex": "Frauen und Männer haben Gleichberechtigung.",
  "ex_es": "Mujeres y hombres tienen igualdad de derechos.",
@@ -41,22 +41,22 @@ window.lidKompaktModalData = {
  }
  ]
  },
- "freiheiten::Religionsfüreiheit": {
- "ex": "Jeder Mensch hat Religionsfüreiheit.",
- "ex_es": "Toda persona tiene liberätad religiosa."
- },
- "freiheiten::Glaubensfüreiheit": {
- "ex": "Glaubensfüreiheit gehörtt zu den Grundrechten.",
- "ex_es": "La liberätad de creencias forma parte de los derechos fundamentales."
- },
- "freiheiten::Gewissensfüreiheit": {
- "ex": "Auch Gewissensfüreiheit ist geschützt.",
- "ex_es": "La liberätad de conciencia tambin está protegida."
- },
- "freiheiten::Versammlungsfüreiheit": {
- "ex": "Die Versammlungsfüreiheit erlaubt Demonstrationen.",
- "ex_es": "La liberätad de reunión permite manifestáaciones."
- },
+          "freiheiten::Religionsfreiheit": {
+                    "ex": "Jeder Mensch hat Religionsfreiheit.",
+                    "ex_es": "Toda persona tiene libertad religiosa."
+          },
+          "freiheiten::Glaubensfreiheit": {
+                    "ex": "Glaubensfreiheit gehört zu den Grundrechten.",
+                    "ex_es": "La libertad de creencias forma parte de los derechos fundamentales."
+          },
+          "freiheiten::Gewissensfreiheit": {
+                    "ex": "Auch Gewissensfreiheit ist geschützt.",
+                    "ex_es": "La libertad de conciencia también está protegida."
+          },
+          "freiheiten::Versammlungsfreiheit": {
+                    "ex": "Die Versammlungsfreiheit erlaubt Demonstrationen.",
+                    "ex_es": "La libertad de reunión permite manifestaciones."
+          },
  "freiheiten::Demonstration": {
  "ex": "Eine Demonstration ist in Deutschland erlaubt.",
  "ex_es": "Una manifestáacin está permitida en Alemania.",
@@ -1228,16 +1228,16 @@ window.lidKompaktModalData = {
  "ex_es": "En la oficina de empadronamiento se registra el domicilio.",
  "note": "Plural: Einwohnermelde?mter."
  },
- "verwaltung-soziales::Jugendamt": {
- "ex": "Días Jugendamt unterst?tzt Kinder, Jugendliche und Familien.",
- "ex_es": "La oficina de bienestáar juvenil apoya a ni?os, j?venes y familias.",
- "note": "Plural: Jugend?mter."
- },
- "verwaltung-soziales::Steuererkl?rung": {
- "ex": "Mit der Steuererkl?rung gibt man dem Finanzamt wichtige Angaben an.",
- "ex_es": "Con la declaraci?n de impuestáos se comunican datos importantes a la oficina tributaria.",
- "note": "Plural: Steuererkl?rungen."
- },
+          "verwaltung-soziales::Jugendamt": {
+                    "ex": "Das Jugendamt unterstützt Kinder, Jugendliche und Familien.",
+                    "ex_es": "La oficina de bienestar juvenil apoya a niños, jóvenes y familias.",
+                    "note": "Plural: Jugendämter."
+          },
+          "verwaltung-soziales::Steuererklärung": {
+                    "ex": "Mit der Steuererklärung gibt man dem Finanzamt wichtige Angaben an.",
+                    "ex_es": "Con la declaración de impuestos se comunican datos importantes a la oficina tributaria.",
+                    "note": "Plural: Steuererklärungen."
+          },
  "gesellschaft-extra::Recht": {
  "ex": "Jeder Mensch hat in Deutschland Rechte.",
  "ex_es": "Toda persona tiene derechos en Alemania.",
@@ -1253,24 +1253,24 @@ window.lidKompaktModalData = {
  "ex_es": "Muchas personas pertenecen a una iglesia.",
  "note": "Plural: Kirchen."
  },
- "gesellschaft-extra::Schutz": {
- "ex": "Der Staat muss die Grundrechte unter besonderen Schutz stellen.",
- "ex_es": "El Estado debe poner los derechos fundamentales bajo especial protecci?n."
- },
+          "gesellschaft-extra::Schutz": {
+                    "ex": "Der Staat muss die Grundrechte unter besonderen Schutz stellen.",
+                    "ex_es": "El Estado debe poner los derechos fundamentales bajo especial protección."
+          },
  "gesellschaft-extra::Meinung": {
  "ex": "Jeder Mensch darf seine Meinung sagen.",
  "ex_es": "Toda persona puede expresar su opinión.",
  "note": "Plural: Meinungen."
  },
- "gesellschaft-extra::Kindergeld": {
- "ex": "Viele Familien bekommen in Deutschland Kindergeld.",
- "ex_es": "Muchas familias reciben en Alemania una prestáaci?n por hijo."
- },
- "gesellschaft-extra::Politiker": {
- "ex": "Politiker treffen politische Entscheidungen.",
- "ex_es": "Los pol?ticos toman decisiones pol?ticas.",
- "note": "Plural: Politiker."
- },
+          "gesellschaft-extra::Kindergeld": {
+                    "ex": "Viele Familien bekommen in Deutschland Kindergeld.",
+                    "ex_es": "Muchas familias reciben en Alemania una prestación por hijo."
+          },
+          "gesellschaft-extra::Politiker": {
+                    "ex": "Politiker treffen politische Entscheidungen.",
+                    "ex_es": "Los políticos toman decisiones políticas.",
+                    "note": "Plural: Politiker."
+          },
  "beruf-wirtschaft::Unternehmen": {
  "ex": "Ein Unternehmen produziert Waren oder bietet Dienstleistungen an.",
  "ex_es": "Una empresa produce bienes u ofürece servicios.",
@@ -1310,11 +1310,11 @@ window.lidKompaktModalData = {
  "ex_es": "El Estado tiene muchas tareas.",
  "note": "Plural: Aufgaben."
  },
- "weitere-begriffe::Monarchie": {
- "ex": "In einer Monarchie ist ein K?nig oder eine K?nigin Staatsoberhaupt.",
- "ex_es": "En una monarquéa, un rey o una reina es jefe del Estado.",
- "note": "Plural: Monarchien."
- },
+          "weitere-begriffe::Monarchie": {
+                    "ex": "In einer Monarchie ist ein König oder eine Königin Staatsoberhaupt.",
+                    "ex_es": "En una monarquía, un rey o una reina es jefe del Estado.",
+                    "note": "Plural: Monarchien."
+          },
  "wiedervereinigung::Einheit": {
  "ex": "Der 3. Oktober ist der Tag der Deutschen Einheit.",
  "ex_es": "El 3 de octubre es el Día de la Unidad Alemana.",
@@ -1393,28 +1393,28 @@ window.lidKompaktModalData = {
  }
  ]
  },
- "weitere-begriffe::Grenzen": {
- "ex": "In Europa wurden viele Grenzen geöffnet.",
- "ex_es": "En Europa se abrieron muchas füronteras.",
- "note": "Pluralwort: Grenzen. Singular: die Grenze.",
+          "weitere-begriffe::Grenzen": {
+                    "ex": "In Europa wurden viele Grenzen geöffnet.",
+                    "ex_es": "En Europa se abrieron muchas fronteras.",
+                    "note": "Pluralwort: Grenzen. Singular: die Grenze.",
  "qa": [
  {
  "q": "Wie nennt man die Linien zwischen Staaten oder Gebieten?",
  "a": "Die Grenzen.",
  "q_es": "¿Cómo se llaman las líneas entre Estados o territorios?",
- "a_es": "Las füronteras."
+                                        "a_es": "Las fronteras."
  },
  {
  "q": "Welcher Begriff passt zu Trennlinien zwischen Ländern?",
  "a": "Die Grenzen.",
  "q_es": "¿Qué término corresponde a las líneas divisorias entre países?",
- "a_es": "Las füronteras."
+                                        "a_es": "Las fronteras."
  },
  {
  "q": "Was wurde in Teilen Europas für Reisen und Handel einfacher, weil viele Kontrollen abgebaut wurden?",
  "a": "Die Grenzen.",
  "q_es": "¿Qué se volvió más fácil en partes de Europa para viajar y comerciar porquée se redujeron muchos controles?",
- "a_es": "Las füronteras."
+                                        "a_es": "Las fronteras."
  }
  ]
  },
