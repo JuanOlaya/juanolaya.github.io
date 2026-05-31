@@ -269,3 +269,26 @@ json/
 
 1. Address verbs missing `praesens` conjugation tables
 2. Consider reviewing remaining A2 verbs for example quality
+
+### 16. Verb Reorganization, Translation Updates, and Theme Splitting
+**Date**: 2026-05-31
+
+- **Translation Updates**:
+  - Updated `fernsehen` Spanish translation card view to be split on two lines: `"card_es": "ver, televisión"`.
+  - Verified `stehen` Spanish translations: card shows `"estar de pie, estar situado"` and modal shows `"estar de pie, estar situado, figurar escrito"`.
+- **Athletik Theme Relocation**:
+  - Moved `Athletik` theme (containing `rennen`, `reiten`, `treten`, `schießen`) from level `A1.1` to the bottom of level `A2.2` as Group 30.
+  - Updated card files for these 4 verbs to level `A2.2`.
+- **Routine Theme Splitting**:
+  - Split the "Routine" theme into "Morgenroutine" and "Abendroutine".
+  - Updated `A1_1_group_5.json` to theme "Morgenroutine" containing: `aufwachen`, `aufstehen`, `frühstücken`, `gehen`, and `arbeiten`.
+  - Moved `gehen` from "Grundlagen" (`A1_1_group_1.json`) to "Morgenroutine".
+  - Re-used `A1_1_group_16.json` (vacated by Athletik) to define the new "Abendroutine" theme containing: `mittagessen`, `abendessen`, and `einschlafen`.
+  - Updated verb card files for both routines to match their new themes.
+- **Kontakt Theme Creation**:
+  - Created new theme "Kontakt" in level `A1.2` as Group 31.
+  - Moved `vertrauen`, `raten`, and `begegnen` from the "Social" theme (`A1_2_group_16.json`) to the new "Kontakt" theme.
+  - Updated card files for these 3 verbs to theme "Kontakt".
+- **Metadata and System Sync**:
+  - Updated physical level mappings in `script.js` to account for the new group counts: A1.2 count is 17 (groups up to 31), A2.2 count is 18 (groups up to 30), A1.1 count remains 16.
+  - Ran index update and card synchronization tools to align everything.
