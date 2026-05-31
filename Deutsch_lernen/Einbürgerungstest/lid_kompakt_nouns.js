@@ -1040,7 +1040,7 @@
                                         "art": "die / -",
                                         "w": "Rechtsprechung / rechtsprechende(n)",
                                         "e": "\u2696\ufe0f",
-                                        "tr": "poder judicial / jurisdiccional (queééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée juzga)",
+                                        "tr": "poder judicial / jurisdiccional (que juzga)",
                                         "important": true
                               },
                               {
@@ -1130,7 +1130,7 @@
                     ]
           },
           {
-                    "id": "strafürecht",
+                    "id": "strafrecht",
                     "title": "Strafrecht",
                     "title_es": "Derecho penal",
                     "icon": "\u2696\ufe0f",
@@ -1174,7 +1174,7 @@
                                         "art": "der/die",
                                         "w": "Erwerbst\u00e4tige",
                                         "e": "\ud83d\udcbc",
-                                        "tr": "persona queééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééée trabaja / persona empleada"
+                                        "tr": "persona que trabaja / persona empleada"
                               },
                               {
                                         "art": "der",
@@ -1193,7 +1193,7 @@
                               {
                                         "art": "der",
                                         "w": "Willen",
-                                        "e": "??",
+                                        "e": "\u270a",
                                         "tr": "voluntad"
                               }
                     ]
@@ -1234,7 +1234,7 @@
                                         "art": "die",
                                         "w": "Lehrstellensuche",
                                         "e": "\ud83d\udd0d",
-                                        "tr": "búsqueéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééeda de plaza de formación profesional"
+                                        "tr": "búsqueda de plaza de formación profesional"
                               }
                     ]
           },
@@ -1312,7 +1312,7 @@
                                         "art": "das",
                                         "w": "Pfarramt",
                                         "e": "\ud83d\udccd",
-                                        "tr": "oficina parroqueéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééial"
+                                        "tr": "oficina parroquial"
                               },
                               {
                                         "art": "die",
