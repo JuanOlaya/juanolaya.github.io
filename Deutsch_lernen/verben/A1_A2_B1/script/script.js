@@ -17,11 +17,11 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
  let physicalLevelMap = {
  'A1': [
- { key: 'A1_1', count: 16, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] },
+ { key: 'A1_1', count: 15, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] },
  { key: 'A1_2', count: 17, fileNumbers: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31] }
  ],
  'A2': [
- { key: 'A2_1', count: 12, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
+ { key: 'A2_1', count: 13, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] },
  { key: 'A2_2', count: 18, fileNumbers: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30] }
  ],
  'B1': [{ key: 'B1_1', count: 26, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26] }],
