@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const baseDir = path.join(__dirname, 'json');
+const baseDir = path.join(__dirname, '..', 'json');
 const indexFile = path.join(baseDir, 'verbs_index.json');
 const outputDir = path.join(baseDir, 'conjugations_bulk');
 

@@ -181,7 +181,9 @@
             font-weight: 700;
             color: #CBF6DB;
             /* Pale Mint Green from Design System */
-            white-space: nowrap;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
         .noun-tag {
             display: inline-flex;
@@ -268,7 +270,7 @@
 
         .word-wrapper {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 10px;
             flex-wrap: wrap;
         }
@@ -295,7 +297,9 @@
             font-size: 1.1rem;
             font-weight: 700;
             color: white;
-            white-space: nowrap;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
 
         /* Translation Cell Styling (Spanish) */
