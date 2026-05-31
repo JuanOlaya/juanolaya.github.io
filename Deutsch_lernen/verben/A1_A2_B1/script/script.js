@@ -2709,64 +2709,64 @@ async function loadBackgroundData() {
  window.openThemeModal = openThemeModal;
 
  // --- TTS FUNCTION ---
- window.speak = function (text, lang = 'de-DE', rate = 0.9) {
- if ('speechSynthesis' in window) {
- // Cancel any previous speech
- window.speechSynthesis.cancel();
+ function speak(text, lang = 'de-DE', rate = 0.9) {
+   if ('speechSynthesis' in window) {
+     // Cancel previous and resume in case browser is in stuck paused state
+     window.speechSynthesis.cancel();
+     if (window.speechSynthesis.paused) {
+       window.speechSynthesis.resume();
+     }
 
- const voices = window.speechSynthesis.getVoices();
+     // Small delay prevents immediate cancellation bug in Chromium-based browsers
+     setTimeout(() => {
+       const voices = window.speechSynthesis.getVoices();
 
- // Helper to get best voice
- const getVoice = () => {
- return voices.find(voice => voice.lang === lang && voice.name.includes('Google')) ||
- voices.find(voice => voice.lang === lang && voice.name.includes('Microsoft')) ||
- voices.find(voice => voice.lang === lang) ||
- voices.find(voice => voice.lang === lang.replace('-', '_')) ||
- voices.find(voice => voice.lang.startsWith(lang.substring(0, 2)));
- };
+       // Helper to get best voice
+       const getVoice = () => {
+         return voices.find(voice => voice.lang === lang && voice.name.includes('Google')) ||
+                voices.find(voice => voice.lang === lang && voice.name.includes('Microsoft')) ||
+                voices.find(voice => voice.lang === lang) ||
+                voices.find(voice => voice.lang === lang.replace('-', '_')) ||
+                voices.find(voice => voice.lang.startsWith(lang.substring(0, 2)));
+       };
 
- const targetVoice = getVoice();
+       const targetVoice = getVoice();
 
- // Helper to create and speak utterance
- const speakUtterance = (txt, pitchVal, rateVal) => {
- const u = new SpeechSynthesisUtterance(txt);
- u.rate = rateVal;
- u.pitch = pitchVal;
- if (targetVoice) {
- u.voice = targetVoice;
- u.lang = targetVoice.lang;
- } else {
- u.lang = lang;
+       // Helper to create and speak utterance
+       const speakUtterance = (txt, pitchVal, rateVal) => {
+         const u = new SpeechSynthesisUtterance(txt);
+         u.rate = rateVal;
+         u.pitch = pitchVal;
+         if (targetVoice) {
+           u.voice = targetVoice;
+           u.lang = targetVoice.lang;
+         } else {
+           u.lang = lang;
+         }
+         window.speechSynthesis.speak(u);
+       };
+
+       const isQuestion = text.trim().endsWith('?');
+
+       // Experimental: For questions, split the last word to force pitch rise
+       if (isQuestion && text.trim().includes(' ')) {
+         const parts = text.trim().lastIndexOf(' ');
+         const firstPart = text.substring(0, parts);
+         const lastPart = text.substring(parts + 1);
+
+         speakUtterance(firstPart, 1.0, rate);
+         speakUtterance(lastPart, 1.3, rate);
+       } else if (isQuestion) {
+         speakUtterance(text, 1.2, rate);
+       } else {
+         speakUtterance(text, 1.0, rate);
+       }
+     }, 50);
+   } else {
+     console.error("Speech synthesis not supported in this browser.");
+   }
  }
- window.speechSynthesis.speak(u);
- };
-
- const isQuestion = text.trim().endsWith('?');
-
- // Experimental: For questions, split the last word to force pitch rise
- if (isQuestion && text.trim().includes(' ')) {
- const parts = text.trim().lastIndexOf(' ');
- const firstPart = text.substring(0, parts); // e.g. "Stimmt"
- const lastPart = text.substring(parts + 1); // e.g. "das?"
-
- // Speak first part normal
- speakUtterance(firstPart, 1.0, rate);
-
- // Speak last part higher
- // Using 1.3 pitch for noticeable rise
- speakUtterance(lastPart, 1.3, rate);
- } else if (isQuestion) {
- // Single word question, just pitch up
- speakUtterance(text, 1.2, rate);
- } else {
- // Normal Statement
- speakUtterance(text, 1.0, rate);
- }
-
- } else {
- console.error("Speech synthesis not supported in this browser.");
- }
- };
+ window.speak = speak;
 
  // --- UPDATED MODAL FUNCTION WITH LAZY LOADING ---
  window.openModalForVerb = async function (verb, options = {}) {
@@ -4554,31 +4554,7 @@ async function loadWortfamilieIndex() {
  clearSearchBtn.addEventListener('click', clearSearch);
  }
 
- // --- TTS Function ---
- function speak(text, lang = 'de-DE', rate = 0.9) {
- if ('speechSynthesis' in window) {
- // Cancel any previous speech
- window.speechSynthesis.cancel();
-
- const utterance = new SpeechSynthesisUtterance(text);
- utterance.lang = lang;
- utterance.rate = rate;
-
- // Optional: Find a specific German voice
- const voices = window.speechSynthesis.getVoices();
- const germanVoice = voices.find(voice => voice.lang === 'de-DE');
- if (germanVoice) {
- utterance.voice = germanVoice;
- }
-
- window.speechSynthesis.speak(utterance);
- } else {
- console.error("Speech synthesis not supported in this browser.");
- }
- }
- window.speak = speak;
-
- // Helper to find verb location (needed for WF matches that weren't in direct search)
+  // Helper to find verb location (needed for WF matches that weren't in direct search)
  function findVerbLevelAndGroup(verbName) {
  for (const levelKey in verbGroupsByLevel) {
  const groups = verbGroupsByLevel[levelKey];
