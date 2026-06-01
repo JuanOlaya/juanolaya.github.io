@@ -3464,6 +3464,12 @@ async function loadBackgroundData() {
  const perfektKonjugation = perfektPartizip && perfektPartizip !== '---'
  ? `${auxVerb} ${perfektPartizip}`
  : auxVerb;
+ 
+ let perfektConjugationCell = perfektKonjugation;
+  if (perfektConjugationCell) {
+    const safeConjugation = perfektConjugationCell.replace(/'/g, "\\'");
+    perfektConjugationCell = `<span class="german-word conjugation-cell-speak" onclick="event.stopPropagation(); window.speak('${safeConjugation}')" title="Aussprache hören" style="cursor: pointer; display: inline-block;">${perfektConjugationCell}</span>`;
+  }
 
  // Add special classes for er/sie/es rows
  let rowClass = '';
@@ -3479,7 +3485,7 @@ async function loadBackgroundData() {
  rowClass = ' class="pronoun-row-Sie-formal"';
  }
 
- perfektTableHTML += `<tr${rowClass}><td>${pronounCell}</td><td class="aux-verb">${perfektKonjugation}</td><td>${exampleCell}</td></tr>`;
+ perfektTableHTML += `<tr${rowClass}><td>${pronounCell}</td><td class="aux-verb">${perfektConjugationCell}</td><td>${exampleCell}</td></tr>`;
  }
 
  perfektTableHTML += '</table>';
@@ -3544,6 +3550,11 @@ async function loadBackgroundData() {
  } else if (key === 'Sie (formal)') {
  rowClass = ' class="pronoun-row-Sie-formal"';
  }
+ 
+  if (conjugationCell) {
+    const safeConjugation = conjugationCell.replace(/'/g, "\\'");
+    conjugationCell = `<span class="german-word conjugation-cell-speak" onclick="event.stopPropagation(); window.speak('${safeConjugation}')" title="Aussprache hören" style="cursor: pointer; display: inline-block;">${conjugationCell}</span>`;
+  }
 
  praeteritumTableHTML += `<tr${rowClass}><td>${pronounCell}</td><td>${conjugationCell}</td><td>${exampleCell}</td></tr>`;
  }
@@ -3596,7 +3607,12 @@ async function loadBackgroundData() {
  exampleCell += `</div>`;
  }
 
- konjunktivTableHTML += `<tr><td>${pronounCell}</td><td>${conjugation || ''}</td><td>${exampleCell}</td></tr>`;
+  let conjugationCell = conjugation || '';
+  if (conjugationCell) {
+    const safeConjugation = conjugationCell.replace(/'/g, "\\'");
+    conjugationCell = `<span class="german-word conjugation-cell-speak" onclick="event.stopPropagation(); window.speak('${safeConjugation}')" title="Aussprache hören" style="cursor: pointer; display: inline-block;">${conjugationCell}</span>`;
+  }
+  konjunktivTableHTML += `<tr><td>${pronounCell}</td><td>${conjugationCell}</td><td>${exampleCell}</td></tr>`;
  }
  }
 
