@@ -2590,6 +2590,7 @@
                 { article: "die (pl)", word: "Briefmarken", emoji: "📮", translation_es: "sellos postales", translation_en: "stamps", example_de: "Ich kaufe drei Briefmarken.", example_es: "Compro tres sellos postales." },
                 { article: "der", word: "Eintritt", emoji: "🎟️", translation_es: "entrada / ingreso", translation_en: "admission / entry", example_de: "Der Eintritt ist frei.", example_es: "La entrada es gratis." },
                 { article: "der", word: "Erhalt", emoji: "📥", translation_es: "recepción / obtención", translation_en: "receipt", example_de: "Bitte bestätigen Sie den Erhalt der E-Mail.", example_es: "Por favor, confirme la recepción del correo." },
+                { article: "die", word: "Bewegung", emoji: "🏃", translation_es: "movimiento", translation_en: "movement", example_de: "Bewegung ist gesund.", example_es: "El movimiento es saludable." },
                 { article: "der", word: "Buchstabe", emoji: "🔤", translation_es: "letra", translation_en: "letter", example_de: "Dieser Buchstabe ist schwierig.", example_es: "Esta letra es difícil." },
                 { article: "der", word: "Chef", emoji: "🧑‍💼", translation_es: "jefe", translation_en: "boss", example_de: "Der Chef ist heute im Büro.", example_es: "El jefe está hoy en la oficina." },
                 { article: "die", word: "Firma", emoji: "🏢", translation_es: "empresa", translation_en: "company", example_de: "Die Firma ist sehr groß.", example_es: "La empresa es muy grande." },
@@ -3342,7 +3343,7 @@
                 title_es: "Correo",
                 title_en: "Mail",
                 level: "A1",
-                nouns: pickThemeNouns(["der|brief", "die|briefmarke", "der|absender", "die|anrede", "der|empfanger"])
+                nouns: pickThemeNouns(["der|brief", "die|briefmarke", "die (pl)|briefmarken", "der|absender", "die|anrede", "der|empfanger", "der|erhalt"])
             },
             {
                 id: "pruefung",
@@ -3868,7 +3869,7 @@
                 title_es: "Eventos",
                 title_en: "Events",
                 level: "A1-B1",
-                nouns: pickThemeNouns(["die|veranstaltung", "die|eintrittskarte", "das|gewinnspiel"])
+                nouns: pickThemeNouns(["die|veranstaltung", "der|eintritt", "die|eintrittskarte", "das|gewinnspiel"])
             },
             {
                 id: "freizeit",
@@ -3877,6 +3878,14 @@
                 title_en: "Leisure",
                 level: "A1-B1",
                 nouns: pickThemeNouns(["der|verein", "die (pl)|freunde", "der|feierabend"])
+            },
+            {
+                id: "bewegung",
+                title: "Bewegung",
+                title_es: "Movimiento",
+                title_en: "Movement",
+                level: "A1-B1",
+                nouns: pickThemeNouns(["die|bewegung"])
             },
             {
                 id: "sport",
@@ -4255,6 +4264,7 @@
             spielzeug: "A1",
             spielplatz: "A1",
             musik: "A1",
+            bewegung: "A1",
             sport: "A1",
             kalender: "A1",
             uhrzeit: "A1",

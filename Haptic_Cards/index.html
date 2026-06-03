@@ -685,6 +685,14 @@
                          </div>
                      </div>
  
+                     <!-- Application Context Section -->
+                     <div class="mb-4 pb-4 border-b border-gray-200">
+                         <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Application Context</h3>
+                         <div class="flex flex-wrap gap-1 mt-2"> 
+                            ${generalUseCaseTagsHTML}
+                         </div>
+                     </div>
+
                      <!-- Use Cases Section -->
                      <div class="mb-4 flex-grow pb-4 border-b border-gray-200">
                          <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Use Cases</h3>
@@ -692,12 +700,6 @@
                          <div class="flex flex-wrap gap-1 mt-2"> 
                             ${useCaseTagsHTML}
                          </div>
-                         ${generalUseCaseTagsHTML ? `
-                         <div class="mt-2 flex items-center gap-1.5 flex-wrap">
-                            <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">General:</span>
-                            ${generalUseCaseTagsHTML}
-                         </div>
-                         ` : ''}
                      </div>
 
                     <!-- Reference Section -->
