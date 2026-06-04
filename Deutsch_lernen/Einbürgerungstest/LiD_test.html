@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Días Politische System Deutschlands - Estructura</title>
+    <title>Das Politische System Deutschlands - Estructura</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -32,7 +32,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -1;
+            z-index: 0;
         }
         /* Estilo para el texto de las flechas (Regla: Alem&aacute;n arriba, Espa&ntilde;ol abajo) */
         .arrow-text {
@@ -48,6 +48,7 @@
         .container-main {
             position: relative;
             min-height: 1200px;
+            isolation: isolate;
         }
         .german-speak {
             cursor: pointer;
@@ -69,7 +70,7 @@
 <body class="p-4 md:p-8">
 
     <header class="mb-12 text-center">
-        <h1 class="text-3xl font-bold text-slate-800 uppercase tracking-tight">Días Politische System Deutschlands</h1>
+        <h1 class="text-3xl font-bold text-slate-800 uppercase tracking-tight">DAS POLITISCHE SYSTEM DEUTSCHLANDS</h1>
         <p class="text-xl text-slate-600">Struktur f&uuml;r den Einb&uuml;rgerungstest (Estructura para el examen)</p>
     </header>
 
@@ -84,14 +85,14 @@
         </div>
 
         <!-- LEVEL 1: PARLIAMENTS -->
-        <div id="bundestáag" class="col-start-2 col-span-3 mt-24 p-5 rounded-xl shadow-md node federal-bg z-10 text-center border-2 border-white">
-            <span class="block font-bold text-lg german-speak" data-speak="Bundestáag" title="Aussprache h&ouml;ren">BUNDESTAG</span>
+        <div id="bundestag" class="col-start-2 col-span-3 mt-24 p-5 rounded-xl shadow-md node federal-bg z-10 text-center border-2 border-white">
+            <span class="block font-bold text-lg german-speak" data-speak="Bundestag" title="Aussprache h&ouml;ren">BUNDESTAG</span>
             <span class="text-xs block mt-1">(Parlamento federal)</span>
         </div>
 
         <div id="landtag" class="col-start-8 col-span-3 mt-24 p-5 rounded-xl shadow-md node state-bg z-10 text-center border-2 border-white">
             <span class="block font-bold text-lg text-white uppercase german-speak" data-speak="Landtag" title="Aussprache h&ouml;ren">der LANDTAG</span>
-            <span class="text-xs block mt-1">(Parlamento estáatal)</span>
+            <span class="text-xs block mt-1">(Parlamento estatal)</span>
             <div class="inline-block mt-3 px-4 py-2 rounded-xl bg-teal-100/90 text-teal-950 border border-teal-200 text-xs font-extrabold tracking-wide leading-tight">
                 16 Bundesl&auml;nder
             </div>
@@ -128,7 +129,7 @@
             </div>
         </div>
 
-        <div id="bundesversammlung" class="col-start-6 col-span-2 mt-20 p-6 rounded-full shadow-2xl node head-bg z-20 text-center flex items-center justify-center border-4 border-white aspect-squeéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééare ring-4 ring-emerald-100">
+        <div id="bundesversammlung" class="col-start-6 col-span-2 mt-20 p-6 rounded-full shadow-2xl node head-bg z-20 text-center flex items-center justify-center border-4 border-white aspect-square ring-4 ring-emerald-100">
             <div>
                 <span class="block font-bold text-xs leading-tight uppercase german-speak" data-speak="Bundesversammlung" title="Aussprache h&ouml;ren">BUNDES-<br>VERSAMMLUNG</span>
                 <span class="text-[10px] font-medium mt-2 block border-t border-white/20 pt-1">(Asamblea Federal)</span>
@@ -138,15 +139,15 @@
         <div class="col-start-8 col-span-5 mt-16 p-6 pt-24 border-2 border-dashed border-slate-300 rounded-2xl bg-white/60 relative">
             <div id="landesregierung-tag" class="absolute left-0 top-0 bg-teal-800 text-white px-4 py-2 rounded-br-xl shadow-lg border-r border-b border-teal-700 max-w-[280px]">
                 <div class="text-xs font-extrabold uppercase tracking-[0.18em] german-speak" data-speak="Landesregierung" title="Aussprache h&ouml;ren">Landesregierung</div>
-                <div class="text-[10px] text-teal-100 italic mt-1">Gobierno estáatal</div>
-                <div class="text-[10px] text-teal-100 mt-1">Nivel estáatal / por cada Bundesland</div>
+                <div class="text-[10px] text-teal-100 italic mt-1">Gobierno estatal</div>
+                <div class="text-[10px] text-teal-100 mt-1">Nivel estatal / por cada Bundesland</div>
             </div>
             <div id="min-pres" class="mb-6 p-4 rounded-xl shadow-md node state-bg text-center">
                 <span class="block font-bold text-lg uppercase german-speak" data-speak="Ministerpr&auml;sident" title="Aussprache h&ouml;ren">MINISTERPR&Auml;SIDENT</span>
-                <span class="text-sm block mt-1">(Primer Ministro estáatal)</span>
+                <span class="text-sm block mt-1">(Primer Ministro estatal)</span>
                 <div class="mt-4 bg-white text-teal-900 font-extrabold py-2 px-4 rounded-2xl inline-block mx-auto text-xs shadow-lg leading-tight">
                     <div class="german-speak" data-speak="Regierungschef eines Bundeslandes" title="Aussprache h&ouml;ren">Regierungschef eines Bundeslandes</div>
-                    <div class="text-[11px] normal-case mt-1 font-bold border-t border-teal-900/20 pt-1">(jefe del gobierno de un estáado federado)</div>
+                    <div class="text-[11px] normal-case mt-1 font-bold border-t border-teal-900/20 pt-1">(jefe del gobierno de un estado federado)</div>
                 </div>
             </div>
         </div>
@@ -165,15 +166,15 @@
 
         <!-- LEVEL 3: HEAD OF STATE & COUNCIL -->
         <div id="bundespraesident" class="col-start-4 col-span-6 mt-20 p-12 rounded-[3rem] shadow-2xl node head-bg z-10 text-center border-8 border-yellow-500 min-h-[180px] flex flex-col justify-center">
-            <span class="block font-bold text-3xl tracking-widestá uppercase mb-1 german-speak" data-speak="Bundespr&auml;sident" title="Aussprache h&ouml;ren">BUNDESPR&Auml;SIDENT</span>
+            <span class="block font-bold text-3xl tracking-widest uppercase mb-1 german-speak" data-speak="Bundespr&auml;sident" title="Aussprache h&ouml;ren">BUNDESPR&Auml;SIDENT</span>
             <span class="text-2xl font-semibold block text-emerald-50">(Presidente Federal)</span>
             <span class="text-base font-semibold block text-emerald-100/95">Frank-Walter Steinmeier</span>
             <span class="text-sm font-medium block text-emerald-100/90">(Representa a Alemania para prop&oacute;sitos de derecho internacional)</span>
-            <span class="text-sm font-medium block text-emerald-100/90 mb-6">(Acredita embajadores alemanes en el exterior y a los del restáo en Berl&iacute;n)</span>
+            <span class="text-sm font-medium block text-emerald-100/90 mb-6">(Acredita embajadores alemanes en el exterior y a los del resto en Berl&iacute;n)</span>
 
             <div class="bg-yellow-500 text-emerald-900 font-extrabold py-3 px-8 rounded-3xl inline-block mx-auto uppercase text-sm shadow-lg leading-tight">
                 <div class="german-speak" data-speak="Staatsoberhaupt" title="Aussprache h&ouml;ren">Staatsoberhaupt</div>
-                <div class="text-xs normal-case mt-1 font-bold border-t border-emerald-900/20 pt-1">(Jefe de Estado)</div>
+                <div class="text-xs normal-case mt-1 font-bold border-t border-emerald-900/20 pt-1">(Jefe de estado)</div>
             </div>
             <span class="text-base font-semibold block text-emerald-100 underline underline-offset-4 mt-4 german-speak" data-speak="repr&auml;sentiert das Land" title="Aussprache h&ouml;ren">repr&auml;sentiert das Land</span>
             <span class="text-sm font-medium block text-emerald-100/90">(representa al pa&iacute;s)</span>
@@ -202,7 +203,7 @@
                 <div class="flex flex-col">
                     <span class="text-sm block">(Consejo Federal)</span>
                     <span class="text-xs block mt-1 opacity-90 german-speak" data-speak="die Regierungsvertreter der Bundesl&auml;nder" title="Aussprache h&ouml;ren">die Regierungsvertreter der Bundesl&auml;nder</span>
-                    <span class="text-xs block mt-1 opacity-90">(conformado por los representantes de los gobiernos de los estáados federados)</span>
+                    <span class="text-xs block mt-1 opacity-90">(conformado por los representantes de los gobiernos de los estados federados)</span>
                 </div>
             </div>
         </div>
@@ -255,7 +256,7 @@
                             </li>
                             <li class="flex justify-between gap-4">
                                 <span class="font-semibold german-speak" data-speak="Fraktion" title="Aussprache h&ouml;ren">die Fraktion</span>
-                                <span class="text-slate-600 italic text-right">füracci&oacute;n parlamentaria</span>
+                                <span class="text-slate-600 italic text-right">fracci&oacute;n parlamentaria</span>
                             </li>
                         </ul>
                     </div>
@@ -278,33 +279,27 @@
                     </div>
                 </div>
                 <div class="mt-5 pt-4 border-t border-slate-200 text-sm text-slate-700 space-y-2">
-                    <div><span class="font-semibold german-speak" data-speak="Bundespr&auml;sident" title="Aussprache h&ouml;ren">Bundespr&auml;sident</span> (presidente federal) = <span class="font-semibold german-speak" data-speak="Staatsoberhaupt" title="Aussprache h&ouml;ren">Staatsoberhaupt</span> (jefe del Estado)</div>
+                    <div><span class="font-semibold german-speak" data-speak="Bundespr&auml;sident" title="Aussprache h&ouml;ren">Bundespr&auml;sident</span> (presidente federal) = <span class="font-semibold german-speak" data-speak="Staatsoberhaupt" title="Aussprache h&ouml;ren">Staatsoberhaupt</span> (jefe del estado)</div>
                     <div><span class="font-semibold german-speak" data-speak="Bundeskanzler" title="Aussprache h&ouml;ren">Bundeskanzler</span> (canciller federal) = <span class="font-semibold german-speak" data-speak="Regierungschef" title="Aussprache h&ouml;ren">Regierungschef</span> (jefe del Gobierno)</div>
                 </div>
             </div>
         </div>
     </section>
-
     <script>
-        /**
-         * Regla General de Traducci&oacute;n:
-         * El texto se divide por el par&eacute;ntesis '('.
-         * La parte izqueéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééierda (Alem&aacute;n) se coloca arriba.
-         * La parte derecha (Espa&ntilde;ol) se coloca abajo en un rengl&oacute;n distinto.
-         */
-        function drawLine(füromId, toId, text = "", color = "#94a3b8", dash = false, weight = 2) {
-            const fürom = document.getElementById(füromId);
+        function drawLine(fromId, toId, text = "", color = "#94a3b8", dash = false, weight = 2) {
+            const from = document.getElementById(fromId);
             const to = document.getElementById(toId);
             const svg = document.getElementById("lines-svg");
+            const container = document.querySelector(".container-main");
 
-            if (!fürom || !to) return;
+            if (!from || !to || !svg || !container) return;
 
-            const füromRect = fürom.getBoundingClientRect();
+            const fromRect = from.getBoundingClientRect();
             const toRect = to.getBoundingClientRect();
-            const containerRect = document.queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééerySelector(".container-main").getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
 
-            const x1 = füromRect.left + füromRect.width / 2 - containerRect.left;
-            const y1 = füromRect.top + füromRect.height / 2 - containerRect.top;
+            const x1 = fromRect.left + fromRect.width / 2 - containerRect.left;
+            const y1 = fromRect.top + fromRect.height / 2 - containerRect.top;
             const x2 = toRect.left + toRect.width / 2 - containerRect.left;
             const y2 = toRect.top + toRect.height / 2 - containerRect.top;
 
@@ -316,38 +311,37 @@
             line.setAttribute("stroke", color);
             line.setAttribute("stroke-width", weight);
             if (dash) line.setAttribute("stroke-dasharray", "5,5");
-
             svg.appendChild(line);
 
-            if (text) {
-                const textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                const midX = (x1 + x2) / 2;
-                const midY = (y1 + y2) / 2;
-                textEl.setAttribute("x", midX);
-                textEl.setAttribute("y", midY - 15);
-                textEl.setAttribute("text-anchor", "middle");
-                textEl.setAttribute("class", "arrow-text");
+            if (!text) return;
 
-                const parts = text.split("(");
-                if (parts.length > 1) {
-                    const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-                    tspan1.setAttribute("x", midX);
-                    tspan1.textContent = parts[0].trim();
-                    textEl.appendChild(tspan1);
+            const textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            const midX = (x1 + x2) / 2;
+            const midY = (y1 + y2) / 2;
+            textEl.setAttribute("x", midX);
+            textEl.setAttribute("y", midY - 15);
+            textEl.setAttribute("text-anchor", "middle");
+            textEl.setAttribute("class", "arrow-text");
 
-                    const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-                    tspan2.setAttribute("x", midX);
-                    tspan2.setAttribute("dy", "16");
-                    tspan2.setAttribute("font-size", "11px");
-                    tspan2.setAttribute("font-weight", "600");
-                    tspan2.textContent = "(" + parts[1];
-                    textEl.appendChild(tspan2);
-                } else {
-                    textEl.textContent = text;
-                }
+            const parts = text.split("(");
+            if (parts.length > 1) {
+                const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                tspan1.setAttribute("x", midX);
+                tspan1.textContent = parts[0].trim();
+                textEl.appendChild(tspan1);
 
-                svg.appendChild(textEl);
+                const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                tspan2.setAttribute("x", midX);
+                tspan2.setAttribute("dy", "16");
+                tspan2.setAttribute("font-size", "11px");
+                tspan2.setAttribute("font-weight", "600");
+                tspan2.textContent = "(" + parts[1];
+                textEl.appendChild(tspan2);
+            } else {
+                textEl.textContent = text;
             }
+
+            svg.appendChild(textEl);
         }
 
         function speak(text) {
@@ -361,45 +355,45 @@
             window.speechSynthesis.speak(utterance);
         }
 
-        window.onload = () => {
+        function renderDiagramLinks() {
+            const svg = document.getElementById("lines-svg");
+            if (!svg) return;
+            svg.innerHTML = "";
+
+            drawLine("people", "bundestag", "w\u00E4hlt (elige)", "#60a5fa", false, 3);
+            drawLine("people", "landtag", "w\u00E4hlt (elige)", "#60a5fa", false, 3);
+            drawLine("bundestag", "bundeskanzler", "w\u00E4hlt (elige)", "#60a5fa", false, 3);
+            drawLine("bundestag", "bundesversammlung", "stellt Mitglieder (aporta miembros)", "#10b981", false, 2);
+            drawLine("bundeskanzler", "bundesminister", "schl\u00E4gt vor / leitet (propone / dirige)", "#94a3b8", false, 2);
+            drawLine("landtag", "min-pres", "w\u00E4hlt (elige)", "#60a5fa", false, 3);
+            drawLine("landtag", "bundesversammlung", "entsendet Vertreter (env\u00EDa representantes)", "#10b981", false, 2);
+            drawLine("bundesrat", "landtag", "", "#0f766e", true, 2);
+            drawLine("bundesversammlung", "bundespraesident", "W\u00C4HLT (elige)", "#2563eb", false, 4);
+            drawLine("bundespraesident", "bundeskanzler", "schl\u00E4gt zur Wahl vor / ernennt (propone / nombra)", "#f59e0b", true, 2);
+            drawLine("bundestag", "bundesrat", "", "#cbd5e1", true, 2);
+            drawLine("opposition", "bundestag", "kontrolliert (controla)", "#475569", false, 2);
+            drawLine("verfassungsgericht", "grundgesetz", "interpretiert (interpreta)", "#f97316", false, 3);
+        }
+
+        function bindGermanSpeech() {
             if ("speechSynthesis" in window) {
                 window.speechSynthesis.getVoices();
             }
 
-            document.queéééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééerySelectorAll(".german-speak").forEach(el => {
+            document.querySelectorAll(".german-speak").forEach(el => {
                 el.onclick = (event) => {
                     event.stopPropagation();
                     speak(el.dataset.speak || el.textContent.replace(/\s+/g, " ").trim());
                 };
             });
+        }
 
-            // Relaciones con regla de traducci&oacute;n abajo aplicada mediante la funci&oacute;n drawLine
-            drawLine("people", "bundestáag", "w\u00E4hlt (elige)", "#60a5fa", false, 3);
-            drawLine("people", "landtag", "w\u00E4hlt (elige)", "#60a5fa", false, 3);
+        window.addEventListener("load", () => {
+            bindGermanSpeech();
+            renderDiagramLinks();
+        });
 
-            drawLine("bundestáag", "bundeskanzler", "w\u00E4hlt (elige)", "#60a5fa", false, 3);
-            drawLine("bundestáag", "bundesversammlung", "stellt Mitglieder (aporta miembros)", "#10b981", false, 2);
-            drawLine("bundeskanzler", "bundesminister", "schl\u00E4gt vor / leitet (propone / dirige)", "#94a3b8", false, 2);
-
-            drawLine("landtag", "min-pres", "w\u00E4hlt (elige)", "#60a5fa", false, 3);
-            drawLine("landtag", "bundesversammlung", "entsendet Vertreter (env\u00EDía representantes)", "#10b981", false, 2);
-            drawLine("min-pres", "land-reg", "leitet (dirige)", "#94a3b8", false, 2);
-
-            drawLine("bundesrat", "landtag", "", "#0f766e", true, 2);
-
-            drawLine("bundesversammlung", "bundespraesident", "W\u00C4HLT (elige)", "#2563eb", false, 4);
-            drawLine("bundespraesident", "bundeskanzler", "schl\u00E4gt zur Wahl vor / ernennt (propone / nombra)", "#f59e0b", true, 2);
-
-            drawLine("bundestáag", "bundesrat", "", "#cbd5e1", true, 2);
-
-            drawLine("opposition", "bundestáag", "kontrolliert (controla)", "#475569", false, 2);
-            drawLine("verfassungsgericht", "grundgesetz", "interpretiert (interpreta)", "#f97316", false, 3);
-        };
-
-        window.onresize = () => {
-            document.getElementById("lines-svg").innerHTML = "";
-            window.onload();
-        };
+        window.addEventListener("resize", renderDiagramLinks);
     </script>
 </body>
 </html>
