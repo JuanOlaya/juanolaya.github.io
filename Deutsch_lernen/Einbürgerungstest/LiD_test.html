@@ -183,8 +183,8 @@
         <div class="col-start-4 col-span-6 mt-4 z-10">
             <div class="flex justify-around gap-4 text-center">
                 <div class="text-slate-800 font-bold leading-tight">
-                    <div class="german-speak" data-speak="entsendet Vertreter" title="Aussprache h&ouml;ren">entsendet Vertreter</div>
-                    <div class="text-sm font-semibold">(env&iacute;a representantes)</div>
+                    <div class="german-speak" data-speak="Regierungsvertreter" title="Aussprache h&ouml;ren">Regierungsvertreter</div>
+                    <div class="text-sm font-semibold">(representantes del gobierno)</div>
                 </div>
                 <div class="text-slate-800 font-bold leading-tight">
                     <div class="german-speak" data-speak="wirkt mit" title="Aussprache h&ouml;ren">wirkt mit</div>
@@ -344,6 +344,86 @@
             svg.appendChild(textEl);
         }
 
+        function getAnchorPoint(rect, containerRect, anchor = "center") {
+            const xMap = {
+                left: rect.left,
+                right: rect.right,
+                center: rect.left + rect.width / 2,
+                top: rect.left + rect.width / 2,
+                bottom: rect.left + rect.width / 2
+            };
+            const yMap = {
+                top: rect.top,
+                bottom: rect.bottom,
+                center: rect.top + rect.height / 2,
+                left: rect.top + rect.height / 2,
+                right: rect.top + rect.height / 2
+            };
+
+            return {
+                x: xMap[anchor] - containerRect.left,
+                y: yMap[anchor] - containerRect.top
+            };
+        }
+
+        function drawCurvedLine(fromId, toId, text = "", color = "#94a3b8", curveOffset = 60, weight = 2, fromAnchor = "center", toAnchor = "center") {
+            const from = document.getElementById(fromId);
+            const to = document.getElementById(toId);
+            const svg = document.getElementById("lines-svg");
+            const container = document.querySelector(".container-main");
+
+            if (!from || !to || !svg || !container) return;
+
+            const fromRect = from.getBoundingClientRect();
+            const toRect = to.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+
+            const start = getAnchorPoint(fromRect, containerRect, fromAnchor);
+            const end = getAnchorPoint(toRect, containerRect, toAnchor);
+            const x1 = start.x;
+            const y1 = start.y;
+            const x2 = end.x;
+            const y2 = end.y;
+            const controlX = (x1 + x2) / 2 + curveOffset;
+            const controlY = (y1 + y2) / 2 - Math.abs(curveOffset);
+
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", `M ${x1} ${y1} Q ${controlX} ${controlY} ${x2} ${y2}`);
+            path.setAttribute("fill", "none");
+            path.setAttribute("stroke", color);
+            path.setAttribute("stroke-width", weight);
+            path.setAttribute("stroke-dasharray", "8,6");
+            svg.appendChild(path);
+
+            if (!text) return;
+
+            const textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            textEl.setAttribute("x", controlX);
+            textEl.setAttribute("y", controlY - 8);
+            textEl.setAttribute("text-anchor", "middle");
+            textEl.setAttribute("class", "arrow-text");
+
+            const parts = text.split("(");
+            if (parts.length > 1) {
+                const tspan1 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                tspan1.setAttribute("x", controlX);
+                tspan1.textContent = parts[0].trim();
+                textEl.appendChild(tspan1);
+
+                const tspan2 = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                tspan2.setAttribute("x", controlX);
+                tspan2.setAttribute("dy", "16");
+                tspan2.setAttribute("font-size", "11px");
+                tspan2.setAttribute("font-weight", "600");
+                tspan2.textContent = "(" + parts[1];
+                textEl.appendChild(tspan2);
+            } else {
+                textEl.textContent = text;
+            }
+
+            svg.appendChild(textEl);
+        }
+
         function speak(text) {
             if (!("speechSynthesis" in window)) return;
             window.speechSynthesis.cancel();
@@ -367,7 +447,8 @@
             drawLine("bundeskanzler", "bundesminister", "schl\u00E4gt vor / leitet (propone / dirige)", "#94a3b8", false, 2);
             drawLine("landtag", "min-pres", "w\u00E4hlt (elige)", "#60a5fa", false, 3);
             drawLine("landtag", "bundesversammlung", "entsendet Vertreter (env\u00EDa representantes)", "#10b981", false, 2);
-            drawLine("bundesrat", "landtag", "", "#0f766e", true, 2);
+            drawCurvedLine("landesregierung-tag", "bundesrat", "bildet den Bundesrat (forma el Bundesrat)", "#0f766e", 90, 2, "bottom", "right");
+            drawCurvedLine("bundesrat", "landesregierung-tag", "vertritt Interessen (representa intereses)", "#0f766e", -90, 2, "left", "bottom");
             drawLine("bundesversammlung", "bundespraesident", "W\u00C4HLT (elige)", "#2563eb", false, 4);
             drawLine("bundespraesident", "bundeskanzler", "schl\u00E4gt zur Wahl vor / ernennt (propone / nombra)", "#f59e0b", true, 2);
             drawLine("bundestag", "bundesrat", "", "#cbd5e1", true, 2);
