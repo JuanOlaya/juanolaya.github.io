@@ -22,7 +22,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  ],
  'A2': [
  { key: 'A2_1', count: 13, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] },
- { key: 'A2_2', count: 18, fileNumbers: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30] }
+ { key: 'A2_2', count: 19, fileNumbers: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31] }
  ],
  'B1': [{ key: 'B1_1', count: 26, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26] }],
  'B2': [{ key: 'B2_1', count: 14, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] }]
@@ -30,8 +30,8 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
  const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#3b82f6', '#ea580c', '#22C55E', '#a855f7', '#facc15'];
 
  const separablePrefixesMap = {
- "abbiegen": "ab", "abfahren": "ab", "abfliegen": "ab", "abgeben": "ab", "abhalten": "ab", "abheben": "ab", "abholen": "ab", "absagen": "ab", "abschließen": "ab", "ablehnen": "ab", "abnehmen": "ab", "abschaffen": "ab", "absichern": "ab",
- "anbieten": "an", "anfahren": "an", "anfangen": "an", "ankommen": "an", "ankreuzen": "an", "anprobieren": "an", "anrufen": "an", "ansehen": "an", "anziehen": "an", "anklagen": "an", "anklicken": "an", "anmachen": "an", "anmelden": "an", "anregen": "an", "anwenden": "an",
+ "abbiegen": "ab", "abfahren": "ab", "abfliegen": "ab", "abgeben": "ab", "abhalten": "ab", "abheben": "ab", "abholen": "ab", "absagen": "ab", "abschließen": "ab", "ablehnen": "ab", "abnehmen": "ab", "abschaffen": "ab", "absichern": "ab", "abreisen": "ab",
+ "anbieten": "an", "anfahren": "an", "anfangen": "an", "ankommen": "an", "ankreuzen": "an", "anprobieren": "an", "anrufen": "an", "ansehen": "an", "anziehen": "an", "anklagen": "an", "anklicken": "an", "anmachen": "an", "anmelden": "an", "anregen": "an", "anwenden": "an", "anreisen": "an",
  "aufbauen": "auf", "aufhören": "auf", "aufmachen": "auf", "aufpassen": "auf", "aufräumen": "auf", "aufstehen": "auf", "aufwachen": "auf", "aufwachsen": "auf", "aufgeben": "auf", "aufregen": "auf", "aufsuchen": "auf",
  "ausfallen": "aus", "ausfüllen": "aus", "ausgehen": "aus", "ausgeben": "aus", "auslegen": "aus", "ausleihen": "aus", "auspacken": "aus", "ausruhen": "aus", "aussehen": "aus", "aussprechen": "aus", "aussteigen": "aus", "aussuchen": "aus", "auswählen": "aus", "ausziehen": "aus", "ausgrenzen": "aus", "auslösen": "aus", "ausmachen": "aus", "ausschalten": "aus",
  "beitreten": "bei", "dabeihaben": "dabei", "durchstreichen": "durch",
