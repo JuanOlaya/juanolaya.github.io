@@ -2741,7 +2741,10 @@
                 { article: "die", word: "Erfahrung", emoji: "🎓", translation_es: "experiencia", translation_en: "experience", example_de: "Die Erfahrung ist wertvoll.", example_es: "La experiencia es valiosa." },
                 { article: "der", word: "Umzug", emoji: "📦", translation_es: "mudanza", translation_en: "move / relocation", example_de: "Der Umzug ist sehr anstrengend.", example_es: "La mudanza es muy agotadora." },
                 { article: "die", word: "Unterstützung", emoji: "🤝", translation_es: "apoyo / asistencia", translation_en: "support / assistance", example_de: "Ich brauche Ihre Unterstützung.", example_es: "Necesito su apoyo." },
-                { article: "die", word: "Bestellung", emoji: "📦", translation_es: "pedido / encargo", translation_en: "order", example_de: "Ihre Bestellung ist auf dem Weg.", example_es: "Su pedido está en camino." }
+                { article: "die", word: "Bestellung", emoji: "📦", translation_es: "pedido / encargo", translation_en: "order", example_de: "Ihre Bestellung ist auf dem Weg.", example_es: "Su pedido está en camino." },
+                { article: "die", word: "Mitgliedschaft", emoji: "🤝", translation_es: "membresía / afiliación", translation_en: "membership", example_de: "Die Mitgliedschaft im Verein kostet Geld.", example_es: "La membresía en el club cuesta dinero." },
+                { article: "die", word: "Kündigung", emoji: "📄", translation_es: "terminación / rescisión", translation_en: "termination / cancellation", example_de: "Er hat die Kündigung eingereicht.", example_es: "Él ha presentado la rescisión." },
+                { article: "der", word: "Zustand", emoji: "📊", translation_es: "estado / condición", translation_en: "condition / state", example_de: "Das Auto ist in einem guten Zustand.", example_es: "El coche está en buenas condiciones." }
             ]
         });
 
@@ -3097,9 +3100,17 @@
                 title_en: "Leisure",
                 level: "A1-B1",
                 nouns: pickThemeNouns([
-                    "die|veranstaltung", "das|fest", "die|feier", "die|einweihung",
-                    "der|jubilaum", "die|eintrittskarte", "das|gewinnspiel",
-                    "der|verein", "der|spass"
+                    "die|veranstaltung", "das|fest", "die|feier", "die|einweihung", "der|jubilaum"
+                ])
+            },
+            {
+                id: "verein",
+                title: "Verein",
+                title_es: "Club / Asociación",
+                title_en: "Club / Association",
+                level: "A1-B1",
+                nouns: pickThemeNouns([
+                    "die|eintrittskarte", "das|gewinnspiel", "der|verein", "der|spass", "die|mitgliedschaft"
                 ])
             },
             {
@@ -3301,7 +3312,7 @@
                 title_es: "Carrera",
                 title_en: "Career",
                 level: "A1",
-                nouns: pickThemeNouns(["der|arbeitsplatz", "das|werk", "der|feierabend", "die|stellenanzeige", "die|erfahrung"])
+                nouns: pickThemeNouns(["der|arbeitsplatz", "das|werk", "der|feierabend", "die|stellenanzeige", "die|erfahrung", "die|kundigung"])
             },
             {
                 id: "pflege",
@@ -3810,7 +3821,7 @@
                 title_es: "Detalles",
                 title_en: "Features",
                 level: "A1-B1",
-                nouns: pickThemeNouns(["die|qualitat", "die|grosse", "die|farbe", "die|garantie"])
+                nouns: pickThemeNouns(["die|qualitat", "die|grosse", "die|farbe", "die|garantie", "der|zustand"])
             },
             {
                 id: "preise",
@@ -4358,6 +4369,7 @@
             geraete: "A2",
             system: "A2",
             freizeit: "A2",
+            verein: "A2",
             tourismus: "A1",
             gefuehle: "A2",
             gesundheit: "A1",
