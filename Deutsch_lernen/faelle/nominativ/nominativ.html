@@ -1,900 +1,617 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>German Nominativ Case Table — A1–A2</title>
+    <title>German Nominativ Infographics</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f7f7f7; }
-        #table-container { max-width: calc(100vw - 4rem); overflow-x: hidden; }
-        table { width: 100%; table-layout: auto; }
-        td, th { overflow: visible; }
-        .table-cell { padding: 0.25rem 0.3rem; white-space: nowrap; vertical-align: top; font-size: 0.8rem; }
-        .wrap-cell { white-space: normal; }
-        .study-cell { position: relative; display: flex; flex-direction: column; align-items: flex-start; cursor: pointer; padding: 0.3rem 0.3rem; min-height: 3.5rem; justify-content: center; }
-        .merged-gender-cell { padding: 0.25rem 0.3rem; min-height: 5rem; display: flex; flex-direction: column; justify-content: flex-start; }
-        .merged-gender-cell .study-cell { min-height: auto; padding: 0; margin-top: 0.3rem; }
-        .merged-possessive-cell { padding: 0.4rem 0.6rem; white-space: normal; vertical-align: top; font-size: 0.9rem; line-height: 1.2; min-height: 5.5rem; }
-        .stacked-content-line { margin-bottom: 2px; line-height: 1.2; }
-        .german-phrase, .article-german-lines { color: #1f2937; font-size: 1.0rem; line-height: 1.2; }
-        .base-article-german { background-color: #eff6ff; display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: #1e40af; font-size: 1.0rem; }
-        .article-hidden-part { color: #000000; font-style: italic; font-size: 0.8rem; opacity: 0; transition: opacity 0.3s ease-out; line-height: 1.2; white-space: normal; margin-left: 0.25rem; }
-        .spanish-translation { color: #000000; font-style: italic; font-size: 0.8rem; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; margin-top: 0.1rem; }
-        .study-cell:hover .spanish-translation, .study-cell.active .spanish-translation { max-height: 10rem; opacity: 1; }
-        .article-study-cell-wrapper:hover .article-hidden-part, .article-study-cell-wrapper.active .article-hidden-part { opacity: 1; }
-        .article-study-cell-wrapper { cursor: pointer; padding: 0.4rem 0.6rem; transition: background-color 0.15s ease-in-out; min-height: 5.5rem; display: flex; flex-direction: column; justify-content: center; }
-        .article-study-cell-wrapper:hover, .article-study-cell-wrapper.active { background-color: #e5e5e5; }
-        .article-study-cell-wrapper .stacked-translation-line { display: block; text-align: left; }
-        .nominativ-determiner { font-weight: 700; color: #1e40af; background-color: #eff6ff; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; font-size: 1.0rem; }
-        .article-row { background-color: #f7f7f7; }
-        .possessive-row { background-color: #dbeafe; }
-        .subject-study-cell { min-height: 5.5rem; padding: 0.4rem 0.6rem; cursor: pointer; transition: background-color 0.15s ease-in-out; }
-        .pronunciation-hint { font-size: 0.8rem; color: #000000; font-weight: 500; display: inline; }
-        .pronunciation-hint.subject-translation-hidden { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; display: inline; }
-        .subject-study-cell:hover .subject-translation-hidden, .subject-study-cell.active .subject-translation-hidden { max-height: 5rem; opacity: 1; }
-        .force-open .article-hidden-part, .force-open .spanish-translation, .force-open .subject-translation-hidden { max-height: 10rem !important; opacity: 1 !important; margin-top: 0.1rem !important; }
-        .verb-example:hover .spanish-translation, .verb-example.active .spanish-translation { max-height: 10rem; opacity: 1; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+        }
 
-        /* Modal styles */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: none; justify-content: center; align-items: center; z-index: 1000; }
-        .modal-overlay.active { display: flex; }
-        .modal-content { background-color: white; border-radius: 1rem; padding: 2rem; max-width: 600px; width: 90%; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); position: relative; max-height: 80vh; overflow-y: auto; }
-        .modal-close { position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem; cursor: pointer; color: #6b7280; transition: color 0.15s ease-in-out; }
-        .modal-close:hover { color: #1f2937; }
-        .modal-title { font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 1rem; }
-        .modal-section { margin-bottom: 1.5rem; }
-        .modal-label { font-size: 0.875rem; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
-        .modal-text { font-size: 1rem; color: #1f2937; line-height: 1.5; }
-        .category-tag { display: inline-block; padding: 0.25rem 0.5rem; background-color: #dbeafe; color: #1e40af; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 500; margin-top: 0.25rem; }
-        .bg-blue-25 { background-color: #f0f9ff; }
-        .separator-row { border-top: 3px solid #1e40af !important; }
+        .info-card {
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .col-masc {
+            background-color: #eff6ff;
+            border-color: #bfdbfe;
+            color: #1e40af;
+        }
+
+        .col-fem {
+            background-color: #fef2f2;
+            border-color: #fecaca;
+            color: #991b1b;
+        }
+
+        .col-neu {
+            background-color: #f0fdf4;
+            border-color: #bbf7d0;
+            color: #166534;
+        }
+
+        .col-plu {
+            background-color: #fffbeb;
+            border-color: #fde68a;
+            color: #92400e;
+        }
+
+        .header-masc-pastel {
+            background-color: #eff6ff;
+            color: #1e40af;
+            border-bottom: 2px solid #bfdbfe;
+        }
+
+        .header-fem-pastel {
+            background-color: #fef2f2;
+            color: #991b1b;
+            border-bottom: 2px solid #fecaca;
+        }
+
+        .header-neu-pastel {
+            background-color: #f0fdf4;
+            color: #166534;
+            border-bottom: 2px solid #bbf7d0;
+        }
+
+        .header-plu-pastel {
+            background-color: #fffbeb;
+            color: #92400e;
+            border-bottom: 2px solid #fde68a;
+        }
+
+        .base-highlight {
+            background-color: white;
+            border: 2px solid #2563eb;
+            color: #2563eb;
+            font-weight: 800;
+            padding: 0.15rem 0.5rem;
+            border-radius: 0.375rem;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.16);
+            display: inline-block;
+        }
+
+        .detail-row {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .group:hover .detail-row,
+        .group.active .detail-row {
+            max-height: 120px;
+            opacity: 1;
+        }
+
+        .scroll-container {
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 transparent;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .segmented-control {
+            background: #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 0.25rem;
+        }
+
+        .mode-button {
+            border-radius: 0.5rem;
+            color: #64748b;
+            font-weight: 800;
+            padding: 0.45rem 0.85rem;
+            transition: all 0.18s ease;
+            white-space: nowrap;
+        }
+
+        .mode-button.active {
+            background: white;
+            color: #1e293b;
+            box-shadow: 0 1px 5px rgba(15, 23, 42, 0.14);
+        }
+
+        b {
+            color: inherit;
+            font-weight: 800;
+        }
     </style>
 </head>
-<body class="p-4 sm:p-8">
+
+<body class="px-2 py-4 md:px-4 md:py-8">
     <div class="max-w-7xl mx-auto">
-        <h1 class="text-3xl font-bold text-gray-800 mb-2">German Nominativ Case: Articles, Pronouns, and Possessives</h1>
-        <p class="text-gray-600 mb-6">El Nominativ responde a "¿Quién?" o "¿Qué?". Se usa para el <strong>sujeto</strong> de la oración - la persona o cosa que hace la acción.</p>
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-2 tracking-tight">
+                Der Nominativ
+            </h1>
+            <p class="text-lg text-slate-500 font-light">Guía Visual de Gramática (A1-A2)</p>
 
-        <!-- Articles Table -->
-        <h2 class="text-2xl font-bold text-gray-800 mb-3 mt-8">Artículos (Articles)</h2>
-        <div id="articles-table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200 mb-8"></div>
-
-        <!-- Pronouns Table -->
-        <h2 class="text-2xl font-bold text-gray-800 mb-3 mt-8">Pronombres Posesivos (Possessive Pronouns)</h2>
-        <div class="mb-8 bg-gradient-to-r from-yellow-100 to-yellow-200 rounded-xl p-6 shadow-md border-2 border-yellow-400">
-            <h3 class="text-2xl font-bold text-yellow-800 mb-4 flex items-center">
-                <span class="mr-2">💡</span> Tips para No Olvidar
-            </h3>
-            <div class="space-y-3">
-                <div class="flex items-start">
-                    <span class="text-2xl mr-3">1️⃣</span>
-                    <div>
-                        <span class="font-bold text-yellow-900">El Nominativ es el caso más simple:</span>
-                        <span class="text-gray-700"> Es la <span class="bg-yellow-300 px-2 py-1 rounded font-bold">forma base</span> que aparece en el diccionario</span>
+            <div class="mt-6 inline-block bg-white p-4 rounded-xl shadow-lg border-l-4 border-blue-600">
+                <div class="flex items-center gap-4 text-left">
+                    <div class="bg-blue-100 text-blue-600 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-lightbulb"></i>
                     </div>
-                </div>
-                <div class="flex items-start">
-                    <span class="text-2xl mr-3">2️⃣</span>
                     <div>
-                        <span class="font-bold text-yellow-900">Pregunta siempre:</span>
-                        <span class="text-gray-700"> <span class="bg-blue-200 px-2 py-1 rounded font-semibold">Wer?</span> <span class="italic">"¿Quién?"</span> o <span class="bg-blue-200 px-2 py-1 rounded font-semibold">Was?</span> <span class="italic">"¿Qué?"</span> + verbo</span>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <span class="text-2xl mr-3">3️⃣</span>
-                    <div>
-                        <span class="font-bold text-yellow-900">El sujeto siempre hace la acción:</span>
-                        <span class="text-gray-700"> Busca <span class="underline decoration-2">quién realiza el verbo</span></span>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <span class="text-2xl mr-3">4️⃣</span>
-                    <div>
-                        <span class="font-bold text-yellow-900">Toda oración tiene un sujeto:</span>
-                        <span class="text-gray-700"> Y ese sujeto siempre está en Nominativ</span>
+                        <h3 class="font-bold text-slate-800 uppercase text-sm tracking-wider">Regla de Oro</h3>
+                        <p class="text-slate-600">El <span class="text-blue-600 font-bold">Nominativ</span> marca el sujeto: quien o qué hace la acción.</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="pronouns-table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200"></div>
 
-        <div class="mt-6 flex justify-end">
-            <button id="toggle-all-button" onclick="toggleAllTranslations()" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-4 5a1 1 0 100 2h2a1 1 0 100-2h-2z" clip-rule="evenodd"/></svg>
-                Mostrar todas las traducciones
-            </button>
+        <div class="mb-16">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-slate-800 text-white w-8 h-8 rounded flex items-center justify-center font-bold">1</span>
+                <h2 class="text-2xl font-bold text-slate-800">Determinantes (Artículos)</h2>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+                <div class="overflow-x-auto scroll-container">
+                    <div class="min-w-[980px]">
+                        <div class="grid grid-cols-[150px_repeat(4,_1fr)_230px] divide-x divide-slate-100 border-b border-slate-200">
+                            <div class="p-4 bg-slate-50 flex items-center justify-center font-bold text-slate-400 uppercase text-xs tracking-widest text-center sticky left-0 z-10 border-r shadow-[4px_0_10px_-5px_rgba(0,0,0,0.1)]">Tipo</div>
+                            <div class="header-masc-pastel p-4 text-center">
+                                <div class="font-bold text-lg">Männlich</div>
+                                <div class="text-xs uppercase tracking-widest opacity-80">Masculino</div>
+                            </div>
+                            <div class="header-fem-pastel p-4 text-center">
+                                <div class="font-bold text-lg">Weiblich</div>
+                                <div class="text-xs uppercase tracking-widest opacity-80">Femenino</div>
+                            </div>
+                            <div class="header-neu-pastel p-4 text-center">
+                                <div class="font-bold text-lg">Neutral</div>
+                                <div class="text-xs uppercase tracking-widest opacity-80">Neutro</div>
+                            </div>
+                            <div class="header-plu-pastel p-4 text-center">
+                                <div class="font-bold text-lg">Plural</div>
+                                <div class="text-xs uppercase tracking-widest opacity-80">Los/Las</div>
+                            </div>
+                            <div class="p-4 bg-slate-50 text-center font-bold text-slate-400 uppercase text-xs tracking-widest">Beispiel</div>
+                        </div>
+                        <div id="articles-grid"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-xs text-slate-400 mt-3 italic">Pasa el mouse o toca las celdas para ver la traducción.</p>
         </div>
 
-        <!-- Nominativ Detailed Explanation -->
-        <div class="mt-12 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-8 border-2 border-blue-200">
+        <div class="mb-12">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                <div class="flex items-center gap-3">
+                    <span class="bg-slate-800 text-white w-8 h-8 rounded flex items-center justify-center font-bold">2</span>
+                    <h2 class="text-2xl font-bold text-slate-800">Pronombres y Posesivos (Nominativ)</h2>
+                </div>
+                <div class="segmented-control inline-flex self-start md:self-auto" aria-label="Cambiar tipo de ejemplo">
+                    <button id="btn-statement" class="mode-button active" onclick="setMode('statement')" type="button">
+                        <i class="fa-solid fa-comment mr-2"></i>Aussagen A1
+                    </button>
+                    <button id="btn-question" class="mode-button" onclick="setMode('question')" type="button">
+                        <i class="fa-solid fa-circle-question mr-2"></i>Fragen A1
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200 relative">
+                <div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/5 to-transparent pointer-events-none md:hidden z-20"></div>
+                <div class="overflow-x-auto scroll-container">
+                    <div class="min-w-[1180px]">
+                        <div class="grid grid-cols-[110px_250px_190px_repeat(4,_1fr)_270px] text-2xl uppercase tracking-wider font-extrabold text-slate-600 border-b-2 border-slate-200 bg-slate-50">
+                            <div class="px-2 py-4 text-center flex flex-col justify-center border-r">Subjekt<span class="text-xs font-normal opacity-60">Nominativ</span></div>
+                            <div class="px-2 py-4 text-center flex flex-col justify-center items-center border-r bg-slate-100">
+                                <div class="flex items-center gap-1.5 justify-center">
+                                    <span>Beispiel</span>
+                                    <span id="beispiel-mode-tag" class="bg-slate-200 text-slate-800 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Aussagen A1</span>
+                                </div>
+                                <span class="text-xs font-normal opacity-60 mt-0.5">Ejemplo</span>
+                            </div>
+                            <div class="px-2 py-4 text-center flex flex-col justify-center border-r bg-indigo-50 text-indigo-800">Possessiv<span class="text-xs font-normal opacity-60">Base</span></div>
+                            <div class="px-2 py-4 col-masc text-center border-r text-blue-700">Masc.</div>
+                            <div class="px-2 py-4 col-fem text-center border-r text-red-700">Fem.</div>
+                            <div class="px-2 py-4 col-neu text-center border-r text-green-700">Neut.</div>
+                            <div class="px-2 py-4 col-plu text-center border-r text-amber-800">Plur.</div>
+                            <div class="px-2 py-4 text-center flex flex-col justify-center bg-yellow-50 text-yellow-800">Uso Posesivo<span class="text-xs font-normal opacity-60">Contexto</span></div>
+                        </div>
+                        <div id="pronouns-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-6 md:p-8 border-2 border-blue-200">
             <h2 class="text-3xl font-bold text-blue-700 mb-6 flex items-center">
-                <span class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3 text-xl">📝</span>
-                Nominativ - Explicación Detallada
+                <span class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3 text-xl"><i class="fa-solid fa-pen"></i></span>
+                Nominativ - Explicación Rápida
             </h2>
 
-            <div class="bg-white rounded-xl p-6 mb-6 shadow-md border-l-4 border-blue-500">
-                <p class="text-lg text-gray-700 mb-2">
-                    El Nominativ responde a <span class="bg-blue-200 px-2 py-1 rounded font-semibold">Wer?</span> <span class="font-bold text-blue-600">¿Quién?</span> o <span class="bg-blue-200 px-2 py-1 rounded font-semibold">Was?</span> <span class="font-bold text-blue-600">¿Qué?</span>.
-                    Se usa para el <span class="bg-yellow-200 font-bold px-2 py-1 rounded">sujeto</span> de la oración -
-                    la persona o cosa que <span class="underline decoration-blue-500 decoration-2">hace o realiza la acción del verbo</span>.
-                    Es el caso <span class="font-bold text-blue-600">básico o de diccionario</span>.
-                </p>
-            </div>
-
-            <!-- W-Fragen Section -->
-            <div class="mb-8">
-                <h3 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
-                    <span class="mr-2">❓</span> W-Fragen (Preguntas en Alemán)
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-blue-100 rounded-lg p-4 border-2 border-blue-300">
-                        <div class="text-3xl font-bold text-blue-700 mb-2">Wer?</div>
-                        <div class="text-lg text-gray-700">¿Quién? <span class="text-sm italic">(para personas)</span></div>
-                    </div>
-                    <div class="bg-blue-100 rounded-lg p-4 border-2 border-blue-300">
-                        <div class="text-3xl font-bold text-blue-700 mb-2">Was?</div>
-                        <div class="text-lg text-gray-700">¿Qué? <span class="text-sm italic">(para cosas)</span></div>
-                    </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-blue-500">
+                    <h3 class="font-bold text-xl text-slate-800 mb-2">Pregunta clave</h3>
+                    <p class="text-slate-600"><span class="bg-blue-100 text-blue-800 font-bold px-2 py-1 rounded">Wer?</span> ¿Quién? o <span class="bg-blue-100 text-blue-800 font-bold px-2 py-1 rounded">Was?</span> ¿Qué?</p>
+                </div>
+                <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-indigo-500">
+                    <h3 class="font-bold text-xl text-slate-800 mb-2">Función</h3>
+                    <p class="text-slate-600">El sujeto de la frase siempre aparece en Nominativ.</p>
+                </div>
+                <div class="bg-white rounded-xl p-5 shadow-md border-l-4 border-cyan-500">
+                    <h3 class="font-bold text-xl text-slate-800 mb-2">Posesivos</h3>
+                    <p class="text-slate-600">En masculino y neutro no llevan terminación: <b>mein Vater</b>, <b>mein Kind</b>.</p>
                 </div>
             </div>
 
-            <!-- Sujeto Section -->
-            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
-                <h3 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
-                    <span class="mr-2">🎯</span> ¿Qué es el Sujeto?
-                </h3>
-                <p class="text-lg text-gray-700 mb-4">
-                    El sujeto (<span class="font-semibold text-blue-600">Nominativ</span>) es la persona o cosa que
-                    <span class="bg-blue-100 font-bold px-2 py-1 rounded border border-blue-300">hace o realiza</span> la acción del verbo.
-                    Es lo que responde a las preguntas <span class="font-bold">"¿Quién?"</span> o <span class="font-bold">"¿Qué?"</span>.
-                </p>
-
-                <div class="space-y-3">
-                    <div class="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg border-l-4 border-green-500">
-                        <div class="font-bold text-lg mb-2"><span class="text-blue-600 bg-blue-100 px-2 py-1 rounded">Der Mann</span> läuft schnell.</div>
-                        <div class="text-gray-600">
-                            → <span class="font-semibold">¿Quién corre?</span> → <span class="text-blue-600 font-bold">el hombre</span>
-                            <span class="bg-yellow-200 px-2 py-1 rounded text-sm ml-2">sujeto</span>
-                        </div>
-                    </div>
-                    <div class="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg border-l-4 border-purple-500">
-                        <div class="font-bold text-lg mb-2"><span class="text-blue-600 bg-blue-100 px-2 py-1 rounded">Das Buch</span> es interesante.</div>
-                        <div class="text-gray-600">
-                            → <span class="font-semibold">¿Qué es interesante?</span> → <span class="text-blue-600 font-bold">el libro</span>
-                            <span class="bg-yellow-200 px-2 py-1 rounded text-sm ml-2">sujeto</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="mt-6 bg-white rounded-xl p-5 shadow-md">
+                <div class="font-bold text-lg mb-2"><span class="text-blue-700 bg-blue-100 px-2 py-1 rounded">Mein Kind</span> ist krank.</div>
+                <div class="text-slate-600">→ ¿Quién está enfermo? → <span class="text-blue-700 font-bold">mi hijo</span> <span class="bg-yellow-100 text-yellow-800 font-semibold px-2 py-1 rounded text-sm ml-2">sujeto</span></div>
             </div>
-
-            <!-- Identificación Section -->
-            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
-                <h3 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
-                    <span class="mr-2">🔍</span> ¿Cómo Identificar el Sujeto?
-                </h3>
-
-                <div class="space-y-4">
-                    <!-- Técnica 1 -->
-                    <div class="bg-gradient-to-r from-cyan-50 to-cyan-100 p-5 rounded-lg border-2 border-cyan-400">
-                        <h4 class="font-bold text-xl text-cyan-700 mb-3">📌 Técnica 1: Usa las W-Fragen</h4>
-                        <p class="text-gray-700 mb-3">Haz la pregunta con <span class="bg-cyan-200 font-bold px-2 py-1 rounded">wer?</span> (¿quién?) o <span class="bg-cyan-200 font-bold px-2 py-1 rounded">was?</span> (¿qué?) antes del verbo:</p>
-                        <div class="bg-white p-3 rounded border-l-4 border-cyan-500">
-                            <div class="mb-2"><span class="text-blue-600 font-bold">Die Katze</span> schläft.</div>
-                            <div class="text-gray-600">→ <span class="italic">Wer schläft?</span> → <span class="text-blue-600 font-bold">Die Katze</span> <span class="text-cyan-600 font-bold text-xl">✓</span></div>
-                        </div>
-                    </div>
-
-                    <!-- Técnica 2 -->
-                    <div class="bg-gradient-to-r from-indigo-50 to-indigo-100 p-5 rounded-lg border-2 border-indigo-400">
-                        <h4 class="font-bold text-xl text-indigo-700 mb-3">📌 Técnica 2: El que hace la acción</h4>
-                        <div class="space-y-2 text-gray-700">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-2">➤</span>
-                                <span>El sujeto es <span class="font-bold">quien o qué ejecuta</span> el verbo</span>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-2">➤</span>
-                                <span>Siempre está en <span class="bg-blue-200 font-bold px-2 py-1 rounded">Nominativ</span></span>
-                            </div>
-                        </div>
-                        <div class="bg-white p-3 rounded border-l-4 border-indigo-500 mt-3">
-                            <div><span class="bg-blue-200 font-bold px-2 py-1 rounded">Der Lehrer</span> <span class="text-gray-500 text-sm">(sujeto/NOM)</span> explica la Gramática.</div>
-                            <div class="text-sm text-gray-600 mt-1 italic">El profesor explica la gramática.</div>
-                        </div>
-                    </div>
-
-                    <!-- Técnica 3 -->
-                    <div class="bg-gradient-to-r from-sky-50 to-sky-100 p-5 rounded-lg border-2 border-sky-400">
-                        <h4 class="font-bold text-xl text-sky-700 mb-3">📌 Técnica 3: La forma base del diccionario</h4>
-                        <p class="text-gray-700 mb-3">El Nominativ es <span class="underline decoration-2 decoration-sky-500 font-bold">siempre la forma que aparece en el diccionario</span>:</p>
-                        <div class="space-y-2">
-                            <div class="bg-white p-3 rounded flex items-center justify-between">
-                                <span class="font-bold">der Mann / ein Mann</span>
-                                <span class="text-sm">(masculino)</span>
-                                <span class="bg-blue-500 text-white font-bold px-3 py-1 rounded text-lg">✓ BASE</span>
-                            </div>
-                            <div class="bg-white p-3 rounded flex items-center justify-between">
-                                <span class="font-bold">die Frau / eine Frau</span>
-                                <span class="text-sm">(femenino)</span>
-                                <span class="bg-blue-500 text-white font-bold px-3 py-1 rounded text-lg">✓ BASE</span>
-                            </div>
-                            <div class="bg-white p-3 rounded flex items-center justify-between">
-                                <span class="font-bold">das Kind / ein Kind</span>
-                                <span class="text-sm">(neutro)</span>
-                                <span class="bg-blue-500 text-white font-bold px-3 py-1 rounded text-lg">✓ BASE</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Verbos Comunes Section -->
-            <div class="mb-8 bg-white rounded-xl p-6 shadow-md">
-                <h3 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
-                    <span class="mr-2">💬</span> Verbos Comunes con Sujeto en Nominativ
-                </h3>
-                <p class="text-gray-700 mb-3"><span class="font-bold">Todos los verbos</span> requieren un sujeto en Nominativ. Aquí algunos ejemplos básicos:</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">🏃</span><span class="font-bold text-blue-700">sein</span> <span class="text-gray-600">(ser/estar)</span>
-                        <div class="text-sm mt-1"><span class="font-semibold">Der Hund</span> ist groß.</div>
-                        <div class="spanish-translation">El perro es grande.</div>
-                    </div>
-                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">🚶</span><span class="font-bold text-blue-700">gehen</span> <span class="text-gray-600">(ir)</span>
-                        <div class="text-sm mt-1"><span class="font-semibold">Die Frau</span> geht nach Hause.</div>
-                        <div class="spanish-translation">La mujer va a casa.</div>
-                    </div>
-                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">🛌</span><span class="font-bold text-blue-700">schlafen</span> <span class="text-gray-600">(dormir)</span>
-                        <div class="text-sm mt-1"><span class="font-semibold">Das Kind</span> schläft.</div>
-                        <div class="spanish-translation">El niño duerme.</div>
-                    </div>
-                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">💼</span><span class="font-bold text-blue-700">arbeiten</span> <span class="text-gray-600">(trabajar)</span>
-                        <div class="text-sm mt-1"><span class="font-semibold">Mein Vater</span> arbeitet hier.</div>
-                        <div class="spanish-translation">Mi padre trabaja aquí.</div>
-                    </div>
-                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">🗣️</span><span class="font-bold text-blue-700">sprechen</span> <span class="text-gray-600">(hablar)</span>
-                        <div class="text-sm mt-1"><span class="font-semibold">Wir</span> sprechen Deutsch.</div>
-                        <div class="spanish-translation">Hablamos alemán.</div>
-                    </div>
-                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">🏠</span><span class="font-bold text-blue-700">wohnen</span> <span class="text-gray-600">(vivir)</span>
-                        <div class="text-sm mt-1"><span class="font-semibold">Sie</span> wohnt in Berlin.</div>
-                        <div class="spanish-translation">Ella vive en Berlín.</div>
-                    </div>
-                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">📖</span><span class="font-bold text-blue-700">lesen</span> <span class="text-gray-600">(leer)</span>
-                        <div class="text-sm mt-1"><span class="font-semibold">Ich</span> lese ein Buch.</div>
-                        <div class="spanish-translation">Leo un libro.</div>
-                    </div>
-                    <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-400 cursor-pointer verb-example" onclick="this.classList.toggle('active')">
-                        <span class="text-xl mr-1">🎮</span><span class="font-bold text-blue-700">spielen</span> <span class="text-gray-600">(jugar)</span>
-                        <div class="text-sm mt-1"><span class="font-semibold">Die Kinder</span> spielen draußen.</div>
-                        <div class="spanish-translation">Los niños juegan afuera.</div>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-
-    <!-- Modal for Nullartikel examples -->
-    <div id="nullartikel-modal" class="modal-overlay" onclick="closeModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="modal-close" onclick="closeModal()">×</span>
-            <div id="modal-body"></div>
         </div>
     </div>
 
     <script>
-        const tableData = [
+        const articlesData = [
             {
-                "Sujeto (Nominativo)": "Art. Def.",
-                "Sujeto Display": "Artículo<br>Definido",
-                "Base": "der / die / das",
-                "Trad. Base": "el / la / el",
-                "der männlich (nominativ)": "der",
-                "Männlich (M)": "Der Mann ist freundlich.",
-                "Trad. (M)": "El hombre es amable.",
-                "die weiblich (nominativ)": "die",
-                "Weiblich (F)": "Die Frau ist Ärztin.",
-                "Trad. (F)": "La mujer es doctora.",
-                "das neutral (nominativ)": "das",
-                "Neutral (N)": "Das Kind schläft.",
-                "Trad. (N)": "El niño duerme.",
-                "die plural (nominativ)": "die",
-                "Plural (P)": "Die Hunde bellen.",
-                "Trad. (P)": "Los perros ladran."
+                type: "Definido",
+                subtitle: "der / die / das",
+                masc: "der",
+                fem: "die",
+                neu: "das",
+                plu: "die",
+                example: "<b>Der</b> Mann kommt.",
+                translation: "El hombre viene."
             },
             {
-                "Sujeto (Nominativo)": "Art. Indef.",
-                "Sujeto Display": "Artículo<br>Indefinido",
-                "Base": "ein / eine / ein",
-                "Trad. Base": "un / una / un",
-                "der männlich (nominativ)": "ein",
-                "Männlich (M)": "Ein Vogel singt laut.",
-                "Trad. (M)": "Un pájaro canta fuerte.",
-                "die weiblich (nominativ)": "eine",
-                "Weiblich (F)": "Eine Blume blüht.",
-                "Trad. (F)": "Una flor florece.",
-                "das neutral (nominativ)": "ein",
-                "Neutral (N)": "Ein Buch liegt da.",
-                "Trad. (N)": "Un libro está ahí.",
-                "die plural (nominativ)": "-",
-                "Plural (P)": "-",
-                "Trad. (P)": "(No existe art. indefinido)"
+                type: "Indefinido",
+                subtitle: "ein / eine / ein",
+                masc: "ein",
+                fem: "eine",
+                neu: "ein",
+                plu: "-",
+                example: "<b>Eine</b> Frau wartet.",
+                translation: "Una mujer espera."
             },
             {
-                "Sujeto (Nominativo)": "Art. Neg.",
-                "Sujeto Display": "Artículo<br>Negativo",
-                "Base": "kein / keine / kein",
-                "Trad. Base": "ningún / ninguna / ningún",
-                "der männlich (nominativ)": "kein",
-                "Männlich (M)": "Es ist kein Wein auf dem Tisch.",
-                "Trad. (M)": "No hay vino en la mesa.",
-                "die weiblich (nominativ)": "keine",
-                "Weiblich (F)": "Es ist keine Milch im Kühlschrank.",
-                "Trad. (F)": "No hay leche en el refrigerador.",
-                "das neutral (nominativ)": "kein",
-                "Neutral (N)": "Kein Auto steht draußen.",
-                "Trad. (N)": "Ningún carro está afuera.",
-                "die plural (nominativ)": "keine",
-                "Plural (P)": "Keine Kinder spielen hier.",
-                "Trad. (P)": "Ningún niño juega aquí."
+                type: "Negativo",
+                subtitle: "kein / keine / kein",
+                masc: "kein",
+                fem: "keine",
+                neu: "kein",
+                plu: "keine",
+                example: "<b>Kein</b> Problem.",
+                translation: "Ningún problema."
             },
             {
-                "Sujeto (Nominativo)": "Nullartikel",
-                "Base": "∅",
-                "Trad. Base": "sin artículo",
-                "der männlich (nominativ)": "∅",
-                "Männlich (M)": "Kaffee ist lecker.",
-                "Trad. (M)": "El café es delicioso.",
-                "Category (M)": "Sustantivo Masivo (Materia)",
-                "Explanation (M)": "Se refiere a la bebida/sustancia Kaffee en general, no a una taza específica.",
-                "die weiblich (nominativ)": "∅",
-                "Weiblich (F)": "Milch ist gesund.",
-                "Trad. (F)": "La leche es saludable.",
-                "Category (F)": "Sustantivo Masivo (Líquido)",
-                "Explanation (F)": "Milch se refiere a la sustancia en general, sin especificar cantidad.",
-                "das neutral (nominativ)": "∅",
-                "Neutral (N)": "Wasser ist wichtig.",
-                "Trad. (N)": "El agua es importante.",
-                "Category (N)": "Sustantivo Masivo (Líquido)",
-                "Explanation (N)": "Wasser funciona como sustantivo incontable, refiriéndose al líquido en general.",
-                "die plural (nominativ)": "∅",
-                "Plural (P)": "Kinder spielen draußen.",
-                "Trad. (P)": "Los niños juegan afuera.",
-                "Category (P)": "Sustantivo Plural Indefinido",
-                "Explanation (P)": "Se refiere a niños en general, sin especificar cuáles. El plural no lleva artículo indefinido."
-            },
-            {
-                "Sujeto (Nominativo)": "ich",
-                "Base": "mein-",
-                "Trad. Base": "mi-",
-                "der männlich (nominativ)": "mein",
-                "Männlich (M)": "Mein Hund ist süß.",
-                "Trad. (M)": "Mi perro es lindo.",
-                "die weiblich (nominativ)": "meine",
-                "Weiblich (F)": "Meine Lampe brennt.",
-                "Trad. (F)": "Mi lámpara está encendida.",
-                "das neutral (nominativ)": "mein",
-                "Neutral (N)": "Mein Haus ist groß.",
-                "Trad. (N)": "Mi casa es grande.",
-                "die plural (nominativ)": "meine",
-                "Plural (P)": "Meine Katzen schlafen.",
-                "Trad. (P)": "Mis gatos duermen."
-            },
-            {
-                "Sujeto (Nominativo)": "du",
-                "Base": "dein-",
-                "Trad. Base": "tu-",
-                "der männlich (nominativ)": "dein",
-                "Männlich (M)": "Dein Tisch ist leer.",
-                "Trad. (M)": "Tu mesa está vacía.",
-                "die weiblich (nominativ)": "deine",
-                "Weiblich (F)": "Deine Uhr ist kaputt.",
-                "Trad. (F)": "Tu reloj está roto.",
-                "das neutral (nominativ)": "dein",
-                "Neutral (N)": "Dein Glas ist voll.",
-                "Trad. (N)": "Tu vaso está lleno.",
-                "die plural (nominativ)": "deine",
-                "Plural (P)": "Deine Bücher sind neu.",
-                "Trad. (P)": "Tus libros son nuevos."
-            },
-            {
-                "Sujeto (Nominativo)": "er",
-                "Base": "sein-",
-                "Trad. Base": "su (de él)-",
-                "der männlich (nominativ)": "sein",
-                "Männlich (M)": "Sein Name ist Tom.",
-                "Trad. (M)": "Su nombre es Tom.",
-                "die weiblich (nominativ)": "seine",
-                "Weiblich (F)": "Seine Frau arbeitet hier.",
-                "Trad. (F)": "Su esposa trabaja aquí.",
-                "das neutral (nominativ)": "sein",
-                "Neutral (N)": "Sein Buch ist interessant.",
-                "Trad. (N)": "Su libro es interesante.",
-                "die plural (nominativ)": "seine",
-                "Plural (P)": "Seine Eltern sind nett.",
-                "Trad. (P)": "Sus padres son amables."
-            },
-            {
-                "Sujeto (Nominativo)": "sie (ella)",
-                "Base": "ihr-",
-                "Trad. Base": "su (de ella)-",
-                "der männlich (nominativ)": "ihr",
-                "Männlich (M)": "Ihr Mann ist Ingenieur.",
-                "Trad. (M)": "Su esposo es ingeniero.",
-                "die weiblich (nominativ)": "ihre",
-                "Weiblich (F)": "Ihre Katze ist schwarz.",
-                "Trad. (F)": "Su gato es negro.",
-                "das neutral (nominativ)": "ihr",
-                "Neutral (N)": "Ihr Kind spielt draußen.",
-                "Trad. (N)": "Su hijo juega afuera.",
-                "die plural (nominativ)": "ihre",
-                "Plural (P)": "Ihre Taschen sind schwer.",
-                "Trad. (P)": "Sus bolsas son pesadas."
-            },
-            {
-                "Sujeto (Nominativo)": "es (neutro)",
-                "Base": "sein-",
-                "Trad. Base": "su (de ello)-",
-                "der männlich (nominativ)": "sein",
-                "Männlich (M)": "Sein Auto fährt schnell.",
-                "Trad. (M)": "Su carro va rápido.",
-                "die weiblich (nominativ)": "seine",
-                "Weiblich (F)": "Seine Farbe ist schön.",
-                "Trad. (F)": "Su color es bonito.",
-                "das neutral (nominativ)": "sein",
-                "Neutral (N)": "Sein Buch ist dick.",
-                "Trad. (N)": "Su libro es grueso.",
-                "die plural (nominativ)": "seine",
-                "Plural (P)": "Seine Blätter fallen.",
-                "Trad. (P)": "Sus hojas caen."
-            },
-            {
-                "Sujeto (Nominativo)": "wir",
-                "Base": "unser-",
-                "Trad. Base": "nuestro/a-",
-                "der männlich (nominativ)": "unser",
-                "Männlich (M)": "Unser Lehrer ist streng.",
-                "Trad. (M)": "Nuestro profesor es estricto.",
-                "die weiblich (nominativ)": "unsere",
-                "Weiblich (F)": "Unsere Stadt ist schön.",
-                "Trad. (F)": "Nuestra ciudad es bonita.",
-                "das neutral (nominativ)": "unser",
-                "Neutral (N)": "Unser Haus ist alt.",
-                "Trad. (N)": "Nuestra casa es vieja.",
-                "die plural (nominativ)": "unsere",
-                "Plural (P)": "Unsere Kinder sind ruidosos.",
-                "Trad. (P)": "Nuestros hijos son ruidosos."
-            },
-            {
-                "Sujeto (Nominativo)": "ihr (vosotros)",
-                "Base": "euer- / eur-",
-                "Trad. Base": "vuestro/a-",
-                "der männlich (nominativ)": "euer",
-                "Männlich (M)": "Euer Garten ist grün.",
-                "Trad. (M)": "Vuestro jardín es verde.",
-                "die weiblich (nominativ)": "eure",
-                "Weiblich (F)": "Eure Wohnung ist klein.",
-                "Trad. (F)": "Vuestro apartamento es pequeño.",
-                "das neutral (nominativ)": "euer",
-                "Neutral (N)": "Euer Auto ist rot.",
-                "Trad. (N)": "Vuestro carro es rojo.",
-                "die plural (nominativ)": "eure",
-                "Plural (P)": "Eure Kleider sind schön.",
-                "Trad. (P)": "Vuestras ropas son bonitas."
-            },
-            {
-                "Sujeto (Nominativo)": "sie (ellos)",
-                "Base": "ihr-",
-                "Trad. Base": "su (de ellos)-",
-                "der männlich (nominativ)": "ihr",
-                "Männlich (M)": "Ihr Baum ist hoch.",
-                "Trad. (M)": "Su árbol es alto.",
-                "die weiblich (nominativ)": "ihre",
-                "Weiblich (F)": "Ihre Idee ist gut.",
-                "Trad. (F)": "Su idea es buena.",
-                "das neutral (nominativ)": "ihr",
-                "Neutral (N)": "Ihr Geld ist weg.",
-                "Trad. (N)": "Su dinero se fue.",
-                "die plural (nominativ)": "ihre",
-                "Plural (P)": "Ihre Kinder spielen.",
-                "Trad. (P)": "Sus hijos juegan."
-            },
-            {
-                "Sujeto (Nominativo)": "Sie (formal)",
-                "Base": "Ihr-",
-                "Trad. Base": "su (formal)-",
-                "der männlich (nominativ)": "Ihr",
-                "Männlich (M)": "Ihr Kaffee ist fertig.",
-                "Trad. (M)": "Su café está listo.",
-                "die weiblich (nominativ)": "Ihre",
-                "Weiblich (F)": "Ihre Rechnung ist korrekt.",
-                "Trad. (F)": "Su cuenta es correcta.",
-                "das neutral (nominativ)": "Ihr",
-                "Neutral (N)": "Ihr Gepäck ist angekommen.",
-                "Trad. (N)": "Su equipaje ha llegado.",
-                "die plural (nominativ)": "Ihre",
-                "Plural (P)": "Ihre Kollegen sind hier.",
-                "Trad. (P)": "Sus colegas están aquí."
+                type: "Nullartikel",
+                subtitle: "sin artículo",
+                masc: "∅ Kaffee",
+                fem: "∅ Musik",
+                neu: "∅ Wasser",
+                plu: "∅ Kinder",
+                example: "<b>Kaffee</b> ist teuer.",
+                translation: "El café está caro."
             }
         ];
 
-        const mergedDeterminerKeys = [
-            { key: "der männlich (nominativ)", example: "Männlich (M)", translation: "Trad. (M)", color: 'bg-blue-200' },
-            { key: "die weiblich (nominativ)", example: "Weiblich (F)", translation: "Trad. (F)", color: 'bg-blue-300' },
-            { key: "das neutral (nominativ)", example: "Neutral (N)", translation: "Trad. (N)", color: 'bg-blue-400' },
-            { key: "die plural (nominativ)", example: "Plural (P)", translation: "Trad. (P)", color: 'bg-blue-500' }
+        const pronounsData = [
+            {
+                subject: "ich",
+                hint: "",
+                base: "mein-",
+                baseTranslation: "mi",
+                masc: "mein",
+                fem: "meine",
+                neu: "mein",
+                plu: "meine",
+                statement: {
+                    pro: "<b>Ich</b> habe einen Termin.",
+                    proTr: "Tengo una cita.",
+                    poss: "<b>Mein</b> Kind ist krank.",
+                    possTr: "Mi hijo está enfermo."
+                },
+                question: {
+                    pro: "Kann <b>ich</b> morgen kommen?",
+                    proTr: "¿Puedo venir mañana?",
+                    poss: "Ist das <b>mein</b> Paket?",
+                    possTr: "¿Es este mi paquete?"
+                }
+            },
+            {
+                subject: "du",
+                hint: "",
+                base: "dein-",
+                baseTranslation: "tu",
+                masc: "dein",
+                fem: "deine",
+                neu: "dein",
+                plu: "deine",
+                statement: {
+                    pro: "<b>Du</b> kommst zur Party.",
+                    proTr: "Vienes a la fiesta.",
+                    poss: "Ist das <b>dein</b> Buch?",
+                    possTr: "¿Es ese tu libro?"
+                },
+                question: {
+                    pro: "Kommst <b>du</b> zur Party?",
+                    proTr: "¿Vienes a la fiesta?",
+                    poss: "Ist das <b>dein</b> Handy?",
+                    possTr: "¿Es tu móvil?"
+                }
+            },
+            {
+                subject: "er",
+                hint: "",
+                base: "sein-",
+                baseTranslation: "su (de él)",
+                masc: "sein",
+                fem: "seine",
+                neu: "sein",
+                plu: "seine",
+                statement: {
+                    pro: "<b>Er</b> arbeitet am Wochenende.",
+                    proTr: "Él trabaja el fin de semana.",
+                    poss: "<b>Sein</b> Paket ist nicht gekommen.",
+                    possTr: "Su paquete no llegó."
+                },
+                question: {
+                    pro: "Hat <b>er</b> Zeit?",
+                    proTr: "¿Tiene tiempo?",
+                    poss: "Wo ist <b>sein</b> Buch?",
+                    possTr: "¿Dónde está su libro?"
+                }
+            },
+            {
+                subject: "sie",
+                hint: "ella",
+                base: "ihr-",
+                baseTranslation: "su (de ella)",
+                masc: "ihr",
+                fem: "ihre",
+                neu: "ihr",
+                plu: "ihre",
+                statement: {
+                    pro: "<b>Sie</b> hilft mir.",
+                    proTr: "Ella me ayuda.",
+                    poss: "<b>Ihre</b> Wohnung ist in Berlin.",
+                    possTr: "Su piso está en Berlín."
+                },
+                question: {
+                    pro: "Kann <b>sie</b> helfen?",
+                    proTr: "¿Puede ayudar?",
+                    poss: "Ist das <b>ihre</b> Tasche?",
+                    possTr: "¿Es su bolso?"
+                }
+            },
+            {
+                subject: "es",
+                hint: "neutro",
+                base: "sein-",
+                baseTranslation: "su (de ello)",
+                masc: "sein",
+                fem: "seine",
+                neu: "sein",
+                plu: "seine",
+                statement: {
+                    pro: "<b>Es</b> kostet zehn Euro.",
+                    proTr: "Cuesta diez euros.",
+                    poss: "<b>Sein</b> Zimmer ist klein.",
+                    possTr: "Su habitación es pequeña."
+                },
+                question: {
+                    pro: "Wie viel kostet <b>es</b>?",
+                    proTr: "¿Cuánto cuesta?",
+                    poss: "Ist das <b>sein</b> Zimmer?",
+                    possTr: "¿Es su habitación?"
+                }
+            },
+            {
+                subject: "wir",
+                hint: "",
+                base: "unser-",
+                baseTranslation: "nuestro/a",
+                masc: "unser",
+                fem: "unsere",
+                neu: "unser",
+                plu: "unsere",
+                statement: {
+                    pro: "<b>Wir</b> treffen uns am Samstag.",
+                    proTr: "Nos encontramos el sábado.",
+                    poss: "<b>Unser</b> Lehrer ist nett.",
+                    possTr: "Nuestro profesor es amable."
+                },
+                question: {
+                    pro: "Können <b>wir</b> uns treffen?",
+                    proTr: "¿Podemos encontrarnos?",
+                    poss: "Ist das <b>unser</b> Tisch?",
+                    possTr: "¿Es nuestra mesa?"
+                }
+            },
+            {
+                subject: "ihr",
+                hint: "vosotros",
+                base: "euer- / eur-",
+                baseTranslation: "vuestro/a",
+                masc: "euer",
+                fem: "eure",
+                neu: "euer",
+                plu: "eure",
+                statement: {
+                    pro: "<b>Ihr</b> kommt zu spät.",
+                    proTr: "Llegáis tarde.",
+                    poss: "<b>Eure</b> Kinder spielen im Park.",
+                    possTr: "Vuestros hijos juegan en el parque."
+                },
+                question: {
+                    pro: "Kommt <b>ihr</b> morgen?",
+                    proTr: "¿Venís mañana?",
+                    poss: "Sind das <b>eure</b> Kinder?",
+                    possTr: "¿Son vuestros hijos?"
+                }
+            },
+            {
+                subject: "sie",
+                hint: "ellos",
+                base: "ihr-",
+                baseTranslation: "su (de ellos)",
+                masc: "ihr",
+                fem: "ihre",
+                neu: "ihr",
+                plu: "ihre",
+                statement: {
+                    pro: "<b>Sie</b> wohnen in Hamburg.",
+                    proTr: "Ellos viven en Hamburgo.",
+                    poss: "<b>Ihre</b> Freunde kommen morgen.",
+                    possTr: "Sus amigos vienen mañana."
+                },
+                question: {
+                    pro: "Haben <b>sie</b> Zeit?",
+                    proTr: "¿Tienen tiempo?",
+                    poss: "Sind das <b>ihre</b> Freunde?",
+                    possTr: "¿Son sus amigos?"
+                }
+            },
+            {
+                subject: "Sie",
+                hint: "formal",
+                base: "Ihr-",
+                baseTranslation: "su (formal)",
+                masc: "Ihr",
+                fem: "Ihre",
+                neu: "Ihr",
+                plu: "Ihre",
+                statement: {
+                    pro: "<b>Sie</b> haben einen Termin.",
+                    proTr: "Usted tiene una cita.",
+                    poss: "Ist das <b>Ihre</b> Tasche?",
+                    possTr: "¿Es su bolso?"
+                },
+                question: {
+                    pro: "Haben <b>Sie</b> einen Termin?",
+                    proTr: "¿Tiene una cita?",
+                    poss: "Ist das <b>Ihre</b> Rechnung?",
+                    possTr: "¿Es su factura?"
+                }
+            }
         ];
 
-        const determinerKeys = ["der männlich (nominativ)", "die weiblich (nominativ)", "das neutral (nominativ)", "die plural (nominativ)"];
+        let currentMode = "statement";
 
-        const pronunciationMap = {
-            "ich": "/ij/",
-            "du": "/du/",
-            "er": "/ea/",
-            "sie (ella)": "/si/",
-            "es (neutro)": "/es/",
-            "wir": "/via/",
-            "ihr (vosotros)": "/ia/",
-            "sie (ellos)": "/si/",
-            "Sie (formal)": "/si/"
-        };
+        function renderArticles() {
+            const container = document.getElementById("articles-grid");
+            container.innerHTML = "";
 
-        const spanishTranslationMap = { "ich": "yo", "du": "tú", "er": "él", "wir": "nosotros/as" };
+            articlesData.forEach((item, index) => {
+                const row = document.createElement("div");
+                row.className = "grid grid-cols-[150px_repeat(4,_1fr)_230px] divide-x divide-slate-100 border-b border-slate-100 group cursor-pointer";
+                row.onclick = () => row.classList.toggle("active");
 
-        function formatMultiLine(text, isTranslationBase) {
-            if (typeof text !== 'string') return text;
-            let newText = text.replace(/ \/ /g, '<br>');
-            if (!isTranslationBase) { newText = newText.replace(/\(Nominativ\)/g, '<br>(Nom.)'); } 
-            else { newText = newText.replace(/\(Nominativ\)/g, '').replace(/-\s*$/, ''); }
-            return newText;
-        }
-
-        function formatSubjectColumn(text) {
-            if (typeof text !== 'string') return text;
-            const parenthesisMatch = text.match(/ \((ella|vosotros|ellos|formal|neutro)\)/);
-            const baseText = text.replace(parenthesisMatch ? parenthesisMatch[0] : '', '').trim();
-            const pronunciation = pronunciationMap[text] || '';
-            const simpleSpanishTranslation = spanishTranslationMap[baseText] || '';
-            let formattedText = '';
-            if (spanishTranslationMap[baseText]) {
-                formattedText += `<span class="base-article-german">${baseText}</span>`;
-                if (pronunciation) {
-                    formattedText += `<span class="pronunciation-hint subject-translation-hidden">→${pronunciation}</span>`;
-                }
-                if (simpleSpanishTranslation) {
-                    formattedText += `<br><span class="text-xs italic text-black" style="margin-top: 0.2rem;">${simpleSpanishTranslation}</span>`;
-                }
-            } else {
-                formattedText += `<span class="base-article-german">${baseText}</span>`;
-                if (pronunciation) {
-                    formattedText += `<span class="pronunciation-hint subject-translation-hidden">→${pronunciation}</span>`;
-                }
-                if (parenthesisMatch) {
-                    let parenthesisContent = parenthesisMatch[1];
-                    if (parenthesisContent === 'formal') { parenthesisContent = 'Usted / Ustedes'; }
-                    formattedText += `<br><span class="text-xs italic text-black" style="margin-top: 0.2rem;">${parenthesisContent}</span>`;
-                }
-            }
-            return formattedText;
-        }
-
-        let translationsVisible = false;
-        function toggleAllTranslations() {
-            const studyWrappers = document.querySelectorAll('.subject-study-cell, .article-study-cell-wrapper, .study-cell, .verb-example');
-            const button = document.getElementById('toggle-all-button');
-            const articlesTable = document.getElementById('articles-table-container');
-            const pronounsTable = document.getElementById('pronouns-table-container');
-            translationsVisible = !translationsVisible;
-            if (translationsVisible) {
-                articlesTable.classList.add('force-open');
-                pronounsTable.classList.add('force-open');
-                studyWrappers.forEach(w => w.classList.add('active'));
-                button.textContent = 'Ocultar todas las traducciones';
-            }
-            else {
-                articlesTable.classList.remove('force-open');
-                pronounsTable.classList.remove('force-open');
-                button.textContent = 'Mostrar todas las traducciones';
-                studyWrappers.forEach(w => w.classList.remove('active'));
-            }
-        }
-
-        function renderTables() {
-            renderArticlesTable();
-            renderPronounsTable();
-        }
-
-        function renderArticlesTable() {
-            const container = document.getElementById('articles-table-container');
-            let html = '<table class="divide-y divide-gray-300">';
-            html += '<thead class="bg-gray-100">';
-            html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-gray-50" style="font-size: 0.95rem;">Subjekt (Nom.)</th>`;
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-blue-200" style="font-size: 0.95rem;">Artikel</th>`;
-            const genders = [
-                { title: 'Männlich (M)', color: 'bg-blue-200', colspan: 1 },
-                { title: 'Weiblich (F)', color: 'bg-blue-300', colspan: 1 },
-                { title: 'Neutral (N)', color: 'bg-blue-400', colspan: 1 },
-                { title: 'Plural (P)', color: 'bg-blue-500', colspan: 1 }
-            ];
-            genders.forEach(g => {
-                html += `<th colspan="${g.colspan}" class="table-cell font-bold tracking-wider text-gray-900 ${g.color}" style="font-size: 0.95rem;">${g.title}</th>`;
+                row.innerHTML = `
+                    <div class="p-4 bg-slate-50 flex flex-col justify-center border-r sticky left-0 z-10 shadow-[4px_0_10px_-5px_rgba(0,0,0,0.05)]">
+                        <span class="font-bold text-slate-700 text-sm uppercase">${item.type}</span>
+                        <span class="text-xs text-slate-400 font-light">${item.subtitle}</span>
+                    </div>
+                    ${articleCell(item.masc, "col-masc", index === 0)}
+                    ${articleCell(item.fem, "col-fem", false)}
+                    ${articleCell(item.neu, "col-neu", false)}
+                    ${articleCell(item.plu, "col-plu", false)}
+                    <div class="p-4 bg-white flex flex-col justify-center items-center text-center">
+                        <span class="italic text-slate-700 font-bold text-xl leading-tight block w-full px-2">${item.example}</span>
+                        <div class="detail-row text-center mt-2">
+                            <div class="text-[15px] leading-snug text-slate-500 font-medium italic">${item.translation}</div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(row);
             });
-            html += '</tr>';
-            html += '</thead>';
-
-            const keysToSkip = ["Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M)", "Weiblich (F)", "Neutral (N)", "Plural (P)", "Trad. Base", "Category (M)", "Category (F)", "Category (N)", "Category (P)", "Explanation (M)", "Explanation (F)", "Explanation (N)", "Explanation (P)", "Sujeto Display"];
-
-            html += '<tbody class="divide-y divide-gray-200">';
-            // Filter only article rows
-            const articlesData = tableData.filter(row =>
-                row["Sujeto (Nominativo)"].startsWith('Art.') ||
-                row["Sujeto (Nominativo)"].startsWith('Articulo') ||
-                row["Sujeto (Nominativo)"] === "Nullartikel"
-            );
-            articlesData.forEach((row) => {
-                const rowClass = 'article-row';
-                html += `<tr class="${rowClass} hover:bg-opacity-75">`;
-
-                const headers = [
-                    "Sujeto (Nominativo)", "Base", "Trad. Base",
-                    "der männlich (nominativ)", "Männlich (M)", "Trad. (M)",
-                    "die weiblich (nominativ)", "Weiblich (F)", "Trad. (F)",
-                    "das neutral (nominativ)", "Neutral (N)", "Trad. (N)",
-                    "die plural (nominativ)", "Plural (P)", "Trad. (P)"
-                ];
-
-                headers.forEach((key) => {
-                    const value = row[key];
-                    if (keysToSkip.includes(key)) return;
-                    let cellClass = 'table-cell text-sm text-gray-800 text-left';
-                    let contentHtml = value;
-
-                    if (determinerKeys.includes(key)) {
-                        const mergedData = mergedDeterminerKeys.find(d => d.key === key);
-                        const determiner = row[mergedData.key];
-                        const exampleValue = row[mergedData.example];
-                        const tradExampleValue = row[mergedData.translation];
-
-                        const exampleTextToBold = determiner;
-                        let styledExampleValue = exampleValue.replace(new RegExp(`\b(${exampleTextToBold})\b`), (m) => `<b>${m}</b>`);
-                        cellClass += ` merged-gender-cell wrap-cell align-top ${mergedData.color}`;
-
-                        // Add white/light text for dark blue backgrounds (Weiblich, Neutral and Plural columns) - for examples and translations
-                        const isDarkBlue = mergedData.color === 'bg-blue-300' || mergedData.color === 'bg-blue-400' || mergedData.color === 'bg-blue-500';
-                        const textColorClass = isDarkBlue ? 'text-white' : '';
-                        const translationColorClass = isDarkBlue ? 'text-white' : '';
-
-                        const genderSuffix = key.includes('männlich') ? '(M)' : key.includes('weiblich') ? '(F)' : key.includes('neutral') ? '(N)' : '(P)';
-                        const categoryValue = row[`Category ${genderSuffix}`] || '';
-                        const explanationValue = row[`Explanation ${genderSuffix}`] || '';
-                        const isNullartikel = row["Sujeto (Nominativo)"] === "Nullartikel";
-
-                        if (exampleValue && exampleValue !== '-' && tradExampleValue && tradExampleValue !== '-') {
-                            if (isNullartikel && categoryValue) {
-                                contentHtml = `
-                                    <span class="nominativ-determiner">${determiner}</span>
-                                    <div class="study-cell cursor-pointer p-0 pt-1" onclick="openModal('${exampleValue.replace(/'/g, "\'")}', '${tradExampleValue.replace(/'/g, "\'")}', '${categoryValue.replace(/'/g, "\'")}', '${explanationValue.replace(/'/g, "\'")}')" style="cursor: pointer;">
-                                        <span class="german-phrase whitespace-nowrap ${textColorClass}">${styledExampleValue}</span>
-                                        <span class="spanish-translation ${translationColorClass}">${tradExampleValue}<br><span class="category-tag">${categoryValue}</span></span>
-                                    </div>`;
-                            } else {
-                                contentHtml = `
-                                    <span class="nominativ-determiner">${determiner}</span>
-                                    <div class="study-cell cursor-pointer p-0 pt-1" onclick="this.classList.toggle('active')">
-                                        <span class="german-phrase whitespace-nowrap ${textColorClass}">${styledExampleValue}</span>
-                                        <span class="spanish-translation ${translationColorClass}">${tradExampleValue}</span>
-                                    </div>`;
-                            }
-                        } else {
-                            contentHtml = `<span class="nominativ-determiner">${determiner}</span>${exampleValue ? '<br>' + exampleValue : ''}`;
-                        }
-                    }
-                    else if (key === "Base") {
-                        const baseValue = formatMultiLine(row["Base"], false);
-                        const germanLines = baseValue.split('<br>');
-                        let alignedHtml = '';
-                        const isArticleRow = row["Sujeto (Nominativo)"].startsWith('Art.') ||
-                                           row["Sujeto (Nominativo)"].startsWith('Articulo') ||
-                                           row["Sujeto (Nominativo)"] === 'Nullartikel';
-                        if (isArticleRow) {
-                            const tradBaseValue = formatMultiLine(row["Trad. Base"], true);
-                            const spanishLines = tradBaseValue.split('<br>');
-                            cellClass += ' article-study-cell-wrapper wrap-cell align-top';
-                            let germanDisplay = '';
-                            for (let i = 0; i < germanLines.length; i++) {
-                                const germanText = germanLines[i].trim();
-                                const spanishText = (spanishLines[i] || '').trim();
-                                if (germanText) {
-                                    const isNom = germanText === '(Nom.)';
-                                    const germanSpan = isNom ? `<span class="text-gray-800 font-medium">${germanText}</span>` : `<span class="base-article-german">${germanText}</span>`;
-                                    const hiddenPart = spanishText ? `<span class="article-hidden-part">→ ${spanishText}</span>` : '';
-                                    germanDisplay += `<div class="stacked-content-line">${germanSpan}${hiddenPart}</div>`;
-                                }
-                            }
-                            contentHtml = `<div class="w-full" onclick="this.classList.toggle('active')">${germanDisplay}</div>`;
-                            cellClass += ' merged-possessive-cell bg-blue-50';
-                        } else {
-                            const possessiveRoot = germanLines[0];
-                            const tradBaseValue = formatMultiLine(row["Trad. Base"], true);
-                            const spanishTranslation = tradBaseValue.split('<br>')[0].trim();
-                            alignedHtml = `
-                                <div class="stacked-content-line"><span class="base-article-german">${possessiveRoot}</span></div>
-                                <div class="stacked-content-line text-xs italic text-black" style="margin-top: 0.2rem;">${spanishTranslation}</div>`;
-                            contentHtml = alignedHtml;
-                            cellClass += ' merged-possessive-cell bg-blue-100';
-                        }
-                    }
-                    else {
-                        if (key === "Sujeto (Nominativo)") {
-                            const displayValue = row["Sujeto Display"] || value;
-                            contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(value)}</div>`;
-                            cellClass += ' wrap-cell align-top p-0';
-                            cellClass += ' bg-blue-25';
-                        }
-                    }
-                    html += `<td class="${cellClass}">${contentHtml}</td>`;
-                });
-                html += '</tr>';
-            });
-            html += '</tbody></table>';
-            container.innerHTML = html;
         }
 
-        function renderPronounsTable() {
-            const container = document.getElementById('pronouns-table-container');
-            let html = '<table class="divide-y divide-gray-300">';
-            html += '<thead class="bg-gray-100">';
-            html += '<tr>';
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-gray-50" style="font-size: 0.95rem;">Subjekt (Nom.)</th>`;
-            html += `<th colspan="1" class="table-cell font-bold tracking-wider text-gray-700 border-r border-gray-300 bg-blue-200" style="font-size: 0.95rem;">Possessiv</th>`;
-            const genders = [
-                { title: 'Männlich (M)', color: 'bg-blue-200', colspan: 1 },
-                { title: 'Weiblich (F)', color: 'bg-blue-300', colspan: 1 },
-                { title: 'Neutral (N)', color: 'bg-blue-400', colspan: 1 },
-                { title: 'Plural (P)', color: 'bg-blue-500', colspan: 1 }
-            ];
-            genders.forEach(g => {
-                html += `<th colspan="${g.colspan}" class="table-cell font-bold tracking-wider text-gray-900 ${g.color}" style="font-size: 0.95rem;">${g.title}</th>`;
-            });
-            html += '</tr>';
-            html += '</thead>';
-
-            const keysToSkip = ["Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M)", "Weiblich (F)", "Neutral (N)", "Plural (P)", "Trad. Base", "Category (M)", "Category (F)", "Category (N)", "Category (P)", "Explanation (M)", "Explanation (F)", "Explanation (N)", "Explanation (P)", "Sujeto Display"];
-
-            html += '<tbody class="divide-y divide-gray-200">';
-            // Filter only pronoun rows
-            const pronounsData = tableData.filter(row =>
-                !row["Sujeto (Nominativo)"].startsWith('Art.') &&
-                !row["Sujeto (Nominativo)"].startsWith('Articulo') &&
-                row["Sujeto (Nominativo)"] !== "Nullartikel"
-            );
-            pronounsData.forEach((row) => {
-                const rowClass = 'possessive-row';
-                html += `<tr class="${rowClass} hover:bg-opacity-75">`;
-
-                const headers = [
-                    "Sujeto (Nominativo)", "Base", "Trad. Base",
-                    "der männlich (nominativ)", "Männlich (M)", "Trad. (M)",
-                    "die weiblich (nominativ)", "Weiblich (F)", "Trad. (F)",
-                    "das neutral (nominativ)", "Neutral (N)", "Trad. (N)",
-                    "die plural (nominativ)", "Plural (P)", "Trad. (P)"
-                ];
-
-                headers.forEach((key) => {
-                    const value = row[key];
-                    if (keysToSkip.includes(key)) return;
-                    let cellClass = 'table-cell text-sm text-gray-800 text-left';
-                    let contentHtml = value;
-
-                    if (determinerKeys.includes(key)) {
-                        const mergedData = mergedDeterminerKeys.find(d => d.key === key);
-                        const determiner = row[mergedData.key];
-                        const exampleValue = row[mergedData.example];
-                        const tradExampleValue = row[mergedData.translation];
-
-                        const exampleTextToBold = determiner;
-                        let styledExampleValue = exampleValue.replace(new RegExp(`\b(${exampleTextToBold})\b`), (m) => `<b>${m}</b>`);
-                        cellClass += ` merged-gender-cell wrap-cell align-top ${mergedData.color}`;
-
-                        const isDarkBlue = mergedData.color === 'bg-blue-300' || mergedData.color === 'bg-blue-400' || mergedData.color === 'bg-blue-500';
-                        const textColorClass = isDarkBlue ? 'text-white' : '';
-                        const translationColorClass = isDarkBlue ? 'text-white' : '';
-
-                        if (exampleValue && exampleValue !== '-' && tradExampleValue && tradExampleValue !== '-') {
-                            contentHtml = `
-                                <span class="nominativ-determiner">${determiner}</span>
-                                <div class="study-cell cursor-pointer p-0 pt-1" onclick="this.classList.toggle('active')">
-                                    <span class="german-phrase whitespace-nowrap ${textColorClass}">${styledExampleValue}</span>
-                                    <span class="spanish-translation ${translationColorClass}">${tradExampleValue}</span>
-                                </div>`;
-                        } else {
-                            contentHtml = `<span class="nominativ-determiner">${determiner}</span>${exampleValue ? '<br>' + exampleValue : ''}`;
-                        }
-                    }
-                    else if (key === "Base") {
-                        const baseValue = formatMultiLine(row["Base"], false);
-                        const germanLines = baseValue.split('<br>');
-                        const possessiveRoot = germanLines[0];
-                        const tradBaseValue = formatMultiLine(row["Trad. Base"], true);
-                        const spanishTranslation = tradBaseValue.split('<br>')[0].trim();
-                        alignedHtml = `
-                            <div class="stacked-content-line"><span class="base-article-german">${possessiveRoot}</span></div>
-                            <div class="stacked-content-line text-xs italic text-black" style="margin-top: 0.2rem;">${spanishTranslation}</div>`;
-                        contentHtml = alignedHtml;
-                        cellClass += ' merged-possessive-cell bg-blue-100';
-                    }
-                    else {
-                        if (key === "Sujeto (Nominativo)") {
-                            const displayValue = row["Sujeto Display"] || value;
-                            contentHtml = `<div class="w-full subject-study-cell" onclick="this.classList.toggle('active')">${formatSubjectColumn(value)}</div>`;
-                            cellClass += ' wrap-cell align-top p-0';
-                            cellClass += ' bg-blue-25';
-                        }
-                    }
-                    html += `<td class="${cellClass}">${contentHtml}</td>`;
-                });
-                html += '</tr>';
-            });
-            html += '</tbody></table>';
-            container.innerHTML = html;
-        }
-
-        function openModal(german, spanish, category, explanation) {
-            const modal = document.getElementById('nullartikel-modal');
-            const modalBody = document.getElementById('modal-body');
-
-            modalBody.innerHTML = `
-                <h2 class="modal-title">Nullartikel - Ejemplo Detallado</h2>
-
-                <div class="modal-section">
-                    <div class="modal-label">Alemán (Sin Artículo)</div>
-                    <div class="modal-text" style="font-weight: 600; color: #1e40af;">${german}</div>
-                </div>
-
-                <div class="modal-section">
-                    <div class="modal-label">Español (Traducción Directa)</div>
-                    <div class="modal-text">${spanish}</div>
-                </div>
-
-                <div class="modal-section">
-                    <div class="modal-label">Categoría</div>
-                    <div class="modal-text"><span class="category-tag" style="font-size: 0.875rem; padding: 0.375rem 0.75rem;">${category}</span></div>
-                </div>
-
-                <div class="modal-section">
-                    <div class="modal-label">Explicación</div>
-                    <div class="modal-text">${explanation}</div>
+        function articleCell(value, colorClass, highlight) {
+            const valueClass = highlight ? "base-highlight text-3xl md:text-4xl" : "font-extrabold text-slate-700 text-3xl md:text-4xl";
+            return `
+                <div class="p-4 ${colorClass} flex flex-col justify-center items-center min-h-[96px]">
+                    <span class="${valueClass}">${value}</span>
                 </div>
             `;
-
-            modal.classList.add('active');
         }
 
-        function closeModal(event) {
-            if (!event || event.target.classList.contains('modal-overlay') || event.target.classList.contains('modal-close')) {
-                document.getElementById('nullartikel-modal').classList.remove('active');
-            }
+        function setMode(mode) {
+            currentMode = mode;
+            document.getElementById("btn-statement").classList.toggle("active", mode === "statement");
+            document.getElementById("btn-question").classList.toggle("active", mode === "question");
+            document.getElementById("beispiel-mode-tag").textContent = mode === "statement" ? "Aussagen A1" : "Fragen A1";
+            renderPronouns();
         }
 
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
+        function renderPronouns() {
+            const container = document.getElementById("pronouns-grid");
+            container.innerHTML = "";
 
-        window.onload = renderTables;
+            pronounsData.forEach((item, index) => {
+                const example = item[currentMode];
+                const row = document.createElement("div");
+                const bgClass = index % 2 === 0 ? "bg-white" : "bg-slate-50/50";
+                row.className = `grid grid-cols-[110px_250px_190px_repeat(4,_1fr)_270px] border-b border-slate-100 group hover:bg-white hover:shadow-md transition-all relative ${bgClass}`;
+                row.onclick = () => row.classList.toggle("active");
+
+                row.innerHTML = `
+                    <div class="px-2 py-4 border-r flex flex-col justify-center items-center">
+                        <span class="font-extrabold text-slate-800 text-3xl md:text-4xl">${item.subject}</span>
+                        ${item.hint ? `<span class="text-xs text-slate-500 font-normal mt-1">${item.hint}</span>` : ""}
+                    </div>
+                    <div class="px-2 py-4 border-r bg-slate-50/80 flex flex-col justify-center items-center text-center">
+                        <span class="font-extrabold text-slate-800 text-xl md:text-2xl leading-tight">${example.pro}</span>
+                        <div class="detail-row text-center mt-2 w-full px-2">
+                            <div class="text-[16px] leading-snug text-slate-500 font-medium italic">${example.proTr}</div>
+                        </div>
+                    </div>
+                    <div class="px-2 py-4 border-r bg-indigo-50 flex flex-col justify-center items-center relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
+                        <span class="font-extrabold text-black text-3xl md:text-4xl">${item.base}</span>
+                        <span class="text-xl md:text-2xl text-slate-600 font-bold italic mt-2">${item.baseTranslation}</span>
+                    </div>
+                    ${possCell(item.masc, "col-masc", true)}
+                    ${possCell(item.fem, "col-fem", false)}
+                    ${possCell(item.neu, "col-neu", false)}
+                    ${possCell(item.plu, "col-plu", false)}
+                    <div class="px-2 py-4 bg-yellow-50 flex flex-col justify-center items-center text-center">
+                        <span class="font-bold text-slate-700 text-xl md:text-2xl leading-tight">${example.poss}</span>
+                        <div class="detail-row text-center mt-2 w-full px-2">
+                            <div class="text-[16px] leading-snug text-slate-500 font-medium italic">${example.possTr}</div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function possCell(value, colorClass, highlight) {
+            const valueClass = highlight ? "base-highlight text-2xl md:text-3xl" : "font-extrabold text-2xl md:text-3xl";
+            return `
+                <div class="px-2 py-4 border-r ${colorClass} flex flex-col justify-center items-center">
+                    <span class="${valueClass}">${value}</span>
+                </div>
+            `;
+        }
+
+        renderArticles();
+        renderPronouns();
     </script>
 </body>
+
 </html>
