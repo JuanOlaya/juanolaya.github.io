@@ -290,7 +290,7 @@
                         <i
                             class="fa-solid fa-circle-notch text-4xl opacity-10 absolute -right-2 -bottom-4 group-hover:scale-110 transition-transform"></i>
                         <span class="font-bold text-lg">Neutral</span>
-                        <span class="text-xs opacity-80 uppercase tracking-widest">El Niño/Cosa</span>
+                        <span class="text-xs opacity-80 uppercase tracking-widest">Neutro</span>
                     </div>
 
                     <!-- Plural Header (Updated to Pastel) -->
@@ -299,7 +299,7 @@
                         <i
                             class="fa-solid fa-users text-4xl opacity-10 absolute -right-2 -bottom-4 group-hover:scale-110 transition-transform"></i>
                         <span class="font-bold text-lg">Plural</span>
-                        <span class="text-xs opacity-80 uppercase tracking-widest">Los/Las</span>
+                        <span class="text-xs opacity-80 uppercase tracking-widest">Plural</span>
                     </div>
 
                     <!-- Example Column Header (Moved to End) -->
@@ -335,23 +335,29 @@
                     <div class="flex items-start gap-3">
                         <span class="bg-blue-600 text-white font-extrabold w-6 h-6 rounded flex items-center justify-center text-sm shrink-0 mt-0.5">1</span>
                         <div class="text-slate-700 text-base">
-                            <strong class="text-slate-800 text-lg block mb-0.5">Memoriza "der → den":</strong> Este es el <span class="bg-yellow-250 bg-yellow-200 text-yellow-900 px-2 py-0.5 rounded font-extrabold text-sm">único cambio importante</span>.
+                            <strong class="text-slate-800 text-lg block mb-0.5">Artículo masculino "der → den":</strong> <span class="bg-yellow-250 bg-yellow-200 text-yellow-900 px-2 py-0.5 rounded font-extrabold text-sm">Único cambio importante</span>.
                         </div>
                     </div>
                     <div class="flex items-start gap-3">
                         <span class="bg-blue-600 text-white font-extrabold w-6 h-6 rounded flex items-center justify-center text-sm shrink-0 mt-0.5">2</span>
                         <div class="text-slate-700 text-base">
-                            <strong class="text-slate-800 text-lg block mb-0.5">Pregunta siempre:</strong> <span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded font-extrabold text-sm">Was?</span> "¿Qué?" o <span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded font-extrabold text-sm">Wen?</span> "¿A quién?" después del verbo.
+                            <strong class="text-slate-800 text-lg block mb-0.5">Posesivo masculino termina en "-en":</strong> <span class="bg-yellow-250 bg-yellow-200 text-yellow-900 px-2 py-0.5 rounded font-extrabold text-sm">Único cambio importante</span>.
                         </div>
                     </div>
                     <div class="flex items-start gap-3">
                         <span class="bg-blue-600 text-white font-extrabold w-6 h-6 rounded flex items-center justify-center text-sm shrink-0 mt-0.5">3</span>
                         <div class="text-slate-700 text-base">
-                            <strong class="text-slate-800 text-lg block mb-0.5">El sujeto hace, el objeto recibe:</strong> Esta regla <span class="underline decoration-2 decoration-amber-600 font-extrabold">nunca falla</span>.
+                            <strong class="text-slate-800 text-lg block mb-0.5">Pregunta siempre:</strong> <span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded font-extrabold text-sm">Was?</span> "¿Qué?" o <span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded font-extrabold text-sm">Wen?</span> "¿A quién?" después del verbo.
                         </div>
                     </div>
                     <div class="flex items-start gap-3">
                         <span class="bg-blue-600 text-white font-extrabold w-6 h-6 rounded flex items-center justify-center text-sm shrink-0 mt-0.5">4</span>
+                        <div class="text-slate-700 text-base">
+                            <strong class="text-slate-800 text-lg block mb-0.5">El sujeto hace, el objeto recibe:</strong> Esta regla <span class="underline decoration-2 decoration-amber-600 font-extrabold">nunca falla</span>.
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 md:col-span-2">
+                        <span class="bg-blue-600 text-white font-extrabold w-6 h-6 rounded flex items-center justify-center text-sm shrink-0 mt-0.5">5</span>
                         <div class="text-slate-700 text-base">
                             <strong class="text-slate-800 text-lg block mb-0.5">Practica con verbos transitivos:</strong> Verbos que necesitan un objeto (<span class="text-slate-600 italic">haben, sehen, kaufen, lieben, essen, trinken, brauchen, nehmen, machen, finden, suchen, lesen, schreiben, hören, kennen, besuchen, verstehen, etc.</span>).
                         </div>
@@ -386,10 +392,22 @@
                                 </div>
                                 <span class="text-xs font-normal opacity-60 mt-0.5">Ejemplo</span>
                             </div>
-                            <div class="px-2 py-4 col-masc text-center border-r text-blue-700">Masc.</div>
-                            <div class="px-2 py-4 col-fem text-center border-r text-red-700">Fem.</div>
-                            <div class="px-2 py-4 col-neu text-center border-r text-green-700">Neut.</div>
-                            <div class="px-2 py-4 col-plu text-center border-r text-amber-800">Plur.</div>
+                            <div class="px-2 py-4 col-masc text-center border-r flex flex-col justify-center items-center">
+                                <span class="font-extrabold text-blue-700 text-lg">Männlich</span>
+                                <span class="text-xs text-blue-600 font-normal lowercase tracking-wider mt-0.5">masculino</span>
+                            </div>
+                            <div class="px-2 py-4 col-fem text-center border-r flex flex-col justify-center items-center">
+                                <span class="font-extrabold text-red-700 text-lg">Weiblich</span>
+                                <span class="text-xs text-red-600 font-normal lowercase tracking-wider mt-0.5">femenino</span>
+                            </div>
+                            <div class="px-2 py-4 col-neu text-center border-r flex flex-col justify-center items-center">
+                                <span class="font-extrabold text-green-700 text-lg">Neutral</span>
+                                <span class="text-xs text-green-600 font-normal lowercase tracking-wider mt-0.5">neutro</span>
+                            </div>
+                            <div class="px-2 py-4 col-plu text-center border-r flex flex-col justify-center items-center">
+                                <span class="font-extrabold text-amber-800 text-lg">Plural</span>
+                                <span class="text-xs text-amber-700 font-normal lowercase tracking-wider mt-0.5">plural</span>
+                            </div>
                             <!-- New Column Header -->
                             <div class="px-2 py-4 text-center flex flex-col justify-center items-center bg-yellow-50 text-yellow-800"
                                 title="Contexto">
@@ -1133,7 +1151,10 @@
                     <!-- Possessives - Masculine -->
                     <div class="px-2 py-4 border-r col-masc flex flex-col justify-center items-center relative overflow-hidden group cursor-pointer">
                         <div class="absolute top-0 left-0 w-1 h-full bg-indigo-500"></div>
-                        <div class="${mascClass} relative z-10">${mascPossessive}</div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="${mascClass} relative z-10">${mascPossessive}</span>
+                            <span class="text-sm md:text-base text-slate-500 font-normal italic mt-0.5">${item["poss_trans"]}</span>
+                        </div>
                          ${mEx ? `
                         <div class="detail-row text-center mt-2 relative z-10">
                             <div class="text-xs italic text-blue-800 font-medium">${mEx}</div>
@@ -1145,7 +1166,7 @@
                     <div class="px-2 py-4 border-r col-fem flex flex-col justify-center items-center group cursor-pointer">
                         <div class="flex flex-col items-center justify-center">
                             <span class="font-extrabold text-2xl md:text-3xl">${item["die weiblich (akkusativ)"]}</span>
-                            <span class="text-xl md:text-2xl text-slate-600 font-bold italic mt-1">${item["poss_trans"]}</span>
+                            <span class="text-sm md:text-base text-slate-500 font-normal italic mt-0.5">${item["poss_trans"]}</span>
                         </div>
                          ${fEx ? `
                         <div class="detail-row text-center mt-2">
@@ -1155,8 +1176,11 @@
                     </div>
 
                     <!-- Possessives - Neutral -->
-                    <div class="px-2 py-4 border-r col-neu flex flex-col justify-center items-center font-extrabold text-2xl md:text-3xl group cursor-pointer">
-                        ${item["das neutral (akkusativ)"]}
+                    <div class="px-2 py-4 border-r col-neu flex flex-col justify-center items-center group cursor-pointer">
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-extrabold text-2xl md:text-3xl">${item["das neutral (akkusativ)"]}</span>
+                            <span class="text-sm md:text-base text-slate-500 font-normal italic mt-0.5">${item["poss_trans"]}</span>
+                        </div>
                          ${nEx ? `
                         <div class="detail-row text-center mt-2 font-normal">
                             <div class="text-xs italic text-green-800 font-medium">${nEx}</div>
@@ -1165,8 +1189,11 @@
                     </div>
 
                     <!-- Possessives - Plural -->
-                    <div class="px-2 py-4 col-plu border-r flex flex-col justify-center items-center font-extrabold text-2xl md:text-3xl group cursor-pointer">
-                        ${item["die plural (akkusativ)"]}
+                    <div class="px-2 py-4 col-plu border-r flex flex-col justify-center items-center group cursor-pointer">
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-extrabold text-2xl md:text-3xl">${item["die plural (akkusativ)"]}</span>
+                            <span class="text-sm md:text-base text-slate-500 font-normal italic mt-0.5">${item["poss_trans"]}</span>
+                        </div>
                          ${pEx ? `
                         <div class="detail-row text-center mt-2 font-normal">
                             <div class="text-xs italic text-amber-800 font-medium">${pEx}</div>

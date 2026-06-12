@@ -98,23 +98,29 @@
                 <div class="flex items-start gap-2.5">
                     <span class="bg-blue-600 text-white font-extrabold w-5 h-5 rounded flex items-center justify-center text-xs shrink-0 mt-0.5">1</span>
                     <div class="text-slate-700">
-                        <strong class="text-slate-800">Memoriza "der → den":</strong> Este es el <span class="bg-amber-200 text-amber-950 px-1.5 py-0.5 rounded font-bold text-[10px]">único cambio importante</span>.
+                        <strong class="text-slate-800">Artículo masculino "der → den":</strong> <span class="bg-amber-200 text-amber-950 px-1.5 py-0.5 rounded font-bold text-[10px]">Único cambio importante</span>.
                     </div>
                 </div>
                 <div class="flex items-start gap-2.5">
                     <span class="bg-blue-600 text-white font-extrabold w-5 h-5 rounded flex items-center justify-center text-xs shrink-0 mt-0.5">2</span>
                     <div class="text-slate-700">
-                        <strong class="text-slate-800">Pregunta siempre:</strong> <span class="bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded font-bold text-[10px]">Was?</span> "¿Qué?" o <span class="bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded font-bold text-[10px]">Wen?</span> "¿A quién?" después del verbo.
+                        <strong class="text-slate-800">Posesivo masculino termina en "-en":</strong> <span class="bg-amber-200 text-amber-950 px-1.5 py-0.5 rounded font-bold text-[10px]">Único cambio importante</span>.
                     </div>
                 </div>
                 <div class="flex items-start gap-2.5">
                     <span class="bg-blue-600 text-white font-extrabold w-5 h-5 rounded flex items-center justify-center text-xs shrink-0 mt-0.5">3</span>
                     <div class="text-slate-700">
-                        <strong class="text-slate-800">El sujeto hace, el objeto recibe:</strong> Esta regla <span class="underline decoration-2 decoration-amber-600 font-bold">nunca falla</span>.
+                        <strong class="text-slate-800">Pregunta siempre:</strong> <span class="bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded font-bold text-[10px]">Was?</span> "¿Qué?" o <span class="bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded font-bold text-[10px]">Wen?</span> "¿A quién?" después del verbo.
                     </div>
                 </div>
                 <div class="flex items-start gap-2.5">
                     <span class="bg-blue-600 text-white font-extrabold w-5 h-5 rounded flex items-center justify-center text-xs shrink-0 mt-0.5">4</span>
+                    <div class="text-slate-700">
+                        <strong class="text-slate-800">El sujeto hace, el objeto recibe:</strong> Esta regla <span class="underline decoration-2 decoration-amber-600 font-bold">nunca falla</span>.
+                    </div>
+                </div>
+                <div class="flex items-start gap-2.5 md:col-span-2">
+                    <span class="bg-blue-600 text-white font-extrabold w-5 h-5 rounded flex items-center justify-center text-xs shrink-0 mt-0.5">5</span>
                     <div class="text-slate-700">
                         <strong class="text-slate-800">Practica con verbos transitivos:</strong> <span class="text-slate-600">Verbos que necesitan un objeto (haben, sehen, kaufen, lieben, essen, trinken, brauchen, nehmen, machen, finden, suchen, lesen, schreiben, hören, kennen, besuchen, verstehen, etc.).</span>
                     </div>
@@ -135,10 +141,22 @@
                     </div>
                     <span class="text-[10px] font-normal opacity-60 mt-0.5">Ejemplo</span>
                 </div>
-                <div class="px-1 py-2 col-masc text-center border-r text-blue-700">Masc.</div>
-                <div class="px-1 py-2 col-fem text-center border-r text-red-700">Fem.</div>
-                <div class="px-1 py-2 col-neu text-center border-r text-green-700">Neut.</div>
-                <div class="px-1 py-2 col-plu text-center border-r text-amber-800">Plur.</div>
+                <div class="px-1 py-2 col-masc text-center border-r flex flex-col justify-center items-center">
+                    <span class="font-extrabold text-blue-700 text-sm">Männlich</span>
+                    <span class="text-[10px] text-blue-600 font-normal lowercase tracking-wider mt-0.5">masculino</span>
+                </div>
+                <div class="px-1 py-2 col-fem text-center border-r flex flex-col justify-center items-center">
+                    <span class="font-extrabold text-red-700 text-sm">Weiblich</span>
+                    <span class="text-[10px] text-red-600 font-normal lowercase tracking-wider mt-0.5">femenino</span>
+                </div>
+                <div class="px-1 py-2 col-neu text-center border-r flex flex-col justify-center items-center">
+                    <span class="font-extrabold text-green-700 text-sm">Neutral</span>
+                    <span class="text-[10px] text-green-600 font-normal lowercase tracking-wider mt-0.5">neutro</span>
+                </div>
+                <div class="px-1 py-2 col-plu text-center border-r flex flex-col justify-center items-center">
+                    <span class="font-extrabold text-amber-800 text-sm">Plural</span>
+                    <span class="text-[10px] text-amber-700 font-normal lowercase tracking-wider mt-0.5">plural</span>
+                </div>
                 <div class="px-1 py-2 text-center flex flex-col justify-center items-center bg-yellow-50 text-yellow-800">
                     <div class="flex items-center gap-1 justify-center">
                         <span class="font-extrabold text-sm md:text-base">Uso Posesivo</span>
@@ -493,25 +511,34 @@
 
                     <!-- Possessives - Masculine -->
                     <div class="px-1 py-1.5 border-r col-masc flex flex-col justify-center items-center relative overflow-hidden">
-                        <div class="${mascClass} relative z-10">${mascPossessive}</div>
+                        <div class="flex flex-col items-center justify-center">
+                            <div class="${mascClass} relative z-10">${mascPossessive}</div>
+                            <span class="text-[10px] text-slate-500 font-normal italic mt-0.5">${item["poss_trans"]}</span>
+                        </div>
                     </div>
 
                     <!-- Possessives - Feminine -->
                     <div class="px-1 py-1.5 border-r col-fem flex flex-col justify-center items-center">
                         <div class="flex flex-col items-center justify-center">
                             <span class="font-extrabold text-base md:text-lg">${item["die weiblich (akkusativ)"]}</span>
-                            <span class="text-xs md:text-sm text-slate-600 font-bold italic mt-0.5">${item["poss_trans"]}</span>
+                            <span class="text-[10px] text-slate-500 font-normal italic mt-0.5">${item["poss_trans"]}</span>
                         </div>
                     </div>
 
                     <!-- Possessives - Neutral -->
-                    <div class="px-1 py-1.5 border-r col-neu flex flex-col justify-center items-center font-extrabold text-base md:text-lg">
-                        ${item["das neutral (akkusativ)"]}
+                    <div class="px-1 py-1.5 border-r col-neu flex flex-col justify-center items-center">
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-extrabold text-base md:text-lg">${item["das neutral (akkusativ)"]}</span>
+                            <span class="text-[10px] text-slate-500 font-normal italic mt-0.5">${item["poss_trans"]}</span>
+                        </div>
                     </div>
 
                     <!-- Possessives - Plural -->
-                    <div class="px-1 py-1.5 col-plu border-r flex flex-col justify-center items-center font-extrabold text-base md:text-lg">
-                        ${item["die plural (akkusativ)"]}
+                    <div class="px-1 py-1.5 col-plu border-r flex flex-col justify-center items-center">
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-extrabold text-base md:text-lg">${item["die plural (akkusativ)"]}</span>
+                            <span class="text-[10px] text-slate-500 font-normal italic mt-0.5">${item["poss_trans"]}</span>
+                        </div>
                     </div>
 
                     <!-- New Column: Possessive Examples -->
