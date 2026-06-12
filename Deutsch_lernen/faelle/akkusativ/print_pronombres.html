@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Akkusativ: 2 Pronombres y Posesivos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: white;
+            color: #1e293b;
+        }
+
+        .col-masc {
+            background-color: #eff6ff !important;
+            border-color: #bfdbfe !important;
+            color: #1e40af !important;
+        }
+
+        .col-fem {
+            background-color: #fef2f2 !important;
+            border-color: #fecaca !important;
+            color: #991b1b !important;
+        }
+
+        .col-neu {
+            background-color: #f0fdf4 !important;
+            border-color: #bbf7d0 !important;
+            color: #166534 !important;
+        }
+
+        .col-plu {
+            background-color: #fffbeb !important;
+            border-color: #fde68a !important;
+            color: #92400e !important;
+        }
+
+        .morph-highlight {
+            position: relative;
+            background-color: white !important;
+            border: 2px solid #2563eb !important;
+            color: #2563eb !important;
+            font-weight: 800;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.375rem;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+            display: inline-block;
+        }
+
+        .morph-highlight::after {
+            content: '⚠️';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-size: 0.6rem;
+            background: white;
+            border-radius: 50%;
+            padding: 1px;
+            line-height: 1;
+            border: 1px solid #e2e8f0;
+        }
+
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 0.4cm;
+            }
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                zoom: 88%; /* Scales down the entire layout slightly to ensure single-page fit */
+            }
+        }
+    </style>
+</head>
+
+<body class="p-1">
+    <div class="max-w-7xl mx-auto">
+        <!-- Table Title -->
+        <div class="flex items-center gap-3 mb-2">
+            <span class="bg-slate-800 text-white w-6 h-6 rounded flex items-center justify-center font-bold text-sm">2</span>
+            <h2 class="text-xl font-bold text-slate-800">Pronombres y Posesivos (Akkusativ)</h2>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-200">
+            <!-- Grid Header -->
+            <div class="grid grid-cols-[90px_110px_200px_repeat(4,_1fr)_220px] text-base uppercase tracking-wider font-extrabold text-slate-650 border-b-2 border-slate-200 bg-slate-50">
+                <div class="px-1 py-2 text-center flex flex-col justify-center border-r">Sujeto<span class="text-[10px] font-normal opacity-60">Nominativ</span></div>
+                <div class="px-1 py-2 text-center flex flex-col justify-center border-r">Objeto<span class="text-[10px] font-normal opacity-60">Akkusativ</span></div>
+                <div class="px-1 py-2 text-center flex flex-col justify-center items-center border-r bg-slate-100 text-slate-650">
+                    <div class="flex items-center gap-1 justify-center">
+                        <span class="font-extrabold text-sm md:text-base">Beispiel</span>
+                        <span id="beispiel-mode-tag" class="bg-slate-200 text-slate-800 text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Aussage</span>
+                        <button id="toggle-beispiel-type" onclick="cycleBeispielMode()" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-1 py-0.5 rounded shadow text-[10px] transition-all active:scale-95 flex items-center justify-center select-none print:hidden" title="Cambiar modo de ejemplos">⇄</button>
+                    </div>
+                    <span class="text-[10px] font-normal opacity-60 mt-0.5">Ejemplo</span>
+                </div>
+                <div class="px-1 py-2 col-masc text-center border-r text-blue-700">Masc.</div>
+                <div class="px-1 py-2 col-fem text-center border-r text-red-700">Fem.</div>
+                <div class="px-1 py-2 col-neu text-center border-r text-green-700">Neut.</div>
+                <div class="px-1 py-2 col-plu text-center border-r text-amber-800">Plur.</div>
+                <div class="px-1 py-2 text-center flex flex-col justify-center bg-yellow-50 text-yellow-800">Uso Posesivo<span class="text-[10px] font-normal opacity-60">Contexto</span></div>
+            </div>
+
+            <!-- Rows Container -->
+            <div id="pronouns-grid">
+                <!-- JS Injected -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tableData = [
+            {
+                "Sujeto (Nominativo)": "ich",
+                "Pronombre (Akkusativ)": "mich",
+                "Trad. Pronombre": "me",
+                "Example": "Er liebt mich.",
+                "poss_trans": "mi",
+                "den männlich (akkusativ)": "meinen",
+                "die weiblich (akkusativ)": "meine",
+                "das neutral (akkusativ)": "mein",
+                "die plural (akkusativ)": "meine",
+                "PossessiveExample": "Ich mag meinen Job.",
+                "Männlich (M) - Ejemplos con Verbos": "Ich sehe meinen Bruder.",
+                "Trad. (M)": "Veo a mi hermano.",
+                "Weiblich (F) - Ejemplos con Verbos": "Ich besuche meine Oma hoy.",
+                "Trad. (F)": "Visito a mi abuela hoy.",
+                "Neutral (N) - Ejemplos con Verbos": "Ich putze mein Zimmer.",
+                "Trad. (N)": "Limpio mi cuarto.",
+                "Plural (P) - Ejemplos con Verbos": "Ich mag meine Blumen.",
+                "Trad. (P)": "Me gustan mis flores."
+            },
+            {
+                "Sujeto (Nominativo)": "du",
+                "Pronombre (Akkusativ)": "dich",
+                "Trad. Pronombre": "te",
+                "Example": "Ich sehe dich.",
+                "poss_trans": "tu",
+                "den männlich (akkusativ)": "deinen",
+                "die weiblich (akkusativ)": "deine",
+                "das neutral (akkusativ)": "dein",
+                "die plural (akkusativ)": "deine",
+                "PossessiveExample": "Ich sehe deinen Hund.",
+                "Männlich (M) - Ejemplos con Verbos": "Du hast deinen Hund.",
+                "Trad. (M)": "Tienes tu perro.",
+                "Weiblich (F) - Ejemplos con Verbos": "Du schreibst deine Nachricht.",
+                "Trad. (F)": "Escribes tu mensaje.",
+                "Neutral (N) - Ejemplos con Verbos": "Du liest dein Buch gern.",
+                "Trad. (N)": "Lees tu libro con gusto.",
+                "Plural (P) - Ejemplos con Verbos": "Du suchst deine Schlüssel.",
+                "Trad. (P)": "Buscas tus llaves."
+            },
+            {
+                "Sujeto (Nominativo)": "er",
+                "Pronombre (Akkusativ)": "ihn",
+                "Trad. Pronombre": "lo",
+                "Example": "Wir kennen ihn.",
+                "poss_trans": "su (de él)",
+                "den männlich (akkusativ)": "seinen",
+                "die weiblich (akkusativ)": "seine",
+                "das neutral (akkusativ)": "sein",
+                "die plural (akkusativ)": "seine",
+                "PossessiveExample": "Er sucht seinen Schlüssel.",
+                "Männlich (M) - Ejemplos con Verbos": "Er kauft seinen Ball.",
+                "Trad. (M)": "Él compra su pelota.",
+                "Weiblich (F) - Ejemplos con Verbos": "Er sucht seine Mutter.",
+                "Trad. (F)": "Él busca a su madre.",
+                "Neutral (N) - Ejemplos con Verbos": "Er hat sein Handy.",
+                "Trad. (N)": "Él tiene su móvil.",
+                "Plural (P) - Ejemplos con Verbos": "Er sieht seine Freunde.",
+                "Trad. (P)": "Él ve a sus amigos."
+            },
+            {
+                "Sujeto (Nominativo)": "sie (ella)",
+                "Pronombre (Akkusativ)": "sie",
+                "Trad. Pronombre": "la",
+                "Example": "Ich frage sie.",
+                "poss_trans": "su (de ella)",
+                "den männlich (akkusativ)": "ihren",
+                "die weiblich (akkusativ)": "ihre",
+                "das neutral (akkusativ)": "ihr",
+                "die plural (akkusativ)": "ihre",
+                "PossessiveExample": "Ich mag ihre Idee.",
+                "Männlich (M) - Ejemplos con Verbos": "Sie liest ihren Roman.",
+                "Trad. (M)": "Ella lee su novela.",
+                "Weiblich (F) - Ejemplos con Verbos": "Sie kauft ihre Schuhe hoy.",
+                "Trad. (F)": "Ella compra sus zapatos hoy.",
+                "Neutral (N) - Ejemplos con Verbos": "Sie putzt ihr Auto.",
+                "Trad. (N)": "Ella limpia su coche.",
+                "Plural (P) - Ejemplos con Verbos": "Sie sieht ihre Freundinnen.",
+                "Trad. (P)": "Ella ve a sus amigas."
+            },
+            {
+                "Sujeto (Nominativo)": "es (neutro)",
+                "Pronombre (Akkusativ)": "es",
+                "Trad. Pronombre": "lo",
+                "Example": "Er hat es.",
+                "poss_trans": "su (de ello)",
+                "den männlich (akkusativ)": "seinen",
+                "die weiblich (akkusativ)": "seine",
+                "das neutral (akkusativ)": "sein",
+                "die plural (akkusativ)": "seine",
+                "PossessiveExample": "Ich sehe sein Spielzeug.",
+                "Männlich (M) - Ejemplos con Verbos": "Das Baby findet seinen Ball.",
+                "Trad. (M)": "El bebé encuentra su pelota.",
+                "Weiblich (F) - Ejemplos con Verbos": "Das Kind sucht seine Mutter.",
+                "Trad. (F)": "El niño busca a su madre.",
+                "Neutral (N) - Ejemplos con Verbos": "Es mag sein Spielzeug.",
+                "Trad. (N)": "Le gusta su juguete.",
+                "Plural (P) - Ejemplos con Verbos": "Es isst seine Kekse.",
+                "Trad. (P)": "Come sus galletas."
+            },
+            {
+                "Sujeto (Nominativo)": "wir",
+                "Pronombre (Akkusativ)": "uns",
+                "Trad. Pronombre": "nos",
+                "Example": "Sie besuchen uns.",
+                "poss_trans": "nuestro/a",
+                "den männlich (akkusativ)": "unseren",
+                "die weiblich (akkusativ)": "unsere",
+                "das neutral (akkusativ)": "unser",
+                "die plural (akkusativ)": "unsere",
+                "PossessiveExample": "Ich mag unser Haus.",
+                "Männlich (M) - Ejemplos con Verbos": "Wir brauchen unseren Schlüssel.",
+                "Trad. (M)": "Necesitamos nuestra llave.",
+                "Weiblich (F) - Ejemplos con Verbos": "Wir lieben unsere Stadt.",
+                "Trad. (F)": "Amamos nuestra ciudad.",
+                "Neutral (N) - Ejemplos con Verbos": "Wir essen unser Brot.",
+                "Trad. (N)": "Comemos nuestro pan.",
+                "Plural (P) - Ejemplos con Verbos": "Wir besuchen unsere Eltern.",
+                "Trad. (P)": "Visitamos a nuestros padres."
+            },
+            {
+                "Sujeto (Nominativo)": "ihr (vosotros)",
+                "Pronombre (Akkusativ)": "euch",
+                "Trad. Pronombre": "os",
+                "Example": "Ich höre euch.",
+                "poss_trans": "vuestro/a",
+                "den männlich (akkusativ)": "euren",
+                "die weiblich (akkusativ)": "eure",
+                "das neutral (akkusativ)": "euer",
+                "die plural (akkusativ)": "eure",
+                "PossessiveExample": "Ich brauche eure Hilfe.",
+                "Männlich (M) - Ejemplos con Verbos": "Ihr esst euren Käse.",
+                "Trad. (M)": "Coméis vuestro queso.",
+                "Weiblich (F) - Ejemplos con Verbos": "Habt ihr eure Tickets?",
+                "Trad. (F)": "¿Tenéis vuestras entradas?",
+                "Neutral (N) - Ejemplos con Verbos": "Trinkt ihr euer Wasser?",
+                "Trad. (N)": "¿Bebéis vuestra agua?",
+                "Plural (P) - Ejemplos con Verbos": "Wo sind eure Fahrräder?",
+                "Trad. (P)": "¿Dónde están vuestras bicicletas."
+            },
+            {
+                "Sujeto (Nominativo)": "sie (ellos)",
+                "Pronombre (Akkusativ)": "sie",
+                "Trad. Pronombre": "los/las",
+                "Example": "Wir rufen sie an.",
+                "poss_trans": "su (de ellos)",
+                "den männlich (akkusativ)": "ihren",
+                "die weiblich (akkusativ)": "ihre",
+                "das neutral (akkusativ)": "ihr",
+                "die plural (akkusativ)": "ihre",
+                "PossessiveExample": "Ich höre ihre Stimmen.",
+                "Männlich (M) - Ejemplos con Verbos": "Sie trinken ihren Tee.",
+                "Trad. (M)": "Beben su té.",
+                "Weiblich (F) - Ejemplos con Verbos": "Sie suchen ihre Katze.",
+                "Trad. (F)": "Buscan a su gato.",
+                "Neutral (N) - Ejemplos con Verbos": "Sie verkaufen ihr Haus.",
+                "Trad. (N)": "Venden su casa.",
+                "Plural (P) - Ejemplos con Verbos": "Sie machen ihre Hausaufgaben.",
+                "Trad. (P)": "Hacen sus deberes."
+            },
+            {
+                "Sujeto (Nominativo)": "Sie (formal)",
+                "Pronombre (Akkusativ)": "Sie",
+                "Trad. Pronombre": "Le",
+                "Example": "Ich verstehe Sie.",
+                "poss_trans": "su (formal)",
+                "den männlich (akkusativ)": "Ihren",
+                "die weiblich (akkusativ)": "Ihre",
+                "das neutral (akkusativ)": "Ihr",
+                "die plural (akkusativ)": "Ihre",
+                "PossessiveExample": "Dank für Ihre Hilfe.",
+                "Männlich (M) - Ejemplos con Verbos": "Sie tragen Ihren Anzug.",
+                "Trad. (M)": "Lleva su traje.",
+                "Weiblich (F) - Ejemplos con Verbos": "Haben Sie Ihre Karte?",
+                "Trad. (F)": "¿Tiene su tarjeta?",
+                "Neutral (N) - Ejemplos con Verbos": "Trinken Sie Ihr Bier?",
+                "Trad. (N)": "¿Bebe su cerveza?",
+                "Plural (P) - Ejemplos con Verbos": "Wo sind Ihre Koffer?",
+                "Trad. (P)": "¿Dónde están sus maletas?"
+            }
+        ];
+
+        const contentMap = {
+            "ich": {
+                statement: {
+                    PRO: "Er liebt <b>mich</b>.", PRO_TR: "Él <b>me</b> ama.",
+                    POSS: "Ich mag <b>meinen</b> Job.", POSS_TR: "Me gusta mi trabajo."
+                },
+                question: {
+                    PRO: "Hören Sie <b>mich</b>?", PRO_TR: "¿<b>Me</b> escucha?",
+                    POSS: "Mag ich <b>meinen</b> Job?", POSS_TR: "¿Me gusta mi trabajo?"
+                },
+                telc_a1: {
+                    PRO: "Können Sie <b>mich</b> anrufen?", PRO_TR: "¿Puede llamar<b>me</b>?",
+                    POSS: "Ich mag <b>meinen</b> Job.", POSS_TR: "Me gusta mi trabajo."
+                }
+            },
+            "du": {
+                statement: {
+                    PRO: "Ich sehe <b>dich</b>.", PRO_TR: "<b>Te</b> veo.",
+                    POSS: "Ich sehe <b>deinen</b> Hund.", POSS_TR: "Veo a tu perro."
+                },
+                question: {
+                    PRO: "Kann ich <b>dich</b> anrufen?", PRO_TR: "¿Puedo llamar<b>te</b>?",
+                    POSS: "Hast du <b>deinen</b> Schlüssel?", POSS_TR: "¿Tienes tu llave?"
+                },
+                telc_a1: {
+                    PRO: "Ich sehe <b>dich</b> morgen.", PRO_TR: "<b>Te</b> veo mañana.",
+                    POSS: "Ich sehe <b>deinen</b> Hund.", POSS_TR: "Veo a tu perro."
+                }
+            },
+            "er": {
+                statement: {
+                    PRO: "Wir kennen <b>ihn</b>.", PRO_TR: "<b>Lo</b> conocemos.",
+                    POSS: "Er sucht <b>seinen</b> Schlüssel.", POSS_TR: "Él busca su llave."
+                },
+                question: {
+                    PRO: "Kennst du <b>ihn</b>?", PRO_TR: "¿<b>Lo</b> conoces?",
+                    POSS: "Sucht er <b>seinen</b> Stift?", POSS_TR: "¿Busca él su bolígrafo?"
+                },
+                telc_a1: {
+                    PRO: "Ich kenne <b>ihn</b> nicht.", PRO_TR: "No <b>lo</b> conozco.",
+                    POSS: "Er sucht <b>seinen</b> Schlüssel.", POSS_TR: "Él busca su llave."
+                }
+            },
+            "sie (ella)": {
+                statement: {
+                    PRO: "Ich frage <b>sie</b>.", PRO_TR: "<b>Le</b> pregunto a ella.",
+                    POSS: "Ich mag <b>ihre</b> Idee.", POSS_TR: "Me gusta su idea."
+                },
+                question: {
+                    PRO: "Wann triffst du <b>sie</b>?", PRO_TR: "¿Cuándo <b>la</b> encuentras?",
+                    POSS: "Hat sie <b>ihren</b> Ausweis?", POSS_TR: "¿Tiene ella su identificación?"
+                },
+                telc_a1: {
+                    PRO: "Ich besuche <b>sie</b> am Samstag.", PRO_TR: "<b>La</b> visito el sábado.",
+                    POSS: "Ich mag <b>ihre</b> Idee.", POSS_TR: "Me gusta su idea."
+                }
+            },
+            "es (neutro)": {
+                statement: {
+                    PRO: "Er hat <b>es</b>.", PRO_TR: "Él <b>lo</b> tiene.",
+                    POSS: "Ich sehe <b>sein</b> Spielzeug.", POSS_TR: "Veo su juguete."
+                },
+                question: {
+                    PRO: "Hast du <b>es</b>?", PRO_TR: "¿<b>Lo</b> tienes?",
+                    POSS: "Sucht es <b>sein</b> Spielzeug?", POSS_TR: "¿Busca (el niño/animal) su juguete?"
+                },
+                telc_a1: {
+                    PRO: "Ich habe <b>es</b> vergessen.", PRO_TR: "<b>Lo</b> he olvidado.",
+                    POSS: "Ich sehe <b>sein</b> Spielzeug.", POSS_TR: "Veo su juguete."
+                }
+            },
+            "wir": {
+                statement: {
+                    PRO: "Sie besuchen <b>uns</b>.", PRO_TR: "Ellos <b>nos</b> visitan.",
+                    POSS: "Ich mag <b>unser</b> Haus.", POSS_TR: "Me gusta nuestra casa."
+                },
+                question: {
+                    PRO: "Besucht ihr <b>uns</b> morgen?", PRO_TR: "¿<b>Nos</b> visitáis mañana?",
+                    POSS: "Mögt ihr <b>unser</b> Essen?", POSS_TR: "¿Os gusta nuestra comida?"
+                },
+                telc_a1: {
+                    PRO: "Können Sie <b>uns</b> helfen?", PRO_TR: "¿Puede ayudar<b>nos</b>?",
+                    POSS: "Ich mag <b>unser</b> Haus.", POSS_TR: "Me gusta nuestra casa."
+                }
+            },
+            "ihr (vosotros)": {
+                statement: {
+                    PRO: "Ich höre <b>euch</b>.", PRO_TR: "<b>Os</b> oigo.",
+                    POSS: "Ich brauche <b>eure</b> Hilfe.", POSS_TR: "Necesito vuestra ayuda."
+                },
+                question: {
+                    PRO: "Kann ich <b>euch</b> helfen?", PRO_TR: "¿Puedo ayudar<b>os</b>?",
+                    POSS: "Habt ihr <b>eure</b> Tickets?", POSS_TR: "¿Tenéis vuestros boletos?"
+                },
+                telc_a1: {
+                    PRO: "Ich lade <b>euch</b> ein.", PRO_TR: "<b>Os</b> invito.",
+                    POSS: "Ich brauche <b>eure</b> Hilfe.", POSS_TR: "Necesito vuestra ayuda."
+                }
+            },
+            "sie (ellos)": {
+                statement: {
+                    PRO: "Wir rufen <b>sie</b> an.", PRO_TR: "<b>Los</b> llamamos.",
+                    POSS: "Ich höre <b>ihre</b> Stimmen.", POSS_TR: "Oigo sus voces."
+                },
+                question: {
+                    PRO: "Laden wir <b>sie</b> ein?", PRO_TR: "¿<b>Los</b> invitamos?",
+                    POSS: "Haben sie <b>ihre</b> Bücher?", POSS_TR: "¿Tienen ellos sus libros?"
+                },
+                telc_a1: {
+                    PRO: "Ich treffe <b>sie</b> im Park.", PRO_TR: "<b>Los</b> encuentro en el parque.",
+                    POSS: "Ich höre <b>ihre</b> Stimmen.", POSS_TR: "Oigo sus voces."
+                }
+            },
+            "Sie (formal)": {
+                statement: {
+                    PRO: "Ich verstehe <b>Sie</b>.", PRO_TR: "<b>Lo</b>/<b>La</b> entiendo (a usted).",
+                    POSS: "Dank für <b>Ihre</b> Hilfe.", POSS_TR: "Gracias por su ayuda."
+                },
+                question: {
+                    PRO: "Kann ich <b>Sie</b> anrufen?", PRO_TR: "¿Puedo llamar<b>le</b>?",
+                    POSS: "Haben Sie <b>Ihren</b> Pass?", POSS_TR: "¿Tiene su pasaporte?"
+                },
+                telc_a1: {
+                    PRO: "Ich verstehe <b>Sie</b> nicht.", PRO_TR: "No <b>le</b> entiendo.",
+                    POSS: "Dank für <b>Ihre</b> Hilfe.", POSS_TR: "Gracias por su ayuda."
+                }
+            }
+        };
+
+        const pronounsContainer = document.getElementById('pronouns-grid');
+        const pronounsData = tableData.filter(row => row["Pronombre (Akkusativ)"]);
+        let currentMode = 'statement'; // 'statement', 'question', or 'telc_a1'
+
+        function cycleBeispielMode() {
+            if (currentMode === 'statement') {
+                currentMode = 'question';
+            } else if (currentMode === 'question') {
+                currentMode = 'telc_a1';
+            } else {
+                currentMode = 'statement';
+            }
+            
+            const tag = document.getElementById('beispiel-mode-tag');
+            if (currentMode === 'statement') {
+                tag.textContent = 'Aussage';
+            } else if (currentMode === 'question') {
+                tag.textContent = 'Frage';
+            } else {
+                tag.textContent = 'Telc A1';
+            }
+            renderPronouns();
+        }
+
+        function renderPronouns() {
+            pronounsContainer.innerHTML = '';
+            pronounsData.forEach((item, index) => {
+                const row = document.createElement('div');
+                const isOdd = index % 2 === 0;
+                const bgClass = isOdd ? 'bg-white' : 'bg-slate-50/50';
+
+                row.className = `grid grid-cols-[90px_110px_200px_repeat(4,_1fr)_220px] border-b border-slate-100 relative ${bgClass}`;
+
+                let subject = item["Sujeto (Nominativo)"].replace(' (ella)', '').replace(' (vosotros)', '').replace(' (ellos)', '').replace(' (neutro)', '');
+                if (subject.includes('(formal)')) {
+                    subject = subject.replace(' (formal)', '');
+                    subject = `${subject}<span class="text-sm font-normal opacity-70 ml-1">(formal)</span>`;
+                }
+                const hint = item["Sujeto (Nominativo)"].includes('ella') ? 'ella' :
+                    item["Sujeto (Nominativo)"].includes('ellos') ? 'ellos' :
+                    item["Sujeto (Nominativo)"].includes('vosotros') ? 'vosotros' :
+                    item["Sujeto (Nominativo)"].includes('formal') ? 'usted' :
+                    item["Sujeto (Nominativo)"].includes('neutro') ? 'neutro' : '';
+
+                const mascPossessive = item["den männlich (akkusativ)"];
+                const mascClass = mascPossessive ? 'morph-highlight text-lg md:text-xl' : 'font-extrabold text-lg md:text-xl';
+
+                const key = item["Sujeto (Nominativo)"];
+                const modeData = contentMap[key] ? contentMap[key][currentMode] : null;
+                const mainContent = modeData || { PRO: item.Example, POSS: item.PossessiveExample };
+
+                row.innerHTML = `
+                    <!-- Subject -->
+                    <div class="px-1 py-1.5 border-r flex flex-col justify-center items-center">
+                        <span class="font-extrabold text-slate-800 text-xl md:text-2xl">${subject}</span>
+                        ${hint ? `<span class="text-[9px] text-slate-500 font-normal mt-0.5">${hint}</span>` : ''}
+                    </div>
+
+                    <!-- Pronoun Accusative -->
+                    <div class="px-1 py-1.5 border-r bg-indigo-50/70 flex flex-col justify-center items-center relative overflow-hidden">
+                        <span class="font-extrabold text-black text-xl md:text-2xl">${item["Pronombre (Akkusativ)"]}</span>
+                        <span class="text-sm md:text-base text-slate-600 font-bold italic mt-0.5">${item["Trad. Pronombre"]}</span>
+                    </div>
+
+                    <!-- Example Sentence -->
+                    <div class="px-1 py-1.5 border-r bg-slate-50/40 flex flex-col justify-center items-center text-center">
+                        <span class="font-semibold text-slate-800 text-sm md:text-base leading-snug">${mainContent.PRO}</span>
+                        <span class="text-xs leading-snug text-slate-500 font-medium italic mt-0.5">${mainContent.PRO_TR || ''}</span>
+                    </div>
+
+                    <!-- Possessives - Masculine -->
+                    <div class="px-1 py-1.5 border-r col-masc flex flex-col justify-center items-center relative overflow-hidden">
+                        <div class="${mascClass} relative z-10">${mascPossessive}</div>
+                    </div>
+
+                    <!-- Possessives - Feminine -->
+                    <div class="px-1 py-1.5 border-r col-fem flex flex-col justify-center items-center">
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-extrabold text-base md:text-lg">${item["die weiblich (akkusativ)"]}</span>
+                            <span class="text-xs md:text-sm text-slate-600 font-bold italic mt-0.5">${item["poss_trans"]}</span>
+                        </div>
+                    </div>
+
+                    <!-- Possessives - Neutral -->
+                    <div class="px-1 py-1.5 border-r col-neu flex flex-col justify-center items-center font-extrabold text-base md:text-lg">
+                        ${item["das neutral (akkusativ)"]}
+                    </div>
+
+                    <!-- Possessives - Plural -->
+                    <div class="px-1 py-1.5 col-plu border-r flex flex-col justify-center items-center font-extrabold text-base md:text-lg">
+                        ${item["die plural (akkusativ)"]}
+                    </div>
+
+                    <!-- New Column: Possessive Examples -->
+                    <div class="px-1 py-1.5 bg-yellow-50/50 flex flex-col justify-center items-center text-center">
+                        <span class="font-bold text-slate-700 text-sm md:text-base leading-snug">${mainContent.POSS}</span>
+                        <span class="text-xs leading-snug text-slate-500 font-medium italic mt-0.5">${mainContent.POSS_TR || ''}</span>
+                    </div>
+                `;
+                pronounsContainer.appendChild(row);
+            });
+        }
+
+        renderPronouns();
+    </script>
+</body>
+
+</html>
