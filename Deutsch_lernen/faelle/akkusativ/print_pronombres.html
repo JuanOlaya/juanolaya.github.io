@@ -97,7 +97,7 @@
                 <div class="px-1 py-2 text-center flex flex-col justify-center items-center border-r bg-slate-100 text-slate-650">
                     <div class="flex items-center gap-1 justify-center">
                         <span class="font-extrabold text-sm md:text-base">Beispiel</span>
-                        <span id="beispiel-mode-tag" class="bg-slate-200 text-slate-800 text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Aussage</span>
+                        <span id="beispiel-mode-tag" class="bg-slate-200 text-slate-800 text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Telc A1</span>
                         <button id="toggle-beispiel-type" onclick="cycleBeispielMode()" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-1 py-0.5 rounded shadow text-[10px] transition-all active:scale-95 flex items-center justify-center select-none print:hidden" title="Cambiar modo de ejemplos">⇄</button>
                     </div>
                     <span class="text-[10px] font-normal opacity-60 mt-0.5">Ejemplo</span>
@@ -431,22 +431,22 @@
 
         const pronounsContainer = document.getElementById('pronouns-grid');
         const pronounsData = tableData.filter(row => row["Pronombre (Akkusativ)"]);
-        let currentMode = 'statement'; // 'statement', 'question', or 'telc_a1'
+        let currentMode = 'telc_a1'; // 'statement', 'question', or 'telc_a1'
 
         function cycleBeispielMode() {
-            if (currentMode === 'statement') {
-                currentMode = 'question';
-            } else if (currentMode === 'question') {
-                currentMode = 'telc_a1';
-            } else {
+            if (currentMode === 'telc_a1') {
                 currentMode = 'statement';
+            } else if (currentMode === 'statement') {
+                currentMode = 'question';
+            } else {
+                currentMode = 'telc_a1';
             }
             
             const tag = document.getElementById('beispiel-mode-tag');
             if (currentMode === 'statement') {
                 tag.textContent = 'Aussage';
             } else if (currentMode === 'question') {
-                tag.textContent = 'Frage';
+                tag.textContent = 'Frage_A1';
             } else {
                 tag.textContent = 'Telc A1';
             }
