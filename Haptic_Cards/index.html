@@ -317,6 +317,34 @@
 
         const cardContainer = document.getElementById('card-container');
 
+        // Helper functions for Research Focus tags
+        function getResearchFocus(device) {
+            if (device.researchFocus) return device.researchFocus;
+            if (device.category === "Air Propulsion") {
+                return ["Enhance realism", "Increase enjoyment"];
+            } else if (device.category === "Fingertip Interaction") {
+                return ["Enhance realism", "Improve usability"];
+            } else if (device.category === "Grip Form Factor") {
+                return ["Improve usability", "Increase enjoyment"];
+            } else {
+                return ["Enhance realism", "Improve usability", "Increase enjoyment"];
+            }
+        }
+
+        function getResearchFocusTagHTML(topic) {
+            let classes = "text-xs font-semibold px-3 py-1 rounded-full border ";
+            if (topic === "Enhance realism") {
+                classes += "bg-indigo-100 text-indigo-800 border-indigo-200";
+            } else if (topic === "Increase enjoyment") {
+                classes += "bg-rose-100 text-rose-800 border-rose-200";
+            } else if (topic === "Improve usability") {
+                classes += "bg-teal-100 text-teal-800 border-teal-200";
+            } else {
+                classes += "bg-slate-100 text-slate-800 border-slate-200";
+            }
+            return `<span class="${classes}">${topic}</span>`;
+        }
+
         // --- Gemini API Call Function ---
         async function getGeminiIdeas(device, buttonElement) {
             const ideasContainer = document.getElementById(`gemini-ideas-${device.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '')}`); // Ensure ID matches sanitization
@@ -621,6 +649,9 @@
                     }
                 }
 
+                // --- Generate Research Focus Tags HTML ---
+                const researchFocus = getResearchFocus(device);
+                const researchTagsHTML = researchFocus.map(topic => getResearchFocusTagHTML(topic)).join('');
 
                 // Card Template - REORDERED SECTIONS + CATEGORY + GALLERY + ICON
                 const cardHTML = `
@@ -649,82 +680,102 @@
                         <div class="gallery-dots">${dotsHTML}</div> <!-- Dots instead of counter -->
                     </div>
  
-                      <!-- Mechanism Section -->
-                      <div class="mb-4 pb-4 border-b border-gray-200">
-                         <button class="w-full text-left focus:outline-none flex justify-between items-center mechanism-toggle-btn mb-2">
-                             <div class="flex items-center gap-1.5 flex-wrap">
-                                 <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Mechanism:</h3>
-                                 <span class="category-tag text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-black lowercase tracking-wider">${mappedCategory.toLowerCase()}</span>
-                                 <span class="text-xl leading-none" title="${mappedCategory}">${categoryIconSymbol}</span>
-                             </div>
-                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-200 transform mechanism-arrow text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                             </svg>
-                         </button>
-                         <div class="mechanism-content hidden">
-                              <p class="text-gray-700 mt-1">
-                                  ${device.mechanism}
-                              </p>
-                         </div>
-                     </div>
- 
-                      <!-- Haptic Modality Section -->
-                      <div class="mb-4 pb-4 border-b border-gray-200">
-                           <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Haptic Modality</h3>
-                           <div class="grid grid-cols-2 gap-4">
-                               <div>
-                                   <h4 class="text-xs font-bold text-gray-700 mb-1">Cutaneous Perception</h4>
-                                   <div class="flex flex-wrap gap-1">${cutaneousTagsHTML}</div>
+                    <!-- Sleek Tab Switcher -->
+                    <div class="flex border-b border-gray-300 mb-4 text-xs font-semibold select-none gap-4">
+                        <button class="info-tab-btn pb-1.5 text-blue-600 border-blue-600 border-b-2 focus:outline-none" data-tab="technical">Technical Specs</button>
+                        <button class="info-tab-btn pb-1.5 text-gray-500 hover:text-gray-700 focus:outline-none" data-tab="research">Research Focus</button>
+                    </div>
+
+                    <!-- Technical specs content container -->
+                    <div class="technical-tab-content flex-grow flex flex-col">
+                        <!-- Mechanism Section -->
+                        <div class="mb-4 pb-4 border-b border-gray-200">
+                           <button class="w-full text-left focus:outline-none flex justify-between items-center mechanism-toggle-btn mb-2">
+                               <div class="flex items-center gap-1.5 flex-wrap">
+                                   <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Mechanism:</h3>
+                                   <span class="category-tag text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-black lowercase tracking-wider">${mappedCategory.toLowerCase()}</span>
+                                   <span class="text-xl leading-none" title="${mappedCategory}">${categoryIconSymbol}</span>
                                </div>
-                               <div>
-                                   <h4 class="text-xs font-bold text-gray-700 mb-1">Kinesthetic Perception</h4>
-                                   <div class="flex flex-wrap gap-1">${kinestheticTagsHTML}</div>
-                               </div>
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-200 transform mechanism-arrow text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                               </svg>
+                           </button>
+                           <div class="mechanism-content hidden">
+                                <p class="text-gray-700 mt-1">
+                                    ${device.mechanism}
+                                </p>
                            </div>
-                      </div>
- 
-                      <!-- Use Cases Section -->
-                      <div class="mb-4 flex-grow pb-4 border-b border-gray-200">
-                          <button class="w-full text-left focus:outline-none flex justify-between items-center usecase-toggle-btn mb-2">
-                              <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Use Cases</h3>
-                              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-200 transform usecase-arrow text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                       </div>
+   
+                        <!-- Haptic Modality Section -->
+                        <div class="mb-4 pb-4 border-b border-gray-200">
+                             <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Haptic Modality</h3>
+                             <div class="grid grid-cols-2 gap-4">
+                                 <div>
+                                     <h4 class="text-xs font-bold text-gray-700 mb-1">Cutaneous Perception</h4>
+                                     <div class="flex flex-wrap gap-1">${cutaneousTagsHTML}</div>
+                                 </div>
+                                 <div>
+                                     <h4 class="text-xs font-bold text-gray-700 mb-1">Kinesthetic Perception</h4>
+                                     <div class="flex flex-wrap gap-1">${kinestheticTagsHTML}</div>
+                                 </div>
+                             </div>
+                        </div>
+   
+                        <!-- Use Cases Section -->
+                        <div class="mb-4 flex-grow pb-4 border-b border-gray-200">
+                            <button class="w-full text-left focus:outline-none flex justify-between items-center usecase-toggle-btn mb-2">
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Use Cases</h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-200 transform usecase-arrow text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <!-- Use case tags are always visible -->
+                            ${useCaseTagsHTML ? `
+                            <div class="flex flex-wrap gap-1 mb-2"> 
+                               ${useCaseTagsHTML}
+                            </div>
+                            ` : ''}
+                            <!-- Text description is collapsible -->
+                            <div class="usecase-content hidden">
+                                <p class="text-gray-700 mt-1 text-sm">${device.useCaseText || ''}</p> 
+                            </div>
+                        </div>
+
+                      <!-- Reference Section -->
+                      ${device.doi ? `
+                      <div class="mt-auto text-xs text-gray-600">
+                          <button class="w-full text-left focus:outline-none flex justify-between items-center text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2 ref-toggle-btn">
+                              <span>Reference</span>
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-200 transform ref-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                               </svg>
                           </button>
-                          <!-- Use case tags are always visible -->
-                          ${useCaseTagsHTML ? `
-                          <div class="flex flex-wrap gap-1 mb-2"> 
-                             ${useCaseTagsHTML}
-                          </div>
-                          ` : ''}
-                          <!-- Text description is collapsible -->
-                          <div class="usecase-content hidden">
-                              <p class="text-gray-700 mt-1 text-sm">${device.useCaseText || ''}</p> 
+                          <div class="ref-content hidden">
+                              <p class="font-semibold">${device.author || 'N/A'}</p>
+                              <p class="italic my-1">"${device.title || 'N/A'}"</p>
+                              <p>${device.publication || 'N/A'}, ${device.year || 'N/A'}</p>
+                              <a href="https://doi.org/${device.doi}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 font-medium transition-colors inline-flex items-center mt-2 mb-2">
+                                  Paper
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                  </svg>
+                              </a>
                           </div>
                       </div>
+                      ` : ''}
+                    </div>
 
-                    <!-- Reference Section -->
-                    ${device.doi ? `
-                    <div class="mt-auto text-xs text-gray-600">
-                        <button class="w-full text-left focus:outline-none flex justify-between items-center text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2 ref-toggle-btn">
-                            <span>Reference</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-200 transform ref-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-                        <div class="ref-content hidden">
-                            <p class="font-semibold">${device.author || 'N/A'}</p>
-                            <p class="italic my-1">"${device.title || 'N/A'}"</p>
-                            <p>${device.publication || 'N/A'}, ${device.year || 'N/A'}</p>
-                            <a href="https://doi.org/${device.doi}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 font-medium transition-colors inline-flex items-center mt-2 mb-2">
-                                Paper
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                </svg>
-                            </a>
+                    <!-- Research Focus Content Container -->
+                    <div class="research-tab-content hidden flex-grow flex flex-col justify-start">
+                        <div class="mb-4 pb-4 border-b border-gray-200">
+                            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Research Focus</h3>
+                            <p class="text-xs text-gray-600 mb-3">This project targets the following research focus areas:</p>
+                            <div class="flex flex-wrap gap-2 mb-1">
+                                ${researchTagsHTML}
+                            </div>
                         </div>
                     </div>
-                    ` : ''}
 
                      <!-- Gemini Section -->
                     <div class="gemini-section mt-4 pt-4 border-t border-dashed border-gray-300 hidden">
@@ -844,15 +895,17 @@
                 if (!clickedCard) return;
 
                 const allCards = Array.from(cardContainer.children);
-                const isOpening = targetBtn.nextElementSibling.classList.contains('hidden');
+                const usecaseContent = clickedCard.querySelector('.usecase-content');
+                if (!usecaseContent) return;
+                const isOpening = usecaseContent.classList.contains('hidden');
                 
                 // Find all cards in the same row
                 const rowCards = allCards.filter(card => card.offsetTop === clickedCard.offsetTop);
                 
                 rowCards.forEach(card => {
                     const btn = card.querySelector('.usecase-toggle-btn');
-                    if (btn) {
-                        const content = btn.nextElementSibling;
+                    const content = card.querySelector('.usecase-content');
+                    if (btn && content) {
                         const arrow = btn.querySelector('.usecase-arrow');
                         if (isOpening) {
                             content.classList.remove('hidden');
@@ -863,6 +916,41 @@
                         }
                     }
                 });
+            });
+
+             // Add delegated event listener for tab buttons
+            cardContainer.addEventListener('click', (event) => {
+                const targetBtn = event.target.closest('.info-tab-btn');
+                if (!targetBtn) return;
+                
+                const card = targetBtn.closest('.card-item');
+                if (!card) return;
+
+                const tabName = targetBtn.dataset.tab;
+
+                // Toggle active tab classes on buttons
+                const tabButtons = card.querySelectorAll('.info-tab-btn');
+                tabButtons.forEach(btn => {
+                    if (btn === targetBtn) {
+                        btn.classList.add('text-blue-600', 'border-blue-600', 'border-b-2');
+                        btn.classList.remove('text-gray-500');
+                    } else {
+                        btn.classList.remove('text-blue-600', 'border-blue-600', 'border-b-2');
+                        btn.classList.add('text-gray-500');
+                    }
+                });
+
+                // Toggle visibility of sections
+                const technicalContent = card.querySelector('.technical-tab-content');
+                const researchContent = card.querySelector('.research-tab-content');
+                
+                if (tabName === 'technical') {
+                    technicalContent.classList.remove('hidden');
+                    researchContent.classList.add('hidden');
+                } else if (tabName === 'research') {
+                    technicalContent.classList.add('hidden');
+                    researchContent.classList.remove('hidden');
+                }
             });
 
              // Initialize galleries after adding cards to DOM
