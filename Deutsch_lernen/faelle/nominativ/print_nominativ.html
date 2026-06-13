@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nominativ: Pronombres y Posesivos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: white;
+            color: #1e293b;
+        }
+
+        .col-masc {
+            background-color: #eff6ff !important;
+            border-color: #bfdbfe !important;
+            color: #1e40af !important;
+        }
+
+        .col-fem {
+            background-color: #fef2f2 !important;
+            border-color: #fecaca !important;
+            color: #991b1b !important;
+        }
+
+        .col-neu {
+            background-color: #f0fdf4 !important;
+            border-color: #bbf7d0 !important;
+            color: #166534 !important;
+        }
+
+        .col-plu {
+            background-color: #fffbeb !important;
+            border-color: #fde68a !important;
+            color: #92400e !important;
+        }
+
+        .base-highlight {
+            position: relative;
+            background-color: white !important;
+            border: 2px solid #2563eb !important;
+            color: #2563eb !important;
+            font-weight: 800;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.375rem;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+            display: inline-block;
+        }
+
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 0.4cm;
+            }
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                zoom: 80%; /* Scales down layout slightly to fit single-page landscape perfectly */
+            }
+        }
+    </style>
+</head>
+
+<body class="p-1">
+    <div class="max-w-7xl mx-auto">
+        <!-- Table Title -->
+        <div class="flex items-center gap-3 mb-2">
+            <span class="bg-slate-800 text-white w-6 h-6 rounded flex items-center justify-center font-bold text-sm">2</span>
+            <h2 class="text-xl font-bold text-slate-800">Pronombres y Posesivos (Nominativ)</h2>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="mb-3 bg-amber-50/70 border border-amber-200 rounded-xl p-3 shadow-sm text-xs">
+            <h3 class="text-sm font-bold text-amber-800 mb-2 flex items-center gap-2">
+                <span>💡</span> Tips para No Olvidar (Nominativ)
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                <div class="flex items-start gap-2.5">
+                    <span class="text-base shrink-0 mt-0.5">1️⃣</span>
+                    <div class="text-slate-700">
+                        <strong class="text-slate-800">El Nominativ es la forma base.</strong>
+                        <div class="flex items-start gap-1 mt-0.5 text-slate-650">
+                            <span>🟨</span>
+                            <span>Es la forma que aparece en el diccionario.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2.5">
+                    <span class="text-base shrink-0 mt-0.5">2️⃣</span>
+                    <div class="text-slate-700">
+                        <strong class="text-slate-800">El Nominativ = sujeto de la oración.</strong>
+                        <div class="flex items-start gap-1 mt-0.5 text-slate-650">
+                            <span>🟨</span>
+                            <span>El sujeto es quien o lo que realiza el verbo.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2.5">
+                    <span class="text-base shrink-0 mt-0.5">3️⃣</span>
+                    <div class="text-slate-700">
+                        <strong class="text-slate-800">Encuentra el Nominativ.</strong>
+                        <div class="flex items-start gap-1 mt-0.5 text-slate-650">
+                            <span>🟨</span>
+                            <span>Pregunta siempre: <span class="bg-blue-100 text-blue-800 px-1 py-0.5 rounded font-bold text-[10px]">Wer?</span> (¿Quién?) o <span class="bg-blue-100 text-blue-800 px-1 py-0.5 rounded font-bold text-[10px]">Was?</span> (¿Qué?) realiza el verbo.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2.5">
+                    <span class="text-base shrink-0 mt-0.5">4️⃣</span>
+                    <div class="text-slate-700">
+                        <strong class="text-slate-800">Toda oración tiene un sujeto.</strong>
+                        <div class="flex items-start gap-1 mt-0.5 text-slate-650">
+                            <span>🟨</span>
+                            <span>Busca primero quién o qué hace el verbo. El sujeto siempre está en Nominativ.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-200">
+            <!-- Grid Header -->
+            <div class="grid grid-cols-[90px_230px_160px_repeat(4,_1fr)_250px] text-base uppercase tracking-wider font-extrabold text-slate-650 border-b-2 border-slate-200 bg-slate-50">
+                <div class="px-1 py-2 text-center flex flex-col justify-center border-r">Sujeto<span class="text-[10px] font-normal opacity-60">Nominativ</span></div>
+                <div class="px-1 py-2 text-center flex flex-col justify-center items-center border-r bg-slate-100 text-slate-650">
+                    <div class="flex items-center gap-1 justify-center">
+                        <span class="font-extrabold text-sm md:text-base">Beispiel</span>
+                        <span id="beispiel-mode-tag" class="bg-slate-200 text-slate-800 text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Aussagen A1</span>
+                        <button id="toggle-beispiel-type" onclick="cycleBeispielMode()" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-1 py-0.5 rounded shadow text-[10px] transition-all active:scale-95 flex items-center justify-center select-none print:hidden" title="Cambiar modo de ejemplos">⇄</button>
+                    </div>
+                    <span class="text-[10px] font-normal opacity-60 mt-0.5">Ejemplo</span>
+                </div>
+                <div class="px-1 py-2 text-center flex flex-col justify-center border-r bg-indigo-50 text-indigo-800">Possessiv<span class="text-[10px] font-normal opacity-60">Base</span></div>
+                <div class="px-1 py-2 col-masc text-center border-r flex flex-col justify-center items-center">
+                    <span class="font-extrabold text-blue-700 text-sm">Männlich</span>
+                    <span class="text-[10px] text-blue-600 font-normal lowercase tracking-wider mt-0.5">masculino</span>
+                </div>
+                <div class="px-1 py-2 col-fem text-center border-r flex flex-col justify-center items-center">
+                    <span class="font-extrabold text-red-700 text-sm">Weiblich</span>
+                    <span class="text-[10px] text-red-600 font-normal lowercase tracking-wider mt-0.5">femenino</span>
+                </div>
+                <div class="px-1 py-2 col-neu text-center border-r flex flex-col justify-center items-center">
+                    <span class="font-extrabold text-green-700 text-sm">Neutral</span>
+                    <span class="text-[10px] text-green-600 font-normal lowercase tracking-wider mt-0.5">neutro</span>
+                </div>
+                <div class="px-1 py-2 col-plu text-center border-r flex flex-col justify-center items-center">
+                    <span class="font-extrabold text-amber-800 text-sm">Plural</span>
+                    <span class="text-[10px] text-amber-700 font-normal lowercase tracking-wider mt-0.5">plural</span>
+                </div>
+                <div class="px-1 py-2 text-center flex flex-col justify-center items-center bg-yellow-50 text-yellow-800">
+                    <span class="font-extrabold text-sm md:text-base">Uso Posesivo</span>
+                    <span class="text-[10px] font-normal opacity-60 mt-0.5">Contexto</span>
+                </div>
+            </div>
+
+            <!-- Rows Container -->
+            <div id="pronouns-grid">
+                <!-- JS Injected -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const pronounsData = [
+            {
+                subject: "ich",
+                hint: "",
+                base: "mein-",
+                baseTranslation: "mi",
+                masc: "mein",
+                fem: "meine",
+                neu: "mein",
+                plu: "meine",
+                statement: {
+                    pro: "<b>Ich</b> habe einen Termin.",
+                    proTr: "Tengo una cita.",
+                    poss: "<b>Mein</b> Kind ist krank.",
+                    possTr: "<b>Mi</b> hijo está enfermo."
+                },
+                question: {
+                    pro: "Kann <b>ich</b> morgen kommen?",
+                    proTr: "¿Puedo venir mañana?",
+                    poss: "Ist das <b>mein</b> Paket?",
+                    possTr: "¿Es este <b>mi</b> paquete?"
+                }
+            },
+            {
+                subject: "du",
+                hint: "",
+                base: "dein-",
+                baseTranslation: "tu",
+                masc: "dein",
+                fem: "deine",
+                neu: "dein",
+                plu: "deine",
+                statement: {
+                    pro: "<b>Du</b> kommst zur Party.",
+                    proTr: "Vienes a la fiesta.",
+                    poss: "Ist das <b>dein</b> Buch?",
+                    possTr: "¿Es ese <b>tu</b> libro?"
+                },
+                question: {
+                    pro: "Kommst <b>du</b> zur Party?",
+                    proTr: "¿Vienes a la fiesta?",
+                    poss: "Ist das <b>dein</b> Handy?",
+                    possTr: "¿Es <b>tu</b> móvil?"
+                }
+            },
+            {
+                subject: "er",
+                hint: "",
+                base: "sein-",
+                baseTranslation: "su (de él)",
+                masc: "sein",
+                fem: "seine",
+                neu: "sein",
+                plu: "seine",
+                statement: {
+                    pro: "<b>Er</b> arbeitet am Wochenende.",
+                    proTr: "Él trabaja el fin de semana.",
+                    poss: "<b>Sein</b> Paket ist nicht gekommen.",
+                    possTr: "<b>Su</b> paquete no llegó."
+                },
+                question: {
+                    pro: "Hat <b>er</b> Zeit?",
+                    proTr: "¿Tiene tiempo?",
+                    poss: "Wo ist <b>sein</b> Buch?",
+                    possTr: "¿Dónde está <b>su</b> libro?"
+                }
+            },
+            {
+                subject: "sie",
+                hint: "ella",
+                base: "ihr-",
+                baseTranslation: "su (de ella)",
+                masc: "ihr",
+                fem: "ihre",
+                neu: "ihr",
+                plu: "ihre",
+                statement: {
+                    pro: "<b>Sie</b> hilft mir.",
+                    proTr: "Ella me ayuda.",
+                    poss: "<b>Ihre</b> Wohnung ist in Berlin.",
+                    possTr: "<b>Su</b> piso está en Berlín."
+                },
+                question: {
+                    pro: "Kann <b>sie</b> helfen?",
+                    proTr: "¿Puede ayudar?",
+                    poss: "Ist das <b>ihre</b> Tasche?",
+                    possTr: "¿Es <b>su</b> bolso?"
+                }
+            },
+            {
+                subject: "es",
+                hint: "neutro",
+                base: "sein-",
+                baseTranslation: "su (de ello)",
+                masc: "sein",
+                fem: "seine",
+                neu: "sein",
+                plu: "seine",
+                statement: {
+                    pro: "<b>Es</b> kostet diez Euro.", // Wait, let's verify if original had "zehn Euro" or "diez Euro" in German: line 270 is "Es kostet zehn Euro." in original, so we keep "zehn Euro".
+                    pro: "<b>Es</b> kostet zehn Euro.",
+                    proTr: "Cuesta diez euros.",
+                    poss: "<b>Sein</b> Zimmer ist klein.",
+                    possTr: "<b>Su</b> habitación es pequeña."
+                },
+                question: {
+                    pro: "Wie viel kostet <b>es</b>?",
+                    proTr: "¿Cuánto cuesta?",
+                    poss: "Ist das <b>sein</b> Zimmer?",
+                    possTr: "¿Es <b>su</b> habitación?"
+                }
+            },
+            {
+                subject: "wir",
+                hint: "",
+                base: "unser-",
+                baseTranslation: "nuestro/a",
+                masc: "unser",
+                fem: "unsere",
+                neu: "unser",
+                plu: "unsere",
+                statement: {
+                    pro: "<b>Wir</b> treffen uns am Samstag.",
+                    proTr: "Nos encontramos el sábado.",
+                    poss: "<b>Unser</b> Lehrer ist nett.",
+                    possTr: "<b>Nuestro</b> profesor es amable."
+                },
+                question: {
+                    pro: "Können <b>wir</b> uns treffen?",
+                    proTr: "¿Podemos encontrarnos?",
+                    poss: "Ist das <b>unser</b> Tisch?",
+                    possTr: "¿Es <b>nuestra</b> mesa?"
+                }
+            },
+            {
+                subject: "ihr",
+                hint: "vosotros",
+                base: "euer- / eur-",
+                baseTranslation: "vuestro/a",
+                masc: "euer",
+                fem: "eure",
+                neu: "euer",
+                plu: "eure",
+                statement: {
+                    pro: "<b>Ihr</b> kommt zu spät.",
+                    proTr: "Llegáis tarde.",
+                    poss: "<b>Eure</b> Kinder spielen im Park.",
+                    possTr: "<b>Vuestros</b> hijos juegan en el parque."
+                },
+                question: {
+                    pro: "Kommt <b>ihr</b> morgen?",
+                    proTr: "¿Venís mañana?",
+                    poss: "Sind das <b>eure</b> Kinder?",
+                    possTr: "¿Son <b>vuestros</b> hijos?"
+                }
+            },
+            {
+                subject: "sie",
+                hint: "ellos",
+                base: "ihr-",
+                baseTranslation: "su (de ellos)",
+                masc: "ihr",
+                fem: "ihre",
+                neu: "ihr",
+                plu: "ihre",
+                statement: {
+                    pro: "<b>Sie</b> wohnen in Hamburg.",
+                    proTr: "Ellos viven en Hamburgo.",
+                    poss: "<b>Ihre</b> Freunde kommen morgen.",
+                    possTr: "<b>Sus</b> amigos vienen mañana."
+                },
+                question: {
+                    pro: "Haben <b>sie</b> Zeit?",
+                    proTr: "¿Tienen tiempo?",
+                    poss: "Sind das <b>ihre</b> Freunde?",
+                    possTr: "¿Son <b>sus</b> amigos?"
+                }
+            },
+            {
+                subject: "Sie",
+                hint: "formal",
+                base: "Ihr-",
+                baseTranslation: "su (formal)",
+                masc: "Ihr",
+                fem: "Ihre",
+                neu: "Ihr",
+                plu: "Ihre",
+                statement: {
+                    pro: "<b>Sie</b> haben einen Termin.",
+                    proTr: "Usted tiene una cita.",
+                    poss: "Ist das <b>Ihre</b> Tasche?",
+                    possTr: "¿Es <b>su</b> bolso?"
+                },
+                question: {
+                    pro: "Haben <b>Sie</b> einen Termin?",
+                    proTr: "¿Tiene una cita?",
+                    poss: "Ist das <b>Ihre</b> Rechnung?",
+                    possTr: "¿Es <b>su</b> factura?"
+                }
+            }
+        ];
+
+        let currentMode = "statement"; // 'statement' or 'question'
+
+        function cycleBeispielMode() {
+            currentMode = (currentMode === "statement") ? "question" : "statement";
+            const tag = document.getElementById("beispiel-mode-tag");
+            tag.textContent = (currentMode === "statement") ? "Aussagen A1" : "Fragen A1";
+            renderPronouns();
+        }
+
+        const pronounsContainer = document.getElementById("pronouns-grid");
+
+        function renderPronouns() {
+            pronounsContainer.innerHTML = "";
+            pronounsData.forEach((item, index) => {
+                const example = item[currentMode];
+                const row = document.createElement("div");
+                const isOdd = index % 2 === 0;
+                const bgClass = isOdd ? "bg-white" : "bg-slate-50/50";
+
+                row.className = `grid grid-cols-[90px_230px_160px_repeat(4,_1fr)_250px] border-b border-slate-100 relative ${bgClass}`;
+
+                const baseClass = "font-extrabold text-black text-xl";
+                
+                // Highlight base pronoun just like in akkusativ
+                const isHighlight = item.subject === "ich";
+                const mascClass = isHighlight ? "base-highlight text-lg md:text-xl" : "font-extrabold text-lg md:text-xl";
+
+                row.innerHTML = `
+                    <!-- Subject -->
+                    <div class="px-1 py-1.5 border-r flex flex-col justify-center items-center">
+                        <span class="font-extrabold text-slate-800 text-xl md:text-2xl">${item.subject}</span>
+                        ${item.hint ? `<span class="text-[9px] text-slate-500 font-normal mt-0.5">${item.hint}</span>` : ''}
+                    </div>
+
+                    <!-- Example Sentence -->
+                    <div class="px-1 py-1.5 border-r bg-slate-50/40 flex flex-col justify-center items-center text-center">
+                        <span class="font-semibold text-slate-800 text-sm md:text-base leading-snug">${example.pro}</span>
+                        <span class="text-xs leading-snug text-slate-500 font-medium italic mt-0.5">${example.proTr || ''}</span>
+                    </div>
+
+                    <!-- Possessives - Base -->
+                    <div class="px-1 py-1.5 border-r bg-indigo-50/70 flex flex-col justify-center items-center relative overflow-hidden">
+                        <span class="${baseClass}">${item.base}</span>
+                        <span class="text-[10px] text-slate-650 font-bold italic mt-0.5">${item.baseTranslation}</span>
+                    </div>
+
+                    <!-- Possessives - Masculine -->
+                    <div class="px-1 py-1.5 border-r col-masc flex flex-col justify-center items-center">
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="${mascClass}">${item.masc}</span>
+                            <span class="text-[10px] text-slate-500 font-normal italic mt-0.5">${item.baseTranslation}</span>
+                        </div>
+                    </div>
+
+                    <!-- Possessives - Feminine -->
+                    <div class="px-1 py-1.5 border-r col-fem flex flex-col justify-center items-center">
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-extrabold text-base md:text-lg">${item.fem}</span>
+                            <span class="text-[10px] text-slate-500 font-normal italic mt-0.5">${item.baseTranslation}</span>
+                        </div>
+                    </div>
+
+                    <!-- Possessives - Neutral -->
+                    <div class="px-1 py-1.5 border-r col-neu flex flex-col justify-center items-center">
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-extrabold text-base md:text-lg">${item.neu}</span>
+                            <span class="text-[10px] text-slate-500 font-normal italic mt-0.5">${item.baseTranslation}</span>
+                        </div>
+                    </div>
+
+                    <!-- Possessives - Plural -->
+                    <div class="px-1 py-1.5 col-plu border-r flex flex-col justify-center items-center">
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-extrabold text-base md:text-lg">${item.plu}</span>
+                            <span class="text-[10px] text-slate-500 font-normal italic mt-0.5">${item.baseTranslation}</span>
+                        </div>
+                    </div>
+
+                    <!-- New Column: Possessive Examples -->
+                    <div class="px-1 py-1.5 bg-yellow-50/50 flex flex-col justify-center items-center text-center">
+                        <span class="font-bold text-slate-700 text-sm md:text-base leading-snug">${example.poss}</span>
+                        <span class="text-xs leading-snug text-slate-500 font-medium italic mt-0.5">${example.possTr || ''}</span>
+                    </div>
+                `;
+                pronounsContainer.appendChild(row);
+            });
+        }
+
+        renderPronouns();
+    </script>
+</body>
+
+</html>
