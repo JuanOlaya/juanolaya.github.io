@@ -51,6 +51,11 @@
             display: inline-block;
         }
 
+        .page-break {
+            page-break-after: always;
+            break-after: page;
+        }
+
         @media print {
             @page {
                 size: A4 landscape;
@@ -70,104 +75,182 @@
 
 <body class="p-1">
     <div class="max-w-7xl mx-auto">
-        <!-- Table Title -->
-        <div class="flex items-center gap-3 mb-2">
-            <span class="bg-slate-800 text-white w-6 h-6 rounded flex items-center justify-center font-bold text-sm">2</span>
-            <h2 class="text-xl font-bold text-slate-800">Pronombres y Posesivos (Nominativ)</h2>
-        </div>
+        <!-- PAGE 1: Determinantes (Artículos) y Tips -->
+        <div class="page-break mb-6">
+            <!-- Table Title -->
+            <div class="flex items-center gap-3 mb-2">
+                <span class="bg-slate-800 text-white w-6 h-6 rounded flex items-center justify-center font-bold text-sm">1</span>
+                <h2 class="text-xl font-bold text-slate-800">Determinantes (Artículos)</h2>
+            </div>
 
-        <!-- Tips Section -->
-        <div class="mb-3 bg-amber-50/70 border border-amber-200 rounded-xl p-3 shadow-sm text-xs">
-            <h3 class="text-sm font-bold text-amber-800 mb-2 flex items-center gap-2">
-                <span>💡</span> Tips para No Olvidar (Nominativ)
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
-                <div class="flex items-start gap-2.5">
-                    <span class="text-base shrink-0 mt-0.5">1️⃣</span>
-                    <div class="text-slate-700">
-                        <strong class="text-slate-800">El Nominativ es la forma base.</strong>
-                        <div class="flex items-start gap-1 mt-0.5 text-slate-650">
-                            <span>🟨</span>
-                            <span>Es la forma que aparece en el diccionario.</span>
-                        </div>
+            <!-- Articles Table -->
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-200">
+                <!-- Grid Header -->
+                <div class="grid grid-cols-[150px_repeat(4,_1fr)_250px] text-base uppercase tracking-wider font-extrabold text-slate-650 border-b-2 border-slate-200 bg-slate-50">
+                    <div class="px-1 py-2 text-center flex flex-col justify-center border-r">Tipo</div>
+                    <div class="px-1 py-2 col-masc text-center border-r flex flex-col justify-center items-center">
+                        <span class="font-extrabold text-blue-700 text-sm">Männlich</span>
+                        <span class="text-[10px] text-blue-600 font-normal lowercase tracking-wider mt-0.5">masculino</span>
+                    </div>
+                    <div class="px-1 py-2 col-fem text-center border-r flex flex-col justify-center items-center">
+                        <span class="font-extrabold text-red-700 text-sm">Weiblich</span>
+                        <span class="text-[10px] text-red-600 font-normal lowercase tracking-wider mt-0.5">femenino</span>
+                    </div>
+                    <div class="px-1 py-2 col-neu text-center border-r flex flex-col justify-center items-center">
+                        <span class="font-extrabold text-green-700 text-sm">Neutral</span>
+                        <span class="text-[10px] text-green-600 font-normal lowercase tracking-wider mt-0.5">neutro</span>
+                    </div>
+                    <div class="px-1 py-2 col-plu text-center border-r flex flex-col justify-center items-center">
+                        <span class="font-extrabold text-amber-800 text-sm">Plural</span>
+                        <span class="text-[10px] text-amber-700 font-normal lowercase tracking-wider mt-0.5">los/las</span>
+                    </div>
+                    <div class="px-1 py-2 text-center flex flex-col justify-center items-center bg-slate-50 text-slate-650">
+                        <span class="font-extrabold text-sm">Beispiel</span>
+                        <span class="text-[10px] font-normal opacity-60 mt-0.5">Ejemplo</span>
                     </div>
                 </div>
-                <div class="flex items-start gap-2.5">
-                    <span class="text-base shrink-0 mt-0.5">2️⃣</span>
-                    <div class="text-slate-700">
-                        <strong class="text-slate-800">El Nominativ = sujeto de la oración.</strong>
-                        <div class="flex items-start gap-1 mt-0.5 text-slate-650">
-                            <span>🟨</span>
-                            <span>El sujeto es quien o lo que realiza el verbo.</span>
+
+                <!-- Rows Container -->
+                <div id="articles-grid">
+                    <!-- JS Injected -->
+                </div>
+            </div>
+            
+            <p class="text-center text-[10px] text-slate-400 mt-2 mb-6 italic">Pasa el mouse o toca las celdas para ver la traducción.</p>
+
+            <!-- Title for Section 2 (Header only for Tips) -->
+            <div class="flex items-center gap-3 mb-2">
+                <span class="bg-slate-800 text-white w-6 h-6 rounded flex items-center justify-center font-bold text-sm">2</span>
+                <h2 class="text-xl font-bold text-slate-800">Pronombres y Posesivos (Nominativ)</h2>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-3 shadow-sm text-xs">
+                <h3 class="text-sm font-bold text-amber-800 mb-2 flex items-center gap-2">
+                    <span>💡</span> Tips para No Olvidar (Nominativ)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                    <div class="flex items-start gap-2.5">
+                        <span class="text-base shrink-0 mt-0.5">1️⃣</span>
+                        <div class="text-slate-700">
+                            <strong class="text-slate-800">El Nominativ es la forma base.</strong>
+                            <div class="flex items-start gap-1 mt-0.5 text-slate-650">
+                                <span>🟨</span>
+                                <span>Es la forma que aparece en el diccionario.</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="flex items-start gap-2.5">
-                    <span class="text-base shrink-0 mt-0.5">3️⃣</span>
-                    <div class="text-slate-700">
-                        <strong class="text-slate-800">Encuentra el Nominativ.</strong>
-                        <div class="flex items-start gap-1 mt-0.5 text-slate-650">
-                            <span>🟨</span>
-                            <span>Pregunta siempre: <span class="bg-blue-100 text-blue-800 px-1 py-0.5 rounded font-bold text-[10px]">Wer?</span> (¿Quién?) o <span class="bg-blue-100 text-blue-800 px-1 py-0.5 rounded font-bold text-[10px]">Was?</span> (¿Qué?) realiza la acción, el verbo.</span>
+                    <div class="flex items-start gap-2.5">
+                        <span class="text-base shrink-0 mt-0.5">2️⃣</span>
+                        <div class="text-slate-700">
+                            <strong class="text-slate-800">El Nominativ = sujeto de la oración.</strong>
+                            <div class="flex items-start gap-1 mt-0.5 text-slate-650">
+                                <span>🟨</span>
+                                <span>El sujeto es quien o lo que realiza el verbo.</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="flex items-start gap-2.5">
-                    <span class="text-base shrink-0 mt-0.5">4️⃣</span>
-                    <div class="text-slate-700">
-                        <strong class="text-slate-800">Toda oración tiene un sujeto.</strong>
-                        <div class="flex items-start gap-1 mt-0.5 text-slate-650">
-                            <span>🟨</span>
-                            <span>Busca primero quién o qué hace el verbo. El sujeto siempre está en Nominativ.</span>
+                    <div class="flex items-start gap-2.5">
+                        <span class="text-base shrink-0 mt-0.5">3️⃣</span>
+                        <div class="text-slate-700">
+                            <strong class="text-slate-800">Encuentra el Nominativ.</strong>
+                            <div class="flex items-start gap-1 mt-0.5 text-slate-650">
+                                <span>🟨</span>
+                                <span>Pregunta siempre: <span class="bg-blue-100 text-blue-800 px-1 py-0.5 rounded font-bold text-[10px]">Wer?</span> (¿Quién?) o <span class="bg-blue-100 text-blue-800 px-1 py-0.5 rounded font-bold text-[10px]">Was?</span> (¿Qué?) realiza la acción, el verbo.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2.5">
+                        <span class="text-base shrink-0 mt-0.5">4️⃣</span>
+                        <div class="text-slate-700">
+                            <strong class="text-slate-800">Toda oración tiene un sujeto.</strong>
+                            <div class="flex items-start gap-1 mt-0.5 text-slate-650">
+                                <span>🟨</span>
+                                <span>Busca primero quién o qué hace el verbo. El sujeto siempre está en Nominativ.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-200">
-            <!-- Grid Header -->
-            <div class="grid grid-cols-[90px_230px_160px_repeat(4,_1fr)_250px] text-base uppercase tracking-wider font-extrabold text-slate-650 border-b-2 border-slate-200 bg-slate-50">
-                <div class="px-1 py-2 text-center flex flex-col justify-center border-r">Sujeto<span class="text-[10px] font-normal opacity-60">Nominativ</span></div>
-                <div class="px-1 py-2 text-center flex flex-col justify-center items-center border-r bg-slate-100 text-slate-650">
-                    <div class="flex items-center gap-1 justify-center">
-                        <span class="font-extrabold text-sm md:text-base">Beispiel</span>
-                        <span id="beispiel-mode-tag" class="bg-slate-200 text-slate-800 text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Aussagen A1</span>
-                        <button id="toggle-beispiel-type" onclick="cycleBeispielMode()" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-1 py-0.5 rounded shadow text-[10px] transition-all active:scale-95 flex items-center justify-center select-none print:hidden" title="Cambiar modo de ejemplos">⇄</button>
+        <!-- PAGE 2: La Tabla de Pronombres y Posesivos -->
+        <div>
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-200">
+                <!-- Grid Header -->
+                <div class="grid grid-cols-[90px_230px_160px_repeat(4,_1fr)_250px] text-base uppercase tracking-wider font-extrabold text-slate-650 border-b-2 border-slate-200 bg-slate-50">
+                    <div class="px-1 py-2 text-center flex flex-col justify-center border-r">Subjekt<span class="text-[10px] font-normal opacity-60">Nominativ</span></div>
+                    <div class="px-1 py-2 text-center flex flex-col justify-center items-center border-r bg-slate-100 text-slate-650">
+                        <div class="flex items-center gap-1 justify-center">
+                            <span class="font-extrabold text-sm md:text-base">Beispiel</span>
+                            <span id="beispiel-mode-tag" class="bg-slate-200 text-slate-800 text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Aussagen A1</span>
+                            <button id="toggle-beispiel-type" onclick="cycleBeispielMode()" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-1 py-0.5 rounded shadow text-[10px] transition-all active:scale-95 flex items-center justify-center select-none print:hidden" title="Cambiar modo de ejemplos">⇄</button>
+                        </div>
+                        <span class="text-[10px] font-normal opacity-60 mt-0.5">Ejemplo</span>
                     </div>
-                    <span class="text-[10px] font-normal opacity-60 mt-0.5">Ejemplo</span>
+                    <div class="px-1 py-2 text-center flex flex-col justify-center border-r bg-indigo-50 text-indigo-800">Possessiv<span class="text-[10px] font-normal opacity-60">Base</span></div>
+                    <div class="px-1 py-2 col-masc text-center border-r flex flex-col justify-center items-center text-blue-750 font-extrabold">MASC.</div>
+                    <div class="px-1 py-2 col-fem text-center border-r flex flex-col justify-center items-center text-red-750 font-extrabold">FEM.</div>
+                    <div class="px-1 py-2 col-neu text-center border-r flex flex-col justify-center items-center text-green-750 font-extrabold">NEUT.</div>
+                    <div class="px-1 py-2 col-plu text-center border-r flex flex-col justify-center items-center text-amber-850 font-extrabold">PLUR.</div>
+                    <div class="px-1 py-2 text-center flex flex-col justify-center items-center bg-yellow-50 text-yellow-800">
+                        <span class="font-extrabold text-sm md:text-base">Uso Posesivo</span>
+                        <span class="text-[10px] font-normal opacity-60 mt-0.5">Contexto</span>
+                    </div>
                 </div>
-                <div class="px-1 py-2 text-center flex flex-col justify-center border-r bg-indigo-50 text-indigo-800">Possessiv<span class="text-[10px] font-normal opacity-60">Base</span></div>
-                <div class="px-1 py-2 col-masc text-center border-r flex flex-col justify-center items-center">
-                    <span class="font-extrabold text-blue-700 text-sm">Männlich</span>
-                    <span class="text-[10px] text-blue-600 font-normal lowercase tracking-wider mt-0.5">masculino</span>
-                </div>
-                <div class="px-1 py-2 col-fem text-center border-r flex flex-col justify-center items-center">
-                    <span class="font-extrabold text-red-700 text-sm">Weiblich</span>
-                    <span class="text-[10px] text-red-600 font-normal lowercase tracking-wider mt-0.5">femenino</span>
-                </div>
-                <div class="px-1 py-2 col-neu text-center border-r flex flex-col justify-center items-center">
-                    <span class="font-extrabold text-green-700 text-sm">Neutral</span>
-                    <span class="text-[10px] text-green-600 font-normal lowercase tracking-wider mt-0.5">neutro</span>
-                </div>
-                <div class="px-1 py-2 col-plu text-center border-r flex flex-col justify-center items-center">
-                    <span class="font-extrabold text-amber-800 text-sm">Plural</span>
-                    <span class="text-[10px] text-amber-700 font-normal lowercase tracking-wider mt-0.5">plural</span>
-                </div>
-                <div class="px-1 py-2 text-center flex flex-col justify-center items-center bg-yellow-50 text-yellow-800">
-                    <span class="font-extrabold text-sm md:text-base">Uso Posesivo</span>
-                    <span class="text-[10px] font-normal opacity-60 mt-0.5">Contexto</span>
-                </div>
-            </div>
 
-            <!-- Rows Container -->
-            <div id="pronouns-grid">
-                <!-- JS Injected -->
+                <!-- Rows Container -->
+                <div id="pronouns-grid">
+                    <!-- JS Injected -->
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        const articlesData = [
+            {
+                type: "Definido",
+                subtitle: "der / die / das",
+                masc: "der",
+                fem: "die",
+                neu: "das",
+                plu: "die",
+                example: "<b>Der</b> Mann kommt.",
+                translation: "El hombre viene."
+            },
+            {
+                type: "Indefinido",
+                subtitle: "ein / eine / ein",
+                masc: "ein",
+                fem: "eine",
+                neu: "ein",
+                plu: "-",
+                example: "<b>Eine</b> Frau wartet.",
+                translation: "Una mujer espera."
+            },
+            {
+                type: "Negativo",
+                subtitle: "kein / keine / kein",
+                masc: "kein",
+                fem: "keine",
+                neu: "kein",
+                plu: "keine",
+                example: "<b>Kein</b> Problem.",
+                translation: "Ningún problema."
+            },
+            {
+                type: "Nullartikel",
+                subtitle: "sin artículo",
+                masc: "∅ Kaffee",
+                fem: "∅ Musik",
+                neu: "∅ Wasser",
+                plu: "∅ Kinder",
+                example: "<b>Kaffee</b> ist teuer.",
+                translation: "El café está caro."
+            }
+        ];
+
         const pronounsData = [
             {
                 subject: "ich",
@@ -267,7 +350,6 @@
                 neu: "sein",
                 plu: "seine",
                 statement: {
-                    pro: "<b>Es</b> kostet diez Euro.", // Wait, let's verify if original had "zehn Euro" or "diez Euro" in German: line 270 is "Es kostet zehn Euro." in original, so we keep "zehn Euro".
                     pro: "<b>Es</b> kostet zehn Euro.",
                     proTr: "Cuesta diez euros.",
                     poss: "<b>Sein</b> Zimmer ist klein.",
@@ -379,6 +461,56 @@
             renderPronouns();
         }
 
+        function renderArticles() {
+            const container = document.getElementById("articles-grid");
+            container.innerHTML = "";
+
+            articlesData.forEach((item, index) => {
+                const row = document.createElement("div");
+                const bgClass = index % 2 === 0 ? "bg-white" : "bg-slate-50/50";
+                row.className = `grid grid-cols-[150px_repeat(4,_1fr)_250px] border-b border-slate-100 relative ${bgClass}`;
+
+                // Highlight DEFINIDO masc ('der')
+                const isHighlight = (index === 0);
+                const mascValClass = isHighlight ? "base-highlight text-2xl md:text-3xl" : "font-extrabold text-slate-700 text-2xl md:text-3xl";
+
+                row.innerHTML = `
+                    <!-- Tipo -->
+                    <div class="px-1 py-1.5 border-r flex flex-col justify-center items-center text-center">
+                        <span class="font-bold text-slate-700 text-sm uppercase">${item.type}</span>
+                        <span class="text-[10px] text-slate-400 font-light mt-0.5">${item.subtitle}</span>
+                    </div>
+
+                    <!-- Masculine -->
+                    <div class="px-1 py-1.5 border-r col-masc flex flex-col justify-center items-center">
+                        <span class="${mascValClass}">${item.masc}</span>
+                    </div>
+
+                    <!-- Feminine -->
+                    <div class="px-1 py-1.5 border-r col-fem flex flex-col justify-center items-center">
+                        <span class="font-extrabold text-red-700 text-2xl md:text-3xl">${item.fem}</span>
+                    </div>
+
+                    <!-- Neutral -->
+                    <div class="px-1 py-1.5 border-r col-neu flex flex-col justify-center items-center">
+                        <span class="font-extrabold text-green-700 text-2xl md:text-3xl">${item.neu}</span>
+                    </div>
+
+                    <!-- Plural -->
+                    <div class="px-1 py-1.5 border-r col-plu flex flex-col justify-center items-center">
+                        <span class="font-extrabold text-amber-800 text-2xl md:text-3xl">${item.plu}</span>
+                    </div>
+
+                    <!-- Example -->
+                    <div class="px-1 py-1.5 bg-white flex flex-col justify-center items-center text-center">
+                        <span class="font-semibold text-slate-800 text-sm leading-snug">${item.example}</span>
+                        <span class="text-xs leading-snug text-slate-500 font-medium italic mt-0.5">${item.translation}</span>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
         const pronounsContainer = document.getElementById("pronouns-grid");
 
         function renderPronouns() {
@@ -386,16 +518,14 @@
             pronounsData.forEach((item, index) => {
                 const example = item[currentMode];
                 const row = document.createElement("div");
-                const isOdd = index % 2 === 0;
-                const bgClass = isOdd ? "bg-white" : "bg-slate-50/50";
+                const bgClass = index % 2 === 0 ? "bg-white" : "bg-slate-50/50";
 
                 row.className = `grid grid-cols-[90px_230px_160px_repeat(4,_1fr)_250px] border-b border-slate-100 relative ${bgClass}`;
 
                 const baseClass = "font-extrabold text-black text-xl";
                 
-                // Highlight base pronoun just like in akkusativ
-                const isHighlight = item.subject === "ich";
-                const mascClass = isHighlight ? "base-highlight text-lg md:text-xl" : "font-extrabold text-lg md:text-xl";
+                // Highlight all masculine cells in this column (as shown in second screenshot)
+                const mascClass = "base-highlight text-lg md:text-xl";
 
                 row.innerHTML = `
                     <!-- Subject -->
@@ -427,7 +557,7 @@
                     <!-- Possessives - Feminine -->
                     <div class="px-1 py-1.5 border-r col-fem flex flex-col justify-center items-center">
                         <div class="flex flex-col items-center justify-center">
-                            <span class="font-extrabold text-base md:text-lg">${item.fem}</span>
+                            <span class="font-extrabold text-base md:text-lg text-red-700">${item.fem}</span>
                             <span class="text-[10px] text-slate-500 font-normal italic mt-0.5">${item.baseTranslation}</span>
                         </div>
                     </div>
@@ -435,7 +565,7 @@
                     <!-- Possessives - Neutral -->
                     <div class="px-1 py-1.5 border-r col-neu flex flex-col justify-center items-center">
                         <div class="flex flex-col items-center justify-center">
-                            <span class="font-extrabold text-base md:text-lg">${item.neu}</span>
+                            <span class="font-extrabold text-base md:text-lg text-green-700">${item.neu}</span>
                             <span class="text-[10px] text-slate-500 font-normal italic mt-0.5">${item.baseTranslation}</span>
                         </div>
                     </div>
@@ -443,12 +573,12 @@
                     <!-- Possessives - Plural -->
                     <div class="px-1 py-1.5 col-plu border-r flex flex-col justify-center items-center">
                         <div class="flex flex-col items-center justify-center">
-                            <span class="font-extrabold text-base md:text-lg">${item.plu}</span>
+                            <span class="font-extrabold text-base md:text-lg text-amber-800">${item.plu}</span>
                             <span class="text-[10px] text-slate-500 font-normal italic mt-0.5">${item.baseTranslation}</span>
                         </div>
                     </div>
 
-                    <!-- New Column: Possessive Examples -->
+                    <!-- Possessive Examples -->
                     <div class="px-1 py-1.5 bg-yellow-50/50 flex flex-col justify-center items-center text-center">
                         <span class="font-bold text-slate-700 text-sm md:text-base leading-snug">${example.poss}</span>
                         <span class="text-xs leading-snug text-slate-500 font-medium italic mt-0.5">${example.possTr || ''}</span>
@@ -458,6 +588,7 @@
             });
         }
 
+        renderArticles();
         renderPronouns();
     </script>
 </body>
