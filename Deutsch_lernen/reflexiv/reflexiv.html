@@ -142,7 +142,7 @@
           Klicke auf eine Reihe, um ein praktisches Beispiel anzuzeigen.
         </p>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="pronoun-cards-container">
+        <div class="flex flex-col gap-2.5" id="pronoun-cards-container">
           <!-- Dynamisch gefüllte Karten im Premium-Sticker-Stil -->
         </div>
       </div>
@@ -543,32 +543,33 @@
 
         // Bestimme Klassen für die Karten basierend auf dem Selektionsstatus im Hell-/Dunkelmodus
         const cardBgClass = isSelected 
-          ? "bg-amber-500/5 dark:bg-amber-500/10 border-2 border-amber-500 shadow-md scale-[1.02]" 
-          : "bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:scale-[1.01] hover:border-slate-350 dark:hover:border-slate-700/50";
+          ? "bg-amber-500/5 dark:bg-amber-500/10 border-2 border-amber-500 shadow-md scale-[1.01]" 
+          : "bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:scale-[1.005] hover:border-slate-300 dark:hover:border-slate-700/50";
           
         // Sticker-Badge Styling (Inspirado por la captura: Fondo blanco con borde grueso azul o amarillo)
         const badgeBorderColor = isSelected ? 'border-amber-500 text-amber-500' : 'border-blue-600 text-blue-600';
         const badgeBgColor = isSelected ? 'bg-amber-50/10 dark:bg-amber-50/10' : 'bg-white';
         const badgeTextColor = isSelected ? 'text-amber-600 dark:text-amber-400' : 'text-blue-600';
 
-        card.className = `${cardBgClass} p-3.5 rounded-2xl flex items-center justify-between cursor-pointer transition-all-300 select-none`;
+        card.className = `${cardBgClass} p-2.5 rounded-xl flex items-center justify-between cursor-pointer transition-all-300 select-none`;
 
         card.innerHTML = `
-          <!-- Links: Sujeto & Übersetzung -->
-          <div class="flex flex-col min-w-0 pr-2">
-            <span class="font-bold text-base text-slate-800 dark:text-slate-100 font-display truncate">
+          <!-- Links: Sujeto & Reflexiv badge inline -->
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="font-bold text-sm sm:text-base text-slate-800 dark:text-slate-100 font-display w-24 sm:w-28 shrink-0 truncate">
               ${item.subj}
             </span>
-            <span class="text-slate-500 dark:text-slate-400 text-xs font-medium italic truncate">
-              ${transSpalte}
-            </span>
-          </div>
-          
-          <!-- Rechts: Reflexiv (Sticker-Badge) -->
-          <div class="shrink-0">
-            <div class="inline-block ${badgeBgColor} border-[3px] ${badgeBorderColor} rounded-xl px-3.5 py-1 font-black font-display text-sm tracking-tight shadow-sm transition-all-300 ${badgeTextColor}">
+            <span class="text-slate-400 dark:text-slate-600 font-bold select-none">➔</span>
+            <div class="inline-block ${badgeBgColor} border-[2.5px] ${badgeBorderColor} rounded-lg px-2.5 py-0.5 font-black font-display text-xs tracking-tight shadow-sm transition-all-300 ${badgeTextColor} shrink-0">
               ${item.refl}
             </div>
+          </div>
+          
+          <!-- Rechts: Übersetzung/Equivalente -->
+          <div class="text-right pl-2 shrink-0">
+            <span class="text-slate-550 dark:text-slate-400 text-xs font-semibold italic">
+              ${transSpalte}
+            </span>
           </div>
         `;
         container.appendChild(card);
