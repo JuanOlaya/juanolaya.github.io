@@ -1069,16 +1069,7 @@
 
             <p id="m-desc" class="modal-explanation">Explanation here.</p>
 
-            <div style="background:#f9f9f9; padding:10px; border-radius:8px; font-size:0.9rem; margin-top:15px; border-left:4px solid #3498db;">
-                <strong>Contracciones comunes:</strong><br>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 5px;">
-                    <div>von + dem = <strong>vom</strong></div>
-                    <div>zu + dem = <strong>zum</strong></div>
-                    <div>zu + der = <strong>zur</strong></div>
-                    <div>an + dem = <strong>am</strong></div>
-                    <div>in + dem = <strong>im</strong></div>
-                </div>
-            </div>
+            <div id="m-contractions" style="display:none; background:#f9f9f9; padding:10px; border-radius:8px; font-size:0.9rem; margin-top:15px; border-left:4px solid #3498db;"></div>
 
             <!-- New Mobile Friendly Close Button -->
             <button class="close-btn-bottom" onclick="closeModalBtn()">CERRAR</button>
@@ -1976,6 +1967,26 @@
             }
 
             document.getElementById('m-desc').innerHTML = data.desc;
+
+            // Contractions Logic
+            const contractionsElem = document.getElementById('m-contractions');
+            let contractionsHTML = '';
+            if (key === 'von') {
+                contractionsHTML = '<div>von + dem = <strong>vom</strong></div>';
+            } else if (key === 'zu') {
+                contractionsHTML = '<div>zu + dem = <strong>zum</strong></div><div>zu + der = <strong>zur</strong></div>';
+            } else if (key === 'an') {
+                contractionsHTML = '<div>an + dem = <strong>am</strong></div>';
+            } else if (key === 'in') {
+                contractionsHTML = '<div>in + dem = <strong>im</strong></div>';
+            }
+
+            if (contractionsHTML !== '') {
+                contractionsElem.innerHTML = '<strong>Contracciones comunes:</strong><br><div style="display: grid; grid-template-columns: 1fr; gap: 5px; margin-top: 5px;">' + contractionsHTML + '</div>';
+                contractionsElem.style.display = 'block';
+            } else {
+                contractionsElem.style.display = 'none';
+            }
 
             // Set Header Color & Text
             const typeElem = document.getElementById('m-type');

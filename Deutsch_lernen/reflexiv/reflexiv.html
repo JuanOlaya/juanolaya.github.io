@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sich - Die Reflexivpronomen (A1)</title>
+  <!-- Tailwind CSS CDN für modernes Styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+  <!-- Google Fonts für ansprechende Typografie -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus+Jakarta+Sans', sans-serif;
+    }
+    .font-display {
+      font-family: 'Space+Grotesk', sans-serif;
+    }
+    /* Sanfte Übergänge für interaktive Elemente */
+    .transition-all-300 {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+  <script>
+    // System zum Laden des Themas vor dem Rendern (Vermeidet weißes Flashen)
+    function initTheme() {
+      const gespeichertesThema = localStorage.getItem('theme');
+      if (gespeichertesThema === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.add('dark');
+      }
+    }
+    initTheme();
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 min-h-screen selection:bg-amber-500 selection:text-slate-950 transition-colors duration-300">
+
+  <!-- Haupt-Container -->
+  <div class="max-w-6xl mx-auto px-4 py-8 md:py-12">
+    
+    <!-- Kopfzeile / Header -->
+    <header class="flex flex-col md:flex-row md:items-center md:justify-between border-b border-slate-200 dark:border-slate-800 pb-8 mb-8 gap-6">
+      <div>
+        <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-semibold px-3 py-1 rounded-full mb-3 uppercase tracking-wider">
+          Deutsch lernen • Level A1
+        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold font-display tracking-tight bg-gradient-to-r from-slate-900 via-slate-700 to-slate-800 dark:from-white dark:via-slate-100 dark:to-slate-400 bg-clip-text text-transparent">
+          Sich: Reflexivpronomen
+        </h1>
+        <p class="text-slate-600 dark:text-slate-400 mt-2 text-lg" id="header-subtitle">
+          Master German reflexive pronouns for Spanish & English speakers.
+        </p>
+      </div>
+
+      <!-- Steuerungselemente rechts (Sprache und Theme-Toggle) -->
+      <div class="flex items-center gap-3 self-start md:self-center">
+        <!-- Sprachumschalter (Toggle Switch) -->
+        <div class="flex items-center gap-3 bg-white dark:bg-slate-800/80 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700/50 shadow-sm">
+          <button id="btn-es" onclick="setLanguage('es')" class="px-4 py-2 rounded-xl text-sm font-bold transition-all-300 bg-amber-500 text-slate-950 shadow-md">
+            Español 🇪🇸
+          </button>
+          <button id="btn-en" onclick="setLanguage('en')" class="px-4 py-2 rounded-xl text-sm font-bold transition-all-300 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white">
+            English 🇬🇧
+          </button>
+        </div>
+
+        <!-- Light/Dark Mode Switcher -->
+        <button id="theme-toggle" onclick="toggleTheme()" class="p-3 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/50 text-slate-700 dark:text-amber-400 hover:scale-105 active:scale-95 transition-all-300 shadow-sm flex items-center justify-center" aria-label="Theme Toggle">
+          <!-- Sonne-Icon (sichtbar im Dark-Mode) -->
+          <svg id="theme-icon-sun" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <!-- Mond-Icon (sichtbar im Light-Mode) -->
+          <svg id="theme-icon-moon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Einführung & Grammatik-Erklärung -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+      <div class="lg:col-span-2 bg-white dark:bg-gradient-to-br dark:from-slate-800/80 dark:to-slate-900 border border-slate-200 dark:border-slate-700/50 rounded-3xl p-6 md:p-8 relative overflow-hidden shadow-md dark:shadow-xl transition-all-300">
+        <div class="absolute -right-12 -top-12 w-48 h-48 bg-amber-500/5 rounded-full blur-3xl"></div>
+        <h2 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-4 flex items-center gap-2" id="concept-title">
+          <svg class="w-6 h-6 text-amber-500 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          Was ist ein Reflexivpronomen?
+        </h2>
+        <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-base" id="concept-body">
+          Ein Reflexivpronomen bezieht sich zurück auf das Subjekt des Satzes. Es zeigt, dass das Subjekt die Handlung an sich selbst ausführt.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <div class="bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-4">
+            <span class="text-xs font-bold text-amber-600 dark:text-amber-500 block uppercase mb-1" id="label-reflexive-structure">Einfache Struktur</span>
+            <div class="font-mono text-sm text-slate-800 dark:text-slate-200">
+              <span class="text-sky-600 dark:text-sky-400 font-bold">Subjekt</span> + <span class="text-rose-600 dark:text-rose-400 font-bold">Verb</span> + <span class="text-emerald-600 dark:text-emerald-400 font-bold">Reflexivpronomen</span>
+            </div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800 rounded-2xl p-4">
+            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-500 block uppercase mb-1" id="label-crucial-rule">Besonderheit</span>
+            <p class="text-xs text-slate-600 dark:text-slate-400" id="text-crucial-rule">
+              In der 3. Person (Einzahl & Mehrzahl) sowie in der Höflichkeitsform "Sie" heißt das Pronomen immer <strong>sich</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Info Card -->
+      <div class="bg-amber-500/5 dark:bg-gradient-to-br dark:from-amber-500/10 dark:to-transparent border border-amber-200/80 dark:border-amber-500/20 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-md dark:shadow-lg transition-all-300">
+        <div>
+          <h3 class="text-amber-600 dark:text-amber-400 font-bold font-display text-lg mb-2" id="info-card-title">Der "Aha!" Effekt</h3>
+          <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed" id="info-card-text">
+            Das deutsche "sich" entspricht fast exakt dem spanischen Pronomen "se" oder dem englischen "himself/herself/themselves".
+          </p>
+        </div>
+        <div class="mt-6 pt-6 border-t border-slate-200 dark:border-slate-800/80 flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center font-bold text-slate-800 dark:text-amber-400">A1</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400" id="info-card-footer">
+            Dieses Thema ist essenziell für die TELC & Goethe A1 Prüfung.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interaktive Tabelle & Detailansicht -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+      
+      <!-- Tabelle (7 Spalten auf LG) -->
+      <div class="lg:col-span-7 bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-md dark:shadow-xl transition-all-300">
+        <h3 class="text-xl font-bold font-display text-slate-900 dark:text-white mb-2 flex items-center gap-2" id="table-title">
+          Pronomen-Übersicht (Deklinations-Tabelle)
+        </h3>
+        <p class="text-slate-500 dark:text-slate-400 text-xs mb-6" id="table-instruction">
+          Klicke auf eine Reihe, um ein praktisches Beispiel anzuzeigen.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-separate border-spacing-y-3">
+            <thead>
+              <tr class="text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider">
+                <th class="pb-1 px-4 text-left" id="th-subject">Sujeto (Pronomen)</th>
+                <th class="pb-1 px-4 text-center" id="th-reflexive">Reflexivpronomen</th>
+                <th class="pb-1 px-4 text-left" id="th-translation">Übersetzung</th>
+              </tr>
+            </thead>
+            <tbody id="pronoun-table-body">
+              <!-- Dynamisch gefüllte Reihen im Premium-Sticker-Stil -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Detailansicht / Beispiel-Box (5 Spalten auf LG) -->
+      <div class="lg:col-span-5 flex flex-col justify-between bg-gradient-to-b from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-md dark:shadow-xl relative min-h-[350px] transition-all-300">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <h4 class="text-xs font-bold text-amber-600 dark:text-amber-500 uppercase tracking-widest" id="detail-box-label">Ausgewähltes Pronomen</h4>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 uppercase tracking-wider" id="click-feedback">Interaktiv</span>
+          </div>
+          <div class="flex items-baseline gap-4 mb-6">
+            <span class="text-5xl font-extrabold text-slate-900 dark:text-white font-display" id="detail-german-subject">Ich</span>
+            <svg class="w-6 h-6 text-slate-400 dark:text-slate-600 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            <span class="text-5xl font-extrabold text-emerald-600 dark:text-emerald-400 font-display" id="detail-german-reflexive">mich</span>
+          </div>
+
+          <div class="space-y-4">
+            <div class="bg-slate-100 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-4 transition-all-300">
+              <span class="text-xs font-bold text-slate-500 dark:text-slate-400 block uppercase mb-1" id="detail-ex-label">Beispielsatz (Alemán)</span>
+              <p class="text-lg font-bold text-slate-800 dark:text-slate-200" id="detail-example-german">Ich wasche mich.</p>
+            </div>
+            
+            <div class="bg-slate-50 dark:bg-slate-950/30 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 transition-all-300">
+              <span class="text-xs font-bold text-slate-500 dark:text-slate-400 block uppercase mb-1" id="detail-trans-label">Übersetzung</span>
+              <p class="text-slate-700 dark:text-slate-300 italic" id="detail-example-translation">Me lavo. / I wash myself.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800/80 text-xs text-slate-500 flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span id="detail-footer-text">Verwende dieses Paar für Reflexionen der 1. Person Singular.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Satz-Baukasten (Interactive Sentence Builder) -->
+    <div class="bg-gradient-to-r from-white to-slate-100 dark:from-slate-950 dark:to-slate-900 border border-slate-200 dark:border-slate-800/80 rounded-3xl p-6 md:p-8 mb-12 shadow-md dark:shadow-2xl relative transition-all-300">
+      <div class="absolute right-0 top-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="mb-6">
+        <h3 class="text-2xl font-bold font-display text-slate-900 dark:text-white mb-2" id="builder-title">Satz-Baukasten (Live Sentence Builder)</h3>
+        <p class="text-slate-600 dark:text-slate-400 text-sm" id="builder-subtitle">Wähle ein Verb und ein Subjekt, um die richtige Satzkonstruktion interaktiv zu betrachten.</p>
+      </div>
+
+      <!-- Verbauswahl -->
+      <div class="mb-8">
+        <span class="block text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-3" id="label-choose-verb">1. Reflexives Verb wählen</span>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3" id="builder-verbs-grid">
+          <!-- Dynamisch generierte Verben-Buttons -->
+        </div>
+      </div>
+
+      <!-- Subjektauswahl -->
+      <div class="mb-8">
+        <span class="block text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-3" id="label-choose-subject">2. Subjekt wählen</span>
+        <div class="flex flex-wrap gap-2" id="builder-subjects-container">
+          <!-- Dynamisch generierte Pronomen-Buttons -->
+        </div>
+      </div>
+
+      <!-- Live Anzeige -->
+      <div class="bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 relative transition-all-300 shadow-sm">
+        <div class="absolute top-3 right-3 flex gap-1">
+          <span class="w-2.5 h-2.5 rounded-full bg-red-500/40"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/40"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/40"></span>
+        </div>
+
+        <span class="block text-[10px] font-bold text-amber-600 dark:text-amber-500 uppercase tracking-widest mb-4" id="label-sentence-formula">Formel: Subjekt + konjugiertes Verb + Reflexivpronomen + Ergänzung</span>
+
+        <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2 text-2xl md:text-4xl font-extrabold font-display tracking-tight text-slate-900 dark:text-white">
+          <span class="text-sky-600 dark:text-sky-400 border-b-2 border-sky-400/30 pb-1" id="build-subj">Ich</span>
+          <span class="text-rose-600 dark:text-rose-400 border-b-2 border-rose-400/30 pb-1" id="build-verb">freue</span>
+          <span class="text-emerald-600 dark:text-emerald-400 border-b-2 border-emerald-400/30 pb-1" id="build-refl">mich</span>
+          <span class="text-slate-700 dark:text-slate-300 border-b-2 border-slate-200 dark:border-slate-700 pb-1" id="build-extra">auf den Urlaub.</span>
+          <span class="text-rose-600 dark:text-rose-400 border-b-2 border-rose-400/30 pb-1 hidden" id="build-prefix">vor</span>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase block mb-1" id="label-translation-builder">Übersetzung</span>
+            <p class="text-lg font-medium text-slate-800 dark:text-slate-300 italic" id="build-translation">Me alegro por las vacaciones. / I look forward to the vacation.</p>
+          </div>
+          
+          <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800 self-start sm:self-center text-xs transition-all-300">
+            <span class="text-slate-500 dark:text-slate-400 block mb-1 font-bold" id="label-grammar-note">Grammatik-Tipp</span>
+            <span class="text-slate-600 dark:text-slate-300" id="build-note">Präposition "auf" fordert den Akkusativ.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mini-Quiz / Spiel (Practice Zone) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Quiz Panel (8 Spalten) -->
+      <div class="lg:col-span-8 bg-white dark:bg-slate-800/20 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-md dark:shadow-xl transition-all-300">
+        <div class="flex justify-between items-center mb-6">
+          <div>
+            <h3 class="text-2xl font-bold font-display text-slate-900 dark:text-white" id="quiz-title">A1 Quiz-Trainer</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-sm mt-1" id="quiz-subtitle">Beweise dein Wissen. Fülle die Lücken aus!</p>
+          </div>
+          <div class="bg-slate-100 dark:bg-slate-900 px-4 py-2 rounded-2xl border border-slate-200 dark:border-slate-700/50 flex flex-col items-center transition-all-300">
+            <span class="text-[9px] font-bold text-amber-600 dark:text-amber-500 uppercase" id="label-quiz-score">Score</span>
+            <span class="text-lg font-bold text-slate-900 dark:text-white font-mono" id="quiz-score">0 / 6</span>
+          </div>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quiz-container" class="space-y-6">
+          <div class="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 relative transition-all-300">
+            <!-- Progress Bar -->
+            <div class="absolute top-0 left-0 h-1 bg-amber-500 rounded-full transition-all-300" id="quiz-progress-bar" style="width: 16.6%"></div>
+
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest" id="quiz-step-label">Frage 1 von 6</span>
+              <span class="text-xs text-slate-500 italic" id="quiz-tip">Achte auf das Subjekt</span>
+            </div>
+
+            <div class="text-xl md:text-2xl font-bold font-display text-slate-800 dark:text-slate-100 mb-6 flex items-center flex-wrap gap-2 leading-relaxed">
+              <span id="quiz-sentence-start">Ich freue</span>
+              <span class="inline-block px-4 py-1 bg-slate-100 dark:bg-slate-950 border-2 border-dashed border-slate-300 dark:border-amber-500/50 rounded-lg text-amber-600 dark:text-amber-400 font-mono text-center min-w-[80px]" id="quiz-gap">_____</span>
+              <span id="quiz-sentence-end">auf den Urlaub.</span>
+            </div>
+
+            <!-- Quiz Choices / Buttons -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="quiz-choices">
+              <!-- Dynamisch gefüllte Buttons -->
+            </div>
+
+            <!-- Quiz Feedback Box -->
+            <div id="quiz-feedback" class="mt-6 p-4 rounded-xl hidden text-sm font-semibold transition-all-300 flex items-center gap-3">
+              <!-- Dynamisches Feedback (Success / Error) -->
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="flex justify-between items-center">
+            <button id="btn-quiz-reset" onclick="resetQuiz()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-550 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition-all-300">
+              Neustart / Reset
+            </button>
+            <button id="btn-quiz-next" onclick="nextQuestion()" class="px-6 py-3 bg-amber-500 text-slate-950 font-bold rounded-xl text-sm transition-all-300 opacity-50 cursor-not-allowed" disabled>
+              Nächste Frage &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Verben-Vokabelkarten (4 Spalten) -->
+      <div class="lg:col-span-4 bg-gradient-to-b from-white to-slate-100 dark:from-slate-800/40 dark:to-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-md dark:shadow-xl flex flex-col justify-between transition-all-300">
+        <div>
+          <h3 class="text-lg font-bold font-display text-slate-900 dark:text-white mb-3" id="vocab-title">A1 Vokabelliste</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mb-5" id="vocab-subtitle">Lerne diese 6 reflexiven Verben auswendig für die Prüfung.</p>
+          
+          <div class="space-y-3" id="vocab-list-container">
+            <!-- Dynamisch generierte Vokabel-Items -->
+          </div>
+        </div>
+        
+        <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400 text-center italic" id="vocab-footer">
+          "für" verlangt den Akkusativ (für den Kurs, für Musik)
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Fußzeile / Footer -->
+    <footer class="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800/80 text-center text-xs text-slate-550 dark:text-slate-500">
+      <p id="footer-credits">Reflexivpronomen Infografik & Trainer — Entwickelt für Spanisch- & Englischsprachige.</p>
+      <p class="mt-2">Made with 💛 for A1 German Learners.</p>
+    </footer>
+
+  </div>
+
+  <!-- JavaScript Logik -->
+  <script>
+    // --- DATENSÄTZE UND DIKTIONÄRE ---
+    // (Alle Variablennamen und Dokumentenkommentare sind auf Deutsch gehalten)
+
+    // Sprachsteuerung
+    let aktuelleSprache = 'es'; // Standard: Spanisch
+    let aktiverIndex = 0; // Aktuell ausgewählte Pronomenreihe
+
+    // Die Pronomen-Datenstruktur für die Tabelle und das Detailfeld
+    const pronomenDaten = [
+      { subj: "ich", refl: "mich", es: "me", en: "myself / me", bsp: "Ich wasche mich.", bspEs: "Me lavo.", bspEn: "I wash myself.", bspDescEs: "Akkusativ-Pronomen der 1. Person Singular.", bspDescEn: "Accusative pronoun for 1st person singular." },
+      { subj: "du", refl: "dich", es: "te", en: "yourself / you", bsp: "Du musst dich anmelden.", bspEs: "Tienes que registrarte.", bspEn: "You must register.", bspDescEs: "Akkusativ-Pronomen der 2. Person Singular.", bspDescEn: "Accusative pronoun for 2nd person singular." },
+      { subj: "er", refl: "sich", es: "se", en: "himself / it", bsp: "Er freut sich.", bspEs: "Él se alegra.", bspEn: "He is happy / looks forward.", bspDescEs: "3. Person Singular Maskulinum.", bspDescEn: "3rd person singular masculine." },
+      { subj: "sie (ella)", refl: "sich", es: "se", en: "herself", bsp: "Sie setzt sich.", bspEs: "Ella se sienta.", bspEn: "She sits down.", bspDescEs: "3. Person Singular Femininum.", bspDescEn: "3rd person singular feminine." },
+      { subj: "es", refl: "sich", es: "se", en: "itself", bsp: "Es freut sich.", bspEs: "Se alegra (neutro).", bspEn: "It is happy.", bspDescEs: "3. Person Singular Neutrum.", bspDescEn: "3rd person singular neuter." },
+      { subj: "wir", refl: "uns", es: "nos", en: "ourselves / us", bsp: "Wir treffen uns am Samstag.", bspEs: "Nos encontramos el sábado.", bspEn: "We meet on Saturday.", bspDescEs: "1. Person Plural.", bspDescEn: "1st person plural." },
+      { subj: "ihr", refl: "euch", es: "os", en: "yourselves / you (all)", bsp: "Ihr müsst euch beeilen.", bspEs: "Tenéis que daros prisa.", bspEn: "You all must hurry.", bspDescEs: "2. Person Plural (informell).", bspDescEn: "2nd person plural (informal)." },
+      { subj: "sie (ellos)", refl: "sich", es: "se", en: "themselves / them", bsp: "Sie interessieren sich für Deutsch.", bspEs: "Ellos se interesan por el alemán.", bspEn: "They are interested in German.", bspDescEs: "3. Person Plural.", bspDescEn: "3rd person plural." },
+      { subj: "Sie (formal)", refl: "sich", es: "se (usted / ustedes)", en: "yourself / yourselves (formal)", bsp: "Können Sie sich vorstellen?", bspEs: "¿Puede presentarse?", bspEn: "Can you introduce yourself?", bspDescEs: "Formelle Höflichkeitsform (Singular & Plural).", bspDescEn: "Formal address (singular & plural)." }
+    ];
+
+    // Liste der A1 Verben für den Satz-Baukasten
+    const verbenListe = [
+      { id: "freuen", inf: "sich freuen", es: "alegrarse", en: "to be happy / look forward to", extra: "auf den Urlaub.", extraEs: "por las vacaciones.", extraEn: "to the vacation.", tippEs: 'Verbindet sich oft mit "auf" (Zukunft) oder "über" (Gegenwart/Vergangenheit).', tippEn: 'Often connects with "auf" (future) or "über" (present/past).' },
+      { id: "treffen", inf: "sich treffen", es: "encontrarse / verse", en: "to meet up", extra: "am Samstag.", extraEs: "el sábado.", extraEn: "on Saturday.", tippEs: 'Achtung beim Vokalwechsel: "wir treffen uns" aber "er trifft sich"!', tippEn: 'Watch out for vowel change: "wir treffen uns" but "er trifft sich"!' },
+      { id: "vorstellen", inf: "sich vorstellen", es: "presentarse", en: "to introduce oneself", extra: "gerne.", extraEs: "con gusto.", extraEn: "gladly.", prefix: "vor", tippEs: 'Trennbares Verb! Das Präfix "vor" steht ganz am Ende des Hauptsatzes.', tippEn: 'Separable verb! The prefix "vor" goes to the very end of the main clause.' },
+      { id: "interessieren", inf: "sich interessieren für", es: "interesarse por", en: "to be interested in", extra: "für Musik.", extraEs: "por la música.", extraEn: "in music.", tippEs: 'Erfordert die Präposition "für" + Akkusativ.', tippEn: 'Requires the preposition "für" + accusative.' },
+      { id: "anmelden", inf: "sich anmelden für", es: "inscribirse / registrarse", en: "to register for", extra: "für den Kurs.", extraEs: "para el curso.", extraEn: "for the course.", prefix: "an", tippEs: 'Trennbares Verb! "an" wandert ans Satzende (z.B. "Ich melde mich an").', tippEn: 'Separable verb! "an" moves to the end of the sentence.' },
+      { id: "beeilen", inf: "sich beeilen", es: "darse prisa", en: "to hurry", extra: "schnell.", extraEs: "rápido.", extraEn: "quickly.", tippEs: 'Im Imperativ sehr beliebt: "Beeil dich!" (¡Date prisa!).', tippEn: 'Very common in imperative: "Beeil dich!" (Hurry up!).' }
+    ];
+
+    // Konjugationstabelle für den Live-Baukasten zur dynamischen Generierung
+    const konjugationsMatrix = {
+      freuen: { ich: "freue", du: "freust", er: "freut", wir: "freuen", ihr: "freut", sie: "freuen", Sie: "freuen" },
+      treffen: { ich: "treffe", du: "triffst", er: "trifft", wir: "treffen", ihr: "trefft", sie: "treffen", Sie: "treffen" },
+      vorstellen: { ich: "stelle", du: "stellst", er: "stellt", wir: "stellen", ihr: "stellt", sie: "stellen", Sie: "stellen" },
+      interessieren: { ich: "interessiere", du: "interessierst", er: "interessiert", wir: "interessieren", ihr: "interessiert", sie: "interessieren", Sie: "interessieren" },
+      anmelden: { ich: "melde", du: "meldest", er: "meldet", wir: "melden", ihr: "meldet", sie: "melden", Sie: "melden" },
+      beeilen: { ich: "beeile", du: "beeilst", er: "beeilt", wir: "beeilen", ihr: "beeilt", sie: "beeilen", Sie: "beeilen" }
+    };
+
+    // Quiz-Datenbank
+    const quizFragen = [
+      { start: "Ich freue", end: "auf den Urlaub.", correct: "mich", options: ["mich", "dich", "sich"], tipEs: "Erste Person Singular (Ich).", tipEn: "First person singular (I)." },
+      { start: "Wir treffen", end: "am Samstag um 14:00 Uhr.", correct: "uns", options: ["uns", "euch", "sich"], tipEs: "Wir (Plural, erste Person).", tipEn: "We (plural, first person)." },
+      { start: "Kinder, müsst ihr", end: "beeilen? Die Schule beginnt!", correct: "euch", options: ["dich", "euch", "uns"], tipEs: "Ihr (Plural, informelle Anrede).", tipEn: "You all (plural, informal)." },
+      { start: "Können Sie", end: "vorstellen, Herr Müller?", correct: "sich", options: ["sich", "uns", "euch"], tipEs: "Sie (Formelle Höflichkeitsform).", tipEn: "Formal 'Sie' always uses 'sich'." },
+      { start: "Du musst", end: "für den Deutschkurs anmelden.", correct: "dich", options: ["mich", "dich", "sich"], tipEs: "Zweite Person Singular (Du).", tipEn: "Second person singular (You)." },
+      { start: "Er interessiert", end: "für moderne Kunst.", correct: "sich", options: ["sich", "ihn", "dich"], tipEs: "Er (Dritte Person Singular Maskulinum).", tipEn: "He (third person singular masculine)." }
+    ];
+
+    // UI-Texte für die Echtzeit-Übersetzung (Lokalisierung)
+    const uiTexte = {
+      es: {
+        subtitle: "Aprende los pronombres reflexivos en alemán para hispanohablantes e ingleses.",
+        conceptTitle: "¿Qué es un pronombre reflexivo?",
+        conceptBody: "Un pronombre reflexivo se utiliza cuando el sujeto de la frase realiza una acción que recae sobre sí mismo (como 'me lavo', 'se alegra' en español).",
+        lblReflexiveStructure: "Estructura básica",
+        lblCrucialRule: "Regla de oro",
+        txtCrucialRule: "En la 3.ª persona (él, ella, ellos) y en el tratamiento formal (Sie), el pronombre reflexivo es siempre <strong>sich</strong>.",
+        infoCardTitle: "El efecto espejo",
+        infoCardText: "El 'sich' del alemán equivale perfectamente al 'se' español en muchos casos (ej. er wäscht sich = él se lava). ¡Esto facilita enormemente tu aprendizaje!",
+        infoCardFooter: "Clave para exámenes TELC y Goethe A1.",
+        tableTitle: "Tabla de Pronombres Reflexivos",
+        tableInstruction: "Haz clic en una fila para ver el ejemplo en la tarjeta de detalle.",
+        thSubject: "Sujeto",
+        thReflexive: "Reflexivo",
+        thTranslation: "Equivalente",
+        detailBoxLabel: "PRONOMBRE SELECCIONADO",
+        detailExLabel: "Frase de ejemplo en alemán",
+        detailTransLabel: "Traducción",
+        detailFooterText: "Selecciona filas de la tabla para analizar su uso.",
+        builderTitle: "Satz-Baukasten (Constructor de Oraciones)",
+        builderSubtitle: "Elige un verbo y un sujeto para ver cómo se compone la frase reflexiva en tiempo real.",
+        lblChooseVerb: "1. Elige un verbo reflexivo",
+        lblChooseSubject: "2. Elige un sujeto",
+        lblSentenceFormula: "Fórmula: Sujeto + Verbo Conjugado + Pronombre Reflexivo + Complementos",
+        lblTranslationBuilder: "Traducción interactiva",
+        lblGrammarNote: "Nota gramatical",
+        quizTitle: "Entrenador de Cuestionario A1",
+        quizSubtitle: "Pon a prueba tus conocimientos. ¡Rellena los espacios vacíos!",
+        lblQuizScore: "Puntuación",
+        quizStepLabel: "Pregunta {num} de 6",
+        quizTip: "Pista",
+        vocabTitle: "Vocabulario A1",
+        vocabSubtitle: "Los 6 verbos reflexivos clave para aprobar tu nivel inicial.",
+        vocabFooter: "'für' rige acusativo (für den Kurs, für Musik).",
+        footerCredits: "Infografía Interactiva de Reflexivpronomen — Diseñada para estudiantes de alemán."
+      },
+      en: {
+        subtitle: "Master German reflexive pronouns with explanations for English & Spanish speakers.",
+        conceptTitle: "What is a reflexive pronoun?",
+        conceptBody: "A reflexive pronoun is used when the subject of the sentence performs an action on itself (like 'I wash myself', 'he is glad').",
+        lblReflexiveStructure: "Basic structure",
+        lblCrucialRule: "Golden Rule",
+        txtCrucialRule: "For the 3rd person (he/she/it, they) and the formal address (Sie), the reflexive pronoun is always <strong>sich</strong>.",
+        infoCardTitle: "The Mirror Effect",
+        infoCardText: "Unlike English, which uses 'myself/himself', German has simplified forms. For 'him/her/them', it is always the word <strong>sich</strong>!",
+        infoCardFooter: "Essential grammar for Goethe and TELC A1.",
+        tableTitle: "Reflexive Pronouns Table",
+        tableInstruction: "Click on any row to view its details and full translation on the right card.",
+        thSubject: "Subject",
+        thReflexive: "Reflexive",
+        thTranslation: "Translation",
+        detailBoxLabel: "SELECTED PRONOUN",
+        detailExLabel: "German Example Sentence",
+        detailTransLabel: "Translation",
+        detailFooterText: "Click table rows to explore different pronoun behaviors.",
+        builderTitle: "Live Sentence Builder",
+        builderSubtitle: "Select a verb and a subject to see how the conjugated sentence is structured dynamically.",
+        lblChooseVerb: "1. Select a reflexive verb",
+        lblChooseSubject: "2. Select a subject",
+        lblSentenceFormula: "Formula: Subject + Conjugated Verb + Reflexive Pronoun + Extra elements",
+        lblTranslationBuilder: "Dynamic Translation",
+        lblGrammarNote: "Grammar Tip",
+        quizTitle: "A1 Quiz Trainer",
+        quizSubtitle: "Test your skills! Fill in the blanks with the correct pronoun.",
+        lblQuizScore: "Score",
+        quizStepLabel: "Question {num} of 6",
+        quizTip: "Tip",
+        vocabTitle: "A1 Vocabulary",
+        vocabSubtitle: "The 6 essential reflexive verbs you must memorize for the exam.",
+        vocabFooter: "'für' takes accusative case (e.g. für den Kurs).",
+        footerCredits: "Interactive Reflexive Pronoun Infographic — Crafted for German learners."
+      }
+    };
+
+
+    // --- STATUS-VARIABLE FÜR DEN SITZUNGSVERLAUF ---
+    let ausgewaehltesVerbId = "freuen";
+    let ausgewaehltesSubjekt = "ich";
+    let aktuellerQuizIndex = 0;
+    let quizPunktzahl = 0;
+
+
+    // --- HILFSFUNKTIONEN & INITIALISIERUNG ---
+
+    // Dark / Light Mode Switcher Logic
+    function toggleTheme() {
+      const istJetztDunkel = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', istJetztDunkel ? 'dark' : 'light');
+      // Aktualisiere die Tabelle, um die Sticker-Hintergründe im Light-Mode perfekt anzupassen
+      rendereTabelle();
+    }
+
+    // Hauptfunktion zum Umschalten der Sprachen (Spanisch / Englisch)
+    function setLanguage(lang) {
+      aktuelleSprache = lang;
+      
+      // Buttons-Klassen anpassen (Berücksichtigt Light und Dark Mode perfekt)
+      const btnEs = document.getElementById('btn-es');
+      const btnEn = document.getElementById('btn-en');
+      
+      if (lang === 'es') {
+        btnEs.className = "px-4 py-2 rounded-xl text-sm font-bold transition-all-300 bg-amber-500 text-slate-950 shadow-md";
+        btnEn.className = "px-4 py-2 rounded-xl text-sm font-bold transition-all-300 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white";
+      } else {
+        btnEn.className = "px-4 py-2 rounded-xl text-sm font-bold transition-all-300 bg-amber-500 text-slate-950 shadow-md";
+        btnEs.className = "px-4 py-2 rounded-xl text-sm font-bold transition-all-300 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white";
+      }
+
+      // Alle UI-Texte übersetzen
+      aktualisiereUIGebiete();
+      // Tabelle neu rendern
+      rendereTabelle();
+      // Satz-Baukasten aktualisieren
+      aktualisiereBaukasten();
+      // Quiz-Komponenten übersetzen
+      rendereQuizFrage();
+      // Vokabelliste übersetzen
+      rendereVokabelliste();
+    }
+
+    // Funktion zur Aktualisierung aller Textblöcke auf der Seite
+    function aktualisiereUIGebiete() {
+      const txt = uiTexte[aktuelleSprache];
+      
+      document.getElementById('header-subtitle').textContent = txt.subtitle;
+      document.getElementById('concept-title').innerHTML = `<svg class="w-6 h-6 text-amber-500 dark:text-amber-400 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>${txt.conceptTitle}`;
+      document.getElementById('concept-body').textContent = txt.conceptBody;
+      document.getElementById('label-reflexive-structure').textContent = txt.lblReflexiveStructure;
+      document.getElementById('label-crucial-rule').textContent = txt.lblCrucialRule;
+      document.getElementById('text-crucial-rule').innerHTML = txt.txtCrucialRule;
+      document.getElementById('info-card-title').textContent = txt.infoCardTitle;
+      document.getElementById('info-card-text').innerHTML = txt.infoCardText;
+      document.getElementById('info-card-footer').textContent = txt.infoCardFooter;
+      document.getElementById('table-title').textContent = txt.tableTitle;
+      document.getElementById('table-instruction').textContent = txt.tableInstruction;
+      document.getElementById('th-subject').textContent = txt.thSubject;
+      document.getElementById('th-reflexive').textContent = txt.thReflexive;
+      document.getElementById('th-translation').textContent = txt.thTranslation;
+      document.getElementById('detail-box-label').textContent = txt.detailBoxLabel;
+      document.getElementById('detail-ex-label').textContent = txt.detailExLabel;
+      document.getElementById('detail-trans-label').textContent = txt.detailTransLabel;
+      document.getElementById('builder-title').textContent = txt.builderTitle;
+      document.getElementById('builder-subtitle').textContent = txt.builderSubtitle;
+      document.getElementById('label-choose-verb').textContent = txt.lblChooseVerb;
+      document.getElementById('label-choose-subject').textContent = txt.lblChooseSubject;
+      document.getElementById('label-sentence-formula').textContent = txt.lblSentenceFormula;
+      document.getElementById('label-translation-builder').textContent = txt.lblTranslationBuilder;
+      document.getElementById('label-grammar-note').textContent = txt.lblGrammarNote;
+      document.getElementById('quiz-title').textContent = txt.quizTitle;
+      document.getElementById('quiz-subtitle').textContent = txt.quizSubtitle;
+      document.getElementById('label-quiz-score').textContent = txt.lblQuizScore;
+      document.getElementById('vocab-title').textContent = txt.vocabTitle;
+      document.getElementById('vocab-subtitle').textContent = txt.vocabSubtitle;
+      document.getElementById('vocab-footer').textContent = txt.vocabFooter;
+      document.getElementById('footer-credits').textContent = txt.footerCredits;
+    }
+
+    // Rendern der Haupt-Pronomentabelle mit der 3-Spalten-Struktur (Erweiterte Light/Dark Unterstützung)
+    function rendereTabelle() {
+      const tbody = document.getElementById('pronoun-table-body');
+      tbody.innerHTML = '';
+
+      pronomenDaten.forEach((item, index) => {
+        const isSelected = index === aktiverIndex;
+        const tr = document.createElement('tr');
+        
+        // Reihen mit sanften Interaktionen im Sticker-Kombination-Design
+        tr.className = "group cursor-pointer transition-all-300 select-none";
+        tr.onclick = () => zeigePronomenDetail(index);
+
+        const transSpalte = aktuelleSprache === 'es' ? item.es : item.en;
+
+        // Bestimme Klassen für die Zellen basierend auf dem Selektionsstatus im Hell-/Dunkelmodus
+        const cellBgClass = isSelected 
+          ? "bg-slate-200/80 dark:bg-slate-800" 
+          : "bg-white dark:bg-slate-800/30 hover:bg-slate-100/60 dark:hover:bg-slate-800/50";
+          
+        const borderClass = isSelected 
+          ? "border-amber-500" 
+          : "border-transparent group-hover:border-slate-300 dark:group-hover:border-slate-700/50";
+        
+        // Sticker-Badge Styling (Inspirado por la captura: Fondo blanco con borde grueso azul o amarillo)
+        const badgeBorderColor = isSelected ? 'border-amber-500 text-amber-500' : 'border-blue-600 text-blue-600';
+        const badgeBgColor = isSelected ? 'bg-amber-50/10 dark:bg-amber-50/10' : 'bg-white';
+        const badgeTextColor = isSelected ? 'text-amber-600 dark:text-amber-400' : 'text-blue-600';
+
+        tr.innerHTML = `
+          <!-- Spalte 1: Sujeto -->
+          <td class="p-4 ${cellBgClass} border-t-2 border-b-2 border-l-2 ${borderClass} rounded-l-2xl font-bold text-base text-slate-800 dark:text-slate-100 font-display transition-all-300">
+            ${item.subj}
+          </td>
+          
+          <!-- Spalte 2: Reflexivo (Sticker-Badge) -->
+          <td class="p-3 ${cellBgClass} border-t-2 border-b-2 text-center transition-all-300">
+            <div class="inline-block ${badgeBgColor} border-[3px] ${badgeBorderColor} rounded-xl px-4 py-1.5 font-black font-display text-sm tracking-tight shadow-md group-hover:scale-105 transition-all-300 ${badgeTextColor}">
+              ${item.refl}
+            </div>
+          </td>
+          
+          <!-- Spalte 3: Equivalente -->
+          <td class="p-4 ${cellBgClass} border-t-2 border-b-2 border-r-2 ${borderClass} rounded-r-2xl text-slate-600 dark:text-slate-400 text-sm font-medium italic transition-all-300">
+            ${transSpalte}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Detail-Box rechts neben der Tabelle füllen
+    function zeigePronomenDetail(index) {
+      aktiverIndex = index;
+      const daten = pronomenDaten[index];
+      
+      document.getElementById('detail-german-subject').textContent = daten.subj;
+      document.getElementById('detail-german-reflexive').textContent = daten.refl;
+      document.getElementById('detail-example-german').innerHTML = highlighteDeutschePronomen(daten.bsp, daten.subj, daten.refl);
+      
+      const uebersetzung = aktuelleSprache === 'es' ? daten.bspEs : daten.bspEn;
+      document.getElementById('detail-example-translation').textContent = uebersetzung;
+
+      const beschreibung = aktuelleSprache === 'es' ? daten.bspDescEs : daten.bspDescEn;
+      document.getElementById('detail-footer-text').textContent = beschreibung;
+
+      // Setze auch den Baukasten-Sitzungseffekt auf dieses Subjekt
+      let baukastenSubjekt = daten.subj;
+      if (baukastenSubjekt.includes('sie')) {
+        baukastenSubjekt = 'sie'; // Normierung für den Baukasten
+      } else if (baukastenSubjekt.includes('Sie')) {
+        baukastenSubjekt = 'Sie';
+      }
+      waehleSubjektFuerBaukasten(baukastenSubjekt);
+      
+      // Tabelle aktualisieren, um das neue active-Styling anzuwenden
+      rendereTabelle();
+    }
+
+    // Hebt Subjekt und reflexives Wort im Beispielsatz farblich hervor
+    function highlighteDeutschePronomen(satz, subj, refl) {
+      // Bereinigt Subjekt-Marker wie "(ella)" oder "(ellos)" für den Regex-Abgleich
+      const reinerSubj = subj.split(' ')[0];
+      
+      let formatierterSatz = satz;
+      // Hebe Reflexivpronomen hervor (z.B. mich, dich, sich)
+      const reflRegex = new RegExp(`\\b(${refl})\\b`, 'i');
+      formatierterSatz = formatierterSatz.replace(reflRegex, `<span class="text-emerald-600 dark:text-emerald-400 font-extrabold">$1</span>`);
+      
+      // Hebe Subjekt hervor
+      const subjRegex = new RegExp(`\\b(${reinerSubj})\\b`, 'i');
+      formatierterSatz = formatierterSatz.replace(subjRegex, `<span class="text-sky-600 dark:text-sky-400 font-extrabold">$1</span>`);
+
+      return formatierterSatz;
+    }
+
+
+    // --- INTERAKTIVER BAU-KASTEN (SENTENCE BUILDER) LOGIK ---
+
+    // Initialisiert die UI für den Baukasten
+    function initBaukasten() {
+      // Generiere Verben-Buttons
+      const verbGrid = document.getElementById('builder-verbs-grid');
+      verbGrid.innerHTML = '';
+      verbenListe.forEach(verb => {
+        const btn = document.createElement('button');
+        btn.id = `btn-verb-${verb.id}`;
+        btn.onclick = () => waehleVerbFuerBaukasten(verb.id);
+        btn.className = "p-3 rounded-2xl border text-xs font-bold transition-all-300 text-center flex flex-col justify-center items-center gap-1 shadow-sm bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700/50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300";
+        btn.innerHTML = `
+          <span class="text-slate-800 dark:text-white block font-display">${verb.inf}</span>
+          <span class="text-[10px] text-slate-500 dark:text-slate-400 font-normal italic">${aktuelleSprache === 'es' ? verb.es : verb.en}</span>
+        `;
+        verbGrid.appendChild(btn);
+      });
+
+      // Generiere Subjekts-Buttons (ich, du, er, wir, ihr, sie, Sie)
+      const subContainer = document.getElementById('builder-subjects-container');
+      subContainer.innerHTML = '';
+      const subjekte = ["ich", "du", "er", "wir", "ihr", "sie", "Sie"];
+      subjekte.forEach(sub => {
+        const btn = document.createElement('button');
+        btn.id = `btn-subj-${sub}`;
+        btn.onclick = () => waehleSubjektFuerBaukasten(sub);
+        btn.className = "px-4 py-2 rounded-xl text-xs font-bold transition-all-300 border bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800";
+        btn.textContent = sub;
+        subContainer.appendChild(btn);
+      });
+
+      // Standardwerte setzen
+      waehleVerbFuerBaukasten("freuen");
+      waehleSubjektFuerBaukasten("ich");
+    }
+
+    function waehleVerbFuerBaukasten(verbId) {
+      ausgewaehltesVerbId = verbId;
+      
+      // Update Buttons visuell (Mit Hell-/Dunkelmoduskompatibilität)
+      verbenListe.forEach(v => {
+        const btn = document.getElementById(`btn-verb-${v.id}`);
+        if (v.id === verbId) {
+          btn.className = "p-3 rounded-2xl border text-xs font-bold transition-all-300 text-center flex flex-col justify-center items-center gap-1 shadow-lg bg-amber-500 border-amber-400 text-slate-950";
+          btn.querySelector('span').className = "text-slate-950 block font-display font-extrabold";
+          btn.querySelectorAll('span')[1].className = "text-slate-900 font-semibold text-[10px] italic";
+        } else {
+          btn.className = "p-3 rounded-2xl border text-xs font-bold transition-all-300 text-center flex flex-col justify-center items-center gap-1 shadow-sm bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700/50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300";
+          btn.querySelector('span').className = "text-slate-800 dark:text-white block font-display";
+          btn.querySelectorAll('span')[1].className = "text-slate-500 dark:text-slate-400 font-normal text-[10px] italic";
+        }
+      });
+
+      aktualisiereBaukasten();
+    }
+
+    function waehleSubjektFuerBaukasten(subj) {
+      ausgewaehltesSubjekt = subj;
+
+      // Update Subjekt-Buttons visuell
+      const subjekte = ["ich", "du", "er", "wir", "ihr", "sie", "Sie"];
+      subjekte.forEach(s => {
+        const btn = document.getElementById(`btn-subj-${s}`);
+        if (s === subj) {
+          btn.className = "px-4 py-2 rounded-xl text-xs font-bold transition-all-300 border bg-sky-500 text-slate-950 border-sky-400 shadow-md";
+        } else {
+          btn.className = "px-4 py-2 rounded-xl text-xs font-bold transition-all-300 border bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800";
+        }
+      });
+
+      aktualisiereBaukasten();
+    }
+
+    // Logik für die Echtzeit-Satzbildung
+    function aktualisiereBaukasten() {
+      const verbObj = verbenListe.find(v => v.id === ausgewaehltesVerbId);
+      const konjugiertesVerb = konjugationsMatrix[ausgewaehltesVerbId][ausgewaehltesSubjekt];
+      
+      // Bestimme das passende Reflexivpronomen
+      let reflPronomen = "sich";
+      if (ausgewaehltesSubjekt === "ich") reflPronomen = "mich";
+      else if (ausgewaehltesSubjekt === "du") reflPronomen = "dich";
+      else if (ausgewaehltesSubjekt === "wir") reflPronomen = "uns";
+      else if (ausgewaehltesSubjekt === "ihr") reflPronomen = "euch";
+
+      // Formel-UI befüllen
+      document.getElementById('build-subj').textContent = ausgewaehltesSubjekt.charAt(0).toUpperCase() + ausgewaehltesSubjekt.slice(1);
+      document.getElementById('build-verb').textContent = konjugiertesVerb;
+      document.getElementById('build-refl').textContent = reflPronomen;
+      document.getElementById('build-extra').textContent = verbObj.extra;
+
+      // Behandlung trennbarer Verben (Präfix am Satzende)
+      const prefixEl = document.getElementById('build-prefix');
+      if (verbObj.prefix) {
+        prefixEl.textContent = verbObj.prefix;
+        prefixEl.classList.remove('hidden');
+      } else {
+        prefixEl.classList.add('hidden');
+      }
+
+      // Live-Übersetzung generieren
+      let transText = "";
+      if (aktuelleSprache === 'es') {
+        // Generiert eine verständliche spanische Übersetzung basierend auf Subjekt und Verb
+        transText = holeEchtzeitSpanischUebersetzung(ausgewaehltesSubjekt, verbObj);
+      } else {
+        transText = holeEchtzeitEnglischUebersetzung(ausgewaehltesSubjekt, verbObj);
+      }
+      document.getElementById('build-translation').textContent = transText;
+
+      // Grammatik-Tipp anzeigen
+      const grammatikTipp = aktuelleSprache === 'es' ? verbObj.tippEs : verbObj.tippEn;
+      document.getElementById('build-note').textContent = grammatikTipp;
+    }
+
+    // Hilfsfunktion zur Generierung spanischer Sätze
+    function holeEchtzeitSpanischUebersetzung(subj, verbObj) {
+      const pronomenMap = { ich: "Me", du: "Te", er: "Se", wir: "Nos", ihr: "Os", sie: "Se", Sie: "Se" };
+      const verbMap = {
+        freuen: { ich: "alegro", du: "alegras", er: "alegra", wir: "alegramos", ihr: "alegráis", sie: "alegran", Sie: "alegra" },
+        treffen: { ich: "encuentro", du: "encuentras", er: "encuentra", wir: "encontramos", ihr: "encontráis", sie: "encuentran", Sie: "encuentra" },
+        vorstellen: { ich: "presento", du: "presentas", er: "presenta", wir: "presentamos", ihr: "presentáis", sie: "presentan", Sie: "presenta" },
+        interessieren: { ich: "intereso", du: "interesas", er: "interesa", wir: "interesamos", ihr: "interesáis", sie: "interesan", Sie: "interesa" },
+        anmelden: { ich: "inscribo", du: "inscribes", er: "inscribe", wir: "inscribimos", ihr: "inscribís", sie: "inscriben", Sie: "inscribe" },
+        beeilen: { ich: "doy prisa", du: "das prisa", er: "da prisa", wir: "damos prisa", ihr: "dais prisa", sie: "dan prisa", Sie: "da prisa" }
+      };
+
+      const pronom = pronomenMap[subj];
+      const verbKonj = verbMap[verbObj.id][subj];
+      let zusatz = verbObj.extraEs;
+
+      // Sonderanpassung für "sich beeilen" im Spanischen
+      if (verbObj.id === "beeilen") {
+        if (subj === "ich") return "Me doy prisa rápido.";
+        if (subj === "du") return "Te das prisa rápido.";
+        if (subj === "er") return "Se da prisa rápido.";
+        if (subj === "wir") return "Nos damos prisa rápido.";
+        if (subj === "ihr") return "Os dais prisa rápido.";
+        if (subj === "sie") return "Se dan prisa rápido.";
+        if (subj === "Sie") return "Se da prisa rápido (usted).";
+      }
+
+      return `${pronom} ${verbKonj} ${zusatz}`;
+    }
+
+    // Hilfsfunktion zur Generierung englischer Sätze
+    function holeEchtzeitEnglischUebersetzung(subj, verbObj) {
+      // Anpassungen für ein natürliches Englisch
+      if (verbObj.id === "freuen") {
+        const engSubj = { ich: "I am", du: "You are", er: "He is", wir: "We are", ihr: "You all are", sie: "They are", Sie: "You (formal) are" };
+        return `${engSubj[subj]} looking forward to the vacation.`;
+      }
+      if (verbObj.id === "treffen") {
+        const engSubj = { ich: "I meet up", du: "You meet up", er: "He meets up", wir: "We meet up", ihr: "You all meet up", sie: "They meet up", Sie: "You meet up" };
+        return `${engSubj[subj]} on Saturday.`;
+      }
+      if (verbObj.id === "vorstellen") {
+        const engSelf = { ich: "myself", du: "yourself", er: "himself", wir: "ourselves", ihr: "yourselves", sie: "themselves", Sie: "yourself" };
+        const engSubj = { ich: "I introduce", du: "You introduce", er: "He introduces", wir: "We introduce", ihr: "You introduce", sie: "They introduce", Sie: "You introduce" };
+        return `${engSubj[subj]} ${engSelf[subj]} gladly.`;
+      }
+      if (verbObj.id === "interessieren") {
+        const engSubj = { ich: "I am", du: "You are", er: "He is", wir: "We are", ihr: "You are", sie: "They are", Sie: "You are" };
+        return `${engSubj[subj]} interested in music.`;
+      }
+      if (verbObj.id === "anmelden") {
+        const engSubj = { ich: "I register", du: "You register", er: "He registers", wir: "We register", ihr: "You register", sie: "They register", Sie: "You register" };
+        return `${engSubj[subj]} for the course.`;
+      }
+      if (verbObj.id === "beeilen") {
+        const engSubj = { ich: "I hurry up", du: "You hurry up", er: "He hurries up", wir: "We hurry up", ihr: "You hurry up", sie: "They hurry up", Sie: "You hurry up" };
+        return `${engSubj[subj]} quickly.`;
+      }
+      return "";
+    }
+
+
+    // --- QUIZ GAME LOGIK ---
+
+    function rendereQuizFrage() {
+      const frage = quizFragen[aktuellerQuizIndex];
+      const txt = uiTexte[aktuelleSprache];
+      
+      // Update Step Label & Piste
+      const stepText = txt.quizStepLabel.replace('{num}', aktuellerQuizIndex + 1);
+      document.getElementById('quiz-step-label').textContent = stepText;
+      
+      const tippStr = aktuelleSprache === 'es' ? frage.tipEs : frage.tipEn;
+      document.getElementById('quiz-tip').textContent = `${txt.quizTip}: ${tippStr}`;
+
+      // Satzteile anzeigen
+      document.getElementById('quiz-sentence-start').textContent = frage.start;
+      document.getElementById('quiz-sentence-end').textContent = frage.end;
+      document.getElementById('quiz-gap').textContent = "_____";
+      document.getElementById('quiz-gap').className = "inline-block px-4 py-1 bg-slate-100 dark:bg-slate-950 border-2 border-dashed border-slate-300 dark:border-amber-500/50 rounded-lg text-amber-600 dark:text-amber-400 font-mono text-center min-w-[80px]";
+
+      // Progress-Bar aktualisieren
+      const progressProzent = ((aktuellerQuizIndex + 1) / quizFragen.length) * 100;
+      document.getElementById('quiz-progress-bar').style.width = `${progressProzent}%`;
+
+      // Antwort-Buttons generieren
+      const choicesContainer = document.getElementById('quiz-choices');
+      choicesContainer.innerHTML = '';
+      
+      frage.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.onclick = () => checkeQuizAntwort(opt, btn);
+        btn.className = "p-4 bg-slate-50 hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/60 rounded-2xl font-bold font-mono text-slate-800 dark:text-slate-200 text-center transition-all-300 shadow active:scale-95";
+        btn.textContent = opt;
+        choicesContainer.appendChild(btn);
+      });
+
+      // Feedback ausblenden & Next-Button sperren
+      document.getElementById('quiz-feedback').classList.add('hidden');
+      const nextBtn = document.getElementById('btn-quiz-next');
+      nextBtn.disabled = true;
+      nextBtn.className = "px-6 py-3 bg-amber-500 text-slate-950 font-bold rounded-xl text-sm transition-all-300 opacity-50 cursor-not-allowed";
+      if (aktuelleSprache === 'es') {
+        nextBtn.innerHTML = "Siguiente pregunta &rarr;";
+      } else {
+        nextBtn.innerHTML = "Next Question &rarr;";
+      }
+    }
+
+    function checkeQuizAntwort(gewaehlt, buttonEl) {
+      const frage = quizFragen[aktuellerQuizIndex];
+      const feedbackBox = document.getElementById('quiz-feedback');
+      const choicesButtons = document.querySelectorAll('#quiz-choices button');
+      
+      // Deaktiviere alle Buttons nach Klick
+      choicesButtons.forEach(btn => btn.disabled = true);
+
+      const istRichtig = gewaehlt === frage.correct;
+      const gapEl = document.getElementById('quiz-gap');
+
+      if (istRichtig) {
+        quizPunktzahl++;
+        document.getElementById('quiz-score').textContent = `${quizPunktzahl} / 6`;
+        
+        // Visuelles Feedback
+        gapEl.textContent = gewaehlt;
+        gapEl.className = "inline-block px-4 py-1 bg-emerald-950 border border-emerald-500 rounded-lg text-emerald-400 font-mono text-center min-w-[80px] font-extrabold animate-bounce";
+        buttonEl.className = "p-4 bg-emerald-500 border border-emerald-400 rounded-2xl font-bold font-mono text-slate-950 text-center transition-all-300 shadow-lg";
+        
+        feedbackBox.className = "mt-6 p-4 rounded-xl text-sm font-semibold transition-all-300 flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 dark:text-emerald-400";
+        feedbackBox.innerHTML = `
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span>${aktuelleSprache === 'es' ? 'Richtig! ¡Excelente trabajo!' : 'Correct! Excellent job!'}</span>
+        `;
+      } else {
+        // Falsche Antwort
+        gapEl.textContent = frage.correct;
+        gapEl.className = "inline-block px-4 py-1 bg-rose-950 border border-rose-500 rounded-lg text-rose-400 font-mono text-center min-w-[80px] font-extrabold";
+        buttonEl.className = "p-4 bg-rose-500 border border-rose-400 rounded-2xl font-bold font-mono text-slate-950 text-center transition-all-300 shadow-lg";
+
+        // Hebe das richtige visuell hervor
+        choicesButtons.forEach(btn => {
+          if (btn.textContent === frage.correct) {
+            btn.className = "p-4 bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-400 dark:border-emerald-500/60 rounded-2xl font-bold font-mono text-emerald-800 dark:text-emerald-400 text-center transition-all-300";
+          }
+        });
+
+        feedbackBox.className = "mt-6 p-4 rounded-xl text-sm font-semibold transition-all-300 flex items-center gap-3 bg-rose-500/10 border border-rose-500/30 text-rose-500 dark:text-rose-400";
+        feedbackBox.innerHTML = `
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span>${aktuelleSprache === 'es' ? `Falsch. Richtig ist: <strong>${frage.correct}</strong>` : `Incorrect. Correct is: <strong>${frage.correct}</strong>`}</span>
+        `;
+      }
+
+      feedbackBox.classList.remove('hidden');
+
+      // Next-Button freigeben
+      const nextBtn = document.getElementById('btn-quiz-next');
+      nextBtn.disabled = false;
+      nextBtn.className = "px-6 py-3 bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 font-bold rounded-xl text-sm transition-all-300 shadow-md cursor-pointer";
+    }
+
+    function nextQuestion() {
+      if (aktuellerQuizIndex < quizFragen.length - 1) {
+        aktuellerQuizIndex++;
+        rendereQuizFrage();
+      } else {
+        // Spiel-Ende erreicht
+        zeigeQuizErgebnis();
+      }
+    }
+
+    function zeigeQuizErgebnis() {
+      const container = document.getElementById('quiz-container');
+      const textMap = uiTexte[aktuelleSprache];
+      
+      const istPerfekt = quizPunktzahl >= 5;
+      const titel = istPerfekt 
+        ? (aktuelleSprache === 'es' ? '🏆 Fantástico!' : '🏆 Fantastic!')
+        : (aktuelleSprache === 'es' ? '💪 Weiter so!' : '💪 Keep learning!');
+      
+      const nachricht = istPerfekt
+        ? (aktuelleSprache === 'es' ? '¡Has dominado los pronombres reflexivos en alemán!' : 'You mastered German reflexive pronouns perfectly!')
+        : (aktuelleSprache === 'es' ? '¡Vas por buen camino! Sigue practicando.' : 'Good effort! Keep practicing to get 6/6.');
+
+      container.innerHTML = `
+        <div class="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 text-center space-y-6 transition-all-300">
+          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full ${istPerfekt ? 'bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400' : 'bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400'}">
+            <span class="text-3xl font-extrabold font-mono">${quizPunktzahl}/6</span>
+          </div>
+          <div>
+            <h4 class="text-2xl font-bold font-display text-slate-900 dark:text-white">${titel}</h4>
+            <p class="text-slate-600 dark:text-slate-400 text-sm mt-2">${nachricht}</p>
+          </div>
+          <button onclick="resetQuiz()" class="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition-all-300 inline-flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H12v9"></path></svg>
+            ${aktuelleSprache === 'es' ? 'Cuestionario de nuevo' : 'Restart Quiz'}
+          </button>
+        </div>
+      `;
+    }
+
+    function resetQuiz() {
+      aktuellerQuizIndex = 0;
+      quizPunktzahl = 0;
+      document.getElementById('quiz-score').textContent = "0 / 6";
+      
+      // Container wieder auf Standard-Layout setzen
+      document.getElementById('quiz-container').innerHTML = `
+        <div class="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 relative transition-all-300">
+          <div class="absolute top-0 left-0 h-1 bg-amber-500 rounded-full transition-all-300" id="quiz-progress-bar" style="width: 16.6%"></div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest" id="quiz-step-label">Frage 1 von 6</span>
+            <span class="text-xs text-slate-500 italic" id="quiz-tip">Achte auf das Subjekt</span>
+          </div>
+          <div class="text-xl md:text-2xl font-bold font-display text-slate-800 dark:text-slate-100 mb-6 flex items-center flex-wrap gap-2 leading-relaxed">
+            <span id="quiz-sentence-start">Ich freue</span>
+            <span class="inline-block px-4 py-1 bg-slate-100 dark:bg-slate-950 border-2 border-dashed border-slate-300 dark:border-amber-500/50 rounded-lg text-amber-600 dark:text-amber-400 font-mono text-center min-w-[80px]" id="quiz-gap">_____</span>
+            <span id="quiz-sentence-end">auf den URLaub.</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="quiz-choices"></div>
+          <div id="quiz-feedback" class="mt-6 p-4 rounded-xl hidden text-sm font-semibold transition-all-300 flex items-center gap-3"></div>
+        </div>
+        <div class="flex justify-between items-center">
+          <button id="btn-quiz-reset" onclick="resetQuiz()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition-all-300">
+            Neustart / Reset
+          </button>
+          <button id="btn-quiz-next" onclick="nextQuestion()" class="px-6 py-3 bg-amber-500 text-slate-950 font-bold rounded-xl text-sm transition-all-300 opacity-50 cursor-not-allowed" disabled>
+            Nächste Frage &rarr;
+          </button>
+        </div>
+      `;
+      
+      rendereQuizFrage();
+    }
+
+
+    // --- VOKABEL-KARTEN LOGIK ---
+
+    function rendereVokabelliste() {
+      const container = document.getElementById('vocab-list-container');
+      container.innerHTML = '';
+
+      verbenListe.forEach(verb => {
+        const uebersetzung = aktuelleSprache === 'es' ? verb.es : verb.en;
+        const div = document.createElement('div');
+        div.className = "flex items-center justify-between p-3 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-2xl hover:border-slate-300 dark:hover:border-slate-700/60 transition-all-300";
+        div.innerHTML = `
+          <div>
+            <span class="text-xs font-bold text-slate-500 block uppercase tracking-wider">${verb.inf}</span>
+            <span class="text-sm font-bold text-slate-800 dark:text-slate-200">${uebersetzung}</span>
+          </div>
+          <button onclick="waehleVerbFuerBaukasten('${verb.id}')" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-[10px] font-bold text-amber-600 dark:text-amber-400 rounded-lg border border-slate-200 dark:border-slate-700/50 transition-all-300">
+            Bauen
+          </button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+
+    // --- ONLOAD INITIALISIERUNG ---
+    window.onload = function() {
+      setLanguage('es'); // Standard auf Spanisch setzen
+      initBaukasten();
+      zeigePronomenDetail(0); // Standardmäßig "ich / mich" laden
+    };
+
+  </script>
+</body>
+</html>
