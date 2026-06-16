@@ -142,19 +142,8 @@
           Klicke auf eine Reihe, um ein praktisches Beispiel anzuzeigen.
         </p>
 
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-separate border-spacing-y-3">
-            <thead>
-              <tr class="text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider">
-                <th class="pb-1 px-4 text-left" id="th-subject">Sujeto (Pronomen)</th>
-                <th class="pb-1 px-4 text-center" id="th-reflexive">Reflexivpronomen</th>
-                <th class="pb-1 px-4 text-left" id="th-translation">Übersetzung</th>
-              </tr>
-            </thead>
-            <tbody id="pronoun-table-body">
-              <!-- Dynamisch gefüllte Reihen im Premium-Sticker-Stil -->
-            </tbody>
-          </table>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="pronoun-cards-container">
+          <!-- Dynamisch gefüllte Karten im Premium-Sticker-Stil -->
         </div>
       </div>
 
@@ -519,9 +508,6 @@
       document.getElementById('info-card-footer').textContent = txt.infoCardFooter;
       document.getElementById('table-title').textContent = txt.tableTitle;
       document.getElementById('table-instruction').textContent = txt.tableInstruction;
-      document.getElementById('th-subject').textContent = txt.thSubject;
-      document.getElementById('th-reflexive').textContent = txt.thReflexive;
-      document.getElementById('th-translation').textContent = txt.thTranslation;
       document.getElementById('detail-box-label').textContent = txt.detailBoxLabel;
       document.getElementById('detail-ex-label').textContent = txt.detailExLabel;
       document.getElementById('detail-trans-label').textContent = txt.detailTransLabel;
@@ -541,54 +527,51 @@
       document.getElementById('footer-credits').textContent = txt.footerCredits;
     }
 
-    // Rendern der Haupt-Pronomentabelle mit der 3-Spalten-Struktur (Erweiterte Light/Dark Unterstützung)
+    // Rendern der Haupt-Pronomentabelle als interaktive Karten-Übersicht (Erweiterte Light/Dark Unterstützung)
     function rendereTabelle() {
-      const tbody = document.getElementById('pronoun-table-body');
-      tbody.innerHTML = '';
+      const container = document.getElementById('pronoun-cards-container');
+      container.innerHTML = '';
 
       pronomenDaten.forEach((item, index) => {
         const isSelected = index === aktiverIndex;
-        const tr = document.createElement('tr');
+        const card = document.createElement('div');
         
-        // Reihen mit sanften Interaktionen im Sticker-Kombination-Design
-        tr.className = "group cursor-pointer transition-all-300 select-none";
-        tr.onclick = () => zeigePronomenDetail(index);
+        // Karten mit sanften Interaktionen im Sticker-Kombination-Design
+        card.onclick = () => zeigePronomenDetail(index);
 
         const transSpalte = aktuelleSprache === 'es' ? item.es : item.en;
 
-        // Bestimme Klassen für die Zellen basierend auf dem Selektionsstatus im Hell-/Dunkelmodus
-        const cellBgClass = isSelected 
-          ? "bg-slate-200/80 dark:bg-slate-800" 
-          : "bg-white dark:bg-slate-800/30 hover:bg-slate-100/60 dark:hover:bg-slate-800/50";
+        // Bestimme Klassen für die Karten basierend auf dem Selektionsstatus im Hell-/Dunkelmodus
+        const cardBgClass = isSelected 
+          ? "bg-amber-500/5 dark:bg-amber-500/10 border-2 border-amber-500 shadow-md scale-[1.02]" 
+          : "bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:scale-[1.01] hover:border-slate-350 dark:hover:border-slate-700/50";
           
-        const borderClass = isSelected 
-          ? "border-amber-500" 
-          : "border-transparent group-hover:border-slate-300 dark:group-hover:border-slate-700/50";
-        
         // Sticker-Badge Styling (Inspirado por la captura: Fondo blanco con borde grueso azul o amarillo)
         const badgeBorderColor = isSelected ? 'border-amber-500 text-amber-500' : 'border-blue-600 text-blue-600';
         const badgeBgColor = isSelected ? 'bg-amber-50/10 dark:bg-amber-50/10' : 'bg-white';
         const badgeTextColor = isSelected ? 'text-amber-600 dark:text-amber-400' : 'text-blue-600';
 
-        tr.innerHTML = `
-          <!-- Spalte 1: Sujeto -->
-          <td class="p-4 ${cellBgClass} border-t-2 border-b-2 border-l-2 ${borderClass} rounded-l-2xl font-bold text-base text-slate-800 dark:text-slate-100 font-display transition-all-300">
-            ${item.subj}
-          </td>
+        card.className = `${cardBgClass} p-3.5 rounded-2xl flex items-center justify-between cursor-pointer transition-all-300 select-none`;
+
+        card.innerHTML = `
+          <!-- Links: Sujeto & Übersetzung -->
+          <div class="flex flex-col min-w-0 pr-2">
+            <span class="font-bold text-base text-slate-800 dark:text-slate-100 font-display truncate">
+              ${item.subj}
+            </span>
+            <span class="text-slate-500 dark:text-slate-400 text-xs font-medium italic truncate">
+              ${transSpalte}
+            </span>
+          </div>
           
-          <!-- Spalte 2: Reflexivo (Sticker-Badge) -->
-          <td class="p-3 ${cellBgClass} border-t-2 border-b-2 text-center transition-all-300">
-            <div class="inline-block ${badgeBgColor} border-[3px] ${badgeBorderColor} rounded-xl px-4 py-1.5 font-black font-display text-sm tracking-tight shadow-md group-hover:scale-105 transition-all-300 ${badgeTextColor}">
+          <!-- Rechts: Reflexiv (Sticker-Badge) -->
+          <div class="shrink-0">
+            <div class="inline-block ${badgeBgColor} border-[3px] ${badgeBorderColor} rounded-xl px-3.5 py-1 font-black font-display text-sm tracking-tight shadow-sm transition-all-300 ${badgeTextColor}">
               ${item.refl}
             </div>
-          </td>
-          
-          <!-- Spalte 3: Equivalente -->
-          <td class="p-4 ${cellBgClass} border-t-2 border-b-2 border-r-2 ${borderClass} rounded-r-2xl text-slate-600 dark:text-slate-400 text-sm font-medium italic transition-all-300">
-            ${transSpalte}
-          </td>
+          </div>
         `;
-        tbody.appendChild(tr);
+        container.appendChild(card);
       });
     }
 
