@@ -148,18 +148,8 @@
       </div>
 
       <!-- Detailansicht / Beispiel-Box (5 Spalten auf LG) -->
-      <div class="lg:col-span-5 flex flex-col justify-between bg-gradient-to-b from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-md dark:shadow-xl relative min-h-[350px] transition-all-300">
+      <div class="lg:col-span-5 flex flex-col justify-between bg-gradient-to-b from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-md dark:shadow-xl relative min-h-[250px] transition-all-300">
         <div>
-          <div class="flex items-center justify-between mb-4">
-            <h4 class="text-xs font-bold text-amber-600 dark:text-amber-500 uppercase tracking-widest" id="detail-box-label">Ausgewähltes Pronomen</h4>
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 uppercase tracking-wider" id="click-feedback">Interaktiv</span>
-          </div>
-          <div class="flex items-baseline gap-4 mb-6">
-            <span class="text-5xl font-extrabold text-slate-900 dark:text-white font-display" id="detail-german-subject">Ich</span>
-            <svg class="w-6 h-6 text-slate-400 dark:text-slate-600 self-center" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-            <span class="text-5xl font-extrabold text-emerald-600 dark:text-emerald-400 font-display" id="detail-german-reflexive">mich</span>
-          </div>
-
           <div class="space-y-4">
             <div class="bg-slate-100 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-4 transition-all-300">
               <span class="text-xs font-bold text-slate-500 dark:text-slate-400 block uppercase mb-1" id="detail-ex-label">Beispielsatz (Alemán)</span>
@@ -508,7 +498,6 @@
       document.getElementById('info-card-footer').textContent = txt.infoCardFooter;
       document.getElementById('table-title').textContent = txt.tableTitle;
       document.getElementById('table-instruction').textContent = txt.tableInstruction;
-      document.getElementById('detail-box-label').textContent = txt.detailBoxLabel;
       document.getElementById('detail-ex-label').textContent = txt.detailExLabel;
       document.getElementById('detail-trans-label').textContent = txt.detailTransLabel;
       document.getElementById('builder-title').textContent = txt.builderTitle;
@@ -543,35 +532,70 @@
 
         // Bestimme Klassen für die Karten basierend auf dem Selektionsstatus im Hell-/Dunkelmodus
         const cardBgClass = isSelected 
-          ? "bg-amber-500/5 dark:bg-amber-500/10 border-2 border-amber-500 shadow-md scale-[1.01]" 
-          : "bg-white dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:scale-[1.005] hover:border-slate-300 dark:hover:border-slate-700/50";
+          ? "bg-sky-500 border-2 border-sky-400 shadow-md scale-[1.01]" 
+          : "bg-slate-100 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 hover:bg-slate-200/60 dark:hover:bg-slate-800/70 hover:scale-[1.005] hover:border-slate-350 dark:hover:border-slate-600/50";
           
-        // Sticker-Badge Styling (Inspirado por la captura: Fondo blanco con borde grueso azul o amarillo)
-        const badgeBorderColor = isSelected ? 'border-amber-500 text-amber-500' : 'border-blue-600 text-blue-600';
-        const badgeBgColor = isSelected ? 'bg-amber-50/10 dark:bg-amber-50/10' : 'bg-white';
-        const badgeTextColor = isSelected ? 'text-amber-600 dark:text-amber-400' : 'text-blue-600';
+        // Sticker-Badge Styling (Inspirado por la captura de pantalla del verbo activo)
+        const badgeBorderClass = isSelected ? 'border border-amber-400' : 'border-[2px] border-blue-600/65 dark:border-sky-500/40';
+        const badgeBgColor = isSelected ? 'bg-amber-500' : 'bg-white dark:bg-slate-900/95';
+        const badgeTextColor = isSelected ? 'text-slate-950 font-black' : 'text-blue-600 dark:text-sky-400';
+        
+        const subjTextColor = isSelected ? 'text-slate-950' : 'text-slate-800 dark:text-slate-100';
+        const arrowColor = isSelected ? 'text-slate-900' : 'text-slate-400 dark:text-slate-600';
+        const transTextColor = isSelected ? 'text-slate-900' : 'text-slate-650 dark:text-slate-300';
 
-        card.className = `${cardBgClass} p-2.5 rounded-xl flex items-center justify-between cursor-pointer transition-all-300 select-none`;
+        const cardPaddingClass = isSelected ? "p-3" : "p-2 sm:p-2.5";
+        card.className = `${cardBgClass} ${cardPaddingClass} rounded-xl flex items-center justify-between cursor-pointer transition-all-300 select-none`;
 
-        card.innerHTML = `
-          <!-- Links: Sujeto & Reflexiv badge inline -->
-          <div class="flex items-center gap-3 min-w-0">
-            <span class="font-bold text-sm sm:text-base text-slate-800 dark:text-slate-100 font-display w-24 sm:w-28 shrink-0 truncate">
-              ${item.subj}
-            </span>
-            <span class="text-slate-400 dark:text-slate-600 font-bold select-none">➔</span>
-            <div class="inline-block ${badgeBgColor} border-[2.5px] ${badgeBorderColor} rounded-lg px-2.5 py-0.5 font-black font-display text-xs tracking-tight shadow-sm transition-all-300 ${badgeTextColor} shrink-0">
-              ${item.refl}
+        if (isSelected) {
+          card.innerHTML = `
+            <div class="flex flex-col gap-1.5 w-full">
+              <!-- Obere Reihe: Sujeto & Reflexiv-Badge -->
+              <div class="flex items-center justify-between w-full">
+                <div class="flex items-center gap-3 min-w-0">
+                  <span class="font-bold text-sm sm:text-base ${subjTextColor} font-display w-24 sm:w-28 shrink-0 truncate">
+                    ${item.subj}
+                  </span>
+                  <span class="${arrowColor} font-bold select-none">➔</span>
+                </div>
+                
+                <!-- Badge: Reflexiv (encima) & Equivalente (abajo) -->
+                <div class="shrink-0">
+                  <div class="inline-flex flex-col items-center justify-center ${badgeBgColor} ${badgeBorderClass} rounded-xl px-4 py-1.5 font-display shadow-sm transition-all-300 ${badgeTextColor} min-w-[85px]">
+                    <span class="font-black text-xs sm:text-sm leading-tight">${item.refl}</span>
+                    <span class="text-[9px] sm:text-[10px] font-semibold italic opacity-85 leading-tight">${transSpalte}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Untere Reihe: Beispielsatz (Solo para seleccionado, sin label) -->
+              <div class="pl-1 text-left w-full border-t border-slate-900/10 dark:border-slate-800/10 pt-1.5 mt-0.5">
+                <p class="text-xs sm:text-sm font-semibold ${transTextColor} leading-relaxed">
+                  ${item.bsp}
+                </p>
+              </div>
             </div>
-          </div>
-          
-          <!-- Rechts: Übersetzung/Equivalente -->
-          <div class="text-right pl-2 shrink-0">
-            <span class="text-slate-550 dark:text-slate-400 text-xs font-semibold italic">
-              ${transSpalte}
-            </span>
-          </div>
-        `;
+          `;
+        } else {
+          card.innerHTML = `
+            <div class="flex items-center justify-between w-full">
+              <div class="flex items-center gap-3 min-w-0">
+                <span class="font-bold text-sm sm:text-base ${subjTextColor} font-display w-24 sm:w-28 shrink-0 truncate">
+                  ${item.subj}
+                </span>
+                <span class="${arrowColor} font-bold select-none">➔</span>
+              </div>
+              
+              <!-- Badge: Reflexiv (encima) & Equivalente (abajo) -->
+              <div class="shrink-0">
+                <div class="inline-flex flex-col items-center justify-center ${badgeBgColor} ${badgeBorderClass} rounded-xl px-4 py-1.5 font-display shadow-sm transition-all-300 ${badgeTextColor} min-w-[85px]">
+                  <span class="font-black text-xs sm:text-sm leading-tight">${item.refl}</span>
+                  <span class="text-[9px] sm:text-[10px] font-semibold italic opacity-85 leading-tight">${transSpalte}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        }
         container.appendChild(card);
       });
     }
@@ -581,8 +605,6 @@
       aktiverIndex = index;
       const daten = pronomenDaten[index];
       
-      document.getElementById('detail-german-subject').textContent = daten.subj;
-      document.getElementById('detail-german-reflexive').textContent = daten.refl;
       document.getElementById('detail-example-german').innerHTML = highlighteDeutschePronomen(daten.bsp, daten.subj, daten.refl);
       
       const uebersetzung = aktuelleSprache === 'es' ? daten.bspEs : daten.bspEn;
