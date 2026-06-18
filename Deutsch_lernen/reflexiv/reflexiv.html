@@ -142,7 +142,7 @@
           Klicke auf eine Reihe, um ein praktisches Beispiel anzuzeigen.
         </p>
 
-        <div class="flex flex-col gap-2.5" id="pronoun-cards-container">
+        <div class="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden divide-y divide-slate-200 dark:divide-slate-800 shadow-sm" id="pronoun-table-container">
           <!-- Dynamisch gefüllte Karten im Premium-Sticker-Stil -->
         </div>
       </div>
@@ -518,7 +518,7 @@
 
     // Rendern der Haupt-Pronomentabelle als interaktive Karten-Übersicht (Erweiterte Light/Dark Unterstützung)
     function rendereTabelle() {
-      const container = document.getElementById('pronoun-cards-container');
+      const container = document.getElementById('pronoun-table-container');
       container.innerHTML = '';
 
       pronomenDaten.forEach((item, index) => {
@@ -532,22 +532,23 @@
 
         // Bestimme Klassen für die Karten basierend auf dem Selektionsstatus im Hell-/Dunkelmodus
         const cardBgClass = isSelected 
-          ? "bg-sky-500 border-2 border-sky-400 shadow-md scale-[1.01]" 
-          : "bg-slate-100 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/50 hover:bg-slate-200/60 dark:hover:bg-slate-800/70 hover:scale-[1.005] hover:border-slate-350 dark:hover:border-slate-600/50";
+          ? "bg-sky-500 text-slate-950 z-10 relative" 
+          : "bg-white dark:bg-slate-900/60 hover:bg-slate-50 dark:hover:bg-slate-800/30 text-slate-800 dark:text-slate-100";
           
         // Sticker-Badge Styling (Inspirado por la captura de pantalla del verbo activo)
-        const badgeBorderClass = isSelected ? 'border border-amber-400' : 'border-[2px] border-blue-600/65 dark:border-sky-500/40';
-        const badgeBgColor = isSelected ? 'bg-amber-500' : 'bg-white dark:bg-slate-900/95';
-        const badgeTextColor = isSelected ? 'text-slate-950 font-black' : 'text-blue-600 dark:text-sky-400';
+        const badgeBorderClass = isSelected ? 'border border-amber-400' : 'border border-slate-250 dark:border-slate-700/65';
+        const badgeBgColor = isSelected ? 'bg-amber-500' : 'bg-slate-100 dark:bg-slate-800/60';
+        const badgeTextColor = isSelected ? 'text-slate-950 font-black' : 'text-blue-600 dark:text-sky-400 font-bold';
         
         const subjTextColor = isSelected ? 'text-slate-950' : 'text-slate-800 dark:text-slate-100';
         const arrowColor = isSelected ? 'text-slate-900' : 'text-slate-400 dark:text-slate-600';
         const transTextColor = isSelected ? 'text-slate-900' : 'text-slate-650 dark:text-slate-300';
 
-        const cardPaddingClass = isSelected ? "p-3" : "p-2 sm:p-2.5";
-        card.className = `${cardBgClass} ${cardPaddingClass} rounded-xl flex items-center justify-between cursor-pointer transition-all-300 select-none`;
+        const cardPaddingClass = isSelected ? "px-4 py-3" : "px-4 py-2 sm:py-2.5";
+        card.className = `${cardBgClass} ${cardPaddingClass} flex items-center justify-between cursor-pointer transition-all duration-200 select-none`;
 
         if (isSelected) {
+          const bspTrans = aktuelleSprache === 'es' ? item.bspEs : item.bspEn;
           card.innerHTML = `
             <div class="flex flex-col gap-1.5 w-full">
               <!-- Obere Reihe: Sujeto & Reflexiv-Badge -->
@@ -556,22 +557,25 @@
                   <span class="font-bold text-sm sm:text-base ${subjTextColor} font-display w-24 sm:w-28 shrink-0 truncate">
                     ${item.subj}
                   </span>
-                  <span class="${arrowColor} font-bold select-none">➔</span>
+                  <span class="${arrowColor} font-bold select-none text-xs">➔</span>
                 </div>
                 
                 <!-- Badge: Reflexiv (Equivalente) inline -->
                 <div class="shrink-0">
-                  <div class="inline-flex items-center justify-center ${badgeBgColor} ${badgeBorderClass} rounded-xl px-3 py-1 font-display shadow-sm transition-all-300 ${badgeTextColor}">
+                  <div class="inline-flex items-center justify-center ${badgeBgColor} ${badgeBorderClass} rounded-lg px-2.5 py-0.5 font-display shadow-sm transition-all-300 ${badgeTextColor}">
                     <span class="font-black text-xs sm:text-sm leading-tight">${item.refl}</span>
                     <span class="text-[9px] sm:text-[10px] font-semibold italic opacity-85 leading-tight ml-1.5">(${transSpalte})</span>
                   </div>
                 </div>
               </div>
               
-              <!-- Untere Reihe: Beispielsatz (Solo para seleccionado, sin label) -->
-              <div class="pl-1 text-left w-full border-t border-slate-900/10 dark:border-slate-800/10 pt-1.5 mt-0.5">
-                <p class="text-xs sm:text-sm font-semibold ${transTextColor} leading-relaxed">
+              <!-- Untere Reihe: Beispielsatz & Übersetzung nebeneinander (Solo para seleccionado) -->
+              <div class="pl-1 text-left w-full border-t border-slate-950/15 pt-1.5 mt-0.5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+                <p class="text-xs sm:text-sm font-bold text-blue-950 leading-relaxed">
                   ${item.bsp}
+                </p>
+                <p class="text-[11px] sm:text-xs font-semibold italic text-indigo-950/80 leading-relaxed shrink-0">
+                  ${bspTrans}
                 </p>
               </div>
             </div>
@@ -583,12 +587,12 @@
                 <span class="font-bold text-sm sm:text-base ${subjTextColor} font-display w-24 sm:w-28 shrink-0 truncate">
                   ${item.subj}
                 </span>
-                <span class="${arrowColor} font-bold select-none">➔</span>
+                <span class="${arrowColor} font-bold select-none text-xs">➔</span>
               </div>
               
               <!-- Badge: Reflexiv (Equivalente) inline -->
               <div class="shrink-0">
-                <div class="inline-flex items-center justify-center ${badgeBgColor} ${badgeBorderClass} rounded-xl px-3 py-1 font-display shadow-sm transition-all-300 ${badgeTextColor}">
+                <div class="inline-flex items-center justify-center ${badgeBgColor} ${badgeBorderClass} rounded-lg px-2.5 py-0.5 font-display shadow-sm transition-all-300 ${badgeTextColor}">
                   <span class="font-black text-xs sm:text-sm leading-tight">${item.refl}</span>
                   <span class="text-[9px] sm:text-[10px] font-semibold italic opacity-85 leading-tight ml-1.5">(${transSpalte})</span>
                 </div>
@@ -598,9 +602,7 @@
         }
         container.appendChild(card);
       });
-    }
-
-    // Detail-Box rechts neben der Tabelle füllen
+    }// Detail-Box rechts neben der Tabelle füllen
     function zeigePronomenDetail(index) {
       aktiverIndex = index;
       const daten = pronomenDaten[index];
