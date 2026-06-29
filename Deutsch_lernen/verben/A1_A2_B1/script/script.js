@@ -288,9 +288,9 @@ const lazyExampleLoadPromises = new Map();
  modalHeader.insertBefore(translationRow, translationsEl);
  }
 
- translationRow.appendChild(spanishTranslation);
- translationRow.appendChild(tagsToggle);
- }
+  translationRow.appendChild(translationsEl);
+  translationRow.appendChild(tagsToggle);
+  }
 
  setupModalHeaderLayout();
 
