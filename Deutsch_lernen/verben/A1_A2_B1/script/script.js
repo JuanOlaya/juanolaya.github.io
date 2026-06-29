@@ -3010,12 +3010,12 @@ async function loadBackgroundData() {
 
  // Emoji with TTS
  const modalEmojiEl = document.getElementById('modal-emoji');
- modalEmojiEl.textContent = updatedData.emoji || '❔';
- modalEmojiEl.onclick = (e) => {
+ if (modalEmojiEl) modalEmojiEl.textContent = updatedData.emoji || '❔';
+ if (modalEmojiEl) modalEmojiEl.onclick = (e) => {
  e.stopPropagation();
  speak(verb);
  };
- modalEmojiEl.title = "Aussprache hören";
+ if (modalEmojiEl) modalEmojiEl.title = "Aussprache hören";
 
  const esSwitch = document.getElementById('es-switch');
   const enSwitch = document.getElementById('en-switch');
