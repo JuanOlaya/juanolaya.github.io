@@ -5247,3 +5247,443 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
     text-overflow: ellipsis;
     display: block;
 }
+
+/* ==========================================
+   Redesigned Verb Modal (Dark Theme like screenshot)
+   ========================================== */
+#verb-modal .modal-content {
+    background-color: #0f172a !important; /* Dark Slate */
+    color: #f8fafc !important;
+}
+
+#verb-modal .modal-header {
+    background-color: var(--modal-theme, #3b82f6) !important;
+    border-radius: 20px 20px 0 0;
+    padding: 20px 18px 15px 18px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+#verb-modal .modal-word {
+    color: #ffffff !important;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 5px 0;
+}
+
+#verb-modal .modal-translation {
+    color: #e2e8f0 !important;
+    font-size: 1.1rem;
+    font-style: italic;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Level badge styled as a pill at the top center of header */
+#verb-modal .modal-level-badge {
+    background-color: rgba(0, 0, 0, 0.25) !important;
+    color: #ffffff !important;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 4px 14px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 5px;
+    letter-spacing: 0.05em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* Close button positioning & styling */
+#verb-modal .modal-close-x {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.2) !important;
+    color: #ffffff !important;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#verb-modal .modal-close-x:hover {
+    background: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Details summary containers styled as dark cards in body */
+#verb-modal details {
+    margin-top: 14px;
+}
+
+#verb-modal summary {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border: 1px solid #334155 !important;
+    border-radius: 10px !important;
+    padding: 12px 18px !important;
+    font-weight: 600;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+#verb-modal summary:hover {
+    background: #334155 !important;
+    border-color: #475569 !important;
+}
+
+/* Arrow inside summary */
+#verb-modal summary .details-arrow {
+    color: var(--modal-theme, #3b82f6) !important;
+}
+
+/* Details content */
+#verb-modal .details-content {
+    background-color: #1e293b !important;
+    border: 1px solid #334155 !important;
+    border-top: none !important;
+    border-radius: 0 0 10px 10px !important;
+    padding: 15px !important;
+    margin-top: -4px !important;
+}
+
+#verb-modal details[open] summary {
+    border-radius: 10px 10px 0 0 !important;
+}
+
+/* Make sure all lists/text inside details are readable */
+#verb-modal .wf-word-german {
+    color: #f8fafc !important;
+}
+
+#verb-modal .wf-word-type {
+    color: #94a3b8 !important;
+}
+
+#verb-modal .wf-word-translation {
+    color: #cbd5e1 !important;
+}
+
+#verb-modal .modal-tabs-nav {
+    background-color: #1e293b !important;
+    border-top: 1px solid #334155 !important;
+    padding: 10px 15px !important;
+    border-radius: 0 0 20px 20px !important;
+    display: flex;
+    justify-content: space-around;
+    gap: 8px;
+}
+
+#verb-modal .modal-tab-btn {
+    background: #334155 !important;
+    color: #94a3b8 !important;
+    border: 1px solid #475569 !important;
+    border-radius: 8px !important;
+    padding: 8px 16px !important;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+}
+
+#verb-modal .modal-tab-btn:hover {
+    background: #475569 !important;
+    color: #f8fafc !important;
+}
+
+#verb-modal .modal-tab-btn.active {
+    background: var(--modal-theme, #3b82f6) !important;
+    color: #ffffff !important;
+    border-color: var(--modal-theme, #3b82f6) !important;
+    box-shadow: 0 2px 6px rgba(59, 130, 246, 0.4) !important;
+}
+
+/* Hide conjugation tables inside main modal */
+#praesens-tab-content, 
+#perfekt-tab-content, 
+#praeteritum-tab-content, 
+#konjunktiv-tab-content {
+    display: none !important;
+}
+
+/* ==========================================
+   Sätze Section Styles
+   ========================================== */
+#saetze-container {
+    margin: 16px 0;
+}
+
+#saetze-summary {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #f8fafc;
+    cursor: pointer;
+}
+
+#saetze-content {
+    padding: 16px;
+}
+
+.saetze-level-section {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.saetze-level-section:last-child {
+    margin-bottom: 0;
+}
+
+.saetze-level-header {
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #334155;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.saetze-level-header.level-a1 {
+    color: #4ade80 !important; /* Light Green */
+}
+.saetze-level-header.level-a2 {
+    color: #facc15 !important; /* Yellow */
+}
+.saetze-level-header.level-b1 {
+    color: #fb923c !important; /* Orange */
+}
+
+.saetze-item {
+    margin-bottom: 14px;
+    padding-left: 10px;
+    border-left: 2px solid #334155;
+}
+
+.saetze-item:last-child {
+    margin-bottom: 0;
+}
+
+.saetze-expression-line {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f1f5f9;
+}
+
+.saetze-expression-de {
+    cursor: pointer;
+    text-decoration: underline dotted;
+}
+
+.saetze-expression-de:hover {
+    color: var(--modal-theme, #3b82f6);
+}
+
+.saetze-expression-translation {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    font-weight: normal;
+}
+
+.saetze-example-box {
+    margin-top: 6px;
+    padding: 6px 10px;
+    background: #1e293b;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.saetze-example-de {
+    font-weight: 600;
+    color: #e2e8f0;
+    cursor: pointer;
+}
+
+.saetze-example-de:hover {
+    color: var(--modal-theme, #3b82f6);
+}
+
+.saetze-example-translation {
+    font-style: italic;
+    color: #cbd5e1;
+    margin-top: 2px;
+}
+
+.note-highlight-card {
+    border-left: 4px solid #3b82f6; /* Blue border */
+    background-color: #ffffff; /* White background */
+    color: #1e293b; /* Dark text for contrast */
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-style: italic;
+    font-size: 0.95rem;
+    text-align: left;
+    margin: 10px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================
+   Conjugation Sub-Modal Overlay Styles
+   ========================================== */
+#conjugation-sub-modal {
+    z-index: 2000 !important; /* On top of the main modal */
+}
+
+#conjugation-sub-modal .sub-modal-content {
+    background-color: #0f172a !important; /* Dark Slate */
+    color: #f8fafc !important;
+    padding: 24px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 95%;
+    box-sizing: border-box;
+    max-height: 85vh;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    position: relative;
+    border: 1px solid #334155;
+}
+
+#conjugation-sub-modal .sub-modal-header {
+    margin-bottom: 20px;
+    padding-right: 30px; /* Space for close button */
+    text-align: left;
+}
+
+#conjugation-sub-modal .sub-modal-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    text-transform: capitalize;
+}
+
+#conjugation-sub-modal .sub-modal-body {
+    text-align: left;
+}
+
+#conjugation-sub-modal table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #1e293b;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #334155;
+}
+
+#conjugation-sub-modal th {
+    background-color: var(--modal-theme, #3b82f6);
+    color: #ffffff;
+    padding: 10px 12px;
+    font-weight: 700;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+#conjugation-sub-modal td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #334155;
+    color: #f1f5f9;
+    font-size: 0.95rem;
+    vertical-align: top;
+}
+
+#conjugation-sub-modal tr:last-child td {
+    border-bottom: none;
+}
+
+#conjugation-sub-modal .pronoun-de {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+#conjugation-sub-modal .pronoun-es {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-weight: normal;
+}
+
+#conjugation-sub-modal .example-de {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+#conjugation-sub-modal .example-translation {
+    font-size: 0.8rem;
+    color: #cbd5e1;
+    font-style: italic;
+}
+
+#conjugation-sub-modal .modal-note-praesens {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    color: #cbd5e1;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    line-height: 1.4;
+}
+
+#conjugation-sub-modal .modal-close-x {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#conjugation-sub-modal .modal-close-x:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+#conjugation-sub-modal .beispiel-mode-tag {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    text-transform: uppercase;
+}
+
+#conjugation-sub-modal .toggle-beispiel-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: auto;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    opacity: 0.8;
+}
+
+#conjugation-sub-modal .toggle-beispiel-btn:hover {
+    opacity: 1;
+}
+

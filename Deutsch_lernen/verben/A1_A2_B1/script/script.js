@@ -277,15 +277,15 @@ const lazyExampleLoadPromises = new Map();
 
  function setupModalHeaderLayout() {
  const modalHeader = document.querySelector('#verb-modal .modal-header');
- const spanishTranslation = document.getElementById('modal-verb-infinitive-es');
+ const translationsEl = document.getElementById('modal-verb-translations');
  const tagsToggle = document.getElementById('modal-tags-toggle');
- if (!modalHeader || !spanishTranslation || !tagsToggle) return;
+ if (!modalHeader || !translationsEl || !tagsToggle) return;
 
  let translationRow = modalHeader.querySelector('.modal-translation-row');
  if (!translationRow) {
  translationRow = document.createElement('div');
  translationRow.className = 'modal-translation-row';
- modalHeader.insertBefore(translationRow, spanishTranslation);
+ modalHeader.insertBefore(translationRow, translationsEl);
  }
 
  translationRow.appendChild(spanishTranslation);
@@ -1285,6 +1285,7 @@ async function loadBackgroundData() {
  }
 
  function closeVerbModal() {
+  closeConjugationSubModal();
  currentVerbInModal = '';
  modalDeferredLoadToken += 1;
  modalExampleLoadToken += 1;
@@ -2640,9 +2641,12 @@ async function loadBackgroundData() {
 
  if (!isRestoringModalTab && currentVerbInModal && verbModal.classList.contains('visible')) {
  maybeLoadExamplesForActiveTab(currentVerbInModal, tabId);
- }
- });
- });
+  }
+  if (!isRestoringModalTab) {
+    openConjugationSubModal(tabId);
+  }
+  });
+  });
 
  // Initialize
  updateCarousel();
@@ -3013,32 +3017,34 @@ async function loadBackgroundData() {
  };
  modalEmojiEl.title = "Aussprache hören";
 
- document.getElementById('modal-verb-infinitive-es').textContent = updatedData.es || '';
+ const esSwitch = document.getElementById('es-switch');
+  const enSwitch = document.getElementById('en-switch');
+  const showSpanish = esSwitch ? esSwitch.checked : true;
+  const showEnglish = enSwitch ? enSwitch.checked : false;
+  const translations = [];
+  if (showSpanish && updatedData.es) translations.push(updatedData.es);
+  if (showEnglish && updatedData.en_verb) translations.push(updatedData.en_verb);
+  const translationsEl = document.getElementById('modal-verb-translations');
+  if (translationsEl) {
+      translationsEl.textContent = translations.join(', ');
+  }
  document.getElementById('modal-verb-perfekt-es').textContent = updatedData.es_perfekt || '';
  document.getElementById('modal-verb-praeteritum-es').textContent = updatedData.es_praeteritum || '';
- document.getElementById('modal-verb-english-infinitive').textContent = updatedData.en_verb || '';
+ 
  document.getElementById('modal-verb-english-perfekt').textContent = updatedData.en_perfekt || '';
  document.getElementById('modal-verb-english-praeteritum').textContent = updatedData.en_praeteritum || '';
  const levelText = updatedData.level || 'A1';
- let typeText = '';
- if (updatedData.Wortart_type) {
- const capitalizedType = updatedData.Wortart_type.charAt(0).toUpperCase() + updatedData.Wortart_type.slice(1);
- typeText = ` - ${capitalizedType}`;
- }
- document.getElementById('modal-level-badge').textContent = levelText + typeText;
+  const macroLevel = levelText.split('.')[0];
+  document.getElementById('modal-level-badge').textContent = macroLevel;
 
  // --- NEW NOTE LOGIC ---
 
  // 1. General Card Note (displayed below Wortfamilie)
  // Use 'note' attribute or fallback to 'note_es'
- const generalNote = updatedData.note || updatedData.note_es;
  const generalNoteElement = document.getElementById('modal-general-note');
- if (generalNote) {
- generalNoteElement.innerHTML = generalNote;
- generalNoteElement.style.display = 'block';
- } else {
- generalNoteElement.style.display = 'none';
- }
+  if (generalNoteElement) {
+      generalNoteElement.style.display = 'none';
+  }
 
  // 2. Present Tense Note (displayed below conjugation table)
  const praesensNote = updatedData.praesens_note;
@@ -3254,6 +3260,7 @@ async function loadBackgroundData() {
  });
  }
  renderStandardWordList(wortfeldContainer, wortfeldContent, wortfeldItems);
+  renderSaetzeSection(updatedData);
 
  const praesensTableContainer = document.getElementById('modal-praesens-table');
  if (updatedData.praesens) {
@@ -4743,6 +4750,171 @@ async function loadWortfamilieIndex() {
  renderVerbGroup();
  });
  }
+
+
+  // === REDESIGNED MODAL HELPERS ===
+  function restoreConjugationTables() {
+    const praesensTable = document.getElementById('modal-praesens-table');
+    const perfektTable = document.getElementById('modal-perfekt-examples-table');
+    const praeteritumTable = document.getElementById('modal-praeteritum-konjugation-table');
+    const konjunktivTable = document.getElementById('modal-konjunktiv-konjugation-table-tab');
+
+    const praesensContainer = document.getElementById('praesens-details-container');
+    const perfektContainer = document.getElementById('perfekt-examples-container');
+    const praeteritumContainer = document.getElementById('praeteritum-konjugation-container');
+    const konjunktivContainer = document.getElementById('konjunktiv-konjugation-container-tab');
+
+    if (praesensTable && praesensContainer) {
+      praesensContainer.appendChild(praesensTable);
+    }
+    if (perfektTable && perfektContainer) {
+      perfektContainer.appendChild(perfektTable);
+    }
+    if (praeteritumTable && praeteritumContainer) {
+      praeteritumContainer.appendChild(praeteritumTable);
+    }
+    if (konjunktivTable && konjunktivContainer) {
+      konjunktivContainer.appendChild(konjunktivTable);
+    }
+  }
+
+  function closeConjugationSubModal() {
+    const subModal = document.getElementById('conjugation-sub-modal');
+    if (subModal) {
+      subModal.classList.remove('visible');
+    }
+    restoreConjugationTables();
+    // Deactivate active tab btn in footer
+    document.querySelectorAll('.modal-tab-btn').forEach(btn => btn.classList.remove('active'));
+  }
+
+  function openConjugationSubModal(tabId) {
+    const subModal = document.getElementById('conjugation-sub-modal');
+    const subModalTitle = document.getElementById('sub-modal-title');
+    const subModalTableContainer = document.getElementById('sub-modal-table-container');
+    const subModalNote = document.getElementById('sub-modal-note');
+    if (!subModal || !subModalTitle || !subModalTableContainer || !subModalNote) return;
+
+    // First restore any tables that were previously moved to the sub-modal
+    restoreConjugationTables();
+
+    subModalTableContainer.innerHTML = '';
+    subModalNote.style.display = 'none';
+    subModalNote.innerHTML = '';
+
+    let titleText = '';
+    let sourceTableId = '';
+    let sourceNoteId = '';
+
+    if (tabId === 'praesens') {
+      titleText = `${currentVerbInModal} - Präsens`;
+      sourceTableId = 'modal-praesens-table';
+      sourceNoteId = 'modal-praesens-note';
+    } else if (tabId === 'perfekt') {
+      titleText = `${currentVerbInModal} - Perfekt`;
+      sourceTableId = 'modal-perfekt-examples-table';
+      sourceNoteId = 'modal-perfekt-note';
+    } else if (tabId === 'praeteritum') {
+      titleText = `${currentVerbInModal} - Präteritum`;
+      sourceTableId = 'modal-praeteritum-konjugation-table';
+      sourceNoteId = 'modal-praeteritum-note';
+    } else if (tabId === 'konjunktiv') {
+      titleText = `${currentVerbInModal} - Konjunktiv II`;
+      sourceTableId = 'modal-konjunktiv-konjugation-table-tab';
+    }
+
+    const sourceTable = document.getElementById(sourceTableId);
+    if (sourceTable) {
+      subModalTableContainer.appendChild(sourceTable);
+    }
+
+    const sourceNote = document.getElementById(sourceNoteId);
+    if (sourceNote && sourceNote.innerHTML.trim() !== '') {
+      subModalNote.innerHTML = sourceNote.innerHTML;
+      subModalNote.style.display = 'block';
+    }
+
+    subModalTitle.textContent = titleText;
+    subModal.classList.add('visible');
+  }
+
+  const renderSaetzeSection = (verbData) => {
+    const container = document.getElementById('saetze-container');
+    const contentEl = document.getElementById('saetze-content');
+    if (!container || !contentEl) return;
+
+    const hasSaetze = verbData.saetze && Object.keys(verbData.saetze).length > 0;
+    const hasNote = !!(verbData.note || verbData.note_es);
+
+    if (!hasSaetze && !hasNote) {
+      container.style.display = 'none';
+      return;
+    }
+
+    container.style.display = 'block';
+
+    let contentHTML = '';
+
+    // Render note if present
+    if (hasNote) {
+      const noteText = verbData.note_es || verbData.note;
+      contentHTML += `<div class="note-highlight-card">${noteText}</div>`;
+    }
+
+    // Render level-classified sentences/expressions
+    if (hasSaetze) {
+      const levels = ['A1', 'A2', 'B1'];
+      levels.forEach(level => {
+        const items = verbData.saetze[level];
+        if (items && items.length > 0) {
+          const levelCircle = level === 'A1' ? '🟢' : level === 'A2' ? '🟡' : '🟠';
+          let levelName = '';
+          if (level === 'A1') levelName = 'Acciones básicas';
+          else if (level === 'A2') levelName = 'Vida cotidiana y estados';
+          else if (level === 'B1') levelName = 'Expresiones idiomáticas y abstractas';
+
+          contentHTML += `<div class="saetze-level-section">`;
+          contentHTML += `<div class="saetze-level-header level-${level.toLowerCase()}">`;
+          contentHTML += `<span>${levelCircle}</span> Nivel ${level} (${levelName})`;
+          contentHTML += `</div>`;
+
+          items.forEach(item => {
+            contentHTML += `<div class="saetze-item">`;
+            contentHTML += `<div class="saetze-expression-line">`;
+            const safeExpr = item.expression.replace(/'/g, "\\'");
+            contentHTML += `• <span class="saetze-expression-de" onclick="speak('${safeExpr}')" title="Aussprache hören">${item.expression}</span>: `;
+            contentHTML += `<span class="saetze-expression-translation">${item.translation}</span>`;
+            contentHTML += `</div>`;
+
+            if (item.example) {
+              contentHTML += `<div class="saetze-example-box">`;
+              const safeEx = item.example.replace(/'/g, "\\'");
+              contentHTML += `Ejemplo: "<span class="saetze-example-de" onclick="speak('${safeEx}')" title="Aussprache hören">${item.example}</span>"`;
+              if (item.example_es) {
+                contentHTML += ` <span class="saetze-example-translation">(${item.example_es})</span>`;
+              }
+              contentHTML += `</div>`;
+            }
+            contentHTML += `</div>`;
+          });
+
+          contentHTML += `</div>`;
+        }
+      });
+    }
+
+    contentEl.innerHTML = contentHTML;
+  };
+
+  // Bind close events for conjugation sub-modal
+  const subModal = document.getElementById('conjugation-sub-modal');
+  const closeSubModalX = document.getElementById('close-conjugation-modal-x');
+  if (closeSubModalX && subModal) {
+    closeSubModalX.addEventListener('click', closeConjugationSubModal);
+    subModal.addEventListener('click', (e) => {
+      if (e.target === subModal) closeConjugationSubModal();
+    });
+  }
 
 });
 
