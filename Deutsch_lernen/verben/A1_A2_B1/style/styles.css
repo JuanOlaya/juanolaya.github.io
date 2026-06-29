@@ -5735,48 +5735,271 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 }
 
 /* ==========================================
-   Inline card details overlay (theme card flip mockup)
+   Card Backface Details Flip (No Modals)
    ========================================== */
 .kompakt-level-card {
-    position: relative !important; /* Ensure child absolute positioning works */
+    position: relative !important;
+    perspective: 1000px;
+    min-height: 380px; /* Ensure a consistent minimum height for flip contents */
 }
 
-#verb-modal.inline-mode {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background-color: #0f172a !important; /* Solid Slate background */
-    z-index: 100 !important;
-    border-radius: inherit;
-    display: flex !important;
-    align-items: stretch;
-    justify-content: stretch;
-    margin: 0 !important;
-}
-
-#verb-modal.inline-mode .modal-content {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
-    max-height: none !important;
-    margin: 0 !important;
-    border-radius: inherit !important;
-    box-shadow: none !important;
-    border: none !important;
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
-    background-color: #0f172a !important;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease;
 }
 
-/* Adjust scroll bar style inside card inline modal */
-#verb-modal.inline-mode .modal-content::-webkit-scrollbar {
-    width: 6px;
+/* Card Back Details Styling */
+.card-back {
+    background-color: #0f172a !important; /* Solid Slate bg */
+    border-radius: inherit;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
-#verb-modal.inline-mode .modal-content::-webkit-scrollbar-thumb {
+
+/* Back Header */
+.card-back-header {
+    background-color: var(--card-theme, #3b82f6);
+    padding: 12px 16px;
+    position: relative;
+    color: #ffffff;
+    border-radius: 15px 15px 0 0;
+}
+
+.card-back-level-badge {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 12px;
+    position: absolute;
+    top: 10px;
+    left: 16px;
+}
+
+.card-back-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.card-back-close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.card-back-infinitive {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 12px 0 2px 0;
+    text-align: center;
+}
+
+.card-back-translation {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Back Body */
+.card-back-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Custom Scrollbar for Card Back Body */
+.card-back-body::-webkit-scrollbar {
+    width: 5px;
+}
+.card-back-body::-webkit-scrollbar-thumb {
     background-color: #334155;
     border-radius: 3px;
+}
+
+/* Active Conjugation Title badge */
+.card-back-tense-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--card-theme, #3b82f6);
+    background: rgba(var(--card-theme-rgb, 59, 130, 246), 0.12);
+    padding: 3px 8px;
+    border-radius: 6px;
+    align-self: flex-start;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+}
+
+/* Inline Conjugation List Grid */
+.inline-conjugation-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3px;
+    background: #1e293b;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+
+.conj-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem; /* Compact font size */
+    color: #e2e8f0;
+    padding: 2px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.conj-row:last-child {
+    border-bottom: none;
+}
+
+.conj-pronoun {
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.conj-form {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* Inline Examples Box */
+.inline-example-box {
+    background: #1e293b;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.example-de {
+    font-size: 0.82rem; /* Compact font size */
+    color: #38bdf8; /* Lighter blue for German example */
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.25;
+    cursor: pointer;
+}
+
+.example-de:hover {
+    text-decoration: underline;
+}
+
+.example-es {
+    font-size: 0.76rem;
+    color: #94a3b8;
+    margin: 0;
+    font-style: italic;
+    line-height: 1.25;
+}
+
+/* Collapsible Section Buttons */
+.card-back-expandable-btn {
+    background: #1e293b;
+    color: #e2e8f0;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.card-back-expandable-btn:hover {
+    background: #334155;
+}
+
+.card-back-expandable-btn::after {
+    content: "▶";
+    font-size: 0.65rem;
+    color: var(--card-theme, #3b82f6);
+    transition: transform 0.2s;
+}
+
+.card-back-expandable-btn.expanded::after {
+    transform: rotate(90deg);
+}
+
+.card-back-expandable-content {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 0.8rem;
+    color: #cbd5e1;
+    margin-top: -4px;
+}
+
+/* Card Back Footer navigation */
+.card-back-footer {
+    background-color: #1e293b;
+    border-top: 1px solid #334155;
+    padding: 6px 10px;
+    border-radius: 0 0 15px 15px;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+
+.card-back-footer::-webkit-scrollbar {
+    display: none;
+}
+
+.card-back-tab-btn {
+    background: rgba(var(--card-theme-rgb, 59, 130, 246), 0.12) !important;
+    color: var(--card-theme, #3b82f6) !important;
+    border: 1px solid rgba(var(--card-theme-rgb, 59, 130, 246), 0.25) !important;
+    border-radius: 6px !important;
+    padding: 6px 10px !important;
+    font-weight: 700;
+    font-size: 0.78rem; /* Compact footer text size */
+    transition: all 0.2s ease;
+    cursor: pointer;
+    flex: 0 0 auto !important;
+    text-align: center;
+}
+
+.card-back-tab-btn:hover {
+    background: rgba(var(--card-theme-rgb, 59, 130, 246), 0.28) !important;
+    color: #ffffff !important;
+}
+
+.card-back-tab-btn.active {
+    background: var(--card-theme, #3b82f6) !important;
+    color: #ffffff !important;
+    border-color: var(--card-theme, #3b82f6) !important;
 }
 
