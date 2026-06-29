@@ -438,7 +438,2162 @@ function applyModalThemePalette(verbData) {
  let modalSessionId = 0;
 
  let isRestoringModalTab = false;
-  verbModal.classList.remove('visible');
+
+ let storyClickCounter = 0;
+
+let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
+
+const CACHE_KEY = 'verbAppCache_v46_wortfamilie_search_ready';
+
+const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
+
+let cachePersistTimeout = null;
+
+let cachePersistenceDisabled = false;
+
+let cacheHydrated = false;
+
+let hydratedCacheVersion = null;
+
+const PRELOAD_CONJUGATIONS_IN_BACKGROUND = true;
+
+const PRELOAD_CONJUGATIONS_SCOPE = 'current-group';
+
+const lazyExampleLoadPromises = new Map();
+
+ const HEAVY_VERB_DATA_KEYS = [
+
+ 'praesens_examples',
+
+ 'praeteritum_examples',
+
+ 'praesens_fragen',
+
+ 'wortfamilie'
+
+ ];
+
+
+
+ // --- DOM ELEMENTS ---
+
+ const mainContainer = document.getElementById('main-container');
+
+ const cardsContainer = document.getElementById('cards-container');
+
+ const levelIndicator = document.getElementById('level-indicator');
+
+ const controlsContainer = document.querySelector('.controls-container');
+
+ const headerSearchContainer = document.querySelector('.controls-container .search-container');
+
+ const levelToggleContainer = document.querySelector('.level-toggle-container');
+
+ const levelToggleFooter = document.querySelector('.level-toggle-footer');
+
+ const levelToggleButtons = document.querySelectorAll('.level-toggle-footer .level-option');
+
+ const groupThemeIndicator = document.getElementById('group-theme-indicator');
+
+ const groupIndicator = document.getElementById('group-indicator');
+
+ const progressBar = document.getElementById('progress-bar');
+
+ const prevGroupBtn = document.getElementById('prev-group-btn');
+
+ const nextGroupBtn = document.getElementById('next-group-btn');
+
+ const navigationWrapper = document.querySelector('.navigation-wrapper');
+
+ const storyButton = document.getElementById('story-button');
+
+ const storyContainer = document.getElementById('story-container');
+
+ const storyContent = document.getElementById('story-content');
+
+ const searchInput = document.getElementById('verb-search');
+
+ const settingsBtn = document.getElementById('settings-btn');
+
+ const verbModal = document.getElementById('verb-modal');
+
+ const infoModal = document.getElementById('info-modal');
+
+ const closeVerbModalButton = document.getElementById('close-verb-modal');
+
+ const closeVerbModalXButton = document.getElementById('close-verb-modal-x');
+
+ const infoButton = document.getElementById('info-button');
+
+ const closeInfoModalButton = document.getElementById('close-info-modal');
+
+ const gustarButtonContainer = document.getElementById('gustar-button-container');
+
+ const gustarButton = document.getElementById('gustar-button');
+
+ const gustarModal = document.getElementById('gustar-modal');
+
+ const gustarCloseBtn = document.getElementById('gustar-close-btn');
+
+ const gustarCloseFooterBtn = document.getElementById('gustar-close-footer-btn');
+
+
+
+ const reflexiveButtonContainer = document.getElementById('reflexive-button-container');
+
+ const reflexiveButton = document.getElementById('reflexive-button');
+
+ const reflexiveModal = document.getElementById('reflexive-modal');
+
+ const reflexiveCloseBtn = document.getElementById('reflexive-close-btn');
+
+ const reflexiveCloseFooterBtn = document.getElementById('reflexive-close-footer-btn');
+
+
+
+ // Theme modal elements
+
+ const themeModal = document.getElementById('theme-modal');
+
+ const closeThemeModalX = document.getElementById('close-theme-modal-x');
+
+ const closeThemeModalBtn = document.getElementById('close-theme-modal-btn');
+
+
+
+ function setupModalHeaderLayout() {
+
+ const modalHeader = document.querySelector('#verb-modal .modal-header');
+
+ const translationsEl = document.getElementById('modal-verb-translations');
+
+ const tagsToggle = document.getElementById('modal-tags-toggle');
+
+ if (!modalHeader || !translationsEl || !tagsToggle) return;
+
+
+
+ let translationRow = modalHeader.querySelector('.modal-translation-row');
+
+ if (!translationRow) {
+
+ translationRow = document.createElement('div');
+
+ translationRow.className = 'modal-translation-row';
+
+ modalHeader.insertBefore(translationRow, translationsEl);
+
+ }
+
+
+
+  translationRow.appendChild(translationsEl);
+
+  translationRow.appendChild(tagsToggle);
+
+  }
+
+
+
+ setupModalHeaderLayout();
+
+
+
+ // Header Tags Toggle Listener
+
+ const modalTagsToggle = document.getElementById('modal-tags-toggle');
+
+ if (modalTagsToggle) {
+
+ modalTagsToggle.addEventListener('click', (e) => {
+
+ e.stopPropagation();
+
+ const wrapper = document.getElementById('modal-tags-collapsible');
+
+ const dots = modalTagsToggle.querySelector('.dots-icon');
+
+ const chevron = modalTagsToggle.querySelector('.chevron-icon');
+
+
+
+ if (wrapper) {
+
+ const isCollapsed = wrapper.classList.toggle('collapsed');
+
+ if (isCollapsed) {
+
+ dots.style.display = 'inline';
+
+ chevron.style.display = 'none';
+
+ } else {
+
+ dots.style.display = 'none';
+
+ chevron.style.display = 'inline';
+
+ }
+
+ }
+
+ });
+
+ }
+
+
+
+ // Theme data storage
+
+ let currentThemeData = null;
+
+ let appVersion = '1.6_static'; // Stable version; replaced by verbs_index.lastUpdated when available
+
+ let isLevelMenuExpanded = false;
+
+ const mobileLevelMediaQuery = window.matchMedia('(max-width: 600px)');
+
+ let footerUtilityBar = null;
+
+ let footerSearchShell = null;
+
+ let footerSearchPanel = null;
+
+ let footerSearchToggle = null;
+
+ let isFooterSearchExpanded = false;
+
+ let isFooterSearchForcedOpen = false;
+
+ let levelMenuIdleTimeout = null;
+
+ let searchIdleTimeout = null;
+
+
+
+ async function parseJsonUtf8(response) {
+
+ const buffer = await response.arrayBuffer();
+
+ const text = new TextDecoder('utf-8').decode(buffer);
+
+ return normalizeMojibakeDeep(JSON.parse(text));
+
+ }
+
+
+
+ function normalizeMojibakeString(value) {
+
+ if (typeof value !== 'string') return value;
+
+
+
+ let normalized = value;
+
+ const replacements = [
+
+ ['íÃ†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾', 'Ä'],
+
+ ['Ö', 'Ö'],
+
+ ['íÃ†â€™Ãƒâ€¦Ã¢â‚¬Å“', 'Ü'],
+
+ ['ä', 'ä'],
+
+ ['ö', 'ö'],
+
+ ['ü', 'ü'],
+
+ ['ß', 'ß'],
+
+ ['á', 'á'],
+
+ ['é', 'é'],
+
+ ['í', 'í'],
+
+ ['ó', 'ó'],
+
+ ['ú', 'ú'],
+
+ ['ñ', 'ñ'],
+
+ ['íÃ†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â°', 'Ãƒâ€°'],
+
+ ['íÃ¢â‚¬Å¾', 'Ä'],
+
+ ['íÃ¢â‚¬â€œ', 'Ö'],
+
+ ['íÃ…â€œ', 'Ü'],
+
+ ['ä', 'ä'],
+
+ ['ö', 'ö'],
+
+ ['ü', 'ü'],
+
+ ['ß', 'ß'],
+
+ ['á', 'á'],
+
+ ['é', 'é'],
+
+ ['í', 'í'],
+
+ ['ó', 'ó'],
+
+ ['ú', 'ú'],
+
+ ['ñ', 'ñ'],
+
+ ['Ã‚Â¿', 'Ã‚Â¿'],
+
+ ['Ã‚Â¡', 'Ã‚Â¡'],
+
+ // Mojibake for emojis (UTF-8 bytes read as Windows-1252)
+
+ ['ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã…Â¡', '🔵œÅ¡'],
+
+ ['🏡', '🏡'],
+
+ ['ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¼', '🔵™Â¼'],
+
+ ['ÃƒÂ°Ã…Â¸Ã…Â¡Ã‚Â¢', 'Ã°Å¸Å¡Â¢'],
+
+ ['ÃƒÂ°Ã…Â¸Ã…Â¡Ã¢â€šÂ¬', '🚀'],
+
+ ['ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¬', '🔵™Â¬'],
+
+ ['ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã¢â‚¬â€œ', '🔵œâ€“'],
+
+ ['ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¡', '💡']
+
+ ];
+
+
+
+ for (let pass = 0; pass < 3; pass++) {
+
+ let changed = false;
+
+ for (const [broken, fixed] of replacements) {
+
+ if (normalized.includes(broken)) {
+
+ normalized = normalized.split(broken).join(fixed);
+
+ changed = true;
+
+ }
+
+ }
+
+ if (!changed) break;
+
+ }
+
+
+
+ return normalized;
+
+ }
+
+
+
+ function normalizeMojibakeDeep(value) {
+
+ if (typeof value === 'string') {
+
+ return normalizeMojibakeString(value);
+
+ }
+
+
+
+ if (Array.isArray(value)) {
+
+ return value.map(item => normalizeMojibakeDeep(item));
+
+ }
+
+
+
+ if (!value || typeof value !== 'object') {
+
+ return value;
+
+ }
+
+
+
+ const normalizedObject = {};
+
+ Object.entries(value).forEach(([key, entryValue]) => {
+
+ normalizedObject[normalizeMojibakeString(key)] = normalizeMojibakeDeep(entryValue);
+
+ });
+
+ return normalizedObject;
+
+ }
+
+
+
+ function setupFooterUtilityBar() {
+
+ if (!levelToggleContainer || !headerSearchContainer || !controlsContainer) return;
+
+
+
+ const settingsButton = settingsBtn;
+
+ if (settingsButton && settingsButton.parentElement === headerSearchContainer) {
+
+ controlsContainer.appendChild(settingsButton);
+
+ }
+
+
+
+ footerUtilityBar = document.createElement('div');
+
+ footerUtilityBar.className = 'footer-utility-bar';
+
+
+
+ const footerSearch = document.createElement('div');
+
+ footerSearch.className = 'footer-search-shell footer-search-collapsed';
+
+ footerSearch.innerHTML = `
+
+ <div class="footer-search-panel">
+
+ </div>
+
+ <button id="footer-search-toggle" class="footer-search-toggle" type="button" aria-expanded="false" aria-label="Search">
+
+ <span class="footer-search-arrow">‹</span>
+
+ <span class="footer-search-icon">⌕</span>
+
+ </button>
+
+ `;
+
+
+
+ footerSearchPanel = footerSearch.querySelector('.footer-search-panel');
+
+ footerSearchToggle = footerSearch.querySelector('#footer-search-toggle');
+
+ headerSearchContainer.classList.add('footer-search-container');
+
+ footerSearchPanel.prepend(headerSearchContainer);
+
+
+
+ const settingsModal = document.getElementById('settings-modal');
+
+ const footerParent = settingsModal?.parentElement || document.body;
+
+ footerParent.insertBefore(footerUtilityBar, settingsModal || null);
+
+ footerUtilityBar.appendChild(levelToggleContainer);
+
+ footerUtilityBar.appendChild(footerSearch);
+
+
+
+ footerSearchShell = footerSearch;
+
+ }
+
+
+
+ function scheduleLevelMenuIdleCollapse() {
+
+ clearTimeout(levelMenuIdleTimeout);
+
+ if (!isLevelMenuExpanded || isFooterSearchExpanded) return;
+
+ levelMenuIdleTimeout = setTimeout(() => {
+
+ isLevelMenuExpanded = false;
+
+ syncMobileLevelToggleState();
+
+ }, 1800);
+
+ }
+
+
+
+ function scheduleSearchIdleCollapse() {
+
+ clearTimeout(searchIdleTimeout);
+
+ if (!isFooterSearchExpanded || isFooterSearchForcedOpen) return;
+
+ if (searchInput && searchInput.value.trim()) return;
+
+ searchIdleTimeout = setTimeout(() => {
+
+ if (searchInput && document.activeElement === searchInput) return;
+
+ if (searchInput && searchInput.value.trim()) return;
+
+ setFooterSearchExpanded(false);
+
+ }, 1800);
+
+ }
+
+
+
+ function setFooterSearchExpanded(expanded, { forced = false } = {}) {
+
+ if (!footerSearchShell || !footerSearchToggle) return;
+
+ isFooterSearchExpanded = expanded;
+
+ isFooterSearchForcedOpen = forced ? expanded : (expanded && isFooterSearchForcedOpen);
+
+ if (!expanded) {
+
+ isFooterSearchForcedOpen = false;
+
+ } else {
+
+ isLevelMenuExpanded = false;
+
+ }
+
+ footerSearchShell.classList.toggle('footer-search-expanded', expanded);
+
+ footerSearchShell.classList.toggle('footer-search-collapsed', !expanded);
+
+ footerSearchToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+
+ if (expanded) {
+
+ scheduleSearchIdleCollapse();
+
+ } else {
+
+ clearTimeout(searchIdleTimeout);
+
+ }
+
+ syncMobileLevelToggleState();
+
+ }
+
+
+
+ setupFooterUtilityBar();
+
+
+
+ function syncMobileLevelToggleState() {
+
+ if (!levelToggleFooter) return;
+
+
+
+ const isMobile = mobileLevelMediaQuery.matches;
+
+ const isCollapsed = !isLevelMenuExpanded || isFooterSearchExpanded;
+
+ levelToggleFooter.classList.toggle('mobile-collapsed', isCollapsed);
+
+ levelToggleFooter.classList.toggle('mobile-expanded', !isCollapsed);
+
+ levelToggleFooter.classList.toggle('selector-collapsed', isCollapsed);
+
+ levelToggleFooter.classList.toggle('selector-expanded', !isCollapsed);
+
+ levelToggleFooter.classList.toggle('search-collapsed', isFooterSearchExpanded);
+
+ levelToggleContainer?.classList.toggle('mobile-right-docked', isMobile);
+
+ if (isCollapsed) {
+
+ clearTimeout(levelMenuIdleTimeout);
+
+ } else {
+
+ scheduleLevelMenuIdleCollapse();
+
+ }
+
+ }
+
+
+
+ function createLightweightVerbDataSnapshot(source = allVerbsData) {
+
+ const snapshot = {};
+
+ Object.entries(source || {}).forEach(([verbName, verbData]) => {
+
+ if (!verbData || typeof verbData !== 'object' || Array.isArray(verbData)) return;
+
+ const compactVerbData = { ...verbData };
+
+ HEAVY_VERB_DATA_KEYS.forEach(key => {
+
+ delete compactVerbData[key];
+
+ });
+
+ snapshot[verbName] = compactVerbData;
+
+ });
+
+ return snapshot;
+
+ }
+
+
+
+ function createCachePayload({ compact = false } = {}) {
+
+ const lightweightVerbs = createLightweightVerbDataSnapshot(allVerbsData);
+
+ const payload = {
+
+ allVerbsData: lightweightVerbs,
+
+ verbGroupsByLevel,
+
+ allGroupsIndex,
+
+ fileIndexData,
+
+ wortfamilieIndex,
+
+ lastUpdated: appVersion || new Date().toISOString(),
+
+ timestamp: Date.now(),
+
+ cacheMode: compact ? 'compact' : 'full'
+
+ };
+
+
+
+ if (!compact) {
+
+ return payload;
+
+ }
+
+
+
+ const compactGroups = {};
+
+ const compactVerbsData = {};
+
+ const groups = verbGroupsByLevel[currentLevel] || [];
+
+ compactGroups[currentLevel] = groups;
+
+ groups.forEach(group => {
+
+ if (!group || !Array.isArray(group.verbs)) return;
+
+ group.verbs.forEach(verbName => {
+
+ if (lightweightVerbs[verbName]) {
+
+ compactVerbsData[verbName] = lightweightVerbs[verbName];
+
+ }
+
+ });
+
+ });
+
+
+
+ return {
+
+ ...payload,
+
+ allVerbsData: compactVerbsData,
+
+ verbGroupsByLevel: compactGroups
+
+ };
+
+ }
+
+
+
+ function persistCacheSnapshot() {
+
+ if (cachePersistenceDisabled) return;
+
+
+
+ try {
+
+ localStorage.setItem(CACHE_KEY, JSON.stringify(createCachePayload()));
+
+ } catch (e) {
+
+ try {
+
+ localStorage.setItem(CACHE_KEY, JSON.stringify(createCachePayload({ compact: true })));
+
+ } catch (compactError) {
+
+ cachePersistenceDisabled = true;
+
+ clearTimeout(cachePersistTimeout);
+
+ }
+
+ }
+
+ }
+
+
+
+ function scheduleCachePersist() {
+
+ if (cachePersistenceDisabled) return;
+
+ clearTimeout(cachePersistTimeout);
+
+ cachePersistTimeout = setTimeout(() => {
+
+ persistCacheSnapshot();
+
+ }, 250);
+
+ }
+
+
+
+function hydrateFromLocalCache() {
+
+ try {
+
+ const cached = localStorage.getItem(CACHE_KEY);
+
+ if (!cached) return false;
+
+
+
+ const data = normalizeMojibakeDeep(JSON.parse(cached));
+
+ if (!data || !data.allVerbsData || !data.verbGroupsByLevel) return false;
+
+
+
+ allVerbsData = data.allVerbsData;
+
+ verbGroupsByLevel = data.verbGroupsByLevel;
+
+ allGroupsIndex = Array.isArray(data.allGroupsIndex) ? data.allGroupsIndex : [];
+
+ if (allGroupsIndex.length > 0) autoConfigureLevelsFromGroups(allGroupsIndex);
+
+ fileIndexData = data.fileIndexData || null;
+
+ if (data.wortfamilieIndex && typeof data.wortfamilieIndex === 'object') {
+
+ wortfamilieIndex = data.wortfamilieIndex;
+
+ }
+
+ if (data.lastUpdated) {
+
+ appVersion = data.lastUpdated;
+
+ hydratedCacheVersion = data.lastUpdated;
+
+ }
+
+ cacheHydrated = true;
+
+ return true;
+
+ } catch (e) {
+
+ console.warn("Failed to hydrate from local cache", e);
+
+ cacheHydrated = false;
+
+ hydratedCacheVersion = null;
+
+ return false;
+
+ }
+
+}
+
+
+
+ function hasCachedGroup(levelKey, groupIndex) {
+
+ const group = verbGroupsByLevel[levelKey] && verbGroupsByLevel[levelKey][groupIndex];
+
+ if (!group || !Array.isArray(group.verbs)) return false;
+
+ return group.verbs.every(verbName => !!allVerbsData[verbName]);
+
+ }
+
+
+
+ function hasCachedLevel(levelKey) {
+
+ const config = levelConfig[levelKey];
+
+ if (!config || !verbGroupsByLevel[levelKey]) return false;
+
+ for (let i = 0; i < config.groupCount; i++) {
+
+ if (!hasCachedGroup(levelKey, i)) return false;
+
+ }
+
+ return true;
+
+ }
+
+
+
+ // --- BACKGROUND LOADING & PROGRESS ---
+
+ let isBackgroundLoading = false;
+
+ let loadingProgressState = { cards: 0, conjugations: 0 };
+
+
+
+ function updateLoadingProgress(percentage, phase = 'cards') {
+
+ if (!searchInput) return;
+
+ loadingProgressState[phase] = Math.max(0, Math.min(100, percentage));
+
+ const cardsProgress = Math.round(loadingProgressState.cards || 0);
+
+ const conjugationsProgress = Math.round(loadingProgressState.conjugations || 0);
+
+ const overallProgress = cardsProgress;
+
+
+
+ if (phase === 'cards' && percentage < 100) {
+
+ setFooterSearchExpanded(true, { forced: true });
+
+ footerSearchShell?.classList.add('loading-active');
+
+ searchInput.style.background = `linear-gradient(to right, rgba(250,112,154,0.65) 0%, rgba(254,225,64,0.65) ${overallProgress}%, rgba(15,23,42,0.92) ${overallProgress}%, rgba(15,23,42,0.92) 100%)`;
+
+ searchInput.placeholder = `cards ${Math.round(percentage)}%`;
+
+ searchInput.classList.add('loading-active');
+
+ } else {
+
+ if (cardsProgress >= 100 && conjugationsProgress >= 100) {
+
+ searchInput.placeholder = "Suchen... (buscar)";
+
+ searchInput.classList.remove('loading-active');
+
+ searchInput.style.background = '';
+
+ footerSearchShell?.classList.remove('loading-active');
+
+ if (isFooterSearchForcedOpen) {
+
+ setFooterSearchExpanded(false);
+
+ }
+
+ }
+
+ }
+
+ }
+
+
+
+async function loadBackgroundData() {
+
+ let remoteVersion = null;
+
+
+
+ // 1. Check for updates (Version Check)
+
+ try {
+
+ const vRes = await fetch('json/verbs_index.json', { cache: 'no-cache' });
+
+ if (vRes.ok) {
+
+ const vData = await parseJsonUtf8(vRes);
+
+ remoteVersion = vData.lastUpdated;
+
+ allGroupsIndex = Array.isArray(vData.groups) ? vData.groups : allGroupsIndex;
+
+ if (allGroupsIndex.length > 0) autoConfigureLevelsFromGroups(allGroupsIndex);
+
+ if (remoteVersion) {
+
+ appVersion = remoteVersion;
+
+ }
+
+  console.log("Remote version:", remoteVersion);
+
+  }
+
+ } catch (e) {
+
+ console.warn("Version check failed (offline?)", e);
+
+ }
+
+
+
+ const cacheMatchesRemoteVersion =
+
+ cacheHydrated && hydratedCacheVersion && remoteVersion && hydratedCacheVersion === remoteVersion;
+
+
+
+ if (cacheHydrated && (!remoteVersion || cacheMatchesRemoteVersion)) {
+
+ if (!wortfamilieIndex) {
+
+ await loadWortfamilieIndex();
+
+ scheduleCachePersist();
+
+ }
+
+ console.log("Skipping background load because local cache already matches the current version.");
+
+ loadingProgressState = { cards: 100, conjugations: 100 };
+
+ updateLoadingProgress(100, 'cards');
+
+ updateLoadingProgress(100, 'conjugations');
+
+ isBackgroundLoading = false;
+
+ return;
+
+ }
+
+
+
+ // 2. Try to load from LocalStorage
+
+ try {
+
+ const cached = localStorage.getItem(CACHE_KEY);
+
+ if (cached) {
+
+ const data = normalizeMojibakeDeep(JSON.parse(cached));
+
+
+
+ // Cache is valid IF:
+
+ // a) We failed to get remote version (assume offline/safe), OR
+
+ // b) Remote version matches cached version
+
+ const isCacheValid = !remoteVersion || (data.lastUpdated === remoteVersion);
+
+
+
+ if (isCacheValid && data.allVerbsData && data.verbGroupsByLevel) {
+
+ console.log("Loaded data from LocalStorage cache (Version match).");
+
+ allVerbsData = data.allVerbsData;
+
+ verbGroupsByLevel = data.verbGroupsByLevel;
+
+ if ((!Array.isArray(allGroupsIndex) || allGroupsIndex.length === 0) && Array.isArray(data.allGroupsIndex)) {
+
+ allGroupsIndex = data.allGroupsIndex;
+
+ }
+
+ if (!fileIndexData && data.fileIndexData) {
+
+ fileIndexData = data.fileIndexData;
+
+ }
+
+ if (data.wortfamilieIndex && typeof data.wortfamilieIndex === 'object') {
+
+ wortfamilieIndex = data.wortfamilieIndex;
+
+ }
+
+ if (data.lastUpdated) {
+
+ appVersion = data.lastUpdated;
+
+ }
+
+ if (!wortfamilieIndex) {
+
+ await loadWortfamilieIndex();
+
+ scheduleCachePersist();
+
+ }
+
+ loadingProgressState = { cards: 100, conjugations: 100 };
+
+ updateLoadingProgress(100, 'cards');
+
+ updateLoadingProgress(100, 'conjugations');
+
+ isBackgroundLoading = false;
+
+ generateTagFilters();
+
+
+
+ if (searchInput && searchInput.value.trim() !== '') {
+
+ searchInput.dispatchEvent(new Event('input'));
+
+ }
+
+ return; // SKIP NETWORK LOADING
+
+  } else {
+
+  console.log("Cache outdated or invalid. Reloading from network.");
+
+  wortfamilieIndex = null;
+
+  if (allVerbsData) {
+
+  Object.keys(allVerbsData).forEach(verbName => {
+
+  if (allVerbsData[verbName]) {
+
+  delete allVerbsData[verbName].wortfamilie;
+
+  delete allVerbsData[verbName]._wortfamilieLoaded;
+
+  delete allVerbsData[verbName]._deferredLoaded;
+
+  delete allVerbsData[verbName].konjunktiv_ii;
+
+  delete allVerbsData[verbName].praesens_examples;
+
+  delete allVerbsData[verbName].praeteritum_examples;
+
+  delete allVerbsData[verbName].praesens_fragen;
+
+  }
+
+  });
+
+  }
+
+  }
+
+ }
+
+ } catch (e) {
+
+ console.warn("Failed to load/parse cache", e);
+
+ }
+
+
+
+ if (isBackgroundLoading) return;
+
+ isBackgroundLoading = true;
+
+ console.log("Starting background data load...");
+
+ loadingProgressState = { cards: 0, conjugations: 0 };
+
+ updateLoadingProgress(0, 'cards');
+
+
+
+ // Collect all tasks EXCEPT current one (already loading/loaded)
+
+ const loadTasks = [];
+
+ let totalTasks = 0;
+
+
+
+ levelOrder.forEach(levelKey => {
+
+ const config = levelConfig[levelKey];
+
+ for (let i = 1; i <= config.groupCount; i++) {
+
+ loadTasks.push({ levelKey, i });
+
+ }
+
+ });
+
+ totalTasks = loadTasks.length;
+
+ let loadedTasks = 0;
+
+
+
+ const BATCH_SIZE = 10;
+
+ const DELAY_MS = 20;
+
+
+
+ for (let i = 0; i < loadTasks.length; i += BATCH_SIZE) {
+
+ const batch = loadTasks.slice(i, i + BATCH_SIZE);
+
+
+
+ const batchPromises = batch.map(async task => {
+
+ const levelKey = task.levelKey;
+
+ const groupIndex = task.i - 1;
+
+
+
+ // 1. Check if already loaded
+
+ if (hasCachedGroup(levelKey, groupIndex)) {
+
+ return;
+
+ }
+
+
+
+ const physData = getPhysicalGroupData(levelKey, groupIndex);
+
+ if (!physData) return;
+
+ const fileNumber = physData.fileNumber;
+
+
+
+ // 2. Fetch Group Data
+
+ try {
+
+ const groupUrl = `json/groups/${physData.physicalKey}/${physData.physicalKey}_group_${fileNumber}.json${appVersion ? '?v=' + appVersion : ''}`;
+
+ const res = await fetch(groupUrl);
+
+ if (!res.ok) return;
+
+ const groupData = await parseJsonUtf8(res);
+
+
+
+ if (!verbGroupsByLevel[levelKey]) verbGroupsByLevel[levelKey] = [];
+
+ verbGroupsByLevel[levelKey][groupIndex] = groupData;
+
+
+
+ // 3. Fetch Verbs that are NEW
+
+ const verbsToLoad = groupData.verbs || [];
+
+ const newVerbs = (cacheHydrated && cacheMatchesRemoteVersion)
+
+ ? verbsToLoad.filter(v => !allVerbsData[v])
+
+ : verbsToLoad;
+
+
+
+ if (newVerbs.length > 0) {
+
+ const cardPromises = newVerbs.map(verbName =>
+
+ fetch(`json/cards/${verbName}.json${appVersion ? '?v=' + appVersion : ''}`)
+
+ .then(res => res.ok ? parseJsonUtf8(res) : {})
+
+ .then(data => { allVerbsData[verbName] = data; })
+
+ .catch(() => { allVerbsData[verbName] = {}; })
+
+ );
+
+ await Promise.all(cardPromises);
+
+
+
+ }
+
+ } catch (e) {
+
+ console.warn(`Background load failed for ${levelKey} group ${task.i}`, e);
+
+ }
+
+ });
+
+
+
+ await Promise.all(batchPromises);
+
+
+
+ loadedTasks += batch.length;
+
+ const percent = Math.min(100, (loadedTasks / totalTasks) * 100);
+
+ updateLoadingProgress(percent, 'cards');
+
+
+
+ // Yield
+
+ if (i + BATCH_SIZE < loadTasks.length) {
+
+ await new Promise(r => setTimeout(r, DELAY_MS));
+
+ }
+
+ }
+
+
+
+ updateLoadingProgress(100, 'cards');
+
+
+
+ await loadWortfamilieIndex();
+
+ scheduleCachePersist();
+
+
+
+ if (PRELOAD_CONJUGATIONS_IN_BACKGROUND) {
+
+ const physicalLayers = physicalLevelMap[currentLevel] || [];
+
+ const layersToLoad = physicalLayers.map(l => l.key);
+
+ await loadBulkConjugations(layersToLoad, updateLoadingProgress);
+
+ } else {
+
+ loadingProgressState.conjugations = 100;
+
+ }
+
+
+
+ console.log("Background loading complete.");
+
+ updateLoadingProgress(100, 'conjugations');
+
+ isBackgroundLoading = false;
+
+ generateTagFilters();
+
+
+
+ // Save to LocalStorage
+
+ try {
+
+ localStorage.setItem(CACHE_KEY, JSON.stringify(createCachePayload()));
+
+ console.log("Saved data to LocalStorage cache");
+
+ } catch (e) {
+
+ try {
+
+ persistCacheSnapshot();
+
+ } catch (nestedError) {
+
+ console.warn("Failed to save to cache", nestedError);
+
+ }
+
+ }
+
+
+
+ // If the UI started from stale cache, repaint the current view once
+
+ // füresh background data is ready so moved verbs/groups appear immediately.
+
+ if (searchInput && searchInput.value.trim() === '') {
+
+ clearSearchAndRender();
+
+ }
+
+
+
+ // Re-run search if user typed something while loading
+
+ if (searchInput && searchInput.value.trim() !== '') {
+
+ searchInput.dispatchEvent(new Event('input'));
+
+ }
+
+ }
+
+
+
+ // --- OPTIMIZED LAZY LOADING ---
+
+ async function loadGroupData(levelKey, groupIndex, options = {}) {
+
+ const { silent = false, includeConjugations = true } = options;
+
+ // Validate inputs
+
+ if (!levelConfig[levelKey]) return;
+
+
+
+ // 1. Check if group is already loaded in memory
+
+ if (hasCachedGroup(levelKey, groupIndex)) {
+
+ return; // Data active
+
+ }
+
+
+
+ const physData = getPhysicalGroupData(levelKey, groupIndex);
+
+ if (!physData) return;
+
+ const fileNumber = physData.fileNumber;
+
+
+
+ // Show loading state
+
+ if (!silent) {
+
+ cardsContainer.innerHTML = '<div class="loading-spinner">Daten werden geladen...</div>';
+
+ }
+
+
+
+ const groupUrl = `json/groups/${physData.physicalKey}/${physData.physicalKey}_group_${fileNumber}.json${appVersion ? '?v=' + appVersion : ''}`;
+
+
+
+ try {
+
+ const res = await fetch(groupUrl);
+
+ if (!res.ok) throw new Error(`Group not found: ${groupUrl}`);
+
+ const groupData = await parseJsonUtf8(res);
+
+
+
+ // Initialize level array if needed
+
+ if (!verbGroupsByLevel[levelKey]) {
+
+ verbGroupsByLevel[levelKey] = [];
+
+ }
+
+ verbGroupsByLevel[levelKey][groupIndex] = groupData;
+
+
+
+ // 2. Identify new verbs to load
+
+ const verbsToLoad = groupData.verbs || [];
+
+ // Filter out verbs we already have data for
+
+ const newVerbs = verbsToLoad.filter(v => !allVerbsData[v]);
+
+
+
+ if (newVerbs.length > 0) {
+
+ // 3. Fetch Card Data for new verbs
+
+ const cardPromises = newVerbs.map(verbName =>
+
+ fetch(`json/cards/${verbName}.json${appVersion ? '?v=' + appVersion : ''}`)
+
+ .then(res => res.ok ? parseJsonUtf8(res) : {})
+
+ .then(data => { allVerbsData[verbName] = data; })
+
+ .catch(() => { allVerbsData[verbName] = {}; })
+
+ );
+
+ await Promise.all(cardPromises);
+
+
+
+ // 4. Fetch Conjugations for new verbs only when needed.
+
+ // Compact mode initial render only needs the card data.
+
+ if (includeConjugations) {
+
+ const physData = getPhysicalGroupData(levelKey, groupIndex);
+
+ if (physData) {
+
+ await loadBulkConjugations([physData.physicalKey], () => {});
+
+ }
+
+ }
+
+ }
+
+
+
+ scheduleCachePersist();
+
+
+
+ } catch (error) {
+
+ console.error(`Failed to load group data (${levelKey} / ${groupIndex + 1}):`, error);
+
+ if (!silent) {
+
+ cardsContainer.innerHTML = '<p>Fehler beim Laden der Gruppe. Bitte Seite neu laden.</p>';
+
+ }
+
+ }
+
+ }
+
+
+
+ async function loadAllGroupsForLevel(levelKey) {
+
+ const config = levelConfig[levelKey];
+
+ if (!config) return;
+
+
+
+ const loadPromises = [];
+
+ for (let groupIndex = 0; groupIndex < config.groupCount; groupIndex++) {
+
+ loadPromises.push(loadGroupData(levelKey, groupIndex, { silent: true, includeConjugations: false }));
+
+ }
+
+ await Promise.all(loadPromises);
+
+ }
+
+
+
+ async function loadFileIndex() {
+
+ if (fileIndexData) return fileIndexData;
+
+ try {
+
+ const query = appVersion ? `?v=${encodeURIComponent(appVersion)}` : '';
+
+ const response = await fetch(`json/file_index.json${query}`, { cache: 'no-cache' });
+
+ if (!response.ok) throw new Error(`Failed to load file index: ${response.status}`);
+
+ fileIndexData = await parseJsonUtf8(response);
+
+ } catch (error) {
+
+ console.warn('Failed to load file index, falling back to direct fetches.', error);
+
+ fileIndexData = {};
+
+ }
+
+ return fileIndexData;
+
+ }
+
+
+
+ function fileExistsInIndex(folder, verbName) {
+
+ if (!fileIndexData || !fileIndexData[folder]) return true;
+
+ return fileIndexData[folder].includes(verbName);
+
+ }
+
+
+
+ let loadedBulkConjugations = new Set();
+
+ 
+
+ async function loadBulkConjugations(physicalLayers, progressCallback = null) {
+
+ const layersToFetch = physicalLayers.filter(layer => !loadedBulkConjugations.has(layer));
+
+ if (layersToFetch.length === 0) {
+
+ if (progressCallback) progressCallback(100, 'conjugations');
+
+ return;
+
+ }
+
+ 
+
+ let loaded = 0;
+
+ const total = layersToFetch.length;
+
+ 
+
+ for (const layer of layersToFetch) {
+
+ try {
+
+ const query = appVersion ? `?v=${appVersion}` : '';
+
+ const url = `json/conjugations_bulk/${layer}_conjugations.json${query}`;
+
+ const res = await fetch(url);
+
+ if (res.ok) {
+
+ const data = await parseJsonUtf8(res);
+
+ for (const [verbName, verbData] of Object.entries(data)) {
+
+ if (!allVerbsData[verbName]) allVerbsData[verbName] = {};
+
+ 
+
+ const safeMerge = (target, source) => {
+
+ if (!source || typeof source !== 'object') return;
+
+ Object.entries(source).forEach(([key, value]) => {
+
+ if (['es', 'wir', 'ihr', 'sie'].includes(key) && typeof value === 'object' && !['cards'].includes(key)) return;
+
+ if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') return;
+
+ target[key] = value;
+
+ });
+
+ };
+
+ 
+
+ safeMerge(allVerbsData[verbName], verbData);
+
+ }
+
+ loadedBulkConjugations.add(layer);
+
+ }
+
+ } catch (e) {
+
+ console.warn(`Failed to load bulk conjugations for ${layer}:`, e);
+
+ }
+
+ loaded++;
+
+ if (progressCallback) {
+
+ progressCallback(Math.min(100, (loaded / total) * 100), 'conjugations');
+
+ }
+
+ }
+
+ }
+
+
+
+ async function loadVerbPraesensData(verbName) {
+
+ await loadFileIndex();
+
+ const existingData = allVerbsData[verbName] || {};
+
+ if (existingData.praesens) {
+
+ return existingData;
+
+ }
+
+
+
+ const query = appVersion ? `?v=${appVersion}` : '';
+
+ const praesensData = fileExistsInIndex('praesens', verbName)
+
+ ? await fetch(`json/praesens/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
+
+ : {};
+
+
+
+ const safeMerge = (target, source) => {
+
+ if (!source || typeof source !== 'object') return;
+
+ Object.entries(source).forEach(([key, value]) => {
+
+ // Ignore if the key is a German pronoun at root level (likely a rogue JSON structure)
+
+ if (['es', 'wir', 'ihr', 'sie', 'es_example', 'en_example'].includes(key) && typeof value === 'object') {
+
+ return;
+
+ }
+
+ // Protect established core strings
+
+ if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') {
+
+ return;
+
+ }
+
+ target[key] = value;
+
+ });
+
+ };
+
+
+
+ const mergedData = { ...existingData };
+
+ safeMerge(mergedData, praesensData);
+
+ allVerbsData[verbName] = mergedData;
+
+
+
+ return allVerbsData[verbName];
+
+ }
+
+
+
+ async function loadVerbModalDeferredData(verbName) {
+
+ await loadFileIndex();
+
+ const existingData = allVerbsData[verbName] || {};
+
+ const query = appVersion ? `?v=${appVersion}` : '';
+
+ const maybeFetchJson = (folder, fallback = {}) =>
+
+ fileExistsInIndex(folder, verbName)
+
+ ? fetch(`json/${folder}/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : fallback).catch(() => fallback)
+
+ : Promise.resolve(fallback);
+
+
+
+ const shouldRefetchWortfamilie =
+
+ existingData._wortfamilieLoaded !== true ||
+
+ !Array.isArray(existingData.wortfamilie) ||
+
+ existingData.wortfamilie.length === 0;
+
+
+
+ const [
+
+ konjunktivData,
+
+ wortfamilieData
+
+ ] = await Promise.all([
+
+ konjunktivVerbs.includes(verbName) && !existingData.konjunktiv_ii
+
+ ? maybeFetchJson('konjunktiv_ii', {})
+
+ : Promise.resolve({}),
+
+ !shouldRefetchWortfamilie
+
+ ? Promise.resolve({ wortfamilie: existingData.wortfamilie || [] })
+
+ : maybeFetchJson('wortfamilie', { wortfamilie: [] })
+
+ ]);
+
+
+
+ // PROTECT CORE PROPERTIES: Ensure conjugation data (which might have rogue root "es" keys) 
+
+ // doesn't overwrite the verb's translation and basic info.
+
+ const safeMerge = (target, source) => {
+
+ if (!source || typeof source !== 'object') return;
+
+ Object.entries(source).forEach(([key, value]) => {
+
+ // Ignore if the key is a German pronoun at root level (likely a rogue JSON structure)
+
+ if (['es', 'wir', 'ihr', 'sie'].includes(key) && typeof value === 'object' && !['cards'].includes(key)) {
+
+ return;
+
+ }
+
+ // Protect established core strings
+
+ if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') {
+
+ return;
+
+ }
+
+ target[key] = value;
+
+ });
+
+ };
+
+
+
+ const mergedData = { ...existingData };
+
+ safeMerge(mergedData, konjunktivData);
+
+
+
+ // Specific handling for word family
+
+ mergedData.wortfamilie = Array.isArray(wortfamilieData.wortfamilie) ? wortfamilieData.wortfamilie : (mergedData.wortfamilie || []);
+
+ mergedData._wortfamilieLoaded = true;
+
+ mergedData._deferredLoaded = true;
+
+
+
+ allVerbsData[verbName] = mergedData;
+
+
+
+ // PERSISTENCE & RELIABILITY: Double-check if the merge created a corruption ([object Object])
+
+ // This acts as a recovery mechanism for users with corrupted localStorage.
+
+ if (allVerbsData[verbName] && typeof allVerbsData[verbName].es === 'object') {
+
+ console.error(`Detected data corruption for ${verbName}. Restoring basic translation.`);
+
+ allVerbsData[verbName].es = existingData.es || "hablar";
+
+ }
+
+
+
+ scheduleCachePersist();
+
+ return allVerbsData[verbName];
+
+ }
+
+
+
+ function getExampleLoadKey(verbName, tabId) {
+
+ return `${verbName}::${tabId}`;
+
+ }
+
+
+
+ function normalizeModalTabId(tabId) {
+
+ return tabId === 'praesens' ? 'infinitiv' : (tabId || 'infinitiv');
+
+ }
+
+
+
+ function tabNeedsLazyExamples(verbName, verbData, tabId) {
+
+ const normalizedTab = normalizeModalTabId(tabId);
+
+ if (!verbData) return false;
+
+
+
+ if (normalizedTab === 'infinitiv') {
+
+ return !verbData.praesens_examples || !verbData.praesens_fragen;
+
+ }
+
+
+
+ if (normalizedTab === 'perfekt') {
+
+ return !verbData.perfekt_examples;
+
+ }
+
+
+
+ if (normalizedTab === 'praeteritum') {
+
+ return !verbData.praeteritum_conjugations || !verbData.praeteritum_examples;
+
+ }
+
+
+
+ if (normalizedTab === 'konjunktiv') {
+
+ return konjunktivVerbs.includes(verbName) &&
+
+ (!verbData.konjunktiv_ii || !verbData.konjunktiv_ii_examples);
+
+ }
+
+
+
+ return false;
+
+ }
+
+
+
+ async function loadVerbExamplesData(verbName, tabId = 'infinitiv') {
+
+ await loadFileIndex();
+
+ const normalizedTab = normalizeModalTabId(tabId);
+
+ const existingData = allVerbsData[verbName] || {};
+
+
+
+ if (!tabNeedsLazyExamples(verbName, existingData, normalizedTab)) {
+
+ return existingData;
+
+ }
+
+
+
+ const requestKey = getExampleLoadKey(verbName, normalizedTab);
+
+ if (lazyExampleLoadPromises.has(requestKey)) {
+
+ return lazyExampleLoadPromises.get(requestKey);
+
+ }
+
+
+
+ const query = appVersion ? `?v=${appVersion}` : '';
+
+ const maybeFetchJson = (folder, fallback = {}) =>
+
+ fileExistsInIndex(folder, verbName)
+
+ ? fetch(`json/${folder}/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : fallback).catch(() => fallback)
+
+ : Promise.resolve(fallback);
+
+
+
+ const safeMerge = (target, source) => {
+
+ if (!source || typeof source !== 'object') return;
+
+ Object.entries(source).forEach(([key, value]) => {
+
+ if (['es', 'wir', 'ihr', 'sie'].includes(key) && typeof value === 'object') {
+
+ return;
+
+ }
+
+ if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') {
+
+ return;
+
+ }
+
+ target[key] = value;
+
+ });
+
+ };
+
+
+
+ const loadPromise = (async () => {
+
+ let exampleData = {};
+
+ let conjugationData = {};
+
+
+
+ if (normalizedTab === 'infinitiv') {
+
+ const [praesensExamplesData, praesensQuestionData] = await Promise.all([
+
+ !existingData.praesens_examples
+
+ ? maybeFetchJson('examples/praesens_examples', {})
+
+ : Promise.resolve({}),
+
+ !existingData.praesens_fragen
+
+ ? maybeFetchJson('examples/praesens_question_examples', {})
+
+ : Promise.resolve({})
+
+ ]);
+
+
+
+ exampleData = {
+
+ ...praesensExamplesData,
+
+ ...praesensQuestionData
+
+ };
+
+ } else if (normalizedTab === 'perfekt') {
+
+ exampleData = !existingData.perfekt_examples
+
+ ? await maybeFetchJson('examples/perfekt_examples', {})
+
+ : {};
+
+ } else if (normalizedTab === 'praeteritum') {
+
+ const [praeteritumExamplesData, praeteritumConjugationData] = await Promise.all([
+
+ !existingData.praeteritum_examples
+
+ ? maybeFetchJson('examples/praeteritum_examples', {})
+
+ : Promise.resolve({}),
+
+ !existingData.praeteritum_conjugations
+
+ ? maybeFetchJson('praeteritum_konjugation', {})
+
+ : Promise.resolve({})
+
+ ]);
+
+
+
+ exampleData = praeteritumExamplesData;
+
+ conjugationData = praeteritumConjugationData;
+
+
+
+ if (conjugationData.praeteritum) {
+
+ conjugationData.praeteritum_conjugations = conjugationData.praeteritum;
+
+ delete conjugationData.praeteritum;
+
+ }
+
+ if (conjugationData.praeteritum_conjugation) {
+
+ conjugationData.praeteritum_conjugations = conjugationData.praeteritum_conjugation;
+
+ delete conjugationData.praeteritum_conjugation;
+
+ }
+
+ } else if (normalizedTab === 'konjunktiv') {
+
+ const [konjunktivExamplesData, konjunktivConjugationData] = await Promise.all([
+
+ !existingData.konjunktiv_ii_examples
+
+ ? maybeFetchJson('examples/konjunktiv_ii_examples', {})
+
+ : Promise.resolve({}),
+
+ (konjunktivVerbs.includes(verbName) && !existingData.konjunktiv_ii)
+
+ ? maybeFetchJson('konjunktiv_ii', {})
+
+ : Promise.resolve({})
+
+ ]);
+
+
+
+ exampleData = konjunktivExamplesData;
+
+ conjugationData = konjunktivConjugationData;
+
+ }
+
+
+
+ const mergedData = { ...(allVerbsData[verbName] || {}) };
+
+ safeMerge(mergedData, conjugationData);
+
+ safeMerge(mergedData, exampleData);
+
+ allVerbsData[verbName] = mergedData;
+
+ scheduleCachePersist();
+
+ return mergedData;
+
+ })();
+
+
+
+ lazyExampleLoadPromises.set(requestKey, loadPromise);
+
+ try {
+
+ return await loadPromise;
+
+ } finally {
+
+ lazyExampleLoadPromises.delete(requestKey);
+
+ }
+
+ }
+
+
+
+ function maybeLoadExamplesForActiveTab(verbName, tabId) {
+
+ const normalizedTab = normalizeModalTabId(tabId);
+
+ const verbData = allVerbsData[verbName] || {};
+
+ if (!tabNeedsLazyExamples(verbName, verbData, normalizedTab)) {
+
+ return;
+
+ }
+
+
+
+ const token = ++modalExampleLoadToken;
+
+ const sessionId = modalSessionId;
+
+ loadVerbExamplesData(verbName, normalizedTab)
+
+ .then(() => {
+
+ if (modalExampleLoadToken !== token || modalSessionId !== sessionId || currentVerbInModal !== verbName || !verbModal.classList.contains('visible')) return;
+
+ const activeTabNow = document.querySelector('.modal-tab-btn.active')?.dataset.tab || normalizedTab;
+
+ window.openModalForVerb(verbName, {
+
+ skipDeferredReload: true,
+
+ skipExampleReload: true,
+
+ preferredTab: activeTabNow
+
+ });
+
+ })
+
+ .catch(error => {
+
+ console.error(`Failed to load lazy examples for ${verbName} (${normalizedTab}):`, error);
+
+ });
+
+ }
+
+
+
+ function closeVerbModal() {
+
+  closeConjugationSubModal();
+
+ currentVerbInModal = '';
+
+ modalDeferredLoadToken += 1;
+
+ modalExampleLoadToken += 1;
+
+ modalSessionId += 1;
+
+ isRestoringModalTab = false;
+
+ verbModal.classList.remove('visible');
   setTimeout(() => {
     document.body.appendChild(verbModal);
     verbModal.classList.remove('inline-mode');
