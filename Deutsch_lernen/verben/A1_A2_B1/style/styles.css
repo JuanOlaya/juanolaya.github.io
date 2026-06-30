@@ -5571,7 +5571,8 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
     display: none;
 }
 .zeiten-sub-tab-btn {
-    flex: 1 0 auto;
+    flex: 0 0 calc(33% - 4px) !important;
+    min-width: 80px !important;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -5582,7 +5583,6 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
     padding: 5px 6px !important;
     cursor: pointer !important;
     transition: all 0.2s;
-    min-width: 72px;
 }
 .zeiten-sub-tab-btn.active {
     background: var(--card-theme, #3b82f6) !important;
