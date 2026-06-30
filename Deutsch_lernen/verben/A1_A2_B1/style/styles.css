@@ -5415,190 +5415,269 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
     display: block;
 }
 
-/* Details Card Layout (Fitted to card size) */
-#verb-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(15, 23, 42, 0.75) !important; /* Semi-transparent dark slate backdrop */
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+/* --- INLINE CARD BACKFACE FLIP STYLES --- */
+.kompakt-level-card {
+    position: relative !important;
+    perspective: 1000px !important;
+    min-height: 380px !important;
 }
 
-#verb-modal.visible {
-    display: flex !important;
-}
-
-#verb-modal .modal-content {
-    max-width: 400px !important; /* Fixed details card size */
-    width: 92% !important;
-    border-radius: 20px !important;
-    border: 1px solid #334155 !important;
-    background-color: #0f172a !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
-    max-height: 90vh !important;
+.card-front, .card-back {
+    width: 100% !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
     display: flex;
     flex-direction: column;
-    overflow: hidden !important;
 }
 
-/* Card Header */
-#verb-modal .modal-header {
-    background-color: var(--modal-theme, #3b82f6) !important;
-    border-radius: 20px 20px 0 0 !important;
-    padding: 15px 16px 10px 16px !important;
+.card-back {
+    background-color: #0f172a !important; /* Dark Slate card background */
+    border-radius: 12px !important;
+    border: 1px solid #334155 !important;
+    padding: 0 !important;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    color: #f8fafc !important;
+}
+
+/* Card Back Header */
+.card-back-header {
+    background-color: var(--card-theme, #3b82f6) !important;
+    border-radius: 12px 12px 0 0 !important;
+    padding: 12px 14px 10px 14px !important;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 2px;
     color: #ffffff;
 }
 
-/* Card Body Area */
-#verb-modal .modal-body-content {
+.card-back-level-badge {
+    background-color: rgba(0, 0, 0, 0.25) !important;
+    color: #ffffff !important;
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    padding: 2px 10px !important;
+    border-radius: 12px !important;
+    margin-bottom: 2px;
+}
+
+.card-back-close-btn {
+    position: absolute !important;
+    top: 8px !important;
+    right: 8px !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 1.2rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
+}
+
+.card-back-close-btn:hover {
+    background: rgba(0, 0, 0, 0.4) !important;
+}
+
+.card-back-infinitive {
+    font-size: 1.4rem !important;
+    font-weight: 800 !important;
+    margin: 2px 0 !important;
+    color: #ffffff !important;
+}
+
+.card-back-translation {
+    font-size: 0.85rem !important;
+    color: #e2e8f0 !important;
+    font-style: italic !important;
+    margin: 0 !important;
+    text-align: center;
+}
+
+/* Card Back Body */
+.card-back-body {
     flex: 1 1 auto;
     overflow-y: auto;
-    padding: 10px 14px;
+    padding: 10px 12px;
     display: flex;
     flex-direction: column;
     gap: 8px;
     text-align: left;
 }
 
-/* Custom Scrollbars inside details card */
-#verb-modal .modal-body-content::-webkit-scrollbar {
-    width: 5px;
+/* Custom scrollbars for card back body */
+.card-back-body::-webkit-scrollbar {
+    width: 4px;
 }
-#verb-modal .modal-body-content::-webkit-scrollbar-thumb {
+.card-back-body::-webkit-scrollbar-thumb {
     background-color: #334155;
-    border-radius: 3px;
+    border-radius: 2px;
 }
 
-/* Collapsible Summaries */
-#verb-modal details {
-    border: 1px solid #334155 !important;
-    background: #1e293b !important;
-    border-radius: 8px !important;
-    margin: 4px 0 !important;
+/* Tabs Bar */
+.card-back-tabs {
+    display: flex;
+    border-bottom: 1px solid #334155 !important;
+    margin-bottom: 6px;
+    gap: 4px;
 }
 
-#verb-modal summary {
-    background: #1e293b !important;
-    color: #e2e8f0 !important;
-    padding: 8px 10px !important;
-    font-size: 0.85rem !important;
+.card-back-tab-btn {
+    flex: 1;
+    text-align: center;
+    padding: 6px 2px !important;
+    font-size: 0.76rem !important;
     font-weight: 700 !important;
+    color: #94a3b8 !important;
+    cursor: pointer !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    transition: all 0.2s;
 }
 
-#verb-modal .details-content {
-    background: #0f172a !important;
+.card-back-tab-btn.active {
+    color: var(--card-theme, #3b82f6) !important;
+    border-bottom-color: var(--card-theme, #3b82f6) !important;
+}
+
+/* General list and text layout inside card back */
+.card-back-info-text {
+    font-size: 0.78rem !important;
+    line-height: 1.3 !important;
     color: #cbd5e1 !important;
-    font-size: 0.8rem !important;
-    padding: 8px !important;
 }
 
-/* Conjugation table overrides to fit details card size */
-#verb-modal table {
+/* Tiempos overview styling */
+.tiempos-overview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #1e293b !important;
+    padding: 8px !important;
+    border-radius: 6px !important;
+    border: 1px solid #334155 !important;
+    margin-bottom: 8px;
+}
+
+.tiempos-overview-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.76rem !important;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+    padding-bottom: 3px;
+}
+.tiempos-overview-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.tiempos-overview-tense {
+    color: #94a3b8 !important;
+    font-weight: 500;
+}
+
+.tiempos-overview-form {
+    color: #f1f5f9 !important;
+    font-weight: 700;
+}
+
+/* Tiempos Sub-tabs */
+.tiempos-sub-tabs {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.tiempos-sub-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.tiempos-sub-tab-btn {
+    padding: 3px 6px !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    border-radius: 4px !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #94a3b8 !important;
+    border: 1px solid #334155 !important;
+    cursor: pointer !important;
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.tiempos-sub-tab-btn.active {
+    background-color: var(--card-theme, #3b82f6) !important;
+    color: #ffffff !important;
+    border-color: var(--card-theme, #3b82f6) !important;
+}
+
+/* Full Conjugation grid/table overrides */
+.card-back table {
     width: 100% !important;
     border-collapse: collapse !important;
-    margin-top: 10px !important;
     background-color: #1e293b !important;
-    border-radius: 10px !important;
+    border-radius: 6px !important;
     overflow: hidden !important;
     border: 1px solid #334155 !important;
+    font-size: 0.74rem !important;
 }
 
-#verb-modal th {
-    background-color: var(--modal-theme, #3b82f6) !important;
+.card-back th {
+    background-color: var(--card-theme, #3b82f6) !important;
     color: #ffffff !important;
-    padding: 8px 10px !important;
+    padding: 4px 6px !important;
     font-weight: 700 !important;
     text-align: left !important;
-    font-size: 0.85rem !important;
 }
 
-#verb-modal td {
-    padding: 8px 10px !important;
+.card-back td {
+    padding: 4px 6px !important;
     border-bottom: 1px solid #334155 !important;
     color: #f1f5f9 !important;
-    font-size: 0.82rem !important; /* Compact font size */
     vertical-align: top !important;
 }
 
-#verb-modal tr:last-child td {
+.card-back tr:last-child td {
     border-bottom: none !important;
 }
 
-#verb-modal .pronoun-de {
+.card-back .pronoun-de {
     font-weight: 700 !important;
     color: #ffffff !important;
 }
 
-#verb-modal .pronoun-es {
-    font-size: 0.72rem !important;
-    color: #94a3b8 !important;
-    font-weight: normal !important;
-}
-
-#verb-modal .example-de {
+.card-back .example-de {
     font-weight: 600 !important;
     color: #38bdf8 !important; /* Light blue for German example */
     cursor: pointer !important;
 }
 
-#verb-modal .example-translation {
-    font-size: 0.74rem !important;
+.card-back .example-translation {
+    font-size: 0.7rem !important;
     color: #94a3b8 !important;
     font-style: italic !important;
 }
 
-/* Docked Card Footer navigation tabs */
-#verb-modal .modal-tabs-nav {
-    background-color: #1e293b !important;
-    border-top: 1px solid #334155 !important;
-    padding: 8px 12px !important;
-    border-radius: 0 0 20px 20px !important;
-    display: flex;
-    gap: 6px;
-    overflow-x: auto !important;
-    white-space: nowrap !important;
-    scrollbar-width: none !important;
-}
-
-#verb-modal .modal-tabs-nav::-webkit-scrollbar {
-    display: none !important;
-}
-
-#verb-modal .modal-tab-btn {
-    background: rgba(var(--modal-theme-rgb, 59, 130, 246), 0.12) !important;
-    color: var(--modal-theme, #3b82f6) !important;
-    border: 1px solid rgba(var(--modal-theme-rgb, 59, 130, 246), 0.25) !important;
-    border-radius: 6px !important;
-    padding: 6px 12px !important;
-    font-weight: 700;
-    font-size: 0.78rem; /* Compact tabs font size */
-    transition: all 0.2s ease;
-    cursor: pointer;
-    flex: 0 0 auto !important;
-    min-width: auto !important;
-    text-align: center;
-}
-
-#verb-modal .modal-tab-btn:hover {
-    background: rgba(var(--modal-theme-rgb, 59, 130, 246), 0.28) !important;
-    color: #ffffff !important;
-}
-
-#verb-modal .modal-tab-btn.active {
-    background: var(--modal-theme, #3b82f6) !important;
-    color: #ffffff !important;
-    border-color: var(--modal-theme, #3b82f6) !important;
-    box-shadow: none !important;
+/* Collapsible lists on back face */
+.card-back-wf-item, .card-back-wfeld-item, .card-back-saetze-item {
+    font-size: 0.76rem !important;
+    line-height: 1.35 !important;
+    padding: 4px 6px !important;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 4px;
 }
 
 /* ==========================================
