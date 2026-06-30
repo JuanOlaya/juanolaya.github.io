@@ -5557,67 +5557,80 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 }
 
 /* Tiempos overview styling */
-.tiempos-overview-list {
+/* Zeiten Sub-tabs Buttons showing conjugation form above and tense name below */
+.zeiten-sub-tabs {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background-color: #1e293b !important;
-    padding: 8px !important;
-    border-radius: 6px !important;
-    border: 1px solid #334155 !important;
+    gap: 4px;
     margin-bottom: 8px;
-}
-
-.tiempos-overview-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.76rem !important;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
-    padding-bottom: 3px;
-}
-.tiempos-overview-row:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.tiempos-overview-tense {
-    color: #94a3b8 !important;
-    font-weight: 500;
-}
-
-.tiempos-overview-form {
-    color: #f1f5f9 !important;
-    font-weight: 700;
-}
-
-/* Tiempos Sub-tabs */
-.tiempos-sub-tabs {
-    display: flex;
-    gap: 3px;
-    margin-bottom: 6px;
     overflow-x: auto;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
 }
-.tiempos-sub-tabs::-webkit-scrollbar {
+.zeiten-sub-tabs::-webkit-scrollbar {
     display: none;
 }
-
-.tiempos-sub-tab-btn {
-    padding: 3px 6px !important;
-    font-size: 0.7rem !important;
-    font-weight: 700 !important;
-    border-radius: 4px !important;
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    color: #94a3b8 !important;
+.zeiten-sub-tab-btn {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03) !important;
     border: 1px solid #334155 !important;
+    border-radius: 6px !important;
+    padding: 5px 6px !important;
     cursor: pointer !important;
-    flex: 1;
+    transition: all 0.2s;
+    min-width: 72px;
+}
+.zeiten-sub-tab-btn.active {
+    background: var(--card-theme, #3b82f6) !important;
+    border-color: var(--card-theme, #3b82f6) !important;
+    box-shadow: 0 2px 6px rgba(var(--card-theme-rgb, 59, 130, 246), 0.3) !important;
+}
+.zeiten-sub-tab-form {
+    font-size: 0.8rem !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
     text-align: center;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+.zeiten-sub-tab-name {
+    font-size: 0.62rem !important;
+    color: #94a3b8 !important;
+    font-style: italic !important;
+    margin-top: 1px;
+    text-transform: capitalize;
+}
+.zeiten-sub-tab-btn.active .zeiten-sub-tab-name {
+    color: rgba(255, 255, 255, 0.8) !important;
 }
 
-.tiempos-sub-tab-btn.active {
-    background-color: var(--card-theme, #3b82f6) !important;
+/* Wortschatz Toggle Buttons */
+.wortschatz-toggles-container {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+.wortschatz-toggle-btn {
+    flex: 1;
+    text-align: center;
+    padding: 6px 4px !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    color: #94a3b8 !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid #334155 !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    transition: all 0.2s;
+}
+.wortschatz-toggle-btn.active {
+    background: var(--card-theme, #3b82f6) !important;
     color: #ffffff !important;
     border-color: var(--card-theme, #3b82f6) !important;
 }
@@ -5630,7 +5643,7 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
     border-radius: 6px !important;
     overflow: hidden !important;
     border: 1px solid #334155 !important;
-    font-size: 0.74rem !important;
+    font-size: 0.72rem !important;
 }
 
 .card-back th {
@@ -5642,10 +5655,10 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 }
 
 .card-back td {
-    padding: 4px 6px !important;
+    padding: 3px 6px !important;
     border-bottom: 1px solid #334155 !important;
     color: #f1f5f9 !important;
-    vertical-align: top !important;
+    vertical-align: middle !important;
 }
 
 .card-back tr:last-child td {
@@ -5653,6 +5666,11 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 }
 
 .card-back .pronoun-de {
+    font-weight: 700 !important;
+    color: #94a3b8 !important;
+}
+
+.card-back .conj-de-form {
     font-weight: 700 !important;
     color: #ffffff !important;
 }
@@ -5664,8 +5682,8 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 }
 
 .card-back .example-translation {
-    font-size: 0.7rem !important;
-    color: #94a3b8 !important;
+    font-size: 0.68rem !important;
+    color: #cbd5e1 !important;
     font-style: italic !important;
 }
 
