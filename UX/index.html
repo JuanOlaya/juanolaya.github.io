@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infografía Interactiva: Principios Esenciales de UX y Laws of UX</title>
-    <!-- Tailwind CSS para un diseño moderno y fluido -->
+    <title>Infografía Interactiva de UX & Co-Piloto Multifuncional Gemini</title>
+    <!-- Tailwind CSS para diseño moderno y fluido -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter para máxima legibilidad -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- MathJax para renderizar fórmulas matemáticas LaTeX como 7 \pm 2 (Seguro de usar) -->
+    <!-- MathJax para renderizar fórmulas matemáticas LaTeX de manera nativa -->
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         body {
@@ -17,11 +17,18 @@
         }
         /* Animaciones personalizadas */
         .fade-in {
-            animation: fadeIn 0.5s ease-out;
+            animation: fadeIn 0.4s ease-out;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        .pulse-loader {
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.02); opacity: 1; }
         }
     </style>
 </head>
@@ -32,8 +39,8 @@
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div class="max-w-6xl mx-auto relative z-10 text-center md:text-left">
             <div class="flex flex-wrap items-center gap-2 mb-3 justify-center md:justify-start">
-                <span class="bg-indigo-500/20 text-indigo-300 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-indigo-500/30">
-                    Guía de Usabilidad & UI
+                <span class="bg-indigo-500/20 text-indigo-300 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-indigo-500/30 animate-pulse">
+                    Centro de Experiencia UX + Gemini AI Hub (4.0)
                 </span>
                 <a href="https://lawsofux.com/" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-3 py-1 rounded-full border border-slate-700 flex items-center gap-1 transition-all">
                     <span>Visitar Laws of UX ↗</span>
@@ -43,16 +50,30 @@
                 La Anatomía de la Experiencia de Usuario
             </h1>
             <p class="text-slate-300 mt-4 text-base md:text-lg max-w-3xl leading-relaxed">
-                ¿Por qué los usuarios se frustran en tu aplicación? Explora de forma interactiva los problemas de navegación más comunes y aprende cómo la psicología humana define el diseño de interfaces.
+                Explora visual e interactivamente los problemas de navegación tradicionales. Ahora potenciado con un **Super-Hub de Inteligencia Artificial de Google Gemini** para auditar interfaces, rediseñar layouts, generar prototipos y simular entrevistas bilingües.
             </p>
         </div>
     </header>
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="max-w-6xl mx-auto px-4 py-12 space-y-16">
+    <!-- MENÚ DE NAVEGACIÓN RÁPIDA -->
+    <nav class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-slate-200 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap gap-2 justify-center sm:justify-start">
+            <a href="#concept-overload" class="text-xs font-semibold px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors">1. Sobrecarga Cognitiva</a>
+            <a href="#concept-disclosure" class="text-xs font-semibold px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors">2. Divulgación Progresiva</a>
+            <a href="#concept-hick" class="text-xs font-semibold px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors">3. Ley de Hick</a>
+            <span class="w-px h-4 bg-slate-300 self-center hidden sm:inline"></span>
+            <a href="#gemini-hub" class="text-xs font-bold px-3 py-1.5 rounded-lg text-indigo-600 bg-indigo-50 hover:bg-indigo-100 transition-colors flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 24 24"><path d="M12 2a1 1 0 0 1 .897.553l1.832 3.662 4.04.587a1 1 0 0 1 .554 1.706l-2.923 2.85 1.05 4.341a1 1 0 0 1-1.496 1.087L12 14.828l-3.954 2.08a1 1 0 0 1-1.496-1.087l1.05-4.341-2.923-2.85a1 1 0 0 1 .554-1.706l4.04-.587 1.832-3.662A1 1 0 0 1 12 2z"/></svg>
+                Gemini AI Hub
+            </a>
+        </div>
+    </nav>
 
-        <!-- CONCEPT 1: SOBRECARGA COGNITIVA -->
-        <section class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-16">
+
+        <!-- SECCIÓN 1: SOBRECARGA COGNITIVA -->
+        <section id="concept-overload" class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden scroll-mt-20">
             <div class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
                 <!-- Explicación -->
@@ -91,7 +112,6 @@
                             
                             <div>
                                 <h4 class="text-xs font-bold text-slate-400 mb-2">TAB COMPONENT V2.4</h4>
-                                <!-- Tablas y tabs absurdas -->
                                 <div class="flex flex-wrap gap-1 mb-3">
                                     <span class="text-[9px] bg-indigo-600 text-white px-2 py-0.5 rounded font-bold cursor-pointer">Verbo Básico</span>
                                     <span class="text-[9px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded cursor-pointer">Pasado simple</span>
@@ -109,7 +129,6 @@
                                     <p class="text-[10px] font-semibold text-slate-700">Ejemplo principal:</p>
                                     <p class="text-[9px] italic text-slate-600">"Ich spreche ein bisschen Deutsch, pero sigo aprendiendo con dedicación todos los días."</p>
                                     
-                                    <!-- Ruido innecesario -->
                                     <div class="mt-2 pt-2 border-t border-slate-100 grid grid-cols-2 gap-1 text-[8px] text-slate-400">
                                         <span>ID: #9284-A</span>
                                         <span>Creado: 2026-03-10</span>
@@ -119,7 +138,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Botones confusos -->
                             <div class="mt-4 flex flex-wrap gap-1.5 pt-3 border-t border-rose-100">
                                 <button class="bg-emerald-500 text-white text-[9px] px-2 py-1 rounded font-bold hover:bg-emerald-600">Guardar</button>
                                 <button class="bg-sky-500 text-white text-[9px] px-2 py-1 rounded font-bold">Marcar como Importante</button>
@@ -158,7 +176,6 @@
                                 </div>
                             </div>
 
-                            <!-- Botones simplificados y jerarquizados -->
                             <div class="mt-4 flex items-center justify-between pt-3 border-t border-emerald-100">
                                 <button class="text-slate-500 hover:text-slate-700 text-xs font-semibold">Opciones</button>
                                 <button class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-1.5 px-4 rounded-lg shadow-sm transition-all">
@@ -173,8 +190,8 @@
             </div>
         </section>
 
-        <!-- CONCEPT 2: DIVULGACIÓN PROGRESIVA Y SU RELACIÓN CON LAS LEYES DE UX -->
-        <section class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+        <!-- SECCIÓN 2: DIVULGACIÓN PROGRESIVA -->
+        <section id="concept-disclosure" class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden scroll-mt-20">
             <div class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
                 <!-- Explicación de la técnica y las leyes -->
@@ -193,7 +210,6 @@
                         </span>
                     </div>
 
-                    <!-- NUEVAS EXPLICACIONES INTEGRADAS -->
                     <div class="space-y-3">
                         <p class="text-slate-700 leading-relaxed text-sm">
                             Consiste en <strong>mostrar solo la información esencial de inicio</strong>, ocultando los detalles avanzados o secundarios hasta que el usuario decida explorarlos de forma explícita.
@@ -202,7 +218,6 @@
                             Evitamos "saturar" visualmente. Al modular la entrega de información en capas (acordeones, pestañas sencillas o tooltips), el aprendizaje y la navegación se vuelven fluidos y sin fricciones.
                         </p>
                         
-                        <!-- Destacado del Beneficio Clave -->
                         <div class="p-4 bg-emerald-50/80 border-l-4 border-emerald-500 rounded-r-xl shadow-sm">
                             <p class="text-xs text-emerald-950 font-medium leading-relaxed">
                                 <strong class="text-emerald-800 font-bold block mb-0.5">💡 Beneficio clave:</strong> 
@@ -217,7 +232,6 @@
 
                     <!-- Tarjetas de las Leyes que soluciona -->
                     <div class="space-y-4 pt-2">
-                        
                         <!-- 1. Ley de Tesler -->
                         <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:shadow-md transition-all">
                             <div class="flex justify-between items-start">
@@ -225,7 +239,7 @@
                                 <a href="https://lawsofux.com/teslers-law/" target="_blank" rel="noopener noreferrer" class="text-[10px] text-slate-400 hover:text-indigo-600 transition-all font-semibold">Leer ley ↗</a>
                             </div>
                             <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                                Todo sistema tiene una complejidad inherente que no se puede reducir. La divulgación progresiva <strong>gestiona</strong> esta complejidad organizándola en flujos secundarios para que el usuario no la cargue mentalmente.
+                                Todo sistema tiene una complejidad inherente que no se puede reducir. La divulgación progresiva <strong>gestiona</strong> esta complejidad organizándola en flujos secundarios.
                             </p>
                         </div>
 
@@ -238,7 +252,7 @@
                                 <a href="https://lawsofux.com/millers-law/" target="_blank" rel="noopener noreferrer" class="text-[10px] text-slate-400 hover:text-indigo-600 transition-all font-semibold">Leer ley ↗</a>
                             </div>
                             <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                                Solo podemos retener temporalmente un promedio de \(7 \pm 2\) elementos en la memoria de trabajo. Esta técnica fragmenta la información en "chunks" o bloques digeribles y los muestra por demanda.
+                                Solo podemos retener temporalmente un promedio de \(7 \pm 2\) elementos en la memoria. Esta técnica fragmenta la información en bloques digeribles.
                             </p>
                         </div>
 
@@ -249,18 +263,21 @@
                                 <a href="https://lawsofux.com/hicks-law/" target="_blank" rel="noopener noreferrer" class="text-[10px] text-slate-400 hover:text-indigo-600 transition-all font-semibold">Leer ley ↗</a>
                             </div>
                             <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
-                                El tiempo de decisión crece con el número y complejidad de opciones. Ocultar los detalles avanzados por defecto permite al usuario interactuar de forma inmediata sin sufrir parálisis por análisis.
+                                El tiempo de decisión crece con el número y complejidad de opciones. Ocultar los detalles por defecto evita la parálisis por análisis.
                             </p>
                         </div>
-
                     </div>
                 </div>
 
-                <!-- Interactivo: Ejemplo con aprendizaje de Alemán (Verbo Sprechen) -->
+                <!-- Interactivo: Ejemplo con aprendizaje de Alemán y Audio TTS -->
                 <div class="lg:col-span-7 space-y-6">
                     <div class="flex justify-between items-center">
                         <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Demo Interactiva con Sprechen</h3>
-                        <span class="text-[11px] bg-slate-100 text-slate-500 px-2 py-1 rounded">Haz clic para interactuar</span>
+                        <!-- Botón de Audio con Gemini TTS -->
+                        <button onclick="playTTS('Sprechen. El verbo sprechen significa hablar en alemán. Es un verbo irregular de nivel básico.')" id="tts-speak-btn" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+                            <span id="tts-status">Escuchar Pronunciación</span>
+                        </button>
                     </div>
 
                     <!-- Tarjeta interactiva con Divulgación Progresiva -->
@@ -274,11 +291,11 @@
                             <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2 py-1 rounded font-bold border border-emerald-500/20">A1-A2</span>
                         </div>
 
-                        <!-- Capa 1: Información Esencial (Siempre Visible - Satisface Miller's Law) -->
+                        <!-- Capa 1: Información Esencial (Siempre Visible) -->
                         <div class="bg-slate-800/50 rounded-xl p-4 border border-slate-800">
                             <div class="flex justify-between items-center mb-1">
                                 <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Presente (Información Clave)</span>
-                                <span class="text-[9px] text-indigo-300 bg-indigo-950 px-1.5 rounded">Cumple Miller (Pocos elementos)</span>
+                                <span class="text-[9px] text-indigo-300 bg-indigo-950 px-1.5 rounded">Cumple Miller</span>
                             </div>
                             <div class="grid grid-cols-2 gap-2 mt-2 text-sm text-slate-200">
                                 <div>ich <span class="text-indigo-400 font-bold">spreche</span></div>
@@ -288,7 +305,7 @@
                             </div>
                         </div>
 
-                        <!-- Capa 2: Información Revelada a Petición (Satisface Ley de Tesler e Hick) -->
+                        <!-- Capa 2: Información Revelada a Petición -->
                         <div class="space-y-3">
                             <!-- Botón Acordeón 1: Pasado -->
                             <div class="border border-slate-800 rounded-xl overflow-hidden">
@@ -332,8 +349,8 @@
             </div>
         </section>
 
-        <!-- CONCEPT 3: LEY DE HICK -->
-        <section class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+        <!-- SECCIÓN 3: LEY DE HICK -->
+        <section id="concept-hick" class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden scroll-mt-20">
             <div class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
                 <!-- Explicación -->
@@ -355,9 +372,6 @@
                     </p>
                     <p class="text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
                         Fórmula científica: <code class="text-indigo-700 font-mono text-xs">\(T = b \cdot \log_2(n + 1)\)</code>.
-                    </p>
-                    <p class="text-slate-600 leading-relaxed">
-                        Cuanto más saturada de opciones (botones, enlaces, menús desplegables) esté tu interfaz, más lento será el proceso de navegación de tu usuario, causándole fatiga innecesaria.
                     </p>
                 </div>
 
@@ -389,9 +403,7 @@
                             <div class="text-sm font-semibold text-rose-500 mb-2">
                                 ESCENARIO A: Encuentra y haz clic en "GUARDAR" entre 24 opciones idénticas
                             </div>
-                            <div class="grid grid-cols-3 sm:grid-cols-4 gap-2" id="grid-buttons-a">
-                                <!-- Botones inyectados por Javascript de forma desordenada -->
-                            </div>
+                            <div class="grid grid-cols-3 sm:grid-cols-4 gap-2" id="grid-buttons-a"></div>
                         </div>
 
                         <!-- TEST ESCENARIO B (POCAS OPCIONES - OPTIMIZADO) -->
@@ -452,10 +464,357 @@
             </div>
         </section>
 
+
+        <!-- SECCIÓN 4: AI GEMINI HUB (CENTRO INTERACTIVO MULTIFUNCIONAL) -->
+        <section id="gemini-hub" class="bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 text-white rounded-3xl p-6 md:p-10 shadow-xl border border-indigo-800 space-y-8 scroll-mt-20">
+            
+            <div class="border-b border-indigo-800 pb-6 flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4">
+                <div>
+                    <div class="flex items-center gap-2 text-indigo-400">
+                        <span class="h-2 w-2 rounded-full bg-indigo-400 animate-ping"></span>
+                        <span class="text-xs font-bold tracking-widest uppercase">Módulo Copilot Activo</span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight mt-1 text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-indigo-300">
+                        Centro Inteligente Gemini AI
+                    </h2>
+                </div>
+                
+                <!-- Pestañas de Navegación del Hub de IA -->
+                <div class="flex flex-wrap gap-2 w-full xl:w-auto">
+                    <button onclick="switchAITab('audit-tab')" id="btn-audit-tab" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all">
+                        🔍 Auditor & Rediseño UI
+                    </button>
+                    <button onclick="switchAITab('proto-tab')" id="btn-proto-tab" class="bg-slate-800 hover:bg-indigo-950/40 text-slate-300 text-xs font-bold px-4 py-2.5 rounded-xl border border-indigo-900 transition-all">
+                        🎨 Generar Prototipo (Imagen 4)
+                    </button>
+                    <button onclick="switchAITab('interview-tab')" id="btn-interview-tab" class="bg-slate-800 hover:bg-indigo-950/40 text-slate-300 text-xs font-bold px-4 py-2.5 rounded-xl border border-indigo-900 transition-all">
+                        🇩🇪 Entrevista UX Alemán
+                    </button>
+                    <button onclick="switchAITab('grounding-tab')" id="btn-grounding-tab" class="bg-slate-800 hover:bg-indigo-950/40 text-slate-300 text-xs font-bold px-4 py-2.5 rounded-xl border border-indigo-900 transition-all">
+                        🌐 Consultor UX (Grounding)
+                    </button>
+                    <button onclick="switchAITab('quiz-tab')" id="btn-quiz-tab" class="bg-slate-800 hover:bg-indigo-950/40 text-slate-300 text-xs font-bold px-4 py-2.5 rounded-xl border border-indigo-900 transition-all">
+                        🎲 Examen UX (JSON)
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTENIDO DE PESTAÑAS -->
+
+            <!-- PESTAÑA 1: AUDITOR Y REDISEÑADOR MULTIMODAL (IMAGE-TO-IMAGE) -->
+            <div id="ai-audit-content" class="fade-in space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <span>🔍 Auditor & Rediseñador de Interfaces</span>
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Sube una captura de tu interfaz. Gemini la auditará visualmente y, si lo deseas, **rediseñará el layout** generando un wireframe limpio y optimizado aplicando las leyes de usabilidad.
+                        </p>
+                        
+                        <div class="bg-slate-950/40 border border-indigo-950 p-4 rounded-2xl flex flex-col gap-3">
+                            <span class="text-xs font-bold text-indigo-400">¿No tienes una captura a mano?</span>
+                            <p class="text-xs text-slate-400">
+                                Haz clic en el botón de abajo para generar de manera simulada una interfaz extremadamente caótica en canvas y enviarla a analizar y rediseñar.
+                            </p>
+                            <button onclick="auditSampleCanvas()" class="w-full bg-indigo-600/30 hover:bg-indigo-600/50 border border-indigo-700 text-indigo-200 text-xs font-bold py-2.5 px-4 rounded-xl transition-all">
+                                ⚡ Generar UI Caótica de Prueba
+                            </button>
+                        </div>
+
+                        <div class="border-2 border-dashed border-indigo-800 hover:border-indigo-500 rounded-2xl p-6 text-center cursor-pointer transition-all bg-indigo-950/10 hover:bg-indigo-950/20" id="drop-zone" onclick="document.getElementById('image-upload').click()">
+                            <svg class="w-8 h-8 text-indigo-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            <p class="text-xs font-bold">Arrastra tu captura de pantalla o haz clic para subir</p>
+                            <input type="file" id="image-upload" class="hidden" accept="image/*" onchange="handleImageUpload(event)">
+                        </div>
+                    </div>
+
+                    <!-- Reportes / Diagnósticos visuales -->
+                    <div class="bg-slate-950 rounded-2xl p-6 border border-indigo-950 min-h-[350px] flex flex-col justify-center relative overflow-hidden">
+                        <canvas id="mock-canvas" class="hidden"></canvas>
+
+                        <!-- Estado Inicial -->
+                        <div id="audit-initial" class="text-center space-y-3">
+                            <span class="inline-block p-4 bg-indigo-950/50 text-indigo-400 rounded-full">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            </span>
+                            <h4 class="font-bold text-slate-300 text-sm">Esperando interfaz...</h4>
+                            <p class="text-xs text-slate-500 max-w-xs mx-auto">Sube una imagen o usa la de prueba para activar el análisis.</p>
+                        </div>
+
+                        <!-- Cargando -->
+                        <div id="audit-loading" class="hidden text-center space-y-4 pulse-loader">
+                            <svg class="w-8 h-8 animate-spin mx-auto text-indigo-400" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            <h4 class="font-bold text-indigo-300 text-sm" id="audit-loading-text">Gemini está analizando la interfaz...</h4>
+                        </div>
+
+                        <!-- Reporte Listo -->
+                        <div id="audit-report" class="hidden space-y-4 text-xs">
+                            <div class="flex justify-between items-center pb-2 border-b border-indigo-900">
+                                <h4 class="font-bold text-sm text-indigo-400 flex items-center gap-2">
+                                    <span>📋 Diagnóstico & Rediseño de Usabilidad IA</span>
+                                </h4>
+                                <span class="bg-indigo-900 text-indigo-300 text-[10px] py-0.5 px-2 rounded-full font-mono">Gemini-2.5-Flash</span>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-slate-900/60 p-3 rounded-xl border border-indigo-950/50 flex flex-col items-center">
+                                    <span class="text-slate-400 font-bold block mb-1">Imagen Auditada</span>
+                                    <img id="audit-preview-img" class="max-h-24 object-contain rounded border border-slate-800" src="" alt="Captura auditada">
+                                </div>
+                                <div class="bg-slate-900/60 p-3 rounded-xl border border-indigo-950/50 flex flex-col items-center hidden" id="redesign-result-container">
+                                    <span class="text-emerald-400 font-bold block mb-1">✨ Rediseño Producido (Image-to-Image)</span>
+                                    <img id="redesign-preview-img" class="max-h-24 object-contain rounded border border-emerald-900" src="" alt="Rediseño IA">
+                                </div>
+                            </div>
+
+                            <div class="space-y-2 bg-slate-900/40 p-4 rounded-xl border border-indigo-950" id="audit-feedback-block">
+                                <!-- Se poblará por JS -->
+                            </div>
+
+                            <div class="flex gap-2 pt-2">
+                                <button onclick="triggerRedesign()" id="btn-redesign-ia" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all flex items-center justify-center gap-1">
+                                    <span>✨ Rediseñar Layout (Image-to-Image)</span>
+                                </button>
+                                <button onclick="resetAudit()" class="border border-slate-700 hover:bg-slate-900 text-slate-300 font-bold py-2 px-4 rounded-xl text-xs transition-all">
+                                    Limpiar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PESTAÑA 2: GENERADOR DE PROTOTIPOS VISUALES (IMAGEN 4) -->
+            <div id="ai-proto-content" class="hidden fade-in space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <span>🎨 Generador de Wireframes & Mockups UX (Imagen 4)</span>
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Escribe una descripción textual del tipo de interfaz o componente que deseas prototipar. La IA de última generación **Imagen 4** generará el diseño visual al instante.
+                        </p>
+
+                        <div class="space-y-3">
+                            <label class="block text-xs font-bold text-indigo-400 uppercase">Selecciona una plantilla o escribe tu prompt:</label>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button onclick="setProtoPrompt('Un formulario de login móvil limpio con dos campos, un botón de ingresar prominente y un enlace discreto de recuperar contraseña')" class="bg-slate-800 hover:bg-slate-700 text-[10px] text-slate-300 py-1 px-2.5 rounded-lg transition-all border border-slate-700">Login Minimalista</button>
+                                <button onclick="setProtoPrompt('Un dashboard para aprender alemán que muestra el verbo sprechen, con diseño limpio, un reproductor de audio simple y un botón de completado')" class="bg-slate-800 hover:bg-slate-700 text-[10px] text-slate-300 py-1 px-2.5 rounded-lg transition-all border border-slate-700">Dashboard de Idiomas</button>
+                                <button onclick="setProtoPrompt('Un panel administrativo extremadamente caótico lleno de gráficos superpuestos, 30 botones de colores saturados y alertas de error por doquier')" class="bg-slate-800 hover:bg-slate-700 text-[10px] text-slate-300 py-1 px-2.5 rounded-lg transition-all border border-slate-700">UI de Sobrecarga Cognitiva</button>
+                            </div>
+
+                            <textarea id="proto-prompt-input" rows="3" class="w-full bg-slate-950 text-white border border-indigo-950 rounded-xl p-3 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none placeholder-slate-600" placeholder="Describe el diseño que quieres que Imagen 4 renderice..."></textarea>
+                            
+                            <button onclick="generatePrototype()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition-all shadow-md">
+                                🚀 Generar Prototipo con Imagen 4
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Contenedor del Prototipo Producido -->
+                    <div class="bg-slate-950 rounded-2xl p-6 border border-indigo-950 min-h-[350px] flex flex-col justify-center items-center relative overflow-hidden">
+                        
+                        <!-- Estado inicial -->
+                        <div id="proto-initial" class="text-center space-y-3">
+                            <span class="inline-block p-4 bg-indigo-950/50 text-indigo-400 rounded-full">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            </span>
+                            <h4 class="font-bold text-slate-300 text-sm">Esperando instrucciones...</h4>
+                            <p class="text-xs text-slate-500 max-w-xs mx-auto">Selecciona una plantilla o escribe tu propio prompt para generar el diseño visual de referencia.</p>
+                        </div>
+
+                        <!-- Cargando -->
+                        <div id="proto-loading" class="hidden text-center space-y-4 pulse-loader">
+                            <svg class="w-8 h-8 animate-spin mx-auto text-indigo-400" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            <h4 class="font-bold text-indigo-300 text-sm">Imagen 4 está sintetizando tu prototipo gráfico...</h4>
+                        </div>
+
+                        <!-- Resultado -->
+                        <div id="proto-result" class="hidden space-y-4 w-full text-center">
+                            <span class="text-xs text-emerald-400 font-bold uppercase block">✨ Mockup Producido por Imagen 4</span>
+                            <img id="proto-image-result" class="max-h-[250px] mx-auto object-contain rounded-xl border border-slate-800 shadow-xl" src="" alt="Prototipo Generado">
+                            <p class="text-[10px] text-slate-500 max-w-sm mx-auto" id="proto-caption"></p>
+                            <button onclick="resetProto()" class="text-xs text-slate-400 hover:text-white underline">Generar otro</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PESTAÑA 3: COPILOTO DE ENTREVISTA EN ALEMÁN (CON TTS EN TIEMPO REAL) -->
+            <div id="ai-interview-content" class="hidden fade-in space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <div class="lg:col-span-5 space-y-4">
+                        <div class="flex items-center space-x-2 text-rose-400">
+                            <span class="px-2 py-0.5 bg-rose-950 border border-rose-800 rounded text-[10px] font-mono">BILINGÜE</span>
+                            <span class="text-xs font-bold tracking-wider uppercase">Alemán & UX</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">🇩🇪 Simulador de Entrevista UX</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Simula una entrevista técnica para un puesto de Diseñador de Interfaces en una startup en Berlín. 
+                        </p>
+                        <p class="text-slate-400 text-xs leading-relaxed bg-slate-950/40 p-3 rounded-xl border border-indigo-950">
+                            La IA te hablará en **alemán formal**, proveerá la **traducción al español** entre corchetes, y **leerá automáticamente en voz alta** el texto en alemán mediante el sintetizador de alta fidelidad **Gemini TTS**. ¡La forma más inmersiva de practicar!
+                        </p>
+                        <div class="flex gap-2">
+                            <button onclick="playLastGermanResponse()" id="interview-replay-btn" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold py-2 px-4 rounded-xl text-xs transition-all flex items-center justify-center gap-1">
+                                🔊 Repetir Pregunta en Voz Alta
+                            </button>
+                            <button onclick="resetInterview()" class="text-xs text-slate-400 hover:text-white underline px-2">Reiniciar</button>
+                        </div>
+                    </div>
+
+                    <!-- Chat de la entrevista -->
+                    <div class="lg:col-span-7 bg-slate-950 rounded-2xl border border-indigo-950 p-4 flex flex-col h-[400px]">
+                        <div id="interview-chatbox" class="flex-1 overflow-y-auto space-y-3 pr-2 scrollbar-thin">
+                            <!-- Mensaje inicial inyectado por JS -->
+                        </div>
+
+                        <!-- Entrada de respuesta -->
+                        <div class="mt-3 pt-3 border-t border-indigo-950/50 flex gap-2">
+                            <input id="interview-user-input" type="text" class="flex-1 bg-slate-900 border border-indigo-950 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Escribe tu respuesta en alemán o español..." onkeydown="if(event.key === 'Enter') sendInterviewMessage()">
+                            <button onclick="sendInterviewMessage()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition-all">
+                                Responder
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PESTAÑA 4: CONSULTOR UX CON BÚSQUEDA DE GROUNDING (GOOGLE SEARCH) -->
+            <div id="ai-grounding-content" class="hidden fade-in space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <div class="lg:col-span-5 space-y-4">
+                        <div class="flex items-center space-x-2 text-emerald-400">
+                            <span class="px-2 py-0.5 bg-emerald-950 border border-emerald-800 rounded text-[10px] font-mono">CONEXIÓN WEB</span>
+                            <span class="text-xs font-bold tracking-wider uppercase">Google Search Grounding</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">🌐 Consultor Técnico UX en Tiempo Real</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Resuelve dilemas y debates reales de interfaz consultando de manera directa las últimas publicaciones de la web mediante **Google Search Grounding**.
+                        </p>
+                        <p class="text-slate-400 text-xs">
+                            A diferencia de los chats normales de IA que pueden alucinar, Gemini comprobará sus datos consultando internet y listará las referencias usadas para fundamentar su respuesta.
+                        </p>
+                        
+                        <div class="space-y-2 pt-2">
+                            <span class="text-xs font-bold text-slate-500 block uppercase">Preguntas frecuentes sugeridas:</span>
+                            <button onclick="setGroundingQuery('¿Cuál es el consenso actual sobre el debate de scroll infinito vs paginación en interfaces móviles de comercio electrónico?')" class="w-full text-left bg-slate-900 hover:bg-slate-800 border border-indigo-950/50 p-2.5 rounded-xl text-[11px] text-slate-300 transition-all">
+                                🔗 Scroll Infinito vs Paginación (2026)
+                            </button>
+                            <button onclick="setGroundingQuery('¿Cómo se aplica la Ley de Hick en los menús de navegación de Realidad Virtual y Aumentada actualmente?')" class="w-full text-left bg-slate-900 hover:bg-slate-800 border border-indigo-950/50 p-2.5 rounded-xl text-[11px] text-slate-300 transition-all">
+                                🔗 Ley de Hick en VR/AR
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Consola del consultor -->
+                    <div class="lg:col-span-7 bg-slate-950 rounded-2xl border border-indigo-950 p-6 flex flex-col h-[400px] justify-between">
+                        
+                        <div id="grounding-output-container" class="flex-1 overflow-y-auto space-y-4 pr-2">
+                            <div class="text-center text-slate-500 my-auto flex flex-col items-center justify-center h-full space-y-2" id="grounding-placeholder">
+                                <svg class="w-8 h-8 text-slate-600 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <p class="text-xs">Formula una consulta para activar la búsqueda en Google...</p>
+                            </div>
+
+                            <div id="grounding-result-box" class="hidden space-y-4 text-xs text-slate-300">
+                                <div>
+                                    <span class="font-bold text-indigo-400 block mb-1">🔍 Consulta Realizada:</span>
+                                    <p class="italic text-white" id="grounding-question-label"></p>
+                                </div>
+                                <div class="bg-slate-900 p-4 rounded-xl border border-indigo-950 leading-relaxed text-slate-200" id="grounding-response-text">
+                                    <!-- Aquí se inyecta la respuesta -->
+                                </div>
+                                <div>
+                                    <span class="font-bold text-emerald-400 block mb-1">🔗 Fuentes y Referencias (Google Search):</span>
+                                    <ul class="space-y-1 text-[11px]" id="grounding-sources-list">
+                                        <!-- Enlaces -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cargador -->
+                        <div id="grounding-loading" class="hidden text-center space-y-2 py-8 my-auto">
+                            <svg class="w-6 h-6 animate-spin mx-auto text-indigo-400" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            <p class="text-xs text-indigo-300">Buscando fuentes, contrastando información y sintetizando respuesta técnica...</p>
+                        </div>
+
+                        <!-- Campo para escribir consultas -->
+                        <div class="mt-4 pt-3 border-t border-indigo-950/50 flex gap-2">
+                            <input id="grounding-query-input" type="text" class="flex-1 bg-slate-900 border border-indigo-950 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Pregunta sobre tendencias de UX en la web..." onkeydown="if(event.key === 'Enter') runGroundingConsult()">
+                            <button onclick="runGroundingConsult()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition-all">
+                                Consultar
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PESTAÑA 5: EXAMEN DE CONCEPTOS CON IA -->
+            <div id="ai-quiz-content" class="hidden fade-in space-y-6">
+                <div class="max-w-2xl mx-auto space-y-4">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>🧠 Examen de Usabilidad con Gemini</span>
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Evaluemos lo aprendido. Generamos un cuestionario dinámico de 3 preguntas estructurado por Gemini sobre **Sobrecarga Cognitiva, Divulgación Progresiva y Ley de Hick**.
+                    </p>
+
+                    <div class="bg-slate-950 rounded-2xl p-6 border border-indigo-950 min-h-[250px] flex flex-col justify-center relative">
+                        <!-- Estado Inicial: Iniciar Quiz -->
+                        <div id="quiz-start-view" class="text-center space-y-4">
+                            <button onclick="generateQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-xl text-xs shadow-md transition-all">
+                                🎲 Generar Examen Personalizado de IA
+                            </button>
+                            <p class="text-[10px] text-slate-500">Usa Inteligencia Artificial para evaluar tu comprensión en tiempo real.</p>
+                        </div>
+
+                        <!-- Estado Cargando -->
+                        <div id="quiz-loading" class="hidden text-center space-y-4 pulse-loader">
+                            <svg class="w-8 h-8 text-indigo-400 mx-auto animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            <h4 class="font-bold text-indigo-300 text-xs">Estructurando un examen personalizado...</h4>
+                        </div>
+
+                        <!-- Estado En Juego (Quiz Activo) -->
+                        <div id="quiz-game-view" class="hidden space-y-4">
+                            <div class="flex justify-between items-center border-b border-indigo-900 pb-2">
+                                <span class="text-xs font-bold text-indigo-400" id="quiz-question-index">Pregunta 1 de 3</span>
+                                <span class="text-[10px] bg-indigo-950 text-indigo-300 px-2.5 py-0.5 rounded-full font-semibold">Gemini Structured JSON</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-white" id="quiz-question-text">¿Cargando pregunta?</h4>
+                            <div class="grid grid-cols-1 gap-2" id="quiz-answers-container">
+                                <!-- Botones de respuestas inyectados por JS -->
+                            </div>
+                        </div>
+
+                        <!-- Estado de Resultados -->
+                        <div id="quiz-results-view" class="hidden text-center space-y-4">
+                            <h4 class="font-black text-xl text-white">🏆 ¡Quiz Terminado!</h4>
+                            <p class="text-sm text-indigo-300" id="quiz-score-summary">Has acertado 0 de 3 preguntas.</p>
+                            <div class="p-4 bg-indigo-950/40 rounded-xl border border-indigo-900 text-left max-h-48 overflow-y-auto" id="quiz-explanations">
+                                <!-- Respuestas correctas y por qué -->
+                            </div>
+                            <button onclick="resetQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-xl text-xs transition-all">
+                                Intentar con otro examen
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-400 py-12 px-6 text-center text-sm border-t border-slate-800 mt-16">
+    <footer class="bg-slate-900 text-slate-400 py-12 px-6 text-center text-sm border-t border-slate-800">
         <div class="max-w-6xl mx-auto space-y-4">
             <p class="font-semibold text-slate-200">
                 "La simplicidad es la máxima sofisticación." — Steve Jobs
@@ -509,17 +868,13 @@
             
             // Creamos 23 palabras aleatorias del pool + 1 "Guardar"
             const currentPool = [...optionsPool];
-            // Barajar un poco
             currentPool.sort(() => Math.random() - 0.5);
             
-            // Tomar 23
             const selectedOptions = currentPool.slice(0, 23);
             selectedOptions.push("Guardar");
             
-            // Volver a barajar con el "Guardar" incluido para que esté en posición aleatoria
             selectedOptions.sort(() => Math.random() - 0.5);
 
-            // Generar botones en el HTML
             selectedOptions.forEach(text => {
                 const btn = document.createElement('button');
                 btn.className = "bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold py-2 px-1 rounded-lg border border-slate-200 transition-colors duration-150 active:bg-slate-300";
@@ -533,13 +888,11 @@
                 grid.appendChild(btn);
             });
 
-            // Mostrar el test A y registrar el inicio del temporizador
             document.getElementById('hick-test-a').classList.remove('hidden');
             startTimeA = performance.now();
         }
 
         function wrongHickClick(scenario) {
-            // Un toque visual rápido para indicar error
             const container = document.getElementById('game-container');
             container.classList.add('bg-rose-50');
             setTimeout(() => {
@@ -552,11 +905,9 @@
                 endTimeA = performance.now();
                 timeA = Math.round(endTimeA - startTimeA);
                 
-                // Transición al escenario B
                 document.getElementById('hick-test-a').classList.add('hidden');
                 document.getElementById('hick-test-b').classList.remove('hidden');
                 
-                // Pequeño retardo aleatorio corto antes de activar el temporizador de B para evitar clics accidentales inmediatos
                 setTimeout(() => {
                     startTimeB = performance.now();
                 }, 400);
@@ -564,7 +915,6 @@
                 endTimeB = performance.now();
                 timeB = Math.round(endTimeB - startTimeB);
                 
-                // Mostrar resultados
                 document.getElementById('hick-test-b').classList.add('hidden');
                 showResults();
             }
@@ -574,7 +924,6 @@
             document.getElementById('time-result-a').innerText = `${timeA} ms`;
             document.getElementById('time-result-b').innerText = `${timeB} ms`;
             
-            // Calcular mejora
             let diff = timeA - timeB;
             let percent = 0;
             if (timeA > 0) {
@@ -593,19 +942,829 @@
             document.getElementById('hick-results').classList.remove('hidden');
         }
 
-        // Aseguramos compatibilidad con MathJax si actualiza dinámicamente
-        window.addEventListener('load', () => {
-            if (window.MathJax) {
-                window.MathJax.typesetPromise();
-            }
-        });
-
         function resetHickTest() {
             timeA = 0;
             timeB = 0;
             document.getElementById('hick-results').classList.add('hidden');
             document.getElementById('game-intro').classList.remove('hidden');
         }
+
+
+        
+        // 3. LOGICA Y LLAMADAS A LA API DE GOOGLE GEMINI (CON BACKOFF EXPONENCIAL)
+        const apiKey = ""; // Se inyecta automáticamente en el entorno de ejecución
+
+        // Helper genérico para llamadas API seguras con reintento exponencial
+        async function callGeminiAPI(modelEndpoint, payload) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelEndpoint}?key=${apiKey}`;
+            let delay = 1000;
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (response.ok) {
+                        return await response.json();
+                    }
+                    if (response.status === 429 || response.status >= 500) {
+                        // Espera con backoff exponencial
+                        await new Promise(r => setTimeout(r, delay));
+                        delay *= 2;
+                        continue;
+                    }
+                    const errText = await response.text();
+                    throw new Error(`Error API ${response.status}: ${errText}`);
+                } catch (err) {
+                    if (i === 4) throw err;
+                    await new Promise(r => setTimeout(r, delay));
+                    delay *= 2;
+                }
+            }
+        }
+
+        // Cambiar entre pestañas en el Hub de IA
+        function switchAITab(tabName) {
+            const tabButtons = {
+                'audit-tab': 'btn-audit-tab',
+                'proto-tab': 'btn-proto-tab',
+                'interview-tab': 'btn-interview-tab',
+                'grounding-tab': 'btn-grounding-tab',
+                'quiz-tab': 'btn-quiz-tab'
+            };
+
+            const tabContents = {
+                'audit-tab': 'ai-audit-content',
+                'proto-tab': 'ai-proto-content',
+                'interview-tab': 'ai-interview-content',
+                'grounding-tab': 'ai-grounding-content',
+                'quiz-tab': 'ai-quiz-content'
+            };
+
+            // Resetear clases de todos los botones y secciones
+            Object.keys(tabButtons).forEach(key => {
+                const btn = document.getElementById(tabButtons[key]);
+                const content = document.getElementById(tabContents[key]);
+                if (btn) {
+                    if (key === tabName) {
+                        btn.className = "bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all";
+                    } else {
+                        btn.className = "bg-slate-800 hover:bg-indigo-950/40 text-slate-300 text-xs font-bold px-4 py-2.5 rounded-xl border border-indigo-900 transition-all";
+                    }
+                }
+                if (content) {
+                    if (key === tabName) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Acción secundaria al activar la pestaña de entrevista para iniciarla si es primera vez
+            if (tabName === 'interview-tab' && interviewHistory.length === 1) {
+                initializeInterview();
+            }
+        }
+
+        // --- CONVERSOR PCM16 A AUDIO WAV (SOPORTE TTS) ---
+        function base64ToArrayBuffer(base64) {
+            const binaryString = window.atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        function pcmToWav(pcm16, sampleRate) {
+            const buffer = new ArrayBuffer(44 + pcm16.length * 2);
+            const view = new DataView(buffer);
+            
+            const writeString = (v, offset, str) => {
+                for (let i = 0; i < str.length; i++) {
+                    v.setUint8(offset + i, str.charCodeAt(i));
+                }
+            };
+            
+            writeString(view, 0, 'RIFF');
+            view.setUint32(4, 36 + pcm16.length * 2, true);
+            writeString(view, 8, 'WAVE');
+            writeString(view, 12, 'fmt ');
+            view.setUint32(16, 16, true);
+            view.setUint16(20, 1, true); // PCM Mono
+            view.setUint16(22, 1, true);
+            view.setUint32(24, sampleRate, true);
+            view.setUint32(28, sampleRate * 2, true);
+            view.setUint16(32, 2, true);
+            view.setUint16(34, 16, true);
+            writeString(view, 36, 'data');
+            view.setUint32(40, pcm16.length * 2, true);
+            
+            let offset = 44;
+            for (let i = 0; i < pcm16.length; i++, offset += 2) {
+                view.setInt16(offset, pcm16[i], true);
+            }
+            return new Blob([buffer], { type: 'audio/wav' });
+        }
+
+        let audioSource = null;
+        async function playTTS(text, sourceBtnId = "tts-speak-btn", statusLabelId = "tts-status") {
+            const statusLabel = document.getElementById(statusLabelId);
+            const playBtn = document.getElementById(sourceBtnId);
+            
+            if (audioSource) {
+                audioSource.pause();
+                audioSource = null;
+                if (statusLabel) statusLabel.innerText = "Escuchar Pronunciación";
+                if (playBtn) playBtn.classList.remove('pulse-loader');
+                return;
+            }
+
+            if (statusLabel) statusLabel.innerText = "IA Hablando...";
+            if (playBtn) playBtn.classList.add('pulse-loader');
+
+            // Limpiar brackets en español para que el lector solo hable en alemán formal
+            const cleanText = text.replace(/\[.*?\]/g, "").replace(/\(.*?\)/g, "").trim();
+
+            try {
+                const payload = {
+                    contents: [{ parts: [{ text: `Say in a warm, formal, professional educational tone: ${cleanText}` }] }],
+                    generationConfig: {
+                        responseModalities: ["AUDIO"],
+                        speechConfig: {
+                            voiceConfig: {
+                                voiceName: "Kore" // Voz premium ideal para educación/alemán
+                            }
+                        }
+                    }
+                };
+
+                const result = await callGeminiAPI("gemini-2.5-flash-preview-tts:generateContent", payload);
+                const part = result?.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+
+                if (audioData && mimeType && mimeType.startsWith("audio/")) {
+                    const sampleRate = parseInt(mimeType.match(/rate=(\d+)/)?.[1] || "24000", 10);
+                    const pcmData = base64ToArrayBuffer(audioData);
+                    const pcm16 = new Int16Array(pcmData);
+                    const wavBlob = pcmToWav(pcm16, sampleRate);
+                    const audioUrl = URL.createObjectURL(wavBlob);
+                    
+                    audioSource = new Audio(audioUrl);
+                    audioSource.play();
+                    audioSource.onended = () => {
+                        if (statusLabel) statusLabel.innerText = "Escuchar Pronunciación";
+                        if (playBtn) playBtn.classList.remove('pulse-loader');
+                        audioSource = null;
+                    };
+                } else {
+                    throw new Error("Formato no válido");
+                }
+            } catch (error) {
+                console.error("Gemini TTS Error:", error);
+                if (statusLabel) statusLabel.innerText = "No disponible temporalmente";
+                if (playBtn) playBtn.classList.remove('pulse-loader');
+                setTimeout(() => {
+                    if (statusLabel) statusLabel.innerText = "Escuchar Pronunciación";
+                }, 3000);
+            }
+        }
+
+
+        // --- TAB 1: AUDITOR MULTIMODAL & REDISEÑADOR (IMAGE-TO-IMAGE) ---
+        let uploadedImageBase64 = null;
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImageBase64 = e.target.result.split(',')[1];
+                document.getElementById('audit-preview-img').src = e.target.result;
+                triggerAudit();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function auditSampleCanvas() {
+            const canvas = document.getElementById('mock-canvas');
+            canvas.width = 400;
+            canvas.height = 300;
+            const ctx = canvas.getContext('2d');
+
+            // Dibujar un mock de dashboard ultra denso de idiomas
+            ctx.fillStyle = '#1e1b4b';
+            ctx.fillRect(0, 0, 400, 300);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 11px Inter';
+            ctx.fillText('GERMAN VERB COMPLEX MANAGER v1.99', 12, 22);
+
+            // Botones e inputs innecesarios
+            ctx.fillStyle = '#b91c1c';
+            ctx.fillRect(12, 40, 90, 16);
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '8px Inter';
+            ctx.fillText('BORRAR TODO', 20, 51);
+
+            ctx.fillStyle = '#1e293b';
+            for (let i = 0; i < 9; i++) {
+                const x = 12 + (i % 3) * 125;
+                const y = 65 + Math.floor(i / 3) * 25;
+                ctx.fillRect(x, y, 115, 18);
+                ctx.fillStyle = '#475569';
+                ctx.strokeRect(x, y, 115, 18);
+                ctx.fillStyle = '#94a3b8';
+                ctx.fillText(`Pestaña auxiliar ${i+1}`, x + 5, y + 12);
+            }
+
+            // Una tabla ruidosa llena de conjugaciones al mismo tiempo
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(12, 150, 376, 120);
+            ctx.fillStyle = '#334155';
+            ctx.font = '7px Inter';
+            ctx.fillText('ich spreche - wir sprechen - du sprichst - ihr sprecht - er spricht - sie sprechen', 20, 170);
+            ctx.fillText('Pasado: ich sprach - wir sprachen - du sprachst - ihr spracht - er sprach - sie sprachen', 20, 195);
+            ctx.fillText('Perfecto: ich habe gesprochen - wir haben gesprochen - du hast gesprochen', 20, 220);
+            ctx.fillText('Pluscuamperfecto: ich hatte gesprochen - wir hatten gesprochen', 20, 245);
+
+            uploadedImageBase64 = canvas.toDataURL('image/png').split(',')[1];
+            document.getElementById('audit-preview-img').src = canvas.toDataURL('image/png');
+            
+            // Forzar renderizado y disparar auditoría
+            triggerAudit();
+        }
+
+        async function triggerAudit() {
+            if (!uploadedImageBase64) return;
+
+            document.getElementById('audit-initial').classList.add('hidden');
+            document.getElementById('audit-loading').classList.remove('hidden');
+            document.getElementById('audit-loading-text').innerText = "Anizando la captura de pantalla...";
+            document.getElementById('audit-report').classList.add('hidden');
+            document.getElementById('redesign-result-container').classList.add('hidden');
+
+            const systemPrompt = `Actúa como un Auditor de Usabilidad de Software Senior de nivel mundial.
+            Analiza visualmente la captura de pantalla provista para diagnosticar la interfaz según las leyes cognitivas de UX (Sobrecarga Cognitiva, Divulgación Progresiva, Ley de Hick).
+            Genera un reporte estrictamente formateado como un JSON plano con estas claves exactas:
+            {
+               "sobrecarga_score": un entero de 1 a 10 de calificación (donde 10 es un diseño perfecto y libre de sobrecarga, y 1 es el peor caos),
+               "sobrecarga_feedback": "Explicación breve de lo que viste en la captura sobre la sobrecarga cognitiva",
+               "disclosure_score": entero de 1 a 10,
+               "disclosure_feedback": "Explicación breve de cómo aplica o no la divulgación progresiva",
+               "hick_score": entero de 1 a 10,
+               "hick_feedback": "Explicación de cómo el diseño afecta al tiempo de toma de decisiones del usuario",
+               "resumen_general": "Recomendación de mejoras críticas de diseño para esta interfaz."
+            }`;
+
+            const payload = {
+                contents: [{
+                    role: "user",
+                    parts: [
+                        { text: "Analiza visualmente esta interfaz según los estándares de usabilidad de Laws of UX." },
+                        { inlineData: { mimeType: "image/png", data: uploadedImageBase64 } }
+                    ]
+                }],
+                generationConfig: { responseMimeType: "application/json" },
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            try {
+                const result = await callGeminiAPI("gemini-2.5-flash-preview-09-2025:generateContent", payload);
+                const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                const data = JSON.parse(jsonText);
+
+                const scoresContainer = document.getElementById('audit-scores');
+                scoresContainer.innerHTML = `
+                    <div class="flex justify-between items-center py-1 border-b border-indigo-950">
+                        <span class="text-slate-400">🧠 Sobrecarga Cognitiva:</span>
+                        <span class="font-bold ${data.sobrecarga_score >= 7 ? 'text-emerald-400' : 'text-rose-400'}">${data.sobrecarga_score}/10</span>
+                    </div>
+                    <div class="flex justify-between items-center py-1 border-b border-indigo-950">
+                        <span class="text-slate-400">⏱️ Divulgación Progresiva:</span>
+                        <span class="font-bold ${data.disclosure_score >= 7 ? 'text-emerald-400' : 'text-rose-400'}">${data.disclosure_score}/10</span>
+                    </div>
+                    <div class="flex justify-between items-center py-1 border-b border-indigo-950">
+                        <span class="text-slate-400">⚡ Ley de Hick:</span>
+                        <span class="font-bold ${data.hick_score >= 7 ? 'text-emerald-400' : 'text-rose-400'}">${data.hick_score}/10</span>
+                    </div>
+                `;
+
+                document.getElementById('audit-feedback-block').innerHTML = `
+                    <p class="font-bold text-white mb-2 text-xs uppercase text-indigo-400">Diagnóstico del Auditor:</p>
+                    <ul class="space-y-2 text-slate-300">
+                        <li><strong>Sobrecarga:</strong> ${data.sobrecarga_feedback}</li>
+                        <li><strong>Divulgación:</strong> ${data.disclosure_feedback}</li>
+                        <li><strong>Ley de Hick:</strong> ${data.hick_feedback}</li>
+                    </ul>
+                    <div class="mt-4 pt-3 border-t border-indigo-900 text-indigo-200">
+                        <strong>💡 Sugerencia del Auditor:</strong> ${data.resumen_general}
+                    </div>
+                `;
+
+                document.getElementById('audit-loading').classList.add('hidden');
+                document.getElementById('audit-report').classList.remove('hidden');
+
+            } catch (error) {
+                console.error("Multimodal Audit Error:", error);
+                resetAudit();
+                alert("Hubo un error al diagnosticar la interfaz con la IA. Asegúrate de que las credenciales estén activas.");
+            }
+        }
+
+        // REDISEÑO IMAGE-TO-IMAGE
+        async function triggerRedesign() {
+            if (!uploadedImageBase64) return;
+
+            document.getElementById('audit-report').classList.add('hidden');
+            document.getElementById('audit-loading').classList.remove('hidden');
+            document.getElementById('audit-loading-text').innerText = "Generando rediseño visual de baja fidelidad (Image-to-Image)...";
+
+            const prompt = "Rediseña la captura de pantalla de interfaz provista. Crea un mockup de baja fidelidad (wireframe) optimizado, sumamente limpio y estético, eliminando la sobrecarga cognitiva, aplicando la Ley de Hick con pocas opciones y escondiendo lo avanzado con divulgación progresiva. Devuelve la nueva imagen de wireframe en tu respuesta.";
+
+            const payload = {
+                contents: [{
+                    parts: [
+                        { text: prompt },
+                        { inlineData: { mimeType: "image/png", data: uploadedImageBase64 } }
+                    ]
+                }],
+                generationConfig: {
+                    responseModalities: ["TEXT", "IMAGE"]
+                }
+            };
+
+            try {
+                // Utilizando el modelo de edición / image-to-image soportado
+                const result = await callGeminiAPI("gemini-2.5-flash-image-preview:generateContent", payload);
+                const generatedParts = result.candidates?.[0]?.content?.parts;
+                
+                const base64Img = generatedParts?.find(p => p.inlineData)?.inlineData?.data;
+                const feedbackText = generatedParts?.find(p => p.text)?.text;
+
+                if (base64Img) {
+                    document.getElementById('redesign-preview-img').src = `data:image/png;base64,${base64Img}`;
+                    document.getElementById('redesign-result-container').classList.remove('hidden');
+                }
+
+                if (feedbackText) {
+                    document.getElementById('audit-feedback-block').innerHTML += `
+                        <div class="mt-4 pt-4 border-t border-emerald-950 text-emerald-200">
+                            <strong class="text-emerald-400 block mb-1">📐 Notas del Rediseño Producido:</strong>
+                            <p>${feedbackText}</p>
+                        </div>
+                    `;
+                }
+
+                document.getElementById('audit-loading').classList.add('hidden');
+                document.getElementById('audit-report').classList.remove('hidden');
+                
+                // Ocultar botón de rediseño una vez ejecutado para evitar loops
+                document.getElementById('btn-redesign-ia').classList.add('hidden');
+
+            } catch (error) {
+                console.error("Image-to-Image Error:", error);
+                document.getElementById('audit-loading').classList.add('hidden');
+                document.getElementById('audit-report').classList.remove('hidden');
+                alert("La función de rediseño gráfico (Image-to-Image) no pudo completarse en esta iteración.");
+            }
+        }
+
+        // --- TAB 2: GENERADOR DE PROTOTIPOS VISUALES (IMAGEN 4) ---
+        function setProtoPrompt(text) {
+            document.getElementById('proto-prompt-input').value = text;
+        }
+
+        async function generatePrototype() {
+            const promptText = document.getElementById('proto-prompt-input').value.trim();
+            if (!promptText) {
+                alert("Por favor, introduce un prompt.");
+                return;
+            }
+
+            document.getElementById('proto-initial').classList.add('hidden');
+            document.getElementById('proto-loading').classList.remove('hidden');
+            document.getElementById('proto-result').classList.add('hidden');
+
+            const payload = {
+                instances: [{ prompt: `${promptText}, wireframe layout, clean UI, modern, minimal mobile design, vector illustration style` }],
+                parameters: { sampleCount: 1 }
+            };
+
+            try {
+                const result = await callGeminiAPI("imagen-4.0-generate-001:predict", payload);
+                const base64Encoded = result.predictions?.[0]?.bytesBase64Encoded;
+
+                if (base64Encoded) {
+                    const imgUrl = `data:image/png;base64,${base64Encoded}`;
+                    document.getElementById('proto-image-result').src = imgUrl;
+                    document.getElementById('proto-caption').innerText = `Prompt: "${promptText}"`;
+                    
+                    document.getElementById('proto-loading').classList.add('hidden');
+                    document.getElementById('proto-result').classList.remove('hidden');
+                } else {
+                    throw new Error("No se devolvió imagen");
+                }
+            } catch (error) {
+                console.error("Imagen 4 Error:", error);
+                resetProto();
+                alert("Hubo un error al generar la imagen con Imagen 4. Por favor, asegúrate de que el backend soporte Imagen 4 en el ambiente.");
+            }
+        }
+
+        function resetProto() {
+            document.getElementById('proto-initial').classList.remove('hidden');
+            document.getElementById('proto-loading').classList.add('hidden');
+            document.getElementById('proto-result').classList.add('hidden');
+            document.getElementById('proto-prompt-input').value = '';
+        }
+
+
+        // --- TAB 3: SIMULADOR DE ENTREVISTA EN ALEMÁN (TTS AUTO-PLAY CON BRACKETS EN ESPAÑOL) ---
+        let interviewHistory = [
+            {
+                role: "user",
+                parts: [{ text: "Hola. Actúa como un reclutador de diseño UX de Alemania de alta exigencia para una startup berlinesa. Inicia la simulación de la entrevista técnica. Háblame en alemán formal y, para ayudarme a aprender, incluye la traducción del mensaje al español entre corchetes [como esto]. Hazme la primera pregunta conceptual combinando el idioma alemán y conceptos de usabilidad (Ley de Hick o Divulgación Progresiva)." }]
+            }
+        ];
+        let lastGermanResponse = "";
+
+        async function initializeInterview() {
+            const chatbox = document.getElementById('interview-chatbox');
+            chatbox.innerHTML = `
+                <div class="text-center text-slate-500 py-10 pulse-loader">
+                    <span class="text-xs">Iniciando simulador y conectando con el entrevistador de IA...</span>
+                </div>
+            `;
+
+            try {
+                const payload = {
+                    contents: interviewHistory,
+                    systemInstruction: {
+                        parts: [{ text: "Eres un reclutador técnico de diseño UX en Alemania. Conduce la entrevista de manera formal. Proporciona siempre la traducción al español en un bloque con corchetes [ ] al final de cada párrafo de tus mensajes." }]
+                    }
+                };
+
+                const result = await callGeminiAPI("gemini-2.5-flash-preview-09-2025:generateContent", payload);
+                const responseText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                // Registrar en el historial de conversación
+                interviewHistory.push({
+                    role: "model",
+                    parts: [{ text: responseText }]
+                });
+
+                lastGermanResponse = responseText;
+                renderInterviewChat();
+
+                // Reproducir automáticamente el audio en alemán
+                playTTS(lastGermanResponse, "interview-replay-btn", null);
+
+            } catch (error) {
+                console.error("Interview Initialization Error:", error);
+                chatbox.innerHTML = `<p class="text-xs text-rose-400 text-center py-10">Fallo de conexión en el simulador de entrevista bilingüe.</p>`;
+            }
+        }
+
+        function renderInterviewChat() {
+            const chatbox = document.getElementById('interview-chatbox');
+            chatbox.innerHTML = '';
+
+            // Saltarse el primer mensaje del prompt de configuración
+            for (let i = 1; i < interviewHistory.length; i++) {
+                const turn = interviewHistory[i];
+                const isModel = turn.role === "model";
+                
+                const bubble = document.createElement('div');
+                bubble.className = `flex ${isModel ? 'justify-start' : 'justify-end'} fade-in mb-3`;
+                
+                const inner = document.createElement('div');
+                inner.className = `max-w-[85%] rounded-2xl p-3.5 text-xs ${isModel ? 'bg-slate-900 border border-slate-800 text-slate-200' : 'bg-indigo-600 text-white'}`;
+                
+                // Formatear texto para que los corchetes de traducción resalten
+                let htmlContent = turn.parts[0].text;
+                if (isModel) {
+                    htmlContent = htmlContent.replace(/\[(.*?)\]/g, `<span class="block mt-2 pt-2 border-t border-slate-800 text-slate-400 italic font-sans">🇪🇸 $1</span>`);
+                }
+                
+                inner.innerHTML = htmlContent;
+                bubble.appendChild(inner);
+                chatbox.appendChild(bubble);
+            }
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        async function sendInterviewMessage() {
+            const inputEl = document.getElementById('interview-user-input');
+            const text = inputEl.value.trim();
+            if (!text) return;
+
+            inputEl.value = '';
+            
+            // Inyectar respuesta del usuario en el chat
+            interviewHistory.push({
+                role: "user",
+                parts: [{ text: text }]
+            });
+
+            renderInterviewChat();
+
+            // Mensaje de carga para el bot
+            const chatbox = document.getElementById('interview-chatbox');
+            const typingBubble = document.createElement('div');
+            typingBubble.id = "interview-typing";
+            typingBubble.className = "flex justify-start fade-in";
+            typingBubble.innerHTML = `
+                <div class="bg-slate-900 border border-slate-800 text-slate-400 rounded-2xl p-3.5 text-xs pulse-loader">
+                    El entrevistador está escuchando y procesando tu respuesta en usabilidad...
+                </div>
+            `;
+            chatbox.appendChild(typingBubble);
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+            try {
+                const payload = {
+                    contents: interviewHistory,
+                    systemInstruction: {
+                        parts: [{ text: "Eres un entrevistador de UX en Berlín. Sigue la conversación en base a las respuestas de usabilidad del usuario. Siempre incluye la traducción al español en corchetes [ ] al final de tus párrafos." }]
+                    }
+                };
+
+                const result = await callGeminiAPI("gemini-2.5-flash-preview-09-2025:generateContent", payload);
+                const responseText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                // Remover el mensaje de carga
+                const loader = document.getElementById('interview-typing');
+                if (loader) loader.remove();
+
+                interviewHistory.push({
+                    role: "model",
+                    parts: [{ text: responseText }]
+                });
+
+                lastGermanResponse = responseText;
+                renderInterviewChat();
+
+                // Reproducir el alemán automáticamente
+                playTTS(lastGermanResponse, "interview-replay-btn", null);
+
+            } catch (error) {
+                console.error("Interview response error:", error);
+                const loader = document.getElementById('interview-typing');
+                if (loader) loader.remove();
+                alert("Se perdió la conexión con el entrevistador.");
+            }
+        }
+
+        function playLastGermanResponse() {
+            if (lastGermanResponse) {
+                playTTS(lastGermanResponse, "interview-replay-btn", null);
+            }
+        }
+
+        function resetInterview() {
+            interviewHistory = [
+                {
+                    role: "user",
+                    parts: [{ text: "Hola. Actúa como un reclutador de diseño UX de Alemania de alta exigencia para una startup berlinesa. Inicia la simulación de la entrevista técnica. Háblame en alemán formal y, para ayudarme a aprender, incluye la traducción del mensaje al español entre corchetes [como esto]. Hazme la primera pregunta conceptual combinando el idioma alemán y conceptos de usabilidad (Ley de Hick o Divulgación Progresiva)." }]
+                }
+            ];
+            lastGermanResponse = "";
+            if (audioSource) {
+                audioSource.pause();
+                audioSource = null;
+            }
+            initializeInterview();
+        }
+
+
+        // --- TAB 4: CONSULTOR UX CON BÚSQUEDA DE GROUNDING (GOOGLE SEARCH) ---
+        function setGroundingQuery(text) {
+            document.getElementById('grounding-query-input').value = text;
+        }
+
+        async function runGroundingConsult() {
+            const query = document.getElementById('grounding-query-input').value.trim();
+            if (!query) return;
+
+            document.getElementById('grounding-placeholder').classList.add('hidden');
+            document.getElementById('grounding-result-box').classList.add('hidden');
+            document.getElementById('grounding-loading').classList.remove('hidden');
+
+            document.getElementById('grounding-question-label').innerText = query;
+
+            const payload = {
+                contents: [{ parts: [{ text: query }] }],
+                // Habilitamos la herramienta de Google Search para grounding en tiempo real
+                tools: [{ "google_search": {} }]
+            };
+
+            try {
+                const result = await callGeminiAPI("gemini-2.5-flash-preview-09-2025:generateContent", payload);
+                
+                const responseText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                const attributions = result.candidates?.[0]?.groundingMetadata?.groundingAttributions || [];
+
+                // Cargar respuesta
+                document.getElementById('grounding-response-text').innerText = responseText;
+
+                // Cargar fuentes citadas
+                const sourcesContainer = document.getElementById('grounding-sources-list');
+                sourcesContainer.innerHTML = '';
+
+                if (attributions.length > 0) {
+                    attributions.forEach(attr => {
+                        const title = attr.web?.title || attr.web?.uri || "Fuente Web de Usabilidad";
+                        const uri = attr.web?.uri;
+                        if (uri) {
+                            const li = document.createElement('li');
+                            li.innerHTML = `
+                                <a href="${uri}" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 font-medium underline flex items-center gap-1">
+                                    <span>• ${title}</span>
+                                    <svg class="w-2.5 h-2.5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                </a>
+                            `;
+                            sourcesContainer.appendChild(li);
+                        }
+                    });
+                } else {
+                    sourcesContainer.innerHTML = `<li class="text-slate-500 italic">No se citaron fuentes externas directamente para este término de usabilidad común.</li>`;
+                }
+
+                document.getElementById('grounding-loading').classList.add('hidden');
+                document.getElementById('grounding-result-box').classList.remove('hidden');
+                document.getElementById('grounding-query-input').value = '';
+
+            } catch (error) {
+                console.error("Grounding UX Consult Error:", error);
+                document.getElementById('grounding-loading').classList.add('hidden');
+                document.getElementById('grounding-placeholder').classList.remove('hidden');
+                alert("La consulta no pudo completarse. Revisa la consola o tu conexión.");
+            }
+        }
+
+
+        // --- TAB 5: EXAMEN DE USABILIDAD (GEMINI STRUCTURED QUIZ) ---
+        let currentQuestions = [];
+        let currentQuestionIdx = 0;
+        let score = 0;
+        let selectedAnswers = [];
+
+        async function generateQuiz() {
+            document.getElementById('quiz-start-view').classList.add('hidden');
+            document.getElementById('quiz-loading').classList.remove('hidden');
+
+            const systemPrompt = `Actúa como un profesor de diseño interactivo de interfaces y usabilidad web.
+            Genera un cuestionario interactivo de exactamente 3 preguntas de opción múltiple enfocadas en:
+            - Sobrecarga Cognitiva (Cognitive Overload)
+            - Divulgación Progresiva (Progressive Disclosure)
+            - Ley de Hick (Hick's Law)
+            Cada pregunta debe contener 4 opciones con un caso real de UI.
+            El formato de salida debe ser estrictamente un arreglo JSON con el siguiente esquema exacto:
+            [
+               {
+                  "question": "Texto de la pregunta de usabilidad",
+                  "options": ["Opción A", "Opción B", "Opción C", "Opción D"],
+                  "answer_index": 0, // Índice de la respuesta correcta (0 a 3)
+                  "explanation": "Breve explicación educativa de por qué esta es la opción correcta sustentada en usabilidad."
+               }
+            ]`;
+
+            const payload = {
+                contents: [{ parts: [{ text: "Genera 3 preguntas avanzadas y dinámicas de usabilidad basándote en la Ley de Hick, Miller y el caos visual." }] }],
+                generationConfig: {
+                    responseMimeType: "application/json"
+                },
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                }
+            };
+
+            try {
+                // Utilizando el modelo de texto general certificado en el ambiente de Canvas
+                const result = await callGeminiAPI("gemini-2.5-flash-preview-09-2025:generateContent", payload);
+                const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                currentQuestions = JSON.parse(jsonText);
+                
+                currentQuestionIdx = 0;
+                score = 0;
+                selectedAnswers = [];
+
+                document.getElementById('quiz-loading').classList.add('hidden');
+                document.getElementById('quiz-game-view').classList.remove('hidden');
+                renderQuizQuestion();
+
+            } catch (error) {
+                console.error("Quiz Generation Error:", error);
+                resetQuiz();
+                alert("No se pudo generar el examen por IA en este momento. Inténtalo de nuevo en unos segundos.");
+            }
+        }
+
+        function renderQuizQuestion() {
+            const currentQ = currentQuestions[currentQuestionIdx];
+            document.getElementById('quiz-question-index').innerText = `Pregunta ${currentQuestionIdx + 1} de 3`;
+            document.getElementById('quiz-question-text').innerText = currentQ.question;
+
+            const answersContainer = document.getElementById('quiz-answers-container');
+            answersContainer.innerHTML = '';
+
+            currentQ.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white p-3.5 rounded-xl border border-indigo-950 transition-all text-xs font-medium";
+                btn.innerText = opt;
+                btn.onclick = () => selectQuizAnswer(idx);
+                answersContainer.appendChild(btn);
+            });
+        }
+
+        function selectQuizAnswer(selectedIndex) {
+            const currentQ = currentQuestions[currentQuestionIdx];
+            selectedAnswers.push({
+                question: currentQ.question,
+                selected: selectedIndex,
+                correct: currentQ.answer_index,
+                explanation: currentQ.explanation
+            });
+
+            if (selectedIndex === currentQ.answer_index) {
+                score++;
+            }
+
+            if (currentQuestionIdx < 2) {
+                currentQuestionIdx++;
+                renderQuizQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-game-view').classList.add('hidden');
+            document.getElementById('quiz-results-view').classList.remove('hidden');
+
+            document.getElementById('quiz-score-summary').innerText = `Has acertado ${score} de 3 preguntas.`;
+
+            const explanationsContainer = document.getElementById('quiz-explanations');
+            explanationsContainer.innerHTML = '';
+
+            selectedAnswers.forEach((ans, i) => {
+                const item = document.createElement('div');
+                item.className = "mb-3 border-b border-indigo-900/50 pb-3 last:border-none last:mb-0 text-xs text-slate-300";
+                item.innerHTML = `
+                    <p class="font-bold text-white">${i+1}. ${ans.question}</p>
+                    <p class="mt-1">
+                        Tu respuesta: <span class="${ans.selected === ans.correct ? 'text-emerald-400 font-semibold' : 'text-rose-400 font-semibold'}">${currentQuestions[i].options[ans.selected]}</span>
+                    </p>
+                    ${ans.selected !== ans.correct ? `<p class="text-emerald-400">Correcta: ${currentQuestions[i].options[ans.correct]}</p>` : ''}
+                    <p class="italic text-slate-400 mt-1">💡 Explicación: ${ans.explanation}</p>
+                `;
+                explanationsContainer.appendChild(item);
+            });
+        }
+
+        function resetQuiz() {
+            document.getElementById('quiz-results-view').classList.add('hidden');
+            document.getElementById('quiz-start-view').classList.remove('hidden');
+            currentQuestions = [];
+            currentQuestionIdx = 0;
+            score = 0;
+            selectedAnswers = [];
+        }
+
+
+        // Registrar eventos de Drag & Drop para capturas de pantalla de interfaces
+        window.addEventListener('DOMContentLoaded', () => {
+            const dropZone = document.getElementById('drop-zone');
+            if (dropZone) {
+                ['dragenter', 'dragover'].forEach(eventName => {
+                    dropZone.addEventListener(eventName, (e) => {
+                        e.preventDefault();
+                        dropZone.classList.add('border-indigo-400', 'bg-indigo-950/30');
+                    }, false);
+                });
+
+                ['dragleave', 'drop'].forEach(eventName => {
+                    dropZone.addEventListener(eventName, (e) => {
+                        e.preventDefault();
+                        dropZone.classList.remove('border-indigo-400', 'bg-indigo-950/30');
+                    }, false);
+                });
+
+                dropZone.addEventListener('drop', (e) => {
+                    const dt = e.dataTransfer;
+                    const files = dt.files;
+                    if (files.length) {
+                        handleImageUpload({ target: { files } });
+                    }
+                }, false);
+            }
+        });
     </script>
 </body>
 </html>
