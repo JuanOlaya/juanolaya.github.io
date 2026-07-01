@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía Interactiva: Principios Esenciales de UX y Laws of UX</title>
+    <!-- Tailwind CSS para un diseño moderno y fluido -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter para máxima legibilidad -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- MathJax para renderizar fórmulas matemáticas LaTeX como 7 \pm 2 -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Animaciones personalizadas */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- HEADER DE LA INFOGRAFÍA -->
+    <header class="bg-gradient-to-r from-indigo-950 via-indigo-900 to-slate-900 text-white py-12 px-6 relative overflow-hidden border-b border-indigo-950">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-6xl mx-auto relative z-10 text-center md:text-left">
+            <div class="flex flex-wrap items-center gap-2 mb-3 justify-center md:justify-start">
+                <span class="bg-indigo-500/20 text-indigo-300 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-indigo-500/30">
+                    Guía de Usabilidad & UI
+                </span>
+                <a href="https://lawsofux.com/" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-3 py-1 rounded-full border border-slate-700 flex items-center gap-1 transition-all">
+                    <span>Visitar Laws of UX ↗</span>
+                </a>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-extrabold mt-1 tracking-tight">
+                La Anatomía de la Experiencia de Usuario
+            </h1>
+            <p class="text-slate-300 mt-4 text-base md:text-lg max-w-3xl leading-relaxed">
+                ¿Por qué los usuarios se frustran en tu aplicación? Explora de forma interactiva los problemas de navegación más comunes y aprende cómo la psicología humana define el diseño de interfaces.
+            </p>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="max-w-6xl mx-auto px-4 py-12 space-y-16">
+
+        <!-- CONCEPT 1: SOBRECARGA COGNITIVA -->
+        <section class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Explicación -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="flex items-center space-x-3 text-rose-500">
+                        <span class="p-2 bg-rose-50 rounded-lg">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        </span>
+                        <span class="text-sm font-bold tracking-wider uppercase">El Problema</span>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-950">1. Sobrecarga Cognitiva <br><span class="text-slate-500 text-lg font-medium">(Cognitive Overload)</span></h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        Ocurre cuando la cantidad de información, decisiones y elementos en pantalla supera la capacidad de procesamiento del cerebro humano. 
+                    </p>
+                    <p class="text-slate-600 leading-relaxed">
+                        Al intentar procesar pestañas, tablas, botones de colores y textos simultáneamente en un espacio reducido, el usuario experimenta fatiga, confusión y finalmente abandona el sitio.
+                    </p>
+                    <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl">
+                        <p class="text-sm text-amber-800 font-medium">
+                            <strong>Síntoma clave:</strong> El usuario se queda "paralizado" mirando la pantalla, sin saber cuál es el siguiente paso lógico.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Simulación Visual Interactive -->
+                <div class="lg:col-span-7 space-y-6">
+                    <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Demostración Visual</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Mal Diseño -->
+                        <div class="border-2 border-rose-100 rounded-2xl bg-rose-50/20 p-4 relative overflow-hidden flex flex-col justify-between min-h-[380px]">
+                            <div class="absolute top-2 right-2 bg-rose-100 text-rose-700 text-[10px] font-bold uppercase px-2 py-0.5 rounded">
+                                Mal Diseño (Caos)
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-400 mb-2">TAB COMPONENT V2.4</h4>
+                                <!-- Tablas y tabs absurdas -->
+                                <div class="flex flex-wrap gap-1 mb-3">
+                                    <span class="text-[9px] bg-indigo-600 text-white px-2 py-0.5 rounded font-bold cursor-pointer">Verbo Básico</span>
+                                    <span class="text-[9px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded cursor-pointer">Pasado simple</span>
+                                    <span class="text-[9px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded cursor-pointer">Perfecto</span>
+                                    <span class="text-[9px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded cursor-pointer">Ejemplos (25)</span>
+                                    <span class="text-[9px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded cursor-pointer">Reglas Gramaticales</span>
+                                </div>
+                                
+                                <div class="space-y-2 bg-white p-3 rounded-xl border border-rose-200">
+                                    <div class="flex justify-between items-center border-b border-slate-100 pb-1">
+                                        <span class="text-xs font-bold text-slate-700">Sprechen (hablar)</span>
+                                        <span class="text-[9px] bg-amber-100 text-amber-800 px-1 rounded">Irregular</span>
+                                    </div>
+                                    <p class="text-[10px] text-slate-500">Presens: ich spreche, du sprichst, er/sie/es spricht, wir sprechen, ihr sprecht, sie sprechen.</p>
+                                    <p class="text-[10px] font-semibold text-slate-700">Ejemplo principal:</p>
+                                    <p class="text-[9px] italic text-slate-600">"Ich spreche ein bisschen Deutsch, pero sigo aprendiendo con dedicación todos los días."</p>
+                                    
+                                    <!-- Ruido innecesario -->
+                                    <div class="mt-2 pt-2 border-t border-slate-100 grid grid-cols-2 gap-1 text-[8px] text-slate-400">
+                                        <span>ID: #9284-A</span>
+                                        <span>Creado: 2026-03-10</span>
+                                        <span>Nivel: A1-B2</span>
+                                        <span>Progreso: 12% completado</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Botones confusos -->
+                            <div class="mt-4 flex flex-wrap gap-1.5 pt-3 border-t border-rose-100">
+                                <button class="bg-emerald-500 text-white text-[9px] px-2 py-1 rounded font-bold hover:bg-emerald-600">Guardar</button>
+                                <button class="bg-sky-500 text-white text-[9px] px-2 py-1 rounded font-bold">Marcar como Importante</button>
+                                <button class="bg-rose-500 text-white text-[9px] px-2 py-1 rounded font-bold">Borrar</button>
+                                <button class="border border-slate-300 text-slate-600 text-[9px] px-2 py-1 rounded">Reset</button>
+                                <button class="bg-amber-500 text-white text-[9px] px-2 py-1 rounded font-bold">¿Ayuda?</button>
+                            </div>
+                        </div>
+
+                        <!-- Buen Diseño -->
+                        <div class="border-2 border-emerald-100 rounded-2xl bg-emerald-50/20 p-4 relative flex flex-col justify-between min-h-[380px]">
+                            <div class="absolute top-2 right-2 bg-emerald-100 text-emerald-700 text-[10px] font-bold uppercase px-2 py-0.5 rounded">
+                                Buen Diseño (Limpio)
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-xs font-bold text-emerald-600 uppercase mb-2">Tarjeta de Estudio</h4>
+                                
+                                <div class="bg-white p-5 rounded-xl border border-emerald-100 shadow-sm space-y-3">
+                                    <div class="flex justify-between items-baseline">
+                                        <h5 class="text-lg font-bold text-slate-900">Sprechen</h5>
+                                        <span class="text-xs text-indigo-600 font-medium">hablar</span>
+                                    </div>
+                                    
+                                    <div class="space-y-1">
+                                        <span class="text-[10px] text-slate-400 uppercase font-semibold">Presente simple</span>
+                                        <p class="text-xs text-slate-700 font-medium">du <span class="text-indigo-600 font-bold">sprichst</span> • er/sie/es <span class="text-indigo-600 font-bold">spricht</span></p>
+                                    </div>
+
+                                    <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                                        <span>Nivel A1</span>
+                                        <span class="flex items-center text-emerald-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1"></span> Regularizado
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Botones simplificados y jerarquizados -->
+                            <div class="mt-4 flex items-center justify-between pt-3 border-t border-emerald-100">
+                                <button class="text-slate-500 hover:text-slate-700 text-xs font-semibold">Opciones</button>
+                                <button class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-1.5 px-4 rounded-lg shadow-sm transition-all">
+                                    Marcar aprendido
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONCEPT 2: DIVULGACIÓN PROGRESIVA Y SU RELACIÓN CON LAS LEYES DE UX -->
+        <section class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Explicación de la técnica y las leyes -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="flex items-center space-x-3 text-indigo-600">
+                        <span class="p-2 bg-indigo-50 rounded-lg">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </span>
+                        <span class="text-sm font-bold tracking-wider uppercase">La Técnica</span>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <h2 class="text-2xl md:text-3xl font-bold text-slate-950">2. Divulgación Progresiva <br><span class="text-indigo-600 text-lg font-medium">(Progressive Disclosure)</span></h2>
+                        <span class="inline-block bg-indigo-50 text-indigo-700 text-[11px] font-semibold px-2.5 py-1 rounded border border-indigo-100">
+                            Patrón de interacción y diseño
+                        </span>
+                    </div>
+
+                    <!-- NUEVAS EXPLICACIONES INTEGRADAS -->
+                    <div class="space-y-3">
+                        <p class="text-slate-700 leading-relaxed text-sm">
+                            Consiste en <strong>mostrar solo la información esencial de inicio</strong>, ocultando los detalles avanzados o secundarios hasta que el usuario decida explorarlos de forma explícita.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            Evitamos "saturar" visualmente. Al modular la entrega de información en capas (acordeones, pestañas sencillas o tooltips), el aprendizaje y la navegación se vuelven fluidos y sin fricciones.
+                        </p>
+                        
+                        <!-- Destacado del Beneficio Clave -->
+                        <div class="p-4 bg-emerald-50/80 border-l-4 border-emerald-500 rounded-r-xl shadow-sm">
+                            <p class="text-xs text-emerald-950 font-medium leading-relaxed">
+                                <strong class="text-emerald-800 font-bold block mb-0.5">💡 Beneficio clave:</strong> 
+                                Reduce el miedo inicial a interfaces complejas. El usuario aprende "en trozos" digeribles.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-600 leading-relaxed text-xs pt-2">
+                        En el prestigioso compendio <a href="https://lawsofux.com/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 underline font-semibold hover:text-indigo-800">Laws of UX</a>, la Divulgación Progresiva es la técnica reina que sirve para hacer viables tres leyes fundamentales:
+                    </p>
+
+                    <!-- Tarjetas de las Leyes que soluciona -->
+                    <div class="space-y-4 pt-2">
+                        
+                        <!-- 1. Ley de Tesler -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:shadow-md transition-all">
+                            <div class="flex justify-between items-start">
+                                <h4 class="text-xs font-bold text-indigo-900 uppercase">1. Ley de Tesler (Complejidad)</h4>
+                                <a href="https://lawsofux.com/teslers-law/" target="_blank" rel="noopener noreferrer" class="text-[10px] text-slate-400 hover:text-indigo-600 transition-all font-semibold">Leer ley ↗</a>
+                            </div>
+                            <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                                Todo sistema tiene una complejidad inherente que no se puede reducir. La divulgación progresiva <strong>gestiona</strong> esta complejidad organizándola en flujos secundarios para que el usuario no la cargue mentalmente.
+                            </p>
+                        </div>
+
+                        <!-- 2. Ley de Miller -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:shadow-md transition-all">
+                            <div class="flex justify-between items-start">
+                                <h4 class="text-xs font-bold text-indigo-900 uppercase flex items-center gap-1">
+                                    2. Ley de Miller <span class="bg-indigo-100 text-indigo-800 text-[9px] px-1.5 rounded-full font-mono font-normal">\(7 \pm 2\)</span>
+                                </h4>
+                                <a href="https://lawsofux.com/millers-law/" target="_blank" rel="noopener noreferrer" class="text-[10px] text-slate-400 hover:text-indigo-600 transition-all font-semibold">Leer ley ↗</a>
+                            </div>
+                            <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                                Solo podemos retener temporalmente un promedio de \(7 \pm 2\) elementos en la memoria de trabajo. Esta técnica fragmenta la información en "chunks" o bloques digeribles y los muestra por demanda.
+                            </p>
+                        </div>
+
+                        <!-- 3. Ley de Hick -->
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:shadow-md transition-all">
+                            <div class="flex justify-between items-start">
+                                <h4 class="text-xs font-bold text-indigo-900 uppercase">3. Ley de Hick (Decisiones)</h4>
+                                <a href="https://lawsofux.com/hicks-law/" target="_blank" rel="noopener noreferrer" class="text-[10px] text-slate-400 hover:text-indigo-600 transition-all font-semibold">Leer ley ↗</a>
+                            </div>
+                            <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                                El tiempo de decisión crece con el número y complejidad de opciones. Ocultar los detalles avanzados por defecto permite al usuario interactuar de forma inmediata sin sufrir parálisis por análisis.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Interactivo: Ejemplo con aprendizaje de Alemán (Verbo Sprechen) -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Demo Interactiva con Sprechen</h3>
+                        <span class="text-[11px] bg-slate-100 text-slate-500 px-2 py-1 rounded">Haz clic para interactuar</span>
+                    </div>
+
+                    <!-- Tarjeta interactiva con Divulgación Progresiva -->
+                    <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-xl space-y-6 border border-slate-800">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Alemán Interactivo</span>
+                                <h4 class="text-2xl font-extrabold mt-1">Sprechen</h4>
+                                <p class="text-slate-400 text-xs">Verbo irregular • Significa "Hablar"</p>
+                            </div>
+                            <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2 py-1 rounded font-bold border border-emerald-500/20">A1-A2</span>
+                        </div>
+
+                        <!-- Capa 1: Información Esencial (Siempre Visible - Satisface Miller's Law) -->
+                        <div class="bg-slate-800/50 rounded-xl p-4 border border-slate-800">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Presente (Información Clave)</span>
+                                <span class="text-[9px] text-indigo-300 bg-indigo-950 px-1.5 rounded">Cumple Miller (Pocos elementos)</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 mt-2 text-sm text-slate-200">
+                                <div>ich <span class="text-indigo-400 font-bold">spreche</span></div>
+                                <div>wir <span class="text-indigo-400 font-bold">sprechen</span></div>
+                                <div>du <span class="text-indigo-400 font-bold">sprichst</span></div>
+                                <div>ihr <span class="text-indigo-400 font-bold">sprecht</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Capa 2: Información Revelada a Petición (Satisface Ley de Tesler e Hick) -->
+                        <div class="space-y-3">
+                            <!-- Botón Acordeón 1: Pasado -->
+                            <div class="border border-slate-800 rounded-xl overflow-hidden">
+                                <button onclick="toggleDisclosure('past-section')" class="w-full flex items-center justify-between p-4 bg-slate-800/30 hover:bg-slate-800 text-left transition-all">
+                                    <span class="text-xs font-bold text-slate-300">⏱️ Ver conjugación en Pasado (Präteritum)</span>
+                                    <svg id="past-section-icon" class="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                </button>
+                                <div id="past-section" class="hidden p-4 bg-slate-950/50 border-t border-slate-800 text-xs text-slate-400 space-y-2 fade-in">
+                                    <p class="text-slate-500">Complejidad gestionada por la app (Ley de Tesler) para no saturar al inicio:</p>
+                                    <div class="grid grid-cols-2 gap-1 text-slate-300">
+                                        <div>ich <strong class="text-emerald-400">sprach</strong></div>
+                                        <div>wir <strong class="text-emerald-400">sprachen</strong></div>
+                                        <div>du <strong class="text-emerald-400">sprachst</strong></div>
+                                        <div>ihr <strong class="text-emerald-400">spracht</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Botón Acordeón 2: Ejemplos prácticos -->
+                            <div class="border border-slate-800 rounded-xl overflow-hidden">
+                                <button onclick="toggleDisclosure('examples-section')" class="w-full flex items-center justify-between p-4 bg-slate-800/30 hover:bg-slate-800 text-left transition-all">
+                                    <span class="text-xs font-bold text-slate-300">📖 Mostrar Ejemplos de Uso</span>
+                                    <svg id="examples-section-icon" class="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                </button>
+                                <div id="examples-section" class="hidden p-4 bg-slate-950/50 border-t border-slate-800 text-xs text-slate-400 space-y-3 fade-in">
+                                    <div>
+                                        <p class="font-bold text-slate-300">Ejemplo 1:</p>
+                                        <p class="italic">"Sprichst du Deutsch?" (¿Hablas alemán?)</p>
+                                    </div>
+                                    <div class="pt-2 border-t border-slate-800/50">
+                                        <p class="font-bold text-slate-300">Ejemplo 2:</p>
+                                        <p class="italic">"Er hat gestern mit dem Lehrer gesprochen." (Él habló ayer con el profesor)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONCEPT 3: LEY DE HICK -->
+        <section class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Explicación -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="flex items-center space-x-3 text-sky-500">
+                        <span class="p-2 bg-sky-50 rounded-lg">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </span>
+                        <span class="text-sm font-bold tracking-wider uppercase">La Métrica</span>
+                    </div>
+                    <div class="space-y-2">
+                        <h2 class="text-2xl md:text-3xl font-bold text-slate-950">3. Ley de Hick <br><span class="text-slate-500 text-lg font-medium">(Hick's Law)</span></h2>
+                        <a href="https://lawsofux.com/hicks-law/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:text-indigo-800 transition-all">
+                            <span>Ver documentación en Laws of UX ↗</span>
+                        </a>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed">
+                        Establece que **el tiempo que tarda una persona en tomar una decisión aumenta de forma logarítmica según el número y la complejidad de las opciones** disponibles.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        Fórmula científica: <code class="text-indigo-700 font-mono text-xs">\(T = b \cdot \log_2(n + 1)\)</code>.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed">
+                        Cuanto más saturada de opciones (botones, enlaces, menús desplegables) esté tu interfaz, más lento será el proceso de navegación de tu usuario, causándole fatiga innecesaria.
+                    </p>
+                </div>
+
+                <!-- EXPERIMENTO INTERACTIVO DE LA LEY DE HICK -->
+                <div class="lg:col-span-7 bg-slate-50 rounded-2xl p-6 border border-slate-200 space-y-6">
+                    <div class="flex justify-between items-baseline">
+                        <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">Laboratorio en vivo de UX</h3>
+                        <span class="text-xs text-indigo-600 font-semibold">¡Prueba la Ley de Hick!</span>
+                    </div>
+                    
+                    <p class="text-xs text-slate-500">
+                        Haremos un experimento sencillo. Te pediremos buscar y hacer clic en el botón <strong class="text-indigo-600 font-bold uppercase">"Guardar"</strong> bajo dos escenarios distintos. Mediremos cuántos milisegundos te toma reaccionar.
+                    </p>
+
+                    <!-- Zona de Test Dinámica -->
+                    <div id="game-container" class="bg-white rounded-xl border border-slate-200 p-6 min-h-[220px] flex flex-col justify-center items-center text-center">
+                        <div id="game-intro" class="space-y-4">
+                            <span class="inline-block p-3 bg-indigo-50 text-indigo-600 rounded-full">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </span>
+                            <h4 class="font-bold text-slate-800">¿Preparado para medir tus reflejos?</h4>
+                            <button onclick="startHickTest()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-xl text-sm transition-all shadow-md">
+                                Iniciar Experimento
+                            </button>
+                        </div>
+
+                        <!-- TEST ESCENARIO A (MUCHAS OPCIONES - CAOS) -->
+                        <div id="hick-test-a" class="hidden w-full space-y-4">
+                            <div class="text-sm font-semibold text-rose-500 mb-2">
+                                ESCENARIO A: Encuentra y haz clic en "GUARDAR" entre 24 opciones idénticas
+                            </div>
+                            <div class="grid grid-cols-3 sm:grid-cols-4 gap-2" id="grid-buttons-a">
+                                <!-- Botones inyectados por Javascript de forma desordenada -->
+                            </div>
+                        </div>
+
+                        <!-- TEST ESCENARIO B (POCAS OPCIONES - OPTIMIZADO) -->
+                        <div id="hick-test-b" class="hidden w-full space-y-6">
+                            <div class="text-sm font-semibold text-emerald-600 mb-2">
+                                ESCENARIO B: Encuentra y haz clic en "GUARDAR" con un diseño enfocado
+                            </div>
+                            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 py-8">
+                                <button onclick="wrongHickClick('b')" class="text-slate-400 hover:text-slate-600 text-sm font-medium order-3 sm:order-1">
+                                    Cancelar
+                                </button>
+                                <button onclick="correctHickClick('b')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-base font-bold py-3 px-10 rounded-xl shadow-md transform hover:scale-105 transition-all order-1 sm:order-2">
+                                    Guardar
+                                </button>
+                                <button onclick="wrongHickClick('b')" class="text-slate-400 hover:text-slate-600 text-sm font-medium order-2 sm:order-3">
+                                    Eliminar
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- RESULTADOS DEL TEST -->
+                        <div id="hick-results" class="hidden w-full space-y-4 text-left">
+                            <h4 class="font-bold text-lg text-slate-900 flex items-center justify-center space-x-2">
+                                <span>📊 Resultados de tu prueba</span>
+                            </h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+                                <div class="bg-rose-50 border border-rose-100 p-4 rounded-xl">
+                                    <span class="text-xs text-rose-700 font-bold uppercase block">Escenario A (Saturado)</span>
+                                    <span class="text-2xl font-black text-rose-900" id="time-result-a">0 ms</span>
+                                    <p class="text-[11px] text-rose-700 mt-1">
+                                        Tuviste que escanear visualmente cada botón, aumentando el estrés visual.
+                                    </p>
+                                </div>
+                                <div class="bg-emerald-50 border border-emerald-100 p-4 rounded-xl">
+                                    <span class="text-xs text-emerald-700 font-bold uppercase block">Escenario B (Optimizado)</span>
+                                    <span class="text-2xl font-black text-emerald-900" id="time-result-b">0 ms</span>
+                                    <p class="text-[11px] text-emerald-700 mt-1">
+                                        La jerarquía visual te dirigió inmediatamente al botón principal.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="p-3 bg-indigo-50 text-indigo-950 text-xs rounded-xl border border-indigo-100 text-center font-medium">
+                                El diseño optimizado (B) fue un <span class="font-bold text-lg text-indigo-700" id="percentage-improvement">X%</span> más rápido para tu cerebro.
+                            </div>
+
+                            <div class="text-center pt-2">
+                                <button onclick="resetHickTest()" class="text-indigo-600 hover:text-indigo-800 text-xs font-bold underline">
+                                    Volver a intentar
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-12 px-6 text-center text-sm border-t border-slate-800 mt-16">
+        <div class="max-w-6xl mx-auto space-y-4">
+            <p class="font-semibold text-slate-200">
+                "La simplicidad es la máxima sofisticación." — Steve Jobs
+            </p>
+            <p>
+                Diseñado para explicar conceptos fundamentales de UX mediante interacción práctica. Visita <a href="https://lawsofux.com/" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:underline">Laws of UX</a> para más información.
+            </p>
+        </div>
+    </footer>
+
+    <!-- INTERACTION LOGIC (JAVASCRIPT) -->
+    <script>
+        // 1. LÓGICA DE DIVULGACIÓN PROGRESIVA (Concepto 2)
+        function toggleDisclosure(sectionId) {
+            const section = document.getElementById(sectionId);
+            const icon = document.getElementById(sectionId + '-icon');
+            
+            if (section) {
+                if (section.classList.contains('hidden')) {
+                    section.classList.remove('hidden');
+                    if (icon) icon.style.transform = 'rotate(180deg)';
+                } else {
+                    section.classList.add('hidden');
+                    if (icon) icon.style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+
+        // 2. LÓGICA DEL EXPERIMENTO DE LA LEY DE HICK (Concepto 3)
+        let startTimeA, endTimeA;
+        let startTimeB, endTimeB;
+        let timeA = 0;
+        let timeB = 0;
+
+        const optionsPool = [
+            "Editar", "Cerrar", "Enviar", "Copiar", "Pegar", "Borrar", "Salir", 
+            "Imprimir", "Nuevo", "Abrir", "Buscar", "Filtro", "Configurar", 
+            "Ayuda", "Compartir", "Descargar", "Subir", "Sincronizar", 
+            "Historial", "Exportar", "Importar", "Deshacer", "Rehacer"
+        ];
+
+        function startHickTest() {
+            document.getElementById('game-intro').classList.add('hidden');
+            document.getElementById('hick-results').classList.add('hidden');
+            setupScenarioA();
+        }
+
+        function setupScenarioA() {
+            const grid = document.getElementById('grid-buttons-a');
+            grid.innerHTML = ''; // Limpiar previos
+            
+            // Creamos 23 palabras aleatorias del pool + 1 "Guardar"
+            const currentPool = [...optionsPool];
+            // Barajar un poco
+            currentPool.sort(() => Math.random() - 0.5);
+            
+            // Tomar 23
+            const selectedOptions = currentPool.slice(0, 23);
+            selectedOptions.push("Guardar");
+            
+            // Volver a barajar con el "Guardar" incluido para que esté en posición aleatoria
+            selectedOptions.sort(() => Math.random() - 0.5);
+
+            // Generar botones en el HTML
+            selectedOptions.forEach(text => {
+                const btn = document.createElement('button');
+                btn.className = "bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold py-2 px-1 rounded-lg border border-slate-200 transition-colors duration-150 active:bg-slate-300";
+                btn.innerText = text;
+                
+                if (text === "Guardar") {
+                    btn.onclick = () => correctHickClick('a');
+                } else {
+                    btn.onclick = () => wrongHickClick('a');
+                }
+                grid.appendChild(btn);
+            });
+
+            // Mostrar el test A y registrar el inicio del temporizador
+            document.getElementById('hick-test-a').classList.remove('hidden');
+            startTimeA = performance.now();
+        }
+
+        function wrongHickClick(scenario) {
+            // Un toque visual rápido para indicar error
+            const container = document.getElementById('game-container');
+            container.classList.add('bg-rose-50');
+            setTimeout(() => {
+                container.classList.remove('bg-rose-50');
+            }, 250);
+        }
+
+        function correctHickClick(scenario) {
+            if (scenario === 'a') {
+                endTimeA = performance.now();
+                timeA = Math.round(endTimeA - startTimeA);
+                
+                // Transición al escenario B
+                document.getElementById('hick-test-a').classList.add('hidden');
+                document.getElementById('hick-test-b').classList.remove('hidden');
+                
+                // Pequeño retardo aleatorio corto antes de activar el temporizador de B para evitar clics accidentales inmediatos
+                setTimeout(() => {
+                    startTimeB = performance.now();
+                }, 400);
+            } else if (scenario === 'b') {
+                endTimeB = performance.now();
+                timeB = Math.round(endTimeB - startTimeB);
+                
+                // Mostrar resultados
+                document.getElementById('hick-test-b').classList.add('hidden');
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('time-result-a').innerText = `${timeA} ms`;
+            document.getElementById('time-result-b').innerText = `${timeB} ms`;
+            
+            // Calcular mejora
+            let diff = timeA - timeB;
+            let percent = 0;
+            if (timeA > 0) {
+                percent = Math.round((diff / timeA) * 100);
+            }
+            
+            const pctLabel = document.getElementById('percentage-improvement');
+            if (percent > 0) {
+                pctLabel.innerText = `${percent}%`;
+                pctLabel.className = "font-bold text-lg text-emerald-600";
+            } else {
+                pctLabel.innerText = `0%`;
+                pctLabel.className = "font-bold text-lg text-slate-500";
+            }
+
+            document.getElementById('hick-results').classList.remove('hidden');
+        }
+
+        // Aseguramos compatibilidad con MathJax si actualiza dinámicamente
+        window.addEventListener('load', () => {
+            if (window.MathJax) {
+                window.MathJax.typesetPromise();
+            }
+        });
+
+        function resetHickTest() {
+            timeA = 0;
+            timeB = 0;
+            document.getElementById('hick-results').classList.add('hidden');
+            document.getElementById('game-intro').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
