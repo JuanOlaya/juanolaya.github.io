@@ -5615,22 +5615,7 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
     border-color: var(--card-theme, #3b82f6) !important;
 }
 
-/* 3rd-Person singular conjugation display banner */
-.card-back-third-person-display {
-    font-size: 0.8rem !important;
-    color: #cbd5e1 !important;
-    background: rgba(255, 255, 255, 0.04) !important;
-    border: 1px solid #334155 !important;
-    border-radius: 6px !important;
-    padding: 4px 8px !important;
-    text-align: center;
-    margin-bottom: 6px;
-}
-.card-back-third-person-display strong {
-    color: #38bdf8 !important;
-    font-weight: 800 !important;
-    font-size: 0.85rem !important;
-}
+
 
 /* Wortschatz Toggle Buttons */
 .wortschatz-toggles-container {

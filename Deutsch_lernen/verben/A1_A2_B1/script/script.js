@@ -2,7 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+
+
  // --- GLOBAL STATE ---
+
+
+
+
 
 
 
@@ -10,7 +18,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+
+
  let verbGroupsByLevel = {}; // Global Data Containers
+
+
+
+
 
 
 
@@ -18,7 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+
+
  let allGroupsIndex = []; // Full groups index from verbs_index.json for reliable theme search
+
+
+
+
 
 
 
@@ -26,7 +50,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+
+
  let searchScope = 'verbs'; // 'verbs' or 'wortfamilie'
+
+
+
+
 
 
 
@@ -34,7 +66,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "Zwölfte", "Dreizehnte"];
+
+
+
+
 
 
 
@@ -42,7 +82,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  const savedStories = [
+
+
+
+
 
 
 
@@ -50,7 +98,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  `<p>Heute Morgen <span class="highlighted-word">habe ich</span> lange <span class="highlighted-word">geschlafen</span>. Zum Frühstück <span class="highlighted-word">habe ich</span> ein Brötchen <span class="highlighted-word">gegessen</span>. Dann <span class="highlighted-word">habe ich</span> eine E-Mail an meine Familie <span class="highlighted-word">geschrieben</span>. Ich <span class="highlighted-word">habe</span> ihnen <span class="highlighted-word">gesagt</span>, dass ich bald nach Hause <span class="highlighted-word">komme</span>. Später <span class="highlighted-word">habe ich</span> die Zeitung <span class="highlighted-word">gelesen</span>.</p>`,
+
+
+
+
 
 
 
@@ -58,7 +114,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  ];
+
+
+
+
 
 
 
@@ -66,7 +130,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  'A1': [
+
+
+
+
 
 
 
@@ -74,11 +146,23 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  { key: 'A1_2', count: 18, fileNumbers: [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32] }
 
 
 
+
+
+
+
  ],
+
+
+
+
 
 
 
@@ -86,7 +170,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  { key: 'A2_1', count: 13, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] },
+
+
+
+
 
 
 
@@ -94,7 +186,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  ],
+
+
+
+
 
 
 
@@ -102,11 +202,23 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  'B2': [{ key: 'B2_1', count: 14, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] }]
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -114,7 +226,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  const separablePrefixesMap = {
+
+
+
+
 
 
 
@@ -122,7 +242,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  "anbieten": "an", "anfahren": "an", "anfangen": "an", "ankommen": "an", "ankreuzen": "an", "anprobieren": "an", "anrufen": "an", "ansehen": "an", "anziehen": "an", "anklagen": "an", "anklicken": "an", "anmachen": "an", "anmelden": "an", "anregen": "an", "anwenden": "an", "anreisen": "an",
+
+
+
+
 
 
 
@@ -130,7 +258,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  "ausfallen": "aus", "ausfüllen": "aus", "ausgehen": "aus", "ausgeben": "aus", "auslegen": "aus", "ausleihen": "aus", "auspacken": "aus", "ausruhen": "aus", "aussehen": "aus", "aussprechen": "aus", "aussteigen": "aus", "aussuchen": "aus", "auswählen": "aus", "ausziehen": "aus", "ausgrenzen": "aus", "auslösen": "aus", "ausmachen": "aus", "ausschalten": "aus",
+
+
+
+
 
 
 
@@ -138,7 +274,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  "darlegen": "dar",
+
+
+
+
 
 
 
@@ -146,7 +290,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  "fernsehen": "fern", "fertigmachen": "fertig", "herstellen": "her", "hineingehen": "hinein", "hinzufügen": "hinzu",
+
+
+
+
 
 
 
@@ -154,7 +306,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  "kennenlernen": "kennen",
+
+
+
+
 
 
 
@@ -162,7 +322,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  "nachholen": "nach", "stattfinden": "statt",
+
+
+
+
 
 
 
@@ -170,7 +338,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  "umsteigen": "um", "umtauschen": "um", "umziehen": "um",
+
+
+
+
 
 
 
@@ -178,7 +354,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  "wegtun": "weg", "wegwerfen": "weg", "wehtun": "weh", "wohlfühlen": "wohl",
+
+
+
+
 
 
 
@@ -186,11 +370,23 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  "zurückbringen": "zurück", "zurückgeben": "zurück", "zurückkommen": "zurück"
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -198,7 +394,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
   if (verbName === 'geboren werden' && !isModal) {
+
+
+
+
 
 
 
@@ -206,7 +410,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -214,7 +426,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
     const prefix = separablePrefixesMap[verbName];
+
+
+
+
 
 
 
@@ -222,7 +442,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
       return `<span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}`;
+
+
+
+
 
 
 
@@ -230,7 +458,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -238,7 +474,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -246,7 +490,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  const layers = physicalLevelMap[macroLevel] || [];
+
+
+
+
 
 
 
@@ -254,7 +506,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  for (let i = 0; i < layers.length; i++) {
+
+
+
+
 
 
 
@@ -262,7 +522,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  if (globalIndex < offset + layer.count) {
+
+
+
+
 
 
 
@@ -270,7 +538,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  const fileNumber = Array.isArray(layer.fileNumbers)
+
+
+
+
 
 
 
@@ -278,7 +554,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  : globalIndex + 1;
+
+
+
+
 
 
 
@@ -286,7 +570,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -294,7 +586,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -302,7 +602,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -310,7 +618,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  if (!verbData || !verbData.level || !verbData.group) {
+
+
+
+
 
 
 
@@ -318,7 +634,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -326,11 +650,23 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  const physicalKey = verbData.level.replace('.', '_');
 
 
 
+
+
+
+
  const layers = physicalLevelMap[macroLevel] || [];
+
+
+
+
 
 
 
@@ -338,7 +674,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  for (let i = 0; i < layers.length; i++) {
+
+
+
+
 
 
 
@@ -346,7 +690,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  if (layer.key === physicalKey) {
+
+
+
+
 
 
 
@@ -354,7 +706,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -362,7 +722,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -370,11 +738,23 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  function hexToRgb(hex) {
+
+
+
+
 
 
 
@@ -382,7 +762,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  const normalized = hex.replace('#', '').trim();
+
+
+
+
 
 
 
@@ -390,7 +778,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  ? normalized.split('').map(ch => ch + ch).join('')
+
+
+
+
 
 
 
@@ -398,7 +794,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  const int = parseInt(full, 16);
+
+
+
+
 
 
 
@@ -406,7 +810,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  return {
+
+
+
+
 
 
 
@@ -414,7 +826,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  g: (int >> 8) & 255,
+
+
+
+
 
 
 
@@ -422,11 +842,23 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  };
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -434,7 +866,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  const toHex = (value) => Math.max(0, Math.min(255, Math.round(value))).toString(16).padStart(2, '0');
+
+
+
+
 
 
 
@@ -442,7 +882,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -450,7 +898,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  const a = hexToRgb(colorA);
+
+
+
+
 
 
 
@@ -458,7 +914,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  if (!a) return colorB;
+
+
+
+
 
 
 
@@ -466,7 +930,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  return rgbToHex({
+
+
+
+
 
 
 
@@ -474,7 +946,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  g: a.g * (1 - weight) + b.g * weight,
+
+
+
+
 
 
 
@@ -482,11 +962,23 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -494,7 +986,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+
+
+
+
 
 
 
@@ -502,7 +1002,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+
+
+
 
 
 
@@ -510,7 +1018,15 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -518,7 +1034,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  const modalContentEl = document.querySelector('#verb-modal .modal-content');
+
+
+
+
 
 
 
@@ -526,7 +1050,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  if (!modalContentEl) return;
+
+
+
+
 
 
 
@@ -534,7 +1066,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  const softColor = mixHexColors(themeColor, '#ffffff', 0.78);
+
+
+
+
 
 
 
@@ -542,7 +1082,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  const strongColor = mixHexColors(themeColor, '#0f172a', 0.22);
+
+
+
+
 
 
 
@@ -550,7 +1098,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  modalContentEl.style.setProperty('--modal-theme', themeColor);
+
+
+
+
 
 
 
@@ -558,7 +1114,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  modalContentEl.style.setProperty('--modal-theme-pale', paleColor);
+
+
+
+
 
 
 
@@ -566,11 +1130,23 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  modalContentEl.style.setProperty('--modal-theme-border', borderColor);
 
 
 
+
+
+
+
   const rgbString = hexToRgb(themeColor);
+
+
+
+
 
 
 
@@ -578,7 +1154,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  if (modalHeaderEl) {
+
+
+
+
 
 
 
@@ -586,11 +1170,23 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -598,7 +1194,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  'A1': { groupCount: 30, displayName: 'A1' },
+
+
+
+
 
 
 
@@ -606,7 +1210,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  'B1': { groupCount: 26, displayName: 'B1' },
+
+
+
+
 
 
 
@@ -614,7 +1226,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -622,7 +1242,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  if (!Array.isArray(groupsArray) || groupsArray.length === 0) return;
+
+
+
+
 
 
 
@@ -630,7 +1258,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  const tempPhysicalMap = {};
+
+
+
+
 
 
 
@@ -638,7 +1274,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  groupsArray.forEach(group => {
+
+
+
+
 
 
 
@@ -646,7 +1290,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  const parts = String(group.level).split('.');
+
+
+
+
 
 
 
@@ -654,7 +1306,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  const physicalKey = String(group.level).replace('.', '_');
+
+
+
+
 
 
 
@@ -662,7 +1322,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  if (!tempLevelConfig[macroLevel]) tempLevelConfig[macroLevel] = { groupCount: 0, displayName: macroLevel };
+
+
+
+
 
 
 
@@ -670,7 +1338,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  let layer = tempPhysicalMap[macroLevel].find(l => l.key === physicalKey);
+
+
+
+
 
 
 
@@ -678,11 +1354,23 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  layer.count++;
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -690,7 +1378,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  layers.forEach(layer => {
+
+
+
+
 
 
 
@@ -698,7 +1394,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  const previousLayer = (previousPhysicalMap[macroLevel] || []).find(item => item.key === layer.key);
+
+
+
+
 
 
 
@@ -706,7 +1410,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  if (layer.count > previousLayer.fileNumbers.length) {
+
+
+
+
 
 
 
@@ -714,7 +1426,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  const diff = layer.count - previousLayer.fileNumbers.length;
+
+
+
+
 
 
 
@@ -722,11 +1442,23 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  layer.fileNumbers = [...previousLayer.fileNumbers, ...extension];
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -734,11 +1466,23 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -746,15 +1490,31 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -762,11 +1522,23 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  levelConfig = tempLevelConfig;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -774,7 +1546,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  // Verbs that support Konjunktiv II
+
+
+
+
 
 
 
@@ -782,7 +1562,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  let currentLevel = 'A1';
+
+
+
+
 
 
 
@@ -790,7 +1578,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  let currentVerbInModal = '';
+
+
+
+
 
 
 
@@ -798,7 +1594,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  let modalDeferredLoadToken = 0;
+
+
+
+
 
 
 
@@ -806,7 +1610,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  let modalSessionId = 0;
+
+
+
+
 
 
 
@@ -814,7 +1626,15 @@ function applyModalThemePalette(verbData) {
 
 
 
+
+
+
+
  let storyClickCounter = 0;
+
+
+
+
 
 
 
@@ -822,7 +1642,15 @@ let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'ni
 
 
 
+
+
+
+
 const CACHE_KEY = 'verbAppCache_v46_wortfamilie_search_ready';
+
+
+
+
 
 
 
@@ -830,7 +1658,15 @@ const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
 
 
 
+
+
+
+
 let cachePersistTimeout = null;
+
+
+
+
 
 
 
@@ -838,7 +1674,15 @@ let cachePersistenceDisabled = false;
 
 
 
+
+
+
+
 let cacheHydrated = false;
+
+
+
+
 
 
 
@@ -846,7 +1690,15 @@ let hydratedCacheVersion = null;
 
 
 
+
+
+
+
 const PRELOAD_CONJUGATIONS_IN_BACKGROUND = true;
+
+
+
+
 
 
 
@@ -854,7 +1706,15 @@ const PRELOAD_CONJUGATIONS_SCOPE = 'current-group';
 
 
 
+
+
+
+
 const lazyExampleLoadPromises = new Map();
+
+
+
+
 
 
 
@@ -862,7 +1722,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  'praesens_examples',
+
+
+
+
 
 
 
@@ -870,7 +1738,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  'praesens_fragen',
+
+
+
+
 
 
 
@@ -878,7 +1754,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ];
+
+
+
+
 
 
 
@@ -886,7 +1770,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const mainContainer = document.getElementById('main-container');
+
+
+
+
 
 
 
@@ -894,7 +1786,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const levelIndicator = document.getElementById('level-indicator');
+
+
+
+
 
 
 
@@ -902,7 +1802,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const headerSearchContainer = document.querySelector('.controls-container .search-container');
+
+
+
+
 
 
 
@@ -910,7 +1818,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const levelToggleFooter = document.querySelector('.level-toggle-footer');
+
+
+
+
 
 
 
@@ -918,7 +1834,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const groupThemeIndicator = document.getElementById('group-theme-indicator');
+
+
+
+
 
 
 
@@ -926,7 +1850,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const progressBar = document.getElementById('progress-bar');
+
+
+
+
 
 
 
@@ -934,7 +1866,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const nextGroupBtn = document.getElementById('next-group-btn');
+
+
+
+
 
 
 
@@ -942,7 +1882,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const storyButton = document.getElementById('story-button');
+
+
+
+
 
 
 
@@ -950,11 +1898,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const storyContent = document.getElementById('story-content');
 
 
 
+
+
+
+
  const searchInput = document.getElementById('verb-search');
+
+
+
+
 
 
 
@@ -962,7 +1922,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const verbModal = document.getElementById('verb-modal');
+
+
+
+
 
 
 
@@ -970,7 +1938,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const closeVerbModalButton = document.getElementById('close-verb-modal');
+
+
+
+
 
 
 
@@ -978,7 +1954,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const infoButton = document.getElementById('info-button');
+
+
+
+
 
 
 
@@ -986,7 +1970,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const gustarButtonContainer = document.getElementById('gustar-button-container');
+
+
+
+
 
 
 
@@ -994,7 +1986,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const gustarModal = document.getElementById('gustar-modal');
+
+
+
+
 
 
 
@@ -1002,7 +2002,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const gustarCloseFooterBtn = document.getElementById('gustar-close-footer-btn');
+
+
+
+
 
 
 
@@ -1010,7 +2018,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const reflexiveButton = document.getElementById('reflexive-button');
+
+
+
+
 
 
 
@@ -1018,7 +2034,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const reflexiveCloseBtn = document.getElementById('reflexive-close-btn');
+
+
+
+
 
 
 
@@ -1026,7 +2050,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  // Theme modal elements
+
+
+
+
 
 
 
@@ -1034,7 +2066,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const closeThemeModalX = document.getElementById('close-theme-modal-x');
+
+
+
+
 
 
 
@@ -1042,7 +2082,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  function setupModalHeaderLayout() {
+
+
+
+
 
 
 
@@ -1050,11 +2098,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const translationsEl = document.getElementById('modal-verb-translations');
 
 
 
+
+
+
+
  const tagsToggle = document.getElementById('modal-tags-toggle');
+
+
+
+
 
 
 
@@ -1062,7 +2122,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  let translationRow = modalHeader.querySelector('.modal-translation-row');
+
+
+
+
 
 
 
@@ -1070,7 +2138,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  translationRow = document.createElement('div');
+
+
+
+
 
 
 
@@ -1078,11 +2154,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  modalHeader.insertBefore(translationRow, translationsEl);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1090,11 +2178,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
   translationRow.appendChild(tagsToggle);
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -1102,7 +2202,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  // Header Tags Toggle Listener
+
+
+
+
 
 
 
@@ -1110,7 +2218,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (modalTagsToggle) {
+
+
+
+
 
 
 
@@ -1118,7 +2234,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  e.stopPropagation();
+
+
+
+
 
 
 
@@ -1126,7 +2250,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const dots = modalTagsToggle.querySelector('.dots-icon');
+
+
+
+
 
 
 
@@ -1134,7 +2266,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (wrapper) {
+
+
+
+
 
 
 
@@ -1142,7 +2282,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (isCollapsed) {
+
+
+
+
 
 
 
@@ -1150,11 +2298,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  chevron.style.display = 'none';
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -1162,15 +2322,31 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  chevron.style.display = 'inline';
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1178,7 +2354,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1186,7 +2370,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  let currentThemeData = null;
+
+
+
+
 
 
 
@@ -1194,7 +2386,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  let isLevelMenuExpanded = false;
+
+
+
+
 
 
 
@@ -1202,7 +2402,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  let footerUtilityBar = null;
+
+
+
+
 
 
 
@@ -1210,7 +2418,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  let footerSearchPanel = null;
+
+
+
+
 
 
 
@@ -1218,7 +2434,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  let isFooterSearchExpanded = false;
+
+
+
+
 
 
 
@@ -1226,7 +2450,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  let levelMenuIdleTimeout = null;
+
+
+
+
 
 
 
@@ -1234,7 +2466,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  async function parseJsonUtf8(response) {
+
+
+
+
 
 
 
@@ -1242,7 +2482,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const text = new TextDecoder('utf-8').decode(buffer);
+
+
+
+
 
 
 
@@ -1250,7 +2498,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1258,7 +2514,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (typeof value !== 'string') return value;
+
+
+
+
 
 
 
@@ -1266,7 +2530,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const replacements = [
+
+
+
+
 
 
 
@@ -1274,7 +2546,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['Ö', 'Ö'],
+
+
+
+
 
 
 
@@ -1282,7 +2562,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['ä', 'ä'],
+
+
+
+
 
 
 
@@ -1290,7 +2578,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['ü', 'ü'],
+
+
+
+
 
 
 
@@ -1298,7 +2594,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['á', 'á'],
+
+
+
+
 
 
 
@@ -1306,7 +2610,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['í', 'í'],
+
+
+
+
 
 
 
@@ -1314,11 +2626,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['ú', 'ú'],
 
 
 
+
+
+
+
  ['ñ', 'ñ'],
+
+
+
+
 
 
 
@@ -1326,7 +2650,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['íÃ¢â‚¬Å¾', 'Ä'],
+
+
+
+
 
 
 
@@ -1334,7 +2666,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['íÃ…â€œ', 'Ü'],
+
+
+
+
 
 
 
@@ -1342,7 +2682,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['ö', 'ö'],
+
+
+
+
 
 
 
@@ -1350,7 +2698,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['ß', 'ß'],
+
+
+
+
 
 
 
@@ -1358,7 +2714,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['é', 'é'],
+
+
+
+
 
 
 
@@ -1366,7 +2730,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['ó', 'ó'],
+
+
+
+
 
 
 
@@ -1374,7 +2746,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['ñ', 'ñ'],
+
+
+
+
 
 
 
@@ -1382,7 +2762,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['Ã‚Â¡', 'Ã‚Â¡'],
+
+
+
+
 
 
 
@@ -1390,7 +2778,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã…Â¡', '🔵œÅ¡'],
+
+
+
+
 
 
 
@@ -1398,7 +2794,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¼', '🔵™Â¼'],
+
+
+
+
 
 
 
@@ -1406,7 +2810,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['ÃƒÂ°Ã…Â¸Ã…Â¡Ã¢â€šÂ¬', '🚀'],
+
+
+
+
 
 
 
@@ -1414,7 +2826,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ['ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã¢â‚¬â€œ', '🔵œâ€“'],
+
+
+
+
 
 
 
@@ -1422,7 +2842,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  ];
+
+
+
+
 
 
 
@@ -1430,7 +2858,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  let changed = false;
+
+
+
+
 
 
 
@@ -1438,7 +2874,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (normalized.includes(broken)) {
+
+
+
+
 
 
 
@@ -1446,15 +2890,31 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  changed = true;
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1462,7 +2922,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1470,7 +2938,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1478,7 +2954,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (typeof value === 'string') {
+
+
+
+
 
 
 
@@ -1486,7 +2970,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1494,11 +2986,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  return value.map(item => normalizeMojibakeDeep(item));
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1506,11 +3010,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  return value;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1518,7 +3034,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  Object.entries(value).forEach(([key, entryValue]) => {
+
+
+
+
 
 
 
@@ -1526,7 +3050,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -1534,7 +3066,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1542,7 +3082,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (!levelToggleContainer || !headerSearchContainer || !controlsContainer) return;
+
+
+
+
 
 
 
@@ -1550,7 +3098,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (settingsButton && settingsButton.parentElement === headerSearchContainer) {
+
+
+
+
 
 
 
@@ -1558,7 +3114,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1566,7 +3130,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  footerUtilityBar.className = 'footer-utility-bar';
+
+
+
+
 
 
 
@@ -1574,7 +3146,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  footerSearch.className = 'footer-search-shell footer-search-collapsed';
+
+
+
+
 
 
 
@@ -1582,11 +3162,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  <div class="footer-search-panel">
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -1594,7 +3186,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  <span class="footer-search-arrow">‹</span>
+
+
+
+
 
 
 
@@ -1602,11 +3202,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  </button>
 
 
 
+
+
+
+
  `;
+
+
+
+
 
 
 
@@ -1614,7 +3226,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  footerSearchToggle = footerSearch.querySelector('#footer-search-toggle');
+
+
+
+
 
 
 
@@ -1622,7 +3242,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  footerSearchPanel.prepend(headerSearchContainer);
+
+
+
+
 
 
 
@@ -1630,7 +3258,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const footerParent = settingsModal?.parentElement || document.body;
+
+
+
+
 
 
 
@@ -1638,7 +3274,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  footerUtilityBar.appendChild(levelToggleContainer);
+
+
+
+
 
 
 
@@ -1646,11 +3290,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  footerSearchShell = footerSearch;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1658,7 +3314,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  clearTimeout(levelMenuIdleTimeout);
+
+
+
+
 
 
 
@@ -1666,7 +3330,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  levelMenuIdleTimeout = setTimeout(() => {
+
+
+
+
 
 
 
@@ -1674,7 +3346,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  syncMobileLevelToggleState();
+
+
+
+
 
 
 
@@ -1682,7 +3362,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1690,7 +3378,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  clearTimeout(searchIdleTimeout);
+
+
+
+
 
 
 
@@ -1698,7 +3394,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (searchInput && searchInput.value.trim()) return;
+
+
+
+
 
 
 
@@ -1706,7 +3410,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (searchInput && document.activeElement === searchInput) return;
+
+
+
+
 
 
 
@@ -1714,7 +3426,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  setFooterSearchExpanded(false);
+
+
+
+
 
 
 
@@ -1722,7 +3442,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1730,7 +3458,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (!footerSearchShell || !footerSearchToggle) return;
+
+
+
+
 
 
 
@@ -1738,7 +3474,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  isFooterSearchForcedOpen = forced ? expanded : (expanded && isFooterSearchForcedOpen);
+
+
+
+
 
 
 
@@ -1746,7 +3490,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  isFooterSearchForcedOpen = false;
+
+
+
+
 
 
 
@@ -1754,11 +3506,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  isLevelMenuExpanded = false;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1766,7 +3530,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  footerSearchShell.classList.toggle('footer-search-collapsed', !expanded);
+
+
+
+
 
 
 
@@ -1774,7 +3546,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (expanded) {
+
+
+
+
 
 
 
@@ -1782,7 +3562,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -1790,7 +3578,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1798,7 +3594,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1806,7 +3610,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  function syncMobileLevelToggleState() {
+
+
+
+
 
 
 
@@ -1814,7 +3626,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const isMobile = mobileLevelMediaQuery.matches;
+
+
+
+
 
 
 
@@ -1822,7 +3642,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  levelToggleFooter.classList.toggle('mobile-collapsed', isCollapsed);
+
+
+
+
 
 
 
@@ -1830,7 +3658,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  levelToggleFooter.classList.toggle('selector-collapsed', isCollapsed);
+
+
+
+
 
 
 
@@ -1838,7 +3674,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  levelToggleFooter.classList.toggle('search-collapsed', isFooterSearchExpanded);
+
+
+
+
 
 
 
@@ -1846,7 +3690,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (isCollapsed) {
+
+
+
+
 
 
 
@@ -1854,7 +3706,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -1862,11 +3722,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1874,7 +3746,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const snapshot = {};
+
+
+
+
 
 
 
@@ -1882,7 +3762,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (!verbData || typeof verbData !== 'object' || Array.isArray(verbData)) return;
+
+
+
+
 
 
 
@@ -1890,7 +3778,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  HEAVY_VERB_DATA_KEYS.forEach(key => {
+
+
+
+
 
 
 
@@ -1898,7 +3794,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -1906,7 +3810,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -1914,7 +3826,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1922,7 +3842,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const lightweightVerbs = createLightweightVerbDataSnapshot(allVerbsData);
+
+
+
+
 
 
 
@@ -1930,7 +3858,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  allVerbsData: lightweightVerbs,
+
+
+
+
 
 
 
@@ -1938,7 +3874,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  allGroupsIndex,
+
+
+
+
 
 
 
@@ -1946,7 +3890,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  wortfamilieIndex,
+
+
+
+
 
 
 
@@ -1954,7 +3906,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  timestamp: Date.now(),
+
+
+
+
 
 
 
@@ -1962,7 +3922,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -1970,11 +3938,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  return payload;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -1982,7 +3962,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  const compactVerbsData = {};
+
+
+
+
 
 
 
@@ -1990,7 +3978,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  compactGroups[currentLevel] = groups;
+
+
+
+
 
 
 
@@ -1998,11 +3994,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (!group || !Array.isArray(group.verbs)) return;
 
 
 
+
+
+
+
  group.verbs.forEach(verbName => {
+
+
+
+
 
 
 
@@ -2010,7 +4018,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  compactVerbsData[verbName] = lightweightVerbs[verbName];
+
+
+
+
 
 
 
@@ -2018,15 +4034,31 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
  return {
+
+
+
+
 
 
 
@@ -2034,7 +4066,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  allVerbsData: compactVerbsData,
+
+
+
+
 
 
 
@@ -2042,11 +4082,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  };
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2054,11 +4106,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (cachePersistenceDisabled) return;
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -2066,11 +4130,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  } catch (e) {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -2078,7 +4154,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  } catch (compactError) {
+
+
+
+
 
 
 
@@ -2086,19 +4170,39 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  clearTimeout(cachePersistTimeout);
 
 
 
- }
 
-
-
- }
 
 
 
  }
+
+
+
+
+
+
+
+ }
+
+
+
+
+
+
+
+ }
+
+
+
+
 
 
 
@@ -2106,7 +4210,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  if (cachePersistenceDisabled) return;
+
+
+
+
 
 
 
@@ -2114,11 +4226,23 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  cachePersistTimeout = setTimeout(() => {
 
 
 
+
+
+
+
  persistCacheSnapshot();
+
+
+
+
 
 
 
@@ -2126,7 +4250,15 @@ const lazyExampleLoadPromises = new Map();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2134,11 +4266,23 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  try {
 
 
 
+
+
+
+
  const cached = localStorage.getItem(CACHE_KEY);
+
+
+
+
 
 
 
@@ -2146,7 +4290,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  const data = normalizeMojibakeDeep(JSON.parse(cached));
+
+
+
+
 
 
 
@@ -2154,11 +4306,23 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  allVerbsData = data.allVerbsData;
 
 
 
+
+
+
+
  verbGroupsByLevel = data.verbGroupsByLevel;
+
+
+
+
 
 
 
@@ -2166,7 +4330,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  if (allGroupsIndex.length > 0) autoConfigureLevelsFromGroups(allGroupsIndex);
+
+
+
+
 
 
 
@@ -2174,7 +4346,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  if (data.wortfamilieIndex && typeof data.wortfamilieIndex === 'object') {
+
+
+
+
 
 
 
@@ -2182,7 +4362,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2190,7 +4378,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  appVersion = data.lastUpdated;
+
+
+
+
 
 
 
@@ -2198,7 +4394,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2206,11 +4410,23 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  return true;
 
 
 
+
+
+
+
  } catch (e) {
+
+
+
+
 
 
 
@@ -2218,7 +4434,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  cacheHydrated = false;
+
+
+
+
 
 
 
@@ -2226,11 +4450,23 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  return false;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2238,7 +4474,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  function hasCachedGroup(levelKey, groupIndex) {
+
+
+
+
 
 
 
@@ -2246,7 +4490,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  if (!group || !Array.isArray(group.verbs)) return false;
+
+
+
+
 
 
 
@@ -2254,7 +4506,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2262,7 +4522,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  const config = levelConfig[levelKey];
+
+
+
+
 
 
 
@@ -2270,7 +4538,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  for (let i = 0; i < config.groupCount; i++) {
+
+
+
+
 
 
 
@@ -2278,7 +4554,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2286,7 +4570,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2294,7 +4586,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  let isBackgroundLoading = false;
+
+
+
+
 
 
 
@@ -2302,11 +4602,23 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  function updateLoadingProgress(percentage, phase = 'cards') {
 
 
 
+
+
+
+
  if (!searchInput) return;
+
+
+
+
 
 
 
@@ -2314,7 +4626,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  const cardsProgress = Math.round(loadingProgressState.cards || 0);
+
+
+
+
 
 
 
@@ -2322,7 +4642,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  const overallProgress = cardsProgress;
+
+
+
+
 
 
 
@@ -2330,7 +4658,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  setFooterSearchExpanded(true, { forced: true });
+
+
+
+
 
 
 
@@ -2338,7 +4674,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  searchInput.style.background = `linear-gradient(to right, rgba(250,112,154,0.65) 0%, rgba(254,225,64,0.65) ${overallProgress}%, rgba(15,23,42,0.92) ${overallProgress}%, rgba(15,23,42,0.92) 100%)`;
+
+
+
+
 
 
 
@@ -2346,11 +4690,23 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  searchInput.classList.add('loading-active');
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -2358,7 +4714,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  searchInput.placeholder = "Suchen... (buscar)";
+
+
+
+
 
 
 
@@ -2366,7 +4730,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  searchInput.style.background = '';
+
+
+
+
 
 
 
@@ -2374,7 +4746,15 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  if (isFooterSearchForcedOpen) {
+
+
+
+
 
 
 
@@ -2382,11 +4762,7 @@ function hydrateFromLocalCache() {
 
 
 
- }
 
-
-
- }
 
 
 
@@ -2394,7 +4770,31 @@ function hydrateFromLocalCache() {
 
 
 
+
+
+
+
  }
+
+
+
+
+
+
+
+ }
+
+
+
+
+
+
+
+ }
+
+
+
+
 
 
 
@@ -2402,7 +4802,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let remoteVersion = null;
+
+
+
+
 
 
 
@@ -2410,7 +4818,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -2418,7 +4834,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (vRes.ok) {
+
+
+
+
 
 
 
@@ -2426,7 +4850,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  remoteVersion = vData.lastUpdated;
+
+
+
+
 
 
 
@@ -2434,7 +4866,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (allGroupsIndex.length > 0) autoConfigureLevelsFromGroups(allGroupsIndex);
+
+
+
+
 
 
 
@@ -2442,11 +4882,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  appVersion = remoteVersion;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2454,11 +4906,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   }
 
 
 
+
+
+
+
  } catch (e) {
+
+
+
+
 
 
 
@@ -2466,7 +4930,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2474,7 +4946,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  cacheHydrated && hydratedCacheVersion && remoteVersion && hydratedCacheVersion === remoteVersion;
+
+
+
+
 
 
 
@@ -2482,7 +4962,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!wortfamilieIndex) {
+
+
+
+
 
 
 
@@ -2490,11 +4978,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  scheduleCachePersist();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2502,7 +5002,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  loadingProgressState = { cards: 100, conjugations: 100 };
+
+
+
+
 
 
 
@@ -2510,7 +5018,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  updateLoadingProgress(100, 'conjugations');
+
+
+
+
 
 
 
@@ -2518,11 +5034,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2530,7 +5058,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -2538,7 +5074,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (cached) {
+
+
+
+
 
 
 
@@ -2546,7 +5090,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Cache is valid IF:
+
+
+
+
 
 
 
@@ -2554,7 +5106,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // b) Remote version matches cached version
+
+
+
+
 
 
 
@@ -2562,7 +5122,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (isCacheValid && data.allVerbsData && data.verbGroupsByLevel) {
+
+
+
+
 
 
 
@@ -2570,7 +5138,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  allVerbsData = data.allVerbsData;
+
+
+
+
 
 
 
@@ -2578,7 +5154,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if ((!Array.isArray(allGroupsIndex) || allGroupsIndex.length === 0) && Array.isArray(data.allGroupsIndex)) {
+
+
+
+
 
 
 
@@ -2586,7 +5170,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2594,11 +5186,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  fileIndexData = data.fileIndexData;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2606,11 +5210,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  wortfamilieIndex = data.wortfamilieIndex;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2618,11 +5234,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  appVersion = data.lastUpdated;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2630,7 +5258,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  await loadWortfamilieIndex();
+
+
+
+
 
 
 
@@ -2638,7 +5274,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2646,7 +5290,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  updateLoadingProgress(100, 'cards');
+
+
+
+
 
 
 
@@ -2654,7 +5306,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  isBackgroundLoading = false;
+
+
+
+
 
 
 
@@ -2662,7 +5322,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (searchInput && searchInput.value.trim() !== '') {
+
+
+
+
 
 
 
@@ -2670,7 +5338,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2678,7 +5354,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   } else {
+
+
+
+
 
 
 
@@ -2686,7 +5370,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   wortfamilieIndex = null;
+
+
+
+
 
 
 
@@ -2694,7 +5386,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   Object.keys(allVerbsData).forEach(verbName => {
+
+
+
+
 
 
 
@@ -2702,7 +5402,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   delete allVerbsData[verbName].wortfamilie;
+
+
+
+
 
 
 
@@ -2710,7 +5418,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   delete allVerbsData[verbName]._deferredLoaded;
+
+
+
+
 
 
 
@@ -2718,7 +5434,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   delete allVerbsData[verbName].praesens_examples;
+
+
+
+
 
 
 
@@ -2726,11 +5450,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   delete allVerbsData[verbName].praesens_fragen;
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -2738,11 +5474,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   }
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -2750,7 +5498,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } catch (e) {
+
+
+
+
 
 
 
@@ -2758,7 +5514,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -2766,7 +5530,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  isBackgroundLoading = true;
+
+
+
+
 
 
 
@@ -2774,7 +5546,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  loadingProgressState = { cards: 0, conjugations: 0 };
+
+
+
+
 
 
 
@@ -2782,7 +5562,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Collect all tasks EXCEPT current one (already loading/loaded)
+
+
+
+
 
 
 
@@ -2790,7 +5578,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let totalTasks = 0;
+
+
+
+
 
 
 
@@ -2798,7 +5594,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const config = levelConfig[levelKey];
+
+
+
+
 
 
 
@@ -2806,7 +5610,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  loadTasks.push({ levelKey, i });
+
+
+
+
 
 
 
@@ -2814,7 +5626,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -2822,7 +5642,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let loadedTasks = 0;
+
+
+
+
 
 
 
@@ -2830,7 +5658,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const DELAY_MS = 20;
+
+
+
+
 
 
 
@@ -2838,7 +5674,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const batch = loadTasks.slice(i, i + BATCH_SIZE);
+
+
+
+
 
 
 
@@ -2846,7 +5690,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const levelKey = task.levelKey;
+
+
+
+
 
 
 
@@ -2854,7 +5706,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // 1. Check if already loaded
+
+
+
+
 
 
 
@@ -2862,7 +5722,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return;
+
+
+
+
 
 
 
@@ -2870,7 +5738,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const physData = getPhysicalGroupData(levelKey, groupIndex);
+
+
+
+
 
 
 
@@ -2878,7 +5754,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const fileNumber = physData.fileNumber;
+
+
+
+
 
 
 
@@ -2886,7 +5770,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -2894,7 +5786,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const res = await fetch(groupUrl);
+
+
+
+
 
 
 
@@ -2902,7 +5802,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const groupData = await parseJsonUtf8(res);
+
+
+
+
 
 
 
@@ -2910,7 +5818,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  verbGroupsByLevel[levelKey][groupIndex] = groupData;
+
+
+
+
 
 
 
@@ -2918,7 +5834,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const verbsToLoad = groupData.verbs || [];
+
+
+
+
 
 
 
@@ -2926,7 +5850,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ? verbsToLoad.filter(v => !allVerbsData[v])
+
+
+
+
 
 
 
@@ -2934,7 +5866,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (newVerbs.length > 0) {
+
+
+
+
 
 
 
@@ -2942,7 +5882,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  fetch(`json/cards/${verbName}.json${appVersion ? '?v=' + appVersion : ''}`)
+
+
+
+
 
 
 
@@ -2950,7 +5898,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  .then(data => { allVerbsData[verbName] = data; })
+
+
+
+
 
 
 
@@ -2958,7 +5914,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  );
+
+
+
+
 
 
 
@@ -2966,11 +5930,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  } catch (e) {
+
+
+
+
 
 
 
@@ -2978,11 +5954,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -2990,7 +5978,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  loadedTasks += batch.length;
+
+
+
+
 
 
 
@@ -2998,7 +5994,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  updateLoadingProgress(percent, 'cards');
+
+
+
+
 
 
 
@@ -3006,7 +6010,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (i + BATCH_SIZE < loadTasks.length) {
+
+
+
+
 
 
 
@@ -3014,11 +6026,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3026,11 +6050,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  await loadWortfamilieIndex();
 
 
 
+
+
+
+
  scheduleCachePersist();
+
+
+
+
 
 
 
@@ -3038,7 +6074,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const physicalLayers = physicalLevelMap[currentLevel] || [];
+
+
+
+
 
 
 
@@ -3046,11 +6090,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  await loadBulkConjugations(layersToLoad, updateLoadingProgress);
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -3058,7 +6114,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3066,7 +6130,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  updateLoadingProgress(100, 'conjugations');
+
+
+
+
 
 
 
@@ -3074,7 +6146,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  generateTagFilters();
+
+
+
+
 
 
 
@@ -3082,7 +6162,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -3090,7 +6178,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  console.log("Saved data to LocalStorage cache");
+
+
+
+
 
 
 
@@ -3098,7 +6194,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -3106,7 +6210,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } catch (nestedError) {
+
+
+
+
 
 
 
@@ -3114,11 +6226,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3126,7 +6250,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // füresh background data is ready so moved verbs/groups appear immediately.
+
+
+
+
 
 
 
@@ -3134,11 +6266,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  clearSearchAndRender();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3146,7 +6290,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (searchInput && searchInput.value.trim() !== '') {
+
+
+
+
 
 
 
@@ -3154,11 +6306,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3166,7 +6330,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  async function loadGroupData(levelKey, groupIndex, options = {}) {
+
+
+
+
 
 
 
@@ -3174,7 +6346,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Validate inputs
+
+
+
+
 
 
 
@@ -3182,7 +6362,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // 1. Check if group is already loaded in memory
+
+
+
+
 
 
 
@@ -3190,7 +6378,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return; // Data active
+
+
+
+
 
 
 
@@ -3198,7 +6394,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const physData = getPhysicalGroupData(levelKey, groupIndex);
+
+
+
+
 
 
 
@@ -3206,7 +6410,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const fileNumber = physData.fileNumber;
+
+
+
+
 
 
 
@@ -3214,7 +6426,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!silent) {
+
+
+
+
 
 
 
@@ -3222,7 +6442,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3230,7 +6458,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -3238,7 +6474,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!res.ok) throw new Error(`Group not found: ${groupUrl}`);
+
+
+
+
 
 
 
@@ -3246,7 +6490,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Initialize level array if needed
+
+
+
+
 
 
 
@@ -3254,11 +6506,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  verbGroupsByLevel[levelKey] = [];
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3266,7 +6530,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // 2. Identify new verbs to load
+
+
+
+
 
 
 
@@ -3274,7 +6546,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Filter out verbs we already have data for
+
+
+
+
 
 
 
@@ -3282,7 +6562,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (newVerbs.length > 0) {
+
+
+
+
 
 
 
@@ -3290,7 +6578,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const cardPromises = newVerbs.map(verbName =>
+
+
+
+
 
 
 
@@ -3298,7 +6594,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  .then(res => res.ok ? parseJsonUtf8(res) : {})
+
+
+
+
 
 
 
@@ -3306,11 +6610,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  .catch(() => { allVerbsData[verbName] = {}; })
 
 
 
+
+
+
+
  );
+
+
+
+
 
 
 
@@ -3318,7 +6634,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // 4. Fetch Conjugations for new verbs only when needed.
+
+
+
+
 
 
 
@@ -3326,7 +6650,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (includeConjugations) {
+
+
+
+
 
 
 
@@ -3334,7 +6666,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (physData) {
+
+
+
+
 
 
 
@@ -3342,15 +6682,31 @@ async function loadBackgroundData() {
 
 
 
- }
 
-
-
- }
 
 
 
  }
+
+
+
+
+
+
+
+ }
+
+
+
+
+
+
+
+ }
+
+
+
+
 
 
 
@@ -3358,7 +6714,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } catch (error) {
+
+
+
+
 
 
 
@@ -3366,7 +6730,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!silent) {
+
+
+
+
 
 
 
@@ -3374,15 +6746,31 @@ async function loadBackgroundData() {
 
 
 
- }
 
-
-
- }
 
 
 
  }
+
+
+
+
+
+
+
+ }
+
+
+
+
+
+
+
+ }
+
+
+
+
 
 
 
@@ -3390,7 +6778,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const config = levelConfig[levelKey];
+
+
+
+
 
 
 
@@ -3398,7 +6794,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const loadPromises = [];
+
+
+
+
 
 
 
@@ -3406,11 +6810,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  loadPromises.push(loadGroupData(levelKey, groupIndex, { silent: true, includeConjugations: false }));
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3418,7 +6834,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3426,11 +6850,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (fileIndexData) return fileIndexData;
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -3438,7 +6874,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const response = await fetch(`json/file_index.json${query}`, { cache: 'no-cache' });
+
+
+
+
 
 
 
@@ -3446,11 +6890,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  fileIndexData = await parseJsonUtf8(response);
 
 
 
+
+
+
+
  } catch (error) {
+
+
+
+
 
 
 
@@ -3458,11 +6914,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  fileIndexData = {};
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3470,7 +6938,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3478,7 +6954,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!fileIndexData || !fileIndexData[folder]) return true;
+
+
+
+
 
 
 
@@ -3486,7 +6970,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3494,7 +6986,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  async function loadBulkConjugations(physicalLayers, progressCallback = null) {
+
+
+
+
 
 
 
@@ -3502,7 +7002,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (layersToFetch.length === 0) {
+
+
+
+
 
 
 
@@ -3510,11 +7018,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3522,7 +7042,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const total = layersToFetch.length;
+
+
+
+
 
 
 
@@ -3530,11 +7058,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  try {
 
 
 
+
+
+
+
  const query = appVersion ? `?v=${appVersion}` : '';
+
+
+
+
 
 
 
@@ -3542,11 +7082,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const res = await fetch(url);
 
 
 
+
+
+
+
  if (res.ok) {
+
+
+
+
 
 
 
@@ -3554,7 +7106,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  for (const [verbName, verbData] of Object.entries(data)) {
+
+
+
+
 
 
 
@@ -3562,7 +7122,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const safeMerge = (target, source) => {
+
+
+
+
 
 
 
@@ -3570,7 +7138,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  Object.entries(source).forEach(([key, value]) => {
+
+
+
+
 
 
 
@@ -3578,7 +7154,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') return;
+
+
+
+
 
 
 
@@ -3586,11 +7170,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -3598,7 +7194,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3606,11 +7210,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  } catch (e) {
+
+
+
+
 
 
 
@@ -3618,7 +7234,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3626,7 +7250,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (progressCallback) {
+
+
+
+
 
 
 
@@ -3634,15 +7266,31 @@ async function loadBackgroundData() {
 
 
 
- }
 
-
-
- }
 
 
 
  }
+
+
+
+
+
+
+
+ }
+
+
+
+
+
+
+
+ }
+
+
+
+
 
 
 
@@ -3650,11 +7298,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  await loadFileIndex();
 
 
 
+
+
+
+
  const existingData = allVerbsData[verbName] || {};
+
+
+
+
 
 
 
@@ -3662,7 +7322,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return existingData;
+
+
+
+
 
 
 
@@ -3670,7 +7338,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const query = appVersion ? `?v=${appVersion}` : '';
+
+
+
+
 
 
 
@@ -3678,7 +7354,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ? await fetch(`json/praesens/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : {}).catch(() => ({}))
+
+
+
+
 
 
 
@@ -3686,7 +7370,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const safeMerge = (target, source) => {
+
+
+
+
 
 
 
@@ -3694,11 +7386,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  Object.entries(source).forEach(([key, value]) => {
 
 
 
+
+
+
+
  // Ignore if the key is a German pronoun at root level (likely a rogue JSON structure)
+
+
+
+
 
 
 
@@ -3706,11 +7410,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3718,7 +7434,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') {
+
+
+
+
 
 
 
@@ -3726,7 +7450,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3734,7 +7466,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -3742,7 +7482,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const mergedData = { ...existingData };
+
+
+
+
 
 
 
@@ -3750,7 +7498,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  allVerbsData[verbName] = mergedData;
+
+
+
+
 
 
 
@@ -3758,7 +7514,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3766,7 +7530,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  await loadFileIndex();
+
+
+
+
 
 
 
@@ -3774,7 +7546,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const query = appVersion ? `?v=${appVersion}` : '';
+
+
+
+
 
 
 
@@ -3782,7 +7562,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  fileExistsInIndex(folder, verbName)
+
+
+
+
 
 
 
@@ -3790,7 +7578,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  : Promise.resolve(fallback);
+
+
+
+
 
 
 
@@ -3798,7 +7594,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  existingData._wortfamilieLoaded !== true ||
+
+
+
+
 
 
 
@@ -3806,7 +7610,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  existingData.wortfamilie.length === 0;
+
+
+
+
 
 
 
@@ -3814,7 +7626,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  konjunktivData,
+
+
+
+
 
 
 
@@ -3822,7 +7642,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ] = await Promise.all([
+
+
+
+
 
 
 
@@ -3830,11 +7658,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ? maybeFetchJson('konjunktiv_ii', {})
 
 
 
+
+
+
+
  : Promise.resolve({}),
+
+
+
+
 
 
 
@@ -3842,7 +7682,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ? Promise.resolve({ wortfamilie: existingData.wortfamilie || [] })
+
+
+
+
 
 
 
@@ -3850,7 +7698,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ]);
+
+
+
+
 
 
 
@@ -3858,7 +7714,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // doesn't overwrite the verb's translation and basic info.
+
+
+
+
 
 
 
@@ -3866,11 +7730,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!source || typeof source !== 'object') return;
 
 
 
+
+
+
+
  Object.entries(source).forEach(([key, value]) => {
+
+
+
+
 
 
 
@@ -3878,7 +7754,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (['es', 'wir', 'ihr', 'sie'].includes(key) && typeof value === 'object' && !['cards'].includes(key)) {
+
+
+
+
 
 
 
@@ -3886,7 +7770,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3894,7 +7786,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') {
+
+
+
+
 
 
 
@@ -3902,7 +7802,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3910,11 +7818,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -3922,7 +7842,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  safeMerge(mergedData, konjunktivData);
+
+
+
+
 
 
 
@@ -3930,7 +7858,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  mergedData.wortfamilie = Array.isArray(wortfamilieData.wortfamilie) ? wortfamilieData.wortfamilie : (mergedData.wortfamilie || []);
+
+
+
+
 
 
 
@@ -3938,11 +7874,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  mergedData._deferredLoaded = true;
 
 
 
+
+
+
+
  allVerbsData[verbName] = mergedData;
+
+
+
+
 
 
 
@@ -3950,7 +7898,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // This acts as a recovery mechanism for users with corrupted localStorage.
+
+
+
+
 
 
 
@@ -3958,7 +7914,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  console.error(`Detected data corruption for ${verbName}. Restoring basic translation.`);
+
+
+
+
 
 
 
@@ -3966,11 +7930,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  scheduleCachePersist();
+
+
+
+
 
 
 
@@ -3978,7 +7954,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3986,11 +7970,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return `${verbName}::${tabId}`;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -3998,11 +7994,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return tabId === 'praesens' ? 'infinitiv' : (tabId || 'infinitiv');
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4010,7 +8018,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const normalizedTab = normalizeModalTabId(tabId);
+
+
+
+
 
 
 
@@ -4018,7 +8034,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (normalizedTab === 'infinitiv') {
+
+
+
+
 
 
 
@@ -4026,7 +8050,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4034,11 +8066,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return !verbData.perfekt_examples;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4046,11 +8090,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return !verbData.praeteritum_conjugations || !verbData.praeteritum_examples;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4058,7 +8114,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return konjunktivVerbs.includes(verbName) &&
+
+
+
+
 
 
 
@@ -4066,7 +8130,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4074,7 +8146,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4082,11 +8162,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  await loadFileIndex();
 
 
 
+
+
+
+
  const normalizedTab = normalizeModalTabId(tabId);
+
+
+
+
 
 
 
@@ -4094,7 +8186,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!tabNeedsLazyExamples(verbName, existingData, normalizedTab)) {
+
+
+
+
 
 
 
@@ -4102,7 +8202,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4110,7 +8218,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (lazyExampleLoadPromises.has(requestKey)) {
+
+
+
+
 
 
 
@@ -4118,7 +8234,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4126,7 +8250,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const maybeFetchJson = (folder, fallback = {}) =>
+
+
+
+
 
 
 
@@ -4134,7 +8266,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ? fetch(`json/${folder}/${verbName}.json${query}`).then(res => res.ok ? parseJsonUtf8(res) : fallback).catch(() => fallback)
+
+
+
+
 
 
 
@@ -4142,7 +8282,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const safeMerge = (target, source) => {
+
+
+
+
 
 
 
@@ -4150,7 +8298,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  Object.entries(source).forEach(([key, value]) => {
+
+
+
+
 
 
 
@@ -4158,11 +8314,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4170,11 +8338,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4182,11 +8362,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -4194,7 +8386,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let exampleData = {};
+
+
+
+
 
 
 
@@ -4202,7 +8402,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (normalizedTab === 'infinitiv') {
+
+
+
+
 
 
 
@@ -4210,7 +8418,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  !existingData.praesens_examples
+
+
+
+
 
 
 
@@ -4218,7 +8434,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  : Promise.resolve({}),
+
+
+
+
 
 
 
@@ -4226,7 +8450,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ? maybeFetchJson('examples/praesens_question_examples', {})
+
+
+
+
 
 
 
@@ -4234,7 +8466,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ]);
+
+
+
+
 
 
 
@@ -4242,7 +8482,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ...praesensExamplesData,
+
+
+
+
 
 
 
@@ -4250,7 +8498,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -4258,7 +8514,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  exampleData = !existingData.perfekt_examples
+
+
+
+
 
 
 
@@ -4266,7 +8530,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  : {};
+
+
+
+
 
 
 
@@ -4274,7 +8546,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const [praeteritumExamplesData, praeteritumConjugationData] = await Promise.all([
+
+
+
+
 
 
 
@@ -4282,11 +8562,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ? maybeFetchJson('examples/praeteritum_examples', {})
 
 
 
+
+
+
+
  : Promise.resolve({}),
+
+
+
+
 
 
 
@@ -4294,7 +8586,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ? maybeFetchJson('praeteritum_konjugation', {})
+
+
+
+
 
 
 
@@ -4302,7 +8602,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ]);
+
+
+
+
 
 
 
@@ -4310,7 +8618,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  conjugationData = praeteritumConjugationData;
+
+
+
+
 
 
 
@@ -4318,7 +8634,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  conjugationData.praeteritum_conjugations = conjugationData.praeteritum;
+
+
+
+
 
 
 
@@ -4326,7 +8650,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4334,7 +8666,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  conjugationData.praeteritum_conjugations = conjugationData.praeteritum_conjugation;
+
+
+
+
 
 
 
@@ -4342,7 +8682,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4350,7 +8698,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const [konjunktivExamplesData, konjunktivConjugationData] = await Promise.all([
+
+
+
+
 
 
 
@@ -4358,7 +8714,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ? maybeFetchJson('examples/konjunktiv_ii_examples', {})
+
+
+
+
 
 
 
@@ -4366,7 +8730,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  (konjunktivVerbs.includes(verbName) && !existingData.konjunktiv_ii)
+
+
+
+
 
 
 
@@ -4374,11 +8746,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  : Promise.resolve({})
 
 
 
+
+
+
+
  ]);
+
+
+
+
 
 
 
@@ -4386,11 +8770,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  conjugationData = konjunktivConjugationData;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4398,7 +8794,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  safeMerge(mergedData, conjugationData);
+
+
+
+
 
 
 
@@ -4406,11 +8810,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  allVerbsData[verbName] = mergedData;
 
 
 
+
+
+
+
  scheduleCachePersist();
+
+
+
+
 
 
 
@@ -4418,7 +8834,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  })();
+
+
+
+
 
 
 
@@ -4426,7 +8850,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -4434,7 +8866,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } finally {
+
+
+
+
 
 
 
@@ -4442,11 +8882,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4454,7 +8906,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const normalizedTab = normalizeModalTabId(tabId);
+
+
+
+
 
 
 
@@ -4462,7 +8922,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!tabNeedsLazyExamples(verbName, verbData, normalizedTab)) {
+
+
+
+
 
 
 
@@ -4470,7 +8938,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4478,7 +8954,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const sessionId = modalSessionId;
+
+
+
+
 
 
 
@@ -4486,7 +8970,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  .then(() => {
+
+
+
+
 
 
 
@@ -4494,7 +8986,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const activeTabNow = document.querySelector('.modal-tab-btn.active')?.dataset.tab || normalizedTab;
+
+
+
+
 
 
 
@@ -4502,7 +9002,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  skipDeferredReload: true,
+
+
+
+
 
 
 
@@ -4510,7 +9018,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  preferredTab: activeTabNow
+
+
+
+
 
 
 
@@ -4518,11 +9034,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  })
 
 
 
+
+
+
+
  .catch(error => {
+
+
+
+
 
 
 
@@ -4530,11 +9058,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4542,7 +9082,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   closeConjugationSubModal();
+
+
+
+
 
 
 
@@ -4550,7 +9098,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  modalDeferredLoadToken += 1;
+
+
+
+
 
 
 
@@ -4558,7 +9114,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  modalSessionId += 1;
+
+
+
+
 
 
 
@@ -4566,11 +9130,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  verbModal.classList.remove('visible');
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4578,7 +9154,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const targetTabId = tabId || 'infinitiv';
+
+
+
+
 
 
 
@@ -4586,11 +9170,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (targetButton && targetButton.style.display !== 'none') {
 
 
 
+
+
+
+
  isRestoringModalTab = true;
+
+
+
+
 
 
 
@@ -4598,7 +9194,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  isRestoringModalTab = false;
+
+
+
+
 
 
 
@@ -4606,7 +9210,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4614,7 +9226,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (fallbackButton) {
+
+
+
+
 
 
 
@@ -4622,7 +9242,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  fallbackButton.click();
+
+
+
+
 
 
 
@@ -4630,11 +9258,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4642,7 +9282,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!entries) return '';
+
+
+
+
 
 
 
@@ -4650,7 +9298,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const text = extractor ? extractor(entry) : entry;
+
+
+
+
 
 
 
@@ -4658,15 +9314,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return text;
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4674,7 +9346,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4682,7 +9362,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (value === null || value === undefined) return '';
+
+
+
+
 
 
 
@@ -4690,7 +9378,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  .normalize('NFD')
+
+
+
+
 
 
 
@@ -4698,11 +9394,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  .toLowerCase();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4710,7 +9418,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!text || typeof text !== 'string') return '';
+
+
+
+
 
 
 
@@ -4718,7 +9434,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const words = normalized.split(/[\s,/]+/).filter(Boolean);
+
+
+
+
 
 
 
@@ -4726,7 +9450,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4734,7 +9466,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const groupedMap = new Map();
+
+
+
+
 
 
 
@@ -4742,7 +9482,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  allGroupsIndex.forEach(group => {
+
+
+
+
 
 
 
@@ -4750,7 +9498,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const levelKey = group.level.split('.')[0];
+
+
+
+
 
 
 
@@ -4758,7 +9514,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!levelKey || !Number.isInteger(groupIndexInLevel) || groupIndexInLevel < 0) return;
+
+
+
+
 
 
 
@@ -4766,7 +9530,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  levelKey,
+
+
+
+
 
 
 
@@ -4774,19 +9546,39 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  group
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
  }
+
+
+
+
 
 
 
@@ -4794,7 +9586,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const levelGroups = verbGroupsByLevel[levelKey] || [];
+
+
+
+
 
 
 
@@ -4802,7 +9602,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!group || !Array.isArray(group.verbs)) return;
+
+
+
+
 
 
 
@@ -4810,7 +9618,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  levelKey,
+
+
+
+
 
 
 
@@ -4818,19 +9634,39 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  group
 
 
 
- });
 
-
-
- });
 
 
 
  });
+
+
+
+
+
+
+
+ });
+
+
+
+
+
+
+
+ });
+
+
+
+
 
 
 
@@ -4838,7 +9674,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4846,11 +9690,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  function removeParentheses(text) {
 
 
 
+
+
+
+
  if (!text) return text;
+
+
+
+
 
 
 
@@ -4858,7 +9714,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let parsed = text.replace(/^\(([^)]+)\)\s*/, (match, innerWord) => {
+
+
+
+
 
 
 
@@ -4866,7 +9730,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (innerWord.toLowerCase() === 'sich') {
+
+
+
+
 
 
 
@@ -4874,7 +9746,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4882,11 +9762,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return innerWord + ' ';
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -4894,7 +9786,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  parsed = parsed.replace(/ o /g, ' / ');
+
+
+
+
 
 
 
@@ -4902,7 +9802,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4910,7 +9818,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const cleaned = removeParentheses(text || '');
+
+
+
+
 
 
 
@@ -4918,11 +9834,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return cleaned.split('/')[0].trim();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4930,11 +9858,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return (verbData && verbData.card_es) || getPrimaryTranslation((verbData && verbData.es) || '');
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4942,7 +9882,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!verbData) return [];
+
+
+
+
 
 
 
@@ -4950,7 +9898,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!text) {
+
+
+
+
 
 
 
@@ -4958,7 +9914,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4966,11 +9930,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return text.split(/[,/\n\r]+/).map(p => p.trim()).filter(p => p.length > 0);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -4978,7 +9954,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  function getCleanPerfekt(perfekt) {
+
+
+
+
 
 
 
@@ -4986,7 +9970,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Remove any conjugated auxiliary of haben/sein from the beginning
+
+
+
+
 
 
 
@@ -4994,11 +9986,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return cleaned;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -5006,7 +10010,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  function getCleanPraeteritum(praeteritum) {
+
+
+
+
 
 
 
@@ -5014,7 +10026,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Remove "er/sie/es " from the beginning
+
+
+
+
 
 
 
@@ -5022,11 +10042,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return cleaned;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -5034,11 +10066,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  function renderCompactVersion() {
 
 
 
+
+
+
+
  cardsContainer.innerHTML = '';
+
+
+
+
 
 
 
@@ -5046,7 +10090,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.body.classList.remove('light-version-global-dark');
+
+
+
+
 
 
 
@@ -5054,7 +10106,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const esSwitch = document.getElementById('es-switch');
+
+
+
+
 
 
 
@@ -5062,7 +10122,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const showGerman = deSwitch ? deSwitch.checked : true;
+
+
+
+
 
 
 
@@ -5070,7 +10138,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const showEnglish = enSwitch ? enSwitch.checked : false;
+
+
+
+
 
 
 
@@ -5078,11 +10154,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (navigationWrapper) {
 
 
 
+
+
+
+
  const groupNav = navigationWrapper.querySelector('.group-navigation');
+
+
+
+
 
 
 
@@ -5090,11 +10178,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  const levelGroups = verbGroupsByLevel[currentLevel];
+
+
+
+
 
 
 
@@ -5102,7 +10202,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Create the main grid container matching the adverbs layout
+
+
+
+
 
 
 
@@ -5110,7 +10218,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  grid.className = 'kompakt-grid';
+
+
+
+
 
 
 
@@ -5118,7 +10234,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  levelGroups.forEach((group, groupIndex) => {
+
+
+
+
 
 
 
@@ -5126,7 +10250,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const groupName = group.theme || group.groupNameGerman || `Gruppe ${groupIndex + 1}`;
+
+
+
+
 
 
 
@@ -5134,7 +10266,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Chunk verbs into strict maximums of 7 per card
+
+
+
+
 
 
 
@@ -5142,7 +10282,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const chunks = [];
+
+
+
+
 
 
 
@@ -5150,7 +10298,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  chunks.push(group.verbs.slice(i, i + chunkSize));
+
+
+
+
 
 
 
@@ -5158,7 +10314,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  chunks.forEach((chunk, chunkIndex) => {
+
+
+
+
 
 
 
@@ -5166,7 +10330,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let cardTitleHTML = groupName;
+
+
+
+
 
 
 
@@ -5174,11 +10346,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  cardTitleHTML += ` <span class="kompakt-pagination">(${chunkIndex + 1}/${chunks.length})</span>`;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -5186,7 +10370,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const card = document.createElement('div');
+
+
+
+
 
 
 
@@ -5194,7 +10386,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   const cardFront = document.createElement('div');
+
+
+
+
 
 
 
@@ -5202,7 +10402,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Contrast check for Yellow (#FFD700) or other bright colors
+
+
+
+
 
 
 
@@ -5210,11 +10418,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  card.classList.add('light-header');
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -5222,7 +10442,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const header = document.createElement('div');
+
+
+
+
 
 
 
@@ -5230,7 +10458,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  header.style.backgroundColor = themeColor;
+
+
+
+
 
 
 
@@ -5238,7 +10474,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // German side (left)
+
+
+
+
 
 
 
@@ -5246,7 +10490,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  germanSpan.className = 'kompakt-header-de';
+
+
+
+
 
 
 
@@ -5254,7 +10506,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  germanSpan.style.display = showGerman ? '' : 'none';
+
+
+
+
 
 
 
@@ -5262,7 +10522,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  germanSpan.title = 'Aussprache h??ren';
+
+
+
+
 
 
 
@@ -5270,7 +10538,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  event.stopPropagation();
+
+
+
+
 
 
 
@@ -5278,7 +10554,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -5286,7 +10570,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const spanishSpan = document.createElement('span');
+
+
+
+
 
 
 
@@ -5294,7 +10586,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  spanishSpan.textContent = group.spanishName || group.groupNameSpanish || '';
+
+
+
+
 
 
 
@@ -5302,7 +10602,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  spanishSpan.style.cursor = 'pointer';
+
+
+
+
 
 
 
@@ -5310,11 +10618,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  spanishSpan.onclick = (event) => {
 
 
 
+
+
+
+
  event.stopPropagation();
+
+
+
+
 
 
 
@@ -5322,7 +10642,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -5330,7 +10658,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  header.appendChild(spanishSpan);
+
+
+
+
 
 
 
@@ -5338,7 +10674,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Content Area containing rows
+
+
+
+
 
 
 
@@ -5346,7 +10690,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  content.className = 'kompakt-level-content';
+
+
+
+
 
 
 
@@ -5354,7 +10706,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const verbData = allVerbsData[verbName];
+
+
+
+
 
 
 
@@ -5362,7 +10722,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const row = document.createElement('div');
+
+
+
+
 
 
 
@@ -5370,7 +10738,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  row.setAttribute('data-verb', verbName);
+
+
+
+
 
 
 
@@ -5378,7 +10754,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const reflBadge = isReflexive ? `<span class="reflexiv-badge">refl</span>` : '';
+
+
+
+
 
 
 
@@ -5386,7 +10770,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const datBadge = isDativ ? `<span class="dativ-badge">dat</span>` : '';
+
+
+
+
 
 
 
@@ -5394,7 +10786,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const intrBadge = isIntransitive ? `<span class="intr-badge">intr</span>` : '';
+
+
+
+
 
 
 
@@ -5402,7 +10802,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const ikBadge = isIK ? `<span class="ik-badge">IK</span>` : '';
+
+
+
+
 
 
 
@@ -5410,7 +10818,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const lidBadge = isLiD ? `<span class="lid-badge">LiD</span>` : '';
+
+
+
+
 
 
 
@@ -5418,7 +10834,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}">${a1testTag}</span>` : '';
+
+
+
+
 
 
 
@@ -5426,11 +10850,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  germanWord.className = 'kompakt-german';
 
 
 
+
+
+
+
  const displayVerb = formatVerbPrefix(verbName);
+
+
+
+
 
 
 
@@ -5438,7 +10874,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  germanWord.style.display = showGerman ? '' : 'none';
+
+
+
+
 
 
 
@@ -5446,7 +10890,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  germanWord.title = 'Aussprache hören';
+
+
+
+
 
 
 
@@ -5454,7 +10906,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const translations = document.createElement('div');
+
+
+
+
 
 
 
@@ -5462,7 +10922,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const esTranslationLines = getCardTranslationLines(verbData).slice(0, 2);
+
+
+
+
 
 
 
@@ -5470,7 +10938,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const spanishWord = document.createElement('div');
+
+
+
+
 
 
 
@@ -5478,7 +10954,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  spanishWord.innerHTML = esTranslationLines.map(line => `<div class="translation-line">${line}</div>`).join('');
+
+
+
+
 
 
 
@@ -5486,7 +10970,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  spanishWord.style.cursor = 'pointer';
+
+
+
+
 
 
 
@@ -5494,7 +10986,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  spanishWord.onclick = (e) => { e.stopPropagation(); showVerbDetailsInCard(verbName, card); };
+
+
+
+
 
 
 
@@ -5502,7 +11002,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  englishWord.className = 'kompakt-english';
+
+
+
+
 
 
 
@@ -5510,7 +11018,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  englishWord.style.display = showEnglish && englishWord.textContent ? '' : 'none';
+
+
+
+
 
 
 
@@ -5518,7 +11034,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  englishWord.title = 'Details anzeigen';
+
+
+
+
 
 
 
@@ -5526,7 +11050,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  row.appendChild(germanWord);
+
+
+
+
 
 
 
@@ -5534,7 +11066,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  translations.appendChild(englishWord);
+
+
+
+
 
 
 
@@ -5542,11 +11082,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  content.appendChild(row);
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -5554,7 +11106,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Footer
+
+
+
+
 
 
 
@@ -5562,7 +11122,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  footer.className = 'card-footer';
+
+
+
+
 
 
 
@@ -5570,7 +11138,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const levelBadge = document.createElement('span');
+
+
+
+
 
 
 
@@ -5578,7 +11154,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  levelBadge.style.border = 'none';
+
+
+
+
 
 
 
@@ -5586,7 +11170,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const formattedLevel = rawLevel.toUpperCase().replace(/([A-Z])(\d).*/, '$1$2'); // e.g. "A1"
+
+
+
+
 
 
 
@@ -5594,7 +11186,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const verbsLabel = document.createElement('span');
+
+
+
+
 
 
 
@@ -5602,7 +11202,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  verbsLabel.textContent = showEnglish ? 'verbs' : 'verbos';
+
+
+
+
 
 
 
@@ -5610,7 +11218,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  footer.appendChild(verbsLabel);
+
+
+
+
 
 
 
@@ -5618,7 +11234,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  card.appendChild(cardFront);
+
+
+
+
 
 
 
@@ -5626,7 +11250,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   cardBack.className = 'card-back';
+
+
+
+
 
 
 
@@ -5634,7 +11266,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   card.appendChild(cardBack);
+
+
+
+
 
 
 
@@ -5642,7 +11282,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   const rgbString = hexToRgb(themeColor);
+
+
+
+
 
 
 
@@ -5650,15 +11298,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   grid.appendChild(card);
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -5666,11 +11330,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  updateIndicatorsForView(levelGroups[currentGroupInLevel] || levelGroups[0]);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -5678,7 +11354,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  function updateIndicatorsForView(group) {
+
+
+
+
 
 
 
@@ -5686,7 +11370,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  levelIndicator.textContent = displayLevel;
+
+
+
+
 
 
 
@@ -5694,7 +11386,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (displayLevel === 'A1.1') levelIndicator.classList.add('level-a1-1');
+
+
+
+
 
 
 
@@ -5702,7 +11402,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  else if (displayLevel === 'A2.1') levelIndicator.classList.add('level-a2-1');
+
+
+
+
 
 
 
@@ -5710,11 +11418,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  else if (displayLevel === 'B1.1') levelIndicator.classList.add('level-b1-1');
 
 
 
+
+
+
+
  levelToggleButtons.forEach(button => {
+
+
+
+
 
 
 
@@ -5722,7 +11442,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  button.classList.toggle('active', isActive);
+
+
+
+
 
 
 
@@ -5730,7 +11458,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  button.style.order = mobileLevelMediaQuery.matches
+
+
+
+
 
 
 
@@ -5738,7 +11474,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  : '';
+
+
+
+
 
 
 
@@ -5746,7 +11490,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  syncMobileLevelToggleState();
+
+
+
+
 
 
 
@@ -5754,11 +11506,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  groupThemeIndicator.textContent = themeName;
 
 
 
+
+
+
+
  const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
+
+
+
+
 
 
 
@@ -5766,7 +11530,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const themeNameForGroupIndicator = activeTheme ? ` - ${activeTheme}` : '';
+
+
+
+
 
 
 
@@ -5774,7 +11546,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  prevGroupBtn.disabled = currentGroupInLevel === 0 && currentLevel === levelOrder[0];
+
+
+
+
 
 
 
@@ -5782,7 +11562,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -5790,7 +11578,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  function renderNiedlichVersion(group) {
+
+
+
+
 
 
 
@@ -5798,11 +11594,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.body.classList.remove('compact-view');
 
 
 
+
+
+
+
  document.body.classList.remove('light-version-global-dark');
+
+
+
+
 
 
 
@@ -5810,7 +11618,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (navigationWrapper) {
+
+
+
+
 
 
 
@@ -5818,11 +11634,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (groupNav) groupNav.style.display = 'flex';
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -5830,7 +11658,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const enSwitch = document.getElementById('en-switch');
+
+
+
+
 
 
 
@@ -5838,7 +11674,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const cardsHTML = group.verbs.map(verbName => {
+
+
+
+
 
 
 
@@ -5846,7 +11690,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!verbData) return '';
+
+
+
+
 
 
 
@@ -5854,7 +11706,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const irregularMark = verbData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
+
+
+
+
 
 
 
@@ -5862,7 +11722,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const enTranslation = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
+
+
+
+
 
 
 
@@ -5870,7 +11738,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let tagsHTML = '';
+
+
+
+
 
 
 
@@ -5878,7 +11754,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (verbData.case_tags) {
+
+
+
+
 
 
 
@@ -5886,7 +11770,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tagsHTML = visibleTags.map(tag => `<span class="verb-tag">${tag}</span>`).join('');
+
+
+
+
 
 
 
@@ -5894,7 +11786,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
+
+
+
+
 
 
 
@@ -5902,7 +11802,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
+
+
+
+
 
 
 
@@ -5910,7 +11818,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
+
+
+
+
 
 
 
@@ -5918,7 +11834,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
+
+
+
+
 
 
 
@@ -5926,7 +11850,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
+
+
+
+
 
 
 
@@ -5934,7 +11866,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
+
+
+
+
 
 
 
@@ -5942,7 +11882,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // New Structure: Header (Word + Translation), Body (Tags Centered), No Emoji
+
+
+
+
 
 
 
@@ -5950,11 +11898,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return `
 
 
 
+
+
+
+
  <div class="word-item">
+
+
+
+
 
 
 
@@ -5962,7 +11922,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  <span class="german-word" style="font-size: 1.5rem;">${displayVerb} ${irregularMark}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</span>
+
+
+
+
 
 
 
@@ -5970,7 +11938,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  <span class="spanish-translation" style="font-size: 1.1rem; color: white; font-style: italic;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${esTranslation}</span>
+
+
+
+
 
 
 
@@ -5978,11 +11954,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  </div>
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -5990,7 +11978,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  <div class="german-word-container" style="justify-content:center; width: 100%; flex-wrap: wrap; gap: 8px;">
+
+
+
+
 
 
 
@@ -5998,11 +11994,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  </div>
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -6010,7 +12018,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }).join('');
+
+
+
+
 
 
 
@@ -6018,7 +12034,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  updateIndicatorsForView(group);
+
+
+
+
 
 
 
@@ -6026,7 +12050,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6034,7 +12066,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  function renderNormalVersion(group) {
+
+
+
+
 
 
 
@@ -6042,7 +12082,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.body.classList.remove('compact-view');
+
+
+
+
 
 
 
@@ -6050,7 +12098,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Restore group arrows because Normal is paginated by group
+
+
+
+
 
 
 
@@ -6058,7 +12114,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const groupNav = navigationWrapper.querySelector('.group-navigation');
+
+
+
+
 
 
 
@@ -6066,7 +12130,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6074,7 +12146,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const verbData = allVerbsData[verbName];
+
+
+
+
 
 
 
@@ -6082,7 +12162,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const translation = getCardTranslation(verbData);
+
+
+
+
 
 
 
@@ -6090,7 +12178,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
+
+
+
+
 
 
 
@@ -6098,7 +12194,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
+
+
+
+
 
 
 
@@ -6106,7 +12210,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
+
+
+
+
 
 
 
@@ -6114,7 +12226,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
+
+
+
+
 
 
 
@@ -6122,7 +12242,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
+
+
+
+
 
 
 
@@ -6130,7 +12258,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
+
+
+
+
 
 
 
@@ -6138,7 +12274,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const emoji = verbData.emoji || '🔵œÂ';
+
+
+
+
 
 
 
@@ -6146,7 +12290,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return `
+
+
+
+
 
 
 
@@ -6154,7 +12306,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  <div class="normal-card-header" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer;">
+
+
+
+
 
 
 
@@ -6162,7 +12322,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  <h3 class="normal-german">${formatVerbPrefix(verbName)}${irregular}</h3>
+
+
+
+
 
 
 
@@ -6170,7 +12338,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -6178,7 +12354,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  <p class="normal-spanish">${translation}</p>
+
+
+
+
 
 
 
@@ -6186,7 +12370,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  </div>`;
+
+
+
+
 
 
 
@@ -6194,7 +12386,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  cardsContainer.innerHTML = cardsHTML;
+
+
+
+
 
 
 
@@ -6202,7 +12402,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6210,11 +12418,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  function renderLightVersion(group) {
 
 
 
+
+
+
+
  cardsContainer.innerHTML = '';
+
+
+
+
 
 
 
@@ -6222,7 +12442,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Restore group arrows because Light is paginated by group
+
+
+
+
 
 
 
@@ -6230,7 +12458,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const groupNav = navigationWrapper.querySelector('.group-navigation');
+
+
+
+
 
 
 
@@ -6238,7 +12474,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6246,7 +12490,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const lightContainer = document.createElement('div');
+
+
+
+
 
 
 
@@ -6254,7 +12506,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Create header row
+
+
+
+
 
 
 
@@ -6262,7 +12522,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  headerRow.className = 'light-version-header';
+
+
+
+
 
 
 
@@ -6270,7 +12538,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  <div class="light-version-header-cell">Infinitiv</div>
+
+
+
+
 
 
 
@@ -6278,7 +12554,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  <div class="light-version-header-cell">Präteritum</div>
+
+
+
+
 
 
 
@@ -6286,7 +12570,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  `;
+
+
+
+
 
 
 
@@ -6294,7 +12586,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Create data rows
+
+
+
+
 
 
 
@@ -6302,7 +12602,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const verbData = allVerbsData[verbName];
+
+
+
+
 
 
 
@@ -6310,7 +12618,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Get clean forms
+
+
+
+
 
 
 
@@ -6318,7 +12634,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const perfekt = getCleanPerfekt(verbData.perfekt);
+
+
+
+
 
 
 
@@ -6326,11 +12650,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const translation = getCardTranslation(verbData);
 
 
 
+
+
+
+
  const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
+
+
+
+
 
 
 
@@ -6338,7 +12674,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
+
+
+
+
 
 
 
@@ -6346,7 +12690,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
+
+
+
+
 
 
 
@@ -6354,7 +12706,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
+
+
+
+
 
 
 
@@ -6362,11 +12722,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const lidBadge = isLiD ? ` <span class="lid-badge" style="padding: 1px 4px; font-size: 0.9rem; margin-left: 8px;">LiD</span>` : '';
 
 
 
+
+
+
+
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
+
+
+
+
 
 
 
@@ -6374,7 +12746,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const displayVerb = formatVerbPrefix(verbName);
+
+
+
+
 
 
 
@@ -6382,7 +12762,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const row = document.createElement('div');
+
+
+
+
 
 
 
@@ -6390,7 +12778,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  row.innerHTML = `
+
+
+
+
 
 
 
@@ -6398,7 +12794,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  <div class="light-version-cell perfekt" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${perfekt}</div>
+
+
+
+
 
 
 
@@ -6406,11 +12810,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  <div class="light-version-cell translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${translation}</div>
 
 
 
+
+
+
+
  `;
+
+
+
+
 
 
 
@@ -6418,7 +12834,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -6426,11 +12850,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  updateIndicatorsForView(group);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6438,7 +12874,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  function renderVerbGroup() {
+
+
+
+
 
 
 
@@ -6446,7 +12890,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Auto-correct out-of-bounds index
+
+
+
+
 
 
 
@@ -6454,7 +12906,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  console.warn(`Group index ${currentGroupInLevel} out of bounds for level ${currentLevel} (Max: ${levelGroups.length}). Resetting to 0.`);
+
+
+
+
 
 
 
@@ -6462,11 +12922,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  saveProgress();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6474,7 +12946,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  console.error(`Group data error: Level=${currentLevel}, GroupIndex=${currentGroupInLevel}, LoadedGroups=${levelGroups ? levelGroups.length : 'undefined'}`);
+
+
+
+
 
 
 
@@ -6482,11 +12962,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6494,7 +12986,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!group.verbs) {
+
+
+
+
 
 
 
@@ -6502,7 +13002,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  cardsContainer.innerHTML = '<p>Fehler beim Laden der Verben.</p>';
+
+
+
+
 
 
 
@@ -6510,7 +13018,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6518,7 +13034,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const selectedVersionRadio = document.querySelector('input[name="card-version"]:checked');
+
+
+
+
 
 
 
@@ -6526,11 +13050,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (activeVersion === 'compact') {
 
 
 
+
+
+
+
  renderCompactVersion(group);
+
+
+
+
 
 
 
@@ -6538,7 +13074,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  renderNiedlichVersion(group);
+
+
+
+
 
 
 
@@ -6546,7 +13090,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  renderNormalVersion(group);
+
+
+
+
 
 
 
@@ -6554,7 +13106,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.body.classList.add('light-version-global-dark');
+
+
+
+
 
 
 
@@ -6562,7 +13122,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -6570,11 +13138,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  renderCompactVersion(group);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6582,7 +13162,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  updateProgressBar();
+
+
+
+
 
 
 
@@ -6590,7 +13178,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  saveProgress();
+
+
+
+
 
 
 
@@ -6598,7 +13194,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6606,7 +13210,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const containers = document.querySelectorAll('.perfekt-hover-container');
+
+
+
+
 
 
 
@@ -6614,7 +13226,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const perfektTexts = container.querySelectorAll('.perfekt-text');
+
+
+
+
 
 
 
@@ -6622,7 +13242,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const konjunktivTexts = container.querySelectorAll('.konjunktiv-text');
+
+
+
+
 
 
 
@@ -6630,7 +13258,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  perfektTexts.forEach(perfektText => {
+
+
+
+
 
 
 
@@ -6638,7 +13274,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Show full version for all perfekt texts in this container
+
+
+
+
 
 
 
@@ -6646,15 +13290,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  text.textContent = text.getAttribute('data-full');
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -6662,7 +13322,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Show short version for all perfekt texts in this container
+
+
+
+
 
 
 
@@ -6670,19 +13338,39 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  text.textContent = text.getAttribute('data-short');
 
 
 
- });
 
-
-
- });
 
 
 
  });
+
+
+
+
+
+
+
+ });
+
+
+
+
+
+
+
+ });
+
+
+
+
 
 
 
@@ -6690,7 +13378,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  praeteritumTexts.forEach(praeteritumText => {
+
+
+
+
 
 
 
@@ -6698,7 +13394,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Show full version for all präteritum texts in this container
+
+
+
+
 
 
 
@@ -6706,15 +13410,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  text.textContent = text.getAttribute('data-full');
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -6722,7 +13442,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Show short version for all präteritum texts in this container
+
+
+
+
 
 
 
@@ -6730,19 +13458,39 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  text.textContent = text.getAttribute('data-short');
 
 
 
- });
 
-
-
- });
 
 
 
  });
+
+
+
+
+
+
+
+ });
+
+
+
+
+
+
+
+ });
+
+
+
+
 
 
 
@@ -6750,7 +13498,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  konjunktivTexts.forEach(konjunktivText => {
+
+
+
+
 
 
 
@@ -6758,11 +13514,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Show full version for all konjunktiv texts in this container
 
 
 
+
+
+
+
  container.querySelectorAll('.konjunktiv-text').forEach(text => {
+
+
+
+
 
 
 
@@ -6770,11 +13538,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -6782,7 +13562,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Show short version for all konjunktiv texts in this container
+
+
+
+
 
 
 
@@ -6790,15 +13578,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  text.textContent = text.getAttribute('data-short');
 
 
 
- });
 
-
-
- });
 
 
 
@@ -6806,7 +13594,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
+
+
+
+ });
+
+
+
+
+
+
+
+ });
+
+
+
+
 
 
 
@@ -6814,11 +13626,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  updateGustarButtonVisibility();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6826,7 +13650,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (currentLevel === 'A1' && currentGroupInLevel === 8) {
+
+
+
+
 
 
 
@@ -6834,11 +13666,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (reflexiveButtonContainer) reflexiveButtonContainer.style.display = 'none';
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -6846,15 +13690,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (reflexiveButtonContainer) reflexiveButtonContainer.style.display = 'none';
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6862,11 +13722,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  progressBar.innerHTML = '';
 
 
 
+
+
+
+
  const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
+
+
+
+
 
 
 
@@ -6874,7 +13746,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const step = document.createElement('div');
+
+
+
+
 
 
 
@@ -6882,15 +13762,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  progressBar.appendChild(step);
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6898,7 +13794,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  setupProgressBar(); // Rebuild for current level
+
+
+
+
 
 
 
@@ -6906,7 +13810,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  steps.forEach((step, i) => {
+
+
+
+
 
 
 
@@ -6914,11 +13826,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6926,7 +13850,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const prevLevelBtn = document.getElementById('prev-level-btn');
+
+
+
+
 
 
 
@@ -6934,7 +13866,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const currentLevelIndex = levelOrder.indexOf(currentLevel);
+
+
+
+
 
 
 
@@ -6942,11 +13882,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  nextLevelBtn.disabled = currentLevelIndex === levelOrder.length - 1;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6954,7 +13906,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  function saveProgress() {
+
+
+
+
 
 
 
@@ -6962,11 +13922,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  localStorage.setItem('currentLevel', currentLevel);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -6974,7 +13946,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Load saved progress
+
+
+
+
 
 
 
@@ -6982,7 +13962,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Retrieve group using level-specific key first (legacy), or generic (new)
+
+
+
+
 
 
 
@@ -6990,7 +13978,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Let's rely on `progress_${level}` to allow independent progress per level.
+
+
+
+
 
 
 
@@ -6998,11 +13994,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  currentLevel = savedLevel;
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -7010,11 +14018,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  currentLevel = 'A1';
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7022,11 +14042,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const maxGroups = levelConfig[currentLevel].groupCount;
 
 
 
+
+
+
+
  if (!isNaN(savedGroup) && savedGroup >= 0 && savedGroup < maxGroups) {
+
+
+
+
 
 
 
@@ -7034,7 +14066,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -7042,15 +14082,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  currentGroupInLevel = 0;
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7058,7 +14114,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const maxGroups = levelConfig[levelKey] ? levelConfig[levelKey].groupCount : 0;
+
+
+
+
 
 
 
@@ -7066,7 +14130,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!isNaN(savedGroup) && savedGroup >= 0 && savedGroup < maxGroups) {
+
+
+
+
 
 
 
@@ -7074,7 +14146,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7082,7 +14162,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7090,7 +14178,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!levelConfig[targetLevel]) return;
+
+
+
+
 
 
 
@@ -7098,7 +14194,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  await loadGroupData(targetLevel, targetGroup);
+
+
+
+
 
 
 
@@ -7106,7 +14210,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  currentGroupInLevel = targetGroup;
+
+
+
+
 
 
 
@@ -7114,7 +14226,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  syncMobileLevelToggleState();
+
+
+
+
 
 
 
@@ -7122,7 +14242,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7130,7 +14258,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (searchInput) {
+
+
+
+
 
 
 
@@ -7138,7 +14274,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7146,7 +14290,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const searchCounter = document.getElementById('search-counter');
+
+
+
+
 
 
 
@@ -7154,7 +14306,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (searchCounter) searchCounter.textContent = '';
+
+
+
+
 
 
 
@@ -7162,7 +14322,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  levelIndicator.style.opacity = '1';
+
+
+
+
 
 
 
@@ -7170,7 +14338,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7178,11 +14354,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  renderVerbGroup();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7190,7 +14378,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Load saved progress from localStorage
+
+
+
+
 
 
 
@@ -7198,7 +14394,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Handle URL parameters (override saved progress)
+
+
+
+
 
 
 
@@ -7206,7 +14410,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const urlLevel = urlParams.get('level');
+
+
+
+
 
 
 
@@ -7214,7 +14426,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Convert 'A1.2' format to 'A1_2'
+
+
+
+
 
 
 
@@ -7222,7 +14442,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (levelConfig[levelKey]) {
+
+
+
+
 
 
 
@@ -7230,15 +14458,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  currentGroupInLevel = 0;
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7246,7 +14490,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let initialViewMode = localStorage.getItem('verben-card-version') || 'compact';
+
+
+
+
 
 
 
@@ -7254,11 +14506,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  initialViewMode = 'compact';
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7266,7 +14530,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  fetch('json/verb_types.json')
+
+
+
+
 
 
 
@@ -7274,7 +14546,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  .then(data => { verbTypesData = data || {}; })
+
+
+
+
 
 
 
@@ -7282,7 +14562,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Hydrate from cache first so returning to the app feels instant on mobile.
+
+
+
+
 
 
 
@@ -7290,7 +14578,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const hasInitialDataInCache = hydratedFromCache && (
+
+
+
+
 
 
 
@@ -7298,7 +14594,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ? hasCachedLevel(currentLevel)
+
+
+
+
 
 
 
@@ -7306,7 +14610,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  );
+
+
+
+
 
 
 
@@ -7314,7 +14626,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const initialLoadPromise = hasInitialDataInCache
+
+
+
+
 
 
 
@@ -7322,7 +14642,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  : (initialViewMode === 'compact'
+
+
+
+
 
 
 
@@ -7330,7 +14658,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  : loadGroupData(currentLevel, currentGroupInLevel));
+
+
+
+
 
 
 
@@ -7338,7 +14674,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ? Promise.resolve(wortfamilieIndex)
+
+
+
+
 
 
 
@@ -7346,7 +14690,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  Promise.all([initialLoadPromise, initialWortfamiliePromise])
+
+
+
+
 
 
 
@@ -7354,7 +14706,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  renderVerbGroup();
+
+
+
+
 
 
 
@@ -7362,7 +14722,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  loadBackgroundData();
+
+
+
+
 
 
 
@@ -7370,11 +14738,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let newLevel = currentLevel;
 
 
 
+
+
+
+
  let newGroupIndex = currentGroupInLevel;
+
+
+
+
 
 
 
@@ -7382,7 +14762,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Previous group in current level
+
+
+
+
 
 
 
@@ -7390,7 +14778,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -7398,11 +14794,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const currentLevelIndex = levelOrder.indexOf(currentLevel);
 
 
 
+
+
+
+
  if (currentLevelIndex > 0) {
+
+
+
+
 
 
 
@@ -7410,11 +14818,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  newGroupIndex = levelConfig[newLevel].groupCount - 1;
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -7422,11 +14842,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7434,7 +14866,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  await loadGroupData(newLevel, newGroupIndex);
+
+
+
+
 
 
 
@@ -7442,7 +14882,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  currentLevel = newLevel;
+
+
+
+
 
 
 
@@ -7450,11 +14898,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  clearSearchAndRender();
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -7462,7 +14922,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let newLevel = currentLevel;
+
+
+
+
 
 
 
@@ -7470,7 +14938,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const totalGroupsInLevel = levelConfig[currentLevel].groupCount;
+
+
+
+
 
 
 
@@ -7478,7 +14954,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Next group in current level
+
+
+
+
 
 
 
@@ -7486,7 +14970,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -7494,11 +14986,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const currentLevelIndex = levelOrder.indexOf(currentLevel);
 
 
 
+
+
+
+
  if (currentLevelIndex < levelOrder.length - 1) {
+
+
+
+
 
 
 
@@ -7506,11 +15010,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  newGroupIndex = 0;
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -7518,11 +15034,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7530,7 +15058,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  await loadGroupData(newLevel, newGroupIndex);
+
+
+
+
 
 
 
@@ -7538,11 +15074,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  currentLevel = newLevel;
 
 
 
+
+
+
+
  currentGroupInLevel = newGroupIndex;
+
+
+
+
 
 
 
@@ -7550,7 +15098,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -7558,7 +15114,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  function clearSearchAndRender() {
+
+
+
+
 
 
 
@@ -7566,7 +15130,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const clearSearchBtn = document.getElementById('clear-search');
+
+
+
+
 
 
 
@@ -7574,11 +15146,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  searchInput.value = '';
 
 
 
+
+
+
+
  clearSearchBtn.classList.remove('visible');
+
+
+
+
 
 
 
@@ -7586,11 +15170,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  // Reset transform before rendering new group
+
+
+
+
 
 
 
@@ -7598,7 +15194,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  cardsContainer.style.transition = '';
+
+
+
+
 
 
 
@@ -7606,7 +15210,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7614,7 +15226,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const prevLevelBtn = document.getElementById('prev-level-btn');
+
+
+
+
 
 
 
@@ -7622,7 +15242,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  prevLevelBtn.addEventListener('click', async () => {
+
+
+
+
 
 
 
@@ -7630,7 +15258,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (currentLevelIndex > 0) {
+
+
+
+
 
 
 
@@ -7638,11 +15274,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -7650,7 +15298,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const currentLevelIndex = levelOrder.indexOf(currentLevel);
+
+
+
+
 
 
 
@@ -7658,7 +15314,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  await navigateToLevel(levelOrder[currentLevelIndex + 1]);
+
+
+
+
 
 
 
@@ -7666,7 +15330,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -7674,7 +15346,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  button.addEventListener('click', async () => {
+
+
+
+
 
 
 
@@ -7682,7 +15362,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!targetLevel) return;
+
+
+
+
 
 
 
@@ -7690,7 +15378,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  isLevelMenuExpanded = !isLevelMenuExpanded;
+
+
+
+
 
 
 
@@ -7698,11 +15394,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7710,7 +15418,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  isLevelMenuExpanded = false;
+
+
+
+
 
 
 
@@ -7718,11 +15434,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -7730,7 +15458,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  footerSearchToggle.addEventListener('click', () => {
+
+
+
+
 
 
 
@@ -7738,7 +15474,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  setFooterSearchExpanded(false);
+
+
+
+
 
 
 
@@ -7746,7 +15490,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7754,7 +15506,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (searchInput) searchInput.focus();
+
+
+
+
 
 
 
@@ -7762,11 +15522,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  if (searchInput) {
+
+
+
+
 
 
 
@@ -7774,7 +15546,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  searchInput.addEventListener('input', () => {
+
+
+
+
 
 
 
@@ -7782,11 +15562,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  scheduleSearchIdleCollapse();
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -7794,11 +15586,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -7806,7 +15610,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  scheduleSearchIdleCollapse();
+
+
+
+
 
 
 
@@ -7814,7 +15626,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7822,7 +15642,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ['pointermove', 'focusin', 'touchstart'].forEach(eventName => {
+
+
+
+
 
 
 
@@ -7830,7 +15658,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (isLevelMenuExpanded && !isFooterSearchExpanded) {
+
+
+
+
 
 
 
@@ -7838,7 +15674,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7846,11 +15690,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7858,7 +15714,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ['pointermove', 'focusin', 'touchstart'].forEach(eventName => {
+
+
+
+
 
 
 
@@ -7866,7 +15730,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (isFooterSearchExpanded && !isFooterSearchForcedOpen) {
+
+
+
+
 
 
 
@@ -7874,7 +15746,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7882,11 +15762,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7894,7 +15786,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (isLevelMenuExpanded && levelToggleContainer && !levelToggleContainer.contains(event.target)) {
+
+
+
+
 
 
 
@@ -7902,11 +15802,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  syncMobileLevelToggleState();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7914,7 +15826,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  setFooterSearchExpanded(false);
+
+
+
+
 
 
 
@@ -7922,7 +15842,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -7930,7 +15858,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!mobileLevelMediaQuery.matches) {
+
+
+
+
 
 
 
@@ -7938,7 +15874,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7946,7 +15890,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -7954,7 +15906,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.addEventListener('keydown', async (e) => {
+
+
+
+
 
 
 
@@ -7962,7 +15922,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (document.activeElement.tagName === 'INPUT') return;
+
+
+
+
 
 
 
@@ -7970,11 +15938,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (e.key === 'ArrowUp') {
 
 
 
+
+
+
+
  e.preventDefault();
+
+
+
+
 
 
 
@@ -7982,11 +15962,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  await navigateToLevel(levelOrder[currentLevelIndex - 1]);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -7994,7 +15986,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  e.preventDefault();
+
+
+
+
 
 
 
@@ -8002,15 +16002,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  await navigateToLevel(levelOrder[currentLevelIndex + 1]);
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8018,11 +16034,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  })
 
 
 
+
+
+
+
  .catch(error => {
+
+
+
+
 
 
 
@@ -8030,11 +16058,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  cardsContainer.innerHTML = '<p>Ein Fehler ist beim Laden der Verben aufgetreten. Bitte versuchen Sie es später erneut.</p>';
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -8042,7 +16082,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const verbModalContent = document.querySelector('#verb-modal .modal-content');
+
+
+
+
 
 
 
@@ -8050,7 +16098,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // We migrate once so stale hidden states do not keep IK/LiD invisible forever in the app.
+
+
+
+
 
 
 
@@ -8058,7 +16114,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  localStorage.setItem('toggle-ik-switch', 'true');
+
+
+
+
 
 
 
@@ -8066,11 +16130,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  localStorage.setItem(SETTINGS_MIGRATION_KEY, 'true');
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8078,7 +16154,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const toggleClass = toggle.dataset.toggleClass;
+
+
+
+
 
 
 
@@ -8086,7 +16170,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Load saved state from localStorage
+
+
+
+
 
 
 
@@ -8094,7 +16186,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (savedState !== null) {
+
+
+
+
 
 
 
@@ -8102,7 +16202,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -8110,7 +16218,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (toggleId === 'en-switch' || toggleId === 'recall-switch') {
+
+
+
+
 
 
 
@@ -8118,7 +16234,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else if (toggleId === 'es-switch' || toggleId === 'de-switch') {
+
+
+
+
 
 
 
@@ -8126,11 +16250,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8138,7 +16274,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  mainContainer.classList.toggle(toggleClass, !toggle.checked);
+
+
+
+
 
 
 
@@ -8146,7 +16290,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Add change event listener
+
+
+
+
 
 
 
@@ -8154,7 +16306,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isChecked = event.currentTarget.checked;
+
+
+
+
 
 
 
@@ -8162,11 +16322,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  verbModalContent.classList.toggle(toggleClass, !isChecked);
 
 
 
+
+
+
+
  // Save to localStorage
+
+
+
+
 
 
 
@@ -8174,7 +16346,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (currentViewMode === 'compact' || currentViewMode === 'kompakt') {
+
+
+
+
 
 
 
@@ -8182,7 +16362,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  performSearch();
+
+
+
+
 
 
 
@@ -8190,15 +16378,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  renderVerbGroup();
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8206,7 +16410,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -8214,7 +16426,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const kompaktLightSwitch = document.getElementById('kompakt-light-switch');
+
+
+
+
 
 
 
@@ -8222,7 +16442,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const savedLightState = localStorage.getItem('toggle-kompakt-light');
+
+
+
+
 
 
 
@@ -8230,7 +16458,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.body.classList.toggle('compact-light-mode', kompaktLightSwitch.checked);
+
+
+
+
 
 
 
@@ -8238,7 +16474,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const isChecked = e.currentTarget.checked;
+
+
+
+
 
 
 
@@ -8246,7 +16490,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  localStorage.setItem('toggle-kompakt-light', isChecked);
+
+
+
+
 
 
 
@@ -8254,7 +16506,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8262,7 +16522,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const versionRadios = document.querySelectorAll('input[name="card-version"]');
+
+
+
+
 
 
 
@@ -8270,7 +16538,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let savedVersion = localStorage.getItem('verben-card-version') || 'compact';
+
+
+
+
 
 
 
@@ -8278,7 +16554,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!document.querySelector(`input[name="card-version"][value="${savedVersion}"]`)) {
+
+
+
+
 
 
 
@@ -8286,7 +16570,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8294,7 +16586,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const savedRadio = document.querySelector(`input[name="card-version"][value="${savedVersion}"]`);
+
+
+
+
 
 
 
@@ -8302,11 +16602,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  savedRadio.checked = true;
 
 
 
+
+
+
+
  mainContainer.classList.remove('light-version', 'cute-version');
+
+
+
+
 
 
 
@@ -8314,7 +16626,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  mainContainer.classList.add('light-version');
+
+
+
+
 
 
 
@@ -8322,15 +16642,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  mainContainer.classList.add('cute-version');
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8338,7 +16674,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  versionRadios.forEach(radio => {
+
+
+
+
 
 
 
@@ -8346,7 +16690,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const selectedVersion = event.target.value;
+
+
+
+
 
 
 
@@ -8354,7 +16706,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Remove all version classes
+
+
+
+
 
 
 
@@ -8362,7 +16722,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Add appropriate class
+
+
+
+
 
 
 
@@ -8370,7 +16738,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  mainContainer.classList.add('light-version');
+
+
+
+
 
 
 
@@ -8378,11 +16754,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  mainContainer.classList.add('cute-version');
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8390,7 +16778,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  localStorage.setItem('verben-card-version', selectedVersion);
+
+
+
+
 
 
 
@@ -8398,11 +16794,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -8410,7 +16818,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  storyContainer.style.display = 'block';
+
+
+
+
 
 
 
@@ -8418,11 +16834,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  storyClickCounter = (storyClickCounter + 1) % savedStories.length;
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -8430,7 +16858,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  closeInfoModalButton.addEventListener('click', () => infoModal.classList.remove('visible'));
+
+
+
+
 
 
 
@@ -8438,7 +16874,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (closeVerbModalButton) {
+
+
+
+
 
 
 
@@ -8446,7 +16890,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8454,7 +16906,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  verbModal.addEventListener('click', (e) => { if (e.target === verbModal) closeVerbModal(); });
+
+
+
+
 
 
 
@@ -8462,11 +16922,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Note: We attach to header tags container now
 
 
 
+
+
+
+
  const headerTagsContainer = document.getElementById('modal-header-tags');
+
+
+
+
 
 
 
@@ -8474,7 +16946,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Check if clicked element is the theme badge
+
+
+
+
 
 
 
@@ -8482,7 +16962,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  e.stopPropagation(); // Prevent modal header click (TTS)
+
+
+
+
 
 
 
@@ -8490,7 +16978,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const targetGroup = parseInt(e.target.dataset.group);
+
+
+
+
 
 
 
@@ -8498,7 +16994,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Convert display level (e.g., "A1.1") to unified macro level ("A1")
+
+
+
+
 
 
 
@@ -8506,7 +17010,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const levelKey = targetLevel.replace('.', '_');
+
+
+
+
 
 
 
@@ -8514,7 +17026,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let newGroupIndex = targetGroup - 1; // 0-indexed local
+
+
+
+
 
 
 
@@ -8522,7 +17042,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  for (let layer of layers) {
+
+
+
+
 
 
 
@@ -8530,11 +17058,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  newGroupIndex += layer.count;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8542,7 +17082,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  verbModal.classList.remove('visible');
+
+
+
+
 
 
 
@@ -8550,7 +17098,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const searchInput = document.getElementById('verb-search');
+
+
+
+
 
 
 
@@ -8558,7 +17114,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const searchCounter = document.getElementById('search-counter');
+
+
+
+
 
 
 
@@ -8566,7 +17130,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  searchInput.value = '';
+
+
+
+
 
 
 
@@ -8574,11 +17146,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (searchCounter) searchCounter.textContent = '';
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8586,7 +17170,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (levelIndicator) {
+
+
+
+
 
 
 
@@ -8594,11 +17186,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  levelIndicator.style.pointerEvents = 'auto';
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8606,7 +17210,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  currentLevel = macroLevel;
+
+
+
+
 
 
 
@@ -8614,7 +17226,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Reset transform before rendering new group
+
+
+
+
 
 
 
@@ -8622,7 +17242,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Update UI - render the verb group
+
+
+
+
 
 
 
@@ -8630,15 +17258,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
  });
+
+
+
+
 
 
 
@@ -8646,7 +17290,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  gustarButton.addEventListener('click', () => gustarModal.classList.add('visible'));
+
+
+
+
 
 
 
@@ -8654,7 +17306,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  gustarCloseFooterBtn.addEventListener('click', () => gustarModal.classList.remove('visible'));
+
+
+
+
 
 
 
@@ -8662,7 +17322,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Reflexive modal event listeners
+
+
+
+
 
 
 
@@ -8670,11 +17338,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  reflexiveButton.addEventListener('click', () => reflexiveModal.classList.add('visible'));
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8682,11 +17362,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  reflexiveCloseBtn.addEventListener('click', () => reflexiveModal.classList.remove('visible'));
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8694,11 +17386,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  reflexiveCloseFooterBtn.addEventListener('click', () => reflexiveModal.classList.remove('visible'));
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8706,11 +17410,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  reflexiveModal.addEventListener('click', (e) => { if (e.target === reflexiveModal) reflexiveModal.classList.remove('visible'); });
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8718,7 +17434,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // TTS on Modal Header
+
+
+
+
 
 
 
@@ -8726,7 +17450,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (modalHeader) {
+
+
+
+
 
 
 
@@ -8734,7 +17466,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  modalHeader.title = 'Aussprache hören';
+
+
+
+
 
 
 
@@ -8742,11 +17482,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  e.preventDefault();
 
 
 
+
+
+
+
  e.stopPropagation();
+
+
+
+
 
 
 
@@ -8754,7 +17506,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (verbText) {
+
+
+
+
 
 
 
@@ -8762,7 +17522,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8770,7 +17538,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8778,7 +17554,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  groupThemeIndicator.addEventListener('click', openThemeModal);
+
+
+
+
 
 
 
@@ -8786,7 +17570,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  closeThemeModalBtn.addEventListener('click', () => themeModal.classList.remove('visible'));
+
+
+
+
 
 
 
@@ -8794,7 +17586,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Setup Tabs
+
+
+
+
 
 
 
@@ -8802,7 +17602,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8810,7 +17618,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  function setupTabs() {
+
+
+
+
 
 
 
@@ -8818,7 +17634,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const tabContents = document.querySelectorAll('.tab-content');
+
+
+
+
 
 
 
@@ -8826,7 +17650,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Mobile Carousel State
+
+
+
+
 
 
 
@@ -8834,7 +17666,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const visibleTabCount = 3;
+
+
+
+
 
 
 
@@ -8842,7 +17682,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!document.querySelector('.mobile-tab-arrow')) {
+
+
+
+
 
 
 
@@ -8850,7 +17698,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  leftArrow.className = 'mobile-tab-arrow left';
+
+
+
+
 
 
 
@@ -8858,7 +17714,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const rightArrow = document.createElement('div');
+
+
+
+
 
 
 
@@ -8866,7 +17730,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  rightArrow.innerHTML = '&#10095;'; // >
+
+
+
+
 
 
 
@@ -8874,7 +17746,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  modalTabsNav.appendChild(rightArrow);
+
+
+
+
 
 
 
@@ -8882,7 +17762,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  e.stopPropagation(); // Prevent tab click
+
+
+
+
 
 
 
@@ -8890,7 +17778,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -8898,7 +17794,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  e.stopPropagation();
+
+
+
+
 
 
 
@@ -8906,11 +17810,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8918,7 +17834,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  function updateCarousel() {
+
+
+
+
 
 
 
@@ -8926,7 +17850,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Note: Konjunktiv tab might be hidden via display:none style if not applicable.
+
+
+
+
 
 
 
@@ -8934,7 +17866,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // However, the display style is set dynamically in openModalForVerb.
+
+
+
+
 
 
 
@@ -8942,11 +17882,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // For now, let's just assume we operate on buttons that are not 'display: none' via inline style.
 
 
 
+
+
+
+
  const visibleButtons = tabBtns.filter(btn => btn.style.display !== 'none');
+
+
+
+
 
 
 
@@ -8954,7 +17906,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (currentCarouselIndex < 0) currentCarouselIndex = 0;
+
+
+
+
 
 
 
@@ -8962,11 +17922,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  currentCarouselIndex = Math.max(0, visibleButtons.length - visibleTabCount);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -8974,7 +17946,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tabBtns.forEach(btn => btn.classList.remove('visible-tab'));
+
+
+
+
 
 
 
@@ -8982,7 +17962,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (index >= currentCarouselIndex && index < currentCarouselIndex + visibleTabCount) {
+
+
+
+
 
 
 
@@ -8990,11 +17978,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -9002,7 +18002,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // For simple carousel, always show if count > visibleTabCount?
+
+
+
+
 
 
 
@@ -9010,7 +18018,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const arrows = document.querySelectorAll('.mobile-tab-arrow');
+
+
+
+
 
 
 
@@ -9018,7 +18034,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  arrows.forEach(arrow => {
+
+
+
+
 
 
 
@@ -9026,11 +18050,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9038,7 +18074,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const visibleButtons = tabBtns.filter(btn => btn.style.display !== 'none');
+
+
+
+
 
 
 
@@ -9046,7 +18090,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  currentCarouselIndex += direction;
+
+
+
+
 
 
 
@@ -9054,7 +18106,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (currentCarouselIndex > maxIndex) currentCarouselIndex = maxIndex;
+
+
+
+
 
 
 
@@ -9062,7 +18122,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9070,7 +18138,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  window.updateTabCarousel = updateCarousel;
+
+
+
+
 
 
 
@@ -9078,7 +18154,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  btn.addEventListener('click', () => {
+
+
+
+
 
 
 
@@ -9086,7 +18170,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tabBtns.forEach(b => b.classList.remove('active'));
+
+
+
+
 
 
 
@@ -9094,7 +18186,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Add active class to clicked button
+
+
+
+
 
 
 
@@ -9102,7 +18202,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Show corresponding content
+
+
+
+
 
 
 
@@ -9110,7 +18218,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const contentId = `${tabId}-tab-content`;
+
+
+
+
 
 
 
@@ -9118,7 +18234,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (content) {
+
+
+
+
 
 
 
@@ -9126,11 +18250,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  content.style.display = 'block';
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9138,7 +18274,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tabContents.forEach(c => {
+
+
+
+
 
 
 
@@ -9146,7 +18290,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  c.style.display = 'none';
+
+
+
+
 
 
 
@@ -9154,7 +18306,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -9162,11 +18322,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  maybeLoadExamplesForActiveTab(currentVerbInModal, tabId);
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -9174,7 +18346,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
     // openConjugationSubModal(tabId);
+
+
+
+
 
 
 
@@ -9182,11 +18362,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   });
 
 
 
+
+
+
+
   });
+
+
+
+
 
 
 
@@ -9194,7 +18386,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  updateCarousel();
+
+
+
+
 
 
 
@@ -9202,7 +18402,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9210,7 +18418,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  async function openThemeModal(optLevelKey, optGroupIndex) {
+
+
+
+
 
 
 
@@ -9218,11 +18434,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  window.speechSynthesis.cancel();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9230,7 +18458,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const levelKey = (typeof optLevelKey === 'string') ? optLevelKey : currentLevel;
+
+
+
+
 
 
 
@@ -9238,7 +18474,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const groupNum = groupIndex + 1; // 1-indexed
+
+
+
+
 
 
 
@@ -9246,7 +18490,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const groupData = verbGroupsByLevel[levelKey][groupIndex];
+
+
+
+
 
 
 
@@ -9254,7 +18506,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  console.error(`Group data not found for ${levelKey} group index ${groupIndex}`);
+
+
+
+
 
 
 
@@ -9262,7 +18522,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9270,7 +18538,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const themeData = groupData;
+
+
+
+
 
 
 
@@ -9278,7 +18554,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const themeModalContent = themeModal.querySelector('.theme-modal-content');
+
+
+
+
 
 
 
@@ -9286,11 +18570,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  themeModalContent.style.setProperty('--theme-modal-accent', themeColor);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9298,7 +18594,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('theme-modal-german-name').textContent = themeData.theme || themeData.germanName;
+
+
+
+
 
 
 
@@ -9306,7 +18610,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const englishObj = document.getElementById('theme-modal-english-name');
+
+
+
+
 
 
 
@@ -9314,7 +18626,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  englishObj.textContent = themeData.groupNameEnglish;
+
+
+
+
 
 
 
@@ -9322,7 +18642,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else if (englishObj) {
+
+
+
+
 
 
 
@@ -9330,7 +18658,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9338,7 +18674,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const defaultDescription = [themeData.group ? `Grupo ${themeData.group}` : '', themeData.shortName || ''].filter(Boolean).join(' · ');
+
+
+
+
 
 
 
@@ -9346,7 +18690,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ? 'circunstancias inevitables de la vida'
+
+
+
+
 
 
 
@@ -9354,7 +18706,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('theme-modal-description').textContent = customDescription;
+
+
+
+
 
 
 
@@ -9362,7 +18722,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('theme-modal-spanish-desc').textContent = themeData.spanishDescription;
+
+
+
+
 
 
 
@@ -9370,7 +18738,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const ratingBadge = document.getElementById('theme-modal-rating');
+
+
+
+
 
 
 
@@ -9378,7 +18754,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Add appropriate class based on rating type
+
+
+
+
 
 
 
@@ -9386,7 +18770,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (themeData.b1Rating) {
+
+
+
+
 
 
 
@@ -9394,7 +18786,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ratingBadge.classList.add('critical');
+
+
+
+
 
 
 
@@ -9402,7 +18802,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ratingBadge.classList.add('high');
+
+
+
+
 
 
 
@@ -9410,15 +18818,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ratingBadge.classList.add('medium');
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9426,7 +18850,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('theme-modal-exam-context-es').textContent = themeData.examContextEs || '';
+
+
+
+
 
 
 
@@ -9434,11 +18866,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  themeModal.classList.add('visible');
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9446,7 +18890,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // --- TTS FUNCTION ---
+
+
+
+
 
 
 
@@ -9454,7 +18906,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
    if ('speechSynthesis' in window) {
+
+
+
+
 
 
 
@@ -9462,7 +18922,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
      window.speechSynthesis.cancel();
+
+
+
+
 
 
 
@@ -9470,7 +18938,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
        window.speechSynthesis.resume();
+
+
+
+
 
 
 
@@ -9478,7 +18954,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
      // Small delay prevents immediate cancellation bug in Chromium-based browsers
+
+
+
+
 
 
 
@@ -9486,7 +18970,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
        const voices = window.speechSynthesis.getVoices();
+
+
+
+
 
 
 
@@ -9494,7 +18986,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
        const getVoice = () => {
+
+
+
+
 
 
 
@@ -9502,7 +19002,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
                 voices.find(voice => voice.lang === lang && voice.name.includes('Microsoft')) ||
+
+
+
+
 
 
 
@@ -9510,7 +19018,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
                 voices.find(voice => voice.lang === lang.replace('-', '_')) ||
+
+
+
+
 
 
 
@@ -9518,7 +19034,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
        };
+
+
+
+
 
 
 
@@ -9526,7 +19050,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
        // Helper to create and speak utterance
+
+
+
+
 
 
 
@@ -9534,7 +19066,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
          const u = new SpeechSynthesisUtterance(txt);
+
+
+
+
 
 
 
@@ -9542,7 +19082,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
          u.pitch = pitchVal;
+
+
+
+
 
 
 
@@ -9550,7 +19098,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
            u.voice = targetVoice;
+
+
+
+
 
 
 
@@ -9558,7 +19114,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
          } else {
+
+
+
+
 
 
 
@@ -9566,7 +19130,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
          }
+
+
+
+
 
 
 
@@ -9574,7 +19146,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
        };
+
+
+
+
 
 
 
@@ -9582,7 +19162,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
        // Experimental: For questions, split the last word to force pitch rise
+
+
+
+
 
 
 
@@ -9590,7 +19178,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
          const parts = text.trim().lastIndexOf(' ');
+
+
+
+
 
 
 
@@ -9598,7 +19194,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
          const lastPart = text.substring(parts + 1);
+
+
+
+
 
 
 
@@ -9606,7 +19210,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
          speakUtterance(lastPart, 1.3, rate);
+
+
+
+
 
 
 
@@ -9614,7 +19226,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
          speakUtterance(text, 1.2, rate);
+
+
+
+
 
 
 
@@ -9622,7 +19242,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
          speakUtterance(text, 1.0, rate);
+
+
+
+
 
 
 
@@ -9630,7 +19258,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
      }, 50);
+
+
+
+
 
 
 
@@ -9638,7 +19274,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
      console.error("Speech synthesis not supported in this browser.");
+
+
+
+
 
 
 
@@ -9646,7 +19290,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9654,7 +19306,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // --- UPDATED MODAL FUNCTION WITH LAZY LOADING ---
+
+
+
+
 
 
 
@@ -9662,7 +19322,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const { skipDeferredReload = false, skipExampleReload = false, preferredTab = null } = options;
+
+
+
+
 
 
 
@@ -9670,7 +19338,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!data) return;
+
+
+
+
 
 
 
@@ -9678,7 +19354,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const activeTabBeforeRefresh = preferredTab || document.querySelector('.modal-tab-btn.active')?.dataset.tab || 'infinitiv';
+
+
+
+
 
 
 
@@ -9686,11 +19370,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!data.praesens) {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -9698,7 +19394,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } catch (error) {
+
+
+
+
 
 
 
@@ -9706,11 +19410,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9718,7 +19434,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const updatedData = allVerbsData[verb];
+
+
+
+
 
 
 
@@ -9726,7 +19450,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  updatedData._wortfamilieLoaded !== true ||
+
+
+
+
 
 
 
@@ -9734,7 +19466,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Set infinitive with case tags
+
+
+
+
 
 
 
@@ -9742,7 +19482,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // const irregularMark = updatedData.irregularPraesens ? '<span class="irregular-indicator">*</span>' : '';
+
+
+
+
 
 
 
@@ -9750,7 +19498,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  infinitiveElement.innerHTML = formatVerbPrefix(verb, true);
+
+
+
+
 
 
 
@@ -9758,7 +19514,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const tagsCollapsible = document.getElementById('modal-tags-collapsible');
+
+
+
+
 
 
 
@@ -9766,7 +19530,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (tagsCollapsible && tagsToggle) {
+
+
+
+
 
 
 
@@ -9774,7 +19546,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tagsToggle.querySelector('.dots-icon').style.display = 'inline';
+
+
+
+
 
 
 
@@ -9782,7 +19562,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9790,7 +19578,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const caseTagsContainer = document.getElementById('modal-case-tags-container');
+
+
+
+
 
 
 
@@ -9798,7 +19594,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // ROW 1: Theme badge - MOVED TO HEADER
+
+
+
+
 
 
 
@@ -9806,7 +19610,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  headerTagsContainer.innerHTML = ''; // Clear previous header tags
+
+
+
+
 
 
 
@@ -9814,7 +19626,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const extraTagsContainer = document.getElementById('modal-extra-tags');
+
+
+
+
 
 
 
@@ -9822,7 +19642,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (updatedData.theme && updatedData.group) {
+
+
+
+
 
 
 
@@ -9830,7 +19658,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  themeBadge.id = 'modal-theme-badge';
+
+
+
+
 
 
 
@@ -9838,7 +19674,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  themeBadge.title = 'Zum Thema navigieren (Navigate to theme)';
+
+
+
+
 
 
 
@@ -9846,7 +19690,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  themeBadge.style.display = 'inline-block';
+
+
+
+
 
 
 
@@ -9854,7 +19706,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  themeBadge.dataset.group = updatedData.group;
+
+
+
+
 
 
 
@@ -9862,7 +19722,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  themeBadge.style.backgroundColor = 'rgba(255, 255, 255, 0.25)';
+
+
+
+
 
 
 
@@ -9870,7 +19738,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  themeBadge.style.color = 'white';
+
+
+
+
 
 
 
@@ -9878,11 +19754,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  headerTagsContainer.appendChild(themeBadge);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -9890,7 +19778,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const allTags = [
+
+
+
+
 
 
 
@@ -9898,11 +19794,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ...(updatedData.tags || [])
 
 
 
+
+
+
+
  ];
+
+
+
+
 
 
 
@@ -9910,7 +19818,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const tagsContainer = document.createElement('div');
+
+
+
+
 
 
 
@@ -9918,7 +19834,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const groups = {
+
+
+
+
 
 
 
@@ -9926,7 +19850,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  'Kasus': [],
+
+
+
+
 
 
 
@@ -9934,7 +19866,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  'Struktur': [],
+
+
+
+
 
 
 
@@ -9942,7 +19882,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -9950,7 +19898,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const uniqueTags = [...new Set(allTags)];
+
+
+
+
 
 
 
@@ -9958,7 +19914,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (['Akkusativ', 'Dativ', 'Nominativ', 'Genitiv', 'Intransitive', 'intrans'].includes(tag)) groups['Kasus'].push(tag);
+
+
+
+
 
 
 
@@ -9966,7 +19930,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  else if (['Separable', 'Regular', 'Irregular'].includes(tag)) groups['Struktur'].push(tag);
+
+
+
+
 
 
 
@@ -9974,7 +19946,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  else if (tag.includes('Movimiento') || tag.includes('Estático') || tag.includes('🚀') || tag.includes('🏡')) groups['Hilfsverb'].push(tag);
+
+
+
+
 
 
 
@@ -9982,7 +19962,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -9990,7 +19978,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (groups[category].length === 0) return;
+
+
+
+
 
 
 
@@ -9998,7 +19994,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  row.className = 'tag-row';
+
+
+
+
 
 
 
@@ -10006,7 +20010,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  label.className = 'tag-category-label';
+
+
+
+
 
 
 
@@ -10014,7 +20026,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const tagGroup = document.createElement('div');
+
+
+
+
 
 
 
@@ -10022,7 +20042,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  groups[category].forEach(tag => {
+
+
+
+
 
 
 
@@ -10030,7 +20058,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Create specific class based on tag name, remove special chars
+
+
+
+
 
 
 
@@ -10038,7 +20074,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // but usually only affects CSS selector matching. 
+
+
+
+
 
 
 
@@ -10046,7 +20090,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const safeTagClass = tag.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+
+
+
 
 
 
@@ -10054,7 +20106,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tagSpan.textContent = tag;
+
+
+
+
 
 
 
@@ -10062,11 +20122,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tagSpan.addEventListener('click', (e) => {
 
 
 
+
+
+
+
  e.stopPropagation();
+
+
+
+
 
 
 
@@ -10074,7 +20146,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (verbModal) verbModal.classList.remove('visible');
+
+
+
+
 
 
 
@@ -10082,7 +20162,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  searchInput.value = `tag:${tag}`;
+
+
+
+
 
 
 
@@ -10090,11 +20178,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -10102,7 +20202,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -10110,7 +20218,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  row.appendChild(tagGroup);
+
+
+
+
 
 
 
@@ -10118,7 +20234,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -10126,7 +20250,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -10134,7 +20266,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Render Usage Note (Custom rich text note)
+
+
+
+
 
 
 
@@ -10142,7 +20282,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (usageNoteContainer) {
+
+
+
+
 
 
 
@@ -10150,7 +20298,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (updatedData.usage_note) {
+
+
+
+
 
 
 
@@ -10158,7 +20314,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  noteDiv.className = 'verb-usage-note';
+
+
+
+
 
 
 
@@ -10166,7 +20330,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  noteDiv.style.padding = '12px';
+
+
+
+
 
 
 
@@ -10174,7 +20346,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  noteDiv.style.borderLeft = '4px solid #4682B4';
+
+
+
+
 
 
 
@@ -10182,7 +20362,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  noteDiv.style.color = '#333';
+
+
+
+
 
 
 
@@ -10190,7 +20378,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  noteDiv.style.borderRadius = '4px';
+
+
+
+
 
 
 
@@ -10198,7 +20394,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  noteDiv.style.boxShadow = '0 2px 4px rgba(0,0,0,0.05)';
+
+
+
+
 
 
 
@@ -10206,15 +20410,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  usageNoteContainer.appendChild(noteDiv);
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -10222,7 +20442,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('modal-verb-praeteritum').textContent = updatedData.praeteritum || '---';
+
+
+
+
 
 
 
@@ -10230,7 +20458,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const tabBtnInfinitiv = document.getElementById('tab-btn-infinitiv');
+
+
+
+
 
 
 
@@ -10238,7 +20474,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const tabBtnPraeteritum = document.getElementById('tab-btn-praeteritum');
+
+
+
+
 
 
 
@@ -10246,7 +20490,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tabBtnInfinitiv.textContent = verb;
+
+
+
+
 
 
 
@@ -10254,7 +20506,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -10262,7 +20522,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tabBtnPerfekt.textContent = getCleanPerfekt(updatedData.perfekt);
+
+
+
+
 
 
 
@@ -10270,7 +20538,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -10278,7 +20554,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tabBtnPraeteritum.textContent = getCleanPraeteritum(updatedData.praeteritum);
+
+
+
+
 
 
 
@@ -10286,7 +20570,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -10294,7 +20586,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('praesens-tab-content').classList.add('active');
+
+
+
+
 
 
 
@@ -10302,7 +20602,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('perfekt-tab-content').classList.remove('active');
+
+
+
+
 
 
 
@@ -10310,7 +20618,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('praeteritum-tab-content').classList.remove('active');
+
+
+
+
 
 
 
@@ -10318,7 +20634,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('konjunktiv-tab-content').classList.remove('active');
+
+
+
+
 
 
 
@@ -10326,7 +20650,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Show/Hide Konjunktiv Tab Button and Set Label
+
+
+
+
 
 
 
@@ -10334,7 +20666,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (tabBtnKonjunktiv) {
+
+
+
+
 
 
 
@@ -10342,7 +20682,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tabBtnKonjunktiv.style.display = 'inline-block';
+
+
+
+
 
 
 
@@ -10350,11 +20698,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tabBtnKonjunktiv.classList.remove('active');
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -10362,11 +20722,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -10374,7 +20746,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Emoji with TTS
+
+
+
+
 
 
 
@@ -10382,7 +20762,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (modalEmojiEl) modalEmojiEl.textContent = updatedData.emoji || '❔';
+
+
+
+
 
 
 
@@ -10390,7 +20778,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  e.stopPropagation();
+
+
+
+
 
 
 
@@ -10398,7 +20794,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -10406,7 +20810,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const esSwitch = document.getElementById('es-switch');
+
+
+
+
 
 
 
@@ -10414,7 +20826,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   const showSpanish = esSwitch ? esSwitch.checked : true;
+
+
+
+
 
 
 
@@ -10422,7 +20842,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   const translations = [];
+
+
+
+
 
 
 
@@ -10430,7 +20858,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   if (showEnglish && updatedData.en_verb) translations.push(updatedData.en_verb);
+
+
+
+
 
 
 
@@ -10438,7 +20874,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   if (translationsEl) {
+
+
+
+
 
 
 
@@ -10446,7 +20890,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -10454,7 +20906,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('modal-verb-praeteritum-es').textContent = updatedData.es_praeteritum || '';
+
+
+
+
 
 
 
@@ -10462,7 +20922,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('modal-verb-english-praeteritum').textContent = updatedData.en_praeteritum || '';
+
+
+
+
 
 
 
@@ -10470,7 +20938,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   const macroLevel = levelText.split('.')[0];
+
+
+
+
 
 
 
@@ -10478,7 +20954,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // --- NEW NOTE LOGIC ---
+
+
+
+
 
 
 
@@ -10486,7 +20970,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Use 'note' attribute or fallback to 'note_es'
+
+
+
+
 
 
 
@@ -10494,7 +20986,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   if (generalNoteElement) {
+
+
+
+
 
 
 
@@ -10502,7 +21002,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -10510,7 +21018,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const praesensNote = updatedData.praesens_note;
+
+
+
+
 
 
 
@@ -10518,7 +21034,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (praesensNote) {
+
+
+
+
 
 
 
@@ -10526,11 +21050,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  praesensNoteElement.style.display = 'block';
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -10538,7 +21074,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -10546,7 +21090,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const perfektNote = updatedData.note_perfekt;
+
+
+
+
 
 
 
@@ -10554,7 +21106,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (perfektNoteElement) {
+
+
+
+
 
 
 
@@ -10562,7 +21122,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  perfektNoteElement.innerHTML = perfektNote;
+
+
+
+
 
 
 
@@ -10570,7 +21138,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -10578,11 +21154,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -10590,7 +21178,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const praeteritumNote = updatedData.praeteritum_note;
+
+
+
+
 
 
 
@@ -10598,7 +21194,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (praeteritumNoteElement) {
+
+
+
+
 
 
 
@@ -10606,7 +21210,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  praeteritumNoteElement.innerHTML = praeteritumNote;
+
+
+
+
 
 
 
@@ -10614,7 +21226,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -10622,11 +21242,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -10634,7 +21266,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // keeping the element ref just in case but logic is handled above
+
+
+
+
 
 
 
@@ -10642,7 +21282,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (oldNoteElement) {
+
+
+
+
 
 
 
@@ -10650,7 +21298,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -10658,7 +21314,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const parseWordString = (str) => {
+
+
+
+
 
 
 
@@ -10666,7 +21330,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // e.g., "verheiratet (A2) = casado/a (adjetivo)"
+
+
+
+
 
 
 
@@ -10674,7 +21346,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const match = str.match(/^(.*?)\s*\((\w+)\)\s*=\s*(.*)$/);
+
+
+
+
 
 
 
@@ -10682,7 +21362,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return {
+
+
+
+
 
 
 
@@ -10690,7 +21378,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  level: match[2].trim(), // e.g. "A2"
+
+
+
+
 
 
 
@@ -10698,7 +21394,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  es: match[3].trim()
+
+
+
+
 
 
 
@@ -10706,7 +21410,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -10714,7 +21426,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return {
+
+
+
+
 
 
 
@@ -10722,7 +21442,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  level: 'Extras',
+
+
+
+
 
 
 
@@ -10730,15 +21458,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  es: ''
 
 
 
+
+
+
+
  };
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -10746,7 +21490,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  window.toggleTrick = function (btn) {
+
+
+
+
 
 
 
@@ -10754,7 +21506,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (content && content.classList.contains('truco-content')) {
+
+
+
+
 
 
 
@@ -10762,7 +21522,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  content.style.display = isHidden ? 'block' : 'none';
+
+
+
+
 
 
 
@@ -10770,11 +21538,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -10782,7 +21562,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const renderStandardWordList = (container, contentEl, wordObjects) => {
+
+
+
+
 
 
 
@@ -10790,7 +21578,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!wordObjects || wordObjects.length === 0) {
+
+
+
+
 
 
 
@@ -10798,11 +21594,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -10810,7 +21618,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Group words by level
+
+
+
+
 
 
 
@@ -10818,7 +21634,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const extraLevels = {};
+
+
+
+
 
 
 
@@ -10826,7 +21650,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const lvl = wordData.level;
+
+
+
+
 
 
 
@@ -10834,11 +21666,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  wordsByLevel[lvl].push(wordData);
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -10846,7 +21690,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  extraLevels[lvl].push(wordData);
+
+
+
+
 
 
 
@@ -10854,7 +21706,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -10862,7 +21722,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let contentHTML = '';
+
+
+
+
 
 
 
@@ -10870,7 +21738,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ['A1', 'A2', 'B1'].forEach(level => {
+
+
+
+
 
 
 
@@ -10878,11 +21754,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `<div class="wf-level-section">`;
 
 
 
+
+
+
+
  contentHTML += `<div class="wf-level-header">${level}</div>`;
+
+
+
+
 
 
 
@@ -10890,7 +21778,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const abbrev = typeAbbrev[wordData.type] || wordData.type || '';
+
+
+
+
 
 
 
@@ -10898,7 +21794,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `<div class="wf-word-line">`;
+
+
+
+
 
 
 
@@ -10906,7 +21810,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const safeWord = wordData.word.replace(/'/g, "\\'");
+
+
+
+
 
 
 
@@ -10914,11 +21826,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (abbrev) contentHTML += ` <span class="wf-word-type">${abbrev}</span>`;
 
 
 
+
+
+
+
  contentHTML += `</div>`;
+
+
+
+
 
 
 
@@ -10926,7 +21850,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `<div class="wf-word-translation">`;
+
+
+
+
 
 
 
@@ -10934,7 +21866,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (wordData.truco) {
+
+
+
+
 
 
 
@@ -10942,7 +21882,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -10950,7 +21898,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (wordData.example) {
+
+
+
+
 
 
 
@@ -10958,11 +21914,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  contentHTML += `</div>`;
+
+
+
+
 
 
 
@@ -10970,7 +21938,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (wordData.truco) {
+
+
+
+
 
 
 
@@ -10978,11 +21954,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `💡 <strong>Truco:</strong> ${wordData.truco}`;
 
 
 
+
+
+
+
  contentHTML += `</div>`;
+
+
+
+
 
 
 
@@ -10990,7 +21978,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `</div>`;
+
+
+
+
 
 
 
@@ -10998,7 +21994,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `</div>`;
+
+
+
+
 
 
 
@@ -11006,7 +22010,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -11014,7 +22026,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  Object.keys(extraLevels).forEach(level => {
+
+
+
+
 
 
 
@@ -11022,7 +22042,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `<div class="wf-level-section">`;
+
+
+
+
 
 
 
@@ -11030,7 +22058,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  extraLevels[level].forEach(wordData => {
+
+
+
+
 
 
 
@@ -11038,7 +22074,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `<div class="wf-word-item">`;
+
+
+
+
 
 
 
@@ -11046,7 +22090,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Safe stringify for onclick
+
+
+
+
 
 
 
@@ -11054,7 +22106,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `• <span class="wf-word-german" onclick="speak('${safeWord}')" title="Aussprache hören">${wordData.word}</span>`;
+
+
+
+
 
 
 
@@ -11062,7 +22122,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `</div>`;
+
+
+
+
 
 
 
@@ -11070,7 +22138,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `<div class="wf-word-translation">`;
+
+
+
+
 
 
 
@@ -11078,7 +22154,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (wordData.truco) {
+
+
+
+
 
 
 
@@ -11086,7 +22170,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11094,7 +22186,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (wordData.example) {
+
+
+
+
 
 
 
@@ -11102,11 +22202,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  contentHTML += `</div>`;
+
+
+
+
 
 
 
@@ -11114,7 +22226,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (wordData.truco) {
+
+
+
+
 
 
 
@@ -11122,11 +22242,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `💡 <strong>Truco:</strong> ${wordData.truco}`;
 
 
 
+
+
+
+
  contentHTML += `</div>`;
+
+
+
+
 
 
 
@@ -11134,7 +22266,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `</div>`;
+
+
+
+
 
 
 
@@ -11142,7 +22282,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  contentHTML += `</div>`;
+
+
+
+
 
 
 
@@ -11150,7 +22298,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -11158,7 +22314,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -11166,7 +22330,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const wortfamilieContainer = document.getElementById('wortfamilie-container');
+
+
+
+
 
 
 
@@ -11174,7 +22346,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let wortfamilieItems = [];
+
+
+
+
 
 
 
@@ -11182,7 +22362,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  wortfamilieItems = updatedData.wortfamilie.map(item => {
+
+
+
+
 
 
 
@@ -11190,11 +22378,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  return parseWordString(item);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11202,11 +22402,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11214,7 +22426,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Populate Wortfeld section
+
+
+
+
 
 
 
@@ -11222,7 +22442,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const wortfeldContent = document.getElementById('wortfeld-content');
+
+
+
+
 
 
 
@@ -11230,7 +22458,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (updatedData.wortfeld && Array.isArray(updatedData.wortfeld) && updatedData.wortfeld.length > 0) {
+
+
+
+
 
 
 
@@ -11238,7 +22474,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (typeof item === 'string') {
+
+
+
+
 
 
 
@@ -11246,7 +22490,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11254,11 +22506,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11266,7 +22530,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   renderSaetzeSection(updatedData);
+
+
+
+
 
 
 
@@ -11274,7 +22546,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (updatedData.praesens) {
+
+
+
+
 
 
 
@@ -11282,7 +22562,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const pronounOrder = [
+
+
+
+
 
 
 
@@ -11290,7 +22578,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'du', display: 'du', spanish: 'tú' },
+
+
+
+
 
 
 
@@ -11298,7 +22594,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'sie', display: 'sie', spanish: 'ella' },
+
+
+
+
 
 
 
@@ -11306,7 +22610,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'wir', display: 'wir', spanish: 'nosotr@s' },
+
+
+
+
 
 
 
@@ -11314,7 +22626,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'sie (plural)', display: 'sie', spanish: 'ell@s' },
+
+
+
+
 
 
 
@@ -11322,7 +22642,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ];
+
+
+
+
 
 
 
@@ -11330,7 +22658,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const hasFrageExamples = !!(updatedData.praesens_fragen && Object.keys(updatedData.praesens_fragen).length);
+
+
+
+
 
 
 
@@ -11338,7 +22674,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const beispielModes = [
+
+
+
+
 
 
 
@@ -11346,7 +22690,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  hasFrageExamples ? { key: 'frage', label: 'Frage' } : null,
+
+
+
+
 
 
 
@@ -11354,7 +22706,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ].filter(Boolean);
+
+
+
+
 
 
 
@@ -11362,11 +22722,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tableHTML += `<tr><th>Pron.</th><th>Konjugation</th><th>Beispiel <span id="beispiel-mode-tag" class="beispiel-mode-tag">${beispielModes[0]?.label || 'Aussage'}</span><button id="toggle-beispiel-type" class="toggle-beispiel-btn" title="Beispielmodus wechseln">&#8644;</button></th></tr>`;
 
 
 
+
+
+
+
  for (const { key, display, spanish } of pronounOrder) {
+
+
+
+
 
 
 
@@ -11374,7 +22746,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (conjugation) {
+
+
+
+
 
 
 
@@ -11382,7 +22762,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const frage = updatedData.praesens_fragen && updatedData.praesens_fragen[key];
+
+
+
+
 
 
 
@@ -11390,7 +22778,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let exampleCell = '';
+
+
+
+
 
 
 
@@ -11398,7 +22794,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  exampleCell = `<div class="example-cell">`;
+
+
+
+
 
 
 
@@ -11406,7 +22810,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (example) {
+
+
+
+
 
 
 
@@ -11414,7 +22826,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (example.de) exampleCell += `<div class="example-de">${example.de}</div>`;
+
+
+
+
 
 
 
@@ -11422,7 +22842,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (example.es) exampleCell += `<div class="example-translation example-es">${example.es}</div>`;
+
+
+
+
 
 
 
@@ -11430,7 +22858,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11438,7 +22874,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (frage) {
+
+
+
+
 
 
 
@@ -11446,7 +22890,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (frage.de) exampleCell += `<div class="example-de">${frage.de}</div>`;
+
+
+
+
 
 
 
@@ -11454,7 +22906,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (frage.es) exampleCell += `<div class="example-translation example-es">${frage.es}</div>`;
+
+
+
+
 
 
 
@@ -11462,7 +22922,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11470,7 +22938,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  exampleCell += `<div class="example-dativ" style="display: none;">`;
+
+
+
+
 
 
 
@@ -11478,7 +22954,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (dativ.en) exampleCell += `<div class="example-translation example-en">${dativ.en}</div>`;
+
+
+
+
 
 
 
@@ -11486,11 +22970,7 @@ async function loadBackgroundData() {
 
 
 
- exampleCell += `</div>`;
 
-
-
- }
 
 
 
@@ -11498,7 +22978,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
+
+
+
+ exampleCell += `</div>`;
+
+
+
+
+
+
+
+ }
+
+
+
+
 
 
 
@@ -11506,7 +23010,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let pronounCell = `<div class="pronoun-de">${display}</div>`;
+
+
+
+
 
 
 
@@ -11514,11 +23026,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  pronounCell += `<div class="pronoun-es">${spanish}</div>`;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11526,11 +23050,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Also hide conjugation for sie (plural) since it's same as Sie (formal)
 
 
 
+
+
+
+
  let rowClass = '';
+
+
+
+
 
 
 
@@ -11538,11 +23074,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (key === 'er') {
 
 
 
+
+
+
+
  rowClass = ' class="pronoun-row-er"';
+
+
+
+
 
 
 
@@ -11550,7 +23098,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else if (key === 'sie') {
+
+
+
+
 
 
 
@@ -11558,11 +23114,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else if (key === 'es') {
 
 
 
+
+
+
+
  rowClass = ' class="pronoun-row-es"';
+
+
+
+
 
 
 
@@ -11570,11 +23138,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else if (key === 'sie (plural)') {
 
 
 
+
+
+
+
  rowClass = ' class="pronoun-row-sie-plural"';
+
+
+
+
 
 
 
@@ -11582,7 +23162,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else if (key === 'Sie (formal)') {
+
+
+
+
 
 
 
@@ -11590,7 +23178,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11598,7 +23194,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
      const safeConjugation = conjugationCell.replace(/'/g, "\\'");
+
+
+
+
 
 
 
@@ -11606,7 +23210,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11614,11 +23226,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11626,7 +23250,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Add additional grammar note if it exists
+
+
+
+
 
 
 
@@ -11634,11 +23266,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  tableHTML += `<div class="additional-note">${updatedData.additionalNote}</div>`;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11646,7 +23290,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Add event listener for toggle button
+
+
+
+
 
 
 
@@ -11654,7 +23306,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (toggleBtn) {
+
+
+
+
 
 
 
@@ -11662,7 +23322,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const modeTag = document.getElementById('beispiel-mode-tag');
+
+
+
+
 
 
 
@@ -11670,7 +23338,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const currentMode = beispielModes[currentModeIndex] || { key: 'aussage', label: 'Aussage' };
+
+
+
+
 
 
 
@@ -11678,7 +23354,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const frageExamples = document.querySelectorAll('.example-frage');
+
+
+
+
 
 
 
@@ -11686,7 +23370,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  aussageExamples.forEach(el => {
+
+
+
+
 
 
 
@@ -11694,7 +23386,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -11702,11 +23402,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  el.style.display = currentMode.key === 'frage' ? 'block' : 'none';
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -11714,11 +23426,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  el.style.display = currentMode.key === 'dativ' ? 'block' : 'none';
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -11726,11 +23450,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  modeTag.textContent = currentMode.label;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11738,11 +23474,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  };
 
 
 
+
+
+
+
  updateExampleMode();
+
+
+
+
 
 
 
@@ -11750,7 +23498,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (beispielModes.length <= 1) return;
+
+
+
+
 
 
 
@@ -11758,7 +23514,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  updateExampleMode();
+
+
+
+
 
 
 
@@ -11766,11 +23530,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -11778,7 +23554,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11786,7 +23570,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (praesensExamplesContainer) praesensExamplesContainer.style.display = 'none';
+
+
+
+
 
 
 
@@ -11794,7 +23586,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const perfektExamplesTableContainer = document.getElementById('modal-perfekt-examples-table');
+
+
+
+
 
 
 
@@ -11802,7 +23602,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // Determine if verb uses haben or sein
+
+
+
+
 
 
 
@@ -11810,7 +23618,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const usesSein = updatedData.perfekt && updatedData.perfekt.startsWith('ist');
+
+
+
+
 
 
 
@@ -11818,7 +23634,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const auxHaben = ['habe', 'hast', 'hat', 'haben', 'habt', 'haben', 'haben'];
+
+
+
+
 
 
 
@@ -11826,7 +23650,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const pronounOrder = [
+
+
+
+
 
 
 
@@ -11834,7 +23666,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'du', display: 'du', spanish: 'tú', auxIndex: 1 },
+
+
+
+
 
 
 
@@ -11842,7 +23682,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'sie', display: 'sie', spanish: 'ella', auxIndex: 2 },
+
+
+
+
 
 
 
@@ -11850,7 +23698,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'wir', display: 'wir', spanish: 'nosotr@s', auxIndex: 3 },
+
+
+
+
 
 
 
@@ -11858,7 +23714,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'sie (plural)', display: 'sie', spanish: 'ell@s', auxIndex: 5 },
+
+
+
+
 
 
 
@@ -11866,7 +23730,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ];
+
+
+
+
 
 
 
@@ -11874,7 +23746,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let perfektTableHTML = '<table>';
+
+
+
+
 
 
 
@@ -11882,7 +23762,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  for (const { key, display, spanish, auxIndex } of pronounOrder) {
+
+
+
+
 
 
 
@@ -11890,7 +23778,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let exampleCell = '';
+
+
+
+
 
 
 
@@ -11898,7 +23794,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  exampleCell = `<div class="example-cell">`;
+
+
+
+
 
 
 
@@ -11906,7 +23810,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (example.en) exampleCell += `<div class="example-translation example-en">${example.en}</div>`;
+
+
+
+
 
 
 
@@ -11914,11 +23826,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  exampleCell += `</div>`;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11926,7 +23850,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let pronounCell = `<div class="pronoun-de">${display}</div>`;
+
+
+
+
 
 
 
@@ -11934,11 +23866,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  pronounCell += `<div class="pronoun-es">${spanish}</div>`;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11946,7 +23890,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let auxVerb = '';
+
+
+
+
 
 
 
@@ -11954,11 +23906,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  auxVerb = auxSein[auxIndex];
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -11966,7 +23930,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -11974,7 +23946,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ? `${auxVerb} ${perfektPartizip}`
+
+
+
+
 
 
 
@@ -11982,7 +23962,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let perfektConjugationCell = perfektKonjugation;
+
+
+
+
 
 
 
@@ -11990,7 +23978,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
     const safeConjugation = perfektConjugationCell.replace(/'/g, "\\'");
+
+
+
+
 
 
 
@@ -11998,7 +23994,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -12006,7 +24010,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let rowClass = '';
+
+
+
+
 
 
 
@@ -12014,7 +24026,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  rowClass = ' class="pronoun-row-er"';
+
+
+
+
 
 
 
@@ -12022,7 +24042,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  rowClass = ' class="pronoun-row-sie"';
+
+
+
+
 
 
 
@@ -12030,7 +24058,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  rowClass = ' class="pronoun-row-es"';
+
+
+
+
 
 
 
@@ -12038,7 +24074,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  rowClass = ' class="pronoun-row-sie-plural"';
+
+
+
+
 
 
 
@@ -12046,11 +24090,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  rowClass = ' class="pronoun-row-Sie-formal"';
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12058,7 +24114,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12066,11 +24130,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  perfektExamplesTableContainer.innerHTML = perfektTableHTML;
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -12078,7 +24154,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12086,7 +24170,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const praeteritumKonjugationTableContainer = document.getElementById('modal-praeteritum-konjugation-table');
+
+
+
+
 
 
 
@@ -12094,7 +24186,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const pronounOrder = [
+
+
+
+
 
 
 
@@ -12102,7 +24202,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'du', display: 'du', spanish: 'tú' },
+
+
+
+
 
 
 
@@ -12110,7 +24218,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'sie', display: 'sie', spanish: 'ella' },
+
+
+
+
 
 
 
@@ -12118,11 +24234,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'wir', display: 'wir', spanish: 'nosotr@s' },
 
 
 
+
+
+
+
  { key: 'ihr', display: 'ihr', spanish: 'vosotr@s' },
+
+
+
+
 
 
 
@@ -12130,11 +24258,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'Sie (formal)', display: 'Sie', spanish: 'usted(es)' }
 
 
 
+
+
+
+
  ];
+
+
+
+
 
 
 
@@ -12142,11 +24282,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  praeteritumTableHTML += '<tr><th>Pron.</th><th>Konjugation</th><th>Beispiel</th></tr>';
 
 
 
+
+
+
+
  for (const { key, display, spanish } of pronounOrder) {
+
+
+
+
 
 
 
@@ -12154,7 +24306,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const example = updatedData.praeteritum_examples && updatedData.praeteritum_examples[key];
+
+
+
+
 
 
 
@@ -12162,7 +24322,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let exampleCell = '';
+
+
+
+
 
 
 
@@ -12170,7 +24338,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  exampleCell = `<div class="example-cell">`;
+
+
+
+
 
 
 
@@ -12178,7 +24354,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (example.en) exampleCell += `<div class="example-translation example-en">${example.en}</div>`;
+
+
+
+
 
 
 
@@ -12186,11 +24370,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  exampleCell += `</div>`;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12198,7 +24394,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let pronounCell = `<div class="pronoun-de">${display}</div>`;
+
+
+
+
 
 
 
@@ -12206,11 +24410,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  pronounCell += `<div class="pronoun-es">${spanish}</div>`;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12218,7 +24434,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let rowClass = '';
+
+
+
+
 
 
 
@@ -12226,7 +24450,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (key === 'er') {
+
+
+
+
 
 
 
@@ -12234,7 +24466,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else if (key === 'sie') {
+
+
+
+
 
 
 
@@ -12242,7 +24482,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else if (key === 'es') {
+
+
+
+
 
 
 
@@ -12250,7 +24498,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  conjugationCell = ''; // Hide if same as er/sie
+
+
+
+
 
 
 
@@ -12258,7 +24514,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  rowClass = ' class="pronoun-row-sie-plural"';
+
+
+
+
 
 
 
@@ -12266,7 +24530,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  } else if (key === 'Sie (formal)') {
+
+
+
+
 
 
 
@@ -12274,7 +24546,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12282,7 +24562,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
     const safeConjugation = conjugationCell.replace(/'/g, "\\'");
+
+
+
+
 
 
 
@@ -12290,7 +24578,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -12298,11 +24594,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12310,11 +24618,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  praeteritumKonjugationTableContainer.innerHTML = praeteritumTableHTML;
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -12322,7 +24642,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12330,7 +24658,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const konjunktivKonjugationTableContainer = document.getElementById('modal-konjunktiv-konjugation-table-tab');
+
+
+
+
 
 
 
@@ -12338,7 +24674,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (konjunktivVerbs.includes(verb) && updatedData.konjunktiv_ii && updatedData.konjunktiv_ii_examples) {
+
+
+
+
 
 
 
@@ -12346,7 +24690,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  konjunktivKonjugationContainer.style.display = 'block';
+
+
+
+
 
 
 
@@ -12354,7 +24706,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'ich', display: 'ich', spanish: 'yo' },
+
+
+
+
 
 
 
@@ -12362,7 +24722,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'er_sie_es', display: 'er/sie/es', spanish: 'él/ella' },
+
+
+
+
 
 
 
@@ -12370,7 +24738,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  { key: 'ihr', display: 'ihr', spanish: 'vosotr@s' },
+
+
+
+
 
 
 
@@ -12378,7 +24754,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  ];
+
+
+
+
 
 
 
@@ -12386,7 +24770,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  konjunktivTableHTML += '<tr><th>Pron.</th><th>Konjugation</th><th>Beispiel</th></tr>';
+
+
+
+
 
 
 
@@ -12394,7 +24786,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const conjugation = updatedData.konjunktiv_ii[key];
+
+
+
+
 
 
 
@@ -12402,7 +24802,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (conjugation || example) {
+
+
+
+
 
 
 
@@ -12410,7 +24818,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let pronounCell = `<div class="pronoun-de">${display}</div>`;
+
+
+
+
 
 
 
@@ -12418,11 +24834,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  pronounCell += `<div class="pronoun-es">${spanish}</div>`;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12430,7 +24858,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  let exampleCell = '';
+
+
+
+
 
 
 
@@ -12438,7 +24874,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  exampleCell = `<div class="example-cell">`;
+
+
+
+
 
 
 
@@ -12446,7 +24890,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (example.en) exampleCell += `<div class="example-translation example-en">${example.en}</div>`;
+
+
+
+
 
 
 
@@ -12454,11 +24906,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  exampleCell += `</div>`;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12466,7 +24930,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
   if (conjugationCell) {
+
+
+
+
 
 
 
@@ -12474,11 +24946,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
     conjugationCell = `<span class="german-word conjugation-cell-speak" onclick="event.stopPropagation(); window.speak('${safeConjugation}')" title="Aussprache hören" style="cursor: pointer; display: inline-block;">${conjugationCell}</span>`;
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -12486,11 +24970,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12498,11 +24994,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  konjunktivKonjugationTableContainer.innerHTML = konjunktivTableHTML;
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -12510,7 +25018,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  konjunktivKonjugationContainer.style.display = 'none';
+
+
+
+
 
 
 
@@ -12518,7 +25034,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12526,7 +25050,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  verbModalContent.classList.remove('hide-perfekt', 'hide-praeteritum', 'hide-konjunktiv', 'hide-translation');
+
+
+
+
 
 
 
@@ -12534,7 +25066,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!konjunktivVerbs.includes(verb)) {
+
+
+
+
 
 
 
@@ -12542,7 +25082,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12550,11 +25098,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('modal-verb-infinitive').onclick = (e) => {
 
 
 
+
+
+
+
  e.stopPropagation();
+
+
+
+
 
 
 
@@ -12562,7 +25122,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -12570,7 +25138,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('modal-verb-infinitive').title = 'Aussprache hören';
+
+
+
+
 
 
 
@@ -12578,7 +25154,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  e.stopPropagation();
+
+
+
+
 
 
 
@@ -12586,7 +25170,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -12594,7 +25186,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('modal-verb-perfekt').title = 'Aussprache hören';
+
+
+
+
 
 
 
@@ -12602,7 +25202,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  e.stopPropagation();
+
+
+
+
 
 
 
@@ -12610,7 +25218,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -12618,7 +25234,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  document.getElementById('modal-verb-praeteritum').title = 'Aussprache hören';
+
+
+
+
 
 
 
@@ -12626,7 +25250,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // document.getElementById('modal-text').onclick = ...
+
+
+
+
 
 
 
@@ -12634,7 +25266,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  verbModal.classList.add('visible');
+
+
+
+
 
 
 
@@ -12642,11 +25282,23 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  if (!skipExampleReload) {
 
 
 
+
+
+
+
  const activeTabNow = document.querySelector('.modal-tab-btn.active')?.dataset.tab || activeTabBeforeRefresh;
+
+
+
+
 
 
 
@@ -12654,7 +25306,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12662,7 +25322,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const token = ++modalDeferredLoadToken;
+
+
+
+
 
 
 
@@ -12670,7 +25338,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  .then(() => {
+
+
+
+
 
 
 
@@ -12678,7 +25354,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const activeTabNow = document.querySelector('.modal-tab-btn.active')?.dataset.tab || activeTabBeforeRefresh;
+
+
+
+
 
 
 
@@ -12686,7 +25370,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  skipDeferredReload: true,
+
+
+
+
 
 
 
@@ -12694,7 +25386,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -12702,7 +25402,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  .catch(error => {
+
+
+
+
 
 
 
@@ -12710,15 +25418,31 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12726,7 +25450,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // searchInput moved to top
+
+
+
+
 
 
 
@@ -12734,7 +25466,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  const searchCounter = document.getElementById('search-counter');
+
+
+
+
 
 
 
@@ -12742,7 +25482,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
  // wortfamilieIndex is preloaded for search and refreshed through cache/version checks
+
+
+
+
 
 
 
@@ -12750,7 +25498,15 @@ async function loadBackgroundData() {
 
 
 
+
+
+
+
 async function loadWortfamilieIndex() {
+
+
+
+
 
 
 
@@ -12758,7 +25514,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (isLoadingWortfamilie) return null; // Prevent double loading
+
+
+
+
 
 
 
@@ -12766,7 +25530,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -12774,7 +25546,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  ? `json/wortfamilie_index.json?v=${encodeURIComponent(appVersion)}`
+
+
+
+
 
 
 
@@ -12782,7 +25562,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const response = await fetch(url);
+
+
+
+
 
 
 
@@ -12790,11 +25578,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12802,7 +25602,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  scheduleCachePersist();
+
+
+
+
 
 
 
@@ -12810,7 +25618,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  } catch (error) {
+
+
+
+
 
 
 
@@ -12818,7 +25634,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  console.error("Error details:", error.message, error.name);
+
+
+
+
 
 
 
@@ -12826,7 +25650,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return null;
+
+
+
+
 
 
 
@@ -12834,15 +25666,31 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  isLoadingWortfamilie = false;
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12850,7 +25698,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!searchInput) return;
+
+
+
+
 
 
 
@@ -12858,7 +25714,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Unified Search: We now search both Verbs and Wortfamilie
+
+
+
+
 
 
 
@@ -12866,7 +25730,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const wortfamiliePromise = loadWortfamilieIndex()
+
+
+
+
 
 
 
@@ -12874,7 +25746,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  .catch(err => {
+
+
+
+
 
 
 
@@ -12882,11 +25762,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return [];
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -12894,7 +25786,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (clearSearchBtn) {
+
+
+
+
 
 
 
@@ -12902,7 +25802,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  clearSearchBtn.classList.add('visible');
+
+
+
+
 
 
 
@@ -12910,15 +25818,31 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  clearSearchBtn.classList.remove('visible');
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12926,7 +25850,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (searchTerm.length < 2) {
+
+
+
+
 
 
 
@@ -12934,7 +25866,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const allCards = cardsContainer.querySelectorAll('.word-item');
+
+
+
+
 
 
 
@@ -12942,7 +25882,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  card.style.display = '';
+
+
+
+
 
 
 
@@ -12950,7 +25898,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (searchCounter) searchCounter.textContent = '';
+
+
+
+
 
 
 
@@ -12958,7 +25914,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (levelIndicator) {
+
+
+
+
 
 
 
@@ -12966,11 +25930,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  levelIndicator.style.pointerEvents = 'auto';
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12978,7 +25954,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -12986,7 +25970,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (levelIndicator) {
+
+
+
+
 
 
 
@@ -12994,11 +25986,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  levelIndicator.style.pointerEvents = 'none';
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13006,7 +26010,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const searchPromises = [];
+
+
+
+
 
 
 
@@ -13014,7 +26026,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  for (const entry of groupEntries) {
+
+
+
+
 
 
 
@@ -13022,7 +26042,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const groupIndexInLevel = entry.groupIndexInLevel;
+
+
+
+
 
 
 
@@ -13030,7 +26058,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!group || !Array.isArray(group.verbs)) continue;
+
+
+
+
 
 
 
@@ -13038,7 +26074,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const groupNameMatch = (group.theme && normalizeSearchValue(group.theme).includes(searchTerm)) ||
+
+
+
+
 
 
 
@@ -13046,7 +26090,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  (group.spanishName && normalizeSearchValue(group.spanishName).includes(searchTerm)) ||
+
+
+
+
 
 
 
@@ -13054,7 +26106,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  (group.groupNameGerman && normalizeSearchValue(group.groupNameGerman).includes(searchTerm)) ||
+
+
+
+
 
 
 
@@ -13062,7 +26122,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  (group.groupNameEnglish && normalizeSearchValue(group.groupNameEnglish).includes(searchTerm));
+
+
+
+
 
 
 
@@ -13070,7 +26138,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -13078,7 +26154,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const hydratedGroup = verbGroupsByLevel[levelKey] && verbGroupsByLevel[levelKey][groupIndexInLevel];
+
+
+
+
 
 
 
@@ -13086,7 +26170,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  group = hydratedGroup;
+
+
+
+
 
 
 
@@ -13094,7 +26186,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  } catch (e) {
+
+
+
+
 
 
 
@@ -13102,11 +26202,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13114,7 +26226,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13122,7 +26242,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const verbData = allVerbsData[verbName];
+
+
+
+
 
 
 
@@ -13130,7 +26258,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Create a promise for each verb to search (including lazy-loaded praesens)
+
+
+
+
 
 
 
@@ -13138,7 +26274,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -13146,7 +26290,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (groupNameMatch) {
+
+
+
+
 
 
 
@@ -13154,7 +26306,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  verb: verbName,
+
+
+
+
 
 
 
@@ -13162,7 +26322,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  levelKey: levelKey,
+
+
+
+
 
 
 
@@ -13170,11 +26338,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  };
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13182,7 +26362,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const containsWord = (text, term) => Boolean(findMatchingWordInText(text, term));
+
+
+
+
 
 
 
@@ -13190,7 +26378,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let matchedPerfektForm = '';
+
+
+
+
 
 
 
@@ -13198,7 +26394,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let matchedKonjunktivForm = '';
+
+
+
+
 
 
 
@@ -13206,7 +26410,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const germanMatch = normalizeSearchValue(verbName).includes(searchTerm);
+
+
+
+
 
 
 
@@ -13214,7 +26426,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Also search in searchable Spanish variants
+
+
+
+
 
 
 
@@ -13222,7 +26442,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  spanishMatch = verbData.es_searchable.some(variant =>
+
+
+
+
 
 
 
@@ -13230,11 +26458,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  );
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13242,7 +26482,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let perfektMatch = false;
+
+
+
+
 
 
 
@@ -13250,7 +26498,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const perfektWords = verbData.perfekt.toLowerCase().split(' ');
+
+
+
+
 
 
 
@@ -13258,7 +26514,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const filteredPerfektWords = perfektWords.filter(word => word !== 'hat' && word !== 'ist');
+
+
+
+
 
 
 
@@ -13266,7 +26530,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (perfektMatch) {
+
+
+
+
 
 
 
@@ -13274,11 +26546,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13286,7 +26570,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const perfektEntries = Object.values(allVerbsData[verbName].perfekt_examples);
+
+
+
+
 
 
 
@@ -13294,11 +26586,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  perfektMatch = Boolean(matchedPerfektForm);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13306,7 +26610,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!perfektMatch && verbData.es_perfekt) {
+
+
+
+
 
 
 
@@ -13314,7 +26626,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13322,7 +26642,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  perfektMatch = verbData.es_perfekt_searchable.some(variant =>
+
+
+
+
 
 
 
@@ -13330,11 +26658,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  );
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13342,7 +26682,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let tagMatch = false;
+
+
+
+
 
 
 
@@ -13350,7 +26698,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const tagTerm = searchTerm.replace('tag:', '').toLowerCase();
+
+
+
+
 
 
 
@@ -13358,7 +26714,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const generalTagsMatch = verbData.tags && verbData.tags.some(tag => tag.toLowerCase() === tagTerm);
+
+
+
+
 
 
 
@@ -13366,7 +26730,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  tagMatch = true;
+
+
+
+
 
 
 
@@ -13374,7 +26746,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -13382,7 +26762,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const caseTagsMatch = verbData.case_tags && verbData.case_tags.some(tag => tag.toLowerCase().includes(searchTerm));
+
+
+
+
 
 
 
@@ -13390,7 +26778,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (caseTagsMatch || generalTagsMatch) {
+
+
+
+
 
 
 
@@ -13398,11 +26794,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13410,7 +26818,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  !allVerbsData[verbName].praesens ||
+
+
+
+
 
 
 
@@ -13418,7 +26834,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  (konjunktivVerbs.includes(verbName) && !allVerbsData[verbName].konjunktiv_ii);
+
+
+
+
 
 
 
@@ -13426,7 +26850,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const shouldAttemptConjugationSearch = !baseMatchAlreadyFound && searchTerm.length >= 3;
+
+
+
+
 
 
 
@@ -13434,7 +26866,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const physicalLayer = (allVerbsData[verbName].level || '').replace('.', '_');
+
+
+
+
 
 
 
@@ -13442,15 +26882,31 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  await loadBulkConjugations([physicalLayer]);
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13458,7 +26914,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let praesensMatch = false;
+
+
+
+
 
 
 
@@ -13466,7 +26930,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const conjugations = Object.values(allVerbsData[verbName].praesens);
+
+
+
+
 
 
 
@@ -13474,11 +26946,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  praesensMatch = Boolean(matchedPraesensForm);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13486,7 +26970,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let praeteritumMatch = false;
+
+
+
+
 
 
 
@@ -13494,7 +26986,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const conjugations = Object.values(allVerbsData[verbName].praeteritum_conjugations);
+
+
+
+
 
 
 
@@ -13502,7 +27002,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (typeof conj === 'string') return conj;
+
+
+
+
 
 
 
@@ -13510,7 +27018,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -13518,7 +27034,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13526,7 +27050,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!praeteritumMatch && verbData.es_praeteritum) {
+
+
+
+
 
 
 
@@ -13534,7 +27066,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13542,7 +27082,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!praeteritumMatch && verbData.es_praeteritum_searchable) {
+
+
+
+
 
 
 
@@ -13550,7 +27098,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  containsWord(variant, searchTerm)
+
+
+
+
 
 
 
@@ -13558,7 +27114,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13566,7 +27130,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let konjunktivMatch = false;
+
+
+
+
 
 
 
@@ -13574,7 +27146,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const conjugations = Object.values(allVerbsData[verbName].konjunktiv_ii);
+
+
+
+
 
 
 
@@ -13582,11 +27162,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  konjunktivMatch = Boolean(matchedKonjunktivForm);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13594,7 +27186,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return {
+
+
+
+
 
 
 
@@ -13602,7 +27202,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  data: verbData,
+
+
+
+
 
 
 
@@ -13610,7 +27218,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  groupIndexInLevel: groupIndexInLevel,
+
+
+
+
 
 
 
@@ -13618,7 +27234,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  matchedPerfektForm,
+
+
+
+
 
 
 
@@ -13626,7 +27250,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  matchedKonjunktivForm
+
+
+
+
 
 
 
@@ -13634,7 +27266,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13642,7 +27282,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  } catch (e) {
+
+
+
+
 
 
 
@@ -13650,11 +27298,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return null;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13662,11 +27322,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  searchPromises.push(searchPromise);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13674,7 +27346,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13682,7 +27362,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const [verbResults, wfResults] = await Promise.all([
+
+
+
+
 
 
 
@@ -13690,7 +27378,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  wortfamiliePromise
+
+
+
+
 
 
 
@@ -13698,7 +27394,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Flatten verb results
+
+
+
+
 
 
 
@@ -13706,7 +27410,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Merge logic:
+
+
+
+
 
 
 
@@ -13714,7 +27426,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Add direct verb matches
+
+
+
+
 
 
 
@@ -13722,7 +27442,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  uniqueVerbsMap.set(res.verb, res);
+
+
+
+
 
 
 
@@ -13730,11 +27458,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Add Wortfamilie matches
 
 
 
+
+
+
+
  // Add Wortfamilie matches
+
+
+
+
 
 
 
@@ -13742,7 +27482,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!uniqueVerbsMap.has(wfRes.verb)) {
+
+
+
+
 
 
 
@@ -13750,7 +27498,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const levelData = findVerbLevelAndGroup(wfRes.verb);
+
+
+
+
 
 
 
@@ -13758,7 +27514,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Check if data is loaded
+
+
+
+
 
 
 
@@ -13766,7 +27530,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -13774,7 +27546,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (res.ok) {
+
+
+
+
 
 
 
@@ -13782,7 +27562,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13790,15 +27578,31 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  console.warn("Failed to load verb data for search result", wfRes.verb);
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13806,7 +27610,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  uniqueVerbsMap.set(wfRes.verb, {
+
+
+
+
 
 
 
@@ -13814,7 +27626,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  data: allVerbsData[wfRes.verb],
+
+
+
+
 
 
 
@@ -13822,7 +27642,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  groupIndexInLevel: levelData.groupIndex,
+
+
+
+
 
 
 
@@ -13830,19 +27658,39 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
  } else {
+
+
+
+
 
 
 
@@ -13850,7 +27698,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (existing && !existing.matchedRelatedForm) {
+
+
+
+
 
 
 
@@ -13858,19 +27714,39 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  uniqueVerbsMap.set(wfRes.verb, existing);
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
  });
+
+
+
+
 
 
 
@@ -13878,7 +27754,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const matchingVerbs = Array.from(uniqueVerbsMap.values());
+
+
+
+
 
 
 
@@ -13886,7 +27770,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  matchingVerbs.sort((a, b) => {
+
+
+
+
 
 
 
@@ -13894,7 +27786,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const levelIndexB = levelOrder.indexOf(b.levelKey);
+
+
+
+
 
 
 
@@ -13902,7 +27802,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (levelIndexA !== levelIndexB) {
+
+
+
+
 
 
 
@@ -13910,7 +27818,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (levelIndexA === -1) return 1;
+
+
+
+
 
 
 
@@ -13918,11 +27834,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return levelIndexA - levelIndexB;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13930,11 +27858,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return a.verb.localeCompare(b.verb);
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -13942,7 +27882,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  cardsContainer.innerHTML = '';
+
+
+
+
 
 
 
@@ -13950,7 +27898,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (searchCounter) searchCounter.textContent = matchingVerbs.length.toString();
+
+
+
+
 
 
 
@@ -13958,7 +27914,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (matchingVerbs.length > 0) {
+
+
+
+
 
 
 
@@ -13966,11 +27930,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  countEl.style.display = 'block';
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -13978,11 +27954,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  cardsContainer.innerHTML = '<div class="no-results">Keine Ergebnisse gefunden / No results found</div>';
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -13990,7 +27978,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const htmlFragments = [];
+
+
+
+
 
 
 
@@ -13998,7 +27994,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  function highlightMatch(text, query) {
+
+
+
+
 
 
 
@@ -14006,7 +28010,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+
+
+
 
 
 
@@ -14014,7 +28026,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
+
+
+
+
 
 
 
@@ -14022,7 +28042,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${match}</span>`
+
+
+
+
 
 
 
@@ -14030,7 +28058,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14038,7 +28074,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!text) return text;
+
+
+
+
 
 
 
@@ -14046,7 +28090,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14054,7 +28106,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!verbName) return '';
+
+
+
+
 
 
 
@@ -14062,11 +28122,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return highlightMatch('geboren', query);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14074,7 +28146,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const prefix = separablePrefixesMap[verbName];
+
+
+
+
 
 
 
@@ -14082,7 +28162,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const highlightedPrefix = highlightMatch(prefix, query);
+
+
+
+
 
 
 
@@ -14090,15 +28178,31 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return `<span class="separable-prefix">${highlightedPrefix}</span>${highlightedSuffix}`;
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14106,7 +28210,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14114,7 +28226,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return match.matchedPraesensForm ||
+
+
+
+
 
 
 
@@ -14122,7 +28242,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  match.matchedPraeteritumForm ||
+
+
+
+
 
 
 
@@ -14130,7 +28258,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  match.matchedRelatedForm ||
+
+
+
+
 
 
 
@@ -14138,7 +28274,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14146,7 +28290,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!renderFullSearchCards && (currentViewMode === 'compact' || currentViewMode === 'kompakt')) {
+
+
+
+
 
 
 
@@ -14154,11 +28306,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const esSwitch = document.getElementById('es-switch');
 
 
 
+
+
+
+
  const enSwitch = document.getElementById('en-switch');
+
+
+
+
 
 
 
@@ -14166,7 +28330,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const showSpanish = esSwitch ? esSwitch.checked : true;
+
+
+
+
 
 
 
@@ -14174,7 +28346,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const groupedMatches = {};
+
+
+
+
 
 
 
@@ -14182,7 +28362,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const verbData = match.data;
+
+
+
+
 
 
 
@@ -14190,7 +28378,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const groupIndex = Number.isInteger(match.groupIndexInLevel)
+
+
+
+
 
 
 
@@ -14198,7 +28394,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  : (verbData.group ? verbData.group - 1 : 0);
+
+
+
+
 
 
 
@@ -14206,7 +28410,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  ? verbGroupsByLevel[level][groupIndex]
+
+
+
+
 
 
 
@@ -14214,7 +28426,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let theme = resolvedGroup
+
+
+
+
 
 
 
@@ -14222,7 +28442,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  : (verbData.theme || 'Gruppe');
+
+
+
+
 
 
 
@@ -14230,7 +28458,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!groupedMatches[groupKey]) {
+
+
+
+
 
 
 
@@ -14238,7 +28474,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  ? (resolvedGroup.spanishName || resolvedGroup.groupNameSpanish || '')
+
+
+
+
 
 
 
@@ -14246,7 +28490,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const fullGroupVerbs = resolvedGroup && Array.isArray(resolvedGroup.verbs)
+
+
+
+
 
 
 
@@ -14254,7 +28506,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  verb: groupVerbName,
+
+
+
+
 
 
 
@@ -14262,7 +28522,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  levelKey: level,
+
+
+
+
 
 
 
@@ -14270,7 +28538,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }))
+
+
+
+
 
 
 
@@ -14278,7 +28554,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  groupedMatches[groupKey] = {
+
+
+
+
 
 
 
@@ -14286,7 +28570,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  theme: theme,
+
+
+
+
 
 
 
@@ -14294,7 +28586,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  groupIndex: groupIndex,
+
+
+
+
 
 
 
@@ -14302,7 +28602,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -14310,7 +28618,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -14318,7 +28634,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  Object.values(groupedMatches).forEach((group) => {
+
+
+
+
 
 
 
@@ -14326,7 +28650,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const chunkSize = 7;
+
+
+
+
 
 
 
@@ -14334,7 +28666,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  for (let i = 0; i < group.verbs.length; i += chunkSize) {
+
+
+
+
 
 
 
@@ -14342,7 +28682,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14350,7 +28698,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let cardTitleHTML = group.theme || group.groupNameGerman || 'Gruppe';
+
+
+
+
 
 
 
@@ -14358,11 +28714,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  cardTitleHTML += ` <span class="kompakt-pagination">(${chunkIndex + 1}/${chunks.length})</span>`;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14370,7 +28738,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <div class="kompakt-level-card">
+
+
+
+
 
 
 
@@ -14378,7 +28754,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <span class="kompakt-header-de" onclick="event.stopPropagation(); window.speak('${group.theme || group.groupNameGerman || 'Gruppe'}')" title="Aussprache h??ren" style="cursor: pointer; display: ${showGerman ? 'inline' : 'none'};">${cardTitleHTML}</span>
+
+
+
+
 
 
 
@@ -14386,7 +28770,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -14394,7 +28786,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  `;
+
+
+
+
 
 
 
@@ -14402,7 +28802,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const verbName = match.verb;
+
+
+
+
 
 
 
@@ -14410,7 +28818,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const matchHint = getMatchHint(match);
+
+
+
+
 
 
 
@@ -14418,7 +28834,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!verbName.toLowerCase().includes(searchTerm) && matchHint) {
+
+
+
+
 
 
 
@@ -14426,11 +28850,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  const esTranslationRaw = getCardTranslation(verbData);
+
+
+
+
 
 
 
@@ -14438,7 +28874,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const isLong = esTranslationLinesRaw.length > 1 || (esTranslationLinesRaw[0] && esTranslationLinesRaw[0].length > 12);
+
+
+
+
 
 
 
@@ -14446,7 +28890,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const enTranslationRaw = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
+
+
+
+
 
 
 
@@ -14454,7 +28906,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
+
+
+
+
 
 
 
@@ -14462,7 +28922,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
+
+
+
+
 
 
 
@@ -14470,7 +28938,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
+
+
+
+
 
 
 
@@ -14478,7 +28954,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
+
+
+
+
 
 
 
@@ -14486,7 +28970,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
+
+
+
+
 
 
 
@@ -14494,7 +28986,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
+
+
+
+
 
 
 
@@ -14502,7 +29002,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  cardHTML += `
+
+
+
+
 
 
 
@@ -14510,7 +29018,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
+
+
+
+
 
 
 
@@ -14518,7 +29034,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <div class="kompakt-spanish${isLong ? ' long-translation' : ''}" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showSpanish ? 'block' : 'none'};">${esTranslationDisplay}</div>
+
+
+
+
 
 
 
@@ -14526,11 +29050,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  </div>
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -14538,7 +29074,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -14546,7 +29090,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const formattedLevel = rawLevel.toUpperCase().replace(/([A-Z])(\d).*/, '$1$2');
+
+
+
+
 
 
 
@@ -14554,11 +29106,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  cardHTML += `
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -14566,7 +29130,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <span class="card-footer-tag card-footer-level" style="border: none;">${formattedLevel}</span>
+
+
+
+
 
 
 
@@ -14574,7 +29146,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -14582,15 +29162,31 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  htmlFragments.push(cardHTML);
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -14598,7 +29194,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -14606,7 +29210,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  try {
+
+
+
+
 
 
 
@@ -14614,7 +29226,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const verbData = match.data;
+
+
+
+
 
 
 
@@ -14622,7 +29242,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Generate highlighted display names dynamically
+
+
+
+
 
 
 
@@ -14630,7 +29258,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let displayVerbName = highlightVerbName(verbName, searchTerm);
+
+
+
+
 
 
 
@@ -14638,11 +29274,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  displayVerbName = `${highlightBaseVerb(verbName === 'geboren werden' ? 'geboren' : formatVerbPrefix(verbName))} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, searchTerm)})</span>`;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14650,7 +29298,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const esTranslationRaw = getCardTranslation(verbData);
+
+
+
+
 
 
 
@@ -14658,7 +29314,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const esPerfektTranslationRaw = getPrimaryTranslation(verbData.es_perfekt || '');
+
+
+
+
 
 
 
@@ -14666,7 +29330,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const esPraeteritumTranslationRaw = getPrimaryTranslation(verbData.es_praeteritum || '');
+
+
+
+
 
 
 
@@ -14674,7 +29346,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Prepare German perfekt with short and full versions
+
+
+
+
 
 
 
@@ -14682,7 +29362,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let germanPerfektFull = verbData.perfekt || '---';
+
+
+
+
 
 
 
@@ -14690,7 +29378,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const germanParts = verbData.perfekt.split(' ');
+
+
+
+
 
 
 
@@ -14698,7 +29394,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  germanPerfektShort = germanParts.slice(1).join(' ');
+
+
+
+
 
 
 
@@ -14706,11 +29410,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14718,7 +29434,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (match.matchedPerfektForm && !germanPerfektShort.toLowerCase().includes(searchTerm)) {
+
+
+
+
 
 
 
@@ -14726,7 +29450,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  germanPerfektFull = match.matchedPerfektForm;
+
+
+
+
 
 
 
@@ -14734,7 +29466,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14742,7 +29482,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let spanishPerfektShort = esPerfektTranslation;
+
+
+
+
 
 
 
@@ -14750,7 +29498,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let spanishPerfektShortDisplay = esPerfektTranslation;
+
+
+
+
 
 
 
@@ -14758,7 +29514,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const spanishParts = esPerfektTranslationRaw.split(' ');
+
+
+
+
 
 
 
@@ -14766,7 +29530,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  spanishPerfektShort = spanishParts.slice(1).join(' ');
+
+
+
+
 
 
 
@@ -14774,15 +29546,31 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  spanishPerfektShortDisplay = highlightMatch(spanishPerfektShort, searchTerm);
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14790,7 +29578,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let germanPraeteritumShort = verbData.praeteritum || '---';
+
+
+
+
 
 
 
@@ -14798,7 +29594,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (verbData.praeteritum && verbData.praeteritum !== '---') {
+
+
+
+
 
 
 
@@ -14806,7 +29610,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (germanPraeteritumParts.length >= 2) {
+
+
+
+
 
 
 
@@ -14814,15 +29626,31 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  germanPraeteritumFull = verbData.praeteritum; // full: er/sie/es machte
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14830,7 +29658,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (match.matchedPraeteritumForm && !germanPraeteritumShort.toLowerCase().includes(searchTerm)) {
+
+
+
+
 
 
 
@@ -14838,7 +29674,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  germanPraeteritumFull = match.matchedPraeteritumForm;
+
+
+
+
 
 
 
@@ -14846,7 +29690,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14854,7 +29706,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let spanishPraeteritumShort = esPraeteritumTranslation;
+
+
+
+
 
 
 
@@ -14862,7 +29722,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let spanishPraeteritumShortDisplay = esPraeteritumTranslation;
+
+
+
+
 
 
 
@@ -14870,7 +29738,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const spanishPraeteritumParts = esPraeteritumTranslationRaw.split(' ');
+
+
+
+
 
 
 
@@ -14878,7 +29754,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  spanishPraeteritumShort = spanishPraeteritumParts.slice(1).join(' '); // verb only
+
+
+
+
 
 
 
@@ -14886,15 +29770,31 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  spanishPraeteritumShortDisplay = highlightMatch(spanishPraeteritumShort, searchTerm);
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -14902,7 +29802,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let germanKonjunktivShort = '';
+
+
+
+
 
 
 
@@ -14910,7 +29818,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let spanishKonjunktivShort = '';
+
+
+
+
 
 
 
@@ -14918,7 +29834,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let germanKonjunktivShortDisplay = '';
+
+
+
+
 
 
 
@@ -14926,7 +29850,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let konjunktivHTML = '';
+
+
+
+
 
 
 
@@ -14934,7 +29866,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Use the "er_sie_es" form for display
+
+
+
+
 
 
 
@@ -14942,7 +29882,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  germanKonjunktivFull = `er/sie/es ${germanKonjunktivShort}`;
+
+
+
+
 
 
 
@@ -14950,7 +29898,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const konjunktivTranslations = {
+
+
+
+
 
 
 
@@ -14958,7 +29914,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  'haben': 'él/ella tendría',
+
+
+
+
 
 
 
@@ -14966,7 +29930,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  'dürfen': 'él/ella podría (permiso)',
+
+
+
+
 
 
 
@@ -14974,7 +29946,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  'wollen': 'él/ella querría',
+
+
+
+
 
 
 
@@ -14982,7 +29962,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  'mögen': 'él/ella gustaría',
+
+
+
+
 
 
 
@@ -14990,7 +29978,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -14998,7 +29994,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const spanishKonjunktivShortRaw = spanishKonjunktivFullRaw.split(' ').slice(1).join(' ');
+
+
+
+
 
 
 
@@ -15006,7 +30010,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  spanishKonjunktivShort = spanishKonjunktivShortRaw;
+
+
+
+
 
 
 
@@ -15014,7 +30026,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  spanishKonjunktivShortDisplay = highlightMatch(spanishKonjunktivShortRaw, searchTerm);
+
+
+
+
 
 
 
@@ -15022,7 +30042,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  germanKonjunktivShort = match.matchedKonjunktivForm;
+
+
+
+
 
 
 
@@ -15030,11 +30058,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  germanKonjunktivShortDisplay = highlightMatch(match.matchedKonjunktivForm, searchTerm);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15042,7 +30082,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <span class="german-konjunktiv konjunktiv-text" data-form="konjunktiv" data-short="${germanKonjunktivShort}" data-full="${germanKonjunktivFull}">${germanKonjunktivShortDisplay}</span>
+
+
+
+
 
 
 
@@ -15050,11 +30098,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  `;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15062,7 +30122,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let tagsHTML = '';
+
+
+
+
 
 
 
@@ -15070,11 +30138,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  tagsHTML = verbData.tags.map(tag => `<span class="verb-tag">${tag}</span>`).join('');
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15082,7 +30162,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let caseTagsHTML = '';
+
+
+
+
 
 
 
@@ -15090,7 +30178,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  caseTagsHTML = '<div class="case-tags">' + verbData.case_tags.map(tag => {
+
+
+
+
 
 
 
@@ -15098,7 +30194,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  'dat': '🔴 [+Díat]',
+
+
+
+
 
 
 
@@ -15106,7 +30210,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  'akk': '🟢 [+Akk]',
+
+
+
+
 
 
 
@@ -15114,7 +30226,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  'nom': '🟡 [+Nom]',
+
+
+
+
 
 
 
@@ -15122,7 +30242,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  'IK': '🟣 [IK]',
+
+
+
+
 
 
 
@@ -15130,7 +30258,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -15138,7 +30274,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (tag.startsWith('prep:')) {
+
+
+
+
 
 
 
@@ -15146,11 +30290,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return `<span class="case-tag case-tag-prep">⚪ [+Prep: ${prep}]</span>`;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15158,7 +30314,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const className = `case-tag case-tag-${tag.replace('_', '-')}`;
+
+
+
+
 
 
 
@@ -15166,11 +30330,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }).join(' ') + '</div>';
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15178,7 +30354,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Niedlich Mode Rendering - DISABLED per user request (User prefers Normal layout even in Cute mode)
+
+
+
+
 
 
 
@@ -15186,7 +30370,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Construct English translation HTML if toggle is active
+
+
+
+
 
 
 
@@ -15194,7 +30386,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (showEnglish && verbData.en_verb) {
+
+
+
+
 
 
 
@@ -15202,7 +30402,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Match styling: white, font-weight 600, same as applied in renderNiedlichVersion
+
+
+
+
 
 
 
@@ -15210,11 +30418,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  const cardHTML = `
+
+
+
+
 
 
 
@@ -15222,7 +30442,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <div class="card-header niedlich-card-header">
+
+
+
+
 
 
 
@@ -15230,7 +30458,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -15238,7 +30474,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <div class="niedlich-word-container">
+
+
+
+
 
 
 
@@ -15246,7 +30490,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <span class="spanish-translation" style="font-size: 1.1rem; color: white; font-style: italic;">${esTranslation}</span>
+
+
+
+
 
 
 
@@ -15254,11 +30506,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  </div>
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -15266,11 +30530,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  htmlFragments.push(cardHTML);
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -15278,7 +30554,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const shouldHideEmoji = (currentViewMode === 'niedlich' || currentViewMode === 'cute') || searchTerm.startsWith('tag:') || searchTerm.includes('movimiento') || searchTerm.includes('estático') || searchTerm.includes('estático');
+
+
+
+
 
 
 
@@ -15286,7 +30570,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <div class="word-item">
+
+
+
+
 
 
 
@@ -15294,7 +30586,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <span class="german-word" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer;">${displayVerbName}</span>
+
+
+
+
 
 
 
@@ -15302,11 +30602,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  ${shouldHideEmoji ? '' : `<div class="icon-floating" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" style="cursor: pointer;">${verbData.emoji || '❔'}</div>`}
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -15314,7 +30626,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <div class="text-container perfekt-hover-container">
+
+
+
+
 
 
 
@@ -15322,7 +30642,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  ${tagsHTML}
+
+
+
+
 
 
 
@@ -15330,11 +30658,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  </div>
 
 
 
+
+
+
+
  ${shouldHideEmoji ? '' : `
+
+
+
+
 
 
 
@@ -15342,7 +30682,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <span class="spanish-perfekt perfekt-text" data-form="translation perfekt" data-short="${spanishPerfektShort}" data-full="${spanishPerfektFull}">${spanishPerfektShortDisplay}</span>
+
+
+
+
 
 
 
@@ -15350,7 +30698,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <span class="spanish-praeteritum praeteritum-text" data-form="translation praeteritum" data-short="${spanishPraeteritumShort}" data-full="${spanishPraeteritumFull}">${spanishPraeteritumShortDisplay}</span>
+
+
+
+
 
 
 
@@ -15358,11 +30714,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  `}
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -15370,7 +30738,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <div class="cute-translations">
+
+
+
+
 
 
 
@@ -15378,11 +30754,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <div class="cute-translation-en">${(verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim()}</div>
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -15390,7 +30778,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -15398,11 +30794,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  htmlFragments.push(cardHTML);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15410,11 +30818,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  console.error(`Error rendering card for ${match.verb}:`, renderError);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15422,7 +30842,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15430,7 +30858,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  cardsContainer.querySelectorAll('.kompakt-row[data-verb]').forEach((row) => {
+
+
+
+
 
 
 
@@ -15438,7 +30874,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  row.onclick = () => openModalForVerb(verbName);
+
+
+
+
 
 
 
@@ -15446,7 +30890,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (germanWord) {
+
+
+
+
 
 
 
@@ -15454,7 +30906,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  event.stopPropagation();
+
+
+
+
 
 
 
@@ -15462,11 +30922,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  };
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15474,7 +30946,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (spanishWord) {
+
+
+
+
 
 
 
@@ -15482,7 +30962,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  event.stopPropagation();
+
+
+
+
 
 
 
@@ -15490,7 +30978,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  };
+
+
+
+
 
 
 
@@ -15498,7 +30994,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -15506,7 +31010,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  setupHoverListeners();
+
+
+
+
 
 
 
@@ -15514,7 +31026,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (searchCounter) {
+
+
+
+
 
 
 
@@ -15522,7 +31042,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const totalMatches = matchingVerbs.length;
+
+
+
+
 
 
 
@@ -15530,7 +31058,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  searchCounter.textContent = 'Keine Verben gefunden (no se encontraron verbos)';
+
+
+
+
 
 
 
@@ -15538,11 +31074,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  searchCounter.textContent = `${totalMatches} ${totalMatches === 1 ? 'Verb' : 'Verben'} gefunden`;
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -15550,15 +31098,31 @@ async function loadWortfamilieIndex() {
 
 
 
- }
 
-
-
- }
 
 
 
  }
+
+
+
+
+
+
+
+ }
+
+
+
+
+
+
+
+ }
+
+
+
+
 
 
 
@@ -15566,11 +31130,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!wortfamilieIndex) return;
 
 
 
+
+
+
+
  if (clearSearchBtn) {
+
+
+
+
 
 
 
@@ -15578,11 +31154,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  clearSearchBtn.classList.add('visible');
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -15590,11 +31178,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15602,7 +31202,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  cardsContainer.innerHTML = '<div class="cards-placeholder" style="text-align:center; padding: 20px; color: #666;">Geben Sie mindestens 2 Buchstaben ein, um in Wortfamilien zu suchen.</div>';
+
+
+
+
 
 
 
@@ -15610,11 +31218,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return;
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15622,7 +31242,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const results = wortfamilieIndex.filter(item => {
+
+
+
+
 
 
 
@@ -15630,7 +31258,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const es = item.es || '';
+
+
+
+
 
 
 
@@ -15638,11 +31274,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  normalizeSearchValue(es).includes(searchTerm);
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -15650,7 +31298,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (results.length === 0) {
+
+
+
+
 
 
 
@@ -15658,7 +31314,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (searchCounter) searchCounter.textContent = '0 Ergebnisse';
+
+
+
+
 
 
 
@@ -15666,7 +31330,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15674,7 +31346,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  results.slice(0, maxResults).forEach(item => {
+
+
+
+
 
 
 
@@ -15682,7 +31362,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  card.className = 'wf-result-card';
+
+
+
+
 
 
 
@@ -15690,7 +31378,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  card.innerHTML = `
+
+
+
+
 
 
 
@@ -15698,7 +31394,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <span class="wf-word">${item.word}</span>
+
+
+
+
 
 
 
@@ -15706,7 +31410,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  <div class="wf-relationship">
+
+
+
+
 
 
 
@@ -15714,11 +31426,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  </div>
 
 
 
+
+
+
+
  </div>
+
+
+
+
 
 
 
@@ -15726,11 +31450,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  cardsContainer.appendChild(card);
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -15738,7 +31474,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (results.length > maxResults) {
+
+
+
+
 
 
 
@@ -15746,7 +31490,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  } else {
+
+
+
+
 
 
 
@@ -15754,11 +31506,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15766,7 +31530,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  console.error("Error in Wortfamilie search:", error);
+
+
+
+
 
 
 
@@ -15774,11 +31546,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15786,11 +31570,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!searchInput) return;
 
 
 
+
+
+
+
  searchInput.value = '';
+
+
+
+
 
 
 
@@ -15798,7 +31594,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (searchCounter) searchCounter.textContent = '';
+
+
+
+
 
 
 
@@ -15806,7 +31610,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (levelIndicator) {
+
+
+
+
 
 
 
@@ -15814,11 +31626,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  levelIndicator.style.pointerEvents = 'auto';
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15826,11 +31650,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  renderVerbGroup();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15838,11 +31674,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  let searchTimeout;
 
 
 
+
+
+
+
  if (searchInput) {
+
+
+
+
 
 
 
@@ -15850,7 +31698,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  clearTimeout(searchTimeout);
+
+
+
+
 
 
 
@@ -15858,11 +31714,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15870,11 +31738,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  clearSearchBtn.addEventListener('click', clearSearch);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15882,7 +31762,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  function findVerbLevelAndGroup(verbName) {
+
+
+
+
 
 
 
@@ -15890,7 +31778,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const groups = verbGroupsByLevel[levelKey];
+
+
+
+
 
 
 
@@ -15898,7 +31794,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (groups[i].verbs.includes(verbName)) {
+
+
+
+
 
 
 
@@ -15906,15 +31810,31 @@ async function loadWortfamilieIndex() {
 
 
 
- }
 
-
-
- }
 
 
 
  }
+
+
+
+
+
+
+
+ }
+
+
+
+
+
+
+
+ }
+
+
+
+
 
 
 
@@ -15922,7 +31842,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (group && Array.isArray(group.verbs) && group.verbs.includes(verbName)) {
+
+
+
+
 
 
 
@@ -15930,7 +31858,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const groupIndex = Number(group.groupNumberPerLevel) - 1;
+
+
+
+
 
 
 
@@ -15938,19 +31874,39 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return { levelKey, groupIndex };
 
 
 
- }
 
-
-
- }
 
 
 
  }
+
+
+
+
+
+
+
+ }
+
+
+
+
+
+
+
+ }
+
+
+
+
 
 
 
@@ -15958,7 +31914,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15966,7 +31930,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!data || typeof data !== 'object') return [];
+
+
+
+
 
 
 
@@ -15974,11 +31946,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return data.verbs.filter(Boolean);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15986,11 +31970,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return data.base.filter(Boolean);
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -15998,7 +31994,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // verbs/base array. In that case, fall back to the matched word itself if it is a verb.
+
+
+
+
 
 
 
@@ -16006,11 +32010,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  return [word];
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -16018,7 +32034,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -16026,7 +32050,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  function performWortfamilieSearch(term, returnOnly = false) {
+
+
+
+
 
 
 
@@ -16034,7 +32066,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const results = [];
+
+
+
+
 
 
 
@@ -16042,7 +32082,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const termLower = term.toLowerCase();
+
+
+
+
 
 
 
@@ -16050,7 +32098,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Check if the word matches (contains) the search term
+
+
+
+
 
 
 
@@ -16058,7 +32114,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const candidateVerbs = resolveWortfamilieVerbs(word, data);
+
+
+
+
 
 
 
@@ -16066,7 +32130,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const resultKey = `${verb}::${word}`;
+
+
+
+
 
 
 
@@ -16074,7 +32146,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  seenResults.add(resultKey);
+
+
+
+
 
 
 
@@ -16082,7 +32162,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  verb: verb,
+
+
+
+
 
 
 
@@ -16090,15 +32178,31 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  type: data.type
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -16106,7 +32210,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -16114,7 +32226,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -16122,7 +32242,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  initializeApp();
+
+
+
+
 
 
 
@@ -16130,7 +32258,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  function generateTagFilters() {
+
+
+
+
 
 
 
@@ -16138,7 +32274,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!container) return;
+
+
+
+
 
 
 
@@ -16146,7 +32290,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const allTags = new Set();
+
+
+
+
 
 
 
@@ -16154,7 +32306,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  // Collect tags
+
+
+
+
 
 
 
@@ -16162,7 +32322,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (verb.case_tags && Array.isArray(verb.case_tags)) {
+
+
+
+
 
 
 
@@ -16170,7 +32338,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  allTags.add(tag);
+
+
+
+
 
 
 
@@ -16178,11 +32354,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -16190,7 +32378,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (verb.tags && Array.isArray(verb.tags)) {
+
+
+
+
 
 
 
@@ -16198,7 +32394,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  allTags.add(tag);
+
+
+
+
 
 
 
@@ -16206,7 +32410,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -16214,7 +32426,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -16222,7 +32442,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const whitelistedTags = ['Akkusativ', 'Dativ', 'Reflexive', 'Separable', 'Nominativ', 'Genitiv', 'Regular', 'Irregular', 'Intransitive', '🚀 Movimiento', '🏡 Estático'];
+
+
+
+
 
 
 
@@ -16230,7 +32458,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  .filter(tag => whitelistedTags.includes(tag) || tag.startsWith('Präposition:'))
+
+
+
+
 
 
 
@@ -16238,7 +32474,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const indexA = customOrder.indexOf(a);
+
+
+
+
 
 
 
@@ -16246,7 +32490,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+
+
+
+
 
 
 
@@ -16254,7 +32506,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (indexB !== -1) return 1;
+
+
+
+
 
 
 
@@ -16262,7 +32522,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -16270,7 +32538,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const pill = document.createElement('div');
+
+
+
+
 
 
 
@@ -16278,7 +32554,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  pill.textContent = `${tag} (${tagCounts[tag]})`;
+
+
+
+
 
 
 
@@ -16286,7 +32570,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const isActive = pill.classList.contains('active');
+
+
+
+
 
 
 
@@ -16294,7 +32586,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (!isActive) {
+
+
+
+
 
 
 
@@ -16302,7 +32602,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (searchInput) {
+
+
+
+
 
 
 
@@ -16310,11 +32618,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  performSearch();
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -16322,7 +32642,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  if (searchInput) {
+
+
+
+
 
 
 
@@ -16330,19 +32658,39 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  performSearch();
 
 
 
+
+
+
+
  }
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
  });
+
+
+
+
 
 
 
@@ -16350,11 +32698,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -16362,7 +32722,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const viewSwitchers = document.querySelectorAll('input[name="card-version"]');
+
+
+
+
 
 
 
@@ -16370,7 +32738,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  radio.addEventListener('change', () => {
+
+
+
+
 
 
 
@@ -16378,11 +32754,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  });
 
 
 
+
+
+
+
  });
+
+
+
+
 
 
 
@@ -16390,7 +32778,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  const enSwitch = document.getElementById('en-switch');
+
+
+
+
 
 
 
@@ -16398,7 +32794,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  enSwitch.addEventListener('change', () => {
+
+
+
+
 
 
 
@@ -16406,7 +32810,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  renderVerbGroup();
+
+
+
+
 
 
 
@@ -16414,7 +32826,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
  }
+
+
+
+
 
 
 
@@ -16422,7 +32842,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
   function restoreConjugationTables() {
+
+
+
+
 
 
 
@@ -16430,7 +32858,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const perfektTable = document.getElementById('modal-perfekt-examples-table');
+
+
+
+
 
 
 
@@ -16438,7 +32874,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const konjunktivTable = document.getElementById('modal-konjunktiv-konjugation-table-tab');
+
+
+
+
 
 
 
@@ -16446,7 +32890,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const perfektContainer = document.getElementById('perfekt-examples-container');
+
+
+
+
 
 
 
@@ -16454,7 +32906,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const konjunktivContainer = document.getElementById('konjunktiv-konjugation-container-tab');
+
+
+
+
 
 
 
@@ -16462,11 +32922,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       praesensContainer.appendChild(praesensTable);
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -16474,11 +32946,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       perfektContainer.appendChild(perfektTable);
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -16486,11 +32970,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       praeteritumContainer.appendChild(praeteritumTable);
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -16498,7 +32994,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       konjunktivContainer.appendChild(konjunktivTable);
+
+
+
+
 
 
 
@@ -16506,7 +33010,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -16514,7 +33026,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const subModal = document.getElementById('conjugation-sub-modal');
+
+
+
+
 
 
 
@@ -16522,7 +33042,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       subModal.classList.remove('visible');
+
+
+
+
 
 
 
@@ -16530,7 +33058,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     restoreConjugationTables();
+
+
+
+
 
 
 
@@ -16538,11 +33074,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     document.querySelectorAll('.modal-tab-btn').forEach(btn => btn.classList.remove('active'));
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -16550,7 +33098,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const subModal = document.getElementById('conjugation-sub-modal');
+
+
+
+
 
 
 
@@ -16558,7 +33114,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const subModalTableContainer = document.getElementById('sub-modal-table-container');
+
+
+
+
 
 
 
@@ -16566,7 +33130,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (!subModal || !subModalTitle || !subModalTableContainer || !subModalNote) return;
+
+
+
+
 
 
 
@@ -16574,7 +33146,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     restoreConjugationTables();
+
+
+
+
 
 
 
@@ -16582,7 +33162,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     subModalNote.style.display = 'none';
+
+
+
+
 
 
 
@@ -16590,7 +33178,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     let titleText = '';
+
+
+
+
 
 
 
@@ -16598,7 +33194,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     let sourceNoteId = '';
+
+
+
+
 
 
 
@@ -16606,7 +33210,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       titleText = `${currentVerbInModal} - Präsens`;
+
+
+
+
 
 
 
@@ -16614,7 +33226,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       sourceNoteId = 'modal-praesens-note';
+
+
+
+
 
 
 
@@ -16622,7 +33242,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       titleText = `${currentVerbInModal} - Perfekt`;
+
+
+
+
 
 
 
@@ -16630,7 +33258,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       sourceNoteId = 'modal-perfekt-note';
+
+
+
+
 
 
 
@@ -16638,7 +33274,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       titleText = `${currentVerbInModal} - Präteritum`;
+
+
+
+
 
 
 
@@ -16646,7 +33290,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       sourceNoteId = 'modal-praeteritum-note';
+
+
+
+
 
 
 
@@ -16654,7 +33306,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       titleText = `${currentVerbInModal} - Konjunktiv II`;
+
+
+
+
 
 
 
@@ -16662,7 +33322,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -16670,7 +33338,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (sourceTable) {
+
+
+
+
 
 
 
@@ -16678,7 +33354,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -16686,7 +33370,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (sourceNote && sourceNote.innerHTML.trim() !== '') {
+
+
+
+
 
 
 
@@ -16694,11 +33386,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       subModalNote.style.display = 'block';
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -16706,11 +33410,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     subModal.classList.add('visible');
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -16718,7 +33434,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const container = document.getElementById('saetze-container');
+
+
+
+
 
 
 
@@ -16726,7 +33450,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (!container || !contentEl) return;
+
+
+
+
 
 
 
@@ -16734,7 +33466,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const hasNote = !!(verbData.note || verbData.note_es);
+
+
+
+
 
 
 
@@ -16742,7 +33482,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       container.style.display = 'none';
+
+
+
+
 
 
 
@@ -16750,7 +33498,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -16758,7 +33514,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     let contentHTML = '';
+
+
+
+
 
 
 
@@ -16766,7 +33530,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (hasNote) {
+
+
+
+
 
 
 
@@ -16774,11 +33546,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       contentHTML += `<div class="note-highlight-card">${noteText}</div>`;
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -16786,7 +33570,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (hasSaetze) {
+
+
+
+
 
 
 
@@ -16794,7 +33586,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       levels.forEach(level => {
+
+
+
+
 
 
 
@@ -16802,7 +33602,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         if (items && items.length > 0) {
+
+
+
+
 
 
 
@@ -16810,7 +33618,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           let levelName = '';
+
+
+
+
 
 
 
@@ -16818,7 +33634,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           else if (level === 'A2') levelName = 'Vida cotidiana y estados';
+
+
+
+
 
 
 
@@ -16826,7 +33650,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           contentHTML += `<div class="saetze-level-section">`;
+
+
+
+
 
 
 
@@ -16834,7 +33666,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           contentHTML += `<span>${levelCircle}</span> Nivel ${level} (${levelName})`;
+
+
+
+
 
 
 
@@ -16842,7 +33682,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           items.forEach(item => {
+
+
+
+
 
 
 
@@ -16850,7 +33698,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
             contentHTML += `<div class="saetze-expression-line">`;
+
+
+
+
 
 
 
@@ -16858,7 +33714,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
             contentHTML += `• <span class="saetze-expression-de" onclick="speak('${safeExpr}')" title="Aussprache hören">${item.expression}</span>: `;
+
+
+
+
 
 
 
@@ -16866,7 +33730,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
             contentHTML += `</div>`;
+
+
+
+
 
 
 
@@ -16874,7 +33746,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
               contentHTML += `<div class="saetze-example-box">`;
+
+
+
+
 
 
 
@@ -16882,7 +33762,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
               contentHTML += `Ejemplo: "<span class="saetze-example-de" onclick="speak('${safeEx}')" title="Aussprache hören">${item.example}</span>"`;
+
+
+
+
 
 
 
@@ -16890,7 +33778,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
                 contentHTML += ` <span class="saetze-example-translation">(${item.example_es})</span>`;
+
+
+
+
 
 
 
@@ -16898,7 +33794,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
               contentHTML += `</div>`;
+
+
+
+
 
 
 
@@ -16906,11 +33810,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
             contentHTML += `</div>`;
 
 
 
+
+
+
+
           });
+
+
+
+
 
 
 
@@ -16918,7 +33834,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         }
+
+
+
+
 
 
 
@@ -16926,7 +33850,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -16934,7 +33866,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
   };
+
+
+
+
 
 
 
@@ -16942,7 +33882,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
   const subModal = document.getElementById('conjugation-sub-modal');
+
+
+
+
 
 
 
@@ -16950,7 +33898,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
   if (closeSubModalX && subModal) {
+
+
+
+
 
 
 
@@ -16958,7 +33914,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     subModal.addEventListener('click', (e) => {
+
+
+
+
 
 
 
@@ -16966,7 +33930,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     });
+
+
+
+
 
 
 
@@ -16974,7 +33946,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
   // --- NEW INLINE CARD FLIP BODY TABS DETAILS CODE ---
+
+
+
+
 
 
 
@@ -16982,11 +33962,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const cardFront = cardEl.querySelector('.card-front');
 
 
 
+
+
+
+
     const cardBack = cardEl.querySelector('.card-back');
+
+
+
+
 
 
 
@@ -16994,7 +33986,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (window.speak) window.speak(verbName);
+
+
+
+
 
 
 
@@ -17002,7 +34002,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     cardBack.style.display = 'flex';
+
+
+
+
 
 
 
@@ -17010,11 +34018,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     cardBack.innerHTML = `
 
 
 
+
+
+
+
       <div class="card-back-header">
+
+
+
+
 
 
 
@@ -17022,11 +34042,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         <button class="card-back-close-btn">&times;</button>
 
 
 
+
+
+
+
         <h2 class="card-back-infinitive">${verbName}</h2>
+
+
+
+
 
 
 
@@ -17034,11 +34066,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       </div>
 
 
 
+
+
+
+
       <div class="card-back-body">
+
+
+
+
 
 
 
@@ -17046,7 +34090,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       </div>
+
+
+
+
 
 
 
@@ -17054,7 +34106,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     cardBack.querySelector('.card-back-close-btn').onclick = (e) => {
+
+
+
+
 
 
 
@@ -17062,7 +34122,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       cardBack.style.display = 'none';
+
+
+
+
 
 
 
@@ -17070,7 +34138,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     };
+
+
+
+
 
 
 
@@ -17078,11 +34154,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     let data = allVerbsData[verbName];
 
 
 
+
+
+
+
     if (!data) return;
+
+
+
+
 
 
 
@@ -17090,7 +34178,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (!data.praesens) {
+
+
+
+
 
 
 
@@ -17098,7 +34194,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -17106,7 +34210,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (!data.konjunktiv_ii || !data.wortfamilie) {
+
+
+
+
 
 
 
@@ -17114,7 +34226,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -17122,7 +34242,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     // Setup the card back HTML structure
+
+
+
+
 
 
 
@@ -17130,7 +34258,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       <div class="card-back-header">
+
+
+
+
 
 
 
@@ -17138,7 +34274,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         <button class="card-back-close-btn">&times;</button>
+
+
+
+
 
 
 
@@ -17146,11 +34290,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         <p class="card-back-translation">${data.spanishName || data.groupNameSpanish || data.es || ''}</p>
 
 
 
+
+
+
+
       </div>
+
+
+
+
 
 
 
@@ -17158,7 +34314,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         <div class="card-back-tabs">
+
+
+
+
 
 
 
@@ -17166,7 +34330,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           <button class="card-back-tab-btn" data-tab="wortfamilie" id="card-back-wf-tab" style="display: none;">Wortfamilie</button>
+
+
+
+
 
 
 
@@ -17174,11 +34346,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           <button class="card-back-tab-btn" data-tab="saetze" id="card-back-saetze-tab" style="display: none;">Sätze</button>
 
 
 
+
+
+
+
         </div>
+
+
+
+
 
 
 
@@ -17186,7 +34370,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       </div>
+
+
+
+
 
 
 
@@ -17194,7 +34386,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     // Re-bind close button
+
+
+
+
 
 
 
@@ -17202,7 +34402,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       e.stopPropagation();
+
+
+
+
 
 
 
@@ -17210,11 +34418,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       cardFront.style.display = 'flex';
 
 
 
+
+
+
+
     };
+
+
+
+
 
 
 
@@ -17222,7 +34442,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const wfTab = cardBack.querySelector('#card-back-wf-tab');
+
+
+
+
 
 
 
@@ -17230,7 +34458,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const saetzeTab = cardBack.querySelector('#card-back-saetze-tab');
+
+
+
+
 
 
 
@@ -17238,7 +34474,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (wfTab && wfList.length > 0) wfTab.style.display = 'block';
+
+
+
+
 
 
 
@@ -17246,7 +34490,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (wfeldTab && wfeldList.length > 0) wfeldTab.style.display = 'block';
+
+
+
+
 
 
 
@@ -17254,7 +34506,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const hasNote = !!(data.note || data.note_es);
+
+
+
+
 
 
 
@@ -17262,7 +34522,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     // Bind tab clicks
+
+
+
+
 
 
 
@@ -17270,7 +34538,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     tabBtns.forEach(btn => {
+
+
+
+
 
 
 
@@ -17278,7 +34554,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         e.stopPropagation();
+
+
+
+
 
 
 
@@ -17286,7 +34570,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         btn.classList.add('active');
+
+
+
+
 
 
 
@@ -17294,7 +34586,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         window.renderCardBackTabContent(verbName, cardEl, activeTab);
+
+
+
+
 
 
 
@@ -17302,7 +34602,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     });
+
+
+
+
 
 
 
@@ -17310,11 +34618,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     window.renderCardBackTabContent(verbName, cardEl, 'tiempos');
 
 
 
+
+
+
+
   };
+
+
+
+
 
 
 
@@ -17322,11 +34642,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const cardBack = cardEl.querySelector('.card-back');
 
 
 
+
+
+
+
     if (!cardBack) return;
+
+
+
+
 
 
 
@@ -17334,7 +34666,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (!contentArea) return;
+
+
+
+
 
 
 
@@ -17342,7 +34682,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (!data) return;
+
+
+
+
 
 
 
@@ -17350,7 +34698,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       // 1. Render Tiempos (Overview + Sub-tabs + Table)
+
+
+
+
 
 
 
@@ -17358,7 +34714,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       const praesensObj = data.praesens;
+
+
+
+
 
 
 
@@ -17366,7 +34730,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       const perfektForm = data.perfekt || '';
+
+
+
+
 
 
 
@@ -17374,7 +34746,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       const auxForm = auxiliary.includes('sein') ? 'ist' : 'hat';
+
+
+
+
 
 
 
@@ -17382,7 +34762,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       const praeteritumForm = data.praeteritum || '';
+
+
+
+
 
 
 
@@ -17390,7 +34778,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       const konjunktivObj = data.konjunktiv_ii;
+
+
+
+
 
 
 
@@ -17398,7 +34794,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       let overviewHTML = `
+
+
+
+
 
 
 
@@ -17406,7 +34810,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           <div class="tiempos-overview-row"><span class="tiempos-overview-tense">Präsens</span><span class="tiempos-overview-form">er/sie/es ${erPraesens}</span></div>
+
+
+
+
 
 
 
@@ -17414,7 +34826,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           <div class="tiempos-overview-row"><span class="tiempos-overview-tense">Präteritum</span><span class="tiempos-overview-form">er/sie/es ${erPraeteritum}</span></div>
+
+
+
+
 
 
 
@@ -17422,11 +34842,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         </div>
 
 
 
+
+
+
+
       `;
+
+
+
+
 
 
 
@@ -17434,7 +34866,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       const subTabs = [];
+
+
+
+
 
 
 
@@ -17442,7 +34882,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       subTabs.push({ id: 'perfekt', label: 'Perfekt' });
+
+
+
+
 
 
 
@@ -17450,7 +34898,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       if (konjunktivObj) subTabs.push({ id: 'konjunktiv', label: 'Konjunktiv II' });
+
+
+
+
 
 
 
@@ -17458,7 +34914,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       const subTabsHTML = `
+
+
+
+
 
 
 
@@ -17466,7 +34930,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           ${subTabs.map(tab => `
+
+
+
+
 
 
 
@@ -17474,7 +34946,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
               ${tab.label}
+
+
+
+
 
 
 
@@ -17482,11 +34962,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           `).join('')}
 
 
 
+
+
+
+
         </div>
+
+
+
+
 
 
 
@@ -17494,7 +34986,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       `;
+
+
+
+
 
 
 
@@ -17502,7 +35002,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       // Bind sub-tabs clicks
+
+
+
+
 
 
 
@@ -17510,7 +35018,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       subTabBtns.forEach(btn => {
+
+
+
+
 
 
 
@@ -17518,7 +35034,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           e.stopPropagation();
+
+
+
+
 
 
 
@@ -17526,7 +35050,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           btn.classList.add('active');
+
+
+
+
 
 
 
@@ -17534,7 +35066,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           if (!window.activeCardBackSubTab) window.activeCardBackSubTab = {};
+
+
+
+
 
 
 
@@ -17542,7 +35082,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           window.renderCardBackSubTabTable(verbName, cardEl, subTabId);
+
+
+
+
 
 
 
@@ -17550,7 +35098,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       });
+
+
+
+
 
 
 
@@ -17558,7 +35114,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       window.renderCardBackSubTabTable(verbName, cardEl, activeSubTab);
+
+
+
+
 
 
 
@@ -17566,11 +35130,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       const list = data.wortfamilie || [];
 
 
 
+
+
+
+
       contentArea.innerHTML = list.map(item => `
+
+
+
+
 
 
 
@@ -17578,7 +35154,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           <strong>${item.word}</strong> (${item.type}):<br>
+
+
+
+
 
 
 
@@ -17586,11 +35170,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         </div>
 
 
 
+
+
+
+
       `).join('');
+
+
+
+
 
 
 
@@ -17598,7 +35194,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       const list = data.word_field || [];
+
+
+
+
 
 
 
@@ -17606,7 +35210,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         <div class="card-back-info-text card-back-wfeld-item">
+
+
+
+
 
 
 
@@ -17614,7 +35226,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           <span style="color: #cbd5e1;">${item.meaning}</span>
+
+
+
+
 
 
 
@@ -17622,7 +35242,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       `).join('');
+
+
+
+
 
 
 
@@ -17630,7 +35258,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       let html = '';
+
+
+
+
 
 
 
@@ -17638,7 +35274,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       if (note) {
+
+
+
+
 
 
 
@@ -17646,7 +35290,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       }
+
+
+
+
 
 
 
@@ -17654,7 +35306,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       ['A1', 'A2', 'B1'].forEach(lvl => {
+
+
+
+
 
 
 
@@ -17662,7 +35322,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         if (items.length > 0) {
+
+
+
+
 
 
 
@@ -17670,7 +35338,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           items.forEach(item => {
+
+
+
+
 
 
 
@@ -17678,7 +35354,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
               <div class="card-back-info-text card-back-saetze-item">
+
+
+
+
 
 
 
@@ -17686,7 +35370,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
                 ${item.example ? `<br><span style="color:#cbd5e1;">Ex: "${item.example}"</span>` : ''}
+
+
+
+
 
 
 
@@ -17694,7 +35386,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
             `;
+
+
+
+
 
 
 
@@ -17702,7 +35402,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         }
+
+
+
+
 
 
 
@@ -17710,7 +35418,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       contentArea.innerHTML = html || '<p style="font-size: 0.76rem; color: #94a3b8;">Keine Sätze vorhanden.</p>';
+
+
+
+
 
 
 
@@ -17718,7 +35434,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
   };
+
+
+
+
 
 
 
@@ -17726,7 +35450,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const cardBack = cardEl.querySelector('.card-back');
+
+
+
+
 
 
 
@@ -17734,7 +35466,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const tableWrapper = cardBack.querySelector('#card-back-subtab-table-el');
+
+
+
+
 
 
 
@@ -17742,7 +35482,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     const data = allVerbsData[verbName];
+
+
+
+
 
 
 
@@ -17750,7 +35498,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     let conjObj = null;
+
+
+
+
 
 
 
@@ -17758,7 +35514,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (subTabId === 'praesens') conjObj = data.praesens;
+
+
+
+
 
 
 
@@ -17766,7 +35530,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       "ich": `habe ${data.perfekt || ''}`,
+
+
+
+
 
 
 
@@ -17774,7 +35546,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       "er/sie/es": `hat ${data.perfekt || ''}`,
+
+
+
+
 
 
 
@@ -17782,7 +35562,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       "ihr": `habt ${data.perfekt || ''}`,
+
+
+
+
 
 
 
@@ -17790,7 +35578,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     };
+
+
+
+
 
 
 
@@ -17798,7 +35594,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       "ich": data.praeteritum || '',
+
+
+
+
 
 
 
@@ -17806,7 +35610,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       "er/sie/es": data.praeteritum || '',
+
+
+
+
 
 
 
@@ -17814,7 +35626,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       "ihr": data.praeteritum ? `${data.praeteritum}t` : '',
+
+
+
+
 
 
 
@@ -17822,7 +35642,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     };
+
+
+
+
 
 
 
@@ -17830,11 +35658,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       conjObj = data.konjunktiv_ii;
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -17842,7 +35682,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     if (conjObj) {
+
+
+
+
 
 
 
@@ -17850,7 +35698,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         <table>
+
+
+
+
 
 
 
@@ -17858,7 +35714,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
             <tr>
+
+
+
+
 
 
 
@@ -17866,7 +35730,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
               <th>Konjugation</th>
+
+
+
+
 
 
 
@@ -17874,7 +35746,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           </thead>
+
+
+
+
 
 
 
@@ -17882,7 +35762,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
             <tr><td><span class="pronoun-de">ich</span></td><td>${conjObj.ich || ''}</td></tr>
+
+
+
+
 
 
 
@@ -17890,7 +35778,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
             <tr><td><span class="pronoun-de">er/sie/es</span></td><td>${conjObj["er/sie/es"] || conjObj.er_sie_es || ''}</td></tr>
+
+
+
+
 
 
 
@@ -17898,7 +35794,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
             <tr><td><span class="pronoun-de">ihr</span></td><td>${conjObj.ihr || ''}</td></tr>
+
+
+
+
 
 
 
@@ -17906,7 +35810,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           </tbody>
+
+
+
+
 
 
 
@@ -17914,11 +35826,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       `;
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -17926,7 +35850,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     try {
+
+
+
+
 
 
 
@@ -17934,7 +35866,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     } catch(e) {}
+
+
+
+
 
 
 
@@ -17942,7 +35882,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     let exampleHTML = '';
+
+
+
+
 
 
 
@@ -17950,7 +35898,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       const firstEx = examples[0];
+
+
+
+
 
 
 
@@ -17958,7 +35914,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       const exEs = firstEx.es || firstEx.example_es || '';
+
+
+
+
 
 
 
@@ -17966,7 +35930,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
         exampleHTML = `
+
+
+
+
 
 
 
@@ -17974,7 +35946,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
             <p class="example-de" onclick="speak('${exDe.replace(/'/g, "\\'")}')" style="font-size:0.76rem; margin:0;" title="Aussprache hören">${exDe}</p>
+
+
+
+
 
 
 
@@ -17982,7 +35962,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
           </div>
+
+
+
+
 
 
 
@@ -17990,7 +35978,15 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
       }
+
+
+
+
 
 
 
@@ -17998,11 +35994,23 @@ async function loadWortfamilieIndex() {
 
 
 
+
+
+
+
     tableWrapper.innerHTML = conjugationHTML + exampleHTML;
 
 
 
+
+
+
+
   };
+
+
+
+
 
 
 
@@ -18021,7 +36029,7 @@ async function loadWortfamilieIndex() {
     cardBack.innerHTML = `
       <div class="card-back-header">
         <span class="card-back-level-badge">Lade...</span>
-        <button class="card-back-close-btn">&times;</button>
+        <button class="card-back-close-btn" id="card-back-header-action-btn">&times;</button>
         <h2 class="card-back-infinitive">${verbName}</h2>
         <p class="card-back-translation"></p>
       </div>
@@ -18030,7 +36038,7 @@ async function loadWortfamilieIndex() {
       </div>
     `;
 
-    cardBack.querySelector('.card-back-close-btn').onclick = (e) => {
+    cardBack.querySelector('#card-back-header-action-btn').onclick = (e) => {
       e.stopPropagation();
       cardBack.style.display = 'none';
       cardFront.style.display = 'flex';
@@ -18051,11 +36059,11 @@ async function loadWortfamilieIndex() {
 
     data = allVerbsData[verbName] || data;
 
-    // Setup stable header
+    // Setup stable header structure
     cardBack.innerHTML = `
       <div class="card-back-header">
         <span class="card-back-level-badge">${data.level || 'A1'}</span>
-        <button class="card-back-close-btn">&times;</button>
+        <button class="card-back-close-btn" id="card-back-header-action-btn">&times;</button>
         <h2 class="card-back-infinitive">${verbName}</h2>
         <p class="card-back-translation">${data.spanishName || data.groupNameSpanish || data.es || ''}</p>
       </div>
@@ -18064,26 +36072,31 @@ async function loadWortfamilieIndex() {
       </div>
     `;
 
-    // Re-bind close button
-    cardBack.querySelector('.card-back-close-btn').onclick = (e) => {
-      e.stopPropagation();
-      cardBack.style.display = 'none';
-      cardFront.style.display = 'flex';
-    };
-
     // Initial render of main menu
     window.renderCardBackMenu(verbName, cardEl);
   };
 
   window.renderCardBackMenu = function (verbName, cardEl) {
+    const cardFront = cardEl.querySelector('.card-front');
     const cardBack = cardEl.querySelector('.card-back');
-    if (!cardBack) return;
+    if (!cardFront || !cardBack) return;
 
     const contentArea = cardBack.querySelector('#card-back-content-area-el');
     if (!contentArea) return;
 
     const data = allVerbsData[verbName];
     if (!data) return;
+
+    // 1. Configure top-right button as Close button (x)
+    const actionBtn = cardBack.querySelector('#card-back-header-action-btn');
+    if (actionBtn) {
+      actionBtn.innerHTML = '&times;';
+      actionBtn.onclick = (e) => {
+        e.stopPropagation();
+        cardBack.style.display = 'none';
+        cardFront.style.display = 'flex';
+      };
+    }
 
     const wfList = data.wortfamilie || [];
     const wfeldList = data.word_field || [];
@@ -18131,16 +36144,21 @@ async function loadWortfamilieIndex() {
     const data = allVerbsData[verbName];
     if (!data) return;
 
+    // 1. Configure top-right button as Back button (larr)
+    const actionBtn = cardBack.querySelector('#card-back-header-action-btn');
+    if (actionBtn) {
+      actionBtn.innerHTML = '&larr;';
+      actionBtn.onclick = (e) => {
+        e.stopPropagation();
+        window.renderCardBackMenu(verbName, cardEl);
+      };
+    }
+
     // Reset scroll to top of sub-screen
     const bodyEl = cardBack.querySelector('.card-back-body');
     if (bodyEl) bodyEl.scrollTop = 0;
 
-    const backButtonHTML = `
-      <button class="card-back-back-btn" id="card-back-back-btn-el">&larr; Volver al menú</button>
-    `;
-
     if (tabId === 'zeiten') {
-      // 1. Render Tenses Sub-tabs and 9-Row Conjugation Table
       // Extract er/sie/es forms for each tense (handling separate keys er, sie, es)
       const pObj = data.praesens || data;
       let erPraesens = pObj ? (pObj["er/sie/es"] || pObj.er_sie_es || pObj.er || pObj.sie || pObj.es || '') : '';
@@ -18176,8 +36194,7 @@ async function loadWortfamilieIndex() {
       const activeSubTab = window.activeCardBackSubTab?.[verbName] || subTabs[0].id;
 
       const subTabsHTML = `
-        ${backButtonHTML}
-        <div class="zeiten-sub-tabs" style="margin-top: 4px;">
+        <div class="zeiten-sub-tabs">
           ${subTabs.map(tab => `
             <button class="zeiten-sub-tab-btn ${tab.id === activeSubTab ? 'active' : ''}" data-subtab="${tab.id}">
               ${tab.label}
@@ -18188,12 +36205,6 @@ async function loadWortfamilieIndex() {
       `;
 
       contentArea.innerHTML = subTabsHTML;
-
-      // Bind back button
-      contentArea.querySelector('#card-back-back-btn-el').onclick = (e) => {
-        e.stopPropagation();
-        window.renderCardBackMenu(verbName, cardEl);
-      };
 
       // Bind sub-tabs clicks
       const subTabBtns = contentArea.querySelectorAll('.zeiten-sub-tab-btn');
@@ -18219,20 +36230,13 @@ async function loadWortfamilieIndex() {
       let activeVocab = window.activeWortschatzTab?.[verbName] || (wfList.length > 0 ? 'wf' : 'wfeld');
 
       let togglesHTML = `
-        ${backButtonHTML}
-        <div class="wortschatz-toggles-container" style="margin-top: 4px;">
+        <div class="wortschatz-toggles-container">
           ${wfList.length > 0 ? `<button class="wortschatz-toggle-btn ${activeVocab === 'wf' ? 'active' : ''}" data-vocab="wf">Wortfamilie</button>` : ''}
           ${wfeldList.length > 0 ? `<button class="wortschatz-toggle-btn ${activeVocab === 'wfeld' ? 'active' : ''}" data-vocab="wfeld">Wortfeld</button>` : ''}
         </div>
         <div id="wortschatz-vocab-list-el"></div>
       `;
       contentArea.innerHTML = togglesHTML;
-
-      // Bind back button
-      contentArea.querySelector('#card-back-back-btn-el').onclick = (e) => {
-        e.stopPropagation();
-        window.renderCardBackMenu(verbName, cardEl);
-      };
 
       // Bind click events for toggle buttons
       const toggleBtns = contentArea.querySelectorAll('.wortschatz-toggle-btn');
@@ -18252,7 +36256,7 @@ async function loadWortfamilieIndex() {
       window.renderWortschatzList(verbName, cardEl, activeVocab);
 
     } else if (tabId === 'saetze') {
-      let html = backButtonHTML + '<div style="margin-top: 4px;">';
+      let html = '<div>';
       const note = data.note_es || data.note || '';
       if (note) {
         html += `<div style="background: rgba(255,255,255,0.05); padding: 6px; border-radius: 6px; font-size: 0.74rem; margin-bottom: 6px; font-style: italic; color: #cbd5e1;">${note}</div>`;
@@ -18273,13 +36277,7 @@ async function loadWortfamilieIndex() {
         }
       });
       html += '</div>';
-      contentArea.innerHTML = html || backButtonHTML + '<p style="font-size: 0.76rem; color: #94a3b8; margin-top: 4px;">Keine Sätze vorhanden.</p>';
-
-      // Bind back button
-      contentArea.querySelector('#card-back-back-btn-el').onclick = (e) => {
-        e.stopPropagation();
-        window.renderCardBackMenu(verbName, cardEl);
-      };
+      contentArea.innerHTML = html || '<p style="font-size: 0.76rem; color: #94a3b8; margin-top: 4px;">Keine Sätze vorhanden.</p>';
     }
   };
 
@@ -18349,12 +36347,9 @@ async function loadWortfamilieIndex() {
 
     let conjObj = null;
     let tenseExamplesKey = subTabId;
-    let erFormToDisplay = '';
 
     if (subTabId === 'praesens') {
       conjObj = data.praesens || data;
-      const pObj = data.praesens || data;
-      erFormToDisplay = pObj ? (pObj["er/sie/es"] || pObj.er_sie_es || pObj.er || pObj.sie || pObj.es || '') : '';
     } else if (subTabId === 'perfekt') {
       let perfForm = data.perfekt || '';
       perfForm = perfForm.replace(/^(hat|ist)\s+/, '');
@@ -18376,7 +36371,6 @@ async function loadWortfamilieIndex() {
         "ihr": `${auxIhr} ${perfForm}`,
         "sie/Sie": `${auxSie} ${perfForm}`
       };
-      erFormToDisplay = `${auxEr} ${perfForm}`;
     } else if (subTabId === 'praeteritum') {
       const praetPhrase = data.praeteritum || '';
       conjObj = data.praeteritum_conj || {
@@ -18387,20 +36381,8 @@ async function loadWortfamilieIndex() {
         "ihr": conjugateBaseForm(praetPhrase, 't'),
         "sie/Sie": conjugateBaseForm(praetPhrase, 'n')
       };
-      erFormToDisplay = conjugateBaseForm(praetPhrase, '');
     } else if (subTabId === 'konjunktiv') {
       conjObj = data.konjunktiv_ii;
-      const kObj = data.konjunktiv_ii;
-      erFormToDisplay = kObj ? (kObj["er/sie/es"] || kObj.er_sie_es || kObj.er || kObj.sie || kObj.es || '') : '';
-    }
-
-    let thirdPersonDisplayHTML = '';
-    if (erFormToDisplay) {
-      thirdPersonDisplayHTML = `
-        <div class="card-back-third-person-display">
-          er/sie/es <strong>${erFormToDisplay}</strong>
-        </div>
-      `;
     }
 
     let conjugationHTML = '';
@@ -18452,8 +36434,12 @@ async function loadWortfamilieIndex() {
       }
     }
 
-    tableWrapper.innerHTML = thirdPersonDisplayHTML + conjugationHTML + exampleHTML;
+    tableWrapper.innerHTML = conjugationHTML + exampleHTML;
   };});
+
+
+
+
 
 
 
