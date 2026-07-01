@@ -1,1129 +1,1134 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deutsch Verben</title>
-
-    <!-- Open Graph / WhatsApp Preview Meta Tags -->
-    <meta property="og:title" content="Deutsch Verben">
-    <meta property="og:description" content="Deutsche Verben - Ebenen A1 und A2">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="../../images/german_flag.png">
-    <meta name="description" content="Deutsche Verben - Ebenen A1 und A2">
-
-    <link rel="icon" href="../../images/german_flag.png" type="image/png">
-    <!-- Carga de la fuente para el estáilo de tiza -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Nunito:wght@400;700&family=Poppins:wght@400;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style/styles.css?v=1.16">
-</head>
-
-<body>
-
-    <div class="main-container" id="main-container">
-        <div class="content-block">
-            <div class="header">
-                <div class="title-container">
-                    <h1 class="title">Deutsch Verben</h1>
-
-                    <div class="controls-container">
-                        <div class="search-container">
-                            <input type="text" id="verb-search" class="search-input" placeholder="Suchen... (buscar)">
-                            <button id="clear-search" class="clear-search-btn" title="Clear search">&times;</button>
-                            <button id="settings-btn" class="settings-btn" title="Einstellungen"
-                                style="margin-left: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer; transition: transform 0.2s; display: inline-flex; align-items: center; justify-content: center;">
-                                <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.02a1.65 1.65 0 0 0 .98-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 .99 1.51h.02a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.02a1.65 1.65 0 0 0 1.51.98H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51.99z"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div id="loading-status" class="loading-status" aria-live="polite"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="search-counter" class="search-counter"></div>
-
-            <!-- New unified navigation above cards -->
-            <div class="navigation-wrapper">
-                <!-- Level Navigation Section -->
-                <div class="level-navigation">
-                    <button id="prev-level-btn" class="level-nav-arrow" title="Vorheriges Niveau (Previous Level)">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                    </button>
-                    <div class="level-toggle" id="level-toggle" aria-label="Level auswählen">
-                        <button type="button" class="level-option active" data-level="A1" aria-pressed="true">A1</button>
-                        <button type="button" class="level-option" data-level="A2" aria-pressed="false">A2</button>
-                        <button type="button" class="level-option" data-level="B1" aria-pressed="false">B1</button>
-                        <button type="button" class="level-option" data-level="B2" aria-pressed="false">B2</button>
-                    </div>
-                    <div class="level-indicator" id="level-indicator">A1.1</div>
-                    <button id="next-level-btn" class="level-nav-arrow" title="Nächstes Niveau (Next Level)">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="18 15 12 9 6 15"></polyline>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Group Navigation Section -->
-                <div class="group-navigation">
-                    <button id="prev-group-btn" class="group-nav-arrow" title="Vorherige Gruppe">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="15 18 9 12 15 6"></polyline>
-                        </svg>
-                    </button>
-                    <div class="group-theme-indicator" id="group-theme-indicator">Being & Existence</div>
-                    <button id="next-group-btn" class="group-nav-arrow" title="Nächste Gruppe">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <span id="search-results-count" class="search-results-count"></span>
-
-
-
-            <div class="cards-container" id="cards-container">
-                <!-- Verb cards will be generated here by JavaScript -->
-            </div>
-
-            <!-- Group indicator and progress bar moved below cards -->
-            <div class="group-progress-section">
-                <div id="group-indicator" class="group-indicator"></div>
-                <div class="progress-bar-container" id="progress-bar">
-                    <!-- Progress dots will be generated here -->
-                </div>
-            </div>
-
-            <!-- Gustar button for Sechste Gruppe -->
-            <div id="gustar-button-container" class="gustar-button-wrapper" style="display: block;">
-                <button id="gustar-button" class="gustar-btn" title="Mögen, Gern &amp; Gefallen Info">
-                    <span class="gustar-emoji">&hearts;</span>
-                    <span class="gustar-text">gustar</span>
-                </button>
-            </div>
-
-            <!-- Reflexive Button for Zehnte Gruppe (A2.1) -->
-            <div id="reflexive-button-container" class="gustar-button-wrapper" style="display: none;">
-                <button id="reflexive-button" class="gustar-btn" title="Reflexive Verben Info">
-                    <span class="gustar-emoji">&#8635;</span>
-                    <span class="gustar-text">Reflexiv</span>
-                </button>
-            </div>
-
-            <div class="cards-toggles-separator"></div>
-
-            <div class="toggles-row">
-                <div class="info-button" id="info-button">info</div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Verb Modal -->
-    <div id="verb-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="close-verb-modal-x" class="modal-close-x" title="Schließen (Cerrar)">&times;</button>
-            <div class="modal-header">
-                <div id="modal-level-badge" class="modal-level-badge"></div>
-                <h3 id="modal-verb-infinitive" class="modal-word"></h3>
-                <p id="modal-verb-translations" class="modal-translation" data-form="translation"></p>
-
-                <div id="modal-tags-collapsible" class="modal-tags-wrapper collapsed">
-                    <div id="modal-header-tags" class="modal-header-tags"></div>
-                    <!-- Other tags moved to header -->
-                    <div id="modal-extra-tags" class="modal-extra-tags"></div>
-                    <div id="modal-case-tags-container" class="modal-case-tags"></div>
-                </div>
-
-                <div id="modal-tags-toggle" class="modal-tags-toggle" title="Details anzeigen">
-                    <span class="dots-icon">&bull;&bull;&bull;</span>
-                    <span class="chevron-icon" style="display:none;">&#9650;</span>
-                </div>
-            </div>
-
-            <div class="modal-body-content">
-
-                <!-- Usage Note Container (New) -->
-                <div id="modal-usage-note-container"></div>
-
-                <!-- Wortfamilie Section -->
-                <details id="wortfamilie-container">
-                    <summary id="wortfamilie-summary">
-                        📚 Wortfamilie
-                        <span class="details-arrow">&#9654;</span>
-                    </summary>
-                    <div id="wortfamilie-content" class="details-content">
-                        <!-- Word family content inserted here -->
-                    </div>
-                </details>
-
-                <!-- Wortfeld Section -->
-                <details id="wortfeld-container" style="display: none;">
-                    <summary id="wortfeld-summary">
-                        🎨 Wortfeld
-                        <span class="details-arrow">&#9654;</span>
-                    </summary>
-                    <div id="wortfeld-content" class="details-content">
-                        <!-- Word field content inserted here -->
-                    </div>
-                </details>
-
-                <!-- Sätze Section -->
-                <details id="saetze-container" style="display: none;">
-                    <summary id="saetze-summary">
-                        📝 Sätze
-                        <span class="details-arrow">&#9654;</span>
-                    </summary>
-                    <div id="saetze-content" class="details-content">
-                        <!-- Sentences content inserted here -->
-                    </div>
-                </details>
-
-                <!-- General Card Note -->
-                <div id="modal-general-note" class="modal-note-general" style="display: none;"></div>
-            </div><!-- End of top modal-body-content -->
-
-            <!-- New Tab Navigation - Full Width -->
-            <div class="modal-tabs-nav">
-                <button class="modal-tab-btn active" id="tab-btn-infinitiv" data-tab="praesens">Infinitiv</button>
-                <button class="modal-tab-btn" id="tab-btn-perfekt" data-tab="perfekt">Perfekt</button>
-                <button class="modal-tab-btn" id="tab-btn-praeteritum" data-tab="praeteritum">Präteritum</button>
-                <button class="modal-tab-btn" id="tab-btn-konjunktiv" data-tab="konjunktiv"
-                    style="display: none;">Konjunktiv II</button>
-            </div>
-
-            <!-- Tab Contents - Full Width Container -->
-            <div id="praesens-tab-content" class="tab-content active">
-
-                <!-- Präsens Details Section -->
-                <div id="praesens-details-container">
-                    <h4 class="section-title">Präsens Konjugation</h4>
-                    <div id="modal-praesens-table" class="details-content" style="display: block;">
-                        <!-- Conjugation table inserted here -->
-                    </div>
-                    <!-- Present Tense Conjugation Note -->
-                    <div id="modal-praesens-note" class="modal-note-praesens" style="display: none;"></div>
-                </div>
-
-                <!-- Präsens Examples Section -->
-                <details id="praesens-examples-container">
-                    <summary id="praesens-examples-summary">
-                        Präsens Beispiele
-                        <span class="details-arrow">&#9654;</span>
-                    </summary>
-                    <div id="modal-praesens-examples-table" class="details-content">
-                        <!-- Präsens examples table inserted here -->
-                    </div>
-                </details>
-            </div>
-
-            <!-- Tab Content: Perfekt -->
-            <div id="perfekt-tab-content" class="tab-content" style="display: none;">
-                <!-- Perfekt Block -->
-                <div class="modal-verb-block">
-                    <div class="modal-verb-line">
-                        <h4 id="modal-verb-perfekt"></h4>
-                    </div>
-                    <p id="modal-verb-perfekt-es" class="modal-translation" data-form="translation"
-                        style="font-style: italic;"></p>
-                    <p id="modal-verb-english-perfekt" class="modal-translation" data-form="translation"></p>
-                </div>
-
-                <!-- Perfekt Konjugation Section -->
-                <!-- Unwrapped validation: User said "shows below the perfekt konjugation" -->
-                <div id="perfekt-examples-container">
-                    <h4 class="section-title">Perfekt Konjugation</h4>
-                    <div id="modal-perfekt-examples-table" class="details-content" style="display: block;">
-                        <!-- Perfekt conjugation table inserted here -->
-                    </div>
-                </div>
-                <!-- Perfekt Note -->
-                <div id="modal-perfekt-note" class="modal-note-praesens" style="display: none;"></div>
-            </div>
-
-            <!-- Tab Content: Präteritum -->
-            <div id="praeteritum-tab-content" class="tab-content" style="display: none;">
-                <!-- Präteritum Block -->
-                <div class="modal-verb-block">
-                    <div class="modal-verb-line">
-                        <h4 id="modal-verb-praeteritum"></h4>
-                    </div>
-                    <p id="modal-verb-praeteritum-es" class="modal-translation" data-form="translation"></p>
-                    <p id="modal-verb-english-praeteritum" class="modal-translation" data-form="translation"></p>
-                </div>
-
-                <!-- Präteritum Konjugation Section -->
-                <div id="praeteritum-konjugation-container">
-                    <h4 class="section-title">Präteritum Konjugation</h4>
-                    <div id="modal-praeteritum-konjugation-table" class="details-content" style="display: block;">
-                        <!-- Präteritum conjugation table inserted here -->
-                    </div>
-                </div>
-                <!-- Präteritum Note -->
-                <div id="modal-praeteritum-note" class="modal-note-praesens" style="display: none;"></div>
-            </div>
-
-
-            <!-- Tab Content: Konjunktiv II -->
-            <div id="konjunktiv-tab-content" class="tab-content" style="display: none;">
-                <!-- Konjunktiv II Block -->
-                <div class="modal-verb-block">
-                    <div class="modal-verb-line">
-                        <!-- Title will be dynamic if needed, or static -->
-                        <h4 class="section-title">Konjunktiv II</h4>
-                    </div>
-                    <p class="modal-translation" data-form="translation">Modo condicional (expresa deseos, situaciones
-                        hipotéticas)</p>
-                </div>
-
-                <!-- Konjunktiv II Konjugation Section -->
-                <div id="konjunktiv-konjugation-container-tab">
-                    <h4 class="section-title">Konjunktiv II Konjugation</h4>
-                    <div id="modal-konjunktiv-konjugation-table-tab" class="details-content" style="display: block;">
-                        <!-- Konjunktiv II conjugation table inserted here -->
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Bottom Content (Padded) -->
-            <div class="modal-body-content">
-
-                <!-- Konjunktiv and Extra Info (kept separate for now, or should they be under a tab?)
-                     If the user didn't specify, I will leave them at the bottom, outside tabs, or maybe under Infinitiv?
-                     Usually separate. Let's keep them at the bottom common area or move Konjunktiv to its own logic if needed.
-                     But for now, I will leave them below the tabs area.
-                -->
-                <!-- Konjunktiv II section removed (moved to tab) -->
-
-                <!-- Footer elements removed as per request -->
-            </div><!-- End of modal-body-content -->
-        </div>
-    </div>
-
-    <!-- General Info Modal -->
-    <div id="info-modal" class="modal-overlay">
-        <div class="modal-content">
-            <h2>El Pasado "Perfekt"</h2>
-            <h3>Uso Principal</h3>
-            <p>El "Perfekt" es el tiempo pasado más importante en alemán. Se usa principalmente en <b>conversaciones
-                    habladas</b> para describir acciones que ya han terminado.</p>
-
-            <h3>Estructura de la Frase</h3>
-            <p>La estáructura es simple:<br><b>Sujeto + Verbo Auxiliar (conjugado) + ... + Participio II (al final).</b>
-            </p>
-            <p>Ej: <i>Ich <b>habe</b> einen Apfel <b>gegessen</b>.</i></p>
-
-            <h3>Verbos Auxiliares: ¿Haben o Sein?</h3>
-            <p>Se usa <b>sein</b> con verbos que indican un movimiento (de A a B) o un cambio de estáado. Por ejemplo:
-            </p>
-            <ul>
-                <li><b>gehen</b>: Ich bin ins Kino gegangen. (<b>He ido</b> al cine)</li>
-                <li><b>fahren</b>: Er ist nach Berlin gefahren. (í‰l <b>ha ido/conducido</b> a Berlín)</li>
-                <li><b>fliegen</b>: Wir sind geflogen. (<b>Hemos volado</b>)</li>
-                <li><b>aufstehen</b> (levantarse): Du bist aufgestáanden. (<b>Te has levantado</b>)</li>
-            </ul>
-
-            <p>Se usa <b>haben</b> con la gran mayoría de los otros verbos, especialmente aquellos que tienen un objeto
-                directo. Por ejemplo:</p>
-            <ul>
-                <li><b>kaufen</b>: Ich habe ein Buch gekauft. (<b>He comprado</b> un libro)</li>
-                <li><b>essen</b>: Sie hat eine Pizza gegessen. (Ella <b>ha comido</b> una pizza)</li>
-                <li><b>lesen</b>: Wir haben die Zeitung gelesen. (<b>Hemos leído</b> el periódico)</li>
-            </ul>
-
-            <h3>El Participio II (Partizip II)</h3>
-            <p>Es la forma pasada del verbo. Para verbos regulares, a menudo se forma con:<br><b>ge-</b> + raíz del
-                verbo + <b>-t</b>. Por ejemplo:</p>
-            <ul>
-                <li>machen -> <b>ge</b>mach<b>t</b> (hecho)</li>
-                <li>lernen -> <b>ge</b>lern<b>t</b> (aprendido)</li>
-                <li>kaufen -> <b>ge</b>kauf<b>t</b> (comprado)</li>
-            </ul>
-
-            <p>Los verbos irregulares tienen formas propias que debes memorizar (a menudo terminan en <b>-en</b>). Por
-                ejemplo:</p>
-            <ul>
-                <li>gehen -> gegang<b>en</b> (ido)</li>
-                <li>sehen -> geseh<b>en</b> (visto)</li>
-                <li>sprechen -> gesproch<b>en</b> (hablado)</li>
-                <li>trinken -> getrunk<b>en</b> (bebido)</li>
-                <li>schreiben -> geschrieb<b>en</b> (escrito)</li>
-            </ul>
-
-            <br>
-            <button id="close-info-modal" class="close-modal-btn">Verstanden (Entendido)</button>
-        </div>
-    </div>
-
-    <div id="gustar-modal" class="modal-overlay gustar-modal-overlay">
-        <div class="modal-content gustar-modal-content">
-            <div class="gustar-modal-header">
-                <h2>Mögen, Gern & Gefallen: Eine Übersicht</h2>
-                <button id="gustar-close-btn" class="gustar-close-btn" title="Schließen (Cerrar)">&times;</button>
-            </div>
-
-            <div class="gustar-modal-body">
-                <!-- Section 1: Mögen -->
-                <details open class="gustar-section">
-                    <summary>1. Para Cosas (Sustantivos): "Mögen"</summary>
-                    <div class="gustar-section-content">
-                        <div class="highlight-box">
-                            <p>Se usa el verbo <strong>"mögen"</strong> cuando te gusta un objeto, una comida, una
-                                persona o un lugar.</p>
-                            <p class="mt-2"><strong>Estructura:</strong> Sujeto + mögen (conjugado) + Objeto.</p>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Alemán</th>
-                                    <th>Español</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Ich <strong>mag</strong> Kaffee.</td>
-                                    <td>Me gusta el café.</td>
-                                </tr>
-                                <tr>
-                                    <td>Du <strong>magst</strong> Berlin.</td>
-                                    <td>Te gusta Berlín.</td>
-                                </tr>
-                                <tr>
-                                    <td>Er <strong>mag</strong> Fußball.</td>
-                                    <td>A él le gusta el fútbol.</td>
-                                </tr>
-                                <tr class="negative-row font-semibold">
-                                    <td>Ich <strong>mag keinen</strong> Fisch.</td>
-                                    <td>No me gusta el pescado. (Negación)</td>
-                                </tr>
-                                <tr class="negative-row font-semibold">
-                                    <td>Wir <strong>mögen keine</strong> Spinnen.</td>
-                                    <td>No nos gustan las arañas. (Negación)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p class="text-sm text-gray-600 mt-2"><em>Nota: Para negar sustantivos se suele usar
-                                "kein/keine".</em></p>
-                    </div>
-                </details>
-
-                <!-- Section 2: Gern -->
-                <details open class="gustar-section">
-                    <summary>2. Para Acciones (Verbos): "Gern"</summary>
-                    <div class="gustar-section-content">
-                        <div class="highlight-box">
-                            <p>En alemán <strong>NO</strong> se usa "mögen" para acciones. Se usa el verbo de la acción
-                                + el adverbio <strong>"gern"</strong>.</p>
-                            <p class="mt-2"><strong>Estructura:</strong> Sujeto + Verbo conjugado +
-                                <strong>gern</strong>.
-                            </p>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Alemán</th>
-                                    <th>Español</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Ich spiele <strong>gern</strong> Fußball.</td>
-                                    <td>Me gusta jugar fútbol.</td>
-                                </tr>
-                                <tr>
-                                    <td>Ich tanze <strong>gern</strong> Salsa.</td>
-                                    <td>Me gusta bailar salsa.</td>
-                                </tr>
-                                <tr>
-                                    <td>Wir lernen <strong>gern</strong> Deutsch.</td>
-                                    <td>Nos gusta aprender alemán.</td>
-                                </tr>
-                                <tr class="negative-row font-semibold">
-                                    <td>Ich koche <strong>nicht gern</strong>.</td>
-                                    <td>No me gusta cocinar. (Negación)</td>
-                                </tr>
-                                <tr class="negative-row font-semibold">
-                                    <td>Sie warten <strong>nicht gern</strong>.</td>
-                                    <td>A ellos no les gusta esperar. (Negación)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p class="text-sm text-gray-600 mt-2"><em>Nota: Para negar acciones se usa "nicht" antes de
-                                "gern".</em></p>
-                    </div>
-                </details>
-
-                <!-- Section 3: Gefallen -->
-                <details class="gustar-section">
-                    <summary>3. Para impresiones/estética: "Gefallen"</summary>
-                    <div class="gustar-section-content">
-                        <div class="highlight-box">
-                            <p>Funciona igual que "Gustar" en español. El sujeto es la cosa que gusta, y la persona va
-                                en <strong>Dativo</strong>.</p>
-                            <p class="mt-2"><strong>Estructura:</strong> Objeto (Sujeto) + gefällt/gefallen + Persona
-                                (Dativo).</p>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Alemán</th>
-                                    <th>Español</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Das Auto <strong>gefällt mir</strong>.</td>
-                                    <td>El auto me gusta (a mí).</td>
-                                </tr>
-                                <tr>
-                                    <td>Die Schuhe <strong>gefallen mir</strong>.</td>
-                                    <td>Los zapatos me gustan.</td>
-                                </tr>
-                                <tr>
-                                    <td>Berlin <strong>gefällt dir</strong>.</td>
-                                    <td>Berlín te gusta (a ti).</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </details>
-
-                <!-- Section 4: Lieben & Hassen -->
-                <details class="gustar-section">
-                    <summary>4. Los Extremos: "Lieben" y "Hassen"</summary>
-                    <div class="gustar-section-content">
-
-                        <h3 class="text-xl font-bold text-red-600 mb-2">❤️ Lieben (Amar / Encantar)</h3>
-                        <p class="mb-4">Se usa para personas, lugares o cosas que te gustan muchísimo.</p>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Alemán</th>
-                                    <th>Español</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Ich <strong>liebe</strong> meine Familie.</td>
-                                    <td>Amo a mi familia.</td>
-                                </tr>
-                                <tr>
-                                    <td>Er <strong>liebt</strong> Schokolade.</td>
-                                    <td>A él le encanta el chocolate.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <h3 class="text-xl font-bold text-red-800 mt-6 mb-2">😡 Hassen (Odiar)</h3>
-                        <p class="mb-4">Se usa para expresar un desagrado intenso y profundo.</p>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Alemán</th>
-                                    <th>Español</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Ich <strong>hasse</strong> den Regen.</td>
-                                    <td>Odio la lluvia.</td>
-                                </tr>
-                                <tr>
-                                    <td>Du <strong>hasst</strong> Hausaufgaben.</td>
-                                    <td>Tú odias la tarea.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </details>
-
-                <!-- Resumen Rápido -->
-                <div class="gustar-summary">
-                    <h3>💡 Resumen Rápido</h3>
-                    <div class="summary-grid">
-                        <div class="summary-item">
-                            <span class="summary-emoji">❤️</span>
-                            <strong>Lieben</strong> → Encantar
-                            <div class="summary-examples">
-                                <span class="summary-positive">Ich liebe Musik.</span>
-                                <span class="summary-negative">Ich liebe <mark class="neg-highlight">keine</mark>
-                                    Spinnen.</span>
-                            </div>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-emoji">😡</span>
-                            <strong>Hassen</strong> → Odiar
-                            <div class="summary-examples">
-                                <span class="summary-positive">Ich hasse Montage.</span>
-                                <span class="summary-negative">Ich hasse Montage <mark
-                                        class="neg-highlight">nicht</mark>.</span>
-                            </div>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-emoji">👍</span>
-                            <strong>Mögen</strong> → Gustar (cosas)
-                            <div class="summary-examples">
-                                <span class="summary-positive">Ich mag Pizza.</span>
-                                <span class="summary-negative">Ich mag <mark class="neg-highlight">keinen</mark>
-                                    Lärm.</span>
-                            </div>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-emoji">⚡</span>
-                            <strong>Gern</strong> → Gustar (acciones)
-                            <div class="summary-examples">
-                                <span class="summary-positive">Ich esse gern.</span>
-                                <span class="summary-negative">Ich warte <mark class="neg-highlight">nicht</mark>
-                                    gern.</span>
-                            </div>
-                        </div>
-                        <div class="summary-item">
-                            <span class="summary-emoji">✨</span>
-                            <strong>Gefallen</strong> → Gustar (apariencia)
-                            <div class="summary-examples">
-                                <span class="summary-positive">Das Auto gefällt mir.</span>
-                                <span class="summary-negative">Das Bild gefällt mir <mark
-                                        class="neg-highlight">nicht</mark>.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gustar-modal-footer">
-                <button id="gustar-close-footer-btn">Verstanden (Entendido)</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Reflexive Modal -->
-    <div id="reflexive-modal" class="modal-overlay gustar-modal-overlay">
-        <div class="modal-content gustar-modal-content">
-            <div class="gustar-modal-header">
-                <h2>Reflexive Verben: Eine Übersicht</h2>
-                <button id="reflexive-close-btn" class="gustar-close-btn" title="Schließen (Cerrar)">×</button>
-            </div>
-
-            <div class="gustar-modal-body">
-                <!-- Section 1: Introduction -->
-                <div class="highlight-box" style="margin-bottom: 20px;">
-                    <p>Los verbos reflexivos son aquellos en los que la acción recae sobre la misma persona que la
-                        realiza.
-                        En alemán, siempre necesitan un <strong>pronombre reflexivo</strong>.</p>
-                    <p class="mt-2 text-sm">Ejemplo: <em>Ich wasche <strong>mich</strong>.</em> (Yo <strong>me</strong>
-                        lavo.)</p>
-                </div>
-
-                <!-- Section 2: Pronouns Table -->
-                <details open class="gustar-section">
-                    <summary>1. Pronombres Reflexivos (Akkusativ vs. Dativ)</summary>
-                    <div class="gustar-section-content">
-                        <p class="mb-2">La mayoría de los verbos reflexivos usan <strong>Akkusativ</strong>. Usamos
-                            <strong>Dativ</strong> si ya hay otro objeto directo en la frase.
-                        </p>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Persona</th>
-                                    <th>Akkusativ <br><span style="font-weight:normal; font-size:0.8em;">(Lo
-                                            normal)</span>
-                                    </th>
-                                    <th>Dativ <br><span style="font-weight:normal; font-size:0.8em;">(Si hay
-                                            objeto)</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>ich</td>
-                                    <td class="font-bold text-blue-600">mich</td>
-                                    <td class="font-bold text-purple-600">mir</td>
-                                </tr>
-                                <tr>
-                                    <td>du</td>
-                                    <td class="font-bold text-blue-600">dich</td>
-                                    <td class="font-bold text-purple-600">dir</td>
-                                </tr>
-                                <tr>
-                                    <td>er/sie/es</td>
-                                    <td>sich</td>
-                                    <td>sich</td>
-                                </tr>
-                                <tr>
-                                    <td>wir</td>
-                                    <td>uns</td>
-                                    <td>uns</td>
-                                </tr>
-                                <tr>
-                                    <td>ihr</td>
-                                    <td>euch</td>
-                                    <td>euch</td>
-                                </tr>
-                                <tr>
-                                    <td>sie / Sie</td>
-                                    <td>sich</td>
-                                    <td>sich</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </details>
-
-                <!-- Section 3: Akkusativ Examples -->
-                <details class="gustar-section">
-                    <summary>2. Reflexiv im Akkusativ (El estándar)</summary>
-                    <div class="gustar-section-content">
-                        <p class="mb-2">Se usa cuando la acción recae directamente sobre ti.</p>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Alemán</th>
-                                    <th>Español</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Ich freue <strong>mich</strong>.</td>
-                                    <td>Me alegro.</td>
-                                </tr>
-                                <tr>
-                                    <td>Wir treffen <strong>uns</strong>.</td>
-                                    <td>Nos encontramos / reunimos.</td>
-                                </tr>
-                                <tr>
-                                    <td>Er ärgert <strong>sich</strong>.</td>
-                                    <td>Él se enfada/molesta.</td>
-                                </tr>
-                                <tr>
-                                    <td>Du beeilst <strong>dich</strong>.</td>
-                                    <td>Te das prisa.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </details>
-
-                <!-- Section 4: Dativ Examples -->
-                <details class="gustar-section">
-                    <summary>3. Reflexiv im Dativ (Cuando hay un objeto)</summary>
-                    <div class="gustar-section-content">
-                        <div class="highlight-box mb-2">
-                            <p>Si la frase menciona <strong>QUÉ</strong> te estás lavando/comprando/poniendo, el
-                                pronombre
-                                cambia a Dativo.</p>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Alemán</th>
-                                    <th>Español</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr style="background-color: rgba(0,0,0,0.03);">
-                                    <td colspan="2"><strong>Akkusativ</strong> (Sin objeto extra)</td>
-                                </tr>
-                                <tr>
-                                    <td>Ich wasche <strong>mich</strong>.</td>
-                                    <td>Me lavo. (a mí mismo)</td>
-                                </tr>
-                                <tr style="background-color: rgba(0,0,0,0.03);">
-                                    <td colspan="2"><strong>Dativ</strong> (Con objeto extra)</td>
-                                </tr>
-                                <tr>
-                                    <td>Ich wasche <strong>mir</strong> <span class="underline">die Hände</span>.</td>
-                                    <td>Me lavo <span class="underline">las manos</span>.</td>
-                                </tr>
-                                <tr>
-                                    <td>Ich putze <strong>mir</strong> <span class="underline">die Zähne</span>.</td>
-                                    <td>Me lavo <span class="underline">los dientes</span>.</td>
-                                </tr>
-                                <tr>
-                                    <td>Ich kaufe <strong>mir</strong> <span class="underline">ein Eis</span>.</td>
-                                    <td>Me compro <span class="underline">un helado</span>.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </details>
-
-            </div>
-
-            <div class="gustar-modal-footer">
-                <button id="reflexive-close-footer-btn">Verstanden (Entendido)</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Theme Modal -->
-    <div id="theme-modal" class="modal-overlay">
-        <div class="modal-content theme-modal-content">
-            <button id="close-theme-modal-x" class="modal-close-x" title="Schließen (Cerrar)">×</button>
-
-            <div class="theme-modal-header">
-                <h2 id="theme-modal-german-name" class="theme-german-name">Existenz</h2>
-                <p id="theme-modal-spanish-name" class="theme-spanish-name">Existencia</p>
-                <p id="theme-modal-english-name" class="theme-english-name">Existence</p>
-            </div>
-
-            <div class="theme-modal-body">
-                <div class="theme-info-grid">
-                    <div class="theme-info-item">
-                        <span class="theme-info-label">Level</span>
-                        <span id="theme-modal-level" class="theme-info-value">A1.1</span>
-                    </div>
-                    <div class="theme-info-item theme-info-item-wide">
-                        <span class="theme-info-label">Descripción</span>
-                        <span id="theme-modal-description" class="theme-info-value">Group 1 · Existence</span>
-                    </div>
-                </div>
-
-                <!-- B1 Rating Section -->
-                <div class="theme-rating-section">
-                    <div class="theme-rating-badge" id="theme-modal-rating">
-                        📢 Critical
-                    </div>
-                    <div class="theme-exam-context">
-                        <strong>Exam Context:</strong>
-                        <p id="theme-modal-exam-context">Grammar foundation (Perfect tense, Passive voice).</p>
-                        <p id="theme-modal-exam-context-es" class="theme-exam-context-spanish">Fundamento gramatical
-                            (Tiempo perfecto, Voz pasiva).</p>
-                    </div>
-                </div>
-
-                <div class="theme-descriptions">
-                    <div class="theme-description-item">
-                        <span class="theme-desc-emoji">ðŸ‡©ðŸ‡ª</span>
-                        <p id="theme-modal-german-desc" class="theme-description"></p>
-                    </div>
-                    <div class="theme-description-item">
-                        <span class="theme-desc-emoji">ðŸ‡ªðŸ‡¸</span>
-                        <p id="theme-modal-spanish-desc" class="theme-description"></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="theme-modal-footer">
-                <button id="close-theme-modal-btn" class="theme-close-btn">Verstanden (Entendido)</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="level-toggle-container" aria-label="Level Navigation">
-        <div class="level-toggle level-toggle-footer" aria-label="Level auswählen">
-            <button type="button" class="level-option active" data-level="A1" aria-pressed="true">A1</button>
-            <button type="button" class="level-option" data-level="A2" aria-pressed="false">A2</button>
-            <button type="button" class="level-option" data-level="B1" aria-pressed="false">B1</button>
-            <button type="button" class="level-option" data-level="B2" aria-pressed="false">B2</button>
-        </div>
-    </div>
-
-    <!-- Settings Modal -->
-    <div id="settings-modal" class="modal-overlay">
-        <div class="modal-content settings-modal-content"
-            style="padding: 20px; max-width: 560px; max-height: 80vh; overflow-y: auto;">
-            <div class="modal-header"
-                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px; margin-bottom: 15px;">
-                <h2 style="margin: 0; font-size: 1.5rem; color: #4682B4;">Einstellungen</h2>
-                <button id="close-settings-modal" class="close-modal-btn" title="Schließen"
-                    style="background: none; border: none; font-size: 2rem; color: #4b5563; cursor: pointer; padding: 0;">&times;</button>
-            </div>
-
-            <div class="modal-body" style="text-align: left;">
-                <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 1.2rem; color: #374151;">Karten Ansicht
-                    (Vista)</h3>
-                <div class="view-switcher" style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px;">
-                    <input type="radio" id="view-normal" name="card-version" value="normal">
-                    <label for="view-normal" title="Standard" style="margin: 0;">Normal</label>
-
-                    <input type="radio" id="view-leicht" name="card-version" value="light">
-                    <label for="view-leicht" title="Druckfüreundlich" style="margin: 0;">Leicht</label>
-
-                    <input type="radio" id="view-niedlich" name="card-version" value="niedlich">
-                    <label for="view-niedlich" title="Verspielt / Bunt" style="margin: 0;">Niedlich</label>
-
-                    <input type="radio" id="view-compact" name="card-version" value="compact" checked>
-                    <label for="view-compact" title="Kompakte Karten" style="margin: 0;">Kompakt</label>
-                </div>
-
-                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
-
-                <h3 style="margin-top: 0; margin-bottom: 10px; font-size: 1.2rem; color: #374151;">Tag-Filter
-                    (Filtro rápido)</h3>
-                <p style="margin: 0 0 12px 0; font-size: 0.9rem; color: #6b7280;">Tippe un Tag para filtrar al
-                    instante.</p>
-                <div id="tag-filters-container" class="tag-filters-container settings-tag-filters">
-                    <!-- Tags will be generated here -->
-                </div>
-
-                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
-
-                <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 1.2rem; color: #374151;">Sichtbarkeit
-                    (Visibilidad)</h3>
-                <div class="toggles-grid" style="display: flex; flex-direction: column; gap: 15px;">
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <label for="de-switch" class="toggle-label" style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">Deutsch</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Infinitiv)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="de-switch" class="visibility-toggle" data-toggle-class="hide-de"
-                                checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <label for="es-switch" class="toggle-label" style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">Spanisch</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(íœbersetzung)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="es-switch" class="visibility-toggle" data-toggle-class="hide-es">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <label for="en-switch" class="toggle-label" style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">Englisch</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(íœbersetzung)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="en-switch" class="visibility-toggle" data-toggle-class="hide-en">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <label for="refl-switch" class="toggle-label" style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">Reflexiv-Tag (refl)</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Sichtbarkeit)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="refl-switch" class="visibility-toggle"
-                                data-toggle-class="hide-refl" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <label for="dat-switch" class="toggle-label" style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">DAT (dativo fijo / casi fijo)</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Sichtbarkeit)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="dat-switch" class="visibility-toggle"
-                                data-toggle-class="hide-dat" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <label for="intr-switch" class="toggle-label" style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">INTR (intransitivo: sin objeto)</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Sichtbarkeit)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="intr-switch" class="visibility-toggle"
-                                data-toggle-class="hide-intr" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <label for="ik-switch" class="toggle-label" style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">IK</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Integrationkurs)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="ik-switch" class="visibility-toggle"
-                                data-toggle-class="hide-ik" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <label for="lid-switch" class="toggle-label" style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">Leben in Deutschland</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(LiD)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="lid-switch" class="visibility-toggle"
-                                data-toggle-class="hide-lid" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <label for="a1test-switch" class="toggle-label" style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">A1 test</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(A1 test)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="a1test-switch" class="visibility-toggle"
-                                data-toggle-class="hide-a1-test" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <label for="case-tags-switch" class="toggle-label"
-                            style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">Kasus-Tags</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(casos)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="case-tags-switch" class="visibility-toggle"
-                                data-toggle-class="hide-case-tags" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <label for="perfekt-switch" class="toggle-label" style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">Perfekt</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(verbo)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="perfekt-switch" class="visibility-toggle"
-                                data-toggle-class="hide-perfekt" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <label for="praeteritum-switch" class="toggle-label"
-                            style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">Präteritum</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(verbo)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="praeteritum-switch" class="visibility-toggle"
-                                data-toggle-class="hide-praeteritum">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <label for="konjunktiv-switch" class="toggle-label"
-                            style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">Konjunktiv II</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(condicional)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="konjunktiv-switch" class="visibility-toggle"
-                                data-toggle-class="hide-konjunktiv">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle kompakt-only-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 10px; border-top: 1px dashed #e5e7eb; padding-top: 15px;">
-                        <label for="kompakt-light-switch" class="toggle-label"
-                            style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">Kompakt: Hell</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Modo claro)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="kompakt-light-switch">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="active-recall-toggle"
-                        style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 10px; border-top: 1px dashed #e5e7eb; padding-top: 15px;">
-                        <label for="prefix-switch" class="toggle-label"
-                            style="display: flex; flex-direction: column;">
-                            <span style="font-weight: 600; color: #374151;">Prefijos Separables</span>
-                            <span class="toggle-sublabel"
-                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Subrayado)</span>
-                        </label>
-                        <label class="switch">
-                            <input type="checkbox" id="prefix-switch" class="visibility-toggle"
-                                data-toggle-class="hide-separable-prefixes">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                </div>
-                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
-
-                <button id="story-button">✨ Practicar con una Historia</button>
-                <div id="story-container" class="story-container">
-                    <h3>Eine kleine Geschichte...</h3>
-                    <div id="story-content"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const settingsBtn = document.getElementById('settings-btn');
-            const settingsModal = document.getElementById('settings-modal');
-            const closeSettingsBtn = document.getElementById('close-settings-modal');
-
-            if (settingsBtn && settingsModal && closeSettingsBtn) {
-                settingsBtn.addEventListener('click', () => {
-                    settingsModal.classList.add('visible');
-                });
-
-                closeSettingsBtn.addEventListener('click', () => {
-                    settingsModal.classList.remove('visible');
-                });
-
-                window.addEventListener('click', (e) => {
-                    if (e.target === settingsModal) {
-                        settingsModal.classList.remove('visible');
-                    }
-                });
-            }
-        });
-    </script>
-
-    <!-- Conjugation Sub-Modal -->
-    <div id="conjugation-sub-modal" class="modal-overlay">
-        <div class="sub-modal-content">
-            <button id="close-conjugation-modal-x" class="modal-close-x" title="Schließen (Cerrar)">&times;</button>
-            <div class="sub-modal-header">
-                <h3 id="sub-modal-title" class="sub-modal-title"></h3>
-            </div>
-            <div class="sub-modal-body">
-                <div id="sub-modal-table-container"></div>
-                <div id="sub-modal-note" class="modal-note-praesens"></div>
-            </div>
-        </div>
-    </div>
-
-    <script src="script/script.js?v=1.68"></script>
-</body>
-
-</html>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deutsch Verben</title>
+
+    <!-- Open Graph / WhatsApp Preview Meta Tags -->
+    <meta property="og:title" content="Deutsch Verben">
+    <meta property="og:description" content="Deutsche Verben - Ebenen A1 und A2">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="../../images/german_flag.png">
+    <meta name="description" content="Deutsche Verben - Ebenen A1 und A2">
+
+    <link rel="icon" href="../../images/german_flag.png" type="image/png">
+    <!-- Carga de la fuente para el estáilo de tiza -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&family=Nunito:wght@400;700&family=Poppins:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style/styles.css?v=1.16">
+</head>
+
+<body>
+
+    <div class="main-container" id="main-container">
+        <div class="content-block">
+                        <div class="top-navigation-header">
+                <div class="top-nav-buttons-row">
+                    <div class="level-toggle level-toggle-footer" id="level-toggle" aria-label="Level auswählen">
+                        <button type="button" class="level-option active" data-level="A1" aria-pressed="true">A1</button>
+                        <button type="button" class="level-option" data-level="A2" aria-pressed="false">A2</button>
+                        <button type="button" class="level-option" data-level="B1" aria-pressed="false">B1</button>
+                        <button type="button" class="level-option" data-level="B2" aria-pressed="false">B2</button>
+                    </div>
+                    
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <button id="settings-btn" class="settings-btn" title="Einstellungen"
+                            style="background: none; border: none; font-size: 1.5rem; color: #94a3b8; cursor: pointer; transition: transform 0.2s; display: inline-flex; align-items: center; justify-content: center; margin: 0; padding: 0;">
+                            <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.02a1.65 1.65 0 0 0 .98-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 .99 1.51h.02a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.02a1.65 1.65 0 0 0 1.51.98H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51.99z"></path>
+                            </svg>
+                        </button>
+                        <button id="search-toggle-btn" class="search-toggle-btn" title="Suche einblenden">
+                            <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="top-search-row" id="top-search-row-el">
+                    <div class="search-container" style="width: 100%; display: flex; align-items: center; position: relative;">
+                        <input type="text" id="verb-search" class="search-input" placeholder="Suchen... (buscar)" style="flex-grow: 1; width: 100%;">
+                        <button id="clear-search" class="clear-search-btn" title="Clear search">&times;</button>
+                    </div>
+                </div>
+            </div>
+<div id="search-counter" class="search-counter"></div>
+
+            <!-- New unified navigation above cards -->
+            <div class="navigation-wrapper">
+                <!-- Level Navigation Section -->
+                <div class="level-navigation">
+                    <button id="prev-level-btn" class="level-nav-arrow" title="Vorheriges Niveau (Previous Level)">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="level-toggle" id="level-toggle" aria-label="Level auswählen">
+                        <button type="button" class="level-option active" data-level="A1" aria-pressed="true">A1</button>
+                        <button type="button" class="level-option" data-level="A2" aria-pressed="false">A2</button>
+                        <button type="button" class="level-option" data-level="B1" aria-pressed="false">B1</button>
+                        <button type="button" class="level-option" data-level="B2" aria-pressed="false">B2</button>
+                    </div>
+                    <div class="level-indicator" id="level-indicator">A1.1</div>
+                    <button id="next-level-btn" class="level-nav-arrow" title="Nächstes Niveau (Next Level)">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="18 15 12 9 6 15"></polyline>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Group Navigation Section -->
+                <div class="group-navigation">
+                    <button id="prev-group-btn" class="group-nav-arrow" title="Vorherige Gruppe">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <div class="group-theme-indicator" id="group-theme-indicator">Being & Existence</div>
+                    <button id="next-group-btn" class="group-nav-arrow" title="Nächste Gruppe">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <span id="search-results-count" class="search-results-count"></span>
+
+
+
+            <div class="cards-container" id="cards-container">
+                <!-- Verb cards will be generated here by JavaScript -->
+            </div>
+
+            <!-- Group indicator and progress bar moved below cards -->
+            <div class="group-progress-section">
+                <div id="group-indicator" class="group-indicator"></div>
+                <div class="progress-bar-container" id="progress-bar">
+                    <!-- Progress dots will be generated here -->
+                </div>
+            </div>
+
+            <!-- Gustar button for Sechste Gruppe -->
+            <div id="gustar-button-container" class="gustar-button-wrapper" style="display: block;">
+                <button id="gustar-button" class="gustar-btn" title="Mögen, Gern &amp; Gefallen Info">
+                    <span class="gustar-emoji">&hearts;</span>
+                    <span class="gustar-text">gustar</span>
+                </button>
+            </div>
+
+            <!-- Reflexive Button for Zehnte Gruppe (A2.1) -->
+            <div id="reflexive-button-container" class="gustar-button-wrapper" style="display: none;">
+                <button id="reflexive-button" class="gustar-btn" title="Reflexive Verben Info">
+                    <span class="gustar-emoji">&#8635;</span>
+                    <span class="gustar-text">Reflexiv</span>
+                </button>
+            </div>
+
+            <div class="cards-toggles-separator"></div>
+
+            <div class="toggles-row">
+                <div class="info-button" id="info-button">info</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Verb Modal -->
+    <div id="verb-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="close-verb-modal-x" class="modal-close-x" title="Schließen (Cerrar)">&times;</button>
+            <div class="modal-header">
+                <div id="modal-level-badge" class="modal-level-badge"></div>
+                <h3 id="modal-verb-infinitive" class="modal-word"></h3>
+                <p id="modal-verb-translations" class="modal-translation" data-form="translation"></p>
+
+                <div id="modal-tags-collapsible" class="modal-tags-wrapper collapsed">
+                    <div id="modal-header-tags" class="modal-header-tags"></div>
+                    <!-- Other tags moved to header -->
+                    <div id="modal-extra-tags" class="modal-extra-tags"></div>
+                    <div id="modal-case-tags-container" class="modal-case-tags"></div>
+                </div>
+
+                <div id="modal-tags-toggle" class="modal-tags-toggle" title="Details anzeigen">
+                    <span class="dots-icon">&bull;&bull;&bull;</span>
+                    <span class="chevron-icon" style="display:none;">&#9650;</span>
+                </div>
+            </div>
+
+            <div class="modal-body-content">
+
+                <!-- Usage Note Container (New) -->
+                <div id="modal-usage-note-container"></div>
+
+                <!-- Wortfamilie Section -->
+                <details id="wortfamilie-container">
+                    <summary id="wortfamilie-summary">
+                        📚 Wortfamilie
+                        <span class="details-arrow">&#9654;</span>
+                    </summary>
+                    <div id="wortfamilie-content" class="details-content">
+                        <!-- Word family content inserted here -->
+                    </div>
+                </details>
+
+                <!-- Wortfeld Section -->
+                <details id="wortfeld-container" style="display: none;">
+                    <summary id="wortfeld-summary">
+                        🎨 Wortfeld
+                        <span class="details-arrow">&#9654;</span>
+                    </summary>
+                    <div id="wortfeld-content" class="details-content">
+                        <!-- Word field content inserted here -->
+                    </div>
+                </details>
+
+                <!-- Sätze Section -->
+                <details id="saetze-container" style="display: none;">
+                    <summary id="saetze-summary">
+                        📝 Sätze
+                        <span class="details-arrow">&#9654;</span>
+                    </summary>
+                    <div id="saetze-content" class="details-content">
+                        <!-- Sentences content inserted here -->
+                    </div>
+                </details>
+
+                <!-- General Card Note -->
+                <div id="modal-general-note" class="modal-note-general" style="display: none;"></div>
+            </div><!-- End of top modal-body-content -->
+
+            <!-- New Tab Navigation - Full Width -->
+            <div class="modal-tabs-nav">
+                <button class="modal-tab-btn active" id="tab-btn-infinitiv" data-tab="praesens">Infinitiv</button>
+                <button class="modal-tab-btn" id="tab-btn-perfekt" data-tab="perfekt">Perfekt</button>
+                <button class="modal-tab-btn" id="tab-btn-praeteritum" data-tab="praeteritum">Präteritum</button>
+                <button class="modal-tab-btn" id="tab-btn-konjunktiv" data-tab="konjunktiv"
+                    style="display: none;">Konjunktiv II</button>
+            </div>
+
+            <!-- Tab Contents - Full Width Container -->
+            <div id="praesens-tab-content" class="tab-content active">
+
+                <!-- Präsens Details Section -->
+                <div id="praesens-details-container">
+                    <h4 class="section-title">Präsens Konjugation</h4>
+                    <div id="modal-praesens-table" class="details-content" style="display: block;">
+                        <!-- Conjugation table inserted here -->
+                    </div>
+                    <!-- Present Tense Conjugation Note -->
+                    <div id="modal-praesens-note" class="modal-note-praesens" style="display: none;"></div>
+                </div>
+
+                <!-- Präsens Examples Section -->
+                <details id="praesens-examples-container">
+                    <summary id="praesens-examples-summary">
+                        Präsens Beispiele
+                        <span class="details-arrow">&#9654;</span>
+                    </summary>
+                    <div id="modal-praesens-examples-table" class="details-content">
+                        <!-- Präsens examples table inserted here -->
+                    </div>
+                </details>
+            </div>
+
+            <!-- Tab Content: Perfekt -->
+            <div id="perfekt-tab-content" class="tab-content" style="display: none;">
+                <!-- Perfekt Block -->
+                <div class="modal-verb-block">
+                    <div class="modal-verb-line">
+                        <h4 id="modal-verb-perfekt"></h4>
+                    </div>
+                    <p id="modal-verb-perfekt-es" class="modal-translation" data-form="translation"
+                        style="font-style: italic;"></p>
+                    <p id="modal-verb-english-perfekt" class="modal-translation" data-form="translation"></p>
+                </div>
+
+                <!-- Perfekt Konjugation Section -->
+                <!-- Unwrapped validation: User said "shows below the perfekt konjugation" -->
+                <div id="perfekt-examples-container">
+                    <h4 class="section-title">Perfekt Konjugation</h4>
+                    <div id="modal-perfekt-examples-table" class="details-content" style="display: block;">
+                        <!-- Perfekt conjugation table inserted here -->
+                    </div>
+                </div>
+                <!-- Perfekt Note -->
+                <div id="modal-perfekt-note" class="modal-note-praesens" style="display: none;"></div>
+            </div>
+
+            <!-- Tab Content: Präteritum -->
+            <div id="praeteritum-tab-content" class="tab-content" style="display: none;">
+                <!-- Präteritum Block -->
+                <div class="modal-verb-block">
+                    <div class="modal-verb-line">
+                        <h4 id="modal-verb-praeteritum"></h4>
+                    </div>
+                    <p id="modal-verb-praeteritum-es" class="modal-translation" data-form="translation"></p>
+                    <p id="modal-verb-english-praeteritum" class="modal-translation" data-form="translation"></p>
+                </div>
+
+                <!-- Präteritum Konjugation Section -->
+                <div id="praeteritum-konjugation-container">
+                    <h4 class="section-title">Präteritum Konjugation</h4>
+                    <div id="modal-praeteritum-konjugation-table" class="details-content" style="display: block;">
+                        <!-- Präteritum conjugation table inserted here -->
+                    </div>
+                </div>
+                <!-- Präteritum Note -->
+                <div id="modal-praeteritum-note" class="modal-note-praesens" style="display: none;"></div>
+            </div>
+
+
+            <!-- Tab Content: Konjunktiv II -->
+            <div id="konjunktiv-tab-content" class="tab-content" style="display: none;">
+                <!-- Konjunktiv II Block -->
+                <div class="modal-verb-block">
+                    <div class="modal-verb-line">
+                        <!-- Title will be dynamic if needed, or static -->
+                        <h4 class="section-title">Konjunktiv II</h4>
+                    </div>
+                    <p class="modal-translation" data-form="translation">Modo condicional (expresa deseos, situaciones
+                        hipotéticas)</p>
+                </div>
+
+                <!-- Konjunktiv II Konjugation Section -->
+                <div id="konjunktiv-konjugation-container-tab">
+                    <h4 class="section-title">Konjunktiv II Konjugation</h4>
+                    <div id="modal-konjunktiv-konjugation-table-tab" class="details-content" style="display: block;">
+                        <!-- Konjunktiv II conjugation table inserted here -->
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Bottom Content (Padded) -->
+            <div class="modal-body-content">
+
+                <!-- Konjunktiv and Extra Info (kept separate for now, or should they be under a tab?)
+                     If the user didn't specify, I will leave them at the bottom, outside tabs, or maybe under Infinitiv?
+                     Usually separate. Let's keep them at the bottom common area or move Konjunktiv to its own logic if needed.
+                     But for now, I will leave them below the tabs area.
+                -->
+                <!-- Konjunktiv II section removed (moved to tab) -->
+
+                <!-- Footer elements removed as per request -->
+            </div><!-- End of modal-body-content -->
+        </div>
+    </div>
+
+    <!-- General Info Modal -->
+    <div id="info-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>El Pasado "Perfekt"</h2>
+            <h3>Uso Principal</h3>
+            <p>El "Perfekt" es el tiempo pasado más importante en alemán. Se usa principalmente en <b>conversaciones
+                    habladas</b> para describir acciones que ya han terminado.</p>
+
+            <h3>Estructura de la Frase</h3>
+            <p>La estáructura es simple:<br><b>Sujeto + Verbo Auxiliar (conjugado) + ... + Participio II (al final).</b>
+            </p>
+            <p>Ej: <i>Ich <b>habe</b> einen Apfel <b>gegessen</b>.</i></p>
+
+            <h3>Verbos Auxiliares: ¿Haben o Sein?</h3>
+            <p>Se usa <b>sein</b> con verbos que indican un movimiento (de A a B) o un cambio de estáado. Por ejemplo:
+            </p>
+            <ul>
+                <li><b>gehen</b>: Ich bin ins Kino gegangen. (<b>He ido</b> al cine)</li>
+                <li><b>fahren</b>: Er ist nach Berlin gefahren. (í‰l <b>ha ido/conducido</b> a Berlín)</li>
+                <li><b>fliegen</b>: Wir sind geflogen. (<b>Hemos volado</b>)</li>
+                <li><b>aufstehen</b> (levantarse): Du bist aufgestáanden. (<b>Te has levantado</b>)</li>
+            </ul>
+
+            <p>Se usa <b>haben</b> con la gran mayoría de los otros verbos, especialmente aquellos que tienen un objeto
+                directo. Por ejemplo:</p>
+            <ul>
+                <li><b>kaufen</b>: Ich habe ein Buch gekauft. (<b>He comprado</b> un libro)</li>
+                <li><b>essen</b>: Sie hat eine Pizza gegessen. (Ella <b>ha comido</b> una pizza)</li>
+                <li><b>lesen</b>: Wir haben die Zeitung gelesen. (<b>Hemos leído</b> el periódico)</li>
+            </ul>
+
+            <h3>El Participio II (Partizip II)</h3>
+            <p>Es la forma pasada del verbo. Para verbos regulares, a menudo se forma con:<br><b>ge-</b> + raíz del
+                verbo + <b>-t</b>. Por ejemplo:</p>
+            <ul>
+                <li>machen -> <b>ge</b>mach<b>t</b> (hecho)</li>
+                <li>lernen -> <b>ge</b>lern<b>t</b> (aprendido)</li>
+                <li>kaufen -> <b>ge</b>kauf<b>t</b> (comprado)</li>
+            </ul>
+
+            <p>Los verbos irregulares tienen formas propias que debes memorizar (a menudo terminan en <b>-en</b>). Por
+                ejemplo:</p>
+            <ul>
+                <li>gehen -> gegang<b>en</b> (ido)</li>
+                <li>sehen -> geseh<b>en</b> (visto)</li>
+                <li>sprechen -> gesproch<b>en</b> (hablado)</li>
+                <li>trinken -> getrunk<b>en</b> (bebido)</li>
+                <li>schreiben -> geschrieb<b>en</b> (escrito)</li>
+            </ul>
+
+            <br>
+            <button id="close-info-modal" class="close-modal-btn">Verstanden (Entendido)</button>
+        </div>
+    </div>
+
+    <div id="gustar-modal" class="modal-overlay gustar-modal-overlay">
+        <div class="modal-content gustar-modal-content">
+            <div class="gustar-modal-header">
+                <h2>Mögen, Gern & Gefallen: Eine Übersicht</h2>
+                <button id="gustar-close-btn" class="gustar-close-btn" title="Schließen (Cerrar)">&times;</button>
+            </div>
+
+            <div class="gustar-modal-body">
+                <!-- Section 1: Mögen -->
+                <details open class="gustar-section">
+                    <summary>1. Para Cosas (Sustantivos): "Mögen"</summary>
+                    <div class="gustar-section-content">
+                        <div class="highlight-box">
+                            <p>Se usa el verbo <strong>"mögen"</strong> cuando te gusta un objeto, una comida, una
+                                persona o un lugar.</p>
+                            <p class="mt-2"><strong>Estructura:</strong> Sujeto + mögen (conjugado) + Objeto.</p>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alemán</th>
+                                    <th>Español</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ich <strong>mag</strong> Kaffee.</td>
+                                    <td>Me gusta el café.</td>
+                                </tr>
+                                <tr>
+                                    <td>Du <strong>magst</strong> Berlin.</td>
+                                    <td>Te gusta Berlín.</td>
+                                </tr>
+                                <tr>
+                                    <td>Er <strong>mag</strong> Fußball.</td>
+                                    <td>A él le gusta el fútbol.</td>
+                                </tr>
+                                <tr class="negative-row font-semibold">
+                                    <td>Ich <strong>mag keinen</strong> Fisch.</td>
+                                    <td>No me gusta el pescado. (Negación)</td>
+                                </tr>
+                                <tr class="negative-row font-semibold">
+                                    <td>Wir <strong>mögen keine</strong> Spinnen.</td>
+                                    <td>No nos gustan las arañas. (Negación)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-sm text-gray-600 mt-2"><em>Nota: Para negar sustantivos se suele usar
+                                "kein/keine".</em></p>
+                    </div>
+                </details>
+
+                <!-- Section 2: Gern -->
+                <details open class="gustar-section">
+                    <summary>2. Para Acciones (Verbos): "Gern"</summary>
+                    <div class="gustar-section-content">
+                        <div class="highlight-box">
+                            <p>En alemán <strong>NO</strong> se usa "mögen" para acciones. Se usa el verbo de la acción
+                                + el adverbio <strong>"gern"</strong>.</p>
+                            <p class="mt-2"><strong>Estructura:</strong> Sujeto + Verbo conjugado +
+                                <strong>gern</strong>.
+                            </p>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alemán</th>
+                                    <th>Español</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ich spiele <strong>gern</strong> Fußball.</td>
+                                    <td>Me gusta jugar fútbol.</td>
+                                </tr>
+                                <tr>
+                                    <td>Ich tanze <strong>gern</strong> Salsa.</td>
+                                    <td>Me gusta bailar salsa.</td>
+                                </tr>
+                                <tr>
+                                    <td>Wir lernen <strong>gern</strong> Deutsch.</td>
+                                    <td>Nos gusta aprender alemán.</td>
+                                </tr>
+                                <tr class="negative-row font-semibold">
+                                    <td>Ich koche <strong>nicht gern</strong>.</td>
+                                    <td>No me gusta cocinar. (Negación)</td>
+                                </tr>
+                                <tr class="negative-row font-semibold">
+                                    <td>Sie warten <strong>nicht gern</strong>.</td>
+                                    <td>A ellos no les gusta esperar. (Negación)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-sm text-gray-600 mt-2"><em>Nota: Para negar acciones se usa "nicht" antes de
+                                "gern".</em></p>
+                    </div>
+                </details>
+
+                <!-- Section 3: Gefallen -->
+                <details class="gustar-section">
+                    <summary>3. Para impresiones/estética: "Gefallen"</summary>
+                    <div class="gustar-section-content">
+                        <div class="highlight-box">
+                            <p>Funciona igual que "Gustar" en español. El sujeto es la cosa que gusta, y la persona va
+                                en <strong>Dativo</strong>.</p>
+                            <p class="mt-2"><strong>Estructura:</strong> Objeto (Sujeto) + gefällt/gefallen + Persona
+                                (Dativo).</p>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alemán</th>
+                                    <th>Español</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Das Auto <strong>gefällt mir</strong>.</td>
+                                    <td>El auto me gusta (a mí).</td>
+                                </tr>
+                                <tr>
+                                    <td>Die Schuhe <strong>gefallen mir</strong>.</td>
+                                    <td>Los zapatos me gustan.</td>
+                                </tr>
+                                <tr>
+                                    <td>Berlin <strong>gefällt dir</strong>.</td>
+                                    <td>Berlín te gusta (a ti).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+
+                <!-- Section 4: Lieben & Hassen -->
+                <details class="gustar-section">
+                    <summary>4. Los Extremos: "Lieben" y "Hassen"</summary>
+                    <div class="gustar-section-content">
+
+                        <h3 class="text-xl font-bold text-red-600 mb-2">❤️ Lieben (Amar / Encantar)</h3>
+                        <p class="mb-4">Se usa para personas, lugares o cosas que te gustan muchísimo.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alemán</th>
+                                    <th>Español</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ich <strong>liebe</strong> meine Familie.</td>
+                                    <td>Amo a mi familia.</td>
+                                </tr>
+                                <tr>
+                                    <td>Er <strong>liebt</strong> Schokolade.</td>
+                                    <td>A él le encanta el chocolate.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 class="text-xl font-bold text-red-800 mt-6 mb-2">😡 Hassen (Odiar)</h3>
+                        <p class="mb-4">Se usa para expresar un desagrado intenso y profundo.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alemán</th>
+                                    <th>Español</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ich <strong>hasse</strong> den Regen.</td>
+                                    <td>Odio la lluvia.</td>
+                                </tr>
+                                <tr>
+                                    <td>Du <strong>hasst</strong> Hausaufgaben.</td>
+                                    <td>Tú odias la tarea.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+
+                <!-- Resumen Rápido -->
+                <div class="gustar-summary">
+                    <h3>💡 Resumen Rápido</h3>
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <span class="summary-emoji">❤️</span>
+                            <strong>Lieben</strong> → Encantar
+                            <div class="summary-examples">
+                                <span class="summary-positive">Ich liebe Musik.</span>
+                                <span class="summary-negative">Ich liebe <mark class="neg-highlight">keine</mark>
+                                    Spinnen.</span>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-emoji">😡</span>
+                            <strong>Hassen</strong> → Odiar
+                            <div class="summary-examples">
+                                <span class="summary-positive">Ich hasse Montage.</span>
+                                <span class="summary-negative">Ich hasse Montage <mark
+                                        class="neg-highlight">nicht</mark>.</span>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-emoji">👍</span>
+                            <strong>Mögen</strong> → Gustar (cosas)
+                            <div class="summary-examples">
+                                <span class="summary-positive">Ich mag Pizza.</span>
+                                <span class="summary-negative">Ich mag <mark class="neg-highlight">keinen</mark>
+                                    Lärm.</span>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-emoji">⚡</span>
+                            <strong>Gern</strong> → Gustar (acciones)
+                            <div class="summary-examples">
+                                <span class="summary-positive">Ich esse gern.</span>
+                                <span class="summary-negative">Ich warte <mark class="neg-highlight">nicht</mark>
+                                    gern.</span>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-emoji">✨</span>
+                            <strong>Gefallen</strong> → Gustar (apariencia)
+                            <div class="summary-examples">
+                                <span class="summary-positive">Das Auto gefällt mir.</span>
+                                <span class="summary-negative">Das Bild gefällt mir <mark
+                                        class="neg-highlight">nicht</mark>.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gustar-modal-footer">
+                <button id="gustar-close-footer-btn">Verstanden (Entendido)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reflexive Modal -->
+    <div id="reflexive-modal" class="modal-overlay gustar-modal-overlay">
+        <div class="modal-content gustar-modal-content">
+            <div class="gustar-modal-header">
+                <h2>Reflexive Verben: Eine Übersicht</h2>
+                <button id="reflexive-close-btn" class="gustar-close-btn" title="Schließen (Cerrar)">×</button>
+            </div>
+
+            <div class="gustar-modal-body">
+                <!-- Section 1: Introduction -->
+                <div class="highlight-box" style="margin-bottom: 20px;">
+                    <p>Los verbos reflexivos son aquellos en los que la acción recae sobre la misma persona que la
+                        realiza.
+                        En alemán, siempre necesitan un <strong>pronombre reflexivo</strong>.</p>
+                    <p class="mt-2 text-sm">Ejemplo: <em>Ich wasche <strong>mich</strong>.</em> (Yo <strong>me</strong>
+                        lavo.)</p>
+                </div>
+
+                <!-- Section 2: Pronouns Table -->
+                <details open class="gustar-section">
+                    <summary>1. Pronombres Reflexivos (Akkusativ vs. Dativ)</summary>
+                    <div class="gustar-section-content">
+                        <p class="mb-2">La mayoría de los verbos reflexivos usan <strong>Akkusativ</strong>. Usamos
+                            <strong>Dativ</strong> si ya hay otro objeto directo en la frase.
+                        </p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Persona</th>
+                                    <th>Akkusativ <br><span style="font-weight:normal; font-size:0.8em;">(Lo
+                                            normal)</span>
+                                    </th>
+                                    <th>Dativ <br><span style="font-weight:normal; font-size:0.8em;">(Si hay
+                                            objeto)</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ich</td>
+                                    <td class="font-bold text-blue-600">mich</td>
+                                    <td class="font-bold text-purple-600">mir</td>
+                                </tr>
+                                <tr>
+                                    <td>du</td>
+                                    <td class="font-bold text-blue-600">dich</td>
+                                    <td class="font-bold text-purple-600">dir</td>
+                                </tr>
+                                <tr>
+                                    <td>er/sie/es</td>
+                                    <td>sich</td>
+                                    <td>sich</td>
+                                </tr>
+                                <tr>
+                                    <td>wir</td>
+                                    <td>uns</td>
+                                    <td>uns</td>
+                                </tr>
+                                <tr>
+                                    <td>ihr</td>
+                                    <td>euch</td>
+                                    <td>euch</td>
+                                </tr>
+                                <tr>
+                                    <td>sie / Sie</td>
+                                    <td>sich</td>
+                                    <td>sich</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+
+                <!-- Section 3: Akkusativ Examples -->
+                <details class="gustar-section">
+                    <summary>2. Reflexiv im Akkusativ (El estándar)</summary>
+                    <div class="gustar-section-content">
+                        <p class="mb-2">Se usa cuando la acción recae directamente sobre ti.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alemán</th>
+                                    <th>Español</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ich freue <strong>mich</strong>.</td>
+                                    <td>Me alegro.</td>
+                                </tr>
+                                <tr>
+                                    <td>Wir treffen <strong>uns</strong>.</td>
+                                    <td>Nos encontramos / reunimos.</td>
+                                </tr>
+                                <tr>
+                                    <td>Er ärgert <strong>sich</strong>.</td>
+                                    <td>Él se enfada/molesta.</td>
+                                </tr>
+                                <tr>
+                                    <td>Du beeilst <strong>dich</strong>.</td>
+                                    <td>Te das prisa.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+
+                <!-- Section 4: Dativ Examples -->
+                <details class="gustar-section">
+                    <summary>3. Reflexiv im Dativ (Cuando hay un objeto)</summary>
+                    <div class="gustar-section-content">
+                        <div class="highlight-box mb-2">
+                            <p>Si la frase menciona <strong>QUÉ</strong> te estás lavando/comprando/poniendo, el
+                                pronombre
+                                cambia a Dativo.</p>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Alemán</th>
+                                    <th>Español</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: rgba(0,0,0,0.03);">
+                                    <td colspan="2"><strong>Akkusativ</strong> (Sin objeto extra)</td>
+                                </tr>
+                                <tr>
+                                    <td>Ich wasche <strong>mich</strong>.</td>
+                                    <td>Me lavo. (a mí mismo)</td>
+                                </tr>
+                                <tr style="background-color: rgba(0,0,0,0.03);">
+                                    <td colspan="2"><strong>Dativ</strong> (Con objeto extra)</td>
+                                </tr>
+                                <tr>
+                                    <td>Ich wasche <strong>mir</strong> <span class="underline">die Hände</span>.</td>
+                                    <td>Me lavo <span class="underline">las manos</span>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Ich putze <strong>mir</strong> <span class="underline">die Zähne</span>.</td>
+                                    <td>Me lavo <span class="underline">los dientes</span>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Ich kaufe <strong>mir</strong> <span class="underline">ein Eis</span>.</td>
+                                    <td>Me compro <span class="underline">un helado</span>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+
+            </div>
+
+            <div class="gustar-modal-footer">
+                <button id="reflexive-close-footer-btn">Verstanden (Entendido)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Modal -->
+    <div id="theme-modal" class="modal-overlay">
+        <div class="modal-content theme-modal-content">
+            <button id="close-theme-modal-x" class="modal-close-x" title="Schließen (Cerrar)">×</button>
+
+            <div class="theme-modal-header">
+                <h2 id="theme-modal-german-name" class="theme-german-name">Existenz</h2>
+                <p id="theme-modal-spanish-name" class="theme-spanish-name">Existencia</p>
+                <p id="theme-modal-english-name" class="theme-english-name">Existence</p>
+            </div>
+
+            <div class="theme-modal-body">
+                <div class="theme-info-grid">
+                    <div class="theme-info-item">
+                        <span class="theme-info-label">Level</span>
+                        <span id="theme-modal-level" class="theme-info-value">A1.1</span>
+                    </div>
+                    <div class="theme-info-item theme-info-item-wide">
+                        <span class="theme-info-label">Descripción</span>
+                        <span id="theme-modal-description" class="theme-info-value">Group 1 · Existence</span>
+                    </div>
+                </div>
+
+                <!-- B1 Rating Section -->
+                <div class="theme-rating-section">
+                    <div class="theme-rating-badge" id="theme-modal-rating">
+                        📢 Critical
+                    </div>
+                    <div class="theme-exam-context">
+                        <strong>Exam Context:</strong>
+                        <p id="theme-modal-exam-context">Grammar foundation (Perfect tense, Passive voice).</p>
+                        <p id="theme-modal-exam-context-es" class="theme-exam-context-spanish">Fundamento gramatical
+                            (Tiempo perfecto, Voz pasiva).</p>
+                    </div>
+                </div>
+
+                <div class="theme-descriptions">
+                    <div class="theme-description-item">
+                        <span class="theme-desc-emoji">ðŸ‡©ðŸ‡ª</span>
+                        <p id="theme-modal-german-desc" class="theme-description"></p>
+                    </div>
+                    <div class="theme-description-item">
+                        <span class="theme-desc-emoji">ðŸ‡ªðŸ‡¸</span>
+                        <p id="theme-modal-spanish-desc" class="theme-description"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="theme-modal-footer">
+                <button id="close-theme-modal-btn" class="theme-close-btn">Verstanden (Entendido)</button>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal-content settings-modal-content"
+            style="padding: 20px; max-width: 560px; max-height: 80vh; overflow-y: auto;">
+            <div class="modal-header"
+                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px; margin-bottom: 15px;">
+                <h2 style="margin: 0; font-size: 1.5rem; color: #4682B4;">Einstellungen</h2>
+                <button id="close-settings-modal" class="close-modal-btn" title="Schließen"
+                    style="background: none; border: none; font-size: 2rem; color: #4b5563; cursor: pointer; padding: 0;">&times;</button>
+            </div>
+
+            <div class="modal-body" style="text-align: left;">
+                <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 1.2rem; color: #374151;">Karten Ansicht
+                    (Vista)</h3>
+                <div class="view-switcher" style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px;">
+                    <input type="radio" id="view-normal" name="card-version" value="normal">
+                    <label for="view-normal" title="Standard" style="margin: 0;">Normal</label>
+
+                    <input type="radio" id="view-leicht" name="card-version" value="light">
+                    <label for="view-leicht" title="Druckfüreundlich" style="margin: 0;">Leicht</label>
+
+                    <input type="radio" id="view-niedlich" name="card-version" value="niedlich">
+                    <label for="view-niedlich" title="Verspielt / Bunt" style="margin: 0;">Niedlich</label>
+
+                    <input type="radio" id="view-compact" name="card-version" value="compact" checked>
+                    <label for="view-compact" title="Kompakte Karten" style="margin: 0;">Kompakt</label>
+                </div>
+
+                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
+
+                <h3 style="margin-top: 0; margin-bottom: 10px; font-size: 1.2rem; color: #374151;">Tag-Filter
+                    (Filtro rápido)</h3>
+                <p style="margin: 0 0 12px 0; font-size: 0.9rem; color: #6b7280;">Tippe un Tag para filtrar al
+                    instante.</p>
+                <div id="tag-filters-container" class="tag-filters-container settings-tag-filters">
+                    <!-- Tags will be generated here -->
+                </div>
+
+                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
+
+                <h3 style="margin-top: 0; margin-bottom: 15px; font-size: 1.2rem; color: #374151;">Sichtbarkeit
+                    (Visibilidad)</h3>
+                <div class="toggles-grid" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="de-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Deutsch</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Infinitiv)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="de-switch" class="visibility-toggle" data-toggle-class="hide-de"
+                                checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="es-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Spanisch</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(íœbersetzung)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="es-switch" class="visibility-toggle" data-toggle-class="hide-es">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="en-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Englisch</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(íœbersetzung)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="en-switch" class="visibility-toggle" data-toggle-class="hide-en">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="refl-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Reflexiv-Tag (refl)</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Sichtbarkeit)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="refl-switch" class="visibility-toggle"
+                                data-toggle-class="hide-refl" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="dat-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">DAT (dativo fijo / casi fijo)</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Sichtbarkeit)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="dat-switch" class="visibility-toggle"
+                                data-toggle-class="hide-dat" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="intr-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">INTR (intransitivo: sin objeto)</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Sichtbarkeit)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="intr-switch" class="visibility-toggle"
+                                data-toggle-class="hide-intr" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="ik-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">IK</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Integrationkurs)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="ik-switch" class="visibility-toggle"
+                                data-toggle-class="hide-ik" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="lid-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Leben in Deutschland</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(LiD)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="lid-switch" class="visibility-toggle"
+                                data-toggle-class="hide-lid" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="a1test-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">A1 test</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(A1 test)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="a1test-switch" class="visibility-toggle"
+                                data-toggle-class="hide-a1-test" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="case-tags-switch" class="toggle-label"
+                            style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Kasus-Tags</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(casos)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="case-tags-switch" class="visibility-toggle"
+                                data-toggle-class="hide-case-tags" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="perfekt-switch" class="toggle-label" style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Perfekt</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(verbo)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="perfekt-switch" class="visibility-toggle"
+                                data-toggle-class="hide-perfekt" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="praeteritum-switch" class="toggle-label"
+                            style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Präteritum</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(verbo)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="praeteritum-switch" class="visibility-toggle"
+                                data-toggle-class="hide-praeteritum">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <label for="konjunktiv-switch" class="toggle-label"
+                            style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Konjunktiv II</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(condicional)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="konjunktiv-switch" class="visibility-toggle"
+                                data-toggle-class="hide-konjunktiv">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle kompakt-only-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 10px; border-top: 1px dashed #e5e7eb; padding-top: 15px;">
+                        <label for="kompakt-light-switch" class="toggle-label"
+                            style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Kompakt: Hell</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Modo claro)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="kompakt-light-switch">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="active-recall-toggle"
+                        style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 10px; border-top: 1px dashed #e5e7eb; padding-top: 15px;">
+                        <label for="prefix-switch" class="toggle-label"
+                            style="display: flex; flex-direction: column;">
+                            <span style="font-weight: 600; color: #374151;">Prefijos Separables</span>
+                            <span class="toggle-sublabel"
+                                style="font-size: 0.8rem; color: #6b7280; font-weight: normal;">(Subrayado)</span>
+                        </label>
+                        <label class="switch">
+                            <input type="checkbox" id="prefix-switch" class="visibility-toggle"
+                                data-toggle-class="hide-separable-prefixes">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
+
+                <button id="story-button">✨ Practicar con una Historia</button>
+                <div id="story-container" class="story-container">
+                    <h3>Eine kleine Geschichte...</h3>
+                    <div id="story-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const settingsBtn = document.getElementById('settings-btn');
+            const settingsModal = document.getElementById('settings-modal');
+            const closeSettingsBtn = document.getElementById('close-settings-modal');
+
+            if (settingsBtn && settingsModal && closeSettingsBtn) {
+                settingsBtn.addEventListener('click', () => {
+                    settingsModal.classList.add('visible');
+                });
+
+                closeSettingsBtn.addEventListener('click', () => {
+                    settingsModal.classList.remove('visible');
+                });
+
+                window.addEventListener('click', (e) => {
+                    if (e.target === settingsModal) {
+                        settingsModal.classList.remove('visible');
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Conjugation Sub-Modal -->
+    <div id="conjugation-sub-modal" class="modal-overlay">
+        <div class="sub-modal-content">
+            <button id="close-conjugation-modal-x" class="modal-close-x" title="Schließen (Cerrar)">&times;</button>
+            <div class="sub-modal-header">
+                <h3 id="sub-modal-title" class="sub-modal-title"></h3>
+            </div>
+            <div class="sub-modal-body">
+                <div id="sub-modal-table-container"></div>
+                <div id="sub-modal-note" class="modal-note-praesens"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/script.js?v=1.68"></script>
+</body>
+
+</html>
