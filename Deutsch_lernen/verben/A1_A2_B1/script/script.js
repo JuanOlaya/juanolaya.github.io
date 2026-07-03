@@ -1208,7 +1208,7 @@ async function loadBackgroundData() {
 
  try {
 
- const vRes = await fetch('json/verbs_index.json', { cache: 'no-cache' });
+    const vRes = await fetch('json/verbs_index.json?t=' + Date.now(), { cache: 'no-cache' });
 
  if (vRes.ok) {
 
