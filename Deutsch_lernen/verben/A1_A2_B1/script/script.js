@@ -9069,19 +9069,6 @@ async function loadWortfamilieIndex() {
       conjugationHTML = `
 
         <table>
-
-          <thead>
-
-            <tr>
-
-              <th>Pron.</th>
-
-              <th>Konjugation</th>
-
-            </tr>
-
-          </thead>
-
           <tbody>
 
             <tr><td><span class="pronoun-de">ich</span></td><td><span class="conj-de-form">${conjObj.ich || ''}</span></td></tr>
