@@ -8629,369 +8629,253 @@ async function loadWortfamilieIndex() {
   };
 
   window.renderCardBackMenu = function (verbName, cardEl) {
-
     const cardFront = cardEl.querySelector('.card-front');
-
     const cardBack = cardEl.querySelector('.card-back');
-
     if (!cardFront || !cardBack) return;
-
     const contentArea = cardBack.querySelector('#card-back-content-area-el');
-
     if (!contentArea) return;
-
     const data = allVerbsData[verbName];
-
     if (!data) return;
 
     // Configure top-right button as Close button (x)
-
     const actionBtn = cardBack.querySelector('#card-back-header-action-btn') || cardBack.querySelector('.card-back-close-btn');
-
     if (actionBtn) {
-
       actionBtn.innerHTML = '&times;';
-
       actionBtn.onclick = (e) => {
-
         e.stopPropagation();
-
         cardBack.style.display = 'none';
-
         cardFront.style.display = 'flex';
-
       };
-
     }
 
     const wfList = data.wortfamilie || [];
-
     const wfeldList = data.word_field || [];
-
     const hasVocab = wfList.length > 0 || wfeldList.length > 0;
-
     const saetze = data.saetze || {};
-
     const hasSaetze = Object.values(saetze).some(arr => arr && arr.length > 0);
-
     const hasNote = !!(data.note || data.note_es);
-
     const hasSaetzeSection = hasSaetze || hasNote;
 
     // Conjugation values helper (removes pronouns like er/sie/es and reflexive pronouns like sich)
-
     const cleanVerbForm = (phrase) => {
-
       if (!phrase) return '';
-
       // Remove pronouns
-
       let clean = phrase.replace(/\b(er\/sie\/es|er|sie|es|ich|du|wir|ihr|Sie)\s+/gi, '');
-
       // Remove reflexive pronouns (sich, mich, dich, uns, euch)
-
       clean = clean.replace(/\b(sich|mich|dich|uns|euch)\s+/gi, '');
-
       return clean.trim().replace(/\s+/g, ' ');
-
     };
 
     const praesensObj = data.praesens;
-
     const erPraesensRaw = praesensObj ? (praesensObj["er"] || praesensObj.er || '') : '';
-
     const erPraesens = cleanVerbForm(erPraesensRaw);
 
     const praeteritumForm = data.praeteritum || '';
-
     const erPraeteritum = cleanVerbForm(praeteritumForm);
 
+    // Perfekt: REMOVE the auxiliary (only show the participle form)
     const perfektForm = data.perfekt || '';
-
-    const auxiliary = data.auxiliary || 'haben';
-
-    const auxForm = auxiliary.includes('sein') ? 'ist' : 'hat';
-
     let erPerfekt = '';
-
     if (perfektForm) {
-
-      const cleanPerf = perfektForm.replace(/^(hat|ist)\s+/gi, '');
-
-      const finalVerbPart = cleanVerbForm(cleanPerf);
-
-      erPerfekt = `${auxForm} ${finalVerbPart}`;
-
+      const cleanPerf = perfektForm.replace(/^(hat|ist|haben|sein)\s+/gi, '');
+      erPerfekt = cleanVerbForm(cleanPerf);
     }
 
     const konjunktivObj = data.konjunktiv_ii;
-
-    const erKonjunktivRaw = konjunktivObj ? (konjunktivObj["er"] || konjunktivObj.er || '') : '';
-
+    const erKonjunktivRaw = konjunktivObj ? (konjunktivObj["er_sie_es"] || konjunktivObj["er/sie/es"] || konjunktivObj.er_sie_es || konjunktivObj.er || konjunktivObj.sie || konjunktivObj.es || '') : '';
     const erKonjunktiv = cleanVerbForm(erKonjunktivRaw);
 
     let html = `<div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">`;
 
     // Horizontal Tenses Row
-
     html += `<div class="card-back-tenses-row">`;
-
     if (erPraesens) {
-
       html += `<button class="tense-menu-btn" data-target="zeit_praesens">${erPraesens}</button>`;
-
     }
-
     if (erPerfekt) {
-
       html += `<button class="tense-menu-btn" data-target="zeit_perfekt">${erPerfekt}</button>`;
-
     }
-
     if (erPraeteritum) {
-
       html += `<button class="tense-menu-btn" data-target="zeit_praeteritum">${erPraeteritum}</button>`;
-
     }
-
     if (erKonjunktiv) {
-
       html += `<button class="tense-menu-btn" data-target="zeit_konjunktiv">${erKonjunktiv}</button>`;
-
     }
-
     html += `</div>`;
 
     // Wortfamilie button (full width with orange triangle)
-
     if (hasVocab) {
-
       html += `
-
         <button class="card-back-menu-btn" data-target="wortschatz">
-
           <span class="btn-left">📚 Wortfamilie</span>
-
           <span class="btn-triangle">▶</span>
-
         </button>
-
       `;
-
     }
 
     // Sätze button (full width with orange triangle)
-
     if (hasSaetzeSection) {
-
       html += `
-
         <button class="card-back-menu-btn" data-target="saetze">
-
           <span class="btn-left">📝 Sätze</span>
-
           <span class="btn-triangle">▶</span>
-
         </button>
-
       `;
-
     }
 
     html += `</div>`;
-
     contentArea.innerHTML = html;
 
     // Reset scroll to top
-
     const bodyEl = cardBack.querySelector('.card-back-body');
-
     if (bodyEl) bodyEl.scrollTop = 0;
 
     // Bind click events for navigation
-
     const menuBtns = contentArea.querySelectorAll('.tense-menu-btn, .card-back-menu-btn');
-
     menuBtns.forEach(btn => {
-
       btn.onclick = (e) => {
-
         e.stopPropagation();
-
         const target = btn.dataset.target;
-
         window.renderCardBackTabContent(verbName, cardEl, target);
-
       };
-
     });
-
   };
 
   window.renderCardBackTabContent = function (verbName, cardEl, tabId) {
-
     const cardBack = cardEl.querySelector('.card-back');
-
     if (!cardBack) return;
-
     const contentArea = cardBack.querySelector('#card-back-content-area-el');
-
     if (!contentArea) return;
-
     const data = allVerbsData[verbName];
-
     if (!data) return;
 
     // Configure top-right button as Back button (larr/flip icon)
-
     const actionBtn = cardBack.querySelector('#card-back-header-action-btn') || cardBack.querySelector('.card-back-close-btn');
-
     if (actionBtn) {
-
       actionBtn.innerHTML = `<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h9a2 2 0 0 1 2 2v9" opacity="0.4"></path><rect x="4" y="8" width="10" height="11" rx="1.5"></rect><path d="M14 10c2-1 4 .5 4 2.5v1.5"></path><polyline points="16 13 18 15 20 13"></polyline></svg>`;
-
       actionBtn.onclick = (e) => {
-
         e.stopPropagation();
-
         window.renderCardBackMenu(verbName, cardEl);
-
       };
-
     }
 
     // Reset scroll to top of sub-screen
-
     const bodyEl = cardBack.querySelector('.card-back-body');
-
     if (bodyEl) bodyEl.scrollTop = 0;
 
     if (tabId.startsWith('zeit_')) {
-
       const tenseId = tabId.replace('zeit_', ''); // 'praesens', 'praeteritum', 'perfekt', 'konjunktiv'
+      
+      // Determine available tenses in order
+      const cleanVerbForm = (phrase) => {
+        if (!phrase) return '';
+        let clean = phrase.replace(/\b(er\/sie\/es|er|sie|es|ich|du|wir|ihr|Sie)\s+/gi, '');
+        clean = clean.replace(/\b(sich|mich|dich|uns|euch)\s+/gi, '');
+        return clean.trim().replace(/\s+/g, ' ');
+      };
+      
+      const tensesOrder = [];
+      if (data.praesens) tensesOrder.push('praesens');
+      if (data.perfekt) tensesOrder.push('perfekt');
+      if (data.praeteritum) tensesOrder.push('praeteritum');
+      
+      const konjunktivObj = data.konjunktiv_ii;
+      const erKonjunktivRaw = konjunktivObj ? (konjunktivObj["er_sie_es"] || konjunktivObj["er/sie/es"] || konjunktivObj.er_sie_es || konjunktivObj.er || konjunktivObj.sie || konjunktivObj.es || '') : '';
+      const erKonjunktiv = cleanVerbForm(erKonjunktivRaw);
+      if (erKonjunktiv) tensesOrder.push('konjunktiv');
+
+      const currentIdx = tensesOrder.indexOf(tenseId);
+      const prevTense = currentIdx > 0 ? tensesOrder[currentIdx - 1] : null;
+      const nextTense = currentIdx < tensesOrder.length - 1 ? tensesOrder[currentIdx + 1] : null;
 
       let title = '';
-
       if (tenseId === 'praesens') title = 'Präsens';
-
       else if (tenseId === 'praeteritum') title = 'Präteritum';
-
       else if (tenseId === 'perfekt') title = 'Perfekt';
-
       else if (tenseId === 'konjunktiv') title = 'Konjunktiv II';
 
       contentArea.innerHTML = `
-
         <div style="margin-top: 10px; margin-bottom: 15px;">
-
-          <h3 style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin: 0 0 10px 0;">${title}</h3>
-
+          <div class="tense-nav-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <button class="tense-nav-arrow-btn prev-tense-btn" style="background: none; border: none; color: #94a3b8; font-size: 1.25rem; cursor: pointer; padding: 4px 12px; transition: color 0.2s; visibility: ${prevTense ? 'visible' : 'hidden'};" title="Vorherige Zeitform">◀</button>
+            <h3 style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin: 0;">${title}</h3>
+            <button class="tense-nav-arrow-btn next-tense-btn" style="background: none; border: none; color: #94a3b8; font-size: 1.25rem; cursor: pointer; padding: 4px 12px; transition: color 0.2s; visibility: ${nextTense ? 'visible' : 'hidden'};" title="Nächste Zeitform">▶</button>
+          </div>
           <div class="tiempos-full-table-wrapper" id="card-back-subtab-table-el"></div>
-
         </div>
-
       `;
 
-      window.renderCardBackSubTabTable(verbName, cardEl, tenseId);
-
-    } else if (tabId === 'wortschatz') {
-
-      const wfList = data.wortfamilie || [];
-
-      const wfeldList = data.word_field || [];
-
-      let activeVocab = window.activeWortschatzTab?.[verbName] || (wfList.length > 0 ? 'wf' : 'wfeld');
-
-      let togglesHTML = `
-
-        <div class="wortschatz-toggles-container">
-
-          ${wfList.length > 0 ? `<button class="wortschatz-toggle-btn ${activeVocab === 'wf' ? 'active' : ''}" data-vocab="wf">Wortfamilie</button>` : ''}
-
-          ${wfeldList.length > 0 ? `<button class="wortschatz-toggle-btn ${activeVocab === 'wfeld' ? 'active' : ''}" data-vocab="wfeld">Wortfeld</button>` : ''}
-
-        </div>
-
-        <div id="wortschatz-vocab-list-el"></div>
-
-      `;
-
-      contentArea.innerHTML = togglesHTML;
-
-      const toggleBtns = contentArea.querySelectorAll('.wortschatz-toggle-btn');
-
-      toggleBtns.forEach(btn => {
-
-        btn.onclick = (e) => {
-
+      // Bind arrow navigation clicks
+      const prevBtn = contentArea.querySelector('.prev-tense-btn');
+      if (prevBtn && prevTense) {
+        prevBtn.onclick = (e) => {
           e.stopPropagation();
-
-          toggleBtns.forEach(b => b.classList.remove('active'));
-
-          btn.classList.add('active');
-
-          const vocabId = btn.dataset.vocab;
-
-          if (!window.activeWortschatzTab) window.activeWortschatzTab = {};
-
-          window.activeWortschatzTab[verbName] = vocabId;
-
-          window.renderWortschatzList(verbName, cardEl, vocabId);
-
+          window.renderCardBackTabContent(verbName, cardEl, 'zeit_' + prevTense);
         };
-
-      });
-
-      window.renderWortschatzList(verbName, cardEl, activeVocab);
-
-    } else if (tabId === 'saetze') {
-
-      let html = '<div>';
-
-      const note = data.note_es || data.note || '';
-
-      if (note) {
-
-        html += `<div style="background: rgba(255,255,255,0.05); padding: 6px; border-radius: 6px; font-size: 0.74rem; margin-bottom: 6px; font-style: italic; color: #cbd5e1;">${note}</div>`;
-
+        prevBtn.onmouseover = () => { prevBtn.style.color = '#ffffff'; };
+        prevBtn.onmouseout = () => { prevBtn.style.color = '#94a3b8'; };
+      }
+      
+      const nextBtn = contentArea.querySelector('.next-tense-btn');
+      if (nextBtn && nextTense) {
+        nextBtn.onclick = (e) => {
+          e.stopPropagation();
+          window.renderCardBackTabContent(verbName, cardEl, 'zeit_' + nextTense);
+        };
+        nextBtn.onmouseover = () => { nextBtn.style.color = '#ffffff'; };
+        nextBtn.onmouseout = () => { nextBtn.style.color = '#94a3b8'; };
       }
 
-      const saetze = data.saetze || {};
-
-      ['A1', 'A2', 'B1'].forEach(lvl => {
-
-        const items = saetze[lvl] || [];
-
-        if (items.length > 0) {
-
-          html += `<div style="margin-top: 6px; font-weight: bold; font-size: 0.76rem; color: #38bdf8;">Nivel ${lvl}:</div>`;
-
-          items.forEach(item => {
-
-            html += `
-
-              <div class="card-back-info-text card-back-saetze-item">
-
-                <strong>${item.expression}</strong>: ${item.translation}
-
-                ${item.example ? `<br><span style="color:#cbd5e1;">Ex: "${item.example}"</span>` : ''}
-
-              </div>
-
-            `;
-
-          });
-
-        }
-
+      window.renderCardBackSubTabTable(verbName, cardEl, tenseId);
+    } else if (tabId === 'wortschatz') {
+      const wfList = data.wortfamilie || [];
+      const wfeldList = data.word_field || [];
+      let activeVocab = window.activeWortschatzTab?.[verbName] || (wfList.length > 0 ? 'wf' : 'wfeld');
+      let togglesHTML = `
+        <div class="wortschatz-toggles-container">
+          ${wfList.length > 0 ? `<button class="wortschatz-toggle-btn ${activeVocab === 'wf' ? 'active' : ''}" data-vocab="wf">Wortfamilie</button>` : ''}
+          ${wfeldList.length > 0 ? `<button class="wortschatz-toggle-btn ${activeVocab === 'wfeld' ? 'active' : ''}" data-vocab="wfeld">Wortfeld</button>` : ''}
+        </div>
+        <div id="wortschatz-vocab-list-el"></div>
+      `;
+      contentArea.innerHTML = togglesHTML;
+      const toggleBtns = contentArea.querySelectorAll('.wortschatz-toggle-btn');
+      toggleBtns.forEach(btn => {
+        btn.onclick = (e) => {
+          e.stopPropagation();
+          toggleBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const vocabId = btn.dataset.vocab;
+          if (!window.activeWortschatzTab) window.activeWortschatzTab = {};
+          window.activeWortschatzTab[verbName] = vocabId;
+          window.renderWortschatzList(verbName, cardEl, vocabId);
+        };
       });
-
+      window.renderWortschatzList(verbName, cardEl, activeVocab);
+    } else if (tabId === 'saetze') {
+      let html = '<div>';
+      const note = data.note_es || data.note || '';
+      if (note) {
+        html += `<div style="background: rgba(255,255,255,0.05); padding: 6px; border-radius: 6px; font-size: 0.74rem; margin-bottom: 6px; font-style: italic; color: #cbd5e1;">${note}</div>`;
+      }
+      const saetze = data.saetze || {};
+      ['A1', 'A2', 'B1'].forEach(lvl => {
+        const items = saetze[lvl] || [];
+        if (items.length > 0) {
+          html += `<div style="margin-top: 6px; font-weight: bold; font-size: 0.76rem; color: #38bdf8;">Nivel ${lvl}:</div>`;
+          items.forEach(item => {
+            html += `
+              <div class="card-back-info-text card-back-saetze-item">
+                <strong>${item.expression}</strong>: ${item.translation}
+                ${item.example ? `<br><span style="color:#cbd5e1;">Ex: "${item.example}"</span>` : ''}
+              </div>
+            `;
+          });
+        }
+      });
       html += '</div>';
-
       contentArea.innerHTML = html || '<p style="font-size: 0.76rem; color: #94a3b8; margin-top: 4px;">Keine Sätze vorhanden.</p>';
-
     }
-
   };
 
   window.renderWortschatzList = function (verbName, cardEl, vocabId) {
