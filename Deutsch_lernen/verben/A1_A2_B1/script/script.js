@@ -8707,7 +8707,7 @@ async function loadWortfamilieIndex() {
     if (hasVocab) {
       html += `
         <button class="card-back-menu-btn" data-target="wortschatz">
-          <span class="btn-left">📚 Wortfamilie</span>
+          <span class="btn-left">📚 Wortschatz</span>
           <span class="btn-triangle">▶</span>
         </button>
       `;
