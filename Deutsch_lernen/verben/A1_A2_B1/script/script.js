@@ -8685,10 +8685,10 @@ async function loadWortfamilieIndex() {
     const erKonjunktivRaw = konjunktivObj ? (konjunktivObj["er_sie_es"] || konjunktivObj["er/sie/es"] || konjunktivObj.er_sie_es || konjunktivObj.er || konjunktivObj.sie || konjunktivObj.es || '') : '';
     const erKonjunktiv = cleanVerbForm(erKonjunktivRaw);
 
-    let html = `<div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">`;
+    let html = `<div style="display: flex; flex-direction: column; flex-grow: 1; height: 100%; justify-content: space-between;">`;
 
     // Horizontal Tenses Row
-    html += `<div class="card-back-tenses-row">`;
+    html += `<div class="card-back-tenses-row" style="margin-top: 6px;">`;
     if (erPraesens) {
       html += `<button class="tense-menu-btn" data-target="zeit_praesens">${erPraesens}</button>`;
     }
@@ -8703,7 +8703,10 @@ async function loadWortfamilieIndex() {
     }
     html += `</div>`;
 
-    // Wortfamilie button (full width with orange triangle)
+    // Center container for Wortschatz and Sätze buttons
+    html += `<div style="display: flex; flex-direction: column; justify-content: center; gap: 10px; flex-grow: 1;">`;
+
+    // Wortschatz button (full width with orange triangle)
     if (hasVocab) {
       html += `
         <button class="card-back-menu-btn" data-target="wortschatz">
@@ -8723,7 +8726,7 @@ async function loadWortfamilieIndex() {
       `;
     }
 
-    html += `</div>`;
+    html += `</div></div>`;
     contentArea.innerHTML = html;
 
     // Reset scroll to top
