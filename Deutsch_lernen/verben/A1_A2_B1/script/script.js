@@ -6456,6 +6456,7 @@ async function loadWortfamilieIndex() {
  async function performSearch() {
 
  if (!searchInput) return;
+  console.log("performSearch called with query:", searchInput.value);
 
  const searchTerm = normalizeSearchValue(searchInput.value.trim());
 
@@ -6970,6 +6971,7 @@ async function loadWortfamilieIndex() {
  await Promise.all(wfPromises);
 
  const matchingVerbs = Array.from(uniqueVerbsMap.values());
+  console.log("performSearch resolved matching verbs:", matchingVerbs.length, matchingVerbs.map(m => m.verb));
 
  // SORTING LOGIC: Level Priority (A1.1 -> B2.1) then Alphabetical
 
