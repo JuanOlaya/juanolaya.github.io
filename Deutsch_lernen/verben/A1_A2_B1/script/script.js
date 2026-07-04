@@ -1351,6 +1351,7 @@ async function loadBackgroundData() {
  isBackgroundLoading = false;
 
  generateTagFilters();
+  console.log("100% of the data is loaded.");
 
  if (searchInput && searchInput.value.trim() !== '') {
 
@@ -1553,12 +1554,14 @@ async function loadBackgroundData() {
  }
 
  console.log("Background loading complete.");
+  console.log("100% of the data is loaded.");
 
  updateLoadingProgress(100, 'conjugations');
 
  isBackgroundLoading = false;
 
  generateTagFilters();
+  console.log("100% of the data is loaded.");
 
  // Save to LocalStorage
 
