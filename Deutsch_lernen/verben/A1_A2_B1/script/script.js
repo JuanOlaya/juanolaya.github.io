@@ -8683,10 +8683,7 @@ async function loadWortfamilieIndex() {
 
     const konjunktivObj = data.konjunktiv_ii;
     const erKonjunktivRaw = konjunktivObj ? (konjunktivObj["er_sie_es"] || konjunktivObj["er/sie/es"] || konjunktivObj.er_sie_es || konjunktivObj.er || konjunktivObj.sie || konjunktivObj.es || '') : '';
-    let erKonjunktiv = cleanVerbForm(erKonjunktivRaw);
-    if (erKonjunktiv === erPraeteritum) {
-      erKonjunktiv = '';
-    }
+    const erKonjunktiv = cleanVerbForm(erKonjunktivRaw);
 
     let html = `<div style="display: flex; flex-direction: column; flex-grow: 1; height: 100%; justify-content: space-between;">`;
 
@@ -8787,12 +8784,7 @@ async function loadWortfamilieIndex() {
       
       const konjunktivObj = data.konjunktiv_ii;
       const erKonjunktivRaw = konjunktivObj ? (konjunktivObj["er_sie_es"] || konjunktivObj["er/sie/es"] || konjunktivObj.er_sie_es || konjunktivObj.er || konjunktivObj.sie || konjunktivObj.es || '') : '';
-      let erKonjunktiv = cleanVerbForm(erKonjunktivRaw);
-      const praeteritumForm = data.praeteritum || '';
-      const erPraeteritum = cleanVerbForm(praeteritumForm);
-      if (erKonjunktiv === erPraeteritum) {
-        erKonjunktiv = '';
-      }
+      const erKonjunktiv = cleanVerbForm(erKonjunktivRaw);
       if (erKonjunktiv) tensesOrder.push('konjunktiv');
 
       const currentIdx = tensesOrder.indexOf(tenseId);
