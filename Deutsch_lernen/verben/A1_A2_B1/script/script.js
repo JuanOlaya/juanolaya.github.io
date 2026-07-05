@@ -8650,16 +8650,16 @@ async function loadWortfamilieIndex() {
     // Horizontal Tenses Row
     html += `<div class="card-back-tenses-row" style="margin-top: 6px;">`;
     if (erPraesens) {
-      html += `<button class="tense-menu-btn" data-target="zeit_praesens">${erPraesens}</button>`;
+      html += `<button class="tense-menu-btn" data-target="zeit_praesens"><span class="tense-btn-word">${erPraesens}</span><span class="tense-btn-label">Präsens</span></button>`;
     }
     if (erPerfekt) {
-      html += `<button class="tense-menu-btn" data-target="zeit_perfekt">${erPerfekt}</button>`;
+      html += `<button class="tense-menu-btn" data-target="zeit_perfekt"><span class="tense-btn-word">${erPerfekt}</span><span class="tense-btn-label">Perfekt</span></button>`;
     }
     if (erPraeteritum) {
-      html += `<button class="tense-menu-btn" data-target="zeit_praeteritum">${erPraeteritum}</button>`;
+      html += `<button class="tense-menu-btn" data-target="zeit_praeteritum"><span class="tense-btn-word">${erPraeteritum}</span><span class="tense-btn-label">Präteritum</span></button>`;
     }
     if (erKonjunktiv) {
-      html += `<button class="tense-menu-btn" data-target="zeit_konjunktiv">${erKonjunktiv}</button>`;
+      html += `<button class="tense-menu-btn" data-target="zeit_konjunktiv"><span class="tense-btn-word">${erKonjunktiv}</span><span class="tense-btn-label">Konj. II</span></button>`;
     }
     html += `</div>`;
 

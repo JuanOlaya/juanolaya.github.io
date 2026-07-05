@@ -23425,73 +23425,43 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 
 
 .tense-menu-btn {
-
-
-
     flex: 1 !important;
-
-
-
-    text-align: center !important;
-
-
-
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
     background: #1e293b !important;
-
-
-
-    border: 1px solid #334155 !important;
-
-
-
+    border: 1px solid rgba(56, 189, 248, 0.25) !important;
     color: #ffffff !important;
-
-
-
     border-radius: 8px !important;
-
-
-
-    padding: 12px 6px !important;
-
-
-
-    font-size: 0.9rem !important;
-
-
-
-    font-weight: 700 !important;
-
-
-
+    padding: 8px 4px !important;
     cursor: pointer !important;
-
-
-
-    transition: all 0.2s !important;
-
-
-
+    transition: all 0.2s ease-in-out !important;
     box-sizing: border-box !important;
-
-
-
 }
 
+.tense-menu-btn .tense-btn-word {
+    font-size: 0.92rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    line-height: 1.2 !important;
+    margin-bottom: 2px !important;
+}
 
+.tense-menu-btn .tense-btn-label {
+    font-size: 0.64rem !important;
+    font-weight: 500 !important;
+    color: rgba(56, 189, 248, 0.8) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.03em !important;
+    line-height: 1 !important;
+}
 
 .tense-menu-btn:hover {
-
-
-
-    background: #334155 !important;
-
-
-
-    border-color: var(--card-theme, #3b82f6) !important;
-
-
-
+    background: #1e293b !important;
+    border-color: #38bdf8 !important;
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2) !important;
 }
 
 
