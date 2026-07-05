@@ -3601,7 +3601,7 @@ async function loadBackgroundData() {
 
  }
 
- const clearSearchBtn = document.getElementById('clear-search');
+ const clearSearchBtn = document.getElementById('clear-search-btn');
 
  const searchCounter = document.getElementById('search-counter');
 
@@ -3813,7 +3813,7 @@ async function loadBackgroundData() {
 
  const searchInput = document.getElementById('verb-search');
 
- const clearSearchBtn = document.getElementById('clear-search');
+ const clearSearchBtn = document.getElementById('clear-search-btn');
 
  if (searchInput) {
 
@@ -4307,7 +4307,7 @@ async function loadBackgroundData() {
 
  const searchInput = document.getElementById('verb-search');
 
- const clearSearchBtn = document.getElementById('clear-search');
+ const clearSearchBtn = document.getElementById('clear-search-btn');
 
  const searchCounter = document.getElementById('search-counter');
 
@@ -6395,7 +6395,7 @@ async function loadBackgroundData() {
 
  // searchInput moved to top
 
- const clearSearchBtn = document.getElementById('clear-search');
+ const clearSearchBtn = document.getElementById('clear-search-btn');
 
  const searchCounter = document.getElementById('search-counter');
 
@@ -7813,115 +7813,70 @@ async function loadWortfamilieIndex() {
 
  }
 
- function performWortfamilieSearch(searchTerm) {
-
- if (!wortfamilieIndex) return;
-
- if (clearSearchBtn) {
-
- if (searchTerm.length > 0) {
-
- clearSearchBtn.classList.add('visible');
-
- } else {
-
- clearSearchBtn.classList.remove('visible');
-
- }
-
- }
-
- if (searchTerm.length < 2) {
-
- cardsContainer.innerHTML = '<div class="cards-placeholder" style="text-align:center; padding: 20px; color: #666;">Geben Sie mindestens 2 Buchstaben ein, um in Wortfamilien zu suchen.</div>';
-
- if (searchCounter) searchCounter.textContent = '';
-
- return;
-
- }
-
- try {
-
- const results = wortfamilieIndex.filter(item => {
-
- const word = item.word || '';
-
- const es = item.es || '';
-
- return normalizeSearchValue(word).includes(searchTerm) ||
-
- normalizeSearchValue(es).includes(searchTerm);
-
- });
-
- cardsContainer.innerHTML = '';
-
- if (results.length === 0) {
-
- cardsContainer.innerHTML = '<div class="no-results" style="text-align:center; padding: 20px;">Keine Ergebnisse gefunden.</div>';
-
- if (searchCounter) searchCounter.textContent = '0 Ergebnisse';
-
- return;
-
- }
-
- const maxResults = 50;
-
- results.slice(0, maxResults).forEach(item => {
-
- const card = document.createElement('div');
-
- card.className = 'wf-result-card';
-
- card.onclick = () => openModalForVerb(item.verb);
-
- card.innerHTML = `
-
- <div class="wf-main-info">
-
- <span class="wf-word">${item.word}</span>
-
- <span class="wf-translation">${item.es}</span>
-
- <div class="wf-relationship">
-
- Gehört zu: <strong>${item.verb}</strong> <span class="wf-arrow">➔</span>
-
- </div>
-
- </div>
-
- `;
-
- cardsContainer.appendChild(card);
-
- });
-
- if (searchCounter) {
-
- if (results.length > maxResults) {
-
- searchCounter.textContent = `${maxResults} von ${results.length} Ergebnisse angezeigt`;
-
- } else {
-
- searchCounter.textContent = `${results.length} Ergebnisse`;
-
- }
-
- }
-
- } catch (error) {
-
- console.error("Error in Wortfamilie search:", error);
-
- cardsContainer.innerHTML = '<div class="error-message" style="text-align:center; padding: 20px;">Ein Fehler ist aufgetreten.</div>';
-
- }
-
- }
+  function performWortfamilieSearch(searchTerm, returnResultsOnly = false) {
+    if (!wortfamilieIndex) return [];
+    if (!returnResultsOnly && clearSearchBtn) {
+      if (searchTerm.length > 0) {
+        clearSearchBtn.classList.add('visible');
+      } else {
+        clearSearchBtn.classList.remove('visible');
+      }
+    }
+    if (searchTerm.length < 2) {
+      if (!returnResultsOnly) {
+        cardsContainer.innerHTML = '<div class="cards-placeholder" style="text-align:center; padding: 20px; color: #666;">Geben Sie mindestens 2 Buchstaben ein, um in Wortfamilien zu suchen.</div>';
+        if (searchCounter) searchCounter.textContent = '';
+      }
+      return [];
+    }
+    try {
+      const results = wortfamilieIndex.filter(item => {
+        const word = item.word || '';
+        const es = item.es || '';
+        return normalizeSearchValue(word).includes(searchTerm) ||
+               normalizeSearchValue(es).includes(searchTerm);
+      });
+      if (returnResultsOnly) {
+        return results;
+      }
+      cardsContainer.innerHTML = '';
+      if (results.length === 0) {
+        cardsContainer.innerHTML = '<div class="no-results" style="text-align:center; padding: 20px;">Keine Ergebnisse gefunden.</div>';
+        if (searchCounter) searchCounter.textContent = '0 Ergebnisse';
+        return [];
+      }
+      const maxResults = 50;
+      results.slice(0, maxResults).forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'wf-result-card';
+        card.onclick = () => openModalForVerb(item.verb);
+        card.innerHTML = `
+          <div class="wf-main-info">
+            <span class="wf-word">${item.word}</span>
+            <span class="wf-translation">${item.es}</span>
+            <div class="wf-relationship">
+              Gehört zu: <strong>${item.verb}</strong> <span class="wf-arrow"></span>
+            </div>
+          </div>
+        `;
+        cardsContainer.appendChild(card);
+      });
+      if (searchCounter) {
+        if (results.length > maxResults) {
+          searchCounter.textContent = `${maxResults} von ${results.length} Ergebnisse angezeigt`;
+        } else {
+          searchCounter.textContent = `${results.length} Ergebnisse`;
+        }
+      }
+      return results;
+    } catch (error) {
+      console.error("Error in Wortfamilie search:", error);
+      if (!returnResultsOnly) {
+        cardsContainer.innerHTML = '<div class="error-message" style="text-align:center; padding: 20px;">Ein Fehler ist aufgetreten.</div>';
+      }
+      return [];
+    }
+  }
 
  function clearSearch() {
 
