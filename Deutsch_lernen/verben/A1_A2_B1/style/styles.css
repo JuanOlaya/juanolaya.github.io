@@ -23868,3 +23868,12 @@ body.compact-view #search-counter {
     height: 0 !important;
     overflow: hidden !important;
 }
+
+
+/* ==========================================
+   margin nudge down override for cards container
+   ========================================== */
+
+body.compact-view #cards-container {
+    margin-top: 30px !important; /* Move cards down a bit visually */
+}
