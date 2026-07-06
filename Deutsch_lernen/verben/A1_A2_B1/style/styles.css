@@ -2758,6 +2758,10 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 
 
 
+    overflow-y: auto !important;
+
+
+
 }
 
 
@@ -3523,25 +3527,7 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 
 
 .progress-bar-container {
-
-
-
-    width: 180px;
-
-
-
-    display: flex;
-
-
-
-    justify-content: space-between;
-
-
-
-    align-items: center;
-
-
-
+    display: none !important;
 }
 
 
@@ -20948,7 +20934,7 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 
 
 
-    min-height: 380px; /* Ensure a consistent minimum height for flip contents */
+    height: 450px; /* Ensure a consistent height for flip contents */
 
 
 
@@ -23430,7 +23416,7 @@ body.compact-view .cards-container {
         gap: 12px !important;
     }
     body.compact-view .kompakt-level-card {
-        min-height: 310px !important;
+        height: 380px !important;
     }
     body.compact-view .kompakt-level-header {
         padding: 8px 12px !important;
@@ -23456,7 +23442,7 @@ body.compact-view .cards-container {
         gap: 8px !important;
     }
     body.compact-view .kompakt-level-card {
-        min-height: 270px !important;
+        height: 310px !important;
     }
     body.compact-view .kompakt-level-header {
         padding: 6px 10px !important;
@@ -23478,4 +23464,24 @@ body.compact-view .cards-container {
         padding: 6px 10px !important;
         margin-top: 5px !important;
     }
+}
+
+/* Settings Info Button Styling */
+.settings-info-btn {
+    cursor: pointer;
+    background: #4682B4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s, transform 0.2s;
+}
+.settings-info-btn:hover {
+    background: #3b6d9c;
+    transform: scale(1.02);
 }
