@@ -24058,3 +24058,12 @@ body.compact-view .compact-nav-bar {
 body.compact-view .kompakt-level-card {
     transition: none; /* Disables slide-in animation on load, while allowing inline JS overrides during drag gestures */
 }
+
+
+/* ==========================================
+   touch-action override to prevent browser swipe-back history gestures
+   ========================================== */
+
+body.compact-view .kompakt-level-card {
+    touch-action: none !important; /* Forces all touch events to be delivered to JS, resolving drag-back issues */
+}
