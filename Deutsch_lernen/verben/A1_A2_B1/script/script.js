@@ -9121,6 +9121,8 @@ async function loadWortfamilieIndex() {
   };
 
   function setupCardDrag(cardElement) {
+    if (cardElement.dataset.dragSetup === 'true') return;
+    cardElement.dataset.dragSetup = 'true';
     let startX = 0;
     let currentX = 0;
     let isDragging = false;

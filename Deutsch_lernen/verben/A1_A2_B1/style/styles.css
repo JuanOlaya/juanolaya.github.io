@@ -23806,3 +23806,26 @@ body.compact-view .compact-nav-bar {
     margin: 0 !important;
     flex-shrink: 0 !important;
 }
+
+
+/* ==========================================
+   fixed width and flex constraints for kompakt-level-card
+   ========================================== */
+
+body.compact-view .kompakt-level-card {
+    width: 350px !important;
+    max-width: 90vw !important;
+    flex-shrink: 0 !important;
+    margin: 0 10px !important;
+    box-sizing: border-box !important;
+}
+
+body.compact-view .kompakt-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 0 !important; /* spacing handled by card margins */
+}
