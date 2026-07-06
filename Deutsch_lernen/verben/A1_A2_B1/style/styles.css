@@ -23465,3 +23465,144 @@ body.compact-view .cards-container {
     background: #3b6d9c;
     transform: scale(1.02);
 }
+
+
+/* ==========================================
+   premium vertical centering and fixed footer navigation overrides
+   ========================================== */
+
+/* 1. Force the compact-view body to occupy full screen height and center cards container */
+body.compact-view {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+body.compact-view .main-container {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    background-color: #0f172a !important; /* solid slate background */
+}
+
+body.compact-view .content-block {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    width: 100% !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    padding-bottom: 74px !important; /* space for the fixed footer */
+}
+
+/* 2. Top header navigation styling */
+body.compact-view .top-navigation-header {
+    width: 100% !important;
+    max-width: 600px !important;
+    box-sizing: border-box !important;
+    padding: 12px 20px !important;
+    flex-shrink: 0 !important;
+    background: transparent !important;
+}
+
+/* 3. Cards container vertical centering */
+body.compact-view #cards-container {
+    flex-grow: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 10px !important;
+    min-height: 0 !important;
+}
+
+body.compact-view .kompakt-grid {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 4. Level selector buttons: always show A1, A2, B1, B2 in a clean inline row (never collapse) */
+.level-toggle-footer.selector-collapsed .level-option:not(.active),
+.level-toggle-footer.mobile-collapsed .level-option:not(.active),
+.level-toggle-footer.search-collapsed .level-option:not(.active) {
+    display: inline-flex !important;
+}
+
+.level-toggle-footer.selector-collapsed .level-option.active::after,
+.level-toggle-footer.mobile-collapsed .level-option.active::after,
+.level-toggle-footer.selector-collapsed .level-option.active::before,
+.level-toggle-footer.mobile-collapsed .level-option.active::before {
+    content: '' !important;
+    display: none !important;
+}
+
+/* 5. Balanced heights: premium fixed bottom navigation area as footer */
+body.compact-view .compact-nav-bar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 70px !important;
+    background-color: #0f172a !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5) !important;
+    padding: 0 40px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    z-index: 1100 !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+}
+
+/* 6. Larger Back and Next buttons to balance the header level options */
+body.compact-view .compact-nav-btn {
+    height: 44px !important;
+    max-width: 120px !important;
+    padding: 0 24px !important;
+    font-size: 0.98rem !important;
+    font-weight: 800 !important;
+    border-radius: 22px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.2s ease !important;
+}
+
+body.compact-view .compact-nav-btn:hover:not(:disabled) {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.compact-view .compact-nav-btn:active:not(:disabled) {
+    transform: translateY(0) !important;
+}
+
+body.compact-view .compact-nav-dots {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+}

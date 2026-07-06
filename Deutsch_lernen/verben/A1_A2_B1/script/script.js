@@ -7908,10 +7908,23 @@ async function loadWortfamilieIndex() {
  }
 
  if (clearSearchBtn) {
+    clearSearchBtn.addEventListener('click', clearSearch);
+  }
 
- clearSearchBtn.addEventListener('click', clearSearch);
-
- }
+  // Register click listener for top search toggle button to fix search feature not working
+  const searchToggleBtn = document.getElementById('search-toggle-btn');
+  const topSearchRowEl = document.getElementById('top-search-row-el');
+  if (searchToggleBtn && topSearchRowEl) {
+    searchToggleBtn.addEventListener('click', () => {
+      topSearchRowEl.classList.toggle('visible');
+      const isVisible = topSearchRowEl.classList.contains('visible');
+      if (isVisible) {
+        if (searchInput) searchInput.focus();
+      } else {
+        clearSearch();
+      }
+    });
+  }
 
   // Helper to find verb location (needed for WF matches that weren't in direct search)
 
@@ -9114,66 +9127,120 @@ async function loadWortfamilieIndex() {
 
   };
 
+  function setupCardDrag(cardElement) {
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+    const threshold = 80;
+
+    // Mouse events
+    cardElement.addEventListener('mousedown', startDrag);
+    window.addEventListener('mousemove', drag);
+    window.addEventListener('mouseup', endDrag);
+
+    // Touch events
+    cardElement.addEventListener('touchstart', startDrag, { passive: true });
+    window.addEventListener('touchmove', drag, { passive: false });
+    window.addEventListener('touchend', endDrag);
+
+    function startDrag(e) {
+      if (e.target.closest('button') || e.target.closest('input') || e.target.closest('a') || e.target.closest('.settings-info-btn') || e.target.closest('.kompakt-header-de') || e.target.closest('.kompakt-header-es')) {
+        return;
+      }
+      isDragging = true;
+      startX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+      currentX = startX;
+      cardElement.style.transition = 'none';
+    }
+
+    function drag(e) {
+      if (!isDragging) return;
+      currentX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+      const deltaX = currentX - startX;
+      cardElement.style.transform = `translateX(${deltaX}px) rotate(${deltaX * 0.03}deg)`;
+      if (e.cancelable) e.preventDefault();
+    }
+
+    function endDrag() {
+      if (!isDragging) return;
+      isDragging = false;
+      const deltaX = currentX - startX;
+      cardElement.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+
+      const isMobile = window.innerWidth < 768;
+      const pageSize = isMobile ? 1 : 3;
+
+      if (deltaX < -threshold) {
+        // Next page
+        const nextDisabled = window.currentCompactCardIndex + pageSize >= window.allCompactCards.length;
+        if (!nextDisabled) {
+          cardElement.style.transform = 'translateX(-150%) rotate(-15deg)';
+          setTimeout(() => {
+            window.currentCompactCardIndex = Math.min(
+              window.allCompactCards.length - pageSize,
+              window.currentCompactCardIndex + pageSize
+            );
+            window.updateCompactView();
+          }, 150);
+        } else {
+          cardElement.style.transform = 'translateX(0) rotate(0)';
+        }
+      } else if (deltaX > threshold) {
+        // Previous page
+        const prevDisabled = window.currentCompactCardIndex === 0;
+        if (!prevDisabled) {
+          cardElement.style.transform = 'translateX(150%) rotate(15deg)';
+          setTimeout(() => {
+            window.currentCompactCardIndex = Math.max(0, window.currentCompactCardIndex - pageSize);
+            window.updateCompactView();
+          }, 150);
+        } else {
+          cardElement.style.transform = 'translateX(0) rotate(0)';
+        }
+      } else {
+        cardElement.style.transform = 'translateX(0) rotate(0)';
+      }
+    }
+  }
+
   window.updateCompactView = function() {
-
     cardsContainer.innerHTML = '';
-
     const grid = document.createElement('div');
-
     grid.className = 'kompakt-grid';
-
     const isMobile = window.innerWidth < 768;
-
     const pageSize = isMobile ? 1 : 3;
 
     if (window.currentCompactCardIndex < 0) window.currentCompactCardIndex = 0;
-
     if (window.currentCompactCardIndex >= window.allCompactCards.length) {
-
       window.currentCompactCardIndex = Math.max(0, window.allCompactCards.length - pageSize);
-
     }
 
     const visibleCards = window.allCompactCards.slice(
-
       window.currentCompactCardIndex,
-
       window.currentCompactCardIndex + pageSize
-
     );
 
     visibleCards.forEach(card => {
-
       grid.appendChild(card);
-
+      setupCardDrag(card); // Enable swipe/drag navigation!
     });
 
     cardsContainer.appendChild(grid);
 
     // Create bottom navigation bar
-
     const navBar = document.createElement('div');
-
     navBar.className = 'compact-nav-bar';
 
     const prevBtn = document.createElement('button');
-
     prevBtn.className = 'compact-nav-btn back-btn';
-
     prevBtn.innerHTML = 'Back';
-
     const prevDisabled = window.currentCompactCardIndex === 0;
-
     if (prevDisabled) prevBtn.disabled = true;
 
     const nextBtn = document.createElement('button');
-
     nextBtn.className = 'compact-nav-btn next-btn';
-
     nextBtn.innerHTML = 'Next';
-
     const nextDisabled = window.currentCompactCardIndex + pageSize >= window.allCompactCards.length;
-
     if (nextDisabled) nextBtn.disabled = true;
 
     const dotsContainer = document.createElement('div');
@@ -9200,38 +9267,24 @@ async function loadWortfamilieIndex() {
     }
 
     prevBtn.onclick = () => {
-
       window.currentCompactCardIndex = Math.max(0, window.currentCompactCardIndex - pageSize);
-
       window.updateCompactView();
-
     };
 
     nextBtn.onclick = () => {
-
       window.currentCompactCardIndex = Math.min(
-
         window.allCompactCards.length - pageSize,
-
         window.currentCompactCardIndex + pageSize
-
       );
-
       window.updateCompactView();
-
     };
 
     navBar.appendChild(prevBtn);
-
     navBar.appendChild(dotsContainer);
-
     navBar.appendChild(nextBtn);
 
     const oldNavBar = document.querySelector('.compact-nav-bar');
-
     if (oldNavBar) oldNavBar.remove();
-
     cardsContainer.parentNode.insertBefore(navBar, cardsContainer.nextSibling);
-
   };
 });
