@@ -9124,6 +9124,7 @@ async function loadWortfamilieIndex() {
     let startX = 0;
     let currentX = 0;
     let isDragging = false;
+    let hasMoved = false;
     const threshold = 80;
 
     // Mouse events
@@ -9141,22 +9142,34 @@ async function loadWortfamilieIndex() {
         return;
       }
       isDragging = true;
+      hasMoved = false;
       startX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
       currentX = startX;
-      cardElement.style.transition = 'none';
     }
 
     function drag(e) {
       if (!isDragging) return;
       currentX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
       const deltaX = currentX - startX;
-      cardElement.style.transform = `translateX(${deltaX}px) rotate(${deltaX * 0.03}deg)`;
-      if (e.cancelable) e.preventDefault();
+      
+      if (Math.abs(deltaX) > 8) {
+        if (!hasMoved) {
+          cardElement.style.transition = 'none';
+          hasMoved = true;
+        }
+        cardElement.style.transform = `translateX(${deltaX}px) rotate(${deltaX * 0.03}deg)`;
+        if (e.cancelable) e.preventDefault();
+      }
     }
 
     function endDrag() {
       if (!isDragging) return;
       isDragging = false;
+      
+      if (!hasMoved) {
+        return;
+      }
+      
       const deltaX = currentX - startX;
       cardElement.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
 
