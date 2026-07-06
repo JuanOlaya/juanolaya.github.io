@@ -3462,7 +3462,11 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 
 
 
-    display: flex;
+    display: none !important;
+
+
+
+    flex-direction: column;
 
 
 
