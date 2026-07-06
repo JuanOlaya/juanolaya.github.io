@@ -2735,7 +2735,7 @@ async function loadBackgroundData() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}">⭐</span>` : '';
+ const a1testBadge = a1testTag ? `<span style="margin-left: 5px;">⭐</span>` : '';
 
  const germanWord = document.createElement('div');
 
@@ -2999,7 +2999,7 @@ async function loadBackgroundData() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? ` <span class="a1test-badge case-tag-${a1testTag}" style="vertical-align: super; font-size: 0.9rem; padding: 1px 4px; margin-left: 6px;">⭐</span>` : '';
+ const a1testBadge = a1testTag ? ` <span style="vertical-align: super; font-size: 0.9rem; margin-left: 6px;">⭐</span>` : '';
 
  // New Structure: Header (Word + Translation), Body (Tags Centered), No Emoji
 
@@ -3097,7 +3097,7 @@ async function loadBackgroundData() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}" style="margin-top: 4px; margin-left: 8px;">⭐</span>` : '';
+ const a1testBadge = a1testTag ? `<span style="margin-top: 4px; margin-left: 8px;">⭐</span>` : '';
 
  const emoji = verbData.emoji || '🔵œÂ';
 
@@ -3215,7 +3215,7 @@ async function loadBackgroundData() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? ` <span class="a1test-badge case-tag-${a1testTag}" style="padding: 1px 4px; font-size: 0.9rem; margin-left: 8px;">⭐</span>` : '';
+ const a1testBadge = a1testTag ? ` <span style="font-size: 0.9rem; margin-left: 8px;">⭐</span>` : '';
 
  const displayVerb = formatVerbPrefix(verbName);
 
@@ -3442,21 +3442,8 @@ async function loadBackgroundData() {
  }
 
  function updateGustarButtonVisibility() {
-
- if (currentLevel === 'A1' && currentGroupInLevel === 8) {
-
- if (gustarButtonContainer) gustarButtonContainer.style.display = 'block';
-
- if (reflexiveButtonContainer) reflexiveButtonContainer.style.display = 'none';
-
- } else {
-
- if (gustarButtonContainer) gustarButtonContainer.style.display = 'none';
-
- if (reflexiveButtonContainer) reflexiveButtonContainer.style.display = 'none';
-
- }
-
+  if (gustarButtonContainer) gustarButtonContainer.style.display = 'block';
+  if (reflexiveButtonContainer) reflexiveButtonContainer.style.display = 'block';
  }
 
  function setupProgressBar() {
@@ -7281,7 +7268,7 @@ async function loadWortfamilieIndex() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}">⭐</span>` : '';
+ const a1testBadge = a1testTag ? `<span style="margin-left: 5px;">⭐</span>` : '';
 
  cardHTML += `
 
