@@ -3008,15 +3008,15 @@ async function loadBackgroundData() {
 
  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
 
- <span class="spanish-translation" style="font-size: 1.1rem; color: white; font-style: italic;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${esTranslation}</span>
+ <span class="spanish-translation" style="font-size: 1.1rem; color: white; font-style: italic;" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" title="Details anzeigen">${esTranslation}</span>
 
- ${showEnglish ? `<span class="english-translation" style="font-size: 1.1rem; color: white; font-weight: 600;" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen">${enTranslation}</span>` : ''}
-
- </div>
+ ${showEnglish ? `<span class="english-translation" style="font-size: 1.1rem; color: white; font-weight: 600;" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" title="Details anzeigen">${enTranslation}</span>` : ''}
 
  </div>
 
- <div class="card-body niedlich-card-body" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" style="cursor: pointer;">
+ </div>
+
+ <div class="card-body niedlich-card-body" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" style="cursor: pointer;">
 
  <div class="german-word-container" style="justify-content:center; width: 100%; flex-wrap: wrap; gap: 8px;">
 
@@ -3110,7 +3110,7 @@ async function loadBackgroundData() {
 
  </div>
 
- <div class="normal-card-content" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
+ <div class="normal-card-content" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" title="Details anzeigen" style="cursor: pointer;">
 
  <p class="normal-spanish">${translation}</p>
 
@@ -3222,11 +3222,11 @@ async function loadBackgroundData() {
 
  <div class="light-version-cell infinitiv" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer;">${displayVerb}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
 
- <div class="light-version-cell perfekt" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${perfekt}</div>
+ <div class="light-version-cell perfekt" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" title="Details anzeigen" style="cursor: pointer;">${perfekt}</div>
 
- <div class="light-version-cell praeteritum" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${praeteritum}</div>
+ <div class="light-version-cell praeteritum" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" title="Details anzeigen" style="cursor: pointer;">${praeteritum}</div>
 
- <div class="light-version-cell translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${translation}</div>
+ <div class="light-version-cell translation" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" title="Details anzeigen" style="cursor: pointer;">${translation}</div>
 
  `;
 
@@ -7198,16 +7198,12 @@ async function loadWortfamilieIndex() {
  let cardHTML = `
 
  <div class="kompakt-level-card">
-
- <div class="kompakt-level-header" style="background-color: ${themeColor}; cursor: default;">
-
- <span class="kompakt-header-de" onclick="event.stopPropagation(); window.speak('${group.theme || group.groupNameGerman || 'Gruppe'}')" title="Aussprache h??ren" style="cursor: pointer; display: ${showGerman ? 'inline' : 'none'};">${cardTitleHTML}</span>
-
- <span class="kompakt-header-es" onclick="event.stopPropagation(); openThemeModal('${group.level}', ${group.groupIndex})" title="Themeninfos anzeigen" style="cursor: pointer; display: ${showSpanish ? 'inline' : 'none'};">${group.spanishName || group.groupNameSpanish || ''}</span>
-
- </div>
-
- <div class="kompakt-level-content">
+   <div class="card-front" style="display: flex; flex-direction: column; width: 100%; height: 100%;">
+     <div class="kompakt-level-header" style="background-color: ${themeColor}; cursor: default;">
+       <span class="kompakt-header-de" onclick="event.stopPropagation(); window.speak('${group.theme || group.groupNameGerman || 'Gruppe'}')" title="Aussprache hören" style="cursor: pointer; display: ${showGerman ? 'inline' : 'none'};">${cardTitleHTML}</span>
+       <span class="kompakt-header-es" onclick="event.stopPropagation(); openThemeModal('${group.level}', ${group.groupIndex})" title="Themeninfos anzeigen" style="cursor: pointer; display: ${showSpanish ? 'inline' : 'none'};">${group.spanishName || group.groupNameSpanish || ''}</span>
+     </div>
+     <div class="kompakt-level-content">
 
  `;
 
@@ -7265,15 +7261,15 @@ async function loadWortfamilieIndex() {
 
  cardHTML += `
 
- <div class="kompakt-row" data-verb="${verbName}" onclick="openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">
+ <div class="kompakt-row" data-verb="${verbName}" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" title="Details anzeigen" style="cursor: pointer;">
 
  <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
 
  <div class="kompakt-translations">
 
- <div class="kompakt-spanish${isLong ? ' long-translation' : ''}" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showSpanish ? 'block' : 'none'};">${esTranslationDisplay}</div>
+ <div class="kompakt-spanish${isLong ? ' long-translation' : ''}" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" title="Details anzeigen" style="cursor: pointer; display: ${showSpanish ? 'block' : 'none'};">${esTranslationDisplay}</div>
 
- <div class="kompakt-english" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer; display: ${showEnglish && enTranslationRaw ? 'block' : 'none'};">${enTranslationDisplay}</div>
+ <div class="kompakt-english" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" title="Details anzeigen" style="cursor: pointer; display: ${showEnglish && enTranslationRaw ? 'block' : 'none'};">${enTranslationDisplay}</div>
 
  </div>
 
@@ -7291,16 +7287,13 @@ async function loadWortfamilieIndex() {
 
  cardHTML += `
 
- </div>
-
- <div class="card-footer" style="background-color: ${themeColor};">
-
- <span class="card-footer-tag card-footer-level" style="border: none;">${formattedLevel}</span>
-
- <span class="card-footer-tag">${verbsLabelText}</span>
-
- </div>
-
+     </div>
+     <div class="card-footer" style="background-color: ${themeColor};">
+       <span class="card-footer-tag card-footer-level" style="border: none;">${formattedLevel}</span>
+       <span class="card-footer-tag">${verbsLabelText}</span>
+     </div>
+   </div>
+   <div class="card-back" style="display: none;"></div>
  </div>`;
 
  htmlFragments.push(cardHTML);
@@ -7621,7 +7614,7 @@ async function loadWortfamilieIndex() {
 
  const cardHTML = `
 
- <div class="word-item niedlich-card" onclick="openModalForVerb('${verbName}')">
+ <div class="word-item niedlich-card" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))">
 
  <div class="card-header niedlich-card-header">
 
@@ -7661,13 +7654,13 @@ async function loadWortfamilieIndex() {
 
  <span class="german-word" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer;">${displayVerbName}</span>
 
- <span class="spanish-translation" data-form="translation" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" title="Details anzeigen" style="cursor: pointer;">${esTranslation}</span>
+ <span class="spanish-translation" data-form="translation" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" title="Details anzeigen" style="cursor: pointer;">${esTranslation}</span>
 
- ${shouldHideEmoji ? '' : `<div class="icon-floating" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" style="cursor: pointer;">${verbData.emoji || '❔'}</div>`}
+ ${shouldHideEmoji ? '' : `<div class="icon-floating" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" style="cursor: pointer;">${verbData.emoji || '❔'}</div>`}
 
  </div>
 
- <div class="card-body" onclick="event.stopPropagation(); openModalForVerb('${verbName}')" style="cursor: pointer;">
+ <div class="card-body" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" style="cursor: pointer;">
 
  <div class="text-container perfekt-hover-container">
 
@@ -7728,40 +7721,48 @@ async function loadWortfamilieIndex() {
  cardsContainer.innerHTML = htmlFragments.join('');
 
  cardsContainer.querySelectorAll('.kompakt-row[data-verb]').forEach((row) => {
-
- const verbName = row.dataset.verb;
-
- row.onclick = () => openModalForVerb(verbName);
-
- const germanWord = row.querySelector('.kompakt-german');
-
- if (germanWord) {
-
- germanWord.onclick = (event) => {
-
- event.stopPropagation();
-
- window.speak(verbName);
-
- };
-
- }
-
- const spanishWord = row.querySelector('.kompakt-spanish');
-
- if (spanishWord) {
-
- spanishWord.onclick = (event) => {
-
- event.stopPropagation();
-
- openModalForVerb(verbName);
-
- };
-
- }
-
- });
+      const verbName = row.dataset.verb;
+      if (currentViewMode === 'compact' || currentViewMode === 'kompakt') {
+        row.onclick = () => window.showVerbDetailsInCard(verbName, row.closest('.kompakt-level-card'));
+        const germanWord = row.querySelector('.kompakt-german');
+        if (germanWord) {
+          germanWord.onclick = (event) => {
+            event.stopPropagation();
+            window.speak(verbName === 'geboren werden' ? 'geboren' : verbName);
+          };
+        }
+        const spanishWord = row.querySelector('.kompakt-spanish');
+        if (spanishWord) {
+          spanishWord.onclick = (event) => {
+            event.stopPropagation();
+            window.showVerbDetailsInCard(verbName, row.closest('.kompakt-level-card'));
+          };
+        }
+        const englishWord = row.querySelector('.kompakt-english');
+        if (englishWord) {
+          englishWord.onclick = (event) => {
+            event.stopPropagation();
+            window.showVerbDetailsInCard(verbName, row.closest('.kompakt-level-card'));
+          };
+        }
+      } else {
+        row.onclick = () => openModalForVerb(verbName);
+        const germanWord = row.querySelector('.kompakt-german');
+        if (germanWord) {
+          germanWord.onclick = (event) => {
+            event.stopPropagation();
+            window.speak(verbName === 'geboren werden' ? 'geboren' : verbName);
+          };
+        }
+        const spanishWord = row.querySelector('.kompakt-spanish');
+        if (spanishWord) {
+          spanishWord.onclick = (event) => {
+            event.stopPropagation();
+            openModalForVerb(verbName);
+          };
+        }
+      }
+    });
 
  // Re-setup hover listeners for new cards
 
