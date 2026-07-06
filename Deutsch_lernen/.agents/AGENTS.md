@@ -6,4 +6,5 @@
 
 ## Git Version Control & Deployment
 - **Rule**: After completing any task, regenerating the metadata index, and verifying everything is functional, you **MUST** stage the changes, commit them with a descriptive message, and push them to the GitHub remote repository (`git push origin master`).
+- **Rule**: In your final response message, after presenting the index update console logs, you **MUST** always provide the following link to monitor the build status: https://github.com/JuanOlaya/juanolaya.github.io/actions/
 
