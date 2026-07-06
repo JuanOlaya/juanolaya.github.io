@@ -1095,12 +1095,9 @@ function hydrateFromLocalCache() {
  }
 
  if (data.lastUpdated) {
-
- appVersion = data.lastUpdated;
-
- hydratedCacheVersion = data.lastUpdated;
-
- }
+    appVersion = data.lastUpdated.replace(/\s+/g, '_').replace(/:/g, '-');
+    hydratedCacheVersion = data.lastUpdated;
+  }
 
  cacheHydrated = true;
 
@@ -1221,10 +1218,8 @@ async function loadBackgroundData() {
  if (allGroupsIndex.length > 0) autoConfigureLevelsFromGroups(allGroupsIndex);
 
  if (remoteVersion) {
-
- appVersion = remoteVersion;
-
- }
+    appVersion = remoteVersion.replace(/\s+/g, '_').replace(/:/g, '-');
+  }
 
   console.log("Remote version:", remoteVersion);
 
@@ -1329,10 +1324,8 @@ async function loadBackgroundData() {
  }
 
  if (data.lastUpdated) {
-
- appVersion = data.lastUpdated;
-
- }
+    appVersion = data.lastUpdated.replace(/\s+/g, '_').replace(/:/g, '-');
+  }
 
  if (!wortfamilieIndex) {
 
