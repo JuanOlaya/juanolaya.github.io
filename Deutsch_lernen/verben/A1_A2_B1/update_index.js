@@ -18,8 +18,6 @@ function getGermanFormattedDate() {
         const partMap = {};
         parts.forEach(p => { partMap[p.type] = p.value; });
         
-        const ms = String(date.getMilliseconds()).padStart(3, '0');
-        
         const tzFormatter = new Intl.DateTimeFormat('en-US', {
             timeZone: 'Europe/Berlin',
             timeZoneName: 'longOffset'
@@ -28,11 +26,11 @@ function getGermanFormattedDate() {
         const tzOffsetPart = tzParts.find(p => p.type === 'timeZoneName');
         const tzOffset = tzOffsetPart ? tzOffsetPart.value : 'GMT+02:00';
         
-        return `_${partMap.year}-${partMap.month}-${partMap.day}  _T${partMap.hour}:${partMap.minute}:${partMap.second}.${ms}  _${tzOffset}`;
+        return `_${partMap.year}-${partMap.month}-${partMap.day}  _T${partMap.hour}:${partMap.minute}:${partMap.second}  _${tzOffset}`;
     } catch (e) {
         const iso = date.toISOString();
         const datePart = iso.substring(0, 10);
-        const timePart = iso.substring(11, 23);
+        const timePart = iso.substring(11, 19); // Omit milliseconds
         return `_${datePart}  _T${timePart}  _GMT+00:00`;
     }
 }

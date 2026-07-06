@@ -23877,3 +23877,82 @@ body.compact-view #search-counter {
 body.compact-view #cards-container {
     margin-top: 30px !important; /* Move cards down a bit visually */
 }
+
+
+/* ==========================================
+   absolute viewport centering overrides
+   ========================================== */
+
+/* 1. Force top header to be fixed */
+body.compact-view .top-navigation-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 70px !important;
+    background-color: #0f172a !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    padding: 0 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    z-index: 1100 !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+}
+
+/* 2. Force bottom nav bar to be fixed */
+body.compact-view .compact-nav-bar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 70px !important;
+    width: 100% !important;
+    background-color: #0f172a !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5) !important;
+    padding: 0 40px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    z-index: 1100 !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+}
+
+/* 3. Force cards container to be perfectly positioned in the absolute vertical and horizontal center of the viewport */
+body.compact-view #cards-container {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 1000 !important;
+    width: 100% !important;
+    height: auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: none !important; /* Let clicks pass through to child cards */
+}
+
+body.compact-view .kompakt-grid {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: auto !important; /* Re-enable pointer events for the cards */
+}
+
+/* Disable body scroll completely in compact view */
+html,
+body.compact-view {
+    overflow: hidden !important;
+    height: 100vh !important;
+}
