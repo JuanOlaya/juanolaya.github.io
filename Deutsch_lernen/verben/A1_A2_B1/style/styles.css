@@ -24023,3 +24023,16 @@ body.compact-view .compact-nav-bar {
     border-radius: 0 !important;
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
+
+
+/* ==========================================
+   restoring visual gradient shadow on header and footer lines
+   ========================================== */
+
+body.compact-view .top-navigation-header {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+body.compact-view .compact-nav-bar {
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5) !important;
+}
