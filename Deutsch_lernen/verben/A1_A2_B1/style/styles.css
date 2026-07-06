@@ -24002,3 +24002,24 @@ body.compact-view .compact-nav-bar {
     max-width: 1110px !important; /* Constrain width to match the 3 cards exactly */
     border-radius: 16px 16px 0 0 !important;
 }
+
+
+/* ==========================================
+   minimalist single horizontal line navigation overrides
+   ========================================== */
+
+body.compact-view .top-navigation-header {
+    background-color: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.compact-view .compact-nav-bar {
+    background-color: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
