@@ -23956,3 +23956,49 @@ body.compact-view {
     overflow: hidden !important;
     height: 100vh !important;
 }
+
+
+/* ==========================================
+   desktop centered navigation width matching 3 cards
+   ========================================== */
+
+body.compact-view .top-navigation-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 70px !important;
+    background-color: #0f172a !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    padding: 0 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    z-index: 1100 !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important; /* Center on desktop screen */
+    max-width: 1110px !important; /* Constrain width to match the 3 cards exactly */
+    width: 100% !important;
+    border-radius: 0 0 16px 16px !important;
+}
+
+body.compact-view .compact-nav-bar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 70px !important;
+    width: 100% !important;
+    background-color: #0f172a !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5) !important;
+    padding: 0 40px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    z-index: 1100 !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important; /* Center on desktop screen */
+    max-width: 1110px !important; /* Constrain width to match the 3 cards exactly */
+    border-radius: 16px 16px 0 0 !important;
+}

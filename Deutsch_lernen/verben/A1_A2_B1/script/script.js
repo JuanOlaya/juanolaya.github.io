@@ -9229,6 +9229,8 @@ async function loadWortfamilieIndex() {
     );
 
     visibleCards.forEach(card => {
+      card.style.transform = 'none';
+      card.style.transition = 'none';
       grid.appendChild(card);
       setupCardDrag(card); // Enable swipe/drag navigation!
     });
