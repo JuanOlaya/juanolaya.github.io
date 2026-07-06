@@ -2769,7 +2769,13 @@
                 { article: "der", word: "Ausgang", emoji: "🚪", translation_es: "salida", translation_en: "exit", example_de: "Wo ist der Ausgang?", example_es: "¿Dónde está la salida?" },
                 { article: "der", word: "Betrieb", emoji: "🏢", translation_es: "empresa / funcionamiento", translation_en: "company / operations", example_de: "Der Betrieb läuft gut.", example_es: "La empresa (operación) marcha bien." },
                 { article: "der", word: "Kinderwagen", emoji: "🚼", translation_es: "coche para bebé", translation_en: "stroller / pushchair", example_de: "Der Kinderwagen ist neu.", example_es: "El coche para bebé es nuevo." },
-                { article: "der", word: "Buggy", emoji: "👶", translation_es: "coche deportivo / plegable", translation_en: "stroller / buggy", example_de: "Wir nehmen den Buggy mit.", example_es: "Nos llevamos el coche plegable." }
+                { article: "der", word: "Buggy", emoji: "👶", translation_es: "coche deportivo / plegable", translation_en: "stroller / buggy", example_de: "Wir nehmen den Buggy mit.", example_es: "Nos llevamos el coche plegable." },
+                { article: "die", word: "Überweisung", emoji: "📄", translation_es: "remisión médica", translation_en: "medical referral", example_de: "Ich brauche eine Überweisung zum Facharzt.", example_es: "Necesito una remisión médica para el especialista." },
+                { article: "der", word: "Kreuzschlitz-Schraubendreher", emoji: "🪛", translation_es: "destornillador de estrella", translation_en: "Phillips screwdriver", example_de: "Hast du einen Kreuzschlitz-Schraubendreher?", example_es: "¿Tienes un destornillador de estrella?" },
+                { article: "der", word: "Sinn", emoji: "🧠", translation_es: "sentido / significado", translation_en: "sense / meaning", example_de: "Das macht keinen Sinn.", example_es: "Eso no tiene (ningún) sentido." },
+                { article: "das", word: "Fälligkeitsdatum", emoji: "📅", translation_es: "fecha de vencimiento", translation_en: "due date", example_de: "Das Fälligkeitsdatum ist morgen.", example_es: "La fecha de vencimiento es mañana." },
+                { article: "der", word: "Erzieher", emoji: "👨‍🏫", translation_es: "educador / maestro", translation_en: "educator / teacher", example_de: "Der Erzieher spielt mit den Kindern.", example_es: "El educador juega con los niños." },
+                { article: "die", word: "Erzieherin", emoji: "👩‍🏫", translation_es: "educadora / maestra", translation_en: "educator / teacher", example_de: "Die Erzieherin liest ein Buch vor.", example_es: "La educadora lee un libro." }
             ]
         });
 
@@ -3813,7 +3819,7 @@
                 title_es: "Guardería",
                 title_en: "Daycare",
                 level: "A1",
-                nouns: pickThemeNouns(["der|ballon", "der|kinderwagen", "der|buggy"])
+                nouns: pickThemeNouns(["der|ballon", "der|kinderwagen", "der|buggy", "der|erzieher", "die|erzieherin"])
             },
             {
                 id: "schlafzimmer",
@@ -3909,7 +3915,7 @@
                 title_es: "Medicina",
                 title_en: "Medicine",
                 level: "A1-B1",
-                nouns: pickThemeNouns(["die|versicherung", "die|krankenversicherung", "das|beruhigungsmittel", "die (pl)|tropfen"])
+                nouns: pickThemeNouns(["die|versicherung", "die|krankenversicherung", "das|beruhigungsmittel", "die (pl)|tropfen", "die|uberweisung"])
             },
             {
                 id: "gesundheit",
@@ -3993,12 +3999,20 @@
                 nouns: pickThemeNouns(["das|basteln"])
             },
             {
+                id: "ideen",
+                title: "Ideen & Konzepte",
+                title_es: "Ideas y conceptos",
+                title_en: "Ideas & Concepts",
+                level: "A2",
+                nouns: pickThemeNouns(["die|idee", "der|vorschlag", "der|sinn", "die|angst", "der|spass", "die|liebe", "das|gluck"])
+            },
+            {
                 id: "werkzeuge",
                 title: "Werkzeuge",
                 title_es: "Herramientas",
                 title_en: "Tools",
                 level: "A2",
-                nouns: pickThemeNouns(["der|inbus", "der|messschieber", "der|schraubendreher", "der|hammer", "der|bohrer", "die|schere", "die|zange"])
+                nouns: pickThemeNouns(["der|inbus", "der|messschieber", "der|schraubendreher", "der|kreuzschlitz-schraubendreher", "der|hammer", "der|bohrer", "die|zange"])
             },
             {
                 id: "tourismus",
@@ -4290,7 +4304,7 @@
                 title_es: "Trámites",
                 title_en: "Public office",
                 level: "A1",
-                nouns: pickThemeNouns(["der|ausweis", "das|formular", "die|anmeldung", "die|unterschrift", "der|termin", "die|verwaltung"])
+                nouns: pickThemeNouns(["der|ausweis", "das|formular", "die|anmeldung", "die|unterschrift", "der|termin", "die|verwaltung", "das|falligkeitsdatum"])
             },
             {
                 id: "physik",
@@ -4421,6 +4435,7 @@
             lehre: "B1",
             personal: "B1",
             handwerk: "B1",
+            ideen: "A2",
             arbeit: "A1",
             karriere: "A1",
             pflege: "B1",

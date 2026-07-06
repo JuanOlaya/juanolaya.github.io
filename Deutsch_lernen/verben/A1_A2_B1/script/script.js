@@ -3601,7 +3601,7 @@ async function loadBackgroundData() {
 
  }
 
- const clearSearchBtn = document.getElementById('clear-search-btn');
+ const clearSearchBtn = document.getElementById('clear-search');
 
  const searchCounter = document.getElementById('search-counter');
 
@@ -3813,7 +3813,7 @@ async function loadBackgroundData() {
 
  const searchInput = document.getElementById('verb-search');
 
- const clearSearchBtn = document.getElementById('clear-search-btn');
+ const clearSearchBtn = document.getElementById('clear-search');
 
  if (searchInput) {
 
@@ -4307,7 +4307,7 @@ async function loadBackgroundData() {
 
  const searchInput = document.getElementById('verb-search');
 
- const clearSearchBtn = document.getElementById('clear-search-btn');
+ const clearSearchBtn = document.getElementById('clear-search');
 
  const searchCounter = document.getElementById('search-counter');
 
@@ -6395,7 +6395,7 @@ async function loadBackgroundData() {
 
  // searchInput moved to top
 
- const clearSearchBtn = document.getElementById('clear-search-btn');
+ const clearSearchBtn = document.getElementById('clear-search');
 
  const searchCounter = document.getElementById('search-counter');
 
@@ -9163,29 +9163,26 @@ async function loadWortfamilieIndex() {
     if (nextDisabled) nextBtn.disabled = true;
 
     const dotsContainer = document.createElement('div');
-
     dotsContainer.className = 'compact-nav-dots';
 
     const totalPages = Math.ceil(window.allCompactCards.length / pageSize);
-
     const currentPage = Math.floor(window.currentCompactCardIndex / pageSize);
 
-    for (let i = 0; i < totalPages; i++) {
-
-      const dot = document.createElement('div');
-
-      dot.className = `compact-dot ${i === currentPage ? 'active' : ''}`;
-
-      dot.onclick = () => {
-
-        window.currentCompactCardIndex = i * pageSize;
-
-        window.updateCompactView();
-
-      };
-
-      dotsContainer.appendChild(dot);
-
+    if (isMobile) {
+      const pageIndicator = document.createElement('span');
+      pageIndicator.className = 'compact-nav-pages';
+      pageIndicator.textContent = `${currentPage + 1} / ${totalPages}`;
+      dotsContainer.appendChild(pageIndicator);
+    } else {
+      for (let i = 0; i < totalPages; i++) {
+        const dot = document.createElement('div');
+        dot.className = `compact-dot ${i === currentPage ? 'active' : ''}`;
+        dot.onclick = () => {
+          window.currentCompactCardIndex = i * pageSize;
+          window.updateCompactView();
+        };
+        dotsContainer.appendChild(dot);
+      }
     }
 
     prevBtn.onclick = () => {

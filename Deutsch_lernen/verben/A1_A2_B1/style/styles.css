@@ -9792,7 +9792,7 @@ details[open]>summary .details-arrow {
 
 
 
-        gap: 15px;
+        gap: 8px;
 
 
 
@@ -15584,7 +15584,7 @@ body.compact-view #modal-konjunktiv-konjugation-table-tab th {
 
 
 
-    gap: 15px;
+    gap: 8px;
 
 
 
@@ -21984,7 +21984,7 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 
 
 
-    gap: 15px;
+    gap: 8px;
 
 
 
@@ -22085,53 +22085,17 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 
 
 .compact-nav-btn {
-
-
-
     flex: 1;
-
-
-
-    max-width: 160px;
-
-
-
-    padding: 12px 24px !important;
-
-
-
-    font-size: 0.95rem !important;
-
-
-
+    max-width: 90px;
+    padding: 8px 12px !important;
+    font-size: 0.85rem !important;
     font-weight: 700 !important;
-
-
-
     color: #ffffff !important;
-
-
-
     border: none !important;
-
-
-
-    border-radius: 24px !important;
-
-
-
+    border-radius: 20px !important;
     cursor: pointer !important;
-
-
-
     transition: all 0.2s;
-
-
-
     text-align: center;
-
-
-
 }
 
 
@@ -22700,7 +22664,7 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 
 
 
-    gap: 15px;
+    gap: 8px;
 
 
 
@@ -22801,53 +22765,17 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 
 
 .compact-nav-btn {
-
-
-
     flex: 1;
-
-
-
-    max-width: 160px;
-
-
-
-    padding: 12px 24px !important;
-
-
-
-    font-size: 0.95rem !important;
-
-
-
+    max-width: 90px;
+    padding: 8px 12px !important;
+    font-size: 0.85rem !important;
     font-weight: 700 !important;
-
-
-
     color: #ffffff !important;
-
-
-
     border: none !important;
-
-
-
-    border-radius: 24px !important;
-
-
-
+    border-radius: 20px !important;
     cursor: pointer !important;
-
-
-
     transition: all 0.2s;
-
-
-
     text-align: center;
-
-
-
 }
 
 
@@ -23531,4 +23459,79 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
     flex: 1 1 auto !important;
     height: 100% !important;
     box-sizing: border-box !important;
+}
+
+/* Page Indicator and Height-based responsiveness overrides for compact view */
+.compact-nav-pages {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: inherit;
+    user-select: none;
+}
+
+body.compact-view .cards-container {
+    min-height: auto !important;
+}
+
+@media (max-height: 750px) {
+    body.compact-view {
+        padding: 5px 0 !important;
+    }
+    body.compact-view .navigation-wrapper {
+        margin-bottom: 8px !important;
+    }
+    body.compact-view .kompakt-grid {
+        padding: 5px !important;
+        gap: 12px !important;
+    }
+    body.compact-view .kompakt-level-card {
+        min-height: 310px !important;
+    }
+    body.compact-view .kompakt-level-header {
+        padding: 8px 12px !important;
+    }
+    body.compact-view .kompakt-row {
+        padding: 6px 0 !important;
+    }
+    body.compact-view .card-footer {
+        padding: 6px 12px 8px !important;
+    }
+    body.compact-view .compact-nav-bar {
+        padding: 8px 12px !important;
+        margin-top: 8px !important;
+    }
+}
+
+@media (max-height: 650px) {
+    body.compact-view .navigation-wrapper {
+        margin-bottom: 5px !important;
+    }
+    body.compact-view .kompakt-grid {
+        padding: 2px !important;
+        gap: 8px !important;
+    }
+    body.compact-view .kompakt-level-card {
+        min-height: 270px !important;
+    }
+    body.compact-view .kompakt-level-header {
+        padding: 6px 10px !important;
+        font-size: 1.05rem !important;
+    }
+    body.compact-view .kompakt-german {
+        font-size: 1.15rem !important;
+    }
+    body.compact-view .kompakt-spanish {
+        font-size: 1.05rem !important;
+    }
+    body.compact-view .kompakt-row {
+        padding: 4px 0 !important;
+    }
+    body.compact-view .card-footer {
+        padding: 5px 10px 6px !important;
+    }
+    body.compact-view .compact-nav-bar {
+        padding: 6px 10px !important;
+        margin-top: 5px !important;
+    }
 }
