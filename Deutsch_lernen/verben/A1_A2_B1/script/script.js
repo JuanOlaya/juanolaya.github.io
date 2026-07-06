@@ -2735,7 +2735,7 @@ async function loadBackgroundData() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? `<span style="margin-left: 5px; font-size: 0.75em;">⭐</span>` : '';
+ const a1testBadge = a1testTag ? `<span style="margin-left: 5px; font-size: 0.67em;">⭐</span>` : '';
 
  const germanWord = document.createElement('div');
 
@@ -2999,7 +2999,7 @@ async function loadBackgroundData() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? ` <span style="vertical-align: super; font-size: 0.68rem; margin-left: 6px;">⭐</span>` : '';
+ const a1testBadge = a1testTag ? ` <span style="vertical-align: super; font-size: 0.6rem; margin-left: 6px;">⭐</span>` : '';
 
  // New Structure: Header (Word + Translation), Body (Tags Centered), No Emoji
 
@@ -3097,7 +3097,7 @@ async function loadBackgroundData() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? `<span style="margin-top: 4px; margin-left: 8px; font-size: 0.75em;">⭐</span>` : '';
+ const a1testBadge = a1testTag ? `<span style="margin-top: 4px; margin-left: 8px; font-size: 0.67em;">⭐</span>` : '';
 
  const emoji = verbData.emoji || '🔵œÂ';
 
@@ -3215,7 +3215,7 @@ async function loadBackgroundData() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? ` <span style="font-size: 0.68rem; margin-left: 8px;">⭐</span>` : '';
+ const a1testBadge = a1testTag ? ` <span style="font-size: 0.6rem; margin-left: 8px;">⭐</span>` : '';
 
  const displayVerb = formatVerbPrefix(verbName);
 
@@ -7268,7 +7268,7 @@ async function loadWortfamilieIndex() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? `<span style="margin-left: 5px; font-size: 0.75em;">⭐</span>` : '';
+ const a1testBadge = a1testTag ? `<span style="margin-left: 5px; font-size: 0.67em;">⭐</span>` : '';
 
  cardHTML += `
 
