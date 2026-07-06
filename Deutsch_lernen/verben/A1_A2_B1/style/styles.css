@@ -1627,46 +1627,22 @@ body.compact-view .content-block {
 
 
 .level-option {
-
-
-
-    border: none;
-
-
-
+    border: none !important;
     background: transparent;
-
-
-
     color: #64748b;
-
-
-
-    border-radius: 24px;
-
-
-
-    padding: 10px 16px;
-
-
-
+    border-radius: 50% !important;
+    width: 44px !important;
+    height: 44px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     font-family: 'Nunito', sans-serif;
-
-
-
-    font-size: 0.9rem;
-
-
-
-    font-weight: 800;
-
-
-
-    cursor: pointer;
-
-
-
-    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, opacity 0.28s ease, max-width 0.28s ease, padding 0.28s ease, margin 0.28s ease, transform 0.28s ease;
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    cursor: pointer !important;
+    min-width: 44px !important;
+    transition: all 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, opacity 0.28s ease, max-width 0.28s ease, padding 0.28s ease, margin 0.28s ease, transform 0.28s ease;
 
 
 
@@ -1746,7 +1722,7 @@ body.compact-view .content-block {
 
 
 
-    min-width: 80px;
+    min-width: 44px !important;
 
 
 
@@ -9970,11 +9946,11 @@ details[open]>summary .details-arrow {
 
 
 
-        min-width: 92px;
+        min-width: 44px !important;
 
 
 
-        padding-right: 28px;
+        padding-right: 0 !important;
 
 
 
@@ -10066,11 +10042,11 @@ details[open]>summary .details-arrow {
 
 
 
-        min-width: 80px;
+        min-width: 44px !important;
 
 
 
-        padding-right: 24px;
+        padding-right: 0 !important;
 
 
 
