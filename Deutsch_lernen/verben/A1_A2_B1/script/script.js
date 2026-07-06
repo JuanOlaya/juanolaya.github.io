@@ -1222,6 +1222,7 @@ async function loadBackgroundData() {
   }
 
   console.log("Remote version:", remoteVersion);
+  console.log("Actions build link: https://github.com/JuanOlaya/juanolaya.github.io/actions/");
 
   try {
 
