@@ -2735,7 +2735,7 @@ async function loadBackgroundData() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}">${a1testTag}</span>` : '';
+ const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}">⭐</span>` : '';
 
  const germanWord = document.createElement('div');
 
@@ -2999,7 +2999,7 @@ async function loadBackgroundData() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? ` <span class="a1test-badge case-tag-${a1testTag}" style="vertical-align: super; font-size: 0.9rem; padding: 1px 4px; margin-left: 6px;">${a1testTag}</span>` : '';
+ const a1testBadge = a1testTag ? ` <span class="a1test-badge case-tag-${a1testTag}" style="vertical-align: super; font-size: 0.9rem; padding: 1px 4px; margin-left: 6px;">⭐</span>` : '';
 
  // New Structure: Header (Word + Translation), Body (Tags Centered), No Emoji
 
@@ -3097,7 +3097,7 @@ async function loadBackgroundData() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}" style="margin-top: 4px; margin-left: 8px;">${a1testTag}</span>` : '';
+ const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}" style="margin-top: 4px; margin-left: 8px;">⭐</span>` : '';
 
  const emoji = verbData.emoji || '🔵œÂ';
 
@@ -3215,7 +3215,7 @@ async function loadBackgroundData() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? ` <span class="a1test-badge case-tag-${a1testTag}" style="padding: 1px 4px; font-size: 0.9rem; margin-left: 8px;">${a1testTag}</span>` : '';
+ const a1testBadge = a1testTag ? ` <span class="a1test-badge case-tag-${a1testTag}" style="padding: 1px 4px; font-size: 0.9rem; margin-left: 8px;">⭐</span>` : '';
 
  const displayVerb = formatVerbPrefix(verbName);
 
@@ -7281,7 +7281,7 @@ async function loadWortfamilieIndex() {
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
 
- const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}">${a1testTag}</span>` : '';
+ const a1testBadge = a1testTag ? `<span class="a1test-badge case-tag-${a1testTag}">⭐</span>` : '';
 
  cardHTML += `
 
@@ -8372,7 +8372,25 @@ async function loadWortfamilieIndex() {
 
     if (hasNote) {
 
-      const noteText = verbData.note_es || verbData.note;
+      let noteText = verbData.note_es || verbData.note;
+
+      const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
+
+      if (a1testTag) {
+
+        const badgeHTML = `<span class="a1test-badge case-tag-${a1testTag}" style="display: inline-block; padding: 1.5px 5px; font-size: 0.74rem; border-radius: 4px; font-weight: 800; margin-right: 5px;">${a1testTag}</span>`;
+
+        if (noteText.includes('<br>')) {
+
+          noteText = noteText.replace('<br>', `<br>${badgeHTML} `);
+
+        } else {
+
+          noteText = badgeHTML + ' ' + noteText;
+
+        }
+
+      }
 
       contentHTML += `<div class="note-highlight-card">${noteText}</div>`;
 
@@ -8817,8 +8835,17 @@ async function loadWortfamilieIndex() {
       window.renderWortschatzList(verbName, cardEl, activeVocab);
     } else if (tabId === 'saetze') {
       let html = '<div>';
-      const note = data.note_es || data.note || '';
+      let note = data.note_es || data.note || '';
       if (note) {
+        const a1testTag = data.case_tags ? data.case_tags.find(t => t.startsWith('A1')) : null;
+        if (a1testTag) {
+          const badgeHTML = `<span class="a1test-badge case-tag-${a1testTag}" style="display: inline-block; padding: 1.5px 5px; font-size: 0.74rem; border-radius: 4px; font-weight: 800; margin-right: 5px;">${a1testTag}</span>`;
+          if (note.includes('<br>')) {
+            note = note.replace('<br>', `<br>${badgeHTML} `);
+          } else {
+            note = badgeHTML + ' ' + note;
+          }
+        }
         html += `<div style="background: rgba(255,255,255,0.05); padding: 6px; border-radius: 6px; font-size: 0.74rem; margin-bottom: 6px; font-style: italic; color: #cbd5e1;">${note}</div>`;
       }
       const saetze = data.saetze || {};
