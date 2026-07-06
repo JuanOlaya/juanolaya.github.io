@@ -24049,3 +24049,12 @@ body.compact-view .top-navigation-header {
 body.compact-view .compact-nav-bar {
     box-shadow: 0 -8px 15px -8px rgba(0, 0, 0, 0.9) !important; /* Top-only shadow */
 }
+
+
+/* ==========================================
+   disable default card transitions on load via CSS specificity
+   ========================================== */
+
+body.compact-view .kompakt-level-card {
+    transition: none; /* Disables slide-in animation on load, while allowing inline JS overrides during drag gestures */
+}
