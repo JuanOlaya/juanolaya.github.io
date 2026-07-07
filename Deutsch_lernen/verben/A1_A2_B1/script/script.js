@@ -1249,10 +1249,12 @@ async function loadBackgroundData() {
       levelOrder.forEach(lvl => {
         const info = summary[lvl];
         if (info && info.groups > 0) {
-          console.log(`  %c${lvl}: %c${info.groups} groups, %c${info.verbs} verbs`, 
+          console.log(`  %c${lvl}: %c${info.groups}%c groups, %c${info.verbs}%c verbs`, 
                       'color: #e91e63; font-weight: bold;',
-                      'color: #9c27b0;',
-                      'color: #3f51b5;');
+                      'color: #ff9800; font-weight: bold;',
+                      'color: #ffffff;',
+                      'color: #ff9800; font-weight: bold;',
+                      'color: #ffffff;');
         }
       });
     }
