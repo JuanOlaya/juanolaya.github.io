@@ -26,12 +26,12 @@ function getGermanFormattedDate() {
         const tzOffsetPart = tzParts.find(p => p.type === 'timeZoneName');
         const tzOffset = tzOffsetPart ? tzOffsetPart.value : 'GMT+02:00';
         
-        return `_${partMap.year}-${partMap.month}-${partMap.day}  _T${partMap.hour}:${partMap.minute}:${partMap.second}  _${tzOffset}`;
+        return `${partMap.year}-${partMap.month}-${partMap.day}  T_${partMap.hour}:${partMap.minute}:${partMap.second}  ${tzOffset}`;
     } catch (e) {
         const iso = date.toISOString();
         const datePart = iso.substring(0, 10);
         const timePart = iso.substring(11, 19); // Omit milliseconds
-        return `_${datePart}  _T${timePart}  _GMT+00:00`;
+        return `${datePart}  T_${timePart}  GMT+00:00`;
     }
 }
 
