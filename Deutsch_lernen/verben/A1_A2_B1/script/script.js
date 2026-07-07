@@ -2535,331 +2535,239 @@ async function loadBackgroundData() {
 
  // --- KOMPAKT VERSION RENDER FUNCTION (Adverb Port / Slate-Mint) ---
 
- function renderCompactVersion() {
+function createCompactCardElement(group, groupIndex, chunk, chunkIndex, chunksCount, levelKey, query = "") {
+  const deSwitch = document.getElementById('de-switch');
+  const esSwitch = document.getElementById('es-switch');
+  const enSwitch = document.getElementById('en-switch');
+  const showGerman = deSwitch ? deSwitch.checked : true;
+  const showSpanish = esSwitch ? esSwitch.checked : true;
+  const showEnglish = enSwitch ? enSwitch.checked : false;
 
- cardsContainer.innerHTML = '';
+  const groupName = group.theme || group.germanName || group.groupNameGerman || `Gruppe ${groupIndex + 1}`;
+  const themeColor = standardColors[groupIndex % standardColors.length];
 
- const allGeneratedCards = [];
+  let cardTitleHTML = groupName;
+  if (chunksCount > 1) {
+    cardTitleHTML += ` <span class="kompakt-pagination">(${chunkIndex + 1}/${chunksCount})</span>`;
+  }
 
- document.body.classList.add('compact-view');
-
- document.body.classList.remove('light-version-global-dark');
-
- const deSwitch = document.getElementById('de-switch');
-
- const esSwitch = document.getElementById('es-switch');
-
- const enSwitch = document.getElementById('en-switch');
-
- const showGerman = deSwitch ? deSwitch.checked : true;
-
- const showSpanish = esSwitch ? esSwitch.checked : true;
-
- const showEnglish = enSwitch ? enSwitch.checked : false;
-
- // Disable group arrows because we show ALL groups for the current level at once
-
- if (navigationWrapper) {
-
- const groupNav = navigationWrapper.querySelector('.group-navigation');
-
- if (groupNav) groupNav.style.display = 'none';
-
- }
-
- const levelGroups = verbGroupsByLevel[currentLevel];
-
- if (!levelGroups) return;
-
- // Create the main grid container matching the adverbs layout
-
- const grid = document.createElement('div');
-
- grid.className = 'kompakt-grid';
-
- // Standard palette logic (fallback sequence if theme colors are missing)
-
- levelGroups.forEach((group, groupIndex) => {
-
- if (!group || !group.verbs) return;
-
- const groupName = group.theme || group.groupNameGerman || `Gruppe ${groupIndex + 1}`;
-
- const themeColor = standardColors[groupIndex % standardColors.length]; // Fallback rotation
-
- // Chunk verbs into strict maximums of 7 per card
-
- const chunkSize = 7;
-
- const chunks = [];
-
- for (let i = 0; i < group.verbs.length; i += chunkSize) {
-
- chunks.push(group.verbs.slice(i, i + chunkSize));
-
- }
-
- chunks.forEach((chunk, chunkIndex) => {
-
- // Formatting Card Title (add pagination if >1 chunk exists for this group)
-
- let cardTitleHTML = groupName;
-
- if (chunks.length > 1) {
-
- cardTitleHTML += ` <span class="kompakt-pagination">(${chunkIndex + 1}/${chunks.length})</span>`;
-
- }
-
- // Build Semantic Card
-
- const card = document.createElement('div');
-
- card.className = 'kompakt-level-card';
+  const card = document.createElement('div');
+  card.className = 'kompakt-level-card';
 
   const cardFront = document.createElement('div');
-
   cardFront.className = 'card-front';
-
- // Contrast check for Yellow (#FFD700) or other bright colors
-
- if (themeColor && (themeColor.toUpperCase() === '#FFD700' || themeColor.toLowerCase() === 'gold')) {
-
- card.classList.add('light-header');
-
- }
-
- // Header (Clickable Theme Title)
-
- const header = document.createElement('div');
-
- header.className = 'kompakt-level-header';
-
- header.style.backgroundColor = themeColor;
-
- header.style.cursor = 'default';
-
- // German side (left)
-
- const germanSpan = document.createElement('span');
-
- germanSpan.className = 'kompakt-header-de';
-
- germanSpan.innerHTML = cardTitleHTML;
-
- germanSpan.style.display = showGerman ? '' : 'none';
-
- germanSpan.style.cursor = 'pointer';
-
- germanSpan.title = 'Aussprache h??ren';
-
- germanSpan.onclick = (event) => {
-
- event.stopPropagation();
-
- window.speak(groupName);
-
- };
-
- // Spanish side (right)
-
- const spanishSpan = document.createElement('span');
-
- spanishSpan.className = 'kompakt-header-es';
-
- spanishSpan.textContent = group.spanishName || group.groupNameSpanish || '';
-
- spanishSpan.style.display = showSpanish ? '' : 'none';
-
- spanishSpan.style.cursor = 'pointer';
-
- spanishSpan.title = 'Themeninfos anzeigen';
-
- spanishSpan.onclick = (event) => {
-
- event.stopPropagation();
-
- openThemeModal(currentLevel, groupIndex);
-
- };
-
- header.appendChild(germanSpan);
-
- header.appendChild(spanishSpan);
-
- cardFront.appendChild(header);
-
- // Content Area containing rows
-
- const content = document.createElement('div');
-
- content.className = 'kompakt-level-content';
-
- chunk.forEach(verbName => {
-
- const verbData = allVerbsData[verbName];
-
- if (!verbData) return;
-
- const row = document.createElement('div');
-
- row.className = 'kompakt-row';
-
- row.setAttribute('data-verb', verbName);
-
- const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
-
- const reflBadge = isReflexive ? `<span class="reflexiv-badge">refl</span>` : '';
-
- const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
-
- const datBadge = isDativ ? `<span class="dativ-badge">dat</span>` : '';
-
- const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
-
- const intrBadge = isIntransitive ? `<span class="intr-badge">intr</span>` : '';
-
- const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
-
- const ikBadge = isIK ? `<span class="ik-badge">IK</span>` : '';
-
- const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
-
- const lidBadge = isLiD ? `<span class="lid-badge">LiD</span>` : '';
-
- const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
-
- const a1testBadge = a1testTag ? `<span style="margin-left: 5px; font-size: 0.67em;">⭐</span>` : '';
-
- const germanWord = document.createElement('div');
-
- germanWord.className = 'kompakt-german';
-
- const displayVerb = formatVerbPrefix(verbName);
-
- germanWord.innerHTML = `${displayVerb}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}`;
-
- germanWord.style.display = showGerman ? '' : 'none';
-
- germanWord.style.cursor = 'pointer';
-
- germanWord.title = 'Aussprache hören';
-
- germanWord.onclick = (e) => { e.stopPropagation(); window.speak(verbName === 'geboren werden' ? 'geboren' : verbName); };
-
- const translations = document.createElement('div');
-
- translations.className = 'kompakt-translations';
-
- const esTranslationLines = getCardTranslationLines(verbData).slice(0, 2);
-
- const isLong = esTranslationLines.length > 1 || (esTranslationLines[0] && esTranslationLines[0].length > 12);
-
- const spanishWord = document.createElement('div');
-
- spanishWord.className = 'kompakt-spanish' + (isLong ? ' long-translation' : '');
-
- spanishWord.innerHTML = esTranslationLines.map(line => `<div class="translation-line">${line}</div>`).join('');
-
- spanishWord.style.display = showSpanish ? '' : 'none';
-
- spanishWord.style.cursor = 'pointer';
-
- spanishWord.title = 'Details anzeigen';
-
- spanishWord.onclick = (e) => { e.stopPropagation(); showVerbDetailsInCard(verbName, card); };
-
- const englishWord = document.createElement('div');
-
- englishWord.className = 'kompakt-english';
-
- englishWord.textContent = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
-
- englishWord.style.display = showEnglish && englishWord.textContent ? '' : 'none';
-
- englishWord.style.cursor = 'pointer';
-
- englishWord.title = 'Details anzeigen';
-
- englishWord.onclick = (e) => { e.stopPropagation(); showVerbDetailsInCard(verbName, card); };
-
- row.appendChild(germanWord);
-
- translations.appendChild(spanishWord);
-
- translations.appendChild(englishWord);
-
- row.appendChild(translations);
-
- content.appendChild(row);
-
- });
-
- cardFront.appendChild(content);
-
- // Footer
-
- const footer = document.createElement('div');
-
- footer.className = 'card-footer';
-
- footer.style.backgroundColor = themeColor;
-
- const levelBadge = document.createElement('span');
-
- levelBadge.className = 'card-footer-tag card-footer-level';
-
- levelBadge.style.border = 'none';
-
- const rawLevel = group.level || currentLevel; // e.g. "A1.1"
-
- const formattedLevel = rawLevel.toUpperCase().replace(/([A-Z])(\d).*/, '$1$2'); // e.g. "A1"
-
- levelBadge.textContent = formattedLevel;
-
- const verbsLabel = document.createElement('span');
-
- verbsLabel.className = 'card-footer-tag';
-
- verbsLabel.textContent = showEnglish ? 'verbs' : 'verbos';
-
- footer.appendChild(levelBadge);
-
- footer.appendChild(verbsLabel);
-
- cardFront.appendChild(footer);
-
- card.appendChild(cardFront);
+  cardFront.style.display = 'flex';
+  cardFront.style.flexDirection = 'column';
+  cardFront.style.width = '100%';
+  cardFront.style.height = '100%';
+
+  if (themeColor && (themeColor.toUpperCase() === '#FFD700' || themeColor.toLowerCase() === 'gold')) {
+    card.classList.add('light-header');
+  }
+
+  const header = document.createElement('div');
+  header.className = 'kompakt-level-header';
+  header.style.backgroundColor = themeColor;
+  header.style.cursor = 'default';
+
+  const germanSpan = document.createElement('span');
+  germanSpan.className = 'kompakt-header-de';
+  germanSpan.innerHTML = cardTitleHTML;
+  germanSpan.style.display = showGerman ? 'inline' : 'none';
+  germanSpan.style.cursor = 'pointer';
+  germanSpan.title = 'Aussprache hören';
+  germanSpan.onclick = (event) => {
+    event.stopPropagation();
+    window.speak(groupName);
+  };
+
+  const spanishSpan = document.createElement('span');
+  spanishSpan.className = 'kompakt-header-es';
+  spanishSpan.textContent = group.spanishName || group.groupNameSpanish || '';
+  spanishSpan.style.display = showSpanish ? 'inline' : 'none';
+  spanishSpan.style.cursor = 'pointer';
+  spanishSpan.title = 'Themeninfos anzeigen';
+  spanishSpan.onclick = (event) => {
+    event.stopPropagation();
+    openThemeModal(levelKey, groupIndex);
+  };
+
+  header.appendChild(germanSpan);
+  header.appendChild(spanishSpan);
+  cardFront.appendChild(header);
+
+  const content = document.createElement('div');
+  content.className = 'kompakt-level-content';
+
+  chunk.forEach(verbName => {
+    const verbData = allVerbsData[verbName];
+    if (!verbData) return;
+
+    const row = document.createElement('div');
+    row.className = 'kompakt-row';
+    row.setAttribute('data-verb', verbName);
+    row.style.cursor = 'pointer';
+    row.title = 'Details anzeigen';
+    row.onclick = (e) => {
+      e.stopPropagation();
+      window.showVerbDetailsInCard(verbName, card);
+    };
+
+    const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
+    const reflBadge = isReflexive ? `<span class="reflexiv-badge">refl</span>` : '';
+    const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
+    const datBadge = isDativ ? `<span class="dativ-badge">dat</span>` : '';
+    const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
+    const intrBadge = isIntransitive ? `<span class="intr-badge">intr</span>` : '';
+    const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
+    const ikBadge = isIK ? `<span class="ik-badge">IK</span>` : '';
+    const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
+    const lidBadge = isLiD ? `<span class="lid-badge">LiD</span>` : '';
+    const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
+    const a1testBadge = a1testTag ? `<span style="margin-left: 5px; font-size: 0.67em;"></span>` : '';
+
+    const germanWord = document.createElement('div');
+    germanWord.className = 'kompakt-german';
+    
+    let displayVerbName = formatVerbPrefix(verbName);
+    if (query) {
+      displayVerbName = highlightVerbName(verbName, query);
+      const matchHint = getMatchHint({ verb: verbName, data: verbData, levelKey: levelKey });
+      if (!verbName.toLowerCase().includes(query) && matchHint) {
+        displayVerbName = `${highlightBaseVerb(verbName === 'geboren werden' ? 'geboren' : formatVerbPrefix(verbName))} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, query)})</span>`;
+      }
+    }
+    
+    germanWord.innerHTML = `${displayVerbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}`;
+    germanWord.style.display = showGerman ? 'block' : 'none';
+    germanWord.style.cursor = 'pointer';
+    germanWord.title = 'Aussprache hören';
+    germanWord.onclick = (e) => {
+      e.stopPropagation();
+      window.speak(verbName === 'geboren werden' ? 'geboren' : verbName);
+    };
+
+    const translations = document.createElement('div');
+    translations.className = 'kompakt-translations';
+
+    const esTranslationLines = getCardTranslationLines(verbData).slice(0, 2);
+    const isLong = esTranslationLines.length > 1 || (esTranslationLines[0] && esTranslationLines[0].length > 12);
+
+    const spanishWord = document.createElement('div');
+    spanishWord.className = 'kompakt-spanish' + (isLong ? ' long-translation' : '');
+    
+    if (query) {
+      spanishWord.innerHTML = esTranslationLines.map(line => `<div class="translation-line">${highlightMatch(line, query)}</div>`).join('');
+    } else {
+      spanishWord.innerHTML = esTranslationLines.map(line => `<div class="translation-line">${line}</div>`).join('');
+    }
+    
+    spanishWord.style.display = showSpanish ? 'block' : 'none';
+    spanishWord.style.cursor = 'pointer';
+    spanishWord.title = 'Details anzeigen';
+    spanishWord.onclick = (e) => {
+      e.stopPropagation();
+      window.showVerbDetailsInCard(verbName, card);
+    };
+
+    const englishWord = document.createElement('div');
+    englishWord.className = 'kompakt-english';
+    const enTranslationRaw = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
+    
+    if (query) {
+      englishWord.innerHTML = highlightMatch(enTranslationRaw, query);
+    } else {
+      englishWord.textContent = enTranslationRaw;
+    }
+    
+    englishWord.style.display = showEnglish && enTranslationRaw ? 'block' : 'none';
+    englishWord.style.cursor = 'pointer';
+    englishWord.title = 'Details anzeigen';
+    englishWord.onclick = (e) => {
+      e.stopPropagation();
+      window.showVerbDetailsInCard(verbName, card);
+    };
+
+    row.appendChild(germanWord);
+    translations.appendChild(spanishWord);
+    translations.appendChild(englishWord);
+    row.appendChild(translations);
+    content.appendChild(row);
+  });
+
+  cardFront.appendChild(content);
+
+  const footer = document.createElement('div');
+  footer.className = 'card-footer';
+  footer.style.backgroundColor = themeColor;
+
+  const levelBadge = document.createElement('span');
+  levelBadge.className = 'card-footer-tag card-footer-level';
+  levelBadge.style.border = 'none';
+
+  const rawLevel = group.level || levelKey;
+  const formattedLevel = rawLevel.toUpperCase().replace(/([A-Z])(\d).*/, '$1$2');
+  levelBadge.textContent = formattedLevel;
+
+  const verbsLabel = document.createElement('span');
+  verbsLabel.className = 'card-footer-tag';
+  verbsLabel.textContent = showEnglish ? 'verbs' : 'verbos';
+
+  footer.appendChild(levelBadge);
+  footer.appendChild(verbsLabel);
+  cardFront.appendChild(footer);
+
+  card.appendChild(cardFront);
 
   const cardBack = document.createElement('div');
-
   cardBack.className = 'card-back';
-
   cardBack.style.display = 'none';
-
   card.appendChild(cardBack);
 
   card.style.setProperty('--card-theme', themeColor);
-
   const rgbString = hexToRgb(themeColor);
-
   card.style.setProperty('--card-theme-rgb', rgbString);
 
-  allGeneratedCards.push(card);
+  return card;
+}
 
- });
+function renderCompactVersion() {
+  cardsContainer.innerHTML = '';
+  const allGeneratedCards = [];
+  document.body.classList.add('compact-view');
+  document.body.classList.remove('light-version-global-dark');
 
- });
+  // Disable group arrows because we show ALL groups for the current level at once
+  if (navigationWrapper) {
+    const groupNav = navigationWrapper.querySelector('.group-navigation');
+    if (groupNav) groupNav.style.display = 'none';
+  }
 
- window.allCompactCards = allGeneratedCards;
+  const levelGroups = verbGroupsByLevel[currentLevel];
+  if (!levelGroups) return;
 
- window.currentCompactCardIndex = 0;
+  const levelGroupsToRender = levelGroups;
 
- window.updateCompactView();
+  levelGroupsToRender.forEach((group, groupIndex) => {
+    if (!group || !group.verbs) return;
 
- updateIndicatorsForView(levelGroups[currentGroupInLevel] || levelGroups[0]);
+    const chunkSize = 7;
+    const chunks = [];
+    for (let i = 0; i < group.verbs.length; i += chunkSize) {
+      chunks.push(group.verbs.slice(i, i + chunkSize));
+    }
 
- }
+    chunks.forEach((chunk, chunkIndex) => {
+      const card = createCompactCardElement(group, groupIndex, chunk, chunkIndex, chunks.length, currentLevel);
+      allGeneratedCards.push(card);
+    });
+  });
+
+  window.allCompactCards = allGeneratedCards;
+  window.currentCompactCardIndex = 0;
+  window.updateCompactView();
+  updateIndicatorsForView(levelGroups[currentGroupInLevel] || levelGroups[0]);
+}
 
  // Helper to update indicators (shared between Light and Compact)
 
@@ -6438,8 +6346,7 @@ async function loadWortfamilieIndex() {
 
  if (!searchInput) return;
   console.log("performSearch called with query:", searchInput.value);
-
- const searchTerm = normalizeSearchValue(searchInput.value.trim());
+const searchTerm = normalizeSearchValue(searchInput.value.trim());
 
  // Unified Search: We now search both Verbs and Wortfamilie
 
@@ -6475,33 +6382,24 @@ async function loadWortfamilieIndex() {
 
  // Only search if 2+ characters
 
- if (searchTerm.length < 2) {
-
- // Show all cards in current group
-
- const allCards = cardsContainer.querySelectorAll('.word-item');
-
- allCards.forEach(card => {
-
- card.style.display = '';
-
- });
-
- if (searchCounter) searchCounter.textContent = '';
-
- // Re-enable level indicator
-
- if (levelIndicator) {
-
- levelIndicator.style.opacity = '1';
-
- levelIndicator.style.pointerEvents = 'auto';
-
- }
-
- return;
-
- }
+  if (searchTerm.length < 2) {
+    if (currentViewMode === 'compact' || currentViewMode === 'kompakt') {
+      window.updateCompactView();
+    } else {
+      // Show all cards in current group
+      const allCards = cardsContainer.querySelectorAll('.word-item');
+      allCards.forEach(card => {
+        card.style.display = '';
+      });
+    }
+    if (searchCounter) searchCounter.textContent = '';
+    // Re-enable level indicator
+    if (levelIndicator) {
+      levelIndicator.style.opacity = '1';
+      levelIndicator.style.pointerEvents = 'auto';
+    }
+    return;
+  }
 
  // Disable level indicator during search
 
@@ -7086,225 +6984,30 @@ async function loadWortfamilieIndex() {
 
  const renderFullSearchCards = false;
 
- if (!renderFullSearchCards && (currentViewMode === 'compact' || currentViewMode === 'kompakt')) {
-
- const deSwitch = document.getElementById('de-switch');
-
- const esSwitch = document.getElementById('es-switch');
-
- const enSwitch = document.getElementById('en-switch');
-
- const showGerman = deSwitch ? deSwitch.checked : true;
-
- const showSpanish = esSwitch ? esSwitch.checked : true;
-
- const showEnglish = enSwitch ? enSwitch.checked : false;
-
- const groupedMatches = {};
-
- verbsToShow.forEach(match => {
-
- const verbData = match.data;
-
- const level = match.levelKey || (verbData.level ? verbData.level.split('.')[0] : 'A1');
-
- const groupIndex = Number.isInteger(match.groupIndexInLevel)
-
- ? match.groupIndexInLevel
-
- : (verbData.group ? verbData.group - 1 : 0);
-
- const resolvedGroup = verbGroupsByLevel[level] && verbGroupsByLevel[level][groupIndex]
-
- ? verbGroupsByLevel[level][groupIndex]
-
- : null;
-
- let theme = resolvedGroup
-
- ? (resolvedGroup.theme || resolvedGroup.germanName || resolvedGroup.groupNameGerman || 'Gruppe')
-
- : (verbData.theme || 'Gruppe');
-
- const groupKey = `${level}-${theme}`;
-
- if (!groupedMatches[groupKey]) {
-
- const spanishName = resolvedGroup
-
- ? (resolvedGroup.spanishName || resolvedGroup.groupNameSpanish || '')
-
- : '';
-
- const fullGroupVerbs = resolvedGroup && Array.isArray(resolvedGroup.verbs)
-
- ? resolvedGroup.verbs.map(groupVerbName => ({
-
- verb: groupVerbName,
-
- data: allVerbsData[groupVerbName] || {},
-
- levelKey: level,
-
- groupIndexInLevel: groupIndex
-
- }))
-
- : [];
-
- groupedMatches[groupKey] = {
-
- level: level,
-
- theme: theme,
-
- spanishName: spanishName,
-
- groupIndex: groupIndex,
-
- verbs: fullGroupVerbs.length > 0 ? fullGroupVerbs : [match]
-
- };
-
- }
-
- });
-
- htmlFragments.push('<div class="kompakt-grid">');
-
- Object.values(groupedMatches).forEach((group) => {
-
- const themeColor = standardColors[group.groupIndex % standardColors.length];
-
- const chunkSize = 7;
-
- const chunks = [];
-
- for (let i = 0; i < group.verbs.length; i += chunkSize) {
-
- chunks.push(group.verbs.slice(i, i + chunkSize));
-
- }
-
- chunks.forEach((chunk, chunkIndex) => {
-
- let cardTitleHTML = group.theme || group.groupNameGerman || 'Gruppe';
-
- if (chunks.length > 1) {
-
- cardTitleHTML += ` <span class="kompakt-pagination">(${chunkIndex + 1}/${chunks.length})</span>`;
-
- }
-
- let cardHTML = `
-
- <div class="kompakt-level-card">
-   <div class="card-front" style="display: flex; flex-direction: column; width: 100%; height: 100%;">
-     <div class="kompakt-level-header" style="background-color: ${themeColor}; cursor: default;">
-       <span class="kompakt-header-de" onclick="event.stopPropagation(); window.speak('${group.theme || group.groupNameGerman || 'Gruppe'}')" title="Aussprache hören" style="cursor: pointer; display: ${showGerman ? 'inline' : 'none'};">${cardTitleHTML}</span>
-       <span class="kompakt-header-es" onclick="event.stopPropagation(); openThemeModal('${group.level}', ${group.groupIndex})" title="Themeninfos anzeigen" style="cursor: pointer; display: ${showSpanish ? 'inline' : 'none'};">${group.spanishName || group.groupNameSpanish || ''}</span>
-     </div>
-     <div class="kompakt-level-content">
-
- `;
-
- chunk.forEach(match => {
-
- const verbName = match.verb;
-
- const verbData = match.data;
-
- const matchHint = getMatchHint(match);
-
- let displayVerbName = highlightVerbName(verbName, searchTerm);
-
- if (!verbName.toLowerCase().includes(searchTerm) && matchHint) {
-
- displayVerbName = `${highlightBaseVerb(verbName === 'geboren werden' ? 'geboren' : formatVerbPrefix(verbName))} <span class="search-match-hint" style="font-size: 0.78em; opacity: 0.82; margin-left: 6px;">(${highlightMatch(matchHint, searchTerm)})</span>`;
-
- }
-
- const esTranslationRaw = getCardTranslation(verbData);
-
- const esTranslationLinesRaw = getCardTranslationLines(verbData).slice(0, 2);
-
- const isLong = esTranslationLinesRaw.length > 1 || (esTranslationLinesRaw[0] && esTranslationLinesRaw[0].length > 12);
-
- const esTranslationDisplay = esTranslationLinesRaw.map(line => `<div class="translation-line">${highlightMatch(line, searchTerm)}</div>`).join('');
-
- const enTranslationRaw = (verbData.en_verb || '').replace(/^\(?(to\s+)?|\)$/gi, '').trim();
-
- const enTranslationDisplay = highlightMatch(enTranslationRaw, searchTerm);
-
- const isReflexive = verbData.case_tags && verbData.case_tags.includes('Reflexiv');
-
- const reflBadge = isReflexive ? `<span class="reflexiv-badge">refl</span>` : '';
-
- const isDativ = verbData.case_tags && verbData.case_tags.includes('DAT');
-
- const datBadge = isDativ ? `<span class="dativ-badge">dat</span>` : '';
-
- const isIntransitive = verbData.case_tags && verbData.case_tags.includes('INTR');
-
- const intrBadge = isIntransitive ? `<span class="intr-badge">intr</span>` : '';
-
- const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
-
- const ikBadge = isIK ? `<span class="ik-badge">IK</span>` : '';
-
- const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
-
- const lidBadge = isLiD ? `<span class="lid-badge">LiD</span>` : '';
-
- const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;
-
- const a1testBadge = a1testTag ? `<span style="margin-left: 5px; font-size: 0.67em;">⭐</span>` : '';
-
- cardHTML += `
-
- <div class="kompakt-row" data-verb="${verbName}" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" title="Details anzeigen" style="cursor: pointer;">
-
- <div class="kompakt-german" onclick="event.stopPropagation(); window.speak('${verbName === 'geboren werden' ? 'geboren' : verbName}')" title="Aussprache hören" style="cursor: pointer; display: ${showGerman ? 'block' : 'none'};">${displayVerbName}${reflBadge}${datBadge}${intrBadge}${ikBadge}${lidBadge}${a1testBadge}</div>
-
- <div class="kompakt-translations">
-
- <div class="kompakt-spanish${isLong ? ' long-translation' : ''}" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" title="Details anzeigen" style="cursor: pointer; display: ${showSpanish ? 'block' : 'none'};">${esTranslationDisplay}</div>
-
- <div class="kompakt-english" onclick="event.stopPropagation(); window.showVerbDetailsInCard('${verbName}', this.closest('.kompakt-level-card'))" title="Details anzeigen" style="cursor: pointer; display: ${showEnglish && enTranslationRaw ? 'block' : 'none'};">${enTranslationDisplay}</div>
-
- </div>
-
- </div>
-
- `;
-
- });
-
- const rawLevel = group.level || '';
-
- const formattedLevel = rawLevel.toUpperCase().replace(/([A-Z])(\d).*/, '$1$2');
-
- const verbsLabelText = showEnglish ? 'verbs' : 'verbos';
-
- cardHTML += `
-
-     </div>
-     <div class="card-footer" style="background-color: ${themeColor};">
-       <span class="card-footer-tag card-footer-level" style="border: none;">${formattedLevel}</span>
-       <span class="card-footer-tag">${verbsLabelText}</span>
-     </div>
-   </div>
-   <div class="card-back" style="display: none;"></div>
- </div>`;
-
- htmlFragments.push(cardHTML);
-
- });
-
- });
-
- htmlFragments.push('</div>');
-
+  if (!renderFullSearchCards && (currentViewMode === 'compact' || currentViewMode === 'kompakt')) {
+    const searchGeneratedCards = [];
+    Object.values(groupedMatches).forEach((group) => {
+      const resolvedGroup = verbGroupsByLevel[group.level] && verbGroupsByLevel[group.level][group.groupIndex]
+        ? verbGroupsByLevel[group.level][group.groupIndex]
+        : null;
+      if (!resolvedGroup) return;
+
+      const chunkSize = 7;
+      const chunks = [];
+      for (let i = 0; i < group.verbs.length; i += chunkSize) {
+        chunks.push(group.verbs.slice(i, i + chunkSize));
+      }
+
+      chunks.forEach((chunk, chunkIndex) => {
+        const chunkVerbsOnly = chunk.map(v => v.verb);
+        const card = createCompactCardElement(resolvedGroup, group.groupIndex, chunkVerbsOnly, chunkIndex, chunks.length, group.level, searchTerm);
+        searchGeneratedCards.push(card);
+      });
+    });
+
+    window.allCompactCards = searchGeneratedCards;
+    window.currentCompactCardIndex = 0;
+    window.updateCompactView();
  } else {
 
  verbsToShow.forEach(match => {
