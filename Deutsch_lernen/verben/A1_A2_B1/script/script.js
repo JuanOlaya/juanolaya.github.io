@@ -1208,22 +1208,55 @@ async function loadBackgroundData() {
     const vRes = await fetch('json/verbs_index.json?t=' + Date.now(), { cache: 'no-cache' });
 
  if (vRes.ok) {
+    const vData = await parseJsonUtf8(vRes);
+    remoteVersion = vData.lastUpdated;
+    allGroupsIndex = Array.isArray(vData.groups) ? vData.groups : allGroupsIndex;
+    if (allGroupsIndex.length > 0) autoConfigureLevelsFromGroups(allGroupsIndex);
 
- const vData = await parseJsonUtf8(vRes);
+    if (remoteVersion) {
+      appVersion = remoteVersion.replace(/\s+/g, '_').replace(/:/g, '-');
+    }
 
- remoteVersion = vData.lastUpdated;
+    console.log("Remote version:", remoteVersion);
+    console.log("Actions build link: https://github.com/JuanOlaya/juanolaya.github.io/actions/");
 
- allGroupsIndex = Array.isArray(vData.groups) ? vData.groups : allGroupsIndex;
+    if (Array.isArray(vData.groups)) {
+      const summary = {};
+      let totalVerbs = 0;
+      let totalGroups = vData.groups.length;
+      const levelOrder = ["A1.1", "A1.2", "A2.1", "A2.2", "B1.1", "B2.1"];
+      levelOrder.forEach(l => {
+        summary[l] = { groups: 0, verbs: 0 };
+      });
+      vData.groups.forEach(g => {
+        const lvl = g.level;
+        if (!summary[lvl]) {
+          summary[lvl] = { groups: 0, verbs: 0 };
+        }
+        summary[lvl].groups += 1;
+        const count = Array.isArray(g.verbs) ? g.verbs.length : (g.verbCount || 0);
+        summary[lvl].verbs += count;
+        totalVerbs += count;
+      });
 
- if (allGroupsIndex.length > 0) autoConfigureLevelsFromGroups(allGroupsIndex);
-
- if (remoteVersion) {
-    appVersion = remoteVersion.replace(/\s+/g, '_').replace(/:/g, '-');
+      console.log('%cUpdating verbs index...', 'color: #9e9e9e;');
+      console.log('%c✓ Index updated: %c%d verbs %cacross %c%d groups', 
+                  'color: #4CAF50; font-weight: bold;', 
+                  'color: #00bcd4; font-weight: bold;', totalVerbs,
+                  'color: #4CAF50; font-weight: bold;',
+                  'color: #00bcd4; font-weight: bold;', totalGroups);
+      console.log('%cSummary by level:', 'color: #ff9800; font-weight: bold;');
+      levelOrder.forEach(lvl => {
+        const info = summary[lvl];
+        if (info && info.groups > 0) {
+          console.log(`  %c${lvl}: %c${info.groups} groups, %c${info.verbs} verbs`, 
+                      'color: #e91e63; font-weight: bold;',
+                      'color: #9c27b0;',
+                      'color: #3f51b5;');
+        }
+      });
+    }
   }
-
-  console.log("Remote version:", remoteVersion);
-  console.log("Actions build link: https://github.com/JuanOlaya/juanolaya.github.io/actions/");
-
   try {
 
     const stylesLink = document.querySelector('link[href*="styles.css"]');
