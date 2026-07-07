@@ -6342,6 +6342,80 @@ async function loadWortfamilieIndex() {
 
  }
 
+ // --- Whole-Word Regex Highlighter ---
+
+ function highlightMatch(text, query) {
+
+ if (!query || !text) return text;
+
+ const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+ // Matches any whole word (\b...\b) containing the query sequence including trailing/leading German characters
+
+ const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
+
+ return text.replace(regex, (match) =>
+
+ `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${match}</span>`
+
+ );
+
+ }
+
+ function highlightBaseVerb(text) {
+
+ if (!text) return text;
+
+ return `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${text}</span>`;
+
+ }
+
+ function highlightVerbName(verbName, query) {
+
+ if (!verbName) return '';
+
+ if (verbName === 'geboren werden') {
+
+ return highlightMatch('geboren', query);
+
+ }
+
+ if (separablePrefixesMap[verbName]) {
+
+ const prefix = separablePrefixesMap[verbName];
+
+ if (verbName.startsWith(prefix)) {
+
+ const highlightedPrefix = highlightMatch(prefix, query);
+
+ const highlightedSuffix = highlightMatch(verbName.slice(prefix.length), query);
+
+ return `<span class="separable-prefix">${highlightedPrefix}</span>${highlightedSuffix}`;
+
+ }
+
+ }
+
+ return highlightMatch(verbName, query);
+
+ }
+
+ function getMatchHint(match) {
+
+ return match.matchedPraesensForm ||
+
+ match.matchedPerfektForm ||
+
+ match.matchedPraeteritumForm ||
+
+ match.matchedKonjunktivForm ||
+
+ match.matchedRelatedForm ||
+
+ '';
+
+ }
+
  async function performSearch() {
 
  if (!searchInput) return;
@@ -6908,79 +6982,6 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
 
  const htmlFragments = [];
 
- // --- Whole-Word Regex Highlighter ---
-
- function highlightMatch(text, query) {
-
- if (!query || !text) return text;
-
- const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
- // Matches any whole word (\b...\b) containing the query sequence including trailing/leading German characters
-
- const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
-
- return text.replace(regex, (match) =>
-
- `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${match}</span>`
-
- );
-
- }
-
- function highlightBaseVerb(text) {
-
- if (!text) return text;
-
- return `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${text}</span>`;
-
- }
-
- function highlightVerbName(verbName, query) {
-
- if (!verbName) return '';
-
- if (verbName === 'geboren werden') {
-
- return highlightMatch('geboren', query);
-
- }
-
- if (separablePrefixesMap[verbName]) {
-
- const prefix = separablePrefixesMap[verbName];
-
- if (verbName.startsWith(prefix)) {
-
- const highlightedPrefix = highlightMatch(prefix, query);
-
- const highlightedSuffix = highlightMatch(verbName.slice(prefix.length), query);
-
- return `<span class="separable-prefix">${highlightedPrefix}</span>${highlightedSuffix}`;
-
- }
-
- }
-
- return highlightMatch(verbName, query);
-
- }
-
- function getMatchHint(match) {
-
- return match.matchedPraesensForm ||
-
- match.matchedPerfektForm ||
-
- match.matchedPraeteritumForm ||
-
- match.matchedKonjunktivForm ||
-
- match.matchedRelatedForm ||
-
- '';
-
- }
 
  const renderFullSearchCards = false;
 
