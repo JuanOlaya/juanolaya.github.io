@@ -7928,7 +7928,7 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
     // Configure top-right button as Close button (x)
     const actionBtn = cardBack.querySelector('#card-back-header-action-btn') || cardBack.querySelector('.card-back-close-btn');
     if (actionBtn) {
-      actionBtn.innerHTML = '&times;';
+      actionBtn.innerHTML = `<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>`;
       actionBtn.onclick = (e) => {
         e.stopPropagation();
         cardBack.style.display = 'none';
@@ -8043,7 +8043,7 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
     // Configure top-right button as Back button (larr/flip icon)
     const actionBtn = cardBack.querySelector('#card-back-header-action-btn') || cardBack.querySelector('.card-back-close-btn');
     if (actionBtn) {
-      actionBtn.innerHTML = `<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h9a2 2 0 0 1 2 2v9" opacity="0.4"></path><rect x="4" y="8" width="10" height="11" rx="1.5"></rect><path d="M14 10c2-1 4 .5 4 2.5v1.5"></path><polyline points="16 13 18 15 20 13"></polyline></svg>`;
+      actionBtn.innerHTML = `<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>`;
       actionBtn.onclick = (e) => {
         e.stopPropagation();
         window.renderCardBackMenu(verbName, cardEl);
