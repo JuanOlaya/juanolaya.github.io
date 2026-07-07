@@ -6405,33 +6405,42 @@ async function loadWortfamilieIndex() {
  }
 
  function highlightVerbName(verbName, query) {
+   if (!verbName) return '';
+   
+   if (verbName === 'geboren werden') {
+     const escapedQuery = query.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&');
+     const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
+     if (query && regex.test('geboren')) {
+       return `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">geboren</span> werden`;
+     }
+     return 'geboren werden';
+   }
 
- if (!verbName) return '';
-
- if (verbName === 'geboren werden') {
-
- return highlightMatch('geboren', query);
-
- }
-
- if (separablePrefixesMap[verbName]) {
-
- const prefix = separablePrefixesMap[verbName];
-
- if (verbName.startsWith(prefix)) {
-
- const highlightedPrefix = highlightMatch(prefix, query);
-
- const highlightedSuffix = highlightMatch(verbName.slice(prefix.length), query);
-
- return `<span class="separable-prefix">${highlightedPrefix}</span>${highlightedSuffix}`;
-
- }
-
- }
-
- return highlightMatch(verbName, query);
-
+   const prefix = separablePrefixesMap[verbName];
+   const isSeparable = prefix && verbName.startsWith(prefix);
+   
+   if (!query) {
+     if (isSeparable) {
+       return `<span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}`;
+     }
+     return verbName;
+   }
+   
+   const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+   const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
+   
+   if (regex.test(verbName)) {
+     if (isSeparable) {
+       return `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;"><span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}</span>`;
+     } else {
+       return `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${verbName}</span>`;
+     }
+   }
+   
+   if (isSeparable) {
+     return `<span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}`;
+   }
+   return verbName;
  }
 
  function getMatchHint(match) {
