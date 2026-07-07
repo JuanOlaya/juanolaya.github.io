@@ -6985,6 +6985,42 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
  const renderFullSearchCards = false;
 
   if (!renderFullSearchCards && (currentViewMode === 'compact' || currentViewMode === 'kompakt')) {
+    const groupedMatches = {};
+    verbsToShow.forEach(match => {
+      const verbData = match.data;
+      const level = match.levelKey || (verbData.level ? verbData.level.split('.')[0] : 'A1');
+      const groupIndex = Number.isInteger(match.groupIndexInLevel)
+        ? match.groupIndexInLevel
+        : (verbData.group ? verbData.group - 1 : 0);
+      const resolvedGroup = verbGroupsByLevel[level] && verbGroupsByLevel[level][groupIndex]
+        ? verbGroupsByLevel[level][groupIndex]
+        : null;
+      let theme = resolvedGroup
+        ? (resolvedGroup.theme || resolvedGroup.germanName || resolvedGroup.groupNameGerman || 'Gruppe')
+        : (verbData.theme || 'Gruppe');
+      const groupKey = `${level}-${theme}`;
+      if (!groupedMatches[groupKey]) {
+        const spanishName = resolvedGroup
+          ? (resolvedGroup.spanishName || resolvedGroup.groupNameSpanish || '')
+          : '';
+        const fullGroupVerbs = resolvedGroup && Array.isArray(resolvedGroup.verbs)
+          ? resolvedGroup.verbs.map(groupVerbName => ({
+              verb: groupVerbName,
+              data: allVerbsData[groupVerbName] || {},
+              levelKey: level,
+              groupIndexInLevel: groupIndex
+            }))
+          : [];
+        groupedMatches[groupKey] = {
+          level: level,
+          theme: theme,
+          spanishName: spanishName,
+          groupIndex: groupIndex,
+          verbs: fullGroupVerbs.length > 0 ? fullGroupVerbs : [match]
+        };
+      }
+    });
+
     const searchGeneratedCards = [];
     Object.values(groupedMatches).forEach((group) => {
       const resolvedGroup = verbGroupsByLevel[group.level] && verbGroupsByLevel[group.level][group.groupIndex]
@@ -7008,7 +7044,6 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
     window.allCompactCards = searchGeneratedCards;
     window.currentCompactCardIndex = 0;
     window.updateCompactView();
- } else {
 
  verbsToShow.forEach(match => {
 
