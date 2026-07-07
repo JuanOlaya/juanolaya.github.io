@@ -1277,7 +1277,6 @@ async function loadBackgroundData() {
 
   }
 
-  }
 
  } catch (e) {
 
