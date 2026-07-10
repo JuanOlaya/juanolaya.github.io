@@ -8462,10 +8462,7 @@ function setupCardDrag(cardElement) {
     let hasMoved = false;
     const threshold = 80;
 
-    // Mouse events
-    cardElement.addEventListener('mousedown', startDrag);
-    window.addEventListener('mousemove', drag);
-    window.addEventListener('mouseup', endDrag);
+    // Mouse events disabled on desktop
 
     // Touch events
     cardElement.addEventListener('touchstart', startDrag, { passive: true });
