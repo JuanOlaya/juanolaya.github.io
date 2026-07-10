@@ -16527,6 +16527,7 @@ body.compact-view #verb-modal .modal-content {
 
 
 body.compact-view .cards-container {
+    cursor: default !important;
 
 
 
@@ -23381,6 +23382,7 @@ body.compact-light-mode:not(.hide-separable-prefixes) .separable-prefix,
 }
 
 body.compact-view .cards-container {
+    cursor: default !important;
     min-height: auto !important;
 }
 
