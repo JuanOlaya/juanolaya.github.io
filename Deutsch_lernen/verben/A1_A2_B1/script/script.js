@@ -8451,6 +8451,9 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
   }
 
 function setupCardDrag(cardElement) {
+    const { isDesktop } = getPageSizeAndDevice();
+    if (isDesktop) return; // Disable card dragging on desktop!
+
     if (cardElement.dataset.dragSetup === 'true') return;
     cardElement.dataset.dragSetup = 'true';
     let startX = 0;
