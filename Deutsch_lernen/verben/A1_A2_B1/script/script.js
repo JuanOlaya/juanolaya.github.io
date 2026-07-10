@@ -8442,9 +8442,9 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
     if (width < 768) {
       return { pageSize: 1, isPhone: true, isTablet: false, isDesktop: false };
     } else if (width <= 1024) {
-      return { pageSize: 2, isPhone: false, isTablet: true, isDesktop: false };
+      return { pageSize: 3, isPhone: false, isTablet: true, isDesktop: false };
     } else {
-      return { pageSize: 3, isPhone: false, isTablet: false, isDesktop: true };
+      return { pageSize: 4, isPhone: false, isTablet: false, isDesktop: true };
     }
   }
 
@@ -8558,6 +8558,16 @@ function setupCardDrag(cardElement) {
     visibleCards.forEach(card => {
       card.style.transform = 'none';
       card.style.transition = 'none';
+      
+      // Calculate responsive card width to fit perfectly on different screens
+      const margin = 10;
+      const containerWidth = window.innerWidth * 0.95;
+      const calculatedWidth = Math.floor(containerWidth / pageSize) - (margin * 2);
+      const finalWidth = Math.max(280, Math.min(350, calculatedWidth));
+      card.style.width = `${finalWidth}px`;
+      card.style.maxWidth = '90vw';
+      card.style.flexShrink = '0';
+      
       grid.appendChild(card);
       setupCardDrag(card); // Enable swipe/drag navigation!
     });
