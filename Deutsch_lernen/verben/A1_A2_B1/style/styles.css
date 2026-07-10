@@ -23578,11 +23578,12 @@ body.compact-view .compact-nav-bar {
 
 /* 6. Larger Back and Next buttons to balance the header level options */
 body.compact-view .compact-nav-btn {
+    font-family: inherit !important;
     height: 44px !important;
     max-width: 120px !important;
     padding: 0 24px !important;
     font-size: 0.98rem !important;
-    font-weight: 800 !important;
+    font-weight: 500 !important;
     border-radius: 22px !important;
     display: inline-flex !important;
     align-items: center !important;

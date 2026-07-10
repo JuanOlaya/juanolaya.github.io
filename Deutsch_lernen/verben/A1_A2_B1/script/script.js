@@ -8547,9 +8547,10 @@ function setupCardDrag(cardElement) {
     grid.className = 'kompakt-grid';
     const { pageSize, isPhone } = getPageSizeAndDevice();
 
+    const maxIndex = Math.max(0, window.allCompactCards.length - pageSize);
     if (window.currentCompactCardIndex < 0) window.currentCompactCardIndex = 0;
-    if (window.currentCompactCardIndex >= window.allCompactCards.length) {
-      window.currentCompactCardIndex = Math.max(0, window.allCompactCards.length - pageSize);
+    if (window.currentCompactCardIndex > maxIndex) {
+      window.currentCompactCardIndex = maxIndex;
     }
 
     const visibleCards = window.allCompactCards.slice(
@@ -8596,7 +8597,7 @@ function setupCardDrag(cardElement) {
     dotsContainer.className = 'compact-nav-dots';
 
     const totalPages = Math.ceil(window.allCompactCards.length / pageSize);
-    const currentPage = Math.floor(window.currentCompactCardIndex / pageSize);
+    const currentPage = (maxIndex === 0) ? 0 : Math.round((window.currentCompactCardIndex / maxIndex) * (totalPages - 1));
 
     if (isPhone) {
       const pageIndicator = document.createElement('span');
@@ -8608,7 +8609,7 @@ function setupCardDrag(cardElement) {
         const dot = document.createElement('div');
         dot.className = `compact-dot ${i === currentPage ? 'active' : ''}`;
         dot.onclick = () => {
-          window.currentCompactCardIndex = i * pageSize;
+          window.currentCompactCardIndex = Math.min(maxIndex, i * pageSize);
           window.updateCompactView();
         };
         dotsContainer.appendChild(dot);
