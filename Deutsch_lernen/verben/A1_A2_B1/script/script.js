@@ -8439,8 +8439,10 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
 
     function getPageSizeAndDevice() {
     const width = window.innerWidth;
-    if (width < 768) {
+    if (width < 600) {
       return { pageSize: 1, isPhone: true, isTablet: false, isDesktop: false };
+    } else if (width < 768) {
+      return { pageSize: 2, isPhone: true, isTablet: false, isDesktop: false };
     } else if (width <= 1024) {
       return { pageSize: 3, isPhone: false, isTablet: true, isDesktop: false };
     } else {
