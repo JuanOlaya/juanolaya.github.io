@@ -25,6 +25,7 @@
             --cat-avisos: #ef4444;
             --cat-kinder: #ec4899;
             --cat-despedidas: #14b8a6;
+            --cat-igualmente: #6366f1;
 
             --level-a1: #3b82f6;
             --level-a2: #eab308;
@@ -327,6 +328,10 @@
             background: var(--cat-despedidas);
         }
 
+        .level-card.igualmente-card .card-footer {
+            background: var(--cat-igualmente);
+        }
+
         .level-card .card-footer {
             margin-top: auto;
         }
@@ -357,6 +362,10 @@
 
         .level-header.despedidas {
             background: var(--cat-despedidas);
+        }
+
+        .level-header.igualmente {
+            background: var(--cat-igualmente);
         }
 
         table {
@@ -492,6 +501,10 @@
 
         .modal-header.theme-despedidas {
             background: var(--cat-despedidas);
+        }
+
+        .modal-header.theme-igualmente {
+            background: var(--cat-igualmente);
         }
 
         .modal-header.theme-na {
@@ -851,6 +864,13 @@
                 </table>
                 <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Abschiede')">Abschiede</span><span id="titleDespedidas" class="card-footer-translation">Despedidas</span></span></div>
             </div>
+            <div class="level-card igualmente-card">
+                <div class="level-header igualmente"><span class="card-footer-level">A1-A2</span><span id="headerWordEs8" class="card-header-label">interjecciones</span></div>
+                <table>
+                    <tbody id="group-igualmente"></tbody>
+                </table>
+                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Gleichfalls')">Gleichfalls</span><span id="titleIgualmente" class="card-footer-translation">Igualmente</span></span></div>
+            </div>
         </div>
 
         <section
@@ -889,6 +909,7 @@
                 titleAvisos: "Avisos",
                 titleKinder: "Niños",
                 titleDespedidas: "Despedidas",
+                titleIgualmente: "Igualmente",
                 footerInterjection: "interjecciones",
                 naDef: "La navaja suiza del idioma. Cambia según el contexto.",
                 btnSpeak: "ESCUCHAR"
@@ -903,6 +924,7 @@
                 titleAvisos: "Warnings",
                 titleKinder: "Kids",
                 titleDespedidas: "Farewells",
+                titleIgualmente: "Likewise",
                 footerInterjection: "interjections",
                 naDef: "The language's Swiss Army knife. Context is key.",
                 btnSpeak: "LISTEN"
@@ -968,13 +990,20 @@
                 { de: "Wahnsinn!", es: "¡Increíble!", en: "Amazing! / Insane!", lv: "A2", ex: [{ de: "Das ist Wahnsinn!", es: "¡Eso es una locura!", en: "That's insane!" }] }
             ],
             social: [
-                { de: "Gleichfalls!", es: "¡Igualmente!", en: "Likewise! / Same to you", lv: "A1", ex: [{ de: "Schönes Wochenende! - Gleichfalls!", es: "¡Buen finde! - ¡Igualmente!", en: "Have a nice weekend! - Likewise!" }] },
-                { de: "Ebenfalls!", es: "¡Igualmente!", en: "Likewise! / Same to you", lv: "A1", ex: [{ de: "Schönen Tag noch! - Ebenfalls!", es: "¡Que tengas buen día! - ¡Igualmente!", en: "Have a nice day! - Likewise!" }] },
                 { de: "Schade!", es: "¡Qué lástima!", en: "What a pity!", lv: "A1", ex: [{ de: "Ich kann nicht kommen. - Schade!", es: "No puedo ir. - ¡Qué lástima!", en: "I can't come. - That's a pity!" }] },
                 { de: "Toll!", es: "¡Genial!", en: "Great! / Terrific", lv: "A1", ex: [{ de: "Das ist toll!", es: "¡Eso es genial!", en: "That is great!" }] },
                 { de: "Prima!", es: "¡Estupendo!", en: "Great! / Excellent!", lv: "A1", ex: [{ de: "Prima, dann gehen wir los!", es: "¡Estupendo!, entonces nos vamos.", en: "Great, then let's go!" }] },
                 { de: "Gesundheit!", es: "¡Salud!", en: "Bless you!", lv: "A1", ex: [{ de: "Hatschi! - Gesundheit!", es: "¡Achís! - ¡Salud!", en: "Achoo! - Bless you!" }] },
                 { de: "Mach's gut!", es: "¡Cuídate!", en: "Take care!", lv: "A2", ex: [{ de: "Bis morgen, mach's gut!", es: "Hasta mañana, ¡cuídate!", en: "See you tomorrow, take care!" }] }
+            ],
+            igualmente: [
+                { de: "Dir auch!", es: "¡A ti también!", en: "You too! (informal)", lv: "A1", ex: [{ de: "A: Schönen Tag! → B: Dir auch!", es: "A: ¡Buen día! → B: ¡A ti también!", en: "A: Have a nice day! → B: You too!" }] },
+                { de: "Ihnen auch!", es: "¡A usted también!", en: "You too! (formal)", lv: "A1", ex: [{ de: "A: Schönen Tag! → B: Ihnen auch!", es: "A: ¡Buen día! → B: ¡A usted también!", en: "A: Have a nice day! → B: You too!" }] },
+                { de: "Dir ebenfalls!", es: "¡Igualmente para ti!", en: "Likewise to you! (informal)", lv: "A1", ex: [{ de: "A: Schönen Tag! → B: Dir ebenfalls!", es: "A: ¡Buen día! → B: ¡Igualmente para ti!", en: "A: Have a nice day! → B: Likewise to you!" }] },
+                { de: "Ihnen ebenfalls!", es: "¡Igualmente para usted!", en: "Likewise to you! (formal)", lv: "A1", ex: [{ de: "A: Schönen Tag! → B: Ihnen ebenfalls!", es: "A: ¡Buen día! → B: ¡Igualmente para usted!", en: "A: Have a nice day! → B: Likewise to you!" }] },
+                { de: "Ebenfalls!", es: "¡Igualmente!", en: "Likewise! / Same to you", lv: "A1", ex: [{ de: "A: Schönen Tag! → B: Ebenfalls!", es: "A: ¡Buen día! → B: ¡Igualmente!", en: "A: Have a nice day! - Likewise!" }] },
+                { de: "Gleichfalls!", es: "¡Igualmente!", en: "Likewise! / Same to you", lv: "A1", ex: [{ de: "A: Schönen Tag! → B: Gleichfalls!", es: "A: ¡Buen día! → B: ¡Igualmente!", en: "A: Have a nice day! → B: Likewise!" }] },
+                { de: "Ebenso!", es: "¡Igualmente!", en: "Likewise! / Equally", lv: "A1", ex: [{ de: "A: Schönen Tag! → B: Ebenso!", es: "A: ¡Buen día! → B: ¡Igualmente!", en: "A: Have a nice day! → B: Likewise!" }] }
             ],
             reacciones: [
                 { de: "Hoppla!", es: "¡Uy!", en: "Oops!", lv: "A1", ex: [{ de: "Hoppla, Entschuldigung!", es: "¡Uy, perdón!", en: "Oops, sorry!" }] },
@@ -1086,6 +1115,7 @@
             document.getElementById('titleAvisos').textContent = langLabels.titleAvisos;
             document.getElementById('titleKinder').textContent = langLabels.titleKinder;
             document.getElementById('titleDespedidas').textContent = langLabels.titleDespedidas;
+            document.getElementById('titleIgualmente').textContent = langLabels.titleIgualmente;
             document.getElementById('headerWordEs').textContent = langLabels.footerInterjection;
             document.getElementById('headerWordEs2').textContent = langLabels.footerInterjection;
             document.getElementById('headerWordEs3').textContent = langLabels.footerInterjection;
@@ -1093,6 +1123,7 @@
             document.getElementById('headerWordEs5').textContent = langLabels.footerInterjection;
             document.getElementById('headerWordEs6').textContent = langLabels.footerInterjection;
             document.getElementById('headerWordEs7').textContent = langLabels.footerInterjection;
+            document.getElementById('headerWordEs8').textContent = langLabels.footerInterjection;
             document.getElementById('naDef').textContent = langLabels.naDef;
             document.getElementById('btnSpeakText').textContent = langLabels.btnSpeak;
 
@@ -1218,10 +1249,13 @@
         function speak(text) {
             if (!text) return;
 
-            // Clean specific chars if needed, though usually native synth handles UTF8 fine
-            // const cleanText = text.replace(/[!?,.]/g, ''); 
+            // Clean dialogue turn markers for natural reading
+            let cleanText = text
+                .replace(/^[A-Z]:\s*/gi, '')       // Remove initial speaker label e.g., "A: "
+                .replace(/\s*[→-]\s*[A-Z]:\s*/gi, ', ') // Replace transition to second speaker with a comma pause
+                .replace(/→/g, ', ');             // Replace raw arrows with a comma pause
 
-            const utterance = new SpeechSynthesisUtterance(text);
+            const utterance = new SpeechSynthesisUtterance(cleanText);
             utterance.lang = 'de-DE';
             utterance.rate = 0.9;
 
