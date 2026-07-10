@@ -388,7 +388,7 @@ function applyModalThemePalette(verbData) {
 
  // Verbs that support Konjunktiv II
 
- const konjunktivVerbs = ['sein', 'haben', 'werden', 'dürfen', 'müssen', 'wollen', 'sollen', 'mögen', 'können'];
+ const konjunktivVerbs = ['sein', 'haben', 'werden', 'dürfen', 'müssen', 'wollen', 'sollen', 'mögen', 'können', 'geben', 'kommen', 'gehen', 'finden'];
 
  let currentLevel = 'A1';
 
