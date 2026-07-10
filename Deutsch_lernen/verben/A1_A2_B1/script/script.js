@@ -8437,7 +8437,18 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
 
   };
 
-  function setupCardDrag(cardElement) {
+    function getPageSizeAndDevice() {
+    const width = window.innerWidth;
+    if (width < 768) {
+      return { pageSize: 1, isPhone: true, isTablet: false, isDesktop: false };
+    } else if (width <= 1024) {
+      return { pageSize: 2, isPhone: false, isTablet: true, isDesktop: false };
+    } else {
+      return { pageSize: 3, isPhone: false, isTablet: false, isDesktop: true };
+    }
+  }
+
+function setupCardDrag(cardElement) {
     if (cardElement.dataset.dragSetup === 'true') return;
     cardElement.dataset.dragSetup = 'true';
     let startX = 0;
@@ -8493,8 +8504,7 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
       console.log("[endDrag] deltaX:", deltaX, "threshold:", threshold, "currentCompactCardIndex:", window.currentCompactCardIndex);
       cardElement.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
 
-      const isMobile = window.innerWidth < 768;
-      const pageSize = isMobile ? 1 : 3;
+      const { pageSize } = getPageSizeAndDevice();
 
       if (deltaX < -threshold) {
         // Next page
@@ -8533,8 +8543,7 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
     cardsContainer.innerHTML = '';
     const grid = document.createElement('div');
     grid.className = 'kompakt-grid';
-    const isMobile = window.innerWidth < 768;
-    const pageSize = isMobile ? 1 : 3;
+    const { pageSize, isPhone } = getPageSizeAndDevice();
 
     if (window.currentCompactCardIndex < 0) window.currentCompactCardIndex = 0;
     if (window.currentCompactCardIndex >= window.allCompactCards.length) {
@@ -8577,7 +8586,7 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
     const totalPages = Math.ceil(window.allCompactCards.length / pageSize);
     const currentPage = Math.floor(window.currentCompactCardIndex / pageSize);
 
-    if (isMobile) {
+    if (isPhone) {
       const pageIndicator = document.createElement('span');
       pageIndicator.className = 'compact-nav-pages';
       pageIndicator.textContent = `${currentPage + 1} / ${totalPages}`;
