@@ -24070,3 +24070,9 @@ body.compact-view .kompakt-level-card {
 body.compact-view .kompakt-level-card {
     touch-action: none !important; /* Forces all touch events to be delivered to JS, resolving drag-back issues */
 }
+
+/* Fix scroll container percentage height bug on compact view card back */
+body.compact-view .card-back-body {
+    flex: 1 1 0% !important;
+    height: 0 !important;
+}
