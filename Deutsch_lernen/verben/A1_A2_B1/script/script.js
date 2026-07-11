@@ -7975,8 +7975,9 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
 
     let html = `<div style="display: flex; flex-direction: column; flex-grow: 1; height: 100%; justify-content: space-between;">`;
 
-    // Horizontal Tenses Row
-    html += `<div class="card-back-tenses-row" style="margin-top: 6px;">`;
+    // 1. Tense buttons container centered in the middle of the top space
+    html += `<div style="display: flex; flex-direction: column; justify-content: center; flex-grow: 1;">`;
+    html += `<div class="card-back-tenses-row" style="margin: auto 0;">`;
     if (erPraesens) {
       html += `<button class="tense-menu-btn" data-target="zeit_praesens"><span class="tense-btn-word">${erPraesens}</span><span class="tense-btn-label">präsens</span></button>`;
     }
@@ -7989,10 +7990,10 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
     if (erKonjunktiv) {
       html += `<button class="tense-menu-btn" data-target="zeit_konjunktiv"><span class="tense-btn-word">${erKonjunktiv}</span><span class="tense-btn-label">konj. ii</span></button>`;
     }
-    html += `</div>`;
+    html += `</div></div>`;
 
-    // Center container for Wortschatz and Sätze buttons
-    html += `<div style="display: flex; flex-direction: column; justify-content: center; gap: 10px; flex-grow: 1;">`;
+    // 2. Wortschatz and Sätze buttons container at the bottom
+    html += `<div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; margin-top: auto;">`;
 
     // Wortschatz button (full width with orange triangle)
     if (hasVocab) {
