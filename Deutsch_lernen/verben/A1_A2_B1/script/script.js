@@ -8029,7 +8029,16 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
           bodyComputedStyleDisplay: window.getComputedStyle(cbb).display,
           bodyComputedStyleFlexDirection: window.getComputedStyle(cbb).flexDirection,
           contentAreaComputedStyleHeight: window.getComputedStyle(cbca).height,
-          contentAreaComputedStyleDisplay: window.getComputedStyle(cbca).display
+          contentAreaComputedStyleDisplay: window.getComputedStyle(cbca).display,
+          childrenInfo: Array.from(cbca.children).map((child, idx) => ({
+            index: idx,
+            tagName: child.tagName,
+            offsetHeight: child.offsetHeight,
+            marginTop: window.getComputedStyle(child).marginTop,
+            marginBottom: window.getComputedStyle(child).marginBottom,
+            flexGrow: window.getComputedStyle(child).flexGrow,
+            display: window.getComputedStyle(child).display
+          }))
         });
       }
     }, 100);
