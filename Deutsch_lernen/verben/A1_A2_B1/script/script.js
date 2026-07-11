@@ -7977,7 +7977,7 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
 
     // 1. Tense buttons container centered in the middle of the top space
     html += `<div style="display: flex; flex-direction: column; justify-content: center; flex-grow: 1;">`;
-    html += `<div class="card-back-tenses-row" style="margin: auto 0;">`;
+    html += `<div class="card-back-tenses-row">`;
     if (erPraesens) {
       html += `<button class="tense-menu-btn" data-target="zeit_praesens"><span class="tense-btn-word">${erPraesens}</span><span class="tense-btn-label">präsens</span></button>`;
     }
