@@ -7973,7 +7973,7 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
     const erKonjunktivRaw = konjunktivObj ? (konjunktivObj["er_sie_es"] || konjunktivObj["er/sie/es"] || konjunktivObj.er_sie_es || konjunktivObj.er || konjunktivObj.sie || konjunktivObj.es || '') : '';
     const erKonjunktiv = cleanVerbForm(erKonjunktivRaw);
 
-    let html = `<div style="display: flex; flex-direction: column; flex-grow: 1; height: 100%; justify-content: space-between;">`;
+    let html = "";
 
     // 1. Tense buttons container centered in the middle of the top space
     html += `<div style="display: flex; flex-direction: column; justify-content: center; flex-grow: 1;">`;
@@ -8015,7 +8015,7 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
       `;
     }
 
-    html += `</div></div>`;
+    html += `</div>`;
     contentArea.innerHTML = html;
 
     // Reset scroll to top
