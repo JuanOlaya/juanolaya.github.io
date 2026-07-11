@@ -8017,6 +8017,22 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
 
     html += `</div>`;
     contentArea.innerHTML = html;
+    setTimeout(() => {
+      const cb = document.querySelector(".card-back");
+      const cbb = document.querySelector(".card-back-body");
+      const cbca = document.querySelector(".card-back-content-area");
+      if (cb && cbb && cbca) {
+        console.log("DEBUG LAYOUT:", {
+          cardBackHeight: cb.offsetHeight,
+          bodyHeight: cbb.offsetHeight,
+          contentAreaHeight: cbca.offsetHeight,
+          bodyComputedStyleDisplay: window.getComputedStyle(cbb).display,
+          bodyComputedStyleFlexDirection: window.getComputedStyle(cbb).flexDirection,
+          contentAreaComputedStyleHeight: window.getComputedStyle(cbca).height,
+          contentAreaComputedStyleDisplay: window.getComputedStyle(cbca).display
+        });
+      }
+    }, 100);
 
     // Reset scroll to top
     const bodyEl = cardBack.querySelector('.card-back-body');
