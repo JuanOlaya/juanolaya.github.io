@@ -50,7 +50,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
  'B1': [{ key: 'B1_1', count: 26, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26] }],
 
- 'B2': [{ key: 'B2_1', count: 14, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] }]
+        'B2': [{ key: 'B2_1', count: 15, fileNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] }]
 
  };
 
@@ -304,7 +304,7 @@ function applyModalThemePalette(verbData) {
 
  'B1': { groupCount: 26, displayName: 'B1' },
 
- 'B2': { groupCount: 14, displayName: 'B2' }
+        'B2': { groupCount: 15, displayName: 'B2' }
 
  };
 
