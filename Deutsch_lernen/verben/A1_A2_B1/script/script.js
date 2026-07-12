@@ -7826,7 +7826,7 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
 
         <button class="card-back-close-btn">&times;</button>
 
-        <h2 class="card-back-infinitive">${verbName}</h2>
+        <h2 class="card-back-infinitive">${formatVerbPrefix(verbName)}</h2>
 
         <p class="card-back-translation"></p>
 
@@ -7884,7 +7884,7 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
 
         <button class="card-back-close-btn">&times;</button>
 
-        <h2 class="card-back-infinitive">${verbName}</h2>
+        <h2 class="card-back-infinitive">${formatVerbPrefix(verbName)}</h2>
 
         <p class="card-back-translation">${data.spanishName || data.groupNameSpanish || data.es || ''}</p>
 
