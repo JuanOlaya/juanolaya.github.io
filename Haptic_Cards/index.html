@@ -235,65 +235,71 @@
         const devices = [
              {
                  isIntro: true,
-                 name: "Active Haptic Controllers",
+                 name: "Active Haptic Feedback",
                  category: "Definition",
                  contentHTML: `
-                 <div class="space-y-4 text-sm text-gray-800 flex-grow flex flex-col justify-between">
-                     <p class="font-medium text-blue-800 text-base">Enhancing Virtual Reality Realism</p>
-                     <p class="leading-relaxed">
-                         Active haptic controllers use computer-controlled actuation to render haptic feedback in response to virtual events in real time.
-                     </p>
-                     <div class="bg-blue-50 border-l-4 border-blue-500 p-3 rounded mt-auto">
-                         <p class="text-xs text-blue-900 leading-relaxed font-semibold">
-                             This project categorizes prior work according to the types of active haptic feedback they generate to enhance VR realism.
-                         </p>
-                     </div>
-                 </div>
-                 `
-             },
-             {
-                 isIntro: true,
-                 name: "Haptic Modality Classification",
-                 category: "Taxonomy",
-                 contentHTML: `
-                 <div class="space-y-3 text-xs text-gray-800 flex-grow flex flex-col justify-between">
-                     <p class="leading-relaxed text-sm">
-                         We classify controllers according to their haptic modality (cutaneous or kinesthetic) and the specific haptic sensations they render.
-                     </p>
-                     
-                     <!-- Tree visualization -->
-                     <div class="bg-slate-50 p-3 rounded border border-slate-200 mt-2 space-y-3 flex-grow">
-                         <div class="text-center font-bold text-blue-800 border-b border-slate-200 pb-1 mb-2 text-xs">Haptic Modality Taxonomy</div>
-                         
-                         <div class="grid grid-cols-2 gap-3 text-center">
-                             <!-- Cutaneous Branch -->
-                             <div class="bg-green-50/50 p-2 rounded border border-green-200 flex flex-col">
-                                 <div class="font-semibold text-green-800 border-b border-green-200 pb-1 mb-1 text-[11px] flex items-center justify-center gap-1">
-                                     <span>👆</span> Cutaneous
-                                 </div>
-                                 <div class="space-y-1 text-green-700 text-[10px] font-medium text-left pl-1">
-                                     <div>• Thermal</div>
-                                     <div>• Stiffness</div>
-                                     <div>• Friction</div>
-                                     <div>• Vibration</div>
-                                 </div>
+                 <div class="intro-slides-container flex flex-col justify-between min-h-[300px]">
+                     <!-- Slides -->
+                     <div class="intro-slides flex-grow relative">
+                         <!-- Slide 1: Definition -->
+                         <div class="intro-slide intro-slide-1 transition-all duration-300">
+                             <p class="font-medium text-blue-800 text-sm mb-2">Enhancing Virtual Reality Realism</p>
+                             <p class="leading-relaxed text-xs text-gray-700">
+                                 Active haptic controllers use computer-controlled actuation to render haptic feedback in response to virtual events in real time.
+                             </p>
+                             <div class="bg-blue-50 border-l-4 border-blue-500 p-3 rounded mt-4">
+                                 <p class="text-xs text-blue-900 leading-relaxed font-semibold">
+                                     This project categorizes prior work according to the types of active haptic feedback they generate to enhance VR realism.
+                                 </p>
                              </div>
-                             
-                             <!-- Kinesthetic Branch -->
-                             <div class="bg-red-50/50 p-2 rounded border border-red-200 flex flex-col">
-                                 <div class="font-semibold text-red-800 border-b border-red-200 pb-1 mb-1 text-[11px] flex items-center justify-center gap-1">
-                                     <span>💪</span> Kinesthetic
-                                 </div>
-                                 <div class="space-y-1 text-red-700 text-[10px] font-medium text-left pl-1">
-                                     <div>• Impact</div>
-                                     <div>• Motion</div>
-                                     <div>• Resistance</div>
-                                     <div>• Weight Amount</div>
-                                     <div>• Weight Dist.</div>
-                                     <div>• Shape</div>
+                         </div>
+                         
+                         <!-- Slide 2: Taxonomy -->
+                         <div class="intro-slide intro-slide-2 hidden transition-all duration-300">
+                             <p class="leading-relaxed text-[11px] text-gray-700 mb-2">
+                                 We classify controllers according to their haptic modality (cutaneous or kinesthetic) and the sensations they render.
+                             </p>
+                             <!-- Tree visualization -->
+                             <div class="bg-slate-50 p-2 rounded border border-slate-200 space-y-2">
+                                 <div class="text-center font-bold text-blue-800 border-b border-slate-200 pb-0.5 mb-1.5 text-[10px]">Haptic Modality Taxonomy</div>
+                                 
+                                 <div class="grid grid-cols-2 gap-2 text-center">
+                                     <!-- Cutaneous Branch -->
+                                     <div class="bg-green-50/50 p-1.5 rounded border border-green-200 flex flex-col">
+                                         <div class="font-semibold text-green-800 border-b border-green-200 pb-0.5 mb-1 text-[9px] flex items-center justify-center gap-1">
+                                             <span>👆</span> Cutaneous
+                                         </div>
+                                         <div class="space-y-0.5 text-green-700 text-[9px] font-medium text-left pl-1">
+                                             <div>• Thermal</div>
+                                             <div>• Stiffness</div>
+                                             <div>• Friction</div>
+                                             <div>• Vibration</div>
+                                         </div>
+                                     </div>
+                                     
+                                     <!-- Kinesthetic Branch -->
+                                     <div class="bg-red-50/50 p-1.5 rounded border border-red-200 flex flex-col">
+                                         <div class="font-semibold text-red-800 border-b border-red-200 pb-0.5 mb-1 text-[9px] flex items-center justify-center gap-1">
+                                             <span>💪</span> Kinesthetic
+                                         </div>
+                                         <div class="space-y-0.5 text-red-700 text-[9px] font-medium text-left pl-1">
+                                             <div>• Impact</div>
+                                             <div>• Motion</div>
+                                             <div>• Resistance</div>
+                                             <div>• Weight Amount</div>
+                                             <div>• Weight Dist.</div>
+                                             <div>• Shape</div>
+                                         </div>
+                                     </div>
                                  </div>
                              </div>
                          </div>
+                     </div>
+                     
+                     <!-- Progress/Navigation Dots at the bottom -->
+                     <div class="intro-dots flex justify-center gap-2 mt-4 pt-2 border-t border-slate-100 select-none">
+                         <button class="intro-dot w-2.5 h-2.5 rounded-full bg-blue-600 focus:outline-none" data-slide="0" title="Definition"></button>
+                         <button class="intro-dot w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 focus:outline-none" data-slide="1" title="Taxonomy"></button>
                      </div>
                  </div>
                  `
@@ -1057,6 +1063,41 @@
                 } else if (tabName === 'use-cases' && useCasesContent) {
                     useCasesContent.classList.remove('hidden');
                 }
+            });
+
+            // Add delegated event listener for intro card dots
+            cardContainer.addEventListener('click', (event) => {
+                const dot = event.target.closest('.intro-dot');
+                if (!dot) return;
+                
+                const card = dot.closest('.card-item');
+                if (!card) return;
+                
+                const slideIndex = parseInt(dot.dataset.slide, 10);
+                const slide1 = card.querySelector('.intro-slide-1');
+                const slide2 = card.querySelector('.intro-slide-2');
+                const dots = card.querySelectorAll('.intro-dot');
+                const categoryLabel = card.querySelector('.intro-category-label');
+                
+                if (slideIndex === 0) {
+                    if (slide1) slide1.classList.remove('hidden');
+                    if (slide2) slide2.classList.add('hidden');
+                    if (categoryLabel) categoryLabel.textContent = "Definition";
+                } else {
+                    if (slide1) slide1.classList.add('hidden');
+                    if (slide2) slide2.classList.remove('hidden');
+                    if (categoryLabel) categoryLabel.textContent = "Taxonomy";
+                }
+                
+                dots.forEach((d, idx) => {
+                    if (idx === slideIndex) {
+                        d.classList.add('bg-blue-600');
+                        d.classList.remove('bg-slate-300', 'hover:bg-slate-400');
+                    } else {
+                        d.classList.remove('bg-blue-600');
+                        d.classList.add('bg-slate-300', 'hover:bg-slate-400');
+                    }
+                });
             });
 
              // Initialize galleries after adding cards to DOM
