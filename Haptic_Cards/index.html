@@ -202,6 +202,8 @@
 
 
     <script>
+        const localLastUpdated = "2026-07-14T14:45:41Z";
+
         // Data derived from the provided table, including category mapping and media array
          const categoryMap = {
             "Air-propulsion": "Air Propulsion",
@@ -1109,6 +1111,23 @@
         // Run the function on page load
         window.onload = function() {
             createCards();
+
+            // Check and compare last updated timestamps
+            fetch(`metadata.json?t=${Date.now()}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("=== Haptic Cards Version Check ===");
+                    console.log("Local (Hardcoded index.html):", localLastUpdated);
+                    console.log("Remote (Fetched metadata.json):", data.lastUpdated);
+                    if (localLastUpdated === data.lastUpdated) {
+                        console.log("Status: ✅ Latest version is loaded!");
+                    } else {
+                        console.warn("Status: ❌ Running an older cached version of index.html. Please force-refresh the page (Ctrl+F5) to clear cache.");
+                    }
+                })
+                .catch(err => {
+                    console.error("Error fetching version metadata:", err);
+                });
 
             // Setup toggle functionality
             const ideaToggle = document.getElementById('toggle-ideas');
