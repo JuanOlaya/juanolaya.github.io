@@ -233,6 +233,71 @@
 
 
         const devices = [
+             {
+                 isIntro: true,
+                 name: "Active Haptic Controllers",
+                 category: "Definition",
+                 contentHTML: `
+                 <div class="space-y-4 text-sm text-gray-800 flex-grow flex flex-col justify-between">
+                     <p class="font-medium text-blue-800 text-base">Enhancing Virtual Reality Realism</p>
+                     <p class="leading-relaxed">
+                         Active haptic controllers use computer-controlled actuation to render haptic feedback in response to virtual events in real time.
+                     </p>
+                     <div class="bg-blue-50 border-l-4 border-blue-500 p-3 rounded mt-auto">
+                         <p class="text-xs text-blue-900 leading-relaxed font-semibold">
+                             This project categorizes prior work according to the types of active haptic feedback they generate to enhance VR realism.
+                         </p>
+                     </div>
+                 </div>
+                 `
+             },
+             {
+                 isIntro: true,
+                 name: "Haptic Modality Classification",
+                 category: "Taxonomy",
+                 contentHTML: `
+                 <div class="space-y-3 text-xs text-gray-800 flex-grow flex flex-col justify-between">
+                     <p class="leading-relaxed text-sm">
+                         We classify controllers according to their haptic modality (cutaneous or kinesthetic) and the specific haptic sensations they render.
+                     </p>
+                     
+                     <!-- Tree visualization -->
+                     <div class="bg-slate-50 p-3 rounded border border-slate-200 mt-2 space-y-3 flex-grow">
+                         <div class="text-center font-bold text-blue-800 border-b border-slate-200 pb-1 mb-2 text-xs">Haptic Modality Taxonomy</div>
+                         
+                         <div class="grid grid-cols-2 gap-3 text-center">
+                             <!-- Cutaneous Branch -->
+                             <div class="bg-green-50/50 p-2 rounded border border-green-200 flex flex-col">
+                                 <div class="font-semibold text-green-800 border-b border-green-200 pb-1 mb-1 text-[11px] flex items-center justify-center gap-1">
+                                     <span>👆</span> Cutaneous
+                                 </div>
+                                 <div class="space-y-1 text-green-700 text-[10px] font-medium text-left pl-1">
+                                     <div>• Thermal</div>
+                                     <div>• Stiffness</div>
+                                     <div>• Friction</div>
+                                     <div>• Vibration</div>
+                                 </div>
+                             </div>
+                             
+                             <!-- Kinesthetic Branch -->
+                             <div class="bg-red-50/50 p-2 rounded border border-red-200 flex flex-col">
+                                 <div class="font-semibold text-red-800 border-b border-red-200 pb-1 mb-1 text-[11px] flex items-center justify-center gap-1">
+                                     <span>💪</span> Kinesthetic
+                                 </div>
+                                 <div class="space-y-1 text-red-700 text-[10px] font-medium text-left pl-1">
+                                     <div>• Impact</div>
+                                     <div>• Motion</div>
+                                     <div>• Resistance</div>
+                                     <div>• Weight Amount</div>
+                                     <div>• Weight Dist.</div>
+                                     <div>• Shape</div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 `
+             },
              { name: "Aero-plane", category: "Air Propulsion", author: "Je et al.", title: "Aero-plane: A Handheld Force-Feedback Device that Renders Weight Motion Illusion on a Virtual 2D Plane", mechanism: "Propellers render forces for weight shifting.", useCaseText: "Simulating flight dynamics, wind forces, and wielding large, heavy objects.", useCaseTags: ["Flight dynamics", "Wind forces", "Wielding heavy objects"], generalUseCases: ["Training", "Gaming"], submodalities: ["Impact", "Motion", "Resistance", "Weight distribution", "Shape"], media: [{ type: "image", src: "https://futureofinterface.org/wp-content/uploads/2023/04/Aero-plane1.png" }, { type: "video", src: "https://www.youtube.com/embed/RzbaKvFlvXg" }], doi: "10.1145/3332165.3347926", publication: "UIST", year: "2019" },
              { name: "AirCharge", category: "Air Propulsion", author: "Chen et al.", title: "AirCharge: Amplifying Ungrounded Impact Force by Accumulating Air Propulsion Momentum", mechanism: "Compressed air jets create sharp impacts.", useCaseText: "Feeling the impact of virtual projectiles or sharp haptic alerts.", useCaseTags: ["Projectile impacts", "Sharp haptic alerts"], generalUseCases: ["Gaming"], submodalities: ["Impact"], media: [{ type: "image", src: "https://lauren505.github.io/assets/img/publication_preview/aircharge.jpg" }, { type: "video", src: "https://www.youtube.com/embed/8Pzk_2D0Bxo?start=615" }], doi: "10.1145/3586183.3606768", publication: "UIST", year: "2023" },
              { name: "AirRacket", category: "Air Propulsion", author: "Tsai et al.", title: "AirRacket: Perceptual Design of Ungrounded, Directional Force Feedback to Improve Virtual Racket Sports Experiences", mechanism: "Compressed air jets generate racket impact.", useCaseText: "Simulating ball impacts in racket sports like tennis or badminton.", useCaseTags: ["Ball impacts in racket sports"], generalUseCases: ["Gaming"], submodalities: ["Impact"], media: [{ type: "image", src: "https://raw.githubusercontent.com/ntu-hci-lab/AirRacket/main/Figures/Teaser_Figure_bordered.jpg" }, { type: "video", src: "https://www.youtube.com/embed/MLbCse7VR5k" }], doi: "10.1145/3491102.3502034", publication: "CHI", year: "2022" },
@@ -601,6 +666,27 @@
         // Function to generate and append cards
         function createCards() {
             devices.forEach((device) => {
+                if (device.isIntro) {
+                    const cardHTML = `
+                    <div class="card-item bg-[#E0FFFF] rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col relative overflow-hidden">
+                        <!-- Header Section -->
+                        <div class="bg-[#0369A1] border-b border-sky-800 flex flex-col p-5">
+                            <span class="text-[10px] font-bold text-sky-200 uppercase tracking-widest">${device.category}</span>
+                            <h2 class="text-xl font-bold text-white mt-1">
+                                ${device.name}
+                            </h2>
+                        </div>
+                        
+                        <!-- Content Section -->
+                        <div class="p-5 flex-grow flex flex-col justify-start">
+                            ${device.contentHTML}
+                        </div>
+                    </div>
+                    `;
+                    cardContainer.innerHTML += cardHTML;
+                    return;
+                }
+
                 const deviceId = device.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, ''); // Sanitize ID further
                 const deviceCutaneous = device.submodalities.filter(sm => cutaneousSubmodalities.has(sm));
                 const deviceKinesthetic = device.submodalities.filter(sm => kinestheticSubmodalities.has(sm));
