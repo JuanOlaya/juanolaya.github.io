@@ -25,7 +25,7 @@ function inspirationWall(){
 
 			background(backgroundColor);
 			defaultCanvas.style.display = "block";
-			balconitySection.style.display = "none";
+			if (balconitySection) balconitySection.style.display = "none";
 			loading.style.display = "none";
 			
 			//homeEureka.style.display = "block";

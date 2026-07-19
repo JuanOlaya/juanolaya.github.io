@@ -37,22 +37,26 @@ let color7="#1E9CC9";  // 29833B 2A878D 2F969D 1C90BA 1D96C2 1E9CC9 4FC3CB #00FF
 let color8="#f48c06";
 let color9="#DC4141";
 let demoSection;
-let museFlowSection;
+let museFlowSection = document.getElementById("museFlowSec");
 var defaultCanvas1;
 var timerPencilMode=false;
 var startingTimePencilMode = 0;
 
+demoSection = document.getElementById("demoSec");
+if (demoSection) demoSection.style.display = "none";
 
-demoSection=document.getElementById("demoSec");
-demoSection.style.display = "none";
-
-museFlowSection=document.getElementById("museFlowSec");
-museFlowSection.style.display = "none";
+if (museFlowSection) museFlowSection.style.display = "none";
 
 document.getElementsByTagName('canvas');
 
-swarmCanvasSection.style.display = "none";
-shapyGridSection.style.display = "none";
+let swarmCanvasSection = document.getElementById("swarmCanvasSection");
+if (swarmCanvasSection) swarmCanvasSection.style.display = "none";
+
+let shapyGridSection = document.getElementById("shapyGridSection");
+if (shapyGridSection) shapyGridSection.style.display = "none";
+
+let balconitySection = document.getElementById("balconity");
+if (balconitySection) balconitySection.style.display = "none";
 //homeEureka.style.display = "none";
 
 //defaultCanvas=document.getElementById("defaultCanvas0");
