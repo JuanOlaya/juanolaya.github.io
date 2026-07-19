@@ -364,10 +364,16 @@ setInterval(() => {
 getWeatherData(); 
 function getWeatherData(){
     // Sao
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=-23.42&lon=-46.48&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(data =>{
-        //console.log(data);
-        showWeatherDataSao(data);
-    });
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=-23.42&lon=-46.48&units=metric&appid=${API_KEY}`)
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return res.json();
+        })
+        .then(data => showWeatherDataSao(data))
+        .catch(err => {
+            console.error("Error fetching weather for Sao Paulo:", err);
+            weatherSaoEl.innerHTML = `<div class="cityTemperature">Offline</div>`;
+        });
 }
 
 
@@ -375,227 +381,280 @@ function getWeatherData(){
 getWeatherDataBrasov();
 function getWeatherDataBrasov(){
     // Brasov 45.64306929797585, 25.591688427132617
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=45.64&lon=25.59&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(resB => resB.json()).then(dataBrasov =>{
-        //console.log(dataBrasov);
-        showWeatherDataBrasov(dataBrasov);
-    });
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=45.64&lon=25.59&units=metric&appid=${API_KEY}`)
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return res.json();
+        })
+        .then(dataBrasov => showWeatherDataBrasov(dataBrasov))
+        .catch(err => {
+            console.error("Error fetching weather for Brasov:", err);
+            weatherBrasovEl.innerHTML = `<div class="cityTemperature">Offline</div>`;
+        });
 }
 
 
 getWeatherDataTaoyuan();
 function getWeatherDataTaoyuan(){
     // Taoyuan 24.898973396740853, 121.28230201082584
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=24.89&lon=121.28&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataTaoyuan =>{
-        //console.log(dataTaoyuan);
-        showWeatherDataTaoyuan(dataTaoyuan);
-    });
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=24.89&lon=121.28&units=metric&appid=${API_KEY}`)
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return res.json();
+        })
+        .then(dataTaoyuan => showWeatherDataTaoyuan(dataTaoyuan))
+        .catch(err => {
+            console.error("Error fetching weather for Taoyuan:", err);
+            weatherTaoyuanEl.innerHTML = `<div class="cityTemperature">Offline</div>`;
+        });
 }
 
 getWeatherDataTaipei();
 function getWeatherDataTaipei(){
     // Taipei 25.03599478244717, 121.56444740481227
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=25.03&lon=121.56&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataTaipei =>{
-        //console.log(dataTaipei);
-        showWeatherDataTaipei(dataTaipei);
-    });
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=25.03&lon=121.56&units=metric&appid=${API_KEY}`)
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return res.json();
+        })
+        .then(dataTaipei => showWeatherDataTaipei(dataTaipei))
+        .catch(err => {
+            console.error("Error fetching weather for Taipei:", err);
+            weatherTaipeiEl.innerHTML = `<div class="cityTemperature">Offline</div>`;
+        });
 }
 
 getWeatherDataOdessa();
 function getWeatherDataOdessa(){
     // Odessa 46.49065067401354, 30.73857664724402
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=46.49&lon=30.73&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataOdessa =>{
-        //console.log(dataOdessa);
-        showWeatherDataOdessa(dataOdessa);
-    });
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=46.49&lon=30.73&units=metric&appid=${API_KEY}`)
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return res.json();
+        })
+        .then(dataOdessa => showWeatherDataOdessa(dataOdessa))
+        .catch(err => {
+            console.error("Error fetching weather for Odessa:", err);
+            weatherOdessaEl.innerHTML = `<div class="cityTemperature">Offline</div>`;
+        });
 }
 
 getWeatherDataTokyo();
 function getWeatherDataTokyo(){
     // Tokyo 35.65982030515791, 139.7010257463303
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=35.65&lon=139.70&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataTokyo =>{
-        //console.log(dataTokyo);
-        showWeatherDataTokyo(dataTokyo);
-    });
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=35.65&lon=139.70&units=metric&appid=${API_KEY}`)
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return res.json();
+        })
+        .then(dataTokyo => showWeatherDataTokyo(dataTokyo))
+        .catch(err => {
+            console.error("Error fetching weather for Tokyo:", err);
+            weatherTokyoEl.innerHTML = `<div class="cityTemperature">Offline</div>`;
+        });
 }
 
 
 getWeatherDataVerbier();
 function getWeatherDataVerbier(){
     // Verbier 46.09612803438759, 7.228889161183665
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=46.09&lon=7.22&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataVerbier =>{
-        //console.log(dataVerbier);
-        showWeatherDataVerbier(dataVerbier);
-    });
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=46.09&lon=7.22&units=metric&appid=${API_KEY}`)
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return res.json();
+        })
+        .then(dataVerbier => showWeatherDataVerbier(dataVerbier))
+        .catch(err => {
+            console.error("Error fetching weather for Verbier:", err);
+            weatherVerbierEl.innerHTML = `<div class="cityTemperature">Offline</div>`;
+        });
 }
 
 getWeatherDataVenice();
 function getWeatherDataVenice(){
     // Venice 45.44387557496979, 12.325567185160779
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=45.44&lon=12.32&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataVenice =>{
-        //console.log(dataVenice);
-        showWeatherDataVenice(dataVenice);
-    });
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=45.44&lon=12.32&units=metric&appid=${API_KEY}`)
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return res.json();
+        })
+        .then(dataVenice => showWeatherDataVenice(dataVenice))
+        .catch(err => {
+            console.error("Error fetching weather for Venice:", err);
+            weatherVeniceEl.innerHTML = `<div class="cityTemperature">Offline</div>`;
+        });
 }
 
 getWeatherDataAmsterdam();
 function getWeatherDataAmsterdam(){
     // Amsterdam 52.3778937674073, 4.893438884975311
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=52.37&lon=4.89&exclude=hourly,minutely,alerts&units=metric&appid=${API_KEY}`).then(res => res.json()).then(dataAmsterdam =>{
-        console.log(dataAmsterdam);
-        showWeatherDataAmsterdam(dataAmsterdam);
-    });
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=52.37&lon=4.89&units=metric&appid=${API_KEY}`)
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return res.json();
+        })
+        .then(dataAmsterdam => showWeatherDataAmsterdam(dataAmsterdam))
+        .catch(err => {
+            console.error("Error fetching weather for Amsterdam:", err);
+            weatherAmsterdamEl.innerHTML = `<div class="cityTemperature">Offline</div>`;
+        });
 }
 
 function showWeatherDataSao(data){
-    let {temp} = data.current;
+    if (!data || !data.main || !data.weather || !data.weather[0]) {
+        weatherSaoEl.innerHTML = `<div class="cityTemperature">N/A</div>`;
+        return;
+    }
+    let {temp} = data.main;
     temp=Math.round(temp);
-    //console.log("temp: "+temp);
-    let {icon} = data.current.weather[0];
-    //console.log({icon});
+    let {icon} = data.weather[0];
     
     weatherSaoEl.innerHTML = `
     <div class="cityIcon">
-        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+        <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
     </div>
     <div class="cityTemperature">
         ${temp}° C
     </div>`;
-
-    //console.log(weatherSaoEl);
 }
 
 
 function showWeatherDataBrasov(dataBrasov){
-    //console.log(dataBrasov);
-    let {temp} = dataBrasov.current;
+    if (!dataBrasov || !dataBrasov.main || !dataBrasov.weather || !dataBrasov.weather[0]) {
+        weatherBrasovEl.innerHTML = `<div class="cityTemperature">N/A</div>`;
+        return;
+    }
+    let {temp} = dataBrasov.main;
     temp=Math.round(temp);
-    //console.log(temp);
-    let {icon} = dataBrasov.current.weather[0];
-    //console.log({icon});
+    let {icon} = dataBrasov.weather[0];
     
-    //weatherBrasovEl.innerHTML = `<div class="cityIcon"><img src="http://openweathermap.org/img/wn/01n@2x.png" alt="Weather Icon" width=75 height=75></div><div class="cityTemperature">18° C</div>`;
-
-    weatherBrasovEl.innerHTML = `<div class="cityIcon"><img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75></div><div class="cityTemperature">${temp}° C</div>`;
-    //console.log(weatherSaoEl);
+    weatherBrasovEl.innerHTML = `<div class="cityIcon"><img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75></div><div class="cityTemperature">${temp}° C</div>`;
 }
 
 function showWeatherDataTaoyuan(dataTaoyuan){
-    let {temp} = dataTaoyuan.current;
+    if (!dataTaoyuan || !dataTaoyuan.main || !dataTaoyuan.weather || !dataTaoyuan.weather[0]) {
+        weatherTaoyuanEl.innerHTML = `<div class="cityTemperature">N/A</div>`;
+        return;
+    }
+    let {temp} = dataTaoyuan.main;
     temp=Math.round(temp);
-    let {icon} = dataTaoyuan.current.weather[0];
-    //console.log({icon});
+    let {icon} = dataTaoyuan.weather[0];
     
     weatherTaoyuanEl.innerHTML = `
     <div class="cityIcon">
-        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+        <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
     </div>
     <div class="cityTemperature">
         ${temp}° C
     </div>`;
-
-    //console.log(weatherSaoEl);
 }
 
 function showWeatherDataTaipei(data){
-    let {temp} = data.current;
+    if (!data || !data.main || !data.weather || !data.weather[0]) {
+        weatherTaipeiEl.innerHTML = `<div class="cityTemperature">N/A</div>`;
+        return;
+    }
+    let {temp} = data.main;
     temp=Math.round(temp);
-    let {icon} = data.current.weather[0];
-    console.log({temp});
+    let {icon} = data.weather[0];
     
     weatherTaipeiEl.innerHTML = `
     <div class="cityIcon">
-        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+        <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
     </div>
     <div class="cityTemperature">
         ${temp}° C
     </div>`;
-
-    //console.log(weatherSaoEl);
 }
 
 function showWeatherDataOdessa(data){
-    let {temp} = data.current;
+    if (!data || !data.main || !data.weather || !data.weather[0]) {
+        weatherOdessaEl.innerHTML = `<div class="cityTemperature">N/A</div>`;
+        return;
+    }
+    let {temp} = data.main;
     temp=Math.round(temp);
-    let {icon} = data.current.weather[0];
-    //console.log({temp});
+    let {icon} = data.weather[0];
     
     weatherOdessaEl.innerHTML = `
     <div class="cityIcon">
-        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+        <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
     </div>
     <div class="cityTemperature">
         ${temp}° C
     </div>`;
-
-    //console.log(weatherSaoEl);
 }
 
 function showWeatherDataTokyo(data){
-    let {temp} = data.current;
+    if (!data || !data.main || !data.weather || !data.weather[0]) {
+        weatherTokyoEl.innerHTML = `<div class="cityTemperature">N/A</div>`;
+        return;
+    }
+    let {temp} = data.main;
     temp=Math.round(temp);
-    let {icon} = data.current.weather[0];
-    //console.log({temp});
+    let {icon} = data.weather[0];
     
     weatherTokyoEl.innerHTML = `
     <div class="cityIcon">
-        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+        <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
     </div>
     <div class="cityTemperature">
         ${temp}° C
     </div>`;
-
-    //console.log(weatherSaoEl);
 }
 
 function showWeatherDataVerbier(data){
-    let {temp} = data.current;
+    if (!data || !data.main || !data.weather || !data.weather[0]) {
+        weatherVerbierEl.innerHTML = `<div class="cityTemperature">N/A</div>`;
+        return;
+    }
+    let {temp} = data.main;
     temp=Math.round(temp);
-    let {icon} = data.current.weather[0];
-    //console.log({temp});
+    let {icon} = data.weather[0];
     
     weatherVerbierEl.innerHTML = `
     <div class="cityIcon">
-        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+        <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
     </div>
     <div class="cityTemperature">
         ${temp}° C
     </div>`;
-
-    //console.log(weatherSaoEl);
 }
 
 function showWeatherDataVenice(data){
-    let {temp} = data.current;
+    if (!data || !data.main || !data.weather || !data.weather[0]) {
+        weatherVeniceEl.innerHTML = `<div class="cityTemperature">N/A</div>`;
+        return;
+    }
+    let {temp} = data.main;
     temp=Math.round(temp);
-    let {icon} = data.current.weather[0];
-    //console.log({temp});
+    let {icon} = data.weather[0];
     
     weatherVeniceEl.innerHTML = `
     <div class="cityIcon">
-        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+        <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
     </div>
     <div class="cityTemperature">
         ${temp}° C
     </div>`;
-
-    //console.log(weatherSaoEl);
 }
 
 function showWeatherDataAmsterdam(data){
-    let {temp} = data.current;
+    if (!data || !data.main || !data.weather || !data.weather[0]) {
+        weatherAmsterdamEl.innerHTML = `<div class="cityTemperature">N/A</div>`;
+        return;
+    }
+    let {temp} = data.main;
     temp=Math.round(temp);
-    let {icon} = data.current.weather[0];
-    //console.log({temp});
+    let {icon} = data.weather[0];
     
     weatherAmsterdamEl.innerHTML = `
     <div class="cityIcon">
-        <img src="http://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
+        <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon" width=75 height=75>
     </div>
     <div class="cityTemperature">
         ${temp}° C
     </div>`;
-
-    //console.log(weatherSaoEl);
 }
 
 
