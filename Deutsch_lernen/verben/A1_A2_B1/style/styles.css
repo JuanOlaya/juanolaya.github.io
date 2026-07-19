@@ -2716,28 +2716,16 @@ body.compact-view.compact-light-mode .kompakt-header-es {
 
 .kompakt-level-content {
 
-
-
     background: transparent;
-
-
-
     padding: 10px 20px;
-
-
-
     text-align: left;
-
-
-
     flex: 1;
-
-
-
     overflow-y: auto !important;
+    scrollbar-width: none; /* Firefox */
+}
 
-
-
+.kompakt-level-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
 }
 
 
