@@ -24064,3 +24064,16 @@ body.compact-view .card-back-body {
     flex: 1 1 0% !important;
     height: 0 !important;
 }
+
+/* Native dialog modal styles */
+dialog.modal-content {
+    border: none;
+    outline: none;
+    background-color: #fff;
+    padding: 0;
+    border-radius: 20px;
+}
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
