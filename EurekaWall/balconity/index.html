@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Balcondipity - EurekaWall</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <section id="balconity">
+            <section>    
+                <iframe class="windowBrasov" id="brasovCam" src="https://www.youtube.com/embed/G05wmWFDtSo?autoplay=1&mute=1&vq=hd1080" allow='autoplay' frameBorder="0"></iframe>
+                <iframe class="window" id="saoPauloCam" src="https://www.youtube.com/embed/K8r6pjAuLQ4?autoplay=1&mute=1&vq=hd1080" width="1345" height="762" allow='autoplay' frameBorder="0"></iframe>
+                <iframe class="window" id="taoyuanCam" src="https://www.youtube.com/embed/z_mlibCfgFI?autoplay=1&mute=1&vq=hd1080" width="1266" height="712" allow='autoplay' frameBorder="0"></iframe>
+                <iframe class="window" id="taipeiCam" src="https://www.youtube.com/embed/z_fY1pj1VBw?autoplay=1&mute=1&vq=hd1080" width="1268" height="713" allow='autoplay' frameBorder="0"></iframe>
+                <iframe class="window" id="odessaCam" src="https://www.youtube.com/embed/OBNF7N1ZDlM?autoplay=1&mute=1&vq=hd1080" width="1264" height="711" allow='autoplay' frameBorder="0"></iframe>
+                <iframe class="window" id="tokyoCam" src="https://www.youtube.com/embed/HpdO5Kq3o7Y?autoplay=1&mute=1&vq=hd1080" width="1268" height="713" allow='autoplay' frameBorder="0"></iframe>
+                <iframe class="window" id="verbierCam" src="https://www.youtube.com/embed/yDKJMdZTEXQ?autoplay=1&mute=1&vq=hd1080" width="1248" height="702" allow='autoplay' frameBorder="0"></iframe>
+                <iframe class="window" id="veniceCam" src="https://www.youtube.com/embed/HpZAez2oYsA?autoplay=1&mute=1&vq=hd1080" width="1268" height="713" allow='autoplay' frameBorder="0"></iframe>
+                <iframe class="window" id="amsterdamCam" src="https://www.youtube.com/embed/-E8pophP1VQ?autoplay=1&mute=1&vq=hd1080" width="1248" height="702" allow='autoplay' frameBorder="0"></iframe>        
+            </section>   
+            <section class="marginFrameBackground">
+                <div id="frameBehind" class="frameBackground"></div>
+            </section>           
+            <section>
+                <div id="allBackground" class="fullBackground"></div>
+            </section>
+            <section class="marginFrame">
+                <div class="frame"></div>
+            </section>
+            <section class="marginBoxCity">
+                <div class="boxCity"></div>
+            </section>
+            <section class="marginBoxInfoLeft">   
+                <div class="boxInfoLeft"></div>
+            </section>
+            
+            <span id="leftArrowIcon" class="material-icons-round span_no_selection">arrow_left</span>
+            <span id="rightArrowIcon" class="material-icons-round span_no_selection">arrow_right</span>
+            <span id="infoIcon" class="material-icons-outlined span_no_selection">priority_high</span>
+            <span id="goBackBalconity" class="material-icons-outlined span_no_selection">arrow_back</span>
+
+            <section class="saoName" id="saoPauloTitle">
+                France, Alpes-Maritimes, Nice 
+            </section>
+            
+            <section id="saoPauloInfo">
+                <div id="weatherSao">
+                    <div class="cityIcon">
+                        <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
+                    </div>
+                    <div class="cityTemperature"></div>
+                </div>
+                <div class="cityTime" id="timeSao"></div> 
+                <div class="cityDate" id="dateSao"></div>
+            </section>
+
+            <section class="brasovName" id="brasovTitle">
+                Romania, Brasov, Michael Weiss Street
+            </section>
+            <section id="brasovInfo">
+                <div id="weatherBrasov">
+                    <div class="cityIcon">
+                        <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
+                    </div>
+                    <div class="cityTemperature"></div>
+                </div>
+                <div class="cityTime" id="timeBrasov"></div>
+                <div class="cityDate" id="dateBrasov"></div>
+            </section>
+
+            <section class="taoyuanName" id="taoyuanTitle">
+                Taiwan, Taoyuan, Daxi Old Street
+            </section>
+            <section id="taoyuanInfo">
+                <div id="weatherTaoyuan">
+                    <div class="cityIcon">
+                        <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
+                    </div>
+                    <div class="cityTemperature"></div>
+                </div>
+                <div class="cityTime" id="timeTaoyuan"></div>
+                <div class="cityDate" id="dateTaoyuan"></div>
+            </section>
+                
+            <section class="taipeiName" id="taipeiTitle">
+                Taiwan, Taipei City  
+            </section>
+            <section id="taipeiInfo">
+                <div id="weatherTaipei">
+                    <div class="cityIcon">
+                        <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
+                    </div>
+                    <div class="cityTemperature"></div>
+                </div>
+                <div class="cityTime" id="timeTaipei"></div>
+                <div class="cityDate" id="dateTaipei"></div>
+            </section>
+
+            <section class="odessaName" id="odessaTitle">
+                USA, Florida, Deerfield Beach
+            </section>
+            <section id="odessaInfo">
+                <div id="weatherOdessa">
+                    <div class="cityIcon">
+                        <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
+                    </div>
+                    <div class="cityTemperature"></div>
+                </div>
+                <div class="cityTime" id="timeOdessa"></div>
+                <div class="cityDate" id="dateOdessa"></div>
+            </section>
+
+            <section class="tokyoName" id="tokyoTitle">
+                Japan, Tokyo, Shibuya Scramble Crossing
+            </section>
+            <section id="tokyoInfo">
+                <div id="weatherTokyo">
+                    <div class="cityIcon">
+                        <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
+                    </div>
+                    <div class="cityTemperature"></div>
+                </div>
+                <div class="cityTime" id="timeTokyo"></div>
+                <div class="cityDate" id="dateTokyo"></div>
+            </section>
+
+            <section class="veniceName" id="veniceTitle">
+                Italy, Venice, Guglie Bridge
+            </section>
+            <section id="veniceInfo">
+                <div id="weatherVenice">
+                    <div class="cityIcon">
+                        <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
+                    </div>
+                    <div class="cityTemperature"></div>
+                </div>
+                <div class="cityTime" id="timeVenice"></div>
+                <div class="cityDate" id="dateVenice"></div>
+            </section>
+
+            <section class="verbierName" id="verbierTitle">
+                Switzerland, Verbier Town
+            </section>
+            <section id="verbierInfo">
+                <div id="weatherVerbier">
+                    <div class="cityIcon">
+                        <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
+                    </div>
+                    <div class="cityTemperature"></div>
+                </div>
+                <div class="cityTime" id="timeVerbier"></div>
+                <div class="cityDate" id="dateVerbier"></div>
+            </section>
+
+            <section class="amsterdamName" id="amsterdamTitle">
+                Taiwan, Taoyuan, Xiao Wulai 
+            </section>
+            <section id="amsterdamInfo">
+                <div id="weatherAmsterdam">
+                    <div class="cityIcon">
+                        <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="Weather Icon" width=75 height=75>
+                    </div>
+                    <div class="cityTemperature"></div>
+                </div>
+                <div class="cityTime" id="timeAmsterdam"></div>
+                <div class="cityDate" id="dateAmsterdam"></div>
+            </section>
+
+            <section id="infoScreen">
+                <div class="marginFrame screenInfo">
+                    <br>
+                    <div id="aboutTitle">Balcondipity: The serendipitous observation point</div>
+                    <br><br><br><br>
+                    <div class="slideshow-container">
+                        <div class="mySlides fade">
+                            <div class="aboutIconMargin">
+                                <span id="aboutIcon" class="material-icons span_no_selection">explore</span>
+                            </div>
+                            <br><br><br><br>
+                            <div class="text">In the literature of creative spaces, rooms with multiple windows are considered as a positive element for an inspiring atmosphere.</div>
+                        </div>
+                        <div class="mySlides fade">
+                            <div class="aboutIconMargin">
+                                <span id="aboutIcon" class="material-icons span_no_selection">play_circle_filled</span>
+                            </div>
+                            <br><br><br><br>
+                            <div class="text">However, seeing the same surroundings every day can be monotonous.</div>
+                        </div>
+                        <div class="mySlides fade">
+                            <div class="aboutIconMargin">
+                                <span id="aboutIcon" class="material-icons span_no_selection">travel_explore</span>
+                            </div>
+                            <br><br><br><br>
+                            <div class="text">Balcondipity is a digital observation point where users can visit different venues from the world in real-time.</div>
+                        </div> 
+                    </div>
+                    <div>
+                        <span id="leftArrowAboutIcon" class="material-icons-round span_no_selection" onclick="plusSlides(-1)">arrow_left</span>
+                        <span id="rightArrowAboutIcon" class="material-icons-round span_no_selection" onclick="plusSlides(1)">arrow_right</span>
+                    </div>
+                    <br>
+                    <div class="marginDot" style="text-align:center">
+                        <span class="dot" onclick="currentSlide(1)"></span> 
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span> 
+                    </div>
+                </div>
+                <span id="cancelInfoScreen" class="material-icons-round span_no_selection">highlight_off</span>
+            </section>
+        </section>
+
+        <script src="script.js" type="text/javascript"></script>
+    </body>
+</html>

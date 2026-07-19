@@ -1,0 +1,433 @@
+body {
+    background-color: #1e1e1e;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Work Sans', 'Roboto', sans-serif;
+    user-select: none;
+}
+
+#shapyGridSection {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+}
+
+/* Material Icon Reset */
+.span_no_selection {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Arrow Back Button */
+#goBackShapyGrid {
+    margin: 0;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    font-size: 35px;
+    color: rgba(243, 228, 206, 0.9);
+    border-radius: 50%;
+    padding: 10px;
+    background-color: #292A2B;
+    z-index: 2;
+    transition: background-color 0.2s;
+}
+#goBackShapyGrid:hover {
+    background-color: #3C3D3E;
+}
+
+#purple{
+    margin: 0;
+    position: absolute;
+    left: 75px;
+    bottom: 20px;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 25px;
+    color: #484B78;
+    background-color: #141414;
+    z-index: 1;
+}
+
+#yellow{
+    margin: 0;
+    position: absolute;
+    left: 135px;
+    bottom: 20px;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 25px;
+    color: #E4AA2D;
+    background-color: #141414;
+    z-index: 1;
+}
+
+#pink{
+    margin: 0;
+    position: absolute;
+    left: 195px;
+    bottom: 20px;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 25px;
+    color: #C62F40;
+    background-color: #141414;
+    z-index: 1;
+}
+
+#green{
+    margin: 0;
+    position: absolute;
+    left: 255px;
+    bottom: 20px;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 25px;
+    color: #58875D;
+    background-color: #141414;
+    z-index: 1;
+}
+
+#orange{
+    margin: 0;
+    position: absolute;
+    left: 315px;
+    bottom: 20px;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 25px;
+    color: #D0692E;
+    background-color: #141414;
+    z-index: 1;
+}
+
+#clean{
+    margin: 0;
+    position: absolute;
+    left: 375px;
+    bottom: 20px;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 25px;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#circleShapy{
+    margin: 0;
+    position: absolute;
+    left: 480px;
+    bottom: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#squareShapy{
+    margin: 0;
+    position: absolute;
+    left: 540px;
+    bottom: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#pie1Shapy{
+    margin: 0;
+    position: absolute;
+    left: 600px;
+    bottom: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#pie2Shapy{
+    margin: 0;
+    position: absolute;
+    left: 660px;
+    bottom: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#pie3Shapy{
+    margin: 0;
+    position: absolute;
+    left: 720px;
+    bottom: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#pie4Shapy{
+    margin: 0;
+    position: absolute;
+    left: 780px;
+    bottom: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#triangle1Shapy{
+    margin: 0;
+    position: absolute;
+    left: 840px;
+    bottom: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#triangle2Shapy{
+    margin: 0;
+    position: absolute;
+    left: 900px;
+    bottom: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#triangle3Shapy{
+    margin: 0;
+    position: absolute;
+    left: 960px;
+    bottom: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#triangle4Shapy{
+    margin: 0;
+    position: absolute;
+    left: 1020px;
+    bottom: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#leaf1Shapy{
+    margin: 0;
+    position: absolute;
+    left: 1080px;
+    bottom: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#leaf2Shapy{
+    margin: 0;
+    position: absolute;
+    left: 1140px;
+    bottom: 20px;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#backgroundShapy{
+    margin: 0;
+    position: absolute;
+    left: 1275px;
+    bottom: 20px;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 25px;
+    color: rgba(243, 228, 206);
+    background-color: #141414;
+    z-index: 1;
+}
+
+#infoScreenShapy {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.screenInfoShapy{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1200px; 
+    height: 633px;
+    border: 43px solid #292A2B;
+    background: #292A2B;
+    line-height: 120%;
+    color: #F1D8BC;
+    font-size: 35px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+}
+
+#aboutTitle {
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+#cancelInfoScreenShapy{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(540px, 240px);
+    cursor: pointer;
+    font-size: 45px;
+    color: #F1D8BC;
+    border-radius: 50%;
+    background: #3C3D3E;
+    border: 10px solid #3C3D3E;
+    z-index: 12;
+}
+
+#infoIconShapy{
+    margin: 0;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 35px;
+    transform: rotate(180deg);
+    color: rgba(243, 228, 206, 0.9);
+    border-radius: 50%;
+    padding: 10px;
+    background-color: #292A2B;
+    z-index: 2;
+}
+
+.SVGlocationShapy{
+    position: relative;
+    left: 17px;
+    top: 15px;
+}
+
+/* Slideshow styles */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    height: 300px;
+}
+
+.mySlides {
+    display: none;
+}
+
+.aboutIconMargin {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.aboutIconMargin span {
+    font-size: 80px;
+    color: #F1D8BC;
+}
+
+.text {
+    color: #F1D8BC;
+    font-size: 24px;
+    padding: 8px 12px;
+    width: 100%;
+    text-align: center;
+}
+
+.dot {
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin: 0 4px;
+    background-color: #717171;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+    background-color: #F1D8BC;
+}
+
+/* Fading animation */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}

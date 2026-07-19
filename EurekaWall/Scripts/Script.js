@@ -248,12 +248,14 @@ function setup() {
         }
 	}
 	*/
+	/*
 	let gap=7;
 	for(let x=width/18;x<cols2;x=x+(sizePixel+gap) ){
 		for(let y=width/25;y<rows2;y=y+(sizePixel+gap) ){
 			pixelList.push(new Pixel(x,y,sizePixel));
         }
 	}
+	*/
 	
 	// WINDOW TO ANOTHER WORLD
 	rot=3*PI/2;

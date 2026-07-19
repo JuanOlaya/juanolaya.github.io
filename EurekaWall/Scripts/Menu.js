@@ -987,16 +987,10 @@ function mousePressed(){
                     screen=20;
                 }
                 if(numApp==8){
-                    homeEureka.style.display = "none";
-                    balconitySection.style.display = "block";
-                    defaultCanvas.style.display = "none";
-                    screen=30;
+                    window.location.href = "balconity/index.html";
                 }
                 if(numApp==9){
-                    shapyGridSection.style.display = "block";
-                    homeEureka.style.display = "none";
-                    defaultCanvas.style.zIndex = "-1";
-                    screen=10;
+                    window.location.href = "pixelGrid/index.html";
                 }
             }
         } 
