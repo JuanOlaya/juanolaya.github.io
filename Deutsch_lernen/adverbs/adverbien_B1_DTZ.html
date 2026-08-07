@@ -2598,6 +2598,13 @@
             adverbs: g.adverbs.filter(a => a.dtz_star)
         }));
         const wordMap = createWordMap(starredRawAdverbGroups);
+        
+        // Add B1 DTZ starred modal particles (like doch) to wordMap
+        modalParticlesGroup.adverbs.forEach((adverb) => {
+            if (adverb.dtz_star) {
+                wordMap.set(adverb.word, adverb);
+            }
+        });
         const adjectiveLikeWords = new Set(['nat\u00fcrlich', 'haupts\u00e4chlich', 'pers\u00f6nlich', 'konsequent', 'regelrecht', 'grundsätzlich']);
         const adverbOverrides = {
             danach: {
@@ -3042,7 +3049,7 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            console.log("App cargada. Última actualización del código (lastUpdate): 2026-08-07 12:25:00");
+            console.log("App cargada. Última actualización del código (lastUpdate): 2026-08-07 12:32:00");
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'light') {
                 document.body.classList.add('light-mode');
