@@ -31,6 +31,12 @@ const levelMap = {
 };
 
 const standardColors = ['#3b82f6', '#eab308', '#f97316', '#ef4444'];
+const footerRules = [
+    "Regla: No cambian posición del verbo",
+    "Regla: Envían el verbo al final",
+    "Regla: Envían el verbo al final",
+    "Regla: Empujan el verbo a pos 2"
+];
 
 let cardIdx = 0;
 while ((cardMatch = cardRegex.exec(htmlContent)) !== null) {
@@ -43,11 +49,8 @@ while ((cardMatch = cardRegex.exec(htmlContent)) !== null) {
     const title = headerMatch[1].trim();
     const translation = headerMatch[2].trim();
     const themeColor = standardColors[cardIdx % standardColors.length];
+    const footerText = footerRules[cardIdx] || '';
     cardIdx++;
-    
-    // Extract footer
-    const footerMatch = /<div class="level-footer[^>]*?>([\s\S]*?)<\/div>/i.exec(cardContent);
-    const footerText = footerMatch ? footerMatch[1].trim() : '';
     
     // Extract rows
     let rowsHtml = '';
