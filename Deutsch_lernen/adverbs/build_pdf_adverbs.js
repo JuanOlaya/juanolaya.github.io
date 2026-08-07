@@ -1,0 +1,293 @@
+const fs = require('fs');
+const path = require('path');
+const os = require('os');
+const { execSync } = require('child_process');
+
+const desktopPath = path.join(os.homedir(), 'Desktop');
+const tempHtmlPath = path.join(desktopPath, 'adverbien_DTZ_print.html');
+const pdfPath = path.join(desktopPath, 'adverbien_B1_DTZ.pdf');
+
+// 1. Read adverbien_B1_DTZ.html
+const htmlContent = fs.readFileSync('adverbien_B1_DTZ.html', 'utf8');
+
+// 2. Extract script block containing data
+const scriptRegex = /<script>([\s\S]*?)<\/script>/gi;
+let scriptCode = '';
+let match;
+while ((match = scriptRegex.exec(htmlContent)) !== null) {
+    if (match[1].includes('rawAdverbGroups') && match[1].includes('themeBlueprints')) {
+        scriptCode = match[1];
+        break;
+    }
+}
+
+if (!scriptCode) {
+    console.error('Failed to locate script block with data.');
+    process.exit(1);
+}
+
+// 3. Evaluate script block to get variables in a sandboxed way
+const sandboxCode = `
+const document = {
+    addEventListener: () => {},
+    getElementById: () => ({ appendChild: () => {}, style: {} }),
+    querySelector: () => ({ style: {} }),
+    querySelectorAll: () => []
+};
+const window = {
+    speechSynthesis: {},
+    addEventListener: () => {}
+};
+const navigator = {
+    userAgent: ''
+};
+${scriptCode}
+console.log(JSON.stringify({ rawAdverbGroups, themeBlueprints, modalParticlesGroup }));
+`;
+
+const tempEvalPath = path.join(__dirname, 'temp_eval.js');
+fs.writeFileSync(tempEvalPath, sandboxCode, 'utf8');
+
+let data;
+try {
+    const stdout = execSync(`node "${tempEvalPath}"`, { maxBuffer: 10 * 1024 * 1024 });
+    data = JSON.parse(stdout.toString());
+} catch (err) {
+    console.error('Failed to extract data via Node evaluation.');
+    console.error(err);
+    if (fs.existsSync(tempEvalPath)) fs.unlinkSync(tempEvalPath);
+    process.exit(1);
+} finally {
+    if (fs.existsSync(tempEvalPath)) fs.unlinkSync(tempEvalPath);
+}
+
+const { rawAdverbGroups, themeBlueprints, modalParticlesGroup } = data;
+
+// 4. Create word mapping
+const wordMap = new Map();
+rawAdverbGroups.forEach(g => {
+    g.adverbs.forEach(adv => {
+        if (adv.dtz_star) {
+            wordMap.set(adv.word, adv);
+        }
+    });
+});
+modalParticlesGroup.adverbs.forEach(adv => {
+    if (adv.dtz_star) {
+        wordMap.set(adv.word, adv);
+    }
+});
+
+// Standard premium colors for card headers
+const standardColors = ['#0ea5e9', '#0284c7', '#0f766e', '#9333ea', '#f43f5e', '#be123c', '#ea580c', '#059669', '#f59e0b', '#b45309', '#6366f1'];
+
+// 5. Generate print HTML
+let printHtml = `<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>DTZ B1 Adverbien - Druckversion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&family=Inter:ital,wght@0,400;0,600;0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #0f172a;
+            margin: 0;
+            padding: 10mm;
+            -webkit-print-color-adjust: exact;
+        }
+        .page-header {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .page-header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            margin: 0;
+            color: #0f172a;
+        }
+        .page-header p {
+            font-size: 0.8rem;
+            margin: 2px 0 10px 0;
+            color: #64748b;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 12px;
+            height: calc(100vh - 28mm);
+            page-break-after: always;
+        }
+        .grid:last-child {
+            page-break-after: avoid;
+        }
+        .kompakt-card {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            break-inside: avoid;
+            font-size: 0.75rem;
+        }
+        .kompakt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 12px;
+            color: #ffffff;
+        }
+        .header-de {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 800;
+        }
+        .header-es {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-style: italic;
+            opacity: 0.9;
+        }
+        .kompakt-content {
+            padding: 4px 10px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .kompakt-row {
+            padding: 5px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .kompakt-row:last-child {
+            border-bottom: none;
+        }
+        .word-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .kompakt-german {
+            font-size: 0.85rem;
+            color: #0f172a;
+        }
+        .kompakt-spanish {
+            font-size: 0.75rem;
+            font-style: italic;
+            color: #475569;
+        }
+        .kompakt-example {
+            font-size: 0.65rem;
+            color: #64748b;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+<body>
+`;
+
+// Chunk the 11 blueprints into A4 pages (6 cards per page)
+const chunks = [];
+for (let i = 0; i < themeBlueprints.length; i += 6) {
+    chunks.push(themeBlueprints.slice(i, i + 6));
+}
+
+chunks.forEach((chunk, pageIndex) => {
+    printHtml += `  <div class="page-header">
+        <h1>DTZ B1 Adverbien (⭐ Esenciales) - Seite ${pageIndex + 1} von ${chunks.length}</h1>
+        <p>Tarjetas de Vocabulario para Examen de Certificación B1</p>
+    </div>
+    <div class="grid">
+`;
+
+    chunk.forEach((theme, index) => {
+        const themeColor = standardColors[(pageIndex * 6 + index) % standardColors.length];
+        let rowsHtml = '';
+        
+        theme.words.forEach(w => {
+            const adv = wordMap.get(w);
+            if (adv) {
+                // Formatting spanish translation to remove parentheses if needed
+                let spanTrans = adv.spanish || '';
+                
+                rowsHtml += `            <div class="kompakt-row">
+                <div class="word-line">
+                    <span class="kompakt-german">${adv.emoji} ${adv.word}</span>
+                    <span class="kompakt-spanish">${spanTrans}</span>
+                </div>
+                <div class="kompakt-example">
+                    <strong>Ex:</strong> ${adv.example_de} &rarr; <em>${adv.example_es}</em>
+                </div>
+            </div>
+`;
+            }
+        });
+
+        printHtml += `        <div class="kompakt-card">
+            <div class="kompakt-header" style="background-color: ${themeColor};">
+                <span class="header-de">${theme.title}</span>
+                <span class="header-es">${theme.translation}</span>
+            </div>
+            <div class="kompakt-content">
+${rowsHtml}
+            </div>
+        </div>
+`;
+    });
+
+    // If it's the last page and has less than 6 cards, pad it with empty cards to maintain grid layout
+    if (chunk.length < 6) {
+        for (let pad = 0; pad < (6 - chunk.length); pad++) {
+            printHtml += '        <div style="border: 1px dashed #cbd5e1; border-radius: 10px; opacity: 0.3;"></div>\n';
+        }
+    }
+
+    printHtml += `    </div>\n`; // end grid
+});
+
+printHtml += `</body>
+</html>`;
+
+fs.writeFileSync(tempHtmlPath, printHtml, 'utf8');
+console.log('HTML generated at:', tempHtmlPath);
+
+// 6. Find Edge/Chrome path
+const browsers = [
+    'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+];
+
+let browserPath = null;
+for (const b of browsers) {
+    if (fs.existsSync(b)) {
+        browserPath = '"' + b + '"';
+        break;
+    }
+}
+
+if (!browserPath) {
+    console.error('Could not find Edge or Chrome to compile the PDF.');
+    process.exit(1);
+}
+
+try {
+    console.log('Generating PDF via headless browser...');
+    const command = `${browserPath} --headless --disable-gpu "--print-to-pdf=${pdfPath}" "${tempHtmlPath}"`;
+    execSync(command, { stdio: 'inherit' });
+    console.log('SUCCESS! PDF generated successfully at:', pdfPath);
+    if (fs.existsSync(tempHtmlPath)) fs.unlinkSync(tempHtmlPath);
+} catch (error) {
+    console.error('Failed to convert HTML to PDF.');
+    console.error(error);
+}
