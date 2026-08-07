@@ -232,7 +232,7 @@ themeBlueprints.forEach((theme, index) => {
                     </span>
                 </div>
                 <div class="kompakt-example">
-                    <strong>Ex:</strong> ${adv.example_de} &rarr; <em>${adv.example_es}</em>
+                    ${adv.example_de} &rarr; <em>${adv.example_es}</em>
                 </div>
             </div>
 `;

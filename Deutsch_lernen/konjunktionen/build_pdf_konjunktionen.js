@@ -72,7 +72,7 @@ while ((cardMatch = cardRegex.exec(htmlContent)) !== null) {
                     </span>
                 </div>
                 <div class="kompakt-example">
-                    <strong>Ex:</strong> ${example}
+                    ${example}
                 </div>
             </div>
 `;
