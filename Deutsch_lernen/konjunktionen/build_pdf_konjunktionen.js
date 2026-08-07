@@ -30,7 +30,7 @@ const levelMap = {
     deshalb: 'B1', deswegen: 'B1', trotzdem: 'B1', dennoch: 'B1', sonst: 'B1', dann: 'B1', außerdem: 'B1'
 };
 
-const standardColors = ['#3b82f6', '#eab308', '#f97316', '#ef4444'];
+const standardColors = ['#3b82f6', '#ca8a04', '#f97316', '#ef4444'];
 const footerRules = [
     "Regla: No cambian posición del verbo",
     "Regla: Envían el verbo al final",
