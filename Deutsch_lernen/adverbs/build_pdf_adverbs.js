@@ -204,40 +204,53 @@ let printHtml = `<!DOCTYPE html>
 <body>
 `;
 
-// Chunk the 11 blueprints into A4 pages (6 cards per page)
-const chunks = [];
-for (let i = 0; i < themeBlueprints.length; i += 6) {
-    chunks.push(themeBlueprints.slice(i, i + 6));
-}
+// 5. Generate all card HTMLs
+const cardsList = [];
 
-chunks.forEach((chunk, pageIndex) => {
-    printHtml += `    <div class="grid">
+// A. Add Title/Cover Card first
+const titleCardHtml = `        <div class="kompakt-card" style="border: 2px solid #0f172a; background-color: #f8fafc; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; padding: 15px;">
+            <div style="margin-top: 15px; width: 100%;">
+                <span style="font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800; color: #0f172a; display: block; line-height: 1.1;">DTZ B1</span>
+                <span style="font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800; color: #0284c7; display: block; margin-top: 5px; letter-spacing: 1px;">ADVERBIEN</span>
+            </div>
+            <div style="margin-bottom: 15px; font-size: 0.82rem; color: #475569; font-weight: 600; line-height: 1.4; padding: 0 10px; width: 100%;">
+                <p style="margin: 0 0 10px 0; font-size: 0.95rem; color: #0f172a; font-weight: 700;">Lista Oficial y Ejemplos</p>
+                <div style="border-top: 1px solid #cbd5e1; margin: 8px 0;"></div>
+                <p style="margin: 4px 0;">⭐ 70 Adverbios Esenciales</p>
+                <p style="margin: 4px 0;">📂 11 Categorías Temáticas</p>
+                <p style="margin: 4px 0;">📖 Ejemplos Prácticos Completos</p>
+                <div style="border-top: 1px solid #cbd5e1; margin: 8px 0;"></div>
+                <p style="margin: 8px 0 0 0; font-size: 0.72rem; color: #94a3b8; font-style: italic;">Preparación para el Examen de Certificación (Goethe / telc)</p>
+            </div>
+        </div>
 `;
+cardsList.push(titleCardHtml);
 
-    chunk.forEach((theme, index) => {
-        const themeColor = standardColors[(pageIndex * 6 + index) % standardColors.length];
-        let rowsHtml = '';
-        
-        theme.words.forEach(w => {
-            const adv = wordMap.get(w);
-            if (adv) {
-                // Formatting spanish translation to remove parentheses if needed
-                let spanTrans = adv.spanish || '';
-                
-                rowsHtml += `            <div class="kompakt-row">
+// B. Build the 11 category cards
+themeBlueprints.forEach((theme, index) => {
+    const themeColor = standardColors[index % standardColors.length];
+    let rowsHtml = '';
+    
+    theme.words.forEach(w => {
+        const adv = wordMap.get(w);
+        if (adv) {
+            let spanTrans = adv.spanish || '';
+            const exactLevel = adv.level || 'B1';
+            
+            rowsHtml += `            <div class="kompakt-row">
                 <div class="word-line">
                     <span class="kompakt-german">${adv.word}</span>
-                    <span class="kompakt-spanish">${spanTrans}</span>
+                    <span class="kompakt-spanish">${spanTrans} <span style="font-size: 0.55rem; background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 0px 3px; border-radius: 4px; font-weight: 700; font-style: normal; margin-left: 4px;">${exactLevel}</span></span>
                 </div>
                 <div class="kompakt-example">
                     <strong>Ex:</strong> ${adv.example_de} &rarr; <em>${adv.example_es}</em>
                 </div>
             </div>
 `;
-            }
-        });
+        }
+    });
 
-        printHtml += `        <div class="kompakt-card">
+    const cardHtml = `        <div class="kompakt-card">
             <div class="kompakt-header" style="background-color: ${themeColor};">
                 <span class="header-de">${theme.title}</span>
                 <span class="header-es">${theme.translation}</span>
@@ -247,33 +260,24 @@ ${rowsHtml}
             </div>
         </div>
 `;
+    cardsList.push(cardHtml);
+});
+
+// Chunk into pages of 6 cards
+const chunks = [];
+for (let i = 0; i < cardsList.length; i += 6) {
+    chunks.push(cardsList.slice(i, i + 6));
+}
+
+chunks.forEach((chunk, pageIndex) => {
+    printHtml += `    <div class="grid">
+`;
+
+    chunk.forEach(card => {
+        printHtml += card;
     });
 
-    // If it's the last page and has less than 6 cards, pad it with the custom title card
-    if (chunk.length < 6) {
-        const titleCardHtml = `        <div class="kompakt-card" style="border: 2px solid #0f172a; background-color: #f8fafc; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; padding: 20px;">
-            <div style="margin-top: 15px; width: 100%;">
-                <span style="font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800; color: #0f172a; display: block; line-height: 1.1;">DTZ B1</span>
-                <span style="font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800; color: #0284c7; display: block; margin-top: 5px; letter-spacing: 1px;">ADVERBIEN</span>
-            </div>
-            <div style="margin-bottom: 15px; font-size: 0.85rem; color: #475569; font-weight: 600; line-height: 1.4; padding: 0 10px; width: 100%;">
-                <p style="margin: 0 0 10px 0; font-size: 0.95rem; color: #0f172a; font-weight: 700;">Lista Oficial y Ejemplos</p>
-                <div style="border-top: 1px solid #cbd5e1; margin: 8px 0;"></div>
-                <p style="margin: 4px 0;">⭐ 70 Adverbios Esenciales</p>
-                <p style="margin: 4px 0;">📂 11 Categorías Temáticas</p>
-                <p style="margin: 4px 0;">📖 Ejemplos Prácticos Completos</p>
-                <div style="border-top: 1px solid #cbd5e1; margin: 8px 0;"></div>
-                <p style="margin: 8px 0 0 0; font-size: 0.75rem; color: #94a3b8; font-style: italic;">Preparación para el Examen de Certificación (Goethe / telc)</p>
-            </div>
-        </div>
-`;
-        printHtml += titleCardHtml;
-        for (let pad = 0; pad < (6 - chunk.length - 1); pad++) {
-            printHtml += '        <div style="border: 1px dashed #cbd5e1; border-radius: 10px; opacity: 0.3;"></div>\n';
-        }
-    }
-
-    printHtml += `    </div>\n`; // end grid
+    printHtml += `    </div>\n`;
 });
 
 printHtml += `</body>
