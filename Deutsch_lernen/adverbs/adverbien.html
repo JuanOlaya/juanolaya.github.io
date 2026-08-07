@@ -1577,6 +1577,24 @@
                         "level": "A1"
                     },
                     {
+                        "word": "hierher",
+                        "emoji": "📍",
+                        "spanish": "(hacia aquí / acá)",
+                        "english": "here / this way",
+                        "example_de": "Komm bitte hierher.",
+                        "example_es": "Ven aquí, por favor.",
+                        "level": "A2"
+                    },
+                    {
+                        "word": "dorthin",
+                        "emoji": "👉",
+                        "spanish": "(hacia allá / allí)",
+                        "english": "there / that way",
+                        "example_de": "Wir gehen dorthin.",
+                        "example_es": "Vamos hacia allá.",
+                        "level": "A2"
+                    },
+                    {
                         "word": "zurück",
                         "emoji": "↩️",
                         "spanish": "(atrás / de regreso / de vuelta)",
@@ -2409,30 +2427,35 @@
 
         const themeBlueprints = [
             { title: 'Gegenwart', translation: '(presente)', level: 'A1-A2', colorMain: '#0ea5e9', badge: 'GEGENWART', words: ['jetzt', 'heute', 'gerade', 'gleich', 'sofort', 'bald'] },
-            { title: 'Abfolge', translation: '(secuencia)', level: 'A1-A2', colorMain: '#0284c7', badge: 'ABFOLGE', words: ['gestern', 'morgen', 'dann', 'danach', 'sp\u00e4ter', 'vorhin', 'zuletzt'] },
+            { title: 'Abfolge', translation: '(secuencia)', level: 'A1-A2', colorMain: '#0284c7', badge: 'ABFOLGE', words: ['gestern', 'morgen', 'dann', 'danach', 'später', 'vorhin', 'zuletzt'] },
             { title: 'Beginn', translation: '(inicio)', level: 'A1-A2', colorMain: '#0f766e', badge: 'BEGINN', words: ['erst', 'zuerst', 'erstmals'] },
             { title: 'Status', translation: '(estado)', level: 'A1-A2', colorMain: '#0284c7', badge: 'STATUS', words: ['schon', 'noch', 'bereits'] },
-            { title: 'Zeitlauf', translation: '(curso del tiempo)', level: 'A1-A2', colorMain: '#0891b2', badge: 'ZEITLAUF', words: ['inzwischen', 'wieder', 'erneut', 'endlich', 'pl\u00f6tzlich', 'jederzeit'] },
-            { title: 'Wandel', translation: '(cambio)', level: 'A1-A2', colorMain: '#0f766e', badge: 'WANDEL', words: ['damals', 'heutzutage', 'neuerdings', 'fr\u00fcher'] },
-            { title: 'Ordnung', translation: '(orden)', level: 'A2', colorMain: '#16a34a', badge: 'ORDNUNG', words: ['erstens', 'zweitens', 'drittens', 'viertens', 'f\u00fcnftens'] },
-            { title: 'Z\u00e4hlung', translation: '(enumeraci\u00f3n)', level: 'A1-A2', colorMain: '#65a30d', badge: 'ZAEHLUNG', words: ['einmal', 'zweimal', 'dreimal', 'viermal', 'f\u00fcnfmal', 'mehrmals', 'jeweils'] },
-            { title: 'H\u00e4ufigkeit', translation: '(frecuencia)', level: 'A1-A2', colorMain: '#7c3aed', badge: 'HAEUFIGKEIT', words: ['immer', 'nie', 'oft', 'manchmal', 'selten', 'meistens', 'jemals'] },
-            { title: 'Rhythmus', translation: '(ritmo)', level: 'A1-A2', colorMain: '#9333ea', badge: 'RHYTHMUS', words: ['t\u00e4glich', 'w\u00f6chentlich', 'monatlich', 'j\u00e4hrlich', 'gew\u00f6hnlich', 'normalerweise', 'regelm\u00e4\u00dfig'] },
-            { title: 'Richtung', translation: '(direcci\u00f3n)', level: 'A1-B1', colorMain: '#db2777', badge: 'RICHTUNG', words: ['links', 'rechts', 'geradeaus', 'weiter', 'irgendwohin', 'nirgendwohin', 'zurück', 'rück', 'vorwärts', 'rückwärts', 'voraus', 'herüber', 'hinüber'] },
-            { title: 'Position', translation: '(posici\u00f3n)', level: 'A1-B1', colorMain: '#e11d48', badge: 'POSITION', words: ['oben', 'unten', 'vorne', 'hinten', 'drinnen', 'drau\u00dfen', 'da', 'nebenan', 'unterwegs'] },
-            { title: 'Raum', translation: '(espacio)', level: 'A1', colorMain: '#f43f5e', badge: 'RAUM', words: ['hier', 'dort', '\u00fcberall', 'nirgends', 'irgendwo', 'weg'] },
+            { title: 'Zeitlauf', translation: '(curso del tiempo)', level: 'A1-A2', colorMain: '#0891b2', badge: 'ZEITLAUF', words: ['inzwischen', 'wieder', 'erneut', 'endlich', 'plötzlich', 'jederzeit'] },
+            { title: 'Wandel', translation: '(cambio)', level: 'A1-A2', colorMain: '#0f766e', badge: 'WANDEL', words: ['damals', 'heutzutage', 'neuerdings', 'früher'] },
+            { title: 'Ordnung', translation: '(orden)', level: 'A2', colorMain: '#16a34a', badge: 'ORDNUNG', words: ['erstens', 'zweitens', 'drittens', 'viertens', 'fünftens'] },
+            { title: 'Zählung', translation: '(enumeración)', level: 'A1-A2', colorMain: '#65a30d', badge: 'ZAEHLUNG', words: ['einmal', 'zweimal', 'dreimal', 'viermal', 'fünfmal', 'mehrmals', 'jeweils'] },
+            { title: 'Häufigkeit', translation: '(frecuencia)', level: 'A1-A2', colorMain: '#7c3aed', badge: 'HAEUFIGKEIT', words: ['immer', 'nie', 'oft', 'manchmal', 'selten', 'meistens', 'jemals'] },
+            { title: 'Rhythmus', translation: '(ritmo)', level: 'A1-A2', colorMain: '#9333ea', badge: 'RHYTHMUS', words: ['täglich', 'wöchentlich', 'monatlich', 'jährlich', 'gewöhnlich', 'normalerweise', 'regelmäßig'] },
+            { title: 'Richtung', translation: '(dirección)', level: 'A1-B1', colorMain: '#db2777', badge: 'RICHTUNG', words: ['links', 'rechts', 'geradeaus', 'weiter', 'zurück', 'rück'] },
+            { title: 'Bewegung', translation: '(desplazamiento)', level: 'A2-B1', colorMain: '#c2185b', badge: 'BEWEGUNG', words: ['vorwärts', 'rückwärts', 'voraus', 'irgendwohin', 'nirgendwohin', 'herüber', 'hinüber'] },
+            { title: 'Position', translation: '(posición)', level: 'A1-B1', colorMain: '#e11d48', badge: 'POSITION', words: ['oben', 'unten', 'vorne', 'hinten', 'drinnen', 'draußen', 'da'] },
+            { title: 'Umgebung', translation: '(entorno)', level: 'A2-B1', colorMain: '#be123c', badge: 'UMGEBUNG', words: ['nebenan', 'unterwegs', 'hierher', 'dorthin'] },
+            { title: 'Raum', translation: '(espacio)', level: 'A1', colorMain: '#f43f5e', badge: 'RAUM', words: ['hier', 'dort', 'überall', 'nirgends', 'irgendwo', 'weg'] },
             { title: 'Grad', translation: '(grado)', level: 'A1-B1', colorMain: '#ea580c', badge: 'GRAD', words: ['sehr', 'fast', 'ganz', 'ziemlich', 'besonders', 'sogar', 'so'] },
-            { title: 'Anteil', translation: '(proporci\u00f3n)', level: 'A1-B1', colorMain: '#7c2d12', badge: 'ANTEIL', words: ['haupts\u00e4chlich', 'insbesondere', 'teilweise'] },
-            { title: 'Vermutung', translation: '(suposici\u00f3n)', level: 'A1-B1', colorMain: '#d97706', badge: 'VERMUTUNG', words: ['vielleicht', 'm\u00f6glicherweise', 'vermutlich', 'wahrscheinlich', 'bestimmt', 'sicher', 'hoffentlich'] },
-            { title: 'Fokus', translation: '(enfoque)', level: 'A1-B1', colorMain: '#2563eb', badge: 'FOKUS', words: ['auch', 'nur', 'wirklich', 'eigentlich', 'tats\u00e4chlich', '\u00fcberhaupt', 'eben'] },
-            { title: 'Haltung', translation: '(actitud)', level: 'A1-B1', colorMain: '#059669', badge: 'HALTUNG', words: ['nat\u00fcrlich', 'gern', 'ehrlich', 'h\u00f6flich', 'lieber', 'gl\u00fccklich', 'gl\u00fccklicherweise'] },
-            { title: 'Weise', translation: '(manera)', level: 'A1-B1', colorMain: '#0891b2', badge: 'WEISE', words: ['zusammen', 'alleine', 'anders', 'einfach', 'kaum', 'leider', 'dabei', 'hiermit'] },
-            { title: 'Stil', translation: '(estilo)', level: 'A1-B1', colorMain: '#64748b', badge: 'STIL', words: ['pers\u00f6nlich', 'konsequent', 'theoretisch', 'quasi', 'regelrecht', 'grundsätzlich'] },
+            { title: 'Anteil', translation: '(proporción)', level: 'A1-B1', colorMain: '#7c2d12', badge: 'ANTEIL', words: ['hauptsächlich', 'insbesondere', 'teilweise'] },
+            { title: 'Vermutung', translation: '(suposición)', level: 'A1-B1', colorMain: '#d97706', badge: 'VERMUTUNG', words: ['vielleicht', 'möglicherweise', 'vermutlich', 'wahrscheinlich', 'bestimmt', 'sicher', 'hoffentlich'] },
+            { title: 'Fokus', translation: '(enfoque)', level: 'A1-B1', colorMain: '#2563eb', badge: 'FOKUS', words: ['auch', 'nur', 'wirklich', 'eigentlich', 'tatsächlich', 'überhaupt', 'eben'] },
+            { title: 'Haltung', translation: '(actitud)', level: 'A1-B1', colorMain: '#059669', badge: 'HALTUNG', words: ['natürlich', 'gern', 'ehrlich', 'höflich', 'lieber', 'glücklich', 'glücklicherweise'] },
+            { title: 'Weise', translation: '(manera)', level: 'A1-B1', colorMain: '#0891b2', badge: 'WEISE', words: ['zusammen', 'alleine', 'anders', 'einfach', 'kaum', 'leider'] },
+            { title: 'Umstand', translation: '(circunstancia)', level: 'A2-B1', colorMain: '#0e7490', badge: 'UMSTAND', words: ['dabei', 'hiermit'] },
+            { title: 'Stil', translation: '(estilo)', level: 'A1-B1', colorMain: '#64748b', badge: 'STIL', words: ['persönlich', 'konsequent', 'theoretisch', 'quasi', 'regelrecht', 'grundsätzlich'] },
             { title: 'Recht', translation: '(derecho)', level: 'B1', colorMain: '#475569', badge: 'RECHT', words: ['rechtlich', 'gesetzlich'] },
-            { title: 'Logik', translation: '(l\u00f3gica)', level: 'A1-B1', colorMain: '#f59e0b', badge: 'LOGIK', words: ['allerdings', 'trotzdem', 'dennoch', 'au\u00dferdem', 'n\u00e4mlich', 'schlie\u00dflich', 'jedenfalls', 'sowieso'] },
+            { title: 'Logik', translation: '(contraste)', level: 'A1-B1', colorMain: '#f59e0b', badge: 'LOGIK', words: ['allerdings', 'trotzdem', 'dennoch', 'nämlich'] },
+            { title: 'Konsequenz', translation: '(conclusión)', level: 'A2-B1', colorMain: '#d97706', badge: 'LOGIK', words: ['außerdem', 'schließlich', 'jedenfalls', 'sowieso'] },
             { title: 'Kausal', translation: '(causalidad)', level: 'A1-B1', colorMain: '#b45309', badge: 'KAUSAL', words: ['also', 'deshalb', 'deswegen', 'daher', 'folglich', 'sonst'] },
-            { title: 'Pronominal', translation: '(pronominales)', level: 'A2-B1', colorMain: '#6366f1', badge: 'PRONOMINAL', words: ['dazu', 'damit', 'darauf', 'davon', 'darüber', 'dafür', 'dagegen', 'dazwischen'] },
-            { title: 'Modalpartikeln', translation: '(part\u00edculas modales)', level: 'A2-B1', colorMain: '#7c3aed', badge: 'PARTIKELN', custom: true }
+            { title: 'Bezug', translation: '(referencia)', level: 'B1', colorMain: '#6366f1', badge: 'PRONOMINAL', words: ['dazu', 'darauf', 'davon', 'darüber'] },
+            { title: 'Verhältnis', translation: '(relación)', level: 'A2-B1', colorMain: '#4f46e5', badge: 'PRONOMINAL', words: ['damit', 'dafür', 'dagegen', 'hierher', 'dorthin', 'dazwischen'] },
+            { title: 'Modalpartikeln', translation: '(partículas modales)', level: 'A2-B1', colorMain: '#7c3aed', badge: 'PARTIKELN', custom: true }
         ];
 
         const modalParticlesGroup = {
@@ -2539,7 +2562,7 @@
             'nat\u00fcrlich', 'wirklich', 'eigentlich',
             'zusammen', 'alleine', 'anders', 'einfach', 'lieber', 'gl\u00fccklich', 'ehrlich', 'h\u00f6flich',
             'erstens', 'zweitens', 'drittens', 'viertens', 'f\u00fcnftens',
-            'also', 'deshalb', 'deswegen', 'daher', 'trotzdem', 'au\u00dferdem', 'sonst', 'dabei', 'zurück', 'damit', 'darauf', 'davon', 'darüber', 'dafür', 'dagegen'
+            'also', 'deshalb', 'deswegen', 'daher', 'trotzdem', 'au\u00dferdem', 'sonst', 'dabei', 'zurück', 'damit', 'darauf', 'davon', 'darüber', 'dafür', 'dagegen', 'hierher', 'dorthin'
         ]);
 
         function getExactLevel(word) {
@@ -2612,85 +2635,70 @@
             data.forEach((group) => {
                 if (!group.adverbs || group.adverbs.length === 0) return;
 
-                const chunkSize = 7;
-                for (let i = 0; i < group.adverbs.length; i += chunkSize) {
-                    const chunk = group.adverbs.slice(i, i + chunkSize);
-                    const chunkLevel = getHighestLevel(chunk);
-
-                    // Filter Logic: If query exists, only show chunks that have at least one match
-                    if (query) {
-                        const hasMatch = chunk.some(adv => {
-                            const matchDe = adv.word.toLowerCase().includes(query.toLowerCase());
-                            const matchEs = adv.spanish.toLowerCase().includes(query.toLowerCase());
-                            const matchEn = adv.english ? adv.english.toLowerCase().includes(query.toLowerCase()) : false;
-                            return matchDe || matchEs || matchEn;
-                        });
-                        if (!hasMatch) continue;
-                    }
-
-                    const card = document.createElement('div');
-                    card.className = 'level-card';
-
-                    // Title
-                    let partLabel = '';
-                    if (group.adverbs.length > chunkSize) {
-                        const partNum = Math.floor(i / chunkSize) + 1;
-                        const totalParts = Math.ceil(group.adverbs.length / chunkSize);
-                        partLabel = `(${partNum}/${totalParts})`;
-                    }
-
-                    // Header
-                    const header = document.createElement('div');
-                    header.className = 'level-header';
-                    header.style.backgroundColor = group.colorMain;
-                    header.innerHTML = `
-                        <div class="level-header-main">
-                            <button class="theme-header-german" type="button" title="Escuchar tema">${group.title}</button>
-                            <button class="theme-header-translation" type="button" title="Abrir tema">${group.description}</button>
-                        </div>
-                        ${partLabel ? `<span class="theme-header-part">${partLabel}</span>` : ''}
-                    `;
-
-                    const germanButton = header.querySelector('.theme-header-german');
-                    const translationButton = header.querySelector('.theme-header-translation');
-
-                    germanButton.onclick = (event) => {
-                        event.stopPropagation();
-                        speak(group.title);
-                    };
-
-                    translationButton.onclick = (event) => {
-                        event.stopPropagation();
-                        openThemeNameModal(group);
-                    };
-
-                    // Table
-                    const content = document.createElement('div');
-                    content.className = 'level-content';
-
-                    const tableHTML = `
-                        <tbody>
-                            ${chunk.map((adv, index) => createRow(adv, group, query, index)).join('')}
-                        </tbody>
-                    `;
-
-                    const table = document.createElement('table');
-                    table.innerHTML = tableHTML;
-                    content.appendChild(table);
-
-                    const footer = document.createElement('div');
-                    footer.className = 'card-footer';
-                    footer.style.backgroundColor = group.colorMain;
-                    footer.innerHTML = `
-                        <span class="card-footer-tag card-footer-level">${chunkLevel}</span>
-                        <span class="card-footer-tag">${getCardTypeLabel()}</span>
-                    `;
-
-                    card.appendChild(header);
-                    card.appendChild(content);
-                    card.appendChild(footer);
-                    container.appendChild(card);
+                // Filter Logic: If query exists, only show group if it has at least one match
+                if (query) {
+                    const hasMatch = group.adverbs.some(adv => {
+                        const matchDe = adv.word.toLowerCase().includes(query.toLowerCase());
+                        const matchEs = adv.spanish.toLowerCase().includes(query.toLowerCase());
+                        const matchEn = adv.english ? adv.english.toLowerCase().includes(query.toLowerCase()) : false;
+                        return matchDe || matchEs || matchEn;
+                    });
+                    if (!hasMatch) return;
                 }
+
+                const card = document.createElement('div');
+                card.className = 'level-card';
+
+                // Header
+                const header = document.createElement('div');
+                header.className = 'level-header';
+                header.style.backgroundColor = group.colorMain;
+                header.innerHTML = `
+                    <div class="level-header-main">
+                        <button class="theme-header-german" type="button" title="Escuchar tema">${group.title}</button>
+                        <button class="theme-header-translation" type="button" title="Abrir tema">${group.description}</button>
+                    </div>
+                `;
+
+                const germanButton = header.querySelector('.theme-header-german');
+                const translationButton = header.querySelector('.theme-header-translation');
+
+                germanButton.onclick = (event) => {
+                    event.stopPropagation();
+                    speak(group.title);
+                };
+
+                translationButton.onclick = (event) => {
+                    event.stopPropagation();
+                    openThemeNameModal(group);
+                };
+
+                // Table
+                const content = document.createElement('div');
+                content.className = 'level-content';
+
+                const tableHTML = `
+                    <tbody>
+                        ${group.adverbs.map((adv, index) => createRow(adv, group, query, index)).join('')}
+                    </tbody>
+                `;
+
+                const table = document.createElement('table');
+                table.innerHTML = tableHTML;
+                content.appendChild(table);
+
+                const footer = document.createElement('div');
+                footer.className = 'card-footer';
+                footer.style.backgroundColor = group.colorMain;
+                footer.innerHTML = `
+                    <span class="card-footer-tag card-footer-level">${group.level}</span>
+                    <span class="card-footer-tag">${getCardTypeLabel()}</span>
+                `;
+
+                card.appendChild(header);
+                card.appendChild(content);
+                card.appendChild(footer);
+                container.appendChild(card);
             });
         }
 
@@ -2970,7 +2978,7 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            console.log("App cargada. Última actualización del código (lastUpdate): 2026-07-11 17:28:00");
+            console.log("App cargada. Última actualización del código (lastUpdate): 2026-08-07 11:49:00");
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'light') {
                 document.body.classList.add('light-mode');
