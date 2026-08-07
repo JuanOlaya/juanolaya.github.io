@@ -98,7 +98,7 @@ let printHtml = `<!DOCTYPE html>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&family=Inter:ital,wght@0,400;0,600;0,700;1,700&display=swap" rel="stylesheet">
     <style>
         @page {
-            size: A4 landscape;
+            size: A4 portrait;
             margin: 0;
         }
         body {
@@ -106,15 +106,15 @@ let printHtml = `<!DOCTYPE html>
             background-color: #ffffff;
             color: #0f172a;
             margin: 0;
-            padding: 4mm;
+            padding: 6mm;
             -webkit-print-color-adjust: exact;
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             grid-template-rows: repeat(2, 1fr);
-            gap: 8px;
-            height: calc(100vh - 8mm);
+            gap: 12px;
+            height: calc(100vh - 12mm);
             page-break-after: always;
         }
         .grid:last-child {
@@ -128,38 +128,38 @@ let printHtml = `<!DOCTYPE html>
             flex-direction: column;
             overflow: hidden;
             break-inside: avoid;
-            font-size: 0.68rem;
+            font-size: 0.82rem;
         }
         .kompakt-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 4px 10px;
+            padding: 6px 12px;
             color: #ffffff;
         }
         .header-de {
             font-family: 'Outfit', sans-serif;
-            font-size: 0.85rem;
+            font-size: 1.05rem;
             font-weight: 800;
         }
         .header-es {
             font-family: 'Inter', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.9rem;
             font-weight: 600;
             font-style: italic;
             opacity: 0.9;
         }
         .kompakt-content {
-            padding: 2px 8px;
+            padding: 4px 10px;
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
         .kompakt-row {
-            padding: 2px 0;
+            padding: 4px 0;
             border-bottom: 1px solid #e2e8f0;
-            line-height: 1.15;
+            line-height: 1.2;
         }
         .kompakt-row:last-child {
             border-bottom: none;
@@ -169,21 +169,22 @@ let printHtml = `<!DOCTYPE html>
             justify-content: space-between;
             align-items: center;
             font-weight: 700;
-            margin-bottom: 1px;
+            margin-bottom: 2px;
         }
         .kompakt-german {
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             color: #0f172a;
         }
         .kompakt-spanish {
-            font-size: 0.7rem;
+            font-size: 0.85rem;
+            color: #000000;
+            font-weight: bold;
             font-style: italic;
-            color: #475569;
         }
         .kompakt-example {
-            font-size: 0.6rem;
+            font-size: 0.72rem;
             color: #64748b;
-            line-height: 1.15;
+            line-height: 1.2;
         }
     </style>
 </head>
@@ -194,18 +195,18 @@ let printHtml = `<!DOCTYPE html>
 const cardsList = [];
 
 // A. Add Title/Cover Card first
-const titleCardHtml = `        <div class="kompakt-card" style="border: 2px solid #0f172a; background-color: #f8fafc; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; padding: 15px;">
-            <div style="margin-top: 15px; width: 100%;">
-                <span style="font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800; color: #0f172a; display: block; line-height: 1.1;">DTZ B1</span>
-                <span style="font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800; color: #0284c7; display: block; margin-top: 5px; letter-spacing: 1px;">ADVERBIEN</span>
+const titleCardHtml = `        <div class="kompakt-card" style="border: 2px solid #0f172a; background-color: #f8fafc; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; padding: 25px;">
+            <div style="margin-top: 30px; width: 100%;">
+                <span style="font-family: 'Outfit', sans-serif; font-size: 3.2rem; font-weight: 800; color: #0f172a; display: block; line-height: 1.1;">DTZ B1</span>
+                <span style="font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800; color: #0284c7; display: block; margin-top: 10px; letter-spacing: 1px;">ADVERBIEN</span>
             </div>
-            <div style="margin-bottom: 15px; font-size: 0.82rem; color: #475569; font-weight: 600; line-height: 1.4; padding: 0 10px; width: 100%;">
-                <p style="margin: 0 0 10px 0; font-size: 0.95rem; color: #0f172a; font-weight: 700;">Lista Oficial y Ejemplos</p>
-                <div style="border-top: 1px solid #cbd5e1; margin: 8px 0;"></div>
-                <p style="margin: 4px 0;">⭐ 70 Adverbios Esenciales</p>
-                <p style="margin: 4px 0;">📂 11 Categorías Temáticas</p>
-                <p style="margin: 4px 0;">📖 Ejemplos Prácticos Completos</p>
-                <div style="border-top: 1px solid #cbd5e1; margin: 8px 0;"></div>
+            <div style="margin-bottom: 30px; font-size: 0.95rem; color: #475569; font-weight: 600; line-height: 1.5; padding: 0 15px; width: 100%;">
+                <p style="margin: 0 0 15px 0; font-size: 1.15rem; color: #0f172a; font-weight: 700;">Lista Oficial y Ejemplos</p>
+                <div style="border-top: 1px solid #cbd5e1; margin: 12px 0;"></div>
+                <p style="margin: 6px 0;">⭐ 70 Adverbios Esenciales</p>
+                <p style="margin: 6px 0;">📂 11 Categorías Temáticas</p>
+                <p style="margin: 6px 0;">📖 Ejemplos Prácticos Completos</p>
+                <div style="border-top: 1px solid #cbd5e1; margin: 12px 0;"></div>
             </div>
         </div>
 `;
@@ -223,9 +224,12 @@ themeBlueprints.forEach((theme, index) => {
             const exactLevel = adv.level || 'B1';
             
             rowsHtml += `            <div class="kompakt-row">
-                <div class="word-line">
-                    <span class="kompakt-german">${adv.word}</span>
-                    <span class="kompakt-spanish">${spanTrans} <span style="font-size: 0.55rem; background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 0px 3px; border-radius: 4px; font-weight: 700; font-style: normal; margin-left: 4px;">${exactLevel}</span></span>
+                <div class="word-line" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="kompakt-german" style="width: 35%; text-align: left;">${adv.word}</span>
+                    <span class="kompakt-spanish" style="width: 50%; text-align: center;">${spanTrans}</span>
+                    <span style="width: 15%; text-align: right;">
+                        <span style="font-size: 0.55rem; background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 0px 3px; border-radius: 4px; font-weight: 700; font-style: normal;">${exactLevel}</span>
+                    </span>
                 </div>
                 <div class="kompakt-example">
                     <strong>Ex:</strong> ${adv.example_de} &rarr; <em>${adv.example_es}</em>
@@ -248,10 +252,10 @@ ${rowsHtml}
     cardsList.push(cardHtml);
 });
 
-// Chunk into pages of 6 cards
+// Chunk into pages of 4 cards
 const chunks = [];
-for (let i = 0; i < cardsList.length; i += 6) {
-    chunks.push(cardsList.slice(i, i + 6));
+for (let i = 0; i < cardsList.length; i += 4) {
+    chunks.push(cardsList.slice(i, i + 4));
 }
 
 chunks.forEach((chunk, pageIndex) => {

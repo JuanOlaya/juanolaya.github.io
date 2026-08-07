@@ -1,4 +1,4 @@
-const CACHE_NAME = 'deutsch-lernen-v2.5';
+const CACHE_NAME = 'deutsch-lernen-v2.6';
 const ASSETS_TO_CACHE = [
     './',
     './index_OLD.html',
@@ -23,6 +23,7 @@ const ASSETS_TO_CACHE = [
     './adverbs/adverbien_B1_DTZ.html',
     './adverbs/mengenpronomen.html',
     './konjunktionen/konjunktionen.html',
+    './konjunktionen/konjunktionen_B1_DTZ.html',
     // Praepositionen
     './praepositionen/praepositionen.html',
     // W-Fragen
