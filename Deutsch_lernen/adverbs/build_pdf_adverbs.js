@@ -195,18 +195,20 @@ let printHtml = `<!DOCTYPE html>
 const cardsList = [];
 
 // A. Add Title/Cover Card first
-const titleCardHtml = `        <div class="kompakt-card" style="border: 2px solid #0f172a; background-color: #f8fafc; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; padding: 25px;">
-            <div style="margin-top: 30px; width: 100%;">
+const titleCardHtml = `        <div class="kompakt-card" style="border: 2px solid #0f172a; background-color: #f8fafc; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; padding: 15px;">
+            <div style="margin-top: 15px; width: 100%;">
                 <span style="font-family: 'Outfit', sans-serif; font-size: 3.2rem; font-weight: 800; color: #0f172a; display: block; line-height: 1.1;">DTZ B1</span>
                 <span style="font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800; color: #0284c7; display: block; margin-top: 10px; letter-spacing: 1px;">ADVERBIEN</span>
             </div>
-            <div style="margin-bottom: 30px; font-size: 0.95rem; color: #475569; font-weight: 600; line-height: 1.5; padding: 0 15px; width: 100%;">
-                <p style="margin: 0 0 15px 0; font-size: 1.15rem; color: #0f172a; font-weight: 700;">Lista Oficial y Ejemplos</p>
-                <div style="border-top: 1px solid #cbd5e1; margin: 12px 0;"></div>
-                <p style="margin: 6px 0;">⭐ 70 Adverbios Esenciales</p>
-                <p style="margin: 6px 0;">📂 11 Categorías Temáticas</p>
-                <p style="margin: 6px 0;">📖 Ejemplos Prácticos Completos</p>
-                <div style="border-top: 1px solid #cbd5e1; margin: 12px 0;"></div>
+            <div style="margin-bottom: 15px; font-size: 0.9rem; color: #475569; font-weight: 600; line-height: 1.4; padding: 0 10px; width: 100%;">
+                <div style="border-top: 1px solid #cbd5e1; margin: 8px 0;"></div>
+                <p style="margin: 4px 0;">⭐ 70 Adverbios Esenciales</p>
+                <p style="margin: 4px 0;">📂 11 Categorías Temáticas</p>
+                <div style="border-top: 1px solid #cbd5e1; margin: 8px 0;"></div>
+                <div style="margin-top: 12px; display: flex; flex-direction: column; align-items: center;">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://juanolaya.github.io/Deutsch_lernen/index.html" alt="QR Code MemoDeutsch" style="width: 100px; height: 100px; border: 1px solid #cbd5e1; padding: 3px; border-radius: 4px; background: #ffffff;" />
+                    <span style="display: block; font-size: 0.75rem; color: #0f172a; font-weight: 800; margin-top: 5px; letter-spacing: 0.5px;">MemoDeutsch App</span>
+                </div>
             </div>
         </div>
 `;
