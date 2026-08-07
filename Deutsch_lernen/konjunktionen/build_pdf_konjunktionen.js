@@ -45,6 +45,10 @@ while ((cardMatch = cardRegex.exec(htmlContent)) !== null) {
     const themeColor = standardColors[cardIdx % standardColors.length];
     cardIdx++;
     
+    // Extract footer
+    const footerMatch = /<div class="level-footer[^>]*?>([\s\S]*?)<\/div>/i.exec(cardContent);
+    const footerText = footerMatch ? footerMatch[1].trim() : '';
+    
     // Extract rows
     let rowsHtml = '';
     const rowRegex = /<tr[^>]*?data-word="([^"]+)"[^>]*?data-trans="([^"]+)"[^>]*?data-example="([^"]+)"/gi;
@@ -79,6 +83,9 @@ while ((cardMatch = cardRegex.exec(htmlContent)) !== null) {
         <div class="kompakt-content">
 ${rowsHtml}
         </div>
+        <div class="kompakt-footer" style="background-color: ${themeColor}; padding: 4px 10px; color: #ffffff; font-size: 0.72rem; font-weight: 700; text-align: center;">
+            ${footerText}
+        </div>
     </div>`;
     
     cardsList.push(cardHtml);
@@ -106,20 +113,21 @@ let printHtml = `<!DOCTYPE html>
         }
         .page-header {
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             border-bottom: 2px solid #0f172a;
-            padding-bottom: 8px;
+            padding-bottom: 4px;
         }
         .page-header h1 {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             margin: 0;
             color: #0f172a;
             letter-spacing: 0.5px;
+            display: inline-block;
         }
-        .page-header p {
-            font-size: 0.85rem;
-            margin: 3px 0 0 0;
+        .page-header span {
+            font-size: 0.75rem;
+            margin-left: 10px;
             color: #475569;
             font-weight: 600;
         }
@@ -128,7 +136,7 @@ let printHtml = `<!DOCTYPE html>
             grid-template-columns: repeat(2, 1fr);
             grid-template-rows: repeat(2, 1fr);
             gap: 12px;
-            height: calc(100vh - 28mm);
+            height: calc(100vh - 22mm);
             page-break-after: avoid;
         }
         .kompakt-card {
@@ -203,7 +211,7 @@ let printHtml = `<!DOCTYPE html>
 <body>
     <div class="page-header">
         <h1>DTZ B1 KONJUNKTIONEN</h1>
-        <p>Conectores y Estructuras de Oraciones Esenciales para el Examen (24 Conjunciones)</p>
+        <span>(24 Conectores Esenciales)</span>
     </div>
     <div class="grid">
 `;
