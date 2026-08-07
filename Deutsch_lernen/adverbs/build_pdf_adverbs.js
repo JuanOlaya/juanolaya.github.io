@@ -106,30 +106,15 @@ let printHtml = `<!DOCTYPE html>
             background-color: #ffffff;
             color: #0f172a;
             margin: 0;
-            padding: 10mm;
+            padding: 4mm;
             -webkit-print-color-adjust: exact;
-        }
-        .page-header {
-            text-align: center;
-            margin-bottom: 5px;
-        }
-        .page-header h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.5rem;
-            margin: 0;
-            color: #0f172a;
-        }
-        .page-header p {
-            font-size: 0.8rem;
-            margin: 2px 0 10px 0;
-            color: #64748b;
         }
         .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(2, 1fr);
-            gap: 12px;
-            height: calc(100vh - 20mm);
+            gap: 8px;
+            height: calc(100vh - 8mm);
             page-break-after: always;
         }
         .grid:last-child {
@@ -138,42 +123,43 @@ let printHtml = `<!DOCTYPE html>
         .kompakt-card {
             background-color: #ffffff;
             border: 1px solid #cbd5e1;
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
             overflow: hidden;
             break-inside: avoid;
-            font-size: 0.75rem;
+            font-size: 0.68rem;
         }
         .kompakt-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 6px 12px;
+            padding: 4px 10px;
             color: #ffffff;
         }
         .header-de {
             font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 800;
         }
         .header-es {
             font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
             font-style: italic;
             opacity: 0.9;
         }
         .kompakt-content {
-            padding: 4px 10px;
+            padding: 2px 8px;
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
         .kompakt-row {
-            padding: 5px 0;
+            padding: 2px 0;
             border-bottom: 1px solid #e2e8f0;
+            line-height: 1.15;
         }
         .kompakt-row:last-child {
             border-bottom: none;
@@ -183,21 +169,21 @@ let printHtml = `<!DOCTYPE html>
             justify-content: space-between;
             align-items: center;
             font-weight: 700;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
         .kompakt-german {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #0f172a;
         }
         .kompakt-spanish {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-style: italic;
             color: #475569;
         }
         .kompakt-example {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: #64748b;
-            line-height: 1.2;
+            line-height: 1.15;
         }
     </style>
 </head>
@@ -220,7 +206,6 @@ const titleCardHtml = `        <div class="kompakt-card" style="border: 2px soli
                 <p style="margin: 4px 0;">📂 11 Categorías Temáticas</p>
                 <p style="margin: 4px 0;">📖 Ejemplos Prácticos Completos</p>
                 <div style="border-top: 1px solid #cbd5e1; margin: 8px 0;"></div>
-                <p style="margin: 8px 0 0 0; font-size: 0.72rem; color: #94a3b8; font-style: italic;">Preparación para el Examen de Certificación (Goethe / telc)</p>
             </div>
         </div>
 `;
