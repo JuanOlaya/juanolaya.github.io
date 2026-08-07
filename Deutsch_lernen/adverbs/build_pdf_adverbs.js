@@ -249,9 +249,26 @@ ${rowsHtml}
 `;
     });
 
-    // If it's the last page and has less than 6 cards, pad it with empty cards to maintain grid layout
+    // If it's the last page and has less than 6 cards, pad it with the custom title card
     if (chunk.length < 6) {
-        for (let pad = 0; pad < (6 - chunk.length); pad++) {
+        const titleCardHtml = `        <div class="kompakt-card" style="border: 2px solid #0f172a; background-color: #f8fafc; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; padding: 20px;">
+            <div style="margin-top: 15px; width: 100%;">
+                <span style="font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800; color: #0f172a; display: block; line-height: 1.1;">DTZ B1</span>
+                <span style="font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800; color: #0284c7; display: block; margin-top: 5px; letter-spacing: 1px;">ADVERBIEN</span>
+            </div>
+            <div style="margin-bottom: 15px; font-size: 0.85rem; color: #475569; font-weight: 600; line-height: 1.4; padding: 0 10px; width: 100%;">
+                <p style="margin: 0 0 10px 0; font-size: 0.95rem; color: #0f172a; font-weight: 700;">Lista Oficial y Ejemplos</p>
+                <div style="border-top: 1px solid #cbd5e1; margin: 8px 0;"></div>
+                <p style="margin: 4px 0;">⭐ 70 Adverbios Esenciales</p>
+                <p style="margin: 4px 0;">📂 11 Categorías Temáticas</p>
+                <p style="margin: 4px 0;">📖 Ejemplos Prácticos Completos</p>
+                <div style="border-top: 1px solid #cbd5e1; margin: 8px 0;"></div>
+                <p style="margin: 8px 0 0 0; font-size: 0.75rem; color: #94a3b8; font-style: italic;">Preparación para el Examen de Certificación (Goethe / telc)</p>
+            </div>
+        </div>
+`;
+        printHtml += titleCardHtml;
+        for (let pad = 0; pad < (6 - chunk.length - 1); pad++) {
             printHtml += '        <div style="border: 1px dashed #cbd5e1; border-radius: 10px; opacity: 0.3;"></div>\n';
         }
     }
