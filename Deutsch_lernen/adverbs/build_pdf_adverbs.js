@@ -5,7 +5,15 @@ const { execSync } = require('child_process');
 
 const desktopPath = path.join(os.homedir(), 'Desktop');
 const tempHtmlPath = path.join(desktopPath, 'adverbien_DTZ_print.html');
-const pdfPath = path.join(desktopPath, 'adverbien_B1_DTZ.pdf');
+
+// Create a timestamped PDF filename
+const now = new Date();
+const timestamp = now.getFullYear() +
+    String(now.getMonth() + 1).padStart(2, '0') +
+    String(now.getDate()).padStart(2, '0') + '_' +
+    String(now.getHours()).padStart(2, '0') +
+    String(now.getMinutes()).padStart(2, '0');
+const pdfPath = path.join(desktopPath, `adverbien_B1_DTZ_${timestamp}.pdf`);
 
 // 1. Read adverbien_B1_DTZ.html
 const htmlContent = fs.readFileSync('adverbien_B1_DTZ.html', 'utf8');
@@ -121,7 +129,7 @@ let printHtml = `<!DOCTYPE html>
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(2, 1fr);
             gap: 12px;
-            height: calc(100vh - 28mm);
+            height: calc(100vh - 20mm);
             page-break-after: always;
         }
         .grid:last-child {
@@ -203,11 +211,7 @@ for (let i = 0; i < themeBlueprints.length; i += 6) {
 }
 
 chunks.forEach((chunk, pageIndex) => {
-    printHtml += `  <div class="page-header">
-        <h1>DTZ B1 Adverbien (⭐ Esenciales) - Seite ${pageIndex + 1} von ${chunks.length}</h1>
-        <p>Tarjetas de Vocabulario para Examen de Certificación B1</p>
-    </div>
-    <div class="grid">
+    printHtml += `    <div class="grid">
 `;
 
     chunk.forEach((theme, index) => {
@@ -222,7 +226,7 @@ chunks.forEach((chunk, pageIndex) => {
                 
                 rowsHtml += `            <div class="kompakt-row">
                 <div class="word-line">
-                    <span class="kompakt-german">${adv.emoji} ${adv.word}</span>
+                    <span class="kompakt-german">${adv.word}</span>
                     <span class="kompakt-spanish">${spanTrans}</span>
                 </div>
                 <div class="kompakt-example">
