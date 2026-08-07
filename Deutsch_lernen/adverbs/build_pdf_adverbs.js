@@ -185,6 +185,11 @@ let printHtml = `<!DOCTYPE html>
             font-size: 0.72rem;
             color: #64748b;
             line-height: 1.2;
+            font-weight: 400;
+        }
+        .kompakt-example em {
+            font-weight: 400;
+            font-style: italic;
         }
     </style>
 </head>
