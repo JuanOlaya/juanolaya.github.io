@@ -446,6 +446,12 @@
             letter-spacing: 1px;
             text-transform: none;
             color: white;
+            white-space: nowrap;
+        }
+
+        .level-footer.compact-rule {
+            font-size: 0.94rem;
+            letter-spacing: 0.35px;
         }
 
         .level-footer.a1 {
@@ -469,6 +475,28 @@
         }
 
         /* Tables */
+        .card-section-label {
+            height: 0;
+            cursor: default;
+        }
+
+        .card-section-label td {
+            padding: 6px 15px;
+            background: rgba(168, 85, 247, 0.18);
+            border-top: 1px solid rgba(216, 180, 254, 0.38);
+            border-bottom: 1px solid rgba(216, 180, 254, 0.38);
+            color: #e9d5ff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .card-section-label:hover {
+            background: transparent;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -822,6 +850,7 @@
             .sheet-note {
                 max-width: 78mm;
                 font-size: 7.5pt;
+                white-space: nowrap;
             }
 
             .grid-layout {
@@ -879,6 +908,17 @@
                 padding: 2.5mm 3mm;
                 font-size: 9pt;
                 text-align: center;
+            }
+
+            .level-footer.compact-rule {
+                font-size: 8pt;
+                letter-spacing: 0.15pt;
+            }
+
+            .card-section-label td {
+                padding: 1.2mm 3.5mm;
+                font-size: 6.5pt;
+                letter-spacing: 0.7pt;
             }
         }
 
@@ -1142,7 +1182,7 @@
                     <span class="sheet-kicker">Cara A · Núcleo DTZ B1</span>
                     <h2 id="frontSheetTitle" class="sheet-title">Las cuatro reglas de uso activo</h2>
                 </div>
-                <p class="sheet-note">⭐ Prioridad alta · Máximo 7 elementos por tarjeta · Preparada para A4</p>
+                <p class="sheet-note">⭐ Esenciales · máx. 7 · A4</p>
             </div>
 
             <div class="grid-layout">
@@ -1225,23 +1265,16 @@
                 <div class="level-footer a2">Regla: Envían el verbo al final</div>
             </div>
 
-            <!-- Card 3: Infinitive and purpose structures -->
+            <!-- Card 3: Manner/alternative first, then purpose structures -->
             <div class="level-card">
                 <div class="level-header inf">
-                    <span>Zu / Final</span>
-                    <span class="level-header-label">finalidad y modo</span>
+                    <span>Modo / Final</span>
+                    <span class="level-header-label">modo y finalidad</span>
                 </div>
                 <div class="level-content">
                     <table>
                         <tbody>
-                            <tr onclick="openWordModal(this)" data-word="damit" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="para que" data-example="Ich lerne, <strong>damit</strong> ich besser <span class='german-word' style='font-size:0.9em'>werde</span>.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>damit</div></td>
-                                <td>para que</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="um... zu" data-dtz-star="true" data-tag="Infinitivo" data-tag-class="tag inf" data-trans="para (+ infinitivo)" data-example="Ich lerne Deutsch, <strong>um</strong> eine Arbeit <span class='german-word' style='font-size:0.9em'>zu finden</span>.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>um... zu</div></td>
-                                <td>para (+ infinitivo)</td>
-                            </tr>
+                            <tr class="card-section-label"><td colspan="2">Modo / alternativa</td></tr>
                             <tr onclick="openWordModal(this)" data-word="indem" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="al / mediante" data-example="Man lernt Deutsch, <strong>indem</strong> man jeden Tag <span class='german-word' style='font-size:0.9em'>spricht</span>.">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>indem</div></td>
                                 <td>al / mediante</td>
@@ -1254,10 +1287,19 @@
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>statt... zu</div></td>
                                 <td>en vez de (+ inf)</td>
                             </tr>
+                            <tr class="card-section-label"><td colspan="2">Finalidad</td></tr>
+                            <tr onclick="openWordModal(this)" data-word="damit" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="para que" data-example="Ich lerne, <strong>damit</strong> ich besser <span class='german-word' style='font-size:0.9em'>werde</span>.">
+                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>damit</div></td>
+                                <td>para que</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="um... zu" data-dtz-star="true" data-tag="Infinitivo" data-tag-class="tag inf" data-trans="para (+ infinitivo)" data-example="Ich lerne Deutsch, <strong>um</strong> eine Arbeit <span class='german-word' style='font-size:0.9em'>zu finden</span>.">
+                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>um... zu</div></td>
+                                <td>para (+ infinitivo)</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="level-footer inf">Regla: mismo sujeto → um … zu · distinto → damit</div>
+                <div class="level-footer inf compact-rule">R: mismo sujeto → um … zu · distinto → damit</div>
             </div>
 
             <!-- Card 4: Adverbial (Pos 1) -->
@@ -1300,7 +1342,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="level-footer b1">Regla: al inicio → conector + verbo + sujeto</div>
+                <div class="level-footer b1 compact-rule">R: inicio → conector + verbo + sujeto</div>
             </div>
 
             </div>
@@ -1312,7 +1354,7 @@
                     <span class="sheet-kicker">Cara B · Ampliación DTZ B1</span>
                     <h2 id="backSheetTitle" class="sheet-title">Alternativas y estructuras complementarias</h2>
                 </div>
-                <p class="sheet-note">✓ Para reconocer y ampliar · Orden espejado para dúplex por el borde largo</p>
+                <p class="sheet-note">✓ Ampliación · dúplex: borde largo</p>
             </div>
 
             <div class="grid-layout">
@@ -1347,7 +1389,7 @@
                             </tr>
                         </tbody></table>
                     </div>
-                    <div class="level-footer a2">Regla: conjunción + sujeto … + verbo final</div>
+                    <div class="level-footer a2 compact-rule">R: conjunción + sujeto … + verbo final</div>
                 </div>
 
                 <!-- Back top-right: aligns behind the front top-left -->
@@ -1375,7 +1417,7 @@
                             </tr>
                         </tbody></table>
                     </div>
-                    <div class="level-footer a1">Regla: mantienen el orden normal del verbo</div>
+                    <div class="level-footer a1 compact-rule">R: mantienen el orden normal del verbo</div>
                 </div>
 
                 <!-- Back bottom-left: aligns behind the front bottom-right -->
@@ -1406,7 +1448,7 @@
                             </tr>
                         </tbody></table>
                     </div>
-                    <div class="level-footer b1">Regla: al inicio → conector + verbo + sujeto</div>
+                    <div class="level-footer b1 compact-rule">R: inicio → conector + verbo + sujeto</div>
                 </div>
 
                 <!-- Back bottom-right: aligns behind the front bottom-left -->
@@ -1430,7 +1472,7 @@
                             <tr onclick="openWordModal(this)" data-word="woher" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="de dónde" data-example="Können Sie mir sagen, <strong>woher</strong> diese Information <span class='german-word' style='font-size:0.9em'>kommt</span>?"><td><div class="german-word"><span class="priority-mark useful">✓</span>woher</div></td><td>de dónde</td></tr>
                         </tbody></table>
                     </div>
-                    <div class="level-footer inf">Regla: pregunta indirecta → verbo al final</div>
+                    <div class="level-footer inf compact-rule">R: pregunta indirecta → verbo al final</div>
                 </div>
             </div>
         </section>
