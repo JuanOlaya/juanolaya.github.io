@@ -33,6 +33,8 @@
             /* 🟧 Orange */
             --level-b2: #ef4444;
             /* 🟥 Red */
+            --level-inf: #a855f7;
+            /* 🟪 Purple */
 
             --accent-green: #00FFA1;
             /* Main Accent */
@@ -66,6 +68,7 @@
             --level-a2: #ca8a04;
             --level-b1: #ea580c;
             --level-b2: #dc2626;
+            --level-inf: #7e22ce;
 
             --accent-green: #059669;
 
@@ -142,6 +145,10 @@
             display: none;
         }
 
+        .theme-toggle-wrapper .print-btn {
+            display: flex;
+        }
+
         body:not(.light-mode) .icon-sun {
             display: block;
         }
@@ -199,8 +206,9 @@
         }
 
         .pos-card {
-            flex: 1;
-            min-width: 180px;
+            flex: 1 1 calc(50% - 10px);
+            min-width: 0;
+            box-sizing: border-box;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
@@ -220,15 +228,19 @@
         }
 
         .pos-card.pos-0::before {
-            background: var(--accent-green);
+            background: var(--level-a1);
         }
 
         .pos-card.pos-1::before {
-            background: var(--level-a2);
+            background: var(--level-b1);
         }
 
         .pos-card.pos-end::before {
-            background: var(--level-b2);
+            background: var(--level-a2);
+        }
+
+        .pos-card.pos-inf::before {
+            background: var(--level-inf);
         }
 
         .pos-icon {
@@ -271,23 +283,81 @@
             font-weight: bold;
         }
 
+        /* Printable study sheets */
+        .sheet-page {
+            background: var(--bg-color);
+            padding: 34px 40px 40px;
+        }
+
+        .sheet-page + .sheet-page {
+            border-top: 1px solid var(--border-color);
+        }
+
+        .sheet-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 22px;
+        }
+
+        .sheet-kicker {
+            display: block;
+            color: var(--accent-green);
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .sheet-title {
+            margin: 0;
+            font-size: 1.55rem;
+            line-height: 1.1;
+        }
+
+        .sheet-note {
+            max-width: 310px;
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.86rem;
+            line-height: 1.35;
+            text-align: right;
+        }
+
         /* Grid Layout */
         .grid-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            padding: 40px;
-            background: var(--bg-color);
+            gap: 24px;
         }
 
         @media (max-width: 768px) {
             .grid-layout {
                 grid-template-columns: 1fr;
-                padding: 20px;
+            }
+
+            .sheet-page {
+                padding: 24px 20px 30px;
+            }
+
+            .sheet-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .sheet-note {
+                max-width: none;
+                text-align: left;
             }
 
             .position-cards {
                 flex-direction: column;
+            }
+
+            .position-cards .pos-card {
+                flex-basis: auto;
             }
         }
 
@@ -321,6 +391,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
+        }
+
+        .level-header > span:first-child {
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .level-header-label {
@@ -347,6 +423,11 @@
         .level-header.b2 {
             background: var(--level-b2);
             box-shadow: 0 0 var(--glow-strength) var(--level-b2);
+        }
+
+        .level-header.inf {
+            background: var(--level-inf);
+            box-shadow: 0 0 var(--glow-strength) var(--level-inf);
         }
 
         .level-content {
@@ -381,6 +462,10 @@
 
         .level-footer.b2 {
             background: var(--level-b2);
+        }
+
+        .level-footer.inf {
+            background: var(--level-inf);
         }
 
         /* Tables */
@@ -447,21 +532,27 @@
         }
 
         .tag.zero {
-            background: rgba(0, 255, 161, 0.15);
-            color: var(--accent-green);
-            border: 1px solid rgba(0, 255, 161, 0.3);
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--level-a1);
+            border: 1px solid rgba(59, 130, 246, 0.35);
         }
 
         .tag.inv {
-            background: rgba(234, 179, 8, 0.15);
-            color: var(--level-a2);
-            border: 1px solid rgba(234, 179, 8, 0.3);
+            background: rgba(249, 115, 22, 0.15);
+            color: var(--level-b1);
+            border: 1px solid rgba(249, 115, 22, 0.35);
         }
 
         .tag.end {
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--level-b2);
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            background: rgba(234, 179, 8, 0.15);
+            color: var(--level-a2);
+            border: 1px solid rgba(234, 179, 8, 0.35);
+        }
+
+        .tag.inf {
+            background: rgba(168, 85, 247, 0.14);
+            color: var(--level-inf);
+            border: 1px solid rgba(168, 85, 247, 0.35);
         }
 
         .tag.level-tag {
@@ -508,6 +599,23 @@
             align-items: center;
             gap: 6px;
             transition: transform 0.1s ease, color 0.2s;
+        }
+
+        .priority-mark {
+            display: inline-block;
+            width: 1.25em;
+            flex: 0 0 1.25em;
+            text-align: center;
+            margin-right: 3px;
+        }
+
+        .priority-mark.core {
+            color: #fbbf24;
+        }
+
+        .priority-mark.useful {
+            color: var(--accent-green);
+            font-weight: 900;
         }
 
         .word-badges {
@@ -578,6 +686,10 @@
             border-left-color: var(--level-b2);
         }
 
+        .rule-card.inf-rule {
+            border-left-color: var(--level-inf);
+        }
+
         .rule-card.full-width {
             grid-column: 1 / -1;
             border-left-color: var(--level-a2);
@@ -595,6 +707,10 @@
 
         .rule-card.warning .rule-title {
             color: var(--level-b2);
+        }
+
+        .rule-card.inf-rule .rule-title {
+            color: var(--level-inf);
         }
 
         .rule-card.full-width .rule-title {
@@ -629,6 +745,141 @@
             text-align: center;
             font-size: 0.9rem;
             color: var(--text-muted);
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 8mm;
+        }
+
+        @media print {
+            html,
+            body {
+                background: #0f172a !important;
+                color: #f1f5f9 !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            body {
+                display: block;
+                padding: 0;
+            }
+
+            .container {
+                width: 100%;
+                max-width: none;
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+                overflow: visible;
+                background: #0f172a !important;
+            }
+
+            header,
+            .visual-guide-section,
+            .rule-section,
+            footer,
+            .modal {
+                display: none !important;
+            }
+
+            .sheet-page {
+                box-sizing: border-box;
+                width: 194mm;
+                height: 281mm;
+                padding: 0;
+                overflow: hidden;
+                background: #0f172a !important;
+                break-after: page;
+                page-break-after: always;
+            }
+
+            .sheet-page + .sheet-page {
+                border-top: 0;
+            }
+
+            .sheet-page:last-of-type {
+                break-after: auto;
+                page-break-after: auto;
+            }
+
+            .sheet-heading {
+                height: 17mm;
+                margin: 0 0 4mm;
+                align-items: center;
+            }
+
+            .sheet-kicker {
+                font-size: 7.5pt;
+                margin-bottom: 1mm;
+            }
+
+            .sheet-title {
+                font-size: 16pt;
+            }
+
+            .sheet-note {
+                max-width: 78mm;
+                font-size: 7.5pt;
+            }
+
+            .grid-layout {
+                height: 260mm;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                gap: 5mm;
+            }
+
+            .level-card {
+                min-height: 0;
+                border-radius: 4mm;
+                box-shadow: none;
+                break-inside: avoid;
+                page-break-inside: avoid;
+                background: #1e293b !important;
+                border-color: #475569 !important;
+            }
+
+            .level-card:hover {
+                transform: none;
+            }
+
+            .level-header {
+                padding: 3mm 4mm;
+                font-size: 10pt;
+            }
+
+            .level-header-label {
+                font-size: 9.5pt;
+            }
+
+            table {
+                font-size: 9.5pt;
+            }
+
+            td {
+                padding: 2.35mm 3.5mm;
+                border-color: #475569 !important;
+                color: #f1f5f9 !important;
+            }
+
+            .german-word {
+                color: #00e69a !important;
+            }
+
+            .audio-icon,
+            .word-badges {
+                display: none !important;
+            }
+
+            .level-footer {
+                min-height: 13mm;
+                box-sizing: border-box;
+                padding: 2.5mm 3mm;
+                font-size: 9pt;
+                text-align: center;
+            }
         }
 
         .footer-actions {
@@ -817,6 +1068,9 @@
                 <button id="infoBtn" class="info-btn" aria-label="Información">
                     ℹ️
                 </button>
+                <button class="theme-btn print-btn" onclick="window.print()" aria-label="Imprimir fichas A4" title="Imprimir fichas A4">
+                    🖨️
+                </button>
                 <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Dark/Light Mode">
                     <span class="icon-sun">☀️</span>
                     <span class="icon-moon">🌙</span>
@@ -824,7 +1078,7 @@
             </div>
 
             <h1>DTZ B1 <span>Conectores</span></h1>
-            <p>Konjunktionen, Konnektoren y orden de palabras (A1 → B2)</p>
+            <p>Cuatro reglas · cara A esencial · cara B de ampliación</p>
         </header>
 
         <!-- VISUAL GUIDE: WORD ORDER -->
@@ -868,55 +1122,59 @@
                     </div>
                 </div>
 
+                <!-- Infinitive with zu -->
+                <div class="pos-card pos-inf">
+                    <span class="tag inf"
+                        style="font-size: 1.2rem; display: inline-block; margin-bottom: 10px; padding: 5px 10px;">ZU</span>
+                    <span class="pos-name">Infinitivo con zu</span>
+                    <span class="pos-desc">Mismo sujeto: um / ohne / statt … zu</span>
+                    <div class="syntax-box">
+                        um + ... + <span class="verb">zu + infinitivo</span>
+                    </div>
+                </div>
+
             </div>
         </div>
 
-                <div class="grid-layout">
+        <section class="sheet-page sheet-front" aria-labelledby="frontSheetTitle">
+            <div class="sheet-heading">
+                <div>
+                    <span class="sheet-kicker">Cara A · Núcleo DTZ B1</span>
+                    <h2 id="frontSheetTitle" class="sheet-title">Las cuatro reglas de uso activo</h2>
+                </div>
+                <p class="sheet-note">⭐ Prioridad alta · Máximo 7 elementos por tarjeta · Preparada para A4</p>
+            </div>
+
+            <div class="grid-layout">
 
             <!-- Card 1: Koordinierend (Pos 0) -->
             <div class="level-card">
                 <div class="level-header a1">
                     <span>Pos 0</span>
-                    <span class="level-header-label">coordinantes (ADUSO)</span>
+                    <span class="level-header-label">coordinantes esenciales (ADUSO)</span>
                 </div>
                 <div class="level-content">
                     <table>
                         <tbody>
-                            <tr onclick="openWordModal(this)" data-word="und" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="y" data-example="Er liest <strong>und</strong> sie schläft.">
+                            <tr onclick="openWordModal(this)" data-word="und" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="y" data-example="Ich brauche einen Termin <strong>und</strong> möchte die Kosten wissen.">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>und</div></td>
                                 <td>y</td>
                             </tr>
-                            <tr onclick="openWordModal(this)" data-word="aber" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="pero" data-example="Ich bin müde, <strong>aber</strong> ich arbeite.">
+                            <tr onclick="openWordModal(this)" data-word="aber" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="pero" data-example="Der Kurs ist interessant, <strong>aber</strong> er ist zu teuer.">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>aber</div></td>
                                 <td>pero</td>
                             </tr>
-                            <tr onclick="openWordModal(this)" data-word="oder" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="o" data-example="Kaffee <strong>oder</strong> Tee?">
+                            <tr onclick="openWordModal(this)" data-word="oder" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="o" data-example="Können wir uns am Montag <strong>oder</strong> am Dienstag treffen?">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>oder</div></td>
                                 <td>o</td>
                             </tr>
-                            <tr onclick="openWordModal(this)" data-word="denn" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="pues / porque" data-example="Ich esse, <strong>denn</strong> ich habe Hunger.">
+                            <tr onclick="openWordModal(this)" data-word="denn" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="pues / porque" data-example="Ich kann nicht kommen, <strong>denn</strong> ich bin krank.">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>denn</div></td>
                                 <td>pues / porque</td>
                             </tr>
-                            <tr onclick="openWordModal(this)" data-word="sondern" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="sino (tras negación)" data-example="Nicht Kaffee, <strong>sondern</strong> Tee.">
+                            <tr onclick="openWordModal(this)" data-word="sondern" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="sino (tras negación)" data-example="Ich komme nicht am Montag, <strong>sondern</strong> am Dienstag.">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>sondern</div></td>
                                 <td>sino (tras negación)</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="doch" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="pero / sin embargo" data-example="Er ist klein, <strong>doch</strong> er ist sehr stark.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>doch</div></td>
-                                <td>pero / sin embargo</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="sowie" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="así como / al igual que" data-example="Sie spricht Deutsch <strong>sowie</strong> Englisch.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>sowie</div></td>
-                                <td>así como / al igual que</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="zwar... aber" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="es cierto que... pero" data-example="Er ist <strong>zwar</strong> alt, <strong>aber</strong> sehr fit.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>zwar... aber</div></td>
-                                <td>es cierto que... pero</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="entweder... oder" data-dtz-star="true" data-tag="Pos 0" data-tag-class="tag zero" data-trans="o bien... o bien" data-example="Wir fahren <strong>entweder</strong> heute <strong>oder</strong> morgen.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>entweder... oder</div></td>
-                                <td>o bien... o bien</td>
                             </tr>
                         </tbody>
                     </table>
@@ -928,7 +1186,7 @@
             <div class="level-card">
                 <div class="level-header a2">
                     <span>Final</span>
-                    <span class="level-header-label">subordinantes I</span>
+                    <span class="level-header-label">subordinantes esenciales</span>
                 </div>
                 <div class="level-content">
                     <table>
@@ -949,25 +1207,17 @@
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>ob</div></td>
                                 <td>si (duda)</td>
                             </tr>
-                            <tr onclick="openWordModal(this)" data-word="als" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="cuando (pasado único)" data-example="<strong>Als</strong> ich Kind <span class='german-word' style='font-size:0.9em'>war</span>...">
+                            <tr onclick="openWordModal(this)" data-word="als" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="cuando (pasado único)" data-example="<strong>Als</strong> ich ein Kind <span class='german-word' style='font-size:0.9em'>war</span>, wohnte ich auf dem Land.">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>als</div></td>
                                 <td>cuando (pasado único)</td>
                             </tr>
-                            <tr onclick="openWordModal(this)" data-word="da" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="como / ya que" data-example="<strong>Da</strong> ich krank <span class='german-word' style='font-size:0.9em'>bin</span>, bleibe ich.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>da</div></td>
-                                <td>como / ya que</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="bis" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="hasta que" data-example="Bitte warten Sie, <strong>bis</strong> der Bus <span class='german-word' style='font-size:0.9em'>kommt</span>.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>bis</div></td>
-                                <td>hasta que</td>
+                            <tr onclick="openWordModal(this)" data-word="obwohl" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="aunque" data-example="<strong>Obwohl</strong> es laut <span class='german-word' style='font-size:0.9em'>ist</span>, gefällt mir die Wohnung.">
+                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>obwohl</div></td>
+                                <td>aunque</td>
                             </tr>
                             <tr onclick="openWordModal(this)" data-word="falls" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="en caso de que" data-example="<strong>Falls</strong> Sie Fragen <span class='german-word' style='font-size:0.9em'>haben</span>, rufen Sie an.">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>falls</div></td>
                                 <td>en caso de que</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="solange" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="mientras (duración)" data-example="<strong>Solange</strong> du krank <span class='german-word' style='font-size:0.9em'>bist</span>, bleib im Bett.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>solange</div></td>
-                                <td>mientras (duración)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -975,11 +1225,11 @@
                 <div class="level-footer a2">Regla: Envían el verbo al final</div>
             </div>
 
-            <!-- Card 3: Subordinierend II -->
+            <!-- Card 3: Infinitive and purpose structures -->
             <div class="level-card">
-                <div class="level-header b2" style="background:var(--level-b1)">
-                    <span>Final</span>
-                    <span class="level-header-label">subordinantes II</span>
+                <div class="level-header inf">
+                    <span>Zu / Final</span>
+                    <span class="level-header-label">finalidad y modo</span>
                 </div>
                 <div class="level-content">
                     <table>
@@ -988,49 +1238,33 @@
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>damit</div></td>
                                 <td>para que</td>
                             </tr>
-                            <tr onclick="openWordModal(this)" data-word="bevor" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="antes de que" data-example="<strong>Bevor</strong> ich gehe, <span class='german-word' style='font-size:0.9em'>rufe</span> ich dich an.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>bevor</div></td>
-                                <td>antes de que</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="seit" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="desde que" data-example="<strong>Seit</strong> ich hier <span class='german-word' style='font-size:0.9em'>wohne</span>, lerne ich Deutsch.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>seit</div></td>
-                                <td>desde que</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="sobald" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="en cuanto" data-example="<strong>Sobald</strong> ich Zeit <span class='german-word' style='font-size:0.9em'>habe</span>, komme ich.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>sobald</div></td>
-                                <td>en cuanto</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="während" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="mientras (tiempo)" data-example="<strong>Während</strong> er <span class='german-word' style='font-size:0.9em'>kocht</span>, spült sie.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>während</div></td>
-                                <td>mientras (tiempo)</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="obwohl" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="aunque" data-example="<strong>Obwohl</strong> es <span class='german-word' style='font-size:0.9em'>regnet</span>, gehen wir.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>obwohl</div></td>
-                                <td>aunque</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="um... zu" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="para (+ infinitivo)" data-example="Ich lerne Deutsch, <strong>um</strong> eine Arbeit <span class='german-word' style='font-size:0.9em'>zu finden</span>.">
+                            <tr onclick="openWordModal(this)" data-word="um... zu" data-dtz-star="true" data-tag="Infinitivo" data-tag-class="tag inf" data-trans="para (+ infinitivo)" data-example="Ich lerne Deutsch, <strong>um</strong> eine Arbeit <span class='german-word' style='font-size:0.9em'>zu finden</span>.">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>um... zu</div></td>
                                 <td>para (+ infinitivo)</td>
                             </tr>
-                            <tr onclick="openWordModal(this)" data-word="ohne... zu" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="sin (+ infinitivo)" data-example="Er ging weg, <strong>ohne</strong> Tschüss <span class='german-word' style='font-size:0.9em'>zu sagen</span>.">
+                            <tr onclick="openWordModal(this)" data-word="indem" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="al / mediante" data-example="Man lernt Deutsch, <strong>indem</strong> man jeden Tag <span class='german-word' style='font-size:0.9em'>spricht</span>.">
+                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>indem</div></td>
+                                <td>al / mediante</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="ohne... zu" data-dtz-star="true" data-tag="Infinitivo" data-tag-class="tag inf" data-trans="sin (+ infinitivo)" data-example="Er ging weg, <strong>ohne</strong> Tschüss <span class='german-word' style='font-size:0.9em'>zu sagen</span>.">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>ohne... zu</div></td>
                                 <td>sin (+ infinitivo)</td>
                             </tr>
-                            <tr onclick="openWordModal(this)" data-word="statt... zu" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="en vez de (+ inf)" data-example="Er sieht fern, <strong>statt</strong> <span class='german-word' style='font-size:0.9em'>zu lernen</span>.">
+                            <tr onclick="openWordModal(this)" data-word="statt... zu" data-dtz-star="true" data-tag="Infinitivo" data-tag-class="tag inf" data-trans="en vez de (+ inf)" data-example="Er sieht fern, <strong>statt</strong> <span class='german-word' style='font-size:0.9em'>zu lernen</span>.">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>statt... zu</div></td>
                                 <td>en vez de (+ inf)</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="level-footer b2" style="background: var(--level-b1);">Regla: Envían el verbo al final</div>
+                <div class="level-footer inf">Regla: mismo sujeto → um … zu · distinto → damit</div>
             </div>
 
             <!-- Card 4: Adverbial (Pos 1) -->
             <div class="level-card">
                 <div class="level-header b1">
                     <span>Pos 1</span>
-                    <span class="level-header-label">adverbiales (inversión)</span>
+                    <span class="level-header-label">adverbiales esenciales</span>
                 </div>
                 <div class="level-content">
                     <table>
@@ -1043,21 +1277,9 @@
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>deswegen</div></td>
                                 <td>por eso</td>
                             </tr>
-                            <tr onclick="openWordModal(this)" data-word="darum" data-dtz-star="true" data-tag="Pos 1" data-tag-class="tag inv" data-trans="por eso" data-example="Ich bin müde, <strong>darum</strong> <span class='german-word' style='font-size:0.9em'>bleibe</span> ich zu Hause.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>darum</div></td>
-                                <td>por eso</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="daher" data-dtz-star="true" data-tag="Pos 1" data-tag-class="tag inv" data-trans="por lo tanto" data-example="Er war krank, <strong>daher</strong> <span class='german-word' style='font-size:0.9em'>konnte</span> er nicht kommen.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>daher</div></td>
-                                <td>por lo tanto</td>
-                            </tr>
                             <tr onclick="openWordModal(this)" data-word="trotzdem" data-dtz-star="true" data-tag="Pos 1" data-tag-class="tag inv" data-trans="sin embargo" data-example="Es regnet, <strong>trotzdem</strong> <span class='german-word' style='font-size:0.9em'>gehen</span> wir raus.">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>trotzdem</div></td>
                                 <td>sin embargo</td>
-                            </tr>
-                            <tr onclick="openWordModal(this)" data-word="dennoch" data-dtz-star="true" data-tag="Pos 1" data-tag-class="tag inv" data-trans="sin embargo / no obstante" data-example="Es ist schwer. <strong>Dennoch</strong> <span class='german-word' style='font-size:0.9em'>versuchen</span> wir es.">
-                                <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>dennoch</div></td>
-                                <td>sin embargo / no obstante</td>
                             </tr>
                             <tr onclick="openWordModal(this)" data-word="sonst" data-dtz-star="true" data-tag="Pos 1" data-tag-class="tag inv" data-trans="si no / de lo contrario" data-example="Beeil dich, <strong>sonst</strong> <span class='german-word' style='font-size:0.9em'>verpassen</span> wir den Zug.">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>sonst</div></td>
@@ -1074,17 +1296,150 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="level-footer b1">Regla: Empujan el verbo a pos 2</div>
+                <div class="level-footer b1">Regla: al inicio → conector + verbo + sujeto</div>
             </div>
 
-        </div>
+            </div>
+        </section>
+
+        <section class="sheet-page sheet-back" aria-labelledby="backSheetTitle">
+            <div class="sheet-heading">
+                <div>
+                    <span class="sheet-kicker">Cara B · Ampliación DTZ B1</span>
+                    <h2 id="backSheetTitle" class="sheet-title">Alternativas y estructuras complementarias</h2>
+                </div>
+                <p class="sheet-note">✓ Para reconocer y ampliar · Orden espejado para dúplex por el borde largo</p>
+            </div>
+
+            <div class="grid-layout">
+                <!-- Back top-left: aligns behind the front top-right when duplex printed -->
+                <div class="level-card">
+                    <div class="level-header a2">
+                        <span>Final</span>
+                        <span class="level-header-label">temporales</span>
+                    </div>
+                    <div class="level-content">
+                        <table><tbody>
+                            <tr onclick="openWordModal(this)" data-word="bevor" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="antes de que" data-example="<strong>Bevor</strong> ich <span class='german-word' style='font-size:0.9em'>gehe</span>, rufe ich dich an.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>bevor</div></td><td>antes de que</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="nachdem" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="después de que" data-example="<strong>Nachdem</strong> ich den Brief geschrieben <span class='german-word' style='font-size:0.9em'>habe</span>, bringe ich ihn zur Post.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>nachdem</div></td><td>después de que</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="während" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="mientras" data-example="<strong>Während</strong> ich <span class='german-word' style='font-size:0.9em'>arbeite</span>, hört mein Handy nicht auf zu klingeln.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>während</div></td><td>mientras</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="seitdem" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="desde que" data-example="<strong>Seitdem</strong> ich hier <span class='german-word' style='font-size:0.9em'>wohne</span>, lerne ich Deutsch.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>seitdem</div></td><td>desde que</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="bis" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="hasta que" data-example="Bitte warten Sie, <strong>bis</strong> der Bus <span class='german-word' style='font-size:0.9em'>kommt</span>.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>bis</div></td><td>hasta que</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="sobald" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="en cuanto" data-example="<strong>Sobald</strong> ich Zeit <span class='german-word' style='font-size:0.9em'>habe</span>, melde ich mich.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>sobald</div></td><td>en cuanto</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="solange" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="mientras / siempre que" data-example="<strong>Solange</strong> du krank <span class='german-word' style='font-size:0.9em'>bist</span>, bleib im Bett.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>solange</div></td><td>mientras / siempre que</td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                    <div class="level-footer a2">Regla: conjunción + sujeto … + verbo final</div>
+                </div>
+
+                <!-- Back top-right: aligns behind the front top-left -->
+                <div class="level-card">
+                    <div class="level-header a1">
+                        <span>Pos 0</span>
+                        <span class="level-header-label">coordinantes ampliadas</span>
+                    </div>
+                    <div class="level-content">
+                        <table><tbody>
+                            <tr onclick="openWordModal(this)" data-word="doch" data-dtz-star="false" data-tag="Pos 0" data-tag-class="tag zero" data-trans="pero / sin embargo" data-example="Der Weg ist lang, <strong>doch</strong> er ist nicht schwierig.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>doch</div></td><td>pero / sin embargo</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="sowie" data-dtz-star="false" data-tag="Pos 0" data-tag-class="tag zero" data-trans="así como" data-example="Bitte schicken Sie das Formular <strong>sowie</strong> die Bescheinigung.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>sowie</div></td><td>así como</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="zwar... aber" data-dtz-star="false" data-tag="Pos 0" data-tag-class="tag zero" data-trans="es cierto que… pero" data-example="Der Kurs ist <strong>zwar</strong> teuer, <strong>aber</strong> sehr gut.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>zwar… aber</div></td><td>es cierto que… pero</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="entweder... oder" data-dtz-star="false" data-tag="Pos 0" data-tag-class="tag zero" data-trans="o bien… o bien" data-example="Wir treffen uns <strong>entweder</strong> heute <strong>oder</strong> morgen.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>entweder… oder</div></td><td>o bien… o bien</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="weder... noch" data-dtz-star="false" data-tag="Pos 0" data-tag-class="tag zero" data-trans="ni… ni" data-example="Ich habe <strong>weder</strong> eine Antwort <strong>noch</strong> einen Termin bekommen.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>weder… noch</div></td><td>ni… ni</td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                    <div class="level-footer a1">Regla: mantienen el orden normal del verbo</div>
+                </div>
+
+                <!-- Back bottom-left: aligns behind the front bottom-right -->
+                <div class="level-card">
+                    <div class="level-header b1">
+                        <span>Pos 1</span>
+                        <span class="level-header-label">variantes y secuencia</span>
+                    </div>
+                    <div class="level-content">
+                        <table><tbody>
+                            <tr onclick="openWordModal(this)" data-word="darum" data-dtz-star="false" data-tag="Pos 1" data-tag-class="tag inv" data-trans="por eso" data-example="Ich bin krank. <strong>Darum</strong> <span class='german-word' style='font-size:0.9em'>bleibe</span> ich zu Hause.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>darum</div></td><td>por eso</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="daher" data-dtz-star="false" data-tag="Pos 1" data-tag-class="tag inv" data-trans="por lo tanto" data-example="Er war krank. <strong>Daher</strong> <span class='german-word' style='font-size:0.9em'>konnte</span> er nicht kommen.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>daher</div></td><td>por lo tanto</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="dennoch" data-dtz-star="false" data-tag="Pos 1" data-tag-class="tag inv" data-trans="no obstante" data-example="Es ist schwierig. <strong>Dennoch</strong> <span class='german-word' style='font-size:0.9em'>versuchen</span> wir es.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>dennoch</div></td><td>no obstante</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="jedoch" data-dtz-star="false" data-tag="Pos 1" data-tag-class="tag inv" data-trans="sin embargo" data-example="Der Termin passt. <strong>Jedoch</strong> <span class='german-word' style='font-size:0.9em'>komme</span> ich etwas später.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>jedoch</div></td><td>sin embargo</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="zuerst" data-dtz-star="false" data-tag="Pos 1" data-tag-class="tag inv" data-trans="primero" data-example="<strong>Zuerst</strong> <span class='german-word' style='font-size:0.9em'>füllen</span> Sie das Formular aus.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>zuerst</div></td><td>primero</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="danach" data-dtz-star="false" data-tag="Pos 1" data-tag-class="tag inv" data-trans="después" data-example="<strong>Danach</strong> <span class='german-word' style='font-size:0.9em'>schicken</span> Sie die Unterlagen ab.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>danach</div></td><td>después</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="anschließend" data-dtz-star="false" data-tag="Pos 1" data-tag-class="tag inv" data-trans="a continuación" data-example="<strong>Anschließend</strong> <span class='german-word' style='font-size:0.9em'>vereinbaren</span> wir einen Termin.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>anschließend</div></td><td>a continuación</td>
+                            </tr>
+                        </tbody></table>
+                    </div>
+                    <div class="level-footer b1">Regla: al inicio → conector + verbo + sujeto</div>
+                </div>
+
+                <!-- Back bottom-right: aligns behind the front bottom-left -->
+                <div class="level-card">
+                    <div class="level-header inf">
+                        <span>Final</span>
+                        <span class="level-header-label">preguntas indirectas</span>
+                    </div>
+                    <div class="level-content">
+                        <table><tbody>
+                            <tr onclick="openWordModal(this)" data-word="da" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="como / ya que" data-example="<strong>Da</strong> ich krank <span class='german-word' style='font-size:0.9em'>bin</span>, bleibe ich zu Hause.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>da</div></td><td>como / ya que</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="wann" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="cuándo" data-example="Ich möchte wissen, <strong>wann</strong> der Kurs <span class='german-word' style='font-size:0.9em'>beginnt</span>.">
+                                <td><div class="german-word"><span class="priority-mark useful">✓</span>wann</div></td><td>cuándo</td>
+                            </tr>
+                            <tr onclick="openWordModal(this)" data-word="warum" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="por qué" data-example="Können Sie mir sagen, <strong>warum</strong> der Termin ausgefallen <span class='german-word' style='font-size:0.9em'>ist</span>?"><td><div class="german-word"><span class="priority-mark useful">✓</span>warum</div></td><td>por qué</td></tr>
+                            <tr onclick="openWordModal(this)" data-word="wie" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="cómo" data-example="Bitte erklären Sie mir, <strong>wie</strong> das Gerät <span class='german-word' style='font-size:0.9em'>funktioniert</span>."><td><div class="german-word"><span class="priority-mark useful">✓</span>wie</div></td><td>cómo</td></tr>
+                            <tr onclick="openWordModal(this)" data-word="wo" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="dónde" data-example="Wissen Sie, <strong>wo</strong> die Prüfung <span class='german-word' style='font-size:0.9em'>stattfindet</span>?"><td><div class="german-word"><span class="priority-mark useful">✓</span>wo</div></td><td>dónde</td></tr>
+                            <tr onclick="openWordModal(this)" data-word="wohin" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="adónde" data-example="Ich weiß nicht, <strong>wohin</strong> ich das Formular schicken <span class='german-word' style='font-size:0.9em'>soll</span>."><td><div class="german-word"><span class="priority-mark useful">✓</span>wohin</div></td><td>adónde</td></tr>
+                            <tr onclick="openWordModal(this)" data-word="woher" data-dtz-star="false" data-tag="Final" data-tag-class="tag end" data-trans="de dónde" data-example="Können Sie mir sagen, <strong>woher</strong> diese Information <span class='german-word' style='font-size:0.9em'>kommt</span>?"><td><div class="german-word"><span class="priority-mark useful">✓</span>woher</div></td><td>de dónde</td></tr>
+                        </tbody></table>
+                    </div>
+                    <div class="level-footer inf">Regla: pregunta indirecta → verbo al final</div>
+                </div>
+            </div>
+        </section>
 
         <!-- RULES MOVED TO BOTTOM -->
         <div class="rule-section">
             <!-- Rule 1: ADUSO -->
             <div class="rule-card">
                 <div class="rule-title">
-                    <span>0️⃣ Regla A1: ADUSO</span>
+                    <span>0️⃣ Regla 1: ADUSO</span>
                 </div>
                 <div class="rule-content">
                     Las conjunciones de <strong>Posición 0</strong> no ocupan espacio gramatical. Se conocen como ADUSO:
@@ -1097,10 +1452,10 @@
             <!-- Rule 2: Inversion -->
             <div class="rule-card warning">
                 <div class="rule-title">
-                    <span>1️⃣ Regla B1: Inversión</span>
+                    <span>1️⃣ Regla 3: Inversión</span>
                 </div>
                 <div class="rule-content">
-                    Los conectores adverbiales (deshalb, trotzdem, dann) ocupan la <strong>Posición 1</strong>.
+                    Cuando los conectores adverbiales (deshalb, trotzdem, dann) ocupan la <strong>Posición 1</strong>,
                     <br>
                     ¡Esto empuja al verbo a la posición 2 y al sujeto a la posición 3!
                 </div>
@@ -1110,9 +1465,9 @@
             </div>
 
             <!-- Rule 3: Nebensatz -->
-            <div class="rule-card full-width">
+            <div class="rule-card">
                 <div class="rule-title" style="color: var(--level-a2);">
-                    <span>🔚 Regla A2/B2: El Verbo al Final</span>
+                    <span>🔚 Regla 2: El verbo al final</span>
                 </div>
                 <div class="rule-content">
                     Con las conjunciones subordinantes (weil, dass, wenn, obwohl, etc.), el verbo conjugado viaja hasta
@@ -1120,6 +1475,21 @@
                     <br><br>
                     ✅ Ich esse, <strong>weil</strong> ich Hunger <strong>habe</strong>.<br>
                     ❌ <s>Ich esse, weil ich habe Hunger.</s> (Error típico hispanohablante)
+                </div>
+            </div>
+
+            <!-- Rule 4: Infinitive with zu -->
+            <div class="rule-card inf-rule">
+                <div class="rule-title">
+                    <span>🎯 Regla 4: Infinitivo con zu</span>
+                </div>
+                <div class="rule-content">
+                    Con el mismo sujeto usamos <strong>um … zu</strong>. Si los sujetos son diferentes, usamos
+                    <strong>damit</strong> y el verbo conjugado va al final.
+                </div>
+                <div class="rule-example">
+                    Ich lerne, <strong>um</strong> die Prüfung <strong>zu bestehen</strong>.<br>
+                    Ich spreche langsam, <strong>damit</strong> du mich <strong>verstehst</strong>.
                 </div>
             </div>
         </div>
@@ -1163,10 +1533,17 @@
                 </div>
 
                 <h3 style="color: var(--level-b1); margin-top: 20px;">3. Adverbiales (Posición 1)</h3>
-                <p>Actúan como el primer elemento de la frase, por lo que el verbo debe ir inmediatamente después
-                    (inversión).</p>
+                <p>Cuando actúan como el primer elemento de la frase, el verbo debe ir inmediatamente después
+                    (inversión). También pueden aparecer en el interior de la oración.</p>
                 <div class="rule-example">
                     Es regnet, <strong>deshalb</strong> <strong>bleibe</strong> ich zu Hause.
+                </div>
+
+                <h3 style="color: var(--level-inf); margin-top: 20px;">4. Construcciones con zu</h3>
+                <p>Con el mismo sujeto usamos <strong>um … zu</strong>. Con sujetos diferentes usamos
+                    <strong>damit</strong> y el verbo conjugado queda al final.</p>
+                <div class="rule-example">
+                    Ich lerne Deutsch, <strong>um</strong> die Prüfung <strong>zu bestehen</strong>.
                 </div>
             </div>
         </div>
@@ -1209,8 +1586,14 @@
             "wenn": "Conjuncion subordinante",
             "ob": "Conjuncion subordinante",
             "wann": "Adverbio interrogativo",
+            "warum": "Adverbio interrogativo",
+            "wie": "Adverbio interrogativo",
+            "wo": "Adverbio interrogativo",
+            "wohin": "Adverbio interrogativo",
+            "woher": "Adverbio interrogativo",
             "als": "Conjuncion subordinante",
             "bevor": "Conjuncion subordinante",
+            "nachdem": "Conjuncion subordinante",
             "seit": "Conjuncion subordinante",
             "seitdem": "Conjuncion subordinante",
             "sobald": "Conjuncion subordinante",
@@ -1237,12 +1620,16 @@
             "bis": "Conjuncion subordinante",
             "solange": "Conjuncion subordinante",
             "entweder... oder": "Estructura correlativa",
+            "weder... noch": "Estructura correlativa",
             "um... zu": "Estructura infinitiva",
             "ohne... zu": "Estructura infinitiva",
             "statt... zu": "Estructura infinitiva",
             "während": "Conjuncion subordinante",
             "indem": "Conjuncion subordinante",
-            "falls": "Conjuncion subordinante"
+            "falls": "Conjuncion subordinante",
+            "zuerst": "Conector adverbial",
+            "danach": "Conector adverbial",
+            "anschließend": "Conector adverbial"
         };
 
         const explanations = {
@@ -1451,7 +1838,9 @@
 
             words.forEach(el => {
                 const rawText = el.innerText.trim();
-                const textToSpeak = el.getAttribute('data-speak') || rawText;
+                const textToSpeak = el.getAttribute('data-speak')
+                    || el.closest('tr')?.getAttribute('data-word')
+                    || rawText;
 
                 const icon = document.createElement('span');
                 icon.textContent = '🔊';
