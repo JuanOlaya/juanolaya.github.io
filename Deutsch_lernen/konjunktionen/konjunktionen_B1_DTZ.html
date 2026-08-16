@@ -497,6 +497,27 @@
             background: transparent;
         }
 
+        .card-section-rule {
+            height: 0;
+            cursor: default;
+        }
+
+        .card-section-rule td {
+            padding: 7px 15px;
+            background: var(--level-inf);
+            border-bottom: 0;
+            color: #ffffff;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.35px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .card-section-rule:hover {
+            background: transparent;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -920,6 +941,12 @@
                 font-size: 6.5pt;
                 letter-spacing: 0.7pt;
             }
+
+            .card-section-rule td {
+                padding: 1.5mm 3.5mm;
+                font-size: 7pt;
+                letter-spacing: 0.1pt;
+            }
         }
 
         .footer-actions {
@@ -1287,6 +1314,7 @@
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>statt... zu</div></td>
                                 <td>en vez de (+ inf)</td>
                             </tr>
+                            <tr class="card-section-rule"><td colspan="2">R: mismo sujeto → um … zu</td></tr>
                             <tr class="card-section-label"><td colspan="2">Finalidad</td></tr>
                             <tr onclick="openWordModal(this)" data-word="damit" data-dtz-star="true" data-tag="Final" data-tag-class="tag end" data-trans="para que" data-example="Ich lerne, <strong>damit</strong> ich besser <span class='german-word' style='font-size:0.9em'>werde</span>.">
                                 <td><div class="german-word"><span class="dtz-star" style="color:#fbbf24; margin-right:4px;">⭐</span>damit</div></td>
@@ -1299,7 +1327,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="level-footer inf compact-rule">R: mismo sujeto → um … zu · distinto → damit</div>
+                <div class="level-footer inf compact-rule">R: distinto sujeto → damit</div>
             </div>
 
             <!-- Card 4: Adverbial (Pos 1) -->
