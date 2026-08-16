@@ -11,8 +11,8 @@ const { pathToFileURL } = require('url');
  *   node build_pdf_konjunktionen_8_cards.js
  *
  * Options:
- *   --examples=front  Examples on the first four cards (default)
- *   --examples=all    Examples on all eight cards
+ *   --examples=all    Examples on all eight cards (default)
+ *   --examples=front  Examples on the first four cards
  *   --examples=none   No examples
  *   --output=PATH     Stable output path instead of a timestamped Desktop PDF
  *   --keep-html       Keep the intermediate printable HTML
@@ -24,7 +24,7 @@ function optionValue(name) {
     return option ? option.slice(prefix.length) : null;
 }
 
-const examplesMode = optionValue('examples') || 'front';
+const examplesMode = optionValue('examples') || 'all';
 if (!['front', 'all', 'none'].includes(examplesMode)) {
     throw new Error('Invalid --examples value. Use front, all, or none.');
 }
@@ -280,10 +280,14 @@ function renderRow(row, showExamples) {
         ? '<div class="kompakt-example">' + row.example + '</div>'
         : '';
 
+    const germanClass = row.word.length > 14
+        ? 'kompakt-german long-word'
+        : 'kompakt-german';
+
     return [
         '<div class="kompakt-row">',
         '  <div class="word-line">',
-        '    <span class="kompakt-german">' + row.word + '</span>',
+        '    <span class="' + germanClass + '">' + row.word + '</span>',
         '    <span class="kompakt-spanish">' + row.translation + '</span>',
         '    <span class="level-badge">' + row.level + '</span>',
         '  </div>',
@@ -319,7 +323,9 @@ function renderPage(cards, pageIndex) {
         ? {
             kicker: 'CARA A - NUCLEO DTZ B1',
             title: 'Las cuatro reglas de uso activo',
-            note: 'Ejemplos en las 4 tarjetas esenciales'
+            note: examplesMode === 'all'
+                ? 'Ejemplos en las 8 tarjetas'
+                : 'Ejemplos en las 4 tarjetas esenciales'
         }
         : {
             kicker: 'CARA B - AMPLIACION DTZ B1',
@@ -384,8 +390,9 @@ const printHtml = [
     '    .kompakt-content { flex: 1; min-height: 0; display: flex; flex-direction: column; }',
     '    .kompakt-row { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; justify-content: center; padding: 1.25mm 2.6mm; border-bottom: 0.25mm solid #e2e8f0; }',
     '    .kompakt-row:last-child { border-bottom: 0; }',
-    '    .word-line { display: grid; grid-template-columns: minmax(0, 33%) minmax(0, 1fr) 10mm; align-items: center; column-gap: 2mm; line-height: 1.05; }',
-    '    .kompakt-german { overflow: hidden; color: #0f172a; font-size: 8.2pt; font-weight: 800; text-overflow: ellipsis; white-space: nowrap; }',
+    '    .word-line { display: grid; grid-template-columns: minmax(0, 38%) minmax(0, 1fr) 9mm; align-items: center; column-gap: 1.5mm; line-height: 1.05; }',
+    '    .kompakt-german { overflow: hidden; color: #0f172a; font-size: 9.4pt; font-weight: 800; letter-spacing: -0.08pt; text-overflow: ellipsis; white-space: nowrap; }',
+    '    .kompakt-german.long-word { font-size: 8.8pt; }',
     '    .kompakt-spanish { color: #111827; font-size: 7.3pt; font-style: italic; font-weight: 700; text-align: center; }',
     '    .level-badge { justify-self: end; padding: 0.15mm 1mm; border: 0.25mm solid #cbd5e1; border-radius: 1.2mm; background: #f1f5f9; color: #475569; font-size: 5.8pt; font-weight: 800; }',
     '    .kompakt-example { margin-top: 0.7mm; overflow: hidden; color: #64748b; font-size: 6.25pt; line-height: 1.18; }',
@@ -395,7 +402,7 @@ const printHtml = [
     '    .kompakt-section-label { border-top: 0.25mm solid #c4b5fd; border-bottom: 0.25mm solid #c4b5fd; background: #ede9fe; color: #6d28d9; }',
     '    .kompakt-section-rule { background: #a855f7; color: #fff; letter-spacing: 0.15pt; text-transform: none; }',
     '    .kompakt-footer { min-height: 8mm; flex: 0 0 8mm; display: flex; align-items: center; justify-content: center; padding: 1.4mm 2mm; color: #fff; font-size: 7.1pt; font-weight: 800; letter-spacing: 0.05pt; text-align: center; white-space: nowrap; }',
-    '    .without-examples .kompakt-german { font-size: 8.8pt; }',
+    '    .without-examples .kompakt-german { font-size: 10pt; }',
     '    .without-examples .kompakt-spanish { font-size: 8pt; }',
     '  </style>',
     '</head>',
