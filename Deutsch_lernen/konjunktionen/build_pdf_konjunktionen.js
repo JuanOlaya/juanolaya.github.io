@@ -24,10 +24,10 @@ const cardRegex = /<div class="level-card">([\s\S]*?)<\/div>\s*<\/div>/gi;
 let cardMatch;
 
 const levelMap = {
-    und: 'A1', aber: 'A1', oder: 'A1', denn: 'A1', sondern: 'A1', doch: 'A1',
-    weil: 'A2', dass: 'A2', wenn: 'A2', ob: 'A2', als: 'A2', da: 'B1',
-    damit: 'A2', bevor: 'A2', seit: 'A2', sobald: 'A2', während: 'B2', obwohl: 'B1',
-    deshalb: 'B1', deswegen: 'B1', darum: 'B1', 'deshalb / darum / deswegen': 'B1', trotzdem: 'B1', dennoch: 'B1', sonst: 'B1', dann: 'B1', außerdem: 'B1'
+    und: 'A1', aber: 'A1', oder: 'A1', denn: 'A1', sondern: 'A1', doch: 'A1', sowie: 'B1', 'zwar... aber': 'B1', 'entweder... oder': 'B1',
+    weil: 'A2', dass: 'A2', wenn: 'A2', ob: 'A2', als: 'A2', da: 'B1', bis: 'A2', falls: 'B1', solange: 'B1',
+    damit: 'A2', bevor: 'A2', seit: 'A2', sobald: 'A2', während: 'B2', obwohl: 'B1', 'um... zu': 'A2', 'ohne... zu': 'B1', 'statt... zu': 'B1',
+    deshalb: 'B1', deswegen: 'B1', darum: 'B1', daher: 'B1', trotzdem: 'B1', dennoch: 'B1', sonst: 'B1', dann: 'B1', außerdem: 'B1'
 };
 
 const standardColors = ['#3b82f6', '#ca8a04', '#f97316', '#ef4444'];
