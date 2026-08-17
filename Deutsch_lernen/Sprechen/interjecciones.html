@@ -26,6 +26,8 @@
             --cat-kinder: #ec4899;
             --cat-despedidas: #14b8a6;
             --cat-igualmente: #6366f1;
+            --cat-particulamal1: #8b5cf6;
+            --cat-particulamal2: #4f46e5;
 
             --level-a1: #3b82f6;
             --level-a2: #eab308;
@@ -332,6 +334,14 @@
             background: var(--cat-igualmente);
         }
 
+        .level-card.particulamal1-card .card-footer {
+            background: var(--cat-particulamal1);
+        }
+
+        .level-card.particulamal2-card .card-footer {
+            background: var(--cat-particulamal2);
+        }
+
         .level-card .card-footer {
             margin-top: auto;
         }
@@ -366,6 +376,14 @@
 
         .level-header.igualmente {
             background: var(--cat-igualmente);
+        }
+
+        .level-header.particulamal1 {
+            background: var(--cat-particulamal1);
+        }
+
+        .level-header.particulamal2 {
+            background: var(--cat-particulamal2);
         }
 
         table {
@@ -505,6 +523,14 @@
 
         .modal-header.theme-igualmente {
             background: var(--cat-igualmente);
+        }
+
+        .modal-header.theme-particulamal1 {
+            background: var(--cat-particulamal1);
+        }
+
+        .modal-header.theme-particulamal2 {
+            background: var(--cat-particulamal2);
         }
 
         .modal-header.theme-na {
@@ -871,6 +897,22 @@
                 </table>
                 <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Gleichfalls')">Gleichfalls</span><span id="titleIgualmente" class="card-footer-translation">Igualmente</span></span></div>
             </div>
+            <!-- Partícula "mal" I -->
+            <div class="level-card particulamal1-card">
+                <div class="level-header particulamal1"><span class="card-footer-level">A1-B1</span><span class="card-header-label">partículas I</span></div>
+                <table>
+                    <tbody id="group-particulamal1"></tbody>
+                </table>
+                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Modalpartikel')">Partikel "mal" I</span><span id="titleParticulaMal1" class="card-footer-translation">Partícula "mal" I</span></span></div>
+            </div>
+            <!-- Partícula "mal" II -->
+            <div class="level-card particulamal2-card">
+                <div class="level-header particulamal2"><span class="card-footer-level">A1-B1</span><span class="card-header-label">partículas II</span></div>
+                <table>
+                    <tbody id="group-particulamal2"></tbody>
+                </table>
+                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Modalpartikel')">Partikel "mal" II</span><span id="titleParticulaMal2" class="card-footer-translation">Partícula "mal" II</span></span></div>
+            </div>
         </div>
 
         <section
@@ -910,6 +952,8 @@
                 titleKinder: "Niños",
                 titleDespedidas: "Despedidas",
                 titleIgualmente: "Igualmente",
+                titleParticulaMal1: "Partícula \"mal\" I",
+                titleParticulaMal2: "Partícula \"mal\" II",
                 footerInterjection: "interjecciones",
                 naDef: "La navaja suiza del idioma. Cambia según el contexto.",
                 btnSpeak: "ESCUCHAR"
@@ -925,6 +969,8 @@
                 titleKinder: "Kids",
                 titleDespedidas: "Farewells",
                 titleIgualmente: "Likewise",
+                titleParticulaMal1: "Particle \"mal\" I",
+                titleParticulaMal2: "Particle \"mal\" II",
                 footerInterjection: "interjections",
                 naDef: "The language's Swiss Army knife. Context is key.",
                 btnSpeak: "LISTEN"
@@ -1035,6 +1081,169 @@
                 { de: "Bis später!", es: "¡Hasta luego!", en: "See you later!", lv: "A1", ex: [{ de: "Ich muss los, bis später!", es: "Me tengo que ir, ¡hasta luego!", en: "I have to go, see you later!" }] },
                 { de: "Bis morgen!", es: "¡Hasta mañana!", en: "See you tomorrow!", lv: "A1", ex: [{ de: "Schlaf gut, bis morgen!", es: "Duerme bien, ¡hasta mañana!", en: "Sleep well, see you tomorrow!" }] },
                 { de: "Tschüss!", es: "¡Chao!", en: "Bye!", lv: "A1", ex: [{ de: "Tschüss, bis morgen!", es: "¡Chao, hasta mañana!", en: "Bye, see you tomorrow!" }] }
+            ],
+            particulamal1: [
+                {
+                    de: "Guck mal!",
+                    es: "¡Mira! / ¡Fíjate!",
+                    en: "Look! / Check it out!",
+                    lv: "A1",
+                    desc_es: "<p>La palabra <strong>mal</strong> es una partícula modal (Modalpartikel) derivada de <em>einmal</em>. Se usa para suavizar imperativos y preguntas, haciéndolos sonar más amigables y casuales.</p><p class='mt-2'><strong>Diferencia de número (imperativo):</strong></p><ul class='list-disc list-inside mt-1 space-y-1'><li><strong>Guck mal!</strong> (tú / singular)</li><li><strong>Guckt mal!</strong> (vosotros / plural informal)</li></ul>",
+                    desc_en: "<p>The word <strong>mal</strong> is a modal particle (short for <em>einmal</em>). It softens imperatives and questions, making them sound friendlier and more casual.</p><p class='mt-2'><strong>Number difference (imperative):</strong></p><ul class='list-disc list-inside mt-1 space-y-1'><li><strong>Guck mal!</strong> (singular informal 'you')</li><li><strong>Guckt mal!</strong> (plural informal 'you')</li></ul>",
+                    ex: [
+                        { de: "Guck mal, da drüben!", es: "¡Mira, allí enfrente!", en: "Look, over there!" },
+                        { de: "Guckt mal, Kinder!", es: "¡Mirad, niños!", en: "Look, kids!" }
+                    ]
+                },
+                {
+                    de: "Sag mal...",
+                    es: "Dime... / Oye...",
+                    en: "Tell me... / Say...",
+                    lv: "A1",
+                    desc_es: "Se usa para iniciar una pregunta o cambiar de tema de forma muy casual y cercana. Suaviza la interrupción.",
+                    desc_en: "Used to introduce a question or change the subject in a very casual way. Softens the interruption.",
+                    ex: [{ de: "Sag mal, hast du heute Zeit?", es: "Oye, ¿tienes tiempo hoy?", en: "Say, do you have time today?" }]
+                },
+                {
+                    de: "Mal sehen.",
+                    es: "A ver. / Ya veremos.",
+                    en: "We'll see. / Let's see.",
+                    lv: "A1",
+                    desc_es: "Una expresión muy común para aplazar una decisión o expresar incertidumbre, equivalente al 'ya veremos' español.",
+                    desc_en: "A very common expression to defer a decision or express uncertainty, equivalent to 'we'll see'.",
+                    ex: [{ de: "Kommst du morgen? - Mal sehen.", es: "¿Vienes mañana? - A ver / Ya veremos.", en: "Are you coming tomorrow? - We'll see." }]
+                },
+                {
+                    de: "Hör mal!",
+                    es: "¡Escucha! / ¡Oye!",
+                    en: "Listen! / Hey!",
+                    lv: "A1",
+                    desc_es: "Se usa para llamar la atención del oyente o pedirle que preste atención. En plural informal se usa <strong>Hört mal!</strong>.",
+                    desc_en: "Used to catch the listener's attention or ask them to listen. The plural informal form is <strong>Hört mal!</strong>.",
+                    ex: [
+                        { de: "Hör mal, das ist wichtig!", es: "¡Escucha, esto es importante!", en: "Listen, this is important!" },
+                        { de: "Hört mal alle kurz zu!", es: "¡Escuchad todos un momento!", en: "Listen up everyone for a second!" }
+                    ]
+                },
+                {
+                    de: "Warte mal!",
+                    es: "¡Espera! / ¡Espera un segundo!",
+                    en: "Wait! / Hold on!",
+                    lv: "A1",
+                    desc_es: "Suaviza la orden de esperar, haciéndola sonar como 'espera un segundito'. En plural informal se usa <strong>Wartet mal!</strong>.",
+                    desc_en: "Softens the command to wait, making it sound like 'wait a second'. The plural informal form is <strong>Wartet mal!</strong>.",
+                    ex: [
+                        { de: "Warte mal kurz auf mich!", es: "¡Espérame un momento!", en: "Wait up for me a second!" },
+                        { de: "Wartet mal, ich komme mit!", es: "¡Esperad, voy con vosotros!", en: "Wait, I am coming along!" }
+                    ]
+                },
+                {
+                    de: "Lass mal.",
+                    es: "Déjalo. / Deja estar.",
+                    en: "Forget it. / Don't bother.",
+                    lv: "A2",
+                    desc_es: "Expresión informal para declinar una ayuda o sugerencia amablemente. Indica 'no hace falta' o 'deja así'.",
+                    desc_en: "Informal expression to politely decline help or a suggestion. Means 'don't bother' or 'leave it be'.",
+                    ex: [{ de: "Soll ich helfen? - Nein, lass mal.", es: "¿Quieres que te ayude? - No, déjalo / no hace falta.", en: "Should I help? - No, don't bother." }]
+                },
+                {
+                    de: "Probier mal!",
+                    es: "¡Prueba! / ¡Pruébalo!",
+                    en: "Try it! / Taste it!",
+                    lv: "A1",
+                    desc_es: "Utilizado comúnmente con comida o actividades para animar a alguien a probar algo. En plural se usa <strong>Probiert mal!</strong>.",
+                    desc_en: "Commonly used with food or activities to encourage someone to try something. The plural is <strong>Probiert mal!</strong>.",
+                    ex: [
+                        { de: "Probier mal diese Suppe!", es: "¡Prueba esta sopa!", en: "Taste this soup!" },
+                        { de: "Probiert mal das new Spiel!", es: "¡Probad el juego nuevo!", en: "Try the new game!" }
+                    ]
+                }
+            ],
+            particulamal2: [
+                {
+                    de: "Komm mal!",
+                    es: "¡Ven! / ¡Ven aquí!",
+                    en: "Come here! / Come over!",
+                    lv: "A1",
+                    desc_es: "Hace que la llamada a acercarse suene cercana y amistosa, no autoritaria. En plural se usa <strong>Kommt mal!</strong>.",
+                    desc_en: "Makes the call to approach sound close and friendly, not bossy. The plural form is <strong>Kommt mal!</strong>.",
+                    ex: [
+                        { de: "Komm mal her, bitte.", es: "Ven aquí un momento, por favor.", en: "Come here for a second, please." },
+                        { de: "Kommt mal an die Tafel!", es: "¡Venid a la pizarra!", en: "Come to the blackboard!" }
+                    ]
+                },
+                {
+                    de: "Mach mal!",
+                    es: "¡Hazlo! / ¡Venga! / ¡Date prisa!",
+                    en: "Do it! / Hurry up! / Come on!",
+                    lv: "A2",
+                    desc_es: "Se usa para meter prisa o animar a alguien a actuar de forma coloquial. En plural se usa <strong>Macht mal!</strong>.",
+                    desc_en: "Used to rush or encourage someone to take action colloquially. The plural is <strong>Macht mal!</strong>.",
+                    ex: [
+                        { de: "Mach mal schnell!", es: "¡Date prisa! / ¡Venga, rápido!", en: "Hurry up!" },
+                        { de: "Macht mal vorwärts!", es: "¡Venga, id avanzando!", en: "Come on, get moving!" }
+                    ]
+                },
+                {
+                    de: "Denk mal nach!",
+                    es: "¡Piénsalo! / ¡Reflexiona!",
+                    en: "Think about it! / Reflect!",
+                    lv: "A2",
+                    desc_es: "Petición amistosa pero firme de reflexionar sobre algo. En plural se usa <strong>Denkt mal nach!</strong>.",
+                    desc_en: "A friendly but firm request to reflect on something. The plural is <strong>Denkt mal nach!</strong>.",
+                    ex: [
+                        { de: "Denk mal über meine Worte nach.", es: "Piensa un momento en mis palabras.", en: "Think about my words for a moment." },
+                        { de: "Denkt mal scharf nach!", es: "¡Pensad detenidamente!", en: "Think hard about it!" }
+                    ]
+                },
+                {
+                    de: "Riech mal!",
+                    es: "¡Huele! / ¡Huele esto!",
+                    en: "Smell this! / Take a sniff!",
+                    lv: "A1",
+                    desc_es: "Invita a alguien a percibir un olor agradable o desagradable de forma informal. En plural se usa <strong>Riecht mal!</strong>.",
+                    desc_en: "Invites someone to perceive a pleasant or unpleasant smell informally. The plural is <strong>Riecht mal!</strong>.",
+                    ex: [
+                        { de: "Riech mal an diesen Blumen!", es: "¡Huele estas flores!", en: "Smell these flowers!" },
+                        { de: "Riecht mal, wie gut es riecht!", es: "¡Oled qué bien huele!", en: "Smell how good it smells!" }
+                    ]
+                },
+                {
+                    de: "Schau mal!",
+                    es: "¡Mira! / ¡Mira esto!",
+                    en: "Look! / Look at this!",
+                    lv: "A1",
+                    desc_es: "Sinónimo de 'Guck mal!'. Muy común para dirigir la mirada de alguien hacia algo. En plural se usa <strong>Schaut mal!</strong>.",
+                    desc_en: "Synonym of 'Guck mal!'. Very common for directing someone's gaze to something. The plural is <strong>Schaut mal!</strong>.",
+                    ex: [
+                        { de: "Schau mal das Foto an!", es: "¡Mira la foto!", en: "Look at the photo!" },
+                        { de: "Schaut mal hierhin!", es: "¡Mirad hacia aquí!", en: "Look over here!" }
+                    ]
+                },
+                {
+                    de: "Geh mal!",
+                    es: "¡Ve! / ¡Ve un momento!",
+                    en: "Go! / Go over there!",
+                    lv: "A1",
+                    desc_es: "Suaviza la petición de desplazarse o ir a hacer algo. En plural se usa <strong>Geht mal!</strong>.",
+                    desc_en: "Softens the request to move or go do something. The plural is <strong>Geht mal!</strong>.",
+                    ex: [
+                        { de: "Geh mal bitte einkaufen.", es: "Ve a comprar un momento, por favor.", en: "Go shopping for a moment, please." },
+                        { de: "Geht mal auf eure Plätze!", es: "¡Id a vuestros sitios!", en: "Go to your seats!" }
+                    ]
+                },
+                {
+                    de: "Fass mal an!",
+                    es: "¡Toca! / ¡Toca esto!",
+                    en: "Touch this! / Feel it!",
+                    lv: "A2",
+                    desc_es: "Invita a alguien a percibir la textura o estado físico de algo con las manos. En plural se usa <strong>Fasst mal an!</strong>.",
+                    desc_en: "Invites someone to perceive the texture or physical state of something with their hands. The plural is <strong>Fasst mal an!</strong>.",
+                    ex: [
+                        { de: "Fass mal an, wie weich das ist!", es: "¡Toca qué suave es esto!", en: "Feel how soft this is!" },
+                        { de: "Fasst mal das Eis an!", es: "¡Tocad el hielo!", en: "Touch the ice!" }
+                    ]
+                }
             ]
         };
 
