@@ -28,6 +28,7 @@
             --cat-igualmente: #6366f1;
             --cat-particulamal1: #8b5cf6;
             --cat-particulamal2: #4f46e5;
+            --cat-ordenes: #ec4899;
 
             --level-a1: #3b82f6;
             --level-a2: #eab308;
@@ -342,6 +343,10 @@
             background: var(--cat-particulamal2);
         }
 
+        .level-card.ordenes-card .card-footer {
+            background: var(--cat-ordenes);
+        }
+
         .level-card .card-footer {
             margin-top: auto;
         }
@@ -384,6 +389,10 @@
 
         .level-header.particulamal2 {
             background: var(--cat-particulamal2);
+        }
+
+        .level-header.ordenes {
+            background: var(--cat-ordenes);
         }
 
         table {
@@ -531,6 +540,10 @@
 
         .modal-header.theme-particulamal2 {
             background: var(--cat-particulamal2);
+        }
+
+        .modal-header.theme-ordenes {
+            background: var(--cat-ordenes);
         }
 
         .modal-header.theme-na {
@@ -913,6 +926,14 @@
                 </table>
                 <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Modalpartikel')">Partikel "mal" II</span><span id="titleParticulaMal2" class="card-footer-translation">Partícula "mal" II</span></span></div>
             </div>
+            <!-- Órdenes cotidianas -->
+            <div class="level-card ordenes-card">
+                <div class="level-header ordenes"><span class="card-footer-level">A1-A2</span><span class="card-header-label">órdenes</span></div>
+                <table>
+                    <tbody id="group-ordenes"></tbody>
+                </table>
+                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Befehle')">Alltagsbefehle</span><span id="titleOrdenes" class="card-footer-translation">Órdenes</span></span></div>
+            </div>
         </div>
 
         <section
@@ -954,6 +975,7 @@
                 titleIgualmente: "Igualmente",
                 titleParticulaMal1: "Partícula \"mal\" I",
                 titleParticulaMal2: "Partícula \"mal\" II",
+                titleOrdenes: "Órdenes",
                 footerInterjection: "interjecciones",
                 naDef: "La navaja suiza del idioma. Cambia según el contexto.",
                 btnSpeak: "ESCUCHAR"
@@ -971,6 +993,7 @@
                 titleIgualmente: "Likewise",
                 titleParticulaMal1: "Particle \"mal\" I",
                 titleParticulaMal2: "Particle \"mal\" II",
+                titleOrdenes: "Commands",
                 footerInterjection: "interjections",
                 naDef: "The language's Swiss Army knife. Context is key.",
                 btnSpeak: "LISTEN"
@@ -1242,6 +1265,92 @@
                     ex: [
                         { de: "Fass mal an, wie weich das ist!", es: "¡Toca qué suave es esto!", en: "Feel how soft this is!" },
                         { de: "Fasst mal das Eis an!", es: "¡Tocad el hielo!", en: "Touch the ice!" }
+                    ]
+                }
+            ],
+            ordenes: [
+                {
+                    de: "Zieh die Schuhe an!",
+                    es: "¡Ponte los zapatos!",
+                    en: "Put on your shoes!",
+                    lv: "A1",
+                    desc_es: "<p>Imperativo de <strong>anziehen</strong> (ponerse ropa/zapatos). Coloquialmente también se dice simplemente <strong>Schuhe an!</strong> (¡Zapatos puestos!).</p><p class='mt-2'><strong>Formas según el número:</strong></p><ul class='list-disc list-inside mt-1 space-y-1'><li><strong>Zieh die Schuhe an!</strong> (tú)</li><li><strong>Zieht die Schuhe an!</strong> (vosotros)</li></ul>",
+                    desc_en: "<p>Imperative of <strong>anziehen</strong> (to put on clothes/shoes). Colloquially also shortened to <strong>Schuhe an!</strong> (shoes on!).</p><p class='mt-2'><strong>Forms by grammatical number:</strong></p><ul class='list-disc list-inside mt-1 space-y-1'><li><strong>Zieh die Schuhe an!</strong> (singular informal 'you')</li><li><strong>Zieht die Schuhe an!</strong> (plural informal 'you')</li></ul>",
+                    ex: [
+                        { de: "Zieh die Schuhe an, wir müssen gehen!", es: "¡Ponte los zapatos, tenemos que irnos!", en: "Put on your shoes, we must go!" },
+                        { de: "Schuhe an, Kinder! Schnell!", es: "¡Zapatos puestos, niños! ¡Rápido!", en: "Shoes on, kids! Quickly!" }
+                    ]
+                },
+                {
+                    de: "Beeil dich!",
+                    es: "¡Date prisa! / ¡Apúrate!",
+                    en: "Hurry up!",
+                    lv: "A1",
+                    desc_es: "Imperativo del verbo reflexivo <strong>sich beeilen</strong>. En plural se dice <strong>Beeilt euch!</strong>.",
+                    desc_en: "Imperative of the reflexive verb <strong>sich beeilen</strong>. The plural form is <strong>Beeilt euch!</strong>.",
+                    ex: [
+                        { de: "Beeil dich, der bus kommt!", es: "¡Date prisa, que viene el autobús!", en: "Hurry up, the bus is coming!" },
+                        { de: "Beeilt euch, wir sind spät dran!", es: "¡Daos prisa, llegamos tarde!", en: "Hurry up, we are late!" }
+                    ]
+                },
+                {
+                    de: "Mach die Tür zu!",
+                    es: "¡Cierra la puerta!",
+                    en: "Close the door!",
+                    lv: "A1",
+                    desc_es: "Imperativo de <strong>zumachen</strong> (cerrar de forma informal, coloquial). En plural se usa <strong>Macht die Tür zu!</strong>.",
+                    desc_en: "Imperative of <strong>zumachen</strong> (to close colloquially). The plural is <strong>Macht die Tür zu!</strong>.",
+                    ex: [
+                        { de: "Mach bitte die Tür zu, es zieht.", es: "Cierra la puerta por favor, hay corriente de aire.", en: "Please close the door, there's a draft." },
+                        { de: "Macht die Tür zu, es ist kalt!", es: "¡Cerrad la puerta, hace frío!", en: "Close the door, it is cold!" }
+                    ]
+                },
+                {
+                    de: "Mach das Licht aus!",
+                    es: "¡Apaga la luz!",
+                    en: "Turn off the light!",
+                    lv: "A1",
+                    desc_es: "Imperativo de <strong>ausmachen</strong> (apagar un electrodoméstico o luz). En plural se usa <strong>Macht das Licht aus!</strong>.",
+                    desc_en: "Imperative of <strong>ausmachen</strong> (to turn off a light or device). The plural is <strong>Macht das Licht aus!</strong>.",
+                    ex: [
+                        { de: "Mach das Licht aus, wenn du gehst.", es: "Apaga la luz cuando salgas.", en: "Turn off the light when you leave." },
+                        { de: "Macht alle Lichter aus!", es: "¡Apagad todas las luces!", en: "Turn off all lights!" }
+                    ]
+                },
+                {
+                    de: "Zieh dich an!",
+                    es: "¡Vístete!",
+                    en: "Get dressed!",
+                    lv: "A1",
+                    desc_es: "Imperativo del verbo reflexivo <strong>sich anziehen</strong> (vestirse). En plural se usa <strong>Zieht euch an!</strong>.",
+                    desc_en: "Imperative of the reflexive verb <strong>sich anziehen</strong> (to get dressed). The plural is <strong>Zieht euch an!</strong>.",
+                    ex: [
+                        { de: "Zieh dich an, das Frühstück ist fertig.", es: "Vístete, el desayuno está listo.", en: "Get dressed, breakfast is ready." },
+                        { de: "Zieht euch warm an!", es: "¡Vestíos con ropa de abrigo!", en: "Dress warmly!" }
+                    ]
+                },
+                {
+                    de: "Putz die Zähne!",
+                    es: "¡Lávate los dientes!",
+                    en: "Brush your teeth!",
+                    lv: "A1",
+                    desc_es: "Imperativo de <strong>Zähne putzen</strong> (lavarse los dientes). En plural se usa <strong>Putzt die Zähne!</strong>.",
+                    desc_en: "Imperative of <strong>Zähne putzen</strong> (to brush one's teeth). The plural is <strong>Putzt die Zähne!</strong>.",
+                    ex: [
+                        { de: "Putz die Zähne, bevor du schläfst.", es: "Lávate los dientes antes de dormir.", en: "Brush your teeth before sleeping." },
+                        { de: "Kinder, putzt eure Zähne!", es: "¡Niños, lavaos los dientes!", en: "Kids, brush your teeth!" }
+                    ]
+                },
+                {
+                    de: "Räum auf!",
+                    es: "¡Ordena! / ¡Limpia!",
+                    en: "Clean up! / Tidy up!",
+                    lv: "A2",
+                    desc_es: "Imperativo de <strong>aufräumen</strong> (ordenar o recoger un espacio). En plural se usa <strong>Räumt auf!</strong>.",
+                    desc_en: "Imperative of <strong>aufräumen</strong> (to clean/tidy up a room). The plural is <strong>Räumt auf!</strong>.",
+                    ex: [
+                        { de: "Räum bitte dein Zimmer auf!", es: "¡Por favor, ordena tu habitación!", en: "Please clean up your room!" },
+                        { de: "Räumt hier sofort auf!", es: "¡Ordenad esto inmediatamente!", en: "Clean this up immediately!" }
                     ]
                 }
             ]
