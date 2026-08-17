@@ -174,6 +174,7 @@ function extractRows(cardHtml) {
                     word,
                     translation: getAttribute(openTag, 'data-trans'),
                     example: getAttribute(openTag, 'data-example'),
+                    favorite: getAttribute(openTag, 'data-dtz-star') === 'true',
                     level: levelMap[word] || 'B1'
                 });
             }
@@ -283,11 +284,14 @@ function renderRow(row, showExamples) {
     const germanClass = row.word.length > 14
         ? 'kompakt-german long-word'
         : 'kompakt-german';
+    const favoriteStar = row.favorite
+        ? '<span class="favorite-star" aria-hidden="true">★</span>'
+        : '';
 
     return [
         '<div class="kompakt-row">',
         '  <div class="word-line">',
-        '    <span class="' + germanClass + '">' + row.word + '</span>',
+        '    <span class="' + germanClass + '">' + favoriteStar + row.word + '</span>',
         '    <span class="kompakt-spanish">' + row.translation + '</span>',
         '    <span class="level-badge">' + row.level + '</span>',
         '  </div>',
@@ -393,6 +397,7 @@ const printHtml = [
     '    .word-line { display: grid; grid-template-columns: minmax(0, 40%) minmax(0, 1fr) 8mm; align-items: center; column-gap: 1.2mm; line-height: 1.05; }',
     '    .kompakt-german { overflow: hidden; color: #0f172a; font-size: 10.5pt; font-weight: 800; letter-spacing: -0.12pt; text-overflow: ellipsis; white-space: nowrap; }',
     '    .kompakt-german.long-word { font-size: 9.6pt; }',
+    '    .favorite-star { margin-right: 1.1mm; color: #f4b400; font-family: "Segoe UI Symbol", sans-serif; font-size: 9.2pt; letter-spacing: 0; vertical-align: 0.2pt; }',
     '    .kompakt-spanish { color: #111827; font-size: 7.3pt; font-style: italic; font-weight: 700; text-align: center; }',
     '    .level-badge { justify-self: end; padding: 0.15mm 1mm; border: 0.25mm solid #cbd5e1; border-radius: 1.2mm; background: #f1f5f9; color: #475569; font-size: 5.8pt; font-weight: 800; }',
     '    .kompakt-example { margin-top: 0.7mm; overflow: hidden; color: #64748b; font-size: 6.25pt; line-height: 1.18; }',
