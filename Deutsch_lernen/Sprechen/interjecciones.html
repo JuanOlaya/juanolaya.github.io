@@ -1485,7 +1485,8 @@
 
                     const tdEs = document.createElement('td');
                     tdEs.className = "spanish-word";
-                    tdEs.textContent = currentLang === 'es' ? item.es : item.en;
+                    const fullText = currentLang === 'es' ? item.es : item.en;
+                    tdEs.textContent = fullText.split('/')[0].trim();
                     tdEs.onclick = (e) => { e.stopPropagation(); openWordModal(item); };
 
                     tr.appendChild(tdDe);
@@ -1510,7 +1511,8 @@
 
                 const subtitle = document.createElement('p');
                 subtitle.className = "text-slate-400 italic";
-                subtitle.textContent = currentLang === 'es' ? item.es : item.en;
+                const naFullText = currentLang === 'es' ? item.es : item.en;
+                subtitle.textContent = naFullText.split('/')[0].trim();
 
                 card.appendChild(title);
                 card.appendChild(subtitle);
