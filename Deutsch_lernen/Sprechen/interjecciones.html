@@ -929,7 +929,7 @@
                 <table>
                     <tbody id="group-particulamal1"></tbody>
                 </table>
-                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Modalpartikel')">Partikel "mal" I</span><span id="titleParticulaMal1" class="card-footer-translation">Partícula "mal" (suaviza imperativos)</span></span></div>
+                <div class="card-footer"><span class="card-footer-content" onclick="speak('Modalpartikel')"><span id="titleParticulaMal1" class="card-footer-translation">Partícula "mal" suaviza imperativos</span></span></div>
             </div>
             <!-- Partícula "mal" II -->
             <div class="level-card particulamal2-card">
@@ -937,7 +937,7 @@
                 <table>
                     <tbody id="group-particulamal2"></tbody>
                 </table>
-                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Modalpartikel')">Partikel "mal" II</span><span id="titleParticulaMal2" class="card-footer-translation">Partícula "mal" (suaviza imperativos)</span></span></div>
+                <div class="card-footer"><span class="card-footer-content" onclick="speak('Modalpartikel')"><span id="titleParticulaMal2" class="card-footer-translation">Partícula "mal" suaviza imperativos</span></span></div>
             </div>
             <!-- Órdenes cotidianas -->
             <div class="level-card ordenes-card">
@@ -994,8 +994,8 @@
                 titleKinder: "Niños",
                 titleDespedidas: "Despedidas",
                 titleIgualmente: "Igualmente",
-                titleParticulaMal1: "Partícula \"mal\" (suaviza imperativos)",
-                titleParticulaMal2: "Partícula \"mal\" (suaviza imperativos)",
+                titleParticulaMal1: "Partícula \"mal\" suaviza imperativos",
+                titleParticulaMal2: "Partícula \"mal\" suaviza imperativos",
                 titleOrdenes: "Órdenes",
                 titleRepetir: "Repetir",
                 footerInterjection: "interjecciones",
@@ -1013,8 +1013,8 @@
                 titleKinder: "Kids",
                 titleDespedidas: "Farewells",
                 titleIgualmente: "Likewise",
-                titleParticulaMal1: "Particle \"mal\" (softens imperatives)",
-                titleParticulaMal2: "Particle \"mal\" (softens imperatives)",
+                titleParticulaMal1: "Particle \"mal\" softens imperatives",
+                titleParticulaMal2: "Particle \"mal\" softens imperatives",
                 titleOrdenes: "Commands",
                 titleRepetir: "Repetition",
                 footerInterjection: "interjections",
@@ -1541,6 +1541,10 @@
             document.getElementById('headerWordEs8').textContent = langLabels.footerInterjection;
             document.getElementById('naDef').textContent = langLabels.naDef;
             document.getElementById('btnSpeakText').textContent = langLabels.btnSpeak;
+            document.getElementById('titleParticulaMal1').textContent = langLabels.titleParticulaMal1;
+            document.getElementById('titleParticulaMal2').textContent = langLabels.titleParticulaMal2;
+            document.getElementById('titleOrdenes').textContent = langLabels.titleOrdenes;
+            document.getElementById('titleRepetir').textContent = langLabels.titleRepetir;
 
             document.getElementById('langEs').classList.toggle('active', currentLang === 'es');
             document.getElementById('langEn').classList.toggle('active', currentLang === 'en');
