@@ -29,6 +29,7 @@
             --cat-particulamal1: #8b5cf6;
             --cat-particulamal2: #4f46e5;
             --cat-ordenes: #ec4899;
+            --cat-repetir: #d97706;
 
             --level-a1: #3b82f6;
             --level-a2: #eab308;
@@ -347,6 +348,10 @@
             background: var(--cat-ordenes);
         }
 
+        .level-card.repetir-card .card-footer {
+            background: var(--cat-repetir);
+        }
+
         .level-card .card-footer {
             margin-top: auto;
         }
@@ -393,6 +398,10 @@
 
         .level-header.ordenes {
             background: var(--cat-ordenes);
+        }
+
+        .level-header.repetir {
+            background: var(--cat-repetir);
         }
 
         table {
@@ -544,6 +553,10 @@
 
         .modal-header.theme-ordenes {
             background: var(--cat-ordenes);
+        }
+
+        .modal-header.theme-repetir {
+            background: var(--cat-repetir);
         }
 
         .modal-header.theme-na {
@@ -934,6 +947,14 @@
                 </table>
                 <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Befehle')">Alltagsbefehle</span><span id="titleOrdenes" class="card-footer-translation">Órdenes</span></span></div>
             </div>
+            <!-- Repetir y Aclarar -->
+            <div class="level-card repetir-card">
+                <div class="level-header repetir"><span class="card-footer-level">A1-A2</span><span class="card-header-label">aclarar</span></div>
+                <table>
+                    <tbody id="group-repetir"></tbody>
+                </table>
+                <div class="card-footer"><span class="card-footer-content"><span class="card-footer-theme" onclick="speak('Wiederholung')">Nachfragen</span><span id="titleRepetir" class="card-footer-translation">Repetir</span></span></div>
+            </div>
         </div>
 
         <section
@@ -976,6 +997,7 @@
                 titleParticulaMal1: "Partícula \"mal\" I",
                 titleParticulaMal2: "Partícula \"mal\" II",
                 titleOrdenes: "Órdenes",
+                titleRepetir: "Repetir",
                 footerInterjection: "interjecciones",
                 naDef: "La navaja suiza del idioma. Cambia según el contexto.",
                 btnSpeak: "ESCUCHAR"
@@ -994,6 +1016,7 @@
                 titleParticulaMal1: "Particle \"mal\" I",
                 titleParticulaMal2: "Particle \"mal\" II",
                 titleOrdenes: "Commands",
+                titleRepetir: "Repetition",
                 footerInterjection: "interjections",
                 naDef: "The language's Swiss Army knife. Context is key.",
                 btnSpeak: "LISTEN"
@@ -1351,6 +1374,83 @@
                     ex: [
                         { de: "Räum bitte dein Zimmer auf!", es: "¡Por favor, ordena tu habitación!", en: "Please clean up your room!" },
                         { de: "Räumt hier sofort auf!", es: "¡Ordenad esto inmediatamente!", en: "Clean this up immediately!" }
+                    ]
+                }
+            ],
+            repetir: [
+                {
+                    de: "Nochmal, bitte!",
+                    es: "¡Otra vez, por favor! / ¡De nuevo, por favor!",
+                    en: "Once more, please! / Again, please!",
+                    lv: "A1",
+                    desc_es: "Expresión indispensable para pedir que alguien repita lo que acaba de decir. Abreviatura de <em>Noch einmal, bitte!</em>.",
+                    desc_en: "Indispensable expression to ask someone to repeat what they just said. Short for <em>Noch einmal, bitte!</em>.",
+                    ex: [{ de: "Nochmal, bitte! Ich habe es nicht verstanden.", es: "¡Otra vez, por favor! No lo he entendido.", en: "Once more, please! I didn't understand it." }]
+                },
+                {
+                    de: "Sag das bitte nochmal!",
+                    es: "¡Dilo otra vez, por favor!",
+                    en: "Please say that again!",
+                    lv: "A1",
+                    desc_es: "Imperativo más cortés (gracias al uso de <em>bitte</em>) para solicitar repetición. En plural informal se usa <strong>Sagt das bitte nochmal!</strong>.",
+                    desc_en: "A more polite imperative (thanks to <em>bitte</em>) to request repetition. The plural informal is <strong>Sagt das bitte nochmal!</strong>.",
+                    ex: [
+                        { de: "Sag das bitte nochmal, aber langsamer!", es: "¡Dilo otra vez por favor, pero más despacio!", en: "Please say that again, but slower!" },
+                        { de: "Kinder, sagt das bitte nochmal!", es: "¡Niños, decid eso otra vez por favor!", en: "Kids, please say that again!" }
+                    ]
+                },
+                {
+                    de: "Wie bitte?",
+                    es: "¿Cómo? / ¿Cómo dice?",
+                    en: "Pardon? / Sorry, what?",
+                    lv: "A1",
+                    desc_es: "La forma estándar, más educada y común de decir '¿cómo?' o '¿qué dijiste?' cuando no escuchas o no entiendes a alguien.",
+                    desc_en: "The standard, polite, and most common way to say 'pardon?' or 'what did you say?' when you didn't hear or understand someone.",
+                    ex: [{ de: "Ich heiße Juan. - Wie bitte?", es: "Me llamo Juan. - ¿Cómo?", en: "My name is Juan. - Pardon?" }]
+                },
+                {
+                    de: "Kannst du das wiederholen?",
+                    es: "¿Puedes repetir eso?",
+                    en: "Can you repeat that?",
+                    lv: "A1",
+                    desc_es: "Pregunta directa en imperativo amable/pregunta. En plural informal se usa <strong>Könnt ihr das wiederholen?</strong>.",
+                    desc_en: "Direct question in a friendly/polite way. The plural informal is <strong>Könnt ihr das wiederholen?</strong>.",
+                    ex: [
+                        { de: "Kannst du das bitte wiederholen?", es: "¿Puedes repetir eso por favor?", en: "Can you please repeat that?" },
+                        { de: "Könnt ihr das wiederholen, bitte?", es: "¿Podéis repetir eso, por favor?", en: "Can you repeat that, please?" }
+                    ]
+                },
+                {
+                    de: "Ich verstehe nicht.",
+                    es: "No entiendo.",
+                    en: "I don't understand.",
+                    lv: "A1",
+                    desc_es: "Frase básica para indicar que no comprendes el significado o el idioma en una conversación.",
+                    desc_en: "Basic phrase to indicate that you do not understand the meaning or the language in a conversation.",
+                    ex: [{ de: "Es tut mir leid, ich verstehe nicht.", es: "Lo siento, no entiendo.", en: "I am sorry, I don't understand." }]
+                },
+                {
+                    de: "Sprich bitte langsamer.",
+                    es: "Habla más despacio, por favor.",
+                    en: "Please speak slower.",
+                    lv: "A1",
+                    desc_es: "Imperativo del verbo fuerte <strong>sprechen</strong>. En plural informal se usa <strong>Sprecht bitte langsamer.</strong>.",
+                    desc_en: "Imperative of the strong verb <strong>sprechen</strong>. The plural informal is <strong>Sprecht bitte langsamer.</strong>.",
+                    ex: [
+                        { de: "Sprich bitte langsamer, mein Deutsch ist nicht perfekt.", es: "Habla más despacio por favor, mi alemán no es perfecto.", en: "Please speak slower, my German is not perfect." },
+                        { de: "Sprecht bitte langsamer, Kinder!", es: "¡Hablad más despacio por favor, niños!", en: "Please speak slower, kids!" }
+                    ]
+                },
+                {
+                    de: "Schreib das bitte auf.",
+                    es: "Escribe eso por favor. / Anótalo.",
+                    en: "Please write that down.",
+                    lv: "A1",
+                    desc_es: "Imperativo del verbo separable <strong>aufschreiben</strong>. En plural informal se usa <strong>Schreibt das bitte auf.</strong>.",
+                    desc_en: "Imperative of the separable verb <strong>aufschreiben</strong>. The plural informal is <strong>Schreibt das bitte auf.</strong>.",
+                    ex: [
+                        { de: "Schreib das bitte auf diesen Zettel.", es: "Escribe eso en este papel, por favor.", en: "Please write that down on this paper." },
+                        { de: "Schreibt das bitte an die Tafel!", es: "¡Escribid eso en la pizarra por favor!", en: "Please write that down on the board!" }
                     ]
                 }
             ]
