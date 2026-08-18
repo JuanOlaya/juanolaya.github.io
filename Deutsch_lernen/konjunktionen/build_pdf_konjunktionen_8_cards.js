@@ -288,9 +288,15 @@ function renderRow(row, showExamples) {
         ? '<div class="kompakt-example">' + exampleDe + exampleEs + '</div>'
         : '';
 
-    const germanClass = row.word.length > 14
-        ? 'kompakt-german long-word'
-        : 'kompakt-german';
+    let germanClass = 'kompakt-german';
+    if (row.word.length <= 7) {
+        germanClass += ' short-word';
+    } else if (row.word.length <= 13) {
+        germanClass += ' medium-word';
+    } else {
+        germanClass += ' long-word';
+    }
+
     const favoriteStar = row.favorite
         ? '<span class="favorite-star" aria-hidden="true">★</span>'
         : '';
@@ -405,9 +411,10 @@ const printHtml = [
     '    .kompakt-content { flex: 1; min-height: 0; display: flex; flex-direction: column; }',
     '    .kompakt-row { flex: 1 1 0; min-height: 0; display: grid; grid-template-columns: minmax(0, 40%) minmax(0, 60%); align-items: center; column-gap: 2mm; padding: 0.8mm 2.2mm; border-bottom: 0.25mm solid #e2e8f0; }',
     '    .kompakt-row:last-child { border-bottom: 0; }',
-    '    .german-col { display: flex; align-items: center; }',
-    '    .kompakt-german { overflow: hidden; color: #0f172a; font-size: 16.5pt; font-weight: 800; letter-spacing: -0.2pt; line-height: 1.05; word-break: break-word; }',
-    '    .kompakt-german.long-word { font-size: 13.5pt; }',
+    '    .kompakt-german { overflow: hidden; color: #0f172a; font-weight: 800; letter-spacing: -0.2pt; line-height: 1.05; word-break: break-word; }',
+    '    .kompakt-german.short-word { font-size: 21pt; }',
+    '    .kompakt-german.medium-word { font-size: 17.5pt; }',
+    '    .kompakt-german.long-word { font-size: 14pt; }',
     '    .favorite-star { margin-right: 1mm; color: #f4b400; font-family: "Segoe UI Symbol", sans-serif; font-size: 12pt; letter-spacing: 0; vertical-align: 0.5pt; }',
     '    .details-col { display: flex; flex-direction: column; justify-content: center; min-width: 0; }',
     '    .trans-line { display: flex; justify-content: space-between; align-items: center; gap: 1mm; }',
