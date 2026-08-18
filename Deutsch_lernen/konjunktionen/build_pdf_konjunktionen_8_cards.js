@@ -174,6 +174,7 @@ function extractRows(cardHtml) {
                     word,
                     translation: getAttribute(openTag, 'data-trans'),
                     example: getAttribute(openTag, 'data-example'),
+                    exampleEs: getAttribute(openTag, 'data-example-es'),
                     favorite: getAttribute(openTag, 'data-dtz-star') === 'true',
                     level: levelMap[word] || 'B1'
                 });
@@ -277,8 +278,14 @@ function renderRow(row, showExamples) {
         );
     }
 
-    const example = showExamples && row.example
-        ? '<div class="kompakt-example">' + row.example + '</div>'
+    const exampleDe = showExamples && row.example
+        ? '<div class="kompakt-example-de">' + row.example + '</div>'
+        : '';
+    const exampleEs = showExamples && row.exampleEs
+        ? '<div class="kompakt-example-es">' + row.exampleEs + '</div>'
+        : '';
+    const exampleBlock = (exampleDe || exampleEs)
+        ? '<div class="kompakt-example">' + exampleDe + exampleEs + '</div>'
         : '';
 
     const germanClass = row.word.length > 14
@@ -290,12 +297,16 @@ function renderRow(row, showExamples) {
 
     return [
         '<div class="kompakt-row">',
-        '  <div class="word-line">',
+        '  <div class="german-col">',
         '    <span class="' + germanClass + '">' + favoriteStar + row.word + '</span>',
-        '    <span class="kompakt-spanish">' + row.translation + '</span>',
-        '    <span class="level-badge">' + row.level + '</span>',
         '  </div>',
-        example,
+        '  <div class="details-col">',
+        '    <div class="trans-line">',
+        '      <span class="kompakt-spanish">' + row.translation + '</span>',
+        '      <span class="level-badge">' + row.level + '</span>',
+        '    </div>',
+        '    ' + exampleBlock,
+        '  </div>',
         '</div>'
     ].join('\n');
 }
@@ -392,23 +403,26 @@ const printHtml = [
     '    .header-de { flex-shrink: 0; font-family: "Outfit", "Segoe UI", sans-serif; font-size: 10pt; font-weight: 800; text-transform: uppercase; }',
     '    .header-es { min-width: 0; overflow: hidden; font-size: 8pt; font-style: italic; font-weight: 700; text-align: right; text-overflow: ellipsis; white-space: nowrap; }',
     '    .kompakt-content { flex: 1; min-height: 0; display: flex; flex-direction: column; }',
-    '    .kompakt-row { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; justify-content: center; padding: 1.25mm 2.6mm; border-bottom: 0.25mm solid #e2e8f0; }',
+    '    .kompakt-row { flex: 1 1 0; min-height: 0; display: grid; grid-template-columns: minmax(0, 36%) minmax(0, 64%); align-items: center; column-gap: 2mm; padding: 1mm 2.4mm; border-bottom: 0.25mm solid #e2e8f0; }',
     '    .kompakt-row:last-child { border-bottom: 0; }',
-    '    .word-line { display: grid; grid-template-columns: minmax(0, 40%) minmax(0, 1fr) 8mm; align-items: center; column-gap: 1.2mm; line-height: 1.05; }',
-    '    .kompakt-german { overflow: hidden; color: #0f172a; font-size: 10.5pt; font-weight: 800; letter-spacing: -0.12pt; text-overflow: ellipsis; white-space: nowrap; }',
-    '    .kompakt-german.long-word { font-size: 9.6pt; }',
-    '    .favorite-star { margin-right: 1.1mm; color: #f4b400; font-family: "Segoe UI Symbol", sans-serif; font-size: 9.2pt; letter-spacing: 0; vertical-align: 0.2pt; }',
-    '    .kompakt-spanish { color: #111827; font-size: 7.3pt; font-style: italic; font-weight: 700; text-align: center; }',
-    '    .level-badge { justify-self: end; padding: 0.15mm 1mm; border: 0.25mm solid #cbd5e1; border-radius: 1.2mm; background: #f1f5f9; color: #475569; font-size: 5.8pt; font-weight: 800; }',
-    '    .kompakt-example { margin-top: 0.7mm; overflow: hidden; color: #64748b; font-size: 6.25pt; line-height: 1.18; }',
-    '    .kompakt-example strong { color: #334155; font-weight: 800; }',
-    '    .kompakt-example .german-word { color: #334155; font-weight: 800; text-decoration: underline; }',
-    '    .kompakt-section { flex: 0 0 auto; padding: 0.8mm 2.6mm; font-size: 6pt; font-weight: 800; letter-spacing: 0.55pt; text-align: center; text-transform: uppercase; }',
+    '    .german-col { display: flex; align-items: center; }',
+    '    .kompakt-german { overflow: hidden; color: #0f172a; font-size: 13.5pt; font-weight: 800; letter-spacing: -0.15pt; line-height: 1.1; word-break: break-word; }',
+    '    .kompakt-german.long-word { font-size: 11pt; }',
+    '    .favorite-star { margin-right: 1mm; color: #f4b400; font-family: "Segoe UI Symbol", sans-serif; font-size: 10.5pt; letter-spacing: 0; vertical-align: 0.5pt; }',
+    '    .details-col { display: flex; flex-direction: column; justify-content: center; min-width: 0; }',
+    '    .trans-line { display: flex; justify-content: space-between; align-items: center; gap: 1mm; }',
+    '    .kompakt-spanish { color: #111827; font-size: 8.5pt; font-style: italic; font-weight: 700; }',
+    '    .level-badge { flex-shrink: 0; padding: 0.15mm 1mm; border: 0.25mm solid #cbd5e1; border-radius: 1.2mm; background: #f1f5f9; color: #475569; font-size: 5.8pt; font-weight: 800; }',
+    '    .kompakt-example { margin-top: 0.4mm; overflow: hidden; color: #475569; font-size: 6pt; line-height: 1.12; }',
+    '    .kompakt-example-de strong { color: #1e293b; font-weight: 800; }',
+    '    .kompakt-example-de .german-word { color: #1e293b; font-weight: 800; text-decoration: underline; }',
+    '    .kompakt-example-es { color: #64748b; font-style: italic; font-size: 5.6pt; margin-top: 0.15mm; }',
+    '    .kompakt-section { flex: 0 0 auto; padding: 0.8mm 2.4mm; font-size: 6pt; font-weight: 800; letter-spacing: 0.55pt; text-align: center; text-transform: uppercase; }',
     '    .kompakt-section-label { border-top: 0.25mm solid #c4b5fd; border-bottom: 0.25mm solid #c4b5fd; background: #ede9fe; color: #6d28d9; }',
     '    .kompakt-section-rule { background: #a855f7; color: #fff; letter-spacing: 0.15pt; text-transform: none; }',
-    '    .kompakt-footer { min-height: 8mm; flex: 0 0 8mm; display: flex; align-items: center; justify-content: center; padding: 1.4mm 2mm; color: #fff; font-size: 7.1pt; font-weight: 800; letter-spacing: 0.05pt; text-align: center; white-space: nowrap; }',
-    '    .without-examples .kompakt-german { font-size: 11pt; }',
-    '    .without-examples .kompakt-spanish { font-size: 8pt; }',
+    '    .kompakt-footer { min-height: 8.5mm; flex: 0 0 8.5mm; display: flex; align-items: center; justify-content: center; padding: 1.2mm 2mm; color: #fff; font-size: 8.5pt; font-weight: 800; letter-spacing: 0.05pt; text-align: center; white-space: nowrap; }',
+    '    .without-examples .kompakt-german { font-size: 14pt; }',
+    '    .without-examples .kompakt-spanish { font-size: 9pt; }',
     '  </style>',
     '</head>',
     '<body>',
