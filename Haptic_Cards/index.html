@@ -121,7 +121,7 @@
                 Haptic VR Controllers
             </h1>
             <p class="text-sm sm:text-base text-sky-800/80 mt-2 max-w-2xl mx-auto">
-                Comprehensive taxonomy of 91 peer-reviewed VR handheld controllers categorized across 21 Mechanism Patterns and 10 canonical sensations.
+                Comprehensive taxonomy of 92 VR handheld controllers categorized across 21 Mechanism Patterns and 10 canonical sensations (Max 5 Stars).
             </p>
         </header>
 
@@ -139,7 +139,7 @@
     </div>
 
     <script>
-        const localLastUpdated = "2026-08-26  T12:43:52  Z";
+        const localLastUpdated = "2026-08-26  T15:22:42  Z";
 
         const devices = [
         {
@@ -211,44 +211,45 @@
         </div>
     </div>`
         },
-        {"name": "Drag:on", "category": "Aerodynamic resistance", "author": "", "title": "", "mechanism": "Adjustable surface area changes airflow drag when swung.", "useCaseText": "Providing active resistance, weight magnitude, shape cues in virtual reality interactions.", "useCaseTags": ["Resistance cues", "Weight magnitude cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Resistance", "Weight magnitude", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Drag:on"}], "doi": "", "publication": "", "year": ""},
+        {"name": "LeverForce", "category": "Solid mass shifting", "author": "Juan Olaya et al.", "title": "LeverForce: Rendering Versatile Haptic Feedback for VR Controllers using Weight Shifting", "mechanism": "Motorized lever mechanism that dynamically shifts a moving mass along a lever arm to modulate center of mass, rotational inertia, and render resistance, impact, motion, and weight cues in handheld VR.", "useCaseText": "Simulating heavy tool dynamics, automotive gear resistance, aviation joystick torque, recoil impacts, and versatile physical interactions in virtual reality.", "useCaseTags": ["Resistance cues", "Impact cues", "Motion cues", "Weight magnitude cues", "Weight distribution cues"], "generalUseCases": ["Gaming", "Training", "Aviation Simulator", "Automotive Simulator"], "submodalities": ["Resistance", "Impact", "Motion", "Weight magnitude", "Weight distribution"], "media": [{"type": "image", "src": "img/leverforce.png"}, {"type": "image", "src": "img/leverforce_teaser.png"}, {"type": "image", "src": "img/leverforce_car.png"}, {"type": "image", "src": "img/leverforce_helicopter.jpg"}], "doi": "", "publication": "DIS / CHI", "year": "2026"},
+        {"name": "Drag:on", "category": "Aerodynamic resistance", "author": "", "title": "", "mechanism": "Adjustable surface area changes airflow drag when swung.", "useCaseText": "Providing active resistance, weight magnitude, shape cues in virtual reality interactions.", "useCaseTags": ["Resistance cues", "Weight magnitude cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Resistance", "Weight magnitude", "Shape"], "media": [{"type": "image", "src": "img/dragon.jpg"}], "doi": "", "publication": "", "year": ""},
         {"name": "ShapeSense", "category": "Aerodynamic resistance", "author": "", "title": "", "mechanism": "Sliding surfaces alter drag and mass properties.", "useCaseText": "Providing active shape cues in virtual reality interactions.", "useCaseTags": ["Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=ShapeSense"}], "doi": "", "publication": "", "year": ""},
         {"name": "AirCharge", "category": "Compressed air release", "author": "", "title": "", "mechanism": "Air jet jets create sharp impacts.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=AirCharge"}], "doi": "", "publication": "", "year": ""},
         {"name": "AirRacket", "category": "Compressed air release", "author": "", "title": "", "mechanism": "Air jets generate racket impact.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=AirRacket"}], "doi": "", "publication": "CHI", "year": "2022"},
         {"name": "JetController", "category": "Compressed air release", "author": "", "title": "", "mechanism": "Air jet jets generate 3D forces.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=JetController"}], "doi": "", "publication": "CHI", "year": "2021"},
         {"name": "HairTouch", "category": "Flexible surface deformation", "author": "", "title": "", "mechanism": "Servo adjusts hair stiffness, roughness.", "useCaseText": "Providing active stiffness, friction, shape cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues", "Friction cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness", "Friction", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=HairTouch"}], "doi": "", "publication": "", "year": ""},
         {"name": "TapeTouch", "category": "Flexible surface deformation", "author": "", "title": "", "mechanism": "Motorized tape renders softness cues.", "useCaseText": "Providing active stiffness, shape cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=TapeTouch"}], "doi": "", "publication": "", "year": ""},
-        {"name": "Haptic Handshank", "category": "Flexible surface deformation", "author": "", "title": "", "mechanism": "Airbag for stiffness; Peltier; vibromotor.", "useCaseText": "Providing active thermal, stiffness, vibration cues in virtual reality interactions.", "useCaseTags": ["Thermal cues", "Stiffness cues", "Vibration cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Thermal", "Stiffness", "Vibration"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Haptic+Handshank"}], "doi": "", "publication": "", "year": ""},
+        {"name": "Haptic Handshank", "category": "Flexible surface deformation", "author": "", "title": "", "mechanism": "Airbag for stiffness; Peltier; vibromotor.", "useCaseText": "Providing active thermal, stiffness, vibration cues in virtual reality interactions.", "useCaseTags": ["Thermal cues", "Stiffness cues", "Vibration cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Thermal", "Stiffness", "Vibration"], "media": [{"type": "image", "src": "img/haptic_handshank.png"}], "doi": "", "publication": "", "year": ""},
         {"name": "CapstanCrunch", "category": "Joint actuation", "author": "", "title": "", "mechanism": "Capstan brake clutches a built-in spring to render compliance.", "useCaseText": "Providing active stiffness cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=CapstanCrunch"}], "doi": "", "publication": "", "year": ""},
-        {"name": "CLAW", "category": "Joint actuation", "author": "", "title": "", "mechanism": "Servo yields pinch; coil adds texture.", "useCaseText": "Providing active stiffness, vibration, impact, shape cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues", "Vibration cues", "Impact cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness", "Vibration", "Impact", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=CLAW"}], "doi": "", "publication": "", "year": ""},
+        {"name": "CLAW", "category": "Joint actuation", "author": "", "title": "", "mechanism": "Servo yields pinch; coil adds texture.", "useCaseText": "Providing active stiffness, vibration, impact, shape cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues", "Vibration cues", "Impact cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness", "Vibration", "Impact", "Shape"], "media": [{"type": "image", "src": "img/claw.jpg"}], "doi": "", "publication": "", "year": ""},
         {"name": "HapLinkage", "category": "Joint actuation", "author": "", "title": "", "mechanism": "Linkage renders shape and resistance.", "useCaseText": "Providing active resistance cues in virtual reality interactions.", "useCaseTags": ["Resistance cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Resistance"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=HapLinkage"}], "doi": "", "publication": "", "year": ""},
-        {"name": "Haptic Links", "category": "Joint actuation", "author": "", "title": "", "mechanism": "Linkage brakes provide resistance.", "useCaseText": "Providing active resistance, shape cues in virtual reality interactions.", "useCaseTags": ["Resistance cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Resistance", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Haptic+Links"}], "doi": "", "publication": "", "year": ""},
+        {"name": "Haptic Links", "category": "Joint actuation", "author": "", "title": "", "mechanism": "Linkage brakes provide resistance.", "useCaseText": "Providing active resistance, shape cues in virtual reality interactions.", "useCaseTags": ["Resistance cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Resistance", "Shape"], "media": [{"type": "image", "src": "img/hapticlinks.jpg"}], "doi": "", "publication": "", "year": ""},
         {"name": "ElaStick", "category": "Band elasticity control", "author": "", "title": "", "mechanism": "Motorized tendons render stiffness.", "useCaseText": "Providing active stiffness, shape cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=ElaStick"}], "doi": "", "publication": "", "year": ""},
         {"name": "ElastiLinks", "category": "Band elasticity control", "author": "", "title": "", "mechanism": "Bimanual resistance (elastic links).", "useCaseText": "Providing active impact, resistance cues in virtual reality interactions.", "useCaseTags": ["Impact cues", "Resistance cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact", "Resistance"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=ElastiLinks"}], "doi": "", "publication": "", "year": ""},
         {"name": "ElastOscillation", "category": "Band elasticity control", "author": "", "title": "", "mechanism": "Elastic bands create oscillations.", "useCaseText": "Providing active weight distribution cues in virtual reality interactions.", "useCaseTags": ["Weight distribution cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight distribution"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=ElastOscillation"}], "doi": "", "publication": "", "year": ""},
-        {"name": "Bstick", "category": "Pin extension", "author": "", "title": "", "mechanism": "Linear actuators provide finger cues.", "useCaseText": "Providing active stiffness, vibration cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues", "Vibration cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness", "Vibration"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Bstick"}], "doi": "", "publication": "SIGGRAPH", "year": "2023"},
-        {"name": "HaptiVec", "category": "Pin extension", "author": "", "title": "", "mechanism": "Pin array renders directional impact.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=HaptiVec"}], "doi": "", "publication": "", "year": ""},
+        {"name": "Bstick", "category": "Pin extension", "author": "", "title": "", "mechanism": "Linear actuators provide finger cues.", "useCaseText": "Providing active stiffness, vibration cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues", "Vibration cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness", "Vibration"], "media": [{"type": "image", "src": "img/bstick.png"}], "doi": "", "publication": "SIGGRAPH", "year": "2023"},
+        {"name": "HaptiVec", "category": "Pin extension", "author": "", "title": "", "mechanism": "Pin array renders directional impact.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "img/haptivec.jpg"}], "doi": "", "publication": "", "year": ""},
         {"name": "PoCoPo", "category": "Pin extension", "author": "", "title": "", "mechanism": "Pin array renders shape in palm.", "useCaseText": "Providing active shape cues in virtual reality interactions.", "useCaseTags": ["Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=PoCoPo"}], "doi": "", "publication": "CHI", "year": "2020"},
         {"name": "TextureTouch", "category": "Pin extension", "author": "", "title": "", "mechanism": "Actuated 4x4 pin matrix renders surface shape.", "useCaseText": "Providing active shape cues in virtual reality interactions.", "useCaseTags": ["Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=TextureTouch"}], "doi": "", "publication": "", "year": ""},
         {"name": "Chanbara", "category": "Flywheel torque", "author": "", "title": "", "mechanism": "Actuation mechanism rendering impact in handheld VR.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Chanbara"}], "doi": "", "publication": "", "year": "2007"},
-        {"name": "HapticWhirl", "category": "Flywheel torque", "author": "", "title": "", "mechanism": "Tilted flywheel creates gyroscopic torque.", "useCaseText": "Providing active vibration, impact, motion, resistance cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Impact cues", "Motion cues", "Resistance cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Impact", "Motion", "Resistance"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=HapticWhirl"}], "doi": "", "publication": "", "year": ""},
+        {"name": "HapticWhirl", "category": "Flywheel torque", "author": "", "title": "", "mechanism": "Tilted flywheel creates gyroscopic torque.", "useCaseText": "Providing active vibration, impact, motion, resistance cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Impact cues", "Motion cues", "Resistance cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Impact", "Motion", "Resistance"], "media": [{"type": "image", "src": "img/hapticwhirl.png"}], "doi": "", "publication": "", "year": ""},
         {"name": "iTorqU 2.1", "category": "Flywheel torque", "author": "", "title": "", "mechanism": "Gimbaled flywheel produces torque.", "useCaseText": "Providing active motion cues in virtual reality interactions.", "useCaseTags": ["Motion cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Motion"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=iTorqU+2.1"}], "doi": "", "publication": "", "year": ""},
         {"name": "MetamorphX", "category": "Flywheel torque", "author": "", "title": "", "mechanism": "Opposed gyros create 3-DoF torque.", "useCaseText": "Providing active resistance cues in virtual reality interactions.", "useCaseTags": ["Resistance cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Resistance"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=MetamorphX"}], "doi": "", "publication": "", "year": ""},
         {"name": "Sobue et al.", "category": "Flywheel torque", "author": "", "title": "", "mechanism": "Actuation mechanism rendering impact in handheld VR.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Sobue+et+al."}], "doi": "", "publication": "", "year": ""},
-        {"name": "SpinShot", "category": "Flywheel torque", "author": "", "title": "", "mechanism": "Flywheel firing creates impact, torque.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=SpinShot"}], "doi": "", "publication": "", "year": ""},
-        {"name": "TorqueCapsules", "category": "Flywheel torque", "author": "", "title": "", "mechanism": "Flywheels render impact and resistance.", "useCaseText": "Providing active impact, resistance cues in virtual reality interactions.", "useCaseTags": ["Impact cues", "Resistance cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact", "Resistance"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=TorqueCapsules"}], "doi": "", "publication": "", "year": ""},
+        {"name": "SpinShot", "category": "Flywheel torque", "author": "", "title": "", "mechanism": "Flywheel firing creates impact, torque.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "img/spinshot.jpg"}], "doi": "", "publication": "", "year": ""},
+        {"name": "TorqueCapsules", "category": "Flywheel torque", "author": "", "title": "", "mechanism": "Flywheels render impact and resistance.", "useCaseText": "Providing active impact, resistance cues in virtual reality interactions.", "useCaseTags": ["Impact cues", "Resistance cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact", "Resistance"], "media": [{"type": "image", "src": "img/torquecapsules.jpg"}], "doi": "", "publication": "", "year": ""},
         {"name": "HaptiCraft", "category": "Exchangeable actuator modules", "author": "", "title": "", "mechanism": "Cube modules combine vibration, impact, thermal, MR-fluid stiffness, sliding-mass inertia.", "useCaseText": "Providing active thermal, stiffness, vibration, impact cues in virtual reality interactions.", "useCaseTags": ["Thermal cues", "Stiffness cues", "Vibration cues", "Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Thermal", "Stiffness", "Vibration", "Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=HaptiCraft"}], "doi": "", "publication": "", "year": ""},
         {"name": "SensoryBlox", "category": "Exchangeable actuator modules", "author": "", "title": "", "mechanism": "Actuation mechanism rendering thermal, vibration in handheld VR.", "useCaseText": "Providing active thermal, vibration cues in virtual reality interactions.", "useCaseTags": ["Thermal cues", "Vibration cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Thermal", "Vibration"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=SensoryBlox"}], "doi": "", "publication": "", "year": ""},
         {"name": "VoxelHap", "category": "Exchangeable actuator modules", "author": "", "title": "", "mechanism": "Actuation mechanism rendering vibration, resistance in handheld VR.", "useCaseText": "Providing active vibration, resistance cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Resistance cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Resistance"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=VoxelHap"}], "doi": "", "publication": "", "year": ""},
         {"name": "FluidWeight", "category": "Liquid mass shifting", "author": "", "title": "", "mechanism": "Water pumps shift mass and balance.", "useCaseText": "Providing active weight magnitude, weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Weight magnitude cues", "Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight magnitude", "Weight distribution", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=FluidWeight"}], "doi": "", "publication": "", "year": ""},
         {"name": "GravityCup", "category": "Liquid mass shifting", "author": "", "title": "", "mechanism": "Pumps move water to change weight.", "useCaseText": "Providing active weight magnitude, shape cues in virtual reality interactions.", "useCaseTags": ["Weight magnitude cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight magnitude", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=GravityCup"}], "doi": "", "publication": "", "year": ""},
         {"name": "MobileGravity", "category": "Liquid mass shifting", "author": "", "title": "", "mechanism": "Pumped liquid changes the absolute mass.", "useCaseText": "Providing active weight magnitude, shape cues in virtual reality interactions.", "useCaseTags": ["Weight magnitude cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight magnitude", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=MobileGravity"}], "doi": "", "publication": "", "year": ""},
-        {"name": "PumpVR", "category": "Liquid mass shifting", "author": "", "title": "", "mechanism": "Chamber liquid transfer shifts weight.", "useCaseText": "Providing active weight magnitude, shape cues in virtual reality interactions.", "useCaseTags": ["Weight magnitude cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight magnitude", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=PumpVR"}], "doi": "", "publication": "", "year": ""},
-        {"name": "VibroWeight", "category": "Liquid mass shifting", "author": "", "title": "", "mechanism": "Liquid shifts mass; motor adds vibration.", "useCaseText": "Providing active vibration, weight magnitude, weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Weight magnitude cues", "Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Weight magnitude", "Weight distribution", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=VibroWeight"}], "doi": "", "publication": "", "year": ""},
+        {"name": "PumpVR", "category": "Liquid mass shifting", "author": "", "title": "", "mechanism": "Chamber liquid transfer shifts weight.", "useCaseText": "Providing active weight magnitude, shape cues in virtual reality interactions.", "useCaseTags": ["Weight magnitude cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight magnitude", "Shape"], "media": [{"type": "image", "src": "img/pumpvr.jpg"}], "doi": "", "publication": "", "year": ""},
+        {"name": "VibroWeight", "category": "Liquid mass shifting", "author": "", "title": "", "mechanism": "Liquid shifts mass; motor adds vibration.", "useCaseText": "Providing active vibration, weight magnitude, weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Weight magnitude cues", "Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Weight magnitude", "Weight distribution", "Shape"], "media": [{"type": "image", "src": "img/vibroweight.png"}], "doi": "", "publication": "", "year": ""},
         {"name": "Liu et al. (2023)", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "Motorized reel shifts mass vertically for impact and vibration.", "useCaseText": "Providing active vibration, impact, weight distribution cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Impact cues", "Weight distribution cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Impact", "Weight distribution"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Liu+et+al.+(2023)"}], "doi": "", "publication": "", "year": ""},
         {"name": "Shifty", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "Motor shifts mass and center of gravity.", "useCaseText": "Providing active weight magnitude, weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Weight magnitude cues", "Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight magnitude", "Weight distribution", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Shifty"}], "doi": "", "publication": "", "year": ""},
-        {"name": "SWISH", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "Motors shift mass to alter balance.", "useCaseText": "Providing active weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight distribution", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=SWISH"}], "doi": "", "publication": "", "year": ""},
-        {"name": "Transcalibur", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "Reconfigures shape and center of mass.", "useCaseText": "Providing active weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight distribution", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Transcalibur"}], "doi": "", "publication": "", "year": ""},
+        {"name": "SWISH", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "Motors shift mass to alter balance.", "useCaseText": "Providing active weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight distribution", "Shape"], "media": [{"type": "image", "src": "img/swish.jpg"}], "doi": "", "publication": "", "year": ""},
+        {"name": "Transcalibur", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "Reconfigures shape and center of mass.", "useCaseText": "Providing active weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight distribution", "Shape"], "media": [{"type": "image", "src": "img/transcalibur.jpg"}], "doi": "", "publication": "", "year": ""},
         {"name": "Unident", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "Belt-driven mass gives directional force.", "useCaseText": "Providing active impact, shape cues in virtual reality interactions.", "useCaseTags": ["Impact cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Unident"}], "doi": "", "publication": "", "year": ""},
         {"name": "VolRec", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "Actuation mechanism rendering weight distribution, shape in handheld VR.", "useCaseText": "Providing active weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight distribution", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=VolRec"}], "doi": "", "publication": "", "year": ""},
         {"name": "White et al.", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "Weighted prop outperforms vibrotactile.", "useCaseText": "Providing active weight magnitude cues in virtual reality interactions.", "useCaseTags": ["Weight magnitude cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight magnitude"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=White+et+al."}], "doi": "", "publication": "", "year": ""},
@@ -271,7 +272,7 @@
         {"name": "Thor's Hammer", "category": "Propeller thrust", "author": "", "title": "", "mechanism": "Propellers render force, weight, stiffness.", "useCaseText": "Providing active stiffness, motion, resistance, weight magnitude cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues", "Motion cues", "Resistance cues", "Weight magnitude cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness", "Motion", "Resistance", "Weight magnitude"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Thor's+Hammer"}], "doi": "", "publication": "", "year": ""},
         {"name": "OrbitStick", "category": "Mass acceleration", "author": "", "title": "", "mechanism": "2-DOF spherical mass abruptly shifts direction to render impact.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=OrbitStick"}], "doi": "", "publication": "", "year": ""},
         {"name": "Su et al.", "category": "Mass acceleration", "author": "", "title": "", "mechanism": "Gun controller for linear recoil.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Su+et+al."}], "doi": "", "publication": "", "year": ""},
-        {"name": "Dominjon et al.", "category": "Mass acceleration", "author": "", "title": "", "mechanism": "Asymmetric oscillation alters heaviness.", "useCaseText": "Providing active weight magnitude cues in virtual reality interactions.", "useCaseTags": ["Weight magnitude cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight magnitude"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Dominjon+et+al."}], "doi": "", "publication": "VR", "year": "2008"},
+        {"name": "Dominjon et al.", "category": "Mass acceleration", "author": "", "title": "", "mechanism": "Asymmetric oscillation alters heaviness.", "useCaseText": "Providing active weight magnitude cues in virtual reality interactions.", "useCaseTags": ["Weight magnitude cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight magnitude"], "media": [{"type": "image", "src": "img/dominjon.jpg"}], "doi": "", "publication": "VR", "year": "2008"},
         {"name": "HapReel", "category": "Surface rotation", "author": "", "title": "", "mechanism": "Motors deform fingertip for racket vibration and impact.", "useCaseText": "Providing active vibration, impact cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=HapReel"}], "doi": "", "publication": "SIGGRAPH", "year": "2023"},
         {"name": "Haptic Palette", "category": "Surface rotation", "author": "", "title": "", "mechanism": "Rotating disc presents physical textures.", "useCaseText": "Providing active friction cues in virtual reality interactions.", "useCaseTags": ["Friction cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Friction"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Haptic+Palette"}], "doi": "", "publication": "", "year": ""},
         {"name": "Haptic Revolver", "category": "Surface rotation", "author": "", "title": "", "mechanism": "Wheel renders fingertip texture.", "useCaseText": "Providing active friction, shape cues in virtual reality interactions.", "useCaseTags": ["Friction cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Friction", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Haptic+Revolver"}], "doi": "", "publication": "", "year": ""},
@@ -285,10 +286,10 @@
         {"name": "Lin and Smith", "category": "Plate shearing", "author": "", "title": "", "mechanism": "Actuation mechanism rendering friction, vibration in handheld VR.", "useCaseText": "Providing active friction, vibration cues in virtual reality interactions.", "useCaseTags": ["Friction cues", "Vibration cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Friction", "Vibration"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Lin+and+Smith"}], "doi": "", "publication": "", "year": ""},
         {"name": "iGripper", "category": "Spring loading", "author": "", "title": "", "mechanism": "Linear motor adjusts spring stiffness.", "useCaseText": "Providing active stiffness cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=iGripper"}], "doi": "", "publication": "", "year": ""},
         {"name": "Shi et al.", "category": "Spring loading", "author": "", "title": "", "mechanism": "Linkage resists finger flexion in elastic and rigid modes.", "useCaseText": "Providing active stiffness cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Shi+et+al."}], "doi": "", "publication": "", "year": ""},
-        {"name": "Triggermuscle", "category": "Spring loading", "author": "", "title": "", "mechanism": "Servo-spring system alters trigger pull.", "useCaseText": "Providing active resistance, weight magnitude cues in virtual reality interactions.", "useCaseTags": ["Resistance cues", "Weight magnitude cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Resistance", "Weight magnitude"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Triggermuscle"}], "doi": "", "publication": "", "year": ""},
-        {"name": "Berna-Moya et al.", "category": "Mass striking", "author": "", "title": "", "mechanism": "Handheld gun provides impact recoil.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Berna-Moya+et+al."}], "doi": "", "publication": "INTERACT", "year": "2019"},
+        {"name": "Triggermuscle", "category": "Spring loading", "author": "", "title": "", "mechanism": "Servo-spring system alters trigger pull.", "useCaseText": "Providing active resistance, weight magnitude cues in virtual reality interactions.", "useCaseTags": ["Resistance cues", "Weight magnitude cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Resistance", "Weight magnitude"], "media": [{"type": "image", "src": "img/triggermuscle.jpg"}], "doi": "", "publication": "", "year": ""},
+        {"name": "Berna-Moya et al.", "category": "Mass striking", "author": "", "title": "", "mechanism": "Handheld gun provides impact recoil.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "img/bernamoya.jpg"}], "doi": "", "publication": "INTERACT", "year": "2019"},
         {"name": "FeelCoilins", "category": "Mass striking", "author": "", "title": "", "mechanism": "Solenoids strike housing, drum impact.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=FeelCoilins"}], "doi": "", "publication": "", "year": ""},
-        {"name": "HapticCollider", "category": "Mass striking", "author": "", "title": "", "mechanism": "Mass strikes handle, rigid collision.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=HapticCollider"}], "doi": "", "publication": "", "year": ""},
+        {"name": "HapticCollider", "category": "Mass striking", "author": "", "title": "", "mechanism": "Mass strikes handle, rigid collision.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "img/hapticcollider.png"}], "doi": "", "publication": "", "year": ""},
         {"name": "MMGrip", "category": "Mass striking", "author": "", "title": "", "mechanism": "Combines vibration, impact, and shear for collision realism.", "useCaseText": "Providing active friction, vibration, impact cues in virtual reality interactions.", "useCaseTags": ["Friction cues", "Vibration cues", "Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Friction", "Vibration", "Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=MMGrip"}], "doi": "", "publication": "", "year": ""},
         {"name": "transPAF", "category": "Mass striking", "author": "", "title": "", "mechanism": "Rotatable tracks move impactor omnidirectionally for dynamic impact.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=transPAF"}], "doi": "", "publication": "", "year": ""},
         {"name": "FresnelDeform", "category": "Plate tilting", "author": "", "title": "", "mechanism": "Actuation mechanism rendering stiffness in handheld VR.", "useCaseText": "Providing active stiffness cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=FresnelDeform"}], "doi": "", "publication": "CHI", "year": ""},
@@ -296,9 +297,9 @@
         {"name": "NormalTouch", "category": "Plate tilting", "author": "", "title": "", "mechanism": "Tilting platform renders geometry.", "useCaseText": "Providing active shape cues in virtual reality interactions.", "useCaseTags": ["Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=NormalTouch"}], "doi": "", "publication": "", "year": ""},
         {"name": "Stuet", "category": "Plate tilting", "author": "", "title": "", "mechanism": "Dual Stewart platforms render pinch width and tilt.", "useCaseText": "Providing active shape cues in virtual reality interactions.", "useCaseTags": ["Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Stuet"}], "doi": "", "publication": "", "year": ""},
         {"name": "Cabaret et al.", "category": "Vibration", "author": "", "title": "", "mechanism": "Two voice coils in a tracked handle place an impact in the hand.", "useCaseText": "Providing active vibration, impact cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Cabaret+et+al."}], "doi": "", "publication": "", "year": "2022"},
-        {"name": "DualVib", "category": "Vibration", "author": "", "title": "", "mechanism": "Dual voice coils for complex vibrations.", "useCaseText": "Providing active vibration, weight magnitude cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Weight magnitude cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Weight magnitude"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=DualVib"}], "doi": "", "publication": "", "year": ""},
+        {"name": "DualVib", "category": "Vibration", "author": "", "title": "", "mechanism": "Dual voice coils for complex vibrations.", "useCaseText": "Providing active vibration, weight magnitude cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Weight magnitude cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Weight magnitude"], "media": [{"type": "image", "src": "img/multivibes.jpg"}], "doi": "", "publication": "", "year": ""},
         {"name": "Fong et al.", "category": "Vibration", "author": "", "title": "", "mechanism": "torque.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Fong+et+al."}], "doi": "", "publication": "", "year": ""},
-        {"name": "MultiVibes", "category": "Vibration", "author": "", "title": "", "mechanism": "Vibromotors create spatial patterns.", "useCaseText": "Providing active vibration cues in virtual reality interactions.", "useCaseTags": ["Vibration cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=MultiVibes"}], "doi": "", "publication": "", "year": ""},
+        {"name": "MultiVibes", "category": "Vibration", "author": "", "title": "", "mechanism": "Vibromotors create spatial patterns.", "useCaseText": "Providing active vibration cues in virtual reality interactions.", "useCaseTags": ["Vibration cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration"], "media": [{"type": "image", "src": "img/multivibes.png"}], "doi": "", "publication": "", "year": ""},
         {"name": "PowVRtool", "category": "Vibration", "author": "", "title": "", "mechanism": "LRA, ERM motor, and magnetic ram render vibration and impulse.", "useCaseText": "Providing active vibration, impact cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=PowVRtool"}], "doi": "", "publication": "", "year": ""},
         {"name": "TORC", "category": "Vibration", "author": "", "title": "", "mechanism": "Voice coils render vibration and texture.", "useCaseText": "Providing active stiffness, vibration cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues", "Vibration cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness", "Vibration"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=TORC"}], "doi": "", "publication": "", "year": ""},
         {"name": "VibeRo", "category": "Vibration", "author": "", "title": "", "mechanism": "Voice coil squeezes the fingertips to render softness.", "useCaseText": "Providing active stiffness cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=VibeRo"}], "doi": "", "publication": "IEEE", "year": "2020"}
@@ -396,10 +397,11 @@
         "MultiVibes": "Vibration",
         "PowVRtool": "Vibration",
         "TORC": "Vibration",
-        "VibeRo": "Vibration"
+        "VibeRo": "Vibration",
+        "LeverForce": "Solid mass shifting"
 };
 
-        // --- Haptic Versatility & Audit Data (all 91 controllers from LeverForce taxonomy-audit.html) ---
+        // --- Haptic Versatility & Audit Data (all controllers from LeverForce taxonomy-audit.html + LeverForce 5-Stars) ---
         const hapticAuditData = {
         "Drag:on": {
                 "score": 3,
@@ -1193,6 +1195,18 @@
                         "Stiffness"
                 ],
                 "status": "added"
+        },
+        "LeverForce": {
+                "score": 5,
+                "ticks_str": "5",
+                "sensations": [
+                        "Resistance",
+                        "Impact",
+                        "Motion",
+                        "Weight magnitude",
+                        "Weight distribution"
+                ],
+                "status": "exemplar"
         }
 };
 
@@ -1284,7 +1298,7 @@
             };
 
             const score = auditInfo.score || 1;
-            const maxScore = 4;
+            const maxScore = 5; // 5-Star Maximum Rating Scale
 
             let starsHTML = '';
             for (let i = 1; i <= maxScore; i++) {
@@ -1303,7 +1317,10 @@
 
             let levelLabel = "Specialized";
             let levelBadgeClass = "bg-slate-100 text-slate-700 border-slate-300";
-            if (score >= 4) {
+            if (score >= 5) {
+                levelLabel = "Max Versatility";
+                levelBadgeClass = "bg-amber-100 text-amber-900 border-amber-400 font-extrabold shadow-sm";
+            } else if (score === 4) {
                 levelLabel = "High Versatility";
                 levelBadgeClass = "bg-purple-100 text-purple-800 border-purple-300 font-bold";
             } else if (score === 3) {
@@ -1314,19 +1331,21 @@
                 levelBadgeClass = "bg-emerald-100 text-emerald-800 border-emerald-300 font-semibold";
             } else if (score === 1) {
                 levelLabel = "Specialized";
-                levelBadgeClass = "bg-amber-100 text-amber-800 border-amber-300 font-medium";
+                levelBadgeClass = "bg-slate-100 text-slate-700 border-slate-300 font-medium";
             }
 
             const status = auditInfo.status || 'auditable';
             let statusBadgeClass = "bg-slate-100 text-slate-600 border-slate-200";
-            if (status === 'auditable') statusBadgeClass = "bg-emerald-50 text-emerald-700 border-emerald-300";
+            if (status === 'exemplar') statusBadgeClass = "bg-amber-50 text-amber-800 border-amber-300 font-bold";
+            else if (status === 'auditable') statusBadgeClass = "bg-emerald-50 text-emerald-700 border-emerald-300";
             else if (status === 'updated' || status === 'corrected') statusBadgeClass = "bg-amber-50 text-amber-700 border-amber-300";
             else if (status === 'priority') statusBadgeClass = "bg-purple-50 text-purple-700 border-purple-300";
             else if (status === 'group queried') statusBadgeClass = "bg-orange-50 text-orange-700 border-orange-300";
             else if (status === 'pending') statusBadgeClass = "bg-sky-50 text-sky-700 border-sky-300";
 
+            const cutaneousSet = new Set(["Thermal", "Stiffness", "Friction", "Vibration", "Fine vibration"]);
             const sensationsHTML = auditInfo.sensations.map(sens => {
-                const isCutaneous = cutaneousSubmodalities.has(sens);
+                const isCutaneous = cutaneousSet.has(sens);
                 if (isCutaneous) {
                     return `<span class="inline-flex items-center gap-1 text-[10.5px] font-medium px-2 py-0.5 rounded bg-green-50 text-green-800 border border-green-200" title="Cutaneous sensation (Audited)">
                         <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>${sens}
@@ -1350,12 +1369,12 @@
                 </div>
                 
                 <div class="flex items-center justify-between mb-2">
-                    <div class="flex items-center gap-1.5" title="${score} of 10 canonical sensations verified in audit">
+                    <div class="flex items-center gap-1.5" title="${score} of 10 canonical sensations verified in audit (${score}/5 stars)">
                         <div class="flex items-center gap-0.5">
                             ${starsHTML}
                         </div>
                         <span class="text-xs font-bold text-gray-800 ml-1">
-                            ${score}<span class="text-[11px] font-normal text-gray-500">/10 sensations</span>
+                            ${score}<span class="text-[11px] font-normal text-gray-500">/5 stars</span>
                         </span>
                     </div>
                     <span class="text-[9px] font-mono px-1.5 py-0.5 rounded border uppercase ${statusBadgeClass}" title="Taxonomy audit evidence status">
@@ -1388,76 +1407,34 @@
             return `<span class="bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs px-2.5 py-1 rounded-full font-medium shadow-sm">${topic}</span>`;
         }
 
-        let currentActivePattern = "ALL";
+        let currentPatternIndex = 0;
 
-        function filterByPattern(patternName) {
-            currentActivePattern = patternName;
-            
-            document.querySelectorAll('.pattern-filter-btn').forEach(btn => {
-                if (btn.dataset.pattern === patternName) {
-                    btn.classList.add('bg-blue-600', 'text-white', 'shadow');
-                    btn.classList.remove('bg-white', 'text-gray-700', 'hover:bg-sky-50');
-                } else {
-                    btn.classList.remove('bg-blue-600', 'text-white', 'shadow');
-                    btn.classList.add('bg-white', 'text-gray-700', 'hover:bg-sky-50');
-                }
-            });
-
-            document.querySelectorAll('.pattern-section-header').forEach(header => {
-                if (patternName === "ALL" || header.dataset.pattern === patternName) {
-                    header.classList.remove('hidden');
-                } else {
-                    header.classList.add('hidden');
-                }
-            });
-
-            document.querySelectorAll('.card-item:not(.intro-card)').forEach(card => {
-                if (patternName === "ALL" || card.dataset.pattern === patternName) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
+        function setPatternIndex(index) {
+            if (index < 0) index = canonicalPatterns.length - 1;
+            if (index >= canonicalPatterns.length) index = 0;
+            currentPatternIndex = index;
+            renderActivePattern();
         }
 
-        function showMedia(container, index) {
-            const mediaData = JSON.parse(container.dataset.media || '[]');
-            const categorySymbol = container.dataset.categorySymbol || '⚙️';
-            const display = container.querySelector('.gallery-media-display');
-            if (!display) return;
-
-            if (mediaData.length === 0) {
-                display.innerHTML = `
-                <div class="h-48 w-full bg-sky-900 flex flex-col items-center justify-center text-sky-200">
-                    <span class="text-4xl mb-2">${categorySymbol}</span>
-                    <span class="text-xs font-medium tracking-wide text-sky-300">Active Haptic Device</span>
-                </div>`;
-                return;
-            }
-
-            const normalizedIndex = (index + mediaData.length) % mediaData.length;
-            container.dataset.currentIndex = normalizedIndex;
-
-            const currentMedia = mediaData[normalizedIndex];
-            if (currentMedia.type === 'video') {
-                display.innerHTML = `<video src="${currentMedia.src}" class="w-full h-48 object-cover" autoplay loop muted playsinline></video>`;
-            } else {
-                display.innerHTML = `<img src="${currentMedia.src}" alt="Haptic Controller" class="w-full h-48 object-cover" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'h-48 w-full bg-sky-900 flex flex-col items-center justify-center text-sky-200\'><span class=\'text-4xl mb-2\'>${categorySymbol}</span><span class=\'text-xs font-medium tracking-wide text-sky-300\'>Active Haptic Device</span></div>';">`;
-            }
-
-            const dots = container.querySelectorAll('.gallery-dot');
-            dots.forEach((dot, idx) => {
-                if (idx === normalizedIndex) dot.classList.add('active');
-                else dot.classList.remove('active');
-            });
+        function nextPattern() {
+            setPatternIndex(currentPatternIndex + 1);
         }
 
-        function createCards() {
+        function prevPattern() {
+            setPatternIndex(currentPatternIndex - 1);
+        }
+
+        function renderActivePattern() {
             const cardContainer = document.getElementById('card-container');
             if (!cardContainer) return;
             cardContainer.innerHTML = '';
 
-            // 1. Intro Card (Header)
+            const currentPat = canonicalPatterns[currentPatternIndex];
+            const currentIcon = patternIcons[currentPat] || "⚙️";
+            const regularDevices = devices.filter(d => !d.isIntro);
+            const patternDevices = regularDevices.filter(d => (deviceMechanismPatterns[d.name] || "General") === currentPat);
+
+            // 1. Intro Card (Definition / 6-criteria taxonomy)
             const introDevice = devices.find(d => d.isIntro);
             if (introDevice) {
                 const introHTML = `
@@ -1479,245 +1456,272 @@
                 cardContainer.innerHTML += introHTML;
             }
 
-            // 2. Filter Bar with All 21 Mechanism Patterns
-            const regularDevices = devices.filter(d => !d.isIntro);
-
-            let filterPillsHTML = `
-            <div class="col-span-full mb-4">
-                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-3.5 border border-sky-200/80 shadow-sm">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-bold text-sky-900 uppercase tracking-wider flex items-center gap-1.5">
-                            <span>🔍</span> Filter by Mechanism Pattern (21 Total)
-                        </span>
-                        <span class="text-[11px] font-semibold text-sky-700 bg-sky-100 px-2 py-0.5 rounded-full">
-                            ${regularDevices.length} Peer-Reviewed Controllers
-                        </span>
-                    </div>
-                    <div class="flex flex-wrap gap-1.5 max-h-40 overflow-y-auto pr-1">
-                        <button class="pattern-filter-btn text-xs font-medium px-3 py-1 rounded-full border border-sky-300 bg-blue-600 text-white shadow transition-all duration-150 select-none" data-pattern="ALL">
-                            All Patterns (${regularDevices.length})
+            // 2. Pattern Navigation Header & Controls (Single Pattern at a time)
+            const navHTML = `
+            <div class="col-span-full mb-6">
+                <!-- Navigation Hero Bar -->
+                <div class="bg-white/95 backdrop-blur-md rounded-2xl p-5 border border-sky-200 shadow-md">
+                    <!-- Top controls row: Prev, Pattern Title, Next -->
+                    <div class="flex items-center justify-between gap-3 flex-wrap">
+                        <button onclick="prevPattern()" class="flex items-center gap-1.5 px-4 py-2 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 rounded-xl font-semibold text-xs sm:text-sm transition-all shadow-sm active:scale-95">
+                            <span>◀</span> <span class="hidden sm:inline">Previous</span>
                         </button>
-            `;
 
-            canonicalPatterns.forEach(pat => {
-                const count = regularDevices.filter(d => (deviceMechanismPatterns[d.name] || "General") === pat).length;
-                const icon = patternIcons[pat] || "⚙️";
-                filterPillsHTML += `
-                <button class="pattern-filter-btn text-xs font-medium px-3 py-1 rounded-full border border-sky-200 bg-white text-gray-700 hover:bg-sky-50 transition-all duration-150 select-none flex items-center gap-1" data-pattern="${pat}">
-                    <span>${icon}</span> ${pat} <span class="text-[10px] text-gray-500 font-semibold ml-0.5">(${count})</span>
-                </button>
-                `;
-            });
+                        <div class="text-center flex-1 min-w-[200px]">
+                            <span class="text-[11px] font-bold uppercase tracking-widest text-sky-600 bg-sky-100 px-3 py-0.5 rounded-full border border-sky-200">
+                                Pattern ${currentPatternIndex + 1} of ${canonicalPatterns.length}
+                            </span>
+                            <div class="flex items-center justify-center gap-2 mt-1.5">
+                                <span class="text-2xl sm:text-3xl">${currentIcon}</span>
+                                <h2 class="text-xl sm:text-2xl font-black text-sky-950">${currentPat}</h2>
+                            </div>
+                            <p class="text-xs text-sky-700/80 font-medium mt-0.5">
+                                Showing <strong>${patternDevices.length}</strong> ${patternDevices.length === 1 ? 'controller' : 'controllers'} for this mechanism pattern
+                            </p>
+                        </div>
 
-            filterPillsHTML += `
+                        <button onclick="nextPattern()" class="flex items-center gap-1.5 px-4 py-2 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 rounded-xl font-semibold text-xs sm:text-sm transition-all shadow-sm active:scale-95">
+                            <span class="hidden sm:inline">Next</span> <span>▶</span>
+                        </button>
+                    </div>
+
+                    <!-- Quick Pattern Selector Bar (Pills) -->
+                    <div class="mt-4 pt-3 border-t border-sky-100">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-[11px] font-bold text-sky-900 uppercase tracking-wider">
+                                Direct Pattern Jump (Press ← / → keys on keyboard):
+                            </span>
+                            <span class="text-[11px] text-sky-600 font-mono">
+                                ${currentPatternIndex + 1}/${canonicalPatterns.length}
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pr-1">
+                            ${canonicalPatterns.map((pat, idx) => {
+                                const count = regularDevices.filter(d => (deviceMechanismPatterns[d.name] || "General") === pat).length;
+                                const icon = patternIcons[pat] || "⚙️";
+                                const isActive = idx === currentPatternIndex;
+                                return `
+                                <button onclick="setPatternIndex(${idx})" class="text-xs font-medium px-3 py-1 rounded-full border transition-all duration-150 select-none flex items-center gap-1 ${
+                                    isActive 
+                                        ? 'bg-blue-600 text-white border-blue-700 shadow-md font-bold scale-105' 
+                                        : 'bg-white text-gray-700 border-sky-200 hover:bg-sky-50'
+                                }">
+                                    <span>${icon}</span> ${pat} <span class="text-[10px] ${isActive ? 'text-blue-100' : 'text-gray-500'} font-semibold">(${count})</span>
+                                </button>
+                                `;
+                            }).join('')}
+                        </div>
                     </div>
                 </div>
             </div>
             `;
+            cardContainer.innerHTML += navHTML;
 
-            cardContainer.innerHTML += filterPillsHTML;
+            // 3. Render Cards for ONLY the current Mechanism Pattern
+            if (patternDevices.length === 0) {
+                cardContainer.innerHTML += `
+                <div class="col-span-full py-12 text-center bg-white/70 rounded-xl border border-sky-200">
+                    <p class="text-gray-500 text-sm">No controllers registered under this mechanism pattern.</p>
+                </div>`;
+                return;
+            }
 
-            // 3. Render Cards Grouped by all 21 Mechanism Patterns
-            canonicalPatterns.forEach(pat => {
-                const patternDevices = regularDevices.filter(d => (deviceMechanismPatterns[d.name] || "General") === pat);
-                if (patternDevices.length === 0) return;
+            patternDevices.forEach(device => {
+                const deviceId = device.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+                const devicePattern = deviceMechanismPatterns[device.name] || currentPat;
+                const deviceCutaneous = (device.submodalities || []).filter(sm => cutaneousSubmodalities.has(sm));
+                const deviceKinesthetic = (device.submodalities || []).filter(sm => kinestheticSubmodalities.has(sm));
 
-                const icon = patternIcons[pat] || "⚙️";
+                const cutaneousTagsHTML = deviceCutaneous.length > 0 
+                    ? deviceCutaneous.map(sm => `<button data-modality="${sm}" class="modality-tag cutaneous">${sm}</button>`).join('')
+                    : '<span class="modality-tag none-tag">none</span>';
 
-                const sectionHeaderHTML = `
-                <div class="col-span-full pattern-section-header mt-6 mb-2 pt-4 border-t-2 border-sky-400/40 flex items-center justify-between flex-wrap gap-2" data-pattern="${pat}">
-                    <div class="flex items-center gap-2.5">
-                        <span class="text-xl p-1.5 bg-white rounded-lg border border-sky-200 shadow-sm">${icon}</span>
-                        <div>
-                            <h2 class="text-lg sm:text-xl font-bold text-sky-950">${pat}</h2>
-                            <p class="text-[11px] text-sky-700/80">Mechanism pattern classification from peer-reviewed audit</p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-semibold px-3 py-1 rounded-full bg-sky-100/90 text-sky-800 border border-sky-200 shadow-sm">
-                        ${patternDevices.length} ${patternDevices.length === 1 ? 'controller' : 'controllers'}
-                    </span>
-                </div>
-                `;
+                const kinestheticTagsHTML = deviceKinesthetic.length > 0 
+                    ? deviceKinesthetic.map(sm => `<button data-modality="${sm}" class="modality-tag kinesthetic">${sm}</button>`).join('')
+                    : '<span class="modality-tag none-tag">none</span>';
 
-                cardContainer.innerHTML += sectionHeaderHTML;
+                const useCaseTagsHTML = Array.isArray(device.useCaseTags) && device.useCaseTags.length > 0 
+                    ? device.useCaseTags.map(uc => `<span class="use-case-tag text-white text-xs font-medium px-2.5 py-0.5 rounded-full">${uc}</span>`).join('') 
+                    : '';
 
-                patternDevices.forEach(device => {
-                    const deviceId = device.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
-                    const devicePattern = deviceMechanismPatterns[device.name] || pat;
-                    const deviceCutaneous = (device.submodalities || []).filter(sm => cutaneousSubmodalities.has(sm));
-                    const deviceKinesthetic = (device.submodalities || []).filter(sm => kinestheticSubmodalities.has(sm));
+                const generalUseCaseTagsHTML = Array.isArray(device.generalUseCases) && device.generalUseCases.length > 0 
+                    ? device.generalUseCases.map(guc => `<span class="general-use-case-tag text-white text-xs font-medium px-2.5 py-0.5 rounded-full">${guc}</span>`).join('') 
+                    : '';
+                
+                const mappedCategory = categoryMap[device.category] || device.category || "Unknown";
+                const categoryIconSymbol = categoryIconSymbols[mappedCategory] || categoryIconSymbols["Unknown"];
 
-                    const cutaneousTagsHTML = deviceCutaneous.length > 0 
-                        ? deviceCutaneous.map(sm => `<button data-modality="${sm}" class="modality-tag cutaneous">${sm}</button>`).join('')
-                        : '<span class="modality-tag none-tag">none</span>';
-
-                    const kinestheticTagsHTML = deviceKinesthetic.length > 0 
-                        ? deviceKinesthetic.map(sm => `<button data-modality="${sm}" class="modality-tag kinesthetic">${sm}</button>`).join('')
-                        : '<span class="modality-tag none-tag">none</span>';
-
-                    const useCaseTagsHTML = Array.isArray(device.useCaseTags) && device.useCaseTags.length > 0 
-                        ? device.useCaseTags.map(uc => `<span class="use-case-tag text-white text-xs font-medium px-2.5 py-0.5 rounded-full">${uc}</span>`).join('') 
-                        : '';
-
-                    const generalUseCaseTagsHTML = Array.isArray(device.generalUseCases) && device.generalUseCases.length > 0 
-                        ? device.generalUseCases.map(guc => `<span class="general-use-case-tag text-white text-xs font-medium px-2.5 py-0.5 rounded-full">${guc}</span>`).join('') 
-                        : '';
-                    
-                    const mappedCategory = categoryMap[device.category] || device.category || "Unknown";
-                    const categoryIconSymbol = categoryIconSymbols[mappedCategory] || categoryIconSymbols["Unknown"];
-
-                    const mediaArray = Array.isArray(device.media) ? device.media : []; 
-                    const mediaDataString = JSON.stringify(mediaArray).replace(/"/g, '&quot;');
-                    
-                    let dotsHTML = '';
-                    if (mediaArray.length > 1) {
-                        for (let i = 0; i < mediaArray.length; i++) {
-                            dotsHTML += `<span class="gallery-dot ${i === 0 ? 'active' : ''}"></span>`;
-                        }
+                const mediaArray = Array.isArray(device.media) ? device.media : []; 
+                const mediaDataString = JSON.stringify(mediaArray).replace(/"/g, '&quot;');
+                
+                let dotsHTML = '';
+                if (mediaArray.length > 1) {
+                    for (let i = 0; i < mediaArray.length; i++) {
+                        dotsHTML += `<span class="gallery-dot ${i === 0 ? 'active' : ''}"></span>`;
                     }
+                }
 
-                    const researchFocus = getResearchFocus(device);
-                    const researchTagsHTML = researchFocus.map(topic => getResearchFocusTagHTML(topic)).join('');
+                const researchFocus = getResearchFocus(device);
+                const researchTagsHTML = researchFocus.map(topic => getResearchFocusTagHTML(topic)).join('');
 
-                    const cardHTML = `
-                    <div class="card-item bg-[#E0FFFF] rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col relative overflow-hidden" data-pattern="${devicePattern}">
-                        <!-- Header Section with Mechanism Pattern (No emoji in top right) -->
-                        <div class="bg-[#0369A1] border-b border-sky-800 flex flex-col">
-                            <div class="px-5 pt-4 pb-3 flex justify-between items-center">
-                                <div class="flex flex-col">
-                                    <span class="text-[10px] font-bold text-sky-200 uppercase tracking-widest">${devicePattern}</span>
-                                    <h2 class="text-xl font-bold text-white">
-                                        ${device.name}
-                                    </h2>
-                                </div>
-                                ${device.year ? `<span class="text-[11px] font-semibold px-2.5 py-0.5 rounded bg-sky-900/70 text-sky-200 border border-sky-700/60">${device.year}</span>` : ''}
+                const cardHTML = `
+                <div class="card-item bg-[#E0FFFF] rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col relative overflow-hidden" data-pattern="${devicePattern}">
+                    <!-- Header Section with Mechanism Pattern (No emoji in top right) -->
+                    <div class="bg-[#0369A1] border-b border-sky-800 flex flex-col">
+                        <div class="px-5 pt-4 pb-3 flex justify-between items-center">
+                            <div class="flex flex-col">
+                                <span class="text-[10px] font-bold text-sky-200 uppercase tracking-widest">${devicePattern}</span>
+                                <h2 class="text-xl font-bold text-white">
+                                    ${device.name}
+                                </h2>
                             </div>
-                            
-                            <div class="gallery-container bg-gray-100 relative" data-media="${mediaDataString}" data-current-index="0" data-category-symbol="${categoryIconSymbol}">
-                                <div class="gallery-media-display"></div>
-                                <button class="gallery-nav-btn gallery-prev-btn">
-                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
-                                </button>
-                                <button class="gallery-nav-btn gallery-next-btn">
-                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
-                                </button>
-                                <div class="gallery-dots">${dotsHTML}</div>
-                            </div>
+                            ${device.year ? `<span class="text-[11px] font-semibold px-2.5 py-0.5 rounded bg-sky-900/70 text-sky-200 border border-sky-700/60">${device.year}</span>` : ''}
                         </div>
                         
-                        <div class="p-5 flex-grow flex flex-col">
-                            <div class="flex border-b border-gray-300 mb-4 text-xs font-semibold select-none gap-4">
-                                <button class="info-tab-btn pb-1.5 text-blue-600 border-blue-600 border-b-2 focus:outline-none" data-tab="research">Research Focus</button>
-                                <button class="info-tab-btn pb-1.5 text-gray-500 hover:text-gray-700 focus:outline-none" data-tab="haptic-specs">Haptic Specs</button>
-                                <button class="info-tab-btn pb-1.5 text-gray-500 hover:text-gray-700 focus:outline-none" data-tab="use-cases">Use Cases</button>
-                            </div>
+                        <div class="gallery-container bg-gray-100 relative" data-media="${mediaDataString}" data-current-index="0" data-category-symbol="${categoryIconSymbol}">
+                            <div class="gallery-media-display"></div>
+                            <button class="gallery-nav-btn gallery-prev-btn">
+                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
+                            </button>
+                            <button class="gallery-nav-btn gallery-next-btn">
+                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                            </button>
+                            <div class="gallery-dots">${dotsHTML}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-5 flex-grow flex flex-col">
+                        <!-- Sleek Tab Switcher: Haptic Versatility is first on left and active by default -->
+                        <div class="flex border-b border-gray-300 mb-4 text-xs font-semibold select-none gap-4">
+                            <button class="info-tab-btn pb-1.5 text-blue-600 border-blue-600 border-b-2 focus:outline-none" data-tab="versatility">Haptic Versatility</button>
+                            <button class="info-tab-btn pb-1.5 text-gray-500 hover:text-gray-700 focus:outline-none" data-tab="research">Research Focus</button>
+                            <button class="info-tab-btn pb-1.5 text-gray-500 hover:text-gray-700 focus:outline-none" data-tab="use-cases">Use Cases</button>
+                        </div>
 
-                            <!-- Research Focus Content Container (Active by Default) -->
-                            <div class="research-tab-content flex-grow flex flex-col justify-start">
-                                ${renderVersatilityRating(device)}
+                        <!-- 1. Haptic Versatility Content Container (Active & Visible by Default) -->
+                        <div class="versatility-tab-content flex-grow flex flex-col justify-start">
+                            <!-- Haptic Versatility Rating Box (Stars, Scores, Sensations) -->
+                            ${renderVersatilityRating(device)}
 
-                                <div class="mb-4 pb-4 border-b border-gray-200">
-                                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Research Focus</h3>
-                                    <p class="text-xs text-gray-600 mb-3">This project targets the following research focus areas:</p>
-                                    <div class="flex flex-wrap gap-2 mb-4">
-                                        ${researchTagsHTML}
-                                    </div>
-                                    
-                                    ${generalUseCaseTagsHTML ? `
-                                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2 mt-4">Application Context</h3>
-                                    <div class="flex flex-wrap gap-2 mb-1">
-                                        ${generalUseCaseTagsHTML}
-                                    </div>
-                                    ` : ''}
-                                </div>
-                            </div>
-
-                            <!-- Haptic Specs Content Container (Category Emoji relocated here) -->
-                            <div class="haptic-specs-tab-content hidden flex-grow flex flex-col">
-                                <div class="mb-4 pb-4 border-b border-gray-200">
-                                   <button class="w-full text-left focus:outline-none flex justify-between items-center mechanism-toggle-btn mb-2">
-                                       <div class="flex items-center gap-2 flex-wrap">
-                                           <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Mechanism:</h3>
-                                           <span class="category-tag text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-black lowercase tracking-wider">${mappedCategory.toLowerCase()}</span>
-                                           <span class="text-base bg-sky-100 p-1 rounded-full border border-sky-200 leading-none inline-flex items-center justify-center" title="${mappedCategory}">${categoryIconSymbol}</span>
-                                       </div>
-                                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-200 transform mechanism-arrow text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                       </svg>
-                                   </button>
-                                   <div class="mechanism-content hidden">
-                                        <p class="text-gray-700 mt-1 text-sm leading-relaxed">
-                                            ${device.mechanism}
-                                        </p>
+                            <!-- Mechanism Section with Relocated Category Emoji -->
+                            <div class="mb-4 pb-4 border-b border-gray-200">
+                               <button class="w-full text-left focus:outline-none flex justify-between items-center mechanism-toggle-btn mb-2">
+                                   <div class="flex items-center gap-2 flex-wrap">
+                                       <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Mechanism:</h3>
+                                       <span class="category-tag text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-black lowercase tracking-wider">${mappedCategory.toLowerCase()}</span>
+                                       <span class="text-base bg-sky-100 p-1 rounded-full border border-sky-200 leading-none inline-flex items-center justify-center" title="${mappedCategory}">${categoryIconSymbol}</span>
                                    </div>
+                                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-200 transform mechanism-arrow text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                   </svg>
+                               </button>
+                               <div class="mechanism-content hidden">
+                                    <p class="text-gray-700 mt-1 text-sm leading-relaxed">
+                                        ${device.mechanism}
+                                    </p>
                                </div>
-           
-                                <div class="mb-4 pb-4 border-b border-gray-200">
-                                     <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Haptic Modality</h3>
-                                     <div class="grid grid-cols-2 gap-4">
-                                         <div>
-                                             <h4 class="text-xs font-bold text-gray-700 mb-1">Cutaneous Perception</h4>
-                                             <div class="flex flex-wrap gap-1">${cutaneousTagsHTML}</div>
-                                         </div>
-                                         <div>
-                                             <h4 class="text-xs font-bold text-gray-700 mb-1">Kinesthetic Perception</h4>
-                                             <div class="flex flex-wrap gap-1">${kinestheticTagsHTML}</div>
-                                         </div>
-                                     </div>
-                                </div>
-     
-                              ${device.doi || device.publication || device.year ? `
-                              <div class="mt-auto text-xs text-gray-600">
-                                  <button class="w-full text-left focus:outline-none flex justify-between items-center text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2 ref-toggle-btn">
-                                      <span>Reference</span>
-                                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-200 transform ref-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                      </svg>
-                                  </button>
-                                  <div class="ref-content hidden">
-                                      <p class="font-semibold">${device.author || 'Author in Proceedings'}</p>
-                                      <p class="italic my-1">"${device.title || device.name}</p>
-                                      <p>${device.publication || 'Proceedings'}, ${device.year || ''}</p>
-                                      ${device.doi ? `
-                                      <a href="https://doi.org/${device.doi}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 font-medium transition-colors inline-flex items-center mt-2 mb-2">
-                                          Paper
-                                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                          </svg>
-                                      </a>` : ''}
-                                  </div>
-                              </div>
-                              ` : ''}
                             </div>
+       
+                            <!-- Haptic Modality Section -->
+                            <div class="mb-4 pb-4 border-b border-gray-200">
+                                 <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Haptic Modality</h3>
+                                 <div class="grid grid-cols-2 gap-4">
+                                     <div>
+                                         <h4 class="text-xs font-bold text-gray-700 mb-1">Cutaneous Perception</h4>
+                                         <div class="flex flex-wrap gap-1">${cutaneousTagsHTML}</div>
+                                     </div>
+                                     <div>
+                                         <h4 class="text-xs font-bold text-gray-700 mb-1">Kinesthetic Perception</h4>
+                                         <div class="flex flex-wrap gap-1">${kinestheticTagsHTML}</div>
+                                     </div>
+                                 </div>
+                            </div>
+ 
+                            <!-- Reference Section -->
+                            ${device.doi || device.publication || device.year ? `
+                            <div class="mt-auto text-xs text-gray-600">
+                                <button class="w-full text-left focus:outline-none flex justify-between items-center text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2 ref-toggle-btn">
+                                    <span>Reference</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-200 transform ref-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                <div class="ref-content hidden">
+                                    <p class="font-semibold">${device.author || 'Author in Proceedings'}</p>
+                                    <p class="italic my-1">"${device.title || device.name}"</p>
+                                    <p>${device.publication || 'Proceedings'}, ${device.year || ''}</p>
+                                    ${device.doi ? `
+                                    <a href="https://doi.org/${device.doi}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 font-medium transition-colors inline-flex items-center mt-2 mb-2">
+                                        Paper
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke-width="2">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                        </svg>
+                                    </a>` : ''}
+                                </div>
+                            </div>
+                            ` : ''}
+                        </div>
 
-                            <!-- Use Cases Content Container -->
-                            <div class="use-cases-tab-content hidden flex-grow flex flex-col justify-start">
-                                <div class="mb-4 flex-grow pb-4 border-b border-gray-200">
-                                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Use Cases</h3>
-                                    ${useCaseTagsHTML ? `
-                                    <div class="flex flex-wrap gap-1 mb-3"> 
-                                       ${useCaseTagsHTML}
-                                    </div>
-                                    ` : ''}
-                                    <div class="usecase-content">
-                                        <p class="text-gray-700 mt-1 text-sm leading-relaxed">${device.useCaseText || ''}</p> 
-                                    </div>
+                        <!-- 2. Research Focus Content Container (Hidden by Default) -->
+                        <div class="research-tab-content hidden flex-grow flex flex-col justify-start">
+                            <div class="mb-4 pb-4 border-b border-gray-200">
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Research Focus</h3>
+                                <p class="text-xs text-gray-600 mb-3">This project targets the following research focus areas:</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    ${researchTagsHTML}
+                                </div>
+                                
+                                ${generalUseCaseTagsHTML ? `
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2 mt-4">Application Context</h3>
+                                <div class="flex flex-wrap gap-2 mb-1">
+                                    ${generalUseCaseTagsHTML}
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+
+                        <!-- 3. Use Cases Content Container (Hidden by Default) -->
+                        <div class="use-cases-tab-content hidden flex-grow flex flex-col justify-start">
+                            <div class="mb-4 flex-grow pb-4 border-b border-gray-200">
+                                <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Use Cases</h3>
+                                ${useCaseTagsHTML ? `
+                                <div class="flex flex-wrap gap-1 mb-3"> 
+                                   ${useCaseTagsHTML}
+                                </div>
+                                ` : ''}
+                                <div class="usecase-content">
+                                    <p class="text-gray-700 mt-1 text-sm leading-relaxed">${device.useCaseText || ''}</p> 
                                 </div>
                             </div>
                         </div>
                     </div>
-                    `;
-                    
-                    cardContainer.innerHTML += cardHTML;
-                });
+                </div>
+                `;
+                
+                cardContainer.innerHTML += cardHTML;
             });
 
-            // Setup Event Listeners
-            document.querySelectorAll('.pattern-filter-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterByPattern(btn.dataset.pattern);
-                });
+            // Initialize galleries
+            document.querySelectorAll('.gallery-container').forEach(container => {
+                showMedia(container, 0);
             });
+        }
+
+        function createCards() {
+            renderActivePattern();
+
+            // Keyboard navigation for pattern browsing (Left and Right arrow keys)
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    nextPattern();
+                } else if (e.key === 'ArrowLeft') {
+                    prevPattern();
+                }
+            });
+
+            // Setup Event Listeners (delegated on cardContainer)
+            const cardContainer = document.getElementById('card-container');
+            if (!cardContainer) return;
 
             cardContainer.addEventListener('click', (event) => {
                 const target = event.target.closest('button');
@@ -1756,6 +1760,7 @@
                 }
             });
 
+            // Tab Switcher Listener
             cardContainer.addEventListener('click', (event) => {
                 const targetBtn = event.target.closest('.info-tab-btn');
                 if (!targetBtn) return;
@@ -1773,17 +1778,21 @@
                     }
                 });
 
+                const versatilityContent = card.querySelector('.versatility-tab-content');
                 const researchContent = card.querySelector('.research-tab-content');
-                const hapticSpecsContent = card.querySelector('.haptic-specs-tab-content');
                 const useCasesContent = card.querySelector('.use-cases-tab-content');
                 
+                if (versatilityContent) versatilityContent.classList.add('hidden');
                 if (researchContent) researchContent.classList.add('hidden');
-                if (hapticSpecsContent) hapticSpecsContent.classList.add('hidden');
                 if (useCasesContent) useCasesContent.classList.add('hidden');
                 
-                if (tabName === 'research' && researchContent) researchContent.classList.remove('hidden');
-                else if (tabName === 'haptic-specs' && hapticSpecsContent) hapticSpecsContent.classList.remove('hidden');
-                else if (tabName === 'use-cases' && useCasesContent) useCasesContent.classList.remove('hidden');
+                if (tabName === 'versatility' && versatilityContent) {
+                    versatilityContent.classList.remove('hidden');
+                } else if (tabName === 'research' && researchContent) {
+                    researchContent.classList.remove('hidden');
+                } else if (tabName === 'use-cases' && useCasesContent) {
+                    useCasesContent.classList.remove('hidden');
+                }
             });
 
             cardContainer.addEventListener('click', (event) => {
@@ -1817,10 +1826,6 @@
                         d.classList.add('bg-slate-300', 'hover:bg-slate-400');
                     }
                 });
-            });
-
-            document.querySelectorAll('.gallery-container').forEach(container => {
-                showMedia(container, 0);
             });
         }
 
