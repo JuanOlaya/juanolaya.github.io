@@ -134,18 +134,18 @@
 
     <div class="max-w-[1600px] w-full mx-auto flex-grow flex flex-col">
         
-        <!-- App Top Header Bar -->
-        <header class="bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3.5 border border-sky-200/90 shadow-sm mb-4 flex items-center justify-between flex-wrap gap-3">
+        <!-- App Top Header Bar (Fused Single Header) -->
+        <header class="bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3 border border-sky-200/90 shadow-sm mb-4 flex items-center justify-between flex-wrap gap-3">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-sky-600 flex items-center justify-center text-white shadow-md text-xl">
-                    ⚡
+                <div id="hero-pattern-icon" class="w-10 h-10 rounded-xl bg-sky-600 flex items-center justify-center text-white shadow-md text-xl select-none">
+                    ⚖️
                 </div>
                 <div>
-                    <h1 class="text-xl sm:text-2xl font-black text-sky-950 tracking-tight leading-none">
-                        Haptic VR Controllers
+                    <h1 id="hero-pattern-title" class="text-xl sm:text-2xl font-black text-sky-950 tracking-tight leading-none">
+                        Solid mass shifting
                     </h1>
                     <p class="text-xs text-sky-700 font-medium mt-0.5">
-                        Interactive Dashboard &bull; 92 Peer-Reviewed Controllers across 21 Mechanism Patterns
+                        Haptic VR Controllers &bull; Interactive 21 Pattern Dashboard
                     </p>
                 </div>
             </div>
@@ -181,30 +181,6 @@
                 </div>
             </div>
         </header>
-
-        <!-- Current Pattern Banner Title -->
-        <div id="active-pattern-hero" class="mb-4 bg-gradient-to-r from-sky-900 via-sky-800 to-indigo-900 text-white rounded-2xl px-6 py-3.5 shadow-md flex items-center justify-between flex-wrap gap-3 border border-sky-700">
-            <div class="flex items-center gap-3">
-                <span id="hero-pattern-icon" class="text-3xl p-1.5 bg-white/10 rounded-xl border border-white/20 shadow-inner">⚖️</span>
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span id="hero-pattern-idx" class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-sky-500/30 border border-sky-400/40 text-sky-200">
-                            Pattern 10 of 21
-                        </span>
-                        <span id="hero-pattern-count" class="text-xs font-semibold px-2 py-0.5 rounded-full bg-amber-400 text-amber-950 font-bold">
-                            8 Controllers
-                        </span>
-                    </div>
-                    <h2 id="hero-pattern-title" class="text-xl sm:text-2xl font-black tracking-tight mt-0.5">
-                        Solid mass shifting
-                    </h2>
-                </div>
-            </div>
-            <div class="text-right hidden md:block">
-                <span class="text-xs text-sky-200 font-medium">Focused View:</span>
-                <p class="text-sm font-bold text-white">Displaying up to 4 cards per screen</p>
-            </div>
-        </div>
 
         <!-- 4-Card Viewport Grid Container (Main Screen Area) -->
         <main class="flex-grow mb-6">
@@ -374,7 +350,7 @@
         {"name": "Mouillé", "category": "Peltier cell actuation", "author": "", "title": "", "mechanism": "Peltier cooling evokes wetness.", "useCaseText": "Providing active thermal cues in virtual reality interactions.", "useCaseTags": ["Thermal cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Thermal"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Mouillé"}], "doi": "", "publication": "", "year": ""},
         {"name": "ThermalPen", "category": "Peltier cell actuation", "author": "", "title": "", "mechanism": "A Peltier cell in the barrel maps stroke colour and texture to temperature.", "useCaseText": "Providing active thermal cues in virtual reality interactions.", "useCaseTags": ["Thermal cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Thermal"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=ThermalPen"}], "doi": "", "publication": "VR", "year": "2024"},
         {"name": "Aero-plane", "category": "Propeller thrust", "author": "", "title": "", "mechanism": "Propellers render weight-shifting forces.", "useCaseText": "Providing active motion, weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Motion cues", "Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Motion", "Weight distribution", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Aero-plane"}], "doi": "", "publication": "", "year": ""},
-        {"name": "Arezoo et al.", "category": "Propeller thrust", "author": "", "title": "", "mechanism": "torque.", "useCaseText": "Providing active motion, resistance cues in virtual reality interactions.", "useCaseTags": ["Motion cues", "Resistance cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Motion", "Resistance"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Arezoo+et+al."}], "doi": "", "publication": "VR", "year": ""},
+        {"name": "Arezoo et al.", "category": "Propeller thrust", "author": "", "title": "", "mechanism": "Propeller thrusters render directional torque and force.", "useCaseText": "Providing active motion, resistance cues in virtual reality interactions.", "useCaseTags": ["Motion cues", "Resistance cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Motion", "Resistance"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Arezoo+et+al."}], "doi": "", "publication": "VR", "year": ""},
         {"name": "CrazyJoystick", "category": "Propeller thrust", "author": "", "title": "", "mechanism": "Quadrotor flies to user, then reallocates thrust for handheld torque and force.", "useCaseText": "Providing active motion, resistance cues in virtual reality interactions.", "useCaseTags": ["Motion cues", "Resistance cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Motion", "Resistance"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=CrazyJoystick"}], "doi": "", "publication": "", "year": ""},
         {"name": "Flyables", "category": "Propeller thrust", "author": "", "title": "", "mechanism": "Quadcopter delivers matching 3D-printed UI-element prop on demand.", "useCaseText": "Providing active shape cues in virtual reality interactions.", "useCaseTags": ["Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Flyables"}], "doi": "", "publication": "", "year": ""},
         {"name": "Hydra", "category": "Propeller thrust", "author": "", "title": "", "mechanism": "Solenoid fires a 90 g projectile into a stop; four propellers push the hand.", "useCaseText": "Providing active impact, motion cues in virtual reality interactions.", "useCaseTags": ["Impact cues", "Motion cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact", "Motion"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Hydra"}], "doi": "", "publication": "", "year": ""},
@@ -408,7 +384,7 @@
         {"name": "Stuet", "category": "Plate tilting", "author": "", "title": "", "mechanism": "Dual Stewart platforms render pinch width and tilt.", "useCaseText": "Providing active shape cues in virtual reality interactions.", "useCaseTags": ["Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Stuet"}], "doi": "", "publication": "", "year": ""},
         {"name": "Cabaret et al.", "category": "Vibration", "author": "", "title": "", "mechanism": "Two voice coils in a tracked handle place an impact in the hand.", "useCaseText": "Providing active vibration, impact cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Cabaret+et+al."}], "doi": "", "publication": "", "year": "2022"},
         {"name": "DualVib", "category": "Vibration", "author": "", "title": "", "mechanism": "Dual voice coils for complex vibrations.", "useCaseText": "Providing active vibration, weight magnitude cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Weight magnitude cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Weight magnitude"], "media": [{"type": "image", "src": "img/multivibes.jpg"}], "doi": "", "publication": "", "year": ""},
-        {"name": "Fong et al.", "category": "Vibration", "author": "", "title": "", "mechanism": "torque.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Fong+et+al."}], "doi": "", "publication": "", "year": ""},
+        {"name": "Fong et al.", "category": "Vibration", "author": "", "title": "", "mechanism": "Voice coils and motors render vibration and torque.", "useCaseText": "Providing active impact cues in virtual reality interactions.", "useCaseTags": ["Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=Fong+et+al."}], "doi": "", "publication": "", "year": ""},
         {"name": "MultiVibes", "category": "Vibration", "author": "", "title": "", "mechanism": "Vibromotors create spatial patterns.", "useCaseText": "Providing active vibration cues in virtual reality interactions.", "useCaseTags": ["Vibration cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration"], "media": [{"type": "image", "src": "img/multivibes.png"}], "doi": "", "publication": "", "year": ""},
         {"name": "PowVRtool", "category": "Vibration", "author": "", "title": "", "mechanism": "LRA, ERM motor, and magnetic ram render vibration and impulse.", "useCaseText": "Providing active vibration, impact cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Impact cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Impact"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=PowVRtool"}], "doi": "", "publication": "", "year": ""},
         {"name": "TORC", "category": "Vibration", "author": "", "title": "", "mechanism": "Voice coils render vibration and texture.", "useCaseText": "Providing active stiffness, vibration cues in virtual reality interactions.", "useCaseTags": ["Stiffness cues", "Vibration cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Stiffness", "Vibration"], "media": [{"type": "image", "src": "https://placehold.co/400x250/E2E8F0/4A5568?text=TORC"}], "doi": "", "publication": "", "year": ""},
@@ -1560,18 +1536,14 @@
             const endIdx = Math.min(startIdx + CARDS_PER_PAGE, totalCards);
             const pageDevices = patternDevices.slice(startIdx, endIdx);
 
-            // Update Top Banner
+            // Update Top Fused Header
             const heroIcon = document.getElementById('hero-pattern-icon');
-            const heroIdx = document.getElementById('hero-pattern-idx');
-            const heroCount = document.getElementById('hero-pattern-count');
             const heroTitle = document.getElementById('hero-pattern-title');
             const pageIndicator = document.getElementById('page-indicator');
             const prevPageBtn = document.getElementById('prev-page-btn');
             const nextPageBtn = document.getElementById('next-page-btn');
 
             if (heroIcon) heroIcon.textContent = currentIcon;
-            if (heroIdx) heroIdx.textContent = `Pattern ${currentPatternIndex + 1} of ${canonicalPatterns.length}`;
-            if (heroCount) heroCount.textContent = `${totalCards} ${totalCards === 1 ? 'Controller' : 'Controllers'}`;
             if (heroTitle) heroTitle.textContent = currentPat;
 
             if (pageIndicator) {
