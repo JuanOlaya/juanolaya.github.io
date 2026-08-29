@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Primitivas Geométricas con p5.brush & Color Plano</title>
+  <!-- p5.brush Standalone library (WebGL2) -->
+  <script src="libraries/p5.brush/dist/brush.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #1e1e24;
+      color: #eaeaea;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #sidebar {
+      width: 350px;
+      background: #282830;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      overflow-y: auto;
+      border-right: 1px solid #3c3c46;
+    }
+    h1 {
+      font-size: 1.15rem;
+      color: #f7d070;
+      margin-bottom: 2px;
+    }
+    p.subtitle {
+      font-size: 0.82rem;
+      color: #a0a0b0;
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #c0c0d0;
+    }
+    select, input, button {
+      background: #1b1b22;
+      color: #eaeaea;
+      border: 1px solid #444452;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    select:focus, input:focus {
+      border-color: #f7d070;
+    }
+    .btn-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+    }
+    button {
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      background: #363644;
+    }
+    button:hover {
+      background: #49495c;
+      border-color: #f7d070;
+    }
+    button.primary {
+      background: #f7d070;
+      color: #1a1a20;
+      border-color: #f7d070;
+      grid-column: span 2;
+      padding: 10px;
+    }
+    button.primary:hover {
+      background: #ffe39a;
+    }
+    #canvas-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #141418;
+      position: relative;
+    }
+    canvas {
+      box-shadow: 0 12px 36px rgba(0,0,0,0.6);
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <aside id="sidebar">
+    <div>
+      <h1>Primitivas & Estilos</h1>
+      <p class="subtitle">Compara Figuras Planas vs. Texturas de Brocha (p5.brush)</p>
+    </div>
+
+    <!-- Estilo general -->
+    <div class="control-group">
+      <label for="render-style">Estilo de Renderizado</label>
+      <select id="render-style">
+        <option value="watercolor">🎨 Acuarela Orgánica (p5.brush)</option>
+        <option value="hatch">✏️ Trama / Hatching (p5.brush)</option>
+        <option value="pencil">🖋️ Lápiz / Carboncillo (p5.brush)</option>
+        <option value="marker">🖍️ Marcador Fluido (p5.brush)</option>
+        <option value="flat">📐 Color Plano Sólido (Flat Color)</option>
+      </select>
+    </div>
+
+    <!-- Figura Primitiva -->
+    <div class="control-group">
+      <label for="shape-type">Figura Primitiva</label>
+      <select id="shape-type">
+        <option value="composition">✨ Composición Geométrica</option>
+        <option value="rect">Cuadrado / Rectángulo</option>
+        <option value="circle">Círculo</option>
+        <option value="triangle">Triángulo Equilátero</option>
+        <option value="polygon">Hexágono</option>
+      </select>
+    </div>
+
+    <!-- Paleta de colores -->
+    <div class="control-group">
+      <label for="color-palette">Paleta de Colores</label>
+      <select id="color-palette">
+        <option value="warm">Terracota & Ocre Cálido</option>
+        <option value="ocean">Azules Marinos & Turquesa</option>
+        <option value="botanical">Verdes Botánicos & Salvia</option>
+        <option value="sunset">Atardecer Magenta & Ámbar</option>
+        <option value="monochrome">Tinta Negra & Carbón</option>
+      </select>
+    </div>
+
+    <!-- Parámetros específicos -->
+    <div class="control-group" id="group-bleed">
+      <label for="slider-bleed">Sangrado de Acuarela (Bleed): <span id="val-bleed">0.2</span></label>
+      <input type="range" id="slider-bleed" min="0" max="0.5" step="0.02" value="0.2">
+    </div>
+
+    <div class="control-group" id="group-hatch">
+      <label for="slider-hatch">Espaciado de Trama: <span id="val-hatch">8</span>px</label>
+      <input type="range" id="slider-hatch" min="3" max="25" step="1" value="8">
+    </div>
+
+    <div class="btn-grid">
+      <button class="primary" id="btn-render">🔄 Regenerar</button>
+      <button id="btn-save">💾 Guardar Imagen</button>
+      <button id="btn-seed">🎲 Cambiar Semilla</button>
+    </div>
+  </aside>
+
+  <main id="canvas-container">
+    <!-- El lienzo WebGL de p5.brush se inserta aquí -->
+  </main>
+
+  <script>
+    const CANVAS_WIDTH = 680;
+    const CANVAS_HEIGHT = 680;
+    let canvasElement = null;
+    let currentSeed = 42;
+
+    const PALETTES = {
+      warm: ["#d95c41", "#e08d3c", "#d1a153", "#744b36", "#2b2b2b"],
+      ocean: ["#1d4e89", "#00b2ca", "#7dcfb6", "#fbd1a2", "#1d2d44"],
+      botanical: ["#2d5a27", "#84a98c", "#52796f", "#cad2c5", "#354f52"],
+      sunset: ["#d62246", "#e55934", "#fa7921", "#9b5de5", "#3c096c"],
+      monochrome: ["#111111", "#333333", "#555555", "#777777", "#999999"]
+    };
+
+    function init() {
+      // Inicializar el canvas usando la versión standalone de p5.brush
+      canvasElement = brush.createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT, {
+        parent: document.getElementById('canvas-container'),
+        pixelDensity: window.devicePixelRatio || 1
+      });
+      brush.scaleBrushes(3.5);
+      brush.angleMode(brush.DEGREES);
+
+      setupListeners();
+      drawScene();
+    }
+
+    function setupListeners() {
+      document.getElementById('render-style').addEventListener('change', drawScene);
+      document.getElementById('shape-type').addEventListener('change', drawScene);
+      document.getElementById('color-palette').addEventListener('change', drawScene);
+      
+      const sliderBleed = document.getElementById('slider-bleed');
+      sliderBleed.addEventListener('input', (e) => {
+        document.getElementById('val-bleed').innerText = e.target.value;
+        drawScene();
+      });
+
+      const sliderHatch = document.getElementById('slider-hatch');
+      sliderHatch.addEventListener('input', (e) => {
+        document.getElementById('val-hatch').innerText = e.target.value;
+        drawScene();
+      });
+
+      document.getElementById('btn-render').addEventListener('click', drawScene);
+      document.getElementById('btn-seed').addEventListener('click', () => {
+        currentSeed = Math.floor(Math.random() * 10000);
+        drawScene();
+      });
+
+      document.getElementById('btn-save').addEventListener('click', () => {
+        const link = document.createElement('a');
+        link.download = `figura_${document.getElementById('render-style').value}.png`;
+        link.href = canvasElement.toDataURL();
+        link.click();
+      });
+    }
+
+    function drawScene() {
+      const style = document.getElementById('render-style').value;
+      const shape = document.getElementById('shape-type').value;
+      const paletteName = document.getElementById('color-palette').value;
+      const colors = PALETTES[paletteName];
+      const bleedStrength = parseFloat(document.getElementById('slider-bleed').value);
+      const hatchDist = parseInt(document.getElementById('slider-hatch').value);
+
+      brush.seed(currentSeed);
+      brush.noiseSeed(currentSeed);
+
+      // Fondo papel natural suave
+      brush.clear('#faf6ed');
+
+      brush.push();
+      // Mover origen de coordenadas al centro superior izquierdo
+      brush.translate(-CANVAS_WIDTH / 2, -CANVAS_HEIGHT / 2);
+
+      if (shape === 'composition') {
+        drawComposition(style, colors, bleedStrength, hatchDist);
+      } else {
+        drawSingleShape(shape, style, colors, bleedStrength, hatchDist);
+      }
+
+      brush.pop();
+      brush.render(); // Proyectar todo en el lienzo WebGL
+    }
+
+    function drawPrimitive(type, x, y, size, colFill, colStroke, style, bleed, hatchDist, angle = 0) {
+      if (style === 'flat') {
+        // === MODO COLOR PLANO (SÓLIDO) ===
+        brush.noHatch();
+        brush.noMass();
+        brush.wash(colFill, 255);
+        brush.set('HB', colStroke, 2);
+      } else if (style === 'watercolor') {
+        // === MODO ACUARELA CON SANGRADO ORGÁNICO ===
+        brush.noHatch();
+        brush.noMass();
+        brush.fill(colFill, 150);
+        brush.fillBleed(bleed, 'out');
+        brush.fillTexture(0.55, 0.35, true);
+        brush.set('watercolor', colStroke, 2.5);
+      } else if (style === 'hatch') {
+        // === MODO TRAMADO / RAYADO ARTÍSTICO ===
+        brush.noMass();
+        brush.fill(colFill, 70);
+        brush.hatch(hatchDist, angle || 45, { rand: 0.15, continuous: false });
+        brush.hatchStyle('HB', colStroke, 1.2);
+        brush.set('HB', colStroke, 2);
+      } else if (style === 'pencil') {
+        // === MODO LÁPIZ / CARBONCILLO ===
+        brush.noFill();
+        brush.noHatch();
+        brush.mass('charcoal', colFill, { strength: 0.75, precision: 0.5 });
+        brush.set('2B', colStroke, 2.2);
+      } else if (style === 'marker') {
+        // === MODO MARCADOR / CRAYON ===
+        brush.noHatch();
+        brush.noMass();
+        brush.fill(colFill, 200);
+        brush.fillBleed(0.04);
+        brush.set('marker', colStroke, 3);
+      }
+
+      // Dibujar primitivas geométricas
+      if (type === 'rect') {
+        brush.rect(x - size / 2, y - size / 2, size, size);
+      } else if (type === 'circle') {
+        brush.circle(x, y, size / 2, style === 'flat' ? 0 : 0.03);
+      } else if (type === 'triangle') {
+        const h = size * (Math.sqrt(3) / 2);
+        const pts = [
+          [x, y - (2/3) * h],
+          [x - size / 2, y + (1/3) * h],
+          [x + size / 2, y + (1/3) * h]
+        ];
+        brush.polygon(pts);
+      } else if (type === 'polygon') {
+        const pts = [];
+        for (let i = 0; i < 6; i++) {
+          const a = (i * 60 + angle) * (Math.PI / 180);
+          pts.push([x + (size / 2) * Math.cos(a), y + (size / 2) * Math.sin(a)]);
+        }
+        brush.polygon(pts);
+      }
+    }
+
+    function drawSingleShape(shape, style, colors, bleed, hatchDist) {
+      const cx = CANVAS_WIDTH / 2;
+      const cy = CANVAS_HEIGHT / 2;
+      drawPrimitive(shape, cx, cy, 320, colors[0], colors[3], style, bleed, hatchDist, 30);
+    }
+
+    function drawComposition(style, colors, bleed, hatchDist) {
+      // 1. Rectángulo de fondo
+      drawPrimitive('rect', 260, 260, 270, colors[1], colors[4], style, bleed, hatchDist, 45);
+      // 2. Círculo intermedio
+      drawPrimitive('circle', 440, 270, 210, colors[0], colors[3], style, bleed, hatchDist, 120);
+      // 3. Triángulo superpuesto
+      drawPrimitive('triangle', 330, 450, 250, colors[2], colors[4], style, bleed, hatchDist, 90);
+      // 4. Polígono de acento
+      drawPrimitive('polygon', 490, 470, 150, colors[3], colors[0], style, bleed, hatchDist, 15);
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
