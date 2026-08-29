@@ -150,32 +150,19 @@
                 </div>
             </div>
 
-            <!-- Active Pattern Info & In-Pattern Card Pagination -->
+            <!-- Active Pattern Info & Navigation -->
             <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
                 <!-- Info / Taxonomy Modal Toggle -->
                 <button onclick="toggleIntroModal()" class="px-3 py-1.5 bg-sky-100 hover:bg-sky-200 text-sky-800 rounded-xl text-xs font-bold border border-sky-300 transition-all flex items-center gap-1.5 shadow-sm active:scale-95">
                     <span>ℹ️</span> <span>Taxonomy Info</span>
                 </button>
 
-                <!-- Pattern Pagination Controls -->
-                <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-300 gap-1.5 shadow-inner">
-                    <button onclick="prevCardsPage()" id="prev-page-btn" class="px-2.5 py-1 bg-white hover:bg-sky-50 text-sky-900 rounded-lg text-xs font-bold shadow-sm transition disabled:opacity-40 disabled:pointer-events-none" title="Previous 4 cards">
-                        ◀
-                    </button>
-                    <span id="page-indicator" class="text-xs font-bold text-slate-700 px-2 select-none min-w-[75px] text-center">
-                        Cards 1-4
-                    </span>
-                    <button onclick="nextCardsPage()" id="next-page-btn" class="px-2.5 py-1 bg-white hover:bg-sky-50 text-sky-900 rounded-lg text-xs font-bold shadow-sm transition disabled:opacity-40 disabled:pointer-events-none" title="Next 4 cards">
-                        ▶
-                    </button>
-                </div>
-
                 <!-- Pattern Prev/Next Switchers -->
-                <div class="flex items-center gap-1">
-                    <button onclick="prevPattern()" class="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow transition flex items-center gap-1 active:scale-95">
+                <div class="flex items-center gap-1.5">
+                    <button onclick="prevPattern()" class="px-3.5 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow transition flex items-center gap-1 active:scale-95">
                         <span>◀ Prev Pattern</span>
                     </button>
-                    <button onclick="nextPattern()" class="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow transition flex items-center gap-1 active:scale-95">
+                    <button onclick="nextPattern()" class="px-3.5 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow transition flex items-center gap-1 active:scale-95">
                         <span>Next Pattern ▶</span>
                     </button>
                 </div>
@@ -1483,37 +1470,43 @@
             });
         }
 
-        function setPattern(idx) {
+        function setPattern(idx, targetPage = 0) {
             if (idx < 0) idx = canonicalPatterns.length - 1;
             if (idx >= canonicalPatterns.length) idx = 0;
             currentPatternIndex = idx;
-            currentCardsPage = 0;
+            currentCardsPage = targetPage;
             renderApp();
         }
 
         function nextPattern() {
-            setPattern(currentPatternIndex + 1);
-        }
-
-        function prevPattern() {
-            setPattern(currentPatternIndex - 1);
-        }
-
-        function nextCardsPage() {
             const currentPat = canonicalPatterns[currentPatternIndex];
             const regularDevices = devices.filter(d => !d.isIntro);
             const patternDevices = regularDevices.filter(d => (deviceMechanismPatterns[d.name] || "General") === currentPat);
-            const maxPages = Math.ceil(patternDevices.length / CARDS_PER_PAGE);
-            if (currentCardsPage < maxPages - 1) {
+            const totalPages = Math.ceil(patternDevices.length / CARDS_PER_PAGE);
+
+            if (currentCardsPage < totalPages - 1) {
                 currentCardsPage++;
                 renderApp();
+            } else {
+                setPattern(currentPatternIndex + 1, 0);
             }
         }
 
-        function prevCardsPage() {
+        function prevPattern() {
             if (currentCardsPage > 0) {
                 currentCardsPage--;
                 renderApp();
+            } else {
+                let prevIdx = currentPatternIndex - 1;
+                if (prevIdx < 0) prevIdx = canonicalPatterns.length - 1;
+                
+                const prevPat = canonicalPatterns[prevIdx];
+                const regularDevices = devices.filter(d => !d.isIntro);
+                const prevDevices = regularDevices.filter(d => (deviceMechanismPatterns[d.name] || "General") === prevPat);
+                const prevTotalPages = Math.ceil(prevDevices.length / CARDS_PER_PAGE);
+                const targetPage = Math.max(0, prevTotalPages - 1);
+
+                setPattern(prevIdx, targetPage);
             }
         }
 
@@ -1539,19 +1532,9 @@
             // Update Top Fused Header
             const heroIcon = document.getElementById('hero-pattern-icon');
             const heroTitle = document.getElementById('hero-pattern-title');
-            const pageIndicator = document.getElementById('page-indicator');
-            const prevPageBtn = document.getElementById('prev-page-btn');
-            const nextPageBtn = document.getElementById('next-page-btn');
 
             if (heroIcon) heroIcon.textContent = currentIcon;
             if (heroTitle) heroTitle.textContent = currentPat;
-
-            if (pageIndicator) {
-                if (totalCards === 0) pageIndicator.textContent = '0 cards';
-                else pageIndicator.textContent = `Cards ${startIdx + 1}-${endIdx} of ${totalCards}`;
-            }
-            if (prevPageBtn) prevPageBtn.disabled = currentCardsPage === 0;
-            if (nextPageBtn) nextPageBtn.disabled = currentCardsPage >= totalPages - 1 || totalCards <= CARDS_PER_PAGE;
 
             // Render 4 Cards in Viewport
             const viewport = document.getElementById('cards-viewport');
