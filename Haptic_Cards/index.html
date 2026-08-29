@@ -1442,16 +1442,11 @@
             return `
             <div class="mb-3 pb-2.5 bg-white/90 rounded-lg p-2.5 border border-slate-200 shadow-sm">
                 <div class="flex items-center justify-between mb-1.5">
-                    <span class="text-[9.5px] font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1">
-                        <span>⚡</span> Haptic Versatility
+                    <span class="text-[9.5px] font-bold text-gray-500 uppercase tracking-wider">
+                        Haptic Versatility
                     </span>
-                    <div class="flex items-center gap-1" title="${score} of 10 canonical sensations verified in audit (${score}/5 stars)">
-                        <div class="flex items-center">
-                            ${starsHTML}
-                        </div>
-                        <span class="text-[11px] font-bold text-gray-800 ml-0.5">
-                            ${score}<span class="text-[10px] font-normal text-gray-500">/5</span>
-                        </span>
+                    <div class="flex items-center" title="${score} of 10 canonical sensations verified in audit">
+                        ${starsHTML}
                     </div>
                 </div>
 
@@ -1685,20 +1680,6 @@
                                             </p>
                                          </div>
                    
-                                        <!-- Haptic Modality Row -->
-                                        <div class="mb-2.5 pb-2 border-b border-gray-200">
-                                             <h3 class="text-[11px] font-semibold text-gray-500 uppercase tracking-wider mb-1">Haptic Modality</h3>
-                                             <div class="grid grid-cols-2 gap-2 text-xs">
-                                                 <div>
-                                                     <h4 class="text-[10px] font-bold text-gray-600 mb-0.5">Cutaneous</h4>
-                                                     <div class="flex flex-wrap gap-0.5">${cutaneousTagsHTML}</div>
-                                                 </div>
-                                                 <div>
-                                                     <h4 class="text-[10px] font-bold text-gray-600 mb-0.5">Kinesthetic</h4>
-                                                     <div class="flex flex-wrap gap-0.5">${kinestheticTagsHTML}</div>
-                                                 </div>
-                                             </div>
-                                        </div>
                                     </div>
 
                                     <!-- 2. Research Focus Tab Content -->
