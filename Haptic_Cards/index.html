@@ -212,7 +212,7 @@
     </div>
 
     <script>
-        const localLastUpdated = "2026-08-30  T16:36:42  Z";
+        const localLastUpdated = "2026-08-30  T16:43:37  Z";
 
         const devices = [
         {
@@ -1467,15 +1467,9 @@
             } else if (isVideo) {
                 mediaHTML = `<video src="${currentMedia.src}" class="w-full h-44 object-cover bg-black" autoplay loop muted playsinline controls></video>`;
             } else {
-                // Carousel position 1 color filter: #fd5321
-                const overlayHTML = normalizedIndex === 0 
-                    ? `<div class="absolute inset-0 bg-gradient-to-t from-[#fd5321]/80 via-[#fd5321]/40 to-[#fd5321]/15 mix-blend-multiply opacity-85 hover:opacity-0 transition-opacity duration-300 pointer-events-none"></div>`
-                    : '';
-                
                 mediaHTML = `
                 <div class="relative w-full h-44 overflow-hidden group">
                     <img src="${currentMedia.src}" alt="Haptic Controller" class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" onerror="this.onerror=null; this.parentElement.parentElement.innerHTML='<div class=\'h-44 w-full bg-sky-900 flex flex-col items-center justify-center text-sky-200\'><span class=\'text-3xl mb-1\'>${categorySymbol}</span><span class=\'text-xs font-medium tracking-wide text-sky-300\'>Active Haptic Device</span></div>';">
-                    ${overlayHTML}
                 </div>`;
             }
 
