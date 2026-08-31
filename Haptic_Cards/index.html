@@ -217,7 +217,7 @@
     </div>
 
     <script>
-        const localLastUpdated = "2026-08-30  T19:50:36  Z";
+        const localLastUpdated = "2026-08-31  T18:32:36  Z";
 
         const devices = [
         {
@@ -1472,9 +1472,10 @@
             } else if (isVideo) {
                 mediaHTML = `<video src="${currentMedia.src}" class="w-full h-44 object-cover bg-black" autoplay loop muted playsinline controls></video>`;
             } else {
+                const isFirstImage = normalizedIndex === 0;
                 mediaHTML = `
-                <div class="relative w-full h-44 overflow-hidden group">
-                    <img src="${currentMedia.src}" alt="Haptic Controller" class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" onerror="this.onerror=null; this.parentElement.parentElement.innerHTML='<div class=\'h-44 w-full bg-[#DFE2DC] flex flex-col items-center justify-center text-[#001011]\'><span class=\'text-3xl mb-1\'>${categorySymbol}</span><span class=\'text-xs font-medium tracking-wide text-[#001011]/80\'>Active Haptic Controller</span></div>';">
+                <div class="relative w-full h-44 overflow-hidden group bg-[#DFE2DC]">
+                    <img src="${currentMedia.src}" alt="Haptic Controller" class="w-full h-44 object-cover transition-all duration-500 ease-out group-hover:scale-105 ${isFirstImage ? 'filter grayscale contrast-[1.08] brightness-[0.98] group-hover:grayscale-0' : ''}" loading="lazy" onerror="this.onerror=null; this.parentElement.parentElement.innerHTML='<div class=\'h-44 w-full bg-[#DFE2DC] flex flex-col items-center justify-center text-[#001011]\'><span class=\'text-3xl mb-1\'>${categorySymbol}</span><span class=\'text-xs font-medium tracking-wide text-[#001011]/80\'>Active Haptic Controller</span></div>';">
                 </div>`;
             }
 
