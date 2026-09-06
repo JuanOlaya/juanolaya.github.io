@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sich vorstellen - Angela | Deutsch lernen A1/A2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Kalam:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f7f3ee 0%, #edf3f7 50%, #f3f8f5 100%);
+            --card-bg: rgba(255, 255, 255, 0.88);
+            --card-border: rgba(230, 235, 240, 0.8);
+            --text-main: #2d3748;
+            --text-muted: #718096;
+            --primary: #4a6fa5;
+            --primary-light: #e9f0f8;
+            --accent: #e07a5f;
+            --accent-soft: #fdf0ec;
+            --success: #38a169;
+            --success-soft: #f0fff4;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 20px 40px -15px rgba(65, 80, 105, 0.12);
+            --radius-xl: 24px;
+            --radius-md: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 16px 40px;
+        }
+
+        .header {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            background: white;
+            border-radius: 999px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .level-badge {
+            background: #e2e8f0;
+            color: #4a5568;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 999px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Video / Presentation Container */
+        .presentation-card {
+            width: 100%;
+            max-width: 900px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Progress Bar */
+        .progress-section {
+            padding: 20px 28px 12px;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .progress-segments {
+            display: flex;
+            gap: 5px;
+            width: 100%;
+            height: 6px;
+        }
+
+        .progress-step {
+            flex: 1;
+            height: 100%;
+            background: #e2e8f0;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .progress-step.completed {
+            background: var(--primary);
+            opacity: 0.6;
+        }
+
+        .progress-step.active {
+            background: var(--accent);
+            opacity: 1;
+            transform: scaleY(1.3);
+        }
+
+        /* Subtitle Stage / Screen */
+        .stage {
+            min-height: 280px;
+            padding: 36px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.8));
+        }
+
+        .category-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            background: var(--primary-light);
+            padding: 5px 14px;
+            border-radius: 999px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .german-text-wrap {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .german-text {
+            font-size: 1.85rem;
+            line-height: 1.45;
+            font-weight: 700;
+            color: var(--text-main);
+            transition: all 0.25s ease;
+            max-width: 780px;
+        }
+
+        @media (max-width: 600px) {
+            .german-text {
+                font-size: 1.35rem;
+            }
+        }
+
+        .spanish-text {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: #64748b;
+            max-width: 700px;
+            line-height: 1.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .spanish-text.hidden {
+            display: none;
+        }
+
+        /* Audio Visualizer Wave */
+        .audio-wave {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            height: 20px;
+            margin-top: 18px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .audio-wave.playing {
+            opacity: 1;
+        }
+
+        .wave-bar {
+            width: 3px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 2px;
+            animation: bounce 0.8s ease-in-out infinite alternate;
+        }
+
+        .wave-bar:nth-child(2) { animation-delay: 0.15s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.3s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.45s; }
+        .wave-bar:nth-child(5) { animation-delay: 0.6s; }
+
+        @keyframes bounce {
+            from { height: 4px; }
+            to { height: 18px; }
+        }
+
+        /* Grammar Note Drawer */
+        .grammar-box {
+            margin: 0 28px 18px;
+            padding: 14px 18px;
+            background: #fff9f6;
+            border-left: 4px solid var(--accent);
+            border-radius: var(--radius-md);
+            font-size: 0.92rem;
+            line-height: 1.5;
+            color: #5c4d47;
+            display: none;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .grammar-box.show {
+            display: block;
+        }
+
+        .grammar-title {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Controls Section */
+        .controls-section {
+            padding: 18px 28px 24px;
+            background: rgba(255, 255, 255, 0.75);
+            border-top: 1px solid rgba(226, 232, 240, 0.8);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .primary-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .ctrl-btn {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: var(--text-main);
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+
+        .ctrl-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+            color: var(--primary);
+        }
+
+        .ctrl-btn.play-btn {
+            width: 62px;
+            height: 62px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 20px rgba(224, 122, 95, 0.35);
+        }
+
+        .ctrl-btn.play-btn:hover {
+            transform: scale(1.06);
+            background: #d4684c;
+        }
+
+        /* Settings Bar */
+        .settings-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed #e2e8f0;
+            font-size: 0.88rem;
+        }
+
+        .segmented-group {
+            display: inline-flex;
+            background: #edf2f7;
+            padding: 3px;
+            border-radius: 999px;
+            gap: 2px;
+        }
+
+        .seg-btn {
+            border: none;
+            background: transparent;
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .seg-btn.active {
+            background: white;
+            color: var(--text-main);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+
+        .toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-btn.active {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Sentences Overview Drawer */
+        .overview-section {
+            width: 100%;
+            max-width: 900px;
+            margin-top: 24px;
+            background: white;
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-sm);
+            padding: 24px 28px;
+        }
+
+        .overview-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sentence-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sentence-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid #edf2f7;
+            background: #fafbfc;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sentence-item:hover {
+            background: var(--primary-light);
+            border-color: #cbd5e1;
+            transform: translateX(3px);
+        }
+
+        .sentence-item.active {
+            background: #fdf2ee;
+            border-color: var(--accent);
+        }
+
+        .sentence-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .item-num {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .item-de {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .item-es {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .item-play-icon {
+            color: var(--primary);
+            font-size: 1.1rem;
+            opacity: 0.7;
+            margin-left: 12px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <a href="a1.html" class="back-link">
+            ← Zurück zu Sprechen A1
+        </a>
+        <span class="level-badge">A1 / A2 • Sich vorstellen</span>
+    </header>
+
+    <!-- Main Presentation Player -->
+    <main class="presentation-card">
+        
+        <!-- Progress Bar & Indicator -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <span id="progress-text">Satz 1 von 15</span>
+                <span id="percent-text">7% abgeschlossen</span>
+            </div>
+            <div class="progress-segments" id="progress-segments">
+                <!-- 15 segments injected via JS -->
+            </div>
+        </div>
+
+        <!-- Stage Subtitles -->
+        <div class="stage">
+            <div class="category-tag" id="category-tag">Begrüßung & Vorstellung</div>
+            
+            <div class="german-text-wrap">
+                <h1 class="german-text" id="german-text">Guten Tag. Ich möchte mich kurz vorstellen.</h1>
+            </div>
+
+            <p class="spanish-text" id="spanish-text">Buenos días. Me gustaría presentarme brevemente.</p>
+
+            <div class="audio-wave" id="audio-wave">
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+            </div>
+        </div>
+
+        <!-- Grammar Note Box -->
+        <div class="grammar-box" id="grammar-box">
+            <div class="grammar-title">💡 Grammatik & Tipps:</div>
+            <div id="grammar-content"></div>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="controls-section">
+            <div class="primary-controls">
+                <button class="ctrl-btn" id="btn-prev" title="Vorheriger Satz (←)">⏮</button>
+                <button class="ctrl-btn play-btn" id="btn-play" title="Abspielen / Pause (Leertaste)">▶</button>
+                <button class="ctrl-btn" id="btn-next" title="Nächster Satz (→)">⏭</button>
+                <button class="ctrl-btn" id="btn-repeat" title="Wiederholen (R)">🔁</button>
+            </div>
+
+            <!-- Settings & Study Mode Bar -->
+            <div class="settings-bar">
+                <!-- Study Mode -->
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-weight: 600; color: var(--text-muted);">Modus:</span>
+                    <div class="segmented-group">
+                        <button class="seg-btn active" id="mode-continuous">Video / Fortlaufend</button>
+                        <button class="seg-btn" id="mode-shadowing">Shadowing / Pause</button>
+                    </div>
+                </div>
+
+                <!-- Speed Control -->
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-weight: 600; color: var(--text-muted);">Geschwindigkeit:</span>
+                    <div class="segmented-group">
+                        <button class="seg-btn" data-speed="0.75">0.75x</button>
+                        <button class="seg-btn" data-speed="0.9">0.9x</button>
+                        <button class="seg-btn active" data-speed="1.0">1.0x</button>
+                    </div>
+                </div>
+
+                <!-- Toggles -->
+                <div style="display: flex; gap: 8px;">
+                    <button class="toggle-btn active" id="toggle-spanish">🇪🇸 Übersetzung</button>
+                    <button class="toggle-btn" id="toggle-grammar">💡 Grammatik</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Overview List -->
+    <section class="overview-section">
+        <div class="overview-title">
+            <span>Alle Sätze im Überblick (15)</span>
+            <span style="font-size: 0.85rem; font-weight: 500; color: var(--text-muted);">Klicke auf einen Satz zum Anhören</span>
+        </div>
+        <div class="sentence-list" id="sentence-list">
+            <!-- Populated via JS -->
+        </div>
+    </section>
+
+    <!-- Audio Element -->
+    <audio id="audio-player" preload="auto"></audio>
+
+    <script>
+        const sentences = [
+            {
+                id: 1,
+                category: "1. Begrüßung & Vorstellung",
+                de: "Guten Tag. Ich möchte mich kurz vorstellen.",
+                es: "Buenos días. Me gustaría presentarme brevemente.",
+                grammar: "<b>Ich möchte mich vorstellen</b>: verbo reflexivo separable (<i>sich vorstellen</i>) con verbo modal <i>möchte</i> en posición 2 y el infinitivo al final.",
+                filename: "01_guten_tag.mp3"
+            },
+            {
+                id: 2,
+                category: "2. Persönliche Daten",
+                de: "Ich heiße Angela und bin 38 Jahre alt.",
+                es: "Me llamo Angela y tengo 38 años.",
+                grammar: "<b>heißen</b> (llamarse). En alemán la edad se expresa con el verbo ser (<b>sein</b>): <i>ich bin ... Jahre alt</i> (nunca con haben).",
+                filename: "02_heisse_angela.mp3"
+            },
+            {
+                id: 3,
+                category: "3. Herkunft & Wohnort",
+                de: "Ich komme aus Kolumbien und lebe seit vier Jahren in Deutschland.",
+                es: "Vengo de Colombia y vivo desde hace cuatro años en Alemania.",
+                grammar: "<b>aus</b> rige dativo (país de origen). <b>seit</b> rige dativo plural: <i>seit vier Jahren</i> (se añade -n en el dativo plural).",
+                filename: "03_komme_aus_kolumbien.mp3"
+            },
+            {
+                id: 4,
+                category: "3. Herkunft & Wohnort",
+                de: "Ich wohne in Berlin.",
+                es: "Vivo en Berlín.",
+                grammar: "<b>wohnen in</b> + Dativo para indicar lugar estático de residencia.",
+                filename: "04_wohne_in_berlin.mp3"
+            },
+            {
+                id: 5,
+                category: "4. Familie",
+                de: "Ich bin verheiratet und habe eine kleine Tochter.",
+                es: "Estoy casada y tengo una hija pequeña.",
+                grammar: "<b>eine kleine Tochter</b>: Acusativo femenino con adjetivo con terminación <b>-e</b>.",
+                filename: "05_verheiratet_tochter.mp3"
+            },
+            {
+                id: 6,
+                category: "4. Familie",
+                de: "Sie heißt Antonella.",
+                es: "Ella se llama Antonella.",
+                grammar: "Pronombre <b>Sie</b> (ella, tercera persona singular) + <i>heißt</i>.",
+                filename: "06_heisst_antonella.mp3"
+            },
+            {
+                id: 7,
+                category: "5. Beruf & Erfahrung",
+                de: "Ich bin Rechtsanwältin von Beruf.",
+                es: "Soy abogada de profesión.",
+                grammar: "Sufijo femenino de profesión <b>-in</b> (<i>die Rechtsanwältin</i> / masculino: <i>der Rechtsanwalt</i>). Frase fija: <i>... von Beruf</i>.",
+                filename: "07_rechtsanwaeltin.mp3"
+            },
+            {
+                id: 8,
+                category: "5. Beruf & Erfahrung",
+                de: "In Kolumbien habe ich als Rechtsanwältin gearbeitet.",
+                es: "En Colombia he trabajado / trabajé como abogada.",
+                grammar: "<b>Perfekt</b> con verbo auxiliar <i>haben</i> en posición 2 y participio pasado regular <i>gearbeitet</i> al final de la oración. Preposición <b>als</b> para profesiones.",
+                filename: "08_als_rechtsanwaeltin_gearbeitet.mp3"
+            },
+            {
+                id: 9,
+                category: "5. Beruf & Erfahrung",
+                de: "Ich habe dort viele Jahre Berufserfahrung gesammelt.",
+                es: "Allí he acumulado muchos años de experiencia profesional.",
+                grammar: "Palabra compuesta: <b>der Beruf</b> (profesión) + <b>die Erfahrung</b> (experiencia) = <i>die Berufserfahrung</i>.",
+                filename: "09_berufserfahrung.mp3"
+            },
+            {
+                id: 10,
+                category: "6. Motivation & Zukunft",
+                de: "Zurzeit lerne ich Deutsch, weil ich in Deutschland leben und arbeiten möchte.",
+                es: "Actualmente estoy aprendiendo alemán porque me gustaría vivir y trabajar en Alemania.",
+                grammar: "Conector subordinante <b>weil</b>: envía todos los verbos al final de la oración (<i>leben und arbeiten möchte</i>).",
+                filename: "10_zurzeit_lerne_ich.mp3"
+            },
+            {
+                id: 11,
+                category: "6. Motivation & Zukunft",
+                de: "Deutsch ist für mich sehr wichtig, deshalb möchte ich meine Deutschkenntnisse weiter verbessern.",
+                es: "El alemán es muy importante para mí, por eso me gustaría seguir mejorando mis conocimientos de alemán.",
+                grammar: "Conector <b>deshalb</b> (por eso): va en posición 1 y genera inversión (el verbo <i>möchte</i> va inmediatamente después).",
+                filename: "11_deutsch_sehr_wichtig.mp3"
+            },
+            {
+                id: 12,
+                category: "7. Freizeit & Hobbys",
+                de: "In meiner Freizeit verbringe ich gerne Zeit mit meiner Familie.",
+                es: "En mi tiempo libre me gusta pasar tiempo con mi familia.",
+                grammar: "<b>mit</b> rige siempre Dativo femenino: <i>mit meiner Familie</i>. <b>gerne</b> señala agrado o gusto al realizar la acción.",
+                filename: "12_freizeit_familie.mp3"
+            },
+            {
+                id: 13,
+                category: "7. Freizeit & Hobbys",
+                de: "Ich reise gerne und interessiere mich für andere Kulturen.",
+                es: "Me gusta viajar y me intereso por otras culturas.",
+                grammar: "Verbo con régimen preposicional fijo: <b>sich interessieren für + Acusativo</b>: <i>interessiere mich für andere Kulturen</i>.",
+                filename: "13_reise_gerne.mp3"
+            },
+            {
+                id: 14,
+                category: "8. Zukunft & Abschluss",
+                de: "In Zukunft möchte ich mein Deutsch weiter verbessern und wieder als Rechtsanwältin arbeiten.",
+                es: "En el futuro me gustaría seguir mejorando mi alemán y volver a trabajar como abogada.",
+                grammar: "<b>wieder</b> (de nuevo/otra vez). Infinitivos coordinados con <i>möchte</i>: <i>weiter verbessern und ... arbeiten</i>.",
+                filename: "14_in_zukunft.mp3"
+            },
+            {
+                id: 15,
+                category: "8. Zukunft & Abschluss",
+                de: "Vielen Dank.",
+                es: "Muchas gracias.",
+                grammar: "Expresión de cortesía fija: Acusativo masculino abreviado (<i>Ich wünsche Ihnen vielen Dank</i>).",
+                filename: "15_vielen_dank.mp3"
+            }
+        ];
+
+        let currentIndex = 0;
+        let isPlaying = false;
+        let studyMode = 'continuous'; // 'continuous' or 'shadowing'
+        let playbackRate = 1.0;
+        let showSpanish = true;
+        let showGrammar = false;
+
+        const audioPlayer = document.getElementById('audio-player');
+        const btnPlay = document.getElementById('btn-play');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        const btnRepeat = document.getElementById('btn-repeat');
+        const germanText = document.getElementById('german-text');
+        const spanishText = document.getElementById('spanish-text');
+        const categoryTag = document.getElementById('category-tag');
+        const progressText = document.getElementById('progress-text');
+        const percentText = document.getElementById('percent-text');
+        const progressSegments = document.getElementById('progress-segments');
+        const audioWave = document.getElementById('audio-wave');
+        const grammarBox = document.getElementById('grammar-box');
+        const grammarContent = document.getElementById('grammar-content');
+        const toggleSpanishBtn = document.getElementById('toggle-spanish');
+        const toggleGrammarBtn = document.getElementById('toggle-grammar');
+        const modeContinuousBtn = document.getElementById('mode-continuous');
+        const modeShadowingBtn = document.getElementById('mode-shadowing');
+        const sentenceList = document.getElementById('sentence-list');
+
+        // Initialize Segments & List
+        function initUI() {
+            progressSegments.innerHTML = '';
+            sentenceList.innerHTML = '';
+
+            sentences.forEach((s, idx) => {
+                // Segment
+                const seg = document.createElement('div');
+                seg.className = 'progress-step' + (idx === 0 ? ' active' : '');
+                seg.onclick = () => selectSentence(idx, true);
+                seg.title = `Satz ${idx + 1}: ${s.de}`;
+                progressSegments.appendChild(seg);
+
+                // List item
+                const item = document.createElement('div');
+                item.className = 'sentence-item' + (idx === 0 ? ' active' : '');
+                item.id = `item-${idx}`;
+                item.onclick = () => selectSentence(idx, true);
+                item.innerHTML = `
+                    <div class="sentence-info">
+                        <span class="item-num">Satz ${idx + 1} • ${s.category.split('. ')[1] || s.category}</span>
+                        <span class="item-de">${s.de}</span>
+                        <span class="item-es">${s.es}</span>
+                    </div>
+                    <span class="item-play-icon">▶</span>
+                `;
+                sentenceList.appendChild(item);
+            });
+
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const current = sentences[currentIndex];
+            germanText.textContent = current.de;
+            spanishText.textContent = current.es;
+            categoryTag.textContent = current.category;
+            grammarContent.innerHTML = current.grammar;
+
+            progressText.textContent = `Satz ${currentIndex + 1} von ${sentences.length}`;
+            const pct = Math.round(((currentIndex + 1) / sentences.length) * 100);
+            percentText.textContent = `${pct}% abgeschlossen`;
+
+            // Update progress segments
+            const segs = progressSegments.children;
+            for (let i = 0; i < segs.length; i++) {
+                segs[i].className = 'progress-step';
+                if (i < currentIndex) segs[i].classList.add('completed');
+                else if (i === currentIndex) segs[i].classList.add('active');
+            }
+
+            // Update list active
+            const items = sentenceList.children;
+            for (let i = 0; i < items.length; i++) {
+                items[i].classList.toggle('active', i === currentIndex);
+            }
+
+            // Scroll active item into view smoothly if list is long
+            const activeItem = document.getElementById(`item-${currentIndex}`);
+            if (activeItem && isPlaying) {
+                activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+
+            // Audio source
+            const audioSrc = `audio/angela/${current.filename}`;
+            if (audioPlayer.src !== new URL(audioSrc, window.location.href).href) {
+                audioPlayer.src = audioSrc;
+                audioPlayer.playbackRate = playbackRate;
+            }
+        }
+
+        function playCurrent() {
+            audioPlayer.playbackRate = playbackRate;
+            audioPlayer.play().then(() => {
+                isPlaying = true;
+                btnPlay.textContent = '⏸';
+                audioWave.classList.add('playing');
+            }).catch(err => {
+                console.warn('Audio play prevented:', err);
+            });
+        }
+
+        function pauseCurrent() {
+            audioPlayer.pause();
+            isPlaying = false;
+            btnPlay.textContent = '▶';
+            audioWave.classList.remove('playing');
+        }
+
+        function selectSentence(idx, autoPlay = false) {
+            if (idx < 0 || idx >= sentences.length) return;
+            currentIndex = idx;
+            updateDisplay();
+            if (autoPlay || isPlaying) {
+                playCurrent();
+            } else {
+                pauseCurrent();
+            }
+        }
+
+        // Event Listeners
+        btnPlay.onclick = () => {
+            if (isPlaying) {
+                pauseCurrent();
+            } else {
+                playCurrent();
+            }
+        };
+
+        btnPrev.onclick = () => {
+            if (currentIndex > 0) {
+                selectSentence(currentIndex - 1, isPlaying);
+            }
+        };
+
+        btnNext.onclick = () => {
+            if (currentIndex < sentences.length - 1) {
+                selectSentence(currentIndex + 1, isPlaying);
+            }
+        };
+
+        btnRepeat.onclick = () => {
+            audioPlayer.currentTime = 0;
+            playCurrent();
+        };
+
+        // Audio ended handler
+        audioPlayer.onended = () => {
+            audioWave.classList.remove('playing');
+
+            if (studyMode === 'continuous') {
+                if (currentIndex < sentences.length - 1) {
+                    setTimeout(() => {
+                        selectSentence(currentIndex + 1, true);
+                    }, 600);
+                } else {
+                    pauseCurrent();
+                }
+            } else {
+                // Shadowing mode: pause and let student repeat
+                pauseCurrent();
+            }
+        };
+
+        // Speed selectors
+        document.querySelectorAll('[data-speed]').forEach(btn => {
+            btn.onclick = () => {
+                document.querySelectorAll('[data-speed]').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                playbackRate = parseFloat(btn.dataset.speed);
+                audioPlayer.playbackRate = playbackRate;
+            };
+        });
+
+        // Mode selectors
+        modeContinuousBtn.onclick = () => {
+            studyMode = 'continuous';
+            modeContinuousBtn.classList.add('active');
+            modeShadowingBtn.classList.remove('active');
+        };
+
+        modeShadowingBtn.onclick = () => {
+            studyMode = 'shadowing';
+            modeShadowingBtn.classList.add('active');
+            modeContinuousBtn.classList.remove('active');
+        };
+
+        // Toggles
+        toggleSpanishBtn.onclick = () => {
+            showSpanish = !showSpanish;
+            toggleSpanishBtn.classList.toggle('active', showSpanish);
+            spanishText.classList.toggle('hidden', !showSpanish);
+        };
+
+        toggleGrammarBtn.onclick = () => {
+            showGrammar = !showGrammar;
+            toggleGrammarBtn.classList.toggle('active', showGrammar);
+            grammarBox.classList.toggle('show', showGrammar);
+        };
+
+        // Keyboard Shortcuts
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                btnPlay.click();
+            } else if (e.code === 'ArrowRight') {
+                e.preventDefault();
+                btnNext.click();
+            } else if (e.code === 'ArrowLeft') {
+                e.preventDefault();
+                btnPrev.click();
+            } else if (e.key.toLowerCase() === 'r') {
+                btnRepeat.click();
+            }
+        });
+
+        // Startup
+        initUI();
+    </script>
+</body>
+</html>
