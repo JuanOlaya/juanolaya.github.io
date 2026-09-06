@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sich vorstellen - Angela | Deutsch lernen A1/A2</title>
+    <title>Sich vorstellen - Angela | Deutsch lernen B1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Kalam:wght@700&display=swap" rel="stylesheet">
@@ -138,7 +138,6 @@
         .progress-step.active {
             background: var(--accent);
             opacity: 1;
-            transform: scaleY(1.3);
         }
 
         /* Subtitle Stage / Screen */
@@ -385,22 +384,48 @@
             border-radius: var(--radius-xl);
             border: 1px solid var(--card-border);
             box-shadow: var(--shadow-sm);
-            padding: 24px 28px;
+            padding: 18px 24px;
+            transition: all 0.2s ease;
         }
 
-        .overview-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 16px;
+        .overview-header {
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            user-select: none;
+        }
+
+        .overview-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+        }
+
+        .overview-toggle-icon {
+            font-size: 0.85rem;
+            transition: transform 0.25s ease;
+            color: var(--text-muted);
+        }
+
+        .overview-section.open .overview-toggle-icon {
+            transform: rotate(180deg);
         }
 
         .sentence-list {
-            display: flex;
+            display: none;
             flex-direction: column;
             gap: 10px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #edf2f7;
+        }
+
+        .overview-section.open .sentence-list {
+            display: flex;
         }
 
         .sentence-item {
@@ -470,7 +495,7 @@
         <a href="a1.html" class="back-link">
             ← Zurück zu Sprechen A1
         </a>
-        <span class="level-badge">A1 / A2 • Sich vorstellen</span>
+        <span class="level-badge">B1 • Sich vorstellen</span>
     </header>
 
     <!-- Main Presentation Player -->
@@ -495,7 +520,7 @@
                 <h1 class="german-text" id="german-text">Guten Tag. Ich möchte mich kurz vorstellen.</h1>
             </div>
 
-            <p class="spanish-text" id="spanish-text">Buenos días. Me gustaría presentarme brevemente.</p>
+            <p class="spanish-text hidden" id="spanish-text">Buenos días. Me gustaría presentarme brevemente.</p>
 
             <div class="audio-wave" id="audio-wave">
                 <div class="wave-bar"></div>
@@ -544,7 +569,7 @@
 
                 <!-- Toggles -->
                 <div style="display: flex; gap: 8px;">
-                    <button class="toggle-btn active" id="toggle-spanish">🇪🇸 Übersetzung</button>
+                    <button class="toggle-btn" id="toggle-spanish">🇪🇸 Übersetzung</button>
                     <button class="toggle-btn" id="toggle-grammar">💡 Grammatik</button>
                 </div>
             </div>
@@ -552,11 +577,16 @@
 
     </main>
 
-    <!-- Overview List -->
-    <section class="overview-section">
-        <div class="overview-title">
-            <span>Alle Sätze im Überblick (15)</span>
-            <span style="font-size: 0.85rem; font-weight: 500; color: var(--text-muted);">Klicke auf einen Satz zum Anhören</span>
+    <!-- Overview Accordion (Closed by default) -->
+    <section class="overview-section" id="overview-section">
+        <div class="overview-header" id="overview-header">
+            <div class="overview-title">
+                <span>Alle Sätze im Überblick (15)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 0.82rem; font-weight: 500; color: var(--text-muted);">Klicken zum Einblenden</span>
+                <span class="overview-toggle-icon">▼</span>
+            </div>
         </div>
         <div class="sentence-list" id="sentence-list">
             <!-- Populated via JS -->
@@ -694,7 +724,7 @@
         let isPlaying = false;
         let studyMode = 'continuous'; // 'continuous' or 'shadowing'
         let playbackRate = 1.0;
-        let showSpanish = true;
+        let showSpanish = false;
         let showGrammar = false;
 
         const audioPlayer = document.getElementById('audio-player');
@@ -716,6 +746,12 @@
         const modeContinuousBtn = document.getElementById('mode-continuous');
         const modeShadowingBtn = document.getElementById('mode-shadowing');
         const sentenceList = document.getElementById('sentence-list');
+        const overviewSection = document.getElementById('overview-section');
+        const overviewHeader = document.getElementById('overview-header');
+
+        overviewHeader.onclick = () => {
+            overviewSection.classList.toggle('open');
+        };
 
         // Initialize Segments & List
         function initUI() {
@@ -772,12 +808,6 @@
             const items = sentenceList.children;
             for (let i = 0; i < items.length; i++) {
                 items[i].classList.toggle('active', i === currentIndex);
-            }
-
-            // Scroll active item into view smoothly if list is long
-            const activeItem = document.getElementById(`item-${currentIndex}`);
-            if (activeItem && isPlaying) {
-                activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
 
             // Audio source
