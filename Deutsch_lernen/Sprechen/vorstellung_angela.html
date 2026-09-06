@@ -156,16 +156,13 @@
         .category-tag {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             color: var(--primary);
             background: var(--primary-light);
-            padding: 5px 14px;
+            padding: 4px 12px;
             border-radius: 999px;
-            margin-bottom: 24px;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
         }
 
@@ -505,7 +502,7 @@
         <div class="progress-section">
             <div class="progress-header">
                 <span id="progress-text">Satz 1 von 15</span>
-                <span id="percent-text">7% abgeschlossen</span>
+                <span class="category-tag" id="category-tag">1. Begrüßung & Vorstellung</span>
             </div>
             <div class="progress-segments" id="progress-segments">
                 <!-- 15 segments injected via JS -->
@@ -514,8 +511,6 @@
 
         <!-- Stage Subtitles -->
         <div class="stage">
-            <div class="category-tag" id="category-tag">Begrüßung & Vorstellung</div>
-            
             <div class="german-text-wrap">
                 <h1 class="german-text" id="german-text">Guten Tag. Ich möchte mich kurz vorstellen.</h1>
             </div>
@@ -736,7 +731,6 @@
         const spanishText = document.getElementById('spanish-text');
         const categoryTag = document.getElementById('category-tag');
         const progressText = document.getElementById('progress-text');
-        const percentText = document.getElementById('percent-text');
         const progressSegments = document.getElementById('progress-segments');
         const audioWave = document.getElementById('audio-wave');
         const grammarBox = document.getElementById('grammar-box');
@@ -792,8 +786,6 @@
             grammarContent.innerHTML = current.grammar;
 
             progressText.textContent = `Satz ${currentIndex + 1} von ${sentences.length}`;
-            const pct = Math.round(((currentIndex + 1) / sentences.length) * 100);
-            percentText.textContent = `${pct}% abgeschlossen`;
 
             // Update progress segments
             const segs = progressSegments.children;
