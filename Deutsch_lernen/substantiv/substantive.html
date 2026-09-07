@@ -612,6 +612,13 @@
             font-size: 2.5rem;
             font-weight: 800;
             line-height: 1.1;
+            cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .modal-word:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
         }
 
         .modal-translation {
@@ -649,6 +656,25 @@
             font-size: 1.15rem;
             font-weight: 700;
             color: #f8fafc;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .modal-variant-word.is-clickable {
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .modal-variant-word.is-clickable:hover {
+            color: #93c5fd;
+        }
+
+        .modal-variant-word.is-clickable:hover .audio-icon {
+            opacity: 1;
+            transform: scale(1.15);
+            color: #93c5fd;
         }
 
         .modal-variant-translation {
@@ -678,6 +704,15 @@
             /* Slate 100 */
             font-weight: 600;
             margin-bottom: 8px;
+        }
+
+        .modal-example-de.is-clickable {
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .modal-example-de.is-clickable:hover {
+            color: #93c5fd;
         }
 
         .modal-example-es {
@@ -5747,6 +5782,41 @@
             return icon.firstElementChild;
         }
 
+        function createAudioIconSpan(text, title = 'Aussprache / Pronunciar') {
+            const span = document.createElement('span');
+            span.className = 'audio-icon';
+            span.title = title;
+            span.setAttribute('aria-label', title);
+            span.appendChild(createFilledSpeakerIcon());
+            span.onclick = (e) => {
+                e.stopPropagation();
+                speak(text);
+            };
+            return span;
+        }
+
+        function setModalVariantAudio(element, textToDisplay, textToSpeak, title = 'Aussprache / Pronunciar') {
+            element.innerHTML = '';
+            const textSpan = document.createElement('span');
+            textSpan.textContent = textToDisplay;
+            element.appendChild(textSpan);
+
+            if (textToSpeak) {
+                element.classList.add('is-clickable');
+                element.title = title;
+                element.onclick = (e) => {
+                    e.stopPropagation();
+                    speak(textToSpeak);
+                };
+                const audioIcon = createAudioIconSpan(textToSpeak, title);
+                element.appendChild(audioIcon);
+            } else {
+                element.classList.remove('is-clickable');
+                element.title = '';
+                element.onclick = null;
+            }
+        }
+
         function createCard(noun, level, highlightQuery = '') {
             const card = document.createElement('div');
             card.className = 'card';
@@ -5952,11 +6022,23 @@
                     pluralText = '—';
                 }
 
+                const canSpeakSingular = singularText && singularText !== '—';
+                const canSpeakPlural = pluralText && pluralText !== '—' && !pluralText.includes('nur Singular');
+                const wordPhrase = `${noun.article} ${noun.word}`;
+
+                const wordCell = `<span style="cursor:pointer;" title="Aussprache: ${escapeHtml(wordPhrase)}" onclick="speak('${escapeHtml(wordPhrase)}')">${escapeHtml(wordPhrase)}</span>`;
+                const singularCell = canSpeakSingular
+                    ? `<span style="cursor:pointer;" title="Aussprache: ${escapeHtml(singularText)}" onclick="speak('${escapeHtml(singularText)}')">${escapeHtml(singularText)}</span>`
+                    : escapeHtml(singularText);
+                const pluralCell = canSpeakPlural
+                    ? `<span style="cursor:pointer;" title="Aussprache: ${escapeHtml(pluralText)}" onclick="speak('${escapeHtml(pluralText)}')">${escapeHtml(pluralText)}</span>`
+                    : escapeHtml(pluralText);
+
                 return `
                     <tr>
-                        <td>${escapeHtml(`${noun.article} ${noun.word}`)}</td>
-                        <td>${escapeHtml(singularText)}</td>
-                        <td>${escapeHtml(pluralText)}</td>
+                        <td>${wordCell}</td>
+                        <td>${singularCell}</td>
+                        <td>${pluralCell}</td>
                     </tr>
                 `;
             }).join('');
@@ -5965,9 +6047,25 @@
         function renderModalContent(noun, level) {
             modalEmoji.textContent = noun.emoji;
             modalWord.innerHTML = `<span style="font-size:0.5em; display:block; margin-bottom:5px;">${noun.article}</span>${noun.word}`;
+            modalWord.title = `Aussprache: ${noun.article} ${noun.word}`;
+            modalWord.onclick = () => {
+                speak(`${noun.article} ${noun.word}`);
+            };
+
             modalTranslation.textContent = currentTranslationLang === 'en' ? noun.translation_en : noun.translation_es;
             modalLevel.textContent = level || '';
             modalExampleDe.textContent = noun.example_de || '-';
+            if (noun.example_de && noun.example_de !== '-') {
+                modalExampleDe.classList.add('is-clickable');
+                modalExampleDe.title = `Aussprache: ${noun.example_de}`;
+                modalExampleDe.onclick = () => {
+                    speak(noun.example_de);
+                };
+            } else {
+                modalExampleDe.classList.remove('is-clickable');
+                modalExampleDe.title = '';
+                modalExampleDe.onclick = null;
+            }
             modalExampleEs.textContent = noun.example_es || '-';
             modalHeader.style.backgroundColor = getColorForArticle(noun.article);
 
@@ -5990,13 +6088,14 @@
                     if (modalSingularLabel) {
                         modalSingularLabel.textContent = currentTranslationLang === 'en' ? 'Singular form' : 'Forma singular';
                     }
-                    modalSingularWord.textContent = `${singularVariant.article} ${singularVariant.word}`;
+                    const singularPhrase = `${singularVariant.article} ${singularVariant.word}`;
+                    setModalVariantAudio(modalSingularWord, singularPhrase, singularPhrase, `Aussprache: ${singularPhrase}`);
                 } else {
                     modalSingularBlock.hidden = false;
                     if (modalSingularLabel) {
                         modalSingularLabel.textContent = currentTranslationLang === 'en' ? 'Grammar' : 'Gramática';
                     }
-                    modalSingularWord.textContent = currentTranslationLang === 'en' ? 'Plural only (Pluraliatantum)' : 'Solo plural (Pluraliatantum)';
+                    setModalVariantAudio(modalSingularWord, currentTranslationLang === 'en' ? 'Plural only (Pluraliatantum)' : 'Solo plural (Pluraliatantum)', null);
                 }
             } else {
                 const pluralForm = getPluralDisplay(noun);
@@ -6005,29 +6104,30 @@
                     if (modalSingularLabel) {
                         modalSingularLabel.textContent = currentTranslationLang === 'en' ? 'Plural form' : 'Forma plural';
                     }
-                    modalSingularWord.textContent = pluralForm;
+                    setModalVariantAudio(modalSingularWord, pluralForm, pluralForm, `Aussprache: ${pluralForm}`);
                 } else if (pluralForm && (pluralForm.includes('nur Singular') || pluralForm === '—')) {
                     modalSingularBlock.hidden = false;
                     if (modalSingularLabel) {
                         modalSingularLabel.textContent = currentTranslationLang === 'en' ? 'Plural form' : 'Forma plural';
                     }
-                    modalSingularWord.textContent = currentTranslationLang === 'en' ? '— (Singular only)' : '— (Sin plural / Solo singular)';
+                    setModalVariantAudio(modalSingularWord, currentTranslationLang === 'en' ? '— (Singular only)' : '— (Sin plural / Solo singular)', null);
                 } else {
                     modalSingularBlock.hidden = true;
-                    modalSingularWord.textContent = '';
+                    setModalVariantAudio(modalSingularWord, '', null);
                 }
             }
 
             const feminineVariant = getFeminineVariant(noun);
             if (feminineVariant) {
                 modalFeminineBlock.hidden = false;
-                modalFeminineWord.textContent = `${feminineVariant.article} ${feminineVariant.word}`;
+                const femPhrase = `${feminineVariant.article} ${feminineVariant.word}`;
+                setModalVariantAudio(modalFeminineWord, femPhrase, femPhrase, `Aussprache: ${femPhrase}`);
                 modalFeminineTranslation.textContent = currentTranslationLang === 'en'
                     ? (feminineVariant.translation_en || '')
                     : (feminineVariant.translation_es || '');
             } else {
                 modalFeminineBlock.hidden = true;
-                modalFeminineWord.textContent = '';
+                setModalVariantAudio(modalFeminineWord, '', null);
                 modalFeminineTranslation.textContent = '';
             }
 
