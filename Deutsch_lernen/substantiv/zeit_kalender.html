@@ -16,24 +16,6 @@
 
             /* Light Mode Variables */
             --bg-body: #e5e7eb;
-<!DOCTYPE html>
-<html lang="de">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infografik: Zeit & Kalender</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* Article Colors (Constant) */
-            --der-blue: #3b82f6;
-            --die-red: #ef4444;
-            --das-green: #22c55e;
-            --accent-purple: #8b5cf6;
-
-            /* Light Mode Variables */
-            --bg-body: #e5e7eb;
             --bg-container: #ffffff;
             --text-main: #1f2937;
             --text-subtitle: #6b7280;
@@ -667,25 +649,34 @@
             color: #ecfdf5;
         }
 
-        /* --- Resumen de Preposiciones (Tarjetas Sobrias) --- */
+        /* --- Resumen de Preposiciones (Tarjetas Estructuradas con Pistas) --- */
         .prep-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
             margin-top: 20px;
         }
 
         .prep-card {
-            padding: 18px 20px;
+            padding: 16px 18px;
             border-radius: 16px;
             background: var(--bg-body);
             border: 2px dashed var(--section-border);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .prep-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            border-color: var(--accent-purple);
+        }
+
+        .prep-card-header {
+            margin-bottom: 12px;
+            border-bottom: 1px dashed var(--section-border);
+            padding-bottom: 8px;
         }
 
         .prep-card strong {
@@ -693,31 +684,228 @@
             font-size: 1.25rem;
             font-weight: 800;
             display: block;
-            margin-bottom: 12px;
-            border-bottom: 1px dashed var(--section-border);
-            padding-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .prep-card .prep-sub {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-subtitle);
+            margin-top: 3px;
+            display: block;
         }
 
         .prep-card ul {
-            padding-left: 18px;
+            padding-left: 0;
             margin: 0;
-            font-size: 0.95rem;
-            color: var(--text-subtitle);
+            list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .prep-card li {
-            color: var(--text-main);
-            font-weight: 700;
+            padding: 7px 10px;
+            border-radius: 10px;
+            background: rgba(139, 92, 246, 0.04);
+            border: 1px solid rgba(139, 92, 246, 0.1);
             cursor: pointer;
-            transition: color 0.2s ease, transform 0.2s ease;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
         .prep-card li:hover {
+            background: rgba(139, 92, 246, 0.12);
+            border-color: var(--accent-purple);
+            transform: translateX(3px);
+        }
+
+        .prep-de {
+            color: var(--text-main);
+            font-weight: 800;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .prep-highlight {
             color: var(--accent-purple);
-            transform: translateX(4px);
+            font-weight: 800;
+        }
+
+        .prep-hint {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-subtitle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .prep-tag {
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 1px 6px;
+            border-radius: 999px;
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-purple);
+            white-space: nowrap;
+        }
+
+        /* --- DTZ Truco Callout Box --- */
+        .dtz-trick-box {
+            margin-top: 24px;
+            background: var(--bg-body);
+            border: 2px solid #eab308;
+            border-radius: 20px;
+            padding: 20px 22px;
+            box-shadow: 0 8px 24px rgba(234, 179, 8, 0.08);
+            position: relative;
+        }
+
+        .dtz-trick-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .dtz-badge {
+            background: #eab308;
+            color: #422006;
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 999px;
+            letter-spacing: 0.02em;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dtz-trick-header h3 {
+            margin: 0;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .dtz-intro {
+            margin: 0 0 16px 0;
+            font-size: 0.9rem;
+            color: var(--text-subtitle);
+            line-height: 1.45;
+        }
+
+        .dtz-compare-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .dtz-compare-card {
+            background: var(--bg-container);
+            border: 1px solid var(--section-border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .dtz-compare-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            border-color: #eab308;
+        }
+
+        .dtz-term {
+            font-weight: 800;
+            font-size: 0.96rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dtz-pill {
+            padding: 1px 7px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .dtz-pill-ab { background: #0284c7; }
+        .dtz-pill-bis { background: #dc2626; }
+        .dtz-pill-am { background: #8b5cf6; }
+        .dtz-pill-seit { background: #16a34a; }
+
+        .dtz-trans {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #eab308;
+        }
+
+        [data-theme="light"] .dtz-trans {
+            color: #b45309;
+        }
+
+        .dtz-expl {
+            font-size: 0.75rem;
+            color: var(--text-subtitle);
+            line-height: 1.35;
+        }
+
+        .dtz-relative-row {
+            border-top: 1px dashed var(--section-border);
+            padding-top: 12px;
+            font-size: 0.85rem;
+        }
+
+        .dtz-relative-row strong {
+            color: var(--text-main);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.84rem;
+        }
+
+        .dtz-relative-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .dtz-rel-tag {
+            background: var(--bg-container);
+            border: 1px solid var(--section-border);
+            padding: 5px 11px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dtz-rel-tag:hover {
+            border-color: #eab308;
+            transform: scale(1.03);
+            color: #eab308;
+        }
+
+        .dtz-rel-tag strong {
+            color: inherit;
+            display: inline;
+            margin-bottom: 0;
         }
 
         /* --- Preposition Badges --- */
@@ -1126,33 +1314,163 @@
         </div>
 
         <!-- Temporale Präpositionen Summary Section -->
-        <div class="section-title"><span class="emoji">✏️</span> Temporale Präpositionen (Resumen)</div>
+        <div class="section-title"><span class="emoji">✏️</span> Temporale Präpositionen (Resumen con Pistas)</div>
         <div class="prep-grid">
+            <!-- Card 1: am -->
             <div class="prep-card">
-                <strong onclick="speak('am')" style="cursor: pointer;" title="Escuchar pronunciación">am <span style="font-size:0.8rem; font-weight:normal; color:var(--text-subtitle);">(an dem)</span></strong>
+                <div class="prep-card-header">
+                    <strong onclick="speak('am')" style="cursor: pointer;" title="Escuchar: am">am</strong>
+                    <span class="prep-sub">an + dem • Días, fechas y momentos</span>
+                </div>
                 <ul>
-                    <li onclick="speak('am Morgen, am Mittag, am Abend')" title="Escuchar: am Morgen / Mittag / Abend"><span style="color: var(--accent-purple); font-weight: 800;">am</span> Morgen / Mittag / Abend</li>
-                    <li onclick="speak('am Montag, am Dienstag')" title="Escuchar: am Montag / Dienstag ..."><span style="color: var(--accent-purple); font-weight: 800;">am</span> Montag / Dienstag ...</li>
-                    <li onclick="speak('am Wochenende')" title="Escuchar: am Wochenende"><span style="color: var(--accent-purple); font-weight: 800;">am</span> Wochenende</li>
-                    <li onclick="speak('am ersten Mai')" title="Escuchar: am 1. Mai"><span style="color: var(--accent-purple); font-weight: 800;">am</span> 1. Mai <span style="font-style: italic; color: var(--text-subtitle); font-weight: normal; font-size: 0.85rem;">(Fechas)</span></li>
+                    <li onclick="speak('am Montag, am Dienstag')" title="Escuchar: am Montag / am Dienstag">
+                        <span class="prep-de"><span class="prep-highlight">am</span> Montag / Dienstag ...</span>
+                        <span class="prep-hint">→ el lunes, el martes <span class="prep-tag">días</span></span>
+                    </li>
+                    <li onclick="speak('am Morgen, am Mittag, am Abend')" title="Escuchar: am Morgen / am Mittag / am Abend">
+                        <span class="prep-de"><span class="prep-highlight">am</span> Morgen / Abend</span>
+                        <span class="prep-hint">→ por la mañana / tarde <span class="prep-tag">momentos</span></span>
+                    </li>
+                    <li onclick="speak('am Wochenende')" title="Escuchar: am Wochenende">
+                        <span class="prep-de"><span class="prep-highlight">am</span> Wochenende</span>
+                        <span class="prep-hint">→ el fin de semana <span class="prep-tag">finde</span></span>
+                    </li>
+                    <li onclick="speak('am ersten Mai')" title="Escuchar: am 1. Mai">
+                        <span class="prep-de"><span class="prep-highlight">am</span> 1. Mai / 15. Oktober</span>
+                        <span class="prep-hint">→ el 1 de mayo ... <span class="prep-tag">fechas</span></span>
+                    </li>
                 </ul>
             </div>
+
+            <!-- Card 2: im -->
             <div class="prep-card">
-                <strong onclick="speak('im')" style="cursor: pointer;" title="Escuchar pronunciación">im <span style="font-size:0.8rem; font-weight:normal; color:var(--text-subtitle);">(in dem)</span></strong>
+                <div class="prep-card-header">
+                    <strong onclick="speak('im')" style="cursor: pointer;" title="Escuchar: im">im</strong>
+                    <span class="prep-sub">in + dem • Meses, estaciones y años</span>
+                </div>
                 <ul>
-                    <li onclick="speak('im Frühling, im Sommer')" title="Escuchar: im Frühling / Sommer ..."><span style="color: var(--accent-purple); font-weight: 800;">im</span> Frühling / Sommer ...</li>
-                    <li onclick="speak('im Januar, im Februar')" title="Escuchar: im Januar / Februar ..."><span style="color: var(--accent-purple); font-weight: 800;">im</span> Januar / Februar ... <span style="font-style: italic; color: var(--text-subtitle); font-weight: normal; font-size: 0.85rem;">(Meses)</span></li>
-                    <li onclick="speak('im Jahr zweitausendsechsundzwanzig, im Monat')" title="Escuchar: im Jahr 2026 / im Monat ..."><span style="color: var(--accent-purple); font-weight: 800;">im</span> Jahr 2026 / <span style="color: var(--accent-purple); font-weight: 800;">im</span> Monat ...</li>
+                    <li onclick="speak('im Januar, im Februar')" title="Escuchar: im Januar / im Februar">
+                        <span class="prep-de"><span class="prep-highlight">im</span> Januar / Februar ...</span>
+                        <span class="prep-hint">→ en enero, en febrero <span class="prep-tag">meses</span></span>
+                    </li>
+                    <li onclick="speak('im Frühling, im Sommer')" title="Escuchar: im Frühling / im Sommer">
+                        <span class="prep-de"><span class="prep-highlight">im</span> Frühling / Sommer ...</span>
+                        <span class="prep-hint">→ en primavera / verano <span class="prep-tag">estaciones</span></span>
+                    </li>
+                    <li onclick="speak('im Jahr zweitausendsechsundzwanzig')" title="Escuchar: im Jahr 2026">
+                        <span class="prep-de"><span class="prep-highlight">im</span> Jahr 2026 / im Monat</span>
+                        <span class="prep-hint">→ en el año 2026 / en el mes <span class="prep-tag">años</span></span>
+                    </li>
+                    <li onclick="speak('im Moment')" title="Escuchar: im Moment">
+                        <span class="prep-de"><span class="prep-highlight">im</span> Moment / Augenblick</span>
+                        <span class="prep-hint">→ en este momento <span class="prep-tag">presente</span></span>
+                    </li>
                 </ul>
             </div>
+
+            <!-- Card 3: um & Lapsos -->
             <div class="prep-card">
-                <strong style="cursor: pointer;" title="Escuchar pronunciación">otras preposiciones</strong>
+                <div class="prep-card-header">
+                    <strong onclick="speak('um')" style="cursor: pointer;" title="Escuchar: um">um / in / nach / vor</strong>
+                    <span class="prep-sub">Horas exactas y lapsos relativos</span>
+                </div>
                 <ul>
-                    <li onclick="speak('um acht Uhr')" title="Escuchar: um 8:00 Uhr"><span style="color: var(--accent-purple); font-weight: 800;">um</span> 8:00 Uhr <span style="font-style: italic; color: var(--text-subtitle); font-weight: normal; font-size: 0.85rem;">(Horas)</span></li>
-                    <li onclick="speak('in einer Stunde, in fünf Minuten')" title="Escuchar: in einer Stunde / 5 Minuten"><span style="color: var(--accent-purple); font-weight: 800;">in</span> einer Stunde / 5 Minuten</li>
-                    <li onclick="speak('nach der Arbeit, vor der Arbeit')" title="Escuchar: nach / vor der Arbeit"><span style="color: var(--accent-purple); font-weight: 800;">nach</span> / <span style="color: var(--accent-purple); font-weight: 800;">vor</span> der Arbeit</li>
-                    <li onclick="speak('seit gestern, bis morgen')" title="Escuchar: seit gestern / bis morgen"><span style="color: var(--accent-purple); font-weight: 800;">seit</span> gestern / <span style="color: var(--accent-purple); font-weight: 800;">bis</span> morgen</li>
+                    <li onclick="speak('um acht Uhr')" title="Escuchar: um 8:00 Uhr">
+                        <span class="prep-de"><span class="prep-highlight">um</span> 8:00 Uhr</span>
+                        <span class="prep-hint">→ a las 8:00 <span class="prep-tag">hora exacta</span></span>
+                    </li>
+                    <li onclick="speak('in fünf Minuten, in einer Stunde')" title="Escuchar: in 5 Minuten / in 1 Stunde">
+                        <span class="prep-de"><span class="prep-highlight">in</span> 5 Min. / einer Stunde</span>
+                        <span class="prep-hint">→ dentro de / en ... <span class="prep-tag">futuro</span></span>
+                    </li>
+                    <li onclick="speak('in drei Tagen')" title="Escuchar: in 3 Tagen">
+                        <span class="prep-de"><span class="prep-highlight">in</span> 3 Tagen / einem Jahr</span>
+                        <span class="prep-hint">→ dentro de 3 días / 1 año <span class="prep-tag">plazo</span></span>
+                    </li>
+                    <li onclick="speak('vor der Arbeit, nach der Arbeit')" title="Escuchar: vor der Arbeit / nach der Arbeit">
+                        <span class="prep-de"><span class="prep-highlight">vor</span> / <span class="prep-highlight">nach</span> der Arbeit</span>
+                        <span class="prep-hint">→ antes / después del trabajo <span class="prep-tag">orden</span></span>
+                    </li>
                 </ul>
+            </div>
+
+            <!-- Card 4: ab / bis / seit (DTZ Clave) -->
+            <div class="prep-card" style="border-color: rgba(234, 179, 8, 0.4); background: rgba(234, 179, 8, 0.03);">
+                <div class="prep-card-header">
+                    <strong style="color: #eab308; cursor: pointer;" onclick="speak('ab, bis, seit')" title="Escuchar: ab, bis, seit">ab / bis / seit 🔥</strong>
+                    <span class="prep-sub">Límites y continuidad (Clave DTZ)</span>
+                </div>
+                <ul>
+                    <li onclick="speak('ab Dienstag ist geöffnet')" title="Escuchar: ab Dienstag">
+                        <span class="prep-de"><span class="prep-highlight" style="color: #0284c7;">ab</span> Dienstag / ab 8:00 Uhr</span>
+                        <span class="prep-hint">→ a partir de / desde el martes <span class="prep-tag" style="background: rgba(2, 132, 199, 0.15); color: #0284c7;">inicio</span></span>
+                    </li>
+                    <li onclick="speak('bis Freitag')" title="Escuchar: bis Freitag">
+                        <span class="prep-de"><span class="prep-highlight" style="color: #dc2626;">bis</span> Freitag / bis morgen</span>
+                        <span class="prep-hint">→ hasta el viernes / mañana <span class="prep-tag" style="background: rgba(220, 38, 38, 0.15); color: #dc2626;">límite final</span></span>
+                    </li>
+                    <li onclick="speak('von Montag bis Freitag')" title="Escuchar: von Montag bis Freitag">
+                        <span class="prep-de"><span class="prep-highlight">von</span> Montag <span class="prep-highlight">bis</span> Freitag</span>
+                        <span class="prep-hint">→ de lunes a viernes <span class="prep-tag">rango</span></span>
+                    </li>
+                    <li onclick="speak('seit Montag')" title="Escuchar: seit Montag">
+                        <span class="prep-de"><span class="prep-highlight" style="color: #16a34a;">seit</span> Montag / 2 Monaten</span>
+                        <span class="prep-hint">→ desde el lunes / hace 2 meses <span class="prep-tag" style="background: rgba(22, 163, 74, 0.15); color: #16a34a;">continúa</span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- DTZ Trick Callout Box -->
+        <div class="dtz-trick-box">
+            <div class="dtz-trick-header">
+                <span class="dtz-badge">🧠 Truco para el DTZ</span>
+                <h3>Comprensión Temporal: No caigas en la trampa (Lesen &amp; Hören)</h3>
+            </div>
+            <p class="dtz-intro">En los avisos de horarios de Kita, consultorios médicos, tiendas y ofertas, <strong>la preposición cambia por completo el significado</strong>:</p>
+
+            <div class="dtz-compare-grid">
+                <div class="dtz-compare-card" onclick="speak('ab Dienstag ist die Kita geöffnet')">
+                    <div class="dtz-term">
+                        <span class="dtz-pill dtz-pill-ab">ab</span> Dienstag
+                    </div>
+                    <div class="dtz-trans">→ desde / a partir del martes</div>
+                    <div class="dtz-expl">El martes <strong>abre o empieza</strong> y continúa en adelante. <em>(Antes estuvo cerrado).</em></div>
+                </div>
+
+                <div class="dtz-compare-card" onclick="speak('bis Freitag')">
+                    <div class="dtz-term">
+                        <span class="dtz-pill dtz-pill-bis">bis</span> Freitag
+                    </div>
+                    <div class="dtz-trans">→ hasta el viernes</div>
+                    <div class="dtz-expl">El viernes es el <strong>último día</strong> de plazo o atención. <em>(Después ya no).</em></div>
+                </div>
+
+                <div class="dtz-compare-card" onclick="speak('am Montag')">
+                    <div class="dtz-term">
+                        <span class="dtz-pill dtz-pill-am">am</span> Montag
+                    </div>
+                    <div class="dtz-trans">→ el lunes</div>
+                    <div class="dtz-expl">Ocurre <strong>solamente ese día</strong> específico como evento puntual.</div>
+                </div>
+
+                <div class="dtz-compare-card" onclick="speak('seit Montag')">
+                    <div class="dtz-term">
+                        <span class="dtz-pill dtz-pill-seit">seit</span> Montag
+                    </div>
+                    <div class="dtz-trans">→ desde el lunes (hace...)</div>
+                    <div class="dtz-expl">Comenzó en el <strong>pasado</strong> y todavía sigue ocurriendo hoy.</div>
+                </div>
+            </div>
+
+            <div class="dtz-relative-row">
+                <strong>Otras expresiones temporales clave en avisos del DTZ:</strong>
+                <div class="dtz-relative-tags">
+                    <span class="dtz-rel-tag" onclick="speak('nächste Woche')"><strong>nächste Woche</strong> → la próxima semana</span>
+                    <span class="dtz-rel-tag" onclick="speak('kommenden Montag')"><strong>kommenden Montag</strong> → el próximo lunes</span>
+                    <span class="dtz-rel-tag" onclick="speak('letzte Woche')"><strong>letzte Woche</strong> → la semana pasada</span>
+                    <span class="dtz-rel-tag" onclick="speak('ab dem 1. Oktober')"><strong>ab dem 1. Oktober</strong> → a partir del 1 de octubre</span>
+                </div>
             </div>
         </div>
 
