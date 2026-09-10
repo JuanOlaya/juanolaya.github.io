@@ -152,39 +152,29 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
  }
 
- function getThemeColorForVerbData(verbData) {
+  function getGlobalGroupIndex(levelStr, localGroupNumber) {
+    if (!levelStr || localGroupNumber === undefined || localGroupNumber === null) return 0;
+    const macroLevel = levelStr.split('.')[0];
+    const physicalKey = levelStr.includes('.') ? levelStr.replace('.', '_') : levelStr;
+    const layers = physicalLevelMap[macroLevel] || [];
+    let globalGroupIndex = Number(localGroupNumber) - 1;
+    for (let i = 0; i < layers.length; i++) {
+      const layer = layers[i];
+      if (layer.key === physicalKey) {
+        break;
+      }
+      globalGroupIndex += layer.count;
+    }
+    return Math.max(0, globalGroupIndex);
+  }
 
- if (!verbData || !verbData.level || !verbData.group) {
-
- return '#4682B4';
-
- }
-
- const macroLevel = verbData.level.split('.')[0];
-
- const physicalKey = verbData.level.replace('.', '_');
-
- const layers = physicalLevelMap[macroLevel] || [];
-
- let globalGroupIndex = Number(verbData.group) - 1;
-
- for (let i = 0; i < layers.length; i++) {
-
- const layer = layers[i];
-
- if (layer.key === physicalKey) {
-
- break;
-
- }
-
- globalGroupIndex += layer.count;
-
- }
-
- return standardColors[((globalGroupIndex % standardColors.length) + standardColors.length) % standardColors.length];
-
- }
+  function getThemeColorForVerbData(verbData) {
+    if (!verbData || !verbData.level || !verbData.group) {
+      return '#4682B4';
+    }
+    const globalGroupIndex = getGlobalGroupIndex(verbData.level, verbData.group);
+    return standardColors[((globalGroupIndex % standardColors.length) + standardColors.length) % standardColors.length];
+  }
 
  function hexToRgb(hex) {
 
@@ -2428,8 +2418,7 @@ async function loadBackgroundData() {
  if (!group || !group.level || !Array.isArray(group.verbs)) return;
 
  const levelKey = group.level.split('.')[0];
-
- const groupIndexInLevel = Number(group.groupNumberPerLevel) - 1;
+ const groupIndexInLevel = getGlobalGroupIndex(group.level, group.groupNumberPerLevel);
 
  if (!levelKey || !Number.isInteger(groupIndexInLevel) || groupIndexInLevel < 0) return;
 
@@ -6579,16 +6568,22 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
  }
 
  group.verbs.forEach(verbName => {
-
- const verbData = allVerbsData[verbName];
-
- if (verbData) {
-
- // Create a promise for each verb to search (including lazy-loaded praesens)
-
- const searchPromise = (async () => {
-
- try {
+   let verbData = allVerbsData[verbName];
+   // Create a promise for each verb to search (including lazy-loaded praesens)
+   const searchPromise = (async () => {
+     try {
+       if (!verbData) {
+         if (groupNameMatch || normalizeSearchValue(verbName).includes(searchTerm)) {
+           try {
+             const res = await fetch(`json/cards/${verbName}.json${appVersion ? '?v=' + appVersion : ''}`);
+             if (res.ok) {
+               verbData = await parseJsonUtf8(res);
+               allVerbsData[verbName] = verbData;
+             }
+           } catch (e) {}
+         }
+       }
+       if (!verbData) return null;
 
  // If the group matches, return this verb immediately as a match
 
@@ -6850,10 +6845,7 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
 
  })();
 
- searchPromises.push(searchPromise);
-
- }
-
+  searchPromises.push(searchPromise);
  });
 
  }
@@ -7021,20 +7013,41 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
  const renderFullSearchCards = false;
 
   if (matchingVerbs.length > 0) {
-    const groupedMatches = {};
+    // Ensure all groups for matching verbs are loaded into memory
+    const groupLoadPromises = [];
+    const requestedGroups = new Set();
     verbsToShow.forEach(match => {
-      const verbData = match.data;
+      const verbData = match.data || {};
       const level = match.levelKey || (verbData.level ? verbData.level.split('.')[0] : 'A1');
       const groupIndex = Number.isInteger(match.groupIndexInLevel)
         ? match.groupIndexInLevel
-        : (verbData.group ? verbData.group - 1 : 0);
+        : getGlobalGroupIndex(verbData.level, verbData.group);
+      const key = `${level}-${groupIndex}`;
+      if (!requestedGroups.has(key)) {
+        requestedGroups.add(key);
+        if (!verbGroupsByLevel[level] || !verbGroupsByLevel[level][groupIndex]) {
+          groupLoadPromises.push(loadGroupData(level, groupIndex, { silent: true }).catch(() => {}));
+        }
+      }
+    });
+    if (groupLoadPromises.length > 0) {
+      await Promise.all(groupLoadPromises);
+    }
+
+    const groupedMatches = {};
+    verbsToShow.forEach(match => {
+      const verbData = match.data || {};
+      const level = match.levelKey || (verbData.level ? verbData.level.split('.')[0] : 'A1');
+      const groupIndex = Number.isInteger(match.groupIndexInLevel)
+        ? match.groupIndexInLevel
+        : getGlobalGroupIndex(verbData.level, verbData.group);
       const resolvedGroup = verbGroupsByLevel[level] && verbGroupsByLevel[level][groupIndex]
         ? verbGroupsByLevel[level][groupIndex]
         : null;
       let theme = resolvedGroup
         ? (resolvedGroup.theme || resolvedGroup.germanName || resolvedGroup.groupNameGerman || 'Gruppe')
         : (verbData.theme || 'Gruppe');
-      const groupKey = `${level}-${theme}`;
+      const groupKey = `${level}-${groupIndex}`;
       if (!groupedMatches[groupKey]) {
         const spanishName = resolvedGroup
           ? (resolvedGroup.spanishName || resolvedGroup.groupNameSpanish || '')
