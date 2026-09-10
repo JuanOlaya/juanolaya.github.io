@@ -2161,8 +2161,12 @@
                     { article: "das", word: "Baby", emoji: "🍼", translation_es: "bebé", translation_en: "baby", example_de: "Das Baby schläft.", example_es: "El bebé duerme." },
                     { article: "der", word: "Mann", emoji: "👨", translation_es: "esposo / hombre", translation_en: "husband / man", example_de: "Ihr Mann ist Lehrer.", example_es: "Su esposo es profesor." },
                     { article: "die", word: "Frau", emoji: "👩", translation_es: "esposa / mujer", translation_en: "wife / woman", example_de: "Seine Frau ist Ärztin.", example_es: "Su esposa es médica." },
-                    { article: "der", word: "Freund", emoji: "🙍‍♂️", translation_es: "amigo / novio", translation_en: "friend / boyfriend", example_de: " Das ist mein Freund.", example_es: "Ese es mi amigo." },
+                    { article: "der", word: "Freund", emoji: "🙍‍♂️", translation_es: "amigo / novio", translation_en: "friend / boyfriend", example_de: "Das ist mein Freund.", example_es: "Ese es mi amigo." },
                     { article: "die", word: "Freundin", emoji: "🙍‍♀️", translation_es: "amiga / novia", translation_en: "friend / girlfriend", example_de: "Meine Freundin kommt heute.", example_es: "Mi amiga viene hoy." },
+                    { article: "der", word: "Partner", emoji: "🧑‍🤝‍🧑", translation_es: "pareja / socio", translation_en: "partner", example_de: "Er ist mein Partner.", example_es: "Él es mi pareja." },
+                    { article: "die", word: "Partnerin", emoji: "🧑‍🤝‍🧑", translation_es: "pareja (mujer) / socia", translation_en: "partner (female)", example_de: "Sie ist meine Partnerin.", example_es: "Ella es mi pareja." },
+                    { article: "der", word: "Bekannte", emoji: "🤝", translation_es: "conocido", translation_en: "acquaintance", example_de: "Ein Bekannter von mir wohnt in Berlin.", example_es: "Un conocido mío vive en Berlín." },
+                    { article: "die", word: "Bekannte", emoji: "🤝", translation_es: "conocida", translation_en: "acquaintance (female)", example_de: "Eine Bekannte von mir kommt zu Besuch.", example_es: "Una conocida mía viene de visita." },
                     { article: "die (pl)", word: "Freunde", emoji: "🫂", translation_es: "amigos", translation_en: "friends", example_de: "Meine Freunde kommen heute Abend.", example_es: "Mis amigos vienen esta noche." },
                     { article: "der", word: "Verwandte", emoji: "👥", translation_es: "pariente / familiar", translation_en: "relative", example_de: "Ich besuche meine Verwandten.", example_es: "Visito a mis parientes." }
                 ]
@@ -2935,7 +2939,9 @@
             wahler: "die|wahlerin",
             freund: "die|freundin",
             cousin: "die|cousine",
-            kunstler: "die|kunstlerin"
+            kunstler: "die|kunstlerin",
+            partner: "die|partnerin",
+            bekannte: "die|bekannte"
         };
 
         window.rawNonLiDNounsByKey = nonLiDByKey;
@@ -4053,7 +4059,7 @@
                 title_es: "Ocio",
                 title_en: "Leisure",
                 level: "A1-B1",
-                nouns: pickThemeNouns(["der|verein", "die (pl)|freunde", "der|feierabend"])
+                nouns: pickThemeNouns(["der|verein", "der|feierabend"])
             },
             {
                 id: "bewegung",
@@ -4112,12 +4118,12 @@
                 nouns: pickThemeNouns(["der|ausflug", "der|spaziergang", "das|picknick", "der|spass", "das|ausland", "der|auslander"])
             },
             {
-                id: "freunde",
-                title: "Freunde",
-                title_es: "Amigos",
-                title_en: "Friends",
+                id: "beziehungen",
+                title: "Beziehungen",
+                title_es: "Relaciones",
+                title_en: "Relationships",
                 level: "A1",
-                nouns: pickThemeNouns(["der|freund", "die (pl)|freunde", "der|geburtstag"])
+                nouns: pickThemeNouns(["der|freund", "der|partner", "der|bekannte"])
             },
             {
                 id: "tagesablauf",
@@ -4302,7 +4308,7 @@
                 title_es: "Calendario",
                 title_en: "Calendar",
                 level: "A1",
-                nouns: pickThemeNouns(["der|tag", "die|woche", "der|monat", "das|jahr", "das|datum"])
+                nouns: pickThemeNouns(["der|tag", "die|woche", "der|monat", "das|jahr", "das|datum", "der|geburtstag"])
             },
             {
                 id: "uhrzeit",
@@ -4494,6 +4500,7 @@
             tagesablauf: "A1",
             draussen: "A1",
             freunde: "A1",
+            beziehungen: "A1",
             kleidung: "A1",
             oberteile: "A1",
             accessoires: "A1",
@@ -4881,6 +4888,7 @@
             'baum': 'die Bäume',
             'beamte': 'die Beamten',
             'beamtin': 'die Beamtinnen',
+            'bekannte': 'die Bekannten',
             'begrundung': 'die Begründungen',
             'bein': 'die Beine',
             'beispiel': 'die Beispiele',
@@ -5297,6 +5305,8 @@
             'parkgebuhr': 'die Parkgebühren',
             'parkgebuhren': 'die Parkgebühren',
             'partei': 'die Parteien',
+            'partner': 'die Partner',
+            'partnerin': 'die Partnerinnen',
             'pass': 'die Pässe',
             'patient': 'die Patienten',
             'pause': 'die Pausen',
