@@ -2167,6 +2167,10 @@
                     { article: "die", word: "Partnerin", emoji: "🧑‍🤝‍🧑", translation_es: "pareja (mujer) / socia", translation_en: "partner (female)", example_de: "Sie ist meine Partnerin.", example_es: "Ella es mi pareja." },
                     { article: "der", word: "Bekannte", emoji: "🤝", translation_es: "conocido", translation_en: "acquaintance", example_de: "Ein Bekannter von mir wohnt in Berlin.", example_es: "Un conocido mío vive en Berlín." },
                     { article: "die", word: "Bekannte", emoji: "🤝", translation_es: "conocida", translation_en: "acquaintance (female)", example_de: "Eine Bekannte von mir kommt zu Besuch.", example_es: "Una conocida mía viene de visita." },
+                    { article: "das", word: "Paar", emoji: "👩‍❤️‍👨", translation_es: "pareja", translation_en: "couple / pair", example_de: "Sie sind ein glückliches Paar.", example_es: "Son una pareja feliz." },
+                    { article: "der", word: "Ehemann", emoji: "💍", translation_es: "esposo / marido", translation_en: "husband", example_de: "Mein Ehemann arbeitet heute von zu Hause.", example_es: "Mi esposo trabaja hoy desde casa." },
+                    { article: "die", word: "Ehefrau", emoji: "💍", translation_es: "esposa", translation_en: "wife", example_de: "Seine Ehefrau ist Ärztin.", example_es: "Su esposa es médica." },
+                    { article: "die", word: "Beziehung", emoji: "🔗", translation_es: "relación", translation_en: "relationship", example_de: "Wir haben eine sehr gute Beziehung.", example_es: "Tenemos una muy buena relación." },
                     { article: "die (pl)", word: "Freunde", emoji: "🫂", translation_es: "amigos", translation_en: "friends", example_de: "Meine Freunde kommen heute Abend.", example_es: "Mis amigos vienen esta noche." },
                     { article: "der", word: "Verwandte", emoji: "👥", translation_es: "pariente / familiar", translation_en: "relative", example_de: "Ich besuche meine Verwandten.", example_es: "Visito a mis parientes." }
                 ]
@@ -2941,7 +2945,8 @@
             cousin: "die|cousine",
             kunstler: "die|kunstlerin",
             partner: "die|partnerin",
-            bekannte: "die|bekannte"
+            bekannte: "die|bekannte",
+            ehemann: "die|ehefrau"
         };
 
         window.rawNonLiDNounsByKey = nonLiDByKey;
@@ -4123,7 +4128,15 @@
                 title_es: "Relaciones",
                 title_en: "Relationships",
                 level: "A1",
-                nouns: pickThemeNouns(["der|freund", "der|partner", "der|bekannte"])
+                nouns: pickThemeNouns([
+                    "der|freund",
+                    "der|partner",
+                    "der|bekannte",
+                    "das|paar",
+                    "der|ehemann",
+                    "der|kollege",
+                    "die|beziehung"
+                ])
             },
             {
                 id: "tagesablauf",
@@ -4908,6 +4921,7 @@
             'bett': 'die Betten',
             'bewegung': 'die Bewegungen',
             'bewerbung': 'die Bewerbungen',
+            'beziehung': 'die Beziehungen',
             'bibliothek': 'die Bibliotheken',
             'biene': 'die Bienen',
             'bier': 'die Biere',
@@ -4967,6 +4981,8 @@
             'durst': '—',
             'dusche': 'die Duschen',
             'e-mail': 'die E-Mails',
+            'ehefrau': 'die Ehefrauen',
+            'ehemann': 'die Ehemänner',
             'ehrenamt': 'die Ehrenämter',
             'ehrenamtliche': 'die Ehrenamtlichen',
             'ei': 'die Eier',
@@ -5298,6 +5314,7 @@
             'orange': 'die Orangen',
             'ordner': 'die Ordner',
             'ordnung': 'die Ordnungen',
+            'paar': 'die Paare',
             'paket': 'die Pakete',
             'papier': 'die Papiere',
             'paprika': 'die Paprikas',
