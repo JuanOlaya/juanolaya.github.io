@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google" content="notranslate">
-    <title>Sich vorstellen - Angela | Deutsch lernen B1</title>
+    <title>Sich vorstellen - Angela (V2 Echte Stimme) | Deutsch lernen B1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Kalam:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-gradient: linear-gradient(135deg, #f7f3ee 0%, #edf3f7 50%, #f3f8f5 100%);
-            --card-bg: rgba(255, 255, 255, 0.88);
-            --card-border: rgba(230, 235, 240, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-border: rgba(230, 235, 240, 0.85);
             --text-main: #2d3748;
             --text-muted: #718096;
             --primary: #4a6fa5;
@@ -99,7 +99,7 @@
             background: #f1f5f9;
         }
 
-        /* Video / Presentation Container */
+        /* Presentation Player Card */
         .presentation-card {
             width: 100%;
             max-width: 900px;
@@ -114,7 +114,7 @@
             flex-direction: column;
         }
 
-        /* Top Progress Bar */
+        /* Progress Bar Section */
         .progress-section {
             padding: 20px 28px 12px;
             border-bottom: 1px solid rgba(226, 232, 240, 0.7);
@@ -124,15 +124,25 @@
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--text-muted);
             margin-bottom: 10px;
+        }
+
+        .category-tag {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: var(--primary-light);
+            padding: 4px 12px;
+            border-radius: 999px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
         }
 
         .progress-segments {
             display: flex;
-            gap: 5px;
+            gap: 6px;
             width: 100%;
             height: 6px;
         }
@@ -156,30 +166,17 @@
             opacity: 1;
         }
 
-        /* Subtitle Stage / Screen */
+        /* Subtitle Stage */
         .stage {
             min-height: 280px;
-            padding: 36px 32px;
+            padding: 40px 32px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             position: relative;
-            background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.8));
-        }
-
-        .category-tag {
-            display: inline-flex;
-            align-items: center;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            background: var(--primary-light);
-            padding: 4px 12px;
-            border-radius: 999px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
+            background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.85));
         }
 
         .german-text-wrap {
@@ -203,7 +200,7 @@
         }
 
         .spanish-text {
-            font-size: 1.15rem;
+            font-size: 1.12rem;
             font-weight: 500;
             color: #64748b;
             max-width: 700px;
@@ -215,7 +212,7 @@
             display: none;
         }
 
-        /* Audio Visualizer Wave */
+        /* Audio Wave Indicator */
         .audio-wave {
             display: flex;
             align-items: center;
@@ -278,7 +275,7 @@
         /* Controls Section */
         .controls-section {
             padding: 18px 28px 24px;
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.8);
             border-top: 1px solid rgba(226, 232, 240, 0.8);
             display: flex;
             flex-direction: column;
@@ -388,7 +385,7 @@
             color: var(--primary);
         }
 
-        /* Sentences Overview Drawer */
+        /* Overview Accordion */
         .overview-section {
             width: 100%;
             max-width: 900px;
@@ -484,7 +481,7 @@
         .sentence-info {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 3px;
         }
 
         .item-num {
@@ -498,11 +495,6 @@
             font-size: 0.98rem;
             font-weight: 600;
             color: var(--text-main);
-        }
-
-        .item-es {
-            font-size: 0.85rem;
-            color: var(--text-muted);
         }
 
         .item-play-icon {
@@ -522,10 +514,10 @@
 
     <!-- Header Navigation -->
     <header class="header notranslate" translate="no">
-        <span class="level-badge">B1 Vorstellung Angela</span>
+        <span class="level-badge">🎙️ B1 Vorstellung Angela (Echte Stimme)</span>
         <div class="version-toggle">
-            <span class="ver-link active" title="Version 1: Synthetische Stimme">V1: Katja</span>
-            <a href="vorstellung_angela_v2.html" class="ver-link" title="Version 2: Echte Stimme">V2: Angela (Echte Stimme)</a>
+            <a href="vorstellung_angela.html" class="ver-link" title="Version 1: Synthetische Stimme">V1: Katja</a>
+            <span class="ver-link active" title="Version 2: Echte Stimme">V2: Angela</span>
         </div>
     </header>
 
@@ -535,20 +527,20 @@
         <!-- Progress Bar & Indicator -->
         <div class="progress-section">
             <div class="progress-header">
-                <span class="category-tag" id="category-tag">1. Begrüßung & Vorstellung</span>
+                <span class="category-tag" id="category-tag">1. Begrüßung & Name</span>
             </div>
             <div class="progress-segments" id="progress-segments">
-                <!-- 15 segments injected via JS -->
+                <!-- 12 segments injected via JS -->
             </div>
         </div>
 
         <!-- Stage Subtitles -->
         <div class="stage">
             <div class="german-text-wrap">
-                <h1 class="german-text notranslate" id="german-text" translate="no">Guten Tag. Ich möchte mich kurz vorstellen.</h1>
+                <h1 class="german-text notranslate" id="german-text" translate="no">Guten Tag. Mein Name ist Angela.</h1>
             </div>
 
-            <p class="spanish-text hidden notranslate" id="spanish-text" translate="no">Buenos días. Me gustaría presentarme brevemente.</p>
+            <p class="spanish-text hidden notranslate" id="spanish-text" translate="no">Buenos días. Mi nombre es Angela.</p>
 
             <div class="audio-wave" id="audio-wave">
                 <div class="wave-bar"></div>
@@ -608,11 +600,11 @@
     <!-- Overview Accordion (Closed by default) -->
     <section class="overview-section notranslate" id="overview-section" translate="no">
         <div class="overview-top-row">
-            <span id="progress-text" class="progress-status-badge">Satz 1 von 15</span>
+            <span id="progress-text" class="progress-status-badge">Satz 1 von 12</span>
         </div>
         <div class="overview-header" id="overview-header">
             <div class="overview-title">
-                <span>Alle Sätze im Überblick (15)</span>
+                <span>Alle Sätze im Überblick (12)</span>
             </div>
             <div style="display: flex; align-items: center; gap: 10px;">
                 <span style="font-size: 0.82rem; font-weight: 500; color: var(--text-muted);">Klicken zum Einblenden</span>
@@ -620,134 +612,134 @@
             </div>
         </div>
         <div class="sentence-list" id="sentence-list">
-            <!-- Populated via JS -->
+            <!-- Populated via JS without Spanish translation -->
         </div>
     </section>
 
-    <!-- Audio Element -->
-    <audio id="audio-player" preload="auto"></audio>
+    <!-- Single continuous master audio element ensuring uninterrupted Android lock-screen playback -->
+    <audio id="audio-player" preload="auto" playsinline src="audio/angela_v2/angela_v2_full.mp3"></audio>
 
     <script>
         const sentences = [
             {
                 id: 1,
-                category: "1. Begrüßung & Vorstellung",
-                de: "Guten Tag. Ich möchte mich kurz vorstellen.",
-                es: "Buenos días. Me gustaría presentarme brevemente.",
-                grammar: "<b>Ich möchte mich vorstellen</b>: verbo reflexivo separable (<i>sich vorstellen</i>) con verbo modal <i>möchte</i> en posición 2 y el infinitivo al final.",
-                filename: "01_guten_tag.mp3"
+                category: "1. Begrüßung & Name",
+                de: "Guten Tag. Mein Name ist Angela.",
+                es: "Buenos días. Mi nombre es Angela.",
+                grammar: "<b>Mein Name ist Angela</b>: Estructura formal de presentación en alemán (equivalente a <i>Ich heiße Angela</i>).",
+                start: 0.0,
+                end: 3.5,
+                duration: 3.5
             },
             {
                 id: 2,
-                category: "2. Persönliche Daten",
-                de: "Ich heiße Angela und bin 38 Jahre alt.",
-                es: "Me llamo Angela y tengo 38 años.",
-                grammar: "<b>heißen</b> (llamarse). En alemán la edad se expresa con el verbo ser (<b>sein</b>): <i>ich bin ... Jahre alt</i> (nunca con haben).",
-                filename: "02_heisse_angela.mp3"
+                category: "2. Herkunft & Wohnort",
+                de: "Ich wurde in Kolumbien geboren und lebe seit vier Jahren in Berlin.",
+                es: "Nací en Colombia y vivo desde hace cuatro años en Berlín.",
+                grammar: "<b>Passiv Präteritum</b>: <i>ich wurde ... geboren</i>. La preposición <b>seit</b> rige dativo plural: <i>seit vier Jahren</i> (se añade <b>-n</b> al sustantivo plural).",
+                start: 4.25,
+                end: 9.95,
+                duration: 5.7
             },
             {
                 id: 3,
-                category: "3. Herkunft & Wohnort",
-                de: "Ich komme aus Kolumbien und lebe seit vier Jahren in Deutschland.",
-                es: "Vengo de Colombia y vivo desde hace cuatro años en Alemania.",
-                grammar: "<b>aus</b> rige dativo (país de origen). <b>seit</b> rige dativo plural: <i>seit vier Jahren</i> (se añade -n en el dativo plural).",
-                filename: "03_komme_aus_kolumbien.mp3"
+                category: "2. Herkunft & Wohnort",
+                de: "Berlin ist jetzt mein Zuhause.",
+                es: "Berlín es ahora mi hogar.",
+                grammar: "<b>das Zuhause</b>: Sustantivo neutro invariable que designa el hogar propio o el lugar donde uno se siente en casa.",
+                start: 10.7,
+                end: 13.4,
+                duration: 2.7
             },
             {
                 id: 4,
-                category: "3. Herkunft & Wohnort",
-                de: "Ich wohne in Berlin.",
-                es: "Vivo en Berlín.",
-                grammar: "<b>wohnen in</b> + Dativo para indicar lugar estático de residencia.",
-                filename: "04_wohne_in_berlin.mp3"
+                category: "3. Beruf & Tätigkeit",
+                de: "Von Beruf bin ich Rechtsanwältin.",
+                es: "De profesión soy abogada.",
+                grammar: "Inversión sintáctica: al comenzar por <b>Von Beruf</b>, el verbo conjugado <i>bin</i> pasa a la posición 2, seguido por el sujeto <i>ich</i>.",
+                start: 14.15,
+                end: 17.55,
+                duration: 3.4
             },
             {
                 id: 5,
-                category: "4. Familie",
-                de: "Ich bin verheiratet und habe eine kleine Tochter.",
-                es: "Estoy casada y tengo una hija pequeña.",
-                grammar: "<b>eine kleine Tochter</b>: Acusativo femenino con adjetivo con terminación <b>-e</b>.",
-                filename: "05_verheiratet_tochter.mp3"
+                category: "3. Beruf & Tätigkeit",
+                de: "In Kolumbien habe ich als Rechtsanwältin gearbeitet.",
+                es: "En Colombia trabajé / he trabajado como abogada.",
+                grammar: "<b>Perfekt</b> con auxiliar <i>haben</i> en posición 2 y participio pasado <i>gearbeitet</i> al final. <b>als</b> introduce la profesión o función desempeñada.",
+                start: 18.3,
+                end: 23.9,
+                duration: 5.6
             },
             {
                 id: 6,
-                category: "4. Familie",
-                de: "Sie heißt Antonella.",
-                es: "Ella se llama Antonella.",
-                grammar: "Pronombre <b>Sie</b> (ella, tercera persona singular) + <i>heißt</i>.",
-                filename: "06_heisst_antonella.mp3"
+                category: "3. Beruf & Tätigkeit",
+                de: "Momentan arbeite ich nicht in meinem Beruf, weil ich zuerst mein Deutsch verbessern möchte.",
+                es: "Por el momento no trabajo en mi profesión porque primero me gustaría mejorar mi alemán.",
+                grammar: "Conector subordinante <b>weil</b>: envía todos los verbos al final de la oración (<i>verbessern möchte</i>: infinitivo + verbo modal conjugado).",
+                start: 24.65,
+                end: 32.95,
+                duration: 8.3
             },
             {
                 id: 7,
-                category: "5. Beruf & Erfahrung",
-                de: "Ich bin Rechtsanwältin von Beruf.",
-                es: "Soy abogada de profesión.",
-                grammar: "Sufijo femenino de profesión <b>-in</b> (<i>die Rechtsanwältin</i> / masculino: <i>der Rechtsanwalt</i>). Frase fija: <i>... von Beruf</i>.",
-                filename: "07_rechtsanwaeltin.mp3"
+                category: "4. Familie & Alltag",
+                de: "Ich habe eine Tochter. Sie geht in die Kita.",
+                es: "Tengo una hija. Ella va a la guardería.",
+                grammar: "<b>die Kita</b> (Kindertagesstätte - guardería infantil). Con verbos de movimiento (<i>gehen</i>), la preposición <i>in</i> rige acusativo: <i>in die Kita</i>.",
+                start: 33.7,
+                end: 37.3,
+                duration: 3.6
             },
             {
                 id: 8,
-                category: "5. Beruf & Erfahrung",
-                de: "In Kolumbien habe ich als Rechtsanwältin gearbeitet.",
-                es: "En Colombia he trabajado / trabajé como abogada.",
-                grammar: "<b>Perfekt</b> con verbo auxiliar <i>haben</i> en posición 2 y participio pasado regular <i>gearbeitet</i> al final de la oración. Preposición <b>als</b> para profesiones.",
-                filename: "08_als_rechtsanwaeltin_gearbeitet.mp3"
+                category: "4. Familie & Alltag",
+                de: "Meine Familie ist mir sehr wichtig.",
+                es: "Mi familia es muy importante para mí.",
+                grammar: "Construcción fija con dativo de interés / persona afectada: <i>jemandem wichtig sein</i>: <i>etwas ist <b>mir</b> wichtig</i>.",
+                start: 38.05,
+                end: 41.45,
+                duration: 3.4
             },
             {
                 id: 9,
-                category: "5. Beruf & Erfahrung",
-                de: "Ich habe dort viele Jahre Berufserfahrung gesammelt.",
-                es: "Allí he acumulado muchos años de experiencia profesional.",
-                grammar: "Palabra compuesta: <b>der Beruf</b> (profesión) + <b>die Erfahrung</b> (experiencia) = <i>die Berufserfahrung</i>.",
-                filename: "09_berufserfahrung.mp3"
+                category: "4. Familie & Alltag",
+                de: "Und in meiner Freizeit verbringe ich gerne Zeit mit meiner Tochter.",
+                es: "Y en mi tiempo libre me gusta pasar tiempo con mi hija.",
+                grammar: "<b>mit</b> rige siempre caso Dativo: <i>mit meiner Tochter</i> (femenino con desinencia <b>-er</b> en el posesivo).",
+                start: 42.2,
+                end: 49.3,
+                duration: 7.1
             },
             {
                 id: 10,
-                category: "6. Motivation & Zukunft",
-                de: "Zurzeit lerne ich Deutsch, weil ich in Deutschland leben und arbeiten möchte.",
-                es: "Actualmente estoy aprendiendo alemán porque me gustaría vivir y trabajar en Alemania.",
-                grammar: "Conector subordinante <b>weil</b>: envía todos los verbos al final de la oración (<i>leben und arbeiten möchte</i>).",
-                filename: "10_zurzeit_lerne_ich.mp3"
+                category: "5. Sprachen",
+                de: "Meine Muttersprache ist Spanisch.",
+                es: "Mi lengua materna es el español.",
+                grammar: "<b>die Muttersprache</b>: Expresión formal B1 para indicar el idioma nativo de origen.",
+                start: 50.05,
+                end: 53.85,
+                duration: 3.8
             },
             {
                 id: 11,
-                category: "6. Motivation & Zukunft",
-                de: "Deutsch ist für mich sehr wichtig, deshalb möchte ich meine Deutschkenntnisse weiter verbessern.",
-                es: "El alemán es muy importante para mí, por eso me gustaría seguir mejorando mis conocimientos de alemán.",
-                grammar: "Conector <b>deshalb</b> (por eso): va en posición 1 y genera inversión (el verbo <i>möchte</i> va inmediatamente después).",
-                filename: "11_deutsch_sehr_wichtig.mp3"
+                category: "5. Sprachen",
+                de: "Auch spreche ich Deutsch und ein bisschen Englisch.",
+                es: "También hablo alemán y un poco de inglés.",
+                grammar: "<b>auch</b> en posición 1 genera inversión del verbo conjugado (<i>spreche ich</i>).",
+                start: 54.6,
+                end: 59.64,
+                duration: 5.04
             },
             {
                 id: 12,
-                category: "7. Freizeit & Hobbys",
-                de: "In meiner Freizeit verbringe ich gerne Zeit mit meiner Familie.",
-                es: "En mi tiempo libre me gusta pasar tiempo con mi familia.",
-                grammar: "<b>mit</b> rige siempre Dativo femenino: <i>mit meiner Familie</i>. <b>gerne</b> señala agrado o gusto al realizar la acción.",
-                filename: "12_freizeit_familie.mp3"
-            },
-            {
-                id: 13,
-                category: "7. Freizeit & Hobbys",
-                de: "Ich reise gerne und interessiere mich für andere Kulturen.",
-                es: "Me gusta viajar y me intereso por otras culturas.",
-                grammar: "Verbo con régimen preposicional fijo: <b>sich interessieren für + Acusativo</b>: <i>interessiere mich für andere Kulturen</i>.",
-                filename: "13_reise_gerne.mp3"
-            },
-            {
-                id: 14,
-                category: "8. Zukunft & Abschluss",
-                de: "In Zukunft möchte ich mein Deutsch weiter verbessern und wieder als Rechtsanwältin arbeiten.",
-                es: "En el futuro me gustaría seguir mejorando mi alemán y volver a trabajar como abogada.",
-                grammar: "<b>wieder</b> (de nuevo/otra vez). Infinitivos coordinados con <i>möchte</i>: <i>weiter verbessern und ... arbeiten</i>.",
-                filename: "14_in_zukunft.mp3"
-            },
-            {
-                id: 15,
-                category: "8. Zukunft & Abschluss",
-                de: "Vielen Dank.",
-                es: "Muchas gracias.",
-                grammar: "Expresión de cortesía fija: Acusativo masculino abreviado (<i>Ich wünsche Ihnen vielen Dank</i>).",
-                filename: "15_vielen_dank.mp3"
+                category: "6. Zukunft & Ziel",
+                de: "Ich lerne Deutsch, weil ich in Deutschland lebe und später gerne wieder als Rechtsanwältin arbeiten möchte.",
+                es: "Aprendo alemán porque vivo en Alemania y más adelante me gustaría volver a trabajar como abogada.",
+                grammar: "Oración compleja coordinada dentro de la subordinada causal con <b>weil</b>: <i>...lebe und später gerne wieder ... arbeiten möchte</i>.",
+                start: 60.39,
+                end: 70.73,
+                duration: 10.34
             }
         ];
 
@@ -757,6 +749,7 @@
         let playbackRate = 1.0;
         let showSpanish = false;
         let showGrammar = false;
+        let isSeekingInternally = false;
 
         const audioPlayer = document.getElementById('audio-player');
         const btnPlay = document.getElementById('btn-play');
@@ -783,7 +776,7 @@
             overviewSection.classList.toggle('open');
         };
 
-        // Initialize Segments & List
+        // Initialize UI Elements
         function initUI() {
             progressSegments.innerHTML = '';
             sentenceList.innerHTML = '';
@@ -792,15 +785,15 @@
                 // Segment
                 const seg = document.createElement('div');
                 seg.className = 'progress-step' + (idx === 0 ? ' active' : '');
-                seg.onclick = () => selectSentence(idx, true);
+                seg.onclick = () => jumpToSentence(idx, true);
                 seg.title = `Satz ${idx + 1}: ${s.de}`;
                 progressSegments.appendChild(seg);
 
-                // List item
+                // List item (No Spanish shown as requested)
                 const item = document.createElement('div');
                 item.className = 'sentence-item' + (idx === 0 ? ' active' : '');
                 item.id = `item-${idx}`;
-                item.onclick = () => selectSentence(idx, true);
+                item.onclick = () => jumpToSentence(idx, true);
                 item.innerHTML = `
                     <div class="sentence-info">
                         <span class="item-num">Satz ${idx + 1} • ${s.category.split('. ')[1] || s.category}</span>
@@ -812,6 +805,7 @@
             });
 
             updateDisplay();
+            initMediaSession();
         }
 
         function updateDisplay() {
@@ -837,11 +831,41 @@
                 items[i].classList.toggle('active', i === currentIndex);
             }
 
-            // Audio source
-            const audioSrc = `audio/angela/${current.filename}`;
-            if (audioPlayer.src !== new URL(audioSrc, window.location.href).href) {
-                audioPlayer.src = audioSrc;
-                audioPlayer.playbackRate = playbackRate;
+            updateMediaSessionMetadata();
+        }
+
+        // Web MediaSession API for lock-screen & background control on Android
+        function initMediaSession() {
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.setActionHandler('play', () => playCurrent());
+                navigator.mediaSession.setActionHandler('pause', () => pauseCurrent());
+                navigator.mediaSession.setActionHandler('previoustrack', () => {
+                    if (currentIndex > 0) jumpToSentence(currentIndex - 1, true);
+                });
+                navigator.mediaSession.setActionHandler('nexttrack', () => {
+                    if (currentIndex < sentences.length - 1) jumpToSentence(currentIndex + 1, true);
+                });
+                try {
+                    navigator.mediaSession.setActionHandler('seekto', (details) => {
+                        if (details.seekTime != null) {
+                            audioPlayer.currentTime = details.seekTime;
+                        }
+                    });
+                } catch (e) {}
+            }
+        }
+
+        function updateMediaSessionMetadata() {
+            if ('mediaSession' in navigator) {
+                const s = sentences[currentIndex];
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: `${s.de}`,
+                    artist: 'Angela (B1 Vorstellung)',
+                    album: 'Deutsch Sprechen B1',
+                    artwork: [
+                        { src: 'https://juanolaya.github.io/Deutsch_lernen/favicon.ico', sizes: '96x96', type: 'image/x-icon' }
+                    ]
+                });
             }
         }
 
@@ -851,8 +875,11 @@
                 isPlaying = true;
                 btnPlay.textContent = '⏸';
                 audioWave.classList.add('playing');
+                if ('mediaSession' in navigator) {
+                    navigator.mediaSession.playbackState = 'playing';
+                }
             }).catch(err => {
-                console.warn('Audio play prevented:', err);
+                console.warn('Playback prevented:', err);
             });
         }
 
@@ -861,18 +888,67 @@
             isPlaying = false;
             btnPlay.textContent = '▶';
             audioWave.classList.remove('playing');
-        }
-
-        function selectSentence(idx, autoPlay = false) {
-            if (idx < 0 || idx >= sentences.length) return;
-            currentIndex = idx;
-            updateDisplay();
-            if (autoPlay || isPlaying) {
-                playCurrent();
-            } else {
-                pauseCurrent();
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.playbackState = 'paused';
             }
         }
+
+        function jumpToSentence(idx, autoPlay = false) {
+            if (idx < 0 || idx >= sentences.length) return;
+            currentIndex = idx;
+            isSeekingInternally = true;
+            audioPlayer.currentTime = sentences[idx].start;
+            updateDisplay();
+            setTimeout(() => { isSeekingInternally = false; }, 150);
+
+            if (autoPlay || isPlaying) {
+                playCurrent();
+            }
+        }
+
+        // Real-time synchronization during continuous playback
+        audioPlayer.ontimeupdate = () => {
+            if (isSeekingInternally) return;
+
+            const t = audioPlayer.currentTime;
+
+            // In Shadowing / Pause mode: check if sentence ended
+            if (studyMode === 'shadowing') {
+                const cur = sentences[currentIndex];
+                if (t >= cur.end) {
+                    pauseCurrent();
+                    if (currentIndex < sentences.length - 1) {
+                        currentIndex++;
+                        audioPlayer.currentTime = sentences[currentIndex].start;
+                        updateDisplay();
+                    }
+                    return;
+                }
+            }
+
+            // In continuous mode: dynamically highlight active sentence based on timestamps
+            let activeIdx = -1;
+            for (let i = 0; i < sentences.length; i++) {
+                const s = sentences[i];
+                const nextStart = (i < sentences.length - 1) ? sentences[i + 1].start : s.end + 0.8;
+                if (t >= s.start && t < nextStart) {
+                    activeIdx = i;
+                    break;
+                }
+            }
+
+            if (activeIdx !== -1 && activeIdx !== currentIndex) {
+                currentIndex = activeIdx;
+                updateDisplay();
+            }
+        };
+
+        audioPlayer.onended = () => {
+            pauseCurrent();
+            audioPlayer.currentTime = 0;
+            currentIndex = 0;
+            updateDisplay();
+        };
 
         // Event Listeners
         btnPlay.onclick = () => {
@@ -885,37 +961,18 @@
 
         btnPrev.onclick = () => {
             if (currentIndex > 0) {
-                selectSentence(currentIndex - 1, isPlaying);
+                jumpToSentence(currentIndex - 1, isPlaying);
             }
         };
 
         btnNext.onclick = () => {
             if (currentIndex < sentences.length - 1) {
-                selectSentence(currentIndex + 1, isPlaying);
+                jumpToSentence(currentIndex + 1, isPlaying);
             }
         };
 
         btnRepeat.onclick = () => {
-            audioPlayer.currentTime = 0;
-            playCurrent();
-        };
-
-        // Audio ended handler
-        audioPlayer.onended = () => {
-            audioWave.classList.remove('playing');
-
-            if (studyMode === 'continuous') {
-                if (currentIndex < sentences.length - 1) {
-                    setTimeout(() => {
-                        selectSentence(currentIndex + 1, true);
-                    }, 600);
-                } else {
-                    pauseCurrent();
-                }
-            } else {
-                // Shadowing mode: pause and let student repeat
-                pauseCurrent();
-            }
+            jumpToSentence(currentIndex, true);
         };
 
         // Speed selectors
