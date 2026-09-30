@@ -140,37 +140,47 @@
     <div class="max-w-[1600px] w-full mx-auto flex-grow flex flex-col">
         
         <!-- App Top Header Bar (Fused Single Header) -->
-        <header class="bg-[#ECEDE8] rounded-2xl px-5 py-3.5 border border-[#001011]/10 shadow-sm mb-4 flex items-center justify-between flex-wrap gap-3">
-            <div class="flex items-center gap-3">
-                <div id="hero-pattern-icon" class="w-10 h-10 rounded-xl bg-[#001011] flex items-center justify-center text-white shadow-md text-xl select-none">
-                    ⚖️
+        <header class="bg-[#ECEDE8] rounded-2xl px-5 py-3.5 border border-[#001011]/10 shadow-sm mb-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <!-- Left: App Branding -->
+            <div class="flex items-center gap-3 md:flex-1 justify-start w-full md:w-auto">
+                <div class="w-10 h-10 rounded-xl bg-[#001011] flex items-center justify-center text-white shadow-md text-xl select-none shrink-0">
+                    🎮
                 </div>
                 <div>
-                    <h1 id="hero-pattern-title" class="text-xl sm:text-2xl font-black text-[#001011] tracking-tight leading-none">
-                        Solid mass shifting
+                    <h1 class="text-xl sm:text-2xl font-black text-[#001011] tracking-tight leading-none">
+                        Haptic VR Controllers
                     </h1>
                     <p class="text-xs text-[#001011]/70 font-medium mt-0.5">
-                        Haptic VR Controllers &bull; Interactive 21 Pattern Dashboard
+                        Mechanism Design Taxonomy
                     </p>
                 </div>
             </div>
 
-            <!-- Active Pattern Info & Navigation -->
-            <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
-                <!-- Info / Taxonomy Modal Toggle -->
-                <button onclick="toggleIntroModal()" class="px-3 py-1.5 bg-[#fd5321] hover:bg-[#e04818] text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm active:scale-95">
-                    <span>ℹ️</span> <span>Taxonomy Info</span>
+            <!-- Center: Pattern Prev / Active Pattern / Next Switchers -->
+            <div class="flex items-center justify-center gap-2 sm:gap-3 md:flex-initial lg:flex-1 w-full md:w-auto flex-wrap sm:flex-nowrap">
+                <button onclick="prevPattern()" class="px-4 py-2 sm:px-5 sm:py-2.5 bg-[#001011] hover:bg-sky-700 text-white rounded-xl text-sm sm:text-base font-bold shadow-md hover:shadow-lg transition flex items-center gap-1.5 active:scale-95 shrink-0">
+                    <span>◀ Previous</span>
                 </button>
-
-                <!-- Pattern Prev/Next Switchers -->
-                <div class="flex items-center gap-1.5">
-                    <button onclick="prevPattern()" class="px-3.5 py-1.5 bg-[#001011] hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow transition flex items-center gap-1 active:scale-95">
-                        <span>◀ Prev Pattern</span>
-                    </button>
-                    <button onclick="nextPattern()" class="px-3.5 py-1.5 bg-[#001011] hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow transition flex items-center gap-1 active:scale-95">
-                        <span>Next Pattern ▶</span>
-                    </button>
+                <div class="flex items-center gap-2 px-3.5 py-2 bg-white/80 rounded-xl border border-[#001011]/10 shadow-sm text-center">
+                    <span id="hero-pattern-icon" class="text-xl select-none">⚖️</span>
+                    <span id="hero-pattern-title" class="text-sm sm:text-base font-black text-[#001011] tracking-tight whitespace-nowrap">
+                        Solid mass shifting
+                    </span>
                 </div>
+                <button onclick="nextPattern()" class="px-4 py-2 sm:px-5 sm:py-2.5 bg-[#001011] hover:bg-sky-700 text-white rounded-xl text-sm sm:text-base font-bold shadow-md hover:shadow-lg transition flex items-center gap-1.5 active:scale-95 shrink-0">
+                    <span>Next ▶</span>
+                </button>
+            </div>
+
+            <!-- Right: Info / Taxonomy Modal Toggle with 21 Pattern Dashboard -->
+            <div class="flex items-center justify-center md:justify-end md:flex-1 w-full md:w-auto">
+                <button onclick="toggleIntroModal()" class="px-4 py-2 bg-[#fd5321] hover:bg-[#e04818] text-white rounded-xl font-bold transition-all flex items-center gap-2.5 shadow-sm hover:shadow active:scale-95 text-left">
+                    <span class="text-lg">ℹ️</span>
+                    <div class="flex flex-col">
+                        <span class="text-xs sm:text-sm font-black leading-tight">Taxonomy Info</span>
+                        <span class="text-[10px] sm:text-[11px] font-semibold opacity-90 leading-tight">21 Pattern Dashboard</span>
+                    </div>
+                </button>
             </div>
         </header>
 
@@ -325,7 +335,7 @@
         {"name": "PumpVR", "category": "Liquid mass shifting", "author": "", "title": "", "mechanism": "Liquid mass transfers between chambers to render the weight of objects and of the avatar's own limb.", "useCaseText": "Providing active weight magnitude, shape cues in virtual reality interactions.", "useCaseTags": ["Weight magnitude cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight magnitude", "Shape"], "media": [{"type": "image", "src": "img/pumpvr.jpg"}], "doi": "", "publication": "", "year": ""},
         {"name": "VibroWeight", "category": "Liquid mass shifting", "author": "", "title": "", "mechanism": "Liquid shifts both total mass and its balance, while a voice coil adds vibration at contact.", "useCaseText": "Providing active vibration, weight magnitude, weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Weight magnitude cues", "Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Weight magnitude", "Weight distribution", "Shape"], "media": [{"type": "image", "src": "img/vibroweight.png"}], "doi": "", "publication": "", "year": ""},
         {"name": "Liu et al. (2023)", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "A motorised reel raises and drops the mass vertically in two controllers for impact and vibration.", "useCaseText": "Providing active vibration, impact, weight distribution cues in virtual reality interactions.", "useCaseTags": ["Vibration cues", "Impact cues", "Weight distribution cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Vibration", "Impact", "Weight distribution"], "media": [{"type": "image", "src": "https://placehold.co/400x250/DFE2DC/001011?text=Liu+et+al.+(2023)"}], "doi": "", "publication": "", "year": ""},
-        {"name": "Shifty", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "A motor slides an internal weight along a rod, altering perceived length, thickness and heaviness.", "useCaseText": "Providing active weight magnitude, weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Weight magnitude cues", "Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight magnitude", "Weight distribution", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/DFE2DC/001011?text=Shifty"}], "doi": "", "publication": "", "year": ""},
+        {"name": "Shifty", "category": "Solid mass shifting", "author": "André Zenner and Antonio Krüger", "title": "Shifty: A Weight-Shifting Dynamic Passive Haptic Proxy to Enhance Object Perception in Virtual Reality", "mechanism": "A motor slides an internal weight along a rod, altering perceived length, thickness and heaviness.", "useCaseText": "Providing active weight magnitude, weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Weight magnitude cues", "Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight magnitude", "Weight distribution", "Shape"], "media": [{"type": "image", "src": "img/shifty.jpg"}, {"type": "image", "src": "img/shifty_hand.jpg"}, {"type": "video", "src": "https://www.youtube.com/watch?v=1l0wKk6q_ss"}], "doi": "10.1109/TVCG.2017.2656978", "publication": "IEEE TVCG / IEEE VR", "year": "2017"},
         {"name": "SWISH", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "Motors relocate the centre of gravity to emulate liquid sloshing inside a handheld vessel.", "useCaseText": "Providing active weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight distribution", "Shape"], "media": [{"type": "image", "src": "img/swish.jpg"}], "doi": "", "publication": "", "year": ""},
         {"name": "Transcalibur", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "A 2-DoF weight shift reconfigures mass distribution, rendering 2D shapes via a perception model.", "useCaseText": "Providing active weight distribution, shape cues in virtual reality interactions.", "useCaseTags": ["Weight distribution cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Weight distribution", "Shape"], "media": [{"type": "image", "src": "img/transcalibur.jpg"}], "doi": "", "publication": "", "year": ""},
         {"name": "Unident", "category": "Solid mass shifting", "author": "", "title": "", "mechanism": "A belt drives a weight along the grip, giving directional impact and the size of the held object.", "useCaseText": "Providing active impact, shape cues in virtual reality interactions.", "useCaseTags": ["Impact cues", "Shape cues"], "generalUseCases": ["Gaming", "Training"], "submodalities": ["Impact", "Shape"], "media": [{"type": "image", "src": "https://placehold.co/400x250/DFE2DC/001011?text=Unident"}], "doi": "", "publication": "", "year": ""},
