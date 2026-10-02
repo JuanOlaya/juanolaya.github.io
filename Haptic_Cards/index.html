@@ -166,6 +166,7 @@
                     <span id="hero-pattern-title" class="text-sm sm:text-base font-black text-[#001011] tracking-tight whitespace-nowrap">
                         Solid mass shifting
                     </span>
+                    <span id="hero-pattern-count" class="text-[11px] font-bold text-[#fd5321] bg-[#fd5321]/10 px-2 py-0.5 rounded-full ml-1 hidden"></span>
                 </div>
                 <button onclick="nextPattern()" class="px-4 py-2 sm:px-5 sm:py-2.5 bg-[#001011] hover:bg-sky-700 text-white rounded-xl text-sm sm:text-base font-bold shadow-md hover:shadow-lg transition flex items-center gap-1.5 active:scale-95 shrink-0">
                     <span>Next ▶</span>
@@ -181,9 +182,15 @@
         </header>
 
         <!-- 4-Card Viewport Grid Container (Main Screen Area - Centered) -->
-        <main class="flex-grow flex flex-col justify-center my-auto py-3">
+        <main class="flex-grow flex flex-col justify-center my-auto py-2">
+            <!-- Cards Grid -->
             <div id="cards-viewport" class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch min-h-[500px]">
                 <!-- Exactly 4 Cards are dynamically injected here -->
+            </div>
+
+            <!-- Card Pagination Bar (Visible when pattern has > 4 cards) -->
+            <div id="cards-pagination-bar" class="w-full mt-3 hidden">
+                <!-- Dynamically injected here -->
             </div>
         </main>
 
@@ -1591,6 +1598,37 @@
             renderApp();
         }
 
+        function setCardsPage(page) {
+            const currentPat = canonicalPatterns[currentPatternIndex];
+            const regularDevices = devices.filter(d => !d.isIntro);
+            const patternDevices = regularDevices.filter(d => (deviceMechanismPatterns[d.name] || "General") === currentPat);
+            const totalPages = Math.ceil(patternDevices.length / CARDS_PER_PAGE);
+
+            if (page >= 0 && page < totalPages) {
+                currentCardsPage = page;
+                renderApp();
+            }
+        }
+
+        function nextCardsPage() {
+            const currentPat = canonicalPatterns[currentPatternIndex];
+            const regularDevices = devices.filter(d => !d.isIntro);
+            const patternDevices = regularDevices.filter(d => (deviceMechanismPatterns[d.name] || "General") === currentPat);
+            const totalPages = Math.ceil(patternDevices.length / CARDS_PER_PAGE);
+
+            if (currentCardsPage < totalPages - 1) {
+                currentCardsPage++;
+                renderApp();
+            }
+        }
+
+        function prevCardsPage() {
+            if (currentCardsPage > 0) {
+                currentCardsPage--;
+                renderApp();
+            }
+        }
+
         function nextPattern() {
             const currentPat = canonicalPatterns[currentPatternIndex];
             const regularDevices = devices.filter(d => !d.isIntro);
@@ -1645,9 +1683,21 @@
             // Update Top Fused Header
             const heroIcon = document.getElementById('hero-pattern-icon');
             const heroTitle = document.getElementById('hero-pattern-title');
+            const heroCount = document.getElementById('hero-pattern-count');
 
             if (heroIcon) heroIcon.textContent = currentIcon;
             if (heroTitle) heroTitle.textContent = currentPat;
+            if (heroCount) {
+                if (totalPages > 1) {
+                    heroCount.textContent = `Page ${currentCardsPage + 1}/${totalPages} (${totalCards})`;
+                    heroCount.classList.remove('hidden');
+                } else if (totalCards > 0) {
+                    heroCount.textContent = `${totalCards}`;
+                    heroCount.classList.remove('hidden');
+                } else {
+                    heroCount.classList.add('hidden');
+                }
+            }
 
             // Render 4 Cards in Viewport
             const viewport = document.getElementById('cards-viewport');
@@ -1820,6 +1870,64 @@
                 });
             }
 
+            // Render Card Pagination Controls (when pattern has > 1 page)
+            const paginationContainer = document.getElementById('cards-pagination-bar');
+            if (paginationContainer) {
+                if (totalPages > 1) {
+                    let pageButtonsHTML = '';
+                    for (let p = 0; p < totalPages; p++) {
+                        const isCurrent = p === currentCardsPage;
+                        pageButtonsHTML += `
+                        <button onclick="setCardsPage(${p})" class="w-8 h-8 rounded-lg text-xs font-bold transition flex items-center justify-center select-none ${
+                            isCurrent
+                                ? 'bg-[#fd5321] text-white shadow-sm scale-105'
+                                : 'bg-white hover:bg-stone-100 text-[#001011] border border-[#001011]/15 hover:border-[#fd5321]'
+                        }">
+                            ${p + 1}
+                        </button>
+                        `;
+                    }
+
+                    paginationContainer.innerHTML = `
+                    <div class="flex items-center justify-between w-full bg-[#ECEDE8]/90 backdrop-blur-xs px-4 py-2 rounded-xl border border-[#001011]/10 shadow-xs">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-[#001011]">
+                                Controllers <span class="text-[#fd5321] font-black">${startIdx + 1}&ndash;${endIdx}</span> of <span class="font-black">${totalCards}</span>
+                            </span>
+                            <span class="text-[11px] text-[#001011]/50 font-medium hidden sm:inline">&bull; Page ${currentCardsPage + 1} of ${totalPages}</span>
+                        </div>
+
+                        <!-- Page switcher -->
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="prevCardsPage()" ${currentCardsPage === 0 ? 'disabled' : ''} class="px-2.5 py-1 text-xs font-bold rounded-lg border transition flex items-center gap-1 select-none ${
+                                currentCardsPage === 0
+                                    ? 'opacity-40 cursor-not-allowed bg-transparent border-transparent text-[#001011]/40'
+                                    : 'bg-white hover:bg-[#001011] hover:text-white border-[#001011]/15 text-[#001011] active:scale-95 shadow-xs'
+                            }">
+                                <span>‹ Prev 4</span>
+                            </button>
+
+                            <div class="flex items-center gap-1">
+                                ${pageButtonsHTML}
+                            </div>
+
+                            <button onclick="nextCardsPage()" ${currentCardsPage === totalPages - 1 ? 'disabled' : ''} class="px-2.5 py-1 text-xs font-bold rounded-lg border transition flex items-center gap-1 select-none ${
+                                currentCardsPage === totalPages - 1
+                                    ? 'opacity-40 cursor-not-allowed bg-transparent border-transparent text-[#001011]/40'
+                                    : 'bg-white hover:bg-[#001011] hover:text-white border-[#001011]/15 text-[#001011] active:scale-95 shadow-xs'
+                            }">
+                                <span>Next 4 ›</span>
+                            </button>
+                        </div>
+                    </div>
+                    `;
+                    paginationContainer.classList.remove('hidden');
+                } else {
+                    paginationContainer.innerHTML = '';
+                    paginationContainer.classList.add('hidden');
+                }
+            }
+
             // Render Bottom Mechanism Family Tabs and Pattern Pills
             const currentFamily = getFamilyForPattern(currentPat);
             const effectiveFamilyId = selectedFamilyId === 'all' 
@@ -1836,10 +1944,10 @@
                 <button onclick="selectFamily('all')" class="text-xs font-bold px-3 py-1.5 rounded-xl border transition-all duration-150 select-none flex items-center gap-1.5 ${
                     isAllActive
                         ? 'bg-[#001011] text-white border-[#001011] shadow-sm'
-                        : 'bg-white/80 hover:bg-white text-[#001011]/80 hover:text-[#001011] border-[#001011]/15'
+                        : 'bg-white/60 hover:bg-white text-gray-400 hover:text-[#001011] border-[#001011]/10 hover:border-[#001011]/25'
                 }">
                     <span>All Families</span>
-                    <span class="text-[10px] ${isAllActive ? 'text-white/80' : 'text-[#001011]/50'} font-semibold">(21)</span>
+                    <span class="text-[10px] ${isAllActive ? 'text-white/80' : 'text-gray-400 group-hover:text-[#001011]/70'} font-semibold">(21)</span>
                 </button>
                 `;
 
@@ -1851,10 +1959,10 @@
                     <button onclick="selectFamily('${fam.id}')" class="text-xs font-bold px-3 py-1.5 rounded-xl border transition-all duration-150 select-none flex items-center gap-1.5 ${
                         isFamActive
                             ? 'bg-[#001011] text-white border-[#001011] shadow-sm'
-                            : 'bg-white/80 hover:bg-white text-[#001011]/80 hover:text-[#001011] border-[#001011]/15'
+                            : 'bg-white/60 hover:bg-white text-gray-400 hover:text-[#001011] border-[#001011]/10 hover:border-[#001011]/25'
                     }">
                         <span>${fam.name}</span>
-                        <span class="text-[10px] ${isFamActive ? 'text-white/80' : 'text-[#001011]/50'} font-semibold">(${famPatternCount})</span>
+                        <span class="text-[10px] ${isFamActive ? 'text-white/80' : 'text-gray-400 group-hover:text-[#001011]/70'} font-semibold">(${famPatternCount})</span>
                     </button>
                     `;
                 });
