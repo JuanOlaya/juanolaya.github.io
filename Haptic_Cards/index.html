@@ -192,12 +192,9 @@
             <div class="bg-[#ECEDE8] rounded-2xl p-4 sm:p-5 border border-[#001011]/10 shadow-sm">
                 <!-- Bar Header -->
                 <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-[#001011]/10 flex-wrap gap-2">
-                    <div class="flex items-center gap-2">
-                        <span class="text-base text-[#fd5321]">🔍</span>
-                        <h3 class="text-xs sm:text-sm font-black text-[#001011] uppercase tracking-wider">
-                            FILTER BY MECHANISM FAMILY &amp; PATTERN (21 TOTAL)
-                        </h3>
-                    </div>
+                    <h3 class="text-xs sm:text-sm font-black text-[#001011] uppercase tracking-wider">
+                        FILTER BY MECHANISM FAMILY &amp; PATTERN (21 TOTAL)
+                    </h3>
                     <span class="text-xs font-bold text-[#001011]/70 bg-[#001011]/5 px-3 py-1 rounded-full border border-[#001011]/15">
                         92 Peer-Reviewed Controllers
                     </span>
@@ -1841,7 +1838,6 @@
                         ? 'bg-[#001011] text-white border-[#001011] shadow-sm'
                         : 'bg-white/80 hover:bg-white text-[#001011]/80 hover:text-[#001011] border-[#001011]/15'
                 }">
-                    <span>🗂️</span>
                     <span>All Families</span>
                     <span class="text-[10px] ${isAllActive ? 'text-white/80' : 'text-[#001011]/50'} font-semibold">(21)</span>
                 </button>
@@ -1857,7 +1853,6 @@
                             ? 'bg-[#001011] text-white border-[#001011] shadow-sm'
                             : 'bg-white/80 hover:bg-white text-[#001011]/80 hover:text-[#001011] border-[#001011]/15'
                     }">
-                        <span>${fam.icon}</span>
                         <span>${fam.name}</span>
                         <span class="text-[10px] ${isFamActive ? 'text-white/80' : 'text-[#001011]/50'} font-semibold">(${famPatternCount})</span>
                     </button>
@@ -1877,15 +1872,14 @@
                     mechanismFamilies.forEach(fam => {
                         groupedHTML += `
                         <div class="flex items-center gap-2 flex-wrap">
-                            <span class="text-[11px] font-black uppercase text-[#001011]/70 tracking-wider bg-[#001011]/5 px-2.5 py-1 rounded-lg shrink-0 flex items-center gap-1">
-                                <span>${fam.icon}</span> <span>${fam.name}</span>
+                            <span class="text-[11px] font-black uppercase text-[#001011]/70 tracking-wider bg-[#001011]/5 px-2.5 py-1 rounded-lg shrink-0">
+                                ${fam.name}
                             </span>
                             <div class="flex flex-wrap gap-1.5">
                         `;
                         fam.patterns.forEach(pat => {
                             const idx = canonicalPatterns.indexOf(pat);
                             const count = regularDevices.filter(d => (deviceMechanismPatterns[d.name] || "General") === pat).length;
-                            const icon = patternIcons[pat] || "⚙️";
                             const isActive = idx === currentPatternIndex;
                             groupedHTML += `
                             <button onclick="setPattern(${idx})" class="text-xs font-medium px-3 py-1.5 rounded-full border transition-all duration-150 select-none flex items-center gap-1.5 shadow-xs ${
@@ -1893,7 +1887,6 @@
                                     ? 'bg-[#fd5321] text-white border-[#fd5321] font-bold shadow-md scale-105' 
                                     : 'bg-white text-[#001011] border-[#001011]/15 hover:border-[#fd5321] hover:bg-[#FEFAF6]'
                             }">
-                                <span>${icon}</span>
                                 <span>${pat}</span>
                                 <span class="text-[10px] ${isActive ? 'text-white font-bold' : 'text-[#001011]/60 font-semibold'}">(${count})</span>
                             </button>
@@ -1910,7 +1903,6 @@
                     fam.patterns.forEach(pat => {
                         const idx = canonicalPatterns.indexOf(pat);
                         const count = regularDevices.filter(d => (deviceMechanismPatterns[d.name] || "General") === pat).length;
-                        const icon = patternIcons[pat] || "⚙️";
                         const isActive = idx === currentPatternIndex;
 
                         pillsHTML += `
@@ -1919,7 +1911,6 @@
                                 ? 'bg-[#fd5321] text-white border-[#fd5321] font-bold shadow-md scale-105' 
                                 : 'bg-white text-[#001011] border-[#001011]/15 hover:border-[#fd5321] hover:bg-[#FEFAF6]'
                         }">
-                            <span>${icon}</span>
                             <span>${pat}</span>
                             <span class="text-[10.5px] ${isActive ? 'text-white font-bold' : 'text-[#001011]/60 font-semibold'}">(${count})</span>
                         </button>
