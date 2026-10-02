@@ -180,22 +180,22 @@
             </div>
         </header>
 
-        <!-- 4-Card Viewport Grid Container (Main Screen Area) -->
-        <main class="flex-grow mb-6">
-            <div id="cards-viewport" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch min-h-[500px]">
+        <!-- 4-Card Viewport Grid Container (Main Screen Area - Centered) -->
+        <main class="flex-grow flex flex-col justify-center my-auto py-3">
+            <div id="cards-viewport" class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch min-h-[500px]">
                 <!-- Exactly 4 Cards are dynamically injected here -->
             </div>
         </main>
 
-        <!-- Bottom Mechanism Patterns Bar (Exact matching screenshot design) -->
+        <!-- Bottom Mechanism Patterns Bar (Grouped by Mechanism Families) -->
         <footer class="mt-auto">
             <div class="bg-[#ECEDE8] rounded-2xl p-4 sm:p-5 border border-[#001011]/10 shadow-sm">
                 <!-- Bar Header -->
-                <div class="flex items-center justify-between mb-3 pb-2 border-b border-[#001011]/10 flex-wrap gap-2">
+                <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-[#001011]/10 flex-wrap gap-2">
                     <div class="flex items-center gap-2">
                         <span class="text-base text-[#fd5321]">🔍</span>
                         <h3 class="text-xs sm:text-sm font-black text-[#001011] uppercase tracking-wider">
-                            FILTER BY MECHANISM PATTERN (21 TOTAL)
+                            FILTER BY MECHANISM FAMILY &amp; PATTERN (21 TOTAL)
                         </h3>
                     </div>
                     <span class="text-xs font-bold text-[#001011]/70 bg-[#001011]/5 px-3 py-1 rounded-full border border-[#001011]/15">
@@ -203,8 +203,13 @@
                     </span>
                 </div>
 
-                <!-- 21 Pattern Pills Grid / Wrap matching screenshot -->
-                <div id="patterns-pills-container" class="flex flex-wrap gap-2 custom-scrollbar">
+                <!-- Functional Mechanism Family Tabs -->
+                <div id="family-tabs-container" class="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-3 pb-2.5 border-b border-[#001011]/10">
+                    <!-- Family tabs injected here -->
+                </div>
+
+                <!-- Pattern Pills Container -->
+                <div id="patterns-pills-container" class="flex flex-wrap gap-2 items-center min-h-[38px]">
                     <!-- Pills injected here -->
                 </div>
             </div>
@@ -1369,6 +1374,90 @@
         const cutaneousSubmodalities = new Set(["Thermal", "Stiffness", "Friction", "Vibration", "Fine vibration"]);
         const kinestheticSubmodalities = new Set(["Impact", "Motion", "Resistance", "Weight magnitude", "Weight distribution", "Shape", "Size", "Deformation", "Compliance", "Mass displacement", "Torque", "Inertia", "CoG Displacement"]);
 
+        // 5 Functional Mechanism Families grouping the 21 Canonical Patterns
+        const mechanismFamilies = [
+            {
+                id: "mass-inertia",
+                name: "Mass & Inertia",
+                icon: "⚖️",
+                patterns: [
+                    "Solid mass shifting",
+                    "Liquid mass shifting",
+                    "Flywheel torque",
+                    "Mass acceleration",
+                    "Mass striking"
+                ]
+            },
+            {
+                id: "fluids-pneumatics",
+                name: "Fluids & Pneumatics",
+                icon: "💨",
+                patterns: [
+                    "Aerodynamic resistance",
+                    "Compressed air release",
+                    "Propeller thrust"
+                ]
+            },
+            {
+                id: "surface-deformation",
+                name: "Surface & Deformation",
+                icon: "✋",
+                patterns: [
+                    "Flexible surface deformation",
+                    "Grip morphing",
+                    "Pin extension",
+                    "Plate shearing",
+                    "Plate tilting",
+                    "Surface rotation"
+                ]
+            },
+            {
+                id: "mechanical-structural",
+                name: "Mechanical & Structural",
+                icon: "⚙️",
+                patterns: [
+                    "Joint actuation",
+                    "Band elasticity control",
+                    "Spring loading",
+                    "Exchangeable actuator modules"
+                ]
+            },
+            {
+                id: "sensory-thermal",
+                name: "Sensory & Thermal",
+                icon: "⚡",
+                patterns: [
+                    "Vibration",
+                    "Electrode stimulation",
+                    "Peltier cell actuation"
+                ]
+            }
+        ];
+
+        let selectedFamilyId = 'auto'; // 'auto' tracks active pattern family; or specific family id; or 'all'
+
+        function getFamilyForPattern(patName) {
+            return mechanismFamilies.find(f => f.patterns.includes(patName)) || mechanismFamilies[0];
+        }
+
+        function selectFamily(familyId) {
+            selectedFamilyId = familyId;
+            if (familyId !== 'all') {
+                const fam = mechanismFamilies.find(f => f.id === familyId);
+                if (fam) {
+                    const currentPat = canonicalPatterns[currentPatternIndex];
+                    if (!fam.patterns.includes(currentPat)) {
+                        const newIdx = canonicalPatterns.indexOf(fam.patterns[0]);
+                        if (newIdx !== -1) {
+                            setPattern(newIdx, 0);
+                            return;
+                        }
+                    }
+                }
+            }
+            renderApp();
+        }
+
         // App state: Default to Solid mass shifting (Index 9, contains LeverForce)
         let currentPatternIndex = 9; 
         let currentCardsPage = 0; // 0-based page of 4 cards
@@ -1499,6 +1588,9 @@
             if (idx >= canonicalPatterns.length) idx = 0;
             currentPatternIndex = idx;
             currentCardsPage = targetPage;
+            if (selectedFamilyId !== 'all') {
+                selectedFamilyId = 'auto';
+            }
             renderApp();
         }
 
@@ -1731,28 +1823,110 @@
                 });
             }
 
-            // Render Bottom Mechanism Pattern Pills exactly as in the screenshot
+            // Render Bottom Mechanism Family Tabs and Pattern Pills
+            const currentFamily = getFamilyForPattern(currentPat);
+            const effectiveFamilyId = selectedFamilyId === 'all' 
+                ? 'all' 
+                : (selectedFamilyId === 'auto' ? currentFamily.id : selectedFamilyId);
+
+            const familyTabsContainer = document.getElementById('family-tabs-container');
+            if (familyTabsContainer) {
+                let tabsHTML = '';
+                
+                // "All Families" Tab
+                const isAllActive = effectiveFamilyId === 'all';
+                tabsHTML += `
+                <button onclick="selectFamily('all')" class="text-xs font-bold px-3 py-1.5 rounded-xl border transition-all duration-150 select-none flex items-center gap-1.5 ${
+                    isAllActive
+                        ? 'bg-[#001011] text-white border-[#001011] shadow-sm'
+                        : 'bg-white/80 hover:bg-white text-[#001011]/80 hover:text-[#001011] border-[#001011]/15'
+                }">
+                    <span>🗂️</span>
+                    <span>All Families</span>
+                    <span class="text-[10px] ${isAllActive ? 'text-white/80' : 'text-[#001011]/50'} font-semibold">(21)</span>
+                </button>
+                `;
+
+                // Individual Family Tabs
+                mechanismFamilies.forEach(fam => {
+                    const isFamActive = effectiveFamilyId === fam.id;
+                    const famPatternCount = fam.patterns.length;
+                    tabsHTML += `
+                    <button onclick="selectFamily('${fam.id}')" class="text-xs font-bold px-3 py-1.5 rounded-xl border transition-all duration-150 select-none flex items-center gap-1.5 ${
+                        isFamActive
+                            ? 'bg-[#001011] text-white border-[#001011] shadow-sm'
+                            : 'bg-white/80 hover:bg-white text-[#001011]/80 hover:text-[#001011] border-[#001011]/15'
+                    }">
+                        <span>${fam.icon}</span>
+                        <span>${fam.name}</span>
+                        <span class="text-[10px] ${isFamActive ? 'text-white/80' : 'text-[#001011]/50'} font-semibold">(${famPatternCount})</span>
+                    </button>
+                    `;
+                });
+
+                familyTabsContainer.innerHTML = tabsHTML;
+            }
+
             const pillsContainer = document.getElementById('patterns-pills-container');
             if (pillsContainer) {
                 pillsContainer.innerHTML = '';
-                canonicalPatterns.forEach((pat, idx) => {
-                    const count = regularDevices.filter(d => (deviceMechanismPatterns[d.name] || "General") === pat).length;
-                    const icon = patternIcons[pat] || "⚙️";
-                    const isActive = idx === currentPatternIndex;
 
-                    const pillHTML = `
-                    <button onclick="setPattern(${idx})" class="text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all duration-150 select-none flex items-center gap-1.5 shadow-sm ${
-                        isActive 
-                            ? 'bg-[#fd5321] text-white border-[#fd5321] font-bold shadow-md scale-105' 
-                            : 'bg-white text-[#001011] border-[#001011]/15 hover:border-[#fd5321] hover:bg-[#FEFAF6]'
-                    }">
-                        <span>${icon}</span>
-                        <span>${pat}</span>
-                        <span class="text-[10.5px] ${isActive ? 'text-white font-bold' : 'text-[#001011]/60 font-semibold'}">(${count})</span>
-                    </button>
-                    `;
-                    pillsContainer.innerHTML += pillHTML;
-                });
+                if (effectiveFamilyId === 'all') {
+                    // Grouped view by family when "All" is active
+                    let groupedHTML = '<div class="flex flex-col gap-2.5 w-full">';
+                    mechanismFamilies.forEach(fam => {
+                        groupedHTML += `
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-[11px] font-black uppercase text-[#001011]/70 tracking-wider bg-[#001011]/5 px-2.5 py-1 rounded-lg shrink-0 flex items-center gap-1">
+                                <span>${fam.icon}</span> <span>${fam.name}</span>
+                            </span>
+                            <div class="flex flex-wrap gap-1.5">
+                        `;
+                        fam.patterns.forEach(pat => {
+                            const idx = canonicalPatterns.indexOf(pat);
+                            const count = regularDevices.filter(d => (deviceMechanismPatterns[d.name] || "General") === pat).length;
+                            const icon = patternIcons[pat] || "⚙️";
+                            const isActive = idx === currentPatternIndex;
+                            groupedHTML += `
+                            <button onclick="setPattern(${idx})" class="text-xs font-medium px-3 py-1.5 rounded-full border transition-all duration-150 select-none flex items-center gap-1.5 shadow-xs ${
+                                isActive 
+                                    ? 'bg-[#fd5321] text-white border-[#fd5321] font-bold shadow-md scale-105' 
+                                    : 'bg-white text-[#001011] border-[#001011]/15 hover:border-[#fd5321] hover:bg-[#FEFAF6]'
+                            }">
+                                <span>${icon}</span>
+                                <span>${pat}</span>
+                                <span class="text-[10px] ${isActive ? 'text-white font-bold' : 'text-[#001011]/60 font-semibold'}">(${count})</span>
+                            </button>
+                            `;
+                        });
+                        groupedHTML += `</div></div>`;
+                    });
+                    groupedHTML += '</div>';
+                    pillsContainer.innerHTML = groupedHTML;
+                } else {
+                    // Focused single-family view: clean, comfortable row
+                    const fam = mechanismFamilies.find(f => f.id === effectiveFamilyId) || mechanismFamilies[0];
+                    let pillsHTML = '';
+                    fam.patterns.forEach(pat => {
+                        const idx = canonicalPatterns.indexOf(pat);
+                        const count = regularDevices.filter(d => (deviceMechanismPatterns[d.name] || "General") === pat).length;
+                        const icon = patternIcons[pat] || "⚙️";
+                        const isActive = idx === currentPatternIndex;
+
+                        pillsHTML += `
+                        <button onclick="setPattern(${idx})" class="text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all duration-150 select-none flex items-center gap-1.5 shadow-sm ${
+                            isActive 
+                                ? 'bg-[#fd5321] text-white border-[#fd5321] font-bold shadow-md scale-105' 
+                                : 'bg-white text-[#001011] border-[#001011]/15 hover:border-[#fd5321] hover:bg-[#FEFAF6]'
+                        }">
+                            <span>${icon}</span>
+                            <span>${pat}</span>
+                            <span class="text-[10.5px] ${isActive ? 'text-white font-bold' : 'text-[#001011]/60 font-semibold'}">(${count})</span>
+                        </button>
+                        `;
+                    });
+                    pillsContainer.innerHTML = pillsHTML;
+                }
             }
         }
 
