@@ -157,20 +157,27 @@
             </div>
 
             <!-- Center: Pattern Prev / Active Pattern / Next Switchers -->
-            <div class="flex items-center justify-center gap-2 sm:gap-3 md:flex-initial lg:flex-1 w-full md:w-auto flex-wrap sm:flex-nowrap">
-                <button onclick="prevPattern()" class="px-4 py-2 sm:px-5 sm:py-2.5 bg-[#001011] hover:bg-sky-700 text-white rounded-xl text-sm sm:text-base font-bold shadow-md hover:shadow-lg transition flex items-center gap-1.5 active:scale-95 shrink-0">
-                    <span>◀ Previous</span>
-                </button>
-                <div class="flex items-center gap-2 px-3.5 py-2 bg-white/80 rounded-xl border border-[#001011]/10 shadow-sm text-center">
-                    <span id="hero-pattern-icon" class="text-xl select-none">⚖️</span>
-                    <span id="hero-pattern-title" class="text-sm sm:text-base font-black text-[#001011] tracking-tight whitespace-nowrap">
-                        Solid mass shifting
-                    </span>
-                    <span id="hero-pattern-count" class="text-[11px] font-bold text-[#fd5321] bg-[#fd5321]/10 px-2 py-0.5 rounded-full ml-1 hidden"></span>
+            <div class="flex flex-col items-center justify-center md:flex-initial lg:flex-1 w-full md:w-auto">
+                <div class="flex items-center justify-center gap-2 sm:gap-3 w-full">
+                    <button onclick="prevPattern()" class="px-4 py-2 sm:px-5 sm:py-2.5 bg-[#001011] hover:bg-sky-700 text-white rounded-xl text-sm sm:text-base font-bold shadow-md hover:shadow-lg transition flex items-center gap-1.5 active:scale-95 shrink-0">
+                        <span>◀ Previous</span>
+                    </button>
+                    <div class="flex items-center gap-2 px-3.5 py-2 bg-white/80 rounded-xl border border-[#001011]/10 shadow-sm text-center">
+                        <span id="hero-pattern-icon" class="text-xl select-none">⚖️</span>
+                        <span id="hero-pattern-title" class="text-sm sm:text-base font-black text-[#001011] tracking-tight whitespace-nowrap">
+                            Solid mass shifting
+                        </span>
+                        <span id="hero-pattern-count" class="text-[11px] font-bold text-[#fd5321] bg-[#fd5321]/10 px-2 py-0.5 rounded-full ml-1 hidden"></span>
+                    </div>
+                    <button onclick="nextPattern()" class="px-4 py-2 sm:px-5 sm:py-2.5 bg-[#001011] hover:bg-sky-700 text-white rounded-xl text-sm sm:text-base font-bold shadow-md hover:shadow-lg transition flex items-center gap-1.5 active:scale-95 shrink-0">
+                        <span>Next ▶</span>
+                    </button>
                 </div>
-                <button onclick="nextPattern()" class="px-4 py-2 sm:px-5 sm:py-2.5 bg-[#001011] hover:bg-sky-700 text-white rounded-xl text-sm sm:text-base font-bold shadow-md hover:shadow-lg transition flex items-center gap-1.5 active:scale-95 shrink-0">
-                    <span>Next ▶</span>
-                </button>
+
+                <!-- Minimal Dots & Info (Underneath Pattern) -->
+                <div id="cards-dots-container" class="flex items-center justify-center gap-1.5 mt-1.5 min-h-[16px]">
+                    <!-- Injected dynamically: dots + "1–4 of 8 controllers" -->
+                </div>
             </div>
 
             <!-- Right: Info / Taxonomy Modal Toggle (Small) -->
@@ -201,10 +208,6 @@
                 </button>
             </div>
 
-            <!-- Minimal Dots & Info (Zero boxes, 100% transparent, minimal) -->
-            <div id="cards-dots-container" class="flex items-center justify-center gap-2 mt-2.5 min-h-[20px]">
-                <!-- Injected dynamically: dots + "1–4 of 8" without any box/background -->
-            </div>
         </main>
 
         <!-- Bottom Mechanism Patterns Bar (Grouped by Mechanism Families) -->
@@ -1900,7 +1903,7 @@
                     dotsHTML += '</div>';
                     dotsHTML += `
                     <span class="text-xs font-semibold text-[#001011]/60 ml-1.5 select-none">
-                        ${startIdx + 1}&ndash;${endIdx} of ${totalCards} controllers
+                        ${startIdx + 1 === endIdx ? endIdx : (startIdx + 1) + '&ndash;' + endIdx} of ${totalCards} controllers
                     </span>
                     `;
                     dotsContainer.innerHTML = dotsHTML;
