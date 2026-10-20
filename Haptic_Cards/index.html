@@ -193,7 +193,7 @@
             <!-- Cards Grid Area with Floating Side Navigation -->
             <div class="relative w-full">
                 <!-- Floating Left Arrow for Card Pagination (only shown when pattern has > 4 cards and currentCardsPage > 0) -->
-                <button id="cards-nav-prev" onclick="prevCardsPage()" title="Previous controllers" aria-label="Previous controllers" class="hidden absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white text-[#001011] hover:bg-[#001011] hover:text-white shadow-xl border border-[#001011]/15 transition-all flex items-center justify-center text-2xl font-bold cursor-pointer active:scale-90">
+                <button id="cards-nav-prev" onclick="prevCardsPage()" title="Previous controllers" aria-label="Previous controllers" class="hidden absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#fd5321] text-white hover:bg-[#e04818] shadow-xl shadow-[#fd5321]/35 border border-white/40 transition-all flex items-center justify-center text-2xl font-bold cursor-pointer active:scale-90">
                     <span class="-ml-0.5 leading-none">‹</span>
                 </button>
 
@@ -203,34 +203,45 @@
                 </div>
 
                 <!-- Floating Right Arrow for Card Pagination (only shown when pattern has > 4 cards and currentCardsPage < totalPages - 1) -->
-                <button id="cards-nav-next" onclick="nextCardsPage()" title="Next controllers" aria-label="Next controllers" class="hidden absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white text-[#001011] hover:bg-[#001011] hover:text-white shadow-xl border border-[#001011]/15 transition-all flex items-center justify-center text-2xl font-bold cursor-pointer active:scale-90">
+                <button id="cards-nav-next" onclick="nextCardsPage()" title="Next controllers" aria-label="Next controllers" class="hidden absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#fd5321] text-white hover:bg-[#e04818] shadow-xl shadow-[#fd5321]/35 border border-white/40 transition-all flex items-center justify-center text-2xl font-bold cursor-pointer active:scale-90">
                     <span class="-mr-0.5 leading-none">›</span>
                 </button>
             </div>
 
         </main>
 
-        <!-- Bottom Mechanism Patterns Bar (Grouped by Mechanism Families) -->
+        <!-- Bottom Mechanism Patterns Bar (Grouped by Mechanism Families - Collapsible) -->
         <footer class="mt-auto">
-            <div class="bg-[#ECEDE8] rounded-2xl p-4 sm:p-5 border border-[#001011]/10 shadow-sm">
-                <!-- Bar Header -->
-                <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-[#001011]/10 flex-wrap gap-2">
-                    <h3 class="text-xs sm:text-sm font-black text-[#001011] uppercase tracking-wider">
-                        FILTER BY MECHANISM FAMILY &amp; PATTERN (21 TOTAL)
-                    </h3>
-                    <span class="text-xs font-bold text-[#001011]/70 bg-[#001011]/5 px-3 py-1 rounded-full border border-[#001011]/15">
-                        92 Peer-Reviewed Controllers
-                    </span>
+            <div class="bg-[#ECEDE8] rounded-2xl px-4 py-2.5 sm:px-5 sm:py-3 border border-[#001011]/10 shadow-sm transition-all duration-300">
+                <!-- Clickable Accordion Header -->
+                <div onclick="toggleFooterCollapse()" class="flex items-center justify-between flex-wrap gap-2 cursor-pointer group select-none">
+                    <div class="flex items-center gap-2.5">
+                        <span id="footer-chevron" class="text-xs font-black text-[#fd5321] transition-transform duration-200">▲</span>
+                        <h3 class="text-xs sm:text-sm font-black text-[#001011] group-hover:text-[#fd5321] uppercase tracking-wider transition-colors">
+                            FILTER BY MECHANISM FAMILY &amp; PATTERN (21 TOTAL)
+                        </h3>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-[#001011]/70 bg-[#001011]/5 px-3 py-1 rounded-full border border-[#001011]/15">
+                            92 Peer-Reviewed Controllers
+                        </span>
+                        <span id="footer-toggle-btn" class="text-xs font-bold text-[#fd5321] group-hover:underline px-2 py-0.5 rounded-lg bg-[#fd5321]/10 transition">
+                            Show
+                        </span>
+                    </div>
                 </div>
 
-                <!-- Functional Mechanism Family Tabs -->
-                <div id="family-tabs-container" class="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-3 pb-2.5 border-b border-[#001011]/10">
-                    <!-- Family tabs injected here -->
-                </div>
+                <!-- Collapsible Content Wrapper (Closed by default) -->
+                <div id="footer-collapsible-content" class="hidden mt-3 pt-3 border-t border-[#001011]/10">
+                    <!-- Functional Mechanism Family Tabs -->
+                    <div id="family-tabs-container" class="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-3 pb-2.5 border-b border-[#001011]/10">
+                        <!-- Family tabs injected here -->
+                    </div>
 
-                <!-- Pattern Pills Container -->
-                <div id="patterns-pills-container" class="flex flex-wrap gap-2 items-center min-h-[38px]">
-                    <!-- Pills injected here -->
+                    <!-- Pattern Pills Container -->
+                    <div id="patterns-pills-container" class="flex flex-wrap gap-2 items-center min-h-[38px]">
+                        <!-- Pills injected here -->
+                    </div>
                 </div>
             </div>
         </footer>
@@ -1653,6 +1664,25 @@
             let prevIdx = currentPatternIndex - 1;
             if (prevIdx < 0) prevIdx = canonicalPatterns.length - 1;
             setPattern(prevIdx, 0);
+        }
+
+        let isFooterCollapsed = true;
+        function toggleFooterCollapse() {
+            isFooterCollapsed = !isFooterCollapsed;
+            const content = document.getElementById('footer-collapsible-content');
+            const chevron = document.getElementById('footer-chevron');
+            const toggleBtn = document.getElementById('footer-toggle-btn');
+            if (content) {
+                if (isFooterCollapsed) {
+                    content.classList.add('hidden');
+                    if (chevron) chevron.textContent = '▲';
+                    if (toggleBtn) toggleBtn.textContent = 'Show';
+                } else {
+                    content.classList.remove('hidden');
+                    if (chevron) chevron.textContent = '▼';
+                    if (toggleBtn) toggleBtn.textContent = 'Hide';
+                }
+            }
         }
 
         function toggleIntroModal() {
