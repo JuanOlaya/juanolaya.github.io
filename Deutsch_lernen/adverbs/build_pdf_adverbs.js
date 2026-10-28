@@ -276,7 +276,7 @@ let printHtml = `<!DOCTYPE html>
             line-height: 0.95;
         }
         .kompakt-german.long-word {
-            font-size: 1.15rem;
+            font-size: 0.98rem;
             letter-spacing: -0.4px;
         }
         .kompakt-german.mid-word {
