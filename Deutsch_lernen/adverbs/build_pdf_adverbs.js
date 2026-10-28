@@ -141,7 +141,7 @@ const dtzKeyNotes = {
     // Modal, Opinión y Actitud
     "leider": { emoji: "✍️🗣️", tip: "Disculparse y cancelar citas", ex_de: "Leider muss ich unseren Termin absagen.", ex_es: "Lamentablemente tengo que cancelar nuestra cita." },
     "vielleicht": { emoji: "🗣️", tip: "Hacer propuestas al compañero", ex_de: "Vielleicht können wir einen Kuchen backen?", ex_es: "¿Quizás podamos hornear un pastel?" },
-    "wahrscheinlich": { emoji: "🗣️", tip: "Describir fotos (hipótesis)", ex_de: "Die Familie feiert wahrscheinlich einen Geburtstag.", ex_es: "La familia probablemente celebra un cumpleaños." },
+    "eigentlich": { emoji: "🗣️", tip: "Matizar respuestas al hablar (en realidad)", ex_de: "Eigentlich habe ich heute keine Zeit.", ex_es: "En realidad hoy no tengo tiempo." },
     "natürlich": { emoji: "🗣️", tip: "Aceptar con amabilidad", ex_de: "Natürlich helfe ich dir gern.", ex_es: "Por supuesto te ayudo con gusto." },
     "wirklich": { emoji: "🗣️", tip: "Reaccionar en el diálogo", ex_de: "Das ist wirklich eine gute Idee!", ex_es: "¡De verdad es una buena idea!" },
 
@@ -238,14 +238,14 @@ let printHtml = `<!DOCTYPE html>
             opacity: 0.95;
         }
         .kompakt-content {
-            padding: 1px 8px;
+            padding: 0px 8px;
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
         }
         .kompakt-row {
-            padding: 1.5px 0;
+            padding: 0.5px 0;
             border-bottom: 1px solid #f1f5f9;
             display: flex;
             align-items: center;
@@ -256,11 +256,11 @@ let printHtml = `<!DOCTYPE html>
             border-bottom: none;
         }
         .col-left {
-            width: 36%;
+            width: 37%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            line-height: 1;
+            line-height: 0.95;
         }
         .word-title-line {
             display: flex;
@@ -269,15 +269,23 @@ let printHtml = `<!DOCTYPE html>
         }
         .kompakt-german {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.48rem;
+            font-size: 1.7rem;
             font-weight: 900;
             color: #0f172a;
-            letter-spacing: -0.5px;
-            line-height: 1;
+            letter-spacing: -0.6px;
+            line-height: 0.95;
+        }
+        .kompakt-german.long-word {
+            font-size: 1.15rem;
+            letter-spacing: -0.4px;
+        }
+        .kompakt-german.mid-word {
+            font-size: 1.4rem;
+            letter-spacing: -0.4px;
         }
         .star-badge {
             color: #d97706;
-            font-size: 0.95rem;
+            font-size: 1rem;
             line-height: 1;
             font-weight: bold;
         }
@@ -295,14 +303,14 @@ let printHtml = `<!DOCTYPE html>
             line-height: 1.1;
         }
         .col-right {
-            width: 64%;
+            width: 63%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             text-align: right;
             border-left: 2px solid #e2e8f0;
             padding-left: 6px;
-            line-height: 1.16;
+            line-height: 1.15;
         }
         .right-top-line {
             display: flex;
@@ -391,6 +399,14 @@ orderedThemeTitles.forEach((themeTitle, index) => {
             const isKey = !!keyData;
             const tipText = keyData ? `${keyData.emoji} ${keyData.tip}` : null;
 
+            // Determinar clase de tamaño según longitud de la palabra
+            let sizeClass = '';
+            if (adv.word.length >= 12) {
+                sizeClass = ' long-word'; // e.g. wahrscheinlich (14), normalerweise (13), mittlerweile (12)
+            } else if (adv.word.length >= 9) {
+                sizeClass = ' mid-word';  // e.g. schließlich (11), regelmäßig (10), eigentlich (10)
+            }
+
             // Ejemplo enfocado al DTZ
             const exDe = (keyData && keyData.ex_de) ? keyData.ex_de : adv.example_de;
             const exEs = (keyData && keyData.ex_es) ? keyData.ex_es : adv.example_es;
@@ -406,7 +422,7 @@ orderedThemeTitles.forEach((themeTitle, index) => {
             rowsHtml += `            <div class="kompakt-row">
                 <div class="col-left">
                     <div class="word-title-line">
-                        <span class="kompakt-german">${adv.word}</span>
+                        <span class="kompakt-german${sizeClass}">${adv.word}</span>
                         ${isKey ? '<span class="star-badge" title="Esencial DTZ">⭐</span>' : ''}
                     </div>
                     <div class="meaning-line" title="${spanTrans}">
