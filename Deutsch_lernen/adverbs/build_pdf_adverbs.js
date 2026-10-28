@@ -106,52 +106,53 @@ const metaCategoryMap = {
     "Bezug": "PRONOMINAL"
 };
 
-// 35 Adverbios más cruciales para DTZ B1 y sus notas de destreza contextual con emojis
+// 35 Adverbios más cruciales para DTZ B1 y sus notas de destreza con emojis (✍️ Schreiben, 🗣️ Sprechen, 📖 Lesen, 👂 Hören)
+// Con frases simples, directas y enfocadas al examen
 const dtzKeyNotes = {
     // Kausal & Verbindung (Conectores imprescindibles)
-    "deshalb": { emoji: "✍️🗣️", tip: "Causa principal B1 (verbo en pos. 2)", ex_de: "Ich war krank, deshalb konnte ich nicht kommen.", ex_es: "Estaba enfermo, por eso no pude venir." },
-    "deswegen": { emoji: "✍️", tip: "Justificaciones en cartas y reclamos", ex_de: "Der Zug hatte Verspätung, deswegen komme ich später.", ex_es: "El tren se retrasó, por esa razón llego tarde." },
-    "also": { emoji: "🗣️", tip: "Concluir / estructurar al hablar", ex_de: "Also, wir treffen uns morgen um 10 Uhr.", ex_es: "Entonces, nos encontramos mañana a las 10." },
-    "sonst": { emoji: "🗣️✍️", tip: "Consecuencia negativa (o si no...)", ex_de: "Bitte antworten Sie schnell, sonst verfällt der Termin.", ex_es: "Responda pronto, por favor, si no la cita caducará." },
-    "trotzdem": { emoji: "✍️🗣️", tip: "Conector concesivo estrella B1", ex_de: "Es regnet, trotzdem gehen wir zum Deutschkurs.", ex_es: "Llueve, no obstante vamos al curso de alemán." },
-    "außerdem": { emoji: "✍️", tip: "Sumar argumentos clave en la carta", ex_de: "Ich habe Erfahrung und spreche außerdem fließend Deutsch.", ex_es: "Tengo experiencia y además hablo alemán fluido." },
-    "allerdings": { emoji: "🗣️", tip: "Matizar opiniones en parte oral", ex_de: "Das Angebot ist gut, allerdings etwas zu teuer.", ex_es: "La oferta es buena, aunque ciertamente un poco cara." },
-    "schließlich": { emoji: "🗣️", tip: "Conclusión / al fin y al cabo", ex_de: "Wir haben schließlich eine Lösung gefunden.", ex_es: "Al final, después de todo, encontramos una solución." },
-    "doch": { emoji: "🗣️", tip: "Énfasis cordial para sonar natural", ex_de: "Kommen Sie doch bitte kurz vorbei!", ex_es: "¡Pásese por aquí un momento, por favor!" },
+    "deshalb": { emoji: "✍️🗣️", tip: "Causa en cartas y oral", ex_de: "Ich bin krank, deshalb bleibe ich zu Hause.", ex_es: "Estoy enfermo, por eso me quedo en casa." },
+    "deswegen": { emoji: "✍️", tip: "Justificar ausencias en notas", ex_de: "Mein Kind ist krank, deswegen komme ich nicht.", ex_es: "Mi hijo está enfermo, por eso no voy." },
+    "also": { emoji: "🗣️", tip: "Resumir acuerdos al hablar", ex_de: "Also, wir treffen uns um zehn Uhr.", ex_es: "Entonces, nos vemos a las diez." },
+    "sonst": { emoji: "📖🗣️", tip: "Condiciones en avisos (o si no)", ex_de: "Zahlen Sie bitte, sonst gibt es Mahngebühren.", ex_es: "Pague por favor, o si no habrá recargo." },
+    "trotzdem": { emoji: "✍️🗣️", tip: "Concesivo clave B1", ex_de: "Es regnet, trotzdem gehe ich spazieren.", ex_es: "Llueve, pero aun así salgo a caminar." },
+    "außerdem": { emoji: "✍️📖", tip: "Sumar puntos en la carta / leer avisos", ex_de: "Ich bin fleißig und lerne außerdem gern.", ex_es: "Soy aplicado y además me gusta aprender." },
+    "allerdings": { emoji: "📖🗣️", tip: "Matizar opiniones / contratos", ex_de: "Die Wohnung ist schön, allerdings teuer.", ex_es: "El piso es bonito, aunque ciertamente caro." },
+    "schließlich": { emoji: "🗣️", tip: "Concluir relato al hablar", ex_de: "Schließlich habe ich die Prüfung geschafft.", ex_es: "Al final aprobé el examen." },
+    "doch": { emoji: "🗣️", tip: "Invitar cordialmente", ex_de: "Komm doch bitte rein!", ex_es: "¡Entra por favor!" },
 
     // Temporales esenciales
-    "jetzt": { emoji: "✍️🗣️", tip: "Marcar situación presente en mensajes", ex_de: "Ich bin jetzt im Büro und rufe Sie gleich an.", ex_es: "Estoy ahora en la oficina y le llamo enseguida." },
-    "heute": { emoji: "✍️🗣️", tip: "Fijar plazos y fechas actuales", ex_de: "Kann ich heute noch einen Termin bekommen?", ex_es: "¿Puedo conseguir una cita todavía hoy?" },
-    "gestern": { emoji: "🗣️✍️", tip: "Relato de hechos pasados / reclamos", ex_de: "Gestern habe ich den Brief nicht erhalten.", ex_es: "Ayer no recibí la carta." },
-    "morgen": { emoji: "✍️🗣️", tip: "Proponer y acordar citas", ex_de: "Morgen um 14 Uhr passt es mir sehr gut.", ex_es: "Mañana a las 14:00 me viene muy bien." },
-    "bald": { emoji: "✍️", tip: "Cierre clásico en cartas formales", ex_de: "Ich hoffe, bald eine Antwort von Ihnen zu erhalten.", ex_es: "Espero recibir pronto una respuesta de usted." },
-    "sofort": { emoji: "✍️", tip: "Urgencias y reclamaciones formales", ex_de: "Bitte reparieren Sie die Heizung sofort.", ex_es: "Por favor, repare la calefacción inmediatamente." },
-    "dann": { emoji: "🗣️", tip: "Estructurar secuencia cronológica", ex_de: "Zuerst kochen wir, dann essen wir zusammen.", ex_es: "Primero cocinamos, luego comemos juntos." },
-    "danach": { emoji: "🗣️", tip: "Describir rutinas o pasos del día", ex_de: "Ich habe den Kurs besucht, danach war ich einkaufen.", ex_es: "Asistí al curso, después fui de compras." },
-    "später": { emoji: "🗣️✍️", tip: "Posponer citas o compromisos", ex_de: "Können wir das Treffen auf später verschieben?", ex_es: "¿Podemos aplazar la reunión para más tarde?" },
-    "zuerst": { emoji: "🗣️", tip: "Inicio de relato en la parte oral", ex_de: "Zuerst möchte ich mich kurz vorstellen.", ex_es: "Primero me gustaría presentarme brevemente." },
-    "zuletzt": { emoji: "🗣️", tip: "Cierre ordenado de relato o puntos", ex_de: "Zuletzt möchte ich mich für Ihre Hilfe bedanken.", ex_es: "Por último, quisiera agradecerle su ayuda." },
-    "schon": { emoji: "🗣️👂", tip: "Expresar cumplimiento / ya hecho", ex_de: "Ich habe die Unterlagen schon geschickt.", ex_es: "Ya he enviado los documentos." },
-    "noch": { emoji: "✍️🗣️", tip: "Estado pendiente / todavía", ex_de: "Ich warte noch auf eine Bestätigung.", ex_es: "Todavía estoy esperando una confirmación." },
-    "immer": { emoji: "🗣️", tip: "Frecuencia habitual en presentaciones", ex_de: "Ich lerne immer abends nach der Arbeit.", ex_es: "Siempre estudio por la tarde después del trabajo." },
-    "oft": { emoji: "🗣️", tip: "Hábitos y experiencias cotidianas", ex_de: "Ich fahre oft mit der U-Bahn zur Schule.", ex_es: "Viajo a menudo en metro a la escuela." },
-    "nie": { emoji: "🗣️", tip: "Negación temporal tajante", ex_de: "Er kommt nie zu spät zum Unterricht.", ex_es: "Él nunca llega tarde a clase." },
+    "jetzt": { emoji: "✍️🗣️", tip: "Situación presente en mensajes", ex_de: "Ich habe jetzt Zeit für Sie.", ex_es: "Ahora tengo tiempo para usted." },
+    "heute": { emoji: "✍️🗣️", tip: "Fijar citas para el mismo día", ex_de: "Heute kann ich leider nicht kommen.", ex_es: "Hoy lamentablemente no puedo ir." },
+    "gestern": { emoji: "🗣️✍️", tip: "Hechos pasados en reclamos", ex_de: "Gestern war die Heizung kaputt.", ex_es: "Ayer la calefacción estaba rota." },
+    "morgen": { emoji: "✍️🗣️", tip: "Proponer y confirmar citas", ex_de: "Morgen um 9 Uhr passt es mir gut.", ex_es: "Mañana a las 9 me viene bien." },
+    "bald": { emoji: "✍️", tip: "Despedida en cartas y emails", ex_de: "Schreib mir bitte bald!", ex_es: "¡Escríbeme pronto, por favor!" },
+    "sofort": { emoji: "📖✍️", tip: "Urgencias en notas y avisos", ex_de: "Bitte rufen Sie mich sofort an.", ex_es: "Por favor llámeme de inmediato." },
+    "dann": { emoji: "🗣️", tip: "Secuencia al relatar un día", ex_de: "Erst lerne ich, dann koche ich.", ex_es: "Primero estudio, luego cocino." },
+    "danach": { emoji: "🗣️", tip: "Describir el siguiente paso", ex_de: "Wir essen, danach gehen wir spazieren.", ex_es: "Comemos, después vamos a pasear." },
+    "später": { emoji: "🗣️✍️", tip: "Pedir cambio de hora", ex_de: "Können wir uns später treffen?", ex_es: "¿Podemos vernos más tarde?" },
+    "zuerst": { emoji: "🗣️", tip: "Empezar una explicación oral", ex_de: "Zuerst möchte ich mich vorstellen.", ex_es: "Primero quisiera presentarme." },
+    "zuletzt": { emoji: "🗣️", tip: "Terminar la presentación", ex_de: "Zuletzt danke ich für Ihre Aufmerksamkeit.", ex_es: "Por último agradezco su atención." },
+    "schon": { emoji: "📖👂", tip: "Acción ya realizada / confirmada", ex_de: "Ich habe den Brief schon abgeschickt.", ex_es: "Ya he enviado la carta." },
+    "noch": { emoji: "✍️🗣️", tip: "Acción pendiente o incompleta", ex_de: "Ich brauche noch etwas Zeit.", ex_es: "Todavía necesito algo de tiempo." },
+    "immer": { emoji: "🗣️", tip: "Rutinas en la presentación personal", ex_de: "Ich stehe immer um 7 Uhr auf.", ex_es: "Siempre me levanto a las 7." },
+    "oft": { emoji: "🗣️", tip: "Hablar de tiempo libre", ex_de: "Am Wochenende fahre ich oft Rad.", ex_es: "El fin de semana monto a menudo en bici." },
+    "nie": { emoji: "🗣️", tip: "Negación rotunda", ex_de: "Ich esse nie Fleisch.", ex_es: "Nunca como carne." },
 
     // Modal, Opinión y Actitud
-    "leider": { emoji: "✍️🗣️", tip: "Cancelar o disculpar citas (básico)", ex_de: "Leider kann ich morgen nicht zum Termin kommen.", ex_es: "Desafortunadamente no puedo ir a la cita mañana." },
-    "vielleicht": { emoji: "🗣️", tip: "Proponer ideas en la tarea conjunta", ex_de: "Vielleicht könnten wir am Samstag zusammen lernen?", ex_es: "¿Quizás podríamos estudiar juntos el sábado?" },
-    "wahrscheinlich": { emoji: "🗣️", tip: "Describir hipótesis en fotos (oral)", ex_de: "Die Familie feiert wahrscheinlich einen Geburtstag.", ex_es: "La familia probablemente está celebrando un cumpleaños." },
-    "natürlich": { emoji: "🗣️", tip: "Responder con seguridad y cortesía", ex_de: "Natürlich kann ich Ihnen dabei gerne helfen.", ex_es: "Por supuesto, puedo ayudarle con gusto en eso." },
-    "wirklich": { emoji: "🗣️", tip: "Mostrar interés y reaccionar al hablar", ex_de: "Das ist wirklich eine hervorragende Idee!", ex_es: "¡Esa es de verdad una idea excelente!" },
+    "leider": { emoji: "✍️🗣️", tip: "Disculparse y cancelar citas", ex_de: "Leider muss ich unseren Termin absagen.", ex_es: "Lamentablemente tengo que cancelar nuestra cita." },
+    "vielleicht": { emoji: "🗣️", tip: "Hacer propuestas al compañero", ex_de: "Vielleicht können wir einen Kuchen backen?", ex_es: "¿Quizás podamos hornear un pastel?" },
+    "wahrscheinlich": { emoji: "🗣️", tip: "Describir fotos (hipótesis)", ex_de: "Die Familie feiert wahrscheinlich einen Geburtstag.", ex_es: "La familia probablemente celebra un cumpleaños." },
+    "natürlich": { emoji: "🗣️", tip: "Aceptar con amabilidad", ex_de: "Natürlich helfe ich dir gern.", ex_es: "Por supuesto te ayudo con gusto." },
+    "wirklich": { emoji: "🗣️", tip: "Reaccionar en el diálogo", ex_de: "Das ist wirklich eine gute Idee!", ex_es: "¡De verdad es una buena idea!" },
 
     // Frecuencia & Preferencia
-    "gern": { emoji: "🗣️✍️", tip: "Aceptar planes y expresar gusto", ex_de: "Ich nehme die Einladung sehr gern an.", ex_es: "Acepto la invitación con mucho gusto." },
-    "lieber": { emoji: "🗣️", tip: "Proponer alternativas en el diálogo", ex_de: "Ich würde lieber ins Museum statt ins Kino gehen.", ex_es: "Preferiría ir al museo en vez de al cine." },
-    "normalerweise": { emoji: "🗣️", tip: "Describir costumbres en presentación", ex_de: "Normalerweise frühstücke ich um 7 Uhr.", ex_es: "Normalmente desayuno a las 7:00." },
+    "gern": { emoji: "🗣️✍️", tip: "Aceptar planes con entusiasmo", ex_de: "Ich komme sehr gern zur Party.", ex_es: "Voy con mucho gusto a la fiesta." },
+    "lieber": { emoji: "🗣️", tip: "Elegir otra opción al acordar", ex_de: "Ich trinke lieber Tee als Kaffee.", ex_es: "Prefiero tomar té que café." },
+    "normalerweise": { emoji: "🗣️", tip: "Describir costumbres típicas", ex_de: "Normalerweise fahre ich mit dem Bus.", ex_es: "Normalmente voy en autobús." },
 
     // Local
-    "hier": { emoji: "🗣️", tip: "Describir imágenes (Hier sieht man...)", ex_de: "Auf dem Foto sieht man hier eine Baustelle.", ex_es: "En la foto se ve aquí una zona de obras." },
-    "unterwegs": { emoji: "✍️👂", tip: "Avisar retrasos por transporte", ex_de: "Ich stehe im Stau und bin noch unterwegs.", ex_es: "Estoy en un atasco y todavía voy de camino." }
+    "hier": { emoji: "🗣️📖", tip: "Señalar fotos o planos", ex_de: "Hier im Bild sieht man einen Park.", ex_es: "Aquí en la imagen se ve un parque." },
+    "unterwegs": { emoji: "👂✍️", tip: "Avisar retraso por mensaje de voz", ex_de: "Ich stehe im Stau, bin noch unterwegs.", ex_es: "Estoy en un atasco, sigo en camino." }
 };
 
 // Standard premium colors for card headers
@@ -346,10 +347,10 @@ let printHtml = `<!DOCTYPE html>
 const themeMap = new Map();
 themeBlueprints.forEach(t => themeMap.set(t.title, t));
 
-// Orden solicitado:
-// Página 1: Las 4 temporales y causales juntas: Gegenwart, Abfolge, Wandel, Kausal
-// Página 2: Conectores, Opinión y Hábitos: Verbindung, Haltung, Frequenz, Umgebung
-// Página 3: Espaciales, Enfoque, Pronominales + Portada QR: Raum, Grad & Fokus, Bezug, [PORTADA]
+// Orden por páginas:
+// Página 1: Gegenwart, Abfolge, Wandel, Kausal
+// Página 2: Verbindung, Haltung, Frequenz, Umgebung
+// Página 3: Raum, Grad & Fokus, Bezug, [PORTADA QR]
 const orderedThemeTitles = [
     "Gegenwart",
     "Abfolge",
@@ -448,7 +449,7 @@ const titleCardHtml = `        <div class="kompakt-card" style="border: 2px soli
             <div style="margin-bottom: 8px; font-size: 0.82rem; color: #334155; font-weight: 600; line-height: 1.4; padding: 0 6px; width: 100%;">
                 <div style="border-top: 1px solid #cbd5e1; margin: 6px 0;"></div>
                 <p style="margin: 3px 0;">⭐ <strong>35 Adverbios Clave DTZ</strong> señalados con estrella</p>
-                <p style="margin: 3px 0;">✍️🗣️👂 <strong>Tips y ejemplos enfocados</strong> al examen oficial</p>
+                <p style="margin: 3px 0;">✍️🗣️📖👂 <strong>Destrezas de examen</strong> (Escribir, Hablar, Leer, Escuchar)</p>
                 <p style="margin: 3px 0;">📂 <strong>11 Tarjetas</strong> por función comunicativa</p>
                 <div style="border-top: 1px solid #cbd5e1; margin: 6px 0;"></div>
                 <div style="margin-top: 8px; display: flex; flex-direction: column; align-items: center;">
@@ -460,9 +461,9 @@ const titleCardHtml = `        <div class="kompakt-card" style="border: 2px soli
 `;
 
 // Distribución de las tarjetas:
-// Página 1 (Top Estrellas / Bloque Temporal): Gegenwart, Abfolge, Wandel, Kausal
+// Página 1: Gegenwart, Abfolge, Wandel, Kausal
 // Página 2: Verbindung, Haltung, Frequenz, Umgebung
-// Página 3 (Última Página): Raum, Grad & Fokus, Bezug + [PORTADA QR]
+// Página 3: Raum, Grad & Fokus, Bezug + [PORTADA QR]
 const allCards = [
     ...themeCardsList.slice(0, 8),
     ...themeCardsList.slice(8, 11),
@@ -496,7 +497,7 @@ console.log('HTML generated at:', tempHtmlPath);
 const browsers = [
     'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
     'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-    'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
 ];
 
 let browserPath = null;
