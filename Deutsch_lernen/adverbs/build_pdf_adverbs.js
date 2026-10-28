@@ -155,7 +155,7 @@ const dtzKeyNotes = {
 };
 
 // Standard premium colors for card headers
-const standardColors = ['#0ea5e9', '#0284c7', '#0f766e', '#7c3aed', '#e11d48', '#be123c', '#ea580c', '#059669', '#d97706', '#b45309', '#4f46e5'];
+const standardColors = ['#0284c7', '#0ea5e9', '#059669', '#b45309', '#0f766e', '#7c3aed', '#d97706', '#be123c', '#ea580c', '#e11d48', '#4f46e5'];
 
 // 5. Generate print HTML
 let printHtml = `<!DOCTYPE html>
@@ -163,7 +163,7 @@ let printHtml = `<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <title>DTZ B1 Adverbien - Druckversion</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <style>
         @page {
             size: A4 portrait;
@@ -237,64 +237,80 @@ let printHtml = `<!DOCTYPE html>
             opacity: 0.95;
         }
         .kompakt-content {
-            padding: 3px 8px;
+            padding: 2px 8px;
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
         }
         .kompakt-row {
-            padding: 3.5px 0;
+            padding: 3px 0;
             border-bottom: 1px solid #f1f5f9;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 8px;
+            gap: 6px;
         }
         .kompakt-row:last-child {
             border-bottom: none;
         }
         .col-left {
-            width: 44%;
+            width: 38%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            line-height: 1.15;
+            line-height: 1.1;
         }
         .word-title-line {
             display: flex;
             align-items: baseline;
-            gap: 4px;
+            gap: 3px;
         }
         .kompakt-german {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.05rem;
+            font-size: 1.25rem;
             font-weight: 800;
             color: #0f172a;
-            letter-spacing: -0.2px;
+            letter-spacing: -0.3px;
+            line-height: 1.05;
         }
         .star-badge {
             color: #d97706;
-            font-size: 0.82rem;
+            font-size: 0.9rem;
             line-height: 1;
             font-weight: bold;
         }
         .meaning-line {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             margin-top: 1px;
         }
         .kompakt-spanish {
             font-size: 0.72rem;
-            color: #1e293b;
+            color: #334155;
             font-style: italic;
             font-weight: 600;
-            line-height: 1.15;
+            line-height: 1.1;
+        }
+        .col-right {
+            width: 62%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: right;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 6px;
+            line-height: 1.18;
+        }
+        .right-top-line {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 2px;
         }
         .exam-tip-badge {
-            font-size: 0.60rem;
+            font-size: 0.58rem;
             background-color: #fef3c7;
             color: #92400e;
             border: 1px solid #fde68a;
@@ -304,20 +320,9 @@ let printHtml = `<!DOCTYPE html>
             font-style: normal;
             display: inline-block;
             line-height: 1.2;
-            margin-top: 1px;
-        }
-        .col-right {
-            width: 56%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: right;
-            border-left: 2px solid #e2e8f0;
-            padding-left: 6px;
-            line-height: 1.2;
         }
         .example-de {
-            font-size: 0.71rem;
+            font-size: 0.72rem;
             color: #1e293b;
             font-weight: 600;
         }
@@ -333,33 +338,20 @@ let printHtml = `<!DOCTYPE html>
 <body>
 `;
 
-// 6. Generate all card HTMLs
-const cardsList = [];
+// 6. Ordenar temáticas por relevancia de estrellas DTZ B1 (descendente)
+const sortedThemes = [...themeBlueprints].sort((a, b) => {
+    const starsA = a.words.filter(w => dtzKeyNotes[w]).length;
+    const starsB = b.words.filter(w => dtzKeyNotes[w]).length;
+    if (starsB !== starsA) {
+        return starsB - starsA; // Mayor número de estrellas primero
+    }
+    return (starsB / b.words.length) - (starsA / a.words.length);
+});
 
-// A. Add Title/Cover Card first
-const titleCardHtml = `        <div class="kompakt-card" style="border: 2px solid #0f172a; background-color: #f8fafc; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; padding: 12px;">
-            <div style="margin-top: 10px; width: 100%;">
-                <span style="font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 800; color: #0f172a; display: block; line-height: 1;">DTZ B1</span>
-                <span style="font-family: 'Outfit', sans-serif; font-size: 1.9rem; font-weight: 800; color: #0284c7; display: block; margin-top: 6px; letter-spacing: 1px;">ADVERBIEN</span>
-                <span style="display: inline-block; background-color: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; font-size: 0.68rem; font-weight: 800; padding: 2px 8px; border-radius: 10px; margin-top: 6px; text-transform: uppercase;">Guía de Examen DTZ / B1</span>
-            </div>
-            <div style="margin-bottom: 8px; font-size: 0.82rem; color: #334155; font-weight: 600; line-height: 1.4; padding: 0 6px; width: 100%;">
-                <div style="border-top: 1px solid #cbd5e1; margin: 6px 0;"></div>
-                <p style="margin: 3px 0;">⭐ <strong>35 Adverbios Clave DTZ</strong> señalados con estrella</p>
-                <p style="margin: 3px 0;">💡 <strong>Notas estratégicas</strong> para cartas y parte oral</p>
-                <p style="margin: 3px 0;">📂 <strong>11 Tarjetas</strong> por función comunicativa</p>
-                <div style="border-top: 1px solid #cbd5e1; margin: 6px 0;"></div>
-                <div style="margin-top: 8px; display: flex; flex-direction: column; align-items: center;">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://juanolaya.github.io/Deutsch_lernen/index.html" alt="QR Code MemoDeutsch" style="width: 85px; height: 85px; border: 1px solid #cbd5e1; padding: 2px; border-radius: 4px; background: #ffffff;" />
-                    <span style="display: block; font-size: 0.72rem; color: #0f172a; font-weight: 800; margin-top: 4px; letter-spacing: 0.5px;">MemoDeutsch App</span>
-                </div>
-            </div>
-        </div>
-`;
-cardsList.push(titleCardHtml);
+// Construir las 11 tarjetas temáticas
+const themeCardsList = [];
 
-// B. Build the 11 category cards
-themeBlueprints.forEach((theme, index) => {
+sortedThemes.forEach((theme, index) => {
     const themeColor = standardColors[index % standardColors.length];
     const metaCategory = metaCategoryMap[theme.title] || "ADVERB";
     let cleanTranslation = (theme.translation || '').replace(/^\(|\)$/g, '').trim();
@@ -369,8 +361,13 @@ themeBlueprints.forEach((theme, index) => {
     theme.words.forEach(w => {
         const adv = wordMap.get(w);
         if (adv) {
-            // Clean Spanish parentheses: "(ahora)" -> "ahora"
+            // Limpiar paréntesis español y truncar si es demasiado largo para 1 sola línea
             let spanTrans = (adv.spanish || '').replace(/^\(|\)$/g, '').trim();
+            // Si tiene varias acepciones separadas por barra, tomamos la más representativa o compacta
+            if (spanTrans.length > 25 && spanTrans.includes('/')) {
+                spanTrans = spanTrans.split('/')[0].trim();
+            }
+
             const isKey = !!dtzKeyNotes[adv.word];
             const tip = dtzKeyNotes[adv.word] || null;
 
@@ -380,12 +377,12 @@ themeBlueprints.forEach((theme, index) => {
                         <span class="kompakt-german">${adv.word}</span>
                         ${isKey ? '<span class="star-badge" title="Esencial DTZ">⭐</span>' : ''}
                     </div>
-                    <div class="meaning-line">
+                    <div class="meaning-line" title="${spanTrans}">
                         <span class="kompakt-spanish">${spanTrans}</span>
                     </div>
-                    ${tip ? `<span class="exam-tip-badge">${tip}</span>` : ''}
                 </div>
                 <div class="col-right">
+                    ${tip ? `<div class="right-top-line"><span class="exam-tip-badge">💡 ${tip}</span></div>` : ''}
                     <div class="example-de">${adv.example_de}</div>
                     <div class="example-es">${adv.example_es}</div>
                 </div>
@@ -407,13 +404,44 @@ ${rowsHtml}
             </div>
         </div>
 `;
-    cardsList.push(cardHtml);
+    themeCardsList.push(cardHtml);
 });
+
+// Tarjeta Portada / QR Code (Va en la última página junto a las de menor estrellas)
+const titleCardHtml = `        <div class="kompakt-card" style="border: 2px solid #0f172a; background-color: #f8fafc; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; padding: 12px;">
+            <div style="margin-top: 10px; width: 100%;">
+                <span style="font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 800; color: #0f172a; display: block; line-height: 1;">DTZ B1</span>
+                <span style="font-family: 'Outfit', sans-serif; font-size: 1.9rem; font-weight: 800; color: #0284c7; display: block; margin-top: 6px; letter-spacing: 1px;">ADVERBIEN</span>
+                <span style="display: inline-block; background-color: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; font-size: 0.68rem; font-weight: 800; padding: 2px 8px; border-radius: 10px; margin-top: 6px; text-transform: uppercase;">Guía de Examen DTZ / B1</span>
+            </div>
+            <div style="margin-bottom: 8px; font-size: 0.82rem; color: #334155; font-weight: 600; line-height: 1.4; padding: 0 6px; width: 100%;">
+                <div style="border-top: 1px solid #cbd5e1; margin: 6px 0;"></div>
+                <p style="margin: 3px 0;">⭐ <strong>35 Adverbios Clave DTZ</strong> señalados con estrella</p>
+                <p style="margin: 3px 0;">💡 <strong>Notas estratégicas</strong> para cartas y parte oral</p>
+                <p style="margin: 3px 0;">📂 <strong>11 Tarjetas</strong> por función comunicativa</p>
+                <div style="border-top: 1px solid #cbd5e1; margin: 6px 0;"></div>
+                <div style="margin-top: 8px; display: flex; flex-direction: column; align-items: center;">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://juanolaya.github.io/Deutsch_lernen/index.html" alt="QR Code MemoDeutsch" style="width: 85px; height: 85px; border: 1px solid #cbd5e1; padding: 2px; border-radius: 4px; background: #ffffff;" />
+                    <span style="display: block; font-size: 0.72rem; color: #0f172a; font-weight: 800; margin-top: 4px; letter-spacing: 0.5px;">MemoDeutsch App</span>
+                </div>
+            </div>
+        </div>
+`;
+
+// Distribución de las tarjetas:
+// Página 1 (Top Estrellas): Top 4 temáticas
+// Página 2 (Estrellas Medias): Siguientes 4 temáticas
+// Página 3 (Última Página - Menor Estrellas + Portada/QR): Últimas 3 temáticas + titleCardHtml
+const allCards = [
+    ...themeCardsList.slice(0, 8),
+    ...themeCardsList.slice(8, 11),
+    titleCardHtml
+];
 
 // Chunk into pages of 4 cards
 const chunks = [];
-for (let i = 0; i < cardsList.length; i += 4) {
-    chunks.push(cardsList.slice(i, i + 4));
+for (let i = 0; i < allCards.length; i += 4) {
+    chunks.push(allCards.slice(i, i + 4));
 }
 
 chunks.forEach((chunk, pageIndex) => {
