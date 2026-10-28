@@ -106,52 +106,52 @@ const metaCategoryMap = {
     "Bezug": "PRONOMINAL"
 };
 
-// 35 Adverbios más cruciales para DTZ B1 y sus notas de uso
+// 35 Adverbios más cruciales para DTZ B1 y sus notas de destreza contextual con emojis
 const dtzKeyNotes = {
     // Kausal & Verbindung (Conectores imprescindibles)
-    "deshalb": "Imprescindible B1 (inversión de verbo)",
-    "deswegen": "Conector causal clave en cartas",
-    "also": "Conclusión / estructurar ideas",
-    "sonst": "Consecuencia negativa (o si no...)",
-    "trotzdem": "Imprescindible B1 (concesivo)",
-    "außerdem": "Añadir argumentos en la carta",
-    "allerdings": "Matizar opiniones en parte oral",
-    "schließlich": "Conclusión / al fin y al cabo",
-    "doch": "Énfasis / insistir cordialmente",
+    "deshalb": { emoji: "✍️🗣️", tip: "Causa principal B1 (verbo en pos. 2)", ex_de: "Ich war krank, deshalb konnte ich nicht kommen.", ex_es: "Estaba enfermo, por eso no pude venir." },
+    "deswegen": { emoji: "✍️", tip: "Justificaciones en cartas y reclamos", ex_de: "Der Zug hatte Verspätung, deswegen komme ich später.", ex_es: "El tren se retrasó, por esa razón llego tarde." },
+    "also": { emoji: "🗣️", tip: "Concluir / estructurar al hablar", ex_de: "Also, wir treffen uns morgen um 10 Uhr.", ex_es: "Entonces, nos encontramos mañana a las 10." },
+    "sonst": { emoji: "🗣️✍️", tip: "Consecuencia negativa (o si no...)", ex_de: "Bitte antworten Sie schnell, sonst verfällt der Termin.", ex_es: "Responda pronto, por favor, si no la cita caducará." },
+    "trotzdem": { emoji: "✍️🗣️", tip: "Conector concesivo estrella B1", ex_de: "Es regnet, trotzdem gehen wir zum Deutschkurs.", ex_es: "Llueve, no obstante vamos al curso de alemán." },
+    "außerdem": { emoji: "✍️", tip: "Sumar argumentos clave en la carta", ex_de: "Ich habe Erfahrung und spreche außerdem fließend Deutsch.", ex_es: "Tengo experiencia y además hablo alemán fluido." },
+    "allerdings": { emoji: "🗣️", tip: "Matizar opiniones en parte oral", ex_de: "Das Angebot ist gut, allerdings etwas zu teuer.", ex_es: "La oferta es buena, aunque ciertamente un poco cara." },
+    "schließlich": { emoji: "🗣️", tip: "Conclusión / al fin y al cabo", ex_de: "Wir haben schließlich eine Lösung gefunden.", ex_es: "Al final, después de todo, encontramos una solución." },
+    "doch": { emoji: "🗣️", tip: "Énfasis cordial para sonar natural", ex_de: "Kommen Sie doch bitte kurz vorbei!", ex_es: "¡Pásese por aquí un momento, por favor!" },
 
     // Temporales esenciales
-    "jetzt": "Base A1-B1 para cartas y citas",
-    "heute": "Indicar día actual en mensajes",
-    "gestern": "Relato de hechos pasados",
-    "morgen": "Proponer o confirmar citas",
-    "bald": "Cierre típico de carta (Bis bald!)",
-    "sofort": "Reclamaciones / urgencias en cartas",
-    "dann": "Estructurar secuencia cronológica",
-    "danach": "Describir rutina o proceso",
-    "später": "Posponer citas / compromisos",
-    "zuerst": "Inicio de secuencia en el oral",
-    "zuletzt": "Cierre de secuencia de hechos",
-    "schon": "Expresar cumplimiento / ya hecho",
-    "noch": "Estado pendiente / todavía",
-    "immer": "Frecuencia absoluta en rutinas",
-    "oft": "Frecuencia alta en relatos",
-    "nie": "Negación temporal absoluta",
+    "jetzt": { emoji: "✍️🗣️", tip: "Marcar situación presente en mensajes", ex_de: "Ich bin jetzt im Büro und rufe Sie gleich an.", ex_es: "Estoy ahora en la oficina y le llamo enseguida." },
+    "heute": { emoji: "✍️🗣️", tip: "Fijar plazos y fechas actuales", ex_de: "Kann ich heute noch einen Termin bekommen?", ex_es: "¿Puedo conseguir una cita todavía hoy?" },
+    "gestern": { emoji: "🗣️✍️", tip: "Relato de hechos pasados / reclamos", ex_de: "Gestern habe ich den Brief nicht erhalten.", ex_es: "Ayer no recibí la carta." },
+    "morgen": { emoji: "✍️🗣️", tip: "Proponer y acordar citas", ex_de: "Morgen um 14 Uhr passt es mir sehr gut.", ex_es: "Mañana a las 14:00 me viene muy bien." },
+    "bald": { emoji: "✍️", tip: "Cierre clásico en cartas formales", ex_de: "Ich hoffe, bald eine Antwort von Ihnen zu erhalten.", ex_es: "Espero recibir pronto una respuesta de usted." },
+    "sofort": { emoji: "✍️", tip: "Urgencias y reclamaciones formales", ex_de: "Bitte reparieren Sie die Heizung sofort.", ex_es: "Por favor, repare la calefacción inmediatamente." },
+    "dann": { emoji: "🗣️", tip: "Estructurar secuencia cronológica", ex_de: "Zuerst kochen wir, dann essen wir zusammen.", ex_es: "Primero cocinamos, luego comemos juntos." },
+    "danach": { emoji: "🗣️", tip: "Describir rutinas o pasos del día", ex_de: "Ich habe den Kurs besucht, danach war ich einkaufen.", ex_es: "Asistí al curso, después fui de compras." },
+    "später": { emoji: "🗣️✍️", tip: "Posponer citas o compromisos", ex_de: "Können wir das Treffen auf später verschieben?", ex_es: "¿Podemos aplazar la reunión para más tarde?" },
+    "zuerst": { emoji: "🗣️", tip: "Inicio de relato en la parte oral", ex_de: "Zuerst möchte ich mich kurz vorstellen.", ex_es: "Primero me gustaría presentarme brevemente." },
+    "zuletzt": { emoji: "🗣️", tip: "Cierre ordenado de relato o puntos", ex_de: "Zuletzt möchte ich mich für Ihre Hilfe bedanken.", ex_es: "Por último, quisiera agradecerle su ayuda." },
+    "schon": { emoji: "🗣️👂", tip: "Expresar cumplimiento / ya hecho", ex_de: "Ich habe die Unterlagen schon geschickt.", ex_es: "Ya he enviado los documentos." },
+    "noch": { emoji: "✍️🗣️", tip: "Estado pendiente / todavía", ex_de: "Ich warte noch auf eine Bestätigung.", ex_es: "Todavía estoy esperando una confirmación." },
+    "immer": { emoji: "🗣️", tip: "Frecuencia habitual en presentaciones", ex_de: "Ich lerne immer abends nach der Arbeit.", ex_es: "Siempre estudio por la tarde después del trabajo." },
+    "oft": { emoji: "🗣️", tip: "Hábitos y experiencias cotidianas", ex_de: "Ich fahre oft mit der U-Bahn zur Schule.", ex_es: "Viajo a menudo en metro a la escuela." },
+    "nie": { emoji: "🗣️", tip: "Negación temporal tajante", ex_de: "Er kommt nie zu spät zum Unterricht.", ex_es: "Él nunca llega tarde a clase." },
 
     // Modal, Opinión y Actitud
-    "leider": "Clave para disculparse y cancelar citas",
-    "vielleicht": "Proponer planes / suposiciones",
-    "wahrscheinlich": "Descripción de fotos en el oral",
-    "natürlich": "Afirmación y cortesía formal",
-    "wirklich": "Énfasis y confirmación de dudas",
+    "leider": { emoji: "✍️🗣️", tip: "Cancelar o disculpar citas (básico)", ex_de: "Leider kann ich morgen nicht zum Termin kommen.", ex_es: "Desafortunadamente no puedo ir a la cita mañana." },
+    "vielleicht": { emoji: "🗣️", tip: "Proponer ideas en la tarea conjunta", ex_de: "Vielleicht könnten wir am Samstag zusammen lernen?", ex_es: "¿Quizás podríamos estudiar juntos el sábado?" },
+    "wahrscheinlich": { emoji: "🗣️", tip: "Describir hipótesis en fotos (oral)", ex_de: "Die Familie feiert wahrscheinlich einen Geburtstag.", ex_es: "La familia probablemente está celebrando un cumpleaños." },
+    "natürlich": { emoji: "🗣️", tip: "Responder con seguridad y cortesía", ex_de: "Natürlich kann ich Ihnen dabei gerne helfen.", ex_es: "Por supuesto, puedo ayudarle con gusto en eso." },
+    "wirklich": { emoji: "🗣️", tip: "Mostrar interés y reaccionar al hablar", ex_de: "Das ist wirklich eine hervorragende Idee!", ex_es: "¡Esa es de verdad una idea excelente!" },
 
     // Frecuencia & Preferencia
-    "gern": "Aceptar propuestas / preferencias",
-    "lieber": "Negociar alternativas en el oral",
-    "normalerweise": "Describir costumbres en el oral",
+    "gern": { emoji: "🗣️✍️", tip: "Aceptar planes y expresar gusto", ex_de: "Ich nehme die Einladung sehr gern an.", ex_es: "Acepto la invitación con mucho gusto." },
+    "lieber": { emoji: "🗣️", tip: "Proponer alternativas en el diálogo", ex_de: "Ich würde lieber ins Museum statt ins Kino gehen.", ex_es: "Preferiría ir al museo en vez de al cine." },
+    "normalerweise": { emoji: "🗣️", tip: "Describir costumbres en presentación", ex_de: "Normalerweise frühstücke ich um 7 Uhr.", ex_es: "Normalmente desayuno a las 7:00." },
 
     // Local
-    "hier": "Ubicación básica para indicaciones",
-    "unterwegs": "Avisar retrasos por mensaje o carta"
+    "hier": { emoji: "🗣️", tip: "Describir imágenes (Hier sieht man...)", ex_de: "Auf dem Foto sieht man hier eine Baustelle.", ex_es: "En la foto se ve aquí una zona de obras." },
+    "unterwegs": { emoji: "✍️👂", tip: "Avisar retrasos por transporte", ex_de: "Ich stehe im Stau und bin noch unterwegs.", ex_es: "Estoy en un atasco y todavía voy de camino." }
 };
 
 // Standard premium colors for card headers
@@ -237,14 +237,14 @@ let printHtml = `<!DOCTYPE html>
             opacity: 0.95;
         }
         .kompakt-content {
-            padding: 2px 8px;
+            padding: 1px 8px;
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
         }
         .kompakt-row {
-            padding: 3px 0;
+            padding: 1.5px 0;
             border-bottom: 1px solid #f1f5f9;
             display: flex;
             align-items: center;
@@ -255,11 +255,11 @@ let printHtml = `<!DOCTYPE html>
             border-bottom: none;
         }
         .col-left {
-            width: 38%;
+            width: 36%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            line-height: 1.1;
+            line-height: 1;
         }
         .word-title-line {
             display: flex;
@@ -268,15 +268,15 @@ let printHtml = `<!DOCTYPE html>
         }
         .kompakt-german {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 800;
+            font-size: 1.48rem;
+            font-weight: 900;
             color: #0f172a;
-            letter-spacing: -0.3px;
-            line-height: 1.05;
+            letter-spacing: -0.5px;
+            line-height: 1;
         }
         .star-badge {
             color: #d97706;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             line-height: 1;
             font-weight: bold;
         }
@@ -294,20 +294,20 @@ let printHtml = `<!DOCTYPE html>
             line-height: 1.1;
         }
         .col-right {
-            width: 62%;
+            width: 64%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             text-align: right;
             border-left: 2px solid #e2e8f0;
             padding-left: 6px;
-            line-height: 1.18;
+            line-height: 1.16;
         }
         .right-top-line {
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            margin-bottom: 2px;
+            margin-bottom: 1.5px;
         }
         .exam-tip-badge {
             font-size: 0.58rem;
@@ -322,9 +322,13 @@ let printHtml = `<!DOCTYPE html>
             line-height: 1.2;
         }
         .example-de {
-            font-size: 0.72rem;
-            color: #1e293b;
+            font-size: 0.73rem;
+            color: #0f172a;
             font-weight: 600;
+        }
+        .example-de strong {
+            font-weight: 800;
+            color: #0369a1;
         }
         .example-es {
             font-size: 0.67rem;
@@ -338,20 +342,35 @@ let printHtml = `<!DOCTYPE html>
 <body>
 `;
 
-// 6. Ordenar temáticas por relevancia de estrellas DTZ B1 (descendente)
-const sortedThemes = [...themeBlueprints].sort((a, b) => {
-    const starsA = a.words.filter(w => dtzKeyNotes[w]).length;
-    const starsB = b.words.filter(w => dtzKeyNotes[w]).length;
-    if (starsB !== starsA) {
-        return starsB - starsA; // Mayor número de estrellas primero
-    }
-    return (starsB / b.words.length) - (starsA / a.words.length);
-});
+// Mapa de temáticas por nombre
+const themeMap = new Map();
+themeBlueprints.forEach(t => themeMap.set(t.title, t));
 
-// Construir las 11 tarjetas temáticas
+// Orden solicitado:
+// Página 1: Las 4 temporales y causales juntas: Gegenwart, Abfolge, Wandel, Kausal
+// Página 2: Conectores, Opinión y Hábitos: Verbindung, Haltung, Frequenz, Umgebung
+// Página 3: Espaciales, Enfoque, Pronominales + Portada QR: Raum, Grad & Fokus, Bezug, [PORTADA]
+const orderedThemeTitles = [
+    "Gegenwart",
+    "Abfolge",
+    "Wandel",
+    "Kausal",
+    "Verbindung",
+    "Haltung",
+    "Frequenz",
+    "Umgebung",
+    "Raum",
+    "Grad & Fokus",
+    "Bezug"
+];
+
+// Construir las 11 tarjetas temáticas en orden
 const themeCardsList = [];
 
-sortedThemes.forEach((theme, index) => {
+orderedThemeTitles.forEach((themeTitle, index) => {
+    const theme = themeMap.get(themeTitle);
+    if (!theme) return;
+
     const themeColor = standardColors[index % standardColors.length];
     const metaCategory = metaCategoryMap[theme.title] || "ADVERB";
     let cleanTranslation = (theme.translation || '').replace(/^\(|\)$/g, '').trim();
@@ -363,13 +382,25 @@ sortedThemes.forEach((theme, index) => {
         if (adv) {
             // Limpiar paréntesis español y truncar si es demasiado largo para 1 sola línea
             let spanTrans = (adv.spanish || '').replace(/^\(|\)$/g, '').trim();
-            // Si tiene varias acepciones separadas por barra, tomamos la más representativa o compacta
             if (spanTrans.length > 25 && spanTrans.includes('/')) {
                 spanTrans = spanTrans.split('/')[0].trim();
             }
 
-            const isKey = !!dtzKeyNotes[adv.word];
-            const tip = dtzKeyNotes[adv.word] || null;
+            const keyData = dtzKeyNotes[adv.word];
+            const isKey = !!keyData;
+            const tipText = keyData ? `${keyData.emoji} ${keyData.tip}` : null;
+
+            // Ejemplo enfocado al DTZ
+            const exDe = (keyData && keyData.ex_de) ? keyData.ex_de : adv.example_de;
+            const exEs = (keyData && keyData.ex_es) ? keyData.ex_es : adv.example_es;
+
+            // Resaltar la palabra en el ejemplo alemán si coincide
+            let exDeFormatted = exDe;
+            const wordEscaped = adv.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regexWord = new RegExp(`\\b(${wordEscaped})\\b`, 'i');
+            if (regexWord.test(exDeFormatted)) {
+                exDeFormatted = exDeFormatted.replace(regexWord, '<strong>$1</strong>');
+            }
 
             rowsHtml += `            <div class="kompakt-row">
                 <div class="col-left">
@@ -382,9 +413,9 @@ sortedThemes.forEach((theme, index) => {
                     </div>
                 </div>
                 <div class="col-right">
-                    ${tip ? `<div class="right-top-line"><span class="exam-tip-badge">💡 ${tip}</span></div>` : ''}
-                    <div class="example-de">${adv.example_de}</div>
-                    <div class="example-es">${adv.example_es}</div>
+                    ${tipText ? `<div class="right-top-line"><span class="exam-tip-badge">${tipText}</span></div>` : ''}
+                    <div class="example-de">${exDeFormatted}</div>
+                    <div class="example-es">${exEs}</div>
                 </div>
             </div>
 `;
@@ -417,7 +448,7 @@ const titleCardHtml = `        <div class="kompakt-card" style="border: 2px soli
             <div style="margin-bottom: 8px; font-size: 0.82rem; color: #334155; font-weight: 600; line-height: 1.4; padding: 0 6px; width: 100%;">
                 <div style="border-top: 1px solid #cbd5e1; margin: 6px 0;"></div>
                 <p style="margin: 3px 0;">⭐ <strong>35 Adverbios Clave DTZ</strong> señalados con estrella</p>
-                <p style="margin: 3px 0;">💡 <strong>Notas estratégicas</strong> para cartas y parte oral</p>
+                <p style="margin: 3px 0;">✍️🗣️👂 <strong>Tips y ejemplos enfocados</strong> al examen oficial</p>
                 <p style="margin: 3px 0;">📂 <strong>11 Tarjetas</strong> por función comunicativa</p>
                 <div style="border-top: 1px solid #cbd5e1; margin: 6px 0;"></div>
                 <div style="margin-top: 8px; display: flex; flex-direction: column; align-items: center;">
@@ -429,9 +460,9 @@ const titleCardHtml = `        <div class="kompakt-card" style="border: 2px soli
 `;
 
 // Distribución de las tarjetas:
-// Página 1 (Top Estrellas): Top 4 temáticas
-// Página 2 (Estrellas Medias): Siguientes 4 temáticas
-// Página 3 (Última Página - Menor Estrellas + Portada/QR): Últimas 3 temáticas + titleCardHtml
+// Página 1 (Top Estrellas / Bloque Temporal): Gegenwart, Abfolge, Wandel, Kausal
+// Página 2: Verbindung, Haltung, Frequenz, Umgebung
+// Página 3 (Última Página): Raum, Grad & Fokus, Bezug + [PORTADA QR]
 const allCards = [
     ...themeCardsList.slice(0, 8),
     ...themeCardsList.slice(8, 11),
