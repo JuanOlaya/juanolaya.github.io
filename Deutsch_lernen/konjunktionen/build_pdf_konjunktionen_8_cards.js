@@ -314,7 +314,7 @@ function renderCard(card) {
         '<article class="kompakt-card">',
         '  <header class="kompakt-header" style="background-color:' + card.color + '">',
         '    <div class="header-left">',
-        '      <span class="header-meta-pill">KONJUNKTIONEN</span>',
+        '      <span class="header-meta-pill">CONECTORES</span>',
         '      <span class="header-pill">' + card.position + '</span>',
         '      <span class="header-de">' + card.title + '</span>',
         '    </div>',
