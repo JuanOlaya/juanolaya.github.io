@@ -291,7 +291,24 @@ function renderRow(row) {
 }
 
 function renderCard(card) {
-    const rowsHtml = card.rows.map(renderRow).join('\n');
+    let rowsToRender = card.rows;
+
+    // Si es la tarjeta ADUSO, ordenar explícitamente: aber, denn, und, sondern, oder
+    if (card.title.toLowerCase().includes('aduso')) {
+        const adusoOrder = ['aber', 'denn', 'und', 'sondern', 'oder'];
+        const wordRows = card.rows.filter(r => r.type === 'word');
+        const otherRows = card.rows.filter(r => r.type !== 'word');
+
+        wordRows.sort((a, b) => {
+            const indexA = adusoOrder.indexOf(a.word.toLowerCase());
+            const indexB = adusoOrder.indexOf(b.word.toLowerCase());
+            return (indexA !== -1 ? indexA : 99) - (indexB !== -1 ? indexB : 99);
+        });
+
+        rowsToRender = [...otherRows, ...wordRows];
+    }
+
+    const rowsHtml = rowsToRender.map(renderRow).join('\n');
 
     return [
         '<article class="kompakt-card">',
