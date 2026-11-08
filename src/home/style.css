@@ -121,6 +121,20 @@ a:active {
   font-size: 42px;
 }
 
+/* Native buttons for keyboard access, reset so they look exactly like the old icon spans. */
+.home-control {
+  padding: 0;
+  border: 0;
+  background: none;
+  line-height: 1;
+}
+
+.home-control:focus-visible {
+  outline: 2px solid rgba(243, 228, 206, 0.9);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
 .span_no_selection {
   user-select: none;
   -webkit-user-select: none;

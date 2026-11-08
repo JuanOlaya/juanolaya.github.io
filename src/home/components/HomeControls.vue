@@ -19,26 +19,35 @@ function toggleFullscreen(): void {
 <!-- The controls only appear while the cards are hidden. -->
 <template>
   <footer>
-    <span
+    <button
       v-show="!gridVisible"
       id="fullscreenIcon"
-      class="material-icons-round span_no_selection"
+      type="button"
+      aria-label="Toggle fullscreen"
+      class="home-control material-icons-round span_no_selection"
       @click="toggleFullscreen"
-      >fullscreen</span
     >
-    <span
+      <span aria-hidden="true">fullscreen</span>
+    </button>
+    <button
       v-show="!gridVisible"
       id="gridOnIcon"
-      class="material-icons-round span_no_selection"
+      type="button"
+      aria-label="Show projects"
+      class="home-control material-icons-round span_no_selection"
       @click="emit('show-grid')"
-      >grid_on</span
     >
-    <span
+      <span aria-hidden="true">grid_on</span>
+    </button>
+    <button
       v-show="!gridVisible"
       id="refreshIcon"
-      class="material-icons-outlined span_no_selection"
+      type="button"
+      aria-label="Restart animation"
+      class="home-control material-icons-outlined span_no_selection"
       @click="emit('refresh')"
-      >refresh</span
     >
+      <span aria-hidden="true">refresh</span>
+    </button>
   </footer>
 </template>
