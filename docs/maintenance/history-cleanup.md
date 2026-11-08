@@ -15,11 +15,16 @@ Clon espejo completo (`git clone --mirror`), 1688 commits, 44 228 objetos.
 |---|---|---|---|
 | Actual | nada | **148,30 MiB** | — |
 | A — basura | `tmp*`, perfiles de Chrome/Edge, `Sockets/node_modules/`, `.vs/` | **110,15 MiB** | −38,2 MiB (−26 %) |
-| B — recomendado | A + `Deutsch_lernen/output/angela_video/` + `bamf_official_2025.pdf` | **77,13 MiB** | −71,2 MiB (−48 %) |
+| B — recomendado | A + medios generados de `output/angela_video/` (mp4, wav, mp3, png, jpg; se conservan scripts y textos) + `bamf_official_2025.pdf` | **77,28 MiB** | −71,0 MiB (−48 %) |
 | C — A + Git LFS | A y además `*.mp4`, `*.wav` y el PDF del BAMF migrados a LFS | 90,76 MiB + 24 MB en LFS | −57,5 MiB en git |
 
 Árbol de trabajo de `master`: 11 263 archivos / 376 MB hoy → 8 492 / 182 MB (A)
-→ 8 430 / 121 MB (B).
+→ 8 445 / 121 MB (B).
+
+En `output/angela_video/` el escenario B conserva los 15 archivos de código y
+texto (`generate_voice.py`, `render_video.py`, `verify_video.py`,
+`prepare_local_audio.py`, los 3 `.ps1`, `texto_de.txt`, `timing.jsonl`, `*.json`,
+`.srt`, `frames.txt`): con ellos se pueden regenerar los medios eliminados.
 
 ### Blobs más pesados del historial (tamaño comprimido en el pack)
 
@@ -65,8 +70,9 @@ LFS comentadas. Recomendación:
 
 ## 3. Lista de rutas a eliminar
 
-Guardar como `paths-to-remove.txt` (escenario B; para el A, quitar las tres
-últimas líneas):
+Guardar como `paths-to-remove.txt` (escenario B). Para el escenario A, guardar
+solo las 8 primeras líneas como `paths-a.txt`. En los `glob:` de filter-repo,
+`*` también cruza `/`, así que `angela_video/*.png` incluye `frames/*.png`.
 
 ```text
 Deutsch_lernen/tmp/
@@ -77,7 +83,11 @@ Sockets/node_modules/
 glob:**/.chrome-headless-profile*/**
 glob:**/.edge-headless-profile*/**
 glob:**/chrome-profile/**
-Deutsch_lernen/output/angela_video/
+glob:Deutsch_lernen/output/angela_video/*.mp4
+glob:Deutsch_lernen/output/angela_video/*.wav
+glob:Deutsch_lernen/output/angela_video/*.mp3
+glob:Deutsch_lernen/output/angela_video/*.png
+glob:Deutsch_lernen/output/angela_video/*.jpg
 glob:**/bamf_official_2025.pdf
 ```
 
@@ -102,6 +112,11 @@ gh release create media-2026 ~/keep/angela_presentacion.mp4 \
   --notes "Binarios grandes retirados del historial (issue #6)."
 ```
 
+El resto de medios de `angela_video/` (wav, mp3, frames, clips) son intermedios
+que regeneran los scripts que se quedan en el repo. Si se quieren guardar
+igualmente, copiar la carpeta antes de reescribir:
+`cp -r Deutsch_lernen/output/angela_video ~/keep/`.
+
 ### 4.3 Copia de seguridad
 
 ```bash
@@ -109,12 +124,33 @@ git clone --mirror https://github.com/JuanOlaya/juanolaya.github.io.git backup.g
 tar czf juanolaya-backup-$(date +%F).tgz backup.git
 ```
 
-### 4.4 Reescritura
+### 4.4 Secretos en el historial
+
+El PR del issue #5 detecta una API key de Gemini en `Deutsch_lernen/futur/futur.html`
+y contraseñas de MySQL en `MuseFlow/php/*-db.php`. Borrarlas del árbol no las
+saca del historial. **Rotarlas primero** (es lo único que las invalida) y
+crear, fuera del repositorio, `secrets.txt` con una línea por valor:
+
+```text
+valor_literal_del_secreto==>REDACTED
+```
+
+### 4.5 Reescritura (una sola pasada)
+
+Rutas y secretos van en **una única ejecución** de `git filter-repo` sobre un
+clon espejo recién clonado de GitHub, así no hace falta `--force`.
+Si filter-repo aborta con *"this does not look like a fresh clone"* (pasa, por
+ejemplo, con un clon local o con uno que ya tiene cambios), no forzarlo:
+volver a clonar desde GitHub y repetir. En el ensayo, una segunda pasada sobre
+el mismo `work.git` sí se aceptó sin `--force` (filter-repo recuerda su
+ejecución anterior), pero una sola pasada es más simple y deja un único
+`commit-map` para auditar.
 
 ```bash
 git clone --mirror https://github.com/JuanOlaya/juanolaya.github.io.git work.git
 cd work.git
-git filter-repo --invert-paths --paths-from-file ../paths-to-remove.txt
+git filter-repo --invert-paths --paths-from-file ../paths-to-remove.txt \
+  --replace-text ../secrets.txt
 git count-objects -vH   # esperado: size-pack ≈ 77 MiB (B) o ≈ 110 MiB (A)
 ```
 
@@ -122,24 +158,17 @@ git count-objects -vH   # esperado: size-pack ≈ 77 MiB (B) o ≈ 110 MiB (A)
 
 ```bash
 git log --oneline -5 master
-git ls-tree -r --name-only master | grep -E 'tmp/|headless-profile|node_modules/' || echo limpio
+git ls-tree -r --name-only master | grep -E 'tmp/|headless-profile|node_modules/|\.mp4$' || echo limpio
+git log --all -p | grep -cF 'valor_literal_del_secreto'   # esperado: 0
 ```
 
-#### Secretos en el historial
-
-El PR del issue #5 detecta una API key de Gemini en `Deutsch_lernen/futur/futur.html`
-y contraseñas de MySQL en `MuseFlow/php/*-db.php`. Borrarlas del árbol no las
-saca del historial. **Rotarlas primero** (es lo único que las invalida) y,
-aprovechando esta reescritura, sustituirlas en todas las versiones:
-
-```bash
-# secrets.txt: una línea por valor, formato  valor_literal==>REDACTED
-git filter-repo --replace-text ../secrets.txt
-```
+Esta secuencia exacta (con un valor ficticio en `secrets.txt`) se ensayó sin
+`--force` sobre un clon espejo nuevo: terminó sin errores, `size-pack: 77.28 MiB`,
+y los scripts de `angela_video/` siguen en `master`.
 
 No guardar `secrets.txt` dentro del repositorio.
 
-### 4.5 Subida (solo el dueño)
+### 4.6 Subida (solo el dueño)
 
 ```bash
 git remote add origin https://github.com/JuanOlaya/juanolaya.github.io.git
@@ -154,10 +183,15 @@ Después, comprobar que Pages vuelve a publicar y que
 `https://juanolaya.github.io/` y `https://juanolaya.github.io/CV/JuanOlaya.pdf`
 responden `200`.
 
-### 4.6 Alternativa con LFS (escenario C, solo con despliegue por Actions)
+### 4.7 Alternativa con LFS (escenario C, solo con despliegue por Actions)
+
+Igual que 4.5 pero con `paths-a.txt` (una sola pasada de filter-repo sobre un
+clon fresco) y después `git lfs migrate`, que es otra herramienta y no requiere
+`--force`:
 
 ```bash
-git filter-repo --invert-paths --paths-from-file ../paths-a.txt
+git filter-repo --invert-paths --paths-from-file ../paths-a.txt \
+  --replace-text ../secrets.txt
 git lfs migrate import --everything \
   --include="*.mp4,*.wav,Deutsch_lernen/**/bamf_official_2025.pdf"
 git reflog expire --expire=now --all && git gc --prune=now
@@ -188,7 +222,12 @@ git -C full.git count-objects -vH
 git -C full.git rev-list --objects --all \
   | git -C full.git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(objectsize:disk) %(rest)' \
   | awk '$1=="blob"' | sort -k3 -nr | head -40
-git clone --mirror --no-local full.git m-b.git && git -C m-b.git remote remove origin
-(cd m-b.git && git filter-repo --invert-paths --paths-from-file ../paths-b.txt --force)
-git -C m-b.git count-objects -vH
+# Escenarios A y C: copias locales de full.git; un clon local no es "fresco",
+# por eso solo en este ensayo se usó --force (nunca en el procedimiento real).
+git clone --mirror --no-local full.git m-a.git && git -C m-a.git remote remove origin
+(cd m-a.git && git filter-repo --invert-paths --paths-from-file ../paths-a.txt --force)
+# Escenario B: la secuencia exacta de 4.5, sobre un clon nuevo de GitHub y sin --force
+git clone --mirror https://github.com/JuanOlaya/juanolaya.github.io.git work.git
+(cd work.git && git filter-repo --invert-paths --paths-from-file ../paths-to-remove.txt   --replace-text ../secrets.txt)
+git -C work.git count-objects -vH   # size-pack: 77.28 MiB
 ```
