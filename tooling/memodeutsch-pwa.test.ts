@@ -27,6 +27,7 @@ describe('MemoDeutsch precache list', () => {
         'verben/A1_A2_B1/verben.html',
         'verben/A1_A2_B1/script/verben-helpers.js',
         'verben/A1_A2_B1/script/script.js',
+        'verben/A1_A2_B1/script/app/state.js',
         'app/index.html',
       ]),
     );

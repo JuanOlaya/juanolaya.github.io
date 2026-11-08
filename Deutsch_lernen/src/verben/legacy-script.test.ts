@@ -1,11 +1,11 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { describe, expect, it } from 'vitest';
 import { MEMODEUTSCH_PRECACHE } from '../../../tooling/memodeutsch-pwa.ts';
 import { STORAGE_SCHEMA_VERSION, type MemoStorage } from '../storage/memo-storage.ts';
 import { legacyGlobals } from './legacy-globals.ts';
-import { declarationsOf, loadLegacyFunction, readLegacyScript } from './legacy-script.ts';
+import { declarationsOf, LEGACY_MODULES_DIR, loadLegacyFunction, readLegacyScript } from './legacy-script.ts';
 
 const VERBEN_DIR = path.resolve(import.meta.dirname, '../../verben/A1_A2_B1');
 const HELPER_NAMES = Object.keys(legacyGlobals);
@@ -56,6 +56,13 @@ describe('verben.html wiring of the helper modules', () => {
   it('the service worker precaches the bundle with script.js', () => {
     expect(MEMODEUTSCH_PRECACHE).toContain('verben/A1_A2_B1/script/verben-helpers.js');
   });
+
+  it('loads script.js as an ES module and precaches every module it is split into', () => {
+    expect(readVerben('verben.html')).toMatch(/<script type="module" src="script\/script\.js/);
+    const modules = readdirSync(LEGACY_MODULES_DIR).map((name) => `verben/A1_A2_B1/script/app/${name}`);
+    expect(modules.length).toBeGreaterThan(0);
+    expect(MEMODEUTSCH_PRECACHE).toEqual(expect.arrayContaining(modules));
+  });
 });
 
 interface StubElement {
@@ -75,14 +82,14 @@ function stubElement(): StubElement {
   return element;
 }
 
-/** Runs script.js's renderLightVersion for one group against stubbed DOM and closure state. */
+/** Runs renderLightVersion (now in `script/app/views.js`) for one group against stubbed DOM and page state. */
 function renderLightRows(allVerbsData: Record<string, object>): string[] {
   const cardsContainer = stubElement();
   const renderLightVersion = loadLegacyFunction<(group: { verbs: string[] }) => void>('renderLightVersion', {
     ...legacyGlobals,
     cardsContainer,
     navigationWrapper: null,
-    allVerbsData,
+    state: { allVerbsData },
     updateIndicatorsForView: () => {},
     document: { createElement: stubElement, body: { classList: { remove: () => {} } } },
   });
