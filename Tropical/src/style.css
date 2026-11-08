@@ -1,0 +1,72 @@
+@import '../../src/shared/styles/tailwind.css';
+@import '../../src/shared/styles/v3-compat.css';
+@source '../';
+@source '../../src/shared/components';
+
+@theme {
+  --color-tropical: #0d2c25;
+  --color-neon-pink: #ff2d75;
+  --color-accent-green: #baff39;
+  --font-unbounded: 'Unbounded', cursive;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  scroll-behavior: smooth;
+}
+
+.tropical-gradient {
+  background: linear-gradient(135deg, #0d2c25 0%, #1a4d40 100%);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dark green text on the neon background for maximum legibility. */
+.badge-pill {
+  background-color: #baff39;
+  color: #0d2c25;
+  padding: 8px 24px;
+  border-radius: 9999px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  box-shadow: 0 4px 14px rgba(186, 255, 57, 0.2);
+  text-transform: uppercase;
+}
+
+.badge-signature {
+  background-color: #baff39;
+  color: #0d2c25;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.i18n {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.lang-fading .i18n {
+  opacity: 0;
+}

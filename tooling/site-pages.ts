@@ -23,7 +23,7 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'CV' },
 
   // Project pages, one public URL per folder.
-  { kind: 'legacy', path: 'Antonella' },
+  { kind: 'vite', dir: 'Antonella/Lenguajes' },
   { kind: 'legacy', path: 'Balconity' },
   // Deutsch_lernen/src/ holds the TypeScript schemas and tests of its migration (#14), not site files.
   { kind: 'legacy', path: 'Deutsch_lernen', exclude: ['src'] },
@@ -38,8 +38,7 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'ParticleCanvas' },
   { kind: 'legacy', path: 'PixelGrid' },
   { kind: 'legacy', path: 'PlatformGame' },
-  { kind: 'legacy', path: 'Project_Management' },
-  { kind: 'legacy', path: 'PruebaGithub' },
+  { kind: 'vite', dir: 'Project_Management' },
   // Server code (moving to server/ in #16) must never be published; the page itself may live in
   // Sockets/public/ or Sockets/index.html depending on that move, so the whole folder is listed.
   {
@@ -48,8 +47,8 @@ export const siteEntries: readonly SiteEntry[] = [
     exclude: ['server.js', 'package.json', 'package-lock.json', 'node_modules'],
   },
   { kind: 'legacy', path: 'TestingSoSci' },
-  { kind: 'legacy', path: 'Tropical' },
-  { kind: 'legacy', path: 'UX' },
+  { kind: 'vite', dir: 'Tropical' },
+  { kind: 'vite', dir: 'UX' },
   { kind: 'legacy', path: 'Website' },
   { kind: 'legacy', path: 'WeightLever' },
   { kind: 'legacy', path: 'multitouchTest' },

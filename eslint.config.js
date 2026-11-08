@@ -7,7 +7,7 @@ import tseslint from 'typescript-eslint';
 
 // Legacy pages are plain scripts sharing globals and would flood the report, so only migrated
 // and new code is linted: shared code, each page's `src/` folder and the build tooling.
-const lintedSources = ['src/**', '*/src/**', 'tooling/**', '*.config.{js,ts}'];
+const lintedSources = ['src/**', '*/src/**', '*/*/src/**', 'tooling/**', '*.config.{js,ts}'];
 
 export default defineConfig([
   globalIgnores([

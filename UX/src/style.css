@@ -1,0 +1,42 @@
+@import '../../src/shared/styles/tailwind.css';
+@import '../../src/shared/styles/v3-compat.css';
+@source '../';
+@source '../../src/shared/components';
+
+body {
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* Animaciones personalizadas */
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Own keyframes name so it does not override Tailwind's `animate-pulse`. */
+.pulse-loader {
+  animation: pulse-loader 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-loader {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+}

@@ -31,6 +31,6 @@ export default defineConfig({
   // Without this the dev server crawls every legacy HTML file looking for dependencies.
   optimizeDeps: { entries: Object.values(input) },
   test: {
-    include: ['tooling/**/*.test.ts', 'src/**/*.test.ts', '*/src/**/*.test.ts'],
+    include: ['tooling/**/*.test.ts', 'src/**/*.test.ts', '*/src/**/*.test.ts', '*/*/src/**/*.test.ts'],
   },
 });
