@@ -69,6 +69,175 @@
 			writeVerbCache: (payload) => store.setItem(CURRENT_VERB_CACHE_KEY, JSON.stringify(payload))
 		};
 	}
+	// Deutsch_lernen/src/verben/verben-data.ts
+	/** Static content and lookup tables of the verben page, moved verbatim out of `script.js`. */
+	var germanOrdinals = [
+		"Erste",
+		"Zweite",
+		"Dritte",
+		"Vierte",
+		"Fünfte",
+		"Sechste",
+		"Siebte",
+		"Achte",
+		"Neunte",
+		"Zehnte",
+		"Elfte",
+		"Zwölfte",
+		"Dreizehnte"
+	];
+	var germanExampleOrdinals = [
+		"Erstes",
+		"Zweites",
+		"Drittes",
+		"Viertes",
+		"Fünftes",
+		"Sechstes",
+		"Siebtes",
+		"Achtes"
+	];
+	var savedStories = [
+		`<p>Gestern <span class="highlighted-word">bin ich</span> in Berlin <span class="highlighted-word">gewesen</span>. Ich <span class="highlighted-word">bin</span> mit dem Zug <span class="highlighted-word">gefahren</span>. In der Stadt <span class="highlighted-word">habe ich</span> eine Freundin <span class="highlighted-word">gesehen</span>. Wir <span class="highlighted-word">haben</span> in einem Café <span class="highlighted-word">gesprochen</span> und einen Kaffee <span class="highlighted-word">getrunken</span>. Danach <span class="highlighted-word">habe ich</span> ein Buch <span class="highlighted-word">gekauft</span> und mit Karte <span class="highlighted-word">bezahlt</span>. Es <span class="highlighted-word">hat</span> viel Spaß <span class="highlighted-word">gemacht</span>!</p>`,
+		`<p>Heute Morgen <span class="highlighted-word">habe ich</span> lange <span class="highlighted-word">geschlafen</span>. Zum Frühstück <span class="highlighted-word">habe ich</span> ein Brötchen <span class="highlighted-word">gegessen</span>. Dann <span class="highlighted-word">habe ich</span> eine E-Mail an meine Familie <span class="highlighted-word">geschrieben</span>. Ich <span class="highlighted-word">habe</span> ihnen <span class="highlighted-word">gesagt</span>, dass ich bald nach Hause <span class="highlighted-word">komme</span>. Später <span class="highlighted-word">habe ich</span> die Zeitung <span class="highlighted-word">gelesen</span>.</p>`,
+		`<p>Am Wochenende <span class="highlighted-word">habe ich</span> zu Hause <span class="highlighted-word">gearbeitet</span>. Ich <span class="highlighted-word">habe</span> für eine Prüfung <span class="highlighted-word">gelernt</span>. Ich <span class="highlighted-word">habe</span> eine Frage nicht <span class="highlighted-word">gewusst</span>, also <span class="highlighted-word">habe ich</span> meinen Lehrer <span class="highlighted-word">gefüragt</span>. Er <span class="highlighted-word">hat</span> mir alles gut erklärt. Ich <span class="highlighted-word">habe</span> die Antwort schnell <span class="highlighted-word">gefunden</span>.</p>`
+	];
+	var standardColors = [
+		"#8b5cf6",
+		"#ec4899",
+		"#f59e0b",
+		"#3b82f6",
+		"#ea580c",
+		"#22C55E",
+		"#a855f7",
+		"#facc15"
+	];
+	/** Verbs that have a Konjunktiv II tab. */
+	var konjunktivVerbs = [
+		"sein",
+		"haben",
+		"werden",
+		"dürfen",
+		"müssen",
+		"wollen",
+		"sollen",
+		"mögen",
+		"können",
+		"geben",
+		"kommen",
+		"gehen",
+		"finden"
+	];
+	// Deutsch_lernen/src/verben/level-layout.ts
+	/** Folder, position inside it and file number of the `globalIndex`-th group of `macroLevel`, or null. */
+	function physicalGroupData(map, macroLevel, globalIndex) {
+		const layers = map[macroLevel] || [];
+		let offset = 0;
+		for (const layer of layers) {
+			if (globalIndex < offset + layer.count) {
+				const localIndex = globalIndex - offset;
+				const fileNumber = Array.isArray(layer.fileNumbers) ? layer.fileNumbers[localIndex] : globalIndex + 1;
+				return {
+					physicalKey: layer.key,
+					localIndex,
+					fileNumber
+				};
+			}
+			offset += layer.count;
+		}
+		return null;
+	}
+	/** 0-based index across the whole macro level of group `localGroupNumber` (1-based) of layer `levelStr` (`A1.2`). */
+	function globalGroupIndex(map, levelStr, localGroupNumber) {
+		if (!levelStr || localGroupNumber === void 0 || localGroupNumber === null) return 0;
+		const macroLevel = levelStr.split(".")[0];
+		const physicalKey = levelStr.includes(".") ? levelStr.replace(".", "_") : levelStr;
+		const layers = map[macroLevel] || [];
+		let index = Number(localGroupNumber) - 1;
+		for (const layer of layers) {
+			if (layer.key === physicalKey) break;
+			index += layer.count;
+		}
+		return Math.max(0, index);
+	}
+	/** Theme colour of the group a verb belongs to; steel blue when the verb has no level or group. */
+	function themeColorForVerb(map, verbData) {
+		if (!verbData || !verbData.level || !verbData.group) return "#4682B4";
+		return standardColors[(globalGroupIndex(map, verbData.level, verbData.group) % standardColors.length + standardColors.length) % standardColors.length];
+	}
+	function fileNumbersFor(count, previousLayer) {
+		if (!previousLayer || !Array.isArray(previousLayer.fileNumbers)) return Array.from({ length: count }, (_, index) => index + 1);
+		const previous = previousLayer.fileNumbers;
+		if (count <= previous.length) return previous.slice(0, count);
+		const lastNum = previous.length > 0 ? previous[previous.length - 1] : 0;
+		const extension = Array.from({ length: count - previous.length }, (_, index) => lastNum + index + 1);
+		return [...previous, ...extension];
+	}
+	/**
+	* Level layout derived from the groups index. Known layers keep their file numbers (extended or trimmed to
+	* the new count); new layers number their files from 1. Null when there are no groups, so the caller keeps
+	* its current layout.
+	*/
+	function levelsFromGroups(groupsArray, previousMap) {
+		if (!Array.isArray(groupsArray) || groupsArray.length === 0) return null;
+		const physicalLevelMap = {};
+		const levelConfig = {};
+		for (const group of groupsArray) {
+			if (!group || !group.level) continue;
+			const macroLevel = String(group.level).split(".")[0];
+			const physicalKey = String(group.level).replace(".", "_");
+			physicalLevelMap[macroLevel] ??= [];
+			levelConfig[macroLevel] ??= {
+				groupCount: 0,
+				displayName: macroLevel
+			};
+			levelConfig[macroLevel].groupCount++;
+			let layer = physicalLevelMap[macroLevel].find((l) => l.key === physicalKey);
+			if (!layer) {
+				layer = {
+					key: physicalKey,
+					count: 0,
+					fileNumbers: []
+				};
+				physicalLevelMap[macroLevel].push(layer);
+			}
+			layer.count++;
+		}
+		for (const layers of Object.values(physicalLevelMap)) for (const layer of layers) {
+			const previousLayer = (previousMap[layer.key.split("_")[0]] || []).find((item) => item.key === layer.key);
+			layer.fileNumbers = fileNumbersFor(layer.count, previousLayer);
+		}
+		return {
+			physicalLevelMap,
+			levelConfig
+		};
+	}
+	/** Cards per page of the compact carousel for a viewport `width`, and the device class it implies. */
+	function pageSizeForWidth(width) {
+		if (width < 600) return {
+			pageSize: 1,
+			isPhone: true,
+			isTablet: false,
+			isDesktop: false
+		};
+		if (width < 768) return {
+			pageSize: 2,
+			isPhone: true,
+			isTablet: false,
+			isDesktop: false
+		};
+		if (width <= 1024) return {
+			pageSize: 3,
+			isPhone: false,
+			isTablet: true,
+			isDesktop: false
+		};
+		return {
+			pageSize: 4,
+			isPhone: false,
+			isTablet: false,
+			isDesktop: true
+		};
+	}
 	// Deutsch_lernen/src/verben/mojibake.ts
 	/**
 	* Repairs text that was saved with a wrong encoding (UTF-8 read as Windows-1252, sometimes several times).
@@ -135,170 +304,6 @@
 			normalizedObject[normalizeMojibakeString(key)] = normalizeMojibakeDeep(entryValue);
 		});
 		return normalizedObject;
-	}
-	// Deutsch_lernen/src/verben/search.ts
-	/** Lowercase, without diacritics, so "Übung" matches "ubung". */
-	function normalizeSearchValue(value) {
-		if (value === null || value === void 0) return "";
-		return String(value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-	}
-	/** First word of `text` that starts with the (already normalised) search term, or `''`. */
-	function findMatchingWordInText(text, searchTerm) {
-		if (!text || typeof text !== "string") return "";
-		return text.replace(/[()]/g, "").split(/[\s,/]+/).filter(Boolean).find((word) => normalizeSearchValue(word).startsWith(searchTerm)) || "";
-	}
-	/** First entry whose text contains a matching word, or `''`. */
-	function findMatchingTextEntry(entries, searchTerm, extractor = null) {
-		if (!entries) return "";
-		for (const entry of entries) {
-			const text = extractor ? extractor(entry) : entry;
-			if (typeof text === "string" && findMatchingWordInText(text, searchTerm)) return text;
-		}
-		return "";
-	}
-	// Deutsch_lernen/src/verben/theme-colors.ts
-	/** `"r, g, b"` for `rgba(var(--x), alpha)` styles; unknown input falls back to the default blue. */
-	function hexToRgb(hex) {
-		const full = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (_match, r, g, b) => r + r + g + g + b + b);
-		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(full);
-		return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : "59, 130, 246";
-	}
-	function rgbToHex({ r, g, b }) {
-		const toHex = (value) => Math.max(0, Math.min(255, Math.round(value))).toString(16).padStart(2, "0");
-		return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-	}
-	/** Channels of a 3- or 6-digit hex colour (`#` optional), or `null` when it is not one. */
-	function hexToRgbChannels(hex) {
-		if (!hex) return null;
-		const normalized = hex.replace("#", "").trim();
-		const full = normalized.length === 3 ? normalized.split("").map((ch) => ch + ch).join("") : normalized;
-		const int = parseInt(full, 16);
-		if (Number.isNaN(int) || full.length !== 6) return null;
-		return {
-			r: int >> 16 & 255,
-			g: int >> 8 & 255,
-			b: int & 255
-		};
-	}
-	/**
-	* Blends two hex colours (`weight` 0 → `colorA`, 1 → `colorB`) for the modal palette. If one colour is not
-	* valid hex, the other is returned unchanged.
-	*/
-	function mixHexColors(colorA, colorB, weight = .5) {
-		const a = hexToRgbChannels(colorA);
-		const b = hexToRgbChannels(colorB);
-		if (!a) return colorB;
-		if (!b) return colorA;
-		return rgbToHex({
-			r: a.r * (1 - weight) + b.r * weight,
-			g: a.g * (1 - weight) + b.g * weight,
-			b: a.b * (1 - weight) + b.b * weight
-		});
-	}
-	// Deutsch_lernen/src/verben/translations.ts
-	/** Drops a leading "(sich)", unwraps any other leading "(word)" and turns " o " into " / ". */
-	function removeParentheses(text) {
-		if (!text) return text;
-		return text.replace(/^\(([^)]+)\)\s*/, (_match, innerWord) => innerWord.toLowerCase() === "sich" ? "" : innerWord + " ").replace(/ o /g, " / ").trim();
-	}
-	function getPrimaryTranslation(text) {
-		const cleaned = removeParentheses(text || "");
-		if (!cleaned) return cleaned;
-		return cleaned.split("/")[0].trim();
-	}
-	function getCardTranslation(verbData) {
-		return verbData && verbData.card_es || getPrimaryTranslation(verbData && verbData.es || "");
-	}
-	/** The card's translation, one line per alternative. */
-	function getCardTranslationLines(verbData) {
-		if (!verbData) return [];
-		const text = verbData.card_es || getCardTranslation(verbData);
-		if (!text) return [];
-		return text.split(/[,/\n\r]+/).map((part) => part.trim()).filter((part) => part.length > 0);
-	}
-	// Deutsch_lernen/src/verben/verb-cache.ts
-	/** Verb fields too large for the localStorage snapshot; the modal fetches them again when needed. */
-	var HEAVY_VERB_DATA_KEYS = [
-		"praesens_examples",
-		"praeteritum_examples",
-		"praesens_fragen",
-		"wortfamilie"
-	];
-	function isVerbObject(value) {
-		return Boolean(value) && typeof value === "object" && !Array.isArray(value);
-	}
-	/** Copies every verb without its heavy fields, so the snapshot fits in the storage quota. */
-	function lightweightVerbData(source) {
-		const snapshot = {};
-		Object.entries(source ?? {}).forEach(([verbName, verbData]) => {
-			if (!isVerbObject(verbData)) return;
-			const compactVerbData = { ...verbData };
-			HEAVY_VERB_DATA_KEYS.forEach((key) => delete compactVerbData[key]);
-			snapshot[verbName] = compactVerbData;
-		});
-		return snapshot;
-	}
-	/** Narrows a cache payload to one level's groups and their verbs: the retry when the full one is too big. */
-	function compactToLevel(payload, level) {
-		const groups = payload.verbGroupsByLevel[level] ?? [];
-		const verbs = {};
-		groups.forEach((group) => {
-			if (!group || !Array.isArray(group.verbs)) return;
-			group.verbs.forEach((verbName) => {
-				if (payload.allVerbsData[verbName]) verbs[verbName] = payload.allVerbsData[verbName];
-			});
-		});
-		return {
-			...payload,
-			allVerbsData: verbs,
-			verbGroupsByLevel: { [level]: groups }
-		};
-	}
-	// Deutsch_lernen/src/verben/verb-forms.ts
-	/** Perfekt without its auxiliary ("hat gemacht" → "gemacht"); `'---'` when missing. */
-	function getCleanPerfekt(perfekt) {
-		if (!perfekt || perfekt === "---") return "---";
-		return perfekt.replace(/^(habe|hast|hat|haben|habt|bin|bist|ist|sind|seid|sein)\s+/i, "");
-	}
-	/** Präteritum without the "er/sie/es" label; `'---'` when missing. */
-	function getCleanPraeteritum(praeteritum) {
-		if (!praeteritum || praeteritum === "---") return "---";
-		return praeteritum.replace(/^(er\/sie\/es)\s+/, "");
-	}
-	/** Verb form without personal or reflexive pronouns, for the tense buttons on the card back. */
-	function cleanVerbForm(phrase) {
-		if (!phrase) return "";
-		return phrase.replace(/\b(er\/sie\/es|er|sie|es|ich|du|wir|ihr|Sie)\s+/gi, "").replace(/\b(sich|mich|dich|uns|euch)\s+/gi, "").trim().replace(/\s+/g, " ");
-	}
-	function withEnding(base, suffix) {
-		if (suffix === "st") {
-			if (base.endsWith("e")) return base + "st";
-			if (base.endsWith("t") || base.endsWith("d")) return base + "est";
-			return base + "st";
-		}
-		if (suffix === "n") {
-			if (base.endsWith("en")) return base;
-			if (base.endsWith("e")) return base + "n";
-			return base + "en";
-		}
-		if (suffix === "t") {
-			if (base.endsWith("t")) return base;
-			if (base.endsWith("e")) return base + "t";
-			if (base.endsWith("d")) return base + "et";
-			return base + "t";
-		}
-		return base;
-	}
-	/**
-	* Adds a person ending to the first word of a conjugated phrase for the card-back table, keeping a
-	* separable prefix after it ("biege ab" + "st" → "biegest ab").
-	*/
-	function conjugateBaseForm(phrase, suffix) {
-		if (!phrase) return "";
-		const parts = phrase.replace(/^(ich|du|er\/sie\/es|wir|ihr|sie\/Sie)\s+/, "").split(/\s+/);
-		const prefix = parts.slice(1).join(" ");
-		const base = withEnding(parts[0], suffix);
-		return prefix ? `${base} ${prefix}` : base;
 	}
 	// Deutsch_lernen/src/verben/verb-prefix.ts
 	/** Separable verbs and their prefix, highlighted on the cards. */
@@ -430,6 +435,257 @@
 		if (prefix && verbName.startsWith(prefix)) return `<span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}`;
 		return verbName;
 	}
+	// Deutsch_lernen/src/verben/search-highlight.ts
+	var HIGHLIGHT_OPEN = "<span style=\"background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;\">";
+	function escapeRegExp(query) {
+		return query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+	}
+	/** Every word of `text` containing `query`, wrapped in the search highlight. */
+	function highlightMatch(text, query) {
+		if (!query || !text) return text;
+		const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapeRegExp(query)}[\\wäöüÄÖÜß]*)`, "gi");
+		return text.replace(regex, (match) => `${HIGHLIGHT_OPEN}${match}</span>`);
+	}
+	function highlightBaseVerb(text) {
+		if (!text) return text;
+		return `${HIGHLIGHT_OPEN}${text}</span>`;
+	}
+	function separableMarkup(prefix, verbName) {
+		return `<span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}`;
+	}
+	/** The verb as the search results show it: separable prefix marked, highlighted when it matches `query`. */
+	function highlightVerbName(verbName, query) {
+		if (!verbName) return "";
+		if (verbName === "geboren werden") {
+			const escapedQuery = query.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&");
+			const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, "gi");
+			if (query && regex.test("geboren")) return `${HIGHLIGHT_OPEN}geboren</span> werden`;
+			return "geboren werden";
+		}
+		const prefix = separablePrefixesMap[verbName];
+		const plain = prefix && verbName.startsWith(prefix) ? separableMarkup(prefix, verbName) : verbName;
+		if (!query) return plain;
+		if (new RegExp(`([\\wäöüÄÖÜß]*${escapeRegExp(query)}[\\wäöüÄÖÜß]*)`, "gi").test(verbName)) return `${HIGHLIGHT_OPEN}${plain}</span>`;
+		return plain;
+	}
+	/** The conjugated form a search result matched, or `''` when it matched the infinitive. */
+	function getMatchHint(match) {
+		return match.matchedPraesensForm || match.matchedPerfektForm || match.matchedPraeteritumForm || match.matchedKonjunktivForm || match.matchedRelatedForm || "";
+	}
+	// Deutsch_lernen/src/verben/search.ts
+	/** Lowercase, without diacritics, so "Übung" matches "ubung". */
+	function normalizeSearchValue(value) {
+		if (value === null || value === void 0) return "";
+		return String(value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+	}
+	/** First word of `text` that starts with the (already normalised) search term, or `''`. */
+	function findMatchingWordInText(text, searchTerm) {
+		if (!text || typeof text !== "string") return "";
+		return text.replace(/[()]/g, "").split(/[\s,/]+/).filter(Boolean).find((word) => normalizeSearchValue(word).startsWith(searchTerm)) || "";
+	}
+	/** First entry whose text contains a matching word, or `''`. */
+	function findMatchingTextEntry(entries, searchTerm, extractor = null) {
+		if (!entries) return "";
+		for (const entry of entries) {
+			const text = extractor ? extractor(entry) : entry;
+			if (typeof text === "string" && findMatchingWordInText(text, searchTerm)) return text;
+		}
+		return "";
+	}
+	// Deutsch_lernen/src/verben/theme-colors.ts
+	/** `"r, g, b"` for `rgba(var(--x), alpha)` styles; unknown input falls back to the default blue. */
+	function hexToRgb(hex) {
+		const full = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (_match, r, g, b) => r + r + g + g + b + b);
+		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(full);
+		return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : "59, 130, 246";
+	}
+	function rgbToHex({ r, g, b }) {
+		const toHex = (value) => Math.max(0, Math.min(255, Math.round(value))).toString(16).padStart(2, "0");
+		return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+	}
+	/** Channels of a 3- or 6-digit hex colour (`#` optional), or `null` when it is not one. */
+	function hexToRgbChannels(hex) {
+		if (!hex) return null;
+		const normalized = hex.replace("#", "").trim();
+		const full = normalized.length === 3 ? normalized.split("").map((ch) => ch + ch).join("") : normalized;
+		const int = parseInt(full, 16);
+		if (Number.isNaN(int) || full.length !== 6) return null;
+		return {
+			r: int >> 16 & 255,
+			g: int >> 8 & 255,
+			b: int & 255
+		};
+	}
+	/**
+	* Blends two hex colours (`weight` 0 → `colorA`, 1 → `colorB`) for the modal palette. If one colour is not
+	* valid hex, the other is returned unchanged.
+	*/
+	function mixHexColors(colorA, colorB, weight = .5) {
+		const a = hexToRgbChannels(colorA);
+		const b = hexToRgbChannels(colorB);
+		if (!a) return colorB;
+		if (!b) return colorA;
+		return rgbToHex({
+			r: a.r * (1 - weight) + b.r * weight,
+			g: a.g * (1 - weight) + b.g * weight,
+			b: a.b * (1 - weight) + b.b * weight
+		});
+	}
+	// Deutsch_lernen/src/verben/translations.ts
+	/** Drops a leading "(sich)", unwraps any other leading "(word)" and turns " o " into " / ". */
+	function removeParentheses(text) {
+		if (!text) return text;
+		return text.replace(/^\(([^)]+)\)\s*/, (_match, innerWord) => innerWord.toLowerCase() === "sich" ? "" : innerWord + " ").replace(/ o /g, " / ").trim();
+	}
+	function getPrimaryTranslation(text) {
+		const cleaned = removeParentheses(text || "");
+		if (!cleaned) return cleaned;
+		return cleaned.split("/")[0].trim();
+	}
+	function getCardTranslation(verbData) {
+		return verbData && verbData.card_es || getPrimaryTranslation(verbData && verbData.es || "");
+	}
+	/** The card's translation, one line per alternative. */
+	function getCardTranslationLines(verbData) {
+		if (!verbData) return [];
+		const text = verbData.card_es || getCardTranslation(verbData);
+		if (!text) return [];
+		return text.split(/[,/\n\r]+/).map((part) => part.trim()).filter((part) => part.length > 0);
+	}
+	// Deutsch_lernen/src/verben/verb-cache.ts
+	/** Verb fields too large for the localStorage snapshot; the modal fetches them again when needed. */
+	var HEAVY_VERB_DATA_KEYS = [
+		"praesens_examples",
+		"praeteritum_examples",
+		"praesens_fragen",
+		"wortfamilie"
+	];
+	function isVerbObject(value) {
+		return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+	}
+	/** Copies every verb without its heavy fields, so the snapshot fits in the storage quota. */
+	function lightweightVerbData(source) {
+		const snapshot = {};
+		Object.entries(source ?? {}).forEach(([verbName, verbData]) => {
+			if (!isVerbObject(verbData)) return;
+			const compactVerbData = { ...verbData };
+			HEAVY_VERB_DATA_KEYS.forEach((key) => delete compactVerbData[key]);
+			snapshot[verbName] = compactVerbData;
+		});
+		return snapshot;
+	}
+	/** Narrows a cache payload to one level's groups and their verbs: the retry when the full one is too big. */
+	function compactToLevel(payload, level) {
+		const groups = payload.verbGroupsByLevel[level] ?? [];
+		const verbs = {};
+		groups.forEach((group) => {
+			if (!group || !Array.isArray(group.verbs)) return;
+			group.verbs.forEach((verbName) => {
+				if (payload.allVerbsData[verbName]) verbs[verbName] = payload.allVerbsData[verbName];
+			});
+		});
+		return {
+			...payload,
+			allVerbsData: verbs,
+			verbGroupsByLevel: { [level]: groups }
+		};
+	}
+	// Deutsch_lernen/src/verben/verb-data-merge.ts
+	/** Root keys that are German pronouns: as objects they come from a rogue JSON structure and are skipped. */
+	var PRONOUN_KEYS = [
+		"es",
+		"wir",
+		"ihr",
+		"sie"
+	];
+	var PROTECTED_STRING_KEYS = [
+		"es",
+		"en_verb",
+		"level",
+		"theme",
+		"group"
+	];
+	/**
+	* Copies `source` into `target` key by key, except objects under `ignoredObjectKeys` and core strings
+	* (`es`, `en_verb`, `level`, `theme`, `group`) that `target` already has.
+	*/
+	function mergeVerbData(target, source, ignoredObjectKeys = PRONOUN_KEYS) {
+		if (!source || typeof source !== "object") return;
+		for (const [key, value] of Object.entries(source)) {
+			if (ignoredObjectKeys.includes(key) && typeof value === "object") continue;
+			if (PROTECTED_STRING_KEYS.includes(key) && typeof target[key] === "string" && target[key] !== "") continue;
+			target[key] = value;
+		}
+	}
+	/** Response body decoded as UTF-8 JSON, with mojibake repaired. */
+	async function parseJsonUtf8(response) {
+		const buffer = await response.arrayBuffer();
+		const text = new TextDecoder("utf-8").decode(buffer);
+		return normalizeMojibakeDeep(JSON.parse(text));
+	}
+	function getExampleLoadKey(verbName, tabId) {
+		return `${verbName}::${tabId}`;
+	}
+	/** The modal calls the Präsens tab `infinitiv`; no tab means that one too. */
+	function normalizeModalTabId(tabId) {
+		return tabId === "praesens" ? "infinitiv" : tabId || "infinitiv";
+	}
+	/** Whether the examples (or conjugations) shown by `tabId` still have to be fetched for this verb. */
+	function tabNeedsLazyExamples(verbName, verbData, tabId) {
+		const normalizedTab = normalizeModalTabId(tabId);
+		if (!verbData) return false;
+		if (normalizedTab === "infinitiv") return !verbData.praesens_examples || !verbData.praesens_fragen;
+		if (normalizedTab === "perfekt") return !verbData.perfekt_examples;
+		if (normalizedTab === "praeteritum") return !verbData.praeteritum_conjugations || !verbData.praeteritum_examples;
+		if (normalizedTab === "konjunktiv") return konjunktivVerbs.includes(verbName) && (!verbData.konjunktiv_ii || !verbData.konjunktiv_ii_examples);
+		return false;
+	}
+	// Deutsch_lernen/src/verben/verb-forms.ts
+	/** Perfekt without its auxiliary ("hat gemacht" → "gemacht"); `'---'` when missing. */
+	function getCleanPerfekt(perfekt) {
+		if (!perfekt || perfekt === "---") return "---";
+		return perfekt.replace(/^(habe|hast|hat|haben|habt|bin|bist|ist|sind|seid|sein)\s+/i, "");
+	}
+	/** Präteritum without the "er/sie/es" label; `'---'` when missing. */
+	function getCleanPraeteritum(praeteritum) {
+		if (!praeteritum || praeteritum === "---") return "---";
+		return praeteritum.replace(/^(er\/sie\/es)\s+/, "");
+	}
+	/** Verb form without personal or reflexive pronouns, for the tense buttons on the card back. */
+	function cleanVerbForm(phrase) {
+		if (!phrase) return "";
+		return phrase.replace(/\b(er\/sie\/es|er|sie|es|ich|du|wir|ihr|Sie)\s+/gi, "").replace(/\b(sich|mich|dich|uns|euch)\s+/gi, "").trim().replace(/\s+/g, " ");
+	}
+	function withEnding(base, suffix) {
+		if (suffix === "st") {
+			if (base.endsWith("e")) return base + "st";
+			if (base.endsWith("t") || base.endsWith("d")) return base + "est";
+			return base + "st";
+		}
+		if (suffix === "n") {
+			if (base.endsWith("en")) return base;
+			if (base.endsWith("e")) return base + "n";
+			return base + "en";
+		}
+		if (suffix === "t") {
+			if (base.endsWith("t")) return base;
+			if (base.endsWith("e")) return base + "t";
+			if (base.endsWith("d")) return base + "et";
+			return base + "t";
+		}
+		return base;
+	}
+	/**
+	* Adds a person ending to the first word of a conjugated phrase for the card-back table, keeping a
+	* separable prefix after it ("biege ab" + "st" → "biegest ab").
+	*/
+	function conjugateBaseForm(phrase, suffix) {
+		if (!phrase) return "";
+		const parts = phrase.replace(/^(ich|du|er\/sie\/es|wir|ihr|sie\/Sie)\s+/, "").split(/\s+/);
+		const prefix = parts.slice(1).join(" ");
+		const base = withEnding(parts[0], suffix);
+		return prefix ? `${base} ${prefix}` : base;
+	}
 	// Deutsch_lernen/src/verben/legacy-globals.ts
 	/** Helpers that `script.js` calls by their bare names, keyed by those names. */
 	var legacyGlobals = {
@@ -452,7 +708,26 @@
 		cleanVerbForm,
 		conjugateBaseForm,
 		lightweightVerbData,
-		compactToLevel
+		compactToLevel,
+		savedStories,
+		germanOrdinals,
+		germanExampleOrdinals,
+		standardColors,
+		konjunktivVerbs,
+		physicalGroupData,
+		globalGroupIndex,
+		themeColorForVerb,
+		levelsFromGroups,
+		pageSizeForWidth,
+		mergeVerbData,
+		parseJsonUtf8,
+		getExampleLoadKey,
+		normalizeModalTabId,
+		tabNeedsLazyExamples,
+		highlightMatch,
+		highlightBaseVerb,
+		highlightVerbName,
+		getMatchHint
 	};
 	// Deutsch_lernen/src/verben/verben-helpers.ts
 	/**

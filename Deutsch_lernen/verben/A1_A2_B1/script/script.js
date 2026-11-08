@@ -16,19 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cache/background load
 
- const germanOrdinals = ["Erste", "Zweite", "Dritte", "Vierte", "Fünfte", "Sechste", "Siebte", "Achte", "Neunte", "Zehnte", "Elfte", "Zwölfte", "Dreizehnte"];
 
- const germanExampleOrdinals = ["Erstes", "Zweites", "Drittes", "Viertes", "Fünftes", "Sechstes", "Siebtes", "Achtes"];
 
- const savedStories = [
-
- `<p>Gestern <span class="highlighted-word">bin ich</span> in Berlin <span class="highlighted-word">gewesen</span>. Ich <span class="highlighted-word">bin</span> mit dem Zug <span class="highlighted-word">gefahren</span>. In der Stadt <span class="highlighted-word">habe ich</span> eine Freundin <span class="highlighted-word">gesehen</span>. Wir <span class="highlighted-word">haben</span> in einem Café <span class="highlighted-word">gesprochen</span> und einen Kaffee <span class="highlighted-word">getrunken</span>. Danach <span class="highlighted-word">habe ich</span> ein Buch <span class="highlighted-word">gekauft</span> und mit Karte <span class="highlighted-word">bezahlt</span>. Es <span class="highlighted-word">hat</span> viel Spaß <span class="highlighted-word">gemacht</span>!</p>`,
-
- `<p>Heute Morgen <span class="highlighted-word">habe ich</span> lange <span class="highlighted-word">geschlafen</span>. Zum Frühstück <span class="highlighted-word">habe ich</span> ein Brötchen <span class="highlighted-word">gegessen</span>. Dann <span class="highlighted-word">habe ich</span> eine E-Mail an meine Familie <span class="highlighted-word">geschrieben</span>. Ich <span class="highlighted-word">habe</span> ihnen <span class="highlighted-word">gesagt</span>, dass ich bald nach Hause <span class="highlighted-word">komme</span>. Später <span class="highlighted-word">habe ich</span> die Zeitung <span class="highlighted-word">gelesen</span>.</p>`,
-
- `<p>Am Wochenende <span class="highlighted-word">habe ich</span> zu Hause <span class="highlighted-word">gearbeitet</span>. Ich <span class="highlighted-word">habe</span> für eine Prüfung <span class="highlighted-word">gelernt</span>. Ich <span class="highlighted-word">habe</span> eine Frage nicht <span class="highlighted-word">gewusst</span>, also <span class="highlighted-word">habe ich</span> meinen Lehrer <span class="highlighted-word">gefüragt</span>. Er <span class="highlighted-word">hat</span> mir alles gut erklärt. Ich <span class="highlighted-word">habe</span> die Antwort schnell <span class="highlighted-word">gefunden</span>.</p>`
-
- ];
 
  /** @type {Record<string, any>} */ let physicalLevelMap = {
 
@@ -54,62 +43,17 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
  };
 
- const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#3b82f6', '#ea580c', '#22C55E', '#a855f7', '#facc15'];
 
  function getPhysicalGroupData(macroLevel, globalIndex) {
-
- const layers = physicalLevelMap[macroLevel] || [];
-
- let offset = 0;
-
- for (let i = 0; i < layers.length; i++) {
-
- let layer = layers[i];
-
- if (globalIndex < offset + layer.count) {
-
- const localIndex = globalIndex - offset;
-
- const fileNumber = Array.isArray(layer.fileNumbers)
-
- ? layer.fileNumbers[localIndex]
-
- : globalIndex + 1;
-
- return { physicalKey: layer.key, localIndex, fileNumber };
-
- }
-
- offset += layer.count;
-
- }
-
- return null;
-
- }
+    return physicalGroupData(physicalLevelMap, macroLevel, globalIndex);
+  }
 
   function getGlobalGroupIndex(levelStr, localGroupNumber) {
-    if (!levelStr || localGroupNumber === undefined || localGroupNumber === null) return 0;
-    const macroLevel = levelStr.split('.')[0];
-    const physicalKey = levelStr.includes('.') ? levelStr.replace('.', '_') : levelStr;
-    const layers = physicalLevelMap[macroLevel] || [];
-    let globalGroupIndex = Number(localGroupNumber) - 1;
-    for (let i = 0; i < layers.length; i++) {
-      const layer = layers[i];
-      if (layer.key === physicalKey) {
-        break;
-      }
-      globalGroupIndex += layer.count;
-    }
-    return Math.max(0, globalGroupIndex);
+    return globalGroupIndex(physicalLevelMap, levelStr, localGroupNumber);
   }
 
   function getThemeColorForVerbData(verbData) {
-    if (!verbData || !verbData.level || !verbData.group) {
-      return '#4682B4';
-    }
-    const globalGroupIndex = getGlobalGroupIndex(verbData.level, verbData.group);
-    return standardColors[((globalGroupIndex % standardColors.length) + standardColors.length) % standardColors.length];
+    return themeColorForVerb(physicalLevelMap, verbData);
   }
 
 function applyModalThemePalette(verbData) {
@@ -165,86 +109,16 @@ function applyModalThemePalette(verbData) {
  };
 
  function autoConfigureLevelsFromGroups(groupsArray) {
+    const layout = levelsFromGroups(groupsArray, physicalLevelMap);
+    if (!layout) return;
+    physicalLevelMap = layout.physicalLevelMap;
+    levelConfig = layout.levelConfig;
+  }
 
- if (!Array.isArray(groupsArray) || groupsArray.length === 0) return;
 
- const previousPhysicalMap = physicalLevelMap;
 
- const tempPhysicalMap = {};
-
- const tempLevelConfig = {};
-
- groupsArray.forEach(group => {
-
- if (!group || !group.level) return;
-
- const parts = String(group.level).split('.');
-
- const macroLevel = parts[0];
-
- const physicalKey = String(group.level).replace('.', '_');
-
- if (!tempPhysicalMap[macroLevel]) tempPhysicalMap[macroLevel] = [];
-
- if (!tempLevelConfig[macroLevel]) tempLevelConfig[macroLevel] = { groupCount: 0, displayName: macroLevel };
-
- tempLevelConfig[macroLevel].groupCount++;
-
- let layer = tempPhysicalMap[macroLevel].find(l => l.key === physicalKey);
-
- if (!layer) { layer = { key: physicalKey, count: 0, fileNumbers: [] }; tempPhysicalMap[macroLevel].push(layer); }
-
- layer.count++;
-
- });
-
- Object.values(tempPhysicalMap).forEach(layers => {
-
- layers.forEach(layer => {
-
- const macroLevel = layer.key.split('_')[0];
-
- const previousLayer = (previousPhysicalMap[macroLevel] || []).find(item => item.key === layer.key);
-
- if (previousLayer && Array.isArray(previousLayer.fileNumbers)) {
-
- if (layer.count > previousLayer.fileNumbers.length) {
-
- const lastNum = previousLayer.fileNumbers.length > 0 ? previousLayer.fileNumbers[previousLayer.fileNumbers.length - 1] : 0;
-
- const diff = layer.count - previousLayer.fileNumbers.length;
-
- const extension = Array.from({ length: diff }, (_, index) => lastNum + index + 1);
-
- layer.fileNumbers = [...previousLayer.fileNumbers, ...extension];
-
- } else {
-
- layer.fileNumbers = previousLayer.fileNumbers.slice(0, layer.count);
-
- }
-
- } else {
-
- layer.fileNumbers = Array.from({ length: layer.count }, (_, index) => index + 1);
-
- }
-
- });
-
- });
-
- physicalLevelMap = tempPhysicalMap;
-
- levelConfig = tempLevelConfig;
-
- }
 
  const levelOrder = ['A1', 'A2', 'B1', 'B2'];
-
- // Verbs that support Konjunktiv II
-
- const konjunktivVerbs = ['sein', 'haben', 'werden', 'dürfen', 'müssen', 'wollen', 'sollen', 'mögen', 'können', 'geben', 'kommen', 'gehen', 'finden'];
 
  let currentLevel = 'A1';
 
@@ -456,15 +330,6 @@ const lazyExampleLoadPromises = new Map();
 
  let searchIdleTimeout = null;
 
- async function parseJsonUtf8(response) {
-
- const buffer = await response.arrayBuffer();
-
- const text = new TextDecoder('utf-8').decode(buffer);
-
- return normalizeMojibakeDeep(JSON.parse(text));
-
- }
 
  function setupFooterUtilityBar() {
 
@@ -1468,21 +1333,7 @@ async function loadBackgroundData() {
 
  if (!allVerbsData[verbName]) allVerbsData[verbName] = {};
 
- const safeMerge = (target, source) => {
-
- if (!source || typeof source !== 'object') return;
-
- Object.entries(source).forEach(([key, value]) => {
-
- if (['es', 'wir', 'ihr', 'sie'].includes(key) && typeof value === 'object' && !['cards'].includes(key)) return;
-
- if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') return;
-
- target[key] = value;
-
- });
-
- };
+ const safeMerge = (target, source) => mergeVerbData(target, source);
 
  safeMerge(allVerbsData[verbName], verbData);
 
@@ -1530,33 +1381,7 @@ async function loadBackgroundData() {
 
  : {};
 
- const safeMerge = (target, source) => {
-
- if (!source || typeof source !== 'object') return;
-
- Object.entries(source).forEach(([key, value]) => {
-
- // Ignore if the key is a German pronoun at root level (likely a rogue JSON structure)
-
- if (['es', 'wir', 'ihr', 'sie', 'es_example', 'en_example'].includes(key) && typeof value === 'object') {
-
- return;
-
- }
-
- // Protect established core strings
-
- if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') {
-
- return;
-
- }
-
- target[key] = value;
-
- });
-
- };
+ const safeMerge = (target, source) => mergeVerbData(target, source, ['es', 'wir', 'ihr', 'sie', 'es_example', 'en_example']);
 
  const mergedData = { ...existingData };
 
@@ -1618,33 +1443,7 @@ async function loadBackgroundData() {
 
  // doesn't overwrite the verb's translation and basic info.
 
- const safeMerge = (target, source) => {
-
- if (!source || typeof source !== 'object') return;
-
- Object.entries(source).forEach(([key, value]) => {
-
- // Ignore if the key is a German pronoun at root level (likely a rogue JSON structure)
-
- if (['es', 'wir', 'ihr', 'sie'].includes(key) && typeof value === 'object' && !['cards'].includes(key)) {
-
- return;
-
- }
-
- // Protect established core strings
-
- if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') {
-
- return;
-
- }
-
- target[key] = value;
-
- });
-
- };
+ const safeMerge = (target, source) => mergeVerbData(target, source);
 
  const mergedData = { ...existingData };
 
@@ -1678,53 +1477,8 @@ async function loadBackgroundData() {
 
  }
 
- function getExampleLoadKey(verbName, tabId) {
 
- return `${verbName}::${tabId}`;
 
- }
-
- function normalizeModalTabId(tabId) {
-
- return tabId === 'praesens' ? 'infinitiv' : (tabId || 'infinitiv');
-
- }
-
- function tabNeedsLazyExamples(verbName, verbData, tabId) {
-
- const normalizedTab = normalizeModalTabId(tabId);
-
- if (!verbData) return false;
-
- if (normalizedTab === 'infinitiv') {
-
- return !verbData.praesens_examples || !verbData.praesens_fragen;
-
- }
-
- if (normalizedTab === 'perfekt') {
-
- return !verbData.perfekt_examples;
-
- }
-
- if (normalizedTab === 'praeteritum') {
-
- return !verbData.praeteritum_conjugations || !verbData.praeteritum_examples;
-
- }
-
- if (normalizedTab === 'konjunktiv') {
-
- return konjunktivVerbs.includes(verbName) &&
-
- (!verbData.konjunktiv_ii || !verbData.konjunktiv_ii_examples);
-
- }
-
- return false;
-
- }
 
  async function loadVerbExamplesData(verbName, tabId = 'infinitiv') {
 
@@ -1758,29 +1512,7 @@ async function loadBackgroundData() {
 
  : Promise.resolve(fallback);
 
- const safeMerge = (target, source) => {
-
- if (!source || typeof source !== 'object') return;
-
- Object.entries(source).forEach(([key, value]) => {
-
- if (['es', 'wir', 'ihr', 'sie'].includes(key) && typeof value === 'object') {
-
- return;
-
- }
-
- if (['es', 'en_verb', 'level', 'theme', 'group'].includes(key) && typeof target[key] === 'string' && target[key] !== '') {
-
- return;
-
- }
-
- target[key] = value;
-
- });
-
- };
+ const safeMerge = (target, source) => mergeVerbData(target, source);
 
  const loadPromise = (async () => {
 
@@ -5859,86 +5591,9 @@ async function loadWortfamilieIndex() {
 
  // --- Whole-Word Regex Highlighter ---
 
- function highlightMatch(text, query) {
 
- if (!query || !text) return text;
 
- const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
- // Matches any whole word (\b...\b) containing the query sequence including trailing/leading German characters
-
- const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
-
- return text.replace(regex, (match) =>
-
- `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${match}</span>`
-
- );
-
- }
-
- function highlightBaseVerb(text) {
-
- if (!text) return text;
-
- return `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${text}</span>`;
-
- }
-
- function highlightVerbName(verbName, query) {
-   if (!verbName) return '';
-   
-   if (verbName === 'geboren werden') {
-     const escapedQuery = query.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&');
-     const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
-     if (query && regex.test('geboren')) {
-       return `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">geboren</span> werden`;
-     }
-     return 'geboren werden';
-   }
-
-   const prefix = separablePrefixesMap[verbName];
-   const isSeparable = prefix && verbName.startsWith(prefix);
-   
-   if (!query) {
-     if (isSeparable) {
-       return `<span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}`;
-     }
-     return verbName;
-   }
-   
-   const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-   const regex = new RegExp(`([\\wäöüÄÖÜß]*${escapedQuery}[\\wäöüÄÖÜß]*)`, 'gi');
-   
-   if (regex.test(verbName)) {
-     if (isSeparable) {
-       return `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;"><span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}</span>`;
-     } else {
-       return `<span style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #6e4e00; padding: 0;">${verbName}</span>`;
-     }
-   }
-   
-   if (isSeparable) {
-     return `<span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}`;
-   }
-   return verbName;
- }
-
- function getMatchHint(match) {
-
- return match.matchedPraesensForm ||
-
- match.matchedPerfektForm ||
-
- match.matchedPraeteritumForm ||
-
- match.matchedKonjunktivForm ||
-
- match.matchedRelatedForm ||
-
- '';
-
- }
 
  async function performSearch() {
 
@@ -7908,16 +7563,7 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
   };
 
     function getPageSizeAndDevice() {
-    const width = window.innerWidth;
-    if (width < 600) {
-      return { pageSize: 1, isPhone: true, isTablet: false, isDesktop: false };
-    } else if (width < 768) {
-      return { pageSize: 2, isPhone: true, isTablet: false, isDesktop: false };
-    } else if (width <= 1024) {
-      return { pageSize: 3, isPhone: false, isTablet: true, isDesktop: false };
-    } else {
-      return { pageSize: 4, isPhone: false, isTablet: false, isDesktop: true };
-    }
+    return pageSizeForWidth(window.innerWidth);
   }
 
 function setupCardDrag(cardElement) {

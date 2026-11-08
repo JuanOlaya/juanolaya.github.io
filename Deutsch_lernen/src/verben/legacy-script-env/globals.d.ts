@@ -36,6 +36,25 @@ declare global {
   const conjugateBaseForm: Helpers['conjugateBaseForm'];
   const lightweightVerbData: Helpers['lightweightVerbData'];
   const compactToLevel: Helpers['compactToLevel'];
+  const savedStories: Helpers['savedStories'];
+  const germanOrdinals: Helpers['germanOrdinals'];
+  const germanExampleOrdinals: Helpers['germanExampleOrdinals'];
+  const standardColors: Helpers['standardColors'];
+  const konjunktivVerbs: Helpers['konjunktivVerbs'];
+  const physicalGroupData: Helpers['physicalGroupData'];
+  const globalGroupIndex: Helpers['globalGroupIndex'];
+  const themeColorForVerb: Helpers['themeColorForVerb'];
+  const levelsFromGroups: Helpers['levelsFromGroups'];
+  const pageSizeForWidth: Helpers['pageSizeForWidth'];
+  const mergeVerbData: Helpers['mergeVerbData'];
+  const parseJsonUtf8: Helpers['parseJsonUtf8'];
+  const getExampleLoadKey: Helpers['getExampleLoadKey'];
+  const normalizeModalTabId: Helpers['normalizeModalTabId'];
+  const tabNeedsLazyExamples: Helpers['tabNeedsLazyExamples'];
+  const highlightMatch: Helpers['highlightMatch'];
+  const highlightBaseVerb: Helpers['highlightBaseVerb'];
+  const highlightVerbName: Helpers['highlightVerbName'];
+  const getMatchHint: Helpers['getMatchHint'];
 
   // script.js assigns this one to `window` and also calls it by its bare name.
   const openModalForVerb: Window['openModalForVerb'];
