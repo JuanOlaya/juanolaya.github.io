@@ -144,7 +144,13 @@ const timeAmsterdamEl = document.getElementById("timeAmsterdam");
 const dateAmsterdamEl = document.getElementById("dateAmsterdam");
 const weatherAmsterdamEl = document.getElementById("weatherAmsterdam");
 
-const API_KEY = "1dd359b1b668b6011fdd5c163f521f6b";
+// The OpenWeather key lives in server/weather-proxy; the page only knows the proxy URL from
+// <meta name="weather-proxy-url">. Without it, no request is made and the weather shows "N/A".
+const WEATHER_PROXY_URL = (document.querySelector('meta[name="weather-proxy-url"]')?.content || "").replace(/\/+$/, "");
+function fetchCityWeather(city) {
+    if (!WEATHER_PROXY_URL) return Promise.resolve(new Response("null"));
+    return fetch(`${WEATHER_PROXY_URL}/weather?city=${city}`);
+}
 
 // Clocks Update loop
 setInterval(() => {
@@ -294,7 +300,7 @@ setInterval(() => {
 // Weather fetching
 getWeatherData(); 
 function getWeatherData() {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=-23.42&lon=-46.48&units=metric&appid=${API_KEY}`)
+    fetchCityWeather('sao-paulo')
         .then(res => {
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             return res.json();
@@ -308,7 +314,7 @@ function getWeatherData() {
 
 getWeatherDataBrasov();
 function getWeatherDataBrasov() {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=45.64&lon=25.59&units=metric&appid=${API_KEY}`)
+    fetchCityWeather('brasov')
         .then(res => {
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             return res.json();
@@ -322,7 +328,7 @@ function getWeatherDataBrasov() {
 
 getWeatherDataTaoyuan();
 function getWeatherDataTaoyuan() {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=24.89&lon=121.28&units=metric&appid=${API_KEY}`)
+    fetchCityWeather('taoyuan')
         .then(res => {
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             return res.json();
@@ -336,7 +342,7 @@ function getWeatherDataTaoyuan() {
 
 getWeatherDataTaipei();
 function getWeatherDataTaipei() {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=25.03&lon=121.56&units=metric&appid=${API_KEY}`)
+    fetchCityWeather('taipei')
         .then(res => {
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             return res.json();
@@ -350,7 +356,7 @@ function getWeatherDataTaipei() {
 
 getWeatherDataOdessa();
 function getWeatherDataOdessa() {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=46.49&lon=30.73&units=metric&appid=${API_KEY}`)
+    fetchCityWeather('odessa')
         .then(res => {
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             return res.json();
@@ -364,7 +370,7 @@ function getWeatherDataOdessa() {
 
 getWeatherDataTokyo();
 function getWeatherDataTokyo() {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=35.65&lon=139.70&units=metric&appid=${API_KEY}`)
+    fetchCityWeather('tokyo')
         .then(res => {
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             return res.json();
@@ -378,7 +384,7 @@ function getWeatherDataTokyo() {
 
 getWeatherDataVerbier();
 function getWeatherDataVerbier() {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=46.09&lon=7.22&units=metric&appid=${API_KEY}`)
+    fetchCityWeather('verbier')
         .then(res => {
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             return res.json();
@@ -392,7 +398,7 @@ function getWeatherDataVerbier() {
 
 getWeatherDataVenice();
 function getWeatherDataVenice() {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=45.44&lon=12.32&units=metric&appid=${API_KEY}`)
+    fetchCityWeather('venice')
         .then(res => {
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             return res.json();
@@ -406,7 +412,7 @@ function getWeatherDataVenice() {
 
 getWeatherDataAmsterdam();
 function getWeatherDataAmsterdam() {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=52.37&lon=4.89&units=metric&appid=${API_KEY}`)
+    fetchCityWeather('amsterdam')
         .then(res => {
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             return res.json();
