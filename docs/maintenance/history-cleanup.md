@@ -125,6 +125,20 @@ git log --oneline -5 master
 git ls-tree -r --name-only master | grep -E 'tmp/|headless-profile|node_modules/' || echo limpio
 ```
 
+#### Secretos en el historial
+
+El PR del issue #5 detecta una API key de Gemini en `Deutsch_lernen/futur/futur.html`
+y contraseñas de MySQL en `MuseFlow/php/*-db.php`. Borrarlas del árbol no las
+saca del historial. **Rotarlas primero** (es lo único que las invalida) y,
+aprovechando esta reescritura, sustituirlas en todas las versiones:
+
+```bash
+# secrets.txt: una línea por valor, formato  valor_literal==>REDACTED
+git filter-repo --replace-text ../secrets.txt
+```
+
+No guardar `secrets.txt` dentro del repositorio.
+
 ### 4.5 Subida (solo el dueño)
 
 ```bash
