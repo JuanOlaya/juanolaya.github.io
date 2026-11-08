@@ -14,10 +14,8 @@ export const siteEntries: readonly SiteEntry[] = [
   // Pipeline sanity check: Vue 3 + Tailwind (build) + p5 from npm. Remove once a real page is migrated.
   { kind: 'vite', dir: 'tooling-check' },
 
-  // Home page and its assets.
-  { kind: 'legacy', path: 'index.html' },
-  { kind: 'legacy', path: 'styles' },
-  { kind: 'legacy', path: 'scripts' },
+  // Home page (Vue, sources in src/home/) and its assets.
+  { kind: 'vite', dir: '' },
   { kind: 'legacy', path: 'assets' },
   { kind: 'legacy', path: 'favicon' },
   { kind: 'legacy', path: 'CV' },
