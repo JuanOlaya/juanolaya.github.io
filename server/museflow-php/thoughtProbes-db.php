@@ -23,10 +23,12 @@ if(!is_array($decoded)){
     throw new Exception('Received content contained invalid JSON!');
 }
 
-$servername = "localhost";
-$username = "futurework";
-$password = "WZG66h6ZqvLU";
-$dbname = "futurework";
+// Credentials live in config.php (not versioned); copy config.example.php to create it.
+$config = require __DIR__ . '/config.php';
+$servername = $config['db_host'];
+$username = $config['db_user'];
+$password = $config['db_password'];
+$dbname = $config['db_name'];
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
