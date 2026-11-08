@@ -37,7 +37,7 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'Haptic_Cards/img' },
   { kind: 'legacy', path: 'Haptic_Cards/README.md' },
   { kind: 'legacy', path: 'Haptic_Cards/metadata.json' },
-  { kind: 'legacy', path: 'MuseFlow' },
+  { kind: 'vite', dir: 'MuseFlow' },
   { kind: 'legacy', path: 'OldWebsite' },
   { kind: 'legacy', path: 'OldWebsite2' },
   // One TS sketch (src/sketches/inspirational-wall) behind two URLs; Scripts/ keeps an orphan legacy gallery page.
