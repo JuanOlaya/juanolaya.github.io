@@ -1,195 +1,145 @@
 import type p5 from 'p5';
-import { BALL_RADIUS, Ball, type Vec2 } from './ball.ts';
-import { orbitPoint, ringRadius, steer, type Rect } from './orbit.ts';
-import { isPressed, layoutFor, shiftTimings, startPositions, type Layout, type Timings } from './scene.ts';
+import { pulseLevel } from './motion.ts';
+import type { Rect } from './orbit.ts';
+import { fadeBucket, ringAlpha, type Trail } from './trail.ts';
+import {
+  ORBIT_TRAIL_LIFETIME,
+  TRAIL_LIFETIME,
+  advanceWorld,
+  createWorld,
+  setOrbitTarget,
+  type Hue,
+  type World,
+} from './world.ts';
 
 const BACKGROUND_GRAY = 40;
-const ORANGE = 'rgba(196,130,8, 0.25)';
-const BLUE = 'rgba(25,139,198, 0.25)';
-// The orange ball bounces off an invisible wall at 80 % of the width, leaving the right side to the blue one.
-const DIAGONAL_RIGHT_LIMIT = 0.8;
-// Upper bound for drawing the whole animation at once; both balls stop long before this.
-const MAX_SETTLE_FRAMES = 20_000;
-// Hover rings are fainter than the balls: they keep overdrawing the same orbit.
-const ORANGE_RING = 'rgba(196,130,8, 0.12)';
-const BLUE_RING = 'rgba(25,139,198, 0.12)';
-const ORBIT_SPEED = 0.03;
-const ORBIT_PADDING = 14;
-const STEER_EASE = 0.12;
+const RGB: Record<Hue, string> = { orange: '196,130,8', blue: '25,139,198' };
+const ORBIT_ALPHA = 0.2;
+// Rings are stroked in this many opacity steps: a handful of canvas calls per trail instead of one per ring.
+const FADE_STEPS = 8;
+const MAX_PIXEL_DENSITY = 2;
+// A frame longer than this (tab switch, debugger) is treated as this long, so nothing teleports.
+const MAX_STEP_SECONDS = 0.05;
+// Reduced motion shows the trails a few seconds of motion would have left, then stays still.
+const SETTLE_SECONDS = 4;
+const SETTLE_STEP = 1 / 60;
+const PULSE_PERIOD = 9;
+const PULSE_DURATION = 0.8;
+const PULSE_ALPHA = 0.22;
 
 export interface BouncingBalls {
   sketch: (p: p5) => void;
-  /** Clears the trails and replays the animation from new random positions. */
+  /** Clears the trails and starts again from new random positions. */
   refresh: () => void;
   /** Sends two rings to circle `rect` (a hovered card); `null` lets them go. Ignored under reduced motion. */
   setAttractor: (rect: Rect | null) => void;
-}
-
-/** Two rings, one per ball colour, that orbit a hovered card on opposite sides. */
-interface Orbit {
-  /** `null` while no card is hovered: the rings stop drawing but remember where they are. */
-  rect: Rect | null;
-  angle: number;
-  orange: Vec2;
-  blue: Vec2;
-}
-
-interface Scene {
-  p: p5;
-  layout: Layout;
-  timings: Timings;
-  diagonalBall: Ball;
-  horizontalBall: Ball;
-  horizontalHits: number;
-  diagonalHits: number;
-  orbit: Orbit | null;
-}
-
-function drawBall(p: p5, ball: Ball, color: string, filled: boolean): void {
-  if (filled) {
-    p.noStroke();
-    p.fill(color);
-  } else {
-    p.noFill();
-    p.stroke(color);
-  }
-  p.ellipse(ball.position.x, ball.position.y, ball.radius * 2, ball.radius * 2);
-}
-
-function createScene(p: p5): Scene {
-  const layout = layoutFor(p.windowWidth, p.windowHeight);
-  p.createCanvas(layout.canvas.width, layout.canvas.height);
-  const start = startPositions(layout, 'initial', (min, max) => p.random(min, max));
-  p.background(BACKGROUND_GRAY);
-  return {
-    p,
-    layout,
-    timings: layout.timings,
-    diagonalBall: new Ball(start.diagonal, { x: 3, y: 3 }),
-    horizontalBall: new Ball(start.horizontal, { x: 4, y: 4 }),
-    horizontalHits: 0,
-    diagonalHits: 0,
-    orbit: null,
-  };
-}
-
-function bounceAndCount(scene: Scene, ball: Ball, right: number): void {
-  const hits = ball.bounce({ right, bottom: scene.p.height });
-  scene.horizontalHits += hits.horizontal;
-  scene.diagonalHits += hits.diagonal;
-}
-
-// Both balls share the two hit counters, exactly like the global counters of the original page.
-function drawFrame(scene: Scene): void {
-  const { p, layout, timings, diagonalBall, horizontalBall } = scene;
-  const now = p.millis();
-  if (scene.diagonalHits < layout.diagonalStopAfter) {
-    drawBall(p, diagonalBall, ORANGE, isPressed(now, timings.pressDiagonal, timings.releaseDiagonal));
-    diagonalBall.step();
-    bounceAndCount(scene, diagonalBall, p.width * DIAGONAL_RIGHT_LIMIT);
-  }
-  if (scene.horizontalHits === 0) {
-    drawBall(p, horizontalBall, BLUE, isPressed(now, timings.pressHorizontal, timings.releaseHorizontal));
-    if (layout.mobile) horizontalBall.moveDown();
-    else horizontalBall.moveLeft();
-    bounceAndCount(scene, horizontalBall, p.width);
-  }
-}
-
-function isFinished(scene: Scene): boolean {
-  return scene.diagonalHits >= scene.layout.diagonalStopAfter && scene.horizontalHits !== 0;
-}
-
-/** Reduced motion: draw every frame of the run at once and leave the final picture still. */
-function settle(scene: Scene): void {
-  for (let frame = 0; frame < MAX_SETTLE_FRAMES && !isFinished(scene); frame++) drawFrame(scene);
-  scene.p.noLoop();
+  /** Stops the loop while the tab is hidden, so a background tab costs nothing. */
+  setHidden: (hidden: boolean) => void;
 }
 
 function prefersReducedMotion(): boolean {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-// resizeCanvas() wipes the pixels, so the trails drawn so far are copied back onto the new size.
-// noRedraw: its implicit redraw would step the balls onto the wiped canvas and lose that frame of trail.
-function resize(scene: Scene): void {
-  const { p } = scene;
-  const trails = p.get();
-  p.resizeCanvas(p.windowWidth, p.windowHeight, true);
-  p.background(BACKGROUND_GRAY);
-  p.image(trails, 0, 0);
-  scene.layout = { ...scene.layout, canvas: { width: p.width, height: p.height } };
+interface TrailStyle {
+  rgb: string;
+  peak: number;
+  lifetime: number;
 }
 
-function drawRing(p: p5, center: Vec2, radius: number, color: string): void {
-  p.noFill();
-  p.stroke(color);
-  p.ellipse(center.x, center.y, radius * 2, radius * 2);
-}
-
-function drawOrbit(p: p5, orbit: Orbit): void {
-  const { rect } = orbit;
-  if (!rect) return;
-  orbit.angle += ORBIT_SPEED;
-  orbit.orange = steer(orbit.orange, orbitPoint(rect, orbit.angle, ORBIT_PADDING), STEER_EASE);
-  orbit.blue = steer(orbit.blue, orbitPoint(rect, orbit.angle + Math.PI, ORBIT_PADDING), STEER_EASE);
-  const radius = ringRadius(rect, BALL_RADIUS);
-  drawRing(p, orbit.orange, radius, ORANGE_RING);
-  drawRing(p, orbit.blue, radius, BLUE_RING);
-}
-
-// The first hover sends the rings out from the balls; later ones fly them over from the last card.
-function attract(scene: Scene, rect: Rect | null): void {
-  if (scene.orbit) {
-    scene.orbit.rect = rect;
-    return;
+function strokeTrail(ctx: CanvasRenderingContext2D, trail: Trail, now: number, style: TrailStyle): void {
+  const { rgb, peak, lifetime } = style;
+  let index = 0;
+  // The trail is oldest first, so walking it from the faintest step down gives one contiguous run per step.
+  for (let step = FADE_STEPS - 1; step >= 0 && index < trail.length; step--) {
+    ctx.beginPath();
+    while (index < trail.length && fadeBucket(now - trail[index].bornAt, lifetime, FADE_STEPS) >= step) {
+      const { x, y, radius } = trail[index++];
+      ctx.moveTo(x + radius, y);
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+    }
+    const age = (lifetime * (step + 0.5)) / FADE_STEPS;
+    ctx.strokeStyle = `rgba(${rgb},${ringAlpha(age, lifetime, peak)})`;
+    ctx.stroke();
   }
-  if (!rect) return;
-  const orange = { ...scene.diagonalBall.position };
-  const blue = { ...scene.horizontalBall.position };
-  scene.orbit = { rect, angle: 0, orange, blue };
 }
 
-function restart(scene: Scene): void {
-  const { p, layout } = scene;
+function fillPulses(ctx: CanvasRenderingContext2D, world: World): void {
+  world.particles.slice(0, 2).forEach((lead, i) => {
+    const level = pulseLevel(world.time, PULSE_PERIOD, PULSE_DURATION, i * (PULSE_PERIOD / 2));
+    if (level === 0) return;
+    ctx.fillStyle = `rgba(${RGB[lead.hue]},${PULSE_ALPHA * level})`;
+    ctx.beginPath();
+    ctx.arc(lead.position.x, lead.position.y, lead.radius, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function render(p: p5, world: World): void {
   p.background(BACKGROUND_GRAY);
-  scene.horizontalHits = 0;
-  scene.diagonalHits = 0;
-  scene.orbit = null;
-  const start = startPositions(layout, 'refresh', (min, max) => p.random(min, max));
-  scene.diagonalBall.placeAt(start.diagonal);
-  scene.horizontalBall.placeAt(start.horizontal);
-  // The original page reset only the blue ball's x speed on desktop (to 3, slower than its first run).
-  if (!layout.mobile) scene.horizontalBall.velocity.x = 3;
-  scene.timings = shiftTimings(layout.timings, p.millis());
-  if (prefersReducedMotion()) settle(scene);
+  const ctx = p.drawingContext as CanvasRenderingContext2D;
+  ctx.lineWidth = 1;
+  const { time, orbit } = world;
+  for (const { trail, hue, alpha } of world.particles) {
+    strokeTrail(ctx, trail, time, { rgb: RGB[hue], peak: alpha, lifetime: TRAIL_LIFETIME });
+  }
+  fillPulses(ctx, world);
+  if (!orbit) return;
+  const orbitStyle = { peak: ORBIT_ALPHA, lifetime: ORBIT_TRAIL_LIFETIME };
+  strokeTrail(ctx, orbit.orangeTrail, time, { ...orbitStyle, rgb: RGB.orange });
+  strokeTrail(ctx, orbit.blueTrail, time, { ...orbitStyle, rgb: RGB.blue });
+}
+
+function settle(world: World, noise: (x: number, y: number) => number): void {
+  for (let t = 0; t < SETTLE_SECONDS; t += SETTLE_STEP) advanceWorld(world, SETTLE_STEP, noise);
 }
 
 /**
- * Background of the home page: two translucent balls leave trails (the canvas is never cleared)
- * until their wall hits stop them. Instance mode keeps p5 state out of `window`.
+ * Background of the home page: translucent rings drift on noise-bent paths, leaving trails that fade
+ * after a few seconds. Instance mode keeps p5 state out of `window`.
  */
 export function createBouncingBalls(): BouncingBalls {
-  let scene: Scene | undefined;
-  const sketch = (p: p5) => {
-    p.setup = () => {
-      scene = createScene(p);
-      if (prefersReducedMotion()) settle(scene);
+  let p: p5 | undefined;
+  let world: World | undefined;
+  const reduced = prefersReducedMotion();
+  const noise = (x: number, y: number) => p?.noise(x, y) ?? 0.5;
+  const random = (min: number, max: number) => p?.random(min, max) ?? min;
+  const bounds = () => ({ width: p?.width ?? 0, height: p?.height ?? 0 });
+
+  const start = () => {
+    world = createWorld(bounds(), random);
+    if (reduced) settle(world, noise);
+  };
+  const sketch = (instance: p5) => {
+    p = instance;
+    instance.setup = () => {
+      instance.createCanvas(instance.windowWidth, instance.windowHeight);
+      instance.pixelDensity(Math.min(window.devicePixelRatio || 1, MAX_PIXEL_DENSITY));
+      start();
+      if (reduced) instance.noLoop();
     };
-    p.windowResized = () => {
-      if (scene) resize(scene);
+    instance.windowResized = () => {
+      instance.resizeCanvas(instance.windowWidth, instance.windowHeight);
+      if (world) world.bounds = bounds();
     };
-    p.draw = () => {
-      if (!scene) return;
-      drawFrame(scene);
-      if (scene.orbit) drawOrbit(p, scene.orbit);
+    instance.draw = () => {
+      if (!world) return;
+      if (!reduced) advanceWorld(world, Math.min(instance.deltaTime / 1000, MAX_STEP_SECONDS), noise);
+      render(instance, world);
     };
   };
   const refresh = () => {
-    if (scene) restart(scene);
+    if (!p) return;
+    start();
+    if (reduced) p.redraw();
   };
   const setAttractor = (rect: Rect | null) => {
-    if (scene && !prefersReducedMotion()) attract(scene, rect);
+    if (world && !reduced) setOrbitTarget(world, rect);
   };
-  return { sketch, refresh, setAttractor };
+  const setHidden = (hidden: boolean) => {
+    if (!p || reduced) return;
+    if (hidden) p.noLoop();
+    else p.loop();
+  };
+  return { sketch, refresh, setAttractor, setHidden };
 }

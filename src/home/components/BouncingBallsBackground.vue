@@ -7,10 +7,16 @@ const host = useTemplateRef<HTMLDivElement>('host');
 const balls = createBouncingBalls();
 let instance: p5 | undefined;
 
+const syncVisibility = () => balls.setHidden(document.hidden);
+
 onMounted(() => {
   if (host.value) instance = new p5(balls.sketch, host.value);
+  document.addEventListener('visibilitychange', syncVisibility);
 });
-onUnmounted(() => instance?.remove());
+onUnmounted(() => {
+  document.removeEventListener('visibilitychange', syncVisibility);
+  instance?.remove();
+});
 
 defineExpose({ refresh: balls.refresh, setAttractor: balls.setAttractor });
 </script>

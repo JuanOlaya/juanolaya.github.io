@@ -23,18 +23,21 @@ describe('orbitPoint', () => {
 });
 
 describe('steer', () => {
-  it('moves the given fraction of the way', () => {
-    expect(steer({ x: 0, y: 0 }, { x: 100, y: -50 }, 0.1)).toEqual({ x: 10, y: -5 });
+  it('stays put when no time passes', () => {
+    expect(steer({ x: 3, y: 4 }, { x: 9, y: 9 }, 8, 0)).toEqual({ x: 3, y: 4 });
   });
 
-  it('stays put with ease 0 and arrives with ease 1', () => {
-    expect(steer({ x: 3, y: 4 }, { x: 9, y: 9 }, 0)).toEqual({ x: 3, y: 4 });
-    expect(steer({ x: 3, y: 4 }, { x: 9, y: 9 }, 1)).toEqual({ x: 9, y: 9 });
+  it('lands in the same place with one long step or two short ones', () => {
+    const target = { x: 100, y: -50 };
+    const once = steer({ x: 0, y: 0 }, target, 8, 0.032);
+    const twice = steer(steer({ x: 0, y: 0 }, target, 8, 0.016), target, 8, 0.016);
+    expect(twice.x).toBeCloseTo(once.x, 9);
+    expect(twice.y).toBeCloseTo(once.y, 9);
   });
 
   it('converges on the target when repeated', () => {
     let position = { x: 0, y: 0 };
-    for (let i = 0; i < 100; i++) position = steer(position, { x: 50, y: 50 }, 0.12);
+    for (let i = 0; i < 120; i++) position = steer(position, { x: 50, y: 50 }, 8, 1 / 60);
     expect(position.x).toBeCloseTo(50, 3);
     expect(position.y).toBeCloseTo(50, 3);
   });
