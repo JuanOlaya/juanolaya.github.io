@@ -58,11 +58,11 @@ Debes incrementar el `"count"` y añadir el número consecutivo en el array de `
 ---
 
 ### Paso 3: Sincronizar Base de Datos y Fichas de Verbo
-La aplicación lee el archivo compilado `json/verbs_index.json` y las fichas individuales de los verbos en `json/cards/`. Para sincronizar tus cambios físicos en las carpetas de grupos con estos archivos, abre una terminal en la carpeta `Deutsch_lernen/verben/A1_A2_B1/` y corre:
+La aplicación lee el archivo compilado `json/verbs_index.json` y las fichas individuales de los verbos en `json/cards/`. Para sincronizar tus cambios físicos en las carpetas de grupos con estos archivos, abre una terminal en la raíz del repositorio y corre (los scripts viven en `tools/memodeutsch/verben/A1_A2_B1/`, fuera del sitio publicado):
 
-1. **`node update_index.js`**
+1. **`node tools/memodeutsch/verben/A1_A2_B1/update_index.js`**
    * *¿Qué hace?* Recopila todos los grupos físicos, calcula su orden real y genera el índice general de la app (`verbs_index.json`).
-2. **`node sync_card_groups.js`**
+2. **`node tools/memodeutsch/verben/A1_A2_B1/sync_card_groups.js`**
    * *¿Qué hace?* Actualiza automáticamente el número de grupo dentro de cada ficha individual de verbo en `json/cards/` para que coincida exactamente con el índice compilado.
 
 ---
@@ -71,7 +71,7 @@ La aplicación lee el archivo compilado `json/verbs_index.json` y las fichas ind
 Para tener la certeza absoluta de que no se ha roto ninguna ruta ni se ha quedado ningún grupo en el aire sin mostrarse, ejecuta:
 
 ```bash
-node verify_inventory.js
+node tools/memodeutsch/verben/A1_A2_B1/verify_inventory.js
 ```
 
 * **Si el script devuelve:** `Inventory is UP TO DATE.`, todo está perfecto y puedes probar/desplegar de forma segura.
@@ -91,9 +91,9 @@ Si necesitas insertar un grupo entre otros existentes (por ejemplo, crear un gru
 3. **Modificar `physicalLevelMap` en `script.js`** aumentando el count y agregando el número consecutivo al final de `fileNumbers` (ej. agregar `15`).
 4. **Correr los comandos de sincronización**:
    ```bash
-   node update_index.js
-   node sync_card_groups.js
-   node verify_inventory.js
+   node tools/memodeutsch/verben/A1_A2_B1/update_index.js
+   node tools/memodeutsch/verben/A1_A2_B1/sync_card_groups.js
+   node tools/memodeutsch/verben/A1_A2_B1/verify_inventory.js
    ```
 
 ---
@@ -106,4 +106,4 @@ Si necesitas insertar un grupo entre otros existentes (por ejemplo, crear un gru
 
 ### 🟡 El grupo nuevo no se muestra en el menú
 * **Causa:** Cache del navegador persistida o falta actualizar el índice.
-* **Solución:** Corre `node update_index.js`, refresca el navegador haciendo una limpieza de cache fuerte (`Ctrl + F5` o `Cmd + Shift + R`).
+* **Solución:** Corre `node tools/memodeutsch/verben/A1_A2_B1/update_index.js`, refresca el navegador haciendo una limpieza de cache fuerte (`Ctrl + F5` o `Cmd + Shift + R`).

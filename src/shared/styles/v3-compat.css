@@ -1,0 +1,19 @@
+/*
+ * The migrated pages were designed with Tailwind v3 (CDN). Tailwind v4 changed two preflight defaults
+ * that are visible in them: borders default to `currentColor` and buttons to `cursor: default`.
+ * These rules restore the v3 behaviour, as recommended by the Tailwind v4 upgrade guide.
+ */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
