@@ -16,7 +16,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "vue-tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "check:urls": "node tooling/check-public-urls.ts"
   },
   "dependencies": {
     "lucide-vue-next": "1.0.0",
