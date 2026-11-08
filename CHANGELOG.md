@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.9.3](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.9.2...v0.9.3) (2026-11-08)
+
+
+### Bug Fixes
+
+* **memodeutsch:** estado de carga y modulepreload en el arranque en frío de verben ([8f32ab7](https://github.com/JuanOlaya/juanolaya.github.io/commit/8f32ab77feaaa0d4b1e776428e2d12dad20a9a4a))
+* **memodeutsch:** show loading state and preload modules on verben cold start ([3b8813d](https://github.com/JuanOlaya/juanolaya.github.io/commit/3b8813d8355b9f25e46a681e2d21345520523d03))
+
 ## [0.9.2](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.9.1...v0.9.2) (2026-11-08)
 
 
