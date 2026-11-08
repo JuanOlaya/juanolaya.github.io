@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.9.1](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.9.0...v0.9.1) (2026-11-08)
+
+
+### Bug Fixes
+
+* **eureka-wall:** no reiniciar el sketch al volver a la pestaña tras pagehide ([e9c5b4e](https://github.com/JuanOlaya/juanolaya.github.io/commit/e9c5b4ecf7fac2d2cd7b1b501012607ddae63314))
+* **eureka-wall:** stop visibility pausing on pagehide ([385cf5a](https://github.com/JuanOlaya/juanolaya.github.io/commit/385cf5a7c091687a25d35709263ea750c895f8ed))
+* **p5:** fill every PixelGrid shape with the selected color ([c2ad646](https://github.com/JuanOlaya/juanolaya.github.io/commit/c2ad6460e5ed860711ffc2b5ec99b70347015220))
+* **p5:** fill every PixelGrid shape with the selected color ([122e86e](https://github.com/JuanOlaya/juanolaya.github.io/commit/122e86ed42a9ffb4b02e15ba3dc1a0c87425ee0e))
+
 ## [0.9.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.8.0...v0.9.0) (2026-11-08)
 
 
