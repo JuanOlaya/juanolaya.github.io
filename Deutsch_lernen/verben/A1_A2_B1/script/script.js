@@ -2720,6 +2720,8 @@ function renderCompactVersion() {
 
  const ikBadge = isIK ? ` <span class="ik-badge" style="padding: 1px 4px; font-size: 0.9rem; margin-left: 8px;">IK</span>` : '';
 
+ const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
+
  const lidBadge = isLiD ? ` <span class="lid-badge" style="padding: 1px 4px; font-size: 0.9rem; margin-left: 8px;">LiD</span>` : '';
 
  const a1testTag = verbData.case_tags ? verbData.case_tags.find(t => t.startsWith('A1')) : null;

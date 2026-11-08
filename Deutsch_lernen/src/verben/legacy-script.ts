@@ -46,17 +46,12 @@ export function declarationsOf(source: string, name: string): string[] {
 }
 
 /**
- * Evaluates the first declaration of each name (all declarations for `function` names, so a later duplicate
- * overrides an earlier one exactly as in the browser) and returns them by name.
+ * Evaluates the function `name` from script.js with `scope` standing in for the closure it lives in, so a
+ * DOM-rendering function can run against stubs.
  */
-export function loadLegacyDeclarations<T extends object>(names: readonly string[]): T {
-  const source = readLegacyScript();
-  const body = names
-    .map((name) => {
-      const found = declarationsOf(source, name);
-      if (found.length === 0) throw new Error(`"${name}" not found in script.js`);
-      return found[0].startsWith('function') ? found.join('\n') : found[0];
-    })
-    .join('\n');
-  return new Function(`${body}\nreturn { ${names.join(', ')} };`)() as T;
+export function loadLegacyFunction<T>(name: string, scope: Record<string, unknown>): T {
+  const [declaration] = declarationsOf(readLegacyScript(), name);
+  if (!declaration) throw new Error(`"${name}" not found in script.js`);
+  const factory = new Function(...Object.keys(scope), `${declaration}; return ${name};`);
+  return factory(...Object.values(scope)) as T;
 }

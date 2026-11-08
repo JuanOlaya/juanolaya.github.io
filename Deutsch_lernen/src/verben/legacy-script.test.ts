@@ -3,7 +3,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { describe, expect, it } from 'vitest';
 import { legacyGlobals } from './legacy-globals.ts';
-import { declarationsOf, readLegacyScript } from './legacy-script.ts';
+import { declarationsOf, loadLegacyFunction, readLegacyScript } from './legacy-script.ts';
 
 const VERBEN_DIR = path.resolve(import.meta.dirname, '../../verben/A1_A2_B1');
 const HELPER_NAMES = Object.keys(legacyGlobals);
@@ -36,5 +36,54 @@ describe('verben.html wiring of the helper modules', () => {
   it('the service worker precaches the bundle with script.js', () => {
     const worker = readFileSync(path.resolve(VERBEN_DIR, '../../service-worker.js'), 'utf8');
     expect(worker).toContain("'./verben/A1_A2_B1/script/verben-helpers.js'");
+  });
+});
+
+interface StubElement {
+  className: string;
+  innerHTML: string;
+  children: StubElement[];
+  appendChild: (child: StubElement) => void;
+}
+
+function stubElement(): StubElement {
+  const element: StubElement = {
+    className: '',
+    innerHTML: '',
+    children: [],
+    appendChild: (child) => element.children.push(child),
+  };
+  return element;
+}
+
+/** Runs script.js's renderLightVersion for one group against stubbed DOM and closure state. */
+function renderLightRows(allVerbsData: Record<string, object>): string[] {
+  const cardsContainer = stubElement();
+  const renderLightVersion = loadLegacyFunction<(group: { verbs: string[] }) => void>('renderLightVersion', {
+    ...legacyGlobals,
+    cardsContainer,
+    navigationWrapper: null,
+    allVerbsData,
+    updateIndicatorsForView: () => {},
+    document: { createElement: stubElement, body: { classList: { remove: () => {} } } },
+  });
+  renderLightVersion({ verbs: Object.keys(allVerbsData) });
+  const [lightContainer] = cardsContainer.children;
+  return lightContainer.children.slice(1).map((row) => row.innerHTML);
+}
+
+describe('renderLightVersion (light card view)', () => {
+  const verb = { perfekt: 'hat gemacht', praeteritum: 'er/sie/es machte', es: 'hacer' };
+
+  it('marks LiD verbs with the LiD badge', () => {
+    const [row] = renderLightRows({ machen: { ...verb, case_tags: ['LiD'] } });
+    expect(row).toContain('class="lid-badge"');
+    expect(row).toContain('>gemacht<');
+  });
+
+  it('renders verbs without tags without badges', () => {
+    const [row] = renderLightRows({ machen: verb });
+    expect(row).not.toContain('lid-badge');
+    expect(row).toContain('>machte<');
   });
 });
