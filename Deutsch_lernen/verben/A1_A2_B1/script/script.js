@@ -56,70 +56,6 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
  const standardColors = ['#8b5cf6', '#ec4899', '#f59e0b', '#3b82f6', '#ea580c', '#22C55E', '#a855f7', '#facc15'];
 
- const separablePrefixesMap = {
-
- "abbiegen": "ab", "abfahren": "ab", "abfliegen": "ab", "abgeben": "ab", "abhalten": "ab", "abheben": "ab", "abholen": "ab", "absagen": "ab", "abschließen": "ab", "ablehnen": "ab", "abnehmen": "ab", "abschaffen": "ab", "absichern": "ab", "abreisen": "ab",
-
- "anbieten": "an", "anfahren": "an", "anfangen": "an", "ankommen": "an", "ankreuzen": "an", "anprobieren": "an", "anrufen": "an", "ansehen": "an", "anziehen": "an", "anklagen": "an", "anklicken": "an", "anmachen": "an", "anmelden": "an", "anregen": "an", "anwenden": "an", "anreisen": "an",
-
- "aufbauen": "auf", "aufhören": "auf", "aufmachen": "auf", "aufpassen": "auf", "aufräumen": "auf", "aufstehen": "auf", "aufwachen": "auf", "aufwachsen": "auf", "aufgeben": "auf", "aufregen": "auf", "aufsuchen": "auf",
-
- "ausfallen": "aus", "ausfüllen": "aus", "ausgehen": "aus", "ausgeben": "aus", "auslegen": "aus", "ausleihen": "aus", "auspacken": "aus", "ausruhen": "aus", "aussehen": "aus", "aussprechen": "aus", "aussteigen": "aus", "aussuchen": "aus", "auswählen": "aus", "ausziehen": "aus", "ausgrenzen": "aus", "auslösen": "aus", "ausmachen": "aus", "ausschalten": "aus",
-
- "beitreten": "bei", "dabeihaben": "dabei", "durchstreichen": "durch",
-
- "darlegen": "dar",
-
- "eingreifen": "ein", "einkaufen": "ein", "einladen": "ein", "einmachen": "ein", "einpacken": "ein", "einrichten": "ein", "einschlafen": "ein", "einsteigen": "ein", "eintragen": "ein", "einziehen": "ein", "einhalten": "ein", "einlegen": "ein", "einordnen": "ein", "einreichen": "ein", "einschalten": "ein", "einschränken": "ein", "einstellen": "ein", "einwenden": "ein",
-
- "fernsehen": "fern", "fertigmachen": "fertig", "herstellen": "her", "hineingehen": "hinein", "hinzufügen": "hinzu",
-
- "feststellen": "fest", "herunterladen": "herunter", "hochladen": "hoch",
-
- "kennenlernen": "kennen",
-
- "mitbringen": "mit", "mitkommen": "mit", "mitmachen": "mit", "mitnehmen": "mit", "mitteilen": "mit", "mitwirken": "mit",
-
- "nachholen": "nach", "stattfinden": "statt",
-
- "teilnehmen": "teil",
-
- "umsteigen": "um", "umtauschen": "um", "umziehen": "um",
-
- "vorbereiten": "vor", "vorhaben": "vor", "weiterhelfen": "weiter", "vorschlagen": "vor", "vorstellen": "vor",
-
- "wegtun": "weg", "wegwerfen": "weg", "wehtun": "weh", "wohlfühlen": "wohl",
-
- "zuhören": "zu", "zumachen": "zu", "zuordnen": "zu", "zunehmen": "zu", "zustimmen": "zu",
-
- "zurückbringen": "zurück", "zurückgeben": "zurück", "zurückkommen": "zurück"
-
- };
-
- function formatVerbPrefix(verbName, isModal = false) {
-
-  if (verbName === 'geboren werden' && !isModal) {
-
-    return 'geboren';
-
-  }
-
-  if (separablePrefixesMap[verbName]) {
-
-    const prefix = separablePrefixesMap[verbName];
-
-    if (verbName.startsWith(prefix)) {
-
-      return `<span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}`;
-
-    }
-
-  }
-
-  return verbName;
-
- }
-
  function getPhysicalGroupData(macroLevel, globalIndex) {
 
  const layers = physicalLevelMap[macroLevel] || [];
@@ -175,76 +111,6 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
     const globalGroupIndex = getGlobalGroupIndex(verbData.level, verbData.group);
     return standardColors[((globalGroupIndex % standardColors.length) + standardColors.length) % standardColors.length];
   }
-
- function hexToRgb(hex) {
-
- if (!hex) return null;
-
- const normalized = hex.replace('#', '').trim();
-
- const full = normalized.length === 3
-
- ? normalized.split('').map(ch => ch + ch).join('')
-
- : normalized;
-
- const int = parseInt(full, 16);
-
- if (Number.isNaN(int) || full.length !== 6) return null;
-
- return {
-
- r: (int >> 16) & 255,
-
- g: (int >> 8) & 255,
-
- b: int & 255
-
- };
-
- }
-
- function rgbToHex({ r, g, b }) {
-
- const toHex = (value) => Math.max(0, Math.min(255, Math.round(value))).toString(16).padStart(2, '0');
-
- return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-
- }
-
- function mixHexColors(colorA, colorB, weight = 0.5) {
-
- const a = hexToRgb(colorA);
-
- const b = hexToRgb(colorB);
-
- if (!a) return colorB;
-
- if (!b) return colorA;
-
- return rgbToHex({
-
- r: a.r * (1 - weight) + b.r * weight,
-
- g: a.g * (1 - weight) + b.g * weight,
-
- b: a.b * (1 - weight) + b.b * weight
-
- });
-
- }
-
- function hexToRgb(hex) {
-
-  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-
-  hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
-
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-
-  return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '59, 130, 246';
-
-}
 
 function applyModalThemePalette(verbData) {
 
@@ -613,148 +479,6 @@ const lazyExampleLoadPromises = new Map();
  const text = new TextDecoder('utf-8').decode(buffer);
 
  return normalizeMojibakeDeep(JSON.parse(text));
-
- }
-
- function normalizeMojibakeString(value) {
-
- if (typeof value !== 'string') return value;
-
- let normalized = value;
-
- const replacements = [
-
- ['íÃ†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾', 'Ä'],
-
- ['Ö', 'Ö'],
-
- ['íÃ†â€™Ãƒâ€¦Ã¢â‚¬Å“', 'Ü'],
-
- ['ä', 'ä'],
-
- ['ö', 'ö'],
-
- ['ü', 'ü'],
-
- ['ß', 'ß'],
-
- ['á', 'á'],
-
- ['é', 'é'],
-
- ['í', 'í'],
-
- ['ó', 'ó'],
-
- ['ú', 'ú'],
-
- ['ñ', 'ñ'],
-
- ['íÃ†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â°', 'Ãƒâ€°'],
-
- ['íÃ¢â‚¬Å¾', 'Ä'],
-
- ['íÃ¢â‚¬â€œ', 'Ö'],
-
- ['íÃ…â€œ', 'Ü'],
-
- ['ä', 'ä'],
-
- ['ö', 'ö'],
-
- ['ü', 'ü'],
-
- ['ß', 'ß'],
-
- ['á', 'á'],
-
- ['é', 'é'],
-
- ['í', 'í'],
-
- ['ó', 'ó'],
-
- ['ú', 'ú'],
-
- ['ñ', 'ñ'],
-
- ['Ã‚Â¿', 'Ã‚Â¿'],
-
- ['Ã‚Â¡', 'Ã‚Â¡'],
-
- // Mojibake for emojis (UTF-8 bytes read as Windows-1252)
-
- ['ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã…Â¡', '🔵œÅ¡'],
-
- ['🏡', '🏡'],
-
- ['ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¼', '🔵™Â¼'],
-
- ['ÃƒÂ°Ã…Â¸Ã…Â¡Ã‚Â¢', 'Ã°Å¸Å¡Â¢'],
-
- ['ÃƒÂ°Ã…Â¸Ã…Â¡Ã¢â€šÂ¬', '🚀'],
-
- ['ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¬', '🔵™Â¬'],
-
- ['ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã¢â‚¬â€œ', '🔵œâ€“'],
-
- ['ÃƒÂ°Ã…Â¸Ã¢â‚¬â„¢Ã‚Â¡', '💡']
-
- ];
-
- for (let pass = 0; pass < 3; pass++) {
-
- let changed = false;
-
- for (const [broken, fixed] of replacements) {
-
- if (normalized.includes(broken)) {
-
- normalized = normalized.split(broken).join(fixed);
-
- changed = true;
-
- }
-
- }
-
- if (!changed) break;
-
- }
-
- return normalized;
-
- }
-
- function normalizeMojibakeDeep(value) {
-
- if (typeof value === 'string') {
-
- return normalizeMojibakeString(value);
-
- }
-
- if (Array.isArray(value)) {
-
- return value.map(item => normalizeMojibakeDeep(item));
-
- }
-
- if (!value || typeof value !== 'object') {
-
- return value;
-
- }
-
- const normalizedObject = {};
-
- Object.entries(value).forEach(([key, entryValue]) => {
-
- normalizedObject[normalizeMojibakeString(key)] = normalizeMojibakeDeep(entryValue);
-
- });
-
- return normalizedObject;
 
  }
 
@@ -2361,52 +2085,6 @@ async function loadBackgroundData() {
 
  }
 
- function findMatchingTextEntry(entries, searchTerm, extractor = null) {
-
- if (!entries) return '';
-
- for (const entry of entries) {
-
- const text = extractor ? extractor(entry) : entry;
-
- if (typeof text === 'string' && findMatchingWordInText(text, searchTerm)) {
-
- return text;
-
- }
-
- }
-
- return '';
-
- }
-
- function normalizeSearchValue(value) {
-
- if (value === null || value === undefined) return '';
-
- return String(value)
-
- .normalize('NFD')
-
- .replace(/[\u0300-\u036f]/g, '')
-
- .toLowerCase();
-
- }
-
- function findMatchingWordInText(text, searchTerm) {
-
- if (!text || typeof text !== 'string') return '';
-
- const normalized = text.replace(/[()]/g, '');
-
- const words = normalized.split(/[\s,/]+/).filter(Boolean);
-
- return words.find(word => normalizeSearchValue(word).startsWith(searchTerm)) || '';
-
- }
-
  function getAllSearchGroupEntries() {
 
  const groupedMap = new Map();
@@ -2459,100 +2137,6 @@ async function loadBackgroundData() {
  });
 
  return Array.from(groupedMap.values());
-
- }
-
- // Helper function to dynamically parse and strip parentheses from translations
-
- function removeParentheses(text) {
-
- if (!text) return text;
-
- // Strip starting parenthesis block: ^\(([^)]+)\)\s*
-
- let parsed = text.replace(/^\(([^)]+)\)\s*/, (match, innerWord) => {
-
- // Discard (sich) completely
-
- if (innerWord.toLowerCase() === 'sich') {
-
- return '';
-
- }
-
- // Strip parentheses but keep the word for anything else
-
- return innerWord + ' ';
-
- });
-
- // Standardize explicit " o " strings into localized slashes
-
- parsed = parsed.replace(/ o /g, ' / ');
-
- return parsed.trim();
-
- }
-
- function getPrimaryTranslation(text) {
-
- const cleaned = removeParentheses(text || '');
-
- if (!cleaned) return cleaned;
-
- return cleaned.split('/')[0].trim();
-
- }
-
- function getCardTranslation(verbData) {
-
- return (verbData && verbData.card_es) || getPrimaryTranslation((verbData && verbData.es) || '');
-
- }
-
- function getCardTranslationLines(verbData) {
-
- if (!verbData) return [];
-
- let text = verbData.card_es;
-
- if (!text) {
-
- text = getCardTranslation(verbData);
-
- }
-
- if (!text) return [];
-
- return text.split(/[,/\n\r]+/).map(p => p.trim()).filter(p => p.length > 0);
-
- }
-
- // Helper function to extract clean Perfekt (remove auxiliary verb)
-
- function getCleanPerfekt(perfekt) {
-
- if (!perfekt || perfekt === '---') return '---';
-
- // Remove any conjugated auxiliary of haben/sein from the beginning
-
- const cleaned = perfekt.replace(/^(habe|hast|hat|haben|habt|bin|bist|ist|sind|seid|sein)\s+/i, '');
-
- return cleaned;
-
- }
-
- // Helper function to extract clean Präteritum (remove pronouns)
-
- function getCleanPraeteritum(praeteritum) {
-
- if (!praeteritum || praeteritum === '---') return '---';
-
- // Remove "er/sie/es " from the beginning
-
- const cleaned = praeteritum.replace(/^(er\/sie\/es)\s+/, '');
-
- return cleaned;
 
  }
 
@@ -3135,6 +2719,8 @@ function renderCompactVersion() {
  const isIK = verbData.case_tags && verbData.case_tags.includes('IK');
 
  const ikBadge = isIK ? ` <span class="ik-badge" style="padding: 1px 4px; font-size: 0.9rem; margin-left: 8px;">IK</span>` : '';
+
+ const isLiD = verbData.case_tags && verbData.case_tags.includes('LiD');
 
  const lidBadge = isLiD ? ` <span class="lid-badge" style="padding: 1px 4px; font-size: 0.9rem; margin-left: 8px;">LiD</span>` : '';
 
@@ -7957,16 +7543,6 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
     const hasNote = !!(data.note || data.note_es);
     const hasSaetzeSection = hasSaetze || hasNote;
 
-    // Conjugation values helper (removes pronouns like er/sie/es and reflexive pronouns like sich)
-    const cleanVerbForm = (phrase) => {
-      if (!phrase) return '';
-      // Remove pronouns
-      let clean = phrase.replace(/\b(er\/sie\/es|er|sie|es|ich|du|wir|ihr|Sie)\s+/gi, '');
-      // Remove reflexive pronouns (sich, mich, dich, uns, euch)
-      clean = clean.replace(/\b(sich|mich|dich|uns|euch)\s+/gi, '');
-      return clean.trim().replace(/\s+/g, ' ');
-    };
-
     const praesensObj = data.praesens;
     const erPraesensRaw = praesensObj ? (praesensObj["er"] || praesensObj.er || '') : '';
     const erPraesens = cleanVerbForm(erPraesensRaw);
@@ -8097,13 +7673,6 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
       const tenseId = tabId.replace('zeit_', ''); // 'praesens', 'praeteritum', 'perfekt', 'konjunktiv'
       
       // Determine available tenses in order
-      const cleanVerbForm = (phrase) => {
-        if (!phrase) return '';
-        let clean = phrase.replace(/\b(er\/sie\/es|er|sie|es|ich|du|wir|ihr|Sie)\s+/gi, '');
-        clean = clean.replace(/\b(sich|mich|dich|uns|euch)\s+/gi, '');
-        return clean.trim().replace(/\s+/g, ' ');
-      };
-      
       const tensesOrder = [];
       if (data.praesens) tensesOrder.push('praesens');
       if (data.perfekt) tensesOrder.push('perfekt');
@@ -8280,50 +7849,6 @@ const searchTerm = normalizeSearchValue(searchInput.value.trim());
     const data = allVerbsData[verbName];
 
     if (!data) return;
-
-    const conjugateBaseForm = (phrase, suffix) => {
-
-      if (!phrase) return '';
-
-      const cleanPhrase = phrase.replace(/^(ich|du|er\/sie\/es|wir|ihr|sie\/Sie)\s+/, '');
-
-      const parts = cleanPhrase.split(/\s+/);
-
-      let base = parts[0];
-
-      const prefix = parts.slice(1).join(' ');
-
-      if (suffix === 'st') {
-
-        if (base.endsWith('e')) base = base + 'st';
-
-        else if (base.endsWith('t') || base.endsWith('d')) base = base + 'est';
-
-        else base = base + 'st';
-
-      } else if (suffix === 'n') {
-
-        if (base.endsWith('en')) {}
-
-        else if (base.endsWith('e')) base = base + 'n';
-
-        else base = base + 'en';
-
-      } else if (suffix === 't') {
-
-        if (base.endsWith('t')) {}
-
-        else if (base.endsWith('e')) base = base + 't';
-
-        else if (base.endsWith('d')) base = base + 'et';
-
-        else base = base + 't';
-
-      }
-
-      return prefix ? `${base} ${prefix}` : base;
-
-    };
 
     let conjObj = null;
 
