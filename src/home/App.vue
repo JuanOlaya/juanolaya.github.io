@@ -5,13 +5,14 @@ import HomeControls from './components/HomeControls.vue';
 import ProfileCard from './components/ProfileCard.vue';
 import ProjectGrid from './components/ProjectGrid.vue';
 import SocialLinks from './components/SocialLinks.vue';
+import { isGridToggleShortcut } from './shortcuts';
 
 const gridVisible = ref(true);
 const background = useTemplateRef<InstanceType<typeof BouncingBallsBackground>>('background');
 
 // Space hides the cards so the animation can be watched on its own.
 function toggleGridOnSpace(event: KeyboardEvent): void {
-  if (event.code === 'Space') gridVisible.value = !gridVisible.value;
+  if (isGridToggleShortcut(event)) gridVisible.value = !gridVisible.value;
 }
 
 onMounted(() => document.addEventListener('keyup', toggleGridOnSpace));
