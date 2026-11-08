@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.5.1...v0.6.0) (2026-11-08)
+
+
+### Features
+
+* **memodeutsch:** generate the service worker with vite-plugin-pwa ([ac4bc49](https://github.com/JuanOlaya/juanolaya.github.io/commit/ac4bc49e0a956cac402c1a9c064a046af6901358)), closes [#14](https://github.com/JuanOlaya/juanolaya.github.io/issues/14)
+* **memodeutsch:** service worker generado con vite-plugin-pwa (Workbox) ([#14](https://github.com/JuanOlaya/juanolaya.github.io/issues/14), c) ([35d9376](https://github.com/JuanOlaya/juanolaya.github.io/commit/35d9376bae2ad23bd691574ca64bcf76f6bcf2f9))
+
 ## [0.5.1](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.5.0...v0.5.1) (2026-11-08)
 
 
