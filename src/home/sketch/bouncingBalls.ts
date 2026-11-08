@@ -1,5 +1,6 @@
 import type p5 from 'p5';
-import { Ball } from './ball.ts';
+import { BALL_RADIUS, Ball, type Vec2 } from './ball.ts';
+import { orbitPoint, ringRadius, steer, type Rect } from './orbit.ts';
 import { isPressed, layoutFor, shiftTimings, startPositions, type Layout, type Timings } from './scene.ts';
 
 const BACKGROUND_GRAY = 40;
@@ -9,11 +10,28 @@ const BLUE = 'rgba(25,139,198, 0.25)';
 const DIAGONAL_RIGHT_LIMIT = 0.8;
 // Upper bound for drawing the whole animation at once; both balls stop long before this.
 const MAX_SETTLE_FRAMES = 20_000;
+// Hover rings are fainter than the balls: they keep overdrawing the same orbit.
+const ORANGE_RING = 'rgba(196,130,8, 0.12)';
+const BLUE_RING = 'rgba(25,139,198, 0.12)';
+const ORBIT_SPEED = 0.03;
+const ORBIT_PADDING = 14;
+const STEER_EASE = 0.12;
 
 export interface BouncingBalls {
   sketch: (p: p5) => void;
   /** Clears the trails and replays the animation from new random positions. */
   refresh: () => void;
+  /** Sends two rings to circle `rect` (a hovered card); `null` lets them go. Ignored under reduced motion. */
+  setAttractor: (rect: Rect | null) => void;
+}
+
+/** Two rings, one per ball colour, that orbit a hovered card on opposite sides. */
+interface Orbit {
+  /** `null` while no card is hovered: the rings stop drawing but remember where they are. */
+  rect: Rect | null;
+  angle: number;
+  orange: Vec2;
+  blue: Vec2;
 }
 
 interface Scene {
@@ -24,6 +42,7 @@ interface Scene {
   horizontalBall: Ball;
   horizontalHits: number;
   diagonalHits: number;
+  orbit: Orbit | null;
 }
 
 function drawBall(p: p5, ball: Ball, color: string, filled: boolean): void {
@@ -50,6 +69,7 @@ function createScene(p: p5): Scene {
     horizontalBall: new Ball(start.horizontal, { x: 4, y: 4 }),
     horizontalHits: 0,
     diagonalHits: 0,
+    orbit: null,
   };
 }
 
@@ -100,11 +120,41 @@ function resize(scene: Scene): void {
   scene.layout = { ...scene.layout, canvas: { width: p.width, height: p.height } };
 }
 
+function drawRing(p: p5, center: Vec2, radius: number, color: string): void {
+  p.noFill();
+  p.stroke(color);
+  p.ellipse(center.x, center.y, radius * 2, radius * 2);
+}
+
+function drawOrbit(p: p5, orbit: Orbit): void {
+  const { rect } = orbit;
+  if (!rect) return;
+  orbit.angle += ORBIT_SPEED;
+  orbit.orange = steer(orbit.orange, orbitPoint(rect, orbit.angle, ORBIT_PADDING), STEER_EASE);
+  orbit.blue = steer(orbit.blue, orbitPoint(rect, orbit.angle + Math.PI, ORBIT_PADDING), STEER_EASE);
+  const radius = ringRadius(rect, BALL_RADIUS);
+  drawRing(p, orbit.orange, radius, ORANGE_RING);
+  drawRing(p, orbit.blue, radius, BLUE_RING);
+}
+
+// The first hover sends the rings out from the balls; later ones fly them over from the last card.
+function attract(scene: Scene, rect: Rect | null): void {
+  if (scene.orbit) {
+    scene.orbit.rect = rect;
+    return;
+  }
+  if (!rect) return;
+  const orange = { ...scene.diagonalBall.position };
+  const blue = { ...scene.horizontalBall.position };
+  scene.orbit = { rect, angle: 0, orange, blue };
+}
+
 function restart(scene: Scene): void {
   const { p, layout } = scene;
   p.background(BACKGROUND_GRAY);
   scene.horizontalHits = 0;
   scene.diagonalHits = 0;
+  scene.orbit = null;
   const start = startPositions(layout, 'refresh', (min, max) => p.random(min, max));
   scene.diagonalBall.placeAt(start.diagonal);
   scene.horizontalBall.placeAt(start.horizontal);
@@ -129,11 +179,16 @@ export function createBouncingBalls(): BouncingBalls {
       if (scene) resize(scene);
     };
     p.draw = () => {
-      if (scene) drawFrame(scene);
+      if (!scene) return;
+      drawFrame(scene);
+      if (scene.orbit) drawOrbit(p, scene.orbit);
     };
   };
   const refresh = () => {
     if (scene) restart(scene);
   };
-  return { sketch, refresh };
+  const setAttractor = (rect: Rect | null) => {
+    if (scene && !prefersReducedMotion()) attract(scene, rect);
+  };
+  return { sketch, refresh, setAttractor };
 }

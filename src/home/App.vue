@@ -28,7 +28,7 @@ onBeforeUnmount(() => document.removeEventListener('keyup', toggleGridOnSpace));
       <ProjectGrid />
       <SocialLinks />
     </div>
-    <ProjectPages />
+    <ProjectPages @attract="background?.setAttractor($event)" />
   </div>
   <HomeControls
     :grid-visible="gridVisible"

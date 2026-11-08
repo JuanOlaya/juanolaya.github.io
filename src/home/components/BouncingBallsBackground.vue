@@ -12,7 +12,7 @@ onMounted(() => {
 });
 onUnmounted(() => instance?.remove());
 
-defineExpose({ refresh: balls.refresh });
+defineExpose({ refresh: balls.refresh, setAttractor: balls.setAttractor });
 </script>
 
 <template>

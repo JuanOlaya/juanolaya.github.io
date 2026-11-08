@@ -91,6 +91,12 @@ body {
   border-color: rgba(243, 228, 206, 0.6);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .card.project-card {
+    transition: none;
+  }
+}
+
 .project-card-title {
   color: #f8ecde;
   font-weight: 500;
