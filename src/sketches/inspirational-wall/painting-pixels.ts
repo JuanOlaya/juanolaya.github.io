@@ -1,9 +1,41 @@
+import type { SketchUiOptions } from '@shared/p5/sketch-ui.ts';
 import type p5 from 'p5';
 import { distance, PIXEL_SIZE, shapeBarX } from './layout.ts';
+import type { Pixel } from './pixel.ts';
 import { BACKGROUND_COLOR, BUTTON_COLOR, PAINT_COLORS, type WallState } from './state.ts';
 
 const ERASER_COLOR = '#de5a04';
 const COLOR_SLOTS = [1, 2, 3, 4, 5, 6] as const;
+
+// The last paint colour is the background: painting with it is how the original erased.
+const BLANK_COLOR = PAINT_COLORS.length - 1;
+const CIRCLE_SHAPE = 1;
+
+/** Turns every pixel back into a blank circle, keeping the grid. */
+export function clearPixels(pixels: readonly Pixel[]): void {
+  for (const pixel of pixels) {
+    pixel.colorIndex = BLANK_COLOR;
+    pixel.status = CIRCLE_SHAPE;
+  }
+}
+
+export function pixelGridPanel(state: WallState, rebuildGrid: () => void): SketchUiOptions {
+  return {
+    title: 'Pixel Grid',
+    caption:
+      'Tap a cell to paint it; pinch it with two fingers to change its shape. Drag the left edge to erase.',
+    controls: [
+      {
+        label: 'Palette',
+        key: 'p',
+        action: () => (state.shapeBarOpen = !state.shapeBarOpen),
+        pressed: () => state.shapeBarOpen,
+      },
+      { label: 'Clear', key: 'c', action: () => clearPixels(state.pixels) },
+      { label: 'New grid', key: 'r', action: rebuildGrid },
+    ],
+  };
+}
 
 /** Screen 10: the paintable pixel grid with its colour and shape bars. */
 export function drawPaintingPixels(

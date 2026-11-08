@@ -8,7 +8,7 @@ import { drawGenerativeArt, generativeArtPanel } from './generative-art.ts';
 import { handleDrag, handleKey, handlePress, handleRelease, touchesOf } from './input.ts';
 import { artistSpots, pixelGridPositions, PIXEL_SIZE } from './layout.ts';
 import { drawMenu } from './menu.ts';
-import { drawPaintingPixels } from './painting-pixels.ts';
+import { drawPaintingPixels, pixelGridPanel } from './painting-pixels.ts';
 import { Pixel } from './pixel.ts';
 import { GeneralMode, Screen } from './screens.ts';
 import { BACKGROUND_COLOR, createWallState, type WallState } from './state.ts';
@@ -57,7 +57,16 @@ export function mountInspirationalWall(config: WallConfig, host: HTMLElement = d
 
 /** Title, caption and controls of the page the wall was opened on. */
 function panelFor(state: WallState, sketch: () => p5 | undefined): SketchUiOptions {
-  return generativeArtPanel(state, sketch);
+  if (state.config.screen === Screen.GenerativeArt) return generativeArtPanel(state, sketch);
+  // A new grid fills the current window, which also fixes a grid laid out for an older size.
+  return pixelGridPanel(state, () => {
+    const p = sketch();
+    if (p) state.pixels = buildPixels(p);
+  });
+}
+
+function buildPixels(p: p5): Pixel[] {
+  return pixelGridPositions(p.width, p.height).map(({ x, y }) => new Pixel(x, y, p));
 }
 
 // p5 types `elt` as `any`; checking it keeps the rest of the sketch strictly typed.
@@ -70,7 +79,7 @@ function canvasElement(renderer: p5.Renderer): HTMLCanvasElement {
 function setupState(p: p5, state: WallState): void {
   state.cursorHideAt = p.millis() + CURSOR_IDLE_MS;
   p.textFont('Work Sans');
-  state.pixels = pixelGridPositions(p.width, p.height).map(({ x, y }) => new Pixel(x, y, p));
+  state.pixels = buildPixels(p);
   // The original drew two numbers here for unused variables; keeping the draws keeps the
   // random sequence (and so the generative-art agents) identical.
   p.random(100);
