@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.7.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.6.0...v0.7.0) (2026-11-08)
+
+
+### Features
+
+* **hci:** eased shrink, visible trigger and controls for the HCI sketch ([057a440](https://github.com/JuanOlaya/juanolaya.github.io/commit/057a440170aa4c306a00f15b4e20b56cc682e57b))
+* **p5:** pulido visual e interactivo de los sketches (HCI, Particle Canvas, Pixel Grid) ([44a4dda](https://github.com/JuanOlaya/juanolaya.github.io/commit/44a4dda47a3b8bf17fa0b66e4a306281731c722b))
+* **p5:** shared sketch panel, pixel density cap and reduced-motion helper ([ecebb67](https://github.com/JuanOlaya/juanolaya.github.io/commit/ecebb6708668a3e3fa631b8c3606f69a8030a223))
+* **particle-canvas:** controls panel, HiDPI canvas and reduced motion ([9a75b9a](https://github.com/JuanOlaya/juanolaya.github.io/commit/9a75b9a32b833450d632577864c3ab1e4427a890))
+* **pixel-grid:** controls panel with palette, clear and new grid ([2c95035](https://github.com/JuanOlaya/juanolaya.github.io/commit/2c9503582ee4dab2b10bf617a925c9e0db5b870a))
+
+
+### Bug Fixes
+
+* **build:** never publish AI-assistant config files ([35f4e7b](https://github.com/JuanOlaya/juanolaya.github.io/commit/35f4e7b8b89ec1384cde3244e941bd7cc98e8af8))
+* **build:** no publicar archivos de configuración de agentes (CLAUDE.md, AGENTS.md) ([80b6e27](https://github.com/JuanOlaya/juanolaya.github.io/commit/80b6e27f08985d6dc6b608e4454a34d05c3ad31d))
+
 ## [0.6.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.5.1...v0.6.0) (2026-11-08)
 
 
