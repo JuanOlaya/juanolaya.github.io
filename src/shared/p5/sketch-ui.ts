@@ -67,10 +67,18 @@ function hasModifier(press: KeyPress): boolean {
   return press.ctrlKey || press.metaKey || press.altKey;
 }
 
+/** Typing in a field must never trigger a sketch shortcut. */
+export function isTypingTarget(target: EventTarget | null): boolean {
+  if (!(target instanceof HTMLElement)) return false;
+  return target.isContentEditable || target.matches('input, textarea, select');
+}
+
 /** Folds the panel down to its title so it never hides part of the sketch for good. */
 function collapseButton(panel: HTMLElement, body: HTMLElement): HTMLButtonElement {
-  const button = element('button', 'sketch-ui__button sketch-ui__collapse', 'Hide');
+  const button = element('button', 'sketch-ui__button sketch-ui__collapse');
+  const label = element('span', '', 'Hide');
   button.type = 'button';
+  button.append(label, ' ', element('kbd', '', keyLabel(HIDE_KEY)));
   body.id = `sketch-ui-body-${Math.random().toString(36).slice(2)}`;
   button.setAttribute('aria-controls', body.id);
   button.setAttribute('aria-expanded', 'true');
@@ -79,7 +87,7 @@ function collapseButton(panel: HTMLElement, body: HTMLElement): HTMLButtonElemen
   button.addEventListener('click', () => {
     const collapsed = panel.classList.toggle('sketch-ui--collapsed');
     button.setAttribute('aria-expanded', String(!collapsed));
-    button.textContent = collapsed ? 'Show' : 'Hide';
+    label.textContent = collapsed ? 'Show' : 'Hide';
   });
   return button;
 }
@@ -114,6 +122,8 @@ export function mountSketchUi(host: HTMLElement, options: SketchUiOptions): () =
   sync();
 
   const onKey = (event: KeyboardEvent) => {
+    // Autofill fires keydown without a key; holding a key must not flip a toggle on every repeat.
+    if (typeof event.key !== 'string' || event.repeat || isTypingTarget(event.target)) return;
     // Space or Enter on a focused button already fires its click.
     if (event.target instanceof HTMLButtonElement && (event.key === ' ' || event.key === 'Enter')) return;
     if (event.key.toLowerCase() === HIDE_KEY && !hasModifier(event)) {
@@ -125,9 +135,13 @@ export function mountSketchUi(host: HTMLElement, options: SketchUiOptions): () =
     event.preventDefault();
     run(control);
   };
-  window.addEventListener('keydown', onKey);
-  return () => {
+  const unmount = () => {
     window.removeEventListener('keydown', onKey);
+    window.removeEventListener('pagehide', unmount);
     panel.remove();
   };
+  window.addEventListener('keydown', onKey);
+  // Same lifetime as the sketch, which `mountSketch` stops on pagehide.
+  window.addEventListener('pagehide', unmount);
+  return unmount;
 }
