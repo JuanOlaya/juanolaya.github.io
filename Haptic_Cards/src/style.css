@@ -36,7 +36,8 @@
   --hc-key-edge: rgb(20 26 24 / 0.22);
   --hc-shadow: 0 1px 0 rgb(20 26 24 / 0.04), 0 1px 2px rgb(20 26 24 / 0.06);
   --hc-shadow-lift: 0 2px 0 rgb(20 26 24 / 0.04), 0 14px 28px -12px rgb(20 26 24 / 0.28);
-  --hc-focus: #ff5a26;
+  /* #c43d14 keeps the focus ring above 3:1 on paper, surface and the graphite plates. */
+  --hc-focus: #c43d14;
   --hc-nav-bg: #18201e;
   --hc-nav-edge: #18201e;
 }
@@ -71,6 +72,7 @@
     --hc-shadow-lift: 0 18px 34px -14px rgb(0 0 0 / 0.75);
     --hc-nav-bg: #2a322f;
     --hc-nav-edge: #4c5652;
+    --hc-focus: #ff6a3d;
   }
 }
 
