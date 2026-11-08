@@ -58,6 +58,24 @@ describe('publishVerbatim', { timeout: 30_000 }, () => {
     expect(existsSync(path.join(out, 'Sockets/tmp'))).toBe(false);
   });
 
+  it('never publishes AI-assistant config files', () => {
+    const root = tempDir();
+    const out = tempDir();
+    legacyPageFixture(root);
+    writeFile(root, 'Sockets/CLAUDE.md');
+    writeFile(root, 'Sockets/.agents/AGENTS.md');
+    writeFile(root, 'Sockets/sub/.claude/settings.local.json');
+    git(root, 'init', '-q');
+    git(root, 'add', '.');
+
+    publishVerbatim([{ path: 'Sockets', exclude: [] }], root, out);
+
+    expect(existsSync(path.join(out, 'Sockets/index.html'))).toBe(true);
+    expect(existsSync(path.join(out, 'Sockets/CLAUDE.md'))).toBe(false);
+    expect(existsSync(path.join(out, 'Sockets/.agents'))).toBe(false);
+    expect(existsSync(path.join(out, 'Sockets/sub/.claude'))).toBe(false);
+  });
+
   it('fails when a listed path exists on disk but is not tracked', () => {
     const root = tempDir();
     legacyPageFixture(root);
