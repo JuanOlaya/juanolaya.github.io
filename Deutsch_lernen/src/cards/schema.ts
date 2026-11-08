@@ -122,27 +122,75 @@ export const VerbsIndexSchema = z.strictObject({
   ),
 });
 
+const PronounRowsSchema = z.array(
+  z.strictObject({
+    pronoun: z.string(),
+    verbForm: z.string(),
+    es: z.string().optional(),
+    en: z.string().optional(),
+  }),
+);
+
+/** One top-level value of a tense or example file: a note, a conjugation table, an example map or pronoun rows. */
+const TenseValueSchema = z.union([z.string(), ConjugationTableSchema, ExampleMapSchema, PronounRowsSchema]);
+
 /**
  * A per-verb tense file (`praesens/`, `praeteritum_konjugation/`, `perfekt_konjugation/`, `konjunktiv_ii/`).
  * Their layouts vary between generations of the data, so each top-level value only has to be one of the
- * shapes the app reads: a note, a conjugation table, an example map or a list of pronoun rows.
+ * shapes the app reads.
  */
-export const TenseFileSchema = z.record(
-  z.string(),
-  z.union([
-    z.string(),
-    ConjugationTableSchema,
-    ExampleMapSchema,
-    z.array(
-      z.strictObject({
-        pronoun: z.string(),
-        verbForm: z.string(),
-        es: z.string().optional(),
-        en: z.string().optional(),
-      }),
-    ),
-  ]),
-);
+export const TenseFileSchema = z.record(z.string(), TenseValueSchema);
+
+/**
+ * A per-verb example file (`examples/<tense>_examples/`). The app merges it into the verb and reads these keys as
+ * pronoun → `{ de, es, en }`, so they must be example maps; older files may also carry conjugation tables or notes.
+ */
+export const ExampleFileSchema = z
+  .object({
+    praesens_examples: ExampleMapSchema.optional(),
+    praesens_dativ: ExampleMapSchema.optional(),
+    praesens_fragen: ExampleMapSchema.optional(),
+    praesens_question_examples: ExampleMapSchema.optional(),
+    perfekt_examples: ExampleMapSchema.optional(),
+    praeteritum_examples: ExampleMapSchema.optional(),
+    konjunktiv_ii_examples: ExampleMapSchema.optional(),
+  })
+  .catchall(TenseValueSchema);
+
+/** One related word in `json/wortfamilie/<verb>.json`; only the keys the verb modal reads. */
+const WortfamilieEntrySchema = z.strictObject({
+  word: z.string().min(1),
+  type: z.string().min(1),
+  level: z.string().optional(),
+  es: z.string().optional(),
+  en: z.string().optional(),
+  example: z.string().optional(),
+  truco: z.string().optional(),
+});
+
+export const WortfamilieFileSchema = z.strictObject({
+  wortfamilie: z.array(WortfamilieEntrySchema),
+});
+
+/**
+ * Metadata of one group: `json/themes/<level>_<n>_theme.json`, e.g. `A2_1_10_theme.json`.
+ * Written by the tools in `tools/memodeutsch/`; the app takes the same fields from the group files.
+ */
+export const ThemeSchema = z.strictObject({
+  level: SubLevelSchema,
+  group: z.int().positive(),
+  theme: z.string().optional(),
+  germanName: z.string().min(1),
+  shortName: z.string().min(1),
+  spanishName: z.string().min(1),
+  englishName: z.string().optional(),
+  description: z.string().optional(),
+  germanDescription: z.string(),
+  spanishDescription: z.string(),
+  b1Rating: z.string(),
+  examContext: z.string(),
+  examContextEs: z.string(),
+});
 
 export type Card = z.infer<typeof CardSchema>;
 export type Group = z.infer<typeof GroupSchema>;
@@ -150,3 +198,6 @@ export type VerbsIndex = z.infer<typeof VerbsIndexSchema>;
 export type ConjugationTable = z.infer<typeof ConjugationTableSchema>;
 export type Example = z.infer<typeof ExampleSchema>;
 export type TenseFile = z.infer<typeof TenseFileSchema>;
+export type ExampleFile = z.infer<typeof ExampleFileSchema>;
+export type WortfamilieFile = z.infer<typeof WortfamilieFileSchema>;
+export type Theme = z.infer<typeof ThemeSchema>;
