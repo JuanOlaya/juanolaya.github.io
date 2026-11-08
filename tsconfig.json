@@ -20,5 +20,5 @@
       "@shared/*": ["./src/shared/*"]
     }
   },
-  "include": ["src/**/*", "*/src/**/*", "tooling/**/*", "vite.config.ts", "eslint.config.js"]
+  "include": ["src/**/*", "*/src/**/*", "*/*/src/**/*", "tooling/**/*", "vite.config.ts", "eslint.config.js"]
 }

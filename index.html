@@ -1,158 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Juan Olaya</title>
+    <meta name="description" content="Interactive Designer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <!-- vite-ignore: favicon/ is published verbatim, so these keep their current URLs. -->
+    <link vite-ignore rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link vite-ignore rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link vite-ignore rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link vite-ignore rel="manifest" href="/favicon/site.webmanifest" />
+    <link vite-ignore rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+  </head>
 
-    <head>
-        <meta charset="utf-8" />
-        <title>Juan Olaya</title>
-        <meta name="description" content="Interactive Designer">
-        <link rel="stylesheet" type="text/css" href="styles/style.css">
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1"> 
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"rel="stylesheet">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"rel="stylesheet">
-        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-        <link rel="manifest" href="favicon/site.webmanifest">
-        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
-        <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="theme-color" content="#ffffff">
-    </head>
-
-    <body style="background-color:#282828;">
-        <!--
-        <span id="oneSelected" class="material-icons-round span_no_selection">looks_one</span>
-        <span id="twoSelected" class="material-icons-round span_no_selection">looks_two</span>
-        <span id="threeSelected" class="material-icons-round span_no_selection">looks_3</span>
-        -->
-
-        <div id="cardGrid" class="center">
-            <div  class="grid-container">
-                <div class="card">
-                    <div class="title">Juan Olaya</div>
-                    <br>
-                    <br>
-                    Computer Engineer.
-                    <br>             
-                    Human-Computer Interaction.
-                    <br>
-                    Researcher, Lecturer, Designer and Developer.
-                    <br>
-                </div>
-                <!--
-                <div class="card">
-                    <div class="title">MuseFlow Game</div>
-                    <br>
-                    <p style="text-align:left">
-                    Undemanding and relaxing video game to unlock creativity promoting mind-wandering episodes during break times. 
-                    </p>
-                    <br>
-                    <a href="https://link.springer.com/chapter/10.1007%2F978-3-030-85613-7_9" target="_blank">Publication</a>
-                    <br>
-                    <a href="https://juanolaya.github.io/MuseFlow/index.html" target="_blank">Online Game</a>
-                    <br>
-                    <a href="https://github.com/JuanOlaya/MuseFlow" target="_blank">Open Source</a>
-                </div>
-
-                <div class="card">
-                    <div class="title">Balconity</div>
-                    <br>
-                    <p style="text-align:left">
-                        Digital balcony to expand the mind and inspire new ideas in coworking spaces. 
-                    </p>
-                    <br>
-                    <a href="https://juanolaya.github.io/Balconity/" target="_blank">Online Experience</a>
-                </div>
-
-                <div class="card">
-                    <div class="title">InspirationalWall</div>
-                    <br>
-                    <p style="text-align:left">
-                    Two interactive experiences to facilitate positive moods, autonomy and personal meaningful. 
-                    </p>
-                    <br>
-                    <a href="http://dx.doi.org/10.13140/RG.2.2.25669.99046" target="_blank">Poster</a>
-                    <br>
-                    <a href="https://gather.town/app/G0SiADpC0D81VGYq/futurework" target="_blank">futureWork on Gather</a>
-                    <br>
-                </div>
-
-                <div class="card">
-                    <div class="title">Object-Oriented Game Development</div>
-                    <br>
-                    <p style="text-align:left">
-                        Currillum to develop game physics using the Object-Oriented Programming (OOP) paradigm. 
-                    </p>
-                    <br>
-                    <a href="https://openprocessing.org/class/57891" target="_blank">Course</a>
-                    <br>
-                    <a href="https://github.com/JuanOlaya/OOP" target="_blank">Github</a>
-                    <br>
-                </div>
-
-                <div class="card">
-                    <div class="title">Full-Body for Live Coding</div>
-                    <br>
-                    <p style="text-align:left">
-                        Interactive mat to generate visuals and sounds during live coding performances.
-                    </p>
-                    <br>
-                    <a href="https://zenodo.org/record/3946303#.YOXrjugzaUk" target="_blank">Link paper</a>
-                    <br>
-                </div>
-
-                <div class="card">
-                    <div class="title">Socializing with a Smart Space</div>
-                    <br>
-                    <p style="text-align:left">
-                        Visual affective cues to understand how to provide social capabilities to a mixed reality environment. 
-                    </p>
-                    <a href="https://www.researchgate.net/publication/352284845_Expresiones_del_XIM_Socializando_con_un_robot_no_antropomorfico" target="_blank">Report</a>
-                    <br>    
-                    <a href="https://www.youtube.com/watch?v=acY4CaYMU7U&list=PLBD3ein1xee3-U3jtAEAsn_oqIB82Vh5B&index=4" target="_blank">Demo Video</a>
-                </div>
-
-                <div class="card">
-                    <div class="title">Agile Constru- Colectiva</div>
-                    <br>
-                    <p style="text-align:left">
-                    Automating project management based on Agile methodologies and Computer-supported cooperative work.
-                    </p>
-                    <a href="https://www.researchgate.net/publication/329915709_Agile_ConstruColectiva" target="_blank">Poster</a>
-                    <br>
-                    <a href="https://www.researchgate.net/publication/267808702_ConstruColectiva_Guia_metodologica_para_la_gestion_de_proyectos_de_software_basados_en_metodologias_agiles_utilizando_ambientes_de_desarrollo_colaborativo" target="_blank">Report</a>
-                </div>
-                -->
-                <div class="card">
-                    <div class="title">Find me on:</div>
-                    <br>
-                    <a href="https://openprocessing.org/user/65585" target="_blank">OpenProcessing</a>
-                    <br>
-                    <a href="https://github.com/JuanOlaya/" target="_blank">Github</a>
-                    <br>
-                    <a href="https://www.youtube.com/playlist?list=PLBD3ein1xee3-U3jtAEAsn_oqIB82Vh5B" target="_blank">Youtube</a>
-                    <br>
-                    <a href="https://www.researchgate.net/profile/Juan-Olaya-Figueroa" target="_blank">ResearchGate</a> 
-                    <br>
-                    <a href="https://juanolaya.github.io/CV/JuanOlaya.pdf" target="_blank">CV</a>
-                    <br>
-                    Berlin, Germany
-                </div>
-            </div>
-        </div>
-        <footer> 
-            <span id="fullscreenIcon" class="material-icons-round span_no_selection">fullscreen</span>
-            <span id="gridOnIcon" class="material-icons-round span_no_selection">grid_on</span>
-            <span id="refreshIcon" class="material-icons-outlined span_no_selection">refresh</span>
-            <!--
-            <span id="gridOffIcon" class="material-icons-round span_no_selection">grid_off</span>
-            <span id="oneUnselected" class="material-icons-outlined span_no_selection">looks_one</span>
-            <span id="twoUnselected" class="material-icons-outlined span_no_selection">looks_two</span>
-            <span id="threeUnselected" class="material-icons-outlined span_no_selection">looks_3</span>
-            -->
-        </footer>
-        <script src="scripts/main.js"></script>
-        <script src="scripts/ball.js"></script>
-    </body>
-
+  <body style="background-color: #282828">
+    <div id="app"></div>
+    <script type="module" src="/src/home/main.ts"></script>
+  </body>
 </html>
