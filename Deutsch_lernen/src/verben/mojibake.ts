@@ -59,7 +59,8 @@ export function normalizeMojibakeString<T>(value: T): T {
   return normalized as T;
 }
 
-/** Applies {@link normalizeMojibakeString} to every string and object key of parsed JSON. */
+/** Applies {@link normalizeMojibakeString} to every string and object key of parsed JSON; the shape is kept. */
+export function normalizeMojibakeDeep<T>(value: T): T;
 export function normalizeMojibakeDeep(value: unknown): unknown {
   if (typeof value === 'string') {
     return normalizeMojibakeString(value);

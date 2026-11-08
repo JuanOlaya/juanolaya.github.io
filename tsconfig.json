@@ -20,5 +20,7 @@
       "@shared/*": ["./src/shared/*"]
     }
   },
-  "include": ["src/**/*", "*/src/**/*", "*/*/src/**/*", "tooling/**/*", "vite.config.ts", "eslint.config.js"]
+  "include": ["src/**/*", "*/src/**/*", "*/*/src/**/*", "tooling/**/*", "vite.config.ts", "eslint.config.js"],
+  // checkJs of the legacy verben script.js is its own project: its loose DOM shim must stay out of here.
+  "exclude": ["Deutsch_lernen/src/verben/legacy-script-env"]
 }

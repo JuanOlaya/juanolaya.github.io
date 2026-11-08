@@ -174,6 +174,18 @@ describe('verb cache', () => {
     expect(memo.readVerbCache()).toBeNull();
   });
 
+  it('rejects a cache whose version stamp is not text, since script.js compares and formats it', () => {
+    const memo = createMemoStorage(store);
+    store.setItem(CURRENT_VERB_CACHE_KEY, '{"allVerbsData":{},"verbGroupsByLevel":{},"lastUpdated":42}');
+    expect(memo.readVerbCache()).toBeNull();
+
+    store.setItem(
+      CURRENT_VERB_CACHE_KEY,
+      '{"allVerbsData":{},"verbGroupsByLevel":{},"lastUpdated":"2026-11-01"}',
+    );
+    expect(memo.readVerbCache()?.lastUpdated).toBe('2026-11-01');
+  });
+
   it('lets a quota error reach the caller, which falls back to a compact payload', () => {
     store.quota = 10;
 

@@ -57,6 +57,8 @@ export function migrateStorage(store: KeyValueStore): void {
 export interface VerbCache {
   allVerbsData: Record<string, unknown>;
   verbGroupsByLevel: Record<string, unknown>;
+  /** App data version the snapshot was taken from; compared with the remote one to decide whether to reuse it. */
+  lastUpdated?: string;
   [field: string]: unknown;
 }
 
@@ -69,6 +71,7 @@ function parseVerbCache(raw: string | null): VerbCache | null {
   try {
     const data: unknown = JSON.parse(raw);
     if (!isRecord(data) || !isRecord(data.allVerbsData) || !isRecord(data.verbGroupsByLevel)) return null;
+    if (data.lastUpdated !== undefined && typeof data.lastUpdated !== 'string') return null;
     return data as VerbCache;
   } catch {
     return null;
