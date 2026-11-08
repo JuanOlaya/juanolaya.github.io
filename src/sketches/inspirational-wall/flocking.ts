@@ -120,10 +120,11 @@ export function cohesion(
   else seek(agent, sum, strength);
 }
 
-export function move(agent: Agent, speedFactor: number): void {
+/** `frames` is the step's length in 60 FPS frames (see `frameScale`); 1 moves exactly as the original. */
+export function move(agent: Agent, speedFactor: number, frames = 1): void {
   agent.vel.add(agent.acc);
   agent.vel.mult(speedFactor);
-  agent.pos.add(agent.vel);
+  agent.pos.add(agent.vel.copy().mult(frames));
   agent.acc.mult(0);
 }
 

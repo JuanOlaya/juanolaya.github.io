@@ -8,13 +8,15 @@ import {
   type Point,
   type ToolbarButton,
 } from './layout.ts';
+import { GeneralMode, Screen } from './screens.ts';
 import { BACKGROUND_COLOR, MENU_BUTTON_DIAMETER, type WallState } from './state.ts';
 
 const MAX_SHAPES = 150;
 const MIN_SHAPES = 6;
 const SHAPES_STEP = 3;
-const KEY_WALL = 49;
-const KEY_PLAIN = 50;
+const KEY_WALL = 49; // '1'
+const KEY_PLAIN = 50; // '2'
+const WEBCAM_COUNT = 3;
 
 export function touchesOf(p: p5): Point[] {
   return p.touches as Point[];
@@ -34,45 +36,40 @@ function onMenuIcon(p: p5, [x, y]: [number, number]): boolean {
  */
 export function handlePress(p: p5, state: WallState, canvas: HTMLCanvasElement): void {
   let entered = false;
-  if (state.screen === 0) {
+  if (state.screen === Screen.Menu) {
     entered = true;
     pressMenu(p, state);
   }
-  if (state.screen === 10 && !entered) {
-    entered = true;
-    pressPixels(p, state);
-  }
-  if (state.screen === 20 || (state.screen === 21 && !entered)) {
-    entered = true;
-    pressGenerativeArt(p, state, canvas);
-  }
-  if (state.screen === 30 || (state.screen === 31 && !entered)) {
-    pressArtwork(p, state);
-  }
-  if (state.screen === 30) {
-    state.webcamStatus = state.webcamStatus < 3 ? state.webcamStatus + 1 : 1;
-  }
+  if (state.screen === Screen.PixelGrid && !entered) pressPixels(p, state);
+  if (state.screen === Screen.GenerativeArt) pressGenerativeArt(p, state, canvas);
+  if (state.screen === Screen.Webcam || state.screen === Screen.Profile) pressArtwork(p, state);
+  if (state.screen === Screen.Webcam) state.webcamStatus = nextWebcam(state.webcamStatus);
+}
+
+/** The webcam window cycles 1 → 2 → 3 → 1 on every press. */
+export function nextWebcam(status: number): number {
+  return status < WEBCAM_COUNT ? status + 1 : 1;
 }
 
 function pressMenu(p: p5, state: WallState): void {
   const { first, second, third } = state.menuIcons;
-  if (onMenuIcon(p, first)) state.screen = 10;
+  if (onMenuIcon(p, first)) state.screen = Screen.PixelGrid;
   if (onMenuIcon(p, second)) {
-    state.screen = 20;
+    state.screen = Screen.GenerativeArt;
     p.background(BACKGROUND_COLOR);
   }
-  if (onMenuIcon(p, third)) state.screen = 30;
+  if (onMenuIcon(p, third)) state.screen = Screen.Webcam;
 }
 
 function pressPixels(p: p5, state: WallState): void {
   const touchCount = touchesOf(p).length;
   const brush = { shape: state.shapeSelected, color: state.colorSelected };
   for (const pixel of state.pixels) pixel.press(pointer(p), touchCount, state.eraserDragging, brush);
-  if (isInHomeCorner(p.mouseX, p.mouseY, p.width, p.height)) state.screen = 0;
+  if (isInHomeCorner(p.mouseX, p.mouseY, p.width, p.height)) state.screen = Screen.Menu;
 }
 
 function pressGenerativeArt(p: p5, state: WallState, canvas: HTMLCanvasElement): void {
-  if (isInHomeCorner(p.mouseX, p.mouseY, p.width, p.height)) state.screen = 0;
+  if (isInHomeCorner(p.mouseX, p.mouseY, p.width, p.height)) state.screen = Screen.Menu;
   const button = toolbarButtonAt(p.mouseX, p.mouseY, p.height);
   if (button) applyToolbarButton(state, button, canvas);
 }
@@ -114,14 +111,14 @@ function pressArtwork(p: p5, state: WallState): void {
     p.mouseX < p.width &&
     p.mouseY > (69 * p.height) / 80 &&
     p.mouseY < p.height;
-  if (inCorner) state.screen = 0;
+  if (inCorner) state.screen = Screen.Menu;
   const onArtist = state.artists.some((a) => distance(a.x, a.y, p.mouseX, p.mouseY) < a.diameter / 2);
-  if (onArtist) state.screen = 31;
+  if (onArtist) state.screen = Screen.Profile;
 }
 
 export function handleDrag(p: p5, state: WallState): void {
   if (p.mouseX < (1 * p.width) / 25) state.eraserDragging = true;
-  if (state.screen !== 10) return;
+  if (state.screen !== Screen.PixelGrid) return;
   const touches = touchesOf(p);
   const brush = { shape: state.shapeSelected, color: state.colorSelected };
   for (const pixel of state.pixels) {
@@ -133,7 +130,7 @@ export function handleDrag(p: p5, state: WallState): void {
 
 export function handleRelease(p: p5, state: WallState): void {
   state.eraserDragging = false;
-  if (state.screen === 10) {
+  if (state.screen === Screen.PixelGrid) {
     for (const pixel of state.pixels) pixel.release();
   }
   // Checked on every screen, as in the original.
@@ -143,8 +140,8 @@ export function handleRelease(p: p5, state: WallState): void {
 }
 
 export function handleKey(state: WallState, keyCode: number): void {
-  if (keyCode === KEY_WALL) state.generalMode = 1;
-  if (keyCode === KEY_PLAIN) state.generalMode = 2;
+  if (keyCode === KEY_WALL) state.generalMode = GeneralMode.Wall;
+  if (keyCode === KEY_PLAIN) state.generalMode = GeneralMode.Plain;
 }
 
 function printCanvas(canvas: HTMLCanvasElement): void {

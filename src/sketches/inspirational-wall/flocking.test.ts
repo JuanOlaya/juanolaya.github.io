@@ -92,6 +92,12 @@ describe('move and wrap', () => {
     expect(agent.acc.mag()).toBe(0);
   });
 
+  it('moves half as far on a 120 FPS frame', () => {
+    const agent = agentAt(0, 0, 4, 2);
+    move(agent, 1, 0.5);
+    expect(agent.pos).toEqual(new Vec2(2, 1));
+  });
+
   it('wraps 100px beyond each edge', () => {
     const agent = agentAt(-101, 701);
     wrap(agent, 800, 600);

@@ -1,5 +1,6 @@
-/** Screen ids used by the original sketch: 0 menu, 10–12 pixel grid, 20 generative art, 30–31 artwork. */
-export type StartScreen = 10 | 20;
+import { Screen } from './screens.ts';
+
+export type StartScreen = typeof Screen.PixelGrid | typeof Screen.GenerativeArt;
 
 export interface WallConfig {
   /** First screen shown after setup. */
@@ -10,10 +11,18 @@ export interface WallConfig {
   squareShapeCaps: boolean;
 }
 
-export const PARTICLE_CANVAS: WallConfig = { screen: 20, shapeBarOffsetX: 0, squareShapeCaps: false };
-export const PIXEL_GRID: WallConfig = { screen: 10, shapeBarOffsetX: 107, squareShapeCaps: true };
+export const PARTICLE_CANVAS: WallConfig = {
+  screen: Screen.GenerativeArt,
+  shapeBarOffsetX: 0,
+  squareShapeCaps: false,
+};
+export const PIXEL_GRID: WallConfig = {
+  screen: Screen.PixelGrid,
+  shapeBarOffsetX: 107,
+  squareShapeCaps: true,
+};
 
-const START_SCREENS: readonly StartScreen[] = [10, 20];
+const START_SCREENS: readonly StartScreen[] = [Screen.PixelGrid, Screen.GenerativeArt];
 
 function parseStartScreen(raw: string | null): StartScreen | undefined {
   const value = Number(raw);

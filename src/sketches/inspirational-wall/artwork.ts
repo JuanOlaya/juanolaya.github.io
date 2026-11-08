@@ -1,5 +1,13 @@
+import { frameScale } from '@shared/p5/frame-scale.ts';
 import type p5 from 'p5';
 import { BACKGROUND_COLOR, BUTTON_COLOR, type WallState } from './state.ts';
+
+// The original rotated by frameCount / 50 and stepped the noise twice per frame (60 FPS).
+const PROFILE_SPIN_PER_FRAME = 1 / 50;
+const NOISE_STEP_BEFORE = 0.009;
+const NOISE_STEP_AFTER = 0.0009;
+const PENTAGON_MAX_RADIUS = 200;
+const PENTAGON_POINTS = 5;
 
 const WEBCAMS: Record<number, { label: string; hourOffset: number }> = {
   1: { label: 'Brașov - Romania', hourOffset: 1 },
@@ -73,13 +81,15 @@ export function drawProfile(p: p5, state: WallState): void {
   p.fill('#98A5B1');
   p.text('Skulptur', p.width / 24 + 15, p.height / 2 - 40);
   // The original sampled noise twice per frame and discarded the first sample; only the steps matter.
-  state.noiseStep = state.noiseStep + 0.009;
-  const radius = p.noise(state.noiseStep) * 200;
-  state.noiseStep = state.noiseStep + 0.0009;
+  const frames = frameScale(p.deltaTime);
+  state.noiseStep = state.noiseStep + NOISE_STEP_BEFORE * frames;
+  const radius = p.noise(state.noiseStep) * PENTAGON_MAX_RADIUS;
+  state.noiseStep = state.noiseStep + NOISE_STEP_AFTER * frames;
+  state.profileAngle = state.profileAngle + PROFILE_SPIN_PER_FRAME * frames;
   p.push();
   p.translate(p.width / 2, p.height / 2);
-  p.rotate(p.frameCount / 50.0);
-  drawPolygon(p, radius, 5);
+  p.rotate(state.profileAngle);
+  drawPolygon(p, radius, PENTAGON_POINTS);
   p.pop();
   drawHomeDots(p);
 }
