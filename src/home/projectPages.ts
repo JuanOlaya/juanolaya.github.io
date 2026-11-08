@@ -18,11 +18,6 @@ export const projectPages: readonly ProjectPage[] = [
     href: '/Haptic_Cards/',
   },
   {
-    title: 'Haptic Lever Simulator',
-    description: 'Resistance force simulation of a haptic lever controller.',
-    href: '/WeightLever/weightLever_simulation_Gemini_v4.html',
-  },
-  {
     title: 'Balconity',
     description: 'Digital balcony to expand the mind and inspire new ideas in coworking spaces.',
     href: '/Balconity/',
@@ -72,9 +67,5 @@ export const projectPages: readonly ProjectPage[] = [
     description: 'Browser platform game prototype.',
     href: '/PlatformGame/',
   },
-  {
-    title: 'Tropical',
-    description: 'Website for an artisan exotic gelato shop.',
-    href: '/Tropical/',
-  },
 ];
+
