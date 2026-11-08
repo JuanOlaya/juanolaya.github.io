@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.3.0...v0.4.0) (2026-11-08)
+
+
+### Features
+
+* **memodeutsch:** capa de persistencia tipada sobre localStorage con versionado ([#14](https://github.com/JuanOlaya/juanolaya.github.io/issues/14), a) ([cbdb8bb](https://github.com/JuanOlaya/juanolaya.github.io/commit/cbdb8bbbc7b84d15b11a2f9c04b519c2be6b141d))
+* **memodeutsch:** typed localStorage layer with schema versioning ([f2f1062](https://github.com/JuanOlaya/juanolaya.github.io/commit/f2f1062f99af33cf8d8fb52c6c9e8476c76f5330)), closes [#14](https://github.com/JuanOlaya/juanolaya.github.io/issues/14)
+
 ## [0.3.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.2.0...v0.3.0) (2026-11-08)
 
 
