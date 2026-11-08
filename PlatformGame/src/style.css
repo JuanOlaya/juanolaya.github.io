@@ -70,8 +70,9 @@ body {
   }
 }
 
-/* Very wide windows have spare width beside the 16:9 canvas: the panel moves into a side column. */
-@media (min-width: 1100px) and (min-aspect-ratio: 2/1) {
+/* Very wide windows and landscape phones have spare width beside the 16:9 canvas but little height:
+   the panel moves into a side column. */
+@media (min-width: 1100px) and (min-aspect-ratio: 2/1), (orientation: landscape) and (max-height: 500px) {
   .game {
     grid-template:
       'stage panel' minmax(0, 1fr)
