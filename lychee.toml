@@ -1,0 +1,17 @@
+# Link check of the built site (issue #9). The workflow runs:
+#   lychee --root-dir "$PWD/dist" "dist/**/*.html"
+# Offline: only links inside the site are checked, so an external outage never blocks a deploy.
+offline = true
+no_progress = true
+
+# Pages whose internal links were already broken on master before the migration (32201ad0).
+# They are archived or scratch copies; fix them in their own migration issue, then drop the line.
+exclude_path = [
+  'Deutsch_lernen/substantiv/old/',
+  'Deutsch_lernen/sonstiges/zusaetzliche-ressourcen\.html',
+  'Deutsch_lernen/verben/verben\.html',
+  'EurekaWall/brushes_primitives_demo\.html',
+  '(EurekaWall|ParticleCanvas|PixelGrid)/Scripts/BridgeGallery\.html',
+  'EurekaWall3/index\.html',
+  'EurekaWall_old/index\.html',
+]
