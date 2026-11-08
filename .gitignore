@@ -1,2 +1,31 @@
+# Dependencies
 node_modules/
+
+# Build output
 dist/
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vs/
+.idea/
+
+# Python caches and vendored packages
+__pycache__/
+*.pyc
+.tmp_pypdf/
+Deutsch_lernen/vendorpdf/
+
+# Temporary folders (Deutsch_lernen/tmp, tmp_lid_pdf, tmp_edge_profile, ...)
+tmp*/
+
+# Headless browser profiles created by the PDF build scripts
+.chrome-headless-profile-*/
+.edge-headless-profile-*/
+chrome-headless-profile-*/
+edge-headless-profile-*/
+chrome-profile/
+
+# Local environment and secrets
+.env
+.env.*
