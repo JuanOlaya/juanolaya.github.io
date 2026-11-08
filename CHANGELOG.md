@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.1](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.5.0...v0.5.1) (2026-11-08)
+
+
+### Bug Fixes
+
+* **ci:** retirar las URLs de Tropical y WeightLever ocultadas a propósito ([915cd44](https://github.com/JuanOlaya/juanolaya.github.io/commit/915cd4419e284f6031debdd01e4f7979a241bc30))
+* **ci:** retire Tropical and WeightLever URLs hidden by the owner ([e4668dc](https://github.com/JuanOlaya/juanolaya.github.io/commit/e4668dcf873d9d115a1ff09f3c5306250e8902cb))
+
 ## [0.5.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.4.1...v0.5.0) (2026-11-08)
 
 
