@@ -23,21 +23,20 @@ export interface StartPositions {
 
 export type RandomRange = (min: number, max: number) => number;
 
-// Portrait screens get a fixed canvas that CSS stretches to the viewport, as the original page did.
-const MOBILE_CANVAS = { width: 400, height: 850 };
-
+/** The canvas always matches the viewport; portrait screens only change the motion and timings. */
 export function layoutFor(windowWidth: number, windowHeight: number): Layout {
+  const canvas = { width: windowWidth, height: windowHeight };
   if (windowWidth < windowHeight) {
     return {
       mobile: true,
-      canvas: { ...MOBILE_CANVAS },
+      canvas,
       timings: { pressHorizontal: 750, releaseHorizontal: 1000, pressDiagonal: 500, releaseDiagonal: 1000 },
       diagonalStopAfter: 3,
     };
   }
   return {
     mobile: false,
-    canvas: { width: windowWidth, height: windowHeight },
+    canvas,
     timings: { pressHorizontal: 3000, releaseHorizontal: 3250, pressDiagonal: 4500, releaseDiagonal: 5000 },
     diagonalStopAfter: 4,
   };

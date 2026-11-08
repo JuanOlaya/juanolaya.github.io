@@ -16,5 +16,5 @@ defineExpose({ refresh: balls.refresh });
 </script>
 
 <template>
-  <div ref="host"></div>
+  <div ref="host" class="home-background" aria-hidden="true"></div>
 </template>
