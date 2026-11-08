@@ -47,6 +47,7 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'Tropical' },
   { kind: 'legacy', path: 'UX' },
   { kind: 'legacy', path: 'Website' },
-  { kind: 'legacy', path: 'WeightLever' },
+  { kind: 'vite', dir: 'WeightLever', html: 'weightLever_simulation_Gemini_v4.html' },
+  { kind: 'legacy', path: 'WeightLever', exclude: ['src', 'weightLever_simulation_Gemini_v4.html'] },
   { kind: 'legacy', path: 'multitouchTest' },
 ];
