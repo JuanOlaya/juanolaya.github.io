@@ -8,6 +8,8 @@ export interface ProjectPage {
 
 /**
  * Project pages linked from the home "Projects" section.
+ * Each card points to the copy the owner maintains: Balcondipity and ShapyPresence live under
+ * /EurekaWall/ (its Start button opens the same pages), not the older /Balconity/ and /PixelGrid/.
  * Left out on purpose: archived (`legacy/`) and redirect-stub folders, Sockets, test pages
  * (`tooling-check`, `multitouchTest`, `TestingSoSci`) and personal pages.
  */
@@ -18,9 +20,9 @@ export const projectPages: readonly ProjectPage[] = [
     href: '/Haptic_Cards/',
   },
   {
-    title: 'Balconity',
-    description: 'Digital balcony to expand the mind and inspire new ideas in coworking spaces.',
-    href: '/Balconity/',
+    title: 'Balcondipity',
+    description: 'EurekaWall: a digital balcony for serendipitous inspiration in coworking spaces.',
+    href: '/EurekaWall/balconity/',
   },
   {
     title: 'MuseFlow',
@@ -58,9 +60,9 @@ export const projectPages: readonly ProjectPage[] = [
     href: '/ParticleCanvas/',
   },
   {
-    title: 'Pixel Grid',
-    description: 'InspirationalWall: a paintable pixel grid in p5.js.',
-    href: '/PixelGrid/',
+    title: 'ShapyPresence',
+    description: 'EurekaWall: feel a remote social presence by sharing visual messages on a shape grid.',
+    href: '/EurekaWall/pixelGrid/',
   },
   {
     title: 'Platform Game',

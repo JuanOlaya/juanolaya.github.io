@@ -34,7 +34,7 @@ export const projects: Project[] = [
   {
     title: 'Balconity',
     description: 'Digital balcony to expand the mind and inspire new ideas in coworking spaces.',
-    links: [{ label: 'Online Experience', url: '/Balconity/' }],
+    links: [{ label: 'Online Experience', url: '/EurekaWall/balconity/' }],
     status: 'hidden',
   },
   {
