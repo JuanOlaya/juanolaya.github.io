@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.4](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.9.3...v0.9.4) (2026-11-08)
+
+
+### Reverts
+
+* restaurar el MuseFlow original (revierte [#71](https://github.com/JuanOlaya/juanolaya.github.io/issues/71)) ([ef001fb](https://github.com/JuanOlaya/juanolaya.github.io/commit/ef001fb1f9d3235e1ab46c7e2d10ee6d8c7df884))
+
 ## [0.9.3](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.9.2...v0.9.3) (2026-11-08)
 
 
