@@ -1,0 +1,116 @@
+/* Overlay shared by the p5 sketch pages: dark glass panel, site accents (blue focus, orange "on"). */
+.sketch-ui {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+  box-sizing: border-box;
+  max-width: min(420px, calc(100vw - 32px));
+  padding: 14px 16px;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 10px;
+  background: rgb(22 22 26 / 0.78);
+  backdrop-filter: blur(6px);
+  color: #e8e2d8;
+  font:
+    14px/1.45 system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+}
+
+.sketch-ui__title {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.sketch-ui__caption {
+  margin: 0 0 10px;
+  color: #b9b2a6;
+}
+
+.sketch-ui__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sketch-ui .sketch-ui__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  margin: 0;
+  padding: 0 12px;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 0.06);
+  color: inherit;
+  font: inherit;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sketch-ui .sketch-ui__button:hover {
+  background: rgb(255 255 255 / 0.12);
+}
+
+.sketch-ui .sketch-ui__button:focus-visible {
+  outline: 2px solid #1e90d6;
+  outline-offset: 2px;
+}
+
+.sketch-ui .sketch-ui__button[aria-pressed='true'] {
+  border-color: #d4870a;
+  background: rgb(212 135 10 / 0.18);
+}
+
+.sketch-ui kbd {
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: rgb(255 255 255 / 0.1);
+  color: #b9b2a6;
+  font:
+    11px/1 ui-monospace,
+    'IBM Plex Mono',
+    monospace;
+}
+
+@media (max-width: 640px) {
+  .sketch-ui {
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+    max-width: none;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  /* Title and caption share one line so the panel covers as little of the sketch as possible. */
+  .sketch-ui__title {
+    display: inline;
+    margin-right: 6px;
+    font-size: 14px;
+  }
+
+  .sketch-ui__caption {
+    display: inline;
+  }
+
+  .sketch-ui__controls {
+    margin-top: 8px;
+  }
+
+  .sketch-ui .sketch-ui__button {
+    min-height: 32px;
+    padding: 0 10px;
+  }
+
+  /* Phones rarely have a keyboard; the shortcut badges would only add width. */
+  .sketch-ui kbd {
+    display: none;
+  }
+}
