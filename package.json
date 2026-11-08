@@ -15,7 +15,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "vue-tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "check:urls": "node tooling/check-public-urls.ts"
   },
   "dependencies": {
     "p5": "1.11.13",
