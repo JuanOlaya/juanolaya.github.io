@@ -7,7 +7,7 @@ import {
   stepColumn,
 } from './columns.ts';
 import { BALL_RADIUS, type Ball, type Direction, stepBall } from './player.ts';
-import { type Attention, dueProbe, probeColumns } from './probes.ts';
+import { type Rating, dueProbe, probeColumns } from './probes.ts';
 
 export interface Game {
   columns: Column[];
@@ -15,7 +15,7 @@ export interface Game {
   /** Furthest column reached; each new one is a point. */
   reached: number;
   probes: number[];
-  answers: Attention[];
+  answers: Rating[];
   /** A thought probe is waiting for an answer; the game holds still meanwhile. */
   probing: boolean;
   finished: boolean;
@@ -51,9 +51,9 @@ export function stepGame(game: Game, direction: Direction, frames: number, ms: n
   else if (dueProbe(game.probes, game.answers.length, game.reached) !== undefined) game.probing = true;
 }
 
-export function answerProbe(game: Game, attention: Attention): void {
+export function answerProbe(game: Game, rating: Rating): void {
   if (!game.probing) return;
-  game.answers.push(attention);
+  game.answers.push(rating);
   game.probing = false;
 }
 

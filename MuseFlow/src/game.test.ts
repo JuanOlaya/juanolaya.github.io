@@ -13,8 +13,8 @@ describe('game', () => {
     const x = game.ball.x;
     stepGame(game, 1, 1, 16);
     expect(game.ball.x).toBe(x);
-    answerProbe(game, 'off-task');
-    expect(game.answers).toEqual(['off-task']);
+    answerProbe(game, 4);
+    expect(game.answers).toEqual([4]);
     for (let i = 0; i < 400 && !game.finished; i++) stepGame(game, 1, 1, 16);
     expect(game.finished).toBe(true);
     expect(progress(game)).toBe(1);

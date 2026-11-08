@@ -44,24 +44,33 @@ canvas {
   font-size: clamp(20px, 4vw, 28px);
 }
 
+.probe__hint {
+  margin: 0;
+  opacity: 0.85;
+}
+
 .probe__choices {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
+}
+
+.probe__end {
+  font-weight: 700;
 }
 
 .probe__choice {
-  display: grid;
-  gap: 4px;
-  width: min(260px, 100%);
-  min-height: 44px;
-  padding: 14px 16px;
+  width: 52px;
+  height: 52px;
   border: 2px solid rgb(255 255 255 / 0.5);
   border-radius: 10px;
   background: #043c62;
   color: inherit;
   font: inherit;
+  font-size: 20px;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -69,8 +78,4 @@ canvas {
 .probe__choice:focus-visible {
   border-color: #fff;
   outline: none;
-}
-
-.probe__choice strong {
-  font-size: 20px;
 }
