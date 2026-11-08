@@ -34,6 +34,15 @@ describe('projectPages', () => {
     expect(projectPages.filter((page) => page.href.startsWith('/legacy/'))).toEqual([]);
   });
 
+  // Older copies of tools the owner now maintains under /EurekaWall/.
+  it('links the EurekaWall copies instead of the older duplicates', () => {
+    const hrefs = projectPages.map((page) => page.href);
+    expect(hrefs).toContain('/EurekaWall/balconity/');
+    expect(hrefs).toContain('/EurekaWall/pixelGrid/');
+    expect(hrefs).not.toContain('/Balconity/');
+    expect(hrefs).not.toContain('/PixelGrid/');
+  });
+
   it('has unique links', () => {
     expect(new Set(projectPages.map((page) => page.href)).size).toBe(projectPages.length);
   });
