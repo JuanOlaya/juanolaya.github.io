@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
  // --- GLOBAL STATE ---
 
- let allVerbsData = {}; // Global Data Containers
+ /** @type {Record<string, any>} */ let allVerbsData = {}; // Global Data Containers
 
- let verbGroupsByLevel = {}; // Global Data Containers
+ /** @type {Record<string, any>} */ let verbGroupsByLevel = {}; // Global Data Containers
 
  let verbTypesData = {}; // Verb types and notes data
 
@@ -30,7 +30,7 @@ let wortfamilieIndex = null; // Search-ready Wortfamilie index hydrated from cac
 
  ];
 
- let physicalLevelMap = {
+ /** @type {Record<string, any>} */ let physicalLevelMap = {
 
  'A1': [
 
@@ -152,7 +152,7 @@ function applyModalThemePalette(verbData) {
 
  }
 
- let levelConfig = {
+ /** @type {Record<string, any>} */ let levelConfig = {
 
  'A1': { groupCount: 30, displayName: 'A1' },
 
@@ -279,18 +279,6 @@ const PRELOAD_CONJUGATIONS_IN_BACKGROUND = true;
 const PRELOAD_CONJUGATIONS_SCOPE = 'current-group';
 
 const lazyExampleLoadPromises = new Map();
-
- const HEAVY_VERB_DATA_KEYS = [
-
- 'praesens_examples',
-
- 'praeteritum_examples',
-
- 'praesens_fragen',
-
- 'wortfamilie'
-
- ];
 
  // --- DOM ELEMENTS ---
 
@@ -646,37 +634,11 @@ const lazyExampleLoadPromises = new Map();
 
  }
 
- function createLightweightVerbDataSnapshot(source = allVerbsData) {
-
- const snapshot = {};
-
- Object.entries(source || {}).forEach(([verbName, verbData]) => {
-
- if (!verbData || typeof verbData !== 'object' || Array.isArray(verbData)) return;
-
- const compactVerbData = { ...verbData };
-
- HEAVY_VERB_DATA_KEYS.forEach(key => {
-
- delete compactVerbData[key];
-
- });
-
- snapshot[verbName] = compactVerbData;
-
- });
-
- return snapshot;
-
- }
-
  function createCachePayload({ compact = false } = {}) {
-
- const lightweightVerbs = createLightweightVerbDataSnapshot(allVerbsData);
 
  const payload = {
 
- allVerbsData: lightweightVerbs,
+ allVerbsData: lightweightVerbData(allVerbsData),
 
  verbGroupsByLevel,
 
@@ -694,47 +656,10 @@ const lazyExampleLoadPromises = new Map();
 
  };
 
- if (!compact) {
-
- return payload;
+ return compact ? compactToLevel(payload, currentLevel) : payload;
 
  }
 
- const compactGroups = {};
-
- const compactVerbsData = {};
-
- const groups = verbGroupsByLevel[currentLevel] || [];
-
- compactGroups[currentLevel] = groups;
-
- groups.forEach(group => {
-
- if (!group || !Array.isArray(group.verbs)) return;
-
- group.verbs.forEach(verbName => {
-
- if (lightweightVerbs[verbName]) {
-
- compactVerbsData[verbName] = lightweightVerbs[verbName];
-
- }
-
- });
-
- });
-
- return {
-
- ...payload,
-
- allVerbsData: compactVerbsData,
-
- verbGroupsByLevel: compactGroups
-
- };
-
- }
 
  function persistCacheSnapshot() {
 
@@ -1861,7 +1786,7 @@ async function loadBackgroundData() {
 
  let exampleData = {};
 
- let conjugationData = {};
+ /** @type {Record<string, any>} */ let conjugationData = {};
 
  if (normalizedTab === 'infinitiv') {
 
@@ -2802,7 +2727,7 @@ function renderCompactVersion() {
 
  if (activeVersion === 'compact') {
 
- renderCompactVersion(group);
+ renderCompactVersion();
 
  } else if (activeVersion === 'niedlich') {
 
@@ -2822,7 +2747,7 @@ function renderCompactVersion() {
 
  // Default to Kompakt if match fails, or Niedlich? User said Default Kompakt.
 
- renderCompactVersion(group);
+ renderCompactVersion();
 
  }
 
@@ -3470,7 +3395,7 @@ function renderCompactVersion() {
 
  document.addEventListener('click', (event) => {
 
- if (isLevelMenuExpanded && levelToggleContainer && !levelToggleContainer.contains(event.target)) {
+ if (isLevelMenuExpanded && levelToggleContainer && !levelToggleContainer.contains(/** @type {Node} */ (event.target))) {
 
  isLevelMenuExpanded = false;
 

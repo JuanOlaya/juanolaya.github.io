@@ -15,7 +15,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "vue-tsc --noEmit",
+    "typecheck": "vue-tsc --noEmit && tsc -p Deutsch_lernen/src/verben/legacy-script-env",
     "test": "vitest run",
     "check:urls": "node tooling/check-public-urls.ts"
   },

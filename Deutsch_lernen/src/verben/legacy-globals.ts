@@ -7,6 +7,7 @@ import {
   getPrimaryTranslation,
   removeParentheses,
 } from './translations.ts';
+import { compactToLevel, lightweightVerbData } from './verb-cache.ts';
 import { cleanVerbForm, conjugateBaseForm, getCleanPerfekt, getCleanPraeteritum } from './verb-forms.ts';
 import { formatVerbPrefix, separablePrefixesMap } from './verb-prefix.ts';
 
@@ -30,4 +31,6 @@ export const legacyGlobals = {
   getCleanPraeteritum,
   cleanVerbForm,
   conjugateBaseForm,
+  lightweightVerbData,
+  compactToLevel,
 };

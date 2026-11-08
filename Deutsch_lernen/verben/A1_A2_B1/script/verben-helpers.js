@@ -39,6 +39,7 @@
 		try {
 			const data = JSON.parse(raw);
 			if (!isRecord(data) || !isRecord(data.allVerbsData) || !isRecord(data.verbGroupsByLevel)) return null;
+			if (data.lastUpdated !== void 0 && typeof data.lastUpdated !== "string") return null;
 			return data;
 		} catch {
 			return null;
@@ -125,7 +126,6 @@
 		}
 		return normalized;
 	}
-	/** Applies {@link normalizeMojibakeString} to every string and object key of parsed JSON. */
 	function normalizeMojibakeDeep(value) {
 		if (typeof value === "string") return normalizeMojibakeString(value);
 		if (Array.isArray(value)) return value.map((item) => normalizeMojibakeDeep(item));
@@ -215,6 +215,44 @@
 		const text = verbData.card_es || getCardTranslation(verbData);
 		if (!text) return [];
 		return text.split(/[,/\n\r]+/).map((part) => part.trim()).filter((part) => part.length > 0);
+	}
+	// Deutsch_lernen/src/verben/verb-cache.ts
+	/** Verb fields too large for the localStorage snapshot; the modal fetches them again when needed. */
+	var HEAVY_VERB_DATA_KEYS = [
+		"praesens_examples",
+		"praeteritum_examples",
+		"praesens_fragen",
+		"wortfamilie"
+	];
+	function isVerbObject(value) {
+		return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+	}
+	/** Copies every verb without its heavy fields, so the snapshot fits in the storage quota. */
+	function lightweightVerbData(source) {
+		const snapshot = {};
+		Object.entries(source ?? {}).forEach(([verbName, verbData]) => {
+			if (!isVerbObject(verbData)) return;
+			const compactVerbData = { ...verbData };
+			HEAVY_VERB_DATA_KEYS.forEach((key) => delete compactVerbData[key]);
+			snapshot[verbName] = compactVerbData;
+		});
+		return snapshot;
+	}
+	/** Narrows a cache payload to one level's groups and their verbs: the retry when the full one is too big. */
+	function compactToLevel(payload, level) {
+		const groups = payload.verbGroupsByLevel[level] ?? [];
+		const verbs = {};
+		groups.forEach((group) => {
+			if (!group || !Array.isArray(group.verbs)) return;
+			group.verbs.forEach((verbName) => {
+				if (payload.allVerbsData[verbName]) verbs[verbName] = payload.allVerbsData[verbName];
+			});
+		});
+		return {
+			...payload,
+			allVerbsData: verbs,
+			verbGroupsByLevel: { [level]: groups }
+		};
 	}
 	// Deutsch_lernen/src/verben/verb-forms.ts
 	/** Perfekt without its auxiliary ("hat gemacht" → "gemacht"); `'---'` when missing. */
@@ -412,7 +450,9 @@
 		getCleanPerfekt,
 		getCleanPraeteritum,
 		cleanVerbForm,
-		conjugateBaseForm
+		conjugateBaseForm,
+		lightweightVerbData,
+		compactToLevel
 	};
 	// Deutsch_lernen/src/verben/verben-helpers.ts
 	/**
