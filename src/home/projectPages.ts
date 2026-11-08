@@ -11,7 +11,7 @@ export interface ProjectPage {
  * Each card points to the copy the owner maintains: Balcondipity and ShapyPresence live under
  * /EurekaWall/ (its Start button opens the same pages), not the older /Balconity/ and /PixelGrid/.
  * Left out on purpose: archived (`legacy/`) and redirect-stub folders, Sockets, test pages
- * (`tooling-check`, `multitouchTest`, `TestingSoSci`) and personal pages.
+ * (`multitouchTest`, `TestingSoSci`) and personal pages.
  */
 export const projectPages: readonly ProjectPage[] = [
   {
@@ -70,4 +70,3 @@ export const projectPages: readonly ProjectPage[] = [
     href: '/PlatformGame/',
   },
 ];
-
