@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { normalizeMojibakeDeep, normalizeMojibakeString } from './mojibake.ts';
 import { findMatchingTextEntry, findMatchingWordInText, normalizeSearchValue } from './search.ts';
-import { hexToRgb, mixHexColors, rgbToHex } from './theme-colors.ts';
+import { hexToRgb, hexToRgbChannels, mixHexColors, rgbToHex } from './theme-colors.ts';
 import {
   getCardTranslation,
   getCardTranslationLines,
@@ -191,7 +191,21 @@ describe('theme colours', () => {
     expect(hexToRgb('zzz')).toBe('59, 130, 246');
   });
 
-  it('BUG: mixHexColors yields "#NaNNaNNaN" because hexToRgb no longer returns {r, g, b}', () => {
-    expect(mixHexColors('#ff0000', '#0000ff')).toBe('#NaNNaNNaN');
+  it('hexToRgbChannels parses 3- and 6-digit hex into channels', () => {
+    expect(hexToRgbChannels('#4682B4')).toEqual({ r: 70, g: 130, b: 180 });
+    expect(hexToRgbChannels('fff')).toEqual({ r: 255, g: 255, b: 255 });
+    expect(hexToRgbChannels('#12345')).toBeNull();
+    expect(hexToRgbChannels('')).toBeNull();
+  });
+
+  it('mixHexColors blends two colours by weight (modal palette)', () => {
+    expect(mixHexColors('#ff0000', '#0000ff')).toBe('#800080');
+    expect(mixHexColors('#8b5cf6', '#ffffff', 0.78)).toBe('#e5dbfd');
+    expect(mixHexColors('#000000', '#ffffff', 0)).toBe('#000000');
+  });
+
+  it('mixHexColors falls back to the valid colour when the other is not hex', () => {
+    expect(mixHexColors('nope', '#0000ff')).toBe('#0000ff');
+    expect(mixHexColors('#ff0000', 'nope')).toBe('#ff0000');
   });
 });

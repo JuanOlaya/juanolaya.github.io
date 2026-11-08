@@ -25,13 +25,29 @@ export function rgbToHex({ r, g, b }: Rgb): string {
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
+/** Channels of a 3- or 6-digit hex colour (`#` optional), or `null` when it is not one. */
+export function hexToRgbChannels(hex: string | null | undefined): Rgb | null {
+  if (!hex) return null;
+  const normalized = hex.replace('#', '').trim();
+  const full =
+    normalized.length === 3
+      ? normalized
+          .split('')
+          .map((ch) => ch + ch)
+          .join('')
+      : normalized;
+  const int = parseInt(full, 16);
+  if (Number.isNaN(int) || full.length !== 6) return null;
+  return { r: (int >> 16) & 255, g: (int >> 8) & 255, b: int & 255 };
+}
+
 /**
- * Blends two hex colours (`weight` 0 → `colorA`, 1 → `colorB`) for the modal palette.
- * It reads channels through `hexToRgb`, which returns a string, so every channel is NaN.
+ * Blends two hex colours (`weight` 0 → `colorA`, 1 → `colorB`) for the modal palette. If one colour is not
+ * valid hex, the other is returned unchanged.
  */
 export function mixHexColors(colorA: string, colorB: string, weight = 0.5): string {
-  const a = hexToRgb(colorA) as unknown as Rgb | null;
-  const b = hexToRgb(colorB) as unknown as Rgb | null;
+  const a = hexToRgbChannels(colorA);
+  const b = hexToRgbChannels(colorB);
   if (!a) return colorB;
   if (!b) return colorA;
   return rgbToHex({

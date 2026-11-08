@@ -99,13 +99,26 @@
 		const toHex = (value) => Math.max(0, Math.min(255, Math.round(value))).toString(16).padStart(2, "0");
 		return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 	}
+	/** Channels of a 3- or 6-digit hex colour (`#` optional), or `null` when it is not one. */
+	function hexToRgbChannels(hex) {
+		if (!hex) return null;
+		const normalized = hex.replace("#", "").trim();
+		const full = normalized.length === 3 ? normalized.split("").map((ch) => ch + ch).join("") : normalized;
+		const int = parseInt(full, 16);
+		if (Number.isNaN(int) || full.length !== 6) return null;
+		return {
+			r: int >> 16 & 255,
+			g: int >> 8 & 255,
+			b: int & 255
+		};
+	}
 	/**
-	* Blends two hex colours (`weight` 0 → `colorA`, 1 → `colorB`) for the modal palette.
-	* It reads channels through `hexToRgb`, which returns a string, so every channel is NaN.
+	* Blends two hex colours (`weight` 0 → `colorA`, 1 → `colorB`) for the modal palette. If one colour is not
+	* valid hex, the other is returned unchanged.
 	*/
 	function mixHexColors(colorA, colorB, weight = .5) {
-		const a = hexToRgb(colorA);
-		const b = hexToRgb(colorB);
+		const a = hexToRgbChannels(colorA);
+		const b = hexToRgbChannels(colorB);
 		if (!a) return colorB;
 		if (!b) return colorA;
 		return rgbToHex({
