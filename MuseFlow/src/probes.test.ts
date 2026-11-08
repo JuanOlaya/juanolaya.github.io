@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dueProbe, probeColumns, summarize } from './probes.ts';
+import { dueProbe, isRating, probeColumns, summarize } from './probes.ts';
 
 describe('probeColumns', () => {
   it('spreads five probes over a full level', () => {
@@ -25,8 +25,19 @@ describe('dueProbe', () => {
   });
 });
 
+describe('isRating', () => {
+  it('accepts the five points of the scale only', () => {
+    expect([1, 2, 3, 4, 5].every(isRating)).toBe(true);
+    expect([0, 6, 2.5, Number.NaN].some(isRating)).toBe(false);
+  });
+});
+
 describe('summarize', () => {
-  it('counts on-task and off-task answers', () => {
-    expect(summarize(['on-task', 'off-task', 'on-task'])).toEqual({ onTask: 2, offTask: 1 });
+  it('counts 1-2 as on-task, 4-5 as off-task and averages the ratings', () => {
+    expect(summarize([1, 2, 3, 4, 5, 5])).toEqual({ onTask: 2, offTask: 3, mean: 20 / 6 });
+  });
+
+  it('has no average before the first answer', () => {
+    expect(summarize([])).toEqual({ onTask: 0, offTask: 0, mean: undefined });
   });
 });

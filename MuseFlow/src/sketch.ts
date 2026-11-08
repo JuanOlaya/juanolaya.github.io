@@ -104,8 +104,9 @@ function drawHud(p: p5, game: Game): void {
 function message(state: MuseFlowState): string | undefined {
   const { game } = state;
   if (game.finished) {
-    const { onTask, offTask } = summarize(game.answers);
-    return `Goal reached in ${formatDuration(game.elapsedMs)}\nOn-task ${onTask} · Off-task ${offTask}\nPress R to play again`;
+    const { onTask, offTask, mean } = summarize(game.answers);
+    const average = mean === undefined ? '' : ` · Average ${mean.toFixed(1)} / 5`;
+    return `Goal reached in ${formatDuration(game.elapsedMs)}\nOn-task ${onTask} · Off-task ${offTask}${average}\nPress R to play again`;
   }
   if (state.paused) return 'Paused';
   if (!state.moved)
@@ -212,7 +213,7 @@ export function mountMuseFlow(host: HTMLElement): Unmount {
   } as MuseFlowState;
   restart(state, levelIndex);
   let sketch: p5 | undefined;
-  const probe = createProbeDialog(host, (attention) => answerProbe(state.game, attention));
+  const probe = createProbeDialog(host, (rating) => answerProbe(state.game, rating));
   const unmountSketch = mountSketch((p) => {
     sketch = p;
     createSketch(state, () => probe.show())(p);
