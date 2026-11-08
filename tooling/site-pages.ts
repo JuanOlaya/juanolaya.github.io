@@ -34,8 +34,11 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'MuseFlow' },
   { kind: 'legacy', path: 'OldWebsite' },
   { kind: 'legacy', path: 'OldWebsite2' },
-  { kind: 'legacy', path: 'ParticleCanvas' },
-  { kind: 'legacy', path: 'PixelGrid' },
+  // One TS sketch (src/sketches/inspirational-wall) behind two URLs; Scripts/ keeps an orphan legacy gallery page.
+  { kind: 'vite', dir: 'ParticleCanvas' },
+  { kind: 'legacy', path: 'ParticleCanvas/Scripts' },
+  { kind: 'vite', dir: 'PixelGrid' },
+  { kind: 'legacy', path: 'PixelGrid/Scripts' },
   { kind: 'legacy', path: 'PlatformGame' },
   { kind: 'legacy', path: 'Project_Management' },
   { kind: 'legacy', path: 'PruebaGithub' },
