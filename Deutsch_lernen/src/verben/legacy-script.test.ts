@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { describe, expect, it } from 'vitest';
+import { MEMODEUTSCH_PRECACHE } from '../../../tooling/memodeutsch-pwa.ts';
 import { STORAGE_SCHEMA_VERSION, type MemoStorage } from '../storage/memo-storage.ts';
 import { legacyGlobals } from './legacy-globals.ts';
 import { declarationsOf, loadLegacyFunction, readLegacyScript } from './legacy-script.ts';
@@ -53,8 +54,7 @@ describe('verben.html wiring of the helper modules', () => {
   });
 
   it('the service worker precaches the bundle with script.js', () => {
-    const worker = readFileSync(path.resolve(VERBEN_DIR, '../../service-worker.js'), 'utf8');
-    expect(worker).toContain("'./verben/A1_A2_B1/script/verben-helpers.js'");
+    expect(MEMODEUTSCH_PRECACHE).toContain('verben/A1_A2_B1/script/verben-helpers.js');
   });
 });
 
