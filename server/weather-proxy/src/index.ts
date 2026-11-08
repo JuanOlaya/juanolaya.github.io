@@ -1,7 +1,19 @@
-import { trimWeather, validateRequest } from './validate.ts';
+import { trimWeather, validateRequest, type Coordinates, type TrimmedWeather } from './validate.ts';
+
+// Shape of the Workers Rate Limiting binding declared in wrangler.toml ([[ratelimits]]).
+export interface RateLimiter {
+  limit(options: { key: string }): Promise<{ success: boolean }>;
+}
+
+// The Workers runtime exposes caches.default; plain Node (tests) has no Cache API, so it is optional.
+interface EdgeCache {
+  match(request: Request): Promise<Response | undefined>;
+  put(request: Request, response: Response): Promise<void>;
+}
 
 export interface Env {
   OPENWEATHER_API_KEY: string;
+  RATE_LIMITER?: RateLimiter;
   // Comma-separated; defaults to the production site. Override in .dev.vars for local testing only.
   ALLOWED_ORIGINS?: string;
 }
@@ -37,6 +49,51 @@ function preflight(origin: string | null, origins: string[]): Response {
   return new Response(null, { status: 204, headers: corsHeaders(origin) });
 }
 
+// Origin only stops browsers on other sites; the per-IP limit is what bounds scripted abuse of the key.
+async function isRateLimited(request: Request, limiter: RateLimiter): Promise<boolean> {
+  const key = request.headers.get('CF-Connecting-IP') ?? 'unknown';
+  const { success } = await limiter.limit({ key });
+  return !success;
+}
+
+function edgeCache(): EdgeCache | undefined {
+  return (globalThis as { caches?: { default?: EdgeCache } }).caches?.default;
+}
+
+// Keyed by coordinates only, so the key never ends up in the cache and every origin shares one entry per city.
+function cacheKey(city: Coordinates): Request {
+  return new Request(`https://weather-proxy.cache/weather?lat=${city.lat}&lon=${city.lon}`);
+}
+
+async function fetchWeather(city: Coordinates, apiKey: string): Promise<TrimmedWeather | null> {
+  const target = new URL(OPENWEATHER_URL);
+  target.search = new URLSearchParams({
+    lat: String(city.lat),
+    lon: String(city.lon),
+    units: 'metric',
+    appid: apiKey,
+  }).toString();
+  try {
+    const upstream = await fetch(target.toString());
+    // Upstream errors are not forwarded: their body could echo request details, including the key.
+    if (!upstream.ok) return null;
+    return trimWeather(await upstream.json());
+  } catch {
+    // Network failures and invalid JSON are reported as a generic 502; their messages may contain the URL.
+    return null;
+  }
+}
+
+async function cachedWeather(city: Coordinates, apiKey: string): Promise<TrimmedWeather | null> {
+  const cache = edgeCache();
+  const hit = await cache?.match(cacheKey(city));
+  if (hit) return (await hit.json()) as TrimmedWeather;
+
+  const weather = await fetchWeather(city, apiKey);
+  if (weather && cache) await cache.put(cacheKey(city), json(200, weather, { 'Cache-Control': `max-age=${CACHE_SECONDS}` }));
+  return weather;
+}
+
 async function proxy(request: Request, env: Env): Promise<Response> {
   const origins = allowedOrigins(env);
   const origin = request.headers.get('Origin');
@@ -45,22 +102,12 @@ async function proxy(request: Request, env: Env): Promise<Response> {
   const validation = validateRequest({ method: request.method, origin, url: request.url }, origins);
   const cors = origin && origins.includes(origin) ? corsHeaders(origin) : {};
   if (!validation.ok) return json(validation.status, { error: validation.error }, cors);
-  if (!env.OPENWEATHER_API_KEY) return json(503, { error: 'proxy not configured' }, cors);
+  if (!env.OPENWEATHER_API_KEY || !env.RATE_LIMITER) return json(503, { error: 'proxy not configured' }, cors);
+  if (await isRateLimited(request, env.RATE_LIMITER)) return json(429, { error: 'too many requests' }, cors);
 
-  const target = new URL(OPENWEATHER_URL);
-  target.search = new URLSearchParams({
-    lat: String(validation.city.lat),
-    lon: String(validation.city.lon),
-    units: 'metric',
-    appid: env.OPENWEATHER_API_KEY,
-  }).toString();
-
-  const upstream = await fetch(target.toString());
-  // Upstream errors are not forwarded: their body could echo request details, including the key.
-  if (!upstream.ok) return json(502, { error: 'upstream error' }, cors);
-  const trimmed = trimWeather(await upstream.json());
-  if (!trimmed) return json(502, { error: 'unexpected upstream reply' }, cors);
-  return json(200, trimmed, { ...cors, 'Cache-Control': `public, max-age=${CACHE_SECONDS}` });
+  const weather = await cachedWeather(validation.city, env.OPENWEATHER_API_KEY);
+  if (!weather) return json(502, { error: 'upstream error' }, cors);
+  return json(200, weather, { ...cors, 'Cache-Control': `public, max-age=${CACHE_SECONDS}` });
 }
 
 export default { fetch: proxy };

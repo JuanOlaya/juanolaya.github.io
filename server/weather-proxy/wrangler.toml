@@ -3,3 +3,13 @@ main = "src/index.ts"
 compatibility_date = "2026-10-01"
 
 # OPENWEATHER_API_KEY is a secret: `npx wrangler secret put OPENWEATHER_API_KEY`. Never add it here.
+
+# Workers Rate Limiting binding: at most 30 requests per client IP every 60 s (period must be 10 or 60).
+# namespace_id is any integer unique within the Cloudflare account (gemini-proxy uses 1016).
+[[ratelimits]]
+name = "RATE_LIMITER"
+namespace_id = "1012"
+
+  [ratelimits.simple]
+  limit = 30
+  period = 60

@@ -17,7 +17,10 @@ navegador solo conoce la URL del Worker, que es pública por naturaleza.
   `amsterdam` (coordenadas fijas en `src/validate.ts`; no acepta lat/lon arbitrarios).
 - Respuesta 200: `{ "main": { "temp": 17.6 }, "weather": [{ "icon": "04d", "description": "..." }] }`
   con `Cache-Control: public, max-age=600`.
-- Errores: 403 origen, 404 ruta o ciudad, 405 método, 503 sin clave, 502 error de OpenWeather (sin reenviar su cuerpo).
+- Errores: 403 origen, 404 ruta o ciudad, 405 método, 429 más de 30 peticiones/min por IP (binding
+  `RATE_LIMITER` en `wrangler.toml`), 503 sin clave o sin binding, 502 error o fallo de red de OpenWeather
+  (sin reenviar su cuerpo).
+- Caché del Worker (Cache API, 10 min por ciudad): peticiones idénticas no vuelven a gastar la clave.
 - Usa el endpoint *Current Weather* (`/data/2.5/weather`, plan gratuito). El antiguo `onecall` 2.5 de Balconity ya no está disponible.
 
 ## Despliegue (dueño del repo)
