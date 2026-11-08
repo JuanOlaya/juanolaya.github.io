@@ -17,17 +17,36 @@ export const CIRCLES: readonly Circle[] = [
 const TRIGGER = { xPercent: 80, yPercent: 43, radius: 50 } as const;
 
 export function isShrinkTrigger(x: number, y: number, width: number, height: number): boolean {
-  const dx = x - (TRIGGER.xPercent * width) / 100;
-  const dy = y - (TRIGGER.yPercent * height) / 100;
-  return Math.hypot(dx, dy) < TRIGGER.radius;
+  const center = triggerCenter(width, height);
+  return Math.hypot(x - center.x, y - center.y) < TRIGGER.radius;
 }
 
-/** Diameter lost per 60 FPS frame once the circles start shrinking. */
-export const SHRINK_PER_FRAME = 1;
+/** Where the empty sixth spot is drawn, as a percentage of the canvas size. */
+export function triggerCenter(width: number, height: number): { x: number; y: number } {
+  return { x: (TRIGGER.xPercent * width) / 100, y: (TRIGGER.yPercent * height) / 100 };
+}
 
-/** One shrink step worth `frames` 60 FPS frames (see `frameScale`); never below zero. */
-export function shrink(diameter: number, frames = 1): number {
-  return Math.max(0, diameter - SHRINK_PER_FRAME * frames);
+export const TRIGGER_RADIUS = TRIGGER.radius;
+
+// The original 80 px circle on a 1080 px tall screen; scaled with the short side, within bounds.
+const DIAMETER_RATIO = 80 / 1080;
+const MIN_DIAMETER = 40;
+const MAX_DIAMETER = 120;
+
+export function circleDiameter(width: number, height: number): number {
+  return Math.min(MAX_DIAMETER, Math.max(MIN_DIAMETER, Math.min(width, height) * DIAMETER_RATIO));
+}
+
+/** Moves `progress` (0 = full circles, 1 = gone) toward `target`, covering the whole way in `duration` s. */
+export function stepProgress(progress: number, target: number, seconds: number, duration: number): number {
+  const step = seconds / duration;
+  if (progress < target) return Math.min(target, progress + step);
+  return Math.max(target, progress - step);
+}
+
+/** Slow start, slow end: the circles ease out of and back into view instead of shrinking linearly. */
+export function easeInOutCubic(t: number): number {
+  return t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
 }
 
 /** Canvas position of a circle given as percentages of the canvas size. */

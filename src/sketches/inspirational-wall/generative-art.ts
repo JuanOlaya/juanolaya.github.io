@@ -1,4 +1,5 @@
 import { frameScale } from '@shared/p5/frame-scale.ts';
+import type { SketchUiOptions } from '@shared/p5/sketch-ui.ts';
 import type p5 from 'p5';
 import {
   align,
@@ -21,6 +22,42 @@ const LINE_HALF_LENGTH = 20;
 /** Toolbar row: icons sit on discs this far above the bottom edge. */
 const TOOLBAR_OFFSET_Y = 50;
 const BUTTON_DISC_DIAMETER = 57;
+
+/** Shape drawn by the flocks: 1 lines, 2 crosses, 3 bars; the S key cycles through them. */
+export function nextShape(shape: number): number {
+  return shape >= 3 ? 1 : shape + 1;
+}
+
+/** Empties both flocks; they grow back one agent per frame with new random shapes and colours. */
+export function regenerate(state: WallState): void {
+  state.groupA = [];
+  state.groupB = [];
+}
+
+export function generativeArtPanel(state: WallState, sketch: () => p5 | undefined): SketchUiOptions {
+  return {
+    title: 'Particle Canvas',
+    caption: 'Two flocks follow your pointer; hold it down to pull them, two fingers split them.',
+    controls: [
+      { label: 'Pause', key: ' ', action: () => (state.paused = !state.paused), pressed: () => state.paused },
+      {
+        label: 'Trails',
+        key: 't',
+        action: () => (state.clearBackground = !state.clearBackground),
+        pressed: () => !state.clearBackground,
+      },
+      { label: 'Shape', key: 's', action: () => (state.shape = nextShape(state.shape)) },
+      {
+        label: 'Regenerate',
+        key: 'n',
+        action: () => {
+          regenerate(state);
+          sketch()?.background(BACKGROUND_COLOR);
+        },
+      },
+    ],
+  };
+}
 
 /** Screen 20: two flocks of shapes; with two fingers each flock follows its own finger. */
 export function drawGenerativeArt(p: p5, state: WallState, touches: readonly Point[]): void {

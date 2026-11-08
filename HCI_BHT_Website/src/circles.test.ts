@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { CIRCLES, circleCenter, isShrinkTrigger, shrink } from './circles.ts';
+import {
+  CIRCLES,
+  circleCenter,
+  circleDiameter,
+  easeInOutCubic,
+  isShrinkTrigger,
+  stepProgress,
+} from './circles.ts';
 
 describe('isShrinkTrigger', () => {
   it('accepts presses within 50px of (80%, 43%)', () => {
@@ -10,23 +17,36 @@ describe('isShrinkTrigger', () => {
   });
 });
 
-describe('shrink', () => {
-  it('decreases by one per frame and stops at zero', () => {
-    expect(shrink(80)).toBe(79);
-    expect(shrink(0)).toBe(0);
+describe('circleDiameter', () => {
+  it('keeps the original 80 px on a 1080 px tall screen and scales within bounds', () => {
+    expect(circleDiameter(1920, 1080)).toBeCloseTo(80);
+    expect(circleDiameter(390, 844)).toBe(40);
+    expect(circleDiameter(5000, 4000)).toBe(120);
+  });
+});
+
+describe('stepProgress', () => {
+  it('advances toward the target and stops there, in both directions', () => {
+    expect(stepProgress(0, 1, 0.5, 2)).toBe(0.25);
+    expect(stepProgress(0.9, 1, 0.5, 2)).toBe(1);
+    expect(stepProgress(0.1, 0, 0.5, 2)).toBe(0);
   });
 
-  it('shrinks by the same amount per second at any frame rate', () => {
-    let at30 = 80;
-    let at120 = 80;
-    for (let i = 0; i < 30; i++) at30 = shrink(at30, 2);
-    for (let i = 0; i < 120; i++) at120 = shrink(at120, 0.5);
-    expect(at30).toBeCloseTo(20);
-    expect(at120).toBeCloseTo(20);
+  it('covers the same ground at 30 and 120 FPS', () => {
+    let slow = 0;
+    let fast = 0;
+    for (let i = 0; i < 15; i++) slow = stepProgress(slow, 1, 1 / 30, 1);
+    for (let i = 0; i < 60; i++) fast = stepProgress(fast, 1, 1 / 120, 1);
+    expect(fast).toBeCloseTo(slow);
   });
+});
 
-  it('never goes below zero on a long frame', () => {
-    expect(shrink(0.5, 4)).toBe(0);
+describe('easeInOutCubic', () => {
+  it('starts at 0, ends at 1 and passes the middle at 0.5', () => {
+    expect(easeInOutCubic(0)).toBe(0);
+    expect(easeInOutCubic(0.5)).toBe(0.5);
+    expect(easeInOutCubic(1)).toBe(1);
+    expect(easeInOutCubic(0.1)).toBeLessThan(0.1);
   });
 });
 
