@@ -70,10 +70,12 @@ Con el `content` vacío el AI Hub muestra un aviso y no hace llamadas. Desarroll
 
 ## museflow-php (reactivar el estudio)
 
-La página `MuseFlow/` funciona como juego estático: `dataEndpointBase` vale `null` en `MuseFlow/scripts/main.js`
-(y en la copia `EurekaWall/Scripts/museFlow/main.js`), así que no se envían datos ni se reintenta nada.
+La página `MuseFlow/` es ahora una versión en TypeScript (`MuseFlow/src/`) que no envía datos: las respuestas a las
+sondas de pensamiento solo se muestran al final de la partida. El cliente original del estudio sigue en el historial de
+git (`MuseFlow/scripts/main.js` antes de la migración) y en la copia `EurekaWall/Scripts/museFlow/main.js`, ambos con
+`dataEndpointBase` a `null`.
 
-Para volver a recoger datos:
+Para volver a recoger datos (con el cliente original):
 
 1. **Antes de exponerlo**, cambia las consultas por sentencias preparadas: hoy concatenan los valores del JSON en el
    SQL (inyección SQL) y, si fallan, devuelven el SQL y el error de MySQL al cliente.
@@ -82,8 +84,7 @@ Para volver a recoger datos:
 4. Ajusta `Access-Control-Allow-Origin` en los PHP al origen real del juego (hoy `https://www.soscisurvey.de`).
 5. Pon la URL de la carpeta en `dataEndpointBase` (sin barra final), p. ej. `'https://servidor.example/museflow'`.
    No uses `cors-anywhere`: el proxy público ya no admite uso general.
-6. `MuseFlow/index.html` espera que el servidor de la encuesta sustituya `%caseNumber%` y `%urn%`; en Pages se quedan
-   tal cual.
+6. El `index.html` original esperaba que el servidor de la encuesta sustituyera `%caseNumber%` y `%urn%`.
 
 ## sockets (archivado)
 
