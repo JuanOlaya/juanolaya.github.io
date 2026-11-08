@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- URL del proxy de Gemini (server/gemini-proxy/). Vacía = AI Hub desactivado con aviso. -->
+    <meta name="gemini-proxy-url" content="">
     <title>Infografía Interactiva de UX & Co-Piloto Multifuncional Gemini</title>
     <!-- Tailwind CSS para diseño moderno y fluido -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -499,6 +501,11 @@
                 </div>
             </div>
 
+            <!-- Aviso visible cuando no hay proxy de Gemini configurado -->
+            <div id="ai-unavailable-notice" role="status" class="hidden bg-amber-100 text-amber-900 border border-amber-300 rounded-2xl p-4 text-sm">
+                <strong>AI Hub desactivado.</strong> Esta versión pública no tiene un proxy de Gemini configurado, así que las funciones de IA no están disponibles. El resto de la infografía funciona con normalidad.
+            </div>
+
             <!-- CONTENIDO DE PESTAÑAS -->
 
             <!-- PESTAÑA 1: AUDITOR Y REDISEÑADOR MULTIMODAL (IMAGE-TO-IMAGE) -->
@@ -951,36 +958,58 @@
 
 
         
-        // 3. LOGICA Y LLAMADAS A LA API DE GOOGLE GEMINI (CON BACKOFF EXPONENCIAL)
-        const apiKey = ""; // Se inyecta automáticamente en el entorno de ejecución
+        // 3. LLAMADAS A GEMINI A TRAVÉS DEL PROXY (CON BACKOFF EXPONENCIAL)
+        // La clave nunca está en el navegador: el proxy (server/gemini-proxy/) la guarda como secreto.
+        const GEMINI_PROXY_URL = (document.querySelector('meta[name="gemini-proxy-url"]')?.content || "").trim().replace(/\/+$/, "");
+        const AI_UNAVAILABLE_MESSAGE = "El AI Hub está desactivado en esta versión pública: no hay un proxy de Gemini configurado.";
 
-        // Helper genérico para llamadas API seguras con reintento exponencial
+        class AIUnavailableError extends Error {
+            constructor() {
+                super(AI_UNAVAILABLE_MESSAGE);
+                this.name = "AIUnavailableError";
+            }
+        }
+
+        // El aviso de IA desactivada es más útil para el usuario que el mensaje genérico de cada pestaña.
+        function aiErrorMessage(error, fallback) {
+            return error instanceof AIUnavailableError ? AI_UNAVAILABLE_MESSAGE : fallback;
+        }
+
+        if (!GEMINI_PROXY_URL) {
+            document.getElementById('ai-unavailable-notice')?.classList.remove('hidden');
+        }
+
+        const wait = (ms) => new Promise(r => setTimeout(r, ms));
+
+        // Solo se reintentan fallos de red, 429 y 5xx; un 4xx del proxy es definitivo.
         async function callGeminiAPI(modelEndpoint, payload) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelEndpoint}?key=${apiKey}`;
+            if (!GEMINI_PROXY_URL) throw new AIUnavailableError();
+            const url = `${GEMINI_PROXY_URL}/v1beta/models/${modelEndpoint}`;
             let delay = 1000;
             for (let i = 0; i < 5; i++) {
+                const isLastAttempt = i === 4;
+                let response;
                 try {
-                    const response = await fetch(url, {
+                    response = await fetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
                     });
-                    if (response.ok) {
-                        return await response.json();
-                    }
-                    if (response.status === 429 || response.status >= 500) {
-                        // Espera con backoff exponencial
-                        await new Promise(r => setTimeout(r, delay));
-                        delay *= 2;
-                        continue;
-                    }
-                    const errText = await response.text();
-                    throw new Error(`Error API ${response.status}: ${errText}`);
                 } catch (err) {
-                    if (i === 4) throw err;
-                    await new Promise(r => setTimeout(r, delay));
+                    if (isLastAttempt) throw err;
+                    await wait(delay);
                     delay *= 2;
+                    continue;
                 }
+                if (response.ok) return await response.json();
+                const retryable = response.status === 429 || response.status >= 500;
+                if (retryable && !isLastAttempt) {
+                    await wait(delay);
+                    delay *= 2;
+                    continue;
+                }
+                const errText = await response.text();
+                throw new Error(`Error API ${response.status}: ${errText}`);
             }
         }
 
@@ -1273,7 +1302,7 @@
             } catch (error) {
                 console.error("Multimodal Audit Error:", error);
                 resetAudit();
-                alert("Hubo un error al diagnosticar la interfaz con la IA. Asegúrate de que las credenciales estén activas.");
+                alert(aiErrorMessage(error, "Hubo un error al diagnosticar la interfaz con la IA. Asegúrate de que las credenciales estén activas."));
             }
         }
 
@@ -1331,7 +1360,7 @@
                 console.error("Image-to-Image Error:", error);
                 document.getElementById('audit-loading').classList.add('hidden');
                 document.getElementById('audit-report').classList.remove('hidden');
-                alert("La función de rediseño gráfico (Image-to-Image) no pudo completarse en esta iteración.");
+                alert(aiErrorMessage(error, "La función de rediseño gráfico (Image-to-Image) no pudo completarse en esta iteración."));
             }
         }
 
@@ -1373,7 +1402,7 @@
             } catch (error) {
                 console.error("Imagen 4 Error:", error);
                 resetProto();
-                alert("Hubo un error al generar la imagen con Imagen 4. Por favor, asegúrate de que el backend soporte Imagen 4 en el ambiente.");
+                alert(aiErrorMessage(error, "Hubo un error al generar la imagen con Imagen 4. Por favor, asegúrate de que el backend soporte Imagen 4 en el ambiente."));
             }
         }
 
@@ -1427,7 +1456,7 @@
 
             } catch (error) {
                 console.error("Interview Initialization Error:", error);
-                chatbox.innerHTML = `<p class="text-xs text-rose-400 text-center py-10">Fallo de conexión en el simulador de entrevista bilingüe.</p>`;
+                chatbox.innerHTML = `<p class="text-xs text-rose-400 text-center py-10">${aiErrorMessage(error, "Fallo de conexión en el simulador de entrevista bilingüe.")}</p>`;
             }
         }
 
@@ -1517,7 +1546,7 @@
                 console.error("Interview response error:", error);
                 const loader = document.getElementById('interview-typing');
                 if (loader) loader.remove();
-                alert("Se perdió la conexión con el entrevistador.");
+                alert(aiErrorMessage(error, "Se perdió la conexión con el entrevistador."));
             }
         }
 
@@ -1604,7 +1633,7 @@
                 console.error("Grounding UX Consult Error:", error);
                 document.getElementById('grounding-loading').classList.add('hidden');
                 document.getElementById('grounding-placeholder').classList.remove('hidden');
-                alert("La consulta no pudo completarse. Revisa la consola o tu conexión.");
+                alert(aiErrorMessage(error, "La consulta no pudo completarse. Revisa la consola o tu conexión."));
             }
         }
 
@@ -1662,7 +1691,7 @@
             } catch (error) {
                 console.error("Quiz Generation Error:", error);
                 resetQuiz();
-                alert("No se pudo generar el examen por IA en este momento. Inténtalo de nuevo en unos segundos.");
+                alert(aiErrorMessage(error, "No se pudo generar el examen por IA en este momento. Inténtalo de nuevo en unos segundos."));
             }
         }
 
