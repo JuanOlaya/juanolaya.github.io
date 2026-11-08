@@ -13,43 +13,78 @@ export const ALLOWED_TARGETS: ReadonlySet<string> = new Set([
 
 const PATH_PREFIX = '/v1beta/models/';
 
-export interface RequestFacts {
+// Everything known before the body is read, so bad requests are rejected without buffering it.
+export interface RequestHead {
   method: string;
   origin: string | null;
   path: string;
   contentType: string | null;
-  body: string;
+  contentLength: string | null;
 }
 
-export type Validation =
-  | { ok: true; target: string }
-  | { ok: false; status: number; error: string };
+export type Rejection = { ok: false; status: number; error: string };
+export type Validation = { ok: true; target: string } | Rejection;
+export type BodyValidation = { ok: true } | Rejection;
 
-function reject(status: number, error: string): Validation {
+function reject(status: number, error: string): Rejection {
   return { ok: false, status, error };
 }
 
-function isJsonObject(body: string): boolean {
-  try {
-    const parsed: unknown = JSON.parse(body);
-    return typeof parsed === 'object' && parsed !== null && !Array.isArray(parsed);
-  } catch {
-    return false;
-  }
+function declaresTooLarge(contentLength: string | null): boolean {
+  if (contentLength === null) return false;
+  const bytes = Number(contentLength);
+  return !Number.isFinite(bytes) || bytes > MAX_BODY_BYTES;
 }
 
-export function validateRequest(facts: RequestFacts, allowedOrigins: readonly string[]): Validation {
-  if (!facts.origin || !allowedOrigins.includes(facts.origin)) return reject(403, 'origin not allowed');
-  if (facts.method !== 'POST') return reject(405, 'method not allowed');
+export function validateHead(head: RequestHead, allowedOrigins: readonly string[]): Validation {
+  if (!head.origin || !allowedOrigins.includes(head.origin)) return reject(403, 'origin not allowed');
+  if (head.method !== 'POST') return reject(405, 'method not allowed');
 
-  const target = facts.path.startsWith(PATH_PREFIX) ? facts.path.slice(PATH_PREFIX.length) : '';
+  const target = head.path.startsWith(PATH_PREFIX) ? head.path.slice(PATH_PREFIX.length) : '';
   if (!ALLOWED_TARGETS.has(target)) return reject(404, 'model not allowed');
 
-  const mediaType = (facts.contentType ?? '').split(';')[0].trim().toLowerCase();
+  const mediaType = (head.contentType ?? '').split(';')[0].trim().toLowerCase();
   if (mediaType !== 'application/json') return reject(415, 'content type must be application/json');
-
-  if (new TextEncoder().encode(facts.body).byteLength > MAX_BODY_BYTES) return reject(413, 'payload too large');
-  if (!isJsonObject(facts.body)) return reject(400, 'body must be a JSON object');
+  if (declaresTooLarge(head.contentLength)) return reject(413, 'payload too large');
 
   return { ok: true, target };
+}
+
+export function validateBody(body: string): BodyValidation {
+  try {
+    const parsed: unknown = JSON.parse(body);
+    if (typeof parsed === 'object' && parsed !== null && !Array.isArray(parsed)) return { ok: true };
+  } catch {
+    // Invalid JSON gets the same rejection as a non-object body.
+  }
+  return reject(400, 'body must be a JSON object');
+}
+
+function concat(chunks: Uint8Array[], total: number): Uint8Array {
+  const bytes = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return bytes;
+}
+
+// Content-Length can be missing or wrong, so the limit is also enforced on the bytes actually streamed.
+export async function readBodyWithLimit(stream: ReadableStream<Uint8Array> | null, maxBytes: number): Promise<string | null> {
+  if (!stream) return '';
+  const reader = stream.getReader();
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > maxBytes) {
+      await reader.cancel();
+      return null;
+    }
+    chunks.push(value);
+  }
+  return new TextDecoder().decode(concat(chunks, total));
 }
