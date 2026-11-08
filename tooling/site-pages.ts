@@ -29,7 +29,7 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'EurekaWall' },
   { kind: 'legacy', path: 'EurekaWall3' },
   { kind: 'legacy', path: 'EurekaWall_old' },
-  { kind: 'legacy', path: 'HCI_BHT_Website' },
+  { kind: 'vite', dir: 'HCI_BHT_Website' },
   { kind: 'legacy', path: 'Haptic_Cards' },
   { kind: 'legacy', path: 'MuseFlow' },
   { kind: 'legacy', path: 'OldWebsite' },
