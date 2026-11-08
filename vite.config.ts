@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vitest/config';
 import { copyVerbatim } from './tooling/copy-verbatim.ts';
+import { memoDeutschPwa } from './tooling/memodeutsch-pwa.ts';
 import { assertValidEntries, pageInputFrom, verbatimCopiesFrom } from './tooling/page-inputs.ts';
 import { siteEntries } from './tooling/site-pages.ts';
 
@@ -15,7 +16,13 @@ export default defineConfig({
   // User site (juanolaya.github.io): served from the domain root.
   base: '/',
   publicDir: 'public',
-  plugins: [vue(), tailwindcss(), copyVerbatim(verbatimCopiesFrom(siteEntries), rootDir)],
+  plugins: [
+    vue(),
+    tailwindcss(),
+    copyVerbatim(verbatimCopiesFrom(siteEntries), rootDir),
+    // After copy-verbatim: the precache globs the legacy MemoDeutsch files in dist/.
+    ...memoDeutschPwa(),
+  ],
   resolve: {
     alias: { '@shared': fileURLToPath(new URL('./src/shared', import.meta.url)) },
   },
