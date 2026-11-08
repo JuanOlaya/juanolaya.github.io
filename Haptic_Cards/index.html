@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <meta
       name="description"
       content="Interactive cards classifying 92 peer-reviewed handheld haptic VR controllers into 21 mechanism patterns."
@@ -10,9 +11,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
     <title>Haptic VR Controllers - Interactive 21 Mechanism Patterns Dashboard</title>
   </head>
-  <body
-    class="flex min-h-screen flex-col justify-between bg-[#FEFAF6] p-3 text-[#001011] selection:bg-[#fd5321] selection:text-white sm:p-6"
-  >
+  <body class="flex min-h-screen flex-col justify-between p-3 sm:p-6">
     <div id="app" class="flex grow flex-col"></div>
     <noscript>This dashboard needs JavaScript to filter the controller cards.</noscript>
     <script type="module" src="./src/main.ts"></script>
