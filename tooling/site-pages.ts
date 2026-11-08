@@ -30,13 +30,16 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'EurekaWall' },
   { kind: 'legacy', path: 'EurekaWall3' },
   { kind: 'legacy', path: 'EurekaWall_old' },
-  { kind: 'legacy', path: 'HCI_BHT_Website' },
+  { kind: 'vite', dir: 'HCI_BHT_Website' },
   { kind: 'legacy', path: 'Haptic_Cards' },
   { kind: 'legacy', path: 'MuseFlow' },
   { kind: 'legacy', path: 'OldWebsite' },
   { kind: 'legacy', path: 'OldWebsite2' },
-  { kind: 'legacy', path: 'ParticleCanvas' },
-  { kind: 'legacy', path: 'PixelGrid' },
+  // One TS sketch (src/sketches/inspirational-wall) behind two URLs; Scripts/ keeps an orphan legacy gallery page.
+  { kind: 'vite', dir: 'ParticleCanvas' },
+  { kind: 'legacy', path: 'ParticleCanvas/Scripts' },
+  { kind: 'vite', dir: 'PixelGrid' },
+  { kind: 'legacy', path: 'PixelGrid/Scripts' },
   { kind: 'legacy', path: 'PlatformGame' },
   { kind: 'vite', dir: 'Project_Management' },
   // Server code (moving to server/ in #16) must never be published; the page itself may live in
@@ -50,6 +53,7 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'vite', dir: 'Tropical' },
   { kind: 'vite', dir: 'UX' },
   { kind: 'legacy', path: 'Website' },
-  { kind: 'legacy', path: 'WeightLever' },
+  { kind: 'vite', dir: 'WeightLever', html: 'weightLever_simulation_Gemini_v4.html' },
+  { kind: 'legacy', path: 'WeightLever', exclude: ['src', 'weightLever_simulation_Gemini_v4.html'] },
   { kind: 'legacy', path: 'multitouchTest' },
 ];
