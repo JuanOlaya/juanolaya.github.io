@@ -59,7 +59,7 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'TestingSoSci' },
   { kind: 'vite', dir: 'UX' },
   { kind: 'legacy', path: 'Website' },
-  { kind: 'legacy', path: 'multitouchTest' },
+  { kind: 'vite', dir: 'multitouchTest' },
 
   // Archived pages (issue #7). The old folders above keep only redirect stubs pointing here.
   { kind: 'legacy', path: 'legacy' },
