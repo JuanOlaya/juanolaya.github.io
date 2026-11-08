@@ -55,11 +55,8 @@ export const siteEntries: readonly SiteEntry[] = [
     exclude: ['server.js', 'package.json', 'package-lock.json', 'node_modules'],
   },
   { kind: 'legacy', path: 'TestingSoSci' },
-  { kind: 'vite', dir: 'Tropical' },
   { kind: 'vite', dir: 'UX' },
   { kind: 'legacy', path: 'Website' },
-  { kind: 'vite', dir: 'WeightLever', html: 'weightLever_simulation_Gemini_v4.html' },
-  { kind: 'legacy', path: 'WeightLever', exclude: ['src', 'weightLever_simulation_Gemini_v4.html'] },
   { kind: 'legacy', path: 'multitouchTest' },
 
   // Archived pages (issue #7). The old folders above keep only redirect stubs pointing here.

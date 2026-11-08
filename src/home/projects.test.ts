@@ -15,10 +15,8 @@ const LIVE_PAGES = [
   '/PixelGrid/',
   '/PlatformGame/',
   '/Project_Management/',
-  '/Tropical/',
   '/UX/',
   '/multitouchTest/',
-  '/WeightLever/',
 ];
 
 const allUrls = projects.flatMap((project) => project.links.map((link) => link.url));
