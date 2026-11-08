@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.8.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.7.2...v0.8.0) (2026-11-08)
+
+
+### Features
+
+* **eureka-wall:** migrate the EurekaWall home to a TS p5 sketch ([fd5c35e](https://github.com/JuanOlaya/juanolaya.github.io/commit/fd5c35ed23ae6f57d26086763e8c3b1db935bcb9))
+* **eureka-wall:** migrate the EurekaWall home to a TS p5 sketch ([4e67096](https://github.com/JuanOlaya/juanolaya.github.io/commit/4e67096aacf460a2c932739c118f043fb8e5837e))
+* **museflow:** port the MuseFlow game to TypeScript p5 instance mode ([55ac8e7](https://github.com/JuanOlaya/juanolaya.github.io/commit/55ac8e77b4bbc2c093d6f61f1ea8ff4d5d0422db))
+* **museflow:** port the MuseFlow game to TypeScript p5 instance mode ([99b1cfa](https://github.com/JuanOlaya/juanolaya.github.io/commit/99b1cfa77f0b59da0579e74aa3744826c6ab0b3e))
+* **platform-game:** migrar PlatformGame a página Vite con p5 en modo instancia ([ee5daba](https://github.com/JuanOlaya/juanolaya.github.io/commit/ee5dabaa26f80ad65e0046cfd7ce1556750ffac2))
+* **platform-game:** migrate PlatformGame to a Vite p5 instance-mode page ([2b4e43c](https://github.com/JuanOlaya/juanolaya.github.io/commit/2b4e43c4de84a7d6e5a0515169a8e3264f44dfb1))
+
 ## [0.7.2](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.7.1...v0.7.2) (2026-11-08)
 
 
