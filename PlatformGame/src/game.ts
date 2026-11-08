@@ -147,12 +147,15 @@ function draw(p: p5, state: GameState, alpha: number): void {
   p.pop();
   // Text would be unreadably small on a phone-sized canvas, so the HUD and cards grow back up to 1.6x.
   const uiScale = Math.min(Math.max(MIN_TEXT_SCALE / scale, 1), MAX_UI_SCALE);
+  // The HUD goes under the start/pause card: scaled up on phones it would otherwise cover the title.
+  p.push();
+  p.scale(scale * uiScale);
+  drawHud(p, state.player);
+  p.pop();
   p.push();
   p.scale(scale);
   const [title, hint] = overlayText(state);
   drawOverlay(p, easeOutCubic(state.overlay), title, hint, uiScale);
-  p.scale(uiScale);
-  drawHud(p, state.player);
   p.pop();
 }
 
