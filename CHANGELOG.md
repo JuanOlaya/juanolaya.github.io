@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.9.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.8.0...v0.9.0) (2026-11-08)
+
+
+### Features
+
+* **multitouch:** port the multitouch test to TypeScript p5 instance mode ([5ae2086](https://github.com/JuanOlaya/juanolaya.github.io/commit/5ae2086034627dd909ac272d6592fccac509b7aa))
+* **multitouch:** port the multitouch test to TypeScript p5 instance mode ([30d74e4](https://github.com/JuanOlaya/juanolaya.github.io/commit/30d74e48261c0dabf38abecd6c5f2dc54d55098f))
+
 ## [0.8.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.7.2...v0.8.0) (2026-11-08)
 
 
