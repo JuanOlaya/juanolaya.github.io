@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.1](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.7.0...v0.7.1) (2026-11-08)
+
+
+### Bug Fixes
+
+* serve /favicon.ico at the site root ([405874b](https://github.com/JuanOlaya/juanolaya.github.io/commit/405874bb801597162703ae15f2b5f0e78efca8bd))
+* servir /favicon.ico en la raíz del sitio ([f041128](https://github.com/JuanOlaya/juanolaya.github.io/commit/f0411282f7a8639cef7bc4cde5a9a147db825496))
+
 ## [0.7.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.6.0...v0.7.0) (2026-11-08)
 
 
