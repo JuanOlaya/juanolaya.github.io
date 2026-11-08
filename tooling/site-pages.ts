@@ -24,7 +24,9 @@ export const siteEntries: readonly SiteEntry[] = [
 
   // Project pages, one public URL per folder.
   { kind: 'legacy', path: 'Antonella' },
-  { kind: 'legacy', path: 'Balconity' },
+  { kind: 'vite', dir: 'Balconity' },
+  // Old icon URLs (/Balconity/assets/...) keep working; the page itself uses the hashed copies.
+  { kind: 'legacy', path: 'Balconity/assets' },
   { kind: 'legacy', path: 'Deutsch_lernen' },
   { kind: 'legacy', path: 'EurekaWall' },
   { kind: 'legacy', path: 'EurekaWall3' },
