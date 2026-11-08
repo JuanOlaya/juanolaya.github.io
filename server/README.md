@@ -70,8 +70,8 @@ Con el `content` vacío el AI Hub muestra un aviso y no hace llamadas. Desarroll
 
 ## museflow-php (reactivar el estudio)
 
-La página `MuseFlow/` funciona como juego estático: `dataEndpointBase` vale `null` en `MuseFlow/scripts/main.js`
-(y en la copia `EurekaWall/Scripts/museFlow/main.js`), así que no se envían datos ni se reintenta nada.
+La página `MuseFlow/` funciona como juego estático: `dataEndpointBase` vale `null` en `MuseFlow/scripts/main.js`, así
+que no se envían datos ni se reintenta nada.
 
 Para volver a recoger datos:
 
