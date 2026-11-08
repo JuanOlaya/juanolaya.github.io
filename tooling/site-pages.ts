@@ -23,7 +23,7 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'CV' },
 
   // Project pages, one public URL per folder.
-  { kind: 'legacy', path: 'Antonella' },
+  { kind: 'vite', dir: 'Antonella/Lenguajes' },
   { kind: 'legacy', path: 'Balconity' },
   { kind: 'legacy', path: 'Deutsch_lernen' },
   { kind: 'legacy', path: 'EurekaWall' },
