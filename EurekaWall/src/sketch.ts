@@ -224,8 +224,15 @@ function pauseWhileHidden(sketch: () => p5 | undefined): () => void {
     if (document.hidden) p.noLoop();
     else p.loop();
   };
+  const stop = () => {
+    document.removeEventListener('visibilitychange', sync);
+    window.removeEventListener('pagehide', stop);
+  };
   document.addEventListener('visibilitychange', sync);
-  return () => document.removeEventListener('visibilitychange', sync);
+  // `mountSketch` removes the sketch on pagehide; a later `loop()` would restart the removed
+  // instance's draw loop on a detached canvas, e.g. when a bfcache restore turns the tab visible.
+  window.addEventListener('pagehide', stop);
+  return stop;
 }
 
 /** The EurekaWall home: a half wheel of the toolkit's five tools and a Start button. */
