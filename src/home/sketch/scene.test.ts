@@ -17,10 +17,10 @@ describe('layoutFor', () => {
     expect(layout.diagonalStopAfter).toBe(4);
   });
 
-  it('uses a fixed 400x850 canvas and fast timings on portrait screens', () => {
+  it('uses a viewport-sized canvas and fast timings on portrait screens', () => {
     const layout = layoutFor(390, 844);
     expect(layout.mobile).toBe(true);
-    expect(layout.canvas).toEqual({ width: 400, height: 850 });
+    expect(layout.canvas).toEqual({ width: 390, height: 844 });
     expect(layout.timings).toEqual({
       pressHorizontal: 750,
       releaseHorizontal: 1000,
@@ -74,7 +74,7 @@ describe('startPositions', () => {
     const layout = layoutFor(390, 844);
     expect(startPositions(layout, 'initial', lowest)).toEqual({
       diagonal: { x: 100, y: 86 },
-      horizontal: { x: 310, y: 100 },
+      horizontal: { x: 300, y: 100 },
     });
   });
 
