@@ -1,0 +1,18 @@
+@import '../../../src/shared/styles/tailwind.css';
+@import '../../../src/shared/styles/v3-compat.css';
+@source '../';
+@source '../../../src/shared/components';
+
+/* The page toggles dark mode with a button (class on <html>), not with the OS preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+}
+
+.transition-theme {
+  transition:
+    background-color 0.5s ease,
+    border-color 0.5s ease,
+    color 0.5s ease;
+}

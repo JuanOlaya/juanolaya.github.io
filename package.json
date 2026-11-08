@@ -1,0 +1,47 @@
+{
+  "name": "juanolaya.github.io",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Personal portfolio of Juan Olaya, built with Vite multi-page.",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:legacy-scripts": "node tooling/build-legacy-scripts.ts",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "lucide-vue-next": "1.0.0",
+    "mathjax": "3.2.2",
+    "p5": "1.11.13",
+    "vue": "3.5.45"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@tailwindcss/vite": "4.3.5",
+    "@types/node": "24.19.2",
+    "@types/p5": "1.7.7",
+    "@vitejs/plugin-vue": "6.0.10",
+    "eslint": "10.14.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-vue": "10.12.0",
+    "globals": "17.14.0",
+    "prettier": "3.9.10",
+    "tailwindcss": "4.3.5",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.1",
+    "vite": "8.3.6",
+    "vitest": "5.1.0",
+    "vue-eslint-parser": "10.4.2",
+    "vue-tsc": "3.3.14",
+    "zod": "4.6.7"
+  }
+}
