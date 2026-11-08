@@ -1,0 +1,14 @@
+# Prettier formats only migrated and new code; legacy pages must stay byte-for-byte.
+/*
+!/*/
+/*/*
+!/*/src/
+!/src/*
+!/tooling/*
+!/tooling-check/index.html
+!/*.config.js
+!/*.config.ts
+!/tsconfig.json
+!/package.json
+!/.prettierrc.json
+/node_modules/
