@@ -12,29 +12,11 @@ const JSON_DIR = path.resolve(import.meta.dirname, '../../verben/A1_A2_B1/json')
  * app tolerates them. Fixing one makes this test fail on purpose, so the entry is removed in the same change.
  */
 const KNOWN_INVALID: Record<string, Record<string, string>> = {
-  cards: {
-    'beschließen.json': 'verb is mojibake ("beschlieÃŸen")',
-    'äußern.json': 'verb is mojibake ("äuÃŸern")',
-    'errichten.json': 'old card format: level "B1", group "B1.2 Group 1", keys translation/hat_sein/folder',
-    'kennzeichnen.json':
-      'old card format: level "B2", group "B2.1 Group 1", keys translation/hat_sein/folder',
-    'trauen.json': 'old card format: level "A1", group "A1.2 Group 1", keys translation/hat_sein/folder',
-    'verhalten.json': 'old card format: level "A2", group "A2.2 Group 1", keys translation/hat_sein/folder',
-    'sinken.json': 'key "perfect" instead of "perfekt"',
-    'versenken.json': 'key "perfect" instead of "perfekt"',
-    'überschwemmen.json': 'key "perfect" instead of "perfekt"',
-    'halten.json': 'unknown key "net_forms" (not read by the app)',
-    'stimmen.json': 'unknown key "net_forms" (not read by the app)',
-  },
+  cards: {},
   groups: {},
   praesens: {},
   praeteritum_konjugation: {},
-  perfekt_konjugation: {
-    'erleben.json': '"perfekt" is a list of {pronoun, verb_conjugation, auxiliary_verb}',
-    'gelten.json': 'root is an array of {person, verb, example, es}',
-    'hineingehen.json': 'root is an array',
-    'verbinden.json': 'root is an array',
-  },
+  perfekt_konjugation: {},
   konjunktiv_ii: {},
 };
 
