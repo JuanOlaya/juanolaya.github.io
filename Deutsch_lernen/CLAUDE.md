@@ -1,11 +1,11 @@
 # MemoDeutsch - Developer Guide & Code Conventions
 
 ## Build & Sincronization Commands
-Run the following scripts in the `verben/A1_A2_B1` directory to synchronize and validate the database:
-- **Compile Index**: `node update_index.js`
-- **Synchronize Groups**: `node sync_card_groups.js`
-- **Verify Inventory**: `node verify_inventory.js`
-- **Wortfamilie Index**: `node generate_wortfamilie_index.js` (runs from the parent `verben/A1_A2_B1` or `verben` directory depending on target)
+Run the following scripts from the repository root to synchronize and validate the database (offline tools live in `tools/memodeutsch/`, outside the published site):
+- **Compile Index**: `node tools/memodeutsch/verben/A1_A2_B1/update_index.js`
+- **Synchronize Groups**: `node tools/memodeutsch/verben/A1_A2_B1/sync_card_groups.js`
+- **Verify Inventory**: `node tools/memodeutsch/verben/A1_A2_B1/verify_inventory.js`
+- **Wortfamilie Index**: `node tools/memodeutsch/verben/A1_A2_B1/tools/generate_wortfamilie_index.js`
 
 ## Coding & Formatting Conventions
 

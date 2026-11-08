@@ -6,6 +6,7 @@ const ASSETS_TO_CACHE = [
     // Verben Section
     './verben/A1_A2_B1/verben.html',
     './verben/A1_A2_B1/style/styles.css',
+    './verben/A1_A2_B1/script/verben-helpers.js',
     './verben/A1_A2_B1/script/script.js',
     './verben/A1_A2_B1/json/verb_types.json',
     './verben/A1_A2_B1/json/verbs_index.json',

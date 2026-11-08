@@ -23,21 +23,25 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'CV' },
 
   // Project pages, one public URL per folder.
-  { kind: 'legacy', path: 'Antonella' },
+  { kind: 'vite', dir: 'Antonella/Lenguajes' },
   { kind: 'legacy', path: 'Balconity' },
-  { kind: 'legacy', path: 'Deutsch_lernen' },
+  // Deutsch_lernen/src/ holds the TypeScript schemas and tests of its migration (#14), not site files.
+  { kind: 'legacy', path: 'Deutsch_lernen', exclude: ['src'] },
   { kind: 'legacy', path: 'EurekaWall' },
   { kind: 'legacy', path: 'EurekaWall3' },
   { kind: 'legacy', path: 'EurekaWall_old' },
-  { kind: 'legacy', path: 'HCI_BHT_Website' },
+  { kind: 'vite', dir: 'HCI_BHT_Website' },
   { kind: 'legacy', path: 'Haptic_Cards' },
   { kind: 'legacy', path: 'MuseFlow' },
   { kind: 'legacy', path: 'OldWebsite' },
   { kind: 'legacy', path: 'OldWebsite2' },
-  { kind: 'legacy', path: 'ParticleCanvas' },
-  { kind: 'legacy', path: 'PixelGrid' },
+  // One TS sketch (src/sketches/inspirational-wall) behind two URLs; Scripts/ keeps an orphan legacy gallery page.
+  { kind: 'vite', dir: 'ParticleCanvas' },
+  { kind: 'legacy', path: 'ParticleCanvas/Scripts' },
+  { kind: 'vite', dir: 'PixelGrid' },
+  { kind: 'legacy', path: 'PixelGrid/Scripts' },
   { kind: 'legacy', path: 'PlatformGame' },
-  { kind: 'legacy', path: 'Project_Management' },
+  { kind: 'vite', dir: 'Project_Management' },
   // Server code (moving to server/ in #16) must never be published; the page itself may live in
   // Sockets/public/ or Sockets/index.html depending on that move, so the whole folder is listed.
   {
@@ -46,10 +50,11 @@ export const siteEntries: readonly SiteEntry[] = [
     exclude: ['server.js', 'package.json', 'package-lock.json', 'node_modules'],
   },
   { kind: 'legacy', path: 'TestingSoSci' },
-  { kind: 'legacy', path: 'Tropical' },
-  { kind: 'legacy', path: 'UX' },
+  { kind: 'vite', dir: 'Tropical' },
+  { kind: 'vite', dir: 'UX' },
   { kind: 'legacy', path: 'Website' },
-  { kind: 'legacy', path: 'WeightLever' },
+  { kind: 'vite', dir: 'WeightLever', html: 'weightLever_simulation_Gemini_v4.html' },
+  { kind: 'legacy', path: 'WeightLever', exclude: ['src', 'weightLever_simulation_Gemini_v4.html'] },
   { kind: 'legacy', path: 'multitouchTest' },
 
   // Archived pages (issue #7). The old folders above keep only redirect stubs pointing here.
