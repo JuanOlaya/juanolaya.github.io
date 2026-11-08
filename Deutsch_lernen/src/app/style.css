@@ -1,0 +1,10 @@
+@import '../../../src/shared/styles/tailwind.css';
+@source '.';
+@source '../../app/index.html';
+/* The pre-migration pages are kept only as the extraction test's oracle; their CDN Tailwind classes must not leak in. */
+@source not './demonstratives/__fixtures__';
+
+body {
+  font-family: 'Instrument Sans Variable', system-ui, sans-serif;
+  background-color: #f7f7f7;
+}

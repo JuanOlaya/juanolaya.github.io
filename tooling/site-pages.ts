@@ -25,8 +25,10 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'vite', dir: 'Balconity' },
   // Old icon URLs (/Balconity/assets/...) keep working; the page itself uses the hashed copies.
   { kind: 'legacy', path: 'Balconity/assets' },
-  // Deutsch_lernen/src/ holds the TypeScript schemas and tests of its migration (#14), not site files.
-  { kind: 'legacy', path: 'Deutsch_lernen', exclude: ['src'] },
+  // MemoDeutsch (#14): the Vue app (sources in Deutsch_lernen/src/app/) takes over pages one view at a time;
+  // their old URLs stay as redirect stubs in the legacy tree. Deutsch_lernen/src/ is never published.
+  { kind: 'vite', dir: 'Deutsch_lernen/app' },
+  { kind: 'legacy', path: 'Deutsch_lernen', exclude: ['src', 'app'] },
   { kind: 'legacy', path: 'EurekaWall' },
   { kind: 'legacy', path: 'EurekaWall3' },
   { kind: 'legacy', path: 'EurekaWall_old' },
