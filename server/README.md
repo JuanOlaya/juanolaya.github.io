@@ -15,7 +15,15 @@ Los archivos PHP tenían credenciales de MySQL escritas en el código (en `upstr
 `museflow-php/config.php`, que está en `.gitignore`. **Los valores antiguos siguen en el historial de git: hay que
 rotar esa contraseña en el servidor MySQL** (y, si el usuario se reutiliza en otro sitio, también allí).
 
-Ningún archivo versionado contiene una clave de Gemini.
+### Claves a rotar
+
+| Credencial | Dónde estaba / está | Acción |
+|---|---|---|
+| Contraseña de MySQL de MuseFlow | `MuseFlow/php/platforms-db.php:27-30`, `MuseFlow/php/thoughtProbes-db.php:26-29` | Rotar (sigue en el historial) |
+| Clave de API de Gemini (Google AI Studio) | `Deutsch_lernen/futur/futur.html:459`, **todavía versionada** | Rotar ya y sacarla del archivo; esa página puede usar este proxy añadiendo su modelo a la lista blanca |
+
+`UX/index.html` no contiene ninguna clave. `EurekaWall/index.html:300` publica la configuración web de Firebase, que es
+pública por diseño: su protección son las reglas de seguridad de Firebase y la restricción de la clave por referrer.
 
 ## gemini-proxy
 
@@ -23,11 +31,17 @@ Qué valida (ver `src/validate.ts`):
 
 - Solo `POST` (y el preflight `OPTIONS`) desde `https://juanolaya.github.io`.
 - Solo los cuatro pares `modelo:método` que usa `UX/index.html`.
-- Cuerpo JSON (objeto) de 4 MiB como máximo.
+- Cuerpo JSON (objeto) de 4 MiB como máximo: se rechaza antes de leerlo si `Content-Length` lo supera y, si la cabecera
+  falta o miente, la lectura se corta en cuanto se pasa del límite.
+- Método, origen, ruta y tipo de contenido se comprueban antes de leer el cuerpo.
+- Límite por IP (`CF-Connecting-IP`): 20 peticiones cada 60 s con el binding de
+  [Rate Limiting de Workers](https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/)
+  declarado en `wrangler.toml`. Respuesta `429` sin llamar a Google. Sin el binding, el Worker responde `503`.
 - La clave viaja en la cabecera `x-goog-api-key`, nunca en la URL.
 
-La cabecera `Origin` la puede falsificar un cliente que no sea un navegador. Para limitar abusos, configura además una
-regla de *rate limiting* de Cloudflare para la ruta del Worker y una cuota diaria en Google AI Studio.
+**`Origin` solo frena a navegadores.** Un script con `curl` puede enviar `Origin: https://juanolaya.github.io` y pasar ese
+filtro; lo que acota el gasto de la clave es el límite por IP. Ese límite es por ubicación de Cloudflare y aproximado
+(no es un contador global exacto), así que pon también una cuota diaria a la clave en Google Cloud / AI Studio.
 
 Pruebas (sin red ni dependencias, Node ≥ 22.18):
 
