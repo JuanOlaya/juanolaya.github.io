@@ -1,0 +1,12 @@
+{
+  "name": "weather-proxy",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Cloudflare Worker that serves Balconity's weather without exposing the OpenWeather key",
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"test/**/*.test.ts\"",
+    "dev": "npx wrangler@4 dev",
+    "deploy": "npx wrangler@4 deploy"
+  }
+}
