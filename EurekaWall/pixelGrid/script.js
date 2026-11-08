@@ -183,7 +183,6 @@ class Pixel {
             rectMode(CENTER);
             stroke(this.colores[this.indexColor]);
             strokeWeight(5);
-            noFill();
             rect(this.posX, this.posY, 50, 50);
             rectMode(CORNER);
             noStroke();
@@ -192,7 +191,6 @@ class Pixel {
         if (this.status == 3) {
             strokeWeight(5);
             stroke(this.colores[this.indexColor]);
-            noFill();
             arc(this.posX - this.diameter / 2, this.posY - this.diameter / 2, this.diameter * 2, this.diameter * 2, 0, PI / 2);
             noStroke();
         }
@@ -200,7 +198,6 @@ class Pixel {
         if (this.status == 4) {
             strokeWeight(5);
             stroke(this.colores[this.indexColor]);
-            noFill();
             arc(this.posX + this.diameter / 2 + 2, this.posY - this.diameter / 2 - 2, this.diameter * 2 + 3, this.diameter * 2 + 3, PI / 2, PI);
             noStroke();
         }
@@ -208,7 +205,6 @@ class Pixel {
         if (this.status == 5) {
             strokeWeight(5);
             stroke(this.colores[this.indexColor]);
-            noFill();
             arc(this.posX - this.diameter / 2 - 2, this.posY + this.diameter / 2 + 2, this.diameter * 2 + 3, this.diameter * 2 + 3, 3 * PI / 2, 2 * PI);
             noStroke();
         }
@@ -216,7 +212,6 @@ class Pixel {
         if (this.status == 6) {
             strokeWeight(5);
             stroke(this.colores[this.indexColor]);
-            noFill();
             arc(this.posX + this.diameter / 2 + 2, this.posY + this.diameter / 2 + 2, this.diameter * 2 + 2, this.diameter * 2, PI, 3 * PI / 2);
             noStroke();
         }
@@ -224,7 +219,6 @@ class Pixel {
         if (this.status == 7) {
             strokeWeight(2);
             stroke(this.colores[this.indexColor]);
-            noFill();
             triangle(this.posX - (this.diameter / 2), this.posY - (this.diameter / 2), this.posX - (this.diameter / 2), this.posY + (this.diameter / 2), this.posX + (this.diameter / 2), this.posY - (this.diameter / 2));
             noStroke();
         }
@@ -232,7 +226,6 @@ class Pixel {
         if (this.status == 8) {
             strokeWeight(2);
             stroke(this.colores[this.indexColor]);
-            noFill();
             triangle(this.posX - (this.diameter / 2), this.posY - (this.diameter / 2), this.posX + (this.diameter / 2), this.posY + (this.diameter / 2), this.posX + (this.diameter / 2), this.posY - (this.diameter / 2));
             noStroke();
         }
@@ -240,7 +233,6 @@ class Pixel {
         if (this.status == 9) {
             strokeWeight(2);
             stroke(this.colores[this.indexColor]);
-            noFill();
             triangle(this.posX - (this.diameter / 2), this.posY - (this.diameter / 2), this.posX + (this.diameter / 2), this.posY + (this.diameter / 2), this.posX - (this.diameter / 2), this.posY + (this.diameter / 2));
             noStroke();
         }
@@ -248,7 +240,6 @@ class Pixel {
         if (this.status == 10) {
             strokeWeight(2);
             stroke(this.colores[this.indexColor]);
-            noFill();
             triangle(this.posX + (this.diameter / 2), this.posY - (this.diameter / 2), this.posX + (this.diameter / 2), this.posY + (this.diameter / 2), this.posX - (this.diameter / 2), this.posY + (this.diameter / 2));
             noStroke();
         }
@@ -258,7 +249,6 @@ class Pixel {
             translate(this.posX, this.posY);
             stroke(this.colores[this.indexColor]);
             strokeWeight(1.7);
-            noFill();
             push();
             translate(-this.diameter / 2, -this.diameter / 2);
             arc(0, 0, this.diameter * 2 + 2, this.diameter * 2 + 2, 0, PI / 2, CHORD);
@@ -275,7 +265,6 @@ class Pixel {
             translate(this.posX, this.posY);
             stroke(this.colores[this.indexColor]);
             strokeWeight(1.7);
-            noFill();
             push();
             translate(this.diameter / 2, -this.diameter / 2);
             arc(0, 0, this.diameter * 2 + 2, this.diameter * 2 + 2, PI / 2, PI, CHORD);
