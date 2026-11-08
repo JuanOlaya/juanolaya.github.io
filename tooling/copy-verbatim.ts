@@ -5,9 +5,19 @@ import type { Plugin } from 'vite';
 import type { VerbatimCopy } from './page-inputs.ts';
 
 const OS_JUNK = new Set(['.DS_Store', 'Thumbs.db']);
+// AI-assistant config is tooling for authors, never site content.
+const AGENT_FILES = new Set(['CLAUDE.md', 'AGENTS.md']);
+const AGENT_DIRS = new Set(['.claude', '.agents']);
+
+function isAgentConfig(relativeFile: string): boolean {
+  const segments = relativeFile.split('/');
+  if (AGENT_FILES.has(segments[segments.length - 1] ?? '')) return true;
+  return segments.some((segment) => AGENT_DIRS.has(segment));
+}
 
 function isExcluded(relativeFile: string, copy: VerbatimCopy): boolean {
   if (OS_JUNK.has(path.posix.basename(relativeFile))) return true;
+  if (isAgentConfig(relativeFile)) return true;
   const inner = relativeFile === copy.path ? '' : relativeFile.slice(copy.path.length + 1);
   return copy.exclude.some((subPath) => inner === subPath || inner.startsWith(`${subPath}/`));
 }
