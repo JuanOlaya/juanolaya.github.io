@@ -68,15 +68,17 @@ function step(delta: number): void {
       </div>
       <br />
       <div class="marginDot">
-        <span
-          v-for="(slide, index) in SLIDES"
-          :key="slide.icon"
-          class="dot"
-          :class="{ active: index === slideIndex }"
-          role="button"
-          :aria-label="`Slide ${index + 1}`"
-          @click="slideIndex = index"
-        ></span>
+        <!-- The explicit space reproduces the gap the original markup had between inline dots. -->
+        <template v-for="(slide, index) in SLIDES" :key="slide.icon">
+          <span
+            class="dot"
+            :class="{ active: index === slideIndex }"
+            role="button"
+            :aria-label="`Slide ${index + 1}`"
+            @click="slideIndex = index"
+          ></span
+          >{{ ' ' }}
+        </template>
       </div>
       <span
         id="cancelInfoScreen"
