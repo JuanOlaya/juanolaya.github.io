@@ -1,0 +1,98 @@
+@import 'tailwindcss' source(none);
+@source "../weightLever_simulation_Gemini_v4.html";
+@source "./";
+
+/*
+ * The page used to load Tailwind v3 from its CDN. These base rules restore the v3 defaults that
+ * v4 changed and that the markup relies on (border colour of bare <hr>, pointer cursor on buttons).
+ */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif;
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+.panel {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 0.1),
+    0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+canvas {
+  display: block;
+  background-color: #f8fafc;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #4f46e5;
+  cursor: pointer;
+  border-radius: 50%;
+}
+input[type='range']::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #4f46e5;
+  cursor: pointer;
+  border-radius: 50%;
+}
+button {
+  transition: all 0.2s;
+}
+button[aria-pressed='true'] {
+  background-color: #4338ca;
+  color: #ffffff;
+}
+.formula-breakdown {
+  font-family:
+    ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Oxygen Mono',
+    'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  font-size: 1rem; /* Increased font size */
+  line-height: 1.6;
+  background-color: #f8fafc;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  height: 100%;
+}
+.formula-breakdown b,
+.angle-breakdown b {
+  color: #4f46e5;
+}
+.angle-breakdown {
+  font-family:
+    ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Oxygen Mono',
+    'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+/* With the v3 CDN the hover utility out-ranked the rule above; v4 layers utilities below plain CSS. */
+button[aria-pressed='true']:hover {
+  background-color: var(--color-indigo-200);
+}

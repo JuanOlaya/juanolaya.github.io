@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:legacy-scripts": "node tooling/build-legacy-scripts.ts",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -19,6 +20,8 @@
     "check:urls": "node tooling/check-public-urls.ts"
   },
   "dependencies": {
+    "lucide-vue-next": "1.0.0",
+    "mathjax": "3.2.2",
     "p5": "1.11.13",
     "vue": "3.5.45"
   },
@@ -39,6 +42,7 @@
     "vite": "8.3.6",
     "vitest": "5.1.0",
     "vue-eslint-parser": "10.4.2",
-    "vue-tsc": "3.3.14"
+    "vue-tsc": "3.3.14",
+    "zod": "4.6.7"
   }
 }
