@@ -25,7 +25,8 @@ export const siteEntries: readonly SiteEntry[] = [
   // Project pages, one public URL per folder.
   { kind: 'legacy', path: 'Antonella' },
   { kind: 'legacy', path: 'Balconity' },
-  { kind: 'legacy', path: 'Deutsch_lernen' },
+  // Deutsch_lernen/src/ holds the TypeScript schemas and tests of its migration (#14), not site files.
+  { kind: 'legacy', path: 'Deutsch_lernen', exclude: ['src'] },
   { kind: 'legacy', path: 'EurekaWall' },
   { kind: 'legacy', path: 'EurekaWall3' },
   { kind: 'legacy', path: 'EurekaWall_old' },
