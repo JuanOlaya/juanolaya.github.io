@@ -58,6 +58,19 @@ function bounceEdges(player: Player): boolean {
   return false;
 }
 
+/**
+ * The end walls are solid: the original only clamped arrow-key moves, so sideways speed from a
+ * corner bounce could carry the ball past a wall into a void with nothing to land on, forever.
+ * Hitting a wall reflects the ball like a platform face does.
+ */
+function bounceWalls(player: Player, worldWidth: number): boolean {
+  const x = clamp(player.x, RADIUS, worldWidth - RADIUS);
+  if (x === player.x) return false;
+  player.x = x;
+  player.vx = -player.vx;
+  return true;
+}
+
 function applyInput(player: Player, input: Input, worldWidth: number): void {
   if (input.left) player.x = clamp(player.x - SPEED_X, RADIUS, worldWidth - RADIUS);
   if (input.right) player.x = clamp(player.x + SPEED_X, RADIUS, worldWidth - RADIUS);
@@ -71,15 +84,17 @@ function applyInput(player: Player, input: Input, worldWidth: number): void {
 /** One original frame: gravity, edges, input, then every platform; mutates and reports events. */
 export function stepPlayer(player: Player, input: Input, level: Level): StepEvents {
   const events: StepEvents = { landingSpeed: 0, wallHit: false, respawned: false };
+  const from = { x: player.x, y: player.y };
   player.minSpeed = Math.min(player.minSpeed, player.vy);
   player.vy += GRAVITY;
   player.x += player.vx;
   player.y += player.vy;
   events.respawned = bounceEdges(player);
+  events.wallHit = bounceWalls(player, level.width);
   applyInput(player, input, level.width);
   for (const platform of level.platforms) {
     const before = player.vy;
-    const side = collideCircleRect(player, platform);
+    const side = collideCircleRect(player, platform, from);
     if (side === 3) events.landingSpeed = Math.max(events.landingSpeed, before);
     else if (side !== 0) events.wallHit = true;
   }

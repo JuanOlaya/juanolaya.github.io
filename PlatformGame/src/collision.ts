@@ -11,16 +11,20 @@ interface Body {
   side: number;
 }
 
+interface Point {
+  x: number;
+  y: number;
+}
+
 /**
- * Which of the 12 regions around the platform the ball is in (clock-face numbering of the original),
- * and the closest point on the platform to test against. Inside the platform the previous side is kept.
+ * Which of the 12 regions around the platform the point is in (clock-face numbering of the original),
+ * and the closest point on the platform to test against; side 0 when the point is inside the platform.
  * Based on Jeff Thompson's circle/rectangle test, extended by Juan Olaya: https://www.openprocessing.org/sketch/627378
  */
-export function closestSide(body: Body, rect: Platform): { side: number; testX: number; testY: number } {
-  const { x, y } = body;
+export function closestSide({ x, y }: Point, rect: Platform): { side: number; testX: number; testY: number } {
   const right = rect.x + rect.w;
   const bottom = rect.y + rect.h;
-  let side = body.side;
+  let side = 0;
   let testX = x;
   let testY = y;
   if (x < rect.x) [testX, side] = [rect.x, 12];
@@ -99,11 +103,18 @@ function respond(body: Body, rect: Platform, side: number): void {
   }
 }
 
-/** Resolves a ball/platform hit in place; returns the side hit, or 0 when they do not touch. */
-export function collideCircleRect(body: Body, rect: Platform): number {
-  const { side, testX, testY } = closestSide(body, rect);
+/**
+ * Resolves a ball/platform hit in place; returns the side hit, or 0 when they do not touch.
+ * A fast ball can end a step with its centre inside the platform. The original then reused the
+ * side found for the previously tested platform, which threw the ball out through the wrong face,
+ * even past the end walls; instead it leaves through the face it came from (`from`, its position
+ * before the step), or the top when that is unknown.
+ */
+export function collideCircleRect(body: Body, rect: Platform, from: Point = body): number {
+  const hit = closestSide(body, rect);
+  const side = hit.side || closestSide(from, rect).side || 3;
   body.side = side;
-  if (Math.hypot(body.x - testX, body.y - testY) > RADIUS) return 0;
+  if (Math.hypot(body.x - hit.testX, body.y - hit.testY) > RADIUS) return 0;
   respond(body, rect, side);
   return side;
 }

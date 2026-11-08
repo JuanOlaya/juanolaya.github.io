@@ -186,10 +186,12 @@ function createSketch(state: GameState, stage: HTMLElement, controls: Controls, 
 export interface GameHost {
   stage: HTMLElement;
   pad: HTMLElement;
+  /** Slot beside or above the stage for the controls panel, so it never covers the canvas. */
+  panel: HTMLElement;
 }
 
 /** Mounts the game; everything it adds is removed on pagehide so a bfcache restore can mount afresh. */
-export function mountPlatformGame({ stage, pad }: GameHost): () => void {
+export function mountPlatformGame({ stage, pad, panel }: GameHost): () => void {
   const state = createState(prefersReducedMotion());
   const controls = attachControls(pad, () => wake(state));
   let instance: p5 | undefined;
@@ -198,7 +200,7 @@ export function mountPlatformGame({ stage, pad }: GameHost): () => void {
     instance = p;
     createSketch(state, stage, controls, observer)(p);
   }, stage);
-  const unmountUi = mountSketchUi(document.body, {
+  const unmountUi = mountSketchUi(panel, {
     title: 'Platform Game',
     caption: 'Bounce across random platforms. ← → move, hold ↑ while rising to jump higher.',
     placement: 'top',

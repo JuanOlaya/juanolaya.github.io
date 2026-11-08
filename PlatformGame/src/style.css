@@ -20,17 +20,82 @@ body {
   overscroll-behavior: none;
 }
 
+/* The controls panel gets its own grid cell, above the stage or beside it, so it never covers the canvas. */
 .game {
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template:
+    'panel' auto
+    'stage' minmax(0, 1fr)
+    'pad' auto
+    / minmax(0, 1fr);
+  gap: max(8px, var(--gutter));
   height: 100dvh;
   box-sizing: border-box;
   padding: var(--gutter);
   padding-bottom: max(var(--gutter), env(safe-area-inset-bottom));
 }
 
+.game__panel {
+  grid-area: panel;
+  min-width: 0;
+}
+
+/* In the page flow instead of the shared fixed overlay. */
+.game__panel .sketch-ui {
+  position: static;
+  max-width: none;
+}
+
+.game__panel .sketch-ui--collapsed .sketch-ui__body {
+  display: none;
+}
+
+/* Wide enough for one compact row: title, caption and buttons side by side. */
+@media (min-width: 900px) {
+  .game__panel .sketch-ui,
+  .game__panel .sketch-ui__body {
+    display: flex;
+    align-items: center;
+    gap: 8px 20px;
+  }
+
+  .game__panel .sketch-ui__body {
+    flex: 1;
+    justify-content: space-between;
+    min-width: 0;
+  }
+
+  .game__panel .sketch-ui__caption {
+    margin: 0;
+  }
+}
+
+/* Very wide windows have spare width beside the 16:9 canvas: the panel moves into a side column. */
+@media (min-width: 1100px) and (min-aspect-ratio: 2/1) {
+  .game {
+    grid-template:
+      'stage panel' minmax(0, 1fr)
+      'pad pad' auto
+      / minmax(0, 1fr) 260px;
+  }
+
+  .game__panel {
+    align-self: start;
+  }
+
+  .game__panel .sketch-ui,
+  .game__panel .sketch-ui__body {
+    display: block;
+  }
+
+  .game__panel .sketch-ui__caption {
+    margin: 4px 0 10px;
+  }
+}
+
 /* The canvas keeps the original 1366x768 aspect and is centred; the rest is letterbox. */
 .game__stage {
+  grid-area: stage;
   display: grid;
   place-items: center;
   min-width: 0;
@@ -47,6 +112,7 @@ body {
 
 /* Touch controls sit below the play area, never on top of it. */
 .game__pad {
+  grid-area: pad;
   display: none;
   gap: 16px;
   padding: 16px 8px 8px;
