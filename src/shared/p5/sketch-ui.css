@@ -113,31 +113,6 @@
   }
 
   /* Title and caption share one line so the panel covers as little of the sketch as possible. */
-  .sketch-ui--bottom {
-    bottom: 16px;
-  }
-
-  .sketch-ui--top {
-    top: 16px;
-  }
-
-  .sketch-ui__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .sketch-ui--collapsed .sketch-ui__body {
-    display: none;
-  }
-
-  .sketch-ui .sketch-ui__collapse {
-    min-height: 28px;
-    padding: 0 10px;
-    font-size: 12px;
-  }
-
   .sketch-ui__title {
     display: inline;
     margin-right: 6px;
