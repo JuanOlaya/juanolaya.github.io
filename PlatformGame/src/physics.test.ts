@@ -86,3 +86,47 @@ describe('collideCircleRect', () => {
     expect(ball).toMatchObject({ vx: -7, x: 100 - RADIUS });
   });
 });
+
+describe('world edges', () => {
+  // Owner's report: sideways speed from a corner bounce carried the ball past the full-height end
+  // wall, where it fell and respawned forever beside the wall with nothing to land on.
+  const FIRST = { x: 0, y: 500, w: 200, h: 268 };
+  const LAST = { x: 330, y: 500, w: 200, h: 268 };
+  const WORLD: Level = { platforms: [FIRST, LAST], width: 530 };
+
+  function play(ball: ReturnType<typeof createPlayer>, steps: number) {
+    let landed = false;
+    for (let i = 0; i < steps; i++) {
+      landed ||= stepPlayer(ball, NO_INPUT, WORLD).landingSpeed > 0;
+      expect(ball.x).toBeGreaterThanOrEqual(RADIUS);
+      expect(ball.x).toBeLessThanOrEqual(WORLD.width - RADIUS);
+    }
+    return landed;
+  }
+
+  it('keeps a ball flying left inside the left wall', () => {
+    const ball = player({ x: 100, y: 100, vx: -15 });
+    expect(play(ball, 300)).toBe(true);
+  });
+
+  it('keeps a ball flying right inside the right wall', () => {
+    const ball = player({ x: 430, y: 100, vx: 15 });
+    expect(play(ball, 300)).toBe(true);
+  });
+
+  it('throws a ball that tunnels into the last platform back out of the face it came from', () => {
+    // Fast enough to end the step inside the platform; the stale side of the previously tested
+    // platform used to push it out through the right face, into the end wall.
+    const ball = player({ x: 290, y: 650, vx: 30 });
+    const events = stepPlayer(ball, { ...NO_INPUT, right: true }, WORLD);
+    expect(ball).toMatchObject({ x: LAST.x - RADIUS, vx: -30, side: 12 });
+    expect(events.wallHit).toBe(true);
+  });
+
+  it('bounces off an end wall like a platform face', () => {
+    const ball = player({ x: 40, y: 100, vx: -15 });
+    const events = stepPlayer(ball, NO_INPUT, WORLD);
+    expect(ball).toMatchObject({ x: RADIUS, vx: 15 });
+    expect(events.wallHit).toBe(true);
+  });
+});

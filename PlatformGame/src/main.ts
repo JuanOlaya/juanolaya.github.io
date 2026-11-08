@@ -10,11 +10,12 @@ void document.fonts.load(`bold 16px "${SANS}"`);
 
 const stage = document.querySelector<HTMLElement>('.game__stage');
 const pad = document.querySelector<HTMLElement>('.game__pad');
+const panel = document.querySelector<HTMLElement>('.game__panel');
 
-if (stage && pad) {
-  mountPlatformGame({ stage, pad });
+if (stage && pad && panel) {
+  mountPlatformGame({ stage, pad, panel });
   // Everything was torn down on pagehide; a page restored from the bfcache needs a fresh game.
   window.addEventListener('pageshow', (event) => {
-    if (event.persisted) mountPlatformGame({ stage, pad });
+    if (event.persisted) mountPlatformGame({ stage, pad, panel });
   });
 }
