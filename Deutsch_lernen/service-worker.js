@@ -1,7 +1,6 @@
-const CACHE_NAME = 'deutsch-lernen-v2.7';
+const CACHE_NAME = 'deutsch-lernen-v2.8';
 const ASSETS_TO_CACHE = [
     './',
-    './index_OLD.html',
     './index.html',
     './styles.css',
     // Verben Section
