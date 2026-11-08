@@ -47,7 +47,7 @@ export const siteEntries: readonly SiteEntry[] = [
     exclude: ['server.js', 'package.json', 'package-lock.json', 'node_modules'],
   },
   { kind: 'legacy', path: 'TestingSoSci' },
-  { kind: 'legacy', path: 'Tropical' },
+  { kind: 'vite', dir: 'Tropical' },
   { kind: 'legacy', path: 'UX' },
   { kind: 'legacy', path: 'Website' },
   { kind: 'legacy', path: 'WeightLever' },
