@@ -1,4 +1,4 @@
-import type { Vec2 } from './ball.ts';
+import { easeFactor, type Vec2 } from './motion.ts';
 
 /** A card's box in viewport pixels, which are also canvas pixels because the canvas is fixed at 0,0. */
 export interface Rect {
@@ -17,9 +17,10 @@ export function orbitPoint(rect: Rect, angle: number, padding: number): Vec2 {
   };
 }
 
-/** Moves `from` a fraction `ease` (0..1) of the way to `to`, so the ring glides instead of jumping. */
-export function steer(from: Vec2, to: Vec2, ease: number): Vec2 {
-  return { x: from.x + (to.x - from.x) * ease, y: from.y + (to.y - from.y) * ease };
+/** Glides `from` toward `to` at `rate` per second over `dt` seconds, the same at any frame rate. */
+export function steer(from: Vec2, to: Vec2, rate: number, dt: number): Vec2 {
+  const k = easeFactor(rate, dt);
+  return { x: from.x + (to.x - from.x) * k, y: from.y + (to.y - from.y) * k };
 }
 
 /** Ring radius that fits the card: never larger than the normal ball, never hiding a small card. */
