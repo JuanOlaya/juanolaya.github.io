@@ -47,7 +47,7 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'ParticleCanvas/Scripts' },
   { kind: 'vite', dir: 'PixelGrid' },
   { kind: 'legacy', path: 'PixelGrid/Scripts' },
-  { kind: 'legacy', path: 'PlatformGame' },
+  { kind: 'vite', dir: 'PlatformGame' },
   { kind: 'vite', dir: 'Project_Management' },
   // Server code (moving to server/ in #16) must never be published; the page itself may live in
   // Sockets/public/ or Sockets/index.html depending on that move, so the whole folder is listed.
