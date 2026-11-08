@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>German Demonstratives - Nominativ Case</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f7f7; }
+        #table-container { max-width: calc(100vw - 4rem); overflow-x: hidden; }
+        table { width: 100%; table-layout: auto; }
+        td, th { overflow: visible; }
+        .table-cell { padding: 0.25rem 0.3rem; white-space: nowrap; vertical-align: top; font-size: 0.8rem; }
+        .wrap-cell { white-space: normal; }
+        .study-cell { position: relative; display: flex; flex-direction: column; align-items: flex-start; cursor: pointer; padding: 0.3rem 0.3rem; min-height: 3.5rem; justify-content: center; }
+        .merged-gender-cell { padding: 0.25rem 0.3rem; min-height: 5rem; display: flex; flex-direction: column; justify-content: flex-start; }
+        .merged-gender-cell .study-cell { min-height: auto; padding: 0; margin-top: 0.3rem; }
+        .merged-possessive-cell { padding: 0.4rem 0.6rem; white-space: normal; vertical-align: top; font-size: 0.9rem; line-height: 1.2; min-height: 5.5rem; }
+        .german-phrase { color: #1f2937; font-size: 0.8rem; line-height: 1.2; }
+        .base-article-german { background-color: #eff6ff; display: inline-block; padding: 0.05rem 0.2rem; border-radius: 0.25rem; font-weight: 700; color: #1e40af; }
+        .spanish-translation { color: #4b5563; font-style: italic; font-size: 0.8rem; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.3s ease-out, opacity 0.3s ease-out; line-height: 1.2; white-space: normal; margin-top: 0.1rem; }
+        .study-cell:hover .spanish-translation, .study-cell.active .spanish-translation { max-height: 10rem; opacity: 1; }
+        .nominativ-determiner { font-weight: 700; color: #1e40af; background-color: #eff6ff; display: inline-block; padding: 0.1rem 0.2rem; border-radius: 0.25rem; }
+        .force-open .spanish-translation { max-height: 10rem !important; opacity: 1 !important; margin-top: 0.1rem !important; }
+        .stacked-content-line { margin-bottom: 2px; line-height: 1.2; }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">German Demonstratives - Nominativ Case (A1–A2)</h1>
+        <p class="text-gray-600 mb-6">Demostrativos en alemán: dieser (este), jener (aquel), jeder (cada), welcher (cuál).</p>
+        <div id="table-container" class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200"></div>
+        <div class="mt-6 flex justify-end">
+            <button id="toggle-all-button" onclick="toggleAllTranslations()" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-4 5a1 1 0 100 2h2a1 1 0 100-2h-2z" clip-rule="evenodd"/></svg>
+                Mostrar todas las traducciones
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const tableData = [
+            {
+                "Tipo": "dieser (este/esta)",
+                "Trad. Tipo": "este / esta / estos / estas",
+                "der männlich": "dieser",
+                "Männlich (M)": "Dieser Mann ist nett.",
+                "Trad. (M)": "Este hombre es amable.",
+                "die weiblich": "diese",
+                "Weiblich (F)": "Diese Frau arbeitet hier.",
+                "Trad. (F)": "Esta mujer trabaja aquí.",
+                "das neutral": "dieses",
+                "Neutral (N)": "Dieses Kind spielt gern.",
+                "Trad. (N)": "Este niño juega con gusto.",
+                "die plural": "diese",
+                "Plural (P)": "Diese Bücher sind neu.",
+                "Trad. (P)": "Estos libros son nuevos."
+            },
+            {
+                "Tipo": "jener (aquel/aquella)",
+                "Trad. Tipo": "aquel / aquella / aquellos / aquellas",
+                "der männlich": "jener",
+                "Männlich (M)": "Jener Baum ist alt.",
+                "Trad. (M)": "Aquel árbol es viejo.",
+                "die weiblich": "jene",
+                "Weiblich (F)": "Jene Lampe leuchtet hell.",
+                "Trad. (F)": "Aquella lámpara brilla fuerte.",
+                "das neutral": "jenes",
+                "Neutral (N)": "Jenes Haus ist groß.",
+                "Trad. (N)": "Aquella casa es grande.",
+                "die plural": "jene",
+                "Plural (P)": "Jene Autos sind teuer.",
+                "Trad. (P)": "Aquellos carros son caros."
+            },
+            {
+                "Tipo": "jeder (cada)",
+                "Trad. Tipo": "cada (singular)",
+                "der männlich": "jeder",
+                "Männlich (M)": "Jeder Student lernt Deutsch.",
+                "Trad. (M)": "Cada estudiante aprende alemán.",
+                "die weiblich": "jede",
+                "Weiblich (F)": "Jede Antwort ist wichtig.",
+                "Trad. (F)": "Cada respuesta es importante.",
+                "das neutral": "jedes",
+                "Neutral (N)": "Jedes Kind braucht Liebe.",
+                "Trad. (N)": "Cada niño necesita amor.",
+                "die plural": "-",
+                "Plural (P)": "-",
+                "Trad. (P)": "(No se usa en plural)"
+            },
+            {
+                "Tipo": "welcher (cuál)",
+                "Trad. Tipo": "cuál / cuáles (interrogativo)",
+                "der männlich": "welcher",
+                "Männlich (M)": "Welcher Mann ist dein Lehrer?",
+                "Trad. (M)": "¿Cuál hombre es tu profesor?",
+                "die weiblich": "welche",
+                "Weiblich (F)": "Welche Farbe ist schön?",
+                "Trad. (F)": "¿Cuál color es bonito?",
+                "das neutral": "welches",
+                "Neutral (N)": "Welches Buch liest du?",
+                "Trad. (N)": "¿Cuál libro lees?",
+                "die plural": "welche",
+                "Plural (P)": "Welche Filme magst du?",
+                "Trad. (P)": "¿Cuáles películas te gustan?"
+            }
+        ];
+
+        const mergedDeterminerKeys = [
+            { key: "der männlich", example: "Männlich (M)", translation: "Trad. (M)", color: 'bg-blue-200' },
+            { key: "die weiblich", example: "Weiblich (F)", translation: "Trad. (F)", color: 'bg-blue-300' },
+            { key: "das neutral", example: "Neutral (N)", translation: "Trad. (N)", color: 'bg-blue-400' },
+            { key: "die plural", example: "Plural (P)", translation: "Trad. (P)", color: 'bg-blue-500' }
+        ];
+
+        const determinerKeys = ["der männlich", "die weiblich", "das neutral", "die plural"];
+
+        let translationsVisible = false;
+        function toggleAllTranslations() {
+            const studyWrappers = document.querySelectorAll('.study-cell');
+            const button = document.getElementById('toggle-all-button');
+            const table = document.getElementById('table-container');
+            translationsVisible = !translationsVisible;
+            if (translationsVisible) {
+                table.classList.add('force-open');
+                button.textContent = 'Ocultar todas las traducciones';
+            }
+            else {
+                table.classList.remove('force-open');
+                button.textContent = 'Mostrar todas las traducciones';
+                studyWrappers.forEach(w => w.classList.remove('active'));
+            }
+        }
+
+        function renderTable() {
+            const container = document.getElementById('table-container');
+            let html = '<table class="divide-y divide-gray-300">';
+            html += '<thead class="bg-gray-100">';
+            html += '<tr>';
+            html += `<th colspan="1" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 border-r border-gray-300 bg-blue-100">Demostrativo</th>`;
+            html += `<th colspan="4" class="table-cell text-xs font-semibold uppercase tracking-wider text-gray-700 bg-blue-100">Nominativ Case (por Género)</th>`;
+            html += '</tr>';
+            html += '<tr>';
+            html += `<th colspan="1" class="table-cell text-xs font-semibold tracking-wider text-gray-700 border-r border-gray-300 bg-blue-200">Tipo</th>`;
+            const genders = [
+                { title: 'Männlich (M)', color: 'bg-blue-200', colspan: 1 },
+                { title: 'Weiblich (F)', color: 'bg-blue-300', colspan: 1 },
+                { title: 'Neutral (N)', color: 'bg-blue-400', colspan: 1 },
+                { title: 'Plural (P)', color: 'bg-blue-500', colspan: 1 }
+            ];
+            genders.forEach(g => {
+                html += `<th colspan="${g.colspan}" class="table-cell text-xs font-semibold tracking-wider text-gray-900 ${g.color}">${g.title}</th>`;
+            });
+            html += '</tr>';
+            html += '</thead>';
+
+            const keysToSkip = ["Trad. (M)", "Trad. (F)", "Trad. (N)", "Trad. (P)", "Männlich (M)", "Weiblich (F)", "Neutral (N)", "Plural (P)", "Trad. Tipo"];
+
+            html += '<tbody class="divide-y divide-gray-200">';
+            tableData.forEach((row) => {
+                html += `<tr class="hover:bg-opacity-75">`;
+
+                const headers = [
+                    "Tipo", "Trad. Tipo",
+                    "der männlich", "Männlich (M)", "Trad. (M)",
+                    "die weiblich", "Weiblich (F)", "Trad. (F)",
+                    "das neutral", "Neutral (N)", "Trad. (N)",
+                    "die plural", "Plural (P)", "Trad. (P)"
+                ];
+
+                headers.forEach((key) => {
+                    const value = row[key];
+                    if (keysToSkip.includes(key)) return;
+                    let cellClass = 'table-cell text-sm text-gray-800 text-left';
+                    let contentHtml = value;
+
+                    if (determinerKeys.includes(key)) {
+                        const mergedData = mergedDeterminerKeys.find(d => d.key === key);
+                        const determiner = row[mergedData.key];
+                        const exampleValue = row[mergedData.example];
+                        const tradExampleValue = row[mergedData.translation];
+
+                        const exampleTextToBold = determiner;
+                        let styledExampleValue = exampleValue && exampleValue !== '-' ?
+                            exampleValue.replace(new RegExp(`\\b(${exampleTextToBold})\\b`, 'i'), (m) => `<b>${m}</b>`) :
+                            exampleValue;
+                        cellClass += ` merged-gender-cell wrap-cell align-top ${mergedData.color}`;
+
+                        if (exampleValue && exampleValue !== '-' && tradExampleValue && tradExampleValue !== '-') {
+                            contentHtml = `
+                                <span class="nominativ-determiner">${determiner}</span>
+                                <div class="study-cell cursor-pointer p-0 pt-1" onclick="this.classList.toggle('active')">
+                                    <span class="german-phrase whitespace-nowrap">${styledExampleValue}</span>
+                                    <span class="spanish-translation">${tradExampleValue}</span>
+                                </div>`;
+                        } else {
+                            contentHtml = `<span class="nominativ-determiner">${determiner}</span>`;
+                        }
+                    }
+                    else if (key === "Tipo") {
+                        const tipoValue = row["Tipo"];
+                        const tradTipoValue = row["Trad. Tipo"];
+                        contentHtml = `
+                            <div class="stacked-content-line"><span class="base-article-german">${tipoValue}</span></div>
+                            <div class="stacked-content-line text-xs italic text-gray-500" style="margin-top: 0.2rem;">${tradTipoValue}</div>`;
+                        cellClass += ' merged-possessive-cell bg-blue-100';
+                    }
+
+                    html += `<td class="${cellClass}">${contentHtml}</td>`;
+                });
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        window.onload = renderTable;
+    </script>
+</body>
+</html>
