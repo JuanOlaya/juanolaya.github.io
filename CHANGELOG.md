@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.4.1](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.4.0...v0.4.1) (2026-11-08)
+
+
+### Bug Fixes
+
+* **home:** follow the hovered card when the window resizes ([f203810](https://github.com/JuanOlaya/juanolaya.github.io/commit/f2038109cfdcdbd6772c7b6c7c77132c999c5fc8))
+* **home:** follow-ups to [#41](https://github.com/JuanOlaya/juanolaya.github.io/issues/41) (resize handling) ([dad6ac0](https://github.com/JuanOlaya/juanolaya.github.io/commit/dad6ac04da8d5d872442f347a379027833c0c610))
+* **home:** keep the trail frame when the canvas resizes ([751aace](https://github.com/JuanOlaya/juanolaya.github.io/commit/751aace79210da0515d306d5b2213529a531f186))
+
 ## [0.4.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.3.0...v0.4.0) (2026-11-08)
 
 
