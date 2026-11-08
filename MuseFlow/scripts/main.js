@@ -136,6 +136,11 @@ var missedOpportunities=0;
 var flow=0;
 var resultDB1=true;
 var resultDB2=true;
+// Base URL of the server/museflow-php endpoints (see server/README.md). null keeps the study's data
+// collection off, so the static archive on GitHub Pages never makes network calls.
+var dataEndpointBase=null;
+var maxDataRetries=3;
+var countErrorThoughtProbes=0;
 var posXpowerUps;
 
 var thoughtProbesIndex=0;
@@ -2464,6 +2469,9 @@ var countError=0;
 function catchError(error){
   
   countError++;
+  if(countError>maxDataRetries){
+    return;
+  }
   /*
   if(countError>3){
     console.log("The limit was reached");
@@ -2481,6 +2489,10 @@ function catchError(error){
 
 function catchErrorThoughtProbes(error){
   
+  countErrorThoughtProbes++;
+  if(countErrorThoughtProbes>maxDataRetries){
+    return;
+  }
   console.log(error);
   console.log("There was an error in Thought Probes");
   setTimeout(function(){dorequestThoughtProbes().catch(catchErrorThoughtProbes)},3000);
@@ -3111,7 +3123,10 @@ function probeButtons(){
   }
 }
 
-async function dorequestThoughtProbes (){  
+async function dorequestThoughtProbes (){
+  if(!dataEndpointBase){
+    return;
+  }
   //console.trace();
   //console.log("doRequesttt");
   /*
@@ -3150,7 +3165,7 @@ async function dorequestThoughtProbes (){
 
   //console.log("user :"+JSON.stringify(user));
   
-  let response = await fetch('https://cors-anywhere.herokuapp.com/https://hci.w-hs.de/data/futurework/MW-Experiment-8/php/thoughtProbes-db.php', { 
+  let response = await fetch(dataEndpointBase+'/thoughtProbes-db.php', { 
   //let response = await fetch('https://hci.w-hs.de/data/futurework/MW-Experiment-8/php/thoughtProbes-db.php', {
 
     method: 'POST',
@@ -3172,6 +3187,9 @@ async function dorequestThoughtProbes (){
 
 
 async function dorequestPlatforms (){
+  if(!dataEndpointBase){
+    return;
+  }
   //console.trace();
   var arrayPlatforms={levels:[]};
   var levels=[];
@@ -3201,7 +3219,7 @@ async function dorequestPlatforms (){
   var abc= JSON.stringify(arrayPlatforms);
   var zeta= JSON.stringify(levels);
 
-  let response = await fetch('https://cors-anywhere.herokuapp.com/https://hci.w-hs.de/data/futurework/MW-Experiment-8/php/platforms-db.php', {
+  let response = await fetch(dataEndpointBase+'/platforms-db.php', {
   //let response = await fetch('https://hci.w-hs.de/data/futurework/MW-Experiment-8/php/platforms-db.php', {
 
   method: 'POST',
