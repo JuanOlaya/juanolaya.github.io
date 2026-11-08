@@ -32,7 +32,7 @@ export function mountInspirationalWall(config: WallConfig, host: HTMLElement = d
       p.pixelDensity(pixelDensityFor(window.devicePixelRatio));
       renderer.position(0, 0);
       renderer.style('z-index', CANVAS_Z_INDEX);
-      canvas = canvasElement(renderer);
+      canvas = renderer.elt;
       setupState(p, state);
     };
     p.draw = () => drawFrame(p, state, canvas);
@@ -42,10 +42,8 @@ export function mountInspirationalWall(config: WallConfig, host: HTMLElement = d
     };
     p.mousePressed = () => handlePress(p, state, canvas);
     p.mouseDragged = () => handleDrag(p, state);
+    // p5 2 drives these from pointer events, so touches reach them too; touchStarted/touchEnded are gone.
     p.mouseReleased = () => handleRelease(p, state);
-    // p5 1.4 forwarded touch start/end to the mouse handlers; p5 1.11 only does so for touchmove.
-    p.touchStarted = () => handlePress(p, state, canvas);
-    p.touchEnded = () => handleRelease(p, state);
     p.keyPressed = () => handleKey(state, p.keyCode);
   }, host);
   const unmountUi = mountSketchUi(host, { ...panelFor(state, () => instance), placement: 'top' });
@@ -67,13 +65,6 @@ function panelFor(state: WallState, sketch: () => p5 | undefined): SketchUiOptio
 
 function buildPixels(p: p5): Pixel[] {
   return pixelGridPositions(p.width, p.height).map(({ x, y }) => new Pixel(x, y, p));
-}
-
-// p5 types `elt` as `any`; checking it keeps the rest of the sketch strictly typed.
-function canvasElement(renderer: p5.Renderer): HTMLCanvasElement {
-  const elt: unknown = renderer.elt;
-  if (!(elt instanceof HTMLCanvasElement)) throw new Error('p5 did not create a 2D canvas');
-  return elt;
 }
 
 function setupState(p: p5, state: WallState): void {

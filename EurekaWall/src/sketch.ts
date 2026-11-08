@@ -115,7 +115,7 @@ function drawStart(p: p5, state: WallState): void {
 function drawTitlePill(p: p5, app: WallApp, x: number, y: number, size: number): void {
   p.textSize(size);
   p.textStyle(p.BOLD);
-  const pillWidth = p.textWidth(app.title) + size * 1.6;
+  const pillWidth = p.fontWidth(app.title) + size * 1.6;
   p.rectMode(p.CENTER);
   p.noFill();
   p.stroke(app.color);
@@ -169,17 +169,12 @@ function listenToCanvas(canvas: HTMLCanvasElement, state: WallState): void {
 
 function loadIcons(p: p5, state: WallState): void {
   ICON_URLS.forEach((url, i) => {
-    p.loadImage(url, (image) => {
-      state.icons[i] = image;
-    });
+    // p5 2 returns a promise; an icon that fails to load simply stays undrawn.
+    p.loadImage(url).then(
+      (image) => (state.icons[i] = image),
+      () => undefined,
+    );
   });
-}
-
-// p5 types `elt` as `any`; checking it keeps the rest of the sketch strictly typed.
-function canvasElement(renderer: p5.Renderer): HTMLCanvasElement {
-  const elt: unknown = renderer.elt;
-  if (!(elt instanceof HTMLCanvasElement)) throw new Error('p5 did not create a 2D canvas');
-  return elt;
 }
 
 function createSketch(state: WallState, reduced: boolean): (p: p5) => void {
@@ -189,7 +184,7 @@ function createSketch(state: WallState, reduced: boolean): (p: p5) => void {
       p.pixelDensity(pixelDensityFor(window.devicePixelRatio));
       p.textFont('Work Sans');
       state.layout = wheelLayout(p.width, p.height, COUNT);
-      listenToCanvas(canvasElement(renderer), state);
+      listenToCanvas(renderer.elt, state);
       loadIcons(p, state);
     };
     p.draw = () => {

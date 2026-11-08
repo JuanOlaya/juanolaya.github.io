@@ -62,7 +62,7 @@ function createSketch(state: MultitouchState): (p: p5) => void {
       const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
       p.pixelDensity(pixelDensityFor(window.devicePixelRatio));
       canvas.elt.setAttribute('aria-label', 'Multitouch test: each touch draws a red circle');
-      bindPointers(canvas.elt as HTMLCanvasElement, state);
+      bindPointers(canvas.elt, state);
     };
     p.windowResized = () => p.resizeCanvas(p.windowWidth, p.windowHeight);
     p.draw = () => {
