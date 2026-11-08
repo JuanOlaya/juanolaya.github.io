@@ -4,6 +4,7 @@ import BouncingBallsBackground from './components/BouncingBallsBackground.vue';
 import HomeControls from './components/HomeControls.vue';
 import ProfileCard from './components/ProfileCard.vue';
 import ProjectGrid from './components/ProjectGrid.vue';
+import ProjectPages from './components/ProjectPages.vue';
 import SocialLinks from './components/SocialLinks.vue';
 import { isGridToggleShortcut } from './shortcuts';
 
@@ -27,6 +28,7 @@ onBeforeUnmount(() => document.removeEventListener('keyup', toggleGridOnSpace));
       <ProjectGrid />
       <SocialLinks />
     </div>
+    <ProjectPages />
   </div>
   <HomeControls
     :grid-visible="gridVisible"
