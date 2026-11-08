@@ -8,7 +8,7 @@ import type { SiteEntry } from './page-inputs.ts';
  *   `vite` entry with the same folder, so its public URL does not change.
  *
  * Not published on purpose: `Haptic_Controller_3D_modelling/` (Fusion 360 add-in, not web content),
- * `Repository_Housekeeping/` (maintenance reports), `Sockets/` server files (only `Sockets/public/` is a page).
+ * `Repository_Housekeeping/` (maintenance reports), `Sockets/` server files and dependencies.
  */
 export const siteEntries: readonly SiteEntry[] = [
   // Pipeline sanity check: Vue 3 + Tailwind (build) + p5 from npm. Remove once a real page is migrated.
@@ -39,7 +39,13 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'PlatformGame' },
   { kind: 'legacy', path: 'Project_Management' },
   { kind: 'legacy', path: 'PruebaGithub' },
-  { kind: 'legacy', path: 'Sockets/public' },
+  // Server code (moving to server/ in #16) must never be published; the page itself may live in
+  // Sockets/public/ or Sockets/index.html depending on that move, so the whole folder is listed.
+  {
+    kind: 'legacy',
+    path: 'Sockets',
+    exclude: ['server.js', 'package.json', 'package-lock.json', 'node_modules'],
+  },
   { kind: 'legacy', path: 'TestingSoSci' },
   { kind: 'legacy', path: 'Tropical' },
   { kind: 'legacy', path: 'UX' },
