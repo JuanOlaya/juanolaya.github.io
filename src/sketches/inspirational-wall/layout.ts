@@ -56,6 +56,15 @@ export function pixelGridPositions(width: number, height: number, size = PIXEL_S
   return positions;
 }
 
+/** Centres of the four artist portraits on the artwork screen, on a 50 × 50 grid of the canvas. */
+export function artistSpots(width: number, height: number): Point[] {
+  const columns = [9, 30];
+  const rows = [13, 37];
+  return columns.flatMap((column) =>
+    rows.map((row) => ({ x: (column * width) / 50, y: (row * height) / 50 })),
+  );
+}
+
 /** X of the n-th slot of the colour/shape bar at the bottom of the painting screen. */
 export function shapeBarX(slot: number, width: number, size = PIXEL_SIZE): number {
   return width / 25 + (size * slot + SHAPE_BAR_GAP * slot);

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  artistSpots,
   distance,
   isInHomeCorner,
   nextPinchedStatus,
@@ -62,5 +63,16 @@ describe('nextPinchedStatus', () => {
 describe('distance', () => {
   it('is euclidean', () => {
     expect(distance(0, 0, 3, 4)).toBe(5);
+  });
+});
+
+describe('artistSpots', () => {
+  it('keeps the original order: left column top and bottom, then right column', () => {
+    expect(artistSpots(1000, 500)).toEqual([
+      { x: 180, y: 130 },
+      { x: 180, y: 370 },
+      { x: 600, y: 130 },
+      { x: 600, y: 370 },
+    ]);
   });
 });

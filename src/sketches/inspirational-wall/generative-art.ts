@@ -1,3 +1,4 @@
+import { frameScale } from '@shared/p5/frame-scale.ts';
 import type p5 from 'p5';
 import {
   align,
@@ -16,6 +17,10 @@ import { Vec2 } from './vec2.ts';
 
 const VELOCITY_ROTATION = 0.09;
 const SEEK_STRENGTH = 5;
+const LINE_HALF_LENGTH = 20;
+/** Toolbar row: icons sit on discs this far above the bottom edge. */
+const TOOLBAR_OFFSET_Y = 50;
+const BUTTON_DISC_DIAMETER = 57;
 
 /** Screen 20: two flocks of shapes; with two fingers each flock follows its own finger. */
 export function drawGenerativeArt(p: p5, state: WallState, touches: readonly Point[]): void {
@@ -25,8 +30,9 @@ export function drawGenerativeArt(p: p5, state: WallState, touches: readonly Poi
   if (state.groupB.length < state.amountShapes) state.groupB.push(createAgent(rng, p.width, p.height));
 
   const [targetA, targetB] = flockTargets(p, touches);
-  updateFlock(p, state, state.groupA, targetA);
-  updateFlock(p, state, state.groupB, targetB);
+  const frames = frameScale(p.deltaTime);
+  updateFlock(p, state, state.groupA, targetA, frames);
+  updateFlock(p, state, state.groupB, targetB, frames);
   drawToolbar(p, state);
 }
 
@@ -44,21 +50,21 @@ function flockTargets(p: p5, touches: readonly Point[]): [Vec2, Vec2] {
   return [pointer, pointer];
 }
 
-function updateFlock(p: p5, state: WallState, group: Agent[], target: Vec2): void {
+function updateFlock(p: p5, state: WallState, group: Agent[], target: Vec2, frames: number): void {
   for (const agent of group) {
     if (!state.paused) {
       if (p.mouseIsPressed) seek(agent, target, SEEK_STRENGTH);
       separate(agent, group, 1);
       align(agent, group);
       cohesion(agent, group, p.mouseY < p.height / 2, 1);
-      move(agent, state.speedFactor);
+      move(agent, state.speedFactor, frames);
       wrap(agent, p.width, p.height);
     }
-    renderAgent(p, state, agent);
+    renderAgent(p, state, agent, frames);
   }
 }
 
-function renderAgent(p: p5, state: WallState, agent: Agent): void {
+function renderAgent(p: p5, state: WallState, agent: Agent, frames: number): void {
   if (state.shape === 1) {
     p.rectMode(p.CENTER);
     p.strokeWeight(1);
@@ -67,12 +73,12 @@ function renderAgent(p: p5, state: WallState, agent: Agent): void {
     p.push();
     p.translate(agent.pos.x, agent.pos.y);
     p.rotate(agent.vel.heading());
-    p.line(-20, 0, 20, 0);
+    p.line(-LINE_HALF_LENGTH, 0, LINE_HALF_LENGTH, 0);
     p.pop();
     return;
   }
   if (state.shape !== 2 && state.shape !== 3) return;
-  if (!state.paused) agent.rot = agent.rot + VELOCITY_ROTATION;
+  if (!state.paused) agent.rot = agent.rot + VELOCITY_ROTATION * frames;
   p.push();
   p.translate(agent.pos.x, agent.pos.y);
   p.rotate(agent.rot);
@@ -93,11 +99,11 @@ function renderAgent(p: p5, state: WallState, agent: Agent): void {
 function buttonDisc(p: p5, x: number): void {
   p.fill(BACKGROUND_COLOR);
   p.noStroke();
-  p.ellipse(x, p.height - 50, 57, 57);
+  p.ellipse(x, p.height - TOOLBAR_OFFSET_Y, BUTTON_DISC_DIAMETER, BUTTON_DISC_DIAMETER);
 }
 
 function drawToolbar(p: p5, state: WallState): void {
-  const y = p.height - 50;
+  const y = p.height - TOOLBAR_OFFSET_Y;
   drawTraceButton(p, y);
   drawPauseButton(p, state, y);
   drawShapeButtons(p, y);

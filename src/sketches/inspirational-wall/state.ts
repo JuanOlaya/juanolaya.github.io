@@ -1,6 +1,7 @@
 import type { WallConfig } from './config.ts';
 import type { Agent } from './flocking.ts';
 import type { Pixel } from './pixel.ts';
+import { GeneralMode, type Screen } from './screens.ts';
 
 export const BACKGROUND_COLOR = '#1E1E1E';
 export const BUTTON_COLOR = '#EFD8B9';
@@ -23,10 +24,8 @@ export interface Artist {
 /** Everything the original sketch kept in globals shared across its 15 scripts. */
 export interface WallState {
   config: WallConfig;
-  /** 0 menu, 10–12 pixel grid, 20 generative art, 30 webcam window, 31 artist profile. */
-  screen: number;
-  /** Keys 1/2 switch between the wall (1) and a plain brown screen (2). */
-  generalMode: number;
+  screen: Screen;
+  generalMode: GeneralMode;
   showingCursor: boolean;
   cursorHideAt: number;
 
@@ -41,6 +40,8 @@ export interface WallState {
   artists: Artist[];
   webcamStatus: number;
   noiseStep: number;
+  /** Rotation (radians) of the pulsing pentagon on the profile screen. */
+  profileAngle: number;
 
   paused: boolean;
   /** When false the background is not cleared, so shapes leave trails. */
@@ -57,7 +58,7 @@ export function createWallState(config: WallConfig): WallState {
   return {
     config,
     screen: config.screen,
-    generalMode: 1,
+    generalMode: GeneralMode.Wall,
     showingCursor: true,
     cursorHideAt: 0,
     pixels: [],
@@ -70,6 +71,7 @@ export function createWallState(config: WallConfig): WallState {
     artists: [],
     webcamStatus: 3,
     noiseStep: 0,
+    profileAngle: 0,
     paused: false,
     clearBackground: true,
     shape: 2,
