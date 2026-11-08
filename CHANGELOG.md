@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.2](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.9.1...v0.9.2) (2026-11-08)
+
+
+### Bug Fixes
+
+* **platformgame:** el panel de estadísticas no tapa el título en móvil ([949a47b](https://github.com/JuanOlaya/juanolaya.github.io/commit/949a47bc33db8b80369baf60ad7baf45e5d82c8b))
+
 ## [0.9.1](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.9.0...v0.9.1) (2026-11-08)
 
 
