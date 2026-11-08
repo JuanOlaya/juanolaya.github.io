@@ -54,4 +54,7 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'vite', dir: 'WeightLever', html: 'weightLever_simulation_Gemini_v4.html' },
   { kind: 'legacy', path: 'WeightLever', exclude: ['src', 'weightLever_simulation_Gemini_v4.html'] },
   { kind: 'legacy', path: 'multitouchTest' },
+
+  // Archived pages (issue #7). The old folders above keep only redirect stubs pointing here.
+  { kind: 'legacy', path: 'legacy' },
 ];

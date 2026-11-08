@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W-Fragen: Infografía Interactiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f3f4f6; /* Fondo gris claro neutro original */
+            --text-color: #1f2937;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 800px;
+        }
+
+        h1 {
+            color: #111827;
+            margin-bottom: 15px;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.05rem;
+        }
+
+        h1 span {
+            color: #d97706;
+            border-bottom: 4px solid #d97706;
+        }
+
+        p.instruction {
+            color: #6b7280;
+            font-size: 1.25rem;
+        }
+
+        /* Grid Layout */
+        .infographic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 40px; /* Espacio vertical extra para el icono flotante */
+            max-width: 1200px;
+            width: 100%;
+            padding-bottom: 60px;
+        }
+
+        /* Estilo de las Tarjetas */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: visible; /* Importante para el icono flotante */
+            display: flex;
+            flex-direction: column;
+            min-height: 280px;
+            border: none;
+            margin-top: 10px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Header con Color Sólido */
+        .card-header {
+            background-color: var(--card-main);
+            color: white;
+            padding: 40px 15px 45px 15px; /* Espacio abajo para el icono */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-grow: 0;
+            height: auto;
+            border-radius: 20px 20px 0 0;
+        }
+
+        /* ICONO FLOTANTE EN EL BORDE */
+        .icon-floating {
+            width: 60px;
+            height: 60px;
+            background-color: var(--card-pastel);
+            color: var(--card-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            
+            /* Posicionamiento: Mitad arriba, mitad abajo */
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            
+            /* Sin borde blanco */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        /* Body Blanco */
+        .card-body {
+            background-color: white;
+            /* Padding superior aumentado para no chocar con el icono */
+            padding: 45px 20px 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            border-radius: 0 0 20px 20px;
+        }
+
+        /* Palabra Alemán */
+        .german-word {
+            display: block; 
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: white; 
+            margin-bottom: 0;
+            line-height: 1.1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Traducción (En el header) */
+        .spanish-meaning {
+            display: block;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+            margin-bottom: 0;
+            margin-top: 5px;
+        }
+
+        /* Badge en la Tarjeta (En el body) - CORREGIDO A GRIS */
+        .card-category-badge {
+            background-color: #f3f4f6; /* Gris muy claro */
+            color: #6b7280; /* Gris medio para el texto */
+            padding: 6px 12px; 
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 15px;
+            display: inline-block;
+            box-shadow: none; /* Eliminada sombra para que sea más plano/sutil */
+        }
+
+        /* Ejemplo (Limpio) */
+        .card-exam-example {
+            width: 90%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            position: relative;
+            padding: 5px 0; 
+            background-color: transparent;
+            border: none;
+            margin-top: auto; 
+        }
+
+        .example-text {
+            display: block;
+            line-height: 1.4;
+        }
+
+        .example-text.de {
+            font-size: 1.1rem;
+            color: #1f2937;
+            font-weight: 700;
+        }
+
+        .example-text.es {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        /* Ventana Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 24px;
+            max-width: 550px;
+            width: 90%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            background-color: var(--modal-color, #f3f4f6);
+            padding: 40px 30px 30px;
+            color: white;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .close-btn:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        .modal-title-group {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .modal-category-badge {
+            background-color: var(--modal-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .modal-title {
+            font-size: 3rem;
+            margin: 0;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+        
+        .modal-subtitle {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+        
+        .modal-note {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid rgba(255, 255, 255, 0.8);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            text-align: left;
+            display: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .modal-body {
+            padding: 30px;
+            background: white;
+            overflow-y: auto;
+        }
+
+        /* --- ESTILOS GRAMÁTICA --- */
+        .grammar-section {
+            margin-bottom: 25px;
+        }
+
+        .grammar-toggle-btn {
+            background-color: #f3f4f6;
+            color: #4b5563;
+            border: 2px solid transparent;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .grammar-toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            filter: brightness(0.95);
+            background-color: #e5e7eb;
+        }
+
+        .grammar-content {
+            display: none;
+            background-color: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #4b5563;
+            line-height: 1.6;
+            text-align: left;
+            animation: slideDown 0.3s ease-out;
+            position: relative;
+        }
+
+        .grammar-content::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 6px 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent #fcd34d transparent;
+        }
+
+        .grammar-content strong {
+            color: #111827;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .examples-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #9ca3af;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .example-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            transition: transform 0.2s;
+        }
+
+        .example-item:hover {
+            transform: translateX(5px);
+            border-color: var(--modal-color);
+            background-color: white;
+        }
+
+        .example-number {
+            font-weight: 700;
+            color: var(--modal-color);
+            margin-right: 15px;
+            font-size: 1.2rem;
+            opacity: 0.5;
+        }
+
+        .example-content {
+            flex: 1;
+        }
+
+        .example-de {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .example-es {
+            display: block;
+            font-size: 1rem;
+            color: #6b7280;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #9ca3af;
+            text-align: center;
+        }
+
+        /* Animación para el icono del modal */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .modal-icon-float {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Las <span>W-Fragen</span></h1>
+        <p class="instruction">Haz clic en las tarjetas para ver más detalles.</p>
+    </header>
+
+    <div class="infographic-grid" id="gridContainer">
+        <!-- Generado por JS -->
+    </div>
+
+    <footer>
+        Hecho con ❤️ para aprender alemán
+    </footer>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content" id="modalContent">
+            <div class="modal-header" id="modalHeader">
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+                <div class="modal-title-group">
+                    <span id="modalIcon" class="modal-icon-float"></span>
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <div class="modal-subtitle" id="modalSubtitle"></div>
+                    <div id="modalNote" class="modal-note"></div>
+                </div>
+            </div>
+            <div class="modal-body">
+                
+                <!-- Badge movido aquí (fuera del área de color) -->
+                <div style="text-align: center;">
+                    <div id="modalBadge" class="modal-category-badge"></div>
+                </div>
+
+                <!-- Sección Gramática -->
+                <div class="grammar-section">
+                    <button id="grammarBtn" class="grammar-toggle-btn" onclick="toggleGrammar()">
+                        💡 Gramática: ¿Por qué se usa así?
+                    </button>
+                    <div id="grammarContent" class="grammar-content">
+                        <!-- Contenido dinámico -->
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;">
+
+                <span class="examples-label">Beispiele / Ejemplos</span>
+                <div id="modalExamples">
+                    <!-- Ejemplos dinámicos -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Definición de Colores ORIGINALES (Vibrantes)
+        const COLORS = {
+            person: { 
+                main: '#3b82f6', 
+                pastel: '#dbeafe',
+                light: '#eff6ff', 
+                label: 'Persona' 
+            },
+            place: { 
+                main: '#10b981', 
+                pastel: '#d1fae5',
+                light: '#ecfdf5', 
+                label: 'Lugar' 
+            },
+            time: { 
+                main: '#8b5cf6', 
+                pastel: '#ede9fe',
+                light: '#f5f3ff', 
+                label: 'Tiempo' 
+            },
+            reason: { 
+                main: '#f59e0b', 
+                pastel: '#fef3c7',
+                light: '#fffbeb', 
+                label: 'Causa' 
+            },
+            thing: { 
+                main: '#ef4444', 
+                pastel: '#fee2e2',
+                light: '#fef2f2', 
+                label: 'Objeto' 
+            },
+            choice: { 
+                main: '#ec4899', 
+                pastel: '#fce7f3',
+                light: '#fdf2f8', 
+                label: 'Elección' 
+            }
+        };
+
+        const wFragenData = [
+            // FILA 1: Was?, Warum?, Was für?, Wer?
+            { 
+                word: "Was?", translation: "¿Qué?", icon: "🎁", category: "thing",
+                examExample: "Was ist das?", 
+                examTranslation: "¿Qué es esto?",
+                grammar: "Se utiliza para preguntar por <strong>cosas, acciones o conceptos</strong>. Puede funcionar como sujeto (Nominativo) o como objeto directo (Acusativo). No cambia de forma según el género.",
+                examples: [
+                    { de: "Was ist das?", es: "¿Qué es esto? (Identificar objetos)" },
+                    { de: "Was sind Ihre Hobbys?", es: "¿Cuáles son sus aficiones? (Formal)" },
+                    { de: "Was machst du?", es: "¿Qué haces?" }
+                ] 
+            },
+            { 
+                word: "Warum?", translation: "¿Por qué?", icon: "🤔", category: "reason",
+                examExample: "Warum lernen Sie Deutsch?", 
+                examTranslation: "¿Por qué aprende alemán?",
+                grammar: "Pregunta por la <strong>causa o razón</strong>. La respuesta típica comienza con <em>'Weil...'</em> (porque) y envía el verbo al final de la oración (oración subordinada).",
+                examples: [
+                    { de: "Warum lernen Sie Deutsch?", es: "¿Por qué aprende usted alemán? (Entrevista)" },
+                    { de: "Warum kommst du nicht?", es: "¿Por qué no vienes?" }
+                ] 
+            },
+            { 
+                word: "Was für ein...?", 
+                cardTitle: "Was für?", 
+                translation: "¿Qué tipo?", icon: "🏷️", category: "choice",
+                examExample: "Was für Musik hören Sie?", 
+                examTranslation: "¿Qué tipo de música escucha?",
+                grammar: "Pregunta por la <strong>clase, tipo o cualidad</strong> de algo (literalmente: '¿Qué para un...?'). El artículo 'ein' se declina según el caso de la oración.",
+                examples: [
+                    { de: "Was für Musik hören Sie?", es: "¿Qué tipo de música escucha?" },
+                    { de: "Was für einen Film schauen wir?", es: "¿Qué tipo de película vemos?" }
+                ] 
+            },
+            { 
+                word: "Wer?", translation: "¿Quién?", icon: "👤", category: "person",
+                examExample: "Wer ist das?", 
+                examTranslation: "¿Quién es ese?",
+                grammar: "Pregunta por la persona que es el <strong>Sujeto</strong> de la oración. Siempre está en <strong>Nominativo</strong>. El verbo suele ir en 3ª persona del singular.",
+                examples: [
+                    { de: "Wer ist das?", es: "¿Quién es ese? (Presentar a alguien)" },
+                    { de: "Wer sind Sie?", es: "¿Quién es usted? (Formal)" }
+                ] 
+            },
+
+            // FILA 2: Woher?, Wo?, Wohin?, Wen?
+            { 
+                word: "Woher?", translation: "¿De dónde?", icon: "⬅️", category: "place",
+                examExample: "Woher kommen Sie?", 
+                examTranslation: "¿De dónde viene usted?",
+                grammar: "Pregunta por el <strong>origen o procedencia</strong>. Casi siempre se responde usando la preposición <strong>'aus'</strong> (para ciudades, países) o 'von'.",
+                examples: [
+                    { de: "Woher kommen Sie?", es: "¿De dónde viene usted? (Origen)" },
+                    { de: "Woher weißt du das?", es: "¿De dónde sabes eso?" }
+                ] 
+            },
+            { 
+                word: "Wo?", translation: "¿Dónde?", icon: "📍", category: "place",
+                examExample: "Wo wohnen Sie?", 
+                examTranslation: "¿Dónde vive usted?",
+                grammar: "Pregunta por una <strong>ubicación estática</strong> (sin movimiento hacia otro lugar). Rige siempre el caso <strong>Dativo</strong> si usas preposiciones locales.",
+                examples: [
+                    { de: "Wo wohnen Sie?", es: "¿Dónde vive usted? (Datos personales)" },
+                    { de: "Wo ist der Bahnhof?", es: "¿Dónde está la estación? (Direcciones)" }
+                ] 
+            },
+            { 
+                word: "Wohin?", translation: "¿Adónde?", icon: "➡️", category: "place",
+                examExample: "Wohin fahren Sie?", 
+                examTranslation: "¿Adónde viaja usted?",
+                grammar: "Pregunta por la <strong>dirección o destino</strong> de un movimiento. Rige el caso <strong>Acusativo</strong> (porque hay desplazamiento hacia un lugar).",
+                examples: [
+                    { de: "Wohin fahren Sie?", es: "¿Adónde viaja usted?" },
+                    { de: "Wohin gehen wir heute?", es: "¿Adónde vamos hoy?" }
+                ] 
+            },
+            { 
+                word: "Wen?", translation: "¿A quién?", icon: "🕵️", category: "person",
+                examExample: "Wen rufen Sie an?",
+                examTranslation: "¿A quién llama usted?",
+                note: "⚠️ <strong>¡Ojo!</strong> No confundir con <em>Wenn</em> (que significa 'si' condicional o 'cuando' en el pasado).", 
+                grammar: "Pregunta por la persona que es el <strong>Objeto Directo</strong>. Está en caso <strong>Acusativo</strong>. Se usa cuando la acción recae sobre alguien (ver, llamar, visitar).",
+                examples: [
+                    { de: "Wen rufen Sie an?", es: "¿A quién llama usted?" },
+                    { de: "Wen suchst du?", es: "¿A quién buscas?" }
+                ] 
+            },
+
+            // FILA 3: Wie?, Wie viel?, Wie viele?, Wann?
+            { 
+                word: "Wie?", translation: "¿Cómo?", icon: "⚙️", category: "reason",
+                examExample: "Wie heißen Sie?", 
+                examTranslation: "¿Cómo se llama usted?",
+                grammar: "Pregunta por el <strong>modo, manera o cualidad</strong>. Es muy versátil y se combina con adjetivos para preguntar grado (<em>Wie alt</em> = Cuán viejo/Qué edad, <em>Wie lange</em> = Cuánto tiempo).",
+                examples: [
+                    { de: "Wie heißen Sie?", es: "¿Cómo se llama usted? (Presentación)" },
+                    { de: "Wie geht es Ihnen?", es: "¿Cómo está usted? (Saludo)" },
+                    { de: "Wie schreibt man das?", es: "¿Cómo se escribe eso?" }
+                ] 
+            },
+            { 
+                word: "Wie viel?", translation: "¿Cuánto?", icon: "💰", category: "thing",
+                examExample: "Wie viel kostet das?", 
+                examTranslation: "¿Cuánto cuesta esto?",
+                grammar: "Se usa para sustantivos <strong>incontables</strong> (singular). Ejemplo: dinero (Geld), tiempo (Zeit), agua (Wasser).",
+                examples: [
+                    { de: "Wie viel kostet das?", es: "¿Cuánto cuesta esto? (Compras)" },
+                    { de: "Wie viel Uhr ist es?", es: "¿Qué hora es?" }
+                ] 
+            },
+            { 
+                word: "Wie viele?", translation: "¿Cuántos?", icon: "🔢", category: "thing",
+                examExample: "Wie viele Kinder haben Sie?", 
+                examTranslation: "¿Cuántos hijos tiene?",
+                grammar: "Se usa para sustantivos <strong>contables en plural</strong>. Ejemplo: amigos (Freunde), manzanas (Äpfel), días (Tage).",
+                examples: [
+                    { de: "Wie viele Kinder haben Sie?", es: "¿Cuántos hijos tiene? (Familia)" },
+                    { de: "Wie viele Sprachen sprichst du?", es: "¿Cuántos idiomas hablas?" }
+                ] 
+            },
+            { 
+                word: "Wann?", translation: "¿Cuándo?", icon: "⏰", category: "time",
+                examExample: "Wann haben Sie Geburtstag?", 
+                examTranslation: "¿Cuándo es su cumpleaños?",
+                note: "⚠️ <strong>¡Ojo!</strong> No confundir con <em>Wenn</em> (que significa 'si' condicional). <em>Wann</em> es solo para tiempo/preguntas.",
+                grammar: "Pregunta temporal. Se responde con horas (<em>um 8 Uhr</em>), días (<em>am Montag</em>), meses (<em>im Januar</em>) o fechas específicas.",
+                examples: [
+                    { de: "Wann haben Sie Geburtstag?", es: "¿Cuándo es su cumpleaños?" },
+                    { de: "Wann beginnt der Kurs?", es: "¿Cuándo empieza el curso?" }
+                ] 
+            },
+
+            // FILA 4: Welcher?
+            { 
+                word: "Welcher?", translation: "¿Cuál?", icon: "👆", category: "choice",
+                examExample: "Welche Sprachen sprechen Sie?", 
+                examTranslation: "¿Qué idiomas habla usted?",
+                grammar: "Implica una <strong>selección</strong> dentro de un grupo conocido. Se declina igual que el artículo determinado (<em>welcher, welche, welches, welchen...</em>) según el género y caso del sustantivo.",
+                examples: [
+                    { de: "Welche Sprachen sprechen Sie?", es: "¿Qué idiomas habla usted?" },
+                    { de: "Welcher Tag ist heute?", es: "¿Qué día es hoy?" }
+                ] 
+            }
+        ];
+
+        const gridContainer = document.getElementById('gridContainer');
+        const modal = document.getElementById('modal');
+        const modalHeader = document.getElementById('modalHeader');
+        
+        function renderCards() {
+            gridContainer.innerHTML = ''; // Limpiar
+            wFragenData.forEach((item, index) => {
+                // Manejo de espacio vacío
+                if (item.empty) {
+                    const emptyCard = document.createElement('div');
+                    emptyCard.className = 'card';
+                    emptyCard.style.visibility = 'hidden';
+                    emptyCard.style.pointerEvents = 'none';
+                    emptyCard.style.boxShadow = 'none';
+                    emptyCard.style.background = 'transparent';
+                    gridContainer.appendChild(emptyCard);
+                    return;
+                }
+
+                const colorTheme = COLORS[item.category] || COLORS.thing;
+                
+                const card = document.createElement('div');
+                card.className = 'card';
+                // Asignar variables CSS para colores
+                card.style.setProperty('--card-pastel', colorTheme.pastel);
+                card.style.setProperty('--card-main', colorTheme.main);
+                
+                card.onclick = () => openModal(index);
+                
+                // Nueva estructura HTML de la tarjeta (Header Color Sólido, Icono Flotante)
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="german-word">${item.cardTitle || item.word}</span>
+                        <span class="spanish-meaning">${item.translation}</span>
+                        <div class="icon-floating">${item.icon}</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-category-badge">${colorTheme.label}</div>
+                        <div class="card-exam-example">
+                            <span class="example-text de">${item.examExample}</span>
+                            <span class="example-text es">${item.examTranslation}</span>
+                        </div>
+                    </div>
+                `;
+                gridContainer.appendChild(card);
+            });
+        }
+
+        function openModal(index) {
+            const data = wFragenData[index];
+            const colorTheme = COLORS[data.category] || COLORS.thing;
+
+            // Actualizar colores del modal
+            modalHeader.style.backgroundColor = colorTheme.main;
+            document.documentElement.style.setProperty('--modal-color', colorTheme.main);
+
+            // Contenido básico
+            document.getElementById('modalTitle').textContent = data.word;
+            document.getElementById('modalSubtitle').textContent = data.translation;
+            document.getElementById('modalIcon').textContent = data.icon;
+            
+            // Actualizar Badge en el Modal
+            const modalBadge = document.getElementById('modalBadge');
+            modalBadge.textContent = colorTheme.label;
+
+            // Resetear sección gramática
+            const grammarContent = document.getElementById('grammarContent');
+            const grammarBtn = document.getElementById('grammarBtn');
+            grammarContent.style.display = 'none';
+            grammarContent.innerHTML = data.grammar || "No hay explicación gramatical disponible.";
+            
+            // Estilizar botón gramática
+            grammarBtn.style.color = colorTheme.main;
+            grammarBtn.style.backgroundColor = colorTheme.light;
+            grammarBtn.style.borderColor = 'transparent';
+
+            // Manejo de la nota especial
+            const noteElement = document.getElementById('modalNote');
+            if (data.note) {
+                noteElement.innerHTML = data.note;
+                noteElement.style.display = 'block';
+            } else {
+                noteElement.style.display = 'none';
+            }
+
+            // Ejemplos
+            const examplesContainer = document.getElementById('modalExamples');
+            examplesContainer.innerHTML = '';
+            
+            data.examples.forEach((ex, i) => {
+                const item = document.createElement('div');
+                item.className = 'example-item';
+                item.innerHTML = `
+                    <span class="example-number">${i + 1}</span>
+                    <div class="example-content">
+                        <span class="example-de">${ex.de}</span>
+                        <span class="example-es">${ex.es}</span>
+                    </div>
+                `;
+                examplesContainer.appendChild(item);
+            });
+
+            // Mostrar modal
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+        }
+
+        // Función para alternar la visibilidad de la gramática
+        function toggleGrammar() {
+            const content = document.getElementById('grammarContent');
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+            } else {
+                content.style.display = 'block';
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") closeModal();
+        });
+
+        renderCards();
+
+    </script>
+</body>
+</html>
