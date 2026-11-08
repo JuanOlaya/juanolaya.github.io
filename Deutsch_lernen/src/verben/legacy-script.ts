@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
 /**
@@ -8,8 +8,16 @@ import path from 'node:path';
  */
 export const LEGACY_SCRIPT_PATH = path.resolve(import.meta.dirname, '../../verben/A1_A2_B1/script/script.js');
 
+/** The ES modules `script.js` imports, which hold the page logic since the split. */
+export const LEGACY_MODULES_DIR = path.resolve(path.dirname(LEGACY_SCRIPT_PATH), 'app');
+
+/** Source of `script.js` followed by every module under `app/`, so declarations are found wherever they moved. */
 export function readLegacyScript(): string {
-  return readFileSync(LEGACY_SCRIPT_PATH, 'utf8');
+  const modules = readdirSync(LEGACY_MODULES_DIR)
+    .filter((name) => name.endsWith('.js'))
+    .sort()
+    .map((name) => readFileSync(path.join(LEGACY_MODULES_DIR, name), 'utf8'));
+  return [readFileSync(LEGACY_SCRIPT_PATH, 'utf8'), ...modules].join('\n');
 }
 
 function indexAfterMatching(source: string, openIndex: number, open: string, close: string): number {
