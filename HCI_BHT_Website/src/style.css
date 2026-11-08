@@ -7,11 +7,18 @@ canvas {
   display: block;
 }
 
+body {
+  overflow: hidden;
+  background: #1c3147;
+}
+
+/* Same place and size as before on wide screens; shrinks to fit narrow ones. */
 .logo {
   z-index: 0;
-  width: 585px;
-  height: 72.5px;
+  --logo-left: clamp(16px, 10.4vw, 200px);
+  width: min(585px, calc(100vw - var(--logo-left) - 16px));
+  height: auto;
   position: absolute;
-  top: 30px;
-  left: 200px;
+  top: clamp(16px, 4vw, 30px);
+  left: var(--logo-left);
 }
