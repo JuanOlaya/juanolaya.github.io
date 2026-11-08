@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.2](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.7.1...v0.7.2) (2026-11-08)
+
+
+### Bug Fixes
+
+* **p5:** atajos fuera de campos de texto y panel eliminado en pagehide ([bc60b4c](https://github.com/JuanOlaya/juanolaya.github.io/commit/bc60b4c2d6055e5d8967d8ac2be4deeebf081d03))
+
 ## [0.7.1](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.7.0...v0.7.1) (2026-11-08)
 
 
