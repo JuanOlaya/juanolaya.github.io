@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vitest/config';
 import { copyVerbatim } from './tooling/copy-verbatim.ts';
-import { assertValidEntries, pageInputFrom, verbatimPathsFrom } from './tooling/page-inputs.ts';
+import { assertValidEntries, pageInputFrom, verbatimCopiesFrom } from './tooling/page-inputs.ts';
 import { siteEntries } from './tooling/site-pages.ts';
 
 const rootDir = fileURLToPath(new URL('.', import.meta.url));
@@ -15,7 +15,7 @@ export default defineConfig({
   // User site (juanolaya.github.io): served from the domain root.
   base: '/',
   publicDir: 'public',
-  plugins: [vue(), tailwindcss(), copyVerbatim(verbatimPathsFrom(siteEntries), rootDir)],
+  plugins: [vue(), tailwindcss(), copyVerbatim(verbatimCopiesFrom(siteEntries), rootDir)],
   resolve: {
     alias: { '@shared': fileURLToPath(new URL('./src/shared', import.meta.url)) },
   },
