@@ -27,14 +27,14 @@ function markFailed(src: string): void {
 </script>
 
 <template>
-  <div class="gallery-container relative bg-gray-100">
+  <div class="gallery-container relative bg-plate">
     <div
       v-if="showFallback"
-      class="flex h-44 w-full flex-col items-center justify-center bg-[#DFE2DC] text-[#001011]"
+      class="flex h-44 w-full flex-col items-center justify-center bg-sunken text-ink"
       data-testid="media-fallback"
     >
-      <span class="mb-1 text-3xl">{{ fallbackIcon }}</span>
-      <span class="text-xs font-medium tracking-wide text-[#001011]/80">Active Haptic Controller</span>
+      <span class="mb-1 text-3xl" aria-hidden="true">{{ fallbackIcon }}</span>
+      <span class="spec-label">Active Haptic Controller</span>
     </div>
     <iframe
       v-else-if="kind === 'youtube'"
@@ -54,7 +54,7 @@ function markFailed(src: string): void {
       playsinline
       controls
     ></video>
-    <div v-else class="group relative h-44 w-full overflow-hidden bg-[#DFE2DC]">
+    <div v-else class="group relative h-44 w-full overflow-hidden bg-sunken">
       <img
         :src="current!.src"
         :alt="current!.caption ?? 'Haptic Controller'"
@@ -79,6 +79,7 @@ function markFailed(src: string): void {
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="2.5"
+        aria-hidden="true"
         stroke="currentColor"
       >
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
@@ -90,6 +91,7 @@ function markFailed(src: string): void {
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="2.5"
+        aria-hidden="true"
         stroke="currentColor"
       >
         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />

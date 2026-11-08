@@ -24,22 +24,25 @@ const hasReference = computed(() =>
 </script>
 
 <template>
-  <article
-    class="card-item relative flex flex-col overflow-hidden rounded-2xl border border-[#001011]/10 bg-[#ECEDE8] shadow-xs transition-all duration-300 ease-in-out hover:shadow-lg"
-    :data-pattern="device.category"
-  >
-    <div class="flex flex-col border-b border-black bg-[#001011]">
-      <div class="flex items-center justify-between gap-2 px-4 pt-3.5 pb-3">
-        <h2 class="truncate text-base leading-snug font-bold text-white sm:text-lg" :title="device.name">
+  <article class="card-item relative flex flex-col overflow-hidden" :data-pattern="device.category">
+    <div class="flex flex-col bg-plate px-2.5 pb-2.5">
+      <div class="flex items-baseline justify-between gap-3 px-1.5 pt-3 pb-2.5">
+        <h2
+          class="truncate text-lg leading-snug font-semibold text-[#f3f0e8] [font-stretch:94%]"
+          :title="device.name"
+        >
           {{ device.name }}
         </h2>
         <span
-          class="shrink-0 rounded-full border border-white/20 bg-white/15 px-2.5 py-0.5 text-right text-[10px] font-medium tracking-wider whitespace-nowrap text-white/95 uppercase shadow-xs"
+          class="flex shrink-0 items-center gap-1.5 font-mono text-[10px] tracking-[0.08em] whitespace-nowrap text-[#c9cdc5] uppercase"
         >
+          <span class="h-1.5 w-1.5 bg-signal-bright" aria-hidden="true"></span>
           {{ device.category }}
         </span>
       </div>
-      <Carousel :media="device.media" :fallback-icon="MECHANISM_ICON" />
+      <div class="media-frame">
+        <Carousel :media="device.media" :fallback-icon="MECHANISM_ICON" />
+      </div>
     </div>
 
     <div class="flex grow flex-col justify-between p-4">
@@ -48,50 +51,52 @@ const hasReference = computed(() =>
 
         <div v-if="activeTab === 'versatility'" class="flex grow flex-col justify-start" role="tabpanel">
           <VersatilityRating :audit="device.audit" />
-          <div class="mb-2.5 space-y-1 border-b border-gray-200 pb-2">
+          <div class="mb-2.5 space-y-1.5">
             <div class="flex items-center gap-1.5">
-              <h3 class="text-[11px] font-semibold tracking-wider text-[#001011]/60 uppercase">Mechanism:</h3>
-              <span
-                class="inline-flex items-center justify-center rounded-full border border-[#001011]/15 bg-[#001011]/5 p-0.5 text-xs"
-                :title="device.category"
-                >{{ MECHANISM_ICON }}</span
+              <svg
+                viewBox="0 0 24 24"
+                class="h-3.5 w-3.5 text-ink-3"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                role="img"
+                :aria-label="device.category"
               >
+                <title>{{ device.category }}</title>
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  stroke-linecap="round"
+                  d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"
+                />
+              </svg>
+              <h3 class="spec-label">Mechanism</h3>
             </div>
-            <p class="text-xs leading-relaxed font-medium text-gray-800">
+            <p class="text-[13px] leading-relaxed text-ink-2">
               {{ device.mechanism || 'Actuation mechanism rendering haptic feedback.' }}
             </p>
           </div>
         </div>
 
         <div v-else-if="activeTab === 'research'" class="flex grow flex-col justify-start" role="tabpanel">
-          <div class="mb-3 border-b border-gray-200 pb-3">
+          <div class="mb-3">
             <div class="mb-2 flex flex-wrap items-center justify-between gap-1">
-              <h3 class="text-[11px] font-semibold tracking-wider text-[#001011]/60 uppercase">
-                Research Focus
-              </h3>
+              <h3 class="spec-label">Research Focus</h3>
               <span
                 v-if="device.year"
-                class="rounded-full border border-[#001011]/15 bg-[#001011]/5 px-2 py-0.5 text-[10px] font-semibold text-[#001011]/80"
-                >📅 {{ device.year }}</span
+                class="rounded-[4px] border border-line-strong px-1.5 py-0.5 font-mono text-[11px] font-medium text-ink-2"
+                >{{ device.year }}</span
               >
             </div>
-            <div class="mb-2 flex flex-wrap gap-1">
-              <span
-                v-for="topic in focus"
-                :key="topic"
-                class="rounded-full border border-indigo-200 bg-indigo-50 px-2 py-0.5 text-[11px] font-medium text-indigo-700 shadow-xs"
-                >{{ topic }}</span
-              >
+            <div class="mb-3 flex flex-wrap gap-1">
+              <span v-for="topic in focus" :key="topic" class="tag bg-sunken text-ink">{{ topic }}</span>
             </div>
             <template v-if="device.generalUseCases.length > 0">
-              <h3 class="mt-2 mb-1 text-[11px] font-semibold tracking-wider text-[#001011]/60 uppercase">
-                Context
-              </h3>
+              <h3 class="spec-label mb-1.5">Context</h3>
               <div class="mb-1 flex flex-wrap gap-1">
                 <span
                   v-for="context in device.generalUseCases"
                   :key="context"
-                  class="general-use-case-tag rounded-full px-2 py-0.5 text-[11px] font-medium text-white"
+                  class="general-use-case-tag tag"
                   >{{ context }}</span
                 >
               </div>
@@ -100,27 +105,20 @@ const hasReference = computed(() =>
         </div>
 
         <div v-else class="flex grow flex-col justify-start" role="tabpanel">
-          <div class="mb-3 border-b border-gray-200 pb-3">
-            <h3 class="mb-1 text-[11px] font-semibold tracking-wider text-[#001011]/60 uppercase">
-              Use Cases
-            </h3>
+          <div class="mb-3">
+            <h3 class="spec-label mb-1.5">Use Cases</h3>
             <div v-if="device.useCaseTags.length > 0" class="mb-2 flex flex-wrap gap-1">
-              <span
-                v-for="tag in device.useCaseTags"
-                :key="tag"
-                class="use-case-tag rounded-full px-2 py-0.5 text-[11px] font-medium text-white"
-                >{{ tag }}</span
-              >
+              <span v-for="tag in device.useCaseTags" :key="tag" class="use-case-tag tag">{{ tag }}</span>
             </div>
-            <p class="mt-1 text-xs leading-relaxed text-gray-700">{{ device.useCaseText }}</p>
+            <p class="mt-1 text-[13px] leading-relaxed text-ink-2">{{ device.useCaseText }}</p>
           </div>
         </div>
       </div>
 
-      <div v-if="hasReference" class="mt-auto border-t border-slate-200/60 pt-2 text-xs text-gray-600">
+      <div v-if="hasReference" class="mt-auto border-t border-dashed border-line-strong pt-2">
         <button
           type="button"
-          class="flex w-full items-center justify-between text-left text-[10.5px] font-semibold tracking-wider text-[#001011]/60 uppercase focus:outline-hidden"
+          class="spec-label flex min-h-8 w-full items-center justify-between rounded-[4px] text-left transition-colors hover:text-ink"
           :aria-expanded="referenceOpen"
           @click="referenceOpen = !referenceOpen"
         >
@@ -137,16 +135,18 @@ const hasReference = computed(() =>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
-        <div v-show="referenceOpen" class="mt-1.5 text-[11px]">
-          <p class="font-semibold text-gray-800">{{ device.author || 'Author in Proceedings' }}</p>
-          <p class="my-0.5 text-gray-600 italic">"{{ device.title || device.name }}"</p>
-          <p class="text-[#001011]/60">{{ device.publication || 'Proceedings' }}, {{ device.year }}</p>
+        <div v-show="referenceOpen" class="mt-1 border-l-2 border-signal pl-2.5 text-xs leading-relaxed">
+          <p class="font-semibold text-ink">{{ device.author || 'Author in Proceedings' }}</p>
+          <p class="my-0.5 text-ink-2 italic">"{{ device.title || device.name }}"</p>
+          <p class="font-mono text-[11px] text-ink-3">
+            {{ device.publication || 'Proceedings' }}, {{ device.year }}
+          </p>
           <a
             v-if="device.doi"
             :href="`https://doi.org/${device.doi}`"
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-1 inline-flex items-center font-semibold text-[#fd5321] transition-colors hover:underline"
+            class="mt-1 inline-flex items-center font-semibold text-signal-ink underline-offset-2 hover:underline"
           >
             Paper
             <svg

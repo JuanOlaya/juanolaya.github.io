@@ -11,137 +11,147 @@ const WEARABLE_SURVEY = 'https://ieeexplore.ieee.org/document/7922602';
 
 <template>
   <div
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-[#0a0d0c]/70 p-4 backdrop-blur-xs"
     @click.self="$emit('close')"
   >
     <div
-      class="relative w-full max-w-2xl rounded-2xl border border-[#001011]/15 bg-white p-6 shadow-2xl"
+      class="relative w-full max-w-2xl overflow-hidden rounded-panel border border-line bg-surface shadow-2xl"
       role="dialog"
       aria-modal="true"
       aria-labelledby="intro-title"
     >
-      <button
-        type="button"
-        class="absolute top-4 right-4 p-1 text-xl font-bold text-gray-400 hover:text-gray-700"
-        aria-label="Close"
-        @click="$emit('close')"
-      >
-        &times;
-      </button>
-      <div class="mb-3">
-        <span class="text-xs font-bold tracking-widest text-[#001011]/70 uppercase">{{
-          intro.category
-        }}</span>
-        <h2 id="intro-title" class="text-2xl font-bold text-[#001011]">{{ intro.name }}</h2>
-      </div>
+      <div class="h-1 bg-signal-bright" aria-hidden="true"></div>
+      <div class="p-6">
+        <button
+          type="button"
+          class="keycap absolute top-4 right-4 flex h-9 w-9 items-center justify-center"
+          aria-label="Close"
+          @click="$emit('close')"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            class="h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.25"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" d="M6 6l12 12M18 6 6 18" />
+          </svg>
+        </button>
+        <div class="mb-4 pr-12">
+          <span class="spec-label">{{ intro.category }}</span>
+          <h2 id="intro-title" class="text-2xl font-semibold tracking-tight text-ink [font-stretch:88%]">
+            {{ intro.name }}
+          </h2>
+        </div>
 
-      <div class="flex min-h-[300px] flex-col justify-between">
-        <div class="relative grow">
-          <div v-if="slide === 0" class="transition-all duration-300">
-            <p class="mb-2 text-sm font-medium text-blue-800">Enhancing Virtual Reality Realism</p>
-            <p class="text-xs leading-relaxed text-gray-700">
-              Active haptic controllers use computer-controlled actuation to render haptic feedback in
-              response to virtual events in real time.
-            </p>
-            <div class="mt-3 rounded-sm border-l-4 border-blue-500 bg-blue-50 p-3">
-              <p class="text-xs leading-relaxed font-semibold text-blue-900">
-                This categorization organizes prior work across 21 Mechanism Patterns and 10 canonical
-                sensations from peer-reviewed literature for handheld controllers.
+        <div class="flex min-h-[300px] flex-col justify-between">
+          <div class="relative grow">
+            <div v-if="slide === 0">
+              <p class="mb-2 text-sm font-semibold text-signal-ink">Enhancing Virtual Reality Realism</p>
+              <p class="text-sm leading-relaxed text-ink-2">
+                Active haptic controllers use computer-controlled actuation to render haptic feedback in
+                response to virtual events in real time.
               </p>
-            </div>
-            <div class="mt-3 rounded-xl border border-amber-200/90 bg-amber-50/80 p-3 text-xs">
-              <div class="mb-1 flex items-center gap-1.5 font-bold text-amber-900">
-                <span>🧤</span> Wearable Devices Categorization
+              <div class="mt-3 border-l-2 border-signal bg-sunken/70 p-3">
+                <p class="text-sm leading-relaxed font-medium text-ink">
+                  This categorization organizes prior work across 21 Mechanism Patterns and 10 canonical
+                  sensations from peer-reviewed literature for handheld controllers.
+                </p>
               </div>
-              <p class="text-xs leading-relaxed text-amber-900/90">
-                For haptic categorization of <strong>wearable devices</strong> (fingertip and hand-worn
-                systems), see:
-              </p>
-              <a
-                :href="WEARABLE_SURVEY"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="mt-1.5 inline-flex items-center gap-1 font-bold text-blue-700 hover:text-blue-900 hover:underline"
-              >
-                <span
-                  >Pacchierotti et al. (2017) &ndash; Wearable Haptic Systems for the Fingertip and the Hand:
-                  Taxonomy, Review, and Perspectives</span
-                >
-                <span class="text-[11px]">↗</span>
-              </a>
-            </div>
-          </div>
-
-          <div v-else class="transition-all duration-300">
-            <p class="mb-2 text-[11px] leading-relaxed text-gray-700">
-              We classify controllers according to their haptic modality (cutaneous or kinesthetic) and the
-              sensations they render.
-            </p>
-            <div class="space-y-2 rounded-sm border border-slate-200 bg-slate-50 p-2">
-              <div
-                class="mb-1.5 border-b border-slate-200 pb-0.5 text-center text-[10px] font-bold text-blue-800"
-              >
-                Haptic Modality Categorization (10 Sensations)
-              </div>
-              <div class="grid grid-cols-2 gap-2 text-center">
-                <div class="flex flex-col rounded-sm border border-green-200 bg-green-50/50 p-1.5">
-                  <div
-                    class="mb-1 flex items-center justify-center gap-1 border-b border-green-200 pb-0.5 text-[9px] font-semibold text-green-800"
-                  >
-                    <span>👆</span> Cutaneous (4)
-                  </div>
-                  <div class="space-y-0.5 pl-1 text-left text-[9px] font-medium text-green-700">
-                    <div>• Thermal</div>
-                    <div>• Stiffness</div>
-                    <div>• Friction</div>
-                    <div>• Vibration</div>
-                  </div>
-                </div>
-                <div class="flex flex-col rounded-sm border border-red-200 bg-red-50/50 p-1.5">
-                  <div
-                    class="mb-1 flex items-center justify-center gap-1 border-b border-red-200 pb-0.5 text-[9px] font-semibold text-red-800"
-                  >
-                    <span>💪</span> Kinesthetic (6)
-                  </div>
-                  <div class="space-y-0.5 pl-1 text-left text-[9px] font-medium text-red-700">
-                    <div>• Impact</div>
-                    <div>• Motion</div>
-                    <div>• Resistance</div>
-                    <div>• Weight Amount</div>
-                    <div>• Weight Dist.</div>
-                    <div>• Shape</div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="flex flex-wrap items-center justify-between gap-1 border-t border-slate-200/80 px-1 pt-1.5 text-left text-[10px] text-slate-600"
-              >
-                <span>For wearable devices:</span>
+              <div class="mt-3 rounded-key border border-dashed border-line-strong p-3 text-sm">
+                <div class="spec-label mb-1 text-ink">Wearable Devices Categorization</div>
+                <p class="leading-relaxed text-ink-2">
+                  For haptic categorization of <strong class="text-ink">wearable devices</strong> (fingertip
+                  and hand-worn systems), see:
+                </p>
                 <a
                   :href="WEARABLE_SURVEY"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center gap-0.5 font-bold text-blue-700 hover:underline"
+                  class="mt-1.5 inline-flex items-center gap-1 font-semibold text-signal-ink underline-offset-2 hover:underline"
                 >
-                  Pacchierotti et al. (IEEE ToH 2017) ↗
+                  <span
+                    >Pacchierotti et al. (2017) &ndash; Wearable Haptic Systems for the Fingertip and the
+                    Hand: Taxonomy, Review, and Perspectives</span
+                  >
+                  <span class="text-[11px]" aria-hidden="true">↗</span>
                 </a>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="mt-4 flex justify-center gap-2 border-t border-slate-100 pt-2 select-none">
-          <button
-            v-for="(title, index) in slides"
-            :key="title"
-            type="button"
-            class="intro-dot h-2.5 w-2.5 rounded-full focus:outline-hidden"
-            :class="index === slide ? 'bg-blue-600' : 'bg-slate-300 hover:bg-slate-400'"
-            :title="title"
-            :aria-label="`Show ${title}`"
-            :aria-current="index === slide"
-            @click="slide = index"
-          ></button>
+            <div v-else>
+              <p class="mb-3 text-sm leading-relaxed text-ink-2">
+                We classify controllers according to their haptic modality (cutaneous or kinesthetic) and the
+                sensations they render.
+              </p>
+              <div class="rounded-key border border-line bg-sunken/60 p-3">
+                <div class="spec-label mb-2 text-center">Haptic Modality Categorization (10 Sensations)</div>
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="rounded-key bg-cut-tint p-2.5 text-cut">
+                    <div
+                      class="mb-1.5 flex items-center gap-1.5 border-b border-current/25 pb-1 text-xs font-semibold"
+                    >
+                      <span class="h-2 w-2 rounded-full bg-current" aria-hidden="true"></span> Cutaneous (4)
+                    </div>
+                    <ul class="space-y-0.5 text-xs">
+                      <li>Thermal</li>
+                      <li>Stiffness</li>
+                      <li>Friction</li>
+                      <li>Vibration</li>
+                    </ul>
+                  </div>
+                  <div class="rounded-key bg-kin-tint p-2.5 text-kin">
+                    <div
+                      class="mb-1.5 flex items-center gap-1.5 border-b border-current/25 pb-1 text-xs font-semibold"
+                    >
+                      <span class="h-2 w-2 bg-current" aria-hidden="true"></span> Kinesthetic (6)
+                    </div>
+                    <ul class="space-y-0.5 text-xs">
+                      <li>Impact</li>
+                      <li>Motion</li>
+                      <li>Resistance</li>
+                      <li>Weight Amount</li>
+                      <li>Weight Dist.</li>
+                      <li>Shape</li>
+                    </ul>
+                  </div>
+                </div>
+                <div
+                  class="mt-2 flex flex-wrap items-center justify-between gap-1 border-t border-line pt-2 text-xs text-ink-2"
+                >
+                  <span>For wearable devices:</span>
+                  <a
+                    :href="WEARABLE_SURVEY"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-0.5 font-semibold text-signal-ink underline-offset-2 hover:underline"
+                  >
+                    Pacchierotti et al. (IEEE ToH 2017) <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 flex justify-center gap-1 border-t border-line pt-2 select-none">
+            <button
+              v-for="(title, index) in slides"
+              :key="title"
+              type="button"
+              class="intro-dot group flex h-8 items-center px-1.5"
+              :title="title"
+              :aria-label="`Show ${title}`"
+              :aria-current="index === slide"
+              @click="slide = index"
+            >
+              <span
+                class="block h-1 rounded-[1px] transition-all duration-200"
+                :class="index === slide ? 'w-6 bg-signal' : 'w-3 bg-line-strong group-hover:bg-ink-3'"
+              ></span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

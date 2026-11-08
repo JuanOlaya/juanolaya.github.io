@@ -42,47 +42,70 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown));
 <template>
   <div class="mx-auto flex w-full max-w-[1600px] grow flex-col">
     <header
-      class="mb-4 flex flex-col items-center justify-between gap-4 rounded-2xl border border-[#001011]/10 bg-[#ECEDE8] px-5 py-3.5 shadow-xs md:flex-row"
+      class="mb-5 grid grid-cols-1 items-center gap-4 border-b border-line-strong pb-4 md:grid-cols-[1fr_auto_1fr] md:gap-6"
     >
-      <div class="flex w-full items-center justify-start gap-3 md:w-auto md:flex-1">
+      <div class="flex items-center gap-3">
         <div
-          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#001011] text-xl text-white shadow-md select-none"
+          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-key bg-plate text-signal-bright"
+          aria-hidden="true"
         >
-          🎮
+          <!-- A contact point radiating pulses: the brand mark for "haptic". -->
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.75">
+            <circle cx="12" cy="12" r="2.25" fill="currentColor" stroke="none" />
+            <path stroke-linecap="round" d="M8 8.5a5 5 0 0 0 0 7M16 8.5a5 5 0 0 1 0 7" />
+            <path
+              stroke-linecap="round"
+              opacity="0.55"
+              d="M5 5.5a9.2 9.2 0 0 0 0 13M19 5.5a9.2 9.2 0 0 1 0 13"
+            />
+          </svg>
         </div>
-        <div>
-          <h1 class="text-xl leading-none font-black tracking-tight text-[#001011] sm:text-2xl">
+        <div class="min-w-0">
+          <p class="spec-label">HCI &middot; Handheld haptics catalogue</p>
+          <h1
+            class="text-2xl leading-none font-semibold tracking-tight text-ink [font-stretch:85%] sm:text-[1.75rem]"
+          >
             Haptic VR Controllers
           </h1>
-          <p class="mt-0.5 text-xs font-medium text-[#001011]/70">
-            Categorization &bull; 21 Pattern Dashboard
-          </p>
         </div>
       </div>
 
-      <div class="flex w-full flex-col items-center justify-center md:w-auto md:flex-initial lg:flex-1">
+      <div class="flex flex-col items-center">
         <div class="flex w-full items-center justify-center gap-2 sm:gap-3">
           <button
             type="button"
             title="Previous set"
             aria-label="Previous set"
-            class="nav-btn"
+            class="keycap nav-btn"
             @click="catalog.previous()"
           >
-            <span class="-ml-0.5 leading-none select-none">◀</span>
+            <svg
+              viewBox="0 0 24 24"
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.25"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 18 9 12l6-6" />
+            </svg>
           </button>
           <div
-            class="flex w-[280px] shrink-0 items-center justify-center gap-2 rounded-xl border border-[#001011]/10 bg-white/80 px-3 py-2 text-center shadow-xs sm:w-[320px] md:w-[340px]"
+            class="flex h-11 w-[250px] min-w-0 shrink items-center gap-2.5 rounded-key border border-line bg-surface px-2 shadow-[inset_0_1px_2px_rgb(0_0_0/0.06)] sm:w-[340px]"
           >
-            <span class="shrink-0 text-xl select-none" data-testid="hero-icon">{{ icon }}</span>
             <span
-              class="truncate text-xs font-black tracking-tight text-[#001011] sm:text-sm md:text-base"
+              class="flex h-8 w-8 shrink-0 items-center justify-center rounded-[4px] bg-sunken text-lg select-none"
+              data-testid="hero-icon"
+              >{{ icon }}</span
+            >
+            <span
+              class="min-w-0 grow truncate text-sm font-semibold tracking-tight text-ink sm:text-base"
               data-testid="hero-title"
               >{{ pattern }}</span
             >
             <span
               v-if="patternDevices.length > 0"
-              class="ml-1 rounded-full bg-[#fd5321]/10 px-2 py-0.5 text-[11px] font-bold text-[#fd5321]"
+              class="shrink-0 rounded-[4px] bg-signal-tint px-1.5 py-0.5 font-mono text-xs font-medium text-signal-ink"
               data-testid="hero-count"
               >{{ patternDevices.length }}</span
             >
@@ -91,16 +114,26 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown));
             type="button"
             title="Next set"
             aria-label="Next set"
-            class="nav-btn"
+            class="keycap nav-btn"
             @click="catalog.next()"
           >
-            <span class="-mr-0.5 leading-none select-none">▶</span>
+            <svg
+              viewBox="0 0 24 24"
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.25"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" />
+            </svg>
           </button>
         </div>
 
-        <div class="mt-1.5 flex min-h-[16px] items-center justify-center gap-1.5" data-testid="page-dots">
+        <div class="mt-2 flex min-h-[24px] items-center justify-center gap-2" data-testid="page-dots">
           <template v-if="pageCount > 1">
-            <div class="flex items-center gap-1.5">
+            <div class="flex items-center">
+              <!-- Thin visual bars inside a 24px hit area so the page buttons stay tappable. -->
               <button
                 v-for="(_, page) in pageCount"
                 :key="page"
@@ -108,34 +141,45 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown));
                 :title="pageTitle(page)"
                 :aria-label="pageTitle(page)"
                 :aria-current="page === state.page"
-                class="cursor-pointer transition-all duration-200"
-                :class="
-                  page === state.page
-                    ? 'h-2 w-5 rounded-full bg-[#fd5321]'
-                    : 'h-2 w-2 rounded-full bg-[#001011]/25 hover:bg-[#001011]/60'
-                "
+                class="group flex h-6 items-center px-1"
                 @click="catalog.goToPage(page)"
-              ></button>
+              >
+                <span
+                  class="block h-1 rounded-[1px] transition-all duration-200"
+                  :class="page === state.page ? 'w-6 bg-signal' : 'w-3 bg-line-strong group-hover:bg-ink-3'"
+                ></span>
+              </button>
             </div>
-            <span class="ml-1.5 text-xs font-semibold text-[#001011]/60 select-none"
+            <span class="font-mono text-[11px] text-ink-3 select-none"
               >{{ rangeLabel }} of {{ patternDevices.length }} controllers</span
             >
           </template>
         </div>
       </div>
 
-      <div class="flex w-full items-center justify-center md:w-auto md:flex-1 md:justify-end">
+      <div class="flex items-center justify-center md:justify-end">
         <button
           type="button"
-          class="flex items-center gap-1.5 rounded-xl bg-[#fd5321] px-3 py-1.5 text-xs font-bold text-white shadow-xs transition-all hover:bg-[#e04818] active:scale-95"
+          class="keycap flex h-10 items-center gap-2 px-3.5 text-sm font-semibold"
           @click="introOpen = true"
         >
-          <span>ℹ️</span> <span>Categorization Info</span>
+          <svg
+            viewBox="0 0 24 24"
+            class="h-4 w-4 text-signal-ink"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path stroke-linecap="round" d="M12 11v5.5M12 7.6v.1" />
+          </svg>
+          <span>Categorization Info</span>
         </button>
       </div>
     </header>
 
-    <main class="my-auto flex grow flex-col justify-center py-2">
+    <main class="my-auto flex grow flex-col justify-center pb-5">
       <div
         class="grid min-h-[500px] w-full grid-cols-1 items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4"
         data-testid="cards"
@@ -143,10 +187,10 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown));
         <DeviceCard v-for="device in pageDevices" :key="device.name" :device="device" />
         <div
           v-if="pageDevices.length === 0"
-          class="col-span-full flex flex-col items-center justify-center rounded-2xl border border-[#001011]/15 bg-white/70 py-16 text-center"
+          class="col-span-full flex flex-col items-center justify-center rounded-panel border border-dashed border-line-strong bg-surface py-16 text-center"
         >
-          <span class="mb-2 text-4xl">{{ icon }}</span>
-          <p class="font-medium text-gray-600">No controllers registered in this pattern yet.</p>
+          <span class="mb-2 text-4xl" aria-hidden="true">{{ icon }}</span>
+          <p class="font-medium text-ink-2">No controllers registered in this pattern yet.</p>
         </div>
       </div>
     </main>
