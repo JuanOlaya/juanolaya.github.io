@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.5.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.4.1...v0.5.0) (2026-11-08)
+
+
+### Features
+
+* **home:** fondo p5 más fluido con estelas que se desvanecen ([66983c1](https://github.com/JuanOlaya/juanolaya.github.io/commit/66983c1111145d2868e216ff27e57c0465031976))
+* **home:** hide Haptic Lever Simulator and Tropical from projects grid ([85cc6bc](https://github.com/JuanOlaya/juanolaya.github.io/commit/85cc6bcf789713e5cafed0bbb48259b4606df4a9))
+* **home:** smoother ring background with fading trails ([1eaa3ce](https://github.com/JuanOlaya/juanolaya.github.io/commit/1eaa3cef6455ef5ee0dc53656592df9eb9c685a2))
+* **memodeutsch:** SPA Vue + vue-router con vista parametrizada de demostrativos ([#14](https://github.com/JuanOlaya/juanolaya.github.io/issues/14), b) ([3a3bb9a](https://github.com/JuanOlaya/juanolaya.github.io/commit/3a3bb9ad57f070dda777e1f44bf96f77466a0c54))
+* **memodeutsch:** Vue app with vue-router replacing the demonstratives pages ([8e8d033](https://github.com/JuanOlaya/juanolaya.github.io/commit/8e8d033fc5561939d506af93710bf748d139333c)), closes [#14](https://github.com/JuanOlaya/juanolaya.github.io/issues/14)
+
+
+### Bug Fixes
+
+* **security:** redact exposed keys, remove Hotjar and hide Tropical and WeightLever from site pages ([871eef5](https://github.com/JuanOlaya/juanolaya.github.io/commit/871eef578109048d5f2297d7cb112d54f024de36))
+
 ## [0.4.1](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.4.0...v0.4.1) (2026-11-08)
 
 
