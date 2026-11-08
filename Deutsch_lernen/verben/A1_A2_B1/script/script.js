@@ -266,10 +266,6 @@ function applyModalThemePalette(verbData) {
 
 let currentViewMode = 'compact'; // Tracks active view: 'normal', 'compact', 'niedlich', 'light'
 
-const CACHE_KEY = 'verbAppCache_v46_wortfamilie_search_ready';
-
-const SETTINGS_MIGRATION_KEY = 'verbenSettingsMigration_v1_show_ik_lid';
-
 let cachePersistTimeout = null;
 
 let cachePersistenceDisabled = false;
@@ -746,13 +742,13 @@ const lazyExampleLoadPromises = new Map();
 
  try {
 
- localStorage.setItem(CACHE_KEY, JSON.stringify(createCachePayload()));
+ memoStorage.writeVerbCache(createCachePayload());
 
  } catch (e) {
 
  try {
 
- localStorage.setItem(CACHE_KEY, JSON.stringify(createCachePayload({ compact: true })));
+ memoStorage.writeVerbCache(createCachePayload({ compact: true }));
 
  } catch (compactError) {
 
@@ -784,11 +780,11 @@ function hydrateFromLocalCache() {
 
  try {
 
- const cached = localStorage.getItem(CACHE_KEY);
+ const cached = memoStorage.readVerbCache();
 
  if (!cached) return false;
 
- const data = normalizeMojibakeDeep(JSON.parse(cached));
+ const data = normalizeMojibakeDeep(cached);
 
  if (!data || !data.allVerbsData || !data.verbGroupsByLevel) return false;
 
@@ -1032,11 +1028,11 @@ async function loadBackgroundData() {
 
  try {
 
- const cached = localStorage.getItem(CACHE_KEY);
+ const cached = memoStorage.readVerbCache();
 
  if (cached) {
 
- const data = normalizeMojibakeDeep(JSON.parse(cached));
+ const data = normalizeMojibakeDeep(cached);
 
  // Cache is valid IF:
 
@@ -1309,7 +1305,7 @@ async function loadBackgroundData() {
 
  try {
 
- localStorage.setItem(CACHE_KEY, JSON.stringify(createCachePayload()));
+ memoStorage.writeVerbCache(createCachePayload());
 
  console.log("Saved data to LocalStorage cache");
 
@@ -3007,9 +3003,8 @@ function renderCompactVersion() {
 
  function saveProgress() {
 
- localStorage.setItem(`progress_${currentLevel}`, currentGroupInLevel);
+ memoStorage.saveProgress(currentLevel, currentGroupInLevel);
 
- localStorage.setItem('currentLevel', currentLevel);
 
  }
 
@@ -3017,7 +3012,7 @@ function renderCompactVersion() {
 
  // Load saved progress
 
- const savedLevel = localStorage.getItem('currentLevel');
+ const savedLevel = memoStorage.getCurrentLevel();
 
  // Retrieve group using level-specific key first (legacy), or generic (new)
 
@@ -3037,7 +3032,7 @@ function renderCompactVersion() {
 
  }
 
- const savedGroup = parseInt(localStorage.getItem(`progress_${currentLevel}`));
+ const savedGroup = memoStorage.getSavedGroup(currentLevel) ?? NaN;
 
  const maxGroups = levelConfig[currentLevel].groupCount;
 
@@ -3059,7 +3054,7 @@ function renderCompactVersion() {
 
  const maxGroups = levelConfig[levelKey] ? levelConfig[levelKey].groupCount : 0;
 
- const savedGroup = parseInt(localStorage.getItem(`progress_${levelKey}`));
+ const savedGroup = memoStorage.getSavedGroup(levelKey) ?? NaN;
 
  if (!isNaN(savedGroup) && savedGroup >= 0 && savedGroup < maxGroups) {
 
@@ -3151,7 +3146,7 @@ function renderCompactVersion() {
 
  setupProgressBar();
 
- let initialViewMode = localStorage.getItem('verben-card-version') || 'compact';
+ let initialViewMode = memoStorage.getCardVersion() || 'compact';
 
  if (!document.querySelector(`input[name="card-version"][value="${initialViewMode}"]`)) {
 
@@ -3551,20 +3546,6 @@ function renderCompactVersion() {
 
  const verbModalContent = document.querySelector('#verb-modal .modal-content');
 
- // Newer visibility tags should default to visible even for users carrying older localStorage.
-
- // We migrate once so stale hidden states do not keep IK/LiD invisible forever in the app.
-
- if (!localStorage.getItem(SETTINGS_MIGRATION_KEY)) {
-
- localStorage.setItem('toggle-ik-switch', 'true');
-
- localStorage.setItem('toggle-lid-switch', 'true');
-
- localStorage.setItem(SETTINGS_MIGRATION_KEY, 'true');
-
- }
-
  toggles.forEach(toggle => {
 
  const toggleClass = toggle.dataset.toggleClass;
@@ -3573,11 +3554,11 @@ function renderCompactVersion() {
 
  // Load saved state from localStorage
 
- const savedState = localStorage.getItem(`toggle-${toggleId}`);
+ const savedState = memoStorage.getToggle(toggleId);
 
  if (savedState !== null) {
 
- toggle.checked = savedState === 'true';
+ toggle.checked = savedState;
 
  } else {
 
@@ -3613,7 +3594,7 @@ function renderCompactVersion() {
 
  // Save to localStorage
 
- localStorage.setItem(`toggle-${toggleId}`, isChecked);
+ memoStorage.setToggle(toggleId, isChecked);
 
  if (currentViewMode === 'compact' || currentViewMode === 'kompakt') {
 
@@ -3639,9 +3620,9 @@ function renderCompactVersion() {
 
  if (kompaktLightSwitch) {
 
- const savedLightState = localStorage.getItem('toggle-kompakt-light');
+ const savedLightState = memoStorage.getToggle('kompakt-light');
 
- kompaktLightSwitch.checked = (savedLightState === 'true');
+ kompaktLightSwitch.checked = savedLightState === true;
 
  document.body.classList.toggle('compact-light-mode', kompaktLightSwitch.checked);
 
@@ -3651,7 +3632,7 @@ function renderCompactVersion() {
 
  document.body.classList.toggle('compact-light-mode', isChecked);
 
- localStorage.setItem('toggle-kompakt-light', isChecked);
+ memoStorage.setToggle('kompakt-light', isChecked);
 
  });
 
@@ -3663,7 +3644,7 @@ function renderCompactVersion() {
 
  // Load saved state from localStorage (default to 'compact')
 
- let savedVersion = localStorage.getItem('verben-card-version') || 'compact';
+ let savedVersion = memoStorage.getCardVersion() || 'compact';
 
  // Validate against available options
 
@@ -3723,7 +3704,7 @@ function renderCompactVersion() {
 
  // Save to localStorage
 
- localStorage.setItem('verben-card-version', selectedVersion);
+ memoStorage.setCardVersion(selectedVersion);
 
  renderVerbGroup();
 
