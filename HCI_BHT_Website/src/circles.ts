@@ -14,7 +14,7 @@ export const CIRCLES: readonly Circle[] = [
 ];
 
 /** Pressing near (80%, 43%) — where a sixth circle used to be drawn — makes all circles shrink away. */
-const TRIGGER = { xPercent: 80, yPercent: 43, radius: 50 };
+const TRIGGER = { xPercent: 80, yPercent: 43, radius: 50 } as const;
 
 export function isShrinkTrigger(x: number, y: number, width: number, height: number): boolean {
   const dx = x - (TRIGGER.xPercent * width) / 100;
@@ -22,6 +22,15 @@ export function isShrinkTrigger(x: number, y: number, width: number, height: num
   return Math.hypot(dx, dy) < TRIGGER.radius;
 }
 
-export function shrink(diameter: number): number {
-  return diameter > 0 ? diameter - 1 : diameter;
+/** Diameter lost per 60 FPS frame once the circles start shrinking. */
+export const SHRINK_PER_FRAME = 1;
+
+/** One shrink step worth `frames` 60 FPS frames (see `frameScale`); never below zero. */
+export function shrink(diameter: number, frames = 1): number {
+  return Math.max(0, diameter - SHRINK_PER_FRAME * frames);
+}
+
+/** Canvas position of a circle given as percentages of the canvas size. */
+export function circleCenter(circle: Circle, width: number, height: number): { x: number; y: number } {
+  return { x: (circle.xPercent * width) / 100, y: (circle.yPercent * height) / 100 };
 }
