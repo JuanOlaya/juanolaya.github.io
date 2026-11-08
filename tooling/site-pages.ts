@@ -22,7 +22,9 @@ export const siteEntries: readonly SiteEntry[] = [
 
   // Project pages, one public URL per folder.
   { kind: 'vite', dir: 'Antonella/Lenguajes' },
-  { kind: 'legacy', path: 'Balconity' },
+  { kind: 'vite', dir: 'Balconity' },
+  // Old icon URLs (/Balconity/assets/...) keep working; the page itself uses the hashed copies.
+  { kind: 'legacy', path: 'Balconity/assets' },
   // Deutsch_lernen/src/ holds the TypeScript schemas and tests of its migration (#14), not site files.
   { kind: 'legacy', path: 'Deutsch_lernen', exclude: ['src'] },
   { kind: 'legacy', path: 'EurekaWall' },

@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500;520;600;700&display=swap');
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
@@ -9,10 +10,9 @@ html, body {
 canvas {
   display: block;
 }
-  
-.window{
 
-  /*border: 20px solid #CFD6EA; */ /* #4182ab  #E67A01*/ 
+.window {
+  /*border: 20px solid #CFD6EA; */ /* #4182ab  #E67A01*/
   /*border-radius: 50px;*/
   border-radius: 0px 130px 100px 100px;
   z-index: 0;
@@ -24,115 +24,110 @@ canvas {
   transform: translate(-50%, -50%);
 }
 
-body{
+body {
   z-index: -1;
-  background-color: #F4A523;   /*F4A523*/  /* #10002b */   /*142C52*/
+  background-color: #f4a523; /*F4A523*/ /* #10002b */ /*142C52*/
   font-family: 'Poppins', sans-serif;
-  overflow-y: hidden; 
-  overflow-x: hidden; 
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
-
-.marginFrame{
+.marginFrame {
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-662px,-355px);
+  transform: translate(-662px, -355px);
 }
 
-.frame{
-  width: 1200px; 
+.frame {
+  width: 1200px;
   height: 633px;
-  border: 43px solid #292A2B;
+  border: 43px solid #292a2b;
   /*border-radius: 50px;*/
   border-radius: 0px 100px 0px 100px;
-  box-shadow:  41px 41px 70px #cf8c1e,
-  -41px -41px 70px #ffbe28;
-  
+  box-shadow:
+    41px 41px 70px #cf8c1e,
+    -41px -41px 70px #ffbe28;
+
   z-index: 2;
   opacity: 1;
 }
 
-.screenInfo{
-  width: 1200px; 
+.screenInfo {
+  width: 1200px;
   height: 633px;
-  border: 43px solid #292A2B;
-  background: #292A2B;
+  border: 43px solid #292a2b;
+  background: #292a2b;
   line-height: 120%;
-  color: #F1D8BC;
+  color: #f1d8bc;
   font-size: 35px;
   /*border-radius: 50px;*/
   border-radius: 0px 100px 0px 100px;
-  box-shadow:  41px 41px 70px #cf8c1e,
-  -41px -41px 70px #ffbe28;
-  
+  box-shadow:
+    41px 41px 70px #cf8c1e,
+    -41px -41px 70px #ffbe28;
+
   z-index: 2;
   opacity: 1;
 }
 
-
-
-.marginFrameBackground{
+.marginFrameBackground {
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-705px,-398px);
+  transform: translate(-705px, -398px);
 }
 
-
-
-.frameBackground{
-  width: 1243px; 
+.frameBackground {
+  width: 1243px;
   height: 680px;
-  border: 80px solid #F4A523;
+  border: 80px solid #f4a523;
   /*border-radius: 50px;*/
   border-radius: 0px 120px 0px 130px;
-  
+
   z-index: 1;
   opacity: 1;
 }
 
-
-.marginBoxCity{
+.marginBoxCity {
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-280px,310px);
+  transform: translate(-280px, 310px);
 }
 
-.boxCity{
-  width: 530px; 
+.boxCity {
+  width: 530px;
   height: 50px;
   border-radius: 30px 30px 0 0;
-  background: #292A2B;
+  background: #292a2b;
   opacity: 1;
 }
 
-.marginBoxInfoLeft{
+.marginBoxInfoLeft {
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-650px,-355px);
+  transform: translate(-650px, -355px);
 }
 
-
-.boxInfoLeft{
-  width: 225px; 
+.boxInfoLeft {
+  width: 225px;
   height: 110px;
-  border-radius: 40px 0px 40px 0px; 
-  background: #292A2B;    /*5C8BD6*/ /*323334*/
+  border-radius: 40px 0px 40px 0px;
+  background: #292a2b; /*5C8BD6*/ /*323334*/
   /*border-top: 4px solid #292A2B;
   border-left: 4px solid #292A2B;*/
   /*border: 1px solid #3C3D3E;*/
@@ -169,175 +164,175 @@ body{
 }
 */
 
-.saoName{
+.saoName {
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #F3E4CE;
+  color: #f3e4ce;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-205px,323px);
+  transform: translate(-205px, 323px);
   font-weight: 500;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.brasovName{
+.brasovName {
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #F3E4CE;
+  color: #f3e4ce;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-165px,323px);
+  transform: translate(-165px, 323px);
   font-weight: 500;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.taoyuanName{
+.taoyuanName {
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #F3E4CE;
+  color: #f3e4ce;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-145px,323px);
+  transform: translate(-145px, 323px);
   font-weight: 500;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.taipeiName{
+.taipeiName {
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #F3E4CE;
+  color: #f3e4ce;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-100px,323px);
+  transform: translate(-100px, 323px);
   font-weight: 500;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.odessaName{
+.odessaName {
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #F3E4CE;
+  color: #f3e4ce;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-175px,323px);
+  transform: translate(-175px, 323px);
   font-weight: 500;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.tokyoName{
+.tokyoName {
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #F3E4CE;
+  color: #f3e4ce;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-180px,323px);
+  transform: translate(-180px, 323px);
   font-weight: 500;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.verbierName{
+.verbierName {
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #F3E4CE;
+  color: #f3e4ce;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-120px,323px);
+  transform: translate(-120px, 323px);
   font-weight: 500;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.veniceName{
+.veniceName {
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #F3E4CE;
+  color: #f3e4ce;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-115px,323px);
+  transform: translate(-115px, 323px);
   font-weight: 500;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.amsterdamName{
+.amsterdamName {
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #F3E4CE;
+  color: #f3e4ce;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-165px,323px);
+  transform: translate(-165px, 323px);
   font-weight: 500;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.cityText{
+.cityText {
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #F3E4CE;
+  color: #f3e4ce;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-210px,323px);
+  transform: translate(-210px, 323px);
   font-weight: 500;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.cityTime{
+.cityTime {
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #FBF6EF;
+  color: #fbf6ef;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-610px,-324px);
+  transform: translate(-610px, -324px);
   font-size: 35px;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.cityDate{
+.cityDate {
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #FBF6EF;
+  color: #fbf6ef;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-610px,-275px);
+  transform: translate(-610px, -275px);
   font-size: 10px;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.cityIcon{
+.cityIcon {
   z-index: 0;
   margin: 0;
   position: absolute;
@@ -346,79 +341,79 @@ body{
   /*color: #ffffff;*/
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-510px,-334px);
+  transform: translate(-510px, -334px);
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-.cityTemperature{
+.cityTemperature {
   z-index: 0;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #FBF6EF;
+  color: #fbf6ef;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-486px,-274px);
+  transform: translate(-486px, -274px);
   font-size: 10px;
   /*font-family: 'Noto Sans KR', sans-serif;*/
 }
 
-#leftArrowIcon{
+#leftArrowIcon {
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-280px,300px);
+  transform: translate(-280px, 300px);
   font-size: 70px;
-  color: #F3E4CE;
+  color: #f3e4ce;
   cursor: pointer;
 }
 
-#rightArrowIcon{
+#rightArrowIcon {
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(183px,300px);
+  transform: translate(183px, 300px);
   font-size: 70px;
-  color: #F3E4CE;
+  color: #f3e4ce;
   cursor: pointer;
 }
 
-#leftArrowAboutIcon{
+#leftArrowAboutIcon {
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(-160px,238px);
+  transform: translate(-160px, 238px);
   font-size: 90px;
   /*color: #F3E4CE;*/
-  color: #F1D8BC;
+  color: #f1d8bc;
   cursor: pointer;
 }
 
-#rightArrowAboutIcon{
+#rightArrowAboutIcon {
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(78px,238px);
+  transform: translate(78px, 238px);
   font-size: 90px;
   /*color: #F3E4CE;*/
-  color: #F1D8BC;
+  color: #f1d8bc;
   cursor: pointer;
 }
 
-#fullscreenIcon{
+#fullscreenIcon {
   margin: 0;
   position: absolute;
   bottom: 15px;
@@ -428,7 +423,7 @@ body{
   color: rgba(243, 228, 206, 0.9);
 }
 
-#fullscreenExitIcon{
+#fullscreenExitIcon {
   margin: 0;
   position: absolute;
   bottom: 15px;
@@ -438,7 +433,7 @@ body{
   color: rgba(243, 228, 206, 0.9);
 }
 
-#paletteIcon{
+#paletteIcon {
   margin: 0;
   position: absolute;
   bottom: 20px;
@@ -448,7 +443,7 @@ body{
   color: rgba(243, 228, 206, 0.9);
 }
 
-#infoIcon{
+#infoIcon {
   margin: 0;
   position: absolute;
   bottom: 20px;
@@ -458,21 +453,21 @@ body{
   color: rgba(243, 228, 206, 0.9);
 }
 
-#cancelInfoScreen{
+#cancelInfoScreen {
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  transform: translate(595px,315px);
+  transform: translate(595px, 315px);
   cursor: pointer;
   font-size: 45px;
   /*color: #F3E4CE;*/
-  color: #F1D8BC;
+  color: #f1d8bc;
   border-radius: 50%;
-  background: #3C3D3E;
-  border: 10px solid #3C3D3E;
+  background: #3c3d3e;
+  border: 10px solid #3c3d3e;
 }
 
 .span_no_selection {
@@ -483,24 +478,28 @@ body{
   -ms-user-select: none; /* IE10+ */
 }
 
-#aboutTitle{
+#aboutTitle {
   /*transform: translateX(320px);*/
   text-align: center;
   font-weight: 600;
   font-size: 40px;
-  color: #F1D8BC;
+  color: #f1d8bc;
 }
 
-#aboutIcon{
+.aboutIcon {
   font-size: 140px;
 }
 
-.aboutIconMargin{
+.aboutIconMargin {
   text-align: center;
 }
 
-.mySlides {display: none}
-img {vertical-align: middle;}
+.mySlides {
+  display: none;
+}
+img {
+  vertical-align: middle;
+}
 
 /* Slideshow container */
 .slideshow-container {
@@ -510,14 +509,15 @@ img {vertical-align: middle;}
 }
 
 /* Next & previous buttons */
-.prev, .next {
+.prev,
+.next {
   cursor: pointer;
   position: absolute;
   top: 50%;
   width: auto;
   padding: 16px;
   margin-top: -22px;
-  color: #F1D8BC;
+  color: #f1d8bc;
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
@@ -532,14 +532,15 @@ img {vertical-align: middle;}
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* Caption text */
 .text {
   /*color: #f2f2f2;*/
-  color: #F1D8BC;
+  color: #f1d8bc;
   font-size: 21px;
   padding: 8px 12px;
   position: absolute;
@@ -573,12 +574,14 @@ img {vertical-align: middle;}
   transition: background-color 0.6s ease;
 }
 
-.marginDot{
+.marginDot {
+  text-align: center;
   bottom: 17px;
 }
 
-.active, .dot:hover {
-  background-color: #F1D8BC;
+.active,
+.dot:hover {
+  background-color: #f1d8bc;
 }
 
 /* Fading animation */
@@ -590,16 +593,28 @@ img {vertical-align: middle;}
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* On smaller screens, decrease text size */
 @media only screen and (max-width: 300px) {
-  .prev, .next,.text {font-size: 11px}
+  .prev,
+  .next,
+  .text {
+    font-size: 11px;
+  }
 }
