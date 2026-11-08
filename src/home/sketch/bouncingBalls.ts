@@ -111,10 +111,11 @@ function prefersReducedMotion(): boolean {
 }
 
 // resizeCanvas() wipes the pixels, so the trails drawn so far are copied back onto the new size.
+// noRedraw: its implicit redraw would step the balls onto the wiped canvas and lose that frame of trail.
 function resize(scene: Scene): void {
   const { p } = scene;
   const trails = p.get();
-  p.resizeCanvas(p.windowWidth, p.windowHeight);
+  p.resizeCanvas(p.windowWidth, p.windowHeight, true);
   p.background(BACKGROUND_GRAY);
   p.image(trails, 0, 0);
   scene.layout = { ...scene.layout, canvas: { width: p.width, height: p.height } };
