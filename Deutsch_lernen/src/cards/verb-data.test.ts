@@ -2,7 +2,15 @@ import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { ZodType } from 'zod';
-import { CardSchema, GroupSchema, TenseFileSchema, VerbsIndexSchema } from './schema.ts';
+import {
+  CardSchema,
+  ExampleFileSchema,
+  GroupSchema,
+  TenseFileSchema,
+  ThemeSchema,
+  VerbsIndexSchema,
+  WortfamilieFileSchema,
+} from './schema.ts';
 
 const BOM = String.fromCharCode(0xfeff);
 const JSON_DIR = path.resolve(import.meta.dirname, '../../verben/A1_A2_B1/json');
@@ -18,6 +26,17 @@ const KNOWN_INVALID: Record<string, Record<string, string>> = {
   praeteritum_konjugation: {},
   perfekt_konjugation: {},
   konjunktiv_ii: {},
+  examples: {
+    'perfekt_examples/stimmen.json': 'examples are plain strings, the modal reads { de, es, en }',
+    'praesens_examples/stimmen.json': 'examples are plain strings, the modal reads { de, es, en }',
+    'praeteritum_examples/stimmen.json': 'examples are plain strings, the modal reads { de, es, en }',
+  },
+  wortfamilie: {
+    'aufwachen.json': 'entries use "translation" (not read) and two have no "es"',
+    'ordnen.json': 'entries carry a "note" the modal does not read',
+    'schminken.json': 'extra root key "B1" with a second word list',
+  },
+  themes: {},
 };
 
 const SCHEMA_BY_FOLDER: Record<string, ZodType> = {
@@ -27,6 +46,9 @@ const SCHEMA_BY_FOLDER: Record<string, ZodType> = {
   praeteritum_konjugation: TenseFileSchema,
   perfekt_konjugation: TenseFileSchema,
   konjunktiv_ii: TenseFileSchema,
+  examples: ExampleFileSchema,
+  wortfamilie: WortfamilieFileSchema,
+  themes: ThemeSchema,
 };
 
 /** The browser decodes with `TextDecoder`, which drops a UTF-8 BOM; several files have one. */
@@ -84,5 +106,13 @@ describe('verb data matches its schema', () => {
       .flatMap((file) => GroupSchema.parse(readJson(path.join(JSON_DIR, 'groups', file))).verbs)
       .filter((verb) => !cards.has(verb));
     expect(missing).toEqual([]);
+  });
+
+  it('every theme file is named after its level and group', () => {
+    const misnamed = jsonFilesIn('themes').filter((file) => {
+      const theme = ThemeSchema.parse(readJson(path.join(JSON_DIR, 'themes', file)));
+      return file !== `${theme.level.replace('.', '_')}_${theme.group}_theme.json`;
+    });
+    expect(misnamed).toEqual([]);
   });
 });
