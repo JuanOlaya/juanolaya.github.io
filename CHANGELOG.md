@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.9.5](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.9.4...v0.9.5) (2026-11-08)
+
+
+### Bug Fixes
+
+* **platform-game:** give the canvas room on landscape phones ([#89](https://github.com/JuanOlaya/juanolaya.github.io/issues/89)) ([18bc8db](https://github.com/JuanOlaya/juanolaya.github.io/commit/18bc8dbba1ee8eb91ffbaf011eae3560d27ff7ed))
+* **platform-game:** keep the ball inside the world and the panel off the canvas ([#87](https://github.com/JuanOlaya/juanolaya.github.io/issues/87)) ([cc5436b](https://github.com/JuanOlaya/juanolaya.github.io/commit/cc5436bd92b7aef62f50f1f537cc96c02165ff59))
+
 ## [0.9.4](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.9.3...v0.9.4) (2026-11-08)
 
 
