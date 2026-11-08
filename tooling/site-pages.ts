@@ -32,6 +32,8 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'HCI_BHT_Website' },
   { kind: 'vite', dir: 'Haptic_Cards' },
   { kind: 'legacy', path: 'Haptic_Cards/img' },
+  { kind: 'legacy', path: 'Haptic_Cards/README.md' },
+  { kind: 'legacy', path: 'Haptic_Cards/metadata.json' },
   { kind: 'legacy', path: 'MuseFlow' },
   { kind: 'legacy', path: 'OldWebsite' },
   { kind: 'legacy', path: 'OldWebsite2' },
