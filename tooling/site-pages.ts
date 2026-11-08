@@ -48,7 +48,7 @@ export const siteEntries: readonly SiteEntry[] = [
   },
   { kind: 'legacy', path: 'TestingSoSci' },
   { kind: 'vite', dir: 'Tropical' },
-  { kind: 'legacy', path: 'UX' },
+  { kind: 'vite', dir: 'UX' },
   { kind: 'legacy', path: 'Website' },
   { kind: 'legacy', path: 'WeightLever' },
   { kind: 'legacy', path: 'multitouchTest' },
