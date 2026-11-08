@@ -48,6 +48,14 @@ Las carpetas `legacy` se publican byte a byte y solo con archivos versionados en
 3. Estilos: `<Proyecto>/src/style.css` con `@import '../../src/shared/styles/tailwind.css';` y `@source '..';`.
 4. Tests junto al código (`<Proyecto>/src/**/*.test.ts`) y pasar `lint`, `typecheck`, `test` y `build`.
 
+## Versiones
+
+El sitio usa [versionado semántico](https://semver.org/lang/es/) automatizado con [release-please](https://github.com/googleapis/release-please):
+
+- Los commits `fix:` suben la versión de parche y los `feat:` la versión menor; un `!` o `BREAKING CHANGE:` marca un cambio mayor. Otros tipos (`chore:`, `docs:`, …) no generan versión.
+- Con cada push a `master`, release-please abre o actualiza un PR de release con la nueva versión y el `CHANGELOG.md`.
+- Al fusionar ese PR se crea la etiqueta `vX.Y.Z` y una GitHub Release con el sitio compilado adjunto (`juanolaya-site-vX.Y.Z.zip`).
+
 ## Contribuir
 
 - Una rama y un PR por issue, con commits en formato [Conventional Commits](https://www.conventionalcommits.org/).
