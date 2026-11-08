@@ -38,7 +38,6 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'PixelGrid' },
   { kind: 'legacy', path: 'PlatformGame' },
   { kind: 'legacy', path: 'Project_Management' },
-  { kind: 'legacy', path: 'PruebaGithub' },
   // Server code (moving to server/ in #16) must never be published; the page itself may live in
   // Sockets/public/ or Sockets/index.html depending on that move, so the whole folder is listed.
   {
@@ -52,4 +51,7 @@ export const siteEntries: readonly SiteEntry[] = [
   { kind: 'legacy', path: 'Website' },
   { kind: 'legacy', path: 'WeightLever' },
   { kind: 'legacy', path: 'multitouchTest' },
+
+  // Archived pages (issue #7). The old folders above keep only redirect stubs pointing here.
+  { kind: 'legacy', path: 'legacy' },
 ];
