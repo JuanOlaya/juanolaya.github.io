@@ -1,8 +1,10 @@
+import { pixelDensityFor, prefersReducedMotion } from '@shared/p5/display.ts';
 import { mountSketch, type Unmount } from '@shared/p5/mount.ts';
+import { mountSketchUi, type SketchUiOptions } from '@shared/p5/sketch-ui.ts';
 import type p5 from 'p5';
 import { drawProfile, drawWebcamWindow } from './artwork.ts';
 import type { WallConfig } from './config.ts';
-import { drawGenerativeArt } from './generative-art.ts';
+import { drawGenerativeArt, generativeArtPanel } from './generative-art.ts';
 import { handleDrag, handleKey, handlePress, handleRelease, touchesOf } from './input.ts';
 import { artistSpots, pixelGridPositions, PIXEL_SIZE } from './layout.ts';
 import { drawMenu } from './menu.ts';
@@ -19,11 +21,15 @@ const PLAIN_BACKGROUND = '#3F1801';
 /** Mounts the "Inspirational Wall" sketch shared by /ParticleCanvas/ and /PixelGrid/. */
 export function mountInspirationalWall(config: WallConfig, host: HTMLElement = document.body): Unmount {
   const state = createWallState(config);
-  const buttons = addLegacyButtons(host, state);
+  // Reduced motion: the flocks start still and move only once the visitor presses Play.
+  state.paused = prefersReducedMotion();
+  let instance: p5 | undefined;
   const unmountSketch = mountSketch((p: p5) => {
+    instance = p;
     let canvas: HTMLCanvasElement;
     p.setup = () => {
       const renderer = p.createCanvas(p.windowWidth, p.windowHeight);
+      p.pixelDensity(pixelDensityFor(window.devicePixelRatio));
       renderer.position(0, 0);
       renderer.style('z-index', CANVAS_Z_INDEX);
       canvas = canvasElement(renderer);
@@ -42,10 +48,16 @@ export function mountInspirationalWall(config: WallConfig, host: HTMLElement = d
     p.touchEnded = () => handleRelease(p, state);
     p.keyPressed = () => handleKey(state, p.keyCode);
   }, host);
+  const unmountUi = mountSketchUi(host, { ...panelFor(state, () => instance), placement: 'top' });
   return () => {
+    unmountUi();
     unmountSketch();
-    for (const button of buttons) button.remove();
   };
+}
+
+/** Title, caption and controls of the page the wall was opened on. */
+function panelFor(state: WallState, sketch: () => p5 | undefined): SketchUiOptions {
+  return generativeArtPanel(state, sketch);
 }
 
 // p5 types `elt` as `any`; checking it keeps the rest of the sketch strictly typed.
@@ -124,16 +136,4 @@ function drawWall(p: p5, state: WallState, canvas: HTMLCanvasElement): void {
   }
   p.textSize(20);
   p.fill(255);
-}
-
-/** The original page appended these two buttons to <body>; they sit under the canvas but are kept as published. */
-function addLegacyButtons(host: HTMLElement, state: WallState): HTMLButtonElement[] {
-  const trace = document.createElement('button');
-  trace.textContent = 'Trace';
-  trace.addEventListener('click', () => (state.clearBackground = !state.clearBackground));
-  const pause = document.createElement('button');
-  pause.textContent = 'Pause';
-  pause.addEventListener('click', () => (state.paused = !state.paused));
-  host.append(trace, pause);
-  return [trace, pause];
 }

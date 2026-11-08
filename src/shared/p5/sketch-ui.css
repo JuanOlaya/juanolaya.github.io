@@ -2,7 +2,6 @@
 .sketch-ui {
   position: fixed;
   right: 16px;
-  bottom: 16px;
   z-index: 10;
   box-sizing: border-box;
   max-width: min(420px, calc(100vw - 32px));
@@ -19,15 +18,40 @@
     sans-serif;
 }
 
+.sketch-ui--bottom {
+  bottom: 16px;
+}
+
+.sketch-ui--top {
+  top: 16px;
+}
+
+.sketch-ui__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sketch-ui--collapsed .sketch-ui__body {
+  display: none;
+}
+
+.sketch-ui .sketch-ui__collapse {
+  min-height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
 .sketch-ui__title {
-  margin: 0 0 4px;
+  margin: 0;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.01em;
 }
 
 .sketch-ui__caption {
-  margin: 0 0 10px;
+  margin: 4px 0 10px;
   color: #b9b2a6;
 }
 
@@ -82,7 +106,6 @@
 @media (max-width: 640px) {
   .sketch-ui {
     right: 8px;
-    bottom: 8px;
     left: 8px;
     max-width: none;
     padding: 8px 10px;
@@ -90,6 +113,31 @@
   }
 
   /* Title and caption share one line so the panel covers as little of the sketch as possible. */
+  .sketch-ui--bottom {
+    bottom: 16px;
+  }
+
+  .sketch-ui--top {
+    top: 16px;
+  }
+
+  .sketch-ui__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .sketch-ui--collapsed .sketch-ui__body {
+    display: none;
+  }
+
+  .sketch-ui .sketch-ui__collapse {
+    min-height: 28px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
   .sketch-ui__title {
     display: inline;
     margin-right: 6px;
@@ -98,10 +146,6 @@
 
   .sketch-ui__caption {
     display: inline;
-  }
-
-  .sketch-ui__controls {
-    margin-top: 8px;
   }
 
   .sketch-ui .sketch-ui__button {

@@ -13,7 +13,11 @@ export interface SketchUiOptions {
   title: string;
   caption: string;
   controls: readonly SketchControl[];
+  /** Corner the panel sits in; `top` keeps it clear of toolbars drawn along the bottom. */
+  placement?: 'top' | 'bottom';
 }
+
+const HIDE_KEY = 'h';
 
 export interface KeyPress {
   key: string;
@@ -27,7 +31,7 @@ export function controlForKey(
   controls: readonly SketchControl[],
   press: KeyPress,
 ): SketchControl | undefined {
-  if (press.ctrlKey || press.metaKey || press.altKey) return undefined;
+  if (hasModifier(press)) return undefined;
   return controls.find((control) => control.key === press.key.toLowerCase());
 }
 
@@ -59,13 +63,35 @@ function createButton(control: SketchControl, run: (control: SketchControl) => v
   return button;
 }
 
+function hasModifier(press: KeyPress): boolean {
+  return press.ctrlKey || press.metaKey || press.altKey;
+}
+
+/** Folds the panel down to its title so it never hides part of the sketch for good. */
+function collapseButton(panel: HTMLElement, body: HTMLElement): HTMLButtonElement {
+  const button = element('button', 'sketch-ui__button sketch-ui__collapse', 'Hide');
+  button.type = 'button';
+  body.id = `sketch-ui-body-${Math.random().toString(36).slice(2)}`;
+  button.setAttribute('aria-controls', body.id);
+  button.setAttribute('aria-expanded', 'true');
+  button.setAttribute('aria-keyshortcuts', keyLabel(HIDE_KEY));
+  for (const type of STOPPED_EVENTS) button.addEventListener(type, (event) => event.stopPropagation());
+  button.addEventListener('click', () => {
+    const collapsed = panel.classList.toggle('sketch-ui--collapsed');
+    button.setAttribute('aria-expanded', String(!collapsed));
+    button.textContent = collapsed ? 'Show' : 'Hide';
+  });
+  return button;
+}
+
 /**
  * Title, caption and a row of buttons laid over a sketch, each with a keyboard shortcut.
  * Returns a function that removes the panel and its key listener.
  */
 export function mountSketchUi(host: HTMLElement, options: SketchUiOptions): () => void {
-  const panel = element('section', 'sketch-ui');
+  const panel = element('section', `sketch-ui sketch-ui--${options.placement ?? 'bottom'}`);
   panel.setAttribute('aria-label', `${options.title} controls`);
+  const body = element('div', 'sketch-ui__body');
   const row = element('div', 'sketch-ui__controls');
   const buttons = new Map<SketchControl, HTMLButtonElement>();
   const sync = () => {
@@ -79,17 +105,21 @@ export function mountSketchUi(host: HTMLElement, options: SketchUiOptions): () =
   };
   for (const control of options.controls) buttons.set(control, createButton(control, run));
   row.append(...buttons.values());
-  panel.append(
-    element('h1', 'sketch-ui__title', options.title),
-    element('p', 'sketch-ui__caption', options.caption),
-    row,
-  );
+  body.append(element('p', 'sketch-ui__caption', options.caption), row);
+  const header = element('div', 'sketch-ui__header');
+  const hide = collapseButton(panel, body);
+  header.append(element('h1', 'sketch-ui__title', options.title), hide);
+  panel.append(header, body);
   host.append(panel);
   sync();
 
   const onKey = (event: KeyboardEvent) => {
     // Space or Enter on a focused button already fires its click.
     if (event.target instanceof HTMLButtonElement && (event.key === ' ' || event.key === 'Enter')) return;
+    if (event.key.toLowerCase() === HIDE_KEY && !hasModifier(event)) {
+      hide.click();
+      return;
+    }
     const control = controlForKey(options.controls, event);
     if (!control) return;
     event.preventDefault();
