@@ -31,5 +31,10 @@ export default defineConfig([
     files: ['tooling/**', '*.config.{js,ts}'],
     languageOptions: { globals: globals.node },
   },
+  {
+    // Issue #11 names these components; none of them collides with an HTML element.
+    files: ['Haptic_Cards/src/components/**'],
+    rules: { 'vue/multi-word-component-names': ['error', { ignores: ['Carousel', 'Pills', 'Tabs'] }] },
+  },
   prettier,
 ]);

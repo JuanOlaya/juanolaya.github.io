@@ -1,0 +1,114 @@
+@import '../../src/shared/styles/tailwind.css';
+@source '.';
+@source '../index.html';
+/* The pre-migration page is kept only as the extraction test's oracle; its Tailwind v3 classes must not leak in. */
+@source not './data/__fixtures__';
+
+@layer base {
+  body {
+    font-family:
+      'Inter',
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+
+  /* Tailwind v4 dropped the pointer cursor on buttons; the original page (Tailwind v3) had it. */
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .nav-btn {
+    @apply flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-[#001011] text-base font-black text-white shadow-md transition hover:bg-sky-700 hover:shadow-lg active:scale-95 sm:h-11 sm:w-11 sm:text-lg;
+  }
+
+  .use-case-tag,
+  .general-use-case-tag {
+    display: inline-block;
+    margin: 2px;
+    border-radius: 9999px;
+    vertical-align: middle;
+    font-size: 0.85em;
+    padding: 4px 10px;
+  }
+
+  .use-case-tag {
+    background-color: #007bff;
+  }
+
+  .general-use-case-tag {
+    background-color: #fd7e14;
+  }
+
+  .gallery-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 1px solid rgba(254, 250, 246, 0.2);
+    border-radius: 9999px;
+    background-color: rgba(0, 16, 17, 0.65);
+    color: #fefaf6;
+    opacity: 0.75;
+    backdrop-filter: blur(4px);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .gallery-container:hover .gallery-nav-btn {
+    opacity: 1;
+  }
+
+  .gallery-nav-btn:hover {
+    transform: translateY(-50%) scale(1.08);
+    border-color: #fd5321;
+    background-color: #fd5321;
+    color: #fff;
+    opacity: 1;
+  }
+
+  .gallery-prev-btn {
+    left: 0.5rem;
+  }
+
+  .gallery-next-btn {
+    right: 0.5rem;
+  }
+
+  .gallery-nav-btn svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .gallery-dots {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .gallery-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background-color: rgba(255, 255, 255, 0.6);
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .gallery-dot.active {
+    background-color: #fd5321;
+    transform: scale(1.3);
+  }
+}
