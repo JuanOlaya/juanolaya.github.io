@@ -5,7 +5,7 @@ import type { Rect } from '../sketch/orbit.ts';
 
 const emit = defineEmits<{ attract: [rect: Rect | null] }>();
 
-// The card the background rings are circling; its box is re-sent while the page scrolls.
+// The card the background rings are circling; its box is re-sent when the page scrolls or resizes.
 let activeCard: HTMLElement | null = null;
 
 function attractTo(card: HTMLElement | null): void {
@@ -28,12 +28,18 @@ function onFocus(event: FocusEvent): void {
   if (card.matches(':focus-visible')) attractTo(card);
 }
 
-function followScroll(): void {
+function followCard(): void {
   if (activeCard) attractTo(activeCard);
 }
 
-onMounted(() => window.addEventListener('scroll', followScroll, { passive: true }));
-onBeforeUnmount(() => window.removeEventListener('scroll', followScroll));
+onMounted(() => {
+  window.addEventListener('scroll', followCard, { passive: true });
+  window.addEventListener('resize', followCard);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', followCard);
+  window.removeEventListener('resize', followCard);
+});
 </script>
 
 <template>
