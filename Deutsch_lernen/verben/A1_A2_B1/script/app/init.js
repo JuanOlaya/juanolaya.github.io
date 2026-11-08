@@ -72,6 +72,11 @@ import { closeVerbModal, loadProgress, navigateToLevel, renderVerbGroup, setupPr
 
  // Load enough data for the initial view only if cache cannot already render it.
 
+ // A cold start fetches every card of the level before the first render; without this the page stays blank for seconds.
+ if (!hasInitialDataInCache) {
+ cardsContainer.innerHTML = '<div class="loading-spinner">Daten werden geladen...</div>';
+ }
+
  const initialLoadPromise = hasInitialDataInCache
 
  ? Promise.resolve()

@@ -4406,6 +4406,19 @@
 
 
     <script src="script/verben-helpers.js?v=1.88"></script>
+    <!-- Fetch the whole module graph in parallel instead of one import level at a time. -->
+    <link rel="modulepreload" href="script/app/state.js">
+    <link rel="modulepreload" href="script/app/shared.js">
+    <link rel="modulepreload" href="script/app/levels.js">
+    <link rel="modulepreload" href="script/app/layout.js">
+    <link rel="modulepreload" href="script/app/data-loading.js">
+    <link rel="modulepreload" href="script/app/search.js">
+    <link rel="modulepreload" href="script/app/views.js">
+    <link rel="modulepreload" href="script/app/verb-modal.js">
+    <link rel="modulepreload" href="script/app/card-back.js">
+    <link rel="modulepreload" href="script/app/conjugation-modal.js">
+    <link rel="modulepreload" href="script/app/view-controls.js">
+    <link rel="modulepreload" href="script/app/init.js">
     <script type="module" src="script/script.js?v=1.88"></script>
 
 
