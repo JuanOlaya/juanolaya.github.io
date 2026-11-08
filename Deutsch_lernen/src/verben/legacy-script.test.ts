@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { describe, expect, it } from 'vitest';
+import { STORAGE_SCHEMA_VERSION, type MemoStorage } from '../storage/memo-storage.ts';
 import { legacyGlobals } from './legacy-globals.ts';
 import { declarationsOf, loadLegacyFunction, readLegacyScript } from './legacy-script.ts';
 
@@ -18,10 +19,28 @@ describe('verben.html wiring of the helper modules', () => {
     expect(HELPER_NAMES.filter((name) => declarationsOf(source, name).length > 0)).toEqual([]);
   });
 
+  it('script.js reaches localStorage only through the typed memoStorage layer', () => {
+    expect(readLegacyScript()).not.toMatch(/localStorage\.\w+\(/);
+  });
+
   it('the committed bundle publishes every helper as a global under its legacy name', () => {
-    const context: Record<string, unknown> = {};
+    const items = new Map<string, string>();
+    const localStorage = {
+      get length() {
+        return items.size;
+      },
+      key: (index: number) => [...items.keys()][index] ?? null,
+      getItem: (key: string) => items.get(key) ?? null,
+      setItem: (key: string, value: string) => void items.set(key, value),
+      removeItem: (key: string) => void items.delete(key),
+    };
+    const context: Record<string, unknown> = { localStorage };
     vm.runInNewContext(readVerben('script/verben-helpers.js'), context);
-    expect(Object.keys(context).sort()).toEqual([...HELPER_NAMES].sort());
+    expect(Object.keys(context).sort()).toEqual([...HELPER_NAMES, 'localStorage', 'memoStorage'].sort());
+    // The bundle migrates storage before script.js runs, and script.js reaches it through `memoStorage`.
+    expect(items.get('memodeutsch-storage-version')).toBe(String(STORAGE_SCHEMA_VERSION));
+    (context.memoStorage as MemoStorage).saveProgress('A2', 4);
+    expect(items.get('progress_A2')).toBe('4');
     const format = context.formatVerbPrefix as typeof legacyGlobals.formatVerbPrefix;
     expect(format('abfahren')).toBe(legacyGlobals.formatVerbPrefix('abfahren'));
   });

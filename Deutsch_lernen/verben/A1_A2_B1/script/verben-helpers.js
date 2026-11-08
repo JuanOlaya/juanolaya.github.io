@@ -1,5 +1,73 @@
 // Generated from Deutsch_lernen/src/verben/verben-helpers.ts by `npm run build:legacy-scripts`. Do not edit.
 (function() {
+	// Deutsch_lernen/src/storage/memo-storage.ts
+	var STORAGE_VERSION_KEY = "memodeutsch-storage-version";
+	/** Bump the `script.js` cache name here only: migration 2 removes every other `verbAppCache_*` key. */
+	var CURRENT_VERB_CACHE_KEY = "verbAppCache_v46_wortfamilie_search_ready";
+	var VERB_CACHE_PREFIX = "verbAppCache_";
+	var LEGACY_SETTINGS_FLAG = "verbenSettingsMigration_v1_show_ik_lid";
+	function showIkAndLidTags(store) {
+		if (!store.getItem(LEGACY_SETTINGS_FLAG)) {
+			store.setItem("toggle-ik-switch", "true");
+			store.setItem("toggle-lid-switch", "true");
+		}
+		store.removeItem(LEGACY_SETTINGS_FLAG);
+	}
+	function removeStaleVerbCaches(store) {
+		const keys = Array.from({ length: store.length }, (_, index) => store.key(index));
+		for (const key of keys) if (key?.startsWith(VERB_CACHE_PREFIX) && key !== "verbAppCache_v46_wortfamilie_search_ready") store.removeItem(key);
+	}
+	/** Migration `n` (1-based) upgrades a store from schema version `n - 1` to `n`. Append only. */
+	var migrations = [showIkAndLidTags, removeStaleVerbCaches];
+	var STORAGE_SCHEMA_VERSION = migrations.length;
+	function readVersion(store) {
+		const version = Number(store.getItem(STORAGE_VERSION_KEY));
+		return Number.isInteger(version) && version > 0 ? version : 0;
+	}
+	/** Brings `store` up to `STORAGE_SCHEMA_VERSION`; a store written by a newer version is left alone. */
+	function migrateStorage(store) {
+		const from = readVersion(store);
+		if (from >= STORAGE_SCHEMA_VERSION) return;
+		migrations.slice(from).forEach((migrate) => migrate(store));
+		store.setItem(STORAGE_VERSION_KEY, String(STORAGE_SCHEMA_VERSION));
+	}
+	function isRecord(value) {
+		return typeof value === "object" && value !== null && !Array.isArray(value);
+	}
+	function parseVerbCache(raw) {
+		if (raw === null) return null;
+		try {
+			const data = JSON.parse(raw);
+			if (!isRecord(data) || !isRecord(data.allVerbsData) || !isRecord(data.verbGroupsByLevel)) return null;
+			return data;
+		} catch {
+			return null;
+		}
+	}
+	function parseGroupIndex(raw) {
+		const group = Number.parseInt(raw ?? "", 10);
+		return Number.isNaN(group) ? null : group;
+	}
+	function createMemoStorage(store) {
+		return {
+			getCurrentLevel: () => store.getItem("currentLevel"),
+			getSavedGroup: (level) => parseGroupIndex(store.getItem(`progress_${level}`)),
+			saveProgress(level, groupIndex) {
+				store.setItem(`progress_${level}`, String(groupIndex));
+				store.setItem("currentLevel", level);
+			},
+			getToggle(id) {
+				const value = store.getItem(`toggle-${id}`);
+				return value === null ? null : value === "true";
+			},
+			setToggle: (id, checked) => store.setItem(`toggle-${id}`, String(checked)),
+			getCardVersion: () => store.getItem("verben-card-version"),
+			setCardVersion: (version) => store.setItem("verben-card-version", version),
+			readVerbCache: () => parseVerbCache(store.getItem(CURRENT_VERB_CACHE_KEY)),
+			/** Throws when the payload exceeds the quota, so the caller can retry with a smaller one. */
+			writeVerbCache: (payload) => store.setItem(CURRENT_VERB_CACHE_KEY, JSON.stringify(payload))
+		};
+	}
 	// Deutsch_lernen/src/verben/mojibake.ts
 	/**
 	* Repairs text that was saved with a wrong encoding (UTF-8 read as Windows-1252, sometimes several times).
@@ -324,13 +392,9 @@
 		if (prefix && verbName.startsWith(prefix)) return `<span class="separable-prefix">${prefix}</span>${verbName.slice(prefix.length)}`;
 		return verbName;
 	}
-	// Deutsch_lernen/src/verben/verben-helpers.ts
-	/**
-	* Entry of `verben/A1_A2_B1/script/verben-helpers.js`, the classic script that `verben.html` loads before
-	* `script.js`. The legacy script calls these helpers by their bare names, so they are published as globals
-	* under exactly those names until the page itself becomes a module.
-	*/
-	Object.assign(globalThis, {
+	// Deutsch_lernen/src/verben/legacy-globals.ts
+	/** Helpers that `script.js` calls by their bare names, keyed by those names. */
+	var legacyGlobals = {
 		separablePrefixesMap,
 		formatVerbPrefix,
 		hexToRgb,
@@ -349,5 +413,13 @@
 		getCleanPraeteritum,
 		cleanVerbForm,
 		conjugateBaseForm
-	});
+	};
+	// Deutsch_lernen/src/verben/verben-helpers.ts
+	/**
+	* Entry of `verben/A1_A2_B1/script/verben-helpers.js`, the classic script that `verben.html` loads before
+	* `script.js`. The legacy script calls these helpers by their bare names, so they are published as globals
+	* under exactly those names until the page itself becomes a module.
+	*/
+	migrateStorage(localStorage);
+	Object.assign(globalThis, legacyGlobals, { memoStorage: createMemoStorage(localStorage) });
 })();
