@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:legacy-scripts": "node tooling/build-legacy-scripts.ts",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
