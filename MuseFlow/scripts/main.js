@@ -245,9 +245,9 @@ var scoreQ10=50;
 
 
 function preload() {
-  //img = loadImage('https://juanolaya.github.io/assets/chair.png');
-  undemandingInstructions= loadImage('https://juanolaya.github.io/assets/undemandingInstructions.png');
-  demandingInstructions= loadImage('https://juanolaya.github.io/assets/demandingInstructions.png');
+  //img = loadImage('/assets/chair.png');
+  undemandingInstructions= loadImage('/assets/undemandingInstructions.png');
+  demandingInstructions= loadImage('/assets/demandingInstructions.png');
   
   if(document.getElementById('caseNum').value!="%caseNumber%"){ 
     caseNumber=document.getElementById('caseNum').value;
