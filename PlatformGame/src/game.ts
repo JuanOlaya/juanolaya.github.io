@@ -2,11 +2,13 @@ import { pixelDensityFor, prefersReducedMotion } from '@shared/p5/display.ts';
 import { mountSketch } from '@shared/p5/mount.ts';
 import { mountSketchUi } from '@shared/p5/sketch-ui.ts';
 import type p5 from 'p5';
-import { approach, fitAspect, planSteps } from './clock.ts';
+import { approach, fitAspect } from './clock.ts';
+import { generateWorld } from './domain/level.ts';
+import { RADIUS } from './domain/player.ts';
+import { VIEW_HEIGHT, VIEW_WIDTH } from './domain/view.ts';
+import type { InputState, StepReport, World } from './domain/world.ts';
 import { attachControls, type Controls } from './input.ts';
-import { VIEW_HEIGHT, VIEW_WIDTH, generateLevel, type Level } from './level.ts';
 import { burst, stepParticles, type Particle } from './particles.ts';
-import { RADIUS, createPlayer, stepPlayer, type Input, type Player, type StepEvents } from './physics.ts';
 import {
   drawHud,
   drawOverlay,
@@ -25,12 +27,12 @@ const HARD_LANDING = 14;
 const MIN_TEXT_SCALE = 0.6;
 const MAX_UI_SCALE = 1.6;
 
+/**
+ * Application layer: owns the session (started, paused, feedback effects) and drives the domain
+ * `World` from p5's clock. Nothing here knows how a collision is computed.
+ */
 interface GameState {
-  level: Level;
-  player: Player;
-  /** Position before the last physics step, for interpolated drawing. */
-  previous: { x: number; y: number };
-  carry: number;
+  world: World;
   started: boolean;
   paused: boolean;
   /** Start/pause screen visibility, 0..1, eased in and out. */
@@ -42,13 +44,12 @@ interface GameState {
   reduced: boolean;
 }
 
+/** Notified after every frame with what the world did; the explanatory panels hang off this. */
+export type FrameListener = (world: World, seconds: number) => void;
+
 function createState(reduced: boolean): GameState {
-  const player = createPlayer();
   return {
-    level: generateLevel(),
-    player,
-    previous: { x: player.x, y: player.y },
-    carry: 0,
+    world: generateWorld(),
     started: false,
     paused: false,
     overlay: 1,
@@ -77,7 +78,7 @@ function togglePause(state: GameState): void {
 
 function landingDust(state: GameState, speed: number): void {
   const strength = Math.min(speed / 20, 1);
-  const { x, y } = state.player;
+  const { x, y } = state.world.player.position;
   state.squash = 0.22 * strength;
   burst(state.particles, { x, y: y + RADIUS }, 4 + Math.round(8 * strength), {
     speed: 260 * strength + 80,
@@ -89,12 +90,17 @@ function landingDust(state: GameState, speed: number): void {
 }
 
 /** Dust, flash and shake are feedback only; with reduced motion they are skipped entirely. */
-function react(state: GameState, events: StepEvents): void {
+function react(state: GameState, events: StepReport): void {
   if (state.reduced) return;
   if (events.landingSpeed > 2) landingDust(state, events.landingSpeed);
   if (!events.wallHit) return;
   state.flash = 0.8;
-  burst(state.particles, state.player, 6, { speed: 220, angle: 0, arc: Math.PI * 2, color: '#FFFFFF' });
+  burst(state.particles, state.world.player.position, 6, {
+    speed: 220,
+    angle: 0,
+    arc: Math.PI * 2,
+    color: '#FFFFFF',
+  });
 }
 
 function fadeEffects(state: GameState, seconds: number): void {
@@ -106,18 +112,13 @@ function fadeEffects(state: GameState, seconds: number): void {
   state.shake = Math.max(0, state.shake - decay * MAX_SHAKE * 0.5);
 }
 
-/** Advances the game by real time in fixed physics steps; returns the interpolation factor. */
-function update(state: GameState, input: Input, seconds: number): number {
+/** Advances the game by real time; the world runs its own fixed steps and reports back. */
+function update(state: GameState, input: InputState, seconds: number): void {
   fadeEffects(state, seconds);
-  if (!state.started || state.paused) return 1;
+  if (!state.started || state.paused) return;
   stepParticles(state.particles, seconds);
-  const plan = planSteps(state.carry, seconds);
-  state.carry = plan.carry;
-  for (let i = 0; i < plan.steps; i++) {
-    state.previous = { x: state.player.x, y: state.player.y };
-    react(state, stepPlayer(state.player, input, state.level));
-  }
-  return plan.alpha;
+  state.world.step(seconds, input);
+  react(state, state.world.lastStep);
 }
 
 function overlayText(state: GameState): [string, string] {
@@ -125,15 +126,22 @@ function overlayText(state: GameState): [string, string] {
   return ['Paused', 'Press Space or an arrow to resume'];
 }
 
-function renderPosition(state: GameState, alpha: number): { x: number; y: number } {
-  const { player, previous } = state;
+/** Draws between the last two physics positions; a paused game shows the current one exactly. */
+function renderPosition(state: GameState): { x: number; y: number } {
+  const { world } = state;
+  const current = world.player.position;
+  const previous = world.previousPosition;
   // A respawn jumps from the floor to the top; interpolating across it would draw a streak.
-  if (Math.abs(player.y - previous.y) > VIEW_HEIGHT / 2) return { x: player.x, y: player.y };
-  return { x: previous.x + (player.x - previous.x) * alpha, y: previous.y + (player.y - previous.y) * alpha };
+  if (Math.abs(current.y - previous.y) > VIEW_HEIGHT / 2) return current;
+  const alpha = state.started && !state.paused ? world.lastStep.alpha : 1;
+  return {
+    x: previous.x + (current.x - previous.x) * alpha,
+    y: previous.y + (current.y - previous.y) * alpha,
+  };
 }
 
-function draw(p: p5, state: GameState, alpha: number): void {
-  const { x, y } = renderPosition(state, alpha);
+function draw(p: p5, state: GameState): void {
+  const { x, y } = renderPosition(state);
   const scale = p.width / VIEW_WIDTH;
   p.push();
   p.scale(scale);
@@ -141,7 +149,7 @@ function draw(p: p5, state: GameState, alpha: number): void {
   drawSky(p, x);
   // Camera locked on the ball, as in the original.
   p.translate(-x + VIEW_WIDTH / 2, 0);
-  drawWorld(p, state.level);
+  drawWorld(p, state.world);
   drawParticles(p, state.particles);
   drawPlayer(p, x, y, state.squash, state.flash);
   p.pop();
@@ -150,7 +158,7 @@ function draw(p: p5, state: GameState, alpha: number): void {
   // The HUD goes under the start/pause card: scaled up on phones it would otherwise cover the title.
   p.push();
   p.scale(scale * uiScale);
-  drawHud(p, state.player);
+  drawHud(p, state.world.player);
   p.pop();
   p.push();
   p.scale(scale);
@@ -165,7 +173,14 @@ function fitCanvas(p: p5, stage: HTMLElement): void {
   p.resizeCanvas(Math.max(width, 1), Math.max(height, 1));
 }
 
-function createSketch(state: GameState, stage: HTMLElement, controls: Controls, observer: ResizeObserver) {
+interface SketchDeps {
+  stage: HTMLElement;
+  controls: Controls;
+  observer: ResizeObserver;
+  onFrame: FrameListener;
+}
+
+function createSketch(state: GameState, { stage, controls, observer, onFrame }: SketchDeps) {
   return (p: p5) => {
     p.setup = () => {
       const canvas = p.createCanvas(1, 1);
@@ -177,7 +192,9 @@ function createSketch(state: GameState, stage: HTMLElement, controls: Controls, 
     };
     p.draw = () => {
       const seconds = Math.min(p.deltaTime / 1000, MAX_FRAME_SECONDS);
-      draw(p, state, update(state, controls.input, seconds));
+      update(state, controls.input, seconds);
+      draw(p, state);
+      onFrame(state.world, seconds);
     };
     p.mousePressed = () => wake(state);
   };
@@ -188,17 +205,18 @@ export interface GameHost {
   pad: HTMLElement;
   /** Slot beside or above the stage for the controls panel, so it never covers the canvas. */
   panel: HTMLElement;
+  onFrame?: FrameListener;
 }
 
 /** Mounts the game; everything it adds is removed on pagehide so a bfcache restore can mount afresh. */
-export function mountPlatformGame({ stage, pad, panel }: GameHost): () => void {
+export function mountPlatformGame({ stage, pad, panel, onFrame = () => {} }: GameHost): () => void {
   const state = createState(prefersReducedMotion());
   const controls = attachControls(pad, () => wake(state));
   let instance: p5 | undefined;
   const observer = new ResizeObserver(() => instance && fitCanvas(instance, stage));
   const unmountSketch = mountSketch((p) => {
     instance = p;
-    createSketch(state, stage, controls, observer)(p);
+    createSketch(state, { stage, controls, observer, onFrame })(p);
   }, stage);
   const unmountUi = mountSketchUi(panel, {
     title: 'Platform Game',

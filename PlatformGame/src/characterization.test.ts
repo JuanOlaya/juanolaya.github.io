@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { fitAspect } from './clock.ts';
-import { VIEW_HEIGHT } from './level.ts';
-import { RADIUS, createPlayer, stepPlayer, type Input } from './physics.ts';
+import { Platform } from './domain/platform.ts';
+import { Player, RADIUS } from './domain/player.ts';
+import { STEP_SECONDS } from './domain/timestep.ts';
+import { Vector } from './domain/vector.ts';
+import { VIEW_HEIGHT } from './domain/view.ts';
+import { type InputState as Input, World } from './domain/world.ts';
 
 /**
  * Pins the feel of the game before the domain refactor: every number below was recorded from the
@@ -44,14 +48,25 @@ const BLOCK: Box = { x: 100, y: 500, w: 200, h: 268 };
 // --- harness: the only part tied to the module layout ------------------------------------------
 
 function simulate(scenario: Scenario, steps: number): Frame[] {
-  const player = { ...createPlayer(), ...scenario.ball };
+  const spawn = new Player();
+  const start = { x: spawn.position.x, y: spawn.position.y, vx: 0, vy: 0, minSpeed: 0, ...scenario.ball };
+  const player = new Player(new Vector(start.x, start.y));
+  player.velocity = new Vector(start.vx, start.vy);
+  player.minSpeed = start.minSpeed;
+  const platforms = (scenario.platforms ?? [BLOCK]).map((box) => new Platform(box.x, box.y, box.w, box.h));
+  const world = new World(platforms, scenario.width ?? 2000, player);
   const input = { ...NO_INPUT, ...scenario.input };
-  const level = { platforms: scenario.platforms ?? [BLOCK], width: scenario.width ?? 2000 };
   const frames: Frame[] = [];
   for (let i = 0; i < steps; i++) {
-    const events = stepPlayer(player, input, level);
-    const { x, y, vx, vy, minSpeed } = player;
-    frames.push({ ball: { x, y, vx, vy, minSpeed }, ...events });
+    world.step(STEP_SECONDS, input);
+    const { landingSpeed, wallHit, respawned } = world.lastStep;
+    const { position, velocity, minSpeed } = player;
+    frames.push({
+      ball: { x: position.x, y: position.y, vx: velocity.x, vy: velocity.y, minSpeed },
+      landingSpeed,
+      wallHit,
+      respawned,
+    });
   }
   return frames;
 }
