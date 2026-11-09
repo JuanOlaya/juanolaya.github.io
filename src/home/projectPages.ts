@@ -48,7 +48,7 @@ export const projectPages: readonly ProjectPage[] = [
   },
   {
     title: 'Platform Game',
-    description: 'Browser platform game prototype.',
+    description: 'Teaching game for OOP, physics simulation and DDD.',
     href: '/PlatformGame/',
   },
   {

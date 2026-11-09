@@ -1,0 +1,24 @@
+import { describe, expect, it } from 'vitest';
+import { STEP_SECONDS, planSteps } from './timestep.ts';
+
+describe('planSteps', () => {
+  it('runs one step per 1/30 s whatever the frame rate', () => {
+    let carry = 0;
+    let steps = 0;
+    for (let frame = 0; frame < 120; frame++) {
+      const plan = planSteps(carry, 1 / 120);
+      carry = plan.carry;
+      steps += plan.steps;
+    }
+    expect(steps).toBeGreaterThanOrEqual(29);
+    expect(steps).toBeLessThanOrEqual(30);
+    expect(planSteps(0, STEP_SECONDS * 2.5).steps).toBe(2);
+  });
+
+  it('interpolates between steps and caps catch-up after a stall', () => {
+    expect(planSteps(0, STEP_SECONDS / 2).alpha).toBeCloseTo(0.5);
+    expect(planSteps(0, 10).steps).toBe(7);
+    expect(planSteps(0, Number.NaN).steps).toBe(0);
+    expect(planSteps(0, -1).steps).toBe(0);
+  });
+});

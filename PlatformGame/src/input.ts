@@ -1,7 +1,7 @@
 import { isTypingTarget } from '@shared/p5/sketch-ui.ts';
-import type { Input } from './physics.ts';
+import type { InputState } from './domain/world.ts';
 
-type Direction = keyof Input;
+type Direction = keyof InputState;
 
 const KEY_DIRECTIONS: Record<string, Direction> = { ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'up' };
 
@@ -12,15 +12,15 @@ const PAD_BUTTONS: readonly { direction: Direction; label: string; symbol: strin
 ];
 
 export interface Controls {
-  input: Input;
+  input: InputState;
   remove: () => void;
 }
 
 /** Arrow keys plus the on-screen pad share one held-direction state; `onPress` fires on each new press. */
 export function attachControls(pad: HTMLElement, onPress: () => void): Controls {
-  const keys: Input = { left: false, right: false, up: false };
-  const touch: Input = { left: false, right: false, up: false };
-  const input: Input = {
+  const keys: InputState = { left: false, right: false, up: false };
+  const touch: InputState = { left: false, right: false, up: false };
+  const input: InputState = {
     get left() {
       return keys.left || touch.left;
     },

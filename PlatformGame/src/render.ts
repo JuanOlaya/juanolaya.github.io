@@ -1,8 +1,10 @@
 import type p5 from 'p5';
-import { VIEW_HEIGHT, VIEW_WIDTH, type Level } from './level.ts';
+import { GRAVITY, RADIUS, type Player } from './domain/player.ts';
+import { VIEW_HEIGHT, VIEW_WIDTH } from './domain/view.ts';
+import type { World } from './domain/world.ts';
 import type { Particle } from './particles.ts';
-import { GRAVITY, RADIUS, type Player } from './physics.ts';
 
+/** The canvas keeps its warm sky and red platforms (DESIGN-LOG exception); the HUD uses the site tokens. */
 export const COLORS = {
   skyTop: '#FFE48A',
   skyBottom: '#FFD04F',
@@ -10,9 +12,9 @@ export const COLORS = {
   platform: '#E85243',
   platformTop: '#F7735F',
   player: '#198BC6',
-  hud: 'rgba(38, 24, 10, 0.72)',
-  hudText: '#FFF4DC',
-  hudMuted: '#F2B7A5',
+  hud: 'rgba(22, 22, 26, 0.78)',
+  hudText: '#f8ecde',
+  hudMuted: '#b9b2a6',
   ink: '#2A1A0C',
 } as const;
 
@@ -39,12 +41,12 @@ export function drawSky(p: p5, cameraX: number): void {
   for (let x = offset - 600; x < VIEW_WIDTH + 600; x += 600) p.ellipse(x, VIEW_HEIGHT * 0.95, 760, 420);
 }
 
-export function drawWorld(p: p5, level: Level): void {
+export function drawWorld(p: p5, world: World): void {
   p.noStroke();
   p.fill(COLORS.platform);
   p.rect(-WALL, 0, WALL, VIEW_HEIGHT);
-  p.rect(level.width, 0, WALL, VIEW_HEIGHT);
-  for (const platform of level.platforms) {
+  p.rect(world.width, 0, WALL, VIEW_HEIGHT);
+  for (const platform of world.platforms) {
     p.fill(COLORS.platform);
     p.rect(platform.x, platform.y, platform.w, platform.h, 8, 8, 0, 0);
     p.fill(COLORS.platformTop);
@@ -77,10 +79,10 @@ export function drawParticles(p: p5, particles: readonly Particle[]): void {
 /** The original's physics readout, same values, in a readable card. */
 export function drawHud(p: p5, player: Player): void {
   const rows: [string, string][] = [
-    ['Velocity X', String(Math.round(player.vx))],
-    ['Velocity Y', String(Math.round(player.vy))],
-    ['Acceleration X', '0'],
-    ['Acceleration Y', String(GRAVITY)],
+    ['Velocity X', String(Math.round(player.velocity.x))],
+    ['Velocity Y', String(Math.round(player.velocity.y))],
+    ['Acceleration X', String(GRAVITY.x)],
+    ['Acceleration Y', String(GRAVITY.y)],
     ['Min. speed going down', String(Math.round(player.minSpeed * 10) / 10)],
   ];
   p.noStroke();

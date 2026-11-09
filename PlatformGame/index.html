@@ -3,17 +3,25 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#1d150d" />
+    <meta name="theme-color" content="#282828" />
     <title>Platform Game · Juan Olaya</title>
     <meta
       name="description"
-      content="A p5.js platformer prototype: a bouncing ball over procedurally generated platforms, with twelve-sided circle and rectangle collision."
+      content="Teaching game for OOP, physics simulation and Domain-Driven Design: a bouncing ball over random platforms, with live panels explaining the physics and the architecture."
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet" />
   </head>
   <body>
     <main class="game">
-      <div class="game__panel"></div>
+      <div class="game__panel">
+        <nav class="game__nav" aria-label="Site">
+          <a class="game__home" href="/" aria-label="Back to the home page">← Home</a>
+        </nav>
+      </div>
       <div class="game__stage"></div>
+      <aside class="game__learn" aria-label="How it works"></aside>
       <div class="game__pad" aria-label="Touch controls"></div>
     </main>
     <script type="module" src="./src/main.ts"></script>
