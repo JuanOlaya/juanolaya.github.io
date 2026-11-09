@@ -1,0 +1,200 @@
+/* Shared style contract §9: home-page palette, Noto Sans KR 300/500, flat surfaces, 44 px targets. */
+:root {
+  color-scheme: dark;
+  --bg: #282828;
+  --surface: #33333d;
+  --border: #41414e;
+  --ink: #f8ecde;
+  --ink-2: #b9b2a6;
+  --accent-hover: #d4870a;
+  --focus: rgb(243 228 206 / 0.9);
+  --white-6: rgb(255 255 255 / 0.06);
+  --white-12: rgb(255 255 255 / 0.12);
+  --white-16: rgb(255 255 255 / 0.16);
+  --radius-button: 8px;
+  --page-pad: clamp(16px, 5vw, 64px);
+  --tool-size: 44px;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font:
+    300 clamp(15px, 0.9rem + 0.2vw, 17px) / 1.4 'Noto Sans KR',
+    'Instrument Sans Variable',
+    system-ui,
+    sans-serif;
+  overscroll-behavior: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Header, canvas and toolbar share the viewport height; nothing is laid over the canvas. */
+.shapy {
+  display: grid;
+  grid-template:
+    'bar' auto
+    'stage' minmax(0, 1fr)
+    'tools' auto
+    / minmax(0, 1fr);
+  height: 100dvh;
+}
+
+.shapy__bar {
+  grid-area: bar;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px var(--page-pad);
+  border-bottom: 1px solid var(--border);
+  background: rgb(40 40 40 / 0.82);
+  backdrop-filter: blur(6px);
+}
+
+.shapy__home {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  min-height: var(--tool-size);
+  min-width: var(--tool-size);
+  padding: 0 16px;
+  border: 1px solid var(--white-16);
+  border-radius: var(--radius-button);
+  background: var(--white-6);
+  color: var(--ink);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+.shapy__home:hover {
+  background: var(--white-12);
+  text-decoration: underline;
+}
+
+.shapy__panel {
+  flex: 1;
+  min-width: 0;
+}
+
+/* The shared panel sits in the header instead of floating over the sketch. */
+.shapy__panel .sketch-ui {
+  position: static;
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  backdrop-filter: none;
+  font-family: inherit;
+}
+
+.shapy__panel .sketch-ui__title {
+  font-weight: 500;
+}
+
+.shapy__panel .sketch-ui__caption {
+  color: var(--ink-2);
+}
+
+.shapy__stage {
+  grid-area: stage;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.shapy__stage canvas {
+  display: block;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* One scrolling row on phones so the canvas keeps its height; it wraps once there is room. */
+.shapy__tools {
+  grid-area: tools;
+  display: flex;
+  gap: 16px;
+  padding: 8px var(--page-pad) max(8px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.tools__group {
+  display: flex;
+  flex: none;
+  gap: 8px;
+}
+
+.tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tool-size);
+  height: var(--tool-size);
+  padding: 0;
+  border: 1px solid var(--white-16);
+  border-radius: var(--radius-button);
+  background: var(--white-6);
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+.tool:hover {
+  background: var(--white-12);
+}
+
+.tool[aria-pressed='true'] {
+  border-color: var(--accent-hover);
+  background: rgb(212 135 10 / 0.18);
+}
+
+.tool__swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+.tool__swatch--blank {
+  box-sizing: border-box;
+  border: 2px dashed var(--ink-2);
+}
+
+.tool img {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .shapy__tools {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
