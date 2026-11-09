@@ -12,7 +12,7 @@ export interface ProjectPage {
  * /EurekaWall/ (its Start button opens the same pages), not the older /Balconity/.
  * Left out on purpose: archived (`legacy/`) and redirect-stub folders, Sockets, test pages
  * (`multitouchTest`, `TestingSoSci`), personal pages, and projects pending improvement
- * (MemoDeutsch, UX Infographic, Project Management, HCI BHT, ShapyPresence - see pendientes.md).
+ * (MemoDeutsch, UX Infographic, Project Management, HCI BHT, ShapyPresence - see TODO.md).
  */
 export const projectPages: readonly ProjectPage[] = [
   {
