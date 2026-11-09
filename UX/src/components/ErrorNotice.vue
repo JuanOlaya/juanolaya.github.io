@@ -7,7 +7,7 @@ defineProps<{ message: string }>();
   <p
     v-if="message"
     role="alert"
-    class="text-xs text-rose-300 bg-rose-950/40 border border-rose-900 rounded-xl p-3"
+    class="rounded-card border border-danger/40 bg-bg p-3 text-[0.92em] text-danger"
   >
     {{ message }}
   </p>
