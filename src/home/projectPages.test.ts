@@ -42,6 +42,10 @@ describe('projectPages', () => {
     expect(hrefs).not.toContain('/PixelGrid/');
   });
 
+  it('lists Project Management again (TODO.md §3)', () => {
+    expect(projectPages.map((page) => page.href)).toContain('/Project_Management/');
+  });
+
   // TODO.md §5: ShapyPresence is back on the home page at its EurekaWall URL.
   it('lists ShapyPresence under /EurekaWall/pixelGrid/', () => {
     const page = projectPages.find((item) => item.title === 'ShapyPresence');
