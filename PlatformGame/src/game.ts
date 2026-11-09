@@ -45,7 +45,7 @@ interface GameState {
 }
 
 /** Notified after every frame with what the world did; the explanatory panels hang off this. */
-export type FrameListener = (world: World, seconds: number) => void;
+export type FrameListener = (world: World, input: InputState, seconds: number) => void;
 
 function createState(reduced: boolean): GameState {
   return {
@@ -194,7 +194,7 @@ function createSketch(state: GameState, { stage, controls, observer, onFrame }: 
       const seconds = Math.min(p.deltaTime / 1000, MAX_FRAME_SECONDS);
       update(state, controls.input, seconds);
       draw(p, state);
-      onFrame(state.world, seconds);
+      onFrame(state.world, controls.input, seconds);
     };
     p.mousePressed = () => wake(state);
   };
