@@ -1,6 +1,6 @@
 # Proyectos Pendientes de Mejora y Publicación
 
-Este documento recopila los proyectos retirados temporalmente de la sección de proyectos de la página de inicio ([`https://juanolaya.github.io/`](https://juanolaya.github.io/)) para ser mejorados, pulidos y republicados posteriormente.
+Este documento recopila los proyectos retirados temporalmente de la sección de proyectos de la página de inicio ([`https://juanolaya.github.io/`](https://juanolaya.github.io/)) para ser mejorados, pulidos y republicados posteriormente, así como notas de enfoque pedagógico y mejoras de los proyectos activos.
 
 ---
 
@@ -57,3 +57,16 @@ Este documento recopila los proyectos retirados temporalmente de la sección de 
   - [ ] Refactorizar la interacción táctil y el canvas de dibujo de patrones.
   - [ ] Mejorar la integración visual dentro de la suite de EurekaWall.
   - [ ] Probar la fluidez de interacción y respuesta en diferentes navegadores.
+
+---
+
+## 6. Platform Game (Enfoque Pedagógico: OOP y Simulación Física)
+* **Ruta en el repositorio:** `PlatformGame/`
+* **URL:** `/PlatformGame/`
+* **Propósito real:** Proyecto didáctico diseñado para enseñar **Programación Orientada a Objetos (OOP)** y **simulación física** en desarrollo de videojuegos:
+  - Sistema de colisiones (suelo, plataformas, límites).
+  - Cinemática de salto y gravedad (*jumping / gravity*).
+  - Arquitectura modular basada en clases (`Player`, `Platform`, partículas y render).
+* **Mejoras pendientes:**
+  - [ ] Actualizar la descripción pública del proyecto en la portada para reflejar su objetivo formativo (OOP y física) en lugar de un simple prototipo genérico.
+  - [ ] Añadir paneles explicativos o documentación visual interactiva que demuestre los conceptos físicos y de código en tiempo real.
