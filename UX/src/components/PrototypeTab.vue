@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { PROTOTYPE_STYLE_SUFFIX, prototypeTemplates } from '../content';
 import { aiErrorMessage } from '../gemini-client';
 import { gemini, logAiError, type PredictResponse } from '../gemini';
+import { BUTTON_GHOST, BUTTON_PRIMARY, BUTTON_SECONDARY, FIELD, PANEL } from '../ui';
 import ErrorNotice from './ErrorNotice.vue';
 import SpinnerIcon from './SpinnerIcon.vue';
 
@@ -50,26 +51,25 @@ async function generate(): Promise<void> {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+  <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
     <div class="space-y-4">
-      <h3 class="text-lg font-bold text-white flex items-center gap-2">
-        <span>🎨 Generador de Wireframes & Mockups UX (Imagen 4)</span>
-      </h3>
-      <p class="text-slate-300 text-sm leading-relaxed">
+      <h3 class="text-lg font-medium">🎨 Generador de Wireframes & Mockups UX (Imagen 4)</h3>
+      <p class="text-[0.92em] text-ink-2">
         Escribe una descripción textual del tipo de interfaz o componente que deseas prototipar. La IA de
-        última generación <strong>Imagen 4</strong> generará el diseño visual al instante.
+        última generación <strong class="font-medium text-ink">Imagen 4</strong> generará el diseño visual al
+        instante.
       </p>
 
       <div class="space-y-3">
-        <label for="proto-prompt-input" class="block text-xs font-bold text-indigo-400 uppercase"
+        <label for="proto-prompt-input" class="block text-caption font-medium text-accent-text uppercase"
           >Selecciona una plantilla o escribe tu prompt:</label
         >
-        <div class="flex flex-wrap gap-1.5">
+        <div class="flex flex-wrap gap-2">
           <button
             v-for="template in prototypeTemplates"
             :key="template.label"
             type="button"
-            class="bg-slate-800 hover:bg-slate-700 text-[10px] text-slate-300 py-1 px-2.5 rounded-lg transition-all border border-slate-700"
+            :class="`${BUTTON_SECONDARY} text-caption`"
             @click="prompt = template.prompt"
           >
             {{ template.label }}
@@ -80,15 +80,11 @@ async function generate(): Promise<void> {
           id="proto-prompt-input"
           v-model="prompt"
           rows="3"
-          class="w-full bg-slate-950 text-white border border-indigo-950 rounded-xl p-3 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none placeholder-slate-600"
+          :class="`${FIELD} py-3 text-[0.92em]`"
           placeholder="Describe el diseño que quieres que Imagen 4 renderice..."
         ></textarea>
 
-        <button
-          type="button"
-          class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition-all shadow-md"
-          @click="generate"
-        >
+        <button type="button" :class="`${BUTTON_PRIMARY} w-full`" @click="generate">
           🚀 Generar Prototipo con Imagen 4
         </button>
         <ErrorNotice :message="errorMessage" />
@@ -96,11 +92,11 @@ async function generate(): Promise<void> {
     </div>
 
     <div
-      class="bg-slate-950 rounded-2xl p-6 border border-indigo-950 min-h-[350px] flex flex-col justify-center items-center relative overflow-hidden"
+      :class="`${PANEL} relative flex min-h-[350px] flex-col items-center justify-center overflow-hidden p-6`"
     >
-      <div v-if="view === 'initial'" class="text-center space-y-3">
-        <span class="inline-block p-4 bg-indigo-950/50 text-indigo-400 rounded-full">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <div v-if="view === 'initial'" class="space-y-3 text-center">
+        <span class="inline-block rounded-full border border-border p-4 text-ink-2">
+          <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -109,30 +105,28 @@ async function generate(): Promise<void> {
             />
           </svg>
         </span>
-        <h4 class="font-bold text-slate-300 text-sm">Esperando instrucciones...</h4>
-        <p class="text-xs text-slate-500 max-w-xs mx-auto">
+        <h4 class="font-medium">Esperando instrucciones...</h4>
+        <p class="mx-auto max-w-xs text-caption text-ink-2">
           Selecciona una plantilla o escribe tu propio prompt para generar el diseño visual de referencia.
         </p>
       </div>
 
-      <div v-else-if="view === 'loading'" class="text-center space-y-4 pulse-loader">
-        <SpinnerIcon class="w-8 h-8 mx-auto" />
-        <h4 class="font-bold text-indigo-300 text-sm">Imagen 4 está sintetizando tu prototipo gráfico...</h4>
+      <div v-else-if="view === 'loading'" class="pulse-loader space-y-4 text-center">
+        <SpinnerIcon class="mx-auto h-8 w-8" />
+        <h4 class="font-medium text-accent-text">Imagen 4 está sintetizando tu prototipo gráfico...</h4>
       </div>
 
-      <div v-else class="space-y-4 w-full text-center">
-        <span class="text-xs text-emerald-400 font-bold uppercase block"
+      <div v-else class="w-full space-y-4 text-center">
+        <span class="block text-caption font-medium text-success uppercase"
           >✨ Mockup Producido por Imagen 4</span
         >
         <img
-          class="max-h-[250px] mx-auto object-contain rounded-xl border border-slate-800 shadow-xl"
+          class="mx-auto max-h-[250px] rounded-card border border-border object-contain"
           :src="imageSrc"
           alt="Prototipo Generado"
         />
-        <p class="text-[10px] text-slate-500 max-w-sm mx-auto">{{ caption }}</p>
-        <button type="button" class="text-xs text-slate-400 hover:text-white underline" @click="reset">
-          Generar otro
-        </button>
+        <p class="mx-auto max-w-sm text-caption text-ink-2">{{ caption }}</p>
+        <button type="button" :class="BUTTON_GHOST" @click="reset">Generar otro</button>
       </div>
     </div>
   </div>

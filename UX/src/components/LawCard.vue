@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { PANEL } from '../ui';
+
 defineProps<{ title: string; href: string }>();
 </script>
 
 <template>
-  <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 hover:shadow-md transition-all">
-    <div class="flex justify-between items-start">
-      <h4 class="text-xs font-bold text-indigo-900 uppercase flex items-center gap-1">
+  <div :class="`${PANEL} hover:border-[rgba(243,228,206,0.6)] motion-safe:transition-colors`">
+    <div class="flex items-start justify-between gap-3">
+      <h4 class="flex items-center gap-1 text-caption font-medium text-ink uppercase">
         {{ title }}
         <slot name="badge" />
       </h4>
@@ -13,11 +15,11 @@ defineProps<{ title: string; href: string }>();
         :href="href"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-[10px] text-slate-400 hover:text-indigo-600 transition-all font-semibold"
+        class="inline-flex min-h-11 shrink-0 items-center text-caption whitespace-nowrap text-link"
         >Leer ley ↗</a
       >
     </div>
-    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+    <p class="mt-1.5 text-[0.92em] text-ink-2">
       <slot />
     </p>
   </div>

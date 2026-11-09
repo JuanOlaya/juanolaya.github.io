@@ -12,6 +12,8 @@ export interface ProjectPage {
  * /EurekaWall/ (its Start button opens the same pages), not the older /Balconity/.
  * Left out on purpose: archived (`legacy/`) and redirect-stub folders, Sockets, test pages
  * (`multitouchTest`, `TestingSoSci`) and personal pages.
+ * (MemoDeutsch, Project Management, HCI BHT, ShapyPresence - see TODO.md).
+ * (`multitouchTest`, `TestingSoSci`) and personal pages.
  * (MemoDeutsch, UX Infographic, HCI BHT, ShapyPresence - see TODO.md).
  * (`multitouchTest`, `TestingSoSci`) and personal pages.
  * (MemoDeutsch, UX Infographic, Project Management - see TODO.md).
@@ -46,6 +48,11 @@ export const projectPages: readonly ProjectPage[] = [
     title: 'Platform Game',
     description: 'Browser platform game prototype.',
     href: '/PlatformGame/',
+  },
+  {
+    title: 'UX Infographic',
+    description: 'Interactive infographic on UX laws with a Gemini AI co-pilot (in Spanish).',
+    href: '/UX/',
   },
   {
     title: 'Project Management',

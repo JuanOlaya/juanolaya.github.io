@@ -1,22 +1,82 @@
 @import '../../src/shared/styles/tailwind.css';
-@import '../../src/shared/styles/v3-compat.css';
 @source '../';
 @source '../../src/shared/components';
 
-body {
-  font-family: 'Inter', sans-serif;
-  scroll-behavior: smooth;
+/* Tokens of the shared STYLE-CONTRACT (§9 A), derived from the home page. */
+@theme {
+  --color-bg: #282828;
+  --color-surface: #33333d;
+  --color-border: #41414e;
+  --color-ink: #f8ecde;
+  --color-ink-2: #b9b2a6;
+  --color-link: #f4f0f9;
+  --color-link-visited: #b597d8;
+  --color-accent: #c48208;
+  --color-accent-hover: #d4870a;
+  --color-accent-text: #e5a53a;
+  --color-on-accent: #1a1a1a;
+  --color-info: #198bc6;
+  --color-info-text: #6cb6ff;
+  --color-success: #7bd389;
+  --color-danger: #ff7b72;
+  --font-sans: 'Noto Sans KR', 'Instrument Sans Variable', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius-card: 5px;
+  --radius-button: 8px;
+  --radius-panel: 10px;
+  --text-caption: 13px;
+  --text-caption--line-height: 1.3;
 }
 
-/* Animaciones personalizadas */
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(15px, 0.9rem + 0.2vw, 17px);
+    line-height: 1.4;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  a {
+    color: var(--color-link);
+    text-decoration: underline;
+  }
+  a:visited {
+    color: var(--color-link-visited);
+  }
+  a:hover {
+    color: #a5a5a5;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(243 228 206 / 0.9);
+    outline-offset: 2px;
+  }
+  /* Tailwind v4 defaults borders to currentColor and buttons to the default cursor. */
+  *,
+  ::after,
+  ::before {
+    border-color: var(--color-border);
+  }
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Tab panels and chat bubbles enter with a short fade (contract §7: 200 ms, opacity + transform). */
 .fade-in {
-  animation: fadeIn 0.4s ease-out;
+  animation: fadeIn 0.2s ease-out;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
@@ -32,11 +92,29 @@ body {
 @keyframes pulse-loader {
   0%,
   100% {
-    transform: scale(1);
     opacity: 0.6;
   }
   50% {
-    transform: scale(1.02);
     opacity: 1;
+  }
+}
+
+/* Horizontal tab strips scroll inside their row; the page never scrolls sideways. */
+.scroll-row {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.scroll-row::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

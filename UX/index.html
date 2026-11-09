@@ -3,17 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#282828" />
     <!-- URL del proxy de Gemini (server/gemini-proxy/). Vacía = AI Hub desactivado con aviso. -->
     <meta name="gemini-proxy-url" content="" />
     <title>Infografía Interactiva de UX & Co-Piloto Multifuncional Gemini</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-    <!-- Google Fonts: Inter para máxima legibilidad -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap"
       rel="stylesheet"
     />
   </head>
-  <body class="bg-slate-50 text-slate-800 min-h-screen">
+  <body>
     <div id="app"></div>
     <script type="module" src="./src/main.ts"></script>
   </body>

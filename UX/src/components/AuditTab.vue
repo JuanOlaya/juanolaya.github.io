@@ -5,6 +5,7 @@ import { aiErrorMessage } from '../gemini-client';
 import { firstText, gemini, logAiError, responseParts, type GenerateContentResponse } from '../gemini';
 import { parseAuditReport, type AuditReport } from '../model-text';
 import { drawChaoticSampleUi, inlineImageFromDataUrl } from '../sample-canvas';
+import { BUTTON_SECONDARY, PANEL } from '../ui';
 import AuditReportView from './AuditReportView.vue';
 import ErrorNotice from './ErrorNotice.vue';
 import SpinnerIcon from './SpinnerIcon.vue';
@@ -112,28 +113,22 @@ function onDrop(event: DragEvent): void {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+  <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
     <div class="space-y-4">
-      <h3 class="text-lg font-bold text-white flex items-center gap-2">
-        <span>🔍 Auditor & Rediseñador de Interfaces</span>
-      </h3>
-      <p class="text-slate-300 text-sm leading-relaxed">
+      <h3 class="text-lg font-medium">🔍 Auditor & Rediseñador de Interfaces</h3>
+      <p class="text-[0.92em] text-ink-2">
         Sube una captura de tu interfaz. Gemini la auditará visualmente y, si lo deseas,
-        <strong>rediseñará el layout</strong> generando un wireframe limpio y optimizado aplicando las leyes
-        de usabilidad.
+        <strong class="font-medium text-ink">rediseñará el layout</strong> generando un wireframe limpio y
+        optimizado aplicando las leyes de usabilidad.
       </p>
 
-      <div class="bg-slate-950/40 border border-indigo-950 p-4 rounded-2xl flex flex-col gap-3">
-        <span class="text-xs font-bold text-indigo-400">¿No tienes una captura a mano?</span>
-        <p class="text-xs text-slate-400">
+      <div :class="`${PANEL} flex flex-col gap-3`">
+        <span class="text-caption font-medium text-accent-text">¿No tienes una captura a mano?</span>
+        <p class="text-caption text-ink-2">
           Haz clic en el botón de abajo para generar de manera simulada una interfaz extremadamente caótica en
           canvas y enviarla a analizar y rediseñar.
         </p>
-        <button
-          type="button"
-          class="w-full bg-indigo-600/30 hover:bg-indigo-600/50 border border-indigo-700 text-indigo-200 text-xs font-bold py-2.5 px-4 rounded-xl transition-all"
-          @click="runAudit(drawChaoticSampleUi())"
-        >
+        <button type="button" :class="`${BUTTON_SECONDARY} w-full`" @click="runAudit(drawChaoticSampleUi())">
           ⚡ Generar UI Caótica de Prueba
         </button>
       </div>
@@ -141,8 +136,8 @@ function onDrop(event: DragEvent): void {
       <button
         type="button"
         :class="[
-          'w-full border-2 border-dashed hover:border-indigo-500 rounded-2xl p-6 text-center cursor-pointer transition-all hover:bg-indigo-950/20',
-          dragging ? 'border-indigo-400 bg-indigo-950/30' : 'border-indigo-800 bg-indigo-950/10',
+          'w-full rounded-card border-2 border-dashed p-6 text-center hover:border-[rgba(243,228,206,0.6)] motion-safe:transition-colors',
+          dragging ? 'border-accent bg-accent/10' : 'border-border bg-bg',
         ]"
         @click="fileInput?.click()"
         @dragenter.prevent="dragging = true"
@@ -151,7 +146,7 @@ function onDrop(event: DragEvent): void {
         @drop.prevent="onDrop"
       >
         <svg
-          class="w-8 h-8 text-indigo-400 mx-auto mb-2"
+          class="mx-auto mb-2 h-8 w-8 text-accent-text"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -164,18 +159,16 @@ function onDrop(event: DragEvent): void {
             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
           />
         </svg>
-        <span class="text-xs font-bold">Arrastra tu captura de pantalla o haz clic para subir</span>
+        <span class="text-[0.92em] font-medium">Arrastra tu captura de pantalla o haz clic para subir</span>
       </button>
       <input ref="fileInput" type="file" class="hidden" accept="image/*" @change="onFileChange" />
       <ErrorNotice :message="errorMessage" />
     </div>
 
-    <div
-      class="bg-slate-950 rounded-2xl p-6 border border-indigo-950 min-h-[350px] flex flex-col justify-center relative overflow-hidden"
-    >
-      <div v-if="view === 'initial'" class="text-center space-y-3">
-        <span class="inline-block p-4 bg-indigo-950/50 text-indigo-400 rounded-full">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <div :class="`${PANEL} relative flex min-h-[350px] flex-col justify-center overflow-hidden p-6`">
+      <div v-if="view === 'initial'" class="space-y-3 text-center">
+        <span class="inline-block rounded-full border border-border p-4 text-ink-2">
+          <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -184,15 +177,15 @@ function onDrop(event: DragEvent): void {
             />
           </svg>
         </span>
-        <h4 class="font-bold text-slate-300 text-sm">Esperando interfaz...</h4>
-        <p class="text-xs text-slate-500 max-w-xs mx-auto">
+        <h4 class="font-medium">Esperando interfaz...</h4>
+        <p class="mx-auto max-w-xs text-caption text-ink-2">
           Sube una imagen o usa la de prueba para activar el análisis.
         </p>
       </div>
 
-      <div v-else-if="view === 'loading'" class="text-center space-y-4 pulse-loader">
-        <SpinnerIcon class="w-8 h-8 mx-auto" />
-        <h4 class="font-bold text-indigo-300 text-sm">{{ loadingText }}</h4>
+      <div v-else-if="view === 'loading'" class="pulse-loader space-y-4 text-center">
+        <SpinnerIcon class="mx-auto h-8 w-8" />
+        <h4 class="font-medium text-accent-text">{{ loadingText }}</h4>
       </div>
 
       <AuditReportView
