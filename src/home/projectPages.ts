@@ -12,7 +12,6 @@ export interface ProjectPage {
  * /EurekaWall/ (its Start button opens the same pages), not the older /Balconity/.
  * Left out on purpose: archived (`legacy/`) and redirect-stub folders, Sockets, test pages
  * (`multitouchTest`, `TestingSoSci`) and personal pages.
- * (UX Infographic, Project Management, HCI BHT, ShapyPresence - see TODO.md).
  * (`multitouchTest`, `TestingSoSci`) and personal pages.
  * (MemoDeutsch, Project Management, HCI BHT, ShapyPresence - see TODO.md).
  * (`multitouchTest`, `TestingSoSci`) and personal pages.

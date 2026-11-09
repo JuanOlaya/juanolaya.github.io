@@ -9,10 +9,10 @@ Este documento recopila los proyectos retirados temporalmente de la sección de 
 * **URL:** `/Deutsch_lernen/`
 * **Descripción:** Plataforma de aprendizaje de alemán: gramática, conjugación de verbos, vocabulario y simulador del examen de nacionalidad (*Einbürgerungstest*).
 * **Mejoras pendientes antes de republicar:**
-  - [ ] Completar la modularización y partición de `script.js` (en curso).
-  - [ ] Validar y optimizar la experiencia PWA (Service Worker y almacenamiento en caché).
-  - [ ] Mejorar la interfaz responsiva en dispositivos móviles.
-  - [ ] Limpiar dependencias y asegurar hidratación automática de datos en `localStorage`.
+  - [x] Completar la modularización y partición de `script.js` (en curso). (#101)
+  - [x] Validar y optimizar la experiencia PWA (Service Worker y almacenamiento en caché). (#101)
+  - [x] Mejorar la interfaz responsiva en dispositivos móviles. (#101)
+  - [x] Limpiar dependencias y asegurar hidratación automática de datos en `localStorage`. (#101)
 
 ---
 
@@ -21,9 +21,9 @@ Este documento recopila los proyectos retirados temporalmente de la sección de 
 * **URL:** `/UX/`
 * **Descripción:** Infografía interactiva sobre Experiencia de Usuario (UX) y co-pilotos de Inteligencia Artificial (en español).
 * **Mejoras pendientes antes de republicar:**
-  - [ ] Conectar de forma segura con el proxy de Cloudflare para las consultas a Gemini (o implementar un modo offline elegante).
-  - [ ] Pulir el diseño visual y las animaciones interactivas.
-  - [ ] Optimizar la navegación táctil y en pantallas de diferentes tamaños.
+  - [x] Conectar de forma segura con el proxy de Cloudflare para las consultas a Gemini (o implementar un modo offline elegante). (#100)
+  - [x] Pulir el diseño visual y las animaciones interactivas. (#100)
+  - [x] Optimizar la navegación táctil y en pantallas de diferentes tamaños. (#100)
 
 ---
 
@@ -32,9 +32,9 @@ Este documento recopila los proyectos retirados temporalmente de la sección de 
 * **URL:** `/Project_Management/`
 * **Descripción:** Guía interactiva de gestión de proyectos basada en el estándar PMBOK 7 (en español).
 * **Mejoras pendientes antes de republicar:**
-  - [ ] Revisión de contenido pedagógico y diagramas de flujo.
-  - [ ] Modernización de la interfaz gráfica y estilos.
-  - [ ] Añadir interactividad y casos prácticos de gestión ágil.
+  - [x] Revisión de contenido pedagógico y diagramas de flujo. (#99)
+  - [x] Modernización de la interfaz gráfica y estilos. (#99)
+  - [x] Añadir interactividad y casos prácticos de gestión ágil. (#99)
 
 ---
 
@@ -43,9 +43,9 @@ Este documento recopila los proyectos retirados temporalmente de la sección de 
 * **URL:** `/HCI_BHT_Website/`
 * **Descripción:** Landing page con animación generativa de círculos en p5.js para el área de Human-Computer Interaction en la Berliner Hochschule für Technik (BHT Berlin).
 * **Mejoras pendientes antes de republicar:**
-  - [ ] Actualizar la información académica, enlaces de docencia y proyectos de investigación.
-  - [ ] Optimizar el rendimiento del sketch de p5.js en móviles y pantallas retina.
-  - [ ] Adaptar la jerarquía visual del contenido.
+  - [ ] Actualizar la información académica, enlaces de docencia y proyectos de investigación. *(omitido por decisión del dueño; solo se mejoró la parte visual, #97)*
+  - [x] Optimizar el rendimiento del sketch de p5.js en móviles y pantallas retina. (#97)
+  - [x] Adaptar la jerarquía visual del contenido. (#97)
 
 ---
 
@@ -54,9 +54,9 @@ Este documento recopila los proyectos retirados temporalmente de la sección de 
 * **URL:** `/EurekaWall/pixelGrid/`
 * **Descripción:** Experimento de presencia social remota compartiendo mensajes visuales a través de una cuadrícula de figuras en EurekaWall.
 * **Mejoras pendientes antes de republicar:**
-  - [ ] Refactorizar la interacción táctil y el canvas de dibujo de patrones.
-  - [ ] Mejorar la integración visual dentro de la suite de EurekaWall.
-  - [ ] Probar la fluidez de interacción y respuesta en diferentes navegadores.
+  - [x] Refactorizar la interacción táctil y el canvas de dibujo de patrones. (#98)
+  - [x] Mejorar la integración visual dentro de la suite de EurekaWall. (#98)
+  - [x] Probar la fluidez de interacción y respuesta en diferentes navegadores. (#98)
 
 ---
 
@@ -68,6 +68,6 @@ Este documento recopila los proyectos retirados temporalmente de la sección de 
   - Cinemática de salto y gravedad (*jumping / gravity*).
   - Arquitectura orientada a dominio: estructurado probablemente aplicando **DDD (Domain-Driven Design / Development)** para separar limpiamente la lógica de dominio (física, entidades, reglas del juego) del renderizado y la capa visual.
 * **Mejoras pendientes:**
-  - [ ] Reestructurar el código aplicando principios de **DDD** (entidades de dominio como `Player`, `Platform`, `World`, value objects para vectores/posiciones y servicios de colisión desacoplados de p5/canvas).
-  - [ ] Actualizar la descripción pública del proyecto en la portada para reflejar su objetivo formativo (OOP, física y DDD) en lugar de un simple prototipo genérico.
-  - [ ] Añadir paneles explicativos o documentación visual interactiva que demuestre los conceptos físicos y de arquitectura en tiempo real.
+  - [x] Reestructurar el código aplicando principios de **DDD** (entidades de dominio como `Player`, `Platform`, `World`, value objects para vectores/posiciones y servicios de colisión desacoplados de p5/canvas). (#102)
+  - [x] Actualizar la descripción pública del proyecto en la portada para reflejar su objetivo formativo (OOP, física y DDD) en lugar de un simple prototipo genérico. (#102)
+  - [x] Añadir paneles explicativos o documentación visual interactiva que demuestre los conceptos físicos y de arquitectura en tiempo real. (#102)
