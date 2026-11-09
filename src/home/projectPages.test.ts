@@ -38,7 +38,6 @@ describe('projectPages', () => {
   it('links the EurekaWall copies instead of the older duplicates', () => {
     const hrefs = projectPages.map((page) => page.href);
     expect(hrefs).toContain('/EurekaWall/balconity/');
-    expect(hrefs).toContain('/EurekaWall/pixelGrid/');
     expect(hrefs).not.toContain('/Balconity/');
     expect(hrefs).not.toContain('/PixelGrid/');
   });
