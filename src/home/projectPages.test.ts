@@ -42,6 +42,11 @@ describe('projectPages', () => {
     expect(hrefs).not.toContain('/PixelGrid/');
   });
 
+  // Republished after TODO.md §1: mobile layout, PWA and storage hydration are in place.
+  it('links MemoDeutsch at its public URL', () => {
+    expect(projectPages.map((page) => page.href)).toContain('/Deutsch_lernen/');
+  });
+
   it('has unique links', () => {
     expect(new Set(projectPages.map((page) => page.href)).size).toBe(projectPages.length);
   });
