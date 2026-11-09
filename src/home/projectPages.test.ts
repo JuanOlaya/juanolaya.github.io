@@ -42,6 +42,11 @@ describe('projectPages', () => {
     expect(hrefs).not.toContain('/PixelGrid/');
   });
 
+  // TODO.md §2: republished once the AI Hub degraded gracefully and the page followed the style contract.
+  it('lists the UX Infographic again', () => {
+    expect(projectPages.map((page) => page.href)).toContain('/UX/');
+  });
+
   it('has unique links', () => {
     expect(new Set(projectPages.map((page) => page.href)).size).toBe(projectPages.length);
   });
