@@ -4,6 +4,7 @@ import { mountSketchUi } from '@shared/p5/sketch-ui.ts';
 import type p5 from 'p5';
 import {
   POP_MS,
+  clearGrid,
   createGrid,
   eraseLeftOf,
   layoutGrid,
@@ -184,7 +185,7 @@ export function mountShapyPresence(hosts: ShapyHosts): Unmount {
           label: 'Clear',
           key: 'c',
           action: () => {
-            eraseLeftOf(state.grid, Number.POSITIVE_INFINITY);
+            clearGrid(state.grid);
             state.invalidate();
           },
         },

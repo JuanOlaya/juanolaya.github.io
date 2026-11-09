@@ -6,7 +6,6 @@
   --border: #41414e;
   --ink: #f8ecde;
   --ink-2: #b9b2a6;
-  --link: #f4f0f9;
   --accent-hover: #d4870a;
   --focus: rgb(243 228 206 / 0.9);
   --white-6: rgb(255 255 255 / 0.06);
@@ -73,7 +72,7 @@ body {
   border: 1px solid var(--white-16);
   border-radius: var(--radius-button);
   background: var(--white-6);
-  color: var(--link);
+  color: var(--ink);
   font-weight: 500;
   text-decoration: none;
   white-space: nowrap;

@@ -8,6 +8,7 @@ import {
   cellCenter,
   cellIndexAt,
   clearCell,
+  clearGrid,
   colorHex,
   createGrid,
   cycleShape,
@@ -158,6 +159,13 @@ describe('eraser', () => {
     expect(clearCell(grid, 0)).toBe(true);
     expect(grid.cells[0]).toEqual({ shape: 1, color: BACKGROUND_COLOR });
     expect(clearCell(grid, 99_999)).toBe(false);
+  });
+
+  it('clearGrid blanks every cell and copes with an empty grid', () => {
+    const grid = createGrid(layoutGrid(400, 300), alwaysPaint);
+    clearGrid(grid);
+    expect(grid.cells.every((cell) => cell.color === BACKGROUND_COLOR && cell.shape === 1)).toBe(true);
+    expect(() => clearGrid(createGrid(layoutGrid(0, 0), alwaysPaint))).not.toThrow();
   });
 
   it('eraseLeftOf wipes only the cells whose centre is left of x', () => {

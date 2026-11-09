@@ -146,6 +146,10 @@ export function eraseLeftOf(grid: Grid, x: number): number {
   return wiped;
 }
 
+export function clearGrid(grid: Grid): void {
+  for (let index = 0; index < grid.cells.length; index += 1) clearCell(grid, index);
+}
+
 export function strokePaint(grid: Grid, stroke: Stroke, x: number, y: number, shape: number, color: number): boolean {
   const index = cellIndexAt(grid.layout, x, y);
   const revisit = index === stroke.lastCell;
