@@ -4,34 +4,27 @@ import { mountSketchUi } from '@shared/p5/sketch-ui.ts';
 import type p5 from 'p5';
 import {
   CIRCLES,
+  type ShrinkState,
   TRIGGER_RADIUS,
   circleCenter,
   circleDiameter,
   easeInOutCubic,
   isShrinkTrigger,
-  stepProgress,
+  nextProgress,
   triggerCenter,
 } from './circles.ts';
+import { PANEL_CAPTION, PANEL_TITLE } from './copy.ts';
 
+// The canvas is the piece: it keeps its own navy instead of the site's #282828.
 const BACKGROUND = '#1C3147';
 // Behind the HCI logo, which is positioned over the canvas.
 const CANVAS_Z_INDEX = '-1';
-// The original lost 1 px of an 80 px circle per frame: about 1.3 s at 60 FPS.
-const SHRINK_SECONDS = 1.4;
-const MAX_STEP_SECONDS = 0.05;
 const HINT_DASH = [4, 6];
 const HINT_ALPHA = 0.22;
 const HINT_HOVER_ALPHA = 0.6;
 
-interface HciState {
-  /** 0 = full circles, 1 = gone; eased on the way. */
-  progress: number;
-  target: number;
-  paused: boolean;
-}
-
 /** The empty sixth spot, drawn as a dashed ring so the hidden interaction can be found. */
-function drawTriggerHint(p: p5, state: HciState, hovered: boolean): void {
+function drawTriggerHint(p: p5, state: ShrinkState, hovered: boolean): void {
   const { x, y } = triggerCenter(p.width, p.height);
   const ctx = p.drawingContext as CanvasRenderingContext2D;
   const alpha = state.target === 1 ? HINT_ALPHA / 2 : hovered ? HINT_HOVER_ALPHA : HINT_ALPHA;
@@ -45,7 +38,7 @@ function drawTriggerHint(p: p5, state: HciState, hovered: boolean): void {
   ctx.restore();
 }
 
-function drawCircles(p: p5, state: HciState): void {
+function drawCircles(p: p5, state: ShrinkState): void {
   const diameter = circleDiameter(p.width, p.height) * (1 - easeInOutCubic(state.progress));
   if (diameter <= 0) return;
   for (const circle of CIRCLES) {
@@ -55,7 +48,7 @@ function drawCircles(p: p5, state: HciState): void {
   }
 }
 
-function createSketch(state: HciState, reduced: boolean): (p: p5) => void {
+function createSketch(state: ShrinkState): (p: p5) => void {
   return (p: p5) => {
     p.setup = () => {
       const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
@@ -69,11 +62,7 @@ function createSketch(state: HciState, reduced: boolean): (p: p5) => void {
       if (isShrinkTrigger(p.mouseX, p.mouseY, p.width, p.height)) state.target = 1;
     };
     p.draw = () => {
-      if (reduced) state.progress = state.target;
-      else if (!state.paused) {
-        const seconds = Math.min(p.deltaTime / 1000, MAX_STEP_SECONDS);
-        state.progress = stepProgress(state.progress, state.target, seconds, SHRINK_SECONDS);
-      }
+      state.progress = nextProgress(state, p.deltaTime / 1000);
       const hovered = isShrinkTrigger(p.mouseX, p.mouseY, p.width, p.height);
       p.cursor(hovered ? p.HAND : p.ARROW);
       p.background(BACKGROUND);
@@ -83,13 +72,22 @@ function createSketch(state: HciState, reduced: boolean): (p: p5) => void {
   };
 }
 
+/** Follows the OS motion setting while the page is open, not only at load. */
+function followReducedMotion(state: ShrinkState): () => void {
+  const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const onChange = (event: MediaQueryListEvent) => (state.reduced = event.matches);
+  media.addEventListener('change', onChange);
+  return () => media.removeEventListener('change', onChange);
+}
+
 /** Five coloured circles; pressing the empty sixth spot makes them all shrink away. */
 export function mountHciSketch(host: HTMLElement): Unmount {
-  const state: HciState = { progress: 0, target: 0, paused: false };
-  const unmountSketch = mountSketch(createSketch(state, prefersReducedMotion()), host);
+  const state: ShrinkState = { progress: 0, target: 0, paused: false, reduced: prefersReducedMotion() };
+  const stopFollowing = followReducedMotion(state);
+  const unmountSketch = mountSketch(createSketch(state), host);
   const unmountUi = mountSketchUi(host, {
-    title: 'HCI · BHT Berlin',
-    caption: 'Press the dashed spot to make the circles shrink away.',
+    title: PANEL_TITLE,
+    caption: PANEL_CAPTION,
     controls: [
       { label: 'Shrink', key: 's', action: () => (state.target = 1) },
       { label: 'Reset', key: 'r', action: () => (state.target = 0) },
@@ -97,6 +95,7 @@ export function mountHciSketch(host: HTMLElement): Unmount {
     ],
   });
   return () => {
+    stopFollowing();
     unmountUi();
     unmountSketch();
   };
