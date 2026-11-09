@@ -46,3 +46,9 @@ describe('projectPages', () => {
     expect(new Set(projectPages.map((page) => page.href)).size).toBe(projectPages.length);
   });
 });
+
+describe('projects returned to the home page', () => {
+  it('lists HCI BHT again', () => {
+    expect(projectPages.map((page) => page.href)).toContain('/HCI_BHT_Website/');
+  });
+});
