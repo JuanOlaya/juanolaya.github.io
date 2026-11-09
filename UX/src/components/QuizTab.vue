@@ -4,6 +4,7 @@ import { QUIZ_SYSTEM_PROMPT, QUIZ_USER_PROMPT } from '../content';
 import { aiErrorMessage } from '../gemini-client';
 import { firstText, gemini, logAiError, type GenerateContentResponse } from '../gemini';
 import { isCorrect, parseQuiz, quizScore, type QuizAnswer, type QuizQuestion } from '../quiz';
+import { BUTTON_PRIMARY, BUTTON_SECONDARY, PANEL } from '../ui';
 import ErrorNotice from './ErrorNotice.vue';
 import SpinnerIcon from './SpinnerIcon.vue';
 
@@ -57,53 +58,46 @@ function choose(selected: number): void {
 </script>
 
 <template>
-  <div class="max-w-2xl mx-auto space-y-4">
-    <h3 class="text-lg font-bold text-white flex items-center gap-2">
-      <span>🧠 Examen de Usabilidad con Gemini</span>
-    </h3>
-    <p class="text-slate-300 text-sm leading-relaxed">
+  <div class="mx-auto max-w-2xl space-y-4">
+    <h3 class="text-lg font-medium">🧠 Examen de Usabilidad con Gemini</h3>
+    <p class="text-[0.92em] text-ink-2">
       Evaluemos lo aprendido. Generamos un cuestionario dinámico de 3 preguntas estructurado por Gemini sobre
-      <strong>Sobrecarga Cognitiva, Divulgación Progresiva y Ley de Hick</strong>.
+      <strong class="font-medium text-ink">Sobrecarga Cognitiva, Divulgación Progresiva y Ley de Hick</strong
+      >.
     </p>
 
-    <div
-      class="bg-slate-950 rounded-2xl p-6 border border-indigo-950 min-h-[250px] flex flex-col justify-center relative"
-    >
-      <div v-if="view === 'start'" class="text-center space-y-4">
-        <button
-          type="button"
-          class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-xl text-xs shadow-md transition-all"
-          @click="generate"
-        >
+    <div :class="`${PANEL} relative flex min-h-[250px] flex-col justify-center p-6`">
+      <div v-if="view === 'start'" class="space-y-4 text-center">
+        <button type="button" :class="BUTTON_PRIMARY" @click="generate">
           🎲 Generar Examen Personalizado de IA
         </button>
-        <p class="text-[10px] text-slate-500">
+        <p class="text-caption text-ink-2">
           Usa Inteligencia Artificial para evaluar tu comprensión en tiempo real.
         </p>
         <ErrorNotice :message="errorMessage" />
       </div>
 
-      <div v-else-if="view === 'loading'" class="text-center space-y-4 pulse-loader">
-        <SpinnerIcon class="w-8 h-8 mx-auto" />
-        <h4 class="font-bold text-indigo-300 text-xs">Estructurando un examen personalizado...</h4>
+      <div v-else-if="view === 'loading'" class="pulse-loader space-y-4 text-center">
+        <SpinnerIcon class="mx-auto h-8 w-8" />
+        <h4 class="font-medium text-accent-text">Estructurando un examen personalizado...</h4>
       </div>
 
       <div v-else-if="view === 'playing' && current" class="space-y-4">
-        <div class="flex justify-between items-center border-b border-indigo-900 pb-2">
-          <span class="text-xs font-bold text-indigo-400"
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-2">
+          <span class="text-caption font-medium text-accent-text"
             >Pregunta {{ answers.length + 1 }} de {{ questions.length }}</span
           >
-          <span class="text-[10px] bg-indigo-950 text-indigo-300 px-2.5 py-0.5 rounded-full font-semibold"
+          <span class="rounded-full border border-border px-2.5 py-0.5 font-mono text-[11px] text-ink-2"
             >Gemini Structured JSON</span
           >
         </div>
-        <h4 class="font-bold text-sm text-white">{{ current.question }}</h4>
+        <h4 class="font-medium">{{ current.question }}</h4>
         <div class="grid grid-cols-1 gap-2">
           <button
             v-for="(option, index) in current.options"
             :key="index"
             type="button"
-            class="w-full text-left bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white p-3.5 rounded-xl border border-indigo-950 transition-all text-xs font-medium"
+            :class="`${BUTTON_SECONDARY} w-full justify-start py-3 text-left text-[0.92em] whitespace-normal`"
             @click="choose(index)"
           >
             {{ option }}
@@ -111,38 +105,31 @@ function choose(selected: number): void {
         </div>
       </div>
 
-      <div v-else-if="view === 'results'" class="text-center space-y-4" aria-live="polite">
-        <h4 class="font-black text-xl text-white">🏆 ¡Quiz Terminado!</h4>
-        <p class="text-sm text-indigo-300">Has acertado {{ score }} de {{ questions.length }} preguntas.</p>
-        <div
-          class="p-4 bg-indigo-950/40 rounded-xl border border-indigo-900 text-left max-h-48 overflow-y-auto"
-        >
+      <div v-else-if="view === 'results'" class="space-y-4 text-center" aria-live="polite">
+        <h4 class="text-xl font-medium">🏆 ¡Quiz Terminado!</h4>
+        <p class="text-[0.92em] text-accent-text">
+          Has acertado {{ score }} de {{ questions.length }} preguntas.
+        </p>
+        <div class="max-h-48 overflow-y-auto rounded-card border border-border bg-surface p-4 text-left">
           <div
             v-for="(answer, index) in answers"
             :key="index"
-            class="mb-3 border-b border-indigo-900/50 pb-3 last:border-none last:mb-0 text-xs text-slate-300"
+            class="mb-3 border-b border-border pb-3 text-[0.92em] text-ink-2 last:mb-0 last:border-none"
           >
-            <p class="font-bold text-white">{{ index + 1 }}. {{ answer.question.question }}</p>
+            <p class="font-medium text-ink">{{ index + 1 }}. {{ answer.question.question }}</p>
             <p class="mt-1">
               Tu respuesta:
-              <span
-                :class="isCorrect(answer) ? 'text-emerald-400 font-semibold' : 'text-rose-400 font-semibold'"
-                >{{ answer.question.options[answer.selected] }}</span
-              >
+              <span :class="['font-medium', isCorrect(answer) ? 'text-success' : 'text-danger']">{{
+                answer.question.options[answer.selected]
+              }}</span>
             </p>
-            <p v-if="!isCorrect(answer)" class="text-emerald-400">
+            <p v-if="!isCorrect(answer)" class="text-success">
               Correcta: {{ answer.question.options[answer.question.answerIndex] }}
             </p>
-            <p class="italic text-slate-400 mt-1">💡 Explicación: {{ answer.question.explanation }}</p>
+            <p class="mt-1 italic">💡 Explicación: {{ answer.question.explanation }}</p>
           </div>
         </div>
-        <button
-          type="button"
-          class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-xl text-xs transition-all"
-          @click="reset"
-        >
-          Intentar con otro examen
-        </button>
+        <button type="button" :class="BUTTON_PRIMARY" @click="reset">Intentar con otro examen</button>
       </div>
     </div>
   </div>

@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import TabGroup, { type TabOption } from '@shared/components/TabGroup.vue';
 import { gemini } from '../gemini';
+import { scrollBehaviorFor, watchReducedMotion } from '../motion';
+import { IDLE_SWIPE, beginSwipe, cancelSwipe, endSwipe, type SwipePointer, type SwipeState } from '../swipe';
+import { tabIndexAfterSwipe } from '../tab-gestures';
+import { CARD, EYEBROW } from '../ui';
 import AuditTab from './AuditTab.vue';
 import GroundingTab from './GroundingTab.vue';
 import InterviewTab from './InterviewTab.vue';
@@ -19,28 +23,69 @@ const tabs: readonly TabOption<AiTabId>[] = [
 ];
 
 const activeTab = ref<AiTabId>('audit');
+const root = ref<HTMLElement | null>(null);
+const reducedMotion = ref(false);
+let swipe: SwipeState = IDLE_SWIPE;
+let stopMotionWatch = (): void => {};
+
+onMounted(() => {
+  stopMotionWatch = watchReducedMotion((reduced) => (reducedMotion.value = reduced));
+});
+onBeforeUnmount(() => stopMotionWatch());
 
 function tabClass(active: boolean): string {
-  const base = 'text-xs font-bold px-4 py-2.5 rounded-xl transition-all';
+  const base =
+    'inline-flex min-h-11 shrink-0 items-center rounded-button px-4 text-caption font-medium whitespace-nowrap motion-safe:transition-colors';
   return active
-    ? `${base} bg-indigo-600 hover:bg-indigo-700 text-white`
-    : `${base} bg-slate-800 hover:bg-indigo-950/40 text-slate-300 border border-indigo-900`;
+    ? `${base} bg-accent text-on-accent`
+    : `${base} border border-white/15 bg-white/5 text-ink hover:bg-white/10`;
 }
+
+function pointerOf(event: PointerEvent): SwipePointer {
+  return {
+    pointerId: event.pointerId,
+    x: event.clientX,
+    y: event.clientY,
+    pointerType: event.pointerType,
+    isPrimary: event.isPrimary,
+  };
+}
+
+function onPointerDown(event: PointerEvent): void {
+  swipe = beginSwipe(swipe, pointerOf(event));
+}
+
+function onPointerUp(event: PointerEvent): void {
+  const result = endSwipe(swipe, pointerOf(event));
+  swipe = result.state;
+  const current = tabs.findIndex((tab) => tab.id === activeTab.value);
+  const next = tabIndexAfterSwipe(result.direction, current, tabs.length);
+  if (next !== null) activeTab.value = tabs[next].id;
+}
+
+function onPointerCancel(): void {
+  swipe = cancelSwipe();
+}
+
+// Arrow keys and swipes can select a tab that sits outside the scrollable strip.
+watch(activeTab, async () => {
+  await nextTick();
+  root.value?.querySelector<HTMLElement>('[role="tab"][aria-selected="true"]')?.scrollIntoView({
+    behavior: scrollBehaviorFor(reducedMotion.value),
+    inline: 'nearest',
+    block: 'nearest',
+  });
+});
 </script>
 
 <template>
-  <section
-    id="gemini-hub"
-    class="bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 text-white rounded-3xl p-6 md:p-10 shadow-xl border border-indigo-800 space-y-8 scroll-mt-20"
-  >
+  <section id="gemini-hub" ref="root" :class="`${CARD} scroll-mt-20 space-y-8`">
     <div>
-      <div class="flex items-center gap-2 text-indigo-400">
-        <span class="h-2 w-2 rounded-full bg-indigo-400 animate-ping"></span>
-        <span class="text-xs font-bold tracking-widest uppercase">Módulo Copilot Activo</span>
+      <div :class="`${EYEBROW} flex items-center gap-2 text-ink-2`">
+        <span :class="['h-2 w-2 rounded-full', gemini.isAvailable ? 'bg-success' : 'bg-ink-2']"></span>
+        <span>{{ gemini.isAvailable ? 'Módulo Copilot activo' : 'Módulo Copilot sin conexión' }}</span>
       </div>
-      <h2
-        class="text-2xl md:text-3xl font-extrabold tracking-tight mt-1 text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-indigo-300"
-      >
+      <h2 class="mt-1 text-[clamp(20px,1.1rem+0.5vw,26px)] leading-tight font-medium">
         Centro Inteligente Gemini AI
       </h2>
     </div>
@@ -48,28 +93,43 @@ function tabClass(active: boolean): string {
     <div
       v-if="!gemini.isAvailable"
       role="status"
-      class="bg-amber-100 text-amber-900 border border-amber-300 rounded-2xl p-4 text-sm"
+      class="rounded-card border border-accent/40 bg-bg p-4 text-[0.92em] text-ink-2"
     >
-      <strong>AI Hub desactivado.</strong> Esta versión pública no tiene un proxy de Gemini configurado, así
-      que las funciones de IA no están disponibles. El resto de la infografía funciona con normalidad.
+      <strong class="block font-medium text-accent-text">AI Hub desactivado en esta versión pública.</strong>
+      No hay un proxy de Gemini configurado, así que las funciones de IA no responden. Puedes recorrer las
+      cinco herramientas para ver qué hacen; el resto de la infografía funciona con normalidad.
     </div>
 
     <TabGroup
       v-model="activeTab"
       :tabs="tabs"
       label="Herramientas del AI Hub"
-      list-class="flex flex-wrap gap-2 border-b border-indigo-800 pb-6 mb-8"
+      list-class="scroll-row mb-6 flex gap-2 border-b border-border pb-4"
       :tab-class="tabClass"
     >
       <template #default="{ active }">
-        <!-- v-show keeps each tool's state when switching tabs, as the original did. -->
-        <div v-show="active === 'audit'" class="fade-in"><AuditTab /></div>
-        <div v-show="active === 'proto'" class="fade-in"><PrototypeTab /></div>
-        <div v-show="active === 'interview'" class="fade-in">
-          <InterviewTab :active="active === 'interview'" />
+        <p class="mb-4 hidden text-caption text-ink-2 pointer-coarse:block">
+          Desliza hacia los lados para cambiar de herramienta.
+        </p>
+        <!--
+          Swipe handlers live on this wrapper (the shared TabGroup is used as is). `touch-pan-y` keeps
+          vertical scrolling native; the browser then cancels our pointer when it takes over.
+        -->
+        <div
+          class="touch-pan-y"
+          @pointerdown="onPointerDown"
+          @pointerup="onPointerUp"
+          @pointercancel="onPointerCancel"
+        >
+          <!-- v-show keeps each tool's state when switching tabs, as the original did. -->
+          <div v-show="active === 'audit'" class="fade-in"><AuditTab /></div>
+          <div v-show="active === 'proto'" class="fade-in"><PrototypeTab /></div>
+          <div v-show="active === 'interview'" class="fade-in">
+            <InterviewTab :active="active === 'interview'" />
+          </div>
+          <div v-show="active === 'grounding'" class="fade-in"><GroundingTab /></div>
+          <div v-show="active === 'quiz'" class="fade-in"><QuizTab /></div>
         </div>
-        <div v-show="active === 'grounding'" class="fade-in"><GroundingTab /></div>
-        <div v-show="active === 'quiz'" class="fade-in"><QuizTab /></div>
       </template>
     </TabGroup>
   </section>

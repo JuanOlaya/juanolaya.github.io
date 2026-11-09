@@ -1,4 +1,8 @@
-export type Tone = 'indigo' | 'emerald' | 'amber' | 'rose';
+/**
+ * Semantic colour of a topic, mapped to STYLE-CONTRACT tokens by the components:
+ * `info` principles, `success` people/execution domains, `accent` planning domains, `danger` compliance.
+ */
+export type Tone = 'info' | 'accent' | 'success' | 'danger';
 
 /** Detail shown in the modal when a principle, domain or guide card is opened. */
 export interface Topic {
@@ -6,8 +10,6 @@ export interface Topic {
   sub: string;
   tone: Tone;
   lead: string;
-  /** Replaces the tone's lead box classes where the original page styled it differently. */
-  leadClass?: string;
   items: readonly string[];
   /** Measurement shows the KPI/SPI/CPI cards and puts the list in a "Fórmulas y Tipos" box. */
   kind?: 'measurement';
@@ -17,7 +19,7 @@ export const topics = {
   Stewardship: {
     title: 'Stewardship',
     sub: 'Responsabilidad',
-    tone: 'indigo',
+    tone: 'info',
     lead: 'Cuidar el proyecto como si fuera propio.',
     items: [
       'Integridad (Integrity): Actuar con honestidad en cada decisión.',
@@ -28,7 +30,7 @@ export const topics = {
   Team: {
     title: 'Team',
     sub: 'Equipo',
-    tone: 'indigo',
+    tone: 'info',
     lead: 'El corazón de la ejecución.',
     items: [
       'Cultura: Crear un entorno de seguridad psicológica.',
@@ -39,7 +41,7 @@ export const topics = {
   Stakeholders: {
     title: 'Stakeholders',
     sub: 'Interesados',
-    tone: 'indigo',
+    tone: 'info',
     lead: 'Gestionar relaciones, no solo nombres.',
     items: [
       'Involucramiento (Engagement): Mantenerlos activos y motivados.',
@@ -50,7 +52,7 @@ export const topics = {
   Value: {
     title: 'Value',
     sub: 'Valor',
-    tone: 'indigo',
+    tone: 'info',
     lead: 'El fin último de todo esfuerzo.',
     items: [
       'Beneficios: Medir el éxito por el impacto, no solo por tareas.',
@@ -61,7 +63,7 @@ export const topics = {
   SystemsThinking: {
     title: 'Systems Thinking',
     sub: 'Pensamiento Sistémico',
-    tone: 'indigo',
+    tone: 'info',
     lead: 'Entender que todo está conectado.',
     items: [
       'Holismo: Mirar la imagen completa o Big Picture.',
@@ -72,7 +74,7 @@ export const topics = {
   Leadership: {
     title: 'Leadership',
     sub: 'Liderazgo',
-    tone: 'indigo',
+    tone: 'info',
     lead: 'Influencia positiva sin jerarquías.',
     items: [
       'Inspiración: Motivar hacia una visión común compartida.',
@@ -83,7 +85,7 @@ export const topics = {
   Tailoring: {
     title: 'Tailoring',
     sub: 'Adaptación',
-    tone: 'indigo',
+    tone: 'info',
     lead: 'No hay una receta mágica única.',
     items: [
       'Ajuste: Seleccionar los procesos que sirven específicamente hoy.',
@@ -94,7 +96,7 @@ export const topics = {
   Quality: {
     title: 'Quality',
     sub: 'Calidad',
-    tone: 'indigo',
+    tone: 'info',
     lead: 'Hacerlo bien desde la primera vez.',
     items: [
       'Satisfacción: Cumplir con lo que el cliente espera recibir.',
@@ -105,7 +107,7 @@ export const topics = {
   Complexity: {
     title: 'Complexity',
     sub: 'Complejidad',
-    tone: 'indigo',
+    tone: 'info',
     lead: 'Navegar en la niebla con seguridad.',
     items: [
       'Diagnóstico: Entender qué variables hacen complejo al proyecto.',
@@ -116,7 +118,7 @@ export const topics = {
   Risk: {
     title: 'Risk',
     sub: 'Riesgo',
-    tone: 'indigo',
+    tone: 'info',
     lead: 'Anticiparse al futuro incierto.',
     items: [
       'Amenazas (Threats): Planear para lo que puede salir mal.',
@@ -127,7 +129,7 @@ export const topics = {
   Adaptability: {
     title: 'Adaptability & Resiliency',
     sub: 'Adaptabilidad y Resiliencia',
-    tone: 'indigo',
+    tone: 'info',
     lead: 'Flexibilidad para ganar.',
     items: [
       'Reacción: Ajustar las velas cuando cambia el viento del proyecto.',
@@ -138,7 +140,7 @@ export const topics = {
   Change: {
     title: 'Change',
     sub: 'Cambio',
-    tone: 'indigo',
+    tone: 'info',
     lead: 'Acompañar la transformación organizacional.',
     items: [
       'Transición: Ayudar a la gente a adoptar los nuevos resultados.',
@@ -150,7 +152,7 @@ export const topics = {
   DomainStakeholders: {
     title: 'Stakeholders',
     sub: 'Interesados',
-    tone: 'emerald',
+    tone: 'success',
     lead: 'Este dominio establece una Estrategia de Relación (Engagement Strategy) efectiva.',
     items: [
       'Matrices de Poder e Interés: Saber quién decide de verdad.',
@@ -161,8 +163,8 @@ export const topics = {
   DomainTeam: {
     title: 'Team',
     sub: 'Equipo',
-    tone: 'emerald',
-    lead: 'Aborda la Estructura y Gobernanza (Governance) del grupo de trabajo.',
+    tone: 'success',
+    lead: 'Aborda la cultura, el liderazgo y el alto desempeño del equipo que produce los entregables.',
     items: [
       'Matriz RACI: Claridad absoluta en responsabilidades y roles.',
       'Normas de Equipo: Reglas del juego claras para la convivencia.',
@@ -172,18 +174,18 @@ export const topics = {
   DomainLifecycle: {
     title: 'Development Approach and Life Cycle',
     sub: 'Ciclo de Vida',
-    tone: 'amber',
-    lead: 'Define la Metodología de Entrega (Delivery Methodology).',
+    tone: 'accent',
+    lead: 'Define el enfoque de desarrollo, la cadencia de entrega y las fases del ciclo de vida.',
     items: [
-      'Agile (Ágil): Para requisitos cambiantes y rapidez de entrega.',
-      'Cascada (Waterfall): Para estabilidad y hitos fijos secuenciales.',
-      'Híbrido: Combinar lo mejor de ambos mundos según el caso.',
+      'Predictivo (Cascada): Alcance estable y fases secuenciales con hitos fijos.',
+      'Adaptativo (Ágil, iterativo e incremental): Requisitos cambiantes y entregas frecuentes.',
+      'Híbrido: Combinar ambos según la incertidumbre de cada componente del proyecto.',
     ],
   },
   DomainPlanning: {
     title: 'Planning',
     sub: 'Planificación',
-    tone: 'amber',
+    tone: 'accent',
     lead: 'Cubre la organización técnica de recursos, tiempo y costos.',
     items: [
       'Líneas Base (Baselines): El punto de comparación inicial aprobado.',
@@ -194,7 +196,7 @@ export const topics = {
   DomainWork: {
     title: 'Project Work',
     sub: 'Trabajo del Proyecto',
-    tone: 'emerald',
+    tone: 'success',
     lead: 'Se enfoca en la Operación Diaria (Daily Operations).',
     items: [
       'Flujos como Kanban: Visibilidad total de las tareas diarias.',
@@ -205,10 +207,8 @@ export const topics = {
   DomainDelivery: {
     title: 'Delivery',
     sub: 'Entrega',
-    tone: 'emerald',
-    lead: '🎯 Foco en Requisitos y Alcance (Scope). Es el dominio donde se realiza el Levantamiento de Requisitos.',
-    leadClass:
-      'bg-emerald-50 p-6 rounded-xl border-l-4 border-emerald-600 mb-4 font-semibold text-emerald-900 shadow-sm',
+    tone: 'success',
+    lead: 'Foco en Requisitos y Alcance (Scope). Es el dominio donde se realiza el Levantamiento de Requisitos.',
     items: [
       'Levantamiento (Requirements Gathering): Captura técnica de necesidades.',
       'Trazabilidad (Traceability): Seguir el requisito hasta su entrega.',
@@ -218,11 +218,9 @@ export const topics = {
   DomainMeasurement: {
     title: 'Measurement',
     sub: 'Medición',
-    tone: 'indigo',
+    tone: 'info',
     kind: 'measurement',
     lead: 'Este dominio es el corazón del control basado en datos cuantificables.',
-    leadClass:
-      'bg-slate-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800 italic',
     items: [
       'SPI = EV / PV: Valor Ganado (Earned Value) entre Valor Planificado.',
       'CPI = EV / AC: Valor Ganado (Earned Value) entre Costo Real.',
@@ -233,7 +231,7 @@ export const topics = {
   DomainUncertainty: {
     title: 'Uncertainty',
     sub: 'Incertidumbre',
-    tone: 'amber',
+    tone: 'accent',
     lead: 'Gestiona el espectro completo de Riesgos y Oportunidades.',
     items: [
       'Heat Maps (Mapas de Calor): Priorizar riesgos por impacto y probabilidad.',
@@ -245,7 +243,7 @@ export const topics = {
   GuideGobernanza: {
     title: 'Gobernanza',
     sub: 'Liderazgo y Ética',
-    tone: 'indigo',
+    tone: 'info',
     lead: 'El marco de decisión del proyecto.',
     items: [
       'Modelo de Liderazgo: Definir si será directivo, servicial o transformacional.',
@@ -256,7 +254,7 @@ export const topics = {
   GuideTecnica: {
     title: 'Cuerpo Técnico',
     sub: 'Metodología y Alcance',
-    tone: 'emerald',
+    tone: 'success',
     lead: 'La arquitectura de la solución propuesta.',
     items: [
       'Levantamiento de Requisitos: Métodos para capturar necesidades técnicas.',
@@ -267,7 +265,7 @@ export const topics = {
   GuideVisual: {
     title: 'Gestión Visual',
     sub: 'Transparencia y Control',
-    tone: 'amber',
+    tone: 'accent',
     lead: 'Mostrar el progreso en tiempo real.',
     items: [
       'Kanban: Visualización del flujo y detección de cuellos de botella.',
@@ -278,7 +276,7 @@ export const topics = {
   GuideCompliance: {
     title: 'Compliance',
     sub: 'Normativa y Sostenibilidad',
-    tone: 'rose',
+    tone: 'danger',
     lead: 'Protección legal y regulatoria.',
     items: [
       'Monitoreo: Auditorías periódicas de procesos y resultados técnicos.',
@@ -290,12 +288,19 @@ export const topics = {
 
 export type TopicId = keyof typeof topics;
 
-export const leadClassByTone: Record<Tone, string> = {
-  indigo: 'bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500 mb-4 font-semibold text-indigo-800',
-  emerald: 'bg-emerald-50 p-4 rounded-xl border-l-4 border-emerald-500 mb-4 font-semibold text-emerald-800',
-  amber: 'bg-amber-50 p-4 rounded-xl border-l-4 border-amber-500 mb-4 font-semibold text-amber-800',
-  rose: 'bg-rose-50 p-4 rounded-xl border-l-4 border-rose-500 mb-4 font-semibold text-rose-800',
-};
+export interface FlowStep {
+  id: string;
+  title: string;
+  text: string;
+}
+
+/** PMBOK 7 value delivery flow: principles guide the domains, whose work yields deliverables and value. */
+export const flowSteps: readonly FlowStep[] = [
+  { id: 'ser', title: 'Ser', text: '12 principios: la mentalidad que guía cada decisión.' },
+  { id: 'hacer', title: 'Hacer', text: '8 dominios de desempeño: dónde ocurre el trabajo.' },
+  { id: 'entregar', title: 'Entregar', text: 'Entregables y resultados, visibles en los artefactos.' },
+  { id: 'valor', title: 'Valor', text: 'Beneficios para la organización y los interesados.' },
+];
 
 export interface PrincipleButton {
   id: TopicId;
@@ -308,7 +313,7 @@ export const principles: readonly PrincipleButton[] = [
   { id: 'Team', label: 'Team', translation: 'Equipo' },
   { id: 'Stakeholders', label: 'Stakeholders', translation: 'Interesados' },
   { id: 'Value', label: 'Value', translation: 'Valor' },
-  { id: 'SystemsThinking', label: 'Systems Thinking', translation: 'Pensa. Sistémico' },
+  { id: 'SystemsThinking', label: 'Systems Thinking', translation: 'Pensamiento Sistémico' },
   { id: 'Leadership', label: 'Leadership', translation: 'Liderazgo' },
   { id: 'Tailoring', label: 'Tailoring', translation: 'Adaptación' },
   { id: 'Quality', label: 'Quality', translation: 'Calidad' },
@@ -318,8 +323,8 @@ export const principles: readonly PrincipleButton[] = [
   { id: 'Change', label: 'Change', translation: 'Cambio' },
 ];
 
-/** `amber` marks the planning-related domains, `delivery` the highlighted Delivery domain. */
-export type DomainAccent = 'emerald' | 'amber' | 'delivery';
+/** `planning` marks the planning-related domains, `delivery` the highlighted Delivery domain. */
+export type DomainAccent = 'default' | 'planning' | 'delivery';
 
 export interface DomainButton {
   id: TopicId;
@@ -333,61 +338,89 @@ export const domains: readonly DomainButton[] = [
     id: 'DomainStakeholders',
     label: 'Stakeholders',
     summary: 'Interesados — Estrategia y expectativas.',
-    accent: 'emerald',
+    accent: 'default',
   },
-  { id: 'DomainTeam', label: 'Team', summary: 'Equipo — Estructura y gobernanza.', accent: 'emerald' },
+  { id: 'DomainTeam', label: 'Team', summary: 'Equipo — Cultura y alto desempeño.', accent: 'default' },
   {
     id: 'DomainLifecycle',
     label: 'Development Approach and Life Cycle',
-    summary: 'Ciclo de Vida — Metodología.',
-    accent: 'amber',
+    summary: 'Ciclo de Vida — Enfoque predictivo, adaptativo o híbrido.',
+    accent: 'planning',
   },
-  { id: 'DomainPlanning', label: 'Planning', summary: 'Planificación — Cronograma.', accent: 'amber' },
-  { id: 'DomainWork', label: 'Project Work', summary: 'Trabajo — Procesos operativos.', accent: 'emerald' },
+  {
+    id: 'DomainPlanning',
+    label: 'Planning',
+    summary: 'Planificación — Alcance, tiempo y costo.',
+    accent: 'planning',
+  },
+  { id: 'DomainWork', label: 'Project Work', summary: 'Trabajo — Procesos operativos.', accent: 'default' },
   { id: 'DomainDelivery', label: 'Delivery', summary: 'Entrega — Alcance y Requisitos.', accent: 'delivery' },
   {
     id: 'DomainMeasurement',
     label: 'Measurement',
     summary: 'Medición — KPIs y desempeño.',
-    accent: 'emerald',
+    accent: 'default',
   },
-  { id: 'DomainUncertainty', label: 'Uncertainty', summary: 'Incertidumbre — Riesgos.', accent: 'amber' },
+  {
+    id: 'DomainUncertainty',
+    label: 'Uncertainty',
+    summary: 'Incertidumbre — Riesgos, ambigüedad y volatilidad.',
+    accent: 'planning',
+  },
 ];
+
+/** Lucide icon chosen by ArtifactsSection.vue for each artifact. */
+export type ArtifactIcon =
+  | 'kanban'
+  | 'gantt'
+  | 'burndown'
+  | 's-curve'
+  | 'cfd'
+  | 'traceability'
+  | 'backlog'
+  | 'wbs'
+  | 'baseline'
+  | 'pareto'
+  | 'roadmap'
+  | 'heatmap'
+  | 'dashboard'
+  | 'vsm'
+  | 'ishikawa';
 
 export interface ArtifactColumn {
   title: string;
-  items: readonly { icon: string; label: string }[];
+  items: readonly { icon: ArtifactIcon; label: string }[];
 }
 
 export const artifactColumns: readonly ArtifactColumn[] = [
   {
     title: 'Ejecución y Flujo',
     items: [
-      { icon: '🎴', label: 'Tableros y Tarjetas Kanban' },
-      { icon: '📈', label: 'Diagrama de Gantt / Cronograma' },
-      { icon: '📉', label: 'Burndown / Burnup Charts' },
-      { icon: '📊', label: 'Curva S (Costos Acumulados)' },
-      { icon: '🌊', label: 'Flujo Acumulado (CFD)' },
+      { icon: 'kanban', label: 'Tableros y Tarjetas Kanban' },
+      { icon: 'gantt', label: 'Diagrama de Gantt / Cronograma' },
+      { icon: 'burndown', label: 'Burndown / Burnup Charts' },
+      { icon: 's-curve', label: 'Curva S (Costos Acumulados)' },
+      { icon: 'cfd', label: 'Flujo Acumulado (CFD)' },
     ],
   },
   {
     title: 'Requisitos e Informes',
     items: [
-      { icon: '📋', label: 'Matriz de Trazabilidad' },
-      { icon: '📑', label: 'Backlog / Historias de Usuario' },
-      { icon: '🌳', label: 'EDT / WBS (Jerarquía)' },
-      { icon: '📐', label: 'Líneas Base (Baselines)' },
-      { icon: '🔎', label: 'Diagrama de Pareto' },
+      { icon: 'traceability', label: 'Matriz de Trazabilidad' },
+      { icon: 'backlog', label: 'Backlog / Historias de Usuario' },
+      { icon: 'wbs', label: 'EDT / WBS (Jerarquía)' },
+      { icon: 'baseline', label: 'Líneas Base (Baselines)' },
+      { icon: 'pareto', label: 'Diagrama de Pareto' },
     ],
   },
   {
     title: 'Estrategia y Riesgo',
     items: [
-      { icon: '🗺️', label: 'Roadmap del Proyecto' },
-      { icon: '🔥', label: 'Mapa de Calor de Riesgos' },
-      { icon: '🖥️', label: 'Dashboard de Desempeño' },
-      { icon: '💎', label: 'Mapa de Valor (VSM)' },
-      { icon: '🦴', label: 'Diagrama de Ishikawa' },
+      { icon: 'roadmap', label: 'Roadmap del Proyecto' },
+      { icon: 'heatmap', label: 'Mapa de Calor de Riesgos' },
+      { icon: 'dashboard', label: 'Dashboard de Desempeño' },
+      { icon: 'vsm', label: 'Mapa de Valor (VSM)' },
+      { icon: 'ishikawa', label: 'Diagrama de Ishikawa' },
     ],
   },
 ];
@@ -396,8 +429,7 @@ export interface GuideCard {
   id: TopicId;
   title: string;
   description: string;
-  cardClass: string;
-  titleClass: string;
+  tone: Tone;
 }
 
 export const guideCards: readonly GuideCard[] = [
@@ -405,28 +437,24 @@ export const guideCards: readonly GuideCard[] = [
     id: 'GuideGobernanza',
     title: 'Gobernanza',
     description: 'Modelo de liderazgo y aseguramiento de la ética y Compliance (Cumplimiento).',
-    cardClass: 'border-indigo-500 hover:bg-indigo-50',
-    titleClass: 'text-indigo-700',
+    tone: 'info',
   },
   {
     id: 'GuideTecnica',
     title: 'Cuerpo Técnico',
-    description: 'Levantamiento de Requisitos y Metodología de Entrega elegida.',
-    cardClass: 'border-emerald-500 hover:bg-emerald-50',
-    titleClass: 'text-emerald-700',
+    description: 'Levantamiento de Requisitos y enfoque de desarrollo elegido.',
+    tone: 'success',
   },
   {
     id: 'GuideVisual',
     title: 'Gestión Visual',
     description: 'Uso de Kanban y Dashboards (Tableros) para transparencia.',
-    cardClass: 'border-amber-500 hover:bg-indigo-50',
-    titleClass: 'text-amber-700',
+    tone: 'accent',
   },
   {
     id: 'GuideCompliance',
     title: 'Compliance',
     description: 'Monitorización de leyes y normas vigentes.',
-    cardClass: 'border-rose-500 hover:bg-rose-50',
-    titleClass: 'text-rose-700',
+    tone: 'danger',
   },
 ];
