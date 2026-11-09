@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.11.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.10.0...v0.11.0) (2026-11-09)
+
+
+### Features
+
+* **hci:** site chrome, reduced-motion step and home return for HCI BHT ([#97](https://github.com/JuanOlaya/juanolaya.github.io/issues/97)) ([7073c8f](https://github.com/JuanOlaya/juanolaya.github.io/commit/7073c8f71da645a32048e3c6cc6c3c2e59c19b5a))
+* **memodeutsch:** mobile UI on the style contract, resilient storage, back on the home page ([#101](https://github.com/JuanOlaya/juanolaya.github.io/issues/101)) ([44689cd](https://github.com/JuanOlaya/juanolaya.github.io/commit/44689cde742e8a79568f6bb303d44a1835255c7b))
+* **platform-game:** DDD domain, live physics/architecture panels and teaching description ([#102](https://github.com/JuanOlaya/juanolaya.github.io/issues/102)) ([22ace1f](https://github.com/JuanOlaya/juanolaya.github.io/commit/22ace1f0cac3a710a6a32788cfd3058ce47097ff))
+* **project-management:** PMBOK 7 content review, shared theme and agile cases (TODO §3) ([#99](https://github.com/JuanOlaya/juanolaya.github.io/issues/99)) ([8f63446](https://github.com/JuanOlaya/juanolaya.github.io/commit/8f63446659f6cb2e2a75cd56657491c3eb74fb00))
+* **shapy-presence:** migrate ShapyPresence to TypeScript and p5 2 instance mode ([#98](https://github.com/JuanOlaya/juanolaya.github.io/issues/98)) ([2b90d51](https://github.com/JuanOlaya/juanolaya.github.io/commit/2b90d51752ee01c5f9ebf651d62e4c2642be6791))
+* **ux:** modo offline verificado, estética del contrato y navegación táctil ([#100](https://github.com/JuanOlaya/juanolaya.github.io/issues/100)) ([d70dc33](https://github.com/JuanOlaya/juanolaya.github.io/commit/d70dc334a45fc551f99fc03244057d7fc10895ea))
+
 ## [0.10.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.9.5...v0.10.0) (2026-11-09)
 
 
