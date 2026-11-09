@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.10.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.9.5...v0.10.0) (2026-11-09)
+
+
+### Features
+
+* **filter:** collapse expandable mechanism filter bar by default ([f6e932f](https://github.com/JuanOlaya/juanolaya.github.io/commit/f6e932f32143bd7f906b7d0b604e99f0518c4c00))
+* **home:** hide pending projects from home grid and document them in pendientes.md ([8f78278](https://github.com/JuanOlaya/juanolaya.github.io/commit/8f782785dff2a6dea494d0ff8ad8cc192e301be8))
+
 ## [0.9.5](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.9.4...v0.9.5) (2026-11-08)
 
 
