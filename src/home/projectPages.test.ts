@@ -42,6 +42,10 @@ describe('projectPages', () => {
     expect(hrefs).not.toContain('/PixelGrid/');
   });
 
+  it('lists Project Management again (TODO.md §3)', () => {
+    expect(projectPages.map((page) => page.href)).toContain('/Project_Management/');
+  });
+
   it('has unique links', () => {
     expect(new Set(projectPages.map((page) => page.href)).size).toBe(projectPages.length);
   });
