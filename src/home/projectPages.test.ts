@@ -42,6 +42,13 @@ describe('projectPages', () => {
     expect(hrefs).not.toContain('/PixelGrid/');
   });
 
+  // TODO.md §5: ShapyPresence is back on the home page at its EurekaWall URL.
+  it('lists ShapyPresence under /EurekaWall/pixelGrid/', () => {
+    const page = projectPages.find((item) => item.title === 'ShapyPresence');
+    expect(page?.href).toBe('/EurekaWall/pixelGrid/');
+    expect(siteEntries).toContainEqual({ kind: 'vite', dir: 'EurekaWall/pixelGrid' });
+  });
+
   it('has unique links', () => {
     expect(new Set(projectPages.map((page) => page.href)).size).toBe(projectPages.length);
   });
