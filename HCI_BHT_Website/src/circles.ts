@@ -53,3 +53,24 @@ export function easeInOutCubic(t: number): number {
 export function circleCenter(circle: Circle, width: number, height: number): { x: number; y: number } {
   return { x: (circle.xPercent * width) / 100, y: (circle.yPercent * height) / 100 };
 }
+
+export interface ShrinkState {
+  /** 0 = full circles, 1 = gone; eased on the way. */
+  progress: number;
+  target: number;
+  paused: boolean;
+  /** `prefers-reduced-motion: reduce`: the user asked for no unsolicited movement. */
+  reduced: boolean;
+}
+
+// The original lost 1 px of an 80 px circle per frame: about 1.3 s at 60 FPS.
+const SHRINK_SECONDS = 1.4;
+// A tab coming back from the background reports one huge frame; it must not jump the animation.
+const MAX_STEP_SECONDS = 0.05;
+
+/** Progress for the next frame: eased toward the target, frozen while paused, instant under reduced motion. */
+export function nextProgress(state: ShrinkState, seconds: number): number {
+  if (state.reduced) return state.target;
+  if (state.paused) return state.progress;
+  return stepProgress(state.progress, state.target, Math.min(seconds, MAX_STEP_SECONDS), SHRINK_SECONDS);
+}
