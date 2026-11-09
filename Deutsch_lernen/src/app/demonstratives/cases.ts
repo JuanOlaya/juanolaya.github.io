@@ -13,7 +13,10 @@ export interface DemonstrativeCase {
   description: string;
   rows: DemonstrativeRow[];
   overviewRows: DemonstrativeRow[];
-  /** Full Tailwind class names, written out so the compiler finds them. */
+  /**
+   * Full Tailwind class names, written out so the compiler finds them. One contract colour per case
+   * (`info`, `danger`, `success`), lightened by gender with alphas that keep `ink` readable (AA) on `surface`.
+   */
   theme: { header: string; genders: readonly string[]; chip: string; heading: string };
 }
 
@@ -32,10 +35,10 @@ export const demonstrativeCases: Record<Fall, DemonstrativeCase> = {
     intro: 'Demostrativos en alemán: dieser (este), jener (aquel), jeder (cada), welcher (cuál).',
     description: 'El Nominativ identifica el sujeto de la oración - quién o qué realiza la acción.',
     theme: {
-      header: 'bg-blue-100',
-      genders: ['bg-blue-200', 'bg-blue-300', 'bg-blue-400', 'bg-blue-500'],
-      chip: 'bg-blue-50 text-blue-800',
-      heading: 'text-blue-800',
+      header: 'bg-info/15',
+      genders: ['bg-info/10', 'bg-info/15', 'bg-info/22', 'bg-info/30'],
+      chip: 'bg-info/25 text-ink',
+      heading: 'text-info-text',
     },
   }),
   akkusativ: caseOf('akkusativ', {
@@ -46,10 +49,10 @@ export const demonstrativeCases: Record<Fall, DemonstrativeCase> = {
     description:
       'El Akkusativ identifica el objeto directo - qué o a quién recibe directamente la acción del verbo.',
     theme: {
-      header: 'bg-red-100',
-      genders: ['bg-red-200', 'bg-red-300', 'bg-red-400', 'bg-red-500'],
-      chip: 'bg-red-50 text-red-800',
-      heading: 'text-red-800',
+      header: 'bg-danger/15',
+      genders: ['bg-danger/10', 'bg-danger/15', 'bg-danger/22', 'bg-danger/30'],
+      chip: 'bg-danger/25 text-ink',
+      heading: 'text-danger',
     },
   }),
   dativ: caseOf('dativ', {
@@ -60,10 +63,10 @@ export const demonstrativeCases: Record<Fall, DemonstrativeCase> = {
     description:
       'El Dativ identifica el objeto indirecto - a quién o para quién se realiza la acción indirectamente.',
     theme: {
-      header: 'bg-green-100',
-      genders: ['bg-green-200', 'bg-green-300', 'bg-green-400', 'bg-green-500'],
-      chip: 'bg-green-50 text-green-700',
-      heading: 'text-green-700',
+      header: 'bg-success/15',
+      genders: ['bg-success/10', 'bg-success/15', 'bg-success/22', 'bg-success/30'],
+      chip: 'bg-success/25 text-ink',
+      heading: 'text-success',
     },
   }),
 };

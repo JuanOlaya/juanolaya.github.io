@@ -1,5 +1,5 @@
 <template>
-  <svg class="animate-spin text-indigo-400" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+  <svg class="animate-spin text-accent-text" fill="none" viewBox="0 0 24 24" aria-hidden="true">
     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
     <path
       class="opacity-75"

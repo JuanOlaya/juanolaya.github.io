@@ -6,19 +6,22 @@ import { FAELLE } from '../demonstratives/types.ts';
 
 <template>
   <section class="mx-auto max-w-3xl">
-    <h1 class="mb-2 text-3xl font-bold text-gray-800">MemoDeutsch</h1>
-    <p class="mb-6 text-gray-600">
+    <h1 class="mb-2 text-[clamp(26px,1.4rem+1vw,36px)] leading-[1.1] font-medium text-ink">MemoDeutsch</h1>
+    <p class="mb-6 text-ink-2">
       Páginas que ya forman parte de la nueva app. El resto sigue en el
-      <a href="../" class="text-indigo-700 underline">índice de MemoDeutsch</a>.
+      <a href="../">índice de MemoDeutsch</a>.
     </p>
-    <ul class="space-y-2">
+    <ul class="flex flex-col gap-1">
       <li>
-        <RouterLink :to="{ name: 'demonstratives' }" class="text-indigo-700 underline">
+        <RouterLink :to="{ name: 'demonstratives' }" class="inline-flex min-h-11 items-center">
           Demonstrativpronomen – alle Fälle
         </RouterLink>
-        <ul class="mt-1 ml-6 list-disc text-sm">
+        <ul class="ml-6 flex list-disc flex-col gap-1">
           <li v-for="fall in FAELLE" :key="fall">
-            <RouterLink :to="{ name: 'demonstrative', params: { fall } }" class="text-indigo-700 underline">
+            <RouterLink
+              :to="{ name: 'demonstrative', params: { fall } }"
+              class="inline-flex min-h-11 items-center"
+            >
               {{ demonstrativeCases[fall].label }}
             </RouterLink>
           </li>

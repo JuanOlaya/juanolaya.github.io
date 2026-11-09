@@ -33,12 +33,13 @@ export interface ColoredButton {
   className: string;
 }
 
+/** Deliberately one saturated fill per button: the mock illustrates colour noise, within the palette. */
 export const chaosButtons: readonly ColoredButton[] = [
-  { label: 'Guardar', className: 'bg-emerald-500 text-white font-bold hover:bg-emerald-600' },
-  { label: 'Marcar como Importante', className: 'bg-sky-500 text-white font-bold' },
-  { label: 'Borrar', className: 'bg-rose-500 text-white font-bold' },
-  { label: 'Reset', className: 'border border-slate-300 text-slate-600' },
-  { label: '¿Ayuda?', className: 'bg-amber-500 text-white font-bold' },
+  { label: 'Guardar', className: 'bg-success text-on-accent font-medium' },
+  { label: 'Marcar como Importante', className: 'bg-info text-ink font-medium' },
+  { label: 'Borrar', className: 'bg-danger text-on-accent font-medium' },
+  { label: 'Reset', className: 'border border-ink-2 text-ink-2' },
+  { label: '¿Ayuda?', className: 'bg-accent text-on-accent font-medium' },
 ];
 
 export interface Conjugation {

@@ -42,7 +42,34 @@ describe('projectPages', () => {
     expect(hrefs).not.toContain('/PixelGrid/');
   });
 
+  // Republished after TODO.md §1: mobile layout, PWA and storage hydration are in place.
+  it('links MemoDeutsch at its public URL', () => {
+    expect(projectPages.map((page) => page.href)).toContain('/Deutsch_lernen/');
+  });
+
+  // TODO.md §2: republished once the AI Hub degraded gracefully and the page followed the style contract.
+  it('lists the UX Infographic again', () => {
+    expect(projectPages.map((page) => page.href)).toContain('/UX/');
+  });
+
+  it('lists Project Management again (TODO.md §3)', () => {
+    expect(projectPages.map((page) => page.href)).toContain('/Project_Management/');
+  });
+
+  // TODO.md §5: ShapyPresence is back on the home page at its EurekaWall URL.
+  it('lists ShapyPresence under /EurekaWall/pixelGrid/', () => {
+    const page = projectPages.find((item) => item.title === 'ShapyPresence');
+    expect(page?.href).toBe('/EurekaWall/pixelGrid/');
+    expect(siteEntries).toContainEqual({ kind: 'vite', dir: 'EurekaWall/pixelGrid' });
+  });
+
   it('has unique links', () => {
     expect(new Set(projectPages.map((page) => page.href)).size).toBe(projectPages.length);
+  });
+});
+
+describe('projects returned to the home page', () => {
+  it('lists HCI BHT again', () => {
+    expect(projectPages.map((page) => page.href)).toContain('/HCI_BHT_Website/');
   });
 });

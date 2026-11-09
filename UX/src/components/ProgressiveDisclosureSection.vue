@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import AccordionItem from '@shared/components/AccordionItem.vue';
 import { PRONUNCIATION_TEXT, pastTense, presentTense, usageExamples } from '../content';
 import { useSpeechButton } from '../speech';
+import { BUTTON_SECONDARY, CARD, EYEBROW, PANEL } from '../ui';
 import LawCard from './LawCard.vue';
 
 const pastOpen = ref(false);
@@ -14,20 +15,17 @@ const {
 } = useSpeechButton('Escuchar Pronunciación');
 
 const accordionButtonClass =
-  'w-full flex items-center justify-between p-4 bg-slate-800/30 hover:bg-slate-800 text-left transition-all';
-const accordionPanelClass = 'p-4 bg-slate-950/50 border-t border-slate-800 text-xs text-slate-400 fade-in';
+  'flex min-h-11 w-full items-center justify-between gap-3 px-4 py-3 text-left hover:bg-white/5 motion-safe:transition-colors';
+const accordionPanelClass = 'fade-in border-t border-border p-4 text-[0.92em] text-ink-2';
 </script>
 
 <template>
-  <section
-    id="concept-disclosure"
-    class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden scroll-mt-20"
-  >
-    <div class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      <div class="lg:col-span-5 space-y-6">
-        <div class="flex items-center space-x-3 text-indigo-600">
-          <span class="p-2 bg-indigo-50 rounded-lg">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+  <section id="concept-disclosure" :class="`${CARD} scroll-mt-20`">
+    <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+      <div class="space-y-6 lg:col-span-5">
+        <div class="flex items-center gap-3 text-info-text">
+          <span class="rounded-button border border-info/40 p-2">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -36,60 +34,56 @@ const accordionPanelClass = 'p-4 bg-slate-950/50 border-t border-slate-800 text-
               />
             </svg>
           </span>
-          <span class="text-sm font-bold tracking-wider uppercase">La Técnica</span>
+          <span :class="EYEBROW">La Técnica</span>
         </div>
 
         <div class="space-y-2">
-          <h2 class="text-2xl md:text-3xl font-bold text-slate-950">
-            2. Divulgación Progresiva <br /><span class="text-indigo-600 text-lg font-medium"
+          <h2 class="text-[clamp(20px,1.1rem+0.5vw,26px)] leading-tight font-medium">
+            2. Divulgación Progresiva <br /><span class="text-[0.75em] text-info-text"
               >(Progressive Disclosure)</span
             >
           </h2>
-          <span
-            class="inline-block bg-indigo-50 text-indigo-700 text-[11px] font-semibold px-2.5 py-1 rounded border border-indigo-100"
-          >
+          <span class="inline-block rounded-[4px] border border-border px-2.5 py-1 text-caption text-ink-2">
             Patrón de interacción y diseño
           </span>
         </div>
 
-        <div class="space-y-3">
-          <p class="text-slate-700 leading-relaxed text-sm">
-            Consiste en <strong>mostrar solo la información esencial de inicio</strong>, ocultando los
-            detalles avanzados o secundarios hasta que el usuario decida explorarlos de forma explícita.
+        <div class="space-y-3 text-ink-2">
+          <p>
+            Consiste en
+            <strong class="font-medium text-ink">mostrar solo la información esencial de inicio</strong>,
+            ocultando los detalles avanzados o secundarios hasta que el usuario decida explorarlos de forma
+            explícita.
           </p>
-          <p class="text-slate-600 leading-relaxed text-sm">
+          <p>
             Evitamos "saturar" visualmente. Al modular la entrega de información en capas (acordeones,
             pestañas sencillas o tooltips), el aprendizaje y la navegación se vuelven fluidos y sin
             fricciones.
           </p>
-          <div class="p-4 bg-emerald-50/80 border-l-4 border-emerald-500 rounded-r-xl shadow-sm">
-            <p class="text-xs text-emerald-950 font-medium leading-relaxed">
-              <strong class="text-emerald-800 font-bold block mb-0.5">💡 Beneficio clave:</strong>
+          <div class="rounded-r-card border-l-4 border-success bg-bg p-4">
+            <p class="text-[0.92em] text-ink">
+              <strong class="mb-0.5 block font-medium text-success">💡 Beneficio clave:</strong>
               Reduce el miedo inicial a interfaces complejas. El usuario aprende "en trozos" digeribles.
             </p>
           </div>
         </div>
 
-        <p class="text-slate-600 leading-relaxed text-xs pt-2">
+        <p class="pt-2 text-[0.92em] text-ink-2">
           En el prestigioso compendio
-          <a
-            href="https://lawsofux.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-indigo-600 underline font-semibold hover:text-indigo-800"
-            >Laws of UX</a
-          >, la Divulgación Progresiva es la técnica reina que sirve para hacer viables tres leyes
-          fundamentales:
+          <a href="https://lawsofux.com/" target="_blank" rel="noopener noreferrer">Laws of UX</a>, la
+          Divulgación Progresiva es la técnica reina que sirve para hacer viables tres leyes fundamentales:
         </p>
 
         <div class="space-y-4 pt-2">
           <LawCard title="1. Ley de Tesler (Complejidad)" href="https://lawsofux.com/teslers-law/">
             Todo sistema tiene una complejidad inherente que no se puede reducir. La divulgación progresiva
-            <strong>gestiona</strong> esta complejidad organizándola en flujos secundarios.
+            <strong class="font-medium text-ink">gestiona</strong> esta complejidad organizándola en flujos
+            secundarios.
           </LawCard>
           <LawCard title="2. Ley de Miller" href="https://lawsofux.com/millers-law/">
             <template #badge>
-              <span class="bg-indigo-100 text-indigo-800 text-[9px] px-1.5 rounded-full font-mono font-normal"
+              <span
+                class="rounded-full border border-border px-1.5 font-mono text-[11px] text-info-text normal-case"
                 >\(7 \pm 2\)</span
               >
             </template>
@@ -103,20 +97,16 @@ const accordionPanelClass = 'p-4 bg-slate-950/50 border-t border-slate-800 text-
         </div>
       </div>
 
-      <div class="lg:col-span-7 space-y-6">
-        <div class="flex justify-between items-center">
-          <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider">
-            Demo Interactiva con Sprechen
-          </h3>
+      <div class="space-y-6 lg:col-span-7">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <h3 :class="`${EYEBROW} text-ink-2`">Demo Interactiva con Sprechen</h3>
           <button
             type="button"
-            :class="[
-              'flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all',
-              { 'pulse-loader': speaking },
-            ]"
+            :class="[BUTTON_SECONDARY, 'text-caption', { 'pulse-loader': speaking }]"
+            :aria-pressed="speaking"
             @click="toggleSpeech(PRONUNCIATION_TEXT)"
           >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -128,32 +118,30 @@ const accordionPanelClass = 'p-4 bg-slate-950/50 border-t border-slate-800 text-
           </button>
         </div>
 
-        <div class="bg-slate-900 text-white rounded-2xl p-6 shadow-xl space-y-6 border border-slate-800">
-          <div class="flex justify-between items-start">
+        <div :class="`${PANEL} space-y-6 p-[clamp(16px,1.6vw,24px)]`">
+          <div class="flex items-start justify-between gap-3">
             <div>
-              <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest"
-                >Alemán Interactivo</span
-              >
-              <h4 class="text-2xl font-extrabold mt-1">Sprechen</h4>
-              <p class="text-slate-400 text-xs">Verbo irregular • Significa "Hablar"</p>
+              <span :class="`${EYEBROW} text-info-text`">Alemán Interactivo</span>
+              <h4 class="mt-1 text-2xl font-medium">Sprechen</h4>
+              <p class="text-caption text-ink-2">Verbo irregular • Significa "Hablar"</p>
             </div>
             <span
-              class="bg-emerald-500/10 text-emerald-400 text-xs px-2 py-1 rounded font-bold border border-emerald-500/20"
+              class="rounded-[4px] border border-success/40 px-2 py-1 text-caption font-medium text-success"
               >A1-A2</span
             >
           </div>
 
           <!-- Capa 1: información esencial, siempre visible -->
-          <div class="bg-slate-800/50 rounded-xl p-4 border border-slate-800">
-            <div class="flex justify-between items-center mb-1">
-              <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider"
-                >Presente (Información Clave)</span
+          <div class="rounded-card border border-border bg-surface p-4">
+            <div class="mb-1 flex flex-wrap items-center justify-between gap-2">
+              <span :class="`${EYEBROW} text-ink-2`">Presente (Información Clave)</span>
+              <span class="rounded-[4px] border border-border px-1.5 text-caption text-info-text"
+                >Cumple Miller</span
               >
-              <span class="text-[9px] text-indigo-300 bg-indigo-950 px-1.5 rounded">Cumple Miller</span>
             </div>
-            <div class="grid grid-cols-2 gap-2 mt-2 text-sm text-slate-200">
+            <div class="mt-2 grid grid-cols-2 gap-2 text-[0.92em]">
               <div v-for="item in presentTense" :key="item.form">
-                {{ item.pronoun }} <span class="text-indigo-400 font-bold">{{ item.form }}</span>
+                {{ item.pronoun }} <span class="font-medium text-info-text">{{ item.form }}</span>
               </div>
             </div>
           </div>
@@ -162,16 +150,14 @@ const accordionPanelClass = 'p-4 bg-slate-950/50 border-t border-slate-800 text-
           <div class="space-y-3">
             <AccordionItem
               v-model:open="pastOpen"
-              class="border border-slate-800 rounded-xl overflow-hidden"
+              class="overflow-hidden rounded-card border border-border bg-surface"
               :button-class="accordionButtonClass"
               :panel-class="`${accordionPanelClass} space-y-2`"
             >
               <template #header="{ open }">
-                <span class="text-xs font-bold text-slate-300"
-                  >⏱️ Ver conjugación en Pasado (Präteritum)</span
-                >
+                <span class="text-[0.92em] font-medium">⏱️ Ver conjugación en Pasado (Präteritum)</span>
                 <svg
-                  :class="['w-4 h-4 transform transition-transform', { 'rotate-180': open }]"
+                  :class="['h-4 w-4 shrink-0 motion-safe:transition-transform', { 'rotate-180': open }]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -180,26 +166,24 @@ const accordionPanelClass = 'p-4 bg-slate-950/50 border-t border-slate-800 text-
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </template>
-              <p class="text-slate-500">
-                Complejidad gestionada por la app (Ley de Tesler) para no saturar al inicio:
-              </p>
-              <div class="grid grid-cols-2 gap-1 text-slate-300">
+              <p>Complejidad gestionada por la app (Ley de Tesler) para no saturar al inicio:</p>
+              <div class="grid grid-cols-2 gap-1 text-ink">
                 <div v-for="item in pastTense" :key="item.form">
-                  {{ item.pronoun }} <strong class="text-emerald-400">{{ item.form }}</strong>
+                  {{ item.pronoun }} <strong class="font-medium text-success">{{ item.form }}</strong>
                 </div>
               </div>
             </AccordionItem>
 
             <AccordionItem
               v-model:open="examplesOpen"
-              class="border border-slate-800 rounded-xl overflow-hidden"
+              class="overflow-hidden rounded-card border border-border bg-surface"
               :button-class="accordionButtonClass"
               :panel-class="`${accordionPanelClass} space-y-3`"
             >
               <template #header="{ open }">
-                <span class="text-xs font-bold text-slate-300">📖 Mostrar Ejemplos de Uso</span>
+                <span class="text-[0.92em] font-medium">📖 Mostrar Ejemplos de Uso</span>
                 <svg
-                  :class="['w-4 h-4 transform transition-transform', { 'rotate-180': open }]"
+                  :class="['h-4 w-4 shrink-0 motion-safe:transition-transform', { 'rotate-180': open }]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -211,9 +195,9 @@ const accordionPanelClass = 'p-4 bg-slate-950/50 border-t border-slate-800 text-
               <div
                 v-for="(example, index) in usageExamples"
                 :key="example.title"
-                :class="{ 'pt-2 border-t border-slate-800/50': index > 0 }"
+                :class="{ 'border-t border-border pt-2': index > 0 }"
               >
-                <p class="font-bold text-slate-300">{{ example.title }}</p>
+                <p class="font-medium text-ink">{{ example.title }}</p>
                 <p class="italic">{{ example.sentence }}</p>
               </div>
             </AccordionItem>

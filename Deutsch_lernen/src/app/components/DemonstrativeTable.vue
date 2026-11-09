@@ -2,6 +2,9 @@
 import { computed, ref, watch } from 'vue';
 import { GENDER_TITLES, hasExample, highlightForm, type DemonstrativeCase } from '../demonstratives/cases.ts';
 import type { DemonstrativeRow } from '../demonstratives/types.ts';
+import { tableLayoutForWidth } from '../layout/table-layout.ts';
+import { useViewportWidth } from '../layout/use-viewport-width.ts';
+import DemonstrativeExample from './DemonstrativeExample.vue';
 
 const props = defineProps<{ entry: DemonstrativeCase; rows: DemonstrativeRow[]; showAll: boolean }>();
 
@@ -14,9 +17,8 @@ function toggleCell(id: string): void {
   openCells.value = next;
 }
 
-function isDark(genderIndex: number): boolean {
-  // Neutral and Plural use the two darkest shades; light text keeps their examples legible.
-  return genderIndex >= 2;
+function isOpen(id: string): boolean {
+  return props.showAll || openCells.value.has(id);
 }
 
 // Hiding all translations also closes the ones opened by tap, as the old pages did.
@@ -31,49 +33,77 @@ const highlighted = computed(() =>
   props.rows.map((row) => row.forms.map((form) => highlightForm(form.example, form.form))),
 );
 const theme = computed(() => props.entry.theme);
+
+// Five columns never fit a phone: below the contract's `sm` breakpoint each row becomes a card.
+const viewportWidth = useViewportWidth();
+const stacked = computed(() => tableLayoutForWidth(viewportWidth.value) === 'cards');
 </script>
 
 <template>
-  <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-xl">
-    <table class="w-full divide-y divide-gray-300 text-left">
-      <thead class="bg-gray-100">
+  <div v-if="stacked" class="flex flex-col gap-3">
+    <article
+      v-for="(row, rowIndex) in rows"
+      :key="row.type"
+      class="flex flex-col gap-1.5 rounded-card border border-border bg-surface p-4 text-ink"
+    >
+      <h3 class="m-0 flex flex-wrap items-baseline gap-2 text-base font-medium">
+        <span :class="theme.chip" class="rounded px-1">{{ row.type }}</span>
+        <span class="text-sm text-ink-2 italic">{{ row.typeTranslation }}</span>
+      </h3>
+      <dl class="m-0 flex flex-col gap-1.5">
+        <div
+          v-for="(form, genderIndex) in row.forms"
+          :key="genderIndex"
+          :class="theme.genders[genderIndex]"
+          class="rounded px-2 py-1.5"
+        >
+          <dt class="text-xs text-ink-2">{{ GENDER_TITLES[genderIndex] }}</dt>
+          <dd class="m-0">
+            <span :class="theme.chip" class="rounded px-1 font-medium">{{ form.form }}</span>
+            <DemonstrativeExample
+              v-if="hasExample(form)"
+              :example="highlighted[rowIndex][genderIndex]"
+              :translation="form.translation"
+              :open="isOpen(`${rowIndex}-${genderIndex}`)"
+              @toggle="toggleCell(`${rowIndex}-${genderIndex}`)"
+            />
+          </dd>
+        </div>
+      </dl>
+    </article>
+  </div>
+
+  <div v-else class="overflow-x-auto rounded-card border border-border bg-surface text-ink">
+    <table class="w-full divide-y divide-border text-left">
+      <thead>
         <tr>
           <th
             :class="theme.header"
-            class="cell border-r border-gray-300 text-xs font-semibold tracking-wider text-gray-700 uppercase"
+            class="cell border-r border-border text-xs tracking-wider text-ink-2 uppercase"
           >
             Demostrativo
           </th>
-          <th
-            :class="theme.header"
-            colspan="4"
-            class="cell text-xs font-semibold tracking-wider text-gray-700 uppercase"
-          >
+          <th :class="theme.header" colspan="4" class="cell text-xs tracking-wider text-ink-2 uppercase">
             {{ entry.label }} Case (por Género)
           </th>
         </tr>
         <tr>
-          <th
-            :class="theme.genders[0]"
-            class="cell border-r border-gray-300 text-xs font-semibold text-gray-700"
-          >
-            Tipo
-          </th>
+          <th :class="theme.genders[0]" class="cell border-r border-border text-xs text-ink-2">Tipo</th>
           <th
             v-for="(title, index) in GENDER_TITLES"
             :key="title"
             :class="theme.genders[index]"
-            class="cell text-xs font-semibold text-gray-900"
+            class="cell text-xs text-ink"
           >
             {{ title }}
           </th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-gray-200">
+      <tbody class="divide-y divide-border">
         <tr v-for="(row, rowIndex) in rows" :key="row.type">
           <td :class="theme.header" class="cell min-w-32 align-top whitespace-normal">
-            <span :class="theme.chip" class="rounded px-1 font-bold">{{ row.type }}</span>
-            <div class="mt-1 text-xs text-gray-500 italic">{{ row.typeTranslation }}</div>
+            <span :class="theme.chip" class="rounded px-1 font-medium">{{ row.type }}</span>
+            <div class="mt-1 text-xs text-ink-2 italic">{{ row.typeTranslation }}</div>
           </td>
           <td
             v-for="(form, genderIndex) in row.forms"
@@ -81,30 +111,14 @@ const theme = computed(() => props.entry.theme);
             :class="theme.genders[genderIndex]"
             class="cell align-top whitespace-normal"
           >
-            <span :class="theme.chip" class="rounded px-1 font-bold">{{ form.form }}</span>
-            <button
+            <span :class="theme.chip" class="rounded px-1 font-medium">{{ form.form }}</span>
+            <DemonstrativeExample
               v-if="hasExample(form)"
-              type="button"
-              class="study-cell mt-1 flex w-full flex-col items-start text-left"
-              :class="{ open: showAll || openCells.has(`${rowIndex}-${genderIndex}`) }"
-              :aria-expanded="showAll || openCells.has(`${rowIndex}-${genderIndex}`)"
-              @click="toggleCell(`${rowIndex}-${genderIndex}`)"
-            >
-              <span
-                class="text-[0.8rem] leading-tight"
-                :class="isDark(genderIndex) ? 'text-white' : 'text-gray-800'"
-              >
-                {{ highlighted[rowIndex][genderIndex].before
-                }}<b>{{ highlighted[rowIndex][genderIndex].match }}</b
-                >{{ highlighted[rowIndex][genderIndex].after }}
-              </span>
-              <span
-                class="translation text-[0.8rem] italic"
-                :class="isDark(genderIndex) ? 'text-gray-100' : 'text-gray-600'"
-              >
-                {{ form.translation }}
-              </span>
-            </button>
+              :example="highlighted[rowIndex][genderIndex]"
+              :translation="form.translation"
+              :open="isOpen(`${rowIndex}-${genderIndex}`)"
+              @toggle="toggleCell(`${rowIndex}-${genderIndex}`)"
+            />
           </td>
         </tr>
       </tbody>
@@ -116,27 +130,6 @@ const theme = computed(() => props.entry.theme);
 .cell {
   padding: 0.3rem 0.4rem;
   font-size: 0.8rem;
-}
-
-.translation {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition:
-    max-height 0.3s ease-out,
-    opacity 0.3s ease-out;
-}
-
-.study-cell:hover .translation,
-.study-cell:focus-visible .translation,
-.study-cell.open .translation {
-  max-height: 10rem;
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .translation {
-    transition: none;
-  }
+  font-weight: 500;
 }
 </style>

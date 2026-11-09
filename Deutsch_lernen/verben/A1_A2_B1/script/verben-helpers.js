@@ -31,6 +31,63 @@
 		migrations.slice(from).forEach((migrate) => migrate(store));
 		store.setItem(STORAGE_VERSION_KEY, String(STORAGE_SCHEMA_VERSION));
 	}
+	/** Session-only stand-in used once the browser's storage proves unusable. */
+	var MemoryStore = class {
+		items = /* @__PURE__ */ new Map();
+		get length() {
+			return this.items.size;
+		}
+		key(index) {
+			return [...this.items.keys()][index] ?? null;
+		}
+		getItem(key) {
+			return this.items.get(key) ?? null;
+		}
+		setItem(key, value) {
+			this.items.set(key, value);
+		}
+		removeItem(key) {
+			this.items.delete(key);
+		}
+	};
+	function isQuotaError(error) {
+		return error instanceof DOMException && (error.name === "QuotaExceededError" || error.code === 22);
+	}
+	/**
+	* A store that keeps the page working when the browser's does not: if opening it or any operation throws
+	* (Safari with cookies blocked, sandboxed iframes, locked-down profiles) the rest of the session runs on
+	* memory. Quota errors pass through, because `script.js` answers them with a smaller payload.
+	*/
+	function resilientStore(open) {
+		let store;
+		try {
+			store = open();
+		} catch {
+			store = new MemoryStore();
+		}
+		const guarded = (run) => {
+			try {
+				return run(store);
+			} catch (error) {
+				if (isQuotaError(error)) throw error;
+				store = new MemoryStore();
+				return run(store);
+			}
+		};
+		return {
+			get length() {
+				return guarded((current) => current.length);
+			},
+			key: (index) => guarded((current) => current.key(index)),
+			getItem: (key) => guarded((current) => current.getItem(key)),
+			setItem: (key, value) => guarded((current) => current.setItem(key, value)),
+			removeItem: (key) => guarded((current) => current.removeItem(key))
+		};
+	}
+	/** `localStorage` itself can throw on access; this never does. */
+	function browserStore() {
+		return resilientStore(() => globalThis.localStorage);
+	}
 	function isRecord(value) {
 		return typeof value === "object" && value !== null && !Array.isArray(value);
 	}
@@ -735,6 +792,7 @@
 	* `script.js`. The legacy script calls these helpers by their bare names, so they are published as globals
 	* under exactly those names until the page itself becomes a module.
 	*/
-	migrateStorage(localStorage);
-	Object.assign(globalThis, legacyGlobals, { memoStorage: createMemoStorage(localStorage) });
+	var store = browserStore();
+	migrateStorage(store);
+	Object.assign(globalThis, legacyGlobals, { memoStorage: createMemoStorage(store) });
 })();

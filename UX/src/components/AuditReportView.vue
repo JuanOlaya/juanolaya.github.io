@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { AuditReport } from '../model-text';
+import { BUTTON_PRIMARY, BUTTON_SECONDARY } from '../ui';
 
 const props = defineProps<{
   report: AuditReport;
@@ -23,80 +24,68 @@ const canRedesign = computed(() => !props.redesignSrc && !props.redesignNotes);
 </script>
 
 <template>
-  <div class="space-y-4 text-xs" aria-live="polite">
-    <div class="flex justify-between items-center pb-2 border-b border-indigo-900">
-      <h4 class="font-bold text-sm text-indigo-400 flex items-center gap-2">
-        <span>📋 Diagnóstico & Rediseño de Usabilidad IA</span>
-      </h4>
-      <span class="bg-indigo-900 text-indigo-300 text-[10px] py-0.5 px-2 rounded-full font-mono"
+  <div class="space-y-4 text-[0.92em]" aria-live="polite">
+    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-2">
+      <h4 class="font-medium text-accent-text">📋 Diagnóstico & Rediseño de Usabilidad IA</h4>
+      <span class="rounded-full border border-border px-2 py-0.5 font-mono text-[11px] text-ink-2"
         >Gemini-2.5-Flash</span
       >
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="bg-slate-900/60 p-3 rounded-xl border border-indigo-950/50 flex flex-col items-center">
-        <span class="text-slate-400 font-bold block mb-1">Imagen Auditada</span>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div class="flex flex-col items-center rounded-card border border-border bg-surface p-3">
+        <span class="mb-1 block text-caption text-ink-2">Imagen Auditada</span>
         <img
-          class="max-h-24 object-contain rounded border border-slate-800"
+          class="max-h-24 rounded-[4px] border border-border object-contain"
           :src="imageSrc"
           alt="Captura auditada"
         />
       </div>
       <div
         v-if="redesignSrc"
-        class="bg-slate-900/60 p-3 rounded-xl border border-indigo-950/50 flex flex-col items-center"
+        class="flex flex-col items-center rounded-card border border-border bg-surface p-3"
       >
-        <span class="text-emerald-400 font-bold block mb-1">✨ Rediseño Producido (Image-to-Image)</span>
+        <span class="mb-1 block text-caption text-success">✨ Rediseño Producido (Image-to-Image)</span>
         <img
-          class="max-h-24 object-contain rounded border border-emerald-900"
+          class="max-h-24 rounded-[4px] border border-success/40 object-contain"
           :src="redesignSrc"
           alt="Rediseño IA"
         />
       </div>
     </div>
 
-    <div class="space-y-2 bg-slate-900/40 p-4 rounded-xl border border-indigo-950">
+    <div class="space-y-2 rounded-card border border-border bg-surface p-4">
       <div
         v-for="score in scores"
         :key="score.label"
-        class="flex justify-between items-center py-1 border-b border-indigo-950"
+        class="flex items-center justify-between border-b border-border py-1"
       >
-        <span class="text-slate-400">{{ score.label }}</span>
-        <span :class="['font-bold', score.value >= PASSING_SCORE ? 'text-emerald-400' : 'text-rose-400']"
+        <span class="text-ink-2">{{ score.label }}</span>
+        <span
+          :class="['font-mono font-medium', score.value >= PASSING_SCORE ? 'text-success' : 'text-danger']"
           >{{ score.value }}/10</span
         >
       </div>
-      <p class="font-bold mb-2 text-xs uppercase text-indigo-400 pt-2">Diagnóstico del Auditor:</p>
-      <ul class="space-y-2 text-slate-300">
-        <li><strong>Sobrecarga:</strong> {{ report.sobrecargaFeedback }}</li>
-        <li><strong>Divulgación:</strong> {{ report.disclosureFeedback }}</li>
-        <li><strong>Ley de Hick:</strong> {{ report.hickFeedback }}</li>
+      <p class="pt-2 text-caption font-medium text-accent-text uppercase">Diagnóstico del Auditor:</p>
+      <ul class="space-y-2 text-ink-2">
+        <li><strong class="font-medium text-ink">Sobrecarga:</strong> {{ report.sobrecargaFeedback }}</li>
+        <li><strong class="font-medium text-ink">Divulgación:</strong> {{ report.disclosureFeedback }}</li>
+        <li><strong class="font-medium text-ink">Ley de Hick:</strong> {{ report.hickFeedback }}</li>
       </ul>
-      <div class="mt-4 pt-3 border-t border-indigo-900 text-indigo-200">
-        <strong>💡 Sugerencia del Auditor:</strong> {{ report.summary }}
+      <div class="mt-4 border-t border-border pt-3">
+        <strong class="font-medium text-accent-text">💡 Sugerencia del Auditor:</strong> {{ report.summary }}
       </div>
-      <div v-if="redesignNotes" class="mt-4 pt-4 border-t border-emerald-950 text-emerald-200">
-        <strong class="text-emerald-400 block mb-1">📐 Notas del Rediseño Producido:</strong>
-        <p class="whitespace-pre-line">{{ redesignNotes }}</p>
+      <div v-if="redesignNotes" class="mt-4 border-t border-border pt-4">
+        <strong class="mb-1 block font-medium text-success">📐 Notas del Rediseño Producido:</strong>
+        <p class="whitespace-pre-line text-ink-2">{{ redesignNotes }}</p>
       </div>
     </div>
 
-    <div class="flex gap-2 pt-2">
-      <button
-        v-if="canRedesign"
-        type="button"
-        class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded-xl text-xs transition-all flex items-center justify-center gap-1"
-        @click="$emit('redesign')"
-      >
-        <span>✨ Rediseñar Layout (Image-to-Image)</span>
+    <div class="flex flex-wrap gap-2 pt-2">
+      <button v-if="canRedesign" type="button" :class="`${BUTTON_PRIMARY} flex-1`" @click="$emit('redesign')">
+        ✨ Rediseñar Layout (Image-to-Image)
       </button>
-      <button
-        type="button"
-        class="border border-slate-700 hover:bg-slate-900 text-slate-300 font-bold py-2 px-4 rounded-xl text-xs transition-all"
-        @click="$emit('clear')"
-      >
-        Limpiar
-      </button>
+      <button type="button" :class="BUTTON_SECONDARY" @click="$emit('clear')">Limpiar</button>
     </div>
   </div>
 </template>

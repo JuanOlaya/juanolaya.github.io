@@ -1,17 +1,15 @@
 <script setup lang="ts">
 import { chaosButtons, chaosMeta, chaosTabs } from '../content';
+import { CARD, EYEBROW, PANEL } from '../ui';
 </script>
 
 <template>
-  <section
-    id="concept-overload"
-    class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden scroll-mt-20"
-  >
-    <div class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      <div class="lg:col-span-5 space-y-4">
-        <div class="flex items-center space-x-3 text-rose-500">
-          <span class="p-2 bg-rose-50 rounded-lg">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+  <section id="concept-overload" :class="`${CARD} scroll-mt-20`">
+    <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+      <div class="space-y-4 lg:col-span-5">
+        <div class="flex items-center gap-3 text-danger">
+          <span class="rounded-button border border-danger/30 p-2">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -20,139 +18,131 @@ import { chaosButtons, chaosMeta, chaosTabs } from '../content';
               />
             </svg>
           </span>
-          <span class="text-sm font-bold tracking-wider uppercase">El Problema</span>
+          <span :class="EYEBROW">El Problema</span>
         </div>
-        <h2 class="text-2xl md:text-3xl font-bold text-slate-950">
-          1. Sobrecarga Cognitiva <br /><span class="text-slate-500 text-lg font-medium"
-            >(Cognitive Overload)</span
-          >
+        <h2 class="text-[clamp(20px,1.1rem+0.5vw,26px)] leading-tight font-medium">
+          1. Sobrecarga Cognitiva <br /><span class="text-[0.75em] text-ink-2">(Cognitive Overload)</span>
         </h2>
-        <p class="text-slate-600 leading-relaxed">
+        <p class="text-ink-2">
           Ocurre cuando la cantidad de información, decisiones y elementos en pantalla supera la capacidad de
           procesamiento del cerebro humano.
         </p>
-        <p class="text-slate-600 leading-relaxed">
+        <p class="text-ink-2">
           Al intentar procesar pestañas, tablas, botones de colores y textos simultáneamente en un espacio
           reducido, el usuario experimenta fatiga, confusión y finalmente abandona el sitio.
         </p>
-        <div class="p-4 bg-amber-50 border-l-4 border-amber-500 rounded-r-xl">
-          <p class="text-sm text-amber-800 font-medium">
-            <strong>Síntoma clave:</strong> El usuario se queda "paralizado" mirando la pantalla, sin saber
-            cuál es el siguiente paso lógico.
+        <div class="rounded-r-card border-l-4 border-accent bg-bg p-4">
+          <p class="text-[0.92em]">
+            <strong class="font-medium text-accent-text">Síntoma clave:</strong> El usuario se queda
+            "paralizado" mirando la pantalla, sin saber cuál es el siguiente paso lógico.
           </p>
         </div>
       </div>
 
-      <div class="lg:col-span-7 space-y-6">
-        <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Demostración Visual</h3>
+      <div class="space-y-6 lg:col-span-7">
+        <h3 :class="`${EYEBROW} text-ink-2`">Demostración Visual</h3>
+        <p class="sr-only">
+          Comparativa ilustrativa: una tarjeta saturada de pestañas, metadatos y botones de colores frente a
+          una tarjeta de estudio limpia con una sola acción principal.
+        </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Mal diseño: decorative mock, its buttons intentionally do nothing -->
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2" aria-hidden="true">
+          <!-- Mal diseño: decorative mock; nothing inside is interactive. -->
           <div
-            class="border-2 border-rose-100 rounded-2xl bg-rose-50/20 p-4 relative overflow-hidden flex flex-col justify-between min-h-[380px]"
+            :class="`${PANEL} flex min-h-[380px] flex-col justify-between overflow-hidden border-danger/40`"
           >
-            <div
-              class="absolute top-2 right-2 bg-rose-100 text-rose-700 text-[10px] font-bold uppercase px-2 py-0.5 rounded"
-            >
-              Mal Diseño (Caos)
-            </div>
-
             <div>
-              <h4 class="text-xs font-bold text-slate-400 mb-2">TAB COMPONENT V2.4</h4>
-              <div class="flex flex-wrap gap-1 mb-3">
+              <div class="mb-2 flex items-start justify-between gap-2">
+                <h4 class="text-caption font-medium text-ink-2">TAB COMPONENT V2.4</h4>
+                <span
+                  class="shrink-0 rounded-[4px] border border-danger/40 px-2 py-0.5 text-[10px] font-medium text-danger uppercase"
+                  >Mal Diseño (Caos)</span
+                >
+              </div>
+              <div class="mb-3 flex flex-wrap gap-1">
                 <span
                   v-for="(tab, index) in chaosTabs"
                   :key="tab"
                   :class="[
-                    'text-[9px] px-2 py-0.5 rounded cursor-pointer',
-                    index === 0 ? 'bg-indigo-600 text-white font-bold' : 'bg-slate-200 text-slate-600',
+                    'rounded-[4px] px-2 py-0.5 text-[9px]',
+                    index === 0 ? 'bg-info font-medium text-ink' : 'bg-white/10 text-ink-2',
                   ]"
                   >{{ tab }}</span
                 >
               </div>
 
-              <div class="space-y-2 bg-white p-3 rounded-xl border border-rose-200">
-                <div class="flex justify-between items-center border-b border-slate-100 pb-1">
-                  <span class="text-xs font-bold text-slate-700">Sprechen (hablar)</span>
-                  <span class="text-[9px] bg-amber-100 text-amber-800 px-1 rounded">Irregular</span>
+              <div class="space-y-2 rounded-card border border-danger/30 bg-surface p-3">
+                <div class="flex items-center justify-between border-b border-border pb-1">
+                  <span class="text-caption font-medium">Sprechen (hablar)</span>
+                  <span class="rounded-[4px] bg-accent px-1 text-[9px] text-on-accent">Irregular</span>
                 </div>
-                <p class="text-[10px] text-slate-500">
+                <p class="text-[10px] text-ink-2">
                   Presens: ich spreche, du sprichst, er/sie/es spricht, wir sprechen, ihr sprecht, sie
                   sprechen.
                 </p>
-                <p class="text-[10px] font-semibold text-slate-700">Ejemplo principal:</p>
-                <p class="text-[9px] italic text-slate-600">
+                <p class="text-[10px] font-medium">Ejemplo principal:</p>
+                <p class="text-[9px] text-ink-2 italic">
                   "Ich spreche ein bisschen Deutsch, pero sigo aprendiendo con dedicación todos los días."
                 </p>
 
-                <div
-                  class="mt-2 pt-2 border-t border-slate-100 grid grid-cols-2 gap-1 text-[8px] text-slate-400"
-                >
+                <div class="mt-2 grid grid-cols-2 gap-1 border-t border-border pt-2 text-[8px] text-ink-2">
                   <span v-for="item in chaosMeta" :key="item">{{ item }}</span>
                 </div>
               </div>
             </div>
 
-            <div class="mt-4 flex flex-wrap gap-1.5 pt-3 border-t border-rose-100">
-              <button
+            <div class="mt-4 flex flex-wrap gap-1.5 border-t border-danger/30 pt-3">
+              <span
                 v-for="button in chaosButtons"
                 :key="button.label"
-                type="button"
-                :class="['text-[9px] px-2 py-1 rounded', button.className]"
+                :class="['rounded-[4px] px-2 py-1 text-[9px]', button.className]"
               >
                 {{ button.label }}
-              </button>
+              </span>
             </div>
           </div>
 
           <!-- Buen diseño -->
-          <div
-            class="border-2 border-emerald-100 rounded-2xl bg-emerald-50/20 p-4 relative flex flex-col justify-between min-h-[380px]"
-          >
-            <div
-              class="absolute top-2 right-2 bg-emerald-100 text-emerald-700 text-[10px] font-bold uppercase px-2 py-0.5 rounded"
-            >
-              Buen Diseño (Limpio)
-            </div>
-
+          <div :class="`${PANEL} flex min-h-[380px] flex-col justify-between border-success/40`">
             <div>
-              <h4 class="text-xs font-bold text-emerald-600 uppercase mb-2">Tarjeta de Estudio</h4>
+              <div class="mb-2 flex items-start justify-between gap-2">
+                <h4 class="text-caption font-medium text-success uppercase">Tarjeta de Estudio</h4>
+                <span
+                  class="shrink-0 rounded-[4px] border border-success/40 px-2 py-0.5 text-[10px] font-medium text-success uppercase"
+                  >Buen Diseño (Limpio)</span
+                >
+              </div>
 
-              <div class="bg-white p-5 rounded-xl border border-emerald-100 shadow-sm space-y-3">
-                <div class="flex justify-between items-baseline">
-                  <h5 class="text-lg font-bold text-slate-900">Sprechen</h5>
-                  <span class="text-xs text-indigo-600 font-medium">hablar</span>
+              <div class="space-y-3 rounded-card border border-border bg-surface p-5">
+                <div class="flex items-baseline justify-between">
+                  <h5 class="text-lg font-medium">Sprechen</h5>
+                  <span class="text-caption text-info-text">hablar</span>
                 </div>
 
                 <div class="space-y-1">
-                  <span class="text-[10px] text-slate-400 uppercase font-semibold">Presente simple</span>
-                  <p class="text-xs text-slate-700 font-medium">
-                    du <span class="text-indigo-600 font-bold">sprichst</span> • er/sie/es
-                    <span class="text-indigo-600 font-bold">spricht</span>
+                  <span class="text-caption text-ink-2 uppercase">Presente simple</span>
+                  <p class="text-[0.92em]">
+                    du <span class="font-medium text-info-text">sprichst</span> • er/sie/es
+                    <span class="font-medium text-info-text">spricht</span>
                   </p>
                 </div>
 
                 <div
-                  class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500"
+                  class="flex items-center justify-between border-t border-border pt-2 text-caption text-ink-2"
                 >
                   <span>Nivel A1</span>
-                  <span class="flex items-center text-emerald-600">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1"></span> Regularizado
+                  <span class="flex items-center text-success">
+                    <span class="mr-1 h-1.5 w-1.5 rounded-full bg-success"></span> Regularizado
                   </span>
                 </div>
               </div>
             </div>
 
-            <div class="mt-4 flex items-center justify-between pt-3 border-t border-emerald-100">
-              <button type="button" class="text-slate-500 hover:text-slate-700 text-xs font-semibold">
-                Opciones
-              </button>
-              <button
-                type="button"
-                class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-1.5 px-4 rounded-lg shadow-sm transition-all"
-              >
+            <div class="mt-4 flex items-center justify-between border-t border-success/30 pt-3">
+              <span class="text-caption text-ink-2">Opciones</span>
+              <span class="rounded-button bg-accent px-4 py-1.5 text-caption font-medium text-on-accent">
                 Marcar aprendido
-              </button>
+              </span>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { aiErrorMessage } from '../gemini-client';
 import { firstText, gemini, logAiError, type ChatTurn, type GenerateContentResponse } from '../gemini';
 import { splitTranslations } from '../model-text';
 import { stopSpeech, useSpeechButton } from '../speech';
+import { BUTTON_GHOST, BUTTON_PRIMARY, BUTTON_SECONDARY, EYEBROW, FIELD, PANEL } from '../ui';
 import ErrorNotice from './ErrorNotice.vue';
 
 const props = defineProps<{ active: boolean }>();
@@ -100,67 +101,58 @@ watch(
 </script>
 
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-    <div class="lg:col-span-5 space-y-4">
-      <div class="flex items-center space-x-2 text-rose-400">
-        <span class="px-2 py-0.5 bg-rose-950 border border-rose-800 rounded text-[10px] font-mono"
-          >BILINGÜE</span
-        >
-        <span class="text-xs font-bold tracking-wider uppercase">Alemán & UX</span>
+  <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+    <div class="space-y-4 lg:col-span-5">
+      <div class="flex flex-wrap items-center gap-2 text-danger">
+        <span class="rounded-[4px] border border-danger/40 px-2 py-0.5 font-mono text-[11px]">BILINGÜE</span>
+        <span :class="EYEBROW">Alemán & UX</span>
       </div>
-      <h3 class="text-lg font-bold text-white">🇩🇪 Simulador de Entrevista UX</h3>
-      <p class="text-slate-300 text-sm leading-relaxed">
+      <h3 class="text-lg font-medium">🇩🇪 Simulador de Entrevista UX</h3>
+      <p class="text-[0.92em] text-ink-2">
         Simula una entrevista técnica para un puesto de Diseñador de Interfaces en una startup en Berlín.
       </p>
-      <p
-        class="text-slate-400 text-xs leading-relaxed bg-slate-950/40 p-3 rounded-xl border border-indigo-950"
-      >
-        La IA te hablará en <strong>alemán formal</strong>, proveerá la
-        <strong>traducción al español</strong> entre corchetes, y
-        <strong>leerá automáticamente en voz alta</strong> el texto en alemán mediante el sintetizador de alta
-        fidelidad <strong>Gemini TTS</strong>. ¡La forma más inmersiva de practicar!
+      <p :class="`${PANEL} text-caption text-ink-2`">
+        La IA te hablará en <strong class="font-medium text-ink">alemán formal</strong>, proveerá la
+        <strong class="font-medium text-ink">traducción al español</strong> entre corchetes, y
+        <strong class="font-medium text-ink">leerá automáticamente en voz alta</strong> el texto en alemán
+        mediante el sintetizador de alta fidelidad <strong class="font-medium text-ink">Gemini TTS</strong>.
+        ¡La forma más inmersiva de practicar!
       </p>
-      <div class="flex gap-2">
+      <div class="flex flex-wrap gap-2">
         <button
           type="button"
-          :class="[
-            'flex-1 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold py-2 px-4 rounded-xl text-xs transition-all flex items-center justify-center gap-1',
-            { 'pulse-loader': speaking },
-          ]"
+          :class="[BUTTON_SECONDARY, 'flex-1 text-caption', { 'pulse-loader': speaking }]"
+          :aria-pressed="speaking"
           @click="replay"
         >
           🔊 Repetir Pregunta en Voz Alta
         </button>
-        <button type="button" class="text-xs text-slate-400 hover:text-white underline px-2" @click="restart">
-          Reiniciar
-        </button>
+        <button type="button" :class="`${BUTTON_GHOST} text-caption`" @click="restart">Reiniciar</button>
       </div>
       <ErrorNotice :message="replyError" />
     </div>
 
-    <div class="lg:col-span-7 bg-slate-950 rounded-2xl border border-indigo-950 p-4 flex flex-col h-[400px]">
-      <div ref="chatbox" class="flex-1 overflow-y-auto space-y-3 pr-2" aria-live="polite">
-        <div v-if="starting" class="text-center text-slate-500 py-10 pulse-loader">
-          <span class="text-xs">Iniciando simulador y conectando con el entrevistador de IA...</span>
+    <div :class="`${PANEL} flex h-[400px] flex-col lg:col-span-7`">
+      <div ref="chatbox" class="flex-1 space-y-3 overflow-y-auto pr-2" aria-live="polite">
+        <div v-if="starting" class="pulse-loader py-10 text-center text-caption text-ink-2">
+          Iniciando simulador y conectando con el entrevistador de IA...
         </div>
-        <p v-else-if="startError" class="text-xs text-rose-400 text-center py-10">{{ startError }}</p>
+        <p v-else-if="startError" class="py-10 text-center text-[0.92em] text-danger">{{ startError }}</p>
         <div
           v-for="(turn, index) in visibleTurns"
           :key="index"
-          :class="['flex fade-in mb-3', turn.role === 'model' ? 'justify-start' : 'justify-end']"
+          :class="['fade-in mb-3 flex', turn.role === 'model' ? 'justify-start' : 'justify-end']"
         >
           <div
             :class="[
-              'max-w-[85%] rounded-2xl p-3.5 text-xs',
-              turn.role === 'model'
-                ? 'bg-slate-900 border border-slate-800 text-slate-200'
-                : 'bg-indigo-600 text-white',
+              'max-w-[85%] rounded-panel p-3.5 text-[0.92em]',
+              turn.role === 'model' ? 'border border-border bg-surface text-ink' : 'bg-info text-ink',
             ]"
           >
             <template v-for="(segment, segmentIndex) in turn.segments" :key="segmentIndex">
               <span
                 v-if="segment.kind === 'translation' && turn.role === 'model'"
-                class="block mt-2 pt-2 border-t border-slate-800 text-slate-400 italic font-sans"
+                class="mt-2 block border-t border-border pt-2 text-ink-2 italic"
                 >🇪🇸 {{ segment.text }}</span
               >
               <span v-else-if="segment.kind === 'translation'">[{{ segment.text }}]</span>
@@ -168,29 +160,24 @@ watch(
             </template>
           </div>
         </div>
-        <div v-if="typing" class="flex justify-start fade-in">
+        <div v-if="typing" class="fade-in flex justify-start">
           <div
-            class="bg-slate-900 border border-slate-800 text-slate-400 rounded-2xl p-3.5 text-xs pulse-loader"
+            class="pulse-loader rounded-panel border border-border bg-surface p-3.5 text-caption text-ink-2"
           >
             El entrevistador está escuchando y procesando tu respuesta en usabilidad...
           </div>
         </div>
       </div>
 
-      <form class="mt-3 pt-3 border-t border-indigo-950/50 flex gap-2" @submit.prevent="send">
+      <form class="mt-3 flex flex-wrap gap-2 border-t border-border pt-3" @submit.prevent="send">
         <input
           v-model="draft"
           type="text"
           aria-label="Tu respuesta"
-          class="flex-1 bg-slate-900 border border-indigo-950 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          :class="`${FIELD} min-w-0 flex-1 text-[0.92em]`"
           placeholder="Escribe tu respuesta en alemán o español..."
         />
-        <button
-          type="submit"
-          class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition-all"
-        >
-          Responder
-        </button>
+        <button type="submit" :class="BUTTON_PRIMARY">Responder</button>
       </form>
     </div>
   </div>
