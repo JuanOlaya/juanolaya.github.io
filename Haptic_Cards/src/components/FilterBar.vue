@@ -10,7 +10,7 @@ import Tabs from './Tabs.vue';
 const props = defineProps<{ activePattern: PatternName; activeFamilyId: string; deviceCount: number }>();
 const emit = defineEmits<{ selectFamily: [id: string]; selectPattern: [pattern: PatternName] }>();
 
-const collapsed = ref(false);
+const collapsed = ref(true);
 
 const familyTabs = [
   { id: ALL_FAMILIES, label: 'All Families', count: patternNames.length },
