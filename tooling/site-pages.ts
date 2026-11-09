@@ -26,9 +26,10 @@ export const siteEntries: readonly SiteEntry[] = [
   // their old URLs stay as redirect stubs in the legacy tree. Deutsch_lernen/src/ is never published.
   { kind: 'vite', dir: 'Deutsch_lernen/app' },
   { kind: 'legacy', path: 'Deutsch_lernen', exclude: ['src', 'app'] },
-  // Home migrated to TS; the tool pages (balconity/, pixelGrid/, Scripts/, demo) and assets stay verbatim.
+  // Home and ShapyPresence migrated to TS; the other tool pages (balconity/, Scripts/, demo) and assets stay verbatim.
   { kind: 'vite', dir: 'EurekaWall' },
-  { kind: 'legacy', path: 'EurekaWall', exclude: ['index.html', 'src'] },
+  { kind: 'vite', dir: 'EurekaWall/pixelGrid' },
+  { kind: 'legacy', path: 'EurekaWall', exclude: ['index.html', 'src', 'pixelGrid'] },
   { kind: 'legacy', path: 'EurekaWall3' },
   { kind: 'legacy', path: 'EurekaWall_old' },
   { kind: 'vite', dir: 'HCI_BHT_Website' },
