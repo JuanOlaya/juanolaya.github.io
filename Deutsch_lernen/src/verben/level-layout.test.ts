@@ -89,6 +89,8 @@ describe('levelsFromGroups', () => {
 
 describe('pageSizeForWidth', () => {
   it.each([
+    [0, 1, 'phone'],
+    [320, 1, 'phone'],
     [599, 1, 'phone'],
     [600, 2, 'phone'],
     [768, 3, 'tablet'],

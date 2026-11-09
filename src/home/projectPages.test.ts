@@ -42,6 +42,11 @@ describe('projectPages', () => {
     expect(hrefs).not.toContain('/PixelGrid/');
   });
 
+  // Republished after TODO.md §1: mobile layout, PWA and storage hydration are in place.
+  it('links MemoDeutsch at its public URL', () => {
+    expect(projectPages.map((page) => page.href)).toContain('/Deutsch_lernen/');
+  });
+
   // TODO.md §2: republished once the AI Hub degraded gracefully and the page followed the style contract.
   it('lists the UX Infographic again', () => {
     expect(projectPages.map((page) => page.href)).toContain('/UX/');

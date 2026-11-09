@@ -4,7 +4,70 @@
 /* The pre-migration pages are kept only as the extraction test's oracle; their CDN Tailwind classes must not leak in. */
 @source not './demonstratives/__fixtures__';
 
-body {
-  font-family: 'Instrument Sans Variable', system-ui, sans-serif;
-  background-color: #f7f7f7;
+/* Home page tokens, pasted literally from the shared style contract (jo-wt/_shared/STYLE-CONTRACT.md §9 A). */
+@theme {
+  --color-bg: #282828;
+  --color-surface: #33333d;
+  --color-border: #41414e;
+  --color-ink: #f8ecde;
+  --color-ink-2: #b9b2a6;
+  --color-link: #f4f0f9;
+  --color-link-visited: #b597d8;
+  --color-accent: #c48208;
+  --color-accent-hover: #d4870a;
+  --color-accent-text: #e5a53a;
+  --color-on-accent: #1a1a1a;
+  --color-info: #198bc6;
+  --color-info-text: #6cb6ff;
+  --color-success: #7bd389;
+  --color-danger: #ff7b72;
+  --font-sans: 'Noto Sans KR', 'Instrument Sans Variable', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius-card: 5px;
+  --radius-button: 8px;
+  --radius-panel: 10px;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(15px, 0.9rem + 0.2vw, 17px);
+    line-height: 1.4;
+    min-height: 100dvh;
+  }
+  a {
+    color: var(--color-link);
+    text-decoration: underline;
+  }
+  a:visited {
+    color: var(--color-link-visited);
+  }
+  a:hover {
+    color: #a5a5a5;
+  }
+  /* The home page has no bold weight: emphasis is 500. */
+  b,
+  strong {
+    font-weight: 500;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(243 228 206 / 0.9);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

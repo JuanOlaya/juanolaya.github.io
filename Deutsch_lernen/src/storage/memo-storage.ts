@@ -53,6 +53,68 @@ export function migrateStorage(store: KeyValueStore): void {
   store.setItem(STORAGE_VERSION_KEY, String(STORAGE_SCHEMA_VERSION));
 }
 
+/** Session-only stand-in used once the browser's storage proves unusable. */
+class MemoryStore implements KeyValueStore {
+  private readonly items = new Map<string, string>();
+
+  get length(): number {
+    return this.items.size;
+  }
+  key(index: number): string | null {
+    return [...this.items.keys()][index] ?? null;
+  }
+  getItem(key: string): string | null {
+    return this.items.get(key) ?? null;
+  }
+  setItem(key: string, value: string): void {
+    this.items.set(key, value);
+  }
+  removeItem(key: string): void {
+    this.items.delete(key);
+  }
+}
+
+function isQuotaError(error: unknown): boolean {
+  return error instanceof DOMException && (error.name === 'QuotaExceededError' || error.code === 22);
+}
+
+/**
+ * A store that keeps the page working when the browser's does not: if opening it or any operation throws
+ * (Safari with cookies blocked, sandboxed iframes, locked-down profiles) the rest of the session runs on
+ * memory. Quota errors pass through, because `script.js` answers them with a smaller payload.
+ */
+export function resilientStore(open: () => KeyValueStore): KeyValueStore {
+  let store: KeyValueStore;
+  try {
+    store = open();
+  } catch {
+    store = new MemoryStore();
+  }
+  const guarded = <T>(run: (current: KeyValueStore) => T): T => {
+    try {
+      return run(store);
+    } catch (error) {
+      if (isQuotaError(error)) throw error;
+      store = new MemoryStore();
+      return run(store);
+    }
+  };
+  return {
+    get length() {
+      return guarded((current) => current.length);
+    },
+    key: (index) => guarded((current) => current.key(index)),
+    getItem: (key) => guarded((current) => current.getItem(key)),
+    setItem: (key, value) => guarded((current) => current.setItem(key, value)),
+    removeItem: (key) => guarded((current) => current.removeItem(key)),
+  };
+}
+
+/** `localStorage` itself can throw on access; this never does. */
+export function browserStore(): KeyValueStore {
+  return resilientStore(() => globalThis.localStorage);
+}
+
 /** The snapshot `script.js` saves so the verb list renders before the network answers. */
 export interface VerbCache {
   allVerbsData: Record<string, unknown>;
