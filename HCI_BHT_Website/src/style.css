@@ -1,24 +1,89 @@
+/* The chrome follows the site contract; the canvas keeps its own navy because the sketch is the piece. */
+html {
+  color-scheme: dark;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
 }
-canvas {
-  display: block;
-}
 
 body {
   overflow: hidden;
   background: #1c3147;
+  color: #f8ecde;
+  font:
+    300 clamp(15px, 0.9rem + 0.2vw, 17px) / 1.4 'Noto Sans KR',
+    'Instrument Sans Variable',
+    system-ui,
+    sans-serif;
 }
 
-/* Same place and size as before on wide screens; shrinks to fit narrow ones. */
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+/* Secondary button pinned top-left; the sketch panel lives bottom-right, so neither covers the other. */
+.home-link {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 0.06);
+  color: #f4f0f9;
+  font-weight: 500;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  transition:
+    background-color 0.2s ease-out,
+    border-color 0.2s ease-out;
+}
+
+.home-link:hover {
+  background: rgb(255 255 255 / 0.12);
+  text-decoration: underline;
+}
+
+.home-link:focus-visible {
+  outline: 2px solid rgb(243 228 206 / 0.9);
+  outline-offset: 2px;
+}
+
+/* Below the home button on phones; beside it from 640px, where the logo has room to its right. */
 .logo {
   z-index: 0;
   --logo-left: clamp(16px, 10.4vw, 200px);
   width: min(585px, calc(100vw - var(--logo-left) - 16px));
   height: auto;
   position: absolute;
-  top: clamp(16px, 4vw, 30px);
+  top: 72px;
   left: var(--logo-left);
+}
+
+@media (min-width: 640px) {
+  /* Never closer than 128px to the edge: 16px + the home button + 16px gap. */
+  .logo {
+    --logo-left: clamp(128px, 10.4vw, 200px);
+    top: clamp(16px, 4vw, 30px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -1,42 +1,64 @@
 <script setup lang="ts">
-import InfoCard from '@shared/components/InfoCard.vue';
 import PageSection from '@shared/components/PageSection.vue';
-import { artifactColumns } from '../content';
+import {
+  ChartArea,
+  ChartColumn,
+  ChartGantt,
+  ChartLine,
+  Fish,
+  Flame,
+  Gem,
+  Kanban,
+  ListChecks,
+  Map,
+  Monitor,
+  Network,
+  Ruler,
+  ScrollText,
+  Search,
+  TrendingDown,
+} from 'lucide-vue-next';
+import type { Component } from 'vue';
+import { type ArtifactIcon, artifactColumns } from '../content';
+
+const icons: Record<ArtifactIcon, Component> = {
+  kanban: Kanban,
+  gantt: ChartGantt,
+  burndown: TrendingDown,
+  's-curve': ChartLine,
+  cfd: ChartArea,
+  traceability: ListChecks,
+  backlog: ScrollText,
+  wbs: Network,
+  baseline: Ruler,
+  pareto: Search,
+  roadmap: Map,
+  heatmap: Flame,
+  dashboard: Monitor,
+  vsm: Gem,
+  ishikawa: Fish,
+};
 </script>
 
 <template>
-  <PageSection
-    section-class="gradient-artifacts p-8 rounded-3xl text-white shadow-xl mb-10 card-hover"
-    heading-class="text-3xl font-extrabold mb-4 flex items-center"
-  >
-    <template #icon>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-8 w-8 mr-3"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        aria-hidden="true"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
-        />
-      </svg>
-    </template>
-    <template #title>Commonly Used Artifacts &amp; Visualizations</template>
+  <PageSection section-class="card" heading-class="card__title">
+    <template #icon><ChartColumn :size="24" aria-hidden="true" /></template>
+    <template #title>Artefactos y visualizaciones habituales</template>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <InfoCard v-for="column in artifactColumns" :key="column.title" class="bg-black/20 p-4 rounded-xl">
-        <h3 class="font-bold border-b border-white/20 pb-2 mb-3">{{ column.title }}</h3>
-        <ul class="text-xs space-y-2">
-          <li v-for="item in column.items" :key="item.label" class="flex items-center">
-            <span class="mr-2" aria-hidden="true">{{ item.icon }}</span> {{ item.label }}
+    <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+      <div
+        v-for="column in artifactColumns"
+        :key="column.title"
+        class="rounded-card border border-border p-4"
+      >
+        <h3 class="mb-3 border-b border-border pb-2 text-[1em]">{{ column.title }}</h3>
+        <ul class="m-0 grid list-none gap-2 p-0 text-[0.92em]">
+          <li v-for="item in column.items" :key="item.label" class="flex items-center gap-2">
+            <component :is="icons[item.icon]" :size="20" class="text-ink-2 flex-none" aria-hidden="true" />
+            {{ item.label }}
           </li>
         </ul>
-      </InfoCard>
+      </div>
     </div>
   </PageSection>
 </template>
