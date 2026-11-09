@@ -60,13 +60,14 @@ Este documento recopila los proyectos retirados temporalmente de la sección de 
 
 ---
 
-## 6. Platform Game (Enfoque Pedagógico: OOP y Simulación Física)
+## 6. Platform Game (Enfoque Pedagógico: OOP, Simulación Física y DDD)
 * **Ruta en el repositorio:** `PlatformGame/`
 * **URL:** `/PlatformGame/`
-* **Propósito real:** Proyecto didáctico diseñado para enseñar **Programación Orientada a Objetos (OOP)** y **simulación física** en desarrollo de videojuegos:
-  - Sistema de colisiones (suelo, plataformas, límites).
+* **Propósito real:** Proyecto didáctico diseñado para enseñar **Programación Orientada a Objetos (OOP)** y **simulación física** (*physics simulation*):
+  - Detección y respuesta de colisiones (*colisiones*).
   - Cinemática de salto y gravedad (*jumping / gravity*).
-  - Arquitectura modular basada en clases (`Player`, `Platform`, partículas y render).
+  - Arquitectura orientada a dominio: estructurado probablemente aplicando **DDD (Domain-Driven Design / Development)** para separar limpiamente la lógica de dominio (física, entidades, reglas del juego) del renderizado y la capa visual.
 * **Mejoras pendientes:**
-  - [ ] Actualizar la descripción pública del proyecto en la portada para reflejar su objetivo formativo (OOP y física) en lugar de un simple prototipo genérico.
-  - [ ] Añadir paneles explicativos o documentación visual interactiva que demuestre los conceptos físicos y de código en tiempo real.
+  - [ ] Reestructurar el código aplicando principios de **DDD** (entidades de dominio como `Player`, `Platform`, `World`, value objects para vectores/posiciones y servicios de colisión desacoplados de p5/canvas).
+  - [ ] Actualizar la descripción pública del proyecto en la portada para reflejar su objetivo formativo (OOP, física y DDD) en lugar de un simple prototipo genérico.
+  - [ ] Añadir paneles explicativos o documentación visual interactiva que demuestre los conceptos físicos y de arquitectura en tiempo real.
