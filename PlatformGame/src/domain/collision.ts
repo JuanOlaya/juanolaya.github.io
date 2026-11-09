@@ -17,24 +17,41 @@ export interface CollisionResult {
 const NO_COLLISION: CollisionResult = { landingSpeed: 0, wallHit: false, side: 0, normal: null };
 const DIAGONAL = Math.SQRT1_2;
 
+/** -1 before `min`, 1 past `max`, 0 in between. */
+function axisSide(value: number, min: number, max: number): number {
+  if (value < min) return -1;
+  return value > max ? 1 : 0;
+}
+
+/** Side for a point beside exactly one face, keyed by `${dx},${dy}`. */
+const FACE_SIDES: Record<string, number> = { '0,0': 0, '-1,0': 12, '1,0': 6, '0,-1': 3, '0,1': 9 };
+
+/** Corner rule of the original: the smaller overshoot picks the face; listed as [vertical smaller, otherwise]. */
+const CORNER_SIDES: Record<string, readonly [number, number]> = {
+  '-1,-1': [1, 2],
+  '1,1': [7, 8],
+  '-1,1': [11, 10],
+};
+
+function cornerSide(vertical: number, horizontal: number, dx: number, dy: number): number {
+  // Top-right is the odd one out: the original compared the raw (negative) differences there, so the test flips.
+  if (dx > 0 && dy < 0) return vertical > horizontal ? 4 : 5;
+  const [nearVertical, nearHorizontal] = CORNER_SIDES[`${dx},${dy}`] as readonly [number, number];
+  return vertical < horizontal ? nearVertical : nearHorizontal;
+}
+
 /**
  * Clock-face region of `point` around the platform: 12 left, 3 top, 6 right, 9 bottom, and the
  * corners split between the two faces by whichever is nearer; 0 when the point is inside.
  * Based on Jeff Thompson's circle/rectangle test, extended by Juan Olaya: https://www.openprocessing.org/sketch/627378
  */
 export function sideOf(point: Vector, platform: Platform): number {
-  const left = point.x < platform.x;
-  const right = point.x > platform.right;
-  const above = point.y < platform.y;
-  const below = point.y > platform.bottom;
-  if (above && left) return platform.y - point.y < platform.x - point.x ? 1 : 2;
-  if (above && right) return point.y - platform.y < platform.right - point.x ? 4 : 5;
-  if (below && right) return point.y - platform.bottom < point.x - platform.right ? 7 : 8;
-  if (below && left) return point.y - platform.bottom < platform.x - point.x ? 11 : 10;
-  if (left) return 12;
-  if (right) return 6;
-  if (above) return 3;
-  return below ? 9 : 0;
+  const dx = axisSide(point.x, platform.x, platform.right);
+  const dy = axisSide(point.y, platform.y, platform.bottom);
+  if (dx === 0 || dy === 0) return FACE_SIDES[`${dx},${dy}`] as number;
+  const vertical = dy < 0 ? platform.y - point.y : point.y - platform.bottom;
+  const horizontal = dx < 0 ? platform.x - point.x : point.x - platform.right;
+  return cornerSide(vertical, horizontal, dx, dy);
 }
 
 const NORMALS: Record<number, Vector> = {

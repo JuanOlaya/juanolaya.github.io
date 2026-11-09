@@ -15,9 +15,17 @@ function fixed(value: number): string {
   return value.toFixed(1);
 }
 
-function inputStatus(input: InputState): string {
-  const held = [input.left && '←', input.right && '→', input.up && '↑'].filter(Boolean);
+function heldKeys(input: InputState): string[] {
+  return [input.left && '←', input.right && '→', input.up && '↑'].filter((key) => key !== false);
+}
+
+function inputStatus(held: string[]): string {
   return held.length ? `held: ${held.join(' ')} → InputState` : 'no keys held; p5 draws the last state';
+}
+
+function stepStatus(report: StepReport): string {
+  if (!report.steps) return 'World.step(dt, input) → 0 steps this frame';
+  return `World.step(dt, input) → ${report.steps} fixed step${report.steps > 1 ? 's' : ''}`;
 }
 
 function playerStatus(report: StepReport): string {
@@ -34,33 +42,27 @@ function collisionStatus(report: StepReport): string {
 
 /** The four layers, outermost first, each with a live one-liner. */
 export function describeFrame(report: StepReport, input: InputState): LayerStatus[] {
-  const touched = report.side !== 0 || report.wallHit;
+  const held = heldKeys(input);
+  const stepped = report.steps > 0;
   return [
     {
       layer: 'UI · p5 + DOM',
       module: 'render.ts · input.ts · panels/',
-      status: inputStatus(input),
-      active: input.left || input.right || input.up,
+      status: inputStatus(held),
+      active: held.length > 0,
     },
-    {
-      layer: 'Application',
-      module: 'game.ts',
-      status: report.steps
-        ? `World.step(dt, input) → ${report.steps} fixed step${report.steps > 1 ? 's' : ''}`
-        : 'World.step(dt, input) → 0 steps this frame',
-      active: report.steps > 0,
-    },
+    { layer: 'Application', module: 'game.ts', status: stepStatus(report), active: stepped },
     {
       layer: 'Domain · entities',
       module: 'domain/world.ts · player.ts · vector.ts',
       status: playerStatus(report),
-      active: report.steps > 0,
+      active: stepped,
     },
     {
       layer: 'Domain · service',
       module: 'domain/collision.ts',
       status: collisionStatus(report),
-      active: touched,
+      active: report.side !== 0 || report.wallHit,
     },
   ];
 }
@@ -90,6 +92,12 @@ function layerRow(layer: LayerStatus): LayerRow {
   return { item, status, lit: 0 };
 }
 
+/** Keeps a layer lit for `hold` seconds after it last acted. */
+function light(row: LayerRow, active: boolean, hold: number, seconds: number): void {
+  row.lit = active ? hold : Math.max(0, row.lit - seconds);
+  row.item.classList.toggle('is-active', row.lit > 0);
+}
+
 export interface ArchitecturePanel {
   update(world: World, input: InputState, seconds: number): void;
 }
@@ -117,13 +125,9 @@ export function mountArchitecturePanel(
     update(world, input, seconds) {
       elapsed += seconds;
       const layers = describeFrame(world.lastStep, input);
-      layers.forEach((layer, index) => {
-        const row = rows[index] as LayerRow;
-        if (layer.active) row.lit = hold;
-        else row.lit = Math.max(0, row.lit - seconds);
-        row.item.classList.toggle('is-active', row.lit > 0);
-      });
-      if (elapsed < REFRESH_SECONDS && !world.lastStep.side && !world.lastStep.respawned) return;
+      layers.forEach((layer, index) => light(rows[index] as LayerRow, layer.active, hold, seconds));
+      const eventful = world.lastStep.side !== 0 || world.lastStep.respawned;
+      if (elapsed < REFRESH_SECONDS && !eventful) return;
       elapsed = 0;
       layers.forEach((layer, index) => ((rows[index] as LayerRow).status.textContent = layer.status));
     },
