@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google" content="notranslate">
     <title>MemoDeutsch</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
     <!-- Light Mode Icon (Default) -->
     <link rel="icon" href="images/app_icon.png?v=3" media="(prefers-color-scheme: light)">
@@ -15,288 +17,204 @@
 
     <!-- Apple Touch Icon (iOS doesn't auto-switch, usually takes default) -->
     <link rel="apple-touch-icon" href="images/app_icon.png?v=3">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#282828">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 
     <style>
+        /* MemoDeutsch start page. Tokens pasted from the shared style contract (jo-wt/_shared/STYLE-CONTRACT.md §9 B). */
         :root {
-            /* Light Mode Variables */
-            --bg-body: #e5e7eb;
-            --bg-container: #ffffff;
-            --text-main: #1f2937;
-            --text-subtitle: #6b7280;
-            --card-shadow: rgba(0, 0, 0, 0.1);
-            --toggle-bg: #f3f4f6;
+            color-scheme: dark;
+            --bg: #282828; --surface: #33333d; --border: #41414e;
+            --ink: #f8ecde; --ink-2: #b9b2a6;
+            --link: #f4f0f9; --link-visited: #b597d8; --link-hover: #a5a5a5;
+            --accent: #c48208; --accent-hover: #d4870a; --accent-text: #e5a53a; --on-accent: #1a1a1a;
+            --info: #198bc6; --info-text: #6cb6ff; --success: #7bd389; --danger: #ff7b72;
+            --focus: rgb(243 228 206 / 0.9);
+            --radius-card: 5px; --radius-button: 8px;
+            --page-pad: clamp(16px, 5vw, 64px);
+            /* Géneros: mismos roles, variantes AA sobre fondo oscuro */
+            --maskulin-color: var(--info-text); --feminin-color: var(--danger);
+            --neutrum-color: var(--success);    --plural-color: var(--accent-text);
         }
+        html, body { margin: 0; }
+        body { background: var(--bg); color: var(--ink); font: 300 clamp(15px, 0.9rem + 0.2vw, 17px)/1.4 'Noto Sans KR', system-ui, sans-serif;
+               padding: var(--page-pad); min-height: 100dvh; }
+        h1, h2, h3 { font-weight: 500; color: var(--ink); }
+        a { color: var(--link); text-decoration: underline; }  a:visited { color: var(--link-visited); }  a:hover { color: var(--link-hover); }
+        :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+        .site-header { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+          min-height: 56px; margin: calc(-1 * var(--page-pad)) calc(-1 * var(--page-pad)) 16px; padding: 0 var(--page-pad);
+          background: rgb(40 40 40 / 0.82); backdrop-filter: blur(6px); border-bottom: 1px solid var(--border); }
+        .site-header a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px; text-decoration: none; }
+        .site-header a:hover { text-decoration: underline; }
+        .btn { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; min-width: 44px; padding: 0 16px; border-radius: var(--radius-button);
+          font: inherit; font-weight: 500; cursor: pointer; border: 1px solid transparent; transition: background-color .2s, border-color .2s; }
+        .btn-primary { background: var(--accent); color: var(--on-accent); }           .btn-primary:hover { background: var(--accent-hover); }
+        .btn-secondary { background: rgb(255 255 255 / 0.06); color: var(--ink); border-color: rgb(255 255 255 / 0.16); }
+        .btn-secondary:hover { background: rgb(255 255 255 / 0.12); }
+        .btn[aria-pressed='true'] { border-color: var(--accent-hover); background: rgb(212 135 10 / 0.18); }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: clamp(16px, 1.6vw, 24px); }
+        @media (prefers-reduced-motion: reduce) { *, ::before, ::after { animation: none !important; transition-duration: 0.01ms !important; } }
+        @media (min-width: 1024px) { body > main { max-width: 72rem; margin-inline: auto; } }
 
-        /* Default to Dark Theme Variables */
-        [data-theme="dark"] {
-            --bg-body: #0f172a;
-            --bg-container: #1e293b;
-            --text-main: #f8fafc;
-            --text-subtitle: #94a3b8;
-            --card-shadow: rgba(0, 0, 0, 0.3);
-            --toggle-bg: #334155;
-        }
-
-        body {
-            font-family: 'Nunito', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            transition: background-color 0.3s ease;
-        }
+        /* --- Page --- */
+        .site-header .site-title { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
         .container {
-            max-width: 1200px;
             width: 100%;
-            background: var(--bg-container);
-            border-radius: 24px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            position: relative;
-            transition: background-color 0.3s ease;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            gap: 24px;
         }
 
-        /* --- Theme Toggle --- */
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--toggle-bg);
-            border: none;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-            width: 100%;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin: 0 0 10px 0;
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .container > header h1 {
+            font-size: clamp(26px, 1.4rem + 1vw, 36px);
+            line-height: 1.1;
+            margin: 0;
         }
 
         .subtitle {
-            color: var(--text-subtitle);
-            font-size: 1.1rem;
-            font-weight: 600;
+            color: var(--ink-2);
+            margin: 4px 0 0;
         }
 
         /* --- Navigation Grid --- */
         .nav-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            width: 100%;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+            gap: clamp(12px, 1.8vw, 20px);
         }
 
         .nav-card {
-            padding: 25px;
-            border-radius: 20px;
-            text-align: center;
-            color: white;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            padding: clamp(16px, 1.6vw, 24px);
+            color: var(--ink);
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            gap: 6px;
+            min-width: 0;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
+            transition: border-color 0.2s ease-out;
         }
 
-        .nav-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
+        /* A card that is itself a link: one tab stop, underlined title, border on hover (contract §5.3). */
+        a.nav-card, a.nav-card:visited { color: var(--ink); }
+        a.nav-card:hover, a.nav-card:focus-visible { border-color: rgb(243 228 206 / 0.6); }
+        a.nav-card .card-title { text-decoration: underline; }
 
-        /* Wide Card Modifiers */
         @media (min-width: 640px) {
-            .nav-card-wide {
-                grid-column: span 2;
-                aspect-ratio: 16 / 9;
-            }
+            .nav-card-wide { grid-column: span 2; }
         }
 
-        /* Gradient Variants */
-        .style-morgen {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            color: #802d31;
+        .card-title {
+            font-size: clamp(20px, 1.1rem + 0.5vw, 26px);
+            line-height: 1;
+            margin: 0;
         }
 
-        .style-tag {
-            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-            color: #1e4d63;
-        }
-
-        .style-abend {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            color: #6e4e00;
-        }
-
-        .style-nacht {
-            background: linear-gradient(135deg, #243949 0%, #517fa4 100%);
-            color: #fff;
+        .card-desc {
+            color: var(--ink-2);
+            font-size: 0.92em;
         }
 
         .nav-card .emoji {
-            font-size: 3rem;
-            margin-top: 15px;
-            /* 3D Effect */
-            filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.25));
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            transform: perspective(500px) translateZ(0);
+            font-size: 2rem;
+            line-height: 1;
+            margin-top: auto;
         }
 
-        .nav-card:hover .emoji {
-            transform: perspective(500px) translateZ(30px) scale(1.15) rotate(5deg);
-            filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.4));
-        }
-
-        .nav-card .card-title {
-            font-weight: 800;
-            font-size: 1.5rem;
-            margin: 0;
-            line-height: 1.2;
-        }
-
-        .style-nacht .card-title {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-card .card-desc {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            font-weight: 600;
-            margin-top: 5px;
-        }
-
-        /* Sub-links styling for container cards */
+        /* Sub-links are secondary buttons: 44px targets, 8px apart (contract §5.2, §8). */
         .card-links {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            width: 100%;
-            margin-top: 15px;
+            margin-top: 8px;
         }
 
-        /* Rectangular grid layout specifically for levels */
         .card-links-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
-            width: 75%;
-            margin: 15px auto 0 auto;
+            margin-top: 8px;
         }
 
         .sub-link {
-            background-color: rgba(255, 255, 255, 0.25);
-            color: white;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-            backdrop-filter: blur(4px);
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 6px;
+            min-height: 44px;
+            padding: 0 16px;
+            border-radius: var(--radius-button);
+            background: rgb(255 255 255 / 0.06);
+            border: 1px solid rgb(255 255 255 / 0.16);
+            color: var(--ink);
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+        }
+
+        .sub-link:visited { color: var(--ink); }
+
+        .sub-link:hover {
+            background: rgb(255 255 255 / 0.12);
+            text-decoration: underline;
         }
 
         .card-links-grid .sub-link {
-            aspect-ratio: 16 / 9;
-            font-size: 1.1rem;
             flex-direction: column;
-            gap: 5px;
-            border-radius: 12px;
+            gap: 2px;
+            padding: 12px;
         }
 
-        .sub-link:hover {
-            background-color: rgba(255, 255, 255, 0.4);
-            transform: translateX(5px);
+        /* The one primary action of the page. */
+        .sub-link-lid, .sub-link-lid:visited {
+            background: var(--accent);
+            border-color: transparent;
+            color: var(--on-accent);
         }
 
-        .sub-link-lid {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            color: #6e4e00;
-            font-weight: 800;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+        .sub-link-lid:hover { background: var(--accent-hover); }
+
+        /* Highlighted (exam-relevant) entries use the pressed secondary look instead of a gradient. */
+        .sub-link-featured {
+            border-color: var(--accent-hover);
+            background: rgb(212 135 10 / 0.18);
+        }
+
+        .sub-link-muted {
+            color: var(--ink-2);
+            font-weight: 300;
         }
 
         /* --- Footer --- */
         .footer {
             margin-top: auto;
-            color: var(--text-subtitle);
-            font-size: 0.9rem;
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(148, 163, 184, 0.2);
-            width: 100%;
+            color: var(--ink-2);
+            font-size: 13px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-                border-radius: 16px;
-            }
-
-            .theme-toggle {
-                top: 5px;
-                right: 5px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .nav-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        .footer p { margin: 0; }
     </style>
 </head>
 
-<body data-theme="dark">
+<body>
 
-    <div class="container">
-        <button class="theme-toggle" id="theme-btn" title="Thema wechseln">&#x2600;&#xFE0F;</button>
+    <header class="site-header">
+        <nav aria-label="Volver">
+            <a href="/" aria-label="Volver a la portada">← Inicio</a>
+        </nav>
+        <span class="site-title">MemoDeutsch</span>
+    </header>
 
+    <main class="container">
         <header>
             <h1>MemoDeutsch</h1>
 
@@ -311,19 +229,19 @@
                 <div class="card-links-grid">
                     <a href="verben/A1_A2_B1/verben.html?level=A1" class="sub-link">
                         <span style="font-size: 1.5rem;">A1</span>
-                        <span style="font-size: 0.85rem; font-weight: 600; opacity: 0.9;">supervivencia</span>
+                        <span style="font-size: 0.85rem; font-weight: 300; color: var(--ink-2);">supervivencia</span>
                     </a>
                     <a href="verben/A1_A2_B1/verben.html?level=A2" class="sub-link">
                         <span style="font-size: 1.5rem;">A2</span>
-                        <span style="font-size: 0.85rem; font-weight: 600; opacity: 0.9;">procesos</span>
+                        <span style="font-size: 0.85rem; font-weight: 300; color: var(--ink-2);">procesos</span>
                     </a>
                     <a href="verben/A1_A2_B1/verben.html?level=B1" class="sub-link">
                         <span style="font-size: 1.5rem;">B1</span>
-                        <span style="font-size: 0.85rem; font-weight: 600; opacity: 0.9;">sociedad</span>
+                        <span style="font-size: 0.85rem; font-weight: 300; color: var(--ink-2);">sociedad</span>
                     </a>
                     <a href="verben/A1_A2_B1/verben.html?level=B2" class="sub-link">
                         <span style="font-size: 1.5rem;">B2</span>
-                        <span style="font-size: 0.85rem; font-weight: 600; opacity: 0.9;">an&aacute;lisis</span>
+                        <span style="font-size: 0.85rem; font-weight: 300; color: var(--ink-2);">an&aacute;lisis</span>
                     </a>
                 </div>
             </div>
@@ -358,7 +276,7 @@
                 <div class="card-desc">Umstandsw&ouml;rter &amp; Ausdr&uuml;cke</div>
                 <div class="card-links">
                     <a href="adverbs/adverbien.html" class="sub-link">&#x26A1; Adverbien (General)</a>
-                    <a href="adverbs/adverbien_B1_DTZ.html" class="sub-link" style="background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); color: white; font-weight: 800;">⭐ Adverbien (DTZ B1)</a>
+                    <a href="adverbs/adverbien_B1_DTZ.html" class="sub-link sub-link-featured">⭐ Adverbien (DTZ B1)</a>
                     <a href="adverbs/expresiones_adverbiales.html" class="sub-link">&#x1F550;&#xFE0F; Expresiones</a>
                 </div>
             </div>
@@ -372,7 +290,7 @@
                     <a href="praepositionen/praepositionen.html" class="sub-link">Pr&auml;positionen</a>
                     <a href="adverbs/mengenpronomen.html" class="sub-link">&#x1F4CA; Cantidad (Menge)</a>
                     <a href="konjunktionen/konjunktionen.html" class="sub-link">&#x1F517; Konjunktionen (General)</a>
-                    <a href="konjunktionen/konjunktionen_B1_DTZ.html" class="sub-link" style="background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%); color: white; font-weight: 800;">⭐ Conectores (DTZ B1)</a>
+                    <a href="konjunktionen/konjunktionen_B1_DTZ.html" class="sub-link sub-link-featured">⭐ Conectores (DTZ B1)</a>
                     <a href="praepositionen/contracciones.html" class="sub-link">&#x1F5C7;&#xFE0F; Contracciones</a>
                 </div>
             </div>
@@ -431,8 +349,8 @@
                     <a href="Aussprache/aussprache.html" class="sub-link">&#x1F50A; Pronunciaci&oacute;n</a>
                     <a href="Sprechen/interjecciones.html" class="sub-link">&#x1F4AC; Interjecciones!!!</a>
                     <a href="Sprechen/a1.html" class="sub-link">&#x1F5E3;&#xFE0F; Sprechen A1</a>
-                    <a href="Sprechen/vorstellung_angela_v2.html" class="sub-link" style="background: linear-gradient(135deg, #e07a5f 0%, #f4a261 100%); color: white; font-weight: 800;">🎙️ Angela: Vorstellung B1 (Voz Real)</a>
-                    <a href="Sprechen/vorstellung_angela.html" class="sub-link" style="color: #64748b; font-size: 0.84rem;">🎙️ Angela: Vorstellung (V1 Katja)</a>
+                    <a href="Sprechen/vorstellung_angela_v2.html" class="sub-link sub-link-featured">🎙️ Angela: Vorstellung B1 (Voz Real)</a>
+                    <a href="Sprechen/vorstellung_angela.html" class="sub-link sub-link-muted">🎙️ Angela: Vorstellung (V1 Katja)</a>
                 </div>
             </div>
 
@@ -457,22 +375,9 @@
         <div class="footer">
             <p>Made with &#x2764;&#xFE0F; for German Learners &bull; 2026</p>
         </div>
-    </div>
+    </main>
 
     <script>
-        // Theme Toggle Logic
-        const themeBtn = document.getElementById('theme-btn');
-        const body = document.body;
-
-        // Check local storage or system preference could be added here
-
-        themeBtn.addEventListener('click', () => {
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            body.setAttribute('data-theme', newTheme);
-            themeBtn.textContent = newTheme === 'light' ? '\u{1F319}' : '\u2600\uFE0F';
-        });
-
         // Robust JS Prefetcher to warm up cache
         window.addEventListener('load', () => {
             const resources = [
