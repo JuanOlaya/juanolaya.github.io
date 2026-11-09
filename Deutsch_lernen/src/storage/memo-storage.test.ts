@@ -5,6 +5,7 @@ import {
   STORAGE_VERSION_KEY,
   createMemoStorage,
   migrateStorage,
+  resilientStore,
   type KeyValueStore,
 } from './memo-storage.ts';
 
@@ -91,13 +92,89 @@ describe('migrateStorage', () => {
     expect(store.getItem(STORAGE_VERSION_KEY)).toBe(String(STORAGE_SCHEMA_VERSION + 1));
   });
 
-  it('treats a corrupt version as a fresh store', () => {
-    store.setItem(STORAGE_VERSION_KEY, 'banana');
+  it.each(['banana', '', '-1', '1.5', 'NaN'])('treats the corrupt version %j as a fresh store', (version) => {
+    store.setItem(STORAGE_VERSION_KEY, version);
 
     migrateStorage(store);
 
     expect(store.getItem('toggle-lid-switch')).toBe('true');
     expect(store.getItem(STORAGE_VERSION_KEY)).toBe(String(STORAGE_SCHEMA_VERSION));
+  });
+});
+
+/** Storage whose every operation throws, as Safari does with cookies blocked or a sandboxed iframe does. */
+class BlockedStore implements KeyValueStore {
+  private fail(): never {
+    throw new DOMException('denied', 'SecurityError');
+  }
+  get length(): number {
+    return this.fail();
+  }
+  key(): string | null {
+    return this.fail();
+  }
+  getItem(): string | null {
+    return this.fail();
+  }
+  setItem(): void {
+    this.fail();
+  }
+  removeItem(): void {
+    this.fail();
+  }
+}
+
+describe('resilientStore', () => {
+  it('reads and writes through a working store', () => {
+    const resilient = resilientStore(() => store);
+
+    resilient.setItem('currentLevel', 'A2');
+
+    expect(store.getItem('currentLevel')).toBe('A2');
+    expect(resilient.getItem('currentLevel')).toBe('A2');
+  });
+
+  it('starts empty: nothing saved means null everywhere, and migrating writes only the schema version', () => {
+    const memo = createMemoStorage(resilientStore(() => store));
+
+    expect(memo.getCurrentLevel()).toBeNull();
+    expect(memo.getSavedGroup('A1')).toBeNull();
+    expect(memo.getToggle('ik-switch')).toBeNull();
+    expect(memo.getCardVersion()).toBeNull();
+    expect(memo.readVerbCache()).toBeNull();
+  });
+
+  it('falls back to memory when opening the store throws, so the page still loads', () => {
+    const resilient = resilientStore(() => {
+      throw new DOMException('denied', 'SecurityError');
+    });
+
+    expect(() => migrateStorage(resilient)).not.toThrow();
+    const memo = createMemoStorage(resilient);
+    memo.saveProgress('A1', 3);
+
+    expect(memo.getSavedGroup('A1')).toBe(3);
+    expect(resilient.getItem(STORAGE_VERSION_KEY)).toBe(String(STORAGE_SCHEMA_VERSION));
+  });
+
+  it('switches to memory the first time an operation throws and stays there', () => {
+    const resilient = resilientStore(() => new BlockedStore());
+
+    expect(() => migrateStorage(resilient)).not.toThrow();
+    expect(resilient.getItem('missing')).toBeNull();
+    resilient.setItem('toggle-ik-switch', 'false');
+    expect(resilient.getItem('toggle-ik-switch')).toBe('false');
+    expect(resilient.length).toBeGreaterThan(0);
+    resilient.removeItem('toggle-ik-switch');
+    expect(resilient.getItem('toggle-ik-switch')).toBeNull();
+  });
+
+  it('still lets a quota error through, since script.js retries with a compact payload', () => {
+    store.quota = 10;
+    const memo = createMemoStorage(resilientStore(() => store));
+
+    expect(() => memo.writeVerbCache({ allVerbsData: {}, verbGroupsByLevel: {} })).toThrow('full');
+    expect(memo.readVerbCache()).toBeNull();
   });
 });
 
