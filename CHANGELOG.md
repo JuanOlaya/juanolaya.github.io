@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.12.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.11.0...v0.12.0) (2026-11-11)
+
+
+### Features
+
+* **cards:** add responsive card hover/touch scaling and media lightbox viewer ([f24d7d5](https://github.com/JuanOlaya/juanolaya.github.io/commit/f24d7d52b7cb392a779e2741a3b220d7c370cf7d))
+* **cards:** dim non-hovered cards and highlight active card on hover ([39e2bd2](https://github.com/JuanOlaya/juanolaya.github.io/commit/39e2bd22651131c3a811b6f479b6a1a5c87e7c76))
+* **cards:** show concise mechanism above 4 tabs and split Cutaneous/Kinesthetic rows ([c59da30](https://github.com/JuanOlaya/juanolaya.github.io/commit/c59da30f8ab08046c8959f53a958ea65021fb584))
+* **intro:** add Haptic Experience Inventory (HXI) evaluation tab to Categorization Info modal ([b543032](https://github.com/JuanOlaya/juanolaya.github.io/commit/b5430327dca54543232d1a10cb3a1a50ea6af6f8))
+* **pixel-grid:** allow switching between modern and classic color palettes ([90fbefb](https://github.com/JuanOlaya/juanolaya.github.io/commit/90fbefb11e16113f36a3556b9247c0da2af67e54))
+* **pixelGrid:** decouple palette toggle from background, add [#282828](https://github.com/JuanOlaya/juanolaya.github.io/issues/282828) to background button, move background to bottom toolbar and add fullscreen button ([a021d3c](https://github.com/JuanOlaya/juanolaya.github.io/commit/a021d3c033cd4068c5a2b1a62c3e46e4fa444d4b))
+* **pixelGrid:** default to classic palette and seed cells with classic colors, default UI to collapsed ([3157e91](https://github.com/JuanOlaya/juanolaya.github.io/commit/3157e9119474a7df63cb0a94add92aff9033c079))
+* **pixelGrid:** preserve cell colors independently and add palette drawer arrow button ([de8e7a6](https://github.com/JuanOlaya/juanolaya.github.io/commit/de8e7a63156b12fcf0cfff0a4c8e281229ce0a4b))
+* **pixelGrid:** replace flyout arrow with monochrome artist palette toggle button ([8d1dcbb](https://github.com/JuanOlaya/juanolaya.github.io/commit/8d1dcbb59e0b7e3f314b3754ce5e5455b9ea7a5f))
+
+
+### Bug Fixes
+
+* **pixel-grid:** remove unused imports to pass lint and add Haptic Cards modern web plan ([69ec720](https://github.com/JuanOlaya/juanolaya.github.io/commit/69ec720d16738c391d16c0b8448771b7d8a4b5d7))
+* **test:** avoid unused destructured variable in data.test.ts ([9ab1549](https://github.com/JuanOlaya/juanolaya.github.io/commit/9ab154914c9e20cd896e9d5ccb2be94553e7a83a))
+
 ## [0.11.0](https://github.com/JuanOlaya/juanolaya.github.io/compare/v0.10.0...v0.11.0) (2026-11-09)
 
 
